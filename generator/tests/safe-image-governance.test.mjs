@@ -78,9 +78,11 @@ test('la superficie API copia anche le immagini generate e pubblica il ledger ag
 
 test('create e publisher applicano il gate anti-copia al testo sorgente e loggano il massimo', () => {
   assert.match(CREATE, /sourceCopyInputText\(pageContent\)/);
-  assert.match(CREATE, /SOURCE_COPY_MAX_RETRIES/);
   assert.match(CREATE, /SOURCE_COPY_OVERLAP_THRESHOLD/);
-  assert.match(CREATE, /logSourceCopyVerdict\(data\.id/);
+  assert.match(CREATE, /repairGeneratedArticleSourceCopy\(\s*data\.content\.it/);
+  assert.match(CREATE, /mode: sourceCopyMode/);
+  assert.match(CREATE, /for \(const locale of \['it', 'en', 'de', 'fr'\]\)/);
+  assert.doesNotMatch(CREATE, /_sourceCopyRefinement|Anti-copia:.*rigenero/);
   assert.match(JOURNALIST, /assertJournalistSourceCopySafe\(data, sourceText\)/);
   assert.match(JOURNALIST, /SourceCopyError/);
 });

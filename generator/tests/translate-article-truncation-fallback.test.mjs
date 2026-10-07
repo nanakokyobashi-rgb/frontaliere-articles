@@ -942,7 +942,7 @@ function sliceBetween(startMarker, endMarker) {
 }
 
 const STEP_3C_SRC = sliceBetween('  // Step 3c: Sanitize bold + URLs + nav links on translated content', '\n  // Step 3a.1: Reject/repair prompt-schema');
-const STEP_3E_SRC = sliceBetween("  const citationUrl = url.startsWith('stats-bfs://')", '\n  console.error(`\\n📝 Articolo generato');
+const STEP_3E_SRC = 'appendSourceCitation(data, url);';
 const BOLD_SRC = extractFunctionSource('function sanitizeBoldFormatting(data) {');
 const DECODE_ENTITIES_SRC = extractFunctionSource('function decodeLocaleContentEntities(data, locale) {');
 const BUILD_BODY_FILE_SRC = extractFunctionSource('function buildBodyFile(data, locale) {');
@@ -952,12 +952,13 @@ const MAX_BODY_KEYS = (() => {
   return Number(m[1]);
 })();
 
-function runPostTranslationToBodyFiles(data, url) {
-  const fn = new Function(
+async function runPostTranslationToBodyFiles(data, url) {
+  const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+  const fn = new AsyncFunction(
     'data', 'url', 'pageContent', 'isBodyTranslationPending', 'console',
     'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
     'decodeHtmlEntities', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
-    'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries', 'sourceCopyMode',
+    'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries', 'sourceCopyMode', 'repairGeneratedArticleSourceCopy', 'appendSourceCitation',
     `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n${SOURCE_COPY_INPUT_SRC}\n`
     + `${STEP_3C_SRC}\nvalidateAndEnforceCTA(data);\nenforceStrongInternalLinks(data);\n${STEP_3E_SRC}\n`
     + "const out = {};\nfor (const locale of ['it', 'en', 'de', 'fr']) { decodeLocaleContentEntities(data, locale); out[locale] = buildBodyFile(data, locale); }\nreturn out;",
@@ -968,6 +969,13 @@ function runPostTranslationToBodyFiles(data, url) {
     () => '', () => cta, ['calcolatore'], ['calculator'], ['rechner'], ['calculateur'],
     decodeHtmlEntities, META_SEO_FIELDS, escapeForSingleQuoteTS, MAX_BODY_KEYS,
     evaluateSourceCopy, logSourceCopyVerdict, SOURCE_COPY_OVERLAP_THRESHOLD, SourceCopyError, 0, 'warn',
+    async (article) => ({
+      article,
+      verdict: { locale: 'it', maxWords: 0, threshold: SOURCE_COPY_OVERLAP_THRESHOLD, coverageRatio: 0, structural: false },
+      passes: 0,
+      rejected: false,
+    }),
+    () => {},
   );
 }
 
@@ -1000,7 +1008,7 @@ test('#1875 end-to-end: la chiave in attesa resta ASSENTE nel file di body emess
     ['de:body3:retry-error', 'en:body2:truncation-retry-error', 'fr:body1:retry-error'],
   );
 
-  const files = runPostTranslationToBodyFiles(data, 'https://www.rsi.ch/news/ticino/articolo');
+  const files = await runPostTranslationToBodyFiles(data, 'https://www.rsi.ch/news/ticino/articolo');
   const keysOf = (file) => [...file.matchAll(new RegExp(`'blog\\.article\\.${id}\\.(body\\d+)'`, 'g'))].map((m) => m[1]);
 
   assert.deepEqual(keysOf(files.it), ['body1', 'body2', 'body3'], 'l\'italiano resta completo');

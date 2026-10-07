@@ -46,8 +46,9 @@ const RC_TO_ENV = {
   // exactly the trap the OMNIROUTE_PROVIDER_ALLOWLIST note below describes.
   // Absent from RC on any project that has not created it: simply skipped.
   GITHUB_PAT_NANAKO:              ['GITHUB_PAT_NANAKO'],
-  // Optional editorial switch. Local and CI default safely to `warn` when
-  // the RC parameter is absent; `repair` is activated by the follow-up path.
+  // Optional editorial switch. When absent, the guard's local default is the
+  // targeted `repair` mode; `warn` remains an explicit rollback and `enforce`
+  // an explicit strict setting.
   [ARTICLE_SOURCE_COPY_MODE_ENV]: [ARTICLE_SOURCE_COPY_MODE_ENV],
   // Extra GitHub Models PATs from additional free accounts. GitHub Models'
   // free-tier rate limit is per-account, so each extra PAT multiplies the free

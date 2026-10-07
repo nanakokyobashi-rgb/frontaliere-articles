@@ -272,13 +272,13 @@ import {
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
 import {
-  evaluateSourceCopy,
   getSourceCopyMode,
-  logSourceCopyVerdict,
-  SOURCE_COPY_MAX_RETRIES,
-  SOURCE_COPY_MAX_QUOTE_WORDS,
   SOURCE_COPY_OVERLAP_THRESHOLD,
-  sourceCopyModeBlocks,
+  SOURCE_COPY_MAX_REPAIR_PASSES,
+  applySourceCopyRepairReplacements,
+  evaluateSourceCopy,
+  logSourceCopyVerdict,
+  repairSourceCopyArticle,
   SourceCopyError,
 } from './lib/source-copy-guard.mjs';
 import { ARTICLE_SECTION_CORE, ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
@@ -5021,6 +5021,21 @@ function bodyTextForQuality(content) {
     .join('\n\n');
 }
 
+// The final source-copy repair runs after the first CTA/link pass. Recheck the
+// repaired body without those deterministic appendages: the canton guard must
+// see a toponym introduced by the repair, but a generic CTA mentioning Ticino
+// must not turn a Grigioni/Vallese article into a false cross-canton reject.
+function bodyTextForCantonPostcondition(data) {
+  const appendages = [
+    ...CTA_POOL.map((cta) => cta.it),
+    ...Object.values(INTERNAL_LINK_BLOCK.it),
+  ];
+  return appendages.reduce(
+    (body, appendage) => body.replaceAll(appendage, ''),
+    bodyTextForQuality(data?.content?.it || {}),
+  ).replace(/\n\n\*Fonte: \[[^\]]+\]\([^)]*\)\*/gu, '');
+}
+
 /**
  * Gate comune per i payload appena generati, prima di traduzioni, immagini e
  * scritture. Le coppie `placeholder-value` vengono tolte solo quando la lista
@@ -5301,6 +5316,137 @@ function factualityGateSourceText(url, pageContent) {
 // those briefs are still input text and may not be reproduced verbatim.
 function sourceCopyInputText(pageContent) {
   return String(pageContent || '');
+}
+
+function appendSourceCitation(data, url) {
+  const citationUrl = String(url || '').startsWith('stats-bfs://')
+    ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'
+    : String(url || '').startsWith('stats-astra://')
+      ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
+      : url;
+  if (citationUrl && !citationUrl.startsWith('evergreen://')) {
+    try {
+      const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
+      const sourceLabel = { it: 'Fonte', en: 'Source', de: 'Quelle', fr: 'Source' };
+      for (const locale of ['it', 'en', 'de', 'fr']) {
+        if (!data.content?.[locale]?.body3) continue;
+        const label = sourceLabel[locale] || 'Source';
+        if (!data.content[locale].body3.includes(sourceDomain)) {
+          data.content[locale].body3 += `\n\n*${label}: [${sourceDomain}](${citationUrl})*`;
+        }
+      }
+      console.error(`  📰 Citazione fonte aggiunta: ${sourceDomain}`);
+    } catch { /* invalid URL — skip */ }
+  }
+  return data;
+}
+
+const SOURCE_COPY_REPAIR_SCHEMA = {
+  name: 'source_copy_targeted_repair',
+  schema: {
+    type: 'object',
+    additionalProperties: false,
+    required: ['replacements'],
+    properties: {
+      replacements: {
+        type: 'array',
+        minItems: 1,
+        maxItems: 12,
+        items: {
+          type: 'object',
+          additionalProperties: false,
+          required: ['targetIndex', 'text'],
+          properties: {
+            targetIndex: { type: 'integer', minimum: 0 },
+            text: { type: 'string', minLength: 1 },
+          },
+        },
+      },
+    },
+  },
+};
+
+const SOURCE_COPY_REPAIR_LOCALE_NAMES = {
+  it: 'italiano',
+  en: 'inglese',
+  de: 'tedesco',
+  fr: 'francese',
+};
+
+/**
+ * Rewrite only the paragraphs identified by source-copy-guard. The model
+ * receives no article-wide regeneration prompt and the returned replacements
+ * are applied to the original paragraphs in JavaScript.
+ */
+export async function repairGeneratedArticleSourceCopy(article, sourceText, {
+  articleId,
+  locale = 'it',
+  mode = getSourceCopyMode(),
+} = {}) {
+  return repairSourceCopyArticle({
+    sourceText,
+    article,
+    articleId,
+    locale,
+    mode,
+    logger: console.error,
+    repair: async ({ article: currentArticle, targets, pass }) => {
+      const targetText = targets.map((target, index) => [
+        `TARGET ${index} — paragrafo ${target.paragraphIndex} (${target.field || 'body'})`,
+        `Sequenza da riformulare: ${target.articleText}`,
+        `Testo completo del paragrafo da riscrivere:\n${target.paragraphText}`,
+      ].join('\n')).join('\n\n');
+      const messages = [
+        {
+          role: 'system',
+          content: `Sei un redattore ${SOURCE_COPY_REPAIR_LOCALE_NAMES[locale] || locale}. `
+            + 'Ripara SOLO i paragrafi numerati indicati. Riformula le frasi che ripetono la fonte, '
+            + 'mantieni tutti i fatti verificabili, nomi propri, date, cifre, citazioni attribuite, link e markdown. '
+            + 'Non aggiungere fatti e non riscrivere i paragrafi non indicati. Rispondi SOLO con JSON valido '
+            + 'nel formato {"replacements":[{"targetIndex":0,"text":"..."}]}; includi una sostituzione '
+            + 'per ogni target e usa lo stesso indice.',
+        },
+        {
+          role: 'user',
+          content: `Passata di riparazione ${pass}. Fonte di confronto (non copiarla):\n${String(sourceText).slice(0, 12000)}\n\n${targetText}`,
+        },
+      ];
+      const raw = await _aiCallLLM(messages, {
+        temperature: 0.2,
+        maxTokens: 3000,
+        timeout: 90_000,
+        deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
+        jsonMode: true,
+        jsonSchema: SOURCE_COPY_REPAIR_SCHEMA,
+        prefer: PREFERRED_GENERATION_MODELS,
+      });
+      const parsed = JSON.parse(repairLlmJson(raw));
+      if (!Array.isArray(parsed?.replacements)) throw new Error('source-copy repair: replacements mancanti');
+      const indexes = parsed.replacements.map((replacement) => Number(replacement?.targetIndex));
+      const uniqueIndexes = new Set(indexes);
+      const oneToOne = parsed.replacements.length === targets.length
+        && indexes.every((index) => Number.isInteger(index) && index >= 0 && index < targets.length)
+        && uniqueIndexes.size === targets.length;
+      if (!oneToOne) {
+        throw new Error(
+          `source-copy repair: replacements non uno-a-uno (${parsed.replacements.length}/${targets.length}, `
+          + 'indici duplicati, mancanti o fuori range)',
+        );
+      }
+      const replacements = parsed.replacements.map((replacement, position) => {
+        const target = targets[indexes[position]];
+        if (typeof replacement?.text !== 'string' || !replacement.text.trim()) {
+          throw new Error(`source-copy repair: testo vuoto per targetIndex=${indexes[position]}`);
+        }
+        return {
+          field: target.field,
+          paragraphIndex: target.paragraphIndex,
+          text: replacement.text,
+        };
+      });
+      return applySourceCopyRepairReplacements(currentArticle, replacements);
+    },
+  });
 }
 
 /**
@@ -9921,12 +10067,6 @@ ${sourceContext._identityRefinement}
 Rigenera "id" e "slugs" seguendo ESATTAMENTE lo schema richiesto sopra (valore reale specifico dell'articolo, non il segnaposto), senza ripetere il valore appena rigettato.`
     : '';
 
-  const sourceCopyRefinementInstruction = sourceContext?._sourceCopyRefinement
-    ? `\n\n⚠️ TENTATIVO PRECEDENTE RIGETTATO — testo troppo vicino alla fonte:
-${sourceContext._sourceCopyRefinement}
-Riformula da zero il corpo italiano: non riutilizzare alcuna sequenza di ${SOURCE_COPY_OVERLAP_THRESHOLD} o più parole consecutive della fonte, salvo al massimo due citazioni brevi, attribuite e tra virgolette, di non più di ${SOURCE_COPY_MAX_QUOTE_WORDS} parole ciascuna.`
-    : '';
-
   // ── Multi-call generation with automatic model fallback ──
   // Supports model override via sourceContext._forceModel and temperature via sourceContext._temperature
   const forceModel = sourceContext?._forceModel;
@@ -10113,7 +10253,6 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // 12-token margin for the headline+fact-check combination alone): a single
   // relevant note beats three where two are stale.
   const _remediationFull = identityRefinementInstruction
-    || sourceCopyRefinementInstruction
     || (headlineRefinementInstruction + factCheckRefinementInstruction);
   const _remediationShort = _clampRemediation(_remediationFull, PROMPT_REMEDIATION_CAP_CHARS);
   const _shrinkLadder = [
@@ -11343,6 +11482,38 @@ function italianBodyWordCount(data) {
   return ['body1', 'body2', 'body3']
     .map((k) => countWords(it[k] || ''))
     .reduce((acc, n) => acc + n, 0);
+}
+
+function italianBodyPlainChars(data) {
+  const it = data?.content?.it || {};
+  return ['body1', 'body2', 'body3']
+    .map((k) => it[k] || '')
+    .join(' ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .length;
+}
+
+function assertItalianBodyLengthPostcondition(bodyText, { minWords, minChars, label = 'Body' } = {}) {
+  const words = countWords(bodyText);
+  const chars = String(bodyText || '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .length;
+  if (Number.isFinite(minWords) && words < minWords) {
+    throw qualityRejectError(
+      `${label} troppo corto dopo la riparazione anti-copia: ${words} parole (min: ${minWords}).`,
+    );
+  }
+  if (Number.isFinite(minChars) && chars < minChars) {
+    throw qualityRejectError(
+      `${label} troppo corto dopo la riparazione anti-copia: ${chars} chars (min: ${minChars}).`,
+    );
+  }
+  console.error(`  ✅ [thin-content] ${label}: ${words} parole, ${chars} chars (min ${minWords}/${minChars})`);
+  return { words, chars };
 }
 
 /**
@@ -13492,6 +13663,46 @@ function optimizeSeoMetadata(data) {
   const baseKeywords = ['frontalieri', 'ticino', 'svizzera', 'italia'];
   data.seo.keywords = [...baseKeywords, ...uniqueTerms].slice(0, 8).join(', ');
 
+  return data;
+}
+
+/**
+ * Rebuild metadata that is derived from body text after a targeted source-copy
+ * repair. The repair intentionally changes only selected paragraphs, but an
+ * excerpt or SEO description derived before that change would describe text
+ * that is no longer published. The deterministic cap is the same fallback
+ * used by generateExcerpt() when its model call is unavailable; it keeps this
+ * postcondition quota-free and locale-safe.
+ */
+export function refreshSourceCopyDerivedMetadata(data) {
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const content = data?.content?.[locale];
+    if (!content || typeof content !== 'object') continue;
+    const body = bodyTextForQuality(content);
+    if (!body.trim()) continue;
+    const excerpt = capBlogDescription(body).value;
+    if (!excerpt) continue;
+    content.excerpt = excerpt;
+    applyMicrocopyGuard(content, locale);
+    if (typeof content.seoDescription === 'string') {
+      content.seoDescription = capBlogDescription(excerpt).value;
+    }
+    if (typeof content.ogDescription === 'string') {
+      content.ogDescription = capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value;
+    }
+  }
+
+  // optimizeSeoMetadata derives the shared IT description, OG description and
+  // keyword list from the current IT title/excerpt. Seed both descriptions so
+  // a previous model value cannot survive a body repair through its `||`
+  // fallback in that function.
+  const itExcerpt = data?.content?.it?.excerpt;
+  if (typeof itExcerpt === 'string' && itExcerpt.trim()) {
+    if (!data.seo || typeof data.seo !== 'object') data.seo = {};
+    data.seo.description = itExcerpt;
+    data.seo.ogDescription = itExcerpt;
+    optimizeSeoMetadata(data);
+  }
   return data;
 }
 
@@ -16471,10 +16682,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // id/slug rejection regenerated blind instead of being told what to fix.
   /** @type {string|null} */
   let lastIdentityErrors = null;
-  // Carries the previous source-copy verdict into the next prompt so the model
-  // is explicitly told to paraphrase rather than repeat the rejected run.
-  /** @type {string|null} */
-  let lastSourceCopyErrors = null;
   // Il cap di input piu' permissivo che la flotta ha dichiarato rifiutando il
   // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
   let lastPromptTokenBudget = 0;
@@ -16540,7 +16747,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Tracks the model used by the immediately preceding attempt, for
   // selectMinWordsRetryModel()'s back-to-back-duplicate skip below.
   let previousMinWordsModel = null;
-  let sourceCopyRetries = 0;
   const sourceCopyMode = getSourceCopyMode();
 
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
@@ -16613,9 +16819,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // Surface the previous attempt's id/slug rejection so callGemini can
       // tell the model exactly what was wrong with the value it echoed back.
       _identityRefinement: lastIdentityErrors || undefined,
-      // Surface the previous article/source overlap so the next body is
-      // regenerated with an explicit paraphrase instruction.
-      _sourceCopyRefinement: lastSourceCopyErrors || undefined,
       // Il budget che la FLOTTA ha dichiarato al tentativo precedente, non uno
       // che assumiamo noi. Vedi il blocco che lo consuma in callGemini.
       _promptTokenBudget: lastPromptTokenBudget || undefined,
@@ -16790,33 +16993,27 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       }
       throw validationErr;
     }
-    const sourceCopyVerdict = evaluateSourceCopy(
-      sourceCopyInputText(pageContent),
+    const sourceCopyResult = await repairGeneratedArticleSourceCopy(
       data.content.it,
-      { locale: 'it' },
+      sourceCopyInputText(pageContent),
+      { articleId: data.id, locale: 'it', mode: sourceCopyMode },
     );
-    logSourceCopyVerdict(data.id, sourceCopyVerdict, console.error, sourceCopyMode);
-    if (!sourceCopyVerdict.safe && sourceCopyModeBlocks(sourceCopyMode)) {
-      lastSourceCopyErrors = `Massimo overlap rilevato: ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD}). `
-        + 'Riformula il corpo senza copiare la fonte.';
-      if (sourceCopyRetries < SOURCE_COPY_MAX_RETRIES && attempt < maxAttempts) {
-        sourceCopyRetries += 1;
-        console.error(`  🔄 Anti-copia: overlap di ${sourceCopyVerdict.maxWords} parole — rigenero (${sourceCopyRetries}/${SOURCE_COPY_MAX_RETRIES})...`);
-        continue;
-      }
+    data.content.it = sourceCopyResult.article;
+    if (sourceCopyResult.rejected) {
       throw new SourceCopyError(
-        `Anti-copia fallita: overlap massimo ${sourceCopyVerdict.maxWords} parole consecutive (soglia ${SOURCE_COPY_OVERLAP_THRESHOLD})`,
-        sourceCopyVerdict,
-        { retries: sourceCopyRetries },
+        `Anti-copia strutturale: overlap massimo ${sourceCopyResult.verdict.maxWords} parole consecutive `
+          + `(soglia ${SOURCE_COPY_OVERLAP_THRESHOLD}, coverage ${(sourceCopyResult.verdict.coverageRatio * 100).toFixed(1)}%)`,
+        sourceCopyResult.verdict,
+        { retries: sourceCopyResult.passes },
       );
     }
-    lastSourceCopyErrors = null;
     // Step 3a.0-specificity: reject/repair vacuous key facts and reject a
     // cross-canton guide before spending translation, image or write budget.
     // The same helper is called again after translations below because this
     // primary path does not enter registerArticleFiles().
     assertGeneratedArticleQuality(data);
-    optimizeSeoMetadata(data);
+    if (sourceCopyResult.changed) refreshSourceCopyDerivedMetadata(data);
+    else optimizeSeoMetadata(data);
     // Step 3a.0-dup: i gate deterministici dei duplicati, gli stessi di Step
     // 3a.2 e 3a.4, gia' qui, prima del fact-check e dell'espansione. Id e
     // titolo IT sono stabili da questo punto: il fact-check e l'espansione
@@ -17433,8 +17630,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Final thin content guard (after retry/expand attempts)
   {
-    const itBodyFinal = `${(data.content.it || data.content)?.body1 || ''} ${(data.content.it || data.content)?.body2 || ''} ${(data.content.it || data.content)?.body3 || ''}`;
-    const itPlainCharsFinal = itBodyFinal.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().length;
+    const itPlainCharsFinal = italianBodyPlainChars(data);
     const adaptiveMinChars = computeAdaptiveMinChars(lengthBudgetSource);
     if (itPlainCharsFinal < adaptiveMinChars) {
       const thinErr = new Error(`Articolo troppo corto dopo retry: ${itPlainCharsFinal} chars (min: ${adaptiveMinChars}). Google penalizza thin content.`);
@@ -17443,6 +17639,15 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     }
     console.error(`  ✅ [thin-content] Body finale: ${itPlainCharsFinal} chars (min: ${adaptiveMinChars})`);
   }
+  // Preserve the floor that was actually verified before translation and the
+  // final targeted repair. Thin sources may legitimately use the documented
+  // last-attempt 85% word allowance; the postcondition must not make that
+  // accepted article shorter, while a normal article must still keep the full
+  // adaptive floor.
+  const verifiedItalianLength = {
+    words: italianBodyWordCount(data),
+    chars: italianBodyPlainChars(data),
+  };
 
     // Step 3a.0b: Strip leaked internal URLs from IT
   for (const field of ['body1', 'body2', 'body3']) {
@@ -17610,37 +17815,32 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // Step 3e: Append source citation to body3 (E-E-A-T compliance)
   // For stats-bfs:// articles, the URL is a synthetic per-quarter dedup key
   // — the human-readable citation must point to the public BFS landing page.
-  const citationUrl = url.startsWith('stats-bfs://')
-    ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'
-    : url.startsWith('stats-astra://')
-      ? 'https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'
-      : url;
-  if (citationUrl && !citationUrl.startsWith('evergreen://')) {
-    try {
-      const sourceDomain = new URL(citationUrl).hostname.replace(/^www\./, '');
-      const SOURCE_LABEL = { it: 'Fonte', en: 'Source', de: 'Quelle', fr: 'Source' };
-      for (const locale of ['it', 'en', 'de', 'fr']) {
-        if (!data.content[locale]?.body3) continue;
-        const label = SOURCE_LABEL[locale] || 'Source';
-        // Only append if not already present
-        if (!data.content[locale].body3.includes(sourceDomain)) {
-          data.content[locale].body3 += `\n\n*${label}: [${sourceDomain}](${citationUrl})*`;
-        }
-      }
-      console.error(`  📰 Citazione fonte aggiunta: ${sourceDomain}`);
-    } catch { /* invalid URL — skip */ }
-  }
+  appendSourceCitation(data, url);
 
-  // Final anti-copy check runs after citation/CTA/sanitizer mutations and on
-  // every published locale. The Italian check above is the regenerable gate;
-  // this is the fail-closed publication gate for the exact bytes we are about
-  // to write.
+  // Final anti-copy pass runs after citation/CTA/sanitizer mutations and on
+  // every published locale. Translations use the same targeted repair and
+  // condensation path; a full article regeneration is never triggered here.
   const sourceCopyFinalSource = sourceCopyInputText(pageContent);
-  const sourceCopyFinalVerdicts = ['it', 'en', 'de', 'fr'].map((locale) => {
-    const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
-    logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode);
-    return verdict;
-  });
+  const sourceCopyFinalVerdicts = [];
+  let sourceCopyFinalChanged = false;
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    if (!data.content[locale]) continue;
+    const result = await repairGeneratedArticleSourceCopy(
+      data.content[locale],
+      sourceCopyFinalSource,
+      { articleId: data.id, locale, mode: sourceCopyMode },
+    );
+    data.content[locale] = result.article;
+    sourceCopyFinalVerdicts.push(result.verdict);
+    sourceCopyFinalChanged = sourceCopyFinalChanged || result.changed;
+    if (result.rejected) {
+      throw new SourceCopyError(
+        `Anti-copia strutturale dopo le trasformazioni finali (${locale}): overlap massimo ${result.verdict.maxWords} parole consecutive`,
+        result.verdict,
+        { retries: result.passes },
+      );
+    }
+  }
   const worstSourceCopy = sourceCopyFinalVerdicts.reduce(
     (worst, verdict) => verdict.maxWords > worst.maxWords ? verdict : worst,
     sourceCopyFinalVerdicts[0],
@@ -17649,14 +17849,81 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     `[source-copy] article=${data.id} max_overlap=${worstSourceCopy.maxWords}`
       + ` threshold=${SOURCE_COPY_OVERLAP_THRESHOLD} mode=${sourceCopyMode} locales=it,en,de,fr`,
   );
-  const unsafeSourceCopy = sourceCopyFinalVerdicts.find((verdict) => !verdict.safe);
-  if (unsafeSourceCopy && sourceCopyModeBlocks(sourceCopyMode)) {
-    throw new SourceCopyError(
-      `Anti-copia fallita dopo le trasformazioni finali (${unsafeSourceCopy.locale}): `
-        + `overlap massimo ${unsafeSourceCopy.maxWords} parole consecutive`,
-      unsafeSourceCopy,
-      { retries: sourceCopyRetries },
-    );
+
+  // The targeted repair is deliberately the last model mutation, but it ran
+  // after the normal CTA/link/citation passes. Re-run every deterministic
+  // postcondition that could otherwise be deleted by a paragraph replacement,
+  // and re-run the source-aware factuality checks before anything is written.
+  // This keeps the repair local without allowing it to bypass the guards that
+  // previously ran only before the final anti-copy pass.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (error) {
+    error.qualityReject = true;
+    throw error;
+  }
+  sanitizeBoldFormatting(data);
+  assertGeneratedArticleQuality(data, {
+    // Explicitly evaluate the post-repair body with the deterministic CTA/link
+    // appendages removed; the pre-first-CTA snapshot is stale after repair.
+    cantonBody: bodyTextForCantonPostcondition(data),
+  });
+  assertNoFabricatedReferences(data.content.it);
+  assertNoFabricatedLaborOfficeCrossLocale(data);
+  assertNoFabricatedNormAcronyms({
+    it: data.content.it,
+    en: data.content.en,
+    de: data.content.de,
+    fr: data.content.fr,
+  });
+
+  Object.defineProperty(data, '_localNewsSource', {
+    value: IS_FRONTALIERE && isLocalNewsWithoutFrontaliereAngle(pageContent),
+    configurable: true,
+  });
+  validateAndEnforceCTA(data);
+  enforceStrongInternalLinks(data);
+  delete data._localNewsSource;
+  appendSourceCitation(data, url);
+
+  // The repair can change the text from which locale metadata was derived;
+  // restore the shared SEO fields after all body replacements, then keep the
+  // municipality postcondition last on the metadata surfaces.
+  if (sourceCopyFinalChanged) refreshSourceCopyDerivedMetadata(data);
+  preserveMunicipalityNamesInMetadata(data);
+
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    if (!data.content[locale]) continue;
+    const verdict = evaluateSourceCopy(sourceCopyFinalSource, data.content[locale], { locale });
+    logSourceCopyVerdict(data.id, verdict, console.error, sourceCopyMode, 'postconditions');
+    if (sourceCopyMode !== 'warn' && (verdict.structural || (sourceCopyMode === 'enforce' && !verdict.safe))) {
+      throw new SourceCopyError(
+        `Anti-copia non conforme dopo le postcondizioni (${locale}): overlap massimo ${verdict.maxWords} parole consecutive`,
+        verdict,
+        { retries: SOURCE_COPY_MAX_REPAIR_PASSES },
+      );
+    }
+  }
+
+  // The repair/condense pass can shorten the Italian body after the original
+  // word/character gate and after duplicate admission. Check the repaired body
+  // before writing, without counting deterministic CTA/link/citation text.
+  assertItalianBodyLengthPostcondition(bodyTextForCantonPostcondition(data), {
+    minWords: Math.min(adaptiveMinWords, verifiedItalianLength.words),
+    minChars: Math.min(computeAdaptiveMinChars(lengthBudgetSource), verifiedItalianLength.chars),
+    label: 'Body post-riparazione anti-copia',
+  });
+
+  // Metadata refresh can change the excerpt used by both lexical and semantic
+  // duplicate admission. Re-run the same gates on the final candidate instead
+  // of publishing a repaired excerpt that was never admitted.
+  if (sourceCopyFinalChanged) {
+    console.error('🔍 Verifica duplicati post-riparazione:');
+    checkForDuplicates(data);
+    await checkSemanticNearDuplicate(data, {
+      store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
+      meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
+    });
   }
 
   console.error(`\n📝 Articolo generato: "${data.content.it.title}"`);
@@ -17664,12 +17931,6 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   console.error(`   Categoria: ${data.category}`);
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
-
-  // This is the last metadata mutation before the primary write path. The
-  // placeholder guard may replace a localized imageAlt wholesale with its IT
-  // fallback; restore municipality names only after that replacement, or a
-  // comune present only in the localized source would be lost.
-  preserveMunicipalityNamesInMetadata(data);
 
   // Step 3a.2: gate deterministico sui body tradotti — BLOCCANTE (#5661).
   // Questo gate resta dopo tutte le mutazioni del testo (3d CTA/link, 3e
