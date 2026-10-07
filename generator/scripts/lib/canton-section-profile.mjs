@@ -593,7 +593,15 @@ function sourceUrlMap() {
  */
 export function filterCantonSourceHeadlines(profile, source, headlines) {
   const wanted = String(source?.quirks?.filterByCanton || '').trim().toUpperCase();
-  if (!wanted) return headlines;
+  // Il marker è una prova prodotta da questo filtro, non input affidabile del
+  // parser. Eliminalo dal percorso non filtrato: un oggetto headline riusato
+  // o con proprietà interne residue non può trasformarsi in un'ancora.
+  const withoutFilterMarker = (h) => {
+    if (!h || typeof h !== 'object' || !Object.hasOwn(h, '_cantonFilterBy')) return h;
+    const { _cantonFilterBy: _discarded, ...clean } = h;
+    return clean;
+  };
+  if (!wanted) return (headlines || []).map(withoutFilterMarker);
   if (wanted !== String(profile?.canton || '').trim().toUpperCase()) return [];
   const aliases = SHARED_CANTON_AREA_ALIASES[wanted] || [];
   const textAliases = aliases.filter((alias) => !alias.includes('.ch'));
@@ -606,7 +614,7 @@ export function filterCantonSourceHeadlines(profile, source, headlines) {
   // dichiarato. Conserviamo la prova come metadato interno: il successivo
   // anchor-gate non deve riconoscere di nuovo gli alias condivisi come se
   // fossero un feed regionale non filtrato.
-  return filtered.map((h) => ({ ...h, _cantonFilterBy: wanted }));
+  return filtered.map((h) => ({ ...withoutFilterMarker(h), _cantonFilterBy: wanted }));
 }
 
 /**

@@ -323,6 +323,19 @@ test('feed Unterwalden: gli alias condivisi entrano in entrambi i profili, URL l
   );
 });
 
+test('feed non filtrato: scarta un marker cantonale residuo prima dell’anchor gate', () => {
+  const nw = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  const headline = { headline: 'Unterwaldens Ski-Asse starten in den Winter', url: 'https://www.unterwalden24.ch/ski' };
+  const stale = { ...headline, _cantonFilterBy: 'NW' };
+  const clean = filterCantonSourceHeadlines(nw, {}, [stale]);
+  assert.equal(clean[0]._cantonFilterBy, undefined);
+  assert.equal(
+    nw.anchors(clean[0].headline, clean[0].url, 'https://www.unterwalden24.ch/feed/'),
+    false,
+    'un marker residuo non deve autorizzare il feed condiviso',
+  );
+});
+
 test("lessico cantonale: composti tedeschi/francesi di mobilita' e sicurezza entrano, cultura no", () => {
   const p = buildCantonProfile('canton-nw', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
   for (const text of [
