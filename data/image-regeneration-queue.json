@@ -378,6 +378,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T10:27:22.590Z",
       "lastFailureAt": "2026-10-07T10:27:22.590Z"
+    },
+    {
+      "articleId": "incidente-a13-widnau-2026",
+      "title": "Incidente A13 Widnau 2026: danni e impatto sul traffico",
+      "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
+      "reason": "All image providers failed for article-incidente-a13-widnau-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T10:36:03.797Z",
+      "lastFailureAt": "2026-10-07T10:36:03.797Z"
     }
   ]
 }
