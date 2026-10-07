@@ -30,8 +30,9 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);
   assert.doesNotMatch(imageAdapter, new RegExp(`fetch\\(|${RETIRED_FLASH_IMAGE_MODEL}|Pollinations|Together|Fal\\.ai|Pixabay|Pexels|Picsum`));
   assert.doesNotMatch(source, new RegExp(RETIRED_FLASH_IMAGE_MODEL));
-  assert.match(source, /No governed image or valid catalog fallback/);
   assert.match(source, /hasValidBlogImageRecord/);
+  assert.match(source, /resolveArticleCoverFallback/);
+  assert.match(imageAdapter, /maxAttempts:\s*1/);
 });
 
 test('il publisher non scarica URL senza prova di licenza', () => {
@@ -45,6 +46,7 @@ test('il publisher non scarica URL senza prova di licenza', () => {
   assert.match(resolver, /if \(isEditorialUpload && upload\)/);
   assert.match(resolver, /non scarico la risorsa/);
   assert.match(resolver, /generateArticleImage/);
+  assert.match(resolver, /resolveArticleCoverFallback/);
   assert.doesNotMatch(resolver, /resolveCommonsPick|STATIC_FALLBACK_IMAGE/);
 });
 
