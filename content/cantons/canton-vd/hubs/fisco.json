@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "6d012b0562a2b3bb443e47727e4f27f32d47f339dc42e2bc15f916b991776ac1",
+  "updatedAt": "2026-10-07T15:40:47.440Z",
+  "contentHash": "3deafc975dcc325085976dfa8c87a7915b7c35bd23e8aa80c7fbfe0177f301e9",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -144,16 +144,16 @@
           "date": "2026-08-17T13:10:46.376Z"
         },
         {
-          "title": "Imposta cantonale: confronto Svizzera 2026 - Cantone Vaud",
-          "url": "/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-vaud/",
-          "excerpt": "Il cantone Vaud ha un'aliquota di imposta cantonale del 10,5%.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
           "title": "Imposta successione e donazione nel Cantone di Vaud",
           "url": "/articoli-svizzera/imposta-successione-donazione-vaud/",
           "excerpt": "Guida alle aliquote e alle esenzioni per eredi e donatari nel sistema fiscale del Cantone di Vaud, con focus sui rapporti di parentela.",
           "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Imposta cantonale: confronto Svizzera 2026 - Cantone Vaud",
+          "url": "/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-vaud/",
+          "excerpt": "Il cantone Vaud ha un'aliquota di imposta cantonale del 10,5%.",
+          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Imposta cantonale: confronto 2026 e focus sul Canton Vaud",
@@ -188,7 +188,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "en": {
       "canton": "VD",
@@ -310,16 +310,16 @@
           "date": "2026-08-17T13:10:46.376Z"
         },
         {
-          "title": "Cantonal tax: comparison Switzerland 2026 - Canton Vaud",
-          "url": "/en/swiss-articles/tax-cantonal-comparison-switzerland-2026-canton-vaud/",
-          "excerpt": "The canton of Vaud has a cantonal tax rate of 10.5%.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
           "title": "Tax succession and donation in the Canton of Vaud",
           "url": "/en/swiss-articles/inheritance-gift-tax-vaud-canton/",
           "excerpt": "Guide to rates and exemptions for heirs and donors in the tax system of the Canton of Vaud, with a focus on kinship relationships.",
           "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Cantonal tax: comparison Switzerland 2026 - Canton Vaud",
+          "url": "/en/swiss-articles/tax-cantonal-comparison-switzerland-2026-canton-vaud/",
+          "excerpt": "The canton of Vaud has a cantonal tax rate of 10.5%.",
+          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Cantonal tax: comparison 2026 and focus on the canton of Vaud",
@@ -354,7 +354,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "de": {
       "canton": "VD",
@@ -476,16 +476,16 @@
           "date": "2026-08-17T13:10:46.376Z"
         },
         {
-          "title": "Kantonssteuer: Vergleich Schweiz 2026 - Kanton Waadt",
-          "url": "/de/schweiz-artikel/steuerliche-vergleichung-schweiz-2026-kanton-vaud/",
-          "excerpt": "Der Kanton Waadt hat einen kantonalen Steuersatz von 10,5%.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
           "title": "Erbschafts- und Schenkungssteuer im Kanton Waadt",
           "url": "/de/schweiz-artikel/erbschaft-schenkungssteuer-kanton-waadt/",
           "excerpt": "Leitfaden zu den Steuersätzen und Befreiungen für Erben und Schenkende im Steuersystem des Kantons Waadt mit Schwerpunkt auf Verwandtschaftsverhältnissen.",
           "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Kantonssteuer: Vergleich Schweiz 2026 - Kanton Waadt",
+          "url": "/de/schweiz-artikel/steuerliche-vergleichung-schweiz-2026-kanton-vaud/",
+          "excerpt": "Der Kanton Waadt hat einen kantonalen Steuersatz von 10,5%.",
+          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Kantonssteuer: Vergleich 2026 und Fokus auf den Kanton Waadt",
@@ -520,7 +520,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     },
     "fr": {
       "canton": "VD",
@@ -642,16 +642,16 @@
           "date": "2026-08-17T13:10:46.376Z"
         },
         {
-          "title": "Impôt cantonal : comparaison Suisse 2026 - Canton de Vaud",
-          "url": "/fr/articles-suisse/comparaison-fiscale-suisse-2026-canton-vaud/",
-          "excerpt": "Le canton de Vaud a un taux d'imposition cantonal de 10,5 %.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
           "title": "Impôt succession et donation dans le canton de Vaud",
           "url": "/fr/articles-suisse/impot-succession-donation-canton-vaud/",
           "excerpt": "Guide des taux et des exonérations pour les héritiers et les donataires dans le système fiscal du canton de Vaud, en mettant l'accent sur les relations de parenté.",
           "date": "2026-09-05T09:40:27.337Z"
+        },
+        {
+          "title": "Impôt cantonal : comparaison Suisse 2026 - Canton de Vaud",
+          "url": "/fr/articles-suisse/comparaison-fiscale-suisse-2026-canton-vaud/",
+          "excerpt": "Le canton de Vaud a un taux d'imposition cantonal de 10,5 %.",
+          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Taxe cantonale : comparaison 2026 et focus sur le canton de Vaud",
@@ -686,7 +686,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-07T15:40:47.440Z"
     }
   }
 }
