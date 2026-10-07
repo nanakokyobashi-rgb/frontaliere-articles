@@ -38,20 +38,53 @@
  *     nei casi inversi: le asserzioni che pinnano il comportamento legittimo
  *     mordono davvero, non sono decorative.
  */
-import { test, describe, beforeEach, afterEach } from 'node:test';
+import { test, describe, beforeEach, afterEach, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
-import {
+import { setLocalOpusMtForTests } from '../scripts/lib/local-opus-mt.mjs';
+
+// This file deliberately drives the cascade with mocked fetches. Clear ADC and
+// every optional provider before importing free-translate: its Google Cloud
+// service-account credential is read at module initialization, and leaving the
+// ambient ADC in place would enter the real JWT retry/backoff path in an
+// otherwise offline test.
+const ENV_KEYS = [
+  'GOOGLE_APPLICATION_CREDENTIALS',
+  'CODEX_AUTH_BROKER_SOCKET',
+  'FREE_TRANSLATE_CODEX_TIER',
+  'DEEPL_API_KEY',
+  'DEEPL_API_KEY_2',
+  'AZURE_TRANSLATOR_KEY',
+  'AZURE_TRANSLATOR_KEY_2',
+  'GSC_CLIENT_ID',
+  'GSC_CLIENT_SECRET',
+  'GSC_REFRESH_TOKEN',
+  'HF_TOKEN',
+  'HUGGINGFACE_API_KEY',
+  'LIBRETRANSLATE_SELF_HOSTED_URL',
+  'MT_LOCAL_OPUSMT',
+  'VITEST',
+];
+const savedEnv = new Map(ENV_KEYS.map((key) => [key, process.env[key]]));
+for (const key of ENV_KEYS) delete process.env[key];
+
+const {
   freeTranslate,
   freeTranslateWithRetryDetailed,
   getCascadeStats,
   logCascadeSummary,
   isSourcePassthrough,
   asTranslationResult,
-} from '../scripts/lib/free-translate.mjs';
-import { setLocalOpusMtForTests } from '../scripts/lib/local-opus-mt.mjs';
+} = await import('../scripts/lib/free-translate.mjs');
+
+after(() => {
+  for (const [key, value] of savedEnv) {
+    if (value === undefined) delete process.env[key];
+    else process.env[key] = value;
+  }
+});
 
 const IT = [
   '## In breve',
@@ -70,7 +103,7 @@ const EN = [
 ].join('\n');
 
 const realFetch = globalThis.fetch;
-const realVitestFlag = process.env.VITEST;
+const realVitestFlag = savedEnv.get('VITEST');
 
 test('non usa più il flag outcomeNoted morto nel percorso Azure', () => {
   const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
@@ -205,17 +238,19 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.equal(snapshot().hits - before.hits, 0);
   });
 
-  test('non scarta la traduzione per un ultimo chunk breve restituito verbatim', async () => {
+  test('lascia passare un ultimo chunk breve se e\' l\'unico eco', async () => {
     const firstChunk = Array.from({ length: 100 }, (_, i) => `Frase sorgente numero ${i} con testo sufficiente.`).join(' ');
     const secondChunk = Array.from({ length: 90 }, (_, i) => `Frase sorgente numero ${i + 100} con testo sufficiente.`).join(' ');
     const filler = Array.from({ length: 55 }, () => 'parola').join(' ');
     const longText = `${firstChunk} ${secondChunk} ${filler} ## FAQ`;
     let myMemoryCalls = 0;
+    const queries = [];
     globalThis.fetch = async (url) => {
       if (!String(url).includes('api.mymemory.translated.net')) throw new Error('offline nel test');
       const query = new URL(url).searchParams.get('q') || '';
+      queries.push(query);
       myMemoryCalls += 1;
-      const translatedText = query.includes('## FAQ') ? query : `Translated chunk ${myMemoryCalls}`;
+      const translatedText = query === 'FAQ' ? query : `Translated chunk ${myMemoryCalls}`;
       return {
         ok: true,
         json: async () => ({ responseData: { translatedText, match: 1 } }),
@@ -225,11 +260,11 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
 
     const out = await freeTranslate({ text: longText, sourceLang: 'it', targetLang: 'en', fieldType: 'description' });
 
-    assert.match(out, /Translated chunk/);
-    assert.match(out, /## FAQ/);
+    assert.notEqual(out, '');
+    assert.equal(queries.at(-1), 'FAQ');
     assert.ok(myMemoryCalls > 2);
-    assert.equal(snapshot().passthroughs - before.passthroughs, 1);
-    assert.ok(snapshot().chunks - before.chunks > 0);
+    assert.equal(snapshot().passthroughs - before.passthroughs, 0);
+    assert.equal(snapshot().chunks - before.chunks, 0);
     assert.equal(snapshot().hits - before.hits, 1);
   });
 
@@ -263,12 +298,10 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     assert.match(summary, /Tier passthrough \(chunk/);
   });
 
-  test('documenta la soglia dei chunk con la misura del corpus che la sostiene (#1320/FU-025)', () => {
+  test('documenta che i passthrough a chunk sono giudicati aggregati', () => {
     const source = readFileSync(new URL('../scripts/lib/free-translate.mjs', import.meta.url), 'utf8');
-    assert.match(source, /const MIN_SUBSTANTIVE_PASSTHROUGH_WORDS = 8;/);
-    assert.match(source, /blog-body:\s+15'476 file, 46'524 campi, 48'298 chunk/);
-    assert.match(source, /blog-body-ch:\s+8'388 file, 25'164 campi, 25'589 chunk/);
-    assert.match(source, /totale:\s+23'864 file, 71'688 campi, 73'887 chunk/);
+    assert.match(source, /MIN_SUBSTANTIVE_PASSTHROUGH_WORDS/);
+    assert.match(source, /rejectAggregatedPassthrough/);
   });
 
   // ── IL VERSO INVERSO: cio' che NON deve cambiare ───────────────────────────
@@ -718,9 +751,13 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
     setLocalOpusMtForTests(async () => { throw new Error('modello non disponibile'); });
     globalThis.fetch = async (url) => {
       if (String(url).includes('api.mymemory.translated.net')) {
+        const query = new URL(url).searchParams.get('q') || '';
+        const translatedText = query.includes('\n')
+          ? 'vera traduzione'
+          : `${query.match(/^\s*(?:#{1,6}\s+|[-*+]\s+|\d+[.)]\s+)/u)?.[0] || ''}vera traduzione`;
         return {
           ok: true,
-          json: async () => ({ responseData: { translatedText: 'vera traduzione', match: 1 } }),
+          json: async () => ({ responseData: { translatedText, match: 1 } }),
         };
       }
       throw new Error('offline nel test');
@@ -736,7 +773,10 @@ describe('freeTranslate — guardia «uscita == sorgente»', () => {
         _outcome: outcome,
       });
 
-      assert.equal(out, 'vera traduzione');
+      assert.equal(
+        out,
+        '## vera traduzione\n- vera traduzione\n- vera traduzione\n\nvera traduzione',
+      );
       assert.equal(outcome.incomplete, true);
     } finally {
       setLocalOpusMtForTests(null);

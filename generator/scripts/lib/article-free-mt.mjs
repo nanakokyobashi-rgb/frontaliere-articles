@@ -17,6 +17,7 @@ import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import { findLoneSurrogates } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { SUPPORTED_LOCALES } from './key-facts-specificity.mjs';
+import { translationSentinel, translationSentinelRegExp } from './translation-sentinels.mjs';
 import {
   comuneTopicKey,
   isMunicipalityIndexUsable,
@@ -24,7 +25,7 @@ import {
 } from './topic-coverage-guard.mjs';
 
 const NAV_LINK_RE = /\[[^\]]+\]\(nav:[^)]+\)/g;
-const NAV_SENTINEL_RE = /0NAV(\d+)0/g;
+const NAV_SENTINEL_RE = translationSentinelRegExp('nav', 'g');
 
 const templateLocale = (locale) => {
   const value = String(locale ?? '').trim().toLowerCase();
@@ -49,13 +50,12 @@ function templateHeadingPairs(sourceLang, targetLang) {
  * never reach the engine: the runs of text between them are translated on their
  * own and the canonical target heading is written back between the runs.
  *
- * A sentinel was the first attempt and it cannot hold. The free cascade does
- * not preserve line structure: its long-text branch joins the sentence segments
- * of a chunk, and then the chunks, with a space
- * (`_chunkAtSentences` and `parts.join(' ')` in `free-translate.mjs`), so a token
- * that must come back alone on its line comes back inline. Whatever the engine
- * does to its input, a heading it never sees cannot be translated, merged into
- * a sentence, reordered or dropped.
+ * A sentinel was the first attempt and it cannot hold. The free cascade keeps
+ * the source line structure in its long-text branch: chunks carry their source
+ * separators and `_recomposeChunkParts` restores them after translation. A
+ * heading that must come back alone on its line therefore remains isolated;
+ * whatever the engine does to its input, a heading it never sees cannot be
+ * translated, merged into a sentence, reordered or dropped.
  *
  * Headings are recognised on `detectText` and the segments are cut from
  * `payloadText`: the municipality mask in between rewrites names inside a line
@@ -126,7 +126,7 @@ function bodyTranslationCompletenessMiss(source, translated, fieldName) {
 // English translation). Keep the list derived from the canonical municipality
 // source; a hand-maintained allow-list would silently miss the next comune
 // added to `data/municipalities.ts`.
-const MUNICIPALITY_SENTINEL_RE = /0M0(\d+)Q0/gi;
+const MUNICIPALITY_SENTINEL_RE = translationSentinelRegExp('municipality', 'gi');
 
 function municipalitySlug(name) {
   return String(name)
@@ -220,7 +220,7 @@ export function maskMunicipalityNames(text) {
   const originals = [];
   const masked = source.replace(MUNICIPALITY_MATCH_RE, (match) => {
     const index = originals.push(match) - 1;
-    return `0M0${index}Q0`;
+    return translationSentinel('municipality', index);
   });
   const restore = (translated) => restoreIndexedSentinels(
     translated,
@@ -379,7 +379,7 @@ export function joinTranslatedChunks(results, bodyKey, targetLang, sourceChunks 
 export function maskNavLinks(text) {
   const store = [];
   const masked = String(text ?? '').replace(NAV_LINK_RE, (m) => {
-    const token = `0NAV${store.length}0`;
+    const token = translationSentinel('nav', store.length);
     store.push(m);
     return token;
   });

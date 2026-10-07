@@ -353,10 +353,10 @@ test('translateFieldFreeMt non manda i titoli al motore, li canonizza in en/de/f
 });
 
 test('un motore che appiattisce le righe non sposta i titoli ne\' le righe vuote attorno', async () => {
-  // E' cio' che fa il ramo a pezzi della cascata per i testi lunghi
-  // (`_chunkAtSentences` e `parts.join(' ')` in free-translate.mjs): unisce
-  // segmenti e pezzi con uno spazio. Una sentinella «sola sulla sua riga» non
-  // potrebbe sopravvivere; un titolo che il motore non vede si'.
+  // Il ramo lungo invia al motore il testo senza il prefisso strutturale e
+  // ricompone ogni riga con i separatori originali. Questo stub simula comunque
+  // un engine che appiattisce l'output; i titoli di template restano isolati dal
+  // wrapper e vengono riscritti nella lingua target.
   const out = await translateFieldFreeMt({
     text: IT_TEMPLATE_BODY1,
     sourceLang: 'it',
