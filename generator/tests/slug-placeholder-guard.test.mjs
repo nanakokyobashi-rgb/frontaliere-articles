@@ -142,12 +142,17 @@ function loadGuard() {
     // esplode su un nome non definito invece che sui segnaposto (#798).
     sliceFn('function localizedTitleSlugCandidate(localizedTitle) {'),
     sliceFn('export function relocalizeSlugsAfterTranslation(data, opts = {}) {'),
+    // Il guard sui marker di servizio e' condiviso fra validate() e il writer
+    // secondario: includerlo nella sandbox mantiene il test agganciato al
+    // percorso reale invece di sostituirlo con una copia.
+    sliceFn('function assertNoArticleIdentityServiceMarkers(data, { qualityReject = false } = {}) {'),
     sliceFn('export function deriveAndSanitizeArticleSlugs(data) {'),
   ]
     .join('\n\n')
     .replace(/^export /gm, '');
   return new Function(
     'console',
+    'findArticleIdentityServiceMarkers',
     'truncateSlugAtWordBoundary',
     'metaFieldPlausibilityMiss',
     'sectionLocaleSlugTaken',
@@ -174,6 +179,7 @@ function freshGuard() {
   // article-slug-i18n.test.mjs.
   const sandbox = loadGuard()(
     fakeConsole,
+    findArticleIdentityServiceMarkers,
     truncateSlugAtWordBoundary,
     // Importato dal suo modulo, non ricopiato (AGENTS.md #6): e' il floor che
     // `localizedTitleSlugCandidate` somma al classificatore.
