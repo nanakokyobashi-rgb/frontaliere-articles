@@ -72,6 +72,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T06:42:41.992Z",
       "lastFailureAt": "2026-10-07T06:42:41.992Z"
+    },
+    {
+      "articleId": "strada-calanca-chiusura-preventiva",
+      "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
+      "fallbackImage": "/images/blog/pasture-chiusura-garanzie.webp",
+      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T06:43:54.395Z",
+      "lastFailureAt": "2026-10-07T06:43:54.395Z"
     }
   ]
 }
