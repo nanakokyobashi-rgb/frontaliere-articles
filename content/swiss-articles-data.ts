@@ -26257,6 +26257,26 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'marcel-salathe-ia-commento',
+    category: 'novita',
+    date: '2026-10-07T20:39:09.410Z',
+    image: '/images/blog/article-marcel-salathe-ia-commento.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'carriere-politica-economica',
+    category: 'pratico',
+    date: '2026-10-07T22:29:39.311Z',
+    image: '/images/blog/article-carriere-politica-economica.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

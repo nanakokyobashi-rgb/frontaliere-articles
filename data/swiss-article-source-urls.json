@@ -1,14 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/verita-immobiliari/1948263/affittare-presto-e-facile-affittare-bene-e-un-altro-lavoro": {
-    "articleId": "affittare-bene-immobili-ticino",
-    "ts": "2026-09-06T06:07:15.606Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/rubriche/ospite/1948272/neutralita-lorenzo-quadri-fa-svizzera": {
-    "articleId": "neutralita-svizzera-prospeta",
-    "ts": "2026-09-06T07:05:05.464Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948281/fondazione-vittime-franchi-crans-montana-istituita-richieste-azione-ricevuto-settantina": {
     "articleId": "beloved-aiuto-vittime-crans-montana",
     "ts": "2026-09-06T07:55:34.365Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/svizzera/economia/1955337/svizzera-collaboratori-tamedia-tagli-giornalismo": {
     "articleId": "tamedia-41-licenziamenti-13-a-losanna-e-ginevra",
     "ts": "2026-10-07T19:46:59.161Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4139903": {
+    "articleId": "marcel-salathe-ia-commento",
+    "ts": "2026-10-07T20:39:09.721Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
+    "articleId": "carriere-politica-economica",
+    "ts": "2026-10-07T22:29:39.705Z",
     "keyForm": 2
   }
 }

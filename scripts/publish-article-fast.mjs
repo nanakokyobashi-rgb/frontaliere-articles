@@ -34,17 +34,19 @@
 //      THIS article are already on disk by this point, so self-referencing
 //      hreflang (the only kind an article page emits) always resolves.
 //   5. hero-image CDN rewrite — rewriteBlogImageRefs() rewrites same-origin
-//      `/images/blog/<file>` refs to the CDN URL. Applied to every written
-//      file (index + bridge), matching blogImageCdnFinalizePlugin's
-//      unconditional whole-dist walk in the full build.
-//   6. renderArticleHubPages({section}) (issue #4881 Fase 1) — re-renders the
-//      section's `/tutti/` archive + pagination for all 4 locales so the
-//      just-published article is immediately LISTED, not merely reachable by
-//      direct URL. Calls the SAME renderArticleHubPagesCore the full build's
-//      emitSeoHubs uses (engine/articleHubPagesPlugin.ts) — byte-identical by
-//      construction. Not run through steps 2-5: those are article-body
-//      specific (flat bridge, this article's own related-picks, hero image)
-//      and don't apply to an archive listing page.
+//      `/images/blog/<file>` refs to the CDN URL; declared images recovered
+//      from the CDN are rewritten by exact key even outside `images/blog`.
+//      Applied to every written file (index + bridge), matching
+//      blogImageCdnFinalizePlugin's unconditional whole-dist walk in the full
+//      build while keeping scratch-only images reachable after cleanup.
+//   6. after the image postcondition, renderArticleHubPages({section}) only if
+//      every requested article is publishable. Otherwise the previous archive
+//      stays online: a new archive built from the whole registry could link to
+//      a page deliberately withheld from this push. On the safe path, calls
+//      the SAME renderArticleHubPagesCore the full build's emitSeoHubs uses
+//      (engine/articleHubPagesPlugin.ts) — byte-identical by construction. It
+//      does not run through steps 2-5: those are article-body specific (flat
+//      bridge, this article's own related-picks, hero image), not archive work.
 //   7. scripts/offload-generated-images-cdn.mjs, unmodified, as a subprocess
 //      (CDN_BASE=https://cdn.frontaliereticino.ch — the same value deploy.yml
 //      exports for the en/de/fr shard runners, which process an analogously
@@ -119,6 +121,7 @@
 import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 // Output-boundary sanitisation (see scripts/lib/sanitize-control-chars.mjs).
 // The renderer is engine/ogPagesPlugin.ts, which arrives by mirror and is not
@@ -134,6 +137,12 @@ import { heroCdnUploads, renderSectionArticlePipeline } from './lib/article-rend
 import { shardOf } from './ci/fast-publish-section.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+function corpusContentRevision() {
+  const epoch = execFileSync('git', ['show', '-s', '--format=%ct', 'HEAD'], { cwd: ROOT_DIR, encoding: 'utf8' }).trim();
+  const short = execFileSync('git', ['rev-parse', '--short=12', 'HEAD'], { cwd: ROOT_DIR, encoding: 'utf8' }).trim();
+  return `${epoch}.${short}`;
+}
 
 function parseArgs(argv) {
   const out = { ids: [] };
@@ -188,6 +197,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
+  const contentRevision = corpusContentRevision();
 
   // La catena di render (passi 0-7b, nell'ordine che conta) vive in
   // scripts/lib/article-render-pipeline.mjs, condivisa col publisher R2 delle
@@ -205,7 +215,17 @@ async function main() {
     console.error(`[publish-article-fast] ${err.message}`);
     process.exit(1);
   }
-  const { written, entries, hubResult, locales } = pipeline;
+  const {
+    written,
+    entries,
+    hubResult,
+    locales,
+    downloadedImageKeys,
+    imageFetchFailures,
+    imagePostcondition,
+    aggregatePagesAllowed,
+  } = pipeline;
+  const publishedIds = [...new Set(entries.map((entry) => entry.articleId))];
 
   // ── Summary JSON for stream B (shard push) / stream C (workflow) ──
   const sectionShardKey = args.shardKey;
@@ -244,16 +264,32 @@ async function main() {
 
   // Hero e thumbnail di ogni articolo reso, dalla directory REALE in cui
   // l'engine li ha risolti (images/blog o images/places): vedi heroCdnUploads.
-  const cdnUploads = heroCdnUploads({ rootDir: ROOT_DIR, entries, logPrefix: 'publish-article-fast' });
+  const cdnUploads = heroCdnUploads({
+    rootDir: ROOT_DIR,
+    entries,
+    downloadedImageKeys,
+    logPrefix: 'publish-article-fast',
+  });
 
-  const summary = { id: args.ids.length === 1 ? args.id : null, ids: args.ids, section: args.section, shards, cdnUploads };
+  const summary = {
+    id: publishedIds.length === 1 ? publishedIds[0] : null,
+    requestedIds: args.ids,
+    ids: publishedIds,
+    section: args.section,
+    contentRevision,
+    imagePostcondition,
+    imageFetchFailures,
+    aggregatePagesAllowed,
+    shards,
+    cdnUploads,
+  };
   const summaryPath = path.resolve(args.summary);
   fs.mkdirSync(path.dirname(summaryPath), { recursive: true });
   fs.writeFileSync(summaryPath, JSON.stringify(summary, null, 2) + '\n', 'utf-8');
 
   const wallMs = Date.now() - t0;
   console.log(
-    `[publish-article-fast] done — ids=${args.ids.join(',')} section=${args.section} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
+    `[publish-article-fast] done — requested=${args.ids.join(',')} published=${publishedIds.join(',') || '(none)'} section=${args.section} contentRevision=${contentRevision} wrote=${written} article files + ${hubResult.written} hub pages, wall=${(wallMs / 1000).toFixed(1)}s`,
   );
   console.log(`[publish-article-fast] summary written to ${summaryPath}`);
 }

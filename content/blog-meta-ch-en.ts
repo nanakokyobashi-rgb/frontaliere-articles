@@ -7877,6 +7877,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.title': 'Tamedia: 41 layoffs, 13 in Lausanne and Geneva',
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.excerpt': '## TL;DR - Tamedia announced 41 layoffs in Switzerland - 13 positions concern Lausanne and Geneva - The French-speaking Swiss assembly voted unanimously against it',
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.imageAlt': 'Editorial image related to: Tamedia: 41 licenziamenti, 13 a Losanna e Ginevra',
+    'blog.article.marcel-salathe-ia-commento.title': 'Artificial intelligence will not kill us all',
+    'blog.article.marcel-salathe-ia-commento.excerpt': '## TL;DR - Salathé considers apocalyptic scenarios exaggerated. - He is a professor at the Swiss Federal Institute of Technology Lausanne. - Big tech companies are preparing to enter',
+    'blog.article.marcel-salathe-ia-commento.imageAlt': 'View of Lake Lugano with mountains in the background, representing the Swiss context of the artificial intelligence debate.',
+    'blog.article.carriere-politica-economica.title': 'Working at SECO: Jobs and Career Paths',
+    'blog.article.carriere-politica-economica.excerpt': '## TL;DR - More than 900 employees and executives work at SECO - Employees and executives distributed across three Swiss locations - Approximately 30 secondees work',
+    'blog.article.carriere-politica-economica.imageAlt': 'Employees working in a modern Swiss office',
 };
 
 export default blogMetaChEn;

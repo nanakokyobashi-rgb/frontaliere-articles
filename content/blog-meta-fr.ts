@@ -12756,6 +12756,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'À Cantello, le théâtre dialectal revient avec « Quei giargianes da giappunes »',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': '## En bref - Deux dates : le 10 octobre à 21 h et le 18 octobre à 15 h - Version dialectale d’Alessandro Campi - Sur scène, la compagnie amateur Tutti in Scena',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Affiche de la pièce dialectale «Quei giargianes da giappunes» au Teatro Pax de Cantello avec la compagnie Tutti in Scena',
+    'blog.article.vendemmia-mendrisiotto-lavoratori-terra.title': 'Frontaliers des vendanges : 15 francs de l\'heure',
+    'blog.article.vendemmia-mendrisiotto-lavoratori-terra.excerpt': '## En bref - Environ 50 frontaliers animent les vendanges dans le Mendrisiotto - Ils viennent principalement de la province de Varese - Le salaire est d\'environ 15 francs nets',
+    'blog.article.vendemmia-mendrisiotto-lavoratori-terra.imageAlt': 'Des travailleurs frontaliers vendangent sur les collines du Mendrisiotto',
+    'blog.article.lifestyle-innovation-hub-chiasso.title': 'Lifestyle Innovation Hub à Chiasso : 30 millions investis',
+    'blog.article.lifestyle-innovation-hub-chiasso.excerpt': '## En bref - Transformation de l\'ancien siège de Credit Suisse avec un investissement total de 30 millions de francs - Inauguré à Chiasso le 7 octobre 2026',
+    'blog.article.lifestyle-innovation-hub-chiasso.imageAlt': 'Le Lifestyle Innovation Hub inauguré à Chiasso le 7 octobre 2026, un immeuble de six étages de plus de 10 000 m² dédié à l\'innovation, à l\'IA et aux secteurs du voyage, de l\'hôtellerie, du design et des médias.',
+    'blog.article.coda-a8-castronno-solbiate.title': 'Accident sur l\'A8 entre Castronno et Solbiate : embouteillages',
+    'blog.article.coda-a8-castronno-solbiate.excerpt': 'À partir de 18 heures le mercredi 7 octobre, l\'accident entre Castronno et Solbiate Arno a paralysé la circulation entre Varese et Gallarate. Retour à la normale à 20 heures.',
+    'blog.article.coda-a8-castronno-solbiate.imageAlt': 'Bouchon après l\'accident sur l\'A8 entre Castronno et Solbiate Arno.',
 };
 
 export default blogMetaFr;

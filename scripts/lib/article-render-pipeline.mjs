@@ -29,8 +29,17 @@ import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { sanitizeHtmlDocument } from './sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../../generator/scripts/lib/control-char-write-report.mjs';
+import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
+import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
+import { heldArticlesWithoutOnlinePage, releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
 
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
+const SITE_ORIGIN = 'https://frontaliereticino.ch';
+const MAX_DECLARED_IMAGE_BYTES = 5 * 1024 * 1024;
+const IMAGE_FETCH_TIMEOUT_MS = 20_000;
+const IMAGE_FETCH_ATTEMPTS = 2;
+const IMAGE_FETCH_CONCURRENCY = 4;
 
 /**
  * @param {object} opts
@@ -41,9 +50,11 @@ export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
  * @param {string} [opts.logPrefix]
  * @param {(ctx: { distDir: string, entries: any[], hubResult: any }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
- * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[] }>}
+ * @param {(url: string) => Promise<{ state: string, reason: string }>} [opts.probeOnlineImage]
+ *   lettura della pagina online per gli articoli ricaduti sull'immagine generica (default: produzione)
+ * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, aggregatePagesAllowed: boolean }>}
  */
-export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload }) {
+export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload, probeOnlineImage }) {
   // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
   // top-level evaluation (an IIFE, not a function call re-read per use), to
   // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). the site repo's deploy workflow's
@@ -96,31 +107,24 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // cost. Must be set before the dynamic import below (Node reads TZ once).
   process.env.TZ = 'UTC';
 
-  // ── Step 0: make public/images visible to resolveImagePath's existence
-  // checks (see the "Known gap" note in the file header). Symlink, not copy
-  // — ~3.5k files, no need to duplicate them per invocation. Torn down again
-  // right after step 1 — see the DANGER note above for why its lifetime must
-  // stay confined to the renderArticlePages call only.
-  const scratchImagesLink = path.join(distDir, 'images');
-  try {
-    fs.symlinkSync(path.join(rootDir, 'public', 'images'), scratchImagesLink, 'dir');
-  } catch (err) {
-    if (err.code !== 'EEXIST') throw err;
-  }
+  const declaredImages = await readDeclaredImages(rootDir, section, ids);
+  const imageStage = await prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix });
 
   // ── Step 1: render the 4 locale pages (Deliverables 1+2, #4837 stream A) ──
   const { renderArticlePages } = await import('../../engine/ogPagesPlugin.ts');
   // `ids` vuoto = nessun articolo da rendere (una sezione appena accesa, o un
   // giro che rinfresca solo landing/archivio/hub): `onlyArticleIds: []` non
   // deve mai voler dire «tutta la sezione».
-  const { written, entries } = ids.length
-    ? await renderArticlePages({ rootDir, distDir, section, onlyArticleIds: ids })
-    : { written: 0, entries: [] };
-
-  // Remove the symlink itself (unlink — the final path component IS the
-  // symlink, so this never follows it into public/images). Must happen
-  // before any of steps 2-7, none of which need distDir/images to exist.
-  fs.rmSync(scratchImagesLink, { force: true });
+  let written;
+  let entries;
+  try {
+    ({ written, entries } = ids.length
+      ? await renderArticlePages({ rootDir, distDir, section, onlyArticleIds: ids })
+      : { written: 0, entries: [] });
+  } finally {
+    removeImageView(imageStage.viewDir);
+    fs.rmSync(imageStage.downloadDir, { recursive: true, force: true });
+  }
 
   const renderedIds = new Set(entries.map((entry) => entry.articleId));
   const missingIds = ids.filter((id) => !renderedIds.has(id));
@@ -161,9 +165,12 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
       if (hreflangResult) indexHtml = hreflangResult.html;
 
       // 5. hero-image CDN rewrite — applied to both files, matching
-      // blogImageCdnFinalizePlugin's unconditional whole-dist walk.
-      indexHtml = rewriteBlogImageRefs(indexHtml);
-      const finalBridgeHtml = rewriteBlogImageRefs(bridgeHtml);
+      // blogImageCdnFinalizePlugin's unconditional whole-dist walk. Images
+      // recovered from the CDN for this scratch render can also live outside
+      // images/blog; keep those references on the CDN after the temporary
+      // image view is removed.
+      indexHtml = rewriteDownloadedImageRefs(rewriteBlogImageRefs(indexHtml), imageStage.downloadedImageKeys);
+      const finalBridgeHtml = rewriteDownloadedImageRefs(rewriteBlogImageRefs(bridgeHtml), imageStage.downloadedImageKeys);
 
       // Last transform before the bytes hit disk, so it covers steps 1-5 and
       // anything a later step inserts through them. A clean page comes back
@@ -177,6 +184,54 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
       fs.writeFileSync(flatAbs, flatClean, 'utf-8');
     }
   }
+
+  const htmlByPath = {};
+  for (const entry of entries) {
+    for (const rel of [...Object.values(entry.paths || {}), ...Object.values(entry.flatPaths || {})]) {
+      if (rel && fs.existsSync(path.join(distDir, rel))) htmlByPath[rel] = fs.readFileSync(path.join(distDir, rel), 'utf-8');
+    }
+  }
+  // Un articolo che ricade sull'immagine generica resta fuori dal push solo se
+  // online c'è qualcosa da proteggere: una sua pagina con immagine propria, o
+  // una risposta che non si è potuta leggere. Un articolo senza pagine online
+  // esce subito con l'immagine generica (decisione del proprietario, 07-10-2026).
+  const imagePostcondition = await releaseArticlesWithNothingToProtect({
+    entries,
+    postcondition: filterEntriesByImagePostcondition({ entries, declaredImages, htmlByPath }),
+    probe: probeOnlineImage,
+  });
+  if (imagePostcondition.excludedArticles.length > 0) {
+    console.error(
+      `[${logPrefix}] image postcondition excluded ${imagePostcondition.excludedArticles.length} article(s) / ` +
+        `${imagePostcondition.excludedPages} page(s): ${imagePostcondition.firstExcludedArticleIds.join(', ')}`,
+    );
+  }
+  if (imagePostcondition.releasedArticles.length > 0) {
+    console.error(
+      `[${logPrefix}] image postcondition released ${imagePostcondition.releasedArticles.length} article(s) with the generic image ` +
+        `(no page online to protect): ${imagePostcondition.releasedArticles.slice(0, 10).map((article) => article.articleId).join(', ')}`,
+    );
+  }
+  // Un articolo trattenuto con la pagina online non ferma gli archivi: il link
+  // che lo elenca risponde. Li ferma quello la cui pagina non è dimostrata e,
+  // separatamente, qualunque articolo appena rilasciato con l'immagine generica:
+  // gli aggregati leggono il registro completo e conserverebbero il path
+  // dichiarato che non è ancora disponibile.
+  const aggregateVerdict = aggregatePageVerdict(imagePostcondition);
+  const { heldWithoutOnlinePage, releasedWithGenericImage } = aggregateVerdict;
+  if (heldWithoutOnlinePage.length > 0) {
+    console.error(
+      `[${logPrefix}] aggregate pages withheld: ${heldWithoutOnlinePage.length} held article(s) with no page proven online ` +
+        `(${heldWithoutOnlinePage.slice(0, 10).map((article) => article.articleId).join(', ')})`,
+    );
+  }
+  if (releasedWithGenericImage.length > 0) {
+    console.error(
+      `[${logPrefix}] aggregate pages withheld: ${releasedWithGenericImage.length} article(s) released with the generic image ` +
+        `(${releasedWithGenericImage.slice(0, 10).map((article) => article.articleId).join(', ')})`,
+    );
+  }
+  const aggregatePagesAllowed = aggregateVerdict.allowed;
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
   // Re-renders each section's `/tutti/` archive + pagination into the SAME
@@ -212,36 +267,60 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // 2-6". That rationale is right for steps 2-5, which are per-article, and
   // wrong for the offload, which is a whole-dist pass every emitted page
   // needs — archive included.
-  const { renderArticleHubPages } = await import('../../engine/articleHubPagesPlugin.ts');
-  const hubResult = await renderArticleHubPages({
-    rootDir: rootDir,
-    distDir,
-    section: section,
-  });
+  // Gli archivi e le pagine aggregate leggono l'intero registro, non il set
+  // filtrato appena sopra. Se un articolo trattenuto non ha una pagina
+  // dimostrata online, lasciare uscire quegli aggregati pubblicherebbe un link
+  // alla pagina omessa; se invece è stato rilasciato col fallback, gli aggregati
+  // conserverebbero ancora il path immagine dichiarato ma assente. In entrambi
+  // i casi restano online gli aggregati precedenti e questo giro pubblica solo
+  // le pagine articolo consentite.
+  let hubResult = { written: 0, pathsByLocale: Object.fromEntries(locales.map((locale) => [locale, []])) };
+  let extraPaths = [];
+  if (aggregatePagesAllowed) {
+    const { renderArticleHubPages } = await import('../../engine/articleHubPagesPlugin.ts');
+    hubResult = await renderArticleHubPages({
+      rootDir: rootDir,
+      distDir,
+      section: section,
+    });
 
-  // The archive lists every article's TITLE, so it carries the same control
-  // bytes the article page does — one poisoned title contaminates every page
-  // of the /tutti/ chain in all 4 locales, not just its own URL. Steps 2-5
-  // deliberately skip these pages (they are article-body transforms); this is
-  // not an article-body transform, so it does not skip them. Rewritten only
-  // when something actually changed, so a clean archive keeps its bytes.
-  for (const locale of locales) {
-    for (const rel of hubResult.pathsByLocale[locale] ?? []) {
-      const abs = path.join(distDir, rel);
-      if (!fs.existsSync(abs)) continue;
-      const html = fs.readFileSync(abs, 'utf-8');
-      const clean = sanitizeHtmlDocument(html);
-      reportStrippedControlChars(abs, html, clean);
-      if (clean !== html) fs.writeFileSync(abs, clean, 'utf-8');
+    // The archive lists every article's TITLE, so it carries the same control
+    // bytes the article page does — one poisoned title contaminates every page
+    // of the /tutti/ chain in all 4 locales, not just its own URL. Steps 2-5
+    // deliberately skip these pages (they are article-body transforms); this is
+    // not an article-body transform, so it does not skip them. Rewritten only
+    // when something actually changed, so a clean archive keeps its bytes.
+    for (const locale of locales) {
+      for (const rel of hubResult.pathsByLocale[locale] ?? []) {
+        const abs = path.join(distDir, rel);
+        if (!fs.existsSync(abs)) continue;
+        const html = fs.readFileSync(abs, 'utf-8');
+        const clean = sanitizeHtmlDocument(html);
+        reportStrippedControlChars(abs, html, clean);
+        if (clean !== html) fs.writeFileSync(abs, clean, 'utf-8');
+      }
     }
-  }
 
-  // ── Step 6b: pagine in piu' del chiamante, PRIMA dell'offload ──
-  // Il publisher delle sezioni cantonali scrive qui landing e hub tematici:
-  // devono esistere in distDir prima del passo 7 per la stessa ragione
-  // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
-  // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
-  const extraPaths = beforeOffload ? (await beforeOffload({ distDir, entries, hubResult })) ?? [] : [];
+    // ── Step 6b: pagine in piu' del chiamante, PRIMA dell'offload ──
+    // Il publisher delle sezioni cantonali scrive qui landing e hub tematici:
+    // devono esistere in distDir prima del passo 7 per la stessa ragione
+    // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
+    // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
+    extraPaths = beforeOffload ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult })) ?? [] : [];
+
+    // Le immagini recuperate esistono sul CDN ma non nel checkout e quindi non
+    // vengono ricaricate. Anche archivi, landing e hub possono riprenderne il
+    // path dal registro completo: riscriviamo tutte le pagine aggregate appena
+    // prodotte prima che la view temporanea sparita diventi un riferimento
+    // same-origin senza asset dietro.
+    rewriteDownloadedImageFiles({
+      distDir,
+      relPaths: [...Object.values(hubResult.pathsByLocale).flat(), ...extraPaths],
+      downloadedImageKeys: imageStage.downloadedImageKeys,
+    });
+  } else {
+    console.error(`[${logPrefix}] aggregate pages withheld by the image postcondition verdict`);
+  }
 
   // ── Step 7: offload-generated-images-cdn.mjs, unmodified, via subprocess ──
   // The script hardcodes distDir = path.resolve(process.cwd(), 'dist'), so we
@@ -317,7 +396,131 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     console.log(`[cdn-asset-check] verifica saltata (non-fatale): ${(err && err.message) || err}`);
   }
 
-  return { written, entries, hubResult, extraPaths, locales };
+  return {
+    written,
+    entries: imagePostcondition.entries,
+    hubResult,
+    extraPaths,
+    locales,
+    declaredImages,
+    downloadedImageKeys: imageStage.downloadedImageKeys,
+    imageFetchFailures: imageStage.failures,
+    imagePostcondition,
+    aggregatePagesAllowed,
+  };
+}
+
+export function registryPathForSection(rootDir, section) {
+  const profile = ARTICLE_SECTION_CORE_ALL[section];
+  if (!profile?.registryFile) throw new Error(`profilo registryFile assente per la sezione "${section}"`);
+  return path.join(rootDir, corpusPath(profile.registryFile));
+}
+
+export async function readDeclaredImages(rootDir, section, ids) {
+  const sourcePath = registryPathForSection(rootDir, section);
+  let source;
+  try {
+    source = fs.readFileSync(sourcePath, 'utf-8');
+  } catch (error) {
+    throw new Error(`registro immagini dichiarate non leggibile per "${section}": ${sourcePath}`, { cause: error });
+  }
+  const { parseArticleRegistryEntries } = await import('../../engine/shared/articleRegistryEntries.ts');
+  const wanted = new Set(ids);
+  return Object.fromEntries(
+    parseArticleRegistryEntries(source)
+      .filter((entry) => wanted.has(entry.id))
+      .map((entry) => [entry.id, entry.image]),
+  );
+}
+
+function removeImageView(viewDir) {
+  if (!viewDir || !fs.existsSync(viewDir)) return;
+  if (fs.lstatSync(viewDir).isSymbolicLink()) fs.unlinkSync(viewDir);
+  else fs.rmSync(viewDir, { recursive: true, force: true });
+}
+
+function mirrorImageFiles(sourceDir, destinationDir) {
+  if (!fs.existsSync(sourceDir)) return;
+  fs.mkdirSync(destinationDir, { recursive: true });
+  for (const item of fs.readdirSync(sourceDir, { withFileTypes: true })) {
+    const source = path.join(sourceDir, item.name);
+    const destination = path.join(destinationDir, item.name);
+    if (item.isDirectory()) mirrorImageFiles(source, destination);
+    else if (item.isFile()) fs.symlinkSync(source, destination);
+  }
+}
+
+function imageDownloadPath(reference) {
+  const rel = imagePathFromReference(reference);
+  return rel ? `/${rel}` : null;
+}
+
+export async function fetchDeclaredImage({ imagePath, destination, logPrefix, fetchImpl = globalThis.fetch }) {
+  const url = new URL(imagePath, `${CDN_BASE}/`);
+  if (url.origin !== new URL(CDN_BASE).origin || url.protocol !== 'https:') throw new Error('origine CDN non autorizzata');
+  let lastError = 'nessuna risposta';
+  for (let attempt = 1; attempt <= IMAGE_FETCH_ATTEMPTS; attempt += 1) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), IMAGE_FETCH_TIMEOUT_MS);
+    try {
+      const response = await fetchImpl(url, { redirect: 'manual', signal: controller.signal });
+      const contentType = String(response.headers?.get?.('content-type') || '').toLowerCase();
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!contentType.startsWith('image/')) throw new Error(`content-type non immagine: ${contentType || 'assente'}`);
+      const contentLength = Number(response.headers?.get?.('content-length') || 0);
+      if (contentLength > MAX_DECLARED_IMAGE_BYTES) throw new Error('immagine oltre 5 MB');
+      const buffer = Buffer.from(await response.arrayBuffer());
+      if (buffer.byteLength > MAX_DECLARED_IMAGE_BYTES) throw new Error('immagine oltre 5 MB');
+      fs.mkdirSync(path.dirname(destination), { recursive: true });
+      fs.writeFileSync(destination, buffer);
+      return;
+    } catch (error) {
+      lastError = error?.name === 'AbortError' ? 'timeout 20s' : error?.message || String(error);
+      if (attempt < IMAGE_FETCH_ATTEMPTS) await new Promise((resolve) => setTimeout(resolve, 100 * attempt));
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw new Error(lastError);
+}
+
+export async function prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix, fetchImpl = globalThis.fetch, logger = console }) {
+  const viewDir = path.join(distDir, 'images');
+  const downloadDir = fs.mkdtempSync(path.join(os.tmpdir(), 'frontaliere-declared-images-'));
+  const downloadedImageKeys = [];
+  const failures = [];
+  removeImageView(viewDir);
+  mirrorImageFiles(path.join(rootDir, 'public', 'images'), viewDir);
+
+  const missing = [];
+  for (const articleId of ids) {
+    const reference = declaredImages[articleId];
+    const rel = imagePathFromReference(reference);
+    if (!rel || fs.existsSync(path.join(rootDir, 'public', rel))) continue;
+    missing.push({ articleId, rel });
+  }
+
+  let cursor = 0;
+  const worker = async () => {
+    while (cursor < missing.length) {
+      const item = missing[cursor++];
+      const destination = path.join(downloadDir, item.rel);
+      try {
+        await fetchDeclaredImage({ imagePath: imageDownloadPath(item.rel), destination, logPrefix, fetchImpl });
+        const target = path.join(viewDir, item.rel.replace(/^images[\\/]/, ''));
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.copyFileSync(destination, target);
+        downloadedImageKeys.push(item.rel);
+        logger.log(`[${logPrefix}] downloaded declared image from CDN: ${item.rel}`);
+      } catch (error) {
+        const failure = { articleId: item.articleId, image: item.rel, reason: error?.message || String(error) };
+        failures.push(failure);
+        logger.error(`[${logPrefix}] declared image unavailable (${item.articleId}, ${item.rel}): ${failure.reason}`);
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(IMAGE_FETCH_CONCURRENCY, Math.max(1, missing.length)) }, worker));
+  return { viewDir, downloadDir, downloadedImageKeys, failures };
 }
 
 function imagePathFromReference(reference) {
@@ -334,6 +537,53 @@ function imagePathFromReference(reference) {
   return heroImgRel;
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * A declared image downloaded into the temporary render view already exists
+ * on the CDN and is deliberately not uploaded again. Rewrite only those exact
+ * same-origin references so removing the view cannot leave the published HTML
+ * pointing at an asset absent from the shard.
+ */
+export function rewriteDownloadedImageRefs(html, downloadedImageKeys = []) {
+  let rewritten = String(html ?? '');
+  for (const key of new Set(downloadedImageKeys)) {
+    const imageKey = imagePathFromReference(key);
+    if (!imageKey) continue;
+    const escapedKey = escapeRegExp(imageKey);
+    const boundary = '(?![\\w./%-])';
+    const replacement = `${CDN_BASE}/${imageKey}`;
+    rewritten = rewritten
+      .replace(new RegExp(`${escapeRegExp(SITE_ORIGIN)}/${escapedKey}${boundary}`, 'g'), replacement)
+      .replace(new RegExp(`(?<![\\w.@])/${escapedKey}${boundary}`, 'g'), replacement);
+  }
+  return rewritten;
+}
+
+/** Rewrite the generated aggregate files that can carry registry image refs. */
+export function rewriteDownloadedImageFiles({ distDir, relPaths = [], downloadedImageKeys = [] }) {
+  for (const rel of new Set(relPaths.filter(Boolean))) {
+    const abs = path.join(distDir, rel);
+    if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) continue;
+    const html = fs.readFileSync(abs, 'utf-8');
+    const rewritten = rewriteDownloadedImageRefs(html, downloadedImageKeys);
+    if (rewritten !== html) fs.writeFileSync(abs, rewritten, 'utf-8');
+  }
+}
+
+/** Aggregates are safe only when every registry image they retain is usable. */
+export function aggregatePageVerdict(imagePostcondition = {}) {
+  const heldWithoutOnlinePage = heldArticlesWithoutOnlinePage(imagePostcondition.excludedArticles ?? []);
+  const releasedWithGenericImage = imagePostcondition.releasedArticles ?? [];
+  return {
+    allowed: heldWithoutOnlinePage.length === 0 && releasedWithGenericImage.length === 0,
+    heldWithoutOnlinePage,
+    releasedWithGenericImage,
+  };
+}
+
 function imageReferencesFromHtml(html) {
   const refs = [];
   const attribute = /\b(?:src|srcset)=["']([^"']+)["']/gi;
@@ -348,7 +598,7 @@ function imageReferencesFromHtml(html) {
   return refs;
 }
 
-function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix }) {
+function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix, downloadedImageKeys = new Set() }) {
   const heroImgRel = imagePathFromReference(imagePath);
   if (!heroImgRel) return;
   const heroDir = path.dirname(heroImgRel);
@@ -356,19 +606,29 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
   const heroBase = path.basename(heroImgRel, heroExt);
   const heroLocal = path.join('public', heroDir, `${heroBase}${heroExt}`);
   const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
-  if (fs.existsSync(path.join(rootDir, heroLocal))) {
-    cdnUploadsByKey.set(path.join(heroDir, `${heroBase}${heroExt}`), {
+  const heroKey = path.join(heroDir, `${heroBase}${heroExt}`);
+  const thumbKey = path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`);
+  if (downloadedImageKeys.has(heroKey)) {
+    // renderSectionArticlePipeline already rewrote this exact key to CDN_BASE
+    // in every emitted article page before the temporary image view vanished.
+    console.log(`[${logPrefix}] skipping CDN upload for downloaded image ${heroKey}`);
+  } else if (fs.existsSync(path.join(rootDir, heroLocal))) {
+    cdnUploadsByKey.set(heroKey, {
       local: heroLocal,
-      key: path.join(heroDir, `${heroBase}${heroExt}`),
+      key: heroKey,
     });
   } else {
     console.error(`[${logPrefix}] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
-    missing?.push({ kind: 'hero', local: heroLocal, key: path.join(heroDir, `${heroBase}${heroExt}`) });
+    missing?.push({ kind: 'hero', local: heroLocal, key: heroKey });
   }
-  if (fs.existsSync(path.join(rootDir, thumbLocal))) {
-    cdnUploadsByKey.set(path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`), {
+  if (downloadedImageKeys.has(thumbKey) || downloadedImageKeys.has(heroKey)) {
+    // The hero came FROM the CDN: its thumbnail lives there too, and its
+    // absence from this checkout is expected, not a missing asset.
+    console.log(`[${logPrefix}] skipping CDN upload for the thumbnail of downloaded image ${heroKey}`);
+  } else if (fs.existsSync(path.join(rootDir, thumbLocal))) {
+    cdnUploadsByKey.set(thumbKey, {
       local: thumbLocal,
-      key: path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`),
+      key: thumbKey,
     });
   } else {
     console.error(`[${logPrefix}] expected thumbnail "${thumbLocal}" does not exist on disk — omitting from cdnUploads`);
@@ -382,16 +642,17 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
  * la landing rende dal registry: un refresh parziale non puo' pubblicare una
  * landing che punta a un asset non confermato.
  */
-export function heroCdnUploads({ rootDir, entries = [], htmlPages = [], missing, logPrefix = 'article-render-pipeline' }) {
+export function heroCdnUploads({ rootDir, entries = [], htmlPages = [], missing, logPrefix = 'article-render-pipeline', downloadedImageKeys = [] }) {
   // Derive every upload from the ACTUAL resolved directory — NOT a hardcoded
   // `images/blog/`. Shared stock heroes live under `images/places/` and use
   // the same thumbnail convention. DEFAULT_IMG (`/og-image.png`) is outside
   // `images/` and is deliberately not listed here.
   const cdnUploadsByKey = new Map();
-  for (const entry of entries) addHeroCdnUpload({ rootDir, imagePath: entry?.img, cdnUploadsByKey, missing, logPrefix });
+  const downloaded = new Set(downloadedImageKeys);
+  for (const entry of entries) addHeroCdnUpload({ rootDir, imagePath: entry?.img, cdnUploadsByKey, missing, logPrefix, downloadedImageKeys: downloaded });
   for (const page of htmlPages) {
     for (const imagePath of imageReferencesFromHtml(page?.html)) {
-      addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix });
+      addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPrefix, downloadedImageKeys: downloaded });
     }
   }
   return [...cdnUploadsByKey.values()];

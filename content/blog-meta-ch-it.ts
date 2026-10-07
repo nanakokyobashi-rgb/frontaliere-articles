@@ -7877,6 +7877,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.title': 'Tamedia: 41 licenziamenti, 13 a Losanna e Ginevra',
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.excerpt': '## In breve - Tamedia ha annunciato 41 licenziamenti in Svizzera - 13 posti riguardano Losanna e Ginevra - L\'assemblea romanda ha votato all\'unanimità contro',
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.imageAlt': 'Immagine editoriale relativa a: Tamedia: 41 licenziamenti, 13 a Losanna e Ginevra',
+    'blog.article.marcel-salathe-ia-commento.title': 'L’intelligenza artificiale non ci ucciderà tutti',
+    'blog.article.marcel-salathe-ia-commento.excerpt': '## In breve - Salathé giudica esagerati gli scenari apocalittici. - È professore al Politecnico federale di Losanna. - Le big tech si preparano a entrare',
+    'blog.article.marcel-salathe-ia-commento.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo, rappresenta il contesto svizzero del dibattito sull\'intelligenza artificiale.',
+    'blog.article.carriere-politica-economica.title': 'Lavorare alla SECO: posti e percorsi professionali',
+    'blog.article.carriere-politica-economica.excerpt': '## In breve - Oltre 900 collaboratori e dirigenti lavorano alla SECO - Collaboratori e dirigenti distribuiti in tre sedi svizzere - Circa 30 distaccati operano',
+    'blog.article.carriere-politica-economica.imageAlt': 'Collaboratori al lavoro in un moderno ufficio svizzero',
 };
 
 export default blogMetaChIt;

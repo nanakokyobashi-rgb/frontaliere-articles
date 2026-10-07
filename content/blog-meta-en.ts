@@ -12754,6 +12754,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'Dialect theatre returns to Cantello: “Those Japanese strangers”',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': '## TL;DR - Two dates: October 10 at 21 and October 18 at 15 - Dialect version by Alessandro Campi - On stage, the amateur company Tutti in Scena',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Poster for the dialect play “Quei giargianes da giappunes” at Teatro Pax in Cantello, performed by Tutti in Scena',
+    'blog.article.vendemmia-mendrisiotto-lavoratori-terra.title': 'Cross-border grape harvest workers: 15 francs an hour',
+    'blog.article.vendemmia-mendrisiotto-lavoratori-terra.excerpt': '## TL;DR - Around 50 cross-border commuters bring the grape harvest to life in Mendrisiotto - They come mainly from the province of Varese - Pay is around 15 net francs',
+    'blog.article.vendemmia-mendrisiotto-lavoratori-terra.imageAlt': 'Frontier workers harvest grapes on the Mendrisiotto hills during the grape harvest',
+    'blog.article.lifestyle-innovation-hub-chiasso.title': 'Lifestyle Innovation Hub in Chiasso: 30 million invested',
+    'blog.article.lifestyle-innovation-hub-chiasso.excerpt': '## TL;DR - Transformation of the former Credit Suisse headquarters with a total investment of 30 million francs - Inaugurated in Chiasso on October 7, 2026',
+    'blog.article.lifestyle-innovation-hub-chiasso.imageAlt': 'The Lifestyle Innovation Hub inaugurated in Chiasso on 7 October 2026, a six‑story building over 10,000 m² focused on innovation, AI and the travel, hospitality, design and media sectors.',
+    'blog.article.coda-a8-castronno-solbiate.title': 'Accident on the A8 between Castronno and Solbiate: traffic jams',
+    'blog.article.coda-a8-castronno-solbiate.excerpt': 'From 18 on Wednesday, October 7, the accident between Castronno and Solbiate Arno paralyzed traffic between Varese and Gallarate. Normal conditions at 20.',
+    'blog.article.coda-a8-castronno-solbiate.imageAlt': 'Road queue after the crash on the A8 between Castronno and Solbiate Arno.',
 };
 
 export default blogMetaEn;

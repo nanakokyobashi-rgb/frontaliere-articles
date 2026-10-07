@@ -130,7 +130,11 @@ const CANTON_INSTITUTION_NAMES = Object.freeze({
   NW: ['kanton nidwalden', 'canton nidvaldo', 'nidwaldner regierung'],
   OW: ['kanton obwalden', 'canton obvaldo', 'obwaldner regierung'],
   SG: ['kanton st. gallen', 'kanton st gallen', 'canton san gallo', 'st. galler regierung'],
-  SH: ['kanton schaffhausen', 'canton sciaffusa', 'schaffhauser regierung'],
+  SH: [
+    'kanton schaffhausen', 'canton sciaffusa', 'schaffhauser regierung', 'schaffhauser',
+    'schaffhauser polizei', 'schaffhauser kantonalbank', 'spitäler schaffhausen',
+    'verkehrsbetriebe schaffhausen', 'vbsh',
+  ],
   SO: ['kanton solothurn', 'canton soletta', 'solothurner regierung'],
   SZ: ['kanton schwyz', 'canton svitto', 'schwyzer regierung'],
   TG: ['kanton thurgau', 'canton turgovia', 'thurgauer regierung'],
@@ -212,7 +216,19 @@ const FRONTALIERI_TERMS = Object.freeze([
 
 /** Minuscole e senza diacritici, come `foldKeepCase` ma per un confronto a stem. */
 export function foldForMatch(text) {
-  return String(text || '')
+  const raw = String(text || '');
+  let decoded = raw;
+  // I feed URL-encoded source URLs into the gates together with title/lead.
+  // Decode only valid percent escapes so a term such as `vbsh` is not hidden
+  // behind the preceding `%20`/`20` bytes of `...%20vbsh`.
+  if (/%[0-9a-f]{2}/iu.test(raw)) {
+    try {
+      decoded = decodeURIComponent(raw);
+    } catch {
+      decoded = raw;
+    }
+  }
+  return decoded
     .normalize('NFD')
     .replace(/[̀-ͯ]/gu, '')
     .toLowerCase()
@@ -573,10 +589,12 @@ export function buildCantonSourceUrlMap(cantonSections = loadCantonSectionProfil
       const host = registrableHost(url);
       const hostIsLocal = domainMap.get(host) === profile.code;
       const pathHasCanton = termHits(url, cantonSourcePathTokens(profile.code)) > 0;
+      const explicitlyScoped = source.quirks?.localCantonContext === profile.code;
       const scoped = hostIsLocal || (
-        LOCAL_SOURCE_KINDS.has(source.kind)
-        && !source.quirks?.filterByCanton
-        && pathHasCanton
+        !source.quirks?.filterByCanton && (
+          (LOCAL_SOURCE_KINDS.has(source.kind) && pathHasCanton)
+          || explicitlyScoped
+        )
       );
       if (!scoped) continue;
       if (!candidates.has(url)) candidates.set(url, new Set());

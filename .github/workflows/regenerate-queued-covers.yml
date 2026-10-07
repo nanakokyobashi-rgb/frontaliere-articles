@@ -21,10 +21,14 @@ on:
         default: false
         type: boolean
 
-# Mai cancellare un drain in corso: ha gia' pagato le immagini e sta per
-# rendere atomici hero, registro, thumbnail e coda.
+# Il gruppo condiviso `generate-article` e' una politica di scarto in entrambe
+# le direzioni: GitHub conserva una sola run pending e un arrivo del drain puo'
+# sfrattare una generazione (vedi l'intestazione di generate-article.yml).
+# La mutua esclusione delle scritture su main vive gia' nel push con rebase dello
+# step «Commit and push corpus data»; due drain non devono sovrapporsi, quindi
+# resta un gruppo ma proprio.
 concurrency:
-  group: generate-article
+  group: regenerate-queued-covers
   cancel-in-progress: false
 
 permissions:
@@ -120,7 +124,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(generator): drain queued article covers ($drained drained)"
+          PRODUCED="$(git rev-parse HEAD)"
+          registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
+          if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base"
+          fi
           cp data/generated-image-registry.json "$registry_snapshot"
 
           # Keep the token out of URLs and logs. The extraheader is local-only
@@ -156,9 +165,15 @@ jobs:
               exit 1
             fi
             node scripts/ci/merge-generated-image-registry.mjs \
-              data/generated-image-registry.json "$registry_snapshot"
+              data/generated-image-registry.json "$registry_base" "$registry_snapshot"
             git add data/generated-image-registry.json
-            if ! git diff --cached --quiet; then git commit --amend --no-edit; fi
+            if ! git diff --cached --quiet; then
+              if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
+                git commit -C "$PRODUCED"
+              else
+                git commit --amend --no-edit
+              fi
+            fi
           done
           echo "::error::push failed after 5 attempts"
           exit 1

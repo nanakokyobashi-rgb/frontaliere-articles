@@ -80,6 +80,10 @@ const QUIRKS = {
   // Feed condivisi fra cantoni: il generatore filtra le headline sul gruppo
   // dichiarato prima di applicare recency e gate (es. Unterwalden24 NW/OW).
   filterByCanton: (v) => typeof v === 'string' && /^[A-Z]{2}$/.test(v),
+  // Fonte locale con kind editoriale non istituzionale (per esempio una
+  // banca cantonale): la prova resta scoped al profilo, non diventa una
+  // promozione globale del dominio.
+  localCantonContext: (v) => typeof v === 'string' && /^[A-Z]{2}$/.test(v),
   http1Only: (v) => v === true,
   urlPeriod: (v) => ['year', 'month', 'iso-week'].includes(v),
   datetimeYearOffset: (v) => Number.isInteger(v) && v !== 0,
@@ -90,6 +94,8 @@ const QUIRKS = {
   // ancorata al path (`^/`), cosi' non puo' degradare a «contiene», e
   // compilabile, perche' lo scanner la compila a ogni run.
   articlePathPattern: isPathRegex,
+  urlDateFormat: (v) => v === 'YYMMDD',
+  dateFromSectionHeading: (v) => v === 'h4',
   // P5b. La fonte riemette lo stesso URL con notizie diverse: l'identita'
   // dell'item e' URL + titolo (vedi generator/scripts/lib/source-url-ledger.mjs).
   // `true` = ovunque; una regex sul path = solo li' (i «Ticker» di Tamedia).
@@ -99,6 +105,8 @@ const QUIRKS = {
 /** quirk → parser su cui ha senso. Dichiarato altrove sarebbe un hint che nessuno legge. */
 const QUIRK_PARSERS = {
   articlePathPattern: new Set(['html-links']),
+  urlDateFormat: new Set(['html-links']),
+  dateFromSectionHeading: new Set(['html-links']),
   urlReusedForDifferentStories: new Set(['rss', 'atom', 'news-sitemap', 'sitemap', 'weekly-sitemap']),
 };
 
@@ -274,6 +282,10 @@ export function validateCantonSections(doc, ctx) {
         } else if (filterByCanton !== c.code) {
           err(where, `${lbl}: quirk filterByCanton="${filterByCanton}" non coincide col profilo proprietario ${c.code}`);
         }
+      }
+      const localCantonContext = s?.quirks?.localCantonContext;
+      if (localCantonContext !== undefined && localCantonContext !== c.code) {
+        err(where, `${lbl}: quirk localCantonContext="${localCantonContext}" non coincide col profilo proprietario ${c.code}`);
       }
       if (!(s.items7d === null || (Number.isInteger(s.items7d) && s.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
       if (!DATE_RE.test(s.verifiedAt || '')) err(where, `${lbl}: verifiedAt non YYYY-MM-DD`);

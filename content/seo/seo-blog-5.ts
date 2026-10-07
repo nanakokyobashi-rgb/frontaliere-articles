@@ -100923,10 +100923,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/sindacati-miazzina-diritti-9-ottobre.webp`,
+        "url": `${BASE_URL}/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Locandina dello spettacolo dialettale “Quei giargianes da giappunes” al Teatro Pax di Cantello con la compagnia Tutti in Scena"
+        "caption": "Illustrazione editoriale del teatro dialettale al Teatro Pax di Cantello"
       },
       "datePublished": "2026-10-07T16:05:11+00:00",
       "dateModified": "2026-10-07T16:05:11+00:00",
@@ -100939,6 +100939,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cantello-teatro-dialettale-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vendemmia-mendrisiotto-lavoratori-terra': {
+    title: 'Frontalieri della vendemmia: 15 franchi l\'ora | Frontaliere Ticino',
+    description: '## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti',
+    keywords: 'frontalieri, ticino, svizzera, italia, vendemmia, franchi, breve, circa',
+    ogTitle: 'Vendemmia in Ticino: 15 franchi netti l\'ora',
+    ogDescription: '## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti',
+    canonicalPath: '/articoli-frontaliere/vendemmia-mendrisiotto-lavoratori-terra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri della vendemmia: 15 franchi l'ora",
+      "description": "## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-vendemmia-mendrisiotto-lavoratori-terra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratori frontalieri raccolgono uva sui colli del Mendrisiotto durante la vendemmia"
+      },
+      "datePublished": "2026-10-07T21:11:35+00:00",
+      "dateModified": "2026-10-07T21:11:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vendemmia-mendrisiotto-lavoratori-terra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lifestyle-innovation-hub-chiasso': {
+    title: 'Lifestyle Innovation Hub a Chiasso: 30 milioni investiti',
+    description: '## In breve - Trasformazione dell\'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi - Inaugurato a Chiasso il 7 ottobre 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, lifestyle, innovation, chiasso, milioni',
+    ogTitle: 'Lifestyle Innovation Hub a Chiasso: 30 milioni investiti',
+    ogDescription: '## In breve - Trasformazione dell\'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi - Inaugurato a Chiasso il 7 ottobre 2026',
+    canonicalPath: '/articoli-frontaliere/lifestyle-innovation-hub-chiasso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lifestyle Innovation Hub a Chiasso: 30 milioni investiti",
+      "description": "## In breve - Trasformazione dell'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi - Inaugurato a Chiasso il 7 ottobre 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lifestyle-innovation-hub-chiasso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Lifestyle Innovation Hub inaugurato a Chiasso il 7 ottobre 2026, edificio di sei piani oltre 10'000 mq dedicato a innovazione, IA e settori travel, hospitality, design e media."
+      },
+      "datePublished": "2026-10-07T21:45:04+00:00",
+      "dateModified": "2026-10-07T21:45:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lifestyle-innovation-hub-chiasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-coda-a8-castronno-solbiate': {
+    title: 'Incidente A8 tra Castronno e Solbiate: code | Frontaliere Ticino',
+    description: 'Incidente sulla A8 tra Castronno e Solbiate Arno: dalle 18 code tra Varese e Gallarate, traffico sulla Statale e ritorno alla normalità intorno alle 20.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, castronno, solbiate, code',
+    ogTitle: 'Code sulla A8 tra Castronno e Solbiate',
+    ogDescription: 'Lo scontro tra Castronno e Solbiate Arno ha provocato una lunga coda sulla A8 e paralizzato la viabilità tra Varese e Gallarate. Il traffico si è riversato sulla Statale, dove il semaforo a senso alternato del ponte ha creato un ulteriore imbuto.',
+    canonicalPath: '/articoli-frontaliere/coda-a8-castronno-solbiate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente A8 tra Castronno e Solbiate: code",
+      "description": "Incidente sulla A8 tra Castronno e Solbiate Arno: dalle 18 code tra Varese e Gallarate, traffico sulla Statale e ritorno alla normalità intorno alle 20.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-coda-a8-castronno-solbiate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Coda stradale dopo l'incidente sulla A8 tra Castronno e Solbiate Arno."
+      },
+      "datePublished": "2026-10-07T22:16:34+00:00",
+      "dateModified": "2026-10-07T22:16:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/coda-a8-castronno-solbiate/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

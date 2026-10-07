@@ -7877,6 +7877,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.title': 'Tamedia : 41 licenciements, 13 à Lausanne et Genève',
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.excerpt': '## En bref - Tamedia a annoncé 41 licenciements en Suisse - 13 postes concernent Lausanne et Genève - L\'assemblée romande a voté à l\'unanimité contre',
     'blog.article.tamedia-41-licenziamenti-13-a-losanna-e-ginevra.imageAlt': 'Image éditoriale relative à: Tamedia: 41 licenziamenti, 13 a Losanna e Ginevra',
+    'blog.article.marcel-salathe-ia-commento.title': 'L’intelligence artificielle ne nous tuera pas tous',
+    'blog.article.marcel-salathe-ia-commento.excerpt': '## En bref - Salathé juge les scénarios apocalyptiques exagérés. - Il est professeur à l’École polytechnique fédérale de Lausanne. - Les big tech se préparent à entrer',
+    'blog.article.marcel-salathe-ia-commento.imageAlt': 'Vue du lac de Lugano avec les montagnes en arrière-plan, représentant le contexte suisse du débat sur l\'intelligenza artificiale.',
+    'blog.article.carriere-politica-economica.title': 'Travailler au SECO : postes et parcours professionnels',
+    'blog.article.carriere-politica-economica.excerpt': '## En bref - Plus de 900 collaborateurs et cadres travaillent au SECO - Collaborateurs et cadres répartis sur trois sites suisses - Environ 30 personnes détachées travaillent',
+    'blog.article.carriere-politica-economica.imageAlt': 'Collaborateurs au travail dans un bureau suisse moderne',
 };
 
 export default blogMetaChFr;
