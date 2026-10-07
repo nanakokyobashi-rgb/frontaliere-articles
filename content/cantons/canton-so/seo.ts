@@ -42,26 +42,26 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-premi-malattia-soletta-2027': {
-    title: 'Canton Soletta: premi della cassa malati +6% nel 2027',
-    description: 'Nel 2027 i premi della cassa malati in Canton Soletta salgono del 6%: +23.50 CHF, media a 417.50 CHF, sopra il dato svizzero. Possibile sollievo nel 2028.',
-    keywords: 'frontalieri, ticino, svizzera, italia, canton, soletta, premi, cassa',
-    ogTitle: 'Canton Soletta: premi malattia +6% nel 2027',
-    ogDescription: 'Il premio medio nel Canton Soletta salirà a 417.50 CHF, 23.50 CHF in più e 5.50 CHF sopra la media svizzera. Solo Jura e Schaffhausen registrano rincari superiori; Eberhard indica la quota degli over 65 e le cure fuori Cantone tra i fattori.',
+    title: 'Premi cassa malati a Soletta: +6% nel 2027 | Frontaliere Ticino',
+    description: 'Nel 2027 il premio medio della cassa malati nel Canton Soletta salirà del 6%, a CHF 417.50: CHF 5.50 sopra la media svizzera di CHF 412.0 per il 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, soletta',
+    ogTitle: 'Soletta: premi cassa malati +6% nel 2027',
+    ogDescription: 'Nel Canton Soletta la crescita dei premi sarà tra le più alte nel 2027. Il premio medio raggiungerà CHF 417.50, mentre Berna, i due Basilea e il Giura restano più cari; tra le cause indicate ci sono età della popolazione e cure fuori cantone.',
     canonicalPath: '/articoli-soletta/premi-malattia-soletta-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Canton Soletta: premi della cassa malati +6% nel 2027",
-      "description": "Nel 2027 i premi della cassa malati in Canton Soletta salgono del 6%: +23.50 CHF, media a 417.50 CHF, sopra il dato svizzero. Possibile sollievo nel 2028.",
+      "headline": "Premi cassa malati a Soletta: +6% nel 2027",
+      "description": "Nel 2027 il premio medio della cassa malati nel Canton Soletta salirà del 6%, a CHF 417.50: CHF 5.50 sopra la media svizzera di CHF 412.0 per il 2027.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/premi-cassa-malati-lamal-2026-canton-zurigo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Canton Soletta associato all'aumento dei premi della cassa malati nel 2027"
+        "caption": "Premi della cassa malati nel Canton Soletta nel 2027"
       },
-      "datePublished": "2026-10-07T10:54:53+00:00",
-      "dateModified": "2026-10-07T10:54:53+00:00",
+      "datePublished": "2026-10-07T11:11:51+00:00",
+      "dateModified": "2026-10-07T11:11:51+00:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -74,7 +74,6 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
-
 };
 
 export default CANTON_SEO_METADATA;

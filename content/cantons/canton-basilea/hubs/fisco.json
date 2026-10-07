@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "981f2b111ac8c4e387f0648a4fa233645e0d86030f7461361fb7bce76a8d8937",
+  "updatedAt": "2026-10-07T11:25:23.150Z",
+  "contentHash": "5d123899e5db8ab1ec4e61a763f2c7f81ee0fd6be500b2b27efef197ab9ab052",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -142,6 +142,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Basilea Città: detrazioni figli quattro volte più alte",
+          "url": "/articoli-basilea/detrazioni-figli-basel/",
+          "excerpt": "Un'iniziativa nel Canton Basilea Città propone di rendere quattro volte più alta la detrazione fiscale per ogni figlio.",
+          "date": "2026-10-07T11:11:39.950Z"
+        },
+        {
           "title": "Imposta di successione e donazione Basilea Città: aliquote",
           "url": "/articoli-svizzera/imposta-di-successione-e-donazione-basilea-citta/",
           "excerpt": "Guida alle imposte di successione e donazione nel Cantone di Basilea Città: aliquote per grado di parentela, esenzioni e procedure di dichiarazione.",
@@ -210,7 +216,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T11:25:23.150Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -335,6 +341,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Basel-Stadt: child deductions four times higher",
+          "url": "/en/basel-articles/basel-child-tax-deductions/",
+          "excerpt": "An initiative in the Canton of Basel-City proposes making the tax deduction for each child four times higher.",
+          "date": "2026-10-07T11:11:39.950Z"
+        },
+        {
           "title": "Basel City Inheritance and Gift Tax: Rates",
           "url": "/en/swiss-articles/inheritance-and-donation-tax-basel-stadt/",
           "excerpt": "Guide to inheritance and gift taxes in the Canton of Basel-City: rates for degree of kinship, exemptions and reporting procedures.",
@@ -403,7 +415,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T11:25:23.150Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -528,6 +540,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Basel-Stadt: Kinderabzüge viermal höher",
+          "url": "/de/basel-artikel/basel-kinderabzuege-steuern/",
+          "excerpt": "Eine Initiative im Kanton Basel-Stadt schlägt vor, den Steuerabzug für jedes Kind auf das Vierfache zu erhöhen.",
+          "date": "2026-10-07T11:11:39.950Z"
+        },
+        {
           "title": "Erbschafts- und Schenkungssteuer Basel-Stadt: Steuersätze",
           "url": "/de/schweiz-artikel/erbschaft-und-schenkung-steuern-basel-stadt/",
           "excerpt": "Leitfaden Erbschafts- und Schenkungssteuern im Kanton Basel-Stadt: Verwandtschaftsgradsätze, Befreiungen und Meldeverfahren.",
@@ -596,7 +614,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T11:25:23.150Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -721,6 +739,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bâle-Ville : déductions pour enfants quatre fois plus élevées",
+          "url": "/fr/articles-bale/bale-deductions-enfants/",
+          "excerpt": "Une initiative dans le canton de Bâle-Ville propose de rendre la déduction fiscale pour chaque enfant quatre fois plus élevée.",
+          "date": "2026-10-07T11:11:39.950Z"
+        },
+        {
           "title": "Droit de succession et donation Bâle-Ville : taux",
           "url": "/fr/articles-suisse/impot-succession-et-donation-bale-ville/",
           "excerpt": "Guide des droits de succession et de donation dans le canton de Bâle-Ville : taux par degré de parenté, exonérations et procédures de déclaration.",
@@ -789,7 +813,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-07T11:25:23.150Z"
     }
   }
 }

@@ -75,6 +75,39 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-losanna-budget-deficit-2027': {
+    title: 'Losanna: deficit di 77,7 milioni nel budget 2027',
+    description: 'Il budget 2027 di Losanna presenta un deficit di 77,7 milioni di franchi: la cifra al centro della notizia sul bilancio 2027 della città vodese di Losanna.',
+    keywords: 'frontalieri, ticino, svizzera, italia, losanna, deficit, milioni, budget',
+    ogTitle: 'Budget 2027 di Losanna: deficit di 77,7 milioni',
+    ogDescription: 'Lausanne presenta un budget 2027 deficitario di 77,7 milioni di franchi. L\'articolo chiarisce che il dato riguarda la città vodese e distingue la cifra annunciata dalle eventuali misure future, che la fonte non specifica.',
+    canonicalPath: '/articoli-vaud/losanna-budget-deficit-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Losanna: deficit di 77,7 milioni nel budget 2027",
+      "description": "Il budget 2027 di Losanna presenta un deficit di 77,7 milioni di franchi: la cifra al centro della notizia sul bilancio 2027 della città vodese di Losanna.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/angestellte-schweiz-aumento-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta urbana di Losanna per il bilancio 2027 in deficit."
+      },
+      "datePublished": "2026-10-07T11:12:50+00:00",
+      "dateModified": "2026-10-07T11:12:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/losanna-budget-deficit-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default CANTON_SEO_METADATA;

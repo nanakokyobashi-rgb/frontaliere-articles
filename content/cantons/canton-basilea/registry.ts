@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'detrazioni-figli-basel',
+ category: 'fiscale',
+ date: '2026-10-07T11:11:39.950Z',
+ image: '/images/blog/asilo-nido-e-custodia-bambini-canton-basilea-citta.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
