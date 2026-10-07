@@ -535,4 +535,47 @@ describe('content-gates-main: il rilevatore vede le sotto-cartelle e il template
       fs.rmSync(dir, { recursive: true, force: true });
     }
   });
+
+  test('riconosce la lettura indiretta con un literal content/ separato', () => {
+    const dir = mk();
+    try {
+      const contentPath = ['content', '/blog-articles-data.ts'].join('');
+      fs.writeFileSync(
+        path.join(dir, 'indirect.test.mjs'),
+        [
+          "import path from 'node:path';",
+          "import { fileURLToPath } from 'node:url';",
+          "const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');",
+          "const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');",
+          `read('${contentPath}');`,
+        ].join('\n'),
+      );
+      const trovati = detectCorpusReaders(dir);
+      assert.equal(trovati.length, 1, 'la lettura via helper non e\' stata riconosciuta');
+      assert.equal(trovati[0].file, 'generator/tests/indirect.test.mjs');
+      assert.match(trovati[0].why, /lettura indiretta/);
+      assert.match(trovati[0].why, /content/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('path.join sull\'ancora senza un literal content/ resta null', () => {
+    const dir = mk();
+    try {
+      fs.writeFileSync(
+        path.join(dir, 'not-content.test.mjs'),
+        [
+          "import path from 'node:path';",
+          "import { fileURLToPath } from 'node:url';",
+          "const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');",
+          "const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');",
+          "read('data/example.json');",
+        ].join('\n'),
+      );
+      assert.deepEqual(detectCorpusReaders(dir), []);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });

@@ -129,6 +129,17 @@ export const TITLE = 'gate content su main: offender nel corpus generato dai bot
 export const CONTENT_GATES = [
   'generator/tests/brogeda-editorial-correction.test.mjs',
   'generator/tests/historical-unknown-dates.test.mjs',
+  // Il test che dimostra la completezza del gate esegue anche il preflight
+  // sul corpus reale: un registro o un pavimento pubblicato rotto deve aprire
+  // la stessa issue degli altri lettori, non nascondersi nella meta-suite.
+  'generator/tests/content-gates-main.test.mjs',
+  // Il caso canonical override apre una superficie reale sotto content/ oltre
+  // al corpus sintetico: una nuova coppia shadowed/winner deve restare valida.
+  'generator/tests/canton-hubs.test.mjs',
+  'generator/tests/courmayeur-vallese-content.test.mjs',
+  // Il ratchet legge i ledger URL→id pubblicati: un nuovo articolo può
+  // introdurre un duplicato cross-sezione anche senza cambiare il test.
+  'generator/tests/cross-section-duplicate-ratchet.test.mjs',
   // P14: i record di credito delle copertine Commons (content/image-credits/)
   // e i letterali SEO delle copertine accreditate: li scrive il generatore,
   // direttamente su `main`.
@@ -156,18 +167,21 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-dichiarazione-redditi-ticino-2026-refresh.test.mjs',
   'generator/tests/evergreen-guida-contributi-sociali-svizzera-refresh.test.mjs',
   'generator/tests/evergreen-guida-dichiarazione-redditi-frontalieri-refresh.test.mjs',
+  'generator/tests/evergreen-guida-pensione-frontaliere-avs-lpp-refresh.test.mjs',
   'generator/tests/evergreen-irpef-secondo-scaglione-2026.test.mjs',
   'generator/tests/evergreen-lamal-cmi-scelta-frontaliere-2026-refresh.test.mjs',
   'generator/tests/evergreen-lamal-vs-ssn-decisione-refresh.test.mjs',
   'generator/tests/evergreen-mappa-fiscale-comuni-frontiera-refresh.test.mjs',
   'generator/tests/evergreen-naspi-disoccupazione-frontalieri-refresh.test.mjs',
   'generator/tests/evergreen-maternita-paternita-frontaliere-guida-refresh.test.mjs',
+  'generator/tests/evergreen-maternita-paternita-ticino-refresh.test.mjs',
   'generator/tests/evergreen-naspi-ex-frontalieri-2026-refresh.test.mjs',
   'generator/tests/evergreen-naspi-ex-frontalieri-guida-refresh.test.mjs',
   'generator/tests/evergreen-naspi-frontaliere-italia-requisiti-refresh.test.mjs',
   'generator/tests/evergreen-naspi-frontalieri-italia-requisiti-calcolo-domanda-refresh.test.mjs',
   'generator/tests/evergreen-naspi-frontendalieri-requisiti-calcolo-2024-refresh.test.mjs',
   'generator/tests/evergreen-prelievo-secondo-pilastro-frontaliere-refresh.test.mjs',
+  'generator/tests/evergreen-pilastro-3a-frontaliere-refresh.test.mjs',
   'generator/tests/evergreen-ristorni-fiscali-ticino-refresh.test.mjs',
   'generator/tests/evergreen-ritenuta-lpp-intermediario-residente-refresh.test.mjs',
   'generator/tests/evergreen-simulazione-fiscale-frontaliere-2026-refresh.test.mjs',
@@ -176,6 +190,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-tassazione-individuale-refresh.test.mjs',
   'generator/tests/evergreen-tassazione-individuale-voto-refresh.test.mjs',
   'generator/tests/evergreen-telelavoro-accordo-definitivo-italia-refresh.test.mjs',
+  'generator/tests/evergreen-tredicesima-frontaliere-refresh.test.mjs',
   'generator/tests/evergreen-telelavoro-frontalieri-ratifica-refresh.test.mjs',
   'generator/tests/evergreen-triad-refresh.test.mjs',
   'generator/tests/faq-locale-consistency.test.mjs',
@@ -188,6 +203,7 @@ export const CONTENT_GATES = [
   'generator/tests/frontaliere-sitemap-shadow.test.mjs',
   'generator/tests/it-microcopy-guard.test.mjs',
   'generator/tests/key-facts-specificity.test.mjs',
+  'generator/tests/meta-fields-plausibility-floor.test.mjs',
   'generator/tests/meta-localized-seo-description.test.mjs',
   'generator/tests/prompt-placeholder-guard.test.mjs',
   // Ogni voce di registry nata dal cutover dichiara `articleType`, e ogni
@@ -199,12 +215,15 @@ export const CONTENT_GATES = [
   // `content/`, che nessuna PR scrive. E' l'unico che costa ~40s (una passata
   // su 19.588 file); gli altri diciotto stanno sotto il secondo.
   'generator/tests/repair-mangled-chars-tetto-corpus.test.mjs',
+  'generator/tests/retire-article-leftover-check.test.mjs',
+  'generator/tests/retired-articles-fully-removed.test.mjs',
   'generator/tests/seo-clause-truncation.test.mjs',
   'generator/tests/seo-title-prefix-repair.test.mjs',
   'generator/tests/seo-description-cap.test.mjs',
   'generator/tests/seo-digit-residue-guard.test.mjs',
   'generator/tests/slug-placeholder-guard.test.mjs',
   'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs',
+  'generator/tests/ts-literal-span.test.mjs',
   'generator/tests/vacant-key-facts.test.mjs',
   'generator/tests/wrong-latin-language-adoption.test.mjs',
 ];
@@ -249,11 +268,38 @@ export const CONTENT_GATES = [
  * silenzio.
  */
 export const NON_SONO_CONTENT_GATES = Object.freeze({
+  'generator/tests/canton-article-workflows.test.mjs':
+    'verifica la generazione dei workflow cantonali con YAML e corpi sintetici '
+    + 'in directory temporanee; non apre il content/ reale del checkout, quindi '
+    + 'un articolo pubblicato non puo\' renderla rossa.',
+  'generator/tests/canton-classifier.test.mjs':
+    'classifica snapshot in generator/data e un mini-corpus creato sotto '
+    + 'mkdtemp; non legge il content/ reale del checkout, quindi un articolo '
+    + 'pubblicato non puo\' renderla rossa.',
   'generator/tests/corpus-paths.test.mjs':
     "verifica la funzione che MAPPA i path del sito su quelli del corpus: i "
     + "'content/...' che il rilevatore vede sono i valori ATTESI delle asserzioni, "
     + 'stringhe confrontate con stringhe. Non apre un file, quindi nessun articolo '
     + 'pubblicato puo\' renderlo rosso.',
+  'generator/tests/corpus-producers-guard.test.mjs':
+    'controlla la forma dei workflow produttori e specchia content/ in un '
+    + 'repository git temporaneo per provare la guardia; il verdetto non dipende '
+    + 'dal corpus pubblicato del checkout.',
+  'generator/tests/loop-workflow-triggers.test.mjs':
+    'verifica solo trigger, concorrenza e forma dei workflow; le stringhe '
+    + 'content/** sono valori attesi e nessun file del corpus viene aperto.',
+  'generator/tests/sanitize-control-chars.test.mjs':
+    'prova il sanitizzatore con titoli fixture e ispeziona solo scripts/; '
+    + 'content/ compare come dato atteso, ma nessun articolo o registro del '
+    + 'checkout viene letto.',
+  'generator/tests/section-pages.test.mjs':
+    'prova il publisher con registri, slug, hub e pagine costruiti in directory '
+    + 'temporanee; sulle superfici reali verifica solo symlink/layout e presenza, '
+    + 'non legge ne\' valuta articoli sotto content/.',
+  'generator/tests/section-registry.test.mjs':
+    'valida sections/registry.json e il publisher con documenti e superfici '
+    + 'sintetiche in directory temporanee; non legge gli articoli reali sotto '
+    + 'content/ del checkout.',
 });
 
 /**
@@ -266,10 +312,15 @@ export const NON_SONO_CONTENT_GATES = Object.freeze({
  * `path.join(root, 'content', ...)` dentro una `mkdtemp`, e contarli sarebbe
  * rumore puro.
  *
- * Due forme, entrambe misurate sui 18 file che oggi la usano:
+ * Quattro forme, tutte statiche e limitate a questo sorgente:
  *   A. `new URL('../../content/...', import.meta.url)`
  *   B. un identificatore ancorato a `import.meta.url` (di norma `ROOT`), poi
  *      `path.join(ROOT, 'content', ...)`
+ *   C. lo stesso identificatore dentro un template literal
+ *      (`` `${ROOT}/content/...` ``)
+ *   D. un helper che passa un identificatore a `path.join(ROOT, rel)` e usa
+ *      altrove un literal che comincia con `content/` — la forma indiretta che
+ *      le prime tre non vedevano.
  *
  * Ricorsivo: `{fixtures,lib,parity}/` oggi non hanno `.test.mjs` dentro, ma un
  * file futuro li' andrebbe comunque registrato o esentato, altrimenti e' di
@@ -305,12 +356,12 @@ export function detectCorpusReaders(dir, rel = 'generator/tests') {
 /**
  * La forma con cui un sorgente raggiunge il corpus reale, o null.
  *
- * Tre forme riconosciute, non due: alle due dirette (`new URL(../content/…)`
- * e `path.join(ancora, 'content', …)`) si aggiunge l'indirezione via template
- * literal (`` `${ancora}/content/…` ``) sulla stessa `ancora` ancorata a
- * `import.meta.url`. Un helper importato da un altro modulo che nascondesse
- * l'accesso resterebbe comunque fuori: e' analisi cross-file, non alla
- * portata di un rilevatore statico su un singolo sorgente.
+ * Quattro forme riconosciute: alle due dirette (`new URL(../content/…)` e
+ * `path.join(ancora, 'content', …)`) si aggiungono il template literal
+ * (`` `${ancora}/content/…` ``) e l'helper indiretto (`path.join(ancora, rel)`)
+ * con un literal `content/...` nello stesso sorgente. Un helper importato da un
+ * altro modulo che nascondesse l'accesso resterebbe comunque fuori: e' analisi
+ * cross-file, non alla portata di un rilevatore statico su un singolo sorgente.
  */
 function corpusReaderReason(src) {
   if (/new URL\(\s*[`'"][^`'"]*\.\.\/content\//.test(src)) return 'new URL(../../content/…, import.meta.url)';
@@ -320,6 +371,14 @@ function corpusReaderReason(src) {
   for (const a of ancore) {
     if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${a}\\s*,\\s*['"\`](?:\\.\\.\\/)*content`).test(src)) {
       return `path.join(${a}, 'content', …)`;
+    }
+  }
+  const hasContentLiteral = /['"`]content\/[^'"`]+['"`]/.test(src);
+  if (hasContentLiteral) {
+    for (const a of ancore) {
+      if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${a}\\s*,\\s*[A-Za-z_$][\\w$]*\\s*[,)]`).test(src)) {
+        return `path.join/resolve(${a}, <identificatore>) + literal 'content/…' (lettura indiretta)`;
+      }
     }
   }
   for (const tpl of src.match(/`[^`]*`/gs) || []) {
