@@ -687,35 +687,205 @@ function tidySpacing(value = '') {
 // it rewrote the link (`Perch A9`, `l 80%99UE`) in every translated text that
 // cites such a URL: a 404 behind a source line that looked untouched.
 //
-// Both forms keep one level of balanced parentheses inside the destination,
-// the way Wikipedia-style URLs carry them (`…/Lugano_(citt%C3%A0)`,
-// `…/a(b)/Perch%C3%A9`): closing the span at the first `)` left whatever
-// followed it exposed to the strip. A lone `(` is still part of the URL, and a
-// bare URL quoted inside a parenthesis of prose still ends before the `)`.
-// Markdown also allows a link title after the destination and an angle-bracket
-// destination (`](</wiki/Perch%C3%A9> "titolo")`). Keep both inside the masked
-// span so an encoded token in the relative target cannot reach the strip.
-const LINK_SPAN_RE = /\]\((?:<[^>\r\n]*>|(?:[^()\s]|\((?:[^()\s]*\))?)*)(?:[ \t]+(?:"(?:\\.|[^"\\\r\n])*"|'(?:\\.|[^'\\\r\n])*'|\((?:\\.|[^)\\\r\n])*\)))?\)|(?:https?:\/\/|www\.)(?:[^\s<>"'()\]]|\((?:[^\s<>"'()\]]*\))?)+/gi;
+// Markdown targets, reference definitions, HTML hrefs and bare URLs all feed
+// the same placeholder strip. A regex alone can find their starts, but it
+// cannot balance arbitrarily nested URL parentheses; the small scanner below
+// closes the span only at the matching outer delimiter. Relative and
+// protocol-relative starts are included because `/wiki/Perch%C3%A9`,
+// `../wiki/Perch%C3%A9` and `//example.test/Perch%C3%A9` are just as opaque as
+// `https://example.test/Perch%C3%A9`.
+const LINK_SPAN_RE = /\]\(|https?:\/\/|www\.|\/\/|\.{1,2}\/|\/(?=[A-Za-z0-9._~%?#])/giu;
+const MARKDOWN_REFERENCE_RE = /^[ \t]{0,3}\[[^\]\r\n]+\]:[ \t]*/gim;
+const HTML_HREF_RE = /\bhref\s*=\s*/giu;
 const LINK_SLOT_RE = /\u0000(\d+)\u0000/g;
+
+function escapedEnd(text, start, quote) {
+  for (let index = start; index < text.length; index += 1) {
+    if (text[index] === '\\') {
+      index += 1;
+      continue;
+    }
+    if (text[index] === quote) return index;
+  }
+  return text.length;
+}
+
+function angleDestinationEnd(text, start) {
+  if (text[start] !== '<') return -1;
+  const end = escapedEnd(text, start + 1, '>');
+  return end < text.length ? end + 1 : -1;
+}
+
+/** Return the end of a URL-like token, keeping every balanced `(...)` level. */
+function bareLinkEnd(text, start) {
+  let depth = 0;
+  let index = start;
+  for (; index < text.length; index += 1) {
+    const char = text[index];
+    if (/\s/u.test(char) || char === '<' || char === '>' || char === '"' || char === "'" || char === ']' || char === '`') break;
+    if (char === '\\' && index + 1 < text.length) {
+      index += 1;
+      continue;
+    }
+    if (char === '(') {
+      depth += 1;
+      continue;
+    }
+    if (char === ')') {
+      if (depth === 0) break;
+      depth -= 1;
+    }
+  }
+  return index;
+}
+
+function markdownLinkEnd(text, markerStart) {
+  const open = markerStart + 1;
+  let depth = 0;
+  let angle = false;
+  let quote = '';
+  let titleStarted = false;
+
+  for (let index = open + 1; index < text.length; index += 1) {
+    const char = text[index];
+    if (quote) {
+      if (char === '\\') {
+        index += 1;
+        continue;
+      }
+      if (char === quote) quote = '';
+      continue;
+    }
+    if (char === '\\') {
+      index += 1;
+      continue;
+    }
+    if (angle) {
+      if (char === '>') angle = false;
+      continue;
+    }
+    if (index === open + 1 && char === '<') {
+      angle = true;
+      continue;
+    }
+    if (depth === 0 && /\s/u.test(char)) {
+      titleStarted = true;
+      continue;
+    }
+    if (titleStarted && (char === '"' || char === "'")) {
+      quote = char;
+      continue;
+    }
+    if (char === '(') {
+      depth += 1;
+      continue;
+    }
+    if (char === ')') {
+      if (depth === 0) return index + 1;
+      depth -= 1;
+    }
+  }
+  return -1;
+}
+
+function hasRelativeBoundary(text, start, marker) {
+  if (marker === 'https://' || marker === 'http://' || marker === 'www.' || marker === '//') return true;
+  const previous = text[start - 1] || '';
+  if (/^[\p{L}\p{N}_]$/u.test(previous)) return false;
+  return !(marker === '/' && previous === '<');
+}
+
+function mergeLinkRanges(ranges) {
+  const sorted = ranges
+    .filter(({ start, end }) => Number.isInteger(start) && Number.isInteger(end) && end > start)
+    .sort((left, right) => left.start - right.start || right.end - left.end);
+  const merged = [];
+  for (const range of sorted) {
+    const previous = merged[merged.length - 1];
+    if (previous && range.start <= previous.end) {
+      previous.end = Math.max(previous.end, range.end);
+    } else {
+      merged.push({ ...range });
+    }
+  }
+  return merged;
+}
+
+function opaqueLinkRanges(text) {
+  const ranges = [];
+  const add = (start, end) => {
+    if (end > start) ranges.push({ start, end });
+  };
+
+  for (const match of text.matchAll(LINK_SPAN_RE)) {
+    const marker = match[0];
+    const start = match.index;
+    if (marker === '](') {
+      const end = markdownLinkEnd(text, start);
+      if (end >= 0) add(start, end);
+      continue;
+    }
+    if (!hasRelativeBoundary(text, start, marker)) continue;
+    add(start, bareLinkEnd(text, start));
+  }
+
+  for (const match of text.matchAll(MARKDOWN_REFERENCE_RE)) {
+    const start = match.index + match[0].length;
+    const end = text[start] === '<'
+      ? angleDestinationEnd(text, start)
+      : bareLinkEnd(text, start);
+    if (end >= 0) add(start, end);
+  }
+
+  for (const match of text.matchAll(HTML_HREF_RE)) {
+    const start = match.index + match[0].length;
+    const quote = text[start];
+    if (quote === '"' || quote === "'") {
+      const end = escapedEnd(text, start + 1, quote);
+      add(start + 1, end);
+    } else {
+      let end = start;
+      while (end < text.length && !/[\s>]/u.test(text[end])) end += 1;
+      add(start, end);
+    }
+  }
+
+  return mergeLinkRanges(ranges);
+}
+
+function maskOpaqueLinkSpans(input) {
+  if (input.includes('\u0000')) return { masked: input, links: [] };
+  const ranges = opaqueLinkRanges(input);
+  if (!ranges.length) return { masked: input, links: [] };
+  const links = [];
+  const parts = [];
+  let cursor = 0;
+  for (const { start, end } of ranges) {
+    parts.push(input.slice(cursor, start));
+    links.push(input.slice(start, end));
+    parts.push(`\u0000${links.length - 1}\u0000`);
+    cursor = end;
+  }
+  parts.push(input.slice(cursor));
+  return { masked: parts.join(''), links };
+}
 
 /** Remove template/placeholder tokens (see the design note above). */
 export function stripPlaceholderTokens(text = '') {
   const input = String(text ?? '');
   if (!input) return input;
-  const links = [];
-  // A text that already carries the slot character cannot be masked safely:
-  // it is processed as before.
-  const masked = input.includes('\u0000')
-    ? input
-    : input.replace(LINK_SPAN_RE, (span) => {
-      links.push(span);
-      return `\u0000${links.length - 1}\u0000`;
-    });
+  const { masked, links } = maskOpaqueLinkSpans(input);
   const out = masked
     .replace(templatePlaceholderRe(), ' ')
     .replace(placeholderVocabRe(), ' ');
   if (out === masked) return input;
-  return tidySpacing(out).replace(LINK_SLOT_RE, (_, index) => links[Number(index)]);
+  const tidied = tidySpacing(out);
+  // A caller may already carry legacy NUL slots. They were not created by
+  // this pass and must remain literal; restoring against an empty `links`
+  // array would turn every `\u0000<index>\u0000` into the text `undefined`.
+  return links.length
+    ? tidied.replace(LINK_SLOT_RE, (_, index) => links[Number(index)])
+    : tidied;
 }
 
 /** True when the string still carries at least one letter or digit. */
