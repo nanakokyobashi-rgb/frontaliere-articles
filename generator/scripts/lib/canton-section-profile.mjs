@@ -52,6 +52,23 @@ const DATA_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../
 /** Variabile d'ambiente (da Remote Config) che accende la generazione per cantone. */
 export const CANTON_SECTIONS_ENABLED_ENV = 'CANTON_ARTICLE_SECTIONS_ENABLED';
 
+// I prompt cantonali devono poter passare anche dalla flotta con cap di
+// richiesta a 8k. Questi limiti riguardano solo testo di contesto/riassunto:
+// il lessico usato dai gate deterministici resta intero in `topicalTerms`.
+// Sono costanti condivise per evitare cap diversi fra classifier, selezione e
+// generazione (e per renderli misurabili nei test offline).
+export const CANTON_PROMPT_CONTEXT_MAX_CHARS = 360;
+export const CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS = 220;
+export const CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS = 48;
+
+// Il classifier è un filtro fail-open: una headline oltre questo tetto resta
+// nel pool e passa comunque al gate REGOLA #0. Il tetto impedisce che una
+// giornata con molte fonti cantonali spenda la durata dell'intera cascata su
+// classificazioni leggere prima ancora di arrivare alla selezione.
+export const CANTON_PRESPEND_MAX_CLASSIFIER_CALLS = 12;
+export const CANTON_PRESPEND_CLASSIFIER_TIMEOUT_MS = 10_000;
+export const CANTON_PRESPEND_CLASSIFIER_DEADLINE_MS = 45_000;
+
 /** Marcatore di log dell'uscita pulita per una sezione cantonale spenta. */
 export const CANTON_SECTION_DISABLED_MARKER = 'CANTON_SECTION_DISABLED';
 
@@ -557,7 +574,37 @@ export function buildCantonProfile(section, deps) {
 
 /** Riga di contesto frontalieri del profilo, compatta. */
 function contextLine(p) {
-  return p.frontalieriContext ? `\nCONTESTO DEL CANTONE (per giudicare, non da citare come fonte): ${p.frontalieriContext}\n` : '\n';
+  if (!p.frontalieriContext) return '\n';
+  const raw = String(p.frontalieriContext).replace(/\s+/g, ' ').trim();
+  if (raw.length <= CANTON_PROMPT_CONTEXT_MAX_CHARS) {
+    return `\nCONTESTO DEL CANTONE (per giudicare, non da citare come fonte): ${raw}\n`;
+  }
+  const marker = ' … ';
+  const available = CANTON_PROMPT_CONTEXT_MAX_CHARS - marker.length;
+  const headChars = Math.ceil(available * 0.7);
+  const tailChars = available - headChars;
+  const compact = `${raw.slice(0, headChars).trimEnd()}${marker}${raw.slice(-tailChars).trimStart()}`;
+  return `\nCONTESTO DEL CANTONE (per giudicare, non da citare come fonte): ${compact}\n`;
+}
+
+function compactPromptList(value, maxLineChars) {
+  return String(value || '').split('\n').map((line) => {
+    const text = line.trimEnd();
+    if (text.length <= maxLineChars) return text;
+    return `${text.slice(0, maxLineChars - 1).trimEnd()}…`;
+  }).join('\n');
+}
+
+function compactPublishedDigest(value, maxExcerptChars) {
+  return String(value || '').split('\n').map((line) => {
+    const separator = ' — ';
+    const separatorAt = line.lastIndexOf(separator);
+    if (!line.startsWith('• ') || separatorAt < 0) return line;
+    const title = line.slice(0, separatorAt);
+    const excerpt = line.slice(separatorAt + separator.length);
+    if (excerpt.length <= maxExcerptChars) return line;
+    return `${title}${separator}${excerpt.slice(0, maxExcerptChars).trimEnd()}…`;
+  }).join('\n');
 }
 
 /** Il prompt del classifier pre-spend (stessa forma di risposta delle storiche). */
@@ -581,14 +628,16 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 
 /** Il prompt di selezione della headline (stesso protocollo H<n> delle storiche). */
 export function cantonHeadlineSelectionPrompt(p, { headlineList, recentArticles, jsonQuoteSafetyRule }) {
+  const compactHeadlineList = compactPromptList(headlineList, CANTON_PROMPT_CANDIDATE_LINE_MAX_CHARS);
+  const compactRecentArticles = compactPublishedDigest(recentArticles, CANTON_PROMPT_PUBLISHED_EXCERPT_MAX_CHARS);
   return `Sei un editor del sito frontaliereticino.ch, sezione del Canton ${p.cantonName}.
 Devi scegliere UN articolo da queste headline di fonti del cantone per scrivere un pezzo utile a chi vive o lavora nel Canton ${p.cantonName}, frontalieri compresi.
 ${contextLine(p)}
 HEADLINE DISPONIBILI — ognuna ha una CHIAVE «H<n>» prima del simbolo «»». La chiave è l'UNICA cosa che puoi selezionare:
-${headlineList}
+${compactHeadlineList}
 
 ARTICOLI GIÀ PUBBLICATI (NON scegliere argomenti simili o già coperti). Questo elenco NON ha chiavi e NON è selezionabile: serve solo a dirti di cosa si è già parlato.
-${recentArticles}
+${compactRecentArticles}
 
 CRITERI DI SELEZIONE (in ordine di priorità):
 1. IMPATTO PRATICO NEL CANTONE: lavoro e salari, fisco e imposta alla fonte, AVS/LPP, premi cassa malati, permessi, decisioni del governo o del parlamento cantonale, casa, mobilità e trasporti (chiusure, cantieri, orari), servizi pubblici

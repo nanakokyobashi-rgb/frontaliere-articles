@@ -18,6 +18,15 @@
       "status": "queued",
       "requestedAt": "2026-10-07T04:58:11.891Z",
       "lastFailureAt": "2026-10-07T04:58:11.891Z"
+    },
+    {
+      "articleId": "raffineria-cressier-carburanti",
+      "title": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
+      "fallbackImage": "/images/blog/diesel-rincaro-geopolitica-svizzera.webp",
+      "reason": "All image providers failed for article-raffineria-cressier-carburanti: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "status": "queued",
+      "requestedAt": "2026-10-07T05:28:44.576Z",
+      "lastFailureAt": "2026-10-07T05:28:44.576Z"
     }
   ]
 }
