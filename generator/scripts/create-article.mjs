@@ -7793,19 +7793,7 @@ function sourcePageFetchHeaders() {
 }
 
 async function fetchPageContent(url) {
-  // Clear FIRST, unconditionally, before any early return.
-  //
-  // main() calls generateAndValidateArticle() several times in one process:
-  // Fase 1 retries across real-URL headlines and, on exhaustion, falls through
-  // to the Fase 2 evergreen fallback. Without this reset a Fase-1 source date
-  // (the incident source was 184 days old) would still be set when the
-  // evergreen article — which has no source at all — reaches the freshness
-  // gate, where anything past 90 days is a blocking `stale-source`. That would
-  // spuriously reject innocent evergreen articles, the exact failure mode of
-  // issue #2947 ("the frontaliere evergreen path produced ~0 articles/run").
-  //
-  // Same reasoning as the `_localFallbackUsedThisHeadline` reset in
-  // generateAndValidateArticle(): per-headline state must not leak forward.
+  // Clear per-call state before every synthetic or fetched-source early return.
   lastSourcePublishedAt = '';
   lastSourcePageTitle = '';
   const suppliedCantonSourceContent = pendingCantonSourceContent;
