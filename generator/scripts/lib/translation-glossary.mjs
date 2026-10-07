@@ -949,7 +949,7 @@ function scanMarkdownLink(context, start) {
       // That `)` was balanced inside the destination: when a URL of the
       // destination runs past it (`](https://h/a_(b)/c`), the span must not
       // end before the URL does, or its tail would be left to the strip.
-      return Math.max(lastClose + 1, lastOpaqueUrlEnd(text, destinationStart, lastClose + 1));
+      return Math.max(lastClose + 1, lastOpaqueUrlEnd(text, destinationStart, lineEnd));
     }
   }
   return -1;
@@ -1226,7 +1226,7 @@ function findOpaqueSpans(text) {
     if (character === ']' && text[index + 1] === '(') {
       const end = scanMarkdownLink(context, index);
       if (end > 0) {
-        spans.push({ start: index, end });
+        spans.push({ start: index + 1, end });
         index = end;
         continue;
       }
