@@ -175,7 +175,7 @@ test('translate-pending: broker dopo Argos e Codex primario in 2b/2d/2e', () => 
   );
   const hasWorkflowCallBudget = /FREE_TRANSLATE_CODEX_MAX_CALLS_REPO:/.test(source)
     && /printf ['"]FREE_TRANSLATE_CODEX_MAX_CALLS=%s/.test(source)
-    && /FREE_TRANSLATE_CODEX_MAX_CALLS=30/.test(source);
+    && /FREE_TRANSLATE_CODEX_MAX_CALLS=180/.test(source);
   for (const block of consumers) {
     assert.ok(
       /FREE_TRANSLATE_CODEX_MAX_CALLS:\s*"?\d+"?/.test(block) || hasWorkflowCallBudget,
