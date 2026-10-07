@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'premi-malattia-soletta-2027',
+ category: 'novita',
+ date: '2026-10-07T10:54:53.694Z',
+ image: '/images/blog/premi-cassa-malati-lamal-2026-canton-zurigo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
