@@ -11977,6 +11977,9 @@ async function translateArticle(data) {
       retryCodexTransport: true,
       codexTransportRetries: 2,
       codexTransportBackoffMs: 1_000,
+      // callWithRetry owns repairLlmJson plus the final shape check. Let the
+      // Codex broker carry fenced/repairable JSON to that validation layer.
+      deferJsonValidation: true,
       deadlineMs,
     };
   }

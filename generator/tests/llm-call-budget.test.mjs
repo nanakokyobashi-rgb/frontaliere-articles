@@ -388,7 +388,12 @@ test('④ il fact-check porta un deadlineMs: bypassa il wrapper callLLM che ce l
 });
 
 test('④ la recovery Codex non riapre una chiamata senza deadline quando il residuo e\' esaurito', () => {
-  assert.match(CODE, /function codexTranslationRecoveryOptions\(deadlineMs\)/);
+  const optionsStart = CODE.indexOf('function codexTranslationRecoveryOptions(deadlineMs)');
+  const optionsEnd = CODE.indexOf('async function callWithRetry(', optionsStart);
+  assert.notEqual(optionsStart, -1, 'la factory delle opzioni Codex per le recovery e sparita');
+  assert.notEqual(optionsEnd, -1, 'il confine della factory delle opzioni Codex e sparito');
+  const options = CODE.slice(optionsStart, optionsEnd);
+  assert.match(options, /deferJsonValidation: true/, 'la recovery deve lasciare la riparazione JSON al chiamante');
   assert.match(CODE, /if \(deadlineMs === null\) return null;/);
   assert.match(CODE, /beginCodexTranslationCall\(\{[\s\S]*?processDeadlineMs: _pendingBodyCodexDeadlineMs/);
   assert.match(
