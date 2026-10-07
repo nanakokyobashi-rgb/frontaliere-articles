@@ -88,13 +88,66 @@ export const CANTON_SOURCE_TIMEOUT_MS = 15_000;
 export const CANTON_SOURCE_MAX_ATTEMPTS = 2;
 
 const RETRYABLE_SOURCE_STATUSES = new Set([408, 425, 429]);
+// Errori che indicano un guasto di trasporto dopo che la richiesta e' partita
+// (o un timeout del trasporto). Un errore generico di fetch non basta: URL
+// malformati, redirect invalidi e argomenti rifiutati devono restare
+// fail-closed e non consumare il budget della fonte.
+const RETRYABLE_SOURCE_ERROR_CODES = new Set([
+  'ECONNABORTED',
+  'ECONNRESET',
+  'EAI_AGAIN',
+  'EPIPE',
+  'ETIMEDOUT',
+  'UND_ERR_ABORTED',
+  'UND_ERR_BODY_TIMEOUT',
+  'UND_ERR_CONNECT_TIMEOUT',
+  'UND_ERR_HEADERS_TIMEOUT',
+  'UND_ERR_SOCKET',
+]);
+const RETRYABLE_SOURCE_ERROR_NAMES = new Set(['AbortError', 'TimeoutError']);
+
+function walkSourceError(error, pick) {
+  const seen = new Set();
+  const walk = (current, depth) => {
+    if (!current || typeof current !== 'object' || depth > 4 || seen.has(current)) return null;
+    seen.add(current);
+    const found = pick(current);
+    if (found !== null && found !== undefined) return found;
+    if (Array.isArray(current.errors)) {
+      for (const nested of current.errors) {
+        const result = walk(nested, depth + 1);
+        if (result !== null && result !== undefined) return result;
+      }
+    }
+    return walk(current.cause, depth + 1);
+  };
+  return walk(error, 0);
+}
+
+function sourceErrorCode(error) {
+  return walkSourceError(error, (current) => (
+    typeof current.code === 'string' ? current.code : null
+  ));
+}
+
+function isRetryableSourceTransportError(error) {
+  const code = sourceErrorCode(error);
+  if (code) return RETRYABLE_SOURCE_ERROR_CODES.has(code);
+  if (walkSourceError(error, (current) => (
+    RETRYABLE_SOURCE_ERROR_NAMES.has(current.name) ? true : null
+  ))) return true;
+  // Undici's network failure is a bare TypeError when it has no nested
+  // syscall code. Invalid URL/redirect errors have a different message and
+  // therefore do not enter this fallback.
+  return error?.name === 'TypeError' && error?.message === 'fetch failed';
+}
 
 function isRetryableSourceStatus(status) {
   return RETRYABLE_SOURCE_STATUSES.has(Number(status)) || (Number(status) >= 500 && Number(status) <= 599);
 }
 
 function isRetryableSourceError(error) {
-  return Boolean(error?.retryable) || isRetryableSourceStatus(error?.status);
+  return isRetryableSourceTransportError(error) || isRetryableSourceStatus(error?.status);
 }
 
 /**
@@ -995,9 +1048,9 @@ export async function scanCantonSource(source, ctx) {
               signal: AbortSignal.timeout(CANTON_SOURCE_TIMEOUT_MS),
             });
           } catch (error) {
-            // Fetch/timeout/DNS errors are transient candidates; parser and
-            // decoding errors remain fail-closed and are not retried here.
-            error.retryable = true;
+            // Classify the transport error in the outer catch. Do not mark an
+            // arbitrary thrown value: invalid URLs and redirect failures are
+            // permanent request errors and must not be retried.
             throw error;
           }
           if (!res.ok) {
@@ -1005,7 +1058,12 @@ export async function scanCantonSource(source, ctx) {
             error.status = res.status;
             throw error;
           }
-          const decoded = decodeResponseBody(await res.arrayBuffer(), {
+          // The body is still a network stream: ECONNRESET/UND_ERR_SOCKET or
+          // a transport timeout can happen after fetch() returned headers.
+          // Keep this await inside the same retry classification, while the
+          // decoder itself remains outside the transport classifier.
+          const body = await res.arrayBuffer();
+          const decoded = decodeResponseBody(body, {
             contentType: res.headers?.get?.('content-type') ?? null,
             forcedCharset: quirks.charset || null,
           });
@@ -1018,7 +1076,7 @@ export async function scanCantonSource(source, ctx) {
         const budgetAllowsRetry = budget === Infinity || requests < budget;
         const canRetry = attempt < CANTON_SOURCE_MAX_ATTEMPTS && budgetAllowsRetry && isRetryableSourceError(error);
         if (!canRetry) throw error;
-        notes.push(`retry fonte ${attempt + 1}/${CANTON_SOURCE_MAX_ATTEMPTS} dopo ${error.message}`);
+        notes.push(`retry fonte ${attempt + 1}/${CANTON_SOURCE_MAX_ATTEMPTS} dopo ${error?.message || String(error)}`);
       }
     }
     throw lastError || new Error('errore fonte non riconosciuto');
