@@ -7865,6 +7865,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.riserve-valutarie-settembre-stabili.title': 'Devisenreserven der BNS im September stabil',
     'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## Auf einen Blick - BNS: Devisenreserven bei 771 Milliarden - Im September +0,4 Milliarden gegenüber August - Euro +0,9%, Dollar +3%; zusammen etwa 80% ## Wichtige Fakten',
     'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Schweizer Stadtszene zu Daten über Währungsreserven',
+    'blog.article.ffs-sportelli-chiusi-stazioni.title': 'SBB schließt die Schalter in 13 Bahnhöfen ab 1. Januar',
+    'blog.article.ffs-sportelli-chiusi-stazioni.excerpt': '## Kurz gesagt - Ab dem 1. Januar schließen sie an 13 Stationen die Türen. - Die Personalpunkte werden von 115 auf 102 erhöht. - 97% der Titel werden von den Kanälen übertragen',
+    'blog.article.ffs-sportelli-chiusi-stazioni.imageAlt': 'Schweizer Bahnhof mit geschlossenem Schalter und Selbstbedienungsgeräten im Vordergrund',
 };
 
 export default blogMetaChDe;

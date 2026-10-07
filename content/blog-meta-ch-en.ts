@@ -7865,6 +7865,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.riserve-valutarie-settembre-stabili.title': 'BNS foreign exchange reserves stable in September',
     'blog.article.riserve-valutarie-settembre-stabili.excerpt': '## TL;DR - BNS: foreign currency reserves at 771 billion - In September, +0,4 billion compared with August - Euro +0,9%, dollar +3%; together about 80% ## Key facts',
     'blog.article.riserve-valutarie-settembre-stabili.imageAlt': 'Swiss urban scene linked to foreign-currency reserve data',
+    'blog.article.ffs-sportelli-chiusi-stazioni.title': 'FFS to close ticket counters at 13 stations from January 1',
+    'blog.article.ffs-sportelli-chiusi-stazioni.excerpt': '## TL;DR - From January 1, ticket offices will close at 13 stations. - Staffed points will decrease from 115 to 102. - 97% of tickets pass through channels',
+    'blog.article.ffs-sportelli-chiusi-stazioni.imageAlt': 'Swiss railway station with closed ticket counter and self-service machines in the foreground',
 };
 
 export default blogMetaChEn;
