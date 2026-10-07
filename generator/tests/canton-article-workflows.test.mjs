@@ -734,14 +734,15 @@ test('il core dichiara ogni input che i chiamanti passano, e la catena e\' spent
   assert.match(inputsBlock, /section_gate:\n(?: {8}.*\n)*? {8}default: 'none'/);
   assert.match(CORE, /^on:\n {2}workflow_call:\n/m);
   assert.doesNotMatch(CORE, /^ {2}(schedule|push|workflow_dispatch):/m, 'il core non ha trigger suoi');
-  // Il gate decide senza entrare nella coda del writer; la mutua esclusione
-  // vive sul job che scrive. Production e compare unknown condividono il lock
-  // content, mentre il dry-run resta separato.
+  // Il gate decide senza entrare nella coda del writer. La generazione di ogni
+  // sezione ha il proprio gruppo, cosi' un run cantonale lungo non sfratta il
+  // pending di un altro cantone; il dry-run resta separato e il push usa il
+  // rebase/merge delle superfici condivise.
   assert.match(
     CORE,
-    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && inputs\.concurrency_group \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
+    /\n {4}concurrency:\n {6}group: \$\{\{ \(needs\.admit\.outputs\.run_mode == 'production' \|\| needs\.admit\.outputs\.run_mode == 'unknown'\) && format\('\{0\}-production', inputs\.concurrency_group\) \|\| format\('\{0\}-dry', inputs\.concurrency_group\) \}\}\n {6}cancel-in-progress: false\n/,
   );
-  assert.equal((CORE.match(/\n {4}concurrency:/g) || []).length, 1, 'solo il job writer deve detenere la coda');
+  assert.equal((CORE.match(/\n {4}concurrency:/g) || []).length, 1, 'il job cantonale ha un solo gruppo di generazione');
 });
 
 test('buildAll rifiuta un profilo che non copre le sezioni cantonali del core', () => {

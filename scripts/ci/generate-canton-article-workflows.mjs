@@ -46,7 +46,11 @@
  *     della sezione, cosi' l'articolo di un cantone non sveglia gli altri 23;
  *     se un commit rigenera piu' chiamanti, l'admit elegge un solo self-test
  *     dry dal batch e gli altri escono senza consumare uno slot runner;
- *   - concurrency `generate-article-<sezione>` sul job che scrive;
+ *   - concurrency per sezione sul job completo di produzione, cosi' un arrivo
+ *     di un cantone non sostituisce il pending di un altro durante i ~60 minuti
+ *     di generazione; il push resta protetto dal rebase/merge delle superfici
+ *     condivise e il gruppo specifico del chiamante resta disponibile per i
+ *     dry-run, che non scrivono il corpus;
  *   - catena via dispatch spenta (`chain_dispatch: false`).
  *
  * Solo builtin Node e moduli puri del corpus, come ogni script di `scripts/ci/`.
@@ -199,10 +203,10 @@ export const CORE_REPLACEMENTS = [
       + '    if: needs.admit.outputs.proceed == \'true\' && needs.section_gate.outputs.proceed == \'true\'\n',
   },
   {
-    id: 'generate: gruppo di concurrency del chiamante',
+    id: 'generate: gruppo di concurrency per sezione',
     count: 1,
     find: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && 'generate-article' || 'generate-article-dry' }}\n",
-    replace: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && inputs.concurrency_group || format('{0}-dry', inputs.concurrency_group) }}\n",
+    replace: "      group: ${{ (needs.admit.outputs.run_mode == 'production' || needs.admit.outputs.run_mode == 'unknown') && format('{0}-production', inputs.concurrency_group) || format('{0}-dry', inputs.concurrency_group) }}\n",
   },
   {
     id: 'mode: sezione e gemella arrivano per env',
@@ -360,7 +364,7 @@ on:
         required: true
         type: string
       concurrency_group:
-        description: 'Gruppo di concurrency del job che scrive'
+        description: 'Gruppo base di concurrency della sezione; la produzione non sostituisce i pending di altre sezioni'
         required: true
         type: string
       body_path_regex:

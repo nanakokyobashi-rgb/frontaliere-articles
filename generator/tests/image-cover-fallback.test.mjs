@@ -129,7 +129,9 @@ test('when the catalog is empty, the governed static cover still publishes and d
 
 test('the generator bounds the outage path to one attempt and 120 seconds', () => {
   const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
-  assert.match(source, /maxAttempts:\s*1/);
+  const engine = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/article-cover-engine.mjs'), 'utf8');
+  assert.match(engine, /maxAttempts:\s*1/);
   assert.match(source, /Math\.min\(120_000/);
+  assert.match(source, /generateGovernedArticleHero/);
   assert.match(source, /deadlineAt:\s*imageDeadline/);
 });
