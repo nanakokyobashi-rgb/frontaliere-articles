@@ -109,26 +109,27 @@ test('conteggi realistici non producono violazioni', () => {
 test('un checkout sparse (zero file ovunque) fa fallire il gate', () => {
   // In un worktree sparse `content/` non esiste affatto. E' il falso verde piu'
   // facile da produrre su questo repo, e il gate deve rifiutarsi di dirsi verde.
+  // Le radici cantonali con 0 articoli sono invece legittime: la loro politica
+  // family le esclude dal floor proprio, senza abbassare quello storico.
   const model = deriveFloorModel(ROOT);
   const perRoot = model.perRoot.map((r) => ({ ...r, count: 0 }));
   const v = floorViolations(perRoot);
-  const activeRoots = model.perRoot.filter((r) => r.expectedFiles > 0);
-  assert.equal(v.length, activeRoots.length + 1, 'una violazione per radice attiva + il totale a zero');
+  const positiveRoots = model.perRoot.filter((r) => r.expectedFiles > 0);
+  assert.equal(v.length, positiveRoots.length + 1, 'ogni radice popolata + il totale devono scattare');
+  for (const root of positiveRoots) {
+    assert.ok(v.some((message) => message.startsWith(`${root.rel}:`)), root.rel);
+  }
   assert.ok(v.some((m) => m.startsWith('TOTALE:')), 'il pavimento totale deve scattare');
 });
 
 test('UNA sola radice a zero fa fallire, anche se il totale abbonda', () => {
   // Il pavimento per radice deve vedere la sezione svizzera sparire anche se
-  // tutte le altre radici attive restano piene; il totale derivato deve inoltre
-  // vedere che la fotografia complessiva e' incompleta. Le radici cantonali
-  // attive sono incluse con la stessa regola, senza rendere il test dipendente
-  // dal numero corrente di cantoni pubblicati.
+  // l'altra radice resta piena; il totale derivato deve inoltre vedere che la
+  // fotografia complessiva e' incompleta.
   const model = deriveFloorModel(ROOT);
-  const target = model.perRoot.find((r) => r.section === 'svizzera');
-  assert.ok(target, 'la radice storica svizzera deve essere presente');
   const perRoot = model.perRoot.map((r) => ({
     ...r,
-    count: r.section === target.section ? 0 : r.expectedFiles,
+    count: r.section === 'svizzera' ? 0 : r.expectedFiles,
   }));
   const v = floorViolations(perRoot);
   assert.equal(v.length, 2);

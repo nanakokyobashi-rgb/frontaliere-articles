@@ -160,7 +160,7 @@
     "canton-be": {
       "kind": "canton",
       "canton": "BE",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-berna",
         "en": "bern-articles",
@@ -356,7 +356,7 @@
     "canton-gr": {
       "kind": "canton",
       "canton": "GR",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-grigioni",
         "en": "graubunden-articles",
@@ -895,7 +895,7 @@
     "canton-ti": {
       "kind": "canton",
       "canton": "TI",
-      "status": "draft",
+      "status": "live",
       "indexSlug": {
         "it": "articoli-ticino",
         "en": "ticino-articles",
