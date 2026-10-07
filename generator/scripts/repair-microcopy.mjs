@@ -41,6 +41,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
@@ -91,7 +92,7 @@ function sweepFile(rel, patterns) {
       return `${pre}${value}${post}`;
     });
   }
-  if (fileChanges && !CHECK_ONLY) fs.writeFileSync(abs, src);
+  if (fileChanges && !CHECK_ONLY) writeFileAtomic(abs, src);
   return fileChanges;
 }
 

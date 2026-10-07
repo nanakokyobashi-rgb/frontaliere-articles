@@ -2356,6 +2356,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/atomic-write-file.mjs",
+      "mode": "corpus-only",
+      "reason": "Punto comune di scrittura atomica per i producer del corpus: usa un temporaneo fratello e `renameSync` per evitare file troncati dopo un'interruzione. Non esiste un gemello sul sito, che non esegue questi writer del generatore, quindi resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "adb58a76191e9873",
+        "alignedAt": "2026-10-07"
+      }
+    },
+    {
       "path": "generator/scripts/lib/atomic-write-json.mjs",
       "sitePath": "scripts/lib/atomic-write-json.mjs",
       "mode": "adapted",
