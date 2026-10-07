@@ -49,7 +49,9 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
 const QUEUE_RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-image-regeneration-queue.mjs');
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
+const CORE_WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article-core.yml');
 const JOURNALIST_WORKFLOW = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
+const DRAIN_WORKFLOW = path.resolve(HERE, '../../.github/workflows/regenerate-queued-covers.yml');
 const BOOKKEEPING = 'data/topic-candidates-evergreen-rejected.json';
 const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
 const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
@@ -692,16 +694,15 @@ test('generate-article conserva il registry generato quando rebasea con il drain
 });
 
 test('i quattro writer del registry non fanno amend se il commit rigiocato e\' stato saltato', () => {
-  const workflowsDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../.github/workflows');
   const workflows = [
-    'generate-article.yml',
-    'generate-article-core.yml',
-    'publish-journalist-articles.yml',
-    'regenerate-queued-covers.yml',
+    ['generate-article.yml', WORKFLOW],
+    ['generate-article-core.yml', CORE_WORKFLOW],
+    ['publish-journalist-articles.yml', JOURNALIST_WORKFLOW],
+    ['regenerate-queued-covers.yml', DRAIN_WORKFLOW],
   ];
 
-  for (const filename of workflows) {
-    const source = readFileSync(path.join(workflowsDir, filename), 'utf8');
+  for (const [filename, workflowPath] of workflows) {
+    const source = readFileSync(workflowPath, 'utf8');
     const mergeStart = source.indexOf('node scripts/ci/merge-generated-image-registry.mjs');
     assert.ok(mergeStart >= 0, `${filename}: manca il merge del registry`);
     const mergeBlock = source.slice(mergeStart, mergeStart + 1_000);
