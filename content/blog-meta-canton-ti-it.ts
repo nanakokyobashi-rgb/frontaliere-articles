@@ -12,6 +12,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.title': 'Decreto tassa salute frontalieri pubblicato: via libera regioni',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.excerpt': '## In breve - Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività - Contributo: dal 3% al 6% del reddito netto - Periodo: tra il 31 dicembre 2018',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Immagine editoriale relativa a: Decreto tassa salute frontalieri pubblicato: via libera regioni',
+    'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
+    'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': '## In breve - Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte - Sul capitale LPP la ritenuta svizzera è mediamente del 7% - In Italia il capitale è',
+    'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Edifici amministrativi a Bellinzona, sede di autorità fiscali del Canton Ticino',
 };
 
 export default blogMetaCantonTiIt;

@@ -109,6 +109,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-capitale-lpp-rimborso-imposta-fonte': {
+    title: 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
+    description: '## In breve - Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte - Sul capitale LPP la ritenuta svizzera è mediamente del 7% - In Italia il capitale è',
+    keywords: 'frontalieri, ticino, svizzera, italia, capitale, nega, rimborso, imposta',
+    ogTitle: 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
+    ogDescription: '## In breve - Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte - Sul capitale LPP la ritenuta svizzera è mediamente del 7% - In Italia il capitale è',
+    canonicalPath: '/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
+      "description": "## In breve - Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte - Sul capitale LPP la ritenuta svizzera è mediamente del 7% - In Italia il capitale è",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-capitale-lpp-rimborso-imposta-fonte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici amministrativi a Bellinzona, sede di autorità fiscali del Canton Ticino"
+      },
+      "datePublished": "2026-10-08T12:15:50+00:00",
+      "dateModified": "2026-10-08T12:15:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

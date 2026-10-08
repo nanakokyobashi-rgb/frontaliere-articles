@@ -12,6 +12,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.title': 'Décret sur la taxe santé des frontaliers publié : feu vert des régions',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.excerpt': '## En bref - Décret publié au Journal officiel à l\'approche des fêtes - Contribution : de 3 % à 6 % du revenu net - Période : entre le 31 décembre 2018',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Image éditoriale relative à: Decreto tassa salute frontalieri pubblicato: via libera regioni',
+    'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'Capital LPP : le Tessin refuse le remboursement de l\'impôt à la source',
+    'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': '## En bref - Depuis 2024, le Tessin refuse le remboursement de l\'impôt à la source - Sur le capital LPP, la retenue suisse est en moyenne de 7% - En Italie, le capital est',
+    'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Bâtiments administratifs à Bellinzona, siège des autorités fiscales du Canton du Tessin',
 };
 
 export default blogMetaCantonTiFr;

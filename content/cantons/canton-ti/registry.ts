@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'capitale-lpp-rimborso-imposta-fonte',
+ category: 'fiscale',
+ date: '2026-10-08T12:15:50.666Z',
+ image: '/images/blog/article-capitale-lpp-rimborso-imposta-fonte.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
