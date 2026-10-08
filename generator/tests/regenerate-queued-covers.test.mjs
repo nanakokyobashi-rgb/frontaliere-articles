@@ -85,6 +85,15 @@ function seoFile(entries) {
   return `const BASE_URL = 'https://frontaliereticino.ch';\nconst BLOG_SEO_METADATA = {\n${entries.join('\n')}\n};\nexport default BLOG_SEO_METADATA;\n`;
 }
 
+function writeImageAltMetadata(root, items, metaPrefix) {
+  for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {
+    const meta = items
+      .map(({ articleId }) => `  'blog.article.${articleId}.imageAlt': '${caption}',`)
+      .join('\n');
+    write(root, `content/${metaPrefix}-${locale}.ts`, `const META = {\n${meta}\n};\n`);
+  }
+}
+
 function generatedRecord(root, articleId, imageUrl, bytes) {
   return {
     schema: 1,
@@ -127,6 +136,8 @@ function fixture(root, items) {
   const entries = items.map((entry) => inlineSeoEntry(entry.articleId));
   write(root, 'content/seo/seo-blog-5.ts', seoFile(entries));
   write(root, 'content/cantons/canton-ti/seo.ts', seoFile(entries));
+  writeImageAltMetadata(root, items, 'blog-meta');
+  writeImageAltMetadata(root, items, 'blog-meta-canton-ti');
 }
 
 function item(articleId, requestedAt, title = articleId) {
@@ -322,6 +333,7 @@ test('canonizza gli articleId duplicati prima di selezionare e rimuovere il lavo
     const articleId = 'duplicate-queue-entry';
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
     write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
+    writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
     queue(root, [
       item(articleId, '2026-10-07T09:00:00.000Z'),
@@ -381,6 +393,7 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
     const record = generatedRecord(root, articleId, imageUrl, bytes);
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
     write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId, imageUrl)]));
+    writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
     write(root, `public${imageUrl}`, bytes);
     write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
@@ -410,6 +423,42 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
   }
 });
 
+test('non drena una copertina se manca un imageAlt localizzato', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'missing-localized-image-alt';
+    const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+    const bytes = Buffer.from('missing-localized-image-alt-cover');
+    const record = generatedRecord(root, articleId, imageUrl, bytes);
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId, imageUrl)]));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+    write(root, `public${imageUrl}`, bytes);
+    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
+    write(root, 'content/blog-meta-fr.ts', 'const META = {};\n');
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: async () => { throw new Error('must not regenerate'); },
+      generateThumbnail: async () => { throw new Error('must not create a thumbnail'); },
+    });
+
+    assert.equal(summary.alreadySatisfied, 0);
+    assert.equal(summary.drained, 0);
+    assert.equal(summary.failed, 1);
+    assert.deepEqual(summary.failedIds, [articleId]);
+    assert.equal(summary.residual, 1);
+    const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
+    assert.equal(remaining.items[0].articleId, articleId);
+    assert.equal(remaining.items[0].failureCount, 1);
+    assert.match(remaining.items[0].reason, /imageAlt field is missing/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('una copertina con thumbnail mancante o invalido viene riparata prima di togliere la coda', async () => {
   for (const thumbnailState of ['missing', 'invalid', 'truncated']) {
     const root = tempRoot();
@@ -420,6 +469,7 @@ test('una copertina con thumbnail mancante o invalido viene riparata prima di to
       const record = generatedRecord(root, articleId, imageUrl, bytes);
       write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
       write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+      writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
       write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
       write(root, `public${imageUrl}`, bytes);
       if (thumbnailState === 'invalid') {
@@ -617,6 +667,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
     write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
     write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId)]));
+    writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
 
     const summary = await drain({
       root,

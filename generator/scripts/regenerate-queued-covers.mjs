@@ -55,12 +55,16 @@ function imageAltMetaUpdate(root, articleId, section, locale) {
   if (!sectionCore) throw new Error(`unknown article section ${section}`);
   const relativePath = corpusPath(`services/locales/${sectionCore.metaPrefix}-${locale}.ts`);
   const filePath = absolute(root, relativePath);
-  if (!fs.existsSync(filePath)) return null;
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`article ${articleId} imageAlt metadata file is missing: ${relativePath}`);
+  }
 
   const source = fs.readFileSync(filePath, 'utf8');
   const matches = [...source.matchAll(metaFieldRegex('imageAlt'))]
     .filter((match) => match[1] === articleId);
-  if (matches.length === 0) return null;
+  if (matches.length === 0) {
+    throw new Error(`article ${articleId} imageAlt field is missing in ${relativePath}`);
+  }
   if (matches.length > 1) {
     throw new Error(`article ${articleId} has duplicate imageAlt fields in ${relativePath}`);
   }
@@ -87,8 +91,7 @@ function imageAltMetaUpdate(root, articleId, section, locale) {
 
 function imageAltMetaUpdates(root, articleId, section) {
   return Object.keys(GENERATED_COVER_ALT_BY_LOCALE)
-    .map((locale) => imageAltMetaUpdate(root, articleId, section, locale))
-    .filter(Boolean);
+    .map((locale) => imageAltMetaUpdate(root, articleId, section, locale));
 }
 
 function governedCoverSeoImage(root, record) {
