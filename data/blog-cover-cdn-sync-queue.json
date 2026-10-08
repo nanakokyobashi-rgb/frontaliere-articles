@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-salute-lavoro-progetti-ticino.webp",
-      "sha256": "c66401dd4c4e63c95c6e053bde8fa7bdcd2e5d18f2471ec997369baea5840584"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-salute-lavoro-progetti-ticino-480w.webp",
-      "sha256": "9b1ec8dbe581f91e3b61fdab6e97272cfb5d426001cc8cb09a0e0885cecfc4cb"
-    }
-  ]
+  "items": []
 }
