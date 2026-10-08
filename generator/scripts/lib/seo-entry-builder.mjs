@@ -7,6 +7,7 @@
  * `seo-entry-equivalence.test.mjs` compares the builder with real main
  * entries and classifies historical data drift.
  */
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
