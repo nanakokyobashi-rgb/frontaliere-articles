@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -8,6 +9,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const COVER = '/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp';
 const MCDONALDS_COVER = '/images/blog/article-mcdonalds-pulizia-malnate-2026.webp';
 const FESTIVAL_COVER = '/images/blog/article-festival-racconto-varese-ottobre.webp';
+const BERNA_TRAINING_COVER = '/images/blog/article-contributi-formazione-berna-requisiti.webp';
 
 function filesBelow(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -79,4 +81,18 @@ test('Varese storytelling festival registry, SEO metadata and public asset use t
   assert.ok(metadata, 'Varese storytelling festival SEO metadata is missing');
   assert.ok(metadata.includes('${BASE_URL}' + FESTIVAL_COVER));
   assert.ok(fs.existsSync(path.join(ROOT, `public${FESTIVAL_COVER}`)), 'Varese storytelling festival cover blob is missing');
+});
+
+test('Bern continuing education registry, SEO metadata and public asset use the dedicated cover', () => {
+  const registry = fs.readFileSync(path.join(ROOT, 'content/swiss-articles-data.ts'), 'utf8');
+  const seo = fs.readFileSync(path.join(ROOT, 'content/seo/seo-blog-ch.ts'), 'utf8');
+  const article = registry.match(/id: 'contributi-formazione-berna-requisiti',[\s\S]*?\n\s*\},?/)?.[0];
+  const metadata = seo.match(/'blog-contributi-formazione-berna-requisiti': \{[\s\S]*?\n\s*\},\n\n/)?.[0];
+  const asset = fs.readFileSync(path.join(ROOT, `public${BERNA_TRAINING_COVER}`));
+
+  assert.ok(article, 'Bern continuing education article record is missing');
+  assert.match(article, new RegExp(`image: '${BERNA_TRAINING_COVER.replaceAll('/', '\\/')}'`));
+  assert.ok(metadata, 'Bern continuing education SEO metadata is missing');
+  assert.ok(metadata.includes('${BASE_URL}' + BERNA_TRAINING_COVER));
+  assert.equal(crypto.createHash('sha256').update(asset).digest('hex'), 'a06ebb2026a70ff9d90e0919094c3ac1e5b3f29d5aedde2a8f23d43223918960');
 });
