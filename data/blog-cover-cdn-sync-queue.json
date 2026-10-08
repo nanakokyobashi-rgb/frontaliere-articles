@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-casse-malati-amministrazione-costi-2025.webp",
+      "sha256": "cb72c7dfb7417838111faff3d46c3150137589796a1c5ba44b29debc78ff548b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-casse-malati-amministrazione-costi-2025-480w.webp",
+      "sha256": "27bc0f1e894e9fff005a2ff5a51cbc1f19eeaeb0b45c6fc9483f34a757f2879c"
+    }
+  ]
 }
