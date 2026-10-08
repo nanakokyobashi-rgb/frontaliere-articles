@@ -7,11 +7,53 @@ import {
   DISCOVERY_PROVIDERS,
   RETIRED_FREE_PROVIDERS,
   discoverFreeModels,
+  getProviderRosterStatus,
   getProviderForModel,
+  providerRosterReady,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
 
 const nvidia = DISCOVERY_PROVIDERS.find((provider) => provider.name === 'NVIDIA');
+
+test('providerRosterReady fallisce chiuso e rende osservabile la lane servibile', () => {
+  const previousGemini = process.env.GEMINI_API_KEY;
+  const previousViteGemini = process.env.VITE_GEMINI_API_KEY;
+  const previousForceChain = process.env.AI_MODELS_FORCE_CHAIN;
+  delete process.env.GEMINI_API_KEY;
+  delete process.env.VITE_GEMINI_API_KEY;
+  delete process.env.AI_MODELS_FORCE_CHAIN;
+  resetState();
+  try {
+    const chain = [AI_MODELS.GEMINI_FLASH];
+    const blocked = getProviderRosterStatus({ chain, respectForceChain: false });
+    assert.equal(providerRosterReady({ chain, respectForceChain: false }), false);
+    assert.equal(blocked.ready, false);
+    assert.equal(blocked.reason, 'no-servable-provider');
+    assert.deepEqual(blocked.availableModels, []);
+    assert.deepEqual(blocked.availableProviders, []);
+    assert.equal(blocked.unavailableModels[0].provider, 'gemini');
+
+    process.env.GEMINI_API_KEY = 'roster-test-key';
+    const ready = getProviderRosterStatus({ chain, respectForceChain: false });
+    assert.equal(providerRosterReady({ chain, respectForceChain: false }), true);
+    assert.equal(ready.reason, 'provider-available');
+    assert.deepEqual(ready.availableModels, chain);
+    assert.deepEqual(ready.availableProviders, ['gemini']);
+  } finally {
+    if (previousGemini === undefined) delete process.env.GEMINI_API_KEY;
+    else process.env.GEMINI_API_KEY = previousGemini;
+    if (previousViteGemini === undefined) delete process.env.VITE_GEMINI_API_KEY;
+    else process.env.VITE_GEMINI_API_KEY = previousViteGemini;
+    if (previousForceChain === undefined) delete process.env.AI_MODELS_FORCE_CHAIN;
+    else process.env.AI_MODELS_FORCE_CHAIN = previousForceChain;
+    resetState();
+  }
+});
+
+test('providerRosterReady non usa il roster di default quando il contratto e\' invalido', () => {
+  assert.equal(providerRosterReady({ chain: null, respectForceChain: false }), false);
+  assert.equal(getProviderRosterStatus({ chain: null, respectForceChain: false }).reason, 'invalid-roster');
+});
 
 describe('roster NVIDIA', () => {
   test('mantiene in catena il modello live usato come fallback affidabile', () => {

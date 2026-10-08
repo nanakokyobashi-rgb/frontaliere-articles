@@ -5382,16 +5382,116 @@ export function isModelAvailable(modelId) {
 }
 
 /**
- * Check whether ANY model in the default chain is available.
- * Use this instead of directly checking GEMINI_API_KEY || GH_MODELS_PAT,
- * so that every provider in DEFAULT_CHAIN (GitHub Models, Gemini, Groq,
- * OpenRouter, NVIDIA NIM, Cohere, Cloudflare Workers AI, Z.AI — the retired
- * ones are in RETIRED_FREE_PROVIDERS) is considered.
+ * Build a read-only, non-secret view of the provider roster that can serve a
+ * call right now. The old availability check only answered «there is a key in
+ * the process» and had no reportable result; after a provider cooldown or an
+ * exhausted roster that let callers enter generation without a usable lane.
+ *
+ * `AI_MODELS_FORCE_CHAIN` is part of the effective roster when present. A
+ * caller supplying `chain` can opt out with `respectForceChain: false` for a
+ * diagnostic comparison; production guards keep the override fail-closed.
+ * Explicit CLI fallbacks are added only for the unforced default roster, so a
+ * caller-provided chain remains an exact contract.
+ *
+ * @param {{chain?: string[], includeExplicitFallbacks?: boolean,
+ *   respectForceChain?: boolean}} [options]
+ * @returns {{ready: boolean, reason: string, rosterSize: number,
+ *   availableModels: string[], availableProviders: string[],
+ *   unavailableModels: Array<{model: string, provider: string, reason: string}>,
+ *   invalidModels: unknown[]}}
+ */
+export function getProviderRosterStatus(options = {}) {
+  const hasCustomChain = Object.prototype.hasOwnProperty.call(options, 'chain');
+  const respectForceChain = options.respectForceChain !== false;
+  const forcedRaw = respectForceChain ? String(process.env.AI_MODELS_FORCE_CHAIN || '').trim() : '';
+  const customChain = hasCustomChain ? options.chain : null;
+
+  // A malformed caller contract is not allowed to fall back to the default
+  // roster: doing so would report a provider that the caller did not ask for.
+  if (hasCustomChain && !Array.isArray(customChain)) {
+    return {
+      ready: false,
+      reason: 'invalid-roster',
+      rosterSize: 0,
+      availableModels: [],
+      availableProviders: [],
+      unavailableModels: [],
+      invalidModels: [customChain],
+    };
+  }
+
+  const source = forcedRaw
+    ? forcedRaw.split(',')
+    : (hasCustomChain ? customChain : DEFAULT_CHAIN);
+  const includeExplicitFallbacks = options.includeExplicitFallbacks
+    ?? (!hasCustomChain && !forcedRaw);
+  const configured = includeExplicitFallbacks
+    ? [...source, AI_MODELS.CODEX_CLI_PRIMARY, AI_MODELS.CLAUDE_CLI_HAIKU]
+    : source;
+  const models = [];
+  const invalidModels = [];
+  for (const model of configured) {
+    if (typeof model !== 'string' || !model.trim()) {
+      invalidModels.push(model);
+      continue;
+    }
+    const normalized = model.trim();
+    if (!models.includes(normalized)) models.push(normalized);
+  }
+
+  const states = models.map((model) => {
+    try {
+      const provider = getProvider(model);
+      if (!isModelAvailable(model)) {
+        return { model, provider, ready: false, reason: 'unavailable' };
+      }
+      if (isProviderCoolingDown(provider)) {
+        return { model, provider, ready: false, reason: 'provider-cooldown' };
+      }
+      return { model, provider, ready: true, reason: 'ready' };
+    } catch {
+      // The roster is configuration, not executable input. One malformed
+      // entry must never make a false positive out of an otherwise empty
+      // roster, and its raw value is safe to expose as diagnostic data.
+      return { model, provider: 'unknown', ready: false, reason: 'invalid-model' };
+    }
+  });
+  const available = states.filter((state) => state.ready);
+  const unavailable = states
+    .filter((state) => !state.ready)
+    .map(({ model, provider, reason }) => ({ model, provider, reason }));
+  const availableModels = available.map(({ model }) => model);
+  const availableProviders = [...new Set(available.map(({ provider }) => provider))];
+
+  return {
+    ready: availableModels.length > 0,
+    reason: availableModels.length > 0
+      ? 'provider-available'
+      : models.length > 0 ? 'no-servable-provider' : 'empty-roster',
+    rosterSize: models.length,
+    availableModels,
+    availableProviders,
+    unavailableModels: unavailable,
+    invalidModels,
+  };
+}
+
+/**
+ * Fail-closed predicate for the current provider roster.
+ * Keep callers on this small boolean API; diagnostics should use
+ * `getProviderRosterStatus()` when they need the reason and provider list.
+ */
+export function providerRosterReady(options = {}) {
+  return getProviderRosterStatus(options).ready;
+}
+
+/**
+ * Backward-compatible boolean view used by older callers. Both entry points
+ * now share `getProviderRosterStatus()`, so a cooldown or an invalid roster
+ * cannot be reported differently by two gates.
  */
 export function isAnyModelAvailable() {
-  return DEFAULT_CHAIN.some(m => isModelAvailable(m))
-    || isModelAvailable(AI_MODELS.CODEX_CLI_PRIMARY)
-    || isModelAvailable(AI_MODELS.CLAUDE_CLI_HAIKU);
+  return providerRosterReady();
 }
 
 /**

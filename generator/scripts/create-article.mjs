@@ -67,7 +67,7 @@ import { createHash } from 'node:crypto';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import {
   BLOG_IMAGE_TARGET_MAX_BYTES,
@@ -15793,6 +15793,36 @@ async function main() {
     } catch { /* ignore — df unavailable or parse error */ }
   }
 
+  // `initScoreStore()` also completes the dynamic discovery latch. Check the
+  // resulting roster before scanning sources or spending an inference call:
+  // without this guard an empty/disabled provider set paid the whole scan and
+  // only failed after the first headline reached callLLM(). The workflow
+  // preflight remains the network-level probe; this is the in-process,
+  // fail-closed contract for the exact router state used by generation.
+  await initScoreStore();
+  if (!DRY_RUN_SCAN) {
+    const rosterOptions = { chain: [...DEFAULT_CHAIN, ...PREFERRED_GENERATION_MODELS] };
+    const rosterReady = providerRosterReady(rosterOptions);
+    const roster = getProviderRosterStatus(rosterOptions);
+    console.error(
+      `PROVIDER_ROSTER ready=${rosterReady} size=${roster.rosterSize}`
+      + ` available=${roster.availableModels.length}`
+      + ` providers=${roster.availableProviders.join(',') || 'none'}`
+      + ` reason=${roster.reason}`,
+    );
+    if (!rosterReady) {
+      finalizeRunReport('error', {
+        notes: [...RUN_REPORT.notes, `Provider roster unavailable: ${roster.reason}`],
+      });
+      console.error(
+        `::error::provider-roster-unavailable: reason=${roster.reason}`
+        + ` roster=${roster.rosterSize} available=${roster.availableModels.length}`,
+      );
+      await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+      return;
+    }
+  }
+
   // ── Auto-scan mode: no URL provided → scan news sources first, then evergreen fallback ──
   if (!url) {
     // Evergreen quota counter (2026-05-07): the 30% hard-skip was reverted
@@ -15816,7 +15846,6 @@ async function main() {
     // has capacity — omniroute/claude-cli are NOT local's weak-model failure
     // mode (network-routed, not CPU-bound), so their availability alone is
     // enough to skip this route just like an ordinary free-tier model would.
-    await initScoreStore();
     // NB "cloudOnlyChain" is a misnomer left over from before omniroute/
     // claude-cli existed — it excludes ONLY LOCAL_FALLBACK by identity, so it
     // still contains omniroute/auto and claude-cli/haiku. That's intentional,
