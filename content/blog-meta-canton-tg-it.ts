@@ -12,6 +12,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.chiusura-strada-kesswil.title': 'Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026',
     'blog.article.chiusura-strada-kesswil.excerpt': 'La Uttwilerstrasse di Kesswil sarà chiusa dal 15 ottobre 2026 alle 7 al 18 ottobre alle 17. Traffico deviato e possibile rinvio per pioggia o freddo.',
     'blog.article.chiusura-strada-kesswil.imageAlt': 'Kesswil, strada cantonale H13 con cantiere e deviazione segnalata in autunno.',
+    'blog.article.turgovia-occupazione-rav-settembre.title': 'Disoccupazione in Turgovia: quota stabile al 2,2%',
+    'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'In Turgovia, a fine settembre, i disoccupati sono 3.558 (+54). La quota resta al 2,2%; le persone in cerca d\'impiego sono 7.155 e i posti vacanti 1.824.',
+    'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Centro regionale per l\'impiego in Turgovia con annunci di lavoro',
 };
 
 export default blogMetaCantonTgIt;

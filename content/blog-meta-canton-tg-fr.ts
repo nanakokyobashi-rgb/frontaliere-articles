@@ -12,6 +12,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.chiusura-strada-kesswil.title': 'Kesswil : Uttwilerstrasse fermée du 15 au 18 octobre 2026',
     'blog.article.chiusura-strada-kesswil.excerpt': 'L’Uttwilerstrasse de Kesswil sera fermée du 15 octobre 2026 à 7 h au 18 octobre à 17 h. Trafic dévié et report possible en cas de pluie ou de froid.',
     'blog.article.chiusura-strada-kesswil.imageAlt': 'Kesswil : travaux sur la route cantonale H13 avec déviation signalée en automne.',
+    'blog.article.turgovia-occupazione-rav-settembre.title': 'Chômage en Thurgovie : taux stable à 2,2 %',
+    'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'En Thurgovie, fin septembre, le nombre de chômeurs est de 3.558 (+54). Le taux reste à 2,2 % ; les personnes à la recherche d’un emploi sont au nombre de 7.155 et les postes vacants à 1.824.',
+    'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Centre régional de placement en Thurgovie avec offres d\'emploi',
 };
 
 export default blogMetaCantonTgFr;
