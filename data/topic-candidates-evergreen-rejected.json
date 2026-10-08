@@ -797,22 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/gaia-turbine-sa-si-aggiudica-il-primo-premio-bancastato-per-la-sostenibilita-aziendale-444060": {
-      "section": "frontaliere",
-      "ts": 1791295913545
-    },
-    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1955011/pmi-premio-progetti-sostenibilita-territorio": {
-      "section": "frontaliere",
-      "ts": 1791295980022
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/arpa-e-insubria-insieme-per-accorciare-le-distanze-tra-universita-e-lavoro/2694481": {
-      "section": "frontaliere",
-      "ts": 1791296032597
-    },
-    "frontaliere::https://www.rsi.ch/s/4137113": {
-      "section": "frontaliere",
-      "ts": 1791296104849
-    },
     "svizzera::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
       "section": "svizzera",
       "ts": 1791297834567
@@ -1104,6 +1088,18 @@
     "frontaliere::https://www.swissinfo.ch/ita/nobel-economia%2c-in-corsa-c%27%c3%a8-anche-uno-svizzero-con-dottorato-usi/92187525": {
       "section": "frontaliere",
       "ts": 1791466123599
+    },
+    "frontaliere::https://www.rsi.ch/s/4145954": {
+      "section": "frontaliere",
+      "ts": 1791469395530
+    },
+    "frontaliere::https://www.rsi.ch/s/4137113": {
+      "section": "frontaliere",
+      "ts": 1791470194815
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/monteviasco-la-pazienza-e-finita-otto-anni-di-attesa-ora-basta-vogliamo-poter-vivere-il-nostro-paese/2701789": {
+      "section": "frontaliere",
+      "ts": 1791470212872
     }
   }
 }

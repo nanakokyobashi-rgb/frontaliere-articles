@@ -290,6 +290,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T12:50:35.254Z",
       "lastFailureAt": "2026-10-08T12:50:35.254Z"
+    },
+    {
+      "articleId": "svitto-cambio-cassa-malati",
+      "title": "Concorrenza sleale nel cambio cassa malati a Svitto",
+      "fallbackImage": "/images/blog/article-tf-nega-sconto-cassa-malati-padre-affidamento-alternato.webp",
+      "reason": "All image providers failed for article-svitto-cambio-cassa-malati: openai-codex (Codex broker timed out after 119999ms)",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T14:43:30.790Z",
+      "lastFailureAt": "2026-10-08T14:43:30.790Z"
     }
   ]
 }
