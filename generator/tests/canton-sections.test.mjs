@@ -98,6 +98,9 @@ test('la policy robots ha host bloccati da far valere su tutti i cantoni', () =>
   // Disallow: /.
   assert.equal(isWholeSiteBlock('User-agent: GPTBot -> Disallow: /'), false);
   assert.equal(isWholeSiteBlock('User-agent: * -> Disallow: /'), true);
+  const exception = 'User-agent: * -> Disallow: /; User-agent: * -> Allow: /news/';
+  assert.equal(isWholeSiteBlock(exception, 'FrontaliereTicinoBot', 'https://example.ch/news/item'), false);
+  assert.equal(isWholeSiteBlock(exception, 'FrontaliereTicinoBot', 'https://example.ch/private/item'), true);
   assert.equal(robotsRuleBlocksCrawler('User-agent: GPTBot -> Disallow: /; User-agent: * -> Allow: /', 'https://example.ch/news'), false);
 });
 

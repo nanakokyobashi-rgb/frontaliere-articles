@@ -256,9 +256,9 @@ export function robotsRuleBlocksCrawler(rule, url, userAgent = 'FrontaliereTicin
   return winner?.type === 'disallow';
 }
 
-/** True only for a whole-site block applicable to our UA or `*`. */
-export function isWholeSiteBlock(rule, userAgent = 'FrontaliereTicinoBot') {
-  return robotsRuleBlocksCrawler(rule, 'https://example.invalid/', userAgent)
+/** True for a root block that applies on the source's actual path. */
+export function isWholeSiteBlock(rule, userAgent = 'FrontaliereTicinoBot', url = 'https://example.invalid/') {
+  return robotsRuleBlocksCrawler(rule, url, userAgent)
     && parseCompactRobotsRule(rule).some((d) => d.type === 'disallow' && d.path.trim() === '/' && d.agents.some((a) => a === '*' || a === String(userAgent).toLowerCase()));
 }
 
@@ -302,7 +302,12 @@ export function validateCantonSections(doc, ctx) {
   for (const c of doc.cantons) {
     for (const p of [...(c?.ownerDecisionPending || []), ...(c?.rejectedSources || [])]) {
       try {
-        if (typeof p.robotsRule === 'string' && isWholeSiteBlock(p.robotsRule)) blockedHosts.set(hostOf(p.url), `${c.code} ${p.url}`);
+        if (typeof p.robotsRule === 'string' && isWholeSiteBlock(p.robotsRule, 'FrontaliereTicinoBot', p.url)) {
+          const host = hostOf(p.url);
+          const entries = blockedHosts.get(host) || [];
+          entries.push({ rule: p.robotsRule, source: `${c.code} ${p.url}` });
+          blockedHosts.set(host, entries);
+        }
       } catch { /* l'URL invalido e' segnalato sotto */ }
     }
   }
@@ -407,7 +412,8 @@ export function validateCantonSections(doc, ctx) {
       }
       try {
         const h = hostOf(s.url);
-        if (blockedHosts.has(h)) err(where, `${lbl}: host bloccato per intero al crawler (D10, vedi decisione ${blockedHosts.get(h)})`);
+        const blocker = (blockedHosts.get(h) || []).find((entry) => robotsRuleBlocksCrawler(entry.rule, s.url));
+        if (blocker) err(where, `${lbl}: host bloccato per intero al crawler (D10, vedi decisione ${blocker.source})`);
       } catch { /* gia' segnalato */ }
     };
 

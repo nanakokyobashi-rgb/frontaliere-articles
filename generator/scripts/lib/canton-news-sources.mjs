@@ -825,16 +825,22 @@ export function extractJsonApiItems(text, apiUrl) {
   const out = [];
   if (data && Array.isArray(data.articles)) {
     for (const article of data.articles) {
-      // `free: false` is an explicit paywall marker: the list may expose the
-      // URL, but this scanner must not turn a non-public article into context.
-      if (article?.free === false) continue;
       const url = absoluteUrl(article?.url ?? article?.link, apiUrl);
       const headline = stripTags(article?.title);
       if (!url || headline.length < 10) continue;
       const lead = stripTags(article?.abstract ?? article?.lead ?? article?.description);
       const rawDate = article?.publication_date ?? article?.publicationDate ?? article?.date;
       const date = parseDottedDate(rawDate) || validDate(rawDate);
-      out.push({ url, headline, date, ...(lead ? { lead } : {}) });
+      // A `free: false` item may still expose a public title/abstract in the
+      // feed. Preserve that lead, mark the item, and let the article handoff
+      // refuse any premium body fetch. The body is never used here.
+      out.push({
+        url,
+        headline,
+        date,
+        ...(lead ? { lead } : {}),
+        ...(article?.free === false ? { _paywall: 'title+lead' } : {}),
+      });
     }
     return dedupByUrl(out);
   }

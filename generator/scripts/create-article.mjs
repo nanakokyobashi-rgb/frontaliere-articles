@@ -8440,7 +8440,7 @@ function headlineStackHasPaywall(stack) {
   return stack.some((node) => {
     const className = headlineAttributeValue(node.attrs, 'class');
     return /(?:^|[\s_-])paywall(?:$|[\s_-])/i.test(className)
-      || /data-paywall(?:-[\w-]+)?\s*=/i.test(node.attrs || '');
+      || /\bdata-paywall(?:-[\w-]+)?(?![\w-])(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/i.test(node.attrs || '');
   });
 }
 
@@ -8573,11 +8573,13 @@ function extractHeadlines(html, baseUrl) {
   let m;
   while ((m = linkRe.exec(html)) !== null) {
     const ancestors = headlineAncestorStack(html, m.index);
-    if (source?.quirks?.excludePaywalledCards && headlineStackHasPaywall(ancestors)) continue;
-    let href = m[1];
-    let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     const anchorTagEnd = m[0].indexOf('>');
     const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+    const anchorAttrs = anchorTag.replace(/^<a\b/i, '').replace(/>\s*$/, '');
+    if (source?.quirks?.excludePaywalledCards
+      && headlineStackHasPaywall([...ancestors, { name: 'a', attrs: anchorAttrs }])) continue;
+    let href = m[1];
+    let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
     if (configuredHeadline) text = configuredHeadline;
     // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every

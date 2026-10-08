@@ -154,7 +154,7 @@ test('json-api: una forma sconosciuta non si indovina (sterile, non inventata)',
   assert.deepEqual(extractJsonApiItems('non json', 'https://example.ch/api'), []);
 });
 
-test('json-api articoli: il paywall esplicito free=false viene escluso e il lead pubblico resta', () => {
+test('json-api articoli: free=false conserva solo titolo e lead pubblico, senza corpo premium', () => {
   const items = extractJsonApiItems(JSON.stringify({ articles: [
     {
       url: '/articles/100-paywalled',
@@ -171,12 +171,20 @@ test('json-api articoli: il paywall esplicito free=false viene escluso e il lead
       free: true,
     },
   ] }), 'https://example.ch/api');
-  assert.equal(items.length, 1);
-  assert.equal(items[0].url, 'https://example.ch/articles/101-public');
-  assert.match(items[0].lead, /testo pubblico/);
+  assert.equal(items.length, 2);
+  assert.equal(items[0].url, 'https://example.ch/articles/100-paywalled');
+  assert.equal(items[0]._paywall, 'title+lead');
+  assert.match(items[0].lead, /corpo è premium/);
+  assert.equal(items[1].url, 'https://example.ch/articles/101-public');
+  assert.equal(items[1]._paywall, undefined);
+  assert.match(items[1].lead, /testo pubblico/);
 });
 
 test('date dettaglio: JSON-LD, meta e time sono letti senza usare il corpo', () => {
+  assert.equal(
+    extractPublishedDateFromHtml('<script type="application/ld+json">{"dateModified":"2026-10-09T12:30:00Z","datePublished":"2026-10-05T12:30:00Z"}</script><time datetime="2026-10-11T12:30:00Z">evento</time>').toISOString(),
+    '2026-10-05T12:30:00.000Z',
+  );
   assert.equal(
     extractPublishedDateFromHtml('<script type="application/ld+json">{"datePublished":"2026-10-05T12:30:00Z"}</script><p>corpo</p>').toISOString(),
     '2026-10-05T12:30:00.000Z',
@@ -537,6 +545,14 @@ test('User-Agent dichiarato (D10) e niente HTTP/2 chiesto a undici (http1Only pe
   assert.doesNotMatch(moduleSrc.replace(/^\s*\*.*$/gm, ''), /allowH2/, 'lo scanner non deve abilitare HTTP/2');
 });
 
+test('Le Temps JSON: il parser dichiara Accept application/json con lo UA cantonale', async () => {
+  const url = 'https://www.letemps.ch/suisse/neuchatel';
+  const { impl, calls } = fakeFetch({ [url]: { body: '{"articles":[]}', contentType: 'application/json' } });
+  await scanCantonSource(sourceOf('NE', url), ctx(impl));
+  assert.equal(calls[0].init.headers.Accept, 'application/json');
+  assert.equal(calls[0].init.headers['User-Agent'], CANTON_SOURCE_USER_AGENT);
+});
+
 test('D10: la pagina usa la stessa sorgente UA cantonale, lo storico resta invariato', () => {
   const startAt = SRC.indexOf('const HISTORICAL_SOURCE_PAGE_USER_AGENT =');
   const endAt = SRC.indexOf('async function fetchPageContent', startAt);
@@ -676,6 +692,7 @@ test('html-links: SHN scarta le card paywall e conserva solo il lead pubblico de
   const html = '<main>'
     + '<article class="news-card"><a href="/region/kanton/2026-10-05/public-story">Öffentliche Meldung aus dem Kanton Schaffhausen</a><img title="Der öffentlich sichtbare Vorspann nennt die wichtigsten Fakten." src="/public.jpg"></article>'
     + '<article class="news-card paywall" data-paywall-entity-id="premium-1"><a href="/region/kanton/2026-10-05/premium-story">Premium-Meldung mit nur eingeschränkter öffentlicher Lesbarkeit</a><img title="Dieser Vorspann gehört zur Premiumkarte." src="/premium.jpg"></article>'
+    + '<article class="news-card"><a class="paywall" data-paywall href="/region/kanton/2026-10-05/anchor-paywall">Card con marker paywall direttamente sul link e nessun corpo pubblico</a></article>'
     + '</main>';
   const source = {
     url,

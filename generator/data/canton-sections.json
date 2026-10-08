@@ -6303,13 +6303,13 @@
           "kind": "media",
           "topics": ["lavoro", "economia", "servizi", "frontalieri"],
           "quirks": {
-            "articlePathPattern": "^/ueberregionales/wirtschaft/\\d{4}-\\d{2}-\\d{2}/",
+            "articlePathPattern": "^/uberregionales/wirtschaft/\\d{4}-\\d{2}-\\d{2}/",
             "excludePaywalledCards": true,
             "extractCardLead": "media-title",
             "paywall": "title+lead"
           },
           "items7d": 6,
-          "notes": "Path canonico verificato: /uberregionales/wirtschaft (la variante /ueberregionales/wirtschaft è 404). Si usano solo card pubbliche e lead visibile. robots wildcard consente il percorso; GPTBot è bloccato solo per nome.",
+          "notes": "Path canonico verificato: /uberregionales/wirtschaft e articoli /uberregionales/wirtschaft/YYYY-MM-DD/. Si usano solo card pubbliche e lead visibile. robots wildcard consente il percorso; GPTBot è bloccato solo per nome.",
           "verifiedAt": "2026-10-08"
         },
         {
