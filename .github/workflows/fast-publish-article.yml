@@ -951,14 +951,18 @@ jobs:
           # 2026-10-08 with these two functions and a curl that records its
           # URL: three polls, one key.
           #
+          # The shard is part of the key because the counter restarts at 1 in
+          # every leg of the matrix: run, attempt and counter alone are unique
+          # inside one leg, not across the legs of one run.
+          #
           # Pinned by generator/tests/fast-publish-probe-cache-poisoning.test.mjs.
           PROBE_SEQ=0
           probe_url() {
             local u="$1" sep='?'
             PROBE_SEQ=$((PROBE_SEQ + 1))
             case "$u" in *\?*) sep='&' ;; esac
-            printf -v PROBE_URL '%s%s_fpcb=%s.%s.%s' \
-              "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$PROBE_SEQ"
+            printf -v PROBE_URL '%s%s_fpcb=%s.%s.%s.%s' \
+              "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$shard" "$PROBE_SEQ"
           }
 
           # Poll $1 until it answers 200, at most $2 times, with optional curl
@@ -974,6 +978,11 @@ jobs:
               POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time "$timeout" \
                            -H 'Cache-Control: no-cache' "$PROBE_URL")"
               set -e
+              # curl prints 000 when no HTTP answer arrived. If it is cut off
+              # before it can print at all, the variable holds nothing, or a
+              # fragment: that is the same "no answer", and callers and
+              # annotations read it as 000.
+              case "$POLL_CODE" in [0-9][0-9][0-9]) ;; *) POLL_CODE=000 ;; esac
               [ "$POLL_CODE" = "200" ] && return 0
               if [ "$i" -lt "$attempts" ]; then sleep 15; fi
             done
@@ -986,7 +995,8 @@ jobs:
           # with "no": repeating the probe cannot repair that, so it fails at
           # once, as before.
           #
-          # A 5xx, a 429 or no answer at all says nothing about the article.
+          # A 5xx, a 408, a 425, a 429 or no answer at all says nothing about
+          # the article: the request was not served, whatever the article is.
           # It is the origin not answering. Run 37825012855 published 78
           # articles, purged the edge, and failed here on a single 503 among
           # 308 such probes, with every page readable. The number of these
@@ -1005,7 +1015,7 @@ jobs:
             while :; do
               poll_origin "$u" 1 8 && return 0
               case "$POLL_CODE" in
-                5??|429|000) ;;
+                5??|408|425|429|000) ;;
                 *) return 1 ;;
               esac
               if [ "$retries" -ge 2 ] || [ "$TRANSIENT_RETRY_BUDGET" -le 0 ]; then return 1; fi

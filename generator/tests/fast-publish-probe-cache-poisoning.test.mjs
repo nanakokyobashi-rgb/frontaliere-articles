@@ -287,6 +287,7 @@ function eseguiSonde({
   comandi,
   tetto = TETTO_RUN,
   funzioni = ['probe_url', 'poll_origin', 'poll_batch_member'],
+  shard = SHARD,
 }) {
   const dir = mkdtempSync(join(tmpdir(), 'fast-publish-probe-'));
   try {
@@ -295,13 +296,17 @@ function eseguiSonde({
     writeFileSync(coda, codici.map((codice) => `${codice}\n`).join(''));
     writeFileSync(registro, '');
     const script = [
-      'set -e',
+      // Come lo step: una variabile non definita o un comando fallito fermano tutto.
+      'set -euo pipefail',
+      'shard="$SHARD"',
       'curl() {',
       '  local ultimo codice',
       '  for ultimo in "$@"; do :; done',
       '  codice="$(head -n 1 "$CODA")"',
       '  tail -n +2 "$CODA" > "$CODA.resto" && mv "$CODA.resto" "$CODA"',
       '  printf \'sonda %s\\n\' "$ultimo" >> "$REGISTRO"',
+      // «SILENZIO» è curl interrotto prima di poter stampare il codice.
+      '  if [ "$codice" = "SILENZIO" ]; then return 0; fi',
       '  printf \'%s\' "${codice:-coda-vuota}"',
       '}',
       'sleep() { printf \'attesa %s\\n\' "$1" >> "$REGISTRO"; }',
@@ -312,7 +317,7 @@ function eseguiSonde({
     ].join('\n');
     const esito = spawnSync('bash', ['-c', script], {
       encoding: 'utf8',
-      env: { ...process.env, CODA: coda, REGISTRO: registro, GITHUB_RUN_ID: '777', GITHUB_RUN_ATTEMPT: '2' },
+      env: { ...process.env, CODA: coda, REGISTRO: registro, SHARD: shard, GITHUB_RUN_ID: '777', GITHUB_RUN_ATTEMPT: '2' },
     });
     assert.equal(esito.status, 0, `lo script di prova è uscito con ${esito.status}: ${esito.stderr}`);
     const righe = readFileSync(registro, 'utf8').split('\n').filter(Boolean);
@@ -332,6 +337,7 @@ const membro = (u) =>
   + `else echo "KO ${u} $POLL_CODE $TRANSIENT_RETRY_BUDGET"; fi`;
 
 const ORIGINE = 'https://origin.example.invalid';
+const SHARD = 'articoliprova';
 
 test('eseguito: ogni sonda ha una chiave sua, anche sullo stesso percorso', () => {
   // Il difetto: con `"$(probe_url "$u")"` il contatore restava a 0 e le cinque
@@ -343,7 +349,40 @@ test('eseguito: ogni sonda ha una chiave sua, anche sullo stesso percorso', () =
     comandi: [`poll_origin "${u}" 3 || true`, `poll_origin "${u}" 2 || true`],
     funzioni: ['probe_url', 'poll_origin'],
   });
-  assert.deepEqual(sonde, [1, 2, 3, 4, 5].map((n) => `${u}?_fpcb=777.2.${n}`));
+  assert.deepEqual(sonde, [1, 2, 3, 4, 5].map((n) => `${u}?_fpcb=777.2.${SHARD}.${n}`));
+});
+
+test('eseguito: due rami della matrice non chiedono mai la stessa chiave', () => {
+  // Il contatore riparte da 1 in ogni ramo: senza lo shard nella chiave, due
+  // rami della stessa run che sondassero lo stesso URL leggerebbero l'uno la
+  // risposta dell'altro.
+  const u = `${ORIGINE}/articolo/`;
+  const ramo = (shard) => eseguiSonde({
+    codici: [404, 404],
+    comandi: [`poll_origin "${u}" 2 || true`],
+    funzioni: ['probe_url', 'poll_origin'],
+    shard,
+  }).sonde;
+  const a = ramo('articolifrontaliere');
+  const b = ramo('articolisvizzera');
+  assert.equal(a.length, 2);
+  assert.equal(b.length, 2);
+  assert.deepEqual(a.filter((chiave) => b.includes(chiave)), []);
+});
+
+test('eseguito: curl che non stampa un codice vale come nessuna risposta', () => {
+  // Interrotto prima del write-out, curl non stampa nulla, o un frammento. Non è
+  // una risposta sull'articolo: si legge 000, si ritenta, e l'annotazione non
+  // resta con un codice vuoto.
+  for (const uscita of ['SILENZIO', '20']) {
+    const u = `${ORIGINE}/muto-${uscita}/`;
+    const { uscita: esito, sonde } = eseguiSonde({ codici: [uscita, 200], comandi: [membro(u)] });
+    assert.deepEqual(esito, [`OK ${u} 200 ${TETTO_RUN - 1}`], `uscita «${uscita}» non ritentata`);
+    assert.equal(sonde.length, 2);
+  }
+  const u = `${ORIGINE}/sempre-muto/`;
+  const { uscita: esito } = eseguiSonde({ codici: ['SILENZIO', 'SILENZIO', 'SILENZIO'], comandi: [membro(u)] });
+  assert.deepEqual(esito, [`KO ${u} 000 ${TETTO_RUN - 2}`]);
 });
 
 test('eseguito: un 503 dell\'origine si ritenta, e il membro del lotto passa', () => {
@@ -371,8 +410,9 @@ test('eseguito: un\'origine che continua a non rispondere fallisce dopo due rite
   assert.equal(sonde.length, 3);
 });
 
-test('eseguito: nessuna risposta e 429 valgono come il 5xx; gli altri codici come il 404', () => {
-  for (const codice of ['000', 429, 500, 504]) {
+test('eseguito: ciò che non parla dell\'articolo si ritenta; gli altri codici valgono come il 404', () => {
+  // 408 e 425 dicono che la richiesta non è stata servita, come 429 e 5xx.
+  for (const codice of ['000', 408, 425, 429, 500, 504]) {
     const u = `${ORIGINE}/transitorio-${codice}/`;
     const { uscita, sonde } = eseguiSonde({ codici: [codice, 200], comandi: [membro(u)] });
     assert.deepEqual(uscita, [`OK ${u} 200 ${TETTO_RUN - 1}`], `${codice} non è stato ritentato`);
@@ -410,6 +450,8 @@ test('il membro del lotto passa da poll_batch_member; il gate della lingua e l\'
   assert.match(verify, /origin_locale_gate_started\[\$loc\]=1\n\s*\n?\s+if poll_origin "\$u" 12; then/);
   // L'apex resta a un tentativo e a warning: non decide l'esito dello step.
   assert.match(verify, /if poll_origin "\$u" 1 8; then echo " {2}200 {2}\$u"\n\s+else echo "::warning::/);
+  // Lo shard del ramo della matrice fa parte della chiave.
+  assert.match(verify, /printf -v PROBE_URL '%s%s_fpcb=%s\.%s\.%s\.%s'[\s\S]{0,160}"\$shard" "\$PROBE_SEQ"/);
   // Un membro che non passa ferma lo step con lo stesso messaggio di prima.
   assert.match(verify, /::error::\$u answers \$POLL_CODE after the locale deployment gate passed"\n\s+fail=1/);
 });
