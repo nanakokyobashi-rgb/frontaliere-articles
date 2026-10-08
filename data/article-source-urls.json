@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1941934/tredicesima-avs-ai-frontalieri-come-funziona-da-dicembre": "tredicesima-avs-frontalieri-dettagli",
   "https://comozero.it/attualita/lavoro-sommerso-nel-comasco-18-imprese-sospese-sanzioni-per-757mila-euro": "sanzioni-sicurezza-lavoro-comasco",
   "https://www.varesenoi.it/2026/08/10/leggi-notizia/argomenti/territorio/articolo/alla-casa-di-comunita-di-laveno-si-lavora-con-temperature-fino-a-37-gradi-il-sindacato-segnala.html": "allacasadicomunitalavenosegnala",
   "https://www.varesenews.it/2026/08/malpensa-fabbriche-e-intelligenza-artificiale-cosi-la-logistica-ha-cambiato-leconomia-varesina/2654785": "evoluzione-logistica-varese-malpensa",
@@ -2188,6 +2187,11 @@
   "https://www.varesenews.it/2026/10/incanto-a-brusimpiano-la-regina-dellacqua-con-il-terra-e-laghi-festival/2603083": {
     "articleId": "incanto-brusimpiano-regina-acqua",
     "ts": "2026-10-08T16:20:13.304Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/riparte-il-treno-del-foliage-tra-italia-e-svizzera-boschi-borghi-e-colori-da-godere-lentamente-nellautunno-2026": {
+    "articleId": "treno-foliage-locarno-2026",
+    "ts": "2026-10-08T16:34:16.931Z",
     "keyForm": 2
   }
 }

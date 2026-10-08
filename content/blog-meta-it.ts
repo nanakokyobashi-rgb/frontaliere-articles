@@ -12823,6 +12823,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incanto-brusimpiano-regina-acqua.title': 'Incanto a Brusimpiano: «La regina dell’acqua» del festival',
     'blog.article.incanto-brusimpiano-regina-acqua.excerpt': '21 ottobre alle 10 al Salone SOMS di Brusimpiano In scena «La regina dell\'acqua» con Gli Alcuni La fiaba di Andersen parla del risparmio dell\'acqua Terra',
     'blog.article.incanto-brusimpiano-regina-acqua.imageAlt': 'Spettacolo teatrale per bambini «La regina dell’acqua» al Salone SOMS di Brusimpiano, con costumi colorati e scenografia legata all’acqua.',
+    'blog.article.treno-foliage-locarno-2026.title': 'Treno del Foliage 2026 tra Locarno e Domodossola',
+    'blog.article.treno-foliage-locarno-2026.excerpt': 'Dal 10 ottobre al 15 novembre 2026 Itinerario panoramico tra Locarno e Domodossola 52 km tra Canton Ticino e Piemonte Ferrovia storica tra Italia e Svizzera',
+    'blog.article.treno-foliage-locarno-2026.imageAlt': 'Il Treno del Foliage attraversa i paesaggi autunnali tra Locarno e Domodossola',
 };
 
 export default blogMetaIt;

@@ -103426,6 +103426,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-treno-foliage-locarno-2026': {
+    title: 'Treno del Foliage 2026 tra Locarno e Domodossola',
+    description: 'Dal 10 ottobre al 15 novembre 2026 Itinerario panoramico tra Locarno e Domodossola 52 km tra Canton Ticino e Piemonte Ferrovia storica tra Italia e Svizzera',
+    keywords: 'frontalieri, ticino, svizzera, italia, treno, foliage, locarno, domodossola',
+    ogTitle: 'Treno del Foliage 2026 tra Locarno e Domodossola',
+    ogDescription: 'Dal 10 ottobre al 15 novembre 2026 Itinerario panoramico tra Locarno e Domodossola 52 km tra Canton Ticino e Piemonte Ferrovia storica tra Italia e Svizzera',
+    canonicalPath: '/articoli-frontaliere/treno-foliage-locarno-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Treno del Foliage 2026 tra Locarno e Domodossola",
+      "description": "Dal 10 ottobre al 15 novembre 2026 Itinerario panoramico tra Locarno e Domodossola 52 km tra Canton Ticino e Piemonte Ferrovia storica tra Italia e Svizzera",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-treno-foliage-locarno-domodossola.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Treno del Foliage attraversa i paesaggi autunnali tra Locarno e Domodossola"
+      },
+      "datePublished": "2026-10-08T16:34:16+00:00",
+      "dateModified": "2026-10-08T16:34:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/treno-foliage-locarno-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
