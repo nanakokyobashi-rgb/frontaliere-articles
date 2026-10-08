@@ -607,6 +607,28 @@ export function stripPageChrome(html) {
   return { html: out + masked.slice(at), removed: ranges.length };
 }
 
+/**
+ * Isola il corpo editoriale di una pagina dettaglio prima di consegnarlo al
+ * generatore. Una pagina puo' avere una cornice gia' riconosciuta ma anche
+ * sidebar/related content fuori da `article`: usare tutto il testo restante
+ * contaminerebbe il contesto della fonte verificata.
+ */
+function sourceArticleText(html) {
+  const page = stripPageChrome(html).html;
+  const block = (tag) => {
+    const open = new RegExp(`<${tag}\\b[^>]*>`, 'i').exec(page);
+    if (!open) return '';
+    const end = matchingCloseEnd(page, tag, open.index + open[0].length);
+    return end < 0 ? '' : page.slice(open.index, end);
+  };
+  const article = block('article');
+  const main = block('main');
+  const candidates = [article, main]
+    .map((value) => stripTags(value))
+    .filter((value) => value.length >= 200);
+  return (candidates[0] || '').slice(0, 8000);
+}
+
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
 function matchingCloseEnd(masked, name, from) {
   const re = new RegExp(`<(/?)${name}(?=[\\s/>])[^>]*>`, 'gi');
@@ -1266,8 +1288,7 @@ export async function scanCantonSource(source, ctx) {
     for (const { headline, index } of targets) {
       try {
         const detailHtml = await get(headline.url, HTML_ACCEPT);
-        const detailPage = stripPageChrome(detailHtml);
-        const sourceContent = stripTags(detailPage.html).slice(0, 8000);
+        const sourceContent = sourceArticleText(detailHtml);
         if (sourceContent.length < 200) {
           notes.push(`testo dettaglio vuoto: ${headline.url}`);
           continue;

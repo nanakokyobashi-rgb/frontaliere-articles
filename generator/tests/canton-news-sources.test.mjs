@@ -636,7 +636,7 @@ test('html-links: Radio Munot porta il testo della pagina /p/ nel lead entro il 
   const url = 'https://www.radiomunot.ch/';
   const detailUrl = 'https://www.radiomunot.ch/p/Regionalnachrichten-abc';
   const html = '<main><article><a title="Beitrag \'Regionalnachrichten vom 5. Oktober 2026\' lesen." href="/p/Regionalnachrichten-abc"><span>00:00</span></a></article></main>';
-  const detail = '<main><article><h1>Regionalnachrichten vom 5. Oktober 2026</h1><p>Auf der Buchberger Erlistrasse kommt es wegen Belagsarbeiten zu einer Strassensperrung und einer Umleitung.</p><p>Die Gemeinde informiert über die Verkehrseinschränkungen.</p></article></main>';
+  const detail = '<main><article><h1>Regionalnachrichten vom 5. Oktober 2026</h1><p>Auf der Buchberger Erlistrasse kommt es wegen Belagsarbeiten zu einer Strassensperrung und einer Umleitung.</p><p>Die Gemeinde informiert über die Verkehrseinschränkungen.</p></article><aside>RELATED: Werbung und weitere Sendungen</aside></main>';
   const source = {
     url,
     parser: 'html-links',
@@ -656,6 +656,7 @@ test('html-links: Radio Munot porta il testo della pagina /p/ nel lead entro il 
   assert.equal(out.headlines.length, 1);
   assert.match(out.headlines[0].lead, /Strassensperrung/);
   assert.match(out.headlines[0].sourceContent, /Verkehrseinschränkungen/);
+  assert.doesNotMatch(out.headlines[0].sourceContent, /RELATED|Werbung/);
   assert.equal(out.requests, 2);
   assert.deepEqual(calls.map((call) => call.url), [url, detailUrl]);
 });

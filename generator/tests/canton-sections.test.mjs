@@ -269,3 +269,10 @@ test('viola: esclusione definitiva senza motivo o data di decisione', () => {
   expectViolation(doc, /SH: rejectedSources .*: decisionAt non YYYY-MM-DD/);
   expectViolation(doc, /SH: rejectedSources .*: origin deve essere rejected/);
 });
+
+test('viola: articleContent senza un budget finito di pagine dettaglio', () => {
+  const doc = clone();
+  const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.radiomunot.ch/');
+  delete source.quirks.maxRequestsPerRun;
+  expectViolation(doc, /SH: newsSources .*: articleContent html-text richiede maxRequestsPerRun intero >= 2/);
+});
