@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.admin.ch/it/newnsb/denn9j7b-c4v": {
-      "section": "svizzera",
-      "ts": 1791310754920
-    },
     "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/campeggio-alpino-la-verzasca-si-prepara-al-cantiere--4140344.html": {
       "section": "frontaliere",
       "ts": 1791320181309
@@ -1136,6 +1132,10 @@
     "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/cronaca-20/articolo/frode-fiscale-internazionale-blitz-della-guardia-di-finanza-di-varese-sei-misure-cautelari-e-beni.html": {
       "section": "frontaliere",
       "ts": 1791482989872
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1955658/la-manifattura-va-meglio-del-previsto-le-banche-reggono-ma-cala-l-occupazione": {
+      "section": "frontaliere",
+      "ts": 1791490044037
     }
   }
 }
