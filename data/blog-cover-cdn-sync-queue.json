@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-svizzera-soldi-delusione-lavoro.webp",
-      "sha256": "138e442466e2c64f3b49574c7ceb695ee1656ea52ec4d224c1e1d4c686a7f18b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-svizzera-soldi-delusione-lavoro-480w.webp",
-      "sha256": "24b97bf8175850fdd2ee0b072852a0a3ba9fc52def21ceefb2271908b10dd749"
-    }
-  ]
+  "items": []
 }
