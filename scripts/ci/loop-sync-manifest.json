@@ -2427,7 +2427,7 @@
       "reason": "Validatore e normalizzatore degli excerpt plain usato dal generatore del corpus per impedire Markdown nelle card e nei campi SEO derivati. Non esiste un gemello operativo sul sito: la difesa lato card vive nel repository del sito e resta una protezione distinta.",
       "baseline": {
         "site": null,
-        "corpus": "cd8ae50cdf4e51a2",
+        "corpus": "11254981ebe9404f",
         "alignedAt": "2026-10-08"
       }
     },
