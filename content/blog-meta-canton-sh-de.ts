@@ -9,6 +9,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-formazione-farmacie.title': 'Schaffhausen: E-Learning für Apotheken zum Thema häusliche Gewalt',
     'blog.article.sciaffusa-formazione-farmacie.excerpt': 'Schaffhausen: Freiwillige E-Learning-Module für Apotheken zu Anzeichen häuslicher Gewalt, vertraulichen Gesprächen und der Weitervermittlung an Unterstützungsangebote.',
     'blog.article.sciaffusa-formazione-farmacie.imageAlt': 'Apothekenpersonal bei einer Schulung zu häuslicher Gewalt in Schaffhausen',
+    'blog.article.seehas-affollamento-mattutino.title': 'Stärker ausgelasteter Seehas und längere Fahrten auf der Strecke Konstanz-Singen',
+    'blog.article.seehas-affollamento-mattutino.excerpt': 'Aufgrund der Sperrung der Schwarzwaldbahn verkehrt der Regionalexpress zwischen Konstanz und Singen nicht; mehr Fahrgäste nutzen die S-Bahn Seehas, die morgens sehr voll werden kann und die Fahrzeiten verlängert.',
+    'blog.article.seehas-affollamento-mattutino.imageAlt': 'Pendler auf dem Bahnsteig des Schaffhauser Bahnhofs mit einem einfahrenden S-Bahn Seehas-Zug, der auf erhöhte Morgenauslastung hinweist.',
 };
 
 export default blogMetaCantonShDe;

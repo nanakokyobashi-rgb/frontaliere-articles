@@ -7,9 +7,12 @@ import {
   aggregatePageVerdict,
   CDN_BASE,
   fetchDeclaredImage,
+  heroCdnUploads,
   prepareImageView,
   readDeclaredImages,
   registryPathForSection,
+  rewriteGenericImageRefs,
+  rewriteGenericImageFiles,
   rewriteDownloadedImageFiles,
   rewriteDownloadedImageRefs,
 } from '../../scripts/lib/article-render-pipeline.mjs';
@@ -94,17 +97,54 @@ test('le immagini scaricate vengono riscritte anche in ogni pagina aggregata pro
   }
 });
 
-test('un articolo rilasciato col fallback resta fuori dagli aggregati finché l’immagine non è disponibile', () => {
+test('un articolo rilasciato col fallback resta negli aggregati con immagine generica', () => {
   const online = [{ articleId: 'online', online: [{ state: 'own' }] }];
   assert.equal(aggregatePageVerdict({ excludedArticles: online, releasedArticles: [] }).allowed, true);
   assert.equal(
-    aggregatePageVerdict({ excludedArticles: online, releasedArticles: [{ articleId: 'fallback' }] }).allowed,
-    false,
+    aggregatePageVerdict({ excludedArticles: online, releasedArticles: [{ articleId: 'fallback', declaredImage: '/images/blog/fallback.webp' }] }).allowed,
+    true,
   );
   assert.equal(
     aggregatePageVerdict({ excludedArticles: [{ articleId: 'missing', online: [{ state: 'absent' }] }], releasedArticles: [] }).allowed,
     false,
   );
+  const rewritten = rewriteGenericImageRefs(
+    '<img src="/images/blog/fallback.webp"><meta property="og:image" content="https://cdn.frontaliereticino.ch/images/blog/fallback.webp">',
+    [{ articleId: 'fallback', declaredImage: '/images/blog/fallback.webp' }],
+  );
+  assert.equal((rewritten.match(/\/og-image\.png/g) ?? []).length, 2);
+});
+
+test('gli aggregati Pages e R2 conservano la card col fallback e non segnalano un hero mancante', () => {
+  const distDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-fallback-aggregates-'));
+  const releasedArticles = [{ articleId: 'fallback', declaredImage: '/images/blog/fallback.webp' }];
+  const pagesProfile = 'pages/articles/index.html';
+  const r2Profile = 'r2/landing/index.html';
+  try {
+    for (const rel of [pagesProfile, r2Profile]) {
+      fs.mkdirSync(path.dirname(path.join(distDir, rel)), { recursive: true });
+      fs.writeFileSync(path.join(distDir, rel), '<article data-id="fallback"><img src="/images/blog/fallback.webp"></article>');
+    }
+    rewriteGenericImageFiles({ distDir, relPaths: [pagesProfile, r2Profile], releasedArticles });
+    for (const rel of [pagesProfile, r2Profile]) {
+      assert.match(fs.readFileSync(path.join(distDir, rel), 'utf8'), /src="\/og-image\.png"/);
+    }
+
+    const pagesMissing = [];
+    const r2Missing = [];
+    assert.deepEqual(
+      heroCdnUploads({ rootDir: distDir, entries: [{ articleId: 'fallback', img: '/og-image.png' }], missing: pagesMissing }),
+      [],
+    );
+    assert.deepEqual(
+      heroCdnUploads({ rootDir: distDir, htmlPages: [{ html: fs.readFileSync(path.join(distDir, r2Profile), 'utf8') }], missing: r2Missing }),
+      [],
+    );
+    assert.deepEqual(pagesMissing, []);
+    assert.deepEqual(r2Missing, []);
+  } finally {
+    fs.rmSync(distDir, { recursive: true, force: true });
+  }
 });
 
 test('il registro immagini viene dal profilo della sezione e manca fail-closed', async () => {
