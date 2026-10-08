@@ -32,10 +32,11 @@
  * Solo builtin Node: gira nel primo step del workflow, prima di setup-node.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
-import { readFileSync, realpathSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath } from '../lib/corpus-sections.mjs';
+import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
+import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -73,6 +74,84 @@ const SHARED_R2_REFRESH_PREFIXES = Object.freeze(['engine/', 'host/']);
 
 const isSharedR2RefreshPath = (rel) =>
   SHARED_R2_REFRESH_PATHS.has(rel) || SHARED_R2_REFRESH_PREFIXES.some((prefix) => rel.startsWith(prefix));
+
+function changedFileRecords(files) {
+  const changedFiles = [];
+  for (const raw of files) {
+    const line = String(raw ?? '').trimEnd();
+    if (!line.trim()) continue;
+    const fields = line.split('\t');
+    if (fields.length === 1) {
+      changedFiles.push({ rel: fields[0].trim(), status: 'M' });
+      continue;
+    }
+    const status = fields[0].trim().charAt(0) || 'M';
+    // `--name-status` gives R<score> old new and C<score> old new. A rename or
+    // copy is a change to both image paths for publication purposes.
+    const paths = status === 'R' || status === 'C' ? fields.slice(1) : fields.slice(1, 2);
+    for (const rel of paths) changedFiles.push({ rel: rel.trim(), status });
+  }
+  return changedFiles;
+}
+
+function imageKeyFromPublicPath(rel) {
+  const raw = String(rel ?? '').replaceAll('\\', '/').split(/[?#]/, 1)[0];
+  if (!raw.startsWith('public/images/')) return null;
+  const key = raw.slice('public/'.length);
+  return key.includes('..') ? null : key;
+}
+
+function imageKeyFromReference(reference) {
+  const raw = String(reference ?? '').trim();
+  if (!raw) return null;
+  try {
+    const pathname = /^https?:\/\//i.test(raw) ? new URL(raw).pathname : new URL(raw, 'https://cdn.frontaliereticino.ch').pathname;
+    const key = pathname.replace(/^\/+/, '').split(/[?#]/, 1)[0];
+    return key.startsWith('images/') && !key.includes('..') ? key : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Return the article ids whose registry image is one of the changed public
+ * image files. The registry is the source of ownership: an image-only commit
+ * must wake the same section/id publisher as a body commit, while an image
+ * shared by several records wakes all of them.
+ */
+export function imageArticleOwners(files, coreList = activeCorpusCoreEntries()) {
+  const keys = new Set(changedFileRecords(files).map(({ rel }) => imageKeyFromPublicPath(rel)).filter(Boolean));
+  if (keys.size === 0) return new Map();
+  const owners = new Map();
+  for (const section of activeSourceSections(coreList)) {
+    const registryFile = sectionSourceSurfaces(section.section).registryFile;
+    if (!existsSync(registryFile)) continue;
+    const source = readFileSync(registryFile, 'utf8');
+    for (const body of articleRegistryObjectBodies(source)) {
+      const fields = articleRegistryObjectFields(body);
+      const imageKey = imageKeyFromReference(fields.get('image'));
+      const articleId = fields.get('id');
+      if (!articleId || !imageKey || !keys.has(imageKey)) continue;
+      if (!owners.has(section.section)) owners.set(section.section, new Set());
+      owners.get(section.section).add(articleId);
+    }
+  }
+  return owners;
+}
+
+/** JSON plan used by both workflow resolvers for an image-only push. */
+export function imagePublishPlan(files, coreList = activeCorpusCoreEntries(), { served } = {}) {
+  if (served !== undefined && served !== 'shard' && served !== 'r2') throw new Error(`image-plan: tipo "${served}" sconosciuto (shard | r2)`);
+  const sections = new Set(
+    activeSourceSections(coreList)
+      .filter((s) => served === undefined || (served === 'shard') === Boolean(s.shardKey))
+      .map((s) => s.section),
+  );
+  const owners = imageArticleOwners(files, coreList);
+  return activeSourceSections(coreList)
+    .filter((s) => sections.has(s.section) && owners.has(s.section))
+    .map((s) => ({ section: s.section, ids: [...owners.get(s.section)].sort(), bootstrap: false }));
+}
 
 /**
  * L'ERE (grep -E) dei corpi delle sezioni attive. `served` restringe a chi le
@@ -136,22 +215,7 @@ export function r2PublishPlan(files, coreList = activeCorpusCoreEntries()) {
     if (!plan.has(section)) plan.set(section, { ids: new Set(), bootstrap: false });
     return plan.get(section);
   };
-  const changedFiles = [];
-  for (const raw of files) {
-    const line = String(raw ?? '').trimEnd();
-    if (!line.trim()) continue;
-    const fields = line.split('\t');
-    if (fields.length === 1) {
-      changedFiles.push({ rel: fields[0].trim(), status: 'M' });
-      continue;
-    }
-    const status = fields[0].trim().charAt(0) || 'M';
-    // `--name-status` gives R<score> old new and C<score> old new. A rename
-    // is a deletion plus an addition for publication purposes: seeing either
-    // side is enough to force a complete refresh of the surviving registry.
-    const paths = status === 'R' || status === 'C' ? fields.slice(1) : fields.slice(1, 2);
-    for (const rel of paths) changedFiles.push({ rel: rel.trim(), status });
-  }
+  const changedFiles = changedFileRecords(files);
   if (changedFiles.some(({ rel }) => isSharedR2RefreshPath(rel))) {
     for (const section of sections) touch(section.section).bootstrap = true;
   }
@@ -178,6 +242,12 @@ export function r2PublishPlan(files, coreList = activeCorpusCoreEntries()) {
       if (!isHubData) state.bootstrap = true;
     }
   }
+  for (const [section, ids] of imageArticleOwners(files, coreList)) {
+    const target = sections.find((s) => s.section === section);
+    if (!target) continue;
+    const state = touch(section);
+    for (const id of ids) state.ids.add(id);
+  }
   return sections
     .filter((s) => plan.has(s.section))
     .map((s) => {
@@ -203,9 +273,10 @@ if (isMain()) {
   try {
     if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
     else if (cmd === 'r2-plan') console.log(JSON.stringify(r2PublishPlan(readFileSync(0, 'utf8').split('\n'))));
+    else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files');
   } catch (error) {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);
     process.exit(1);

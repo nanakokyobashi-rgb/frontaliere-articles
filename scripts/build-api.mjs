@@ -121,7 +121,7 @@ import {
   resolveKillSwitch,
   validateEdgeSectionRegistry,
 } from './lib/section-registry.mjs';
-import { cantonHubCoverage } from './lib/canton-hub-data.mjs';
+import { cantonHubCoverage, cantonHubTopics, readCantonHubDocument } from './lib/canton-hub-data.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Il corpus nel layout dell'engine, per i feed delle sezioni di famiglia.
 import { createEngineCorpusView, engineViewRssLayout } from './lib/engine-corpus-view.mjs';
@@ -171,6 +171,8 @@ const BORDER_RANKING = 'border-wait-ranking.json';
 const DAILY_BRIEF = 'daily-brief.json';
 /** Localized editorial companion for the public plate-auction catalogue. */
 const PLATE_AUCTION_EDITORIAL = 'plate-auction-editorial.json';
+/** Versioned runtime payload for hydrated canton thematic hubs (D23). */
+const CANTON_HUBS_API = 'canton-hubs.json';
 
 // Gli INPUT dei tre artefatti condizionali, in una sorgente sola perche' due
 // posti li leggono e devono leggere lo stesso: il ramo che decide se emettere,
@@ -253,6 +255,7 @@ const releaseEmitted = edgeRegistryPublishable(declaredSections, killSwitch);
 const releaseLiveSections = new Set(
   releaseEmitted ? Object.keys(effectiveSections).filter((id) => effectiveSections[id].status === 'live') : [],
 );
+
 // Una sezione di famiglia ha una superficie pubblica solo quando il registro
 // edge che questo build puo' emettere la dichiara effettivamente live. Questa
 // e' la decisione unica per TUTTI gli artefatti cantonali: il catalogo
@@ -315,6 +318,42 @@ const commit = (() => {
 if (!commit) {
   throw new Error('git commit non verificabile — refusing to publish an unmarked release');
 }
+
+// The edge registry is the activation authority (D22). The Pages payload is
+// deliberately projected from the same release set and carries the exact git
+// commit that the registry carries. The site accepts it only when both commits
+// match, so a Pages deployment can never expose a partial or future hub set to
+// a still-older edge release (D20).
+const cantonHubApiSections = {};
+let cantonHubApiCount = 0;
+for (const section of releaseLiveSections) {
+  const topics = {};
+  for (const topic of cantonHubTopics(section)) {
+    const document = readCantonHubDocument(ROOT, section, topic);
+    if (!document) {
+      throw new Error(`${CANTON_HUBS_API}: sezione live ${section} senza il documento hub ${topic} — refusing`);
+    }
+    // `blocks` is producer bookkeeping and is not needed by the React view;
+    // locale payloads are the public data surface consumed over HTTP.
+    topics[topic] = {
+      schemaVersion: document.schemaVersion,
+      id: document.id,
+      section: document.section,
+      canton: document.canton,
+      topic: document.topic,
+      updatedAt: document.updatedAt,
+      contentHash: document.contentHash,
+      locales: document.locales,
+    };
+    cantonHubApiCount += 1;
+  }
+  cantonHubApiSections[section] = topics;
+}
+write(CANTON_HUBS_API, {
+  schema: 1,
+  commit,
+  sections: cantonHubApiSections,
+});
 
 // Ogni documento che il detector legge deve portare la stessa release del
 // manifest. Senza il marker per-riga, counts e insieme di ID possono restare
@@ -1389,6 +1428,7 @@ write('manifest.json', {
     borderRankingEntries,
     dailyBriefBlocks,
     plateAuctionEditorialLocales,
+    cantonHubs: cantonHubApiCount,
     // Le sezioni del catalogo e le sitemap elencate dall'indice (0 = indice
     // non emesso). Quante sezioni sono LIVE non e' un contatore del manifest:
     // lo stato servito lo dice solo il registro su R2.
@@ -1596,6 +1636,13 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       PLATE_AUCTION_EDITORIAL,
       () => Object.keys(jsonOut(PLATE_AUCTION_EDITORIAL).evergreen ?? {}).length,
     ),
+    cantonHubs: derivedAlways(
+      CANTON_HUBS_API,
+      () => Object.values(jsonOut(CANTON_HUBS_API).sections ?? {}).reduce(
+        (count, topics) => count + Object.keys(topics ?? {}).length,
+        0,
+      ),
+    ),
     sections: derivedAlways(SECTIONS_CATALOG_FILE, () => jsonOut(SECTIONS_CATALOG_FILE).sections.length),
     // L'indice e' opzionale per costruzione, e la sua assenza e' legittima
     // solo se il registro edge emesso non ha sezioni live (o non e' stato
@@ -1787,6 +1834,23 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
       mismatches.push(`${SECTION_SITEMAP_INDEX_FILE}: elenca [${listed.join(', ')}], le sezioni live vogliono [${wanted.join(', ')}]`);
     }
     for (const file of wanted) if (!exists(file)) mismatches.push(`${file}: sezione live senza sitemap in dist/api`);
+
+    const hubs = jsonOut(CANTON_HUBS_API);
+    if (hubs.commit !== declaredCommit) {
+      mismatches.push(`${CANTON_HUBS_API}: commit ${hubs.commit}, manifest ${declaredCommit}`);
+    }
+    const hubSectionIds = Object.keys(hubs.sections ?? {}).sort();
+    if (hubSectionIds.join(',') !== live.slice().sort().join(',')) {
+      mismatches.push(`${CANTON_HUBS_API}: sezioni [${hubSectionIds.join(', ')}], registro live [${live.join(', ')}]`);
+    }
+    for (const id of live) {
+      const topics = hubs.sections?.[id];
+      const expectedTopics = cantonHubTopics(id).slice().sort();
+      const actualTopics = Object.keys(topics ?? {}).sort();
+      if (actualTopics.join(',') !== expectedTopics.join(',')) {
+        mismatches.push(`${CANTON_HUBS_API}.${id}: temi [${actualTopics.join(', ')}], attesi [${expectedTopics.join(', ')}]`);
+      }
+    }
   } else if (exists(SECTION_SITEMAP_INDEX_FILE)) {
     mismatches.push(`${SECTION_SITEMAP_INDEX_FILE}: emesso senza ${EDGE_SECTION_REGISTRY_FILE} — la release edge e' intera o assente`);
   }

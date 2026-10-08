@@ -45,6 +45,46 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-sciaffusa-formazione-farmacie': {
+    title: 'Sciaffusa: e-learning per farmacie sulla violenza domestica',
+    description: 'Sciaffusa: e-learning volontario per il personale delle farmacie; segnali di violenza domestica, colloquio riservato e rinvio ai servizi di sostegno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, e-learning, farmacie, sulla',
+    ogTitle: 'Farmacie di Sciaffusa: formazione sulla violenza domestica',
+    ogDescription: 'Sciaffusa: offerta digitale e volontaria per farmaciste, farmacisti e personale specializzato. Si impara a riconoscere segnali, parlare in modo riservato e rinviare a servizi di sostegno e consulenza; i costi sono assunti dal Cantone.',
+    canonicalPath: '/articoli-sciaffusa/sciaffusa-formazione-farmacie/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciaffusa: e-learning per farmacie sulla violenza domestica",
+      "description": "Sciaffusa: e-learning volontario per il personale delle farmacie; segnali di violenza domestica, colloquio riservato e rinvio ai servizi di sostegno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sciaffusa-formazione-farmacie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Personale di farmacia in formazione sulla violenza domestica a Sciaffusa"
+      },
+      "datePublished": "2026-10-08T08:29:37+00:00",
+      "dateModified": "2026-10-08T08:29:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/sciaffusa-formazione-farmacie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

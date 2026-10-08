@@ -22,10 +22,31 @@ test('publish-api uploads changed hero and thumbnail bytes from public-only cove
   assert.match(step, /scripts\/cf-purge-cache\.mjs/);
   assert.match(step, /push origin HEAD:main/);
   assert.match(step, /GITHUB_PAT_NANAKO is required to persist the cover sync queue/);
-  assert.match(step, /http\.https:\/\/github\.com\/.extraheader/);
   assert.match(step, /rebuild_manifest_from_queue/);
   assert.match(step, /rebase conflict/);
   assert.match(step, /github\.event_name == 'schedule'/);
   assert.match(step, /github\.event_name == 'workflow_dispatch'/);
   assert.doesNotMatch(step, /continue-on-error/);
+});
+
+// Fra il 7 e l'8 ottobre 2026 questo passo e' fallito 16 volte: il push della
+// coda partiva come bot di Actions e la regola di `main` lo respingeva. Il test
+// qui sopra era verde, perche' verificava che ci fosse la riga `--unset-all
+// http.https://github.com/.extraheader`, che con actions/checkout v6+ non
+// trova piu' niente. Quello che conta e' che il checkout del job non persista
+// il proprio token: la regola generale e' in workflow-push-identity.test.mjs.
+test('publish-api pushes the cover queue as the owner PAT, and names a rule rejection', () => {
+  const beforeStep = workflow.slice(0, start);
+  const checkout = beforeStep.lastIndexOf('- uses: actions/checkout@');
+  assert.notEqual(checkout, -1, 'the publish job checks out the repository before the cover step');
+  const nextStep = beforeStep.indexOf('\n      - ', checkout + 1);
+  const checkoutBlock = beforeStep.slice(checkout, nextStep === -1 ? undefined : nextStep);
+  assert.match(checkoutBlock, /^\s*persist-credentials:\s*false\s*$/m);
+  // The dead mitigation must not come back as the only one.
+  assert.doesNotMatch(step, /--unset-all http\.https:\/\/github\.com\/\.extraheader/);
+  assert.match(step, /git -c "http\.extraheader=AUTHORIZATION: basic \$auth_header" push origin HEAD:main/);
+  // A rule rejection is reported as such and stops the retries: the old loop
+  // printed «main advanced … rebasing» for it, three times, on every failure.
+  assert.match(step, /GH013\|repository rule violations/);
+  assert.match(step, /cover queue push rejected by a repository rule on main/);
 });

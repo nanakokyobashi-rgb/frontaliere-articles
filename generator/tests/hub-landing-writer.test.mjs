@@ -46,6 +46,12 @@ test('the writer goes through the create-or-refresh entry point', () => {
   );
 });
 
+test('the writer applies the fast-publish generic-image fallback map to cards', () => {
+  assert.match(writer, /argOf\('--released-articles-file', ''\)/);
+  assert.match(writer, /imagePostcondition\?\.releasedArticles/);
+  assert.match(writer, /rewriteGenericImageRefs\(rewriteBlogImageRefs\(cards\), RELEASED_ARTICLES\)/);
+});
+
 test('the writer does not fall back to refresh-only', () => {
   // A regression to `replaceArticleHubCards` would restore the exact silent
   // no-op: null on a marker-less page, "nothing to refresh", exit 0.
