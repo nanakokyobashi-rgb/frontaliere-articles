@@ -103350,16 +103350,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-aperitivo-solidale-giubiasco': {
     title: 'Brindisi solidale al Mercato Coperto di Giubiasco',
-    description: '## In breve - Il Kiwanis Club Bellinzona e Valli festeggia 40 anni - Aperò In Sem si tiene giovedì 8 ottobre - Il ricavato va interamente ad Ares e L\'Ora',
+    description: 'Il Kiwanis Club Bellinzona e Valli festeggia 40 anni',
     keywords: 'frontalieri, ticino, svizzera, italia, brindisi, solidale, mercato, coperto',
     ogTitle: 'Aperò In Sem: serata solidale a Giubiasco',
-    ogDescription: '## In breve - Il Kiwanis Club Bellinzona e Valli festeggia 40 anni - Aperò In Sem si tiene giovedì 8 ottobre - Il ricavato va interamente ad Ares e L\'Ora',
+    ogDescription: 'Il Kiwanis Club Bellinzona e Valli festeggia 40 anni',
     canonicalPath: '/articoli-frontaliere/aperitivo-solidale-giubiasco/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Brindisi solidale al Mercato Coperto di Giubiasco",
-      "description": "## In breve - Il Kiwanis Club Bellinzona e Valli festeggia 40 anni - Aperò In Sem si tiene giovedì 8 ottobre - Il ricavato va interamente ad Ares e L'Ora",
+      "description": "Il Kiwanis Club Bellinzona e Valli festeggia 40 anni",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
