@@ -194,6 +194,18 @@ jobs:
           # scansione piena — vedi lo step "Determine which article bodies this
           # push touched".
           fetch-depth: 0
+          # Il passo «Publish governed blog cover bytes» pusha la coda delle
+          # copertine su `main` con il PAT del proprietario, perche' la regola
+          # di `main` respinge il bot di Actions. Dalla v6 `actions/checkout`
+          # non scrive piu' il proprio token in `.git/config`: lo mette in un
+          # file sotto $RUNNER_TEMP incluso con `includeIf.gitdir`, dove un
+          # `git config --unset-all` non lo trova e da dove copre l'header
+          # generico passato con `-c http.extraheader`. Il push partiva quindi
+          # come bot e veniva respinto (GH013): 16 run fallite fra il 7 e l'8
+          # ottobre 2026, ognuna senza deploy dell'API e senza copertine sulla
+          # CDN. In questo job nessun altro comando git va in rete, quindi il
+          # token del checkout non serve a nessuno.
+          persist-credentials: false
 
       - uses: actions/setup-node@v7
         with:
@@ -757,17 +769,23 @@ jobs:
               echo '::error::GITHUB_PAT_NANAKO is required to persist the cover sync queue'
               return 1
             fi
-            local attempt auth_header
+            local attempt auth_header push_log
             local_queue_backup="$RUNNER_TEMP/publish-api-blog-cover-queue-before-rebase.json"
+            push_log="$RUNNER_TEMP/publish-api-blog-cover-queue-push.log"
             auth_header="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 | tr -d '\n')"
-            # actions/checkout persists GITHUB_TOKEN in the local git config;
-            # the corpus main ruleset rejects that bot identity for queue
-            # commits, so remove it and use the owner PAT explicitly.
-            git config --local --unset-all http.https://github.com/.extraheader || true
-            git config --local --unset-all http.extraheader || true
+            # The corpus main ruleset rejects the Actions bot for queue commits,
+            # so the push goes out as the owner PAT. The checkout of this job
+            # does not persist its own token (`persist-credentials: false`):
+            # the header below is the only identity git can send.
             for attempt in 1 2 3; do
-              if git -c "http.extraheader=AUTHORIZATION: basic $auth_header" push origin HEAD:main; then
+              if git -c "http.extraheader=AUTHORIZATION: basic $auth_header" push origin HEAD:main 2>&1 | tee "$push_log"; then
                 return 0
+              fi
+              # A rule rejection is not a race: rebasing and pushing again as
+              # the same identity gets the same answer. Name it and stop.
+              if grep -q -E 'GH013|repository rule violations' "$push_log"; then
+                echo '::error::cover queue push rejected by a repository rule on main: it did not go out as the owner PAT. Check that no checkout in this job persists its token.'
+                return 1
               fi
               echo "::warning::main advanced while updating the cover queue; rebasing attempt $attempt/3"
               git -c "http.extraheader=AUTHORIZATION: basic $auth_header" fetch --no-tags origin main
