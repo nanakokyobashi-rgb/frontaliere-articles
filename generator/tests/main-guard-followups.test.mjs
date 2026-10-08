@@ -20,6 +20,7 @@ const ENTRYPOINTS = [
   'scripts/seo/bing-seo-loop.mjs',
   'scripts/lib/merge-content-registry-conflict.mjs',
   'scripts/publish-section-edge.mjs',
+  'scripts/publish-section-pages.mjs',
   'scripts/reconcile-article-shards.mjs',
   'scripts/reconcile-section-pages.mjs',
   'scripts/find-dirty-content-ids.mjs',
