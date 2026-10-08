@@ -43198,6 +43198,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'scambio-portieri-lugano-ginevra',
+ category: 'novita',
+ date: '2026-10-08T13:38:03.354Z',
+ image: '/images/blog/article-scambio-portieri-lugano-ginevra.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI', 'GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

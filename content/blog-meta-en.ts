@@ -12813,6 +12813,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto companies compared on work-life balance',
     'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## TL;DR - Meeting in Chiasso on October 1 last year - Around thirty businesses involved - Cantonal survey open until November 30 ## Facts',
     'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Business meeting in Chiasso on work-life balance with participants around a table',
+    'blog.article.scambio-portieri-lugano-ginevra.title': 'Goalkeeper swap: mayer to Lugano, van pottelberghe to Geneva',
+    'blog.article.scambio-portieri-lugano-ginevra.excerpt': '## TL;DR - Mayer arrives in Lugano, Van Pottelberghe goes to Geneva - Mutual loan until the end of the 2026/27 season - Mayer has 397 games to his name',
+    'blog.article.scambio-portieri-lugano-ginevra.imageAlt': 'Hockey goaltender in action at Lugano\'s Cornèr Arena with the Swiss Alps in the background',
 };
 
 export default blogMetaEn;
