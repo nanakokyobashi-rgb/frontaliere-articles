@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni',
+ category: 'novita',
+ date: '2026-10-08T11:44:40.237Z',
+ image: '/images/blog/tassa-salute-frontalieri-ticino-settembre.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

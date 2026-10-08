@@ -9,6 +9,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.scambio-dati-salariali-2027.title': 'Frontaliers, dès 2027 l’échange de données sur les salaires',
     'blog.article.scambio-dati-salariali-2027.excerpt': '## En bref - À partir du 1er janvier 2027, la nouvelle LSADS entre en vigueur - Décision du Conseil fédéral : 19 août 2026 - Accord Suisse-Italie applicable',
     'blog.article.scambio-dati-salariali-2027.imageAlt': 'Vue de Lugano avec des bâtiments modernes et des bureaux.',
+    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.title': 'Décret sur la taxe santé des frontaliers publié : feu vert des régions',
+    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.excerpt': '## En bref - Décret publié au Journal officiel à l\'approche des fêtes - Contribution : de 3 % à 6 % du revenu net - Période : entre le 31 décembre 2018',
+    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Image éditoriale relative à: Decreto tassa salute frontalieri pubblicato: via libera regioni',
 };
 
 export default blogMetaCantonTiFr;

@@ -75,6 +75,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni': {
+    title: 'Decreto tassa salute frontalieri pubblicato: via libera regioni',
+    description: '## In breve - Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività - Contributo: dal 3% al 6% del reddito netto - Periodo: tra il 31 dicembre 2018',
+    keywords: 'frontalieri, ticino, svizzera, italia, decreto, tassa, salute, pubblicato',
+    ogTitle: 'Decreto tassa salute frontalieri pubblicato: via libera',
+    ogDescription: '## In breve - Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività - Contributo: dal 3% al 6% del reddito netto - Periodo: tra il 31 dicembre 2018',
+    canonicalPath: '/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
+      "description": "## In breve - Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività - Contributo: dal 3% al 6% del reddito netto - Periodo: tra il 31 dicembre 2018",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tassa-salute-frontalieri-ticino-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Decreto tassa salute frontalieri pubblicato: via libera regioni"
+      },
+      "datePublished": "2026-10-08T11:44:40+00:00",
+      "dateModified": "2026-10-08T11:44:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
