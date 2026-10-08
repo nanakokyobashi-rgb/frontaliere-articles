@@ -218,6 +218,7 @@ import {
   dropSourceContradictedIssues,
 } from './lib/fact-check-consensus.mjs';
 import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms, detectTruncation, mentionsWrongConventionDate, CONVENTION_DATE_IT } from './lib/article-factuality-gates.mjs';
+import { checkCorpusFabricatedInstitutionNames } from './lib/corpus-fabricated-institution-names.mjs';
 import { loadDefectMemory, learnedDenylist, learnedSuspects } from './lib/article-defect-memory.mjs';
 import {
   stripCompetitorPromotion,
@@ -5544,7 +5545,24 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
 export function assertArticlePassesFactualityGates(data, options = {}) {
   assertItalianArticlePassesFactualityGates(data, options);
   assertTranslationsPassFactualityGates(data);
+  assertNoCorpusFabricatedInstitutionNames(data);
   assertLocalizedToponyms(data);
+}
+
+function assertNoCorpusFabricatedInstitutionNames(data) {
+  const findings = [];
+  for (const [locale, content] of Object.entries(data?.content || {})) {
+    const text = Object.values(content || {})
+      .filter((value) => typeof value === 'string')
+      .join(' ');
+    for (const issue of checkCorpusFabricatedInstitutionNames(text)) {
+      findings.push('[' + locale + '] ' + issue.evidence);
+    }
+  }
+  if (findings.length === 0) return;
+  const error = new Error('Articolo rigettato — istituzione inventata: ' + findings.join('; '));
+  error.qualityReject = true;
+  throw error;
 }
 
 /**
