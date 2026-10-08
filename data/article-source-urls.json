@@ -1,5 +1,4 @@
 {
-  "https://comozero.it/attualita/lavoro-sommerso-nel-comasco-18-imprese-sospese-sanzioni-per-757mila-euro": "sanzioni-sicurezza-lavoro-comasco",
   "https://www.varesenoi.it/2026/08/10/leggi-notizia/argomenti/territorio/articolo/alla-casa-di-comunita-di-laveno-si-lavora-con-temperature-fino-a-37-gradi-il-sindacato-segnala.html": "allacasadicomunitalavenosegnala",
   "https://www.varesenews.it/2026/08/malpensa-fabbriche-e-intelligenza-artificiale-cosi-la-logistica-ha-cambiato-leconomia-varesina/2654785": "evoluzione-logistica-varese-malpensa",
   "https://www.tio.ch/svizzera/economia/1943285/costi-franchi-aumento-persona-prestazioni": "cassa-malati-aumento-costi-lamal-2026",
@@ -2192,6 +2191,11 @@
   "https://comozero.it/attualita/riparte-il-treno-del-foliage-tra-italia-e-svizzera-boschi-borghi-e-colori-da-godere-lentamente-nellautunno-2026": {
     "articleId": "treno-foliage-locarno-2026",
     "ts": "2026-10-08T16:34:16.931Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-bocciato-il-piano-scuole-del-sindaco-rapinese-arriva-lo-stop-del-consiglio-provinciale": {
+    "articleId": "como-bocciato-piano-scuole",
+    "ts": "2026-10-08T18:56:34.644Z",
     "keyForm": 2
   }
 }

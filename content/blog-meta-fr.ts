@@ -12827,6 +12827,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.treno-foliage-locarno-2026.title': 'Treno del Foliage 2026 entre Locarno et Domodossola',
     'blog.article.treno-foliage-locarno-2026.excerpt': 'Du 10 octobre au 15 novembre 2026 Itinéraire panoramique entre Locarno et Domodossola 52 km entre le canton du Tessin et le Piémont Ligne ferroviaire historique entre l’Italie et la Suisse',
     'blog.article.treno-foliage-locarno-2026.imageAlt': 'Le Train du Foliage traverse les paysages d’automne entre Locarno et Domodossola',
+    'blog.article.como-bocciato-piano-scuole.title': 'Côme, rejeté le plan écoles du maire Rapinese',
+    'blog.article.como-bocciato-piano-scuole.excerpt': 'Le Conseil provincial rejette la proposition de la municipalité de Como.',
+    'blog.article.como-bocciato-piano-scuole.imageAlt': 'Hôtel de ville de Como, siège de l\'administration municipale',
 };
 
 export default blogMetaFr;
