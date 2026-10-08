@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-salari-svizzera-talenti-stranieri.webp",
+      "sha256": "6a3da64fc7eeae332fc286b7f579bc033e731bbe1a10443e51e27b448dc3f1ac"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-salari-svizzera-talenti-stranieri-480w.webp",
+      "sha256": "8ee4c7b441866c2155f30fc9bc91fdc345a2c6d19997343b8bf0784d544a48b0"
+    }
+  ]
 }
