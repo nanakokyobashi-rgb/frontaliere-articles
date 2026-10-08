@@ -2100,6 +2100,16 @@
       }
     },
     {
+      "path": "scripts/lib/section-page-manifest.mjs",
+      "mode": "corpus-only",
+      "reason": "Inventario validato delle pagine cantonali realmente pubblicate sull'edge, usato dal publisher R2 e dal reconcile per conservare e ritirare chiavi fra publish parziali. Non esiste sul sito: il sito consuma le pagine via HTTP e la pubblicazione/riconciliazione delle sezioni vive solo nel corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "f87d5739abc1ab2a",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "scripts/lib/engine-corpus-view.mjs",
       "mode": "corpus-only",
       "reason": "Il corpus visto nel layout che l engine legge (services/locales, services/seo, packages/articles/content), costruito al volo con symlink in una cartella temporanea: alias di cartella validi per ogni sezione piu un alias per chunk SEO cantonale, che create-article scrive in content/cantons/<id>/seo.ts e l engine cerca come seo-blog-<id>.ts. Lo usano build-api per i feed RSS delle sezioni di famiglia e i pavimenti per contare i chunk dove stanno. Corpus-only: sul sito il layout dell engine e quello nativo, non serve nessuna vista.",
