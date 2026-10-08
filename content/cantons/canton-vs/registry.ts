@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'a9-chiusure-notturne-sion-sierre',
+ category: 'pratico',
+ date: '2026-10-08T15:24:54.934Z',
+ image: '/images/blog/article-a9-chiusure-notturne-sion-sierre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

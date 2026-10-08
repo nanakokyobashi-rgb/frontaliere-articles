@@ -9,6 +9,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.allerta-botulismo-terrina-vallese.title': 'Zwei Fälle von Botulismus im Wallis: Terrine zurückgezogen',
     'blog.article.allerta-botulismo-terrina-vallese.excerpt': '',
     'blog.article.allerta-botulismo-terrina-vallese.imageAlt': 'Marktstand in Martigny im Wallis mit ausgestellten verpackten Terrinen.',
+    'blog.article.a9-chiusure-notturne-sion-sierre.title': 'A9 Sion-Sierre: drei Wochen nächtliche Sperrungen',
+    'blog.article.a9-chiusure-notturne-sion-sierre.excerpt': 'Drei Wochen Sperrungen: vom 12.',
+    'blog.article.a9-chiusure-notturne-sion-sierre.imageAlt': 'Nächtliche Sperrung der A9 zwischen Sion und Sierre wegen Bauarbeiten',
 };
 
 export default blogMetaCantonVsDe;
