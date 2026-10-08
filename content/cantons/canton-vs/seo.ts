@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - 5’755 disoccupati iscritti agli ORP a fine settembre - Tasso cantonale stabile al 3,1% - Fine stagione estiva: +76 disoccupati in alberghi",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-vallese-fine-estate.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Paesaggio alpino del Vallese con un ufficio regionale di collocamento"
