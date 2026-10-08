@@ -99633,6 +99633,117 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-violazione-dati-publica-indagine': {
+    title: 'Attacco informatico al fornitore software di Publica',
+    description: '## In breve - Attacco informatico a fine settembre - Colpito un fornitore esterno di Publica - Il Ministero pubblico ha avviato un\'indagine - Publica ha',
+    keywords: 'frontalieri, ticino, svizzera, italia, attacco, informatico, fornitore, software',
+    ogTitle: 'Attacco informatico al fornitore software di Publica',
+    ogDescription: '## In breve - Attacco informatico a fine settembre - Colpito un fornitore esterno di Publica - Il Ministero pubblico ha avviato un\'indagine - Publica ha',
+    canonicalPath: '/articoli-svizzera/violazione-dati-publica-indagine/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Attacco informatico al fornitore software di Publica",
+      "description": "## In breve - Attacco informatico a fine settembre - Colpito un fornitore esterno di Publica - Il Ministero pubblico ha avviato un'indagine - Publica ha",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-violazione-dati-publica-indagine.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Server in una sala tecnica svizzera, immagine simbolica dell'attacco a un fornitore di Publica"
+      },
+      "datePublished": "2026-10-08T08:15:35+00:00",
+      "dateModified": "2026-10-08T08:15:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/violazione-dati-publica-indagine/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-crescita-lavoro-intelligenza-artificiale': {
+    title: 'Mercato lavoro IA: +32% di annunci in un anno | Frontaliere Ticino',
+    description: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, annunci, anno',
+    ogTitle: 'Mercato lavoro IA: +32% di annunci in un anno',
+    ogDescription: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore',
+    canonicalPath: '/articoli-svizzera/crescita-lavoro-intelligenza-artificiale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato lavoro IA: +32% di annunci in un anno",
+      "description": "## In breve - Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-crescita-lavoro-intelligenza-artificiale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Postazione di lavoro moderna con analisi dati su schermo a Lugano"
+      },
+      "datePublished": "2026-10-08T09:17:54+00:00",
+      "dateModified": "2026-10-08T09:17:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/crescita-lavoro-intelligenza-artificiale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-lavoro-ia-svizzera': {
+    title: 'Mercato lavoro IA Svizzera: +32% in un anno | Frontaliere Ticino',
+    description: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2\'181 annunci, il 45%',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, anno, breve',
+    ogTitle: 'Mercato lavoro IA Svizzera: crescita del 32% in un anno',
+    ogDescription: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2\'181 annunci, il 45%',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-ia-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato lavoro IA Svizzera: +32% in un anno",
+      "description": "## In breve - Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2'181 annunci, il 45%",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-svizzera-giugno-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionisti che collaborano in un ambiente ufficio moderno in Svizzera, con schermi che mostrano dati e codice IA."
+      },
+      "datePublished": "2026-10-08T09:36:45+00:00",
+      "dateModified": "2026-10-08T09:36:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-ia-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_CH_SEO_METADATA;

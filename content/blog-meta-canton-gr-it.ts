@@ -9,6 +9,12 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.benzina-grigioni-deviazione.title': 'Prezzi benzina in Grigioni: quando conviene deviare',
     'blog.article.benzina-grigioni-deviazione.excerpt': 'Prezzi della benzina a livelli record anche in Grigioni: il calcolatore valuta prezzo e distanza della deviazione verso una stazione più economica.',
     'blog.article.benzina-grigioni-deviazione.imageAlt': 'Auto davanti a un distributore lungo una strada dei Grigioni',
+    'blog.article.lavoro-grigioni-settembre-2026.title': 'Disoccupazione nei Grigioni: 1,1% a settembre 2026',
+    'blog.article.lavoro-grigioni-settembre-2026.excerpt': 'A settembre 2026 i Grigioni hanno registrato 1.237 disoccupati, pari all\'1,1%. Le persone in cerca di lavoro totali sono 2.267.',
+    'blog.article.lavoro-grigioni-settembre-2026.imageAlt': 'Paesaggio alpino dei Grigioni vicino a un centro regionale per l\'impiego',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Grigioni: fondi per valanghe a Rossa e aula a Roveredo',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '## In breve - Il governo retico ha approvato 265\'650 franchi per Pighé. - Il cuneo sorgerà a ovest della zona di insediamento. - I lavori antivalanga',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Strutture antivalanga a Pighé, Rossa, e un\'aula nel bosco a Roveredo, Canton Grigioni.',
 };
 
 export default blogMetaCantonGrIt;

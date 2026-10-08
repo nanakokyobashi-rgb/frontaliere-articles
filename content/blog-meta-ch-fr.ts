@@ -7904,6 +7904,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.incentivi-energetici-lucerna-requisiti.title': 'Incitations énergétiques du canton de Lucerne : conditions et demande',
     'blog.article.incentivi-energetici-lucerna-requisiti.excerpt': '## En bref - Dans le canton de Lucerne, les incitations concernent les bâtiments et les installations. - Les conditions à vérifier sont techniques. - La demande doit être déposée avant',
     'blog.article.incentivi-energetici-lucerna-requisiti.imageAlt': 'Bâtiment résidentiel en cours de rénovation énergétique en Suisse',
+    'blog.article.violazione-dati-publica-indagine.title': 'Attaque informatique contre le fournisseur de logiciels de Publica',
+    'blog.article.violazione-dati-publica-indagine.excerpt': '## En bref - Attaque informatique fin septembre - Un fournisseur externe de Publica touché - Le Ministère public a ouvert une enquête - Publica a',
+    'blog.article.violazione-dati-publica-indagine.imageAlt': 'Serveurs dans une salle technique suisse, symbolisant la cyberattaque contre un fournisseur de logiciels de Publica',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.title': 'Marché de l’emploi en IA : +32% d’annonces en un an',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.excerpt': '## En bref - Près de 5\'000 offres d’emploi en IA entre juillet 2025 et juin 2026 - La demande en IA augmente de 32% en un an - Le secteur public enregistre la plus forte hausse',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.imageAlt': 'Poste de travail moderne avec analyse de données sur écran à Lugano',
+    'blog.article.mercato-lavoro-ia-svizzera.title': 'Marché de l’emploi dans l’IA en Suisse : +32 % en un an',
+    'blog.article.mercato-lavoro-ia-svizzera.excerpt': '## En bref - Près de 5\'000 offres d’emploi en IA entre juillet 2025 et juin 2026 - La demande augmente de 32 % en douze mois - Zurich concentre 2\'181 offres, soit 45 %',
+    'blog.article.mercato-lavoro-ia-svizzera.imageAlt': 'Professionnels collaborant dans un bureau moderne en Suisse, avec des écrans affichant des données et du code liés à l\'IA.',
 };
 
 export default blogMetaChFr;

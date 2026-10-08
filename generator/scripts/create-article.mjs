@@ -7790,6 +7790,8 @@ let lastSourcePageTitle = '';
 let pendingCantonSourceContent = '';
 let pendingCantonSourcePublishedAt = '';
 let pendingCantonSourceTitle = '';
+let pendingCantonSourceLead = '';
+let pendingCantonSourcePaywall = '';
 
 // Le fonti delle sezioni storiche continuano a usare il comportamento
 // precedente. Per le sezioni cantonali la pagina dell'articolo deve dichiarare
@@ -7811,9 +7813,13 @@ async function fetchPageContent(url) {
   const suppliedCantonSourceContent = pendingCantonSourceContent;
   const suppliedCantonSourcePublishedAt = pendingCantonSourcePublishedAt;
   const suppliedCantonSourceTitle = pendingCantonSourceTitle;
+  const suppliedCantonSourceLead = pendingCantonSourceLead;
+  const suppliedCantonSourcePaywall = pendingCantonSourcePaywall;
   pendingCantonSourceContent = '';
   pendingCantonSourcePublishedAt = '';
   pendingCantonSourceTitle = '';
+  pendingCantonSourceLead = '';
+  pendingCantonSourcePaywall = '';
 
   // Handle BFS stats-update articles — no web page to scrape, build the
   // prompt from Firestore numbers written by refresh-bfs-stats.
@@ -7862,6 +7868,21 @@ async function fetchPageContent(url) {
       ? 'Usa solo fatti verificati e stabili sul dominio frontalieri Ticino-Italia.'
       : 'Usa solo fatti verificati e stabili sul dominio svizzero a scala nazionale/cantonale (fiscalità, previdenza, lavoro, alloggio, permessi, istituzioni federali). NON restringere al Ticino né al caso frontaliere.';
     return `[ARTICOLO EVERGREEN SEO]\nKeyword target: ${keyword}\nAngolo editoriale: ${angle}\n\nGenera un articolo approfondito e pratico ottimizzato per questa keyword long-tail. ${domainLine} Se servono esempi, presentali come scenari ipotetici, senza nomi, aziende, città o importi specifici inventati.\n\n${evergreenFactsBriefFor(SECTION_NAME)}\n\n⚠️ I FATTI VERIFICATI qui sopra DEVONO corrispondere ESATTAMENTE (lo stesso ground truth è usato dal fact-checker, che blocca l'articolo se diverghi). Per dettagli NON coperti, attieniti a nozioni stabili e generali del dominio; se un dato specifico non è certo, ometti o usa formulazioni qualitative invece di inventare cifre/date precise.`;
+  }
+  // Un quirk `paywall: title+lead` è un contratto di contenuto pubblico: il
+  // titolo e l'attacco già letto dalla lista bastano come segnale editoriale,
+  // ma il crawler non deve seguire il link premium né tentare di aggirarlo.
+  if (suppliedCantonSourcePaywall === 'title+lead') {
+    lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
+    lastSourcePageTitle = suppliedCantonSourceTitle;
+    const lead = suppliedCantonSourceLead.trim();
+    console.error(`🔒 Fonte paywall: uso solo titolo${lead ? ' + lead pubblico' : ''}; nessun fetch dell'articolo premium`);
+    return [
+      '[FONTE PUBBLICA PARZIALE — PAYWALL]',
+      suppliedCantonSourceTitle ? `Titolo: ${suppliedCantonSourceTitle}` : '',
+      lead ? `Lead pubblico: ${lead}` : '',
+      'Il corpo completo non è accessibile pubblicamente e non viene usato.',
+    ].filter(Boolean).join('\n');
   }
   // Orphan-query candidates carry a site-relative path (GSC topLandingPage
   // is stored path-only by design, see gscFetcher.mjs:231) — fetch() has no
@@ -8217,6 +8238,64 @@ function extractDatesFromHtml(html, baseUrl) {
   return dateMap;
 }
 
+function embeddedHeadlineDateKey(value) {
+  return headlineTextFromMarkup(value).normalize('NFKC').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Radio Munot serializes the card metadata in its page state instead of
+ * rendering a `<time>` element.  Keep this opt-in: scanning arbitrary JSON in
+ * every HTML source would pair unrelated titles and dates.
+ */
+function extractEmbeddedHeadlineDates(html, field) {
+  if (field !== 'publishDate') return new Map();
+  const out = new Map();
+  const seen = new Set();
+  const ambiguous = new Set();
+  const visit = (value) => {
+    if (!value || typeof value !== 'object') return;
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item);
+      return;
+    }
+    // The page-state object is parsed as JSON first. This keeps title/date
+    // associated even when the CMS inserts fields or changes their order.
+    if (typeof value.title === 'string' && typeof value[field] === 'string') {
+      const key = embeddedHeadlineDateKey(value.title);
+      // A title is not an item identity: the page state can contain two
+      // cards with the same label. Never let the later card overwrite the
+      // first one and then assign its date to both links. Ambiguous titles
+      // deliberately remain undated; URL/index pairing is unavailable at
+      // this stage, so guessing would be worse than dropping the hint.
+      if (seen.has(key)) {
+        out.delete(key);
+        ambiguous.add(key);
+      } else if (!ambiguous.has(key)) {
+        seen.add(key);
+        const date = new Date(value[field]);
+        if (!Number.isNaN(date.getTime())) out.set(key, date);
+      }
+    }
+    for (const child of Object.values(value)) visit(child);
+  };
+  const scriptRe = /<script\b([^>]*)>([\s\S]*?)<\/script>/giu;
+  let match;
+  while ((match = scriptRe.exec(String(html || ''))) !== null) {
+    const attrs = match[1] || '';
+    const type = attrs.match(/\btype\s*=\s*["']([^"']+)["']/iu)?.[1] || '';
+    if (type && !/json/iu.test(type)) continue;
+    const body = match[2].trim();
+    if (!body || (!/^\s*[\[{]/u.test(body) && !/\bng-state\b/iu.test(attrs))) continue;
+    try {
+      visit(JSON.parse(body));
+    } catch {
+      // Inline JavaScript and truncated JSON are not page-state data. The
+      // opt-in quirk must fail closed instead of pairing unrelated strings.
+    }
+  }
+  return out;
+}
+
 /** Check if a date is within the last N days */
 function isWithinDays(date, days) {
   if (!date) return false;
@@ -8299,6 +8378,13 @@ function headlineCandidateIsUsable(text) {
   return candidate;
 }
 
+function configuredHeadlineFromAnchor(anchorTag, quirks) {
+  if (quirks?.titleAttributeTemplate !== 'beitrag-lesen') return null;
+  const title = headlineAttributeValue(anchorTag, 'title');
+  const match = title.match(/^\s*Beitrag\s+['"]([\s\S]+)['"]\s+lesen\.\s*$/iu);
+  return match ? headlineCandidateIsUsable(match[1]) : null;
+}
+
 /** Stack degli elementi aperti davanti a un link, sufficiente per il markup
  * server-rendered delle liste comunali (e tollerante verso HTML incompleto). */
 function headlineAncestorStack(html, before) {
@@ -8349,6 +8435,52 @@ function headlineNodeHasHint(node) {
 
 function isHeadlineCardNode(node) {
   return node.name === 'article' || node.name === 'li' || headlineNodeHasHint(node);
+}
+
+function headlineStackHasPaywall(stack) {
+  return stack.some((node) => {
+    const className = headlineAttributeValue(node.attrs, 'class');
+    return /(?:^|[\s_-])paywall(?:$|[\s_-])/i.test(className)
+      || /\bdata-paywall(?:-[\w-]+)?(?![\w-])(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/i.test(node.attrs || '');
+  });
+}
+
+/** Legge solo il teaser pubblico dichiarato dalla card, mai il dettaglio. */
+function publicCardLead(html, linkStart, quirks) {
+  const mode = quirks?.extractCardLead;
+  if (!mode) return '';
+  const stack = headlineAncestorStack(html, linkStart);
+  const cards = stack.filter(isHeadlineCardNode).reverse();
+  for (const card of cards) {
+    const range = headlineElementEnd(html, card);
+    const inner = html.slice(card.openEnd, range.start);
+    if (mode === 'media-title') {
+      const imageRe = /<(?:img|source)\b[^>]*>/gi;
+      let image;
+      while ((image = imageRe.exec(inner)) !== null) {
+        const title = headlineTextFromMarkup(headlineAttributeValue(image[0], 'title'));
+        if (title && title.length <= 1200) return title;
+      }
+    }
+    if (mode === 'text') {
+      const paragraphRe = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
+      let paragraph;
+      while ((paragraph = paragraphRe.exec(inner)) !== null) {
+        const text = headlineTextFromMarkup(paragraph[1]);
+        if (text.length >= 20) return text.slice(0, 600);
+      }
+      const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
+      while ((paragraph = hintedRe.exec(inner)) !== null) {
+        const attrs = paragraph[2] || '';
+        if (!/(?:lead|teaser|description|summary|abstract)/i.test(
+          headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id'),
+        )) continue;
+        const text = headlineTextFromMarkup(paragraph[3]);
+        if (text.length >= 20) return text.slice(0, 600);
+      }
+    }
+  }
+  return '';
 }
 
 function headlineStackHasNavigation(stack) {
@@ -8433,14 +8565,24 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const source = arguments[2] || {};
+  const metadataHtml = arguments[3] || html;
   const results = [];
   const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
+  const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
   // Match <a href="...">text</a> — capture href and inner text
   const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let m;
   while ((m = linkRe.exec(html)) !== null) {
+    const ancestors = headlineAncestorStack(html, m.index);
+    const anchorTagEnd = m[0].indexOf('>');
+    const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+    const anchorAttrs = anchorTag.replace(/^<a\b/i, '').replace(/>\s*$/, '');
+    if (source?.quirks?.excludePaywalledCards
+      && headlineStackHasPaywall([...ancestors, { name: 'a', attrs: anchorAttrs }])) continue;
     let href = m[1];
     let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
+    if (configuredHeadline) text = configuredHeadline;
     // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every
     // teaser link's accessible name with a screen-reader-only "Maggiori
     // informazioni su" label. It's plain text content, not a tag, so it
@@ -8449,8 +8591,6 @@ function extractHeadlines(html, baseUrl) {
     // boilerplate that never carries a topic signal.
     text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
     if (isGenericHeadlineLinkLabel(text)) {
-      const anchorTagEnd = m[0].indexOf('>');
-      const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
       text = structuralHeadlineForLink(html, m.index, anchorTag);
       if (!text) continue;
     }
@@ -8465,8 +8605,12 @@ function extractHeadlines(html, baseUrl) {
     // Skip non-article links (categories, tags, pagination, login, etc.)
     if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) continue;
     // Extract date from URL path or from nearby <time> elements
-    const date = extractDateFromUrl(href) || htmlDateMap.get(href) || null;
-    results.push({ url: href, headline: text, date });
+    const date = extractDateFromUrl(href)
+      || htmlDateMap.get(href)
+      || embeddedDateMap.get(embeddedHeadlineDateKey(text))
+      || null;
+    const lead = publicCardLead(html, m.index, source?.quirks);
+    results.push({ url: href, headline: text, date, ...(lead ? { lead } : {}) });
   }
   // Deduplicate by URL
   const seen = new Set();
@@ -8665,6 +8809,8 @@ async function fetchCantonSourceHeadlines(source, domain) {
     ...h,
     _cantonSourceUrl: source.url,
     ...(h.sourceContent ? { _cantonSourceContent: h.sourceContent } : {}),
+    ...(h.lead ? { _cantonSourceLead: h.lead } : {}),
+    ...(h._paywall ? { _cantonSourcePaywall: h._paywall } : {}),
   }));
 }
 
@@ -16859,6 +17005,12 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     ? sourceContext.date.toISOString()
     : '';
   pendingCantonSourceTitle = typeof sourceContext?.headline === 'string' ? sourceContext.headline : '';
+  pendingCantonSourceLead = typeof sourceContext?._cantonSourceLead === 'string'
+    ? sourceContext._cantonSourceLead
+    : '';
+  pendingCantonSourcePaywall = sourceContext?._cantonSourcePaywall === 'title+lead'
+    ? sourceContext._cantonSourcePaywall
+    : '';
   const pageContent = await fetchPageContent(url);
 
   // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.

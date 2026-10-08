@@ -7904,6 +7904,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.incentivi-energetici-lucerna-requisiti.title': 'Incentivi energetici Cantone Lucerna: requisiti e domanda',
     'blog.article.incentivi-energetici-lucerna-requisiti.excerpt': '## In breve - Nel Cantone di Lucerna gli incentivi riguardano edifici e impianti. - I requisiti da verificare sono tecnici. - La domanda va presentata prima',
     'blog.article.incentivi-energetici-lucerna-requisiti.imageAlt': 'Edificio residenziale in fase di ristrutturazione energetica in Svizzera',
+    'blog.article.violazione-dati-publica-indagine.title': 'Attacco informatico al fornitore software di Publica',
+    'blog.article.violazione-dati-publica-indagine.excerpt': '## In breve - Attacco informatico a fine settembre - Colpito un fornitore esterno di Publica - Il Ministero pubblico ha avviato un\'indagine - Publica ha',
+    'blog.article.violazione-dati-publica-indagine.imageAlt': 'Server in una sala tecnica svizzera, immagine simbolica dell\'attacco a un fornitore di Publica',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.title': 'Mercato lavoro IA: +32% di annunci in un anno',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.excerpt': '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.imageAlt': 'Postazione di lavoro moderna con analisi dati su schermo a Lugano',
+    'blog.article.mercato-lavoro-ia-svizzera.title': 'Mercato lavoro IA Svizzera: +32% in un anno',
+    'blog.article.mercato-lavoro-ia-svizzera.excerpt': '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2\'181 annunci, il 45%',
+    'blog.article.mercato-lavoro-ia-svizzera.imageAlt': 'Professionisti che collaborano in un ambiente ufficio moderno in Svizzera, con schermi che mostrano dati e codice IA.',
 };
 
 export default blogMetaChIt;

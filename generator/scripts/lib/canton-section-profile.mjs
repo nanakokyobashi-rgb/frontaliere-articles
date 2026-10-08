@@ -184,7 +184,7 @@ export const CANTON_TOPICAL_TERMS_DE_FR = Object.freeze([
   'bouchon', 'autoroute', 'voie cyclable', 'piste cyclable', 'sécurité routière', 'securite routiere',
   'accident de la route', 'collision avec un animal', 'route cantonale', 'horaire', 'cff', 'transports publics',
   // sanita', scuola, economia
-  'spital', 'gesundheit', 'schule', 'volksschule', 'hôpital', 'hopital', 'santé', 'école', 'ecole',
+  'spital', 'gesundheit', 'apothek', 'schule', 'volksschule', 'hôpital', 'hopital', 'santé', 'école', 'ecole',
   'wirtschaft', 'unternehmen', 'konkurs', 'firma', 'économie', 'economie', 'entreprise', 'faillite',
   // permessi e residenza
   'aufenthaltsbewilligung', 'bewilligung', 'niederlassung', 'permis de séjour', 'permis g', 'permis b',

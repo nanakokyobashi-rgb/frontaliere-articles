@@ -7904,6 +7904,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.incentivi-energetici-lucerna-requisiti.title': 'Energieförderungen im Kanton Luzern: Voraussetzungen und Antrag',
     'blog.article.incentivi-energetici-lucerna-requisiti.excerpt': '## Auf einen Blick - Im Kanton Luzern betreffen die Förderungen Gebäude und Anlagen. - Die zu prüfenden Voraussetzungen sind technischer Art. - Der Antrag muss vorher eingereicht werden',
     'blog.article.incentivi-energetici-lucerna-requisiti.imageAlt': 'Wohngebäude während der energetischen Sanierung in der Schweiz',
+    'blog.article.violazione-dati-publica-indagine.title': 'Cyberangriff auf den Softwareanbieter von Publica',
+    'blog.article.violazione-dati-publica-indagine.excerpt': '## Auf einen Blick - Cyberangriff Ende September - Externer Anbieter von Publica betroffen - Die Staatsanwaltschaft hat eine Untersuchung eingeleitet - Publica hat',
+    'blog.article.violazione-dati-publica-indagine.imageAlt': 'Server in einem Schweizer Technikraum als Symbol für den Cyberangriff auf einen Publica-Softwareanbieter',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.title': 'KI-Arbeitsmarkt: +32% Stellenanzeigen in einem Jahr',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.excerpt': '## Auf einen Blick - Fast 5\'000 KI-Stellenanzeigen zwischen Juli 2025 und Juni 2026 - Die KI-Nachfrage steigt in einem Jahr um 32% - Der öffentliche Sektor verzeichnet den größten Anstieg',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.imageAlt': 'Moderner Arbeitsplatz mit Datenanalyse auf dem Bildschirm in Lugano',
+    'blog.article.mercato-lavoro-ia-svizzera.title': 'Schweizer KI-Arbeitsmarkt: +32% in einem Jahr',
+    'blog.article.mercato-lavoro-ia-svizzera.excerpt': '## Auf einen Blick - Knapp 5\'000 KI-Stellenanzeigen zwischen Juli 2025 und Juni 2026 - Die Nachfrage wächst innerhalb von zwölf Monaten um 32% - Auf Zürich entfallen 2\'181 Anzeigen, 45%',
+    'blog.article.mercato-lavoro-ia-svizzera.imageAlt': 'Fachleute arbeiten in einem modernen Büro in der Schweiz zusammen, Bildschirme zeigen KI-bezogene Daten und Code.',
 };
 
 export default blogMetaChDe;

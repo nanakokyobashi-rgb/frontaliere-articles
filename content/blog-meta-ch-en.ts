@@ -7904,6 +7904,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.incentivi-energetici-lucerna-requisiti.title': 'Energy incentives in the Canton of Lucerne: requirements and application',
     'blog.article.incentivi-energetici-lucerna-requisiti.excerpt': '## TL;DR - In the Canton of Lucerne, incentives concern buildings and installations. - The requirements to be verified are technical. - The application must be submitted beforehand',
     'blog.article.incentivi-energetici-lucerna-requisiti.imageAlt': 'Residential building undergoing energy renovation in Switzerland',
+    'blog.article.violazione-dati-publica-indagine.title': 'Cyberattack on Publica’s software provider',
+    'blog.article.violazione-dati-publica-indagine.excerpt': '## TL;DR - Cyberattack at the end of September - An external Publica provider was affected - The Public Prosecutor\'s Office has launched an investigation - Publica has',
+    'blog.article.violazione-dati-publica-indagine.imageAlt': 'Server rack in a Swiss technical room symbolising the cyberattack on a Publica software provider',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.title': 'AI job market: +32% of job postings in one year',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.excerpt': '## TL;DR - Nearly 5\'000 AI job postings between July 2025 and June 2026 - AI demand grows by 32% in one year - The public sector records the largest jump',
+    'blog.article.crescita-lavoro-intelligenza-artificiale.imageAlt': 'Modern workstation with data analytics on screen in Lugano',
+    'blog.article.mercato-lavoro-ia-svizzera.title': 'Swiss AI job market: +32% in one year',
+    'blog.article.mercato-lavoro-ia-svizzera.excerpt': '## TL;DR - Nearly 5\'000 AI job postings between July 2025 and June 2026 - Demand grows by 32% in twelve months - Zurich accounts for 2\'181 postings, 45%',
+    'blog.article.mercato-lavoro-ia-svizzera.imageAlt': 'Professionals collaborating in a modern office environment in Switzerland, with screens displaying AI-related data and code.',
 };
 
 export default blogMetaChEn;
