@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-fondo-clima-giura-2028.webp",
-      "sha256": "9c71e3b6527153820f0444806fb1d6f21b45e630d7db96f2d1caac393309ac66"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-fondo-clima-giura-2028-480w.webp",
-      "sha256": "df9fe08c302b3abc32243af58d6b78fee12b455b6f91c43f6d48f072479a6f5c"
-    }
-  ]
+  "items": []
 }
