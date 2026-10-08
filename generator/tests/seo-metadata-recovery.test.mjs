@@ -149,6 +149,7 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
   );
   assert.match(deterministicEntry, /Deterministic media produced by frontaliereticino\.ch\./);
   assert.match(deterministicEntry, /"creditText": "frontaliereticino\.ch"/);
+
 });
 
 test('le date senza orario usano mezzogiorno Europe/Zurich con il cambio DST dichiarato', () => {

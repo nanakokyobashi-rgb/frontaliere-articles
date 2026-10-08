@@ -35,7 +35,10 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.doesNotMatch(source, new RegExp(RETIRED_FLASH_IMAGE_MODEL));
   assert.match(source, /hasValidBlogImageRecord/);
   assert.match(source, /resolveArticleCoverFallback/);
-  assert.match(COVER_ENGINE, /maxAttempts:\s*1/);
+  assert.doesNotMatch(COVER_ENGINE, /maxAttempts:\s*1/);
+  assert.match(COVER_ENGINE, /topic: articleImageTopic/);
+  assert.match(COVER_ENGINE, /place: articleImagePlace/);
+  assert.match(COVER_ENGINE, /keywords: articleImageKeywords/);
 });
 
 test('il publisher non scarica URL senza prova di licenza', () => {
