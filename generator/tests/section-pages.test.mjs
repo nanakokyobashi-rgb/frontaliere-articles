@@ -30,6 +30,7 @@ import {
   hubMissingIsFatal,
   inUploadOrder,
   main,
+  migrationManifestPages,
   missingRenderedArticleIds,
   pageDefects,
   pageEntry,
@@ -141,6 +142,18 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
     console.error = realConsoleError;
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
+});
+
+test('publisher migration manifest usa percorsi canonici per landing e hub', () => {
+  const pages = migrationManifestPages('canton-ti', [], []);
+  const rels = new Set(pages.map(({ rel }) => rel));
+
+  assert.ok(rels.has('articoli-ticino/index.html'));
+  assert.ok(rels.has('articoli-ticino/carburanti/index.html'));
+  assert.ok(rels.has('en/ticino-articles/index.html'));
+  assert.ok(rels.has('en/ticino-articles/fuel/index.html'));
+  assert.ok([...rels].every((rel) => rel.endsWith('/index.html')));
+  assert.ok(![...rels].some((rel) => rel.includes('ticinoindex.html') || rel.includes('ticinocarburanti')));
 });
 
 test('publisher R2 rifiuta gli article ID richiesti che la pipeline trattiene', () => {

@@ -270,15 +270,15 @@ export function articleManifestPages({ section, previousArticlePages = [], curre
  * percorsi derivati dal core; gli articoli e l'archivio arrivano dalla
  * release precedente usata solo per questa migrazione.
  */
-function migrationManifestPages(section, previousArticlePages, previousArchivePages) {
+export function migrationManifestPages(section, previousArticlePages, previousArchivePages) {
   const routes = sectionRoutes(section);
   const topicHubs = Object.values(ARTICLE_SECTION_CORE_ALL[section].topicHubs ?? {});
   return [
     ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
     ...previousArchivePages.map((page) => manifestEntryFromReleasePage(section, page, 'archive')),
     ...routes.flatMap((route) => {
-      const landing = pageEntry(section, `${route.prefix.slice(1)}index.html`, 'landing');
-      const hubs = topicHubs.map((slugs) => pageEntry(section, `${route.prefix.slice(1)}${slugs[route.locale]}/index.html`, 'hub'));
+      const landing = pageEntry(section, `${route.prefix.slice(1)}/index.html`, 'landing');
+      const hubs = topicHubs.map((slugs) => pageEntry(section, `${route.prefix.slice(1)}/${slugs[route.locale]}/index.html`, 'hub'));
       return [landing, ...hubs];
     }),
   ];
