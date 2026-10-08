@@ -83,85 +83,146 @@ function seoEntryEnd(source, start) {
   return match ? match.index : source.length;
 }
 
-function skipQuotedText(source, start, quote) {
-  for (let index = start + 1; index < source.length; index += 1) {
-    if (source[index] === '\\') {
-      index += 1;
+function findMatchingObjectEnd(source, objectStart) {
+  let depth = 0;
+  let quote = null;
+  let escaped = false;
+  for (let index = objectStart; index < source.length; index += 1) {
+    const char = source[index];
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === '\\') {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
       continue;
     }
-    if (source[index] === quote) return index + 1;
-  }
-  return source.length;
-}
-
-function skipComment(source, start) {
-  if (source.startsWith('//', start)) {
-    const lineEnd = source.indexOf('\n', start + 2);
-    return lineEnd < 0 ? source.length : lineEnd;
-  }
-  if (source.startsWith('/*', start)) {
-    const commentEnd = source.indexOf('*/', start + 2);
-    return commentEnd < 0 ? source.length : commentEnd + 2;
-  }
-  return start;
-}
-
-function skipWhitespace(source, start) {
-  let index = start;
-  while (index < source.length && /\s/.test(source[index])) index += 1;
-  return index;
-}
-
-function findObjectProperty(source, property) {
-  for (let index = 0; index < source.length;) {
-    const commentEnd = skipComment(source, index);
-    if (commentEnd !== index) {
-      index = commentEnd;
+    if (char === '"' || char === '\'' || char === '`') {
+      quote = char;
       continue;
     }
+    if (char === '{') {
+      depth += 1;
+    } else if (char === '}') {
+      depth -= 1;
+      if (depth === 0) return index;
+    }
+  }
+  return -1;
+}
 
-    const quote = source[index];
-    if (quote !== '"' && quote !== "'" && quote !== '`') {
-      index += 1;
+function findObjectProperty(source, propertyName, from = 0, end = source.length) {
+  const marker = `"${propertyName}"`;
+  let quote = null;
+  let escaped = false;
+  for (let index = from; index < end; index += 1) {
+    const char = source[index];
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === '\\') {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
       continue;
     }
-
-    const end = skipQuotedText(source, index, quote);
-    if (quote !== '`' && source.slice(index + 1, end - 1) === property) {
-      let cursor = skipWhitespace(source, end);
-      if (source[cursor] === ':') {
-        cursor = skipWhitespace(source, cursor + 1);
-        if (source[cursor] === '{') return { keyStart: index, objectStart: cursor };
+    if (source.startsWith(marker, index)) {
+      const property = new RegExp(`^${marker.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\s*:\\s*`).exec(
+        source.slice(index, end),
+      );
+      if (property) {
+        return {
+          start: index,
+          valueStart: index + property[0].length,
+          prefix: property[0],
+        };
       }
     }
-    index = end;
+    if (char === '"' || char === '\'' || char === '`') quote = char;
   }
   return null;
 }
 
-function seoImageObjectEnd(source, objectStart) {
-  let depth = 0;
-  for (let index = objectStart; index < source.length;) {
-    const commentEnd = skipComment(source, index);
-    if (commentEnd !== index) {
-      index = commentEnd;
-      continue;
-    }
+function imageObjectLocation(block) {
+  const property = findObjectProperty(block, 'image');
+  if (!property || block[property.valueStart] !== '{') return null;
+  const end = findMatchingObjectEnd(block, property.valueStart);
+  return end < 0 ? null : { start: property.start, objectStart: property.valueStart, end };
+}
 
-    const quote = source[index];
-    if (quote === '"' || quote === "'" || quote === '`') {
-      index = skipQuotedText(source, index, quote);
+function findDirectObjectProperty(source, propertyName, objectStart, objectEnd) {
+  const marker = `"${propertyName}"`;
+  let depth = 1;
+  let quote = null;
+  let escaped = false;
+  for (let index = objectStart + 1; index < objectEnd; index += 1) {
+    const char = source[index];
+    if (quote) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === quote) quote = null;
       continue;
     }
-    if (source[index] === '{') {
-      depth += 1;
-    } else if (source[index] === '}') {
-      depth -= 1;
-      if (depth === 0) return index;
+    if (depth === 1 && source.startsWith(marker, index)) {
+      const property = new RegExp(`^${marker.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\s*:\\s*`).exec(
+        source.slice(index, objectEnd),
+      );
+      if (property) {
+        return {
+          start: index,
+          valueStart: index + property[0].length,
+          prefix: property[0],
+        };
+      }
     }
-    index += 1;
+    if (char === '"' || char === '\'' || char === '`') quote = char;
+    else if (char === '{') depth += 1;
+    else if (char === '}') depth -= 1;
   }
-  return -1;
+  return null;
+}
+
+function directUrlLocation(block, image) {
+  const property = findDirectObjectProperty(block, 'url', image.objectStart, image.end);
+  if (!property) return null;
+
+  const valueQuote = block[property.valueStart];
+  if (!['`', '"', '\''].includes(valueQuote)) return null;
+  let valueEnd = property.valueStart + 1;
+  let valueEscaped = false;
+  for (; valueEnd < image.end; valueEnd += 1) {
+    const char = block[valueEnd];
+    if (valueEscaped) {
+      valueEscaped = false;
+    } else if (char === '\\') {
+      valueEscaped = true;
+    } else if (char === valueQuote) {
+      break;
+    }
+  }
+  if (valueEnd >= image.end) return null;
+  return {
+    line: block.slice(property.start, valueEnd + 1),
+    offset: property.start,
+    prefix: property.prefix,
+    quote: valueQuote,
+    value: block.slice(property.valueStart + 1, valueEnd),
+    suffix: '',
+    kind: valueQuote === '`' ? 'template' : 'quoted',
+  };
+}
+
+function seoImageUrlLine(block) {
+  const image = imageObjectLocation(block);
+  const location = image ? directUrlLocation(block, image) : null;
+  if (!location) return null;
+  return {
+    ...location,
+    offset: location.offset,
+  };
 }
 
 function consumeLineBreak(source, start) {
@@ -170,51 +231,18 @@ function consumeLineBreak(source, start) {
 }
 
 function seoImageBlockRange(block) {
-  const property = findObjectProperty(block, 'image');
-  if (!property) return null;
-  const imageEnd = seoImageObjectEnd(block, property.objectStart);
-  if (imageEnd < 0) return null;
-
-  const lineStart = block.lastIndexOf('\n', property.keyStart) + 1;
-  const prefix = block.slice(lineStart, property.keyStart);
-  const start = prefix.trim() === '' ? lineStart : property.keyStart;
-  let end = imageEnd + 1;
+  const image = imageObjectLocation(block);
+  if (!image) return null;
+  const lineStart = block.lastIndexOf('\n', image.start) + 1;
+  const prefix = block.slice(lineStart, image.start);
+  const start = prefix.trim() === '' ? lineStart : image.start;
+  let end = image.end + 1;
   if (block[end] === ',') end += 1;
   end = consumeLineBreak(block, end);
   return {
     start,
     end,
-    keyStart: property.keyStart,
-    objectEnd: imageEnd,
-    text: block.slice(start, imageEnd + 1),
-  };
-}
-
-function seoImageUrlLine(block) {
-  const imageRange = seoImageBlockRange(block);
-  if (!imageRange) return null;
-  const imageBlock = block.slice(imageRange.keyStart, imageRange.objectEnd + 1);
-  const template = /(\s*"url"\s*:\s*)`([^`\r\n]*)`/.exec(imageBlock);
-  if (template) {
-    return {
-      line: template[0],
-      offset: imageRange.keyStart + template.index,
-      prefix: template[1],
-      value: template[2],
-      suffix: '',
-      kind: 'template',
-    };
-  }
-  const quoted = /(\s*"url"\s*:\s*)(["'])([^"'\r\n]*)\2/.exec(imageBlock);
-  if (!quoted) return null;
-  return {
-    line: quoted[0],
-    offset: imageRange.keyStart + quoted.index,
-    prefix: quoted[1],
-    quote: quoted[2],
-    value: quoted[3],
-    suffix: '',
-    kind: 'quoted',
+    text: block.slice(start, image.end + 1),
   };
 }
 
