@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'fribourg-modifica-licd',
  category: 'fiscale',
  date: '2026-10-07T10:27:22.581Z',
- image: '/images/blog/imposte-cantonal-berna-aliquote-deduzioni.webp',
+ image: '/images/blog/article-fribourg-modifica-licd.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['FR'],

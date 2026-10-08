@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Incidente sulla A13 a Widnau il 5 ottobre 2026 - Due persone coinvolte, nessun ferito - Danni per circa CHF 120'000 - Corsia destra chiusa",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp`,
+        "url": `${BASE_URL}/images/blog/article-incidente-a13-widnau-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Vista di un tratto autostradale A13 in Canton San Gallo durante il mattino, con traffico pendolare, senza mostrare l'incidente specifico."

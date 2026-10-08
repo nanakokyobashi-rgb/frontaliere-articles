@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/imposte-cantonal-berna-aliquote-deduzioni.webp`,
+        "url": `${BASE_URL}/images/blog/article-fribourg-modifica-licd.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Ufficio pubblico a Friburgo con contribuenti che compilano la dichiarazione dei redditi su un computer"

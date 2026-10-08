@@ -100709,7 +100709,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/pedemontana-avviso-truffa.webp`,
+        "url": `${BASE_URL}/images/blog/article-pedemontana-truffa-sms-frontalieri.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Foto realistica di un casello autostradale ticinese all'alba con un'auto di un frontalier in avvicinamento"

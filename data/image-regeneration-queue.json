@@ -32,42 +32,6 @@
       "failureCount": 2
     },
     {
-      "articleId": "cdhr-frontalieri-vaud-2026",
-      "title": "CDHR: quando i frontalieri francesi pagano l'acconto del 95%",
-      "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
-      "reason": "All image providers failed for article-cdhr-frontalieri-vaud-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:21:57.444Z",
-      "lastFailureAt": "2026-10-07T10:21:57.444Z"
-    },
-    {
-      "articleId": "fribourg-modifica-licd",
-      "title": "Fribourg adegua imposte dirette alla progressione a freddo",
-      "fallbackImage": "/images/blog/imposte-cantonal-berna-aliquote-deduzioni.webp",
-      "reason": "All image providers failed for article-fribourg-modifica-licd: Codex broker timed out after 119999ms",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:27:22.590Z",
-      "lastFailureAt": "2026-10-07T10:27:22.590Z"
-    },
-    {
-      "articleId": "incidente-a13-widnau-2026",
-      "title": "Incidente A13 Widnau 2026: danni e impatto sul traffico",
-      "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
-      "reason": "All image providers failed for article-incidente-a13-widnau-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:36:03.797Z",
-      "lastFailureAt": "2026-10-07T10:36:03.797Z"
-    },
-    {
-      "articleId": "pedemontana-truffa-sms-frontalieri",
-      "title": "Pedemontana avverte: nessun pagamento pedaggio via SMS o email",
-      "fallbackImage": "/images/blog/pedemontana-avviso-truffa.webp",
-      "reason": "All image providers failed for article-pedemontana-truffa-sms-frontalieri: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:36:09.204Z",
-      "lastFailureAt": "2026-10-07T10:36:09.204Z"
-    },
-    {
       "articleId": "soletta-disoccupazione-settembre",
       "title": "Soletta: disoccupazione al 3,0% a settembre 2026",
       "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
@@ -205,16 +169,6 @@
       "failureCount": 0,
       "requestedAt": "2026-10-07T19:59:34.747Z",
       "lastFailureAt": "2026-10-07T19:59:34.747Z"
-    },
-    {
-      "articleId": "contributi-formazione-berna-requisiti",
-      "title": "Formazione continua nel Canton Berna: requisiti e contributi",
-      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
-      "reason": "All image providers failed for article-contributi-formazione-berna-requisiti: openai-codex (vision gate rejected image: Generic illustrated office scene, but a visible human profil",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T00:53:16.383Z",
-      "lastFailureAt": "2026-10-08T00:53:16.383Z"
     }
   ]
 }

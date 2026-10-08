@@ -42914,7 +42914,7 @@ const RAW_ARTICLES = [
  id: 'pedemontana-truffa-sms-frontalieri',
  category: 'pratico',
  date: '2026-10-07T10:36:08.818Z',
- image: '/images/blog/pedemontana-avviso-truffa.webp',
+ image: '/images/blog/article-pedemontana-truffa-sms-frontalieri.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

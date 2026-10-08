@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "cdhr-frontalieri-vaud-2026",
+      "section": "canton-vd"
+    },
+    {
+      "articleId": "fribourg-modifica-licd",
+      "section": "canton-fr"
+    },
+    {
+      "articleId": "incidente-a13-widnau-2026",
+      "section": "canton-sg"
+    },
+    {
+      "articleId": "pedemontana-truffa-sms-frontalieri",
+      "section": "frontaliere"
+    }
+  ]
+}
