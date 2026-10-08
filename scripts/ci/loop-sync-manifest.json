@@ -232,7 +232,7 @@
       "reason": "Conserva come bundle git il commit o il worktree non ancora committato dei cinque producer (generate-article.yml, generate-article-core.yml, generate-daily-brief.yml, publish-journalist-articles.yml e batch-faq-articles.yml) quando il passo Commit and push fallisce, distinguendo la source nel manifest e documentando il replay nell'artifact del run (issue 2489). Esiste solo nel corpus: il sito non ha un generatore che committa articoli su main.",
       "baseline": {
         "site": null,
-        "corpus": "997381d2d0307c8e",
+        "corpus": "839f62482838c8b8",
         "alignedAt": "2026-10-08"
       }
     },
