@@ -5784,6 +5784,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/slug-fallback-provenance.mjs",
+      "mode": "corpus-only",
+      "reason": "Parser della provenienza degli slug fallback italiani usato dal repair degli esonimi per non riscrivere URL provvisori senza emettere un bridge. È una guardia interna al generatore del corpus; il sito consuma gli slug pubblicati via JSON HTTP e non esegue questo modulo.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/seo-backfill-lock.mjs",
       "mode": "corpus-only",
       "reason": "Marcatore locale al runner per il recupero deterministico delle voci SEO: un secondo recupero non può accodare un lotto concorrente a un chunk lasciato a metà da un'interruzione. Il lock della registrazione normale copre una creazione su più file, questo copre la scrittura di un solo chunk. Sul sito non esiste un writer equivalente.",
