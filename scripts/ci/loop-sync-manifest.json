@@ -227,6 +227,16 @@
       }
     },
     {
+      "path": "scripts/ci/preserve-unpushed-commit.sh",
+      "mode": "corpus-only",
+      "reason": "Conserva come bundle git il commit o il worktree non ancora committato dei cinque producer (generate-article.yml, generate-article-core.yml, generate-daily-brief.yml, publish-journalist-articles.yml e batch-faq-articles.yml) quando il passo Commit and push fallisce, distinguendo la source nel manifest e documentando il replay nell'artifact del run (issue 2489). Esiste solo nel corpus: il sito non ha un generatore che committa articoli su main.",
+      "baseline": {
+        "site": null,
+        "corpus": "839f62482838c8b8",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "scripts/ci/generate-canton-article-workflows.mjs",
       "mode": "corpus-only",
       "reason": "Generatore di generate-article-core.yml (i job di generate-article.yml senza commenti, piu' le sostituzioni dichiarate) e dei 24 chiamanti generate-article-<cantone>.yml (cron, push.paths e gruppo di concurrency da canton-sections.json e dal core), con --check; la parita' byte per byte e' in generator/tests/canton-article-workflows.test.mjs. Corpus-only: generate-article.yml non e' nel manifest e non ha un gemello sul sito, quindi nemmeno cio' che ne deriva. Il modello e' scripts/generate-crawler-group-workflows.mjs del sito, che genera altri workflow.",

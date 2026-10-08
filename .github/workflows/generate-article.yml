@@ -1820,6 +1820,7 @@ jobs:
         run: node scripts/generate-image-thumbnails.mjs
 
       - name: Commit and push
+        id: commit
         if: steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
@@ -1864,6 +1865,7 @@ jobs:
           # rebase il ledger puo' non avere piu' la voce del run (bookkeeping:
           # vince upstream), mentre il nuovo contenuto va comunque ricontrollato.
           PRODUCED="$(git rev-parse HEAD)"
+          printf '%s\n' "$PRODUCED" > "$RUNNER_TEMP/produced-article-commit"
           # Il registro delle immagini generate e' un ledger append-only, non una
           # cache sacrificabile: il rebase puo' prendere upstream per uscire da
           # un conflitto testuale, quindi conserviamo la copia di questo run e
@@ -2101,6 +2103,51 @@ jobs:
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
           exit 1
+
+      # ── CONSERVARE L'ARTICOLO SE IL PUSH FALLISCE ─────────────────────────
+      #
+      # L'8 ottobre due run avevano già generato e pagato un articolo, ma lo
+      # hanno perso quando il controllo post-rebase ha bloccato il push (issue
+      # 2489). Il 7 ottobre era successo lo stesso in un altro run (issue 2421).
+      # Questo artifact conserva il commit prodotto o il worktree per il replay
+      # manuale; la condizione qui sotto limita il recupero al solo fallimento
+      # del passo «Commit and push», così un gate a monte non diventa rigiocabile.
+      - name: Preserve the unpushed article
+        id: preserve_unpushed_article
+        if: ${{ failure() && steps.commit.outcome == 'failure' && steps.generate.outputs.article == 'true' && steps.mode.outputs.dry != 'true' }}
+        run: |
+          set -euo pipefail
+          produced_file="$RUNNER_TEMP/produced-article-commit"
+          preserved_dir="$RUNNER_TEMP/unpushed-article"
+          mkdir -p "$preserved_dir"
+          if [ -s "$produced_file" ]; then
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              "$(cat "$produced_file")" \
+              "$preserved_dir" \
+              "passo Commit and push fallito dopo il commit"
+          else
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              --worktree \
+              "$preserved_dir" \
+              "passo Commit and push fallito prima del commit"
+          fi
+          if [ ! -s "$preserved_dir/article.bundle" ] || [ ! -s "$preserved_dir/manifest.json" ] || [ ! -s "$preserved_dir/REPLAY.md" ]; then
+            echo "Niente da conservare: il commit prodotto non è replayable"
+            exit 0
+          fi
+          artifact_name="unpushed-article-${{ github.run_id }}-${{ github.run_attempt }}"
+          echo "Articolo generato conservato nell'artifact." >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact: \`$artifact_name\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "preserved=true" >> "$GITHUB_OUTPUT"
+
+      - name: Upload the unpushed article
+        if: ${{ always() && steps.preserve_unpushed_article.outputs.preserved == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: unpushed-article-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/unpushed-article
+          retention-days: 14
+          if-no-files-found: ignore
 
       # The summary used to read `steps.generate.outputs.generated`, which was
       # set to `true` on every exit-0 of create-article.mjs — and exiting 0
