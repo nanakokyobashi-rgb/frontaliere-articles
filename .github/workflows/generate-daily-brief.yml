@@ -304,6 +304,7 @@ jobs:
 
           git commit -m "$COMMIT_MESSAGE"
           PRODUCED="$(git rev-parse HEAD)"
+          printf '%s\n' "$PRODUCED" > "$RUNNER_TEMP/produced-article-commit"
           # Il registry delle immagini generate e' un ledger append-only, non
           # una cache sacrificabile: conserva il delta di questo run prima di
           # ogni rebase e lo riunisce con l'upstream dopo una push concorrente.
@@ -456,6 +457,45 @@ jobs:
           fi
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
+
+      # Conservare solo se è fallito questo passo: un gate di qualità a monte
+      # deve restare senza un bundle rigiocabile, non diventare un recupero.
+      - name: Preserve the unpushed article
+        id: preserve_unpushed_article
+        if: ${{ failure() && steps.commit.outcome == 'failure' && steps.mode.outputs.dry != 'true' }}
+        run: |
+          set -euo pipefail
+          produced_file="$RUNNER_TEMP/produced-article-commit"
+          preserved_dir="$RUNNER_TEMP/unpushed-daily-brief"
+          mkdir -p "$preserved_dir"
+          if [ -s "$produced_file" ]; then
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              "$(cat "$produced_file")" \
+              "$preserved_dir" \
+              "passo Commit and push fallito dopo il commit"
+          else
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              --worktree \
+              "$preserved_dir" \
+              "passo Commit and push fallito prima del commit"
+          fi
+          if [ ! -s "$preserved_dir/article.bundle" ]; then
+            echo "Niente da conservare: il risultato non è replayable"
+            exit 0
+          fi
+          artifact_name="unpushed-daily-brief-${{ github.run_id }}-${{ github.run_attempt }}"
+          echo "Edizione giornaliera conservata nell'artifact." >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact: \`$artifact_name\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "preserved=true" >> "$GITHUB_OUTPUT"
+
+      - name: Upload the unpushed article
+        if: ${{ always() && steps.preserve_unpushed_article.outputs.preserved == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: unpushed-daily-brief-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/unpushed-daily-brief
+          retention-days: 14
+          if-no-files-found: ignore
 
       # Best-effort CDN warm (upload-cdn-file.sh always exits 0 by design):
       # the static og:image URL is cdn.frontaliereticino.ch/images/blog/<id>.webp

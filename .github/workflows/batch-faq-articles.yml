@@ -336,6 +336,7 @@ jobs:
           echo "modified FAQ content/state files: $MODIFIED"
 
       - name: Commit and push changes
+        id: commit
         if: steps.mode.outputs.dry != 'true' && steps.count.outputs.modified_count != '0'
         run: |
           set -euo pipefail
@@ -357,6 +358,8 @@ jobs:
 
           MODIFIED="${{ steps.count.outputs.modified_count }}"
           git commit -m "Auto-generated FAQ for ${MODIFIED} blog articles"
+          PRODUCED="$(git rev-parse HEAD)"
+          printf '%s\n' "$PRODUCED" > "$RUNNER_TEMP/produced-article-commit"
 
           # Pushes to the ref this run was started from, NOT hardcoded main. On a
           # scheduled run that is main; on a workflow_dispatch against a side
@@ -387,6 +390,45 @@ jobs:
           done
           echo "::error::push failed after 3 attempts (git output above)"
           exit 1
+
+      # Conservare solo se è fallito questo passo: un gate di qualità a monte
+      # deve restare senza un bundle rigiocabile, non diventare un recupero.
+      - name: Preserve the unpushed article
+        id: preserve_unpushed_article
+        if: ${{ failure() && steps.commit.outcome == 'failure' && steps.mode.outputs.dry != 'true' }}
+        run: |
+          set -euo pipefail
+          produced_file="$RUNNER_TEMP/produced-article-commit"
+          preserved_dir="$RUNNER_TEMP/unpushed-faq-articles"
+          mkdir -p "$preserved_dir"
+          if [ -s "$produced_file" ]; then
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              "$(cat "$produced_file")" \
+              "$preserved_dir" \
+              "passo Commit and push fallito dopo il commit"
+          else
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              --worktree \
+              "$preserved_dir" \
+              "passo Commit and push fallito prima del commit"
+          fi
+          if [ ! -s "$preserved_dir/article.bundle" ]; then
+            echo "Niente da conservare: il risultato non è replayable"
+            exit 0
+          fi
+          artifact_name="unpushed-faq-articles-${{ github.run_id }}-${{ github.run_attempt }}"
+          echo "Articoli FAQ conservati nell'artifact." >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact: \`$artifact_name\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "preserved=true" >> "$GITHUB_OUTPUT"
+
+      - name: Upload the unpushed article
+        if: ${{ always() && steps.preserve_unpushed_article.outputs.preserved == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: unpushed-faq-articles-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/unpushed-faq-articles
+          retention-days: 14
+          if-no-files-found: ignore
 
       # Una run che ha tentato lavoro FAQ e non ne ha prodotto NESSUNO non e'
       # verde: e' lo stesso silenzio verde di #313 su generate-article. Il

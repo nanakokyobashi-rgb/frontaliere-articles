@@ -229,10 +229,10 @@
     {
       "path": "scripts/ci/preserve-unpushed-commit.sh",
       "mode": "corpus-only",
-      "reason": "Conserva come bundle git il commit dell'articolo che generate-article.yml e generate-article-core.yml hanno prodotto ma non sono riusciti a pubblicare (push fallito o ricontrollo di unicita' dopo il rebase), con manifest e istruzioni di replay nell'artifact del run (issue 2489). Esiste solo nel corpus: il sito non ha un generatore che committa articoli su main.",
+      "reason": "Conserva come bundle git il commit o il worktree non ancora committato dei cinque producer (generate-article.yml, generate-article-core.yml, generate-daily-brief.yml, publish-journalist-articles.yml e batch-faq-articles.yml) quando il passo Commit and push fallisce, distinguendo la source nel manifest e documentando il replay nell'artifact del run (issue 2489). Esiste solo nel corpus: il sito non ha un generatore che committa articoli su main.",
       "baseline": {
         "site": null,
-        "corpus": "3718b3ef671d4ca9",
+        "corpus": "0bf5554d8392f848",
         "alignedAt": "2026-10-08"
       }
     },
