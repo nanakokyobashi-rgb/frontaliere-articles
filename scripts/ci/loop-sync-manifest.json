@@ -242,8 +242,8 @@
       "reason": "Generatore di generate-article-core.yml (i job di generate-article.yml senza commenti, piu' le sostituzioni dichiarate) e dei 24 chiamanti generate-article-<cantone>.yml (cron, push.paths e gruppo di concurrency da canton-sections.json e dal core), con --check; la parita' byte per byte e' in generator/tests/canton-article-workflows.test.mjs. Corpus-only: generate-article.yml non e' nel manifest e non ha un gemello sul sito, quindi nemmeno cio' che ne deriva. Il modello e' scripts/generate-crawler-group-workflows.mjs del sito, che genera altri workflow.",
       "baseline": {
         "site": null,
-        "corpus": "f978004d43015b6b",
-        "alignedAt": "2026-10-05"
+        "corpus": "e03a5f584fef3361",
+        "alignedAt": "2026-10-08"
       }
     },
     {

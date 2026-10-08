@@ -702,6 +702,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          # The BRANCH, not the SHA of the event. This job waits behind the
+          # previous generation in the concurrency group above, and by the time
+          # it starts the event's SHA is older than the article that run has
+          # just pushed. The generator would then read a tree without that
+          # article, and its start-of-run dedup (ids, source URLs, content)
+          # could not see it. Measured on run 37772192809 (2026-10-08): this job
+          # started nine seconds after the previous article landed and still
+          # generated from a tree three minutes older — the same source, twice
+          # in the same section (issue #2428). `github.sha` remains the
+          # identity of the EVENT: the step below reads it by name, never
+          # through HEAD.
+          ref: ${{ github.ref }}
           fetch-depth: 0
           # persist-credentials: false is load-bearing, not hygiene.
           # actions/checkout otherwise stores the GITHUB_TOKEN as
@@ -741,7 +753,7 @@ jobs:
             # commit, which is the conservative read.
             if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
                || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
-              CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)
+              CHANGED=$(git diff --name-only "${{ github.sha }}~1" "${{ github.sha }}" 2>/dev/null || true)
             else
               CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}" 2>/dev/null || true)
             fi
@@ -781,8 +793,10 @@ jobs:
             # own commit subject records which section it wrote, so flipping it
             # keeps the two sections growing at the same rate however long the
             # chain runs. Anything unrecognised (another producer's push, e.g.
-            # the border-wait digest) starts a frontaliere run.
-            case "$(git log -1 --format=%s)" in
+            # the border-wait digest) starts a frontaliere run. The subject is
+            # the EVENT's, read by name: HEAD is the branch tip (see Checkout)
+            # and may already be the article of the run this one waited for.
+            case "$(git log -1 --format=%s "${{ github.sha }}")" in
               *'(svizzera)'*) SEC=frontaliere ;;
               *'(frontaliere)'*) SEC=svizzera ;;
               *) SEC=frontaliere ;;
@@ -798,6 +812,12 @@ jobs:
             echo "chain=$CHAIN"
             echo "chain_link=$CHAIN_LINK"
           } >> "$GITHUB_OUTPUT"
+          # How far the tree is from the event: 0 when nothing landed while this
+          # job waited, N when N commits did — and the generator now sees them.
+          EVENT_SHA="${{ github.sha }}"
+          TIP_SHA="$(git rev-parse HEAD)"
+          AHEAD="$(git rev-list --count "${EVENT_SHA}..HEAD" 2>/dev/null || echo unknown)"
+          echo "CHECKOUT_TIP event=${EVENT_SHA:0:9} head=${TIP_SHA:0:9} ahead=${AHEAD}"
           echo "event=$EV chain=$CHAIN chain_link=$CHAIN_LINK → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
