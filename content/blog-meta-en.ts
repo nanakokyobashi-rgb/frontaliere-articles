@@ -12799,6 +12799,11 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.elettrificazione-ferrovia-albate-molteno.title': 'Albate-Molteno railway electrification: Como-Lecco halt',
     'blog.article.elettrificazione-ferrovia-albate-molteno.excerpt': 'Construction work to begin in mid-December for the electrification of Albate-Molteno; traffic suspended on Como-Lecco until June 2029. Investment of 170 million euros.',
     'blog.article.elettrificazione-ferrovia-albate-molteno.imageAlt': 'Image of a modern train station in Ticino with an arriving train, on a bright day.',
+    'blog.article.bollettino-frontaliere-2026-10-08.title': 'Cross-border daily brief – October 8, 2026: 903 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-10-08.excerpt': 'Today\'s numbers, October 8, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-08.imageAlt': 'The day\'s numbers for cross-border commuters – October 8, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-10-08.seoDescription': 'Cross-border brief, October 8, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-08.ogDescription': 'The numbers for October 8, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
 };
 
 export default blogMetaEn;
