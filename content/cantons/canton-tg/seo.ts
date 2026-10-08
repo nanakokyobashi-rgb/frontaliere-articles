@@ -75,6 +75,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-chiusura-strada-kesswil': {
+    title: 'Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026',
+    description: 'La Uttwilerstrasse di Kesswil sarà chiusa dal 15 ottobre 2026 alle 7 al 18 ottobre alle 17. Traffico deviato e possibile rinvio per pioggia o freddo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, kesswil, uttwilerstrasse, chiusa, ottobre',
+    ogTitle: 'Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026',
+    ogDescription: 'Dal 15 al 18 ottobre 2026 la Uttwilerstrasse di Kesswil sarà completamente chiusa per l\'asfalto finale e la marcatura sulla H13. Il traffico sarà deviato; piogge prolungate o freddo possono rinviare i lavori alla primavera 2027.',
+    canonicalPath: '/articoli-turgovia/chiusura-strada-kesswil/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026",
+      "description": "La Uttwilerstrasse di Kesswil sarà chiusa dal 15 ottobre 2026 alle 7 al 18 ottobre alle 17. Traffico deviato e possibile rinvio per pioggia o freddo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Kesswil, strada cantonale H13 con cantiere e deviazione segnalata in autunno."
+      },
+      "datePublished": "2026-10-08T11:25:33+00:00",
+      "dateModified": "2026-10-08T11:25:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/chiusura-strada-kesswil/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

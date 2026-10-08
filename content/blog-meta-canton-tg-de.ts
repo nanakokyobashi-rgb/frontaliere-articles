@@ -9,6 +9,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.rapporti-thurmed-turgovia.title': 'Berichte 2025 von thurmed und Spital Thurgau',
     'blog.article.rapporti-thurmed-turgovia.excerpt': 'Die Seite listet den Bericht 2025 von thurmed und Spital Thurgau AG, den Nachhaltigkeitsbericht und die Statistiken von 2021 bis 2025 auf.',
     'blog.article.rapporti-thurmed-turgovia.imageAlt': 'Spitalgebäude im Kanton Thurgau zu den Berichten von thurmed und Spital Thurgau AG',
+    'blog.article.chiusura-strada-kesswil.title': 'Kesswil: Uttwilerstrasse vom 15. bis 18. Oktober 2026 gesperrt',
+    'blog.article.chiusura-strada-kesswil.excerpt': 'Die Uttwilerstrasse in Kesswil wird vom 15. Oktober 2026 um 7 Uhr bis zum 18. Oktober um 17 Uhr gesperrt. Der Verkehr wird umgeleitet, und wegen Regen oder Kälte ist eine Verschiebung möglich.',
+    'blog.article.chiusura-strada-kesswil.imageAlt': 'Kesswil: Bauarbeiten an der Kantonsstrasse H13 mit signalisierter Umleitung im Herbst.',
 };
 
 export default blogMetaCantonTgDe;

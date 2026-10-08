@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'chiusura-strada-kesswil',
+ category: 'pratico',
+ date: '2026-10-08T11:25:33.511Z',
+ image: '/images/blog/article-agrivarese-angera-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
