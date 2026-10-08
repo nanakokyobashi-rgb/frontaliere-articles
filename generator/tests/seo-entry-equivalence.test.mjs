@@ -4,6 +4,7 @@
  * allowed to derive missing model fields, but it must not create a second
  * serialized dialect for entries the normal writer already knows how to emit.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';

@@ -9,6 +9,7 @@
  * lock. It never asks a model to invent copy and it has no hand-written
  * article payloads.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';

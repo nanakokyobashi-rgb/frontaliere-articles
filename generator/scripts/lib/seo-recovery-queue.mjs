@@ -7,8 +7,11 @@
  *
  * The cover pipeline appends its own failures at the end of this file. Two
  * appends at the same spot are a merge conflict; an insertion one item earlier
- * is not, because the last item's lines stay between the two changes. The
- * drain looks items up by article, so the order only decides who goes first.
+ * is not, because the last item's lines stay between the two changes. That
+ * covers appends only: the drain also deletes items, and a deletion next to
+ * the insertion point still conflicts, so a branch that carries this file has
+ * to stay short-lived. The drain looks items up by article, so the order only
+ * decides who goes first.
  */
 export function mergeQueueWithSnapshot(snapshot, current) {
   const currentById = new Map(current.items.map((item) => [item?.articleId, item]));
