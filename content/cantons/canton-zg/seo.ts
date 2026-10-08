@@ -114,6 +114,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scuola-sternmatt-ia-2026': {
+    title: 'Scuola Sternmatt 1: l\'IA segna il 2026/27 | Frontaliere Ticino',
+    description: 'La scuola Sternmatt 1 presenta il nuovo orientamento per il 2026/27: l\'intelligenza artificiale sarà centrale, con un uso responsabile della tecnologia',
+    keywords: 'frontalieri, ticino, svizzera, italia, scuola, sternmatt, segna, affronta',
+    ogTitle: 'Scuola Sternmatt 1: l\'IA segna il 2026/27',
+    ogDescription: 'La scuola Sternmatt 1 si presenta in una nuova forma all\'inizio dell\'anno scolastico 2026/27. L\'IA non viene descritta come un semplice ingresso nelle aule: la nuova tecnologia va accompagnata dalla trasmissione di un uso responsabile.',
+    canonicalPath: '/articoli-zugo/scuola-sternmatt-ia-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scuola Sternmatt 1: l'IA segna il 2026/27",
+      "description": "La scuola Sternmatt 1 presenta il nuovo orientamento per il 2026/27: l'intelligenza artificiale sarà centrale, con un uso responsabile della tecnologia",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/intelligenza-artificiale-cardiologia-2026-2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scuola Sternmatt 1: l'intelligenza artificiale al centro dell'anno 2026/27"
+      },
+      "datePublished": "2026-10-08T18:01:57+00:00",
+      "dateModified": "2026-10-08T18:01:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/scuola-sternmatt-ia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

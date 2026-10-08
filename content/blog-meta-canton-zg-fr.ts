@@ -12,6 +12,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.baar-rinnovo-comunale-2027.title': 'Baar : renouvellement du Conseil municipal pour 2027–2030',
     'blog.article.baar-rinnovo-comunale-2027.excerpt': 'Baarer Zytig indique les résultats du 27 septembre et le renouvellement du Conseil municipal du 4 octobre 2026 : sept membres pour le mandat 2027–2030.',
     'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Avis d\'élection du conseil municipal à Baar',
+    'blog.article.scuola-sternmatt-ia-2026.title': 'École Sternmatt 1 : l’IA marque l’année 2026/27',
+    'blog.article.scuola-sternmatt-ia-2026.excerpt': 'L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.',
+    'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'École Sternmatt 1: l\'intelligence artificielle au centre de l\'année scolaire 2026/27',
 };
 
 export default blogMetaCantonZgFr;
