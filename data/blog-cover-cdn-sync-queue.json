@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-scambio-portieri-lugano-ginevra.webp",
+      "sha256": "144b62c41a8f80d9151c76bf805218d00b5fdbaf676672cf469466accedd7430"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-scambio-portieri-lugano-ginevra-480w.webp",
+      "sha256": "60bcdc4bd99203d24fbdb4b09c7f99479767071c57310fab0703cffaa8b396cb"
+    }
+  ]
 }
