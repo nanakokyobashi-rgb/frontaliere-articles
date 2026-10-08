@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A settembre 2026 il Canton Soletta registra 4'551 disoccupati, 46 in meno sul mese precedente: il tasso scende dal 3,1% al 3,0% e il calo riguarda gli under 25.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-soletta-disoccupazione-settembre.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Persone davanti a un ufficio pubblico per il lavoro nel Canton Soletta"
@@ -74,6 +74,85 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-luterbach-a5-rampe-notte': {
+    title: 'A5 a Luterbach: quattro rampe chiuse a ottobre',
+    description: 'A Luterbach, sulla A5, la viabilità cambia nell\'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni sono segnalate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, luterbach, quattro, rampe, chiuse',
+    ogTitle: 'A5 a Luterbach: quattro rampe chiuse a ottobre',
+    ogDescription: 'Il nodo di Luterbach cambia la gestione del traffico sulla A5 per l\'ampliamento a sei corsie Luterbach-Härkingen. Quattro rampe saranno chiuse tra le 20 e le 5 in quattro notti di ottobre 2026; il maltempo può spostare ogni chiusura di una notte.',
+    canonicalPath: '/articoli-soletta/luterbach-a5-rampe-notte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A5 a Luterbach: quattro rampe chiuse a ottobre",
+      "description": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni sono segnalate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Svincolo di Luterbach sulla A5 durante lavori notturni e chiusure di rampe"
+      },
+      "datePublished": "2026-10-08T11:26:57+00:00",
+      "dateModified": "2026-10-08T11:26:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/luterbach-a5-rampe-notte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-soletta-progetti-trasporto-governo': {
+    title: 'Soletta: Governo chiede correzioni su progetti trasporti',
+    description: '## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, governo, chiede, correzioni',
+    ogTitle: 'Soletta: Governo chiede correzioni su progetti trasporti',
+    ogDescription: '## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti',
+    canonicalPath: '/articoli-soletta/soletta-progetti-trasporto-governo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: Governo chiede correzioni su progetti trasporti",
+      "description": "## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-progetti-trasporto-governo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta della stazione ferroviaria di Olten, con treni moderni e passeggeri, simbolo dell'infrastruttura di trasporto nel Canton Soletta."
+      },
+      "datePublished": "2026-10-08T11:40:05+00:00",
+      "dateModified": "2026-10-08T11:40:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-progetti-trasporto-governo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

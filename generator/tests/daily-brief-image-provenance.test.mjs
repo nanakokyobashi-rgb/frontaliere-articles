@@ -61,7 +61,11 @@ test('all tracked daily brief heroes have a byte-matching deterministic record',
   const covers = fs.readdirSync(path.join(ROOT, 'public/images/blog'))
     .filter((name) => /^bollettino-frontaliere-\d{4}-\d{2}-\d{2}\.webp$/.test(name))
     .sort();
-  assert.equal(covers.length, 57);
+  // One hero is added every day, so an exact count turns this gate red at each
+  // edition: written as 57 at 05:03Z on 8 October, it was 58 by 11:53Z. The loop
+  // below already checks every file; the floor only keeps a short directory
+  // read from passing with nothing to check.
+  assert.ok(covers.length >= 57, `only ${covers.length} daily brief heroes found: the directory read is short`);
 
   for (const name of covers) {
     const imageUrl = `/images/blog/${name}`;

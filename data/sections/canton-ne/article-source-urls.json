@@ -8,5 +8,15 @@
     "articleId": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
     "ts": "2026-10-07T09:30:57.338Z",
     "keyForm": 2
+  },
+  "https://www.rtn.ch/rtn/actualite/economie/20261007-referendum-depose-pour-defendre-les-salaires-minimaux-cantonaux.html": {
+    "articleId": "neuchatel-referendum-salari-minimi",
+    "ts": "2026-10-08T11:16:38.242Z",
+    "keyForm": 2
+  },
+  "https://www.cnci.ch/aldi-va-fermer-son-magasin-du-centre-ville-de-neuchatel": {
+    "articleId": "aldi-chiude-centro-neuchatel",
+    "ts": "2026-10-08T11:37:06.448Z",
+    "keyForm": 2
   }
 }

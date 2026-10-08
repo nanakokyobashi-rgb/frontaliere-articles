@@ -5,11 +5,12 @@
  * articoli per cantone», P7b). Gemello di reconcile-article-shards.mjs per le
  * sezioni servite dal Worker invece che da uno shard Pages.
  *
- * Perche' serve: fast-publish-section.yml pubblica gli articoli del commit che
- * lo fa scattare (`git diff HEAD~1 HEAD`); un push con piu' commit, una run
- * fallita a meta' o un upload non confermato lasciano un articolo annunciato
- * in `slugs.json`, nella sitemap della sezione e nei feed, e assente su R2:
- * il Worker risponde 404 su un URL che il sito dichiara.
+ * Perche' serve: fast-publish-section.yml rende gli id del piano del push, ma
+ * lo stato delle chiavi gia' sull'edge vive nel manifest scritto solo dopo una
+ * pubblicazione verificata. Un push con piu' commit, una run fallita a meta' o
+ * un upload non confermato possono lasciare un articolo annunciato in
+ * `slugs.json`, nella sitemap della sezione e assente su R2; lo stesso
+ * manifest permette di vedere una pagina ritirata rimasta sull'edge.
  *
  * Cosa confronta, da UNA osservazione della superficie pubblicata (stesso
  * `commit` in manifest, sections, slugs e registro edge, altrimenti il deploy
@@ -18,7 +19,8 @@
  *   atteso    ogni URL annunciato dalla sitemap pubblicata della sezione
  *             (loc e tutti gli xhtml:link href), quindi landing, hub,
  *             archivio con ogni page-N e articoli nelle locali disponibili
- *   presente  HEAD sulla chiave che il Worker legge,
+ *   presente  HEAD sulla chiave che il Worker legge, per le pagine annunciate
+ *             e per le pagine articolo candidate come orfane dal manifest,
  *             `https://cdn.frontaliereticino.ch/edge/sections/<path>/index.html`
  *
  * Solo un 404 conta come «mancante». Ogni altra risposta (5xx, timeout) e'
@@ -41,6 +43,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
 import { cantonHubTopicSlugs } from '../engine/shared/articleSectionCore.mjs';
+import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
 import { validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 
@@ -99,11 +102,27 @@ export function expectedSectionPages(entry, slugs, sitemapXml) {
 }
 
 /**
+ * Articoli che il manifest dell'edge considera presenti ma che il registro
+ * corrente non contiene più, oppure il cui slug è cambiato.
+ */
+export function orphanedArticleCandidates(entry, manifest, slugs, activeIds = Object.keys(slugs ?? {})) {
+  const active = new Set(activeIds);
+  return (manifest?.pages?.article ?? [])
+    .filter((row) => {
+      if (!active.has(row.id)) return true;
+      const expectedSlug = slugs?.[row.id]?.[row.locale];
+      const expectedPath = expectedSlug ? `${entry.paths[row.locale]}${expectedSlug}/` : null;
+      return expectedPath !== row.canonicalPath;
+    })
+    .map((row) => ({ kind: 'article', id: row.id, locale: row.locale, path: row.canonicalPath }));
+}
+
+/**
  * Da pagine attese e loro stato a cosa ripubblicare, con il cap per sezione.
  * @param {Array<{ kind: string, id?: string, path: string, state: 'present' | 'missing' | 'unknown' }>} pages
  * @param {Map<string, string>} dateById id → data dell'articolo
  */
-export function planSectionBackfill(section, pages, dateById, cap) {
+export function planSectionBackfill(section, pages, dateById, cap, orphanPages = []) {
   const n = Number(cap);
   if (!Number.isInteger(n) || n < 1) throw new Error(`cap non valido: ${cap}`);
   const missing = pages.filter((page) => page.state === 'missing');
@@ -112,18 +131,23 @@ export function planSectionBackfill(section, pages, dateById, cap) {
     return byDate || a.localeCompare(b);
   });
   const sectionMissing = missing.filter((page) => page.kind === 'section').map((page) => page.path);
+  const orphaned = orphanPages.filter((page) => page.state === 'present');
+  const orphanedUnknown = orphanPages.filter((page) => page.state === 'unknown').map((page) => page.path);
   return {
     section,
     expected: pages.length,
-    unknown: pages.filter((page) => page.state === 'unknown').map((page) => page.path),
+    unknown: [...pages.filter((page) => page.state === 'unknown').map((page) => page.path), ...orphanedUnknown],
     sectionMissing,
+    orphaned: orphaned.map((page) => page.path),
+    orphanedIds: [...new Set(orphaned.map((page) => page.id))].sort(),
+    orphanedUnknown,
     missingIds,
     selected: missingIds.slice(0, n),
     leftover: missingIds.slice(n),
     // Un giro di sola sezione (ids vuoti) serve quando manca una pagina di
     // sezione e nessun articolo: con articoli selezionati la sezione viene
     // comunque resa per intero dallo stesso publish.
-    dispatch: missingIds.length > 0 || sectionMissing.length > 0,
+    dispatch: missingIds.length > 0 || sectionMissing.length > 0 || orphaned.length > 0,
   };
 }
 
@@ -149,6 +173,11 @@ function unknownSitemapPlan(section, detail) {
     expected: null,
     unknown: [detail],
     sectionMissing: [],
+    orphaned: [],
+    orphanedIds: [],
+    orphanedUnknown: [],
+    pageManifest: 'unknown',
+    pageManifestReason: detail,
     missingIds: [],
     selected: [],
     leftover: [],
@@ -237,7 +266,21 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
     }
     const expected = expectedSectionPages(entry, slugs.cantons?.[entry.id] ?? {}, sitemapXml);
     const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
-    sections.push(planSectionBackfill(entry.id, expected.map((page, i) => ({ ...page, state: states[i] })), dateById, cap));
+    const activeRows = rows.filter((row) => row.section === entry.id);
+    const activeIds = activeRows.length
+      ? new Set(activeRows.map((row) => row.id))
+      : new Set(Object.keys(slugs.cantons?.[entry.id] ?? {}));
+    const pageManifest = await fetchPageManifest(pageManifestUrl(entry.id, CDN_BASE), { fetchImpl, section: entry.id });
+    let orphanPages = [];
+    if (pageManifest.state === 'ok') {
+      const candidates = orphanedArticleCandidates(entry, pageManifest.doc, slugs.cantons?.[entry.id] ?? {}, activeIds);
+      const orphanStates = await mapLimit(candidates, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
+      orphanPages = candidates.map((page, i) => ({ ...page, state: orphanStates[i] }));
+    }
+    const plan = planSectionBackfill(entry.id, expected.map((page, i) => ({ ...page, state: states[i] })), dateById, cap, orphanPages);
+    plan.pageManifest = pageManifest.state;
+    if (pageManifest.reason) plan.pageManifestReason = pageManifest.reason;
+    sections.push(plan);
   }
   return { skipped: null, apiCommit: manifest.commit, sections };
 }
@@ -261,6 +304,8 @@ export async function main(argv = process.argv.slice(2)) {
     dispatch: report.sections.filter((s) => s.dispatch).length,
     missing: report.sections.reduce((n, s) => n + s.missingIds.length, 0),
     leftover: report.sections.reduce((n, s) => n + s.leftover.length, 0),
+    orphaned: report.sections.reduce((n, s) => n + s.orphaned.length, 0),
+    manifestUnknown: report.sections.filter((s) => s.pageManifest !== 'ok').length,
     unknown: report.sections.reduce((n, s) => n + s.unknown.length, 0),
   };
   fs.mkdirSync(path.dirname(path.resolve(args.out)), { recursive: true });
@@ -269,10 +314,14 @@ export async function main(argv = process.argv.slice(2)) {
   console.log(
     `[reconcile-sections] corpus @${String(report.apiCommit).slice(0, 8)} — sezioni live ${report.counts.sections}, ` +
       `da ripubblicare ${report.counts.dispatch}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
+      `orfane ${report.counts.orphaned}, manifest non verificabili ${report.counts.manifestUnknown}, ` +
       `non verificabili ${report.counts.unknown}`,
   );
   for (const s of report.sections.filter((x) => x.dispatch)) {
-    console.log(`  ${s.section}: articoli ${s.selected.join(', ') || '—'}; pagine di sezione mancanti ${s.sectionMissing.length}`);
+    console.log(
+      `  ${s.section}: articoli ${s.selected.join(', ') || '—'}; ` +
+      `pagine di sezione mancanti ${s.sectionMissing.length}; orfane ${s.orphaned.length}`,
+    );
   }
   return 0;
 }

@@ -7913,6 +7913,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.mercato-lavoro-ia-svizzera.title': 'Schweizer KI-Arbeitsmarkt: +32% in einem Jahr',
     'blog.article.mercato-lavoro-ia-svizzera.excerpt': '',
     'blog.article.mercato-lavoro-ia-svizzera.imageAlt': 'Fachleute arbeiten in einem modernen Büro in der Schweiz zusammen, Bildschirme zeigen KI-bezogene Daten und Code.',
+    'blog.article.raiffeisen-pil-inflazione-2026.title': 'Raiffeisen: BIP 2026 bei 1,7%, Inflation bei 0,7%',
+    'blog.article.raiffeisen-pil-inflazione-2026.excerpt': '## Auf einen Blick - Raiffeisen hebt die BIP-Prognose für 2026 auf 1,7% an - Für 2027 bestätigt Raiffeisen ein Wachstum von 1,3% - Inflation 2026 bei 0,7%, gegenüber den geschätzten 0,5%',
+    'blog.article.raiffeisen-pil-inflazione-2026.imageAlt': 'Schweizer Fachperson analysiert Wirtschaftsprognosen mit den Alpen im Hintergrund',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.title': 'Schweiz führend in der Robotik: 217 Unternehmen und 7\'000 Arbeitsplätze',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.excerpt': '## Auf einen Blick - 217 Unternehmen in der Schweizer Robotik - 109 stellen direkt Roboter her - 87% haben weniger als 100 Mitarbeitende - Etwa 7’000 Arbeitsplätze',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.imageAlt': 'Redaktionelles Bild zu: Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
+    'blog.article.salari-svizzera-talenti-stranieri.title': 'Schweiz: minimales Lohngefälle für Talente aus der EU/EFTA',
+    'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## Auf einen Blick - Die Schweiz belegt im IMD World Talent Ranking den ersten Platz - Bereinigtes Lohngefälle EU/EFTA: 1,1% weniger - Drittstaaten: 4,5% weniger - Einwanderung über die Personenfreizügigkeit',
+    'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Panoramablick auf Lugano, Schweiz, symbolisch für wirtschaftliche Chancen und Attraktivität für qualifizierte Talente.',
 };
 
 export default blogMetaChDe;

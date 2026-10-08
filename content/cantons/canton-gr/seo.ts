@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Chiusura totale da mercoledì alle 21 - Tratto: Molina Nord–Cave di Arvigo - MeteoSvizzera prevede pioggia oltre la soglia critica - Riapertura",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/pasture-chiusura-garanzie.webp`,
+        "url": `${BASE_URL}/images/blog/article-strada-calanca-chiusura-preventiva.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Strada della Calanca chiusa per maltempo tra Molina Nord e Arvigo."

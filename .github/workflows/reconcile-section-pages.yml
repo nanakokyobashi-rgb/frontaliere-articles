@@ -1,16 +1,19 @@
 name: reconcile-section-pages
 
 # Riconcilia le pagine ANNUNCIATE delle sezioni cantonali `live` con cio' che
-# R2 ha davvero, e ripubblica le mancanti dispatchando fast-publish-section.yml
+# R2 ha davvero, osserva anche le pagine articolo ORFANE dal manifest dell'edge
+# e ripubblica le mancanti o le orfane dispatchando fast-publish-section.yml
 # (piano «sezioni articoli per cantone», P7b). Gemello di
 # reconcile-article-shards.yml per le sezioni servite dal Worker.
 #
 # fast-publish-section.yml pubblica gli articoli del commit che lo fa scattare:
 # un push con piu' commit, una run fallita a meta' o un upload non confermato
 # lasciano un articolo annunciato (slugs.json, sitemap di sezione, feed) e
-# assente su R2 — un 404 su un URL dichiarato. Qui si chiude quel buco, con un
-# CAP PER SEZIONE (D8) cosi' che un cantone con molti buchi non consumi il giro
-# degli altri.
+# assente su R2 — un 404 su un URL dichiarato. Un run fallito può anche lasciare
+# una pagina ritirata sull'edge: il manifest scritto dal publisher dopo una
+# release verificata rende quella chiave osservabile nel giro seguente. Qui si
+# chiudono entrambi i buchi, con un CAP PER SEZIONE (D8) cosi' che un cantone
+# con molti buchi non consumi il giro degli altri.
 #
 # Finche' nessuna sezione e' live il rilevamento e' un no-op (zero sezioni).
 
@@ -122,4 +125,4 @@ jobs:
           set -euo pipefail
           r="$RUNNER_TEMP/reconcile-sections.json"
           [ -s "$r" ] || exit 0
-          jq -r '"sezioni live \(.counts.sections), da ripubblicare \(.counts.dispatch), articoli mancanti \(.counts.missing), oltre il cap \(.counts.leftover), non verificabili \(.counts.unknown)"' "$r"
+          jq -r '"sezioni live \(.counts.sections), da ripubblicare \(.counts.dispatch), articoli mancanti \(.counts.missing), oltre il cap \(.counts.leftover), orfane \(.counts.orphaned), manifest non verificabili \(.counts.manifestUnknown), non verificabili \(.counts.unknown)"' "$r"

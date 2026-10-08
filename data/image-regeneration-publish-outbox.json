@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "strada-calanca-chiusura-preventiva",
+      "section": "canton-gr"
+    },
+    {
+      "articleId": "soletta-disoccupazione-settembre",
+      "section": "canton-so"
+    },
+    {
+      "articleId": "baugesuch-juchstrasse-frauenfeld",
+      "section": "canton-tg"
+    },
+    {
+      "articleId": "vaud-revision-bouclier-fiscal-2024",
+      "section": "canton-vd"
+    },
+    {
+      "articleId": "rapporti-thurmed-turgovia",
+      "section": "canton-tg"
+    }
+  ]
+}

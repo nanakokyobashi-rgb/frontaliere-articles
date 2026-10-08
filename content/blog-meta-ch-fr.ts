@@ -7913,6 +7913,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mercato-lavoro-ia-svizzera.title': 'Marché de l’emploi dans l’IA en Suisse : +32 % en un an',
     'blog.article.mercato-lavoro-ia-svizzera.excerpt': 'Près de 5\'000 offres d’emploi en IA entre juillet 2025 et juin 2026',
     'blog.article.mercato-lavoro-ia-svizzera.imageAlt': 'Professionnels collaborant dans un bureau moderne en Suisse, avec des écrans affichant des données et du code liés à l\'IA.',
+    'blog.article.raiffeisen-pil-inflazione-2026.title': 'Raiffeisen : PIB 2026 à 1,7%, inflation à 0,7%',
+    'blog.article.raiffeisen-pil-inflazione-2026.excerpt': '## En bref - Raiffeisen porte à 1,7% la prévision de PIB pour 2026 - Pour 2027, elle confirme une croissance de 1,3% - Inflation 2026 à 0,7%, contre 0,5% estimé',
+    'blog.article.raiffeisen-pil-inflazione-2026.imageAlt': 'Professionnel suisse analysant des prévisions économiques avec les Alpes en arrière-plan',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.title': 'La Suisse, leader de la robotique : 217 entreprises et 7\'000 emplois',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.excerpt': '## En bref - 217 entreprises dans la robotique suisse - 109 produisent directement des robots - 87% comptent moins de 100 collaborateurs - Environ 7’000 emplois',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.imageAlt': 'Image éditoriale relative à: Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
+    'blog.article.salari-svizzera-talenti-stranieri.title': 'Suisse : écart salarial minimal pour les talents de l’UE/AELE',
+    'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## En bref - La Suisse est première dans l’IMD World Talent Ranking - Écart UE/AELE corrigé : 1,1 % de moins - Pays tiers : 4,5 % de moins - Immigration libre',
+    'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Vue panoramique de Lugano, Suisse, symbolisant les opportunités économiques et l\'attractivité pour les talents qualifiés.',
 };
 
 export default blogMetaChFr;
