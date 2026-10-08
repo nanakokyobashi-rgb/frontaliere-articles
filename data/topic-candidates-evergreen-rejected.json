@@ -511,7 +511,9 @@
     "affitti svizzera mercato immobiliare 2026 canton San Gallo",
     "dichiarazione imposte svizzera guida pratica 2026 canton Basilea",
     "imposta sugli autoveicoli canton Zurigo calcolo e pagamento",
-    "voto cantonale canton Berna guida a iniziative e referendum"
+    "voto cantonale canton Berna guida a iniziative e referendum",
+    "vivere a Pré-Saint-Didier e lavorare in Vallese da frontaliere",
+    "vivere a Saint-Nicolas e lavorare in Vallese da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -792,7 +794,7 @@
     "imposta di successione e donazione canton Friburgo aliquote": 2,
     "salario medio professioni svizzera 2026 canton Zurigo": 2,
     "affitti svizzera mercato immobiliare 2026": 1,
-    "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
+    "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
@@ -1050,6 +1052,34 @@
     "frontaliere::https://www.tio.ch/svizzera/economia/1955482/tassi-raiffeisen-svizzera-bns-crescita-forte": {
       "section": "frontaliere",
       "ts": 1791445759176
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/raiffeisen%3a-%22crescita-pi%c3%b9-forte-del-previsto%2c-ora-bns-alzer%c3%a0-tassi%22/92184611": {
+      "section": "frontaliere",
+      "ts": 1791449359731
+    },
+    "frontaliere::https://www.rsi.ch/s/4136807": {
+      "section": "frontaliere",
+      "ts": 1791449388982
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1955486/32-in-un-anno-il-mercato-del-lavoro-ia-cresce-rapidamente": {
+      "section": "frontaliere",
+      "ts": 1791449420518
+    },
+    "frontaliere::https://www.rsi.ch/s/4145129": {
+      "section": "frontaliere",
+      "ts": 1791449443633
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954988/traffico-merci-su-rotaia-nel-personale-c-e-apprensione-per-la-sicurezza": {
+      "section": "frontaliere",
+      "ts": 1791449488815
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1955499/aziende-cantonali-ma-quanto-prendono-i-membri-dei-cda": {
+      "section": "frontaliere",
+      "ts": 1791449510348
+    },
+    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955474/dati-publica-confederazione-fuga-pensioni-cassa": {
+      "section": "frontaliere",
+      "ts": 1791449541119
     }
   }
 }

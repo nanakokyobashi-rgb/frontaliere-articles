@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 136,
+  "assetCount": 137,
   "assets": [
     {
       "schema": 1,
@@ -4204,6 +4204,47 @@
         "looks_like_specific_real_event": false,
         "is_photograph": false,
         "notes": "Original generic mountain landscape illustration with no text, logos, recognizable faces, or specific real event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-crescita-lavoro-intelligenza-artificiale",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "1b347e4ad6c3b6491e4b941a52d5e7f359e3be8ca2c0dac290b024bc5e841457",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "48b8f303524b17e3d4d968f7109e875515e4ba78dbe50ff7679ad47e5b073f6f",
+      "bytes": 79238,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-08T09:17:45.483Z",
+      "verifiedAt": "2026-10-08T09:17:53.964Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-crescita-lavoro-intelligenza-artificiale.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "notes": "Original generic editorial illustration with no readable text, logos, faces, or specific real-event depiction."
       }
     }
   ]

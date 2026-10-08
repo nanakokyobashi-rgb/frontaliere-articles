@@ -26362,6 +26362,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'crescita-lavoro-intelligenza-artificiale',
+    category: 'novita',
+    date: '2026-10-08T09:17:54.239Z',
+    image: '/images/blog/article-crescita-lavoro-intelligenza-artificiale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
