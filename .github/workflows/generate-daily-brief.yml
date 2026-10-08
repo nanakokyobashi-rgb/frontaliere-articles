@@ -244,6 +244,7 @@ jobs:
             # esiste sempre qui e finisce in stage solo se lo streak si e' mosso.
             git add public/data/daily-brief.json \
                     data/daily-brief-degradation.json \
+                    data/generated-image-registry.json \
                     content/blogArticleIds.ts \
                     content/routerBlogData.ts \
                     content/blog-articles-data.ts \
@@ -265,15 +266,16 @@ jobs:
             exit 0
           fi
           # Un giorno senza edizione ma con lo streak che si muove (0/4 blocchi,
-          # #885) mette in stage SOLO il registro, e prima che esistesse quel
+          # #885) mette in stage SOLO il ledger di degradazione, e prima che
+          # esistesse quel
           # `git add` questo ramo non veniva mai raggiunto: usciva verde sopra.
           # Ora ci arriva, e con lui arriva l'`exit 1` del push fallito — cioe'
           # un rosso ogni mattina finche' il blackout dura, che e' esattamente
           # il loop dichiarato inaccettabile in #882.
           #
-          # Il registro non e' l'edizione: `data/**` non e' nei `paths:` di
-          # `publish-api.yml`, quindi perderlo non lascia il sito su una
-          # superficie vecchia. Perderlo costa un allarme in ritardo — lo
+          # Il ledger non e' l'edizione: `data/daily-brief-degradation.json`
+          # non e' nei `paths:` di `publish-api.yml`, quindi perderlo non lascia
+          # il sito su una superficie vecchia. Perderlo costa un allarme in ritardo — lo
           # stesso prezzo che si pagava prima di #885 — mentre il rosso in loop
           # costa una mattina rossa per sempre. Quindi: se in stage c'e' SOLO
           # il registro, un push fallito e' un warning e la run resta verde;
@@ -298,6 +300,16 @@ jobs:
           fi
 
           git commit -m "$COMMIT_MESSAGE"
+          # Il registry delle copertine è append-only: se un altro writer entra
+          # su main fra questo commit e il push, il rebase deve poter prendere
+          # upstream per completare e poi riunire il delta di questo run.
+          PRODUCED="$(git rev-parse HEAD)"
+          registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
+          registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
+          if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
+            printf '%s\n' '{"schema":1,"assetCount":0,"assets":[]}' > "$registry_base"
+          fi
+          cp data/generated-image-registry.json "$registry_snapshot"
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
@@ -342,30 +354,34 @@ jobs:
             # superficie classificabile, che contiene esclusivamente gli
             # snapshot dei push sopra.
             set +e
-            git pull --rebase "$REMOTE" "$TARGET" 2>&1 \
+            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+              data/generated-image-registry.json 2>&1 \
               | tee -a "$PUSH_LOG"
             rebase_status=${PIPESTATUS[0]}
             set -e
             if [ "$rebase_status" -eq 0 ]; then
+              node scripts/ci/merge-generated-image-registry.mjs \
+                data/generated-image-registry.json "$registry_base" "$registry_snapshot" \
+                2>&1 | tee -a "$PUSH_LOG"
+              merge_status=${PIPESTATUS[0]}
+              if [ "$merge_status" -ne 0 ]; then
+                echo "error: [registry-merge] generated-image-registry reconciliation failed" \
+                  | tee -a "$PUSH_LOG"
+                exit 1
+              fi
+              git add data/generated-image-registry.json
+              if ! git diff --cached --quiet; then
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
+                  git commit -C "$PRODUCED"
+                else
+                  git commit --amend --no-edit
+                fi
+              fi
               echo "remote: [push-rebase] completed before attempt $((attempt + 1))" \
                 | tee -a "$PUSH_LOG"
             else
               echo "error: [push-rebase] failed before attempt $((attempt + 1)); aborting" \
                 | tee -a "$PUSH_LOG"
-              set +e
-              git rebase --abort 2>&1 \
-                | tee -a "$PUSH_LOG"
-              abort_status=${PIPESTATUS[0]}
-              set -e
-              if [ "$abort_status" -eq 0 ]; then
-                echo "error: [push-rebase] aborted before attempt $((attempt + 1))" \
-                  | tee -a "$PUSH_LOG"
-              else
-                echo "fatal: [push-rebase] abort failed before attempt $((attempt + 1))" \
-                  | tee -a "$PUSH_LOG"
-                echo "::error::cannot abort failed intermediate rebase — refusing to retry or report the edition as pushed"
-                exit 1
-              fi
             fi
           done
           # Il ramo degradato qui sotto classifica per FORMA del fallimento

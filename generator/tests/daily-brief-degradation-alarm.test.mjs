@@ -778,20 +778,21 @@ test('an empty latest outcome is explicit and the intermediate rebase is retaine
   assert.match(emptyBranch, /exit 0/, 'a ledger-only empty outcome stays on the transient path');
   assert.match(emptyBranch, /exit 1/, 'an edition with an empty outcome remains red');
 
-  assert.match(commitStep, /git pull --rebase "\$REMOTE" "\$TARGET" 2>&1/,
-    'the intermediate rebase must be captured');
+  assert.match(
+    commitStep,
+    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET"[\s\S]*data\/generated-image-registry\.json/,
+    'the intermediate rebase must reconcile the generated-image registry',
+  );
+  assert.match(commitStep, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json/,
+    'the replayed registry delta must be merged after the rebase');
   assert.match(commitStep, /\| tee -a "\$PUSH_LOG"/, 'rebase output must enter the cumulative log');
-  assert.doesNotMatch(commitStep, /git pull --rebase[\s\S]*?\| tee -a "\$ATTEMPT_LOG"/, 'rebase output must stay out of the push attempt log');
+  assert.doesNotMatch(commitStep, /rebase-onto-remote\.sh[\s\S]*?\| tee "\$ATTEMPT_LOG"/, 'rebase output must stay out of the push attempt log');
   assert.match(commitStep, /rebase_status=\$\{PIPESTATUS\[0\]\}/,
     'the rebase result must be separated from tee');
-  assert.match(commitStep, /git rebase --abort 2>&1/, 'a failed rebase must be aborted visibly');
-  assert.match(commitStep, /\[push-rebase\] (completed|failed|aborted)/,
+  assert.match(commitStep, /\[push-rebase\] (completed|failed)/,
     'success and partial failure must remain distinguishable in outcome lines');
-  const abortGuard = sliceFrom(commitStep, 'if [ "$abort_status" -eq 0 ]; then');
-  const abortBranch = sliceUntil(abortGuard, '\n          fi');
-  assert.match(abortBranch, /abort failed/, 'an abort failure must be explicit');
-  assert.match(abortBranch, /refusing to retry/, 'an abort failure must stop the retry loop');
-  assert.match(abortBranch, /exit 1/, 'an abort failure must leave the run red');
+  assert.match(commitStep, /\[registry-merge\] generated-image-registry reconciliation failed/,
+    'a failed registry reconciliation must remain explicit and red');
 });
 
 test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress or a fetch-first race', () => {
