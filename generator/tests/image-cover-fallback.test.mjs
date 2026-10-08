@@ -14,8 +14,10 @@ import {
 import {
   appendGeneratedImageRecord,
   imageRecordForPath,
+  readGeneratedImageRecords,
   sha256File,
 } from '../scripts/lib/blog-image-registry.mjs';
+import { buildSeoImageBlock } from '../scripts/lib/seo-entry-builder.mjs';
 import {
   GENERATED_IMAGE_CREDIT,
   GENERATED_IMAGE_LICENSE,
@@ -175,29 +177,38 @@ test('a licensed article hero writes the shared attribution ledger and resolves 
   }
 });
 
-test('replacing a licensed hero with generated media removes the stale per-cover credit', () => {
+test('sostituire una foto licenziata con una cover generata rimuove il ledger obsoleto', () => {
   const root = tempRoot();
   try {
     const licensed = licensedCatalogRecord();
-    const file = path.join(root, 'public', licensed.imageUrl.slice(1));
-    fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, Buffer.alloc(licensed.bytes, 0x47));
-    licensed.sha256 = sha256File(file);
     appendGeneratedImageRecord(root, licensed);
+    const creditFile = path.join(root, 'content/image-credits/blog/licensed-cover-ledger-test.json');
+    assert.equal(fs.existsSync(creditFile), true);
 
     const generated = generatedCatalogRecord();
     generated.assetId = licensed.assetId;
     generated.imageUrl = licensed.imageUrl;
-    generated.sha256 = licensed.sha256;
     appendGeneratedImageRecord(root, generated);
 
-    assert.equal(fs.existsSync(path.join(root, 'content/image-credits/blog/licensed-cover-ledger-test.json')), false);
-    assert.equal(imageRecordForPath(root, licensed.imageUrl, { strict: true }).kind, 'generated');
+    assert.equal(fs.existsSync(creditFile), false);
+    assert.equal(readGeneratedImageRecords(root).find((item) => item.assetId === licensed.assetId).provider, 'openai-codex');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
 });
 
+test('il blocco SEO di una foto licenziata espone autore, licenza e sorgente', () => {
+  const record = licensedCatalogRecord();
+  const block = buildSeoImageBlock({
+    imagePath: record.imageUrl,
+    provenance: { kind: 'licensed-photo', record },
+    caption: 'Copertina fotografica',
+  });
+  assert.match(block, /"acquireLicensePage": "https:\/\/commons\.wikimedia\.org\/wiki\/File:Zurich_employment_office\.jpg"/);
+  assert.match(block, /"license": "https:\/\/creativecommons\.org\/licenses\/by-sa\/4\.0\/"/);
+  assert.match(block, /"creator": \{[^\n]*"name":"Ada Foto"/);
+  assert.match(block, /"isBasedOn": "https:\/\/commons\.wikimedia\.org\/wiki\/File:Zurich_employment_office\.jpg"/);
+});
 test('un catalogo valido ma non pertinente non diventa la copertina finale', () => {
   const root = tempRoot();
   try {
