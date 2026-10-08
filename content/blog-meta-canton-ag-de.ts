@@ -12,6 +12,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.argovia-parita-salariale.title': 'Argovia: Initiative für Lohngleichheit',
     'blog.article.argovia-parita-salariale.excerpt': 'In Argovia fordert die Initiative für Lohngleichheit Analysen ab 50 Beschäftigten, Sanktionen und die Wiederherstellung der Fachstelle für Gleichstellung.',
     'blog.article.argovia-parita-salariale.imageAlt': 'Arbeitnehmerinnen und Unterstützerinnen diskutieren Lohngleichheit im Kanton Aargau',
+    'blog.article.chiusura-hochrheinbahn-2026.title': 'Hochrheinbahn gesperrt: Basel-Rheinfelden ab 10. Oktober',
+    'blog.article.chiusura-hochrheinbahn-2026.excerpt': 'Ab dem 10. Oktober 2026 wird die Hochrheinbahn zwischen Basel und Rheinfelden gesperrt: Bauarbeiten, Verspätungen und Ersatzbusse verändern die Wege der Pendler.',
+    'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Regionalzugstrecke zwischen Basel und Rheinfelden mit Ersatzbus',
 };
 
 export default blogMetaCantonAgDe;

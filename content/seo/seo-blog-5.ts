@@ -46164,7 +46164,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "caption": "Eventi del weekend in Ticino"
       },
       "datePublished": "2026-06-29T23:19:06+02:00",
-      "dateModified": "2026-10-01T00:00:00+02:00",
+      "dateModified": "2026-10-08T00:00:00+02:00",
       "inLanguage": "it",
       "author": {
         "@type": "Person",
@@ -103308,6 +103308,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-scambio-portieri-lugano-ginevra': {
+    title: 'Scambio di portieri: mayer a Lugano, van pottelberghe a Ginevra',
+    description: '## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite',
+    keywords: 'frontalieri, ticino, svizzera, italia, scambio, portieri, mayer, lugano',
+    ogTitle: 'Scambio di portieri: Mayer a Lugano, Van Pottelberghe a Ginevra',
+    ogDescription: '## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite',
+    canonicalPath: '/articoli-frontaliere/scambio-portieri-lugano-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scambio di portieri: mayer a Lugano, van pottelberghe a Ginevra",
+      "description": "## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-scambio-portieri-lugano-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Portiere di hockey in azione alla Cornèr Arena di Lugano con sfondo delle Alpi svizzere"
+      },
+      "datePublished": "2026-10-08T13:38:03+00:00",
+      "dateModified": "2026-10-08T13:38:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scambio-portieri-lugano-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

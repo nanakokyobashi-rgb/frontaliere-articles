@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'chiusura-hochrheinbahn-2026',
+ category: 'pratico',
+ date: '2026-10-08T14:00:19.714Z',
+ image: '/images/blog/article-chiusura-hochrheinbahn-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG', 'BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

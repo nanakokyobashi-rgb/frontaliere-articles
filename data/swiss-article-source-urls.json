@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/gr%3a-hotel-di-lenzerheide-vittima-di-attacco-hacker-avvisa-clienti/92012381": {
-    "articleId": "hotel-lenzerheide-hacker-avviso",
-    "ts": "2026-09-06T18:04:40.285Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948360/fondazione-vittime-crans-montana-beloved-richieste-ricevuto-settantina": {
     "articleId": "beloved-richieste-settantina",
     "ts": "2026-09-06T19:10:59.007Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1955578/figli-tribunale-padre-riduzione-cassa-malattia-tf-premi": {
     "articleId": "tf-nega-sconto-cassa-malati-padre-affidamento-alternato",
     "ts": "2026-10-08T13:03:38.828Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4146074": {
+    "articleId": "ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita",
+    "ts": "2026-10-08T14:16:29.178Z",
     "keyForm": 2
   }
 }

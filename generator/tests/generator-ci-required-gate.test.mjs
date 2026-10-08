@@ -22,6 +22,7 @@ import { touchesGeneratorCiPaths } from '../../scripts/ci/auto-merge-eval.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = path.join(ROOT, '.github/workflows/generator-ci.yml');
+const TESTS_WORKFLOW = path.join(ROOT, '.github/workflows/tests.yml');
 
 /**
  * Estrae i `pull_request.paths` di generator-ci.yml senza un parser YAML
@@ -92,4 +93,13 @@ test('touchesGeneratorCiPaths: PR di solo contenuto/dati non tocca nulla → fal
 test('touchesGeneratorCiPaths: input non-array → false, non lancia', () => {
   assert.equal(touchesGeneratorCiPaths(undefined), false);
   assert.equal(touchesGeneratorCiPaths(null), false);
+});
+
+test('tests.yml passa la base della PR al gate per lo scope locale', () => {
+  const source = fs.readFileSync(TESTS_WORKFLOW, 'utf8');
+  const start = source.indexOf('- name: Generator CI gate');
+  assert.notEqual(start, -1, 'step Generator CI gate non trovato');
+  const next = source.indexOf('\n      - name: ', start + 1);
+  const block = source.slice(start, next === -1 ? undefined : next);
+  assert.match(block, /PR_BASE_SHA: \$\{\{ github\.event\.pull_request\.base\.sha \}\}/);
 });

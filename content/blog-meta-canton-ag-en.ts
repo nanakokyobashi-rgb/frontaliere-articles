@@ -12,6 +12,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.argovia-parita-salariale.title': 'Aargau: initiative for pay equality',
     'blog.article.argovia-parita-salariale.excerpt': 'In Aargau, the equal-pay initiative calls for analyses at companies with 50 employees, sanctions, and the reinstatement of the equality office.',
     'blog.article.argovia-parita-salariale.imageAlt': 'Workers and advocates discuss pay equality in Canton Aargau',
+    'blog.article.chiusura-hochrheinbahn-2026.title': 'Hochrheinbahn closed: Basel-Rheinfelden from October 10',
+    'blog.article.chiusura-hochrheinbahn-2026.excerpt': 'From October 10, 2026, the Hochrheinbahn will be closed between Basel and Rheinfelden: construction work, delays and replacement buses will affect commuters’ journeys.',
+    'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Regional train route between Basel and Rheinfelden with a replacement bus',
 };
 
 export default blogMetaCantonAgEn;
