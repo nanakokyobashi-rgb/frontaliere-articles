@@ -400,6 +400,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T18:19:40.012Z",
       "lastFailureAt": "2026-10-08T18:19:40.012Z"
+    },
+    {
+      "articleId": "heiden-tassa-base-rifiuti",
+      "title": "Heiden aumenta la tassa base sui rifiuti",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T18:18:38.698Z",
+      "lastFailureAt": "2026-10-08T18:18:38.698Z"
     }
   ]
 }
