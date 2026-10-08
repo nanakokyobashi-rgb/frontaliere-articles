@@ -2115,7 +2115,7 @@
       "reason": "Ledger JSON durevole delle pagine articolo con immagine generica: vive nel body della issue observer, conserva gli item oltre la finestra di lookback, limita i dispatch e marca exhausted dopo tre esiti falliti. Il sito non deve possedere ne' modificare questo coordinamento del publisher del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "23e26ea445dfc258",
+        "corpus": "ecade2e2c301547b",
         "alignedAt": "2026-10-08"
       }
     },
