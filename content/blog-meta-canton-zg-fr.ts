@@ -9,6 +9,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zug-rischio-coleottero-giapponese.title': 'Zoug se prépare au risque du scarabée japonais',
     'blog.article.zug-rischio-coleottero-giapponese.excerpt': 'Foyers confirmés à Zurich, Lucerne et Schwytz : Zoug renforce la surveillance et demande de contrôler les véhicules, les bagages et les matériaux.',
     'blog.article.zug-rischio-coleottero-giapponese.imageAlt': 'Pièges de surveillance contre le scarabée japonais dans le canton de Zoug',
+    'blog.article.baar-rinnovo-comunale-2027.title': 'Baar : renouvellement du Conseil municipal pour 2027–2030',
+    'blog.article.baar-rinnovo-comunale-2027.excerpt': 'Baarer Zytig indique les résultats du 27 septembre et le renouvellement du Conseil municipal du 4 octobre 2026 : sept membres pour le mandat 2027–2030.',
+    'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Avis d\'élection du conseil municipal à Baar',
 };
 
 export default blogMetaCantonZgFr;

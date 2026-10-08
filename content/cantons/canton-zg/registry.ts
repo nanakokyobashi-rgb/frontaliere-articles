@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'baar-rinnovo-comunale-2027',
+ category: 'novita',
+ date: '2026-10-08T17:50:07.603Z',
+ image: '/images/blog/article-agrivarese-angera-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

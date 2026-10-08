@@ -9,6 +9,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zug-rischio-coleottero-giapponese.title': 'Zugo si prepara al rischio del coleottero giapponese',
     'blog.article.zug-rischio-coleottero-giapponese.excerpt': 'Focolai confermati a Zurigo, Lucerna e Svitto: Zugo rafforza la sorveglianza e chiede di controllare veicoli, bagagli e materiali.',
     'blog.article.zug-rischio-coleottero-giapponese.imageAlt': 'Rete di trappole per il coleottero giapponese nel Cantone di Zugo',
+    'blog.article.baar-rinnovo-comunale-2027.title': 'Baar: rinnovo del Gemeinderat per il 2027–2030',
+    'blog.article.baar-rinnovo-comunale-2027.excerpt': 'Baarer Zytig indica i risultati del 27 settembre e il rinnovo del Gemeinderat del 4 ottobre 2026: sette membri per il mandato 2027–2030.',
+    'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Avvisi elettorali per il Gemeinderat di Baar',
 };
 
 export default blogMetaCantonZgIt;

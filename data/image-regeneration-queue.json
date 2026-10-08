@@ -370,6 +370,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T17:40:48.716Z",
       "lastFailureAt": "2026-10-08T17:40:48.716Z"
+    },
+    {
+      "articleId": "baar-rinnovo-comunale-2027",
+      "title": "Baar: rinnovo del Gemeinderat per il 2027–2030",
+      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T17:50:07.621Z",
+      "lastFailureAt": "2026-10-08T17:50:07.621Z"
     }
   ]
 }

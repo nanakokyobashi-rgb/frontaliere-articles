@@ -75,6 +75,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-baar-rinnovo-comunale-2027': {
+    title: 'Baar: rinnovo del Gemeinderat per il 2027–2030',
+    description: 'A Baarer Zytig il rinnovo del Gemeinderat di Baar: elezione del 4 ottobre 2026, sette membri e mandato 2027–2030. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, baar, rinnovo, gemeinderat, baarer',
+    ogTitle: 'Baar: rinnovo del Gemeinderat 2027–2030',
+    ogDescription: 'La sezione Wahlen/Abstimmungen della Baarer Zytig presenta i risultati delle votazioni del 27.9. a Baar e il rinnovo del Gemeinderat del 4 ottobre 2026. Il mandato indicato copre il periodo 2027–2030 e riguarda sette membri.',
+    canonicalPath: '/articoli-zugo/baar-rinnovo-comunale-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Baar: rinnovo del Gemeinderat per il 2027–2030",
+      "description": "A Baarer Zytig il rinnovo del Gemeinderat di Baar: elezione del 4 ottobre 2026, sette membri e mandato 2027–2030. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Avvisi elettorali per il Gemeinderat di Baar"
+      },
+      "datePublished": "2026-10-08T17:50:07+00:00",
+      "dateModified": "2026-10-08T17:50:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/baar-rinnovo-comunale-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

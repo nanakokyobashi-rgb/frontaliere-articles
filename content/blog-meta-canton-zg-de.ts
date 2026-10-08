@@ -9,6 +9,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.zug-rischio-coleottero-giapponese.title': 'Zug bereitet sich auf das Risiko des Japankäfers vor',
     'blog.article.zug-rischio-coleottero-giapponese.excerpt': 'Befallsherde in Zürich, Luzern und Schwyz bestätigt: Zug verstärkt die Überwachung und bittet darum, Fahrzeuge, Gepäck und Materialien zu kontrollieren.',
     'blog.article.zug-rischio-coleottero-giapponese.imageAlt': 'Überwachungsfallen gegen den Japankäfer im Kanton Zug',
+    'blog.article.baar-rinnovo-comunale-2027.title': 'Baar: Erneuerung des Gemeinderats für 2027–2030',
+    'blog.article.baar-rinnovo-comunale-2027.excerpt': 'Baarer Zytig nennt die Ergebnisse vom 27.',
+    'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Wahlhinweise für den Gemeinderat in Baar',
 };
 
 export default blogMetaCantonZgDe;

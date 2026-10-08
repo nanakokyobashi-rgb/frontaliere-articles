@@ -9,6 +9,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zug-rischio-coleottero-giapponese.title': 'Zug prepares for the risk of the Japanese beetle',
     'blog.article.zug-rischio-coleottero-giapponese.excerpt': 'Confirmed outbreaks in Zurich, Lucerne and Schwyz: Zug strengthens surveillance and asks people to check vehicles, luggage and materials.',
     'blog.article.zug-rischio-coleottero-giapponese.imageAlt': 'Japanese beetle monitoring traps in the canton of Zug',
+    'blog.article.baar-rinnovo-comunale-2027.title': 'Baar: renewal of the Municipal Council for 2027–2030',
+    'blog.article.baar-rinnovo-comunale-2027.excerpt': 'Baarer Zytig reports the results of September 27 and the renewal of the Gemeinderat on October 4, 2026: seven members for the 2027–2030 term.',
+    'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Municipal council election notices in Baar',
 };
 
 export default blogMetaCantonZgEn;
