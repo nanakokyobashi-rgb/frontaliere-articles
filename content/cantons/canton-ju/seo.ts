@@ -40,6 +40,46 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-fondo-clima-giura-2028': {
+    title: 'Giura, fondo clima da 6,7 milioni annui dal 2028',
+    description: '## In breve - CHF 6,7 milioni annui dal 2028 - Fondo per emissioni e adattamento climatico - Tre prelievi per CHF 2,63 milioni - L\'UDC minaccia un referendum ##',
+    keywords: 'frontalieri, ticino, svizzera, italia, giura, fondo, clima, milioni',
+    ogTitle: 'Giura, fondo clima da 6,7 milioni dal 2028',
+    ogDescription: '## In breve - CHF 6,7 milioni annui dal 2028 - Fondo per emissioni e adattamento climatico - Tre prelievi per CHF 2,63 milioni - L\'UDC minaccia un referendum ##',
+    canonicalPath: '/articoli-giura/fondo-clima-giura-2028/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giura, fondo clima da 6,7 milioni annui dal 2028",
+      "description": "## In breve - CHF 6,7 milioni annui dal 2028 - Fondo per emissioni e adattamento climatico - Tre prelievi per CHF 2,63 milioni - L'UDC minaccia un referendum ##",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fondo-clima-giura-2028.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo e impianto di riscaldamento nel Canton Giura"
+      },
+      "datePublished": "2026-10-08T10:13:59+00:00",
+      "dateModified": "2026-10-08T10:13:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/fondo-clima-giura-2028/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
