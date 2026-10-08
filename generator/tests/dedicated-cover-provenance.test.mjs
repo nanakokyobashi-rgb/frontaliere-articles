@@ -7,6 +7,13 @@
  * cover nuova senza record non può svuotare il test con uno sparse-checkout,
  * mentre una cover storica lasciata senza record resta riparabile in una PR
  * indipendente.
+ *
+ * Il verso opposto ha un caso suo: una PR che toglie un record mentre la
+ * copertina resta nel repository. Il primo controllo guarda i record che il
+ * worktree ha, quindi uno sparito non lo vede. È successo l'8 ottobre 2026
+ * sulla PR 2458: un rebase ha risolto il conflitto sul registro scartando il
+ * lato di `main` e ha perso il record di una copertina pubblicata, con tutti
+ * i test verdi.
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -56,6 +63,19 @@ function relevantDedicatedCovers(base) {
     .filter((record) => JSON.stringify(before.get(record.assetId)) !== JSON.stringify(record))
     .map((record) => record.imageUrl);
   return [...new Set([...changedFiles, ...changedRecords])].sort();
+}
+
+/**
+ * Le copertine dedicate che alla base avevano un record e ora non ne hanno
+ * nessuno, mentre il file è ancora tracciato. Il file si cerca nell'indice di
+ * git, non sul disco: in uno sparse-checkout non è materializzato.
+ */
+function dedicatedCoversLeftWithoutRecord(base) {
+  const stillRegistered = new Set([...registryRecordsAt('WORKTREE').values()].map((record) => record.imageUrl));
+  return [...new Set([...registryRecordsAt(base).values()].map((record) => record.imageUrl))]
+    .filter((imageUrl) => !stillRegistered.has(imageUrl))
+    .filter((imageUrl) => gitText(['ls-files', '--', `public${imageUrl}`]) !== '')
+    .sort();
 }
 
 function webpDimensions(file) {
@@ -137,6 +157,17 @@ test('ogni copertina dedicata toccata dalla PR ha una provenienza strict', (t) =
     ungoverned,
     [],
     `${ungoverned.length} copertine dedicate toccate dalla PR su ${covers.length} senza provenienza verificabile:\n  ${ungoverned.join('\n  ')}`,
+  );
+});
+
+test('una PR non toglie dal registro il record di una copertina dedicata che resta nel repository', () => {
+  const orphaned = dedicatedCoversLeftWithoutRecord(pullRequestBase());
+  assert.deepEqual(
+    orphaned,
+    [],
+    `${orphaned.length} copertine dedicate restano nel repository senza più un record nel registro:\n  ${orphaned.join('\n  ')}\n`
+      + 'Un rebase o una fusione che riscrive data/generated-image-registry.json può perdere un record arrivato su main: '
+      + 'riporta il record, oppure togli anche la copertina.',
   );
 });
 
