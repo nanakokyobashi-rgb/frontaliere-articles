@@ -75,6 +75,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-casse-malati-amministrazione-costi-2025': {
+    title: 'Casse malati: amministrazione varia da 103 a 445 franchi',
+    description: 'Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, amministrazione, varia',
+    ogTitle: 'Casse malati: amministrazione varia da 103 a 445 franchi',
+    ogDescription: 'L\'analisi Comparis per l\'Effizienzpreis 2026 mostra che nel 2025 le casse malati svizzere hanno speso tra 103,35 e 445,20 CHF per persona per la gestione amministrativa. La media è stata di 191,15 CHF, in calo del 3,3% dal 2021. La soglia',
+    canonicalPath: '/articoli-san-gallo/casse-malati-amministrazione-costi-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse malati: amministrazione varia da 103 a 445 franchi",
+      "description": "Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-casse-malati-amministrazione-costi-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio di una cassa malati a San Gallo con persone che camminano davanti"
+      },
+      "datePublished": "2026-10-08T10:59:45+00:00",
+      "dateModified": "2026-10-08T10:59:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/casse-malati-amministrazione-costi-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-spital-grabs-haus-o-vertice': {
+    title: 'Spital Grabs: Haus O raggiunge il punto più alto',
+    description: 'A settembre 2026 Haus O dello Spital Grabs ha raggiunto il punto più alto. Haus S è stato ampliato: nuovi spazi per radiologia e oncologia, lavori fino al 2028.',
+    keywords: 'frontalieri, ticino, svizzera, italia, spital, grabs, haus, raggiunge',
+    ogTitle: 'Spital Grabs: radiologia e oncologia nel nuovo Haus O',
+    ogDescription: 'Nel cantiere di Spital Grabs, HOCH Health Ostschweiz ha segnato un nuovo passaggio: Haus O ha raggiunto la massima altezza nel settembre 2026. La seconda fase di Haus S e il nuovo edificio proseguiranno fino al 2028.',
+    canonicalPath: '/articoli-san-gallo/spital-grabs-haus-o-vertice/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Spital Grabs: Haus O raggiunge il punto più alto",
+      "description": "A settembre 2026 Haus O dello Spital Grabs ha raggiunto il punto più alto. Haus S è stato ampliato: nuovi spazi per radiologia e oncologia, lavori fino al 2028.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-spital-grabs-haus-o-vertice.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere del nuovo Haus O allo Spital Grabs, nel Canton San Gallo."
+      },
+      "datePublished": "2026-10-08T11:13:38+00:00",
+      "dateModified": "2026-10-08T11:13:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/spital-grabs-haus-o-vertice/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

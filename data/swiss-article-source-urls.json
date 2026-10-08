@@ -1,19 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948311/attacco-schweizerhof-credito-destinatari-dati": {
-    "articleId": "attacco-hacker-schweizerhof",
-    "ts": "2026-09-06T11:37:02.159Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1948335/svizzera-budliger-artieda-direttrice-seco-multipolare-mondo": {
-    "articleId": "svizzera-mondo-multipolare",
-    "ts": "2026-09-06T15:10:22.740Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/rubriche/ospite/1948356/svizzera-neutralita-biaggio-scelta-liberta-elio": {
-    "articleId": "riflessione-neutralita-svizzera-delbiaggio",
-    "ts": "2026-09-06T17:57:04.956Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/gr%3a-hotel-di-lenzerheide-vittima-di-attacco-hacker-avvisa-clienti/92012381": {
     "articleId": "hotel-lenzerheide-hacker-avviso",
     "ts": "2026-09-06T18:04:40.285Z",
@@ -2497,6 +2482,21 @@
   "https://www.tio.ch/svizzera/economia/1955486/32-in-un-anno-il-mercato-del-lavoro-ia-cresce-rapidamente": {
     "articleId": "crescita-lavoro-intelligenza-artificiale",
     "ts": "2026-10-08T09:17:54.516Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1955482/tassi-raiffeisen-svizzera-bns-crescita-forte": {
+    "articleId": "raiffeisen-pil-inflazione-2026",
+    "ts": "2026-10-08T10:49:09.087Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/la-svizzera-%c3%a8-il-paese-pi%c3%b9-attraente-per-la-forza-lavoro-altamente-qualificata-anche-per-un-motivo-inaspettato/92171958": {
+    "articleId": "salari-svizzera-talenti-stranieri",
+    "ts": "2026-10-08T12:19:10.366Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1955578/figli-tribunale-padre-riduzione-cassa-malattia-tf-premi": {
+    "articleId": "tf-nega-sconto-cassa-malati-padre-affidamento-alternato",
+    "ts": "2026-10-08T13:03:38.828Z",
     "keyForm": 2
   }
 }

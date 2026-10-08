@@ -2,84 +2,24 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "clan-nazarbayev-ceresio",
-      "title": "Nazarbayev sul Ceresio: petrolio, ville e permessi",
-      "fallbackImage": "/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp",
-      "reason": "All image providers failed for article-clan-nazarbayev-ceresio: openai-codex (vision gate rejected image: Generic illustrative landscape with a non-identifiable foreground figure, but apparent lettering/signage is visible on the distant tra",
-      "status": "queued",
-      "requestedAt": "2026-10-07T04:58:11.891Z",
-      "lastFailureAt": "2026-10-07T22:46:47.705Z",
-      "failureCount": 2
-    },
-    {
-      "articleId": "strada-calanca-chiusura-preventiva",
-      "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
-      "fallbackImage": "/images/blog/pasture-chiusura-garanzie.webp",
-      "reason": "All image providers failed for article-strada-calanca-chiusura-preventiva: openai-codex (vision gate rejected image: Generic stylized landscape illustration with a visible road-closure barricade/signage; no readable lettering, logo, waterma",
-      "status": "queued",
-      "requestedAt": "2026-10-07T06:43:54.395Z",
-      "lastFailureAt": "2026-10-07T22:54:15.028Z",
-      "failureCount": 2
-    },
-    {
       "articleId": "benzina-grigioni-deviazione",
       "title": "Prezzi benzina in Grigioni: quando conviene deviare",
       "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
-      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (vision gate rejected image: Generic illustrated alpine road scene with prominent fuel/energy signage and droplet symbols; no readable lettering, logos, faces,",
-      "status": "queued",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119999ms)",
+      "status": "failed",
       "requestedAt": "2026-10-07T06:53:48.101Z",
-      "lastFailureAt": "2026-10-07T22:55:00.472Z",
-      "failureCount": 2
-    },
-    {
-      "articleId": "soletta-disoccupazione-settembre",
-      "title": "Soletta: disoccupazione al 3,0% a settembre 2026",
-      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
-      "reason": "All image providers failed for article-soletta-disoccupazione-settembre: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:37:25.687Z",
-      "lastFailureAt": "2026-10-07T10:37:25.687Z",
-      "failureCount": 0
-    },
-    {
-      "articleId": "baugesuch-juchstrasse-frauenfeld",
-      "title": "Domanda edilizia a Frauenfeld: Juchstrasse 22-22b",
-      "fallbackImage": "/images/blog/calcolatore-salariale-edilizia-2026.webp",
-      "reason": "All image providers failed for article-baugesuch-juchstrasse-frauenfeld: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:39:32.224Z",
-      "lastFailureAt": "2026-10-07T10:39:32.224Z",
-      "failureCount": 0
-    },
-    {
-      "articleId": "vaud-revision-bouclier-fiscal-2024",
-      "title": "Vaud: la destra rilancia il bouclier fiscal",
-      "fallbackImage": "/images/blog/acquisire-casa-sciaffusa-mutuo-fiscale.webp",
-      "reason": "All image providers failed for article-vaud-revision-bouclier-fiscal-2024: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:47:31.187Z",
-      "lastFailureAt": "2026-10-07T10:47:31.187Z",
-      "failureCount": 0
+      "lastFailureAt": "2026-10-08T11:09:39.116Z",
+      "failureCount": 3
     },
     {
       "articleId": "pedemontana-falso-pedaggio-sms",
       "title": "Pedemontana: nessun pagamento pedaggio via SMS o email",
       "fallbackImage": "/images/blog/pedemontana-avviso-truffa.webp",
-      "reason": "All image providers failed for article-pedemontana-falso-pedaggio-sms: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "All image providers failed for article-pedemontana-falso-pedaggio-sms: openai-codex (Codex broker timed out after 119999ms)",
       "status": "queued",
       "requestedAt": "2026-10-07T10:51:03.474Z",
-      "lastFailureAt": "2026-10-07T10:51:03.474Z",
-      "failureCount": 0
-    },
-    {
-      "articleId": "rapporti-thurmed-turgovia",
-      "title": "Rapporti 2025 thurmed e Spital Thurgau",
-      "fallbackImage": "/images/blog/aiuti-malattie-rare-2025.webp",
-      "reason": "All image providers failed for article-rapporti-thurmed-turgovia: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:52:51.123Z",
-      "lastFailureAt": "2026-10-07T10:52:51.123Z",
-      "failureCount": 0
+      "lastFailureAt": "2026-10-08T11:14:47.861Z",
+      "failureCount": 1
     },
     {
       "articleId": "premi-malattia-soletta-2027",
@@ -262,16 +202,6 @@
       "lastFailureAt": "2026-10-07T23:29:33.907Z"
     },
     {
-      "articleId": "contributi-formazione-berna-requisiti",
-      "title": "Formazione continua nel Canton Berna: requisiti e contributi",
-      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
-      "reason": "All image providers failed for article-contributi-formazione-berna-requisiti: openai-codex (vision gate rejected image: Generic illustrated office scene, but a visible human profil",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T00:53:16.383Z",
-      "lastFailureAt": "2026-10-08T00:53:16.383Z"
-    },
-    {
       "articleId": "seehas-affollamento-mattutino",
       "title": "Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen",
       "fallbackImage": "/images/places/lugano-view.webp",
@@ -300,6 +230,66 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T10:36:56.605Z",
       "lastFailureAt": "2026-10-08T10:36:56.605Z"
+    },
+    {
+      "articleId": "chiusura-strada-kesswil",
+      "title": "Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026",
+      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
+      "reason": "All image providers failed for article-chiusura-strada-kesswil: openai-codex (vision gate rejected image: Generic illustrated scene with prominent road signage, including direction",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:25:33.527Z",
+      "lastFailureAt": "2026-10-08T11:25:33.527Z"
+    },
+    {
+      "articleId": "luterbach-a5-rampe-notte",
+      "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
+      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
+      "reason": "All image providers failed for article-luterbach-a5-rampe-notte: openai-codex (vision gate rejected image: Generic illustrated night highway scene, but it contains prominent road-c",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:26:57.084Z",
+      "lastFailureAt": "2026-10-08T11:26:57.084Z"
+    },
+    {
+      "articleId": "morges-mobilita-consultazione-2045",
+      "title": "Morges: le richieste sulla mobilità al 2045",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-morges-mobilita-consultazione-2045: openai-codex (vision gate rejected image: Generic illustrated urban scene, but it contains visible direct",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:29:50.112Z",
+      "lastFailureAt": "2026-10-08T11:29:50.112Z"
+    },
+    {
+      "articleId": "tifosi-lucerna-lugano-traffico",
+      "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
+      "fallbackImage": "/images/blog/lucerna-voto-tifosi-ocse.webp",
+      "reason": "All image providers failed for article-tifosi-lucerna-lugano-traffico: openai-codex (vision gate rejected image: Generic illustrated scene with multiple roadwork and traffic signs;",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:31:48.777Z",
+      "lastFailureAt": "2026-10-08T11:31:48.777Z"
+    },
+    {
+      "articleId": "decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni",
+      "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
+      "fallbackImage": "/images/blog/tassa-salute-frontalieri-ticino-settembre.webp",
+      "reason": "All image providers failed for article-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni: openai-codex (vision gate rejected image: Generic stylized illustration with",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:44:40.252Z",
+      "lastFailureAt": "2026-10-08T11:44:40.252Z"
+    },
+    {
+      "articleId": "mendrisiotto-aziende-conciliabilita",
+      "title": "Mendrisiotto aziende a confronto su conciliabilità vita-lavoro",
+      "fallbackImage": "/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp",
+      "reason": "All image providers failed for article-mendrisiotto-aziende-conciliabilita: openai-codex (vision gate rejected image: Generic illustration with multiple clearly recognizable human",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T12:50:35.254Z",
+      "lastFailureAt": "2026-10-08T12:50:35.254Z"
     }
   ]
 }

@@ -2312,9 +2312,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "091c40076373adca",
-        "corpus": "091c40076373adca",
-        "alignedAt": "2026-10-07"
+        "site": "c24cdde08b656383",
+        "corpus": "c24cdde08b656383",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -3639,9 +3639,9 @@
       "sitePath": "build-plugins/shared/cdnAssetOffloadRx.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2e679602cd8788ca",
-        "corpus": "2e679602cd8788ca",
-        "alignedAt": "2026-08-09"
+        "site": "d3ba7a401aaf9e3f",
+        "corpus": "d3ba7a401aaf9e3f",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -4419,11 +4419,11 @@
         },
         {
           "path": "scripts/ci/close-recovered-failure-issues.mjs",
-          "mode": "identical"
+          "mode": "non registrato"
         },
         {
           "path": "scripts/ci/crawler-generation-observer-selector.mjs",
-          "mode": "identical"
+          "mode": "non registrato"
         },
         {
           "path": "scripts/ci/loop-sync-manifest.json",
@@ -5736,7 +5736,7 @@
     {
       "path": "generator/scripts/lib/article-registry-image.mjs",
       "mode": "corpus-only",
-      "reason": "Locator e writer del campo `image` nei registry frontaliere, svizzera e cantonali. Aggiorna esclusivamente il record dell'articolo selezionato e non importa codice dal sito: la superficie cross-repo resta il JSON HTTP pubblicato.",
+      "reason": "Locator e writer del campo `image` nei registry e del blocco `ImageObject` nelle voci SEO frontaliere, svizzere e cantonali. Aggiorna esclusivamente l'articolo selezionato e non importa codice dal sito: la superficie cross-repo resta il JSON HTTP pubblicato.",
       "baseline": {
         "site": null,
         "corpus": null,
@@ -5766,7 +5766,7 @@
     {
       "path": "generator/scripts/lib/seo-entry-builder.mjs",
       "mode": "corpus-only",
-      "reason": "Costruttore della voce SEO e inserimento in un chunk usati dal recupero degli orfani. Il writer normale conserva il suo percorso letterale in `create-article.mjs`; `generator/tests/seo-entry-equivalence.test.mjs` confronta il costruttore con le voci reali di main, così non nasce un secondo dialetto serializzato. È codice del generatore del corpus: il sito consuma il JSON pubblicato.",
+      "reason": "Costruttore della voce SEO, del blocco `ImageObject` e inserimento in un chunk usati dal recupero degli orfani e dal drain delle copertine. Il writer normale conserva il suo percorso letterale in `create-article.mjs`; `generator/tests/seo-entry-equivalence.test.mjs` confronta il costruttore con le voci reali di main, così non nasce un secondo dialetto serializzato. È codice del generatore del corpus: il sito consuma il JSON pubblicato.",
       "baseline": {
         "site": null,
         "corpus": null,
@@ -5816,7 +5816,7 @@
     {
       "path": "generator/scripts/regenerate-queued-covers.mjs",
       "mode": "corpus-only",
-      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: riconcilia all'avvio le copertine gia' soddisfatte, seleziona prima le voci mai tentate e poi quelle con meno fallimenti, applica il percorso governato, aggiorna registro/hero/thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
+      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: riconcilia all'avvio le copertine gia' soddisfatte, seleziona prima le voci mai tentate e poi quelle con meno fallimenti, applica il percorso governato, aggiorna registry, blocco `ImageObject` SEO, `imageAlt` localizzati, hero e thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
       "baseline": {
         "site": null,
         "corpus": null,

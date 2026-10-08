@@ -10,7 +10,7 @@
  * article payloads.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
@@ -388,7 +388,15 @@ function run(idsFile, { dryRun = false } = {}) {
   }, null, 2));
 }
 
-if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   const args = process.argv.slice(2);
   const idsFlag = args.indexOf('--ids-file');
   const dryRun = args.includes('--dry-run');

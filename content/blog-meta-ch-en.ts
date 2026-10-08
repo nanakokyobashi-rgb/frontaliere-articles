@@ -7913,6 +7913,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-lavoro-ia-svizzera.title': 'Swiss AI job market: +32% in one year',
     'blog.article.mercato-lavoro-ia-svizzera.excerpt': '## TL;DR - Nearly 5\'000 AI job postings between July 2025 and June 2026 - Demand grows by 32% in twelve months - Zurich accounts for 2\'181 postings, 45%',
     'blog.article.mercato-lavoro-ia-svizzera.imageAlt': 'Professionals collaborating in a modern office environment in Switzerland, with screens displaying AI-related data and code.',
+    'blog.article.raiffeisen-pil-inflazione-2026.title': 'Raiffeisen: GDP at 1.7% in 2026, inflation at 0.7%',
+    'blog.article.raiffeisen-pil-inflazione-2026.excerpt': '## TL;DR - Raiffeisen raises the 2026 GDP estimate to 1,7% - For 2027, it confirms growth of 1,3% - 2026 inflation at 0,7%, versus the estimated 0,5%',
+    'blog.article.raiffeisen-pil-inflazione-2026.imageAlt': 'Swiss professional analyzing economic forecasts with the Alps in the background',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.title': 'Switzerland leads in robotics: 217 companies and 7\'000 jobs',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.excerpt': '## TL;DR - 217 companies in Swiss robotics - 109 directly produce robots - 87% have fewer than 100 employees - Approximately 7’000 jobs',
+    'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.imageAlt': 'Editorial image related to: Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
+    'blog.article.salari-svizzera-talenti-stranieri.title': 'Switzerland: minimum salary gap for EU/EFTA talent',
+    'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## TL;DR - Switzerland ranks first in the IMD World Talent Ranking - Corrected EU/EFTA gap: 1,1% lower - Third countries: 4,5% lower - Immigration given the green light',
+    'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Panoramic view of Lugano, Switzerland, symbolizing economic opportunities and attractiveness for skilled talents.',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'TF denies health insurance discount to father with alternating custody',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## TL;DR - The Federal Supreme Court rejects the appeal of a divorced father. - Child custody alternates between the parents. - No deduction of 9\'000 francs',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Editorial image related to: TF nega sconto cassa malati padre affidamento alternato',
 };
 
 export default blogMetaChEn;

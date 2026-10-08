@@ -102003,7 +102003,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "L'inchiesta sul commercio di materie prime racconta l'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno nel racconto.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp`,
+        "url": `${BASE_URL}/images/blog/article-clan-nazarbayev-ceresio.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Ville sul Ceresio nel racconto sul clan Nazarbayev"
@@ -102071,10 +102071,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Principe Leopoldo e Villa Sassa chiusi in Ticino: 140 licenziati. Daniele Lardi parla di riassumere buona parte e valuta misure per il personale.",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-hotel-ticino-140-licenziati.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "I due hotel Principe Leopoldo e Villa Sassa in Ticino"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T06:29:50+00:00",
       "dateModified": "2026-10-07T06:29:50+00:00",
@@ -102105,10 +102110,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-domodossola-arresto-hashish-stazione.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "La stazione internazionale di Domodossola, dove è avvenuto l'arresto per traffico di stupefacenti"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T06:58:03+00:00",
       "dateModified": "2026-10-07T06:58:03+00:00",
@@ -102139,10 +102149,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-petizione-recupero-carovita-ticino.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Lavoratori del settore pubblico ticinese con striscioni a sostegno della petizione per il recupero del carovita"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T08:24:41+00:00",
       "dateModified": "2026-10-07T08:24:41+00:00",
@@ -102173,6 +102188,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-treno-foliage-locarno-domodossola.webp`,
         "width": 1200,
         "height": 675,
@@ -102207,6 +102227,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-biasca-17enne-arrestato-accoltellamento.webp`,
         "width": 1200,
         "height": 675,
@@ -102241,6 +102266,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-pedemontana-truffa-sms-frontalieri.webp`,
         "width": 1200,
         "height": 675,
@@ -102645,6 +102675,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - 16 persone hanno partecipato alla pulizia di Malnate - Raccolti 20 chili di rifiuti di vario genere - L'iniziativa si è svolta lunedì 5 ottobre",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-mcdonalds-pulizia-malnate-2026.webp`,
         "width": 1200,
         "height": 675,
@@ -102718,6 +102753,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Due appuntamenti culturali a Varese il 9 e l'11 ottobre - Dante al centro dell'incontro di venerdì alle 17:30 - Tre racconti inediti di Carlo",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-festival-racconto-varese-ottobre.webp`,
         "width": 1200,
         "height": 675,
@@ -103002,6 +103042,269 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bellinzona-nord-svincolo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lugano-lucerna-partita-traffico': {
+    title: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
+    description: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, lucerna, cornaredo, strade',
+    ogTitle: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
+    ogDescription: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
+    canonicalPath: '/articoli-frontaliere/lugano-lucerna-partita-traffico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato",
+      "description": "## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lugano-lucerna-partita-traffico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Piazza stazione di Lugano con transenne e tifosi del Lucerna diretti allo stadio di Cornaredo"
+      },
+      "datePublished": "2026-10-08T11:18:04+00:00",
+      "dateModified": "2026-10-08T11:18:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lugano-lucerna-partita-traffico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tifosi-lucerna-lugano-traffico': {
+    title: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
+    description: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    keywords: 'frontalieri, ticino, svizzera, italia, tifosi, lucerna, lugano, strade',
+    ogTitle: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
+    ogDescription: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    canonicalPath: '/articoli-frontaliere/tifosi-lucerna-lugano-traffico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
+      "description": "## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lucerna-voto-tifosi-ocse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strade di Lugano con polizia e tifosi diretti allo stadio di Cornaredo"
+      },
+      "datePublished": "2026-10-08T11:31:48+00:00",
+      "dateModified": "2026-10-08T11:31:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tifosi-lucerna-lugano-traffico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-elettrificazione-ferrovia-albate-molteno': {
+    title: 'Elettrificazione ferrovia albate-molteno: stop como-lecco',
+    description: 'Cantieri per elettrificazione Albate-Molteno avviano a metà dicembre. Traffico Como-Lecco sospeso fino al 2029. Investimento di 170 milioni per più corse',
+    keywords: 'frontalieri, ticino, svizzera, italia, elettrificazione, ferrovia, albate-molteno, stop',
+    ogTitle: 'Elettrificazione ferrovia Albate-Molteno: stop Como-Lecco',
+    ogDescription: 'L\'elettrificazione della linea Albate-Molteno inizia a metà dicembre, causando la sospensione della tratta Como-Lecco fino a giugno 2029. Il progetto da 170 milioni di euro promette più corse e il prolungamento dei collegamenti TILO verso la Svizzera',
+    canonicalPath: '/articoli-frontaliere/elettrificazione-ferrovia-albate-molteno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Elettrificazione ferrovia albate-molteno: stop como-lecco",
+      "description": "Cantieri per elettrificazione Albate-Molteno avviano a metà dicembre. Traffico Como-Lecco sospeso fino al 2029. Investimento di 170 milioni per più corse",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-elettrificazione-ferrovia-albate-molteno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di una stazione ferroviaria moderna in Ticino con un treno in arrivo, in una giornata luminosa."
+      },
+      "datePublished": "2026-10-08T11:47:10+00:00",
+      "dateModified": "2026-10-08T11:47:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/elettrificazione-ferrovia-albate-molteno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-10-08': {
+    title: 'Bollettino del frontaliere – 8 ottobre 2026: 903 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 8 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 8 ottobre 2026: 903 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 8 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-08/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 8 ottobre 2026: 903 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 8 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-10-08.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 8 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-10-08T11:52:55+00:00",
+      "dateModified": "2026-10-08T11:52:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-10-08/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ferrovia-albate-molteno-elettrificazione': {
+    title: 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
+    description: '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
+    keywords: 'frontalieri, ticino, svizzera, italia, elettrificazione, albate-molteno, lavori, dicembre',
+    ogTitle: 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
+    ogDescription: '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
+    canonicalPath: '/articoli-frontaliere/ferrovia-albate-molteno-elettrificazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Elettrificazione Albate-Molteno: lavori da dicembre 2024",
+      "description": "## In breve - Cantieri per l'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ferrovia-albate-molteno-elettrificazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno elettrico sulla linea Albate-Molteno vicino a Lugano con le Alpi sullo sfondo"
+      },
+      "datePublished": "2026-10-08T11:59:50+00:00",
+      "dateModified": "2026-10-08T11:59:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ferrovia-albate-molteno-elettrificazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa': {
+    title: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    description: '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    keywords: 'frontalieri, ticino, svizzera, italia, porlezza, finto, carabiniere, chiede',
+    ogTitle: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    ogDescription: '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    canonicalPath: '/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porlezza: finto carabiniere chiede oro, figlio ferma truffa",
+      "description": "## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Porlezza: finto carabiniere chiede oro, figlio ferma truffa"
+      },
+      "datePublished": "2026-10-08T12:32:22+00:00",
+      "dateModified": "2026-10-08T12:32:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mendrisiotto-aziende-conciliabilita': {
+    title: 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
+    description: '## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti',
+    keywords: 'frontalieri, ticino, svizzera, italia, mendrisiotto, aziende, confronto, conciliabilità',
+    ogTitle: 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
+    ogDescription: '## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti',
+    canonicalPath: '/articoli-frontaliere/mendrisiotto-aziende-conciliabilita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mendrisiotto aziende a confronto su conciliabilità vita-lavoro",
+      "description": "## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incontro aziendale a Chiasso sulla conciliabilità vita-lavoro con partecipanti attorno a un tavolo"
+      },
+      "datePublished": "2026-10-08T12:50:35+00:00",
+      "dateModified": "2026-10-08T12:50:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mendrisiotto-aziende-conciliabilita/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

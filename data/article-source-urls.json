@@ -1,7 +1,4 @@
 {
-  "https://www.vconews.it/2026/08/09/leggi-notizia/argomenti/politica-28/articolo/frontalieri-e-rapporti-con-la-svizzera-confronto-alla-festa-della-lucciola.html": "confronto-frontalieri-festa-lucciola",
-  "https://www.rsi.ch/s/3942510": "traffico-a2-assistenza-emergenza",
-  "https://www.tio.ch/ticino/politica/1942847/davvero-servono-ore-e-ore-per-riaprire-un-autostrada": "autostrada-a2-mezzovico-interrogazione",
   "https://www.tio.ch/ticino/politica/1942871/a2-ancora-al-collasso-il-ticino-non-puo-essere-ostaggio-del-traffico-di-transito": "a2-traffico-ticino-interrogazione",
   "https://www.laregione.ch/culture/locarno-film-festival/1942844/il-don-chisciotte-del-cinema-svizzero": "bideau-locarno-film-festival",
   "https://www.ticinonews.ch/ticino/nodo-di-interscambio-di-biasca-si-entra-nellultima-fase-440417": "nodo-biasca-lavori-fase-finale",
@@ -2164,6 +2161,21 @@
   "https://www.tio.ch/ticino/attualita/1954737/tema-aziende-salute-spaventa-sentito": {
     "articleId": "salute-lavoro-progetti-ticino",
     "ts": "2026-10-08T10:23:19.313Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955532/tifosi-lugano-traffico-lucerna-disagi-strade-politica": {
+    "articleId": "lugano-lucerna-partita-traffico",
+    "ts": "2026-10-08T11:18:04.652Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/la-vecchia-ferrovia-viaggera-nel-futuro-in-lombardia-rivoluzione-da-44-milioni-di-euro-svizzera-inclusa": {
+    "articleId": "elettrificazione-ferrovia-albate-molteno",
+    "ts": "2026-10-08T11:47:11.212Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/cronaca/porlezza-il-finto-carabiniere-tenta-di-truffare-lanziana-e-chiede-oro-il-figlio-rientra-a-casa-lo-inchioda": {
+    "articleId": "porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa",
+    "ts": "2026-10-08T12:32:22.680Z",
     "keyForm": 2
   }
 }

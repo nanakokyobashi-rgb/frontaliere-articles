@@ -9,6 +9,12 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.rapporti-thurmed-turgovia.title': 'Rapports 2025 de thurmed et Spital Thurgau',
     'blog.article.rapporti-thurmed-turgovia.excerpt': 'La page répertorie le rapport 2025 de thurmed et Spital Thurgau AG, le rapport de durabilité et les statistiques de 2021 à 2025.',
     'blog.article.rapporti-thurmed-turgovia.imageAlt': 'Bâtiment hospitalier du canton de Thurgovie lié aux rapports de thurmed et Spital Thurgau AG',
+    'blog.article.chiusura-strada-kesswil.title': 'Kesswil : Uttwilerstrasse fermée du 15 au 18 octobre 2026',
+    'blog.article.chiusura-strada-kesswil.excerpt': 'L’Uttwilerstrasse de Kesswil sera fermée du 15 octobre 2026 à 7 h au 18 octobre à 17 h. Trafic dévié et report possible en cas de pluie ou de froid.',
+    'blog.article.chiusura-strada-kesswil.imageAlt': 'Kesswil : travaux sur la route cantonale H13 avec déviation signalée en automne.',
+    'blog.article.turgovia-occupazione-rav-settembre.title': 'Chômage en Thurgovie : taux stable à 2,2 %',
+    'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'En Thurgovie, fin septembre, le nombre de chômeurs est de 3.558 (+54). Le taux reste à 2,2 % ; les personnes à la recherche d’un emploi sont au nombre de 7.155 et les postes vacants à 1.824.',
+    'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Centre régional de placement en Thurgovie avec offres d\'emploi',
 };
 
 export default blogMetaCantonTgFr;
