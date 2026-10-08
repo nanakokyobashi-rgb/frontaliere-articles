@@ -15,7 +15,11 @@ jobs:
       fail-fast: false
       matrix:
         lane: [prospective, rest]
-    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@2c27327f0b381e7a868468620e099f54e7a72ebc # sito #11175: lista sparse letta da main insieme al codice
+    # Lo stesso commit di prima (sito #11175), con lo SHA che ha dopo la riscrittura
+    # della storia del sito del 2026-10-07. Quello vecchio, 2c27327f0b38, esiste
+    # ancora su GitHub ma nessun ramo lo raggiunge, e Actions non risolve un
+    # workflow riusabile a un commit orfano: startup_failure, zero job, zero log.
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/housekeeping-jobs-logic.yml@8395e120789ed745f9d698d70853c18b0a6e0cb6 # sito #11175: lista sparse letta da main insieme al codice
     with:
       lane: ${{ matrix.lane }}
     secrets:
