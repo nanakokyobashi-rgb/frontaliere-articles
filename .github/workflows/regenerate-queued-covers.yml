@@ -104,6 +104,7 @@ jobs:
         run: |
           set -euo pipefail
           echo "publish_ready=false" >> "$GITHUB_OUTPUT"
+          queue_file=data/image-regeneration-queue.json
           expected_queue="$RUNNER_TEMP/queued-cover-expected-queue.json"
 
           snapshot_expected_queue() {
@@ -112,11 +113,11 @@ jobs:
               echo "::error::queued-cover summary is missing; cannot snapshot the expected queue"
               return 1
             fi
-            if [ ! -s data/image-regeneration-queue.json ]; then
-              echo "::error::queued-cover queue is missing; cannot snapshot the expected queue"
-              return 1
+            if [ -e "$queue_file" ]; then
+              cp "$queue_file" "$expected_queue"
+            else
+              printf '%s\n' '{"schema":1,"items":[]}' > "$expected_queue"
             fi
-            cp data/image-regeneration-queue.json "$expected_queue"
             expected="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid expected queue") end' "$expected_queue")"
             verified="${SUMMARY_FILE}.expected"
             jq --argjson expected "$expected" \
@@ -145,7 +146,11 @@ jobs:
               echo "::error::queued-cover summary diverged before push: drainer=$internal, snapshot=$expected_count"
               return 1
             fi
-            pushed_queue="$(git show HEAD:data/image-regeneration-queue.json)"
+            if git cat-file -e "HEAD:$queue_file" 2>/dev/null; then
+              pushed_queue="$(git show "HEAD:$queue_file")"
+            else
+              pushed_queue='{"schema":1,"items":[]}'
+            fi
             actual="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid queue") end' <<< "$pushed_queue")"
             actual_ids="$(jq -er 'if .schema == 1 and (.items | type == "array") then [.items[] | .articleId | tostring] | unique else error("invalid queue") end' <<< "$pushed_queue")"
             missing="$(jq -ner --argjson expected "$expected_ids" --argjson actual "$actual_ids" '$expected - $actual')"
@@ -220,7 +225,7 @@ jobs:
             rebased=1
             bash scripts/lib/rebase-onto-remote.sh "$remote" main \
               data/generated-image-registry.json \
-              --merge-queue data/image-regeneration-queue.json \
+              --merge-queue "$queue_file" \
               --section-surfaces \
               --take-theirs public/images/blog/ || rebased=0
             if [ "$rebased" -ne 1 ]; then

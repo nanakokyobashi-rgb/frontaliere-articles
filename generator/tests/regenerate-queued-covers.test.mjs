@@ -670,7 +670,10 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
   assert.match(workflow, /snapshot_expected_queue\(\)/);
   assert.match(workflow, /\.residualDrainer = \.residual/);
   assert.match(workflow, /\.residualExpected = \$expected/);
-  assert.match(workflow, /pushed_queue="\$\(git show HEAD:data\/image-regeneration-queue\.json\)"/);
+  assert.match(workflow, /queue_file=data\/image-regeneration-queue\.json/);
+  assert.match(workflow, /--merge-queue "\$queue_file"/);
+  assert.match(workflow, /if \[ -e "\$queue_file" \]; then\s+cp "\$queue_file" "\$expected_queue"\s+else\s+printf '%s\\n' '\{"schema":1,"items":\[\]\}' > "\$expected_queue"/);
+  assert.match(workflow, /if git cat-file -e "HEAD:\$queue_file" 2>\/dev\/null; then\s+pushed_queue="\$\(git show "HEAD:\$queue_file"\)"\s+else\s+pushed_queue='\{"schema":1,"items":\[\]\}'/);
   assert.match(workflow, /queued-cover-expected-queue\.json/);
   assert.match(workflow, /\.residualMissing = \$missing/);
   assert.match(workflow, /\.residualSource = "pushed-branch"/);
