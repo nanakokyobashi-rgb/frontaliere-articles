@@ -26,9 +26,10 @@
  *   4. nessuna `newsSources` e' gia' in `NEWS_SOURCES` o
  *      `NEWS_SOURCES_SVIZZERA` (D6: una fonte = una sezione; D12 per TI);
  *   5. policy robots D10: nessuna fonte in `ownerDecisionPending` o
- *      `rejectedSources` compare in news o dati, e nessun host bloccato per
- *      intero (`Disallow: /`) ai bot AI di input viene usato da NESSUN
- *      cantone per un'altra fonte;
+ *      `rejectedSources` compare in news o dati, e nessun host il cui
+ *      `Disallow: /` si applica al crawler FrontaliereTicino viene usato da
+ *      NESSUN cantone per un'altra fonte. I blocchi nominativi di altri bot
+ *      non sono un blocco del nostro crawler;
  *   6. `cronMinute` intero 0-59, unico fra i cantoni e diverso dai minuti di
  *      `generate-article.yml` (letti dal workflow: frontaliere/svizzera);
  *   7. enum validi (format, parser, kind, language, topics, categorie,
@@ -89,12 +90,19 @@ const QUIRKS = {
   urlPeriod: (v) => ['year', 'month', 'iso-week'].includes(v),
   datetimeYearOffset: (v) => Number.isInteger(v) && v !== 0,
   robotsTxt: (v) => ['absent', 'unreachable'].includes(v),
-  contentSignal: (v) => typeof v === 'string' && !/ai-input\s*=\s*no/i.test(v),
+  // Content-Signal e' un'annotazione editoriale: D10 esclude solo una regola
+  // robots applicabile al nostro UA o a `*`. `ai-input=no` puo' quindi restare
+  // visibile nel profilo senza trasformare un blocco nominativo altrui in un
+  // divieto per FrontaliereTicinoBot.
+  contentSignal: (v) => typeof v === 'string' && Boolean(v.trim()),
   trainingCrawlersBlocked: (v) => Array.isArray(v) && v.length > 0 && v.every((x) => typeof x === 'string'),
   // P5b. Regex su path + query dei link-articolo di una pagina `html-links`:
   // ancorata al path (`^/`), cosi' non puo' degradare a «contiene», e
   // compilabile, perche' lo scanner la compila a ogni run.
   articlePathPattern: isPathRegex,
+  excludePaywalledCards: (v) => v === true,
+  extractCardLead: (v) => v === 'text' || v === 'media-title',
+  articleDateFromDetail: (v) => v === 'html-meta',
   titleAttributeTemplate: (v) => v === 'beitrag-lesen',
   embeddedDateField: (v) => v === 'publishDate',
   articleContent: (v) => v === 'html-text',
@@ -109,6 +117,9 @@ const QUIRKS = {
 /** quirk → parser su cui ha senso. Dichiarato altrove sarebbe un hint che nessuno legge. */
 const QUIRK_PARSERS = {
   articlePathPattern: new Set(['html-links']),
+  excludePaywalledCards: new Set(['html-links']),
+  extractCardLead: new Set(['html-links']),
+  articleDateFromDetail: new Set(['html-links']),
   titleAttributeTemplate: new Set(['html-links']),
   embeddedDateField: new Set(['html-links']),
   articleContent: new Set(['html-links']),
@@ -176,7 +187,80 @@ export function loadContext(root = ROOT) {
 // ── Validazione ──────────────────────────────────────────────────────────────
 
 const hostOf = (u) => new URL(u).hostname.toLowerCase();
-const isWholeSiteBlock = (rule) => /->\s*Disallow:\s*\/(\s*;|\s*$)/.test(rule) || /ai-input=no/i.test(rule);
+
+/**
+ * Legge la forma compatta salvata nel profilo, per esempio
+ * `User-agent: GPTBot -> Disallow: /; User-agent: * -> Allow: /`.
+ * Non usa la lista `aiInputAgents` per decidere: robots seleziona il gruppo
+ * del nostro UA, con fallback a `*`, mentre i gruppi nominativi di altri bot
+ * restano irrilevanti per D10.
+ */
+function parseCompactRobotsRule(rule) {
+  const directives = [];
+  let currentAgents = [];
+  for (const rawSegment of String(rule || '').split(/[;\n]+/)) {
+    const segment = rawSegment.trim();
+    if (!segment) continue;
+    const compact = /^User-agent:\s*([^>]+?)\s*->\s*(Allow|Disallow):\s*(.*)$/i.exec(segment);
+    if (compact) {
+      directives.push({ agents: [compact[1].trim().toLowerCase()], type: compact[2].toLowerCase(), path: compact[3].trim() });
+      continue;
+    }
+    const agent = /^User-agent:\s*([^\s]+)\s*$/i.exec(segment);
+    if (agent) {
+      currentAgents = [agent[1].trim().toLowerCase()];
+      continue;
+    }
+    const directive = /^(Allow|Disallow):\s*(.*)$/i.exec(segment);
+    if (directive && currentAgents.length) {
+      directives.push({ agents: [...currentAgents], type: directive[1].toLowerCase(), path: directive[2].trim() });
+    }
+  }
+  return directives;
+}
+
+function robotsPathMatches(pattern, targetPath) {
+  const raw = String(pattern || '').trim();
+  if (!raw) return false;
+  const anchored = raw.endsWith('$');
+  const body = anchored ? raw.slice(0, -1) : raw;
+  const escaped = body.replace(/[\\.^$+?{}()[\]|]/g, '\\$&').replace(/\*/g, '.*');
+  try {
+    return new RegExp(`^${escaped}${anchored ? '$' : ''}`).test(targetPath);
+  } catch {
+    return false;
+  }
+}
+
+/** True only when the saved robots rule blocks this URL for our crawler. */
+export function robotsRuleBlocksCrawler(rule, url, userAgent = 'FrontaliereTicinoBot') {
+  let targetPath = '/';
+  try {
+    const parsed = new URL(url || 'https://example.invalid/');
+    targetPath = parsed.pathname || '/';
+    if (parsed.search) targetPath += parsed.search;
+  } catch { /* URL validation reports malformed URLs elsewhere. */ }
+  const directives = parseCompactRobotsRule(rule);
+  const ua = String(userAgent).toLowerCase();
+  const exact = directives.filter((d) => d.agents.includes(ua));
+  const wildcard = directives.filter((d) => d.agents.includes('*'));
+  const applicable = exact.length ? exact : wildcard;
+  let winner = null;
+  for (const directive of applicable) {
+    if (!robotsPathMatches(directive.path, targetPath)) continue;
+    const length = directive.path.replace(/\*|\$$/g, '').length;
+    if (!winner || length > winner.length || (length === winner.length && directive.type === 'allow')) {
+      winner = { type: directive.type, length };
+    }
+  }
+  return winner?.type === 'disallow';
+}
+
+/** True only for a whole-site block applicable to our UA or `*`. */
+export function isWholeSiteBlock(rule, userAgent = 'FrontaliereTicinoBot') {
+  return robotsRuleBlocksCrawler(rule, 'https://example.invalid/', userAgent)
+    && parseCompactRobotsRule(rule).some((d) => d.type === 'disallow' && d.path.trim() === '/' && d.agents.some((a) => a === '*' || a === String(userAgent).toLowerCase()));
+}
 
 function expectedBudget(code) {
   for (const [budget, codes] of Object.entries(DAILY_BUDGET_TIERS)) if (codes.includes(code)) return Number(budget);
@@ -212,7 +296,8 @@ export function validateCantonSections(doc, ctx) {
     if (!expectedCodes.includes(code)) err('D19', `${code} (budget ${budget}) non e' un gruppo di ${SLUGS_REL}`);
   }
 
-  // host bloccati per intero ai bot AI, su TUTTI i cantoni (policy D10 cross-cantone)
+  // Host bloccati per intero al crawler, su TUTTI i cantoni (policy D10
+  // cross-cantone). Un `Disallow: /` nominativo di GPTBot non entra qui.
   const blockedHosts = new Map();
   for (const c of doc.cantons) {
     for (const p of [...(c?.ownerDecisionPending || []), ...(c?.rejectedSources || [])]) {
@@ -311,9 +396,18 @@ export function validateCantonSections(doc, ctx) {
           err(where, `${lbl}: articleContent html-text richiede maxRequestsPerRun intero >= 2 e budget effettivo >= 2`);
         }
       }
+      if (s?.quirks?.articleDateFromDetail === 'html-meta') {
+        const effectiveBudget = Number(s?.quirks?.crawlDelaySeconds) > 60
+          ? 1
+          : s?.quirks?.maxRequestsPerRun;
+        if (!(Number.isInteger(s?.quirks?.maxRequestsPerRun) && s.quirks.maxRequestsPerRun >= 2)
+          || !(Number.isInteger(effectiveBudget) && effectiveBudget >= 2)) {
+          err(where, `${lbl}: articleDateFromDetail html-meta richiede maxRequestsPerRun intero >= 2 e budget effettivo >= 2`);
+        }
+      }
       try {
         const h = hostOf(s.url);
-        if (blockedHosts.has(h)) err(where, `${lbl}: host bloccato per intero ai bot AI (D10, vedi ownerDecisionPending ${blockedHosts.get(h)})`);
+        if (blockedHosts.has(h)) err(where, `${lbl}: host bloccato per intero al crawler (D10, vedi decisione ${blockedHosts.get(h)})`);
       } catch { /* gia' segnalato */ }
     };
 
@@ -345,16 +439,24 @@ export function validateCantonSections(doc, ctx) {
       if (!['sources', 'rejected'].includes(p.origin)) err(where, `${lbl}: origin "${p.origin}" non valido`);
       if (!(p.items7d === null || (Number.isInteger(p.items7d) && p.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
     }
-    // 6. rejectedSources: esclusioni definitive già decise (mai riaprire una
-    //    voce robots senza una nuova verifica live e una modifica esplicita).
+    // 6. rejectedSources: esclusioni definitive già decise. Solo il motivo
+    //    robotsAiDisallow richiede una prova robots applicabile al nostro UA;
+    //    paywall/noRecentItems/sourceUnavailable restano esclusioni editoriali
+    //    indipendenti dalla lista dei bot nominativi.
+    const rejectionReasons = new Set(['robotsAiDisallow', 'paywall', 'noRecentItems', 'sourceUnavailable', 'lowRelevance', 'contentUnavailable']);
     for (const p of rejected) {
       const lbl = `rejectedSources ${p?.url}`;
       if (!p || typeof p !== 'object') { err(where, 'rejectedSources: voce non oggetto'); continue; }
       checkUrl(p.url, 'rejectedSources');
-      if (!Array.isArray(p.blockedAgents) || !p.blockedAgents.length) err(where, `${lbl}: blockedAgents vuoto`);
-      if (typeof p.robotsRule !== 'string' || !p.robotsRule.trim()) err(where, `${lbl}: robotsRule vuota`);
-      if (!DATE_RE.test(p.robotsCheckedAt || '')) err(where, `${lbl}: robotsCheckedAt non YYYY-MM-DD`);
-      if (p.reason !== 'robotsAiDisallow') err(where, `${lbl}: reason deve essere robotsAiDisallow`);
+      if (!rejectionReasons.has(p.reason)) err(where, `${lbl}: reason non valido "${p.reason}"`);
+      if (p.reason === 'robotsAiDisallow') {
+        if (!Array.isArray(p.blockedAgents) || !p.blockedAgents.length) err(where, `${lbl}: blockedAgents vuoto`);
+        if (typeof p.robotsRule !== 'string' || !p.robotsRule.trim()) err(where, `${lbl}: robotsRule vuota`);
+        if (!DATE_RE.test(p.robotsCheckedAt || '')) err(where, `${lbl}: robotsCheckedAt non YYYY-MM-DD`);
+        if (!robotsRuleBlocksCrawler(p.robotsRule, p.url)) err(where, `${lbl}: robotsRule non blocca il nostro UA sul percorso`);
+      } else if (p.robotsCheckedAt !== undefined && !DATE_RE.test(p.robotsCheckedAt || '')) {
+        err(where, `${lbl}: robotsCheckedAt non YYYY-MM-DD`);
+      }
       if (p.decision !== 'exclude') err(where, `${lbl}: decision deve essere exclude`);
       if (!DATE_RE.test(p.decisionAt || '')) err(where, `${lbl}: decisionAt non YYYY-MM-DD`);
       if (p.origin !== 'rejected') err(where, `${lbl}: origin deve essere rejected`);

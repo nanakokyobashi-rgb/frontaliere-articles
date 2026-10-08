@@ -18,7 +18,9 @@
  *   - `json-api`           → zh.ch (`{news:[{title,date,link,teaserText}]}`),
  *                            be.ch (`[{id,publishOn,contentList:[{title,lead}]}]`)
  *                            e i CMS pubblici di SH (`[{kachellabel,
- *                            publication_date,permalink}]`)
+ *                            publication_date,permalink}]`); supporta anche
+ *                            `{articles:[{url,title,abstract,publication_date,
+ *                            free}]}` e scarta `free:false`
  *   - `news-sitemap` / `sitemap` → `<url><loc>` con `news:title` e
  *                            `news:publication_date` (o `lastmod`)
  *   - `weekly-sitemap`     → sitemap a periodo (`sitemap_<AAAA><settimana ISO>.xml`
@@ -48,6 +50,14 @@
  *   - `paywall: title+lead`→ della fonte si leggono solo titolo e attacco: il
  *                            lead del feed viaggia con la headline (`lead`) e fa
  *                            da sommario al classifier
+ *   - `excludePaywalledCards` → sulle liste HTML scarta le card marcate come
+ *                            paywall; non segue l'articolo premium
+ *   - `extractCardLead: text|media-title` → porta nel contesto solo il testo
+ *                            pubblico della card o il `title` dell'immagine
+ *                            editoriale
+ *   - `articleDateFromDetail: html-meta` → per le card senza data legge solo
+ *                            JSON-LD/meta/time della pagina dettaglio entro
+ *                            `maxRequestsPerRun`, senza estrarne il corpo
  *   - `datetimeYearOffset` → `<time datetime>` con l'anno sbagliato (ur.ch:
  *                            2626): le date oltre domani si correggono dell'offset
  *   - `articlePathPattern` → fonti `html-links`: regex su path + query dei link
@@ -77,6 +87,8 @@
  * pagina) si toglie prima di cercare i link: vedi `stripPageChrome`.
  *
  * User-Agent onesto (D10: niente UA camuffato), lo stesso dei crawler eventi.
+ * D10 considera esclusivo solo un Disallow applicabile a `*` o a questo UA;
+ * i blocchi nominativi di GPTBot/ChatGPT-User/CCBot restano annotazioni.
  */
 
 import {
@@ -448,6 +460,44 @@ function validDate(raw) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
+/**
+ * Estrae la data editoriale pubblica di una pagina dettaglio senza leggere il
+ * corpo. Serve ai portali (per esempio Schaffhausen24) che ordinano le card
+ * per ID ma non stampano la data nell'elenco. L'ordine è intenzionale: JSON-LD,
+ * meta editoriali, poi `<time>`. Un markup non valido lascia l'item undated.
+ */
+export function extractPublishedDateFromHtml(html) {
+  const input = String(html || '');
+  const jsonLd = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+  let match;
+  while ((match = jsonLd.exec(input)) !== null) {
+    const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(match[1]));
+    const date = validDate(value?.[1]);
+    if (date) return date;
+  }
+
+  const attribute = (attrs, name) => {
+    const re = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'=<>]+))`, 'i');
+    const found = re.exec(attrs || '');
+    return found ? decodeHtmlEntities(found[1] ?? found[2] ?? found[3] ?? '') : '';
+  };
+  const meta = /<meta\b([^>]*)>/gi;
+  while ((match = meta.exec(input)) !== null) {
+    const attrs = match[1] || '';
+    const key = attribute(attrs, 'property') || attribute(attrs, 'name');
+    if (!/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) continue;
+    const date = validDate(attribute(attrs, 'content'));
+    if (date) return date;
+  }
+
+  const time = /<time\b([^>]*)>/gi;
+  while ((match = time.exec(input)) !== null) {
+    const date = validDate(attribute(match[1] || '', 'datetime'));
+    if (date) return date;
+  }
+  return null;
+}
+
 /** `dd.mm.yyyy` (e `dd.mm.yyyy hh:mm:ss`) → Date locale, o null. */
 export function parseDottedDate(raw) {
   const m = /^\s*(\d{1,2})\.(\d{1,2})\.(\d{4})(?:[\sT]+(\d{1,2}):(\d{2})(?::(\d{2}))?)?/.exec(String(raw || ''));
@@ -773,6 +823,21 @@ export function extractJsonApiItems(text, apiUrl) {
     return [];
   }
   const out = [];
+  if (data && Array.isArray(data.articles)) {
+    for (const article of data.articles) {
+      // `free: false` is an explicit paywall marker: the list may expose the
+      // URL, but this scanner must not turn a non-public article into context.
+      if (article?.free === false) continue;
+      const url = absoluteUrl(article?.url ?? article?.link, apiUrl);
+      const headline = stripTags(article?.title);
+      if (!url || headline.length < 10) continue;
+      const lead = stripTags(article?.abstract ?? article?.lead ?? article?.description);
+      const rawDate = article?.publication_date ?? article?.publicationDate ?? article?.date;
+      const date = parseDottedDate(rawDate) || validDate(rawDate);
+      out.push({ url, headline, date, ...(lead ? { lead } : {}) });
+    }
+    return dedupByUrl(out);
+  }
   if (data && Array.isArray(data.news)) {
     for (const n of data.news) {
       const url = absoluteUrl(n?.link, apiUrl);
@@ -1287,6 +1352,31 @@ export async function scanCantonSource(source, ctx) {
     notes.push(`URL riusati: ${reused.identified} voci con l'identita' dell'item`);
     if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza un titolo della fonte scartate (nessuna identita')`);
     headlines = reused.headlines;
+  }
+
+  // Schaffhausen24, Aarau24 e Linth24 ordinano l'elenco per ID ma non
+  // stampano la data nella card. Il secondo passo è limitato agli item senza
+  // data e al budget dichiarato: legge solo metadati pubblici del dettaglio,
+  // non il corpo e non un eventuale paywall.
+  if (source.parser === 'html-links' && quirks.articleDateFromDetail === 'html-meta' && headlines.length > 0) {
+    const detailBudget = budget === Infinity ? headlines.length : Math.max(0, budget - requests);
+    const targets = headlines
+      .map((headline, index) => ({ headline, index }))
+      .filter(({ headline }) => !(headline.date instanceof Date) || Number.isNaN(headline.date.getTime()))
+      .slice(0, detailBudget);
+    if (targets.length < headlines.filter((headline) => !(headline.date instanceof Date) || Number.isNaN(headline.date.getTime())).length) {
+      notes.push(`data dettaglio: ${targets.length} pagine nel budget`);
+    }
+    for (const { headline, index } of targets) {
+      try {
+        const detailHtml = await get(headline.url, HTML_ACCEPT);
+        const date = extractPublishedDateFromHtml(detailHtml);
+        if (date) headlines[index] = { ...headline, date };
+        else notes.push(`data dettaglio assente: ${headline.url}`);
+      } catch (error) {
+        notes.push(`data dettaglio non disponibile: ${headline.url} (${error?.message || error})`);
+      }
+    }
   }
 
   // Alcune home editoriali hanno titoli generici per le rassegne (per esempio
