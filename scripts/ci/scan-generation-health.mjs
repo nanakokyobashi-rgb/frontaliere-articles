@@ -48,6 +48,10 @@
  *  3. **Il corpus del checkout** (`content/*-articles-data.ts` +
  *     `content/blog-meta*-it.ts`), per le coppie di articoli sullo stesso
  *     argomento. Zero rete.
+ *  4. **Gli esiti delle copertine** (`[cover] article=… source=… reason=…`)
+ *     nei log delle run e la coda versionata `data/image-regeneration-queue.json`.
+ *     Il resolver stampa un evento per l'esito scelto; l'errore `source=engine`
+ *     che lo precede resta diagnosi e non viene contato due volte.
  *
  * ## Il criterio di taratura: anomalo, non normale
  *
@@ -165,6 +169,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
+import { readImageRegenerationQueue } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
+import { SECRET_PATTERNS } from './scan-hardcoded-secrets.mjs';
 import { topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 
 const execFileAsync = promisify(execFile);
@@ -594,6 +600,15 @@ export const SECTIONS = ['frontaliere', 'svizzera'];
 /** Sopra questa quota di log illeggibili le condizioni sui log non si valutano. */
 export const MIN_LOG_SUCCESS_RATE = 0.5;
 
+/**
+ * `cover-fallback-health` — quattro ripieghi consecutivi sono già oltre la
+ * normalità osservabile; tre è il limite che l'operatore può tollerare senza
+ * aprire un incidente. La coda è un secondo segnale indipendente: un item che
+ * aspetta sei ore è già più vecchio della finestra operativa del generatore.
+ */
+export const COVER_FALLBACK_CONSECUTIVE_THRESHOLD = 4;
+export const COVER_QUEUE_MAX_AGE_HOURS = 6;
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Parser puri — nessuna rete, nessun filesystem. Sono il cuore testabile.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -699,6 +714,36 @@ const MODEL_TOUCHED_RES = [
 ];
 const EVERGREEN_SATURATED_RE = /Tutte le keyword evergreen risultano già coperte/;
 const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
+const COVER_EVENT_RE = /\[cover\]\s+article=(\S+)\s+source=(\S+)\s+reason=([^\r\n]*)/g;
+
+function safeCoverReason(value) {
+  let reason = String(value || 'unknown').replace(/\s+/g, ' ').trim();
+  for (const { re } of SECRET_PATTERNS) reason = reason.replace(new RegExp(re), '[redacted]');
+  return reason.slice(0, 180) || 'unknown';
+}
+
+/**
+ * Legge solo gli eventi che descrivono l'esito della copertina.
+ *
+ * Il motore stampa prima `source=engine` con l'errore e poi il resolver stampa
+ * `source=catalog-fallback` o `source=static`: il primo è diagnosi, non un
+ * secondo fallback. Un evento `engine` conta solo quando dice `generated`.
+ */
+export function parseCoverOutcomes(text) {
+  const out = [];
+  for (const match of String(text || '').matchAll(COVER_EVENT_RE)) {
+    const articleId = match[1];
+    const source = match[2];
+    const reason = safeCoverReason(match[3]);
+    const kind = source === 'catalog-fallback' || source === 'static'
+      ? 'fallback'
+      : (source === 'engine' && reason === 'generated') || source === 'editorial-upload' || source === 'generated-engine'
+        ? 'generated'
+        : null;
+    if (kind) out.push({ articleId, kind, source, reason });
+  }
+  return out;
+}
 
 /**
  * Estrae dai log di UNA run tutto ciò che le condizioni sanno leggere.
@@ -721,7 +766,8 @@ const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
  *   evergreenSaturated: boolean, evergreenNone: boolean,
  *   tokenLimitSkips: Array<{model: string, limit: number, estimated: number}>,
  *   modelFailures: Array<{model: string, code: string}>,
- *   modelsTouched: string[]
+ *   modelsTouched: string[],
+ *   coverOutcomes: Array<{articleId: string, kind: 'generated'|'fallback', source: string, reason: string}>
  * }}
  */
 export function parseRunLog(text) {
@@ -795,6 +841,7 @@ export function parseRunLog(text) {
     modelsTouched: [...new Set(
       MODEL_TOUCHED_RES.flatMap((re) => [...t.matchAll(re)].map((m) => m[1])),
     )].sort(),
+    coverOutcomes: parseCoverOutcomes(t),
   };
 }
 
@@ -866,6 +913,52 @@ export function parseRunLog(text) {
  *
  * @param {Array<ReturnType<typeof parseRunLog>>} runs
  */
+function summarizeCoverHealth(runs) {
+  const events = [];
+  let order = 0;
+  for (const run of runs || []) {
+    for (const event of run?.coverOutcomes || []) {
+      events.push({
+        ...event,
+        runCreatedAt: Number(run.runCreatedAt),
+        order: order++,
+      });
+    }
+  }
+  // `gh run list` returns newest first. The collector attaches the immutable
+  // run timestamp so a fallback streak is evaluated in time order, while pure
+  // parser fixtures without that metadata keep their insertion order.
+  if (events.length && events.every((event) => Number.isFinite(event.runCreatedAt))) {
+    events.sort((a, b) => a.runCreatedAt - b.runCreatedAt || a.order - b.order);
+  }
+
+  let fallbacks = 0;
+  let generated = 0;
+  let currentStreak = 0;
+  let maxStreak = 0;
+  const reasons = {};
+  for (const event of events) {
+    if (event.kind === 'fallback') {
+      fallbacks++;
+      currentStreak++;
+      maxStreak = Math.max(maxStreak, currentStreak);
+      reasons[event.reason] = (reasons[event.reason] || 0) + 1;
+    } else if (event.kind === 'generated') {
+      generated++;
+      currentStreak = 0;
+    }
+  }
+  return {
+    observations: events.length,
+    fallbacks,
+    generated,
+    fallbackRate: events.length ? fallbacks / events.length : 0,
+    latestConsecutiveFallbacks: currentStreak,
+    maxConsecutiveFallbacks: maxStreak,
+    reasons,
+  };
+}
+
 export function summarizeRuns(runs) {
   const bySection = new Map();
   for (const s of SECTIONS) {
@@ -1084,6 +1177,7 @@ export function summarizeRuns(runs) {
       retiredRate: modelsTouched.size ? retiredIn.size / modelsTouched.size : 0,
       billingRate: modelsTouched.size ? billingIn.size / modelsTouched.size : 0,
     },
+    coverHealth: summarizeCoverHealth(runs),
   };
 }
 
@@ -1179,6 +1273,9 @@ const REMEASURE = {
   commits: 'gh api "repos/$REPO/commits?sha=main&per_page=100" --jq \'.[] | "\\(.commit.committer.date)\\t\\(.commit.message | split("\\n")[0])"\'',
   runs: 'gh run list --repo "$REPO" --workflow=generate-article.yml --limit 200 --json databaseId,conclusion,createdAt'
     + ' && gh run view <id> --repo "$REPO" --log | grep -E "PRESPEND_GATE_|would exceed|Tutte le keyword evergreen|→ section="',
+  cover: 'jq \'{schema,count:(.items|length),oldest:(.items|map(.requestedAt)|sort|.[0])}\' data/image-regeneration-queue.json'
+    + '\ngh run list --repo "$REPO" --workflow=generate-article.yml --limit 60 --json databaseId,createdAt'
+    + '\n# per ogni run completata: gh run view <id> --repo "$REPO" --log | grep -aE \'\\[cover\\]\'',
   // `grep -a` NON è opzionale: questi log si leggono come binari e senza torna
   // vuoto IN SILENZIO — cioè si conclude «nessun modello morto» per un difetto
   // dello strumento. Vale anche per il primo grep.
@@ -1274,6 +1371,85 @@ function sectionDryEvidence(m, section, per) {
 }
 
 export const CONDITIONS = [
+  {
+    id: 'cover-fallback-health',
+    scope: 'global',
+    priority: 2,
+    title: () => 'Watchdog copertine: fallback consecutivi o coda anziana',
+    evaluate(m) {
+      const health = m.runs?.available === true ? m.runs.coverHealth : null;
+      const queue = m.coverQueue;
+      const queueAvailable = queue?.available === true
+        && Number.isFinite(queue.count)
+        && (queue.oldestAgeHours === null || Number.isFinite(queue.oldestAgeHours));
+      const healthAvailable = health
+        && Number.isFinite(health.observations)
+        && Number.isFinite(health.fallbacks)
+        && Number.isFinite(health.generated)
+        && Number.isFinite(health.latestConsecutiveFallbacks)
+        && Number.isFinite(health.fallbackRate);
+      const fallbackEvidenceAvailable = Boolean(healthAvailable && health.observations >= 1);
+      const fallbackSignal = fallbackEvidenceAvailable
+        && health.latestConsecutiveFallbacks >= COVER_FALLBACK_CONSECUTIVE_THRESHOLD;
+      const queueSignal = queueAvailable && Number.isFinite(queue.oldestAgeHours)
+        && queue.oldestAgeHours >= COVER_QUEUE_MAX_AGE_HOURS;
+      // The two signals are independent: an old queue item is actionable even
+      // when recent run logs are unavailable, and a measured fallback streak
+      // remains actionable even when the queue JSON cannot be read. When
+      // neither signal fires, an unavailable side stays fail-closed so an
+      // existing alert is never closed on partial evidence.
+      if (!fallbackSignal && !queueSignal) {
+        if (!fallbackEvidenceAvailable || !queueAvailable) {
+          return {
+            available: false,
+            reason: !queueAvailable
+              ? 'image regeneration queue is not measurable'
+              : 'cover outcomes are not measurable and the queue is below age threshold',
+          };
+        }
+        return { firing: false };
+      }
+
+      const reasons = Object.entries(health?.reasons || {})
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([reason, count]) => `${reason} (${count})`)
+        .join(', ') || 'nessun motivo registrato';
+      const statuses = Object.entries(queue?.statuses || {})
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([status, count]) => `${status}=${count}`)
+        .join(', ') || 'vuota';
+      const queueLines = queueAvailable
+        ? [
+          `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
+          `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${Number.isFinite(queue.oldestAgeHours) ? `${queue.oldestAgeHours.toFixed(1)}h` : '—'} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
+        ]
+        : [
+          '- Coda rigenerazione: **non misurata** (JSON illeggibile o `requestedAt` non valido); questo segnale resta sconosciuto.',
+        ];
+      return {
+        firing: true,
+        body: [
+          'Il watchdog delle copertine ha rilevato un degrado persistente nella finestra osservata.',
+          '',
+          fallbackEvidenceAvailable
+            ? `- Eventi copertina osservati: **${health.observations}**; fallback **${health.fallbacks}** (${(health.fallbackRate * 100).toFixed(0)}%), generated **${health.generated}**.`
+            : '- Eventi copertina recenti: **non misurati** (i log delle run non sono disponibili o non contengono marker).',
+          fallbackEvidenceAvailable
+            ? `- Fallback consecutivi finali: **${health.latestConsecutiveFallbacks}** (soglia ${COVER_FALLBACK_CONSECUTIVE_THRESHOLD}, cioè oltre tre).`
+            : `- Fallback consecutivi finali: **non misurati** (soglia ${COVER_FALLBACK_CONSECUTIVE_THRESHOLD}).`,
+          ...queueLines,
+          `- Motivi più frequenti dei fallback: ${reasons}.`,
+          '',
+          '## Suggested action',
+          '',
+          'Correlare gli eventi [cover] con le run del motore immagini e con la coda prima di chiudere il segnale.',
+          'Verificare generator/scripts/lib/article-cover-fallback.mjs per la scelta della copertina e scripts/ci/scan-generation-health.mjs per la misura; non svuotare la coda senza una rigenerazione riuscita e una nuova misura sotto soglia.',
+        ].join('\n') + footer(REMEASURE.cover),
+      };
+    },
+  },
+
   {
     id: 'generation-idle',
     scope: 'global',
@@ -2013,6 +2189,47 @@ export function formatCantonCommitSummary(perCanton) {
 }
 
 /**
+ * Legge la coda delle copertine senza interpretare un JSON parziale come una
+ * coda sana. Un `requestedAt` invalido rende la misura non disponibile: l'età
+ * minima sarebbe altrimenti un numero inventato proprio mentre il resolver ha
+ * bisogno di un allarme.
+ */
+export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
+  try {
+    const queue = readImageRegenerationQueue(repoRoot);
+    const items = queue.items || [];
+    const parsed = items.map((item) => ({
+      item,
+      requestedAt: Date.parse(String(item?.requestedAt || '')),
+    }));
+    if (parsed.some(({ requestedAt }) => !Number.isFinite(requestedAt))) {
+      return { available: false, reason: 'image regeneration queue contains an invalid requestedAt' };
+    }
+    const statuses = {};
+    for (const { item } of parsed) {
+      const status = String(item?.status || 'unknown');
+      statuses[status] = (statuses[status] || 0) + 1;
+    }
+    const oldest = parsed.length ? Math.min(...parsed.map(({ requestedAt }) => requestedAt)) : null;
+    const observedAt = Number(now);
+    if (!Number.isFinite(observedAt)) {
+      return { available: false, reason: 'cover queue measurement received an invalid timestamp' };
+    }
+    return {
+      available: true,
+      count: items.length,
+      oldestRequestedAt: oldest === null ? null : new Date(oldest).toISOString(),
+      oldestAgeHours: oldest === null ? null : Math.max(0, (observedAt - oldest) / 3_600_000),
+      statuses,
+    };
+  } catch (error) {
+    const reason = safeCoverReason(error?.message || error);
+    console.warn(`::warning::[generation-health] coda copertine non leggibile: ${reason}`);
+    return { available: false, reason };
+  }
+}
+
+/**
  * Log delle run recenti di `generate-article.yml`.
  *
  * Le run `cancelled` sono escluse a monte: su questo repo sono un terzo del
@@ -2049,7 +2266,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
           'gh', ['run', 'view', String(r.databaseId), '--repo', repo, '--log'],
           { encoding: 'utf8', maxBuffer: 128 * 1024 * 1024 },
         );
-        return parseRunLog(stdout);
+        return { ...parseRunLog(stdout), runCreatedAt: Date.parse(r.createdAt) };
       } catch {
         return null;
       }
@@ -2078,6 +2295,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
     outcomesBySection: summary.outcomesBySection,
     oversize: summary.oversize,
     roster: summary.roster,
+    coverHealth: summary.coverHealth,
   };
 }
 
@@ -2178,7 +2396,9 @@ function routeToQueue(issue) {
 export async function collectMeasurements(repo, {
   commitLookback, maxLogRuns, runLookback, now = Date.now,
   collectCommitsFn = collectCommits, collectRunLogsFn = collectRunLogs, collectCorpusFn = collectCorpus,
+  collectCoverQueueFn = collectCoverQueue,
 } = {}) {
+  const observedAt = now();
   let commits;
   let commitCollectionError = null;
   try {
@@ -2190,9 +2410,10 @@ export async function collectMeasurements(repo, {
   }
   return {
     measurements: {
-      now: now(), commits,
+      now: observedAt, commits,
       runs: await collectRunLogsFn(repo, { maxRuns: maxLogRuns, lookbackHours: runLookback }),
       corpus: collectCorpusFn(REPO_ROOT),
+      coverQueue: collectCoverQueueFn(REPO_ROOT, observedAt),
     },
     commitCollectionError,
   };
@@ -2229,6 +2450,19 @@ async function main() {
       `[generation-health] outcomes total=${o.total} generated=${o.generated}`
       + ` no-article=${o.noArticle} timeout=${o.timeout} skipped=${o.skipped}`
       + ` error=${o.error} unknown=${o.unknown} reasons=${JSON.stringify(o.byReason)}`,
+    );
+  }
+  if (measurements.runs.available && measurements.runs.coverHealth) {
+    const h = measurements.runs.coverHealth;
+    console.log(
+      `[generation-health] covers observations=${h.observations} fallback=${h.fallbacks}`
+      + ` generated=${h.generated} latest-streak=${h.latestConsecutiveFallbacks}`,
+    );
+  }
+  if (measurements.coverQueue.available) {
+    console.log(
+      `[generation-health] cover-queue count=${measurements.coverQueue.count}`
+      + ` oldest-age-hours=${measurements.coverQueue.oldestAgeHours ?? 'n/d'}`,
     );
   }
 

@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - 11'251 persone cercavano lavoro a fine settembre - 5'768 erano disoccupate - 3'955 posti vacanti risultavano segnalati - 754 dipendenti erano",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/mercato-lavoro-canton-grigioni.webp`,
+        "url": `${BASE_URL}/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine editoriale relativa a: Canton San Gallo: stabile ricerca lavoro, cala disoccupazione"

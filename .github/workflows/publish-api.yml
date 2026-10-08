@@ -110,6 +110,7 @@ on:
       # themselves are under content/** and the reader under engine/**.
       - 'scripts/lib/image-credit-records.mjs'
       - 'generator/scripts/lib/blog-image-registry.mjs'
+      - 'generator/scripts/lib/deterministic-card-provenance.mjs'
       - 'generator/scripts/lib/atomic-write-json.mjs'
       - 'data/generated-image-registry.json'
       - 'data/editorial-image-registry.json'

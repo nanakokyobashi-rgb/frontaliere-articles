@@ -285,6 +285,8 @@ import {
 } from './lib/blog-image-registry.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
+  CATALOG_FALLBACK_MIN_SHARED_WORDS,
+  catalogFallbackSharedWordCount,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from './lib/article-cover-fallback.mjs';
@@ -1566,41 +1568,28 @@ const AVAILABLE_IMAGES = PLACES_IMAGES;
 
 /**
  * Select an existing catalog cover with a valid reader-facing provenance
- * record. A topical filename match is preferred, but any valid catalog cover
- * is acceptable as the final deterministic fallback.
+ * record. A topical filename match is accepted only when it shares at least
+ * the governed minimum number of words with the article. Returning null for
+ * a weak match is deliberate: the caller's governed fallback resolver then
+ * chooses the static place cover instead of borrowing an unrelated story.
  */
 function findBestFallbackImage(data) {
   const recentImages = new Set(_getRecentArticleImages());
-  const searchableText = [
-    data.id || '',
-    data.category || '',
-    data.imagePrompt || '',
-    data.content?.it?.title || data.content?.title || '',
-    data.content?.it?.excerpt || data.content?.excerpt || '',
-  ].join(' ').toLowerCase();
-  const articleWords = searchableText
-    .replace(/[^a-zà-ÿ0-9\s-]/g, ' ')
-    .split(/[\s-]+/)
-    .filter((word) => word.length >= 4);
 
   let bestBlogMatch = null;
   let bestBlogScore = 0;
   for (const imagePath of FALLBACK_IMAGES) {
     if (recentImages.has(imagePath)) continue;
-    const filename = imagePath.replace('/images/blog/', '').replace(/\.webp$/i, '').toLowerCase();
-    const score = articleWords.reduce((total, word) => total + (filename.includes(word) ? 1 : 0), 0);
+    const score = catalogFallbackSharedWordCount(data, imagePath);
     if (score > bestBlogScore) {
       bestBlogScore = score;
       bestBlogMatch = imagePath;
     }
   }
-  if (bestBlogMatch && bestBlogScore >= 2) return bestBlogMatch;
+  if (bestBlogMatch && bestBlogScore >= CATALOG_FALLBACK_MIN_SHARED_WORDS) return bestBlogMatch;
 
-  // The pool was built only from valid records. Keep the final choice explicit
-  // so an engine outage never turns into an untracked image.
-  return FALLBACK_IMAGES.find((imagePath) => !recentImages.has(imagePath))
-    || FALLBACK_IMAGES[0]
-    || null;
+  // No arbitrary catalog cover: the governed resolver owns the static fallback.
+  return null;
 }
 
 const CATEGORIES = ['fiscale', 'pratico', 'novita', 'pensione'];

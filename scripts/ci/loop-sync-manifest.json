@@ -1027,7 +1027,7 @@
     {
       "path": "scripts/ci/scan-generation-health.mjs",
       "mode": "corpus-only",
-      "reason": "Watchdog della pipeline di generazione: apre e richiude issue sulle run che escono `success` senza produrre articoli. Sul sito non esiste e non deve: dal cutover del 2026-08-02 e il corpus a generarlo, e ogni soglia qui e misurata sui dati DI QUESTO repo (215 intervalli fra articoli, 200 run di generate-article.yml, 3.846 articoli del corpus dopo #184). Portarlo la senza rimisurare darebbe un tasso di falsi positivi diverso. Il fratello `scan-failed-runs.mjs` copre la meta opposta (`conclusion == failure`) ed e registrato a parte.",
+      "reason": "Watchdog della pipeline di generazione: apre e richiude issue sulle run che escono `success` senza produrre articoli e sugli esiti persistenti delle copertine (fallback consecutivi o coda anziana). Sul sito non esiste e non deve: dal cutover del 2026-08-02 e il corpus a generarlo, e ogni soglia qui e misurata sui dati DI QUESTO repo (215 intervalli fra articoli, 200 run di generate-article.yml, 3.846 articoli del corpus dopo #184). Portarlo la senza rimisurare darebbe un tasso di falsi positivi diverso. Il fratello `scan-failed-runs.mjs` copre la meta opposta (`conclusion == failure`) ed e registrato a parte.",
       "baseline": {
         "site": null,
         "corpus": "976f4273dd9ea766",
@@ -2586,6 +2586,16 @@
         "site": null,
         "corpus": "0d418d160b45beb5",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/deterministic-card-provenance.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto di provenance per le card deterministiche del Bollettino, usato dal producer dell'immagine e dal registry delle copertine. Il generatore e i suoi record vivono nel corpus; il sito consuma il JSON pubblicato e non ha un gemello di questo helper.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
       }
     },
     {

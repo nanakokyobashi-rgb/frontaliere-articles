@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/luganese/1942553/lavori-al-posteggio-di-cadro-e-le-isole-verdi": "lavori-posteggio-cadro-interrogazione",
   "https://www.tio.ch/ticino/cronaca/1942773/bloccato-frustrazione-automobilisti-traffico-tanta-a2": "traffico-a2-bloccato",
   "https://www.laregione.ch/culture/locarno-film-festival/1942652/ich-ist-ein-anderer-in-viaggio-con-felix-kersten": "locarno-film-festival-frontaliere-ticino",
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/quanto-%c3%a8-dipendente-la-svizzera-dai-combustibili-fossili/91488958": "frontaliere-ticino-energia-fossili",
@@ -2148,6 +2147,11 @@
   "https://www.varesenews.it/2026/10/sport-alla-materna-a-luvinate-al-via-il-progetto-motorio-in-collaborazione-con-la-varese-basket-school/2700754": {
     "articleId": "luvinate-progetto-motorio-materna",
     "ts": "2026-10-08T02:37:51.981Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/kastritis-momento-difficile-ci-aiutera-a-crescere-massima-fiducia-nel-gruppo/2701573": {
+    "articleId": "kastritis-varese-momento-difficile",
+    "ts": "2026-10-08T03:50:32.569Z",
     "keyForm": 2
   }
 }

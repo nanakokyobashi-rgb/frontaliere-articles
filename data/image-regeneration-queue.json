@@ -32,96 +32,6 @@
       "failureCount": 2
     },
     {
-      "articleId": "uri-misure-energia-clima",
-      "title": "Canton Uri punta sulle misure energetiche per il clima",
-      "fallbackImage": "/images/blog/svizzeri-chiedono-misure-clima.webp",
-      "reason": "All image providers failed for article-uri-misure-energia-clima: Codex broker timed out after 119999ms",
-      "status": "queued",
-      "requestedAt": "2026-10-07T09:07:12.843Z",
-      "lastFailureAt": "2026-10-07T09:07:12.843Z"
-    },
-    {
-      "articleId": "neuchatel-rinnova-politica-abitativa-con-24-milioni",
-      "title": "Neuchâtel rinnova politica abitativa con 24 milioni",
-      "fallbackImage": "/images/blog/politica-agricola-2030-tagli-120-milioni.webp",
-      "reason": "All image providers failed for article-neuchatel-rinnova-politica-abitativa-con-24-milioni: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T09:07:42.914Z",
-      "lastFailureAt": "2026-10-07T09:07:42.914Z"
-    },
-    {
-      "articleId": "treno-foliage-locarno-domodossola",
-      "title": "Treno del Foliage: Locarno-Domodossola dal 10 ottobre",
-      "fallbackImage": "/images/blog/camelie-locarno-record-visitatori-2026-2.webp",
-      "reason": "All image providers failed for article-treno-foliage-locarno-domodossola: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T09:13:13.001Z",
-      "lastFailureAt": "2026-10-07T09:13:13.001Z"
-    },
-    {
-      "articleId": "chiusura-strade-gallusmarkt-svitto",
-      "title": "Einsiedeln: chiusure stradali per il Gallusmarkt 2026",
-      "fallbackImage": "/images/blog/logistica-pallet-analisi-mercato.webp",
-      "reason": "All image providers failed for article-chiusura-strade-gallusmarkt-svitto: Codex broker timed out after 119999ms",
-      "status": "queued",
-      "requestedAt": "2026-10-07T09:21:09.381Z",
-      "lastFailureAt": "2026-10-07T09:21:09.381Z"
-    },
-    {
-      "articleId": "disoccupazione-stabile-4-4-neuchatel-settembre-2026",
-      "title": "Disoccupazione stabile 4,4% Neuchâtel settembre 2026",
-      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
-      "reason": "All image providers failed for article-disoccupazione-stabile-4-4-neuchatel-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T09:30:57.336Z",
-      "lastFailureAt": "2026-10-07T09:30:57.336Z"
-    },
-    {
-      "articleId": "cancro-prostata-assistenza-svizzera",
-      "title": "Cancro alla prostata: assistenza buona in Svizzera 2020‑2023",
-      "fallbackImage": "/images/blog/allarme-aumento-affitti-svizzera.webp",
-      "reason": "All image providers failed for article-cancro-prostata-assistenza-svizzera: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:02:14.857Z",
-      "lastFailureAt": "2026-10-07T10:02:14.857Z"
-    },
-    {
-      "articleId": "canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione",
-      "title": "Canton San Gallo: stabile ricerca lavoro, cala disoccupazione",
-      "fallbackImage": "/images/blog/mercato-lavoro-canton-grigioni.webp",
-      "reason": "All image providers failed for article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:15:11.286Z",
-      "lastFailureAt": "2026-10-07T10:15:11.286Z"
-    },
-    {
-      "articleId": "lavoro-ar-rav-settembre-2026",
-      "title": "Appenzello Esterno: disoccupazione al 1,5% a settembre",
-      "fallbackImage": "/images/blog/disoccupazione-settembre-ticino-2026.webp",
-      "reason": "All image providers failed for article-lavoro-ar-rav-settembre-2026: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:17:50.903Z",
-      "lastFailureAt": "2026-10-07T10:17:50.903Z"
-    },
-    {
-      "articleId": "rtvv-obvaldo-categorie-aziendali",
-      "title": "RTVV a Obvaldo: revisione delle categorie aziendali",
-      "fallbackImage": "/images/blog/asilo-nido-custodia-bambini-canton-obvaldo-costi.webp",
-      "reason": "All image providers failed for article-rtvv-obvaldo-categorie-aziendali: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:19:16.048Z",
-      "lastFailureAt": "2026-10-07T10:19:16.048Z"
-    },
-    {
-      "articleId": "biasca-17enne-arrestato-accoltellamento",
-      "title": "Biasca: arrestato 17enne per accoltellamento vicino alla stazione",
-      "fallbackImage": "/images/blog/biasca-accoltellamento-21enne.webp",
-      "reason": "All image providers failed for article-biasca-17enne-arrestato-accoltellamento: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:19:58.846Z",
-      "lastFailureAt": "2026-10-07T10:19:58.846Z"
-    },
-    {
       "articleId": "cdhr-frontalieri-vaud-2026",
       "title": "CDHR: quando i frontalieri francesi pagano l'acconto del 95%",
       "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
@@ -305,16 +215,6 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T00:53:16.383Z",
       "lastFailureAt": "2026-10-08T00:53:16.383Z"
-    },
-    {
-      "articleId": "festival-racconto-varese-ottobre",
-      "title": "Festival del Racconto: due appuntamenti a Varese",
-      "fallbackImage": "/images/blog/compatta-usata-frontalieri-varese-milano.webp",
-      "reason": "All image providers failed for article-festival-racconto-varese-ottobre: openai-codex (vision gate rejected image: Generic editorial illustration with multiple visible human faces.",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T01:52:56.118Z",
-      "lastFailureAt": "2026-10-08T01:52:56.118Z"
     }
   ]
 }
