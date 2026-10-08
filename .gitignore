@@ -64,3 +64,6 @@ generator/data/register-in-progress*.json.*.tmp
 # Deterministic SEO orphan recovery lock; runner-local, never corpus state.
 generator/data/seo-backfill-in-progress.json
 generator/data/seo-backfill-in-progress.json.*.tmp
+
+# Cover regeneration queue lock; runner-local, never corpus state.
+data/image-regeneration-queue-in-progress.json

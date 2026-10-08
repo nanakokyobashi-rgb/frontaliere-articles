@@ -37,6 +37,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {
   LEGACY_REGISTER_LOCK_FILE,
+  REGISTER_LOCK_KIND_SEO_RECOVERY,
   registerLockFile,
   registerLockPath,
   beginRegisterLock,
@@ -280,6 +281,21 @@ test('beginRegisterLock non sovrascrive un lock esistente', () => {
   // Il lock originale e' intatto: sovrascriverlo perderebbe l'id da
   // confrontare coi 9 file.
   assert.equal(readRegisterLock(root, SECTION).id, ARTICLE_ID);
+});
+
+test('il marker della recovery SEO blocca il writer normale sulla stessa superficie', () => {
+  const root = sandbox();
+  beginRegisterLock(root, 'seo-recovery', SECTION, { kind: REGISTER_LOCK_KIND_SEO_RECOVERY });
+  assert.equal(readRegisterLock(root, SECTION).kind, REGISTER_LOCK_KIND_SEO_RECOVERY);
+  assert.throws(
+    () => resolveRegisterLock(root, makeTargets(root), SECTION),
+    /SEO orphan recovery lock still present/,
+  );
+  assert.throws(() => beginRegisterLock(root, ARTICLE_ID, SECTION), /registration lock still present/);
+
+  endRegisterLock(root, SECTION);
+  assert.doesNotThrow(() => beginRegisterLock(root, ARTICLE_ID, SECTION));
+  endRegisterLock(root, SECTION);
 });
 
 test('il lock resta risolto sulla SEZIONE registrata, non su quella del run successivo', () => {

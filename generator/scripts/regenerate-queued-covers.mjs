@@ -20,8 +20,7 @@ import {
   IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
 } from './lib/image-regeneration-publish-outbox.mjs';
 import {
-  readImageRegenerationQueue,
-  writeImageRegenerationQueue,
+  withImageRegenerationQueueLockAsync,
 } from './lib/image-regeneration-queue.mjs';
 import { canonicalizeImageRegenerationQueue } from '../../scripts/lib/merge-image-regeneration-queue.mjs';
 
@@ -371,12 +370,13 @@ export async function drainQueuedCovers({
   registryFiles,
   retryFailed = false,
 } = {}) {
+  return withImageRegenerationQueueLockAsync(root, async ({ read, write }) => {
   const boundedLimit = parseLimit(limit);
-  const queue = readImageRegenerationQueue(root);
+  const queue = read();
   const canonicalQueue = canonicalizeImageRegenerationQueue(queue);
   const hadDuplicateArticleIds = canonicalQueue.items.length !== queue.items.length;
   queue.items = canonicalQueue.items;
-  if (hadDuplicateArticleIds) writeImageRegenerationQueue(root, queue);
+  if (hadDuplicateArticleIds) write(queue);
   const alreadySatisfiedIds = [];
   const unsatisfiedItems = [];
   for (const item of queue.items) {
@@ -385,7 +385,7 @@ export async function drainQueuedCovers({
   }
   if (alreadySatisfiedIds.length > 0) {
     queue.items = unsatisfiedItems;
-    writeImageRegenerationQueue(root, queue);
+    write(queue);
   }
   const requeued = [];
   if (retryFailed) {
@@ -395,7 +395,7 @@ export async function drainQueuedCovers({
       item.failureCount = 0;
       requeued.push(item.articleId);
     }
-    if (requeued.length > 0) writeImageRegenerationQueue(root, queue);
+    if (requeued.length > 0) write(queue);
   }
   const selected = queue.items
     .filter((item) => retryFailed || item.status !== 'failed')
@@ -421,7 +421,7 @@ export async function drainQueuedCovers({
       if (index < 0) throw new Error(`queue item disappeared before success: ${item.articleId}`);
       queue.items.splice(index, 1);
       try {
-        writeImageRegenerationQueue(root, queue);
+        write(queue);
       } catch (error) {
         // A failed persistence must not turn an in-memory splice into a lost
         // queue item when the catch below records the failed attempt.
@@ -440,7 +440,7 @@ export async function drainQueuedCovers({
       item.status = failureCount >= 3 ? 'failed' : 'queued';
       item.lastFailureAt = typeof now === 'function' ? now() : String(now);
       item.reason = normalizeReason(error);
-      writeImageRegenerationQueue(root, queue);
+      write(queue);
       result.failed += 1;
       result.failedIds.push(item.articleId);
       console.error(`  ⚠️  Copertina ${item.articleId} non smaltita (${failureCount}° tentativo): ${item.reason}`);
@@ -448,6 +448,7 @@ export async function drainQueuedCovers({
   }
 
   return summaryFor(queue, result);
+  });
 }
 
 function parseArgs(argv) {

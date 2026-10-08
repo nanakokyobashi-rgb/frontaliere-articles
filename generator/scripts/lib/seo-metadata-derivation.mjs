@@ -11,7 +11,6 @@
 import {
   TRAILING_STOPWORDS,
   peelDanglingClauseTail,
-  truncateToClause,
   truncateToClauseNonEmpty,
 } from '../../../host/shared/clauseTail.mjs';
 import { repairSeoTitleFields } from './seo-title-repair.mjs';
@@ -124,8 +123,8 @@ export function deriveSeoMetadata(data, { existingTitles = new Set(), log = () =
   if (description.length < 145) {
     description = `${description}${description.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
   }
-  data.seo.description = truncateToClause(description, DESCRIPTION_MAX_CHARS);
-  data.seo.ogDescription = truncateToClause(
+  data.seo.description = truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
+  data.seo.ogDescription = truncateToClauseNonEmpty(
     data.seo.ogDescription || data.seo.description,
     OG_DESCRIPTION_MAX_CHARS,
   );

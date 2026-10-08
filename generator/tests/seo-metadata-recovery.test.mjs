@@ -17,6 +17,12 @@ import {
 import { mergeQueueWithSnapshot } from '../scripts/lib/seo-recovery-queue.mjs';
 import { createWriteLedger, restoreWrittenFiles } from '../scripts/lib/seo-recovery-rollback.mjs';
 import { SEO_BACKFILL_LOCK_REL, beginSeoBackfillLock, endSeoBackfillLock } from '../scripts/lib/seo-backfill-lock.mjs';
+import {
+  IMAGE_REGENERATION_QUEUE_LOCK_REL,
+  appendImageRegenerationQueue,
+  readImageRegenerationQueue,
+  withImageRegenerationQueueLock,
+} from '../scripts/lib/image-regeneration-queue.mjs';
 
 function article() {
   return {
@@ -45,6 +51,16 @@ test('la derivazione usa i meta esistenti e rimuove la coda funzionale con la re
   assert.match(data.seo.title, /^Titolo deterministico \| Frontaliere Ticino$/);
   assert.ok(data.seo.description.length <= 160);
   assert.match(data.seo.keywords, /^frontalieri, ticino, svizzera, italia,/);
+});
+
+test('la derivazione SEO non svuota descrizioni con una prima parola oltre il limite', () => {
+  const data = article();
+  data.content.it.excerpt = 'X'.repeat(220);
+  deriveSeoMetadata(data);
+  assert.ok(data.seo.description.length > 0);
+  assert.ok(data.seo.description.length <= 160);
+  assert.ok(data.seo.ogDescription.length > 0);
+  assert.ok(data.seo.ogDescription.length <= 250);
 });
 
 test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback governato', () => {
@@ -238,6 +254,26 @@ test('mergeQueueWithSnapshot non riporta in coda una voce che il drenaggio ha to
   const duplicated = { schema: 1, items: [queueItem('a'), queueItem('a', { failureCount: 3 }), queueItem('new-1')] };
   const merged = mergeQueueWithSnapshot({ schema: 1, items: [queueItem('a'), queueItem('gone')] }, duplicated);
   assert.deepEqual([...merged.items].sort(byJson), [...duplicated.items].sort(byJson));
+});
+
+test('i writer della coda condividono un lock e non scrivono durante il drenaggio', () => {
+  const root = tempDir('image-regeneration-queue-lock-');
+  const request = {
+    articleId: 'busy-queue-item',
+    title: 'Busy queue item',
+    fallbackImage: '/images/places/lugano-view.webp',
+    reason: 'fixture',
+    requestedAt: '2026-03-03T14:39:51.004Z',
+  };
+  try {
+    const nestedAppend = withImageRegenerationQueueLock(root, () => appendImageRegenerationQueue(root, request));
+    assert.equal(nestedAppend, false, 'un append concorrente deve restare best-effort');
+    assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_LOCK_REL)), false, 'il lock non resta orfano');
+    assert.equal(appendImageRegenerationQueue(root, request), true);
+    assert.deepEqual(readImageRegenerationQueue(root).items.map((item) => item.articleId), ['busy-queue-item']);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 function tempDir(prefix) {
