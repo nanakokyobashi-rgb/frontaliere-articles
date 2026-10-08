@@ -667,6 +667,9 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
     /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
   );
   assert.match(workflow, /verify_pushed_queue\(\)/);
+  assert.match(workflow, /snapshot_expected_queue\(\)/);
+  assert.match(workflow, /\.residualDrainer = \.residual/);
+  assert.match(workflow, /\.residualExpected = \$expected/);
   assert.match(workflow, /pushed_queue="\$\(git show HEAD:data\/image-regeneration-queue\.json\)"/);
   assert.match(workflow, /queued-cover-expected-queue\.json/);
   assert.match(workflow, /\.residualMissing = \$missing/);

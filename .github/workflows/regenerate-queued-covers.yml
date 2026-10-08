@@ -106,6 +106,28 @@ jobs:
           echo "publish_ready=false" >> "$GITHUB_OUTPUT"
           expected_queue="$RUNNER_TEMP/queued-cover-expected-queue.json"
 
+          snapshot_expected_queue() {
+            local expected verified
+            if [ ! -s "$SUMMARY_FILE" ]; then
+              echo "::error::queued-cover summary is missing; cannot snapshot the expected queue"
+              return 1
+            fi
+            if [ ! -s data/image-regeneration-queue.json ]; then
+              echo "::error::queued-cover queue is missing; cannot snapshot the expected queue"
+              return 1
+            fi
+            cp data/image-regeneration-queue.json "$expected_queue"
+            expected="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid expected queue") end' "$expected_queue")"
+            verified="${SUMMARY_FILE}.expected"
+            jq --argjson expected "$expected" \
+              'if has("residualDrainer") then . else .residualDrainer = .residual end
+               | .residual = $expected
+               | .residualExpected = $expected
+               | .residualSource = "expected-before-push"' \
+              "$SUMMARY_FILE" > "$verified"
+            mv "$verified" "$SUMMARY_FILE"
+          }
+
           verify_pushed_queue() {
             local internal expected_count actual expected_ids actual_ids missing verified pushed_queue
             if [ ! -s "$SUMMARY_FILE" ]; then
@@ -143,7 +165,7 @@ jobs:
           }
 
           git add -A
-          cp data/image-regeneration-queue.json "$expected_queue"
+          snapshot_expected_queue
           if git diff --cached --quiet; then
             if [ -s data/image-regeneration-publish-outbox.json ]; then
               echo "no corpus changes; retrying the durable publisher outbox"
@@ -215,6 +237,7 @@ jobs:
                 git commit --amend --no-edit
               fi
             fi
+            snapshot_expected_queue
           done
           echo "::error::push failed after 5 attempts"
           exit 1
