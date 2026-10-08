@@ -103007,16 +103007,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-lugano-lucerna-partita-traffico': {
-    title: 'Lucerna fans in Lugano: road closures, traffic delays',
+    title: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
     description: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
-    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, fans, lugano, road',
-    ogTitle: 'Lucerna fans in Lugano: road closures, traffic delays',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, lucerna, cornaredo, strade',
+    ogTitle: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
     ogDescription: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
     canonicalPath: '/articoli-frontaliere/lugano-lucerna-partita-traffico/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Lucerna fans in Lugano: road closures, traffic delays",
+      "headline": "Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato",
       "description": "## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese",
       "image": {
         "@type": "ImageObject",
