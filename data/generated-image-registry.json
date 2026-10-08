@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 56,
+  "assetCount": 57,
   "assets": [
     {
       "schema": 1,
@@ -2219,6 +2219,22 @@
         "is_photograph": false,
         "notes": "Original generic illustration with no readable text, logos, or recognizable faces."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-contributi-formazione-berna-requisiti",
+      "kind": "generated",
+      "provider": "site-owned",
+      "license": "private-grant",
+      "credit": "frontaliereticino.ch",
+      "note": "Repository/editorial asset retained in the corpus; source article commit 05716112d5c0fc26ff81ce239b50f93e6b978431 is known, but provider, model and prompt hash are not recoverable from repository provenance.",
+      "sha256": "a06ebb2026a70ff9d90e0919094c3ac1e5b3f29d5aedde2a8f23d43223918960",
+      "bytes": 39928,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-contributi-formazione-berna-requisiti.webp"
     },
     {
       "schema": 1,
