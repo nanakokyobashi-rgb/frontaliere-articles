@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.webp",
+      "sha256": "bbb7bd024955e6c06a6ba4c984e8f9fd5560b32be330dd17a80aa36cfbcebcd4"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa-480w.webp",
+      "sha256": "97fbe3b5318c7c22fac029f36c146f0340ea9eecea1458dfbf7ea846b07f041f"
+    }
+  ]
 }
