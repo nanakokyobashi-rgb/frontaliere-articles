@@ -7928,6 +7928,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.title': 'KI und Halbleiter treiben den Handel an, WTO revidiert Wachstumsschätzung',
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.excerpt': '## Auf einen Blick - Halbleiter und Server: Handel wächst um 67% - KI hat 47% des weltweiten Wachstums angetrieben - WTO-Schätzung: von 1,9% auf 3,9%',
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.imageAlt': 'Redaktionelles Bild zu: IA e semiconduttori trainano commercio, OMC rivede crescita',
+    'blog.article.fibra-ottica-limiti-2028.title': 'Glasfaser: Swisscom-Preise bis 2028 unverändert',
+    'blog.article.fibra-ottica-limiti-2028.excerpt': 'Swisscom-Preise bis Ende September 2028 unverändert Verlängerung der Tarifobergrenzen um zwei Jahre Maximal 24 Franken pro Monat, ohne Mehrwertsteuer Keine Erhöhung bei den Positionen',
+    'blog.article.fibra-ottica-limiti-2028.imageAlt': 'Glasfaser-Verteilerkasten an einer Schweizer Strasse.',
 };
 
 export default blogMetaChDe;

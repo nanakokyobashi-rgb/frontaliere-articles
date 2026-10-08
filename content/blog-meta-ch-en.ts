@@ -7928,6 +7928,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.title': 'AI and semiconductors drive trade, WTO revises growth',
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.excerpt': '## TL;DR - Semiconductors and servers: trade growing by 67% - AI fueled 47% of global growth - WTO estimate: from 1,9% to 3,9%',
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.imageAlt': 'Editorial image related to: IA e semiconduttori trainano commercio, OMC rivede crescita',
+    'blog.article.fibra-ottica-limiti-2028.title': 'Optical fiber: Swisscom prices frozen until 2028',
+    'blog.article.fibra-ottica-limiti-2028.excerpt': 'Swisscom prices unchanged until the end of September 2028 Two-year extension of tariff limits Maximum 24 francs per month, excluding VAT No increase for the items',
+    'blog.article.fibra-ottica-limiti-2028.imageAlt': 'Fiber-optic network cabinet on a Swiss street.',
 };
 
 export default blogMetaChEn;

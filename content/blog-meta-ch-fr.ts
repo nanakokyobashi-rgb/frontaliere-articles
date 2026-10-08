@@ -7928,6 +7928,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.title': 'L\'IA et les semi-conducteurs tirent le commerce, l\'OMC révise sa croissance',
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.excerpt': '## En bref - Semi-conducteurs et serveurs : commerce en hausse de 67 % - L\'IA a alimenté 47 % de la croissance mondiale - Estimation de l\'OMC : de 1,9 % à 3,9 %',
     'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.imageAlt': 'Image éditoriale relative à: IA e semiconduttori trainano commercio, OMC rivede crescita',
+    'blog.article.fibra-ottica-limiti-2028.title': 'Fibre optique : prix Swisscom gelés jusqu\'en 2028',
+    'blog.article.fibra-ottica-limiti-2028.excerpt': 'Prix Swisscom inchangés jusqu\'à fin septembre 2028 Prolongation de deux ans des plafonds tarifaires Maximum 24 francs par mois, hors TVA Aucune augmentation pour les postes',
+    'blog.article.fibra-ottica-limiti-2028.imageAlt': 'Armoire de réseau en fibre optique dans une rue suisse.',
 };
 
 export default blogMetaChFr;
