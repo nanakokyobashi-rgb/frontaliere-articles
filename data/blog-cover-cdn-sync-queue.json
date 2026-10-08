@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ipsach-gru-linea-strada.webp",
-      "sha256": "eb82a586893196b817dc476896a9ebb38f68b8778cd8843261ed207897b47fad"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ipsach-gru-linea-strada-480w.webp",
-      "sha256": "028b889f4a1751179035142ec71cf8cf2e94221663d64886b672bef7c0bb565a"
-    }
-  ]
+  "items": []
 }
