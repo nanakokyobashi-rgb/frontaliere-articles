@@ -101,8 +101,20 @@ function requestWinner(existing, candidate) {
   return candidateFailureAt >= existingFailureAt ? candidate : existing;
 }
 
+function sameRequest(existing, candidate) {
+  const existingRequestedAt = timeOf(existing.requestedAt);
+  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  if (existingRequestedAt != null || candidateRequestedAt != null) {
+    return existingRequestedAt != null
+      && candidateRequestedAt != null
+      && existingRequestedAt === candidateRequestedAt;
+  }
+  return String(existing.requestedAt || '') === String(candidate.requestedAt || '');
+}
+
 function mergeItem(existing, candidate) {
   const winner = requestWinner(existing, candidate);
+  if (!sameRequest(existing, candidate)) return { ...winner, articleId: String(existing.articleId) };
   return {
     ...winner,
     articleId: String(existing.articleId),

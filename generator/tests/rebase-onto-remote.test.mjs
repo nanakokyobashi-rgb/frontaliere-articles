@@ -1016,6 +1016,7 @@ test('il merge della coda segue la richiesta piu recente e conserva i contatori 
     status: 'queued',
     failureCount: 0,
     requestedAt: '2026-10-07T00:10:00.000Z',
+    lastFailureAt: '2026-10-07T00:10:00.000Z',
   };
   const requestMerged = mergeImageRegenerationQueues(
     { schema: 1, items: [staleFailure] },
@@ -1024,8 +1025,8 @@ test('il merge della coda segue la richiesta piu recente e conserva i contatori 
   assert.equal(requestMerged.reason, 'new enqueue');
   assert.equal(requestMerged.status, 'queued', 'un tentativo stale non deve bloccare una nuova richiesta');
   assert.equal(requestMerged.requestedAt, '2026-10-07T00:10:00.000Z');
-  assert.equal(requestMerged.failureCount, 3, 'il contatore piu alto resta metadata di fallimento');
-  assert.equal(requestMerged.lastFailureAt, '2026-10-07T00:20:00.000Z');
+  assert.equal(requestMerged.failureCount, 0, 'una nuova richiesta non eredita i fallimenti della richiesta stale');
+  assert.equal(requestMerged.lastFailureAt, '2026-10-07T00:10:00.000Z');
 
   const upstreamRemoval = mergeImageRegenerationQueues(
     { schema: 1, items: [] },
@@ -1057,11 +1058,16 @@ test('il merge della coda segue la richiesta piu recente e conserva i contatori 
 });
 
 test('il merge della coda canonizza gli articleId duplicati prima del drain', () => {
-  const older = queueItem('article-duplicate', 'older', '2026-10-07T00:00:00.000Z');
+  const older = {
+    ...queueItem('article-duplicate', 'older', '2026-10-07T00:00:00.000Z'),
+    failureCount: 3,
+    lastFailureAt: '2026-10-07T00:01:00.000Z',
+  };
   const newer = {
     ...queueItem('article-duplicate', 'newer', '2026-10-07T00:10:00.000Z'),
-    failureCount: 2,
-    lastFailureAt: '2026-10-07T00:11:00.000Z',
+    failureCount: 0,
+    requestedAt: '2026-10-07T00:10:00.000Z',
+    lastFailureAt: '2026-10-07T00:10:00.000Z',
   };
   const merged = mergeImageRegenerationQueues(
     { schema: 1, items: [older, newer, queueItem('article-other', 'other', '2026-10-07T00:20:00.000Z')] },
@@ -1069,7 +1075,8 @@ test('il merge della coda canonizza gli articleId duplicati prima del drain', ()
   );
   assert.deepEqual(merged.items.map((item) => item.articleId), ['article-duplicate', 'article-other']);
   assert.equal(merged.items[0].reason, 'newer');
-  assert.equal(merged.items[0].failureCount, 2);
+  assert.equal(merged.items[0].failureCount, 0);
+  assert.equal(merged.items[0].lastFailureAt, '2026-10-07T00:10:00.000Z');
 });
 
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
