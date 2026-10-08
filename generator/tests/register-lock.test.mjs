@@ -30,6 +30,7 @@
  * modulo proprio.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
+import { spawn } from 'node:child_process';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -37,6 +38,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {
   LEGACY_REGISTER_LOCK_FILE,
+  REGISTER_LOCK_KIND_COVER_REGENERATION,
   REGISTER_LOCK_KIND_SEO_RECOVERY,
   registerLockFile,
   registerLockPath,
@@ -296,6 +298,52 @@ test('il marker della recovery SEO blocca il writer normale sulla stessa superfi
   endRegisterLock(root, SECTION);
   assert.doesNotThrow(() => beginRegisterLock(root, ARTICLE_ID, SECTION));
   endRegisterLock(root, SECTION);
+});
+
+test('il marker del drain copertine blocca il writer normale sulla stessa superficie', () => {
+  const root = sandbox();
+  beginRegisterLock(root, 'cover-regeneration:fixture', SECTION, { kind: REGISTER_LOCK_KIND_COVER_REGENERATION });
+  assert.equal(readRegisterLock(root, SECTION).kind, REGISTER_LOCK_KIND_COVER_REGENERATION);
+  assert.throws(
+    () => resolveRegisterLock(root, makeTargets(root), SECTION),
+    /cover regeneration lock still present/,
+  );
+  assert.throws(() => beginRegisterLock(root, ARTICLE_ID, SECTION), /registration lock still present/);
+  endRegisterLock(root, SECTION);
+});
+
+test('resolveRegisterLock non cancella il marker mentre il processo proprietario è vivo', async () => {
+  const root = sandbox();
+  const ready = path.join(root, 'owner-ready');
+  const moduleUrl = new URL('../scripts/lib/register-lock.mjs', import.meta.url).href;
+  const childScript = `
+    import fs from 'node:fs';
+    const [moduleUrl, root, ready] = process.argv.slice(1);
+    const { beginRegisterLock } = await import(moduleUrl);
+    beginRegisterLock(root, 'live-owner', 'frontaliere');
+    fs.writeFileSync(ready, 'ready');
+    setInterval(() => {}, 1000);
+  `;
+  const child = spawn(process.execPath, [
+    '--input-type=module', '-e', childScript, moduleUrl, root, ready,
+  ], { stdio: 'ignore' });
+  const exited = new Promise((resolve) => child.once('close', resolve));
+  try {
+    const deadline = Date.now() + 5000;
+    while (!fs.existsSync(ready)) {
+      if (Date.now() > deadline) throw new Error('owner child did not claim the registration lock');
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    assert.throws(
+      () => resolveRegisterLock(root, makeTargets(root), SECTION),
+      /active pid/,
+    );
+    assert.equal(fs.existsSync(registerLockPath(root, SECTION)), true);
+  } finally {
+    child.kill('SIGTERM');
+    await exited;
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('il lock resta risolto sulla SEZIONE registrata, non su quella del run successivo', () => {

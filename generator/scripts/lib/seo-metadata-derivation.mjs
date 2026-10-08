@@ -5,15 +5,11 @@
  * from its model payload and preserves that writer contract. Recovery has no
  * model payload, so this module derives those fields from persisted Italian
  * metadata. No copywriter or model is involved here: the inputs are
- * registry/meta values, the existing clause-tail rules and the existing title
- * repair.
+ * registry/meta values and the existing clause-tail rules. The persisted
+ * Italian title is never shortened or disambiguated here: recovery does not
+ * also rewrite the paired locale meta surface.
  */
-import {
-  TRAILING_STOPWORDS,
-  peelDanglingClauseTail,
-  truncateToClauseNonEmpty,
-} from '../../../host/shared/clauseTail.mjs';
-import { repairSeoTitleFields } from './seo-title-repair.mjs';
+import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 
 const TITLE_SUFFIX = ' | Frontaliere Ticino';
 const TITLE_MAX_CHARS = 66;
@@ -32,16 +28,6 @@ export function normalizeSeoTitle(value) {
     .trim();
 }
 
-function titleWithoutDanglingTail(value) {
-  const normalized = normalizeSeoTitle(value);
-  if (!normalized) return normalized;
-  const lastWord = /(\S+)$/.exec(normalized)?.[1]
-    ?.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '')
-    .toLowerCase();
-  if (!TRAILING_STOPWORDS.has(lastWord)) return normalized;
-  return peelDanglingClauseTail(normalized);
-}
-
 /** Extract a 4-digit year from the registry date or article id. */
 export function extractArticleYear(data) {
   if (data?.date) {
@@ -51,64 +37,26 @@ export function extractArticleYear(data) {
   return String(data?.id || '').match(/\b(20[2-3]\d)\b/)?.[1] || '';
 }
 
-/** Extract the first known place token used by the existing collision rule. */
-export function extractArticleCity(slug) {
-  const known = [
-    ['lugano', 'Lugano'],
-    ['mendrisio', 'Mendrisio'],
-    ['bellinzona', 'Bellinzona'],
-    ['locarno', 'Locarno'],
-    ['chiasso', 'Chiasso'],
-    ['ticino', 'Ticino'],
-    ['milano', 'Milano'],
-    ['como', 'Como'],
-    ['varese', 'Varese'],
-    ['lombardia', 'Lombardia'],
-  ];
-  const cleaned = String(slug || '').toLowerCase();
-  return known.find(([key]) => cleaned.includes(key))?.[1] || '';
-}
-
-function disambiguateTitle(initialTitle, data, existingTitles, log) {
-  if (!existingTitles.has(initialTitle.toLowerCase())) return initialTitle;
-  const year = extractArticleYear(data);
-  const city = extractArticleCity(data?.id);
-  let mutated = initialTitle;
-  if (year && !mutated.includes(year)) {
-    mutated = `${mutated} (${year})`;
-    log(`  🪪 Collisione titolo IT — aggiunto anno: "${mutated}"`);
-  } else if (city && !mutated.toLowerCase().includes(city.toLowerCase())) {
-    mutated = `${mutated} — ${city}`;
-    log(`  🪪 Collisione titolo IT — aggiunta città: "${mutated}"`);
-  }
-  if (mutated !== initialTitle && !existingTitles.has(mutated.toLowerCase())) return mutated;
-  log(`  ❌ Titolo IT "${initialTitle}" collide con un articolo esistente.`);
-  log(`     Anno (${year || 'n/a'}) e città (${city || 'n/a'}) non bastano a disambiguare — provo un altro headline.`);
-  throw new Error(`DUPLICATO: titolo IT "${initialTitle}" collide con un articolo esistente`);
-}
-
 /**
  * Mutate `data.seo` using only persisted article content and deterministic
- * repository rules.  `existingTitles` is injected so a recovery run can build
- * a stable collision set without importing the full generator.
+ * repository rules. The persisted Italian meta title is the source of truth:
+ * recovery fills the missing SEO entry and must not invent a different H1 or
+ * JSON-LD headline without updating the paired `blog-meta-it` surface.
  */
-export function deriveSeoMetadata(data, { existingTitles = new Set(), log = () => {} } = {}) {
+export function deriveSeoMetadata(data) {
   const it = data?.content?.it || {};
   if (!data.seo || typeof data.seo !== 'object') data.seo = {};
 
   const rawTitle = normalizeSeoTitle(it.title || data.id || 'Articolo frontalieri');
-  const initialTitle = titleWithoutDanglingTail(rawTitle) || rawTitle;
-  const seoTitleCore = disambiguateTitle(initialTitle, data, existingTitles, log);
+  const seoTitleCore = rawTitle || 'Articolo frontalieri';
   const candidate = `${seoTitleCore}${TITLE_SUFFIX}`;
   data.seo.title = candidate.length <= TITLE_MAX_CHARS ? candidate : seoTitleCore;
 
-  const ogTitle = data.seo.ogTitle ? titleWithoutDanglingTail(data.seo.ogTitle) : seoTitleCore;
-  const headline = data.seo.headline ? titleWithoutDanglingTail(data.seo.headline) : seoTitleCore;
-  data.seo.ogTitle = ogTitle || seoTitleCore;
-  data.seo.headline = headline || seoTitleCore;
-  for (const { field, before, after } of repairSeoTitleFields(data.seo, seoTitleCore)) {
-    log(`  🔧 SEO ${field} ⇐ content.it.title ("${before}" → "${after}")`);
-  }
+  // `content.it.title` is also the rendered H1. Keep the social title and
+  // JSON-LD headline byte-for-byte aligned with that persisted meta value;
+  // only the HTML title may carry the normal brand suffix above.
+  data.seo.ogTitle = seoTitleCore;
+  data.seo.headline = seoTitleCore;
 
   data.seo.breadcrumbName = truncateToClauseNonEmpty(
     data.seo.breadcrumbName || seoTitleCore.split(/[:.–—]/)[0] || 'Articolo',

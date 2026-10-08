@@ -22,6 +22,11 @@ import {
 import {
   withImageRegenerationQueueLockAsync,
 } from './lib/image-regeneration-queue.mjs';
+import {
+  REGISTER_LOCK_KIND_COVER_REGENERATION,
+  beginRegisterLock,
+  endRegisterLock,
+} from './lib/register-lock.mjs';
 import { canonicalizeImageRegenerationQueue } from '../../scripts/lib/merge-image-regeneration-queue.mjs';
 
 export const DEFAULT_LIMIT = 10;
@@ -370,7 +375,17 @@ export async function drainQueuedCovers({
   registryFiles,
   retryFailed = false,
 } = {}) {
-  return withImageRegenerationQueueLockAsync(root, async ({ read, write }) => {
+  let registrationLockHeld = false;
+  try {
+    // The drain rewrites the same registry and SEO sources as the normal
+    // frontaliere writer and the SEO orphan recovery. Claim their transaction
+    // marker before taking the async queue lock, so neither producer can take
+    // a snapshot while this process is generating or publishing a cover.
+    beginRegisterLock(root, `cover-regeneration:${process.pid}`, 'frontaliere', {
+      kind: REGISTER_LOCK_KIND_COVER_REGENERATION,
+    });
+    registrationLockHeld = true;
+    return await withImageRegenerationQueueLockAsync(root, async ({ read, write }) => {
   const boundedLimit = parseLimit(limit);
   const queue = read();
   const canonicalQueue = canonicalizeImageRegenerationQueue(queue);
@@ -447,8 +462,11 @@ export async function drainQueuedCovers({
     }
   }
 
-  return summaryFor(queue, result);
-  });
+    return summaryFor(queue, result);
+    });
+  } finally {
+    if (registrationLockHeld) endRegisterLock(root, 'frontaliere');
+  }
 }
 
 function parseArgs(argv) {

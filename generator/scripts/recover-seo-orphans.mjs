@@ -22,7 +22,7 @@ import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './lib/blog-image-registry.mjs';
 import { buildSeoEntry, insertSeoEntriesAtHead, removeSeoEntriesWithSeparator, toIsoWithTz } from './lib/seo-entry-builder.mjs';
 import { mergeQueueWithSnapshot } from './lib/seo-recovery-queue.mjs';
-import { deriveSeoMetadata, normalizeSeoTitle } from './lib/seo-metadata-derivation.mjs';
+import { deriveSeoMetadata } from './lib/seo-metadata-derivation.mjs';
 import { queueArticleCoverRegeneration, resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
 import { updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
 import { readImageRegenerationQueue, withImageRegenerationQueueLock } from './lib/image-regeneration-queue.mjs';
@@ -114,14 +114,6 @@ function parseIds(file) {
   return ids;
 }
 
-function existingTitleSet(titleById, currentId) {
-  return new Set(
-    [...titleById.entries()]
-      .filter(([id, title]) => id !== currentId && title)
-      .map(([, title]) => normalizeSeoTitle(title).toLowerCase()),
-  );
-}
-
 function imageProvenance(registryEntry, credits) {
   const credit = credits.get(registryEntry.image);
   if (credit) return { kind: 'wikimedia-commons', record: credit, imagePath: registryEntry.image };
@@ -130,7 +122,7 @@ function imageProvenance(registryEntry, credits) {
   return null;
 }
 
-function buildArticle(registryEntry, meta, slugs, titleById, credits) {
+function buildArticle(registryEntry, meta, slugs, credits) {
   const localized = valuesForArticle(meta, registryEntry.id);
   const localizedSlugs = slugs[registryEntry.id];
   if (!localizedSlugs) throw new Error(`${registryEntry.id}: localized slugs missing from ${ROUTER_FILE}`);
@@ -166,10 +158,7 @@ function buildArticle(registryEntry, meta, slugs, titleById, credits) {
     if (!provenance) throw new Error(`${registryEntry.id}: governed static fallback has no licence record`);
     fallback = true;
   }
-  deriveSeoMetadata(data, {
-    existingTitles: existingTitleSet(titleById, registryEntry.id),
-    log: (message) => console.error(message),
-  });
+  deriveSeoMetadata(data);
   const publishedAt = toIsoWithTz(registryEntry.date, { preserveExplicitOffset: false });
   const modifiedAt = toIsoWithTz(registryEntry.updatedAt || registryEntry.date, { preserveExplicitOffset: false });
   return {
@@ -193,12 +182,11 @@ function run(idsFile, { dryRun = false } = {}) {
   const registry = parseRegistry();
   const meta = parseMeta();
   const slugs = parseSlugs();
-  const titleById = parseMetaByField(read('content/blog-meta-it.ts'), 'title');
   const credits = corpusCreditReader(ROOT);
   const entries = ids.map((id) => {
     const registryEntry = registry.get(id);
     if (!registryEntry) throw new Error(`${id}: registry entry missing`);
-    return buildArticle(registryEntry, meta, slugs, titleById, credits);
+    return buildArticle(registryEntry, meta, slugs, credits);
   });
 
   const provenanceCounts = {};

@@ -72,6 +72,7 @@ import { writeJsonAtomic } from './atomic-write-json.mjs';
 export const REGISTER_LOCK_DIR = 'generator/data';
 export const REGISTER_LOCK_KIND_ARTICLE = 'article-registration';
 export const REGISTER_LOCK_KIND_SEO_RECOVERY = 'seo-orphan-recovery';
+export const REGISTER_LOCK_KIND_COVER_REGENERATION = 'cover-regeneration';
 
 let lockTempSequence = 0;
 
@@ -326,6 +327,7 @@ function normaliseLock(parsed) {
     kind: typeof parsed?.kind === 'string' && parsed.kind !== '' ? parsed.kind : null,
     id: typeof parsed?.id === 'string' ? parsed.id : null,
     section: typeof parsed?.section === 'string' && parsed.section !== '' ? parsed.section : null,
+    pid: Number.isSafeInteger(Number(parsed?.pid)) && Number(parsed.pid) > 0 ? Number(parsed.pid) : null,
     runId: typeof parsed?.runId === 'string' && parsed.runId !== '' ? parsed.runId : null,
     runAttempt: typeof parsed?.runAttempt === 'string' && parsed.runAttempt !== '' ? parsed.runAttempt : null,
   };
@@ -354,6 +356,25 @@ export function readRegisterLock(projectRoot, section) {
 /** The legacy single-file marker (pre-#965), or `null`. Read-only. */
 export function readLegacyRegisterLock(projectRoot) {
   return readLockAt(path.join(projectRoot, LEGACY_REGISTER_LOCK_FILE));
+}
+
+/**
+ * A marker is normally resolved in a later process. Before classifying it as
+ * "nothing-written", prove that the process which claimed it is no longer
+ * alive; otherwise a second producer can erase the marker in the small window
+ * between the exclusive claim and the first corpus write.
+ */
+function assertLockOwnerIsNotActive(lock, relPath) {
+  if (!lock?.pid || lock.pid === process.pid) return;
+  try {
+    process.kill(lock.pid, 0);
+  } catch (error) {
+    if (error?.code !== 'EPERM') return;
+  }
+  throw new RegisterLockError(
+    `registration lock at ${relPath} is owned by active pid ${lock.pid} `
+      + `(${describeLockOrigin(lock)}); refusing to resolve it before the owner releases it.`,
+  );
 }
 
 /**
@@ -440,10 +461,13 @@ export function resolveRegisterLock(projectRoot, buildTargets, section, knownSec
   for (const relPath of [LEGACY_REGISTER_LOCK_FILE, registerLockFile(section)]) {
     const lock = readLockAt(path.join(projectRoot, relPath));
     if (!lock) continue;
-    if (lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY) {
+    if (lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY || lock.kind === REGISTER_LOCK_KIND_COVER_REGENERATION) {
+      const kindLabel = lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY
+        ? 'SEO orphan recovery lock'
+        : 'cover regeneration lock';
       throw new RegisterLockError(
-        `SEO orphan recovery lock still present at ${relPath} (${describeLockOrigin(lock)}); `
-          + 'the recovery owns the frontaliere write surface — inspect its marker before generating another article.',
+        `${kindLabel} still present at ${relPath} (${describeLockOrigin(lock)}); `
+          + 'the writer owns the shared surface — inspect its marker before starting another producer.',
       );
     }
     // Un marker dell'ALTRA sezione: lo si lascia esattamente dov'e'. Vale solo
@@ -480,6 +504,7 @@ export function resolveRegisterLock(projectRoot, buildTargets, section, knownSec
           + `(${describeLockOrigin(lock)}). Inspect the marker and corpus by hand.`,
       );
     }
+    assertLockOwnerIsNotActive(lock, relPath);
     const { present, absent } = registrationTargetStatus(buildTargets(lock.id, lock.section));
     if (present.length > 0 && absent.length > 0) {
       throw new RegisterLockError(

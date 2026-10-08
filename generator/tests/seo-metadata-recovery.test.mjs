@@ -19,6 +19,7 @@ import { createWriteLedger, restoreWrittenFiles } from '../scripts/lib/seo-recov
 import { SEO_BACKFILL_LOCK_REL, beginSeoBackfillLock, endSeoBackfillLock } from '../scripts/lib/seo-backfill-lock.mjs';
 import {
   IMAGE_REGENERATION_QUEUE_LOCK_REL,
+  IMAGE_REGENERATION_QUEUE_PENDING_REL,
   appendImageRegenerationQueue,
   readImageRegenerationQueue,
   withImageRegenerationQueueLock,
@@ -43,12 +44,18 @@ function article() {
   };
 }
 
-test('la derivazione usa i meta esistenti e rimuove la coda funzionale con la regola condivisa', () => {
+test('la derivazione mantiene il titolo dei meta e usa la regola di troncamento solo per le descrizioni', () => {
   const data = article();
   deriveSeoMetadata(data);
-  assert.equal(data.seo.headline, 'Titolo deterministico');
-  assert.equal(data.seo.ogTitle, 'Titolo deterministico');
-  assert.match(data.seo.title, /^Titolo deterministico \| Frontaliere Ticino$/);
+  assert.equal(data.seo.headline, data.content.it.title);
+  assert.equal(data.seo.ogTitle, data.content.it.title);
+  assert.match(data.seo.title, /^Titolo deterministico per \| Frontaliere Ticino$/);
+  const entry = buildSeoEntry(data, {
+    provenance: { kind: 'wikimedia-commons', record: { width: 1200, height: 675 } },
+    publishedAt: data.date,
+    modifiedAt: data.date,
+  });
+  assert.match(entry, /"headline": "Titolo deterministico per"/);
   assert.ok(data.seo.description.length <= 160);
   assert.match(data.seo.keywords, /^frontalieri, ticino, svizzera, italia,/);
 });
@@ -267,9 +274,11 @@ test('i writer della coda condividono un lock e non scrivono durante il drenaggi
   };
   try {
     const nestedAppend = withImageRegenerationQueueLock(root, () => appendImageRegenerationQueue(root, request));
-    assert.equal(nestedAppend, false, 'un append concorrente deve restare best-effort');
+    assert.equal(nestedAppend, true, 'un append concorrente deve finire nel pending log');
+    assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_PENDING_REL)), true);
     assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_LOCK_REL)), false, 'il lock non resta orfano');
     assert.equal(appendImageRegenerationQueue(root, request), true);
+    assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_PENDING_REL)), false);
     assert.deepEqual(readImageRegenerationQueue(root).items.map((item) => item.articleId), ['busy-queue-item']);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

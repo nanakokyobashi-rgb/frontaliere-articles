@@ -67,3 +67,6 @@ generator/data/seo-backfill-in-progress.json.*.tmp
 
 # Cover regeneration queue lock; runner-local, never corpus state.
 data/image-regeneration-queue-in-progress.json
+# The pending append log is durable queue state: it must survive a producer
+# commit if an async drain owns the canonical queue lock.
+data/image-regeneration-queue-pending.jsonl.*.processing
