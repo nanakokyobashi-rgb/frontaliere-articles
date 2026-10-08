@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'neuchatel-referendum-salari-minimi',
+ category: 'novita',
+ date: '2026-10-08T11:16:38.230Z',
+ image: '/images/blog/article-neuchatel-referendum-salari-minimi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

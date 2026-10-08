@@ -9,6 +9,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.title': 'Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
     'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.excerpt': '## In breve - 3.945 disoccupati in settembre 2026 - Tasso neocastellano stabile al 4,4% - Disoccupazione giovanile al 5,3% - Dati DECS aggiornati al 6 ottobre',
     'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.imageAlt': 'Immagine editoriale relativa a: Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
+    'blog.article.neuchatel-referendum-salari-minimi.title': 'Neuchâtel: referendum per salari minimi cantonali e CCT',
+    'blog.article.neuchatel-referendum-salari-minimi.excerpt': '## In breve - Oltre 100.000 firme contro la riforma del Parlamento - Le CCT potrebbero prevalere sui salari minimi cantonali - Garanzie previste per Ginevra',
+    'blog.article.neuchatel-referendum-salari-minimi.imageAlt': 'Persone discutono documenti con edifici moderni di Neuchâtel sullo sfondo, simbolo del referendum sui salari minimi e le CCT.',
 };
 
 export default blogMetaCantonNeIt;
