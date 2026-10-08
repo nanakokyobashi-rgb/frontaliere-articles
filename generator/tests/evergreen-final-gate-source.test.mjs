@@ -193,6 +193,12 @@ test('#4 il guard scandisce FAQ annidate e tutti i campi SEO', () => {
   assert.throws(() => makeGate().gate(seoData), (err) => (
     err.qualityReject === true && /istituzione inventata/.test(err.message)
   ));
+
+  const imageAltData = withSource(article(), 'evergreen://vivere-friburgo', BRIEF);
+  imageAltData.imageAlt = { it: 'Federal Statistical Office (IFS)' };
+  assert.throws(() => makeGate().gate(imageAltData), (err) => (
+    err.qualityReject === true && /istituzione inventata/.test(err.message)
+  ));
 });
 
 test('#5 il guard riconosce parentesi terminali e la grafia Aussenpolitik', () => {

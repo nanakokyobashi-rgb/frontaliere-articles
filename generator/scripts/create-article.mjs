@@ -5564,7 +5564,11 @@ function collectPublishedTextValues(value, path = [], seen = new Set()) {
 function assertNoCorpusFabricatedInstitutionNames(data) {
   const findings = [];
   const seen = new Set();
-  for (const [root, value] of [['content', data?.content], ['seo', data?.seo]]) {
+  for (const [root, value] of [
+    ['content', data?.content],
+    ['imageAlt', data?.imageAlt],
+    ['seo', data?.seo],
+  ]) {
     for (const { path, text } of collectPublishedTextValues(value, [root], seen)) {
       for (const issue of checkCorpusFabricatedInstitutionNames(text)) {
         findings.push('[' + path + '] ' + issue.evidence);
