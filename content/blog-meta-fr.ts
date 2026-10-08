@@ -454,9 +454,6 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.spese-sanitarie-frontalieri.title': 'Frais de santé remboursables pour les frontaliers',
  'blog.article.spese-sanitarie-frontalieri.excerpt': 'Guide complet des frais de santé remboursables en Italie pour les frontaliers travaillant en Suisse, avec réglementations et procédures 2026.',
  'blog.article.spese-sanitarie-frontalieri.imageAlt': 'Un hôpital à Mendrisio avec des drapeaux suisses et italiens',
- 'blog.article.naspi-disoccupazione-frontalieri.title': 'NASpI : Chômage pour les frontaliers italiens',
- 'blog.article.naspi-disoccupazione-frontalieri.excerpt': 'Découvrez les conditions, le calcul, la durée et comment demander la NASpI pour les anciens frontaliers ayant travaillé au Tessin.',
- 'blog.article.naspi-disoccupazione-frontalieri.imageAlt': 'Poste frontière de Chiasso avec des voitures en transit et des panneaux de frontière entre la Suisse et l\'Italie',
  'blog.article.dichiarazione-redditi-ticino-2026.title': 'Déclaration des revenus 2026 : tout ce que vous devez savoir',
  'blog.article.dichiarazione-redditi-ticino-2026.excerpt': 'Dans le Tessin, les formulaires pour la déclaration d\'impôt 2025 ont été envoyés. Découvrez comment les remplir en ligne et les délais à respecter.',
  'blog.article.dichiarazione-redditi-ticino-2026.imageAlt': 'Vue de Bellinzone avec Castelgrande en arrière-plan au printemps',
@@ -1982,9 +1979,6 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.benzina-cara-ticino.title': 'Essence plus chère en Suisse : les Tessinois et les frontaliers font le plein en Italie',
  'blog.article.benzina-cara-ticino.excerpt': 'L\'Italie a prolongé la réduction des accises jusqu\'au 1er mai 2026, mais les prix de l\'essence ont augmenté à nouveau en Suisse.',
  'blog.article.benzina-cara-ticino.imageAlt': 'Un bateau à voile sur le lac de Lugano avec les montagnes du Tessin en arrière-plan',
- 'blog.article.tassa-salute-frontalieri-accordo-frontalieri.title': 'Taxe santé: accord frontalier l\'emporte',
- 'blog.article.tassa-salute-frontalieri-accordo-frontalieri.excerpt': 'DFAE confirme que l\'accord italo-suisse prévaut sur le droit interne pour la taxe sur la santé des frontalier',
- 'blog.article.tassa-salute-frontalieri-accordo-frontalieri.imageAlt': 'Frontière entre l\'Italie et la Suisse à Lugano',
  'blog.article.incidente-rampa-a9-chiasso-2026.title': 'Accident sur la bretelle d\'accès à l\'A9 en direction de Chiasso : embouteillages et blessés légers',
  'blog.article.incidente-rampa-a9-chiasso-2026.excerpt': 'Trois voitures impliquées sur le viaduc de Brogeda. Route fermée pendant deux heures. Trois personnes légèrement blessées.',
  'blog.article.incidente-rampa-a9-chiasso-2026.imageAlt': 'Viaduc de Brogeda avec véhicules d\'urgence et embouteillages sur la rampe de l\'A9 vers Chiasso.',
@@ -12786,6 +12780,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.kastritis-varese-momento-difficile.title': 'Kastritis : moment difficile, confiance pleine en équipe',
     'blog.article.kastritis-varese-momento-difficile.excerpt': 'Varese perd ses débuts en Ligue des champions à Murcie contre UCAM Murcia, en l\'absence de McDowell et Della Valle ; Kastritis met en avant l\'intensité défensive et la confiance du groupe, prochain match dans trois jours.',
     'blog.article.kastritis-varese-momento-difficile.imageAlt': 'Joueurs de Pallacanestro Varese en action défensive sur un terrain extérieur à Lugano avec le lac et les montagnes en arrière-plan',
+    'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.title': 'Opération Hermes : fraudes à la TVA 450 mln, saisies 11 mln',
+    'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.excerpt': '## En bref - Six mesures conservatoires et saisies pour environ 11 millions - Fraude à la TVA dans l\'électronique et l\'informatique - 93 sociétés dans la partie italienne de l\'enquête',
+    'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.imageAlt': 'Image éditoriale relative à: Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
+    'blog.article.bally-caslano-moratoria-tagli.title': 'Bally à Caslano : moratoire prolongé et suppressions de postes',
+    'blog.article.bally-caslano-moratoria-tagli.excerpt': 'Après le licenciement collectif de 25 employés, deux offres de rachat de l\'entreprise active à Caslano sont parvenues à Bally.',
+    'blog.article.bally-caslano-moratoria-tagli.imageAlt': 'Lac de Lugano près de Caslano, dans le canton du Tessin',
 };
 
 export default blogMetaFr;

@@ -55,7 +55,12 @@
  * logs explain what interrupted the registration, which is the one thing a
  * human repairing the corpus by hand actually needs.
  */
-import { readFileSync, existsSync, unlinkSync } from 'node:fs';
+import {
+  existsSync,
+  linkSync,
+  readFileSync,
+  unlinkSync,
+} from 'node:fs';
 import path from 'node:path';
 import { writeJsonAtomic } from './atomic-write-json.mjs';
 
@@ -65,6 +70,33 @@ import { writeJsonAtomic } from './atomic-write-json.mjs';
 // CI guard detects a forced/legacy marker in a checkout with an attributable
 // section and run id instead of allowing a generic gate failure.
 export const REGISTER_LOCK_DIR = 'generator/data';
+export const REGISTER_LOCK_KIND_ARTICLE = 'article-registration';
+export const REGISTER_LOCK_KIND_ARTICLE_REFRESH = 'article-refresh';
+export const REGISTER_LOCK_KIND_SEO_RECOVERY = 'seo-orphan-recovery';
+export const REGISTER_LOCK_KIND_COVER_REGENERATION = 'cover-regeneration';
+
+let lockTempSequence = 0;
+
+/**
+ * Reserve the marker with a complete JSON file, then use the shared atomic
+ * writer for its canonical commit path. `linkSync` is the exclusive claim:
+ * two producers cannot both create the section marker, while a killed writer
+ * can leave only a complete reservation that the next run will inspect.
+ */
+function writeJsonExclusive(lockPath, value) {
+  const tempPath = `${lockPath}.${process.pid}.${lockTempSequence++}.tmp`;
+  try {
+    writeJsonAtomic(tempPath, value);
+    linkSync(tempPath, lockPath);
+    unlinkSync(tempPath);
+    // Keep the marker on the same temp+rename+fsync path as every other JSON
+    // writer in this repository; the hard link above already made the claim
+    // exclusive before this replacement can begin.
+    writeJsonAtomic(lockPath, value);
+  } finally {
+    try { unlinkSync(tempPath); } catch { /* best effort */ }
+  }
+}
 
 // The single-file marker used before #965. Still read (a marker written by a
 // run started before this change may remain in a workspace), and resolved by
@@ -190,9 +222,10 @@ export function registerLockPath(projectRoot, section) {
  * `false` proprio nel caso in cui il corpus e' SPEZZATO. Il fatto che conta non
  * e' chi ha lanciato, e' che il lock fosse TENUTO quando l'errore e' passato.
  *
- * Non e' una race con un altro processo: la registrazione e' sincrona e
- * `create-article.mjs` gira un id per volta (i produttori ciclano in serie
- * proprio per non correre sugli stessi file).
+ * Il marker e' anche l'arbitraggio condiviso tra i produttori: la sua creazione
+ * esclusiva impedisce a una recovery SEO e a `create-article.mjs` di entrare
+ * contemporaneamente nella stessa transazione. Le scritture restano sincrone,
+ * ma il controllo deve essere atomico rispetto a processi distinti.
  */
 export function isRegisterLockHeld(projectRoot, section) {
   try {
@@ -236,10 +269,28 @@ export function describeLockOrigin(lock) {
  * of them, and clear the lock as "nothing written" over a genuinely split
  * corpus.
  */
-export function beginRegisterLock(projectRoot, id, section) {
+export function beginRegisterLock(projectRoot, id, section, { kind = REGISTER_LOCK_KIND_ARTICLE } = {}) {
   assertSection(section, 'beginRegisterLock');
+  if (typeof kind !== 'string' || kind === '') {
+    throw new RegisterLockError(`beginRegisterLock() requires a non-empty lock kind (got ${JSON.stringify(kind)})`);
+  }
   const lockPath = registerLockPath(projectRoot, section);
-  if (existsSync(lockPath)) {
+  try {
+    writeJsonExclusive(lockPath, {
+      kind,
+      id,
+      section,
+      pid: process.pid,
+      // L'identita' che SOPRAVVIVE al processo e al checkout, a differenza del
+      // pid: e' l'unico modo di risalire dal marker ai log del run che lo ha
+      // lasciato quando lo si ritrova, giorni dopo, in un checkout diverso.
+      runId: process.env.GITHUB_RUN_ID || null,
+      runAttempt: process.env.GITHUB_RUN_ATTEMPT || null,
+      workflow: process.env.GITHUB_WORKFLOW || null,
+      startedAt: new Date().toISOString(),
+    });
+  } catch (error) {
+    if (error?.code !== 'EEXIST') throw error;
     let stale = lockPath;
     try { stale = readFileSync(lockPath, 'utf-8'); } catch { /* keep path */ }
     throw new RegisterLockError(
@@ -249,28 +300,6 @@ export function beginRegisterLock(projectRoot, id, section) {
         'partial write is inspected by hand and the lock file removed.',
     );
   }
-  // temp+rename, come ogni altra scrittura della catena di registrazione
-  // (`write()` di create-article.mjs, issue #561). Un SIGKILL a meta' di una
-  // `writeFileSync` diretta lascerebbe qui un JSON troncato, e un lock
-  // illeggibile e' un ARRESTO DURO permanente: `resolveRegisterLock()` lancia
-  // finche' qualcuno non cancella il file a mano, anche su un corpus intatto —
-  // il kill puo' essere atterrato PRIMA della prima delle 9 scritture, quindi
-  // senza nessuno split da riparare. Con il commit via `renameSync` le sole
-  // forme osservabili su disco sono «nessun lock» e «lock valido e completo»,
-  // e il ramo `unreadable` di `readRegisterLock()` diventa irraggiungibile per
-  // costruzione (resta li' come rete, non va rimosso).
-  writeJsonAtomic(lockPath, {
-    id,
-    section,
-    pid: process.pid,
-    // L'identita' che SOPRAVVIVE al processo e al checkout, a differenza del
-    // pid: e' l'unico modo di risalire dal marker ai log del run che lo ha
-    // lasciato quando lo si ritrova, giorni dopo, in un checkout diverso.
-    runId: process.env.GITHUB_RUN_ID || null,
-    runAttempt: process.env.GITHUB_RUN_ATTEMPT || null,
-    workflow: process.env.GITHUB_WORKFLOW || null,
-    startedAt: new Date().toISOString(),
-  });
 }
 
 /**
@@ -296,8 +325,10 @@ function removeRegisterLock(projectRoot, relPath) {
 function normaliseLock(parsed) {
   return {
     ...parsed,
+    kind: typeof parsed?.kind === 'string' && parsed.kind !== '' ? parsed.kind : null,
     id: typeof parsed?.id === 'string' ? parsed.id : null,
     section: typeof parsed?.section === 'string' && parsed.section !== '' ? parsed.section : null,
+    pid: Number.isSafeInteger(Number(parsed?.pid)) && Number(parsed.pid) > 0 ? Number(parsed.pid) : null,
     runId: typeof parsed?.runId === 'string' && parsed.runId !== '' ? parsed.runId : null,
     runAttempt: typeof parsed?.runAttempt === 'string' && parsed.runAttempt !== '' ? parsed.runAttempt : null,
   };
@@ -326,6 +357,25 @@ export function readRegisterLock(projectRoot, section) {
 /** The legacy single-file marker (pre-#965), or `null`. Read-only. */
 export function readLegacyRegisterLock(projectRoot) {
   return readLockAt(path.join(projectRoot, LEGACY_REGISTER_LOCK_FILE));
+}
+
+/**
+ * A marker is normally resolved in a later process. Before classifying it as
+ * "nothing-written", prove that the process which claimed it is no longer
+ * alive; otherwise a second producer can erase the marker in the small window
+ * between the exclusive claim and the first corpus write.
+ */
+function assertLockOwnerIsNotActive(lock, relPath) {
+  if (!lock?.pid || lock.pid === process.pid) return;
+  try {
+    process.kill(lock.pid, 0);
+  } catch (error) {
+    if (error?.code !== 'EPERM') return;
+  }
+  throw new RegisterLockError(
+    `registration lock at ${relPath} is owned by active pid ${lock.pid} `
+      + `(${describeLockOrigin(lock)}); refusing to resolve it before the owner releases it.`,
+  );
 }
 
 /**
@@ -412,6 +462,21 @@ export function resolveRegisterLock(projectRoot, buildTargets, section, knownSec
   for (const relPath of [LEGACY_REGISTER_LOCK_FILE, registerLockFile(section)]) {
     const lock = readLockAt(path.join(projectRoot, relPath));
     if (!lock) continue;
+    if (
+      lock.kind === REGISTER_LOCK_KIND_ARTICLE_REFRESH
+      || lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY
+      || lock.kind === REGISTER_LOCK_KIND_COVER_REGENERATION
+    ) {
+      const kindLabel = lock.kind === REGISTER_LOCK_KIND_ARTICLE_REFRESH
+        ? 'existing-article refresh lock'
+        : lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY
+          ? 'SEO orphan recovery lock'
+          : 'cover regeneration lock';
+      throw new RegisterLockError(
+        `${kindLabel} still present at ${relPath} (${describeLockOrigin(lock)}); `
+          + 'the writer owns the shared surface — inspect its marker before starting another producer.',
+      );
+    }
     // Un marker dell'ALTRA sezione: lo si lascia esattamente dov'e'. Vale solo
     // per il file legacy, che e' l'unico non gia' scopato dal proprio nome.
     // Un marker nel path per-sezione con sezione interna discordante e' invece
@@ -446,6 +511,7 @@ export function resolveRegisterLock(projectRoot, buildTargets, section, knownSec
           + `(${describeLockOrigin(lock)}). Inspect the marker and corpus by hand.`,
       );
     }
+    assertLockOwnerIsNotActive(lock, relPath);
     const { present, absent } = registrationTargetStatus(buildTargets(lock.id, lock.section));
     if (present.length > 0 && absent.length > 0) {
       throw new RegisterLockError(

@@ -20,9 +20,14 @@ import {
   IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
 } from './lib/image-regeneration-publish-outbox.mjs';
 import {
-  readImageRegenerationQueue,
-  writeImageRegenerationQueue,
+  withImageRegenerationQueueLockAsync,
 } from './lib/image-regeneration-queue.mjs';
+import {
+  REGISTER_LOCK_KIND_COVER_REGENERATION,
+  beginRegisterLock,
+  endRegisterLock,
+  isRegisterLockError,
+} from './lib/register-lock.mjs';
 import { canonicalizeImageRegenerationQueue } from '../../scripts/lib/merge-image-regeneration-queue.mjs';
 
 export const DEFAULT_LIMIT = 10;
@@ -108,7 +113,7 @@ function requestedAtSort(a, b) {
   const rightValid = Number.isFinite(right);
   if (leftValid && rightValid && left !== right) return left - right;
   if (leftValid !== rightValid) return leftValid ? -1 : 1;
-  return a.index - b.index;
+  return 0;
 }
 
 function failureCountOf(item) {
@@ -122,8 +127,14 @@ function failureCountOf(item) {
 }
 
 function queueAttemptSort(a, b) {
+  // The queue SLO is about request age. Sorting by failure count first lets a
+  // stream of fresh, never-attempted items starve an older item forever when
+  // the older provider failure is reproducible. Failure count remains a useful
+  // deterministic tie-breaker for requests created at the same instant.
+  const requestedDelta = requestedAtSort(a, b);
+  if (requestedDelta) return requestedDelta;
   const failureDelta = failureCountOf(a.item) - failureCountOf(b.item);
-  return failureDelta || requestedAtSort(a, b);
+  return failureDelta || a.index - b.index;
 }
 
 function sectionForRegistry(location) {
@@ -286,9 +297,14 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   };
 }
 
-async function processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail }) {
+async function processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail, expectedSection }) {
   const location = locateArticleRegistry(root, item.articleId, { registryFiles });
   const section = sectionForRegistry(location);
+  if (expectedSection && section !== expectedSection) {
+    throw new Error(
+      `article ${item.articleId} moved from section ${expectedSection} to ${section} while its cover lock was held`,
+    );
+  }
   const snapshots = new Map();
   trackFile(snapshots, absolute(root, GENERATED_REGISTRY_REL));
   trackFile(snapshots, absolute(root, location.path));
@@ -301,7 +317,13 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
       appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
       return { record: existing, ...result, reused: true, section, snapshots };
     } catch (error) {
-      restoreTransaction(snapshots);
+      try {
+        restoreTransaction(snapshots);
+      } catch (rollbackError) {
+        rollbackError.rollbackFailed = true;
+        rollbackError.cause = error;
+        throw rollbackError;
+      }
       throw error;
     }
   }
@@ -332,7 +354,13 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
     removeStagingFile(generated.filePath, imageFile);
     return { record, ...result, reused: false, section, snapshots };
   } catch (error) {
-    restoreTransaction(snapshots);
+    try {
+      restoreTransaction(snapshots);
+    } catch (rollbackError) {
+      rollbackError.rollbackFailed = true;
+      rollbackError.cause = error;
+      throw rollbackError;
+    }
     if (generated?.filePath && fs.existsSync(generated.filePath)) {
       fs.rmSync(path.dirname(generated.filePath), { recursive: true, force: true });
     }
@@ -356,10 +384,9 @@ function summaryFor(queue, result) {
 }
 
 /**
- * Drain the least-failed eligible queue entries, after reconciling covers that
- * are already complete. The callbacks are injectable so the queue, rollback,
- * and registry-selection contract can be tested without a provider or image
- * codec.
+ * Drain the oldest eligible queue entries, after reconciling covers that are
+ * already complete. The callbacks are injectable so the queue, rollback, and
+ * registry-selection contract can be tested without a provider or image codec.
  */
 export async function drainQueuedCovers({
   root,
@@ -371,12 +398,13 @@ export async function drainQueuedCovers({
   registryFiles,
   retryFailed = false,
 } = {}) {
+  return await withImageRegenerationQueueLockAsync(root, async ({ read, write }) => {
   const boundedLimit = parseLimit(limit);
-  const queue = readImageRegenerationQueue(root);
+  const queue = read();
   const canonicalQueue = canonicalizeImageRegenerationQueue(queue);
   const hadDuplicateArticleIds = canonicalQueue.items.length !== queue.items.length;
   queue.items = canonicalQueue.items;
-  if (hadDuplicateArticleIds) writeImageRegenerationQueue(root, queue);
+  if (hadDuplicateArticleIds) write(queue);
   const alreadySatisfiedIds = [];
   const unsatisfiedItems = [];
   for (const item of queue.items) {
@@ -385,7 +413,7 @@ export async function drainQueuedCovers({
   }
   if (alreadySatisfiedIds.length > 0) {
     queue.items = unsatisfiedItems;
-    writeImageRegenerationQueue(root, queue);
+    write(queue);
   }
   const requeued = [];
   if (retryFailed) {
@@ -395,7 +423,7 @@ export async function drainQueuedCovers({
       item.failureCount = 0;
       requeued.push(item.articleId);
     }
-    if (requeued.length > 0) writeImageRegenerationQueue(root, queue);
+    if (requeued.length > 0) write(queue);
   }
   const selected = queue.items
     .filter((item) => retryFailed || item.status !== 'failed')
@@ -415,13 +443,34 @@ export async function drainQueuedCovers({
 
   for (const item of selected) {
     let outcome = null;
+    let itemSection = null;
+    let itemLockHeld = false;
+    let itemLockSafeToRelease = false;
     try {
-      outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail });
+      // A queue is global, while the registry/SEO pair is section-scoped.
+      // Resolve the item first, then claim exactly that section before the
+      // async provider call and keep the marker through every publication
+      // write and the queue acknowledgement.
+      const initialLocation = locateArticleRegistry(root, item.articleId, { registryFiles });
+      itemSection = sectionForRegistry(initialLocation);
+      beginRegisterLock(root, `cover-regeneration:${process.pid}:${item.articleId}`, itemSection, {
+        kind: REGISTER_LOCK_KIND_COVER_REGENERATION,
+      });
+      itemLockHeld = true;
+      outcome = await processItem({
+        root,
+        item,
+        generateCover,
+        generateThumbnail,
+        registryFiles,
+        decodeThumbnail,
+        expectedSection: itemSection,
+      });
       const index = queue.items.indexOf(item);
       if (index < 0) throw new Error(`queue item disappeared before success: ${item.articleId}`);
       queue.items.splice(index, 1);
       try {
-        writeImageRegenerationQueue(root, queue);
+        write(queue);
       } catch (error) {
         // A failed persistence must not turn an in-memory splice into a lost
         // queue item when the catch below records the failed attempt.
@@ -433,21 +482,35 @@ export async function drainQueuedCovers({
       const section = outcome.section;
       if (!result.sections[section]) result.sections[section] = [];
       result.sections[section].push(item.articleId);
+      itemLockSafeToRelease = true;
     } catch (error) {
+      // A competing writer owns the section marker. Do not turn contention or
+      // a marker left as recovery evidence into a provider failure/retry.
+      if (isRegisterLockError(error)) throw error;
+      // A processItem rollback failure is a corpus-level incident, not a
+      // retryable provider failure. Keep the item marker so the next writer
+      // cannot enter a partially restored transaction.
+      if (error?.rollbackFailed) throw error;
       if (outcome?.snapshots) restoreTransaction(outcome.snapshots);
       const failureCount = Number.isInteger(item.failureCount) && item.failureCount >= 0 ? item.failureCount + 1 : 1;
       item.failureCount = failureCount;
       item.status = failureCount >= 3 ? 'failed' : 'queued';
       item.lastFailureAt = typeof now === 'function' ? now() : String(now);
       item.reason = normalizeReason(error);
-      writeImageRegenerationQueue(root, queue);
+      write(queue);
       result.failed += 1;
       result.failedIds.push(item.articleId);
       console.error(`  ⚠️  Copertina ${item.articleId} non smaltita (${failureCount}° tentativo): ${item.reason}`);
+      itemLockSafeToRelease = true;
+    } finally {
+      // An uncaught callback, queue persistence error, or rollback failure
+      // leaves the marker as the evidence needed for manual/startup repair.
+      if (itemLockHeld && itemLockSafeToRelease) endRegisterLock(root, itemSection);
     }
   }
 
-  return summaryFor(queue, result);
+    return summaryFor(queue, result);
+  });
 }
 
 function parseArgs(argv) {

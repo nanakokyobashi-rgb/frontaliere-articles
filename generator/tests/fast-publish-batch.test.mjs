@@ -58,7 +58,7 @@ test('un piano immagine multi-sezione diventa target matrix separati, senza alla
 });
 
 test('i fallback persistenti entrano in archivio e landing, e il dispatch identifica il run', () => {
-  assert.match(workflow, /run-name: fast-publish-article \$\{\{ inputs\.dispatch_nonce \|\| 'push' \}\}/);
+  assert.match(workflow, /run-name: cover-publish-article \/ \$\{\{ inputs\.section \|\| 'auto' \}\} \/ nonce=\$\{\{ inputs\.dispatch_nonce \|\| 'none' \}\}/);
   assert.match(workflow, /dispatch_nonce:/);
   assert.match(workflow, /gh issue list --repo "\$GH_REPO"/);
   assert.match(workflow, /article-image-fallbacks\.mjs/);

@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'incidente-a13-widnau-2026',
  category: 'pratico',
  date: '2026-10-07T10:36:03.789Z',
- image: '/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp',
+ image: '/images/blog/article-incidente-a13-widnau-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SG'],

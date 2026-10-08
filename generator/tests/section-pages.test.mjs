@@ -28,6 +28,7 @@ import {
   ensureRouteOwnerMeta,
   hubMissingIsFatal,
   inUploadOrder,
+  missingRenderedArticleIds,
   pageDefects,
   pageEntry,
   obsoleteArticlePages,
@@ -77,6 +78,17 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   );
   assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
   assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
+});
+
+test('publisher R2 rifiuta gli article ID richiesti che la pipeline trattiene', () => {
+  assert.deepEqual(
+    missingRenderedArticleIds(
+      ['ag-1', 'ag-2', 'ag-2'],
+      [{ articleId: 'ag-1' }],
+    ),
+    ['ag-2'],
+  );
+  assert.deepEqual(missingRenderedArticleIds([], []), []);
 });
 
 test('publisher R2 pubblica article-only ma rifiuta aggregati trapelati', () => {

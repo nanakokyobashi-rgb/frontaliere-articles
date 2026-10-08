@@ -9,6 +9,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.benzina-grigioni-deviazione.title': 'Gasoline prices in Graubünden: when is it worth taking a detour',
     'blog.article.benzina-grigioni-deviazione.excerpt': 'Petrol prices at record levels in Graubünden too: the calculator evaluates the price and distance of the detour to a cheaper station.',
     'blog.article.benzina-grigioni-deviazione.imageAlt': 'Car approaching a fuel station on a road in Graubünden',
+    'blog.article.lavoro-grigioni-settembre-2026.title': 'Unemployment in Graubünden: 1,1% in September 2026',
+    'blog.article.lavoro-grigioni-settembre-2026.excerpt': 'In September 2026, the Grisons recorded 1.237 unemployed people, equivalent to 1,1%. The total number of people looking for work is 2.267.',
+    'blog.article.lavoro-grigioni-settembre-2026.imageAlt': 'Graubünden Alpine landscape near a regional employment centre',
 };
 
 export default blogMetaCantonGrEn;

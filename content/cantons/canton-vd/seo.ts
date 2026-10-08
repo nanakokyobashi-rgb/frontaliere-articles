@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - La CDHR mira a un'imposizione minima del 20% - Il reddito fiscale di riferimento determina il perimetro - Le soglie indicate sono 250.000",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp`,
+        "url": `${BASE_URL}/images/blog/article-cdhr-frontalieri-vaud-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Vista del lago di Ginevra con le montagne del Vallese sullo sfondo, rappresentante il Canton Vaud"

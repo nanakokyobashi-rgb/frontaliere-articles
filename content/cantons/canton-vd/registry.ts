@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'cdhr-frontalieri-vaud-2026',
  category: 'fiscale',
  date: '2026-10-07T10:21:57.438Z',
- image: '/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp',
+ image: '/images/blog/article-cdhr-frontalieri-vaud-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VD'],

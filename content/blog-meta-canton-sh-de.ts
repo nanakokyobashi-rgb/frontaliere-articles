@@ -6,6 +6,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.esplosione-bancomat-thayngen.title': 'Thayngen: Geldautomat gesprengt, Verdächtiger verletzt',
     'blog.article.esplosione-bancomat-thayngen.excerpt': 'Thayngen: Geldautomat vor 4 Uhr gesprengt; ein niederländischer Verdächtiger ist schwer verletzt, zwei mutmassliche Täter sind in Richtung Deutschland geflüchtet.',
     'blog.article.esplosione-bancomat-thayngen.imageAlt': 'Absperrung beim Bahnhof Thayngen nach der Sprengung eines Geldautomaten.',
+    'blog.article.sciaffusa-formazione-farmacie.title': 'Schaffhausen: E-Learning für Apotheken zum Thema häusliche Gewalt',
+    'blog.article.sciaffusa-formazione-farmacie.excerpt': 'Schaffhausen: Freiwillige E-Learning-Module für Apotheken zu Anzeichen häuslicher Gewalt, vertraulichen Gesprächen und der Weitervermittlung an Unterstützungsangebote.',
+    'blog.article.sciaffusa-formazione-farmacie.imageAlt': 'Apothekenpersonal bei einer Schulung zu häuslicher Gewalt in Schaffhausen',
 };
 
 export default blogMetaCantonShDe;

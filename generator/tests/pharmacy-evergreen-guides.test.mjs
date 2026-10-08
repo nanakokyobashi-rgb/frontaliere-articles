@@ -368,6 +368,14 @@ test('pharmacy evergreen: il producer usa il registrar condiviso e la sezione se
   assert.doesNotMatch(source, /blogArticleIds|BlogArticleId/);
   assert.doesNotMatch(source, /content\/blog-articles-data\.ts/);
   assert.match(source, /acquirePharmacyEvergreenRefresh/);
+  assert.match(source, /beginExistingArticleRefreshLock/);
+  assert.match(source, /endExistingArticleRefreshLock/);
   assert.match(source, /transaction\.commit\(\)/);
   assert.match(source, /transaction\.rollback\(\)/);
+  const lockAt = source.indexOf('beginExistingArticleRefreshLock(`pharmacy-evergreen:${states[0].guide.id}`);');
+  const commitAt = source.indexOf('transaction.commit();');
+  const rollbackAt = source.indexOf('transaction.rollback();');
+  const releaseAt = source.indexOf('endExistingArticleRefreshLock();');
+  assert.ok(lockAt > -1 && lockAt < commitAt, 'il producer deve acquisire il lock prima dello staging');
+  assert.ok(commitAt < releaseAt && rollbackAt < releaseAt, 'il lock deve restare fino a commit o rollback');
 });

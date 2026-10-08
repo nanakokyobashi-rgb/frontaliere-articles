@@ -795,54 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/cronaca/1954785/non-paga-la-cassa-malati-da-due-anni-ora-finisce-davanti-al-pretore": {
-      "section": "frontaliere",
-      "ts": 1791262333741
-    },
-    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
-      "section": "frontaliere",
-      "ts": 1791262398061
-    },
-    "frontaliere::https://www.rsi.ch/s/4136807": {
-      "section": "frontaliere",
-      "ts": 1791264868484
-    },
-    "frontaliere::https://www.rsi.ch/info/dialogo/la-svizzera-ai-vertici-della-robotica--4126224.html": {
-      "section": "frontaliere",
-      "ts": 1791264901389
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/bot-impiegati-al-telefono-amico-non-in-ticino-lo-psicologo-prudenza-444005": {
-      "section": "frontaliere",
-      "ts": 1791264919859
-    },
-    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1954757/franchi-lavatoio-coop-brissago-legn-capanna-incella": {
-      "section": "frontaliere",
-      "ts": 1791264964372
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1954941/riad-houthi-aeroporto-colpito-aramco-raffineria": {
-      "section": "svizzera",
-      "ts": 1791265633439
-    },
-    "svizzera::https://www.tio.ch/svizzera/attualita/1954682/shopping-sfrenato-con-le-carte-di-credito-degli-anziani-giovane-tirocinante-condannata-a-zurigo": {
-      "section": "svizzera",
-      "ts": 1791265645400
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1954715/paziente-neuchatel-bordo-ambulanza-conducente": {
-      "section": "svizzera",
-      "ts": 1791265652889
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/destagionalizzare-la-nuova-frontiera-del-turismo-ticinese--4136807.html": {
-      "section": "frontaliere",
-      "ts": 1791266734643
-    },
-    "frontaliere::https://www.rsi.ch/s/4136096": {
-      "section": "frontaliere",
-      "ts": 1791266768992
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/alla-frontiera-aeroportuale-con-carte-da-gioco-da-collezione-per-oltre-27mila-euro-scatta-il-sequestro/2698471": {
-      "section": "frontaliere",
-      "ts": 1791266799144
-    },
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
       "section": "frontaliere",
       "ts": 1791288629715
@@ -1094,6 +1046,10 @@
     "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/varese/articolo/trasformare-le-microplastiche-in-nuove-risorse-il-progetto-propla-si-conclude-lanciando-la-sfida-di.html": {
       "section": "frontaliere",
       "ts": 1791430262025
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1955482/tassi-raiffeisen-svizzera-bns-crescita-forte": {
+      "section": "frontaliere",
+      "ts": 1791445759176
     }
   }
 }

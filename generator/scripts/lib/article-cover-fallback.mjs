@@ -1,5 +1,6 @@
 import { appendImageRegenerationQueue } from './image-regeneration-queue.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './blog-image-registry.mjs';
+import { DETERMINISTIC_CARD_KIND } from './deterministic-card-provenance.mjs';
 
 export const CATALOG_FALLBACK_MIN_SHARED_WORDS = 2;
 
@@ -45,7 +46,9 @@ function readProvenance(root, imagePath) {
 export function applyHeroProvenance(data, imagePath, provenance) {
   data._generatedImagePath = imagePath;
   data._imageCredit = provenance?.kind === 'wikimedia-commons' ? provenance.record : null;
-  data._generatedImageRecord = provenance?.kind === 'generated' ? provenance.record : null;
+  data._generatedImageRecord = provenance?.kind === 'generated' || provenance?.kind === DETERMINISTIC_CARD_KIND
+    ? provenance.record
+    : null;
   data._editorialImageRecord = provenance?.kind === 'editorial-upload' ? provenance.record : null;
   data.image = imagePath.split('/').pop() || data.image;
 }
@@ -56,11 +59,11 @@ export function applyHeroProvenance(data, imagePath, provenance) {
  * queueing there could leave a retry for a document that later failed a
  * validation and was never published.
  */
-export function queueArticleCoverRegeneration(root, data) {
+export function queueArticleCoverRegeneration(root, data, { append = appendImageRegenerationQueue } = {}) {
   const request = data?._imageRegenerationRequest;
   if (!request) return false;
   try {
-    return appendImageRegenerationQueue(root, request);
+    return append === appendImageRegenerationQueue ? append(root, request) : append(request);
   } finally {
     delete data._imageRegenerationRequest;
   }

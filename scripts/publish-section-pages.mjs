@@ -49,11 +49,11 @@
  * confermato o se il verify fallisce.
  */
 import '../host/cantonSectionsBootstrap.mjs';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
@@ -117,6 +117,11 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
   if (out.bootstrap && out.ids.length) throw new Error('--bootstrap rende tutti gli articoli della sezione: non si combina con --id/--ids');
   assertPublishableSection(out.section, { all, active });
   return out;
+}
+
+export function missingRenderedArticleIds(requestedIds, entries) {
+  const rendered = new Set((entries || []).map((entry) => String(entry?.articleId || '')).filter(Boolean));
+  return [...new Set((requestedIds || []).map(String))].filter((articleId) => !rendered.has(articleId));
 }
 
 /** La sezione deve essere cantonale (R2) e ATTIVA nel core: l'engine rende solo le sezioni attive. */
@@ -810,6 +815,8 @@ export async function main(argv = process.argv.slice(2)) {
     ...landingPages.map((page) => rendererPageEntry(section, page, 'landing')),
   ];
   const currentArchivePages = pages.filter((page) => page.kind === 'archive');
+  const renderedIds = [...new Set(entries.map((entry) => String(entry.articleId)).filter(Boolean))];
+  const missingArticleIds = missingRenderedArticleIds(ids, entries);
   const obsoletePages = obsoleteReleasePages({
     previousArticlePages,
     currentArticlePages,
@@ -826,6 +833,9 @@ export async function main(argv = process.argv.slice(2)) {
     const abs = path.join(distDir, page.rel);
     const html = fs.existsSync(abs) ? fs.readFileSync(abs, 'utf-8') : '';
     for (const defect of pageDefects(page, html)) defects.push(`${page.rel}: ${defect}`);
+  }
+  if (missingArticleIds.length) {
+    defects.push(`articoli richiesti non resi dalla pipeline: ${missingArticleIds.join(', ')}`);
   }
   defects.push(...aggregatePageDefects(pages, { aggregatePagesAllowed }));
 
@@ -859,6 +869,8 @@ export async function main(argv = process.argv.slice(2)) {
     declaredStatus: declared ?? null,
     bootstrap: args.bootstrap,
     ids,
+    requestedIds: [...new Set(ids)],
+    renderedIds,
     counts: Object.fromEntries(UPLOAD_ORDER.map((kind) => [kind, pages.filter((page) => page.kind === kind).length])),
     countsByLocale,
     hubsMissing: hubs.missing,
@@ -902,7 +914,15 @@ export async function main(argv = process.argv.slice(2)) {
   return summary.published.failures ? 1 : 0;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().then(
     (code) => {
       process.exitCode = code;

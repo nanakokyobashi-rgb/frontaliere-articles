@@ -148,6 +148,13 @@ export const CONTENT_GATES = [
   // coerenza registry/SEO/blob della cover dedicata. Legge il corpus reale e
   // deve quindi aprire l'alert di main se un produttore reintroduce il difetto.
   'generator/tests/article-publication-contract.test.mjs',
+  // Il registro e il motore SEO sono due superfici scritte dalla stessa
+  // pipeline: una voce in una sola delle due lascia l'articolo non renderizzabile
+  // o fa servire una SEO per un id che il registro non conosce.
+  'generator/tests/content-seo-registry-parity.test.mjs',
+  // Il builder condiviso deve restare byte-equivalente al writer di main sui
+  // 20 articoli piu' recenti: il recupero non puo' introdurre un dialetto SEO.
+  'generator/tests/seo-entry-equivalence.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',
@@ -216,6 +223,13 @@ export const CONTENT_GATES = [
   'generator/tests/key-facts-specificity.test.mjs',
   'generator/tests/meta-fields-plausibility-floor.test.mjs',
   'generator/tests/meta-localized-seo-description.test.mjs',
+  // La premessa di `check-post-rebase-uniqueness.mjs` (meta IT = registro +
+  // mappa slug, per ogni sezione) verificata sul corpus vero. Lo script gira
+  // dopo che l'articolo e' stato pagato: se la base non la rispetta, ogni run
+  // che fa un rebase scarta il proprio articolo (3 run l'8 ottobre 2026, per
+  // due voci di meta rimaste da ritiri a meta'). Qui la stessa rottura apre
+  // la issue dei gate invece di costare un articolo a run.
+  'generator/tests/post-rebase-uniqueness-corpus.test.mjs',
   'generator/tests/prompt-placeholder-guard.test.mjs',
   // Ogni voce di registry nata dal cutover dichiara `articleType`, e ogni
   // `verifiedAt` ha la sua prova nel ledger delle verifiche.
