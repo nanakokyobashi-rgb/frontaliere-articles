@@ -5240,7 +5240,7 @@
       "reason": "Sorgente unica del detector multi-segnale dei contenuti: la usa il generatore e il gate post-rebase prima del push per riconoscere due ID diversi che pubblicano la stessa notizia. Corpus-only perche' il producer operativo vive qui e il sito consuma la superficie JSON senza eseguire questo generatore; il modulo resta puro per essere letto dai gate zero-dep.",
       "baseline": {
         "site": null,
-        "corpus": "da2aa2912092033d",
+        "corpus": "089a8f2872e3d12e",
         "alignedAt": "2026-10-08"
       }
     },
