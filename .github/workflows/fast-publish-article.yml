@@ -942,13 +942,22 @@ jobs:
           # a human is told to open — or into an annotation another workflow
           # parses.
           #
+          # The result is left in $PROBE_URL, and the function is CALLED, never
+          # substituted. `"$(probe_url "$u")"` ran it in a subshell: the counter
+          # was incremented there and lost, so it stayed 0 for the whole step
+          # and every probe of a run carried the same key, `….1`. Twelve polls
+          # of one path were twelve reads of one key — the stale answer the
+          # paragraphs above say this function exists to avoid. Measured on
+          # 2026-10-08 with these two functions and a curl that records its
+          # URL: three polls, one key.
+          #
           # Pinned by generator/tests/fast-publish-probe-cache-poisoning.test.mjs.
           PROBE_SEQ=0
           probe_url() {
             local u="$1" sep='?'
             PROBE_SEQ=$((PROBE_SEQ + 1))
             case "$u" in *\?*) sep='&' ;; esac
-            printf '%s%s_fpcb=%s.%s.%s' \
+            printf -v PROBE_URL '%s%s_fpcb=%s.%s.%s' \
               "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$PROBE_SEQ"
           }
 
@@ -960,14 +969,51 @@ jobs:
             POLL_CODE=000
             for i in $(seq 1 "$attempts"); do
               echo "poll_origin attempt $i/$attempts"
+              probe_url "$u"
               set +e
               POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time "$timeout" \
-                           -H 'Cache-Control: no-cache' "$(probe_url "$u")")"
+                           -H 'Cache-Control: no-cache' "$PROBE_URL")"
               set -e
               [ "$POLL_CODE" = "200" ] && return 0
               if [ "$i" -lt "$attempts" ]; then sleep 15; fi
             done
             return 1
+          }
+
+          # Probe $1, one member of the batch, after its locale's deployment
+          # gate. One attempt answers the question the gate leaves open — is
+          # this article in the build that is now live — and a 404 answers it
+          # with "no": repeating the probe cannot repair that, so it fails at
+          # once, as before.
+          #
+          # A 5xx, a 429 or no answer at all says nothing about the article.
+          # It is the origin not answering. Run 37825012855 published 78
+          # articles, purged the edge, and failed here on a single 503 among
+          # 308 such probes, with every page readable. The number of these
+          # probes grows with the batch (4 locales × N articles, less the 4 the
+          # gates cover), so a rule that reads one unanswered probe as a
+          # missing article fails more often the more it is given to publish.
+          #
+          # Those answers are retried: twice for a path, and from a budget
+          # shared by the whole run, so an origin that is really down cannot
+          # multiply the duration of a job that has 30 minutes. A path that
+          # still does not answer 200 fails the step exactly as before.
+          # Pinned, executed, by generator/tests/fast-publish-probe-cache-poisoning.test.mjs.
+          TRANSIENT_RETRY_BUDGET=12
+          poll_batch_member() {
+            local u="$1" retries=0
+            while :; do
+              poll_origin "$u" 1 8 && return 0
+              case "$POLL_CODE" in
+                5??|429|000) ;;
+                *) return 1 ;;
+              esac
+              if [ "$retries" -ge 2 ] || [ "$TRANSIENT_RETRY_BUDGET" -le 0 ]; then return 1; fi
+              retries=$((retries + 1))
+              TRANSIENT_RETRY_BUDGET=$((TRANSIENT_RETRY_BUDGET - 1))
+              echo "  $POLL_CODE  $u — the origin did not answer about this article; retry $retries/2 ($TRANSIENT_RETRY_BUDGET left for this run)"
+              sleep 5
+            done
           }
 
           # Latest Pages build state for repo $1 -> $PAGES_STATUS (+ $PAGES_ERROR).
@@ -1000,11 +1046,12 @@ jobs:
             repo="$owner/frontaliere-$shard-$loc"
 
             # Wait/recover once per locale until its Pages deployment is live;
-            # then check each remaining article path once against that same build.
+            # then check each remaining article path against that same build.
             # A missing batch member cannot be repaired by repeating the same
-            # Pages wait for every ID, and doing so could exceed this job's timeout.
+            # Pages wait for every ID, and doing so could exceed this job's timeout:
+            # poll_batch_member retries only an origin that did not answer.
             if [ -n "${origin_locale_gate_started[$loc]:-}" ]; then
-              if poll_origin "$u" 1 8; then
+              if poll_batch_member "$u"; then
                 echo "  200  $u"
               else
                 echo "::error::$u answers $POLL_CODE after the locale deployment gate passed"
