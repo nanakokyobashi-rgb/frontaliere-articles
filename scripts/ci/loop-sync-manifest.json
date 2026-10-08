@@ -219,11 +219,11 @@
     {
       "path": "scripts/ci/check-post-rebase-uniqueness.mjs",
       "mode": "corpus-only",
-      "reason": "Ricontrollo di unicita' (id globale fra sezioni, URL fonte fra sezioni) che generate-article.yml esegue dopo un rebase riuscito e prima del push (D18, sezioni cantonali). Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, il ledger da article-surfaces.mjs.",
+      "reason": "Ricontrollo di unicita' (id globale fra sezioni, URL fonte fra sezioni e, dentro la stessa sezione, finche' la voce del ledger e' viva: issue 2428) che generate-article.yml e generate-article-core.yml eseguono dopo un rebase riuscito e prima del push (D18, sezioni cantonali). Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, il ledger da article-surfaces.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "9771a71da3aaa747",
-        "alignedAt": "2026-10-05"
+        "corpus": "13c3667a258c9813",
+        "alignedAt": "2026-10-08"
       }
     },
     {
