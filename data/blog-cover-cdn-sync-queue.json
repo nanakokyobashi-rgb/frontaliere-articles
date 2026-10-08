@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-premi-standard-glarona.webp",
-      "sha256": "7f20af0307251a8f15efebe897ee11f8f8e74ee86c8110bd5a577e317b9b4d13"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-premi-standard-glarona-480w.webp",
-      "sha256": "b7707f4b00b6f431be892358768daccafd4ebeaf3e79e6a8543d9fd7a96df070"
-    }
-  ]
+  "items": []
 }
