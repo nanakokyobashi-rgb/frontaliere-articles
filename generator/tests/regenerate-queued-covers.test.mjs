@@ -762,6 +762,9 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     assert.match(publisher, /run-name:[^\n]*nonce=\$\{\{ inputs\.dispatch_nonce \|\| 'none' \}\}/u);
   }
 
+  const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
+  assert.match(articlePublisher, /publisher omitted requested article IDs/u);
+
   const drainScript = fs.readFileSync(new URL('../../scripts/ci/cover-publisher-drain.mjs', import.meta.url), 'utf8');
   assert.match(drainScript, /displayTitle/u);
   assert.match(drainScript, /nonce=\$\{dispatchNonce\}/u);
