@@ -53,6 +53,7 @@
 # it did not own.
 
 name: fast-publish-article
+run-name: cover-publish-article / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }}
 
 on:
   push:
@@ -109,6 +110,11 @@ on:
         required: false
         default: true
         type: boolean
+      dispatch_nonce:
+        description: 'Opaque nonce used by an orchestrating drain to correlate this run'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import fs from 'node:fs';
-import { execFileSync, spawn } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
+import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -30,11 +31,69 @@ function commandEnvironment(token) {
   return token ? { ...process.env, GH_TOKEN: token } : { ...process.env };
 }
 
-function runGh(args, { token } = {}) {
-  return execFileSync('gh', args, {
-    encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe'],
-    env: commandEnvironment(token),
+function deadlineError(message) {
+  const error = new Error(message);
+  error.code = 'DEADLINE_EXCEEDED';
+  return error;
+}
+
+function isDeadlineError(error) {
+  return error?.code === 'DEADLINE_EXCEEDED';
+}
+
+function runGh(args, { token, deadlineAt, now = Date.now } = {}) {
+  return new Promise((resolve, reject) => {
+    const remaining = Number.isFinite(deadlineAt) ? deadlineAt - now() : null;
+    if (remaining !== null && remaining <= 0) {
+      reject(deadlineError(`deadline reached before gh ${args.join(' ')}`));
+      return;
+    }
+
+    const child = spawn('gh', args, {
+      env: commandEnvironment(token),
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    let stdout = '';
+    let stderr = '';
+    let timedOut = false;
+    let settled = false;
+    let deadlineTimer;
+    let killTimer;
+
+    const finish = (callback) => {
+      if (settled) return;
+      settled = true;
+      if (deadlineTimer) clearTimeout(deadlineTimer);
+      if (killTimer) clearTimeout(killTimer);
+      callback();
+    };
+
+    const failForDeadline = () => finish(() => reject(deadlineError(
+      `deadline reached while running gh ${args.join(' ')}`,
+    )));
+
+    if (remaining !== null) {
+      deadlineTimer = setTimeout(() => {
+        timedOut = true;
+        child.kill('SIGTERM');
+        killTimer = setTimeout(failForDeadline, 1_000);
+      }, Math.max(1, remaining));
+    }
+
+    child.stdout?.on('data', (chunk) => { stdout += chunk; });
+    child.stderr?.on('data', (chunk) => { stderr += chunk; });
+    child.on('error', (error) => finish(() => reject(error)));
+    child.on('close', (code, signal) => {
+      if (timedOut) {
+        failForDeadline();
+      } else if (code === 0) {
+        finish(() => resolve(stdout));
+      } else {
+        const error = new Error(`gh ${args.join(' ')} exited with ${signal || `code ${code}`}`);
+        error.stderr = stderr || stdout;
+        finish(() => reject(error));
+      }
+    });
   });
 }
 
@@ -113,7 +172,7 @@ export function ackSuccessfulPublisherSections(outbox, publisherStatus) {
   };
 }
 
-function dispatchArguments({ workflow, section, articleIds, repo }) {
+function dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce }) {
   if (workflow === 'fast-publish-article.yml') {
     return [
       'workflow', 'run', workflow,
@@ -122,6 +181,7 @@ function dispatchArguments({ workflow, section, articleIds, repo }) {
       '--field', `article_ids=${JSON.stringify(articleIds)}`,
       '--field', `section=${section}`,
       '--field', 'dry_run=false',
+      '--field', `dispatch_nonce=${dispatchNonce}`,
     ];
   }
   return [
@@ -132,32 +192,38 @@ function dispatchArguments({ workflow, section, articleIds, repo }) {
     '--field', `article_ids=${JSON.stringify(articleIds)}`,
     '--field', 'bootstrap=false',
     '--field', 'dry_run=false',
+    '--field', `dispatch_nonce=${dispatchNonce}`,
   ];
 }
 
-function listRunIds({ repo, workflow, token }) {
-  const output = runGh([
+async function listRunIds({ repo, workflow, token, deadlineAt, now }) {
+  const output = await runGh([
     'run', 'list',
     '--repo', repo,
     '--workflow', workflow,
     '--event', 'workflow_dispatch',
     '--branch', 'main',
     '--limit', '100',
-    '--json', 'databaseId,createdAt',
-  ], { token });
+    '--json', 'databaseId,createdAt,displayTitle',
+  ], { token, deadlineAt, now });
   const runs = JSON.parse(output || '[]');
   return Array.isArray(runs) ? runs : [];
 }
 
-async function findNewRunId({ repo, workflow, startedAt, beforeIds, token, deadlineAt, now = Date.now }) {
+export function selectNewRunId(runs, { startedAt, beforeIds, dispatchNonce }) {
+  return runs
+    .filter((run) => run?.databaseId != null)
+    .filter((run) => !beforeIds.has(String(run.databaseId)))
+    .filter((run) => !run.createdAt || run.createdAt >= startedAt)
+    .filter((run) => String(run.displayTitle || '').includes(`nonce=${dispatchNonce}`))
+    .sort((left, right) => String(right.createdAt || '').localeCompare(String(left.createdAt || '')))[0] || null;
+}
+
+async function findNewRunId({ repo, workflow, startedAt, beforeIds, dispatchNonce, token, deadlineAt, now = Date.now }) {
   for (let attempt = 0; attempt < RUN_LOOKUP_ATTEMPTS; attempt += 1) {
     if (now() >= deadlineAt) return null;
-    const runs = listRunIds({ repo, workflow, token });
-    const candidate = runs
-      .filter((run) => run?.databaseId != null)
-      .filter((run) => !beforeIds.has(String(run.databaseId)))
-      .filter((run) => !run.createdAt || run.createdAt >= startedAt)
-      .sort((left, right) => String(right.createdAt || '').localeCompare(String(left.createdAt || '')))[0];
+    const runs = await listRunIds({ repo, workflow, token, deadlineAt, now });
+    const candidate = selectNewRunId(runs, { startedAt, beforeIds, dispatchNonce });
     if (candidate) return String(candidate.databaseId);
     if (attempt + 1 < RUN_LOOKUP_ATTEMPTS) {
       const remaining = Math.max(0, deadlineAt - now());
@@ -170,19 +236,24 @@ async function findNewRunId({ repo, workflow, startedAt, beforeIds, token, deadl
 
 async function defaultDispatch({ repo, workflow, section, articleIds, token, deadlineAt, now = Date.now }) {
   const startedAt = new Date(now()).toISOString();
-  const beforeIds = new Set(listRunIds({ repo, workflow, token }).map((run) => String(run.databaseId)));
-  runGh(dispatchArguments({ workflow, section, articleIds, repo }), { token });
+  const dispatchNonce = `cover-${section}-${now()}-${randomUUID()}`;
+  const beforeIds = new Set((await listRunIds({ repo, workflow, token, deadlineAt, now })).map((run) => String(run.databaseId)));
+  await runGh(dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce }), { token, deadlineAt, now });
   const runId = await findNewRunId({
     repo,
     workflow,
     startedAt,
     beforeIds,
+    dispatchNonce,
     token,
     deadlineAt,
     now,
   });
-  if (!runId) throw new Error(`publisher dispatch accepted for ${section}, but its run id was not observable`);
-  return { runId, dispatchAccepted: true };
+  if (!runId) {
+    if (now() >= deadlineAt) throw deadlineError(`deadline reached while locating publisher run for ${section}`);
+    throw new Error(`publisher dispatch accepted for ${section}, but its nonce-tagged run id was not observable`);
+  }
+  return { runId, dispatchAccepted: true, dispatchNonce };
 }
 
 function appendOutput(current, chunk) {
@@ -244,6 +315,11 @@ function resultCounts(sections) {
   }, { started: 0, succeeded: 0, failed: 0, inProgress: 0, notStarted: 0 });
 }
 
+export function publisherStatusIsComplete(status) {
+  return Array.isArray(status?.sections)
+    && status.sections.every((section) => section?.status === 'success');
+}
+
 export async function drainCoverPublishers({
   outbox,
   repo,
@@ -262,10 +338,10 @@ export async function drainCoverPublishers({
     error: null,
   }));
 
-  for (const section of sections) {
+  await Promise.all(sections.map(async (section) => {
     if (now() >= deadlineAt) {
       section.error = 'deadline reached before dispatch';
-      continue;
+      return;
     }
     try {
       const result = await dispatch({
@@ -281,10 +357,10 @@ export async function drainCoverPublishers({
       section.runId = result?.runId ? String(result.runId) : null;
       if (!section.runId) throw new Error('publisher dispatch returned no run id');
     } catch (error) {
-      section.status = 'failed';
+      section.status = isDeadlineError(error) ? 'in-progress' : 'failed';
       section.error = textError(error);
     }
-  }
+  }));
 
   const watchable = sections.filter((section) => section.runId && section.status === 'not-started');
   if (now() >= deadlineAt) {
@@ -324,7 +400,14 @@ export async function drainCoverPublishers({
 
 function writeJson(filePath, value) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(filePath, `${JSON.stringify(value, null, 2)}\n`);
+  const temporaryPath = `${filePath}.tmp-${process.pid}-${randomUUID()}`;
+  try {
+    fs.writeFileSync(temporaryPath, `${JSON.stringify(value, null, 2)}\n`);
+    fs.renameSync(temporaryPath, filePath);
+  } catch (error) {
+    fs.rmSync(temporaryPath, { force: true });
+    throw error;
+  }
 }
 
 function parseArgs(argv) {
@@ -362,6 +445,7 @@ async function main() {
     }
     if (!fs.existsSync(options.status)) throw new Error(`publisher status is missing: ${options.status}`);
     const status = parseJsonFile(options.status, options.status);
+    if (!Array.isArray(status?.sections)) throw new Error(`publisher status is malformed: ${options.status}`);
     const acknowledged = ackSuccessfulPublisherSections(outbox, status);
     if (acknowledged.outbox.items.length === 0) fs.rmSync(options.outbox, { force: true });
     else writeJson(options.outbox, acknowledged.outbox);
@@ -380,6 +464,7 @@ async function main() {
   });
   writeJson(options.status, status);
   console.log(JSON.stringify(status.counts));
+  if (!publisherStatusIsComplete(status)) process.exitCode = 1;
 }
 
 if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) {

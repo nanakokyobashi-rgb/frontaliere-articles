@@ -749,4 +749,19 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.doesNotMatch(workflow, /git rm -f "\$OUTBOX_FILE"/);
   assert.match(workflow, /registry_base=\"\$RUNNER_TEMP\/generated-image-registry-base\.json\"/);
   assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_base\" \"\$registry_snapshot\"/);
+
+  const publisherWorkflows = [
+    '../../.github/workflows/fast-publish-article.yml',
+    '../../.github/workflows/fast-publish-section.yml',
+  ];
+  for (const publisherWorkflow of publisherWorkflows) {
+    const publisher = fs.readFileSync(new URL(publisherWorkflow, import.meta.url), 'utf8');
+    assert.match(publisher, /dispatch_nonce:/u);
+    assert.match(publisher, /run-name:[^\n]*nonce=\$\{\{ inputs\.dispatch_nonce \|\| 'none' \}\}/u);
+  }
+
+  const drainScript = fs.readFileSync(new URL('../../scripts/ci/cover-publisher-drain.mjs', import.meta.url), 'utf8');
+  assert.match(drainScript, /displayTitle/u);
+  assert.match(drainScript, /nonce=\$\{dispatchNonce\}/u);
+  assert.match(drainScript, /process\.exitCode = 1/u);
 });

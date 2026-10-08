@@ -5,6 +5,8 @@ import {
   ackSuccessfulPublisherSections,
   drainCoverPublishers,
   groupPublisherOutbox,
+  publisherStatusIsComplete,
+  selectNewRunId,
 } from '../../scripts/ci/cover-publisher-drain.mjs';
 
 function outbox(items) {
@@ -103,4 +105,23 @@ test('un ack parziale conserva tutte le voci delle sezioni fallite o ancora in c
     { articleId: 'front-1', section: 'frontaliere' },
     { articleId: 'zh-1', section: 'canton-zh' },
   ]);
+});
+
+test('un esito parziale resta non riuscito per il codice del drain, anche con ack parziale', () => {
+  assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'success' }] }), true);
+  assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'in-progress' }] }), false);
+  assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'failed' }] }), false);
+});
+
+test('correla la run nuova con il nonce, ignorando una dispatch concorrente della stessa workflow', () => {
+  const selected = selectNewRunId([
+    { databaseId: 41, createdAt: '2026-10-08T05:00:02Z', displayTitle: 'cover-publish-section / canton-zh / nonce=other' },
+    { databaseId: 42, createdAt: '2026-10-08T05:00:01Z', displayTitle: 'cover-publish-section / canton-ag / nonce=target' },
+  ], {
+    startedAt: '2026-10-08T05:00:00Z',
+    beforeIds: new Set(['40']),
+    dispatchNonce: 'target',
+  });
+
+  assert.equal(selected?.databaseId, 42);
 });

@@ -514,12 +514,14 @@ jobs:
             for publisher_status in \
               "$RUNNER_TEMP/queued-cover-prepublish-status.json" \
               "$RUNNER_TEMP/queued-cover-publish-status.json"; do
-              if [ -s "$publisher_status" ]; then
+              if [ -s "$publisher_status" ] && jq -e 'type == "object" and (.sections | type == "array")' "$publisher_status" >/dev/null 2>&1; then
                 echo "- Publisher $(basename "$publisher_status" .json): $(jq -c '.counts // {}' "$publisher_status")"
                 pending_publishers="$(jq -c '[.sections[] | select(.status != "success") | {section,status,error}]' "$publisher_status")"
                 if [ "$pending_publishers" != '[]' ]; then
                   echo "- Publisher non conclusi: $pending_publishers"
                 fi
+              elif [ -s "$publisher_status" ]; then
+                echo "- ⚠️ Publisher $(basename "$publisher_status" .json): status non valido; outbox lasciato durevole"
               fi
             done
             if [ -s data/image-regeneration-publish-outbox.json ]; then
