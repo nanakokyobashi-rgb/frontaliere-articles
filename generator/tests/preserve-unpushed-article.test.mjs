@@ -126,10 +126,26 @@ test('crea un bundle replayable con manifest, REPLAY e ref temporaneo rimosso', 
     git(baseClone, 'fetch', bundle, manifest.ref);
     assert.equal(git(baseClone, 'rev-parse', 'FETCH_HEAD').trim(), producedSha);
 
+    // Il replay vero: in un clone che ha solo la base, il cherry-pick riporta
+    // i file dell'articolo e niente altro.
+    git(baseClone, 'cherry-pick', 'FETCH_HEAD');
+    assert.equal(readFileSync(path.join(baseClone, 'article-one.txt'), 'utf8'), 'uno\n');
+    assert.equal(readFileSync(path.join(baseClone, 'article-two.txt'), 'utf8'), 'due\n');
+    assert.equal(
+      git(baseClone, 'diff', '--name-only', baseSha, 'HEAD').trim().split('\n').sort().join(','),
+      'article-one.txt,article-two.txt',
+    );
+
     const replay = readFileSync(replayPath, 'utf8');
     assert.match(replay, /git fetch <bundle> <ref>/);
     assert.match(replay, /git cherry-pick FETCH_HEAD/);
-    assert.match(replay, /node scripts\/ci\/check-post-rebase-uniqueness\.mjs --produced HEAD --against HEAD/);
+    // Stessa invocazione dello step «Commit and push»: lo SHA prodotto dal run,
+    // non l'HEAD rigiocato.
+    assert.ok(
+      replay.includes(`node scripts/ci/check-post-rebase-uniqueness.mjs --produced ${producedSha} --against HEAD`),
+      replay,
+    );
+    assert.match(replay, /--merge-registry/);
     assert.match(replay, /uscita 1 significa un duplicato vero/);
     assert.match(replay, /NON si pusha/);
 

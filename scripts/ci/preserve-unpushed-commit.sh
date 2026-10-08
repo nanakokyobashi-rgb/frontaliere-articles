@@ -104,9 +104,12 @@ NODE
   printf '%s\n' 'git fetch <bundle> <ref>'
   printf '%s\n' "git fetch ./article.bundle ${bundle_ref}"
   printf '%s\n' 'git cherry-pick FETCH_HEAD'
-  printf '%s\n' 'node scripts/ci/check-post-rebase-uniqueness.mjs --produced HEAD --against HEAD'
+  # Come lo step «Commit and push»: --produced e' il commit di QUESTO run preso
+  # prima del replay, --against lo stato su cui si sta per pushare.
+  printf '%s\n' "node scripts/ci/check-post-rebase-uniqueness.mjs --produced ${produced_sha} --against HEAD"
   printf '%s\n' '```'
   printf '%s\n' ''
+  printf '%s\n' 'Se il cherry-pick va in conflitto, i registri append-only vanno fusi come fa lo step «Commit and push» (`scripts/lib/rebase-onto-remote.sh` con le sue liste `--merge-registry`): non scegliere a mano una delle due copie.'
   printf '%s\n' "Il controllo di unicità va rieseguito prima del push. Un'uscita 1 significa un duplicato vero: in quel caso NON si pusha."
   printf '%s\n' 'Solo dopo un controllo riuscito si può fare il push del commit rigiocato.'
 } > "$replay_path"
