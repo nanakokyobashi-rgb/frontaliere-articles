@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-linea-ginevra-friburgo-pressione.webp",
+      "sha256": "c71e573ad8b50dce339d29aed1c06b9ae7d63d7712561abc193b6a17f89ec89e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-linea-ginevra-friburgo-pressione-480w.webp",
+      "sha256": "f9acf3f2a2f84d74cb6c008c2d078ba5fa6dc2355a7366d2d43af684e487ad27"
+    }
+  ]
 }
