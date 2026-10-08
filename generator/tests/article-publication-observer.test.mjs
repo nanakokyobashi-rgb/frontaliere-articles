@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {
   OBSERVER_USER_AGENT,
   buildObserverTargets,
@@ -9,7 +12,9 @@ import {
   observePublicationLag,
   parseChangedBodyLog,
   parsePageObservation,
+  runObserver,
 } from '../../scripts/ci/article-publication-observer.mjs';
+import { renderDegradationLedger } from '../../scripts/lib/article-image-degradation-ledger.mjs';
 
 const sha = 'a'.repeat(40);
 const changedAt = Date.parse('2026-10-05T00:00:00Z');
@@ -195,4 +200,154 @@ test('il tetto di pagine taglia i cambi più vecchi, non la fine dell’alfabeto
   assert.equal(result.capped, true);
   assert.equal(result.unread, 2);
   assert.match(formatObserverReport(result, { nowMs }), /2 più vecchie nella finestra non sono state lette/);
+});
+
+function observerRoot() {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-publication-observer-run-'));
+  const sources = {
+    'content/blog-articles-data.ts': [
+      "{ id: 'alpha', date: '2026-09-01', image: '/images/blog/alpha.webp' },",
+      "{ id: 'zeta', date: '2026-09-01', image: '/images/blog/zeta.webp' },",
+      "{ id: 'missing-image', date: '2026-09-01', image: '/images/blog/missing-image.webp' },",
+    ].join('\n'),
+    'content/swiss-articles-data.ts': '',
+    'content/routerBlogData.ts': [
+      "'alpha': { it: 'alpha' },",
+      "'zeta': { it: 'zeta' },",
+      "'missing-image': { it: 'missing-image' },",
+    ].join('\n'),
+    'content/routerSwissData.ts': '',
+  };
+  for (const [rel, source] of Object.entries(sources)) {
+    const abs = path.join(root, rel);
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, source);
+  }
+  return root;
+}
+
+function issueClient({ issue = null, dispatchResult = { runId: 'run-1' } } = {}) {
+  const calls = [];
+  return {
+    calls,
+    client: {
+      findOpenIssue: async () => issue,
+      createIssue: async (description) => {
+        issue = { number: 9001, body: description };
+        calls.push({ type: 'create', description });
+        return issue;
+      },
+      editIssue: async (number, body) => {
+        issue = { ...issue, number, body };
+        calls.push({ type: 'edit', number, body });
+      },
+      dispatch: async (args) => {
+        calls.push({ type: 'dispatch', args });
+        return dispatchResult;
+      },
+      resolveIssue: async () => {
+        calls.push({ type: 'resolve' });
+        return issue;
+      },
+    },
+  };
+}
+
+function genericPage() {
+  return '<meta property="og:image" content="https://frontaliereticino.ch/og-image.png"><meta property="article:modified_time" content="2026-09-02T00:00:00Z">';
+}
+
+function ownPage(image = ownImage) {
+  return `<meta property="og:image" content="https://frontaliereticino.ch${image}"><meta property="article:modified_time" content="2026-09-02T00:00:00Z">`;
+}
+
+test('il ledger sopravvive alla finestra, viene letto per primo e il cap produce un solo dispatch', async () => {
+  const rootDir = observerRoot();
+  const oldItems = [
+    {
+      section: 'frontaliere', articleId: 'zeta', url: 'https://frontaliereticino.ch/zeta/',
+      registryImage: '/images/blog/zeta.webp', firstSeenAt: '2026-08-01T00:00:00.000Z',
+    },
+    {
+      section: 'frontaliere', articleId: 'alpha', url: 'https://frontaliereticino.ch/alpha/',
+      registryImage: '/images/blog/alpha.webp', firstSeenAt: '2026-08-01T00:00:00.000Z',
+    },
+  ];
+  const github = issueClient({ issue: { number: 2448, body: renderDegradationLedger(oldItems) } });
+  const read = [];
+  const proven = [];
+  try {
+    const result = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => '',
+      githubClient: github.client,
+      repairCap: 1,
+      fetchImpl: async (url) => {
+        read.push(url);
+        return { ok: true, status: 200, text: async () => genericPage() };
+      },
+      fetchDeclaredImageImpl: async ({ imagePath }) => {
+        proven.push(imagePath);
+        return { bytes: 5, contentType: 'image/webp' };
+      },
+    });
+    assert.deepEqual(read.map((url) => url.split('/').at(-2)), ['alpha', 'zeta']);
+    assert.deepEqual(proven, ['/images/blog/alpha.webp', '/images/blog/zeta.webp']);
+    assert.deepEqual(result.dispatched, [{ section: 'frontaliere', ids: ['alpha'], runId: 'run-1' }]);
+    assert.deepEqual(result.ledger.map((item) => [item.articleId, item.status]), [['alpha', 'in-flight'], ['zeta', 'pending']]);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('immagine ancora assente: il degrado entra nel ledger ma non parte alcun dispatch', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient();
+  const log = `commit ${'e'.repeat(40)} 1791417600\ncontent/blog-body/it/missing-image.ts\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      fetchImpl: async () => ({ ok: true, status: 200, text: async () => genericPage() }),
+      fetchDeclaredImageImpl: async () => { throw new Error('HTTP 404'); },
+    });
+    assert.equal(result.dispatched.length, 0);
+    assert.deepEqual(result.ledger.map((item) => [item.articleId, item.status]), [['missing-image', 'pending']]);
+    assert.ok(github.calls.some((call) => call.type === 'create'));
+    assert.ok(github.calls.some((call) => call.type === 'edit' && call.body.includes('ARTICLE_IMAGE_DEGRADATION_LEDGER')));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('una lettura sana rimuove il degradato durevole e risolve l issue senza dispatch', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient({
+    issue: {
+      number: 2448,
+      body: renderDegradationLedger([{
+        section: 'frontaliere', articleId: 'alpha', url: 'https://frontaliereticino.ch/alpha/',
+        registryImage: '/images/blog/alpha.webp', firstSeenAt: '2026-08-01T00:00:00.000Z',
+      }]),
+    },
+  });
+  try {
+    const result = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => '',
+      githubClient: github.client,
+      fetchImpl: async () => ({ ok: true, status: 200, text: async () => ownPage('/images/blog/alpha.webp') }),
+    });
+    assert.deepEqual(result.ledger, []);
+    assert.deepEqual(result.dispatched, []);
+    assert.ok(github.calls.some((call) => call.type === 'resolve'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
 });

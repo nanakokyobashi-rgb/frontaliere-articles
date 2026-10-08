@@ -394,6 +394,7 @@ function defaultGithubClient() {
 }
 
 async function reconcileDispatches(items, github) {
+  if (typeof github.getRun !== 'function') return { items, handledKeys: new Set() };
   const runIds = new Set(items.filter((item) => item.status === 'in-flight' && item.runId).map((item) => item.runId));
   const outcomes = {};
   for (const runId of runIds) {
@@ -438,9 +439,10 @@ export async function runObserver({
   fetchDeclaredImageImpl = fetchDeclaredImage,
   githubClient = null,
   repairCap = DEFAULT_REPAIR_CAP,
+  gitLogImpl = gitText,
 } = {}) {
   const since = new Date(nowMs - days * 24 * 60 * 60 * 1000).toISOString();
-  const log = gitText([
+  const log = gitLogImpl([
     'log', '--first-parent', `--since=${since}`, '--format=commit %H %ct', '--name-only', '--diff-filter=AM', '--',
     'content/blog-body', 'content/blog-body-ch',
   ], rootDir);
@@ -484,6 +486,7 @@ export async function runObserver({
   if (actionable && !issue) {
     issue = await github.createIssue(description);
     if (!issue) throw new Error('issue observer non trovata dopo la creazione');
+    if (!issue.body) issue.body = description;
   }
   if (issue) await persistLedger(issue, ledger, github);
 

@@ -47,7 +47,7 @@ const IMAGE_FETCH_CONCURRENCY = 4;
  * @param {string} opts.section sezione ATTIVA del core
  * @param {string[]} opts.ids id articolo da rendere (vuoto = nessun articolo, solo archivio ed extra)
  * @param {string} [opts.logPrefix]
- * @param {(ctx: { distDir: string, entries: any[], hubResult: any, releasedArticles: any[] }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
+ * @param {(ctx: { distDir: string, entries: any[], hubResult: any, releasedArticles: any[], effectiveEntries: any[] }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
  * @param {(url: string) => Promise<{ state: string, reason: string }>} [opts.probeOnlineImage]
  *   lettura della pagina online per gli articoli ricaduti sull'immagine generica (default: produzione)
@@ -227,6 +227,14 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     console.error(`[${logPrefix}] aggregate pages use the generic image for ${releasedWithGenericImage.length} released article(s)`);
   }
   const aggregatePagesAllowed = aggregateVerdict.allowed;
+  // The registry declaration remains in imagePostcondition for diagnostics,
+  // but downstream hero upload must inspect the image actually rendered. A
+  // released article has `/og-image.png`, so treating its missing declaration
+  // as an upload defect would undo the owner decision at the next gate.
+  const releasedIds = new Set(releasedWithGenericImage.map((article) => article.articleId));
+  const effectiveEntries = imagePostcondition.entries.map((entry) =>
+    releasedIds.has(entry.articleId) ? { ...entry, img: '/og-image.png' } : entry,
+  );
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
   // Re-renders each section's `/tutti/` archive + pagination into the SAME
@@ -299,12 +307,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
     // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
     extraPaths = beforeOffload
-      ? (await beforeOffload({
-          distDir,
-          entries: imagePostcondition.entries,
-          hubResult,
-          releasedArticles: releasedWithGenericImage,
-        })) ?? []
+      ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult, releasedArticles: releasedWithGenericImage, effectiveEntries })) ?? []
       : [];
 
     rewriteGenericImageFiles({
@@ -403,7 +406,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
 
   return {
     written,
-    entries: imagePostcondition.entries,
+    entries: effectiveEntries,
     hubResult,
     extraPaths,
     locales,

@@ -1,8 +1,9 @@
 name: Article publication observer
 
-# Read-only probe of the two article publishers. It opens or resolves one
-# stable issue through the repository's existing issue creator; it never writes
-# to the site, a shard, or a CDN.
+# Probe and bounded repairer for the two article publishers. It opens or
+# resolves one stable issue and dispatches the article publisher only after a
+# live generic page and the declared image are both proven; it never writes
+# directly to the site, a shard, or a CDN.
 on:
   schedule:
     - cron: '17 6 * * *'
