@@ -43,6 +43,16 @@
  * race (issue #4429); targeted callers don't race a live probe, so the sleep
  * would only slow down the fast-publish path for no benefit.
  *
+ * LIST FROM A FILE: `--files-from=<path>` reads the same list from a file,
+ * one URL per line. A list on the command line is ONE argv string, and Linux
+ * refuses to start a process whose single argument is over 128 KiB ("Argument
+ * list too long", exit 126). fast-publish-article.yml crossed it at 1.600
+ * URLs — 78 articles — with the pages already on the shards: the purge, the
+ * verification and the re-purge never ran (issue #2527). The batching below
+ * could not help, because the list never reached this script. A file has no
+ * such ceiling, so a caller whose list grows with what it publishes passes
+ * the file instead; `--files=` stays for the callers that purge a handful.
+ *
  * Auth: CF_API_TOKEN — needs Zone→Cache Purge. Resolves zone by name unless
  * CF_ZONE_ID is set. Hydrate locally via:
  *   eval "$(GOOGLE_APPLICATION_CREDENTIALS=mcp-gsc-main/service_account_credentials.json \
@@ -54,7 +64,12 @@
  * warnStaleEdge annotation on failure.
  *
  * Exit: 0 = purged (or no-op when CF_API_TOKEN absent — non-fatal so a
- * missing secret never fails the deploy), 1 = API/auth error or >30 --files.
+ * missing secret never fails the deploy), 1 = API/auth error, or arguments
+ * this script cannot act on: an unknown flag, more than one list source, a
+ * list that is unreadable or empty, a target that is not a clean http(s) URL.
+ * Those are checked BEFORE the token no-op,
+ * and an unknown flag in particular must never fall through to the default —
+ * the default is the purge of the whole zone.
  *
  * SETTLE DELAY (purge_everything path only): acknowledged instantly by the
  * API but takes up to ~30s to actually clear every edge PoP globally
@@ -70,6 +85,7 @@
  * deploy still fails after the settle — this only smooths over the purge's
  * own propagation window.
  */
+import { readFileSync } from 'node:fs';
 import { resolveZoneId as resolveZoneIdShared } from './lib/cf-analytics.mjs';
 import { purgeBodiesForUrls } from './lib/cf-purge-variants.mjs';
 import { parsePositiveNum } from './lib/parse-positive-num.mjs';
@@ -91,22 +107,91 @@ const REST_BASE = 'https://api.cloudflare.com/client/v4';
 const ZONE_NAME = process.env.CF_ZONE_NAME || 'frontaliereticino.ch';
 const token = process.env.CF_API_TOKEN;
 
-const filesArg = process.argv.find(arg => arg.startsWith('--files='));
-const targetFiles = filesArg
-  ? filesArg
-      .slice('--files='.length)
-      .split(',')
-      .map(url => url.trim())
-      .filter(Boolean)
-  : null;
+const listSources = process.argv
+  .slice(2)
+  .filter(arg => arg.startsWith('--files=') || arg.startsWith('--files-from='));
+const filesArg = listSources.find(arg => arg.startsWith('--files='));
+const filesFromArg = listSources.find(arg => arg.startsWith('--files-from='));
 
-// `--files=` presente ma vuoto non è un purge riuscito: costruirebbe zero
+// Un argomento che lo script non conosce non è «nessun argomento». Senza
+// questo controllo un refuso nel nome del flag (`--file-from=`) cadrebbe nel
+// ramo di default e svuoterebbe la cache dell'intera zona, con uscita 0.
+const unknownArgs = process.argv
+  .slice(2)
+  .filter(arg => !arg.startsWith('--files=') && !arg.startsWith('--files-from='));
+if (unknownArgs.length) {
+  console.error(
+    `❌ Argomento non riconosciuto: ${unknownArgs.join(' ')}. Ammessi: --files=<url,...>, --files-from=<percorso>, oppure nessuno (purge dell'intera zona).`,
+  );
+  process.exit(1);
+}
+
+// Più sorgenti per lo stesso elenco non hanno una risposta giusta: unirle
+// nasconderebbe un refuso del chiamante, sceglierne una lascerebbe le altre
+// senza purge e senza un errore. Vale anche per lo stesso flag dato due volte:
+// leggere solo il primo è un purge parziale con uscita 0.
+if (listSources.length > 1) {
+  console.error(
+    `❌ ${listSources.length} sorgenti per l'elenco (${listSources.map(arg => arg.slice(0, arg.indexOf('=') + 1)).join(' ')}): l'elenco ha una sola sorgente.`,
+  );
+  process.exit(1);
+}
+
+// Un file che non si legge non è un elenco vuoto: il chiamante ha già
+// pubblicato e conta su questo purge, quindi l'errore deve dire quale file.
+function readUrlList(listPath) {
+  if (!listPath) {
+    console.error('❌ --files-from= richiede il percorso di un file.');
+    process.exit(1);
+  }
+  try {
+    // Ogni fine riga, anche il solo CR: un file che lo usa letto come una
+    // riga sola darebbe a Cloudflare un bersaglio unico e inesistente.
+    return readFileSync(listPath, 'utf8').split(/\r\n|\r|\n/u);
+  } catch (err) {
+    console.error(`❌ --files-from=${listPath}: elenco non leggibile (${err.code || err.message}).`);
+    process.exit(1);
+  }
+}
+
+const listedUrls = filesFromArg
+  ? readUrlList(filesFromArg.slice('--files-from='.length))
+  : filesArg
+    ? filesArg.slice('--files='.length).split(',')
+    : null;
+const targetFiles = listedUrls ? listedUrls.map(url => url.trim()).filter(Boolean) : null;
+
+// Un elenco presente ma vuoto non è un purge riuscito: costruirebbe zero
 // batch e uscirebbe 0 senza inviare alcuna richiesta a Cloudflare. Rifiutalo
 // prima del no-op intenzionale per token assente, così il chiamante vede il
 // refuso anche in una run senza credenziali.
 if (targetFiles && !targetFiles.length) {
-  console.error('❌ --files= richiede almeno un URL.');
+  console.error(`❌ ${filesFromArg ? '--files-from=' : '--files='} richiede almeno un URL.`);
   process.exit(1);
+}
+
+// Un bersaglio che non è un URL http(s) pulito non fa fallire Cloudflare: la
+// risposta è `success` e dalla cache non esce niente. Una riga con uno spazio
+// in mezzo, un file che non è UTF-8 (U+FFFD dopo la decodifica), un pezzo di
+// URL tagliato da una virgola: tutti purge riusciti sulla carta. Si fermano
+// qui, con la posizione del primo.
+function isPurgeableUrl(value) {
+  if (/[\s\u0000-\u001f\u007f\ufffd]/u.test(value)) return false;
+  try {
+    return ['http:', 'https:'].includes(new URL(value).protocol);
+  } catch {
+    return false;
+  }
+}
+if (targetFiles) {
+  const firstInvalid = targetFiles.findIndex(value => !isPurgeableUrl(value));
+  if (firstInvalid !== -1) {
+    const invalidCount = targetFiles.filter(value => !isPurgeableUrl(value)).length;
+    console.error(
+      `❌ ${invalidCount} bersagli su ${targetFiles.length} non sono URL http(s) validi; il primo è alla posizione ${firstInvalid + 1}: ${JSON.stringify(targetFiles[firstInvalid].slice(0, 120))}.`,
+    );
+    process.exit(1);
+  }
 }
 
 /**

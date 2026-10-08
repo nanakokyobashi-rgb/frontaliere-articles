@@ -867,7 +867,12 @@ jobs:
             }
             urls+=("https://cdn.frontaliereticino.ch/$key")
           done < "$manifest_file"
-          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+          # From a file, not from an argument (issue #2527): the list grows with
+          # the cover queue, and one argv string over 128 KiB does not start
+          # the process at all ("Argument list too long").
+          purge_list="$RUNNER_TEMP/publish-api-blog-cover-purge-urls.txt"
+          printf '%s\n' "${urls[@]}" > "$purge_list"
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$purge_list"
 
           node --input-type=module - "$queue_file" "$manifest_file" "$RUNNER_TEMP/publish-api-blog-cover-queue-cleared.json" <<'NODE'
           import fs from 'node:fs';
@@ -1007,7 +1012,13 @@ jobs:
             # justification as the fast-publish purge steps (issue #268): a
             # re-invocation just re-issues purge_cache for the same URLs,
             # which is a no-op for anything already purged.
-            bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+            #
+            # From a file, not from an argument (issue #2527): the list grows
+            # with the number of sections, and one argv string over 128 KiB
+            # does not start the process at all.
+            purge_list="$RUNNER_TEMP/publish-api-edge-purge-urls.txt"
+            printf '%s\n' "${urls[@]}" > "$purge_list"
+            bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$purge_list"
           fi
 
       # La release edge delle sezioni cantonali (piano «sezioni articoli per
