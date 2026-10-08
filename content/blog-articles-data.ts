@@ -43167,6 +43167,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'ferrovia-albate-molteno-elettrificazione',
+ category: 'novita',
+ date: '2026-10-08T11:59:50.384Z',
+ image: '/images/blog/article-ferrovia-albate-molteno-elettrificazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

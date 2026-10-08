@@ -12806,6 +12806,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-08.imageAlt': 'Les chiffres du jour pour les frontaliers – 8 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-10-08.seoDescription': 'Bulletin du frontalier du 8 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-08.ogDescription': 'Les chiffres du 8 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Électrification Albate-Molteno : travaux à partir de décembre 2024',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## En bref - Chantiers pour l\'électrification lancés à la mi-décembre - Como-Lecco suspendue au moins jusqu\'en juin 2029 - Albate-Molteno : de 24 à 34 trains par jour',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Train électrique sur la ligne Albate-Molteno vicino a Lugano con le Alpi sullo sfondo',
 };
 
 export default blogMetaFr;

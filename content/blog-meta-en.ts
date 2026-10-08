@@ -12804,6 +12804,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-08.imageAlt': 'The day\'s numbers for cross-border commuters – October 8, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-08.seoDescription': 'Cross-border brief, October 8, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-08.ogDescription': 'The numbers for October 8, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Albate-Molteno electrification: work starting in December 2024',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## TL;DR - Electrification works to start in mid-December - Como-Lecco suspended at least until June 2029 - Albate-Molteno: from 24 to 34 trains per day',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Electric train on the Albate-Molteno line near Lugano with the Alps in the background',
 };
 
 export default blogMetaEn;

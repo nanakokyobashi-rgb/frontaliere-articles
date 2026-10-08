@@ -12803,6 +12803,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-08.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 8. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-08.seoDescription': 'Grenzgänger-Bulletin vom 8. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-08.ogDescription': 'Die Zahlen vom 8. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Elektrifizierung Albate-Molteno: Bauarbeiten ab Dezember 2024',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## Auf einen Blick - Bauarbeiten für die Elektrifizierung beginnen Mitte Dezember - Como-Lecco mindestens bis Juni 2029 unterbrochen - Albate-Molteno: von 24 auf 34 Züge pro Tag',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Elektrischer Zug auf der Albate-Molteno-Strecke nahe Lugano mit den Alpen im Hintergrund',
 };
 
 export default blogMetaDe;

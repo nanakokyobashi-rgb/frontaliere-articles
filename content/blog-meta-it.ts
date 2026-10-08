@@ -12805,6 +12805,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-08.imageAlt': 'I numeri del giorno per i frontalieri – 8 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-10-08.seoDescription': 'Bollettino frontalieri del 8 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-10-08.ogDescription': 'I numeri del 8 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Treno elettrico sulla linea Albate-Molteno vicino a Lugano con le Alpi sullo sfondo',
 };
 
 export default blogMetaIt;
