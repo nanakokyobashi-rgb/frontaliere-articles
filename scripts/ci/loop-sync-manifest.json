@@ -4538,9 +4538,9 @@
       "path": "scripts/ci/fetch-pr-files.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1248386d22cb4319",
-        "corpus": "1248386d22cb4319",
-        "alignedAt": "2026-09-21"
+        "site": "c5c2aa2a8e077fa5",
+        "corpus": "c5c2aa2a8e077fa5",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -4629,9 +4629,9 @@
       "path": "scripts/ci/reconcile-conflict-handoffs.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9d5244fff5f7c815",
-        "corpus": "9d5244fff5f7c815",
-        "alignedAt": "2026-10-04"
+        "site": "231622670e44d4db",
+        "corpus": "231622670e44d4db",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -4928,9 +4928,9 @@
       "path": "scripts/ci/prefetch-review-diff.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2e4eddd56e011cc4",
-        "corpus": "2e4eddd56e011cc4",
-        "alignedAt": "2026-09-28"
+        "site": "6dac8d15fc643639",
+        "corpus": "6dac8d15fc643639",
+        "alignedAt": "2026-10-08"
       }
     },
     {
