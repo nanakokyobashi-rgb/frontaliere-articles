@@ -99903,16 +99903,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita': {
     title: 'IA e semiconduttori trainano commercio, OMC rivede crescita',
-    description: '## In breve - Semiconduttori e server: commercio in crescita del 67% - L\'IA ha alimentato il 47% della crescita mondiale - Stima OMC: dall\'1,9% al 3,9%',
+    description: 'Semiconduttori e server: commercio in crescita del 67%',
     keywords: 'frontalieri, ticino, svizzera, italia, semiconduttori, trainano, commercio, rivede',
     ogTitle: 'IA e semiconduttori trainano commercio, OMC rivede crescita',
-    ogDescription: '## In breve - Semiconduttori e server: commercio in crescita del 67% - L\'IA ha alimentato il 47% della crescita mondiale - Stima OMC: dall\'1,9% al 3,9%',
+    ogDescription: 'Semiconduttori e server: commercio in crescita del 67%',
     canonicalPath: '/articoli-svizzera/ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "IA e semiconduttori trainano commercio, OMC rivede crescita",
-      "description": "## In breve - Semiconduttori e server: commercio in crescita del 67% - L'IA ha alimentato il 47% della crescita mondiale - Stima OMC: dall'1,9% al 3,9%",
+      "description": "Semiconduttori e server: commercio in crescita del 67%",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

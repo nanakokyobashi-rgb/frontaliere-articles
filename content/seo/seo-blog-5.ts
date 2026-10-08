@@ -103311,16 +103311,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-scambio-portieri-lugano-ginevra': {
     title: 'Scambio di portieri: mayer a Lugano, van pottelberghe a Ginevra',
-    description: '## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite',
+    description: 'Mayer arriva a Lugano, Van Pottelberghe va a Ginevra',
     keywords: 'frontalieri, ticino, svizzera, italia, scambio, portieri, mayer, lugano',
     ogTitle: 'Scambio di portieri: Mayer a Lugano, Van Pottelberghe a Ginevra',
-    ogDescription: '## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite',
+    ogDescription: 'Mayer arriva a Lugano, Van Pottelberghe va a Ginevra',
     canonicalPath: '/articoli-frontaliere/scambio-portieri-lugano-ginevra/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Scambio di portieri: mayer a Lugano, van pottelberghe a Ginevra",
-      "description": "## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite",
+      "description": "Mayer arriva a Lugano, Van Pottelberghe va a Ginevra",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
