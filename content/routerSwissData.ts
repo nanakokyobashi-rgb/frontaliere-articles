@@ -2666,6 +2666,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tf-nega-sconto-cassa-malati-padre-affidamento-alternato': { it: 'tf-nega-sconto-cassa-malati-padre-affidamento-alternato', en: 'tf-denies-health-insurance-discount-to-father-with-alternating-custody', de: 'bger-verweigert-krankenkassenabzug-bei-alternierender-obhut-des-vaters', fr: 'tf-deduction-des-primes-maladie-refusee-en-garde-alternee' },
  'ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita': { it: 'ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita', en: 'ai-and-semiconductors-drive-trade-wto-revises-growth', de: 'ki-und-halbleiter-treiben-den-handel-an-wto-revidiert-wachstumsschatzung', fr: 'l-ia-et-les-semi-conducteurs-tirent-le-commerce-l-omc-revise-sa-croissance' },
  'fibra-ottica-limiti-2028': { it: 'fibra-ottica-limiti-2028', en: 'swisscom-fiber-limits-2028', de: 'swisscom-glasfaser-limits-2028', fr: 'limites-fibre-swisscom-2028' },
+ 'frankencoin-kraken-zchf': { it: 'frankencoin-kraken-zchf', en: 'frankencoin-kraken-chf', de: 'frankencoin-kraken-schweizer-franken', fr: 'frankencoin-kraken-franc-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

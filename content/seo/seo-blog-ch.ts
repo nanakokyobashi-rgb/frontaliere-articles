@@ -99979,6 +99979,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frankencoin-kraken-zchf': {
+    title: 'Frankencoin, la stablecoin in CHF arriva su Kraken',
+    description: 'Kraken aggiunge Frankencoin (ZCHF) al trading La stablecoin è ancorata al franco svizzero L\'annuncio arriva da un\'associazione con sede a Zugo Frankencoin',
+    keywords: 'frontalieri, ticino, svizzera, italia, frankencoin, stablecoin, arriva, kraken',
+    ogTitle: 'Frankencoin in CHF entra su Kraken',
+    ogDescription: 'Kraken aggiunge Frankencoin (ZCHF) al trading La stablecoin è ancorata al franco svizzero L\'annuncio arriva da un\'associazione con sede a Zugo Frankencoin',
+    canonicalPath: '/articoli-svizzera/frankencoin-kraken-zchf/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frankencoin, la stablecoin in CHF arriva su Kraken",
+      "description": "Kraken aggiunge Frankencoin (ZCHF) al trading La stablecoin è ancorata al franco svizzero L'annuncio arriva da un'associazione con sede a Zugo Frankencoin",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frankencoin-kraken-zchf.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama svizzero con un richiamo visivo alla finanza digitale in franchi"
+      },
+      "datePublished": "2026-10-08T17:03:40+00:00",
+      "dateModified": "2026-10-08T17:03:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/frankencoin-kraken-zchf/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

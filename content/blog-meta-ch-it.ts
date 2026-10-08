@@ -7931,6 +7931,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.fibra-ottica-limiti-2028.title': 'Fibra ottica: prezzi Swisscom fermi al 2028',
     'blog.article.fibra-ottica-limiti-2028.excerpt': 'Prezzi Swisscom invariati fino a fine settembre 2028 Proroga di due anni dei limiti tariffari Massimo 24 franchi al mese, IVA esclusa Nessun aumento per le voci',
     'blog.article.fibra-ottica-limiti-2028.imageAlt': 'Strada svizzera con armadio per la rete in fibra ottica.',
+    'blog.article.frankencoin-kraken-zchf.title': 'Frankencoin, la stablecoin in CHF arriva su Kraken',
+    'blog.article.frankencoin-kraken-zchf.excerpt': 'Kraken aggiunge Frankencoin (ZCHF) al trading La stablecoin è ancorata al franco svizzero L\'annuncio arriva da un\'associazione con sede a Zugo Frankencoin',
+    'blog.article.frankencoin-kraken-zchf.imageAlt': 'Panorama svizzero con un richiamo visivo alla finanza digitale in franchi',
 };
 
 export default blogMetaChIt;

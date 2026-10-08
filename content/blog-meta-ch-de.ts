@@ -7931,6 +7931,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fibra-ottica-limiti-2028.title': 'Glasfaser: Swisscom-Preise bis 2028 unverändert',
     'blog.article.fibra-ottica-limiti-2028.excerpt': 'Swisscom-Preise bis Ende September 2028 unverändert Verlängerung der Tarifobergrenzen um zwei Jahre Maximal 24 Franken pro Monat, ohne Mehrwertsteuer Keine Erhöhung bei den Positionen',
     'blog.article.fibra-ottica-limiti-2028.imageAlt': 'Glasfaser-Verteilerkasten an einer Schweizer Strasse.',
+    'blog.article.frankencoin-kraken-zchf.title': 'Frankencoin, der Stablecoin in CHF, kommt auf Kraken',
+    'blog.article.frankencoin-kraken-zchf.excerpt': 'Kraken nimmt Frankencoin (ZCHF) in den Handel auf Der Stablecoin ist an den Schweizer Franken gekoppelt Die Ankündigung stammt von einer Vereinigung mit Sitz in Zug Frankencoin',
+    'blog.article.frankencoin-kraken-zchf.imageAlt': 'Schweizer Panorama mit einem visuellen Hinweis auf digitale Finanzen in Franken',
 };
 
 export default blogMetaChDe;
