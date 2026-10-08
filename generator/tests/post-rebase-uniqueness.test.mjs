@@ -1,13 +1,14 @@
 /**
- * scripts/ci/check-post-rebase-uniqueness.mjs — il ricontrollo di id e fonte
+ * scripts/ci/check-post-rebase-uniqueness.mjs — il ricontrollo di id, fonte e contenuto
  * DOPO il rebase e prima del push (D18).
  *
- * Le due invarianti — id unico in tutte le sezioni, una fonte = una sezione —
- * il generatore le verifica sul tree di inizio run, quindi reggono solo con
- * scrittori seriali. Questi test costruiscono lo stato post-rebase che il
- * rebase produce quando due scrittori partono dalla stessa base, e chiedono
- * allo script di accorgersene. Le sezioni sono quelle del core: niente qui
- * elenca «frontaliere» e «svizzera» come lista da controllare.
+ * Le tre invarianti — id unico in tutte le sezioni, una fonte = una sezione e
+ * nessun contenuto quasi duplicato — il generatore le verifica sul tree di
+ * inizio run, quindi reggono solo con scrittori seriali. Questi test
+ * costruiscono lo stato post-rebase che il rebase produce quando due
+ * scrittori partono dalla stessa base, e chiedono allo script di accorgersene.
+ * Le sezioni sono quelle del core: niente qui elenca «frontaliere» e
+ * «svizzera» come lista da controllare.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
@@ -26,13 +27,14 @@ import {
   OK_MARKER,
   VIOLATION_MARKER,
   findPostRebaseViolations,
+  main as checkPostRebaseMain,
   registryIdsOf,
   sectionSurfaces,
+  snapshotSections,
   slugIdsOf,
 } from '../../scripts/ci/check-post-rebase-uniqueness.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const SCRIPT = path.resolve(HERE, '../../scripts/ci/check-post-rebase-uniqueness.mjs');
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
 
 const GIT_ENV = {
@@ -65,11 +67,25 @@ function ledgerSrc(map) {
   return `${JSON.stringify(map, null, 2)}\n`;
 }
 
+function tsString(value) {
+  return String(value).replaceAll('\\', '\\\\').replaceAll("'", "\\'");
+}
+
+function metaSrc(ids, articles = {}) {
+  const entries = ids.map((id) => {
+    const article = articles[id] ?? { title: id, excerpt: '' };
+    return `  'blog.article.${id}.title': '${tsString(article.title)}',\n`
+      + `  'blog.article.${id}.excerpt': '${tsString(article.excerpt ?? '')}',\n`;
+  }).join('');
+  return `export const META = {\n${entries}};\n`;
+}
+
 /** Stato di una sezione: ids (registro + slug) e ledger URL→voce. */
-function sectionFiles(surface, { ids = [], ledger = {} } = {}) {
+function sectionFiles(surface, { ids = [], ledger = {}, articles = {} } = {}) {
   return {
     [surface.registryFile]: registrySrc(ids),
     [surface.slugDataFile]: slugSrc(ids),
+    [surface.metaFile]: metaSrc(ids, articles),
     [surface.sourceLedger]: ledgerSrc(ledger),
   };
 }
@@ -84,6 +100,7 @@ function snapshot(stateBySection) {
       registryIds: registryIdsOf(registrySrc(st.registryIds ?? st.ids ?? [])),
       ledger: st.ledger ?? {},
     };
+    if (st.articles) out[s.section].articles = st.articles;
   }
   return out;
 }
@@ -99,6 +116,7 @@ test('le superfici controllate sono TUTTE le sezioni del core, ognuna col suo le
   for (const s of SURFACES) {
     assert.ok(s.registryFile.startsWith('content/'), `${s.section}: registro fuori dal corpus (${s.registryFile})`);
     assert.ok(s.slugDataFile.startsWith('content/'), `${s.section}: mappa slug fuori dal corpus (${s.slugDataFile})`);
+    assert.ok(s.metaFile.startsWith('content/'), `${s.section}: meta IT fuori dal corpus (${s.metaFile})`);
     assert.match(s.sourceLedger, /\.json$/);
   }
   assert.equal(new Set(SURFACES.map((s) => s.sourceLedger)).size, SURFACES.length, 'un ledger per sezione');
@@ -111,6 +129,56 @@ test('una sezione nel core senza ledger dichiarato e\' un errore, non una sezion
     slugDataFile: 'packages/articles/content/cantons/canton-xx/slugs.ts',
   }];
   assert.throws(() => sectionSurfaces(core), /canton-xx.*ledger URL→id/);
+});
+
+test('il meta IT mancante con ID su registro/slug e\' un errore fail-closed', () => {
+  const files = sectionFiles(FIRST, { ids: ['esistente'] });
+  const readAt = (file) => file === FIRST.metaFile ? null : files[file] ?? null;
+  assert.throws(
+    () => snapshotSections([FIRST], readAt, 'against'),
+    /meta IT assente o incoerente.*esistente/,
+  );
+});
+
+test('un record meta con formato non riconosciuto non puo\' ridurre il contro-corpus', () => {
+  const files = sectionFiles(FIRST, { ids: ['esistente'] });
+  files[FIRST.metaFile] = "export const META = {\n  'blog.article.esistente.title': \"Titolo non letto\",\n};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => files[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*esistente/,
+  );
+});
+
+test('un titolo senza il suo excerpt viene rifiutato in modo fail-closed', () => {
+  const files = sectionFiles(FIRST, { ids: ['esistente'] });
+  files[FIRST.metaFile] = "export const META = {\n  'blog.article.esistente.title': 'Titolo letto',\n};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => files[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*mancano excerpt per esistente/,
+  );
+});
+
+test('un excerpt orfano o duplicato non puo\' ridurre il contro-corpus', () => {
+  const orphanFiles = sectionFiles(FIRST, { ids: ['esistente'] });
+  orphanFiles[FIRST.metaFile] = "export const META = {\n"
+    + "  'blog.article.esistente.title': 'Titolo letto',\n"
+    + "  'blog.article.orfano.excerpt': 'Estratto orfano',\n"
+    + "};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => orphanFiles[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*excerpt orfani.*orfano/,
+  );
+
+  const duplicateFiles = sectionFiles(FIRST, { ids: ['esistente'] });
+  duplicateFiles[FIRST.metaFile] = "export const META = {\n"
+    + "  'blog.article.esistente.title': 'Titolo letto',\n"
+    + "  'blog.article.esistente.excerpt': 'Primo estratto',\n"
+    + "  'blog.article.esistente.excerpt': 'Secondo estratto',\n"
+    + "};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => duplicateFiles[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*excerpt duplicati.*esistente/,
+  );
 });
 
 // ── La logica, sugli snapshot ──────────────────────────────────────────────
@@ -130,6 +198,64 @@ test('ok: id nuovo e fonte nuova, nessuna collisione nello stato post-rebase', (
   assert.deepEqual(r.violations, []);
   assert.deepEqual(r.newIds, [{ section: FIRST.section, id: 'nuovo' }]);
   assert.equal(r.newSourceUrls.length, 1);
+});
+
+test('titolo quasi identico introdotto dal run viene bloccato dopo il rebase', () => {
+  const old = {
+    id: 'pedemontana-falso-pedaggio-sms',
+    title: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte che non chiede pagamenti del pedaggio via SMS o email.',
+  };
+  const candidate = {
+    id: 'pedemontana-truffa-sms-frontalieri',
+    title: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte: nessun pagamento del pedaggio viene richiesto via SMS o email.',
+  };
+  const producedBase = snapshot({ [FIRST.section]: { ids: [] } });
+  const produced = snapshot({ [FIRST.section]: { ids: [candidate.id], articles: { [candidate.id]: candidate } } });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: [candidate.id, old.id],
+      articles: { [candidate.id]: candidate, [old.id]: old },
+    },
+  });
+  const { violations, contentChecks } = findPostRebaseViolations({ producedBase, produced, against });
+  assert.equal(violations.length, 1);
+  assert.deepEqual(violations[0], {
+    kind: 'duplicate-content',
+    section: FIRST.section,
+    id: candidate.id,
+    otherId: old.id,
+    signals: violations[0].signals,
+  });
+  assert.match(violations[0].signals, /Titolo:/);
+  assert.equal(contentChecks, 1);
+});
+
+test('una seconda coppia con wording diverso ma stesso fatto viene bloccata', () => {
+  const old = {
+    id: 'aggressione-van-villa-olmo',
+    title: 'Como, turisti derubati e aggrediti nel van: arrestato 21enne',
+    excerpt: 'A Como due turisti sono stati derubati e aggrediti nel loro van; arrestato un 21enne.',
+  };
+  const candidate = {
+    id: 'furto-van-cernobbio-21enne',
+    title: 'Como, turisti derubati nel van: arrestato un 21enne',
+    excerpt: 'Turisti derubati nel van a Como: per il furto è stato arrestato un 21enne.',
+  };
+  const producedBase = snapshot({ [FIRST.section]: { ids: [] } });
+  const produced = snapshot({ [FIRST.section]: { ids: [candidate.id], articles: { [candidate.id]: candidate } } });
+  const against = snapshot({
+    [FIRST.section]: {
+      ids: [candidate.id, old.id],
+      articles: { [candidate.id]: candidate, [old.id]: old },
+    },
+  });
+  const { violations } = findPostRebaseViolations({ producedBase, produced, against });
+  assert.equal(violations.length, 1);
+  assert.equal(violations[0].kind, 'duplicate-content');
+  assert.equal(violations[0].id, candidate.id);
+  assert.equal(violations[0].otherId, old.id);
 });
 
 test('id duplicato: lo stesso id appena registrato da un altro scrittore in un\'altra sezione', () => {
@@ -248,12 +374,13 @@ function commit(root, files, message) {
 }
 
 function runScript(cwd, ...args) {
-  try {
-    const out = execFileSync('node', [SCRIPT, ...args], { cwd, env: GIT_ENV, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
-    return { code: 0, out };
-  } catch (err) {
-    return { code: err.status ?? 1, out: `${err.stdout ?? ''}${err.stderr ?? ''}` };
-  }
+  const output = [];
+  const code = checkPostRebaseMain(args, {
+    cwd,
+    log: (line) => output.push(String(line)),
+    error: (line) => output.push(String(line)),
+  });
+  return { code, out: output.join('\n') };
 }
 
 /**
@@ -280,6 +407,80 @@ test('CLI ok: exit 0 e marcatore OK quando lo stato post-rebase e\' pulito', () 
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 0, out);
     assert.match(out, new RegExp(`${OK_MARKER} .*new_ids=${FIRST.section}/nuovo`));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('CLI titolo quasi identico: exit 1 e violazione di contenuto dopo il rebase', () => {
+  const old = {
+    id: 'pedemontana-falso-pedaggio-sms',
+    title: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte che non chiede pagamenti del pedaggio via SMS o email.',
+  };
+  const candidate = {
+    id: 'pedemontana-truffa-sms-frontalieri',
+    title: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
+    excerpt: 'Pedemontana avverte: nessun pagamento del pedaggio viene richiesto via SMS o email.',
+  };
+  const mine = sectionFiles(FIRST, {
+    ids: [candidate.id],
+    articles: { [candidate.id]: candidate },
+    ledger: { 'https://www.tio.ch/ticino/attualita/1999998/candidato': entry(candidate.id) },
+  });
+  const upstream = sectionFiles(FIRST, {
+    ids: [old.id],
+    articles: { [old.id]: old },
+    ledger: { 'https://www.tio.ch/ticino/attualita/1999997/esistente': entry(old.id) },
+  });
+  const rebased = sectionFiles(FIRST, {
+    ids: [candidate.id, old.id],
+    articles: { [candidate.id]: candidate, [old.id]: old },
+    ledger: {
+      'https://www.tio.ch/ticino/attualita/1999998/candidato': entry(candidate.id),
+      'https://www.tio.ch/ticino/attualita/1999997/esistente': entry(old.id),
+    },
+  });
+  const w = world({ upstream, mine, rebased });
+  try {
+    const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+    assert.equal(code, 1, out);
+    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=duplicate-content section=${FIRST.section} id=${candidate.id} otherId=${old.id}`));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('CLI meta IT incompleto: exit 2 con POST_REBASE_UNIQUENESS_ERROR, mai un falso ok', () => {
+  const old = 'articolo-esistente';
+  const candidate = 'articolo-nuovo';
+  const candidateArticle = {
+    id: candidate,
+    title: 'Titolo nuovo',
+    excerpt: 'Estratto nuovo',
+  };
+  const mine = sectionFiles(FIRST, {
+    ids: [candidate],
+    articles: { [candidate]: candidateArticle },
+  });
+  // L'upstream porta un record, ma il suo meta IT resta vuoto nel tree
+  // rigiocato: e' proprio il contro-corpus parziale che deve fermare il gate.
+  const upstream = {
+    [FIRST.registryFile]: registrySrc([old]),
+    [FIRST.slugDataFile]: slugSrc([old]),
+  };
+  const rebased = {
+    [FIRST.registryFile]: registrySrc([candidate, old]),
+    [FIRST.slugDataFile]: slugSrc([candidate, old]),
+    [FIRST.metaFile]: metaSrc([candidate], { [candidate]: candidateArticle }),
+  };
+  const w = world({ upstream, mine, rebased });
+  try {
+    const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+    assert.equal(code, 2, out);
+    assert.match(out, new RegExp(`${ERROR_MARKER}: .*meta IT assente o incoerente.*${old}`));
+    assert.doesNotMatch(out, new RegExp(OK_MARKER));
+    assert.doesNotMatch(out, new RegExp(VIOLATION_MARKER));
   } finally {
     w.cleanup();
   }

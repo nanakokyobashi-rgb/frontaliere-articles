@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
  * check-post-rebase-uniqueness.mjs — dopo il rebase e PRIMA del push, ricontrolla
- * che l'articolo appena generato resti unico nel corpus su cui sta per atterrare.
+ * che l'articolo appena generato resti unico nel corpus su cui sta per atterrare
+ * per id, fonte e contenuto.
  *
  * Uso (dalla radice del repo, a rebase concluso):
  *   node scripts/ci/check-post-rebase-uniqueness.mjs --produced <sha> [--against <rev>]
@@ -27,8 +28,12 @@
  *   2. una fonte produce un articolo in UNA sezione sola
  *      (`loadAllSectionSourceUrls` + `findCrossSectionSourceDuplicate`, #251):
  *      vince chi la registra per prima.
+ *   3. il titolo e l'excerpt del nuovo articolo non duplicano un articolo che
+ *      un altro writer ha pubblicato nel frattempo. Qui viene richiamato il
+ *      detector multi-segnale di `create-article.mjs`, non una copia delle sue
+ *      soglie.
  *
- * Entrambe reggono solo in modo seriale. Con piu' scrittori paralleli (le
+ * Tutte reggono solo in modo seriale. Con piu' scrittori paralleli (le
  * sezioni cantonali, una concurrency per sezione) due run partono dalla stessa
  * base, e il rebase li fonde senza sapere niente di ne' l'uno ne' l'altro:
  * `--merge-registry` unisce due record con lo stesso id se stanno in registri
@@ -50,7 +55,8 @@
  * STESSA sezione (#281) e' risolto dal merge dei registri a favore del commit
  * rigiocato, e resta un record solo; il riuso di una fonte nella STESSA sezione
  * ha una finestra di scadenza voluta (`SOURCE_URL_TTL_DAYS`) e gli strati di
- * tema a valle.
+ * tema a valle. I contenuti gia' duplicati nella base non vengono riaperti:
+ * viene controllato solo cio' che il commit prodotto ha aggiunto.
  *
  * ── Le sezioni vengono dal core ────────────────────────────────────────────
  *
@@ -71,6 +77,8 @@ import { fileURLToPath } from 'node:url';
 import { activeCorpusCoreEntries } from '../lib/corpus-sections.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cross-section-dedup.mjs';
+import { findContentDuplicate } from '../../generator/scripts/lib/article-content-duplicate.mjs';
+import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/meta-field-regex.mjs';
 import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
 
@@ -97,8 +105,8 @@ export function registryIdsOf(src) {
  * Le superfici da leggere per ogni sezione del core.
  *
  * @param {Array<{section: string, registryFile: string, slugDataFile: string}>} [coreList]
- * @param {Record<string, {sourceLedger?: string}>} [surfaces]
- * @returns {Array<{section: string, registryFile: string, slugDataFile: string, sourceLedger: string}>}
+ * @param {Record<string, {metaFiles?: string[], sourceLedger?: string}>} [surfaces]
+ * @returns {Array<{section: string, registryFile: string, slugDataFile: string, metaFile: string, sourceLedger: string}>}
  */
 export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces = SECTION_SURFACES) {
   if (!Array.isArray(coreList) || coreList.length === 0) {
@@ -112,10 +120,18 @@ export function sectionSurfaces(coreList = activeCorpusCoreEntries(), surfaces =
         + 'senza, il dedup della fonte fra sezioni non e\' verificabile',
       );
     }
+    const metaFile = surfaces?.[core.section]?.metaFiles?.find((file) => file.endsWith('-it.ts'));
+    if (typeof metaFile !== 'string' || !metaFile) {
+      throw new Error(
+        `la sezione '${core.section}' e' nel core ma non ha il meta IT in article-surfaces.mjs (SECTIONS.${core.section}.metaFiles): `
+        + 'senza, il dedup del contenuto dopo il rebase non e\' verificabile',
+      );
+    }
     return {
       section: core.section,
       registryFile: corpusPath(core.registryFile),
       slugDataFile: corpusPath(core.slugDataFile),
+      metaFile,
       sourceLedger,
     };
   });
@@ -135,11 +151,70 @@ function parseLedger(text, label) {
   return parsed;
 }
 
+function parseArticleMeta(text, label) {
+  if (text == null) return { articles: {}, titleIds: [], excerptIds: [] };
+  const titleMatches = [...text.matchAll(metaFieldRegex('title'))];
+  const excerptMatches = [...text.matchAll(metaFieldRegex('excerpt'))];
+  const excerpts = new Map(
+    excerptMatches.map((match) => [match[1], unescapeTsValue(match[2])]),
+  );
+  const articles = {};
+  const titleIds = [];
+  for (const match of titleMatches) {
+    const id = match[1];
+    if (articles[id]) throw new Error(`${label}: id duplicato nel meta IT '${id}'`);
+    titleIds.push(id);
+    articles[id] = {
+      id,
+      title: unescapeTsValue(match[2]),
+      excerpt: excerpts.get(id) ?? '',
+    };
+  }
+  return { articles, titleIds, excerptIds: excerptMatches.map((match) => match[1]) };
+}
+
+/**
+ * Il meta IT deve descrivere esattamente gli ID gia' presenti sulle superfici
+ * che il gate usera' come riferimento. Un meta assente e' legittimo solo per
+ * una sezione senza articoli; se un parser ignora una riga non riconosciuta o
+ * il file manca mentre slug/registro hanno record, continuare significherebbe
+ * confrontare un contro-corpus troncato e lasciare passare un duplicato.
+ */
+function assertArticleMetaCoverage({ slugIds, registryIds, articles, titleIds, excerptIds }, label) {
+  const surfaceIds = new Set([...slugIds, ...registryIds]);
+  const metaIds = new Set(Object.keys(articles));
+  const missing = [...surfaceIds].filter((id) => !metaIds.has(id));
+  const extra = [...metaIds].filter((id) => !surfaceIds.has(id));
+  const excerptCounts = new Map();
+  for (const id of excerptIds) excerptCounts.set(id, (excerptCounts.get(id) ?? 0) + 1);
+  const titleIdSet = new Set(titleIds);
+  const missingExcerpts = titleIds.filter((id) => !excerptCounts.has(id));
+  const orphanExcerpts = [...excerptCounts.keys()].filter((id) => !titleIdSet.has(id));
+  const duplicateExcerpts = [...excerptCounts.entries()]
+    .filter(([, count]) => count > 1)
+    .map(([id, count]) => `${id} (${count})`);
+  if (
+    missing.length === 0
+    && extra.length === 0
+    && missingExcerpts.length === 0
+    && orphanExcerpts.length === 0
+    && duplicateExcerpts.length === 0
+  ) return;
+
+  const details = [];
+  if (missing.length) details.push(`mancano ${missing.length} ID (${missing.slice(0, 5).join(', ')})`);
+  if (extra.length) details.push(`ci sono ${extra.length} ID non presenti in slug/registro (${extra.slice(0, 5).join(', ')})`);
+  if (missingExcerpts.length) details.push(`mancano excerpt per ${missingExcerpts.slice(0, 5).join(', ')}`);
+  if (orphanExcerpts.length) details.push(`excerpt orfani (${orphanExcerpts.slice(0, 5).join(', ')})`);
+  if (duplicateExcerpts.length) details.push(`excerpt duplicati (${duplicateExcerpts.slice(0, 5).join(', ')})`);
+  throw new Error(`${label}: meta IT assente o incoerente — ${details.join('; ')}`);
+}
+
 /**
  * Lo stato di tutte le sezioni a una revisione.
  *
  * @param {(path: string) => string|null} readAt lettore del file a quella revisione; null = assente.
- * @returns {Record<string, {slugIds: string[], registryIds: string[], ledger: Record<string, unknown>}>}
+ * @returns {Record<string, {slugIds: string[], registryIds: string[], articles: Record<string, {id: string, title: string, excerpt: string}>, ledger: Record<string, unknown>}>}
  */
 export function snapshotSections(surfaces, readAt, label) {
   // `null` = il path non c'e' (sezione ancora vuota): legittimo. Un file che
@@ -154,9 +229,15 @@ export function snapshotSections(surfaces, readAt, label) {
   };
   const out = {};
   for (const s of surfaces) {
+    const slugIds = slugIdsOf(read(s.slugDataFile));
+    const registryIds = registryIdsOf(read(s.registryFile));
+    const parsedMeta = parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`);
+    const { articles } = parsedMeta;
+    assertArticleMetaCoverage({ slugIds, registryIds, ...parsedMeta }, `${label}:${s.metaFile}`);
     out[s.section] = {
-      slugIds: slugIdsOf(read(s.slugDataFile)),
-      registryIds: registryIdsOf(read(s.registryFile)),
+      slugIds,
+      registryIds,
+      articles,
       ledger: parseLedger(read(s.sourceLedger), `${label}:${s.sourceLedger}`),
     };
   }
@@ -169,14 +250,16 @@ const idsOf = (snap) => new Set([...(snap?.slugIds ?? []), ...(snap?.registryIds
  * Le violazioni di unicita' introdotte dal commit prodotto, viste sullo stato post-rebase.
  *
  * @param {{producedBase: object, produced: object, against: object}} snapshots
- *        mappe sezione → {slugIds, registryIds, ledger} da `snapshotSections`.
- * @returns {{violations: Array<object>, newIds: Array<{section: string, id: string}>, newSourceUrls: Array<{section: string, url: string, articleId: string}>}}
+ *        mappe sezione → {slugIds, registryIds, articles, ledger} da `snapshotSections`.
+ * @returns {{violations: Array<object>, newIds: Array<{section: string, id: string}>, newSourceUrls: Array<{section: string, url: string, articleId: string}>, contentChecks: number}}
  */
 export function findPostRebaseViolations({ producedBase, produced, against }) {
   const sections = Object.keys(produced);
   const violations = [];
   const newIds = [];
   const newSourceUrls = [];
+  let contentChecks = 0;
+  const againstArticles = sections.flatMap((section) => Object.values(against?.[section]?.articles ?? {}));
 
   // 1. Unicita' globale degli id.
   for (const section of sections) {
@@ -196,6 +279,30 @@ export function findPostRebaseViolations({ producedBase, produced, against }) {
       );
       if (occurrences > 1) {
         violations.push({ kind: 'duplicate-id-registry', section, id, occurrences });
+      }
+
+      // The regular generator check ran against the checkout from the start
+      // of the run. After a rebase, rerun its same multi-signal detector on
+      // the article metadata in the tree that is about to be pushed. This is
+      // the race that an ID/source-only check cannot see: two different ids
+      // can carry the same news story.
+      if (Object.prototype.hasOwnProperty.call(produced[section], 'articles')) {
+        const candidate = produced[section].articles?.[id];
+        if (!candidate || !candidate.title) {
+          violations.push({ kind: 'article-meta-missing', section, id });
+        } else {
+          contentChecks += 1;
+          const duplicate = findContentDuplicate({ id, content: { it: candidate } }, againstArticles);
+          if (duplicate) {
+            violations.push({
+              kind: 'duplicate-content',
+              section,
+              id,
+              otherId: duplicate.existing.id,
+              signals: duplicate.signals.join('|'),
+            });
+          }
+        }
       }
     }
   }
@@ -243,7 +350,7 @@ export function findPostRebaseViolations({ producedBase, produced, against }) {
     }
   }
 
-  return { violations, newIds, newSourceUrls };
+  return { violations, newIds, newSourceUrls, contentChecks };
 }
 
 export function formatViolation(v) {
@@ -252,6 +359,7 @@ export function formatViolation(v) {
   if (v.otherId) parts.push(`otherId=${v.otherId}`);
   if (v.occurrences) parts.push(`occurrences=${v.occurrences}`);
   if (v.url) parts.push(`url=${v.url}`);
+  if (v.signals) parts.push(`signals=${v.signals.replace(/\s+/g, '_')}`);
   return `${VIOLATION_MARKER} ${parts.join(' ')}`;
 }
 
@@ -329,20 +437,20 @@ export function main(argv, { cwd = process.cwd(), log = console.log, error = con
       produced: snapshotSections(surfaces, gitReader(cwd, produced), 'produced'),
       against: snapshotSections(surfaces, gitReader(cwd, against), 'against'),
     };
-    const { violations, newIds, newSourceUrls } = findPostRebaseViolations(snapshots);
+    const { violations, newIds, newSourceUrls, contentChecks } = findPostRebaseViolations(snapshots);
 
     if (violations.length) {
       for (const v of violations) error(`::error::${formatViolation(v)}`);
       error(
         `::error::${VIOLATION_MARKER}: ${violations.length} violazione/i di unicita' dopo il rebase su ${against.slice(0, 12)} — `
-        + 'il commit NON va pushato: un altro scrittore ha appena registrato lo stesso id o la stessa fonte in un\'altra sezione.',
+        + 'il commit NON va pushato: un altro scrittore ha appena registrato lo stesso id, la stessa fonte o un contenuto duplicato.',
       );
       return 1;
     }
     log(
       `${OK_MARKER} sections=${surfaces.map((s) => s.section).join(',')} `
       + `new_ids=${newIds.map((n) => `${n.section}/${n.id}`).join(',') || '-'} `
-      + `new_source_urls=${newSourceUrls.length} against=${against.slice(0, 12)}`,
+      + `new_source_urls=${newSourceUrls.length} content_checks=${contentChecks} against=${against.slice(0, 12)}`,
     );
     return 0;
   } catch (e) {
@@ -360,5 +468,8 @@ const invokedDirectly = (() => {
 })();
 
 if (invokedDirectly) {
-  process.exit(main(process.argv.slice(2)));
+  // Set the exit code after the logger has queued its marker. `process.exit()`
+  // can truncate stdout/stderr when this CI script is launched through a
+  // pipe, which would make a real violation invisible to the caller.
+  process.exitCode = main(process.argv.slice(2));
 }
