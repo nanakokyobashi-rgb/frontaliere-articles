@@ -244,6 +244,19 @@ jobs:
             exit 1
           fi
 
+      # Le pagine rese qui prendono la shell da `host/`. Il riferimento a
+      # `/assets/gtag-init-<hash>.js` ha il nome derivato dal contenuto: cambia
+      # ogni volta che il sito cambia quei byte, e l'oggetto arriva sulla CDN
+      # solo con un deploy completo del sito, ore dopo che il contratto puo'
+      # arrivare qui. Il 2026-10-07 gli emettitori veloci del sito hanno
+      # pubblicato quel riferimento prima del file: 404 su ogni articolo
+      # rirenderizzato per 2 h 40 min (sito issue 12270). Questo passo carica
+      # il file se la CDN non lo ha, non sostituisce mai un oggetto e ferma il
+      # job se non riesce a stabilirlo: scripts/ci/ensure-host-shell-assets.mjs.
+      - name: Ensure the host shell assets are on the CDN
+        if: needs.resolve.outputs.dry != 'true'
+        run: bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/ci/ensure-host-shell-assets.mjs
+
       - name: Render, validate and publish the section pages
         env:
           SECTION: ${{ matrix.target.section }}
