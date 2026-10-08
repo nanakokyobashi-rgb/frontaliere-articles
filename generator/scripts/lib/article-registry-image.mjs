@@ -112,6 +112,19 @@ function seoImageUrlLine(block) {
   };
 }
 
+function seoImageBlockRange(block) {
+  const imageStart = block.indexOf('"image"');
+  const dateStart = block.indexOf('"datePublished"', imageStart);
+  if (imageStart < 0 || dateStart < 0) return null;
+  const fieldStart = block.lastIndexOf('\n', imageStart) + 1;
+  const dateLineStart = block.lastIndexOf('\n', dateStart) + 1;
+  return {
+    start: fieldStart,
+    end: dateLineStart,
+    text: block.slice(fieldStart, dateLineStart).replace(/\n$/, ''),
+  };
+}
+
 function imagePathFromSeoValue(value) {
   const marker = String(value || '').indexOf('/images/');
   return marker >= 0 ? String(value).slice(marker) : String(value || '');
@@ -251,6 +264,7 @@ export function locateArticleSeoImage(root, articleId, { section = 'frontaliere'
     if (!image) {
       throw new Error(`SEO entry for article ${articleId} has no structuredData image URL in ${relativePath}`);
     }
+    const imageBlock = seoImageBlockRange(block);
     matches.push({
       path: relativePath,
       source,
@@ -258,6 +272,11 @@ export function locateArticleSeoImage(root, articleId, { section = 'frontaliere'
       end,
       block,
       ...image,
+      ...(imageBlock ? {
+        imageBlock: imageBlock.text,
+        imageBlockStart: imageBlock.start,
+        imageBlockEnd: imageBlock.end,
+      } : {}),
       previousImage: imagePathFromSeoValue(image.value),
     });
   }
@@ -289,6 +308,35 @@ export function updateArticleImageInSeo(root, articleId, imageUrl, options = {})
     changed: true,
     previousImage: located.previousImage,
     nextImage: imageUrl,
+    nextSource,
+  };
+}
+
+/** Replace the complete structured-data ImageObject in an existing SEO entry. */
+export function updateArticleSeoImageBlock(root, articleId, imageBlock, options = {}) {
+  if (typeof imageBlock !== 'string' || imageBlock.trim() === '') {
+    throw new TypeError('updateArticleSeoImageBlock: imageBlock is required');
+  }
+  const located = locateArticleSeoImage(root, articleId, options);
+  if (located.imageBlockStart === undefined || located.imageBlockEnd === undefined) {
+    throw new Error(`SEO entry for article ${articleId} has no complete image block before datePublished`);
+  }
+  const normalizedBlock = imageBlock.replace(/\s+$/, '');
+  if (located.imageBlock === normalizedBlock) {
+    return { ...located, changed: false, nextSource: located.source };
+  }
+
+  const blockStart = located.start + located.imageBlockStart;
+  const blockEnd = located.start + located.imageBlockEnd;
+  const replacement = `${normalizedBlock}\n`;
+  const nextSource = located.source.slice(0, blockStart)
+    + replacement
+    + located.source.slice(blockEnd);
+  writeTextAtomic(root, located.path, nextSource);
+  return {
+    ...located,
+    changed: true,
+    imageBlock: normalizedBlock,
     nextSource,
   };
 }
