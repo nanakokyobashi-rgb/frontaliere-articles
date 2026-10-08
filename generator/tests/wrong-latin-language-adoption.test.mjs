@@ -96,32 +96,72 @@ test('#800 — vale anche per DE e FR, e anche dalla radice del payload', () => 
   }
 });
 
-test('#800 — il campo adottato da `content[locale]` NON viene rigiudicato', () => {
-  // Stesso testo inglese, ma dichiarato dal modello nella lingua chiesta. Il
-  // controllo nuovo tace apposta: li' non c'e' l'adozione silenziosa che e' la
-  // causa, e rigiudicare aggiungerebbe solo rischio di falso positivo.
+test('#2509 — un title EN in `content.it` con corpo italiano viene rigettato', () => {
+  // Questo riproduce l'incidente: il modello dichiara la forma `content.it`,
+  // ma il title resta quello inglese di partenza mentre il corpo e' italiano.
+  // Prima di #2509 l'etichetta locale bastava a saltare il rilevatore; il
+  // campo ora viene rigiudicato e finisce in missing, quindi callLLM() applica
+  // la politica esistente: rigenera e non scrive il payload.
+  const parsed = {
+    content: {
+      it: {
+        title: 'Lucerna fans in Lugano: road closures, traffic delays',
+        excerpt: EXCERPT_IT,
+        body1: 'La partita porta molti tifosi a Lugano e richiede attenzione alla viabilità.',
+        body2: 'Il traffico sulla rete stradale ticinese può aumentare nelle ore prima e dopo l’incontro.',
+        body3: 'Le autorità indicano percorsi alternativi e invitano a partire con anticipo.',
+      },
+    },
+  };
   const sources = resolveContentFieldSources(
-    { content: { it: { title: 'Cross-border workers in Switzerland: the 2026 tax rules', excerpt: EXCERPT_IT } } },
+    parsed,
     'it',
     META_ONLY_FIELDS,
   );
   assert.equal(sources.title.isLocale, true);
   assert.deepEqual(
-    wrongLanguageAdoptions(
-      { content: { it: { title: 'Cross-border workers in Switzerland: the 2026 tax rules', excerpt: EXCERPT_IT } } },
-      'it',
-      META_ONLY_FIELDS,
-    ),
-    [],
+    wrongLanguageAdoptions(parsed, 'it', META_ONLY_FIELDS),
+    ['title lingua non-it adottata da content.it (morphology)'],
   );
+  const verdetto = classifyBody2Payload({ parsed });
+  assert.equal(verdetto.verdict, 'reject');
+  assert.ok(verdetto.missing.includes('title lingua non-it adottata da content.it (morphology)'));
 });
 
-test('#800 — nessuna regressione: un title italiano in content.it resta ok', () => {
+test('#2509 — la stessa guardia vale per `content.en/de/fr`', () => {
+  const casi = [
+    ['en', 'A sufficiently long local excerpt for this language.'],
+    ['de', 'Ein ausreichend langer deutscher Auszug fuer diese Sprache.'],
+    ['fr', 'Un extrait francais suffisamment long pour cette langue.'],
+  ];
+  for (const [locale, excerpt] of casi) {
+    const verdetto = classifyBody2Payload({
+      parsed: {
+        content: {
+          [locale]: {
+            title: 'Giovani nel Ticino: fuga e mancato rientro, la posizione politica',
+            excerpt,
+          },
+        },
+      },
+      locale,
+      expectedFields: META_ONLY_FIELDS,
+    });
+
+    assert.equal(verdetto.verdict, 'reject', `${locale}: il title italiano e\u0027 passato`);
+    assert.ok(
+      verdetto.missing.includes(`title lingua it adottata da content.${locale} (morphology)`),
+      `${locale}: ${JSON.stringify(verdetto.missing)}`,
+    );
+  }
+});
+
+test('#800 — un title italiano in content.it con un prestito straniero resta ok', () => {
   const verdetto = classifyBody2Payload({
     parsed: {
       content: {
         it: {
-          title: 'Stipendio netto frontaliere 2026: come calcolarlo',
+          title: 'Smart working per frontalieri: cosa cambia nel 2026',
           excerpt: EXCERPT_IT,
         },
       },

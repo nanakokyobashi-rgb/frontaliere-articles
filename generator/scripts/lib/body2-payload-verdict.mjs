@@ -864,30 +864,35 @@ export function isTopicGateAbortVerdict(parsed, { locale = 'it', expectedFields 
 }
 
 /**
- * ── LA LINGUA DEI CAMPI ADOTTATI DA UN CANDIDATO NON-LOCALE ───────────────
+ * ── LA LINGUA DEI CAMPI META ADOTTATI DAL PAYLOAD ──────────────────────────
  *
  * `normalizeItalianContentFromPayload` cerca ogni campo attraverso i tre
  * candidati indipendentemente, e da #768 il `content` SENZA locale ha
  * priorita' sulla radice. Su `content: { it: { title: "" }, title: "…" }` quel
  * `title` locale-less e' quasi sempre quello condiviso/inglese, e riempie il
  * `title` vuoto di `content.it` senza che nulla dichiari in che lingua sia.
+ * Ma anche un contenitore etichettato puo' portare il difetto opposto: il
+ * modello puo' scrivere un titolo inglese dentro `content.it`, come in #2509.
  *
  * L'unico controllo di lingua che il verdetto aveva — `isNonItalianScript` —
  * guarda la SCRITTURA. Un titolo EN/DE/FR ha ratio 0, quindi usciva
  * `verdict:"ok"`, diventava slug e canonical e finiva live senza rebuild del
  * sito (issue #800).
  *
- * Il controllo si applica SOLO ai campi adottati da un candidato non-locale:
- * un `content[locale].title` e' il modello che risponde nella lingua chiesta,
- * ed e' gia' coperto dal resto del gate — rigiudicarlo qui aggiungerebbe
- * rischio di falso positivo senza aggiungere copertura.
+ * Il primo controllo (#979, issue #800) si applicava SOLO ai campi adottati da
+ * un candidato non-locale: `content[locale].title` era stato trattato come
+ * prova sufficiente della lingua richiesta. #2509 dimostra che l'etichetta
+ * della chiave non e' una verifica del testo: il modello puo' mettere la
+ * lingua sbagliata proprio li'. Il rilevatore resta quello misurato e
+ * conservativo; cambia solo l'insieme delle provenienze giudicate.
  *
  * E solo ai campi META (`title`, `excerpt`): sono quelli che diventano URL, e
- * sono quelli su cui la soglia del rilevatore e' stata MISURATA (5.682 titoli
- * IT pubblicati, zero falsi positivi). Un body1..3 e' prosa lunga, dove una
- * citazione estesa in lingua straniera dentro un articolo italiano e'
- * legittima: applicarci lo stesso criterio significherebbe tararlo su un
- * corpus che non e' stato misurato. Vedi `## Non implementato` della PR.
+ * sono quelli su cui la soglia del rilevatore e' stata MISURATA. Il corpus
+ * pubblicato ha zero falsi positivi legittimi sui title/excerpt di IT, EN, DE
+ * e FR; il test mantiene quel censimento contro regressioni. Un body1..3 e'
+ * prosa lunga, dove una citazione estesa in lingua straniera dentro un
+ * articolo italiano e' legittima: applicarci lo stesso criterio significherebbe
+ * tararlo su un corpus che non e' stato misurato.
  *
  * @param {object}   parsed
  * @param {string}   [locale]
@@ -903,7 +908,12 @@ export function wrongLanguageAdoptions(parsed, locale = 'it', expectedFields = R
 
   for (const field of campi) {
     const origine = sources[field];
-    if (!origine || origine.isLocale) continue;
+    if (!origine) continue;
+    // `isLocale` resta nella sorgente per spiegare quale forma ha adottato il
+    // modello, ma non e' piu' un'esenzione: #2509 dimostra che
+    // `content[locale]` puo' contenere la lingua sbagliata tanto quanto
+    // `content` o la radice. La misura anti-falso-positivo e' sul rilevatore,
+    // non sull'etichetta del contenitore.
     // Gli excerpt IT possono essere tabelle compatte di aliquote e sigle: la
     // morfologia, misurata sui titoli, li legge come testo non italiano anche
     // quando il contenuto e' legittimo. La deroga vive in `itLanguageCheck` —
