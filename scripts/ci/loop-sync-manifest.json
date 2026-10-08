@@ -2312,9 +2312,9 @@
       "path": "scripts/lib/shard-git-helpers.sh",
       "mode": "identical",
       "baseline": {
-        "site": "091c40076373adca",
-        "corpus": "091c40076373adca",
-        "alignedAt": "2026-10-07"
+        "site": "c24cdde08b656383",
+        "corpus": "c24cdde08b656383",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -3639,9 +3639,9 @@
       "sitePath": "build-plugins/shared/cdnAssetOffloadRx.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2e679602cd8788ca",
-        "corpus": "2e679602cd8788ca",
-        "alignedAt": "2026-08-09"
+        "site": "d3ba7a401aaf9e3f",
+        "corpus": "d3ba7a401aaf9e3f",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -4419,11 +4419,11 @@
         },
         {
           "path": "scripts/ci/close-recovered-failure-issues.mjs",
-          "mode": "identical"
+          "mode": "non registrato"
         },
         {
           "path": "scripts/ci/crawler-generation-observer-selector.mjs",
-          "mode": "identical"
+          "mode": "non registrato"
         },
         {
           "path": "scripts/ci/loop-sync-manifest.json",
