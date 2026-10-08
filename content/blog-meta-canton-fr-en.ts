@@ -9,7 +9,7 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.fribourg-modifica-licd.title': 'Fribourg adjusts direct taxes for bracket creep',
     'blog.article.fribourg-modifica-licd.excerpt': '',
     'blog.article.fribourg-modifica-licd.imageAlt': 'Public office in Fribourg with taxpayers filling out their tax return on a computer',
-    'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Freiburg: new cycle network plan approved',
+    'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Fribourg: new cycle network plan approved',
     'blog.article.nuovo-piano-ciclabile-friburgo.excerpt': 'RIMU approves the new cantonal cycle plan Consultation: 80 opinions and almost 270 observations Goal: more bikes in daily life by 2042 The plan covers network',
     'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'New bicycle network in Canton Fribourg for daily mobility',
     'blog.article.friburgo-legge-lingue-ufficiali.title': 'Fribourg approves the law on official languages',

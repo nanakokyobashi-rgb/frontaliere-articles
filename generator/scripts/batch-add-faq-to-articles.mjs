@@ -54,6 +54,7 @@ import {
 } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
+import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
 function parseLimitArgs(argv) {
@@ -613,6 +614,48 @@ export function extractBodyContent(fileContent, articleId) {
   return bodies.join('\n\n');
 }
 
+/**
+ * FAQ writes are a second producer, outside registerArticleFiles(). Compare
+ * the complete body projection plus the candidate FAQ with the Italian source
+ * before allowing the atomic write. A failed translation therefore cannot
+ * publish an Italian exonym as a locale fallback.
+ */
+function articleProjectionText(filePath, articleId, { excludeFaq = false } = {}) {
+  const bodyPath = resolve(filePath);
+  const bodyDir = dirname(dirname(bodyPath));
+  const bodyLocaleDir = dirname(bodyPath);
+  const metaStem = basename(bodyDir).replace(/^blog-body(?=-|$)/u, 'blog-meta');
+  const metaPath = resolve(dirname(bodyDir), `${metaStem}-${basename(bodyLocaleDir)}.ts`);
+  const bodyProjection = existsSync(bodyPath)
+    ? extractArticleProjectionText(readFileSync(bodyPath, 'utf-8'), articleId, { excludeFaq })
+    : '';
+  const metaProjection = existsSync(metaPath)
+    ? extractArticleProjectionText(readFileSync(metaPath, 'utf-8'), articleId, { excludeFaq })
+    : '';
+  return [bodyProjection, metaProjection].filter(Boolean).join('\n');
+}
+
+function passesLocalizedToponymGate({ filePath, articleId, locale, sourceFaq, targetFaq }) {
+  if (!locale || locale === 'it') return true;
+  const targetPath = resolve(filePath);
+  const targetDir = dirname(targetPath);
+  const sourcePath = resolve(targetDir, '..', 'it', basename(targetPath));
+  const sourceArticle = articleProjectionText(sourcePath, articleId, { excludeFaq: true });
+  const targetArticle = articleProjectionText(targetPath, articleId, { excludeFaq: true });
+  try {
+    assertLocalizedToponymPair({
+      sourceText: `${sourceArticle}\n${JSON.stringify(sourceFaq || [])}`,
+      targetText: `${targetArticle}\n${JSON.stringify(targetFaq || [])}`,
+      locale,
+      context: `${articleId}/${locale} FAQ`,
+    });
+    return true;
+  } catch (error) {
+    console.error(`  ❌ ${error.message}`);
+    return false;
+  }
+}
+
 // La copia privata di `isWrongLocale()` — sul testo CONCATENATO — e' stata
 // tolta, non lasciata accanto: era il difetto, non un doppione innocuo.
 // `translateFaqArray()` traduce una coppia alla volta e sul fallimento del
@@ -1123,7 +1166,14 @@ function validateFaq(faq) {
 // ── File modification ────────────────────────────────────────
 
 /** Replace existing FAQ value in a body file */
-export function replaceFaqInBodyFile(filePath, faqArray, articleId) {
+export function replaceFaqInBodyFile(filePath, faqArray, articleId, gate = {}) {
+  if (!passesLocalizedToponymGate({
+    filePath,
+    articleId,
+    locale: gate.locale,
+    sourceFaq: gate.sourceFaq,
+    targetFaq: gate.targetFaq || faqArray,
+  })) return false;
   let content = read(filePath);
   // `escapeForSingleQuoteTS`, non una `.replace()` a mano: quella escapava
   // l'apostrofo e NON il backslash, quindi il `\"` che JSON.stringify produce
@@ -1163,13 +1213,21 @@ export function replaceFaqInBodyFile(filePath, faqArray, articleId) {
  * Insert FAQ key into a body file.
  * Finds the last body key line and appends the FAQ key after it, before `};`
  */
-export function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
+export function insertFaqIntoBodyFile(filePath, articleId, faqArray, gate = {}) {
   let content = read(filePath);
 
   // Already has FAQ? Replace instead of insert.
   if (hasFaqKey(content, articleId)) {
-    return replaceFaqInBodyFile(filePath, faqArray, articleId);
+    return replaceFaqInBodyFile(filePath, faqArray, articleId, gate);
   }
+
+  if (!passesLocalizedToponymGate({
+    filePath,
+    articleId,
+    locale: gate.locale,
+    sourceFaq: gate.sourceFaq,
+    targetFaq: gate.targetFaq || faqArray,
+  })) return false;
 
   const faqJsonStr = JSON.stringify(faqArray);
   const escapedFaq = escapeForSingleQuoteTS(faqJsonStr);
@@ -1343,7 +1401,11 @@ export function recordTranslation(options, articleId, locale, sourceFaq, res, wr
  * @returns {boolean} true se la traduzione e' stata scritta
  */
 export function writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq, res }) {
-  const written = insertFaqIntoBodyFile(localePath, articleId, res.faq) === true;
+  const written = insertFaqIntoBodyFile(localePath, articleId, res.faq, {
+    locale,
+    sourceFaq,
+    targetFaq: res.faq,
+  }) === true;
   recordTranslation(options, articleId, locale, sourceFaq, res, written);
   return written;
 }
@@ -1460,7 +1522,11 @@ async function processArticle(articleId, file, itBodyContent, options) {
       if (res?.faq) {
         writeTranslatedFaq(options, { localePath, articleId, locale, sourceFaq: validFaq, res });
       } else {
-        insertFaqIntoBodyFile(localePath, articleId, faqForLocale);
+        insertFaqIntoBodyFile(localePath, articleId, faqForLocale, {
+          locale,
+          sourceFaq: validFaq,
+          targetFaq: faqForLocale,
+        });
       }
     }
   }
@@ -1548,7 +1614,11 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
           console.error(`${label} ⚠️  ${locale.toUpperCase()} traduzione rifiutata (lingua sbagliata): `
             + 'non scrivo, si recupera al giro dopo');
         } else {
-          insertFaqIntoBodyFile(localePath, articleId, validMerged);
+          insertFaqIntoBodyFile(localePath, articleId, validMerged, {
+            locale,
+            sourceFaq: validMerged,
+            targetFaq: validMerged,
+          });
           console.error(`${label} ⚠️  ${locale.toUpperCase()} translation failed, using Italian`);
         }
       } catch (err) {
@@ -1556,7 +1626,11 @@ async function processTopUp(articleId, file, itContent, existingFaq, options) {
           console.error(`${label} ⚠️  ${locale.toUpperCase()} error after the translation was written: `
             + `${err.message}; keeping the translation`);
         } else {
-          insertFaqIntoBodyFile(localePath, articleId, validMerged);
+          insertFaqIntoBodyFile(localePath, articleId, validMerged, {
+            locale,
+            sourceFaq: validMerged,
+            targetFaq: validMerged,
+          });
           console.error(`${label} ⚠️  ${locale.toUpperCase()} error: ${err.message}, using Italian`);
         }
       }

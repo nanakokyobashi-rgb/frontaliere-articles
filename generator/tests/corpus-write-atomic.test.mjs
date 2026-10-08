@@ -52,6 +52,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-pharmacy-evergreen-guides.mjs', 'nessun workflow: producer rerunnable lanciato a mano'],
   ['generator/scripts/repair-truncated-seo-titles.mjs', 'nessun workflow: bonifica storica eseguita manualmente'],
   ['generator/scripts/retranslate-blocking-bodies.mjs', 'bonifica-blocking-bodies.yml'],
+  ['generator/scripts/repair-localized-toponyms.mjs', 'nessun workflow: bonifica deterministica degli esonimi localizzati'],
   ['generator/scripts/backfill-article-cantons.mjs', 'nessun workflow: backfill one-shot del campo canton lanciato a mano'],
   ['generator/scripts/backfill-article-type.mjs', 'nessun workflow: backfill one-shot del campo articleType lanciato a mano'],
   ['generator/scripts/lib/article-registry-image.mjs', 'regenerate-queued-covers.yml'],

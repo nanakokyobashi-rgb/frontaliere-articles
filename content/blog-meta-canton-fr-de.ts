@@ -5,8 +5,8 @@
 const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.disoccupazione-friburgo-settembre-2026.title': 'Arbeitslosigkeit in Freiburg sinkt im September 2026 auf 2,5%',
     'blog.article.disoccupazione-friburgo-settembre-2026.excerpt': '',
-    'blog.article.disoccupazione-friburgo-settembre-2026.imageAlt': 'Fribourg-Szene mit Pendlern auf Jobsuche, aufgenommen bei Tageslicht.',
-    'blog.article.fribourg-modifica-licd.title': 'Fribourg passt die direkten Steuern an die kalte Progression an',
+    'blog.article.disoccupazione-friburgo-settembre-2026.imageAlt': 'Freiburg-Szene mit Pendlern auf Jobsuche, aufgenommen bei Tageslicht.',
+    'blog.article.fribourg-modifica-licd.title': 'Freiburg passt die direkten Steuern an die kalte Progression an',
     'blog.article.fribourg-modifica-licd.excerpt': '',
     'blog.article.fribourg-modifica-licd.imageAlt': 'Öffentliches Büro in Freiburg mit Steuerzahlenden, die ihre Steuererklärung am Computer ausfüllen',
     'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Freiburg: Neuer Radnetzplan genehmigt',

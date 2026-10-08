@@ -189,6 +189,11 @@ import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
+import {
+  findArticleLocalizedToponymMismatches,
+  localizedToponymInstruction,
+  normalizeLocalizedToponymText,
+} from './lib/localized-toponyms.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/it-text-similarity.mjs';
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
@@ -5539,6 +5544,24 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
 export function assertArticlePassesFactualityGates(data, options = {}) {
   assertItalianArticlePassesFactualityGates(data, options);
   assertTranslationsPassFactualityGates(data);
+  assertLocalizedToponyms(data);
+}
+
+/**
+ * Blocking exonym gate shared by the primary AI path and every direct
+ * producer. It runs on the final payload, after translation and all
+ * deterministic mutations, and before either writer acquires its register
+ * lock. The gate reports the source/target form and never rewrites content.
+ */
+function assertLocalizedToponyms(data) {
+  const issues = findArticleLocalizedToponymMismatches(data);
+  if (issues.length === 0) return;
+  const details = issues
+    .map((issue) => `[${issue.locale}] ${issue.code}.${issue.type}: "${issue.form}" → "${issue.expected}"`)
+    .join('; ');
+  const error = new Error(`Articolo rigettato — esonimo di cantone/capoluogo nella lingua sbagliata: ${details}`);
+  error.qualityReject = true;
+  throw error;
 }
 
 /**
@@ -12452,7 +12475,9 @@ async function translateArticle(data) {
 - Apostrofi: usa sempre ' (diritto), mai virgolette curve
 - I nomi propri di luoghi svizzeri (Sessa, Melide, Malcantone) restano invariati in tutte le lingue
 
-${terminologyByLang[targetLang] || ''}`;
+${terminologyByLang[targetLang] || ''}
+
+${localizedToponymInstruction(targetLang)}`;
 
     // Split into 4 parallel calls — one per field group — to stay within model output limits.
     // German/French expand ~30% vs Italian; some models cap output at ~2048-4096 tokens.
@@ -15021,20 +15046,27 @@ function decodeLocaleContentEntities(data, locale) {
     // in `meta-<locale>.json` esattamente come l'excerpt. Un `&egrave;` non
     // decodificato qui arriverebbe letterale in una SERP.
     for (const field of ['title', 'excerpt', ...META_SEO_FIELDS, ...bodyFields]) {
-      if (typeof c[field] === 'string') c[field] = decodeHtmlEntities(c[field]);
+      if (typeof c[field] === 'string') c[field] = normalizeLocalizedToponymText(c[field]);
     }
     if (Array.isArray(c.faq)) {
       c.faq = c.faq.map((item) => (item && typeof item === 'object'
         ? {
             ...item,
-            q: typeof item.q === 'string' ? decodeHtmlEntities(item.q) : item.q,
-            a: typeof item.a === 'string' ? decodeHtmlEntities(item.a) : item.a,
+            q: typeof item.q === 'string' ? normalizeLocalizedToponymText(item.q) : item.q,
+            a: typeof item.a === 'string' ? normalizeLocalizedToponymText(item.a) : item.a,
           }
         : item));
     }
   }
   const alt = data.imageAlt?.[locale];
-  if (typeof alt === 'string') data.imageAlt[locale] = decodeHtmlEntities(alt);
+  if (typeof alt === 'string') data.imageAlt[locale] = normalizeLocalizedToponymText(alt);
+}
+
+function decodeArticleEntities(data) {
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    decodeLocaleContentEntities(data, locale);
+  }
+  decodeSeoEntities(data);
 }
 
 function writeSectionLocale(data, locale) {
@@ -15101,7 +15133,7 @@ const SEO_ENTITY_FIELDS = ['title', 'description', 'keywords', 'ogTitle', 'ogDes
 function decodeSeoEntities(data) {
   if (!data.seo || typeof data.seo !== 'object') return;
   for (const field of SEO_ENTITY_FIELDS) {
-    if (typeof data.seo[field] === 'string') data.seo[field] = decodeHtmlEntities(data.seo[field]);
+    if (typeof data.seo[field] === 'string') data.seo[field] = normalizeLocalizedToponymText(data.seo[field]);
   }
 }
 
@@ -18411,6 +18443,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // passing the source context through non-enumerable scratch properties. The
   // properties are removed before any write, so they cannot leak into the
   // generated article or alter the serialized data shape.
+  // Decode the same entities that writeSectionLocale() would decode before
+  // the gate inspects the payload. Otherwise `Z&uuml;rich` is not visible as
+  // `Zürich` to the localized-exonym detector and can be published in place
+  // of the required English `Zurich`.
+  decodeArticleEntities(data);
   Object.defineProperties(data, {
     _sourceUrl: { value: url, configurable: true },
     _sourceText: { value: factualityGateSourceText(url, pageContent), configurable: true },
@@ -19364,6 +19401,9 @@ export async function registerArticleFiles(data, opts = {}) {
   // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
+  // Normalize before metadata and slug derivation: the slug must use the same
+  // decoded title that writeSectionLocale() publishes.
+  decodeArticleEntities(data);
   // Secondary producers enter this shared writer directly, so they need the
   // same pre-write specificity/canton gate as the primary AI path.
   assertGeneratedArticleQuality(data, {
@@ -19374,12 +19414,6 @@ export async function registerArticleFiles(data, opts = {}) {
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
   // percorso AI primario.
   preserveMunicipalityNamesInMetadata(data);
-  // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
-  // (daily-brief, events-digest, border-wait-ranking, journalist) importano
-  // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
-  // flusso primario. Senza questa chiamata resterebbero l'unica via per cui un
-  // body tradotto con un rilievo bloccante arriva su disco (#5661).
-  assertArticlePassesFactualityGates(data);
   clampSeoDescriptions(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
@@ -19389,6 +19423,13 @@ export async function registerArticleFiles(data, opts = {}) {
   // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
   // retain an Italian fallback when a translated candidate is unusable.
   checkTranslatedSlugCollisions(data);
+  // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
+  // (daily-brief, events-digest, border-wait-ranking, journalist) importano
+  // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
+  // flusso primario. Il controllo arriva dopo la derivazione definitiva degli
+  // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
+  // provvisorio ancora non sanitizzato.
+  assertArticlePassesFactualityGates(data);
   // Il tipo dell'articolo nel registry: esplicito del produttore, altrimenti
   // dalla stessa dichiarazione che decide la sitemap news (`skipNews`). Prima
   // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.

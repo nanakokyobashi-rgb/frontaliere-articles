@@ -878,13 +878,15 @@ jobs:
             generator/tests/prompt-placeholder-guard.test.mjs \
             generator/tests/article-slug-i18n.test.mjs \
             generator/tests/article-source-echo.test.mjs \
-            generator/tests/article-topic-coverage-guard.test.mjs; then
+            generator/tests/article-topic-coverage-guard.test.mjs \
+            generator/tests/wrong-latin-language-adoption.test.mjs \
+            generator/tests/localized-toponyms.test.mjs; then
             exit 0
           fi
           {
             echo "### ✖ Articolo RIFIUTATO prima del commit — sezione \`${SECTION:-?}\`"
             echo
-            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` / \`article-slug-i18n\` / \`article-source-echo\` hanno trovato offender nel corpus dopo la generazione."
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` / \`article-slug-i18n\` / \`article-source-echo\` / \`wrong-latin-language-adoption\` / \`localized-toponyms\` hanno trovato offender nel corpus dopo la generazione."
             echo "**Niente e' stato committato**: il corpo resta sul runner e sparisce con lui, \`main\` non lo vede."
             echo
             echo "Gli offender sono elencati per path nel log di questo step. Confrontali con la riga \`article body added:\` dello step «Generate the article»:"

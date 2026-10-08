@@ -29,6 +29,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
+import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -241,6 +242,51 @@ const idOfBodyPath = (filePath) => basename(filePath, '.ts');
 const faqKeyRx = (id) => `'blog\\.article\\.${escapeRegExpLiteral(String(id))}\\.faq'`;
 const faqValueRe = (id) => new RegExp(`${faqKeyRx(id)}\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'\\s*[,}]`, 'g');
 
+const LOCALE_DIRS = new Set(['en', 'de', 'fr']);
+
+function articleProjectionText(filePath, articleId, { excludeFaq = false } = {}) {
+  if (!existsSync(filePath)) return '';
+  const bodyPath = resolve(filePath);
+  const bodyDir = dirname(dirname(bodyPath));
+  const bodyLocaleDir = dirname(bodyPath);
+  const metaStem = basename(bodyDir).replace(/^blog-body(?=-|$)/u, 'blog-meta');
+  const metaPath = resolve(dirname(bodyDir), `${metaStem}-${basename(bodyLocaleDir)}.ts`);
+  const bodyProjection = extractArticleProjectionText(
+    readFileSync(bodyPath, 'utf-8'),
+    articleId,
+    { excludeFaq },
+  );
+  const metaProjection = existsSync(metaPath)
+    ? extractArticleProjectionText(readFileSync(metaPath, 'utf-8'), articleId, { excludeFaq })
+    : '';
+  return [bodyProjection, metaProjection].filter(Boolean).join('\n');
+}
+
+function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
+  if (!LOCALE_DIRS.has(locale)) return true;
+  const targetPath = resolve(filePath);
+  const targetDir = dirname(targetPath);
+  const sourcePath = resolve(targetDir, '..', 'it', basename(targetPath));
+  try {
+    const sourceProjection = articleProjectionText(sourcePath, articleId, { excludeFaq: true });
+    // The file still contains the previous FAQ at this point. It is not the
+    // candidate being admitted: only the candidate below must participate in
+    // the target-side translation gate.
+    const targetProjectionWithoutOldFaq = articleProjectionText(targetPath, articleId, { excludeFaq: true });
+    const candidateFaq = JSON.stringify(faqArray || []);
+    assertLocalizedToponymPair({
+      sourceText: `${sourceProjection}\n${candidateFaq}`,
+      targetText: `${targetProjectionWithoutOldFaq}\n${candidateFaq}`,
+      locale,
+      context: `${articleId}/${locale} FAQ repair`,
+    });
+    return true;
+  } catch (error) {
+    console.error(`  ❌ ${error.message}`);
+    return false;
+  }
+}
+
 /** Il literal `.faq` vivo di un file, ancora escapato. `null` se non c'e'. */
 function rawFaqLiteral(filePath, id = idOfBodyPath(filePath)) {
   if (!existsSync(filePath)) return null;
@@ -265,6 +311,7 @@ export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
 }
 
 export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
+  if (!passesLocalizedToponymGate(filePath, id, basename(dirname(resolve(filePath))), newFaqArray)) return false;
   let content = readFileSync(filePath, 'utf-8');
   const jsonStr = serializeFaqLiteral(newFaqArray);
   // Escape-aware regex + function replacer to avoid $-pattern issues.
@@ -280,9 +327,11 @@ export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePa
     content = content.slice(0, start) + last[1] + jsonStr + last[3] + content.slice(end);
   }
   writeCorpusFile(filePath, content);
+  return true;
 }
 
 function insertFaqKey(filePath, articleId, faqArray) {
+  if (!passesLocalizedToponymGate(filePath, articleId, basename(dirname(resolve(filePath))), faqArray)) return false;
   let content = readFileSync(filePath, 'utf-8');
   const jsonStr = serializeFaqLiteral(faqArray);
   const closingIdx = content.lastIndexOf('};');
@@ -819,7 +868,7 @@ function reescapeBroken(bodyDir, limit) {
         continue;
       }
       repaired.push(`${locale}/${file}`);
-      if (!DRY_RUN) replaceFaqInFile(filePath, pairs);
+      if (!DRY_RUN && !replaceFaqInFile(filePath, pairs)) repaired.pop();
     }
   }
   console.log(`\n📊 ${DRY_RUN ? 'Da riparare' : 'Riparati'}: ${repaired.length} file`);
@@ -998,7 +1047,11 @@ async function main() {
           continue;
         }
       } else {
-        replaceFaqInFile(localePath, toWrite);
+        if (!replaceFaqInFile(localePath, toWrite)) {
+          console.error(`${label} ❌ Guard esonimi: FAQ non scritta`);
+          failed++;
+          continue;
+        }
       }
 
       console.log(`${label} ✅ Fixed (${toWrite.length} pairs`
