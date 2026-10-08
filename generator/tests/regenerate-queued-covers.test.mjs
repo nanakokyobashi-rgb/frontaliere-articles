@@ -671,8 +671,9 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
   assert.match(workflow, /queued-cover-expected-queue\.json/);
   assert.match(workflow, /\.residualMissing = \$missing/);
   assert.match(workflow, /\.residualSource = "pushed-branch"/);
+  assert.match(workflow, /queued-cover queue count diverged after push/);
+  assert.match(workflow, /if \[ "\$actual" -ne "\$internal" \]/);
   assert.match(workflow, /queued-cover queue items lost after push/);
-  assert.doesNotMatch(workflow, /queued-cover queue count diverged after push/);
 });
 
 test('il workflow attende la completion del publisher prima di ackare l outbox', () => {

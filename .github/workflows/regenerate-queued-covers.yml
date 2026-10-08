@@ -132,6 +132,10 @@ jobs:
               '.residualInternal = $internal | .residual = $actual | .residualMissing = $missing | .residualSource = "pushed-branch"' \
               "$SUMMARY_FILE" > "$verified"
             mv "$verified" "$SUMMARY_FILE"
+            if [ "$actual" -ne "$internal" ]; then
+              echo "::error::queued-cover queue count diverged after push: drainer=$internal, pushed branch=$actual"
+              return 1
+            fi
             if [ "$missing" != '[]' ]; then
               echo "::error::queued-cover queue items lost after push: $missing"
               return 1
