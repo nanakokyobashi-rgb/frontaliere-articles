@@ -32,11 +32,15 @@ function termPattern(term) {
     .join('\\s+');
 }
 
+// URL destinations are opaque content, including relative Markdown routes.
+// The generator may mention a localized slug in prose as `[link](/en/.../...)`;
+// that route is not a translated sentence and must neither trigger the gate nor
+// be rewritten by the deterministic repair. Plain article slugs, passed as a
+// separate projection field, do not start with `/` and remain visible.
+const URL_PATTERN = /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:ch|com|org|net|it|fr|de|io|info)(?:\/[^\s)]*)?|(?<![\p{L}\p{N}@])\/[a-z0-9][^\s)\]>"]*/giu;
+
 function withoutUrls(value) {
-  return String(value || '').replace(
-    /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:ch|com|org|net|it|fr|de|io|info)(?:\/[^\s)]*)?/giu,
-    ' ',
-  );
+  return String(value || '').replace(URL_PATTERN, ' ');
 }
 
 function containsTerm(value, term) {
@@ -54,6 +58,15 @@ function entityForms(entity) {
 
 function normalizeForm(value) {
   return String(value).normalize('NFKC').toLocaleLowerCase('en').replace(/\s+/gu, ' ').trim();
+}
+
+function localizedSlugForm(value) {
+  return String(value)
+    .normalize('NFKD')
+    .replace(/[\p{M}]/gu, '')
+    .toLocaleLowerCase('en')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/gu, '');
 }
 
 function issueKey(issue) {
@@ -84,8 +97,6 @@ const TOPONYM_PATTERN = new RegExp(
     .join('|')})(?![\\p{L}\\p{N}])`,
   'giu',
 );
-
-const URL_PATTERN = /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:ch|com|org|net|it|fr|de|io|info)(?:\/[^\s)]*)?/giu;
 
 const PROTECTED_NAME_PATTERNS = Object.freeze([
   /\bfrontali(?:ere|er|ère)\s+(?:ticino|tessin)\b/giu,
@@ -147,7 +158,7 @@ function localizedToponymHits(value, { protectNames = false } = {}) {
  * used only to establish which Swiss place the article is about; a foreign
  * place name mentioned in an unrelated article is never judged.
  */
-export function findLocalizedToponymMismatches({ sourceText = '', targetText = '', locale } = {}) {
+export function findLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
   if (!LOCALE_SET.has(locale)) return [];
   const sourceEntities = new Set(localizedToponymHits(sourceText).map((hit) => hit.entity.code));
   if (sourceEntities.size === 0) return [];
@@ -156,7 +167,10 @@ export function findLocalizedToponymMismatches({ sourceText = '', targetText = '
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;
     for (const type of ENTITY_TYPES) {
-      const expected = new Set(entity[type][locale].map(normalizeForm));
+      const expected = new Set(entity[type][locale].flatMap((form) => [
+        normalizeForm(form),
+        ...(slug ? [normalizeForm(localizedSlugForm(form))] : []),
+      ]));
       for (const hit of targetHits) {
         if (hit.entity.code !== entity.code || hit.type !== type || hit.locale === locale) continue;
         if (expected.has(normalizeForm(hit.form))) continue;
@@ -175,12 +189,27 @@ export function findLocalizedToponymMismatches({ sourceText = '', targetText = '
 }
 
 /**
+ * Shared fail-closed write assertion for producers that update an existing
+ * localized field instead of going through `registerArticleFiles()`.
+ */
+export function assertLocalizedToponymPair({ sourceText = '', targetText = '', locale, context = 'traduzione' } = {}) {
+  const issues = findLocalizedToponymMismatches({ sourceText, targetText, locale });
+  if (issues.length === 0) return [];
+  const error = new Error(
+    `${context}: esonimo localizzato non valido (${issues.map((issue) => `${issue.code}.${issue.type} ${issue.form}→${issue.expected}`).join(', ')})`,
+  );
+  error.qualityReject = true;
+  error.localizedToponymIssues = issues;
+  throw error;
+}
+
+/**
  * Deterministically repairs only the foreign exonyms established by the
  * source-language article. URLs are opaque: slugs and source links are never
  * rewritten by this function.
  */
-export function replaceLocalizedToponymMismatches({ sourceText = '', targetText = '', locale } = {}) {
-  const issues = findLocalizedToponymMismatches({ sourceText, targetText, locale });
+export function replaceLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
+  const issues = findLocalizedToponymMismatches({ sourceText, targetText, locale, slug });
   let text = String(targetText || '');
   let replacements = 0;
   const replacementCounts = new Map();
@@ -198,7 +227,7 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
       }
       replacements += 1;
       issueReplacements += 1;
-      return issue.expected;
+      return slug ? localizedSlugForm(issue.expected) : issue.expected;
     });
     replacementCounts.set(issueKey(issue), issueReplacements);
   }
@@ -212,21 +241,39 @@ function collectStrings(value, output = []) {
   return output;
 }
 
+function articleLocaleProjection(data, locale) {
+  const imageAlt = data?.imageAlt && typeof data.imageAlt === 'object'
+    ? data.imageAlt[locale]
+    : locale === 'it' ? data?.imageAlt : undefined;
+  return {
+    content: data?.content?.[locale],
+    imageAlt,
+    slug: data?.slugs?.[locale],
+    // `seo` is the Italian root-level SEO projection; localized SEO fields
+    // live in content[locale] and are already collected above.
+    seo: locale === 'it' ? data?.seo : undefined,
+  };
+}
+
 /** Returns the same deterministic check for the complete pre-write article. */
 export function findArticleLocalizedToponymMismatches(data) {
-  const source = collectStrings({
-    content: data?.content?.it,
-    slug: data?.slugs?.it,
-  }).join('\n');
+  const source = collectStrings(articleLocaleProjection(data, 'it')).join('\n');
   if (!source.trim()) return [];
 
   const issues = [];
   for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
-    const target = collectStrings({
-      content: data?.content?.[locale],
-      slug: data?.slugs?.[locale],
-    }).join('\n');
-    for (const issue of findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale })) {
+    const targetProjection = articleLocaleProjection(data, locale);
+    const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
+    const targetIssues = findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
+    if (targetProjection.slug) {
+      targetIssues.push(...findLocalizedToponymMismatches({
+        sourceText: source,
+        targetText: targetProjection.slug,
+        locale,
+        slug: true,
+      }));
+    }
+    for (const issue of targetIssues) {
       issues.push({ ...issue, locale });
     }
   }
@@ -236,6 +283,9 @@ export function findArticleLocalizedToponymMismatches(data) {
 export function validateLocalizedToponymTable() {
   const errors = [];
   if (TABLE.schemaVersion !== 1) errors.push(`schemaVersion=${TABLE.schemaVersion}`);
+  if (JSON.stringify(TABLE.locales) !== JSON.stringify(['it', 'en', 'de', 'fr'])) {
+    errors.push(`locales=${JSON.stringify(TABLE.locales)}`);
+  }
   if (LOCALIZED_TOPONYMS.length !== 26) errors.push(`entities=${LOCALIZED_TOPONYMS.length}`);
   if (new Set(LOCALIZED_TOPONYMS.map((entity) => entity.code)).size !== LOCALIZED_TOPONYMS.length) {
     errors.push('codici cantonali duplicati');
@@ -245,11 +295,23 @@ export function validateLocalizedToponymTable() {
       for (const locale of LOCALIZED_TOPONYM_LOCALES) {
         if (!Array.isArray(entity[type][locale]) || entity[type][locale].length === 0) {
           errors.push(`${entity.code}.${type}.${locale}`);
+          continue;
+        }
+        if (entity[type][locale].some((form) => typeof form !== 'string' || !form.trim())) {
+          errors.push(`${entity.code}.${type}.${locale}: forma non testuale/vuota`);
+        }
+        if (new Set(entity[type][locale].map(normalizeForm)).size !== entity[type][locale].length) {
+          errors.push(`${entity.code}.${type}.${locale}: alias duplicati`);
         }
       }
     }
   }
   return errors;
+}
+
+const LOCALIZED_TOPONYM_TABLE_ERRORS = validateLocalizedToponymTable();
+if (LOCALIZED_TOPONYM_TABLE_ERRORS.length > 0) {
+  throw new Error(`Tabella esonimi localizzati non valida: ${LOCALIZED_TOPONYM_TABLE_ERRORS.join('; ')}`);
 }
 
 /**
@@ -262,9 +324,9 @@ export function localizedToponymInstruction(locale) {
   const lines = [];
   for (const entity of LOCALIZED_TOPONYMS) {
     for (const type of ENTITY_TYPES) {
-      const source = entity[type].it[0];
-      const target = entity[type][locale][0];
-      if (source === target) continue;
+      const source = entity[type].it.join(' / ');
+      const target = entity[type][locale].join(' / ');
+      if (normalizeForm(source) === normalizeForm(target)) continue;
       lines.push(`- ${source} (${entity.code}, ${type}) → ${target}`);
     }
   }
@@ -275,6 +337,7 @@ export default {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   findLocalizedToponymMismatches,
+  assertLocalizedToponymPair,
   replaceLocalizedToponymMismatches,
   findArticleLocalizedToponymMismatches,
   localizedToponymInstruction,

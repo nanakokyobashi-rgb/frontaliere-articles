@@ -7,7 +7,9 @@ import { fileURLToPath } from 'node:url';
 import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
+  findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
+  localizedToponymInstruction,
   replaceLocalizedToponymMismatches,
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
@@ -101,6 +103,59 @@ test('la riparazione deterministica non riscrive gli URL', () => {
   });
   assert.equal(result.text, 'News from Lucerne: https://example.test/lucerna-lugano');
   assert.equal(result.replacements, 1);
+  const slug = replaceLocalizedToponymMismatches({
+    sourceText: 'Notizia sul cantone di Lucerna',
+    targetText: 'lucerna-road-closures',
+    locale: 'en',
+    slug: true,
+  });
+  assert.equal(slug.text, 'lucerne-road-closures');
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Zurigo',
+      targetText: 'zurich-road-closures',
+      locale: 'de',
+      slug: true,
+    }),
+    [],
+  );
+});
+
+test('ignora anche le route Markdown relative e le lascia intatte', () => {
+  const source = 'Notizia sul cantone di Lucerna';
+  const target = 'Read [the Lucerna route](/en/lucerna-road-closures) and visit Lucerna.';
+  assert.deepEqual(
+    findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale: 'en' }),
+    [{ code: 'LU', type: 'canton', locale: 'en', form: 'Lucerna', expected: 'Lucerne' }],
+  );
+  const result = replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale: 'en' });
+  assert.equal(result.text, 'Read [the Lucerne route](/en/lucerna-road-closures) and visit Lucerne.');
+});
+
+test('la proiezione article-wide copre imageAlt, slug e SEO oltre al body', () => {
+  const base = {
+    content: {
+      it: { title: 'Lucerna: traffico e chiusure', body1: 'Notizia sul cantone.' },
+      en: { title: 'Lucerne: traffic and closures', body1: 'More details.' },
+    },
+    imageAlt: { it: 'Lucerna', en: 'Lucerna traffic' },
+    slugs: { it: 'lucerna-traffico', en: 'lucerne-traffic' },
+    seo: { title: 'Lucerna: traffico' },
+  };
+  const imageIssues = findArticleLocalizedToponymMismatches(base);
+  assert.deepEqual(imageIssues, [{ code: 'LU', type: 'canton', locale: 'en', form: 'Lucerna', expected: 'Lucerne' }]);
+  const slugIssues = findArticleLocalizedToponymMismatches({
+    ...base,
+    imageAlt: { it: 'Lucerna', en: 'Lucerne' },
+    slugs: { it: 'lucerna-traffico', en: 'lucerna-traffic' },
+  });
+  assert.deepEqual(slugIssues, [{ code: 'LU', type: 'canton', locale: 'en', form: 'Lucerna', expected: 'Lucerne' }]);
+});
+
+test('prompt e gate condividono tutte le forme della tabella', () => {
+  const instruction = localizedToponymInstruction('en');
+  assert.match(instruction, /Lucerna \(LU, canton\) → Lucerne/);
+  assert.match(instruction, /Grigioni \(GR, canton\) → Graubünden/);
 });
 
 test('non riscrive brand o nomi ufficiali che contengono un toponimo', () => {
@@ -167,10 +222,10 @@ function collectCorpusEntries() {
     if (!locale) continue;
     const source = readFileSync(file, 'utf8');
     for (const match of source.matchAll(ENTRY_RE)) {
-      const key = `${match[1]}|${match[2]}`;
-      const entries = byLocale.get(locale).get(key) || [];
-      entries.push({ key, field: match[2], value: unescapeTsValue(match[4]), file });
-      byLocale.get(locale).set(key, entries);
+      const articleId = match[1];
+      const entries = byLocale.get(locale).get(articleId) || [];
+      entries.push({ key: `${articleId}|${match[2]}`, field: match[2], value: unescapeTsValue(match[4]), file });
+      byLocale.get(locale).set(articleId, entries);
     }
   }
   return byLocale;
@@ -179,22 +234,24 @@ function collectCorpusEntries() {
 test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue', () => {
   const byLocale = collectCorpusEntries();
   const italian = byLocale.get('it');
-  assert.ok(italian.size >= 5000, `corpus italiano incompleto: ${italian.size} campi`);
+  const italianFieldCount = [...italian.values()].reduce((total, entries) => total + entries.length, 0);
+  assert.ok(italianFieldCount >= 5000, `corpus italiano incompleto: ${italianFieldCount} campi`);
   for (const locale of ['en', 'de', 'fr']) {
-    assert.ok(byLocale.get(locale).size >= 5000, `corpus ${locale} incompleto: ${byLocale.get(locale).size} campi`);
+    const fieldCount = [...byLocale.get(locale).values()].reduce((total, entries) => total + entries.length, 0);
+    assert.ok(fieldCount >= 5000, `corpus ${locale} incompleto: ${fieldCount} campi`);
   }
 
   let offenderCount = 0;
   const sampleOffenders = [];
-  for (const [key, sourceEntries] of italian) {
-    const sourceValues = [...new Set(sourceEntries.map((entry) => entry.value))];
+  for (const [articleId, sourceEntries] of italian) {
+    const sourceText = [...new Set(sourceEntries.map((entry) => entry.value))].join('\n');
     for (const locale of ['en', 'de', 'fr']) {
-      for (const targetEntry of byLocale.get(locale).get(key) || []) {
-        const issues = sourceValues.flatMap((sourceText) => findLocalizedToponymMismatches({
+      for (const targetEntry of byLocale.get(locale).get(articleId) || []) {
+        const issues = findLocalizedToponymMismatches({
           sourceText,
           targetText: targetEntry.value,
           locale,
-        }));
+        });
         const uniqueIssues = new Map(issues.map((issue) => [
           `${issue.code}|${issue.locale}|${issue.form}|${issue.expected}`,
           issue,
@@ -202,7 +259,7 @@ test('il corpus storico e le 24 sezioni cantonali non copiano esonimi fra lingue
         for (const issue of uniqueIssues.values()) {
           offenderCount += 1;
           if (sampleOffenders.length < 80) {
-            sampleOffenders.push({ ...issue, key, file: path.relative(ROOT, targetEntry.file) });
+            sampleOffenders.push({ ...issue, key: targetEntry.key, file: path.relative(ROOT, targetEntry.file) });
           }
         }
       }
@@ -220,9 +277,21 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
   assert.match(source, /assertLocalizedToponyms\(data\)/);
-  const gatePosition = source.indexOf('assertLocalizedToponyms(data)');
-  const lockPosition = source.indexOf('beginRegisterLock(data.id)', gatePosition);
-  assert.ok(gatePosition >= 0 && lockPosition > gatePosition, 'il gate deve precedere il lock di registrazione');
+  const registerStart = source.indexOf('export async function registerArticleFiles');
+  const registerSource = source.slice(registerStart);
+  const slugPosition = registerSource.indexOf('const slugs = deriveAndSanitizeArticleSlugs(data);');
+  const gatePosition = registerSource.indexOf('assertArticlePassesFactualityGates(data);');
+  const lockPosition = registerSource.indexOf('beginRegisterLock(data.id)');
+  assert.ok(slugPosition >= 0 && gatePosition > slugPosition && lockPosition > gatePosition,
+    'il gate deve seguire gli slug definitivi e precedere il lock di registrazione');
+  assert.match(source, /data\.imageAlt/);
+
+  const retranslate = readFileSync(path.join(ROOT, 'generator/scripts/retranslate-blocking-bodies.mjs'), 'utf8');
+  assert.match(retranslate, /assertLocalizedToponymPair/);
+  const faqWriter = readFileSync(path.join(ROOT, 'generator/scripts/batch-add-faq-to-articles.mjs'), 'utf8');
+  assert.match(faqWriter, /assertLocalizedToponymPair/);
+  const faqRepair = readFileSync(path.join(ROOT, 'generator/scripts/fix-faq-locales.mjs'), 'utf8');
+  assert.match(faqRepair, /assertLocalizedToponymPair/);
 
   const workflow = readFileSync(path.join(ROOT, '.github/workflows/generate-article.yml'), 'utf8');
   assert.match(workflow, /generator\/tests\/wrong-latin-language-adoption\.test\.mjs/);

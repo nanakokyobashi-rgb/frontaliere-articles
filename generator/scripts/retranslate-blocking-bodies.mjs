@@ -178,6 +178,7 @@ import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { stripLeakedTitleMarkerLine, diffIsExactlyRemovedLines } from './lib/strip-leaked-title-marker.mjs';
 import { normalizePromptSectionHeadings, applyConvertedHeadings } from './lib/normalize-prompt-section-headings.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
+import { assertLocalizedToponymPair } from './lib/localized-toponyms.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import {
@@ -1895,7 +1896,30 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
     qualityIssue: titleMarkerPlan?.issue || templateIssue || keyFactsGuard.issue,
     structuralDefect: Boolean(pair.structural),
   });
-  const row = { ...base, oldCodes, newCodes, missingField, written: false, reason: verdict.reason };
+  let localizedToponymError = null;
+  if (!isSourceLocale && !missingField) {
+    try {
+      assertLocalizedToponymPair({
+        sourceText: Object.values(italianSections).join('\n'),
+        targetText: Object.values(checkedSections).join('\n'),
+        locale: pair.locale,
+        context: `${pair.id}/${pair.locale}`,
+      });
+    } catch (error) {
+      localizedToponymError = error;
+    }
+  }
+  const row = {
+    ...base,
+    oldCodes,
+    newCodes,
+    missingField,
+    written: false,
+    reason: localizedToponymError ? `esonimo-non-valido: ${localizedToponymError.message}` : verdict.reason,
+    ...(localizedToponymError?.localizedToponymIssues
+      ? { localizedToponymIssues: localizedToponymError.localizedToponymIssues }
+      : {}),
+  };
   if (titleMarkerRepair) {
     row.removedLines = Object.values(titleMarkerRepair.removedByField).flat();
     row.convertedHeadings = Object.values(titleMarkerRepair.convertedByField)
@@ -1909,7 +1933,7 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
       row.reason = `forma-non-riparabile: campo-solo-marcatore (${missingField})`;
     }
   }
-  if (!verdict.write || !APPLY) return row;
+  if (localizedToponymError || !verdict.write || !APPLY) return row;
 
   if (titleMarkerPlan) {
     writeAtomic(trPath, titleMarkerPlan.src);

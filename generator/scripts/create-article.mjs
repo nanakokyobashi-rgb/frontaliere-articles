@@ -19398,12 +19398,6 @@ export async function registerArticleFiles(data, opts = {}) {
   // perdere un comune dall'excerpt, e l'imageAlt del giornalista non passa dal
   // percorso AI primario.
   preserveMunicipalityNamesInMetadata(data);
-  // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
-  // (daily-brief, events-digest, border-wait-ranking, journalist) importano
-  // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
-  // flusso primario. Senza questa chiamata resterebbero l'unica via per cui un
-  // body tradotto con un rilievo bloccante arriva su disco (#5661).
-  assertArticlePassesFactualityGates(data);
   clampSeoDescriptions(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
@@ -19413,6 +19407,13 @@ export async function registerArticleFiles(data, opts = {}) {
   // in the primary AI path: `deriveAndSanitizeArticleSlugs()` can intentionally
   // retain an Italian fallback when a translated candidate is unusable.
   checkTranslatedSlugCollisions(data);
+  // Stessa ragione, stesso percorso condiviso: i quattro produttori secondari
+  // (daily-brief, events-digest, border-wait-ranking, journalist) importano
+  // registerArticleFiles() direttamente e non passano mai dallo Step 3a.2 del
+  // flusso primario. Il controllo arriva dopo la derivazione definitiva degli
+  // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
+  // provvisorio ancora non sanitizzato.
+  assertArticlePassesFactualityGates(data);
   // Il tipo dell'articolo nel registry: esplicito del produttore, altrimenti
   // dalla stessa dichiarazione che decide la sitemap news (`skipNews`). Prima
   // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.

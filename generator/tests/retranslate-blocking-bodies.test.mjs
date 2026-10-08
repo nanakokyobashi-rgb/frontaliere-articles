@@ -1530,8 +1530,8 @@ test('il rifiuto di lingua non scrive, il fallimento del motore tiene il fallbac
   // test direbbe che ho cambiato in silenzio piu' di quanto dichiarato.
   assert.match(bodies.processArticle, /faqForLocale = validFaq;/,
     'processArticle: il fallback italiano sul fallimento del motore non va rimosso qui');
-  assert.match(bodies.processTopUp, /insertFaqIntoBodyFile\(localePath, articleId, validMerged\)/,
-    'processTopUp: il fallback italiano sul fallimento del motore non va rimosso qui');
+  assert.match(bodies.processTopUp, /insertFaqIntoBodyFile\(localePath, articleId, validMerged,\s*\{[\s\S]*sourceFaq:\s*validMerged/,
+    'processTopUp: il fallback italiano sul fallimento del motore non va rimosso qui; deve restare sotto il gate esonimi');
 });
 
 // ── Entry point in-place per uno slug arbitrario, italiano compreso (#1084) ─
