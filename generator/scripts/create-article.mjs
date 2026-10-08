@@ -392,7 +392,10 @@ import {
 import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
-import { assertSeoEntryAbsent } from '../../scripts/lib/seo-entry-guard.mjs';
+import {
+  assertSeoEntryAbsent,
+  readSeoEntrySource,
+} from '../../scripts/lib/seo-entry-guard.mjs';
 // Solo per sapere QUALI sezioni dichiarano l'elenco id come letterale
 // (`idListVar`): è la stessa risposta che usa `scripts/retire-article.mjs`, e
 // va data da un posto solo (AGENTS.md #6).
@@ -15173,7 +15176,11 @@ function assertSeoEntryNotRegistered(id) {
   // first operation that can leave registration state behind. The complete
   // frontaliere chunk family is scanned because new entries are appended to
   // seo-blog-5.ts while older chunks remain renderable.
-  assertSeoEntryAbsent(id, seoFilesForWriter());
+  assertSeoEntryAbsent(
+    id,
+    seoFilesForWriter(),
+    (file) => readSeoEntrySource(file, { missingIsEmpty: IS_CANTON }),
+  );
 }
 
 /**
