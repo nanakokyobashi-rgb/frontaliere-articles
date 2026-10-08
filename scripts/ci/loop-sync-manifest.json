@@ -2589,6 +2589,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/deterministic-card-provenance.mjs",
+      "mode": "corpus-only",
+      "reason": "Contratto di provenance per le card deterministiche del Bollettino, usato dal producer dell'immagine e dal registry delle copertine. Il generatore e i suoi record vivono nel corpus; il sito consuma il JSON pubblicato e non ha un gemello di questo helper.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/blog-image-registry.mjs",
       "mode": "corpus-only",
       "reason": "Registry reader-facing delle copertine generate e degli upload editoriali, più ledger aggregato per la superficie API. La pipeline di generazione e il relativo filesystem vivono nel corpus; il sito consuma JSON pubblicato e non ha un gemello di questo writer.",

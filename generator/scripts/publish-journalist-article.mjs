@@ -103,6 +103,7 @@ import {
   BLOG_IMAGE_HEIGHT,
   BLOG_IMAGE_QUALITY_PASSES,
 } from './lib/blog-image-policy.mjs';
+import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
@@ -261,7 +262,9 @@ async function assertJournalistSourceCopySafe(data, sourceText) {
 function setHeroProvenance(data, imagePath, provenance) {
   data._generatedImagePath = imagePath;
   data._imageCredit = provenance?.kind === 'wikimedia-commons' ? provenance.record : null;
-  data._generatedImageRecord = provenance?.kind === 'generated' ? provenance.record : null;
+  data._generatedImageRecord = provenance?.kind === 'generated' || provenance?.kind === DETERMINISTIC_CARD_KIND
+    ? provenance.record
+    : null;
   data._editorialImageRecord = provenance?.kind === 'editorial-upload' ? provenance.record : null;
   data.image = imagePath.split('/').pop() || data.image;
 }

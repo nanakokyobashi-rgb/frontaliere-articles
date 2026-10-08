@@ -16,6 +16,7 @@ import crypto from 'node:crypto';
 import { validateGeneratedImageRecord, validateGeneratedImageRegistry } from '../../../engine/shared/generatedImageRegistry.mjs';
 import { corpusCreditReader } from '../../../scripts/lib/image-credit-records.mjs';
 import { writeJsonAtomic } from './atomic-write-json.mjs';
+import { DETERMINISTIC_CARD_KIND, isDeterministicCardRecord } from './deterministic-card-provenance.mjs';
 
 export const GENERATED_IMAGE_REGISTRY_REL = 'data/generated-image-registry.json';
 export const EDITORIAL_IMAGE_REGISTRY_REL = 'data/editorial-image-registry.json';
@@ -104,6 +105,10 @@ function validImagePath(value) {
   return typeof value === 'string' && IMAGE_PATH_RX.test(value);
 }
 
+function imageProvenanceKind(record) {
+  return isDeterministicCardRecord(record) ? DETERMINISTIC_CARD_KIND : 'generated';
+}
+
 function materializedImagePath(root, imagePath) {
   if (!MATERIALIZED_IMAGE_PATH_RX.test(imagePath)) return null;
   return absolute(root, path.join('public', imagePath.slice(1)));
@@ -179,7 +184,7 @@ export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
     try {
       const registered = readGeneratedImageRecords(root, { strict: false })
         .find((record) => record.scope === 'place' && record.imageUrl === normalized);
-      if (registered) return { kind: 'generated', record: registered };
+      if (registered) return { kind: imageProvenanceKind(registered), record: registered };
     } catch {
       // The built-in governed record below keeps the outage fallback usable;
       // a malformed optional registry must not reject the article cover.
@@ -192,7 +197,7 @@ export function imageRecordForPath(root, imagePath, { strict = false } = {}) {
     // Place records point at the site's static asset tree. Article-hero records
     // must still prove the materialized corpus bytes before publication.
     return generated.scope === 'place' || hasMaterializedImageRecord(root, normalized, generated)
-      ? { kind: 'generated', record: generated }
+      ? { kind: imageProvenanceKind(generated), record: generated }
       : null;
   }
   const editorial = readEditorialImageRecords(root, { strict }).find((record) => record.cover === normalized);

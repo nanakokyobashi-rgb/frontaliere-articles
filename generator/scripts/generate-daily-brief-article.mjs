@@ -48,7 +48,8 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 // the refusal rules without importing create-article.mjs, whose static deps
 // (jsdom) exist only where `npm ci` ran.
 import { loadSnapshot, buildData } from './lib/daily-brief-content.mjs';
-import { buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
+import { buildDailyBriefImageRecord, buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
+import { appendGeneratedImageRecord, sha256File } from './lib/blog-image-registry.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 
@@ -203,6 +204,15 @@ async function main() {
   const { hero, thumb } = heroPaths(data.id);
   const svg = buildDailyBriefSvg(brief, { locale: 'it' });
   const { heroBytes, thumbBytes } = await renderDailyBriefImage(svg, hero, thumb);
+  // The card is site-owned deterministic media, so persist its byte-level
+  // provenance immediately after the same render that materializes the hero.
+  // appendGeneratedImageRecord is idempotent for a same-day rerun.
+  const imageRecord = buildDailyBriefImageRecord({
+    id: data.id,
+    sha256: sha256File(hero),
+    bytes: heroBytes,
+  });
+  appendGeneratedImageRecord(REPO_ROOT, imageRecord);
   console.log(`🖼️  hero ${path.relative(REPO_ROOT, hero)} (${heroBytes} B), thumb (${thumbBytes} B)`);
 
   if (!exists) {
