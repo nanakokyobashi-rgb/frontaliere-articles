@@ -746,6 +746,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /deadline_ms=\$\(\(job_started_ms \+ 40 \* 60 \* 1000\)\)/);
   assert.match(workflow, /40m internal deadline/);
   assert.match(workflow, /publisher_reserve_ms=\$\(\(15 \* 60 \* 1000\)\)/);
+  assert.match(workflow, /generation_overhead_ms=\$\(\(5 \* 60 \* 1000\)\)/);
   assert.match(workflow, /skippedBeforeDrain:true/);
   assert.match(workflow, /steps\.budget\.outputs\.initial_outbox/);
   assert.match(workflow, /steps\.pre_ack\.outputs\.outbox_pending/);

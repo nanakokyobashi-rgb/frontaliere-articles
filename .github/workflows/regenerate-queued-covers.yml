@@ -247,7 +247,11 @@ jobs:
           deadline_ms="$(cat "$DEADLINE_FILE")"
           publisher_reserve_ms=$((15 * 60 * 1000))
           per_cover_ms=$((120 * 1000))
-          available_ms=$((deadline_ms - now_ms - publisher_reserve_ms))
+          # IMAGE_BUDGET_MS covers the governed image call. Keep a shared 5m
+          # margin for thumbnail generation, registry merge and outbox writes;
+          # the final publisher phase still owns its separate 15m reserve.
+          generation_overhead_ms=$((5 * 60 * 1000))
+          available_ms=$((deadline_ms - now_ms - publisher_reserve_ms - generation_overhead_ms))
           budget_limit=$((available_ms / per_cover_ms))
           if [ "$budget_limit" -lt 1 ]; then
             queue_residual='0'
