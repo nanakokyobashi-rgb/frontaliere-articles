@@ -2,9 +2,12 @@ export const DEGRADATION_LEDGER_SCHEMA = 1;
 export const DEGRADATION_LEDGER_START = '<!-- ARTICLE_IMAGE_DEGRADATION_LEDGER v1 -->';
 export const DEGRADATION_LEDGER_END = '<!-- /ARTICLE_IMAGE_DEGRADATION_LEDGER -->';
 export const MAX_REPAIR_ATTEMPTS = 3;
+export const MAX_ABSENCE_RETRIES = 3;
 export const DEFAULT_REPAIR_CAP = 3;
+export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
+export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
 
-const VALID_STATUSES = new Set(['pending', 'in-flight', 'exhausted']);
+const VALID_STATUSES = new Set(['pending', 'in-flight', 'exhausted', 'orphaned', 'retired']);
 
 export function ledgerKey({ section, articleId } = {}) {
   if (!section || !articleId) return null;
@@ -17,6 +20,7 @@ function normalizedItem(item) {
   if (!section || !articleId) throw new Error('ledger item senza section/articleId');
   const attempts = Number.isInteger(item?.attempts) && item.attempts >= 0 ? item.attempts : 0;
   const status = VALID_STATUSES.has(item?.status) ? item.status : attempts >= MAX_REPAIR_ATTEMPTS ? 'exhausted' : 'pending';
+  const absenceAttempts = Number.isInteger(item?.absenceAttempts) && item.absenceAttempts >= 0 ? item.absenceAttempts : 0;
   return {
     section,
     articleId,
@@ -29,6 +33,8 @@ function normalizedItem(item) {
     runId: item?.runId === null || item?.runId === undefined ? null : String(item.runId),
     dispatchedAt: item?.dispatchedAt ? String(item.dispatchedAt) : null,
     lastOutcome: item?.lastOutcome ? String(item.lastOutcome) : null,
+    absenceAttempts,
+    retiredAt: item?.retiredAt ? String(item.retiredAt) : null,
   };
 }
 
@@ -88,6 +94,8 @@ export function mergeDegradedItems(existing = [], observed = [], now = new Date(
       runId: raw.runId,
       dispatchedAt: raw.dispatchedAt,
       lastOutcome: raw.lastOutcome,
+      absenceAttempts: raw.absenceAttempts,
+      retiredAt: raw.retiredAt,
     });
     const key = ledgerKey(item);
     const previous = byKey.get(key);
@@ -103,9 +111,84 @@ export function mergeDegradedItems(existing = [], observed = [], now = new Date(
       firstSeenAt: previous.firstSeenAt ?? item.firstSeenAt ?? now,
       lastSeenAt: now,
       status,
+      absenceAttempts: 0,
+      retiredAt: null,
     });
   }
   return sortedItems([...byKey.values()]);
+}
+
+/** Mark durable rows whose registry or slug disappeared without leaving them actionable forever. */
+export function markLedgerItemsAbsent(items = [], absentKeys = [], now = new Date().toISOString()) {
+  const absent = new Set(absentKeys);
+  return sortedItems(items).map((item) => {
+    const key = ledgerKey(item);
+    if (!absent.has(key) || item.status === 'retired' || item.status === 'exhausted') return item;
+    const absenceAttempts = item.absenceAttempts + 1;
+    const retired = absenceAttempts >= MAX_ABSENCE_RETRIES;
+    return {
+      ...item,
+      status: retired ? 'retired' : 'orphaned',
+      absenceAttempts,
+      retiredAt: retired ? now : null,
+      runId: retired ? null : item.runId,
+      dispatchedAt: retired ? null : item.dispatchedAt,
+      lastSeenAt: now,
+      lastOutcome: retired ? 'registry-or-slug-missing-retired' : 'registry-or-slug-missing',
+    };
+  });
+}
+
+/**
+ * Bound durable state while retaining a short audit trail for terminal rows.
+ * Active rows older than the retention window become retired; terminal rows
+ * older than their shorter window disappear on the next persistence pass.
+ */
+export function retainDegradationLedger(
+  items = [],
+  {
+    nowMs = Date.now(),
+    retentionDays = DEFAULT_LEDGER_RETENTION_DAYS,
+    terminalRetentionDays = DEFAULT_TERMINAL_RETENTION_DAYS,
+  } = {},
+) {
+  const now = new Date(nowMs).toISOString();
+  const activeCutoff = nowMs - retentionDays * 24 * 60 * 60 * 1000;
+  const terminalCutoff = nowMs - terminalRetentionDays * 24 * 60 * 60 * 1000;
+  return sortedItems(items).flatMap((item) => {
+    const terminalAt = Date.parse(item.retiredAt || item.lastSeenAt || item.firstSeenAt || '');
+    if ((item.status === 'retired' || item.status === 'exhausted') && Number.isFinite(terminalAt) && terminalAt < terminalCutoff) {
+      return [];
+    }
+    const firstSeen = Date.parse(item.firstSeenAt || '');
+    if (item.status !== 'retired' && item.status !== 'exhausted' && Number.isFinite(firstSeen) && firstSeen < activeCutoff) {
+      return [{
+        ...item,
+        status: 'retired',
+        retiredAt: now,
+        runId: null,
+        dispatchedAt: null,
+        lastOutcome: 'retention-expired',
+      }];
+    }
+    return [item];
+  });
+}
+
+/** Fallback map consumed by every aggregate writer, including later rerenders. */
+export function releasedArticleFallbacks(items = []) {
+  const byKey = new Map();
+  for (const raw of items) {
+    const item = normalizedItem(raw);
+    if (item.status === 'retired' || !item.registryImage) continue;
+    const key = `${item.section}:${item.articleId}:${item.registryImage}`;
+    byKey.set(key, {
+      section: item.section,
+      articleId: item.articleId,
+      declaredImage: item.registryImage,
+    });
+  }
+  return [...byKey.values()].sort((a, b) => `${a.section}:${a.articleId}`.localeCompare(`${b.section}:${b.articleId}`));
 }
 
 export function removeHealthyItems(items = [], healthyKeys = []) {

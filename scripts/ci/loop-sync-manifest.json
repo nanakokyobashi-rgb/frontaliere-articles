@@ -166,6 +166,16 @@
       }
     },
     {
+      "path": "scripts/ci/article-image-fallbacks.mjs",
+      "mode": "corpus-only",
+      "reason": "Adattatore del ledger della issue observer al JSON consumato dagli aggregati fast-publish: mantiene i fallback persistenti anche quando la pubblicazione successiva rigenera archivio e landing dal registry completo. Il sito non osserva il ledger del corpus e non ha un equivalente di questo passaggio.",
+      "baseline": {
+        "site": null,
+        "corpus": "c1309de268b36968aed4efc9b7af9f1c97c0ba2e",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "scripts/ci/auto-merge-eval.mjs",
       "mode": "adapted",
       "reason": "Divergenza a DUE direzioni, nessuna delle quali e' copiabile — per questo non e' piu' `identical` (riconciliazione di nanako#318 punto 2). QUI in piu': il gate 4 `generator-ci` (#242/#252), che esige il check-run del generatore sulle PR che toccano generator/engine/host — sul sito quel workflow non esiste, portarcelo bloccherebbe ogni PR in attesa di un check che nessuno emette. SUL SITO in piu': l'osservazione #5552 (`lib/checkRunObservation.mjs` + `lib/prComments.mjs`, che qui non esistono), che elenca i check-run completati sulla HEAD senza bloccare. Copiare in una delle due direzioni romperebbe l'altro lato, quindi restano diversi apposta; la sorveglianza sulla baseline resta accesa e intercetta comunque una modifica futura su uno dei due lati.",

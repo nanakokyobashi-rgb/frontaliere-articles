@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   applyDispatchOutcomes,
+  markLedgerItemsAbsent,
   groupRepairCandidates,
   ledgerKey,
   markDispatched,
@@ -10,6 +11,8 @@ import {
   removeHealthyItems,
   repairCandidates,
   renderDegradationLedger,
+  releasedArticleFallbacks,
+  retainDegradationLedger,
   upsertDegradationLedger,
 } from '../../scripts/lib/article-image-degradation-ledger.mjs';
 
@@ -52,4 +55,29 @@ test('tre esiti terminali falliti marcano l articolo exhausted e non lo ridispat
   assert.equal(entries[0].attempts, 3);
   assert.equal(entries[0].status, 'exhausted');
   assert.deepEqual(repairCandidates(entries, { readyKeys: [ledgerKey(entries[0])] }), []);
+});
+
+test('gli orfani hanno retry bounded e i terminali non consumano la finestra di pagine', () => {
+  let entries = [item('gone')];
+  entries = markLedgerItemsAbsent(entries, [ledgerKey(entries[0])], '2026-10-08T00:00:00.000Z');
+  assert.equal(entries[0].status, 'orphaned');
+  entries = markLedgerItemsAbsent(entries, [ledgerKey(entries[0])], '2026-10-09T00:00:00.000Z');
+  entries = markLedgerItemsAbsent(entries, [ledgerKey(entries[0])], '2026-10-10T00:00:00.000Z');
+  assert.equal(entries[0].status, 'retired');
+  assert.deepEqual(repairCandidates(entries, { readyKeys: [ledgerKey(entries[0])] }), []);
+
+  const expired = retainDegradationLedger([
+    item('exhausted', { status: 'exhausted', lastSeenAt: '2026-09-01T00:00:00.000Z' }),
+  ], { nowMs: Date.parse('2026-10-08T00:00:00.000Z') });
+  assert.deepEqual(expired, []);
+});
+
+test('la mappa fallback conserva pending/exhausted e scarta i ritirati', () => {
+  assert.deepEqual(
+    releasedArticleFallbacks([
+      item('zeta', { status: 'exhausted' }),
+      item('alfa', { status: 'retired' }),
+    ]),
+    [{ section: 'frontaliere', articleId: 'zeta', declaredImage: '/images/blog/zeta.webp' }],
+  );
 });

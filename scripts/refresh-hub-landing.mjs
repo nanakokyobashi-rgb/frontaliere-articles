@@ -91,9 +91,13 @@ function readReleasedArticles(file) {
   if (!file) return [];
   const abs = path.resolve(file);
   const summary = JSON.parse(fs.readFileSync(abs, 'utf-8'));
-  const released = summary?.imagePostcondition?.releasedArticles;
+  // The summary carries the complete persistent map: current-batch releases
+  // alone would let a later registry-wide landing regeneration restore an old
+  // missing CDN image. Keep the legacy nested field as a compatibility fallback
+  // for summaries produced before the durable map was added.
+  const released = summary?.genericFallbackArticles ?? summary?.imagePostcondition?.releasedArticles;
   if (!Array.isArray(released)) {
-    throw new Error(`${abs} has no imagePostcondition.releasedArticles array`);
+    throw new Error(`${abs} has no genericFallbackArticles array`);
   }
   return released;
 }

@@ -53,6 +53,7 @@
 # it did not own.
 
 name: fast-publish-article
+run-name: fast-publish-article ${{ inputs.dispatch_nonce || 'push' }}
 
 on:
   push:
@@ -72,6 +73,7 @@ on:
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/article-image-fallbacks.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
@@ -112,9 +114,14 @@ on:
         required: false
         default: true
         type: boolean
+      dispatch_nonce:
+        description: 'Observer nonce used to identify this exact Actions run'
+        required: false
+        type: string
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   # Sezione e shard si risolvono in un job a parte perche' la concurrency del
@@ -365,6 +372,19 @@ jobs:
         if: needs.resolve.outputs.skip != 'true'
         run: node generator/scripts/load-rc-env.mjs
 
+      - name: Load persistent generic image fallback map
+        if: needs.resolve.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh issue list --repo "$GH_REPO" --state open --limit 100 --json title,body \
+            --jq 'first(.[] | select(.title == "Article publication lag (corpus → site)") | .body) // ""' \
+            > "$RUNNER_TEMP/article-publication-observer.md"
+          node scripts/ci/article-image-fallbacks.mjs "$RUNNER_TEMP/article-publication-observer.md" \
+            > "$RUNNER_TEMP/persistent-image-fallbacks.json"
+
       - name: Probe shard write access
         if: needs.resolve.outputs.skip != 'true'
         run: |
@@ -422,7 +442,8 @@ jobs:
             --ids "$ARTICLE_IDS_JSON" \
             --section "${{ matrix.target.section }}" \
             --out "$RUNNER_TEMP/fast-dist" \
-            --summary "$RUNNER_TEMP/fast-summary.json"
+            --summary "$RUNNER_TEMP/fast-summary.json" \
+            --persistent-generic-fallbacks-file "$RUNNER_TEMP/persistent-image-fallbacks.json"
 
       # The hub LANDING was the one article surface a full site deploy still
       # owned. Since ARTICOLIFRONTALIERE_BUILD_EMIT_SKIP went on (2026-07-29

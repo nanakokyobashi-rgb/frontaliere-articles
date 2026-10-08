@@ -144,6 +144,14 @@ function corpusContentRevision() {
   return `${epoch}.${short}`;
 }
 
+function readPersistentGenericFallbacks(file) {
+  if (!file) return [];
+  const payload = JSON.parse(fs.readFileSync(path.resolve(file), 'utf-8'));
+  const released = Array.isArray(payload) ? payload : payload?.releasedArticles;
+  if (!Array.isArray(released)) throw new Error(`${file} has no releasedArticles array`);
+  return released;
+}
+
 function parseArgs(argv) {
   const out = { ids: [] };
   for (let i = 0; i < argv.length; i++) {
@@ -163,6 +171,7 @@ function parseArgs(argv) {
     } else if (a === '--section') out.section = argv[++i];
     else if (a === '--out') out.out = argv[++i];
     else if (a === '--summary') out.summary = argv[++i];
+    else if (a === '--persistent-generic-fallbacks-file') out.persistentGenericFallbacksFile = argv[++i];
   }
   out.ids = [...new Set(out.ids)];
   if (out.ids.some((id) => typeof id !== 'string' || !id)) {
@@ -175,7 +184,7 @@ function parseArgs(argv) {
   ];
   if (missing.length > 0) {
     console.error(`[publish-article-fast] missing required flag(s): ${missing.map((k) => `--${k}`).join(', ')}`);
-    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <active section with a Pages shard> --out <scratchDistDir> --summary <summaryJsonPath>');
+    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <active section with a Pages shard> --out <scratchDistDir> --summary <summaryJsonPath> [--persistent-generic-fallbacks-file <json>]');
     process.exit(1);
   }
   // Prima di qualunque render: la sezione deve essere ATTIVA nel core e avere
@@ -198,6 +207,7 @@ async function main() {
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
   const contentRevision = corpusContentRevision();
+  const persistentReleasedArticles = readPersistentGenericFallbacks(args.persistentGenericFallbacksFile);
 
   // La catena di render (passi 0-7b, nell'ordine che conta) vive in
   // scripts/lib/article-render-pipeline.mjs, condivisa col publisher R2 delle
@@ -210,6 +220,7 @@ async function main() {
       section: args.section,
       ids: args.ids,
       logPrefix: 'publish-article-fast',
+      persistentReleasedArticles,
     });
   } catch (err) {
     console.error(`[publish-article-fast] ${err.message}`);
@@ -223,6 +234,7 @@ async function main() {
     downloadedImageKeys,
     imageFetchFailures,
     imagePostcondition,
+    genericFallbackArticles,
     aggregatePagesAllowed,
   } = pipeline;
   const publishedIds = [...new Set(entries.map((entry) => entry.articleId))];
@@ -278,6 +290,7 @@ async function main() {
     section: args.section,
     contentRevision,
     imagePostcondition,
+    genericFallbackArticles,
     imageFetchFailures,
     aggregatePagesAllowed,
     shards,

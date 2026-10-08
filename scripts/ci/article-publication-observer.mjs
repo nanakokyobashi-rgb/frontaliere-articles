@@ -14,6 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { declaredImageIsOwn, extractOgImage, isGenericOgImage, normalizeImagePath } from '../lib/article-image-postcondition.mjs';
 import { fetchDeclaredImage } from '../lib/declared-image-fetch.mjs';
@@ -23,8 +24,10 @@ import {
   groupRepairCandidates,
   ledgerKey,
   markDispatched,
+  markLedgerItemsAbsent,
   mergeDegradedItems,
   parseDegradationLedger,
+  retainDegradationLedger,
   removeHealthyItems,
   repairCandidates,
   upsertDegradationLedger,
@@ -35,6 +38,8 @@ export const DEFAULT_LOOKBACK_DAYS = 7;
 export const DEFAULT_STALE_MINUTES = 60;
 export const DEFAULT_MAX_PAGES = 300;
 export const DEFAULT_MIN_INTERVAL_MS = 500;
+export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
+export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
 export const DEFAULT_REPAIR_WORKFLOW = 'fast-publish-article.yml';
 // The apex answers 403 to the default User-Agent of Node's fetch (measured on
@@ -104,15 +109,38 @@ export function parseItalianSlug(source, articleId) {
 export function buildObserverTargets({ changedBodies = [], ledgerItems = [], registrySources, slugSources, baseUrl = SITE_BASE_URL }) {
   const targets = [];
   const skipped = [];
-  const durableChanges = ledgerItems.map((item) => ({
+  const durableChanges = ledgerItems
+    .filter((item) => item.status !== 'retired' && item.status !== 'exhausted')
+    .map((item) => ({
     section: item.section,
     articleId: item.articleId,
     changedAt: Number.isFinite(Date.parse(item.firstSeenAt ?? '')) ? Date.parse(item.firstSeenAt) : 0,
     commit: item.sourceCommit || '0'.repeat(40),
     durable: true,
-  }));
+    }));
+  // Recent corpus changes get the first slots in the bounded page window. The
+  // ledger is still durable, but an old unresolved row must not sit in front
+  // of a new article on every run.
+  const orderedChanges = [...changedBodies.map((change) => ({ ...change, durable: false })), ...durableChanges]
+    .sort((a, b) => b.changedAt - a.changedAt || a.articleId.localeCompare(b.articleId));
+  const changesByKey = new Map();
+  for (const change of orderedChanges) {
+    const key = ledgerKey(change);
+    const previous = changesByKey.get(key);
+    if (!previous) {
+      changesByKey.set(key, change);
+      continue;
+    }
+    changesByKey.set(key, {
+      ...previous,
+      durable: Boolean(previous.durable || change.durable),
+      changedAt: Math.max(previous.changedAt, change.changedAt),
+      commit: previous.changedAt >= change.changedAt ? previous.commit : change.commit,
+    });
+  }
   const seen = new Set();
-  for (const change of [...durableChanges, ...changedBodies]) {
+  const missingLedgerKeys = [];
+  for (const change of changesByKey.values()) {
     const key = ledgerKey(change);
     if (seen.has(key)) continue;
     seen.add(key);
@@ -120,6 +148,7 @@ export function buildObserverTargets({ changedBodies = [], ledgerItems = [], reg
     const slug = parseItalianSlug(slugSources[change.section] || '', change.articleId);
     if (!registry || !slug) {
       skipped.push({ ...change, reason: !registry ? 'registro non trovato' : 'slug italiano non trovato' });
+      if (change.durable) missingLedgerKeys.push(key);
       continue;
     }
     targets.push({
@@ -132,7 +161,7 @@ export function buildObserverTargets({ changedBodies = [], ledgerItems = [], reg
       durable: Boolean(change.durable),
     });
   }
-  return { targets, skipped };
+  return { targets, skipped, missingLedgerKeys };
 }
 
 function parseAttrs(tag) {
@@ -367,28 +396,48 @@ function defaultGithubClient() {
     },
     async dispatch({ section, ids }) {
       const dispatchedAt = Date.now();
+      const dispatchNonce = `observer-${randomUUID()}`;
+      const runsBefore = ghJson([
+        'run', 'list', '--workflow', DEFAULT_REPAIR_WORKFLOW, '--limit', '30',
+        '--json', 'databaseId,status,conclusion,createdAt,event,headBranch,displayTitle',
+      ]);
+      const previousRunIds = new Set((Array.isArray(runsBefore) ? runsBefore : []).map((item) => String(item.databaseId)));
       const idsJson = JSON.stringify(ids);
       execFileSync('gh', [
         'workflow', 'run', DEFAULT_REPAIR_WORKFLOW,
         '-f', `article_ids=${idsJson}`,
         '-f', `section=${section}`,
         '-f', 'dry_run=false',
+        '-f', `dispatch_nonce=${dispatchNonce}`,
         '--ref', 'main',
         ...ghRepoArgs(),
       ], { encoding: 'utf8' });
-      // `gh workflow run` returns before the run is visible in Actions. Find
-      // it by the dispatch event and creation time so the ledger can observe
-      // a real terminal outcome instead of ever dispatching a duplicate.
+      // `gh workflow run` returns before the run is visible in Actions. The
+      // unique run-name nonce is the identity fence; the pre-dispatch snapshot
+      // prevents an old matching run from ever being selected. If Actions does
+      // not expose an identifiable run, return null and leave the ledger
+      // pending rather than guessing a concurrent dispatch.
       for (let attempt = 0; attempt < 10; attempt += 1) {
-        const runs = ghJson(['run', 'list', '--workflow', DEFAULT_REPAIR_WORKFLOW, '--limit', '30', '--json', 'databaseId,status,conclusion,createdAt,event,headBranch']);
+        const runs = ghJson([
+          'run', 'list', '--workflow', DEFAULT_REPAIR_WORKFLOW, '--limit', '30',
+          '--json', 'databaseId,status,conclusion,createdAt,event,headBranch,displayTitle',
+        ]);
         const run = (Array.isArray(runs) ? runs : [])
+          .filter((item) => !previousRunIds.has(String(item.databaseId)))
           .filter((item) => item.event === 'workflow_dispatch' && item.headBranch === 'main')
+          .filter((item) => String(item.displayTitle || '').includes(dispatchNonce))
           .filter((item) => Number.isFinite(Date.parse(item.createdAt)) && Date.parse(item.createdAt) >= dispatchedAt - 10_000)
           .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))[0];
-        if (run?.databaseId) return { runId: run.databaseId, dispatchedAt: new Date(dispatchedAt).toISOString() };
+        if (run?.databaseId) {
+          return {
+            runId: run.databaseId,
+            dispatchNonce,
+            dispatchedAt: new Date(dispatchedAt).toISOString(),
+          };
+        }
         await sleep(500);
       }
-      return { runId: null, dispatchedAt: new Date(dispatchedAt).toISOString() };
+      return { runId: null, dispatchNonce, dispatchedAt: new Date(dispatchedAt).toISOString() };
     },
   };
 }
@@ -409,9 +458,11 @@ async function reconcileDispatches(items, github) {
 }
 
 function saneLiveImage(entry) {
+  const liveImage = normalizeImagePath(entry?.page?.ogImage);
+  const registryImage = normalizeImagePath(entry?.target?.registryImage);
   return entry?.page?.status === 200
     && declaredImageIsOwn(entry.target.registryImage)
-    && Boolean(entry.page.ogImage)
+    && Boolean(liveImage && registryImage && liveImage === registryImage)
     && !isGenericOgImage(entry.page.rawHtml || '');
 }
 
@@ -451,11 +502,22 @@ export async function runObserver({
   const github = githubClient || defaultGithubClient();
   let issue = await github.findOpenIssue();
   let ledger = issue ? parseDegradationLedger(issue.body || '').items : [];
+  ledger = retainDegradationLedger(ledger, {
+    nowMs,
+    retentionDays: DEFAULT_LEDGER_RETENTION_DAYS,
+    terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
+  });
   const prepared = buildObserverTargets({ changedBodies, ledgerItems: ledger, ...sources });
   const report = await observePublicationLag({ targets: prepared.targets, nowMs, fetchImpl });
   const description = formatObserverReport(report, { nowMs, skipped: prepared.skipped });
   const reconciled = await reconcileDispatches(ledger, github);
   ledger = reconciled.items;
+  ledger = markLedgerItemsAbsent(ledger, prepared.missingLedgerKeys, new Date(nowMs).toISOString());
+  ledger = retainDegradationLedger(ledger, {
+    nowMs,
+    retentionDays: DEFAULT_LEDGER_RETENTION_DAYS,
+    terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
+  });
   const healthyKeys = report.checked.filter((entry) => entry.target.durable && saneLiveImage(entry)).map((entry) => ledgerKey(entry.target));
   ledger = removeHealthyItems(ledger, healthyKeys);
   ledger = mergeDegradedItems(

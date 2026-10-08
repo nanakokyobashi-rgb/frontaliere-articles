@@ -40,6 +40,20 @@ export { CDN_BASE, fetchDeclaredImage };
 const SITE_ORIGIN = 'https://frontaliereticino.ch';
 const IMAGE_FETCH_CONCURRENCY = 4;
 
+function mergeGenericFallbacks(...groups) {
+  const byImage = new Map();
+  for (const group of groups) {
+    for (const article of group ?? []) {
+      const declaredImage = article?.declaredImage ?? article?.image ?? article?.registryImage;
+      const articleId = String(article?.articleId ?? '').trim();
+      if (!articleId || !declaredImage) continue;
+      const key = `${articleId}:${declaredImage}`;
+      byImage.set(key, { ...article, articleId, declaredImage: String(declaredImage) });
+    }
+  }
+  return [...byImage.values()].sort((a, b) => String(a.articleId).localeCompare(String(b.articleId)));
+}
+
 /**
  * @param {object} opts
  * @param {string} opts.rootDir radice del repo
@@ -47,13 +61,14 @@ const IMAGE_FETCH_CONCURRENCY = 4;
  * @param {string} opts.section sezione ATTIVA del core
  * @param {string[]} opts.ids id articolo da rendere (vuoto = nessun articolo, solo archivio ed extra)
  * @param {string} [opts.logPrefix]
+ * @param {any[]} [opts.persistentReleasedArticles] fallback releases read from the durable observer ledger
  * @param {(ctx: { distDir: string, entries: any[], hubResult: any, releasedArticles: any[], effectiveEntries: any[] }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
  * @param {(url: string) => Promise<{ state: string, reason: string }>} [opts.probeOnlineImage]
  *   lettura della pagina online per gli articoli ricaduti sull'immagine generica (default: produzione)
- * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, aggregatePagesAllowed: boolean }>}
+ * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, genericFallbackArticles: any[], aggregatePagesAllowed: boolean }>}
  */
-export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload, probeOnlineImage }) {
+export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
   // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
   // top-level evaluation (an IIFE, not a function call re-read per use), to
   // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). the site repo's deploy workflow's
@@ -217,6 +232,12 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // gli aggregati sostituiscono il riferimento dichiarato con /og-image.png.
   const aggregateVerdict = aggregatePageVerdict(imagePostcondition);
   const { heldWithoutOnlinePage, releasedWithGenericImage } = aggregateVerdict;
+  // The current batch tells us what this render just released. The observer
+  // ledger supplies older releases, because a later batch re-renders the full
+  // archive and landing from the registry again. Keep both maps on every
+  // aggregate path, otherwise an old missing image comes back as a broken CDN
+  // reference on the next publication.
+  const genericFallbackArticles = mergeGenericFallbacks(persistentReleasedArticles, releasedWithGenericImage);
   if (heldWithoutOnlinePage.length > 0) {
     console.error(
       `[${logPrefix}] aggregate pages withheld: ${heldWithoutOnlinePage.length} held article(s) with no page proven online ` +
@@ -307,13 +328,13 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
     // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
     extraPaths = beforeOffload
-      ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult, releasedArticles: releasedWithGenericImage, effectiveEntries })) ?? []
+      ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult, releasedArticles: genericFallbackArticles, effectiveEntries })) ?? []
       : [];
 
     rewriteGenericImageFiles({
       distDir,
       relPaths: [...Object.values(hubResult.pathsByLocale).flat(), ...extraPaths],
-      releasedArticles: releasedWithGenericImage,
+      releasedArticles: genericFallbackArticles,
     });
 
     // Le immagini recuperate esistono sul CDN ma non nel checkout e quindi non
@@ -414,6 +435,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     downloadedImageKeys: imageStage.downloadedImageKeys,
     imageFetchFailures: imageStage.failures,
     imagePostcondition,
+    genericFallbackArticles,
     aggregatePagesAllowed,
   };
 }

@@ -61,6 +61,26 @@ test('deriva un target per corpo cambiato e conserva il commit più recente', ()
   assert.equal(prepared.targets[0].registryImage, '/images/blog/costo.webp');
 });
 
+test('ordina il ledger durevole dopo i cambi recenti e non include exhausted', () => {
+  const prepared = buildObserverTargets({
+    changedBodies: [{ section: 'frontaliere', articleId: 'recent', changedAt: Date.parse('2026-10-07T00:00:00Z'), commit: sha }],
+    ledgerItems: [
+      { section: 'frontaliere', articleId: 'old', firstSeenAt: '2026-09-01T00:00:00Z', status: 'pending' },
+      { section: 'frontaliere', articleId: 'dead', firstSeenAt: '2026-09-02T00:00:00Z', status: 'exhausted' },
+    ],
+    registrySources: {
+      frontaliere: [
+        "{ id: 'recent', date: '2026-10-07', image: '/images/blog/recent.webp' },",
+        "{ id: 'old', date: '2026-09-01', image: '/images/blog/old.webp' },",
+      ].join('\n'),
+    },
+    slugSources: {
+      frontaliere: "'recent': { it: 'recent' }, 'old': { it: 'old' },",
+    },
+  });
+  assert.deepEqual(prepared.targets.map((entry) => entry.articleId), ['recent', 'old']);
+});
+
 test('le quattro intersezioni ritardo × degrado hanno verdetti indipendenti', () => {
   const cases = [
     { date: currentDate, image: ownImage, lagging: false, degraded: false },
@@ -376,6 +396,37 @@ test('una lettura sana rimuove il degradato durevole e risolve l issue senza dis
     assert.deepEqual(result.ledger, []);
     assert.deepEqual(result.dispatched, []);
     assert.ok(github.calls.some((call) => call.type === 'resolve'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('una og:image propria ma diversa dal registro non rimuove il degradato', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient({
+    issue: {
+      number: 2448,
+      body: renderDegradationLedger([{
+        section: 'frontaliere', articleId: 'alpha', url: 'https://frontaliereticino.ch/alpha/',
+        registryImage: '/images/blog/alpha.webp', firstSeenAt: '2026-10-01T00:00:00.000Z',
+      }]),
+    },
+  });
+  try {
+    const result = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => '',
+      githubClient: github.client,
+      fetchImpl: async () => ({
+        ok: true,
+        status: 200,
+        text: async () => ownPage('/images/blog/old-alpha.webp'),
+      }),
+    });
+    assert.deepEqual(result.ledger.map((item) => item.articleId), ['alpha']);
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
   }

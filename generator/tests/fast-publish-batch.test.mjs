@@ -12,6 +12,7 @@ const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publis
 const publisher = readFileSync(resolve(here, '../../scripts/publish-article-fast.mjs'), 'utf8');
 // La catena di render condivisa: gli id passano di qui al renderer.
 const pipeline = readFileSync(resolve(here, '../../scripts/lib/article-render-pipeline.mjs'), 'utf8');
+const observer = readFileSync(resolve(here, '../../scripts/ci/article-publication-observer.mjs'), 'utf8');
 
 function stepText(name) {
   const matches = [...workflow.matchAll(/^ {6}- name: (.+)$/gm)];
@@ -54,6 +55,22 @@ test('un piano immagine multi-sezione diventa target matrix separati, senza alla
   assert.match(workflow, /group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}/);
   assert.match(workflow, /ARTICLE_IDS_JSON: \$\{\{ toJSON\(matrix\.target\.ids\) \}\}/);
   assert.match(workflow, /--released-articles-file "\$RUNNER_TEMP\/fast-summary\.json"/);
+});
+
+test('i fallback persistenti entrano in archivio e landing, e il dispatch identifica il run', () => {
+  assert.match(workflow, /run-name: fast-publish-article \$\{\{ inputs\.dispatch_nonce \|\| 'push' \}\}/);
+  assert.match(workflow, /dispatch_nonce:/);
+  assert.match(workflow, /gh issue list --repo "\$GH_REPO"/);
+  assert.match(workflow, /article-image-fallbacks\.mjs/);
+  assert.match(workflow, /--persistent-generic-fallbacks-file/);
+  assert.match(publisher, /persistentReleasedArticles/);
+  assert.match(publisher, /genericFallbackArticles/);
+  assert.match(pipeline, /mergeGenericFallbacks\(persistentReleasedArticles, releasedWithGenericImage\)/);
+  assert.match(pipeline, /releasedArticles: genericFallbackArticles/);
+  assert.match(observer, /randomUUID\(\)/);
+  assert.match(observer, /dispatch_nonce=/);
+  assert.match(observer, /previousRunIds/);
+  assert.match(observer, /displayTitle/);
 });
 
 test('il dispatch accetta una lista JSON e il workflow la passa al renderer batch', () => {
