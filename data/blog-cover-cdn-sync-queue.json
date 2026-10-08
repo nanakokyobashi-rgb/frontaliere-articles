@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-crescita-lavoro-intelligenza-artificiale.webp",
+      "sha256": "48b8f303524b17e3d4d968f7109e875515e4ba78dbe50ff7679ad47e5b073f6f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-crescita-lavoro-intelligenza-artificiale-480w.webp",
+      "sha256": "b4e657272e5480d62f66ecb6434065617aba24707b12729ab9c3d24d03fdd328"
+    }
+  ]
 }
