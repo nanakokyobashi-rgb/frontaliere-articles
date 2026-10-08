@@ -38,6 +38,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {
   LEGACY_REGISTER_LOCK_FILE,
+  REGISTER_LOCK_KIND_ARTICLE_REFRESH,
   REGISTER_LOCK_KIND_COVER_REGENERATION,
   REGISTER_LOCK_KIND_SEO_RECOVERY,
   registerLockFile,
@@ -309,6 +310,18 @@ test('il marker del drain copertine blocca il writer normale sulla stessa superf
     /cover regeneration lock still present/,
   );
   assert.throws(() => beginRegisterLock(root, ARTICLE_ID, SECTION), /registration lock still present/);
+  endRegisterLock(root, SECTION);
+});
+
+test('il marker del refresh di un articolo esistente blocca recovery e registrazioni concorrenti', () => {
+  const root = sandbox();
+  beginRegisterLock(root, `${ARTICLE_ID}:refresh`, SECTION, { kind: REGISTER_LOCK_KIND_ARTICLE_REFRESH });
+  assert.equal(readRegisterLock(root, SECTION).kind, REGISTER_LOCK_KIND_ARTICLE_REFRESH);
+  assert.throws(
+    () => resolveRegisterLock(root, makeTargets(root), SECTION),
+    /existing-article refresh lock still present/,
+  );
+  assert.throws(() => beginRegisterLock(root, 'another', SECTION), /registration lock still present/);
   endRegisterLock(root, SECTION);
 });
 

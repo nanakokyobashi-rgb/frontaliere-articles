@@ -26,6 +26,7 @@ import {
   REGISTER_LOCK_KIND_COVER_REGENERATION,
   beginRegisterLock,
   endRegisterLock,
+  isRegisterLockError,
 } from './lib/register-lock.mjs';
 import { canonicalizeImageRegenerationQueue } from '../../scripts/lib/merge-image-regeneration-queue.mjs';
 
@@ -290,9 +291,14 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   };
 }
 
-async function processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail }) {
+async function processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail, expectedSection }) {
   const location = locateArticleRegistry(root, item.articleId, { registryFiles });
   const section = sectionForRegistry(location);
+  if (expectedSection && section !== expectedSection) {
+    throw new Error(
+      `article ${item.articleId} moved from section ${expectedSection} to ${section} while its cover lock was held`,
+    );
+  }
   const snapshots = new Map();
   trackFile(snapshots, absolute(root, GENERATED_REGISTRY_REL));
   trackFile(snapshots, absolute(root, location.path));
@@ -387,18 +393,7 @@ export async function drainQueuedCovers({
   registryFiles,
   retryFailed = false,
 } = {}) {
-  let registrationLockHeld = false;
-  let registrationLockSafeToRelease = true;
-  try {
-    // The drain rewrites the same registry and SEO sources as the normal
-    // frontaliere writer and the SEO orphan recovery. Claim their transaction
-    // marker before taking the async queue lock, so neither producer can take
-    // a snapshot while this process is generating or publishing a cover.
-    beginRegisterLock(root, `cover-regeneration:${process.pid}`, 'frontaliere', {
-      kind: REGISTER_LOCK_KIND_COVER_REGENERATION,
-    });
-    registrationLockHeld = true;
-    return await withImageRegenerationQueueLockAsync(root, async ({ read, write }) => {
+  return await withImageRegenerationQueueLockAsync(root, async ({ read, write }) => {
   const boundedLimit = parseLimit(limit);
   const queue = read();
   const canonicalQueue = canonicalizeImageRegenerationQueue(queue);
@@ -443,8 +438,29 @@ export async function drainQueuedCovers({
 
   for (const item of selected) {
     let outcome = null;
+    let itemSection = null;
+    let itemLockHeld = false;
+    let itemLockSafeToRelease = false;
     try {
-      outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail });
+      // A queue is global, while the registry/SEO pair is section-scoped.
+      // Resolve the item first, then claim exactly that section before the
+      // async provider call and keep the marker through every publication
+      // write and the queue acknowledgement.
+      const initialLocation = locateArticleRegistry(root, item.articleId, { registryFiles });
+      itemSection = sectionForRegistry(initialLocation);
+      beginRegisterLock(root, `cover-regeneration:${process.pid}:${item.articleId}`, itemSection, {
+        kind: REGISTER_LOCK_KIND_COVER_REGENERATION,
+      });
+      itemLockHeld = true;
+      outcome = await processItem({
+        root,
+        item,
+        generateCover,
+        generateThumbnail,
+        registryFiles,
+        decodeThumbnail,
+        expectedSection: itemSection,
+      });
       const index = queue.items.indexOf(item);
       if (index < 0) throw new Error(`queue item disappeared before success: ${item.articleId}`);
       queue.items.splice(index, 1);
@@ -461,10 +477,14 @@ export async function drainQueuedCovers({
       const section = outcome.section;
       if (!result.sections[section]) result.sections[section] = [];
       result.sections[section].push(item.articleId);
+      itemLockSafeToRelease = true;
     } catch (error) {
+      // A competing writer owns the section marker. Do not turn contention or
+      // a marker left as recovery evidence into a provider failure/retry.
+      if (isRegisterLockError(error)) throw error;
       // A processItem rollback failure is a corpus-level incident, not a
-      // retryable provider failure. Let the outer handler keep the marker so
-      // the next writer cannot enter a partially restored transaction.
+      // retryable provider failure. Keep the item marker so the next writer
+      // cannot enter a partially restored transaction.
       if (error?.rollbackFailed) throw error;
       if (outcome?.snapshots) restoreTransaction(outcome.snapshots);
       const failureCount = Number.isInteger(item.failureCount) && item.failureCount >= 0 ? item.failureCount + 1 : 1;
@@ -476,22 +496,16 @@ export async function drainQueuedCovers({
       result.failed += 1;
       result.failedIds.push(item.articleId);
       console.error(`  ⚠️  Copertina ${item.articleId} non smaltita (${failureCount}° tentativo): ${item.reason}`);
+      itemLockSafeToRelease = true;
+    } finally {
+      // An uncaught callback, queue persistence error, or rollback failure
+      // leaves the marker as the evidence needed for manual/startup repair.
+      if (itemLockHeld && itemLockSafeToRelease) endRegisterLock(root, itemSection);
     }
   }
 
     return summaryFor(queue, result);
-    });
-  } catch (error) {
-    // Any uncaught callback, persistence, or rollback error means the
-    // registry/SEO transaction did not close verifiably. Keep the marker as
-    // evidence for the next run instead of admitting another writer.
-    registrationLockSafeToRelease = false;
-    throw error;
-  } finally {
-    // The marker is evidence that registry/SEO snapshots may not have been
-    // restored completely. Only a fully returned drain may release it.
-    if (registrationLockHeld && registrationLockSafeToRelease) endRegisterLock(root, 'frontaliere');
-  }
+  });
 }
 
 function parseArgs(argv) {

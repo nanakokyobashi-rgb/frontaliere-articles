@@ -64,16 +64,29 @@ export function deriveSeoMetadata(data) {
   );
 
   const year = extractArticleYear(data) || FALLBACK_YEAR;
-  let description = String(data.seo.description || it.excerpt || '').replace(/\s+/g, ' ').trim();
-  if (!description) {
-    description = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati ${year}.`;
+  const persistedDescription = typeof data.seo.description === 'string'
+    ? data.seo.description.replace(/\s+/g, ' ').trim()
+    : '';
+  if (persistedDescription) {
+    // Recovery must retain the already-published SERP/RSS copy. Only apply
+    // the repository's hard cap; the minimum-length enrichment belongs to
+    // entries whose persisted field is genuinely absent.
+    data.seo.description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
+  } else {
+    let description = String(it.excerpt || '').replace(/\s+/g, ' ').trim();
+    if (!description) {
+      description = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati ${year}.`;
+    }
+    if (description.length < 145) {
+      description = `${description}${description.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
+    }
+    data.seo.description = truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
   }
-  if (description.length < 145) {
-    description = `${description}${description.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
-  }
-  data.seo.description = truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
+  const persistedOgDescription = typeof data.seo.ogDescription === 'string'
+    ? data.seo.ogDescription.replace(/\s+/g, ' ').trim()
+    : '';
   data.seo.ogDescription = truncateToClauseNonEmpty(
-    data.seo.ogDescription || data.seo.description,
+    persistedOgDescription || data.seo.description,
     OG_DESCRIPTION_MAX_CHARS,
   );
 

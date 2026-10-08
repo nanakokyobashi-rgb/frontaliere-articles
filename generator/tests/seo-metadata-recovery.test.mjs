@@ -71,6 +71,21 @@ test('la derivazione SEO non svuota descrizioni con una prima parola oltre il li
   assert.ok(data.seo.ogDescription.length <= 250);
 });
 
+test('la recovery conserva seoDescription e ogDescription persistiti invece di derivarli dall excerpt', () => {
+  const data = article();
+  data.content.it.seoDescription = 'Descrizione SERP già pubblicata, distinta dall’estratto editoriale.';
+  data.content.it.ogDescription = 'Descrizione social già pubblicata, più estesa e mantenuta per RSS e card.';
+  data.seo = {
+    description: data.content.it.seoDescription,
+    ogDescription: data.content.it.ogDescription,
+  };
+
+  deriveSeoMetadata(data);
+
+  assert.equal(data.seo.description, data.content.it.seoDescription);
+  assert.equal(data.seo.ogDescription, data.content.it.ogDescription);
+});
+
 test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback governato', () => {
   const commons = article();
   deriveSeoMetadata(commons);

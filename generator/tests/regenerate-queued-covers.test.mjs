@@ -159,14 +159,19 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     ]);
 
     let calls = 0;
-    const generateCover = fakeCover(root);
+    const generateCover = async (entry, context) => {
+      calls += 1;
+      const expectedSection = entry.articleId === 'front-oldest' ? 'frontaliere' : 'canton-ti';
+      assert.equal(context.section, expectedSection);
+      assert.equal(fs.existsSync(registerLockPath(root, expectedSection)), true, 'la generazione deve correre sotto il lock della sezione reale');
+      const otherSection = expectedSection === 'frontaliere' ? 'canton-ti' : 'frontaliere';
+      assert.equal(fs.existsSync(registerLockPath(root, otherSection)), false, 'il drain non deve bloccare una sezione estranea');
+      return fakeCover(root)(entry, context);
+    };
     const summary = await drain({
       root,
       limit: 1,
-      generateCover: async (...args) => {
-        calls += 1;
-        return generateCover(...args);
-      },
+      generateCover,
       generateThumbnail: fakeThumbnail,
       now: () => '2026-10-07T13:00:00.000Z',
     });
@@ -189,10 +194,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     const second = await drain({
       root,
       limit: 1,
-      generateCover: async (...args) => {
-        calls += 1;
-        return generateCover(...args);
-      },
+      generateCover,
       generateThumbnail: fakeThumbnail,
     });
     assert.equal(second.drained, 1);

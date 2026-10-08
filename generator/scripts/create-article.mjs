@@ -414,6 +414,7 @@ import {
 import {
   beginRegisterLock as beginRegisterLockImpl,
   endRegisterLock as endRegisterLockImpl,
+  REGISTER_LOCK_KIND_ARTICLE_REFRESH,
   resolveRegisterLock as resolveRegisterLockImpl,
   registerLockFile,
   assertSectionConfigKeys,
@@ -3133,6 +3134,22 @@ function endRegisterLock() {
 // la sezione sbagliata non appena `generate-article.yml` le alterna.
 export function isRegisterLockHeld() {
   return isRegisterLockHeldImpl(PROJECT_ROOT, SECTION_NAME);
+}
+
+// Existing-article reruns rewrite the same registry/SEO surfaces as the SEO
+// recovery, but they historically only called resolveRegisterLockAtStartup()
+// and then proceeded without claiming the marker. Expose the section-aware
+// claim so every read-modify-write refresh can arbitrate with recovery and
+// cover regeneration before it takes its first snapshot.
+export function beginExistingArticleRefreshLock(id) {
+  if (!id) throw new Error('beginExistingArticleRefreshLock: id mancante');
+  return beginRegisterLockImpl(PROJECT_ROOT, `article-refresh:${id}`, SECTION_NAME, {
+    kind: REGISTER_LOCK_KIND_ARTICLE_REFRESH,
+  });
+}
+
+export function endExistingArticleRefreshLock() {
+  return endRegisterLockImpl(PROJECT_ROOT, SECTION_NAME);
 }
 
 // The files a completed registration must ALL carry the id in, used to tell a

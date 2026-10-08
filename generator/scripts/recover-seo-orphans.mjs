@@ -43,7 +43,9 @@ const SEO_CHUNK_RE = /^seo-blog(?:-\d+|-[a-z]+)?\.ts$/;
 const SEO_CONST_NAME = 'BLOG_SEO_METADATA';
 const HUB_SLUG = 'articoli-frontaliere';
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const META_FIELDS = ['title', 'excerpt', 'imageAlt'];
+const META_REQUIRED_FIELDS = ['title', 'excerpt', 'imageAlt'];
+const META_SEO_FIELDS = ['seoDescription', 'ogDescription'];
+const META_FIELDS = [...META_REQUIRED_FIELDS, ...META_SEO_FIELDS];
 
 function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
@@ -117,11 +119,14 @@ function valuesForArticle(meta, id) {
   for (const locale of LOCALES) {
     const fields = meta.get(locale);
     const values = Object.fromEntries(META_FIELDS.map((field) => [field, fields.get(field).get(id)]));
-    const missing = META_FIELDS.filter((field) => typeof values[field] !== 'string' || values[field].trim() === '');
+    const missing = META_REQUIRED_FIELDS.filter((field) => typeof values[field] !== 'string' || values[field].trim() === '');
     if (missing.length > 0) {
       throw new Error(`${id}: meta ${locale} missing ${missing.join(', ')}`);
     }
     content[locale] = { title: values.title, excerpt: values.excerpt };
+    for (const field of META_SEO_FIELDS) {
+      if (typeof values[field] === 'string' && values[field].trim() !== '') content[locale][field] = values[field];
+    }
     imageAlt[locale] = values.imageAlt;
   }
   return { content, imageAlt };
@@ -160,7 +165,12 @@ function buildArticle(registryEntry, meta, slugs, credits) {
     content: localized.content,
     imageAlt: localized.imageAlt,
     slugs: localizedSlugs,
-    seo: {},
+    seo: {
+      // The SEO entry is Italian-only, so preserve the persisted Italian
+      // surfaces when present and let deriveSeoMetadata fill only omissions.
+      ...(localized.content.it.seoDescription ? { description: localized.content.it.seoDescription } : {}),
+      ...(localized.content.it.ogDescription ? { ogDescription: localized.content.it.ogDescription } : {}),
+    },
     _generatedImagePath: registryEntry.image,
   };
   let provenance = declaredProvenance;

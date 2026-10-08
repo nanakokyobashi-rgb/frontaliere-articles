@@ -38,6 +38,8 @@ import {
   assertArticlePassesFactualityGates,
   assertGeneratedArticleQuality,
   resolveRegisterLockAtStartup,
+  beginExistingArticleRefreshLock,
+  endExistingArticleRefreshLock,
   buildBodyFile,
 } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified } from './lib/evergreen-article-refresh.mjs';
@@ -122,7 +124,7 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
  * is what keeps `bumpDateModified` from being asked to flicker over a rerun
  * that touched nothing).
  */
-export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT) {
+export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT, { lockHeld = false } = {}) {
   // Stessa ragione di `refreshBodyFiles` (follow-up #315): questa e' l'altra
   // meta' del rerun, e riscrive proprio i campi descrittivi — excerpt,
   // seoDescription, ogDescription, seo.description — che il guard tratta come
@@ -144,7 +146,7 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT) {
     data.id,
     localeTexts,
     { description: data.seo?.description, ogDescription: data.seo?.ogDescription },
-    { repoRoot },
+    { repoRoot, lockHeld },
   );
 }
 
@@ -223,6 +225,10 @@ async function main() {
   }
 
   console.log('♻️  same-day rerun — refreshing body files in place…');
+  // Existing-article refreshes read and rewrite the same registry/SEO
+  // surfaces as recover-seo-orphans. Claim the section marker before the
+  // first body/meta/registry read; on any error it remains as evidence.
+  beginExistingArticleRefreshLock(data.id);
   refreshBodyFiles(data);
   // Meta (excerpt/seoDescription/ogDescription) + SEO (description/
   // ogDescription) — issue #85: registerArticleFiles writes these ONCE, at
@@ -238,6 +244,7 @@ async function main() {
   if (!bumpDateModified(data.id, `${todayIso}T00:00:00+02:00`)) {
     console.warn('⚠️  dateModified not bumped — freshness signal may be stale.');
   }
+  endExistingArticleRefreshLock();
   console.log('✅ refreshed.');
 }
 

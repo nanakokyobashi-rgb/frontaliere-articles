@@ -71,6 +71,7 @@ import { writeJsonAtomic } from './atomic-write-json.mjs';
 // section and run id instead of allowing a generic gate failure.
 export const REGISTER_LOCK_DIR = 'generator/data';
 export const REGISTER_LOCK_KIND_ARTICLE = 'article-registration';
+export const REGISTER_LOCK_KIND_ARTICLE_REFRESH = 'article-refresh';
 export const REGISTER_LOCK_KIND_SEO_RECOVERY = 'seo-orphan-recovery';
 export const REGISTER_LOCK_KIND_COVER_REGENERATION = 'cover-regeneration';
 
@@ -461,10 +462,16 @@ export function resolveRegisterLock(projectRoot, buildTargets, section, knownSec
   for (const relPath of [LEGACY_REGISTER_LOCK_FILE, registerLockFile(section)]) {
     const lock = readLockAt(path.join(projectRoot, relPath));
     if (!lock) continue;
-    if (lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY || lock.kind === REGISTER_LOCK_KIND_COVER_REGENERATION) {
-      const kindLabel = lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY
-        ? 'SEO orphan recovery lock'
-        : 'cover regeneration lock';
+    if (
+      lock.kind === REGISTER_LOCK_KIND_ARTICLE_REFRESH
+      || lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY
+      || lock.kind === REGISTER_LOCK_KIND_COVER_REGENERATION
+    ) {
+      const kindLabel = lock.kind === REGISTER_LOCK_KIND_ARTICLE_REFRESH
+        ? 'existing-article refresh lock'
+        : lock.kind === REGISTER_LOCK_KIND_SEO_RECOVERY
+          ? 'SEO orphan recovery lock'
+          : 'cover regeneration lock';
       throw new RegisterLockError(
         `${kindLabel} still present at ${relPath} (${describeLockOrigin(lock)}); `
           + 'the writer owns the shared surface — inspect its marker before starting another producer.',

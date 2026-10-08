@@ -42,6 +42,7 @@ import {
 import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 import { sanitizePromptPlaceholders } from '../scripts/lib/prompt-placeholder-guard.mjs';
 import { bumpDateModified } from '../scripts/lib/evergreen-article-refresh.mjs';
+import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
@@ -404,6 +405,31 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
     assert.ok(seo.includes("description: 'SERP it',"));
     assert.ok(seo.includes("ogDescription: 'Social it',"));
     assert.ok(seo.includes('"description": "SERP it"'));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts prende il section lock prima del read-modify-write', () => {
+  const root = syntheticCorpus();
+  try {
+    const lockPath = registerLockPath(root, 'frontaliere');
+    const observed = [];
+    refreshDescriptiveTexts(
+      'demo-id',
+      { it: { excerpt: 'Estratto sotto lock' } },
+      { description: 'SERP sotto lock' },
+      {
+        repoRoot: root,
+        writeFile(file, content) {
+          observed.push({ file, lockHeld: fs.existsSync(lockPath) });
+          fs.writeFileSync(file, content);
+        },
+      },
+    );
+    assert.ok(observed.length > 0);
+    assert.ok(observed.every(({ lockHeld }) => lockHeld), 'ogni write deve avvenire sotto il marker');
+    assert.equal(fs.existsSync(lockPath), false, 'un refresh completato rilascia il marker');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
