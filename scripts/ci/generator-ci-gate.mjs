@@ -228,8 +228,12 @@ async function main() {
     // Conservativo: senza la lista file non so se il gate si applica, e non
     // posso escluderlo. Rosso, non verde per default. Un rate limit ha gia'
     // la sua annotation (causa + reset) scritta dall'helper.
-    const cause = e instanceof GitHubRateLimitError ? 'rate limit del token' : String(e).slice(0, 160);
-    console.log(`::error::generator-ci-gate: file della PR illeggibili (${cause}).`);
+    if (BASE_SHA) {
+      console.log(`::error::generator-ci-gate: diff locale della PR non verificabile (${String(e).slice(0, 160)}).`);
+    } else {
+      const cause = e instanceof GitHubRateLimitError ? 'rate limit del token' : String(e).slice(0, 160);
+      console.log(`::error::generator-ci-gate: file della PR illeggibili (${cause}).`);
+    }
     process.exit(1);
   }
   if (!touchesGeneratorCiPaths(files)) {

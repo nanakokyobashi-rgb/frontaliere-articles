@@ -6,7 +6,6 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fileURLToPath } from 'node:url';
 
 import { localChangedFiles } from '../../scripts/ci/generator-ci-gate.mjs';
 
