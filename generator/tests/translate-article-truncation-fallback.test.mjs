@@ -45,6 +45,7 @@ import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
 // esattamente la funzione che il loop ritagliato riceve in produzione, e una
 // copia locale nel test divergerebbe in silenzio dal fix (AGENTS.md #6).
 import { translatedStringOrNull, isSourcePassthrough, joinTranslatedChunks, translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
+import { localizedToponymInstruction } from '../scripts/lib/localized-toponyms.mjs';
 import { hasUsableContentText, hasUsableTranslatedText, metaFieldPlausibilityMiss } from '../scripts/lib/body2-payload-verdict.mjs';
 import {
   createFreeMtRecoveryReport,
@@ -1102,13 +1103,13 @@ const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {"
 async function runLegacyTranslateContent(sourceContent, callWithRetry) {
   const fn = new Function(
     'sourceContent', 'callWithRetry', 'ARTICLE_TRANSLATE_FREE_MT', 'translateContentFreeMt', 'TRANSLATION_CHUNK_THRESHOLD',
-    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'console',
+    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console',
     `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
     + "return translateContent('it', 'fr', '4/5', sourceContent);",
   );
   return fn(
     sourceContent, callWithRetry, false, async () => { throw new Error('ramo free-MT non atteso'); }, TRANSLATION_CHUNK_THRESHOLD,
-    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, { error: () => {}, warn: () => {} },
+    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, localizedToponymInstruction, { error: () => {}, warn: () => {} },
   );
 }
 

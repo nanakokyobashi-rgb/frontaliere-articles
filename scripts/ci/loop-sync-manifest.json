@@ -5774,6 +5774,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/localized-toponyms.mjs",
+      "mode": "corpus-only",
+      "reason": "Tabella unica e gate deterministico degli esonimi per cantoni e capoluoghi nelle quattro lingue del generatore: la stessa libreria alimenta il prompt di traduzione, il controllo prima della registrazione e il repair storico. Il sito consuma il corpus via JSON HTTP e non esegue questo generatore, quindi non esiste un gemello operativo da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/seo-backfill-lock.mjs",
       "mode": "corpus-only",
       "reason": "Marcatore locale al runner per il recupero deterministico delle voci SEO: un secondo recupero non può accodare un lotto concorrente a un chunk lasciato a metà da un'interruzione. Il lock della registrazione normale copre una creazione su più file, questo copre la scrittura di un solo chunk. Sul sito non esiste un writer equivalente.",
