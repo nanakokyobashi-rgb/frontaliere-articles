@@ -24,9 +24,15 @@
  *   - un `token:` proprio sul checkout: allora l'identita' persistita e' gia'
  *     quella voluta;
  *   - la rimozione delle voci `includeIf` che puntano al file
- *     `git-credentials-<uuid>.config`, come fanno i fixer.
+ *     `git-credentials-<uuid>.config`, come fanno i fixer;
+ *   - l'azzeramento nel comando stesso: `git -c
+ *     http.https://github.com/.extraheader= push …`. Un valore vuoto svuota
+ *     l'elenco degli header letti fin li', file inclusi compresi.
  *
- * L'`--unset-all` da solo non conta.
+ * L'`--unset-all` da solo non conta. Un push fatto da un clone a parte non
+ * entra nel conto: le credenziali del checkout valgono solo nel repository del
+ * workspace, e quel push non passa da una riga `git … push` del job con
+ * l'identita' costruita accanto.
  *
  * Solo testo dei workflow: nessun parser YAML, come gli altri test di forma.
  */
@@ -92,13 +98,20 @@ function isRealPush(line) {
   return openQuotes % 2 === 0;
 }
 
+/** Il push azzera da se' gli header persistiti: e' difeso qualunque cosa faccia il checkout. */
+function resetsPersistedHeader(line) {
+  return /-c\s+["']?http\.https:\/\/github\.com\/\.extraheader=["']?(?:\s|$)/.test(line);
+}
+
 /** Il job costruisce da se' l'identita' con cui va in rete. */
 const OWN_IDENTITY_RE = /x-access-token:|AUTHORIZATION: basic/i;
 
 function pushIdentityOf(job) {
   const body = job.lines.join('\n');
   const checkouts = checkoutsOf(job);
-  const pushes = job.lines.filter(isRealPush).length;
+  const pushLines = job.lines.filter(isRealPush);
+  const pushes = pushLines.length;
+  const undefendedPushes = pushLines.filter((line) => !resetsPersistedHeader(line)).length;
   const ownIdentity = OWN_IDENTITY_RE.test(body);
   const persisted = checkouts.filter((checkout) => !checkout.persistFalse && !checkout.ownToken).length;
   const dropsIncludeIf = /includeIf/.test(body) && /git-credentials-/.test(body) && /--unset-all/.test(body);
@@ -109,7 +122,8 @@ function pushIdentityOf(job) {
     ownIdentity,
     persisted,
     dropsIncludeIf,
-    exposed: pushes > 0 && ownIdentity && persisted > 0 && !dropsIncludeIf,
+    undefendedPushes,
+    exposed: undefendedPushes > 0 && ownIdentity && persisted > 0 && !dropsIncludeIf,
   };
 }
 
@@ -187,7 +201,12 @@ test('la forma del 7 ottobre, checkout persistito e solo --unset-all, e\' segnal
   assert.equal(row.exposed, true);
 });
 
-test('le tre difese valide non sono segnalate', () => {
+test('le difese valide non sono segnalate', () => {
+  assert.equal(jobFrom(workflowWith({
+    push: [
+      '          git -c http.https://github.com/.extraheader= push "https://x-access-token:${OWNER_PAT}@github.com/${GITHUB_REPOSITORY}.git" HEAD:main',
+    ],
+  })).exposed, false);
   assert.equal(jobFrom(workflowWith({ checkoutInputs: ['persist-credentials: false'] })).exposed, false);
   assert.equal(jobFrom(workflowWith({ checkoutInputs: ['token: ${{ secrets.OWNER_PAT }}'] })).exposed, false);
   assert.equal(jobFrom(workflowWith({
@@ -211,4 +230,17 @@ test('non e\' un push: la parola dentro una stringa, un commento, il push con il
   const sameIdentity = jobFrom(workflowWith({ push: ['          git push origin HEAD:refs/heads/data'] }));
   assert.equal(sameIdentity.pushes, 1);
   assert.equal(sameIdentity.exposed, false);
+});
+
+test('un solo push non difeso basta: l\'azzeramento vale per il comando che lo porta', () => {
+  const mixed = jobFrom(workflowWith({
+    push: [
+      '          auth="$(printf \'x-access-token:%s\' "$OWNER_PAT" | base64 | tr -d \'\\n\')"',
+      '          git -c http.https://github.com/.extraheader= push "https://x-access-token:${OWNER_PAT}@github.com/${GITHUB_REPOSITORY}.git" HEAD:data',
+      '          git -c "http.extraheader=AUTHORIZATION: basic $auth" push origin HEAD:main',
+    ],
+  }));
+  assert.equal(mixed.pushes, 2);
+  assert.equal(mixed.undefendedPushes, 1);
+  assert.equal(mixed.exposed, true);
 });
