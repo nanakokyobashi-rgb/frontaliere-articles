@@ -702,6 +702,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          # The BRANCH, not the SHA of the event. This job waits behind the
+          # previous generation in the concurrency group above, and by the time
+          # it starts the event's SHA is older than the article that run has
+          # just pushed. The generator would then read a tree without that
+          # article, and its start-of-run dedup (ids, source URLs, content)
+          # could not see it. Measured on run 37772192809 (2026-10-08): this job
+          # started nine seconds after the previous article landed and still
+          # generated from a tree three minutes older — the same source, twice
+          # in the same section (issue #2428). `github.sha` remains the
+          # identity of the EVENT: the step below reads it by name, never
+          # through HEAD.
+          ref: ${{ github.ref }}
           fetch-depth: 0
           # persist-credentials: false is load-bearing, not hygiene.
           # actions/checkout otherwise stores the GITHUB_TOKEN as
@@ -741,7 +753,7 @@ jobs:
             # commit, which is the conservative read.
             if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
                || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
-              CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)
+              CHANGED=$(git diff --name-only "${{ github.sha }}~1" "${{ github.sha }}" 2>/dev/null || true)
             else
               CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}" 2>/dev/null || true)
             fi
@@ -781,8 +793,10 @@ jobs:
             # own commit subject records which section it wrote, so flipping it
             # keeps the two sections growing at the same rate however long the
             # chain runs. Anything unrecognised (another producer's push, e.g.
-            # the border-wait digest) starts a frontaliere run.
-            case "$(git log -1 --format=%s)" in
+            # the border-wait digest) starts a frontaliere run. The subject is
+            # the EVENT's, read by name: HEAD is the branch tip (see Checkout)
+            # and may already be the article of the run this one waited for.
+            case "$(git log -1 --format=%s "${{ github.sha }}")" in
               *'(svizzera)'*) SEC=frontaliere ;;
               *'(frontaliere)'*) SEC=svizzera ;;
               *) SEC=frontaliere ;;
@@ -798,6 +812,12 @@ jobs:
             echo "chain=$CHAIN"
             echo "chain_link=$CHAIN_LINK"
           } >> "$GITHUB_OUTPUT"
+          # How far the tree is from the event: 0 when nothing landed while this
+          # job waited, N when N commits did — and the generator now sees them.
+          EVENT_SHA="${{ github.sha }}"
+          TIP_SHA="$(git rev-parse HEAD)"
+          AHEAD="$(git rev-list --count "${EVENT_SHA}..HEAD" 2>/dev/null || echo unknown)"
+          echo "CHECKOUT_TIP event=${EVENT_SHA:0:9} head=${TIP_SHA:0:9} ahead=${AHEAD}"
           echo "event=$EV chain=$CHAIN chain_link=$CHAIN_LINK → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
@@ -1820,6 +1840,7 @@ jobs:
         run: node scripts/generate-image-thumbnails.mjs
 
       - name: Commit and push
+        id: commit
         if: steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
@@ -1864,6 +1885,7 @@ jobs:
           # rebase il ledger puo' non avere piu' la voce del run (bookkeeping:
           # vince upstream), mentre il nuovo contenuto va comunque ricontrollato.
           PRODUCED="$(git rev-parse HEAD)"
+          printf '%s\n' "$PRODUCED" > "$RUNNER_TEMP/produced-article-commit"
           # Il registro delle immagini generate e' un ledger append-only, non una
           # cache sacrificabile: il rebase puo' prendere upstream per uscire da
           # un conflitto testuale, quindi conserviamo la copia di questo run e
@@ -2101,6 +2123,51 @@ jobs:
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
           exit 1
+
+      # ── CONSERVARE L'ARTICOLO SE IL PUSH FALLISCE ─────────────────────────
+      #
+      # L'8 ottobre due run avevano già generato e pagato un articolo, ma lo
+      # hanno perso quando il controllo post-rebase ha bloccato il push (issue
+      # 2489). Il 7 ottobre era successo lo stesso in un altro run (issue 2421).
+      # Questo artifact conserva il commit prodotto o il worktree per il replay
+      # manuale; la condizione qui sotto limita il recupero al solo fallimento
+      # del passo «Commit and push», così un gate a monte non diventa rigiocabile.
+      - name: Preserve the unpushed article
+        id: preserve_unpushed_article
+        if: ${{ failure() && steps.commit.outcome == 'failure' && steps.generate.outputs.article == 'true' && steps.mode.outputs.dry != 'true' }}
+        run: |
+          set -euo pipefail
+          produced_file="$RUNNER_TEMP/produced-article-commit"
+          preserved_dir="$RUNNER_TEMP/unpushed-article"
+          mkdir -p "$preserved_dir"
+          if [ -s "$produced_file" ]; then
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              "$(cat "$produced_file")" \
+              "$preserved_dir" \
+              "passo Commit and push fallito dopo il commit"
+          else
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              --worktree \
+              "$preserved_dir" \
+              "passo Commit and push fallito prima del commit"
+          fi
+          if [ ! -s "$preserved_dir/article.bundle" ] || [ ! -s "$preserved_dir/manifest.json" ] || [ ! -s "$preserved_dir/REPLAY.md" ]; then
+            echo "Niente da conservare: il commit prodotto non è replayable"
+            exit 0
+          fi
+          artifact_name="unpushed-article-${{ github.run_id }}-${{ github.run_attempt }}"
+          echo "Articolo generato conservato nell'artifact." >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact: \`$artifact_name\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "preserved=true" >> "$GITHUB_OUTPUT"
+
+      - name: Upload the unpushed article
+        if: ${{ always() && steps.preserve_unpushed_article.outputs.preserved == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: unpushed-article-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/unpushed-article
+          retention-days: 14
+          if-no-files-found: ignore
 
       # The summary used to read `steps.generate.outputs.generated`, which was
       # set to `true` on every exit-0 of create-article.mjs — and exiting 0

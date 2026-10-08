@@ -12814,6 +12814,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
     'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti',
     'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Incontro aziendale a Chiasso sulla conciliabilità vita-lavoro con partecipanti attorno a un tavolo',
+    'blog.article.scambio-portieri-lugano-ginevra.title': 'Scambio di portieri: mayer a Lugano, van pottelberghe a Ginevra',
+    'blog.article.scambio-portieri-lugano-ginevra.excerpt': '## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite',
+    'blog.article.scambio-portieri-lugano-ginevra.imageAlt': 'Portiere di hockey in azione alla Cornèr Arena di Lugano con sfondo delle Alpi svizzere',
 };
 
 export default blogMetaIt;

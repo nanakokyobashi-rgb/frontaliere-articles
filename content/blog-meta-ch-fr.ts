@@ -7925,6 +7925,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'TF: déduction des primes maladie refusée en garde alternée',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## En bref - Le TF rejette le recours d’un père divorcé. - La garde des enfants est alternée entre les parents. - Pas de déduction de 9\'000 francs',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Image éditoriale relative à: TF nega sconto cassa malati padre affidamento alternato',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.title': 'L\'IA et les semi-conducteurs tirent le commerce, l\'OMC révise sa croissance',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.excerpt': '## En bref - Semi-conducteurs et serveurs : commerce en hausse de 67 % - L\'IA a alimenté 47 % de la croissance mondiale - Estimation de l\'OMC : de 1,9 % à 3,9 %',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.imageAlt': 'Image éditoriale relative à: IA e semiconduttori trainano commercio, OMC rivede crescita',
 };
 
 export default blogMetaChFr;

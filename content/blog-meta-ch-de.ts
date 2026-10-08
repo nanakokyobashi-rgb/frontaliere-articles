@@ -7925,6 +7925,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'BGer verweigert Krankenkassenabzug bei alternierender Obhut des Vaters',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## Auf einen Blick - Das BGer weist die Beschwerde eines geschiedenen Vaters ab. - Die Obhut über die Kinder wird von den Eltern alternierend ausgeübt. - Kein Abzug von 9\'000 Franken',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Redaktionelles Bild zu: TF nega sconto cassa malati padre affidamento alternato',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.title': 'KI und Halbleiter treiben den Handel an, WTO revidiert Wachstumsschätzung',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.excerpt': '## Auf einen Blick - Halbleiter und Server: Handel wächst um 67% - KI hat 47% des weltweiten Wachstums angetrieben - WTO-Schätzung: von 1,9% auf 3,9%',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.imageAlt': 'Redaktionelles Bild zu: IA e semiconduttori trainano commercio, OMC rivede crescita',
 };
 
 export default blogMetaChDe;

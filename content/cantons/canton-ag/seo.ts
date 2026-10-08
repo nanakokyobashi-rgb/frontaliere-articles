@@ -109,6 +109,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-chiusura-hochrheinbahn-2026': {
+    title: 'Hochrheinbahn chiusa: Basilea-Rheinfelden dal 10 ottobre',
+    description: 'Dal 10 ottobre 2026 la Hochrheinbahn chiude tra Basilea e Rheinfelden: lavori, ritardi e bus sostitutivi cambiano gli spostamenti dei pendolari nell\'area.',
+    keywords: 'frontalieri, ticino, svizzera, italia, hochrheinbahn, chiusa, basilea-rheinfelden, ottobre',
+    ogTitle: 'Hochrheinbahn chiusa tra Basilea e Rheinfelden',
+    ogDescription: 'Dal 10 ottobre 2026 la tratta della Hochrheinbahn tra Basilea e Rheinfelden sarà chiusa per lavori di trasformazione. L\'avviso richiama bus sostitutivi e ritardi: pendolari e viaggiatori dovranno organizzare diversamente il percorso.',
+    canonicalPath: '/articoli-argovia/chiusura-hochrheinbahn-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hochrheinbahn chiusa: Basilea-Rheinfelden dal 10 ottobre",
+      "description": "Dal 10 ottobre 2026 la Hochrheinbahn chiude tra Basilea e Rheinfelden: lavori, ritardi e bus sostitutivi cambiano gli spostamenti dei pendolari nell'area.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-chiusura-hochrheinbahn-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno regionale sulla linea tra Basilea e Rheinfelden con bus sostitutivo"
+      },
+      "datePublished": "2026-10-08T14:00:19+00:00",
+      "dateModified": "2026-10-08T14:00:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/chiusura-hochrheinbahn-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

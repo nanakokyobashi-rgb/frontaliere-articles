@@ -76,10 +76,11 @@
  * illeggibili» o per un `generator-ci` lento.
  *
  * Uso:  node scripts/ci/generator-ci-gate.mjs
- * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, HEAD_SHA,
+ * Env:  GH_TOKEN, GITHUB_REPOSITORY, PR_NUMBER, PR_BASE_SHA, HEAD_SHA,
  *       GENERATOR_CI_GATE_TIMEOUT_MS (opzionale, default 30 min)
  * Exit: 0 non applicabile o success · 1 fallito/pending oltre il tetto
  */
+import { execFileSync } from 'node:child_process';
 import { touchesGeneratorCiPaths } from './auto-merge-eval.mjs';
 import { GENERATOR_CI_JOB_NAME } from './lib/constants.mjs';
 import { latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
@@ -149,8 +150,42 @@ export function pollDelayMs(attempt, { nowMs, deadlineMs } = {}) {
   return Math.max(0, Math.min(step, deadlineMs - nowMs));
 }
 
+const FULL_SHA_RE = /^[0-9a-f]{40}$/i;
+const GIT_DIFF_MAX_BUFFER = 64 * 1024 * 1024;
+
+/**
+ * Elenco locale dei file fra la base e la head della PR.
+ *
+ * Il gate gira sul checkout completo di `tests.yml`, quindi questa lettura non
+ * deve consumare il bucket REST condiviso solo per decidere se il gate si
+ * applica. `--no-renames` mantiene sia il vecchio sia il nuovo lato di un
+ * rename: una rimozione da `generator/` deve restare conservativa quanto un
+ * file aggiunto lì. Il formato NUL preserva anche nomi con newline.
+ *
+ * @param {{baseSha?: string, headSha?: string, exec?: Function}} options
+ * @returns {string[]}
+ */
+export function localChangedFiles({ baseSha, headSha, exec = execFileSync } = {}) {
+  const base = String(baseSha ?? '').trim();
+  const head = String(headSha ?? '').trim();
+  if (!FULL_SHA_RE.test(base) || !FULL_SHA_RE.test(head)) {
+    throw new Error('PR_BASE_SHA e HEAD_SHA devono essere SHA completi da 40 caratteri');
+  }
+  const raw = exec('git', [
+    'diff',
+    '--no-ext-diff',
+    '--no-renames',
+    '--name-only',
+    '-z',
+    `${base}...${head}`,
+    '--',
+  ], { encoding: 'utf8', maxBuffer: GIT_DIFF_MAX_BUFFER });
+  return String(raw).split('\0').filter(Boolean);
+}
+
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const PR = process.env.PR_NUMBER || '';
+const BASE_SHA = process.env.PR_BASE_SHA || '';
 const HEAD_SHA = process.env.HEAD_SHA || '';
 const TIMEOUT_MS = Number(process.env.GENERATOR_CI_GATE_TIMEOUT_MS || 30 * 60 * 1000);
 
@@ -173,19 +208,32 @@ async function main() {
   const readBudgetMs = () => Math.max(0, Math.min(RATE_LIMIT_MAX_WAIT_MS, deadline - Date.now()));
   let files;
   try {
-    files = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'], {
-      json: false,
-      maxWaitMs: readBudgetMs(),
-    })
-      .split('\n')
-      .map((s) => s.trim())
-      .filter(Boolean);
+    if (BASE_SHA) {
+      // Il percorso normale del workflow ha gia' base e head nel checkout:
+      // decidere che una PR non attiva generator-ci non deve costare una REST.
+      files = localChangedFiles({ baseSha: BASE_SHA, headSha: HEAD_SHA });
+      console.log(`generator-ci-gate: scope letto localmente da ${BASE_SHA}...${HEAD_SHA} (nessuna lettura REST dei file PR).`);
+    } else {
+      // Compatibilita' per invocazioni storiche/manuali che non passano la base.
+      // Nel workflow reale PR_BASE_SHA e' obbligatorio per evitare questo ramo.
+      files = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'], {
+        json: false,
+        maxWaitMs: readBudgetMs(),
+      })
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean);
+    }
   } catch (e) {
     // Conservativo: senza la lista file non so se il gate si applica, e non
     // posso escluderlo. Rosso, non verde per default. Un rate limit ha gia'
     // la sua annotation (causa + reset) scritta dall'helper.
-    const cause = e instanceof GitHubRateLimitError ? 'rate limit del token' : String(e).slice(0, 160);
-    console.log(`::error::generator-ci-gate: file della PR illeggibili (${cause}).`);
+    if (BASE_SHA) {
+      console.log(`::error::generator-ci-gate: diff locale della PR non verificabile (${String(e).slice(0, 160)}).`);
+    } else {
+      const cause = e instanceof GitHubRateLimitError ? 'rate limit del token' : String(e).slice(0, 160);
+      console.log(`::error::generator-ci-gate: file della PR illeggibili (${cause}).`);
+    }
     process.exit(1);
   }
   if (!touchesGeneratorCiPaths(files)) {

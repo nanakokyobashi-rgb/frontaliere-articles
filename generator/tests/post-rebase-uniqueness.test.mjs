@@ -337,6 +337,63 @@ test('una chiave con l\'identita\' dell\'item non passa dal ponte di forma 1 (P5
   assert.equal(violations[0].kind, 'source-url-cross-section');
 });
 
+// ── La stessa fonte nella STESSA sezione, finche' la voce e' viva (#2428) ──
+
+const NOW_8_OCT = Date.parse('2026-10-08T11:33:00.000Z');
+const TIO_MATCH = 'https://www.tio.ch/ticino/attualita/1955532/tifosi-lugano-traffico-lucerna-disagi-strade-politica';
+
+test('#2428: la fonte appena registrata da un altro articolo della STESSA sezione ferma il push', () => {
+  // L'incidente dell'8 ottobre 2026: `lugano-lucerna-partita-traffico` alle
+  // 11:18Z e `tifosi-lucerna-lugano-traffico` 14 minuti dopo, dalla stessa
+  // pagina. Il ledger post-rebase e' quello di upstream: la voce del secondo
+  // run non c'e' piu', quella del primo si'.
+  const first = { articleId: 'lugano-lucerna-partita-traffico', ts: '2026-10-08T11:18:04.652Z', keyForm: 2 };
+  const mine = { articleId: 'tifosi-lucerna-lugano-traffico', ts: '2026-10-08T11:31:48.000Z', keyForm: 2 };
+  const produced = snapshot({ [FIRST.section]: { ids: [mine.articleId], ledger: { [TIO_MATCH]: mine } } });
+  const against = snapshot({
+    [FIRST.section]: { ids: [first.articleId, mine.articleId], ledger: { [TIO_MATCH]: first } },
+  });
+  const { violations } = findPostRebaseViolations({ producedBase: snapshot({}), produced, against }, { now: NOW_8_OCT });
+  assert.deepEqual(violations, [{
+    kind: 'source-url-same-section',
+    section: FIRST.section,
+    id: mine.articleId,
+    url: TIO_MATCH,
+    otherId: first.articleId,
+  }]);
+});
+
+test('#2428: una voce scaduta nella stessa sezione non blocca, una ancora viva si\'', () => {
+  // Il riuso di una fonte dopo `SOURCE_URL_TTL_DAYS` e' voluto: a inizio run la
+  // voce scaduta non blocca, e non deve bloccare nemmeno qui.
+  const mine = { articleId: 'nuovo', ts: '2026-10-08T11:31:48.000Z', keyForm: 2 };
+  const state = (theirs) => ({
+    producedBase: snapshot({ [FIRST.section]: { ids: ['vecchio'], ledger: { [URL_A]: theirs } } }),
+    produced: snapshot({ [FIRST.section]: { ids: ['vecchio', 'nuovo'], ledger: { [URL_A]: mine } } }),
+    // Al rebase il ledger e' quello di upstream: resta la voce dell'altro.
+    against: snapshot({ [FIRST.section]: { ids: ['vecchio', 'nuovo'], ledger: { [URL_A]: theirs } } }),
+  });
+  const expired = { articleId: 'vecchio', ts: '2026-10-02T11:00:00.000Z', keyForm: 2 };
+  assert.deepEqual(findPostRebaseViolations(state(expired), { now: NOW_8_OCT }).violations, []);
+
+  const live = { articleId: 'vecchio', ts: '2026-10-04T11:00:00.000Z', keyForm: 2 };
+  const { violations } = findPostRebaseViolations(state(live), { now: NOW_8_OCT });
+  assert.equal(violations.length, 1);
+  assert.equal(violations[0].kind, 'source-url-same-section');
+  assert.equal(violations[0].otherId, 'vecchio');
+});
+
+test('#2428: la voce di questo run, rimasta dopo il rebase, non e\' una collisione con se stessi', () => {
+  const mine = { articleId: 'nuovo', ts: '2026-10-08T11:31:48.000Z', keyForm: 2 };
+  const produced = snapshot({ [FIRST.section]: { ids: ['nuovo'], ledger: { [URL_A]: mine } } });
+  const { violations, newSourceUrls } = findPostRebaseViolations(
+    { producedBase: snapshot({}), produced, against: produced },
+    { now: NOW_8_OCT },
+  );
+  assert.deepEqual(violations, []);
+  assert.equal(newSourceUrls.length, 1);
+});
+
 test('solo cio\' che il run ha aggiunto conta: un duplicato storico non fa scattare niente', () => {
   // I duplicati cross-sezione gia' nel corpus (cross-section-duplicate-ratchet)
   // stanno nella BASE del commit prodotto: non sono «nuovi».
@@ -510,6 +567,23 @@ test('CLI URL fonte in un\'altra sezione: exit 1 anche se il ledger post-rebase 
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 1, out);
     assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=source-url-cross-section section=${SECOND.section} id=mio other=${FIRST.section} otherId=suo`));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('CLI stessa fonte nella stessa sezione: exit 1 con la violazione same-section (#2428)', () => {
+  // Date relative: la voce di upstream deve essere viva quando gira il test.
+  const fresh = (articleId) => ({ articleId, ts: new Date().toISOString(), keyForm: 2 });
+  const mine = sectionFiles(FIRST, { ids: ['mio'], ledger: { [URL_A]: fresh('mio') } });
+  const upstream = sectionFiles(FIRST, { ids: ['suo'], ledger: { [URL_A]: fresh('suo') } });
+  // Rigiocato: i due articoli convivono nel registro, il ledger e' di upstream.
+  const rebased = sectionFiles(FIRST, { ids: ['suo', 'mio'], ledger: { [URL_A]: fresh('suo') } });
+  const w = world({ upstream, mine, rebased });
+  try {
+    const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+    assert.equal(code, 1, out);
+    assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=source-url-same-section section=${FIRST.section} id=mio otherId=suo`));
   } finally {
     w.cleanup();
   }

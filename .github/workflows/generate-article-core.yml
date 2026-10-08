@@ -377,6 +377,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.ref }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -401,7 +402,7 @@ jobs:
             BEFORE="${{ github.event.before }}"
             if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
                || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
-              CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)
+              CHANGED=$(git diff --name-only "${{ github.sha }}~1" "${{ github.sha }}" 2>/dev/null || true)
             else
               CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}" 2>/dev/null || true)
             fi
@@ -433,7 +434,7 @@ jobs:
             fi
           elif [ "$CHAIN" = "true" ]; then
             if [ -n "$SIBLING_SECTION" ]; then
-              case "$(git log -1 --format=%s)" in
+              case "$(git log -1 --format=%s "${{ github.sha }}")" in
                 *"($SIBLING_SECTION)"*) SEC="$PRIMARY_SECTION" ;;
                 *"($PRIMARY_SECTION)"*) SEC="$SIBLING_SECTION" ;;
               esac
@@ -449,6 +450,10 @@ jobs:
             echo "chain=$CHAIN"
             echo "chain_link=$CHAIN_LINK"
           } >> "$GITHUB_OUTPUT"
+          EVENT_SHA="${{ github.sha }}"
+          TIP_SHA="$(git rev-parse HEAD)"
+          AHEAD="$(git rev-list --count "${EVENT_SHA}..HEAD" 2>/dev/null || echo unknown)"
+          echo "CHECKOUT_TIP event=${EVENT_SHA:0:9} head=${TIP_SHA:0:9} ahead=${AHEAD}"
           echo "event=$EV chain=$CHAIN chain_link=$CHAIN_LINK → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
@@ -911,6 +916,7 @@ jobs:
         run: node scripts/generate-image-thumbnails.mjs
 
       - name: Commit and push
+        id: commit
         if: steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
@@ -930,6 +936,7 @@ jobs:
             git commit -m "Record rejected topic candidates (${{ steps.mode.outputs.section }} — no article generated)"
           fi
           PRODUCED="$(git rev-parse HEAD)"
+          printf '%s\n' "$PRODUCED" > "$RUNNER_TEMP/produced-article-commit"
           registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
           if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
@@ -1001,6 +1008,43 @@ jobs:
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
           exit 1
+
+      - name: Preserve the unpushed article
+        id: preserve_unpushed_article
+        if: ${{ failure() && steps.commit.outcome == 'failure' && steps.generate.outputs.article == 'true' && steps.mode.outputs.dry != 'true' }}
+        run: |
+          set -euo pipefail
+          produced_file="$RUNNER_TEMP/produced-article-commit"
+          preserved_dir="$RUNNER_TEMP/unpushed-article"
+          mkdir -p "$preserved_dir"
+          if [ -s "$produced_file" ]; then
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              "$(cat "$produced_file")" \
+              "$preserved_dir" \
+              "passo Commit and push fallito dopo il commit"
+          else
+            bash scripts/ci/preserve-unpushed-commit.sh \
+              --worktree \
+              "$preserved_dir" \
+              "passo Commit and push fallito prima del commit"
+          fi
+          if [ ! -s "$preserved_dir/article.bundle" ] || [ ! -s "$preserved_dir/manifest.json" ] || [ ! -s "$preserved_dir/REPLAY.md" ]; then
+            echo "Niente da conservare: il commit prodotto non è replayable"
+            exit 0
+          fi
+          artifact_name="unpushed-article-${{ github.run_id }}-${{ github.run_attempt }}"
+          echo "Articolo generato conservato nell'artifact." >> "$GITHUB_STEP_SUMMARY"
+          echo "Artifact: \`$artifact_name\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "preserved=true" >> "$GITHUB_OUTPUT"
+
+      - name: Upload the unpushed article
+        if: ${{ always() && steps.preserve_unpushed_article.outputs.preserved == 'true' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: unpushed-article-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/unpushed-article
+          retention-days: 14
+          if-no-files-found: ignore
 
       - name: Cleanup Codex auth broker
         if: always()

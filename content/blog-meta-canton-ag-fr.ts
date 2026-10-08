@@ -12,6 +12,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.argovia-parita-salariale.title': 'Argovie : initiative pour l\'égalité salariale',
     'blog.article.argovia-parita-salariale.excerpt': 'En Argovie, l\'initiative pour l\'égalité salariale demande des analyses à partir de 50 employés, des sanctions et le rétablissement du bureau de l\'égalité.',
     'blog.article.argovia-parita-salariale.imageAlt': 'Des travailleuses et militantes discutent de l\'égalité salariale en Argovie',
+    'blog.article.chiusura-hochrheinbahn-2026.title': 'Hochrheinbahn fermée : Bâle-Rheinfelden à partir du 10 octobre',
+    'blog.article.chiusura-hochrheinbahn-2026.excerpt': 'À partir du 10 octobre 2026, la Hochrheinbahn sera fermée entre Bâle et Rheinfelden : les travaux, les retards et les bus de remplacement modifieront les déplacements des navetteurs.',
+    'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Ligne régionale entre Bâle et Rheinfelden avec bus de remplacement',
 };
 
 export default blogMetaCantonAgFr;

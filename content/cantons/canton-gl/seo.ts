@@ -40,6 +40,46 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-premi-standard-glarona': {
+    title: 'Glarona: di nuovo i premi standard più bassi | Frontaliere Ticino',
+    description: 'La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, glarona, nuovo, premi, standard',
+    ogTitle: 'Glarona: di nuovo i premi standard più bassi',
+    ogDescription: 'La Glarner Krankenversicherung torna ai premi standard più bassi. Lo stesso risultato si era già verificato e aveva portato la cassa in serie difficoltà. La fonte segnala però una differenza importante questa volta.',
+    canonicalPath: '/articoli-glarona/premi-standard-glarona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Glarona: di nuovo i premi standard più bassi",
+      "description": "La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-premi-standard-glarona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La Glarner Krankenversicherung torna ad avere i premi standard più bassi"
+      },
+      "datePublished": "2026-10-08T13:30:13+00:00",
+      "dateModified": "2026-10-08T13:30:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/premi-standard-glarona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

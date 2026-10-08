@@ -7925,6 +7925,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'TF denies health insurance discount to father with alternating custody',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## TL;DR - The Federal Supreme Court rejects the appeal of a divorced father. - Child custody alternates between the parents. - No deduction of 9\'000 francs',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Editorial image related to: TF nega sconto cassa malati padre affidamento alternato',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.title': 'AI and semiconductors drive trade, WTO revises growth',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.excerpt': '## TL;DR - Semiconductors and servers: trade growing by 67% - AI fueled 47% of global growth - WTO estimate: from 1,9% to 3,9%',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.imageAlt': 'Editorial image related to: IA e semiconduttori trainano commercio, OMC rivede crescita',
 };
 
 export default blogMetaChEn;

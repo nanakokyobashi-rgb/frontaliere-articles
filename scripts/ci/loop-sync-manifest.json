@@ -219,11 +219,21 @@
     {
       "path": "scripts/ci/check-post-rebase-uniqueness.mjs",
       "mode": "corpus-only",
-      "reason": "Ricontrollo di unicita' (id globale fra sezioni, URL fonte fra sezioni) che generate-article.yml esegue dopo un rebase riuscito e prima del push (D18, sezioni cantonali). Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, il ledger da article-surfaces.mjs.",
+      "reason": "Ricontrollo di unicita' (id globale fra sezioni, URL fonte fra sezioni e, dentro la stessa sezione, finche' la voce del ledger e' viva: issue 2428) che generate-article.yml e generate-article-core.yml eseguono dopo un rebase riuscito e prima del push (D18, sezioni cantonali). Esiste solo qui perche' il push con rebase degli articoli generati vive solo nel corpus: il sito non genera articoli. Le sezioni vengono da ARTICLE_SECTION_CORE_LIST, il ledger da article-surfaces.mjs.",
       "baseline": {
         "site": null,
-        "corpus": "9771a71da3aaa747",
-        "alignedAt": "2026-10-05"
+        "corpus": "13c3667a258c9813",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "scripts/ci/preserve-unpushed-commit.sh",
+      "mode": "corpus-only",
+      "reason": "Conserva come bundle git il commit o il worktree non ancora committato dei cinque producer (generate-article.yml, generate-article-core.yml, generate-daily-brief.yml, publish-journalist-articles.yml e batch-faq-articles.yml) quando il passo Commit and push fallisce, distinguendo la source nel manifest e documentando il replay nell'artifact del run (issue 2489). Esiste solo nel corpus: il sito non ha un generatore che committa articoli su main.",
+      "baseline": {
+        "site": null,
+        "corpus": "839f62482838c8b8",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -232,8 +242,8 @@
       "reason": "Generatore di generate-article-core.yml (i job di generate-article.yml senza commenti, piu' le sostituzioni dichiarate) e dei 24 chiamanti generate-article-<cantone>.yml (cron, push.paths e gruppo di concurrency da canton-sections.json e dal core), con --check; la parita' byte per byte e' in generator/tests/canton-article-workflows.test.mjs. Corpus-only: generate-article.yml non e' nel manifest e non ha un gemello sul sito, quindi nemmeno cio' che ne deriva. Il modello e' scripts/generate-crawler-group-workflows.mjs del sito, che genera altri workflow.",
       "baseline": {
         "site": null,
-        "corpus": "f978004d43015b6b",
-        "alignedAt": "2026-10-05"
+        "corpus": "e03a5f584fef3361",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -895,7 +905,7 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile. 2026-10-08: il gate generator-ci risolve lo scope dal diff locale `base...head` e passa alla REST dei file PR solo nelle invocazioni legacy senza `PR_BASE_SHA`, eliminando la lettura inutile su ogni PR non-generator.",
       "baseline": {
         "site": "7b647c07268b94ce",
         "corpus": "9c601148e973f83d",
@@ -3243,8 +3253,8 @@
       "reason": "Il verdetto sulla risposta di generazione IT (`ok` / `topic-gate-abort` / `reject`), estratto da generator/scripts/create-article.mjs insieme al normalizzatore `normalizeItalianContentFromPayload` che quel verdetto interroga. Nasce il 2026-08-18 dal difetto della run 32175400548: il ciclo `isBody2Check` di `callLLM()` conosceva DUE esiti dove il contratto del prompt ne prevede TRE, e leggeva l'abort di REGOLA #0 (`abort_topical_relevance: true` con i campi di contenuto a null) come «content.it non normalizzabile» — cinque chiamate a `claude-cli/haiku` invece di una, e la sezione chiusa senza articolo. `corpus-only` e non `identical`: il sito ha la sua copia inline dentro scripts/create-article.mjs, gia' registrato `adapted`, quindi un gemello di FILE qui non esiste — stessa forma di article-meta-block.mjs sopra. La ragione dell'estrazione e' verificabilita', non estetica: create-article.mjs non e' importabile dalle gate del generatore, che girano `node --test` senza `npm ci` e non hanno `jsdom` (tirato dentro a module scope da extract-article-text.mjs). Finche' la regola stava inline, l'unico modo di provarla era ricopiarla nel test — una copia che diverge in silenzio. Il modulo e' tenuto PURO e dependency-free apposta: se il gemello del sito tornasse a generare e' copiabile senza adattamenti.",
       "baseline": {
         "site": null,
-        "corpus": "dc1baf17b73d1cd2",
-        "alignedAt": "2026-08-18"
+        "corpus": "ad7b50777e58e2d9",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -4636,7 +4646,7 @@
     {
       "path": "scripts/ci/generator-ci-gate.mjs",
       "mode": "corpus-only",
-      "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui. Dal 2026-09-25 il polling dei check-run parte da 60 s con backoff fino a 120 s (era 20 s fisso: fino a 90 letture per run sul bucket REST condiviso) e le letture passano da `lib/gh-rate-limit.mjs`; la scadenza di 30 minuti resta il tetto e ora copre l'intero step, compresa un'eventuale attesa del reset sulla lettura dei file.",
+      "reason": "Porta il gate condizionale su generator-ci.yml (ex gate 4 di auto-merge-eval) dentro il job che produce il check richiesto dal ruleset: il ruleset puo' richiedere solo contesti presenti su OGNI PR, e generator-ci.yml e' path-scoped. Non ha e non puo' avere un gemello: generator-ci.yml esiste solo qui. Dal 2026-09-25 il polling dei check-run parte da 60 s con backoff fino a 120 s (era 20 s fisso: fino a 90 letture per run sul bucket REST condiviso) e le letture passano da `lib/gh-rate-limit.mjs`; la scadenza di 30 minuti resta il tetto e ora copre l'intero step. 2026-10-08: quando `PR_BASE_SHA` e' disponibile, lo scope dei file e' calcolato con `git diff --no-renames` locale prima di qualunque REST; la lettura API dei file resta solo il fallback per invocazioni senza base verificabile.",
       "baseline": {
         "site": null,
         "corpus": "fa25df2f5bba0fa1",
