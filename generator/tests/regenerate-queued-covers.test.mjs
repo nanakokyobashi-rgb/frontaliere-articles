@@ -15,6 +15,7 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
+import { webpDimensions } from '../scripts/lib/commons-credit.mjs';
 import { appendImageRegenerationQueue } from '../scripts/lib/image-regeneration-queue.mjs';
 import {
   drainQueuedCovers,
@@ -111,14 +112,17 @@ function item(articleId, requestedAt, title = articleId) {
 }
 
 function validThumbnailBytes() {
-  const bytes = Buffer.alloc(30);
-  bytes.write('RIFF', 0, 'ascii');
-  bytes.writeUInt32LE(22, 4);
-  bytes.write('WEBPVP8X', 8, 'ascii');
-  bytes.writeUInt32LE(10, 16);
-  bytes.writeUIntLE(479, 24, 3);
-  bytes.writeUIntLE(269, 27, 3);
-  return bytes;
+  return Buffer.from('UklGRigAAABXRUJQVlA4TBsAAAAv30FDAAdQti71tv8BAEX6/58i+p/63//+TxoA', 'base64');
+}
+
+async function decodeFixtureThumbnail(bytes) {
+  const dimensions = webpDimensions(bytes);
+  if (!dimensions || bytes.length !== validThumbnailBytes().length) throw new Error('truncated WebP fixture');
+  return dimensions;
+}
+
+function drain(options) {
+  return drainQueuedCovers({ decodeThumbnail: decodeFixtureThumbnail, ...options });
 }
 
 function fakeCover(root) {
@@ -155,7 +159,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
 
     let calls = 0;
     const generateCover = fakeCover(root);
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -181,7 +185,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
     assert.deepEqual(remaining.items.map((entry) => entry.articleId), ['canton-newer']);
 
-    const second = await drainQueuedCovers({
+    const second = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -222,7 +226,7 @@ test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', asy
     ]);
 
     const seen = [];
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 4,
       generateCover: async (entry, ...args) => {
@@ -234,6 +238,38 @@ test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', asy
 
     assert.deepEqual(seen, ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']);
     assert.equal(summary.drained, 4);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('canonizza gli articleId duplicati prima di selezionare e rimuovere il lavoro', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'duplicate-queue-entry';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
+    queue(root, [
+      item(articleId, '2026-10-07T09:00:00.000Z'),
+      { ...item(articleId, '2026-10-07T10:00:00.000Z'), reason: 'newer request' },
+    ]);
+
+    let calls = 0;
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: async (...args) => {
+        calls += 1;
+        return fakeCover(root)(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(calls, 1);
+    assert.equal(summary.drained, 1);
+    assert.equal(summary.residual, 0);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items, []);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -278,7 +314,7 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
     queue(root, [{ ...item(articleId, '2026-10-07T09:00:00.000Z'), status: 'failed', failureCount: 3 }]);
 
     let calls = 0;
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async () => {
@@ -302,7 +338,7 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
 });
 
 test('una copertina con thumbnail mancante o invalido viene riparata prima di togliere la coda', async () => {
-  for (const thumbnailState of ['missing', 'invalid']) {
+  for (const thumbnailState of ['missing', 'invalid', 'truncated']) {
     const root = tempRoot();
     try {
       const articleId = `partial-thumbnail-${thumbnailState}`;
@@ -316,10 +352,13 @@ test('una copertina con thumbnail mancante o invalido viene riparata prima di to
       if (thumbnailState === 'invalid') {
         write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'not a webp');
       }
+      if (thumbnailState === 'truncated') {
+        write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes().subarray(0, 30));
+      }
       queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
 
       let thumbnailCalls = 0;
-      const summary = await drainQueuedCovers({
+      const summary = await drain({
         root,
         limit: 1,
         generateCover: async () => { throw new Error('must reuse the materialized record'); },
@@ -342,6 +381,8 @@ test('una copertina con thumbnail mancante o invalido viene riparata prima di to
 
 test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo', () => {
   assert.equal(isVisualTextFailure('vision gate rejected image: visible lettering and signage'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: words and numbers in the scene'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: forbidden content'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: recognizable face'), false);
   assert.equal(isVisualTextFailure('provider unavailable'), false);
   assert.match(NO_TEXT_IMAGE_RETRY_HINT, /no signs/);
@@ -361,7 +402,7 @@ test('non ritenta le voci failed in schedule e le riapre solo con retry esplicit
     }]);
 
     let calls = 0;
-    const skipped = await drainQueuedCovers({
+    const skipped = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -375,7 +416,7 @@ test('non ritenta le voci failed in schedule e le riapre solo con retry esplicit
     assert.equal(calls, 0);
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0].failureCount, 3);
 
-    const retried = await drainQueuedCovers({
+    const retried = await drain({
       root,
       limit: 1,
       retryFailed: true,
@@ -404,7 +445,7 @@ test('un fallimento conserva articolo e coda, e il terzo tentativo resta marcato
     const fail = async () => { throw new Error('provider unavailable'); };
 
     for (let attempt = 1; attempt <= 3; attempt += 1) {
-      const summary = await drainQueuedCovers({
+      const summary = await drain({
         root,
         limit: 1,
         generateCover: fail,
@@ -433,7 +474,7 @@ test('un errore dopo la generazione ripristina articolo, registro e file prima d
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, originalImage));
     fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
 
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: fakeCover(root),
@@ -461,7 +502,7 @@ test('un errore nella persistenza della rimozione ripristina la transazione prim
     const queuePath = path.join(root, 'data/image-regeneration-queue.json');
 
     await assert.rejects(
-      () => drainQueuedCovers({
+      () => drain({
         root,
         limit: 1,
         generateCover: fakeCover(root),
@@ -499,7 +540,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
     write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
 
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async () => { throw new Error('must not regenerate'); },
@@ -677,6 +718,7 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
   assert.match(workflow, /queued-cover-expected-queue\.json/);
   assert.match(workflow, /\.residualMissing = \$missing/);
   assert.match(workflow, /\.residualSource = "pushed-branch"/);
+  assert.match(workflow, /\[\.items\[\] \| \.articleId \| tostring\] \| unique \| length/);
   assert.match(workflow, /queued-cover queue count diverged after push/);
   assert.match(workflow, /if \[ "\$actual" -ne "\$internal" \]/);
   assert.match(workflow, /queued-cover queue items lost after push/);

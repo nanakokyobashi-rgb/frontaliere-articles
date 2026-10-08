@@ -140,7 +140,7 @@ jobs:
               return 1
             fi
             internal="$(jq -er '.residual // error("missing residual")' "$SUMMARY_FILE")"
-            expected_count="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid expected queue") end' "$expected_queue")"
+            expected_count="$(jq -er 'if .schema == 1 and (.items | type == "array") then ([.items[] | .articleId | tostring] | unique | length) else error("invalid expected queue") end' "$expected_queue")"
             expected_ids="$(jq -er 'if .schema == 1 and (.items | type == "array") then [.items[] | .articleId | tostring] | unique else error("invalid expected queue") end' "$expected_queue")"
             if [ "$internal" -ne "$expected_count" ]; then
               echo "::error::queued-cover summary diverged before push: drainer=$internal, snapshot=$expected_count"
@@ -151,7 +151,7 @@ jobs:
             else
               pushed_queue='{"schema":1,"items":[]}'
             fi
-            actual="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid queue") end' <<< "$pushed_queue")"
+            actual="$(jq -er 'if .schema == 1 and (.items | type == "array") then ([.items[] | .articleId | tostring] | unique | length) else error("invalid queue") end' <<< "$pushed_queue")"
             actual_ids="$(jq -er 'if .schema == 1 and (.items | type == "array") then [.items[] | .articleId | tostring] | unique else error("invalid queue") end' <<< "$pushed_queue")"
             missing="$(jq -ner --argjson expected "$expected_ids" --argjson actual "$actual_ids" '$expected - $actual')"
             verified="${SUMMARY_FILE}.verified"

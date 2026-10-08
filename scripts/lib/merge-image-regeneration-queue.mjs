@@ -114,6 +114,16 @@ function mergeItem(existing, candidate) {
   };
 }
 
+function indexItems(items) {
+  const indexed = new Map();
+  for (const item of items) {
+    const articleId = String(item.articleId);
+    const existing = indexed.get(articleId);
+    indexed.set(articleId, existing ? mergeItem(existing, item) : { ...item, articleId });
+  }
+  return indexed;
+}
+
 function isNewRequestAfterDrainStart(baseItem, candidate) {
   const baseRequestedAt = timeOf(baseItem.requestedAt);
   const candidateRequestedAt = timeOf(candidate.requestedAt);
@@ -123,9 +133,9 @@ function isNewRequestAfterDrainStart(baseItem, candidate) {
 
 /** Pure three-way merge used by the conflict resolver and its tests. */
 export function mergeImageRegenerationQueues(upstream, replayed, base = { items: [] }) {
-  const baseByArticle = new Map(base.items.map((item) => [String(item.articleId), item]));
-  const upstreamByArticle = new Map(upstream.items.map((item) => [String(item.articleId), item]));
-  const replayedByArticle = new Map(replayed.items.map((item) => [String(item.articleId), item]));
+  const baseByArticle = indexItems(base.items);
+  const upstreamByArticle = indexItems(upstream.items);
+  const replayedByArticle = indexItems(replayed.items);
   const byArticle = new Map();
   const articleIds = [...new Set([...upstream.items, ...replayed.items].map((item) => String(item.articleId)))];
 
@@ -164,6 +174,13 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
   return {
     schema: IMAGE_REGENERATION_QUEUE_SCHEMA,
     items: [...byArticle.values()],
+  };
+}
+
+export function canonicalizeImageRegenerationQueue(queue) {
+  return {
+    schema: IMAGE_REGENERATION_QUEUE_SCHEMA,
+    items: [...indexItems(queue.items).values()],
   };
 }
 

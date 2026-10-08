@@ -1041,6 +1041,22 @@ test('il merge della coda segue la richiesta piu recente e conserva i contatori 
   );
 });
 
+test('il merge della coda canonizza gli articleId duplicati prima del drain', () => {
+  const older = queueItem('article-duplicate', 'older', '2026-10-07T00:00:00.000Z');
+  const newer = {
+    ...queueItem('article-duplicate', 'newer', '2026-10-07T00:10:00.000Z'),
+    failureCount: 2,
+    lastFailureAt: '2026-10-07T00:11:00.000Z',
+  };
+  const merged = mergeImageRegenerationQueues(
+    { schema: 1, items: [older, newer, queueItem('article-other', 'other', '2026-10-07T00:20:00.000Z')] },
+    { schema: 1, items: [] },
+  );
+  assert.deepEqual(merged.items.map((item) => item.articleId), ['article-duplicate', 'article-other']);
+  assert.equal(merged.items[0].reason, 'newer');
+  assert.equal(merged.items[0].failureCount, 2);
+});
+
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {
   // Without this guard a caller that forgot its paths would degrade to exactly
   // the old behaviour, which is indistinguishable from the fix not being there.
