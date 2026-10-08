@@ -7919,6 +7919,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.title': 'Schweiz führend in der Robotik: 217 Unternehmen und 7\'000 Arbeitsplätze',
     'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.excerpt': '## Auf einen Blick - 217 Unternehmen in der Schweizer Robotik - 109 stellen direkt Roboter her - 87% haben weniger als 100 Mitarbeitende - Etwa 7’000 Arbeitsplätze',
     'blog.article.svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.imageAlt': 'Redaktionelles Bild zu: Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
+    'blog.article.salari-svizzera-talenti-stranieri.title': 'Schweiz: minimales Lohngefälle für Talente aus der EU/EFTA',
+    'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## Auf einen Blick - Die Schweiz belegt im IMD World Talent Ranking den ersten Platz - Bereinigtes Lohngefälle EU/EFTA: 1,1% weniger - Drittstaaten: 4,5% weniger - Einwanderung über die Personenfreizügigkeit',
+    'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Panoramablick auf Lugano, Schweiz, symbolisch für wirtschaftliche Chancen und Attraktivität für qualifizierte Talente.',
 };
 
 export default blogMetaChDe;

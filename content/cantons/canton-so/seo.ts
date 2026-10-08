@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soletta-progetti-trasporto-governo': {
+    title: 'Soletta: Governo chiede correzioni su progetti trasporti',
+    description: '## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, governo, chiede, correzioni',
+    ogTitle: 'Soletta: Governo chiede correzioni su progetti trasporti',
+    ogDescription: '## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti',
+    canonicalPath: '/articoli-soletta/soletta-progetti-trasporto-governo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: Governo chiede correzioni su progetti trasporti",
+      "description": "## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-progetti-trasporto-governo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta della stazione ferroviaria di Olten, con treni moderni e passeggeri, simbolo dell'infrastruttura di trasporto nel Canton Soletta."
+      },
+      "datePublished": "2026-10-08T11:40:05+00:00",
+      "dateModified": "2026-10-08T11:40:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-progetti-trasporto-governo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

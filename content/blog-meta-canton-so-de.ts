@@ -12,6 +12,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.luterbach-a5-rampe-notte.title': 'A5 bei Luterbach: vier Rampen im Oktober gesperrt',
     'blog.article.luterbach-a5-rampe-notte.excerpt': 'Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.',
     'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Verzweigung Luterbach an der A5 bei Nachtarbeiten und Rampensperrungen',
+    'blog.article.soletta-progetti-trasporto-governo.title': 'Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten',
+    'blog.article.soletta-progetti-trasporto-governo.excerpt': '## Auf einen Blick - Solothurn unterstützt «Verkehr ’45» und fordert Korrekturen. - Nein zur Aufhebung von Dornach Apfelsee. - N18: Verbindliche',
+    'blog.article.soletta-progetti-trasporto-governo.imageAlt': 'Ansicht des Bahnhofs Olten mit modernen Zügen und Fahrgästen, als Symbol für die Verkehrsinfrastruktur im Kanton Solothurn.',
 };
 
 export default blogMetaCantonSoDe;
