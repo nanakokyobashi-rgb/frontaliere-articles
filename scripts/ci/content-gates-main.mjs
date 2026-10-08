@@ -223,6 +223,13 @@ export const CONTENT_GATES = [
   'generator/tests/key-facts-specificity.test.mjs',
   'generator/tests/meta-fields-plausibility-floor.test.mjs',
   'generator/tests/meta-localized-seo-description.test.mjs',
+  // La premessa di `check-post-rebase-uniqueness.mjs` (meta IT = registro +
+  // mappa slug, per ogni sezione) verificata sul corpus vero. Lo script gira
+  // dopo che l'articolo e' stato pagato: se la base non la rispetta, ogni run
+  // che fa un rebase scarta il proprio articolo (3 run l'8 ottobre 2026, per
+  // due voci di meta rimaste da ritiri a meta'). Qui la stessa rottura apre
+  // la issue dei gate invece di costare un articolo a run.
+  'generator/tests/post-rebase-uniqueness-corpus.test.mjs',
   'generator/tests/prompt-placeholder-guard.test.mjs',
   // Ogni voce di registry nata dal cutover dichiara `articleType`, e ogni
   // `verifiedAt` ha la sua prova nel ledger delle verifiche.
