@@ -7925,6 +7925,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'TF nega sconto cassa malati padre affidamento alternato',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9\'000 franchi',
     'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Immagine editoriale relativa a: TF nega sconto cassa malati padre affidamento alternato',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.title': 'IA e semiconduttori trainano commercio, OMC rivede crescita',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.excerpt': '## In breve - Semiconduttori e server: commercio in crescita del 67% - L\'IA ha alimentato il 47% della crescita mondiale - Stima OMC: dall\'1,9% al 3,9%',
+    'blog.article.ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.imageAlt': 'Immagine editoriale relativa a: IA e semiconduttori trainano commercio, OMC rivede crescita',
 };
 
 export default blogMetaChIt;
