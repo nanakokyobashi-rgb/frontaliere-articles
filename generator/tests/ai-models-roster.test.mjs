@@ -53,6 +53,27 @@ test('providerRosterReady fallisce chiuso e rende osservabile la lane servibile'
 test('providerRosterReady non usa il roster di default quando il contratto e\' invalido', () => {
   assert.equal(providerRosterReady({ chain: null, respectForceChain: false }), false);
   assert.equal(getProviderRosterStatus({ chain: null, respectForceChain: false }).reason, 'invalid-roster');
+  assert.equal(providerRosterReady(null), false);
+  assert.equal(providerRosterReady({ chain: [null, AI_MODELS.GEMINI_FLASH], respectForceChain: false }), false);
+});
+
+test('il gate segue la catena forzata effettiva, ignorando una override vuota', () => {
+  const previousGemini = process.env.GEMINI_API_KEY;
+  const previousForceChain = process.env.AI_MODELS_FORCE_CHAIN;
+  process.env.GEMINI_API_KEY = 'roster-test-key';
+  process.env.AI_MODELS_FORCE_CHAIN = ' , ';
+  resetState();
+  try {
+    const status = getProviderRosterStatus({ chain: [AI_MODELS.GEMINI_FLASH], respectForceChain: true });
+    assert.equal(status.ready, true);
+    assert.deepEqual(status.availableModels, [AI_MODELS.GEMINI_FLASH]);
+  } finally {
+    if (previousGemini === undefined) delete process.env.GEMINI_API_KEY;
+    else process.env.GEMINI_API_KEY = previousGemini;
+    if (previousForceChain === undefined) delete process.env.AI_MODELS_FORCE_CHAIN;
+    else process.env.AI_MODELS_FORCE_CHAIN = previousForceChain;
+    resetState();
+  }
 });
 
 describe('roster NVIDIA', () => {

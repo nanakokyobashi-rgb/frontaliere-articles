@@ -5381,6 +5381,15 @@ export function isModelAvailable(modelId) {
   return !!getApiKeyForProvider(getProvider(modelId));
 }
 
+// One parser for the diagnostic override. The roster gate and callLLM() must
+// agree on whether an override is active; otherwise the gate could reject a
+// run that callLLM() would correctly route to DEFAULT_CHAIN (for example when
+// the variable contains only commas or whitespace).
+function _forcedChainFromEnv() {
+  const raw = String(process.env.AI_MODELS_FORCE_CHAIN || '').trim();
+  return raw ? raw.split(',').map((model) => model.trim()).filter(Boolean) : [];
+}
+
 /**
  * Build a read-only, non-secret view of the provider roster that can serve a
  * call right now. The old availability check only answered «there is a key in
@@ -5401,9 +5410,21 @@ export function isModelAvailable(modelId) {
  *   invalidModels: unknown[]}}
  */
 export function getProviderRosterStatus(options = {}) {
+  if (options === null || typeof options !== 'object' || Array.isArray(options)) {
+    return {
+      ready: false,
+      reason: 'invalid-roster',
+      rosterSize: 0,
+      availableModels: [],
+      availableProviders: [],
+      unavailableModels: [],
+      invalidModels: [options],
+    };
+  }
+
   const hasCustomChain = Object.prototype.hasOwnProperty.call(options, 'chain');
   const respectForceChain = options.respectForceChain !== false;
-  const forcedRaw = respectForceChain ? String(process.env.AI_MODELS_FORCE_CHAIN || '').trim() : '';
+  const forcedChain = respectForceChain ? _forcedChainFromEnv() : [];
   const customChain = hasCustomChain ? options.chain : null;
 
   // A malformed caller contract is not allowed to fall back to the default
@@ -5420,11 +5441,11 @@ export function getProviderRosterStatus(options = {}) {
     };
   }
 
-  const source = forcedRaw
-    ? forcedRaw.split(',')
+  const source = forcedChain.length
+    ? forcedChain
     : (hasCustomChain ? customChain : DEFAULT_CHAIN);
   const includeExplicitFallbacks = options.includeExplicitFallbacks
-    ?? (!hasCustomChain && !forcedRaw);
+    ?? (!hasCustomChain && !forcedChain.length);
   const configured = includeExplicitFallbacks
     ? [...source, AI_MODELS.CODEX_CLI_PRIMARY, AI_MODELS.CLAUDE_CLI_HAIKU]
     : source;
@@ -5448,6 +5469,9 @@ export function getProviderRosterStatus(options = {}) {
       if (isProviderCoolingDown(provider)) {
         return { model, provider, ready: false, reason: 'provider-cooldown' };
       }
+      if (isPerRunCallCapReached(model)) {
+        return { model, provider, ready: false, reason: 'run-cap' };
+      }
       return { model, provider, ready: true, reason: 'ready' };
     } catch {
       // The roster is configuration, not executable input. One malformed
@@ -5464,8 +5488,10 @@ export function getProviderRosterStatus(options = {}) {
   const availableProviders = [...new Set(available.map(({ provider }) => provider))];
 
   return {
-    ready: availableModels.length > 0,
-    reason: availableModels.length > 0
+    ready: invalidModels.length === 0 && availableModels.length > 0,
+    reason: invalidModels.length > 0
+      ? 'invalid-roster'
+      : availableModels.length > 0
       ? 'provider-available'
       : models.length > 0 ? 'no-servable-provider' : 'empty-roster',
     rosterSize: models.length,
@@ -9357,10 +9383,7 @@ export async function callLLM(messages, opts = {}) {
   // independent verification models onto it — otherwise the model would grade its
   // own output (circular self-consensus) and a forced run could publish unchecked
   // content. With the exemption, generation=local + fact-check=real remote gate.
-  const _forceChainRaw = (process.env.AI_MODELS_FORCE_CHAIN || '').trim();
-  const _forcedChain = (_forceChainRaw && !o.bypassForceChain)
-    ? _forceChainRaw.split(',').map((s) => s.trim()).filter(Boolean)
-    : [];
+  const _forcedChain = !o.bypassForceChain ? _forcedChainFromEnv() : [];
   if (_forcedChain.length) {
     console.warn(`🔧 [ai-models] AI_MODELS_FORCE_CHAIN active — chain pinned to: ${_forcedChain.join(' → ')}`);
     chain = _forcedChain;
