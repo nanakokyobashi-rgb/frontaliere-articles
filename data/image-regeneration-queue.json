@@ -300,6 +300,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T14:43:30.790Z",
       "lastFailureAt": "2026-10-08T14:43:30.790Z"
+    },
+    {
+      "articleId": "nuovo-piano-ciclabile-friburgo",
+      "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-nuovo-piano-ciclabile-friburgo: openai-codex (Codex broker timed out after 119998ms)",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T15:33:51.061Z",
+      "lastFailureAt": "2026-10-08T15:33:51.061Z"
     }
   ]
 }

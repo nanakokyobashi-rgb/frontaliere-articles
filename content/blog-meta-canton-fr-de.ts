@@ -9,6 +9,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.fribourg-modifica-licd.title': 'Fribourg passt die direkten Steuern an die kalte Progression an',
     'blog.article.fribourg-modifica-licd.excerpt': '',
     'blog.article.fribourg-modifica-licd.imageAlt': 'Öffentliches Büro in Freiburg mit Steuerzahlenden, die ihre Steuererklärung am Computer ausfüllen',
+    'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Freiburg: Neuer Radnetzplan genehmigt',
+    'blog.article.nuovo-piano-ciclabile-friburgo.excerpt': 'RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt',
+    'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Neues Velowegnetz im Kanton Freiburg für den Alltagsverkehr',
 };
 
 export default blogMetaCantonFrDe;

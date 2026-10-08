@@ -75,6 +75,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuovo-piano-ciclabile-friburgo': {
+    title: 'Friburgo: approvato il nuovo piano della rete ciclabile',
+    description: 'RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042',
+    keywords: 'frontalieri, ticino, svizzera, italia, friburgo, approvato, nuovo, piano',
+    ogTitle: 'Friburgo: nuovo piano per la rete ciclabile quotidiana',
+    ogDescription: 'RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042',
+    canonicalPath: '/articoli-friburgo/nuovo-piano-ciclabile-friburgo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Friburgo: approvato il nuovo piano della rete ciclabile",
+      "description": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuova rete ciclabile nel Canton Friburgo per la mobilità quotidiana"
+      },
+      "datePublished": "2026-10-08T15:33:51+00:00",
+      "dateModified": "2026-10-08T15:33:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/nuovo-piano-ciclabile-friburgo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
