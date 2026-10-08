@@ -12,6 +12,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.losanna-budget-deficit-2027.title': 'Lausanne : déficit de 77,7 millions dans le budget 2027',
     'blog.article.losanna-budget-deficit-2027.excerpt': 'Le budget 2027 de Lausanne présente un déficit de 77,7 millions de francs.',
     'blog.article.losanna-budget-deficit-2027.imageAlt': 'Vue urbaine de Lausanne liée au budget 2027 déficitaire.',
+    'blog.article.morges-mobilita-consultazione-2045.title': 'Morges : les demandes en matière de mobilité à l’horizon 2045',
+    'blog.article.morges-mobilita-consultazione-2045.excerpt': '## En bref - Morges intervient dans la consultation fédérale « Transports ’45 » - Près de la moitié de la population vit au-delà des limites de bruit - Environ',
+    'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Vue urbaine de Morges avec infrastructures routières',
 };
 
 export default blogMetaCantonVdFr;

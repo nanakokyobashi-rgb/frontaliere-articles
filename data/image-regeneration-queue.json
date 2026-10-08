@@ -250,6 +250,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T11:26:57.084Z",
       "lastFailureAt": "2026-10-08T11:26:57.084Z"
+    },
+    {
+      "articleId": "morges-mobilita-consultazione-2045",
+      "title": "Morges: le richieste sulla mobilità al 2045",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-morges-mobilita-consultazione-2045: openai-codex (vision gate rejected image: Generic illustrated urban scene, but it contains visible direct",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:29:50.112Z",
+      "lastFailureAt": "2026-10-08T11:29:50.112Z"
     }
   ]
 }
