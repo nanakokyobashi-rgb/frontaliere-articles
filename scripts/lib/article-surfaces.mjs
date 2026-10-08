@@ -397,6 +397,10 @@ export function seoFilesFor(section, root = ROOT) {
   return names
     .filter((f) => /^seo-blog.*\.ts$/.test(f))
     .map((f) => `content/seo/${f}`)
+    // `seo-blog-ch.ts` is the explicitly owned national surface.  Do not
+    // fold an explicitly claimed chunk into the frontaliere discovery glob:
+    // otherwise a section-local registry/SEO gate compares two corpora.
+    .filter((f) => !Object.values(SECTIONS).some((surface) => surface.seoFiles?.includes(f)))
     .map((f) => {
       requireRegularFile(root, f, label);
       return f;

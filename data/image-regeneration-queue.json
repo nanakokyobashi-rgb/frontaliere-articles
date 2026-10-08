@@ -169,6 +169,96 @@
       "failureCount": 0,
       "requestedAt": "2026-10-07T19:59:34.747Z",
       "lastFailureAt": "2026-10-07T19:59:34.747Z"
+    },
+    {
+      "articleId": "confusione-tassa-salute-frontalieri",
+      "title": "Frontalieri e tassa salute: la confusione tra politica e normativa",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.832Z",
+      "lastFailureAt": "2026-10-07T23:29:33.832Z"
+    },
+    {
+      "articleId": "costi-cure-domicilio-ticino-2026",
+      "title": "Ticino: dal 2026 si pagherà per le cure a domicilio",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.847Z",
+      "lastFailureAt": "2026-10-07T23:29:33.847Z"
+    },
+    {
+      "articleId": "varese-india-export-2026",
+      "title": "Varese punta a Oriente: l’export verso l’India cresce del 46%",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.860Z",
+      "lastFailureAt": "2026-10-07T23:29:33.860Z"
+    },
+    {
+      "articleId": "autotrasporto-rincari-confine-2026",
+      "title": "Rincari carburante: rischio fermo autotrasportatori al confine",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.869Z",
+      "lastFailureAt": "2026-10-07T23:29:33.869Z"
+    },
+    {
+      "articleId": "carburanti-rincari-confine-ticino",
+      "title": "Rincaro carburanti: che impatto sui frontalieri ticinesi",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.879Z",
+      "lastFailureAt": "2026-10-07T23:29:33.879Z"
+    },
+    {
+      "articleId": "votazioni-imposizione-ticino-2026",
+      "title": "Voti 8 marzo: No al taglio canone, Sì all'imposizione individuale",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.889Z",
+      "lastFailureAt": "2026-10-07T23:29:33.889Z"
+    },
+    {
+      "articleId": "imposizione-individuale-ticino-2026",
+      "title": "Svizzera: tassazione individuale, cosa cambia per il Ticino",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.898Z",
+      "lastFailureAt": "2026-10-07T23:29:33.898Z"
+    },
+    {
+      "articleId": "no-iniziativa-antidumping-ticino",
+      "title": "Ticino: No all'iniziativa antidumping, soddisfazione per il Consiglio di Stato",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "declared cover has no governed provenance record",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-07T23:29:33.907Z",
+      "lastFailureAt": "2026-10-07T23:29:33.907Z"
+    },
+    {
+      "articleId": "contributi-formazione-berna-requisiti",
+      "title": "Formazione continua nel Canton Berna: requisiti e contributi",
+      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
+      "reason": "All image providers failed for article-contributi-formazione-berna-requisiti: openai-codex (vision gate rejected image: Generic illustrated office scene, but a visible human profil",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T00:53:16.383Z",
+      "lastFailureAt": "2026-10-08T00:53:16.383Z"
     }
   ]
 }

@@ -5705,6 +5705,66 @@
       }
     },
     {
+      "path": "generator/scripts/lib/atomic-write-text.mjs",
+      "mode": "corpus-only",
+      "reason": "Scrittura atomica di un file di testo (file temporaneo accanto alla destinazione, poi rename) per il recupero delle voci SEO: un chunk `content/seo/seo-blog-N.ts` interrotto a metà non deve restare sul disco. Lo usa solo `generator/scripts/recover-seo-orphans.mjs`; il sito non esegue il generatore e non scrive i chunk SEO.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/seo-backfill-lock.mjs",
+      "mode": "corpus-only",
+      "reason": "Marcatore locale al runner per il recupero deterministico delle voci SEO: un secondo recupero non può accodare un lotto concorrente a un chunk lasciato a metà da un'interruzione. Il lock della registrazione normale copre una creazione su più file, questo copre la scrittura di un solo chunk. Sul sito non esiste un writer equivalente.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/seo-entry-builder.mjs",
+      "mode": "corpus-only",
+      "reason": "Costruttore della voce SEO e inserimento in un chunk usati dal recupero degli orfani. Il writer normale conserva il suo percorso letterale in `create-article.mjs`; `generator/tests/seo-entry-equivalence.test.mjs` confronta il costruttore con le voci reali di main, così non nasce un secondo dialetto serializzato. È codice del generatore del corpus: il sito consuma il JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/seo-metadata-derivation.mjs",
+      "mode": "corpus-only",
+      "reason": "Derivazione deterministica di `ogTitle`, `headline` e `keywords` dai metadati italiani già persistiti, per gli strumenti di recupero che non hanno un payload del modello. Riusa le regole di coda di frase di `host/shared/clauseTail.mjs` e la riparazione dei titoli esistente; nessun modello coinvolto. Sul sito questi campi arrivano dal generatore e non vengono ricostruiti.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/seo-recovery-queue.mjs",
+      "mode": "corpus-only",
+      "reason": "Contabilità della coda delle copertine per il recupero delle voci SEO: colloca le voci aggiunte dal recupero prima dell'ultima preesistente, così un accodamento della pipeline delle copertine nello stesso punto non diventa un conflitto di merge. Separato dallo script, che esegue la riga di comando all'import. Il sito non scrive `data/image-regeneration-queue.json`.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/seo-recovery-rollback.mjs",
+      "mode": "corpus-only",
+      "reason": "Rollback del recupero delle voci SEO: registra per ogni file il testo prima della run e l'ultimo testo scritto dalla run, e ripristina un file solo se contiene ancora esattamente ciò che la run ha lasciato. Un file cambiato dopo porta il lavoro di un altro produttore e non viene toccato. Separato dallo script, che esegue la riga di comando all'import. Sul sito non esiste questo recupero.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/image-regeneration-publish-outbox.mjs",
       "mode": "corpus-only",
       "reason": "Outbox durevole per il passaggio delle copertine rigenerate ai publisher esistenti: conserva section/articleId fra il push dei dati e il dispatch/acknowledgement, cosi' un errore di gh workflow run non perde una ripubblicazione. Il sito non esegue il drainer e consuma solo le superfici HTTP.",

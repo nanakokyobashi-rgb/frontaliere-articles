@@ -77,6 +77,12 @@ import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
+import {
+  REGISTER_LOCK_KIND_ARTICLE_REFRESH,
+  beginRegisterLock,
+  endRegisterLock,
+  readRegisterLock,
+} from './register-lock.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Two levels up from `generator/scripts/lib/` is `generator/`; one more is the
@@ -315,6 +321,8 @@ export function upsertSeoDescriptionBlock(src, id, seo) {
  * @param {string} [opts.seoFile] - relative to main's layout, default 'services/seo/seo-blog-5.ts'
  * @param {(file: string, content: string) => void} [opts.writeFile] - optional staged writer
  * @param {(file: string, encoding?: string) => string} [opts.readFile] - optional staged reader
+ * @param {string} [opts.section] - explicit article section; inferred from metaPrefix otherwise
+ * @param {boolean} [opts.lockHeld] - caller already holds the section refresh lock
  * @returns {{ changed: boolean, touched: string[] }}
  */
 export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
@@ -325,40 +333,67 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
   const readFile = opts.readFile || readFileSync;
   const writeFile = opts.writeFile || writeCorpusFile;
   const touched = [];
-  const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
-  let seoUpdate = null;
-  const localeUpdates = [];
-
-  // Resolve the SEO entry before touching any locale file. A duplicate SEO
-  // key must reject the whole refresh, not leave a half-updated corpus.
-  if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription)) {
-    const seoPath = path.join(repoRoot, corpusPath(seoFile));
-    const before = readFile(seoPath, 'utf-8');
-    const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts);
-    seoUpdate = { file: seoPath, before, after };
+  const section = opts.section || (metaPrefix === 'blog-meta-ch' ? 'svizzera' : 'frontaliere');
+  const currentLock = readRegisterLock(repoRoot, section);
+  const lockHeld = opts.lockHeld === true
+    || (currentLock?.kind === REGISTER_LOCK_KIND_ARTICLE_REFRESH && currentLock.pid === process.pid);
+  let lockAcquired = false;
+  let writesStarted = false;
+  if (!lockHeld) {
+    beginRegisterLock(repoRoot, `article-refresh:${id}`, section, {
+      kind: REGISTER_LOCK_KIND_ARTICLE_REFRESH,
+    });
+    lockAcquired = true;
   }
 
-  for (const locale of LOCALES) {
-    const rawFields = localeTexts?.[locale];
-    if (!rawFields) continue;
-    const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS);
-    const file = path.join(repoRoot, corpusPath(`services/locales/${metaPrefix}-${locale}.ts`));
-    const before = readFile(file, 'utf-8');
-    const after = upsertLocaleMetaFields(before, id, fields);
-    if (after !== before) {
-      localeUpdates.push({ file, after });
+  try {
+    const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
+    let seoUpdate = null;
+    const localeUpdates = [];
+
+    // The section lock must cover the complete read-modify-write, not just
+    // the writes: recovery can otherwise replace the SEO/registry snapshot
+    // between this preflight read and the eventual rename.
+    if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription)) {
+      const seoPath = path.join(repoRoot, corpusPath(seoFile));
+      const before = readFile(seoPath, 'utf-8');
+      const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts);
+      seoUpdate = { file: seoPath, before, after };
     }
-  }
 
-  for (const { file, after } of localeUpdates) {
-    writeFile(file, after);
-    touched.push(file);
-  }
+    for (const locale of LOCALES) {
+      const rawFields = localeTexts?.[locale];
+      if (!rawFields) continue;
+      const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS);
+      const file = path.join(repoRoot, corpusPath(`services/locales/${metaPrefix}-${locale}.ts`));
+      const before = readFile(file, 'utf-8');
+      const after = upsertLocaleMetaFields(before, id, fields);
+      if (after !== before) {
+        localeUpdates.push({ file, after });
+      }
+    }
 
-  if (seoUpdate && seoUpdate.after !== seoUpdate.before) {
-    writeFile(seoUpdate.file, seoUpdate.after);
-    touched.push(seoUpdate.file);
-  }
+    for (const { file, after } of localeUpdates) {
+      writesStarted = true;
+      writeFile(file, after);
+      touched.push(file);
+    }
 
-  return { changed: touched.length > 0, touched };
+    if (seoUpdate && seoUpdate.after !== seoUpdate.before) {
+      writesStarted = true;
+      writeFile(seoUpdate.file, seoUpdate.after);
+      touched.push(seoUpdate.file);
+    }
+
+    if (lockAcquired) {
+      endRegisterLock(repoRoot, section);
+    }
+    return { changed: touched.length > 0, touched };
+  } catch (error) {
+    // A validation/read error before the first write is safe to release. Once
+    // a write has started, retain the marker as evidence of a possibly
+    // partial refresh so recovery/normal writers fail closed on the next run.
+    if (lockAcquired && !writesStarted) endRegisterLock(repoRoot, section);
+    throw error;
+  }
 }

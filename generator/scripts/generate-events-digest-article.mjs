@@ -39,6 +39,8 @@ import {
   assertArticlePassesFactualityGates,
   assertGeneratedArticleQuality,
   resolveRegisterLockAtStartup,
+  beginExistingArticleRefreshLock,
+  endExistingArticleRefreshLock,
   buildBodyFile,
 } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
@@ -198,6 +200,7 @@ async function main() {
   // regenerated on a body refresh — that would churn ~4 MB of feed files for no
   // content change.
   console.log('♻️  refreshing body files (article already registered)…');
+  beginExistingArticleRefreshLock(data.id);
   refreshBodyFiles(data);
   if (!bumpUpdatedAt(data.id, todayIso)) console.warn('⚠️  updatedAt not bumped (entry not matched).');
   // Keep the freshness signals in sync with the refreshed body (the JSON-LD
@@ -209,6 +212,7 @@ async function main() {
   if (!bumpSitemapLastmod(data.slugs.it, todayIso)) {
     console.warn('⚠️  sitemap-blog lastmod not bumped (url block not matched) — freshness signal may be stale.');
   }
+  endExistingArticleRefreshLock();
   console.log('✅ refreshed.');
 }
 

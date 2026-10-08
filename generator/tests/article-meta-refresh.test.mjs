@@ -42,6 +42,7 @@ import {
 import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 import { sanitizePromptPlaceholders } from '../scripts/lib/prompt-placeholder-guard.mjs';
 import { bumpDateModified } from '../scripts/lib/evergreen-article-refresh.mjs';
+import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
@@ -409,6 +410,31 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
   }
 });
 
+test('refreshDescriptiveTexts prende il section lock prima del read-modify-write', () => {
+  const root = syntheticCorpus();
+  try {
+    const lockPath = registerLockPath(root, 'frontaliere');
+    const observed = [];
+    refreshDescriptiveTexts(
+      'demo-id',
+      { it: { excerpt: 'Estratto sotto lock' } },
+      { description: 'SERP sotto lock' },
+      {
+        repoRoot: root,
+        writeFile(file, content) {
+          observed.push({ file, lockHeld: fs.existsSync(lockPath) });
+          fs.writeFileSync(file, content);
+        },
+      },
+    );
+    assert.ok(observed.length > 0);
+    assert.ok(observed.every(({ lockHeld }) => lockHeld), 'ogni write deve avvenire sotto il marker');
+    assert.equal(fs.existsSync(lockPath), false, 'un refresh completato rilascia il marker');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging senza write sul corpus', () => {
   const root = syntheticCorpus();
   try {
@@ -443,6 +469,42 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
       'reader staged + upsert idempotente non deve aggiungere un secondo write',
     );
     assert.equal(writes.length, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: un writer staged che possiede già il lock lo conserva fino al commit esterno', () => {
+  const root = syntheticCorpus();
+  const lockPath = registerLockPath(root, 'frontaliere');
+  const staged = new Map();
+  try {
+    fs.mkdirSync(path.dirname(lockPath), { recursive: true });
+    fs.writeFileSync(lockPath, JSON.stringify({
+      kind: 'article-refresh',
+      id: 'article-refresh:pharmacy-evergreen',
+      section: 'frontaliere',
+      pid: process.pid,
+      runId: null,
+      runAttempt: null,
+      workflow: null,
+      startedAt: new Date().toISOString(),
+    }));
+    refreshDescriptiveTexts(
+      'demo-id',
+      { it: { excerpt: 'Estratto sotto transazione esterna' } },
+      { description: 'SERP sotto transazione esterna' },
+      {
+        repoRoot: root,
+        writeFile(file, content) { staged.set(file, content); },
+      },
+    );
+    assert.ok(staged.size > 0, 'il writer staged deve comunque ricevere gli aggiornamenti');
+    assert.equal(
+      fs.existsSync(lockPath),
+      true,
+      'il lock posseduto dal chiamante deve restare fino al commit o rollback esterno',
+    );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

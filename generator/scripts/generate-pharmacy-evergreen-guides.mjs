@@ -18,7 +18,7 @@
  */
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { mkdirSync, renameSync, unlinkSync, writeFileSync, realpathSync } from 'node:fs';
+import { existsSync, mkdirSync, renameSync, unlinkSync, writeFileSync, realpathSync } from 'node:fs';
 
 import {
   buildPharmacyEvergreenGuides,
@@ -31,6 +31,8 @@ import {
   assertArticlePassesFactualityGates,
   assertGeneratedArticleQuality,
   resolveRegisterLockAtStartup,
+  beginExistingArticleRefreshLock,
+  endExistingArticleRefreshLock,
   buildBodyFile,
 } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
@@ -165,10 +167,13 @@ function preflight(data) {
 }
 
 function refreshExistingGuides(states) {
-  const transaction = acquirePharmacyEvergreenRefresh(REPO_ROOT, { log: console.log });
-  const writeFile = (file, content) => stageCorpusFile(transaction, file, content);
-  const readFile = (file) => transaction.read(file);
+  beginExistingArticleRefreshLock(`pharmacy-evergreen:${states[0].guide.id}`);
+  let transaction = null;
+  let safeToReleaseLock = false;
   try {
+    transaction = acquirePharmacyEvergreenRefresh(REPO_ROOT, { log: console.log });
+    const writeFile = (file, content) => stageCorpusFile(transaction, file, content);
+    const readFile = (file) => transaction.read(file);
     for (const { guide } of states) {
       console.log(`♻️  refreshing ${guide.id}…`);
       refreshBodyFiles(guide, REPO_ROOT, console.log, writeFile);
@@ -206,14 +211,30 @@ function refreshExistingGuides(states) {
       console.log(`✅ staged ${guide.id}.`);
     }
     transaction.commit();
+    safeToReleaseLock = true;
     console.log('✅ pharmacy evergreen refresh transaction committed.');
   } catch (error) {
     try {
-      transaction.rollback();
+      // commit() rolls back and cleans up on a failed publish. Retry only when
+      // its journal/lock still exists, so the section marker covers every
+      // staged-file rollback without turning a successful internal rollback
+      // into a second failure.
+      if (
+        transaction
+        && (existsSync(transaction.paths.lockPath) || existsSync(transaction.paths.transactionRoot))
+      ) {
+        transaction.rollback();
+      }
+      safeToReleaseLock = true;
     } catch (rollbackError) {
       throw new Error(`${error.message}; ${rollbackError.message}`);
     }
     throw error;
+  } finally {
+    // The section marker is deliberately released only after commit or a
+    // verified rollback. A cover drain uses the same marker and cannot enter
+    // while this transaction still owns staged registry/SEO changes.
+    if (safeToReleaseLock) endExistingArticleRefreshLock();
   }
 }
 
