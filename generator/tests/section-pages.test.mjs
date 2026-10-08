@@ -968,6 +968,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/lib/cf-purge-variants.mjs',
     'scripts/lib/delete-cdn-file.sh',
     'scripts/lib/section-registry.mjs',
+    'scripts/lib/section-page-manifest.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
