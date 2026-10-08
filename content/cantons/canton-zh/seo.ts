@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-winterthur-governo-apprendisti': {
+    title: 'Zimmer Biomet: 580 tagli a Winterthur, diplomi garantiti',
+    description: 'I 580 tagli di Zimmer Biomet a Winterthur: il Regierungsrat del Canton Zurigo prende posizione e garantisce i diplomi degli apprendisti dell\'azienda.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zimmer, biomet, tagli, winterthur',
+    ogTitle: 'Zimmer Biomet: 580 tagli a Winterthur, diplomi garantiti',
+    ogDescription: 'I 580 tagli di Zimmer Biomet a Winterthur portano il Regierungsrat del Canton Zurigo a prendere posizione. La notizia conferma i diplomi degli apprendisti dell\'azienda e descrive il ruolo limitato del Cantone davanti alla riduzione.',
+    canonicalPath: '/articoli-zurigo/winterthur-governo-apprendisti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zimmer Biomet: 580 tagli a Winterthur, diplomi garantiti",
+      "description": "I 580 tagli di Zimmer Biomet a Winterthur: il Regierungsrat del Canton Zurigo prende posizione e garantisce i diplomi degli apprendisti dell'azienda.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-winterthur-governo-apprendisti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area industriale di Winterthur collegata ai tagli di Zimmer Biomet"
+      },
+      "datePublished": "2026-10-08T17:37:44+00:00",
+      "dateModified": "2026-10-08T17:37:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/winterthur-governo-apprendisti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

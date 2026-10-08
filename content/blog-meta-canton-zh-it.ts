@@ -12,6 +12,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.sbb-flotta-zurigo-500m.title': 'SBB: 500 milioni per la flotta di Zurigo',
     'blog.article.sbb-flotta-zurigo-500m.excerpt': 'Le SBB investono 500 milioni di franchi per rinnovare la flotta della S-Bahn di Zurigo: migliore ricezione mobile e nuove imbottiture sui treni zurighesi.',
     'blog.article.sbb-flotta-zurigo-500m.imageAlt': 'Treno della S-Bahn di Zurigo, tema del rinnovo della flotta SBB',
+    'blog.article.winterthur-governo-apprendisti.title': 'Zimmer Biomet: 580 tagli a Winterthur, diplomi garantiti',
+    'blog.article.winterthur-governo-apprendisti.excerpt': 'Il Regierungsrat del Canton Zurigo prende posizione sui 580 tagli di Zimmer Biomet a Winterthur: i diplomi degli apprendisti sono garantiti.',
+    'blog.article.winterthur-governo-apprendisti.imageAlt': 'Area industriale di Winterthur collegata ai tagli di Zimmer Biomet',
 };
 
 export default blogMetaCantonZhIt;

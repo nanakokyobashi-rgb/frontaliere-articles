@@ -12,6 +12,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.sbb-flotta-zurigo-500m.title': 'SBB: 500 Millionen für die Zürcher Flotte',
     'blog.article.sbb-flotta-zurigo-500m.excerpt': 'Die SBB investieren 500 Millionen Franken, um die Flotte der Zürcher S-Bahn zu erneuern: besserer Mobilfunkempfang und neue Polsterungen in den Zürcher Zügen.',
     'blog.article.sbb-flotta-zurigo-500m.imageAlt': 'S-Bahn-Zug in Zürich zum Thema der SBB-Flottenerneuerung',
+    'blog.article.winterthur-governo-apprendisti.title': 'Zimmer Biomet: 580 Stellen in Winterthur gestrichen, Abschlüsse garantiert',
+    'blog.article.winterthur-governo-apprendisti.excerpt': 'Der Regierungsrat des Kantons Zürich nimmt Stellung zu den 580 Stellenkürzungen bei Zimmer Biomet in Winterthur: Die Abschlüsse der Lernenden sind garantiert.',
+    'blog.article.winterthur-governo-apprendisti.imageAlt': 'Industriegebiet in Winterthur im Zusammenhang mit dem Stellenabbau bei Zimmer Biomet',
 };
 
 export default blogMetaCantonZhDe;
