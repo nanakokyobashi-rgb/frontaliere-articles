@@ -5774,6 +5774,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/corpus-fabricated-institution-names.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia corpus-only per i nomi di istituzioni inventate già confermati: la stessa lista alimenta il gate di generazione e la scansione del corpus pubblicato. Il sito consuma il JSON via HTTP e non esegue questo modulo del generatore.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/localized-toponyms.mjs",
       "mode": "corpus-only",
       "reason": "Tabella unica e gate deterministico degli esonimi per cantoni e capoluoghi nelle quattro lingue del generatore: la stessa libreria alimenta il prompt di traduzione, il controllo prima della registrazione e il repair storico. Il sito consuma il corpus via JSON HTTP e non esegue questo generatore, quindi non esiste un gemello operativo da trasportare.",

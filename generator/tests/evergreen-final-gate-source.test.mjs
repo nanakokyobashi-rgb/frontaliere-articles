@@ -38,6 +38,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { runFactualityGates, formatIssues } from '../scripts/lib/article-factuality-gates.mjs';
+import { checkCorpusFabricatedInstitutionNames } from '../scripts/lib/corpus-fabricated-institution-names.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -83,6 +84,7 @@ const GATE_SRC = [
   cutFunctionIfPresent('factualityGateSourceText'),
   cutFunctionIfPresent('assertItalianArticlePassesFactualityGates'),
   cutFunction('assertArticlePassesFactualityGates'),
+  cutFunction('assertNoCorpusFabricatedInstitutionNames'),
   cutFunctionIfPresent('assertLocalizedToponyms'),
 ].join('\n');
 
@@ -97,6 +99,7 @@ function makeGate() {
     'checkStatsAstraCountFidelity',
     'joinBodySections',
     'assertTranslationsPassFactualityGates',
+    'checkCorpusFabricatedInstitutionNames',
     'findArticleLocalizedToponymMismatches',
     `${GATE_SRC}\nreturn assertArticlePassesFactualityGates;`,
   );
@@ -109,6 +112,7 @@ function makeGate() {
     () => ({ passed: true }),
     (content) => Object.values(content).join(' '),
     (data) => { translationCalls.push(data); },
+    checkCorpusFabricatedInstitutionNames,
     findArticleLocalizedToponymMismatches,
   );
   return { gate, translationCalls };
