@@ -9,6 +9,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.incidente-a13-widnau-2026.title': 'Incidente A13 Widnau 2026: danni e impatto sul traffico',
     'blog.article.incidente-a13-widnau-2026.excerpt': '## In breve - Incidente sulla A13 a Widnau il 5 ottobre 2026 - Due persone coinvolte, nessun ferito - Danni per circa CHF 120\'000 - Corsia destra chiusa',
     'blog.article.incidente-a13-widnau-2026.imageAlt': 'Vista di un tratto autostradale A13 in Canton San Gallo durante il mattino, con traffico pendolare, senza mostrare l\'incidente specifico.',
+    'blog.article.casse-malati-amministrazione-costi-2025.title': 'Casse malati: amministrazione varia da 103 a 445 franchi',
+    'blog.article.casse-malati-amministrazione-costi-2025.excerpt': 'Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con minimo 103,35 CHF e massimo 445,20 CHF.',
+    'blog.article.casse-malati-amministrazione-costi-2025.imageAlt': 'Ufficio di una cassa malati a San Gallo con persone che camminano davanti',
 };
 
 export default blogMetaCantonSgIt;

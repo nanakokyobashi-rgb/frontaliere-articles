@@ -75,6 +75,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-casse-malati-amministrazione-costi-2025': {
+    title: 'Casse malati: amministrazione varia da 103 a 445 franchi',
+    description: 'Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, malati, amministrazione, varia',
+    ogTitle: 'Casse malati: amministrazione varia da 103 a 445 franchi',
+    ogDescription: 'L\'analisi Comparis per l\'Effizienzpreis 2026 mostra che nel 2025 le casse malati svizzere hanno speso tra 103,35 e 445,20 CHF per persona per la gestione amministrativa. La media è stata di 191,15 CHF, in calo del 3,3% dal 2021. La soglia',
+    canonicalPath: '/articoli-san-gallo/casse-malati-amministrazione-costi-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse malati: amministrazione varia da 103 a 445 franchi",
+      "description": "Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con un minimo di 103,35 CHF e un massimo di 445,20 CHF",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-casse-malati-amministrazione-costi-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio di una cassa malati a San Gallo con persone che camminano davanti"
+      },
+      "datePublished": "2026-10-08T10:59:45+00:00",
+      "dateModified": "2026-10-08T10:59:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/casse-malati-amministrazione-costi-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

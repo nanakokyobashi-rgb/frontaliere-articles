@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'casse-malati-amministrazione-costi-2025',
+ category: 'novita',
+ date: '2026-10-08T10:59:45.512Z',
+ image: '/images/blog/article-casse-malati-amministrazione-costi-2025.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
