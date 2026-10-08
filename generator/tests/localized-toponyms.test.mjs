@@ -15,6 +15,7 @@ import {
   replaceLocalizedToponymMismatches,
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
+import { extractSlugFallbackLocales } from '../scripts/lib/slug-fallback-provenance.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -106,6 +107,48 @@ test('normalizza le entità HTML prima del gate e della riparazione', () => {
   });
   assert.equal(clean.text, 'Traffic in Z&uuml;rich');
   assert.equal(clean.replacements, 0);
+});
+
+test('la riparazione sostituisce solo lo span errato e conserva le entità vicine', () => {
+  const result = replaceLocalizedToponymMismatches({
+    sourceText: 'Notizia sul cantone di Lucerna',
+    targetText: 'L&#x27;articolo parla di Lucerna',
+    locale: 'en',
+  });
+  assert.equal(result.text, 'L&#x27;articolo parla di Lucerne');
+  assert.equal(result.replacements, 1);
+});
+
+test('normalizza i trattini tipografici senza perdere gli esonimi composti', () => {
+  const issues = findLocalizedToponymMismatches({
+    sourceText: 'Notizia sul cantone di Basilea Campagna',
+    targetText: 'Le notizie citano Basel–Landschaft.',
+    locale: 'fr',
+  });
+  assert.deepEqual(issues, [{
+    code: 'BL', type: 'canton', locale: 'fr', form: 'Basel-Landschaft', expected: 'Bâle-Campagne',
+  }]);
+  const repaired = replaceLocalizedToponymMismatches({
+    sourceText: 'Notizia sul cantone di Basilea Campagna',
+    targetText: 'Le notizie citano Basel–Landschaft.',
+    locale: 'fr',
+  });
+  assert.equal(repaired.text, 'Le notizie citano Bâle-Campagne.');
+});
+
+test('riconosce la provenance dei fallback slug sia nei registri principali sia cantonali', () => {
+  const main = extractSlugFallbackLocales(`
+    export const BLOG_SLUG_FALLBACK_REASONS = {
+      'demo': { en: { source: 'it-slug', reason: 'title-below-plausibility-floor' }, fr: { source: 'it-slug', reason: 'x' } },
+    };
+  `);
+  const canton = extractSlugFallbackLocales(`
+    export const CANTON_SLUG_FALLBACK_REASONS = {
+      'demo': { de: 'title-below-plausibility-floor' },
+    };
+  `);
+  assert.deepEqual([...main.get('demo')], ['en', 'fr']);
+  assert.deepEqual([...canton.get('demo')], ['de']);
 });
 
 test('non confonde una citazione URL o una parola fuori dall articolo', () => {

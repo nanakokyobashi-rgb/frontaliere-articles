@@ -53,6 +53,21 @@ const ADDITIONAL_HTML_ENTITY_PATTERN = new RegExp(
   'g',
 );
 const NUMERIC_HTML_ENTITY_PATTERN = /&#(?:x([0-9a-f]+)|([0-9]+));/giu;
+const DASH_VARIANT_PATTERN = /[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/gu;
+const DASH_CHARACTER_PATTERN = /[-\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/u;
+const RAW_DASH_TERM_PATTERN = '(?:[-\\u2010-\\u2015\\u2212\\uFE58\\uFE63\\uFF0D]|&(?:ndash|mdash);|&#(?:8211|8212|x2013|x2014);)\\s*';
+const RAW_HTML_ENTITY_BY_CHARACTER = new Map();
+for (const [entity, character] of Object.entries({
+  ...ADDITIONAL_HTML_ENTITIES,
+  '&amp;': '&',
+  '&apos;': "'",
+  '&nbsp;': ' ',
+  '&quot;': '"',
+})) {
+  const entities = RAW_HTML_ENTITY_BY_CHARACTER.get(character) || [];
+  entities.push(entity);
+  RAW_HTML_ENTITY_BY_CHARACTER.set(character, entities);
+}
 
 /** Keep detection, writing and historical repair on the same normalized text. */
 export function normalizeLocalizedToponymText(value) {
@@ -64,6 +79,14 @@ export function normalizeLocalizedToponymText(value) {
         ? String.fromCodePoint(codePoint)
         : _entity;
     });
+}
+
+/** Normalize typography only for matching; writers must not rewrite prose here. */
+function normalizeToponymMatchText(value) {
+  return normalizeLocalizedToponymText(value)
+    .normalize('NFKC')
+    .replace(DASH_VARIANT_PATTERN, '-')
+    .replace(/\s*-\s*/gu, '-');
 }
 
 function escapeRegExp(value) {
@@ -78,6 +101,30 @@ function termPattern(term) {
     .join('\\s+');
 }
 
+function rawTermPattern(term) {
+  let pattern = '';
+  for (const character of String(term)) {
+    if (/\s/u.test(character)) {
+      pattern += '\\s+';
+      continue;
+    }
+    if (DASH_CHARACTER_PATTERN.test(character)) {
+      pattern += RAW_DASH_TERM_PATTERN;
+      continue;
+    }
+    const alternatives = [escapeRegExp(character)];
+    for (const entity of RAW_HTML_ENTITY_BY_CHARACTER.get(character) || []) {
+      alternatives.push(escapeRegExp(entity));
+    }
+    const codePoint = character.codePointAt(0);
+    if (codePoint !== undefined) {
+      alternatives.push(`&#${codePoint};`, `&#x${codePoint.toString(16)};`);
+    }
+    pattern += alternatives.length === 1 ? alternatives[0] : `(?:${alternatives.join('|')})`;
+  }
+  return pattern;
+}
+
 // URL destinations are opaque content, including relative Markdown routes.
 // The generator may mention a localized slug in prose as `[link](/en/.../...)`;
 // that route is not a translated sentence and must neither trigger the gate nor
@@ -90,7 +137,7 @@ function withoutUrls(value) {
 }
 
 function containsTerm(value, term) {
-  const text = withoutUrls(normalizeLocalizedToponymText(value)).normalize('NFKC');
+  const text = withoutUrls(normalizeToponymMatchText(value));
   const pattern = termPattern(term);
   if (!pattern) return false;
   return new RegExp(`(?<![\\p{L}\\p{N}])${pattern}(?![\\p{L}\\p{N}])`, 'iu').test(text);
@@ -103,7 +150,7 @@ function entityForms(entity) {
 }
 
 function normalizeForm(value) {
-  return String(value).normalize('NFKC').toLocaleLowerCase('en').replace(/\s+/gu, ' ').trim();
+  return normalizeToponymMatchText(value).toLocaleLowerCase('en').replace(/\s+/gu, ' ').trim();
 }
 
 function localizedSlugForm(value) {
@@ -242,7 +289,7 @@ function replaceOutsideUrls(value, pattern, replacer) {
 }
 
 function localizedToponymHits(value, { protectNames = false, slug = false } = {}) {
-  const text = withoutUrls(normalizeLocalizedToponymText(value)).normalize('NFKC');
+  const text = withoutUrls(normalizeToponymMatchText(value));
   const protectedNameRanges = protectNames ? protectedRanges(text) : [];
   const hits = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
@@ -324,15 +371,16 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
       issues,
     };
   }
-  // Decode only fields that actually contain a mismatch. A clean historical
-  // field must remain byte-stable even if it happens to contain an unrelated
-  // HTML entity.
-  text = normalizeLocalizedToponymText(text);
+  // Match the raw literal directly. The detector normalizes entities and dash
+  // typography for matching, but the repair must not decode unrelated spans:
+  // replacing `&#x27;` with `'` inside a single-quoted TS literal would break
+  // syntax. The raw pattern accepts the same entity/dash spellings and only
+  // the matched exonym span is replaced.
   let replacements = 0;
   const replacementCounts = new Map();
   for (const issue of [...issues].sort((left, right) => right.form.length - left.form.length)) {
     const pattern = new RegExp(
-      `(?<![\\p{L}\\p{N}])${slug ? slugTermPattern(issue.form) : termPattern(issue.form)}(?![\\p{L}\\p{N}])`,
+      `(?<![\\p{L}\\p{N}])${slug ? slugTermPattern(issue.form) : rawTermPattern(issue.form)}(?![\\p{L}\\p{N}])`,
       'giu',
     );
     let issueReplacements = 0;

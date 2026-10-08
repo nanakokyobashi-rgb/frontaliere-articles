@@ -19,6 +19,7 @@ import {
   LOCALIZED_TOPONYM_LOCALES,
   replaceLocalizedToponymMismatches,
 } from './lib/localized-toponyms.mjs';
+import { extractSlugFallbackLocales } from './lib/slug-fallback-provenance.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const CONTENT_ROOT = path.join(ROOT, 'content');
@@ -77,6 +78,12 @@ const files = walk(CONTENT_ROOT).filter((file) => isCorpusFile(file) || isSlugFi
 const fileSources = new Map();
 const sourceValues = new Map();
 const targets = [];
+const fallbackLocalesBySlugFile = new Map();
+
+for (const file of files.filter(isSlugFile)) {
+  const fallbackLocales = extractSlugFallbackLocales(readFileSync(file, 'utf8'));
+  if (fallbackLocales.size > 0) fallbackLocalesBySlugFile.set(file, fallbackLocales);
+}
 
 function addSourceValue(articleId, value) {
   const values = sourceValues.get(articleId) || new Set();
@@ -129,8 +136,17 @@ const byLocale = new Map(LOCALIZED_TOPONYM_LOCALES.filter((locale) => locale !==
 const byForm = new Map();
 let fieldsChanged = 0;
 let replacements = 0;
+let skippedProvisionalSlugs = 0;
 
 for (const target of targets) {
+  const fallbackLocales = fallbackLocalesBySlugFile.get(target.file);
+  if (target.kind === 'slug' && fallbackLocales?.get(target.articleId)?.has(target.locale)) {
+    // A published Italian fallback is a live URL with explicit provenance.
+    // Repairing it in place would change the route without emitting the
+    // redirect/previousSlugs bridge that a URL migration requires.
+    skippedProvisionalSlugs += 1;
+    continue;
+  }
   const references = sourceValues.get(target.articleId);
   if (!references) continue;
   let next = target.raw;
@@ -182,6 +198,7 @@ console.log(JSON.stringify({
   filesScanned: files.length,
   fieldsChanged,
   replacements,
+  skippedProvisionalSlugs,
   byLocale: Object.fromEntries(byLocale),
   byForm: Object.fromEntries([...byForm].sort((left, right) => right[1] - left[1])),
 }, null, 2));
