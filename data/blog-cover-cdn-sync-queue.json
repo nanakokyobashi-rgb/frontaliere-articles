@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-winterthur-governo-apprendisti.webp",
+      "sha256": "fc5d41605b9116326c3ae30c27cff0f8cb8a4fac869317c6fd4ffa21ddf86e52"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-winterthur-governo-apprendisti-480w.webp",
+      "sha256": "2fe440ffce9dfa9bc2259268172ae966d1b2ace248cdff4282b72b3ef9c34f0e"
+    }
+  ]
 }
