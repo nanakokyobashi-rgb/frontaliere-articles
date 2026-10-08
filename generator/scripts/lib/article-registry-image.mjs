@@ -83,16 +83,122 @@ function seoEntryEnd(source, start) {
   return match ? match.index : source.length;
 }
 
+function skipQuotedText(source, start, quote) {
+  for (let index = start + 1; index < source.length; index += 1) {
+    if (source[index] === '\\') {
+      index += 1;
+      continue;
+    }
+    if (source[index] === quote) return index + 1;
+  }
+  return source.length;
+}
+
+function skipComment(source, start) {
+  if (source.startsWith('//', start)) {
+    const lineEnd = source.indexOf('\n', start + 2);
+    return lineEnd < 0 ? source.length : lineEnd;
+  }
+  if (source.startsWith('/*', start)) {
+    const commentEnd = source.indexOf('*/', start + 2);
+    return commentEnd < 0 ? source.length : commentEnd + 2;
+  }
+  return start;
+}
+
+function skipWhitespace(source, start) {
+  let index = start;
+  while (index < source.length && /\s/.test(source[index])) index += 1;
+  return index;
+}
+
+function findObjectProperty(source, property) {
+  for (let index = 0; index < source.length;) {
+    const commentEnd = skipComment(source, index);
+    if (commentEnd !== index) {
+      index = commentEnd;
+      continue;
+    }
+
+    const quote = source[index];
+    if (quote !== '"' && quote !== "'" && quote !== '`') {
+      index += 1;
+      continue;
+    }
+
+    const end = skipQuotedText(source, index, quote);
+    if (quote !== '`' && source.slice(index + 1, end - 1) === property) {
+      let cursor = skipWhitespace(source, end);
+      if (source[cursor] === ':') {
+        cursor = skipWhitespace(source, cursor + 1);
+        if (source[cursor] === '{') return { keyStart: index, objectStart: cursor };
+      }
+    }
+    index = end;
+  }
+  return null;
+}
+
+function seoImageObjectEnd(source, objectStart) {
+  let depth = 0;
+  for (let index = objectStart; index < source.length;) {
+    const commentEnd = skipComment(source, index);
+    if (commentEnd !== index) {
+      index = commentEnd;
+      continue;
+    }
+
+    const quote = source[index];
+    if (quote === '"' || quote === "'" || quote === '`') {
+      index = skipQuotedText(source, index, quote);
+      continue;
+    }
+    if (source[index] === '{') {
+      depth += 1;
+    } else if (source[index] === '}') {
+      depth -= 1;
+      if (depth === 0) return index;
+    }
+    index += 1;
+  }
+  return -1;
+}
+
+function consumeLineBreak(source, start) {
+  if (source[start] === '\r') return source[start + 1] === '\n' ? start + 2 : start + 1;
+  return source[start] === '\n' ? start + 1 : start;
+}
+
+function seoImageBlockRange(block) {
+  const property = findObjectProperty(block, 'image');
+  if (!property) return null;
+  const imageEnd = seoImageObjectEnd(block, property.objectStart);
+  if (imageEnd < 0) return null;
+
+  const lineStart = block.lastIndexOf('\n', property.keyStart) + 1;
+  const prefix = block.slice(lineStart, property.keyStart);
+  const start = prefix.trim() === '' ? lineStart : property.keyStart;
+  let end = imageEnd + 1;
+  if (block[end] === ',') end += 1;
+  end = consumeLineBreak(block, end);
+  return {
+    start,
+    end,
+    keyStart: property.keyStart,
+    objectEnd: imageEnd,
+    text: block.slice(start, imageEnd + 1),
+  };
+}
+
 function seoImageUrlLine(block) {
-  const imageStart = block.indexOf('"image"');
-  if (imageStart < 0) return null;
-  const dateStart = block.indexOf('"datePublished"', imageStart);
-  const imageBlock = block.slice(imageStart, dateStart < 0 ? undefined : dateStart);
+  const imageRange = seoImageBlockRange(block);
+  if (!imageRange) return null;
+  const imageBlock = block.slice(imageRange.keyStart, imageRange.objectEnd + 1);
   const template = /(\s*"url"\s*:\s*)`([^`\r\n]*)`/.exec(imageBlock);
   if (template) {
     return {
       line: template[0],
-      offset: imageStart + template.index,
+      offset: imageRange.keyStart + template.index,
       prefix: template[1],
       value: template[2],
       suffix: '',
@@ -103,26 +209,12 @@ function seoImageUrlLine(block) {
   if (!quoted) return null;
   return {
     line: quoted[0],
-    offset: imageStart + quoted.index,
+    offset: imageRange.keyStart + quoted.index,
     prefix: quoted[1],
     quote: quoted[2],
     value: quoted[3],
     suffix: '',
     kind: 'quoted',
-  };
-}
-
-function seoImageBlockRange(block) {
-  const imageStart = block.indexOf('"image"');
-  const dateStart = block.indexOf('"datePublished"', imageStart);
-  if (imageStart < 0 || dateStart < 0) return null;
-  const fieldStart = block.lastIndexOf('\n', imageStart) + 1;
-  const dateLineStart = block.lastIndexOf('\n', dateStart) + 1;
-  const rawText = block.slice(fieldStart, dateLineStart).replace(/\n$/, '');
-  return {
-    start: fieldStart,
-    end: dateLineStart,
-    text: rawText.replace(/,\s*$/, ''),
   };
 }
 
@@ -320,7 +412,7 @@ export function updateArticleSeoImageBlock(root, articleId, imageBlock, options 
   }
   const located = locateArticleSeoImage(root, articleId, options);
   if (located.imageBlockStart === undefined || located.imageBlockEnd === undefined) {
-    throw new Error(`SEO entry for article ${articleId} has no complete image block before datePublished`);
+    throw new Error(`SEO entry for article ${articleId} has no complete ImageObject block`);
   }
   const normalizedBlock = imageBlock.replace(/\s+$/, '');
   if (located.imageBlock === normalizedBlock) {
