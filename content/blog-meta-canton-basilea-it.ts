@@ -9,6 +9,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.detrazioni-figli-basel.title': 'Basilea Città: detrazioni figli quattro volte più alte',
     'blog.article.detrazioni-figli-basel.excerpt': 'Un\'iniziativa nel Canton Basilea Città propone di rendere quattro volte più alta la detrazione fiscale per ogni figlio.',
     'blog.article.detrazioni-figli-basel.imageAlt': 'Genitori con figli in una scena urbana di Basilea Città sulle detrazioni fiscali',
+    'blog.article.phishing-email-fisco-basel.title': 'Canton Basilea: allerta per e-mail fiscali false',
+    'blog.article.phishing-email-fisco-basel.excerpt': 'La Steuerverwaltung Basel-Stadt segnala false e-mail su rimborsi, solleciti e fatture fiscali: cancellarle, senza aprire link o allegati.',
+    'blog.article.phishing-email-fisco-basel.imageAlt': 'Scrivania con e-mail fiscale sospetta, busta postale ed eBill a Basilea',
 };
 
 export default blogMetaCantonBasileaIt;

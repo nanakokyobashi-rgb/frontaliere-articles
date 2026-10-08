@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'phishing-email-fisco-basel',
+ category: 'fiscale',
+ date: '2026-10-08T15:47:21.742Z',
+ image: '/images/blog/article-phishing-email-fisco-basel.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

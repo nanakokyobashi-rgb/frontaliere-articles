@@ -75,6 +75,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-phishing-email-fisco-basel': {
+    title: 'Canton Basilea: allerta per e-mail fiscali false',
+    description: 'La Steuerverwaltung Basel-Stadt segnala false e-mail su rimborsi, solleciti e fatture fiscali: usare solo posta o eBill, senza aprire link o allegati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, basilea, allerta, e-mail',
+    ogTitle: 'Basilea: allerta per false e-mail fiscali',
+    ogDescription: 'La frode usa falsi rimborsi, solleciti e fatture fiscali per imitare la Steuerverwaltung Basel-Stadt. La regola resta semplice: le comunicazioni autentiche arrivano per posta o eBill; le e-mail sospette vanno cancellate senza aprire link o allegati.',
+    canonicalPath: '/articoli-basilea/phishing-email-fisco-basel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Canton Basilea: allerta per e-mail fiscali false",
+      "description": "La Steuerverwaltung Basel-Stadt segnala false e-mail su rimborsi, solleciti e fatture fiscali: usare solo posta o eBill, senza aprire link o allegati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-phishing-email-fisco-basel.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scrivania con e-mail fiscale sospetta, busta postale ed eBill a Basilea"
+      },
+      "datePublished": "2026-10-08T15:47:21+00:00",
+      "dateModified": "2026-10-08T15:47:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/phishing-email-fisco-basel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

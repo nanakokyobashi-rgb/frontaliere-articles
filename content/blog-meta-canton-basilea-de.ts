@@ -9,6 +9,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.detrazioni-figli-basel.title': 'Basel-Stadt: Kinderabzüge viermal höher',
     'blog.article.detrazioni-figli-basel.excerpt': 'Eine Initiative im Kanton Basel-Stadt schlägt vor, den Steuerabzug für jedes Kind auf das Vierfache zu erhöhen.',
     'blog.article.detrazioni-figli-basel.imageAlt': 'Eltern mit Kindern in Basel-Stadt zum Thema Kindersteuerabzüge',
+    'blog.article.phishing-email-fisco-basel.title': 'Kanton Basel: Warnung vor gefälschten Steuer-E-Mails',
+    'blog.article.phishing-email-fisco-basel.excerpt': 'Die Steuerverwaltung Basel-Stadt warnt vor gefälschten E-Mails zu Rückerstattungen, Mahnungen und Steuerrechnungen: löschen, ohne Links oder Anhänge zu öffnen.',
+    'blog.article.phishing-email-fisco-basel.imageAlt': 'Schreibtisch mit verdächtiger Steuer-E-Mail, Briefumschlag und eBill in Basel',
 };
 
 export default blogMetaCantonBasileaDe;
