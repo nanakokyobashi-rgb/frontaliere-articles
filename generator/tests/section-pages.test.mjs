@@ -156,6 +156,26 @@ test('publisher migration manifest usa percorsi canonici per landing e hub', () 
   assert.ok(![...rels].some((rel) => rel.includes('ticinoindex.html') || rel.includes('ticinocarburanti')));
 });
 
+test('publisher: il seed del manifest di migrazione conserva i percorsi canonici', () => {
+  const manifest = pageManifestFromPages({
+    section: 'canton-ti',
+    commit: 'migration',
+    pages: migrationManifestPages('canton-ti', [], []),
+  });
+
+  assert.deepEqual(
+    manifest.pages.landing.map((page) => page.rel).sort(),
+    [
+      'articoli-ticino/index.html',
+      'de/tessin-artikel/index.html',
+      'en/ticino-articles/index.html',
+      'fr/articles-tessin/index.html',
+    ].sort(),
+  );
+  assert.ok([...manifest.pages.landing, ...manifest.pages.hub].every((page) => page.rel.endsWith('/index.html')));
+  assert.ok(manifest.pages.hub.every((page) => page.rel.includes('/')));
+});
+
 test('publisher R2 rifiuta gli article ID richiesti che la pipeline trattiene', () => {
   assert.deepEqual(
     missingRenderedArticleIds(
