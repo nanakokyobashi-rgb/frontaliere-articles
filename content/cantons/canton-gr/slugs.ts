@@ -5,6 +5,7 @@
 export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
  'strada-calanca-chiusura-preventiva': { it: 'strada-calanca-chiusura-preventiva', en: 'calanca-road-preventive-closure', de: 'calancastrasse-praventive-sperrung', fr: 'route-calanca-fermeture-preventive' },
  'benzina-grigioni-deviazione': { it: 'benzina-grigioni-deviazione', en: 'graubuenden-fuel-detour', de: 'graubuenden-tankrechner-umweg', fr: 'grisons-carburant-detour' },
+ 'lavoro-grigioni-settembre-2026': { it: 'lavoro-grigioni-settembre-2026', en: 'graubunden-unemployment-september-2026', de: 'arbeitslosigkeit-graubuenden-september-2026', fr: 'chomage-grisons-septembre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
