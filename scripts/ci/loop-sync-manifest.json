@@ -5245,6 +5245,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/article-content-duplicate.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica del detector multi-segnale dei contenuti: la usa il generatore e il gate post-rebase prima del push per riconoscere due ID diversi che pubblicano la stessa notizia. Corpus-only perche' il producer operativo vive qui e il sito consuma la superficie JSON senza eseguire questo generatore; il modulo resta puro per essere letto dai gate zero-dep.",
+      "baseline": {
+        "site": null,
+        "corpus": "da2aa2912092033d",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/local-news.mjs",
       "mode": "corpus-only",
       "reason": "Cronaca locale che la sezione frontaliere pubblica anche senza angolo frontaliere (cronaca nera, incidenti stradali, sport, cultura ed eventi), decisione del proprietario del 2026-09-25: il genere (radici a inizio parola sul testo normalizzato) E il luogo (Ticino dall'elenco BFS di generator/data/ticino-municipalities.json, i nomi comuni solo dopo una preposizione di luogo; comuni di confine delle sole province VA, CO e VB dall'indice di topic-coverage-guard.mjs), legati frase per frase: il luogo piu' vicino al genere, introdotto da una preposizione di luogo dell'evento o come dateline, decide dove e' avvenuto il fatto (un luogo al genitivo, organizzatore o proprietario, decide solo se la frase non ne nomina uno dell'evento); un demonimo («un ticinese») o un fiume («sul Ticino») non lo collocano, e lo sport si colloca con il luogo della squadra, non con quello della partita. Sulla sezione frontaliere una headline che isLocalNews ancora anche il gate geografico della scansione (filterByAnchor). In create-article.mjs aggiunge un segnale all'ammissione (hasAdmissionSignal / countAdmissionHits) e decide il ramo cronaca del prompt, dell'espansione, di CTA e link interni e del controllo di densita'. Corpus-only per la stessa ragione di fact-check-response.mjs: la generazione gira solo in questo repo.",
