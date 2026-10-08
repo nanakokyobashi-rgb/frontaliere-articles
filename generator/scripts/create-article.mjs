@@ -8199,6 +8199,34 @@ function extractDatesFromHtml(html, baseUrl) {
   return dateMap;
 }
 
+function embeddedHeadlineDateKey(value) {
+  return headlineTextFromMarkup(value).normalize('NFKC').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Radio Munot serializes the card metadata in its page state instead of
+ * rendering a `<time>` element.  Keep this opt-in: scanning arbitrary JSON in
+ * every HTML source would pair unrelated titles and dates.
+ */
+function extractEmbeddedHeadlineDates(html, field) {
+  if (field !== 'publishDate') return new Map();
+  const out = new Map();
+  const re = /"title"\s*:\s*"((?:\\.|[^"\\]){1,300})"\s*,\s*"type"\s*:\s*"[^"\\]{1,80}"\s*,\s*"publishDate"\s*:\s*"([^"]+)"/gu;
+  let match;
+  while ((match = re.exec(String(html || ''))) !== null) {
+    let title;
+    try {
+      title = JSON.parse(`"${match[1]}"`);
+    } catch {
+      title = match[1];
+    }
+    const date = new Date(match[2]);
+    if (!title || Number.isNaN(date.getTime())) continue;
+    out.set(embeddedHeadlineDateKey(title), date);
+  }
+  return out;
+}
+
 /** Check if a date is within the last N days */
 function isWithinDays(date, days) {
   if (!date) return false;
@@ -8279,6 +8307,13 @@ function headlineCandidateIsUsable(text) {
   if (isGenericHeadlineLinkLabel(candidate)) return null;
   if (/^[\d\s./,:-]+$/.test(candidate)) return null;
   return candidate;
+}
+
+function configuredHeadlineFromAnchor(anchorTag, quirks) {
+  if (quirks?.titleAttributeTemplate !== 'beitrag-lesen') return null;
+  const title = headlineAttributeValue(anchorTag, 'title');
+  const match = title.match(/^\s*Beitrag\s+['"]([\s\S]+)['"]\s+lesen\.\s*$/iu);
+  return match ? headlineCandidateIsUsable(match[1]) : null;
 }
 
 /** Stack degli elementi aperti davanti a un link, sufficiente per il markup
@@ -8415,14 +8450,20 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const source = arguments[2] || {};
+  const metadataHtml = arguments[3] || html;
   const results = [];
   const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
+  const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
   // Match <a href="...">text</a> — capture href and inner text
   const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let m;
   while ((m = linkRe.exec(html)) !== null) {
     let href = m[1];
     let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const anchorTagEnd = m[0].indexOf('>');
+    const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+    const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
+    if (configuredHeadline) text = configuredHeadline;
     // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every
     // teaser link's accessible name with a screen-reader-only "Maggiori
     // informazioni su" label. It's plain text content, not a tag, so it
@@ -8431,8 +8472,6 @@ function extractHeadlines(html, baseUrl) {
     // boilerplate that never carries a topic signal.
     text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
     if (isGenericHeadlineLinkLabel(text)) {
-      const anchorTagEnd = m[0].indexOf('>');
-      const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
       text = structuralHeadlineForLink(html, m.index, anchorTag);
       if (!text) continue;
     }
@@ -8447,7 +8486,10 @@ function extractHeadlines(html, baseUrl) {
     // Skip non-article links (categories, tags, pagination, login, etc.)
     if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) continue;
     // Extract date from URL path or from nearby <time> elements
-    const date = extractDateFromUrl(href) || htmlDateMap.get(href) || null;
+    const date = extractDateFromUrl(href)
+      || htmlDateMap.get(href)
+      || embeddedDateMap.get(embeddedHeadlineDateKey(text))
+      || null;
     results.push({ url: href, headline: text, date });
   }
   // Deduplicate by URL

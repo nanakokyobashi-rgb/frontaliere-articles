@@ -608,6 +608,58 @@ test('html-links: la data YYMMDD nel path delle card newsBox non finisce nel sec
   assert.equal(out.headlines[0].date.getDate(), 29);
 });
 
+test('html-links: Radio Munot legge titolo da title e publishDate dal page-state nonostante lo script rimosso', async () => {
+  const url = 'https://www.radiomunot.ch/';
+  const headline = 'Neues Polizeiboot seit über einem Jahr im Einsatz';
+  const html = [
+    '<main><article><a title="Beitrag \'Neues Polizeiboot seit über einem Jahr im Einsatz\' lesen." href="/p/Neues-Polizeiboot-abc"><span>00:00</span></a></article></main>',
+    '<script type="application/json">{"title":"Neues Polizeiboot seit über einem Jahr im Einsatz","type":"Podcast","publishDate":"2026-10-05T05:00:00Z"}</script>',
+  ].join('');
+  const source = {
+    url,
+    parser: 'html-links',
+    language: 'de',
+    quirks: {
+      articlePathPattern: '^/p/',
+      titleAttributeTemplate: 'beitrag-lesen',
+      embeddedDateField: 'publishDate',
+    },
+  };
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.headlines.length, 1);
+  assert.equal(out.headlines[0].headline, headline);
+  assert.equal(out.headlines[0].date.toISOString(), '2026-10-05T05:00:00.000Z');
+});
+
+test('html-links: Radio Munot porta il testo della pagina /p/ nel lead entro il budget dichiarato', async () => {
+  const url = 'https://www.radiomunot.ch/';
+  const detailUrl = 'https://www.radiomunot.ch/p/Regionalnachrichten-abc';
+  const html = '<main><article><a title="Beitrag \'Regionalnachrichten vom 5. Oktober 2026\' lesen." href="/p/Regionalnachrichten-abc"><span>00:00</span></a></article></main>';
+  const detail = '<main><article><h1>Regionalnachrichten vom 5. Oktober 2026</h1><p>Auf der Buchberger Erlistrasse kommt es wegen Belagsarbeiten zu einer Strassensperrung und einer Umleitung.</p><p>Die Gemeinde informiert über die Verkehrseinschränkungen.</p></article></main>';
+  const source = {
+    url,
+    parser: 'html-links',
+    language: 'de',
+    quirks: {
+      articlePathPattern: '^/p/',
+      titleAttributeTemplate: 'beitrag-lesen',
+      articleContent: 'html-text',
+      maxRequestsPerRun: 2,
+    },
+  };
+  const { impl, calls } = fakeFetch({
+    [url]: { body: html, contentType: 'text/html' },
+    [detailUrl]: { body: detail, contentType: 'text/html' },
+  });
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.headlines.length, 1);
+  assert.match(out.headlines[0].lead, /Strassensperrung/);
+  assert.match(out.headlines[0].sourceContent, /Verkehrseinschränkungen/);
+  assert.equal(out.requests, 2);
+  assert.deepEqual(calls.map((call) => call.url), [url, detailUrl]);
+});
+
 test('html-links: una data evento nel corpo non sostituisce la data h4 della card', async () => {
   const url = 'https://neuhausen.example/aktuelles';
   const html = '<main><section><h2>Mitwirkung zum Angebotskonzept vbsh 2030 abgeschlossen</h2><article><h4>11.05.2026</h4><p>Die Volksabstimmung ist für den 28. Februar 2027 angesetzt.</p><a href="/fileupload/bericht.pdf">Mitwirkungsbericht der Gemeinde Neuhausen am Rheinfall</a></article></section></main>';

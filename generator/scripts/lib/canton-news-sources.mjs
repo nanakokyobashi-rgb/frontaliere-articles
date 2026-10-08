@@ -58,6 +58,14 @@
  *   - `dateFromSectionHeading: h4` → liste HTML in cui la data di pubblicazione
  *                            è l'`<h4>` della card/sezione; evita di leggere
  *                            una data d'evento dentro il testo collegato
+ *   - `titleAttributeTemplate: beitrag-lesen` → card HTML in cui il titolo è
+ *                            nell'attributo `title="Beitrag '…' lesen."`
+ *   - `embeddedDateField: publishDate` → metadati JSON della stessa card,
+ *                            associati al titolo e letti dalla risposta grezza
+ *   - `articleContent: html-text` → dopo la lista, legge le pagine articolo
+ *                            degli item piu' recenti e porta il testo
+ *                            editoriale come `lead`/`sourceContent`; il tetto
+ *                            resta quello di `maxRequestsPerRun`
  *   - `urlReusedForDifferentStories` → la fonte riemette lo stesso URL con
  *                            notizie diverse (ticker, «Kurzmeldungen»),
  *                            ovunque (`true`) o sui path di una regex:
@@ -1092,7 +1100,7 @@ export function createHostThrottle({ sleep = (ms) => new Promise((r) => setTimeo
  *   fetchImpl?: typeof fetch,
  *   throttle?: ReturnType<typeof createHostThrottle>,
  *   extractRssItems: (xml: string, url: string) => Array<{url: string, headline: string, date: Date | null}>,
- *   extractHeadlines: (html: string, url: string) => Array<{url: string, headline: string, date: Date | null}>,
+ *   extractHeadlines: (html: string, url: string, source?: object, metadataHtml?: string) => Array<{url: string, headline: string, date: Date | null}>,
  *   now?: Date,
  * }} ctx
  * @returns {Promise<{ headlines: Array<object>, requests: number, notes: string[] }>}
@@ -1185,7 +1193,7 @@ export async function scanCantonSource(source, ctx) {
         // Prima la cornice del sito (menu, header, footer), poi i link che
         // non sono articoli: vedi stripPageChrome e filterArticleLinks.
         const page = stripPageChrome(text);
-        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url, source), url, source);
+        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url, source, text), url, source);
         if (page.removed > 0 || links.dropped > 0) {
           notes.push(`navigazione: ${page.removed} aree tolte, ${links.dropped} link non articolo scartati`);
         }
@@ -1233,6 +1241,46 @@ export async function scanCantonSource(source, ctx) {
     notes.push(`URL riusati: ${reused.identified} voci con l'identita' dell'item`);
     if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza un titolo della fonte scartate (nessuna identita')`);
     headlines = reused.headlines;
+  }
+
+  // Alcune home editoriali hanno titoli generici per le rassegne (per esempio
+  // «Regionalnachrichten»), ma le pagine /p/ contengono il testo della notizia.
+  // La fonte deve dichiarare esplicitamente questo secondo passo: non si
+  // scaricano pagine articolo da ogni elenco HTML e il budget resta osservabile
+  // nel report. Gli item piu' recenti hanno priorita'; se un dettaglio fallisce
+  // la headline resta utilizzabile, senza trasformare un guasto puntuale in
+  // una fonte interamente fallita.
+  if (source.parser === 'html-links' && quirks.articleContent === 'html-text' && headlines.length > 0) {
+    const detailBudget = budget === Infinity ? headlines.length : Math.max(0, budget - requests);
+    const targets = headlines
+      .map((headline, index) => ({ headline, index }))
+      .sort((a, b) => {
+        const ad = a.headline?.date instanceof Date ? a.headline.date.getTime() : 0;
+        const bd = b.headline?.date instanceof Date ? b.headline.date.getTime() : 0;
+        return bd - ad;
+      })
+      .slice(0, detailBudget);
+    if (targets.length < headlines.length) {
+      notes.push(`testo dettaglio: ${targets.length}/${headlines.length} pagine nel budget`);
+    }
+    for (const { headline, index } of targets) {
+      try {
+        const detailHtml = await get(headline.url, HTML_ACCEPT);
+        const detailPage = stripPageChrome(detailHtml);
+        const sourceContent = stripTags(detailPage.html).slice(0, 8000);
+        if (sourceContent.length < 200) {
+          notes.push(`testo dettaglio vuoto: ${headline.url}`);
+          continue;
+        }
+        headlines[index] = {
+          ...headline,
+          lead: sourceContent.slice(0, 3000),
+          sourceContent,
+        };
+      } catch (error) {
+        notes.push(`testo dettaglio non disponibile: ${headline.url} (${error?.message || error})`);
+      }
+    }
   }
   headlines = dedupByUrl(headlines);
   if (quirks.emptyPubDate) notes.push('pubDate vuoto: voci senza data (quota undated, data dalla pagina in generazione)');
