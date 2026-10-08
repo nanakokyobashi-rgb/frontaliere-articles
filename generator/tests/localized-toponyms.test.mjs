@@ -99,6 +99,13 @@ test('normalizza le entità HTML prima del gate e della riparazione', () => {
   });
   assert.equal(repaired.text, 'Traffic in Zurich');
   assert.equal(repaired.replacements, 1);
+  const clean = replaceLocalizedToponymMismatches({
+    sourceText: 'Notizia sul cantone di Zurigo',
+    targetText: 'Traffic in Z&uuml;rich',
+    locale: 'de',
+  });
+  assert.equal(clean.text, 'Traffic in Z&uuml;rich');
+  assert.equal(clean.replacements, 0);
 });
 
 test('non confonde una citazione URL o una parola fuori dall articolo', () => {

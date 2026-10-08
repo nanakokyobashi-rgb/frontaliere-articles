@@ -315,7 +315,19 @@ export function assertLocalizedToponymPair({ sourceText = '', targetText = '', l
  */
 export function replaceLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
   const issues = findLocalizedToponymMismatches({ sourceText, targetText, locale, slug });
-  let text = normalizeLocalizedToponymText(targetText);
+  let text = String(targetText ?? '');
+  if (issues.length === 0) {
+    return {
+      text,
+      replacements: 0,
+      replacementCounts: new Map(),
+      issues,
+    };
+  }
+  // Decode only fields that actually contain a mismatch. A clean historical
+  // field must remain byte-stable even if it happens to contain an unrelated
+  // HTML entity.
+  text = normalizeLocalizedToponymText(text);
   let replacements = 0;
   const replacementCounts = new Map();
   for (const issue of [...issues].sort((left, right) => right.form.length - left.form.length)) {
