@@ -13,9 +13,16 @@ import { articleHeroImagePath, articleImageAssetId } from './lib/article-cover-i
 import {
   locateArticleRegistry,
   locateArticleSeoImage,
+  updateArticleSeoImageBlock,
   updateArticleImageInRegistry,
-  updateArticleImageInSeo,
 } from './lib/article-registry-image.mjs';
+import { corpusPath } from './lib/corpus-paths.mjs';
+import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
+import { metaFieldRegex } from './lib/meta-field-regex.mjs';
+import {
+  buildSeoImageBlock,
+  GENERATED_COVER_ALT_BY_LOCALE,
+} from './lib/seo-entry-builder.mjs';
 import {
   appendImageRegenerationPublishOutbox,
   IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
@@ -42,6 +49,67 @@ let sharpImport;
 
 function absolute(root, relativePath) {
   return path.join(root, relativePath);
+}
+
+function imageAltMetaUpdate(root, articleId, section, locale) {
+  const sectionCore = ARTICLE_SECTION_CORE_ALL[section];
+  if (!sectionCore) throw new Error(`unknown article section ${section}`);
+  const relativePath = corpusPath(`services/locales/${sectionCore.metaPrefix}-${locale}.ts`);
+  const filePath = absolute(root, relativePath);
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`article ${articleId} imageAlt metadata file is missing: ${relativePath}`);
+  }
+
+  const source = fs.readFileSync(filePath, 'utf8');
+  const matches = [...source.matchAll(metaFieldRegex('imageAlt'))]
+    .filter((match) => match[1] === articleId);
+  if (matches.length === 0) {
+    throw new Error(`article ${articleId} imageAlt field is missing in ${relativePath}`);
+  }
+  if (matches.length > 1) {
+    throw new Error(`article ${articleId} has duplicate imageAlt fields in ${relativePath}`);
+  }
+
+  const match = matches[0];
+  const escaped = escapeForSingleQuoteTS(GENERATED_COVER_ALT_BY_LOCALE[locale]);
+  if (match[2] === escaped) {
+    return { filePath, before: source, nextText: source, changed: false };
+  }
+
+  const valueStart = match[0].indexOf("'", match[0].indexOf(':') + 1);
+  const valueEnd = match[0].length - 1;
+  if (valueStart < 0 || valueEnd <= valueStart) {
+    throw new Error(`article ${articleId} imageAlt field changed while updating ${relativePath}`);
+  }
+  const replacement = match[0].slice(0, valueStart + 1)
+    + escaped
+    + match[0].slice(valueEnd);
+  const nextText = source.slice(0, match.index)
+    + replacement
+    + source.slice(match.index + match[0].length);
+  return { filePath, before: source, nextText, changed: true };
+}
+
+function imageAltMetaUpdates(root, articleId, section) {
+  return Object.keys(GENERATED_COVER_ALT_BY_LOCALE)
+    .map((locale) => imageAltMetaUpdate(root, articleId, section, locale));
+}
+
+function governedCoverSeoImage(root, record) {
+  const provenance = imageRecordForPath(root, record.imageUrl, { strict: true });
+  if (!provenance) throw new Error(`cover has no governed provenance record: ${record.imageUrl}`);
+  return {
+    provenance,
+    imageBlock: buildSeoImageBlock({
+      imagePath: record.imageUrl,
+      provenance,
+      caption: GENERATED_COVER_ALT_BY_LOCALE.it,
+    }),
+  };
+}
+
+function comparableSeoImageBlock(value) {
+  return String(value || '').replace(/\s+/g, '');
 }
 
 function snapshotFile(filePath) {
@@ -217,7 +285,11 @@ async function alreadySatisfiedCover(root, item, registryFiles, decodeThumbnail)
     if (!await hasValidThumbnail(root, record, decodeThumbnail)) return false;
     const section = sectionForRegistry(location);
     const seo = locateArticleSeoImage(root, item.articleId, { section });
-    return seo.previousImage === record.imageUrl;
+    const { imageBlock } = governedCoverSeoImage(root, record);
+    const metadata = imageAltMetaUpdates(root, item.articleId, section);
+    return seo.previousImage === record.imageUrl
+      && comparableSeoImageBlock(seo.imageBlock) === comparableSeoImageBlock(imageBlock)
+      && metadata.every(({ changed }) => !changed);
   } catch {
     return false;
   }
@@ -281,6 +353,8 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   const section = sectionForRegistry(location);
   const seoLocation = locateArticleSeoImage(root, item.articleId, { section });
   trackFile(snapshots, absolute(root, seoLocation.path));
+  const metadata = imageAltMetaUpdates(root, item.articleId, section);
+  for (const update of metadata) trackFile(snapshots, update.filePath);
 
   if (!await hasValidThumbnail(root, record, decodeThumbnail)) await generateThumbnail(destination, { root, item, record });
   if (!await hasValidThumbnail(root, record, decodeThumbnail)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
@@ -289,7 +363,11 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   if (currentImage !== record.imageUrl) {
     updateArticleImageInRegistry(root, item.articleId, record.imageUrl, { registryFiles });
   }
-  updateArticleImageInSeo(root, item.articleId, record.imageUrl, { section });
+  const { imageBlock } = governedCoverSeoImage(root, record);
+  updateArticleSeoImageBlock(root, item.articleId, imageBlock, { section });
+  for (const update of metadata) {
+    if (update.changed) writeTextAtomic(update.filePath, update.nextText);
+  }
 
   return {
     destination,

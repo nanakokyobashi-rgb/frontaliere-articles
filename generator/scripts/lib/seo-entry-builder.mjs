@@ -1,10 +1,11 @@
 /**
  * Shared SEO entry builder/writer.
  *
- * Deterministic orphan recovery uses this builder and the comma-safe append
- * operation. The normal article writer keeps its historical literal path in
- * `create-article.mjs`; `seo-entry-equivalence.test.mjs` compares the builder
- * with real main entries and classifies historical data drift.
+ * Deterministic orphan recovery and queued-cover repair use this builder and
+ * the comma-safe append operation. The normal article writer keeps its
+ * historical literal path in `create-article.mjs`;
+ * `seo-entry-equivalence.test.mjs` compares the builder with real main
+ * entries and classifies historical data drift.
  */
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
@@ -15,6 +16,19 @@ import {
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const SEO_TIME_ZONE = 'Europe/Zurich';
+
+/**
+ * A queued cover has no new model-generated alt text. Until the cover engine
+ * can return localized visual descriptions, use an explicit neutral caption
+ * instead of carrying the description of the previous image into the new
+ * structured-data and accessibility surfaces.
+ */
+export const GENERATED_COVER_ALT_BY_LOCALE = Object.freeze({
+  it: 'Illustrazione generata per questo articolo',
+  en: 'Illustration generated for this article',
+  de: 'Für diesen Artikel erstellte Illustration',
+  fr: 'Illustration générée pour cet article',
+});
 
 const SEO_DATE_ONLY_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 const SEO_EXPLICIT_TIMESTAMP_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
@@ -128,6 +142,29 @@ function imageRightsLines(provenance) {
   throw new Error(`Unsupported SEO image provenance kind: ${provenance.kind}`);
 }
 
+/** Build the complete JSON-LD ImageObject for a governed cover. */
+export function buildSeoImageBlock({ imagePath, provenance, caption }) {
+  if (typeof imagePath !== 'string' || imagePath.trim() === '') {
+    throw new Error('buildSeoImageBlock: imagePath is required');
+  }
+  if (typeof caption !== 'string' || caption.trim() === '') {
+    throw new Error('buildSeoImageBlock: caption is required');
+  }
+  const normalizedImagePath = imagePath.replace(/^\//, '');
+  const record = provenance?.record;
+  const imageWidth = Number(record?.width) || 1200;
+  const imageHeight = Number(record?.height) || 675;
+  const rights = imageRightsLines(provenance);
+
+  return `      "image": {
+        "@type": "ImageObject",${rights}
+        "url": \`\${BASE_URL}/${normalizedImagePath}\`,
+        "width": ${imageWidth},
+        "height": ${imageHeight},
+        "caption": ${jsonValue(caption)}
+      }`;
+}
+
 /** Build one complete `blog-<id>` literal, including JSON-LD. */
 export function buildSeoEntry(data, {
   provenance,
@@ -140,14 +177,15 @@ export function buildSeoEntry(data, {
   }
   const imagePath = data._generatedImagePath.replace(/^\//, '');
   const canonicalPath = `/${hubSlug}/${data.slugs.it}/`;
-  const record = provenance?.record;
-  const imageWidth = Number(record?.width) || 1200;
-  const imageHeight = Number(record?.height) || 675;
   const headline = data.seo.headline || data.seo.title;
   const caption = data.imageAlt?.it || headline;
+  const imageBlock = buildSeoImageBlock({
+    imagePath,
+    provenance,
+    caption,
+  });
   const authorSlug = data.author?.slug || 'redazione';
   const authorName = data.author?.name || 'Redazione Frontaliere Ticino';
-  const rights = imageRightsLines(provenance);
 
   return `
   'blog-${data.id}': {
@@ -162,13 +200,7 @@ export function buildSeoEntry(data, {
       "@type": "NewsArticle",
       "headline": ${jsonValue(headline)},
       "description": ${jsonValue(data.seo.description)},
-      "image": {
-        "@type": "ImageObject",${rights}
-        "url": \`\${BASE_URL}/${imagePath}\`,
-        "width": ${imageWidth},
-        "height": ${imageHeight},
-        "caption": ${jsonValue(caption)}
-      },
+${imageBlock},
       "datePublished": ${jsonValue(toIsoWithTz(publishedAt))},
       "dateModified": ${jsonValue(toIsoWithTz(modifiedAt))},
       "inLanguage": "it",
