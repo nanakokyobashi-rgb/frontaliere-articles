@@ -9,7 +9,6 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { appendGeneratedImageRecord, imageRecordForPath, readGeneratedImageRecords } from './lib/blog-image-registry.mjs';
 import { articleHeroImagePath, articleImageAssetId } from './lib/article-cover-identity.mjs';
-import { webpDimensions } from './lib/commons-credit.mjs';
 import {
   locateArticleRegistry,
   locateArticleSeoImage,
@@ -24,6 +23,7 @@ import {
   readImageRegenerationQueue,
   writeImageRegenerationQueue,
 } from './lib/image-regeneration-queue.mjs';
+import { canonicalizeImageRegenerationQueue } from '../../scripts/lib/merge-image-regeneration-queue.mjs';
 
 export const DEFAULT_LIMIT = 10;
 export const MAX_LIMIT = 100;
@@ -32,6 +32,7 @@ export const NO_TEXT_IMAGE_RETRY_HINT = 'Safety retry: absolutely no signs, lett
 
 const GENERATED_REGISTRY_REL = 'data/generated-image-registry.json';
 let writeTmpSeq = 0;
+let sharpImport;
 
 function absolute(root, relativePath) {
   return path.join(root, relativePath);
@@ -89,7 +90,7 @@ function normalizeReason(value) {
 export function isVisualTextFailure(reason) {
   const normalized = String(reason || '');
   return /vision gate rejected image/i.test(normalized)
-    && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|markings|cartell|scritte?)/i.test(normalized);
+    && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
 }
 
 function parseLimit(value) {
@@ -153,77 +154,27 @@ function thumbnailFileForRecord(root, record) {
   return path.join(path.dirname(imageFile), 'thumbnails', `${stem}-480w.webp`);
 }
 
-let sharpLoader;
-
-function hasCompleteWebpPayload(bytes) {
-  const buf = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes ?? []);
-  if (buf.length < 20 || buf.toString('ascii', 0, 4) !== 'RIFF' || buf.toString('ascii', 8, 12) !== 'WEBP') {
-    return false;
-  }
-  if (buf.readUInt32LE(4) !== buf.length - 8) return false;
-
-  let offset = 12;
-  let imageChunks = 0;
-  while (offset < buf.length) {
-    if (offset + 8 > buf.length) return false;
-    const type = buf.toString('ascii', offset, offset + 4);
-    const size = buf.readUInt32LE(offset + 4);
-    const dataStart = offset + 8;
-    const dataEnd = dataStart + size;
-    const chunkEnd = dataEnd + (size & 1);
-    if (chunkEnd > buf.length) return false;
-
-    if (type === 'VP8 ') {
-      if (size < 10 || buf[dataStart + 3] !== 0x9d || buf[dataStart + 4] !== 0x01 || buf[dataStart + 5] !== 0x2a) return false;
-      imageChunks += 1;
-    } else if (type === 'VP8L') {
-      if (size < 5 || buf[dataStart] !== 0x2f) return false;
-      imageChunks += 1;
-    } else if (type === 'VP8X' && size !== 10) {
-      return false;
-    }
-    offset = chunkEnd;
-  }
-
-  return offset === buf.length && imageChunks === 1;
-}
-
-async function decodeWebp(bytes) {
-  if (!sharpLoader) {
-    sharpLoader = import('sharp')
-      .then((module) => module.default ?? module)
-      .catch((error) => {
-        // The dependency-free generator gates intentionally run without npm ci.
-        // The real drain installs sharp; only that path can provide full codec
-        // validation, while the structural check remains available to the gates.
-        if (error?.code === 'ERR_MODULE_NOT_FOUND') return null;
-        throw error;
-      });
-  }
-  const sharp = await sharpLoader;
-  if (!sharp) return null;
-  return sharp(bytes, { failOn: 'warning' })
+async function decodeWebpThumbnail(bytes) {
+  sharpImport ??= import('sharp');
+  const { default: sharp } = await sharpImport;
+  const input = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes ?? []);
+  const metadata = await sharp(input, { failOn: 'error' }).metadata();
+  if (metadata.format !== 'webp') return null;
+  const { info } = await sharp(input, { failOn: 'error' })
     .raw()
     .toBuffer({ resolveWithObject: true });
+  return { format: metadata.format, width: info.width, height: info.height };
 }
 
-async function hasValidThumbnail(root, record) {
+async function hasValidThumbnail(root, record, decodeThumbnail) {
   const thumbnail = thumbnailFileForRecord(root, record);
   try {
     const stat = fs.lstatSync(thumbnail);
     if (!stat.isFile()) return false;
-    const bytes = fs.readFileSync(thumbnail);
-    const dimensions = webpDimensions(bytes);
-    if (!(dimensions?.width === 480
+    const dimensions = await decodeThumbnail(fs.readFileSync(thumbnail));
+    return dimensions?.width === 480
       && dimensions.height > 0
-      && dimensions.height <= 480)) return false;
-    if (!hasCompleteWebpPayload(bytes)) return false;
-
-    const decoded = await decodeWebp(bytes);
-    if (!decoded) return true;
-    return decoded.data.byteLength > 0
-      && decoded.info?.width === dimensions.width
-      && decoded.info.height === dimensions.height;
+      && dimensions.height <= 480;
   } catch {
     return false;
   }
@@ -246,12 +197,12 @@ function existingRecordForArticle(root, articleId) {
   }
 }
 
-async function alreadySatisfiedCover(root, item, registryFiles) {
+async function alreadySatisfiedCover(root, item, registryFiles, decodeThumbnail) {
   try {
     const location = locateArticleRegistry(root, item.articleId, { registryFiles });
     const record = existingRecordForArticle(root, item.articleId);
     if (!record || location.previousImage !== record.imageUrl) return false;
-    if (!await hasValidThumbnail(root, record)) return false;
+    if (!await hasValidThumbnail(root, record, decodeThumbnail)) return false;
     const section = sectionForRegistry(location);
     const seo = locateArticleSeoImage(root, item.articleId, { section });
     return seo.previousImage === record.imageUrl;
@@ -309,7 +260,7 @@ async function defaultGenerateThumbnail(sourcePath, { root, record } = {}) {
   }
 }
 
-async function finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles }) {
+async function finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles, decodeThumbnail }) {
   const destination = imageFileForRecord(root, record);
   if (!fs.existsSync(destination)) throw new Error(`generated cover is not materialized: ${record.imageUrl}`);
   trackFile(snapshots, destination);
@@ -319,8 +270,8 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   const seoLocation = locateArticleSeoImage(root, item.articleId, { section });
   trackFile(snapshots, absolute(root, seoLocation.path));
 
-  if (!await hasValidThumbnail(root, record)) await generateThumbnail(destination, { root, item, record });
-  if (!await hasValidThumbnail(root, record)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
+  if (!await hasValidThumbnail(root, record, decodeThumbnail)) await generateThumbnail(destination, { root, item, record });
+  if (!await hasValidThumbnail(root, record, decodeThumbnail)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
 
   const currentImage = location.previousImage;
   if (currentImage !== record.imageUrl) {
@@ -335,7 +286,7 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   };
 }
 
-async function processItem({ root, item, generateCover, generateThumbnail, registryFiles }) {
+async function processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail }) {
   const location = locateArticleRegistry(root, item.articleId, { registryFiles });
   const section = sectionForRegistry(location);
   const snapshots = new Map();
@@ -346,7 +297,7 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
   const existing = existingRecordForArticle(root, item.articleId);
   if (existing) {
     try {
-      const result = await finalizeCover({ root, item, record: existing, location, snapshots, generateThumbnail, registryFiles });
+      const result = await finalizeCover({ root, item, record: existing, location, snapshots, generateThumbnail, registryFiles, decodeThumbnail });
       appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
       return { record: existing, ...result, reused: true, section, snapshots };
     } catch (error) {
@@ -376,7 +327,7 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
       fs.renameSync(generated.filePath, imageFile);
     }
     appendGeneratedImageRecord(root, record);
-    const result = await finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles });
+    const result = await finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles, decodeThumbnail });
     appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
     removeStagingFile(generated.filePath, imageFile);
     return { record, ...result, reused: false, section, snapshots };
@@ -416,15 +367,20 @@ export async function drainQueuedCovers({
   now = () => new Date().toISOString(),
   generateCover = defaultGenerateCover,
   generateThumbnail = defaultGenerateThumbnail,
+  decodeThumbnail = decodeWebpThumbnail,
   registryFiles,
   retryFailed = false,
 } = {}) {
   const boundedLimit = parseLimit(limit);
   const queue = readImageRegenerationQueue(root);
+  const canonicalQueue = canonicalizeImageRegenerationQueue(queue);
+  const hadDuplicateArticleIds = canonicalQueue.items.length !== queue.items.length;
+  queue.items = canonicalQueue.items;
+  if (hadDuplicateArticleIds) writeImageRegenerationQueue(root, queue);
   const alreadySatisfiedIds = [];
   const unsatisfiedItems = [];
   for (const item of queue.items) {
-    if (await alreadySatisfiedCover(root, item, registryFiles)) alreadySatisfiedIds.push(item.articleId);
+    if (await alreadySatisfiedCover(root, item, registryFiles, decodeThumbnail)) alreadySatisfiedIds.push(item.articleId);
     else unsatisfiedItems.push(item);
   }
   if (alreadySatisfiedIds.length > 0) {
@@ -460,7 +416,7 @@ export async function drainQueuedCovers({
   for (const item of selected) {
     let outcome = null;
     try {
-      outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles });
+      outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail });
       const index = queue.items.indexOf(item);
       if (index < 0) throw new Error(`queue item disappeared before success: ${item.articleId}`);
       queue.items.splice(index, 1);

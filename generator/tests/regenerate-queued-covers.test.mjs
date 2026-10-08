@@ -15,6 +15,7 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
+import { webpDimensions } from '../scripts/lib/commons-credit.mjs';
 import { appendImageRegenerationQueue } from '../scripts/lib/image-regeneration-queue.mjs';
 import {
   drainQueuedCovers,
@@ -111,10 +112,17 @@ function item(articleId, requestedAt, title = articleId) {
 }
 
 function validThumbnailBytes() {
-  return Buffer.from(
-    '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',
-    'base64',
-  );
+  return Buffer.from('UklGRigAAABXRUJQVlA4TBsAAAAv30FDAAdQti71tv8BAEX6/58i+p/63//+TxoA', 'base64');
+}
+
+async function decodeFixtureThumbnail(bytes) {
+  const dimensions = webpDimensions(bytes);
+  if (!dimensions || bytes.length !== validThumbnailBytes().length) throw new Error('truncated WebP fixture');
+  return dimensions;
+}
+
+function drain(options) {
+  return drainQueuedCovers({ decodeThumbnail: decodeFixtureThumbnail, ...options });
 }
 
 function fakeCover(root) {
@@ -151,7 +159,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
 
     let calls = 0;
     const generateCover = fakeCover(root);
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -177,7 +185,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
     assert.deepEqual(remaining.items.map((entry) => entry.articleId), ['canton-newer']);
 
-    const second = await drainQueuedCovers({
+    const second = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -218,7 +226,7 @@ test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', asy
     ]);
 
     const seen = [];
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 4,
       generateCover: async (entry, ...args) => {
@@ -230,6 +238,38 @@ test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', asy
 
     assert.deepEqual(seen, ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']);
     assert.equal(summary.drained, 4);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('canonizza gli articleId duplicati prima di selezionare e rimuovere il lavoro', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'duplicate-queue-entry';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
+    queue(root, [
+      item(articleId, '2026-10-07T09:00:00.000Z'),
+      { ...item(articleId, '2026-10-07T10:00:00.000Z'), reason: 'newer request' },
+    ]);
+
+    let calls = 0;
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: async (...args) => {
+        calls += 1;
+        return fakeCover(root)(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(calls, 1);
+    assert.equal(summary.drained, 1);
+    assert.equal(summary.residual, 0);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items, []);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -274,7 +314,7 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
     queue(root, [{ ...item(articleId, '2026-10-07T09:00:00.000Z'), status: 'failed', failureCount: 3 }]);
 
     let calls = 0;
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async () => {
@@ -297,7 +337,7 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
   }
 });
 
-test('una copertina con thumbnail mancante, invalido o troncato viene riparata prima di togliere la coda', async () => {
+test('una copertina con thumbnail mancante o invalido viene riparata prima di togliere la coda', async () => {
   for (const thumbnailState of ['missing', 'invalid', 'truncated']) {
     const root = tempRoot();
     try {
@@ -313,16 +353,12 @@ test('una copertina con thumbnail mancante, invalido o troncato viene riparata p
         write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'not a webp');
       }
       if (thumbnailState === 'truncated') {
-        write(
-          root,
-          `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`,
-          validThumbnailBytes().subarray(0, 30),
-        );
+        write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes().subarray(0, 30));
       }
       queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
 
       let thumbnailCalls = 0;
-      const summary = await drainQueuedCovers({
+      const summary = await drain({
         root,
         limit: 1,
         generateCover: async () => { throw new Error('must reuse the materialized record'); },
@@ -345,6 +381,8 @@ test('una copertina con thumbnail mancante, invalido o troncato viene riparata p
 
 test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo', () => {
   assert.equal(isVisualTextFailure('vision gate rejected image: visible lettering and signage'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: words and numbers in the scene'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: forbidden content'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: recognizable face'), false);
   assert.equal(isVisualTextFailure('provider unavailable'), false);
   assert.match(NO_TEXT_IMAGE_RETRY_HINT, /no signs/);
@@ -364,7 +402,7 @@ test('non ritenta le voci failed in schedule e le riapre solo con retry esplicit
     }]);
 
     let calls = 0;
-    const skipped = await drainQueuedCovers({
+    const skipped = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -378,7 +416,7 @@ test('non ritenta le voci failed in schedule e le riapre solo con retry esplicit
     assert.equal(calls, 0);
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0].failureCount, 3);
 
-    const retried = await drainQueuedCovers({
+    const retried = await drain({
       root,
       limit: 1,
       retryFailed: true,
@@ -407,7 +445,7 @@ test('un fallimento conserva articolo e coda, e il terzo tentativo resta marcato
     const fail = async () => { throw new Error('provider unavailable'); };
 
     for (let attempt = 1; attempt <= 3; attempt += 1) {
-      const summary = await drainQueuedCovers({
+      const summary = await drain({
         root,
         limit: 1,
         generateCover: fail,
@@ -436,7 +474,7 @@ test('un errore dopo la generazione ripristina articolo, registro e file prima d
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, originalImage));
     fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
 
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: fakeCover(root),
@@ -464,7 +502,7 @@ test('un errore nella persistenza della rimozione ripristina la transazione prim
     const queuePath = path.join(root, 'data/image-regeneration-queue.json');
 
     await assert.rejects(
-      () => drainQueuedCovers({
+      () => drain({
         root,
         limit: 1,
         generateCover: fakeCover(root),
@@ -502,7 +540,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
     write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
 
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async () => { throw new Error('must not regenerate'); },
@@ -680,6 +718,7 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
   assert.match(workflow, /queued-cover-expected-queue\.json/);
   assert.match(workflow, /\.residualMissing = \$missing/);
   assert.match(workflow, /\.residualSource = "pushed-branch"/);
+  assert.match(workflow, /\[\.items\[\] \| \.articleId \| tostring\] \| unique \| length/);
   assert.match(workflow, /queued-cover queue count diverged after push/);
   assert.match(workflow, /if \[ "\$actual" -ne "\$internal" \]/);
   assert.match(workflow, /queued-cover queue items lost after push/);
