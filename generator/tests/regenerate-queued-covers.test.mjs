@@ -23,6 +23,10 @@ import {
   NO_TEXT_IMAGE_RETRY_HINT,
 } from '../scripts/regenerate-queued-covers.mjs';
 import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
+import {
+  locateArticleSeoImage,
+  updateArticleSeoImageBlock,
+} from '../scripts/lib/article-registry-image.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
 import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 
@@ -129,6 +133,44 @@ function generatedRecord(root, articleId, imageUrl, bytes) {
     },
   };
 }
+
+test('ancora ImageObject e URL diretta anche con un URL annidato e senza datePublished', () => {
+  const root = tempRoot();
+  try {
+    write(root, 'content/seo/seo-blog-5.ts', [
+      "const BASE_URL = 'https://frontaliereticino.ch';",
+      'const BLOG_SEO_METADATA = {',
+      "  'blog-range-guard': {",
+      '    description: \'una descrizione con la parola "image" ma non un campo,\',',
+      '    structuredData: {',
+      '      "image": {',
+      '        "creator": { "url": "https://example.test/creator" },',
+      '        "url": `${BASE_URL}/images/old.webp`,',
+      '        "width": 1200',
+      '      }',
+      '    }',
+      '  },',
+      '};',
+      'export default BLOG_SEO_METADATA;',
+      '',
+    ].join('\n'));
+
+    const located = locateArticleSeoImage(root, 'range-guard');
+    assert.equal(located.previousImage, '/images/old.webp');
+    updateArticleSeoImageBlock(root, 'range-guard', [
+      '      "image": {',
+      '        "url": `${BASE_URL}/images/new.webp`,',
+      '        "width": 1200',
+      '      }',
+    ].join('\n'));
+    const next = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+    assert.match(next, /description: 'una descrizione con la parola "image"/);
+    assert.match(next, /\$\{BASE_URL\}\/images\/new\.webp/);
+    assert.doesNotMatch(next, /example\.test\/creator/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
 
 function fixture(root, items) {
   write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));

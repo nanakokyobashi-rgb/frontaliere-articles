@@ -83,45 +83,157 @@ function seoEntryEnd(source, start) {
   return match ? match.index : source.length;
 }
 
-function seoImageUrlLine(block) {
-  const imageStart = block.indexOf('"image"');
-  if (imageStart < 0) return null;
-  const dateStart = block.indexOf('"datePublished"', imageStart);
-  const imageBlock = block.slice(imageStart, dateStart < 0 ? undefined : dateStart);
-  const template = /(\s*"url"\s*:\s*)`([^`\r\n]*)`/.exec(imageBlock);
-  if (template) {
-    return {
-      line: template[0],
-      offset: imageStart + template.index,
-      prefix: template[1],
-      value: template[2],
-      suffix: '',
-      kind: 'template',
-    };
+function findMatchingObjectEnd(source, objectStart) {
+  let depth = 0;
+  let quote = null;
+  let escaped = false;
+  for (let index = objectStart; index < source.length; index += 1) {
+    const char = source[index];
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === '\\') {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
+      continue;
+    }
+    if (char === '"' || char === '\'' || char === '`') {
+      quote = char;
+      continue;
+    }
+    if (char === '{') {
+      depth += 1;
+    } else if (char === '}') {
+      depth -= 1;
+      if (depth === 0) return index;
+    }
   }
-  const quoted = /(\s*"url"\s*:\s*)(["'])([^"'\r\n]*)\2/.exec(imageBlock);
-  if (!quoted) return null;
+  return -1;
+}
+
+function findObjectProperty(source, propertyName, from = 0, end = source.length) {
+  const marker = `"${propertyName}"`;
+  let quote = null;
+  let escaped = false;
+  for (let index = from; index < end; index += 1) {
+    const char = source[index];
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === '\\') {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
+      continue;
+    }
+    if (source.startsWith(marker, index)) {
+      const property = new RegExp(`^${marker.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\s*:\\s*`).exec(
+        source.slice(index, end),
+      );
+      if (property) {
+        return {
+          start: index,
+          valueStart: index + property[0].length,
+          prefix: property[0],
+        };
+      }
+    }
+    if (char === '"' || char === '\'' || char === '`') quote = char;
+  }
+  return null;
+}
+
+function imageObjectLocation(block) {
+  const property = findObjectProperty(block, 'image');
+  if (!property || block[property.valueStart] !== '{') return null;
+  const end = findMatchingObjectEnd(block, property.valueStart);
+  return end < 0 ? null : { start: property.start, objectStart: property.valueStart, end };
+}
+
+function findDirectObjectProperty(source, propertyName, objectStart, objectEnd) {
+  const marker = `"${propertyName}"`;
+  let depth = 1;
+  let quote = null;
+  let escaped = false;
+  for (let index = objectStart + 1; index < objectEnd; index += 1) {
+    const char = source[index];
+    if (quote) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === quote) quote = null;
+      continue;
+    }
+    if (depth === 1 && source.startsWith(marker, index)) {
+      const property = new RegExp(`^${marker.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}\\s*:\\s*`).exec(
+        source.slice(index, objectEnd),
+      );
+      if (property) {
+        return {
+          start: index,
+          valueStart: index + property[0].length,
+          prefix: property[0],
+        };
+      }
+    }
+    if (char === '"' || char === '\'' || char === '`') quote = char;
+    else if (char === '{') depth += 1;
+    else if (char === '}') depth -= 1;
+  }
+  return null;
+}
+
+function directUrlLocation(block, image) {
+  const property = findDirectObjectProperty(block, 'url', image.objectStart, image.end);
+  if (!property) return null;
+
+  const valueQuote = block[property.valueStart];
+  if (!['`', '"', '\''].includes(valueQuote)) return null;
+  let valueEnd = property.valueStart + 1;
+  let valueEscaped = false;
+  for (; valueEnd < image.end; valueEnd += 1) {
+    const char = block[valueEnd];
+    if (valueEscaped) {
+      valueEscaped = false;
+    } else if (char === '\\') {
+      valueEscaped = true;
+    } else if (char === valueQuote) {
+      break;
+    }
+  }
+  if (valueEnd >= image.end) return null;
   return {
-    line: quoted[0],
-    offset: imageStart + quoted.index,
-    prefix: quoted[1],
-    quote: quoted[2],
-    value: quoted[3],
+    line: block.slice(property.start, valueEnd + 1),
+    offset: property.start,
+    prefix: property.prefix,
+    quote: valueQuote,
+    value: block.slice(property.valueStart + 1, valueEnd),
     suffix: '',
-    kind: 'quoted',
+    kind: valueQuote === '`' ? 'template' : 'quoted',
+  };
+}
+
+function seoImageUrlLine(block) {
+  const image = imageObjectLocation(block);
+  const location = image ? directUrlLocation(block, image) : null;
+  if (!location) return null;
+  return {
+    ...location,
+    offset: location.offset,
   };
 }
 
 function seoImageBlockRange(block) {
-  const imageStart = block.indexOf('"image"');
-  const dateStart = block.indexOf('"datePublished"', imageStart);
-  if (imageStart < 0 || dateStart < 0) return null;
-  const fieldStart = block.lastIndexOf('\n', imageStart) + 1;
-  const dateLineStart = block.lastIndexOf('\n', dateStart) + 1;
-  const rawText = block.slice(fieldStart, dateLineStart).replace(/\n$/, '');
+  const image = imageObjectLocation(block);
+  if (!image) return null;
+  const nextLine = block.indexOf('\n', image.end);
+  const end = nextLine < 0 ? block.length : nextLine + 1;
+  const rawText = block.slice(image.start, end).replace(/\n$/, '');
   return {
-    start: fieldStart,
-    end: dateLineStart,
+    start: image.start,
+    end,
     text: rawText.replace(/,\s*$/, ''),
   };
 }
