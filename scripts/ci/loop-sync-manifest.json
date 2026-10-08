@@ -2293,8 +2293,8 @@
       "reason": "Guardia dello scrittore degli articoli (issue 2431): prima del lock di registrazione cerca l'id in tutti i file SEO della sezione con lo stesso risolutore bilanciato del motore (`engine/shared/seo-entry.mjs`) e rifiuta di aggiungere una voce gia' presente. Sul sito non esiste e non deve: lo scrittore dei contenuti vive solo qui, e il sito riceve i file SEO dal sync.",
       "baseline": {
         "site": null,
-        "corpus": "fbd94f165a0c017a",
-        "alignedAt": "2026-10-07"
+        "corpus": "b3b85661f7bf2434",
+        "alignedAt": "2026-10-08"
       }
     },
     {
