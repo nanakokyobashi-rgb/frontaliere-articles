@@ -896,9 +896,21 @@ export async function publish({
   return { failures, uploaded: uploaded.length, deleted: deleted.length, status };
 }
 
-export async function main(argv = process.argv.slice(2)) {
+export async function main(
+  argv = process.argv.slice(2),
+  {
+    parseArgsImpl = parseArgs,
+    fetchPageManifestImpl = fetchPageManifest,
+    publishedStatusImpl = publishedStatus,
+    createRenderRootImpl = createRenderRoot,
+    renderSectionArticlePipelineImpl = renderSectionArticlePipeline,
+    articleReleaseSnapshotImpl = articleReleaseSnapshot,
+    publishImpl = publish,
+    publishPageManifestImpl = publishPageManifest,
+  } = {},
+) {
   const t0 = Date.now();
-  const args = parseArgs(argv);
+  const args = parseArgsImpl(argv);
   const section = args.section;
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
@@ -907,7 +919,7 @@ export async function main(argv = process.argv.slice(2)) {
   let publishedManifest = { state: 'absent' };
   let publishedManifestPages = null;
   if (publishing) {
-    publishedManifest = await fetchPageManifest(pageManifestUrl(section, CDN_BASE), { section });
+    publishedManifest = await fetchPageManifestImpl(pageManifestUrl(section, CDN_BASE), { section });
     if (publishedManifest.state === 'ok') {
       try {
         publishedManifestPages = Object.fromEntries(
@@ -932,11 +944,11 @@ export async function main(argv = process.argv.slice(2)) {
   // Preflight the same registry the Worker serves before deciding whether a
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
-  const effectiveStatus = publishing ? await publishedStatus(section) : null;
+  const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
 
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
-  const renderRoot = createRenderRoot(ROOT_DIR, process.env.RUNNER_TEMP || os.tmpdir());
+  const renderRoot = createRenderRootImpl(ROOT_DIR, process.env.RUNNER_TEMP || os.tmpdir());
   const {
     entries,
     hubResult,
@@ -944,7 +956,7 @@ export async function main(argv = process.argv.slice(2)) {
     imageFetchFailures,
     imagePostcondition,
     aggregatePagesAllowed,
-  } = await renderSectionArticlePipeline({
+  } = await renderSectionArticlePipelineImpl({
     rootDir: renderRoot,
     distDir,
     section,
@@ -971,7 +983,7 @@ export async function main(argv = process.argv.slice(2)) {
 
   fs.rmSync(renderRoot, { recursive: true, force: true });
 
-  const currentArticlePages = articleReleaseSnapshot(ROOT_DIR, section);
+  const currentArticlePages = articleReleaseSnapshotImpl(ROOT_DIR, section);
   const pages = [
     ...entries.flatMap((entry) => CANTON_HUB_LOCALES.map((loc) => entry.paths[loc]).filter(Boolean).map((rel) => ({
       ...pageEntry(section, rel, 'article'),
@@ -1095,7 +1107,7 @@ export async function main(argv = process.argv.slice(2)) {
     })
     : null;
   if (migrationManifest) {
-    const seeded = publishPageManifest({ manifest: migrationManifest, distDir });
+    const seeded = publishPageManifestImpl({ manifest: migrationManifest, distDir });
     summary.migrationManifestSeeded = seeded;
     if (!seeded) {
       summary.published = { failures: 1, uploaded: 0, deleted: 0, status: null, manifestSeeded: false };
@@ -1104,7 +1116,7 @@ export async function main(argv = process.argv.slice(2)) {
       return 1;
     }
   }
-  summary.published = await publish({ pages, cdnUploads, obsoletePages, distDir, section, releaseCommit });
+  summary.published = await publishImpl({ pages, cdnUploads, obsoletePages, distDir, section, releaseCommit });
   if (summary.published.failures === 0) {
     const manifestPages = aggregatePagesAllowed
       ? [
@@ -1123,7 +1135,7 @@ export async function main(argv = process.argv.slice(2)) {
       : publishedManifestPages
         ? mergePageManifests(publishedManifest.doc, currentManifest)
         : mergePageManifests(migrationManifest, currentManifest);
-    const manifestPublished = publishPageManifest({ manifest: nextManifest, distDir });
+    const manifestPublished = publishPageManifestImpl({ manifest: nextManifest, distDir });
     summary.published.manifestPublished = manifestPublished;
     if (!manifestPublished) {
       summary.published.failures++;

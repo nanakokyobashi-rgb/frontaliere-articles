@@ -29,6 +29,7 @@ import {
   ensureRouteOwnerMeta,
   hubMissingIsFatal,
   inUploadOrder,
+  main,
   missingRenderedArticleIds,
   pageDefects,
   pageEntry,
@@ -92,6 +93,47 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   assert.ok(manifestDeclaration > publishCall, 'il manifest corrente si calcola solo dopo il publish verificato');
   for (const match of publisher.matchAll(/\bcurrentManifest\b/g)) {
     assert.ok(match.index >= manifestDeclaration, 'currentManifest non deve essere letto prima della dichiarazione');
+  }
+});
+
+test('publisher --publish costruisce il manifest solo dopo una publish riuscita', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-publish-'));
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  const events = [];
+  const manifests = [];
+  try {
+    const code = await main(
+      ['--section', 'canton-ti', '--ids', '[]', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'draft',
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async () => {
+          events.push('publish');
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'draft' };
+        },
+        publishPageManifestImpl: ({ manifest }) => {
+          events.push('manifest');
+          manifests.push(manifest);
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0);
+    assert.deepEqual(events, ['publish', 'manifest']);
+    assert.equal(manifests.length, 1);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
   }
 });
 
@@ -698,7 +740,7 @@ test('publisher: hub mancanti sono fatali sulla sola verita\' effettiva live', (
   assert.equal(hubMissingIsFatal({ declaredStatus: 'draft', effectiveStatus: 'live', publishing: true }), true);
   assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: null, publishing: true }), false);
   assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: null, publishing: false }), true);
-  assert.match(read('scripts/publish-section-pages.mjs'), /const effectiveStatus = publishing \? await publishedStatus\(section\) : null/);
+  assert.match(read('scripts/publish-section-pages.mjs'), /const effectiveStatus = publishing \? await publishedStatusImpl\(section\) : null/);
 });
 
 test('publisher: il meta di proprieta\' si aggiunge solo dove manca', () => {
