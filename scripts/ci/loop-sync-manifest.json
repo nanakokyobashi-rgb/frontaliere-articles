@@ -1905,7 +1905,7 @@
       "reason": "Gate del troncamento SEO del generatore. Corpus-only perche' il banco del sito (tests/seo-serp-clause-truncation.test.ts) prova le funzioni del render layer sotto vitest, mentre qui il bersaglio e' il FORK del generatore, che non e' importabile senza node_modules: il test estrae truncateAtWordBoundary e la valuta iniettandole il truncateToClause vero, cosi' le asserzioni restano comportamentali e rimettere il corpo vecchio le fa fallire (verificato: 4 test su 15). Aggiunge il gate sull'output di content/seo/** con ratchet datato sui 3.544 residui storici e zero tolleranza sugli articoli pubblicati dopo la fix.",
       "baseline": {
         "site": null,
-        "corpus": "6ac5601818946501",
+        "corpus": "aa26e07412c803f7",
         "alignedAt": "2026-10-08"
       }
     },
@@ -2594,7 +2594,7 @@
       "reason": "Helper del generatore, della bonifica storica e dei gate del corpus per i campi titolo SEO (`title`, `ogTitle`, `headline`): `generator/scripts/create-article.mjs`, `generator/scripts/repair-truncated-seo-titles.mjs` e i test `seo-title-prefix-repair` e `seo-clause-truncation` leggono qui lo stesso predicato (coda monca, prefisso a meta' clausola, nome proprio in coda) e la stessa riparazione (il titolo vero). Il codice della generazione del corpus vive in `generator/` e questo helper non ha un consumer nel percorso di pubblicazione del sito, quindi non c'e' un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "db798d08b3e2a6be",
+        "corpus": "f955eaf1c8a0e8fd",
         "alignedAt": "2026-10-08"
       }
     },

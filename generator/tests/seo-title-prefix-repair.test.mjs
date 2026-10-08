@@ -151,10 +151,32 @@ describe('coda monca — il valore si ferma su una parola funzionale o su un sep
       'Salario minimo in Ticino, ecco Cosa',
       'Tassa sulla salute: i frontalieri e Il',
       'Maltempo in Ticino: Frontalieri Colpiti Dalla',
+      // Quarta review: nemmeno le sole maiuscole o la lettera singola bastano.
+      'Frontalieri e Telelavoro: Nuove Regole PER',
+      'Frontalieri e Telelavoro: Nuove Regole O',
+      'Tassa sulla salute: i frontalieri e IL',
+      'Permesso G e lavoro: Guida A',
     ]) {
       assert.equal(isDanglingSeoTitle(stored), true, stored);
       assert.equal(hasExemptProperNounTail(stored), false, stored);
     }
+  });
+
+  test('un nome dell\'elenco dice che un titolo può finire lì, non che questo finisce lì', () => {
+    const whole = 'Peggiorano le prospettive finanziarie di AVS e AI';
+    // Il titolo vero finisce lì: il campo è integro, in ogni forma.
+    for (const field of SEO_TITLE_FIELDS) assert.equal(seoTitleFieldDefect(field, whole, whole), null, field);
+    // Il titolo vero prosegue dentro la stessa clausola: è un taglio, in ogni
+    // campo. Per `title` non c'è un altro controllo dopo questo.
+    const longer = `${whole} generativa nel 2027`;
+    assert.equal(seoTitleFieldDefect('ogTitle', whole, longer), 'dangling');
+    assert.equal(seoTitleFieldDefect('headline', whole, longer), 'dangling');
+    assert.equal(seoTitleFieldDefect('title', `${whole} | Frontaliere Ticino`, longer), 'dangling');
+    assert.equal(repairSeoTitleValue('title', `${whole} | Frontaliere Ticino`, longer), seoTitleFromCanonical(longer));
+    assert.equal(repairSeoTitleValue('ogTitle', whole, longer), longer);
+    // Il titolo vero prosegue aprendo una clausola nuova: variante breve voluta.
+    assert.equal(seoTitleFieldDefect('ogTitle', whole, `${whole}: cosa cambia per chi lavora in Svizzera`), null);
+    assert.equal(seoTitleFieldDefect('title', `${whole} | Frontaliere Ticino`, `${whole}: cosa cambia per chi lavora in Svizzera`), null);
   });
 
   test('title in maiuscole di titolo tagliato su una preposizione: torna il titolo vero', () => {
@@ -632,12 +654,12 @@ describe('corpus — nessun campo titolo SEO è un derivato rotto del titolo ver
     assert.equal(unrepairable.length, 0, `campi non riparabili: ${unrepairable.length}`);
   });
 
-  // L'esenzione non giudica dalla sola maiuscola: passano le sigle (per
-  // forma), la lettera che etichetta la parola prima («Haus O») e i nomi di
-  // `SEO_PROPER_NOUN_TAILS`. Una parola funzionale in maiuscola («…Nuove
-  // Regole Per») resta un taglio. 14 campi il 2026-10-08, tutti letti: «AI»,
-  // «AD», «On», «Lucio Dalla», «Haus O». Il tetto lascia spazio alle sigle in
-  // coda e cade se la classe cresce.
+  // L'esenzione non giudica da nessuna forma: passa solo ciò che sta in
+  // `SEO_PROPER_NOUN_TAILS`, e nemmeno quello quando il titolo vero prosegue
+  // dentro la stessa clausola. Una parola funzionale in maiuscola o in sole
+  // maiuscole («…Nuove Regole Per», «…Nuove Regole PER») resta un taglio.
+  // 14 campi il 2026-10-08, tutti letti: «AI», «AD», «On», «Lucio Dalla»,
+  // «Haus O». Il tetto cade se la classe cresce.
   const EXEMPT_TAILS_MAX = 40;
 
   test(`le esenzioni per nome proprio restano poche (${EXEMPT_TAILS_MAX} al massimo)`, () => {

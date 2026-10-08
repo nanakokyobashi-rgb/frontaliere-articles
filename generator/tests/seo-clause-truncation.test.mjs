@@ -383,9 +383,9 @@ describe('voci SEO di ogni sezione — code aperte su una parola funzionale', ()
     expect(recent.length, `articoli generati DOPO la fix con la coda aperta:\n  ${detail}`).toBe(0);
   });
 
-  // L'esenzione non giudica dalla sola maiuscola: passano le sigle (per forma),
-  // la lettera che etichetta la parola prima e i nomi elencati nel modulo; una
-  // parola funzionale in maiuscola («…Nuove Regole Per») resta una coda aperta.
+  // L'esenzione non giudica da nessuna forma: passano solo i nomi e le sigle
+  // elencati nel modulo; una parola funzionale in maiuscola o in sole maiuscole
+  // («…Nuove Regole Per», «…Nuove Regole PER») resta una coda aperta.
   // 17 campi il 2026-10-08, tutti letti («…marchio On», «…AVS e AI», «…confronto
   // su AI», «…Lucio Dalla», «…LAINF e AD», «…nuovo Haus O»). Se la classe
   // cresce, l'esenzione sta diventando il modo in cui una coda vera passa.

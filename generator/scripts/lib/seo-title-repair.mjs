@@ -28,7 +28,6 @@
  * disagree on what a broken title is.
  */
 import {
-  TRAILING_STOPWORDS,
   peelDanglingClauseTail,
   truncateToClause,
 } from '../../../host/shared/clauseTail.mjs';
@@ -77,48 +76,39 @@ export function isStrictSeoTitlePrefix(candidate, canonical) {
 }
 
 /**
- * Names a complete title really ends on and that the shared stopword list —
- * compared in lower case — reads as a function word: the brand «On» («on»),
- * the surname of «Lucio Dalla» («dalla»).
+ * The names and acronyms a complete title really ends on and that the shared
+ * stopword list — compared in lower case — reads as a function word: the brand
+ * «On» («on»), the surname of «Lucio Dalla» («dalla»), the acronyms «AI»
+ * («ai») and «AD» («ad»), the building «Haus O» («o»).
  *
- * Explicit and small on purpose. A capital alone proves nothing: a Title Case
- * title cut short ends on «…Nuove Regole Per» or «…Tutto Quello Che Devi
- * Sapere Su» with exactly the shape of «…marchio On», so a name enters this
- * list together with a published title that ends on it, and
+ * This list is the whole exemption: no shape passes by itself. A capital, an
+ * all-caps token and a lone letter all prove nothing — a title cut short ends
+ * on «…Nuove Regole Per», «…Nuove Regole PER» or «…Nuove Regole O» with
+ * exactly the shape of «…marchio On», «…AVS e AI» and «…Haus O». An entry is
+ * added together with a published title that ends on it, and
  * `generator/tests/seo-title-prefix-repair.test.mjs` fails on an entry no
- * published field uses. A surname is listed with its first name: «Dalla» by
- * itself is also the preposition of «…Colpiti Dalla».
+ * published field uses. A surname is listed with its first name and a lone
+ * letter with the word it labels: «Dalla» and «O» by themselves are also the
+ * tails of «…Colpiti Dalla» and «…Regole O».
  */
-export const SEO_PROPER_NOUN_TAILS = Object.freeze(['On', 'Lucio Dalla']);
-
-// An acronym is recognised by its form: capitals and digits only, two or more.
-const ACRONYM_TAIL_RE = /^\p{Lu}[\p{Lu}\p{N}]+$/u;
+export const SEO_PROPER_NOUN_TAILS = Object.freeze(['On', 'Lucio Dalla', 'AI', 'AD', 'Haus O']);
 
 function endsOnListedName(text) {
   return SEO_PROPER_NOUN_TAILS.some((name) => text === name || text.endsWith(` ${name}`));
 }
 
 /**
- * True when the last word is a proper noun or an acronym that the shared
- * stopword list — compared in lower case — mistakes for a function word:
- * «…per il marchio On», «…di AVS e AI», «…nel nuovo Haus O», «…a Lucio Dalla».
+ * True when the text ends on a name or an acronym of `SEO_PROPER_NOUN_TAILS`
+ * that the shared stopword list mistakes for a function word: «…per il marchio
+ * On», «…di AVS e AI», «…nel nuovo Haus O», «…a Lucio Dalla».
  *
- * Three shapes pass, and nothing else does:
- *   - an acronym, by form («AI», «AD»);
- *   - a name of `SEO_PROPER_NOUN_TAILS`;
- *   - a single capital that labels the content word before it («Haus O»).
+ * Even a listed name is not read as one when it opens a sentence: «…Accordo
+ * vicino? On» is a cut sentence, so the name must follow another word, and
+ * that part must carry lower-case text (an all-caps title proves nothing about
+ * its last word).
  *
- * Three readings look the same and are NOT proper nouns:
- *   - a capitalised function word: «…Nuove Regole Per», «…e Il», «…ecco Cosa»
- *     are cuts of a Title Case title, so a capital is never enough;
- *   - a capital that opens a sentence: «…Accordo vicino? Le» and «…in 5 anni.
- *     Cosa» are cut sentences, so the word must follow another word, and that
- *     part must carry lower-case text (an all-caps title proves nothing about
- *     its last word);
- *   - a single letter after a function word: «…secondarie di I» is «di I
- *     grado» cut short and «…laurea in I» is a word cut after its initial,
- *     while «Haus O» names a building. A lone letter is a label only when it
- *     follows a content word.
+ * A listed name says the text MAY end there. Whether a stored field really
+ * does is decided against its real title in `seoTitleFieldDefect`.
  */
 export function hasProperNounTail(value) {
   const text = normalizeSeoTitle(value);
@@ -126,9 +116,7 @@ export function hasProperNounTail(value) {
   if (!/^\p{Lu}[\p{L}\p{N}]*$/u.test(word)) return false;
   const before = text.slice(0, text.length - word.length).trimEnd();
   if (!before || SENTENCE_BREAK_RE.test(before) || !/\p{Ll}/u.test(before)) return false;
-  if (word.length > 1) return ACRONYM_TAIL_RE.test(word) || endsOnListedName(text);
-  const previous = /(\S+)$/u.exec(before)?.[1]?.toLowerCase() ?? '';
-  return !TRAILING_STOPWORDS.has(previous);
+  return endsOnListedName(text);
 }
 
 /** The shared helper would peel this text: it does not read as complete. */
@@ -176,7 +164,10 @@ export function seoTitleFromCanonical(canonical) {
 /**
  * Why a stored field is a broken derivative of the real title, or `null`.
  *
- *   'dangling'          the value stops on a function word or open separator;
+ *   'dangling'          the value stops on a function word or open separator,
+ *                       or on a listed name where the real title goes on
+ *                       inside the same clause: the exemption for names says
+ *                       a title may end there, not that this one does;
  *   'mid-clause-prefix' `ogTitle`/`headline` only: a strict prefix of the real
  *                       title that neither stops on one of its clause
  *                       boundaries nor is the clause-safe cut earlier repairs
@@ -194,6 +185,13 @@ export function seoTitleFieldDefect(field, candidate, canonical) {
   const value = normalizeSeoTitle(candidate);
   if (!value) return null;
   if (isDanglingSeoTitle(value)) return 'dangling';
+  if (hasExemptProperNounTail(value)) {
+    // Bound to the real title, for every field: `title` has no prefix rule of
+    // its own below, so without this a cut that happens to stop on a listed
+    // name would pass every check.
+    const core = stripSeoTitleBrand(value);
+    if (isStrictSeoTitlePrefix(core, canonical) && !isClauseBoundarySeoTitlePrefix(core, canonical)) return 'dangling';
+  }
   const maxLen = SEO_TITLE_FIELD_LIMITS[field];
   if (!maxLen || !isStrictSeoTitlePrefix(value, canonical)) return null;
   if (isClauseBoundarySeoTitlePrefix(value, canonical)) return null;
