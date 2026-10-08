@@ -12795,6 +12795,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lugano-lucerna-partita-traffico.title': 'Supporters de Lucerna à Lugano : fermetures de routes, retards de circulation',
     'blog.article.lugano-lucerna-partita-traffico.excerpt': '## En bref - Samedi : FC Lugano-FC Lucerna à 18 h à Cornaredo - Cortège des supporters visiteurs entre 16 h et environ 17.30 - Piazzale della stazione fermé à partir de 15.50 - Attentes',
     'blog.article.lugano-lucerna-partita-traffico.imageAlt': 'Place de la gare de Lugano avec barrières et supporters de Lucerne en direction du stade de Cornaredo',
+    'blog.article.tifosi-lucerna-lugano-traffico.title': 'Supporters de Lucerna à Lugano : routes fermées et trafic',
+    'blog.article.tifosi-lucerna-lugano-traffico.excerpt': '## En bref - Match à 18 h au stade de Cornaredo - Cortège entre 16 h et 17 h 30 environ - Temps d’attente de 15 à 30 minutes sur les routes concernées - Via Ciani',
+    'blog.article.tifosi-lucerna-lugano-traffico.imageAlt': 'Rues de Lugano avec police et supporters se rendant au stade de Cornaredo',
 };
 
 export default blogMetaFr;

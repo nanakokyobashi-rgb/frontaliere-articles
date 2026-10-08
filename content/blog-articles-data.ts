@@ -43136,6 +43136,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tifosi-lucerna-lugano-traffico',
+ category: 'pratico',
+ date: '2026-10-08T11:31:48.408Z',
+ image: '/images/blog/lucerna-voto-tifosi-ocse.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI', 'LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -260,6 +260,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T11:29:50.112Z",
       "lastFailureAt": "2026-10-08T11:29:50.112Z"
+    },
+    {
+      "articleId": "tifosi-lucerna-lugano-traffico",
+      "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
+      "fallbackImage": "/images/blog/lucerna-voto-tifosi-ocse.webp",
+      "reason": "All image providers failed for article-tifosi-lucerna-lugano-traffico: openai-codex (vision gate rejected image: Generic illustrated scene with multiple roadwork and traffic signs;",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:31:48.777Z",
+      "lastFailureAt": "2026-10-08T11:31:48.777Z"
     }
   ]
 }

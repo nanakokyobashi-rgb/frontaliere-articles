@@ -12793,6 +12793,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lugano-lucerna-partita-traffico.title': 'Lucerne fans in Lugano: road closures, traffic delays',
     'blog.article.lugano-lucerna-partita-traffico.excerpt': '## TL;DR - Saturday: FC Lugano-FC Lucerna at 18 in Cornaredo - Away supporters\' procession between 16 and around 17.30 - Station forecourt closed from 15.50 - Expected',
     'blog.article.lugano-lucerna-partita-traffico.imageAlt': 'Lugano station square with barriers and Lucerne fans heading to Cornaredo stadium',
+    'blog.article.tifosi-lucerna-lugano-traffico.title': 'Lucerne fans in Lugano: roads closed and traffic',
+    'blog.article.tifosi-lucerna-lugano-traffico.excerpt': '## TL;DR - Match at 6 p.m. at Cornaredo stadium - Parade between approximately 4 and 5:30 p.m. - Delays of 15 to 30 minutes on the affected roads - Via Ciani',
+    'blog.article.tifosi-lucerna-lugano-traffico.imageAlt': 'Lugano streets with police and fans heading to Cornaredo stadium',
 };
 
 export default blogMetaEn;

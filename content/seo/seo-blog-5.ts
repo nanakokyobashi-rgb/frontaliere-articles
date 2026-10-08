@@ -103045,6 +103045,39 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tifosi-lucerna-lugano-traffico': {
+    title: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
+    description: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    keywords: 'frontalieri, ticino, svizzera, italia, tifosi, lucerna, lugano, strade',
+    ogTitle: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
+    ogDescription: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    canonicalPath: '/articoli-frontaliere/tifosi-lucerna-lugano-traffico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
+      "description": "## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lucerna-voto-tifosi-ocse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strade di Lugano con polizia e tifosi diretti allo stadio di Cornaredo"
+      },
+      "datePublished": "2026-10-08T11:31:48+00:00",
+      "dateModified": "2026-10-08T11:31:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tifosi-lucerna-lugano-traffico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;
