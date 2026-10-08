@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-lucerna-salute-mentale-banchi': {
     title: 'Lucerna: giornata sulla salute mentale il 10 ottobre',
-    description: '## In breve - 10 ottobre 2026: giornata cantonale a Lucerna - Dalle 10 alle 16 alla Matthäuskirche nella città vecchia - Ingresso libero e senza prenotazione',
+    description: '10 ottobre 2026: giornata cantonale a Lucerna',
     keywords: 'frontalieri, ticino, svizzera, italia, lucerna, giornata, sulla, salute',
     ogTitle: 'Salute mentale: evento gratuito a Lucerna il 10 ottobre',
-    ogDescription: '## In breve - 10 ottobre 2026: giornata cantonale a Lucerna - Dalle 10 alle 16 alla Matthäuskirche nella città vecchia - Ingresso libero e senza prenotazione',
+    ogDescription: '10 ottobre 2026: giornata cantonale a Lucerna',
     canonicalPath: '/articoli-lucerna/lucerna-salute-mentale-banchi/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lucerna: giornata sulla salute mentale il 10 ottobre",
-      "description": "## In breve - 10 ottobre 2026: giornata cantonale a Lucerna - Dalle 10 alle 16 alla Matthäuskirche nella città vecchia - Ingresso libero e senza prenotazione",
+      "description": "10 ottobre 2026: giornata cantonale a Lucerna",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

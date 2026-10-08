@@ -410,6 +410,42 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
   }
 });
 
+test('refreshDescriptiveTexts: rifiuta Markdown su ogni write path prima di scrivere', () => {
+  const root = syntheticCorpus();
+  try {
+    const metaPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const seoPath = path.join(root, 'content', 'seo', 'seo-blog-5.ts');
+    const metaBefore = fs.readFileSync(metaPath, 'utf-8');
+    const seoBefore = fs.readFileSync(seoPath, 'utf-8');
+
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { seoDescription: '[testo][ref]' } },
+        { description: 'Descrizione semplice.' },
+        { repoRoot: root },
+      ),
+      /excerpt-plain.*content\.seoDescription.*reference-link/,
+    );
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore);
+    assert.equal(fs.readFileSync(seoPath, 'utf-8'), seoBefore);
+
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { excerpt: 'Estratto semplice.' } },
+        { description: 'Descrizione.\n---\nContinua.' },
+        { repoRoot: root },
+      ),
+      /excerpt-plain.*seo\.description.*horizontal-rule/,
+    );
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore);
+    assert.equal(fs.readFileSync(seoPath, 'utf-8'), seoBefore);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('refreshDescriptiveTexts prende il section lock prima del read-modify-write', () => {
   const root = syntheticCorpus();
   try {

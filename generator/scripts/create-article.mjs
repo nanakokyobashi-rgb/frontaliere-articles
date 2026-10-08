@@ -192,6 +192,12 @@ import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.m
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/it-text-similarity.mjs';
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
+import {
+  normalizeExcerpt,
+  stripExcerptMarkdown,
+  assertPlainExcerpt,
+  assertPlainDescriptionFields,
+} from './lib/article-excerpt.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
 // Il verdetto sul payload di generazione (normalizzatore incluso) vive in un
@@ -4652,10 +4658,25 @@ function applyMicrocopyGuard(content, locale) {
   if (!content || typeof content !== 'object') return;
   for (const field of ['title', 'excerpt']) {
     if (typeof content[field] !== 'string' || !content[field].trim()) continue;
+    if (field === 'excerpt') {
+      const normalized = normalizeExcerpt(content[field]);
+      if (normalized !== content[field]) {
+        console.warn(`  🧹 [excerpt-plain] ${locale.toUpperCase()} excerpt normalizzato`);
+        content[field] = normalized;
+      }
+    }
     const { value, fixes } = fixMicrocopy(content[field], { locale, field });
     if (!fixes.length) continue;
     console.warn(`  ✍️ [microcopy] ${locale.toUpperCase()} ${field}: ${fixes.map((f) => `${f.rule} "${f.found}"→"${f.expected}"`).join(', ')}`);
     content[field] = value;
+  }
+  for (const field of ['seoDescription', 'ogDescription']) {
+    if (typeof content[field] !== 'string' || !content[field].trim()) continue;
+    const plain = stripExcerptMarkdown(content[field]);
+    if (plain !== content[field]) {
+      console.warn(`  🧹 [excerpt-plain] ${locale.toUpperCase()} ${field} normalizzato`);
+      content[field] = plain;
+    }
   }
 }
 
@@ -4681,7 +4702,7 @@ async function generateExcerpt(title, body1, body2, body3) {
       { role: 'user', content: `Titolo: ${title}\n\nCorpo dell'articolo:\n${bodyText.slice(0, 4000)}` },
     ];
     const raw = await _aiCallLLM(messages, { temperature: 0.5, maxTokens: 200, timeout: 30_000 });
-    const excerpt = String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim();
+    const excerpt = normalizeExcerpt(String(raw || '').replace(/^["'“”]+|["'“”]+$/g, '').trim());
     // Il non-vuoto non basta (#798): questa e' la sola sorgente dell'`excerpt`
     // della pipeline giornalista, che non passa da `validateItalianPayload`.
     // Un `...` finirebbe in `content/`, in `meta-<locale>.json` e nei feed.
@@ -4695,7 +4716,7 @@ async function generateExcerpt(title, body1, body2, body3) {
   } catch (err) {
     console.warn(`  ⚠️  generateExcerpt fallito, uso fallback troncato: ${err.message}`);
   }
-  return capBlogDescription(bodyText).value;
+  return capBlogDescription(normalizeExcerpt(bodyText)).value;
 }
 
 /** Char-based thirds over an ordered list of chunks (paragraphs or sentences),
@@ -14005,6 +14026,10 @@ function optimizeSeoMetadata(data) {
   const it = data.content?.it || {};
   if (!data.seo) data.seo = {};
 
+  if (typeof it.excerpt === 'string' && it.excerpt.trim()) {
+    it.excerpt = normalizeExcerpt(it.excerpt);
+  }
+
   // ── Collision prevention (mirror og-pages runtime disambiguator) ──
   // The og-pages plugin appends " (2026)" / " — Bellinzona" / FNV hash at
   // build time when two articles produce the same base <title>. Prevent
@@ -14069,16 +14094,18 @@ function optimizeSeoMetadata(data) {
     42,
   );
 
-  let desc = String(data.seo.description || it.excerpt || '').replace(/\s+/g, ' ').trim();
+  let desc = stripExcerptMarkdown(data.seo.description || it.excerpt || '');
   if (!desc) desc = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati 2026.`;
   if (desc.length < 145) {
     desc = `${desc}${desc.endsWith('.') ? '' : '.'} Dati aggiornati 2026 per frontalieri in Ticino.`;
   }
   data.seo.description = truncateAtWordBoundary(desc, 160);
   data.seo.ogDescription = truncateAtWordBoundary(
-    data.seo.ogDescription || data.seo.description,
+    stripExcerptMarkdown(data.seo.ogDescription || data.seo.description),
     SEO_OG_DESCRIPTION_MAX,
   );
+  assertPlainExcerpt(data.seo.description, { field: 'seo.description', id: data.id, locale: 'it' });
+  assertPlainExcerpt(data.seo.ogDescription, { field: 'seo.ogDescription', id: data.id, locale: 'it' });
 
   const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida']);
   const isStopYear = (w) => /^(19|20)\d{2}$/.test(w);
@@ -14113,15 +14140,15 @@ export function refreshSourceCopyDerivedMetadata(data) {
     if (!content || typeof content !== 'object') continue;
     const body = bodyTextForQuality(content);
     if (!body.trim()) continue;
-    const excerpt = capBlogDescription(body).value;
+    const excerpt = capBlogDescription(normalizeExcerpt(body)).value;
     if (!excerpt) continue;
     content.excerpt = excerpt;
     applyMicrocopyGuard(content, locale);
     if (typeof content.seoDescription === 'string') {
-      content.seoDescription = capBlogDescription(excerpt).value;
+      content.seoDescription = stripExcerptMarkdown(capBlogDescription(excerpt).value);
     }
     if (typeof content.ogDescription === 'string') {
-      content.ogDescription = capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value;
+      content.ogDescription = stripExcerptMarkdown(capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value);
     }
   }
 
@@ -14132,8 +14159,8 @@ export function refreshSourceCopyDerivedMetadata(data) {
   const itExcerpt = data?.content?.it?.excerpt;
   if (typeof itExcerpt === 'string' && itExcerpt.trim()) {
     if (!data.seo || typeof data.seo !== 'object') data.seo = {};
-    data.seo.description = itExcerpt;
-    data.seo.ogDescription = itExcerpt;
+    data.seo.description = stripExcerptMarkdown(itExcerpt);
+    data.seo.ogDescription = stripExcerptMarkdown(itExcerpt);
     optimizeSeoMetadata(data);
   }
   return data;
@@ -15080,6 +15107,11 @@ function decodeSeoEntities(data) {
 
 function modifySeoService(data) {
   decodeSeoEntities(data);
+  assertPlainDescriptionFields(data.seo, {
+    fieldPrefix: 'seo.',
+    id: data.id,
+    locale: 'it',
+  });
   const publishedAt = toIsoWithTz(new Date())
   const modifiedAt = publishedAt
 
@@ -19279,6 +19311,27 @@ function clampSeoDescriptions(data) {
   }
 }
 
+/**
+ * All descriptive values must be plain before any shared writer touches the
+ * corpus. Primary generation normalizes them in `optimizeSeoMetadata`, but
+ * deterministic producers call `registerArticleFiles()` directly and must
+ * meet the same contract before the first registry/meta write.
+ */
+function assertArticleDescriptionsArePlain(data) {
+  assertPlainDescriptionFields(data?.seo, {
+    fieldPrefix: 'seo.',
+    id: data?.id,
+    locale: 'it',
+  });
+  for (const [locale, content] of Object.entries(data?.content || {})) {
+    assertPlainDescriptionFields(content, {
+      fieldPrefix: 'content.',
+      id: data?.id,
+      locale,
+    });
+  }
+}
+
 export async function registerArticleFiles(data, opts = {}) {
   if (!data || !data.id || !data.content?.it?.title) {
     throw new Error('registerArticleFiles: data.id and data.content.it.title are required');
@@ -19328,6 +19381,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // body tradotto con un rilievo bloccante arriva su disco (#5661).
   assertArticlePassesFactualityGates(data);
   clampSeoDescriptions(data);
+  assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();
   // The registrar is the write path of the three deterministic generators and

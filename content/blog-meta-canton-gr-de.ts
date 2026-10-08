@@ -4,7 +4,7 @@
  */
 const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.strada-calanca-chiusura-preventiva.title': 'Calanca-Straße: vollständige Schließung zwischen Molina und Arvigo',
-    'blog.article.strada-calanca-chiusura-preventiva.excerpt': '## Kurz gesagt - Vollständige Schließung von Mittwoch um 21 Uhr - Abschnitt: Molina Nord–Cave di Arvigo - MeteoSchweiz erwartet Regen über der kritischen Schwelle - Wiedereröffnung',
+    'blog.article.strada-calanca-chiusura-preventiva.excerpt': 'Vollständige Schließung von Mittwoch um 21 Uhr',
     'blog.article.strada-calanca-chiusura-preventiva.imageAlt': 'Calancastrasse wegen schlechtem Wetter zwischen Molina Nord und Arvigo gesperrt.',
     'blog.article.benzina-grigioni-deviazione.title': 'Benzinpreise in Graubünden: Wann lohnt sich der Umweg',
     'blog.article.benzina-grigioni-deviazione.excerpt': 'Benzinpreise auch in Graubünden auf Rekordniveau: Der Rechner bewertet Preis und Entfernung des Umwegs zu einer günstigeren Tankstelle.',
@@ -13,7 +13,7 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.lavoro-grigioni-settembre-2026.excerpt': 'Im September 2026 verzeichnete Graubünden 1.237 Arbeitslose, was 1,1% entspricht. Insgesamt gibt es 2.267 Stellensuchende.',
     'blog.article.lavoro-grigioni-settembre-2026.imageAlt': 'Alpenlandschaft in Graubünden nahe einem regionalen Arbeitsvermittlungszentrum',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Graubünden: Mittel für Lawinenschutz in Rossa und eine Aula in Roveredo',
-    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '## Auf einen Blick - Die Bündner Regierung hat 265\'650 Franken für Pighé genehmigt. - Der Keil wird westlich des Siedlungsgebiets entstehen. - Die Lawinenschutzarbeiten',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Lawinenschutzbauten in Pighé, Rossa, und ein Waldklassenzimmer in Roveredo, Kanton Graubünden.',
 };
 
