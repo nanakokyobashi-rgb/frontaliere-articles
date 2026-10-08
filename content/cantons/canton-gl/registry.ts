@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'premi-standard-glarona',
+ category: 'pratico',
+ date: '2026-10-08T13:30:13.016Z',
+ image: '/images/blog/article-premi-standard-glarona.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
