@@ -2,12 +2,13 @@
  * scripts/ci/check-post-rebase-uniqueness.mjs — il ricontrollo di id, fonte e contenuto
  * DOPO il rebase e prima del push (D18).
  *
- * Le due invarianti — id unico in tutte le sezioni, una fonte = una sezione —
- * il generatore le verifica sul tree di inizio run, quindi reggono solo con
- * scrittori seriali. Questi test costruiscono lo stato post-rebase che il
- * rebase produce quando due scrittori partono dalla stessa base, e chiedono
- * allo script di accorgersene. Le sezioni sono quelle del core: niente qui
- * elenca «frontaliere» e «svizzera» come lista da controllare.
+ * Le tre invarianti — id unico in tutte le sezioni, una fonte = una sezione e
+ * nessun contenuto quasi duplicato — il generatore le verifica sul tree di
+ * inizio run, quindi reggono solo con scrittori seriali. Questi test
+ * costruiscono lo stato post-rebase che il rebase produce quando due
+ * scrittori partono dalla stessa base, e chiedono allo script di accorgersene.
+ * Le sezioni sono quelle del core: niente qui elenca «frontaliere» e
+ * «svizzera» come lista da controllare.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';

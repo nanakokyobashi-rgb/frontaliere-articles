@@ -994,7 +994,7 @@ jobs:
               uniq_rc=0
               node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD || uniq_rc=$?
               if [ "$uniq_rc" -ne 0 ]; then
-                echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides with another section on id or source URL; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
+                echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides on id, source URL, or content; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
                 exit 1
               fi
             fi
