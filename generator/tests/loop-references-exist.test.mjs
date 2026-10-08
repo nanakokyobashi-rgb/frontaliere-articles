@@ -518,6 +518,13 @@ const DECLARED_ABSENT = {
       'Descrittiva: il gemello `identical` dichiara da se\' che «nel corpus il path non esiste: ' +
       'il registro e\' un no-op».',
   },
+  'scripts/ci/close-recovered-failure-issues.mjs :: .github/workflows/runtime-reliability-watch.yml': {
+    kind: 'site-only',
+    reason:
+      'Voce del registro degli step-verdetto per il watchdog runtime del sito (`Runtime reliability watchdog`, ' +
+      'issue 12270 del sito): il workflow vive solo la\'. Il gemello `identical` porta la voce cosi\' com\'e\'; ' +
+      'qui nessuna run ha quel path, quindi la voce non viene mai selezionata e niente dipende dal file.',
+  },
   'scripts/ci/close-recovered-failure-issues.mjs :: .github/workflows/crawler-health-monitor.yml': {
     kind: 'site-only',
     reason:
