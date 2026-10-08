@@ -7,6 +7,7 @@ function articleSearchWords(data) {
   const searchableText = [
     data?.id || '',
     data?.category || '',
+    data?.imagePrompt || '',
     data?.content?.it?.title || data?.content?.title || '',
     data?.content?.it?.excerpt || data?.content?.excerpt || '',
   ].join(' ').toLowerCase();

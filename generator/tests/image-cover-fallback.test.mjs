@@ -6,6 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  CATALOG_FALLBACK_MIN_SHARED_WORDS,
+  catalogFallbackSharedWordCount,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from '../scripts/lib/article-cover-fallback.mjs';
@@ -125,6 +127,20 @@ test('un catalogo valido ma non pertinente non diventa la copertina finale', () 
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('la pertinenza della cover usa il testo finale e una soglia condivisa', () => {
+  const data = article('article-cantello-teatro', 'Cantello teatro dialettale ottobre');
+  data.imagePrompt = 'Scena editoriale sul teatro dialettale di Cantello';
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/cantello-teatro-dialettale-ottobre-2026.webp'),
+    5,
+  );
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/sindacati-miazzina-diritti-9-ottobre.webp'),
+    1,
+  );
+  assert.equal(CATALOG_FALLBACK_MIN_SHARED_WORDS, 2);
 });
 
 test('when the catalog is empty, the governed static cover still publishes and deduplicates the queue', () => {

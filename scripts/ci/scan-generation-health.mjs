@@ -1387,18 +1387,30 @@ export const CONDITIONS = [
     evaluate(m) {
       const health = m.runs?.available === true ? m.runs.coverHealth : null;
       const queue = m.coverQueue;
-      if (!health || health.observations < 1 || !queue?.available
-        || !Number.isFinite(health.latestConsecutiveFallbacks)
-        || !Number.isFinite(health.fallbackRate)
-        || !Number.isFinite(queue.count)) {
+      const queueAvailable = queue?.available === true && Number.isFinite(queue.count);
+      const healthAvailable = health
+        && Number.isFinite(health.observations)
+        && Number.isFinite(health.fallbacks)
+        && Number.isFinite(health.generated)
+        && Number.isFinite(health.latestConsecutiveFallbacks)
+        && Number.isFinite(health.fallbackRate);
+      const fallbackEvidenceAvailable = Boolean(healthAvailable && health.observations >= 1);
+      if (!queueAvailable) {
         return { available: false };
       }
-      const fallbackSignal = health.latestConsecutiveFallbacks >= COVER_FALLBACK_CONSECUTIVE_THRESHOLD;
-      const queueSignal = queue.oldestAgeHours !== null
+      const fallbackSignal = fallbackEvidenceAvailable
+        && health.latestConsecutiveFallbacks >= COVER_FALLBACK_CONSECUTIVE_THRESHOLD;
+      const queueSignal = Number.isFinite(queue.oldestAgeHours)
         && queue.oldestAgeHours >= COVER_QUEUE_MAX_AGE_HOURS;
+      // An old queue item is independently actionable even when the recent run
+      // logs are unavailable. Conversely, no cover marker is not evidence that
+      // the provider is healthy, so the log side remains fail-closed.
+      if (!fallbackEvidenceAvailable && !queueSignal) {
+        return { available: false, reason: 'cover outcomes are not measurable and the queue is below age threshold' };
+      }
       if (!fallbackSignal && !queueSignal) return { firing: false };
 
-      const reasons = Object.entries(health.reasons || {})
+      const reasons = Object.entries(health?.reasons || {})
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5)
         .map(([reason, count]) => `${reason} (${count})`)
@@ -1412,8 +1424,12 @@ export const CONDITIONS = [
         body: [
           'Il watchdog delle copertine ha rilevato un degrado persistente nella finestra osservata.',
           '',
-          `- Eventi copertina osservati: **${health.observations}**; fallback **${health.fallbacks}** (${(health.fallbackRate * 100).toFixed(0)}%), generated **${health.generated}**.`,
-          `- Fallback consecutivi finali: **${health.latestConsecutiveFallbacks}** (soglia ${COVER_FALLBACK_CONSECUTIVE_THRESHOLD}, cioè oltre tre).`,
+          fallbackEvidenceAvailable
+            ? `- Eventi copertina osservati: **${health.observations}**; fallback **${health.fallbacks}** (${(health.fallbackRate * 100).toFixed(0)}%), generated **${health.generated}**.`
+            : '- Eventi copertina recenti: **non misurati** (i log delle run non sono disponibili o non contengono marker).',
+          fallbackEvidenceAvailable
+            ? `- Fallback consecutivi finali: **${health.latestConsecutiveFallbacks}** (soglia ${COVER_FALLBACK_CONSECUTIVE_THRESHOLD}, cioè oltre tre).`
+            : `- Fallback consecutivi finali: **non misurati** (soglia ${COVER_FALLBACK_CONSECUTIVE_THRESHOLD}).`,
           `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
           `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${queue.oldestAgeHours === null ? '—' : `${queue.oldestAgeHours.toFixed(1)}h`} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
           `- Motivi più frequenti dei fallback: ${reasons}.`,

@@ -933,6 +933,22 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     assert.match(v.body, /queued=55/);
   });
 
+  test('cover-fallback-health: la coda anziana apre anche senza log recenti leggibili', () => {
+    const m = healthy();
+    m.runs = { available: false };
+    m.coverQueue = {
+      available: true,
+      count: 55,
+      oldestRequestedAt: '2026-10-07T04:45:22.263Z',
+      oldestAgeHours: 6.5,
+      statuses: { queued: 55 },
+    };
+    const v = verdictFor(m, 'cover-fallback-health');
+    assert.equal(v.firing, true);
+    assert.match(v.body, /non misurati/);
+    assert.match(v.body, /6\.5h/);
+  });
+
   test('cover-fallback-health resta non misurabile se la coda non è leggibile', () => {
     const m = healthy();
     m.coverQueue = { available: false };
