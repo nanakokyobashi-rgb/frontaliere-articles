@@ -130,10 +130,8 @@ jobs:
       skip: ${{ steps.mode.outputs.skip }}
       skip_reason: ${{ steps.mode.outputs.skip_reason }}
       dry: ${{ steps.mode.outputs.dry }}
-      id: ${{ steps.mode.outputs.id }}
-      ids: ${{ steps.mode.outputs.ids }}
-      section: ${{ steps.mode.outputs.section }}
-      shard: ${{ steps.mode.outputs.shard }}
+      matrix: ${{ steps.mode.outputs.matrix }}
+      any: ${{ steps.mode.outputs.any }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
@@ -162,6 +160,8 @@ jobs:
         run: |
           set -euo pipefail
           ids=()
+          groups='{}'
+          body_section=''
           before="${PUSH_BEFORE:-}"
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
 
@@ -230,32 +230,43 @@ jobs:
                 echo "::error::one commit changes both article sections; publish them in separate commits"
                 exit 1
               fi
+              if [ -n "${body_section_seen:-}" ] && [ "$body_section_seen" != "$body_section" ]; then
+                echo "::error::one commit changes both article sections; publish them in separate commits"
+                exit 1
+              fi
+              body_section_seen="$body_section"
               section="$body_section"
               ids+=("$body_id")
             done
           fi
 
+          # Start with the explicit/body batch. The body guard above is the
+          # intentional cross-section guard: one body commit must not publish
+          # two sections as if it were one batch.
+          if [ "${#ids[@]}" -gt 0 ]; then
+            section="${section:-frontaliere}"
+            ids_json="$(printf '%s\n' "${ids[@]}" | jq -R . | jq -cs 'unique')"
+            groups="$(jq -c --arg s "$section" --argjson ids "$ids_json" \
+              '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
+          fi
+
           # A later image-only commit has no body path to grep. The registry is
           # the ownership map, so resolve the changed public image to every
-          # article id that declares it and keep the same section/shard guard
-          # as body changes.
+          # article id that declares it. Each ownership group becomes its own
+          # matrix target; it must not trip the body-only cross-section guard.
           if [ "${{ github.event_name }}" = "push" ]; then
             image_plan="$(printf '%s\n' "$changed" | node scripts/ci/fast-publish-section.mjs image-plan shard)"
             while IFS= read -r image_target; do
               [ -n "$image_target" ] || continue
               image_section="$(printf '%s' "$image_target" | jq -r '.section')"
-              if [ -n "${section:-}" ] && [ "$section" != "$image_section" ]; then
-                echo "::error::one commit changes both article sections; publish them in separate commits"
-                exit 1
-              fi
-              section="$image_section"
-              mapfile -t image_ids < <(printf '%s' "$image_target" | jq -r '.ids[]')
-              ids+=("${image_ids[@]}")
+              image_ids_json="$(printf '%s' "$image_target" | jq -c '.ids | unique | sort')"
+              groups="$(jq -c --arg s "$image_section" --argjson ids "$image_ids_json" \
+                '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
             done < <(printf '%s' "$image_plan" | jq -c '.[]')
           fi
           echo "dry=$dry" >> "$GITHUB_OUTPUT"
 
-          if [ "${#ids[@]}" -eq 0 ]; then
+          if [ "$(jq 'length' <<<"$groups")" -eq 0 ]; then
             canton_content=false
             while IFS= read -r changed_path; do
               case "$changed_path" in
@@ -276,36 +287,43 @@ jobs:
               echo "skip_reason=no-article-body" >> "$GITHUB_OUTPUT"
             fi
             echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "matrix=[]" >> "$GITHUB_OUTPUT"
+            echo "any=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          ids_json="$(printf '%s\n' "${ids[@]}" | jq -R . | jq -cs 'unique')"
-          id="$(printf '%s' "$ids_json" | jq -r '.[0]')"
-          section="${section:-frontaliere}"
-          # Validates the section against the ACTIVE core sections and returns
-          # its Pages shard. A section served from R2 (shardKey null, the canton
-          # sections) is an explicit error here, never a fallback to a shard
-          # that belongs to another section.
-          shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$section")"
+          # Validate every section against the ACTIVE core and attach its Pages
+          # shard. A section served from R2 (shardKey null, the canton sections)
+          # is an explicit error here, never a fallback to another shard.
+          matrix="$(jq -c 'to_entries | map({section: .key, ids: .value})' <<<"$groups")"
+          matrix_with_shards='[]'
+          while IFS= read -r target; do
+            target_section="$(printf '%s' "$target" | jq -r '.section')"
+            target_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$target_section")"
+            target="$(printf '%s' "$target" | jq -c --arg shard "$target_shard" '. + {shard: $shard}')"
+            matrix_with_shards="$(jq -c --argjson target "$target" '. + [$target]' <<<"$matrix_with_shards")"
+          done < <(printf '%s' "$matrix" | jq -c '.[]')
           {
             echo "skip=false"
-            echo "id=$id"
-            echo "ids=$ids_json"
-            echo "section=$section"
-            echo "shard=$shard"
+            echo "matrix=$matrix_with_shards"
+            echo "any=true"
             echo "skip_reason=publish"
           } >> "$GITHUB_OUTPUT"
-          echo "resolved ids=$(printf '%s' "$ids_json" | jq -r 'join(", ")') section=$section shard=$shard dry=$dry"
+          echo "resolved matrix=$matrix_with_shards dry=$dry"
 
   publish:
     needs: resolve
     if: needs.resolve.outputs.skip != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ fromJSON(needs.resolve.outputs.matrix) }}
     # Never cancel: a cancelled run can leave some locales pushed and others not.
     # Per shard, not global: the shard is the unit that a half-finished publish
     # can leave inconsistent, and it comes from the section core (`shardKey`).
     concurrency:
-      group: fast-publish-article-${{ needs.resolve.outputs.shard }}
+      group: fast-publish-article-${{ matrix.target.shard }}
       cancel-in-progress: false
     steps:
       - name: Checkout
@@ -355,8 +373,7 @@ jobs:
             echo "::error::GITHUB_PAT missing after the Remote Config load"
             exit 1
           fi
-          section="${{ needs.resolve.outputs.section }}"
-          shard="${{ needs.resolve.outputs.shard }}"
+          shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
           # The receive-pack advertisement is permission-gated: a credential
@@ -395,7 +412,7 @@ jobs:
       - name: Render the articles (fast path)
         if: needs.resolve.outputs.skip != 'true'
         env:
-          ARTICLE_IDS_JSON: ${{ needs.resolve.outputs.ids }}
+          ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
         run: |
           set -euo pipefail
           revision="$(git show -s --format=%ct HEAD).$(git rev-parse --short=12 HEAD)"
@@ -403,7 +420,7 @@ jobs:
           export ARTICLE_CONTENT_REVISION="$revision"
           npx -y tsx@4.23.15 scripts/publish-article-fast.mjs \
             --ids "$ARTICLE_IDS_JSON" \
-            --section "${{ needs.resolve.outputs.section }}" \
+            --section "${{ matrix.target.section }}" \
             --out "$RUNNER_TEMP/fast-dist" \
             --summary "$RUNNER_TEMP/fast-summary.json"
 
@@ -429,7 +446,8 @@ jobs:
           fi
           npx -y tsx@4.23.15 scripts/refresh-hub-landing.mjs \
             --out "$RUNNER_TEMP/fast-dist" \
-            --section "${{ needs.resolve.outputs.section }}" \
+            --section "${{ matrix.target.section }}" \
+            --released-articles-file "$RUNNER_TEMP/fast-summary.json" \
             --summary "$RUNNER_TEMP/hub-landing.json"
 
       - name: Validate what was rendered
@@ -583,8 +601,7 @@ jobs:
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
-          section="${{ needs.resolve.outputs.section }}"
-          shard="${{ needs.resolve.outputs.shard }}"
+          shard="${{ matrix.target.shard }}"
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
@@ -660,8 +677,7 @@ jobs:
         run: |
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
-          section="${{ needs.resolve.outputs.section }}"
-          shard="${{ needs.resolve.outputs.shard }}"
+          shard="${{ matrix.target.shard }}"
 
           # Without this the article stays 404 at the apex even though the shard
           # has it and the origin serves it. Measured on run 30814047357: push
@@ -760,8 +776,7 @@ jobs:
         run: |
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
-          section="${{ needs.resolve.outputs.section }}"
-          shard="${{ needs.resolve.outputs.shard }}"
+          shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
           # Two checks, deliberately different in strength, because they answer
@@ -1118,8 +1133,8 @@ jobs:
           {
             echo "### fast-publish-article"
             echo
-            echo "- ids: \`${{ needs.resolve.outputs.ids }}\`"
-            echo "- section: \`${{ needs.resolve.outputs.section }}\`"
+            echo "- ids: \`${{ matrix.target.ids }}\`"
+            echo "- section: \`${{ matrix.target.section }}\`"
             echo "- mode: \`$([ "${{ needs.resolve.outputs.dry }}" = "true" ] && echo DRY || echo ARMED)\`"
             if [ "${{ needs.resolve.outputs.dry }}" = "true" ]; then
               echo

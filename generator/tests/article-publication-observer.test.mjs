@@ -302,6 +302,35 @@ test('il ledger sopravvive alla finestra, viene letto per primo e il cap produce
   }
 });
 
+test('un dispatch senza run id lascia il candidato pending e quindi riconciliabile per retry', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient({
+    issue: {
+      number: 2448,
+      body: renderDegradationLedger([{
+        section: 'frontaliere', articleId: 'alpha', url: 'https://frontaliereticino.ch/alpha/',
+        registryImage: '/images/blog/alpha.webp', firstSeenAt: '2026-08-01T00:00:00.000Z',
+      }]),
+    },
+    dispatchResult: { runId: null },
+  });
+  try {
+    const result = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => '',
+      githubClient: github.client,
+      fetchImpl: async () => ({ ok: true, status: 200, text: async () => genericPage() }),
+      fetchDeclaredImageImpl: async () => ({ bytes: 5, contentType: 'image/webp' }),
+    });
+    assert.deepEqual(result.dispatched, [{ section: 'frontaliere', ids: ['alpha'], runId: null }]);
+    assert.deepEqual(result.ledger.map((item) => [item.articleId, item.status, item.runId]), [['alpha', 'pending', null]]);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
 test('immagine ancora assente: il degrado entra nel ledger ma non parte alcun dispatch', async () => {
   const rootDir = observerRoot();
   const github = issueClient();

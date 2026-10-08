@@ -141,10 +141,24 @@ export function markDispatched(items = [], dispatches = [], now = new Date().toI
   return sortedItems(items).map((item) => {
     const dispatch = byKey.get(ledgerKey(item));
     if (!dispatch) return item;
+    // A dispatch lookup can time out after the workflow was accepted. Without
+    // a run identifier there is nothing reconcileDispatches can follow, so an
+    // in-flight row would become permanent. Leave it retryable instead.
+    const hasRunId = dispatch.runId !== null
+      && dispatch.runId !== undefined
+      && String(dispatch.runId).length > 0;
+    if (!hasRunId) {
+      return {
+        ...item,
+        status: 'pending',
+        runId: null,
+        dispatchedAt: null,
+      };
+    }
     return {
       ...item,
       status: 'in-flight',
-      runId: dispatch.runId === null || dispatch.runId === undefined ? null : String(dispatch.runId),
+      runId: String(dispatch.runId),
       dispatchedAt: dispatch.dispatchedAt ?? now,
     };
   });
