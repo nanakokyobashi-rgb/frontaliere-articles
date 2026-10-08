@@ -12765,6 +12765,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incidente-via-albisetti.title': 'Tradate, Fußgänger angefahren: 58-jähriger Mann verletzt',
     'blog.article.incidente-via-albisetti.excerpt': '## Auf einen Blick - Ein 58-jähriger Mann in Tradate angefahren - Unfall kurz vor 20 Uhr in der Via Albisetti - Hilfe durch das Rote Kreuz von Busto und ein Notarztfahrzeug',
     'blog.article.incidente-via-albisetti.imageAlt': 'Stadtstraße in der Abenddämmerung, Symbolbild zum Unfallbericht aus Tradate',
+    'blog.article.mcdonalds-pulizia-malnate-2026.title': 'McDonald\'s räumt Malnate auf: 20 kg Abfall gesammelt',
+    'blog.article.mcdonalds-pulizia-malnate-2026.excerpt': '## Auf einen Blick - 16 Personen haben an der Säuberung von Malnate teilgenommen - 20 Kilo Abfall verschiedener Art gesammelt - Die Initiative fand am Montag, 5. Oktober, statt',
+    'blog.article.mcdonalds-pulizia-malnate-2026.imageAlt': 'Sauberer und revitalisierter Stadtbereich in einer Kleinstadt',
+    'blog.article.agrivarese-angera-ottobre-2026.title': 'Agrivarese kehrt nach Angera zurück: Landwirtschaftsmesse am 11. Oktober',
+    'blog.article.agrivarese-angera-ottobre-2026.excerpt': '## Auf einen Blick - Am Sonntag, dem 11. Oktober, kommt Agrivarese an die Uferpromenade von Angera - Die Veranstaltung ist von 9 bis 19 Uhr geöffnet - Auf dem Programm stehen mehr als 40 Unternehmen',
+    'blog.article.agrivarese-angera-ottobre-2026.imageAlt': 'Lokale landwirtschaftliche Marktstände am Seeufer von Angera während des Agrivarese-Events.',
+    'blog.article.festival-racconto-varese-ottobre.title': 'Erzählfestival: zwei Termine in Varese',
+    'blog.article.festival-racconto-varese-ottobre.excerpt': '## In Kürze - Zwei Kulturveranstaltungen in Varese am 9. und 11. Oktober - Dante im Mittelpunkt des Treffens am Freitag um 17:30 Uhr - Drei unveröffentlichte Geschichten von Carlo',
+    'blog.article.festival-racconto-varese-ottobre.imageAlt': 'Villa Recalcati in Varese beherbergt das Festival del Racconto',
 };
 
 export default blogMetaDe;
