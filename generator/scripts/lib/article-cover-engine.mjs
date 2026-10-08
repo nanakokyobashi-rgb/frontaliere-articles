@@ -84,7 +84,7 @@ export async function generateGovernedArticleHero({
         variant: 'article hero',
         title: articleData.title || articleData.content?.it?.title || articleData.content?.title,
         topic: articleImageTopic(articleData),
-        place: articleImagePlace(articleData),
+        place: articleImagePlace(articleData, area),
         keywords: articleImageKeywords(articleData),
       },
       {

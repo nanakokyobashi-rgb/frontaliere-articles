@@ -14,8 +14,10 @@ import {
 import {
   appendGeneratedImageRecord,
   imageRecordForPath,
+  readGeneratedImageRecords,
   sha256File,
 } from '../scripts/lib/blog-image-registry.mjs';
+import { buildSeoImageBlock } from '../scripts/lib/seo-entry-builder.mjs';
 import {
   GENERATED_IMAGE_CREDIT,
   GENERATED_IMAGE_LICENSE,
@@ -173,6 +175,39 @@ test('a licensed article hero writes the shared attribution ledger and resolves 
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('sostituire una foto licenziata con una cover generata rimuove il ledger obsoleto', () => {
+  const root = tempRoot();
+  try {
+    const licensed = licensedCatalogRecord();
+    appendGeneratedImageRecord(root, licensed);
+    const creditFile = path.join(root, 'content/image-credits/blog/licensed-cover-ledger-test.json');
+    assert.equal(fs.existsSync(creditFile), true);
+
+    const generated = generatedCatalogRecord();
+    generated.assetId = licensed.assetId;
+    generated.imageUrl = licensed.imageUrl;
+    appendGeneratedImageRecord(root, generated);
+
+    assert.equal(fs.existsSync(creditFile), false);
+    assert.equal(readGeneratedImageRecords(root).find((item) => item.assetId === licensed.assetId).provider, 'openai-codex');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il blocco SEO di una foto licenziata espone autore, licenza e sorgente', () => {
+  const record = licensedCatalogRecord();
+  const block = buildSeoImageBlock({
+    imagePath: record.imageUrl,
+    provenance: { kind: 'licensed-photo', record },
+    caption: 'Copertina fotografica',
+  });
+  assert.match(block, /"acquireLicensePage": "https:\/\/commons\.wikimedia\.org\/wiki\/File:Zurich_employment_office\.jpg"/);
+  assert.match(block, /"license": "https:\/\/creativecommons\.org\/licenses\/by-sa\/4\.0\/"/);
+  assert.match(block, /"creator": \{[^\n]*"name":"Ada Foto"/);
+  assert.match(block, /"isBasedOn": "https:\/\/commons\.wikimedia\.org\/wiki\/File:Zurich_employment_office\.jpg"/);
 });
 
 test('un catalogo valido ma non pertinente non diventa la copertina finale', () => {

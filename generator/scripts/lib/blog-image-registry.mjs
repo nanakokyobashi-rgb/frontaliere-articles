@@ -221,6 +221,13 @@ export function hasValidBlogImageRecord(root, imagePath) {
   return Boolean(imageRecordForPath(root, imagePath));
 }
 
+export function imageCreditFileForGeneratedImageRecord(root, record) {
+  if (!isLicensedPhotoRecord(record) || record.scope !== 'article-hero') return null;
+  const key = coverKey(record.imageUrl);
+  if (!key) throw new Error(`licensed article-hero record has no cover key: ${record.imageUrl}`);
+  return absolute(root, `${IMAGE_CREDITS_ROOT}/blog/${key}.json`);
+}
+
 export function appendGeneratedImageRecord(root, record) {
   const verdict = validateGeneratedImageRecord(record);
   if (!verdict.valid) throw new Error(`generated image record rejected: ${verdict.errors.join('; ')}`);
@@ -228,13 +235,18 @@ export function appendGeneratedImageRecord(root, record) {
     ? imageCreditRecordFromGeneratedImageRecord(record)
     : null;
   const assets = readGeneratedImageRecords(root);
+  const replaced = assets.filter((item) => item.assetId === record.assetId || item.imageUrl === record.imageUrl);
+  const staleCreditFiles = new Set(
+    replaced.map((item) => imageCreditFileForGeneratedImageRecord(root, item)).filter(Boolean),
+  );
+  const creditFile = photoCredit ? imageCreditFileForGeneratedImageRecord(root, record) : null;
   const next = assets.filter((item) => item.assetId !== record.assetId && item.imageUrl !== record.imageUrl);
   next.push(record);
   writeJsonAtomic(absolute(root, GENERATED_IMAGE_REGISTRY_REL), generatedEnvelope(next));
+  for (const staleCreditFile of staleCreditFiles) {
+    if (staleCreditFile !== creditFile) fs.rmSync(staleCreditFile, { force: true });
+  }
   if (photoCredit) {
-    const key = coverKey(photoCredit.cover);
-    if (!key) throw new Error(`licensed article-hero record has no cover key: ${photoCredit.cover}`);
-    const creditFile = absolute(root, `${IMAGE_CREDITS_ROOT}/blog/${key}.json`);
     fs.mkdirSync(path.dirname(creditFile), { recursive: true });
     writeJsonAtomic(creditFile, photoCredit);
   }
