@@ -289,7 +289,8 @@ jobs:
         run: |
           set -uo pipefail
           scan_mode="full"
-          files=""
+          changed_files_path="$RUNNER_TEMP/publish-api-changed-bodies.txt"
+          : > "$changed_files_path"
           # Le cartelle dei corpi vengono dal core delle sezioni (ATTIVE), non
           # da una coppia scritta qui: una sezione accesa nel core ha i suoi
           # corpi nel diff. Se l'elenco non e' derivabile si resta sulla
@@ -301,23 +302,20 @@ jobs:
              [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && \
              git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
             mapfile -t body_dir_list <<< "$body_dirs"
-            if diff_out=$(git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" 2>/dev/null); then
+            if git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" > "$changed_files_path" 2>/dev/null; then
               scan_mode="changed"
-              files="$diff_out"
             fi
           fi
           echo "scan-mode=$scan_mode" >> "$GITHUB_OUTPUT"
-          {
-            echo "changed-files<<PREFLIGHT_CHANGED_FILES_EOF"
-            echo "$files"
-            echo "PREFLIGHT_CHANGED_FILES_EOF"
-          } >> "$GITHUB_OUTPUT"
+          echo "changed-files-path=$changed_files_path" >> "$GITHUB_OUTPUT"
 
       - name: Preflight — i corpi articolo devono parsare come TypeScript
         env:
           PREFLIGHT_ESBUILD_DIR: ${{ runner.temp }}/preflight
           PREFLIGHT_SCAN_MODE: ${{ steps.changed-bodies.outputs.scan-mode }}
-          PREFLIGHT_CHANGED_FILES: ${{ steps.changed-bodies.outputs.changed-files }}
+          # Passa un path, non l'intero diff multilinea: con ~15k corpi il
+          # valore nell'env supera ARG_MAX prima ancora che Node possa partire.
+          PREFLIGHT_CHANGED_FILES_FILE: ${{ steps.changed-bodies.outputs.changed-files-path }}
           # Il floor storico deve coprire l'intero push, non il suo ultimo
           # commit intermedio. `workflow_dispatch` non ha una base e resta sul
           # fallback locale esplicito del modulo.

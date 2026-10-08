@@ -42,6 +42,7 @@ import {
   formatOffender,
   loadEsbuild,
   parseChangedFiles,
+  readChangedFiles,
   run,
 } from '../../scripts/ci/check-blog-body-syntax.mjs';
 import { floorPolicyOf, historyRevisionFromEnv } from '../../scripts/lib/corpus-floors.mjs';
@@ -545,6 +546,31 @@ test('parseChangedFiles scarta righe vuote, input assente => []', () => {
   );
 });
 
+test('readChangedFiles preferisce il file e non materializza il diff nell env', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-changed-files-'));
+  try {
+    const file = path.join(dir, 'changed.txt');
+    fs.writeFileSync(file, 'content/blog-body/it/uno.ts\n\ncontent/blog-body-ch/fr/due.ts\n');
+    assert.deepEqual(
+      readChangedFiles({
+        PREFLIGHT_CHANGED_FILES_FILE: file,
+        PREFLIGHT_CHANGED_FILES: 'content/blog-body/it/vecchio.ts',
+      }),
+      ['content/blog-body/it/uno.ts', 'content/blog-body-ch/fr/due.ts'],
+    );
+    assert.deepEqual(
+      readChangedFiles({ PREFLIGHT_CHANGED_FILES: 'content/blog-body/it/locale.ts\n' }),
+      ['content/blog-body/it/locale.ts'],
+    );
+    assert.throws(
+      () => readChangedFiles({ PREFLIGHT_CHANGED_FILES_FILE: path.join(dir, 'missing.txt') }),
+      /elenco dei corpi cambiati illeggibile/,
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('filesToScan: scanMode diverso da "changed" e\' SEMPRE scansione piena', () => {
   const perRoot = [
     { rel: 'content/blog-body', files: [path.join(ROOT, 'content/blog-body/it/a.ts')] },
@@ -714,8 +740,18 @@ test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicit
   );
   assert.match(
     src,
+    /PREFLIGHT_CHANGED_FILES_FILE:\s*\$\{\{\s*steps\.changed-bodies\.outputs\.changed-files-path\s*\}\}/,
+    'il preflight deve ricevere il file dei corpi cambiati, non un env multilinea che supera ARG_MAX',
+  );
+  assert.match(
+    src,
+    /changed_files_path=.*RUNNER_TEMP.*publish-api-changed-bodies\.txt/,
+    'lo step deve materializzare il diff in un file temporaneo',
+  );
+  assert.doesNotMatch(
+    src,
     /PREFLIGHT_CHANGED_FILES:\s*\$\{\{\s*steps\.changed-bodies\.outputs\.changed-files\s*\}\}/,
-    'il preflight non riceve la lista dei corpi cambiati calcolata dallo step precedente',
+    'il diff non deve essere iniettato come env multilinea: GitHub non riesce ad avviare il processo oltre ARG_MAX',
   );
   assert.match(
     src,

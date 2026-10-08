@@ -85,7 +85,11 @@
  * chiamante puo' calcolarli:
  *
  *   PREFLIGHT_SCAN_MODE=changed
- *   PREFLIGHT_CHANGED_FILES=<path relativi alla root, uno per riga>
+ *   PREFLIGHT_CHANGED_FILES_FILE=<file con path relativi alla root, uno per riga>
+ *
+ * `PREFLIGHT_CHANGED_FILES` resta supportata per l'uso locale e per la
+ * compatibilita' con invocazioni precedenti; il workflow passa il file perche'
+ * un env multilinea con migliaia di path supera ARG_MAX prima che Node parta.
  *
  * Con `PREFLIGHT_SCAN_MODE` assente o diverso da `changed`, o senza questa
  * variabile, la scansione e' PIENA (comportamento di default, sicuro). Il
@@ -250,9 +254,10 @@ export function floorViolations(
 }
 
 /**
- * Legge `PREFLIGHT_CHANGED_FILES`: un path relativo alla root per riga (l'output
- * di `git diff --name-only`, passato attraverso l'output multi-riga di un job
- * GitHub Actions). Righe vuote scartate. Nessuna validazione di esistenza qui:
+ * Legge il file indicato da `PREFLIGHT_CHANGED_FILES_FILE` (un path relativo alla
+ * root per riga, output di `git diff --name-only`). Righe vuote scartate. La
+ * variabile multilinea `PREFLIGHT_CHANGED_FILES` resta un fallback locale.
+ * Nessuna validazione di esistenza qui:
  * un path che non compare fra i file raccolti da `collectTypeScriptFiles`
  * (cancellato, o fuori da BLOG_BODY_ROOTS) semplicemente non finisce in
  * `filesToScan`.
@@ -263,6 +268,23 @@ export function parseChangedFiles(raw) {
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
+}
+
+/**
+ * Legge l'elenco dal file usato in CI. Un file dichiarato ma illeggibile e'
+ * un errore del cablaggio, non una lista vuota: il chiamante deve fallire
+ * chiuso invece di saltare i corpi cambiati.
+ */
+export function readChangedFiles(env = process.env) {
+  const file = String(env.PREFLIGHT_CHANGED_FILES_FILE || '').trim();
+  if (!file) return parseChangedFiles(env.PREFLIGHT_CHANGED_FILES);
+  let raw;
+  try {
+    raw = fs.readFileSync(file, 'utf8');
+  } catch (error) {
+    throw new Error(`elenco dei corpi cambiati illeggibile (${file}): ${error?.message || String(error)}`);
+  }
+  return parseChangedFiles(raw);
 }
 
 /**
@@ -368,7 +390,15 @@ export async function run({
   }
 
   const scanMode = env.PREFLIGHT_SCAN_MODE === 'changed' ? 'changed' : 'full';
-  const changedFiles = scanMode === 'changed' ? parseChangedFiles(env.PREFLIGHT_CHANGED_FILES) : [];
+  let changedFiles = [];
+  if (scanMode === 'changed') {
+    try {
+      changedFiles = readChangedFiles(env);
+    } catch (err) {
+      error(`::error::preflight blog-body — ${err?.message || String(err)}`);
+      return 1;
+    }
+  }
   const files = filesToScan(perRoot, { scanMode, changedFiles });
 
   if (scanMode === 'changed') {
