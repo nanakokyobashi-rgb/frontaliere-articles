@@ -43114,6 +43114,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bellinzona-nord-svincolo',
+ category: 'pratico',
+ date: '2026-10-08T10:36:56.122Z',
+ image: '/images/blog/centro-ovale-chiasso-nuova-proprieta.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
