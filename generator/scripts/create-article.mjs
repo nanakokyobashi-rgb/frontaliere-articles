@@ -7789,6 +7789,8 @@ let lastSourcePageTitle = '';
 let pendingCantonSourceContent = '';
 let pendingCantonSourcePublishedAt = '';
 let pendingCantonSourceTitle = '';
+let pendingCantonSourceLead = '';
+let pendingCantonSourcePaywall = '';
 
 // Le fonti delle sezioni storiche continuano a usare il comportamento
 // precedente. Per le sezioni cantonali la pagina dell'articolo deve dichiarare
@@ -7810,9 +7812,13 @@ async function fetchPageContent(url) {
   const suppliedCantonSourceContent = pendingCantonSourceContent;
   const suppliedCantonSourcePublishedAt = pendingCantonSourcePublishedAt;
   const suppliedCantonSourceTitle = pendingCantonSourceTitle;
+  const suppliedCantonSourceLead = pendingCantonSourceLead;
+  const suppliedCantonSourcePaywall = pendingCantonSourcePaywall;
   pendingCantonSourceContent = '';
   pendingCantonSourcePublishedAt = '';
   pendingCantonSourceTitle = '';
+  pendingCantonSourceLead = '';
+  pendingCantonSourcePaywall = '';
 
   // Handle BFS stats-update articles — no web page to scrape, build the
   // prompt from Firestore numbers written by refresh-bfs-stats.
@@ -7861,6 +7867,21 @@ async function fetchPageContent(url) {
       ? 'Usa solo fatti verificati e stabili sul dominio frontalieri Ticino-Italia.'
       : 'Usa solo fatti verificati e stabili sul dominio svizzero a scala nazionale/cantonale (fiscalità, previdenza, lavoro, alloggio, permessi, istituzioni federali). NON restringere al Ticino né al caso frontaliere.';
     return `[ARTICOLO EVERGREEN SEO]\nKeyword target: ${keyword}\nAngolo editoriale: ${angle}\n\nGenera un articolo approfondito e pratico ottimizzato per questa keyword long-tail. ${domainLine} Se servono esempi, presentali come scenari ipotetici, senza nomi, aziende, città o importi specifici inventati.\n\n${evergreenFactsBriefFor(SECTION_NAME)}\n\n⚠️ I FATTI VERIFICATI qui sopra DEVONO corrispondere ESATTAMENTE (lo stesso ground truth è usato dal fact-checker, che blocca l'articolo se diverghi). Per dettagli NON coperti, attieniti a nozioni stabili e generali del dominio; se un dato specifico non è certo, ometti o usa formulazioni qualitative invece di inventare cifre/date precise.`;
+  }
+  // Un quirk `paywall: title+lead` è un contratto di contenuto pubblico: il
+  // titolo e l'attacco già letto dalla lista bastano come segnale editoriale,
+  // ma il crawler non deve seguire il link premium né tentare di aggirarlo.
+  if (suppliedCantonSourcePaywall === 'title+lead') {
+    lastSourcePublishedAt = suppliedCantonSourcePublishedAt;
+    lastSourcePageTitle = suppliedCantonSourceTitle;
+    const lead = suppliedCantonSourceLead.trim();
+    console.error(`🔒 Fonte paywall: uso solo titolo${lead ? ' + lead pubblico' : ''}; nessun fetch dell'articolo premium`);
+    return [
+      '[FONTE PUBBLICA PARZIALE — PAYWALL]',
+      suppliedCantonSourceTitle ? `Titolo: ${suppliedCantonSourceTitle}` : '',
+      lead ? `Lead pubblico: ${lead}` : '',
+      'Il corpo completo non è accessibile pubblicamente e non viene usato.',
+    ].filter(Boolean).join('\n');
   }
   // Orphan-query candidates carry a site-relative path (GSC topLandingPage
   // is stored path-only by design, see gscFetcher.mjs:231) — fetch() has no
@@ -8415,6 +8436,52 @@ function isHeadlineCardNode(node) {
   return node.name === 'article' || node.name === 'li' || headlineNodeHasHint(node);
 }
 
+function headlineStackHasPaywall(stack) {
+  return stack.some((node) => {
+    const className = headlineAttributeValue(node.attrs, 'class');
+    return /(?:^|[\s_-])paywall(?:$|[\s_-])/i.test(className)
+      || /\bdata-paywall(?:-[\w-]+)?(?![\w-])(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/i.test(node.attrs || '');
+  });
+}
+
+/** Legge solo il teaser pubblico dichiarato dalla card, mai il dettaglio. */
+function publicCardLead(html, linkStart, quirks) {
+  const mode = quirks?.extractCardLead;
+  if (!mode) return '';
+  const stack = headlineAncestorStack(html, linkStart);
+  const cards = stack.filter(isHeadlineCardNode).reverse();
+  for (const card of cards) {
+    const range = headlineElementEnd(html, card);
+    const inner = html.slice(card.openEnd, range.start);
+    if (mode === 'media-title') {
+      const imageRe = /<(?:img|source)\b[^>]*>/gi;
+      let image;
+      while ((image = imageRe.exec(inner)) !== null) {
+        const title = headlineTextFromMarkup(headlineAttributeValue(image[0], 'title'));
+        if (title && title.length <= 1200) return title;
+      }
+    }
+    if (mode === 'text') {
+      const paragraphRe = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
+      let paragraph;
+      while ((paragraph = paragraphRe.exec(inner)) !== null) {
+        const text = headlineTextFromMarkup(paragraph[1]);
+        if (text.length >= 20) return text.slice(0, 600);
+      }
+      const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
+      while ((paragraph = hintedRe.exec(inner)) !== null) {
+        const attrs = paragraph[2] || '';
+        if (!/(?:lead|teaser|description|summary|abstract)/i.test(
+          headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id'),
+        )) continue;
+        const text = headlineTextFromMarkup(paragraph[3]);
+        if (text.length >= 20) return text.slice(0, 600);
+      }
+    }
+  }
+  return '';
+}
+
 function headlineStackHasNavigation(stack) {
   const sectioning = new Set(['article', 'main', 'section']);
   let nearestSectioning = -1;
@@ -8505,10 +8572,14 @@ function extractHeadlines(html, baseUrl) {
   const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let m;
   while ((m = linkRe.exec(html)) !== null) {
-    let href = m[1];
-    let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const ancestors = headlineAncestorStack(html, m.index);
     const anchorTagEnd = m[0].indexOf('>');
     const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+    const anchorAttrs = anchorTag.replace(/^<a\b/i, '').replace(/>\s*$/, '');
+    if (source?.quirks?.excludePaywalledCards
+      && headlineStackHasPaywall([...ancestors, { name: 'a', attrs: anchorAttrs }])) continue;
+    let href = m[1];
+    let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
     if (configuredHeadline) text = configuredHeadline;
     // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every
@@ -8537,7 +8608,8 @@ function extractHeadlines(html, baseUrl) {
       || htmlDateMap.get(href)
       || embeddedDateMap.get(embeddedHeadlineDateKey(text))
       || null;
-    results.push({ url: href, headline: text, date });
+    const lead = publicCardLead(html, m.index, source?.quirks);
+    results.push({ url: href, headline: text, date, ...(lead ? { lead } : {}) });
   }
   // Deduplicate by URL
   const seen = new Set();
@@ -8736,6 +8808,8 @@ async function fetchCantonSourceHeadlines(source, domain) {
     ...h,
     _cantonSourceUrl: source.url,
     ...(h.sourceContent ? { _cantonSourceContent: h.sourceContent } : {}),
+    ...(h.lead ? { _cantonSourceLead: h.lead } : {}),
+    ...(h._paywall ? { _cantonSourcePaywall: h._paywall } : {}),
   }));
 }
 
@@ -16923,6 +16997,12 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     ? sourceContext.date.toISOString()
     : '';
   pendingCantonSourceTitle = typeof sourceContext?.headline === 'string' ? sourceContext.headline : '';
+  pendingCantonSourceLead = typeof sourceContext?._cantonSourceLead === 'string'
+    ? sourceContext._cantonSourceLead
+    : '';
+  pendingCantonSourcePaywall = sourceContext?._cantonSourcePaywall === 'title+lead'
+    ? sourceContext._cantonSourcePaywall
+    : '';
   const pageContent = await fetchPageContent(url);
 
   // Step 1a: su un URL riusato la pagina deve essere ancora QUESTO item.
