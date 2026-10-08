@@ -9,6 +9,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.accordo-cure-oncologiche-ginevra.title': 'Geneva-France agreement for pediatric oncology care',
     'blog.article.accordo-cure-oncologiche-ginevra.excerpt': '',
     'blog.article.accordo-cure-oncologiche-ginevra.imageAlt': 'Cross-border agreement for pediatric oncology care in Geneva',
+    'blog.article.salario-minimo-ginevra-2027.title': 'Geneva: minimum wage at 24,73 CHF per hour from 2027',
+    'blog.article.salario-minimo-ginevra-2027.excerpt': 'From January 1, 2027, the minimum wage rises to 24,73 CHF per hour Agriculture and floriculture: 18,17 CHF per hour Annual indexation follows the cost of living',
+    'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Payroll document and calculator on a desk in Geneva',
 };
 
 export default blogMetaCantonGeEn;

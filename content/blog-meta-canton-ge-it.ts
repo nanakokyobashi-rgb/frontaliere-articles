@@ -9,6 +9,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.accordo-cure-oncologiche-ginevra.title': 'Accordo Ginevra-Francia per cure oncologiche pediatriche',
     'blog.article.accordo-cure-oncologiche-ginevra.excerpt': 'Accordo tra autorità ginevrine e francesi',
     'blog.article.accordo-cure-oncologiche-ginevra.imageAlt': 'Accordo transfrontaliero per cure oncologiche pediatriche a Ginevra',
+    'blog.article.salario-minimo-ginevra-2027.title': 'Ginevra: salario minimo a 24,73 CHF l\'ora dal 2027',
+    'blog.article.salario-minimo-ginevra-2027.excerpt': 'Dal 1° gennaio 2027 il minimo sale a 24,73 CHF l\'ora Agricoltura e floricoltura: 18,17 CHF l\'ora L\'indicizzazione annuale segue il costo della vita Il minimo',
+    'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Documento di paga e calcolatrice su una scrivania a Ginevra',
 };
 
 export default blogMetaCantonGeIt;

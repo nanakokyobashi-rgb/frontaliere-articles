@@ -9,6 +9,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.accordo-cure-oncologiche-ginevra.title': 'Vereinbarung Genf-Frankreich über die pädiatrische onkologische Versorgung',
     'blog.article.accordo-cure-oncologiche-ginevra.excerpt': '',
     'blog.article.accordo-cure-oncologiche-ginevra.imageAlt': 'Grenzüberschreitende Vereinbarung für Kinderkrebsversorgung in Genf',
+    'blog.article.salario-minimo-ginevra-2027.title': 'Genf: Mindestlohn ab 2027 bei 24,73 CHF pro Stunde',
+    'blog.article.salario-minimo-ginevra-2027.excerpt': 'Ab dem 1. Januar 2027 steigt der Mindestlohn auf 24,73 CHF pro Stunde Landwirtschaft und Gartenbau: 18,17 CHF pro Stunde Die jährliche Indexierung folgt',
+    'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Lohnabrechnung und Taschenrechner auf einem Schreibtisch in Genf',
 };
 
 export default blogMetaCantonGeDe;

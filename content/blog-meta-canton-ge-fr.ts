@@ -9,6 +9,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.accordo-cure-oncologiche-ginevra.title': 'Accord Genève-France pour les soins oncologiques pédiatriques',
     'blog.article.accordo-cure-oncologiche-ginevra.excerpt': 'Accord entre les autorités genevoises et françaises',
     'blog.article.accordo-cure-oncologiche-ginevra.imageAlt': 'Accord transfrontalier pour les soins oncologiques pédiatriques à Genève',
+    'blog.article.salario-minimo-ginevra-2027.title': 'Genève : salaire minimum à 24,73 CHF l\'heure dès 2027',
+    'blog.article.salario-minimo-ginevra-2027.excerpt': 'À partir du 1er janvier 2027, le minimum passe à 24,73 CHF l\'heure Agriculture et floriculture : 18,17 CHF l\'heure L\'indexation annuelle suit le coût de la vie',
+    'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Fiche de paie et calculatrice sur un bureau à Genève',
 };
 
 export default blogMetaCantonGeFr;

@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'salario-minimo-ginevra-2027',
+ category: 'pratico',
+ date: '2026-10-08T15:29:49.217Z',
+ image: '/images/blog/article-salario-minimo-ginevra-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
