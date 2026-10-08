@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4063827": {
-    "articleId": "fondazione-beloved-primi-versamenti",
-    "ts": "2026-09-07T05:34:08.111Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/7nsivjh5sfhl": {
     "articleId": "ddps-thun-difesa-innovazione",
     "ts": "2026-09-07T07:16:24.359Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/forniture-di-cemento-in-lieve-aumento-nel-terzo-trimestre/92188621": {
     "articleId": "forniture-cemento-aumento-terzo-trimestre",
     "ts": "2026-10-08T17:40:48.718Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1955632/montblanc-richemont-crisi-orologi-industria": {
+    "articleId": "richemont-montblanc-tagli",
+    "ts": "2026-10-08T18:19:40.015Z",
     "keyForm": 2
   }
 }

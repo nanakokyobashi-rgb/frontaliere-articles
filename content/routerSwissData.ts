@@ -2668,6 +2668,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fibra-ottica-limiti-2028': { it: 'fibra-ottica-limiti-2028', en: 'swisscom-fiber-limits-2028', de: 'swisscom-glasfaser-limits-2028', fr: 'limites-fibre-swisscom-2028' },
  'frankencoin-kraken-zchf': { it: 'frankencoin-kraken-zchf', en: 'frankencoin-kraken-chf', de: 'frankencoin-kraken-schweizer-franken', fr: 'frankencoin-kraken-franc-suisse' },
  'forniture-cemento-aumento-terzo-trimestre': { it: 'forniture-cemento-aumento-terzo-trimestre', en: 'cement-supplies-slightly-up-in-the-third-quarter', de: 'zementlieferungen-im-dritten-quartal-leicht-gestiegen', fr: 'livraisons-de-ciment-en-legere-hausse-au-troisieme-trimestre' },
+ 'richemont-montblanc-tagli': { it: 'richemont-montblanc-tagli', en: 'richemont-montblanc-cuts', de: 'richemont-montblanc-stellenabbau', fr: 'richemont-montblanc-licenciements' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

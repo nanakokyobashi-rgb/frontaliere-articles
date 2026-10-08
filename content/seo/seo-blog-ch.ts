@@ -100057,6 +100057,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-richemont-montblanc-tagli': {
+    title: 'Richemont: a Montblanc 17 trasferimenti e 6 licenziamenti',
+    description: 'Richemont trasferisce 17 dipendenti di Montblanc Sei collaboratori sono stati licenziati Unia segnala la crisi dell\'industria orologiera Termine Valore Azienda',
+    keywords: 'frontalieri, ticino, svizzera, italia, richemont, montblanc, trasferimenti, licenziamenti',
+    ogTitle: 'Montblanc a Le Locle: 17 trasferimenti e 6 licenziamenti',
+    ogDescription: 'Richemont trasferisce 17 dipendenti di Montblanc Sei collaboratori sono stati licenziati Unia segnala la crisi dell\'industria orologiera Termine Valore Azienda',
+    canonicalPath: '/articoli-svizzera/richemont-montblanc-tagli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Richemont: a Montblanc 17 trasferimenti e 6 licenziamenti",
+      "description": "Richemont trasferisce 17 dipendenti di Montblanc Sei collaboratori sono stati licenziati Unia segnala la crisi dell'industria orologiera Termine Valore Azienda",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Atelier di orologeria a Le Locle nel quadro della crisi del settore"
+      },
+      "datePublished": "2026-10-08T18:19:39+00:00",
+      "dateModified": "2026-10-08T18:19:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/richemont-montblanc-tagli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
