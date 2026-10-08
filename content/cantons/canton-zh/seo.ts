@@ -75,6 +75,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sbb-flotta-zurigo-500m': {
+    title: 'SBB: 500 milioni per la flotta di Zurigo | Frontaliere Ticino',
+    description: 'Le SBB investono 500 milioni di franchi per rinnovare la flotta della S-Bahn di Zurigo: migliore ricezione mobile e nuove imbottiture sui treni zurighesi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, milioni, flotta, zurigo, investono',
+    ogTitle: 'Flotta S-Bahn di Zurigo: investimento SBB da 500 milioni',
+    ogDescription: 'La modernizzazione riguarda la flotta della S-Bahn di Zurigo. Il piano SBB vale 500 milioni di franchi e comprende due interventi indicati nel titolo: una ricezione del cellulare migliore e nuove imbottiture per i treni.',
+    canonicalPath: '/articoli-zurigo/sbb-flotta-zurigo-500m/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SBB: 500 milioni per la flotta di Zurigo",
+      "description": "Le SBB investono 500 milioni di franchi per rinnovare la flotta della S-Bahn di Zurigo: migliore ricezione mobile e nuove imbottiture sui treni zurighesi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sbb-flotta-zurigo-500m.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno della S-Bahn di Zurigo, tema del rinnovo della flotta SBB"
+      },
+      "datePublished": "2026-10-08T17:26:18+00:00",
+      "dateModified": "2026-10-08T17:26:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/sbb-flotta-zurigo-500m/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

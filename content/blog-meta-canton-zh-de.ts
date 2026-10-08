@@ -9,6 +9,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.mappa-affitti-zurigo-trasloco.title': 'Mieten in Zürich: der Mietzinsanstieg nach dem Umzug',
     'blog.article.mappa-affitti-zurigo-trasloco.excerpt': 'Eine interaktive Karte zeigt den Mietzinsanstieg in Zürich für Personen, die umziehen, und hilft dabei, die Mietkosten nach dem Umzug zu vergleichen.',
     'blog.article.mappa-affitti-zurigo-trasloco.imageAlt': 'Wohnhäuser in Zürich zum Vergleich der Mieten bei einem Umzug',
+    'blog.article.sbb-flotta-zurigo-500m.title': 'SBB: 500 Millionen für die Zürcher Flotte',
+    'blog.article.sbb-flotta-zurigo-500m.excerpt': 'Die SBB investieren 500 Millionen Franken, um die Flotte der Zürcher S-Bahn zu erneuern: besserer Mobilfunkempfang und neue Polsterungen in den Zürcher Zügen.',
+    'blog.article.sbb-flotta-zurigo-500m.imageAlt': 'S-Bahn-Zug in Zürich zum Thema der SBB-Flottenerneuerung',
 };
 
 export default blogMetaCantonZhDe;

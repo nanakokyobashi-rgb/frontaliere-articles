@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sbb-flotta-zurigo-500m',
+ category: 'novita',
+ date: '2026-10-08T17:26:18.316Z',
+ image: '/images/blog/article-sbb-flotta-zurigo-500m.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

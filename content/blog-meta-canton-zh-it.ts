@@ -9,6 +9,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.mappa-affitti-zurigo-trasloco.title': 'Affitti a Zurigo: il rincaro dopo il trasloco',
     'blog.article.mappa-affitti-zurigo-trasloco.excerpt': 'Una mappa interattiva mostra il rincaro della pigione a Zurigo per chi cambia casa e aiuta a confrontare il costo dell\'affitto dopo il trasloco.',
     'blog.article.mappa-affitti-zurigo-trasloco.imageAlt': 'Palazzi residenziali a Zurigo, tema del confronto tra affitti e traslochi',
+    'blog.article.sbb-flotta-zurigo-500m.title': 'SBB: 500 milioni per la flotta di Zurigo',
+    'blog.article.sbb-flotta-zurigo-500m.excerpt': 'Le SBB investono 500 milioni di franchi per rinnovare la flotta della S-Bahn di Zurigo: migliore ricezione mobile e nuove imbottiture sui treni zurighesi.',
+    'blog.article.sbb-flotta-zurigo-500m.imageAlt': 'Treno della S-Bahn di Zurigo, tema del rinnovo della flotta SBB',
 };
 
 export default blogMetaCantonZhIt;
