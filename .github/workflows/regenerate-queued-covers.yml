@@ -104,27 +104,42 @@ jobs:
         run: |
           set -euo pipefail
           echo "publish_ready=false" >> "$GITHUB_OUTPUT"
+          expected_queue="$RUNNER_TEMP/queued-cover-expected-queue.json"
 
           verify_pushed_queue() {
-            local internal actual verified
+            local internal expected_count actual expected_ids actual_ids missing verified pushed_queue
             if [ ! -s "$SUMMARY_FILE" ]; then
-              echo "::error::queued-cover summary is missing; cannot verify the pushed queue count"
+              echo "::error::queued-cover summary is missing; cannot verify the pushed queue"
+              return 1
+            fi
+            if [ ! -s "$expected_queue" ]; then
+              echo "::error::queued-cover expected queue snapshot is missing; cannot verify the pushed queue"
               return 1
             fi
             internal="$(jq -er '.residual // error("missing residual")' "$SUMMARY_FILE")"
-            actual="$(git show HEAD:data/image-regeneration-queue.json | jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid queue") end')"
+            expected_count="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid expected queue") end' "$expected_queue")"
+            expected_ids="$(jq -er 'if .schema == 1 and (.items | type == "array") then [.items[] | .articleId | tostring] | unique else error("invalid expected queue") end' "$expected_queue")"
+            if [ "$internal" -ne "$expected_count" ]; then
+              echo "::error::queued-cover summary diverged before push: drainer=$internal, snapshot=$expected_count"
+              return 1
+            fi
+            pushed_queue="$(git show HEAD:data/image-regeneration-queue.json)"
+            actual="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid queue") end' <<< "$pushed_queue")"
+            actual_ids="$(jq -er 'if .schema == 1 and (.items | type == "array") then [.items[] | .articleId | tostring] | unique else error("invalid queue") end' <<< "$pushed_queue")"
+            missing="$(jq -ner --argjson expected "$expected_ids" --argjson actual "$actual_ids" '$expected - $actual')"
             verified="${SUMMARY_FILE}.verified"
-            jq --argjson internal "$internal" --argjson actual "$actual" \
-              '.residualInternal = $internal | .residual = $actual | .residualSource = "pushed-branch"' \
+            jq --argjson internal "$internal" --argjson actual "$actual" --argjson missing "$missing" \
+              '.residualInternal = $internal | .residual = $actual | .residualMissing = $missing | .residualSource = "pushed-branch"' \
               "$SUMMARY_FILE" > "$verified"
             mv "$verified" "$SUMMARY_FILE"
-            if [ "$actual" -ne "$internal" ]; then
-              echo "::error::queued-cover queue count diverged after push: drainer=$internal, pushed branch=$actual"
+            if [ "$missing" != '[]' ]; then
+              echo "::error::queued-cover queue items lost after push: $missing"
               return 1
             fi
           }
 
           git add -A
+          cp data/image-regeneration-queue.json "$expected_queue"
           if git diff --cached --quiet; then
             if [ -s data/image-regeneration-publish-outbox.json ]; then
               echo "no corpus changes; retrying the durable publisher outbox"

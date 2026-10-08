@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { appendGeneratedImageRecord, imageRecordForPath, readGeneratedImageRecords } from './lib/blog-image-registry.mjs';
 import { articleHeroImagePath, articleImageAssetId } from './lib/article-cover-identity.mjs';
+import { webpDimensions } from './lib/commons-credit.mjs';
 import {
   locateArticleRegistry,
   locateArticleSeoImage,
@@ -152,6 +153,20 @@ function thumbnailFileForRecord(root, record) {
   return path.join(path.dirname(imageFile), 'thumbnails', `${stem}-480w.webp`);
 }
 
+function hasValidThumbnail(root, record) {
+  const thumbnail = thumbnailFileForRecord(root, record);
+  try {
+    const stat = fs.lstatSync(thumbnail);
+    if (!stat.isFile()) return false;
+    const dimensions = webpDimensions(fs.readFileSync(thumbnail));
+    return dimensions?.width === 480
+      && dimensions.height > 0
+      && dimensions.height <= 480;
+  } catch {
+    return false;
+  }
+}
+
 function existingRecordForArticle(root, articleId) {
   const assetId = articleImageAssetId(articleId);
   let records;
@@ -174,6 +189,7 @@ function alreadySatisfiedCover(root, item, registryFiles) {
     const location = locateArticleRegistry(root, item.articleId, { registryFiles });
     const record = existingRecordForArticle(root, item.articleId);
     if (!record || location.previousImage !== record.imageUrl) return false;
+    if (!hasValidThumbnail(root, record)) return false;
     const section = sectionForRegistry(location);
     const seo = locateArticleSeoImage(root, item.articleId, { section });
     return seo.previousImage === record.imageUrl;
@@ -241,8 +257,8 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   const seoLocation = locateArticleSeoImage(root, item.articleId, { section });
   trackFile(snapshots, absolute(root, seoLocation.path));
 
-  if (!fs.existsSync(thumbnail)) await generateThumbnail(destination, { root, item, record });
-  if (!fs.existsSync(thumbnail)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
+  if (!hasValidThumbnail(root, record)) await generateThumbnail(destination, { root, item, record });
+  if (!hasValidThumbnail(root, record)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
 
   const currentImage = location.previousImage;
   if (currentImage !== record.imageUrl) {
