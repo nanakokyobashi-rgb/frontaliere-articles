@@ -64,7 +64,7 @@ import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
 import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
-import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline, rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
+import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline as defaultRenderSectionArticlePipeline, rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
 import { CANTON_HUB_LOCALES, cantonHubDataFile, cantonHubTopics, readCantonHubData } from './lib/canton-hub-data.mjs';
 import { sourceRegistryIds } from './lib/corpus-floors.mjs';
 import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
@@ -903,7 +903,7 @@ export async function main(
     fetchPageManifestImpl = fetchPageManifest,
     publishedStatusImpl = publishedStatus,
     createRenderRootImpl = createRenderRoot,
-    renderSectionArticlePipelineImpl = renderSectionArticlePipeline,
+    renderSectionArticlePipelineImpl = defaultRenderSectionArticlePipeline,
     articleReleaseSnapshotImpl = articleReleaseSnapshot,
     publishImpl = publish,
     publishPageManifestImpl = publishPageManifest,
@@ -948,6 +948,7 @@ export async function main(
 
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
+  const renderSectionArticlePipeline = renderSectionArticlePipelineImpl;
   const renderRoot = createRenderRootImpl(ROOT_DIR, process.env.RUNNER_TEMP || os.tmpdir());
   const {
     entries,
@@ -956,7 +957,7 @@ export async function main(
     imageFetchFailures,
     imagePostcondition,
     aggregatePagesAllowed,
-  } = await renderSectionArticlePipelineImpl({
+  } = await renderSectionArticlePipeline({
     rootDir: renderRoot,
     distDir,
     section,
