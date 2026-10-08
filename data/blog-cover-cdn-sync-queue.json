@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-neuchatel-referendum-salari-minimi.webp",
-      "sha256": "fd55ee0d9d4b240e0bd56533975aad81564a690c2d8460c085eaca55fff22db7"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-neuchatel-referendum-salari-minimi-480w.webp",
-      "sha256": "1be023bafd8ef2b75dcd443dcd38900d4085cb84e8d34c311fb1634875a7b818"
-    }
-  ]
+  "items": []
 }
