@@ -43095,7 +43095,7 @@ const RAW_ARTICLES = [
  {
  id: 'bally-caslano-moratoria-tagli',
  category: 'novita',
- date: '2026-10-08T08:27:01.797Z',
+ date: '2026-10-08T08:40:15.825Z',
  image: '/images/blog/article-bally-caslano-moratoria-tagli.webp',
  hasCalculator: true,
  articleType: 'news',

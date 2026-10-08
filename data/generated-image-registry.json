@@ -4091,17 +4091,17 @@
       "model": "gpt-image-2.5",
       "executorModel": "gpt-5.6-luna",
       "promptVersion": "frontaliereticino.generated-image-policy.v1",
-      "promptHash": "add2b7a401f59a659babf446ce4acbe5b24315cda1646114ace17edc4aa78c93",
+      "promptHash": "7d7c1bcfe8093da38cb3a6782c8a22d83ae7f9462c1525d72a4e3f7f9139e5dc",
       "license": "generated-provider",
       "licenseUrl": "https://openai.com/policies/terms-of-use/",
       "credit": "frontaliereticino.ch",
-      "sha256": "8fc49ae2e4a8ab9f89bfe756dfaee8099119dcc8c1d2691fde1a64a25d8ec476",
-      "bytes": 155534,
+      "sha256": "67a2e1a734f6c9564f6124288372d2e484c95b467db64ea605719b2323023291",
+      "bytes": 129974,
       "width": 1200,
       "height": 675,
       "format": "webp",
-      "generatedAt": "2026-10-08T08:26:56.004Z",
-      "verifiedAt": "2026-10-08T08:27:01.552Z",
+      "generatedAt": "2026-10-08T08:40:10.046Z",
+      "verifiedAt": "2026-10-08T08:40:15.410Z",
       "restrictions": [
         "illustrative-only",
         "no-real-recognizable-foreground-person",
@@ -4121,7 +4121,7 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "is_photograph": false,
-        "notes": "Original generic illustrative editorial scene with no readable text, logos, recognizable faces, or specific real event."
+        "notes": "Original generic architectural illustration with no text, logos, recognizable faces, or specific real event."
       }
     },
     {
