@@ -56,7 +56,7 @@
  */
 
 import '../host/cantonSectionsBootstrap.mjs';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -699,7 +699,15 @@ async function main(argv) {
   return problems.length > 0 ? 1 : 0;
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main(process.argv.slice(2)).then((code) => { process.exitCode = code; }, (error) => {
     console.error(`[backfill] ${error instanceof Error ? error.stack : String(error)}`);
     process.exitCode = 1;

@@ -2658,6 +2658,12 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'imposta-autoveicoli-lucerna-calcolo': { it: 'imposta-autoveicoli-lucerna-calcolo', en: 'lucerne-vehicle-tax-calculation', de: 'luzern-motorfahrzeugsteuer-berechnung', fr: 'lucerne-impot-vehicules-calcul' },
  'incentivi-energetici-lucerna-requisiti': { it: 'incentivi-energetici-lucerna-requisiti', en: 'energy-incentives-lucerne-requirements', de: 'energiefoerderung-luzern-anforderungen', fr: 'subventions-energetiques-lucerne-exigences' },
  'violazione-dati-publica-indagine': { it: 'violazione-dati-publica-indagine', en: 'publica-data-breach-investigation', de: 'publica-datenleck-ermittlung', fr: 'fuite-donnees-publica-enquete' },
+ 'crescita-lavoro-intelligenza-artificiale': { it: 'crescita-lavoro-intelligenza-artificiale', en: 'ai-jobs-market-growth-switzerland', de: 'ki-arbeitsmarkt-wachstum-schweiz', fr: 'croissance-emploi-ia-suisse' },
+ 'mercato-lavoro-ia-svizzera': { it: 'mercato-lavoro-ia-svizzera', en: 'swiss-ai-job-market', de: 'schweizer-ki-arbeitsmarkt', fr: 'marche-travail-ia-suisse' },
+ 'raiffeisen-pil-inflazione-2026': { it: 'raiffeisen-pil-inflazione-2026', en: 'raiffeisen-gdp-at-1-7-in-2026-inflation-at-0-7', de: 'raiffeisen-bip-2026-bei-1-7-inflation-bei-0-7', fr: 'raiffeisen-pib-2026-a-1-7-inflation-a-0-7' },
+ 'svizzera-leader-nella-robotica-217-aziende-e-7-000-posti': { it: 'svizzera-leader-nella-robotica-217-aziende-e-7-000-posti', en: 'switzerland-leads-in-robotics-217-companies-and-7-000-jobs', de: 'schweiz-fuhrend-in-der-robotik-217-unternehmen-und-7-000-arbeitsplatze', fr: 'la-suisse-leader-de-la-robotique-217-entreprises-et-7-000-emplois' },
+ 'salari-svizzera-talenti-stranieri': { it: 'salari-svizzera-talenti-stranieri', en: 'switzerland-salaries-foreign-talents', de: 'schweiz-gehaelter-auslaendische-talente', fr: 'suisse-salaires-talents-etrangers' },
+ 'tf-nega-sconto-cassa-malati-padre-affidamento-alternato': { it: 'tf-nega-sconto-cassa-malati-padre-affidamento-alternato', en: 'tf-denies-health-insurance-discount-to-father-with-alternating-custody', de: 'bger-verweigert-krankenkassenabzug-bei-alternierender-obhut-des-vaters', fr: 'tf-deduction-des-primes-maladie-refusee-en-garde-alternee' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

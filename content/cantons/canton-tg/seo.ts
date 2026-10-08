@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A Frauenfeld il Baugesuch per Juchstrasse 22, 22a e 22b è consultabile al Bankplatz 3 dal 7 al 26 ottobre 2026. Opposizioni scritte motivate allo Stadtrat.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/calcolatore-salariale-edilizia-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-baugesuch-juchstrasse-frauenfeld.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Edificio commerciale e strada urbana a Frauenfeld, tema di una domanda edilizia pubblica"
@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "La pagina di Spital Thurgau AG raccoglie il rapporto 2025 di thurmed, il rapporto di sostenibilità e le statistiche 2021-2025: ecco la struttura dell'archivio.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/aiuti-malattie-rare-2025.webp`,
+        "url": `${BASE_URL}/images/blog/article-rapporti-thurmed-turgovia.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Edificio ospedaliero nel Canton Turgovia per i rapporti thurmed e Spital Thurgau AG"
@@ -71,6 +71,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/rapporti-thurmed-turgovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-chiusura-strada-kesswil': {
+    title: 'Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026',
+    description: 'La Uttwilerstrasse di Kesswil sarà chiusa dal 15 ottobre 2026 alle 7 al 18 ottobre alle 17. Traffico deviato e possibile rinvio per pioggia o freddo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, kesswil, uttwilerstrasse, chiusa, ottobre',
+    ogTitle: 'Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026',
+    ogDescription: 'Dal 15 al 18 ottobre 2026 la Uttwilerstrasse di Kesswil sarà completamente chiusa per l\'asfalto finale e la marcatura sulla H13. Il traffico sarà deviato; piogge prolungate o freddo possono rinviare i lavori alla primavera 2027.',
+    canonicalPath: '/articoli-turgovia/chiusura-strada-kesswil/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026",
+      "description": "La Uttwilerstrasse di Kesswil sarà chiusa dal 15 ottobre 2026 alle 7 al 18 ottobre alle 17. Traffico deviato e possibile rinvio per pioggia o freddo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Kesswil, strada cantonale H13 con cantiere e deviazione segnalata in autunno."
+      },
+      "datePublished": "2026-10-08T11:25:33+00:00",
+      "dateModified": "2026-10-08T11:25:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/chiusura-strada-kesswil/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-turgovia-occupazione-rav-settembre': {
+    title: 'Disoccupazione in Turgovia: quota stabile al 2,2%',
+    description: 'Turgovia: 3.558 disoccupati a fine settembre, quota al 2,2%. Le persone in cerca d\'impiego sono 7.155; i posti vacanti salgono a 1.824, 236 in più ad agosto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, turgovia, quota, stabile',
+    ogTitle: 'Turgovia: disoccupazione stabile a settembre',
+    ogDescription: 'Il rapporto di settembre in Turgovia registra 3.558 persone disoccupate e una quota ferma al 2,2%. Le persone in cerca d\'impiego sono 7.155; i posti vacanti salgono a 1.824, mentre i settori mostrano andamenti diversi.',
+    canonicalPath: '/articoli-turgovia/turgovia-occupazione-rav-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione in Turgovia: quota stabile al 2,2%",
+      "description": "Turgovia: 3.558 disoccupati a fine settembre, quota al 2,2%. Le persone in cerca d'impiego sono 7.155; i posti vacanti salgono a 1.824, 236 in più ad agosto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-turgovia-occupazione-rav-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro regionale per l'impiego in Turgovia con annunci di lavoro"
+      },
+      "datePublished": "2026-10-08T11:37:03+00:00",
+      "dateModified": "2026-10-08T11:37:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/turgovia-occupazione-rav-settembre/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

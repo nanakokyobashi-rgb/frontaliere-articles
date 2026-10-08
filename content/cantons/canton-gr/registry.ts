@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'strada-calanca-chiusura-preventiva',
  category: 'pratico',
  date: '2026-10-07T06:43:54.388Z',
- image: '/images/blog/pasture-chiusura-garanzie.webp',
+ image: '/images/blog/article-strada-calanca-chiusura-preventiva.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GR'],

@@ -9,6 +9,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-formazione-farmacie.title': 'Sciaffusa: e-learning per farmacie sulla violenza domestica',
     'blog.article.sciaffusa-formazione-farmacie.excerpt': 'Sciaffusa: moduli e-learning volontari per le farmacie, dedicati a segnali di violenza domestica, colloquio riservato e rinvio ai servizi.',
     'blog.article.sciaffusa-formazione-farmacie.imageAlt': 'Personale di farmacia in formazione sulla violenza domestica a Sciaffusa',
+    'blog.article.seehas-affollamento-mattutino.title': 'Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen',
+    'blog.article.seehas-affollamento-mattutino.excerpt': 'A causa della chiusura della Schwarzwaldbahn, il Regionalexpress tra Konstanz e Singen è sospeso; più passeggeri utilizzano la S-Bahn Seehas, che al mattino può diventare molto affollata e allunga i tempi di viaggio.',
+    'blog.article.seehas-affollamento-mattutino.imageAlt': 'Pendolari sulla piattaforma della stazione di Schaffhausen con un treno S-Bahn Seehas in arrivo, indicante maggiore affollamento mattutino.',
 };
 
 export default blogMetaCantonShIt;

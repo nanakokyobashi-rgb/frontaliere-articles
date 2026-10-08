@@ -99672,6 +99672,235 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-crescita-lavoro-intelligenza-artificiale': {
+    title: 'Mercato lavoro IA: +32% di annunci in un anno | Frontaliere Ticino',
+    description: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, annunci, anno',
+    ogTitle: 'Mercato lavoro IA: +32% di annunci in un anno',
+    ogDescription: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore',
+    canonicalPath: '/articoli-svizzera/crescita-lavoro-intelligenza-artificiale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato lavoro IA: +32% di annunci in un anno",
+      "description": "## In breve - Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-crescita-lavoro-intelligenza-artificiale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Postazione di lavoro moderna con analisi dati su schermo a Lugano"
+      },
+      "datePublished": "2026-10-08T09:17:54+00:00",
+      "dateModified": "2026-10-08T09:17:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/crescita-lavoro-intelligenza-artificiale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-lavoro-ia-svizzera': {
+    title: 'Mercato lavoro IA Svizzera: +32% in un anno | Frontaliere Ticino',
+    description: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2\'181 annunci, il 45%',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, anno, breve',
+    ogTitle: 'Mercato lavoro IA Svizzera: crescita del 32% in un anno',
+    ogDescription: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2\'181 annunci, il 45%',
+    canonicalPath: '/articoli-svizzera/mercato-lavoro-ia-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato lavoro IA Svizzera: +32% in un anno",
+      "description": "## In breve - Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2'181 annunci, il 45%",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/mercato-lavoro-svizzera-giugno-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionisti che collaborano in un ambiente ufficio moderno in Svizzera, con schermi che mostrano dati e codice IA."
+      },
+      "datePublished": "2026-10-08T09:36:45+00:00",
+      "dateModified": "2026-10-08T09:36:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-lavoro-ia-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-raiffeisen-pil-inflazione-2026': {
+    title: 'Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%',
+    description: '## In breve - Raiffeisen porta all\'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell\'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato',
+    keywords: 'frontalieri, ticino, svizzera, italia, raiffeisen, inflazione, allo, breve',
+    ogTitle: 'Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%',
+    ogDescription: '## In breve - Raiffeisen porta all\'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell\'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato',
+    canonicalPath: '/articoli-svizzera/raiffeisen-pil-inflazione-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%",
+      "description": "## In breve - Raiffeisen porta all'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-raiffeisen-pil-inflazione-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionista svizzero che analizza previsioni economiche con le Alpi sullo sfondo"
+      },
+      "datePublished": "2026-10-08T10:49:08+00:00",
+      "dateModified": "2026-10-08T10:49:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/raiffeisen-pil-inflazione-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-leader-nella-robotica-217-aziende-e-7-000-posti': {
+    title: 'Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
+    description: '## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro',
+    keywords: 'frontalieri, ticino, svizzera, italia, leader, nella, robotica, aziende',
+    ogTitle: 'Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
+    ogDescription: '## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro',
+    canonicalPath: '/articoli-svizzera/svizzera-leader-nella-robotica-217-aziende-e-7-000-posti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera leader nella robotica: 217 aziende e 7'000 posti",
+      "description": "## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Svizzera leader nella robotica: 217 aziende e 7'000 posti"
+      },
+      "datePublished": "2026-10-08T11:04:25+00:00",
+      "dateModified": "2026-10-08T11:04:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-leader-nella-robotica-217-aziende-e-7-000-posti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-svizzera-talenti-stranieri': {
+    title: 'Svizzera: minimo divario salariale per talenti UE/AELS',
+    description: '## In breve - La Svizzera è prima nell\'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera',
+    keywords: 'frontalieri, ticino, svizzera, italia, minimo, divario, salariale, talenti',
+    ogTitle: 'Svizzera: attrattiva per talenti con minimo divario salariale',
+    ogDescription: '## In breve - La Svizzera è prima nell\'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera',
+    canonicalPath: '/articoli-svizzera/salari-svizzera-talenti-stranieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera: minimo divario salariale per talenti UE/AELS",
+      "description": "## In breve - La Svizzera è prima nell'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-salari-svizzera-talenti-stranieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano, Svizzera, che simboleggia le opportunità economiche e l'attrattiva per i talenti qualificati."
+      },
+      "datePublished": "2026-10-08T12:19:10+00:00",
+      "dateModified": "2026-10-08T12:19:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-svizzera-talenti-stranieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tf-nega-sconto-cassa-malati-padre-affidamento-alternato': {
+    title: 'TF nega sconto cassa malati padre affidamento alternato',
+    description: '## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9\'000 franchi',
+    keywords: 'frontalieri, ticino, svizzera, italia, nega, sconto, cassa, malati',
+    ogTitle: 'TF nega sconto cassa malati padre affidamento alternato',
+    ogDescription: '## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9\'000 franchi',
+    canonicalPath: '/articoli-svizzera/tf-nega-sconto-cassa-malati-padre-affidamento-alternato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "TF nega sconto cassa malati padre affidamento alternato",
+      "description": "## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9'000 franchi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tf-nega-sconto-cassa-malati-padre-affidamento-alternato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: TF nega sconto cassa malati padre affidamento alternato"
+      },
+      "datePublished": "2026-10-08T13:03:38+00:00",
+      "dateModified": "2026-10-08T13:03:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tf-nega-sconto-cassa-malati-padre-affidamento-alternato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -40,7 +40,8 @@
 # Actions", because the agent proxy refuses POST /git/refs. That conclusion was
 # too pessimistic: the git receive-pack ADVERTISEMENT
 # (GET /info/refs?service=git-receive-pack) is permission-gated and is a plain
-# GET, so it goes through. Measured 2026-08-03 with Remote Config's GITHUB_PAT:
+# GET, so it goes through. Measured 2026-08-03 with the owner-aware shard PAT
+# resolver loaded from Remote Config:
 # all 8 article shards answer 200; the control (torvalds/linux, which this PAT
 # obviously cannot write) answers 403 on receive-pack and 200 on upload-pack.
 # The PAT can write to every article shard. The probe step below re-runs that
@@ -384,10 +385,7 @@ jobs:
         if: needs.resolve.outputs.skip != 'true'
         run: |
           set -euo pipefail
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing after the Remote Config load"
-            exit 1
-          fi
+          source scripts/lib/shard-git-helpers.sh
           shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
@@ -397,9 +395,16 @@ jobs:
           fail=0
           for loc in it en de fr; do
             repo="$owner/frontaliere-$shard-$loc"
+            repo_remote="https://github.com/$repo.git"
+            token="$(shard_push_token_for_repo "$repo_remote")"
+            if [ -z "$token" ]; then
+              echo "::error::no owner-aware PAT is available for $repo"
+              fail=1
+              continue
+            fi
             # set +e: a non-2xx is data here, not a reason to end the step.
             set +e
-            code="$(curl -s -o /dev/null -w '%{http_code}' -u "x-access-token:$GITHUB_PAT" \
+            code="$(curl -s -o /dev/null -w '%{http_code}' -u "x-access-token:$token" \
                     "https://github.com/$repo.git/info/refs?service=git-receive-pack")"
             set -e
             if [ "$code" = "200" ]; then
@@ -797,6 +802,7 @@ jobs:
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
+          source scripts/lib/shard-git-helpers.sh
           summary="$RUNNER_TEMP/fast-summary.json"
           shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
@@ -846,12 +852,8 @@ jobs:
           # the error message now carries the build status, so the issue this
           # opens points at the cause instead of the symptom.
           #
-          # $GITHUB_PAT is the same credential the shard push uses (Remote
-          # Config, loaded above; push-article-shard-incremental.sh reads
-          # $SHARD_PUSH_PAT then falls back to it). Verified 2026-08-08: it is a
-          # classic PAT with `repo`, which is enough for both Pages endpoints
-          # even though it only has push — not admin — on the shard repos.
-          # load-rc-env.mjs already ::add-mask::s it.
+          # The Pages token comes from the same owner-aware resolver as the
+          # shard push. load-rc-env.mjs already masks the Remote Config values.
 
           # WHY EVERY PROBE CARRIES A CACHE-BUST QUERY (issue #114).
           #
@@ -964,10 +966,16 @@ jobs:
           # Never fatal: an unreachable or unauthorised API just reads "unknown",
           # which falls through to the same hard failure as before.
           pages_latest() {
-            local repo="$1" body
+            local repo="$1" body token
+            token="$(shard_push_token_for_repo "https://github.com/$repo.git")"
+            if [ -z "$token" ]; then
+              PAGES_STATUS=unknown
+              PAGES_ERROR='owner-aware shard PAT missing'
+              return 0
+            fi
             set +e
             body="$(curl -s --max-time 20 \
-                    -H "Authorization: Bearer ${GITHUB_PAT:-}" \
+                    -H "Authorization: Bearer $token" \
                     -H "Accept: application/vnd.github+json" \
                     "https://api.github.com/repos/$repo/pages/builds/latest")"
             set -e
@@ -975,10 +983,6 @@ jobs:
             PAGES_ERROR="$(printf '%s' "$body" | jq -r '.error.message // ""' 2>/dev/null || echo "")"
             [ -n "$PAGES_STATUS" ] || PAGES_STATUS=unknown
           }
-
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::warning::GITHUB_PAT is not set — the Pages-build recovery is unavailable, a timeout will fail as it did before"
-          fi
 
           echo "── origin (hard gate)"
           declare -A pages_rebuild_requested=()
@@ -1026,9 +1030,15 @@ jobs:
                 fi
                 pages_rebuild_requested[$loc]=1
                 echo "── the Pages build errored; requesting one rebuild of $repo"
+                pages_token="$(shard_push_token_for_repo "https://github.com/$repo.git")"
+                if [ -z "$pages_token" ]; then
+                  echo "::error::the Pages build for $repo is errored but no owner-aware shard PAT is available for the rebuild request"
+                  fail=1
+                  continue
+                fi
                 set +e
                 rc="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST \
-                      -H "Authorization: Bearer ${GITHUB_PAT:-}" \
+                      -H "Authorization: Bearer $pages_token" \
                       -H "Accept: application/vnd.github+json" \
                       "https://api.github.com/repos/$repo/pages/builds")"
                 set -e

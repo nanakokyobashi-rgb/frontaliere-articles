@@ -114,6 +114,18 @@ for rel in "${relpaths[@]}"; do
   fi
 done
 
+SHARD_OWNER="$(jq -r --arg s "$section" '.[$s] // "valerielinc-ops"' "$owners_json" 2>/dev/null || echo valerielinc-ops)"
+if [ -z "$SHARD_OWNER" ] || [ "$SHARD_OWNER" = "null" ]; then SHARD_OWNER="valerielinc-ops"; fi
+SHARD_REPO="git@github.com:$SHARD_OWNER/frontaliere-$section-$loc.git"
+if [ -n "${SHARD_REPO_OVERRIDE:-}" ]; then
+  SHARD_REPO="$SHARD_REPO_OVERRIDE"
+fi
+
+# Select the PAT from the same owner-aware resolver used by the fallback. The
+# direct HTTPS path must not silently fall back to the site's GITHUB_PAT for a
+# shard owned by nanakokyobashi-rgb.
+shard_push_token="$(shard_push_token_for_repo "$SHARD_REPO")"
+
 # Per-section-per-locale deploy key via indirect expansion (mirrors
 # push-section-shard.sh). Missing → skip, exit 0 — the caller (the fast-path
 # workflow) treats this the same as "fast path not provisioned yet" and lets
@@ -128,8 +140,8 @@ key_val="${!key_var:-}"
 #
 # It is wrong now: scripts/lib/section-shard-owners.json puts both article
 # sections under nanakokyobashi-rgb, this repo, and Remote Config's GITHUB_PAT
-# writes to all eight article shards (measured — the permission-gated
-# receive-pack advertisement answers 200 on all 8 and 403 on a control repo).
+# token is selected by shard_push_token_for_repo for the canonical shard owner
+# (GITHUB_PAT_NANAKO for nanakokyobashi-rgb).
 #
 # The migration doc's §10.2 says `shard_pat_push`'s "$SHARD_PUSH_PAT, else
 # $GITHUB_PAT" fallback already makes the deploy keys irrelevant here. It does
@@ -142,20 +154,13 @@ key_val="${!key_var:-}"
 # when NEITHER credential exists is a skip still the right answer.
 pat_mode=0
 if [ -z "$key_val" ]; then
-  if [ -n "${SHARD_PUSH_PAT:-${GITHUB_PAT:-}}" ]; then
+  if [ -n "$shard_push_token" ]; then
     pat_mode=1
     echo "no $key_var secret — pushing $loc $section over HTTPS with the PAT instead"
   else
-    echo "no $key_var secret and no SHARD_PUSH_PAT/GITHUB_PAT — skipping $loc $section article fast-path push (no write credential)"
+    echo "no $key_var secret and no owner-aware shard PAT — skipping $loc $section article fast-path push (no write credential)"
     exit 0
   fi
-fi
-
-SHARD_OWNER="$(jq -r --arg s "$section" '.[$s] // "valerielinc-ops"' "$owners_json" 2>/dev/null || echo valerielinc-ops)"
-if [ -z "$SHARD_OWNER" ] || [ "$SHARD_OWNER" = "null" ]; then SHARD_OWNER="valerielinc-ops"; fi
-SHARD_REPO="git@github.com:$SHARD_OWNER/frontaliere-$section-$loc.git"
-if [ -n "${SHARD_REPO_OVERRIDE:-}" ]; then
-  SHARD_REPO="$SHARD_REPO_OVERRIDE"
 fi
 
 if [ -z "${RUNNER_TEMP:-}" ]; then
@@ -163,8 +168,8 @@ if [ -z "${RUNNER_TEMP:-}" ]; then
   echo "ℹ️ RUNNER_TEMP unset — using temp dir $RUNNER_TEMP"
 fi
 
-# Always defined: "${GIT_PAT_OPTS[@]}" on an UNSET array aborts under `set -u`
-# in bash 3.2, and this script runs with -u. Empty in deploy-key mode.
+# Keep the option array defined, but use the guarded expansion below: Bash 3.2
+# still treats an empty array as unset under `set -u`. Empty in deploy-key mode.
 GIT_PAT_OPTS=()
 keyfile="$RUNNER_TEMP/article-shard_${section}_${loc}_key"
 if [ "$pat_mode" = 0 ]; then
@@ -174,7 +179,7 @@ else
   # HTTPS remote + the same credential helper shard_pat_push uses: the token is
   # read from $SHARD_PUSH_TOKEN inside the helper, so it never reaches the
   # remote URL, argv, or a `set -x` trace.
-  SHARD_PUSH_TOKEN="${SHARD_PUSH_PAT:-${GITHUB_PAT:-}}"
+  SHARD_PUSH_TOKEN="$shard_push_token"
   export SHARD_PUSH_TOKEN
   echo "::add-mask::$SHARD_PUSH_TOKEN"
   SHARD_REPO="$(shard_https_push_url "$SHARD_REPO")" || {
@@ -208,9 +213,11 @@ remote_newer_paths=()
 append_remote_newer_path() {
   local candidate="$1"
   local existing
-  for existing in "${remote_newer_paths[@]}"; do
-    [ "$existing" = "$candidate" ] && return 0
-  done
+  if [ "${#remote_newer_paths[@]}" -gt 0 ]; then
+    for existing in "${remote_newer_paths[@]}"; do
+      [ "$existing" = "$candidate" ] && return 0
+    done
+  fi
   remote_newer_paths+=("$candidate")
 }
 
@@ -366,7 +373,7 @@ _attempt() {
   rm -rf "$stage"
   local clone_err
   clone_err="$(mktemp)"
-  if ! git "${GIT_PAT_OPTS[@]}" clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$stage" 2>"$clone_err"; then
+  if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$stage" 2>"$clone_err"; then
     echo "::warning::clone of $SHARD_REPO failed: $(cat "$clone_err")"
     rm -f "$clone_err"
     return 1
@@ -406,9 +413,11 @@ _attempt() {
     local is_newer=0
     if [ -n "$article_content_revision" ]; then
       local newer_path
-      for newer_path in "${remote_newer_paths[@]}"; do
-        if [ "$newer_path" = "$rel" ]; then is_newer=1; break; fi
-      done
+      if [ "${#remote_newer_paths[@]}" -gt 0 ]; then
+        for newer_path in "${remote_newer_paths[@]}"; do
+          if [ "$newer_path" = "$rel" ]; then is_newer=1; break; fi
+        done
+      fi
     fi
     if [ "$is_newer" = 1 ]; then
       skipped_newer_paths+=("$rel")
@@ -432,16 +441,18 @@ _attempt() {
     echo "monotonic guard: kept remote for $last_skipped_newer_count newer article path(s): $last_skipped_newer_names"
   fi
 
-  for rel in "${eligible_relpaths[@]}"; do
-    src="$scratch_dist_dir/$rel"
-    # ls-tree only touches tree objects (never a blob fetch) — used purely to
-    # classify rel as "new" vs "replaced" for the .shard-filecount delta below.
-    if [ -z "$(git -C "$stage" ls-tree HEAD -- "$rel" 2>/dev/null)" ]; then
-      new_count=$((new_count + 1))
-    fi
-    sha="$(git -C "$stage" hash-object -w --path="$rel" "$src")" || return 1
-    git -C "$stage" update-index --add --cacheinfo 100644,"$sha","$rel" || return 1
-  done
+  if [ "${#eligible_relpaths[@]}" -gt 0 ]; then
+    for rel in "${eligible_relpaths[@]}"; do
+      src="$scratch_dist_dir/$rel"
+      # ls-tree only touches tree objects (never a blob fetch) — used purely to
+      # classify rel as "new" vs "replaced" for the .shard-filecount delta below.
+      if [ -z "$(git -C "$stage" ls-tree HEAD -- "$rel" 2>/dev/null)" ]; then
+        new_count=$((new_count + 1))
+      fi
+      sha="$(git -C "$stage" hash-object -w --path="$rel" "$src")" || return 1
+      git -C "$stage" update-index --add --cacheinfo 100644,"$sha","$rel" || return 1
+    done
+  fi
 
   # Previous file-count: read straight from the tree we just cloned (a single
   # small targeted blob fetch — see header comment for why this beats the
@@ -493,7 +504,7 @@ _attempt() {
   # Never `push -f`: a non-fast-forward here means someone else (the periodic
   # full deploy's push-section-shard.sh, or another fast-path publish) pushed
   # in the meantime. Re-clone onto the new tip and rebuild, don't overwrite it.
-  if git "${GIT_PAT_OPTS[@]}" -C "$stage" push "$SHARD_REPO" "$commit":main; then
+  if git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$stage" push "$SHARD_REPO" "$commit":main; then
     echo "✅ $section-$loc article shard: pushed $commit ($new_count new file(s), filecount $prev_n -> $new_total)"
     return 0
   fi
