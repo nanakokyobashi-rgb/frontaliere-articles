@@ -13,7 +13,9 @@ import {
   GENERATED_IMAGE_LICENSE_URLS,
   GENERATED_IMAGE_PROMPT_VERSION,
   GENERATED_IMAGE_RESTRICTIONS,
+  LICENSED_PHOTO_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
+import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
 import { webpDimensions } from '../scripts/lib/commons-credit.mjs';
 import { appendImageRegenerationQueue } from '../scripts/lib/image-regeneration-queue.mjs';
@@ -141,6 +143,51 @@ function generatedRecord(root, articleId, imageUrl, bytes) {
       contains_recognizable_face: false,
       looks_like_specific_real_event: false,
       notes: 'test fixture',
+    },
+  };
+}
+
+function licensedRecord(articleId, imageUrl) {
+  return {
+    schema: 1,
+    assetId: articleImageAssetId(articleId),
+    kind: 'photo',
+    provider: 'wikimedia',
+    model: 'Wikimedia Commons file mirror',
+    executorModel: 'Wikimedia Commons file mirror',
+    license: 'CC BY-SA 4.0',
+    licenseFamily: 'cc-by-sa',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    credit: 'Ada Foto · CC BY-SA 4.0',
+    author: { name: 'Ada Foto', url: 'https://commons.wikimedia.org/wiki/User:Ada_Foto' },
+    sourcePageUrl: 'https://commons.wikimedia.org/wiki/File:Zurich_employment_office.jpg',
+    sourceImageUrl: 'https://upload.wikimedia.org/commons/Zurich_employment_office.jpg',
+    sourceWidth: 2400,
+    sourceHeight: 1600,
+    photoTitle: 'Zurich employment office.jpg',
+    copyrightNotice: '© Ada Foto',
+    acquireLicensePage: 'https://commons.wikimedia.org/wiki/File:Zurich_employment_office.jpg',
+    modifications: ['cropped', 'resized', 'converted-to-webp'],
+    width: 1200,
+    height: 675,
+    format: 'webp',
+    bytes: 1024,
+    sha256: '0'.repeat(64),
+    generatedAt: '2026-10-08T00:00:00.000Z',
+    verifiedAt: '2026-10-08T00:01:00.000Z',
+    restrictions: [...LICENSED_PHOTO_RESTRICTIONS],
+    scope: 'article-hero',
+    imageUrl,
+    vision: {
+      ok: true,
+      contains_text: false,
+      contains_logo: false,
+      contains_recognizable_face: false,
+      contains_recognizable_foreground_person: false,
+      looks_like_specific_real_event: false,
+      is_photograph: true,
+      is_topic_relevant: true,
+      notes: 'relevant, unbranded landscape photograph',
     },
   };
 }
@@ -713,6 +760,45 @@ test('un errore dopo la generazione ripristina articolo, registro e file prima d
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/generated-image-registry.json'), 'utf8')).assets.length, 0);
     assert.equal(fs.existsSync(path.join(root, 'public/images/blog/article-thumbnail-fails.webp')), false);
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0].failureCount, 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un errore dopo la sostituzione ripristina anche il credito della foto precedente', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'photo-credit-rollback';
+    const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+    const previous = licensedRecord(articleId, imageUrl);
+    const previousCredit = imageCreditRecordFromGeneratedImageRecord(previous);
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/unchanged.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [previous] }));
+    write(root, 'content/image-credits/blog/photo-credit-rollback.json', JSON.stringify(previousCredit, null, 2));
+
+    const bytes = Buffer.from(`replacement:${articleId}`);
+    const replacement = generatedRecord(root, articleId, imageUrl, bytes);
+    const generatedFile = path.join(root, '.cache', `${articleId}.webp`);
+    write(root, `.cache/${articleId}.webp`, bytes);
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: async () => ({ filePath: generatedFile, record: replacement }),
+      generateThumbnail: async () => { throw new Error('thumbnail unavailable'); },
+    });
+
+    assert.equal(summary.failed, 1);
+    assert.deepEqual(
+      JSON.parse(fs.readFileSync(path.join(root, 'data/generated-image-registry.json'), 'utf8')).assets,
+      [previous],
+    );
+    assert.deepEqual(
+      JSON.parse(fs.readFileSync(path.join(root, 'content/image-credits/blog/photo-credit-rollback.json'), 'utf8')),
+      previousCredit,
+    );
+    assert.equal(fs.existsSync(path.join(root, 'public', imageUrl.slice(1))), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

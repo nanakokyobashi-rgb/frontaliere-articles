@@ -8,7 +8,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
-import { appendGeneratedImageRecord, imageRecordForPath, readGeneratedImageRecords } from './lib/blog-image-registry.mjs';
+import {
+  appendGeneratedImageRecord,
+  generatedImageCreditFilesForAppend,
+  imageRecordForPath,
+  readGeneratedImageRecords,
+} from './lib/blog-image-registry.mjs';
 import { articleHeroImagePath, articleImageAssetId } from './lib/article-cover-identity.mjs';
 import {
   locateArticleRegistry,
@@ -418,6 +423,7 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
     const imageFile = imageFileForRecord(root, record);
     trackFile(snapshots, imageFile);
     trackFile(snapshots, thumbnailFileForRecord(root, record));
+    for (const creditFile of generatedImageCreditFilesForAppend(root, record)) trackFile(snapshots, creditFile);
 
     if (!generated?.filePath || !fs.existsSync(generated.filePath)) {
       throw new Error(`governed engine returned no materialized image for ${record?.imageUrl || '<empty>'}`);

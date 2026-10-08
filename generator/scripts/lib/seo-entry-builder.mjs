@@ -117,7 +117,7 @@ function imageRightsLines(provenance) {
   if (!record || typeof provenance.kind !== 'string') {
     throw new Error('SEO entry requires a governed image provenance record');
   }
-  if (provenance.kind === 'wikimedia-commons') return '';
+  if (provenance.kind === 'wikimedia-commons' || provenance.kind === 'licensed-photo') return '';
   if (provenance.kind === DETERMINISTIC_CARD_KIND) {
     return `\n        "acquireLicensePage": ${jsonValue(DETERMINISTIC_CARD_LICENSE_URL)},`
       + '\n        "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",'

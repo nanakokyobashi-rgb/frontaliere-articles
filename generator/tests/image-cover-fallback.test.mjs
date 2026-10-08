@@ -175,6 +175,29 @@ test('a licensed article hero writes the shared attribution ledger and resolves 
   }
 });
 
+test('replacing a licensed hero with generated media removes the stale per-cover credit', () => {
+  const root = tempRoot();
+  try {
+    const licensed = licensedCatalogRecord();
+    const file = path.join(root, 'public', licensed.imageUrl.slice(1));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, Buffer.alloc(licensed.bytes, 0x47));
+    licensed.sha256 = sha256File(file);
+    appendGeneratedImageRecord(root, licensed);
+
+    const generated = generatedCatalogRecord();
+    generated.assetId = licensed.assetId;
+    generated.imageUrl = licensed.imageUrl;
+    generated.sha256 = licensed.sha256;
+    appendGeneratedImageRecord(root, generated);
+
+    assert.equal(fs.existsSync(path.join(root, 'content/image-credits/blog/licensed-cover-ledger-test.json')), false);
+    assert.equal(imageRecordForPath(root, licensed.imageUrl, { strict: true }).kind, 'generated');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('un catalogo valido ma non pertinente non diventa la copertina finale', () => {
   const root = tempRoot();
   try {
@@ -261,7 +284,7 @@ test('the generator lets the governed chain reach licensed photos and keeps the 
   assert.match(engine, /usedRecords: usedArticlePhotoRecords\(root\)/);
   assert.match(engine, /readCreditRecords\(root\)/);
   assert.match(engine, /topic: articleImageTopic/);
-  assert.match(engine, /place: articleImagePlace/);
+  assert.match(engine, /place: articleImagePlace\(articleData, area\)/);
   assert.match(engine, /keywords: articleImageKeywords/);
   assert.match(source, /Math\.min\(120_000/);
   assert.match(source, /generateGovernedArticleHero/);

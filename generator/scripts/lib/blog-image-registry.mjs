@@ -221,22 +221,56 @@ export function hasValidBlogImageRecord(root, imagePath) {
   return Boolean(imageRecordForPath(root, imagePath));
 }
 
+function photoCreditForRecord(record) {
+  return isLicensedPhotoRecord(record)
+    ? imageCreditRecordFromGeneratedImageRecord(record)
+    : null;
+}
+
+function creditFileForPhotoCredit(root, photoCredit) {
+  if (!photoCredit) return null;
+  const key = coverKey(photoCredit.cover);
+  if (!key) throw new Error(`licensed article-hero record has no cover key: ${photoCredit.cover}`);
+  return absolute(root, `${IMAGE_CREDITS_ROOT}/blog/${key}.json`);
+}
+
+function recordsReplacedBy(assets, record) {
+  return assets.filter((item) => item.assetId === record.assetId || item.imageUrl === record.imageUrl);
+}
+
+/**
+ * Return every per-cover credit file that an append may remove or write.
+ * Callers that make the registry part of a larger transaction must snapshot
+ * these paths before calling appendGeneratedImageRecord.
+ */
+export function generatedImageCreditFilesForAppend(root, record) {
+  const verdict = validateGeneratedImageRecord(record);
+  if (!verdict.valid) throw new Error(`generated image record rejected: ${verdict.errors.join('; ')}`);
+  const assets = readGeneratedImageRecords(root);
+  const replacedCreditFiles = recordsReplacedBy(assets, record)
+    .map((previous) => creditFileForPhotoCredit(root, photoCreditForRecord(previous)))
+    .filter(Boolean);
+  const nextCreditFile = creditFileForPhotoCredit(root, photoCreditForRecord(record));
+  return [...new Set([...replacedCreditFiles, nextCreditFile])].filter(Boolean);
+}
+
 export function appendGeneratedImageRecord(root, record) {
   const verdict = validateGeneratedImageRecord(record);
   if (!verdict.valid) throw new Error(`generated image record rejected: ${verdict.errors.join('; ')}`);
-  const photoCredit = isLicensedPhotoRecord(record)
-    ? imageCreditRecordFromGeneratedImageRecord(record)
-    : null;
+  const photoCredit = photoCreditForRecord(record);
   const assets = readGeneratedImageRecords(root);
-  const next = assets.filter((item) => item.assetId !== record.assetId && item.imageUrl !== record.imageUrl);
+  const replaced = recordsReplacedBy(assets, record);
+  const next = assets.filter((item) => !replaced.includes(item));
   next.push(record);
   writeJsonAtomic(absolute(root, GENERATED_IMAGE_REGISTRY_REL), generatedEnvelope(next));
+  const nextCreditFile = creditFileForPhotoCredit(root, photoCredit);
+  for (const previous of replaced) {
+    const staleCreditFile = creditFileForPhotoCredit(root, photoCreditForRecord(previous));
+    if (staleCreditFile && staleCreditFile !== nextCreditFile) fs.rmSync(staleCreditFile, { force: true });
+  }
   if (photoCredit) {
-    const key = coverKey(photoCredit.cover);
-    if (!key) throw new Error(`licensed article-hero record has no cover key: ${photoCredit.cover}`);
-    const creditFile = absolute(root, `${IMAGE_CREDITS_ROOT}/blog/${key}.json`);
-    fs.mkdirSync(path.dirname(creditFile), { recursive: true });
-    writeJsonAtomic(creditFile, photoCredit);
+    fs.mkdirSync(path.dirname(nextCreditFile), { recursive: true });
+    writeJsonAtomic(nextCreditFile, photoCredit);
   }
 }
 

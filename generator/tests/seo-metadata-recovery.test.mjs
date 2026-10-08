@@ -128,6 +128,19 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
   );
   assert.match(deterministicEntry, /Deterministic media produced by frontaliereticino\.ch\./);
   assert.match(deterministicEntry, /"creditText": "frontaliereticino\.ch"/);
+
+  const licensed = article();
+  deriveSeoMetadata(licensed);
+  const licensedEntry = buildSeoEntry(licensed, {
+    provenance: {
+      kind: 'licensed-photo',
+      record: { width: 2400, height: 1600 },
+    },
+    publishedAt: toIsoWithTz(licensed.date, { preserveExplicitOffset: false }),
+    modifiedAt: toIsoWithTz(licensed.date, { preserveExplicitOffset: false }),
+  });
+  assert.match(licensedEntry, /"url": `\$\{BASE_URL\}\/images\/places\/lugano-view\.webp`/);
+  assert.doesNotMatch(licensedEntry, /acquireLicensePage|copyrightNotice|"license"|creditText/);
 });
 
 test('le date senza orario usano mezzogiorno Europe/Zurich con il cambio DST dichiarato', () => {
