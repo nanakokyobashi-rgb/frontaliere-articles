@@ -139,6 +139,10 @@ jobs:
             --mode ack \
             --outbox "$OUTBOX_FILE" \
             --status "$STATUS_FILE"
+          publisher_complete='true'
+          if ! jq -e '(.sections | type) == "array" and all(.sections[]; .status == "success")' "$STATUS_FILE" >/dev/null; then
+            publisher_complete='false'
+          fi
           pending='false'
           if [ -s "$OUTBOX_FILE" ] && jq -e '.schema == 1 and ((.items | type) == "array") and (.items | length > 0)' "$OUTBOX_FILE" >/dev/null; then
             pending='true'
@@ -146,6 +150,10 @@ jobs:
           echo "outbox_pending=$pending" >> "$GITHUB_OUTPUT"
           if git diff --quiet -- "$OUTBOX_FILE"; then
             echo "no pre-generation publisher entries were acknowledged; outbox_pending=$pending"
+            if [ "$publisher_complete" != 'true' ]; then
+              echo "::error::pre-generation publishers are incomplete; keeping the outbox and skipping generation"
+              exit 1
+            fi
             exit 0
           fi
           if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
@@ -163,6 +171,10 @@ jobs:
           for attempt in 1 2 3 4 5; do
             if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
               echo "pre-generation publisher outbox acknowledgement pushed"
+              if [ "$publisher_complete" != 'true' ]; then
+                echo "::error::pre-generation publisher ack was committed, but some publishers are incomplete"
+                exit 1
+              fi
               exit 0
             fi
             if [ "$attempt" -eq 5 ]; then break; fi
@@ -446,8 +458,16 @@ jobs:
             --mode ack \
             --outbox "$OUTBOX_FILE" \
             --status "$STATUS_FILE"
+          publisher_complete='true'
+          if ! jq -e '(.sections | type) == "array" and all(.sections[]; .status == "success")' "$STATUS_FILE" >/dev/null; then
+            publisher_complete='false'
+          fi
           if git diff --quiet -- "$OUTBOX_FILE"; then
             echo "no successful publisher section to acknowledge"
+            if [ "$publisher_complete" != 'true' ]; then
+              echo "::error::publishers are incomplete; keeping the outbox durable for the next run"
+              exit 1
+            fi
             exit 0
           fi
           if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
@@ -465,6 +485,10 @@ jobs:
           for attempt in 1 2 3 4 5; do
             if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
               echo "publisher outbox acknowledged"
+              if [ "$publisher_complete" != 'true' ]; then
+                echo "::error::publisher ack was committed, but some publishers are incomplete"
+                exit 1
+              fi
               exit 0
             fi
             if [ "$attempt" -eq 5 ]; then break; fi

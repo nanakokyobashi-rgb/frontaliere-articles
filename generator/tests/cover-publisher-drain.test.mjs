@@ -118,7 +118,6 @@ test('correla la run nuova con il nonce, ignorando una dispatch concorrente dell
     { databaseId: 41, createdAt: '2026-10-08T05:00:02Z', displayTitle: 'cover-publish-section / canton-zh / nonce=other' },
     { databaseId: 42, createdAt: '2026-10-08T05:00:01Z', displayTitle: 'cover-publish-section / canton-ag / nonce=target' },
   ], {
-    startedAt: '2026-10-08T05:00:00Z',
     beforeIds: new Set(['40']),
     dispatchNonce: 'target',
   });

@@ -41,6 +41,18 @@ function isDeadlineError(error) {
   return error?.code === 'DEADLINE_EXCEEDED';
 }
 
+function terminateChild(child, signal) {
+  if (process.platform !== 'win32' && child.pid) {
+    try {
+      process.kill(-child.pid, signal);
+      return;
+    } catch {
+      /* The process may have exited between the timeout and the kill. */
+    }
+  }
+  child.kill(signal);
+}
+
 function runGh(args, { token, deadlineAt, now = Date.now } = {}) {
   return new Promise((resolve, reject) => {
     const remaining = Number.isFinite(deadlineAt) ? deadlineAt - now() : null;
@@ -50,6 +62,7 @@ function runGh(args, { token, deadlineAt, now = Date.now } = {}) {
     }
 
     const child = spawn('gh', args, {
+      detached: process.platform !== 'win32',
       env: commandEnvironment(token),
       stdio: ['ignore', 'pipe', 'pipe'],
     });
@@ -75,8 +88,11 @@ function runGh(args, { token, deadlineAt, now = Date.now } = {}) {
     if (remaining !== null) {
       deadlineTimer = setTimeout(() => {
         timedOut = true;
-        child.kill('SIGTERM');
-        killTimer = setTimeout(failForDeadline, 1_000);
+        terminateChild(child, 'SIGTERM');
+        killTimer = setTimeout(() => {
+          terminateChild(child, 'SIGKILL');
+          failForDeadline();
+        }, 1_000);
       }, Math.max(1, remaining));
     }
 
@@ -210,20 +226,19 @@ async function listRunIds({ repo, workflow, token, deadlineAt, now }) {
   return Array.isArray(runs) ? runs : [];
 }
 
-export function selectNewRunId(runs, { startedAt, beforeIds, dispatchNonce }) {
+export function selectNewRunId(runs, { beforeIds, dispatchNonce }) {
   return runs
     .filter((run) => run?.databaseId != null)
     .filter((run) => !beforeIds.has(String(run.databaseId)))
-    .filter((run) => !run.createdAt || run.createdAt >= startedAt)
     .filter((run) => String(run.displayTitle || '').includes(`nonce=${dispatchNonce}`))
     .sort((left, right) => String(right.createdAt || '').localeCompare(String(left.createdAt || '')))[0] || null;
 }
 
-async function findNewRunId({ repo, workflow, startedAt, beforeIds, dispatchNonce, token, deadlineAt, now = Date.now }) {
+async function findNewRunId({ repo, workflow, beforeIds, dispatchNonce, token, deadlineAt, now = Date.now }) {
   for (let attempt = 0; attempt < RUN_LOOKUP_ATTEMPTS; attempt += 1) {
     if (now() >= deadlineAt) return null;
     const runs = await listRunIds({ repo, workflow, token, deadlineAt, now });
-    const candidate = selectNewRunId(runs, { startedAt, beforeIds, dispatchNonce });
+    const candidate = selectNewRunId(runs, { beforeIds, dispatchNonce });
     if (candidate) return String(candidate.databaseId);
     if (attempt + 1 < RUN_LOOKUP_ATTEMPTS) {
       const remaining = Math.max(0, deadlineAt - now());
@@ -235,14 +250,12 @@ async function findNewRunId({ repo, workflow, startedAt, beforeIds, dispatchNonc
 }
 
 async function defaultDispatch({ repo, workflow, section, articleIds, token, deadlineAt, now = Date.now }) {
-  const startedAt = new Date(now()).toISOString();
   const dispatchNonce = `cover-${section}-${now()}-${randomUUID()}`;
   const beforeIds = new Set((await listRunIds({ repo, workflow, token, deadlineAt, now })).map((run) => String(run.databaseId)));
   await runGh(dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce }), { token, deadlineAt, now });
   const runId = await findNewRunId({
     repo,
     workflow,
-    startedAt,
     beforeIds,
     dispatchNonce,
     token,

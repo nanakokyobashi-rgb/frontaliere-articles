@@ -746,6 +746,8 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /if: \$\{\{ always\(\) && steps\.push\.outputs\.publish_ready == 'true'/);
   assert.match(workflow, /git add -A -- "\$OUTBOX_FILE"/);
   assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
+  assert.match(workflow, /publisher_complete='true'/);
+  assert.match(workflow, /publishers are incomplete/);
   assert.doesNotMatch(workflow, /git rm -f "\$OUTBOX_FILE"/);
   assert.match(workflow, /registry_base=\"\$RUNNER_TEMP\/generated-image-registry-base\.json\"/);
   assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_base\" \"\$registry_snapshot\"/);
