@@ -36,6 +36,9 @@ on:
       - 'content/cantons/**'
       - 'content/blog-body-canton-*/**'
       - 'content/blog-meta-canton-*'
+      # A declared image may arrive after the article body. The resolver maps
+      # this path through the registry to the owning canton article(s).
+      - 'public/images/**'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       - 'generator/scripts/lib/control-char-write-report.mjs'

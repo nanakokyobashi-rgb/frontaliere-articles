@@ -1,19 +1,34 @@
 #!/usr/bin/env node
 /**
- * Read-only observer for the two Pages article publishers.
+ * Observer and bounded repairer for the two Pages article publishers.
  *
  * It samples only Italian article pages whose body changed recently on corpus
  * main. Publication lag is measured with dateModified versus the registry's
  * updatedAt; image degradation is a separate signal based on og:image versus
  * the registry image. The network loop is deliberately sequential and
- * rate-limited because this is a courtesy check, not a crawler.
+ * rate-limited because this is a courtesy check, not a crawler. Degraded
+ * articles are kept in the observer issue body until a live read is sane; at
+ * most three proven image repairs are dispatched per run.
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { declaredImageIsOwn, extractOgImage, isGenericOgImage } from '../lib/article-image-postcondition.mjs';
+import { declaredImageIsOwn, extractOgImage, isGenericOgImage, normalizeImagePath } from '../lib/article-image-postcondition.mjs';
+import { fetchDeclaredImage } from '../lib/declared-image-fetch.mjs';
+import {
+  DEFAULT_REPAIR_CAP,
+  applyDispatchOutcomes,
+  groupRepairCandidates,
+  ledgerKey,
+  markDispatched,
+  mergeDegradedItems,
+  parseDegradationLedger,
+  removeHealthyItems,
+  repairCandidates,
+  upsertDegradationLedger,
+} from '../lib/article-image-degradation-ledger.mjs';
 
 export const OBSERVER_ISSUE_TITLE = 'Article publication lag (corpus → site)';
 export const DEFAULT_LOOKBACK_DAYS = 7;
@@ -21,6 +36,7 @@ export const DEFAULT_STALE_MINUTES = 60;
 export const DEFAULT_MAX_PAGES = 300;
 export const DEFAULT_MIN_INTERVAL_MS = 500;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
+export const DEFAULT_REPAIR_WORKFLOW = 'fast-publish-article.yml';
 // The apex answers 403 to the default User-Agent of Node's fetch (measured on
 // 2026-10-07): without a name of its own the observer would report every page
 // as lagging with "HTTP 403".
@@ -85,10 +101,21 @@ export function parseItalianSlug(source, articleId) {
   return null;
 }
 
-export function buildObserverTargets({ changedBodies, registrySources, slugSources, baseUrl = SITE_BASE_URL }) {
+export function buildObserverTargets({ changedBodies = [], ledgerItems = [], registrySources, slugSources, baseUrl = SITE_BASE_URL }) {
   const targets = [];
   const skipped = [];
-  for (const change of changedBodies) {
+  const durableChanges = ledgerItems.map((item) => ({
+    section: item.section,
+    articleId: item.articleId,
+    changedAt: Number.isFinite(Date.parse(item.firstSeenAt ?? '')) ? Date.parse(item.firstSeenAt) : 0,
+    commit: item.sourceCommit || '0'.repeat(40),
+    durable: true,
+  }));
+  const seen = new Set();
+  for (const change of [...durableChanges, ...changedBodies]) {
+    const key = ledgerKey(change);
+    if (seen.has(key)) continue;
+    seen.add(key);
     const registry = parseRegistryRecord(registrySources[change.section] || '', change.articleId);
     const slug = parseItalianSlug(slugSources[change.section] || '', change.articleId);
     if (!registry || !slug) {
@@ -102,6 +129,7 @@ export function buildObserverTargets({ changedBodies, registrySources, slugSourc
       sourceUpdatedAt: registry.updatedAt,
       registryDate: registry.date,
       registryImage: registry.image,
+      durable: Boolean(change.durable),
     });
   }
   return { targets, skipped };
@@ -273,6 +301,128 @@ function loadSources(rootDir) {
   };
 }
 
+export function hasLocalDeclaredImage(rootDir, imagePath) {
+  const normalized = normalizeImagePath(imagePath)?.split(/[?#]/, 1)[0] || '';
+  if (!normalized.startsWith('/images/') || normalized.includes('..')) return false;
+  return fs.existsSync(path.join(rootDir, 'public', normalized.slice(1)));
+}
+
+/**
+ * The repairer may dispatch only after a live generic page and a fresh image
+ * proof agree. Checkout files count immediately; otherwise use the exact CDN
+ * fetch contract used by the renderer, without writing the response.
+ */
+export async function proveDeclaredImage({ rootDir, imagePath, fetchImpl = globalThis.fetch, fetchDeclaredImageImpl = fetchDeclaredImage } = {}) {
+  const normalized = normalizeImagePath(imagePath)?.split(/[?#]/, 1)[0] || '';
+  if (!normalized.startsWith('/images/') || normalized.includes('..')) return { available: false, reason: 'immagine dichiarata non interna' };
+  if (hasLocalDeclaredImage(rootDir, normalized)) return { available: true, source: 'checkout' };
+  try {
+    await fetchDeclaredImageImpl({ imagePath: normalized, destination: null, fetchImpl });
+    return { available: true, source: 'cdn' };
+  } catch (error) {
+    return { available: false, reason: error?.message || String(error) };
+  }
+}
+
+function ghRepoArgs() {
+  return process.env.GH_REPO ? ['--repo', process.env.GH_REPO] : [];
+}
+
+function ghJson(args) {
+  const output = execFileSync('gh', [...args, ...ghRepoArgs()], { encoding: 'utf8' });
+  return JSON.parse(output || 'null');
+}
+
+function defaultGithubClient() {
+  return {
+    async findOpenIssue() {
+      const issues = ghJson(['issue', 'list', '--state', 'open', '--limit', '100', '--json', 'number,title,body,url']);
+      return (Array.isArray(issues) ? issues : []).find((issue) => issue.title === OBSERVER_ISSUE_TITLE) || null;
+    },
+    async createIssue(description) {
+      const { createGithubIssue } = await import('../lib/github-issue-creator.mjs');
+      const created = await createGithubIssue({
+        title: OBSERVER_ISSUE_TITLE,
+        description,
+        priority: 2,
+        labels: ['bug', 'article-publication-lag'],
+        workflow: 'article-publication-observer',
+        exactTitle: true,
+      });
+      if (!created || created.persisted === false) throw new Error('issue observer non scritta');
+      return this.findOpenIssue();
+    },
+    async editIssue(number, body) {
+      execFileSync('gh', ['issue', 'edit', String(number), '--body', body, ...ghRepoArgs()], { encoding: 'utf8' });
+    },
+    async resolveIssue() {
+      const { resolveGithubIssue } = await import('../lib/github-issue-creator.mjs');
+      return resolveGithubIssue(OBSERVER_ISSUE_TITLE, {
+        workflow: 'article-publication-observer',
+        exactTitle: true,
+      });
+    },
+    async getRun(runId) {
+      return ghJson(['api', `repos/${process.env.GH_REPO}/actions/runs/${runId}`]);
+    },
+    async dispatch({ section, ids }) {
+      const dispatchedAt = Date.now();
+      const idsJson = JSON.stringify(ids);
+      execFileSync('gh', [
+        'workflow', 'run', DEFAULT_REPAIR_WORKFLOW,
+        '-f', `article_ids=${idsJson}`,
+        '-f', `section=${section}`,
+        '-f', 'dry_run=false',
+        '--ref', 'main',
+        ...ghRepoArgs(),
+      ], { encoding: 'utf8' });
+      // `gh workflow run` returns before the run is visible in Actions. Find
+      // it by the dispatch event and creation time so the ledger can observe
+      // a real terminal outcome instead of ever dispatching a duplicate.
+      for (let attempt = 0; attempt < 10; attempt += 1) {
+        const runs = ghJson(['run', 'list', '--workflow', DEFAULT_REPAIR_WORKFLOW, '--limit', '30', '--json', 'databaseId,status,conclusion,createdAt,event,headBranch']);
+        const run = (Array.isArray(runs) ? runs : [])
+          .filter((item) => item.event === 'workflow_dispatch' && item.headBranch === 'main')
+          .filter((item) => Number.isFinite(Date.parse(item.createdAt)) && Date.parse(item.createdAt) >= dispatchedAt - 10_000)
+          .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))[0];
+        if (run?.databaseId) return { runId: run.databaseId, dispatchedAt: new Date(dispatchedAt).toISOString() };
+        await sleep(500);
+      }
+      return { runId: null, dispatchedAt: new Date(dispatchedAt).toISOString() };
+    },
+  };
+}
+
+async function reconcileDispatches(items, github) {
+  const runIds = new Set(items.filter((item) => item.status === 'in-flight' && item.runId).map((item) => item.runId));
+  const outcomes = {};
+  for (const runId of runIds) {
+    const run = await github.getRun(runId);
+    if (run?.status === 'completed') {
+      for (const item of items) if (item.status === 'in-flight' && item.runId === String(runId)) {
+        outcomes[ledgerKey(item)] = { status: 'completed', conclusion: run.conclusion };
+      }
+    }
+  }
+  return applyDispatchOutcomes(items, outcomes);
+}
+
+function saneLiveImage(entry) {
+  return entry?.page?.status === 200
+    && declaredImageIsOwn(entry.target.registryImage)
+    && Boolean(entry.page.ogImage)
+    && !isGenericOgImage(entry.page.rawHtml || '');
+}
+
+async function persistLedger(issue, items, github) {
+  const body = upsertDegradationLedger(issue.body || '', items);
+  if (body !== issue.body) {
+    await github.editIssue(issue.number, body);
+    issue.body = body;
+  }
+  return issue;
+}
+
 function parseArgs(argv) {
   const daysArg = argv.indexOf('--days');
   const days = daysArg >= 0 ? Number(argv[daysArg + 1]) : DEFAULT_LOOKBACK_DAYS;
@@ -280,7 +430,15 @@ function parseArgs(argv) {
   return { days };
 }
 
-export async function runObserver({ rootDir = ROOT, days = DEFAULT_LOOKBACK_DAYS, nowMs = Date.now() } = {}) {
+export async function runObserver({
+  rootDir = ROOT,
+  days = DEFAULT_LOOKBACK_DAYS,
+  nowMs = Date.now(),
+  fetchImpl = globalThis.fetch,
+  fetchDeclaredImageImpl = fetchDeclaredImage,
+  githubClient = null,
+  repairCap = DEFAULT_REPAIR_CAP,
+} = {}) {
   const since = new Date(nowMs - days * 24 * 60 * 60 * 1000).toISOString();
   const log = gitText([
     'log', '--first-parent', `--since=${since}`, '--format=commit %H %ct', '--name-only', '--diff-filter=AM', '--',
@@ -288,28 +446,71 @@ export async function runObserver({ rootDir = ROOT, days = DEFAULT_LOOKBACK_DAYS
   ], rootDir);
   const changedBodies = parseChangedBodyLog(log);
   const sources = loadSources(rootDir);
-  const prepared = buildObserverTargets({ changedBodies, ...sources });
-  const report = await observePublicationLag({ targets: prepared.targets, nowMs });
+  const github = githubClient || defaultGithubClient();
+  let issue = await github.findOpenIssue();
+  let ledger = issue ? parseDegradationLedger(issue.body || '').items : [];
+  const prepared = buildObserverTargets({ changedBodies, ledgerItems: ledger, ...sources });
+  const report = await observePublicationLag({ targets: prepared.targets, nowMs, fetchImpl });
   const description = formatObserverReport(report, { nowMs, skipped: prepared.skipped });
+  const reconciled = await reconcileDispatches(ledger, github);
+  ledger = reconciled.items;
+  const healthyKeys = report.checked.filter((entry) => entry.target.durable && saneLiveImage(entry)).map((entry) => ledgerKey(entry.target));
+  ledger = removeHealthyItems(ledger, healthyKeys);
+  ledger = mergeDegradedItems(
+    ledger,
+    report.degraded.map((entry) => ({
+      section: entry.target.section,
+      articleId: entry.target.articleId,
+      url: entry.target.url,
+      registryImage: entry.target.registryImage,
+      firstSeenAt: new Date(entry.target.changedAt || nowMs).toISOString(),
+    })),
+    new Date(nowMs).toISOString(),
+  );
 
-  const { createGithubIssue, resolveGithubIssue } = await import('../lib/github-issue-creator.mjs');
-  if (report.lagging.length > 0 || report.degraded.length > 0) {
-    const issue = await createGithubIssue({
-      title: OBSERVER_ISSUE_TITLE,
-      description,
-      priority: 2,
-      labels: ['bug', 'article-publication-lag'],
-      workflow: 'article-publication-observer',
-      exactTitle: true,
+  const readyKeys = new Set();
+  for (const entry of report.degraded) {
+    const key = ledgerKey(entry.target);
+    const proof = await proveDeclaredImage({
+      rootDir,
+      imagePath: entry.target.registryImage,
+      fetchImpl,
+      fetchDeclaredImageImpl,
     });
-    if (!issue || issue.persisted === false) throw new Error('issue observer non scritta');
-    return { ...report, issue, changedBodies, skipped: prepared.skipped };
+    if (proof.available) readyKeys.add(key);
   }
-  const resolved = resolveGithubIssue(OBSERVER_ISSUE_TITLE, {
-    workflow: 'article-publication-observer',
-    exactTitle: true,
+
+  const actionable = report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
+  if (actionable && !issue) {
+    issue = await github.createIssue(description);
+    if (!issue) throw new Error('issue observer non trovata dopo la creazione');
+  }
+  if (issue) await persistLedger(issue, ledger, github);
+
+  const candidates = repairCandidates(ledger, {
+    readyKeys,
+    excludeKeys: reconciled.handledKeys,
+    cap: repairCap,
   });
-  return { ...report, resolved, changedBodies, skipped: prepared.skipped };
+  const dispatched = [];
+  if (issue && candidates.length > 0) {
+    for (const group of groupRepairCandidates(candidates)) {
+      const result = await github.dispatch({ section: group.section, ids: group.ids, issueNumber: issue.number });
+      ledger = markDispatched(ledger, group.items.map((item) => ({
+        key: ledgerKey(item),
+        runId: result?.runId ?? null,
+        dispatchedAt: result?.dispatchedAt,
+      })));
+      dispatched.push({ section: group.section, ids: group.ids, runId: result?.runId ?? null });
+      await persistLedger(issue, ledger, github);
+    }
+  }
+
+  let resolved = null;
+  if (!report.lagging.length && !report.degraded.length && ledger.length === 0 && issue) {
+    resolved = await github.resolveIssue();
+  }
+  return { ...report, issue, resolved, dispatched, ledger, changedBodies, skipped: prepared.skipped, description };
 }
 
 const invokedDirectly = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

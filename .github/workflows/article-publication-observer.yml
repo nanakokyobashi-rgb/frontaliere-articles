@@ -24,6 +24,12 @@ concurrency:
 
 jobs:
   observe:
+    # This is the only job in this workflow that dispatches the repair
+    # publisher. Keep actions:write scoped here, not at workflow level.
+    permissions:
+      contents: read
+      issues: write
+      actions: write
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -37,8 +43,13 @@ jobs:
             /content/swiss-articles-data.ts
             /content/routerBlogData.ts
             /content/routerSwissData.ts
+            /public/images/**
+            /generator/scripts/load-rc-env.mjs
+            /generator/scripts/lib/source-copy-guard.mjs
             /scripts/ci/article-publication-observer.mjs
             /scripts/lib/article-image-postcondition.mjs
+            /scripts/lib/article-image-degradation-ledger.mjs
+            /scripts/lib/declared-image-fetch.mjs
             /scripts/lib/github-issue-creator.mjs
           sparse-checkout-cone-mode: false
 
@@ -47,6 +58,21 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — the observer cannot load the dispatch PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
       - name: Observe published article revisions
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -54,4 +80,10 @@ jobs:
           INPUT_DAYS: ${{ github.event.inputs.days || '7' }}
         run: |
           set -euo pipefail
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing after the Remote Config load — refusing to dispatch a repair with GITHUB_TOKEN"
+            exit 1
+          fi
+          export GH_TOKEN="$runtime_pat"
           node scripts/ci/article-publication-observer.mjs --days "$INPUT_DAYS" | tee -a "$GITHUB_STEP_SUMMARY"

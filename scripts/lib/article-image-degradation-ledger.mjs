@@ -1,0 +1,173 @@
+export const DEGRADATION_LEDGER_SCHEMA = 1;
+export const DEGRADATION_LEDGER_START = '<!-- ARTICLE_IMAGE_DEGRADATION_LEDGER v1 -->';
+export const DEGRADATION_LEDGER_END = '<!-- /ARTICLE_IMAGE_DEGRADATION_LEDGER -->';
+export const MAX_REPAIR_ATTEMPTS = 3;
+export const DEFAULT_REPAIR_CAP = 3;
+
+const VALID_STATUSES = new Set(['pending', 'in-flight', 'exhausted']);
+
+export function ledgerKey({ section, articleId } = {}) {
+  if (!section || !articleId) return null;
+  return `${section}:${articleId}`;
+}
+
+function normalizedItem(item) {
+  const section = String(item?.section ?? '').trim();
+  const articleId = String(item?.articleId ?? '').trim();
+  if (!section || !articleId) throw new Error('ledger item senza section/articleId');
+  const attempts = Number.isInteger(item?.attempts) && item.attempts >= 0 ? item.attempts : 0;
+  const status = VALID_STATUSES.has(item?.status) ? item.status : attempts >= MAX_REPAIR_ATTEMPTS ? 'exhausted' : 'pending';
+  return {
+    section,
+    articleId,
+    url: item?.url ? String(item.url) : null,
+    registryImage: item?.registryImage ? String(item.registryImage) : null,
+    firstSeenAt: item?.firstSeenAt ? String(item.firstSeenAt) : null,
+    lastSeenAt: item?.lastSeenAt ? String(item.lastSeenAt) : null,
+    attempts,
+    status,
+    runId: item?.runId === null || item?.runId === undefined ? null : String(item.runId),
+    dispatchedAt: item?.dispatchedAt ? String(item.dispatchedAt) : null,
+    lastOutcome: item?.lastOutcome ? String(item.lastOutcome) : null,
+  };
+}
+
+function sortedItems(items) {
+  return [...items].map(normalizedItem).sort((a, b) => ledgerKey(a).localeCompare(ledgerKey(b)));
+}
+
+export function parseDegradationLedger(body) {
+  const source = String(body ?? '');
+  const start = source.indexOf(DEGRADATION_LEDGER_START);
+  if (start < 0) return { present: false, items: [] };
+  const end = source.indexOf(DEGRADATION_LEDGER_END, start + DEGRADATION_LEDGER_START.length);
+  if (end < 0) throw new Error('ledger immagini degradate troncato');
+  const section = source.slice(start + DEGRADATION_LEDGER_START.length, end);
+  const json = section.match(/```json\s*\n([\s\S]*?)\n```/i)?.[1];
+  if (!json) throw new Error('ledger immagini degradate senza JSON');
+  let parsed;
+  try {
+    parsed = JSON.parse(json);
+  } catch (error) {
+    throw new Error(`ledger immagini degradate non valido: ${error.message}`);
+  }
+  if (parsed?.schema !== DEGRADATION_LEDGER_SCHEMA || !Array.isArray(parsed.items)) {
+    throw new Error('ledger immagini degradate con schema sconosciuto');
+  }
+  return { present: true, items: sortedItems(parsed.items) };
+}
+
+export function renderDegradationLedger(items = []) {
+  const payload = JSON.stringify({ schema: DEGRADATION_LEDGER_SCHEMA, items: sortedItems(items) }, null, 2);
+  return `${DEGRADATION_LEDGER_START}\n\`\`\`json\n${payload}\n\`\`\`\n${DEGRADATION_LEDGER_END}`;
+}
+
+export function upsertDegradationLedger(body, items = []) {
+  const source = String(body ?? '');
+  const rendered = renderDegradationLedger(items);
+  const start = source.indexOf(DEGRADATION_LEDGER_START);
+  if (start < 0) return source.trimEnd() ? `${source.trimEnd()}\n\n${rendered}\n` : `${rendered}\n`;
+  const endMarker = source.indexOf(DEGRADATION_LEDGER_END, start + DEGRADATION_LEDGER_START.length);
+  if (endMarker < 0) throw new Error('ledger immagini degradate troncato');
+  const end = endMarker + DEGRADATION_LEDGER_END.length;
+  return `${source.slice(0, start)}${rendered}${source.slice(end)}`;
+}
+
+export function mergeDegradedItems(existing = [], observed = [], now = new Date().toISOString()) {
+  const byKey = new Map(sortedItems(existing).map((item) => [ledgerKey(item), item]));
+  for (const raw of observed) {
+    const item = normalizedItem({
+      section: raw.section,
+      articleId: raw.articleId,
+      url: raw.url,
+      registryImage: raw.registryImage,
+      firstSeenAt: raw.firstSeenAt ?? now,
+      lastSeenAt: now,
+      attempts: raw.attempts ?? 0,
+      status: raw.status ?? 'pending',
+      runId: raw.runId,
+      dispatchedAt: raw.dispatchedAt,
+      lastOutcome: raw.lastOutcome,
+    });
+    const key = ledgerKey(item);
+    const previous = byKey.get(key);
+    if (!previous) {
+      byKey.set(key, item);
+      continue;
+    }
+    const status = previous.status === 'in-flight' || previous.status === 'exhausted' ? previous.status : 'pending';
+    byKey.set(key, {
+      ...previous,
+      url: item.url ?? previous.url,
+      registryImage: item.registryImage ?? previous.registryImage,
+      firstSeenAt: previous.firstSeenAt ?? item.firstSeenAt ?? now,
+      lastSeenAt: now,
+      status,
+    });
+  }
+  return sortedItems([...byKey.values()]);
+}
+
+export function removeHealthyItems(items = [], healthyKeys = []) {
+  const healthy = new Set(healthyKeys);
+  return sortedItems(items).filter((item) => !healthy.has(ledgerKey(item)));
+}
+
+/** Apply only terminal dispatch outcomes; running jobs remain in-flight. */
+export function applyDispatchOutcomes(items = [], outcomes = {}, now = new Date().toISOString()) {
+  const handledKeys = new Set();
+  const next = sortedItems(items).map((item) => {
+    if (item.status !== 'in-flight') return item;
+    const outcome = outcomes[ledgerKey(item)];
+    if (!outcome || outcome.status !== 'completed') return item;
+    const success = outcome.conclusion === 'success';
+    handledKeys.add(ledgerKey(item));
+    const attempts = success ? item.attempts : item.attempts + 1;
+    return {
+      ...item,
+      attempts,
+      status: !success && attempts >= MAX_REPAIR_ATTEMPTS ? 'exhausted' : 'pending',
+      runId: null,
+      dispatchedAt: null,
+      lastOutcome: success ? 'success' : String(outcome.conclusion || 'failure'),
+      lastSeenAt: item.lastSeenAt ?? now,
+    };
+  });
+  return { items: next, handledKeys };
+}
+
+export function markDispatched(items = [], dispatches = [], now = new Date().toISOString()) {
+  const byKey = new Map(dispatches.map((dispatch) => [dispatch.key, dispatch]));
+  return sortedItems(items).map((item) => {
+    const dispatch = byKey.get(ledgerKey(item));
+    if (!dispatch) return item;
+    return {
+      ...item,
+      status: 'in-flight',
+      runId: dispatch.runId === null || dispatch.runId === undefined ? null : String(dispatch.runId),
+      dispatchedAt: dispatch.dispatchedAt ?? now,
+    };
+  });
+}
+
+export function repairCandidates(items = [], { readyKeys = [], excludeKeys = [], cap = DEFAULT_REPAIR_CAP } = {}) {
+  const ready = new Set(readyKeys);
+  const excluded = new Set(excludeKeys);
+  return sortedItems(items)
+    .filter((item) => item.status === 'pending' && item.attempts < MAX_REPAIR_ATTEMPTS)
+    .filter((item) => ready.has(ledgerKey(item)) && !excluded.has(ledgerKey(item)))
+    .slice(0, Math.max(0, cap));
+}
+
+export function groupRepairCandidates(items = []) {
+  const groups = new Map();
+  for (const item of sortedItems(items)) {
+    if (!groups.has(item.section)) groups.set(item.section, []);
+    groups.get(item.section).push(item);
+  }
+  return [...groups.entries()].map(([section, group]) => ({
+    section,
+    ids: group.map((item) => item.articleId),
+    items: group,
+  }));
+}

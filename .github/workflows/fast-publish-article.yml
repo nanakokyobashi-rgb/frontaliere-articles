@@ -90,6 +90,9 @@ on:
       - 'scripts/lib/push-article-shard-incremental.sh'
       # THE CHAIN LINK — a corpus push means an article was produced.
       - 'content/**'
+      # An image arriving in a later commit is itself a publication event for
+      # every registry article that declares it (issue #2448).
+      - 'public/images/**'
   workflow_dispatch:
     inputs:
       article_id:
@@ -195,7 +198,7 @@ jobs:
             has_content=false
             while IFS= read -r changed_path; do
               case "$changed_path" in
-                content/*) has_content=true; break ;;
+                content/*|public/images/*) has_content=true; break ;;
               esac
             done <<< "$changed"
             if [ "$has_content" != true ]; then
@@ -230,6 +233,25 @@ jobs:
               section="$body_section"
               ids+=("$body_id")
             done
+          fi
+
+          # A later image-only commit has no body path to grep. The registry is
+          # the ownership map, so resolve the changed public image to every
+          # article id that declares it and keep the same section/shard guard
+          # as body changes.
+          if [ "${{ github.event_name }}" = "push" ]; then
+            image_plan="$(printf '%s\n' "$changed" | node scripts/ci/fast-publish-section.mjs image-plan shard)"
+            while IFS= read -r image_target; do
+              [ -n "$image_target" ] || continue
+              image_section="$(printf '%s' "$image_target" | jq -r '.section')"
+              if [ -n "${section:-}" ] && [ "$section" != "$image_section" ]; then
+                echo "::error::one commit changes both article sections; publish them in separate commits"
+                exit 1
+              fi
+              section="$image_section"
+              mapfile -t image_ids < <(printf '%s' "$image_target" | jq -r '.ids[]')
+              ids+=("${image_ids[@]}")
+            done < <(printf '%s' "$image_plan" | jq -c '.[]')
           fi
           echo "dry=$dry" >> "$GITHUB_OUTPUT"
 
