@@ -1426,6 +1426,38 @@ async function trackingIssueClosed(trackingIssue) {
  */
 const ABSENT_ON_SITE_MODES = new Set(['corpus-only', 'corpus-only-pending']);
 /**
+ * Risolve uno specificatore relativo con la stessa precedenza usata dai
+ * guard del loop. Il trasporto dei gemelli usa questa funzione anche dal
+ * lato `sitePath`: la relazione fra i due alberi non e' sicura se ogni
+ * consumer reimplementa una propria lista di estensioni.
+ *
+ * @param {string} rel     path del file importatore, relativo alla radice
+ * @param {string} spec    specificatore relativo già estratto dal sorgente
+ * @param {(candidate: string) => boolean} known  candidato presente nell'albero
+ * @returns {string|null} il primo path risolto, oppure null
+ */
+function resolveRelativeImport(rel, spec, known) {
+  if (typeof rel !== 'string' || typeof spec !== 'string' || !spec.startsWith('.')) return null;
+  const dir = path.posix.dirname(rel);
+  const base = path.posix.normalize(path.posix.join(dir, spec));
+  // Gli specificatori del ciclo portano l'estensione, ma engine/ e host/
+  // usano la forma senza: si prova la stessa risoluzione di Node.
+  // `.ts` PRIMA di `.mjs`/`.js`: la collisione esiste gia' nell'albero
+  // (`host/shared/viteAssetHashRx.mjs` e `.ts` sono due voci distinte).
+  const tsImporter = ['.ts', '.tsx'].includes(path.posix.extname(rel).toLowerCase());
+  const candidates = [
+    base,
+    ...(tsImporter ? [`${base}.ts`] : []),
+    `${base}.mjs`,
+    `${base}.js`,
+    ...(tsImporter ? [`${base}/index.ts`] : []),
+    `${base}/index.mjs`,
+    `${base}/index.js`,
+  ];
+  return candidates.find(known) || null;
+}
+
+/**
  * Import relativi di un modulo, risolti a path repo-relative e filtrati su
  * cio' che il manifest conosce. Usa la sorgente unica dell'estrattore condiviso
  * in scripts/ci/lib/import-specifiers.mjs, cosi' le forme statiche, dinamiche,
@@ -1437,42 +1469,9 @@ const ABSENT_ON_SITE_MODES = new Set(['corpus-only', 'corpus-only-pending']);
  * @returns {string[]} path repo-relative dei moduli importati e riconosciuti
  */
 function resolvedLocalImports(rel, source, known) {
-  const dir = path.posix.dirname(rel);
   const out = [];
   for (const spec of relativeImportSpecifiers(source)) {
-    if (!spec.startsWith('.')) continue; // i pacchetti non hanno un gemello da dichiarare
-    const base = path.posix.normalize(path.posix.join(dir, spec));
-    // Gli specificatori del ciclo portano l'estensione, ma engine/ e host/
-    // usano la forma senza: si prova la stessa risoluzione di Node.
-    // I rami `.ts` non sono decorativi: engine/ e host/ sono TypeScript (25
-    // voci `.ts` nel manifest), e in TypeScript l'import relativo si scrive
-    // senza estensione. Senza `${base}.ts` un modulo raggiunto in quella forma
-    // non veniva riconosciuto affatto, quindi la contraddizione che questo
-    // scanner esiste per vedere — una voce `identical` che importa un file
-    // dichiarato assente dal sito — restava invisibile proprio sull'albero in
-    // cui la forma senza estensione e' la norma (#1032).
-    // `.ts` PRIMA di `.mjs`/`.js`: la collisione esiste gia' nell'albero
-    // (`host/shared/viteAssetHashRx.mjs` e `.ts` sono due voci di manifest
-    // distinte, e `host/shared/chunkFiles.ts` importa './viteAssetHashRx').
-    // Con i gemelli JS per primi `manifestDepsOf()` attribuiva la dipendenza
-    // al gemello SBAGLIATO: finche' entrambi sono `identical` il verdetto
-    // coincide per caso, ma appena uno passa a `corpus-only`
-    // `unmirrorableDepsVerdict()` (e `transportVerdict()`, che decide la
-    // DIREZIONE del mirror) leggerebbe il `mode` dell'altro file. I rami di
-    // fallback si attivano solo per un importatore TypeScript (`.ts`/`.tsx`):
-    // un `.mjs` sotto Node non puo' scrivere quella forma, quindi far vincere
-    // `.ts` e' sicuro solo quando l'importatore lo consente davvero.
-    const tsImporter = ['.ts', '.tsx'].includes(path.posix.extname(rel).toLowerCase());
-    const candidates = [
-      base,
-      ...(tsImporter ? [`${base}.ts`] : []),
-      `${base}.mjs`,
-      `${base}.js`,
-      ...(tsImporter ? [`${base}/index.ts`] : []),
-      `${base}/index.mjs`,
-      `${base}/index.js`,
-    ];
-    const hit = candidates.find(known);
+    const hit = resolveRelativeImport(rel, spec, known);
     if (hit && !out.includes(hit)) out.push(hit);
   }
   return out;
@@ -2477,4 +2476,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // baseline con LA STESSA regola con cui la pesa il cron, altrimenti una voce
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
-export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE };
+export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE };

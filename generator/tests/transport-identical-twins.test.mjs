@@ -62,18 +62,24 @@ import {
   reconcileSummaryMarkdown,
   realignFromCommitted,
   couplingScanRoot,
+  crawlerContractArtifactMismatches,
+  crawlerContractCouplings,
   hasTypeScriptTwin,
   importSpecifierRe,
   SET_DESCRIPTORS,
   unreadableCouplings,
   transportVerdict,
+  relativeImportCouplings,
+  transportMaxFilesForContract,
+  translateRecoveryPinUpdate,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
-import { classify } from '../../scripts/ci/loop-drift-check.mjs';
+import { classify, gitBlobSha } from '../../scripts/ci/loop-drift-check.mjs';
 import { readManifestSnapshot } from '../../scripts/ci/handoff-to-site.mjs';
 import { parsePositiveNum } from '../../scripts/ci/scan-failed-runs.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const ARTIFACT_SHA = 'a'.repeat(64);
 
 /** Una voce `identical` con la baseline allineata su entrambi i lati. */
 const twin = (over = {}) => ({
@@ -877,6 +883,18 @@ test('un accoppiamento VERIFICATO allineato non blocca', () => {
   assert.deepEqual(chosen.map((c) => c.path), ['host/x.ts']);
 });
 
+test('un path aligned non resta un blocco permanente della componente', () => {
+  const candidates = [cand('host/x.ts')];
+  const graph = [{ path: 'host/tests/x.golden.json', couplings: [{ path: 'host/x.ts', mode: 'identical' }] }];
+  const { chosen } = closeTransportSet(candidates, {
+    maxFiles: 25,
+    couplingGraph: graph,
+    alignedPaths: new Set(['host/tests/x.golden.json']),
+    blockedForever: new Set(['host/tests/x.golden.json']),
+  });
+  assert.deepEqual(chosen.map((candidate) => candidate.path), ['host/x.ts']);
+});
+
 test('sotto il tetto e con entrambe le metà presenti si copia tutto', () => {
   const candidates = [
     cand('host/tests/x.golden.json', [{ path: 'host/x.ts', mode: 'identical' }]),
@@ -885,6 +903,342 @@ test('sotto il tetto e con entrambe le metà presenti si copia tutto', () => {
   const { chosen, capped } = closeTransportSet(candidates, { maxFiles: 25 });
   assert.deepEqual(chosen.map((c) => c.path), ['host/tests/x.golden.json', 'host/x.ts']);
   assert.equal(capped, 0);
+});
+
+test('il budget del contratto comprende il file contratto oltre al roster', () => {
+  const source = JSON.stringify({
+    artifacts: Array.from({ length: 25 }, (_, index) => ({
+      file: `crawler-group-${String(index + 1).padStart(2, '0')}.yml`,
+      artifactSha256: ARTIFACT_SHA,
+    })),
+  });
+  assert.equal(transportMaxFilesForContract(25, source), 26);
+  assert.equal(transportMaxFilesForContract(25, '{'), 25);
+});
+
+test('replay run 37699422170: il contratto crawler chiude workflow e artifact prima del tetto', () => {
+  const manifest = {
+    files: [
+      { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' },
+      { path: '.github/workflows/translate-pending.yml', mode: 'identical' },
+      ...Array.from({ length: 24 }, (_, index) => ({
+        path: `.github/workflows/filler-${String(index).padStart(2, '0')}.yml`,
+        mode: 'identical',
+      })),
+    ],
+  };
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({
+    artifacts: [{ file: 'translate-pending.yml', artifactSha256: ARTIFACT_SHA }],
+  }));
+  const couplingGraph = [...graph].map(([filePath, couplings]) => ({ path: filePath, couplings }));
+  const observedRun = {
+    id: 37699422170,
+    candidates: [
+      cand('.github/workflows/translate-pending.yml'),
+      ...Array.from({ length: 24 }, (_, index) => cand(`.github/workflows/filler-${String(index).padStart(2, '0')}.yml`)),
+      cand('generator/data/crawler-cross-repo-contract.json'),
+    ],
+  };
+  const { chosen, capped } = closeTransportSet(observedRun.candidates, { maxFiles: 25, couplingGraph });
+  const paths = chosen.map((candidate) => candidate.path);
+  assert.ok(paths.includes('.github/workflows/translate-pending.yml'));
+  assert.ok(paths.includes('generator/data/crawler-cross-repo-contract.json'));
+  assert.equal(paths.length, 25);
+  assert.equal(capped, 1);
+});
+
+test('il contratto blocca un artifact dichiarato ma assente dal manifest prima del verdetto', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const manifest = { files: [contractEntry] };
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'missing.yml', artifactSha256: ARTIFACT_SHA }] }));
+  const couplings = graph.get(contractEntry.path);
+  assert.equal(couplings.length, 1);
+  assert.equal(couplings[0].path, '.github/workflows/missing.yml');
+  assert.equal(couplings[0].mode, 'non registrato');
+  const verdict = transportVerdict(
+    contractEntry,
+    { site: 'bbbb', corpus: 'aaaa' },
+    BASE,
+    { couplings },
+  );
+  assert.equal(verdict.permanent, true);
+  assert.match(verdict.reason, /missing\.yml/);
+});
+
+test('il contratto blocca un artifact `adapted` invece di lasciarlo come arco ignorato', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const artifactEntry = { path: '.github/workflows/adapted.yml', mode: 'adapted' };
+  const manifest = { files: [contractEntry, artifactEntry] };
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'adapted.yml', artifactSha256: ARTIFACT_SHA }] }));
+  const contractCouplings = graph.get(contractEntry.path);
+  assert.equal(contractCouplings[0].mode, 'adapted');
+  const verdict = transportVerdict(
+    contractEntry,
+    { site: 'bbbb', corpus: 'aaaa' },
+    BASE,
+    { couplings: contractCouplings },
+  );
+  assert.equal(verdict.permanent, true);
+  assert.match(verdict.reason, /adapted\.yml/);
+});
+
+test('un contratto malformato o senza `artifacts[]` è una unità non verificabile', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const manifest = { files: [contractEntry] };
+  for (const source of ['{', '{}', '{"artifacts":[]}', JSON.stringify({ artifacts: [{ file: 'missing-digest.yml' }] })]) {
+    const graph = crawlerContractCouplings(manifest, source);
+    const couplings = graph.get(contractEntry.path);
+    assert.equal(couplings.length, 1);
+    assert.equal(couplings[0].mode, 'non verificabile');
+    const verdict = transportVerdict(
+      contractEntry,
+      { site: 'bbbb', corpus: 'aaaa' },
+      BASE,
+      { couplings },
+    );
+    assert.equal(verdict.permanent, true);
+    assert.match(verdict.reason, /non `identical`/);
+  }
+});
+
+test('un contratto non verificabile blocca l’intero insieme degli artifact prima del verdetto', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const artifactEntries = [
+    { path: '.github/workflows/crawler-group-01.yml', mode: 'identical' },
+    { path: '.github/workflows/crawler-group-02.yml', mode: 'identical' },
+  ];
+  const manifest = { files: [contractEntry, ...artifactEntries] };
+  const previousWorkflowScope = process.env.PAT_WORKFLOWS_SCOPE;
+  process.env.PAT_WORKFLOWS_SCOPE = 'true';
+  try {
+    for (const source of ['{', '{}']) {
+      const graph = crawlerContractCouplings(manifest, source);
+      for (const artifact of artifactEntries) {
+        const couplings = graph.get(artifact.path);
+        assert.ok(couplings?.some((coupling) => (
+          coupling.path === contractEntry.path
+          && coupling.mode === 'non verificabile'
+        )), `${artifact.path} deve restare accoppiato al contratto non verificabile`);
+        const verdict = transportVerdict(
+          artifact,
+          { site: 'bbbb', corpus: 'aaaa' },
+          BASE,
+          { couplings },
+        );
+        assert.equal(verdict.permanent, true);
+        assert.match(verdict.reason, /crawler-cross-repo-contract/);
+      }
+    }
+  } finally {
+    if (previousWorkflowScope === undefined) delete process.env.PAT_WORKFLOWS_SCOPE;
+    else process.env.PAT_WORKFLOWS_SCOPE = previousWorkflowScope;
+  }
+});
+
+test('un hash dell\u2019artifact dichiarato dal contratto promuove il gemello stale', () => {
+  const manifest = {
+    files: [{ path: '.github/workflows/translate-pending.yml', mode: 'identical' }],
+  };
+  const contract = JSON.stringify({ artifacts: [{
+    file: 'translate-pending.yml',
+    artifactSha256: crypto.createHash('sha256').update('site').digest('hex'),
+  }] });
+  const mismatches = crawlerContractArtifactMismatches(
+    manifest,
+    contract,
+    () => crypto.createHash('sha256').update('corpus').digest('hex'),
+  );
+  assert.deepEqual(mismatches, [{
+    contractPath: 'generator/data/crawler-cross-repo-contract.json',
+    artifactPath: '.github/workflows/translate-pending.yml',
+    expected: crypto.createHash('sha256').update('site').digest('hex'),
+    actual: crypto.createHash('sha256').update('corpus').digest('hex'),
+  }]);
+});
+
+test('il contratto confronta sia il corpus sia i byte dell\u2019artifact sul sito', () => {
+  const manifest = {
+    files: [{ path: '.github/workflows/translate-pending.yml', mode: 'identical' }],
+  };
+  const expected = crypto.createHash('sha256').update('expected').digest('hex');
+  const site = crypto.createHash('sha256').update('site-divergente').digest('hex');
+  const mismatches = crawlerContractArtifactMismatches(
+    manifest,
+    JSON.stringify({ artifacts: [{ file: 'translate-pending.yml', artifactSha256: expected }] }),
+    () => expected,
+    () => site,
+  );
+  assert.deepEqual(mismatches, [{
+    contractPath: 'generator/data/crawler-cross-repo-contract.json',
+    artifactPath: '.github/workflows/translate-pending.yml',
+    expected,
+    actual: expected,
+    actualSite: site,
+  }]);
+});
+
+test('la chiusura degli import relativi segue il twin del sitePath, non l\u2019alias corpus', () => {
+  const manifest = {
+    files: [
+      {
+        path: 'host/shared/inlineJsonScript.ts',
+        sitePath: 'build-plugins/shared/inlineJsonScript.ts',
+        mode: 'identical',
+      },
+      {
+        path: 'host/seo/organizationLd.ts',
+        sitePath: 'services/seo/organizationLd.ts',
+        mode: 'identical',
+      },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
+    manifest,
+    (rel) => rel === 'services/seo/organizationLd.ts',
+  );
+  assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+  assert.equal(couplings[0].mode, 'identical');
+});
+
+test('la chiusura degli import include una dipendenza aggiunta dal site-ahead', () => {
+  const manifest = {
+    files: [
+      {
+        path: 'host/shared/consumer.ts',
+        sitePath: 'build-plugins/shared/consumer.ts',
+        mode: 'identical',
+      },
+      {
+        path: 'host/seo/organizationLd.ts',
+        sitePath: 'build-plugins/seo/organizationLd.ts',
+        mode: 'identical',
+      },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    '// corpus senza il nuovo import\n',
+    "import { organizationLd } from '../seo/organizationLd';\n",
+    manifest,
+  );
+  assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+  assert.equal(couplings[0].mode, 'identical');
+});
+
+test('la chiusura conserva anche il coupling quando entrambi i lati risolvono lo stesso twin identical', () => {
+  const manifest = {
+    files: [
+      {
+        path: 'host/shared/consumer.ts',
+        sitePath: 'build-plugins/shared/consumer.ts',
+        mode: 'identical',
+      },
+      {
+        path: 'host/seo/organizationLd.ts',
+        sitePath: 'build-plugins/seo/organizationLd.ts',
+        mode: 'identical',
+      },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    "import { organizationLd } from '../seo/organizationLd';\n",
+    "import { organizationLd } from '../seo/organizationLd';\n",
+    manifest,
+  );
+  assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+  assert.equal(couplings[0].mode, 'identical');
+  const graph = [{ path: manifest.files[0].path, couplings }];
+  assert.deepEqual(
+    closeTransportSet([cand(manifest.files[0].path)], { couplingGraph: graph }).chosen,
+    [],
+    'un twin non osservato non deve essere separato dal suo importatore',
+  );
+  assert.deepEqual(
+    closeTransportSet([cand(manifest.files[0].path)], {
+      couplingGraph: graph,
+      alignedPaths: new Set(['host/seo/organizationLd.ts']),
+    }).chosen.map((candidate) => candidate.path),
+    [manifest.files[0].path],
+  );
+});
+
+test('un workflow non viene scansionato come modulo per import inline in heredoc', () => {
+  const manifest = {
+    files: [
+      {
+        path: '.github/workflows/translate-pending.yml',
+        sitePath: '.github/corpus-workflows/translate-pending.yml',
+        mode: 'identical',
+      },
+      {
+        path: 'scripts/lib/translate-run-clock.mjs',
+        sitePath: 'scripts/lib/translate-run-clock.mjs',
+        mode: 'identical',
+      },
+    ],
+  };
+  assert.deepEqual(
+    relativeImportCouplings(
+      manifest.files[0],
+      "run: node --input-type=module <<'NODE'\nimport './scripts/lib/translate-run-clock.mjs';\nNODE\n",
+      "run: node --input-type=module <<'NODE'\nimport './scripts/lib/translate-run-clock.mjs';\nNODE\n",
+      manifest,
+    ),
+    [],
+  );
+});
+
+test('un import relativo verso un adapted viene dichiarato come blocco, non scoperto in review', () => {
+  const manifest = {
+    files: [
+      { path: 'host/shared/consumer.ts', sitePath: 'build-plugins/shared/consumer.ts', mode: 'identical' },
+      { path: 'host/seo/organizationLd.ts', sitePath: 'services/seo/organizationLd.ts', mode: 'adapted' },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
+    manifest,
+    (rel) => rel === 'services/seo/organizationLd.ts',
+  );
+  assert.equal(couplings[0].mode, 'adapted');
+  assert.match(permanentBlock(manifest.files[0], { couplings }), /non `identical`/);
+});
+
+test('un import che risolve allo stesso path conserva il coupling se il twin non è `identical`', () => {
+  for (const mode of ['adapted', 'corpus-only', 'corpus-only-pending']) {
+    const manifest = {
+      files: [
+        { path: 'host/shared/consumer.ts', sitePath: 'build-plugins/shared/consumer.ts', mode: 'identical' },
+        { path: 'host/seo/organizationLd.ts', sitePath: 'services/seo/organizationLd.ts', mode },
+      ],
+    };
+    const couplings = relativeImportCouplings(
+      manifest.files[0],
+      "import { organizationLd } from '../../host/seo/organizationLd';\n",
+      "import { organizationLd } from '../../services/seo/organizationLd';\n",
+      manifest,
+      (rel) => rel === 'host/seo/organizationLd.ts',
+    );
+    assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+    assert.equal(couplings[0].mode, mode);
+    assert.match(permanentBlock(manifest.files[0], { couplings }), /non `identical`/);
+  }
+});
+
+test('il pin recovery deriva blob e budget dal workflow trasportato', () => {
+  const workflow = Buffer.from('env:\n  FREE_TRANSLATE_CODEX_MAX_CALLS=350\n', 'utf8');
+  const source = "export const TARGET_WORKFLOW_BLOB_SHA = '0000000000000000000000000000000000000000';\n";
+  const update = translateRecoveryPinUpdate(workflow, source);
+  assert.equal(update.blobSha, gitBlobSha(workflow));
+  assert.equal(update.budget, 350);
+  assert.equal(update.changed, true);
+  assert.match(update.content, new RegExp(update.blobSha));
 });
 
 test('un accoppiamento non `identical` non diventa un arco: sarebbe un no permanente', () => {

@@ -83,6 +83,19 @@ const FIXTURES = [
     },
     opts: { workflowsScope: true },
   },
+  {
+    name: 'workflow con pin corpus-only derivato',
+    report: {
+      transported: RUN_37173895046.transported.slice(0, 1),
+      derived: [{
+        path: 'scripts/ci/translate-queue-recovery.mjs',
+        source: '.github/workflows/translate-pending.yml',
+        blobSha: '0123456789abcdef0123456789abcdef01234567',
+        budget: 350,
+      }],
+    },
+    opts: { workflowsScope: true },
+  },
   { name: 'report vuoto', report: {}, opts: {} },
 ];
 
@@ -124,6 +137,16 @@ test('lo scope workflows mancante resta un blocco tecnico, non una deroga decisi
     { workflowsScope: true },
   );
   assert.doesNotMatch(rejectedWithScope, /e' disponibile per questa identita'/, 'nessuna nota che contraddica il rifiuto esplicito');
+});
+
+test('un pin derivato escluso segue il workflow e resta tracciabile', () => {
+  const body = buildTransportPrBody({
+    transported: [],
+    derivedExcluded: ['scripts/ci/translate-queue-recovery.mjs'],
+  }, { workflowsScope: true });
+  assert.match(body, /scripts\/ci\/translate-queue-recovery\.mjs/);
+  assert.match(body, /blocked:/);
+  assert.deepEqual(decisionDeferralFindings(body), []);
 });
 
 test('il body generato resta leggibile dal realign post-merge', () => {
