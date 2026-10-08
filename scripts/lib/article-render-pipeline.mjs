@@ -30,6 +30,7 @@ import { spawnSync } from 'node:child_process';
 import { sanitizeHtmlDocument } from './sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../../generator/scripts/lib/control-char-write-report.mjs';
 import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
+import { STATIC_FALLBACK_IMAGE } from '../../generator/scripts/lib/blog-image-registry.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
 import { heldArticlesWithoutOnlinePage, releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
@@ -642,7 +643,13 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
   const thumbLocal = path.join('public', heroDir, 'thumbnails', `${heroBase}-480w.webp`);
   const heroKey = path.join(heroDir, `${heroBase}${heroExt}`);
   const thumbKey = path.join(heroDir, 'thumbnails', `${heroBase}-480w.webp`);
-  if (downloadedImageKeys.has(heroKey)) {
+  const siteOwnedImage = heroKey === STATIC_FALLBACK_IMAGE.slice(1);
+  if (siteOwnedImage) {
+    // The governed fallback is materialized by the site repository, not this
+    // corpus checkout. Keep its site-origin URL instead of treating it as a
+    // missing upload when a landing page references it.
+    console.log(`[${logPrefix}] skipping CDN upload for site-owned image ${heroKey}`);
+  } else if (downloadedImageKeys.has(heroKey)) {
     // renderSectionArticlePipeline already rewrote this exact key to CDN_BASE
     // in every emitted article page before the temporary image view vanished.
     console.log(`[${logPrefix}] skipping CDN upload for downloaded image ${heroKey}`);
@@ -655,7 +662,9 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
     console.error(`[${logPrefix}] resolved hero "${heroLocal}" does not exist on disk — omitting from cdnUploads`);
     missing?.push({ kind: 'hero', local: heroLocal, key: heroKey });
   }
-  if (downloadedImageKeys.has(thumbKey) || downloadedImageKeys.has(heroKey)) {
+  if (siteOwnedImage) {
+    console.log(`[${logPrefix}] skipping CDN upload for the thumbnail of site-owned image ${heroKey}`);
+  } else if (downloadedImageKeys.has(thumbKey) || downloadedImageKeys.has(heroKey)) {
     // The hero came FROM the CDN: its thumbnail lives there too, and its
     // absence from this checkout is expected, not a missing asset.
     console.log(`[${logPrefix}] skipping CDN upload for the thumbnail of downloaded image ${heroKey}`);
@@ -679,8 +688,9 @@ function addHeroCdnUpload({ rootDir, imagePath, cdnUploadsByKey, missing, logPre
 export function heroCdnUploads({ rootDir, entries = [], htmlPages = [], missing, logPrefix = 'article-render-pipeline', downloadedImageKeys = [] }) {
   // Derive every upload from the ACTUAL resolved directory — NOT a hardcoded
   // `images/blog/`. Shared stock heroes live under `images/places/` and use
-  // the same thumbnail convention. DEFAULT_IMG (`/og-image.png`) is outside
-  // `images/` and is deliberately not listed here.
+  // the same thumbnail convention. The governed static fallback is owned by
+  // the site repository, so it stays on its site-origin URL. DEFAULT_IMG
+  // (`/og-image.png`) is outside `images/` and is deliberately not listed.
   const cdnUploadsByKey = new Map();
   const downloaded = new Set(downloadedImageKeys);
   for (const entry of entries) addHeroCdnUpload({ rootDir, imagePath: entry?.img, cdnUploadsByKey, missing, logPrefix, downloadedImageKeys: downloaded });
