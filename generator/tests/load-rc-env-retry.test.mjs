@@ -93,6 +93,12 @@ test('il loader nomina i parametri RC irrisolti senza loggare valori', () => {
   assert.equal(formatMissingRcKeys([]), '');
 });
 
+test('i workflow immagini ricevono entrambe le chiavi foto dal loader RC', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
+  assert.match(source, /PEXELS_API_KEY:\s+\['PEXELS_API_KEY'\]/);
+  assert.match(source, /SERVER_PIXABAY_API_KEY:\s+\['PIXABAY_API_KEY'\]/);
+});
+
 test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', () => {
   assert.equal(EXPECTED_ABSENT_RC_KEYS.has('TELEGRAM_BOT_TOKEN'), true);
   assert.equal(rcValueState(null, 'TELEGRAM_BOT_TOKEN'), 'expected-absent');

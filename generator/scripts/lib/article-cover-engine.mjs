@@ -4,12 +4,41 @@ import path from 'node:path';
 
 import { generateImageFromSpec } from '../../../engine/shared/generatedImageEngine.mjs';
 import {
+  articleImageKeywords,
+  articleImagePlace,
   articleHeroImagePath,
   articleImageAssetId,
   articleImageSubject,
+  articleImageTopic,
+} from './article-cover-identity.mjs';
+import { readGeneratedImageRecords } from './blog-image-registry.mjs';
+import { readCreditRecords } from '../../../scripts/lib/image-credit-records.mjs';
+
+export {
+  articleHeroImagePath,
+  articleImageAssetId,
+  articleImageSubject,
+  articleImageTopic,
+  articleImagePlace,
+  articleImageKeywords,
 } from './article-cover-identity.mjs';
 
-export { articleHeroImagePath, articleImageAssetId, articleImageSubject } from './article-cover-identity.mjs';
+function usedArticlePhotoRecords(root) {
+  const generated = readGeneratedImageRecords(root);
+  const legacy = readCreditRecords(root)
+    .map(({ file, record }) => {
+      const pageUrl = record?.source === 'licensed-photo'
+        ? record.photo?.pageUrl
+        : record?.source === 'wikimedia-commons'
+          ? record.commons?.pageUrl
+          : null;
+      return pageUrl
+        ? { scope: 'article-hero', assetId: `legacy-credit-${file}`, sourcePageUrl: pageUrl }
+        : null;
+    })
+    .filter(Boolean);
+  return [...generated, ...legacy];
+}
 
 /**
  * The article-cover adapter shared by the normal generator and the queue
@@ -53,14 +82,15 @@ export async function generateGovernedArticleHero({
         area: promptArea,
         season: 'all seasons',
         variant: 'article hero',
+        title: articleData.title || articleData.content?.it?.title || articleData.content?.title,
+        topic: articleImageTopic(articleData),
+        place: articleImagePlace(articleData),
+        keywords: articleImageKeywords(articleData),
       },
       {
         outputDir: stagingDir,
         assetId,
-        // The engine owns provider order; this publishing path permits one
-        // attempt total so an outage fails fast and the caller can keep its
-        // governed fallback/queue semantics.
-        maxAttempts: 1,
+        usedRecords: usedArticlePhotoRecords(root),
         deadlineAt,
         onProviderAttempt,
       },

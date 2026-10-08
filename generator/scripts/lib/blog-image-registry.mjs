@@ -13,8 +13,9 @@ import '../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import { validateGeneratedImageRecord, validateGeneratedImageRegistry } from '../../../engine/shared/generatedImageRegistry.mjs';
-import { corpusCreditReader } from '../../../scripts/lib/image-credit-records.mjs';
+import { isLicensedPhotoRecord, validateGeneratedImageRecord, validateGeneratedImageRegistry } from '../../../engine/shared/generatedImageRegistry.mjs';
+import { coverKey, imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
+import { IMAGE_CREDITS_ROOT, corpusCreditReader } from '../../../scripts/lib/image-credit-records.mjs';
 import { writeJsonAtomic } from './atomic-write-json.mjs';
 import { DETERMINISTIC_CARD_KIND, isDeterministicCardRecord } from './deterministic-card-provenance.mjs';
 
@@ -106,6 +107,7 @@ function validImagePath(value) {
 }
 
 function imageProvenanceKind(record) {
+  if (isLicensedPhotoRecord(record)) return 'licensed-photo';
   return isDeterministicCardRecord(record) ? DETERMINISTIC_CARD_KIND : 'generated';
 }
 
@@ -222,10 +224,20 @@ export function hasValidBlogImageRecord(root, imagePath) {
 export function appendGeneratedImageRecord(root, record) {
   const verdict = validateGeneratedImageRecord(record);
   if (!verdict.valid) throw new Error(`generated image record rejected: ${verdict.errors.join('; ')}`);
+  const photoCredit = isLicensedPhotoRecord(record)
+    ? imageCreditRecordFromGeneratedImageRecord(record)
+    : null;
   const assets = readGeneratedImageRecords(root);
   const next = assets.filter((item) => item.assetId !== record.assetId && item.imageUrl !== record.imageUrl);
   next.push(record);
   writeJsonAtomic(absolute(root, GENERATED_IMAGE_REGISTRY_REL), generatedEnvelope(next));
+  if (photoCredit) {
+    const key = coverKey(photoCredit.cover);
+    if (!key) throw new Error(`licensed article-hero record has no cover key: ${photoCredit.cover}`);
+    const creditFile = absolute(root, `${IMAGE_CREDITS_ROOT}/blog/${key}.json`);
+    fs.mkdirSync(path.dirname(creditFile), { recursive: true });
+    writeJsonAtomic(creditFile, photoCredit);
+  }
 }
 
 export function appendEditorialImageRecord(root, record) {

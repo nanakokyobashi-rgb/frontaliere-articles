@@ -282,6 +282,7 @@ import {
   hasValidBlogImageRecord,
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
+import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
   CATALOG_FALLBACK_MIN_SHARED_WORDS,
@@ -13333,6 +13334,9 @@ function validate(data, opts = {}) {
       data._generatedImagePath = matched;
       const imageRecord = imageRecordForPath(PROJECT_ROOT, matched);
       if (imageRecord?.kind === 'wikimedia-commons') data._imageCredit = imageRecord.record;
+      if (imageRecord?.kind === 'licensed-photo') {
+        data._imageCredit = imageCreditRecordFromGeneratedImageRecord(imageRecord.record);
+      }
     }
     data.image = PLACES_IMAGES[0]; // compatibility placeholder; path takes priority
   }
@@ -14942,13 +14946,17 @@ function modifySeoService(data) {
     throw new Error(`Hero image has no valid provenance record: ${data._generatedImagePath}`);
   }
   const coverRecord = provenance.record;
-  data._imageCredit = provenance.kind === 'wikimedia-commons' ? coverRecord : null;
+  data._imageCredit = provenance.kind === 'wikimedia-commons'
+    ? coverRecord
+    : provenance.kind === 'licensed-photo'
+      ? imageCreditRecordFromGeneratedImageRecord(coverRecord)
+      : null;
   data._generatedImageRecord = provenance.kind === 'generated' || provenance.kind === DETERMINISTIC_CARD_KIND
     ? coverRecord
     : null;
   data._editorialImageRecord = provenance.kind === 'editorial-upload' ? coverRecord : null;
   const jsonValue = (value) => JSON.stringify(String(value ?? ''));
-  const imageRightsLines = provenance.kind === 'wikimedia-commons' ? '' : provenance.kind === DETERMINISTIC_CARD_KIND ? `
+  const imageRightsLines = provenance.kind === 'wikimedia-commons' || provenance.kind === 'licensed-photo' ? '' : provenance.kind === DETERMINISTIC_CARD_KIND ? `
         "acquireLicensePage": ${jsonValue(DETERMINISTIC_CARD_LICENSE_URL)},
         "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",
         "license": ${jsonValue(DETERMINISTIC_CARD_LICENSE_URL)},
@@ -15153,8 +15161,8 @@ function validateStructuredData(data) {
     throw new Error(`[validate-ld] canonicalPath "${cp}" for ${entryKey} must start and end with "/" (trailing-slash canonical contract)`);
   }
   if (data._imageCredit) {
-    // P14: a credited Commons cover carries no rights field in the literal —
-    // the engine builds all five from the record (see modifySeoService).
+    // A credited third-party cover carries no rights field in the literal —
+    // the shared renderer builds all five from the validated record.
     const imageAt = block.search(/"image"\s*:\s*\{/);
     const imageEnd = imageAt < 0 ? -1 : block.indexOf('"datePublished"', imageAt);
     const imageBlock = imageAt < 0 ? '' : block.slice(imageAt, imageEnd < 0 ? undefined : imageEnd);
