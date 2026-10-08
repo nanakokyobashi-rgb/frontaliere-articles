@@ -14,13 +14,13 @@
       "license": "generated-provider",
       "licenseUrl": "https://openai.com/policies/terms-of-use/",
       "credit": "frontaliereticino.ch",
-      "sha256": "e5d36268e8be73819689d2c07fbed7731863bc5c09a042481d27480a86953e13",
-      "bytes": 130308,
+      "sha256": "9c1a42de6d99ccbd86a1316bce850d8831d4c8a72eb1c499ad4660cbea99d019",
+      "bytes": 210924,
       "width": 1200,
       "height": 675,
       "format": "webp",
-      "generatedAt": "2026-10-07T23:54:31.800Z",
-      "verifiedAt": "2026-10-07T23:54:37.911Z",
+      "generatedAt": "2026-10-08T00:13:19.371Z",
+      "verifiedAt": "2026-10-08T00:13:25.028Z",
       "restrictions": [
         "illustrative-only",
         "no-real-recognizable-foreground-person",
@@ -41,7 +41,7 @@
         "contains_recognizable_face": false,
         "looks_like_specific_real_event": false,
         "is_photograph": false,
-        "notes": "Original generic stylized illustration; no readable text, logos, recognizable faces, or depiction of a specific real event."
+        "notes": "Original generic editorial landscape illustration; no readable text, logos, or recognizable faces."
       }
     },
     {
