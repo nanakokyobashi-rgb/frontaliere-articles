@@ -645,25 +645,25 @@ const BLOG_SEO_METADATA_2: Record<string, SEOMetadata> = {
  },
 
  'blog-tragedia-pendolare-ticino': {
- title: 'Tragedia a Porletta: muore giovane | Frontaliere Ticino',
- description: 'Un 19enne di Como perde la vita in un incidente a Porletta il 28 febbraio 2026. Un drammatico monito sui rischi del pendolarismo e l\'importanza della sicurezza',
- keywords: 'frontalieri, ticino, svizzera, italia, tragedia, porletta, muore, giovane',
- ogTitle: 'Tragedia in Ticino: frontaliere 19enne morto a Porletta',
- ogDescription: 'La morte di un giovane frontaliere comasco in un incidente a Porletta il 28 febbraio 2026 riaccende il dibattito sulla sicurezza stradale e la protezione',
+ title: 'Tragedia a Porlezza: muore giovane | Frontaliere Ticino',
+ description: 'Un 19enne di Como perde la vita in un incidente a Porlezza il 28 febbraio 2026. Un drammatico monito sui rischi del pendolarismo e l\'importanza della sicurezza',
+ keywords: 'frontalieri, ticino, svizzera, italia, tragedia, porlezza, muore, giovane',
+ ogTitle: 'Tragedia a Porlezza: muore giovane frontaliere comasco',
+ ogDescription: 'La morte di un giovane frontaliere comasco in un incidente a Porlezza il 28 febbraio 2026 riaccende il dibattito sulla sicurezza stradale e la protezione',
  canonicalPath: '/articoli-frontaliere/tragedia-pendolare-frontaliere-porletta/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
- "headline": "Incidente mortale a Porletta: frontaliere 19enne perde la vita",
- "description": "Un 19enne di Como perde la vita in un incidente a Porletta il 28 febbraio 2026. Un drammatico monito sui rischi del pendolarismo e l'importanza della sicurezza",
+ "headline": "Incidente mortale a Porlezza: frontaliere 19enne perde la vita",
+ "description": "Un 19enne di Como perde la vita in un incidente a Porlezza il 28 febbraio 2026. Un drammatico monito sui rischi del pendolarismo e l'importanza della sicurezza",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/tragedia-pendolare-ticino.webp`,
  "width": 1344,
  "height": 756,
- "caption": "Casco da scooter posato su un muretto con vista sul Lago di Lugano all'alba, simbolo del pendolarismo transfrontaliero e della tragedia avvenuta a Porletta."
+ "caption": "Casco da scooter posato su un muretto con vista sul Lago di Lugano all'alba, simbolo del pendolarismo transfrontaliero e della tragedia avvenuta a Porlezza."
  },
  "datePublished": "2026-03-01T18:45:12+00:00",
- "dateModified": "2026-03-01T18:45:12+00:00",
+ "dateModified": "2026-10-08T16:02:25Z",
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
@@ -1138,17 +1138,17 @@ const BLOG_SEO_METADATA_2: Record<string, SEOMetadata> = {
  },
 
  'blog-incidente-giovane-frontaliere': {
- title: 'Tragico scontro a Porletta: muore | Frontaliere Ticino',
- description: 'Un giovane frontaliere comasco muore in un incidente a Porletta il 28 febbraio 2026. Analisi delle implicazioni previdenziali e assicurative per le famiglie dei',
- keywords: 'frontalieri, ticino, svizzera, italia, tragico, scontro, porletta, muore',
- ogTitle: 'Tragico scontro a Porletta: muore giovane frontaliere',
- ogDescription: 'Un giovane frontaliere perde la vita a Porletta. Approfondisci le implicazioni previdenziali e assicurative per chi lavora in Ticino.',
+ title: 'Tragico scontro a Porlezza: muore | Frontaliere Ticino',
+ description: 'Un giovane frontaliere comasco muore in un incidente a Porlezza il 28 febbraio 2026. Analisi delle implicazioni previdenziali e assicurative per le famiglie dei',
+ keywords: 'frontalieri, ticino, svizzera, italia, tragico, scontro, porlezza, muore',
+ ogTitle: 'Tragico scontro a Porlezza: muore giovane frontaliere',
+ ogDescription: 'Un giovane frontaliere perde la vita a Porlezza. Approfondisci le implicazioni previdenziali e assicurative per chi lavora in Ticino.',
  canonicalPath: '/articoli-frontaliere/tragedia-frontaliere-porlezza-via-ceresio/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
- "headline": "Tragico incidente frontaliere Porletta, implicazioni previdenziali",
- "description": "Un giovane frontaliere comasco muore in un incidente a Porletta il 28 febbraio 2026. Analisi delle implicazioni previdenziali e assicurative per le famiglie dei",
+ "headline": "Tragico incidente frontaliere Porlezza, implicazioni previdenziali",
+ "description": "Un giovane frontaliere comasco muore in un incidente a Porlezza il 28 febbraio 2026. Analisi delle implicazioni previdenziali e assicurative per le famiglie dei",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/incidente-giovane-frontaliere.webp`,
  "width": 1344,
@@ -1156,7 +1156,7 @@ const BLOG_SEO_METADATA_2: Record<string, SEOMetadata> = {
  "caption": "Casco da scooter a bordo strada con il Lago di Lugano sullo sfondo, simbolo del tragico incidente di un frontaliere"
  },
  "datePublished": "2026-03-02T06:53:59+00:00",
- "dateModified": "2026-03-02T06:53:59+00:00",
+ "dateModified": "2026-10-08T16:02:25Z",
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
