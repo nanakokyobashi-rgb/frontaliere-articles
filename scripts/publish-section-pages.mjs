@@ -277,7 +277,7 @@ function migrationManifestPages(section, previousArticlePages, previousArchivePa
     ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
     ...previousArchivePages.map((page) => manifestEntryFromReleasePage(section, page, 'archive')),
     ...routes.flatMap((route) => {
-      const landing = pageEntry(section, `${route.prefix.slice(1)}index.html`, 'landing');
+      const landing = pageEntry(section, `${route.prefix.slice(1)}/index.html`, 'landing');
       const hubs = topicHubs.map((slugs) => pageEntry(section, `${route.prefix.slice(1)}${slugs[route.locale]}/index.html`, 'hub'));
       return [landing, ...hubs];
     }),
