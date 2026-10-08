@@ -1,0 +1,18 @@
+{
+  "keywords": [],
+  "strikes": {},
+  "topicGateUrls": {
+    "canton-sz::https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26254": {
+      "section": "canton-sz",
+      "ts": 1791469993679
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/lammschlucht-ab-montag-acht-wochen-komplett-gesperrt-art-1725935": {
+      "section": "canton-sz",
+      "ts": 1791470070397
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/adligenswil-28-wohnungen-und-migros-filiale-auf-dem-buetzi-areal-art-1725707": {
+      "section": "canton-sz",
+      "ts": 1791470131623
+    }
+  }
+}

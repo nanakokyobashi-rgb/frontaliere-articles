@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'svitto-cambio-cassa-malati',
+ category: 'pratico',
+ date: '2026-10-08T14:43:30.771Z',
+ image: '/images/blog/article-tf-nega-sconto-cassa-malati-padre-affidamento-alternato.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

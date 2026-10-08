@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/culture/locarno-film-festival/1942844/il-don-chisciotte-del-cinema-svizzero": "bideau-locarno-film-festival",
   "https://www.ticinonews.ch/ticino/nodo-di-interscambio-di-biasca-si-entra-nellultima-fase-440417": "nodo-biasca-lavori-fase-finale",
   "https://www.tio.ch/newsblog/valute-e-frontiere/1941934/tredicesima-avs-ai-frontalieri-come-funziona-da-dicembre": "tredicesima-avs-frontalieri-dettagli",
   "https://comozero.it/attualita/lavoro-sommerso-nel-comasco-18-imprese-sospese-sanzioni-per-757mila-euro": "sanzioni-sicurezza-lavoro-comasco",
@@ -2180,6 +2179,11 @@
   "https://www.tio.ch/sport/hockey/1955588/scambio-di-portieri-sull-asse-lugano-ginevra": {
     "articleId": "scambio-portieri-lugano-ginevra",
     "ts": "2026-10-08T13:38:03.604Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955494/un-brindisi-solidale-al-mercato-coperto-di-giubiasco": {
+    "articleId": "aperitivo-solidale-giubiasco",
+    "ts": "2026-10-08T14:47:04.110Z",
     "keyForm": 2
   }
 }
