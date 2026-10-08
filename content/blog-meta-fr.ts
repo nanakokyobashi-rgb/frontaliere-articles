@@ -12818,6 +12818,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.scambio-portieri-lugano-ginevra.title': 'Échange de gardiens : Mayer à Lugano, Van Pottelberghe à Genève',
     'blog.article.scambio-portieri-lugano-ginevra.excerpt': '## En bref - Mayer arrive à Lugano, Van Pottelberghe va à Genève - Prêt croisé jusqu\'à la fin de la saison 2026/27 - Mayer compte 397 matchs',
     'blog.article.scambio-portieri-lugano-ginevra.imageAlt': 'Gardien de but de hockey en action à la Cornèr Arena de Lugano avec les Alpes suisses en arrière-plan',
+    'blog.article.aperitivo-solidale-giubiasco.title': 'Brindisi solidaire au Marché couvert de Giubiasco',
+    'blog.article.aperitivo-solidale-giubiasco.excerpt': '## En bref - Le Kiwanis Club Bellinzona e Valli fête ses 40 ans - Aperò In Sem a lieu jeudi 8 octobre - Le bénéfice est entièrement destiné à Ares et L\'Ora',
+    'blog.article.aperitivo-solidale-giubiasco.imageAlt': 'Apéritif solidaire avec des vins tessinois au marché couvert de Giubiasco',
 };
 
 export default blogMetaFr;
