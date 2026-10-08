@@ -152,7 +152,27 @@ test('un file servito non fa leggere R2, ne\' caricare, ne\' invalidare niente',
   assert.deepEqual(cdn.calls.checkStored, []);
   assert.deepEqual(cdn.calls.upload, []);
   assert.deepEqual(cdn.calls.purge, []);
-  assert.deepEqual(cdn.calls.confirm, []);
+  // L'URL delle pagine viene chiesto comunque, una volta per voce di cache.
+  assert.deepEqual(
+    cdn.calls.confirm,
+    assets.flatMap((asset) => [[asset.key, undefined], [asset.key, SHELL_ASSET_PAGE_ORIGIN]]),
+  );
+});
+
+// Secondo rilievo della review: la sonda (una HEAD, che legge sempre R2) mostra
+// il file, ma l'URL delle pagine risponde ancora con il 404 tenuto dall'edge.
+test('un file che la sonda mostra ma che l\'URL delle pagine non serve viene invalidato, senza toccare R2', async () => {
+  const assets = shellAssetsFromStaticScripts(hostShellFiles());
+  const cdn = fakeCdn(assets.map((asset) => asset.key));
+  for (const asset of assets) cdn.edge404.add(asset.key);
+
+  const results = await ensureCdnShellAssets({ assets, ...cdn });
+
+  assert.deepEqual(results.map((result) => result.outcome), assets.map(() => 'served'));
+  assert.deepEqual(cdn.calls.checkStored, []);
+  assert.deepEqual(cdn.calls.upload, []);
+  assert.deepEqual(cdn.calls.purge, [assets.map((asset) => asset.key)]);
+  assert.equal(cdn.edge404.size, 0);
 });
 
 test('un runner respinto dall\'edge non sostituisce un oggetto che R2 ha, ma l\'URL va confermato lo stesso', async () => {
