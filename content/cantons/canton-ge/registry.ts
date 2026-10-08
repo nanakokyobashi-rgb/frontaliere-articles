@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'economia-ginevrina-ripresa-globale',
  category: 'novita',
  date: '2026-10-07T08:41:49.737Z',
- image: '/images/blog/crescita-economia-svizzera-seco-2026.webp',
+ image: '/images/blog/article-economia-ginevrina-ripresa-globale.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GE'],

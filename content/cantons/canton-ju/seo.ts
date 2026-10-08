@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Disoccupazione in Giura al 4,2% a settembre 2026, con 2.573 iscritti all'ORP e un calo di 0,1 punti rispetto ad agosto. Confronto nazionale e dati distrettuali.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-giura-settembre-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Via di Delémont con bacheca di offerte di lavoro, autunno"

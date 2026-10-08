@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52',
  category: 'fiscale',
  date: '2026-10-07T08:41:12.746Z',
- image: '/images/blog/galleria-moscia-acapulco-180-milioni.webp',
+ image: '/images/blog/article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['ZG'],

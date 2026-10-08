@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Dal 1° gennaio 2027 il Canton Basilea-Stadt renderà digitali tutte le domande edilizie: oggi è ancora possibile scegliere tra carta e formato digitale.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/avs-prestazioni-complementari-basilea-campagna.webp`,
+        "url": `${BASE_URL}/images/blog/article-permessi-edilizi-digitali-basel.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Domanda edilizia digitale su uno schermo in un ufficio di Basilea"

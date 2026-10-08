@@ -98931,7 +98931,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/autonomi-frontalieri-svizzera-come-aprire.webp`,
+        "url": `${BASE_URL}/images/blog/article-auto-elettrica-come-risparmiare-fino-al-50.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine editoriale relativa a: Auto elettrica: come risparmiare fino al 50%"
@@ -98965,7 +98965,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-e-formazione-canton-soletta.webp`,
+        "url": `${BASE_URL}/images/blog/article-motore-filo-epfl.webp`,
         "width": 1200,
         "height": 675,
         "caption": "FiberMotor e pantaloni robotici in un laboratorio di ricerca"

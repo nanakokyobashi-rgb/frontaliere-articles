@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Governo di Berna propone di allentare le regole sull'uso esclusivo e di introdurre il rimborso entro 4 anni. Franchigia di 800.000 CHF confermata.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/imposta-successione-donazione-berna.webp`,
+        "url": `${BASE_URL}/images/blog/article-simplificazione-imposta-trasferimento-berna.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Edificio abitativo a Berna con piano architettonico in mano"
@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il BAV ha approvato tram e risanamento a Wabern: linea 9 fino a Kleinwabern, nodo tra S-Bahn, bus e tram, lavori non prima del 2028, ricorso in corso.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/tram-treno-lugano-lavori-inizio.webp`,
+        "url": `${BASE_URL}/images/blog/article-wabern-tram-risanamento.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Progetti del tram di Kleinwabern e risanamento del centro di Wabern"
