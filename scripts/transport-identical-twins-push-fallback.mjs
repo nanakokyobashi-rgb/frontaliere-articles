@@ -13,6 +13,8 @@ const WORKFLOW_PREFIX = '.github/workflows/';
 const ANSI_ESCAPE_RE = /\u001B(?:\[[0-?]*[ -/]*[@-~]|\][^\u0007]*(?:\u0007|\u001B\\))/g;
 const WORKFLOW_REFUSAL_RE = /refusing\s+to\s+allow\s+a\s+GitHub\s+App\s+to\s+create\s+or\s+update\s+workflow\s+(?:(?<quote>[`'\"])(?<quotedPath>\.github\/workflows\/(?:\\[^\r\n]|(?!\k<quote>)[^\\\r\n])+)\k<quote>|(?<barePath>\.github\/workflows\/[^\s`'\"]+))\s+without\s+[`'\"]?workflows[`'\"]?\s+permission/gi;
 
+const writeStdout = (value) => fs.writeSync(1, `${value}\n`);
+
 const C_STYLE_ESCAPES = Object.freeze({
   a: '\x07',
   b: '\b',
@@ -162,13 +164,13 @@ function restoreProperty(target, source, key) {
 }
 
 /**
- * Ripristina baseline/couplingSnapshot e appartenenza al manifest dei workflow
+ * Ripristina baseline/couplingSnapshot e appartenenza al manifest dei path
  * indicati, così il commit resta identico al parent anche per file nuovi o
  * rimossi, conservando l'ordine precedente relativo alle altre voci presenti.
  */
-export function restoreWorkflowSnapshots(currentManifest, previousManifest, paths) {
-  const workflowPaths = sortedUnique(paths);
-  const invalid = workflowPaths.filter((rel) => !isWorkflowPath(rel));
+function restoreSnapshots(currentManifest, previousManifest, paths, { workflowsOnly = false } = {}) {
+  const pathsToRestore = sortedUnique(paths);
+  const invalid = workflowsOnly ? pathsToRestore.filter((rel) => !isWorkflowPath(rel)) : [];
   if (invalid.length) throw new Error(`fallback non autorizzato per path non workflow: ${invalid.join(', ')}`);
 
   const current = clone(currentManifest);
@@ -177,11 +179,11 @@ export function restoreWorkflowSnapshots(currentManifest, previousManifest, path
   const currentFiles = current.files;
   const previousFiles = previousManifest.files;
   const missingPreviousEntries = [];
-  for (const rel of workflowPaths) {
+  for (const rel of pathsToRestore) {
     const nowEntries = currentFiles.filter((entry) => entry?.path === rel);
     const oldEntries = previousFiles.filter((entry) => entry?.path === rel);
     if (nowEntries.length > 1 || oldEntries.length > 1) {
-      throw new Error(`manifest con voce workflow duplicata per ${rel}`);
+      throw new Error(`manifest con voce duplicata per ${rel}`);
     }
     if (!nowEntries.length && !oldEntries.length) {
       throw new Error(`manifest senza voce corrente/precedente per ${rel}`);
@@ -226,18 +228,41 @@ export function restoreWorkflowSnapshots(currentManifest, previousManifest, path
   return current;
 }
 
-/** Toglie dal report solo i workflow rimossi dal commit e li rende espliciti. */
+export function restoreTransportSnapshots(currentManifest, previousManifest, paths) {
+  return restoreSnapshots(currentManifest, previousManifest, paths);
+}
+
+export function restoreWorkflowSnapshots(currentManifest, previousManifest, paths) {
+  return restoreSnapshots(currentManifest, previousManifest, paths, { workflowsOnly: true });
+}
+
+/** Toglie dal report i workflow rifiutati e le componenti accoppiate, rendendoli espliciti. */
 export function removeWorkflowPathsFromReport(report, paths) {
   const workflowPaths = sortedUnique(paths);
   const invalid = workflowPaths.filter((rel) => !isWorkflowPath(rel));
   if (invalid.length) throw new Error(`report fallback non autorizzato per path non workflow: ${invalid.join(', ')}`);
-  const excluded = new Set(report.workflowExcluded || []);
-  for (const rel of workflowPaths) excluded.add(rel);
-  const excludedSet = new Set(workflowPaths);
+  const excluded = new Set(workflowPaths);
+  for (const component of report.transportComponents || []) {
+    if (!Array.isArray(component) || !component.some((rel) => excluded.has(rel))) continue;
+    for (const rel of component) {
+      if (typeof rel === 'string' && rel) excluded.add(rel);
+    }
+  }
+  const excludedPaths = sortedUnique([...excluded]);
+  const excludedSet = new Set(excludedPaths);
+  const derivedExcluded = sortedUnique([
+    ...(report.derivedExcluded || []),
+    ...(report.derived || [])
+      .filter((item) => excludedSet.has(item.source) || excludedSet.has(item.path))
+      .map((item) => item.path),
+  ]);
   return {
     ...clone(report),
     transported: (report.transported || []).filter((item) => !excludedSet.has(item.path)),
-    workflowExcluded: sortedUnique([...excluded]),
+    derived: (report.derived || []).filter((item) => !excludedSet.has(item.source) && !excludedSet.has(item.path)),
+    derivedExcluded,
+    transportExcluded: excludedPaths,
+    workflowExcluded: excludedPaths.filter(isWorkflowPath),
   };
 }
 
@@ -270,7 +295,7 @@ function writeJson(file, value) {
 function prepareFallback() {
   const classification = classifyWorkflowPushFailure(fs.readFileSync(requiredArg('push-log'), 'utf8'));
   if (!classification.fallback) {
-    console.log(JSON.stringify(classification, null, 2));
+    writeStdout(JSON.stringify(classification, null, 2));
     return 2;
   }
 
@@ -282,20 +307,25 @@ function prepareFallback() {
   const currentManifest = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
   const previousManifest = JSON.parse(fs.readFileSync(previousManifestFile, 'utf8'));
   const report = JSON.parse(fs.readFileSync(reportFile, 'utf8'));
-  const restoredManifest = restoreWorkflowSnapshots(currentManifest, previousManifest, workflowPaths);
   const updatedReport = removeWorkflowPathsFromReport(report, workflowPaths);
+  const excludedPaths = updatedReport.transportExcluded || workflowPaths;
+  const restoredManifest = restoreTransportSnapshots(currentManifest, previousManifest, excludedPaths);
 
   writeJson(manifestFile, restoredManifest);
   writeJson(reportFile, updatedReport);
-  console.log(JSON.stringify({ ...classification, excludedPaths: workflowPaths }, null, 2));
+  writeStdout(JSON.stringify({
+    ...classification,
+    excludedPaths,
+    excludedDerivedPaths: updatedReport.derivedExcluded || [],
+  }, null, 2));
   return 0;
 }
 
 if (process.argv[1]?.endsWith('transport-identical-twins-push-fallback.mjs')) {
   try {
-    process.exit(prepareFallback());
+    process.exitCode = prepareFallback();
   } catch (error) {
     console.error(`transport-identical-twins-push-fallback fallito: ${error?.stack || error}`);
-    process.exit(1);
+    process.exitCode = 1;
   }
 }

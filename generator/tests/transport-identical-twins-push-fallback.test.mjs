@@ -202,6 +202,18 @@ test('il report conserva native-automerge e nomina i workflow esclusi', () => {
   assert.equal(updated.manifestChanged, true);
 });
 
+test('il fallback esclude anche il derivato del workflow rifiutato', () => {
+  const workflow = '.github/workflows/translate-pending.yml';
+  const derived = 'scripts/ci/translate-queue-recovery.mjs';
+  const updated = removeWorkflowPathsFromReport({
+    transported: [{ path: workflow }, { path: 'scripts/ci/native-automerge-gate.mjs' }],
+    derived: [{ path: derived, source: workflow, blobSha: 'abc' }],
+  }, [workflow]);
+  assert.deepEqual(updated.transported, [{ path: 'scripts/ci/native-automerge-gate.mjs' }]);
+  assert.deepEqual(updated.derived, []);
+  assert.deepEqual(updated.derivedExcluded, [derived]);
+});
+
 test('ripristina baseline e couplingSnapshot dal parent solo sui workflow', () => {
   const previous = {
     files: [
@@ -302,7 +314,7 @@ test('il ripristino mantiene l’ordine precedente dei workflow rimossi', () => 
   ]);
 });
 
-function runPrepareFallback({ currentFiles, previousFiles, commitPaths, transported }) {
+function runPrepareFallback({ currentFiles, previousFiles, commitPaths, transported, transportComponents = [], derived = [] }) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'transport-fallback-'));
   const files = {
     pushLog: path.join(directory, 'push.log'),
@@ -316,7 +328,7 @@ function runPrepareFallback({ currentFiles, previousFiles, commitPaths, transpor
     fs.writeFileSync(files.commitPaths, `${commitPaths.join('\n')}\n`);
     fs.writeFileSync(files.manifest, `${JSON.stringify({ files: currentFiles })}\n`);
     fs.writeFileSync(files.previousManifest, `${JSON.stringify({ files: previousFiles })}\n`);
-    fs.writeFileSync(files.report, `${JSON.stringify({ manifestChanged: true, transported })}\n`);
+    fs.writeFileSync(files.report, `${JSON.stringify({ manifestChanged: true, transported, transportComponents, derived })}\n`);
     const result = spawnSync(process.execPath, [
       FALLBACK_SCRIPT,
       `--push-log=${files.pushLog}`,
@@ -379,6 +391,42 @@ test('prepareFallback ripristina il set completo per workflow nuovi o rimossi', 
     assert.deepEqual(run.report.workflowExcluded, [workflowPath], scenario.name);
     assert.deepEqual(JSON.parse(run.result.stdout).excludedPaths, [workflowPath], scenario.name);
   }
+});
+
+test('prepareFallback ripristina l’intera componente contract/artifact, non solo il workflow rifiutato', () => {
+  const workflowPath = '.github/workflows/crawler-group-01.yml';
+  const siblingPath = 'scripts/ci/translate-queue-recovery.mjs';
+  const derivedPath = 'scripts/ci/derived-pin.mjs';
+  const previousWorkflow = {
+    path: workflowPath,
+    mode: 'identical',
+    baseline: { site: 'old-workflow', corpus: 'old-workflow' },
+  };
+  const previousSibling = {
+    path: siblingPath,
+    mode: 'identical',
+    baseline: { site: 'old-sibling', corpus: 'old-sibling' },
+    couplingSnapshot: [{ path: 'old-contract', mode: 'identical' }],
+  };
+  const run = runPrepareFallback({
+    currentFiles: [
+      { ...previousWorkflow, baseline: { site: 'new-workflow', corpus: 'new-workflow' } },
+      { ...previousSibling, baseline: { site: 'new-sibling', corpus: 'new-sibling' }, couplingSnapshot: [] },
+    ],
+    previousFiles: [previousWorkflow, previousSibling],
+    commitPaths: [workflowPath, siblingPath],
+    transported: [{ path: workflowPath }, { path: siblingPath }],
+    transportComponents: [[workflowPath, siblingPath]],
+    derived: [{ path: derivedPath, source: workflowPath, blobSha: 'abc' }],
+  });
+  assert.equal(run.result.status, 0, run.result.stderr);
+  assert.deepEqual(run.manifest.files, [previousWorkflow, previousSibling]);
+  assert.deepEqual(run.report.transported, []);
+  assert.deepEqual(run.report.transportExcluded, [workflowPath, siblingPath]);
+  assert.deepEqual(run.report.derived, []);
+  assert.deepEqual(run.report.derivedExcluded, [derivedPath]);
+  assert.deepEqual(JSON.parse(run.result.stdout).excludedPaths, [workflowPath, siblingPath]);
+  assert.deepEqual(run.report.workflowExcluded, [workflowPath]);
 });
 
 test('il workflow usa il helper e non offre un fallback per altri push error', () => {

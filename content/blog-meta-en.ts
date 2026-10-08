@@ -12778,6 +12778,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.luvinate-progetto-motorio-materna.title': 'Luvinate: motor skills project launches at the preschool',
     'blog.article.luvinate-progetto-motorio-materna.excerpt': '## TL;DR - At Luvinate the motor project 26-27 begins - The school collaborates with Varese Basket School - The program is aimed at the children of the School',
     'blog.article.luvinate-progetto-motorio-materna.imageAlt': 'Children playing outdoors at a kindergarten',
+    'blog.article.pro-patria-varese-5-2-coppa-italia.title': 'Pro patria beats Varese 5-2 in the Coppa Italia',
+    'blog.article.pro-patria-varese-5-2-coppa-italia.excerpt': '## TL;DR - Pro Patria beats Varese 5-2 at Franco Ossola. - Maistrello, Mapelli and Bonaidi seal the first 3-0. - Gallotti and Castellucchio bring back',
+    'blog.article.pro-patria-varese-5-2-coppa-italia.imageAlt': 'Lake Lugano at sunset with mountain reflections',
 };
 
 export default blogMetaEn;

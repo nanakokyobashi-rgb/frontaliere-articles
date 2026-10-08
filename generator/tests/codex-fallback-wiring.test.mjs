@@ -183,9 +183,10 @@ test('translate-pending: broker dopo Argos e Codex primario in 2a.2/2b/2d/2e', (
     consumerNames.indexOf(TITLE_LANE_2A2) <= 0,
     'the 2a.2 title lane, when it receives the Codex socket, comes before the 2b cascade',
   );
+  const workflowFallbackBudget = /FREE_TRANSLATE_CODEX_MAX_CALLS=(\d+)/.exec(source)?.[1];
   const hasWorkflowCallBudget = /FREE_TRANSLATE_CODEX_MAX_CALLS_REPO:/.test(source)
     && /printf ['"]FREE_TRANSLATE_CODEX_MAX_CALLS=%s/.test(source)
-    && /FREE_TRANSLATE_CODEX_MAX_CALLS=350/.test(source);
+    && /^\d+$/.test(workflowFallbackBudget ?? '');
   for (const block of consumers) {
     assert.ok(
       /FREE_TRANSLATE_CODEX_MAX_CALLS:\s*"?\d+"?/.test(block) || hasWorkflowCallBudget,

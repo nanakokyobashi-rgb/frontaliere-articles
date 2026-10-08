@@ -122,7 +122,14 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { classify, gitBlobSha, siteFile } from './loop-drift-check.mjs';
+import {
+  classify,
+  gitBlobSha,
+  resolveRelativeImport,
+  siteFile,
+} from './loop-drift-check.mjs';
+import { relativeImportSpecifiers } from './lib/import-specifiers.mjs';
+import { TARGET_WORKFLOW_PATH } from './translate-queue-recovery.mjs';
 // Dalla libreria e non da `scan-failed-runs.mjs`: quello e' una CLI che apre
 // issue, e importarla per leggere un numero tira dentro
 // `github-issue-creator.mjs` e le sue costanti di argv.
@@ -166,7 +173,8 @@ const REALIGN_FILE = (RAW_ARGS.find((a) => a.startsWith('--realign=')) || '').sl
  * configura male (stessa classe degli override malformati di #797/#811).
  * `parsePositiveNum` è la sorgente unica di quella validazione.
  */
-const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, 25, {
+const DEFAULT_MAX_FILES = 25;
+const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, DEFAULT_MAX_FILES, {
   label: 'TRANSPORT_MAX_FILES',
   tool: 'transport-identical-twins',
   // Un tetto FRAZIONARIO passa il test "positivo" e poi viene troncato:
@@ -232,6 +240,52 @@ const MAX_FAILURE_RATIO = parseRatio(process.env.TRANSPORT_MAX_FAILURE_RATIO, 0.
 });
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
+const sha256Full = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
+
+export const CRAWLER_CONTRACT_REL = 'generator/data/crawler-cross-repo-contract.json';
+export const TRANSLATE_WORKFLOW_REL = TARGET_WORKFLOW_PATH;
+export const TRANSLATE_RECOVERY_REL = 'scripts/ci/translate-queue-recovery.mjs';
+
+/**
+ * Il budget di chiamate Codex e' un pin derivato dall'artifact workflow, non
+ * una scelta indipendente del corpus. Ritorna il fallback letterale del
+ * workflow; un budget fornito solo da una repository variable non e'
+ * derivabile e resta deliberatamente non attestato qui.
+ */
+export function translateCodexFallbackBudget(workflowContent) {
+  const match = /FREE_TRANSLATE_CODEX_MAX_CALLS=(\d+)/u.exec(String(workflowContent ?? ''));
+  return match ? Number(match[1]) : null;
+}
+
+/**
+ * Produce the one corpus-only pin that must follow a transported
+ * `translate-pending.yml`. The function is pure so the coupling between the
+ * transported bytes and the generated pin is testable without network or
+ * filesystem writes.
+ */
+export function translateRecoveryPinUpdate(workflowContent, recoverySource) {
+  const bytes = Buffer.isBuffer(workflowContent)
+    ? workflowContent
+    : Buffer.from(String(workflowContent ?? ''), 'utf8');
+  const source = String(recoverySource ?? '');
+  const blobSha = gitBlobSha(bytes);
+  const pinRe = /(export const TARGET_WORKFLOW_BLOB_SHA\s*=\s*')[0-9a-f]{40}(';)/u;
+  const match = pinRe.exec(source);
+  if (!match) {
+    return { path: TRANSLATE_RECOVERY_REL, source: TRANSLATE_WORKFLOW_REL, changed: false, reason: 'pin TARGET_WORKFLOW_BLOB_SHA non trovato' };
+  }
+  const content = source.slice(0, match.index)
+    + match[1] + blobSha + match[2]
+    + source.slice(match.index + match[0].length);
+  return {
+    path: TRANSLATE_RECOVERY_REL,
+    source: TRANSLATE_WORKFLOW_REL,
+    changed: content !== source,
+    content,
+    blobSha,
+    budget: translateCodexFallbackBudget(bytes),
+  };
+}
 
 /**
  * Decisione pura per il guard «una PR di trasporto alla volta».
@@ -354,6 +408,301 @@ export function scalarFingerprintCouplings(manifest) {
     out.get(artifact).push({ path: entry.path, mode: entry.mode || 'non registrato', declaredBy: 'scalarFingerprint' });
   }
   return out;
+}
+
+function addCoupling(map, source, coupling) {
+  if (!source || !coupling?.path) return;
+  if (!map.has(source)) map.set(source, []);
+  const current = map.get(source);
+  const key = `${coupling.path}\u0000${coupling.mode}\u0000${coupling.reason || ''}`;
+  if (!current.some((item) => `${item.path}\u0000${item.mode}\u0000${item.reason || ''}` === key)) {
+    current.push(coupling);
+  }
+}
+
+function mergeCouplings(...groups) {
+  const byPath = new Map();
+  for (const group of groups) {
+    for (const coupling of group || []) {
+      if (!coupling?.path) continue;
+      const previous = byPath.get(coupling.path);
+      if (!previous || (previous.mode === 'identical' && coupling.mode !== 'identical')) {
+        byPath.set(coupling.path, { ...coupling });
+        continue;
+      }
+      // Keep the conservative mode, while retaining the declaration marker
+      // that makes a derived coupling visible to `permanentBlock`.
+      if (coupling.declaredBy && !previous.declaredBy) previous.declaredBy = coupling.declaredBy;
+      if (coupling.reason && !previous.reason) previous.reason = coupling.reason;
+    }
+  }
+  return [...byPath.values()];
+}
+
+function parseCrawlerContract(value) {
+  let parsed;
+  if (value && typeof value === 'object' && !Buffer.isBuffer(value)) parsed = value;
+  try {
+    if (parsed === undefined) parsed = JSON.parse(Buffer.isBuffer(value) ? value.toString('utf8') : String(value ?? ''));
+  } catch {
+    return null;
+  }
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed) || !Array.isArray(parsed.artifacts)) return null;
+  if (parsed.artifacts.length === 0 || !parsed.artifacts.every((artifact) => (
+    artifact
+    && typeof artifact === 'object'
+    && typeof artifact.file === 'string'
+    && artifact.file.trim() !== ''
+    && !artifact.file.includes('..')
+    && !artifact.file.includes('\\')
+    && !path.posix.isAbsolute(artifact.file)
+    && typeof artifact.artifactSha256 === 'string'
+    && /^[0-9a-f]{64}$/iu.test(artifact.artifactSha256)
+  ))) return null;
+  return parsed;
+}
+
+/**
+ * Una componente crawler deve entrare intera nel batch. Il contratto e' un
+ * file aggiuntivo rispetto al roster `artifacts[]`, quindi il budget minimo
+ * della sua unita' e' roster + contratto. Il limite configurato resta il
+ * minimo per le altre componenti; questa eccezione evita che l'unita'
+ * dichiarata dal contratto sia rinviata per sempre appena il roster raggiunge
+ * il tetto ordinario.
+ */
+export function transportMaxFilesForContract(maxFiles, contractSource) {
+  const contract = parseCrawlerContract(contractSource);
+  return contract
+    ? Math.max(maxFiles, contract.artifacts.length + 1)
+    : maxFiles;
+}
+
+/**
+ * Calcola la chiusura degli import relativi di un gemello rispetto ai due
+ * alberi. Gli import vengono raccolti da ENTRAMBI i byte: una versione
+ * `site-ahead` puo' aggiungere o rimuovere un import rispetto al corpus, e la
+ * sorgente locale da sola non descrive piu' la dipendenza che verra' copiata.
+ * Se il file sul sito, sotto il suo `sitePath`, risolve un import a un path il
+ * cui gemello corpus e' diverso da quello risolto localmente, il gemello
+ * importato entra nello stesso componente di trasporto. Se un import presente
+ * sul sito non ha un target dichiarato dal manifest, il coupling e' bloccante:
+ * una copia a meta' e' peggio di un rinvio leggibile.
+ *
+ * @param {{path:string, sitePath?:string, mode:string}} entry
+ * @param {string|Buffer|null} localSource testo corpus dell'entry
+ * @param {string|Buffer|null} siteSourceBytes byte dell'entry sotto `sitePath`
+ * @param {{files?:Array<object>}} manifest
+ * @param {(path:string)=>boolean} [corpusExists]
+ * @returns {Array<{path:string,mode:string,declaredBy:string,reason?:string}>}
+ */
+export function relativeImportCouplings(entry, localSource, siteSourceBytes, manifest, corpusExists = (rel) => fs.existsSync(path.join(ROOT, rel))) {
+  if (!entry || entry.mode !== 'identical') return [];
+  if (!MODULE_EXTENSIONS.has(path.extname(entry.path).toLowerCase())
+    || !MODULE_EXTENSIONS.has(path.extname(entry.sitePath || entry.path).toLowerCase())) return [];
+  const localText = typeof localSource === 'string'
+    ? localSource
+    : Buffer.isBuffer(localSource) ? localSource.toString('utf8') : null;
+  const siteText = typeof siteSourceBytes === 'string'
+    ? siteSourceBytes
+    : Buffer.isBuffer(siteSourceBytes) ? siteSourceBytes.toString('utf8') : null;
+  if (localText === null || siteText === null) {
+    const missing = [];
+    if (localText === null) missing.push('corpus');
+    if (siteText === null) missing.push('sitePath');
+    return [{
+      path: entry.path,
+      mode: 'unreadable',
+      declaredBy: 'relative-import',
+      reason: `sorgente ${missing.join(' e ')} del gemello non leggibile: chiusura degli import non verificabile`,
+    }];
+  }
+
+  const entries = Array.isArray(manifest?.files) ? manifest.files : [];
+  const modeOf = new Map(entries.map((item) => [item.path, item.mode]));
+  const bySite = new Map(entries.map((item) => [item.sitePath || item.path, item]));
+  const corpusKnown = (candidate) => modeOf.has(candidate) || corpusExists(candidate);
+  const siteSource = entry.sitePath || entry.path;
+  const localSpecs = new Set(relativeImportSpecifiers(localText));
+  const siteSpecs = new Set(relativeImportSpecifiers(siteText));
+  const specs = new Set([...localSpecs, ...siteSpecs]);
+  const couplings = [];
+
+  for (const spec of specs) {
+    const localTarget = resolveRelativeImport(entry.path, spec, corpusKnown);
+    const siteTarget = resolveRelativeImport(siteSource, spec, (candidate) => bySite.has(candidate));
+    if (!siteTarget) {
+      // Un import rimasto solo nel corpus non e' una dipendenza del file che
+      // verra' copiato dal sito, ma resta nel grafo per conservare la chiusura
+      // gia' attestata dal lato locale. Un import presente sul sito senza
+      // target manifesto, invece, e' un blocker anche se il corpus ha un
+      // omonimo: il byte copiato avrebbe una dipendenza non verificata.
+      if (!siteSpecs.has(spec) && !localTarget) continue;
+      if (!siteSpecs.has(spec)) {
+        couplings.push({
+          path: localTarget,
+          mode: modeOf.get(localTarget) || 'non registrato',
+          declaredBy: 'relative-import',
+          reason: `import relativo ${spec} presente solo nel corpus: il gemello locale ${localTarget} resta nella chiusura`,
+        });
+        continue;
+      }
+      couplings.push({
+        path: localTarget || path.posix.normalize(path.posix.join(path.posix.dirname(siteSource), spec)),
+        mode: 'non registrato',
+        declaredBy: 'relative-import',
+        reason: `import relativo ${spec} presente sul sitePath ${siteSource}, ma il target non e' nel manifest`,
+      });
+      continue;
+    }
+    const twin = bySite.get(siteTarget);
+    if (!twin) continue;
+    couplings.push({
+      path: twin.path,
+      // Un import che il sito ha aggiunto puo' non avere un target risolto
+      // nell'albero corpus. In quel caso il twin del sito e' comunque il file
+      // da portare insieme: `bySite` ne certifica l'esistenza e il suo mode.
+      mode: twin.mode || 'non registrato',
+      declaredBy: 'relative-import',
+      reason: localSpecs.has(spec)
+        ? `import relativo ${spec} risolve sul corpus a ${localTarget}, mentre il gemello di ${siteTarget} e' ${twin.path}`
+        : `import relativo ${spec} presente sul sitePath ${siteSource}: il suo gemello e' ${twin.path}`,
+    });
+  }
+  return mergeCouplings(couplings);
+}
+
+/**
+ * Grafo inverso del contratto crawler cross-repo. Il contratto e ogni artifact
+ * che elenca sono una sola unita' di trasporto quando entrambi sono candidati;
+ * `closeTransportSet()` applica poi il tetto all'intero componente, prima del
+ * taglio. Se il contratto non e' verificabile, il grafo lega invece l'intera
+ * famiglia dei workflow cross-repo potenziali al contratto, cosi' nessun
+ * artifact puo' entrare in `candidates` da solo. I path stabili sono innocui:
+ * `alignedPaths` permette di trasportare un contratto che cambia senza
+ * ricopiare artifact che non sono cambiati.
+ */
+export function crawlerContractCouplings(manifest, contractSource) {
+  const graph = new Map();
+  const entries = Array.isArray(manifest?.files) ? manifest.files : [];
+  const byPath = new Map(entries.map((entry) => [entry.path, entry]));
+  const contractEntry = byPath.get(CRAWLER_CONTRACT_REL);
+  const contract = parseCrawlerContract(contractSource);
+  if (!contractEntry) return graph;
+  if (!contract) {
+    // Senza `artifacts[]` non sappiamo quale subset del manifest il contratto
+    // descriva. Il fallback deve quindi essere conservativo sull'intera
+    // famiglia dei workflow cross-repo potenziali: altrimenti un artifact
+    // `identical` potrebbe passare il verdetto mentre il contratto resta
+    // escluso, spezzando il batch proprio nel caso non verificabile.
+    const potentialArtifacts = entries.filter((entry) => (
+      typeof entry?.path === 'string'
+      && entry.path.startsWith('.github/workflows/')
+      && (typeof entry.sitePath !== 'string' || (
+        entry.sitePath.startsWith('.github/corpus-workflows/')
+        && !entry.sitePath.includes('/observers/')
+      ))
+    ));
+    const reason = 'contratto crawler cross-repo malformato o privo di artifacts[]: intero insieme degli artifact non verificabile';
+    addCoupling(graph, CRAWLER_CONTRACT_REL, {
+      path: CRAWLER_CONTRACT_REL,
+      mode: 'non verificabile',
+      declaredBy: 'crawler-contract',
+      reason,
+    });
+    for (const artifactEntry of potentialArtifacts) {
+      addCoupling(graph, CRAWLER_CONTRACT_REL, {
+        path: artifactEntry.path,
+        mode: artifactEntry.mode || 'non registrato',
+        declaredBy: 'crawler-contract',
+        reason,
+      });
+      addCoupling(graph, artifactEntry.path, {
+        path: CRAWLER_CONTRACT_REL,
+        mode: 'non verificabile',
+        declaredBy: 'crawler-contract',
+        reason,
+      });
+    }
+    return graph;
+  }
+
+  for (const artifact of contract.artifacts) {
+    if (
+      !artifact
+      || typeof artifact.file !== 'string'
+      || artifact.file.trim() === ''
+      || artifact.file.includes('..')
+      || artifact.file.includes('\\')
+      || path.posix.isAbsolute(artifact.file)
+    ) {
+      addCoupling(graph, CRAWLER_CONTRACT_REL, {
+        path: CRAWLER_CONTRACT_REL,
+        mode: 'non verificabile',
+        declaredBy: 'crawler-contract',
+        reason: 'il contratto crawler contiene un artifact non valido: unita\u2019 non verificabile',
+      });
+      continue;
+    }
+    const artifactPath = `.github/workflows/${artifact.file}`;
+    const artifactEntry = byPath.get(artifactPath);
+    const contractMode = contractEntry.mode || 'non registrato';
+    if (!artifactEntry) {
+      addCoupling(graph, CRAWLER_CONTRACT_REL, {
+        path: artifactPath,
+        mode: 'non registrato',
+        declaredBy: 'crawler-contract',
+        reason: `artifact ${artifact.file} elencato dal contratto cross-repo ma assente dal manifest`,
+      });
+      continue;
+    }
+    const artifactMode = artifactEntry.mode || 'non registrato';
+    addCoupling(graph, CRAWLER_CONTRACT_REL, {
+      path: artifactPath,
+      mode: artifactMode,
+      declaredBy: 'crawler-contract',
+      reason: `artifact ${artifact.file} elencato dal contratto cross-repo`,
+    });
+    addCoupling(graph, artifactPath, {
+      path: CRAWLER_CONTRACT_REL,
+      mode: contractMode,
+      declaredBy: 'crawler-contract',
+      reason: `contratto cross-repo che elenca ${artifact.file}`,
+    });
+  }
+  return graph;
+}
+
+/**
+ * Hashes declared by the site contract but not reproduced by either observed
+ * side are not harmless metadata drift: they identify the artifact that must
+ * join a candidate contract before the file cap is applied. The caller
+ * supplies both hash readers so this rule stays pure in tests.
+ */
+export function crawlerContractArtifactMismatches(manifest, contractSource, corpusHash = () => null, siteHash = null) {
+  const entries = Array.isArray(manifest?.files) ? manifest.files : [];
+  const byPath = new Map(entries.map((entry) => [entry.path, entry]));
+  const contract = parseCrawlerContract(contractSource);
+  if (!contract || !Array.isArray(contract.artifacts)) return [];
+  const mismatches = [];
+  for (const artifact of contract.artifacts) {
+    if (!artifact || typeof artifact.file !== 'string' || artifact.file.includes('..')) continue;
+    const artifactPath = `.github/workflows/${artifact.file}`;
+    if (!byPath.has(artifactPath)) continue;
+    const expected = artifact.artifactSha256.toLowerCase();
+    const actualCorpus = corpusHash(artifactPath);
+    const actualSite = typeof siteHash === 'function' ? siteHash(artifactPath) : undefined;
+    if (actualCorpus !== expected
+      || (typeof siteHash === 'function' && actualSite !== expected)) {
+      mismatches.push({
+        contractPath: CRAWLER_CONTRACT_REL,
+        artifactPath,
+        expected,
+        actual: actualCorpus,
+        ...(typeof siteHash === 'function' ? { actualSite } : {}),
+      });
+    }
+  }
+  return mismatches;
 }
 
 /**
@@ -485,24 +834,22 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], co
  *   candidates    [{ path, couplings }] in ordine, già filtrati da `transportVerdict`.
  *   maxFiles      il tetto per passata.
  *   alignedPaths  Set dei path verificati allineati su entrambi i lati.
- *   couplingGraph [{ path, couplings }] raccolto per OGNI fixture, anche per
- *                 quelli che non sono diventati candidati: è da lì che arriva
- *                 il verso inverso (un candidato non fixture ha `couplings: []`
- *                 e da solo non saprebbe di essere pinnato da nessuno).
+ *   couplingGraph [{ path, couplings }] raccolto per OGNI sorgente osservata,
+ *                 anche se non è diventata candidata: include i fixture, il
+ *                 contratto cross-repo e la chiusura degli import relativi.
+ *                 È da lì che arriva il verso inverso (un candidato non
+ *                 fixture ha `couplings: []` e da solo non saprebbe di essere
+ *                 pinnato da nessuno).
  *   blockedForever Set dei path che `permanentBlock` esclude in OGNI giro.
  *
  * E qui sta la differenza che il rinvio da solo non fa. Un vicino che tornerà
  * candidato domani rende il taglio un RINVIO; un vicino bloccato per sempre —
- * `generator/tests/crawler-cross-repo-artifacts.test.mjs` è accoppiato a
- * `scripts/ci/loop-sync-manifest.json`, `corpus-only`, che non sarà mai
- * `identical` — lo rende un NO PERMANENTE: appena quel fixture esce da
- * `stable`, i file che pinna (`scripts/ci/close-recovered-failure-issues.mjs`,
- * `generator/data/crawler-cross-repo-contract.json`) verrebbero scartati a ogni
- * giro, con «aspetta il giro in cui ci stanno insieme» per un giro che non
- * arriva mai: una fix del sito che non scende più, in silenzio, con la passata
- * verde. Il taglio resta — copiare una metà sola mette comunque rossa la PR —
- * ma la ragione dice «copia a mano», che è l'unica azione che lo sblocca, e il
- * flag `permanent` la porta fino al report.
+ * per esempio un `adapted`, un path non registrato o uno scope non scrivibile
+ * — lo rende un NO PERMANENTE: l'altra metà verrebbe scartata a ogni giro, con
+ * «aspetta il giro in cui ci stanno insieme» per un giro che non arriva mai.
+ * Il taglio resta — copiare una metà sola mette comunque rossa la PR — ma la
+ * ragione dice «copia a mano», che è l'unica azione che lo sblocca, e il flag
+ * `permanent` la porta fino al report.
  *
  * La permanenza si PROPAGA: se A cade per un vicino bloccato per sempre, anche
  * B che cade per colpa di A cade per sempre.
@@ -511,7 +858,6 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], co
  * candidati non copiati in questa passata — e `dropped` ne porta le ragioni.
  */
 export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = new Set(), couplingGraph = [], blockedForever = new Set() } = {}) {
-  const permanent = new Set(blockedForever);
   const candidatePaths = new Set(candidates.map((c) => c.path));
   const neighbours = new Map();
   const link = (a, b) => {
@@ -530,33 +876,91 @@ export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = ne
     }
   }
 
-  const kept = new Map(candidates.slice(0, maxFiles).map((c) => [c.path, c]));
-  const dropped = [];
-  // Punto fisso: scartare A può separare B da A, quindi una passata sola non
-  // basta. L'insieme si restringe a ogni giro, quindi termina.
-  for (let changed = true; changed; ) {
-    changed = false;
-    for (const [rel, c] of [...kept]) {
-      const split = [...(neighbours.get(rel) || [])].filter((q) => !kept.has(q) && !alignedPaths.has(q)).sort();
-      if (!split.length) continue;
-      const forever = split.filter((q) => permanent.has(q));
-      kept.delete(rel);
-      if (forever.length) permanent.add(rel);
-      dropped.push({
-        path: rel,
-        candidate: candidatePaths.has(rel),
-        split,
-        permanent: forever.length > 0,
-        reason: forever.length
-          ? `accoppiato a ${forever.join(', ')}, che nessun giro potra\u2019 copiare: il rinvio non scade, serve una copia a mano delle due meta\u2019 insieme`
-          : `separato dai suoi accoppiamenti (${split.join(', ')}): una metà copiata senza l\u2019altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`,
-      });
-      changed = true;
+  // Select connected units, not the first N raw paths. With the old slice a
+  // contract at position N+1 could strand the workflow at position N: both
+  // were then discarded, even when the two-file unit itself fit the cap. A
+  // unit that does not fit the remaining budget is still deferred whole.
+  const components = [];
+  const visited = new Set();
+  for (const candidate of candidates) {
+    if (visited.has(candidate.path)) continue;
+    const nodes = new Set([candidate.path]);
+    const queue = [candidate.path];
+    visited.add(candidate.path);
+    while (queue.length) {
+      const current = queue.shift();
+      for (const neighbour of neighbours.get(current) || []) {
+        if (visited.has(neighbour)) continue;
+        visited.add(neighbour);
+        nodes.add(neighbour);
+        queue.push(neighbour);
+      }
     }
+    const members = candidates.filter((item) => nodes.has(item.path));
+    components.push({
+      nodes,
+      members,
+      firstIndex: candidates.indexOf(members[0]),
+    });
+  }
+  components.sort((left, right) => left.firstIndex - right.firstIndex);
+
+  const kept = new Map();
+  const dropped = [];
+  const decisions = new Map();
+  let used = 0;
+  for (const component of components) {
+    const external = [...component.nodes].filter((rel) => !candidatePaths.has(rel)).sort();
+    const unsettled = external.filter((rel) => !alignedPaths.has(rel));
+    const forever = [...component.nodes]
+      .filter((rel) => blockedForever.has(rel) && !alignedPaths.has(rel))
+      .sort();
+    const permanent = forever.length > 0;
+    const exceedsUnit = component.members.length > maxFiles;
+    const exceedsRemaining = !exceedsUnit && used + component.members.length > maxFiles;
+    let reason = null;
+    let split = [];
+    if (permanent) {
+      split = forever;
+      reason = `accoppiato a ${split.join(', ')}, che nessun giro potra\u2019 copiare: il rinvio non scade, serve una copia a mano delle due meta\u2019 insieme`;
+    } else if (unsettled.length) {
+      split = unsettled;
+      reason = `separato dai suoi accoppiamenti (${split.join(', ')}): una metà copiata senza l\u2019altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`;
+    } else if (exceedsUnit || exceedsRemaining) {
+      split = component.members.map((item) => item.path).filter((rel) => rel !== component.members[0].path).sort();
+      reason = `l’unita’ di trasporto (${component.members.length} file) non entra nel tetto di ${maxFiles}: una metà copiata senza l’altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`;
+    }
+    if (reason) {
+      for (const member of component.members) {
+        decisions.set(member.path, {
+          path: member.path,
+          candidate: true,
+          split,
+          permanent,
+          reason,
+        });
+      }
+      continue;
+    }
+    for (const member of component.members) kept.set(member.path, member);
+    used += component.members.length;
   }
 
   const chosen = candidates.filter((c) => kept.has(c.path));
-  return { chosen, dropped, capped: candidates.length - chosen.length };
+  for (const candidate of candidates) {
+    const decision = decisions.get(candidate.path);
+    if (decision) dropped.push(decision);
+  }
+  const chosenComponents = components
+    .filter((component) => component.members.length > 0
+      && component.members.every((member) => kept.has(member.path)))
+    .map((component) => component.members.map((member) => member.path));
+  return {
+    chosen,
+    dropped,
+    capped: candidates.length - chosen.length,
+    components: chosenComponents,
+  };
 }
 
 /**
@@ -1257,6 +1661,7 @@ function walkSubtree(root, acc = [], blind = new Map()) {
  */
 const TYPE_SCRIPT_EXTENSIONS = new Set(['.ts', '.tsx', '.mts', '.cts']);
 const JAVASCRIPT_EXTENSIONS = new Set(['.js', '.jsx', '.mjs', '.cjs']);
+const MODULE_EXTENSIONS = new Set([...TYPE_SCRIPT_EXTENSIONS, ...JAVASCRIPT_EXTENSIONS]);
 
 /**
  * @param {string} base
@@ -1874,9 +2279,48 @@ async function main() {
   const blockedForever = new Set();
   const realignCandidates = [];
   const needsReconcile = [];
+  const observations = new Map();
   let couplingSnapshotChanged = false;
   let attempted = 0;
   let missingOnSite = 0;
+
+  // Il contratto deve essere disponibile PRIMA dei verdetti degli artifact:
+  // aggiungere il grafo dopo `transportVerdict()` lasciava passare un
+  // contratto `site-ahead` anche quando dichiarava una meta' assente o non
+  // trasportabile. Il fetch viene memorizzato per non pagare due volte la
+  // stessa lettura nel ciclo principale.
+  const contractEntry = manifest.files.find((entry) => entry.path === CRAWLER_CONTRACT_REL);
+  const contractSitePath = contractEntry?.sitePath || contractEntry?.path;
+  let prefetchedContract = null;
+  if (contractEntry?.mode === 'identical') {
+    attempted += 1;
+    try {
+      const content = await siteFile(contractSitePath);
+      if (content === null) missingOnSite += 1;
+      prefetchedContract = { ok: true, content };
+    } catch (e) {
+      const reason = String(e.message || e).slice(0, 120);
+      failed.push({ path: contractEntry.path, reason });
+      prefetchedContract = { ok: false, reason };
+    }
+  }
+
+  // Il sito e' la fonte del coupling quando il byte e' disponibile. Per un
+  // 404 o una fetch fallita resta il fallback locale gia' usato dal canale:
+  // impedisce di spezzare un'unita' conosciuta, mentre il verdetto di fetch
+  // tiene fuori il lato sito non verificato.
+  let contractSource = prefetchedContract?.ok && prefetchedContract.content !== null
+    ? prefetchedContract.content
+    : null;
+  if (contractSource == null && contractEntry) {
+    try {
+      contractSource = fs.readFileSync(path.join(ROOT, contractEntry.path), 'utf8');
+    } catch {
+      contractSource = null;
+    }
+  }
+  const contractGraph = crawlerContractCouplings(manifest, contractSource);
+  for (const [rel, couplings] of contractGraph) couplingGraph.push({ path: rel, couplings });
 
   for (const entry of manifest.files) {
     if (entry.mode !== 'identical') continue;
@@ -1887,33 +2331,25 @@ async function main() {
     const declared = declaredCouplings.get(rel) || [];
     const fixture = isFixture(rel);
     const scanned = fixture ? localCouplings(rel, modeOf) : [];
-    const couplings = [...scanned, ...declared.filter((d) => !scanned.some((c) => c.path === d.path))];
-    if (fixture) {
-      const currentSnapshot = couplingSnapshot(couplings);
-      const diff = couplingDiff(entry.couplingSnapshot, currentSnapshot);
-      if (diff.changed) couplingDelta.push({ path: rel, ...diff });
-      if (APPLY && diff.changed) {
-        entry.couplingSnapshot = currentSnapshot;
-        couplingSnapshotChanged = true;
-      }
+    let source = null;
+    try {
+      source = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    } catch {
+      // `relativeImportCouplings` turns an unreadable source into a visible
+      // blocker; swallowing the read here would make the missing closure look
+      // like a file with no imports.
     }
-    // Raccolto per OGNI fixture, non solo per i candidati: e' la mappa inversa
-    // di cui il tetto ha bisogno per non copiare un file lasciando indietro il
-    // golden che lo pinna (il fixture puo' essere stato escluso prima).
-    if (couplings.length) couplingGraph.push({ path: rel, couplings });
-    // Non dipende dagli hash, quindi si sa PRIMA della fetch — ed e' cio' che
-    // permette al tetto di distinguere un rinvio da un no che non scade.
-    if (permanentBlock(entry, { outOfScopePrefixes, couplings })) blockedForever.add(rel);
-
     let content;
     let now;
-    attempted += 1;
+    const isPrefetchedContract = contractEntry?.path === rel && prefetchedContract;
+    if (isPrefetchedContract && !prefetchedContract.ok) continue;
+    if (!isPrefetchedContract) attempted += 1;
     try {
-      content = await siteFile(sitePath);
+      content = isPrefetchedContract ? prefetchedContract.content : await siteFile(sitePath);
       // Un 404 non lancia: qui non c'e' un errore da mettere in `failed`, ma
       // nemmeno una verifica. Contato a parte, e' la meta' del buio che
       // `fetchFailureVerdict` non poteva vedere.
-      if (content === null) missingOnSite += 1;
+      if (!isPrefetchedContract && content === null) missingOnSite += 1;
       now = { site: content === null ? null : sha256(content), corpus: localHash(rel) };
     } catch (e) {
       // PROCEED-SAFE come il drift check: una fetch fallita non deve far
@@ -1923,7 +2359,36 @@ async function main() {
       continue;
     }
 
+    // La chiusura usa entrambi i byte, ora che il sitePath e' stato letto, e
+    // incorpora il coupling crawler gia' validato prima di questo verdetto.
+    // Un 404 e' lo stato "assente sul sito", non una sorgente illeggibile da
+    // registrare nel coupling snapshot: non c'e' un byte del sitePath da
+    // analizzare e comunque questa voce non puo' diventare candidata.
+    const imported = content === null ? [] : relativeImportCouplings(entry, source, content, manifest);
+    const couplings = mergeCouplings(scanned, declared, imported, contractGraph.get(rel) || []);
+    if (fixture) {
+      const currentSnapshot = couplingSnapshot(couplings);
+      const diff = couplingDiff(entry.couplingSnapshot, currentSnapshot);
+      if (diff.changed) couplingDelta.push({ path: rel, ...diff });
+      if (APPLY && diff.changed) {
+        entry.couplingSnapshot = currentSnapshot;
+        couplingSnapshotChanged = true;
+      }
+    }
+    // Raccolto per OGNI sorgente con coupling, non solo per i candidati: e' la
+    // mappa inversa di cui il tetto ha bisogno per non copiare una meta' mentre
+    // lascia indietro il fixture, il contratto o il twin importato.
+    const graphNode = couplingGraph.find((item) => item.path === rel);
+    if (couplings.length) {
+      if (graphNode) graphNode.couplings = mergeCouplings(graphNode.couplings, couplings);
+      else couplingGraph.push({ path: rel, couplings });
+    }
+    // Non dipende dagli hash, quindi si sa PRIMA del verdetto — ed e' cio' che
+    // permette al tetto di distinguere un rinvio da un no che non scade.
+    if (permanentBlock(entry, { outOfScopePrefixes, couplings })) blockedForever.add(rel);
+
     const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
+    observations.set(rel, { entry, path: rel, sitePath, content, now, base, couplings, verdict });
     if (verdict.realign) {
       realignCandidates.push({ entry, path: rel, sitePath, now, couplings });
       continue;
@@ -1951,13 +2416,65 @@ async function main() {
     candidates.push({ entry, path: rel, sitePath, content, now, base, couplings });
   }
 
+  // A changed contract can expose a stale artifact whose own baseline would
+  // otherwise call it stable. Promote that artifact only when the fetched site
+  // bytes reproduce the contract hash and the normal transport verdict still
+  // says `site-ahead`; local edits and malformed site contracts remain
+  // fail-closed instead of being overwritten by a derived guess.
+  const contractMismatches = crawlerContractArtifactMismatches(manifest, contractSource, (rel) => {
+    try {
+      return sha256Full(fs.readFileSync(path.join(ROOT, rel)));
+    } catch {
+      return null;
+    }
+  }, (rel) => {
+    const observation = observations.get(rel);
+    if (!observation || observation.content == null) return null;
+    return sha256Full(observation.content);
+  });
+  for (const mismatch of contractMismatches) {
+    const observation = observations.get(mismatch.artifactPath);
+    if (!observation || observation.content == null) continue;
+    if (mismatch.actualSite !== mismatch.expected) {
+      // Un artifact che il sito serve con byte diversi dal contratto rende
+      // inaffidabile l'intera componente, anche quando il suo verdetto
+      // individuale sarebbe `stable`: il contratto non puo' viaggiare da solo
+      // lasciando l'altro lato accoppiato a byte incoerenti.
+      alignedPaths.delete(CRAWLER_CONTRACT_REL);
+      alignedPaths.delete(mismatch.artifactPath);
+      blockedForever.add(CRAWLER_CONTRACT_REL);
+      blockedForever.add(mismatch.artifactPath);
+      manual.push({
+        path: mismatch.artifactPath,
+        state: observation.verdict.state,
+        reason: `il contratto ${mismatch.contractPath} dichiara ${mismatch.expected}, ma i byte osservati divergono (corpus ${mismatch.actual}, sito ${mismatch.actualSite}): unita’ non verificabile`,
+      });
+      continue;
+    }
+    if (observation.verdict.transport || observation.verdict.state !== 'site-ahead' || observation.verdict.permanent) continue;
+    alignedPaths.delete(mismatch.artifactPath);
+    for (let index = skipped.length - 1; index >= 0; index -= 1) {
+      if (skipped[index].path === mismatch.artifactPath) skipped.splice(index, 1);
+    }
+    candidates.push({
+      entry: observation.entry,
+      path: observation.path,
+      sitePath: observation.sitePath,
+      content: observation.content,
+      now: observation.now,
+      base: observation.base,
+      couplings: observation.couplings,
+    });
+  }
+
   // Il tetto si applica DOPO aver raccolto tutti i candidati, non durante: e'
-  // l'unico modo di sapere se tagliarlo separerebbe un fixture dai suoi
-  // accoppiamenti. Una passata che copia il golden e lascia indietro il file
-  // che pinna è incoerente per costruzione — la stessa rottura del fixture
-  // copiato da solo, prodotta dal tetto invece che dal manifest.
-  const { chosen, dropped, capped } = closeTransportSet(candidates, {
-    maxFiles: MAX_FILES,
+  // l'unico modo di sapere se tagliarlo separerebbe un fixture, un contratto o
+  // un import relativo dalla sua meta'. Una passata che copia una sola meta'
+  // e' incoerente per costruzione — la stessa rottura prodotta dal tetto
+  // invece che dal manifest.
+  const transportMaxFiles = transportMaxFilesForContract(MAX_FILES, contractSource);
+  const { chosen, dropped, capped, components: transportComponents } = closeTransportSet(candidates, {
+    maxFiles: transportMaxFiles,
     alignedPaths,
     couplingGraph,
     blockedForever,
@@ -1991,6 +2508,30 @@ async function main() {
       entry.baseline = { site: now.site, corpus: now.site, alignedAt: today };
     }
     transported.push({ path: rel, sitePath, from: base.site, to: now.site });
+  }
+
+  // These corpus-only values are deterministic projections of the workflow
+  // bytes. Keeping them in the same apply pass prevents a transported
+  // `translate-pending.yml` from opening a green-looking PR whose recovery
+  // guard and wiring test still pin the previous budget/blob.
+  const derived = [];
+  const translated = chosen.find((candidate) => candidate.path === TRANSLATE_WORKFLOW_REL);
+  if (translated) {
+    const recoveryPath = path.join(ROOT, TRANSLATE_RECOVERY_REL);
+    const recoverySource = fs.readFileSync(recoveryPath, 'utf8');
+    const update = translateRecoveryPinUpdate(translated.content, recoverySource);
+    if (update.reason) {
+      throw new Error(`${TRANSLATE_RECOVERY_REL}: ${update.reason}`);
+    }
+    if (update.changed) {
+      if (APPLY) fs.writeFileSync(recoveryPath, update.content);
+      derived.push({
+        path: update.path,
+        source: update.source,
+        blobSha: update.blobSha,
+        budget: update.budget,
+      });
+    }
   }
 
   // I convergenti DOPO la copia: un fixture convergente si riattesta solo se i
@@ -2051,6 +2592,9 @@ async function main() {
       apply: APPLY,
       manifestChanged,
       transported,
+      transportComponents,
+      derived,
+      contractMismatches,
       capped,
       realign,
       realignOverflow: realignPlan.overflow,
@@ -2068,13 +2612,14 @@ async function main() {
     const mode = APPLY ? 'APPLY' : 'dry-run';
     console.log(`transport-identical-twins (${mode}): ${transported.length} da portare, ${skipped.length} fermi, ${failed.length} non verificati`);
     for (const t of transported) console.log(`  ⬇ ${t.path}  ←  ${t.sitePath}  (${t.from} → ${t.to})`);
+    for (const d of derived) console.log(`  ⤷ ${d.path}  ←  ${d.source}  (workflow blob ${d.blobSha}${d.budget == null ? '' : `, budget ${d.budget}`})`);
     for (const d of couplingDelta) {
       const prefix = d.initialized ? 'inizializzato' : 'cambiato';
       console.log(`  🔗 accoppiamenti ${prefix}: ${d.path} (+${d.added.length}/-${d.removed.length})`);
       for (const c of d.added) console.log(`     + ${c.path} (${c.mode})`);
       for (const c of d.removed) console.log(`     - ${c.path} (${c.mode})`);
     }
-    if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${MAX_FILES} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
+    if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${transportMaxFiles} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
     console.log(`  ${realign.length} convergenti da riattestare (solo baseline), ${needsReconcile.length} divergenti da riconciliare a mano`);
     for (const r of realign) console.log(`  ⟳ ${r.path}: baseline ${APPLY ? 'riattestata' : 'da riattestare'} su ${r.hash} (i due lati coincidono)`);
     if (realignPlan.overflow.length) console.log(`  ⏸ altri ${realignPlan.overflow.length} convergenti oltre il tetto di ${MAX_REALIGN}: restano al prossimo giro (${realignPlan.overflow.join(', ')})`);

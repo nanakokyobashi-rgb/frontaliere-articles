@@ -72,6 +72,14 @@ export function transportBulletLine({ path: filePath, sitePath, to }) {
     + ' del sito (site sha256 `' + to + '`)';
 }
 
+/** Riga del body per un artefatto corpus-only derivato dai byte trasportati. */
+export function derivedTransportBulletLine({ path: filePath, source, blobSha, budget }) {
+  const budgetPart = budget == null ? '' : `; budget Codex fallback ${budget}`;
+  return '- Aggiornato nella stessa PR il pin derivato '
+    + markdownCodeSpan(filePath) + ' da ' + markdownCodeSpan(source)
+    + ` (TARGET_WORKFLOW_BLOB_SHA ${markdownCodeSpan(blobSha)}${budgetPart}).`;
+}
+
 /**
  * Riga del body per un convergente riattestato (solo baseline, nessun file
  * nella PR). Volutamente FUORI dal formato `(site sha256 ...)`: il realign
@@ -104,16 +112,19 @@ export const ADAPTED_DEFERRAL_BULLET = '- Le voci `adapted` di `' + MANIFEST_PAT
  * `transport-identical-twins.mjs` (dopo push e fallback). Una sola sorgente
  * per il workflow e per il test che lo passa all'evaluator del contratto.
  *
- * @param {object} report  `transported`, `realign`, `couplingDelta`,
- *   `realignExcluded`, `workflowExcluded` (gli ultimi due aggiunti dal workflow).
+ * @param {object} report  `transported`, `derived`, `realign`, `couplingDelta`,
+ *   `realignExcluded`, `workflowExcluded`, `derivedExcluded` (gli ultimi
+ *   aggiunti dal workflow).
  * @param {{ workflowsScope?: boolean }} [opts]  `true` quando l'identita' ha lo
  *   scope `workflows` (`PAT_WORKFLOWS_SCOPE`).
  */
 export function buildTransportPrBody(report, { workflowsScope = false } = {}) {
   const r = report || {};
   const transported = r.transported || [];
+  const derived = r.derived || [];
   const realign = r.realign || [];
   const list = transported.map((t) => transportBulletLine(t)).join('\n');
+  const derivedList = derived.map((item) => derivedTransportBulletLine(item)).join('\n');
   const converged = realign.length
     ? '- Riattestata la baseline di ' + realign.length + ' gemelli `identical` modificati su entrambi i lati che oggi coincidono byte per byte (`both-moved-converged`): nessun file copiato, solo il manifest, con i due lati riletti al momento della scrittura.\n'
       + realign.map((x) => convergedBulletLine(x)).join('\n')
@@ -131,6 +142,8 @@ export function buildTransportPrBody(report, { workflowsScope = false } = {}) {
     + ' escluso dal commit per mismatch/normalizzazione dei byte; blocked: diagnosi realign da correggere a mano.').join('\n');
   const workflowExcluded = (r.workflowExcluded || []).map((p) => '- ' + markdownCodeSpan(p)
     + ' escluso dal commit dopo il rifiuto esplicito GitHub dello scope `workflows`; blocked: resta `site-ahead` e verra ritentato in un giro futuro.').join('\n');
+  const derivedExcluded = (r.derivedExcluded || []).map((p) => '- ' + markdownCodeSpan(p)
+    + ' escluso insieme al workflow da cui deriva; blocked: il file sorgente non e\' entrato nel commit pubblicabile e il pin verra ritentato con lui.').join('\n');
   // La riga sullo scope mancante era fusa con quella sulle `adapted` («per
   // costruzione ... blocked: ...»): una deroga decisionale senza Motivo. Ora
   // il blocco tecnico e la scelta sono due voci distinte.
@@ -142,11 +155,12 @@ export function buildTransportPrBody(report, { workflowsScope = false } = {}) {
       ? '- Copia automatica dei gemelli dichiarati `mode: identical` in `' + MANIFEST_PATH + '` che il sito ha portato avanti mentre questo lato restava fermo sulla baseline (stato `site-ahead`), con riallineamento della baseline ai byte committati solo per i path verificati. Aperta da `' + TRANSPORT_WORKFLOW + '` (issue #331).'
       : '- Nessun gemello `site-ahead` da copiare in questa passata: la PR aggiorna solo `' + MANIFEST_PATH + '`. Aperta da `' + TRANSPORT_WORKFLOW + '` (issue #331).',
     list,
+    derivedList,
     converged,
     deltas,
     scopeNote,
   ].filter(Boolean);
-  const deferred = [excluded, workflowExcluded, scopeBlocked, ADAPTED_DEFERRAL_BULLET].filter(Boolean);
+  const deferred = [excluded, workflowExcluded, derivedExcluded, scopeBlocked, ADAPTED_DEFERRAL_BULLET].filter(Boolean);
   return ['## Implementato', ...implemented, '', '## Non implementato (ancora)', ...deferred, ''].join('\n');
 }
 
