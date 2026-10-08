@@ -42,7 +42,7 @@ const PORLEZZA_CONTENT_FIX = {
   },
   de: {
     route: /Grenzübergangs Oria und Lugano/,
-    payer: /Schweizer Unfallversicherer des Arbeitgebers; das INPS ist nicht die auszahlende Stelle/,
+    payer: /Schweizer Unfallversicherer des Arbeitgebers ausgerichtet; das INPS ist nicht die auszahlende Stelle/,
     department: /Departement für Finanzen und Wirtschaft/,
     hospital: /Krankenhaus von Menaggio, wo er kurz darauf starb/,
   },
