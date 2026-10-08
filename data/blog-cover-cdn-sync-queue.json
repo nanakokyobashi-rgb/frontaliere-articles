@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-bally-caslano-moratoria-tagli.webp",
-      "sha256": "67a2e1a734f6c9564f6124288372d2e484c95b467db64ea605719b2323023291"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-bally-caslano-moratoria-tagli-480w.webp",
-      "sha256": "dcf40f60ae11915f9cc70b68b62d6470b0535aa0dfaa48bd6a5cdc2cf088744a"
-    }
-  ]
+  "items": []
 }
