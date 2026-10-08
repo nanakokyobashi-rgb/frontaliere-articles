@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fibra-ottica-limiti-2028.webp",
+      "sha256": "01c48ec627b21e0a7012a2e139b814d7cc0da3ea25213f327d0fa68ca4030e79"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fibra-ottica-limiti-2028-480w.webp",
+      "sha256": "9d69907d5405e6efb639bf0e76bfae501b5af7228057d372ac6c969894ea3679"
+    }
+  ]
 }
