@@ -43,6 +43,16 @@
  * race (issue #4429); targeted callers don't race a live probe, so the sleep
  * would only slow down the fast-publish path for no benefit.
  *
+ * LIST FROM A FILE: `--files-from=<path>` reads the same list from a file,
+ * one URL per line. A list on the command line is ONE argv string, and Linux
+ * refuses to start a process whose single argument is over 128 KiB ("Argument
+ * list too long", exit 126). fast-publish-article.yml crossed it at 1.600
+ * URLs — 78 articles — with the pages already on the shards: the purge, the
+ * verification and the re-purge never ran (issue #2527). The batching below
+ * could not help, because the list never reached this script. A file has no
+ * such ceiling, so a caller whose list grows with what it publishes passes
+ * the file instead; `--files=` stays for the callers that purge a handful.
+ *
  * Auth: CF_API_TOKEN — needs Zone→Cache Purge. Resolves zone by name unless
  * CF_ZONE_ID is set. Hydrate locally via:
  *   eval "$(GOOGLE_APPLICATION_CREDENTIALS=mcp-gsc-main/service_account_credentials.json \
@@ -54,7 +64,11 @@
  * warnStaleEdge annotation on failure.
  *
  * Exit: 0 = purged (or no-op when CF_API_TOKEN absent — non-fatal so a
- * missing secret never fails the deploy), 1 = API/auth error or >30 --files.
+ * missing secret never fails the deploy), 1 = API/auth error, or arguments
+ * this script cannot act on: an unknown flag, both list sources at once, a
+ * list that is unreadable or empty. Those are checked BEFORE the token no-op,
+ * and an unknown flag in particular must never fall through to the default —
+ * the default is the purge of the whole zone.
  *
  * SETTLE DELAY (purge_everything path only): acknowledged instantly by the
  * API but takes up to ~30s to actually clear every edge PoP globally
@@ -70,6 +84,7 @@
  * deploy still fails after the settle — this only smooths over the purge's
  * own propagation window.
  */
+import { readFileSync } from 'node:fs';
 import { resolveZoneId as resolveZoneIdShared } from './lib/cf-analytics.mjs';
 import { purgeBodiesForUrls } from './lib/cf-purge-variants.mjs';
 import { parsePositiveNum } from './lib/parse-positive-num.mjs';
@@ -92,20 +107,57 @@ const ZONE_NAME = process.env.CF_ZONE_NAME || 'frontaliereticino.ch';
 const token = process.env.CF_API_TOKEN;
 
 const filesArg = process.argv.find(arg => arg.startsWith('--files='));
-const targetFiles = filesArg
-  ? filesArg
-      .slice('--files='.length)
-      .split(',')
-      .map(url => url.trim())
-      .filter(Boolean)
-  : null;
+const filesFromArg = process.argv.find(arg => arg.startsWith('--files-from='));
 
-// `--files=` presente ma vuoto non è un purge riuscito: costruirebbe zero
+// Un argomento che lo script non conosce non è «nessun argomento». Senza
+// questo controllo un refuso nel nome del flag (`--file-from=`) cadrebbe nel
+// ramo di default e svuoterebbe la cache dell'intera zona, con uscita 0.
+const unknownArgs = process.argv
+  .slice(2)
+  .filter(arg => !arg.startsWith('--files=') && !arg.startsWith('--files-from='));
+if (unknownArgs.length) {
+  console.error(
+    `❌ Argomento non riconosciuto: ${unknownArgs.join(' ')}. Ammessi: --files=<url,...>, --files-from=<percorso>, oppure nessuno (purge dell'intera zona).`,
+  );
+  process.exit(1);
+}
+
+// Due sorgenti per lo stesso elenco non hanno una risposta giusta: unirle
+// nasconderebbe un refuso del chiamante, sceglierne una lascerebbe l'altra
+// senza purge e senza un errore.
+if (filesArg && filesFromArg) {
+  console.error('❌ --files= e --files-from= insieme: l\'elenco ha una sola sorgente.');
+  process.exit(1);
+}
+
+// Un file che non si legge non è un elenco vuoto: il chiamante ha già
+// pubblicato e conta su questo purge, quindi l'errore deve dire quale file.
+function readUrlList(listPath) {
+  if (!listPath) {
+    console.error('❌ --files-from= richiede il percorso di un file.');
+    process.exit(1);
+  }
+  try {
+    return readFileSync(listPath, 'utf8').split('\n');
+  } catch (err) {
+    console.error(`❌ --files-from=${listPath}: elenco non leggibile (${err.code || err.message}).`);
+    process.exit(1);
+  }
+}
+
+const listedUrls = filesFromArg
+  ? readUrlList(filesFromArg.slice('--files-from='.length))
+  : filesArg
+    ? filesArg.slice('--files='.length).split(',')
+    : null;
+const targetFiles = listedUrls ? listedUrls.map(url => url.trim()).filter(Boolean) : null;
+
+// Un elenco presente ma vuoto non è un purge riuscito: costruirebbe zero
 // batch e uscirebbe 0 senza inviare alcuna richiesta a Cloudflare. Rifiutalo
 // prima del no-op intenzionale per token assente, così il chiamante vede il
 // refuso anche in una run senza credenziali.
 if (targetFiles && !targetFiles.length) {
-  console.error('❌ --files= richiede almeno un URL.');
+  console.error(`❌ ${filesFromArg ? '--files-from=' : '--files='} richiede almeno un URL.`);
   process.exit(1);
 }
 

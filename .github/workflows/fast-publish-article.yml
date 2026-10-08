@@ -796,7 +796,15 @@ jobs:
           # Idempotent: a re-invocation just re-resolves the zone and re-POSTs
           # purge_cache for the same URL list; purging an already-purged URL is
           # a no-op, so retrying the whole script is safe.
-          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+          #
+          # The list travels as the FILE written above, not as an argument
+          # (issue #2527). One argv string tops out at 128 KiB on Linux: 78
+          # articles — 1.600 URLs, 167 KB — crossed it with the pages already
+          # on the shards, bash answered "Argument list too long", and neither
+          # this purge, nor the verification, nor the re-purge ran. Every
+          # article adds 16 URLs and the archive adds its own, so a list on
+          # the command line is a ceiling on how much may be published at once.
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
 
       - name: Verify the article is actually readable
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
@@ -1156,8 +1164,10 @@ jobs:
             exit 1
           fi
           # Through retry-cmd.sh — same blip class and same idempotency
-          # justification as the first purge step above (issue #268).
-          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+          # justification as the first purge step above (issue #268). And the
+          # same file, for the same reason: a list this long does not fit in
+          # one argument (issue #2527).
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$list"
 
       - name: Summary
         if: always() && needs.resolve.outputs.skip != 'true'
