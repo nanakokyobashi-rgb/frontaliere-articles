@@ -739,7 +739,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Come Calcolare il Salario Netto per Frontaliere in Svizzera',
     description: 'Guida pratica per calcolare il salario netto in Svizzera, considerando imposte, deduzioni e contributi. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, calcolare, salario, netto, pratica',
-    ogTitle: 'Come Calcolare il Salario Netto per Frontaliere in Svizze',
+    ogTitle: 'Come Calcolare il Salario Netto per Frontaliere in Svizzera',
     ogDescription: 'Guida pratica per calcolare il salario netto in Svizzera, considerando imposte, deduzioni e contributi',
     canonicalPath: '/articoli-svizzera/calcul-salaire-net-suiss-frontalier/',
     structuredData: {
@@ -1899,7 +1899,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Sciopero femminista: migliaia in piazza a Vaud e Neuchâtel',
     description: '9\'000-15\'000 manifestanti a Losanna, un migliaio a Neuchâtel. Richieste su parità lavorativa, lavoro di cura e contrasto ai 13 femminicidi del 2025.',
     keywords: 'frontalieri, ticino, svizzera, italia, sciopero, femminista, migliaia, piazza',
-    ogTitle: 'Sciopero femminista: migliaia in piazza a Vaud e Neuchâte',
+    ogTitle: 'Sciopero femminista: migliaia in piazza a Vaud e Neuchâtel',
     ogDescription: '9\'000-15\'000 manifestanti a Losanna, un migliaio a Neuchâtel. Richieste su parità lavorativa, lavoro di cura e contrasto ai 13 femminicidi del 2025.',
     canonicalPath: '/articoli-svizzera/sciopero-femminista-vd-ne/',
     structuredData: {
@@ -2172,7 +2172,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Treni fermi Stabio-Gallarate: Verdi criticano Regione e Trenord',
     description: 'Chiusura della tratta ferroviaria Stabio-Gallarate fino al 5 luglio per lavori, con gravi disagi per oltre 5.000 passeggeri giornalieri. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, treni, fermi, stabio-gallarate, verdi',
-    ogTitle: 'Treni fermi Stabio-Gallarate: Verdi criticano Regione e T',
+    ogTitle: 'Treni fermi Stabio-Gallarate: Verdi criticano Regione e Trenord',
     ogDescription: 'Chiusura della tratta ferroviaria Stabio-Gallarate fino al 5 luglio per lavori, con gravi disagi per oltre 5.000 passeggeri giornalieri.',
     canonicalPath: '/articoli-svizzera/treni-fermi-stabio-gallarate-incompetenza-regione/',
     structuredData: {
@@ -2406,7 +2406,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Tassa salute frontalieri: sindacati italiani e svizzeri attaccano la norma',
     description: 'Sindacati italiani e svizzeri chiedono il ritiro della tassa salute, contestando doppia imposizione e caos fiscale. Implicazioni per frontalieri e cantoni.',
     keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, sindacati, italiani',
-    ogTitle: 'Tassa salute frontalieri: sindacati italiani e svizzeri attaccano',
+    ogTitle: 'Tassa salute frontalieri: sindacati italiani e svizzeri attaccano la norma',
     ogDescription: 'Sindacati italiani e svizzeri chiedono il ritiro della tassa salute. Impatto fiscale sui frontalieri e comuni di confine.',
     canonicalPath: '/articoli-svizzera/tassa-salute-frontalieri-sindacati-attacco/',
     structuredData: {
@@ -2518,7 +2518,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Lavorare nel servizio alla casa in Ticino: guida completa',
     description: 'Guida completa su come lavorare come addetto ai servizi alla casa in Ticino, Svizzera. Requisiti, mansioni e consigli pratici. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, lavorare, servizio, alla, casa',
-    ogTitle: 'Lavorare nel servizio alla casa in Ticino: guida',
+    ogTitle: 'Lavorare nel servizio alla casa in Ticino: guida completa',
     ogDescription: 'Scopri come lavorare come addetto ai servizi alla casa in Ticino. Requisiti, mansioni e consigli pratici per un impiego domestico.',
     canonicalPath: '/articoli-svizzera/lavorare-nel-servizio-alla-casa-ticino/',
     structuredData: {
@@ -2674,7 +2674,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Frontalieri: Roma blocca i ristorni? Il Ticino propone stop o tagli',
     description: 'Ticino chiede a Berna di bloccare o ridurre i ristorni ai frontalieri per pressioni fiscali. Due casi oltre 30 milioni hanno dato risultati. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, roma, blocca, ristorni, propone',
-    ogTitle: 'Frontalieri: Roma blocca i ristorni? Il Ticino propone st',
+    ogTitle: 'Frontalieri: Roma blocca i ristorni? Il Ticino propone stop o tagli',
     ogDescription: 'Ticino chiede a Berna di bloccare o ridurre i ristorni ai frontalieri per pressioni fiscali. Due casi oltre 30 milioni hanno dato risultati.',
     canonicalPath: '/articoli-svizzera/bloccare-ridurre-ristorni-frontalieri-roma/',
     structuredData: {
@@ -5182,7 +5182,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Frontaliere trasporti Chiasso-Lugano abbonamenti 2026 entro 20 km',
     description: 'Guida pratica ai trasporti Chiasso-Lugano per frontalieri: treno, auto, parcheggi e abbonamenti con checklist dei costi da verificare. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, trasporti, chiasso-lugano, abbonamenti, entro',
-    ogTitle: 'Frontaliere trasporti Chiasso-Lugano abbonamenti 2026',
+    ogTitle: 'Frontaliere trasporti Chiasso-Lugano abbonamenti 2026 entro 20 km',
     ogDescription: 'Guida pratica ai trasporti Chiasso-Lugano per frontalieri',
     canonicalPath: '/articoli-svizzera/frontaliere-trasporti-chiasso-lugano-abbonamenti-2026/',
     structuredData: {
@@ -7838,7 +7838,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Frontaliere bonus famiglia 2026: guida aggiornata e pratica',
     description: 'Nessuna novità ufficiale per bonus famiglia frontalieri 2026. Stato attuale di assegni, bonus nido e detrazioni. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, bonus, famiglia, aggiornata, pratica',
-    ogTitle: 'Frontaliere bonus famiglia 2026: guida aggiornata',
+    ogTitle: 'Frontaliere bonus famiglia 2026: guida aggiornata e pratica',
     ogDescription: 'Stato attuale di bonus, assegni familiari e detrazioni per frontalieri. Nessuna novità per il 2026.',
     canonicalPath: '/articoli-svizzera/frontaliere-bonus-famiglia-2026/',
     structuredData: {
@@ -13789,7 +13789,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Come funziona il secondo pilastro della previdenza svizzera',
     description: 'Tutto sulla LPP: 894mila beneficiari, rendita mediana 1.744 franchi, aliquota conversione 6,8%. Guida completa al pilastro obbligatorio. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, funziona, secondo, pilastro, previdenza',
-    ogTitle: 'Come funziona il secondo pilastro della previdenza svizze',
+    ogTitle: 'Come funziona il secondo pilastro della previdenza svizzera',
     ogDescription: 'Tutto sulla LPP: 894mila beneficiari, rendita mediana 1.744 franchi, aliquota conversione 6,8%. Guida completa al pilastro obbligatorio.',
     canonicalPath: '/articoli-svizzera/secondo-pilastro-previdenza-professionale-lpp-svizzera/',
     structuredData: {
@@ -22282,16 +22282,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-cassis-duedingen': {
-    title: 'Di più cassis a düdingen: | Frontaliere Ticino',
+    title: 'Cassis a Düdingen: la Svizzera non cade dal cielo, ma va coltivata',
     description: 'Il consigliere federale Ignazio Cassis ha espresso il suo pensiero durante un brunch in fattoria a Düdingen (FR). Ha sottolineato l\'importanza di lavorare',
     keywords: 'frontalieri, ticino, svizzera, italia, cassis, düdingen, cade, cielo',
-    ogTitle: 'Di più Cassis a Düdingen:',
+    ogTitle: 'Cassis a Düdingen: la Svizzera non cade dal cielo, ma va coltivata',
     ogDescription: 'Il consigliere federale Ignazio Cassis ha espresso il suo pensiero durante un brunch in fattoria a Düdingen (FR). Ha sottolineato l\'importanza di lavorare',
     canonicalPath: '/articoli-svizzera/cassis-duedingen/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Di più cassis a düdingen:",
+      "headline": "Cassis a Düdingen: la Svizzera non cade dal cielo, ma va coltivata",
       "description": "Il consigliere federale Ignazio Cassis ha espresso il suo pensiero durante un brunch in fattoria a Düdingen (FR). Ha sottolineato l'importanza di lavorare",
       "image": {
         "@type": "ImageObject",
@@ -23633,7 +23633,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Votazioni federali Svizzera: come funzionano le leggi',
     description: 'Scopri come funzionano le votazioni federali in Svizzera, la democrazia diretta, i referendum e le regole fiscali per i lavoratori. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, votazioni, federali, funzionano, leggi',
-    ogTitle: 'Votazioni federali Svizzera: come funzionano',
+    ogTitle: 'Votazioni federali Svizzera: come funzionano le leggi',
     ogDescription: 'Guida completa alla democrazia diretta svizzera e alle regole fiscali federali.',
     canonicalPath: '/articoli-svizzera/democrazia-diretta-e-votazioni-federali/',
     structuredData: {
@@ -29938,7 +29938,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Siccità in Svizzera: Rösti esclude misure urgenti e federali',
     description: 'Il Consiglio federale monitora la siccità in Svizzera con livello 4. Rösti esclude misure straordinarie per ora, lasciando la gestione a Cantoni e Comuni.',
     keywords: 'frontalieri, ticino, svizzera, italia, siccità, rösti, esclude, misure',
-    ogTitle: 'Siccità in Svizzera: Rösti esclude misure urgenti',
+    ogTitle: 'Siccità in Svizzera: Rösti esclude misure urgenti e federali',
     ogDescription: 'Il Consiglio federale segue l\'evoluzione della siccità in Svizzera con livello di pericolo 4. Nessuna misura straordinaria per ora, gestione affidata a Cantoni e Comuni.',
     canonicalPath: '/articoli-svizzera/siccita-rosti-nessuna-misura-urgente-svizzera/',
     structuredData: {
@@ -32529,7 +32529,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Linea ferroviaria dell\'Albula chiusa almeno fino a domani sera',
     description: 'La Ferrovia retica ha chiuso la linea ferroviaria dell\'Albula a causa di una frana sul torrente Beverin. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, linea, ferroviaria, dell, albula',
-    ogTitle: 'Linea ferroviaria dell\'Albula chiusa',
+    ogTitle: 'Linea ferroviaria dell\'Albula chiusa almeno fino a domani sera',
     ogDescription: 'La Ferrovia retica ha chiuso la linea ferroviaria dell\'Albula a causa di una frana sul torrente Beverin. I treni continueranno a circolare fra Coira e Bergün e fra Samedan e St. Moritz.',
     canonicalPath: '/articoli-svizzera/ferrovia-albula-chiusa/',
     structuredData: {
@@ -41357,7 +41357,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Abbonamenti trasporti pubblici Canton Soletta zone e tariffe',
     description: 'Informazioni sui tarifferi e le zone dei trasporti pubblici nel Canton Soletta. Dati aggiornati 2026 per frontalieri in Ticino.',
     keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, trasporti, pubblici, canton',
-    ogTitle: 'Abbonamenti trasporti pubblici Canton Soletta',
+    ogTitle: 'Abbonamenti trasporti pubblici Canton Soletta zone e tariffe',
     ogDescription: 'Informazioni sui tarifferi e le zone dei trasporti pubblici nel Canton Soletta',
     canonicalPath: '/articoli-svizzera/trasporti-pubblici-canton-soletta-abbonamenti/',
     structuredData: {
@@ -42205,7 +42205,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Borse di studio Canton Basilea Città requisiti e importi',
     description: 'Requisiti e importi delle borse di studio offerte dal Canton Basilea Città per gli studenti svizzeri e stranieri. Dati aggiornati 2026 per frontalieri',
     keywords: 'frontalieri, ticino, svizzera, italia, borse, studio, canton, basilea',
-    ogTitle: 'Borse di studio Canton Basilea Città',
+    ogTitle: 'Borse di studio Canton Basilea Città requisiti e importi',
     ogDescription: 'Requisiti e importi delle borse di studio offerte dal Canton Basilea Città',
     canonicalPath: '/articoli-svizzera/borse-di-studio-basilea-citta/',
     structuredData: {
@@ -42760,7 +42760,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Migros, tre partenze ai vertici annunciate nello stesso giorno',
     description: 'Tre dirigenti Migros lasciano Online, Delica e Migros Bank. Katrin Tschannen fine marzo 2027, Thomas Gubler pensionato, Markus Schawalder nuova sfida',
     keywords: 'frontalieri, ticino, svizzera, italia, migros, partenze, vertici, annunciate',
-    ogTitle: 'Migros, tre partenze ai vertici',
+    ogTitle: 'Migros, tre partenze ai vertici annunciate nello stesso giorno',
     ogDescription: 'Migros annuncia tre cambiamenti contemporanei ai vertici di Online, Delica e Migros Bank. Katrin Tschannen, Thomas Gubler e Markus Schawalder lasciano fra fine 2026 e marzo 2027. Transizione generazionale e implicazioni sul mercato del lavoro',
     canonicalPath: '/articoli-svizzera/migros-tre-partenze-vertici/',
     structuredData: {
@@ -45445,7 +45445,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Affitti Sciaffusa: deposito cauzione e diritto di locazione',
     description: 'Nel canton Sciaffusa il diritto di locazione è regolato dalla legge federale. Ecco cosa sapere su deposito cauzionale, disdetta e contestazione del canone.',
     keywords: 'frontalieri, ticino, svizzera, italia, affitti, sciaffusa, deposito, cauzione',
-    ogTitle: 'Affitti Sciaffusa: deposito cauzione e diritto',
+    ogTitle: 'Affitti Sciaffusa: deposito cauzione e diritto di locazione',
     ogDescription: 'Nel canton Sciaffusa il diritto di locazione è regolato dalla legge federale. Ecco cosa sapere su deposito cauzionale, disdetta e contestazione del canone.',
     canonicalPath: '/articoli-svizzera/affitti-sciaffusa-cauzione-disdetta/',
     structuredData: {
@@ -45713,7 +45713,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Premi cassa malati Appenzello Esterno: franchigie e sussidi',
     description: 'Come funziona l\'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.',
     keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, appenzello',
-    ogTitle: 'Premi cassa malati Appenzello Esterno: franchigie',
+    ogTitle: 'Premi cassa malati Appenzello Esterno: franchigie e sussidi',
     ogDescription: 'Come funziona l\'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.',
     canonicalPath: '/articoli-svizzera/premi-franchigie-appenzello-esterno/',
     structuredData: {
@@ -51113,7 +51113,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Tirocinio e retribuzione nel canton Soletta: guida pratica',
     description: 'Scopri come trovare un tirocinio nel canton Soletta, gli obblighi del contratto e la retribuzione dell\'apprendista con deduzioni fiscali e contributi sociali.',
     keywords: 'frontalieri, ticino, svizzera, italia, tirocinio, retribuzione, canton, soletta',
-    ogTitle: 'Tirocinio e retribuzione nel canton Soletta: guida',
+    ogTitle: 'Tirocinio e retribuzione nel canton Soletta: guida pratica',
     ogDescription: 'Scopri come trovare un tirocinio nel canton Soletta, gli obblighi del contratto e la retribuzione dell\'apprendista con deduzioni fiscali e contributi sociali.',
     canonicalPath: '/articoli-svizzera/tirocinio-retribuzione-soletta-guida/',
     structuredData: {
@@ -51152,7 +51152,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Custodia bambini in Svizzera: costi e sussidi cantonali',
     description: 'Guida alla custodia dei bambini in Svizzera: asili nido, famiglie diurne, doposcuola, tariffe calcolate sul reddito e sussidi cantonali. Scopri come accedere',
     keywords: 'frontalieri, ticino, svizzera, italia, custodia, bambini, costi, sussidi',
-    ogTitle: 'Custodia bambini in Svizzera: costi e sussidi',
+    ogTitle: 'Custodia bambini in Svizzera: costi e sussidi cantonali',
     ogDescription: 'Guida completa sulla custodia dei bambini in Svizzera: asili nido, tariffe calcolate sul reddito, sussidi cantonali, congedi maternità e paternità federali. Scopri come accedere ai servizi e stimare i costi della custodia.',
     canonicalPath: '/articoli-svizzera/custodia-bambini-svizzera-costi-sussidi/',
     structuredData: {
@@ -53340,7 +53340,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Imposte cantonali Appenzello Esterno: aliquote e deduzioni',
     description: 'Guida completa alle imposte cantonali e comunali in Appenzello Esterno: struttura a 3 livelli, aliquote, deduzioni ammesse, scadenze dichiarative e procedura',
     keywords: 'frontalieri, ticino, svizzera, italia, imposte, cantonali, appenzello, esterno',
-    ogTitle: 'Imposte cantonali Appenzello Esterno: aliquote',
+    ogTitle: 'Imposte cantonali Appenzello Esterno: aliquote e deduzioni',
     ogDescription: 'Guida completa alle imposte cantonali e comunali in Appenzello Esterno: struttura a 3 livelli, aliquote, deduzioni ammesse, scadenze dichiarative e procedura online.',
     canonicalPath: '/articoli-svizzera/imposte-appenzello-esterno-aliquote/',
     structuredData: {
@@ -54358,7 +54358,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'MPS e SISA contro l\'aumento tasse universitarie',
     description: 'MPS e SISA contestano l\'aumento tasse universitarie a USI e SUPSI. Le tariffe ticinesi erano già sopra la media svizzera. Preoccupazione per ulteriori rincari.',
     keywords: 'frontalieri, ticino, svizzera, italia, sisa, contro, aumento, tasse',
-    ogTitle: 'MPS e SISA contro l\'aumento tasse',
+    ogTitle: 'MPS e SISA contro l\'aumento tasse universitarie',
     ogDescription: 'Il Movimento per il Socialismo e il Sindacato Indipendente Studenti contestano l\'aumento delle tasse universitarie presso USI e SUPSI, sottolineando come le tariffe ticinesi fossero già superiori alla media nazionale svizzera. Critica ai tagli',
     canonicalPath: '/articoli-svizzera/mps-sisa-tasse-usi-supsi/',
     structuredData: {
@@ -56268,7 +56268,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Glarner lascia il Consiglio nazionale a fine anno',
     description: 'Andreas Glarner (UDC/AG) annuncia dimissioni dal Consiglio nazionale il 31 dicembre 2026 e dalla presidenza del partito cantonale dell\'Argovia. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, glarner, lascia, consiglio, nazionale',
-    ogTitle: 'Glarner lascia il Consiglio nazionale',
+    ogTitle: 'Glarner lascia il Consiglio nazionale a fine anno',
     ogDescription: 'Consigliere nazionale UDC Andreas Glarner annuncia dimissioni dal Parlamento federale il 31 dicembre 2026 e dalla guida del partito argosino. Scelta motivata dal ricambio generazionale.',
     canonicalPath: '/articoli-svizzera/glarner-dimissioni-consiglio-nazionale/',
     structuredData: {
@@ -58671,7 +58671,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Abbonamenti Uri: zone, tariffe e offerte nazionali',
     description: 'Comunità tariffaria Uri: sistema a zone, abbonamenti annuali e mensili, sconti per studenti e combinazioni con Halbtax e AG sullo SwissPass. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, zone, tariffe, offerte',
-    ogTitle: 'Abbonamenti Uri: zone, tariffe e offerte',
+    ogTitle: 'Abbonamenti Uri: zone, tariffe e offerte nazionali',
     ogDescription: 'Come funziona la comunità tariffaria Uri: sistema a zone, abbonamenti annuali e mensili sullo SwissPass, sconti per studenti e apprendisti, e come combinarli con Halbtax e AG. Guida pratica per residenti e pendolari.',
     canonicalPath: '/articoli-svizzera/abbonamenti-trasporti-uri-zone-tariffe/',
     structuredData: {
@@ -59051,7 +59051,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Aprire un\'attività nel Cantone di Svitto: guida pratica',
     description: 'Cantone di Svitto: procedura per aprire un\'attività, capitale minimo Sagl/SA, iscrizione al registro di commercio, obblighi IVA, AVS, AD, LPP e LAMal.',
     keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, cantone, svitto',
-    ogTitle: 'Aprire un\'attività nel Cantone di Svitto: guida',
+    ogTitle: 'Aprire un\'attività nel Cantone di Svitto: guida pratica',
     ogDescription: 'Tutti i passaggi per avviare un\'attività nel Cantone di Svitto: forma giuridica, capitale minimo, registro di commercio, iscrizioni IVA, AVS/AD e LAMal. Costi e adempimenti spiegati passo per passo.',
     canonicalPath: '/articoli-svizzera/aprire-ditta-svitto-costi-e-adempimenti/',
     structuredData: {
@@ -59436,7 +59436,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Custodia bambini in Svizzera: strutture, tariffe e sussidi',
     description: 'Come funzionano asili, tariffe e sussidi per la custodia dei bambini. Modelli di finanziamento e deduzioni fiscali. Dati aggiornati 2026 per frontalieri',
     keywords: 'frontalieri, ticino, svizzera, italia, custodia, bambini, strutture, tariffe',
-    ogTitle: 'Custodia bambini in Svizzera: strutture, tariffe',
+    ogTitle: 'Custodia bambini in Svizzera: strutture, tariffe e sussidi',
     ogDescription: 'Come funzionano asili, tariffe e sussidi per la custodia dei bambini. Modelli di finanziamento e deduzioni fiscali.',
     canonicalPath: '/articoli-svizzera/custodia-bambini-san-gallo-tariffe-sussidi/',
     structuredData: {
@@ -59816,7 +59816,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Aprire un\'attività in Obvaldo: registro di commercio e costi',
     description: 'Guida pratica alla forma giuridica, iscrizione al registro di commercio, capitale minimo e oneri per avviare un\'impresa nel Cantone Obvaldo. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, obvaldo, registro',
-    ogTitle: 'Aprire un\'attività in Obvaldo: registro di commercio',
+    ogTitle: 'Aprire un\'attività in Obvaldo: registro di commercio e costi',
     ogDescription: 'Guida pratica alla forma giuridica, iscrizione al registro di commercio, capitale minimo e oneri per avviare un\'impresa nel Cantone Obvaldo.',
     canonicalPath: '/articoli-svizzera/aprire-attivita-canton-obvaldo-registro/',
     structuredData: {
@@ -60776,7 +60776,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Naturalizzazione Canton Zugo: requisiti e procedura completa',
     description: 'Permesso C, 10 anni di residenza (anni 8-18 contano doppio) e iter a tre livelli. Tutti i requisiti federali, cantonali e comunali a Zugo. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, naturalizzazione, canton, zugo, requisiti',
-    ogTitle: 'Naturalizzazione Canton Zugo: requisiti e procedura',
+    ogTitle: 'Naturalizzazione Canton Zugo: requisiti e procedura completa',
     ogDescription: 'Permesso C, 10 anni di residenza (anni tra 8 e 18 anni compiuti contano doppio) e iter a tre livelli: comunale, cantonale e federale. Scopri come funziona la naturalizzazione ordinaria nel Canton Zugo, dai documenti alle tasse.',
     canonicalPath: '/articoli-svizzera/naturalizzazione-canton-zugo-requisiti-procedura/',
     structuredData: {
@@ -61580,7 +61580,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'UBS: nuove norme bancarie, il compromesso della Commissione',
     description: '31 agosto 2026: la CET-S approva regole più stringenti sulle partecipazioni estere delle grandi banche, con copertura al 50% in AT1 anziché al 100%',
     keywords: 'frontalieri, ticino, svizzera, italia, nuove, norme, bancarie, compromesso',
-    ogTitle: 'UBS: nuove norme bancarie, il compromesso',
+    ogTitle: 'UBS: nuove norme bancarie, il compromesso della Commissione',
     ogDescription: '31 agosto 2026: la CET-S approva regole più stringenti sulle partecipazioni estere delle grandi banche, con copertura al 50% in AT1 anziché al 100% come proposto dal Consiglio federale.',
     canonicalPath: '/articoli-svizzera/ubs-norme-bancarie-compromesso/',
     structuredData: {
@@ -61648,7 +61648,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Città svizzere: più margine per clima e 30 km/h sulle strade',
     description: 'SKM e Unione delle città chiedono a Confederazione e Cantoni di non ostacolare le zone 30 e una strategia nazionale «chi inquina paga». Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, città, svizzere, margine, clima',
-    ogTitle: 'Città svizzere: più margine per clima e 30 km/h',
+    ogTitle: 'Città svizzere: più margine per clima e 30 km/h sulle strade',
     ogDescription: 'La Conferenza delle città per la mobilità (SKM) chiede a Berna e ai Cantoni di non ostacolare le zone 30 km/h e sollecita una strategia nazionale di tariffazione del traffico basata sul principio «chi inquina paga».',
     canonicalPath: '/articoli-svizzera/citta-clima-30-kmh-strade/',
     structuredData: {
@@ -66093,7 +66093,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Comprare casa in Turgovia: tasse e mutuo ipotecario',
     description: 'Acquistare immobile in Turgovia: costi fiscali, fondi propri richiesti, sostenibilità mutuo ipotecario, procedure notarili e tempistiche nazionali svizzere.',
     keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, turgovia, tasse',
-    ogTitle: 'Comprare casa in Turgovia: tasse e mutuo',
+    ogTitle: 'Comprare casa in Turgovia: tasse e mutuo ipotecario',
     ogDescription: 'Guida pratica all\'acquisto immobiliare nel canton Turgovia: imposte su trapassi, diritti notarili, criteri bancari sulla sostenibilità del mutuo, e procedura passo dopo passo dal compromesso alla trascrizione fondiaria.',
     canonicalPath: '/articoli-svizzera/comprare-casa-turgovia-mutuo/',
     structuredData: {
@@ -67310,7 +67310,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Acquistare casa in Canton Lucerna: guida a mutuo e imposte',
     description: 'Come funziona l\'acquisto immobiliare nel Canton Lucerna: procedura, fiscalità, sostenibilità del mutuo e costi notarili secondo la normativa svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, acquistare, casa, canton, lucerna',
-    ogTitle: 'Acquistare casa in Canton Lucerna: guida a mutuo',
+    ogTitle: 'Acquistare casa in Canton Lucerna: guida a mutuo e imposte',
     ogDescription: 'Come funziona l\'acquisto immobiliare nel Canton Lucerna: procedura, fiscalità, sostenibilità del mutuo e costi notarili secondo la normativa svizzera.',
     canonicalPath: '/articoli-svizzera/acquisto-immobiliare-lucerna-mutuo/',
     structuredData: {
@@ -73828,7 +73828,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Aprire un\'attività a Neuchâtel: costi e registro commercio',
     description: 'Forme giuridiche, iscrizione al registro di commercio, contributi previdenziali e tasse. Guida pratica per avviare un\'impresa nel cantone. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, neuch, costi',
-    ogTitle: 'Aprire un\'attività a Neuchâtel: costi e registro',
+    ogTitle: 'Aprire un\'attività a Neuchâtel: costi e registro commercio',
     ogDescription: 'Forme giuridiche, iscrizione al registro di commercio, contributi previdenziali e tasse. Guida pratica per avviare un\'impresa nel cantone.',
     canonicalPath: '/articoli-svizzera/aprire-attivita-neuchatel-costi-commercio/',
     structuredData: {
@@ -73867,7 +73867,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Salari e mercato del lavoro Neuchâtel: settori e formazione',
     description: 'Stipendi, settori che assumono e contratti collettivi nel Cantone di Neuchâtel: come funziona il sistema svizzero di salari per grado di formazione',
     keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, lavoro, neuch',
-    ogTitle: 'Salari e mercato del lavoro Neuchâtel: settori',
+    ogTitle: 'Salari e mercato del lavoro Neuchâtel: settori e formazione',
     ogDescription: 'Stipendi, settori che assumono e contratti collettivi nel Cantone di Neuchâtel: come funziona il sistema svizzero di salari per grado di formazione e contributi.',
     canonicalPath: '/articoli-svizzera/neuchatel-salari-settori-formazione/',
     structuredData: {
@@ -74203,7 +74203,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Mario Padula nuovo direttore IRE dell\'USI dal 1° settembre',
     description: 'Mario Padula assume la direzione dell\'IRE dell\'USI dal 1° settembre 2026, succedendo a Mario Jametti. Esperto di previdenza ed economia dell\'invecchiamento.',
     keywords: 'frontalieri, ticino, svizzera, italia, mario, padula, nuovo, direttore',
-    ogTitle: 'Mario Padula nuovo direttore IRE dell\'USI',
+    ogTitle: 'Mario Padula nuovo direttore IRE dell\'USI dal 1° settembre',
     ogDescription: 'L\'economista Mario Padula, già presidente della COVIP e membro del Board of Supervisors dell\'EIOPA dal 2016 al 2023, assumerà dal 1° settembre 2026 la direzione dell\'Istituto di ricerche economiche dell\'USI, succedendo a Mario Jametti. Laurea',
     canonicalPath: '/articoli-svizzera/padula-direttore-ire-usi-2026/',
     structuredData: {
@@ -77779,7 +77779,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Stablecoin in franchi: il progetto entra in fase operativa',
     description: 'Il progetto CHFD per una moneta digitale legata al franco svizzero entra nella fase di testing. Nove partner finanziari svizzeri sperimentano concreti utilizzi',
     keywords: 'frontalieri, ticino, svizzera, italia, stablecoin, franchi, progetto, entra',
-    ogTitle: 'Stablecoin in franchi: il progetto entra in fase',
+    ogTitle: 'Stablecoin in franchi: il progetto entra in fase operativa',
     ogDescription: 'Il progetto CHFD per una moneta digitale legata al franco svizzero entra nella fase di testing. Nove partner finanziari svizzeri sperimentano concreti utilizzi della stablecoin fino a fine 2026.',
     canonicalPath: '/articoli-svizzera/stablecoin-franco-fase-operativa/',
     structuredData: {
@@ -78125,7 +78125,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Tour operator svizzeri in difficoltà: calo fatturato 5-10%',
     description: 'FSV stima contrazione 5-10% nel 2026 per geopolitica, caldo estivo e crollo visitatori USA. Costi aggiuntivi 2.3M CHF per rimpatri d\'emergenza. Dati aggiornati',
     keywords: 'frontalieri, ticino, svizzera, italia, tour, operator, svizzeri, difficoltà',
-    ogTitle: 'Tour operator svizzeri in difficoltà: calo fatturato',
+    ogTitle: 'Tour operator svizzeri in difficoltà: calo fatturato 5-10%',
     ogDescription: 'FSV stima contrazione 5-10% nel 2026 per geopolitica, caldo estivo e crollo visitatori USA. Costi aggiuntivi 2.3M CHF per rimpatri d\'emergenza.',
     canonicalPath: '/articoli-svizzera/tour-operator-calo-conflitti/',
     structuredData: {
@@ -79056,7 +79056,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Permesso di dimora B in Giura: requisiti, rinnovo e ufficio competente',
     description: 'Scopri come funziona il permesso B nel Cantone di Giura, dalla documentazione alla procedura di rinnovo, con focus su tassazione e assicurazione obbligatoria.',
     keywords: 'frontalieri, ticino, svizzera, italia, permesso, dimora, giura, requisiti',
-    ogTitle: 'Permesso di dimora B in Giura: requisiti, rinnovo',
+    ogTitle: 'Permesso di dimora B in Giura: requisiti, rinnovo e ufficio competente',
     ogDescription: 'Scopri come funziona il permesso B nel Cantone di Giura, dalla documentazione alla procedura di rinnovo, con focus su tassazione e assicurazione obbligatoria.',
     canonicalPath: '/articoli-svizzera/permesso-b-jura-requisiti-rinnovo/',
     structuredData: {
@@ -81799,7 +81799,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     title: 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore',
     description: 'Un malinteso tra Berna e Giura ha portato a un pagamento doppio delle rendite AVS a Moutier, evidenziando la necessità di una comunicazione chiara',
     keywords: 'frontalieri, ticino, svizzera, italia, moutier, oltre, pensionati, ricevono',
-    ogTitle: 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS',
+    ogTitle: 'Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore',
     ogDescription: 'Un episodio a Moutier evidenzia la complessità delle procedure amministrative e la necessità di una comunicazione chiara tra le istituzioni coinvolte nel trasferimento cantonale.',
     canonicalPath: '/articoli-svizzera/malinteso-rendite-avs-moutier/',
     structuredData: {
