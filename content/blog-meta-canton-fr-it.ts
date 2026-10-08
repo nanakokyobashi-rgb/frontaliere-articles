@@ -12,6 +12,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Friburgo: approvato il nuovo piano della rete ciclabile',
     'blog.article.nuovo-piano-ciclabile-friburgo.excerpt': 'RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042',
     'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Nuova rete ciclabile nel Canton Friburgo per la mobilità quotidiana',
+    'blog.article.friburgo-legge-lingue-ufficiali.title': 'Friburgo approva la legge sulle lingue ufficiali',
+    'blog.article.friburgo-legge-lingue-ufficiali.excerpt': 'I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton',
+    'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Deputati del Canton Friburgo riuniti per il voto sulla legge sulle lingue ufficiali',
 };
 
 export default blogMetaCantonFrIt;

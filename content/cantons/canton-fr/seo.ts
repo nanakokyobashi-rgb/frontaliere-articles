@@ -114,6 +114,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-friburgo-legge-lingue-ufficiali': {
+    title: 'Friburgo approva la legge sulle lingue ufficiali',
+    description: 'I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton',
+    keywords: 'frontalieri, ticino, svizzera, italia, friburgo, approva, legge, sulle',
+    ogTitle: 'Friburgo: legge sulle lingue ufficiali',
+    ogDescription: 'I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton',
+    canonicalPath: '/articoli-friburgo/friburgo-legge-lingue-ufficiali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Friburgo approva la legge sulle lingue ufficiali",
+      "description": "I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-friburgo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Deputati del Canton Friburgo riuniti per il voto sulla legge sulle lingue ufficiali"
+      },
+      "datePublished": "2026-10-08T15:45:50+00:00",
+      "dateModified": "2026-10-08T15:45:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/friburgo-legge-lingue-ufficiali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

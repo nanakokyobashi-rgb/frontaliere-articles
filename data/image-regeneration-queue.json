@@ -310,6 +310,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T15:33:51.061Z",
       "lastFailureAt": "2026-10-08T15:33:51.061Z"
+    },
+    {
+      "articleId": "friburgo-legge-lingue-ufficiali",
+      "title": "Friburgo approva la legge sulle lingue ufficiali",
+      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-friburgo.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T15:45:50.095Z",
+      "lastFailureAt": "2026-10-08T15:45:50.095Z"
     }
   ]
 }

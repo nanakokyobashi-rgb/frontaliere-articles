@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'friburgo-legge-lingue-ufficiali',
+ category: 'novita',
+ date: '2026-10-08T15:45:50.084Z',
+ image: '/images/blog/apprendistato-formazione-professionale-canton-friburgo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

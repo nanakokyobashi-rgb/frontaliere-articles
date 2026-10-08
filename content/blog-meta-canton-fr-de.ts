@@ -12,6 +12,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Freiburg: Neuer Radnetzplan genehmigt',
     'blog.article.nuovo-piano-ciclabile-friburgo.excerpt': 'RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt',
     'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Neues Velowegnetz im Kanton Freiburg für den Alltagsverkehr',
+    'blog.article.friburgo-legge-lingue-ufficiali.title': 'Freiburg verabschiedet das Gesetz über die Amtssprachen',
+    'blog.article.friburgo-legge-lingue-ufficiali.excerpt': 'Die Abgeordneten stimmten am Donnerstag ab Freiburg hat sein erstes Gesetz über die Amtssprachen Der Text fördert die Zweisprachigkeit Entscheidung → Abstimmung',
+    'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Freiburger Abgeordnete stimmen über das Gesetz zu den Amtssprachen ab',
 };
 
 export default blogMetaCantonFrDe;
