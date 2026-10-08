@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'zug-rischio-coleottero-giapponese',
  category: 'pratico',
  date: '2026-10-07T09:02:17.902Z',
- image: '/images/blog/asilo-nido-e-custodia-bambini-canton-zugo-costi.webp',
+ image: '/images/blog/article-zug-rischio-coleottero-giapponese.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['ZG'],

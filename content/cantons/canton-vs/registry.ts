@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'disoccupazione-vallese-fine-estate',
  category: 'novita',
  date: '2026-10-07T08:50:45.500Z',
- image: '/images/blog/disoccupazione-settembre-ticino-2026.webp',
+ image: '/images/blog/article-disoccupazione-vallese-fine-estate.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VS'],

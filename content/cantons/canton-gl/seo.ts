@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Governo cantonale di Glarona ha approvato una revisione della legge fiscale che estende a dieci anni la compensazione delle perdite, divide a metà",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/asilo-nido-custodia-bambini-canton-glarona.webp`,
+        "url": `${BASE_URL}/images/blog/article-revisione-fiscale-canton-glarona.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Vista delle Alpi della Glarona con documento di modifica della legge fiscale su tavolo"

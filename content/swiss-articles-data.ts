@@ -26180,7 +26180,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'svizzera-india-accordi-bilaterali',
     category: 'novita',
     date: '2026-10-07T08:55:11.941Z',
-    image: '/images/blog/accordi-svizzera-ue-consiglio-federale.webp',
+    image: '/images/blog/article-svizzera-india-accordi-bilaterali.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

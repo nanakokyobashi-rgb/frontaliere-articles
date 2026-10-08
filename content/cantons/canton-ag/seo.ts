@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A settembre 2026 i sette RAV dell'Argovia hanno registrato 12.451 disoccupati: tasso fermo al 3,2%, 3.735 posti vacanti e ricerca media di 261 giorni",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-argovia-disoccupazione-settembre.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Centro regionale per l'impiego in Argovia sul tema della disoccupazione"
@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "In Argovia la SVA invia i codici per la riduzione dei premi della cassa malati. Per il 2027 la domanda va presentata entro giovedì 31 dicembre: siti e contatti.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/premi-lamal-vallese-riduzione.webp`,
+        "url": `${BASE_URL}/images/blog/article-riduzione-premi-argovia-2027.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Argovia: residente controlla il codice SVA per la riduzione dei premi"
