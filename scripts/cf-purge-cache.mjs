@@ -65,8 +65,9 @@
  *
  * Exit: 0 = purged (or no-op when CF_API_TOKEN absent — non-fatal so a
  * missing secret never fails the deploy), 1 = API/auth error, or arguments
- * this script cannot act on: an unknown flag, both list sources at once, a
- * list that is unreadable or empty. Those are checked BEFORE the token no-op,
+ * this script cannot act on: an unknown flag, more than one list source, a
+ * list that is unreadable or empty, a target that is not a clean http(s) URL.
+ * Those are checked BEFORE the token no-op,
  * and an unknown flag in particular must never fall through to the default —
  * the default is the purge of the whole zone.
  *
@@ -106,8 +107,11 @@ const REST_BASE = 'https://api.cloudflare.com/client/v4';
 const ZONE_NAME = process.env.CF_ZONE_NAME || 'frontaliereticino.ch';
 const token = process.env.CF_API_TOKEN;
 
-const filesArg = process.argv.find(arg => arg.startsWith('--files='));
-const filesFromArg = process.argv.find(arg => arg.startsWith('--files-from='));
+const listSources = process.argv
+  .slice(2)
+  .filter(arg => arg.startsWith('--files=') || arg.startsWith('--files-from='));
+const filesArg = listSources.find(arg => arg.startsWith('--files='));
+const filesFromArg = listSources.find(arg => arg.startsWith('--files-from='));
 
 // Un argomento che lo script non conosce non è «nessun argomento». Senza
 // questo controllo un refuso nel nome del flag (`--file-from=`) cadrebbe nel
@@ -122,11 +126,14 @@ if (unknownArgs.length) {
   process.exit(1);
 }
 
-// Due sorgenti per lo stesso elenco non hanno una risposta giusta: unirle
-// nasconderebbe un refuso del chiamante, sceglierne una lascerebbe l'altra
-// senza purge e senza un errore.
-if (filesArg && filesFromArg) {
-  console.error('❌ --files= e --files-from= insieme: l\'elenco ha una sola sorgente.');
+// Più sorgenti per lo stesso elenco non hanno una risposta giusta: unirle
+// nasconderebbe un refuso del chiamante, sceglierne una lascerebbe le altre
+// senza purge e senza un errore. Vale anche per lo stesso flag dato due volte:
+// leggere solo il primo è un purge parziale con uscita 0.
+if (listSources.length > 1) {
+  console.error(
+    `❌ ${listSources.length} sorgenti per l'elenco (${listSources.map(arg => arg.slice(0, arg.indexOf('=') + 1)).join(' ')}): l'elenco ha una sola sorgente.`,
+  );
   process.exit(1);
 }
 
@@ -138,7 +145,9 @@ function readUrlList(listPath) {
     process.exit(1);
   }
   try {
-    return readFileSync(listPath, 'utf8').split('\n');
+    // Ogni fine riga, anche il solo CR: un file che lo usa letto come una
+    // riga sola darebbe a Cloudflare un bersaglio unico e inesistente.
+    return readFileSync(listPath, 'utf8').split(/\r\n|\r|\n/u);
   } catch (err) {
     console.error(`❌ --files-from=${listPath}: elenco non leggibile (${err.code || err.message}).`);
     process.exit(1);
@@ -159,6 +168,30 @@ const targetFiles = listedUrls ? listedUrls.map(url => url.trim()).filter(Boolea
 if (targetFiles && !targetFiles.length) {
   console.error(`❌ ${filesFromArg ? '--files-from=' : '--files='} richiede almeno un URL.`);
   process.exit(1);
+}
+
+// Un bersaglio che non è un URL http(s) pulito non fa fallire Cloudflare: la
+// risposta è `success` e dalla cache non esce niente. Una riga con uno spazio
+// in mezzo, un file che non è UTF-8 (U+FFFD dopo la decodifica), un pezzo di
+// URL tagliato da una virgola: tutti purge riusciti sulla carta. Si fermano
+// qui, con la posizione del primo.
+function isPurgeableUrl(value) {
+  if (/[\s\u0000-\u001f\u007f\ufffd]/u.test(value)) return false;
+  try {
+    return ['http:', 'https:'].includes(new URL(value).protocol);
+  } catch {
+    return false;
+  }
+}
+if (targetFiles) {
+  const firstInvalid = targetFiles.findIndex(value => !isPurgeableUrl(value));
+  if (firstInvalid !== -1) {
+    const invalidCount = targetFiles.filter(value => !isPurgeableUrl(value)).length;
+    console.error(
+      `❌ ${invalidCount} bersagli su ${targetFiles.length} non sono URL http(s) validi; il primo è alla posizione ${firstInvalid + 1}: ${JSON.stringify(targetFiles[firstInvalid].slice(0, 120))}.`,
+    );
+    process.exit(1);
+  }
 }
 
 /**

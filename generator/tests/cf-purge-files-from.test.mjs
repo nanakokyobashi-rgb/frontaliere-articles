@@ -184,12 +184,44 @@ test('righe vuote, spazi e fine riga di Windows non diventano URL', (t) => {
   assert.deepEqual(purgedByVariant(res.calls).plain, urls);
 });
 
-test('un elenco che manca, vuoto o doppio ferma lo script prima di ogni chiamata', async (t) => {
+test('un file con il solo CR come fine riga dà gli stessi URL', (t) => {
+  const dir = workdir(t);
+  const urls = publishedUrls(2);
+  const list = join(dir, 'urls.txt');
+  writeFileSync(list, `${urls.join('\r')}\r`);
+
+  const res = runPurge(dir, [`--files-from=${list}`]);
+
+  assert.equal(res.status, 0, res.stderr);
+  assert.deepEqual(purgedByVariant(res.calls).plain, urls);
+});
+
+test('un URL con caratteri non ASCII resta com\'è e viene inviato', (t) => {
+  const dir = workdir(t);
+  const urls = ['https://frontaliereticino.ch/de/grenzgaenger-artikel/grenzpendler-trag\u00f6die-porletta/'];
+  const list = join(dir, 'urls.txt');
+  writeFileSync(list, `${urls[0]}\n`);
+
+  const res = runPurge(dir, [`--files-from=${list}`]);
+
+  assert.equal(res.status, 0, res.stderr);
+  assert.deepEqual(purgedByVariant(res.calls).plain, urls);
+});
+
+test('un elenco che manca, vuoto, doppio o con un bersaglio non valido ferma lo script prima di ogni chiamata', async (t) => {
   const dir = workdir(t);
   const empty = join(dir, 'vuoto.txt');
   writeFileSync(empty, '\n  \n\n');
   const some = join(dir, 'urls.txt');
   writeFileSync(some, 'https://frontaliereticino.ch/articoli-frontaliere/\n');
+  const other = join(dir, 'altri-urls.txt');
+  writeFileSync(other, 'https://frontaliereticino.ch/fr/articles-frontalier/\n');
+  const spaced = join(dir, 'con-spazio.txt');
+  writeFileSync(spaced, 'https://frontaliereticino.ch/articoli-frontaliere/\nhttps://frontaliereticino.ch/de/grenzgaenger artikel/\n');
+  const words = join(dir, 'senza-schema.txt');
+  writeFileSync(words, 'articoli-frontaliere/\n');
+  const latin1 = join(dir, 'latin1.txt');
+  writeFileSync(latin1, Buffer.from('https://frontaliereticino.ch/de/grenzgaenger-artikel/trag\u00f6die/\n', 'latin1'));
   const missing = join(dir, 'non-esiste.txt');
 
   const cases = [
@@ -201,8 +233,25 @@ test('un elenco che manca, vuoto o doppio ferma lo script prima di ogni chiamata
     {
       name: 'due sorgenti',
       args: [`--files-from=${some}`, '--files=https://frontaliereticino.ch/en/cross-border-articles/'],
-      stderr: /una sola sorgente/,
+      stderr: /2 sorgenti per l'elenco \(--files-from= --files=\): l'elenco ha una sola sorgente/,
     },
+    // Lo stesso flag due volte: leggere solo il primo sarebbe un purge parziale.
+    {
+      name: 'due file',
+      args: [`--files-from=${some}`, `--files-from=${other}`],
+      stderr: /2 sorgenti per l'elenco \(--files-from= --files-from=\)/,
+    },
+    {
+      name: 'due argomenti',
+      args: ['--files=https://frontaliereticino.ch/articoli-frontaliere/', '--files=https://frontaliereticino.ch/en/cross-border-articles/'],
+      stderr: /2 sorgenti per l'elenco \(--files= --files=\)/,
+    },
+    // Bersagli che Cloudflare accetterebbe con `success` senza togliere niente.
+    { name: 'riga con uno spazio in mezzo', args: [`--files-from=${spaced}`], stderr: /1 bersagli su 2 non sono URL http\(s\) validi; il primo è alla posizione 2/ },
+    { name: 'riga che non è un URL', args: [`--files-from=${words}`], stderr: /il primo è alla posizione 1: "articoli-frontaliere\/"/ },
+    { name: 'schema diverso da http', args: ['--files=ftp://frontaliereticino.ch/articoli-frontaliere/'], stderr: /1 bersagli su 1 non sono URL http\(s\) validi/ },
+    { name: 'file che non è UTF-8', args: [`--files-from=${latin1}`], stderr: /non sono URL http\(s\) validi; il primo è alla posizione 1/ },
+    { name: 'URL tagliato da una virgola', args: ['--files=https://frontaliereticino.ch/a,b/'], stderr: /il primo è alla posizione 2: "b\/"/ },
     // Un refuso nel nome del flag non deve diventare il purge dell'intera zona.
     { name: 'flag con un refuso', args: [`--file-from=${some}`], stderr: /Argomento non riconosciuto: --file-from=/ },
     { name: 'flag senza valore', args: ['--files-from'], stderr: /Argomento non riconosciuto: --files-from/ },
