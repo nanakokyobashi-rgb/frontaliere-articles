@@ -12716,7 +12716,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Train régional sur une ligne ferroviaire transfrontalière entre Côme et la Suisse (Como)',
     'blog.article.hotel-ticino-140-licenziati.title': 'Deux hôtels fermés au Tessin : 140 licenciés',
     'blog.article.hotel-ticino-140-licenziati.excerpt': 'La société qui gère Principe Leopoldo et Villa Sassa annonce 140 licenciements. Daniele Lardi rassure : une bonne partie du personnel sera réembauchée.',
-    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Les hôtels Principe Leopoldo et Villa Sassa au Tessin',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Illustration générée pour cet article',
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola : arrestation pour un kilo de haschisch dans les bagages',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': 'Interpellée à la gare internationale de Domodossola',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'La gare internationale de Domodossola, lieu de l\'arrestation pour trafic de stupéfiants',
@@ -12809,6 +12809,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Électrification Albate-Molteno : travaux à partir de décembre 2024',
     'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## En bref - Chantiers pour l\'électrification lancés à la mi-décembre - Como-Lecco suspendue au moins jusqu\'en juin 2029 - Albate-Molteno : de 24 à 34 trains par jour',
     'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Train électrique sur la ligne Albate-Molteno vicino a Lugano con le Alpi sullo sfondo',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza : un faux carabinier demande de l’or, le fils déjoue l’arnaque',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## En bref - À Porlezza, tentative d’arnaque au faux carabinier - L’appel téléphonique remonte au 7 octobre 2026 - De l’or demandé pour obtenir la libération du fils',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Image éditoriale relative à: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto : entreprises et équilibre vie-travail',
+    'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## En bref - Rencontre à Chiasso le 1er octobre dernier - Une trentaine d’entreprises impliquées - Sondage cantonal ouvert jusqu’au 30 novembre ## Faits',
+    'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Réunion d\'entreprise à Chiasso sur l\'équilibre vie professionnelle-vie privée avec des participants autour d\'une table',
 };
 
 export default blogMetaFr;

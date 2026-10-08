@@ -12715,7 +12715,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Treno regionale su una linea transfrontaliera tra Como e la Svizzera',
     'blog.article.hotel-ticino-140-licenziati.title': 'Due hotel chiusi in Ticino: 140 licenziati',
     'blog.article.hotel-ticino-140-licenziati.excerpt': 'La società che gestisce Principe Leopoldo e Villa Sassa comunica 140 licenziamenti. Daniele Lardi rassicura: una buona parte del personale sarà riassunta.',
-    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'I due hotel Principe Leopoldo e Villa Sassa in Ticino',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: arresto per chilo di hashish nel bagaglio',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': 'Fermata alla stazione internazionale di Domodossola',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'La stazione internazionale di Domodossola, dove è avvenuto l\'arresto per traffico di stupefacenti',
@@ -12808,6 +12808,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
     'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
     'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Treno elettrico sulla linea Albate-Molteno vicino a Lugano con le Alpi sullo sfondo',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Immagine editoriale relativa a: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
+    'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti',
+    'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Incontro aziendale a Chiasso sulla conciliabilità vita-lavoro con partecipanti attorno a un tavolo',
 };
 
 export default blogMetaIt;

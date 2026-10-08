@@ -7922,6 +7922,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.salari-svizzera-talenti-stranieri.title': 'Switzerland: minimum salary gap for EU/EFTA talent',
     'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## TL;DR - Switzerland ranks first in the IMD World Talent Ranking - Corrected EU/EFTA gap: 1,1% lower - Third countries: 4,5% lower - Immigration given the green light',
     'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Panoramic view of Lugano, Switzerland, symbolizing economic opportunities and attractiveness for skilled talents.',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'TF denies health insurance discount to father with alternating custody',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## TL;DR - The Federal Supreme Court rejects the appeal of a divorced father. - Child custody alternates between the parents. - No deduction of 9\'000 francs',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Editorial image related to: TF nega sconto cassa malati padre affidamento alternato',
 };
 
 export default blogMetaChEn;

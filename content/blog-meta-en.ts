@@ -12714,7 +12714,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Regional train on a cross-border railway line between Como and Switzerland',
     'blog.article.hotel-ticino-140-licenziati.title': 'Two hotels closed in Ticino: 140 laid off',
     'blog.article.hotel-ticino-140-licenziati.excerpt': 'The company that manages Principe Leopoldo and Villa Sassa announces 140 layoffs. Daniele Lardi reassures: a good portion of the staff will be rehired.',
-    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Principe Leopoldo and Villa Sassa hotels in Ticino',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Illustration generated for this article',
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: arrest for a kilo of hashish in luggage',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': '',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'Domodossola international station, where the drug trafficking arrest took place',
@@ -12807,6 +12807,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Albate-Molteno electrification: work starting in December 2024',
     'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## TL;DR - Electrification works to start in mid-December - Como-Lecco suspended at least until June 2029 - Albate-Molteno: from 24 to 34 trains per day',
     'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Electric train on the Albate-Molteno line near Lugano with the Alps in the background',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza: fake Carabinieri officer asks for gold, son stops scam',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## TL;DR - At Porlezza, attempted scam by a fake carabiniere - The phone call dates back to October 7, 2026 - Gold requested to secure the son\'s release',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Editorial image related to: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto companies compared on work-life balance',
+    'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## TL;DR - Meeting in Chiasso on October 1 last year - Around thirty businesses involved - Cantonal survey open until November 30 ## Facts',
+    'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Business meeting in Chiasso on work-life balance with participants around a table',
 };
 
 export default blogMetaEn;

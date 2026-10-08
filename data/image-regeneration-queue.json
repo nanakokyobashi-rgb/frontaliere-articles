@@ -280,6 +280,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T11:44:40.252Z",
       "lastFailureAt": "2026-10-08T11:44:40.252Z"
+    },
+    {
+      "articleId": "mendrisiotto-aziende-conciliabilita",
+      "title": "Mendrisiotto aziende a confronto su conciliabilità vita-lavoro",
+      "fallbackImage": "/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp",
+      "reason": "All image providers failed for article-mendrisiotto-aziende-conciliabilita: openai-codex (vision gate rejected image: Generic illustration with multiple clearly recognizable human",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T12:50:35.254Z",
+      "lastFailureAt": "2026-10-08T12:50:35.254Z"
     }
   ]
 }

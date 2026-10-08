@@ -22,6 +22,11 @@ import {
   isVisualTextFailure,
   NO_TEXT_IMAGE_RETRY_HINT,
 } from '../scripts/regenerate-queued-covers.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
+import {
+  locateArticleSeoImage,
+  updateArticleSeoImageBlock,
+} from '../scripts/lib/article-registry-image.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
 import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 
@@ -48,12 +53,60 @@ function seoEntry(id, image = '/images/places/fallback.webp') {
   return `  'blog-${id}': {\n    title: '${id}',\n    description: '${id}',\n    keywords: '${id}',\n    ogTitle: '${id}',\n    ogDescription: '${id}',\n    canonicalPath: '/articoli-frontaliere/${id}/',\n    structuredData: {\n      "image": {\n        "url": \`\${BASE_URL}${image}\`,\n        "width": 1200,\n        "height": 675\n      },\n      "datePublished": "2026-10-07T12:00:00+00:00"\n    }\n  },\n`;
 }
 
+function seoEntryWithQuotedImageText(id, { datePublished = true } = {}) {
+  let entry = seoEntry(id).replace(
+    '      "image": {',
+    String.raw`      "headline": "A literal \"image\" marker",
+      "description": "A literal \"image\" marker",
+      "image": {`,
+  );
+  if (!datePublished) entry = entry.replace(/      "datePublished": [^\n]+\n/u, '');
+  return entry;
+}
+
+function repairedSeoEntry(id, image = '/images/places/fallback.webp') {
+  return [
+    "  'blog-" + id + "': {",
+    "    title: '" + id + "',",
+    "    description: '" + id + "',",
+    "    keywords: '" + id + "',",
+    "    ogTitle: '" + id + "',",
+    "    ogDescription: '" + id + "',",
+    "    canonicalPath: '/articoli-frontaliere/" + id + "/',",
+    '    structuredData: {',
+    '      "image": {',
+    '        "@type": "ImageObject",',
+    '        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",',
+    '        "copyrightNotice": "Generated media; provider terms apply.",',
+    '        "license": "https://openai.com/policies/terms-of-use/",',
+    '        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },',
+    '        "creditText": "frontaliereticino.ch",',
+    '        "url": `${BASE_URL}' + image + '`,',
+    '        "width": 1200,',
+    '        "height": 675,',
+    '        "caption": "' + GENERATED_COVER_ALT_BY_LOCALE.it + '"',
+    '      },',
+    '      "datePublished": "2026-10-07T12:00:00+00:00"',
+    '    }',
+    '  },',
+  ].join('\n') + '\n';
+}
+
 function inlineSeoEntry(id, image = '/images/places/fallback.webp') {
   return `  'blog-${id}': {\n    canonicalPath: '/articoli-frontaliere/${id}/',\n    structuredData: {\n      "image": { "@type": "ImageObject", "url": \`\${BASE_URL}${image}\`, "width": 1200, "height": 675 },\n      "datePublished": "2026-10-07T12:00:00+00:00"\n    }\n  },\n`;
 }
 
 function seoFile(entries) {
   return `const BASE_URL = 'https://frontaliereticino.ch';\nconst BLOG_SEO_METADATA = {\n${entries.join('\n')}\n};\nexport default BLOG_SEO_METADATA;\n`;
+}
+
+function writeImageAltMetadata(root, items, metaPrefix) {
+  for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {
+    const meta = items
+      .map(({ articleId }) => `  'blog.article.${articleId}.imageAlt': '${caption}',`)
+      .join('\n');
+    write(root, `content/${metaPrefix}-${locale}.ts`, `const META = {\n${meta}\n};\n`);
+  }
 }
 
 function generatedRecord(root, articleId, imageUrl, bytes) {
@@ -92,12 +145,52 @@ function generatedRecord(root, articleId, imageUrl, bytes) {
   };
 }
 
+test('ancora ImageObject e URL diretta anche con un URL annidato e senza datePublished', () => {
+  const root = tempRoot();
+  try {
+    write(root, 'content/seo/seo-blog-5.ts', [
+      "const BASE_URL = 'https://frontaliereticino.ch';",
+      'const BLOG_SEO_METADATA = {',
+      "  'blog-range-guard': {",
+      '    description: \'una descrizione con la parola "image" ma non un campo,\',',
+      '    structuredData: {',
+      '      "image": {',
+      '        "creator": { "url": "https://example.test/creator" },',
+      '        "url": `${BASE_URL}/images/old.webp`,',
+      '        "width": 1200',
+      '      }',
+      '    }',
+      '  },',
+      '};',
+      'export default BLOG_SEO_METADATA;',
+      '',
+    ].join('\n'));
+
+    const located = locateArticleSeoImage(root, 'range-guard');
+    assert.equal(located.previousImage, '/images/old.webp');
+    updateArticleSeoImageBlock(root, 'range-guard', [
+      '      "image": {',
+      '        "url": `${BASE_URL}/images/new.webp`,',
+      '        "width": 1200',
+      '      }',
+    ].join('\n'));
+    const next = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+    assert.match(next, /description: 'una descrizione con la parola "image"/);
+    assert.match(next, /\$\{BASE_URL\}\/images\/new\.webp/);
+    assert.doesNotMatch(next, /example\.test\/creator/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 function fixture(root, items) {
   write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
   queue(root, items);
   const entries = items.map((entry) => inlineSeoEntry(entry.articleId));
   write(root, 'content/seo/seo-blog-5.ts', seoFile(entries));
   write(root, 'content/cantons/canton-ti/seo.ts', seoFile(entries));
+  writeImageAltMetadata(root, items, 'blog-meta');
+  writeImageAltMetadata(root, items, 'blog-meta-canton-ti');
 }
 
 function item(articleId, requestedAt, title = articleId) {
@@ -214,6 +307,97 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
   }
 });
 
+test('ricostruisce ImageObject, diritti e imageAlt quando cambia la copertina', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'stale-cover-metadata';
+    const oldCaption = 'Didascalia della copertina precedente';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    const staleSeo = seoEntry(articleId).replace(
+      '        "height": 675',
+      `        "height": 675,\n        "caption": "${oldCaption}"`,
+    );
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([staleSeo]));
+    for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {
+      write(root, `content/blog-meta-${locale}.ts`, `const META = {\n  'blog.article.${articleId}.imageAlt': '${oldCaption}',\n};\n`);
+      assert.notEqual(caption, oldCaption);
+    }
+    queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: fakeCover(root),
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(summary.drained, 1);
+    const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+    assert.ok(seo.includes('article-stale-cover-metadata.webp'));
+    assert.ok(seo.includes('"acquireLicensePage": "https://openai.com/policies/terms-of-use/"'));
+    assert.match(seo, new RegExp(`"caption": "${GENERATED_COVER_ALT_BY_LOCALE.it}"`));
+    assert.doesNotMatch(seo, new RegExp(oldCaption));
+    for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {
+      const meta = fs.readFileSync(path.join(root, `content/blog-meta-${locale}.ts`), 'utf8');
+      assert.match(meta, new RegExp(`imageAlt': '${caption}'`));
+      assert.doesNotMatch(meta, new RegExp(oldCaption));
+    }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('ancora il blocco ImageObject alla proprietà reale anche se il testo contiene "image"', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'image-token-in-json-ld-text';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntryWithQuotedImageText(articleId)]));
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: fakeCover(root),
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(summary.drained, 1);
+    const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+    assert.match(seo, /"headline": "A literal \\"image\\" marker"/u);
+    assert.match(seo, /"description": "A literal \\"image\\" marker"/u);
+    assert.match(seo, /article-image-token-in-json-ld-text\.webp/u);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('chiude il blocco ImageObject senza richiedere datePublished', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'legacy-image-without-date';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntryWithQuotedImageText(articleId, { datePublished: false })]));
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: fakeCover(root),
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(summary.drained, 1);
+    const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+    assert.match(seo, /article-legacy-image-without-date\.webp/u);
+    assert.doesNotMatch(seo, /"datePublished"/u);
+    assert.match(seo, /"headline": "A literal \\"image\\" marker"/u);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('seleziona prima le richieste più vecchie, anche se hanno più fallimenti', async () => {
   const root = tempRoot();
   try {
@@ -252,6 +436,7 @@ test('canonizza gli articleId duplicati prima di selezionare e rimuovere il lavo
     const articleId = 'duplicate-queue-entry';
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
     write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
+    writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
     queue(root, [
       item(articleId, '2026-10-07T09:00:00.000Z'),
@@ -310,7 +495,8 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
     const bytes = Buffer.from('already-satisfied-cover');
     const record = generatedRecord(root, articleId, imageUrl, bytes);
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
-    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId, imageUrl)]));
+    writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
     write(root, `public${imageUrl}`, bytes);
     write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
@@ -340,6 +526,42 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
   }
 });
 
+test('non drena una copertina se manca un imageAlt localizzato', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'missing-localized-image-alt';
+    const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+    const bytes = Buffer.from('missing-localized-image-alt-cover');
+    const record = generatedRecord(root, articleId, imageUrl, bytes);
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId, imageUrl)]));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+    write(root, `public${imageUrl}`, bytes);
+    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
+    write(root, 'content/blog-meta-fr.ts', 'const META = {};\n');
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: async () => { throw new Error('must not regenerate'); },
+      generateThumbnail: async () => { throw new Error('must not create a thumbnail'); },
+    });
+
+    assert.equal(summary.alreadySatisfied, 0);
+    assert.equal(summary.drained, 0);
+    assert.equal(summary.failed, 1);
+    assert.deepEqual(summary.failedIds, [articleId]);
+    assert.equal(summary.residual, 1);
+    const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
+    assert.equal(remaining.items[0].articleId, articleId);
+    assert.equal(remaining.items[0].failureCount, 1);
+    assert.match(remaining.items[0].reason, /imageAlt field is missing/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('una copertina con thumbnail mancante o invalido viene riparata prima di togliere la coda', async () => {
   for (const thumbnailState of ['missing', 'invalid', 'truncated']) {
     const root = tempRoot();
@@ -350,6 +572,7 @@ test('una copertina con thumbnail mancante o invalido viene riparata prima di to
       const record = generatedRecord(root, articleId, imageUrl, bytes);
       write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
       write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+      writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
       write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
       write(root, `public${imageUrl}`, bytes);
       if (thumbnailState === 'invalid') {
@@ -546,7 +769,8 @@ test('un record già materializzato rende il drain riprendibile senza una second
     write(root, `public${imageUrl}`, bytes);
     write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
-    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId)]));
+    writeImageAltMetadata(root, [{ articleId }], 'blog-meta');
 
     const summary = await drain({
       root,

@@ -12713,7 +12713,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.monte-olimpino-treni-weekend.imageAlt': 'Regionalzug auf einer grenzüberschreitenden Bahnstrecke zwischen Como und der Schweiz',
     'blog.article.hotel-ticino-140-licenziati.title': 'Zwei Hotels im Tessin geschlossen: 140 entlassen',
     'blog.article.hotel-ticino-140-licenziati.excerpt': 'Die Gesellschaft, die Principe Leopoldo und Villa Sassa betreibt, meldet 140 Entlassungen. Daniele Lardi beruhigt: Ein grosser Teil des Personals wird wieder eingestellt.',
-    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Die Hotels Principe Leopoldo und Villa Sassa im Tessin',
+    'blog.article.hotel-ticino-140-licenziati.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.domodossola-arresto-hashish-stazione.title': 'Domodossola: Festnahme wegen eines Kilos Haschisch im Gepäck',
     'blog.article.domodossola-arresto-hashish-stazione.excerpt': '',
     'blog.article.domodossola-arresto-hashish-stazione.imageAlt': 'Der internationale Bahnhof von Domodossola, Ort des Drogenarrests',
@@ -12806,6 +12806,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Elektrifizierung Albate-Molteno: Bauarbeiten ab Dezember 2024',
     'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## Auf einen Blick - Bauarbeiten für die Elektrifizierung beginnen Mitte Dezember - Como-Lecco mindestens bis Juni 2029 unterbrochen - Albate-Molteno: von 24 auf 34 Züge pro Tag',
     'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Elektrischer Zug auf der Albate-Molteno-Strecke nahe Lugano mit den Alpen im Hintergrund',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza: Falscher Carabiniere fordert Gold, Sohn vereitelt Betrug',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## Auf einen Blick - In Porlezza versuchter Betrug durch einen falschen Carabiniere - Der Anruf erfolgte am 7. Oktober 2026 - Gold gefordert, um die Freilassung des Sohnes zu erwirken',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Redaktionelles Bild zu: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto: Unternehmen im Austausch zur Vereinbarkeit',
+    'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## Auf einen Blick - Treffen in Chiasso am vergangenen 1. Oktober - Rund dreißig Unternehmen beteiligt - Kantonale Umfrage bis zum 30. November offen ## Fakten',
+    'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Unternehmensmeeting in Chiasso zur Vereinbarkeit von Beruf und Privatleben mit Teilnehmern um einen Tisch',
 };
 
 export default blogMetaDe;

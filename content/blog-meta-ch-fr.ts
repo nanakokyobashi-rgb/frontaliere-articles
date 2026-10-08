@@ -7922,6 +7922,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.salari-svizzera-talenti-stranieri.title': 'Suisse : écart salarial minimal pour les talents de l’UE/AELE',
     'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## En bref - La Suisse est première dans l’IMD World Talent Ranking - Écart UE/AELE corrigé : 1,1 % de moins - Pays tiers : 4,5 % de moins - Immigration libre',
     'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Vue panoramique de Lugano, Suisse, symbolisant les opportunités économiques et l\'attractivité pour les talents qualifiés.',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'TF: déduction des primes maladie refusée en garde alternée',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## En bref - Le TF rejette le recours d’un père divorcé. - La garde des enfants est alternée entre les parents. - Pas de déduction de 9\'000 francs',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Image éditoriale relative à: TF nega sconto cassa malati padre affidamento alternato',
 };
 
 export default blogMetaChFr;

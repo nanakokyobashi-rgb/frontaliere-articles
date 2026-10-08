@@ -43177,6 +43177,27 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa',
+ category: 'novita',
+ date: '2026-10-08T12:32:22.037Z',
+ image: '/images/blog/article-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'mendrisiotto-aziende-conciliabilita',
+ category: 'novita',
+ date: '2026-10-08T12:50:35.045Z',
+ image: '/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

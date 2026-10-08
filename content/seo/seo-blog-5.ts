@@ -102071,10 +102071,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Principe Leopoldo e Villa Sassa chiusi in Ticino: 140 licenziati. Daniele Lardi parla di riassumere buona parte e valuta misure per il personale.",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-hotel-ticino-140-licenziati.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "I due hotel Principe Leopoldo e Villa Sassa in Ticino"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T06:29:50+00:00",
       "dateModified": "2026-10-07T06:29:50+00:00",
@@ -102105,10 +102110,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Fermata alla stazione internazionale di Domodossola",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-domodossola-arresto-hashish-stazione.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "La stazione internazionale di Domodossola, dove è avvenuto l'arresto per traffico di stupefacenti"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T06:58:03+00:00",
       "dateModified": "2026-10-07T06:58:03+00:00",
@@ -102139,10 +102149,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "OCST, VPOD e SIT chiedono il recupero del carovita.",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-petizione-recupero-carovita-ticino.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Lavoratori del settore pubblico ticinese con striscioni a sostegno della petizione per il recupero del carovita"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T08:24:41+00:00",
       "dateModified": "2026-10-07T08:24:41+00:00",
@@ -102173,6 +102188,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Dal 10 ottobre al 15 novembre 2026",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-treno-foliage-locarno-domodossola.webp`,
         "width": 1200,
         "height": 675,
@@ -102207,6 +102227,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "A Biasca arrestato un 17enne siriano dimorante",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-biasca-17enne-arrestato-accoltellamento.webp`,
         "width": 1200,
         "height": 675,
@@ -102241,6 +102266,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Pedemontana non chiede pedaggi via SMS o e-mail",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-pedemontana-truffa-sms-frontalieri.webp`,
         "width": 1200,
         "height": 675,
@@ -102645,6 +102675,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "16 persone hanno partecipato alla pulizia di Malnate",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-mcdonalds-pulizia-malnate-2026.webp`,
         "width": 1200,
         "height": 675,
@@ -102718,6 +102753,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Due appuntamenti culturali a Varese il 9 e l'11 ottobre",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-festival-racconto-varese-ottobre.webp`,
         "width": 1200,
         "height": 675,
@@ -103192,6 +103232,79 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ferrovia-albate-molteno-elettrificazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa': {
+    title: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    description: 'A Porlezza tentata truffa del finto carabiniere',
+    keywords: 'frontalieri, ticino, svizzera, italia, porlezza, finto, carabiniere, chiede',
+    ogTitle: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    ogDescription: 'A Porlezza tentata truffa del finto carabiniere',
+    canonicalPath: '/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porlezza: finto carabiniere chiede oro, figlio ferma truffa",
+      "description": "A Porlezza tentata truffa del finto carabiniere",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Porlezza: finto carabiniere chiede oro, figlio ferma truffa"
+      },
+      "datePublished": "2026-10-08T12:32:22+00:00",
+      "dateModified": "2026-10-08T12:32:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mendrisiotto-aziende-conciliabilita': {
+    title: 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
+    description: 'Incontro a Chiasso il primo ottobre scorso',
+    keywords: 'frontalieri, ticino, svizzera, italia, mendrisiotto, aziende, confronto, conciliabilità',
+    ogTitle: 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
+    ogDescription: 'Incontro a Chiasso il primo ottobre scorso',
+    canonicalPath: '/articoli-frontaliere/mendrisiotto-aziende-conciliabilita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mendrisiotto aziende a confronto su conciliabilità vita-lavoro",
+      "description": "Incontro a Chiasso il primo ottobre scorso",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incontro aziendale a Chiasso sulla conciliabilità vita-lavoro con partecipanti attorno a un tavolo"
+      },
+      "datePublished": "2026-10-08T12:50:35+00:00",
+      "dateModified": "2026-10-08T12:50:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mendrisiotto-aziende-conciliabilita/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
