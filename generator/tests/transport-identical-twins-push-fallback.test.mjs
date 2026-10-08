@@ -202,6 +202,18 @@ test('il report conserva native-automerge e nomina i workflow esclusi', () => {
   assert.equal(updated.manifestChanged, true);
 });
 
+test('il fallback esclude anche il derivato del workflow rifiutato', () => {
+  const workflow = '.github/workflows/translate-pending.yml';
+  const derived = 'scripts/ci/translate-queue-recovery.mjs';
+  const updated = removeWorkflowPathsFromReport({
+    transported: [{ path: workflow }, { path: 'scripts/ci/native-automerge-gate.mjs' }],
+    derived: [{ path: derived, source: workflow, blobSha: 'abc' }],
+  }, [workflow]);
+  assert.deepEqual(updated.transported, [{ path: 'scripts/ci/native-automerge-gate.mjs' }]);
+  assert.deepEqual(updated.derived, []);
+  assert.deepEqual(updated.derivedExcluded, [derived]);
+});
+
 test('ripristina baseline e couplingSnapshot dal parent solo sui workflow', () => {
   const previous = {
     files: [

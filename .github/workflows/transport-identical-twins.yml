@@ -13,10 +13,11 @@ name: Transport identical twins (pull-side)
 # da `content/` a `generator/`.
 #
 # Questo canale non ha bisogno di quella prova: non copia mai una directory, ma
-# i singoli path che il manifest dichiara `identical`, dal loro `sitePath`. Un
-# file `adapted` non e' protetto da un'eccezione — non e' proprio nell'insieme
-# di partenza. E copia SOLO `site-ahead` (`classify()` di loop-drift-check):
-# se questo lato si e' mosso, non si tocca niente.
+# i path che il manifest dichiara `identical`, dal loro `sitePath`, raggruppati
+# nelle unita' chiuse ricavate dai coupling (fixture, contratto cross-repo e
+# import relativi). Un file `adapted` non e' protetto da un'eccezione — non e'
+# proprio nell'insieme di partenza. E copia SOLO `site-ahead` (`classify()` di
+# loop-drift-check): se questo lato si e' mosso, non si tocca niente.
 #
 # `engine/` resta fuori: e' `outOfScope` nel manifest PROPRIO perche' ha gia' il
 # mirror, e due canali sullo stesso path sono un conflitto, non una ridondanza.

@@ -473,8 +473,7 @@ export function relativeImportCouplings(entry, source, manifest, corpusExists = 
 
   const entries = Array.isArray(manifest?.files) ? manifest.files : [];
   const modeOf = new Map(entries.map((item) => [item.path, item.mode]));
-  const bySite = new Map(entries.filter((item) => typeof item.sitePath === 'string')
-    .map((item) => [item.sitePath, item]));
+  const bySite = new Map(entries.map((item) => [item.sitePath || item.path, item]));
   const corpusKnown = (candidate) => modeOf.has(candidate) || corpusExists(candidate);
   const siteSource = entry.sitePath || entry.path;
   const couplings = [];
@@ -494,7 +493,7 @@ export function relativeImportCouplings(entry, source, manifest, corpusExists = 
     }
     const twin = bySite.get(siteTarget);
     if (!twin) continue;
-    if (localTarget === twin.path && twin.mode === 'identical') continue;
+    if (localTarget === twin.path) continue;
     couplings.push({
       path: twin.path,
       mode: twin.mode || 'non registrato',
@@ -502,7 +501,7 @@ export function relativeImportCouplings(entry, source, manifest, corpusExists = 
       reason: `import relativo ${spec} risolve sul corpus a ${localTarget}, mentre il gemello di ${siteTarget} e' ${twin.path}`,
     });
   }
-  return couplingSnapshot(couplings);
+  return mergeCouplings(couplings);
 }
 
 /**
@@ -701,24 +700,22 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], co
  *   candidates    [{ path, couplings }] in ordine, già filtrati da `transportVerdict`.
  *   maxFiles      il tetto per passata.
  *   alignedPaths  Set dei path verificati allineati su entrambi i lati.
- *   couplingGraph [{ path, couplings }] raccolto per OGNI fixture, anche per
- *                 quelli che non sono diventati candidati: è da lì che arriva
- *                 il verso inverso (un candidato non fixture ha `couplings: []`
- *                 e da solo non saprebbe di essere pinnato da nessuno).
+ *   couplingGraph [{ path, couplings }] raccolto per OGNI sorgente osservata,
+ *                 anche se non è diventata candidata: include i fixture, il
+ *                 contratto cross-repo e la chiusura degli import relativi.
+ *                 È da lì che arriva il verso inverso (un candidato non
+ *                 fixture ha `couplings: []` e da solo non saprebbe di essere
+ *                 pinnato da nessuno).
  *   blockedForever Set dei path che `permanentBlock` esclude in OGNI giro.
  *
  * E qui sta la differenza che il rinvio da solo non fa. Un vicino che tornerà
  * candidato domani rende il taglio un RINVIO; un vicino bloccato per sempre —
- * `generator/tests/crawler-cross-repo-artifacts.test.mjs` è accoppiato a
- * `scripts/ci/loop-sync-manifest.json`, `corpus-only`, che non sarà mai
- * `identical` — lo rende un NO PERMANENTE: appena quel fixture esce da
- * `stable`, i file che pinna (`scripts/ci/close-recovered-failure-issues.mjs`,
- * `generator/data/crawler-cross-repo-contract.json`) verrebbero scartati a ogni
- * giro, con «aspetta il giro in cui ci stanno insieme» per un giro che non
- * arriva mai: una fix del sito che non scende più, in silenzio, con la passata
- * verde. Il taglio resta — copiare una metà sola mette comunque rossa la PR —
- * ma la ragione dice «copia a mano», che è l'unica azione che lo sblocca, e il
- * flag `permanent` la porta fino al report.
+ * per esempio un `adapted`, un path non registrato o uno scope non scrivibile
+ * — lo rende un NO PERMANENTE: l'altra metà verrebbe scartata a ogni giro, con
+ * «aspetta il giro in cui ci stanno insieme» per un giro che non arriva mai.
+ * Il taglio resta — copiare una metà sola mette comunque rossa la PR — ma la
+ * ragione dice «copia a mano», che è l'unica azione che lo sblocca, e il flag
+ * `permanent` la porta fino al report.
  *
  * La permanenza si PROPAGA: se A cade per un vicino bloccato per sempre, anche
  * B che cade per colpa di A cade per sempre.
@@ -2170,9 +2167,9 @@ async function main() {
         couplingSnapshotChanged = true;
       }
     }
-    // Raccolto per OGNI fixture, non solo per i candidati: e' la mappa inversa
-    // di cui il tetto ha bisogno per non copiare un file lasciando indietro il
-    // golden che lo pinna (il fixture puo' essere stato escluso prima).
+    // Raccolto per OGNI sorgente con coupling, non solo per i candidati: e' la
+    // mappa inversa di cui il tetto ha bisogno per non copiare una meta' mentre
+    // lascia indietro il fixture, il contratto o il twin importato.
     if (couplings.length) couplingGraph.push({ path: rel, couplings });
     // Non dipende dagli hash, quindi si sa PRIMA della fetch — ed e' cio' che
     // permette al tetto di distinguere un rinvio da un no che non scade.
@@ -2287,10 +2284,10 @@ async function main() {
   }
 
   // Il tetto si applica DOPO aver raccolto tutti i candidati, non durante: e'
-  // l'unico modo di sapere se tagliarlo separerebbe un fixture dai suoi
-  // accoppiamenti. Una passata che copia il golden e lascia indietro il file
-  // che pinna è incoerente per costruzione — la stessa rottura del fixture
-  // copiato da solo, prodotta dal tetto invece che dal manifest.
+  // l'unico modo di sapere se tagliarlo separerebbe un fixture, un contratto o
+  // un import relativo dalla sua meta'. Una passata che copia una sola meta'
+  // e' incoerente per costruzione — la stessa rottura prodotta dal tetto
+  // invece che dal manifest.
   const { chosen, dropped, capped } = closeTransportSet(candidates, {
     maxFiles: MAX_FILES,
     alignedPaths,

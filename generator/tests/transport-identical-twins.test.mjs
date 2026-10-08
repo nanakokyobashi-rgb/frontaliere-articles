@@ -905,7 +905,7 @@ test('il contratto crawler chiude workflow e artifact prima del tetto', () => {
   const graph = crawlerContractCouplings(manifest, JSON.stringify({
     artifacts: [{ file: 'translate-pending.yml' }],
   }));
-  const couplingGraph = [...graph].map(([path: filePath, couplings]) => ({ path: filePath, couplings }));
+  const couplingGraph = [...graph].map(([filePath, couplings]) => ({ path: filePath, couplings }));
   const candidates = [
     cand('.github/workflows/translate-pending.yml'),
     ...Array.from({ length: 24 }, (_, index) => cand(`.github/workflows/filler-${String(index).padStart(2, '0')}.yml`)),
@@ -969,14 +969,14 @@ test('un import relativo verso un adapted viene dichiarato come blocco, non scop
   const manifest = {
     files: [
       { path: 'host/shared/consumer.ts', sitePath: 'build-plugins/shared/consumer.ts', mode: 'identical' },
-      { path: 'host/shared/literalMarkdown.ts', sitePath: 'build-plugins/shared/literalMarkdown.ts', mode: 'adapted' },
+      { path: 'host/seo/organizationLd.ts', sitePath: 'services/seo/organizationLd.ts', mode: 'adapted' },
     ],
   };
   const couplings = relativeImportCouplings(
     manifest.files[0],
-    "import { literalMarkdown } from './literalMarkdown';\n",
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
     manifest,
-    (rel) => rel === 'host/shared/literalMarkdown.ts',
+    (rel) => rel === 'services/seo/organizationLd.ts',
   );
   assert.equal(couplings[0].mode, 'adapted');
   assert.match(permanentBlock(manifest.files[0], { couplings }), /non `identical`/);
