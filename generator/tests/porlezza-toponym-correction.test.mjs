@@ -27,6 +27,41 @@ const CORRECTED = {
 const SAME_EVENT = [...Object.keys(CORRECTED), 'pendolarismo-fatale-frontaliere-porlezza'];
 const SEO_FILE = 'content/seo/seo-blog-2.ts';
 const HISTORICAL_PATH = '/articoli-frontaliere/tragedia-pendolare-frontaliere-porletta/';
+const PORLEZZA_CONTENT_FIX = {
+  it: {
+    route: /valico di Oria e Lugano/,
+    payer: /assicuratore svizzero contro gli infortuni/,
+    department: /Dipartimento delle finanze e dell/,
+    hospital: /ospedale di Menaggio, dove è morto poco dopo/,
+  },
+  en: {
+    route: /Oria border crossing and Lugano/,
+    payer: /Swiss accident insurer; INPS is not the paying institution/,
+    department: /Department of Finance and Economy/,
+    hospital: /Menaggio hospital, where he died shortly afterwards/,
+  },
+  de: {
+    route: /Grenzübergangs Oria und Lugano/,
+    payer: /Schweizer Unfallversicherer des Arbeitgebers ausgerichtet; das INPS ist nicht die auszahlende Stelle/,
+    department: /Departement für Finanzen und Wirtschaft/,
+    hospital: /Krankenhaus von Menaggio, wo er kurz darauf starb/,
+  },
+  fr: {
+    route: /poste-frontière d\\?['’]Oria et Lugano/,
+    payer: /assureur-accidents suisse de l/,
+    department: /Département des finances et de l/,
+    hospital: /hôpital de Menaggio, où il est décédé peu après/,
+  },
+};
+const UNSUPPORTED_PORLEZZA_PATTERNS = [
+  /Mendrisiotto|Mendrisio/i,
+  /primi tragitti|first commutes|ersten Wege|premiers trajets/i,
+  /Associazione Frontalieri|Cross-border associations|Grenzgängerorganisationen|Association Frontalieri|Association des Frontières|Frontier Association/i,
+  /attempts at resuscitation were unsuccessful|Wiederbelebungsversuche erfolglos|tentativo di rianimazione si è rivelato vano|tentative de réanimation a été vaine/i,
+  /Direzione delle finanze|Directorate of Finance|Direktion für Finanzen|Direction des finances|gestion des finances/i,
+  /tramite l\\?['’]INPS|through INPS|über INPS|via l\\?['’]INPS/i,
+  /Polizia Cantonale intensifica controlli|The Cantonal Police regularly increase|Die Kantonspolizei verstärkt regelmäßig|La Police cantonale intensifie régulièrement/i,
+];
 const metaLines = (locale, id) => read(`content/blog-meta-${locale}.ts`)
   .split('\n')
   .filter((line) => line.includes(`'blog.article.${id}.`));
@@ -56,6 +91,28 @@ for (const locale of LOCALES) {
     assert.doesNotMatch(body, /autorità cantonali|cantonal authorities|kantonalen Behörden|autorités cantonales/i);
   });
 }
+
+for (const locale of LOCALES) {
+  test(`${locale}: i passaggi non riscontrati su Porlezza sono corretti in tutte le copie`, () => {
+    const tragedy = read(`content/blog-body/${locale}/tragedia-pendolare-ticino.ts`);
+    const incident = read(`content/blog-body/${locale}/incidente-giovane-frontaliere.ts`);
+    const expected = PORLEZZA_CONTENT_FIX[locale];
+    assert.match(tragedy, expected.route, 'direzione della Via Ceresio non fissata');
+    assert.match(tragedy, expected.payer, 'pagatore della rendita LAINF non fissato');
+    assert.match(incident, expected.route, 'direzione della Via Ceresio non fissata');
+    assert.match(incident, expected.department, 'nome del Dipartimento non fissato');
+    assert.match(incident, expected.hospital, 'esito ospedaliero non fissato');
+    for (const pattern of UNSUPPORTED_PORLEZZA_PATTERNS) {
+      assert.doesNotMatch(`${tragedy}\n${incident}`, pattern, `passaggio residuo: ${pattern}`);
+    }
+  });
+}
+
+test('il titolo tedesco del terzo articolo usa il genere maschile corretto', () => {
+  const meta = read('content/blog-meta-de.ts');
+  assert.match(meta, /Tragödie in Porlezza: Junger Grenzpendler stirbt/);
+  assert.doesNotMatch(meta, /Tragödie in Porlezza: Junge Grenzpendlerin stirbt/);
+});
 
 test('le due voci SEO sono corrette in ogni campo tranne gli indirizzi', () => {
   const source = read(SEO_FILE);
