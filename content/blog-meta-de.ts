@@ -648,7 +648,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.chiasso-comunita-cambiamento-valori.title': 'Chiasso: Die Gemeinschaft entdeckt sich zwischen Glauben und neuen Werten neu',
  'blog.article.chiasso-comunita-cambiamento-valori.excerpt': 'Ein sich wandelndes Chiasso: Der Pfarrer Don Feliciani offenbart einen Paradigmenwechsel bei den Sakramenten, bei dem Erwachsene im Alter von 40 Jahren die Firmung wählen. Ein Signal für die Grenzgänger.',
  'blog.article.chiasso-comunita-cambiamento-valori.imageAlt': 'Hauptstraße in Chiasso mit Menschen und einem Kirchturm im Hintergrund, Symbol einer sich entwickelnden Gemeinschaft.',
- 'blog.article.pendolarismo-fatale-frontaliere-porlezza.title': 'Tragödie in Porlezza: Junge Grenzpendlerin stirbt',
+ 'blog.article.pendolarismo-fatale-frontaliere-porlezza.title': 'Tragödie in Porlezza: Junger Grenzpendler stirbt',
  'blog.article.pendolarismo-fatale-frontaliere-porlezza.excerpt': 'Ein 19-jähriger Comasker, der zur Arbeit ins Tessin fuhr, verliert bei einem Zusammenstoß zwischen Auto und Scooter auf der Via Ceresio sein Leben. Die Tragödie entfacht erneut die Debatte über die Sicherheit der grenzüberschreitenden Pendler.',
  'blog.article.pendolarismo-fatale-frontaliere-porlezza.imageAlt': 'Neblige Küstenstraße entlang des Luganersees, nahe Porlezza, am frühen Morgen, mit einem Rollerlicht in der Ferne.',
  'blog.article.salario-minimo-ticino-trattative.title': 'Tessiner Mindestlohn: Wende im Kompromiss?',

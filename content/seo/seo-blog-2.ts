@@ -663,7 +663,7 @@ const BLOG_SEO_METADATA_2: Record<string, SEOMetadata> = {
  "caption": "Casco da scooter posato su un muretto con vista sul Lago di Lugano all'alba, simbolo del pendolarismo transfrontaliero e della tragedia avvenuta a Porlezza."
  },
  "datePublished": "2026-03-01T18:45:12+00:00",
- "dateModified": "2026-10-08T16:02:25Z",
+ "dateModified": "2026-10-08T18:36:10Z",
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
@@ -1156,7 +1156,7 @@ const BLOG_SEO_METADATA_2: Record<string, SEOMetadata> = {
  "caption": "Casco da scooter a bordo strada con il Lago di Lugano sullo sfondo, simbolo del tragico incidente di un frontaliere"
  },
  "datePublished": "2026-03-02T06:53:59+00:00",
- "dateModified": "2026-10-08T16:02:25Z",
+ "dateModified": "2026-10-08T18:36:10Z",
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
