@@ -154,9 +154,14 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
       continue;
     }
 
-    // The upstream side can independently delete an item. If the replayed
-    // side is unchanged, its copy is stale and the deletion wins.
-    if (baseItem && !upstreamItem && replayedItem && sameItem(replayedItem, baseItem)) continue;
+    // The upstream side can independently delete an item. A replayed copy with
+    // the old requestedAt is stale, even when it only records a later failure;
+    // only a later requestedAt identifies a new request that should survive.
+    if (baseItem && !upstreamItem) {
+      if (!replayedItem || !isNewRequestAfterDrainStart(baseItem, replayedItem)) continue;
+      byArticle.set(articleId, { ...replayedItem, articleId });
+      continue;
+    }
 
     if (upstreamItem && replayedItem) {
       if (baseItem && sameItem(upstreamItem, baseItem) && !sameItem(replayedItem, baseItem)) {

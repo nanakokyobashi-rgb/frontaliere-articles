@@ -1027,6 +1027,21 @@ test('il merge della coda segue la richiesta piu recente e conserva i contatori 
   assert.equal(requestMerged.failureCount, 3, 'il contatore piu alto resta metadata di fallimento');
   assert.equal(requestMerged.lastFailureAt, '2026-10-07T00:20:00.000Z');
 
+  const upstreamRemoval = mergeImageRegenerationQueues(
+    { schema: 1, items: [] },
+    { schema: 1, items: [{ ...staleFailure, reason: 'replayed stale failure' }] },
+    { schema: 1, items: [staleFailure] },
+  );
+  assert.deepEqual(upstreamRemoval.items, [], 'una rimozione upstream non deve riesumare il fallimento rigiocato');
+
+  const replayedNewRequest = mergeImageRegenerationQueues(
+    { schema: 1, items: [] },
+    { schema: 1, items: [{ ...newerRequest, reason: 'replayed new enqueue' }] },
+    { schema: 1, items: [staleFailure] },
+  );
+  assert.equal(replayedNewRequest.items[0].reason, 'replayed new enqueue');
+  assert.equal(replayedNewRequest.items[0].requestedAt, newerRequest.requestedAt);
+
   const orderA = { ...queueItem('article-order-a', 'base', 'not-a-date'), requestedAt: 'not-a-date' };
   const orderB = { ...queueItem('article-order-b', 'new', 'not-a-date'), requestedAt: 'not-a-date' };
   const ordered = mergeImageRegenerationQueues(
