@@ -214,7 +214,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
   }
 });
 
-test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', async () => {
+test('seleziona prima le richieste più vecchie, anche se hanno più fallimenti', async () => {
   const root = tempRoot();
   try {
     const entries = ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']
@@ -239,7 +239,7 @@ test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', asy
       generateThumbnail: fakeThumbnail,
     });
 
-    assert.deepEqual(seen, ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']);
+    assert.deepEqual(seen, ['many-failures', 'legacy-failure', 'one-failure', 'never-attempted']);
     assert.equal(summary.drained, 4);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
