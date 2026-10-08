@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 159,
+  "assetCount": 160,
   "assets": [
     {
       "schema": 1,
@@ -5124,6 +5124,47 @@
         "looks_like_specific_real_event": false,
         "is_photograph": false,
         "notes": "Original generic architectural illustration with no readable text, logos, recognizable faces, or depiction of a specific real event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-salari-svizzera-talenti-stranieri",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "cf02c40dc799c46fefb09d0d0dcb1ce1a16136153d4ddcf320f75feaa4cfff4e",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "6a3da64fc7eeae332fc286b7f579bc033e731bbe1a10443e51e27b448dc3f1ac",
+      "bytes": 145020,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-08T12:19:03.644Z",
+      "verifiedAt": "2026-10-08T12:19:09.744Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-salari-svizzera-talenti-stranieri.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "notes": "Original generic illustrated landscape with no text, logos, recognizable faces, or depiction of a specific real event."
       }
     }
   ]
