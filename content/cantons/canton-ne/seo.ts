@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-neuchatel-rinnova-politica-abitativa-con-24-milioni': {
     title: 'Neuchâtel rinnova politica abitativa con 24 milioni',
-    description: '## In breve - Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto - Credito-quadro di 24 milioni di franchi su otto anni - Prosegue la politica',
+    description: 'Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto',
     keywords: 'frontalieri, ticino, svizzera, italia, neuch, rinnova, politica, abitativa',
     ogTitle: 'Neuchâtel rinnova politica abitativa con 24 milioni',
-    ogDescription: '## In breve - Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto - Credito-quadro di 24 milioni di franchi su otto anni - Prosegue la politica',
+    ogDescription: 'Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto',
     canonicalPath: '/articoli-neuchatel/neuchatel-rinnova-politica-abitativa-con-24-milioni/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Neuchâtel rinnova politica abitativa con 24 milioni",
-      "description": "## In breve - Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto - Credito-quadro di 24 milioni di franchi su otto anni - Prosegue la politica",
+      "description": "Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-neuchatel-rinnova-politica-abitativa-con-24-milioni.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-disoccupazione-stabile-4-4-neuchatel-settembre-2026': {
     title: 'Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
-    description: '## In breve - 3.945 disoccupati in settembre 2026 - Tasso neocastellano stabile al 4,4% - Disoccupazione giovanile al 5,3% - Dati DECS aggiornati al 6 ottobre',
+    description: '3.945 disoccupati in settembre 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, stabile, neuch, settembre',
     ogTitle: 'Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
-    ogDescription: '## In breve - 3.945 disoccupati in settembre 2026 - Tasso neocastellano stabile al 4,4% - Disoccupazione giovanile al 5,3% - Dati DECS aggiornati al 6 ottobre',
+    ogDescription: '3.945 disoccupati in settembre 2026',
     canonicalPath: '/articoli-neuchatel/disoccupazione-stabile-4-4-neuchatel-settembre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Disoccupazione stabile 4,4% Neuchâtel settembre 2026",
-      "description": "## In breve - 3.945 disoccupati in settembre 2026 - Tasso neocastellano stabile al 4,4% - Disoccupazione giovanile al 5,3% - Dati DECS aggiornati al 6 ottobre",
+      "description": "3.945 disoccupati in settembre 2026",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-disoccupazione-stabile-4-4-neuchatel-settembre-2026.webp`,
@@ -77,16 +77,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-neuchatel-referendum-salari-minimi': {
     title: 'Neuchâtel: referendum per salari minimi cantonali e CCT',
-    description: '## In breve - Oltre 100.000 firme contro la riforma del Parlamento - Le CCT potrebbero prevalere sui salari minimi cantonali - Garanzie previste per Ginevra',
+    description: 'Oltre 100.000 firme contro la riforma del Parlamento',
     keywords: 'frontalieri, ticino, svizzera, italia, neuch, referendum, salari, minimi',
     ogTitle: 'Neuchâtel: referendum sui salari minimi e le CCT svizzere',
-    ogDescription: '## In breve - Oltre 100.000 firme contro la riforma del Parlamento - Le CCT potrebbero prevalere sui salari minimi cantonali - Garanzie previste per Ginevra',
+    ogDescription: 'Oltre 100.000 firme contro la riforma del Parlamento',
     canonicalPath: '/articoli-neuchatel/neuchatel-referendum-salari-minimi/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Neuchâtel: referendum per salari minimi cantonali e CCT",
-      "description": "## In breve - Oltre 100.000 firme contro la riforma del Parlamento - Le CCT potrebbero prevalere sui salari minimi cantonali - Garanzie previste per Ginevra",
+      "description": "Oltre 100.000 firme contro la riforma del Parlamento",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -116,16 +116,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-aldi-chiude-centro-neuchatel': {
     title: 'Aldi chiuderà il negozio in centro a Neuchâtel',
-    description: '## In breve - Aldi chiuderà a fine novembre 2026. - Il punto vendita è in Rue Saint-Honoré. - La filiale era la numero 220 in Svizzera. - I collaboratori',
+    description: 'Aldi chiuderà a fine novembre 2026.',
     keywords: 'frontalieri, ticino, svizzera, italia, aldi, chiuderà, negozio, centro',
     ogTitle: 'Aldi chiuderà il negozio in centro a Neuchâtel',
-    ogDescription: '## In breve - Aldi chiuderà a fine novembre 2026. - Il punto vendita è in Rue Saint-Honoré. - La filiale era la numero 220 in Svizzera. - I collaboratori',
+    ogDescription: 'Aldi chiuderà a fine novembre 2026.',
     canonicalPath: '/articoli-neuchatel/aldi-chiude-centro-neuchatel/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Aldi chiuderà il negozio in centro a Neuchâtel",
-      "description": "## In breve - Aldi chiuderà a fine novembre 2026. - Il punto vendita è in Rue Saint-Honoré. - La filiale era la numero 220 in Svizzera. - I collaboratori",
+      "description": "Aldi chiuderà a fine novembre 2026.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-disoccupazione-vallese-fine-estate': {
     title: 'Disoccupazione Vallese: 5’755 iscritti a settembre 2026',
-    description: '## In breve - 5’755 disoccupati iscritti agli ORP a fine settembre - Tasso cantonale stabile al 3,1% - Fine stagione estiva: +76 disoccupati in alberghi',
+    description: '5’755 disoccupati iscritti agli ORP a fine settembre',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, vallese, iscritti, settembre',
     ogTitle: 'Vallese: disoccupazione al 3,1% a settembre',
-    ogDescription: '## In breve - 5’755 disoccupati iscritti agli ORP a fine settembre - Tasso cantonale stabile al 3,1% - Fine stagione estiva: +76 disoccupati in alberghi',
+    ogDescription: '5’755 disoccupati iscritti agli ORP a fine settembre',
     canonicalPath: '/articoli-vallese/disoccupazione-vallese-fine-estate/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Disoccupazione Vallese: 5’755 iscritti a settembre 2026",
-      "description": "## In breve - 5’755 disoccupati iscritti agli ORP a fine settembre - Tasso cantonale stabile al 3,1% - Fine stagione estiva: +76 disoccupati in alberghi",
+      "description": "5’755 disoccupati iscritti agli ORP a fine settembre",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-disoccupazione-vallese-fine-estate.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-allerta-botulismo-terrina-vallese': {
     title: 'Due casi di botulismo in Vallese: terrina ritirata',
-    description: '## In breve - Due casi di botulismo segnalati in Vallese - Richiamata una terrina di stinco di maiale - Venduta a Sierre, Martigny e in macellerie - Non aprire',
+    description: 'Due casi di botulismo segnalati in Vallese',
     keywords: 'frontalieri, ticino, svizzera, italia, casi, botulismo, vallese, terrina',
     ogTitle: 'Botulismo in Vallese: terrina ritirata',
-    ogDescription: '## In breve - Due casi di botulismo segnalati in Vallese - Richiamata una terrina di stinco di maiale - Venduta a Sierre, Martigny e in macellerie - Non aprire',
+    ogDescription: 'Due casi di botulismo segnalati in Vallese',
     canonicalPath: '/articoli-vallese/allerta-botulismo-terrina-vallese/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Due casi di botulismo in Vallese: terrina ritirata",
-      "description": "## In breve - Due casi di botulismo segnalati in Vallese - Richiamata una terrina di stinco di maiale - Venduta a Sierre, Martigny e in macellerie - Non aprire",
+      "description": "Due casi di botulismo segnalati in Vallese",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

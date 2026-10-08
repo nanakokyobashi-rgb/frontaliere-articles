@@ -50,6 +50,8 @@
  * senza dirlo a nessuno.
  */
 
+import { assertPlainExcerpt } from './article-excerpt.mjs';
+
 /**
  * I campi storici. Emessi nell'ordine, sempre per primi: la posizione fa parte
  * del contratto di retrocompatibilita' descritto sopra.
@@ -178,6 +180,9 @@ export function buildMetaBlockLines(data, locale) {
   for (const field of META_FIELDS) {
     const value = readLocaleField(data, locale, field);
     if (value === null && !META_ALWAYS_EMITTED.includes(field)) continue;
+    if (['excerpt', ...META_SEO_FIELDS].includes(field)) {
+      assertPlainExcerpt(value, { field, id, locale });
+    }
     lines.push(`    'blog.article.${id}.${field}': '${escapeForSingleQuoteTS(value)}',`);
   }
   return lines;

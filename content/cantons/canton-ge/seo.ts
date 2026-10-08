@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-accordo-cure-oncologiche-ginevra': {
     title: 'Accordo Ginevra-Francia per cure oncologiche pediatriche',
-    description: '## In breve - Accordo tra autorità ginevrine e francesi - Cure HUG per bambini del Pays de Gex e Haute-Savoie - Regola questioni mediche e amministrative',
+    description: 'Accordo tra autorità ginevrine e francesi',
     keywords: 'frontalieri, ticino, svizzera, italia, accordo, ginevra-francia, cure, oncologiche',
     ogTitle: 'Accordo Ginevra-Francia per cure pediatriche HUG',
-    ogDescription: '## In breve - Accordo tra autorità ginevrine e francesi - Cure HUG per bambini del Pays de Gex e Haute-Savoie - Regola questioni mediche e amministrative',
+    ogDescription: 'Accordo tra autorità ginevrine e francesi',
     canonicalPath: '/articoli-ginevra/accordo-cure-oncologiche-ginevra/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Accordo Ginevra-Francia per cure oncologiche pediatriche",
-      "description": "## In breve - Accordo tra autorità ginevrine e francesi - Cure HUG per bambini del Pays de Gex e Haute-Savoie - Regola questioni mediche e amministrative",
+      "description": "Accordo tra autorità ginevrine e francesi",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-accordo-cure-oncologiche-ginevra.webp`,

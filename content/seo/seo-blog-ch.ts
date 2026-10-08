@@ -98851,16 +98851,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-raffineria-cressier-carburanti': {
     title: 'Diesel svizzero sfiora 2,50 franchi: allarme Cressier',
-    description: '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
+    description: 'Il diesel in Svizzera sfiora 2,50 franchi al litro',
     keywords: 'frontalieri, ticino, svizzera, italia, diesel, svizzero, sfiora, franchi',
     ogTitle: 'Diesel svizzero quasi a 2,50 franchi: Cressier',
-    ogDescription: '## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità',
+    ogDescription: 'Il diesel in Svizzera sfiora 2,50 franchi al litro',
     canonicalPath: '/articoli-svizzera/raffineria-cressier-carburanti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Diesel svizzero sfiora 2,50 franchi: allarme Cressier",
-      "description": "## In breve - Il diesel in Svizzera sfiora 2,50 franchi al litro - Cressier copre circa il 35% dei carburanti nazionali - La raffinazione europea ha capacità",
+      "description": "Il diesel in Svizzera sfiora 2,50 franchi al litro",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-raffineria-cressier-carburanti.webp`,
@@ -98919,16 +98919,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-auto-elettrica-come-risparmiare-fino-al-50': {
     title: 'Auto elettrica: come risparmiare fino al 50% | Frontaliere Ticino',
-    description: '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
+    description: 'Il TCS confronta i prezzi di 19’000 punti svizzeri',
     keywords: 'frontalieri, ticino, svizzera, italia, auto, elettrica, risparmiare, fino',
     ogTitle: 'Auto elettrica: come risparmiare fino al 50%',
-    ogDescription: '## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide',
+    ogDescription: 'Il TCS confronta i prezzi di 19’000 punti svizzeri',
     canonicalPath: '/articoli-svizzera/auto-elettrica-come-risparmiare-fino-al-50/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Auto elettrica: come risparmiare fino al 50%",
-      "description": "## In breve - Il TCS confronta i prezzi di 19’000 punti svizzeri - 50 kWh costano tra 23 e 46 franchi - Il 5% delle ricariche avviene alle colonnine rapide",
+      "description": "Il TCS confronta i prezzi di 19’000 punti svizzeri",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-auto-elettrica-come-risparmiare-fino-al-50.webp`,
@@ -98953,16 +98953,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-motore-filo-epfl': {
     title: 'EPFL sviluppa un motore a forma di filo | Frontaliere Ticino',
-    description: '## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio',
+    description: 'FiberMotor: diametro da 1 a 3 millimetri',
     keywords: 'frontalieri, ticino, svizzera, italia, epfl, sviluppa, motore, forma',
     ogTitle: 'FiberMotor EPFL: motore a forma di filo',
-    ogDescription: '## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio',
+    ogDescription: 'FiberMotor: diametro da 1 a 3 millimetri',
     canonicalPath: '/articoli-svizzera/motore-filo-epfl/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "EPFL sviluppa un motore a forma di filo",
-      "description": "## In breve - FiberMotor: diametro da 1 a 3 millimetri - Quattro motori sollevano una barretta da 46 grammi - Il prototipo è stato integrato in un paio",
+      "description": "FiberMotor: diametro da 1 a 3 millimetri",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-motore-filo-epfl.webp`,
@@ -98987,16 +98987,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-svizzera-india-accordi-bilaterali': {
     title: 'Svizzera e India: nuovi accordi su migrazione e lavoro',
-    description: '## In breve - 5 ottobre 2026: Parmelin incontra i vertici indiani - Svizzera e India firmano due accordi - TEPA: un anno dall\'entrata in vigore con l\'AELS',
+    description: '5 ottobre 2026: Parmelin incontra i vertici indiani',
     keywords: 'frontalieri, ticino, svizzera, italia, india, nuovi, accordi, migrazione',
     ogTitle: 'Svizzera e India rafforzano legami su lavoro e commercio',
-    ogDescription: '## In breve - 5 ottobre 2026: Parmelin incontra i vertici indiani - Svizzera e India firmano due accordi - TEPA: un anno dall\'entrata in vigore con l\'AELS',
+    ogDescription: '5 ottobre 2026: Parmelin incontra i vertici indiani',
     canonicalPath: '/articoli-svizzera/svizzera-india-accordi-bilaterali/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera e India: nuovi accordi su migrazione e lavoro",
-      "description": "## In breve - 5 ottobre 2026: Parmelin incontra i vertici indiani - Svizzera e India firmano due accordi - TEPA: un anno dall'entrata in vigore con l'AELS",
+      "description": "5 ottobre 2026: Parmelin incontra i vertici indiani",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-svizzera-india-accordi-bilaterali.webp`,
@@ -99021,16 +99021,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cancro-prostata-assistenza-svizzera': {
     title: 'Cancro alla prostata: assistenza buona in Svizzera 2020‑2023',
-    description: '## In breve - Oltre 35\'000 casi analizzati tra il 2020 e il 2023 - 8\'929 nuovi casi e 1\'340 decessi medi annui - Il 76% emerge dallo screening opportunistico',
+    description: 'Oltre 35\'000 casi analizzati tra il 2020 e il 2023',
     keywords: 'frontalieri, ticino, svizzera, italia, cancro, alla, prostata, assistenza',
     ogTitle: 'Cancro alla prostata: assistenza buona in Svizzera 2020‑2023',
-    ogDescription: '## In breve - Oltre 35\'000 casi analizzati tra il 2020 e il 2023 - 8\'929 nuovi casi e 1\'340 decessi medi annui - Il 76% emerge dallo screening opportunistico',
+    ogDescription: 'Oltre 35\'000 casi analizzati tra il 2020 e il 2023',
     canonicalPath: '/articoli-svizzera/cancro-prostata-assistenza-svizzera/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cancro alla prostata: assistenza buona in Svizzera 2020‑2023",
-      "description": "## In breve - Oltre 35'000 casi analizzati tra il 2020 e il 2023 - 8'929 nuovi casi e 1'340 decessi medi annui - Il 76% emerge dallo screening opportunistico",
+      "description": "Oltre 35'000 casi analizzati tra il 2020 e il 2023",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-cancro-prostata-assistenza-svizzera.webp`,
@@ -99055,16 +99055,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0': {
     title: 'Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
-    description: '## In breve - I titoli della Confederazione a dieci anni rendono 0,58% - La BNS mantiene il tasso guida allo 0% - Il rendimento è salito da 0,18% a 0,69%',
+    description: 'I titoli della Confederazione a dieci anni rendono 0,58%',
     keywords: 'frontalieri, ticino, svizzera, italia, rendimenti, titoli, svizzeri, rialzo',
     ogTitle: 'Rendimenti titoli svizzeri in rialzo, BNS allo 0%',
-    ogDescription: '## In breve - I titoli della Confederazione a dieci anni rendono 0,58% - La BNS mantiene il tasso guida allo 0% - Il rendimento è salito da 0,18% a 0,69%',
+    ogDescription: 'I titoli della Confederazione a dieci anni rendono 0,58%',
     canonicalPath: '/articoli-svizzera/rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Rendimenti titoli svizzeri in rialzo, BNS allo 0%",
-      "description": "## In breve - I titoli della Confederazione a dieci anni rendono 0,58% - La BNS mantiene il tasso guida allo 0% - Il rendimento è salito da 0,18% a 0,69%",
+      "description": "I titoli della Confederazione a dieci anni rendono 0,58%",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99094,16 +99094,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-riserve-valutarie-settembre-stabili': {
     title: 'Riserve di divise BNS stabili a settembre | Frontaliere Ticino',
-    description: '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
+    description: 'BNS: riserve di divise a 771 miliardi',
     keywords: 'frontalieri, ticino, svizzera, italia, riserve, divise, stabili, settembre',
     ogTitle: 'Riserve di divise BNS stabili a settembre',
-    ogDescription: '## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave',
+    ogDescription: 'BNS: riserve di divise a 771 miliardi',
     canonicalPath: '/articoli-svizzera/riserve-valutarie-settembre-stabili/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Riserve di divise BNS stabili a settembre",
-      "description": "## In breve - BNS: riserve di divise a 771 miliardi - A settembre, +0,4 miliardi rispetto ad agosto - Euro +0,9%, dollaro +3%; insieme circa 80% ## Fatti chiave",
+      "description": "BNS: riserve di divise a 771 miliardi",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99133,16 +99133,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-ffs-sportelli-chiusi-stazioni': {
     title: 'FFS chiude gli sportelli in 13 stazioni dal primo gennaio',
-    description: '## In breve - Dal primo gennaio chiudono gli sportelli in 13 stazioni. - I punti con personale passeranno da 115 a 102. - Il 97% dei titoli passa dai canali',
+    description: 'Dal primo gennaio chiudono gli sportelli in 13 stazioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, chiude, sportelli, stazioni, primo',
     ogTitle: 'FFS chiude gli sportelli in 13 stazioni dal primo gennaio',
-    ogDescription: '## In breve - Dal primo gennaio chiudono gli sportelli in 13 stazioni. - I punti con personale passeranno da 115 a 102. - Il 97% dei titoli passa dai canali',
+    ogDescription: 'Dal primo gennaio chiudono gli sportelli in 13 stazioni.',
     canonicalPath: '/articoli-svizzera/ffs-sportelli-chiusi-stazioni/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "FFS chiude gli sportelli in 13 stazioni dal primo gennaio",
-      "description": "## In breve - Dal primo gennaio chiudono gli sportelli in 13 stazioni. - I punti con personale passeranno da 115 a 102. - Il 97% dei titoli passa dai canali",
+      "description": "Dal primo gennaio chiudono gli sportelli in 13 stazioni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99172,16 +99172,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-intelligenza-artificiale-diritti-umani': {
     title: 'Intelligenza artificiale: impatto sui diritti umani',
-    description: '## In breve - 63a sessione del Consiglio dei diritti umani a Ginevra - La Svizzera ha guidato una coalizione sulla giustizia di transizione - Privacy',
+    description: '63a sessione del Consiglio dei diritti umani a Ginevra',
     keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, impatto, diritti',
     ogTitle: 'Intelligenza artificiale: impatto sui diritti umani',
-    ogDescription: '## In breve - 63a sessione del Consiglio dei diritti umani a Ginevra - La Svizzera ha guidato una coalizione sulla giustizia di transizione - Privacy',
+    ogDescription: '63a sessione del Consiglio dei diritti umani a Ginevra',
     canonicalPath: '/articoli-svizzera/intelligenza-artificiale-diritti-umani/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Intelligenza artificiale: impatto sui diritti umani",
-      "description": "## In breve - 63a sessione del Consiglio dei diritti umani a Ginevra - La Svizzera ha guidato una coalizione sulla giustizia di transizione - Privacy",
+      "description": "63a sessione del Consiglio dei diritti umani a Ginevra",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99211,16 +99211,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-lista-sanzioni-sesam-svizzera': {
     title: 'Sanzioni ONU: aggiornata la banca dati SESAM in Svizzera',
-    description: '## In breve - Il 7 ottobre 2026 è stata pubblicata la comunicazione. - Il comitato di sanzioni dell\'ONU ha modificato la lista. - La banca dati SESAM è stata',
+    description: 'Il 7 ottobre 2026 è stata pubblicata la comunicazione.',
     keywords: 'frontalieri, ticino, svizzera, italia, sanzioni, aggiornata, banca, dati',
     ogTitle: 'Sanzioni ONU: aggiornata la banca dati SESAM in Svizzera',
-    ogDescription: '## In breve - Il 7 ottobre 2026 è stata pubblicata la comunicazione. - Il comitato di sanzioni dell\'ONU ha modificato la lista. - La banca dati SESAM è stata',
+    ogDescription: 'Il 7 ottobre 2026 è stata pubblicata la comunicazione.',
     canonicalPath: '/articoli-svizzera/lista-sanzioni-sesam-svizzera/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Sanzioni ONU: aggiornata la banca dati SESAM in Svizzera",
-      "description": "## In breve - Il 7 ottobre 2026 è stata pubblicata la comunicazione. - Il comitato di sanzioni dell'ONU ha modificato la lista. - La banca dati SESAM è stata",
+      "description": "Il 7 ottobre 2026 è stata pubblicata la comunicazione.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99250,16 +99250,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-tamedia-41-licenziamenti-13-a-losanna-e-ginevra': {
     title: 'Tamedia: 41 licenziamenti, 13 a Losanna e Ginevra',
-    description: '## In breve - Tamedia ha annunciato 41 licenziamenti in Svizzera - 13 posti riguardano Losanna e Ginevra - L\'assemblea romanda ha votato all\'unanimità contro',
+    description: 'Tamedia ha annunciato 41 licenziamenti in Svizzera',
     keywords: 'frontalieri, ticino, svizzera, italia, tamedia, licenziamenti, losanna, ginevra',
     ogTitle: 'Tamedia: 41 licenziamenti, 13 a Losanna e Ginevra',
-    ogDescription: '## In breve - Tamedia ha annunciato 41 licenziamenti in Svizzera - 13 posti riguardano Losanna e Ginevra - L\'assemblea romanda ha votato all\'unanimità contro',
+    ogDescription: 'Tamedia ha annunciato 41 licenziamenti in Svizzera',
     canonicalPath: '/articoli-svizzera/tamedia-41-licenziamenti-13-a-losanna-e-ginevra/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tamedia: 41 licenziamenti, 13 a Losanna e Ginevra",
-      "description": "## In breve - Tamedia ha annunciato 41 licenziamenti in Svizzera - 13 posti riguardano Losanna e Ginevra - L'assemblea romanda ha votato all'unanimità contro",
+      "description": "Tamedia ha annunciato 41 licenziamenti in Svizzera",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99289,16 +99289,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-marcel-salathe-ia-commento': {
     title: 'L’intelligenza artificiale non ci ucciderà tutti',
-    description: '## In breve - Salathé giudica esagerati gli scenari apocalittici. - È professore al Politecnico federale di Losanna. - Le big tech si preparano a entrare',
+    description: 'Salathé giudica esagerati gli scenari apocalittici.',
     keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, ucciderà, tutti',
     ogTitle: 'L’intelligenza artificiale non ci ucciderà tutti',
-    ogDescription: '## In breve - Salathé giudica esagerati gli scenari apocalittici. - È professore al Politecnico federale di Losanna. - Le big tech si preparano a entrare',
+    ogDescription: 'Salathé giudica esagerati gli scenari apocalittici.',
     canonicalPath: '/articoli-svizzera/marcel-salathe-ia-commento/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "L’intelligenza artificiale non ci ucciderà tutti",
-      "description": "## In breve - Salathé giudica esagerati gli scenari apocalittici. - È professore al Politecnico federale di Losanna. - Le big tech si preparano a entrare",
+      "description": "Salathé giudica esagerati gli scenari apocalittici.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99328,16 +99328,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-carriere-politica-economica': {
     title: 'Lavorare alla SECO: posti e percorsi professionali',
-    description: '## In breve - Oltre 900 collaboratori e dirigenti lavorano alla SECO - Collaboratori e dirigenti distribuiti in tre sedi svizzere - Circa 30 distaccati operano',
+    description: 'Oltre 900 collaboratori e dirigenti lavorano alla SECO',
     keywords: 'frontalieri, ticino, svizzera, italia, lavorare, alla, seco, posti',
     ogTitle: 'Lavorare alla SECO: apprendistati e stage',
-    ogDescription: '## In breve - Oltre 900 collaboratori e dirigenti lavorano alla SECO - Collaboratori e dirigenti distribuiti in tre sedi svizzere - Circa 30 distaccati operano',
+    ogDescription: 'Oltre 900 collaboratori e dirigenti lavorano alla SECO',
     canonicalPath: '/articoli-svizzera/carriere-politica-economica/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lavorare alla SECO: posti e percorsi professionali",
-      "description": "## In breve - Oltre 900 collaboratori e dirigenti lavorano alla SECO - Collaboratori e dirigenti distribuiti in tre sedi svizzere - Circa 30 distaccati operano",
+      "description": "Oltre 900 collaboratori e dirigenti lavorano alla SECO",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99367,16 +99367,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-parmelin-avs-ue': {
     title: 'Parmelin lascia il Consiglio federale il 31.12.2026',
-    description: '## In breve - Guy Parmelin lascerà il Consiglio federale il 31.12.2026 - Le rendite AVS/AI saliranno di circa l\'1,6% - Il pacchetto Svizzera-UE è al Parlamento',
+    description: 'Guy Parmelin lascerà il Consiglio federale il 31.12.2026',
     keywords: 'frontalieri, ticino, svizzera, italia, parmelin, lascia, consiglio, federale',
     ogTitle: 'Parmelin lascia il Consiglio federale: novità 2026',
-    ogDescription: '## In breve - Guy Parmelin lascerà il Consiglio federale il 31.12.2026 - Le rendite AVS/AI saliranno di circa l\'1,6% - Il pacchetto Svizzera-UE è al Parlamento',
+    ogDescription: 'Guy Parmelin lascerà il Consiglio federale il 31.12.2026',
     canonicalPath: '/articoli-svizzera/parmelin-avs-ue/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Parmelin lascia il Consiglio federale il 31.12.2026",
-      "description": "## In breve - Guy Parmelin lascerà il Consiglio federale il 31.12.2026 - Le rendite AVS/AI saliranno di circa l'1,6% - Il pacchetto Svizzera-UE è al Parlamento",
+      "description": "Guy Parmelin lascerà il Consiglio federale il 31.12.2026",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99406,16 +99406,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-lavaggio-denaro-avvocatura': {
     title: 'Lavaggio di denaro: norme più severe per l\'avvocatura',
-    description: '## In breve - Nuove norme contro il lavaggio di denaro - Regole più severe per l\'avvocatura - Introdotto un registro per le imprese ## Fatti chiave - Oggetto →',
+    description: 'Nuove norme contro il lavaggio di denaro',
     keywords: 'frontalieri, ticino, svizzera, italia, lavaggio, denaro, norme, severe',
     ogTitle: 'Lavaggio di denaro: avvocatura e registro imprese',
-    ogDescription: '## In breve - Nuove norme contro il lavaggio di denaro - Regole più severe per l\'avvocatura - Introdotto un registro per le imprese ## Fatti chiave - Oggetto →',
+    ogDescription: 'Nuove norme contro il lavaggio di denaro',
     canonicalPath: '/articoli-svizzera/lavaggio-denaro-avvocatura/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lavaggio di denaro: norme più severe per l'avvocatura",
-      "description": "## In breve - Nuove norme contro il lavaggio di denaro - Regole più severe per l'avvocatura - Introdotto un registro per le imprese ## Fatti chiave - Oggetto →",
+      "description": "Nuove norme contro il lavaggio di denaro",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99596,16 +99596,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-incentivi-energetici-lucerna-requisiti': {
     title: 'Incentivi energetici Cantone Lucerna: requisiti e domanda',
-    description: '## In breve - Nel Cantone di Lucerna gli incentivi riguardano edifici e impianti. - I requisiti da verificare sono tecnici. - La domanda va presentata prima',
+    description: 'Nel Cantone di Lucerna gli incentivi riguardano edifici e impianti.',
     keywords: 'frontalieri, ticino, svizzera, italia, incentivi, energetici, cantone, lucerna',
     ogTitle: 'Incentivi Energetici Cantone Lucerna: Requisiti e Domanda',
-    ogDescription: '## In breve - Nel Cantone di Lucerna gli incentivi riguardano edifici e impianti. - I requisiti da verificare sono tecnici. - La domanda va presentata prima',
+    ogDescription: 'Nel Cantone di Lucerna gli incentivi riguardano edifici e impianti.',
     canonicalPath: '/articoli-svizzera/incentivi-energetici-lucerna-requisiti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Incentivi energetici Cantone Lucerna: requisiti e domanda",
-      "description": "## In breve - Nel Cantone di Lucerna gli incentivi riguardano edifici e impianti. - I requisiti da verificare sono tecnici. - La domanda va presentata prima",
+      "description": "Nel Cantone di Lucerna gli incentivi riguardano edifici e impianti.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99635,16 +99635,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-violazione-dati-publica-indagine': {
     title: 'Attacco informatico al fornitore software di Publica',
-    description: '## In breve - Attacco informatico a fine settembre - Colpito un fornitore esterno di Publica - Il Ministero pubblico ha avviato un\'indagine - Publica ha',
+    description: 'Attacco informatico a fine settembre',
     keywords: 'frontalieri, ticino, svizzera, italia, attacco, informatico, fornitore, software',
     ogTitle: 'Attacco informatico al fornitore software di Publica',
-    ogDescription: '## In breve - Attacco informatico a fine settembre - Colpito un fornitore esterno di Publica - Il Ministero pubblico ha avviato un\'indagine - Publica ha',
+    ogDescription: 'Attacco informatico a fine settembre',
     canonicalPath: '/articoli-svizzera/violazione-dati-publica-indagine/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Attacco informatico al fornitore software di Publica",
-      "description": "## In breve - Attacco informatico a fine settembre - Colpito un fornitore esterno di Publica - Il Ministero pubblico ha avviato un'indagine - Publica ha",
+      "description": "Attacco informatico a fine settembre",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99674,16 +99674,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-crescita-lavoro-intelligenza-artificiale': {
     title: 'Mercato lavoro IA: +32% di annunci in un anno | Frontaliere Ticino',
-    description: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore',
+    description: 'Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, annunci, anno',
     ogTitle: 'Mercato lavoro IA: +32% di annunci in un anno',
-    ogDescription: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore',
+    ogDescription: 'Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026',
     canonicalPath: '/articoli-svizzera/crescita-lavoro-intelligenza-artificiale/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mercato lavoro IA: +32% di annunci in un anno",
-      "description": "## In breve - Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda IA cresce del 32% in un anno - Il settore pubblico registra il balzo maggiore",
+      "description": "Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99713,16 +99713,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-mercato-lavoro-ia-svizzera': {
     title: 'Mercato lavoro IA Svizzera: +32% in un anno | Frontaliere Ticino',
-    description: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2\'181 annunci, il 45%',
+    description: 'Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, anno, breve',
     ogTitle: 'Mercato lavoro IA Svizzera: crescita del 32% in un anno',
-    ogDescription: '## In breve - Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2\'181 annunci, il 45%',
+    ogDescription: 'Quasi 5\'000 annunci IA tra luglio 2025 e giugno 2026',
     canonicalPath: '/articoli-svizzera/mercato-lavoro-ia-svizzera/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mercato lavoro IA Svizzera: +32% in un anno",
-      "description": "## In breve - Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026 - La domanda cresce del 32% in dodici mesi - Zurigo concentra 2'181 annunci, il 45%",
+      "description": "Quasi 5'000 annunci IA tra luglio 2025 e giugno 2026",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/mercato-lavoro-svizzera-giugno-2026.webp`,
@@ -99747,16 +99747,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-raiffeisen-pil-inflazione-2026': {
     title: 'Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%',
-    description: '## In breve - Raiffeisen porta all\'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell\'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato',
+    description: 'Raiffeisen porta all\'1,7% la stima del Pil 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, raiffeisen, inflazione, allo, breve',
     ogTitle: 'Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%',
-    ogDescription: '## In breve - Raiffeisen porta all\'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell\'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato',
+    ogDescription: 'Raiffeisen porta all\'1,7% la stima del Pil 2026',
     canonicalPath: '/articoli-svizzera/raiffeisen-pil-inflazione-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%",
-      "description": "## In breve - Raiffeisen porta all'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato",
+      "description": "Raiffeisen porta all'1,7% la stima del Pil 2026",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99786,16 +99786,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-svizzera-leader-nella-robotica-217-aziende-e-7-000-posti': {
     title: 'Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
-    description: '## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro',
+    description: '217 aziende nella robotica svizzera',
     keywords: 'frontalieri, ticino, svizzera, italia, leader, nella, robotica, aziende',
     ogTitle: 'Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
-    ogDescription: '## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro',
+    ogDescription: '217 aziende nella robotica svizzera',
     canonicalPath: '/articoli-svizzera/svizzera-leader-nella-robotica-217-aziende-e-7-000-posti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera leader nella robotica: 217 aziende e 7'000 posti",
-      "description": "## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro",
+      "description": "217 aziende nella robotica svizzera",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99825,16 +99825,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salari-svizzera-talenti-stranieri': {
     title: 'Svizzera: minimo divario salariale per talenti UE/AELS',
-    description: '## In breve - La Svizzera è prima nell\'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera',
+    description: 'La Svizzera è prima nell\'IMD World Talent Ranking',
     keywords: 'frontalieri, ticino, svizzera, italia, minimo, divario, salariale, talenti',
     ogTitle: 'Svizzera: attrattiva per talenti con minimo divario salariale',
-    ogDescription: '## In breve - La Svizzera è prima nell\'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera',
+    ogDescription: 'La Svizzera è prima nell\'IMD World Talent Ranking',
     canonicalPath: '/articoli-svizzera/salari-svizzera-talenti-stranieri/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera: minimo divario salariale per talenti UE/AELS",
-      "description": "## In breve - La Svizzera è prima nell'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera",
+      "description": "La Svizzera è prima nell'IMD World Talent Ranking",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99864,16 +99864,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-tf-nega-sconto-cassa-malati-padre-affidamento-alternato': {
     title: 'TF nega sconto cassa malati padre affidamento alternato',
-    description: '## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9\'000 franchi',
+    description: 'Il TF respinge il ricorso di un padre divorziato.',
     keywords: 'frontalieri, ticino, svizzera, italia, nega, sconto, cassa, malati',
     ogTitle: 'TF nega sconto cassa malati padre affidamento alternato',
-    ogDescription: '## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9\'000 franchi',
+    ogDescription: 'Il TF respinge il ricorso di un padre divorziato.',
     canonicalPath: '/articoli-svizzera/tf-nega-sconto-cassa-malati-padre-affidamento-alternato/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "TF nega sconto cassa malati padre affidamento alternato",
-      "description": "## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9'000 franchi",
+      "description": "Il TF respinge il ricorso di un padre divorziato.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99903,16 +99903,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita': {
     title: 'IA e semiconduttori trainano commercio, OMC rivede crescita',
-    description: '## In breve - Semiconduttori e server: commercio in crescita del 67% - L\'IA ha alimentato il 47% della crescita mondiale - Stima OMC: dall\'1,9% al 3,9%',
+    description: 'Semiconduttori e server: commercio in crescita del 67%',
     keywords: 'frontalieri, ticino, svizzera, italia, semiconduttori, trainano, commercio, rivede',
     ogTitle: 'IA e semiconduttori trainano commercio, OMC rivede crescita',
-    ogDescription: '## In breve - Semiconduttori e server: commercio in crescita del 67% - L\'IA ha alimentato il 47% della crescita mondiale - Stima OMC: dall\'1,9% al 3,9%',
+    ogDescription: 'Semiconduttori e server: commercio in crescita del 67%',
     canonicalPath: '/articoli-svizzera/ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "IA e semiconduttori trainano commercio, OMC rivede crescita",
-      "description": "## In breve - Semiconduttori e server: commercio in crescita del 67% - L'IA ha alimentato il 47% della crescita mondiale - Stima OMC: dall'1,9% al 3,9%",
+      "description": "Semiconduttori e server: commercio in crescita del 67%",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

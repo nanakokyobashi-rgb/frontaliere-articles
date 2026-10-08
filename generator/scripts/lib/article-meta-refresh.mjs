@@ -75,6 +75,7 @@ import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
+import { assertPlainDescriptionFields } from './article-excerpt.mjs';
 import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
@@ -327,6 +328,10 @@ export function upsertSeoDescriptionBlock(src, id, seo) {
  */
 export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
   if (!id) throw new Error('refreshDescriptiveTexts: id mancante');
+  assertPlainDescriptionFields(seoTexts, { fieldPrefix: 'seo.', id, locale: 'it' });
+  for (const [locale, fields] of Object.entries(localeTexts || {})) {
+    assertPlainDescriptionFields(fields, { fieldPrefix: 'content.', id, locale });
+  }
   const repoRoot = opts.repoRoot || DEFAULT_REPO_ROOT;
   const metaPrefix = opts.metaPrefix || 'blog-meta';
   const seoFile = opts.seoFile || 'services/seo/seo-blog-5.ts';

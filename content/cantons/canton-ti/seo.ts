@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-a2-mendrisio-melano-risanamento': {
     title: 'A2 Mendrisio-Melano: il progetto MeMe di risanamento',
-    description: '## In breve - L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano. - I lavori potrebbero iniziare non prima del 2031. - Previsti asfalto fonoassorbente',
+    description: 'L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano.',
     keywords: 'frontalieri, ticino, svizzera, italia, mendrisio-melano, progetto, meme, risanamento',
     ogTitle: 'A2 Mendrisio-Melano: il progetto MeMe di risanamento',
-    ogDescription: '## In breve - L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano. - I lavori potrebbero iniziare non prima del 2031. - Previsti asfalto fonoassorbente',
+    ogDescription: 'L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano.',
     canonicalPath: '/articoli-ticino/a2-mendrisio-melano-risanamento/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
-      "description": "## In breve - L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano. - I lavori potrebbero iniziare non prima del 2031. - Previsti asfalto fonoassorbente",
+      "description": "L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano.",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-a2-mendrisio-melano-risanamento.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-scambio-dati-salariali-2027': {
     title: 'Frontalieri, dal 2027 lo scambio dati sugli stipendi',
-    description: '## In breve - Dal 1 gennaio 2027 entra in vigore la nuova LSADS - Decisione del Consiglio federale: 19 agosto 2026 - Accordo Svizzera-Italia applicabile dal 1',
+    description: 'Dal 1 gennaio 2027 entra in vigore la nuova LSADS',
     keywords: 'frontalieri, ticino, svizzera, italia, scambio, dati, sugli, stipendi',
     ogTitle: 'Frontalieri, dal 2027 scambio automatico dati stipendi',
-    ogDescription: '## In breve - Dal 1 gennaio 2027 entra in vigore la nuova LSADS - Decisione del Consiglio federale: 19 agosto 2026 - Accordo Svizzera-Italia applicabile dal 1',
+    ogDescription: 'Dal 1 gennaio 2027 entra in vigore la nuova LSADS',
     canonicalPath: '/articoli-ticino/scambio-dati-salariali-2027/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri, dal 2027 lo scambio dati sugli stipendi",
-      "description": "## In breve - Dal 1 gennaio 2027 entra in vigore la nuova LSADS - Decisione del Consiglio federale: 19 agosto 2026 - Accordo Svizzera-Italia applicabile dal 1",
+      "description": "Dal 1 gennaio 2027 entra in vigore la nuova LSADS",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-scambio-dati-salariali-2027.webp`,
@@ -77,16 +77,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni': {
     title: 'Decreto tassa salute frontalieri pubblicato: via libera regioni',
-    description: '## In breve - Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività - Contributo: dal 3% al 6% del reddito netto - Periodo: tra il 31 dicembre 2018',
+    description: 'Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività',
     keywords: 'frontalieri, ticino, svizzera, italia, decreto, tassa, salute, pubblicato',
     ogTitle: 'Decreto tassa salute frontalieri pubblicato: via libera',
-    ogDescription: '## In breve - Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività - Contributo: dal 3% al 6% del reddito netto - Periodo: tra il 31 dicembre 2018',
+    ogDescription: 'Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività',
     canonicalPath: '/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
-      "description": "## In breve - Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività - Contributo: dal 3% al 6% del reddito netto - Periodo: tra il 31 dicembre 2018",
+      "description": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/tassa-salute-frontalieri-ticino-settembre.webp`,
@@ -111,16 +111,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-capitale-lpp-rimborso-imposta-fonte': {
     title: 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
-    description: '## In breve - Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte - Sul capitale LPP la ritenuta svizzera è mediamente del 7% - In Italia il capitale è',
+    description: 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte',
     keywords: 'frontalieri, ticino, svizzera, italia, capitale, nega, rimborso, imposta',
     ogTitle: 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
-    ogDescription: '## In breve - Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte - Sul capitale LPP la ritenuta svizzera è mediamente del 7% - In Italia il capitale è',
+    ogDescription: 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte',
     canonicalPath: '/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
-      "description": "## In breve - Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte - Sul capitale LPP la ritenuta svizzera è mediamente del 7% - In Italia il capitale è",
+      "description": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
