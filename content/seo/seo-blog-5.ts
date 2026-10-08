@@ -101283,6 +101283,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-kastritis-varese-momento-difficile': {
+    title: 'Kastritis: momento difficile ci aiuterà a crescere, massima fiducia nel gruppo',
+    description: 'Varese cade all\'esordio in Champions League a Murcia contro l\'UCAM Murcia; Kastritis elogia la difesa, cita le assenze di McDowell e Della Valle e annuncia',
+    keywords: 'frontalieri, ticino, svizzera, italia, kastritis, momento, difficile, aiuterà',
+    ogTitle: 'Kastritis: momento difficile ci aiuterà a crescere, massima fiducia nel gruppo',
+    ogDescription: 'Dopo la sconfitta dell\'esordio in Champions League a Murcia contro l\'UCAM Murcia, l\'allenatore Ioannis Kastritis sottolinea l\'intensità difensiva mostrata dai giocatori, nonostante le assenze rilevanti di McDowell e Della Valle. Egli mantiene massima',
+    canonicalPath: '/articoli-frontaliere/kastritis-varese-momento-difficile/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kastritis: momento difficile ci aiuterà a crescere, massima fiducia nel gruppo",
+      "description": "Varese cade all'esordio in Champions League a Murcia contro l'UCAM Murcia; Kastritis elogia la difesa, cita le assenze di McDowell e Della Valle e annuncia",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kastritis-varese-momento-difficile.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giocatori di Pallacanestro Varese in azione difensiva su un campo aperto a Lugano con lo sfondo del lago e delle montagne"
+      },
+      "datePublished": "2026-10-08T03:50:32+00:00",
+      "dateModified": "2026-10-08T03:50:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/kastritis-varese-momento-difficile/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
