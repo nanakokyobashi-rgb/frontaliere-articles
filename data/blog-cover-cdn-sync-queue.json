@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sciaffusa-formazione-farmacie.webp",
-      "sha256": "b437434ea7d67697a2ca7ee49f35070df3b94368381147b0f7f1b25cd7d81bea"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sciaffusa-formazione-farmacie-480w.webp",
-      "sha256": "87ea6489f9c5d29005501f45d74ddd881651c916606c825850caf52d6ce60d68"
-    }
-  ]
+  "items": []
 }
