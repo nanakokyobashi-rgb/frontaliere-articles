@@ -1,6 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/areu-cerca-30-assistenti-tecnici-opportunita-anche-per-la-centrale-del-112-di-varese/2654053": "areu-cerca-30-assistenti-tecnici",
-  "https://www.laregione.ch/culture/locarno-film-festival/1942667/quale-presidente": "presidente-locarno-film-festival",
   "https://www.rsi.ch/s/3941424": "castasegna-vecchia-dogana-in-vendita",
   "https://www.laregione.ch/culture/locarno-film-festival/1942438/e-difficile-perdonare-armony": "recensione-armony-analisi-critica",
   "https://www.laregione.ch/cantone/luganese/1942553/lavori-al-posteggio-di-cadro-e-le-isole-verdi": "lavori-posteggio-cadro-interrogazione",
@@ -2132,6 +2130,16 @@
   "https://www.varesenews.it/2026/10/pedone-investito-a-tradate-58enne-ferito/2701480": {
     "articleId": "incidente-via-albisetti",
     "ts": "2026-10-07T22:41:49.331Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/sociale/articolo/mcdonalds-al-lavoro-per-ripulire-malnate-raccolti-20-chili-di-rifiuti.html": {
+    "articleId": "mcdonalds-pulizia-malnate-2026",
+    "ts": "2026-10-08T00:02:58.651Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/agrivarese-torna-ad-angera-una-domenica-tra-aziende-agricole-animali-degustazioni-e-il-lago/2700838": {
+    "articleId": "agrivarese-angera-ottobre-2026",
+    "ts": "2026-10-08T01:08:40.796Z",
     "keyForm": 2
   }
 }

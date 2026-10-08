@@ -26287,6 +26287,38 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'lavaggio-denaro-avvocatura',
+    category: 'novita',
+    date: '2026-10-07T23:29:16.083Z',
+    image: '/images/blog/article-lavaggio-denaro-avvocatura.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'contributi-formazione-berna-requisiti',
+    category: 'pratico',
+    date: '2026-10-08T00:53:16.011Z',
+    image: '/images/blog/apprendistato-formazione-professionale-canton-berna.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'salario-minimo-lucerna-requisiti',
+    category: 'pratico',
+    date: '2026-10-08T01:29:21.976Z',
+    image: '/images/blog/article-salario-minimo-lucerna-requisiti.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['LU'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7886,6 +7886,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.parmelin-avs-ue.title': 'Parmelin verlässt den Bundesrat am 31.12.2026',
     'blog.article.parmelin-avs-ue.excerpt': '## Auf einen Blick - Guy Parmelin wird den Bundesrat am 31.12.2026 verlassen - Die AHV/IV-Renten werden um etwa 1,6% steigen - Das Schweiz-EU-Paket liegt dem Parlament vor',
     'blog.article.parmelin-avs-ue.imageAlt': 'Dokumente zu den Entscheiden des Schweizer Bundesrats',
+    'blog.article.lavaggio-denaro-avvocatura.title': 'Geldwäsche: strengere Regeln für die Anwaltschaft',
+    'blog.article.lavaggio-denaro-avvocatura.excerpt': '## Auf einen Blick - Neue Vorschriften gegen Geldwäsche - Strengere Regeln für die Anwaltschaft - Ein Register für Unternehmen eingeführt ## Wichtige Fakten - Gegenstand →',
+    'blog.article.lavaggio-denaro-avvocatura.imageAlt': 'Rechtsdokumente und Unternehmensregister auf einem Büroschreibtisch',
+    'blog.article.contributi-formazione-berna-requisiti.title': 'Weiterbildung im Kanton Bern: Voraussetzungen und Beiträge',
+    'blog.article.contributi-formazione-berna-requisiti.excerpt': 'Im Kanton Bern richten sich die Voraussetzungen, Fristen und Beträge der Beiträge zur Weiterbildung nach kantonalen Regeln und müssen anhand der offiziellen Quelle überprüft werden.',
+    'blog.article.contributi-formazione-berna-requisiti.imageAlt': 'Person prüft einen Antrag für Weiterbildung im Kanton Bern.',
+    'blog.article.salario-minimo-lucerna-requisiti.title': 'Mindestlohn in Luzern: Anforderungen und Anwendung',
+    'blog.article.salario-minimo-lucerna-requisiti.excerpt': 'Analyse der Mindestlohnordnung im Kanton Luzern, Unterschiede zwischen kantonalen Anforderungen und Gesamtarbeitsverträgen, Kontrollen und Verfahren.',
+    'blog.article.salario-minimo-lucerna-requisiti.imageAlt': 'Regelung des Mindestlohns und der Gesamtarbeitsverträge im Kanton Luzern',
 };
 
 export default blogMetaChDe;

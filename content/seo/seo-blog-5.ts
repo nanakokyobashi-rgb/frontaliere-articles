@@ -101099,6 +101099,79 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mcdonalds-pulizia-malnate-2026': {
+    title: 'McDonald\'s ripulisce Malnate: raccolti 20 kg di rifiuti',
+    description: '## In breve - 16 persone hanno partecipato alla pulizia di Malnate - Raccolti 20 chili di rifiuti di vario genere - L\'iniziativa si è svolta lunedì 5 ottobre',
+    keywords: 'frontalieri, ticino, svizzera, italia, mcdonald, ripulisce, malnate, raccolti',
+    ogTitle: 'McDonald\'s ripulisce Malnate: 20 kg di rifiuti raccolti',
+    ogDescription: '## In breve - 16 persone hanno partecipato alla pulizia di Malnate - Raccolti 20 chili di rifiuti di vario genere - L\'iniziativa si è svolta lunedì 5 ottobre',
+    canonicalPath: '/articoli-frontaliere/mcdonalds-pulizia-malnate-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "McDonald's ripulisce Malnate: raccolti 20 kg di rifiuti",
+      "description": "## In breve - 16 persone hanno partecipato alla pulizia di Malnate - Raccolti 20 chili di rifiuti di vario genere - L'iniziativa si è svolta lunedì 5 ottobre",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-mcdonalds-pulizia-malnate-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area urbana pulita e riqualificata in una cittadina"
+      },
+      "datePublished": "2026-10-08T00:02:58+00:00",
+      "dateModified": "2026-10-08T00:02:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/mcdonalds-pulizia-malnate-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-agrivarese-angera-ottobre-2026': {
+    title: 'Agrivarese torna ad Angera: fiera agricola l\'11 ottobre',
+    description: '## In breve - Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera - La manifestazione sarà aperta dalle 9 alle 19 - In programma oltre 40 aziende',
+    keywords: 'frontalieri, ticino, svizzera, italia, agrivarese, torna, angera, fiera',
+    ogTitle: 'Agrivarese torna ad Angera: fiera agricola l\'11 ottobre',
+    ogDescription: '## In breve - Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera - La manifestazione sarà aperta dalle 9 alle 19 - In programma oltre 40 aziende',
+    canonicalPath: '/articoli-frontaliere/agrivarese-angera-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Agrivarese torna ad Angera: fiera agricola l'11 ottobre",
+      "description": "## In breve - Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera - La manifestazione sarà aperta dalle 9 alle 19 - In programma oltre 40 aziende",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bancarelle di prodotti agricoli locali sul lungolago di Angera durante l'evento Agrivarese."
+      },
+      "datePublished": "2026-10-08T01:08:40+00:00",
+      "dateModified": "2026-10-08T01:08:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/agrivarese-angera-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

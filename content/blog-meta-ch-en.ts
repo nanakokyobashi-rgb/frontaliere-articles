@@ -7886,6 +7886,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.parmelin-avs-ue.title': 'Parmelin leaves the Federal Council on December 31, 2026',
     'blog.article.parmelin-avs-ue.excerpt': '## TL;DR - Guy Parmelin will leave the Federal Council on December 31, 2026 - OASI/DI pensions will rise by around 1,6% - The Switzerland-EU package is before Parliament',
     'blog.article.parmelin-avs-ue.imageAlt': 'Documents about decisions by the Swiss Federal Council',
+    'blog.article.lavaggio-denaro-avvocatura.title': 'Money laundering: stricter rules for the legal profession',
+    'blog.article.lavaggio-denaro-avvocatura.excerpt': '## TL;DR - New rules against money laundering - Stricter rules for the legal profession - A register for businesses introduced ## Key facts - Subject →',
+    'blog.article.lavaggio-denaro-avvocatura.imageAlt': 'Legal papers and a business register on an office desk',
+    'blog.article.contributi-formazione-berna-requisiti.title': 'Continuing education in the Canton of Bern: requirements and contributions',
+    'blog.article.contributi-formazione-berna-requisiti.excerpt': 'In the Canton of Bern, requirements, deadlines and amounts of continuing education contributions follow cantonal rules and must be verified against the official source.',
+    'blog.article.contributi-formazione-berna-requisiti.imageAlt': 'Person reviewing an application for continuing education support in the canton of Bern.',
+    'blog.article.salario-minimo-lucerna-requisiti.title': 'Minimum wage in Lucerne: requirements and application',
+    'blog.article.salario-minimo-lucerna-requisiti.excerpt': 'Analysis of minimum wage regulations in the Canton of Lucerne, differences between cantonal requirements and collective labour agreements, controls and procedures.',
+    'blog.article.salario-minimo-lucerna-requisiti.imageAlt': 'Regulation of minimum wage and collective agreements in the Canton of Lucerne',
 };
 
 export default blogMetaChEn;

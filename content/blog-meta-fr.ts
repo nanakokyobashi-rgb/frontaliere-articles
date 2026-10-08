@@ -12768,6 +12768,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incidente-via-albisetti.title': 'Tradate, piéton renversé : un homme de 58 ans blessé',
     'blog.article.incidente-via-albisetti.excerpt': '## En bref - Un homme de 58 ans renversé à Tradate - Accident peu avant 20 heures dans la rue Albisetti - Secours de la Croix-Rouge de Busto et d\'une ambulance médicalisée',
     'blog.article.incidente-via-albisetti.imageAlt': 'Rue urbaine au crépuscule, image d\'illustration pour l\'accident de Tradate',
+    'blog.article.mcdonalds-pulizia-malnate-2026.title': 'McDonald\'s nettoie Malnate : 20 kg de déchets ramassés',
+    'blog.article.mcdonalds-pulizia-malnate-2026.excerpt': '## En bref - 16 personnes ont participé au nettoyage de Malnate - 20 kilos de déchets de toutes sortes ont été ramassés - L\'initiative a eu lieu lundi 5 octobre',
+    'blog.article.mcdonalds-pulizia-malnate-2026.imageAlt': 'Zone urbaine propre et requalifiée dans une petite ville',
+    'blog.article.agrivarese-angera-ottobre-2026.title': 'Agrivarese revient à Angera : foire agricole le 11 octobre',
+    'blog.article.agrivarese-angera-ottobre-2026.excerpt': '## En bref - Dimanche 11 octobre, Agrivarese arrive sur les rives du lac d’Angera - La manifestation sera ouverte de 9 à 19 heures - Plus de 40 entreprises au programme',
+    'blog.article.agrivarese-angera-ottobre-2026.imageAlt': 'Stands de produits agricoles locaux sur le front de lac d\'Angera lors de l\'événement Agrivarese.',
 };
 
 export default blogMetaFr;

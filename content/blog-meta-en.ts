@@ -12766,6 +12766,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incidente-via-albisetti.title': 'Tradate, pedestrian hit: 58-year-old man injured',
     'blog.article.incidente-via-albisetti.excerpt': '## TL;DR - A 58-year-old man hit at Tradate - Accident shortly before 20 on Via Albisetti - Assistance from the Busto Red Cross and a medical car',
     'blog.article.incidente-via-albisetti.imageAlt': 'Urban street at dusk, stock image for the report on the accident in Tradate',
+    'blog.article.mcdonalds-pulizia-malnate-2026.title': 'McDonald\'s cleans up Malnate: 20 kg of waste collected',
+    'blog.article.mcdonalds-pulizia-malnate-2026.excerpt': '## TL;DR - 16 people participated in the cleanup of Malnate - 20 kilograms of various types of waste were collected - The initiative took place on Monday, October 5',
+    'blog.article.mcdonalds-pulizia-malnate-2026.imageAlt': 'Clean and requalified urban area in a small town',
+    'blog.article.agrivarese-angera-ottobre-2026.title': 'Agrivarese returns to Angera: agricultural fair on October 11',
+    'blog.article.agrivarese-angera-ottobre-2026.excerpt': '## TL;DR - Sunday, October 11 Agrivarese arrives on Angera\'s lakeside - The event will be open from 9 to 19 - More than 40 companies are scheduled',
+    'blog.article.agrivarese-angera-ottobre-2026.imageAlt': 'Local agricultural produce stalls at the Agrivarese event on the Angera lakefront.',
 };
 
 export default blogMetaEn;

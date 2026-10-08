@@ -91,6 +91,19 @@ test('create-article registra l\'abort nel catch del ciclo notizie e lo filtra p
   assert.match(src, /if \(isTopicGateAbort && url && !String\(url\)\.startsWith\('evergreen:\/\/'\)\) \{\n\s+try \{\n\s+_persistEvergreenRejectedTracker\(_recordTopicGateAbortedUrl\(_loadEvergreenRejectedTracker\(\), normalizeNewsUrl\(url\), SECTION_NAME\)\);/);
 });
 
+test('un corpo CMS cantonale verificato consente la rivalutazione del memo, non un bypass del gate', () => {
+  const src = fs.readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
+  const start = src.indexOf('const topicGateTracker = _loadEvergreenRejectedTracker();');
+  const end = src.indexOf('// ── Pre-filter: remove headlines whose TOPIC', start);
+  assert.ok(start > 0 && end > start, 'prefiltro topic-gate non trovato');
+  const block = src.slice(start, end);
+  const bodyCheck = block.indexOf('h._cantonSourceContent.trim().length >= 200');
+  const memoCheck = block.indexOf('_isTopicGateAbortedUrl(topicGateTracker, normalizeNewsUrl(h.url), SECTION_NAME)');
+  assert.ok(bodyCheck > memoCheck, 'il memo viene controllato prima del corpo verificato');
+  assert.match(block, /if \(hasVerifiedCantonBody\) \{[\s\S]*?return true;/);
+  assert.match(block, /hasVerifiedCantonBody[\s\S]*?topicGateAbortedRecently/);
+});
+
 test('create-article controlla i duplicati prima del fact-check, oltre che dopo', () => {
   const src = fs.readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
   const fn = src.slice(src.indexOf('async function generateAndValidateArticle('));
