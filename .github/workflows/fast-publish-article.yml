@@ -53,6 +53,7 @@
 # it did not own.
 
 name: fast-publish-article
+run-name: cover-publish-article / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }}
 
 on:
   push:
@@ -109,6 +110,11 @@ on:
         required: false
         default: true
         type: boolean
+      dispatch_nonce:
+        description: 'Opaque nonce used by an orchestrating drain to correlate this run'
+        required: false
+        default: ''
+        type: string
 
 permissions:
   contents: read
@@ -416,6 +422,12 @@ jobs:
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
+          requested_ids="$(jq -c '(.requestedIds // []) | unique | sort' "$summary")"
+          published_ids="$(jq -c '(.ids // []) | unique | sort' "$summary")"
+          if [ "$requested_ids" != '[]' ] && [ "$requested_ids" != "$published_ids" ]; then
+            echo "::error::publisher omitted requested article IDs: expected $requested_ids, published $published_ids"
+            exit 1
+          fi
           article_count="$(jq -r '.ids | length' "$summary")"
           expected_ids="$(jq -c '.ids | sort' "$summary")"
           aggregate_pages="$(jq -r '.aggregatePagesAllowed' "$summary")"

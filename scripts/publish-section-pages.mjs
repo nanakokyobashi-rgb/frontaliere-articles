@@ -119,6 +119,11 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
   return out;
 }
 
+export function missingRenderedArticleIds(requestedIds, entries) {
+  const rendered = new Set((entries || []).map((entry) => String(entry?.articleId || '')).filter(Boolean));
+  return [...new Set((requestedIds || []).map(String))].filter((articleId) => !rendered.has(articleId));
+}
+
 /** La sezione deve essere cantonale (R2) e ATTIVA nel core: l'engine rende solo le sezioni attive. */
 export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
   const core = Object.prototype.hasOwnProperty.call(all, section) ? all[section] : undefined;
@@ -807,6 +812,8 @@ export async function main(argv = process.argv.slice(2)) {
     ...landingPages.map((page) => rendererPageEntry(section, page, 'landing')),
   ];
   const currentArchivePages = pages.filter((page) => page.kind === 'archive');
+  const renderedIds = [...new Set(entries.map((entry) => String(entry.articleId)).filter(Boolean))];
+  const missingArticleIds = missingRenderedArticleIds(ids, entries);
   const obsoletePages = obsoleteReleasePages({
     previousArticlePages,
     currentArticlePages,
@@ -823,6 +830,9 @@ export async function main(argv = process.argv.slice(2)) {
     const abs = path.join(distDir, page.rel);
     const html = fs.existsSync(abs) ? fs.readFileSync(abs, 'utf-8') : '';
     for (const defect of pageDefects(page, html)) defects.push(`${page.rel}: ${defect}`);
+  }
+  if (missingArticleIds.length) {
+    defects.push(`articoli richiesti non resi dalla pipeline: ${missingArticleIds.join(', ')}`);
   }
   defects.push(...aggregatePageDefects(pages, { aggregatePagesAllowed }));
 
@@ -856,6 +866,8 @@ export async function main(argv = process.argv.slice(2)) {
     declaredStatus: declared ?? null,
     bootstrap: args.bootstrap,
     ids,
+    requestedIds: [...new Set(ids)],
+    renderedIds,
     counts: Object.fromEntries(UPLOAD_ORDER.map((kind) => [kind, pages.filter((page) => page.kind === kind).length])),
     countsByLocale,
     hubsMissing: hubs.missing,
