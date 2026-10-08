@@ -157,26 +157,38 @@ export function readSectionTitles(section, { root = ROOT } = {}) {
 
 /**
  * Every stored title field of every SEO entry, with its real title and the
- * defect the shared module finds in it (`null` when it is fine). `orphans`
- * are the entries with no real title in their own section: their fields are
- * still listed, but the prefix shape cannot be judged for them. The gates in
+ * defect the shared module finds in it (`null` when it is fine). The gates in
  * `generator/tests/` read the corpus through this same scan.
+ *
+ * Two lists say what the scan could NOT judge, one per direction:
+ *   - `orphans`: SEO entries with no real title in their own section. Their
+ *     fields are still listed, but the prefix shape has nothing to compare to;
+ *   - `uncovered`: per section, the real titles with no SEO entry. A section
+ *     whose SEO file is missing (`seoFilesFor` returns only the files that
+ *     exist), a lost chunk and a single lost entry all land here, so a
+ *     populated section is never read as clean because nothing of it was read.
  */
 export function scanSeoTitleFields({ root = ROOT } = {}) {
   const rows = [];
   const files = [];
   const orphans = [];
+  const uncovered = [];
   let entries = 0;
   let titles = 0;
   for (const section of Object.keys(SECTIONS)) {
     const sectionTitles = readSectionTitles(section, { root });
     titles += sectionTitles.size;
-    for (const file of seoFilesFor(section, root)) {
+    // Sorted: the directory listing behind the chunked sections has no order
+    // of its own, and the report and the writes should not depend on it.
+    const sectionFiles = [...seoFilesFor(section, root)].sort();
+    const seen = new Set();
+    for (const file of sectionFiles) {
       files.push(file);
       const absolute = path.join(root, file);
       const source = fs.readFileSync(absolute, 'utf8');
       for (const entry of findAllSeoEntryMatches(source, file)) {
         entries += 1;
+        seen.add(entry.id);
         const canonical = sectionTitles.get(entry.id) ?? '';
         if (!canonical) orphans.push({ section, file, id: entry.id });
         const block = source.slice(entry.openIdx, entry.closeIdx + 1);
@@ -201,17 +213,20 @@ export function scanSeoTitleFields({ root = ROOT } = {}) {
         }
       }
     }
+    const missing = [...sectionTitles.keys()].filter((id) => !seen.has(id));
+    if (missing.length > 0) uncovered.push({ section, seoFiles: sectionFiles.length, missing });
   }
-  return { sections: Object.keys(SECTIONS), files, entries, titles, rows, orphans };
+  return { sections: Object.keys(SECTIONS), files, entries, titles, rows, orphans, uncovered };
 }
 
 /**
  * Turn a scan into edits. Pure: nothing is read or written here.
  *
  * `unrepairable` holds what the command must not pass over: a defect whose
- * real title cannot repair it, and every entry without a real title — for
- * those a field that does not dangle would otherwise look fine while its
- * prefix shape was never compared with anything.
+ * real title cannot repair it, every entry without a real title — for those a
+ * field that does not dangle would otherwise look fine while its prefix shape
+ * was never compared with anything — and every section with real titles the
+ * scan found no SEO entry for.
  */
 export function planFromScan(scan) {
   const plans = [];
@@ -222,6 +237,19 @@ export function planFromScan(scan) {
     canonical: '',
     reason: 'missing-canonical',
   }));
+  for (const gap of scan.uncovered ?? []) {
+    unrepairable.push({
+      section: gap.section,
+      file: '',
+      id: '*',
+      field: '*',
+      value: '',
+      canonical: '',
+      reason: 'missing-seo-entry',
+      seoFiles: gap.seoFiles,
+      missing: gap.missing,
+    });
+  }
   for (const row of scan.rows) {
     if (!row.defect) continue;
     const after = repairSeoTitleValue(row.field, row.value, row.canonical);
@@ -299,6 +327,9 @@ export function applyPlans(plans) {
   return byFile.size;
 }
 
+// The report is read in a job log: past this many rows the rest is counted.
+const UNREPAIRABLE_REPORT_LIMIT = 40;
+
 export function formatReport({ sections, files, entries, titles, plans, unrepairable = [], mode }) {
   const count = (list, key) => SEO_TITLE_FIELDS
     .map((field) => `${field}=${list.filter((item) => item[key] === field).length}`)
@@ -317,11 +348,23 @@ export function formatReport({ sections, files, entries, titles, plans, unrepair
   }
   if (plans.length > 12) lines.push(`- … altri ${plans.length - 12} record`);
   if (unrepairable.length > 0) {
-    lines.push(`✖ non riparabili, da correggere a mano in blog-meta-…-it.ts: ${unrepairable.length}`);
-    for (const row of unrepairable) {
-      lines.push(row.reason === 'missing-canonical'
-        ? `- ${row.file}: ${row.id} non ha un titolo italiano nella sezione '${row.section}'`
-        : `- ${row.file}: ${row.id}.${row.field} = "${row.value}" (titolo vero monco: "${row.canonical}")`);
+    lines.push(`✖ non riparabili, da correggere a mano: ${unrepairable.length}`);
+    if (mode === 'apply' && plans.length > 0) {
+      lines.push('  le sostituzioni sicure qui sopra sono state scritte; l\'uscita resta 1 finché questo elenco non è vuoto');
+    }
+    for (const row of unrepairable.slice(0, UNREPAIRABLE_REPORT_LIMIT)) {
+      if (row.reason === 'missing-seo-entry') {
+        const sample = row.missing.slice(0, 5).join(', ');
+        lines.push(`- sezione '${row.section}': ${row.missing.length} titoli italiani senza voce SEO`
+          + ` (file SEO letti: ${row.seoFiles}; ${sample}${row.missing.length > 5 ? ', …' : ''})`);
+      } else if (row.reason === 'missing-canonical') {
+        lines.push(`- ${row.file}: ${row.id} non ha un titolo italiano nella sezione '${row.section}'`);
+      } else {
+        lines.push(`- ${row.file}: ${row.id}.${row.field} = "${row.value}" (titolo vero monco: "${row.canonical}")`);
+      }
+    }
+    if (unrepairable.length > UNREPAIRABLE_REPORT_LIMIT) {
+      lines.push(`- … altri ${unrepairable.length - UNREPAIRABLE_REPORT_LIMIT}`);
     }
   }
   return lines.join('\n');

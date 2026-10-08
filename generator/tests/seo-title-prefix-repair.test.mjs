@@ -23,13 +23,15 @@
  * walks every active section of `scripts/lib/article-surfaces.mjs`: the gate
  * and the backfill cannot read two different corpora.
  */
-import { test, describe } from 'node:test';
+import { after, test, describe } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
-import { SECTIONS } from '../../scripts/lib/article-surfaces.mjs';
+import { LOCALES, SECTIONS, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
+import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import {
   SEO_COMPLETE_SENTENCE_RE,
   SEO_PROPER_NOUN_TAILS,
@@ -50,6 +52,7 @@ import {
   formatReport,
   planFromScan,
   planSeoTitleRepairs,
+  readSectionTitles,
   repairFile,
   scanSeoTitleFields,
   stringLiterals,
@@ -475,6 +478,33 @@ describe('ciò che non si può giudicare non passa in silenzio', () => {
     assert.match(report, /senza-titolo non ha un titolo italiano nella sezione 'svizzera'/);
   });
 
+  test('una sezione con titoli e senza voci SEO finisce fra i non riparabili', () => {
+    // Terza review della PR 2523: `seoFilesFor` restituisce solo i file che
+    // esistono, quindi una sezione senza il suo file SEO non produceva righe e
+    // passava per pulita.
+    const scan = {
+      rows: [],
+      orphans: [],
+      uncovered: [{ section: 'canton-sh', seoFiles: 0, missing: ['primo', 'secondo', 'terzo', 'quarto', 'quinto', 'sesto'] }],
+    };
+    const { plans, unrepairable } = planFromScan(scan);
+    assert.deepEqual(plans, []);
+    assert.deepEqual(unrepairable.map((item) => [item.section, item.reason]), [['canton-sh', 'missing-seo-entry']]);
+    const report = formatReport({ sections: [], files: [], entries: 0, titles: 6, plans, unrepairable, mode: 'dry-run' });
+    assert.match(report, /sezione 'canton-sh': 6 titoli italiani senza voce SEO \(file SEO letti: 0; primo, secondo, terzo, quarto, quinto, …\)/);
+  });
+
+  test('il report conta, senza elencarli tutti, i non riparabili oltre il limite', () => {
+    const orphans = Array.from({ length: 45 }, (_, index) => ({
+      section: 'svizzera', file: 'content/seo/seo-blog-ch.ts', id: `voce-${index}`,
+    }));
+    const { plans, unrepairable } = planFromScan({ rows: [], orphans, uncovered: [] });
+    const report = formatReport({ sections: [], files: [], entries: 45, titles: 0, plans, unrepairable, mode: 'dry-run' });
+    assert.match(report, /non riparabili, da correggere a mano: 45/);
+    assert.equal(report.split('\n').filter((line) => /non ha un titolo italiano/.test(line)).length, 40);
+    assert.match(report, /… altri 5/);
+  });
+
   test('un difetto con il titolo vero monco è non riparabile, uno riparabile diventa un piano', () => {
     const scan = {
       rows: [
@@ -529,6 +559,59 @@ describe('corpus — nessun campo titolo SEO è un derivato rotto del titolo ver
     // letta contro il meta sbagliato passerebbe questo gate a vuoto.
     const orphans = scan.orphans.map((orphan) => `${orphan.file}: ${orphan.id}`);
     assert.deepEqual(orphans, [], `voci SEO senza titolo italiano:\n${orphans.slice(0, 20).join('\n')}`);
+  });
+
+  test('ogni titolo italiano ha la sua voce SEO nella propria sezione', () => {
+    // L'altra direzione: una sezione popolata di cui non si è letta nessuna
+    // voce (o un chunk, o una voce) non è «pulita», è non guardata.
+    const gaps = scan.uncovered.map((gap) => `${gap.section}: ${gap.missing.length} titoli senza voce SEO `
+      + `(file SEO letti: ${gap.seoFiles}; ${gap.missing.slice(0, 5).join(', ')})`);
+    assert.deepEqual(gaps, [], `sezioni con titoli italiani senza voce SEO:\n${gaps.join('\n')}`);
+  });
+
+  describe('una copia del corpus a cui manca un file SEO', () => {
+    const copies = [];
+    after(() => { for (const dir of copies) fs.rmSync(dir, { recursive: true, force: true }); });
+
+    function corpusCopyWithout(omitted) {
+      const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'seo-title-scan-'));
+      copies.push(dir);
+      const copy = (rel) => {
+        fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+        fs.copyFileSync(path.join(ROOT, rel), path.join(dir, rel));
+      };
+      for (const section of Object.keys(SECTIONS)) {
+        copy(SECTIONS[section].metaFiles[LOCALES.indexOf('it')]);
+        for (const file of seoFilesFor(section, ROOT)) if (file !== omitted) copy(file);
+      }
+      return dir;
+    }
+
+    test('senza il file SEO di una sezione cantonale, la sezione è elencata per intero', () => {
+      const section = Object.keys(SECTIONS).find((name) => SECTIONS[name].seoFiles
+        && seoFilesFor(name, ROOT).length === 1 && readSectionTitles(name).size > 0);
+      assert.ok(section, 'nessuna sezione cantonale popolata con un solo file SEO');
+      const [omitted] = seoFilesFor(section, ROOT);
+      const partial = scanSeoTitleFields({ root: corpusCopyWithout(omitted) });
+      assert.equal(partial.rows.some((item) => item.section === section), false, 'la sezione non ha più righe da giudicare');
+      assert.deepEqual(
+        partial.uncovered.map((gap) => [gap.section, gap.seoFiles, gap.missing.length]),
+        [[section, 0, readSectionTitles(section).size]],
+      );
+      const { unrepairable } = planFromScan(partial);
+      assert.deepEqual(unrepairable.map((item) => [item.section, item.reason]), [[section, 'missing-seo-entry']]);
+    });
+
+    test('senza un chunk di una sezione a più file, mancano esattamente le voci di quel chunk', () => {
+      const chunks = [...seoFilesFor('frontaliere', ROOT)].sort();
+      assert.ok(chunks.length > 1, 'la sezione frontaliere deve avere più di un file SEO');
+      const omitted = chunks.at(-1);
+      const lost = findAllSeoEntryMatches(fs.readFileSync(path.join(ROOT, omitted), 'utf8'), omitted).map((entry) => entry.id);
+      assert.ok(lost.length > 0, `${omitted} non contiene voci`);
+      const partial = scanSeoTitleFields({ root: corpusCopyWithout(omitted) });
+      assert.deepEqual(partial.uncovered.map((gap) => [gap.section, gap.seoFiles]), [['frontaliere', chunks.length - 1]]);
+      assert.deepEqual([...partial.uncovered[0].missing].sort(), [...lost].sort());
+    });
   });
 
   test('nessun title, ogTitle o headline è monco o tagliato a metà clausola', () => {
