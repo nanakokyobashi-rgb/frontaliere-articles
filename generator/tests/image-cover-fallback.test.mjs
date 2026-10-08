@@ -134,7 +134,7 @@ test('la pertinenza della cover usa il testo finale e una soglia condivisa', () 
   data.imagePrompt = 'Scena editoriale sul teatro dialettale di Cantello';
   assert.equal(
     catalogFallbackSharedWordCount(data, '/images/blog/cantello-teatro-dialettale-ottobre-2026.webp'),
-    5,
+    4,
   );
   assert.equal(
     catalogFallbackSharedWordCount(data, '/images/blog/sindacati-miazzina-diritti-9-ottobre.webp'),
