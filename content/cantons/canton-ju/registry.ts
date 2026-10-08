@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fondo-clima-giura-2028',
+ category: 'fiscale',
+ date: '2026-10-08T10:13:59.862Z',
+ image: '/images/blog/article-fondo-clima-giura-2028.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

@@ -63,6 +63,7 @@ on:
       - 'scripts/lib/engine-corpus-view.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/section-registry.mjs'
+      - 'scripts/lib/section-page-manifest.mjs'
       - 'scripts/lib/upload-cdn-file.sh'
       - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/lib/parse-positive-num.mjs'
@@ -199,7 +200,7 @@ jobs:
           fetch-depth: 2
           persist-credentials: false
 
-      - name: Fetch previous published revision
+      - name: Fetch fallback corpus revision for manifest migration
         if: github.event_name == 'push'
         env:
           PREVIOUS_REVISION: ${{ github.event.before }}

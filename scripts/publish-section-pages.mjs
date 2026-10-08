@@ -45,6 +45,10 @@
  *   il comportamento resta dry-run per compatibilita'; --dry-run lo rende
  *   esplicito e non si combina con --publish.
  *
+ * Le pagine obsolete si confrontano con `edge/sections/_page-manifests/`,
+ * scritto solo dopo upload, verify e delete riusciti. `--previous-revision`
+ * resta soltanto il ponte per la prima run, prima che esista il manifest.
+ *
  * Esce 1 se una pagina non passa la validazione, se un upload non e'
  * confermato o se il verify fallisce.
  */
@@ -60,7 +64,7 @@ import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
 import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
-import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline, rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
+import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline as defaultRenderSectionArticlePipeline, rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
 import { CANTON_HUB_LOCALES, cantonHubDataFile, cantonHubTopics, readCantonHubData } from './lib/canton-hub-data.mjs';
 import { sourceRegistryIds } from './lib/corpus-floors.mjs';
 import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
@@ -68,6 +72,14 @@ import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { activeCorpusCoreMap, sectionSourceSurfaces } from './lib/corpus-sections.mjs';
 import { EDGE_SECTION_REGISTRY_FILE, SECTION_REGISTRY_FILE, sectionRoutes, validateEdgeSectionRegistry } from './lib/section-registry.mjs';
+import {
+  PAGE_MANIFEST_KINDS,
+  fetchPageManifest,
+  mergePageManifests,
+  pageManifestFromPages,
+  pageManifestKey,
+  pageManifestUrl,
+} from './lib/section-page-manifest.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -80,6 +92,8 @@ export const PAGE_CACHE_CONTROL = 'public,max-age=600';
 /** Dopo il deploy API la superficie pubblica puo' arrivare in ritardo: la delete attende, ma con un limite. */
 export const RELEASE_READY_MAX_WAIT_MS = 120_000;
 export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
+/** Inventario delle pagine: si aggiorna solo dopo una pubblicazione verificata. */
+export const PAGE_MANIFEST_CACHE_CONTROL = 'public,max-age=60';
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 
@@ -173,6 +187,103 @@ export function rendererPageEntry(section, rendered, kind) {
   return { ...entry, edgeKey: rendered.edgeKey };
 }
 
+/** Trasforma le righe del manifest in page entry verificati dalla stessa allowlist del publisher. */
+function manifestPageEntries(section, manifest, kind) {
+  return (manifest.pages?.[kind] ?? []).map((row) => {
+    const page = pageEntry(section, row.rel, kind);
+    if (page.canonicalPath !== row.canonicalPath || page.edgeKey !== row.edgeKey) {
+      throw new Error(`manifest ${section}: ${kind} ${row.rel} non corrisponde alla chiave del Worker`);
+    }
+    return kind === 'article' ? { ...page, id: row.id } : page;
+  });
+}
+
+function manifestEntryFromReleasePage(section, page, kind) {
+  const entry = pageEntry(section, `${page.canonicalPath.slice(1)}index.html`, kind);
+  return kind === 'article' ? { ...entry, id: page.id } : entry;
+}
+
+function articlePageIdentity(page) {
+  if (typeof page?.id !== 'string' || !page.id || typeof page?.locale !== 'string' || !page.locale) return null;
+  return `${page.id}\u0000${page.locale}`;
+}
+
+function articleManifestEntry(section, page) {
+  return page.kind === 'article' && typeof page.rel === 'string'
+    ? page
+    : manifestEntryFromReleasePage(section, page, 'article');
+}
+
+/**
+ * Inventario articolo della release aggregate, limitato alle pagine davvero
+ * verificate dal publisher. Un articolo gia' online resta nel manifest finche'
+ * la sua nuova URL non e' stata caricata e letta: cosi' un reconcile parziale
+ * non annuncia una chiave che non esiste ancora sull'edge.
+ */
+export function articleManifestPages({ section, previousArticlePages = [], currentArticlePages = [], verifiedArticlePages = [] }) {
+  const currentByIdentity = new Map();
+  const currentByPath = new Map();
+  for (const page of currentArticlePages) {
+    const identity = articlePageIdentity(page);
+    if (identity) currentByIdentity.set(identity, page);
+    currentByPath.set(page.canonicalPath, page);
+  }
+  const verifiedByIdentityPath = new Map();
+  for (const page of verifiedArticlePages) {
+    const identity = articlePageIdentity(page);
+    const current = identity ? currentByIdentity.get(identity) : null;
+    if (!identity || !current || current.canonicalPath !== page.canonicalPath) continue;
+    verifiedByIdentityPath.set(`${identity}\u0000${page.canonicalPath}`, page);
+  }
+  for (const previous of previousArticlePages) {
+    const identity = articlePageIdentity(previous);
+    const current = identity ? currentByIdentity.get(identity) : null;
+    if (identity && current?.canonicalPath === previous.canonicalPath) {
+      verifiedByIdentityPath.set(`${identity}\u0000${current.canonicalPath}`, previous);
+    }
+  }
+
+  const result = new Map();
+  for (const previous of previousArticlePages) {
+    const identity = articlePageIdentity(previous);
+    const current = (identity ? currentByIdentity.get(identity) : null)
+      ?? currentByPath.get(previous.canonicalPath);
+    if (!current) continue; // articolo ritirato: obsoleteReleasePages lo cancellera' dopo la readiness gate
+    const replacement = identity
+      ? verifiedByIdentityPath.get(`${articlePageIdentity(current)}\u0000${current.canonicalPath}`)
+      : null;
+    const selected = articlePageIdentity(current) === identity && current.canonicalPath === previous.canonicalPath
+      ? current
+      : replacement ?? previous;
+    result.set(selected.edgeKey, articleManifestEntry(section, selected));
+  }
+  for (const page of verifiedByIdentityPath.values()) {
+    result.set(page.edgeKey, articleManifestEntry(section, page));
+  }
+  return [...result.values()];
+}
+
+/**
+ * Prima che esista il manifest edge, un giro article-only deve comunque
+ * lasciare un inventario completo abbastanza da far vedere al giro seguente
+ * le pagine che il parent del push non contiene più. Gli aggregati hanno
+ * percorsi derivati dal core; gli articoli e l'archivio arrivano dalla
+ * release precedente usata solo per questa migrazione.
+ */
+function migrationManifestPages(section, previousArticlePages, previousArchivePages) {
+  const routes = sectionRoutes(section);
+  const topicHubs = Object.values(ARTICLE_SECTION_CORE_ALL[section].topicHubs ?? {});
+  return [
+    ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
+    ...previousArchivePages.map((page) => manifestEntryFromReleasePage(section, page, 'archive')),
+    ...routes.flatMap((route) => {
+      const landing = pageEntry(section, `${route.prefix.slice(1)}index.html`, 'landing');
+      const hubs = topicHubs.map((slugs) => pageEntry(section, `${route.prefix.slice(1)}${slugs[route.locale]}/index.html`, 'hub'));
+      return [landing, ...hubs];
+    }),
+  ];
+}
+
 const RELEASE_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 const REGISTRY_ID_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -239,9 +350,40 @@ export function articleReleasePages(section, { ids, slugs }) {
  * slug e una rimozione producono una delete R2, mentre una URL ancora
  * annunciata non viene mai toccata.
  */
-export function obsoleteArticlePages(previousPages, currentPages) {
-  const current = new Set(currentPages.map((page) => page.canonicalPath));
-  return previousPages.filter((page) => !current.has(page.canonicalPath));
+export function obsoleteArticlePages(previousPages, currentPages, verifiedPages = currentPages) {
+  const currentPaths = new Set(currentPages.map((page) => page.canonicalPath));
+  const currentByIdentity = new Map();
+  const currentByPath = new Map();
+  for (const page of currentPages) {
+    const identity = articlePageIdentity(page);
+    if (identity) currentByIdentity.set(identity, page);
+    currentByPath.set(page.canonicalPath, page);
+  }
+  const verifiedByIdentityPath = new Set();
+  for (const page of verifiedPages) {
+    const identity = articlePageIdentity(page);
+    if (identity) verifiedByIdentityPath.add(`${identity}\u0000${page.canonicalPath}`);
+  }
+  for (const previous of previousPages) {
+    const identity = articlePageIdentity(previous);
+    const current = identity ? currentByIdentity.get(identity) : null;
+    if (identity && current?.canonicalPath === previous.canonicalPath) {
+      verifiedByIdentityPath.add(`${identity}\u0000${current.canonicalPath}`);
+    }
+  }
+  return previousPages.filter((page) => {
+    const identity = articlePageIdentity(page);
+    if (!identity) return !currentPaths.has(page.canonicalPath);
+    const current = currentByIdentity.get(identity);
+    if (!current) {
+      // Se un altro id riusa la stessa URL, non e' una delete: la chiave
+      // fisica e' anche quella della nuova pagina e va protetta finche' il
+      // nuovo contenuto non e' stato verificato.
+      return !currentByPath.has(page.canonicalPath);
+    }
+    if (current.canonicalPath === page.canonicalPath) return false;
+    return verifiedByIdentityPath.has(`${identity}\u0000${current.canonicalPath}`);
+  });
 }
 
 /** Vecchie pagine di archivio non piu' emesse dopo una riduzione del corpus. */
@@ -446,6 +588,7 @@ export function aggregatePageDefects(pages, { aggregatePagesAllowed, locales = C
 export function obsoleteReleasePages({
   previousArticlePages,
   currentArticlePages,
+  verifiedArticlePages = currentArticlePages,
   previousArchivePages,
   currentArchivePages,
   aggregatePagesAllowed,
@@ -453,7 +596,7 @@ export function obsoleteReleasePages({
   if (typeof aggregatePagesAllowed !== 'boolean') throw new Error('aggregatePagesAllowed deve essere booleano');
   if (!aggregatePagesAllowed) return [];
   return [
-    ...obsoleteArticlePages(previousArticlePages, currentArticlePages),
+    ...obsoleteArticlePages(previousArticlePages, currentArticlePages, verifiedArticlePages),
     ...obsoleteArchivePages(previousArchivePages, currentArchivePages),
   ];
 }
@@ -501,6 +644,18 @@ function run(cmd, args) {
   process.stdout.write(res.stdout ?? '');
   process.stderr.write(res.stderr ?? '');
   return { code: res.status ?? 1, stdout: res.stdout ?? '' };
+}
+
+/** Scrive un checkpoint o la release solo nel punto deciso dal chiamante. */
+export function publishPageManifest({ manifest, distDir, runImpl = run }) {
+  const local = path.join(distDir, `.section-page-manifest-${manifest.section}.json`);
+  try {
+    fs.writeFileSync(local, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8');
+    const result = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, pageManifestKey(manifest.section), PAGE_MANIFEST_CACHE_CONTROL]);
+    return result.stdout.includes('✅ uploaded');
+  } finally {
+    fs.rmSync(local, { force: true });
+  }
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -755,24 +910,60 @@ export async function publish({
   return { failures, uploaded: uploaded.length, deleted: deleted.length, status };
 }
 
-export async function main(argv = process.argv.slice(2)) {
+export async function main(
+  argv = process.argv.slice(2),
+  {
+    parseArgsImpl = parseArgs,
+    fetchPageManifestImpl = fetchPageManifest,
+    publishedStatusImpl = publishedStatus,
+    createRenderRootImpl = createRenderRoot,
+    renderSectionArticlePipelineImpl = defaultRenderSectionArticlePipeline,
+    articleReleaseSnapshotImpl = articleReleaseSnapshot,
+    publishImpl = publish,
+    publishPageManifestImpl = publishPageManifest,
+  } = {},
+) {
   const t0 = Date.now();
-  const args = parseArgs(argv);
+  const args = parseArgsImpl(argv);
   const section = args.section;
   const distDir = path.resolve(args.out);
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIds(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
-  const previousArticlePages = previousArticleReleasePages(ROOT_DIR, section, args.previousRevision);
-  const previousArchivePages = previousArchiveReleasePages(ROOT_DIR, section, args.previousRevision);
+  let publishedManifest = { state: 'absent' };
+  let publishedManifestPages = null;
+  if (publishing) {
+    publishedManifest = await fetchPageManifestImpl(pageManifestUrl(section, CDN_BASE), { section });
+    if (publishedManifest.state === 'ok') {
+      try {
+        publishedManifestPages = Object.fromEntries(
+          PAGE_MANIFEST_KINDS.map((kind) => [kind, manifestPageEntries(section, publishedManifest.doc, kind)]),
+        );
+      } catch (error) {
+        publishedManifest = { state: 'unknown', reason: error?.message ?? String(error) };
+      }
+    }
+    if (publishedManifest.state === 'absent') {
+      console.log(
+        `::warning::[${LOG}] manifest edge ${section} assente: uso il commit precedente solo per la migrazione`,
+      );
+    }
+  }
+  // Il manifest è la fonte normale. Il commit precedente resta solo un ponte
+  // per la prima run dopo il deploy del fix, quando il manifest non esisteva.
+  const previousArticlePages = publishedManifestPages?.article
+    ?? (publishedManifest.state === 'absent' ? previousArticleReleasePages(ROOT_DIR, section, args.previousRevision) : []);
+  const previousArchivePages = publishedManifestPages?.archive
+    ?? (publishedManifest.state === 'absent' ? previousArchiveReleasePages(ROOT_DIR, section, args.previousRevision) : []);
   // Preflight the same registry the Worker serves before deciding whether a
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
-  const effectiveStatus = publishing ? await publishedStatus(section) : null;
+  const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
 
   let hubs = { rels: [], pages: [], missing: [] };
   let landingPages = [];
-  const renderRoot = createRenderRoot(ROOT_DIR, process.env.RUNNER_TEMP || os.tmpdir());
+  const renderSectionArticlePipeline = renderSectionArticlePipelineImpl;
+  const renderRoot = createRenderRootImpl(ROOT_DIR, process.env.RUNNER_TEMP || os.tmpdir());
   const {
     entries,
     hubResult,
@@ -807,19 +998,27 @@ export async function main(argv = process.argv.slice(2)) {
 
   fs.rmSync(renderRoot, { recursive: true, force: true });
 
-  const currentArticlePages = articleReleaseSnapshot(ROOT_DIR, section);
+  const currentArticlePages = articleReleaseSnapshotImpl(ROOT_DIR, section);
   const pages = [
-    ...entries.flatMap((entry) => CANTON_HUB_LOCALES.map((loc) => entry.paths[loc]).filter(Boolean)).map((rel) => pageEntry(section, rel, 'article')),
+    ...entries.flatMap((entry) => CANTON_HUB_LOCALES.map((loc) => entry.paths[loc]).filter(Boolean).map((rel) => ({
+      ...pageEntry(section, rel, 'article'),
+      id: String(entry.articleId),
+    }))),
     ...CANTON_HUB_LOCALES.flatMap((loc) => hubResult.pathsByLocale[loc] ?? []).map((rel) => pageEntry(section, rel, 'archive')),
     ...hubs.pages.map((page) => rendererPageEntry(section, page, 'hub')),
     ...landingPages.map((page) => rendererPageEntry(section, page, 'landing')),
   ];
   const currentArchivePages = pages.filter((page) => page.kind === 'archive');
+  // `publish()` writes the manifest only when every page in `pages` has been
+  // uploaded, purged and read back successfully; this is therefore the
+  // verified upload set used by both deletion and the next inventory.
+  const verifiedArticlePages = pages.filter((page) => page.kind === 'article');
   const renderedIds = [...new Set(entries.map((entry) => String(entry.articleId)).filter(Boolean))];
   const missingArticleIds = missingRenderedArticleIds(ids, entries);
   const obsoletePages = obsoleteReleasePages({
     previousArticlePages,
     currentArticlePages,
+    verifiedArticlePages,
     previousArchivePages,
     currentArchivePages,
     aggregatePagesAllowed,
@@ -828,6 +1027,12 @@ export async function main(argv = process.argv.slice(2)) {
   const defects = [];
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
+  }
+  if (publishing && publishedManifest.state === 'unknown') {
+    defects.push(
+      `manifest edge ${section} non verificabile (${publishedManifest.reason ?? 'errore sconosciuto'}): ` +
+      'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
+    );
   }
   for (const page of pages) {
     const abs = path.join(distDir, page.rel);
@@ -878,6 +1083,7 @@ export async function main(argv = process.argv.slice(2)) {
     imageFetchFailures,
     imagePostcondition,
     aggregatePagesAllowed,
+    publishedPageManifest: publishedManifest.state,
     effectiveStatus,
     pages,
     cdnUploads,
@@ -908,7 +1114,49 @@ export async function main(argv = process.argv.slice(2)) {
     return 0;
   }
   const releaseCommit = execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
-  summary.published = await publish({ pages, cdnUploads, obsoletePages, distDir, section, releaseCommit });
+  const migrationManifest = !publishedManifestPages && publishedManifest.state === 'absent'
+    ? pageManifestFromPages({
+      section,
+      commit: releaseCommit,
+      pages: migrationManifestPages(section, previousArticlePages, previousArchivePages),
+    })
+    : null;
+  if (migrationManifest) {
+    const seeded = publishPageManifestImpl({ manifest: migrationManifest, distDir });
+    summary.migrationManifestSeeded = seeded;
+    if (!seeded) {
+      summary.published = { failures: 1, uploaded: 0, deleted: 0, status: null, manifestSeeded: false };
+      console.error(`::error::[${LOG}] checkpoint manifest edge ${section} non confermato: nessuna pagina viene pubblicata`);
+      writeSummary();
+      return 1;
+    }
+  }
+  summary.published = await publishImpl({ pages, cdnUploads, obsoletePages, distDir, section, releaseCommit });
+  if (summary.published.failures === 0) {
+    const manifestPages = aggregatePagesAllowed
+      ? [
+        ...articleManifestPages({
+          section,
+          previousArticlePages,
+          currentArticlePages,
+          verifiedArticlePages,
+        }),
+        ...pages.filter((page) => page.kind !== 'article'),
+      ]
+      : verifiedArticlePages;
+    const currentManifest = pageManifestFromPages({ section, commit: releaseCommit, pages: manifestPages });
+    const nextManifest = aggregatePagesAllowed
+      ? currentManifest
+      : publishedManifestPages
+        ? mergePageManifests(publishedManifest.doc, currentManifest)
+        : mergePageManifests(migrationManifest, currentManifest);
+    const manifestPublished = publishPageManifestImpl({ manifest: nextManifest, distDir });
+    summary.published.manifestPublished = manifestPublished;
+    if (!manifestPublished) {
+      summary.published.failures++;
+      console.error(`::error::[${LOG}] manifest edge ${section} non confermato: il prossimo giro deve conservare il manifest precedente`);
+    }
+  }
   writeSummary();
   console.log(`[${LOG}] pubblicate ${summary.published.uploaded}/${pages.length} pagine, ${summary.published.failures} fallimenti`);
   return summary.published.failures ? 1 : 0;

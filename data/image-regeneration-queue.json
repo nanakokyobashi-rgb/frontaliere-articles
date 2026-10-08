@@ -290,6 +290,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T09:36:45.453Z",
       "lastFailureAt": "2026-10-08T09:36:45.453Z"
+    },
+    {
+      "articleId": "bellinzona-nord-svincolo",
+      "title": "Bellinzona Nord, chiusura notturna dello svincolo",
+      "fallbackImage": "/images/blog/centro-ovale-chiasso-nuova-proprieta.webp",
+      "reason": "All image providers failed for article-bellinzona-nord-svincolo: openai-codex (vision gate rejected image: Generic illustrated mountain interchange; traffic signage is present, tho",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T10:36:56.605Z",
+      "lastFailureAt": "2026-10-08T10:36:56.605Z"
     }
   ]
 }

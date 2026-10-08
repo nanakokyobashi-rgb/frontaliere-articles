@@ -65,6 +65,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/npm-ci-retry.sh',
   'scripts/lib/parse-positive-num.mjs',
   'scripts/ci/retry-cmd.sh',
+  'scripts/lib/section-page-manifest.mjs',
   'generator/scripts/load-rc-env.mjs',
   'scripts/offload-generated-images-cdn.mjs',
   'scripts/publish-section-edge.mjs',
