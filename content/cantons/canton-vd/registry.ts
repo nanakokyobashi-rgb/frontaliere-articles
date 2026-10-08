@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vaud-budget-2027-revisione-12percento',
+ category: 'fiscale',
+ date: '2026-10-08T11:43:59.351Z',
+ image: '/images/blog/article-vaud-budget-2027-revisione-12percento.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

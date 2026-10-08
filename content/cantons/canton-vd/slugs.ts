@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'vaud-revision-bouclier-fiscal-2024': { it: 'vaud-revision-bouclier-fiscal-2024', en: 'vaud-tax-shield-revision-2024', de: 'waadt-steuerbremse-revision-2024', fr: 'vaud-la-droite-relance-le-bouclier-fiscal' },
  'losanna-budget-deficit-2027': { it: 'losanna-budget-deficit-2027', en: 'lausanne-budget-deficit-2027', de: 'lausanne-budget-defizit-2027', fr: 'budget-lausanne-deficit-2027' },
  'morges-mobilita-consultazione-2045': { it: 'morges-mobilita-consultazione-2045', en: 'morges-mobility-consultation-2045', de: 'morges-mobilitat-konsultation-2045', fr: 'morges-mobilite-consultation-2045' },
+ 'vaud-budget-2027-revisione-12percento': { it: 'vaud-budget-2027-revisione-12percento', en: 'vaud-revises-the-2027-budget-to-cover-the-12-shortfall', de: 'waadt-uberarbeitet-das-budget-2027-um-die-12-lucke-zu-schliessen', fr: 'vaud-revoit-le-budget-2027-pour-combler-le-trou-de-12' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

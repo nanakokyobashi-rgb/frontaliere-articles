@@ -12795,6 +12795,17 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tifosi-lucerna-lugano-traffico.title': 'Luzern-Fans in Lugano: gesperrte Straßen und Verkehr',
     'blog.article.tifosi-lucerna-lugano-traffico.excerpt': '## Auf einen Blick - Spiel um 18 Uhr im Stadion Cornaredo - Fanmarsch zwischen 16 und etwa 17.30 Uhr - Auf den betroffenen Straßen sind Wartezeiten von 15 bis 30 Minuten zu erwarten - Via Ciani',
     'blog.article.tifosi-lucerna-lugano-traffico.imageAlt': 'Luganer Straßen mit Polizei und Fans auf dem Weg zum Cornaredo-Stadion',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.title': 'Elektrifizierung der Bahnstrecke Albate-Molteno: Sperrung Como-Lecco',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.excerpt': 'Bauarbeiten Mitte Dezember für die Elektrifizierung der Strecke Albate-Molteno, Einstellung des Verkehrs auf der Strecke Como-Lecco bis Juni 2029. Investition von 170 Millionen Euro.',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.imageAlt': 'Bild eines modernen Bahnhofs im Tessin mit einem ankommenden Zug an einem hellen Tag.',
+    'blog.article.bollettino-frontaliere-2026-10-08.title': 'Grenzgänger-Tagesbulletin – 8. Oktober 2026: 903 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-10-08.excerpt': 'Die Zahlen von heute, 8. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-08.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 8. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-08.seoDescription': 'Grenzgänger-Bulletin vom 8. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-08.ogDescription': 'Die Zahlen vom 8. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Elektrifizierung Albate-Molteno: Bauarbeiten ab Dezember 2024',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## Auf einen Blick - Bauarbeiten für die Elektrifizierung beginnen Mitte Dezember - Como-Lecco mindestens bis Juni 2029 unterbrochen - Albate-Molteno: von 24 auf 34 Züge pro Tag',
+    'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Elektrischer Zug auf der Albate-Molteno-Strecke nahe Lugano mit den Alpen im Hintergrund',
 };
 
 export default blogMetaDe;

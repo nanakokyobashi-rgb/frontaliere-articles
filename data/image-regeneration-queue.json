@@ -270,6 +270,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T11:31:48.777Z",
       "lastFailureAt": "2026-10-08T11:31:48.777Z"
+    },
+    {
+      "articleId": "decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni",
+      "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
+      "fallbackImage": "/images/blog/tassa-salute-frontalieri-ticino-settembre.webp",
+      "reason": "All image providers failed for article-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni: openai-codex (vision gate rejected image: Generic stylized illustration with",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:44:40.252Z",
+      "lastFailureAt": "2026-10-08T11:44:40.252Z"
     }
   ]
 }

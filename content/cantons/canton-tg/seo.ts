@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-turgovia-occupazione-rav-settembre': {
+    title: 'Disoccupazione in Turgovia: quota stabile al 2,2%',
+    description: 'Turgovia: 3.558 disoccupati a fine settembre, quota al 2,2%. Le persone in cerca d\'impiego sono 7.155; i posti vacanti salgono a 1.824, 236 in più ad agosto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, turgovia, quota, stabile',
+    ogTitle: 'Turgovia: disoccupazione stabile a settembre',
+    ogDescription: 'Il rapporto di settembre in Turgovia registra 3.558 persone disoccupate e una quota ferma al 2,2%. Le persone in cerca d\'impiego sono 7.155; i posti vacanti salgono a 1.824, mentre i settori mostrano andamenti diversi.',
+    canonicalPath: '/articoli-turgovia/turgovia-occupazione-rav-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disoccupazione in Turgovia: quota stabile al 2,2%",
+      "description": "Turgovia: 3.558 disoccupati a fine settembre, quota al 2,2%. Le persone in cerca d'impiego sono 7.155; i posti vacanti salgono a 1.824, 236 in più ad agosto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-turgovia-occupazione-rav-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro regionale per l'impiego in Turgovia con annunci di lavoro"
+      },
+      "datePublished": "2026-10-08T11:37:03+00:00",
+      "dateModified": "2026-10-08T11:37:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/turgovia-occupazione-rav-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

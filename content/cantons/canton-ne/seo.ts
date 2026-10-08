@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aldi-chiude-centro-neuchatel': {
+    title: 'Aldi chiuderà il negozio in centro a Neuchâtel',
+    description: '## In breve - Aldi chiuderà a fine novembre 2026. - Il punto vendita è in Rue Saint-Honoré. - La filiale era la numero 220 in Svizzera. - I collaboratori',
+    keywords: 'frontalieri, ticino, svizzera, italia, aldi, chiuderà, negozio, centro',
+    ogTitle: 'Aldi chiuderà il negozio in centro a Neuchâtel',
+    ogDescription: '## In breve - Aldi chiuderà a fine novembre 2026. - Il punto vendita è in Rue Saint-Honoré. - La filiale era la numero 220 in Svizzera. - I collaboratori',
+    canonicalPath: '/articoli-neuchatel/aldi-chiude-centro-neuchatel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aldi chiuderà il negozio in centro a Neuchâtel",
+      "description": "## In breve - Aldi chiuderà a fine novembre 2026. - Il punto vendita è in Rue Saint-Honoré. - La filiale era la numero 220 in Svizzera. - I collaboratori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aldi-chiude-centro-neuchatel.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ingresso di un negozio alimentare in Rue Saint-Honoré a Neuchâtel"
+      },
+      "datePublished": "2026-10-08T11:37:06+00:00",
+      "dateModified": "2026-10-08T11:37:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/aldi-chiude-centro-neuchatel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

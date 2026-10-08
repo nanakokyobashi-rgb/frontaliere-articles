@@ -43147,6 +43147,36 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'elettrificazione-ferrovia-albate-molteno',
+ category: 'novita',
+ date: '2026-10-08T11:47:10.828Z',
+ image: '/images/blog/article-elettrificazione-ferrovia-albate-molteno.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'bollettino-frontaliere-2026-10-08',
+ category: 'novita',
+ date: '2026-10-08T11:52:55.900Z',
+ image: '/images/blog/bollettino-frontaliere-2026-10-08.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
+ {
+ id: 'ferrovia-albate-molteno-elettrificazione',
+ category: 'novita',
+ date: '2026-10-08T11:59:50.384Z',
+ image: '/images/blog/article-ferrovia-albate-molteno-elettrificazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

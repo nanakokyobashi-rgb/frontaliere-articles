@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'aldi-chiude-centro-neuchatel',
+ category: 'novita',
+ date: '2026-10-08T11:37:06.437Z',
+ image: '/images/blog/article-aldi-chiude-centro-neuchatel.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
