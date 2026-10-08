@@ -1,4 +1,37 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/139-frontalieri-ticino-special-olympics.webp",
+      "sha256": "9c1a42de6d99ccbd86a1316bce850d8831d4c8a72eb1c499ad4660cbea99d019"
+    },
+    {
+      "path": "public/images/blog/article-contributi-formazione-berna-requisiti.webp",
+      "sha256": "a06ebb2026a70ff9d90e0919094c3ac1e5b3f29d5aedde2a8f23d43223918960"
+    },
+    {
+      "path": "public/images/blog/article-festival-racconto-varese-ottobre.webp",
+      "sha256": "40161bee5a8662281eae77801b7ede56f9b78382aac0680cca2bb51871381476"
+    },
+    {
+      "path": "public/images/blog/article-mcdonalds-pulizia-malnate-2026.webp",
+      "sha256": "dd28d3eb59d3a63eb0659d9040234a98d642e650c1835bf1ef4934b26eae3662"
+    },
+    {
+      "path": "public/images/blog/thumbnails/139-frontalieri-ticino-special-olympics-480w.webp",
+      "sha256": "c842730d151b009d80dfb6e6eab6cdb681c1101060f1c647e8ddc8c28414f044"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-contributi-formazione-berna-requisiti-480w.webp",
+      "sha256": "241140ca19498679e1f34c5cdb85aa88a5f7694d2f0f825b954245c60ea7d6a7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-festival-racconto-varese-ottobre-480w.webp",
+      "sha256": "841510e04325574e1bb2b523eba0757f82f9251f94fd2252af368ae71d6572f7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-mcdonalds-pulizia-malnate-2026-480w.webp",
+      "sha256": "7b0582e1860df901eb6ca006024e711bd9634636e82b8c6222f21dff69767163"
+    }
+  ]
 }
