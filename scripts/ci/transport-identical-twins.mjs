@@ -129,6 +129,7 @@ import {
   siteFile,
 } from './loop-drift-check.mjs';
 import { relativeImportSpecifiers } from './lib/import-specifiers.mjs';
+import { TARGET_WORKFLOW_PATH } from './translate-queue-recovery.mjs';
 // Dalla libreria e non da `scan-failed-runs.mjs`: quello e' una CLI che apre
 // issue, e importarla per leggere un numero tira dentro
 // `github-issue-creator.mjs` e le sue costanti di argv.
@@ -241,7 +242,7 @@ const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').sl
 const sha256Full = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
 
 export const CRAWLER_CONTRACT_REL = 'generator/data/crawler-cross-repo-contract.json';
-export const TRANSLATE_WORKFLOW_REL = '.github/workflows/translate-pending.yml';
+export const TRANSLATE_WORKFLOW_REL = TARGET_WORKFLOW_PATH;
 export const TRANSLATE_RECOVERY_REL = 'scripts/ci/translate-queue-recovery.mjs';
 
 /**
