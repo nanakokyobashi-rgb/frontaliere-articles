@@ -9,6 +9,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.fondo-clima-giura-2028.title': 'Giura, fondo clima da 6,7 milioni annui dal 2028',
     'blog.article.fondo-clima-giura-2028.excerpt': '## In breve - CHF 6,7 milioni annui dal 2028 - Fondo per emissioni e adattamento climatico - Tre prelievi per CHF 2,63 milioni - L\'UDC minaccia un referendum ##',
     'blog.article.fondo-clima-giura-2028.imageAlt': 'Edificio amministrativo e impianto di riscaldamento nel Canton Giura',
+    'blog.article.casse-pensioni-migliorano-terzo-trimestre.title': 'Le casse pensioni svizzere migliorano Q3 2026',
+    'blog.article.casse-pensioni-migliorano-terzo-trimestre.excerpt': 'L\'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all\'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano',
+    'blog.article.casse-pensioni-migliorano-terzo-trimestre.imageAlt': 'Vista delle montagne del Giura con edificio uffici moderno che simboleggia la stabilità delle casse pensioni',
 };
 
 export default blogMetaCantonJuIt;

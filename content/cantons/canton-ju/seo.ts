@@ -80,6 +80,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-casse-pensioni-migliorano-terzo-trimestre': {
+    title: 'Le casse pensioni svizzere migliorano Q3 2026 | Frontaliere Ticino',
+    description: 'L\'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all\'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, pensioni, svizzere, migliorano',
+    ogTitle: 'Le casse pensioni svizzere migliorano Q3 2026',
+    ogDescription: 'L\'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all\'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano',
+    canonicalPath: '/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Le casse pensioni svizzere migliorano Q3 2026",
+      "description": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-casse-pensioni-migliorano-terzo-trimestre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista delle montagne del Giura con edificio uffici moderno che simboleggia la stabilità delle casse pensioni"
+      },
+      "datePublished": "2026-10-08T15:48:11+00:00",
+      "dateModified": "2026-10-08T15:48:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

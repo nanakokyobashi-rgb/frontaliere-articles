@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'casse-pensioni-migliorano-terzo-trimestre',
+ category: 'pensione',
+ date: '2026-10-08T15:48:11.331Z',
+ image: '/images/blog/article-casse-pensioni-migliorano-terzo-trimestre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

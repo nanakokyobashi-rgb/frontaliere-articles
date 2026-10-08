@@ -9,6 +9,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.fondo-clima-giura-2028.title': 'Jura, Klimafonds von 6,7 Millionen jährlich ab 2028',
     'blog.article.fondo-clima-giura-2028.excerpt': '## Auf einen Blick - CHF 6,7 Millionen jährlich ab 2028 - Fonds für Emissionen und Klimaanpassung - Drei Abgaben in Höhe von CHF 2,63 Millionen - Die SVP droht',
     'blog.article.fondo-clima-giura-2028.imageAlt': 'Verwaltungsgebäude und Heizungsanlage im Kanton Jura',
+    'blog.article.casse-pensioni-migliorano-terzo-trimestre.title': 'Schweizer Pensionskassen verbessern Q3 2026',
+    'blog.article.casse-pensioni-migliorano-terzo-trimestre.excerpt': 'Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um',
+    'blog.article.casse-pensioni-migliorano-terzo-trimestre.imageAlt': 'Blick auf die Juraberge mit einem modernen Bürogebäude, das die Stabilität der Pensionskassen symbolisiert',
 };
 
 export default blogMetaCantonJuDe;
