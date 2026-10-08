@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Numero massimo di voci da tentare in questa run (mai tentate e meno fallite prima)"
+        description: "Numero massimo di voci da tentare in questa run (le più vecchie prima; failed solo con retry esplicito)"
         required: false
         default: '10'
         type: string
