@@ -377,6 +377,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.ref }}
           fetch-depth: 0
           persist-credentials: false
 
@@ -401,7 +402,7 @@ jobs:
             BEFORE="${{ github.event.before }}"
             if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
                || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
-              CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)
+              CHANGED=$(git diff --name-only "${{ github.sha }}~1" "${{ github.sha }}" 2>/dev/null || true)
             else
               CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}" 2>/dev/null || true)
             fi
@@ -433,7 +434,7 @@ jobs:
             fi
           elif [ "$CHAIN" = "true" ]; then
             if [ -n "$SIBLING_SECTION" ]; then
-              case "$(git log -1 --format=%s)" in
+              case "$(git log -1 --format=%s "${{ github.sha }}")" in
                 *"($SIBLING_SECTION)"*) SEC="$PRIMARY_SECTION" ;;
                 *"($PRIMARY_SECTION)"*) SEC="$SIBLING_SECTION" ;;
               esac
@@ -449,6 +450,10 @@ jobs:
             echo "chain=$CHAIN"
             echo "chain_link=$CHAIN_LINK"
           } >> "$GITHUB_OUTPUT"
+          EVENT_SHA="${{ github.sha }}"
+          TIP_SHA="$(git rev-parse HEAD)"
+          AHEAD="$(git rev-list --count "${EVENT_SHA}..HEAD" 2>/dev/null || echo unknown)"
+          echo "CHECKOUT_TIP event=${EVENT_SHA:0:9} head=${TIP_SHA:0:9} ahead=${AHEAD}"
           echo "event=$EV chain=$CHAIN chain_link=$CHAIN_LINK → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
