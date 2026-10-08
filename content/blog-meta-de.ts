@@ -12809,6 +12809,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza: Falscher Carabiniere fordert Gold, Sohn vereitelt Betrug',
     'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## Auf einen Blick - In Porlezza versuchter Betrug durch einen falschen Carabiniere - Der Anruf erfolgte am 7. Oktober 2026 - Gold gefordert, um die Freilassung des Sohnes zu erwirken',
     'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Redaktionelles Bild zu: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto: Unternehmen im Austausch zur Vereinbarkeit',
+    'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## Auf einen Blick - Treffen in Chiasso am vergangenen 1. Oktober - Rund dreißig Unternehmen beteiligt - Kantonale Umfrage bis zum 30. November offen ## Fakten',
+    'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Unternehmensmeeting in Chiasso zur Vereinbarkeit von Beruf und Privatleben mit Teilnehmern um einen Tisch',
 };
 
 export default blogMetaDe;

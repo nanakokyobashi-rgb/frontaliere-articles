@@ -12811,6 +12811,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
     'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
     'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Immagine editoriale relativa a: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.mendrisiotto-aziende-conciliabilita.title': 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
+    'blog.article.mendrisiotto-aziende-conciliabilita.excerpt': '## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti',
+    'blog.article.mendrisiotto-aziende-conciliabilita.imageAlt': 'Incontro aziendale a Chiasso sulla conciliabilità vita-lavoro con partecipanti attorno a un tavolo',
 };
 
 export default blogMetaIt;
