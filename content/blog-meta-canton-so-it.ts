@@ -9,6 +9,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.premi-malattia-soletta-2027.title': 'Premi cassa malati a Soletta: +6% nel 2027',
     'blog.article.premi-malattia-soletta-2027.excerpt': 'Nel Canton Soletta il premio medio salirà di CHF 23.50 a CHF 417.50 nel 2027, 5.50 in più della media svizzera.',
     'blog.article.premi-malattia-soletta-2027.imageAlt': 'Premi della cassa malati nel Canton Soletta nel 2027',
+    'blog.article.luterbach-a5-rampe-notte.title': 'A5 a Luterbach: quattro rampe chiuse a ottobre',
+    'blog.article.luterbach-a5-rampe-notte.excerpt': 'A Luterbach, sulla A5, la viabilità cambia nell\'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.',
+    'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Svincolo di Luterbach sulla A5 durante lavori notturni e chiusure di rampe',
 };
 
 export default blogMetaCantonSoIt;

@@ -240,6 +240,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T11:25:33.527Z",
       "lastFailureAt": "2026-10-08T11:25:33.527Z"
+    },
+    {
+      "articleId": "luterbach-a5-rampe-notte",
+      "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
+      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
+      "reason": "All image providers failed for article-luterbach-a5-rampe-notte: openai-codex (vision gate rejected image: Generic illustrated night highway scene, but it contains prominent road-c",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T11:26:57.084Z",
+      "lastFailureAt": "2026-10-08T11:26:57.084Z"
     }
   ]
 }

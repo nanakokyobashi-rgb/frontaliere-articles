@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'luterbach-a5-rampe-notte',
+ category: 'pratico',
+ date: '2026-10-08T11:26:57.068Z',
+ image: '/images/blog/article-agrivarese-angera-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

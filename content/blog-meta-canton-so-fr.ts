@@ -9,6 +9,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.premi-malattia-soletta-2027.title': 'Primes d’assurance-maladie à Soleure : +6 % en 2027',
     'blog.article.premi-malattia-soletta-2027.excerpt': 'Dans le canton de Soleure, la prime moyenne augmentera de CHF 23.50 pour atteindre CHF 417.50 en 2027, soit 5.50 de plus que la moyenne suisse.',
     'blog.article.premi-malattia-soletta-2027.imageAlt': 'Primes d\'assurance maladie dans le canton de Soleure en 2027',
+    'blog.article.luterbach-a5-rampe-notte.title': 'A5 à Luterbach : quatre bretelles fermées en octobre',
+    'blog.article.luterbach-a5-rampe-notte.excerpt': 'À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.',
+    'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Echangeur de Luterbach sur l\'A5 pendant des travaux nocturnes et des fermetures de rampes',
 };
 
 export default blogMetaCantonSoFr;
