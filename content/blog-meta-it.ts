@@ -12791,7 +12791,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bellinzona-nord-svincolo.title': 'Bellinzona Nord, chiusura notturna dello svincolo',
     'blog.article.bellinzona-nord-svincolo.excerpt': '## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46',
     'blog.article.bellinzona-nord-svincolo.imageAlt': 'Svincolo autostradale di Bellinzona Nord durante una chiusura notturna',
-    'blog.article.lugano-lucerna-partita-traffico.title': 'Lucerna fans in Lugano: road closures, traffic delays',
+    'blog.article.lugano-lucerna-partita-traffico.title': 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
     'blog.article.lugano-lucerna-partita-traffico.excerpt': '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
     'blog.article.lugano-lucerna-partita-traffico.imageAlt': 'Piazza stazione di Lugano con transenne e tifosi del Lucerna diretti allo stadio di Cornaredo',
     'blog.article.tifosi-lucerna-lugano-traffico.title': 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
@@ -12808,6 +12808,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
     'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
     'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Treno elettrico sulla linea Albate-Molteno vicino a Lugano con le Alpi sullo sfondo',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Immagine editoriale relativa a: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
 };
 
 export default blogMetaIt;
