@@ -12,6 +12,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.a9-chiusure-notturne-sion-sierre.title': 'A9 Sion-Sierre: tre settimane di chiusure notturne',
     'blog.article.a9-chiusure-notturne-sion-sierre.excerpt': 'Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d\'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre',
     'blog.article.a9-chiusure-notturne-sion-sierre.imageAlt': 'Chiusura notturna dell\'A9 tra Sion e Sierre per lavori stradali',
+    'blog.article.maison-garde-ospedale-sion.title': 'Sion: apre la Maison de la garde per le urgenze',
+    'blog.article.maison-garde-ospedale-sion.excerpt': 'Dal 1° settembre l\'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.',
+    'blog.article.maison-garde-ospedale-sion.imageAlt': 'Ingresso della Maison de la garde presso l\'ospedale di Sion',
 };
 
 export default blogMetaCantonVsIt;

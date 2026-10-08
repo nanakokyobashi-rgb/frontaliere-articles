@@ -12,6 +12,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.a9-chiusure-notturne-sion-sierre.title': 'A9 Sion-Sierre : trois semaines de fermetures nocturnes',
     'blog.article.a9-chiusure-notturne-sion-sierre.excerpt': 'Trois semaines de fermetures : du 12 au 30 octobre Travaux interrompus en hiver, reprise en mars 2027 Fermetures nocturnes de 20 h à 5 h Tronçon → A9 entre Sion',
     'blog.article.a9-chiusure-notturne-sion-sierre.imageAlt': 'Fermeture nocturne de l\'A9 entre Sion et Sierre pour travaux',
+    'blog.article.maison-garde-ospedale-sion.title': 'Sion : la Maison de la garde ouvre pour les urgences',
+    'blog.article.maison-garde-ospedale-sion.excerpt': 'À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.',
+    'blog.article.maison-garde-ospedale-sion.imageAlt': 'Entrée de la Maison de la garde à l\'hôpital de Sion',
 };
 
 export default blogMetaCantonVsFr;

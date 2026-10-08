@@ -119,6 +119,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-maison-garde-ospedale-sion': {
+    title: 'Sion: apre la Maison de la garde per le urgenze',
+    description: 'L\'ospedale di Sion ha aperto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 e 22 per alleggerire le urgenze. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, sion, apre, maison, garde',
+    ogTitle: 'Sion: apre la Maison de la garde per le urgenze',
+    ogDescription: 'Per alleggerire il pronto soccorso, l\'ospedale di Sion ha introdotto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 alle 22, coinvolgendo 80 medici generalisti.',
+    canonicalPath: '/articoli-vallese/maison-garde-ospedale-sion/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sion: apre la Maison de la garde per le urgenze",
+      "description": "L'ospedale di Sion ha aperto la Maison de la garde: un presidio per casi non vitali attivo ogni giorno dalle 18 e 22 per alleggerire le urgenze. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ingresso della Maison de la garde presso l'ospedale di Sion"
+      },
+      "datePublished": "2026-10-08T17:03:41+00:00",
+      "dateModified": "2026-10-08T17:03:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/maison-garde-ospedale-sion/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

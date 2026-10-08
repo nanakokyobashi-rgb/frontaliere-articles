@@ -350,6 +350,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T16:34:16.930Z",
       "lastFailureAt": "2026-10-08T16:34:16.930Z"
+    },
+    {
+      "articleId": "maison-garde-ospedale-sion",
+      "title": "Sion: apre la Maison de la garde per le urgenze",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T17:03:41.260Z",
+      "lastFailureAt": "2026-10-08T17:03:41.260Z"
     }
   ]
 }

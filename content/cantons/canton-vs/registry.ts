@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'maison-garde-ospedale-sion',
+ category: 'novita',
+ date: '2026-10-08T17:03:41.241Z',
+ image: '/images/places/lugano-view.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
