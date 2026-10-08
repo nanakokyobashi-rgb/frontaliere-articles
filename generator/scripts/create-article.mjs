@@ -8216,6 +8216,64 @@ function extractDatesFromHtml(html, baseUrl) {
   return dateMap;
 }
 
+function embeddedHeadlineDateKey(value) {
+  return headlineTextFromMarkup(value).normalize('NFKC').replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * Radio Munot serializes the card metadata in its page state instead of
+ * rendering a `<time>` element.  Keep this opt-in: scanning arbitrary JSON in
+ * every HTML source would pair unrelated titles and dates.
+ */
+function extractEmbeddedHeadlineDates(html, field) {
+  if (field !== 'publishDate') return new Map();
+  const out = new Map();
+  const seen = new Set();
+  const ambiguous = new Set();
+  const visit = (value) => {
+    if (!value || typeof value !== 'object') return;
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item);
+      return;
+    }
+    // The page-state object is parsed as JSON first. This keeps title/date
+    // associated even when the CMS inserts fields or changes their order.
+    if (typeof value.title === 'string' && typeof value[field] === 'string') {
+      const key = embeddedHeadlineDateKey(value.title);
+      // A title is not an item identity: the page state can contain two
+      // cards with the same label. Never let the later card overwrite the
+      // first one and then assign its date to both links. Ambiguous titles
+      // deliberately remain undated; URL/index pairing is unavailable at
+      // this stage, so guessing would be worse than dropping the hint.
+      if (seen.has(key)) {
+        out.delete(key);
+        ambiguous.add(key);
+      } else if (!ambiguous.has(key)) {
+        seen.add(key);
+        const date = new Date(value[field]);
+        if (!Number.isNaN(date.getTime())) out.set(key, date);
+      }
+    }
+    for (const child of Object.values(value)) visit(child);
+  };
+  const scriptRe = /<script\b([^>]*)>([\s\S]*?)<\/script>/giu;
+  let match;
+  while ((match = scriptRe.exec(String(html || ''))) !== null) {
+    const attrs = match[1] || '';
+    const type = attrs.match(/\btype\s*=\s*["']([^"']+)["']/iu)?.[1] || '';
+    if (type && !/json/iu.test(type)) continue;
+    const body = match[2].trim();
+    if (!body || (!/^\s*[\[{]/u.test(body) && !/\bng-state\b/iu.test(attrs))) continue;
+    try {
+      visit(JSON.parse(body));
+    } catch {
+      // Inline JavaScript and truncated JSON are not page-state data. The
+      // opt-in quirk must fail closed instead of pairing unrelated strings.
+    }
+  }
+  return out;
+}
+
 /** Check if a date is within the last N days */
 function isWithinDays(date, days) {
   if (!date) return false;
@@ -8296,6 +8354,13 @@ function headlineCandidateIsUsable(text) {
   if (isGenericHeadlineLinkLabel(candidate)) return null;
   if (/^[\d\s./,:-]+$/.test(candidate)) return null;
   return candidate;
+}
+
+function configuredHeadlineFromAnchor(anchorTag, quirks) {
+  if (quirks?.titleAttributeTemplate !== 'beitrag-lesen') return null;
+  const title = headlineAttributeValue(anchorTag, 'title');
+  const match = title.match(/^\s*Beitrag\s+['"]([\s\S]+)['"]\s+lesen\.\s*$/iu);
+  return match ? headlineCandidateIsUsable(match[1]) : null;
 }
 
 /** Stack degli elementi aperti davanti a un link, sufficiente per il markup
@@ -8432,14 +8497,20 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
 // ── Step 1b: Extract links and headlines from an HTML page ──
 function extractHeadlines(html, baseUrl) {
   const source = arguments[2] || {};
+  const metadataHtml = arguments[3] || html;
   const results = [];
   const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
+  const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
   // Match <a href="...">text</a> — capture href and inner text
   const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let m;
   while ((m = linkRe.exec(html)) !== null) {
     let href = m[1];
     let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const anchorTagEnd = m[0].indexOf('>');
+    const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+    const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
+    if (configuredHeadline) text = configuredHeadline;
     // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every
     // teaser link's accessible name with a screen-reader-only "Maggiori
     // informazioni su" label. It's plain text content, not a tag, so it
@@ -8448,8 +8519,6 @@ function extractHeadlines(html, baseUrl) {
     // boilerplate that never carries a topic signal.
     text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
     if (isGenericHeadlineLinkLabel(text)) {
-      const anchorTagEnd = m[0].indexOf('>');
-      const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
       text = structuralHeadlineForLink(html, m.index, anchorTag);
       if (!text) continue;
     }
@@ -8464,7 +8533,10 @@ function extractHeadlines(html, baseUrl) {
     // Skip non-article links (categories, tags, pagination, login, etc.)
     if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) continue;
     // Extract date from URL path or from nearby <time> elements
-    const date = extractDateFromUrl(href) || htmlDateMap.get(href) || null;
+    const date = extractDateFromUrl(href)
+      || htmlDateMap.get(href)
+      || embeddedDateMap.get(embeddedHeadlineDateKey(text))
+      || null;
     results.push({ url: href, headline: text, date });
   }
   // Deduplicate by URL

@@ -1,5 +1,5 @@
 {
-  "_comment": "Profilo editoriale corpus-only delle 24 sezioni cantonali (D14). Sorgente: i 24 report E-src e la riverifica R2 eseguita con lo scanner reale il 2026-10-06. newsSources alimenta generate-article-<canton> (P6/P8); categoryDataSources alimenta le pipeline dati di categoria (D11, P9), NON il generatore news. Policy robots (D10): una fonte il cui robots.txt nomina e blocca un agente AI di input (vedi aiInputAgents) sul path della fonte, o dichiara Content-Signal ai-input=no, NON entra in newsSources ne' in categoryDataSources ma in ownerDecisionPending con la regola esatta. ai-train=no da solo non esclude (il generatore non addestra modelli): resta in quirks.contentSignal. I token solo-addestramento (CCBot, Google-Extended, ...) bloccati sono annotati in quirks.trainingCrawlersBlocked. Un Disallow per User-agent * sul path esclude la fonte del tutto. Esclusi per costruzione: fonti gia' in NEWS_SOURCES/NEWS_SOURCES_SVIZZERA (D6/D12) e fonti a portata nazionale (sezione svizzera). enabled e' l'attivazione della superficie corpus D22; la generazione resta gated anche da CANTON_ARTICLE_SECTIONS_ENABLED in Remote Config (D16). cronMinute e dailyBudget sono verificati da scripts/ci/validate-canton-sections.mjs.",
+  "_comment": "Profilo editoriale corpus-only delle 24 sezioni cantonali (D14). Sorgente: i 24 report E-src e la riverifica R2 eseguita con lo scanner reale il 2026-10-06. newsSources alimenta generate-article-<canton> (P6/P8); categoryDataSources alimenta le pipeline dati di categoria (D11, P9), NON il generatore news. Policy robots (D10): una fonte il cui robots.txt nomina e blocca un agente AI di input (vedi aiInputAgents) sul path della fonte, o dichiara Content-Signal ai-input=no, NON entra in newsSources ne' in categoryDataSources ma in ownerDecisionPending finche' manca una decisione; una decisione definitiva di esclusione va in rejectedSources con regola, motivo e data. ai-train=no da solo non esclude (il generatore non addestra modelli): resta in quirks.contentSignal. I token solo-addestramento (CCBot, Google-Extended, ...) bloccati sono annotati in quirks.trainingCrawlersBlocked. Un Disallow per User-agent * sul path esclude la fonte del tutto. Esclusi per costruzione: fonti gia' in NEWS_SOURCES/NEWS_SOURCES_SVIZZERA (D6/D12) e fonti a portata nazionale (sezione svizzera). enabled e' l'attivazione della superficie corpus D22; la generazione resta gated anche da CANTON_ARTICLE_SECTIONS_ENABLED in Remote Config (D16). cronMinute e dailyBudget sono verificati da scripts/ci/validate-canton-sections.mjs.",
   "schemaVersion": 1,
   "verifiedAt": "2026-10-06",
   "aiInputAgents": ["ClaudeBot", "Claude-Web", "anthropic-ai", "Claude-User", "Claude-SearchBot", "GPTBot", "ChatGPT-User", "OAI-SearchBot", "PerplexityBot"],
@@ -5815,10 +5815,17 @@
           "language": "de",
           "kind": "media",
           "topics": ["cronaca", "eventi"],
-          "quirks": {},
-          "items7d": 0,
-          "verifiedAt": "2026-10-05",
-          "notes": "Radio locale: 18 link /g/<categoria>/<titolo>-<id>, ma in gran parte puntate audio/rubriche (Flashback, Jukebox, 1zu1 Sporttalk); le uniche news testuali sono i riquadri sulle votazioni. Non datati in pagina. Priorita' bassa."
+          "quirks": {
+            "articlePathPattern": "^/p/",
+            "titleAttributeTemplate": "beitrag-lesen",
+            "embeddedDateField": "publishDate",
+            "articleContent": "html-text",
+            "maxRequestsPerRun": 8,
+            "crawlDelaySeconds": 1
+          },
+          "items7d": 7,
+          "verifiedAt": "2026-10-08",
+          "notes": "La home 200 espone le card editoriali /p/: il testo visibile contiene solo 00:00, mentre il titolo e' nell'attributo title (Beitrag '…' lesen.) e publishDate nel page-state JSON. Il parser usa questi due metadati solo con quirk dichiarati e il pattern /p/ lascia fuori le rubriche /g/. Per le card piu' recenti articleContent html-text legge fino a 7 pagine /p/ nello stesso host e porta il testo editoriale nel gate e nel contesto della fonte; maxRequestsPerRun=8 include la lista. Probe live 2026-10-08: 7 link /p/ recenti, inclusi notizie su violenza domestica, archeologia e Polizeiboot; i programmi audio restano soggetti ai gate."
         },
         {
           "url": "https://www.stadt-schaffhausen.ch/medienmitteilungen",
@@ -5830,8 +5837,8 @@
           "topics": ["servizi", "mobilita", "eventi", "fisco"],
           "quirks": {},
           "items7d": 0,
-          "verifiedAt": "2026-10-05",
-          "notes": "ATTENZIONE estrazione: l'elenco NON e' in tag <a> ma in un attributo data-entities (JSON HTML-escaped) con 129 righe {name (contiene <a href='/_rte/information/<id>'>), datum, _datum}. Un estrattore a link <a> ottiene 0 comunicati; serve parse JSON dell'attributo. 0 comunicati negli ultimi 7 giorni, 7 negli ultimi 30."
+          "verifiedAt": "2026-10-08",
+          "notes": "L'elenco non e' in tag <a> ma in data-entities (JSON HTML-escaped) con 128 righe {name (contiene <a href='/_rte/information/<id>'>), datum, _datum}; il parser le estrae tutte e 128 con data. Probe live 2026-10-08: ultimo comunicato 24.09.2026, 0 negli ultimi 3 giorni; la fonte e' sterile per archivio stantio, non per un difetto di estrazione."
         },
         {
           "url": "https://www.konstanz.de/site/Konstanz/pmrss/30221/feed.xml",
@@ -5982,8 +5989,8 @@
           },
           "reserve": true,
           "items7d": 1,
-          "verifiedAt": "2026-10-05",
-          "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; probe locale 200 (1 negli ultimi 7 giorni, 4 negli ultimi 30, ultimo 2026-09-29), ma il runner GitHub riceve HTTP 403. Nessun feed/sitemap ufficiale alternativo accessibile trovato: declassata a fonte reserve, mai da aggirare con UA/proxy/retry."
+          "verifiedAt": "2026-10-08",
+          "notes": "Utility cittadina: tariffe energia, gas, cantieri (Verkehrsumleitung), fotovoltaico. 115 link /sh-power/newsroom/newsbeitrag/<id>-<slug> con <time datetime>; probe locale 200 (1 negli ultimi 7 giorni, 4 negli ultimi 30, ultimo 2026-09-29), ma il runner GitHub riceve HTTP 403. Il robots.txt live pubblica sitemap.xml: l'indice e il news sitemap ufficiale rispondono 200, ma il news sitemap ha 127 URL datati e ultimo item 2026-09-30, quindi 0 recenti nella finestra di 3 giorni. Nessun canale alternativo ufficiale produttivo dal runner: resta fuori dalle fonti attive come reserve, senza UA camuffato, proxy o retry sul 403."
         },
         {
           "url": "https://www.shkb.ch/244-news-medienmitteilungen",
@@ -6104,7 +6111,7 @@
         ],
         "servizi": []
       },
-      "ownerDecisionPending": [
+      "rejectedSources": [
         {
           "url": "https://www.shn.ch/region/kanton",
           "publisher": "Schaffhauser Nachrichten",
@@ -6113,10 +6120,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": 14,
-          "origin": "sources",
-          "notes": "Quotidiano del cantone, sezione Kanton (14 articoli propri, tutti negli ultimi 7 giorni). Server-rendered: link <a> relativi con data nel path (/<sezione>/YYYY-MM-DD/<slug>); la pagina di sezione contiene anche ~5 link di ticker generico (sport, ueberregionales/schweiz) da filtrare per prefisso di sezione. Titoli dall'anchor text. Contenuto parzialmente a pagamento (SN+): il lead e' visibile, il corpo puo' essere troncato. robots.txt senza regole AI."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di shn.ch vieta ancora GPTBot sull'intero sito; non si usa il feed HTML, non si aggira il divieto."
         },
         {
           "url": "https://www.shn.ch/region/stadt",
@@ -6126,10 +6136,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": 14,
-          "origin": "sources",
-          "notes": "Sezione Stadt Schaffhausen (14 articoli, tutti 7d). Server-rendered: link <a> relativi con data nel path (/<sezione>/YYYY-MM-DD/<slug>); la pagina di sezione contiene anche ~5 link di ticker generico (sport, ueberregionales/schweiz) da filtrare per prefisso di sezione. Titoli dall'anchor text. Contenuto parzialmente a pagamento (SN+): il lead e' visibile, il corpo puo' essere troncato. robots.txt senza regole AI."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di shn.ch vieta ancora GPTBot sull'intero sito; non si usa il feed HTML, non si aggira il divieto."
         },
         {
           "url": "https://www.shn.ch/region/regionale-wirtschaft",
@@ -6139,10 +6152,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": 4,
-          "origin": "sources",
-          "notes": "Economia regionale: aziende (GF, WEFA, Griesser), impieghi, mercato del lavoro del cantone. Fonte principale per 'lavoro'. Server-rendered: link <a> relativi con data nel path (/<sezione>/YYYY-MM-DD/<slug>); la pagina di sezione contiene anche ~5 link di ticker generico (sport, ueberregionales/schweiz) da filtrare per prefisso di sezione. Titoli dall'anchor text. Contenuto parzialmente a pagamento (SN+): il lead e' visibile, il corpo puo' essere troncato. robots.txt senza regole AI."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di shn.ch vieta ancora GPTBot sull'intero sito; non si usa il feed HTML, non si aggira il divieto."
         },
         {
           "url": "https://www.shn.ch/region/grenzregion",
@@ -6152,10 +6168,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": 0,
-          "origin": "sources",
-          "notes": "Sezione Grenzregion: lato tedesco (Singen, Buesingen, Konstanz) visto da Schaffhausen. Volume basso: 0 articoli negli ultimi 7 giorni, 3 negli ultimi 30 (14 link in pagina, il piu' recente 2026-09-14). Server-rendered: link <a> relativi con data nel path (/<sezione>/YYYY-MM-DD/<slug>); la pagina di sezione contiene anche ~5 link di ticker generico (sport, ueberregionales/schweiz) da filtrare per prefisso di sezione. Titoli dall'anchor text. Contenuto parzialmente a pagamento (SN+): il lead e' visibile, il corpo puo' essere troncato. robots.txt senza regole AI."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di shn.ch vieta ancora GPTBot sull'intero sito; non si usa il feed HTML, non si aggira il divieto."
         },
         {
           "url": "https://www.shn.ch/region/neuhausen",
@@ -6165,10 +6184,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": 4,
-          "origin": "sources",
-          "notes": "Sezione Neuhausen am Rheinfall (Rheinfall, cantiere Ortsdurchfahrt, turismo). Server-rendered: link <a> relativi con data nel path (/<sezione>/YYYY-MM-DD/<slug>); la pagina di sezione contiene anche ~5 link di ticker generico (sport, ueberregionales/schweiz) da filtrare per prefisso di sezione. Titoli dall'anchor text. Contenuto parzialmente a pagamento (SN+): il lead e' visibile, il corpo puo' essere troncato. robots.txt senza regole AI."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di shn.ch vieta ancora GPTBot sull'intero sito; non si usa il feed HTML, non si aggira il divieto."
         },
         {
           "url": "https://www.shn.ch/ueberregionales/wirtschaft",
@@ -6178,10 +6200,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": 6,
-          "origin": "sources",
-          "notes": "Economia nazionale/internazionale (include notizie su diesel/energia). Nota: il path e' 'uberregionales' senza 'e' in /uberregionales/wirtschaft (con 'ue' risponde 404); i link articolo usano /ueberregionales/wirtschaft/YYYY-MM-DD/. Server-rendered: link <a> relativi con data nel path (/<sezione>/YYYY-MM-DD/<slug>); la pagina di sezione contiene anche ~5 link di ticker generico (sport, ueberregionales/schweiz) da filtrare per prefisso di sezione. Titoli dall'anchor text. Contenuto parzialmente a pagamento (SN+): il lead e' visibile, il corpo puo' essere troncato. robots.txt senza regole AI."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di shn.ch vieta ancora GPTBot sull'intero sito; non si usa il feed HTML, non si aggira il divieto."
         },
         {
           "url": "https://www.shn.ch/ueberregionales/mobilitaet",
@@ -6191,10 +6216,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": 0,
-          "origin": "sources",
-          "notes": "Volume molto basso (14 link, il piu' recente 2026-04-11): utile solo come serbatoio per l'hub mobilita, non per le news fresche. Server-rendered: link <a> relativi con data nel path (/<sezione>/YYYY-MM-DD/<slug>); la pagina di sezione contiene anche ~5 link di ticker generico (sport, ueberregionales/schweiz) da filtrare per prefisso di sezione. Titoli dall'anchor text. Contenuto parzialmente a pagamento (SN+): il lead e' visibile, il corpo puo' essere troncato. robots.txt senza regole AI."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di shn.ch vieta ancora GPTBot sull'intero sito; non si usa il feed HTML, non si aggira il divieto."
         },
         {
           "url": "https://www.schaffhausen24.ch/alle-news",
@@ -6204,10 +6232,13 @@
           "intendedBucket": "news",
           "blockedAgents": ["GPTBot", "ChatGPT-User"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /; User-agent: ChatGPT-User -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": null,
-          "origin": "sources",
-          "notes": "Portale locale con comunicati comunali/associativi e news regionali. 40 link /articles/<id>-<slug> server-rendered; id crescente (410046 il piu' recente), NESSUNA data in pagina: serve la data dalla pagina articolo o dall'ordine di id. Anchor text = 'categoria titolo lead' (es. 'Gesellschaft Spielplatz ...'). robots.txt: nessuna regola AI per UA generico (blocca solo CCBot e /searches)."
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di schaffhausen24.ch vieta GPTBot e ChatGPT-User sull'intero sito; non si usa il portale, non si aggira il divieto."
         },
         {
           "url": "https://www.schaffhausen24.ch/agenda",
@@ -6217,11 +6248,16 @@
           "intendedBucket": "data:eventi",
           "blockedAgents": ["GPTBot", "ChatGPT-User"],
           "robotsRule": "User-agent: GPTBot -> Disallow: /; User-agent: ChatGPT-User -> Disallow: /",
-          "robotsCheckedAt": "2026-10-05",
+          "robotsCheckedAt": "2026-10-08",
           "items7d": null,
-          "origin": "sources",
-          "notes": "Agenda eventi: 30 link /agenda/<id>-<slug>?date=<n> server-rendered, con giorno e luogo nel testo. Unica agenda eventi cantonale leggibile da un estrattore HTML (schaffhauserland.ch e' JS)."
-        },
+          "origin": "rejected",
+          "reason": "robotsAiDisallow",
+          "decision": "exclude",
+          "decisionAt": "2026-10-08",
+          "notes": "Esclusione definitiva D10: il robots.txt live di schaffhausen24.ch vieta GPTBot e ChatGPT-User sull'intero sito; non si usa l'agenda, non si aggira il divieto."
+        }
+      ],
+      "ownerDecisionPending": [
         {
           "url": "https://www.help.ch/firma/187285/kantonale-verwaltung-schaffhausen-schaffhausen",
           "publisher": "help.ch (mirror comunicati Kanton SH)",

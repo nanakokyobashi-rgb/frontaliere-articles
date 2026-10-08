@@ -93,8 +93,23 @@ test('la tabella D19 copre esattamente i 24 gruppi, una volta sola', () => {
 test('la policy robots ha host bloccati da far valere su tutti i cantoni', () => {
   // Se nessuna regola fosse riconosciuta come blocco dell'intero sito, il
   // controllo cross-cantone del validatore non vedrebbe mai niente.
-  const wholeSite = PROFILE.cantons.flatMap((c) => c.ownerDecisionPending).filter((p) => /-> Disallow: \/(;|$)/.test(p.robotsRule));
+  const wholeSite = PROFILE.cantons.flatMap((c) => [
+    ...(c.ownerDecisionPending || []),
+    ...(c.rejectedSources || []),
+  ]).filter((p) => /-> Disallow: \/(;|$)/.test(p.robotsRule));
   assert.ok(wholeSite.length > 0);
+});
+
+test('SHN e Schaffhausen24 esclusi definitivamente dopo la riverifica robots D10', () => {
+  const c = canton(PROFILE, 'SH');
+  assert.equal(c.rejectedSources.length, 9);
+  assert.equal(c.ownerDecisionPending.some((p) => /shn\.ch|schaffhausen24\.ch/.test(p.url)), false);
+  for (const source of c.rejectedSources) {
+    assert.equal(source.reason, 'robotsAiDisallow');
+    assert.equal(source.decision, 'exclude');
+    assert.equal(source.decisionAt, '2026-10-08');
+    assert.equal(source.origin, 'rejected');
+  }
 });
 
 // ── Ogni regola, rotta apposta ──────────────────────────────────────────────
@@ -242,4 +257,29 @@ test('viola: pendente senza la regola robots che lo giustifica', () => {
   p.blockedAgents = [];
   expectViolation(doc, /SO: ownerDecisionPending .*: blockedAgents vuoto/);
   expectViolation(doc, /SO: ownerDecisionPending .*: robotsRule vuota/);
+});
+
+test('viola: esclusione definitiva senza motivo o data di decisione', () => {
+  const doc = clone();
+  const p = canton(doc, 'SH').rejectedSources[0];
+  p.reason = 'manuale';
+  p.decisionAt = '';
+  p.origin = 'sources';
+  expectViolation(doc, /SH: rejectedSources .*: reason deve essere robotsAiDisallow/);
+  expectViolation(doc, /SH: rejectedSources .*: decisionAt non YYYY-MM-DD/);
+  expectViolation(doc, /SH: rejectedSources .*: origin deve essere rejected/);
+});
+
+test('viola: articleContent senza un budget finito di pagine dettaglio', () => {
+  const doc = clone();
+  const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.radiomunot.ch/');
+  delete source.quirks.maxRequestsPerRun;
+  expectViolation(doc, /SH: newsSources .*: articleContent html-text richiede maxRequestsPerRun intero >= 2/);
+});
+
+test('viola: articleContent con crawl-delay oltre il limite ha budget effettivo di una richiesta', () => {
+  const doc = clone();
+  const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.radiomunot.ch/');
+  source.quirks.crawlDelaySeconds = 61;
+  expectViolation(doc, /SH: newsSources .*: articleContent html-text .*budget effettivo >= 2/);
 });
