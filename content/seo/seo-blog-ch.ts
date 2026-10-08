@@ -99457,7 +99457,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Requisiti, programmi riconosciuti, termini e contributi per la formazione continua nel Canton Berna: guida alla verifica sulla fonte ufficiale cantonale.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-berna.webp`,
+        "url": `${BASE_URL}/images/blog/article-contributi-formazione-berna-requisiti.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Persona consulta una domanda per la formazione continua nel Canton Berna."
