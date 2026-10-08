@@ -26301,7 +26301,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'contributi-formazione-berna-requisiti',
     category: 'pratico',
     date: '2026-10-08T00:53:16.011Z',
-    image: '/images/blog/apprendistato-formazione-professionale-canton-berna.webp',
+    image: '/images/blog/article-contributi-formazione-berna-requisiti.webp',
     hasCalculator: true,
     articleType: 'evergreen',
     canton: ['BE'],
