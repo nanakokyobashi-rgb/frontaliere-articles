@@ -474,6 +474,42 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
   }
 });
 
+test('refreshDescriptiveTexts: un writer staged che possiede già il lock lo conserva fino al commit esterno', () => {
+  const root = syntheticCorpus();
+  const lockPath = registerLockPath(root, 'frontaliere');
+  const staged = new Map();
+  try {
+    fs.mkdirSync(path.dirname(lockPath), { recursive: true });
+    fs.writeFileSync(lockPath, JSON.stringify({
+      kind: 'article-refresh',
+      id: 'article-refresh:pharmacy-evergreen',
+      section: 'frontaliere',
+      pid: process.pid,
+      runId: null,
+      runAttempt: null,
+      workflow: null,
+      startedAt: new Date().toISOString(),
+    }));
+    refreshDescriptiveTexts(
+      'demo-id',
+      { it: { excerpt: 'Estratto sotto transazione esterna' } },
+      { description: 'SERP sotto transazione esterna' },
+      {
+        repoRoot: root,
+        writeFile(file, content) { staged.set(file, content); },
+      },
+    );
+    assert.ok(staged.size > 0, 'il writer staged deve comunque ricevere gli aggiornamenti');
+    assert.equal(
+      fs.existsSync(lockPath),
+      true,
+      'il lock posseduto dal chiamante deve restare fino al commit o rollback esterno',
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('refreshDescriptiveTexts: un secondo giro con gli stessi testi non scrive niente (changed: false)', () => {
   const root = syntheticCorpus();
   try {

@@ -8,6 +8,10 @@
  */
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
+import {
+  DETERMINISTIC_CARD_KIND,
+  DETERMINISTIC_CARD_LICENSE_URL,
+} from './deterministic-card-provenance.mjs';
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const SEO_TIME_ZONE = 'Europe/Zurich';
@@ -100,6 +104,13 @@ function imageRightsLines(provenance) {
     throw new Error('SEO entry requires a governed image provenance record');
   }
   if (provenance.kind === 'wikimedia-commons') return '';
+  if (provenance.kind === DETERMINISTIC_CARD_KIND) {
+    return `\n        "acquireLicensePage": ${jsonValue(DETERMINISTIC_CARD_LICENSE_URL)},`
+      + '\n        "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",'
+      + `\n        "license": ${jsonValue(DETERMINISTIC_CARD_LICENSE_URL)},`
+      + '\n        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },'
+      + `\n        "creditText": ${jsonValue(record.credit)},`;
+  }
   if (provenance.kind === 'generated') {
     return `\n        "acquireLicensePage": ${jsonValue(record.licenseUrl)},`
       + `\n        "copyrightNotice": "Generated media; provider terms apply.",`

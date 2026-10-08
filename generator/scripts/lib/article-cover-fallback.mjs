@@ -59,11 +59,11 @@ export function applyHeroProvenance(data, imagePath, provenance) {
  * queueing there could leave a retry for a document that later failed a
  * validation and was never published.
  */
-export function queueArticleCoverRegeneration(root, data) {
+export function queueArticleCoverRegeneration(root, data, { append = appendImageRegenerationQueue } = {}) {
   const request = data?._imageRegenerationRequest;
   if (!request) return false;
   try {
-    return appendImageRegenerationQueue(root, request);
+    return append === appendImageRegenerationQueue ? append(root, request) : append(request);
   } finally {
     delete data._imageRegenerationRequest;
   }

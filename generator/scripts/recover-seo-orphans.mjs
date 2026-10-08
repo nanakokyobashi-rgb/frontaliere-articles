@@ -25,7 +25,7 @@ import { mergeQueueWithSnapshot } from './lib/seo-recovery-queue.mjs';
 import { deriveSeoMetadata } from './lib/seo-metadata-derivation.mjs';
 import { queueArticleCoverRegeneration, resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
 import { updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
-import { readImageRegenerationQueue, withImageRegenerationQueueLock } from './lib/image-regeneration-queue.mjs';
+import { withImageRegenerationQueueLock } from './lib/image-regeneration-queue.mjs';
 import {
   REGISTER_LOCK_KIND_SEO_RECOVERY,
   beginRegisterLock,
@@ -245,61 +245,69 @@ function run(idsFile, { dryRun = false } = {}) {
   let seoLockHeld = false;
   let registrationLockHeld = false;
   const written = createWriteLedger();
-  try {
-    // Acquire the recovery marker and the normal frontaliere registration lock
-    // before reading snapshots. Normal writers use the same section lock, so
-    // they cannot start between these reads and the SEO replacement.
-    beginSeoBackfillLock(ROOT, ids);
-    seoLockHeld = true;
-    beginRegisterLock(ROOT, `seo-orphan-recovery:${ids[0]}`, 'frontaliere', {
-      kind: REGISTER_LOCK_KIND_SEO_RECOVERY,
-    });
-    registrationLockHeld = true;
-
-    const before = fs.readFileSync(seoPath, 'utf8');
-    const registryBefore = fs.readFileSync(registryPath, 'utf8');
+  const queue = withImageRegenerationQueueLock(ROOT, ({ read, write, append }) => {
+    // The drain takes the global queue lock before its section lock. Keep the
+    // same order here and retain queue ownership through snapshots, writes,
+    // and rollback; otherwise a producer append could be included in this
+    // run's ledger and then be erased by restoreWrittenFiles().
     const queueBefore = fs.existsSync(queuePath) ? fs.readFileSync(queuePath, 'utf8') : null;
-    const queueSnapshot = queueBefore === null ? { schema: 1, items: [] } : JSON.parse(queueBefore);
+    const queueSnapshot = read();
     const recordQueue = () => {
       if (fs.existsSync(queuePath)) written.record(queuePath, queueBefore, fs.readFileSync(queuePath, 'utf8'));
     };
 
-    for (const { data } of fallbackEntries) {
-      const update = updateArticleImageInRegistry(ROOT, data.id, STATIC_FALLBACK_IMAGE);
-      if (update.nextText === undefined) throw new Error(`${data.id}: registry image update returned no text`);
-      if (update.changed) written.record(registryPath, registryBefore, update.nextText);
-    }
+    try {
+      // Acquire the recovery marker and the normal frontaliere registration lock
+      // before reading their snapshots. Normal writers use the same section
+      // lock, so they cannot start between these reads and the SEO replacement.
+      beginSeoBackfillLock(ROOT, ids);
+      seoLockHeld = true;
+      beginRegisterLock(ROOT, `seo-orphan-recovery:${ids[0]}`, 'frontaliere', {
+        kind: REGISTER_LOCK_KIND_SEO_RECOVERY,
+      });
+      registrationLockHeld = true;
 
-    let after = before;
-    for (const id of ids) {
-      const removal = removeSeoEntriesWithSeparator(after, id, {
-        findSeoEntryMatches,
-        removeSeoEntriesFromSource,
+      const before = fs.readFileSync(seoPath, 'utf8');
+      const registryBefore = fs.readFileSync(registryPath, 'utf8');
+
+      for (const { data } of fallbackEntries) {
+        const update = updateArticleImageInRegistry(ROOT, data.id, STATIC_FALLBACK_IMAGE);
+        if (update.nextText === undefined) throw new Error(`${data.id}: registry image update returned no text`);
+        if (update.changed) written.record(registryPath, registryBefore, update.nextText);
+      }
+
+      let after = before;
+      for (const id of ids) {
+        const removal = removeSeoEntriesWithSeparator(after, id, {
+          findSeoEntryMatches,
+          removeSeoEntriesFromSource,
+          fileLabel: SEO_FILE,
+        });
+        after = removal.src;
+      }
+      // At the head, not at the tail where the generator appends: see
+      // insertSeoEntriesAtHead.
+      after = insertSeoEntriesAtHead(after, entries.map(({ entry }) => entry), {
+        seoConstName: SEO_CONST_NAME,
         fileLabel: SEO_FILE,
       });
-      after = removal.src;
-    }
-    // At the head, not at the tail where the generator appends: see
-    // insertSeoEntriesAtHead.
-    after = insertSeoEntriesAtHead(after, entries.map(({ entry }) => entry), {
-      seoConstName: SEO_CONST_NAME,
-      fileLabel: SEO_FILE,
-    });
-    const invalidAfterWrite = ids.filter((id) => seoEntryCountAcrossChunks(ROOT, id, {
-      replacementPath: seoPath,
-      replacementSource: after,
-    }) !== 1);
-    if (invalidAfterWrite.length > 0) {
-      throw new Error(`SEO entry count across chunks after build is not one for: ${invalidAfterWrite.join(', ')}`);
-    }
-    writeTextAtomic(seoPath, after);
-    written.record(seoPath, before, after);
-    for (const { data } of fallbackEntries) {
-      const queued = queueArticleCoverRegeneration(ROOT, data);
-      recordQueue();
-      if (!queued) throw new Error(`${data.id}: unable to queue declared-cover regeneration`);
-    }
-    const queue = withImageRegenerationQueueLock(ROOT, ({ read, write }) => {
+      const invalidAfterWrite = ids.filter((id) => seoEntryCountAcrossChunks(ROOT, id, {
+        replacementPath: seoPath,
+        replacementSource: after,
+      }) !== 1);
+      if (invalidAfterWrite.length > 0) {
+        throw new Error(`SEO entry count across chunks after build is not one for: ${invalidAfterWrite.join(', ')}`);
+      }
+      writeTextAtomic(seoPath, after);
+      written.record(seoPath, before, after);
+      for (const { data } of fallbackEntries) {
+        // The outer queue lock makes this append synchronous with the rest of
+        // the recovery. Passing its operation avoids the normal short-lock
+        // wrapper (which would otherwise fall back to the pending log).
+        const queued = queueArticleCoverRegeneration(ROOT, data, { append });
+        recordQueue();
+        if (!queued) throw new Error(`${data.id}: unable to queue declared-cover regeneration`);
+      }
       const currentQueue = read();
       // Same items, other order: nothing the drain removed meanwhile comes back.
       const merged = mergeQueueWithSnapshot(queueSnapshot, currentQueue);
@@ -307,44 +315,46 @@ function run(idsFile, { dryRun = false } = {}) {
         write(merged);
         recordQueue();
       }
-      return merged;
-    });
-    const missingQueueItems = fallbackIds.filter((id) => !queue.items.some(
-      (item) => item?.articleId === id && item.fallbackImage === STATIC_FALLBACK_IMAGE,
-    ));
-    if (missingQueueItems.length > 0) {
-      throw new Error(`cover regeneration queue missing: ${missingQueueItems.join(', ')}`);
-    }
-    endRegisterLock(ROOT, 'frontaliere');
-    registrationLockHeld = false;
-    endSeoBackfillLock(ROOT);
-    seoLockHeld = false;
-  } catch (error) {
-    try {
-      // Only what this run wrote, and only where it is still what this run
-      // left: a file changed since holds someone else's work.
-      const { diverged } = restoreWrittenFiles(written.entries());
-      if (diverged.length === 0) {
-        if (registrationLockHeld) {
-          endRegisterLock(ROOT, 'frontaliere');
-          registrationLockHeld = false;
-        }
-        if (seoLockHeld) {
-          endSeoBackfillLock(ROOT);
-          seoLockHeld = false;
-        }
-      } else {
-        error.rollbackDiverged = diverged;
-        console.error(`Rollback SEO parziale: ${diverged.map((file) => path.relative(ROOT, file)).join(', ')} `
-          + 'è cambiato dopo la scrittura di questa run e non è stato ripristinato. '
-          + `I marker ${SEO_BACKFILL_LOCK_REL} e della registrazione restano al loro posto finché qualcuno non ha guardato.`);
+      const missingQueueItems = fallbackIds.filter((id) => !merged.items.some(
+        (item) => item?.articleId === id && item.fallbackImage === STATIC_FALLBACK_IMAGE,
+      ));
+      if (missingQueueItems.length > 0) {
+        throw new Error(`cover regeneration queue missing: ${missingQueueItems.join(', ')}`);
       }
-    } catch (rollbackError) {
-      error.rollbackError = rollbackError;
-      console.error(`Rollback SEO incompleto: ${rollbackError.message}`);
+      endRegisterLock(ROOT, 'frontaliere');
+      registrationLockHeld = false;
+      endSeoBackfillLock(ROOT);
+      seoLockHeld = false;
+      return merged;
+    } catch (error) {
+      try {
+        // Only what this run wrote, and only where it is still what this run
+        // left: a file changed afterwards holds someone else's work. The
+        // queue lock is still held here, so a concurrent append is in its
+        // pending log rather than in this ledger.
+        const { diverged } = restoreWrittenFiles(written.entries());
+        if (diverged.length === 0) {
+          if (registrationLockHeld) {
+            endRegisterLock(ROOT, 'frontaliere');
+            registrationLockHeld = false;
+          }
+          if (seoLockHeld) {
+            endSeoBackfillLock(ROOT);
+            seoLockHeld = false;
+          }
+        } else {
+          error.rollbackDiverged = diverged;
+          console.error(`Rollback SEO parziale: ${diverged.map((file) => path.relative(ROOT, file)).join(', ')} `
+            + 'è cambiato dopo la scrittura di questa run e non è stato ripristinato. '
+            + `I marker ${SEO_BACKFILL_LOCK_REL} e della registrazione restano al loro posto finché qualcuno non ha guardato.`);
+        }
+      } catch (rollbackError) {
+        error.rollbackError = rollbackError;
+        console.error(`Rollback SEO incompleto: ${rollbackError.message}`);
+      }
+      throw error;
     }
-    throw error;
-  }
+  });
 
   console.log(JSON.stringify({
     ids: ids.length,
@@ -356,7 +366,7 @@ function run(idsFile, { dryRun = false } = {}) {
     fallbackImage: STATIC_FALLBACK_IMAGE,
     fallbackIds,
     queuedCoverRegenerations: fallbackIds.length,
-    queueItemsAfterRecovery: readImageRegenerationQueue(ROOT).items.length,
+    queueItemsAfterRecovery: queue.items.length,
   }, null, 2));
 }
 

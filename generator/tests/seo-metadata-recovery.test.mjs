@@ -17,6 +17,7 @@ import {
 import { mergeQueueWithSnapshot } from '../scripts/lib/seo-recovery-queue.mjs';
 import { createWriteLedger, restoreWrittenFiles } from '../scripts/lib/seo-recovery-rollback.mjs';
 import { seoEntryCountAcrossChunks } from '../scripts/recover-seo-orphans.mjs';
+import { queueArticleCoverRegeneration } from '../scripts/lib/article-cover-fallback.mjs';
 import { SEO_BACKFILL_LOCK_REL, beginSeoBackfillLock, endSeoBackfillLock } from '../scripts/lib/seo-backfill-lock.mjs';
 import {
   IMAGE_REGENERATION_QUEUE_LOCK_REL,
@@ -110,6 +111,23 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
   });
   assert.match(generatedEntry, /"license": "https:\/\/openai\.com\/policies\/terms-of-use\/"/);
   assert.match(generatedEntry, /"url": `\$\{BASE_URL\}\/images\/places\/lugano-view\.webp`/);
+
+  const deterministic = article();
+  deriveSeoMetadata(deterministic);
+  const deterministicEntry = buildSeoEntry(deterministic, {
+    provenance: {
+      kind: 'deterministic-card',
+      record: { credit: 'frontaliereticino.ch', width: 1200, height: 675 },
+    },
+    publishedAt: toIsoWithTz(deterministic.date, { preserveExplicitOffset: false }),
+    modifiedAt: toIsoWithTz(deterministic.date, { preserveExplicitOffset: false }),
+  });
+  assert.match(
+    deterministicEntry,
+    /"license": "https:\/\/frontaliereticino\.ch\/termini-di-servizio\/#licenza-immagini"/,
+  );
+  assert.match(deterministicEntry, /Deterministic media produced by frontaliereticino\.ch\./);
+  assert.match(deterministicEntry, /"creditText": "frontaliereticino\.ch"/);
 });
 
 test('le date senza orario usano mezzogiorno Europe/Zurich con il cambio DST dichiarato', () => {
@@ -215,6 +233,34 @@ const queueItem = (articleId, extra = {}) => ({
   articleId, title: `Title of ${articleId}`, fallbackImage: '/images/places/lugano-view.webp', reason: 'fixture', status: 'queued', failureCount: 0, ...extra,
 });
 const queueText = (items) => `${JSON.stringify({ schema: 1, items }, null, 2)}\n`;
+
+test('queueArticleCoverRegeneration può usare l append già protetto dal lock esterno', () => {
+  const request = queueItem('held-queue-item');
+  const data = { _imageRegenerationRequest: request };
+  const calls = [];
+  const queued = queueArticleCoverRegeneration('/unused', data, {
+    append(item) {
+      calls.push(item);
+      return true;
+    },
+  });
+
+  assert.equal(queued, true);
+  assert.deepEqual(calls, [request]);
+  assert.equal(data._imageRegenerationRequest, undefined, 'la richiesta deve essere consumata anche nel percorso sotto lock');
+});
+
+test('la recovery detiene il lock coda mentre registra le mutazioni della transazione', () => {
+  const source = fs.readFileSync(
+    new URL('../scripts/recover-seo-orphans.mjs', import.meta.url),
+    'utf8',
+  );
+  assert.match(
+    source,
+    /const queue = withImageRegenerationQueueLock\(ROOT, \(\{ read, write, append \}\) => \{/,
+  );
+  assert.match(source, /queueArticleCoverRegeneration\(ROOT, data, \{ append \}\)/);
+});
 
 test('mergeQueueWithSnapshot mette le voci nuove prima dell\'ultima che c\'era', () => {
   const snapshot = { schema: 1, items: [queueItem('a'), queueItem('b'), queueItem('c')] };
