@@ -4408,8 +4408,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e0dd9e80deb4a97a",
-        "corpus": "e0dd9e80deb4a97a",
+        "site": "22923156b7911ee8",
+        "corpus": "22923156b7911ee8",
         "alignedAt": "2026-10-08"
       }
     },
@@ -4419,8 +4419,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
       "baseline": {
-        "site": "dab3689b68091217",
-        "corpus": "dab3689b68091217",
+        "site": "83fcfd40e648fe48",
+        "corpus": "83fcfd40e648fe48",
         "alignedAt": "2026-10-08"
       }
     },
@@ -4526,7 +4526,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "c55356163b8d2f9d",
+        "corpus": "263971b74f68f4df",
         "alignedAt": "2026-10-07"
       }
     },
@@ -5776,6 +5776,16 @@
       "path": "generator/scripts/lib/atomic-write-text.mjs",
       "mode": "corpus-only",
       "reason": "Scrittura atomica di un file di testo (file temporaneo accanto alla destinazione, poi rename) per il recupero delle voci SEO: un chunk `content/seo/seo-blog-N.ts` interrotto a metà non deve restare sul disco. Lo usa solo `generator/scripts/recover-seo-orphans.mjs`; il sito non esegue il generatore e non scrive i chunk SEO.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/corpus-fabricated-institution-names.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia corpus-only per i nomi di istituzioni inventate già confermati: la stessa lista alimenta il gate di generazione e la scansione del corpus pubblicato. Il sito consuma il JSON via HTTP e non esegue questo modulo del generatore.",
       "baseline": {
         "site": null,
         "corpus": null,

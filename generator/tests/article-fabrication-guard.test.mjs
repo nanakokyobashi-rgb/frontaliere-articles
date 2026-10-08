@@ -48,6 +48,7 @@ import {
   FABRICATED_INSTITUTION_ACRONYMS,
   checkFabricatedInstitutionAcronyms,
 } from '../scripts/lib/article-factuality-gates.mjs';
+import { checkCorpusFabricatedInstitutionNames } from '../scripts/lib/corpus-fabricated-institution-names.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 // Dal core (sezioni attive), come ogni altro elenco di radici dei corpi.
@@ -189,6 +190,120 @@ function unescapeTsString(text) {
   return text.replace(/\\n/g, '\n').replace(/\\(['"\\])/g, '$1');
 }
 
+// Osservatore di classe: nei corpi italiani di blog-body-ch, «Ufficio
+// federale …» è un candidato valido solo se il nome compare nell’elenco
+// curato degli uffici federali svizzeri. I candidati non elencati non sono
+// tutti falsi per definizione: il test li misura e impedisce che la classe
+// cresca in silenzio, lasciando la verifica editoriale al triage.
+const SWISS_FEDERAL_OFFICE_NAMES = [
+  "Ufficio federale dell'agricoltura",
+  "Ufficio federale dell'ambiente",
+  "Ufficio federale dell'armamento",
+  "Ufficio federale dell'aviazione civile",
+  "Ufficio federale dell'energia",
+  "Ufficio federale dell'informatica e della telecomunicazione",
+  "Ufficio federale della cibersicurezza",
+  "Ufficio federale della comunicazione",
+  "Ufficio federale della cultura",
+  "Ufficio federale della dogana e della sicurezza dei confini",
+  "Ufficio federale della formazione professionale e della tecnologia",
+  "Ufficio federale della migrazione",
+  "Ufficio federale della proprietà intellettuale",
+  "Ufficio federale della protezione della popolazione",
+  "Ufficio federale della sanità pubblica",
+  "Ufficio federale della sicurezza alimentare e di veterinaria",
+  "Ufficio federale della statistica",
+  "Ufficio federale delle abitazioni",
+  "Ufficio federale delle assicurazioni sociali",
+  "Ufficio federale delle comunicazioni",
+  "Ufficio federale delle costruzioni e della logistica",
+  "Ufficio federale delle dogane",
+  "Ufficio federale delle migrazioni",
+  "Ufficio federale delle strade",
+  "Ufficio federale dei trasporti",
+  "Ufficio federale di giustizia",
+  "Ufficio federale di meteorologia",
+  "Ufficio federale di meteorologia e climatologia",
+  "Ufficio federale di polizia",
+  "Ufficio federale di statistica",
+  "Ufficio federale di topografia",
+  "Ufficio federale del personale",
+  "Ufficio federale del servizio civile",
+  "Ufficio federale dello sport",
+  "Ufficio federale per l'approvvigionamento economico",
+  "Ufficio federale per l'armamento",
+  "Ufficio federale per la formazione professionale e la tecnologia",
+  "Ufficio federale per la migrazione",
+  "Ufficio federale per la parità fra donna e uomo",
+  "Ufficio federale per la protezione dei dati e la trasparenza",
+  "Ufficio federale per la protezione della popolazione",
+  "Ufficio federale per la sicurezza alimentare e di veterinaria",
+  "Ufficio federale per la sicurezza informatica",
+  "Ufficio federale per le pari opportunità",
+  "Ufficio federale per le questioni spaziali",
+  "Ufficio federale per lo sviluppo territoriale",
+  "Ufficio federale per l'uguaglianza fra donna e uomo",
+].map(normalizeObserverText);
+
+const FOREIGN_MINISTRY_MARKER = /\b(?:italian[oa]|frances[ei]|francese|tedesc[oa]|austriac[oa]|europe[oa]|spagnol[oa]|britannic[oa]|belg[ia]|olandese|portoghes[ei]|statunitens[ei]|american[oa])\b/i;
+
+function normalizeObserverText(text) {
+  return text
+    .replace(/[’']/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLocaleLowerCase('it-CH');
+}
+
+function scanSwissInstitutionCandidates(entries) {
+  const unlistedOfficeIds = new Set();
+  const unlistedMinistryIds = new Set();
+  const officeRe = /\bUfficio federale\b[^.!?;\n]{0,100}/gi;
+  const ministryRe = /\bMinistero\b[^.!?;\n]{0,100}/gi;
+
+  for (const entry of entries) {
+    const text = unescapeTsString(entry.text);
+    for (const match of text.matchAll(officeRe)) {
+      const candidate = normalizeObserverText(match[0])
+        .replace(/\s+\([^)]*\).*/, '')
+        .trim();
+      if (!SWISS_FEDERAL_OFFICE_NAMES.some((name) => candidate.startsWith(name))) {
+        unlistedOfficeIds.add(entry.id);
+      }
+    }
+    for (const match of text.matchAll(ministryRe)) {
+      const candidate = normalizeObserverText(match[0]);
+      if (
+        !/^ministero pubblico della confederazione\b/i.test(candidate)
+        && !FOREIGN_MINISTRY_MARKER.test(candidate)
+      ) {
+        unlistedMinistryIds.add(entry.id);
+      }
+    }
+  }
+
+  const overlap = [...unlistedOfficeIds].filter((id) => unlistedMinistryIds.has(id)).length;
+  return {
+    filesScanned: entries.length,
+    unlistedOfficeArticles: unlistedOfficeIds.size,
+    unlistedSwissMinistryArticles: unlistedMinistryIds.size,
+    candidateArticles: new Set([...unlistedOfficeIds, ...unlistedMinistryIds]).size,
+    overlap,
+  };
+}
+
+// Baseline captured immediately before issue #2522 was rewritten. The
+// original cassis-duedingen body contributed one office and one ministry
+// candidate to this observer; the counts are a ratchet, not an expectation
+// that every candidate is already confirmed as fabricated.
+const SWISS_INSTITUTION_OBSERVER_BASELINE = Object.freeze({
+  filesScanned: 2641,
+  unlistedOfficeArticles: 98,
+  unlistedSwissMinistryArticles: 70,
+  candidateArticles: 164,
+  overlap: 4,
+});
+
 function localeFabricatedInstitutions(locale, text) {
   const noun = LOCALE_INSTITUTION_NOUN[locale];
   if (!noun) return [];
@@ -206,6 +321,9 @@ describe('article fabrication guard', () => {
   const itFiles = files.filter((f) => f.locale === 'it');
   // Il testo estratto è riusato da 4 classi di pattern: una lettura sola.
   const itTexts = itFiles.map((f) => ({ id: f.id, text: extractTextContent(f.path) }));
+  const swissChItTexts = files
+    .filter((f) => f.id.startsWith('blog-body-ch/it/'))
+    .map((f) => ({ id: f.id, text: extractTextContent(f.path) }));
 
   it('should have blog body files to check (a sparse checkout must NOT pass vacuously)', () => {
     expect(itFiles.length).toBeGreaterThan(3000);
@@ -240,6 +358,30 @@ describe('article fabrication guard', () => {
     expect(offenders).toEqual([]);
   });
 
+  it('no body names the issue #2522 fabricated institutions in any locale', () => {
+    const offenders = [];
+    for (const f of files) {
+      for (const issue of checkCorpusFabricatedInstitutionNames(
+        unescapeTsString(extractTextContent(f.path)),
+      )) {
+        offenders.push(f.id + ': ' + issue.evidence);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it('the corpus institution guard recognises each translated #2522 alias', () => {
+    const fixtures = [
+      'Ufficio federale per la politica estera (UPEP), Istituto federale di statistica (IFS), Ministero dell’agricoltura, dell’ambiente e dello spazio',
+      'Federal Office for Foreign Policy (UPEP) and Swiss Federal Statistical Office (IFS)',
+      'Bundesamt für Außenpolitik (UPEP) und Bundesamt für Statistik (IFS)',
+      'Office fédéral de la politique étrangère (UPEP) et Office fédéral de la statistique (IFS)',
+    ];
+    for (const fixture of fixtures) {
+      expect(checkCorpusFabricatedInstitutionNames(fixture).length).toBeGreaterThan(0);
+    }
+  });
+
   it('no en/de/fr body names an institution in the generator curated denylist', () => {
     const offenders = [];
     for (const f of files) {
@@ -258,6 +400,34 @@ describe('article fabrication guard', () => {
     // Real bodies and acronyms outside the denylist stay clean.
     expect(localeFabricatedInstitutions('en', 'the Federal Tax Administration (AFC) publishes')).toEqual([]);
     expect(localeFabricatedInstitutions('de', 'das Bundesamt für Gesundheit (BAG) publiziert')).toEqual([]);
+  });
+
+  it('the Swiss institution observer distinguishes allowlisted and suspicious names', () => {
+    const report = scanSwissInstitutionCandidates([
+      {
+        id: 'invented',
+        text: 'Ufficio federale per la politica estera (UPEP). Ministero dell’agricoltura, dell’ambiente e dello spazio.',
+      },
+      {
+        id: 'real',
+        text: 'Ufficio federale di statistica (UST). Ministero pubblico della Confederazione.',
+      },
+      {
+        id: 'foreign',
+        text: 'Ministero della Salute italiana.',
+      },
+    ]);
+    expect(report.unlistedOfficeArticles).toBe(1);
+    expect(report.unlistedSwissMinistryArticles).toBe(1);
+  });
+
+  it('measures unlisted Swiss institution candidates without allowing class growth', () => {
+    const report = scanSwissInstitutionCandidates(swissChItTexts);
+    expect(report.filesScanned).toBeGreaterThan(2600);
+    expect(report.unlistedOfficeArticles <= SWISS_INSTITUTION_OBSERVER_BASELINE.unlistedOfficeArticles).toBeTruthy();
+    expect(report.unlistedSwissMinistryArticles <= SWISS_INSTITUTION_OBSERVER_BASELINE.unlistedSwissMinistryArticles).toBeTruthy();
+    expect(report.candidateArticles <= SWISS_INSTITUTION_OBSERVER_BASELINE.candidateArticles).toBeTruthy();
+    expect(report.overlap <= SWISS_INSTITUTION_OBSERVER_BASELINE.overlap).toBeTruthy();
   });
 
   it('no known incorrect facts in any IT body', () => {

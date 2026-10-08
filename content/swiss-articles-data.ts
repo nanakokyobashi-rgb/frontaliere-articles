@@ -26472,6 +26472,27 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzera-soldi-delusione-lavoro',
+    category: 'pratico',
+    date: '2026-10-08T20:19:18.281Z',
+    image: '/images/blog/article-svizzera-soldi-delusione-lavoro.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'linea-ginevra-friburgo-pressione',
+    category: 'novita',
+    date: '2026-10-08T21:08:07.621Z',
+    image: '/images/blog/article-linea-ginevra-friburgo-pressione.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['FR', 'GE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

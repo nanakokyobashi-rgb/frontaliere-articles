@@ -736,7 +736,7 @@ function siteReusablePins(source, { siteRepo = SITE_DEFAULT_REPO } = {}) {
  * Verdetto PURO su un pin. `pinnedHash`/`headHash` sono gli hash del workflow
  * al ref pinnato e a `siteRef`; `null` = il file non esiste a quel ref.
  */
-function reusablePinVerdict({ sitePath, ref, pinnedHash = null, headHash = null, siteRef = SITE_DEFAULT_REF }) {
+function reusablePinVerdict({ sitePath, ref, pinnedHash = null, headHash = null, reachable = true, siteRef = SITE_DEFAULT_REF }) {
   const bump = `Porta il pin allo SHA completo dell'ultimo commit di \`${siteRef}\` che ha toccato \`${sitePath}\` (\`git log origin/${siteRef} -1 --format=%H -- ${sitePath}\`).`;
   if (!FULL_COMMIT_SHA_RE.test(ref || '')) {
     return {
@@ -752,6 +752,19 @@ function reusablePinVerdict({ sitePath, ref, pinnedHash = null, headHash = null,
       actionable: true,
       headline: `\`${sitePath}\` non esiste piu' su \`${siteRef}\` del sito`,
       detail: `Il pin \`${ref.slice(0, 12)}\` continua a eseguire un workflow che il sito ha rimosso o rinominato: il caller va riportato al nuovo path, o ritirato.`,
+    };
+  }
+  // Prima del confronto fra i contenuti: un commit orfano puo' servire lo stesso
+  // identico file di `siteRef`, e il pin non parte lo stesso.
+  if (reachable === false) {
+    return {
+      state: REUSABLE_PIN_STATE,
+      actionable: true,
+      headline: `il commit pinnato \`${ref.slice(0, 12)}\` non e' piu' raggiungibile da \`${siteRef}\` del sito`,
+      detail:
+        `GitHub Actions non risolve un workflow riusabile a un commit che nessun ramo raggiunge: il caller finisce in ` +
+        `\`startup_failure\`, senza job e senza log. Che \`${sitePath}\` sia ancora leggibile a quello SHA non conta ` +
+        `(2026-10-08, dopo la riscrittura della storia del sito: file identico a \`${siteRef}\`, run 37771757158 e 37834218606 mai partite). ${bump}`,
     };
   }
   if (pinnedHash === null) {
@@ -788,10 +801,20 @@ function localWorkflowSources() {
 /**
  * Una riga di report per ogni pin. `readSite(sitePath, ref)` e' iniettata: in
  * CLI e' `siteFile`, nei test una tabella — nessuna rete nei guard.
+ *
+ * `isReachable(ref)` risponde alla domanda che i contenuti non sanno porre: quel
+ * commit e' ancora antenato di `siteRef`? In CLI e' `siteCommitReachable`; senza,
+ * il pin e' giudicato solo sui contenuti, come prima del 2026-10-08.
  */
-async function reusablePinResults({ workflows, readSite, siteRepo = SITE_REPO, siteRef = SITE_REF }) {
+async function reusablePinResults({ workflows, readSite, isReachable = null, siteRepo = SITE_REPO, siteRef = SITE_REF }) {
   const out = [];
   const headCache = new Map();
+  const reachCache = new Map();
+  const reachableFromSiteRef = async (ref) => {
+    if (!isReachable) return true;
+    if (!reachCache.has(ref)) reachCache.set(ref, await isReachable(ref));
+    return reachCache.get(ref);
+  };
   const hashAt = async (sitePath, ref) => {
     const bytes = await readSite(sitePath, ref);
     return bytes === null ? null : sha256(bytes);
@@ -801,11 +824,13 @@ async function reusablePinResults({ workflows, readSite, siteRepo = SITE_REPO, s
       const row = { path: wf.path, mode: 'reusable-pin', sitePath: pin.sitePath, ref: pin.ref };
       try {
         let hashes = {};
+        let reachable = true;
         if (FULL_COMMIT_SHA_RE.test(pin.ref)) {
           if (!headCache.has(pin.sitePath)) headCache.set(pin.sitePath, await hashAt(pin.sitePath, siteRef));
           hashes = { headHash: headCache.get(pin.sitePath), pinnedHash: await hashAt(pin.sitePath, pin.ref) };
+          reachable = await reachableFromSiteRef(pin.ref);
         }
-        out.push({ ...row, ...reusablePinVerdict({ ...pin, ...hashes, siteRef }), hashes });
+        out.push({ ...row, ...reusablePinVerdict({ ...pin, ...hashes, reachable, siteRef }), hashes, reachable });
       } catch (e) {
         // PROCEED-SAFE: come nel ciclo principale, una lettura fallita non e'
         // un verdetto. Resta visibile come `check-failed`, mai un falso rosso.
@@ -1316,6 +1341,23 @@ async function siteBlobIndex() {
     else index.set(node.sha, [node.path]);
   }
   return { status: 'ok', index, shaByPath, treeSha: tree.sha || null };
+}
+
+/**
+ * `ref` e' antenato di `SITE_REF`? `compare/<ref>...<SITE_REF>` conta in
+ * `behind_by` i commit di `ref` che `SITE_REF` non ha: zero vuol dire antenato.
+ * Un 404 e' un commit che il repo non conosce, e nemmeno quello si risolve.
+ * Qualunque altro esito (rate limit, 5xx) e' una lettura fallita, non un
+ * verdetto: lo decide il chiamante.
+ */
+async function siteCommitReachable(ref) {
+  const url = `https://api.github.com/repos/${SITE_REPO}/compare/${ref}...${encodeURIComponent(SITE_REF)}?per_page=1`;
+  const res = await rawFetch(url, { Accept: 'application/vnd.github+json' });
+  if (res.status === 404) return false;
+  if (!res.ok) throw new Error(`compare ${ref.slice(0, 12)}...${SITE_REF} → HTTP ${res.status}`);
+  const payload = await res.json();
+  if (typeof payload?.behind_by !== 'number') throw new Error(`compare ${ref.slice(0, 12)}...${SITE_REF}: risposta senza behind_by`);
+  return payload.behind_by === 0;
 }
 
 /** Rilegge il blob autorevole del tree, non la risposta raw/CDN. */
@@ -2353,7 +2395,11 @@ async function main() {
 
   // I pin dei workflow riusabili del sito: non sono voci del manifest (non
   // esiste una copia locale), ma la rete per leggerli e' gia' qui.
-  results.push(...await reusablePinResults({ workflows: localWorkflowSources(), readSite: siteFile }));
+  results.push(...await reusablePinResults({
+    workflows: localWorkflowSources(),
+    readSite: siteFile,
+    isReachable: siteCommitReachable,
+  }));
 
   const actionable = results.filter((r) => r.actionable);
   const jsonReport = { siteRepo: SITE_REPO, siteRef: SITE_REF, alignedAt: manifest.alignedAt, results, actionable: actionable.length };

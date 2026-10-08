@@ -7940,6 +7940,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.richemont-montblanc-tagli.title': 'Richemont: a Montblanc 17 trasferimenti e 6 licenziamenti',
     'blog.article.richemont-montblanc-tagli.excerpt': 'Richemont trasferisce 17 dipendenti di Montblanc Sei collaboratori sono stati licenziati Unia segnala la crisi dell\'industria orologiera Termine Valore Azienda',
     'blog.article.richemont-montblanc-tagli.imageAlt': 'Atelier di orologeria a Le Locle nel quadro della crisi del settore',
+    'blog.article.svizzera-soldi-delusione-lavoro.title': 'Chi viene in Svizzera solo per i soldi rimane deluso',
+    'blog.article.svizzera-soldi-delusione-lavoro.excerpt': 'L\'80% dei posti vacanti è coperto da personale locale.',
+    'blog.article.svizzera-soldi-delusione-lavoro.imageAlt': 'Persona lavorante da casa con vista lago in Svizzera',
+    'blog.article.linea-ginevra-friburgo-pressione.title': 'Ginevra-Friburgo, una tratta ferroviaria sotto pressione',
+    'blog.article.linea-ginevra-friburgo-pressione.excerpt': 'Tredici interruzioni sulla linea dall\'inizio dell\'anno Oltre 150’000 passeggeri e più di 700 treni ogni giorno Cavi incendiati, binari danneggiati e un volatile',
+    'blog.article.linea-ginevra-friburgo-pressione.imageAlt': 'Convoglio svizzero in una stazione ferroviaria affollata',
 };
 
 export default blogMetaChIt;

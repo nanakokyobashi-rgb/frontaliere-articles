@@ -797,30 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.admin.ch/it/newnsb/denn9j7b-c4v": {
-      "section": "svizzera",
-      "ts": 1791310754920
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/campeggio-alpino-la-verzasca-si-prepara-al-cantiere--4140344.html": {
-      "section": "frontaliere",
-      "ts": 1791320181309
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955098/il-governo-si-opponga-al-progetto-autostradale-meme": {
-      "section": "frontaliere",
-      "ts": 1791320350484
-    },
-    "frontaliere::https://www.laregione.ch/svizzera/svizzera/1955125/jessica-moretti-chiede-l-indennita-per-infortunio-sul-lavoro": {
-      "section": "frontaliere",
-      "ts": 1791320403933
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1955088/lavori-a-breno-otto-notti-di-sbarramenti-all-incrocio-inferiore": {
-      "section": "frontaliere",
-      "ts": 1791321480193
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-a-materia-le-offerte-di-lavoro-di-questa-settimana-in-provincia-di-varese-8/2700241": {
-      "section": "frontaliere",
-      "ts": 1791326568954
-    },
     "frontaliere::https://www.laregione.ch/cantone/ticino/1954599/mirante-avanti-con-ticino-lavoro-punta-a-un-seggio-in-governo": {
       "section": "frontaliere",
       "ts": 1791326608729
@@ -1136,6 +1112,42 @@
     "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/cronaca-20/articolo/frode-fiscale-internazionale-blitz-della-guardia-di-finanza-di-varese-sei-misure-cautelari-e-beni.html": {
       "section": "frontaliere",
       "ts": 1791482989872
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1955658/la-manifattura-va-meglio-del-previsto-le-banche-reggono-ma-cala-l-occupazione": {
+      "section": "frontaliere",
+      "ts": 1791490044037
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/fotovoltaico-industriale-a-brunello-il-solar-wellness-day-di-elmec-focus-su-sicurezza-manutenzione-e-accumulo/2702671": {
+      "section": "frontaliere",
+      "ts": 1791491712997
+    },
+    "frontaliere::https://www.tio.ch/sport/hockey/1955641/fischer-xhaka-squalificato-stato-certificato-multa": {
+      "section": "frontaliere",
+      "ts": 1791491904793
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955098/il-governo-si-opponga-al-progetto-autostradale-meme": {
+      "section": "frontaliere",
+      "ts": 1791494209714
+    },
+    "svizzera::https://www.rsi.ch/s/4136096": {
+      "section": "svizzera",
+      "ts": 1791495264173
+    },
+    "svizzera::https://www.rsi.ch/s/4146464": {
+      "section": "svizzera",
+      "ts": 1791495281413
+    },
+    "svizzera::https://www.swissinfo.ch/ita/olma%3a-parmelin-inaugura-fiera-agricola%2c-ma-%22vivienne%22-%c3%a8-scontenta/92186973": {
+      "section": "svizzera",
+      "ts": 1791495299262
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1955614/svizzera-popolazioni-specie-paradiso-wwf": {
+      "section": "svizzera",
+      "ts": 1791499390049
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/denn9j7b-c4v": {
+      "section": "svizzera",
+      "ts": 1791499400466
     }
   }
 }

@@ -410,6 +410,26 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T18:18:38.698Z",
       "lastFailureAt": "2026-10-08T18:18:38.698Z"
+    },
+    {
+      "articleId": "cardano-al-campo-minorenne-arresto",
+      "title": "Cardano al Campo: minorenne arrestato con hashish",
+      "fallbackImage": "/images/blog/article-domodossola-arresto-hashish-stazione.webp",
+      "reason": "All image providers failed for article-cardano-al-campo-minorenne-arresto: openai-codex (vision gate rejected image: Original generic illustration with clearly recognizable foregro",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T23:26:42.049Z",
+      "lastFailureAt": "2026-10-08T23:26:42.049Z"
+    },
+    {
+      "articleId": "uri-chiusura-passhoehe",
+      "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
+      "fallbackImage": "/images/blog/article-strada-calanca-chiusura-preventiva.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T23:39:16.220Z",
+      "lastFailureAt": "2026-10-08T23:39:16.220Z"
     }
   ]
 }

@@ -1,14 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/7nsivjh5sfhl": {
-    "articleId": "ddps-thun-difesa-innovazione",
-    "ts": "2026-09-07T07:16:24.359Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/info/scienza-e-tecnologia/%e2%80%9cognuno-dovrebbe-essere-un-hacker%e2%80%9d--4060386.html": {
-    "articleId": "cybersecurity-casa-data-center",
-    "ts": "2026-09-07T07:24:43.961Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/ofsdv0mm5gua": {
     "articleId": "mercato-lavoro-svizzera-agosto-2026",
     "ts": "2026-09-07T07:38:19.064Z",
@@ -2497,6 +2487,16 @@
   "https://www.tio.ch/svizzera/economia/1955632/montblanc-richemont-crisi-orologi-industria": {
     "articleId": "richemont-montblanc-tagli",
     "ts": "2026-10-08T18:19:40.015Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/chi-viene-in-svizzera-solo-per-i-soldi-rimane-deluso/92172169": {
+    "articleId": "svizzera-soldi-delusione-lavoro",
+    "ts": "2026-10-08T20:19:18.628Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4146368": {
+    "articleId": "linea-ginevra-friburgo-pressione",
+    "ts": "2026-10-08T21:08:07.972Z",
     "keyForm": 2
   }
 }

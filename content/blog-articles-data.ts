@@ -43254,6 +43254,26 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'trofeo-rodero-corsa-piede-oro',
+ category: 'novita',
+ date: '2026-10-08T20:50:29.394Z',
+ image: '/images/blog/article-trofeo-rodero-corsa-piede-oro.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'cardano-al-campo-minorenne-arresto',
+ category: 'novita',
+ date: '2026-10-08T23:26:41.689Z',
+ image: '/images/blog/article-domodossola-arresto-hashish-stazione.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

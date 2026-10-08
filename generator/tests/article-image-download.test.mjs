@@ -16,6 +16,7 @@ import {
   rewriteDownloadedImageFiles,
   rewriteDownloadedImageRefs,
 } from '../../scripts/lib/article-render-pipeline.mjs';
+import { STATIC_FALLBACK_IMAGE } from '../scripts/lib/blog-image-registry.mjs';
 
 function response({ status = 200, type = 'image/webp', body = Buffer.from('image') } = {}) {
   return {
@@ -94,6 +95,28 @@ test('le immagini scaricate vengono riscritte anche in ogni pagina aggregata pro
     assert.equal(fs.readFileSync(path.join(distDir, untouched), 'utf8'), '<img src="/images/places/recovered.webp">');
   } finally {
     fs.rmSync(distDir, { recursive: true, force: true });
+  }
+});
+
+test('il fallback statico posseduto dal sito non è un upload mancante', () => {
+  const rootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-image-site-owned-'));
+  const missing = [];
+  const realConsoleLog = console.log;
+  try {
+    console.log = () => {};
+    assert.deepEqual(
+      heroCdnUploads({
+        rootDir,
+        entries: [{ img: STATIC_FALLBACK_IMAGE }],
+        htmlPages: [{ html: `<img src="${STATIC_FALLBACK_IMAGE}">` }],
+        missing,
+      }),
+      [],
+    );
+    assert.deepEqual(missing, []);
+  } finally {
+    console.log = realConsoleLog;
+    fs.rmSync(rootDir, { recursive: true, force: true });
   }
 });
 
