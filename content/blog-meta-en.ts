@@ -12775,6 +12775,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.festival-racconto-varese-ottobre.title': 'Storytelling Festival: two events in Varese',
     'blog.article.festival-racconto-varese-ottobre.excerpt': '## In brief - Two cultural events at Varese on 9 and 11 October - Dante at the centre of Friday\'s meeting at 5:30 pm - Three unpublished stories by Carlo',
     'blog.article.festival-racconto-varese-ottobre.imageAlt': 'Villa Recalcati in Varese hosting the Festival del Racconto',
+    'blog.article.luvinate-progetto-motorio-materna.title': 'Luvinate: motor skills project launches at the preschool',
+    'blog.article.luvinate-progetto-motorio-materna.excerpt': '## TL;DR - At Luvinate the motor project 26-27 begins - The school collaborates with Varese Basket School - The program is aimed at the children of the School',
+    'blog.article.luvinate-progetto-motorio-materna.imageAlt': 'Children playing outdoors at a kindergarten',
 };
 
 export default blogMetaEn;
