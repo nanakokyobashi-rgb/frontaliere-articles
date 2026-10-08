@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-salario-minimo-ginevra-2027.webp",
-      "sha256": "6e4a9840763f51e139ae39e8eb0a5718250daa9c94735cfbbf59841f3f6845bc"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-salario-minimo-ginevra-2027-480w.webp",
-      "sha256": "0653592b8ea88f2342bd0c1a3c3987e271e2dbfe8d41d1e520be14d9d278e3d5"
-    }
-  ]
+  "items": []
 }
