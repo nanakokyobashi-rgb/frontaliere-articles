@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-cdhr-frontalieri-vaud-2026': {
     title: 'CDHR: quando i frontalieri francesi pagano l\'acconto del 95%',
-    description: '## In breve - La CDHR mira a un\'imposizione minima del 20% - Il reddito fiscale di riferimento determina il perimetro - Le soglie indicate sono 250.000',
+    description: 'La CDHR mira a un\'imposizione minima del 20%',
     keywords: 'frontalieri, ticino, svizzera, italia, cdhr, quando, francesi, pagano',
     ogTitle: 'CDHR frontalieri francesi: soglie 250‑500k€ e acconto 95%',
-    ogDescription: '## In breve - La CDHR mira a un\'imposizione minima del 20% - Il reddito fiscale di riferimento determina il perimetro - Le soglie indicate sono 250.000',
+    ogDescription: 'La CDHR mira a un\'imposizione minima del 20%',
     canonicalPath: '/articoli-vaud/cdhr-frontalieri-vaud-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "CDHR: quando i frontalieri francesi pagano l'acconto del 95%",
-      "description": "## In breve - La CDHR mira a un'imposizione minima del 20% - Il reddito fiscale di riferimento determina il perimetro - Le soglie indicate sono 250.000",
+      "description": "La CDHR mira a un'imposizione minima del 20%",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-cdhr-frontalieri-vaud-2026.webp`,
@@ -111,16 +111,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-morges-mobilita-consultazione-2045': {
     title: 'Morges: le richieste sulla mobilità al 2045 | Frontaliere Ticino',
-    description: '## In breve - Morges interviene nella consultazione federale «Transports ’45» - Quasi metà della popolazione vive oltre i limiti di rumore - Circa 115\'000',
+    description: 'Morges interviene nella consultazione federale «Transports ’45»',
     keywords: 'frontalieri, ticino, svizzera, italia, morges, richieste, sulla, mobilità',
     ogTitle: 'Morges: le richieste sulla mobilità al 2045',
-    ogDescription: '## In breve - Morges interviene nella consultazione federale «Transports ’45» - Quasi metà della popolazione vive oltre i limiti di rumore - Circa 115\'000',
+    ogDescription: 'Morges interviene nella consultazione federale «Transports ’45»',
     canonicalPath: '/articoli-vaud/morges-mobilita-consultazione-2045/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Morges: le richieste sulla mobilità al 2045",
-      "description": "## In breve - Morges interviene nella consultazione federale «Transports ’45» - Quasi metà della popolazione vive oltre i limiti di rumore - Circa 115'000",
+      "description": "Morges interviene nella consultazione federale «Transports ’45»",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -150,16 +150,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-vaud-budget-2027-revisione-12percento': {
     title: 'Vaud rivede il budget 2027 per coprire il buco dei 12%',
-    description: '## In breve - Minori entrate fiscali: 272 milioni di franchi - Risparmi complessivi: 165 milioni di franchi - Entrate aggiuntive: 172 milioni, tra BNS e riserve',
+    description: 'Minori entrate fiscali: 272 milioni di franchi',
     keywords: 'frontalieri, ticino, svizzera, italia, vaud, rivede, budget, coprire',
     ogTitle: 'Vaud rivede il budget 2027 per coprire il buco dei 12%',
-    ogDescription: '## In breve - Minori entrate fiscali: 272 milioni di franchi - Risparmi complessivi: 165 milioni di franchi - Entrate aggiuntive: 172 milioni, tra BNS e riserve',
+    ogDescription: 'Minori entrate fiscali: 272 milioni di franchi',
     canonicalPath: '/articoli-vaud/vaud-budget-2027-revisione-12percento/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Vaud rivede il budget 2027 per coprire il buco dei 12%",
-      "description": "## In breve - Minori entrate fiscali: 272 milioni di franchi - Risparmi complessivi: 165 milioni di franchi - Entrate aggiuntive: 172 milioni, tra BNS e riserve",
+      "description": "Minori entrate fiscali: 272 milioni di franchi",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

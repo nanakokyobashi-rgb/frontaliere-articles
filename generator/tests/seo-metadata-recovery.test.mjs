@@ -87,6 +87,27 @@ test('la recovery conserva seoDescription e ogDescription persistiti invece di d
   assert.equal(data.seo.ogDescription, data.content.it.ogDescription);
 });
 
+test('il builder SEO rifiuta Markdown anche nel percorso di recovery diretto', () => {
+  const data = article();
+  data.seo = {
+    title: 'Titolo',
+    description: '[testo][ref]',
+    keywords: 'frontalieri, ticino',
+    ogTitle: 'Titolo',
+    ogDescription: 'Descrizione social semplice.',
+    headline: 'Titolo',
+    breadcrumbName: 'Titolo',
+  };
+  assert.throws(
+    () => buildSeoEntry(data, {
+      provenance: { kind: 'wikimedia-commons', record: { width: 1200, height: 675 } },
+      publishedAt: data.date,
+      modifiedAt: data.date,
+    }),
+    /excerpt-plain.*seo\.description.*reference-link/,
+  );
+});
+
 test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback governato', () => {
   const commons = article();
   deriveSeoMetadata(commons);
@@ -128,6 +149,7 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
   );
   assert.match(deterministicEntry, /Deterministic media produced by frontaliereticino\.ch\./);
   assert.match(deterministicEntry, /"creditText": "frontaliereticino\.ch"/);
+
 });
 
 test('le date senza orario usano mezzogiorno Europe/Zurich con il cambio DST dichiarato', () => {

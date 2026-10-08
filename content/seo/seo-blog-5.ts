@@ -42645,7 +42645,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     description: '500 idee imprenditoriali nate in Lombardia: come il modello può ispirarci in Ticino. Formazione, permessi e fiscalità per frontalieri. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, startup, scuola, opportunità, idee',
     ogTitle: 'Startup a scuola in Ticino: opportunità per frontalieri',
-    ogDescription: 'Scopri come il progetto lombardo *La mia impresa, il mio futuro* può ispirare i frontalieri in Ticino. Guida pratica su formazione, permessi e fiscalità.',
+    ogDescription: 'Scopri come il progetto lombardo La mia impresa, il mio futuro può ispirare i frontalieri in Ticino.',
     canonicalPath: '/articoli-frontaliere/startup-scuola-ticino-frontalieri',
     structuredData: {
       "@context": "https://schema.org",
@@ -101957,16 +101957,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-fischiava-treno-gorla': {
     title: 'Fischiava il treno: festa ferroviaria a Gorla Minore',
-    description: '## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi',
+    description: 'Domenica 11 ottobre 2026 a Gorla Minore',
     keywords: 'frontalieri, ticino, svizzera, italia, fischiava, treno, festa, ferroviaria',
     ogTitle: 'Gorla Minore: festa per la storia ferroviaria',
-    ogDescription: '## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi',
+    ogDescription: 'Domenica 11 ottobre 2026 a Gorla Minore',
     canonicalPath: '/articoli-frontaliere/fischiava-treno-gorla/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Fischiava il treno: festa ferroviaria a Gorla Minore",
-      "description": "## In breve - Domenica 11 ottobre 2026 a Gorla Minore - Evento dalle 12:00 alle 18:00 vicino alla vecchia stazione - Pranzo, trenini, giochi antichi",
+      "description": "Domenica 11 ottobre 2026 a Gorla Minore",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-fischiava-treno-gorla.webp`,
@@ -102025,16 +102025,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-monte-olimpino-treni-weekend': {
     title: 'Treni Como-Svizzera: 4 weekend di chiusura nel 2026',
-    description: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    description: 'Quattro weekend di chiusura tra ottobre e novembre 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, treni, como-svizzera, weekend, chiusura',
     ogTitle: 'Monte Olimpino 1: chiusure ferroviarie nel 2026',
-    ogDescription: '## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como',
+    ogDescription: 'Quattro weekend di chiusura tra ottobre e novembre 2026',
     canonicalPath: '/articoli-frontaliere/monte-olimpino-treni-weekend/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Treni Como-Svizzera: 4 weekend di chiusura nel 2026",
-      "description": "## In breve - Quattro weekend di chiusura tra ottobre e novembre 2026 - Stop da venerdì alle 20:20 a lunedì alle 04:20 - RE80 salta Como San Giovanni e Como",
+      "description": "Quattro weekend di chiusura tra ottobre e novembre 2026",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-monte-olimpino-treni-weekend.webp`,
@@ -102098,16 +102098,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-domodossola-arresto-hashish-stazione': {
     title: 'Domodossola: arresto per chilo di hashish nel bagaglio',
-    description: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    description: 'Fermata alla stazione internazionale di Domodossola',
     keywords: 'frontalieri, ticino, svizzera, italia, domodossola, arresto, chilo, hashish',
     ogTitle: 'Domodossola: arresto per chilo di hashish nel bagaglio',
-    ogDescription: '## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre',
+    ogDescription: 'Fermata alla stazione internazionale di Domodossola',
     canonicalPath: '/articoli-frontaliere/domodossola-arresto-hashish-stazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Domodossola: arresto per chilo di hashish nel bagaglio",
-      "description": "## In breve - Fermata alla stazione internazionale di Domodossola - Arrivava da Milano Centrale - Un chilo di hashish in dieci panetti - Valore stimato: oltre",
+      "description": "Fermata alla stazione internazionale di Domodossola",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102137,16 +102137,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-petizione-recupero-carovita-ticino': {
     title: 'Petizione sindacati per recupero carovati in Ticino',
-    description: '## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa',
+    description: 'OCST, VPOD e SIT chiedono il recupero del carovita.',
     keywords: 'frontalieri, ticino, svizzera, italia, petizione, sindacati, recupero, carovati',
     ogTitle: 'Petizione sindacati per recupero carovati in Ticino',
-    ogDescription: '## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa',
+    ogDescription: 'OCST, VPOD e SIT chiedono il recupero del carovita.',
     canonicalPath: '/articoli-frontaliere/petizione-recupero-carovita-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Petizione sindacati per recupero carovati in Ticino",
-      "description": "## In breve - OCST, VPOD e SIT chiedono il recupero del carovita. - Nel periodo compreso tra dicembre 2020 e settembre 2026, il rincaro è aumentato di circa",
+      "description": "OCST, VPOD e SIT chiedono il recupero del carovita.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102176,16 +102176,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-treno-foliage-locarno-domodossola': {
     title: 'Treno del Foliage: Locarno-Domodossola dal 10 ottobre',
-    description: '## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni',
+    description: 'Dal 10 ottobre al 15 novembre 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, treno, foliage, locarno-domodossola, ottobre',
     ogTitle: 'Treno del Foliage 2026 tra Locarno e Domodossola',
-    ogDescription: '## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni',
+    ogDescription: 'Dal 10 ottobre al 15 novembre 2026',
     canonicalPath: '/articoli-frontaliere/treno-foliage-locarno-domodossola/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Treno del Foliage: Locarno-Domodossola dal 10 ottobre",
-      "description": "## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni",
+      "description": "Dal 10 ottobre al 15 novembre 2026",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102215,16 +102215,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-biasca-17enne-arrestato-accoltellamento': {
     title: 'Biasca: arrestato 17enne per accoltellamento vicino alla stazione',
-    description: '## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio',
+    description: 'A Biasca arrestato un 17enne siriano dimorante',
     keywords: 'frontalieri, ticino, svizzera, italia, biasca, arrestato, 17enne, accoltellamento',
     ogTitle: 'Biasca: 17enne arrestato per accoltellamento vicino alla stazione',
-    ogDescription: '## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio',
+    ogDescription: 'A Biasca arrestato un 17enne siriano dimorante',
     canonicalPath: '/articoli-frontaliere/biasca-17enne-arrestato-accoltellamento/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Biasca: arrestato 17enne per accoltellamento vicino alla stazione",
-      "description": "## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio",
+      "description": "A Biasca arrestato un 17enne siriano dimorante",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102254,16 +102254,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-pedemontana-truffa-sms-frontalieri': {
     title: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
-    description: '## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica',
+    description: 'Pedemontana non chiede pedaggi via SMS o e-mail',
     keywords: 'frontalieri, ticino, svizzera, italia, pedemontana, avverte, nessun, pagamento',
     ogTitle: 'Pedemontana avverte: nessun pagamento pedaggio via SMS o email',
-    ogDescription: '## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica',
+    ogDescription: 'Pedemontana non chiede pedaggi via SMS o e-mail',
     canonicalPath: '/articoli-frontaliere/pedemontana-truffa-sms-frontalieri/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Pedemontana avverte: nessun pagamento pedaggio via SMS o email",
-      "description": "## In breve - Pedemontana non chiede pedaggi via SMS o e-mail - I truffatori minacciano blocco o fermo del veicolo - I link rimandano a domini falsi - Verifica",
+      "description": "Pedemontana non chiede pedaggi via SMS o e-mail",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102293,16 +102293,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-pedemontana-falso-pedaggio-sms': {
     title: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
-    description: '## In breve - Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp - I messaggi minacciano blocco o fermo amministrativo - Eventuali pedaggi si',
+    description: 'Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp',
     keywords: 'frontalieri, ticino, svizzera, italia, pedemontana, nessun, pagamento, pedaggio',
     ogTitle: 'Pedemontana: nessun pagamento pedaggio via SMS o email',
-    ogDescription: '## In breve - Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp - I messaggi minacciano blocco o fermo amministrativo - Eventuali pedaggi si',
+    ogDescription: 'Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp',
     canonicalPath: '/articoli-frontaliere/pedemontana-falso-pedaggio-sms/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Pedemontana: nessun pagamento pedaggio via SMS o email",
-      "description": "## In breve - Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp - I messaggi minacciano blocco o fermo amministrativo - Eventuali pedaggi si",
+      "description": "Pedemontana segnala falsi pedaggi via e-mail, SMS e WhatsApp",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/pedemontana-avviso-truffa.webp`,
@@ -102327,16 +102327,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-aggressione-van-villa-olmo': {
     title: 'Como, turisti derubati e aggrediti nel van: arrestato 21enne',
-    description: '## In breve - Arrestato a Como un 21enne egiziano - Furto in un van in via per Cernobbio - Colluttazione vicino al Lido di Villa Olmo - Beni e documenti',
+    description: 'Arrestato a Como un 21enne egiziano',
     keywords: 'frontalieri, ticino, svizzera, italia, como, turisti, derubati, aggrediti',
     ogTitle: 'Como, turisti derubati e aggrediti nel van: arrestato 21enne',
-    ogDescription: '## In breve - Arrestato a Como un 21enne egiziano - Furto in un van in via per Cernobbio - Colluttazione vicino al Lido di Villa Olmo - Beni e documenti',
+    ogDescription: 'Arrestato a Como un 21enne egiziano',
     canonicalPath: '/articoli-frontaliere/aggressione-van-villa-olmo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Como, turisti derubati e aggrediti nel van: arrestato 21enne",
-      "description": "## In breve - Arrestato a Como un 21enne egiziano - Furto in un van in via per Cernobbio - Colluttazione vicino al Lido di Villa Olmo - Beni e documenti",
+      "description": "Arrestato a Como un 21enne egiziano",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/trenord-furto-di-cavi-sospesa-como-milano.webp`,
@@ -102361,16 +102361,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-furto-van-cernobbio-21enne': {
     title: 'Como, turisti derubati nel van: arrestato un 21enne',
-    description: '## In breve - Arrestato a Como un 21enne egiziano - Furto ai danni di turisti in via per Cernobbio - Colluttazione nei pressi del Lido di Villa Olmo - Indagini',
+    description: 'Arrestato a Como un 21enne egiziano',
     keywords: 'frontalieri, ticino, svizzera, italia, como, turisti, derubati, arrestato',
     ogTitle: 'Como, turisti derubati nel van: arrestato un 21enne',
-    ogDescription: '## In breve - Arrestato a Como un 21enne egiziano - Furto ai danni di turisti in via per Cernobbio - Colluttazione nei pressi del Lido di Villa Olmo - Indagini',
+    ogDescription: 'Arrestato a Como un 21enne egiziano',
     canonicalPath: '/articoli-frontaliere/furto-van-cernobbio-21enne/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Como, turisti derubati nel van: arrestato un 21enne",
-      "description": "## In breve - Arrestato a Como un 21enne egiziano - Furto ai danni di turisti in via per Cernobbio - Colluttazione nei pressi del Lido di Villa Olmo - Indagini",
+      "description": "Arrestato a Como un 21enne egiziano",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102434,16 +102434,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-caduta-scala-locate-varesino': {
     title: 'Locate Varesino, cade da una scala: grave un 79enne',
-    description: '## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un\'azienda agricola - Soccorsi attivati in codice rosso',
+    description: 'Caduta da una scala in via Madonnetta',
     keywords: 'frontalieri, ticino, svizzera, italia, locate, varesino, cade, scala',
     ogTitle: 'Caduta da una scala a Locate Varesino: 79enne grave',
-    ogDescription: '## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un\'azienda agricola - Soccorsi attivati in codice rosso',
+    ogDescription: 'Caduta da una scala in via Madonnetta',
     canonicalPath: '/articoli-frontaliere/caduta-scala-locate-varesino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Locate Varesino, cade da una scala: grave un 79enne",
-      "description": "## In breve - Caduta da una scala in via Madonnetta - Un uomo di 79 anni è precipitato in un'azienda agricola - Soccorsi attivati in codice rosso",
+      "description": "Caduta da una scala in via Madonnetta",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102473,16 +102473,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-cantello-teatro-dialettale-ottobre-2026': {
     title: 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
-    description: '## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena',
+    description: 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
     keywords: 'frontalieri, ticino, svizzera, italia, cantello, torna, teatro, dialettale',
     ogTitle: 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
-    ogDescription: '## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena',
+    ogDescription: 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
     canonicalPath: '/articoli-frontaliere/cantello-teatro-dialettale-ottobre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Cantello torna il teatro dialettale “Quei giargianes da giappunes”",
-      "description": "## In breve - Due date: 10 ottobre alle 21 e 18 ottobre alle 15 - Versione dialettale di Alessandro Campi - Sul palco la compagnia amatoriale Tutti in Scena",
+      "description": "Due date: 10 ottobre alle 21 e 18 ottobre alle 15",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp`,
@@ -102507,16 +102507,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-vendemmia-mendrisiotto-lavoratori-terra': {
     title: 'Frontalieri della vendemmia: 15 franchi l\'ora | Frontaliere Ticino',
-    description: '## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti',
+    description: 'Circa 50 frontalieri animano la vendemmia nel Mendrisiotto',
     keywords: 'frontalieri, ticino, svizzera, italia, vendemmia, franchi, breve, circa',
     ogTitle: 'Vendemmia in Ticino: 15 franchi netti l\'ora',
-    ogDescription: '## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti',
+    ogDescription: 'Circa 50 frontalieri animano la vendemmia nel Mendrisiotto',
     canonicalPath: '/articoli-frontaliere/vendemmia-mendrisiotto-lavoratori-terra/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri della vendemmia: 15 franchi l'ora",
-      "description": "## In breve - Circa 50 frontalieri animano la vendemmia nel Mendrisiotto - Arrivano soprattutto dalla provincia di Varese - La paga è di circa 15 franchi netti",
+      "description": "Circa 50 frontalieri animano la vendemmia nel Mendrisiotto",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102546,16 +102546,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-lifestyle-innovation-hub-chiasso': {
     title: 'Lifestyle Innovation Hub a Chiasso: 30 milioni investiti',
-    description: '## In breve - Trasformazione dell\'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi - Inaugurato a Chiasso il 7 ottobre 2026',
+    description: 'Trasformazione dell\'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi',
     keywords: 'frontalieri, ticino, svizzera, italia, lifestyle, innovation, chiasso, milioni',
     ogTitle: 'Lifestyle Innovation Hub a Chiasso: 30 milioni investiti',
-    ogDescription: '## In breve - Trasformazione dell\'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi - Inaugurato a Chiasso il 7 ottobre 2026',
+    ogDescription: 'Trasformazione dell\'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi',
     canonicalPath: '/articoli-frontaliere/lifestyle-innovation-hub-chiasso/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lifestyle Innovation Hub a Chiasso: 30 milioni investiti",
-      "description": "## In breve - Trasformazione dell'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi - Inaugurato a Chiasso il 7 ottobre 2026",
+      "description": "Trasformazione dell'ex sede di Credit Suisse con un investimento complessivo di 30 milioni di franchi",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102624,16 +102624,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-incidente-via-albisetti': {
     title: 'Tradate, pedone investito: ferito un uomo di 58 anni',
-    description: '## In breve - Un uomo di 58 anni investito a Tradate - Incidente poco prima delle 20 in via Albisetti - Soccorsi della Croce Rossa di Busto e un\'automedica',
+    description: 'Un uomo di 58 anni investito a Tradate',
     keywords: 'frontalieri, ticino, svizzera, italia, tradate, pedone, investito, ferito',
     ogTitle: 'Tradate, pedone investito: ferito un uomo di 58 anni',
-    ogDescription: '## In breve - Un uomo di 58 anni investito a Tradate - Incidente poco prima delle 20 in via Albisetti - Soccorsi della Croce Rossa di Busto e un\'automedica',
+    ogDescription: 'Un uomo di 58 anni investito a Tradate',
     canonicalPath: '/articoli-frontaliere/incidente-via-albisetti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tradate, pedone investito: ferito un uomo di 58 anni",
-      "description": "## In breve - Un uomo di 58 anni investito a Tradate - Incidente poco prima delle 20 in via Albisetti - Soccorsi della Croce Rossa di Busto e un'automedica",
+      "description": "Un uomo di 58 anni investito a Tradate",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102663,16 +102663,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-mcdonalds-pulizia-malnate-2026': {
     title: 'McDonald\'s ripulisce Malnate: raccolti 20 kg di rifiuti',
-    description: '## In breve - 16 persone hanno partecipato alla pulizia di Malnate - Raccolti 20 chili di rifiuti di vario genere - L\'iniziativa si è svolta lunedì 5 ottobre',
+    description: '16 persone hanno partecipato alla pulizia di Malnate',
     keywords: 'frontalieri, ticino, svizzera, italia, mcdonald, ripulisce, malnate, raccolti',
     ogTitle: 'McDonald\'s ripulisce Malnate: 20 kg di rifiuti raccolti',
-    ogDescription: '## In breve - 16 persone hanno partecipato alla pulizia di Malnate - Raccolti 20 chili di rifiuti di vario genere - L\'iniziativa si è svolta lunedì 5 ottobre',
+    ogDescription: '16 persone hanno partecipato alla pulizia di Malnate',
     canonicalPath: '/articoli-frontaliere/mcdonalds-pulizia-malnate-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "McDonald's ripulisce Malnate: raccolti 20 kg di rifiuti",
-      "description": "## In breve - 16 persone hanno partecipato alla pulizia di Malnate - Raccolti 20 chili di rifiuti di vario genere - L'iniziativa si è svolta lunedì 5 ottobre",
+      "description": "16 persone hanno partecipato alla pulizia di Malnate",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102702,16 +102702,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-agrivarese-angera-ottobre-2026': {
     title: 'Agrivarese torna ad Angera: fiera agricola l\'11 ottobre',
-    description: '## In breve - Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera - La manifestazione sarà aperta dalle 9 alle 19 - In programma oltre 40 aziende',
+    description: 'Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera',
     keywords: 'frontalieri, ticino, svizzera, italia, agrivarese, torna, angera, fiera',
     ogTitle: 'Agrivarese torna ad Angera: fiera agricola l\'11 ottobre',
-    ogDescription: '## In breve - Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera - La manifestazione sarà aperta dalle 9 alle 19 - In programma oltre 40 aziende',
+    ogDescription: 'Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera',
     canonicalPath: '/articoli-frontaliere/agrivarese-angera-ottobre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Agrivarese torna ad Angera: fiera agricola l'11 ottobre",
-      "description": "## In breve - Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera - La manifestazione sarà aperta dalle 9 alle 19 - In programma oltre 40 aziende",
+      "description": "Domenica 11 ottobre Agrivarese arriva sul lungolago di Angera",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102741,16 +102741,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-festival-racconto-varese-ottobre': {
     title: 'Festival del Racconto: due appuntamenti a Varese',
-    description: '## In breve - Due appuntamenti culturali a Varese il 9 e l\'11 ottobre - Dante al centro dell\'incontro di venerdì alle 17:30 - Tre racconti inediti di Carlo',
+    description: 'Due appuntamenti culturali a Varese il 9 e l\'11 ottobre',
     keywords: 'frontalieri, ticino, svizzera, italia, festival, racconto, appuntamenti, varese',
     ogTitle: 'Festival del Racconto: Dante e inediti di Carlo Linati',
-    ogDescription: '## In breve - Due appuntamenti culturali a Varese il 9 e l\'11 ottobre - Dante al centro dell\'incontro di venerdì alle 17:30 - Tre racconti inediti di Carlo',
+    ogDescription: 'Due appuntamenti culturali a Varese il 9 e l\'11 ottobre',
     canonicalPath: '/articoli-frontaliere/festival-racconto-varese-ottobre/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Festival del Racconto: due appuntamenti a Varese",
-      "description": "## In breve - Due appuntamenti culturali a Varese il 9 e l'11 ottobre - Dante al centro dell'incontro di venerdì alle 17:30 - Tre racconti inediti di Carlo",
+      "description": "Due appuntamenti culturali a Varese il 9 e l'11 ottobre",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102780,16 +102780,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-luvinate-progetto-motorio-materna': {
     title: 'Luvinate: al via il progetto motorio alla scuola materna',
-    description: '## In breve - A Luvinate parte il progetto motorio 26-27 - La scuola collabora con la Varese Basket School - Il percorso è rivolto ai bambini della Scuola',
+    description: 'A Luvinate parte il progetto motorio 26-27',
     keywords: 'frontalieri, ticino, svizzera, italia, luvinate, progetto, motorio, alla',
     ogTitle: 'Luvinate: al via il progetto motorio alla scuola materna',
-    ogDescription: '## In breve - A Luvinate parte il progetto motorio 26-27 - La scuola collabora con la Varese Basket School - Il percorso è rivolto ai bambini della Scuola',
+    ogDescription: 'A Luvinate parte il progetto motorio 26-27',
     canonicalPath: '/articoli-frontaliere/luvinate-progetto-motorio-materna/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Luvinate: al via il progetto motorio alla scuola materna",
-      "description": "## In breve - A Luvinate parte il progetto motorio 26-27 - La scuola collabora con la Varese Basket School - Il percorso è rivolto ai bambini della Scuola",
+      "description": "A Luvinate parte il progetto motorio 26-27",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102819,16 +102819,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-pro-patria-varese-5-2-coppa-italia': {
     title: 'Pro patria batte Varese 5-2 in coppa Italia | Frontaliere Ticino',
-    description: '## In breve - La Pro Patria batte il Varese 5-2 al Franco Ossola. - Maistrello, Mapelli e Bonaidi firmano il primo 3-0. - Gallotti e Castellucchio riportano',
+    description: 'La Pro Patria batte il Varese 5-2 al Franco Ossola.',
     keywords: 'frontalieri, ticino, svizzera, italia, patria, batte, varese, coppa',
     ogTitle: 'Pro Patria batte Varese 5-2 in Coppa Italia',
-    ogDescription: '## In breve - La Pro Patria batte il Varese 5-2 al Franco Ossola. - Maistrello, Mapelli e Bonaidi firmano il primo 3-0. - Gallotti e Castellucchio riportano',
+    ogDescription: 'La Pro Patria batte il Varese 5-2 al Franco Ossola.',
     canonicalPath: '/articoli-frontaliere/pro-patria-varese-5-2-coppa-italia/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Pro patria batte Varese 5-2 in coppa Italia",
-      "description": "## In breve - La Pro Patria batte il Varese 5-2 al Franco Ossola. - Maistrello, Mapelli e Bonaidi firmano il primo 3-0. - Gallotti e Castellucchio riportano",
+      "description": "La Pro Patria batte il Varese 5-2 al Franco Ossola.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102897,16 +102897,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-operazione-hermes-frodi-iva-450-mln-sequestri-11-mln': {
     title: 'Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
-    description: '## In breve - Sei misure cautelari e sequestri per circa 11 milioni - Frode Iva in elettronica e informatica - 93 società nella parte italiana dell\'indagine',
+    description: 'Sei misure cautelari e sequestri per circa 11 milioni',
     keywords: 'frontalieri, ticino, svizzera, italia, operazione, hermes, frodi, sequestri',
     ogTitle: 'Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
-    ogDescription: '## In breve - Sei misure cautelari e sequestri per circa 11 milioni - Frode Iva in elettronica e informatica - 93 società nella parte italiana dell\'indagine',
+    ogDescription: 'Sei misure cautelari e sequestri per circa 11 milioni',
     canonicalPath: '/articoli-frontaliere/operazione-hermes-frodi-iva-450-mln-sequestri-11-mln/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln",
-      "description": "## In breve - Sei misure cautelari e sequestri per circa 11 milioni - Frode Iva in elettronica e informatica - 93 società nella parte italiana dell'indagine",
+      "description": "Sei misure cautelari e sequestri per circa 11 milioni",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102975,16 +102975,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-salute-lavoro-progetti-ticino': {
     title: 'Salute mentale sul lavoro: progetti in Ticino | Frontaliere Ticino',
-    description: '## In breve - In Svizzera una persona su tre è emotivamente spossata. - In Ticino quasi un apprendista su tre riferisce disturbi d\'ansia. - DSS e Forum GSA',
+    description: 'In Svizzera una persona su tre è emotivamente spossata.',
     keywords: 'frontalieri, ticino, svizzera, italia, salute, mentale, lavoro, progetti',
     ogTitle: 'Salute mentale sul lavoro: progetti Ticino',
-    ogDescription: '## In breve - In Svizzera una persona su tre è emotivamente spossata. - In Ticino quasi un apprendista su tre riferisce disturbi d\'ansia. - DSS e Forum GSA',
+    ogDescription: 'In Svizzera una persona su tre è emotivamente spossata.',
     canonicalPath: '/articoli-frontaliere/salute-lavoro-progetti-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Salute mentale sul lavoro: progetti in Ticino",
-      "description": "## In breve - In Svizzera una persona su tre è emotivamente spossata. - In Ticino quasi un apprendista su tre riferisce disturbi d'ansia. - DSS e Forum GSA",
+      "description": "In Svizzera una persona su tre è emotivamente spossata.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -103014,16 +103014,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-bellinzona-nord-svincolo': {
     title: 'Bellinzona Nord, chiusura notturna dello svincolo',
-    description: '## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46',
+    description: 'Chiusura tra venerdì 9 e sabato 10 ottobre',
     keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, nord, chiusura, notturna',
     ogTitle: 'Bellinzona Nord, chiusura notturna dello svincolo',
-    ogDescription: '## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46',
+    ogDescription: 'Chiusura tra venerdì 9 e sabato 10 ottobre',
     canonicalPath: '/articoli-frontaliere/bellinzona-nord-svincolo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Bellinzona Nord, chiusura notturna dello svincolo",
-      "description": "## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46",
+      "description": "Chiusura tra venerdì 9 e sabato 10 ottobre",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/centro-ovale-chiasso-nuova-proprieta.webp`,
@@ -103048,16 +103048,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-lugano-lucerna-partita-traffico': {
     title: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
-    description: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
+    description: 'Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, lucerna, cornaredo, strade',
     ogTitle: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
-    ogDescription: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
+    ogDescription: 'Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo',
     canonicalPath: '/articoli-frontaliere/lugano-lucerna-partita-traffico/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato",
-      "description": "## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese",
+      "description": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -103087,16 +103087,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-tifosi-lucerna-lugano-traffico': {
     title: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
-    description: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    description: 'Partita alle 18 allo stadio di Cornaredo',
     keywords: 'frontalieri, ticino, svizzera, italia, tifosi, lucerna, lugano, strade',
     ogTitle: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
-    ogDescription: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    ogDescription: 'Partita alle 18 allo stadio di Cornaredo',
     canonicalPath: '/articoli-frontaliere/tifosi-lucerna-lugano-traffico/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
-      "description": "## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani",
+      "description": "Partita alle 18 allo stadio di Cornaredo",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/lucerna-voto-tifosi-ocse.webp`,
@@ -103199,16 +103199,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-ferrovia-albate-molteno-elettrificazione': {
     title: 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
-    description: '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
+    description: 'Cantieri per l\'elettrificazione al via a metà dicembre',
     keywords: 'frontalieri, ticino, svizzera, italia, elettrificazione, albate-molteno, lavori, dicembre',
     ogTitle: 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
-    ogDescription: '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
+    ogDescription: 'Cantieri per l\'elettrificazione al via a metà dicembre',
     canonicalPath: '/articoli-frontaliere/ferrovia-albate-molteno-elettrificazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Elettrificazione Albate-Molteno: lavori da dicembre 2024",
-      "description": "## In breve - Cantieri per l'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno",
+      "description": "Cantieri per l'elettrificazione al via a metà dicembre",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -103238,16 +103238,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa': {
     title: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
-    description: '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    description: 'A Porlezza tentata truffa del finto carabiniere',
     keywords: 'frontalieri, ticino, svizzera, italia, porlezza, finto, carabiniere, chiede',
     ogTitle: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
-    ogDescription: '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    ogDescription: 'A Porlezza tentata truffa del finto carabiniere',
     canonicalPath: '/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Porlezza: finto carabiniere chiede oro, figlio ferma truffa",
-      "description": "## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio",
+      "description": "A Porlezza tentata truffa del finto carabiniere",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -103277,16 +103277,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-mendrisiotto-aziende-conciliabilita': {
     title: 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
-    description: '## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti',
+    description: 'Incontro a Chiasso il primo ottobre scorso',
     keywords: 'frontalieri, ticino, svizzera, italia, mendrisiotto, aziende, confronto, conciliabilità',
     ogTitle: 'Mendrisiotto aziende a confronto su conciliabilità vita-lavoro',
-    ogDescription: '## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti',
+    ogDescription: 'Incontro a Chiasso il primo ottobre scorso',
     canonicalPath: '/articoli-frontaliere/mendrisiotto-aziende-conciliabilita/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Mendrisiotto aziende a confronto su conciliabilità vita-lavoro",
-      "description": "## In breve - Incontro a Chiasso il primo ottobre scorso - Una trentina di realtà aziendali coinvolte - Sondaggio cantonale aperto fino al 30 novembre ## Fatti",
+      "description": "Incontro a Chiasso il primo ottobre scorso",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp`,
@@ -103311,16 +103311,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-scambio-portieri-lugano-ginevra': {
     title: 'Scambio di portieri: mayer a Lugano, van pottelberghe a Ginevra',
-    description: '## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite',
+    description: 'Mayer arriva a Lugano, Van Pottelberghe va a Ginevra',
     keywords: 'frontalieri, ticino, svizzera, italia, scambio, portieri, mayer, lugano',
     ogTitle: 'Scambio di portieri: Mayer a Lugano, Van Pottelberghe a Ginevra',
-    ogDescription: '## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite',
+    ogDescription: 'Mayer arriva a Lugano, Van Pottelberghe va a Ginevra',
     canonicalPath: '/articoli-frontaliere/scambio-portieri-lugano-ginevra/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Scambio di portieri: mayer a Lugano, van pottelberghe a Ginevra",
-      "description": "## In breve - Mayer arriva a Lugano, Van Pottelberghe va a Ginevra - Prestito incrociato fino al termine della stagione 2026/27 - Mayer vanta 397 partite",
+      "description": "Mayer arriva a Lugano, Van Pottelberghe va a Ginevra",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -103350,16 +103350,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-aperitivo-solidale-giubiasco': {
     title: 'Brindisi solidale al Mercato Coperto di Giubiasco',
-    description: '## In breve - Il Kiwanis Club Bellinzona e Valli festeggia 40 anni - Aperò In Sem si tiene giovedì 8 ottobre - Il ricavato va interamente ad Ares e L\'Ora',
+    description: 'Il Kiwanis Club Bellinzona e Valli festeggia 40 anni',
     keywords: 'frontalieri, ticino, svizzera, italia, brindisi, solidale, mercato, coperto',
     ogTitle: 'Aperò In Sem: serata solidale a Giubiasco',
-    ogDescription: '## In breve - Il Kiwanis Club Bellinzona e Valli festeggia 40 anni - Aperò In Sem si tiene giovedì 8 ottobre - Il ricavato va interamente ad Ares e L\'Ora',
+    ogDescription: 'Il Kiwanis Club Bellinzona e Valli festeggia 40 anni',
     canonicalPath: '/articoli-frontaliere/aperitivo-solidale-giubiasco/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Brindisi solidale al Mercato Coperto di Giubiasco",
-      "description": "## In breve - Il Kiwanis Club Bellinzona e Valli festeggia 40 anni - Aperò In Sem si tiene giovedì 8 ottobre - Il ricavato va interamente ad Ares e L'Ora",
+      "description": "Il Kiwanis Club Bellinzona e Valli festeggia 40 anni",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

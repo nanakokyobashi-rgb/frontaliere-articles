@@ -142,12 +142,16 @@ export function auditCreditRecords(entries) {
     if (record.status !== 'ok') {
       problems.push(`${file}: status "${record.status}" — a record under review is never published; curate it or remove the cover`);
     }
+    const sourceKey = record.source === 'licensed-photo'
+      ? `${record.photo.provider}:${record.photo.pageUrl}`
+      : record.commons.title;
     const fields = canonicalJson(fileLevelFields(record));
-    const known = byTitle.get(record.commons.title);
+    const known = byTitle.get(sourceKey);
     if (!known) {
-      byTitle.set(record.commons.title, { file, fields });
+      byTitle.set(sourceKey, { file, fields });
     } else if (known.fields !== fields) {
-      problems.push(`${file}: disagrees with ${known.file} about Commons file «${record.commons.title}» (author, attribution, licence or curation differ)`);
+      const label = record.source === 'licensed-photo' ? `licensed photo «${record.photo.title}»` : `Commons file «${record.commons.title}»`;
+      problems.push(`${file}: disagrees with ${known.file} about ${label} (author, attribution, licence or curation differ)`);
     }
   }
   return problems;
@@ -354,6 +358,29 @@ export function stripCreditedImageRights(src, isCredited) {
  * @param {import('../../engine/shared/imageCredits.mjs').ImageCreditRecord} record
  */
 export function imageCreditDisplayFields(record) {
+  if (record.source === 'licensed-photo') {
+    return {
+      source: 'licensed-photo',
+      photo: {
+        provider: record.photo.provider,
+        title: record.photo.title,
+        pageUrl: record.photo.pageUrl,
+        ...(record.photo.width ? { width: record.photo.width } : {}),
+        ...(record.photo.height ? { height: record.photo.height } : {}),
+      },
+      pageUrl: record.photo.pageUrl,
+      author: { name: record.author.name, url: record.author.url, type: record.author.type },
+      attribution: record.attribution,
+      licence: {
+        name: record.licence.name,
+        url: record.licence.url,
+        family: record.licence.family,
+        attributionRequired: record.licence.attributionRequired,
+      },
+      restrictions: record.restrictions,
+      fetchedAt: record.fetchedAt,
+    };
+  }
   return {
     pageUrl: record.commons.pageUrl,
     author: { name: record.author.name, url: record.author.url, type: record.author.type },
@@ -416,7 +443,9 @@ export function buildImageCreditsIndex({ section, commit, images, reader }) {
   for (const key of [...imageByKey.keys()].sort()) {
     const record = reader.get(imageByKey.get(key));
     if (!record) continue;
-    const title = record.commons.title;
+    const title = record.source === 'licensed-photo'
+      ? `licensed-photo:${record.photo.provider}:${record.photo.pageUrl}`
+      : record.commons.title;
     const fields = imageCreditDisplayFields(record);
     const known = files[title];
     if (!known) {

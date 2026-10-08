@@ -38,6 +38,34 @@ function recordFor(title, cover, modified = 'cropped') {
   return finalizeCreditRecord(verdict.template, { cover, modified });
 }
 
+function licensedRecordFor(cover = '/images/blog/licensed.webp') {
+  return {
+    schema: 1,
+    cover,
+    source: 'licensed-photo',
+    photo: {
+      provider: 'wikimedia',
+      title: 'Zurich employment office.jpg',
+      pageUrl: 'https://commons.wikimedia.org/wiki/File:Zurich_employment_office.jpg',
+      width: 2400,
+      height: 1600,
+    },
+    author: { text: 'Ada Foto', name: 'Ada Foto', url: 'https://commons.wikimedia.org/wiki/User:Ada_Foto', type: 'Person' },
+    attribution: null,
+    licence: {
+      name: 'CC BY-SA 4.0',
+      url: 'https://creativecommons.org/licenses/by-sa/4.0/',
+      family: 'cc-by-sa',
+      attributionRequired: true,
+    },
+    restrictions: ['licensed-source', 'no-recognizable-foreground-person', 'no-logo-brand-or-trademark'],
+    modified: 'cropped',
+    fetchedAt: '2026-10-08',
+    status: 'ok',
+    curation: null,
+  };
+}
+
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'image-credit-records-'));
 }
@@ -81,6 +109,35 @@ test('audit: a clean set of records has no problem; no directory is an empty set
     writeCreditRecord(root, recordFor('Locarno 1.jpg', '/images/blog/a.webp'));
     writeCreditRecord(root, recordFor('Locarno 1.jpg', '/images/blog/b.webp', 'resized'));
     assert.deepEqual(auditCreditRecords(readCreditRecords(root)), []);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('audit and SPA index preserve a licensed article-hero record with its attribution fields', () => {
+  const root = tempRoot();
+  try {
+    const record = licensedRecordFor();
+    writeRaw(root, 'content/image-credits/blog/licensed.json', JSON.stringify(record));
+    assert.deepEqual(auditCreditRecords(readCreditRecords(root)), []);
+    const { payload } = buildImageCreditsIndex({
+      section: 'frontaliere',
+      commit: 'licensed-fixture',
+      images: [record.cover],
+      reader: corpusCreditReader(root),
+    });
+    const file = payload.files[payload.covers.licensed.file];
+    assert.equal(file.source, 'licensed-photo');
+    assert.deepEqual(file.photo, {
+      provider: 'wikimedia',
+      title: 'Zurich employment office.jpg',
+      pageUrl: record.photo.pageUrl,
+      width: 2400,
+      height: 1600,
+    });
+    assert.equal(file.author.name, 'Ada Foto');
+    assert.equal(file.licence.family, 'cc-by-sa');
+    assert.match(imageCreditParts(record, 'it').text, /Ada Foto.*CC BY-SA 4\.0/);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione': {
     title: 'Canton San Gallo: stabile ricerca lavoro, cala disoccupazione',
-    description: '## In breve - 11\'251 persone cercavano lavoro a fine settembre - 5\'768 erano disoccupate - 3\'955 posti vacanti risultavano segnalati - 754 dipendenti erano',
+    description: '11\'251 persone cercavano lavoro a fine settembre',
     keywords: 'frontalieri, ticino, svizzera, italia, canton, gallo, stabile, ricerca',
     ogTitle: 'Canton San Gallo: stabile ricerca lavoro, cala',
-    ogDescription: '## In breve - 11\'251 persone cercavano lavoro a fine settembre - 5\'768 erano disoccupate - 3\'955 posti vacanti risultavano segnalati - 754 dipendenti erano',
+    ogDescription: '11\'251 persone cercavano lavoro a fine settembre',
     canonicalPath: '/articoli-san-gallo/canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Canton San Gallo: stabile ricerca lavoro, cala disoccupazione",
-      "description": "## In breve - 11'251 persone cercavano lavoro a fine settembre - 5'768 erano disoccupate - 3'955 posti vacanti risultavano segnalati - 754 dipendenti erano",
+      "description": "11'251 persone cercavano lavoro a fine settembre",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-incidente-a13-widnau-2026': {
     title: 'Incidente A13 Widnau 2026: danni e impatto sul traffico',
-    description: '## In breve - Incidente sulla A13 a Widnau il 5 ottobre 2026 - Due persone coinvolte, nessun ferito - Danni per circa CHF 120\'000 - Corsia destra chiusa',
+    description: 'Incidente sulla A13 a Widnau il 5 ottobre 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, incidente, widnau, danni, impatto',
     ogTitle: 'Incidente A13 Widnau 2026: danni e impatto sul traffico',
-    ogDescription: '## In breve - Incidente sulla A13 a Widnau il 5 ottobre 2026 - Due persone coinvolte, nessun ferito - Danni per circa CHF 120\'000 - Corsia destra chiusa',
+    ogDescription: 'Incidente sulla A13 a Widnau il 5 ottobre 2026',
     canonicalPath: '/articoli-san-gallo/incidente-a13-widnau-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Incidente A13 Widnau 2026: danni e impatto sul traffico",
-      "description": "## In breve - Incidente sulla A13 a Widnau il 5 ottobre 2026 - Due persone coinvolte, nessun ferito - Danni per circa CHF 120'000 - Corsia destra chiusa",
+      "description": "Incidente sulla A13 a Widnau il 5 ottobre 2026",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-incidente-a13-widnau-2026.webp`,

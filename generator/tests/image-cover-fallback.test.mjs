@@ -14,14 +14,17 @@ import {
 import {
   appendGeneratedImageRecord,
   imageRecordForPath,
+  readGeneratedImageRecords,
   sha256File,
 } from '../scripts/lib/blog-image-registry.mjs';
+import { buildSeoImageBlock } from '../scripts/lib/seo-entry-builder.mjs';
 import {
   GENERATED_IMAGE_CREDIT,
   GENERATED_IMAGE_LICENSE,
   GENERATED_IMAGE_LICENSE_URLS,
   GENERATED_IMAGE_PROMPT_VERSION,
   GENERATED_IMAGE_RESTRICTIONS,
+  LICENSED_PHOTO_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -58,6 +61,51 @@ function generatedCatalogRecord() {
       contains_recognizable_face: false,
       looks_like_specific_real_event: false,
       notes: 'generic catalog illustration',
+    },
+  };
+}
+
+function licensedCatalogRecord() {
+  return {
+    schema: 1,
+    assetId: 'licensed-cover-ledger-test',
+    kind: 'photo',
+    provider: 'wikimedia',
+    model: 'Wikimedia Commons file mirror',
+    executorModel: 'Wikimedia Commons file mirror',
+    license: 'CC BY-SA 4.0',
+    licenseFamily: 'cc-by-sa',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+    credit: 'Ada Foto · CC BY-SA 4.0',
+    author: { name: 'Ada Foto', url: 'https://commons.wikimedia.org/wiki/User:Ada_Foto' },
+    sourcePageUrl: 'https://commons.wikimedia.org/wiki/File:Zurich_employment_office.jpg',
+    sourceImageUrl: 'https://upload.wikimedia.org/commons/Zurich_employment_office.jpg',
+    sourceWidth: 2400,
+    sourceHeight: 1600,
+    photoTitle: 'Zurich employment office.jpg',
+    copyrightNotice: '© Ada Foto',
+    acquireLicensePage: 'https://commons.wikimedia.org/wiki/File:Zurich_employment_office.jpg',
+    modifications: ['cropped', 'resized', 'converted-to-webp'],
+    width: 1200,
+    height: 675,
+    format: 'webp',
+    bytes: 1024,
+    sha256: '0'.repeat(64),
+    generatedAt: '2026-10-08T00:00:00.000Z',
+    verifiedAt: '2026-10-08T00:01:00.000Z',
+    restrictions: [...LICENSED_PHOTO_RESTRICTIONS],
+    scope: 'article-hero',
+    imageUrl: '/images/blog/licensed-cover-ledger-test.webp',
+    vision: {
+      ok: true,
+      contains_text: false,
+      contains_logo: false,
+      contains_recognizable_face: false,
+      contains_recognizable_foreground_person: false,
+      looks_like_specific_real_event: false,
+      is_photograph: true,
+      is_topic_relevant: true,
+      notes: 'relevant, unbranded landscape photograph',
     },
   };
 }
@@ -104,6 +152,63 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
   }
 });
 
+test('a licensed article hero writes the shared attribution ledger and resolves as licensed-photo', () => {
+  const root = tempRoot();
+  try {
+    const record = licensedCatalogRecord();
+    const file = path.join(root, 'public', record.imageUrl.slice(1));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47));
+    record.sha256 = sha256File(file);
+    appendGeneratedImageRecord(root, record);
+
+    const persisted = JSON.parse(fs.readFileSync(path.join(root, 'content/image-credits/blog/licensed-cover-ledger-test.json'), 'utf8'));
+    assert.equal(persisted.source, 'licensed-photo');
+    assert.equal(persisted.photo.pageUrl, record.sourcePageUrl);
+    assert.equal(persisted.licence.family, 'cc-by-sa');
+    const provenance = imageRecordForPath(root, record.imageUrl, { strict: true });
+    assert.equal(provenance.kind, 'licensed-photo');
+    const data = article('licensed-cover-ledger-test', 'Tasse e lavoro a Zurigo');
+    resolveArticleCoverFallback(data, { root, findCatalogImage: () => record.imageUrl });
+    assert.equal(data._imageCredit.source, 'licensed-photo');
+    assert.equal(data._imageCredit.licence.attributionRequired, true);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('sostituire una foto licenziata con una cover generata rimuove il ledger obsoleto', () => {
+  const root = tempRoot();
+  try {
+    const licensed = licensedCatalogRecord();
+    appendGeneratedImageRecord(root, licensed);
+    const creditFile = path.join(root, 'content/image-credits/blog/licensed-cover-ledger-test.json');
+    assert.equal(fs.existsSync(creditFile), true);
+
+    const generated = generatedCatalogRecord();
+    generated.assetId = licensed.assetId;
+    generated.imageUrl = licensed.imageUrl;
+    appendGeneratedImageRecord(root, generated);
+
+    assert.equal(fs.existsSync(creditFile), false);
+    assert.equal(readGeneratedImageRecords(root).find((item) => item.assetId === licensed.assetId).provider, 'openai-codex');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il blocco SEO di una foto licenziata espone autore, licenza e sorgente', () => {
+  const record = licensedCatalogRecord();
+  const block = buildSeoImageBlock({
+    imagePath: record.imageUrl,
+    provenance: { kind: 'licensed-photo', record },
+    caption: 'Copertina fotografica',
+  });
+  assert.match(block, /"acquireLicensePage": "https:\/\/commons\.wikimedia\.org\/wiki\/File:Zurich_employment_office\.jpg"/);
+  assert.match(block, /"license": "https:\/\/creativecommons\.org\/licenses\/by-sa\/4\.0\/"/);
+  assert.match(block, /"creator": \{[^\n]*"name":"Ada Foto"/);
+  assert.match(block, /"isBasedOn": "https:\/\/commons\.wikimedia\.org\/wiki\/File:Zurich_employment_office\.jpg"/);
+});
 test('un catalogo valido ma non pertinente non diventa la copertina finale', () => {
   const root = tempRoot();
   try {
@@ -183,10 +288,15 @@ test('when the catalog is empty, the governed static cover still publishes and d
   }
 });
 
-test('the generator bounds the outage path to one attempt and 120 seconds', () => {
+test('the generator lets the governed chain reach licensed photos and keeps the 120-second phase budget', () => {
   const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   const engine = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/article-cover-engine.mjs'), 'utf8');
-  assert.match(engine, /maxAttempts:\s*1/);
+  assert.doesNotMatch(engine, /maxAttempts:\s*1/);
+  assert.match(engine, /usedRecords: usedArticlePhotoRecords\(root\)/);
+  assert.match(engine, /readCreditRecords\(root\)/);
+  assert.match(engine, /topic: articleImageTopic/);
+  assert.match(engine, /place: articleImagePlace\(articleData, area\)/);
+  assert.match(engine, /keywords: articleImageKeywords/);
   assert.match(source, /Math\.min\(120_000/);
   assert.match(source, /generateGovernedArticleHero/);
   assert.match(source, /deadlineAt:\s*imageDeadline/);

@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-disoccupazione-friburgo-settembre-2026': {
     title: 'Disoccupazione a Friburgo scende al 2,5% in settembre 2026',
-    description: '## In breve - Disoccupazione friburghese al 2,5% a settembre 2026 - 4’509 disoccupati, 185 in meno rispetto ad agosto - Richiedenti d’impiego al 5,1%, stabili',
+    description: 'Disoccupazione friburghese al 2,5% a settembre 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, friburgo, scende, settembre',
     ogTitle: 'Disoccupazione a Friburgo scende al 2,5% in settembre 2026',
-    ogDescription: '## In breve - Disoccupazione friburghese al 2,5% a settembre 2026 - 4’509 disoccupati, 185 in meno rispetto ad agosto - Richiedenti d’impiego al 5,1%, stabili',
+    ogDescription: 'Disoccupazione friburghese al 2,5% a settembre 2026',
     canonicalPath: '/articoli-friburgo/disoccupazione-friburgo-settembre-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Disoccupazione a Friburgo scende al 2,5% in settembre 2026",
-      "description": "## In breve - Disoccupazione friburghese al 2,5% a settembre 2026 - 4’509 disoccupati, 185 in meno rispetto ad agosto - Richiedenti d’impiego al 5,1%, stabili",
+      "description": "Disoccupazione friburghese al 2,5% a settembre 2026",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-disoccupazione-friburgo-settembre-2026.webp`,
@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-fribourg-modifica-licd': {
     title: 'Fribourg adegua imposte dirette alla progressione a freddo',
-    description: '## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si',
+    description: 'Voto: 97 favorevoli, 1 contrario, nessuna astensione',
     keywords: 'frontalieri, ticino, svizzera, italia, fribourg, adegua, imposte, dirette',
     ogTitle: 'Fribourg adegua imposte dirette alla progressione a freddo',
-    ogDescription: '## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si',
+    ogDescription: 'Voto: 97 favorevoli, 1 contrario, nessuna astensione',
     canonicalPath: '/articoli-friburgo/fribourg-modifica-licd/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Fribourg adegua imposte dirette alla progressione a freddo",
-      "description": "## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si",
+      "description": "Voto: 97 favorevoli, 1 contrario, nessuna astensione",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-fribourg-modifica-licd.webp`,

@@ -7,12 +7,18 @@
  * `seo-entry-equivalence.test.mjs` compares the builder with real main
  * entries and classifies historical data drift.
  */
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
+import { assertPlainDescriptionFields } from './article-excerpt.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
   DETERMINISTIC_CARD_KIND,
   DETERMINISTIC_CARD_LICENSE_URL,
 } from './deterministic-card-provenance.mjs';
+import {
+  imageCreditRecordFromGeneratedImageRecord,
+  imageObjectCreditFields,
+} from '../../../engine/shared/imageCredits.mjs';
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const SEO_TIME_ZONE = 'Europe/Zurich';
@@ -132,6 +138,17 @@ function imageRightsLines(provenance) {
       + '\n        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },'
       + `\n        "creditText": ${jsonValue(record.credit)},`;
   }
+  if (provenance.kind === 'licensed-photo') {
+    const credit = imageCreditRecordFromGeneratedImageRecord(record);
+    const fields = imageObjectCreditFields(credit);
+    return `\n        "acquireLicensePage": ${jsonValue(fields.acquireLicensePage)},`
+      + `\n        "copyrightNotice": ${jsonValue(fields.copyrightNotice)},`
+      + `\n        "license": ${jsonValue(fields.license)},`
+      + `\n        "creator": ${JSON.stringify(fields.creator)},`
+      + `\n        "creditText": ${jsonValue(fields.creditText)},`
+      + (fields.isBasedOn ? `\n        "isBasedOn": ${jsonValue(fields.isBasedOn)},` : '')
+      + (fields.description ? `\n        "description": ${jsonValue(fields.description)},` : '');
+  }
   if (provenance.kind === 'editorial-upload') {
     return `\n        "acquireLicensePage": ${jsonValue(record.proofUrl)},`
       + `\n        "copyrightNotice": ${jsonValue(`© ${record.rightsHolder}`)},`
@@ -175,6 +192,11 @@ export function buildSeoEntry(data, {
   if (!data?.id || !data?.seo || !data?.slugs?.it || !data?._generatedImagePath) {
     throw new Error('buildSeoEntry: id, seo, slugs.it and _generatedImagePath are required');
   }
+  assertPlainDescriptionFields(data.seo, {
+    fieldPrefix: 'seo.',
+    id: data.id,
+    locale: 'it',
+  });
   const imagePath = data._generatedImagePath.replace(/^\//, '');
   const canonicalPath = `/${hubSlug}/${data.slugs.it}/`;
   const headline = data.seo.headline || data.seo.title;

@@ -2432,6 +2432,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/article-excerpt.mjs",
+      "mode": "corpus-only",
+      "reason": "Validatore e normalizzatore degli excerpt plain usato dal generatore del corpus per impedire Markdown nelle card e nei campi SEO derivati. Non esiste un gemello operativo sul sito: la difesa lato card vive nel repository del sito e resta una protezione distinta.",
+      "baseline": {
+        "site": null,
+        "corpus": "5655fc21c1a5546b",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/article-defect-memory.mjs",
       "sitePath": "scripts/lib/article-defect-memory.mjs",
       "mode": "identical",

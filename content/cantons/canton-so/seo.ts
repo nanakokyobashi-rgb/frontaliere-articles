@@ -116,16 +116,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-soletta-progetti-trasporto-governo': {
     title: 'Soletta: Governo chiede correzioni su progetti trasporti',
-    description: '## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti',
+    description: 'Soletta sostiene «Verkehr ’45» e chiede correzioni.',
     keywords: 'frontalieri, ticino, svizzera, italia, soletta, governo, chiede, correzioni',
     ogTitle: 'Soletta: Governo chiede correzioni su progetti trasporti',
-    ogDescription: '## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti',
+    ogDescription: 'Soletta sostiene «Verkehr ’45» e chiede correzioni.',
     canonicalPath: '/articoli-soletta/soletta-progetti-trasporto-governo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Soletta: Governo chiede correzioni su progetti trasporti",
-      "description": "## In breve - Soletta sostiene «Verkehr ’45» e chiede correzioni. - No alla soppressione di Dornach Apfelsee. - N18: servono passi di pianificazione vincolanti",
+      "description": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
