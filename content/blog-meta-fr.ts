@@ -12780,6 +12780,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.luvinate-progetto-motorio-materna.title': 'Luvinate : lancement du projet moteur à l\'école maternelle',
     'blog.article.luvinate-progetto-motorio-materna.excerpt': '## En bref - Le projet moteur 26-27 démarre à Luvinate - L\'école collabore avec la Varese Basket School - Le parcours s\'adresse aux enfants de l\'École',
     'blog.article.luvinate-progetto-motorio-materna.imageAlt': 'Enfants jouant à l\'extérieur dans une école maternelle',
+    'blog.article.pro-patria-varese-5-2-coppa-italia.title': 'Pro patria bat Varese 5-2 en coupe d\'Italie',
+    'blog.article.pro-patria-varese-5-2-coppa-italia.excerpt': '## En bref - La Pro Patria bat le Varese 5-2 au Franco Ossola. - Maïstrello, Mapelli et Bonaidi signent le premier 3-0. - Gallotti et Castellucchio rapportent',
+    'blog.article.pro-patria-varese-5-2-coppa-italia.imageAlt': 'Lac de Lugano au coucher du soleil avec reflets des montagnes',
 };
 
 export default blogMetaFr;

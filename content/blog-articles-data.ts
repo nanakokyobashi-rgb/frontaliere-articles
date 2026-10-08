@@ -43062,6 +43062,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'pro-patria-varese-5-2-coppa-italia',
+ category: 'novita',
+ date: '2026-10-08T02:56:22.442Z',
+ image: '/images/blog/article-pro-patria-varese-5-2-coppa-italia.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
