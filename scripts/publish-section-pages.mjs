@@ -235,6 +235,13 @@ export function articleManifestPages({ section, previousArticlePages = [], curre
     if (!identity || !current || current.canonicalPath !== page.canonicalPath) continue;
     verifiedByIdentityPath.set(`${identity}\u0000${page.canonicalPath}`, page);
   }
+  for (const previous of previousArticlePages) {
+    const identity = articlePageIdentity(previous);
+    const current = identity ? currentByIdentity.get(identity) : null;
+    if (identity && current?.canonicalPath === previous.canonicalPath) {
+      verifiedByIdentityPath.set(`${identity}\u0000${current.canonicalPath}`, previous);
+    }
+  }
 
   const result = new Map();
   for (const previous of previousArticlePages) {
@@ -356,6 +363,13 @@ export function obsoleteArticlePages(previousPages, currentPages, verifiedPages 
   for (const page of verifiedPages) {
     const identity = articlePageIdentity(page);
     if (identity) verifiedByIdentityPath.add(`${identity}\u0000${page.canonicalPath}`);
+  }
+  for (const previous of previousPages) {
+    const identity = articlePageIdentity(previous);
+    const current = identity ? currentByIdentity.get(identity) : null;
+    if (identity && current?.canonicalPath === previous.canonicalPath) {
+      verifiedByIdentityPath.add(`${identity}\u0000${current.canonicalPath}`);
+    }
   }
   return previousPages.filter((page) => {
     const identity = articlePageIdentity(page);

@@ -190,6 +190,7 @@ test('manifest edge: una release completa è validabile e un giro article-only c
   const merged = mergePageManifests(previous, current);
   assert.deepEqual(merged.pages.article.map((page) => page.id), ['gone', 'new']);
   assert.equal(merged.pages.landing.length, 1);
+  assert.deepEqual(merged.counts, { article: 2, archive: 0, hub: 0, landing: 1, total: 3 });
   assert.deepEqual(pageManifestErrors(merged, { section: 'canton-ti' }), []);
   assert.equal(pageManifestKey('canton-ti'), 'edge/sections/_page-manifests/canton-ti.json');
   assert.equal(pageManifestUrl('canton-ti', 'https://cdn.test/'), 'https://cdn.test/edge/sections/_page-manifests/canton-ti.json');
@@ -217,6 +218,21 @@ test('manifest edge: uno slug nuovo resta fuori finche\' la sua pagina non e\' v
   assert.deepEqual(obsoleteArticlePages([previousArticle], [currentArticle], []), []);
   assert.deepEqual(obsoleteArticlePages([previousArticle], [currentArticle], [currentArticle]), [previousArticle]);
 
+  assert.deepEqual(
+    articleManifestPages({
+      section: 'canton-ti',
+      previousArticlePages: [previousArticle, currentArticle],
+      currentArticlePages: [currentArticle],
+      verifiedArticlePages: [],
+    }).map((page) => page.canonicalPath),
+    ['/articoli-ticino/new/'],
+    'una URL nuova già nell’inventario pubblicato autorizza il cleanup anche in un run parziale',
+  );
+  assert.deepEqual(
+    obsoleteArticlePages([previousArticle, currentArticle], [currentArticle], []),
+    [previousArticle],
+  );
+
   const reusedByAnotherId = { ...pageEntry('canton-ti', 'articoli-ticino/old/index.html', 'article'), id: 'replacement' };
   assert.deepEqual(obsoleteArticlePages([previousArticle], [reusedByAnotherId], []), []);
   assert.deepEqual(
@@ -228,6 +244,25 @@ test('manifest edge: uno slug nuovo resta fuori finche\' la sua pagina non e\' v
     }).map((page) => page.id),
     ['kept'],
   );
+});
+
+test('manifest edge: i counts dimostrano che il documento HTTP è completo', async () => {
+  const complete = pageManifestFromPages({
+    section: 'canton-ti',
+    commit: 'old-commit',
+    pages: [
+      { ...pageEntry('canton-ti', 'articoli-ticino/kept/index.html', 'article'), id: 'kept' },
+      pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing'),
+    ],
+  });
+  assert.deepEqual(complete.counts, { article: 1, archive: 0, hub: 0, landing: 1, total: 2 });
+  const truncated = { ...complete, pages: { ...complete.pages, article: [] } };
+  const result = await fetchPageManifest('https://cdn.test/manifest.json', {
+    section: 'canton-ti',
+    fetchImpl: async () => ({ status: 200, ok: true, json: async () => truncated }),
+  });
+  assert.equal(result.state, 'unknown');
+  assert.match(result.reason, /counts\.article/);
 });
 
 test('manifest edge: un fallimento lascia la cancellazione in coda al push successivo', () => {

@@ -19,6 +19,12 @@ const REL_PATH_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*(?:\/[a-z0-9]+(?:-[a-z0-9]+)*)*\/i
 
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
+function manifestCounts(pagesByKind) {
+  const counts = Object.fromEntries(PAGE_MANIFEST_KINDS.map((kind) => [kind, pagesByKind[kind].length]));
+  counts.total = PAGE_MANIFEST_KINDS.reduce((total, kind) => total + counts[kind], 0);
+  return counts;
+}
+
 export function pageManifestKey(section) {
   if (typeof section !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(section)) {
     throw new Error(`sezione non valida per il manifest: ${section}`);
@@ -71,7 +77,7 @@ export function pageManifestFromPages({ section, commit, pages }) {
     byKind[page.kind].push(row);
   }
   for (const kind of PAGE_MANIFEST_KINDS) byKind[kind].sort((a, b) => a.edgeKey.localeCompare(b.edgeKey));
-  return { schema: PAGE_MANIFEST_SCHEMA, section, commit, pages: byKind };
+  return { schema: PAGE_MANIFEST_SCHEMA, section, commit, counts: manifestCounts(byKind), pages: byKind };
 }
 
 /**
@@ -88,7 +94,7 @@ export function mergePageManifests(previous, current) {
     const byKey = new Map(rows.map((row) => [row.edgeKey, row]));
     pages[kind] = [...byKey.values()].sort((a, b) => a.edgeKey.localeCompare(b.edgeKey));
   }
-  return { ...current, pages };
+  return { ...current, counts: manifestCounts(pages), pages };
 }
 
 /** Ritorna gli errori strutturali; un array vuoto significa manifest leggibile. */
@@ -99,16 +105,34 @@ export function pageManifestErrors(doc, { section } = {}) {
   if (section !== undefined && doc.section !== section) errors.push(`sezione ${doc.section ?? 'assente'} diversa da ${section}`);
   if (typeof doc.section !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(doc.section)) errors.push('sezione assente o non canonica');
   if (typeof doc.commit !== 'string' || !doc.commit) errors.push('commit assente');
+  const declaredCounts = isPlainObject(doc.counts) ? doc.counts : null;
+  if (!declaredCounts) {
+    errors.push('counts assente o non oggetto');
+  } else {
+    for (const kind of PAGE_MANIFEST_KINDS) {
+      if (!Number.isInteger(declaredCounts[kind]) || declaredCounts[kind] < 0) {
+        errors.push(`counts.${kind} assente o non intero non negativo`);
+      }
+    }
+    if (!Number.isInteger(declaredCounts.total) || declaredCounts.total < 0) {
+      errors.push('counts.total assente o non intero non negativo');
+    }
+  }
   if (!isPlainObject(doc.pages)) {
     errors.push('pages assente o non oggetto');
     return errors;
   }
   const seen = new Set();
+  let actualTotal = 0;
   for (const kind of PAGE_MANIFEST_KINDS) {
     const rows = doc.pages[kind];
     if (!Array.isArray(rows)) {
       errors.push(`pages.${kind} assente o non array`);
       continue;
+    }
+    actualTotal += rows.length;
+    if (declaredCounts && Number.isInteger(declaredCounts[kind]) && declaredCounts[kind] >= 0 && declaredCounts[kind] !== rows.length) {
+      errors.push(`counts.${kind}=${declaredCounts[kind]} ma pages.${kind} contiene ${rows.length} voci`);
     }
     for (const row of rows) {
       try {
@@ -119,6 +143,9 @@ export function pageManifestErrors(doc, { section } = {}) {
         errors.push(error.message);
       }
     }
+  }
+  if (declaredCounts && Number.isInteger(declaredCounts.total) && declaredCounts.total >= 0 && declaredCounts.total !== actualTotal) {
+    errors.push(`counts.total=${declaredCounts.total} ma pages contiene ${actualTotal} voci`);
   }
   return errors;
 }
