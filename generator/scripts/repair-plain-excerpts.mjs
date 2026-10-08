@@ -64,13 +64,13 @@ function repairMetaFile(relativeFile) {
   const details = [];
   const section = sectionForMeta(path.basename(relativeFile));
   const locale = localeForMeta(path.basename(relativeFile));
-  const re = /(^[ \t]*'blog\.article\.([^']+)\.excerpt':\s*')((?:[^'\\]|\\.)*)(')/gm;
-  after = after.replace(re, (full, prefix, id, encoded, suffix) => {
+  const re = /(^[ \t]*'blog\.article\.([^']+)\.(excerpt|seoDescription|ogDescription):\s*')((?:[^'\\]|\\.)*)(')/gm;
+  after = after.replace(re, (full, prefix, id, field, encoded, suffix) => {
     const value = unescapeForSingleQuoteTS(encoded);
-    const result = repairValue(value, { field: 'excerpt', id, locale });
+    const result = repairValue(value, { field, id, locale });
     if (!result.changed) return full;
     changed += 1;
-    details.push({ section, locale, id, field: 'excerpt', defects: result.defects });
+    details.push({ section, locale, id, field, defects: result.defects });
     return `${prefix}${escapeForSingleQuoteTS(result.value)}${suffix}`;
   });
   if (after !== before && writeMode) atomicWrite(file, after);

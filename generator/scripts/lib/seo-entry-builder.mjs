@@ -7,6 +7,7 @@
  * with real main entries and classifies historical data drift.
  */
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
+import { assertPlainDescriptionFields } from './article-excerpt.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
   DETERMINISTIC_CARD_KIND,
@@ -138,6 +139,11 @@ export function buildSeoEntry(data, {
   if (!data?.id || !data?.seo || !data?.slugs?.it || !data?._generatedImagePath) {
     throw new Error('buildSeoEntry: id, seo, slugs.it and _generatedImagePath are required');
   }
+  assertPlainDescriptionFields(data.seo, {
+    fieldPrefix: 'seo.',
+    id: data.id,
+    locale: 'it',
+  });
   const imagePath = data._generatedImagePath.replace(/^\//, '');
   const canonicalPath = `/${hubSlug}/${data.slugs.it}/`;
   const record = provenance?.record;

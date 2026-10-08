@@ -15,6 +15,16 @@ const HEADING_RE = /^\s*#{1,6}\s+(.+?)\s*$/;
 const LIST_RE = /(?:^|\n)\s*(?:[-*+]|\d+\.)\s+\S/m;
 const TABLE_SEPARATOR_RE = /^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/;
 const TABLE_ROW_RE = /^\s*\|?[^\n|]+\|[^\n]*\|?\s*$/;
+const REFERENCE_LINK_RE = /\[[^\]\n]+\]\[[^\]\n]*\]/;
+const REFERENCE_DEFINITION_LINE_RE = /^\s{0,3}\[[^\]\n]+\]:\s+\S+/m;
+const HORIZONTAL_RULE_LINE_RE = /^\s{0,3}(?:(?:\*[ \t]*){3,}|(?:-[ \t]*){3,}|(?:_[ \t]*){3,})\s*$/;
+
+const PLAIN_DESCRIPTION_FIELDS = Object.freeze([
+  'excerpt',
+  'seoDescription',
+  'ogDescription',
+  'description',
+]);
 
 function hasTableSyntax(value) {
   const lines = String(value ?? '').replace(/\r\n?/g, '\n').split('\n');
@@ -25,6 +35,13 @@ function hasTableSyntax(value) {
       || TABLE_SEPARATOR_RE.test(lines[index + 1] || '')
       || /^\s*\|[^|]+\|/.test(line);
   });
+}
+
+function hasHorizontalRuleSyntax(value) {
+  return String(value ?? '')
+    .replace(/\r\n?/g, '\n')
+    .split('\n')
+    .some((line) => HORIZONTAL_RULE_LINE_RE.test(line));
 }
 
 /**
@@ -39,7 +56,9 @@ export function findExcerptMarkdownDefects(value) {
   if (/\*\*[^*\n]+\*\*/.test(text)) defects.push('bold');
   if (/(?<![\w*])\*(?!\*)[^*\n]+(?<!\*)\*(?!\*)|(?<![\w_])_(?!_)[^_\n]+(?<!_)_(?!_)/.test(text)) defects.push('italic');
   if (/\[[^\]]+\]\([^)]*\)/.test(text)) defects.push('link');
+  if (REFERENCE_LINK_RE.test(text) || REFERENCE_DEFINITION_LINE_RE.test(text)) defects.push('reference-link');
   if (hasTableSyntax(text)) defects.push('table');
+  if (hasHorizontalRuleSyntax(text)) defects.push('horizontal-rule');
   if (/`[^`\n]+`/.test(text)) defects.push('code');
   if (/(?:^|\n)\s*>\s*\S/m.test(text)) defects.push('blockquote');
   if (/~~[^~\n]+~~/.test(text)) defects.push('strike');
@@ -54,7 +73,7 @@ function cleanMarkdownLines(value) {
 
   for (let index = 0; index < lines.length; index += 1) {
     let line = lines[index];
-    if (TABLE_SEPARATOR_RE.test(line)) continue;
+    if (TABLE_SEPARATOR_RE.test(line) || HORIZONTAL_RULE_LINE_RE.test(line) || REFERENCE_DEFINITION_LINE_RE.test(line)) continue;
 
     const heading = line.match(HEADING_RE);
     if (heading) {
@@ -79,6 +98,7 @@ function cleanMarkdownLines(value) {
       .replace(/^\s*(?:[-*+]|\d+\.)\s+/, '')
       .replace(/^\s*>\s?/, '')
       .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+      .replace(/\[([^\]\n]+)\]\[[^\]\n]*\]/g, '$1')
       .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
       .replace(/`{1,3}([^`\n]+)`{1,3}/g, '$1')
       .replace(/\*\*([^*\n]+)\*\*/g, '$1')
@@ -140,4 +160,22 @@ export function assertPlainExcerpt(value, { field = 'excerpt', id = 'unknown', l
     throw new Error(`[excerpt-plain] ${locale}/${id}/${field} contiene Markdown (${defects.join(', ')})`);
   }
   return value;
+}
+
+/**
+ * Assert every reader-facing description in a record before its writer emits
+ * it.  The normal generator, same-day refresh and SEO recovery use different
+ * writers, so the shared field list keeps their guards in lockstep.
+ */
+export function assertPlainDescriptionFields(fields, {
+  fieldPrefix = '',
+  id = 'unknown',
+  locale = 'unknown',
+} = {}) {
+  for (const field of PLAIN_DESCRIPTION_FIELDS) {
+    const value = fields?.[field];
+    if (typeof value !== 'string' || value.trim() === '') continue;
+    assertPlainExcerpt(value, { field: `${fieldPrefix}${field}`, id, locale });
+  }
+  return fields;
 }

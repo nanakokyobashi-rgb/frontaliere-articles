@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   assertPlainExcerpt,
+  assertPlainDescriptionFields,
   findExcerptMarkdownDefects,
   normalizeExcerpt,
   stripExcerptMarkdown,
@@ -30,6 +31,28 @@ test('strip deterministico rimuove heading, elenco, grassetto, link e tabella', 
     'First fact from the source. field value source verified',
   );
   assert.deepEqual(findExcerptMarkdownDefects(raw), ['heading', 'list', 'bold', 'link', 'table', 'label']);
+});
+
+test('rimuove link reference e separatori orizzontali Markdown', () => {
+  const raw = [
+    'Leggi [la fonte][fonte] per i dettagli.',
+    '',
+    '---',
+    '',
+    '[fonte]: https://example.test',
+  ].join('\n');
+  assert.equal(stripExcerptMarkdown(raw), 'Leggi la fonte per i dettagli.');
+  assert.deepEqual(findExcerptMarkdownDefects(raw), ['reference-link', 'horizontal-rule']);
+});
+
+test('la guardia condivisa controlla anche i campi SEO fuori dal meta builder', () => {
+  assert.throws(
+    () => assertPlainDescriptionFields(
+      { description: '[testo][ref]' },
+      { fieldPrefix: 'seo.', id: 'a2-test', locale: 'it' },
+    ),
+    /excerpt-plain.*seo\.description.*reference-link/,
+  );
 });
 
 test('il gate accetta testo semplice e rifiuta Markdown nei campi descrittivi', () => {
@@ -63,4 +86,3 @@ test('il gate accetta testo semplice e rifiuta Markdown nei campi descrittivi', 
     /excerpt-plain.*seoDescription.*heading/,
   );
 });
-

@@ -192,7 +192,12 @@ import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.m
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/it-text-similarity.mjs';
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
-import { normalizeExcerpt, stripExcerptMarkdown, assertPlainExcerpt } from './lib/article-excerpt.mjs';
+import {
+  normalizeExcerpt,
+  stripExcerptMarkdown,
+  assertPlainExcerpt,
+  assertPlainDescriptionFields,
+} from './lib/article-excerpt.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
 // Il verdetto sul payload di generazione (normalizzatore incluso) vive in un
@@ -15098,6 +15103,11 @@ function decodeSeoEntities(data) {
 
 function modifySeoService(data) {
   decodeSeoEntities(data);
+  assertPlainDescriptionFields(data.seo, {
+    fieldPrefix: 'seo.',
+    id: data.id,
+    locale: 'it',
+  });
   const publishedAt = toIsoWithTz(new Date())
   const modifiedAt = publishedAt
 
@@ -19293,6 +19303,27 @@ function clampSeoDescriptions(data) {
   }
 }
 
+/**
+ * All descriptive values must be plain before any shared writer touches the
+ * corpus. Primary generation normalizes them in `optimizeSeoMetadata`, but
+ * deterministic producers call `registerArticleFiles()` directly and must
+ * meet the same contract before the first registry/meta write.
+ */
+function assertArticleDescriptionsArePlain(data) {
+  assertPlainDescriptionFields(data?.seo, {
+    fieldPrefix: 'seo.',
+    id: data?.id,
+    locale: 'it',
+  });
+  for (const [locale, content] of Object.entries(data?.content || {})) {
+    assertPlainDescriptionFields(content, {
+      fieldPrefix: 'content.',
+      id: data?.id,
+      locale,
+    });
+  }
+}
+
 export async function registerArticleFiles(data, opts = {}) {
   if (!data || !data.id || !data.content?.it?.title) {
     throw new Error('registerArticleFiles: data.id and data.content.it.title are required');
@@ -19342,6 +19373,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // body tradotto con un rilievo bloccante arriva su disco (#5661).
   assertArticlePassesFactualityGates(data);
   clampSeoDescriptions(data);
+  assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();
   // The registrar is the write path of the three deterministic generators and
