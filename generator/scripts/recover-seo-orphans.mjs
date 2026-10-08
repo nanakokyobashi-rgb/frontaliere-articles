@@ -20,13 +20,14 @@ import { corpusCreditReader } from '../../scripts/lib/image-credit-records.mjs';
 import { unescapeTsString, tsStringEscapesWithNewlineAs } from './lib/unescape-ts-string.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './lib/blog-image-registry.mjs';
-import { buildSeoEntry, insertSeoEntriesAtHead, toIsoWithTz } from './lib/seo-entry-builder.mjs';
+import { buildSeoEntry, insertSeoEntriesAtHead, removeSeoEntriesWithSeparator, toIsoWithTz } from './lib/seo-entry-builder.mjs';
 import { mergeQueueWithSnapshot } from './lib/seo-recovery-queue.mjs';
 import { deriveSeoMetadata, normalizeSeoTitle } from './lib/seo-metadata-derivation.mjs';
 import { queueArticleCoverRegeneration, resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
 import { updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
 import { readImageRegenerationQueue, writeImageRegenerationQueue } from './lib/image-regeneration-queue.mjs';
-import { beginSeoBackfillLock, endSeoBackfillLock } from './lib/seo-backfill-lock.mjs';
+import { SEO_BACKFILL_LOCK_REL, beginSeoBackfillLock, endSeoBackfillLock } from './lib/seo-backfill-lock.mjs';
+import { createWriteLedger, restoreWrittenFiles } from './lib/seo-recovery-rollback.mjs';
 import { writeTextAtomic } from './lib/atomic-write-text.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -218,20 +219,32 @@ function run(idsFile, { dryRun = false } = {}) {
   const seoPath = path.join(ROOT, SEO_FILE);
   const registryPath = path.join(ROOT, REGISTRY_FILE);
   const queuePath = path.join(ROOT, 'data/image-regeneration-queue.json');
-  const before = fs.readFileSync(seoPath, 'utf8');
-  const registryBefore = fs.readFileSync(registryPath, 'utf8');
-  const queueBefore = fs.existsSync(queuePath) ? fs.readFileSync(queuePath, 'utf8') : null;
-  const queueSnapshot = queueBefore === null ? { schema: 1, items: [] } : JSON.parse(queueBefore);
+  // The marker first: the snapshots below are what a rollback puts back, so
+  // they are read while no other recovery can be writing these files.
   beginSeoBackfillLock(ROOT, ids);
+  const written = createWriteLedger();
   try {
+    const before = fs.readFileSync(seoPath, 'utf8');
+    const registryBefore = fs.readFileSync(registryPath, 'utf8');
+    const queueBefore = fs.existsSync(queuePath) ? fs.readFileSync(queuePath, 'utf8') : null;
+    const queueSnapshot = queueBefore === null ? { schema: 1, items: [] } : JSON.parse(queueBefore);
+    const recordQueue = () => {
+      if (fs.existsSync(queuePath)) written.record(queuePath, queueBefore, fs.readFileSync(queuePath, 'utf8'));
+    };
+
     for (const { data } of fallbackEntries) {
       const update = updateArticleImageInRegistry(ROOT, data.id, STATIC_FALLBACK_IMAGE);
       if (update.nextText === undefined) throw new Error(`${data.id}: registry image update returned no text`);
+      if (update.changed) written.record(registryPath, registryBefore, update.nextText);
     }
 
     let after = before;
     for (const id of ids) {
-      const removal = removeSeoEntriesFromSource(after, id, SEO_FILE);
+      const removal = removeSeoEntriesWithSeparator(after, id, {
+        findSeoEntryMatches,
+        removeSeoEntriesFromSource,
+        fileLabel: SEO_FILE,
+      });
       after = removal.src;
     }
     // At the head, not at the tail where the generator appends: see
@@ -243,19 +256,18 @@ function run(idsFile, { dryRun = false } = {}) {
     const missingAfterWrite = ids.filter((id) => findSeoEntryMatches(after, id, SEO_FILE).length !== 1);
     if (missingAfterWrite.length > 0) throw new Error(`SEO entry count after build is not one for: ${missingAfterWrite.join(', ')}`);
     writeTextAtomic(seoPath, after);
+    written.record(seoPath, before, after);
     for (const { data } of fallbackEntries) {
-      if (!queueArticleCoverRegeneration(ROOT, data)) {
-        throw new Error(`${data.id}: unable to queue declared-cover regeneration`);
-      }
+      const queued = queueArticleCoverRegeneration(ROOT, data);
+      recordQueue();
+      if (!queued) throw new Error(`${data.id}: unable to queue declared-cover regeneration`);
     }
     const currentQueue = readImageRegenerationQueue(ROOT);
+    // Same items, other order: nothing the drain removed meanwhile comes back.
     const queue = mergeQueueWithSnapshot(queueSnapshot, currentQueue);
-    const missingSnapshotItems = queueSnapshot.items.some((item) => !currentQueue.items.some(
-      (currentItem) => currentItem?.articleId === item?.articleId,
-    ));
-    // The merged queue also differs from the current one by position alone.
-    if (missingSnapshotItems || JSON.stringify(queue.items) !== JSON.stringify(currentQueue.items)) {
+    if (JSON.stringify(queue.items) !== JSON.stringify(currentQueue.items)) {
       writeImageRegenerationQueue(ROOT, queue);
+      recordQueue();
     }
     const missingQueueItems = fallbackIds.filter((id) => !queue.items.some(
       (item) => item?.articleId === id && item.fallbackImage === STATIC_FALLBACK_IMAGE,
@@ -266,11 +278,17 @@ function run(idsFile, { dryRun = false } = {}) {
     endSeoBackfillLock(ROOT);
   } catch (error) {
     try {
-      writeTextAtomic(seoPath, before);
-      writeTextAtomic(registryPath, registryBefore);
-      if (queueBefore === null) fs.rmSync(queuePath, { force: true });
-      else writeTextAtomic(queuePath, queueBefore);
-      endSeoBackfillLock(ROOT);
+      // Only what this run wrote, and only where it is still what this run
+      // left: a file changed since holds someone else's work.
+      const { diverged } = restoreWrittenFiles(written.entries());
+      if (diverged.length === 0) {
+        endSeoBackfillLock(ROOT);
+      } else {
+        error.rollbackDiverged = diverged;
+        console.error(`Rollback SEO parziale: ${diverged.map((file) => path.relative(ROOT, file)).join(', ')} `
+          + 'è cambiato dopo la scrittura di questa run e non è stato ripristinato. '
+          + `Il marker ${SEO_BACKFILL_LOCK_REL} resta al suo posto finché qualcuno non ha guardato.`);
+      }
     } catch (rollbackError) {
       error.rollbackError = rollbackError;
       console.error(`Rollback SEO incompleto: ${rollbackError.message}`);

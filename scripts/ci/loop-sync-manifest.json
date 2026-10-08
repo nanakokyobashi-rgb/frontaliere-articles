@@ -5755,6 +5755,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/seo-recovery-rollback.mjs",
+      "mode": "corpus-only",
+      "reason": "Rollback del recupero delle voci SEO: registra per ogni file il testo prima della run e l'ultimo testo scritto dalla run, e ripristina un file solo se contiene ancora esattamente ciò che la run ha lasciato. Un file cambiato dopo porta il lavoro di un altro produttore e non viene toccato. Separato dallo script, che esegue la riga di comando all'import. Sul sito non esiste questo recupero.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/scripts/lib/image-regeneration-publish-outbox.mjs",
       "mode": "corpus-only",
       "reason": "Outbox durevole per il passaggio delle copertine rigenerate ai publisher esistenti: conserva section/articleId fra il push dei dati e il dispatch/acknowledgement, cosi' un errore di gh workflow run non perde una ripubblicazione. Il sito non esegue il drainer e consuma solo le superfici HTTP.",

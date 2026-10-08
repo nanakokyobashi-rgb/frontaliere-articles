@@ -2,8 +2,13 @@
 // Kept apart from the script, which runs its command line at import.
 
 /**
- * The queue as it was, with the items this run added placed just before the
- * last pre-existing one instead of after it.
+ * The current queue, with the items this run added placed just before the
+ * last one that was already there instead of after it.
+ *
+ * The result holds exactly the items of `current`, reordered: an item the
+ * drain removed after the snapshot stays removed, and two items for the same
+ * article both stay as they are. `snapshot` only tells which items were there
+ * before the run.
  *
  * The cover pipeline appends its own failures at the end of this file. Two
  * appends at the same spot are a merge conflict; an insertion one item earlier
@@ -14,9 +19,8 @@
  * decides who goes first.
  */
 export function mergeQueueWithSnapshot(snapshot, current) {
-  const currentById = new Map(current.items.map((item) => [item?.articleId, item]));
   const snapshotIds = new Set(snapshot.items.map((item) => item?.articleId));
-  const kept = snapshot.items.map((item) => currentById.get(item?.articleId) || item);
+  const kept = current.items.filter((item) => snapshotIds.has(item?.articleId));
   const added = current.items.filter((item) => !snapshotIds.has(item?.articleId));
   const items = kept.length === 0
     ? added

@@ -204,6 +204,33 @@ export function insertSeoEntriesAtHead(source, seoEntries, {
   return replaceCaptureSafe(source, openerPattern, (_match, opener) => `${opener}${seoEntries.join('\n')}\n`);
 }
 
+/**
+ * Remove every entry of `id`, each together with the blank line that
+ * separates it from the entry before.
+ *
+ * The engine's remover leaves that line behind. That suits a replacement in
+ * place; a recovery that removes entries and inserts them again at the head
+ * would add one blank line per entry on every run over a chunk that already
+ * holds them. The two engine functions are passed in: this module does not
+ * import the engine.
+ */
+export function removeSeoEntriesWithSeparator(source, id, {
+  findSeoEntryMatches,
+  removeSeoEntriesFromSource,
+  fileLabel = 'SEO file',
+} = {}) {
+  if (typeof findSeoEntryMatches !== 'function' || typeof removeSeoEntriesFromSource !== 'function') {
+    throw new TypeError('removeSeoEntriesWithSeparator: the two engine functions are required');
+  }
+  let src = String(source);
+  const matches = findSeoEntryMatches(src, id, fileLabel);
+  for (let index = matches.length - 1; index >= 0; index -= 1) {
+    const { lineStart } = matches[index];
+    if (src.slice(lineStart - 2, lineStart) === '\n\n') src = src.slice(0, lineStart - 1) + src.slice(lineStart);
+  }
+  return removeSeoEntriesFromSource(src, id, fileLabel);
+}
+
 /** Append a built entry before the metadata object's closing brace. */
 export function appendSeoEntrySource(source, seoEntry, {
   seoConstName,

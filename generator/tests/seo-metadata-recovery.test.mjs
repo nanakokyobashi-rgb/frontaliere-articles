@@ -1,12 +1,22 @@
+import '../../host/cantonSectionsBootstrap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { deriveSeoMetadata } from '../scripts/lib/seo-metadata-derivation.mjs';
-import { appendSeoEntrySource, buildSeoEntry, insertSeoEntriesAtHead, toIsoWithTz } from '../scripts/lib/seo-entry-builder.mjs';
+import { findSeoEntryMatches, removeSeoEntriesFromSource } from '../../engine/shared/seo-entry.mjs';
+import {
+  appendSeoEntrySource,
+  buildSeoEntry,
+  insertSeoEntriesAtHead,
+  removeSeoEntriesWithSeparator,
+  toIsoWithTz,
+} from '../scripts/lib/seo-entry-builder.mjs';
 import { mergeQueueWithSnapshot } from '../scripts/lib/seo-recovery-queue.mjs';
+import { createWriteLedger, restoreWrittenFiles } from '../scripts/lib/seo-recovery-rollback.mjs';
+import { SEO_BACKFILL_LOCK_REL, beginSeoBackfillLock, endSeoBackfillLock } from '../scripts/lib/seo-backfill-lock.mjs';
 
 function article() {
   return {
@@ -191,4 +201,139 @@ test('la coda del recupero si fonde senza conflitto con un fallimento accodato n
   // The control: both sides append after the last item.
   const appended = queueText([...baseItems, queueItem('new-1'), queueItem('new-2')]);
   assert.ok(threeWayMerge(base, appended, pipelineAppend).conflicts > 0);
+});
+
+test('rieseguire il recupero su voci già presenti lascia il chunk identico', () => {
+  const ids = ['recovered-one', 'recovered-two'];
+  const recover = (source, remove) => {
+    let next = source;
+    for (const id of ids) next = remove(next, id).src;
+    return insertSeoEntriesAtHead(next, ids.map(builtEntry), { seoConstName: 'BLOG_SEO_METADATA' });
+  };
+  const withSeparator = (source, id) => removeSeoEntriesWithSeparator(source, id, {
+    findSeoEntryMatches,
+    removeSeoEntriesFromSource,
+    fileLabel: 'fixture',
+  });
+  const once = recover(SEO_BASE, withSeparator);
+  assert.equal(recover(once, withSeparator), once);
+  assert.equal(recover(recover(once, withSeparator), withSeparator), once);
+
+  // The control: the engine's remover leaves the separator line of each entry.
+  const engineOnly = (source, id) => removeSeoEntriesFromSource(source, id, 'fixture');
+  const again = recover(once, engineOnly);
+  assert.equal(again.split('\n').length - once.split('\n').length, ids.length);
+});
+
+// ── Concurrent producers (review of PR 2458) ─────────────────────────────────
+
+test('mergeQueueWithSnapshot non riporta in coda una voce che il drenaggio ha tolto', () => {
+  const snapshot = { schema: 1, items: [queueItem('a'), queueItem('b'), queueItem('c')] };
+  // `b` was drained after the snapshot; the recovery queued `new-1`.
+  const current = { schema: 1, items: [queueItem('a'), queueItem('c'), queueItem('new-1')] };
+  assert.deepEqual(mergeQueueWithSnapshot(snapshot, current).items.map((item) => item.articleId), ['a', 'new-1', 'c']);
+
+  // Whatever the input, the result holds the items of the current queue and no other.
+  const byJson = (left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right));
+  const duplicated = { schema: 1, items: [queueItem('a'), queueItem('a', { failureCount: 3 }), queueItem('new-1')] };
+  const merged = mergeQueueWithSnapshot({ schema: 1, items: [queueItem('a'), queueItem('gone')] }, duplicated);
+  assert.deepEqual([...merged.items].sort(byJson), [...duplicated.items].sort(byJson));
+});
+
+function tempDir(prefix) {
+  return fs.mkdtempSync(path.join(os.tmpdir(), prefix));
+}
+
+test('il lock del recupero non sovrascrive un marker che trova', () => {
+  const root = tempDir('seo-backfill-lock-');
+  try {
+    const marker = path.join(root, SEO_BACKFILL_LOCK_REL);
+    fs.mkdirSync(path.dirname(marker), { recursive: true });
+    fs.writeFileSync(marker, 'left by a previous run\n');
+    assert.throws(() => beginSeoBackfillLock(root, ['article-a']), /already exists/);
+    assert.equal(fs.readFileSync(marker, 'utf8'), 'left by a previous run\n');
+
+    fs.rmSync(marker);
+    beginSeoBackfillLock(root, ['article-a']);
+    assert.deepEqual(JSON.parse(fs.readFileSync(marker, 'utf8')).ids, ['article-a']);
+    assert.throws(() => beginSeoBackfillLock(root, ['article-b']), /already exists/);
+    assert.deepEqual(JSON.parse(fs.readFileSync(marker, 'utf8')).ids, ['article-a']);
+    endSeoBackfillLock(root);
+    assert.equal(fs.existsSync(marker), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('fra più recuperi avviati insieme uno solo ottiene il lock', async () => {
+  const root = tempDir('seo-backfill-race-');
+  try {
+    const go = path.join(root, 'go');
+    const lockModule = new URL('../scripts/lib/seo-backfill-lock.mjs', import.meta.url).href;
+    // Each process waits for the same signal, then tries once.
+    const contender = `
+      import fs from 'node:fs';
+      // An inline script has no script path: the arguments start at index 1.
+      const [lockModule, root, go, name] = process.argv.slice(1);
+      const { beginSeoBackfillLock } = await import(lockModule);
+      const until = Date.now() + 20000;
+      while (!fs.existsSync(go)) {
+        if (Date.now() > until) process.exit(2);
+        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 2);
+      }
+      try { beginSeoBackfillLock(root, [name]); process.exit(0); }
+      catch (error) { process.exit(/already exists/.test(error.message) ? 3 : 1); }
+    `;
+    const names = Array.from({ length: 8 }, (_, index) => `contender-${index}`);
+    const exits = names.map((name) => new Promise((resolve) => {
+      const child = spawn(process.execPath, ['--input-type=module', '-e', contender, lockModule, root, go, name], { stdio: 'ignore' });
+      child.on('close', (code) => resolve(code));
+    }));
+    await new Promise((resolve) => { setTimeout(resolve, 400); });
+    fs.writeFileSync(go, '');
+    const codes = await Promise.all(exits);
+    assert.equal(codes.filter((code) => code === 0).length, 1, `exit codes: ${codes.join(',')}`);
+    assert.equal(codes.filter((code) => code === 3).length, names.length - 1, `exit codes: ${codes.join(',')}`);
+    const marker = JSON.parse(fs.readFileSync(path.join(root, SEO_BACKFILL_LOCK_REL), 'utf8'));
+    assert.equal(marker.ids.length, 1);
+    assert.ok(names.includes(marker.ids[0]));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il rollback ripristina solo i file che contengono ancora ciò che la run ha scritto', () => {
+  const dir = tempDir('seo-recovery-rollback-');
+  try {
+    const file = (name) => path.join(dir, name);
+    const ledger = createWriteLedger();
+
+    // Written by the run and untouched since: goes back to its snapshot.
+    fs.writeFileSync(file('seo.ts'), 'run seo');
+    ledger.record(file('seo.ts'), 'before seo', 'run seo');
+    // Written twice by the run: the snapshot is the one before the first write.
+    ledger.record(file('registry.ts'), 'before registry', 'run registry 1');
+    fs.writeFileSync(file('registry.ts'), 'run registry 2');
+    ledger.record(file('registry.ts'), 'run registry 1', 'run registry 2');
+    // Written by the run, then by another producer: left alone.
+    fs.writeFileSync(file('queue.json'), 'run queue + a request queued by the cover pipeline');
+    ledger.record(file('queue.json'), 'before queue', 'run queue');
+    // Created by the run and untouched since: removed.
+    fs.writeFileSync(file('created.json'), 'run created');
+    ledger.record(file('created.json'), null, 'run created');
+    // Created by the run, then extended by another producer: left alone.
+    fs.writeFileSync(file('created-then-used.json'), 'run created + another request');
+    ledger.record(file('created-then-used.json'), null, 'run created');
+
+    const { restored, diverged } = restoreWrittenFiles(ledger.entries());
+    assert.deepEqual(restored.map((item) => path.basename(item)), ['seo.ts', 'registry.ts', 'created.json']);
+    assert.deepEqual(diverged.map((item) => path.basename(item)), ['queue.json', 'created-then-used.json']);
+    assert.equal(fs.readFileSync(file('seo.ts'), 'utf8'), 'before seo');
+    assert.equal(fs.readFileSync(file('registry.ts'), 'utf8'), 'before registry');
+    assert.equal(fs.readFileSync(file('queue.json'), 'utf8'), 'run queue + a request queued by the cover pipeline');
+    assert.equal(fs.existsSync(file('created.json')), false);
+    assert.equal(fs.readFileSync(file('created-then-used.json'), 'utf8'), 'run created + another request');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
