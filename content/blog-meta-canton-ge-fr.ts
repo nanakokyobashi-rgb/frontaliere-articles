@@ -12,6 +12,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.salario-minimo-ginevra-2027.title': 'Genève : salaire minimum à 24,73 CHF l\'heure dès 2027',
     'blog.article.salario-minimo-ginevra-2027.excerpt': 'À partir du 1er janvier 2027, le minimum passe à 24,73 CHF l\'heure Agriculture et floriculture : 18,17 CHF l\'heure L\'indexation annuelle suit le coût de la vie',
     'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Fiche de paie et calculatrice sur un bureau à Genève',
+    'blog.article.ginevra-stop-autostrada-a412.title': 'Genève demande l\'arrêt des travaux de l\'autoroute A412',
+    'blog.article.ginevra-stop-autostrada-a412.excerpt': 'La Ville de Genève demande l\'arrêt des travaux de l\'A412 Six communes genevoises adhèrent à la procédure La Cour d\'appel de Lyon statue le 14 octobre',
+    'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Chantier de l\'autoroute A412 entre la France et Genève',
 };
 
 export default blogMetaCantonGeFr;

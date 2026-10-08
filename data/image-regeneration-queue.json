@@ -320,6 +320,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T15:45:50.095Z",
       "lastFailureAt": "2026-10-08T15:45:50.095Z"
+    },
+    {
+      "articleId": "ginevra-stop-autostrada-a412",
+      "title": "Ginevra chiede lo stop dei lavori per l'autostrada A412",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T15:48:49.599Z",
+      "lastFailureAt": "2026-10-08T15:48:49.599Z"
     }
   ]
 }

@@ -12,6 +12,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.salario-minimo-ginevra-2027.title': 'Geneva: minimum wage at 24,73 CHF per hour from 2027',
     'blog.article.salario-minimo-ginevra-2027.excerpt': 'From January 1, 2027, the minimum wage rises to 24,73 CHF per hour Agriculture and floriculture: 18,17 CHF per hour Annual indexation follows the cost of living',
     'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Payroll document and calculator on a desk in Geneva',
+    'blog.article.ginevra-stop-autostrada-a412.title': 'Geneva calls for work on the A412 motorway to be halted',
+    'blog.article.ginevra-stop-autostrada-a412.excerpt': 'The City of Geneva calls for work on the A412 to be halted Six Geneva municipalities join the proceedings The Lyon Court of Appeal will rule on October 14',
+    'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'A412 highway construction site between France and Geneva',
 };
 
 export default blogMetaCantonGeEn;

@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ginevra-stop-autostrada-a412': {
+    title: 'Ginevra chiede lo stop dei lavori per l\'autostrada A412',
+    description: 'La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d\'appel de Lyon decide il 14 ottobre Nel mirino',
+    keywords: 'frontalieri, ticino, svizzera, italia, ginevra, chiede, stop, lavori',
+    ogTitle: 'Ginevra chiede lo stop immediato dei lavori dell\'A412',
+    ogDescription: 'La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d\'appel de Lyon decide il 14 ottobre Nel mirino',
+    canonicalPath: '/articoli-ginevra/ginevra-stop-autostrada-a412/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ginevra chiede lo stop dei lavori per l'autostrada A412",
+      "description": "La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d'appel de Lyon decide il 14 ottobre Nel mirino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere autostradale A412 tra Francia e Ginevra"
+      },
+      "datePublished": "2026-10-08T15:48:49+00:00",
+      "dateModified": "2026-10-08T15:48:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ginevra/ginevra-stop-autostrada-a412/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

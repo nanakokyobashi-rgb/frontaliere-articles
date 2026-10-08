@@ -12,6 +12,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.salario-minimo-ginevra-2027.title': 'Ginevra: salario minimo a 24,73 CHF l\'ora dal 2027',
     'blog.article.salario-minimo-ginevra-2027.excerpt': 'Dal 1° gennaio 2027 il minimo sale a 24,73 CHF l\'ora Agricoltura e floricoltura: 18,17 CHF l\'ora L\'indicizzazione annuale segue il costo della vita Il minimo',
     'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Documento di paga e calcolatrice su una scrivania a Ginevra',
+    'blog.article.ginevra-stop-autostrada-a412.title': 'Ginevra chiede lo stop dei lavori per l\'autostrada A412',
+    'blog.article.ginevra-stop-autostrada-a412.excerpt': 'La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d\'appel de Lyon decide il 14 ottobre Nel mirino',
+    'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Cantiere autostradale A412 tra Francia e Ginevra',
 };
 
 export default blogMetaCantonGeIt;
