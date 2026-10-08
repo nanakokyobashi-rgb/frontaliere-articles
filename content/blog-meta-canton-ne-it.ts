@@ -4,10 +4,10 @@
  */
 const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.neuchatel-rinnova-politica-abitativa-con-24-milioni.title': 'Neuchâtel rinnova politica abitativa con 24 milioni',
-    'blog.article.neuchatel-rinnova-politica-abitativa-con-24-milioni.excerpt': '## In breve - Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto - Credito-quadro di 24 milioni di franchi su otto anni - Prosegue la politica',
+    'blog.article.neuchatel-rinnova-politica-abitativa-con-24-milioni.excerpt': 'Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto',
     'blog.article.neuchatel-rinnova-politica-abitativa-con-24-milioni.imageAlt': 'Immagine editoriale relativa a: Neuchâtel rinnova politica abitativa con 24 milioni',
     'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.title': 'Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
-    'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.excerpt': '## In breve - 3.945 disoccupati in settembre 2026 - Tasso neocastellano stabile al 4,4% - Disoccupazione giovanile al 5,3% - Dati DECS aggiornati al 6 ottobre',
+    'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.excerpt': '3.945 disoccupati in settembre 2026',
     'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.imageAlt': 'Immagine editoriale relativa a: Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
 };
 
