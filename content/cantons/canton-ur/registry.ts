@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'uri-chiusura-passhoehe',
+ category: 'pratico',
+ date: '2026-10-08T23:39:16.200Z',
+ image: '/images/blog/article-strada-calanca-chiusura-preventiva.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
