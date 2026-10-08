@@ -37,10 +37,12 @@ cleanup() {
   if [ -n "$temp_index" ]; then
     rm -f "$temp_index"
   fi
+  # The staging folder is scratch space: it goes away on every exit, so the
+  # output folder holds either the three files or nothing.
+  if [ -n "$staging_dir" ]; then
+    rm -rf "$staging_dir"
+  fi
   if [ "$remove_outputs" = true ]; then
-    if [ -n "$staging_dir" ]; then
-      rm -rf "$staging_dir"
-    fi
     if [ -n "$bundle_path" ]; then
       rm -f "$bundle_path"
     fi
@@ -82,6 +84,14 @@ else
   reason="${3:-}"
 fi
 
+# The folder holds the result of this invocation only. Whatever an earlier one
+# left there goes away first: a warning-and-exit below must not leave an old
+# bundle for the workflow to upload as this run's article.
+bundle_path="$output_dir/article.bundle"
+manifest_path="$output_dir/manifest.json"
+replay_path="$output_dir/REPLAY.md"
+rm -f "$bundle_path" "$manifest_path" "$replay_path"
+
 if [ "$source_kind" = 'worktree' ]; then
   base_sha="$(git rev-parse --verify 'HEAD^{commit}')"
   head_tree="$(git rev-parse --verify 'HEAD^{tree}')"
@@ -89,9 +99,12 @@ if [ "$source_kind" = 'worktree' ]; then
   rm -f "$temp_index"
   GIT_INDEX_FILE="$temp_index" git read-tree HEAD
   GIT_INDEX_FILE="$temp_index" git add -A
-  # --missing-ok: on a clone without blobs a plain write-tree first downloads
-  # every blob the index names, and this runs after a failure, on a job that is
-  # already ending. The objects `git add` just wrote are local either way.
+  # --missing-ok: on a clone without blobs a plain write-tree first asks the
+  # remote for every blob the index names. This runs after a failure and must
+  # not depend on the network; the objects `git add` just wrote are local
+  # either way, and the bundle below is verified. The five producers check out
+  # the full repository, where the flag changes nothing: it matters for a
+  # caller on a sparse checkout, which actions/checkout clones without blobs.
   worktree_tree="$(GIT_INDEX_FILE="$temp_index" git write-tree --missing-ok)"
   if [ "$worktree_tree" = "$head_tree" ]; then
     warning 'lo stato del worktree non contiene differenze rispetto a HEAD'
@@ -134,16 +147,24 @@ else
 fi
 
 # Always use a per-invocation ref. This also handles an artifact directory being
-# reused while a stale refs/unpushed/article is still present.
-bundle_ref="refs/unpushed/article-$$-${RANDOM}-$(date -u +%s)"
-while git show-ref --verify --quiet "$bundle_ref"; do
-  bundle_ref="refs/unpushed/article-$$-${RANDOM}-$(date -u +%s)"
+# reused while a stale refs/unpushed/article is still present. The ref is
+# created with an all-zero expected value, so git itself refuses a name that
+# already exists: there is no window between a check and the creation.
+zero_oid="$(git hash-object -t blob --stdin < /dev/null | tr '0-9a-f' '0')"
+for _ in 1 2 3 4 5; do
+  candidate_ref="refs/unpushed/article-$$-${RANDOM}-$(date -u +%s)"
+  if git update-ref "$candidate_ref" "$produced_sha" "$zero_oid" 2>/dev/null; then
+    bundle_ref="$candidate_ref"
+    ref_created=true
+    break
+  fi
 done
+if [ "$ref_created" != true ]; then
+  warning 'non è stato possibile creare un ref temporaneo per il bundle'
+  exit 0
+fi
 
 mkdir -p "$output_dir"
-bundle_path="$output_dir/article.bundle"
-manifest_path="$output_dir/manifest.json"
-replay_path="$output_dir/REPLAY.md"
 # Build and validate all three files in a private directory. The workflow
 # promotes the artifact after this helper exits, so a partial bundle or
 # manifest must never be visible as a replayable preservation.
@@ -151,14 +172,13 @@ staging_dir="$(mktemp -d "$output_dir/.preserve-unpushed.XXXXXX")"
 staged_bundle_path="$staging_dir/article.bundle"
 staged_manifest_path="$staging_dir/manifest.json"
 staged_replay_path="$staging_dir/REPLAY.md"
-rm -f "$bundle_path" "$manifest_path" "$replay_path"
 
 files_tmp="$(mktemp "${TMPDIR:-/tmp}/preserve-unpushed-files.XXXXXX")"
-git update-ref "$bundle_ref" "$produced_sha"
-ref_created=true
 git bundle create "$staged_bundle_path" "${base_sha}..${bundle_ref}" >/dev/null
 git bundle verify "$staged_bundle_path" >/dev/null
-git diff-tree --no-commit-id --name-only -r -z "$produced_sha" > "$files_tmp"
+# Base against produced, both named: a plain `diff-tree <commit>` prints
+# nothing for a merge commit.
+git diff-tree --no-commit-id --name-only -r -z "$base_sha" "$produced_sha" > "$files_tmp"
 
 file_count="$(
   PRODUCED_SHA="$produced_sha" \
@@ -174,10 +194,19 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const raw = readFileSync(process.env.FILES_PATH);
 const files = [];
+// A git path is bytes, not text. The bundle carries it exactly; this list is
+// for a person to read, so a name that is not valid UTF-8 is shown decoded and
+// the manifest says that the list is not byte-exact.
+let filesLossy = false;
 let start = 0;
 for (let end = 0; end <= raw.length; end += 1) {
   if (end !== raw.length && raw[end] !== 0) continue;
-  if (end > start) files.push(raw.subarray(start, end).toString('utf8'));
+  if (end > start) {
+    const bytes = raw.subarray(start, end);
+    const name = bytes.toString('utf8');
+    if (!Buffer.from(name, 'utf8').equals(bytes)) filesLossy = true;
+    files.push(name);
+  }
   start = end + 1;
 }
 
@@ -187,6 +216,7 @@ const manifest = {
   subject: process.env.SUBJECT,
   source: process.env.SOURCE_KIND,
   files,
+  ...(filesLossy ? { filesLossy: true } : {}),
   reason: process.env.REASON ?? '',
   ref: process.env.BUNDLE_REF,
 };

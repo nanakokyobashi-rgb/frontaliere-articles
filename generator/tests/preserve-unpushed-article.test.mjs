@@ -4,8 +4,9 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFile, execFileSync } from 'node:child_process';
 import {
+  chmodSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
@@ -17,6 +18,7 @@ import {
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
@@ -206,6 +208,8 @@ test('serializza correttamente path con spazio, carattere non ASCII e newline', 
 
     const manifest = JSON.parse(readFileSync(path.join(output, 'manifest.json'), 'utf8'));
     assert.deepEqual(manifest.files, [filename]);
+    // Nomi UTF-8 validi: l'elenco e' esatto e il manifest non dice il contrario.
+    assert.equal(manifest.filesLossy, undefined);
     assert.equal(manifest.source, 'worktree');
   } finally {
     rmSync(root, { recursive: true, force: true });
@@ -304,9 +308,12 @@ test('la modalita worktree in un checkout sparse non registra come cancellati i 
 });
 
 test('la modalita worktree non chiede al promisor i blob che un clone parziale non ha', () => {
-  // Su un clone senza blob un `git write-tree` semplice scarica prima tutti i
-  // blob nominati dall'indice: nel repo del sito è costato 298 e 321 secondi a
-  // un job da dieci minuti. Qui girerebbe dopo un fallimento, a job già finito.
+  // Su un clone senza blob un `git write-tree` semplice chiede prima al remoto
+  // tutti i blob nominati dall'indice: su questa fixture una richiesta al
+  // promisor e i sei blob scaricati, contro zero e zero. La conservazione gira
+  // dopo un fallimento e non deve dipendere dalla rete. I cinque producer fanno
+  // un checkout completo, dove il flag non cambia nulla: questa e' la guardia
+  // per un chiamante su checkout sparse, che actions/checkout clona senza blob.
   const root = mkdtempSync(path.join(tmpdir(), 'preserve-unpushed-blobless-'));
   try {
     const origin = path.join(root, 'origin');
@@ -487,11 +494,247 @@ test('i cinque producer del funnel hanno id, marker, conservazione condizionata 
     // unicità, rebase, push): il motivo scritto nel manifest non ne sceglie una.
     assert.doesNotMatch(preserve.text, /fallito dopo \d+ tentativi/, `${name}: il motivo non deve affermare una causa`);
     assert.match(preserve.text, /preserved=true/);
+    // Conservato vuol dire i tre file insieme: un bundle da solo non basta.
+    assert.match(
+      preserve.text,
+      /\[ ! -s "\$preserved_dir\/article\.bundle" \] \|\| \[ ! -s "\$preserved_dir\/manifest\.json" \] \|\| \[ ! -s "\$preserved_dir\/REPLAY\.md" \]/,
+      `${name}: l'upload deve richiedere bundle, manifest e REPLAY`,
+    );
     assert.match(upload.text, /uses: actions\/upload-artifact@v7/);
     assert.match(upload.text, /always\(\) && steps\.preserve_unpushed_article\.outputs\.preserved == 'true'/);
     assert.match(upload.text, /name: unpushed-[a-z-]+-\$\{\{ github\.run_id \}\}-\$\{\{ github\.run_attempt \}\}/);
     assert.match(upload.text, /retention-days: 14/);
     assert.match(upload.text, /if-no-files-found: ignore/);
+  }
+});
+
+/** Un eseguibile messo per primo nel PATH, che puo' far fallire un passo. */
+function shimDir(root, name, lines) {
+  const dir = path.join(root, `shim-${name}`);
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(path.join(dir, name), `${lines.join('\n')}\n`);
+  chmodSync(path.join(dir, name), 0o755);
+  return dir;
+}
+
+function realBinary(name) {
+  return execFileSync('/bin/sh', ['-c', `command -v ${name}`], { encoding: 'utf8' }).trim();
+}
+
+test('un errore dopo la creazione del bundle non lascia un risultato a meta', () => {
+  // Un bundle senza manifest e senza REPLAY non e' un articolo conservato: se
+  // restasse nella cartella, il workflow lo caricherebbe come tale.
+  const failures = {
+    manifest: (root) => shimDir(root, 'node', ['#!/bin/sh', 'exit 1']),
+    verify: (root) => shimDir(root, 'git', [
+      '#!/bin/sh',
+      'if [ "$1" = bundle ] && [ "$2" = verify ]; then echo "fatal: simulated verify failure" >&2; exit 1; fi',
+      `exec '${realBinary('git')}' "$@"`,
+    ]),
+  };
+  for (const [label, makeShim] of Object.entries(failures)) {
+    const root = mkdtempSync(path.join(tmpdir(), `preserve-unpushed-partial-${label}-`));
+    try {
+      const repo = path.join(root, 'repo');
+      mkdirSync(repo);
+      initRepo(repo);
+      writeFileSync(path.join(repo, 'base.txt'), 'base\n');
+      commitAll(repo, 'base');
+      writeFileSync(path.join(repo, 'article.txt'), 'articolo\n');
+      const producedSha = commitAll(repo, 'Generate blog article (frontaliere)');
+      const output = path.join(root, 'artifact');
+      // Un risultato precedente nella stessa cartella non deve sopravvivere.
+      mkdirSync(output);
+      writeFileSync(path.join(output, 'article.bundle'), 'vecchio bundle\n');
+
+      const shim = makeShim(root);
+      const result = runPreserverWithEnv(
+        repo,
+        { ...GIT_ENV, PATH: `${shim}${path.delimiter}${process.env.PATH}` },
+        producedSha,
+        output,
+        'passo Commit and push fallito dopo il commit',
+      );
+
+      assert.equal(result.code, 0, `${label}: ${result.output}`);
+      assert.match(result.output, /errore inatteso durante la conservazione/, label);
+      assert.deepEqual(readdirSync(output), [], `${label}: la cartella deve restare vuota`);
+      assert.equal(git(repo, 'for-each-ref', '--format=%(refname)', 'refs/unpushed').trim(), '', label);
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  }
+});
+
+test('l\'elenco dei file di un commit di merge e\' quello rispetto alla base', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'preserve-unpushed-merge-'));
+  try {
+    const repo = path.join(root, 'repo');
+    mkdirSync(repo);
+    initRepo(repo);
+    writeFileSync(path.join(repo, 'base.txt'), 'base\n');
+    commitAll(repo, 'base');
+    const mainBranch = git(repo, 'rev-parse', '--abbrev-ref', 'HEAD').trim();
+    git(repo, 'checkout', '-q', '-b', 'side');
+    writeFileSync(path.join(repo, 'side.txt'), 'side\n');
+    commitAll(repo, 'side');
+    git(repo, 'checkout', '-q', mainBranch);
+    writeFileSync(path.join(repo, 'main.txt'), 'main\n');
+    const baseSha = commitAll(repo, 'main');
+    git(repo, 'merge', '-q', '--no-ff', '-m', 'merge side', 'side');
+    const producedSha = git(repo, 'rev-parse', 'HEAD').trim();
+
+    const output = path.join(root, 'artifact');
+    const result = runPreserver(repo, producedSha, output, 'passo Commit and push fallito dopo il commit');
+    assert.equal(result.code, 0, result.output);
+    const manifest = JSON.parse(readFileSync(path.join(output, 'manifest.json'), 'utf8'));
+    assert.equal(manifest.baseSha, baseSha);
+    // Un `diff-tree <merge>` senza genitore esplicito non elenca niente.
+    assert.deepEqual(manifest.files, ['side.txt']);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un nome di file che non e\' UTF-8 valido e\' segnalato nel manifest', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'preserve-unpushed-bytes-'));
+  try {
+    const repo = path.join(root, 'repo');
+    mkdirSync(repo);
+    initRepo(repo);
+    writeFileSync(path.join(repo, 'base.txt'), 'base\n');
+    commitAll(repo, 'base');
+    // Il path entra dall'indice, non dal filesystem: macOS rifiuterebbe di
+    // creare un file con questi byte, git no.
+    const blob = execFileSync('git', ['hash-object', '-w', '--stdin'], { cwd: repo, env: GIT_ENV, input: 'x\n', encoding: 'utf8' }).trim();
+    const name = Buffer.from([0x61, 0xff, 0xfe, 0x2e, 0x74, 0x78, 0x74]); // a<FF><FE>.txt
+    execFileSync('git', ['update-index', '-z', '--index-info'], {
+      cwd: repo,
+      env: GIT_ENV,
+      input: Buffer.concat([Buffer.from(`100644 ${blob}\t`), name, Buffer.from([0])]),
+    });
+    git(repo, 'commit', '-q', '-m', 'Generate blog article (frontaliere)');
+    const producedSha = git(repo, 'rev-parse', 'HEAD').trim();
+
+    const output = path.join(root, 'artifact');
+    const result = runPreserver(repo, producedSha, output, 'passo Commit and push fallito dopo il commit');
+    assert.equal(result.code, 0, result.output);
+    const manifest = JSON.parse(readFileSync(path.join(output, 'manifest.json'), 'utf8'));
+    assert.equal(manifest.files.length, 1);
+    assert.equal(manifest.filesLossy, true);
+    // Il bundle porta il nome esatto: il manifest e' solo la lista per chi legge.
+    assert.equal(existsSync(path.join(output, 'article.bundle')), true);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('due conservazioni in parallelo sullo stesso repository non si pestano i ref', async () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'preserve-unpushed-parallel-'));
+  try {
+    const repo = path.join(root, 'repo');
+    mkdirSync(repo);
+    initRepo(repo);
+    writeFileSync(path.join(repo, 'base.txt'), 'base\n');
+    commitAll(repo, 'base');
+    writeFileSync(path.join(repo, 'article.txt'), 'articolo\n');
+    const producedSha = commitAll(repo, 'Generate blog article (frontaliere)');
+
+    const run = promisify(execFile);
+    const outputs = ['one', 'two', 'three'].map((label) => path.join(root, `artifact-${label}`));
+    await Promise.all(outputs.map((output) => run('bash', [SCRIPT, producedSha, output, 'parallelo'], { cwd: repo, env: GIT_ENV })));
+
+    const refs = outputs.map((output) => JSON.parse(readFileSync(path.join(output, 'manifest.json'), 'utf8')).ref);
+    assert.equal(new Set(refs).size, outputs.length, `ref non distinti: ${refs.join(', ')}`);
+    for (const output of outputs) {
+      assert.deepEqual(readdirSync(output).sort(), ['REPLAY.md', 'article.bundle', 'manifest.json']);
+    }
+    assert.equal(git(repo, 'for-each-ref', '--format=%(refname)', 'refs/unpushed').trim(), '');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un nome di ref gia\' preso fa riprovare con un altro nome, senza sovrascrivere', () => {
+  // Il ref temporaneo si crea solo se non esiste: e' git a rifiutare un nome
+  // gia' preso, non un controllo fatto prima. Qui il primo tentativo viene
+  // rifiutato come farebbe git con un ref esistente.
+  const root = mkdtempSync(path.join(tmpdir(), 'preserve-unpushed-ref-taken-'));
+  try {
+    const repo = path.join(root, 'repo');
+    mkdirSync(repo);
+    initRepo(repo);
+    writeFileSync(path.join(repo, 'base.txt'), 'base\n');
+    commitAll(repo, 'base');
+    writeFileSync(path.join(repo, 'article.txt'), 'articolo\n');
+    const producedSha = commitAll(repo, 'Generate blog article (frontaliere)');
+
+    const log = path.join(root, 'update-ref.log');
+    const mark = path.join(root, 'first-attempt-refused');
+    const shim = shimDir(root, 'git', [
+      '#!/bin/sh',
+      'if [ "$1" = update-ref ] && [ "$2" != -d ]; then',
+      `  printf '%s %s\\n' "$2" "\${4:-none}" >> '${log}'`,
+      `  if [ ! -e '${mark}' ]; then : > '${mark}'; echo "fatal: simulated: reference already exists" >&2; exit 1; fi`,
+      'fi',
+      `exec '${realBinary('git')}' "$@"`,
+    ]);
+    const output = path.join(root, 'artifact');
+    const result = runPreserverWithEnv(
+      repo,
+      { ...GIT_ENV, PATH: `${shim}${path.delimiter}${process.env.PATH}` },
+      producedSha,
+      output,
+      'passo Commit and push fallito dopo il commit',
+    );
+
+    assert.equal(result.code, 0, result.output);
+    const attempts = readFileSync(log, 'utf8').trim().split('\n').map((line) => line.split(' '));
+    assert.equal(attempts.length, 2, `tentativi di creazione: ${JSON.stringify(attempts)}`);
+    for (const [, expectedOld] of attempts) {
+      assert.match(expectedOld, /^0+$/, 'la creazione deve chiedere a git che il ref non esista');
+    }
+    assert.notEqual(attempts[0][0], attempts[1][0], 'il secondo tentativo deve usare un altro nome');
+    const manifest = JSON.parse(readFileSync(path.join(output, 'manifest.json'), 'utf8'));
+    assert.equal(manifest.ref, attempts[1][0]);
+    assert.equal(git(repo, 'for-each-ref', '--format=%(refname)', 'refs/unpushed').trim(), '');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un risultato precedente non sopravvive a una invocazione che non conserva niente', () => {
+  // La cartella vale per una invocazione sola: se questa esce con un warning, i
+  // tre file lasciati da quella prima non devono restare li' a farsi caricare
+  // come articolo di questo run.
+  const root = mkdtempSync(path.join(tmpdir(), 'preserve-unpushed-stale-'));
+  try {
+    const repo = path.join(root, 'repo');
+    mkdirSync(repo);
+    initRepo(repo);
+    writeFileSync(path.join(repo, 'base.txt'), 'base\n');
+    commitAll(repo, 'base');
+    const output = path.join(root, 'artifact');
+    const leaveStaleResult = () => {
+      mkdirSync(output, { recursive: true });
+      for (const name of ['article.bundle', 'manifest.json', 'REPLAY.md']) {
+        writeFileSync(path.join(output, name), 'risultato di una invocazione precedente\n');
+      }
+    };
+
+    leaveStaleResult();
+    const unknown = runPreserver(repo, '0'.repeat(40), output, 'passo Commit and push fallito dopo il commit');
+    assert.equal(unknown.code, 0, unknown.output);
+    assert.match(unknown.output, /::warning::preserve-unpushed-commit:/);
+    assert.deepEqual(readdirSync(output), []);
+
+    leaveStaleResult();
+    const unchanged = runPreserver(repo, '--worktree', output, 'passo Commit and push fallito prima del commit');
+    assert.equal(unchanged.code, 0, unchanged.output);
+    assert.match(unchanged.output, /non contiene differenze rispetto a HEAD/);
+    assert.deepEqual(readdirSync(output), []);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
 });
 
