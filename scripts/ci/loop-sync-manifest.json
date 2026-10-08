@@ -2115,7 +2115,7 @@
       "reason": "Ledger JSON durevole delle pagine articolo con immagine generica: vive nel body della issue observer, conserva gli item oltre la finestra di lookback, limita i dispatch e marca exhausted dopo tre esiti falliti. Il sito non deve possedere ne' modificare questo coordinamento del publisher del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "ecc6a84b2fc0524c",
+        "corpus": "23e26ea445dfc258",
         "alignedAt": "2026-10-08"
       }
     },
@@ -2135,7 +2135,7 @@
       "reason": "Prova condivisa fra render e repairer dell immagine dichiarata: CDN HTTPS, redirect manuale, content-type image/* e cap di 5 MB, con scrittura opzionale per il render. Il sito consuma le pagine gia' pubblicate e non deve duplicare il fetch del publisher del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "806110bbd4821473",
+        "corpus": "9d95aa872ed0bd2a",
         "alignedAt": "2026-10-08"
       }
     },
@@ -5260,7 +5260,7 @@
       "reason": "Sorgente unica del detector multi-segnale dei contenuti: la usa il generatore e il gate post-rebase prima del push per riconoscere due ID diversi che pubblicano la stessa notizia. Corpus-only perche' il producer operativo vive qui e il sito consuma la superficie JSON senza eseguire questo generatore; il modulo resta puro per essere letto dai gate zero-dep.",
       "baseline": {
         "site": null,
-        "corpus": "da2aa2912092033d",
+        "corpus": "089a8f2872e3d12e",
         "alignedAt": "2026-10-08"
       }
     },
