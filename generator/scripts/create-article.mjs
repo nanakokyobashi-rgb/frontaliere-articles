@@ -15368,6 +15368,11 @@ function gitAddAll(data) {
   if (existsSync(resolve('data/image-regeneration-queue-pending.jsonl'))) {
     files.push('data/image-regeneration-queue-pending.jsonl');
   }
+  const pendingQueuePrefix = 'image-regeneration-queue-pending.jsonl.';
+  for (const name of readdirSync(resolve('data'))
+    .filter((entry) => entry.startsWith(pendingQueuePrefix) && entry.endsWith('.pending'))) {
+    files.push(path.join('data', name));
+  }
   execSync(`git add ${resolveGitAddPaths(PROJECT_ROOT, files).join(' ')}`, { cwd: PROJECT_ROOT, stdio: 'inherit' });
   console.error('  ✅ Tutti i file modificati aggiunti a git');
 }

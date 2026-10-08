@@ -39,6 +39,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const REGISTRY_FILE = 'content/blog-articles-data.ts';
 const ROUTER_FILE = 'content/routerBlogData.ts';
 const SEO_FILE = 'content/seo/seo-blog-5.ts';
+const SEO_CHUNK_RE = /^seo-blog(?:-\d+|-[a-z]+)?\.ts$/;
 const SEO_CONST_NAME = 'BLOG_SEO_METADATA';
 const HUB_SLUG = 'articoli-frontaliere';
 const LOCALES = ['it', 'en', 'de', 'fr'];
@@ -46,6 +47,25 @@ const META_FIELDS = ['title', 'excerpt', 'imageAlt'];
 
 function read(rel) {
   return fs.readFileSync(path.join(ROOT, rel), 'utf8');
+}
+
+function seoChunkPaths(root = ROOT) {
+  const directory = path.join(root, 'content/seo');
+  return fs.readdirSync(directory)
+    .filter((name) => SEO_CHUNK_RE.test(name))
+    .sort()
+    .map((name) => path.join(directory, name));
+}
+
+export function seoEntryCountAcrossChunks(root, id, { replacementPath, replacementSource } = {}) {
+  let count = 0;
+  for (const filePath of seoChunkPaths(root)) {
+    const source = filePath === replacementPath
+      ? replacementSource
+      : fs.readFileSync(filePath, 'utf8');
+    count += findSeoEntryMatches(source, id, path.relative(root, filePath)).length;
+  }
+  return count;
 }
 
 function decodeRegistryString(value) {
@@ -255,8 +275,13 @@ function run(idsFile, { dryRun = false } = {}) {
       seoConstName: SEO_CONST_NAME,
       fileLabel: SEO_FILE,
     });
-    const missingAfterWrite = ids.filter((id) => findSeoEntryMatches(after, id, SEO_FILE).length !== 1);
-    if (missingAfterWrite.length > 0) throw new Error(`SEO entry count after build is not one for: ${missingAfterWrite.join(', ')}`);
+    const invalidAfterWrite = ids.filter((id) => seoEntryCountAcrossChunks(ROOT, id, {
+      replacementPath: seoPath,
+      replacementSource: after,
+    }) !== 1);
+    if (invalidAfterWrite.length > 0) {
+      throw new Error(`SEO entry count across chunks after build is not one for: ${invalidAfterWrite.join(', ')}`);
+    }
     writeTextAtomic(seoPath, after);
     written.record(seoPath, before, after);
     for (const { data } of fallbackEntries) {
@@ -325,13 +350,15 @@ function run(idsFile, { dryRun = false } = {}) {
   }, null, 2));
 }
 
-const args = process.argv.slice(2);
-const idsFlag = args.indexOf('--ids-file');
-const dryRun = args.includes('--dry-run');
-const unexpected = args.filter((arg, index) => arg !== '--ids-file' && arg !== '--dry-run' && index !== idsFlag + 1);
-if (idsFlag < 0 || !args[idsFlag + 1] || unexpected.length > 0) {
-  console.error('Uso: node generator/scripts/recover-seo-orphans.mjs --ids-file /path/to/ids.txt [--dry-run]');
-  process.exitCode = 2;
-} else {
-  run(path.resolve(args[idsFlag + 1]), { dryRun });
+if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) {
+  const args = process.argv.slice(2);
+  const idsFlag = args.indexOf('--ids-file');
+  const dryRun = args.includes('--dry-run');
+  const unexpected = args.filter((arg, index) => arg !== '--ids-file' && arg !== '--dry-run' && index !== idsFlag + 1);
+  if (idsFlag < 0 || !args[idsFlag + 1] || unexpected.length > 0) {
+    console.error('Uso: node generator/scripts/recover-seo-orphans.mjs --ids-file /path/to/ids.txt [--dry-run]');
+    process.exitCode = 2;
+  } else {
+    run(path.resolve(args[idsFlag + 1]), { dryRun });
+  }
 }

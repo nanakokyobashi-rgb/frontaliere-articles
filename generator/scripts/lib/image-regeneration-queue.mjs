@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { writeTextAtomic } from './atomic-write-text.mjs';
 import { writeJsonAtomic } from './atomic-write-json.mjs';
 
 export const IMAGE_REGENERATION_QUEUE_REL = 'data/image-regeneration-queue.json';
@@ -9,6 +10,7 @@ export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
 
 let lockSequence = 0;
 let pendingDrainSequence = 0;
+let pendingAppendSequence = 0;
 
 function queuePath(root) {
   return path.join(root, IMAGE_REGENERATION_QUEUE_REL);
@@ -99,6 +101,9 @@ function flushPendingQueue(root) {
   if (!fs.existsSync(directory)) return 0;
 
   const processingPrefix = `${path.basename(file)}.`;
+  const pendingFiles = fs.readdirSync(directory)
+    .filter((name) => name.startsWith(processingPrefix) && name.endsWith('.pending'))
+    .map((name) => path.join(directory, name));
   const processing = fs.readdirSync(directory)
     .filter((name) => name.startsWith(processingPrefix) && name.endsWith('.processing'))
     .map((name) => path.join(directory, name));
@@ -109,6 +114,11 @@ function flushPendingQueue(root) {
     fs.renameSync(file, rotated);
     processing.push(rotated);
   }
+  // New appends are one complete record per file. A producer publishes the
+  // `.pending` name only after the JSON and newline have been written, so a
+  // drain can never read a partially-written JSONL record. Files published
+  // after this directory scan remain for the next lock holder.
+  processing.push(...pendingFiles);
   if (processing.length === 0) return 0;
 
   const pending = [];
@@ -141,7 +151,8 @@ function appendPendingQueue(root, request) {
   if (!item) return false;
   const file = pendingQueuePath(root);
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.appendFileSync(file, `${JSON.stringify(item)}\n`, 'utf8');
+  const pendingFile = `${file}.${process.pid}.${Date.now()}.${pendingAppendSequence++}.pending`;
+  writeTextAtomic(pendingFile, `${JSON.stringify(item)}\n`);
   return true;
 }
 

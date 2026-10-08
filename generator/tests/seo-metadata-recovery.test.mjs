@@ -16,6 +16,7 @@ import {
 } from '../scripts/lib/seo-entry-builder.mjs';
 import { mergeQueueWithSnapshot } from '../scripts/lib/seo-recovery-queue.mjs';
 import { createWriteLedger, restoreWrittenFiles } from '../scripts/lib/seo-recovery-rollback.mjs';
+import { seoEntryCountAcrossChunks } from '../scripts/recover-seo-orphans.mjs';
 import { SEO_BACKFILL_LOCK_REL, beginSeoBackfillLock, endSeoBackfillLock } from '../scripts/lib/seo-backfill-lock.mjs';
 import {
   IMAGE_REGENERATION_QUEUE_LOCK_REL,
@@ -226,6 +227,31 @@ test('la coda del recupero si fonde senza conflitto con un fallimento accodato n
   assert.ok(threeWayMerge(base, appended, pipelineAppend).conflicts > 0);
 });
 
+test('la recovery conta l ID SEO su tutti i chunk prima di pubblicare', () => {
+  const root = tempDir('seo-chunk-census-');
+  try {
+    const seoDir = path.join(root, 'content/seo');
+    fs.mkdirSync(seoDir, { recursive: true });
+    const id = 'historical-duplicate';
+    const source = `const BLOG_SEO_METADATA = {\n  'blog-${id}': {},\n};\n`;
+    fs.writeFileSync(path.join(seoDir, 'seo-blog.ts'), source);
+    fs.writeFileSync(path.join(seoDir, 'seo-blog-2.ts'), 'const BLOG_SEO_METADATA = {};\n');
+    const target = path.join(seoDir, 'seo-blog-5.ts');
+    fs.writeFileSync(target, 'const BLOG_SEO_METADATA = {};\n');
+
+    assert.equal(seoEntryCountAcrossChunks(root, id, {
+      replacementPath: target,
+      replacementSource: source,
+    }), 2, 'un ID già storico non può essere ripubblicato nel chunk corrente');
+    assert.equal(seoEntryCountAcrossChunks(root, id, {
+      replacementPath: target,
+      replacementSource: 'const BLOG_SEO_METADATA = {};\n',
+    }), 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('rieseguire il recupero su voci già presenti lascia il chunk identico', () => {
   const ids = ['recovered-one', 'recovered-two'];
   const recover = (source, remove) => {
@@ -275,7 +301,14 @@ test('i writer della coda condividono un lock e non scrivono durante il drenaggi
   try {
     const nestedAppend = withImageRegenerationQueueLock(root, () => appendImageRegenerationQueue(root, request));
     assert.equal(nestedAppend, true, 'un append concorrente deve finire nel pending log');
-    assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_PENDING_REL)), true);
+    const pendingDir = path.dirname(path.join(root, IMAGE_REGENERATION_QUEUE_PENDING_REL));
+    const pendingBase = path.basename(IMAGE_REGENERATION_QUEUE_PENDING_REL);
+    assert.equal(
+      fs.readdirSync(pendingDir).filter((name) => name.startsWith(`${pendingBase}.`) && name.endsWith('.pending')).length,
+      1,
+      'il pending deve essere pubblicato come record completo per-request',
+    );
+    assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_PENDING_REL)), false);
     assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_LOCK_REL)), false, 'il lock non resta orfano');
     assert.equal(appendImageRegenerationQueue(root, request), true);
     assert.equal(fs.existsSync(path.join(root, IMAGE_REGENERATION_QUEUE_PENDING_REL)), false);

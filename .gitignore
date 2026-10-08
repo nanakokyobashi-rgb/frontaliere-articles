@@ -70,3 +70,4 @@ data/image-regeneration-queue-in-progress.json
 # The pending append log is durable queue state: it must survive a producer
 # commit if an async drain owns the canonical queue lock.
 data/image-regeneration-queue-pending.jsonl.*.processing
+data/image-regeneration-queue-pending.jsonl.*.tmp

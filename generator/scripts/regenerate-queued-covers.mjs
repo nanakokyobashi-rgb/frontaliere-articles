@@ -305,7 +305,13 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
       appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
       return { record: existing, ...result, reused: true, section, snapshots };
     } catch (error) {
-      restoreTransaction(snapshots);
+      try {
+        restoreTransaction(snapshots);
+      } catch (rollbackError) {
+        rollbackError.rollbackFailed = true;
+        rollbackError.cause = error;
+        throw rollbackError;
+      }
       throw error;
     }
   }
@@ -336,7 +342,13 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
     removeStagingFile(generated.filePath, imageFile);
     return { record, ...result, reused: false, section, snapshots };
   } catch (error) {
-    restoreTransaction(snapshots);
+    try {
+      restoreTransaction(snapshots);
+    } catch (rollbackError) {
+      rollbackError.rollbackFailed = true;
+      rollbackError.cause = error;
+      throw rollbackError;
+    }
     if (generated?.filePath && fs.existsSync(generated.filePath)) {
       fs.rmSync(path.dirname(generated.filePath), { recursive: true, force: true });
     }
@@ -376,6 +388,7 @@ export async function drainQueuedCovers({
   retryFailed = false,
 } = {}) {
   let registrationLockHeld = false;
+  let registrationLockSafeToRelease = true;
   try {
     // The drain rewrites the same registry and SEO sources as the normal
     // frontaliere writer and the SEO orphan recovery. Claim their transaction
@@ -449,6 +462,10 @@ export async function drainQueuedCovers({
       if (!result.sections[section]) result.sections[section] = [];
       result.sections[section].push(item.articleId);
     } catch (error) {
+      // A processItem rollback failure is a corpus-level incident, not a
+      // retryable provider failure. Let the outer handler keep the marker so
+      // the next writer cannot enter a partially restored transaction.
+      if (error?.rollbackFailed) throw error;
       if (outcome?.snapshots) restoreTransaction(outcome.snapshots);
       const failureCount = Number.isInteger(item.failureCount) && item.failureCount >= 0 ? item.failureCount + 1 : 1;
       item.failureCount = failureCount;
@@ -464,8 +481,16 @@ export async function drainQueuedCovers({
 
     return summaryFor(queue, result);
     });
+  } catch (error) {
+    // Any uncaught callback, persistence, or rollback error means the
+    // registry/SEO transaction did not close verifiably. Keep the marker as
+    // evidence for the next run instead of admitting another writer.
+    registrationLockSafeToRelease = false;
+    throw error;
   } finally {
-    if (registrationLockHeld) endRegisterLock(root, 'frontaliere');
+    // The marker is evidence that registry/SEO snapshots may not have been
+    // restored completely. Only a fully returned drain may release it.
+    if (registrationLockHeld && registrationLockSafeToRelease) endRegisterLock(root, 'frontaliere');
   }
 }
 

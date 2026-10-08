@@ -23,6 +23,7 @@ import {
   NO_TEXT_IMAGE_RETRY_HINT,
 } from '../scripts/regenerate-queued-covers.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
+import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-queue-drain-'));
@@ -521,6 +522,11 @@ test('un errore nella persistenza della rimozione ripristina la transazione prim
     assert.equal(fs.existsSync(path.join(root, 'data/image-regeneration-publish-outbox.json')), false);
     assert.equal(fs.existsSync(path.join(root, 'public/images/blog/article-queue-write-fails.webp')), false);
     assert.equal(fs.existsSync(path.join(root, 'public/images/blog/thumbnails/article-queue-write-fails-480w.webp')), false);
+    assert.equal(
+      fs.existsSync(registerLockPath(root, 'frontaliere')),
+      true,
+      'un errore di chiusura deve lasciare il marker per impedire scritture su un corpus forse parziale',
+    );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
