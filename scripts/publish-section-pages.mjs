@@ -49,11 +49,11 @@
  * confermato o se il verify fallisce.
  */
 import '../host/cantonSectionsBootstrap.mjs';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
@@ -911,7 +911,15 @@ export async function main(argv = process.argv.slice(2)) {
   return summary.published.failures ? 1 : 0;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().then(
     (code) => {
       process.exitCode = code;

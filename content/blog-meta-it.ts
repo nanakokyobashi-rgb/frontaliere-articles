@@ -454,9 +454,6 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.spese-sanitarie-frontalieri.title': 'Spese sanitarie rimborsabili per frontalieri',
  'blog.article.spese-sanitarie-frontalieri.excerpt': 'Guida completa alle spese sanitarie rimborsabili in Italia per i frontalieri che lavorano in Svizzera, con normative e procedure 2026.',
  'blog.article.spese-sanitarie-frontalieri.imageAlt': 'Un ospedale a Mendrisio con bandiere svizzere e italiane',
- 'blog.article.naspi-disoccupazione-frontalieri.title': 'NASpI: Disoccupazione per frontalieri italiani',
- 'blog.article.naspi-disoccupazione-frontalieri.excerpt': 'Scopri i requisiti, calcolo, durata e come richiedere la NASpI per ex-frontalieri che lavoravano in Ticino.',
- 'blog.article.naspi-disoccupazione-frontalieri.imageAlt': 'Valico doganale di Chiasso con auto in transito e cartelli di confine tra Svizzera e Italia',
  'blog.article.dichiarazione-redditi-ticino-2026.title': 'Dichiarazione dei redditi 2026: tutto ciò che devi sapere',
  'blog.article.dichiarazione-redditi-ticino-2026.excerpt': 'In Ticino, i moduli per la dichiarazione d\'imposta 2025 sono stati inviati. Scopri come compilarli online e le scadenze da rispettare.',
  'blog.article.dichiarazione-redditi-ticino-2026.imageAlt': 'Vista di Bellinzona con il Castelgrande sullo sfondo in primavera',
@@ -1982,9 +1979,6 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.benzina-cara-ticino.title': 'Benzina più cara in Svizzera: ticinesi e frontalieri fanno il pieno in Italia',
  'blog.article.benzina-cara-ticino.excerpt': 'L\'Italia ha prorogato il taglio delle accise fino al 1° maggio 2026, ma i prezzi della benzina sono saliti di nuovo in Svizzera.',
  'blog.article.benzina-cara-ticino.imageAlt': 'Un lancia a vela sul Lago di Lugano con le montagne del Ticino all\'orizzonte',
- 'blog.article.tassa-salute-frontalieri-accordo-frontalieri.title': 'Tassa salute: accordo frontalieri prevale',
- 'blog.article.tassa-salute-frontalieri-accordo-frontalieri.excerpt': 'DFAE conferma che l\'accordo italo-svizzero prevale sul diritto interno per la tassa sulla salute dei frontalieri',
- 'blog.article.tassa-salute-frontalieri-accordo-frontalieri.imageAlt': 'Valico di confine tra Italia e Svizzera a Lugano',
  'blog.article.incidente-rampa-a9-chiasso-2026.title': 'Incidente sulla rampa A9 per Chiasso: code e feriti lievi',
  'blog.article.incidente-rampa-a9-chiasso-2026.excerpt': 'Tre auto coinvolte sul viadotto Brogeda. Strada chiusa per due ore. Ferite lievi per tre persone.',
  'blog.article.incidente-rampa-a9-chiasso-2026.imageAlt': 'Viadotto Brogeda con veicoli di emergenza e code sulla rampa dell\'A9 verso Chiasso.',
@@ -12785,6 +12779,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.kastritis-varese-momento-difficile.title': 'Kastritis: momento difficile ci aiuterà a crescere, massima fiducia nel gruppo',
     'blog.article.kastritis-varese-momento-difficile.excerpt': 'Varese perde l\'esordio in Champions League a Murcia contro l\'UCAM Murcia, con le assenze di McDowell e Della Valle; Kastritis sottolinea l\'intensità difensiva e la fiducia nel gruppo, prossima partita tra tre giorni.',
     'blog.article.kastritis-varese-momento-difficile.imageAlt': 'Giocatori di Pallacanestro Varese in azione difensiva su un campo aperto a Lugano con lo sfondo del lago e delle montagne',
+    'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.title': 'Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
+    'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.excerpt': '## In breve - Sei misure cautelari e sequestri per circa 11 milioni - Frode Iva in elettronica e informatica - 93 società nella parte italiana dell\'indagine',
+    'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.imageAlt': 'Immagine editoriale relativa a: Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
 };
 
 export default blogMetaIt;

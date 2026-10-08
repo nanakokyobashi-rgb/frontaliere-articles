@@ -58,6 +58,14 @@
  *   - `dateFromSectionHeading: h4` → liste HTML in cui la data di pubblicazione
  *                            è l'`<h4>` della card/sezione; evita di leggere
  *                            una data d'evento dentro il testo collegato
+ *   - `titleAttributeTemplate: beitrag-lesen` → card HTML in cui il titolo è
+ *                            nell'attributo `title="Beitrag '…' lesen."`
+ *   - `embeddedDateField: publishDate` → metadati JSON della stessa card,
+ *                            associati al titolo e letti dalla risposta grezza
+ *   - `articleContent: html-text` → dopo la lista, legge le pagine articolo
+ *                            degli item piu' recenti e porta il testo
+ *                            editoriale come `lead`/`sourceContent`; il tetto
+ *                            resta quello di `maxRequestsPerRun`
  *   - `urlReusedForDifferentStories` → la fonte riemette lo stesso URL con
  *                            notizie diverse (ticker, «Kurzmeldungen»),
  *                            ovunque (`true`) o sui path di una regex:
@@ -599,6 +607,52 @@ export function stripPageChrome(html) {
   return { html: out + masked.slice(at), removed: ranges.length };
 }
 
+/**
+ * Isola il corpo editoriale di una pagina dettaglio prima di consegnarlo al
+ * generatore. Una pagina puo' avere una cornice gia' riconosciuta ma anche
+ * sidebar/related content fuori da `article`: usare tutto il testo restante
+ * contaminerebbe il contesto della fonte verificata.
+ */
+function sourceArticleText(html, requestedHeadline = '') {
+  const page = stripPageChrome(html).html;
+  const blocks = (tag) => {
+    const out = [];
+    const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
+    let open;
+    while ((open = openRe.exec(page)) !== null) {
+      const end = matchingCloseEnd(page, tag, open.index + open[0].length);
+      if (end < 0) continue;
+      const text = stripTags(page.slice(open.index, end));
+      out.push({ tag, text });
+      // Do not treat nested containers as separate candidates when an outer
+      // element already delimits this block; the other tag family (main or
+      // article) is scanned independently below.
+      openRe.lastIndex = end;
+    }
+    return out;
+  };
+  const articles = blocks('article');
+  const mains = blocks('main');
+  const all = [...articles, ...mains];
+  const requested = stripTags(requestedHeadline).toLowerCase();
+  const matching = requested
+    ? all.filter(({ text }) => text.toLowerCase().includes(requested))
+    : [];
+  // If the title identifies a container, use it even when a related card
+  // appears before the story. Without a match, prefer article containers and
+  // the longest one; never fall back to arbitrary page residue.
+  const candidates = matching.length > 0 ? matching : (articles.length > 0 ? articles : mains);
+  candidates.sort((a, b) => {
+    const tagScore = (tag) => (tag === 'article' ? 1 : 0);
+    return tagScore(b.tag) - tagScore(a.tag) || b.text.length - a.text.length;
+  });
+  const first = candidates[0];
+  const second = candidates[1];
+  if (!first || (second && first.tag === second.tag && first.text.length === second.text.length)) return '';
+  if (first.text.length < 200) return '';
+  return first.text.slice(0, 8000);
+}
+
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
 function matchingCloseEnd(masked, name, from) {
   const re = new RegExp(`<(/?)${name}(?=[\\s/>])[^>]*>`, 'gi');
@@ -1092,7 +1146,7 @@ export function createHostThrottle({ sleep = (ms) => new Promise((r) => setTimeo
  *   fetchImpl?: typeof fetch,
  *   throttle?: ReturnType<typeof createHostThrottle>,
  *   extractRssItems: (xml: string, url: string) => Array<{url: string, headline: string, date: Date | null}>,
- *   extractHeadlines: (html: string, url: string) => Array<{url: string, headline: string, date: Date | null}>,
+ *   extractHeadlines: (html: string, url: string, source?: object, metadataHtml?: string) => Array<{url: string, headline: string, date: Date | null}>,
  *   now?: Date,
  * }} ctx
  * @returns {Promise<{ headlines: Array<object>, requests: number, notes: string[] }>}
@@ -1185,7 +1239,7 @@ export async function scanCantonSource(source, ctx) {
         // Prima la cornice del sito (menu, header, footer), poi i link che
         // non sono articoli: vedi stripPageChrome e filterArticleLinks.
         const page = stripPageChrome(text);
-        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url, source), url, source);
+        const links = filterArticleLinks(ctx.extractHeadlines(page.html, url, source, text), url, source);
         if (page.removed > 0 || links.dropped > 0) {
           notes.push(`navigazione: ${page.removed} aree tolte, ${links.dropped} link non articolo scartati`);
         }
@@ -1233,6 +1287,45 @@ export async function scanCantonSource(source, ctx) {
     notes.push(`URL riusati: ${reused.identified} voci con l'identita' dell'item`);
     if (reused.dropped > 0) notes.push(`URL riusati: ${reused.dropped} voci senza un titolo della fonte scartate (nessuna identita')`);
     headlines = reused.headlines;
+  }
+
+  // Alcune home editoriali hanno titoli generici per le rassegne (per esempio
+  // «Regionalnachrichten»), ma le pagine /p/ contengono il testo della notizia.
+  // La fonte deve dichiarare esplicitamente questo secondo passo: non si
+  // scaricano pagine articolo da ogni elenco HTML e il budget resta osservabile
+  // nel report. Gli item piu' recenti hanno priorita'; se un dettaglio fallisce
+  // la headline resta utilizzabile, senza trasformare un guasto puntuale in
+  // una fonte interamente fallita.
+  if (source.parser === 'html-links' && quirks.articleContent === 'html-text' && headlines.length > 0) {
+    const detailBudget = budget === Infinity ? headlines.length : Math.max(0, budget - requests);
+    const targets = headlines
+      .map((headline, index) => ({ headline, index }))
+      .sort((a, b) => {
+        const ad = a.headline?.date instanceof Date ? a.headline.date.getTime() : 0;
+        const bd = b.headline?.date instanceof Date ? b.headline.date.getTime() : 0;
+        return bd - ad;
+      })
+      .slice(0, detailBudget);
+    if (targets.length < headlines.length) {
+      notes.push(`testo dettaglio: ${targets.length}/${headlines.length} pagine nel budget`);
+    }
+    for (const { headline, index } of targets) {
+      try {
+        const detailHtml = await get(headline.url, HTML_ACCEPT);
+        const sourceContent = sourceArticleText(detailHtml, headline.headline);
+        if (sourceContent.length < 200) {
+          notes.push(`testo dettaglio vuoto: ${headline.url}`);
+          continue;
+        }
+        headlines[index] = {
+          ...headline,
+          lead: sourceContent.slice(0, 3000),
+          sourceContent,
+        };
+      } catch (error) {
+        notes.push(`testo dettaglio non disponibile: ${headline.url} (${error?.message || error})`);
+      }
+    }
   }
   headlines = dedupByUrl(headlines);
   if (quirks.emptyPubDate) notes.push('pubDate vuoto: voci senza data (quota undated, data dalla pagina in generazione)');

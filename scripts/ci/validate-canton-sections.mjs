@@ -18,16 +18,17 @@
  *   1. i 24 gruppi sono esattamente quelli di `canton-url-slugs.json`, con
  *      `section` = `canton-<code>` e `members` coerenti con `cantonGroups`;
  *   2. ogni URL e' https, parsabile e unico DENTRO il cantone (fra news, dati
- *      di categoria e decisioni pendenti);
+ *      di categoria, decisioni pendenti ed esclusioni definitive);
  *   3. nessuna fonte usa un dominio di `DEAD_NEWS_DOMAINS`, letto dal sorgente
  *      di `create-article.mjs` (non e' esportato e importare quel modulo
  *      esegue ~17k righe di module scope: il legame e' coperto dal test, come
  *      fa `news-sources-svizzera.test.mjs`);
  *   4. nessuna `newsSources` e' gia' in `NEWS_SOURCES` o
  *      `NEWS_SOURCES_SVIZZERA` (D6: una fonte = una sezione; D12 per TI);
- *   5. policy robots D10: nessuna fonte in `ownerDecisionPending` compare in
- *      news o dati, e nessun host bloccato per intero (`Disallow: /`) ai bot
- *      AI di input viene usato da NESSUN cantone per un'altra fonte;
+ *   5. policy robots D10: nessuna fonte in `ownerDecisionPending` o
+ *      `rejectedSources` compare in news o dati, e nessun host bloccato per
+ *      intero (`Disallow: /`) ai bot AI di input viene usato da NESSUN
+ *      cantone per un'altra fonte;
  *   6. `cronMinute` intero 0-59, unico fra i cantoni e diverso dai minuti di
  *      `generate-article.yml` (letti dal workflow: frontaliere/svizzera);
  *   7. enum validi (format, parser, kind, language, topics, categorie,
@@ -94,6 +95,9 @@ const QUIRKS = {
   // ancorata al path (`^/`), cosi' non puo' degradare a «contiene», e
   // compilabile, perche' lo scanner la compila a ogni run.
   articlePathPattern: isPathRegex,
+  titleAttributeTemplate: (v) => v === 'beitrag-lesen',
+  embeddedDateField: (v) => v === 'publishDate',
+  articleContent: (v) => v === 'html-text',
   urlDateFormat: (v) => v === 'YYMMDD',
   dateFromSectionHeading: (v) => v === 'h4',
   // P5b. La fonte riemette lo stesso URL con notizie diverse: l'identita'
@@ -105,6 +109,9 @@ const QUIRKS = {
 /** quirk → parser su cui ha senso. Dichiarato altrove sarebbe un hint che nessuno legge. */
 const QUIRK_PARSERS = {
   articlePathPattern: new Set(['html-links']),
+  titleAttributeTemplate: new Set(['html-links']),
+  embeddedDateField: new Set(['html-links']),
+  articleContent: new Set(['html-links']),
   urlDateFormat: new Set(['html-links']),
   dateFromSectionHeading: new Set(['html-links']),
   urlReusedForDifferentStories: new Set(['rss', 'atom', 'news-sitemap', 'sitemap', 'weekly-sitemap']),
@@ -208,7 +215,7 @@ export function validateCantonSections(doc, ctx) {
   // host bloccati per intero ai bot AI, su TUTTI i cantoni (policy D10 cross-cantone)
   const blockedHosts = new Map();
   for (const c of doc.cantons) {
-    for (const p of c?.ownerDecisionPending || []) {
+    for (const p of [...(c?.ownerDecisionPending || []), ...(c?.rejectedSources || [])]) {
       try {
         if (typeof p.robotsRule === 'string' && isWholeSiteBlock(p.robotsRule)) blockedHosts.set(hostOf(p.url), `${c.code} ${p.url}`);
       } catch { /* l'URL invalido e' segnalato sotto */ }
@@ -242,6 +249,11 @@ export function validateCantonSections(doc, ctx) {
     const news = Array.isArray(c.newsSources) ? c.newsSources : (err(where, 'newsSources non e\' un array'), []);
     const data = c.categoryDataSources && typeof c.categoryDataSources === 'object' ? c.categoryDataSources : (err(where, 'categoryDataSources mancante'), {});
     const pending = Array.isArray(c.ownerDecisionPending) ? c.ownerDecisionPending : (err(where, 'ownerDecisionPending non e\' un array'), []);
+    const rejected = c.rejectedSources === undefined
+      ? []
+      : Array.isArray(c.rejectedSources)
+        ? c.rejectedSources
+        : (err(where, 'rejectedSources non e\' un array'), []);
     const cats = Object.keys(data);
     if (JSON.stringify(cats) !== JSON.stringify(CATEGORIES)) err(where, `categoryDataSources deve avere esattamente ${CATEGORIES.join(', ')} (in quest'ordine), trovato ${cats.join(', ')}`);
     if (c.enabled === true && news.length === 0) err(where, 'cantone enabled senza newsSources');
@@ -290,6 +302,15 @@ export function validateCantonSections(doc, ctx) {
       if (!(s.items7d === null || (Number.isInteger(s.items7d) && s.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
       if (!DATE_RE.test(s.verifiedAt || '')) err(where, `${lbl}: verifiedAt non YYYY-MM-DD`);
       if (s.reserve !== undefined && s.reserve !== true) err(where, `${lbl}: reserve ammesso solo come true`);
+      if (s?.quirks?.articleContent === 'html-text') {
+        const effectiveBudget = Number(s?.quirks?.crawlDelaySeconds) > 60
+          ? 1
+          : s?.quirks?.maxRequestsPerRun;
+        if (!(Number.isInteger(s?.quirks?.maxRequestsPerRun) && s.quirks.maxRequestsPerRun >= 2)
+          || !(Number.isInteger(effectiveBudget) && effectiveBudget >= 2)) {
+          err(where, `${lbl}: articleContent html-text richiede maxRequestsPerRun intero >= 2 e budget effettivo >= 2`);
+        }
+      }
       try {
         const h = hostOf(s.url);
         if (blockedHosts.has(h)) err(where, `${lbl}: host bloccato per intero ai bot AI (D10, vedi ownerDecisionPending ${blockedHosts.get(h)})`);
@@ -322,6 +343,25 @@ export function validateCantonSections(doc, ctx) {
       if (!KINDS.has(p.kind)) err(where, `${lbl}: kind "${p.kind}" non valido`);
       if (!LANGUAGES.has(p.language)) err(where, `${lbl}: language "${p.language}" non valida`);
       if (!['sources', 'rejected'].includes(p.origin)) err(where, `${lbl}: origin "${p.origin}" non valido`);
+      if (!(p.items7d === null || (Number.isInteger(p.items7d) && p.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
+    }
+    // 6. rejectedSources: esclusioni definitive già decise (mai riaprire una
+    //    voce robots senza una nuova verifica live e una modifica esplicita).
+    for (const p of rejected) {
+      const lbl = `rejectedSources ${p?.url}`;
+      if (!p || typeof p !== 'object') { err(where, 'rejectedSources: voce non oggetto'); continue; }
+      checkUrl(p.url, 'rejectedSources');
+      if (!Array.isArray(p.blockedAgents) || !p.blockedAgents.length) err(where, `${lbl}: blockedAgents vuoto`);
+      if (typeof p.robotsRule !== 'string' || !p.robotsRule.trim()) err(where, `${lbl}: robotsRule vuota`);
+      if (!DATE_RE.test(p.robotsCheckedAt || '')) err(where, `${lbl}: robotsCheckedAt non YYYY-MM-DD`);
+      if (p.reason !== 'robotsAiDisallow') err(where, `${lbl}: reason deve essere robotsAiDisallow`);
+      if (p.decision !== 'exclude') err(where, `${lbl}: decision deve essere exclude`);
+      if (!DATE_RE.test(p.decisionAt || '')) err(where, `${lbl}: decisionAt non YYYY-MM-DD`);
+      if (p.origin !== 'rejected') err(where, `${lbl}: origin deve essere rejected`);
+      const bucketOk = p.intendedBucket === 'news' || (typeof p.intendedBucket === 'string' && p.intendedBucket.startsWith('data:') && CATEGORIES.includes(p.intendedBucket.slice(5)));
+      if (!bucketOk) err(where, `${lbl}: intendedBucket "${p.intendedBucket}" non valido`);
+      if (!KINDS.has(p.kind)) err(where, `${lbl}: kind "${p.kind}" non valido`);
+      if (!LANGUAGES.has(p.language)) err(where, `${lbl}: language "${p.language}" non valida`);
       if (!(p.items7d === null || (Number.isInteger(p.items7d) && p.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
     }
   }

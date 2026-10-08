@@ -113,7 +113,7 @@ function requestedAtSort(a, b) {
   const rightValid = Number.isFinite(right);
   if (leftValid && rightValid && left !== right) return left - right;
   if (leftValid !== rightValid) return leftValid ? -1 : 1;
-  return a.index - b.index;
+  return 0;
 }
 
 function failureCountOf(item) {
@@ -127,8 +127,14 @@ function failureCountOf(item) {
 }
 
 function queueAttemptSort(a, b) {
+  // The queue SLO is about request age. Sorting by failure count first lets a
+  // stream of fresh, never-attempted items starve an older item forever when
+  // the older provider failure is reproducible. Failure count remains a useful
+  // deterministic tie-breaker for requests created at the same instant.
+  const requestedDelta = requestedAtSort(a, b);
+  if (requestedDelta) return requestedDelta;
   const failureDelta = failureCountOf(a.item) - failureCountOf(b.item);
-  return failureDelta || requestedAtSort(a, b);
+  return failureDelta || a.index - b.index;
 }
 
 function sectionForRegistry(location) {
@@ -378,10 +384,9 @@ function summaryFor(queue, result) {
 }
 
 /**
- * Drain the least-failed eligible queue entries, after reconciling covers that
- * are already complete. The callbacks are injectable so the queue, rollback,
- * and registry-selection contract can be tested without a provider or image
- * codec.
+ * Drain the oldest eligible queue entries, after reconciling covers that are
+ * already complete. The callbacks are injectable so the queue, rollback, and
+ * registry-selection contract can be tested without a provider or image codec.
  */
 export async function drainQueuedCovers({
   root,
