@@ -1,12 +1,29 @@
 #!/usr/bin/env node
 /**
- * Repair historical `ogTitle` and JSON-LD `headline` prefixes.
+ * Repair stored SEO title fields that are a broken derivative of the real
+ * Italian title: `title`, `ogTitle` and the JSON-LD `headline`.
  *
- * The generator now closes this tap. This script is the one-shot deterministic
- * backfill for entries already stored under `content/seo/`: it only considers a
- * value when it is a strict prefix of the authoritative Italian title in
- * `content/blog-meta-it.ts`, then applies the same shared clause-safe rule as
- * the generator. Unrelated values are reported neither as repaired nor guessed.
+ * The generator closes this tap for new articles. This script is the
+ * deterministic backfill for the entries already stored, and it reads them the
+ * way the corpus is actually laid out:
+ *
+ *   - EVERY active section, taken from `scripts/lib/article-surfaces.mjs`
+ *     (`SECTIONS`): `frontaliere`, `svizzera` and the cantons, each matched
+ *     against its own `blog-meta-…-it.ts`. The first version knew only
+ *     `content/seo/` and `content/blog-meta-it.ts`, so the 2.637 `svizzera`
+ *     entries were never looked at;
+ *   - whole SEO entries through `findAllSeoEntryMatches`, never line patterns
+ *     tied to an indentation: 663 entries are indented with one space;
+ *   - properties through the entry's string literals, never a pattern over the
+ *     raw block: a field whose text contains `"headline": "…"` (the model has
+ *     written a whole JSON-LD object into a field before) must not be mistaken
+ *     for the JSON-LD property, or the edit lands inside the wrong string.
+ *
+ * What counts as broken, and what the repair is, is decided in one place —
+ * `./lib/seo-title-repair.mjs`. A field is rewritten only when that module
+ * proves the defect. What cannot be judged is never skipped in silence: an
+ * entry with no real title in its own section, and a real title that dangles
+ * itself, are both listed as unrepairable and make the command exit 1.
  *
  * Usage:
  *   node generator/scripts/repair-truncated-seo-titles.mjs --dry-run
@@ -15,23 +32,19 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LOCALES, SECTIONS, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import {
-  SEO_TITLE_FIELD_LIMITS,
-  isStrictSeoTitlePrefix,
-  repairSeoTitleField,
+  SEO_TITLE_FIELDS,
+  normalizeSeoTitle,
+  repairSeoTitleValue,
+  seoTitleFieldDefect,
 } from './lib/seo-title-repair.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-export const SEO_DIR = path.join(ROOT, 'content', 'seo');
-export const META_IT = path.join(ROOT, 'content', 'blog-meta-it.ts');
-
-const SEO_FILES_RE = /^seo-blog.*\.ts$/;
-const OG_TITLE_RE = /\b(ogTitle\s*:\s*')((?:[^'\\]|\\.)*)'/;
-const HEADLINE_RE = /("headline"\s*:\s*")((?:[^"\\]|\\.)*)"/;
 
 function decodeSingle(raw) {
   return unescapeTsValue(raw);
@@ -53,35 +66,216 @@ function encodeDouble(value) {
   return encoded.slice(1, -1);
 }
 
-function readCanonicalTitles(metaSource) {
+/**
+ * The string literals of one SEO entry block, in source order. `start`/`end`
+ * delimit the CONTENT (quotes excluded), `open`/`close` the literal itself.
+ * Comments are skipped; an unclosed literal is an error, never a silent tail.
+ */
+export function stringLiterals(block) {
+  const literals = [];
+  for (let i = 0; i < block.length; i += 1) {
+    const ch = block[i];
+    if (ch === '/' && block[i + 1] === '/') {
+      const end = block.indexOf('\n', i + 2);
+      i = end === -1 ? block.length : end;
+      continue;
+    }
+    if (ch === '/' && block[i + 1] === '*') {
+      const end = block.indexOf('*/', i + 2);
+      if (end === -1) throw new Error('commento multilinea non chiuso nella voce SEO');
+      i = end + 1;
+      continue;
+    }
+    if (ch !== "'" && ch !== '"' && ch !== '`') continue;
+    let j = i + 1;
+    while (j < block.length && block[j] !== ch) j += block[j] === '\\' ? 2 : 1;
+    if (j >= block.length) throw new Error(`stringa ${ch} non chiusa nella voce SEO`);
+    literals.push({ quote: ch, open: i, start: i + 1, end: j, close: j });
+    i = j;
+  }
+  return literals;
+}
+
+function codecFor(literal, block) {
+  const doubleQuoted = literal.quote === '"';
+  return {
+    raw: block.slice(literal.start, literal.end),
+    start: literal.start,
+    end: literal.end,
+    decode: doubleQuoted ? decodeDouble : decodeSingle,
+    encode: doubleQuoted ? encodeDouble : encodeSingle,
+  };
+}
+
+/**
+ * Locate one title field inside an SEO entry block, with its codec.
+ *
+ * `title` and `ogTitle` are identifiers followed by a single-quoted literal;
+ * `headline` is a double-quoted JSON key followed by a double-quoted literal.
+ * Both are matched between literals, so text INSIDE a literal is never a
+ * candidate, whatever it contains.
+ */
+export function fieldMatch(block, field) {
+  if (!SEO_TITLE_FIELDS.includes(field)) throw new Error(`campo titolo SEO sconosciuto: '${field}'`);
+  const literals = stringLiterals(block);
+  if (field === 'headline') {
+    for (let i = 0; i + 1 < literals.length; i += 1) {
+      const key = literals[i];
+      const value = literals[i + 1];
+      if (key.quote !== '"' || value.quote !== '"') continue;
+      if (block.slice(key.start, key.end) !== 'headline') continue;
+      if (!/^\s*:\s*$/.test(block.slice(key.close + 1, value.open))) continue;
+      return codecFor(value, block);
+    }
+    return null;
+  }
+  const property = new RegExp(`(?:^|[\\s{,])${field}\\s*:\\s*$`);
+  let previousClose = -1;
+  for (const literal of literals) {
+    const between = block.slice(previousClose + 1, literal.open);
+    previousClose = literal.close;
+    if (literal.quote === "'" && property.test(between)) return codecFor(literal, block);
+  }
+  return null;
+}
+
+/** The real Italian titles of one section, by article id. */
+export function readSectionTitles(section, { root = ROOT } = {}) {
+  const surfaces = SECTIONS[section];
+  if (!surfaces) throw new Error(`sezione sconosciuta: '${section}'`);
+  const metaFile = surfaces.metaFiles[LOCALES.indexOf('it')];
+  const absolute = path.join(root, metaFile);
+  if (!fs.existsSync(absolute)) {
+    throw new Error(`checkout incompleto: manca ${metaFile} (titoli italiani della sezione '${section}')`);
+  }
   const titles = new Map();
-  for (const match of metaSource.matchAll(metaFieldRegex('title'))) {
-    titles.set(match[1], unescapeTsValue(match[2]).trim());
+  for (const match of fs.readFileSync(absolute, 'utf8').matchAll(metaFieldRegex('title'))) {
+    titles.set(match[1], normalizeSeoTitle(unescapeTsValue(match[2])));
   }
   return titles;
 }
 
-export function fieldMatch(block, field) {
-  if (field === 'ogTitle') {
-    const match = OG_TITLE_RE.exec(block);
-    if (!match) return null;
-    return {
-      raw: match[2],
-      start: match.index + match[1].length,
-      end: match.index + match[1].length + match[2].length,
-      decode: decodeSingle,
-      encode: encodeSingle,
-    };
+/**
+ * Every stored title field of every SEO entry, with its real title and the
+ * defect the shared module finds in it (`null` when it is fine). The gates in
+ * `generator/tests/` read the corpus through this same scan.
+ *
+ * Two lists say what the scan could NOT judge, one per direction:
+ *   - `orphans`: SEO entries with no real title in their own section. Their
+ *     fields are still listed, but the prefix shape has nothing to compare to;
+ *   - `uncovered`: per section, the real titles with no SEO entry. A section
+ *     whose SEO file is missing (`seoFilesFor` returns only the files that
+ *     exist), a lost chunk and a single lost entry all land here, so a
+ *     populated section is never read as clean because nothing of it was read.
+ */
+export function scanSeoTitleFields({ root = ROOT } = {}) {
+  const rows = [];
+  const files = [];
+  const orphans = [];
+  const uncovered = [];
+  let entries = 0;
+  let titles = 0;
+  for (const section of Object.keys(SECTIONS)) {
+    const sectionTitles = readSectionTitles(section, { root });
+    titles += sectionTitles.size;
+    // Sorted: the directory listing behind the chunked sections has no order
+    // of its own, and the report and the writes should not depend on it.
+    const sectionFiles = [...seoFilesFor(section, root)].sort();
+    const seen = new Set();
+    for (const file of sectionFiles) {
+      files.push(file);
+      const absolute = path.join(root, file);
+      const source = fs.readFileSync(absolute, 'utf8');
+      for (const entry of findAllSeoEntryMatches(source, file)) {
+        entries += 1;
+        seen.add(entry.id);
+        const canonical = sectionTitles.get(entry.id) ?? '';
+        if (!canonical) orphans.push({ section, file, id: entry.id });
+        const block = source.slice(entry.openIdx, entry.closeIdx + 1);
+        for (const field of SEO_TITLE_FIELDS) {
+          const match = fieldMatch(block, field);
+          if (!match) continue;
+          const value = match.decode(match.raw).trim();
+          rows.push({
+            section,
+            file,
+            absolute,
+            id: entry.id,
+            field,
+            value,
+            canonical,
+            defect: seoTitleFieldDefect(field, value, canonical),
+            start: entry.openIdx + match.start,
+            end: entry.openIdx + match.end,
+            encode: match.encode,
+            decode: match.decode,
+          });
+        }
+      }
+    }
+    const missing = [...sectionTitles.keys()].filter((id) => !seen.has(id));
+    if (missing.length > 0) uncovered.push({ section, seoFiles: sectionFiles.length, missing });
   }
-  const match = HEADLINE_RE.exec(block);
-  if (!match) return null;
-  return {
-    raw: match[2],
-    start: match.index + match[1].length,
-    end: match.index + match[1].length + match[2].length,
-    decode: decodeDouble,
-    encode: encodeDouble,
-  };
+  return { sections: Object.keys(SECTIONS), files, entries, titles, rows, orphans, uncovered };
+}
+
+/**
+ * Turn a scan into edits. Pure: nothing is read or written here.
+ *
+ * `unrepairable` holds what the command must not pass over: a defect whose
+ * real title cannot repair it, every entry without a real title — for those a
+ * field that does not dangle would otherwise look fine while its prefix shape
+ * was never compared with anything — and every section with real titles the
+ * scan found no SEO entry for.
+ */
+export function planFromScan(scan) {
+  const plans = [];
+  const unrepairable = (scan.orphans ?? []).map((orphan) => ({
+    ...orphan,
+    field: '*',
+    value: '',
+    canonical: '',
+    reason: 'missing-canonical',
+  }));
+  for (const gap of scan.uncovered ?? []) {
+    unrepairable.push({
+      section: gap.section,
+      file: '',
+      id: '*',
+      field: '*',
+      value: '',
+      canonical: '',
+      reason: 'missing-seo-entry',
+      seoFiles: gap.seoFiles,
+      missing: gap.missing,
+    });
+  }
+  for (const row of scan.rows) {
+    if (!row.defect) continue;
+    const after = repairSeoTitleValue(row.field, row.value, row.canonical);
+    if (after === row.value) {
+      if (row.canonical) unrepairable.push({ ...row, reason: 'canonical-dangling' });
+      continue;
+    }
+    const encoded = row.encode(after);
+    if (row.decode(encoded) !== after) {
+      throw new Error(`${row.file}: round-trip non esatto per ${row.id}.${row.field}`);
+    }
+    plans.push({
+      section: row.section,
+      file: row.file,
+      absolute: row.absolute,
+      id: row.id,
+      field: row.field,
+      defect: row.defect,
+      before: row.value,
+      after,
+      start: row.start,
+      end: row.end,
+      encoded,
+    });
+  }
+  return { plans, unrepairable };
 }
 
 /**
@@ -89,51 +283,14 @@ export function fieldMatch(block, field) {
  * and are applied from right to left by `repairFile`.
  */
 export function planSeoTitleRepairs({ root = ROOT } = {}) {
-  const metaSource = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf8');
-  const titles = readCanonicalTitles(metaSource);
-  const seoDir = path.join(root, 'content', 'seo');
-  const files = fs.readdirSync(seoDir).filter((file) => SEO_FILES_RE.test(file)).sort();
-  if (files.length < 8) {
-    throw new Error(`checkout incompleto: attesi almeno 8 chunk SEO, trovati ${files.length}`);
+  const scan = scanSeoTitleFields({ root });
+  if (scan.files.length < 8) {
+    throw new Error(`checkout incompleto: attesi almeno 8 file SEO, trovati ${scan.files.length}`);
   }
-  if (titles.size < 3000) {
-    throw new Error(`checkout incompleto: attesi almeno 3000 titoli IT, trovati ${titles.size}`);
+  if (scan.titles < 3000) {
+    throw new Error(`checkout incompleto: attesi almeno 3000 titoli IT, trovati ${scan.titles}`);
   }
-
-  const plans = [];
-  for (const file of files) {
-    const absolute = path.join(seoDir, file);
-    const source = fs.readFileSync(absolute, 'utf8');
-    for (const entry of findAllSeoEntryMatches(source, path.join('content/seo', file))) {
-      const canonical = titles.get(entry.id);
-      if (!canonical) continue;
-      const block = source.slice(entry.openIdx, entry.closeIdx + 1);
-      for (const [field, maxLen] of Object.entries(SEO_TITLE_FIELD_LIMITS)) {
-        const match = fieldMatch(block, field);
-        if (!match) continue;
-        const before = match.decode(match.raw).trim();
-        if (!isStrictSeoTitlePrefix(before, canonical)) continue;
-        const after = repairSeoTitleField(before, canonical, maxLen);
-        if (after === before) continue;
-        const encoded = match.encode(after);
-        if (match.decode(encoded) !== after) {
-          throw new Error(`${file}: round-trip non esatto per ${entry.id}.${field}`);
-        }
-        plans.push({
-          file,
-          absolute,
-          id: entry.id,
-          field,
-          before,
-          after,
-          start: entry.openIdx + match.start,
-          end: entry.openIdx + match.end,
-          encoded,
-        });
-      }
-    }
-  }
-  return { files, titles, plans };
+  return { ...scan, ...planFromScan(scan) };
 }
 
 export function repairFile(source, filePlans) {
@@ -170,23 +327,50 @@ export function applyPlans(plans) {
   return byFile.size;
 }
 
-export function formatReport({ files, titles, plans, mode }) {
-  const byField = Object.fromEntries(Object.keys(SEO_TITLE_FIELD_LIMITS).map((field) => [
-    field,
-    plans.filter((plan) => plan.field === field).length,
-  ]));
+// The report is read in a job log: past this many rows the rest is counted.
+const UNREPAIRABLE_REPORT_LIMIT = 40;
+
+export function formatReport({ sections, files, entries, titles, plans, unrepairable = [], mode }) {
+  const count = (list, key) => SEO_TITLE_FIELDS
+    .map((field) => `${field}=${list.filter((item) => item[key] === field).length}`)
+    .join(', ');
+  const bySection = [...new Set(plans.map((plan) => plan.section))]
+    .map((section) => `${section}=${plans.filter((plan) => plan.section === section).length}`)
+    .join(', ');
   const lines = [
     `${mode === 'apply' ? '✅ applicate' : '🔍 dry-run'}: ${plans.length} sostituzioni in ${new Set(plans.map((p) => p.file)).size} file`,
-    `inventario: ${files.length} chunk SEO, ${titles.size} titoli IT`,
-    `per campo: ${Object.entries(byField).map(([field, count]) => `${field}=${count}`).join(', ')}`,
+    `inventario: ${sections.length} sezioni, ${files.length} file SEO, ${entries} voci, ${titles} titoli IT`,
+    `per campo: ${count(plans, 'field')}`,
+    `per sezione: ${bySection || '-'}`,
   ];
   for (const plan of plans.slice(0, 12)) {
-    lines.push(`- ${plan.file}: ${plan.id}.${plan.field}: "${plan.before}" → "${plan.after}"`);
+    lines.push(`- ${plan.file}: ${plan.id}.${plan.field} (${plan.defect}): "${plan.before}" → "${plan.after}"`);
   }
   if (plans.length > 12) lines.push(`- … altri ${plans.length - 12} record`);
+  if (unrepairable.length > 0) {
+    lines.push(`✖ non riparabili, da correggere a mano: ${unrepairable.length}`);
+    if (mode === 'apply' && plans.length > 0) {
+      lines.push('  le sostituzioni sicure qui sopra sono state scritte; l\'uscita resta 1 finché questo elenco non è vuoto');
+    }
+    for (const row of unrepairable.slice(0, UNREPAIRABLE_REPORT_LIMIT)) {
+      if (row.reason === 'missing-seo-entry') {
+        const sample = row.missing.slice(0, 5).join(', ');
+        lines.push(`- sezione '${row.section}': ${row.missing.length} titoli italiani senza voce SEO`
+          + ` (file SEO letti: ${row.seoFiles}; ${sample}${row.missing.length > 5 ? ', …' : ''})`);
+      } else if (row.reason === 'missing-canonical') {
+        lines.push(`- ${row.file}: ${row.id} non ha un titolo italiano nella sezione '${row.section}'`);
+      } else {
+        lines.push(`- ${row.file}: ${row.id}.${row.field} = "${row.value}" (titolo vero monco: "${row.canonical}")`);
+      }
+    }
+    if (unrepairable.length > UNREPAIRABLE_REPORT_LIMIT) {
+      lines.push(`- … altri ${unrepairable.length - UNREPAIRABLE_REPORT_LIMIT}`);
+    }
+  }
   return lines.join('\n');
 }
 
+/** Exit status: 1 while something the command could not judge or repair is left. */
 export function main(argv = process.argv.slice(2)) {
   const apply = argv.includes('--apply');
   const dryRun = argv.includes('--dry-run') || !apply;
@@ -194,7 +378,7 @@ export function main(argv = process.argv.slice(2)) {
   const result = planSeoTitleRepairs();
   if (apply && !dryRun) applyPlans(result.plans);
   console.log(formatReport({ ...result, mode: apply ? 'apply' : 'dry-run' }));
-  return result.plans.length;
+  return result.unrepairable.length > 0 ? 1 : 0;
 }
 
 const invokedDirectly = (() => {
@@ -207,7 +391,7 @@ const invokedDirectly = (() => {
 
 if (invokedDirectly) {
   try {
-    main();
+    process.exitCode = main();
   } catch (error) {
     console.error(`✖ ${error.message}`);
     process.exitCode = 1;

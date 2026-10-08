@@ -54,12 +54,16 @@ import {
   peelDanglingClauseTail,
   TRAILING_STOPWORDS,
 } from '../../host/shared/clauseTail.mjs';
+// Le voci SEO si leggono dal registro delle sezioni e con il lettore di voci
+// del motore, mai con pattern di riga: vedi «Gate sull'output» piu' sotto.
+import { SECTIONS, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
+import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
+import { hasExemptProperNounTail, isDanglingSeoTitle } from '../scripts/lib/seo-title-repair.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
 const CLAUSE_TAIL = path.join(ROOT, 'host', 'shared', 'clauseTail.mjs');
 const TITLE_SUFFIX = path.join(ROOT, 'host', 'shared', 'titleSuffix.ts');
-const SEO_DIR = path.join(ROOT, 'content', 'seo');
 
 // ── Estrazione in sandbox ──────────────────────────────────────────────────
 
@@ -274,74 +278,122 @@ describe('guardia "gia\' completo" allineata a repairSerpSnippet', () => {
 });
 
 // ── Gate sull'output: il corpus pubblicato ─────────────────────────────────
-
-const TERMINAL_RE = /[.!?…»"')\]]$/u;
-const FIELD_RE = /^\s{2,8}(description|ogDescription|title|ogTitle|breadcrumbName|h1):\s*(.+?),?\s*$/;
-const SLUG_RE = /^\s{2}['"]([^'"]+)['"]:\s*\{\s*$/;
+//
+// Tre punti ciechi, misurati il 2026-10-08 e chiusi qui (issue #2281):
+//
+//  1. INDENTAZIONE. Lo scan leggeva le righe con pattern legati a due spazi.
+//     `seo-blog-2.ts`, `-3.ts`, `-4.ts` e gran parte di `seo-blog.ts` sono
+//     indentati con UNO spazio dal loro primo commit: 663 voci su 6.931 di cui
+//     non veniva letto nessun `title`, `ogTitle`, `description`. Ora le voci
+//     si leggono intere con `findAllSeoEntryMatches`.
+//  2. SEZIONI. Solo `content/seo/seo-blog*.ts`: i file SEO dei cantoni
+//     (`content/cantons/<sezione>/seo.ts`), tutti di articoli recenti, non
+//     passavano da nessun gate. Ora le sezioni vengono da `SECTIONS`.
+//  3. MARCHIO. «…: cosa | Frontaliere Ticino» finisce sul marchio, non su
+//     «cosa»: 23 `title` monchi erano invisibili. Il predicato condiviso
+//     (`isDanglingSeoTitle`) toglie il marchio prima di giudicare, e non
+//     scambia per parola funzionale un nome proprio o una sigla («…marchio
+//     On», «…AVS e AI», «…nuovo Haus O»): senza, il primo titolo recente e
+//     integro che finisce cosi' farebbe cadere il gate su `main`.
+const FIELD_RE = /^\s*(description|ogDescription|title|ogTitle|breadcrumbName|h1):\s*(.+?),?\s*$/;
 const SD_RE = /^\s*"(description|headline|name)":\s*(".*?"),?\s*$/;
 const DATE_RE = /^\s*"datePublished":\s*"(\d{4}-\d{2}-\d{2})/;
 
 function scanCorpus() {
-  const files = fs.readdirSync(SEO_DIR).filter((f) => /^seo-blog.*\.ts$/.test(f)).sort();
+  const files = [];
+  const entries = [];
   const rows = [];
-  const dateBySlug = new Map();
-  for (const f of files) {
-    let slug = null;
-    for (const line of fs.readFileSync(path.join(SEO_DIR, f), 'utf-8').split('\n')) {
-      const sm = SLUG_RE.exec(line);
-      if (sm) { slug = sm[1]; continue; }
-      const dm = DATE_RE.exec(line);
-      if (dm && slug && !dateBySlug.has(slug)) { dateBySlug.set(slug, dm[1]); continue; }
-      let m = FIELD_RE.exec(line), raw;
-      if (m) raw = m[2];
-      else { m = SD_RE.exec(line); if (!m) continue; raw = m[2]; }
-      if (/^`/.test(raw)) continue;   // template literal su BASE_URL, non testo SEO
-      let value;
-      try { value = (0, eval)(raw); } catch { continue; }
-      if (typeof value !== 'string' || !value) continue;
-      rows.push({ file: f, slug, value });
+  for (const section of Object.keys(SECTIONS)) {
+    for (const file of seoFilesFor(section, ROOT)) {
+      files.push(file);
+      const source = fs.readFileSync(path.join(ROOT, file), 'utf-8');
+      for (const match of findAllSeoEntryMatches(source, file)) {
+        const entry = { section, file, slug: match.id, date: '', kinds: new Set() };
+        entries.push(entry);
+        for (const line of source.slice(match.openIdx, match.closeIdx + 1).split('\n')) {
+          const dm = DATE_RE.exec(line);
+          if (dm) { if (!entry.date) entry.date = dm[1]; continue; }
+          let m = FIELD_RE.exec(line), kind, raw;
+          if (m) { kind = m[1]; raw = m[2]; }
+          else { m = SD_RE.exec(line); if (!m) continue; kind = `structuredData.${m[1]}`; raw = m[2]; }
+          if (/^`/.test(raw)) continue;   // template literal su BASE_URL, non testo SEO
+          let value;
+          try { value = (0, eval)(raw); } catch { continue; }
+          if (typeof value !== 'string' || !value) continue;
+          entry.kinds.add(kind);
+          rows.push({ entry, kind, value });
+        }
+      }
     }
   }
-  const offenders = rows.filter((r) => !TERMINAL_RE.test(r.value) && peelDanglingClauseTail(r.value) !== r.value);
-  return { files, rows, offenders, dateBySlug };
+  const offenders = rows.filter((r) => isDanglingSeoTitle(r.value));
+  const exempt = rows.filter((r) => hasExemptProperNounTail(r.value));
+  return { files, entries, rows, offenders, exempt };
 }
 
-describe('content/seo/** — code aperte su una parola funzionale', () => {
-  const { files, rows, offenders, dateBySlug } = scanCorpus();
+describe('voci SEO di ogni sezione — code aperte su una parola funzionale', () => {
+  const { files, entries, rows, offenders, exempt } = scanCorpus();
+  const tail = (o) => `${o.entry.section}/${o.entry.slug}.${o.kind} — …${o.value.slice(-46)}`;
 
   // Anti-vacuita': in uno sparse checkout senza content/ questo scan
   // troverebbe zero campi e ogni asserzione sotto passerebbe a vuoto.
   it('lo scan ha davvero letto il corpus', () => {
-    expect(files.length, 'gli 8 chunk seo-blog*.ts devono esserci').toBeGreaterThan(7);
-    expect(rows.length, 'campi SEO estratti (27.764 al 2026-08-09)').toBeGreaterThan(20000);
-    expect(dateBySlug.size, 'entry con datePublished (3.075 al 2026-08-09)').toBeGreaterThan(2500);
+    expect(files.length, 'gli 8 chunk seo-blog*.ts e i file SEO dei cantoni devono esserci').toBeGreaterThan(8);
+    expect(files.some((f) => f.startsWith('content/cantons/')), 'nessun file SEO cantonale letto').toBe(true);
+    expect(entries.length, 'voci SEO lette (6.931 al 2026-10-08)').toBeGreaterThan(6000);
+    expect(rows.length, 'campi SEO estratti (46.862 al 2026-10-08)').toBeGreaterThan(40000);
+    expect(entries.filter((e) => e.date).length, 'voci con datePublished (6.913 al 2026-10-08)').toBeGreaterThan(6000);
   });
 
-  // Ratchet: il mucchio storico puo' solo calare. Dopo questa fix il generatore
-  // non ne produce piu', quindi il conteggio e' monotono non crescente — un
-  // bound assoluto qui non sfarfalla.
-  //
-  // 3.544 misurati a 2a7ec113 il 2026-08-09; il tetto tiene un margine per gli
-  // articoli che il codice VECCHIO genera fra questa misura e il merge (~30-50
-  // al giorno, 2-3 campi ciascuno nel caso peggiore).
-  const OFFENDER_BASELINE = 3544;
-  const OFFENDER_MAX = 3700;
+  // Il punto cieco 1 in forma di asserzione: una voce di cui non si legge ne'
+  // il title ne' la description e' una voce che lo scan non sta giudicando.
+  it('di ogni voce legge title e description, qualunque sia l\'indentazione', () => {
+    const unread = entries
+      .filter((e) => !e.kinds.has('title') || !e.kinds.has('description'))
+      .map((e) => `${e.file}: ${e.slug}`);
+    expect(unread.length, `voci SEO lette senza title o description:\n  ${unread.slice(0, 10).join('\n  ')}`).toBe(0);
+  });
 
-  it(`non supera il baseline storico (${OFFENDER_BASELINE} al 2026-08-09)`, () => {
-    const detail = offenders.slice(0, 5).map((o) => `${o.slug || '?'} — …${o.value.slice(-46)}`).join('\n  ');
-    expect(offenders.length, `code aperte in content/seo/**\n  ${detail}`).toBeLessThan(OFFENDER_MAX + 1);
+  // Ratchet: il mucchio storico puo' solo calare. Il generatore non ne produce
+  // piu' e i campi titolo sono a zero (li tiene a zero
+  // `seo-title-prefix-repair.test.mjs`): restano description, ogDescription e
+  // structuredData.description, quasi tutti sul letterale «Dati aggiornati
+  // <anno> per».
+  //
+  // 3.544 al 2026-08-09 con lo scan di allora, che non vedeva 663 voci.
+  // 2.640 misurati il 2026-10-08 su tutte le voci. Il tetto tiene 10 campi di
+  // margine per le PR di contenuto in volo al momento del merge: abbastanza
+  // per non fermare `main` su una corsa, troppo poco per nascondere una classe.
+  const OFFENDER_BASELINE = 2640;
+  const OFFENDER_MAX = 2650;
+
+  it(`non supera il baseline storico (${OFFENDER_BASELINE} al 2026-10-08)`, () => {
+    const detail = offenders.slice(0, 5).map(tail).join('\n  ');
+    expect(offenders.length, `code aperte nelle voci SEO\n  ${detail}`).toBeLessThan(OFFENDER_MAX + 1);
   });
 
   // Il gate vero: da CUTOFF in poi il generatore e' quello corretto, quindi un
-  // articolo nuovo con la coda aperta e' una regressione, non un residuo.
-  // Parte vuoto per costruzione (nessun articolo ha ancora quella data) e
-  // acquista denti entro il giorno; nel frattempo il ratchet sopra copre.
+  // articolo nuovo con la coda aperta e' una regressione, non un residuo. Una
+  // voce senza datePublished (18, tutte storiche) non e' recente.
   const CUTOFF = '2026-08-10';
 
   it(`nessun articolo pubblicato da ${CUTOFF} in poi ha una coda aperta`, () => {
-    const recent = offenders.filter((o) => o.slug && (dateBySlug.get(o.slug) || '') >= CUTOFF);
-    const detail = recent.slice(0, 10).map((o) => `${o.slug} (${dateBySlug.get(o.slug)}) — …${o.value.slice(-46)}`).join('\n  ');
+    const recent = offenders.filter((o) => o.entry.date >= CUTOFF);
+    const detail = recent.slice(0, 10).map((o) => `${tail(o)} (${o.entry.date})`).join('\n  ');
     expect(recent.length, `articoli generati DOPO la fix con la coda aperta:\n  ${detail}`).toBe(0);
+  });
+
+  // L'esenzione non giudica da nessuna forma: passano solo i nomi e le sigle
+  // elencati nel modulo; una parola funzionale in maiuscola o in sole maiuscole
+  // («…Nuove Regole Per», «…Nuove Regole PER») resta una coda aperta.
+  // 17 campi il 2026-10-08, tutti letti («…marchio On», «…AVS e AI», «…confronto
+  // su AI», «…Lucio Dalla», «…LAINF e AD», «…nuovo Haus O»). Se la classe
+  // cresce, l'esenzione sta diventando il modo in cui una coda vera passa.
+  const EXEMPT_TAILS_MAX = 60;
+
+  it(`le code lette come nome proprio o sigla restano poche (${EXEMPT_TAILS_MAX} al massimo)`, () => {
+    const detail = exempt.map(tail).join('\n  ');
+    expect(exempt.length, `campi che passano solo come nome proprio o sigla:\n  ${detail}`).toBeLessThan(EXEMPT_TAILS_MAX + 1);
   });
 });
 

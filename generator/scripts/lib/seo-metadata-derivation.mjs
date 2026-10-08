@@ -10,9 +10,12 @@
  * also rewrite the paired locale meta surface.
  */
 import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
+// Marchio e tetto del title hanno una sola definizione, quella della bonifica.
+import {
+  SEO_TITLE_BRAND_SUFFIX as TITLE_SUFFIX,
+  SEO_TITLE_MAX_CHARS as TITLE_MAX_CHARS,
+} from './seo-title-repair.mjs';
 
-const TITLE_SUFFIX = ' | Frontaliere Ticino';
-const TITLE_MAX_CHARS = 66;
 const DESCRIPTION_MAX_CHARS = 160;
 const OG_DESCRIPTION_MAX_CHARS = 250;
 const FALLBACK_YEAR = '2026';

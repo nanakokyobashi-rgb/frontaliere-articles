@@ -1738,7 +1738,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.keller-sutter-stabilita-finanze-sane.title': 'Svizzera: stabilità e finanze sane, la nostra forza',
     'blog.article.keller-sutter-stabilita-finanze-sane.excerpt': 'La conseillère fédérale Karin Keller-Sutter a mis l’accent sur la stabilité, des finances saines et la construction du consensus à l’occasion du jour férié national à Kradolf-Schönenberg (Thurgovie) aujourd’hui.',
     'blog.article.keller-sutter-stabilita-finanze-sane.imageAlt': 'Une Conseillère fédérale suisse parle dans un tent en face d\'une salle omnisports à Lugano.',
-    'blog.article.cassis-duedingen.title': 'Plus de cassis à Düdingen :',
+    'blog.article.cassis-duedingen.title': 'Cassis à Düdingen : la Suisse ne tombe pas du ciel, mais doit être cultivée',
     'blog.article.cassis-duedingen.excerpt': 'La Suisse ne tombe pas du ciel, mais doit être cultivée',
     'blog.article.cassis-duedingen.imageAlt': 'Groupe de personnes lors d\'un brunch dans une ferme à Düdingen (FR)',
     'blog.article.redditi-estero-controlli-doppia-tassazione.title': 'Revenus étrangers, chèques en route : comment éviter la double imposition',
