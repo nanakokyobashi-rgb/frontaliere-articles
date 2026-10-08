@@ -1,3 +1,4 @@
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { appendImageRegenerationQueue } from './image-regeneration-queue.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './blog-image-registry.mjs';
 import { DETERMINISTIC_CARD_KIND } from './deterministic-card-provenance.mjs';
