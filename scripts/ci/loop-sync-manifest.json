@@ -353,7 +353,7 @@
       "reason": "Orchestratore del drain dell'outbox delle copertine: raggruppa il dispatch per sezione, attende i publisher in parallelo entro una scadenza cumulativa e produce l'esito per l'ack parziale. Esiste solo nel corpus perche' il workflow `regenerate-queued-covers.yml`, l'outbox e i publisher fast appartengono al repo pubblicatore; non esiste un gemello da portare al sito.",
       "baseline": {
         "site": null,
-        "corpus": "7b46cf6c0d03ca08",
+        "corpus": "4eaf4526f9a0bd05",
         "alignedAt": "2026-10-08"
       }
     },
