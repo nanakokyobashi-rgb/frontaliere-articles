@@ -7922,6 +7922,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.salari-svizzera-talenti-stranieri.title': 'Svizzera: minimo divario salariale per talenti UE/AELS',
     'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## In breve - La Svizzera è prima nell\'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera',
     'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Vista panoramica di Lugano, Svizzera, che simboleggia le opportunità economiche e l\'attrattiva per i talenti qualificati.',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'TF nega sconto cassa malati padre affidamento alternato',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## In breve - Il TF respinge il ricorso di un padre divorziato. - La custodia dei figli è alternata tra i genitori. - Niente detrazione di 9\'000 franchi',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Immagine editoriale relativa a: TF nega sconto cassa malati padre affidamento alternato',
 };
 
 export default blogMetaChIt;

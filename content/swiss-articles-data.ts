@@ -26412,6 +26412,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tf-nega-sconto-cassa-malati-padre-affidamento-alternato',
+    category: 'novita',
+    date: '2026-10-08T13:03:38.516Z',
+    image: '/images/blog/article-tf-nega-sconto-cassa-malati-padre-affidamento-alternato.webp',
+    hasCalculator: false,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -7922,6 +7922,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.salari-svizzera-talenti-stranieri.title': 'Schweiz: minimales Lohngefälle für Talente aus der EU/EFTA',
     'blog.article.salari-svizzera-talenti-stranieri.excerpt': '## Auf einen Blick - Die Schweiz belegt im IMD World Talent Ranking den ersten Platz - Bereinigtes Lohngefälle EU/EFTA: 1,1% weniger - Drittstaaten: 4,5% weniger - Einwanderung über die Personenfreizügigkeit',
     'blog.article.salari-svizzera-talenti-stranieri.imageAlt': 'Panoramablick auf Lugano, Schweiz, symbolisch für wirtschaftliche Chancen und Attraktivität für qualifizierte Talente.',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.title': 'BGer verweigert Krankenkassenabzug bei alternierender Obhut des Vaters',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.excerpt': '## Auf einen Blick - Das BGer weist die Beschwerde eines geschiedenen Vaters ab. - Die Obhut über die Kinder wird von den Eltern alternierend ausgeübt. - Kein Abzug von 9\'000 Franken',
+    'blog.article.tf-nega-sconto-cassa-malati-padre-affidamento-alternato.imageAlt': 'Redaktionelles Bild zu: TF nega sconto cassa malati padre affidamento alternato',
 };
 
 export default blogMetaChDe;
