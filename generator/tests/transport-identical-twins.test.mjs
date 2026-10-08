@@ -922,6 +922,60 @@ test('replay run 37699422170: il contratto crawler chiude workflow e artifact pr
   assert.equal(capped, 1);
 });
 
+test('il contratto blocca un artifact dichiarato ma assente dal manifest prima del verdetto', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const manifest = { files: [contractEntry] };
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'missing.yml' }] }));
+  const couplings = graph.get(contractEntry.path);
+  assert.equal(couplings.length, 1);
+  assert.equal(couplings[0].path, '.github/workflows/missing.yml');
+  assert.equal(couplings[0].mode, 'non registrato');
+  const verdict = transportVerdict(
+    contractEntry,
+    { site: 'bbbb', corpus: 'aaaa' },
+    BASE,
+    { couplings },
+  );
+  assert.equal(verdict.permanent, true);
+  assert.match(verdict.reason, /missing\.yml/);
+});
+
+test('il contratto blocca un artifact `adapted` invece di lasciarlo come arco ignorato', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const artifactEntry = { path: '.github/workflows/adapted.yml', mode: 'adapted' };
+  const manifest = { files: [contractEntry, artifactEntry] };
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'adapted.yml' }] }));
+  const contractCouplings = graph.get(contractEntry.path);
+  assert.equal(contractCouplings[0].mode, 'adapted');
+  const verdict = transportVerdict(
+    contractEntry,
+    { site: 'bbbb', corpus: 'aaaa' },
+    BASE,
+    { couplings: contractCouplings },
+  );
+  assert.equal(verdict.permanent, true);
+  assert.match(verdict.reason, /adapted\.yml/);
+});
+
+test('un contratto malformato o senza `artifacts[]` è una unità non verificabile', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const manifest = { files: [contractEntry] };
+  for (const source of ['{', '{}']) {
+    const graph = crawlerContractCouplings(manifest, source);
+    const couplings = graph.get(contractEntry.path);
+    assert.equal(couplings.length, 1);
+    assert.equal(couplings[0].mode, 'non verificabile');
+    const verdict = transportVerdict(
+      contractEntry,
+      { site: 'bbbb', corpus: 'aaaa' },
+      BASE,
+      { couplings },
+    );
+    assert.equal(verdict.permanent, true);
+    assert.match(verdict.reason, /non `identical`/);
+  }
+});
+
 test('un hash dell\u2019artifact dichiarato dal contratto promuove il gemello stale', () => {
   const manifest = {
     files: [{ path: '.github/workflows/translate-pending.yml', mode: 'identical' }],
@@ -961,8 +1015,34 @@ test('la chiusura degli import relativi segue il twin del sitePath, non l\u2019a
   const couplings = relativeImportCouplings(
     manifest.files[0],
     "import { organizationLd } from '../../services/seo/organizationLd';\n",
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
     manifest,
     (rel) => rel === 'services/seo/organizationLd.ts',
+  );
+  assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+  assert.equal(couplings[0].mode, 'identical');
+});
+
+test('la chiusura degli import include una dipendenza aggiunta dal site-ahead', () => {
+  const manifest = {
+    files: [
+      {
+        path: 'host/shared/consumer.ts',
+        sitePath: 'build-plugins/shared/consumer.ts',
+        mode: 'identical',
+      },
+      {
+        path: 'host/seo/organizationLd.ts',
+        sitePath: 'build-plugins/seo/organizationLd.ts',
+        mode: 'identical',
+      },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    '// corpus senza il nuovo import\n',
+    "import { organizationLd } from '../seo/organizationLd';\n",
+    manifest,
   );
   assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
   assert.equal(couplings[0].mode, 'identical');
@@ -977,6 +1057,7 @@ test('un import relativo verso un adapted viene dichiarato come blocco, non scop
   };
   const couplings = relativeImportCouplings(
     manifest.files[0],
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
     "import { organizationLd } from '../../services/seo/organizationLd';\n",
     manifest,
     (rel) => rel === 'services/seo/organizationLd.ts',

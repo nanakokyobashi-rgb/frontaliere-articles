@@ -439,36 +439,56 @@ function mergeCouplings(...groups) {
 }
 
 function parseCrawlerContract(value) {
-  if (value && typeof value === 'object' && !Buffer.isBuffer(value)) return value;
+  let parsed;
+  if (value && typeof value === 'object' && !Buffer.isBuffer(value)) parsed = value;
   try {
-    return JSON.parse(Buffer.isBuffer(value) ? value.toString('utf8') : String(value ?? ''));
+    if (parsed === undefined) parsed = JSON.parse(Buffer.isBuffer(value) ? value.toString('utf8') : String(value ?? ''));
   } catch {
     return null;
   }
+  return parsed
+    && typeof parsed === 'object'
+    && !Array.isArray(parsed)
+    && Array.isArray(parsed.artifacts)
+    ? parsed
+    : null;
 }
 
 /**
  * Calcola la chiusura degli import relativi di un gemello rispetto ai due
- * alberi. Se il file sul sito, sotto il suo `sitePath`, risolve un import a
- * un path il cui gemello corpus e' diverso da quello risolto localmente, il
- * gemello importato entra nello stesso componente di trasporto. Se il target
- * non e' dichiarato dal manifest, il coupling e' bloccante: una copia a meta'
- * e' peggio di un rinvio leggibile.
+ * alberi. Gli import vengono raccolti da ENTRAMBI i byte: una versione
+ * `site-ahead` puo' aggiungere o rimuovere un import rispetto al corpus, e la
+ * sorgente locale da sola non descrive piu' la dipendenza che verra' copiata.
+ * Se il file sul sito, sotto il suo `sitePath`, risolve un import a un path il
+ * cui gemello corpus e' diverso da quello risolto localmente, il gemello
+ * importato entra nello stesso componente di trasporto. Se un import presente
+ * sul sito non ha un target dichiarato dal manifest, il coupling e' bloccante:
+ * una copia a meta' e' peggio di un rinvio leggibile.
  *
  * @param {{path:string, sitePath?:string, mode:string}} entry
- * @param {string|null} source testo corpus dell'entry
+ * @param {string|Buffer|null} localSource testo corpus dell'entry
+ * @param {string|Buffer|null} siteSourceBytes byte dell'entry sotto `sitePath`
  * @param {{files?:Array<object>}} manifest
  * @param {(path:string)=>boolean} [corpusExists]
  * @returns {Array<{path:string,mode:string,declaredBy:string,reason?:string}>}
  */
-export function relativeImportCouplings(entry, source, manifest, corpusExists = (rel) => fs.existsSync(path.join(ROOT, rel))) {
+export function relativeImportCouplings(entry, localSource, siteSourceBytes, manifest, corpusExists = (rel) => fs.existsSync(path.join(ROOT, rel))) {
   if (!entry || entry.mode !== 'identical') return [];
-  if (typeof source !== 'string') {
+  const localText = typeof localSource === 'string'
+    ? localSource
+    : Buffer.isBuffer(localSource) ? localSource.toString('utf8') : null;
+  const siteText = typeof siteSourceBytes === 'string'
+    ? siteSourceBytes
+    : Buffer.isBuffer(siteSourceBytes) ? siteSourceBytes.toString('utf8') : null;
+  if (localText === null || siteText === null) {
+    const missing = [];
+    if (localText === null) missing.push('corpus');
+    if (siteText === null) missing.push('sitePath');
     return [{
       path: entry.path,
       mode: 'unreadable',
       declaredBy: 'relative-import',
-      reason: 'sorgente del gemello non leggibile: chiusura degli import non verificabile',
+      reason: `sorgente ${missing.join(' e ')} del gemello non leggibile: chiusura degli import non verificabile`,
     }];
   }
 
@@ -477,29 +497,51 @@ export function relativeImportCouplings(entry, source, manifest, corpusExists = 
   const bySite = new Map(entries.map((item) => [item.sitePath || item.path, item]));
   const corpusKnown = (candidate) => modeOf.has(candidate) || corpusExists(candidate);
   const siteSource = entry.sitePath || entry.path;
+  const localSpecs = new Set(relativeImportSpecifiers(localText));
+  const siteSpecs = new Set(relativeImportSpecifiers(siteText));
+  const specs = new Set([...localSpecs, ...siteSpecs]);
   const couplings = [];
 
-  for (const spec of relativeImportSpecifiers(source)) {
+  for (const spec of specs) {
     const localTarget = resolveRelativeImport(entry.path, spec, corpusKnown);
-    if (!localTarget) continue;
     const siteTarget = resolveRelativeImport(siteSource, spec, (candidate) => bySite.has(candidate));
     if (!siteTarget) {
+      // Un import rimasto solo nel corpus non e' una dipendenza del file che
+      // verra' copiato dal sito, ma resta nel grafo per conservare la chiusura
+      // gia' attestata dal lato locale. Un import presente sul sito senza
+      // target manifesto, invece, e' un blocker anche se il corpus ha un
+      // omonimo: il byte copiato avrebbe una dipendenza non verificata.
+      if (!siteSpecs.has(spec) && !localTarget) continue;
+      if (!siteSpecs.has(spec)) {
+        couplings.push({
+          path: localTarget,
+          mode: modeOf.get(localTarget) || 'non registrato',
+          declaredBy: 'relative-import',
+          reason: `import relativo ${spec} presente solo nel corpus: il gemello locale ${localTarget} resta nella chiusura`,
+        });
+        continue;
+      }
       couplings.push({
-        path: localTarget,
-        mode: modeOf.get(localTarget) || 'non registrato',
+        path: localTarget || path.posix.normalize(path.posix.join(path.posix.dirname(siteSource), spec)),
+        mode: 'non registrato',
         declaredBy: 'relative-import',
-        reason: `import relativo ${spec} risolve sul corpus a ${localTarget}, ma il target del sitePath ${siteSource} non e' nel manifest`,
+        reason: `import relativo ${spec} presente sul sitePath ${siteSource}, ma il target non e' nel manifest`,
       });
       continue;
     }
     const twin = bySite.get(siteTarget);
     if (!twin) continue;
-    if (localTarget === twin.path) continue;
+    if (localTarget === twin.path && localSpecs.has(spec)) continue;
     couplings.push({
       path: twin.path,
+      // Un import che il sito ha aggiunto puo' non avere un target risolto
+      // nell'albero corpus. In quel caso il twin del sito e' comunque il file
+      // da portare insieme: `bySite` ne certifica l'esistenza e il suo mode.
       mode: twin.mode || 'non registrato',
       declaredBy: 'relative-import',
-      reason: `import relativo ${spec} risolve sul corpus a ${localTarget}, mentre il gemello di ${siteTarget} e' ${twin.path}`,
+      reason: localSpecs.has(spec)
+        ? `import relativo ${spec} risolve sul corpus a ${localTarget}, mentre il gemello di ${siteTarget} e' ${twin.path}`
+        : `import relativo ${spec} presente sul sitePath ${siteSource}: il suo gemello e' ${twin.path}`,
     });
   }
   return mergeCouplings(couplings);
@@ -518,14 +560,46 @@ export function crawlerContractCouplings(manifest, contractSource) {
   const byPath = new Map(entries.map((entry) => [entry.path, entry]));
   const contractEntry = byPath.get(CRAWLER_CONTRACT_REL);
   const contract = parseCrawlerContract(contractSource);
-  if (!contractEntry || !contract || !Array.isArray(contract.artifacts)) return graph;
+  if (!contractEntry) return graph;
+  if (!contract) {
+    addCoupling(graph, CRAWLER_CONTRACT_REL, {
+      path: CRAWLER_CONTRACT_REL,
+      mode: 'non verificabile',
+      declaredBy: 'crawler-contract',
+      reason: 'contratto crawler cross-repo malformato o privo di artifacts[]: unita\u2019 non verificabile',
+    });
+    return graph;
+  }
 
   for (const artifact of contract.artifacts) {
-    if (!artifact || typeof artifact.file !== 'string' || artifact.file.includes('..')) continue;
+    if (
+      !artifact
+      || typeof artifact.file !== 'string'
+      || artifact.file.trim() === ''
+      || artifact.file.includes('..')
+      || artifact.file.includes('\\')
+      || path.posix.isAbsolute(artifact.file)
+    ) {
+      addCoupling(graph, CRAWLER_CONTRACT_REL, {
+        path: CRAWLER_CONTRACT_REL,
+        mode: 'non verificabile',
+        declaredBy: 'crawler-contract',
+        reason: 'il contratto crawler contiene un artifact non valido: unita\u2019 non verificabile',
+      });
+      continue;
+    }
     const artifactPath = `.github/workflows/${artifact.file}`;
     const artifactEntry = byPath.get(artifactPath);
-    if (!artifactEntry) continue;
     const contractMode = contractEntry.mode || 'non registrato';
+    if (!artifactEntry) {
+      addCoupling(graph, CRAWLER_CONTRACT_REL, {
+        path: artifactPath,
+        mode: 'non registrato',
+        declaredBy: 'crawler-contract',
+        reason: `artifact ${artifact.file} elencato dal contratto cross-repo ma assente dal manifest`,
+      });
+      continue;
+    }
     const artifactMode = artifactEntry.mode || 'non registrato';
     addCoupling(graph, CRAWLER_CONTRACT_REL, {
       path: artifactPath,
@@ -2135,10 +2209,47 @@ async function main() {
   const realignCandidates = [];
   const needsReconcile = [];
   const observations = new Map();
-  const siteContents = new Map();
   let couplingSnapshotChanged = false;
   let attempted = 0;
   let missingOnSite = 0;
+
+  // Il contratto deve essere disponibile PRIMA dei verdetti degli artifact:
+  // aggiungere il grafo dopo `transportVerdict()` lasciava passare un
+  // contratto `site-ahead` anche quando dichiarava una meta' assente o non
+  // trasportabile. Il fetch viene memorizzato per non pagare due volte la
+  // stessa lettura nel ciclo principale.
+  const contractEntry = manifest.files.find((entry) => entry.path === CRAWLER_CONTRACT_REL);
+  const contractSitePath = contractEntry?.sitePath || contractEntry?.path;
+  let prefetchedContract = null;
+  if (contractEntry?.mode === 'identical') {
+    attempted += 1;
+    try {
+      const content = await siteFile(contractSitePath);
+      if (content === null) missingOnSite += 1;
+      prefetchedContract = { ok: true, content };
+    } catch (e) {
+      const reason = String(e.message || e).slice(0, 120);
+      failed.push({ path: contractEntry.path, reason });
+      prefetchedContract = { ok: false, reason };
+    }
+  }
+
+  // Il sito e' la fonte del coupling quando il byte e' disponibile. Per un
+  // 404 o una fetch fallita resta il fallback locale gia' usato dal canale:
+  // impedisce di spezzare un'unita' conosciuta, mentre il verdetto di fetch
+  // tiene fuori il lato sito non verificato.
+  let contractSource = prefetchedContract?.ok && prefetchedContract.content !== null
+    ? prefetchedContract.content
+    : null;
+  if (contractSource == null && contractEntry) {
+    try {
+      contractSource = fs.readFileSync(path.join(ROOT, contractEntry.path), 'utf8');
+    } catch {
+      contractSource = null;
+    }
+  }
+  const contractGraph = crawlerContractCouplings(manifest, contractSource);
+  for (const [rel, couplings] of contractGraph) couplingGraph.push({ path: rel, couplings });
 
   for (const entry of manifest.files) {
     if (entry.mode !== 'identical') continue;
@@ -2157,8 +2268,33 @@ async function main() {
       // blocker; swallowing the read here would make the missing closure look
       // like a file with no imports.
     }
-    const imported = relativeImportCouplings(entry, source, manifest);
-    const couplings = mergeCouplings(scanned, declared, imported);
+    let content;
+    let now;
+    const isPrefetchedContract = contractEntry?.path === rel && prefetchedContract;
+    if (isPrefetchedContract && !prefetchedContract.ok) continue;
+    if (!isPrefetchedContract) attempted += 1;
+    try {
+      content = isPrefetchedContract ? prefetchedContract.content : await siteFile(sitePath);
+      // Un 404 non lancia: qui non c'e' un errore da mettere in `failed`, ma
+      // nemmeno una verifica. Contato a parte, e' la meta' del buio che
+      // `fetchFailureVerdict` non poteva vedere.
+      if (!isPrefetchedContract && content === null) missingOnSite += 1;
+      now = { site: content === null ? null : sha256(content), corpus: localHash(rel) };
+    } catch (e) {
+      // PROCEED-SAFE come il drift check: una fetch fallita non deve far
+      // saltare le altre copie, e soprattutto non deve MAI valere come "il
+      // file non c'è più sul sito" (che sarebbe una rimozione inventata).
+      failed.push({ path: rel, reason: String(e.message || e).slice(0, 120) });
+      continue;
+    }
+
+    // La chiusura usa entrambi i byte, ora che il sitePath e' stato letto, e
+    // incorpora il coupling crawler gia' validato prima di questo verdetto.
+    // Un 404 e' lo stato "assente sul sito", non una sorgente illeggibile da
+    // registrare nel coupling snapshot: non c'e' un byte del sitePath da
+    // analizzare e comunque questa voce non puo' diventare candidata.
+    const imported = content === null ? [] : relativeImportCouplings(entry, source, content, manifest);
+    const couplings = mergeCouplings(scanned, declared, imported, contractGraph.get(rel) || []);
     if (fixture) {
       const currentSnapshot = couplingSnapshot(couplings);
       const diff = couplingDiff(entry.couplingSnapshot, currentSnapshot);
@@ -2171,29 +2307,14 @@ async function main() {
     // Raccolto per OGNI sorgente con coupling, non solo per i candidati: e' la
     // mappa inversa di cui il tetto ha bisogno per non copiare una meta' mentre
     // lascia indietro il fixture, il contratto o il twin importato.
-    if (couplings.length) couplingGraph.push({ path: rel, couplings });
-    // Non dipende dagli hash, quindi si sa PRIMA della fetch — ed e' cio' che
+    const graphNode = couplingGraph.find((item) => item.path === rel);
+    if (couplings.length) {
+      if (graphNode) graphNode.couplings = mergeCouplings(graphNode.couplings, couplings);
+      else couplingGraph.push({ path: rel, couplings });
+    }
+    // Non dipende dagli hash, quindi si sa PRIMA del verdetto — ed e' cio' che
     // permette al tetto di distinguere un rinvio da un no che non scade.
     if (permanentBlock(entry, { outOfScopePrefixes, couplings })) blockedForever.add(rel);
-
-    let content;
-    let now;
-    attempted += 1;
-    try {
-      content = await siteFile(sitePath);
-      siteContents.set(sitePath, content);
-      // Un 404 non lancia: qui non c'e' un errore da mettere in `failed`, ma
-      // nemmeno una verifica. Contato a parte, e' la meta' del buio che
-      // `fetchFailureVerdict` non poteva vedere.
-      if (content === null) missingOnSite += 1;
-      now = { site: content === null ? null : sha256(content), corpus: localHash(rel) };
-    } catch (e) {
-      // PROCEED-SAFE come il drift check: una fetch fallita non deve far
-      // saltare le altre copie, e soprattutto non deve MAI valere come "il
-      // file non c'è più sul sito" (che sarebbe una rimozione inventata).
-      failed.push({ path: rel, reason: String(e.message || e).slice(0, 120) });
-      continue;
-    }
 
     const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
     observations.set(rel, { entry, path: rel, sitePath, content, now, base, couplings, verdict });
@@ -2222,26 +2343,6 @@ async function main() {
       continue;
     }
     candidates.push({ entry, path: rel, sitePath, content, now, base, couplings });
-  }
-
-  // The contract graph is read from the site bytes when available. Falling
-  // back to the local contract is conservative for a missing site artifact:
-  // it still prevents a known unit from being split, while the fetch verdict
-  // keeps the missing side out of the selected batch.
-  const contractEntry = manifest.files.find((entry) => entry.path === CRAWLER_CONTRACT_REL);
-  let contractSource = contractEntry ? siteContents.get(contractEntry.sitePath || contractEntry.path) : null;
-  if (contractSource == null && contractEntry) {
-    try {
-      contractSource = fs.readFileSync(path.join(ROOT, contractEntry.path), 'utf8');
-    } catch {
-      contractSource = null;
-    }
-  }
-  const contractGraph = crawlerContractCouplings(manifest, contractSource);
-  for (const [rel, couplings] of contractGraph) {
-    const node = couplingGraph.find((item) => item.path === rel);
-    if (node) node.couplings = mergeCouplings(node.couplings, couplings);
-    else couplingGraph.push({ path: rel, couplings });
   }
 
   // A changed contract can expose a stale artifact whose own baseline would
