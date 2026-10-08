@@ -1329,6 +1329,16 @@
       }
     },
     {
+      "path": "scripts/ci/ensure-host-shell-assets.mjs",
+      "mode": "corpus-only",
+      "reason": "Passo dei workflow di pubblicazione (fast-publish-article.yml, fast-publish-section.yml): prima di rendere e pubblicare, garantisce sulla CDN i file della shell di cui host/ porta il contenuto, oggi il produttore GA4 con il nome derivato dal contenuto (`gtag-init-<hash>.js`). L'omologo del sito e' scripts/ci/ensure-cdn-shell-assets.mjs, che legge la lista da build-plugins/staticScriptsPlugin.ts: quel plugin qui non esiste, quindi lo script d'ingresso e' proprio di questo repo e la logica condivisa sta nel gemello identical scripts/lib/cdn-shell-assets.mjs.",
+      "baseline": {
+        "site": null,
+        "corpus": "70988426e86e683a",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "generator/tests/loop-labels.test.mjs",
       "mode": "corpus-only",
       "reason": "Copre due modi di sbagliare gia' capitati: una descrizione oltre i 100 caratteri (GitHub la rifiuta con un errore generico — e' costata la mancata creazione di agent:in-progress, l'unica che serve al mutex, mentre le altre dodici passavano), e un valore di fu-prio emesso dal classificatore senza la label corrispondente. Il secondo test prende i valori possibili dalla loro SORGENTE invece di indovinarli: il controllo per prefisso si accontentava di un membro qualsiasi della famiglia e non vedeva la rimozione di fu-prio:high.",
@@ -2275,6 +2285,16 @@
         "site": "9633813da0529c82",
         "corpus": "9633813da0529c82",
         "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/lib/cdn-shell-assets.mjs",
+      "mode": "identical",
+      "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275, #12299 e #12305): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; poi chiede l'URL delle pagine nelle due varianti di cache per ogni file, anche per quelli che la sonda mostra (la HEAD della sonda legge R2 e non vede un 404 tenuto dall'edge): un file che la sonda non ha mostrato, o che a quell'URL non risponde, viene invalidato all'edge e riconfermato, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
+      "baseline": {
+        "site": "e3d195c4dd987f6f",
+        "corpus": "e3d195c4dd987f6f",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -3467,7 +3487,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 082cd6c3… registra il riferimento content-addressed a gtag-init.js in GTAG_SNIPPET (`/assets/gtag-init.js?v=<sha256[:12] di GTAG_INIT_CONTENT>`, sito PR #11496, issue 9403), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS entrano nella chiusura; conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #11496 e corpus PR 2176; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest cd702c32… registra il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #12150; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -3478,7 +3498,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "082cd6c37e2cbed2c86e6ae91b1c9af6de9b1ef9b91def9a93f49765522670cd"
+        "sha256": "cd702c32d250a58012beb5da86d107bd2a5af9036e5248a1567043d6ea0c2e78"
       }
     },
     {
@@ -3695,9 +3715,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "fc57a59813a2ab09",
-        "corpus": "fc57a59813a2ab09",
-        "alignedAt": "2026-10-05"
+        "site": "26c08f554ddc2f44",
+        "corpus": "26c08f554ddc2f44",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -3738,6 +3758,16 @@
         "site": null,
         "corpus": "7cee0a8ece1f7f86",
         "alignedAt": "2026-10-03"
+      }
+    },
+    {
+      "path": "host/tests/host-shell-assets.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Test node:test (sotto tsx, come gli altri di host/tests/) della garanzia sugli asset della shell: ogni riferimento con nome derivato dal contenuto nel contratto deve essere un file di cui host/ porta i byte, lo script d'ingresso passa quei file alla libreria, e ogni job che rende pagine con la shell esegue il passo prima del primo emettitore. Il sito copre la libreria con tests/cdn-shell-assets.test.ts (Vitest); questo harness legge host/ e i workflow di questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "ca74194f66bb7947",
+        "alignedAt": "2026-10-08"
       }
     },
     {
