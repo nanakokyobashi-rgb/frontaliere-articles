@@ -15061,6 +15061,13 @@ function decodeLocaleContentEntities(data, locale) {
   if (typeof alt === 'string') data.imageAlt[locale] = decodeHtmlEntities(alt);
 }
 
+function decodeArticleEntities(data) {
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    decodeLocaleContentEntities(data, locale);
+  }
+  decodeSeoEntities(data);
+}
+
 function writeSectionLocale(data, locale) {
   decodeLocaleContentEntities(data, locale);
 
@@ -18435,6 +18442,11 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // passing the source context through non-enumerable scratch properties. The
   // properties are removed before any write, so they cannot leak into the
   // generated article or alter the serialized data shape.
+  // Decode the same entities that writeSectionLocale() would decode before
+  // the gate inspects the payload. Otherwise `Z&uuml;rich` is not visible as
+  // `Zürich` to the localized-exonym detector and can be published in place
+  // of the required English `Zurich`.
+  decodeArticleEntities(data);
   Object.defineProperties(data, {
     _sourceUrl: { value: url, configurable: true },
     _sourceText: { value: factualityGateSourceText(url, pageContent), configurable: true },
@@ -19413,6 +19425,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // flusso primario. Il controllo arriva dopo la derivazione definitiva degli
   // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
   // provvisorio ancora non sanitizzato.
+  decodeArticleEntities(data);
   assertArticlePassesFactualityGates(data);
   // Il tipo dell'articolo nel registry: esplicito del produttore, altrimenti
   // dalla stessa dichiarazione che decide la sitemap news (`skipNews`). Prima

@@ -29,7 +29,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
-import { assertLocalizedToponymPair } from './lib/localized-toponyms.mjs';
+import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -243,18 +243,23 @@ const faqKeyRx = (id) => `'blog\\.article\\.${escapeRegExpLiteral(String(id))}\\
 const faqValueRe = (id) => new RegExp(`${faqKeyRx(id)}\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'\\s*[,}]`, 'g');
 
 const LOCALE_DIRS = new Set(['en', 'de', 'fr']);
-const articleFieldValueRe = (id) => new RegExp(
-  `'blog\\.article\\.${escapeRegExpLiteral(String(id))}\\.[^']+'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`,
-  'g',
-);
 
 function articleProjectionText(filePath, articleId, { excludeFaq = false } = {}) {
   if (!existsSync(filePath)) return '';
-  const source = readFileSync(filePath, 'utf-8');
-  return [...source.matchAll(articleFieldValueRe(articleId))]
-    .filter((match) => !excludeFaq || !match[0].startsWith(`'blog.article.${articleId}.faq'`))
-    .map((match) => unescapeForSingleQuoteTS(match[1]))
-    .join('\n');
+  const bodyPath = resolve(filePath);
+  const bodyDir = dirname(dirname(bodyPath));
+  const bodyLocaleDir = dirname(bodyPath);
+  const metaStem = basename(bodyDir).replace(/^blog-body(?=-|$)/u, 'blog-meta');
+  const metaPath = resolve(dirname(bodyDir), `${metaStem}-${basename(bodyLocaleDir)}.ts`);
+  const bodyProjection = extractArticleProjectionText(
+    readFileSync(bodyPath, 'utf-8'),
+    articleId,
+    { excludeFaq },
+  );
+  const metaProjection = existsSync(metaPath)
+    ? extractArticleProjectionText(readFileSync(metaPath, 'utf-8'), articleId, { excludeFaq })
+    : '';
+  return [bodyProjection, metaProjection].filter(Boolean).join('\n');
 }
 
 function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
@@ -263,7 +268,7 @@ function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
   const targetDir = dirname(targetPath);
   const sourcePath = resolve(targetDir, '..', 'it', basename(targetPath));
   try {
-    const sourceProjection = articleProjectionText(sourcePath, articleId);
+    const sourceProjection = articleProjectionText(sourcePath, articleId, { excludeFaq: true });
     // The file still contains the previous FAQ at this point. It is not the
     // candidate being admitted: only the candidate below must participate in
     // the target-side translation gate.

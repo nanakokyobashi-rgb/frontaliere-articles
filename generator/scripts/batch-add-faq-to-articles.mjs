@@ -54,7 +54,7 @@ import {
 } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
-import { assertLocalizedToponymPair } from './lib/localized-toponyms.mjs';
+import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
 function parseLimitArgs(argv) {
@@ -620,17 +620,32 @@ export function extractBodyContent(fileContent, articleId) {
  * before allowing the atomic write. A failed translation therefore cannot
  * publish an Italian exonym as a locale fallback.
  */
+function articleProjectionText(filePath, articleId, { excludeFaq = false } = {}) {
+  const bodyPath = resolve(filePath);
+  const bodyDir = dirname(dirname(bodyPath));
+  const bodyLocaleDir = dirname(bodyPath);
+  const metaStem = basename(bodyDir).replace(/^blog-body(?=-|$)/u, 'blog-meta');
+  const metaPath = resolve(dirname(bodyDir), `${metaStem}-${basename(bodyLocaleDir)}.ts`);
+  const bodyProjection = existsSync(bodyPath)
+    ? extractArticleProjectionText(readFileSync(bodyPath, 'utf-8'), articleId, { excludeFaq })
+    : '';
+  const metaProjection = existsSync(metaPath)
+    ? extractArticleProjectionText(readFileSync(metaPath, 'utf-8'), articleId, { excludeFaq })
+    : '';
+  return [bodyProjection, metaProjection].filter(Boolean).join('\n');
+}
+
 function passesLocalizedToponymGate({ filePath, articleId, locale, sourceFaq, targetFaq }) {
   if (!locale || locale === 'it') return true;
   const targetPath = resolve(filePath);
   const targetDir = dirname(targetPath);
   const sourcePath = resolve(targetDir, '..', 'it', basename(targetPath));
-  const sourceBody = existsSync(sourcePath) ? extractBodyContent(read(sourcePath), articleId) : '';
-  const targetBody = existsSync(targetPath) ? extractBodyContent(read(targetPath), articleId) : '';
+  const sourceArticle = articleProjectionText(sourcePath, articleId, { excludeFaq: true });
+  const targetArticle = articleProjectionText(targetPath, articleId, { excludeFaq: true });
   try {
     assertLocalizedToponymPair({
-      sourceText: `${sourceBody}\n${JSON.stringify(sourceFaq || [])}`,
-      targetText: `${targetBody}\n${JSON.stringify(targetFaq || [])}`,
+      sourceText: `${sourceArticle}\n${JSON.stringify(sourceFaq || [])}`,
+      targetText: `${targetArticle}\n${JSON.stringify(targetFaq || [])}`,
       locale,
       context: `${articleId}/${locale} FAQ`,
     });

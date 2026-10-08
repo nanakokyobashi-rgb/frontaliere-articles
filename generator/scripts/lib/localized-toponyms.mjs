@@ -1,4 +1,6 @@
 import { readFileSync } from 'node:fs';
+import { unescapeTsString } from './unescape-ts-string.mjs';
+import { decodeHtmlEntities } from './decode-html-entities.mjs';
 
 const TABLE = JSON.parse(
   readFileSync(new URL('../../data/localized-toponyms.json', import.meta.url), 'utf8'),
@@ -19,6 +21,11 @@ export const LOCALIZED_TOPONYMS = Object.freeze(
 
 const LOCALE_SET = new Set(LOCALIZED_TOPONYM_LOCALES);
 const ENTITY_TYPES = Object.freeze(['canton', 'capital']);
+
+/** Keep detection and historical repair on the same text the writer publishes. */
+export function normalizeLocalizedToponymText(value) {
+  return decodeHtmlEntities(String(value ?? ''));
+}
 
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
@@ -44,7 +51,7 @@ function withoutUrls(value) {
 }
 
 function containsTerm(value, term) {
-  const text = withoutUrls(value).normalize('NFKC');
+  const text = withoutUrls(normalizeLocalizedToponymText(value)).normalize('NFKC');
   const pattern = termPattern(term);
   if (!pattern) return false;
   return new RegExp(`(?<![\\p{L}\\p{N}])${pattern}(?![\\p{L}\\p{N}])`, 'iu').test(text);
@@ -67,6 +74,42 @@ function localizedSlugForm(value) {
     .toLocaleLowerCase('en')
     .replace(/[^\p{L}\p{N}]+/gu, '-')
     .replace(/^-+|-+$/gu, '');
+}
+
+const ARTICLE_PROJECTION_ESCAPES = Object.freeze({
+  "'": "'",
+  '"': '"',
+  '\\': '\\',
+  n: '\n',
+  r: '\r',
+  t: ' ',
+});
+
+/**
+ * Extract every published field for one article from a body or meta TS file.
+ * The writer stores body, FAQ and metadata in the same article-key namespace;
+ * callers can therefore combine the result from both files into one
+ * article-wide projection before admitting a replacement.
+ */
+export function extractArticleProjectionText(fileContent, articleId, { excludeFaq = false, fields = null } = {}) {
+  if (!fileContent || !articleId) return '';
+  const allowedFields = fields ? new Set(fields) : null;
+  const fieldRe = new RegExp(
+    "'blog\\.article\\." + escapeRegExp(String(articleId)) + "\\.([^']+)'\\s*:\\s*(['`])((?:\\\\.|(?!\\2)[\\s\\S])*?)\\2",
+    'g',
+  );
+  const prefix = `'blog.article.${articleId}.`;
+  return [...String(fileContent).matchAll(fieldRe)]
+    .filter((match) => {
+      const field = match[1];
+      if (excludeFaq && field === 'faq') return false;
+      if (allowedFields && !allowedFields.has(field)) return false;
+      return match[0].startsWith(`${prefix}${field}'`);
+    })
+    .map((match) => normalizeLocalizedToponymText(
+      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES),
+    ))
+    .join('\n');
 }
 
 function slugTermPattern(term) {
@@ -160,7 +203,7 @@ function replaceOutsideUrls(value, pattern, replacer) {
 }
 
 function localizedToponymHits(value, { protectNames = false, slug = false } = {}) {
-  const text = withoutUrls(value).normalize('NFKC');
+  const text = withoutUrls(normalizeLocalizedToponymText(value)).normalize('NFKC');
   const protectedNameRanges = protectNames ? protectedRanges(text) : [];
   const hits = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
@@ -233,7 +276,7 @@ export function assertLocalizedToponymPair({ sourceText = '', targetText = '', l
  */
 export function replaceLocalizedToponymMismatches({ sourceText = '', targetText = '', locale, slug = false } = {}) {
   const issues = findLocalizedToponymMismatches({ sourceText, targetText, locale, slug });
-  let text = String(targetText || '');
+  let text = normalizeLocalizedToponymText(targetText);
   let replacements = 0;
   const replacementCounts = new Map();
   for (const issue of [...issues].sort((left, right) => right.form.length - left.form.length)) {
@@ -368,6 +411,8 @@ export default {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
   findLocalizedToponymMismatches,
+  extractArticleProjectionText,
+  normalizeLocalizedToponymText,
   assertLocalizedToponymPair,
   replaceLocalizedToponymMismatches,
   findArticleLocalizedToponymMismatches,

@@ -7,9 +7,11 @@ import { fileURLToPath } from 'node:url';
 import {
   LOCALIZED_TOPONYM_LOCALES,
   LOCALIZED_TOPONYMS,
+  extractArticleProjectionText,
   findArticleLocalizedToponymMismatches,
   findLocalizedToponymMismatches,
   localizedToponymInstruction,
+  normalizeLocalizedToponymText,
   replaceLocalizedToponymMismatches,
   validateLocalizedToponymTable,
 } from '../scripts/lib/localized-toponyms.mjs';
@@ -78,6 +80,25 @@ test('rileva un esonimo copiato e accetta la forma giusta', () => {
       { code: 'ZH', type: 'canton', locale: 'fr', form: 'Zurigo', expected: 'Zurich' },
     ],
   );
+});
+
+test('normalizza le entità HTML prima del gate e della riparazione', () => {
+  assert.equal(normalizeLocalizedToponymText('Z&uuml;rich &amp; Lucerna'), 'Zürich & Lucerna');
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Zurigo',
+      targetText: 'Traffic in Z&uuml;rich',
+      locale: 'en',
+    }),
+    [{ code: 'ZH', type: 'canton', locale: 'en', form: 'Zürich', expected: 'Zurich' }],
+  );
+  const repaired = replaceLocalizedToponymMismatches({
+    sourceText: 'Notizia sul cantone di Zurigo',
+    targetText: 'Traffic in Z&uuml;rich',
+    locale: 'en',
+  });
+  assert.equal(repaired.text, 'Traffic in Zurich');
+  assert.equal(repaired.replacements, 1);
 });
 
 test('non confonde una citazione URL o una parola fuori dall articolo', () => {
@@ -216,6 +237,20 @@ test('la proiezione article-wide copre imageAlt, slug e SEO oltre al body', () =
   );
 });
 
+test('la proiezione da file raccoglie body, FAQ e meta dello stesso articolo', () => {
+  const body = [
+    "'blog.article.demo.body1': 'Notizia su Lucerna',",
+    "'blog.article.demo.faq': '[{\\\"q\\\":\\\"Lucerna\\\"}]',",
+    "'blog.article.other.body1': 'Non entra',",
+  ].join('\n');
+  const meta = "'blog.article.demo.imageAlt': 'Lucerna sul lago',";
+  assert.match(extractArticleProjectionText(body, 'demo'), /Notizia su Lucerna/);
+  assert.match(extractArticleProjectionText(body, 'demo'), /Lucerna/);
+  assert.doesNotMatch(extractArticleProjectionText(body, 'demo', { excludeFaq: true }), /q/);
+  assert.equal(extractArticleProjectionText(meta, 'demo'), 'Lucerna sul lago');
+  assert.equal(extractArticleProjectionText(body, 'other'), 'Non entra');
+});
+
 test('prompt e gate condividono tutte le forme della tabella', () => {
   const instruction = localizedToponymInstruction('en');
   assert.match(instruction, /Lucerna \(LU, canton\) → Lucerne/);
@@ -341,6 +376,8 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
   assert.match(source, /findArticleLocalizedToponymMismatches/);
   assert.match(source, /assertArticlePassesFactualityGates\(data, options = \{\}\)/);
   assert.match(source, /assertLocalizedToponyms\(data\)/);
+  assert.ok(source.indexOf('decodeArticleEntities(data);') < source.indexOf('assertArticlePassesFactualityGates(data);'),
+    'le entità HTML devono essere decodificate prima del gate finale');
   const registerStart = source.indexOf('export async function registerArticleFiles');
   const registerSource = source.slice(registerStart);
   const slugPosition = registerSource.indexOf('const slugs = deriveAndSanitizeArticleSlugs(data);');

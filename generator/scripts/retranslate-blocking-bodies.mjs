@@ -156,7 +156,7 @@
  *                      `--json` rediretto con `>` non e' parsabile.
  */
 import { readFileSync, writeFileSync, existsSync, renameSync, unlinkSync, realpathSync, readdirSync, statSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
+import { resolve, dirname, basename } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
@@ -178,7 +178,7 @@ import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { stripLeakedTitleMarkerLine, diffIsExactlyRemovedLines } from './lib/strip-leaked-title-marker.mjs';
 import { normalizePromptSectionHeadings, applyConvertedHeadings } from './lib/normalize-prompt-section-headings.mjs';
 import { detectLanguage, detectLanguageWithConfidence } from './lib/detect-language.mjs';
-import { assertLocalizedToponymPair } from './lib/localized-toponyms.mjs';
+import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import {
@@ -194,6 +194,27 @@ const ROOT = resolve(__dirname, '..', '..');
 
 /** I campi che la guardia concatena: si ri-traducono insieme o niente. */
 export const BODY_FIELDS = [...WRITER_BODY_FIELDS];
+
+function articleMetaPathForBodyPath(filePath) {
+  const bodyLocaleDir = dirname(resolve(filePath));
+  const bodyDir = dirname(bodyLocaleDir);
+  const metaStem = basename(bodyDir).replace(/^blog-body(?=-|$)/u, 'blog-meta');
+  return resolve(dirname(bodyDir), `${metaStem}-${basename(bodyLocaleDir)}.ts`);
+}
+
+function articleMetaProjection(filePath, articleId) {
+  const metaPath = articleMetaPathForBodyPath(filePath);
+  return existsSync(metaPath)
+    ? extractArticleProjectionText(readFileSync(metaPath, 'utf8'), articleId)
+    : '';
+}
+
+function articleSourceProjection(filePath, source, articleId) {
+  return [
+    extractArticleProjectionText(source, articleId),
+    articleMetaProjection(filePath, articleId),
+  ].filter(Boolean).join('\n');
+}
 
 /** Campi body effettivamente emessi per questo articolo dal writer. */
 export function bodyFieldsForSource(src, id) {
@@ -1899,9 +1920,17 @@ async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslat
   let localizedToponymError = null;
   if (!isSourceLocale && !missingField) {
     try {
+      const targetBodyProjection = BODY_FIELDS
+        .map((field) => checkedSections[field] ?? extractArticleProjectionText(trSrc, pair.id, { fields: [field] }))
+        .filter(Boolean)
+        .join('\n');
       assertLocalizedToponymPair({
-        sourceText: Object.values(italianSections).join('\n'),
-        targetText: Object.values(checkedSections).join('\n'),
+        sourceText: articleSourceProjection(itPath, itSrc, pair.id),
+        targetText: [
+          targetBodyProjection,
+          extractArticleProjectionText(trSrc, pair.id, { fields: ['faq'] }),
+          articleMetaProjection(trPath, pair.id),
+        ].filter(Boolean).join('\n'),
         locale: pair.locale,
         context: `${pair.id}/${pair.locale}`,
       });
