@@ -259,6 +259,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T00:53:16.383Z",
       "lastFailureAt": "2026-10-08T00:53:16.383Z"
+    },
+    {
+      "articleId": "seehas-affollamento-mattutino",
+      "title": "Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-seehas-affollamento-mattutino: openai-codex (vision gate rejected image: Generic illustration with small lettering/logo-like marking visible",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T09:19:35.709Z",
+      "lastFailureAt": "2026-10-08T09:19:35.709Z"
     }
   ]
 }
