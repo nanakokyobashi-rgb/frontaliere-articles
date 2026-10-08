@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-grigioni-valanghe-scuola-rossa-roveredo': {
+    title: 'Grigioni: fondi per valanghe a Rossa e aula a Roveredo',
+    description: '## In breve - Il governo retico ha approvato 265\'650 franchi per Pighé. - Il cuneo sorgerà a ovest della zona di insediamento. - I lavori antivalanga',
+    keywords: 'frontalieri, ticino, svizzera, italia, grigioni, fondi, valanghe, rossa',
+    ogTitle: 'Grigioni: fondi per valanghe a Rossa e aula a Roveredo',
+    ogDescription: '## In breve - Il governo retico ha approvato 265\'650 franchi per Pighé. - Il cuneo sorgerà a ovest della zona di insediamento. - I lavori antivalanga',
+    canonicalPath: '/articoli-grigioni/grigioni-valanghe-scuola-rossa-roveredo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Grigioni: fondi per valanghe a Rossa e aula a Roveredo",
+      "description": "## In breve - Il governo retico ha approvato 265'650 franchi per Pighé. - Il cuneo sorgerà a ovest della zona di insediamento. - I lavori antivalanga",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-grigioni-valanghe-scuola-rossa-roveredo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strutture antivalanga a Pighé, Rossa, e un'aula nel bosco a Roveredo, Canton Grigioni."
+      },
+      "datePublished": "2026-10-08T08:38:47+00:00",
+      "dateModified": "2026-10-08T08:38:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/grigioni-valanghe-scuola-rossa-roveredo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

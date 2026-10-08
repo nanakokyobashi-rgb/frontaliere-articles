@@ -12,6 +12,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.lavoro-grigioni-settembre-2026.title': 'Arbeitslosigkeit in Graubünden: 1,1% im September 2026',
     'blog.article.lavoro-grigioni-settembre-2026.excerpt': 'Im September 2026 verzeichnete Graubünden 1.237 Arbeitslose, was 1,1% entspricht. Insgesamt gibt es 2.267 Stellensuchende.',
     'blog.article.lavoro-grigioni-settembre-2026.imageAlt': 'Alpenlandschaft in Graubünden nahe einem regionalen Arbeitsvermittlungszentrum',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Graubünden: Mittel für Lawinenschutz in Rossa und eine Aula in Roveredo',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '## Auf einen Blick - Die Bündner Regierung hat 265\'650 Franken für Pighé genehmigt. - Der Keil wird westlich des Siedlungsgebiets entstehen. - Die Lawinenschutzarbeiten',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Lawinenschutzbauten in Pighé, Rossa, und ein Waldklassenzimmer in Roveredo, Kanton Graubünden.',
 };
 
 export default blogMetaCantonGrDe;

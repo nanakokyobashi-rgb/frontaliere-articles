@@ -12,6 +12,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.lavoro-grigioni-settembre-2026.title': 'Chômage dans les Grisons : 1,1 % en septembre 2026',
     'blog.article.lavoro-grigioni-settembre-2026.excerpt': 'En septembre 2026, les Grisons ont enregistré 1.237 chômeurs, soit 1,1 %. Le nombre total de personnes à la recherche d\'un emploi s\'élève à 2.267.',
     'blog.article.lavoro-grigioni-settembre-2026.imageAlt': 'Paysage alpin des Grisons près d\'un centre régional de placement',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Grisons : fonds pour les avalanches à Rossa et classe en forêt à Roveredo',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '## En bref - Le gouvernement grison a approuvé 265\'650 francs pour Pighé. - Le coin verra le jour à l’ouest de la zone d’habitation. - Les travaux de protection contre les avalanches',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Structures de protection contre les avalanches à Pighé, Rossa, et une salle de classe en forêt à Roveredo, Canton des Grisons.',
 };
 
 export default blogMetaCantonGrFr;

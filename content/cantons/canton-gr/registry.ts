@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'grigioni-valanghe-scuola-rossa-roveredo',
+ category: 'novita',
+ date: '2026-10-08T08:38:47.507Z',
+ image: '/images/blog/article-grigioni-valanghe-scuola-rossa-roveredo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
