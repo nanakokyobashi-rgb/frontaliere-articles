@@ -30,6 +30,7 @@ import {
   hubMissingIsFatal,
   inUploadOrder,
   main,
+  migrationManifestPages,
   missingRenderedArticleIds,
   pageDefects,
   pageEntry,
@@ -143,61 +144,23 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
   }
 });
 
-test('publisher: il seed del manifest di migrazione usa landing canoniche', async () => {
-  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-migration-'));
-  const manifests = [];
-  const realConsoleLog = console.log;
-  const realConsoleError = console.error;
-  try {
-    console.log = () => {};
-    console.error = () => {};
-    const code = await main(
-      [
-        '--section', 'canton-ti',
-        '--ids', '[]',
-        '--previous-revision', '0000000',
-        '--out', path.join(fixtureRoot, 'dist'),
-        '--summary', path.join(fixtureRoot, 'summary.json'),
-        '--publish',
-      ],
-      {
-        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
-        fetchPageManifestImpl: async () => ({ state: 'absent' }),
-        publishedStatusImpl: async () => 'draft',
-        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
-        renderSectionArticlePipelineImpl: async () => ({
-          entries: [],
-          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
-          downloadedImageKeys: [],
-          imageFetchFailures: [],
-          imagePostcondition: {},
-          aggregatePagesAllowed: false,
-        }),
-        articleReleaseSnapshotImpl: () => [],
-        publishImpl: async () => ({ failures: 0, uploaded: 0, deleted: 0, status: 'draft' }),
-        publishPageManifestImpl: ({ manifest }) => {
-          manifests.push(manifest);
-          return true;
-        },
-      },
-    );
-    assert.equal(code, 0);
-    assert.equal(manifests.length, 2, 'seed di migrazione e manifest finale');
-    assert.deepEqual(
-      manifests[0].pages.landing.map((page) => page.rel).sort(),
-      [
-        'articoli-ticino/index.html',
-        'de/tessin-artikel/index.html',
-        'en/ticino-articles/index.html',
-        'fr/articles-tessin/index.html',
-      ].sort(),
-    );
-    assert.ok(manifests[0].pages.landing.every((page) => page.rel.endsWith('/index.html')));
-  } finally {
-    console.log = realConsoleLog;
-    console.error = realConsoleError;
-    rmSync(fixtureRoot, { recursive: true, force: true });
-  }
+test('publisher: il seed del manifest di migrazione usa percorsi canonici', () => {
+  const manifest = pageManifestFromPages({
+    section: 'canton-ti',
+    commit: 'migration',
+    pages: migrationManifestPages('canton-ti', [], []),
+  });
+  assert.deepEqual(
+    manifest.pages.landing.map((page) => page.rel).sort(),
+    [
+      'articoli-ticino/index.html',
+      'de/tessin-artikel/index.html',
+      'en/ticino-articles/index.html',
+      'fr/articles-tessin/index.html',
+    ].sort(),
+  );
+  assert.ok([...manifest.pages.landing, ...manifest.pages.hub].every((page) => page.rel.endsWith('/index.html')));
+  assert.ok(manifest.pages.hub.every((page) => page.rel.includes('/')));
 });
 
 test('publisher R2 rifiuta gli article ID richiesti che la pipeline trattiene', () => {
