@@ -5549,14 +5549,26 @@ export function assertArticlePassesFactualityGates(data, options = {}) {
   assertLocalizedToponyms(data);
 }
 
+function collectPublishedTextValues(value, path = [], seen = new Set()) {
+  if (typeof value === 'string') return [{ path: path.join('.'), text: value }];
+  if (!value || typeof value !== 'object' || seen.has(value)) return [];
+  seen.add(value);
+
+  const values = [];
+  for (const [key, child] of Object.entries(value)) {
+    values.push(...collectPublishedTextValues(child, [...path, key], seen));
+  }
+  return values;
+}
+
 function assertNoCorpusFabricatedInstitutionNames(data) {
   const findings = [];
-  for (const [locale, content] of Object.entries(data?.content || {})) {
-    const text = Object.values(content || {})
-      .filter((value) => typeof value === 'string')
-      .join(' ');
-    for (const issue of checkCorpusFabricatedInstitutionNames(text)) {
-      findings.push('[' + locale + '] ' + issue.evidence);
+  const seen = new Set();
+  for (const [root, value] of [['content', data?.content], ['seo', data?.seo]]) {
+    for (const { path, text } of collectPublishedTextValues(value, [root], seen)) {
+      for (const issue of checkCorpusFabricatedInstitutionNames(text)) {
+        findings.push('[' + path + '] ' + issue.evidence);
+      }
     }
   }
   if (findings.length === 0) return;

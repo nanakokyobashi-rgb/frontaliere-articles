@@ -83,6 +83,7 @@ const GATE_SRC = [
   cutFunction('runArticleFactualityGates'),
   cutFunctionIfPresent('factualityGateSourceText'),
   cutFunctionIfPresent('assertItalianArticlePassesFactualityGates'),
+  cutFunction('collectPublishedTextValues'),
   cutFunction('assertArticlePassesFactualityGates'),
   cutFunction('assertNoCorpusFabricatedInstitutionNames'),
   cutFunctionIfPresent('assertLocalizedToponyms'),
@@ -177,7 +178,39 @@ test('#3 il gate completo giudica ancora le traduzioni', () => {
   assert.equal(translationCalls.length, 1);
 });
 
-test('#4 wiring: gate IT prima della traduzione, gate completo dopo, testo di fonte con una sola espressione', () => {
+test('#4 il guard scandisce FAQ annidate e tutti i campi SEO', () => {
+  const faqData = withSource(article(), 'evergreen://vivere-friburgo', BRIEF);
+  faqData.content.it.faq = [{
+    q: 'Quale ente viene citato?',
+    a: 'Istituto federale di statistica (IFS).',
+  }];
+  assert.throws(() => makeGate().gate(faqData), (err) => (
+    err.qualityReject === true && /istituzione inventata/.test(err.message)
+  ));
+
+  const seoData = withSource(article(), 'evergreen://vivere-friburgo', BRIEF);
+  seoData.seo = { description: 'Federal Statistical Office (IFS), dati aggiornati.' };
+  assert.throws(() => makeGate().gate(seoData), (err) => (
+    err.qualityReject === true && /istituzione inventata/.test(err.message)
+  ));
+});
+
+test('#5 il guard riconosce parentesi terminali e la grafia Aussenpolitik', () => {
+  for (const sample of [
+    'Istituto federale di statistica (IFS).',
+    'Federal Statistical Office (IFS),',
+    'Bundesamt für Statistik (IFS)',
+    'Office fédéral de la statistique (IFS);',
+    'Bundesamt für Aussenpolitik (UPEP) è citato.',
+  ]) {
+    assert.ok(
+      checkCorpusFabricatedInstitutionNames(sample).length > 0,
+      `pattern non rilevato: ${sample}`,
+    );
+  }
+});
+
+test('#6 wiring: gate IT prima della traduzione, gate completo dopo, testo di fonte con una sola espressione', () => {
   const i = src.indexOf('async function generateAndValidateArticle');
   const j = src.indexOf('function slugifySlugPart');
   assert.ok(i > 0 && j > i, 'generateAndValidateArticle non trovata');

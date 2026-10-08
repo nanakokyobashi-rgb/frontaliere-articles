@@ -8,11 +8,11 @@
  */
 const FABRICATED_INSTITUTION_NAME_PATTERNS = [
   {
-    pattern: /\bUfficio federale per la politica estera(?:\s*\(UPEP\))?\b/i,
+    pattern: /\bUfficio federale per la politica estera(?:\s*\(UPEP\))?(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Ufficio federale per la politica estera (UPEP)',
   },
   {
-    pattern: /\bIstituto federale di statistica\s*\(IFS\)/i,
+    pattern: /\bIstituto federale di statistica\s*\(IFS\)(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Istituto federale di statistica (IFS)',
   },
   {
@@ -20,27 +20,27 @@ const FABRICATED_INSTITUTION_NAME_PATTERNS = [
     label: 'Ministero dell’agricoltura, dell’ambiente e dello spazio',
   },
   {
-    pattern: /\bFederal Office for Foreign Policy(?:\s*\(UPEP\))?\b/i,
+    pattern: /\bFederal Office for Foreign Policy(?:\s*\(UPEP\))?(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Federal Office for Foreign Policy (UPEP)',
   },
   {
-    pattern: /\b(?:Swiss )?Federal Statistical Office\s*\(IFS\)/i,
+    pattern: /\b(?:Swiss )?Federal Statistical Office\s*\(IFS\)(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Federal Statistical Office (IFS)',
   },
   {
-    pattern: /\bBundesamt für Außenpolitik(?:\s*\(UPEP\))?\b/i,
+    pattern: /\bBundesamt für (?:Außen|Aussen)politik(?:\s*\(UPEP\))?(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Bundesamt für Außenpolitik (UPEP)',
   },
   {
-    pattern: /\bBundesamt für Statistik\s*\(IFS\)/i,
+    pattern: /\bBundesamt für Statistik\s*\(IFS\)(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Bundesamt für Statistik (IFS)',
   },
   {
-    pattern: /\bOffice fédéral de la politique étrangère(?:\s*\(UPEP\))?\b/i,
+    pattern: /\bOffice fédéral de la politique étrangère(?:\s*\(UPEP\))?(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Office fédéral de la politique étrangère (UPEP)',
   },
   {
-    pattern: /\bOffice fédéral de la statistique\s*\(IFS\)/i,
+    pattern: /\bOffice fédéral de la statistique\s*\(IFS\)(?=$|[^\p{L}\p{N}_])/iu,
     label: 'Office fédéral de la statistique (IFS)',
   },
 ];
