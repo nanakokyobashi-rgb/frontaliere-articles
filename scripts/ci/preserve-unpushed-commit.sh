@@ -21,8 +21,13 @@ bundle_ref=''
 files_tmp=''
 temp_index=''
 ref_created=false
+staging_dir=''
+bundle_path=''
+manifest_path=''
+replay_path=''
 
 cleanup() {
+  local remove_outputs="${1:-false}"
   if [ "$ref_created" = true ]; then
     git update-ref -d "$bundle_ref" "$produced_sha" >/dev/null 2>&1 || true
   fi
@@ -32,6 +37,20 @@ cleanup() {
   if [ -n "$temp_index" ]; then
     rm -f "$temp_index"
   fi
+  if [ "$remove_outputs" = true ]; then
+    if [ -n "$staging_dir" ]; then
+      rm -rf "$staging_dir"
+    fi
+    if [ -n "$bundle_path" ]; then
+      rm -f "$bundle_path"
+    fi
+    if [ -n "$manifest_path" ]; then
+      rm -f "$manifest_path"
+    fi
+    if [ -n "$replay_path" ]; then
+      rm -f "$replay_path"
+    fi
+  fi
 }
 
 # This helper is deliberately fail-open: a preservation failure must not hide
@@ -40,8 +59,10 @@ on_exit() {
   local status=$?
   if [ "$status" -ne 0 ]; then
     warning "errore inatteso durante la conservazione (exit $status)"
+    cleanup true
+  else
+    cleanup false
   fi
-  cleanup
   exit 0
 }
 trap on_exit EXIT
@@ -123,13 +144,20 @@ mkdir -p "$output_dir"
 bundle_path="$output_dir/article.bundle"
 manifest_path="$output_dir/manifest.json"
 replay_path="$output_dir/REPLAY.md"
+# Build and validate all three files in a private directory. The workflow
+# promotes the artifact after this helper exits, so a partial bundle or
+# manifest must never be visible as a replayable preservation.
+staging_dir="$(mktemp -d "$output_dir/.preserve-unpushed.XXXXXX")"
+staged_bundle_path="$staging_dir/article.bundle"
+staged_manifest_path="$staging_dir/manifest.json"
+staged_replay_path="$staging_dir/REPLAY.md"
 rm -f "$bundle_path" "$manifest_path" "$replay_path"
 
 files_tmp="$(mktemp "${TMPDIR:-/tmp}/preserve-unpushed-files.XXXXXX")"
 git update-ref "$bundle_ref" "$produced_sha"
 ref_created=true
-git bundle create "$bundle_path" "${base_sha}..${bundle_ref}" >/dev/null
-git bundle verify "$bundle_path" >/dev/null
+git bundle create "$staged_bundle_path" "${base_sha}..${bundle_ref}" >/dev/null
+git bundle verify "$staged_bundle_path" >/dev/null
 git diff-tree --no-commit-id --name-only -r -z "$produced_sha" > "$files_tmp"
 
 file_count="$(
@@ -140,7 +168,7 @@ file_count="$(
   SOURCE_KIND="$source_kind" \
   BUNDLE_REF="$bundle_ref" \
   FILES_PATH="$files_tmp" \
-  MANIFEST_PATH="$manifest_path" \
+  MANIFEST_PATH="$staged_manifest_path" \
   node --input-type=module <<'NODE'
 import { readFileSync, writeFileSync } from 'node:fs';
 
@@ -195,7 +223,14 @@ NODE
   printf '%s\n' 'Se il cherry-pick va in conflitto, usa scripts/lib/rebase-onto-remote.sh con le sue liste --merge-registry per non perdere i registri append-only.'
   printf '%s\n' "Un'uscita 1 significa un duplicato vero: in quel caso NON si pusha."
   printf '%s\n' 'Solo dopo i controlli riusciti si può fare il push del commit rigiocato.'
-} > "$replay_path"
+} > "$staged_replay_path"
+
+test -s "$staged_bundle_path"
+test -s "$staged_manifest_path"
+test -s "$staged_replay_path"
+mv "$staged_bundle_path" "$bundle_path"
+mv "$staged_manifest_path" "$manifest_path"
+mv "$staged_replay_path" "$replay_path"
 
 bundle_size="$(wc -c < "$bundle_path" | tr -d '[:space:]')"
 printf 'preserve-unpushed-commit: source=%s sha=%s files=%s bundle=%s size=%s bytes\n' \
