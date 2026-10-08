@@ -2288,6 +2288,16 @@
       }
     },
     {
+      "path": "scripts/lib/seo-entry-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia dello scrittore degli articoli (issue 2431): prima del lock di registrazione cerca l'id in tutti i file SEO della sezione con lo stesso risolutore bilanciato del motore (`engine/shared/seo-entry.mjs`) e rifiuta di aggiungere una voce gia' presente. Sul sito non esiste e non deve: lo scrittore dei contenuti vive solo qui, e il sito riceve i file SEO dal sync.",
+      "baseline": {
+        "site": null,
+        "corpus": "b3b85661f7bf2434",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
       "path": "scripts/lib/cdn-shell-assets.mjs",
       "mode": "identical",
       "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275, #12299 e #12305): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; poi chiede l'URL delle pagine nelle due varianti di cache per ogni file, anche per quelli che la sonda mostra (la HEAD della sonda legge R2 e non vede un 404 tenuto dall'edge): un file che la sonda non ha mostrato, o che a quell'URL non risponde, viene invalidato all'edge e riconfermato, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",

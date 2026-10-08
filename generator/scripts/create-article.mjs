@@ -392,6 +392,10 @@ import {
 import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
+import {
+  assertSeoEntryAbsent,
+  readSeoEntrySource,
+} from '../../scripts/lib/seo-entry-guard.mjs';
 // Solo per sapere QUALI sezioni dichiarano l'elenco id come letterale
 // (`idListVar`): è la stessa risposta che usa `scripts/retire-article.mjs`, e
 // va data da un posto solo (AGENTS.md #6).
@@ -15156,6 +15160,29 @@ function modifySeoService(data) {
   // and a red main inherited by every branch (issue #2834, PR #2833).
 }
 
+function seoFilesForWriter() {
+  if (!SECTION.updateRouterUnion) return [resolve(SECTION.seoFile)];
+
+  const seoDir = resolve('services/seo');
+  const rank = (name) => name === 'seo-blog.ts' ? 1 : Number(name.match(/-(\d+)\.ts$/)?.[1] || 0);
+  return readdirSync(seoDir)
+    .filter((name) => /^seo-blog(?:-\d+)?\.ts$/.test(name))
+    .sort((left, right) => rank(left) - rank(right))
+    .map((name) => `${seoDir}/${name}`);
+}
+
+function assertSeoEntryNotRegistered(id) {
+  // All current writers call this before beginRegisterLock(), which is the
+  // first operation that can leave registration state behind. The complete
+  // frontaliere chunk family is scanned because new entries are appended to
+  // seo-blog-5.ts while older chunks remain renderable.
+  assertSeoEntryAbsent(
+    id,
+    seoFilesForWriter(),
+    (file) => readSeoEntrySource(file, { missingIsEmpty: IS_CANTON }),
+  );
+}
+
 /**
  * Post-write validation: re-reads seo-blog-5.ts, extracts the new article's
  * SEO entry using the SAME lexical, balanced resolver used by the render-time
@@ -18283,6 +18310,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
   // eventuale `articleType` arrivato dal payload del modello.
   data.articleType = registryArticleTypeForRun(RUN_REPORT.selectedArticleType, url);
   data.canton = registryCantonsOrNone(data, url);
+  assertSeoEntryNotRegistered(data.id);
   // The primary path writes directly and does not pass through
   // registerArticleFiles(); this is the last identity check after every slug
   // derivation and immediately before the first corpus write.
@@ -19205,6 +19233,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // del lock, come gli altri controlli: un tipo invalido lancia senza scritture.
   data.articleType = resolveArticleType(data, opts);
   data.canton = registryCantonsOrNone(data, data.sourceUrl || '');
+  assertSeoEntryNotRegistered(data.id);
   // Secondary producers may have derived localized slugs above. Keep the
   // publish-boundary check immediately adjacent to their write lock too.
   assertNoArticleIdentityServiceMarkers(data, { qualityReject: true });

@@ -228,6 +228,10 @@ export const CONTENT_GATES = [
   'generator/tests/repair-mangled-chars-tetto-corpus.test.mjs',
   'generator/tests/retire-article-leftover-check.test.mjs',
   'generator/tests/retired-articles-fully-removed.test.mjs',
+  // The renderer, RSS builder and API publisher all consume these SEO chunks;
+  // keep the append-only writer from creating a key that any one of them sees
+  // twice after a bot push to main.
+  'generator/tests/seo-entry-uniqueness.test.mjs',
   'generator/tests/seo-clause-truncation.test.mjs',
   'generator/tests/seo-title-prefix-repair.test.mjs',
   'generator/tests/seo-description-cap.test.mjs',
