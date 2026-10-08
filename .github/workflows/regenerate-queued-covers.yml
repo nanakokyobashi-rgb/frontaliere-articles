@@ -37,6 +37,10 @@ permissions:
 jobs:
   drain:
     runs-on: ubuntu-latest
+    # Budget: 45m job timeout; 40m internal deadline after Remote Config, so
+    # 5m remain for ack, summary and cleanup. Each cover reserves 120s and the
+    # final publisher phase reserves 15m; the pre-generation publisher phase is
+    # capped at 15m, so generation is reduced or skipped when both do not fit.
     timeout-minutes: 45
     steps:
       - name: Checkout
@@ -69,29 +73,173 @@ jobs:
       - name: Load secrets from Remote Config
         run: node generator/scripts/load-rc-env.mjs
 
+      - name: Initialize cover drain budget
+        id: budget
+        env:
+          DEADLINE_FILE: ${{ runner.temp }}/queued-cover-deadline-ms
+          PREPUBLISH_DEADLINE_FILE: ${{ runner.temp }}/queued-cover-prepublish-deadline-ms
+          OUTBOX_FILE: data/image-regeneration-publish-outbox.json
+        run: |
+          set -euo pipefail
+          now_ms="$(node -e 'process.stdout.write(String(Date.now()))')"
+          deadline_ms=$((now_ms + 40 * 60 * 1000))
+          prepublish_deadline_ms=$((now_ms + 15 * 60 * 1000))
+          if [ "$prepublish_deadline_ms" -gt "$deadline_ms" ]; then
+            prepublish_deadline_ms="$deadline_ms"
+          fi
+          printf '%s\n' "$deadline_ms" > "$DEADLINE_FILE"
+          printf '%s\n' "$prepublish_deadline_ms" > "$PREPUBLISH_DEADLINE_FILE"
+          if [ -s "$OUTBOX_FILE" ] && jq -e '.schema == 1 and ((.items | type) == "array") and (.items | length > 0)' "$OUTBOX_FILE" >/dev/null; then
+            echo 'initial_outbox=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'initial_outbox=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Dispatch pending cover publishers before generation
+        id: pre_republish
+        if: steps.budget.outputs.initial_outbox == 'true'
+        env:
+          OUTBOX_FILE: data/image-regeneration-publish-outbox.json
+          STATUS_FILE: ${{ runner.temp }}/queued-cover-prepublish-status.json
+          DEADLINE_FILE: ${{ runner.temp }}/queued-cover-prepublish-deadline-ms
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — cannot dispatch the existing article publishers"
+            exit 1
+          fi
+          export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          node scripts/ci/cover-publisher-drain.mjs \
+            --mode run \
+            --outbox "$OUTBOX_FILE" \
+            --status "$STATUS_FILE" \
+            --repo "$REPO" \
+            --deadline-at "$(cat "$DEADLINE_FILE")"
+
+      - name: Acknowledge pre-generation cover publishers
+        id: pre_ack
+        if: ${{ always() && steps.budget.outcome == 'success' && (steps.pre_republish.outcome == 'success' || steps.pre_republish.outcome == 'failure' || steps.pre_republish.outcome == 'skipped') }}
+        env:
+          OUTBOX_FILE: data/image-regeneration-publish-outbox.json
+          STATUS_FILE: ${{ runner.temp }}/queued-cover-prepublish-status.json
+        run: |
+          set -euo pipefail
+          if [ ! -s "$OUTBOX_FILE" ] || ! jq -e '.schema == 1 and ((.items | type) == "array") and (.items | length > 0)' "$OUTBOX_FILE" >/dev/null; then
+            echo 'outbox_pending=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ ! -s "$STATUS_FILE" ]; then
+            echo "::error::pre-generation publisher status is missing; keeping the outbox and skipping generation"
+            echo 'outbox_pending=true' >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          export GH_TOKEN="${GITHUB_PAT_NANAKO:-}"
+          node scripts/ci/cover-publisher-drain.mjs \
+            --mode ack \
+            --outbox "$OUTBOX_FILE" \
+            --status "$STATUS_FILE"
+          pending='false'
+          if [ -s "$OUTBOX_FILE" ] && jq -e '.schema == 1 and ((.items | type) == "array") and (.items | length > 0)' "$OUTBOX_FILE" >/dev/null; then
+            pending='true'
+          fi
+          echo "outbox_pending=$pending" >> "$GITHUB_OUTPUT"
+          if git diff --quiet -- "$OUTBOX_FILE"; then
+            echo "no pre-generation publisher entries were acknowledged; outbox_pending=$pending"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — refusing an untrusted outbox acknowledgement push"
+            exit 1
+          fi
+          git add -A -- "$OUTBOX_FILE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(generator): acknowledge queued cover publishers (partial)"
+          remote="https://github.com/${GITHUB_REPOSITORY}.git"
+          auth="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 -w 0)"
+          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"
+          git remote set-url origin "$remote"
+          for attempt in 1 2 3 4 5; do
+            if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
+              echo "pre-generation publisher outbox acknowledgement pushed"
+              exit 0
+            fi
+            if [ "$attempt" -eq 5 ]; then break; fi
+            echo "pre-generation acknowledgement push attempt $attempt failed; rebasing"
+            sleep $((attempt * 3))
+            bash scripts/lib/rebase-onto-remote.sh "$remote" main "$OUTBOX_FILE" || {
+              git rebase --abort 2>/dev/null || true
+            }
+          done
+          echo "::error::pre-generation publisher acknowledgement could not be pushed; it remains durable on main"
+          exit 1
+
       # The same Codex broker lane used by generate-article.yml. The engine
       # still owns provider order and verification; this step only supplies
       # the first provider's governed authentication path.
       - name: Setup Codex Luna Max article lane
         id: setup_claude_haiku_fallback
         continue-on-error: true
+        if: steps.pre_ack.outcome == 'success' && steps.pre_ack.outputs.outbox_pending != 'true'
         uses: ./.github/actions/setup-claude-haiku-fallback
         with:
           codex_auth_json: ${{ secrets.CODEX_AUTH_JSON }}
 
       - name: Drain queued covers
         id: drain
+        if: steps.pre_ack.outcome == 'success'
         env:
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
           LIMIT_INPUT: ${{ inputs.limit || '10' }}
           RETRY_FAILED: ${{ inputs.retry_failed || false }}
           SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
+          OUTBOX_FILE: data/image-regeneration-publish-outbox.json
+          QUEUE_FILE: data/image-regeneration-queue.json
+          DEADLINE_FILE: ${{ runner.temp }}/queued-cover-deadline-ms
         run: |
           set -euo pipefail
+          if [ -s "$OUTBOX_FILE" ] && jq -e '.schema == 1 and ((.items | type) == "array") and (.items | length > 0)' "$OUTBOX_FILE" >/dev/null; then
+            residual='0'
+            if [ -s "$QUEUE_FILE" ]; then residual="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid queue") end' "$QUEUE_FILE")"; fi
+            jq -n --argjson residual "$residual" \
+              '{drained:0,residual:$residual,failed:0,failedIds:[],marked:[],reused:0,alreadySatisfied:0,alreadySatisfiedIds:[],requeued:[],sections:{},skippedBeforeDrain:true}' \
+              > "$SUMMARY_FILE"
+            echo "publisher outbox is still pending after the pre-generation phase; skipping new cover generation"
+            echo "summary=$SUMMARY_FILE" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           retry_args=()
           if [ "$RETRY_FAILED" = 'true' ]; then retry_args+=(--retry-failed); fi
+          case "$LIMIT_INPUT" in
+            ''|*[!0-9]*)
+              echo "::error::limit must be an integer"
+              exit 1
+              ;;
+          esac
+          now_ms="$(node -e 'process.stdout.write(String(Date.now()))')"
+          deadline_ms="$(cat "$DEADLINE_FILE")"
+          publisher_reserve_ms=$((15 * 60 * 1000))
+          per_cover_ms=$((120 * 1000))
+          available_ms=$((deadline_ms - now_ms - publisher_reserve_ms))
+          budget_limit=$((available_ms / per_cover_ms))
+          if [ "$budget_limit" -lt 1 ]; then
+            queue_residual='0'
+            if [ -s "$QUEUE_FILE" ]; then queue_residual="$(jq -er '.items | length' "$QUEUE_FILE")"; fi
+            jq -n --argjson residual "$queue_residual" \
+              '{drained:0,residual:$residual,failed:0,failedIds:[],marked:[],reused:0,alreadySatisfied:0,alreadySatisfiedIds:[],requeued:[],sections:{},skippedForBudget:true}' \
+              > "$SUMMARY_FILE"
+            echo "not enough internal time for one cover plus the 15m publisher reserve; skipping generation"
+            echo "summary=$SUMMARY_FILE" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          effective_limit="$LIMIT_INPUT"
+          if [ "$effective_limit" -gt "$budget_limit" ]; then
+            effective_limit="$budget_limit"
+            echo "reducing cover limit from $LIMIT_INPUT to $effective_limit to preserve the publisher reserve"
+          fi
           node generator/scripts/regenerate-queued-covers.mjs \
-            --limit "$LIMIT_INPUT" \
+            --limit "$effective_limit" \
             --summary "$SUMMARY_FILE" \
             "${retry_args[@]}"
           echo "summary=$SUMMARY_FILE" >> "$GITHUB_OUTPUT"
@@ -101,6 +249,7 @@ jobs:
         if: steps.drain.outcome == 'success'
         env:
           SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
+          PREPUBLISH_OUTBOX_PENDING: ${{ steps.pre_ack.outputs.outbox_pending }}
         run: |
           set -euo pipefail
           echo "publish_ready=false" >> "$GITHUB_OUTPUT"
@@ -172,11 +321,11 @@ jobs:
           git add -A
           snapshot_expected_queue
           if git diff --cached --quiet; then
-            if [ -s data/image-regeneration-publish-outbox.json ]; then
+            if [ -s data/image-regeneration-publish-outbox.json ] && [ "${PREPUBLISH_OUTBOX_PENDING:-false}" != 'true' ]; then
               echo "no corpus changes; retrying the durable publisher outbox"
               echo "publish_ready=true" >> "$GITHUB_OUTPUT"
             else
-              echo "queued cover queue produced no changes and no publisher outbox"
+              echo "queued cover queue produced no changes or the pre-generation outbox is still pending"
             fi
             verify_pushed_queue
             exit 0
@@ -211,7 +360,11 @@ jobs:
             if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
               echo "pushed to main"
               verify_pushed_queue
-              echo "publish_ready=true" >> "$GITHUB_OUTPUT"
+              if [ "${PREPUBLISH_OUTBOX_PENDING:-false}" = 'true' ]; then
+                echo "pre-generation outbox remains pending; not dispatching it again in this run"
+              else
+                echo "publish_ready=true" >> "$GITHUB_OUTPUT"
+              fi
               exit 0
             fi
             if [ "$attempt" -eq 5 ]; then break; fi
@@ -252,6 +405,8 @@ jobs:
         if: steps.push.outputs.publish_ready == 'true'
         env:
           OUTBOX_FILE: data/image-regeneration-publish-outbox.json
+          STATUS_FILE: ${{ runner.temp }}/queued-cover-publish-status.json
+          DEADLINE_FILE: ${{ runner.temp }}/queued-cover-deadline-ms
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
@@ -263,95 +418,46 @@ jobs:
             echo "no pending cover publisher outbox"
             exit 0
           fi
-          jq -e '.schema == 1 and (.items | type == "array")' "$OUTBOX_FILE" >/dev/null
-
-          list_dispatch_runs() {
-            local workflow="$1"
-            GH_TOKEN="$GITHUB_PAT_NANAKO" gh run list \
-              --repo "$REPO" \
-              --workflow "$workflow" \
-              --event workflow_dispatch \
-              --branch main \
-              --limit 100 \
-              --json databaseId,createdAt 2>/dev/null || printf '[]'
-          }
-
-          dispatch_and_wait() {
-            local workflow="$1"
-            local section="$2"
-            local ids="$3"
-            local started_at before_ids runs run_id candidate
-            started_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            before_ids="$(list_dispatch_runs "$workflow" | jq -r '.[].databaseId')"
-
-            if [ "$workflow" = 'fast-publish-article.yml' ]; then
-              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run "$workflow" \
-                --repo "$REPO" \
-                --ref main \
-                --field article_ids="$ids" \
-                --field section="$section" \
-                --field dry_run=false
-            else
-              GH_TOKEN="$GITHUB_PAT_NANAKO" gh workflow run "$workflow" \
-                --repo "$REPO" \
-                --ref main \
-                --field section="$section" \
-                --field article_ids="$ids" \
-                --field bootstrap=false \
-                --field dry_run=false
-            fi
-
-            run_id=''
-            for _ in $(seq 1 36); do
-              runs="$(list_dispatch_runs "$workflow")"
-              while IFS= read -r candidate; do
-                [ -n "$candidate" ] || continue
-                if ! grep -Fqx "$candidate" <<< "$before_ids"; then
-                  run_id="$candidate"
-                  break
-                fi
-              done < <(
-                jq -r --arg started "$started_at" \
-                  '[.[] | select(.createdAt >= $started) | .databaseId] | reverse | .[]' \
-                  <<< "$runs"
-              )
-              [ -n "$run_id" ] && break
-              sleep 5
-            done
-            if [ -z "$run_id" ]; then
-              echo "::error::publisher dispatch accepted for $section but its run id was not observable; leaving the outbox durable"
-              return 1
-            fi
-
-            echo "publisher dispatched for $section as run $run_id; waiting for completion"
-            GH_TOKEN="$GITHUB_PAT_NANAKO" gh run watch "$run_id" --repo "$REPO" --exit-status
-            echo "publisher completed successfully for $section (run $run_id)"
-          }
-
-          while IFS= read -r section; do
-            ids="$(jq -c --arg section "$section" '[.items[] | select(.section == $section) | .articleId]' "$OUTBOX_FILE")"
-            [ "$ids" != "null" ] && [ "$ids" != "[]" ] || continue
-            if [ "$section" = 'frontaliere' ] || [ "$section" = 'svizzera' ]; then
-              dispatch_and_wait fast-publish-article.yml "$section" "$ids"
-            else
-              dispatch_and_wait fast-publish-section.yml "$section" "$ids"
-            fi
-          done < <(jq -r '.items | map(.section) | unique[]' "$OUTBOX_FILE")
+          export GH_TOKEN="$GITHUB_PAT_NANAKO"
+          node scripts/ci/cover-publisher-drain.mjs \
+            --mode run \
+            --outbox "$OUTBOX_FILE" \
+            --status "$STATUS_FILE" \
+            --repo "$REPO" \
+            --deadline-at "$(cat "$DEADLINE_FILE")"
 
       - name: Acknowledge cover publisher outbox
-        if: steps.republish.outcome == 'success'
+        if: ${{ always() && steps.push.outputs.publish_ready == 'true' && (steps.republish.outcome == 'success' || steps.republish.outcome == 'failure') }}
         env:
           OUTBOX_FILE: data/image-regeneration-publish-outbox.json
+          STATUS_FILE: ${{ runner.temp }}/queued-cover-publish-status.json
         run: |
           set -euo pipefail
           if [ ! -e "$OUTBOX_FILE" ]; then
             echo "publisher outbox already empty"
             exit 0
           fi
-          git rm -f "$OUTBOX_FILE"
+          if [ ! -s "$STATUS_FILE" ]; then
+            echo "::error::publisher status is missing; leaving the outbox durable for the next run"
+            exit 1
+          fi
+          export GH_TOKEN="${GITHUB_PAT_NANAKO:-}"
+          node scripts/ci/cover-publisher-drain.mjs \
+            --mode ack \
+            --outbox "$OUTBOX_FILE" \
+            --status "$STATUS_FILE"
+          if git diff --quiet -- "$OUTBOX_FILE"; then
+            echo "no successful publisher section to acknowledge"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO missing — refusing an untrusted outbox acknowledgement push"
+            exit 1
+          fi
+          git add -A -- "$OUTBOX_FILE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(generator): acknowledge queued cover publishers"
+          git commit -m "chore(generator): acknowledge queued cover publishers (partial)"
           remote="https://github.com/${GITHUB_REPOSITORY}.git"
           auth="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 -w 0)"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"
@@ -379,7 +485,7 @@ jobs:
           set -uo pipefail
           {
             echo "## Queue cover drain"
-            if [ -s "$SUMMARY_FILE" ]; then
+          if [ -s "$SUMMARY_FILE" ]; then
               drained="$(jq -r '.drained // 0' "$SUMMARY_FILE")"
               residual="$(jq -r '.residual // 0' "$SUMMARY_FILE")"
               failed="$(jq -r '.failed // 0' "$SUMMARY_FILE")"
@@ -405,6 +511,17 @@ jobs:
             else
               echo "- Summary del drainer non disponibile: la run si è fermata prima del conteggio."
             fi
+            for publisher_status in \
+              "$RUNNER_TEMP/queued-cover-prepublish-status.json" \
+              "$RUNNER_TEMP/queued-cover-publish-status.json"; do
+              if [ -s "$publisher_status" ]; then
+                echo "- Publisher $(basename "$publisher_status" .json): $(jq -c '.counts // {}' "$publisher_status")"
+                pending_publishers="$(jq -c '[.sections[] | select(.status != "success") | {section,status,error}]' "$publisher_status")"
+                if [ "$pending_publishers" != '[]' ]; then
+                  echo "- Publisher non conclusi: $pending_publishers"
+                fi
+              fi
+            done
             if [ -s data/image-regeneration-publish-outbox.json ]; then
               echo "- ⚠️ Publisher outbox ancora pendente: $(jq -c '.items // []' data/image-regeneration-publish-outbox.json)"
             else

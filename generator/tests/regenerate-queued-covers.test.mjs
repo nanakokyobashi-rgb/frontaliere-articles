@@ -724,16 +724,29 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
   assert.match(workflow, /queued-cover queue items lost after push/);
 });
 
-test('il workflow attende la completion del publisher prima di ackare l outbox', () => {
+test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezione', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
-  const dispatch = workflow.indexOf('gh workflow run');
-  const completion = workflow.indexOf('gh run watch "$run_id" --repo "$REPO" --exit-status');
+  const preDispatch = workflow.indexOf('name: Dispatch pending cover publishers before generation');
+  const drain = workflow.indexOf('name: Drain queued covers');
+  const dispatch = workflow.indexOf('name: Dispatch and complete pending cover publishers');
   const acknowledge = workflow.indexOf('name: Acknowledge cover publisher outbox');
-  assert.ok(dispatch >= 0);
-  assert.ok(completion > dispatch);
-  assert.ok(acknowledge > completion);
+  assert.ok(preDispatch >= 0);
+  assert.ok(drain > preDispatch);
+  assert.ok(dispatch > drain);
+  assert.ok(acknowledge > dispatch);
+  assert.match(workflow, /cover-publisher-drain\.mjs[\s\S]*--mode run/u);
+  assert.match(workflow, /cover-publisher-drain\.mjs[\s\S]*--mode ack/u);
+  assert.doesNotMatch(workflow, /gh run watch/u);
+  assert.match(workflow, /queued-cover-deadline-ms/);
+  assert.match(workflow, /40m internal deadline/);
+  assert.match(workflow, /publisher_reserve_ms=\$\(\(15 \* 60 \* 1000\)\)/);
+  assert.match(workflow, /skippedBeforeDrain:true/);
+  assert.match(workflow, /steps\.budget\.outputs\.initial_outbox/);
+  assert.match(workflow, /steps\.pre_ack\.outputs\.outbox_pending/);
+  assert.match(workflow, /if: \$\{\{ always\(\) && steps\.push\.outputs\.publish_ready == 'true'/);
+  assert.match(workflow, /git add -A -- "\$OUTBOX_FILE"/);
   assert.match(workflow, /if: steps\.drain\.outcome == 'success'/);
-  assert.doesNotMatch(workflow.slice(dispatch, acknowledge), /git rm -f/);
+  assert.doesNotMatch(workflow, /git rm -f "\$OUTBOX_FILE"/);
   assert.match(workflow, /registry_base=\"\$RUNNER_TEMP\/generated-image-registry-base\.json\"/);
   assert.match(workflow, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json \"\$registry_base\" \"\$registry_snapshot\"/);
 });
