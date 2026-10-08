@@ -11,7 +11,7 @@
  *   node scripts/repair-plain-excerpts.mjs --write  # apply the repair
  */
 
-import { readFileSync, writeFileSync, renameSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, renameSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -83,7 +83,9 @@ function repairSeoFile(relativeFile) {
   let after = before;
   let changed = 0;
   const details = [];
-  const section = path.basename(relativeFile).includes('-ch') ? 'svizzera' : 'frontaliere';
+  const section = relativeFile.startsWith('content/cantons/')
+    ? 'cantonale'
+    : path.basename(relativeFile).includes('-ch') ? 'svizzera' : 'frontaliere';
 
   const entries = [...before.matchAll(/^[ \t]*'blog-([^']+)':\s*\{/gm)];
   const entryForOffset = (currentEntries, offset) => {
@@ -131,10 +133,19 @@ const seoFiles = readdirSync(path.join(contentDir, 'seo'))
   .filter((name) => /^seo-blog(?:-ch)?(?:-\d+)?\.ts$/.test(name))
   .sort()
   .map((name) => path.join('content', 'seo', name));
+const cantonDir = path.join(contentDir, 'cantons');
+const cantonSeoFiles = existsSync(cantonDir)
+  ? readdirSync(cantonDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => path.join('content', 'cantons', entry.name, 'seo.ts'))
+    .filter((relativeFile) => existsSync(path.join(repoRoot, relativeFile)))
+    .sort()
+  : [];
 
 const results = [
   ...allMetaFiles.map(repairMetaFile),
   ...seoFiles.map(repairSeoFile),
+  ...cantonSeoFiles.map(repairSeoFile),
 ];
 const details = results.flatMap((result) => result.details);
 const summary = {

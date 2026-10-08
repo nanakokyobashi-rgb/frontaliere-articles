@@ -43,16 +43,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-fondo-clima-giura-2028': {
     title: 'Giura, fondo clima da 6,7 milioni annui dal 2028',
-    description: '## In breve - CHF 6,7 milioni annui dal 2028 - Fondo per emissioni e adattamento climatico - Tre prelievi per CHF 2,63 milioni - L\'UDC minaccia un referendum ##',
+    description: 'CHF 6,7 milioni annui dal 2028',
     keywords: 'frontalieri, ticino, svizzera, italia, giura, fondo, clima, milioni',
     ogTitle: 'Giura, fondo clima da 6,7 milioni dal 2028',
-    ogDescription: '## In breve - CHF 6,7 milioni annui dal 2028 - Fondo per emissioni e adattamento climatico - Tre prelievi per CHF 2,63 milioni - L\'UDC minaccia un referendum ##',
+    ogDescription: 'CHF 6,7 milioni annui dal 2028',
     canonicalPath: '/articoli-giura/fondo-clima-giura-2028/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Giura, fondo clima da 6,7 milioni annui dal 2028",
-      "description": "## In breve - CHF 6,7 milioni annui dal 2028 - Fondo per emissioni e adattamento climatico - Tre prelievi per CHF 2,63 milioni - L'UDC minaccia un referendum ##",
+      "description": "CHF 6,7 milioni annui dal 2028",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

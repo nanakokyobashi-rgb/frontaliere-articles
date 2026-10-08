@@ -12,7 +12,8 @@ const LABEL_RE = /^(?:In breve|In short|Kurz gesagt|En bref)\b/i;
 const LABEL_START_RE = /^(?:#{1,6}\s*)?(?:In breve|In short|Kurz gesagt|En bref)\b/i;
 const LABEL_PREFIX_RE = /^(?:In breve|In short|Kurz gesagt|En bref)\s*(?::|[-–—])?\s*/i;
 const HEADING_RE = /^\s*#{1,6}\s+(.+?)\s*$/;
-const LIST_RE = /(?:^|\n)\s*(?:[-*+]|\d+\.)\s+\S/m;
+const LIST_ITEM_RE = /^\s*(?:[-*+]|\d+\.)\s+\S/;
+const DATE_PREFIX_RE = /^\s*(?:0?[1-9]|[12]\d|3[01])\.\s+(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|january|february|march|april|may|june|july|august|september|october|november|december|januar|februar|märz|mai|juni|juli|oktober|dezember|janvier|février|juin|juillet|août|septembre|octobre|décembre)\b/iu;
 const TABLE_SEPARATOR_RE = /^\s*\|?\s*:?-{3,}:?\s*(?:\|\s*:?-{3,}:?\s*)+\|?\s*$/;
 const TABLE_ROW_RE = /^\s*\|?[^\n|]+\|[^\n]*\|?\s*$/;
 const REFERENCE_LINK_RE = /\[[^\]\n]+\]\[[^\]\n]*\]/;
@@ -44,6 +45,13 @@ function hasHorizontalRuleSyntax(value) {
     .some((line) => HORIZONTAL_RULE_LINE_RE.test(line));
 }
 
+function hasListSyntax(value) {
+  return String(value ?? '')
+    .replace(/\r\n?/g, '\n')
+    .split('\n')
+    .some((line) => LIST_ITEM_RE.test(line) && !DATE_PREFIX_RE.test(line));
+}
+
 /**
  * Return the Markdown constructs that make a value invalid as an excerpt.
  * The names are stable so callers can put the reason in a gate diagnostic.
@@ -52,7 +60,7 @@ export function findExcerptMarkdownDefects(value) {
   const text = String(value ?? '');
   const defects = [];
   if (/(?:^|\n)\s{0,3}#{1,6}\s+\S/m.test(text)) defects.push('heading');
-  if (LIST_RE.test(text)) defects.push('list');
+  if (hasListSyntax(text)) defects.push('list');
   if (/\*\*[^*\n]+\*\*/.test(text)) defects.push('bold');
   if (/(?<![\w*])\*(?!\*)[^*\n]+(?<!\*)\*(?!\*)|(?<![\w_])_(?!_)[^_\n]+(?<!_)_(?!_)/.test(text)) defects.push('italic');
   if (/\[[^\]]+\]\([^)]*\)/.test(text)) defects.push('link');
@@ -94,8 +102,10 @@ function cleanMarkdownLines(value) {
         .replace(/\s*\|\s*/g, ' ');
     }
 
+    if (!DATE_PREFIX_RE.test(line)) {
+      line = line.replace(/^\s*(?:[-*+]|\d+\.)\s+/, '');
+    }
     line = line
-      .replace(/^\s*(?:[-*+]|\d+\.)\s+/, '')
       .replace(/^\s*>\s?/, '')
       .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
       .replace(/\[([^\]\n]+)\]\[[^\]\n]*\]/g, '$1')

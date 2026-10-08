@@ -9,16 +9,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-strada-calanca-chiusura-preventiva': {
     title: 'Strada della Calanca: chiusura totale tra Molina e Arvigo',
-    description: '## In breve - Chiusura totale da mercoledì alle 21 - Tratto: Molina Nord–Cave di Arvigo - MeteoSvizzera prevede pioggia oltre la soglia critica - Riapertura',
+    description: 'Chiusura totale da mercoledì alle 21',
     keywords: 'frontalieri, ticino, svizzera, italia, strada, calanca, chiusura, totale',
     ogTitle: 'Strada della Calanca: chiusura totale tra Molina e Arvigo',
-    ogDescription: '## In breve - Chiusura totale da mercoledì alle 21 - Tratto: Molina Nord–Cave di Arvigo - MeteoSvizzera prevede pioggia oltre la soglia critica - Riapertura',
+    ogDescription: 'Chiusura totale da mercoledì alle 21',
     canonicalPath: '/articoli-grigioni/strada-calanca-chiusura-preventiva/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
-      "description": "## In breve - Chiusura totale da mercoledì alle 21 - Tratto: Molina Nord–Cave di Arvigo - MeteoSvizzera prevede pioggia oltre la soglia critica - Riapertura",
+      "description": "Chiusura totale da mercoledì alle 21",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/article-strada-calanca-chiusura-preventiva.webp`,
@@ -116,16 +116,16 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-grigioni-valanghe-scuola-rossa-roveredo': {
     title: 'Grigioni: fondi per valanghe a Rossa e aula a Roveredo',
-    description: '## In breve - Il governo retico ha approvato 265\'650 franchi per Pighé. - Il cuneo sorgerà a ovest della zona di insediamento. - I lavori antivalanga',
+    description: 'Il governo retico ha approvato 265\'650 franchi per Pighé.',
     keywords: 'frontalieri, ticino, svizzera, italia, grigioni, fondi, valanghe, rossa',
     ogTitle: 'Grigioni: fondi per valanghe a Rossa e aula a Roveredo',
-    ogDescription: '## In breve - Il governo retico ha approvato 265\'650 franchi per Pighé. - Il cuneo sorgerà a ovest della zona di insediamento. - I lavori antivalanga',
+    ogDescription: 'Il governo retico ha approvato 265\'650 franchi per Pighé.',
     canonicalPath: '/articoli-grigioni/grigioni-valanghe-scuola-rossa-roveredo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Grigioni: fondi per valanghe a Rossa e aula a Roveredo",
-      "description": "## In breve - Il governo retico ha approvato 265'650 franchi per Pighé. - Il cuneo sorgerà a ovest della zona di insediamento. - I lavori antivalanga",
+      "description": "Il governo retico ha approvato 265'650 franchi per Pighé.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

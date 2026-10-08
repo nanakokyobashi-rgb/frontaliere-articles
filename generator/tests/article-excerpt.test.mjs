@@ -33,6 +33,13 @@ test('strip deterministico rimuove heading, elenco, grassetto, link e tabella', 
   assert.deepEqual(findExcerptMarkdownDefects(raw), ['heading', 'list', 'bold', 'link', 'table', 'label']);
 });
 
+test('non tratta una data con giorno puntato come un elenco ordinato', () => {
+  const raw = '1. gennaio 2027 entrerà in vigore il nuovo regolamento.';
+  assert.equal(stripExcerptMarkdown(raw), raw);
+  assert.deepEqual(findExcerptMarkdownDefects(raw), []);
+  assert.doesNotThrow(() => assertPlainExcerpt(raw));
+});
+
 test('rimuove link reference e separatori orizzontali Markdown', () => {
   const raw = [
     'Leggi [la fonte][fonte] per i dettagli.',
