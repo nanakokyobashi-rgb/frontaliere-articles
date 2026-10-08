@@ -613,20 +613,44 @@ export function stripPageChrome(html) {
  * sidebar/related content fuori da `article`: usare tutto il testo restante
  * contaminerebbe il contesto della fonte verificata.
  */
-function sourceArticleText(html) {
+function sourceArticleText(html, requestedHeadline = '') {
   const page = stripPageChrome(html).html;
-  const block = (tag) => {
-    const open = new RegExp(`<${tag}\\b[^>]*>`, 'i').exec(page);
-    if (!open) return '';
-    const end = matchingCloseEnd(page, tag, open.index + open[0].length);
-    return end < 0 ? '' : page.slice(open.index, end);
+  const blocks = (tag) => {
+    const out = [];
+    const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
+    let open;
+    while ((open = openRe.exec(page)) !== null) {
+      const end = matchingCloseEnd(page, tag, open.index + open[0].length);
+      if (end < 0) continue;
+      const text = stripTags(page.slice(open.index, end));
+      out.push({ tag, text });
+      // Do not treat nested containers as separate candidates when an outer
+      // element already delimits this block; the other tag family (main or
+      // article) is scanned independently below.
+      openRe.lastIndex = end;
+    }
+    return out;
   };
-  const article = block('article');
-  const main = block('main');
-  const candidates = [article, main]
-    .map((value) => stripTags(value))
-    .filter((value) => value.length >= 200);
-  return (candidates[0] || '').slice(0, 8000);
+  const articles = blocks('article');
+  const mains = blocks('main');
+  const all = [...articles, ...mains];
+  const requested = stripTags(requestedHeadline).toLowerCase();
+  const matching = requested
+    ? all.filter(({ text }) => text.toLowerCase().includes(requested))
+    : [];
+  // If the title identifies a container, use it even when a related card
+  // appears before the story. Without a match, prefer article containers and
+  // the longest one; never fall back to arbitrary page residue.
+  const candidates = matching.length > 0 ? matching : (articles.length > 0 ? articles : mains);
+  candidates.sort((a, b) => {
+    const tagScore = (tag) => (tag === 'article' ? 1 : 0);
+    return tagScore(b.tag) - tagScore(a.tag) || b.text.length - a.text.length;
+  });
+  const first = candidates[0];
+  const second = candidates[1];
+  if (!first || (second && first.tag === second.tag && first.text.length === second.text.length)) return '';
+  if (first.text.length < 200) return '';
+  return first.text.slice(0, 8000);
 }
 
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
@@ -1288,7 +1312,7 @@ export async function scanCantonSource(source, ctx) {
     for (const { headline, index } of targets) {
       try {
         const detailHtml = await get(headline.url, HTML_ACCEPT);
-        const sourceContent = sourceArticleText(detailHtml);
+        const sourceContent = sourceArticleText(detailHtml, headline.headline);
         if (sourceContent.length < 200) {
           notes.push(`testo dettaglio vuoto: ${headline.url}`);
           continue;

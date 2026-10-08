@@ -302,9 +302,14 @@ export function validateCantonSections(doc, ctx) {
       if (!(s.items7d === null || (Number.isInteger(s.items7d) && s.items7d >= 0))) err(where, `${lbl}: items7d deve essere intero >= 0 o null`);
       if (!DATE_RE.test(s.verifiedAt || '')) err(where, `${lbl}: verifiedAt non YYYY-MM-DD`);
       if (s.reserve !== undefined && s.reserve !== true) err(where, `${lbl}: reserve ammesso solo come true`);
-      if (s?.quirks?.articleContent === 'html-text'
-        && !(Number.isInteger(s?.quirks?.maxRequestsPerRun) && s.quirks.maxRequestsPerRun >= 2)) {
-        err(where, `${lbl}: articleContent html-text richiede maxRequestsPerRun intero >= 2`);
+      if (s?.quirks?.articleContent === 'html-text') {
+        const effectiveBudget = Number(s?.quirks?.crawlDelaySeconds) > 60
+          ? 1
+          : s?.quirks?.maxRequestsPerRun;
+        if (!(Number.isInteger(s?.quirks?.maxRequestsPerRun) && s.quirks.maxRequestsPerRun >= 2)
+          || !(Number.isInteger(effectiveBudget) && effectiveBudget >= 2)) {
+          err(where, `${lbl}: articleContent html-text richiede maxRequestsPerRun intero >= 2 e budget effettivo >= 2`);
+        }
       }
       try {
         const h = hostOf(s.url);

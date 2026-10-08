@@ -276,3 +276,10 @@ test('viola: articleContent senza un budget finito di pagine dettaglio', () => {
   delete source.quirks.maxRequestsPerRun;
   expectViolation(doc, /SH: newsSources .*: articleContent html-text richiede maxRequestsPerRun intero >= 2/);
 });
+
+test('viola: articleContent con crawl-delay oltre il limite ha budget effettivo di una richiesta', () => {
+  const doc = clone();
+  const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.radiomunot.ch/');
+  source.quirks.crawlDelaySeconds = 61;
+  expectViolation(doc, /SH: newsSources .*: articleContent html-text .*budget effettivo >= 2/);
+});

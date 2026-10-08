@@ -8211,6 +8211,8 @@ function embeddedHeadlineDateKey(value) {
 function extractEmbeddedHeadlineDates(html, field) {
   if (field !== 'publishDate') return new Map();
   const out = new Map();
+  const seen = new Set();
+  const ambiguous = new Set();
   const visit = (value) => {
     if (!value || typeof value !== 'object') return;
     if (Array.isArray(value)) {
@@ -8220,8 +8222,20 @@ function extractEmbeddedHeadlineDates(html, field) {
     // The page-state object is parsed as JSON first. This keeps title/date
     // associated even when the CMS inserts fields or changes their order.
     if (typeof value.title === 'string' && typeof value[field] === 'string') {
-      const date = new Date(value[field]);
-      if (!Number.isNaN(date.getTime())) out.set(embeddedHeadlineDateKey(value.title), date);
+      const key = embeddedHeadlineDateKey(value.title);
+      // A title is not an item identity: the page state can contain two
+      // cards with the same label. Never let the later card overwrite the
+      // first one and then assign its date to both links. Ambiguous titles
+      // deliberately remain undated; URL/index pairing is unavailable at
+      // this stage, so guessing would be worse than dropping the hint.
+      if (seen.has(key)) {
+        out.delete(key);
+        ambiguous.add(key);
+      } else if (!ambiguous.has(key)) {
+        seen.add(key);
+        const date = new Date(value[field]);
+        if (!Number.isNaN(date.getTime())) out.set(key, date);
+      }
     }
     for (const child of Object.values(value)) visit(child);
   };
