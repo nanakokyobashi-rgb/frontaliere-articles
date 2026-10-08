@@ -43092,6 +43092,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bally-caslano-moratoria-tagli',
+ category: 'novita',
+ date: '2026-10-08T08:27:01.797Z',
+ image: '/images/blog/article-bally-caslano-moratoria-tagli.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
