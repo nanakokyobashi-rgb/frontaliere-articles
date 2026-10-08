@@ -976,7 +976,7 @@ test('i quattro writer del registry non fanno amend se il commit rigiocato e\' s
   }
 });
 
-test('il merge della coda usa il replayed solo sui pareggi e conserva failure/status', () => {
+test('il merge della coda segue la richiesta piu recente e conserva i contatori di fallimento', () => {
   const baseItem = queueItem('article-same', 'base', 'not-a-date');
   const upstreamItem = {
     ...baseItem,
@@ -1004,6 +1004,28 @@ test('il merge della coda usa il replayed solo sui pareggi e conserva failure/st
   assert.equal(merged.items[0].failureCount, 3);
   assert.equal(merged.items[0].requestedAt, '2026-10-07T00:00:00.000Z');
   assert.equal(merged.items[0].lastFailureAt, '2026-10-07T00:01:00.000Z');
+
+  const staleFailure = {
+    ...queueItem('article-new-request', 'stale failure', '2026-10-07T00:20:00.000Z'),
+    status: 'failed',
+    failureCount: 3,
+    requestedAt: '2026-10-07T00:00:00.000Z',
+  };
+  const newerRequest = {
+    ...queueItem('article-new-request', 'new enqueue', '2026-10-07T00:10:00.000Z'),
+    status: 'queued',
+    failureCount: 0,
+    requestedAt: '2026-10-07T00:10:00.000Z',
+  };
+  const requestMerged = mergeImageRegenerationQueues(
+    { schema: 1, items: [staleFailure] },
+    { schema: 1, items: [newerRequest] },
+  ).items[0];
+  assert.equal(requestMerged.reason, 'new enqueue');
+  assert.equal(requestMerged.status, 'queued', 'un tentativo stale non deve bloccare una nuova richiesta');
+  assert.equal(requestMerged.requestedAt, '2026-10-07T00:10:00.000Z');
+  assert.equal(requestMerged.failureCount, 3, 'il contatore piu alto resta metadata di fallimento');
+  assert.equal(requestMerged.lastFailureAt, '2026-10-07T00:20:00.000Z');
 
   const orderA = { ...queueItem('article-order-a', 'base', 'not-a-date'), requestedAt: 'not-a-date' };
   const orderB = { ...queueItem('article-order-b', 'new', 'not-a-date'), requestedAt: 'not-a-date' };

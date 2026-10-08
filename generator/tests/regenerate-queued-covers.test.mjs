@@ -110,6 +110,17 @@ function item(articleId, requestedAt, title = articleId) {
   };
 }
 
+function validThumbnailBytes() {
+  const bytes = Buffer.alloc(30);
+  bytes.write('RIFF', 0, 'ascii');
+  bytes.writeUInt32LE(22, 4);
+  bytes.write('WEBPVP8X', 8, 'ascii');
+  bytes.writeUInt32LE(10, 16);
+  bytes.writeUIntLE(479, 24, 3);
+  bytes.writeUIntLE(269, 27, 3);
+  return bytes;
+}
+
 function fakeCover(root) {
   return async (entry) => {
     const bytes = Buffer.from(`cover:${entry.articleId}`);
@@ -128,7 +139,7 @@ async function fakeThumbnail(sourcePath) {
     `${path.basename(sourcePath, path.extname(sourcePath))}-480w.webp`,
   );
   fs.mkdirSync(path.dirname(thumbPath), { recursive: true });
-  fs.writeFileSync(thumbPath, 'thumbnail');
+  fs.writeFileSync(thumbPath, validThumbnailBytes());
   return thumbPath;
 }
 
@@ -263,6 +274,7 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
     write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
     write(root, `public${imageUrl}`, bytes);
+    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
     queue(root, [{ ...item(articleId, '2026-10-07T09:00:00.000Z'), status: 'failed', failureCount: 3 }]);
 
     let calls = 0;
@@ -286,6 +298,45 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
     assert.match(fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8'), /article-already-satisfied\.webp/);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una copertina con thumbnail mancante o invalido viene riparata prima di togliere la coda', async () => {
+  for (const thumbnailState of ['missing', 'invalid']) {
+    const root = tempRoot();
+    try {
+      const articleId = `partial-thumbnail-${thumbnailState}`;
+      const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+      const bytes = Buffer.from(`partial-cover:${thumbnailState}`);
+      const record = generatedRecord(root, articleId, imageUrl, bytes);
+      write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
+      write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+      write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+      write(root, `public${imageUrl}`, bytes);
+      if (thumbnailState === 'invalid') {
+        write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'not a webp');
+      }
+      queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+
+      let thumbnailCalls = 0;
+      const summary = await drainQueuedCovers({
+        root,
+        limit: 1,
+        generateCover: async () => { throw new Error('must reuse the materialized record'); },
+        generateThumbnail: async (sourcePath) => {
+          thumbnailCalls += 1;
+          return fakeThumbnail(sourcePath);
+        },
+      });
+
+      assert.equal(summary.alreadySatisfied, 0, `${thumbnailState}: non va scartata come già soddisfatta`);
+      assert.equal(summary.reused, 1, `${thumbnailState}: il record hero deve essere riusato`);
+      assert.equal(thumbnailCalls, 1, `${thumbnailState}: il thumbnail deve essere rigenerato`);
+      assert.equal(summary.residual, 0);
+      assert.deepEqual(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items, []);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   }
 });
 
@@ -444,7 +495,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
     write(root, `public${imageUrl}`, bytes);
-    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'thumbnail');
+    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
     write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
 
@@ -603,7 +654,7 @@ test('il registro editoriale usa cover come identita append-only', () => {
   ]);
 });
 
-test('il drain riapplica il solo delta e ricrea un commit dopo un replay vuoto', () => {
+test('il drain verifica il residuo rebased senza confondere le aggiunte upstream con perdite', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
   assert.match(workflow, /registry_base="\$RUNNER_TEMP\/generated-image-registry-base\.json"/);
   assert.match(workflow, /git show "\$PRODUCED\^:data\/generated-image-registry\.json" > "\$registry_base"/);
@@ -616,9 +667,12 @@ test('il drain riapplica il solo delta e ricrea un commit dopo un replay vuoto',
     /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
   );
   assert.match(workflow, /verify_pushed_queue\(\)/);
-  assert.match(workflow, /git show HEAD:data\/image-regeneration-queue\.json \| jq/);
+  assert.match(workflow, /pushed_queue="\$\(git show HEAD:data\/image-regeneration-queue\.json\)"/);
+  assert.match(workflow, /queued-cover-expected-queue\.json/);
+  assert.match(workflow, /\.residualMissing = \$missing/);
   assert.match(workflow, /\.residualSource = "pushed-branch"/);
-  assert.match(workflow, /queued-cover queue count diverged after push/);
+  assert.match(workflow, /queued-cover queue items lost after push/);
+  assert.doesNotMatch(workflow, /queued-cover queue count diverged after push/);
 });
 
 test('il workflow attende la completion del publisher prima di ackare l outbox', () => {

@@ -9,8 +9,10 @@
  * anche quando nel frattempo ha cambiato solo failureCount/lastFailureAt, e
  * non va reintrodotta. Un requestedAt successivo identifica invece una nuova
  * richiesta, che resta in coda; le aggiunte senza uno stage 1 restano sempre.
- * Per lo stesso articolo vince il fallimento piu' recente e requestedAt segue
- * l'ultima richiesta, cosi' il confine del drain resta esplicito.
+ * Per lo stesso articolo la metadata della richiesta segue il requestedAt piu'
+ * recente; a parita' di richiesta vince il fallimento piu' recente. I contatori
+ * di fallimento vengono fusi separatamente, cosi' un tentativo stale non puo'
+ * cambiare lo stato di una nuova richiesta.
  */
 import { execFileSync } from 'node:child_process';
 import { realpathSync, writeFileSync } from 'node:fs';
@@ -81,16 +83,29 @@ function sameItem(left, right) {
     && JSON.stringify(comparable(left)) === JSON.stringify(comparable(right));
 }
 
-function mergeItem(existing, candidate) {
-  const existingTime = timeOf(existing.lastFailureAt) ?? timeOf(existing.requestedAt) ?? -Infinity;
-  const candidateTime = timeOf(candidate.lastFailureAt) ?? timeOf(candidate.requestedAt) ?? -Infinity;
+function requestWinner(existing, candidate) {
+  const existingRequestedAt = timeOf(existing.requestedAt);
+  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  if (existingRequestedAt != null || candidateRequestedAt != null) {
+    if (existingRequestedAt == null) return candidate;
+    if (candidateRequestedAt == null) return existing;
+    if (candidateRequestedAt !== existingRequestedAt) {
+      return candidateRequestedAt > existingRequestedAt ? candidate : existing;
+    }
+  }
+
+  const existingFailureAt = timeOf(existing.lastFailureAt) ?? -Infinity;
+  const candidateFailureAt = timeOf(candidate.lastFailureAt) ?? -Infinity;
   // A tie deliberately prefers the replayed commit: it is the article commit
   // currently being kept alive by the retry, matching the registry resolver.
-  const winner = candidateTime >= existingTime ? candidate : existing;
+  return candidateFailureAt >= existingFailureAt ? candidate : existing;
+}
+
+function mergeItem(existing, candidate) {
+  const winner = requestWinner(existing, candidate);
   return {
     ...winner,
     articleId: String(existing.articleId),
-    requestedAt: latest(existing.requestedAt, candidate.requestedAt),
     lastFailureAt: latest(existing.lastFailureAt, candidate.lastFailureAt),
     failureCount: Math.max(
       Number.isInteger(existing.failureCount) && existing.failureCount >= 0 ? existing.failureCount : 0,
