@@ -84,8 +84,10 @@
 #
 # `data/image-regeneration-queue.json` e' un documento JSON riscritto per intero
 # dai due producer degli articoli. Prendere un lato dopo un conflitto perde le
-# richieste dell'altro producer; il resolver unisce gli item per `articleId` e
-# sceglie il fallimento piu' recente per i duplicati.
+# richieste dell'altro producer; il resolver unisce gli item per `articleId`.
+# Quando il drain ha rimosso una voce, un upstream che conserva lo stesso
+# `requestedAt` e aggiorna solo i contatori di fallimento e' stale e non la
+# riesuma; un `requestedAt` successivo all'avvio e' invece una nuova richiesta.
 #
 # ── Il QUINTO ramo: i contatori (`--merge-counter <path>:<campo>`, D18) ──────
 #

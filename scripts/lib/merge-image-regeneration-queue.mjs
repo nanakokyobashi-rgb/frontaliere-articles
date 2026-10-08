@@ -4,11 +4,15 @@
  *
  * La coda e' un documento JSON riscritto per intero da due producer diversi.
  * Durante un rebase lo stage 2 e' la copia upstream e lo stage 3 e' il commit
- * rigiocato. Lo stage 1 aggiunge il punto comune: se il drain ha rimosso una
- * voce, la copia identica rimasta in un producer partito prima del drain e'
- * stale e non va reintrodotta; una modifica o aggiunta realmente nuova resta.
- * Per lo stesso articolo vince il fallimento piu' recente; requestedAt resta
- * il primo avvistamento, cosi' la coda non dimentica da quanto aspetta.
+ * rigiocato. Lo stage 1 e' lo snapshot comune all'avvio del drain: se il drain
+ * ha rimosso una voce, la copia upstream con lo stesso requestedAt e' stale,
+ * anche quando nel frattempo ha cambiato solo failureCount/lastFailureAt, e
+ * non va reintrodotta. Un requestedAt successivo identifica invece una nuova
+ * richiesta, che resta in coda; le aggiunte senza uno stage 1 restano sempre.
+ * Per lo stesso articolo la metadata della richiesta segue il requestedAt piu'
+ * recente; a parita' di richiesta vince il fallimento piu' recente. I contatori
+ * di fallimento vengono fusi separatamente, cosi' un tentativo stale non puo'
+ * cambiare lo stato di una nuova richiesta.
  */
 import { execFileSync } from 'node:child_process';
 import { realpathSync, writeFileSync } from 'node:fs';
@@ -58,14 +62,6 @@ function timeOf(value) {
   return Number.isFinite(time) ? time : null;
 }
 
-function earliest(a, b) {
-  const left = timeOf(a);
-  const right = timeOf(b);
-  if (left == null) return b || a;
-  if (right == null) return a || b;
-  return left <= right ? a : b;
-}
-
 function latest(a, b) {
   const left = timeOf(a);
   const right = timeOf(b);
@@ -87,25 +83,71 @@ function sameItem(left, right) {
     && JSON.stringify(comparable(left)) === JSON.stringify(comparable(right));
 }
 
-function mergeItem(existing, candidate) {
-  const existingTime = timeOf(existing.lastFailureAt) ?? timeOf(existing.requestedAt) ?? -Infinity;
-  const candidateTime = timeOf(candidate.lastFailureAt) ?? timeOf(candidate.requestedAt) ?? -Infinity;
+function requestWinner(existing, candidate) {
+  const existingRequestedAt = timeOf(existing.requestedAt);
+  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  if (existingRequestedAt != null || candidateRequestedAt != null) {
+    if (existingRequestedAt == null) return candidate;
+    if (candidateRequestedAt == null) return existing;
+    if (candidateRequestedAt !== existingRequestedAt) {
+      return candidateRequestedAt > existingRequestedAt ? candidate : existing;
+    }
+  }
+
+  const existingFailureAt = timeOf(existing.lastFailureAt) ?? -Infinity;
+  const candidateFailureAt = timeOf(candidate.lastFailureAt) ?? -Infinity;
   // A tie deliberately prefers the replayed commit: it is the article commit
   // currently being kept alive by the retry, matching the registry resolver.
-  const winner = candidateTime >= existingTime ? candidate : existing;
+  return candidateFailureAt >= existingFailureAt ? candidate : existing;
+}
+
+function sameRequest(existing, candidate) {
+  const existingRequestedAt = timeOf(existing.requestedAt);
+  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  if (existingRequestedAt != null || candidateRequestedAt != null) {
+    return existingRequestedAt != null
+      && candidateRequestedAt != null
+      && existingRequestedAt === candidateRequestedAt;
+  }
+  return String(existing.requestedAt || '') === String(candidate.requestedAt || '');
+}
+
+function mergeItem(existing, candidate) {
+  const winner = requestWinner(existing, candidate);
+  if (!sameRequest(existing, candidate)) return { ...winner, articleId: String(existing.articleId) };
   return {
     ...winner,
     articleId: String(existing.articleId),
-    requestedAt: earliest(existing.requestedAt, candidate.requestedAt),
     lastFailureAt: latest(existing.lastFailureAt, candidate.lastFailureAt),
+    failureCount: Math.max(
+      Number.isInteger(existing.failureCount) && existing.failureCount >= 0 ? existing.failureCount : 0,
+      Number.isInteger(candidate.failureCount) && candidate.failureCount >= 0 ? candidate.failureCount : 0,
+    ),
   };
+}
+
+function indexItems(items) {
+  const indexed = new Map();
+  for (const item of items) {
+    const articleId = String(item.articleId);
+    const existing = indexed.get(articleId);
+    indexed.set(articleId, existing ? mergeItem(existing, item) : { ...item, articleId });
+  }
+  return indexed;
+}
+
+function isNewRequestAfterDrainStart(baseItem, candidate) {
+  const baseRequestedAt = timeOf(baseItem.requestedAt);
+  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  return candidateRequestedAt != null
+    && (baseRequestedAt == null || candidateRequestedAt > baseRequestedAt);
 }
 
 /** Pure three-way merge used by the conflict resolver and its tests. */
 export function mergeImageRegenerationQueues(upstream, replayed, base = { items: [] }) {
-  const baseByArticle = new Map(base.items.map((item) => [String(item.articleId), item]));
-  const upstreamByArticle = new Map(upstream.items.map((item) => [String(item.articleId), item]));
-  const replayedByArticle = new Map(replayed.items.map((item) => [String(item.articleId), item]));
+  const baseByArticle = indexItems(base.items);
+  const upstreamByArticle = indexItems(upstream.items);
+  const replayedByArticle = indexItems(replayed.items);
   const byArticle = new Map();
   const articleIds = [...new Set([...upstream.items, ...replayed.items].map((item) => String(item.articleId)))];
 
@@ -114,12 +156,24 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
     const upstreamItem = upstreamByArticle.get(articleId);
     const replayedItem = replayedByArticle.get(articleId);
 
-    // A side that is absent deleted the item. When the other side is an
-    // unchanged copy of the common base, that copy is stale rather than a new
-    // request and the deletion must win. A changed item is a genuine later
-    // update and remains eligible for the normal merge.
-    if (baseItem && !upstreamItem && replayedItem && sameItem(replayedItem, baseItem)) continue;
-    if (baseItem && upstreamItem && !replayedItem && sameItem(upstreamItem, baseItem)) continue;
+    // A side that is absent deleted the item. When the drain side removed it,
+    // an upstream copy with the old requestedAt is stale: failure counters and
+    // lastFailureAt are progress metadata, not a new request. Only a later
+    // requestedAt can revive the article after the drain started.
+    if (baseItem && !replayedItem) {
+      if (!upstreamItem || !isNewRequestAfterDrainStart(baseItem, upstreamItem)) continue;
+      byArticle.set(articleId, { ...upstreamItem, articleId });
+      continue;
+    }
+
+    // The upstream side can independently delete an item. A replayed copy with
+    // the old requestedAt is stale, even when it only records a later failure;
+    // only a later requestedAt identifies a new request that should survive.
+    if (baseItem && !upstreamItem) {
+      if (!replayedItem || !isNewRequestAfterDrainStart(baseItem, replayedItem)) continue;
+      byArticle.set(articleId, { ...replayedItem, articleId });
+      continue;
+    }
 
     if (upstreamItem && replayedItem) {
       if (baseItem && sameItem(upstreamItem, baseItem) && !sameItem(replayedItem, baseItem)) {
@@ -137,6 +191,13 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
   return {
     schema: IMAGE_REGENERATION_QUEUE_SCHEMA,
     items: [...byArticle.values()],
+  };
+}
+
+export function canonicalizeImageRegenerationQueue(queue) {
+  return {
+    schema: IMAGE_REGENERATION_QUEUE_SCHEMA,
+    items: [...indexItems(queue.items).values()],
   };
 }
 

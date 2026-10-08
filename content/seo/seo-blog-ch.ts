@@ -99516,6 +99516,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assistenza-sociale-lucerna-requisiti': {
+    title: 'Assistenza sociale a Lucerna: requisiti e domanda',
+    description: 'Scopri i requisiti, la documentazione e gli uffici competenti per richiedere l\'assistenza sociale nel Cantone di Lucerna. Guida completa e iter. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, assistenza, sociale, lucerna, requisiti',
+    ogTitle: 'Assistenza sociale a Lucerna: requisiti e domanda',
+    ogDescription: 'Approfondimento completo sull\'assistenza sociale nel Cantone di Lucerna: condizioni di accesso, uffici di riferimento, documentazione necessaria e obblighi di collaborazione.',
+    canonicalPath: '/articoli-svizzera/assistenza-sociale-lucerna-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assistenza sociale a Lucerna: requisiti e domanda",
+      "description": "Scopri i requisiti, la documentazione e gli uffici competenti per richiedere l'assistenza sociale nel Cantone di Lucerna. Guida completa e iter. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-assistenza-sociale-lucerna-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uffici amministrativi per l'assistenza sociale nel Cantone di Lucerna"
+      },
+      "datePublished": "2026-10-08T02:16:30+00:00",
+      "dateModified": "2026-10-08T02:16:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assistenza-sociale-lucerna-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

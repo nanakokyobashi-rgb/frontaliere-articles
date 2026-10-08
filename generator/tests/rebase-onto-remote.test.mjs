@@ -779,6 +779,90 @@ test('il conflitto della coda copertine unisce gli item per articleId', () => {
   }
 });
 
+test('una rimozione del drain vince sui soli fallimenti ma non su una nuova richiesta dopo l avvio', () => {
+  const w = makeWorld();
+  try {
+    const drainStartedAt = '2026-10-07T22:40:00.000Z';
+    const failureOnly = {
+      ...queueItem('article-failure-only', 'previous failure', '2026-10-07T22:30:00.000Z'),
+      failureCount: 2,
+      requestedAt: '2026-10-07T22:00:00.000Z',
+    };
+    const newRequest = {
+      ...queueItem('article-new-request', 'previous failure', '2026-10-07T22:31:00.000Z'),
+      failureCount: 1,
+      requestedAt: '2026-10-07T22:01:00.000Z',
+    };
+    const stillQueued = {
+      ...queueItem('article-still-queued', 'base', '2026-10-07T22:32:00.000Z'),
+      failureCount: 0,
+    };
+    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([failureOnly, newRequest, stillQueued]));
+    commitAll(w.work, 'seed cover queue with previously failed entries');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    // The main branch advances with a producer that does not touch the queue.
+    landUpstream(w, [['README.md', 'unrelated upstream producer\n', 'unrelated producer advances main']]);
+
+    // The drain starts after the prior failure counts already exist and removes
+    // the two successful entries from its own queue snapshot.
+    write(w.work, IMAGE_REGENERATION_QUEUE, queueDocument([stillQueued]));
+    write(w.work, 'content/blog-body/it/drained-cover.ts', 'export const drained = true\n');
+    commitAll(w.work, 'drain two cover requests');
+
+    // While the drain is running, one producer only records another failure;
+    // another explicitly requests the same article again after drainStartedAt.
+    const upstreamFailureOnly = {
+      ...failureOnly,
+      reason: 'failure from another run',
+      status: 'queued',
+      failureCount: 3,
+      lastFailureAt: '2026-10-07T22:45:00.000Z',
+    };
+    const upstreamNewRequest = {
+      ...newRequest,
+      reason: 'new request after drain started',
+      status: 'queued',
+      failureCount: 0,
+      requestedAt: '2026-10-07T22:41:00.000Z',
+      lastFailureAt: '2026-10-07T22:41:00.000Z',
+    };
+    landUpstream(w, [[
+      IMAGE_REGENERATION_QUEUE,
+      queueDocument([upstreamFailureOnly, upstreamNewRequest, stillQueued, queueItem(
+        'article-added-during-drain',
+        'new producer item',
+        '2026-10-07T22:42:00.000Z',
+      )]),
+      'producer updates queue during drain',
+    ]]);
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-queue', IMAGE_REGENERATION_QUEUE);
+    assert.equal(code, 0, `la coda deve fondersi senza perdere il drain:\n${out}`);
+    const merged = JSON.parse(git(w.work, 'show', `HEAD:${IMAGE_REGENERATION_QUEUE}`));
+    assert.deepEqual(merged.items.map((item) => item.articleId), [
+      'article-new-request',
+      'article-still-queued',
+      'article-added-during-drain',
+    ]);
+    assert.equal(
+      merged.items.find((item) => item.articleId === 'article-new-request').requestedAt,
+      '2026-10-07T22:41:00.000Z',
+      'una nuova richiesta con requestedAt dopo l avvio del drain deve restare in coda',
+    );
+    assert.equal(
+      merged.items.some((item) => item.articleId === 'article-failure-only'),
+      false,
+      'un aggiornamento di soli failureCount/lastFailureAt non deve riesumare una voce smaltita',
+    );
+    assert.match(git(w.work, 'show', 'HEAD:README.md'), /unrelated upstream producer/);
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/drained-cover.ts')));
+    assert.ok(drainStartedAt < '2026-10-07T22:41:00.000Z');
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('il resolver della coda fallisce chiuso se git non riesce a leggere uno stage', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'queue-stage-read-error-'));
   try {
@@ -892,7 +976,7 @@ test('i quattro writer del registry non fanno amend se il commit rigiocato e\' s
   }
 });
 
-test('il merge della coda usa il replayed solo sui pareggi e conserva failure/status', () => {
+test('il merge della coda segue la richiesta piu recente e conserva i contatori di fallimento', () => {
   const baseItem = queueItem('article-same', 'base', 'not-a-date');
   const upstreamItem = {
     ...baseItem,
@@ -921,6 +1005,44 @@ test('il merge della coda usa il replayed solo sui pareggi e conserva failure/st
   assert.equal(merged.items[0].requestedAt, '2026-10-07T00:00:00.000Z');
   assert.equal(merged.items[0].lastFailureAt, '2026-10-07T00:01:00.000Z');
 
+  const staleFailure = {
+    ...queueItem('article-new-request', 'stale failure', '2026-10-07T00:20:00.000Z'),
+    status: 'failed',
+    failureCount: 3,
+    requestedAt: '2026-10-07T00:00:00.000Z',
+  };
+  const newerRequest = {
+    ...queueItem('article-new-request', 'new enqueue', '2026-10-07T00:10:00.000Z'),
+    status: 'queued',
+    failureCount: 0,
+    requestedAt: '2026-10-07T00:10:00.000Z',
+    lastFailureAt: '2026-10-07T00:10:00.000Z',
+  };
+  const requestMerged = mergeImageRegenerationQueues(
+    { schema: 1, items: [staleFailure] },
+    { schema: 1, items: [newerRequest] },
+  ).items[0];
+  assert.equal(requestMerged.reason, 'new enqueue');
+  assert.equal(requestMerged.status, 'queued', 'un tentativo stale non deve bloccare una nuova richiesta');
+  assert.equal(requestMerged.requestedAt, '2026-10-07T00:10:00.000Z');
+  assert.equal(requestMerged.failureCount, 0, 'una nuova richiesta non eredita i fallimenti della richiesta stale');
+  assert.equal(requestMerged.lastFailureAt, '2026-10-07T00:10:00.000Z');
+
+  const upstreamRemoval = mergeImageRegenerationQueues(
+    { schema: 1, items: [] },
+    { schema: 1, items: [{ ...staleFailure, reason: 'replayed stale failure' }] },
+    { schema: 1, items: [staleFailure] },
+  );
+  assert.deepEqual(upstreamRemoval.items, [], 'una rimozione upstream non deve riesumare il fallimento rigiocato');
+
+  const replayedNewRequest = mergeImageRegenerationQueues(
+    { schema: 1, items: [] },
+    { schema: 1, items: [{ ...newerRequest, reason: 'replayed new enqueue' }] },
+    { schema: 1, items: [staleFailure] },
+  );
+  assert.equal(replayedNewRequest.items[0].reason, 'replayed new enqueue');
+  assert.equal(replayedNewRequest.items[0].requestedAt, newerRequest.requestedAt);
+
   const orderA = { ...queueItem('article-order-a', 'base', 'not-a-date'), requestedAt: 'not-a-date' };
   const orderB = { ...queueItem('article-order-b', 'new', 'not-a-date'), requestedAt: 'not-a-date' };
   const ordered = mergeImageRegenerationQueues(
@@ -933,6 +1055,28 @@ test('il merge della coda usa il replayed solo sui pareggi e conserva failure/st
     ['article-order-a', 'article-same', 'article-order-b'],
     'item con timestamp assente/uguale mantiene ordine upstream e appende solo il nuovo',
   );
+});
+
+test('il merge della coda canonizza gli articleId duplicati prima del drain', () => {
+  const older = {
+    ...queueItem('article-duplicate', 'older', '2026-10-07T00:00:00.000Z'),
+    failureCount: 3,
+    lastFailureAt: '2026-10-07T00:01:00.000Z',
+  };
+  const newer = {
+    ...queueItem('article-duplicate', 'newer', '2026-10-07T00:10:00.000Z'),
+    failureCount: 0,
+    requestedAt: '2026-10-07T00:10:00.000Z',
+    lastFailureAt: '2026-10-07T00:10:00.000Z',
+  };
+  const merged = mergeImageRegenerationQueues(
+    { schema: 1, items: [older, newer, queueItem('article-other', 'other', '2026-10-07T00:20:00.000Z')] },
+    { schema: 1, items: [] },
+  );
+  assert.deepEqual(merged.items.map((item) => item.articleId), ['article-duplicate', 'article-other']);
+  assert.equal(merged.items[0].reason, 'newer');
+  assert.equal(merged.items[0].failureCount, 0);
+  assert.equal(merged.items[0].lastFailureAt, '2026-10-07T00:10:00.000Z');
 });
 
 test('an empty allowlist is a caller bug, not a silent always-abort', () => {

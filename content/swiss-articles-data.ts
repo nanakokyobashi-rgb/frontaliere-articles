@@ -26319,6 +26319,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'assistenza-sociale-lucerna-requisiti',
+    category: 'pratico',
+    date: '2026-10-08T02:16:30.910Z',
+    image: '/images/blog/article-assistenza-sociale-lucerna-requisiti.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['LU'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

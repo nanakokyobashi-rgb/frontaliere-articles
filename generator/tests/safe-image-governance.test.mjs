@@ -27,6 +27,7 @@ test('create-article usa solo il motore governato per nuove copertine', () => {
   assert.match(imageAdapter, /articleHeroPath\.test\(imageUrl\)/);
   assert.match(COVER_ENGINE, /outputDir: stagingDir/);
   assert.match(COVER_ENGINE, /generated-article-images/);
+  assert.match(COVER_ENGINE, /safetyHint/);
   assert.match(imageAdapter, /renameSync\(result\.filePath, destination\)/);
   assert.match(imageAdapter, /appendGeneratedImageRecord/);
   assert.match(imageAdapter, /deadlineAt:\s*imageDeadline/);
