@@ -43022,6 +43022,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'mcdonalds-pulizia-malnate-2026',
+ category: 'novita',
+ date: '2026-10-08T00:02:58.267Z',
+ image: '/images/blog/divario-salariale-genere-agosto-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
