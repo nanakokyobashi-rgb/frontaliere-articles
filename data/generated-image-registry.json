@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 150,
+  "assetCount": 151,
   "assets": [
     {
       "schema": 1,
@@ -4778,6 +4778,47 @@
         "looks_like_specific_real_event": false,
         "is_photograph": false,
         "notes": "Original generic editorial illustration with non-identifiable people; no readable text, logos, or specific real event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-lugano-lucerna-partita-traffico",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "d2aceab3f30d043803765b2a9fd67ae62eea5f404f813b8a3cc7752bd24d9e90",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "928c68171477c45c29b08c8808885533deec693200ddabd16aa335caad14d7f0",
+      "bytes": 156826,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-08T11:17:57.567Z",
+      "verifiedAt": "2026-10-08T11:18:03.856Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-lugano-lucerna-partita-traffico.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "notes": "Generic generated editorial illustration; no readable text, logos, signatures, or recognizable faces."
       }
     }
   ]

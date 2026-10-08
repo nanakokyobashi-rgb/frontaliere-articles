@@ -43125,6 +43125,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lugano-lucerna-partita-traffico',
+ category: 'pratico',
+ date: '2026-10-08T11:18:04.293Z',
+ image: '/images/blog/article-lugano-lucerna-partita-traffico.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI', 'LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

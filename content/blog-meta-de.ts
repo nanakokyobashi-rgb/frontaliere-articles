@@ -12789,6 +12789,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bellinzona-nord-svincolo.title': 'Bellinzona Nord, nächtliche Sperrung der Anschlussstelle',
     'blog.article.bellinzona-nord-svincolo.excerpt': '## Auf einen Blick - Sperrung zwischen Freitag, dem 9., und Samstag, dem 10. Oktober - Stopp von 20.00 bis 5.00 - Richtung: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46',
     'blog.article.bellinzona-nord-svincolo.imageAlt': 'Autobahnanschluss Bellinzona Nord während einer nächtlichen Sperrung',
+    'blog.article.lugano-lucerna-partita-traffico.title': 'Lucerna-Fans in Lugano: Straßensperrungen, Verkehrsbehinderungen',
+    'blog.article.lugano-lucerna-partita-traffico.excerpt': '## Auf einen Blick - Samstag: FC Lugano-FC Lucerna um 18 Uhr in Cornaredo - Marsch der Gästefans zwischen etwa 16 und 17.30 Uhr - Bahnhofsvorplatz ab 15.50 Uhr gesperrt - Wartezeiten',
+    'blog.article.lugano-lucerna-partita-traffico.imageAlt': 'Lugano Bahnhofplatz mit Absperrungen und Lucerne-Fans auf dem Weg zum Cornaredo-Stadion',
 };
 
 export default blogMetaDe;

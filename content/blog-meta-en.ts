@@ -12790,6 +12790,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bellinzona-nord-svincolo.title': 'Bellinzona Nord, nighttime closure of the interchange',
     'blog.article.bellinzona-nord-svincolo.excerpt': '## TL;DR - Closure from Friday, October 9 to Saturday, October 10 - Stop from 20.00 to 5.00 - Direction: Chiasso/San Gottardo - Alternatives: Bellinzona Centro 46',
     'blog.article.bellinzona-nord-svincolo.imageAlt': 'Bellinzona Nord motorway interchange during a night closure',
+    'blog.article.lugano-lucerna-partita-traffico.title': 'Lucerne fans in Lugano: road closures, traffic delays',
+    'blog.article.lugano-lucerna-partita-traffico.excerpt': '## TL;DR - Saturday: FC Lugano-FC Lucerna at 18 in Cornaredo - Away supporters\' procession between 16 and around 17.30 - Station forecourt closed from 15.50 - Expected',
+    'blog.article.lugano-lucerna-partita-traffico.imageAlt': 'Lugano station square with barriers and Lucerne fans heading to Cornaredo stadium',
 };
 
 export default blogMetaEn;
