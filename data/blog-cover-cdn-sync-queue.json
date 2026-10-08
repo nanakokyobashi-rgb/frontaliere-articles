@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-aperitivo-solidale-giubiasco.webp",
+      "sha256": "45a778fc0bde5946071a7ba676c93c22481925eae38ae21f014544a14bf854a6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-aperitivo-solidale-giubiasco-480w.webp",
+      "sha256": "ccc740535a414cc19ec036f864e200303e41353a19909cc9b0e326fec7f197bf"
+    }
+  ]
 }
