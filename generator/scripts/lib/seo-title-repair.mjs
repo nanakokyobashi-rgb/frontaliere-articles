@@ -77,11 +77,40 @@ export function isStrictSeoTitlePrefix(candidate, canonical) {
 }
 
 /**
+ * Names a complete title really ends on and that the shared stopword list —
+ * compared in lower case — reads as a function word: the brand «On» («on»),
+ * the surname of «Lucio Dalla» («dalla»).
+ *
+ * Explicit and small on purpose. A capital alone proves nothing: a Title Case
+ * title cut short ends on «…Nuove Regole Per» or «…Tutto Quello Che Devi
+ * Sapere Su» with exactly the shape of «…marchio On», so a name enters this
+ * list together with a published title that ends on it, and
+ * `generator/tests/seo-title-prefix-repair.test.mjs` fails on an entry no
+ * published field uses. A surname is listed with its first name: «Dalla» by
+ * itself is also the preposition of «…Colpiti Dalla».
+ */
+export const SEO_PROPER_NOUN_TAILS = Object.freeze(['On', 'Lucio Dalla']);
+
+// An acronym is recognised by its form: capitals and digits only, two or more.
+const ACRONYM_TAIL_RE = /^\p{Lu}[\p{Lu}\p{N}]+$/u;
+
+function endsOnListedName(text) {
+  return SEO_PROPER_NOUN_TAILS.some((name) => text === name || text.endsWith(` ${name}`));
+}
+
+/**
  * True when the last word is a proper noun or an acronym that the shared
  * stopword list — compared in lower case — mistakes for a function word:
  * «…per il marchio On», «…di AVS e AI», «…nel nuovo Haus O», «…a Lucio Dalla».
  *
- * Two readings look the same and are NOT proper nouns:
+ * Three shapes pass, and nothing else does:
+ *   - an acronym, by form («AI», «AD»);
+ *   - a name of `SEO_PROPER_NOUN_TAILS`;
+ *   - a single capital that labels the content word before it («Haus O»).
+ *
+ * Three readings look the same and are NOT proper nouns:
+ *   - a capitalised function word: «…Nuove Regole Per», «…e Il», «…ecco Cosa»
+ *     are cuts of a Title Case title, so a capital is never enough;
  *   - a capital that opens a sentence: «…Accordo vicino? Le» and «…in 5 anni.
  *     Cosa» are cut sentences, so the word must follow another word, and that
  *     part must carry lower-case text (an all-caps title proves nothing about
@@ -97,7 +126,7 @@ export function hasProperNounTail(value) {
   if (!/^\p{Lu}[\p{L}\p{N}]*$/u.test(word)) return false;
   const before = text.slice(0, text.length - word.length).trimEnd();
   if (!before || SENTENCE_BREAK_RE.test(before) || !/\p{Ll}/u.test(before)) return false;
-  if (word.length > 1) return true;
+  if (word.length > 1) return ACRONYM_TAIL_RE.test(word) || endsOnListedName(text);
   const previous = /(\S+)$/u.exec(before)?.[1]?.toLowerCase() ?? '';
   return !TRAILING_STOPWORDS.has(previous);
 }

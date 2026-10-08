@@ -383,11 +383,12 @@ describe('voci SEO di ogni sezione — code aperte su una parola funzionale', ()
     expect(recent.length, `articoli generati DOPO la fix con la coda aperta:\n  ${detail}`).toBe(0);
   });
 
-  // L'esenzione per nome proprio o sigla giudica la FORMA dell'ultima parola.
+  // L'esenzione non giudica dalla sola maiuscola: passano le sigle (per forma),
+  // la lettera che etichetta la parola prima e i nomi elencati nel modulo; una
+  // parola funzionale in maiuscola («…Nuove Regole Per») resta una coda aperta.
   // 17 campi il 2026-10-08, tutti letti («…marchio On», «…AVS e AI», «…confronto
   // su AI», «…Lucio Dalla», «…LAINF e AD», «…nuovo Haus O»). Se la classe
-  // cresce, uno scrittore ha cambiato maiuscole e l'esenzione sta diventando
-  // il modo in cui una coda vera passa.
+  // cresce, l'esenzione sta diventando il modo in cui una coda vera passa.
   const EXEMPT_TAILS_MAX = 60;
 
   it(`le code lette come nome proprio o sigla restano poche (${EXEMPT_TAILS_MAX} al massimo)`, () => {

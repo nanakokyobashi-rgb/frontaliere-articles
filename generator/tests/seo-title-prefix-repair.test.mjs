@@ -32,6 +32,7 @@ import { truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { SECTIONS } from '../../scripts/lib/article-surfaces.mjs';
 import {
   SEO_COMPLETE_SENTENCE_RE,
+  SEO_PROPER_NOUN_TAILS,
   SEO_TITLE_BRAND_SUFFIX,
   SEO_TITLE_FIELDS,
   SEO_TITLE_MAX_CHARS,
@@ -42,6 +43,7 @@ import {
   repairSeoTitleValue,
   seoTitleFieldDefect,
   seoTitleFromCanonical,
+  stripSeoTitleBrand,
 } from '../scripts/lib/seo-title-repair.mjs';
 import {
   fieldMatch,
@@ -135,6 +137,31 @@ describe('coda monca — il valore si ferma su una parola funzionale o su un sep
       assert.equal(isDanglingSeoTitle(stored), true, stored);
     }
   });
+
+  // Seconda review della PR 2523: la maiuscola da sola faceva passare per nome
+  // proprio la coda di un titolo scritto con ogni parola in maiuscola.
+  test('una parola funzionale in maiuscola è un taglio, non un nome proprio', () => {
+    for (const stored of [
+      'un titolo Per',
+      'Frontalieri e Telelavoro: Nuove Regole Per',
+      'Permesso G: Tutto Quello Che Devi Sapere Su',
+      'Salario minimo in Ticino, ecco Cosa',
+      'Tassa sulla salute: i frontalieri e Il',
+      'Maltempo in Ticino: Frontalieri Colpiti Dalla',
+    ]) {
+      assert.equal(isDanglingSeoTitle(stored), true, stored);
+      assert.equal(hasExemptProperNounTail(stored), false, stored);
+    }
+  });
+
+  test('title in maiuscole di titolo tagliato su una preposizione: torna il titolo vero', () => {
+    const canonical = 'Frontalieri e Telelavoro: Nuove Regole Per il 2026';
+    const stored = 'Frontalieri e Telelavoro: Nuove Regole Per | Frontaliere Ticino';
+    assert.equal(seoTitleFieldDefect('title', stored, canonical), 'dangling');
+    assert.equal(repairSeoTitleValue('title', stored, canonical), seoTitleFromCanonical(canonical));
+    assert.equal(repairSeoTitleValue('ogTitle', 'Frontalieri e Telelavoro: Nuove Regole Per', canonical), canonical);
+    assert.equal(repairSeoTitleValue('headline', 'Frontalieri e Telelavoro: Nuove Regole Per', canonical), canonical);
+  });
 });
 
 describe('nomi propri e sigle — la lista condivisa confronta in minuscolo', () => {
@@ -156,6 +183,12 @@ describe('nomi propri e sigle — la lista condivisa confronta in minuscolo', ()
       assert.equal(repairSeoTitleValue('ogTitle', stored, 'Un titolo vero del tutto diverso'), stored);
     });
   }
+
+  test('un cognome dell\'elenco vale con il suo nome: da solo resta una preposizione', () => {
+    assert.ok(SEO_PROPER_NOUN_TAILS.includes('Lucio Dalla'));
+    assert.equal(isDanglingSeoTitle('Uboldo: estate 2026 con tributo a Lucio Dalla'), false);
+    assert.equal(isDanglingSeoTitle('Uboldo: estate 2026 con un tributo che parte Dalla'), true);
+  });
 });
 
 describe('prefisso del titolo vero — intenzionale solo su un confine di clausola', () => {
@@ -516,13 +549,12 @@ describe('corpus — nessun campo titolo SEO è un derivato rotto del titolo ver
     assert.equal(unrepairable.length, 0, `campi non riparabili: ${unrepairable.length}`);
   });
 
-  // L'esenzione per nome proprio o sigla è un giudizio sulla FORMA dell'ultima
-  // parola. Il suo limite dichiarato: in un titolo scritto con ogni parola in
-  // maiuscola («Cosa Cambia Per I») scambierebbe una preposizione per un nome.
-  // Il generatore scrive i titoli italiani in minuscolo di frase, quindi oggi
-  // le esenzioni sono poche e tutte lette: 14 il 2026-10-08. Il tetto lascia
-  // spazio ai titoli che finiscono davvero su un nome e cade se la classe
-  // cresce, cioè se uno scrittore ha cambiato maiuscole.
+  // L'esenzione non giudica dalla sola maiuscola: passano le sigle (per
+  // forma), la lettera che etichetta la parola prima («Haus O») e i nomi di
+  // `SEO_PROPER_NOUN_TAILS`. Una parola funzionale in maiuscola («…Nuove
+  // Regole Per») resta un taglio. 14 campi il 2026-10-08, tutti letti: «AI»,
+  // «AD», «On», «Lucio Dalla», «Haus O». Il tetto lascia spazio alle sigle in
+  // coda e cade se la classe cresce.
   const EXEMPT_TAILS_MAX = 40;
 
   test(`le esenzioni per nome proprio restano poche (${EXEMPT_TAILS_MAX} al massimo)`, () => {
@@ -534,5 +566,17 @@ describe('corpus — nessun campo titolo SEO è un derivato rotto del titolo ver
       exempt.length <= EXEMPT_TAILS_MAX,
       `${exempt.length} campi titolo passano solo come nome proprio o sigla:\n${exempt.join('\n')}`,
     );
+  });
+
+  // L'elenco dei nomi non accumula voci morte: ogni nome deve chiudere almeno
+  // un campo titolo pubblicato, altrimenti è un'esenzione senza il suo caso.
+  test('ogni nome dell\'elenco chiude davvero un campo titolo pubblicato', () => {
+    for (const name of SEO_PROPER_NOUN_TAILS) {
+      const used = scan.rows.filter((row) => {
+        const text = stripSeoTitleBrand(row.value);
+        return text === name || text.endsWith(` ${name}`);
+      });
+      assert.ok(used.length > 0, `«${name}» non chiude più nessun campo titolo: va tolto dall'elenco`);
+    }
   });
 });
