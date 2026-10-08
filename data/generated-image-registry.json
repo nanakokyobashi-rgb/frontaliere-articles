@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 141,
+  "assetCount": 142,
   "assets": [
     {
       "schema": 1,
@@ -4409,6 +4409,47 @@
         "looks_like_specific_real_event": false,
         "is_photograph": false,
         "notes": "Original generic architectural illustration with distant non-recognizable figures; no text, logos, or specific real event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-svizzera-leader-nella-robotica-217-aziende-e-7-000-posti",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "957192da52c53397d72b73c767b7b332397468b5b599fcc51cabded947702737",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "af65ee89322805797fb85e2b93e7d65d7c3607163d29c995a5aad92166063f5e",
+      "bytes": 153454,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-08T11:04:19.367Z",
+      "verifiedAt": "2026-10-08T11:04:25.462Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-svizzera-leader-nella-robotica-217-aziende-e-7-000-posti.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "notes": "Original generic editorial illustration; technical diagrams are non-textual and no faces, logos, lettering, or specific real event are present."
       }
     }
   ]
