@@ -146,6 +146,13 @@ else
   subject="$(git show -s --format=%s "$produced_sha")"
 fi
 
+parent_count="$(git show -s --format='%P' "$produced_sha" | wc -w | tr -d '[:space:]')"
+if [ "$parent_count" -gt 1 ]; then
+  cherry_pick_command='git cherry-pick -m 1 FETCH_HEAD'
+else
+  cherry_pick_command='git cherry-pick FETCH_HEAD'
+fi
+
 # Always use a per-invocation ref. This also handles an artifact directory being
 # reused while a stale refs/unpushed/article is still present. The ref is
 # created with an all-zero expected value, so git itself refuses a name that
@@ -238,7 +245,7 @@ NODE
   printf '%s\n' "git checkout --detach ${base_sha}"
   printf '%s\n' 'git fetch <bundle> <ref>'
   printf '%s\n' "git fetch ./article.bundle ${bundle_ref}"
-  printf '%s\n' 'git cherry-pick FETCH_HEAD'
+  printf '%s\n' "$cherry_pick_command"
   if [ "$source_kind" = 'worktree' ]; then
     printf '%s\n' '```'
     printf '%s\n' ''

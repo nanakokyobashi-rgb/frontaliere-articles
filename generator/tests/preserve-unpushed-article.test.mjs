@@ -591,6 +591,7 @@ test('l\'elenco dei file di un commit di merge e\' quello rispetto alla base', (
     assert.equal(manifest.baseSha, baseSha);
     // Un `diff-tree <merge>` senza genitore esplicito non elenca niente.
     assert.deepEqual(manifest.files, ['side.txt']);
+    assert.match(readFileSync(path.join(output, 'REPLAY.md'), 'utf8'), /git cherry-pick -m 1 FETCH_HEAD/);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
