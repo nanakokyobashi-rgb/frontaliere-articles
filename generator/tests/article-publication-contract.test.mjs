@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const COVER = '/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp';
 const MCDONALDS_COVER = '/images/blog/article-mcdonalds-pulizia-malnate-2026.webp';
+const FESTIVAL_COVER = '/images/blog/article-festival-racconto-varese-ottobre.webp';
 
 function filesBelow(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -65,4 +66,17 @@ test('Malnate cleanup registry, SEO metadata and public asset use the dedicated 
   assert.ok(metadata, 'Malnate cleanup SEO metadata is missing');
   assert.ok(metadata.includes('${BASE_URL}' + MCDONALDS_COVER));
   assert.ok(fs.existsSync(path.join(ROOT, `public${MCDONALDS_COVER}`)), 'Malnate cleanup cover blob is missing');
+});
+
+test('Varese storytelling festival registry, SEO metadata and public asset use the dedicated cover', () => {
+  const registry = fs.readFileSync(path.join(ROOT, 'content/blog-articles-data.ts'), 'utf8');
+  const seo = fs.readFileSync(path.join(ROOT, 'content/seo/seo-blog-5.ts'), 'utf8');
+  const article = registry.match(/id: 'festival-racconto-varese-ottobre',[\s\S]*?\n\s*\},?/)?.[0];
+  const metadata = seo.match(/'blog-festival-racconto-varese-ottobre': \{[\s\S]*?\n\s*\},\n\n/)?.[0];
+
+  assert.ok(article, 'Varese storytelling festival article record is missing');
+  assert.match(article, new RegExp(`image: '${FESTIVAL_COVER.replaceAll('/', '\\/')}'`));
+  assert.ok(metadata, 'Varese storytelling festival SEO metadata is missing');
+  assert.ok(metadata.includes('${BASE_URL}' + FESTIVAL_COVER));
+  assert.ok(fs.existsSync(path.join(ROOT, `public${FESTIVAL_COVER}`)), 'Varese storytelling festival cover blob is missing');
 });
