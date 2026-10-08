@@ -24,9 +24,20 @@ import {
   BLOG_IMAGE_TARGET_MAX_BYTES,
   BLOG_IMAGE_WIDTH,
 } from './blog-image-policy.mjs';
+import { buildDeterministicCardRecord } from './deterministic-card-provenance.mjs';
 
 const WIDTH = BLOG_IMAGE_WIDTH;
 const HEIGHT = BLOG_IMAGE_HEIGHT;
+
+export function buildDailyBriefImageRecord({ id, sha256, bytes }) {
+  return buildDeterministicCardRecord({
+    id,
+    sha256,
+    bytes,
+    width: WIDTH,
+    height: HEIGHT,
+  });
+}
 
 const esc = (s) =>
   String(s ?? '')

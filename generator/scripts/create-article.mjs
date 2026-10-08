@@ -283,6 +283,7 @@ import {
   hasValidBlogImageRecord,
   imageRecordForPath,
 } from './lib/blog-image-registry.mjs';
+import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
@@ -15040,10 +15041,17 @@ function modifySeoService(data) {
   }
   const coverRecord = provenance.record;
   data._imageCredit = provenance.kind === 'wikimedia-commons' ? coverRecord : null;
-  data._generatedImageRecord = provenance.kind === 'generated' ? coverRecord : null;
+  data._generatedImageRecord = provenance.kind === 'generated' || provenance.kind === DETERMINISTIC_CARD_KIND
+    ? coverRecord
+    : null;
   data._editorialImageRecord = provenance.kind === 'editorial-upload' ? coverRecord : null;
   const jsonValue = (value) => JSON.stringify(String(value ?? ''));
-  const imageRightsLines = provenance.kind === 'wikimedia-commons' ? '' : provenance.kind === 'generated' ? `
+  const imageRightsLines = provenance.kind === 'wikimedia-commons' ? '' : provenance.kind === DETERMINISTIC_CARD_KIND ? `
+        "acquireLicensePage": ${jsonValue(DETERMINISTIC_CARD_LICENSE_URL)},
+        "copyrightNotice": "Deterministic media produced by frontaliereticino.ch.",
+        "license": ${jsonValue(DETERMINISTIC_CARD_LICENSE_URL)},
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": ${jsonValue(coverRecord.credit)},` : provenance.kind === 'generated' ? `
         "acquireLicensePage": ${jsonValue(coverRecord.licenseUrl)},
         "copyrightNotice": "Generated media; provider terms apply.",
         "license": ${jsonValue(coverRecord.licenseUrl)},
