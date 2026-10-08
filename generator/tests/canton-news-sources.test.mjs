@@ -613,7 +613,7 @@ test('html-links: Radio Munot legge titolo da title e publishDate dal page-state
   const headline = 'Neues Polizeiboot seit über einem Jahr im Einsatz';
   const html = [
     '<main><article><a title="Beitrag \'Neues Polizeiboot seit über einem Jahr im Einsatz\' lesen." href="/p/Neues-Polizeiboot-abc"><span>00:00</span></a></article></main>',
-    '<script type="application/json">{"title":"Neues Polizeiboot seit über einem Jahr im Einsatz","type":"Podcast","publishDate":"2026-10-05T05:00:00Z"}</script>',
+    '<script type="application/json">{"publishDate":"2026-10-05T05:00:00Z","metadata":{"duration":180},"title":"Neues Polizeiboot seit über einem Jahr im Einsatz","type":"Podcast"}</script>',
   ].join('');
   const source = {
     url,

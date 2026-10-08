@@ -8211,18 +8211,34 @@ function embeddedHeadlineDateKey(value) {
 function extractEmbeddedHeadlineDates(html, field) {
   if (field !== 'publishDate') return new Map();
   const out = new Map();
-  const re = /"title"\s*:\s*"((?:\\.|[^"\\]){1,300})"\s*,\s*"type"\s*:\s*"[^"\\]{1,80}"\s*,\s*"publishDate"\s*:\s*"([^"]+)"/gu;
-  let match;
-  while ((match = re.exec(String(html || ''))) !== null) {
-    let title;
-    try {
-      title = JSON.parse(`"${match[1]}"`);
-    } catch {
-      title = match[1];
+  const visit = (value) => {
+    if (!value || typeof value !== 'object') return;
+    if (Array.isArray(value)) {
+      for (const item of value) visit(item);
+      return;
     }
-    const date = new Date(match[2]);
-    if (!title || Number.isNaN(date.getTime())) continue;
-    out.set(embeddedHeadlineDateKey(title), date);
+    // The page-state object is parsed as JSON first. This keeps title/date
+    // associated even when the CMS inserts fields or changes their order.
+    if (typeof value.title === 'string' && typeof value[field] === 'string') {
+      const date = new Date(value[field]);
+      if (!Number.isNaN(date.getTime())) out.set(embeddedHeadlineDateKey(value.title), date);
+    }
+    for (const child of Object.values(value)) visit(child);
+  };
+  const scriptRe = /<script\b([^>]*)>([\s\S]*?)<\/script>/giu;
+  let match;
+  while ((match = scriptRe.exec(String(html || ''))) !== null) {
+    const attrs = match[1] || '';
+    const type = attrs.match(/\btype\s*=\s*["']([^"']+)["']/iu)?.[1] || '';
+    if (type && !/json/iu.test(type)) continue;
+    const body = match[2].trim();
+    if (!body || (!/^\s*[\[{]/u.test(body) && !/\bng-state\b/iu.test(attrs))) continue;
+    try {
+      visit(JSON.parse(body));
+    } catch {
+      // Inline JavaScript and truncated JSON are not page-state data. The
+      // opt-in quirk must fail closed instead of pairing unrelated strings.
+    }
   }
   return out;
 }
