@@ -780,19 +780,21 @@ test('an empty latest outcome is explicit and the intermediate rebase is retaine
 
   assert.match(
     commitStep,
-    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET"[\s\S]*data\/generated-image-registry\.json/,
-    'the intermediate rebase must reconcile the generated-image registry',
+    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+data\/generated-image-registry\.json/,
+    'the intermediate rebase must use the safe helper and preserve the image ledger',
   );
-  assert.match(commitStep, /merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json/,
-    'the replayed registry delta must be merged after the rebase');
   assert.match(commitStep, /\| tee -a "\$PUSH_LOG"/, 'rebase output must enter the cumulative log');
-  assert.doesNotMatch(commitStep, /rebase-onto-remote\.sh[\s\S]*?\| tee "\$ATTEMPT_LOG"/, 'rebase output must stay out of the push attempt log');
+  assert.doesNotMatch(commitStep, /git pull --rebase/, 'the daily writer must not bypass the shared rebase resolver');
   assert.match(commitStep, /rebase_status=\$\{PIPESTATUS\[0\]\}/,
     'the rebase result must be separated from tee');
+  assert.match(commitStep, /node scripts\/ci\/merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json "\$registry_base" "\$registry_snapshot"/,
+    'the run-specific image ledger delta must be merged after the rebase');
+  assert.match(commitStep, /merge_status=\$\{PIPESTATUS\[0\]\}/,
+    'the registry merge result must be separated from tee');
   assert.match(commitStep, /\[push-rebase\] (completed|failed)/,
-    'success and partial failure must remain distinguishable in outcome lines');
-  assert.match(commitStep, /\[registry-merge\] generated-image-registry reconciliation failed/,
-    'a failed registry reconciliation must remain explicit and red');
+    'success and unsafe failure must remain distinguishable in outcome lines');
+  assert.match(commitStep, /refusing to retry an unsafe rebase/,
+    'an unsafe helper result must stop the retry loop');
 });
 
 test('the permanent-rejection grep fires on ruleset/HTTP 403 and not on progress or a fetch-first race', () => {

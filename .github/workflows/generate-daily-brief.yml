@@ -242,6 +242,9 @@ jobs:
             # would never reach the threshold (#885). Il file e' versionato e il
             # refresh lo riscrive quando il contenuto cambia davvero (#927), quindi
             # esiste sempre qui e finisce in stage solo se lo streak si e' mosso.
+            # `data/generated-image-registry.json` is the cover-provenance ledger
+            # written by the producer; stage it with the edition so publish-api
+            # can rebuild the published credits from the committed record.
             git add public/data/daily-brief.json \
                     data/daily-brief-degradation.json \
                     data/generated-image-registry.json \
@@ -273,13 +276,13 @@ jobs:
           # un rosso ogni mattina finche' il blackout dura, che e' esattamente
           # il loop dichiarato inaccettabile in #882.
           #
-          # Il ledger non e' l'edizione: `data/daily-brief-degradation.json`
-          # non e' nei `paths:` di `publish-api.yml`, quindi perderlo non lascia
-          # il sito su una superficie vecchia. Perderlo costa un allarme in ritardo — lo
-          # stesso prezzo che si pagava prima di #885 — mentre il rosso in loop
-          # costa una mattina rossa per sempre. Quindi: se in stage c'e' SOLO
-          # il registro, un push fallito e' un warning e la run resta verde;
-          # se c'e' un'edizione, il rosso resta rosso.
+          # La provenance della cover fa parte dell'edizione: `publish-api.yml`
+          # include `data/generated-image-registry.json` nei propri `paths:`,
+          # quindi ometterla lascerebbe la superficie HTTP senza il record appena
+          # pubblicato. Il solo file che resta fuori da quei `paths:` e' il ledger
+          # di degradazione: se in stage c'e' SOLO quello, un push fallito e' un
+          # warning e la run resta verde; se c'e' un'edizione o una provenance,
+          # il rosso resta rosso.
           #
           # Il ramo degradato vale SOLO per il push fallito dopo tre tentativi,
           # che e' una condizione transitoria: domani la stessa soglia viene
@@ -300,10 +303,10 @@ jobs:
           fi
 
           git commit -m "$COMMIT_MESSAGE"
-          # Il registry delle copertine è append-only: se un altro writer entra
-          # su main fra questo commit e il push, il rebase deve poter prendere
-          # upstream per completare e poi riunire il delta di questo run.
           PRODUCED="$(git rev-parse HEAD)"
+          # Il registry delle immagini generate e' un ledger append-only, non
+          # una cache sacrificabile: conserva il delta di questo run prima di
+          # ogni rebase e lo riunisce con l'upstream dopo una push concorrente.
           registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
           if ! git show "$PRODUCED^:data/generated-image-registry.json" > "$registry_base"; then
@@ -352,37 +355,41 @@ jobs:
             # Il rebase intermedio cambia il contenuto del prossimo push: il
             # suo output resta nel solo resoconto umano. Non entra nella
             # superficie classificabile, che contiene esclusivamente gli
-            # snapshot dei push sopra.
+            # snapshot dei push sopra. Il helper prende upstream per il ledger
+            # in conflitto; il merge dedicato riporta subito il delta di questo
+            # run, così nessuna provenance viene persa.
             set +e
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/generated-image-registry.json 2>&1 \
               | tee -a "$PUSH_LOG"
             rebase_status=${PIPESTATUS[0]}
             set -e
-            if [ "$rebase_status" -eq 0 ]; then
-              node scripts/ci/merge-generated-image-registry.mjs \
-                data/generated-image-registry.json "$registry_base" "$registry_snapshot" \
-                2>&1 | tee -a "$PUSH_LOG"
-              merge_status=${PIPESTATUS[0]}
-              if [ "$merge_status" -ne 0 ]; then
-                echo "error: [registry-merge] generated-image-registry reconciliation failed" \
-                  | tee -a "$PUSH_LOG"
-                exit 1
-              fi
-              git add data/generated-image-registry.json
-              if ! git diff --cached --quiet; then
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
-                  git commit -C "$PRODUCED"
-                else
-                  git commit --amend --no-edit
-                fi
-              fi
-              echo "remote: [push-rebase] completed before attempt $((attempt + 1))" \
+            if [ "$rebase_status" -ne 0 ]; then
+              echo "error: [push-rebase] failed before attempt $((attempt + 1)); refusing to retry an unsafe rebase" \
                 | tee -a "$PUSH_LOG"
-            else
-              echo "error: [push-rebase] failed before attempt $((attempt + 1)); aborting" \
-                | tee -a "$PUSH_LOG"
+              exit 1
             fi
+            set +e
+            node scripts/ci/merge-generated-image-registry.mjs \
+              data/generated-image-registry.json "$registry_base" "$registry_snapshot" 2>&1 \
+              | tee -a "$PUSH_LOG"
+            merge_status=${PIPESTATUS[0]}
+            set -e
+            if [ "$merge_status" -ne 0 ]; then
+              echo "error: [push-rebase] generated-image registry merge failed before attempt $((attempt + 1))" \
+                | tee -a "$PUSH_LOG"
+              exit 1
+            fi
+            git add data/generated-image-registry.json
+            if ! git diff --cached --quiet; then
+              if [ "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)" ]; then
+                git commit -C "$PRODUCED"
+              else
+                git commit --amend --no-edit
+              fi
+            fi
+            echo "remote: [push-rebase] completed before attempt $((attempt + 1))" \
+              | tee -a "$PUSH_LOG"
           done
           # Il ramo degradato qui sotto classifica per FORMA del fallimento
           # (retry esauriti), non per causa — e le due cose non coincidono. Un

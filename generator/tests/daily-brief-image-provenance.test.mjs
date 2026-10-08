@@ -78,3 +78,26 @@ test('the daily writer appends the rendered hero record before article registrat
   assert.match(source, /buildDailyBriefImageRecord\(/);
   assert.match(source, /appendGeneratedImageRecord\(REPO_ROOT, imageRecord\)/);
 });
+
+test('the daily workflow commits and reconciles the cover-provenance ledger', () => {
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/generate-daily-brief.yml'), 'utf8');
+  const commitStep = workflow.slice(workflow.indexOf('- name: Commit and push'));
+  const cacheCheck = commitStep.indexOf('git diff --cached --quiet');
+  const registryStage = commitStep.indexOf('data/generated-image-registry.json');
+  assert.ok(registryStage >= 0 && registryStage < cacheCheck, 'the generated-image registry must be staged before the cache check');
+  const snapshot = commitStep.indexOf('cp data/generated-image-registry.json "$registry_snapshot"');
+  const pushLoop = commitStep.indexOf('for attempt in 1 2 3; do');
+  assert.ok(snapshot >= 0 && snapshot < pushLoop, 'the run snapshot must be captured before retries');
+  assert.match(
+    commitStep,
+    /bash scripts\/lib\/rebase-onto-remote\.sh "\$REMOTE" "\$TARGET" \\\n\s+data\/generated-image-registry\.json/,
+  );
+  assert.match(
+    commitStep,
+    /node scripts\/ci\/merge-generated-image-registry\.mjs[\s\S]*data\/generated-image-registry\.json "\$registry_base" "\$registry_snapshot"/,
+  );
+  assert.doesNotMatch(commitStep, /git pull --rebase "\$REMOTE" "\$TARGET"/);
+
+  const publishWorkflow = fs.readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
+  assert.match(publishWorkflow, /^\s*- 'data\/generated-image-registry\.json'$/m);
+});
