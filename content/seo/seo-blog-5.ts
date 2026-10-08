@@ -102935,16 +102935,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-salute-lavoro-progetti-ticino': {
     title: 'Salute mentale sul lavoro: progetti in Ticino | Frontaliere Ticino',
-    description: '## In breve - In Svizzera una persona su tre è emotivamente spossata. - In Ticino quasi un apprendista su tre riferisce disturbi d\'ansia. - DSS e Forum GSA',
+    description: 'In Svizzera una persona su tre è emotivamente spossata.',
     keywords: 'frontalieri, ticino, svizzera, italia, salute, mentale, lavoro, progetti',
     ogTitle: 'Salute mentale sul lavoro: progetti Ticino',
-    ogDescription: '## In breve - In Svizzera una persona su tre è emotivamente spossata. - In Ticino quasi un apprendista su tre riferisce disturbi d\'ansia. - DSS e Forum GSA',
+    ogDescription: 'In Svizzera una persona su tre è emotivamente spossata.',
     canonicalPath: '/articoli-frontaliere/salute-lavoro-progetti-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Salute mentale sul lavoro: progetti in Ticino",
-      "description": "## In breve - In Svizzera una persona su tre è emotivamente spossata. - In Ticino quasi un apprendista su tre riferisce disturbi d'ansia. - DSS e Forum GSA",
+      "description": "In Svizzera una persona su tre è emotivamente spossata.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -102974,16 +102974,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-bellinzona-nord-svincolo': {
     title: 'Bellinzona Nord, chiusura notturna dello svincolo',
-    description: '## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46',
+    description: 'Chiusura tra venerdì 9 e sabato 10 ottobre',
     keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, nord, chiusura, notturna',
     ogTitle: 'Bellinzona Nord, chiusura notturna dello svincolo',
-    ogDescription: '## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46',
+    ogDescription: 'Chiusura tra venerdì 9 e sabato 10 ottobre',
     canonicalPath: '/articoli-frontaliere/bellinzona-nord-svincolo/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Bellinzona Nord, chiusura notturna dello svincolo",
-      "description": "## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46",
+      "description": "Chiusura tra venerdì 9 e sabato 10 ottobre",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/centro-ovale-chiasso-nuova-proprieta.webp`,
@@ -103008,16 +103008,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-lugano-lucerna-partita-traffico': {
     title: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
-    description: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
+    description: 'Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo',
     keywords: 'frontalieri, ticino, svizzera, italia, lugano, lucerna, cornaredo, strade',
     ogTitle: 'Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato',
-    ogDescription: '## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese',
+    ogDescription: 'Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo',
     canonicalPath: '/articoli-frontaliere/lugano-lucerna-partita-traffico/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato",
-      "description": "## In breve - Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo - Corteo ospite tra le 16 e le 17.30 circa - Piazzale della stazione chiuso dalle 15.50 - Attese",
+      "description": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -103047,16 +103047,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-tifosi-lucerna-lugano-traffico': {
     title: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
-    description: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    description: 'Partita alle 18 allo stadio di Cornaredo',
     keywords: 'frontalieri, ticino, svizzera, italia, tifosi, lucerna, lugano, strade',
     ogTitle: 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
-    ogDescription: '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
+    ogDescription: 'Partita alle 18 allo stadio di Cornaredo',
     canonicalPath: '/articoli-frontaliere/tifosi-lucerna-lugano-traffico/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
-      "description": "## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani",
+      "description": "Partita alle 18 allo stadio di Cornaredo",
       "image": {
         "@type": "ImageObject",
         "url": `${BASE_URL}/images/blog/lucerna-voto-tifosi-ocse.webp`,
@@ -103159,16 +103159,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-ferrovia-albate-molteno-elettrificazione': {
     title: 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
-    description: '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
+    description: 'Cantieri per l\'elettrificazione al via a metà dicembre',
     keywords: 'frontalieri, ticino, svizzera, italia, elettrificazione, albate-molteno, lavori, dicembre',
     ogTitle: 'Elettrificazione Albate-Molteno: lavori da dicembre 2024',
-    ogDescription: '## In breve - Cantieri per l\'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno',
+    ogDescription: 'Cantieri per l\'elettrificazione al via a metà dicembre',
     canonicalPath: '/articoli-frontaliere/ferrovia-albate-molteno-elettrificazione/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Elettrificazione Albate-Molteno: lavori da dicembre 2024",
-      "description": "## In breve - Cantieri per l'elettrificazione al via a metà dicembre - Como-Lecco sospesa almeno fino a giugno 2029 - Albate-Molteno: da 24 a 34 treni al giorno",
+      "description": "Cantieri per l'elettrificazione al via a metà dicembre",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",

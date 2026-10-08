@@ -99747,16 +99747,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-raiffeisen-pil-inflazione-2026': {
     title: 'Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%',
-    description: '## In breve - Raiffeisen porta all\'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell\'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato',
+    description: 'Raiffeisen porta all\'1,7% la stima del Pil 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, raiffeisen, inflazione, allo, breve',
     ogTitle: 'Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%',
-    ogDescription: '## In breve - Raiffeisen porta all\'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell\'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato',
+    ogDescription: 'Raiffeisen porta all\'1,7% la stima del Pil 2026',
     canonicalPath: '/articoli-svizzera/raiffeisen-pil-inflazione-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Raiffeisen: Pil 2026 all’1,7%, inflazione allo 0,7%",
-      "description": "## In breve - Raiffeisen porta all'1,7% la stima del Pil 2026 - Per il 2027 conferma una crescita dell'1,3% - Inflazione 2026 allo 0,7%, contro lo 0,5% stimato",
+      "description": "Raiffeisen porta all'1,7% la stima del Pil 2026",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99786,16 +99786,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-svizzera-leader-nella-robotica-217-aziende-e-7-000-posti': {
     title: 'Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
-    description: '## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro',
+    description: '217 aziende nella robotica svizzera',
     keywords: 'frontalieri, ticino, svizzera, italia, leader, nella, robotica, aziende',
     ogTitle: 'Svizzera leader nella robotica: 217 aziende e 7\'000 posti',
-    ogDescription: '## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro',
+    ogDescription: '217 aziende nella robotica svizzera',
     canonicalPath: '/articoli-svizzera/svizzera-leader-nella-robotica-217-aziende-e-7-000-posti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera leader nella robotica: 217 aziende e 7'000 posti",
-      "description": "## In breve - 217 aziende nella robotica svizzera - 109 producono direttamente robot - 87% ha meno di 100 collaboratori - Circa 7’000 posti di lavoro",
+      "description": "217 aziende nella robotica svizzera",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
@@ -99825,16 +99825,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
 
   'blog-salari-svizzera-talenti-stranieri': {
     title: 'Svizzera: minimo divario salariale per talenti UE/AELS',
-    description: '## In breve - La Svizzera è prima nell\'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera',
+    description: 'La Svizzera è prima nell\'IMD World Talent Ranking',
     keywords: 'frontalieri, ticino, svizzera, italia, minimo, divario, salariale, talenti',
     ogTitle: 'Svizzera: attrattiva per talenti con minimo divario salariale',
-    ogDescription: '## In breve - La Svizzera è prima nell\'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera',
+    ogDescription: 'La Svizzera è prima nell\'IMD World Talent Ranking',
     canonicalPath: '/articoli-svizzera/salari-svizzera-talenti-stranieri/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Svizzera: minimo divario salariale per talenti UE/AELS",
-      "description": "## In breve - La Svizzera è prima nell'IMD World Talent Ranking - Divario UE/AELS corretto: 1,1% in meno - Stati terzi: 4,5% in meno - Immigrazione via libera",
+      "description": "La Svizzera è prima nell'IMD World Talent Ranking",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
