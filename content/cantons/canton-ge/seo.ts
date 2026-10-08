@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Accordo tra autorità ginevrine e francesi - Cure HUG per bambini del Pays de Gex e Haute-Savoie - Regola questioni mediche e amministrative",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/carenze-dogane-sicurezza-ticino.webp`,
+        "url": `${BASE_URL}/images/blog/article-accordo-cure-oncologiche-ginevra.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Accordo transfrontaliero per cure oncologiche pediatriche a Ginevra"

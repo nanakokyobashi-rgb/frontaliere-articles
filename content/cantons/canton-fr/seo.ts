@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Disoccupazione friburghese al 2,5% a settembre 2026 - 4’509 disoccupati, 185 in meno rispetto ad agosto - Richiedenti d’impiego al 5,1%, stabili",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-friburgo-settembre-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Scena di Friburgo con persone in cerca di lavoro, catturata in pieno giorno."

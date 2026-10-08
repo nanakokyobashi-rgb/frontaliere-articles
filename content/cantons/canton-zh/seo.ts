@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A settembre il Canton Zurigo mantiene il 2,9% di disoccupazione: 25’695 iscritti ai RAV, 7’605 posti vacanti in agosto e aspettative aziendali positive.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-zurigo-rav-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Pendolari e lavoratori nel centro di Zurigo in una mattina di settembre"
@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Mappa interattiva sugli affitti a Zurigo: il confronto mostra il rincaro della pigione dopo un trasloco e chiarisce cauzione, disdetta e contestazione.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/affitti-zurigo-canoni-medi-e-diritto-di-locazione.webp`,
+        "url": `${BASE_URL}/images/blog/article-mappa-affitti-zurigo-trasloco.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Palazzi residenziali a Zurigo, tema del confronto tra affitti e traslochi"

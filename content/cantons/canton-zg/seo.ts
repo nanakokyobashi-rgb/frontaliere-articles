@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Dopo i focolai a Zurigo, Lucerna e Svitto, Zugo rafforza i controlli: ecco come riconoscere, bloccare e segnalare un coleottero sospetto in Svizzera.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/asilo-nido-e-custodia-bambini-canton-zugo-costi.webp`,
+        "url": `${BASE_URL}/images/blog/article-zug-rischio-coleottero-giapponese.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Rete di trappole per il coleottero giapponese nel Cantone di Zugo"

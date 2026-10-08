@@ -98999,7 +98999,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - 5 ottobre 2026: Parmelin incontra i vertici indiani - Svizzera e India firmano due accordi - TEPA: un anno dall'entrata in vigore con l'AELS",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/accordi-svizzera-ue-consiglio-federale.webp`,
+        "url": `${BASE_URL}/images/blog/article-svizzera-india-accordi-bilaterali.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Palazzo Federale a Berna, sede del governo svizzero"

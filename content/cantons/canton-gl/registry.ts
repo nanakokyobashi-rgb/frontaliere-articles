@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'revisione-fiscale-canton-glarona',
  category: 'fiscale',
  date: '2026-10-07T08:45:21.300Z',
- image: '/images/blog/asilo-nido-custodia-bambini-canton-glarona.webp',
+ image: '/images/blog/article-revisione-fiscale-canton-glarona.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GL'],

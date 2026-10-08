@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "disoccupazione-zurigo-rav-2026",
+      "section": "canton-zh"
+    },
+    {
+      "articleId": "revisione-fiscale-canton-glarona",
+      "section": "canton-gl"
+    },
+    {
+      "articleId": "argovia-disoccupazione-settembre",
+      "section": "canton-ag"
+    },
+    {
+      "articleId": "disoccupazione-vallese-fine-estate",
+      "section": "canton-vs"
+    },
+    {
+      "articleId": "disoccupazione-friburgo-settembre-2026",
+      "section": "canton-fr"
+    },
+    {
+      "articleId": "svizzera-india-accordi-bilaterali",
+      "section": "svizzera"
+    },
+    {
+      "articleId": "accordo-cure-oncologiche-ginevra",
+      "section": "canton-ge"
+    },
+    {
+      "articleId": "mappa-affitti-zurigo-trasloco",
+      "section": "canton-zh"
+    },
+    {
+      "articleId": "zug-rischio-coleottero-giapponese",
+      "section": "canton-zg"
+    },
+    {
+      "articleId": "riduzione-premi-argovia-2027",
+      "section": "canton-ag"
+    }
+  ]
+}
