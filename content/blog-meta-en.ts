@@ -12819,6 +12819,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.aperitivo-solidale-giubiasco.title': 'Solidarity toast at the Giubiasco Covered Market',
     'blog.article.aperitivo-solidale-giubiasco.excerpt': '## TL;DR - Kiwanis Club Bellinzona e Valli celebrates 40 years - Aperò In Sem takes place on Thursday, October 8 - The proceeds go entirely to Ares and L\'Ora',
     'blog.article.aperitivo-solidale-giubiasco.imageAlt': 'Solidarity aperitif with Ticino wines at Giubiasco Covered Market',
+    'blog.article.incanto-brusimpiano-regina-acqua.title': 'Enchantment in Brusimpiano: the festival’s “queen of the water”',
+    'blog.article.incanto-brusimpiano-regina-acqua.excerpt': 'October 21 at 10 at the SOMS Hall in Brusimpiano On stage “The Water Queen” with Gli Alcuni Andersen’s fairy tale is about water conservation Earth',
+    'blog.article.incanto-brusimpiano-regina-acqua.imageAlt': 'Children\'s theater performance «La regina dell’acqua» at Salone SOMS, Brusimpiano, featuring colorful costumes and water-themed set.',
 };
 
 export default blogMetaEn;

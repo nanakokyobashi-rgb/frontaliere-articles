@@ -43220,6 +43220,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'incanto-brusimpiano-regina-acqua',
+ category: 'novita',
+ date: '2026-10-08T16:20:12.652Z',
+ image: '/images/blog/article-incanto-brusimpiano-regina-acqua.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

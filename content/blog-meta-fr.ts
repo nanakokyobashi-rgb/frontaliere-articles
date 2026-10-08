@@ -12821,6 +12821,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.aperitivo-solidale-giubiasco.title': 'Brindisi solidaire au Marché couvert de Giubiasco',
     'blog.article.aperitivo-solidale-giubiasco.excerpt': '## En bref - Le Kiwanis Club Bellinzona e Valli fête ses 40 ans - Aperò In Sem a lieu jeudi 8 octobre - Le bénéfice est entièrement destiné à Ares et L\'Ora',
     'blog.article.aperitivo-solidale-giubiasco.imageAlt': 'Apéritif solidaire avec des vins tessinois au marché couvert de Giubiasco',
+    'blog.article.incanto-brusimpiano-regina-acqua.title': 'Enchantement à Brusimpiano : « La reine de l’eau » du festival',
+    'blog.article.incanto-brusimpiano-regina-acqua.excerpt': '21 octobre à 10 h au Salone SOMS de Brusimpiano Sur scène « La reine de l’eau » avec Gli Alcuni Le conte d’Andersen parle de l’économie de l’eau Terra',
+    'blog.article.incanto-brusimpiano-regina-acqua.imageAlt': 'Spectacle pour enfants «La regina dell’acqua» au Salone SOMS de Brusimpiano, avec costumes colorés et décor inspiré de l’eau.',
 };
 
 export default blogMetaFr;

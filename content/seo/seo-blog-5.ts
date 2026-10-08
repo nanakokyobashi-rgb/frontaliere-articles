@@ -103387,6 +103387,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incanto-brusimpiano-regina-acqua': {
+    title: 'Incanto a Brusimpiano: «La regina dell’acqua» del festival',
+    description: '21 ottobre alle 10 al Salone SOMS di Brusimpiano In scena «La regina dell\'acqua» con Gli Alcuni La fiaba di Andersen parla del risparmio dell\'acqua Terra',
+    keywords: 'frontalieri, ticino, svizzera, italia, incanto, brusimpiano, regina, dell',
+    ogTitle: 'Incanto a Brusimpiano: «La regina dell’acqua» del festival',
+    ogDescription: '21 ottobre alle 10 al Salone SOMS di Brusimpiano In scena «La regina dell\'acqua» con Gli Alcuni La fiaba di Andersen parla del risparmio dell\'acqua Terra',
+    canonicalPath: '/articoli-frontaliere/incanto-brusimpiano-regina-acqua/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incanto a Brusimpiano: «La regina dell’acqua» del festival",
+      "description": "21 ottobre alle 10 al Salone SOMS di Brusimpiano In scena «La regina dell'acqua» con Gli Alcuni La fiaba di Andersen parla del risparmio dell'acqua Terra",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incanto-brusimpiano-regina-acqua.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Spettacolo teatrale per bambini «La regina dell’acqua» al Salone SOMS di Brusimpiano, con costumi colorati e scenografia legata all’acqua."
+      },
+      "datePublished": "2026-10-08T16:20:12+00:00",
+      "dateModified": "2026-10-08T16:20:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incanto-brusimpiano-regina-acqua/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
