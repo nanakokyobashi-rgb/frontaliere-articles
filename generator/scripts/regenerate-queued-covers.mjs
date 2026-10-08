@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import '../../host/cantonSectionsBootstrap.mjs';
-import fs from 'node:fs';
+import fs, { realpathSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -541,7 +541,15 @@ async function main() {
   console.log(JSON.stringify(summary));
 }
 
-if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) {
+const invokedDirectly = (() => {
+  try {
+    return realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1] || '');
+  } catch {
+    return false;
+  }
+})();
+
+if (invokedDirectly) {
   main().catch((error) => {
     console.error(`❌ Queue drain failed: ${error.message || error}`);
     process.exit(1);
