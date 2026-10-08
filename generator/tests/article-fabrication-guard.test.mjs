@@ -298,10 +298,10 @@ function scanSwissInstitutionCandidates(entries) {
 // that every candidate is already confirmed as fabricated.
 const SWISS_INSTITUTION_OBSERVER_BASELINE = Object.freeze({
   filesScanned: 2641,
-  unlistedOfficeArticles: 265,
+  unlistedOfficeArticles: 98,
   unlistedSwissMinistryArticles: 70,
-  candidateArticles: 323,
-  overlap: 12,
+  candidateArticles: 164,
+  overlap: 4,
 });
 
 function localeFabricatedInstitutions(locale, text) {
