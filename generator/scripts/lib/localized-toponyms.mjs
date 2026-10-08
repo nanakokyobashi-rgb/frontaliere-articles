@@ -32,15 +32,6 @@ function termPattern(term) {
     .join('\\s+');
 }
 
-function slugTermPattern(term) {
-  const slug = localizedSlugForm(term);
-  return slug
-    .split('-')
-    .filter(Boolean)
-    .map(escapeRegExp)
-    .join('[-\\s]+');
-}
-
 // URL destinations are opaque content, including relative Markdown routes.
 // The generator may mention a localized slug in prose as `[link](/en/.../...)`;
 // that route is not a translated sentence and must neither trigger the gate nor
@@ -78,6 +69,10 @@ function localizedSlugForm(value) {
     .replace(/^-+|-+$/gu, '');
 }
 
+function slugTermPattern(term) {
+  return escapeRegExp(localizedSlugForm(term));
+}
+
 function issueKey(issue) {
   // A canton and its capital can legitimately share one name (LU, BE, GE,
   // ...). Report one offending token, while retaining the type that first
@@ -86,6 +81,7 @@ function issueKey(issue) {
 }
 
 const FORM_INDEX = new Map();
+const SLUG_FORM_INDEX = new Map();
 for (const entity of LOCALIZED_TOPONYMS) {
   for (const type of ENTITY_TYPES) {
     for (const locale of LOCALIZED_TOPONYM_LOCALES) {
@@ -94,6 +90,13 @@ for (const entity of LOCALIZED_TOPONYMS) {
         const descriptors = FORM_INDEX.get(key) || [];
         descriptors.push({ entity, type, locale, form });
         FORM_INDEX.set(key, descriptors);
+
+        const slugKey = localizedSlugForm(form);
+        if (slugKey) {
+          const slugDescriptors = SLUG_FORM_INDEX.get(slugKey) || [];
+          slugDescriptors.push({ entity, type, locale, form });
+          SLUG_FORM_INDEX.set(slugKey, slugDescriptors);
+        }
       }
     }
   }
@@ -108,9 +111,8 @@ const TOPONYM_PATTERN = new RegExp(
 );
 
 const TOPONYM_SLUG_PATTERN = new RegExp(
-  `(?<![\\p{L}\\p{N}])(?:${[...FORM_INDEX.keys()]
-    .map(slugTermPattern)
-    .filter(Boolean)
+  `(?<![\\p{L}\\p{N}])(?:${[...SLUG_FORM_INDEX.keys()]
+    .map(escapeRegExp)
     .sort((left, right) => right.length - left.length)
     .join('|')})(?![\\p{L}\\p{N}])`,
   'giu',
@@ -166,8 +168,8 @@ function localizedToponymHits(value, { protectNames = false, slug = false } = {}
     const start = match.index ?? 0;
     const end = start + match[0].length;
     if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) continue;
-    const indexKey = normalizeForm(slug ? match[0].replace(/-/gu, ' ') : match[0]);
-    const descriptors = FORM_INDEX.get(indexKey) || [];
+    const indexKey = slug ? localizedSlugForm(match[0]) : normalizeForm(match[0]);
+    const descriptors = (slug ? SLUG_FORM_INDEX : FORM_INDEX).get(indexKey) || [];
     const observedForm = slug ? localizedSlugForm(match[0]) : normalizeForm(match[0]);
     hits.push(...descriptors.map((descriptor) => ({ ...descriptor, observedForm })));
   }
@@ -286,9 +288,14 @@ export function findArticleLocalizedToponymMismatches(data) {
     const targetProjection = articleLocaleProjection(data, locale);
     const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
     const targetIssues = findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
-    const provisionalSlugs = new Set(
-      Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : [],
-    );
+    const provisionalSlugs = new Set([
+      ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
+      ...(Array.isArray(data?._slugI18nFallbacks)
+        ? data._slugI18nFallbacks
+          .map((record) => typeof record === 'string' ? record : record?.locale)
+          .filter(Boolean)
+        : []),
+    ]);
     if (targetProjection.slug && !provisionalSlugs.has(locale)) {
       targetIssues.push(...findLocalizedToponymMismatches({
         sourceText: source,

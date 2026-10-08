@@ -263,9 +263,15 @@ function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
   const targetDir = dirname(targetPath);
   const sourcePath = resolve(targetDir, '..', 'it', basename(targetPath));
   try {
+    const sourceProjection = articleProjectionText(sourcePath, articleId);
+    // The file still contains the previous FAQ at this point. It is not the
+    // candidate being admitted: only the candidate below must participate in
+    // the target-side translation gate.
+    const targetProjectionWithoutOldFaq = articleProjectionText(targetPath, articleId, { excludeFaq: true });
+    const candidateFaq = JSON.stringify(faqArray || []);
     assertLocalizedToponymPair({
-      sourceText: `${articleProjectionText(sourcePath, articleId)}\n${JSON.stringify(faqArray || [])}`,
-      targetText: `${articleProjectionText(targetPath, articleId, { excludeFaq: true })}\n${JSON.stringify(faqArray || [])}`,
+      sourceText: `${sourceProjection}\n${candidateFaq}`,
+      targetText: `${targetProjectionWithoutOldFaq}\n${candidateFaq}`,
       locale,
       context: `${articleId}/${locale} FAQ repair`,
     });

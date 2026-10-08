@@ -145,6 +145,24 @@ test('la riparazione deterministica non riscrive gli URL', () => {
   });
   assert.equal(multiwordSlug.text, 'basel-landschaft-road-closures');
   assert.equal(multiwordSlug.replacements, 1);
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Appenzello Interno',
+      targetText: 'appenzello-interno-road-closures',
+      locale: 'en',
+      slug: true,
+    }),
+    [{ code: 'AI', type: 'canton', locale: 'en', form: 'Appenzello Interno', expected: 'Appenzell Innerrhoden' }],
+  );
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Appenzello Interno',
+      targetText: 'appenzell-innerrhoden-road-closures',
+      locale: 'en',
+      slug: true,
+    }),
+    [],
+  );
 });
 
 test('ignora anche le route Markdown relative e le lascia intatte', () => {
@@ -182,6 +200,17 @@ test('la proiezione article-wide copre imageAlt, slug e SEO oltre al body', () =
       imageAlt: { it: 'Lucerna', en: 'Lucerne' },
       slugs: { it: 'lucerna-traffico', en: 'lucerna-traffic' },
       _slugsProvisionalFromIt: ['en'],
+    }),
+    [],
+  );
+  assert.deepEqual(
+    findArticleLocalizedToponymMismatches({
+      ...base,
+      imageAlt: { it: 'Lucerna', en: 'Lucerne' },
+      slugs: { it: 'lucerna-traffico', en: 'lucerna-traffic' },
+      _slugI18nFallbacks: [{
+        locale: 'en', slug: 'lucerna-traffic', reasonCode: 'missing-translated-title',
+      }],
     }),
     [],
   );
