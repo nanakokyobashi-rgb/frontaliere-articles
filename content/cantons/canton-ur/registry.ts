@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'uri-misure-energia-clima',
  category: 'novita',
  date: '2026-10-07T09:07:12.834Z',
- image: '/images/blog/svizzeri-chiedono-misure-clima.webp',
+ image: '/images/blog/article-uri-misure-energia-clima.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['UR'],

@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'rtvv-obvaldo-categorie-aziendali',
  category: 'fiscale',
  date: '2026-10-07T10:19:16.038Z',
- image: '/images/blog/asilo-nido-custodia-bambini-canton-obvaldo-costi.webp',
+ image: '/images/blog/article-rtvv-obvaldo-categorie-aziendali.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['OW'],

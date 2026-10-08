@@ -100641,7 +100641,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - Dal 10 ottobre al 15 novembre 2026 - 52 chilometri tra Locarno e Domodossola - Poco meno di due ore per tratta - Biglietto valido uno o due giorni",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/camelie-locarno-record-visitatori-2026-2.webp`,
+        "url": `${BASE_URL}/images/blog/article-treno-foliage-locarno-domodossola.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Il Treno del Foliage attraversa i paesaggi autunnali tra Locarno e Domodossola"
@@ -100675,7 +100675,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "## In breve - A Biasca arrestato un 17enne siriano dimorante - Ferito all’addome, il 21enne è fuori pericolo - L’accusa principale è di tentato omicidio",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/biasca-accoltellamento-21enne.webp`,
+        "url": `${BASE_URL}/images/blog/article-biasca-17enne-arrestato-accoltellamento.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Nastro della polizia e luci lampeggianti vicino alla stazione di Biasca al tramonto"

@@ -99033,7 +99033,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Oltre 35'000 casi analizzati tra il 2020 e il 2023 - 8'929 nuovi casi e 1'340 decessi medi annui - Il 76% emerge dallo screening opportunistico",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/allarme-aumento-affitti-svizzera.webp`,
+        "url": `${BASE_URL}/images/blog/article-cancro-prostata-assistenza-svizzera.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Medico e paziente che discutono i risultati del test PSA in uno studio medico svizzero con vista sulle Alpi"

@@ -26190,7 +26190,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'cancro-prostata-assistenza-svizzera',
     category: 'pratico',
     date: '2026-10-07T10:02:14.636Z',
-    image: '/images/blog/allarme-aumento-affitti-svizzera.webp',
+    image: '/images/blog/article-cancro-prostata-assistenza-svizzera.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

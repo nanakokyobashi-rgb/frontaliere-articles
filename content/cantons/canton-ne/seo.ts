@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - Il 28 settembre 2026 il Consiglio di Stato ha adottato il rapporto - Credito-quadro di 24 milioni di franchi su otto anni - Prosegue la politica",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/politica-agricola-2030-tagli-120-milioni.webp`,
+        "url": `${BASE_URL}/images/blog/article-neuchatel-rinnova-politica-abitativa-con-24-milioni.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine editoriale relativa a: Neuchâtel rinnova politica abitativa con 24 milioni"
@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "## In breve - 3.945 disoccupati in settembre 2026 - Tasso neocastellano stabile al 4,4% - Disoccupazione giovanile al 5,3% - Dati DECS aggiornati al 6 ottobre",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-stabile-4-4-neuchatel-settembre-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine editoriale relativa a: Disoccupazione stabile 4,4% Neuchâtel settembre 2026"
