@@ -20,6 +20,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwne
 import {
   UPLOAD_ORDER,
   aggregatePageDefects,
+  articleManifestPages,
   archiveReleasePages,
   articleReleasePages,
   articleReleaseSnapshot,
@@ -28,6 +29,7 @@ import {
   ensureRouteOwnerMeta,
   hubMissingIsFatal,
   inUploadOrder,
+  main,
   missingRenderedArticleIds,
   pageDefects,
   pageEntry,
@@ -40,11 +42,19 @@ import {
   publishedStatus,
   rendererPageEntry,
 } from '../../scripts/publish-section-pages.mjs';
+import {
+  fetchPageManifest,
+  mergePageManifests,
+  pageManifestErrors,
+  pageManifestFromPages,
+  pageManifestKey,
+  pageManifestUrl,
+} from '../../scripts/lib/section-page-manifest.mjs';
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
 import { bodyRegex, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
-import { cdnUrlFor, expectedSectionPages, headState, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
+import { cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
 import { corpusPath } from '../scripts/lib/corpus-paths.mjs';
@@ -78,6 +88,59 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   );
   assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
   assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
+  const manifestDeclaration = publisher.indexOf('const currentManifest =');
+  const publishCall = publisher.indexOf('summary.published = await publish(');
+  assert.ok(manifestDeclaration > publishCall, 'il manifest corrente si calcola solo dopo il publish verificato');
+  for (const match of publisher.matchAll(/\bcurrentManifest\b/g)) {
+    assert.ok(match.index >= manifestDeclaration, 'currentManifest non deve essere letto prima della dichiarazione');
+  }
+});
+
+test('publisher --publish costruisce il manifest solo dopo una publish riuscita', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-publish-'));
+  const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
+  const events = [];
+  const manifests = [];
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
+  try {
+    console.log = () => {};
+    console.error = () => {};
+    const code = await main(
+      ['--section', 'canton-ti', '--ids', '[]', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
+      {
+        parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
+        fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
+        publishedStatusImpl: async () => 'draft',
+        createRenderRootImpl: () => mkdtempSync(path.join(fixtureRoot, 'render-')),
+        renderSectionArticlePipelineImpl: async () => ({
+          entries: [],
+          hubResult: { pathsByLocale: { it: [], en: [], de: [], fr: [] } },
+          downloadedImageKeys: [],
+          imageFetchFailures: [],
+          imagePostcondition: {},
+          aggregatePagesAllowed: false,
+        }),
+        articleReleaseSnapshotImpl: () => [],
+        publishImpl: async () => {
+          events.push('publish');
+          return { failures: 0, uploaded: 0, deleted: 0, status: 'draft' };
+        },
+        publishPageManifestImpl: ({ manifest }) => {
+          events.push('manifest');
+          manifests.push(manifest);
+          return true;
+        },
+      },
+    );
+    assert.equal(code, 0);
+    assert.deepEqual(events, ['publish', 'manifest']);
+    assert.equal(manifests.length, 1);
+  } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
 });
 
 test('publisher R2 rifiuta gli article ID richiesti che la pipeline trattiene', () => {
@@ -122,6 +185,136 @@ test('publisher R2 article-only conserva tutta la release precedente', () => {
   assert.deepEqual(obsoleteReleasePages({ ...input, aggregatePagesAllowed: false }), []);
   assert.deepEqual(obsoleteReleasePages({ ...input, aggregatePagesAllowed: true }), [oldArticle, oldArchive]);
   assert.throws(() => obsoleteReleasePages(input), /aggregatePagesAllowed deve essere booleano/);
+});
+
+test('manifest edge: una release completa è validabile e un giro article-only conserva ciò che è online', () => {
+  const oldArticle = { ...pageEntry('canton-ti', 'articoli-ticino/gone/index.html', 'article'), id: 'gone' };
+  const oldLanding = pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing');
+  const currentArticle = { ...pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article'), id: 'new' };
+  const previous = pageManifestFromPages({ section: 'canton-ti', commit: 'old-commit', pages: [oldArticle, oldLanding] });
+  const current = pageManifestFromPages({ section: 'canton-ti', commit: 'new-commit', pages: [currentArticle] });
+  const merged = mergePageManifests(previous, current);
+  assert.deepEqual(merged.pages.article.map((page) => page.id), ['gone', 'new']);
+  assert.equal(merged.pages.landing.length, 1);
+  assert.deepEqual(merged.counts, { article: 2, archive: 0, hub: 0, landing: 1, total: 3 });
+  assert.deepEqual(pageManifestErrors(merged, { section: 'canton-ti' }), []);
+  assert.equal(pageManifestKey('canton-ti'), 'edge/sections/_page-manifests/canton-ti.json');
+  assert.equal(pageManifestUrl('canton-ti', 'https://cdn.test/'), 'https://cdn.test/edge/sections/_page-manifests/canton-ti.json');
+});
+
+test('manifest edge: uno slug nuovo resta fuori finche\' la sua pagina non e\' verificata', () => {
+  const previousArticle = { ...pageEntry('canton-ti', 'articoli-ticino/old/index.html', 'article'), id: 'kept' };
+  const currentArticle = { ...pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article'), id: 'kept' };
+  const previous = articleManifestPages({
+    section: 'canton-ti',
+    previousArticlePages: [previousArticle],
+    currentArticlePages: [currentArticle],
+    verifiedArticlePages: [],
+  });
+  assert.deepEqual(previous.map((page) => page.canonicalPath), ['/articoli-ticino/old/']);
+  assert.deepEqual(
+    articleManifestPages({
+      section: 'canton-ti',
+      previousArticlePages: [previousArticle],
+      currentArticlePages: [currentArticle],
+      verifiedArticlePages: [currentArticle],
+    }).map((page) => page.canonicalPath),
+    ['/articoli-ticino/new/'],
+  );
+  assert.deepEqual(obsoleteArticlePages([previousArticle], [currentArticle], []), []);
+  assert.deepEqual(obsoleteArticlePages([previousArticle], [currentArticle], [currentArticle]), [previousArticle]);
+
+  assert.deepEqual(
+    articleManifestPages({
+      section: 'canton-ti',
+      previousArticlePages: [previousArticle, currentArticle],
+      currentArticlePages: [currentArticle],
+      verifiedArticlePages: [],
+    }).map((page) => page.canonicalPath),
+    ['/articoli-ticino/new/'],
+    'una URL nuova già nell’inventario pubblicato autorizza il cleanup anche in un run parziale',
+  );
+  assert.deepEqual(
+    obsoleteArticlePages([previousArticle, currentArticle], [currentArticle], []),
+    [previousArticle],
+  );
+
+  const reusedByAnotherId = { ...pageEntry('canton-ti', 'articoli-ticino/old/index.html', 'article'), id: 'replacement' };
+  assert.deepEqual(obsoleteArticlePages([previousArticle], [reusedByAnotherId], []), []);
+  assert.deepEqual(
+    articleManifestPages({
+      section: 'canton-ti',
+      previousArticlePages: [previousArticle],
+      currentArticlePages: [reusedByAnotherId],
+      verifiedArticlePages: [],
+    }).map((page) => page.id),
+    ['kept'],
+  );
+});
+
+test('manifest edge: i counts dimostrano che il documento HTTP è completo', async () => {
+  const complete = pageManifestFromPages({
+    section: 'canton-ti',
+    commit: 'old-commit',
+    pages: [
+      { ...pageEntry('canton-ti', 'articoli-ticino/kept/index.html', 'article'), id: 'kept' },
+      pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing'),
+    ],
+  });
+  assert.deepEqual(complete.counts, { article: 1, archive: 0, hub: 0, landing: 1, total: 2 });
+  const truncated = { ...complete, pages: { ...complete.pages, article: [] } };
+  const result = await fetchPageManifest('https://cdn.test/manifest.json', {
+    section: 'canton-ti',
+    fetchImpl: async () => ({ status: 200, ok: true, json: async () => truncated }),
+  });
+  assert.equal(result.state, 'unknown');
+  assert.match(result.reason, /counts\.article/);
+});
+
+test('manifest edge: un fallimento lascia la cancellazione in coda al push successivo', () => {
+  const oldPage = { ...pageEntry('canton-ti', 'articoli-ticino/gone/index.html', 'article'), id: 'gone' };
+  const currentPage = { ...pageEntry('canton-ti', 'articoli-ticino/kept/index.html', 'article'), id: 'kept' };
+  const firstAttempt = obsoleteReleasePages({
+    previousArticlePages: [oldPage],
+    currentArticlePages: [currentPage],
+    previousArchivePages: [],
+    currentArchivePages: [],
+    aggregatePagesAllowed: true,
+  });
+  assert.deepEqual(firstAttempt.map((page) => page.id), ['gone']);
+  // La prima run può fallire dopo il calcolo: il manifest non viene scritto e
+  // il giro successivo rilegge la stessa lista pubblicata, non il parent del
+  // secondo push (che ormai non contiene più `gone`).
+  const secondAttempt = obsoleteReleasePages({
+    previousArticlePages: [oldPage],
+    currentArticlePages: [currentPage],
+    previousArchivePages: [],
+    currentArchivePages: [],
+    aggregatePagesAllowed: true,
+  });
+  assert.deepEqual(secondAttempt.map((page) => page.id), ['gone']);
+});
+
+test('manifest edge: lettura 404 e documento di un’altra sezione restano fail-closed', async () => {
+  const manifest = pageManifestFromPages({
+    section: 'canton-ti',
+    commit: 'old-commit',
+    pages: [pageEntry('canton-ti', 'articoli-ticino/index.html', 'landing')],
+  });
+  const ok = await fetchPageManifest('https://cdn.test/manifest.json', {
+    section: 'canton-ti',
+    fetchImpl: async () => ({ status: 200, ok: true, json: async () => manifest }),
+  });
+  assert.equal(ok.state, 'ok');
+  const wrong = await fetchPageManifest('https://cdn.test/manifest.json', {
+    section: 'canton-ti',
+    fetchImpl: async () => ({ status: 200, ok: true, json: async () => ({ ...manifest, section: 'canton-gr' }) }),
+  });
+  assert.equal(wrong.state, 'unknown');
+  const absent = await fetchPageManifest('https://cdn.test/manifest.json', {
+    fetchImpl: async () => ({ status: 404, ok: false }),
+  });
+  assert.equal(absent.state, 'absent');
 });
 
 test('publisher: argomenti', () => {
@@ -588,7 +781,7 @@ test('publisher: hub mancanti sono fatali sulla sola verita\' effettiva live', (
   assert.equal(hubMissingIsFatal({ declaredStatus: 'draft', effectiveStatus: 'live', publishing: true }), true);
   assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: null, publishing: true }), false);
   assert.equal(hubMissingIsFatal({ declaredStatus: 'live', effectiveStatus: null, publishing: false }), true);
-  assert.match(read('scripts/publish-section-pages.mjs'), /const effectiveStatus = publishing \? await publishedStatus\(section\) : null/);
+  assert.match(read('scripts/publish-section-pages.mjs'), /const effectiveStatus = publishing \? await publishedStatusImpl\(section\) : null/);
 });
 
 test('publisher: il meta di proprieta\' si aggiunge solo dove manca', () => {
@@ -775,6 +968,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/lib/cf-purge-variants.mjs',
     'scripts/lib/delete-cdn-file.sh',
     'scripts/lib/section-registry.mjs',
+    'scripts/lib/section-page-manifest.mjs',
     'scripts/publish-section-pages.mjs',
     'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
@@ -812,7 +1006,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(wf, /git diff --name-status "\$before" HEAD/);
-  assert.match(wf, /Fetch previous published revision/);
+  assert.match(wf, /Fetch fallback corpus revision for manifest migration/);
   assert.match(wf, /--previous-revision/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
   for (const p of [
@@ -837,6 +1031,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/lib/parse-positive-num.mjs',
     'scripts/lib/sanitize-control-chars.mjs',
     'scripts/lib/section-registry.mjs',
+    'scripts/lib/section-page-manifest.mjs',
     'scripts/lib/upload-cdn-file.sh',
     'generator/scripts/load-rc-env.mjs',
   ]) assert.ok(wf.includes(`      - '${p}'\n`), p);
@@ -949,9 +1144,34 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   const refresh = planSectionBackfill('canton-ti', [{ kind: 'section', path: '/articoli-ticino/fisco/', state: 'missing' }], dates, 3);
   assert.deepEqual([refresh.dispatch, refresh.selected, refresh.sectionMissing], [true, [], ['/articoli-ticino/fisco/']]);
   assert.equal(planSectionBackfill('canton-ti', [{ kind: 'section', path: '/x/', state: 'unknown' }], dates, 3).dispatch, false);
+  const orphan = planSectionBackfill('canton-ti', [], dates, 3, [{ id: 'gone', path: '/articoli-ticino/gone/', state: 'present' }]);
+  assert.deepEqual([orphan.dispatch, orphan.orphaned, orphan.orphanedIds], [true, ['/articoli-ticino/gone/'], ['gone']]);
+  assert.equal(orphan.selected.length, 0, 'una pagina ritirata non va rimessa in coda come articolo corrente');
 });
 
-function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, edgeCommit = commit, live = true, missing = new Set(), broken = new Set() }) {
+test('reconcile: il manifest individua una pagina articolo ritirata o con slug vecchio', () => {
+  const manifest = pageManifestFromPages({
+    section: 'canton-ti',
+    commit: 'old-commit',
+    pages: [
+      { ...pageEntry('canton-ti', 'articoli-ticino/gone-it/index.html', 'article'), id: 'gone' },
+      { ...pageEntry('canton-ti', 'articoli-ticino/old-it/index.html', 'article'), id: 'kept' },
+      { ...pageEntry('canton-ti', 'en/ticino-articles/kept-en/index.html', 'article'), id: 'kept' },
+    ],
+  });
+  assert.deepEqual(
+    orphanedArticleCandidates(CATALOG_TI, manifest, { kept: { it: 'new-it', en: 'kept-en' } }).map((page) => [page.id, page.path]),
+    [['gone', '/articoli-ticino/gone-it/'], ['kept', '/articoli-ticino/old-it/']],
+  );
+  assert.deepEqual(
+    orphanedArticleCandidates(CATALOG_TI, manifest, { gone: { it: 'gone-it' }, kept: { it: 'old-it', en: 'kept-en' } }, ['kept'])
+      .map((page) => page.id),
+    ['gone'],
+    'la decisione di ritiro usa il registro attivo, non una mappa slug eventualmente residua',
+  );
+});
+
+function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, edgeCommit = commit, live = true, missing = new Set(), broken = new Set(), pageManifest = null }) {
   const docs = {
     'manifest.json': { commit },
     'sections.json': { commit: sectionsCommit, sections: [CATALOG_TI, { id: 'canton-gr', paths: {} }] },
@@ -969,6 +1189,11 @@ function fakeFetch({ commit = 'abc1234', sectionsCommit = commit, edgeCommit = c
       return { status: missing.has(p) ? 404 : 200, ok: !missing.has(p) };
     }
     if (clean.endsWith('/edge/sections/registry.json')) return { ok: true, status: 200, json: async () => edgeRegistry };
+    if (clean.endsWith('/edge/sections/_page-manifests/canton-ti.json')) {
+      return pageManifest
+        ? { ok: true, status: 200, json: async () => pageManifest }
+        : { ok: false, status: 404 };
+    }
     if (clean.endsWith('/sitemap-articles-canton-ti.xml')) return { ok: true, status: 200, text: async () => SITEMAP_TI };
     const name = clean.split('/').pop();
     return { ok: true, status: 200, json: async () => docs[name], text: async () => '' };
@@ -994,6 +1219,20 @@ test('reconcile: solo le sezioni live, solo i 404, e mai su una superficie a met
   assert.deepEqual([ti.selected, ti.leftover], [['b'], ['a']]);
   assert.deepEqual(ti.unknown, ['/de/tessin-artikel/a-de/']);
   assert.deepEqual(ti.sectionMissing, []);
+});
+
+test('reconcile: una pagina articolo presente nel manifest ma ritirata entra nel cleanup', async () => {
+  const pageManifest = pageManifestFromPages({
+    section: 'canton-ti',
+    commit: 'old-commit',
+    pages: [{ ...pageEntry('canton-ti', 'articoli-ticino/ritirato/index.html', 'article'), id: 'ritirato' }],
+  });
+  const report = await reconcile({ apiBase: 'https://api.test', fetchImpl: fakeFetch({ pageManifest }).impl });
+  const [ti] = report.sections;
+  assert.equal(ti.pageManifest, 'ok');
+  assert.deepEqual(ti.orphaned, ['/articoli-ticino/ritirato/']);
+  assert.deepEqual(ti.orphanedIds, ['ritirato']);
+  assert.equal(ti.dispatch, true);
 });
 
 test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta', () => {
