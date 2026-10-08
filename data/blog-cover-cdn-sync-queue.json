@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita.webp",
-      "sha256": "57c953ca879125adc75027d09c2945eda07c8804f8a73d5901fbdbe62ecc3049"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ia-e-semiconduttori-trainano-commercio-omc-rivede-crescita-480w.webp",
-      "sha256": "f18947b325281c159ff5777b9b2c5f079c31f39121415434fa8296cbb2868ea1"
-    }
-  ]
+  "items": []
 }
