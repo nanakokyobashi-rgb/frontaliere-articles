@@ -143,6 +143,21 @@ test('la pertinenza della cover usa il testo finale e una soglia condivisa', () 
   assert.equal(CATALOG_FALLBACK_MIN_SHARED_WORDS, 2);
 });
 
+test('la pertinenza confronta token esatti e ignora category e imagePrompt boilerplate', () => {
+  const data = article('article-casa-tassa', 'Casa tassa');
+  data.category = 'fiscale';
+  data.imagePrompt = 'Scena editoriale fiscale';
+
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/casale-tassazione.webp'),
+    0,
+  );
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/fiscale-editoriale.webp'),
+    0,
+  );
+});
+
 test('when the catalog is empty, the governed static cover still publishes and deduplicates the queue', () => {
   const root = tempRoot();
   try {

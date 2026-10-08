@@ -1379,7 +1379,9 @@ export const CONDITIONS = [
     evaluate(m) {
       const health = m.runs?.available === true ? m.runs.coverHealth : null;
       const queue = m.coverQueue;
-      const queueAvailable = queue?.available === true && Number.isFinite(queue.count);
+      const queueAvailable = queue?.available === true
+        && Number.isFinite(queue.count)
+        && (queue.oldestAgeHours === null || Number.isFinite(queue.oldestAgeHours));
       const healthAvailable = health
         && Number.isFinite(health.observations)
         && Number.isFinite(health.fallbacks)
@@ -1387,30 +1389,44 @@ export const CONDITIONS = [
         && Number.isFinite(health.latestConsecutiveFallbacks)
         && Number.isFinite(health.fallbackRate);
       const fallbackEvidenceAvailable = Boolean(healthAvailable && health.observations >= 1);
-      if (!queueAvailable) {
-        return { available: false };
-      }
       const fallbackSignal = fallbackEvidenceAvailable
         && health.latestConsecutiveFallbacks >= COVER_FALLBACK_CONSECUTIVE_THRESHOLD;
-      const queueSignal = Number.isFinite(queue.oldestAgeHours)
+      const queueSignal = queueAvailable && Number.isFinite(queue.oldestAgeHours)
         && queue.oldestAgeHours >= COVER_QUEUE_MAX_AGE_HOURS;
-      // An old queue item is independently actionable even when the recent run
-      // logs are unavailable. Conversely, no cover marker is not evidence that
-      // the provider is healthy, so the log side remains fail-closed.
-      if (!fallbackEvidenceAvailable && !queueSignal) {
-        return { available: false, reason: 'cover outcomes are not measurable and the queue is below age threshold' };
+      // The two signals are independent: an old queue item is actionable even
+      // when recent run logs are unavailable, and a measured fallback streak
+      // remains actionable even when the queue JSON cannot be read. When
+      // neither signal fires, an unavailable side stays fail-closed so an
+      // existing alert is never closed on partial evidence.
+      if (!fallbackSignal && !queueSignal) {
+        if (!fallbackEvidenceAvailable || !queueAvailable) {
+          return {
+            available: false,
+            reason: !queueAvailable
+              ? 'image regeneration queue is not measurable'
+              : 'cover outcomes are not measurable and the queue is below age threshold',
+          };
+        }
+        return { firing: false };
       }
-      if (!fallbackSignal && !queueSignal) return { firing: false };
 
       const reasons = Object.entries(health?.reasons || {})
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5)
         .map(([reason, count]) => `${reason} (${count})`)
         .join(', ') || 'nessun motivo registrato';
-      const statuses = Object.entries(queue.statuses || {})
+      const statuses = Object.entries(queue?.statuses || {})
         .sort(([a], [b]) => a.localeCompare(b))
         .map(([status, count]) => `${status}=${count}`)
         .join(', ') || 'vuota';
+      const queueLines = queueAvailable
+        ? [
+          `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
+          `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${Number.isFinite(queue.oldestAgeHours) ? `${queue.oldestAgeHours.toFixed(1)}h` : '—'} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
+        ]
+        : [
+          '- Coda rigenerazione: **non misurata** (JSON illeggibile o `requestedAt` non valido); questo segnale resta sconosciuto.',
+        ];
       return {
         firing: true,
         body: [
@@ -1422,8 +1438,7 @@ export const CONDITIONS = [
           fallbackEvidenceAvailable
             ? `- Fallback consecutivi finali: **${health.latestConsecutiveFallbacks}** (soglia ${COVER_FALLBACK_CONSECUTIVE_THRESHOLD}, cioè oltre tre).`
             : `- Fallback consecutivi finali: **non misurati** (soglia ${COVER_FALLBACK_CONSECUTIVE_THRESHOLD}).`,
-          `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
-          `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${queue.oldestAgeHours === null ? '—' : `${queue.oldestAgeHours.toFixed(1)}h`} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
+          ...queueLines,
           `- Motivi più frequenti dei fallback: ${reasons}.`,
           '',
           '## Suggested action',

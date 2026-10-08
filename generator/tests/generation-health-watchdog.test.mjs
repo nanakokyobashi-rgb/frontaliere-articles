@@ -926,6 +926,24 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     assert.match(v.body, /article-cover-fallback\.mjs/);
   });
 
+  test("cover-fallback-health: lo streak apre anche con la coda non misurabile", () => {
+    const m = healthy();
+    m.runs.coverHealth = {
+      observations: 4,
+      fallbacks: 4,
+      generated: 0,
+      fallbackRate: 1,
+      latestConsecutiveFallbacks: 4,
+      maxConsecutiveFallbacks: 4,
+      reasons: { 'provider-timeout': 4 },
+    };
+    m.coverQueue = { available: false, reason: 'invalid requestedAt' };
+    const v = verdictFor(m, 'cover-fallback-health');
+    assert.equal(v.firing, true);
+    assert.match(v.body, /fallback \*\*4\*\*/);
+    assert.match(v.body, /Coda rigenerazione: \*\*non misurata\*\*/);
+  });
+
   test("cover-fallback-health: una coda vecchia di sei ore e mezza apre l'allarme", () => {
     const m = healthy();
     m.coverQueue = {

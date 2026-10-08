@@ -3,30 +3,31 @@ import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './blog-image-registry
 
 export const CATALOG_FALLBACK_MIN_SHARED_WORDS = 2;
 
+function searchTokens(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-zà-ÿ0-9]+/g, ' ')
+    .split(/\s+/)
+    .filter((word) => word.length >= 4);
+}
+
 function articleSearchWords(data) {
   const searchableText = [
     data?.id || '',
-    data?.category || '',
-    data?.imagePrompt || '',
     data?.content?.it?.title || data?.content?.title || '',
     data?.content?.it?.excerpt || data?.content?.excerpt || '',
   ].join(' ').toLowerCase();
-  return new Set(
-    searchableText
-      .replace(/[^a-zà-ÿ0-9\s-]/g, ' ')
-      .split(/[\s-]+/)
-      .filter((word) => word.length >= 4),
-  );
+  return new Set(searchTokens(searchableText));
 }
 
 export function catalogFallbackSharedWordCount(data, imagePath) {
-  const filename = String(imagePath || '')
-    .replace(/^.*\/images\/blog\//, '')
-    .replace(/\.webp$/i, '')
-    .toLowerCase();
-  if (!filename) return 0;
+  const basename = String(imagePath || '')
+    .replace(/^.*\//, '')
+    .replace(/\.[^.]+$/, '');
+  if (!basename) return 0;
   const articleWords = articleSearchWords(data);
-  return [...articleWords].filter((word) => filename.includes(word)).length;
+  const filenameWords = new Set(searchTokens(basename));
+  return [...articleWords].filter((word) => filenameWords.has(word)).length;
 }
 
 function compactReason(value) {
