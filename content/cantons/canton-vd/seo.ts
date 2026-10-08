@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Gran Consiglio di Vaud approva la mozione per ripristinare la revisione 2024 dello scudo fiscale. La sinistra annuncia il referendum. Scopri tutti",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/acquisire-casa-sciaffusa-mutuo-fiscale.webp`,
+        "url": `${BASE_URL}/images/blog/article-vaud-revision-bouclier-fiscal-2024.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Il Gran Consiglio del Canton Vaud a Losanna, sede delle decisioni sul bouclier fiscal."

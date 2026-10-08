@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A Frauenfeld il Baugesuch per Juchstrasse 22, 22a e 22b è consultabile al Bankplatz 3 dal 7 al 26 ottobre 2026. Opposizioni scritte motivate allo Stadtrat.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/calcolatore-salariale-edilizia-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-baugesuch-juchstrasse-frauenfeld.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Edificio commerciale e strada urbana a Frauenfeld, tema di una domanda edilizia pubblica"
@@ -55,7 +55,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "La pagina di Spital Thurgau AG raccoglie il rapporto 2025 di thurmed, il rapporto di sostenibilità e le statistiche 2021-2025: ecco la struttura dell'archivio.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/aiuti-malattie-rare-2025.webp`,
+        "url": `${BASE_URL}/images/blog/article-rapporti-thurmed-turgovia.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Edificio ospedaliero nel Canton Turgovia per i rapporti thurmed e Spital Thurgau AG"

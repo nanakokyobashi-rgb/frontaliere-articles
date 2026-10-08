@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'vaud-revision-bouclier-fiscal-2024',
  category: 'fiscale',
  date: '2026-10-07T10:47:31.180Z',
- image: '/images/blog/acquisire-casa-sciaffusa-mutuo-fiscale.webp',
+ image: '/images/blog/article-vaud-revision-bouclier-fiscal-2024.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VD'],

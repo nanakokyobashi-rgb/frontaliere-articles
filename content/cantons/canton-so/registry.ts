@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'soletta-disoccupazione-settembre',
  category: 'novita',
  date: '2026-10-07T10:37:25.681Z',
- image: '/images/blog/disoccupazione-settembre-ticino-2026.webp',
+ image: '/images/blog/article-soletta-disoccupazione-settembre.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SO'],

@@ -42840,7 +42840,7 @@ const RAW_ARTICLES = [
  id: 'clan-nazarbayev-ceresio',
  category: 'novita',
  date: '2026-10-07T04:58:11.502Z',
- image: '/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp',
+ image: '/images/blog/article-clan-nazarbayev-ceresio.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

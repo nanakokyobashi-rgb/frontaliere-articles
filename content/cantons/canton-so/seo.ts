@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A settembre 2026 il Canton Soletta registra 4'551 disoccupati, 46 in meno sul mese precedente: il tasso scende dal 3,1% al 3,0% e il calo riguarda gli under 25.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-soletta-disoccupazione-settembre.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Persone davanti a un ufficio pubblico per il lavoro nel Canton Soletta"

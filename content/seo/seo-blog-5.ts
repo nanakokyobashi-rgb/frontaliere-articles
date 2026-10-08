@@ -102003,7 +102003,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "L'inchiesta sul commercio di materie prime racconta l'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno nel racconto.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/pronto-consulto-mendrisiotto-basso-ceresio.webp`,
+        "url": `${BASE_URL}/images/blog/article-clan-nazarbayev-ceresio.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Ville sul Ceresio nel racconto sul clan Nazarbayev"
