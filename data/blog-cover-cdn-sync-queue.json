@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-como-bocciato-piano-scuole.webp",
+      "sha256": "7aa687ac83ee9f4d4cf815758c53eb60367f021c100b13eb45f4ddc41866363a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-como-bocciato-piano-scuole-480w.webp",
+      "sha256": "042b39ef41a8c44a1e8b05179d8b40ff8f0f12bd7e1e98a8e8f13f71144a8fc6"
+    }
+  ]
 }
