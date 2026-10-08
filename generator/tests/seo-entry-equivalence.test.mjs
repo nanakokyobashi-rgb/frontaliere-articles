@@ -3,6 +3,13 @@
  * byte for byte for a fixed sample of recent frontaliere entries. Recovery is
  * allowed to derive missing model fields, but it must not create a second
  * serialized dialect for entries the normal writer already knows how to emit.
+ *
+ * The sample holds entries of the article writer only. The daily edition
+ * (`bollettino-frontaliere-YYYY-MM-DD`) is written by its own deterministic
+ * producer, with its own image block and a cover that has no registry record:
+ * each edition sits among the newest twenty entries for 14 to 47 hours
+ * (measured on the six editions of 2026-10-01..06), so sampling it would keep
+ * this gate red for a reason that is not the shared builder.
  */
 import '../../host/cantonSectionsBootstrap.mjs';
 import test from 'node:test';
@@ -23,6 +30,7 @@ import {
 import { metaFieldRegex, unescapeTsValue } from '../scripts/lib/meta-field-regex.mjs';
 import { tsStringEscapesWithNewlineAs, unescapeTsString } from '../scripts/lib/unescape-ts-string.mjs';
 import { buildSeoEntry } from '../scripts/lib/seo-entry-builder.mjs';
+import { DAILY_EDITION_ID_RE } from '../scripts/lib/daily-brief-content.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SEO_FILE = 'content/seo/seo-blog-5.ts';
@@ -129,7 +137,9 @@ test('le voci recenti del main sono byte-identiche al builder condiviso', () => 
       datePublished: seoSource.slice(match.lineStart, match.closeIdx + 1)
         .match(/"datePublished"\s*:\s*"([^"]+)"/)?.[1],
     }))
-    .filter(({ match, datePublished }) => registry.has(match.id) && Number.isFinite(Date.parse(datePublished)))
+    .filter(({ match, datePublished }) => registry.has(match.id)
+      && !DAILY_EDITION_ID_RE.test(match.id)
+      && Number.isFinite(Date.parse(datePublished)))
     .sort((left, right) => Date.parse(right.datePublished) - Date.parse(left.datePublished))
     .slice(0, SAMPLE_SIZE)
     .map(({ match }) => completeEntry(seoSource, match));
