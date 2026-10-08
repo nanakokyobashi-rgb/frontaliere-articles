@@ -13,7 +13,7 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.luterbach-a5-rampe-notte.excerpt': 'At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.',
     'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Luterbach interchange on the A5 during night works and ramp closures',
     'blog.article.soletta-progetti-trasporto-governo.title': 'Solothurn: Government calls for corrections to transport projects',
-    'blog.article.soletta-progetti-trasporto-governo.excerpt': '## TL;DR - Solothurn supports «Verkehr ’45» and calls for corrections. - No to the discontinuation of Dornach Apfelsee. - N18: binding planning steps',
+    'blog.article.soletta-progetti-trasporto-governo.excerpt': '',
     'blog.article.soletta-progetti-trasporto-governo.imageAlt': 'View of Olten train station, with modern trains and passengers, symbolizing transport infrastructure in Canton Solothurn.',
 };
 
