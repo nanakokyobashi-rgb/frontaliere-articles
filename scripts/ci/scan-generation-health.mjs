@@ -170,6 +170,7 @@ import { fileURLToPath } from 'node:url';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
 import { readImageRegenerationQueue } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
+import { SECRET_PATTERNS } from './scan-hardcoded-secrets.mjs';
 import { topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 
 const execFileAsync = promisify(execFile);
@@ -714,19 +715,10 @@ const MODEL_TOUCHED_RES = [
 const EVERGREEN_SATURATED_RE = /Tutte le keyword evergreen risultano già coperte/;
 const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
 const COVER_EVENT_RE = /\[cover\]\s+article=(\S+)\s+source=(\S+)\s+reason=([^\r\n]*)/g;
-const COVER_SECRET_RES = [
-  /AIza[0-9A-Za-z_-]{10,}/g,
-  /ghp_[0-9A-Za-z]{20,}/g,
-  /github_pat_[0-9A-Za-z_]{20,}/g,
-  /GOCSPX-[0-9A-Za-z_-]{10,}/g,
-  /sk-ant-[0-9A-Za-z_-]{10,}/g,
-  /xox[baprs]-[0-9A-Za-z-]{10,}/g,
-  /AKIA[0-9A-Z]{12,}/g,
-];
 
 function safeCoverReason(value) {
   let reason = String(value || 'unknown').replace(/\s+/g, ' ').trim();
-  for (const re of COVER_SECRET_RES) reason = reason.replace(re, '[redacted]');
+  for (const { re } of SECRET_PATTERNS) reason = reason.replace(new RegExp(re), '[redacted]');
   return reason.slice(0, 180) || 'unknown';
 }
 

@@ -249,6 +249,15 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
     assert.deepEqual(parseRunLog(LOG_COVER_OUTCOMES).coverOutcomes, expected);
   });
 
+  test('redige i secret dai motivi della copertina prima di inserirli nell issue', () => {
+    const secret = `${'AIza'}${'A'.repeat(35)}`;
+    const [event] = parseCoverOutcomes(
+      `[cover] article=secret-cover source=static reason=provider-response ${secret}`,
+    );
+    assert.equal(event.reason.includes(secret), false);
+    assert.match(event.reason, /\[redacted\]/);
+  });
+
   test('legge sezione, gate svuotato e pool evergreen saturo da una run svizzera reale', () => {
     const r = parseRunLog(LOG_SVIZZERA_EMPTIED);
     assert.equal(r.section, 'svizzera');
