@@ -192,6 +192,7 @@ import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.m
 import {
   findArticleLocalizedToponymMismatches,
   localizedToponymInstruction,
+  normalizeLocalizedToponymText,
 } from './lib/localized-toponyms.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/it-text-similarity.mjs';
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
@@ -15045,20 +15046,20 @@ function decodeLocaleContentEntities(data, locale) {
     // in `meta-<locale>.json` esattamente come l'excerpt. Un `&egrave;` non
     // decodificato qui arriverebbe letterale in una SERP.
     for (const field of ['title', 'excerpt', ...META_SEO_FIELDS, ...bodyFields]) {
-      if (typeof c[field] === 'string') c[field] = decodeHtmlEntities(c[field]);
+      if (typeof c[field] === 'string') c[field] = normalizeLocalizedToponymText(c[field]);
     }
     if (Array.isArray(c.faq)) {
       c.faq = c.faq.map((item) => (item && typeof item === 'object'
         ? {
             ...item,
-            q: typeof item.q === 'string' ? decodeHtmlEntities(item.q) : item.q,
-            a: typeof item.a === 'string' ? decodeHtmlEntities(item.a) : item.a,
+            q: typeof item.q === 'string' ? normalizeLocalizedToponymText(item.q) : item.q,
+            a: typeof item.a === 'string' ? normalizeLocalizedToponymText(item.a) : item.a,
           }
         : item));
     }
   }
   const alt = data.imageAlt?.[locale];
-  if (typeof alt === 'string') data.imageAlt[locale] = decodeHtmlEntities(alt);
+  if (typeof alt === 'string') data.imageAlt[locale] = normalizeLocalizedToponymText(alt);
 }
 
 function decodeArticleEntities(data) {
@@ -15132,7 +15133,7 @@ const SEO_ENTITY_FIELDS = ['title', 'description', 'keywords', 'ogTitle', 'ogDes
 function decodeSeoEntities(data) {
   if (!data.seo || typeof data.seo !== 'object') return;
   for (const field of SEO_ENTITY_FIELDS) {
-    if (typeof data.seo[field] === 'string') data.seo[field] = decodeHtmlEntities(data.seo[field]);
+    if (typeof data.seo[field] === 'string') data.seo[field] = normalizeLocalizedToponymText(data.seo[field]);
   }
 }
 
@@ -19400,6 +19401,9 @@ export async function registerArticleFiles(data, opts = {}) {
   // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
+  // Normalize before metadata and slug derivation: the slug must use the same
+  // decoded title that writeSectionLocale() publishes.
+  decodeArticleEntities(data);
   // Secondary producers enter this shared writer directly, so they need the
   // same pre-write specificity/canton gate as the primary AI path.
   assertGeneratedArticleQuality(data, {
@@ -19425,7 +19429,6 @@ export async function registerArticleFiles(data, opts = {}) {
   // flusso primario. Il controllo arriva dopo la derivazione definitiva degli
   // slug, così copre anche l'identita' pubblicata senza rifiutare un valore
   // provvisorio ancora non sanitizzato.
-  decodeArticleEntities(data);
   assertArticlePassesFactualityGates(data);
   // Il tipo dell'articolo nel registry: esplicito del produttore, altrimenti
   // dalla stessa dichiarazione che decide la sitemap news (`skipNews`). Prima

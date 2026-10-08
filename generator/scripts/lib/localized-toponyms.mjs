@@ -22,9 +22,48 @@ export const LOCALIZED_TOPONYMS = Object.freeze(
 const LOCALE_SET = new Set(LOCALIZED_TOPONYM_LOCALES);
 const ENTITY_TYPES = Object.freeze(['canton', 'capital']);
 
-/** Keep detection and historical repair on the same text the writer publishes. */
+const ADDITIONAL_HTML_ENTITIES = Object.freeze({
+  '&Aacute;': 'Á', '&aacute;': 'á',
+  '&Acirc;': 'Â', '&acirc;': 'â',
+  '&Agrave;': 'À', '&agrave;': 'à',
+  '&Auml;': 'Ä', '&auml;': 'ä',
+  '&Ccedil;': 'Ç', '&ccedil;': 'ç',
+  '&Eacute;': 'É', '&eacute;': 'é',
+  '&Egrave;': 'È', '&egrave;': 'è',
+  '&Ecirc;': 'Ê', '&ecirc;': 'ê',
+  '&Euml;': 'Ë', '&euml;': 'ë',
+  '&Iacute;': 'Í', '&iacute;': 'í',
+  '&Icirc;': 'Î', '&icirc;': 'î',
+  '&Iuml;': 'Ï', '&iuml;': 'ï',
+  '&Ntilde;': 'Ñ', '&ntilde;': 'ñ',
+  '&Oacute;': 'Ó', '&oacute;': 'ó',
+  '&Ocirc;': 'Ô', '&ocirc;': 'ô',
+  '&Ouml;': 'Ö', '&ouml;': 'ö',
+  '&Uacute;': 'Ú', '&uacute;': 'ú',
+  '&Ucirc;': 'Û', '&ucirc;': 'û',
+  '&Uuml;': 'Ü', '&uuml;': 'ü',
+  '&Yacute;': 'Ý', '&yacute;': 'ý',
+  '&Yuml;': 'Ÿ', '&yuml;': 'ÿ',
+  '&szlig;': 'ß',
+});
+const ADDITIONAL_HTML_ENTITY_PATTERN = new RegExp(
+  Object.keys(ADDITIONAL_HTML_ENTITIES)
+    .map((entity) => escapeRegExp(entity))
+    .join('|'),
+  'g',
+);
+const NUMERIC_HTML_ENTITY_PATTERN = /&#(?:x([0-9a-f]+)|([0-9]+));/giu;
+
+/** Keep detection, writing and historical repair on the same normalized text. */
 export function normalizeLocalizedToponymText(value) {
-  return decodeHtmlEntities(String(value ?? ''));
+  return decodeHtmlEntities(String(value ?? ''))
+    .replace(ADDITIONAL_HTML_ENTITY_PATTERN, (entity) => ADDITIONAL_HTML_ENTITIES[entity] ?? entity)
+    .replace(NUMERIC_HTML_ENTITY_PATTERN, (_entity, hexadecimal, decimal) => {
+      const codePoint = Number.parseInt(hexadecimal || decimal, hexadecimal ? 16 : 10);
+      return Number.isSafeInteger(codePoint) && codePoint >= 0 && codePoint <= 0x10ffff
+        ? String.fromCodePoint(codePoint)
+        : _entity;
+    });
 }
 
 function escapeRegExp(value) {

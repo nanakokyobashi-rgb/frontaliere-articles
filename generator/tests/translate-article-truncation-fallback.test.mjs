@@ -38,6 +38,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { normalizeLocalizedToponymText } from '../scripts/lib/localized-toponyms.mjs';
 import { buildSectionFeeds, RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
 import { escapeForSingleQuoteTS, META_SEO_FIELDS } from '../scripts/lib/article-meta-block.mjs';
 import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
@@ -958,7 +959,7 @@ async function runPostTranslationToBodyFiles(data, url) {
   const fn = new AsyncFunction(
     'data', 'url', 'pageContent', 'isBodyTranslationPending', 'console',
     'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
-    'decodeHtmlEntities', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
+    'decodeHtmlEntities', 'normalizeLocalizedToponymText', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
     'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries', 'sourceCopyMode', 'repairGeneratedArticleSourceCopy', 'appendSourceCitation',
     `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n${SOURCE_COPY_INPUT_SRC}\n`
     + `${STEP_3C_SRC}\nvalidateAndEnforceCTA(data);\nenforceStrongInternalLinks(data);\n${STEP_3E_SRC}\n`
@@ -968,7 +969,7 @@ async function runPostTranslationToBodyFiles(data, url) {
   return fn(
     data, url, '', isBodyTranslationPending, { error: () => {}, warn: () => {} },
     () => '', () => cta, ['calcolatore'], ['calculator'], ['rechner'], ['calculateur'],
-    decodeHtmlEntities, META_SEO_FIELDS, escapeForSingleQuoteTS, MAX_BODY_KEYS,
+    decodeHtmlEntities, normalizeLocalizedToponymText, META_SEO_FIELDS, escapeForSingleQuoteTS, MAX_BODY_KEYS,
     evaluateSourceCopy, logSourceCopyVerdict, SOURCE_COPY_OVERLAP_THRESHOLD, SourceCopyError, 0, 'warn',
     async (article) => ({
       article,

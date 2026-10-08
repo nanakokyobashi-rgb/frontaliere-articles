@@ -380,11 +380,13 @@ test('il gate di generazione importa e invoca il controllo prima della scrittura
     'le entità HTML devono essere decodificate prima del gate finale');
   const registerStart = source.indexOf('export async function registerArticleFiles');
   const registerSource = source.slice(registerStart);
+  const decodePosition = registerSource.indexOf('decodeArticleEntities(data);');
   const slugPosition = registerSource.indexOf('const slugs = deriveAndSanitizeArticleSlugs(data);');
   const gatePosition = registerSource.indexOf('assertArticlePassesFactualityGates(data);');
   const lockPosition = registerSource.indexOf('beginRegisterLock(data.id)');
-  assert.ok(slugPosition >= 0 && gatePosition > slugPosition && lockPosition > gatePosition,
-    'il gate deve seguire gli slug definitivi e precedere il lock di registrazione');
+  assert.ok(decodePosition >= 0 && slugPosition > decodePosition && gatePosition > slugPosition
+    && lockPosition > gatePosition,
+  'le entità HTML vanno decodificate prima degli slug, poi il gate precede il lock');
   assert.match(source, /data\.imageAlt/);
 
   const retranslate = readFileSync(path.join(ROOT, 'generator/scripts/retranslate-blocking-bodies.mjs'), 'utf8');
