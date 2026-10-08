@@ -270,6 +270,27 @@ test('la recovery detiene il lock coda mentre registra le mutazioni della transa
     seoReleaseAt > -1 && seoReleaseAt < registrationReleaseAt,
     'il marker SEO deve essere rimosso prima del lock di sezione condiviso',
   );
+
+  const catchPath = source.slice(source.indexOf('    } catch (error)'), source.indexOf('\n  });\n\n  console.log'));
+  const catchSeoReleaseAt = catchPath.indexOf('endSeoBackfillLock(ROOT);');
+  const catchRegistrationReleaseAt = catchPath.indexOf("endRegisterLock(ROOT, 'frontaliere');");
+  assert.ok(
+    catchSeoReleaseAt > -1 && catchSeoReleaseAt < catchRegistrationReleaseAt,
+    'anche il rollback deve conservare il lock di sezione fino alla rimozione del marker SEO',
+  );
+});
+
+test('la recovery legge e valida la provenienza solo dopo i lock condivisi', () => {
+  const source = fs.readFileSync(
+    new URL('../scripts/recover-seo-orphans.mjs', import.meta.url),
+    'utf8',
+  );
+  const queueStart = source.indexOf('const queue = withImageRegenerationQueueLock');
+  const registrationLock = source.indexOf('beginRegisterLock(ROOT, `seo-orphan-recovery:${ids[0]}`', queueStart);
+  const entriesBuild = source.indexOf('const entries = buildEntries(ids);', registrationLock);
+  assert.ok(queueStart > -1 && registrationLock > queueStart && entriesBuild > registrationLock);
+  assert.doesNotMatch(source, /credits\.get\(registryEntry\.image\)/);
+  assert.match(source, /imageRecordForPath\(ROOT, registryEntry\.image, \{ strict: true \}\)/);
 });
 
 test('mergeQueueWithSnapshot mette le voci nuove prima dell\'ultima che c\'era', () => {

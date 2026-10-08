@@ -16,7 +16,6 @@ import { fileURLToPath } from 'node:url';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { findSeoEntryMatches, removeSeoEntriesFromSource } from '../../engine/shared/seo-entry.mjs';
-import { corpusCreditReader } from '../../scripts/lib/image-credit-records.mjs';
 import { unescapeTsString, tsStringEscapesWithNewlineAs } from './lib/unescape-ts-string.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './lib/blog-image-registry.mjs';
@@ -139,19 +138,16 @@ function parseIds(file) {
   return ids;
 }
 
-function imageProvenance(registryEntry, credits) {
-  const credit = credits.get(registryEntry.image);
-  if (credit) return { kind: 'wikimedia-commons', record: credit, imagePath: registryEntry.image };
+function imageProvenance(registryEntry) {
   const governed = imageRecordForPath(ROOT, registryEntry.image, { strict: true });
-  if (governed) return { ...governed, imagePath: registryEntry.image };
-  return null;
+  return governed ? { ...governed, imagePath: registryEntry.image } : null;
 }
 
-function buildArticle(registryEntry, meta, slugs, credits) {
+function buildArticle(registryEntry, meta, slugs) {
   const localized = valuesForArticle(meta, registryEntry.id);
   const localizedSlugs = slugs[registryEntry.id];
   if (!localizedSlugs) throw new Error(`${registryEntry.id}: localized slugs missing from ${ROUTER_FILE}`);
-  const declaredProvenance = imageProvenance(registryEntry, credits);
+  const declaredProvenance = imageProvenance(registryEntry);
   const data = {
     id: registryEntry.id,
     category: registryEntry.category,
@@ -207,34 +203,46 @@ function buildArticle(registryEntry, meta, slugs, credits) {
   };
 }
 
-function run(idsFile, { dryRun = false } = {}) {
-  const ids = parseIds(idsFile);
+function buildEntries(ids) {
   const registry = parseRegistry();
   const meta = parseMeta();
   const slugs = parseSlugs();
-  const credits = corpusCreditReader(ROOT);
-  const entries = ids.map((id) => {
+  return ids.map((id) => {
     const registryEntry = registry.get(id);
     if (!registryEntry) throw new Error(`${id}: registry entry missing`);
-    return buildArticle(registryEntry, meta, slugs, credits);
+    return buildArticle(registryEntry, meta, slugs);
   });
+}
 
+function summarizeEntries(entries) {
   const provenanceCounts = {};
   for (const { provenance } of entries) provenanceCounts[provenance.kind] = (provenanceCounts[provenance.kind] || 0) + 1;
   const fallbackEntries = entries.filter((entry) => entry.fallback);
   const fallbackIds = fallbackEntries.map(({ data }) => data.id);
-  const declaredImageCount = entries.length - fallbackEntries.length;
+  return {
+    seoEntriesWritten: entries.length,
+    provenanceCounts,
+    fallbackEntries,
+    fallbackIds,
+    declaredImageCount: entries.length - fallbackEntries.length,
+  };
+}
+
+function run(idsFile, { dryRun = false } = {}) {
+  const ids = parseIds(idsFile);
   if (dryRun) {
+    const entries = buildEntries(ids);
+    const summary = summarizeEntries(entries);
     console.log(JSON.stringify({
       dryRun: true,
       ids: ids.length,
       seoEntriesBuilt: entries.length,
       seoFile: SEO_FILE,
-      provenanceCounts,
-      declaredImageCount,
-      fallbackImageCount: fallbackEntries.length,
+      provenanceCounts: summary.provenanceCounts,
+      declaredImageCount: summary.declaredImageCount,
+      fallbackImageCount: summary.fallbackEntries.length,
       fallbackImage: STATIC_FALLBACK_IMAGE,
-      fallbackIds,
+      fallbackIds: summary.fallbackIds,
     }, null, 2));
     return;
   }
@@ -244,6 +252,7 @@ function run(idsFile, { dryRun = false } = {}) {
   const queuePath = path.join(ROOT, 'data/image-regeneration-queue.json');
   let seoLockHeld = false;
   let registrationLockHeld = false;
+  let summary;
   const written = createWriteLedger();
   const queue = withImageRegenerationQueueLock(ROOT, ({ read, write, append }) => {
     // The drain takes the global queue lock before its section lock. Keep the
@@ -267,6 +276,12 @@ function run(idsFile, { dryRun = false } = {}) {
       });
       registrationLockHeld = true;
 
+      // All registry/meta/slug reads and provenance checks must happen after
+      // both shared locks. Otherwise a refresh or cover drain can publish a
+      // newer image/meta snapshot which this recovery would later overwrite.
+      const entries = buildEntries(ids);
+      summary = summarizeEntries(entries);
+      const { fallbackEntries, fallbackIds } = summary;
       const before = fs.readFileSync(seoPath, 'utf8');
       const registryBefore = fs.readFileSync(registryPath, 'utf8');
 
@@ -337,13 +352,13 @@ function run(idsFile, { dryRun = false } = {}) {
         // pending log rather than in this ledger.
         const { diverged } = restoreWrittenFiles(written.entries());
         if (diverged.length === 0) {
-          if (registrationLockHeld) {
-            endRegisterLock(ROOT, 'frontaliere');
-            registrationLockHeld = false;
-          }
           if (seoLockHeld) {
             endSeoBackfillLock(ROOT);
             seoLockHeld = false;
+          }
+          if (registrationLockHeld) {
+            endRegisterLock(ROOT, 'frontaliere');
+            registrationLockHeld = false;
           }
         } else {
           error.rollbackDiverged = diverged;
@@ -361,14 +376,14 @@ function run(idsFile, { dryRun = false } = {}) {
 
   console.log(JSON.stringify({
     ids: ids.length,
-    seoEntriesWritten: entries.length,
+    seoEntriesWritten: summary.seoEntriesWritten,
     seoFile: SEO_FILE,
-    provenanceCounts,
-    declaredImageCount,
-    fallbackImageCount: fallbackEntries.length,
+    provenanceCounts: summary.provenanceCounts,
+    declaredImageCount: summary.declaredImageCount,
+    fallbackImageCount: summary.fallbackEntries.length,
     fallbackImage: STATIC_FALLBACK_IMAGE,
-    fallbackIds,
-    queuedCoverRegenerations: fallbackIds.length,
+    fallbackIds: summary.fallbackIds,
+    queuedCoverRegenerations: summary.fallbackIds.length,
     queueItemsAfterRecovery: queue.items.length,
   }, null, 2));
 }
