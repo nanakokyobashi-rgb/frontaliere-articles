@@ -27,7 +27,9 @@
  *      strutturati della pagina sorella;
  *   2. una fonte produce un articolo in UNA sezione sola
  *      (`loadAllSectionSourceUrls` + `findCrossSectionSourceDuplicate`, #251):
- *      vince chi la registra per prima.
+ *      vince chi la registra per prima. Dentro la PROPRIA sezione la stessa
+ *      fonte e' bloccata finche' la voce e' viva (`SOURCE_URL_TTL_DAYS`):
+ *      `isSourceUrlAlreadyUsed` guarda la sezione attiva per prima.
  *   3. il titolo e l'excerpt del nuovo articolo non duplicano un articolo che
  *      un altro writer ha pubblicato nel frattempo. Qui viene richiamato il
  *      detector multi-segnale di `create-article.mjs`, non una copia delle sue
@@ -54,9 +56,28 @@
  * Fuori da questo controllo, per costruzione: lo stesso id rigenerato nella
  * STESSA sezione (#281) e' risolto dal merge dei registri a favore del commit
  * rigiocato, e resta un record solo; il riuso di una fonte nella STESSA sezione
- * ha una finestra di scadenza voluta (`SOURCE_URL_TTL_DAYS`) e gli strati di
- * tema a valle. I contenuti gia' duplicati nella base non vengono riaperti:
- * viene controllato solo cio' che il commit prodotto ha aggiunto.
+ * DOPO la scadenza della sua voce (`SOURCE_URL_TTL_DAYS`) e' voluto. I
+ * contenuti gia' duplicati nella base non vengono riaperti: viene controllato
+ * solo cio' che il commit prodotto ha aggiunto.
+ *
+ * ── La stessa fonte nella STESSA sezione, finche' la voce e' viva (#2428) ───
+ *
+ * Fino all'8 ottobre 2026 questo caso era lasciato agli strati di tema a valle.
+ * Quel giorno due coppie sono uscite nella sezione `frontaliere` a 14 e a 13
+ * minuti di distanza, ognuna da UNA fonte. La seconda generazione aveva atteso
+ * la prima nel gruppo di concorrenza e poi aveva lavorato sull'albero dello SHA
+ * che l'aveva innescata, piu' vecchio del commit della prima (run 37772192809:
+ * job partito alle 11:48:45Z, checkout di 7d6d48679 delle 11:45:34Z, primo
+ * articolo committato alle 11:48:36Z). La deduplica di inizio run ha quindi
+ * letto un albero senza quell'articolo, ha scelto la stessa fonte e ha scritto
+ * la stessa chiave nel ledger; al rebase e' rimasta la copia upstream (quella
+ * della prima). Titolo ed excerpt non le hanno fermate: in una coppia il titolo
+ * italiano del primo articolo era uscito in inglese, nell'altra i due titoli
+ * erano abbastanza diversi.
+ * La regola e' quella di inizio run, rifatta sullo stato post-rebase: la chiave
+ * che il commit prodotto ha aggiunto appartiene a un ALTRO articolo della
+ * stessa sezione, con una voce non scaduta → violazione. Una voce scaduta non
+ * blocca: il riuso voluto resta possibile.
  *
  * ── Le sezioni vengono dal core ────────────────────────────────────────────
  *
@@ -79,7 +100,7 @@ import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { findCrossSectionSourceDuplicate } from '../../generator/scripts/lib/cross-section-dedup.mjs';
 import { findContentDuplicate } from '../../generator/scripts/lib/article-content-duplicate.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../../generator/scripts/lib/meta-field-regex.mjs';
-import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry } from '../../generator/scripts/lib/source-url-ledger.mjs';
+import { itemIdentityOf, ledgerArticleIds, legacyNewsUrlKey, readLedgerEntry, SOURCE_URL_TTL_DAYS } from '../../generator/scripts/lib/source-url-ledger.mjs';
 import { SECTIONS as SECTION_SURFACES } from '../lib/article-surfaces.mjs';
 
 export const VIOLATION_MARKER = 'POST_REBASE_UNIQUENESS_VIOLATION';
@@ -251,9 +272,11 @@ const idsOf = (snap) => new Set([...(snap?.slugIds ?? []), ...(snap?.registryIds
  *
  * @param {{producedBase: object, produced: object, against: object}} snapshots
  *        mappe sezione → {slugIds, registryIds, articles, ledger} da `snapshotSections`.
+ * @param {{now?: number}} [options] l'istante rispetto a cui una voce del
+ *        ledger della sezione attiva e' viva o scaduta (default: adesso).
  * @returns {{violations: Array<object>, newIds: Array<{section: string, id: string}>, newSourceUrls: Array<{section: string, url: string, articleId: string}>, contentChecks: number}}
  */
-export function findPostRebaseViolations({ producedBase, produced, against }) {
+export function findPostRebaseViolations({ producedBase, produced, against }, { now = Date.now() } = {}) {
   const sections = Object.keys(produced);
   const violations = [];
   const newIds = [];
@@ -320,6 +343,11 @@ export function findPostRebaseViolations({ producedBase, produced, against }) {
       others[other] = ledgerArticleIds(ledger);
       othersLegacy[other] = ledgerArticleIds(ledger, { keyForm: 1 });
     }
+    // La sezione attiva con la finestra di scadenza applicata, come la legge
+    // `ledgerViewsForLookup` a inizio run: restano solo le voci vive.
+    const ownLedger = against?.[section]?.ledger ?? {};
+    const own = { [section]: ledgerArticleIds(ownLedger, { maxAgeDays: SOURCE_URL_TTL_DAYS, now }) };
+    const ownLegacy = { [section]: ledgerArticleIds(ownLedger, { maxAgeDays: SOURCE_URL_TTL_DAYS, now, keyForm: 1 }) };
 
     for (const [url, value] of Object.entries(produced[section].ledger ?? {})) {
       const entry = readLedgerEntry(value);
@@ -345,6 +373,22 @@ export function findPostRebaseViolations({ producedBase, produced, against }) {
           url,
           other: hit.section,
           otherId: hit.articleId,
+        });
+      }
+
+      // 3. La stessa fonte nella STESSA sezione (#2428): dopo il rebase la
+      //    chiave puo' appartenere all'articolo che un altro scrittore della
+      //    sezione ha pubblicato mentre questo run generava. La voce di questo
+      //    run, se e' rimasta, porta il suo id e non conta.
+      let ownHit = findCrossSectionSourceDuplicate(url, own, section);
+      if (!ownHit.used && legacyKey !== url && itemIdentityOf(url) === null) ownHit = findCrossSectionSourceDuplicate(legacyKey, ownLegacy, section);
+      if (ownHit.used && ownHit.articleId !== entry.articleId) {
+        violations.push({
+          kind: 'source-url-same-section',
+          section,
+          id: entry.articleId,
+          url,
+          otherId: ownHit.articleId,
         });
       }
     }
