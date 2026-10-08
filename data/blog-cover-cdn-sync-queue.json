@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-trofeo-rodero-corsa-piede-oro.webp",
-      "sha256": "0e7be7b33fb4c0d8a6f0bf48672f1dfea42b386134c08c2c0a3c4ec4b4cb5fbd"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-trofeo-rodero-corsa-piede-oro-480w.webp",
-      "sha256": "f498221dd53c0cd393edbb8168f4d39cf025aff510bcb933878671743d3adc77"
-    }
-  ]
+  "items": []
 }
