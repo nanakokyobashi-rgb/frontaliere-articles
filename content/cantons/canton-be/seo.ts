@@ -109,6 +109,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ipsach-gru-linea-strada': {
+    title: 'Ipsach: cede una gru, chiuse ferrovia e strada',
+    description: 'Incidente a Ipsach il 6 ottobre 2026: una gru cade su ferrovia e strada. Chiusa la linea Nidau-Sutz-Lattrigen, bus sostitutivi e deviazioni stradali attive.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ipsach, cede, chiuse, ferrovia',
+    ogTitle: 'Ipsach: cede una gru, chiuse ferrovia e strada',
+    ogDescription: 'La gru di un cantiere si è piegata sulla Hauptstrasse 63 di Ipsach, colpendo un edificio, la ferrovia e la strada. La linea tra Nidau e Sutz-Lattrigen è chiusa; bus sostitutivi tra Nidau e Lattrigen e deviazione via Bellmund e Sutz-Lattrigen.',
+    canonicalPath: '/articoli-berna/ipsach-gru-linea-strada/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ipsach: cede una gru, chiuse ferrovia e strada",
+      "description": "Incidente a Ipsach il 6 ottobre 2026: una gru cade su ferrovia e strada. Chiusa la linea Nidau-Sutz-Lattrigen, bus sostitutivi e deviazioni stradali attive.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ipsach-gru-linea-strada.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Gru da cantiere caduta su ferrovia e strada a Ipsach"
+      },
+      "datePublished": "2026-10-08T19:26:56+00:00",
+      "dateModified": "2026-10-08T19:26:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/ipsach-gru-linea-strada/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

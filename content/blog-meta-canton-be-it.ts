@@ -12,6 +12,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.disoccupazione-berna-settembre-2026-stabile.title': 'Disoccupazione stabile a Berna settembre 2026: +78 persone',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.excerpt': 'A settembre 2026 il Canton Berna conta 12.208 disoccupati (+78), tasso 2,2%, giovani 1.435 (-11), settore alberghiero +64, sanitario +35, MEM -50.',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Disoccupazione stabile a Berna settembre 2026, aumento di 78 persone',
+    'blog.article.ipsach-gru-linea-strada.title': 'Ipsach: cede una gru, chiuse ferrovia e strada',
+    'blog.article.ipsach-gru-linea-strada.excerpt': 'Una gru da lavoro è caduta su edificio, ferrovia e strada.',
+    'blog.article.ipsach-gru-linea-strada.imageAlt': 'Gru da cantiere caduta su ferrovia e strada a Ipsach',
 };
 
 export default blogMetaCantonBeIt;
