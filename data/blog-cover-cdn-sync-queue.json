@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-chiusura-hochrheinbahn-2026.webp",
-      "sha256": "93c0be44cdca769f1e77652cc62198134e9e1f197356832cb0e172d399cb2b94"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-chiusura-hochrheinbahn-2026-480w.webp",
-      "sha256": "15162abbe1f6e7126c788010fe367fc9eed58c668021617a3e792f98b7622de1"
-    }
-  ]
+  "items": []
 }
