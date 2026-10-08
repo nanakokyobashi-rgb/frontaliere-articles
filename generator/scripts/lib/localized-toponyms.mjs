@@ -32,6 +32,15 @@ function termPattern(term) {
     .join('\\s+');
 }
 
+function slugTermPattern(term) {
+  const slug = localizedSlugForm(term);
+  return slug
+    .split('-')
+    .filter(Boolean)
+    .map(escapeRegExp)
+    .join('[-\\s]+');
+}
+
 // URL destinations are opaque content, including relative Markdown routes.
 // The generator may mention a localized slug in prose as `[link](/en/.../...)`;
 // that route is not a translated sentence and must neither trigger the gate nor
@@ -98,6 +107,15 @@ const TOPONYM_PATTERN = new RegExp(
   'giu',
 );
 
+const TOPONYM_SLUG_PATTERN = new RegExp(
+  `(?<![\\p{L}\\p{N}])(?:${[...FORM_INDEX.keys()]
+    .map(slugTermPattern)
+    .filter(Boolean)
+    .sort((left, right) => right.length - left.length)
+    .join('|')})(?![\\p{L}\\p{N}])`,
+  'giu',
+);
+
 const PROTECTED_NAME_PATTERNS = Object.freeze([
   /\bfrontali(?:ere|er|ère)\s+(?:ticino|tessin)\b/giu,
   /\b(?:ticino|tessin)\s+(?:turismo|tourismus|tourisme|tourism)\b/giu,
@@ -139,16 +157,19 @@ function replaceOutsideUrls(value, pattern, replacer) {
   return result + text.slice(cursor).replace(pattern, replacer);
 }
 
-function localizedToponymHits(value, { protectNames = false } = {}) {
+function localizedToponymHits(value, { protectNames = false, slug = false } = {}) {
   const text = withoutUrls(value).normalize('NFKC');
   const protectedNameRanges = protectNames ? protectedRanges(text) : [];
   const hits = [];
-  for (const match of text.matchAll(TOPONYM_PATTERN)) {
+  const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
+  for (const match of text.matchAll(pattern)) {
     const start = match.index ?? 0;
     const end = start + match[0].length;
     if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) continue;
-    const descriptors = FORM_INDEX.get(normalizeForm(match[0])) || [];
-    hits.push(...descriptors);
+    const indexKey = normalizeForm(slug ? match[0].replace(/-/gu, ' ') : match[0]);
+    const descriptors = FORM_INDEX.get(indexKey) || [];
+    const observedForm = slug ? localizedSlugForm(match[0]) : normalizeForm(match[0]);
+    hits.push(...descriptors.map((descriptor) => ({ ...descriptor, observedForm })));
   }
   return hits;
 }
@@ -162,7 +183,7 @@ export function findLocalizedToponymMismatches({ sourceText = '', targetText = '
   if (!LOCALE_SET.has(locale)) return [];
   const sourceEntities = new Set(localizedToponymHits(sourceText).map((hit) => hit.entity.code));
   if (sourceEntities.size === 0) return [];
-  const targetHits = localizedToponymHits(targetText, { protectNames: true });
+  const targetHits = localizedToponymHits(targetText, { protectNames: true, slug });
   const issues = [];
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;
@@ -173,7 +194,7 @@ export function findLocalizedToponymMismatches({ sourceText = '', targetText = '
       ]));
       for (const hit of targetHits) {
         if (hit.entity.code !== entity.code || hit.type !== type || hit.locale === locale) continue;
-        if (expected.has(normalizeForm(hit.form))) continue;
+        if (expected.has(hit.observedForm || normalizeForm(hit.form))) continue;
         const issue = {
           code: entity.code,
           type,
@@ -215,7 +236,7 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
   const replacementCounts = new Map();
   for (const issue of [...issues].sort((left, right) => right.form.length - left.form.length)) {
     const pattern = new RegExp(
-      `(?<![\\p{L}\\p{N}])${termPattern(issue.form)}(?![\\p{L}\\p{N}])`,
+      `(?<![\\p{L}\\p{N}])${slug ? slugTermPattern(issue.form) : termPattern(issue.form)}(?![\\p{L}\\p{N}])`,
       'giu',
     );
     let issueReplacements = 0;
@@ -265,7 +286,10 @@ export function findArticleLocalizedToponymMismatches(data) {
     const targetProjection = articleLocaleProjection(data, locale);
     const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
     const targetIssues = findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
-    if (targetProjection.slug) {
+    const provisionalSlugs = new Set(
+      Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : [],
+    );
+    if (targetProjection.slug && !provisionalSlugs.has(locale)) {
       targetIssues.push(...findLocalizedToponymMismatches({
         sourceText: source,
         targetText: targetProjection.slug,

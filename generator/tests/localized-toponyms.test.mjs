@@ -119,6 +119,32 @@ test('la riparazione deterministica non riscrive gli URL', () => {
     }),
     [],
   );
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Basilea Campagna',
+      targetText: 'basilea-campagna-road-closures',
+      locale: 'en',
+      slug: true,
+    }),
+    [{ code: 'BL', type: 'canton', locale: 'en', form: 'Basilea Campagna', expected: 'Basel-Landschaft' }],
+  );
+  assert.deepEqual(
+    findLocalizedToponymMismatches({
+      sourceText: 'Notizia sul cantone di Basilea Campagna',
+      targetText: 'basel-landschaft-road-closures',
+      locale: 'en',
+      slug: true,
+    }),
+    [],
+  );
+  const multiwordSlug = replaceLocalizedToponymMismatches({
+    sourceText: 'Notizia sul cantone di Basilea Campagna',
+    targetText: 'basilea-campagna-road-closures',
+    locale: 'en',
+    slug: true,
+  });
+  assert.equal(multiwordSlug.text, 'basel-landschaft-road-closures');
+  assert.equal(multiwordSlug.replacements, 1);
 });
 
 test('ignora anche le route Markdown relative e le lascia intatte', () => {
@@ -150,6 +176,15 @@ test('la proiezione article-wide copre imageAlt, slug e SEO oltre al body', () =
     slugs: { it: 'lucerna-traffico', en: 'lucerna-traffic' },
   });
   assert.deepEqual(slugIssues, [{ code: 'LU', type: 'canton', locale: 'en', form: 'Lucerna', expected: 'Lucerne' }]);
+  assert.deepEqual(
+    findArticleLocalizedToponymMismatches({
+      ...base,
+      imageAlt: { it: 'Lucerna', en: 'Lucerne' },
+      slugs: { it: 'lucerna-traffico', en: 'lucerna-traffic' },
+      _slugsProvisionalFromIt: ['en'],
+    }),
+    [],
+  );
 });
 
 test('prompt e gate condividono tutte le forme della tabella', () => {

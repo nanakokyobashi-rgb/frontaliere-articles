@@ -248,10 +248,11 @@ const articleFieldValueRe = (id) => new RegExp(
   'g',
 );
 
-function articleProjectionText(filePath, articleId) {
+function articleProjectionText(filePath, articleId, { excludeFaq = false } = {}) {
   if (!existsSync(filePath)) return '';
   const source = readFileSync(filePath, 'utf-8');
   return [...source.matchAll(articleFieldValueRe(articleId))]
+    .filter((match) => !excludeFaq || !match[0].startsWith(`'blog.article.${articleId}.faq'`))
     .map((match) => unescapeForSingleQuoteTS(match[1]))
     .join('\n');
 }
@@ -264,7 +265,7 @@ function passesLocalizedToponymGate(filePath, articleId, locale, faqArray) {
   try {
     assertLocalizedToponymPair({
       sourceText: `${articleProjectionText(sourcePath, articleId)}\n${JSON.stringify(faqArray || [])}`,
-      targetText: `${articleProjectionText(targetPath, articleId)}\n${JSON.stringify(faqArray || [])}`,
+      targetText: `${articleProjectionText(targetPath, articleId, { excludeFaq: true })}\n${JSON.stringify(faqArray || [])}`,
       locale,
       context: `${articleId}/${locale} FAQ repair`,
     });

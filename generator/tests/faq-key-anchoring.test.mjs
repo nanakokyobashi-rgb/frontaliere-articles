@@ -145,6 +145,26 @@ test('fix-faq-locales: replaceFaqInFile scrive SOLO la .faq del proprio id', (t)
   assert.ok(dopo.includes(faqLine(BETA, FAQ_BETA)), 'la riga di beta-due deve restare byte per byte');
 });
 
+test('fix-faq-locales: la sostituzione valuta il FAQ finale, non quello obsoleto', (t) => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'faq-toponym-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(dir, 'it'));
+  fs.mkdirSync(path.join(dir, 'en'));
+  const sourcePath = path.join(dir, 'it', `${ALPHA}.ts`);
+  const targetPath = path.join(dir, 'en', `${ALPHA}.ts`);
+  fs.writeFileSync(sourcePath, bodyFile(
+    `    'blog.article.${ALPHA}.body1': 'Notizia sul cantone di Lucerna, abbastanza lunga da essere valida.',`,
+  ));
+  fs.writeFileSync(targetPath, bodyFile(
+    `    'blog.article.${ALPHA}.body1': 'News about Lucerne, long enough to be valid.',`,
+    faqLine(ALPHA, [{ q: 'Dove?', a: 'Lucerna resta nella FAQ precedente.' }]),
+  ));
+
+  const finalFaq = [{ q: 'Where?', a: 'Lucerne remains in the final FAQ.' }];
+  assert.equal(fixLocales.replaceFaqInFile(targetPath, finalFaq), true);
+  assert.deepEqual(faqDiId(fs.readFileSync(targetPath, 'utf-8'), ALPHA), finalFaq);
+});
+
 // ── repair-prompt-placeholders.mjs ───────────────────────────────────────────
 //
 // Lo script e' tutto a top level (non ha una guardia sull'entry point: importarlo
