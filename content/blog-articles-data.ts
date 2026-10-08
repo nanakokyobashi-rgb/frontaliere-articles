@@ -43042,6 +43042,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'festival-racconto-varese-ottobre',
+ category: 'novita',
+ date: '2026-10-08T01:52:55.465Z',
+ image: '/images/blog/compatta-usata-frontalieri-varese-milano.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

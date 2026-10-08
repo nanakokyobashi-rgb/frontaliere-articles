@@ -565,6 +565,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T00:53:16.383Z",
       "lastFailureAt": "2026-10-08T00:53:16.383Z"
+    },
+    {
+      "articleId": "festival-racconto-varese-ottobre",
+      "title": "Festival del Racconto: due appuntamenti a Varese",
+      "fallbackImage": "/images/blog/compatta-usata-frontalieri-varese-milano.webp",
+      "reason": "All image providers failed for article-festival-racconto-varese-ottobre: openai-codex (vision gate rejected image: Generic editorial illustration with multiple visible human faces.",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T01:52:56.118Z",
+      "lastFailureAt": "2026-10-08T01:52:56.118Z"
     }
   ]
 }
