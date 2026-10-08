@@ -10,10 +10,10 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.excerpt': '3.945 disoccupati in settembre 2026',
     'blog.article.disoccupazione-stabile-4-4-neuchatel-settembre-2026.imageAlt': 'Immagine editoriale relativa a: Disoccupazione stabile 4,4% Neuchâtel settembre 2026',
     'blog.article.neuchatel-referendum-salari-minimi.title': 'Neuchâtel: referendum per salari minimi cantonali e CCT',
-    'blog.article.neuchatel-referendum-salari-minimi.excerpt': '## In breve - Oltre 100.000 firme contro la riforma del Parlamento - Le CCT potrebbero prevalere sui salari minimi cantonali - Garanzie previste per Ginevra',
+    'blog.article.neuchatel-referendum-salari-minimi.excerpt': 'Oltre 100.000 firme contro la riforma del Parlamento',
     'blog.article.neuchatel-referendum-salari-minimi.imageAlt': 'Persone discutono documenti con edifici moderni di Neuchâtel sullo sfondo, simbolo del referendum sui salari minimi e le CCT.',
     'blog.article.aldi-chiude-centro-neuchatel.title': 'Aldi chiuderà il negozio in centro a Neuchâtel',
-    'blog.article.aldi-chiude-centro-neuchatel.excerpt': '## In breve - Aldi chiuderà a fine novembre 2026. - Il punto vendita è in Rue Saint-Honoré. - La filiale era la numero 220 in Svizzera. - I collaboratori',
+    'blog.article.aldi-chiude-centro-neuchatel.excerpt': 'Aldi chiuderà a fine novembre 2026.',
     'blog.article.aldi-chiude-centro-neuchatel.imageAlt': 'Ingresso di un negozio alimentare in Rue Saint-Honoré a Neuchâtel',
 };
 

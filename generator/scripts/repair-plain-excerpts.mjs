@@ -64,7 +64,10 @@ function repairMetaFile(relativeFile) {
   const details = [];
   const section = sectionForMeta(path.basename(relativeFile));
   const locale = localeForMeta(path.basename(relativeFile));
-  const re = /(^[ \t]*'blog\.article\.([^']+)\.(excerpt|seoDescription|ogDescription):\s*')((?:[^'\\]|\\.)*)(')/gm;
+  // The field name is inside the quoted object key: `...excerpt': '...`.
+  // Keeping the closing quote in the match is essential; without it this
+  // historical repair scans zero values and can report a false green.
+  const re = /(^[ \t]*'blog\.article\.([^']+)\.(excerpt|seoDescription|ogDescription)'\s*:\s*')((?:[^'\\]|\\.)*)(')/gm;
   after = after.replace(re, (full, prefix, id, field, encoded, suffix) => {
     const value = unescapeForSingleQuoteTS(encoded);
     const result = repairValue(value, { field, id, locale });
