@@ -22,6 +22,7 @@ import {
   isVisualTextFailure,
   NO_TEXT_IMAGE_RETRY_HINT,
 } from '../scripts/regenerate-queued-covers.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
 import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 
@@ -46,6 +47,34 @@ function registryEntry(id, image) {
 
 function seoEntry(id, image = '/images/places/fallback.webp') {
   return `  'blog-${id}': {\n    title: '${id}',\n    description: '${id}',\n    keywords: '${id}',\n    ogTitle: '${id}',\n    ogDescription: '${id}',\n    canonicalPath: '/articoli-frontaliere/${id}/',\n    structuredData: {\n      "image": {\n        "url": \`\${BASE_URL}${image}\`,\n        "width": 1200,\n        "height": 675\n      },\n      "datePublished": "2026-10-07T12:00:00+00:00"\n    }\n  },\n`;
+}
+
+function repairedSeoEntry(id, image = '/images/places/fallback.webp') {
+  return [
+    "  'blog-" + id + "': {",
+    "    title: '" + id + "',",
+    "    description: '" + id + "',",
+    "    keywords: '" + id + "',",
+    "    ogTitle: '" + id + "',",
+    "    ogDescription: '" + id + "',",
+    "    canonicalPath: '/articoli-frontaliere/" + id + "/',",
+    '    structuredData: {',
+    '      "image": {',
+    '        "@type": "ImageObject",',
+    '        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",',
+    '        "copyrightNotice": "Generated media; provider terms apply.",',
+    '        "license": "https://openai.com/policies/terms-of-use/",',
+    '        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },',
+    '        "creditText": "frontaliereticino.ch",',
+    '        "url": `${BASE_URL}' + image + '`,',
+    '        "width": 1200,',
+    '        "height": 675,',
+    '        "caption": "' + GENERATED_COVER_ALT_BY_LOCALE.it + '"',
+    '      },',
+    '      "datePublished": "2026-10-07T12:00:00+00:00"',
+    '    }',
+    '  },',
+  ].join('\n') + '\n';
 }
 
 function inlineSeoEntry(id, image = '/images/places/fallback.webp') {
@@ -214,6 +243,47 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
   }
 });
 
+test('ricostruisce ImageObject, diritti e imageAlt quando cambia la copertina', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'stale-cover-metadata';
+    const oldCaption = 'Didascalia della copertina precedente';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    const staleSeo = seoEntry(articleId).replace(
+      '        "height": 675',
+      `        "height": 675,\n        "caption": "${oldCaption}"`,
+    );
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([staleSeo]));
+    for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {
+      write(root, `content/blog-meta-${locale}.ts`, `const META = {\n  'blog.article.${articleId}.imageAlt': '${oldCaption}',\n};\n`);
+      assert.notEqual(caption, oldCaption);
+    }
+    queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: fakeCover(root),
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(summary.drained, 1);
+    const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+    assert.ok(seo.includes('article-stale-cover-metadata.webp'));
+    assert.ok(seo.includes('"acquireLicensePage": "https://openai.com/policies/terms-of-use/"'));
+    assert.match(seo, new RegExp(`"caption": "${GENERATED_COVER_ALT_BY_LOCALE.it}"`));
+    assert.doesNotMatch(seo, new RegExp(oldCaption));
+    for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {
+      const meta = fs.readFileSync(path.join(root, `content/blog-meta-${locale}.ts`), 'utf8');
+      assert.match(meta, new RegExp(`imageAlt': '${caption}'`));
+      assert.doesNotMatch(meta, new RegExp(oldCaption));
+    }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('seleziona prima le richieste più vecchie, anche se hanno più fallimenti', async () => {
   const root = tempRoot();
   try {
@@ -310,7 +380,7 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
     const bytes = Buffer.from('already-satisfied-cover');
     const record = generatedRecord(root, articleId, imageUrl, bytes);
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
-    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId, imageUrl)]));
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
     write(root, `public${imageUrl}`, bytes);
     write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
@@ -546,7 +616,7 @@ test('un record già materializzato rende il drain riprendibile senza una second
     write(root, `public${imageUrl}`, bytes);
     write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
-    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([repairedSeoEntry(articleId)]));
 
     const summary = await drain({
       root,

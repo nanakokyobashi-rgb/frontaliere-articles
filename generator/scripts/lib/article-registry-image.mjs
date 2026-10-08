@@ -118,10 +118,11 @@ function seoImageBlockRange(block) {
   if (imageStart < 0 || dateStart < 0) return null;
   const fieldStart = block.lastIndexOf('\n', imageStart) + 1;
   const dateLineStart = block.lastIndexOf('\n', dateStart) + 1;
+  const rawText = block.slice(fieldStart, dateLineStart).replace(/\n$/, '');
   return {
     start: fieldStart,
     end: dateLineStart,
-    text: block.slice(fieldStart, dateLineStart).replace(/\n$/, ''),
+    text: rawText.replace(/,\s*$/, ''),
   };
 }
 
@@ -328,7 +329,7 @@ export function updateArticleSeoImageBlock(root, articleId, imageBlock, options 
 
   const blockStart = located.start + located.imageBlockStart;
   const blockEnd = located.start + located.imageBlockEnd;
-  const replacement = `${normalizedBlock}\n`;
+  const replacement = `${normalizedBlock},\n`;
   const nextSource = located.source.slice(0, blockStart)
     + replacement
     + located.source.slice(blockEnd);

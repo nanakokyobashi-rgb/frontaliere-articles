@@ -104,6 +104,10 @@ function governedCoverSeoImage(root, record) {
   };
 }
 
+function comparableSeoImageBlock(value) {
+  return String(value || '').replace(/\s+/g, '');
+}
+
 function snapshotFile(filePath) {
   if (!fs.existsSync(filePath)) return null;
   return fs.readFileSync(filePath);
@@ -280,7 +284,7 @@ async function alreadySatisfiedCover(root, item, registryFiles, decodeThumbnail)
     const { imageBlock } = governedCoverSeoImage(root, record);
     const metadata = imageAltMetaUpdates(root, item.articleId, section);
     return seo.previousImage === record.imageUrl
-      && seo.imageBlock === imageBlock
+      && comparableSeoImageBlock(seo.imageBlock) === comparableSeoImageBlock(imageBlock)
       && metadata.every(({ changed }) => !changed);
   } catch {
     return false;

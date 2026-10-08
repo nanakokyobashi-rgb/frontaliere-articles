@@ -220,4 +220,12 @@ test('le voci recenti del main sono byte-identiche al builder condiviso', () => 
     unknownDifferences: unknownDiffs,
   }));
   assert.deepEqual(unknownDiffs, [], `shared builder has unexplained differences: ${JSON.stringify(unknownDiffs)}`);
+  const missingGovernedRights = knownDiffs.filter(({ reasons }) => reasons.some(
+    (reason) => reason.startsWith('image.provenance:'),
+  ));
+  assert.deepEqual(
+    missingGovernedRights,
+    [],
+    `governed covers must carry the complete ImageObject rights block: ${JSON.stringify(missingGovernedRights)}`,
+  );
 });
