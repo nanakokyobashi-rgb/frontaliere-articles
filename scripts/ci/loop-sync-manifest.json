@@ -2244,9 +2244,18 @@
       "mode": "adapted",
       "reason": "Push con retry usato dai job che scrivono sugli shard. Il corpus mantiene il retry, il flag opt-in `--soft-fail-exhausted` e le registrazioni dei merge driver del gemello del sito, ma non invoca `old-history-guard.mjs`: quel modulo non e' presente qui e la chiamata causava `MODULE_NOT_FOUND` prima di ogni push. La guardia potra' essere riattivata solo trasportando prima il modulo e registrandolo nel manifest insieme alla sua dipendenza. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello adattato, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "4cb50306a5f08f8e",
-        "corpus": "1b87e374164b004c",
-        "alignedAt": "2026-10-07"
+        "site": "e7f65c01eb9d55dd",
+        "corpus": "307af57d480268ad",
+        "alignedAt": "2026-10-08"
+      }
+    },
+    {
+      "path": "scripts/lib/run-bounded-command.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "1d8f5cc7155c838f",
+        "corpus": "1d8f5cc7155c838f",
+        "alignedAt": "2026-10-08"
       }
     },
     {
