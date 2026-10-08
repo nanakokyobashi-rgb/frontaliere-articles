@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'permessi-edilizi-digitali-basel',
  category: 'novita',
  date: '2026-10-07T08:43:35.073Z',
- image: '/images/blog/avs-prestazioni-complementari-basilea-campagna.webp',
+ image: '/images/blog/article-permessi-edilizi-digitali-basel.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['BASILEA'],

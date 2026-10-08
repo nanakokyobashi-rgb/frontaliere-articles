@@ -15,7 +15,13 @@ import {
   GENERATED_IMAGE_RESTRICTIONS,
 } from '../../engine/shared/generatedImageRegistry.mjs';
 import { articleImageAssetId } from '../scripts/lib/article-cover-identity.mjs';
-import { drainQueuedCovers } from '../scripts/regenerate-queued-covers.mjs';
+import { webpDimensions } from '../scripts/lib/commons-credit.mjs';
+import { appendImageRegenerationQueue } from '../scripts/lib/image-regeneration-queue.mjs';
+import {
+  drainQueuedCovers,
+  isVisualTextFailure,
+  NO_TEXT_IMAGE_RETRY_HINT,
+} from '../scripts/regenerate-queued-covers.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
 
 function tempRoot() {
@@ -105,6 +111,20 @@ function item(articleId, requestedAt, title = articleId) {
   };
 }
 
+function validThumbnailBytes() {
+  return Buffer.from('UklGRigAAABXRUJQVlA4TBsAAAAv30FDAAdQti71tv8BAEX6/58i+p/63//+TxoA', 'base64');
+}
+
+async function decodeFixtureThumbnail(bytes) {
+  const dimensions = webpDimensions(bytes);
+  if (!dimensions || bytes.length !== validThumbnailBytes().length) throw new Error('truncated WebP fixture');
+  return dimensions;
+}
+
+function drain(options) {
+  return drainQueuedCovers({ decodeThumbnail: decodeFixtureThumbnail, ...options });
+}
+
 function fakeCover(root) {
   return async (entry) => {
     const bytes = Buffer.from(`cover:${entry.articleId}`);
@@ -123,7 +143,7 @@ async function fakeThumbnail(sourcePath) {
     `${path.basename(sourcePath, path.extname(sourcePath))}-480w.webp`,
   );
   fs.mkdirSync(path.dirname(thumbPath), { recursive: true });
-  fs.writeFileSync(thumbPath, 'thumbnail');
+  fs.writeFileSync(thumbPath, validThumbnailBytes());
   return thumbPath;
 }
 
@@ -139,7 +159,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
 
     let calls = 0;
     const generateCover = fakeCover(root);
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -165,7 +185,7 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
     const remaining = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'));
     assert.deepEqual(remaining.items.map((entry) => entry.articleId), ['canton-newer']);
 
-    const second = await drainQueuedCovers({
+    const second = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -191,6 +211,184 @@ test('smaltisce in ordine, rimuove solo il successo e aggiorna il registro giust
   }
 });
 
+test('seleziona prima le voci mai tentate e poi quelle con meno fallimenti', async () => {
+  const root = tempRoot();
+  try {
+    const entries = ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']
+      .map((articleId) => ` {\n id: '${articleId}',\n image: '/images/places/fallback.webp',\n },`)
+      .join('\n');
+    write(root, 'content/blog-articles-data.ts', `export const ARTICLES = [\n${entries}\n];\n`);
+    fixture(root, [
+      { ...item('many-failures', '2026-10-07T08:00:00.000Z'), failureCount: 2 },
+      { ...item('legacy-failure', '2026-10-07T08:30:00.000Z'), lastFailureAt: '2026-10-07T08:45:00.000Z' },
+      { ...item('one-failure', '2026-10-07T09:00:00.000Z'), failureCount: 1 },
+      { ...item('never-attempted', '2026-10-07T10:00:00.000Z'), failureCount: 0 },
+    ]);
+
+    const seen = [];
+    const summary = await drain({
+      root,
+      limit: 4,
+      generateCover: async (entry, ...args) => {
+        seen.push(entry.articleId);
+        return fakeCover(root)(entry, ...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.deepEqual(seen, ['never-attempted', 'legacy-failure', 'one-failure', 'many-failures']);
+    assert.equal(summary.drained, 4);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('canonizza gli articleId duplicati prima di selezionare e rimuovere il lavoro', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'duplicate-queue-entry';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 0, assets: [] }));
+    queue(root, [
+      item(articleId, '2026-10-07T09:00:00.000Z'),
+      { ...item(articleId, '2026-10-07T10:00:00.000Z'), reason: 'newer request' },
+    ]);
+
+    let calls = 0;
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: async (...args) => {
+        calls += 1;
+        return fakeCover(root)(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(calls, 1);
+    assert.equal(summary.drained, 1);
+    assert.equal(summary.residual, 0);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items, []);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una nuova accodatura aggiorna requestedAt ma conserva il contatore dei fallimenti', () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'requeued-after-drain-start';
+    queue(root, [{
+      ...item(articleId, '2026-10-07T22:00:00.000Z'),
+      failureCount: 2,
+    }]);
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId,
+      title: articleId,
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'new request',
+      requestedAt: '2026-10-07T22:41:00.000Z',
+    }), true);
+    const updated = JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0];
+    assert.equal(updated.requestedAt, '2026-10-07T22:41:00.000Z');
+    assert.equal(updated.failureCount, 2);
+    assert.equal(updated.status, 'queued');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'already-satisfied';
+    const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+    const bytes = Buffer.from('already-satisfied-cover');
+    const record = generatedRecord(root, articleId, imageUrl, bytes);
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
+    write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+    write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+    write(root, `public${imageUrl}`, bytes);
+    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
+    queue(root, [{ ...item(articleId, '2026-10-07T09:00:00.000Z'), status: 'failed', failureCount: 3 }]);
+
+    let calls = 0;
+    const summary = await drain({
+      root,
+      limit: 1,
+      generateCover: async () => {
+        calls += 1;
+        throw new Error('must not regenerate');
+      },
+      generateThumbnail: async () => { throw new Error('must not create a thumbnail'); },
+    });
+
+    assert.equal(calls, 0);
+    assert.equal(summary.drained, 0);
+    assert.equal(summary.alreadySatisfied, 1);
+    assert.deepEqual(summary.alreadySatisfiedIds, [articleId]);
+    assert.equal(summary.residual, 0);
+    assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items.length, 0);
+    assert.match(fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'), /article-already-satisfied\.webp/);
+    assert.match(fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8'), /article-already-satisfied\.webp/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una copertina con thumbnail mancante o invalido viene riparata prima di togliere la coda', async () => {
+  for (const thumbnailState of ['missing', 'invalid', 'truncated']) {
+    const root = tempRoot();
+    try {
+      const articleId = `partial-thumbnail-${thumbnailState}`;
+      const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+      const bytes = Buffer.from(`partial-cover:${thumbnailState}`);
+      const record = generatedRecord(root, articleId, imageUrl, bytes);
+      write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
+      write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId, imageUrl)]));
+      write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+      write(root, `public${imageUrl}`, bytes);
+      if (thumbnailState === 'invalid') {
+        write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'not a webp');
+      }
+      if (thumbnailState === 'truncated') {
+        write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes().subarray(0, 30));
+      }
+      queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+
+      let thumbnailCalls = 0;
+      const summary = await drain({
+        root,
+        limit: 1,
+        generateCover: async () => { throw new Error('must reuse the materialized record'); },
+        generateThumbnail: async (sourcePath) => {
+          thumbnailCalls += 1;
+          return fakeThumbnail(sourcePath);
+        },
+      });
+
+      assert.equal(summary.alreadySatisfied, 0, `${thumbnailState}: non va scartata come già soddisfatta`);
+      assert.equal(summary.reused, 1, `${thumbnailState}: il record hero deve essere riusato`);
+      assert.equal(thumbnailCalls, 1, `${thumbnailState}: il thumbnail deve essere rigenerato`);
+      assert.equal(summary.residual, 0);
+      assert.deepEqual(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items, []);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  }
+});
+
+test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo', () => {
+  assert.equal(isVisualTextFailure('vision gate rejected image: visible lettering and signage'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: words and numbers in the scene'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: forbidden content'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: recognizable face'), false);
+  assert.equal(isVisualTextFailure('provider unavailable'), false);
+  assert.match(NO_TEXT_IMAGE_RETRY_HINT, /no signs/);
+  assert.match(NO_TEXT_IMAGE_RETRY_HINT, /lettering/);
+});
+
 test('non ritenta le voci failed in schedule e le riapre solo con retry esplicito', async () => {
   const root = tempRoot();
   try {
@@ -204,7 +402,7 @@ test('non ritenta le voci failed in schedule e le riapre solo con retry esplicit
     }]);
 
     let calls = 0;
-    const skipped = await drainQueuedCovers({
+    const skipped = await drain({
       root,
       limit: 1,
       generateCover: async (...args) => {
@@ -218,7 +416,7 @@ test('non ritenta le voci failed in schedule e le riapre solo con retry esplicit
     assert.equal(calls, 0);
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items[0].failureCount, 3);
 
-    const retried = await drainQueuedCovers({
+    const retried = await drain({
       root,
       limit: 1,
       retryFailed: true,
@@ -247,7 +445,7 @@ test('un fallimento conserva articolo e coda, e il terzo tentativo resta marcato
     const fail = async () => { throw new Error('provider unavailable'); };
 
     for (let attempt = 1; attempt <= 3; attempt += 1) {
-      const summary = await drainQueuedCovers({
+      const summary = await drain({
         root,
         limit: 1,
         generateCover: fail,
@@ -276,7 +474,7 @@ test('un errore dopo la generazione ripristina articolo, registro e file prima d
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, originalImage));
     fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
 
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: fakeCover(root),
@@ -304,7 +502,7 @@ test('un errore nella persistenza della rimozione ripristina la transazione prim
     const queuePath = path.join(root, 'data/image-regeneration-queue.json');
 
     await assert.rejects(
-      () => drainQueuedCovers({
+      () => drain({
         root,
         limit: 1,
         generateCover: fakeCover(root),
@@ -338,11 +536,11 @@ test('un record già materializzato rende il drain riprendibile senza una second
     write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
     write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
     write(root, `public${imageUrl}`, bytes);
-    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'thumbnail');
+    write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, validThumbnailBytes());
     queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
     write(root, 'content/seo/seo-blog-5.ts', seoFile([seoEntry(articleId)]));
 
-    const summary = await drainQueuedCovers({
+    const summary = await drain({
       root,
       limit: 1,
       generateCover: async () => { throw new Error('must not regenerate'); },
@@ -497,7 +695,7 @@ test('il registro editoriale usa cover come identita append-only', () => {
   ]);
 });
 
-test('il drain riapplica il solo delta e ricrea un commit dopo un replay vuoto', () => {
+test('il drain verifica il residuo rebased senza confondere le aggiunte upstream con perdite', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
   assert.match(workflow, /registry_base="\$RUNNER_TEMP\/generated-image-registry-base\.json"/);
   assert.match(workflow, /git show "\$PRODUCED\^:data\/generated-image-registry\.json" > "\$registry_base"/);
@@ -509,6 +707,21 @@ test('il drain riapplica il solo delta e ricrea un commit dopo un replay vuoto',
     workflow,
     /if \[ "\$\(git rev-parse HEAD\)" = "\$\(git rev-parse FETCH_HEAD\)" \]; then\s+git commit -C "\$PRODUCED"\s+else\s+git commit --amend --no-edit/,
   );
+  assert.match(workflow, /verify_pushed_queue\(\)/);
+  assert.match(workflow, /snapshot_expected_queue\(\)/);
+  assert.match(workflow, /\.residualDrainer = \.residual/);
+  assert.match(workflow, /\.residualExpected = \$expected/);
+  assert.match(workflow, /queue_file=data\/image-regeneration-queue\.json/);
+  assert.match(workflow, /--merge-queue "\$queue_file"/);
+  assert.match(workflow, /if \[ -e "\$queue_file" \]; then\s+cp "\$queue_file" "\$expected_queue"\s+else\s+printf '%s\\n' '\{"schema":1,"items":\[\]\}' > "\$expected_queue"/);
+  assert.match(workflow, /if git cat-file -e "HEAD:\$queue_file" 2>\/dev\/null; then\s+pushed_queue="\$\(git show "HEAD:\$queue_file"\)"\s+else\s+pushed_queue='\{"schema":1,"items":\[\]\}'/);
+  assert.match(workflow, /queued-cover-expected-queue\.json/);
+  assert.match(workflow, /\.residualMissing = \$missing/);
+  assert.match(workflow, /\.residualSource = "pushed-branch"/);
+  assert.match(workflow, /\[\.items\[\] \| \.articleId \| tostring\] \| unique \| length/);
+  assert.match(workflow, /queued-cover queue count diverged after push/);
+  assert.match(workflow, /if \[ "\$actual" -ne "\$internal" \]/);
+  assert.match(workflow, /queued-cover queue items lost after push/);
 });
 
 test('il workflow attende la completion del publisher prima di ackare l outbox', () => {

@@ -795,18 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
   },
   "topicGateUrls": {
-    "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
-      "section": "svizzera",
-      "ts": 1791243786372
-    },
-    "frontaliere::https://www.rsi.ch/s/4131573": {
-      "section": "frontaliere",
-      "ts": 1791244728361
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/tamedia-cancella-ulteriori-34-posti-di-lavoro/92168518": {
-      "section": "frontaliere",
-      "ts": 1791249645914
-    },
     "frontaliere::https://www.laregione.ch/cantone/ticino/1954862/sentenza-del-cdm-sul-pg-pagani-anche-per-i-vertici-del-parlamento-e-tutto-a-posto": {
       "section": "frontaliere",
       "ts": 1791255421484
@@ -1106,6 +1094,10 @@
     "frontaliere::https://comozero.it/sanita/e-comasco-il-medico-che-ha-somministrato-il-maggior-numero-di-vaccini-in-lombardia-ed-e-stato-premiato": {
       "section": "frontaliere",
       "ts": 1791416146600
+    },
+    "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
+      "section": "svizzera",
+      "ts": 1791424608347
     }
   }
 }

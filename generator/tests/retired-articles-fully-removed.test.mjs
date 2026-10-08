@@ -45,12 +45,15 @@
  * Lancia con:
  *   node --test generator/tests/retired-articles-fully-removed.test.mjs
  */
+import '../../host/cantonSectionsBootstrap.mjs';
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { findAllSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 // Le superfici NON sono riscritte qui: le enumera lo stesso modulo che usa
 // `scripts/retire-article.mjs`. Un secondo elenco a mano è già divergito una
 // volta — mancavano `content/blogArticleIds.ts` e i file SEO, quindi un id
@@ -76,24 +79,57 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 const SURFACE_SIZE_FRACTION = 0.5;
 const SURFACE_FLOOR_BASE_REF = process.env.PREFLIGHT_PR_BASE_REVISION || 'HEAD';
 const surfaceFloorCache = new Map();
+const surfaceBaseSourceCache = new Map();
+
+function observedSurfaceSource(rel) {
+  const cached = surfaceBaseSourceCache.get(rel);
+  if (cached !== undefined) return cached;
+  let source;
+  try {
+    source = execFileSync('git', ['show', `${SURFACE_FLOOR_BASE_REF}:${rel}`], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      maxBuffer: 32 * 1024 * 1024,
+    });
+  } catch (error) {
+    assert.fail(`${rel}: impossibile leggere la superficie in ${SURFACE_FLOOR_BASE_REF} (${error.message})`);
+  }
+  assert.ok(Buffer.byteLength(source, 'utf8') > 0, `${rel}: il blob-base è vuoto`);
+  surfaceBaseSourceCache.set(rel, source);
+  return source;
+}
 
 function observedSurfaceBytes(rel) {
   const cached = surfaceFloorCache.get(rel);
   if (cached !== undefined) return cached;
-  let bytes;
-  try {
-    bytes = execFileSync('git', ['show', `${SURFACE_FLOOR_BASE_REF}:${rel}`], {
-      cwd: ROOT,
-      encoding: 'buffer',
-      maxBuffer: 32 * 1024 * 1024,
-    }).length;
-  } catch (error) {
-    assert.fail(`${rel}: impossibile misurare la superficie in ${SURFACE_FLOOR_BASE_REF} (${error.message})`);
-  }
+  const bytes = Buffer.byteLength(observedSurfaceSource(rel), 'utf8');
   assert.ok(bytes > 0, `${rel}: il blob-base è vuoto`);
   const floor = Math.ceil(bytes * SURFACE_SIZE_FRACTION);
   surfaceFloorCache.set(rel, floor);
   return floor;
+}
+
+/**
+ * A large SEO shrink is safe only when it is a pure family deduplication:
+ * every base key remains somewhere in the current family, and the current
+ * family has no duplicate key. Any other shrink remains a hard failure.
+ */
+function isSafeSeoFamilyReduction(rel) {
+  if (rel !== 'content/seo/seo-blog.ts') return false;
+
+  const baseIds = new Set(findAllSeoEntryMatches(observedSurfaceSource(rel), rel).map(({ id }) => id));
+  const currentCounts = new Map();
+  const seoDir = path.join(ROOT, 'content', 'seo');
+  for (const name of readdirSync(seoDir).filter((entry) => /^seo-blog(?:-\d+)?\.ts$/.test(entry))) {
+    const file = path.join(seoDir, name);
+    const source = readFileSync(file, 'utf8');
+    for (const { id } of findAllSeoEntryMatches(source, path.join('content/seo', name))) {
+      currentCounts.set(id, (currentCounts.get(id) || 0) + 1);
+    }
+  }
+
+  return [...currentCounts.values()].every((count) => count === 1)
+    && [...baseIds].every((id) => currentCounts.has(id));
 }
 
 /**
@@ -110,9 +146,10 @@ function readSurface(rel) {
   assert.ok(existsSync(abs), `${rel}: superficie assente — il test non può dire nulla`);
   const src = readFileSync(abs, 'utf-8');
   const floor = observedSurfaceBytes(rel);
+  const bytes = Buffer.byteLength(src, 'utf-8');
   assert.ok(
-    Buffer.byteLength(src, 'utf-8') >= floor,
-    `${rel}: ${Buffer.byteLength(src, 'utf-8')} byte (< ${floor}, floor derivato dalla metà del blob osservato in HEAD). Una superficie che si legge vuota fa passare `
+    bytes >= floor || isSafeSeoFamilyReduction(rel),
+    `${rel}: ${bytes} byte (< ${floor}, floor derivato dalla metà del blob osservato in HEAD). Una superficie che si legge vuota fa passare `
     + 'ogni asserzione di assenza: è il parser a essere rotto, non il corpus a essere pulito.',
   );
   surfaceCache.set(rel, src);

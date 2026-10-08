@@ -67,7 +67,9 @@ export function appendImageRegenerationQueue(root, {
     if (existing) {
       Object.assign(existing, item, {
         failureCount: Number.isInteger(existing.failureCount) && existing.failureCount >= 0 ? existing.failureCount : 0,
-        requestedAt: existing.requestedAt || item.requestedAt,
+        // A fresh enqueue is a new request. The drainer changes only failure
+        // metadata and deliberately leaves requestedAt untouched.
+        requestedAt: item.requestedAt,
       });
     } else {
       queue.items.push(item);

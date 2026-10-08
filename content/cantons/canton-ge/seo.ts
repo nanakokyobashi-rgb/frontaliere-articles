@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "L'economia ginevrina beneficia della ripresa dell'attività mondiale: il titolo segnala il trend, senza cifre, settori o misure operative concrete.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/crescita-economia-svizzera-seco-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-economia-ginevrina-ripresa-globale.webp`,
         "width": 1200,
         "height": 675,
         "caption": "L'economia ginevrina beneficia della ripresa dell'attività mondiale"

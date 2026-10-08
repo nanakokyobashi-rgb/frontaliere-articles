@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Comune di Zugo prevede per il 2027 un avanzo di CHF 15,6 milioni, mantiene il tasso fiscale al 52% e pianifica investimenti netti per CHF 86,4 milioni",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/galleria-moscia-acapulco-180-milioni.webp`,
+        "url": `${BASE_URL}/images/blog/article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Vista aerea della vecchia città di Zugo sul lago di Zugo con edifici moderni e spazi verdi"

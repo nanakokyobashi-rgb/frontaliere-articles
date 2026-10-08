@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       limit:
-        description: "Numero massimo di voci piu' vecchie da tentare in questa run"
+        description: "Numero massimo di voci da tentare in questa run (mai tentate e meno fallite prima)"
         required: false
         default: '10'
         type: string
@@ -104,7 +104,73 @@ jobs:
         run: |
           set -euo pipefail
           echo "publish_ready=false" >> "$GITHUB_OUTPUT"
+          queue_file=data/image-regeneration-queue.json
+          expected_queue="$RUNNER_TEMP/queued-cover-expected-queue.json"
+
+          snapshot_expected_queue() {
+            local expected verified
+            if [ ! -s "$SUMMARY_FILE" ]; then
+              echo "::error::queued-cover summary is missing; cannot snapshot the expected queue"
+              return 1
+            fi
+            if [ -e "$queue_file" ]; then
+              cp "$queue_file" "$expected_queue"
+            else
+              printf '%s\n' '{"schema":1,"items":[]}' > "$expected_queue"
+            fi
+            expected="$(jq -er 'if .schema == 1 and (.items | type == "array") then (.items | length) else error("invalid expected queue") end' "$expected_queue")"
+            verified="${SUMMARY_FILE}.expected"
+            jq --argjson expected "$expected" \
+              'if has("residualDrainer") then . else .residualDrainer = .residual end
+               | .residual = $expected
+               | .residualExpected = $expected
+               | .residualSource = "expected-before-push"' \
+              "$SUMMARY_FILE" > "$verified"
+            mv "$verified" "$SUMMARY_FILE"
+          }
+
+          verify_pushed_queue() {
+            local internal expected_count actual expected_ids actual_ids missing verified pushed_queue
+            if [ ! -s "$SUMMARY_FILE" ]; then
+              echo "::error::queued-cover summary is missing; cannot verify the pushed queue"
+              return 1
+            fi
+            if [ ! -s "$expected_queue" ]; then
+              echo "::error::queued-cover expected queue snapshot is missing; cannot verify the pushed queue"
+              return 1
+            fi
+            internal="$(jq -er '.residual // error("missing residual")' "$SUMMARY_FILE")"
+            expected_count="$(jq -er 'if .schema == 1 and (.items | type == "array") then ([.items[] | .articleId | tostring] | unique | length) else error("invalid expected queue") end' "$expected_queue")"
+            expected_ids="$(jq -er 'if .schema == 1 and (.items | type == "array") then [.items[] | .articleId | tostring] | unique else error("invalid expected queue") end' "$expected_queue")"
+            if [ "$internal" -ne "$expected_count" ]; then
+              echo "::error::queued-cover summary diverged before push: drainer=$internal, snapshot=$expected_count"
+              return 1
+            fi
+            if git cat-file -e "HEAD:$queue_file" 2>/dev/null; then
+              pushed_queue="$(git show "HEAD:$queue_file")"
+            else
+              pushed_queue='{"schema":1,"items":[]}'
+            fi
+            actual="$(jq -er 'if .schema == 1 and (.items | type == "array") then ([.items[] | .articleId | tostring] | unique | length) else error("invalid queue") end' <<< "$pushed_queue")"
+            actual_ids="$(jq -er 'if .schema == 1 and (.items | type == "array") then [.items[] | .articleId | tostring] | unique else error("invalid queue") end' <<< "$pushed_queue")"
+            missing="$(jq -ner --argjson expected "$expected_ids" --argjson actual "$actual_ids" '$expected - $actual')"
+            verified="${SUMMARY_FILE}.verified"
+            jq --argjson internal "$internal" --argjson actual "$actual" --argjson missing "$missing" \
+              '.residualInternal = $internal | .residual = $actual | .residualMissing = $missing | .residualSource = "pushed-branch"' \
+              "$SUMMARY_FILE" > "$verified"
+            mv "$verified" "$SUMMARY_FILE"
+            if [ "$actual" -ne "$internal" ]; then
+              echo "::error::queued-cover queue count diverged after push: drainer=$internal, pushed branch=$actual"
+              return 1
+            fi
+            if [ "$missing" != '[]' ]; then
+              echo "::error::queued-cover queue items lost after push: $missing"
+              return 1
+            fi
+          }
+
           git add -A
+          snapshot_expected_queue
           if git diff --cached --quiet; then
             if [ -s data/image-regeneration-publish-outbox.json ]; then
               echo "no corpus changes; retrying the durable publisher outbox"
@@ -112,6 +178,7 @@ jobs:
             else
               echo "queued cover queue produced no changes and no publisher outbox"
             fi
+            verify_pushed_queue
             exit 0
           fi
           if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
@@ -143,6 +210,7 @@ jobs:
           for attempt in 1 2 3 4 5; do
             if git -c pack.window=0 -c pack.threads=1 push --no-thin --no-verify origin HEAD:main; then
               echo "pushed to main"
+              verify_pushed_queue
               echo "publish_ready=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
@@ -157,7 +225,7 @@ jobs:
             rebased=1
             bash scripts/lib/rebase-onto-remote.sh "$remote" main \
               data/generated-image-registry.json \
-              --merge-queue data/image-regeneration-queue.json \
+              --merge-queue "$queue_file" \
               --section-surfaces \
               --take-theirs public/images/blog/ || rebased=0
             if [ "$rebased" -ne 1 ]; then
@@ -174,6 +242,7 @@ jobs:
                 git commit --amend --no-edit
               fi
             fi
+            snapshot_expected_queue
           done
           echo "::error::push failed after 5 attempts"
           exit 1
@@ -314,9 +383,11 @@ jobs:
               drained="$(jq -r '.drained // 0' "$SUMMARY_FILE")"
               residual="$(jq -r '.residual // 0' "$SUMMARY_FILE")"
               failed="$(jq -r '.failed // 0' "$SUMMARY_FILE")"
+              already_satisfied="$(jq -r '.alreadySatisfied // 0' "$SUMMARY_FILE")"
               marked="$(jq -r '(.marked // []) | length' "$SUMMARY_FILE")"
               requeued="$(jq -r '(.requeued // []) | length' "$SUMMARY_FILE")"
               echo "- Smaltite: **$drained**"
+              echo "- Già soddisfatte, tolte senza rigenerare: **$already_satisfied**"
               echo "- Residue: **$residual**"
               echo "- Fallite in questa run: **$failed**"
               echo "- Marcate dopo almeno tre fallimenti: **$marked**"
@@ -326,6 +397,9 @@ jobs:
               fi
               if [ "$failed" -gt 0 ]; then
                 echo "- ⚠️ ID falliti in questa run: $(jq -r '(.failedIds // []) | join(", ")' "$SUMMARY_FILE")"
+              fi
+              if [ "$already_satisfied" -gt 0 ]; then
+                echo "- ID già soddisfatti: $(jq -r '(.alreadySatisfiedIds // []) | join(", ")' "$SUMMARY_FILE")"
               fi
               echo "- Sezioni ripubblicate: $(jq -c '.sections // {}' "$SUMMARY_FILE")"
             else

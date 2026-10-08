@@ -23,13 +23,16 @@ import {
   readImageRegenerationQueue,
   writeImageRegenerationQueue,
 } from './lib/image-regeneration-queue.mjs';
+import { canonicalizeImageRegenerationQueue } from '../../scripts/lib/merge-image-regeneration-queue.mjs';
 
 export const DEFAULT_LIMIT = 10;
 export const MAX_LIMIT = 100;
 export const IMAGE_BUDGET_MS = 120_000;
+export const NO_TEXT_IMAGE_RETRY_HINT = 'Safety retry: absolutely no signs, lettering, words, numbers, logos, labels, banners, watermarks, or signature-like marks anywhere in the image.';
 
 const GENERATED_REGISTRY_REL = 'data/generated-image-registry.json';
 let writeTmpSeq = 0;
+let sharpImport;
 
 function absolute(root, relativePath) {
   return path.join(root, relativePath);
@@ -84,6 +87,12 @@ function normalizeReason(value) {
   return reason || 'engine-failed';
 }
 
+export function isVisualTextFailure(reason) {
+  const normalized = String(reason || '');
+  return /vision gate rejected image/i.test(normalized)
+    && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
+}
+
 function parseLimit(value) {
   const limit = Number(value);
   if (!Number.isSafeInteger(limit) || limit < 1 || limit > MAX_LIMIT) {
@@ -100,6 +109,21 @@ function requestedAtSort(a, b) {
   if (leftValid && rightValid && left !== right) return left - right;
   if (leftValid !== rightValid) return leftValid ? -1 : 1;
   return a.index - b.index;
+}
+
+function failureCountOf(item) {
+  if (Number.isInteger(item?.failureCount) && item.failureCount >= 0) return item.failureCount;
+  // Older queue entries predate failureCount. Their initial lastFailureAt is
+  // copied from requestedAt; a later timestamp proves that they were already
+  // attempted, so they must not masquerade as never-attempted work.
+  const requestedAt = Date.parse(String(item?.requestedAt || ''));
+  const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
+  return Number.isFinite(requestedAt) && Number.isFinite(lastFailureAt) && lastFailureAt > requestedAt ? 1 : 0;
+}
+
+function queueAttemptSort(a, b) {
+  const failureDelta = failureCountOf(a.item) - failureCountOf(b.item);
+  return failureDelta || requestedAtSort(a, b);
 }
 
 function sectionForRegistry(location) {
@@ -130,6 +154,32 @@ function thumbnailFileForRecord(root, record) {
   return path.join(path.dirname(imageFile), 'thumbnails', `${stem}-480w.webp`);
 }
 
+async function decodeWebpThumbnail(bytes) {
+  sharpImport ??= import('sharp');
+  const { default: sharp } = await sharpImport;
+  const input = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes ?? []);
+  const metadata = await sharp(input, { failOn: 'error' }).metadata();
+  if (metadata.format !== 'webp') return null;
+  const { info } = await sharp(input, { failOn: 'error' })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  return { format: metadata.format, width: info.width, height: info.height };
+}
+
+async function hasValidThumbnail(root, record, decodeThumbnail) {
+  const thumbnail = thumbnailFileForRecord(root, record);
+  try {
+    const stat = fs.lstatSync(thumbnail);
+    if (!stat.isFile()) return false;
+    const dimensions = await decodeThumbnail(fs.readFileSync(thumbnail));
+    return dimensions?.width === 480
+      && dimensions.height > 0
+      && dimensions.height <= 480;
+  } catch {
+    return false;
+  }
+}
+
 function existingRecordForArticle(root, articleId) {
   const assetId = articleImageAssetId(articleId);
   let records;
@@ -147,6 +197,20 @@ function existingRecordForArticle(root, articleId) {
   }
 }
 
+async function alreadySatisfiedCover(root, item, registryFiles, decodeThumbnail) {
+  try {
+    const location = locateArticleRegistry(root, item.articleId, { registryFiles });
+    const record = existingRecordForArticle(root, item.articleId);
+    if (!record || location.previousImage !== record.imageUrl) return false;
+    if (!await hasValidThumbnail(root, record, decodeThumbnail)) return false;
+    const section = sectionForRegistry(location);
+    const seo = locateArticleSeoImage(root, item.articleId, { section });
+    return seo.previousImage === record.imageUrl;
+  } catch {
+    return false;
+  }
+}
+
 async function defaultGenerateCover(item, context) {
   const { generateGovernedArticleHero } = await import('./lib/article-cover-engine.mjs');
   return generateGovernedArticleHero({
@@ -154,6 +218,7 @@ async function defaultGenerateCover(item, context) {
     articleId: item.articleId,
     title: item.title,
     area: context.area,
+    safetyHint: isVisualTextFailure(item.reason) ? NO_TEXT_IMAGE_RETRY_HINT : '',
     deadlineAt: Date.now() + IMAGE_BUDGET_MS,
     onProviderAttempt: ({ provider, attempt }) => {
       console.error(`  🎨 Copertina ${item.articleId}: ${provider}, tentativo ${attempt}`);
@@ -195,7 +260,7 @@ async function defaultGenerateThumbnail(sourcePath, { root, record } = {}) {
   }
 }
 
-async function finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles }) {
+async function finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles, decodeThumbnail }) {
   const destination = imageFileForRecord(root, record);
   if (!fs.existsSync(destination)) throw new Error(`generated cover is not materialized: ${record.imageUrl}`);
   trackFile(snapshots, destination);
@@ -205,8 +270,8 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   const seoLocation = locateArticleSeoImage(root, item.articleId, { section });
   trackFile(snapshots, absolute(root, seoLocation.path));
 
-  if (!fs.existsSync(thumbnail)) await generateThumbnail(destination, { root, item, record });
-  if (!fs.existsSync(thumbnail)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
+  if (!await hasValidThumbnail(root, record, decodeThumbnail)) await generateThumbnail(destination, { root, item, record });
+  if (!await hasValidThumbnail(root, record, decodeThumbnail)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
 
   const currentImage = location.previousImage;
   if (currentImage !== record.imageUrl) {
@@ -221,7 +286,7 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   };
 }
 
-async function processItem({ root, item, generateCover, generateThumbnail, registryFiles }) {
+async function processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail }) {
   const location = locateArticleRegistry(root, item.articleId, { registryFiles });
   const section = sectionForRegistry(location);
   const snapshots = new Map();
@@ -232,7 +297,7 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
   const existing = existingRecordForArticle(root, item.articleId);
   if (existing) {
     try {
-      const result = await finalizeCover({ root, item, record: existing, location, snapshots, generateThumbnail, registryFiles });
+      const result = await finalizeCover({ root, item, record: existing, location, snapshots, generateThumbnail, registryFiles, decodeThumbnail });
       appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
       return { record: existing, ...result, reused: true, section, snapshots };
     } catch (error) {
@@ -262,7 +327,7 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
       fs.renameSync(generated.filePath, imageFile);
     }
     appendGeneratedImageRecord(root, record);
-    const result = await finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles });
+    const result = await finalizeCover({ root, item, record, location, snapshots, generateThumbnail, registryFiles, decodeThumbnail });
     appendImageRegenerationPublishOutbox(root, { articleId: item.articleId, section });
     removeStagingFile(generated.filePath, imageFile);
     return { record, ...result, reused: false, section, snapshots };
@@ -283,15 +348,18 @@ function summaryFor(queue, result) {
     marked: queue.items.filter((item) => Number(item.failureCount || 0) >= 3).map((item) => item.articleId),
     failedIds: result.failedIds,
     reused: result.reused,
+    alreadySatisfied: result.alreadySatisfiedIds.length,
+    alreadySatisfiedIds: result.alreadySatisfiedIds,
     requeued: result.requeued,
     sections: result.sections,
   };
 }
 
 /**
- * Drain the oldest queue entries. The callbacks are injectable so the queue,
- * rollback, and registry-selection contract can be tested without a provider
- * or an image codec.
+ * Drain the least-failed eligible queue entries, after reconciling covers that
+ * are already complete. The callbacks are injectable so the queue, rollback,
+ * and registry-selection contract can be tested without a provider or image
+ * codec.
  */
 export async function drainQueuedCovers({
   root,
@@ -299,11 +367,26 @@ export async function drainQueuedCovers({
   now = () => new Date().toISOString(),
   generateCover = defaultGenerateCover,
   generateThumbnail = defaultGenerateThumbnail,
+  decodeThumbnail = decodeWebpThumbnail,
   registryFiles,
   retryFailed = false,
 } = {}) {
   const boundedLimit = parseLimit(limit);
   const queue = readImageRegenerationQueue(root);
+  const canonicalQueue = canonicalizeImageRegenerationQueue(queue);
+  const hadDuplicateArticleIds = canonicalQueue.items.length !== queue.items.length;
+  queue.items = canonicalQueue.items;
+  if (hadDuplicateArticleIds) writeImageRegenerationQueue(root, queue);
+  const alreadySatisfiedIds = [];
+  const unsatisfiedItems = [];
+  for (const item of queue.items) {
+    if (await alreadySatisfiedCover(root, item, registryFiles, decodeThumbnail)) alreadySatisfiedIds.push(item.articleId);
+    else unsatisfiedItems.push(item);
+  }
+  if (alreadySatisfiedIds.length > 0) {
+    queue.items = unsatisfiedItems;
+    writeImageRegenerationQueue(root, queue);
+  }
   const requeued = [];
   if (retryFailed) {
     for (const item of queue.items) {
@@ -317,15 +400,23 @@ export async function drainQueuedCovers({
   const selected = queue.items
     .filter((item) => retryFailed || item.status !== 'failed')
     .map((item, index) => ({ item, index }))
-    .sort(requestedAtSort)
+    .sort(queueAttemptSort)
     .slice(0, boundedLimit)
     .map(({ item }) => item);
-  const result = { drained: 0, failed: 0, failedIds: [], reused: 0, requeued, sections: {} };
+  const result = {
+    drained: 0,
+    failed: 0,
+    failedIds: [],
+    reused: 0,
+    alreadySatisfiedIds,
+    requeued,
+    sections: {},
+  };
 
   for (const item of selected) {
     let outcome = null;
     try {
-      outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles });
+      outcome = await processItem({ root, item, generateCover, generateThumbnail, registryFiles, decodeThumbnail });
       const index = queue.items.indexOf(item);
       if (index < 0) throw new Error(`queue item disappeared before success: ${item.articleId}`);
       queue.items.splice(index, 1);

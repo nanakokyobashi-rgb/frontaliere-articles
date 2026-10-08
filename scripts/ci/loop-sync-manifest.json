@@ -2233,7 +2233,7 @@
     {
       "path": "scripts/lib/merge-image-regeneration-queue.mjs",
       "mode": "corpus-only",
-      "reason": "Resolver del conflitto di `data/image-regeneration-queue.json`: durante i retry di generate-article.yml e publish-journalist-articles.yml unisce gli item per articleId, conserva la prima richiesta e il fallimento piu' recente, e rifiuta una coda illeggibile invece di perdere silenziosamente una richiesta. Non esiste sul sito: entrambi i producer sono nel corpus.",
+      "reason": "Resolver del conflitto di `data/image-regeneration-queue.json`: durante i retry di generate-article.yml e publish-journalist-articles.yml unisce gli item per articleId, fa vincere la rimozione del drain sugli aggiornamenti di soli fallimenti, conserva una richiesta con requestedAt successivo all'avvio e il fallimento piu' recente, e rifiuta una coda illeggibile invece di perdere silenziosamente una richiesta. Non esiste sul sito: entrambi i producer sono nel corpus.",
       "baseline": {
         "site": null,
         "corpus": null,
@@ -2285,6 +2285,16 @@
         "site": "9633813da0529c82",
         "corpus": "9633813da0529c82",
         "alignedAt": "2026-10-07"
+      }
+    },
+    {
+      "path": "scripts/lib/seo-entry-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia dello scrittore degli articoli (issue 2431): prima del lock di registrazione cerca l'id in tutti i file SEO della sezione con lo stesso risolutore bilanciato del motore (`engine/shared/seo-entry.mjs`) e rifiuta di aggiungere una voce gia' presente. Sul sito non esiste e non deve: lo scrittore dei contenuti vive solo qui, e il sito riceve i file SEO dal sync.",
+      "baseline": {
+        "site": null,
+        "corpus": "b3b85661f7bf2434",
+        "alignedAt": "2026-10-08"
       }
     },
     {
@@ -5677,7 +5687,7 @@
     {
       "path": "generator/scripts/regenerate-queued-covers.mjs",
       "mode": "corpus-only",
-      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: smaltisce per anzianita', applica il percorso governato, aggiorna registro/hero/thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
+      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: riconcilia all'avvio le copertine gia' soddisfatte, seleziona prima le voci mai tentate e poi quelle con meno fallimenti, applica il percorso governato, aggiorna registro/hero/thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
       "baseline": {
         "site": null,
         "corpus": null,

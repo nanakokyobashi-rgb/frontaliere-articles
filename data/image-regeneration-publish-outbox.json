@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "simplificazione-imposta-trasferimento-berna",
+      "section": "canton-be"
+    },
+    {
+      "articleId": "domodossola-arresto-hashish-stazione",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "wabern-tram-risanamento",
+      "section": "canton-be"
+    },
+    {
+      "articleId": "auto-elettrica-come-risparmiare-fino-al-50",
+      "section": "svizzera"
+    },
+    {
+      "articleId": "motore-filo-epfl",
+      "section": "svizzera"
+    },
+    {
+      "articleId": "petizione-recupero-carovita-ticino",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52",
+      "section": "canton-zg"
+    },
+    {
+      "articleId": "economia-ginevrina-ripresa-globale",
+      "section": "canton-ge"
+    },
+    {
+      "articleId": "disoccupazione-giura-settembre-2026",
+      "section": "canton-ju"
+    },
+    {
+      "articleId": "permessi-edilizi-digitali-basel",
+      "section": "canton-basilea"
+    }
+  ]
+}
