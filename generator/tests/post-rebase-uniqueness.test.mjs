@@ -149,6 +149,38 @@ test('un record meta con formato non riconosciuto non puo\' ridurre il contro-co
   );
 });
 
+test('un titolo senza il suo excerpt viene rifiutato in modo fail-closed', () => {
+  const files = sectionFiles(FIRST, { ids: ['esistente'] });
+  files[FIRST.metaFile] = "export const META = {\n  'blog.article.esistente.title': 'Titolo letto',\n};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => files[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*mancano excerpt per esistente/,
+  );
+});
+
+test('un excerpt orfano o duplicato non puo\' ridurre il contro-corpus', () => {
+  const orphanFiles = sectionFiles(FIRST, { ids: ['esistente'] });
+  orphanFiles[FIRST.metaFile] = "export const META = {\n"
+    + "  'blog.article.esistente.title': 'Titolo letto',\n"
+    + "  'blog.article.orfano.excerpt': 'Estratto orfano',\n"
+    + "};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => orphanFiles[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*excerpt orfani.*orfano/,
+  );
+
+  const duplicateFiles = sectionFiles(FIRST, { ids: ['esistente'] });
+  duplicateFiles[FIRST.metaFile] = "export const META = {\n"
+    + "  'blog.article.esistente.title': 'Titolo letto',\n"
+    + "  'blog.article.esistente.excerpt': 'Primo estratto',\n"
+    + "  'blog.article.esistente.excerpt': 'Secondo estratto',\n"
+    + "};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => duplicateFiles[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*excerpt duplicati.*esistente/,
+  );
+});
+
 // ── La logica, sugli snapshot ──────────────────────────────────────────────
 
 test('ok: id nuovo e fonte nuova, nessuna collisione nello stato post-rebase', () => {

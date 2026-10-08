@@ -28,7 +28,8 @@ import {
  */
 export function findContentDuplicate(data, existingArticles) {
   const candidate = data?.content?.it ?? data;
-  existingArticles = (existingArticles ?? []).filter((article) => article?.id !== candidate?.id);
+  const candidateId = data?.id ?? candidate?.id;
+  existingArticles = (existingArticles ?? []).filter((article) => article?.id !== candidateId);
   const articles = existingArticles;
 
   // ── Local tokenizer ────────────────────────────────────────
@@ -64,7 +65,7 @@ export function findContentDuplicate(data, existingArticles) {
   const commonEntities = corpusCommonEntities(existingEntityLists, commonEntityMinDf(existingArticles.length));
 
   // ── Prepare new article signals ────────────────────────────
-  const newIdWords = String(candidate?.id ?? '').split('-').filter(w => w.length > 1).map(w => normalizeItWord(w));
+  const newIdWords = String(candidateId ?? '').split('-').filter(w => w.length > 1).map(w => normalizeItWord(w));
   const newTitleWords = getSignificantWords(candidate?.title);
   const newExcerptWords = getSignificantWords(candidate?.excerpt || '');
   const newEntities = distinctiveEntities(

@@ -152,23 +152,25 @@ function parseLedger(text, label) {
 }
 
 function parseArticleMeta(text, label) {
-  if (text == null) return {};
+  if (text == null) return { articles: {}, titleIds: [], excerptIds: [] };
   const titleMatches = [...text.matchAll(metaFieldRegex('title'))];
   const excerptMatches = [...text.matchAll(metaFieldRegex('excerpt'))];
   const excerpts = new Map(
     excerptMatches.map((match) => [match[1], unescapeTsValue(match[2])]),
   );
   const articles = {};
+  const titleIds = [];
   for (const match of titleMatches) {
     const id = match[1];
     if (articles[id]) throw new Error(`${label}: id duplicato nel meta IT '${id}'`);
+    titleIds.push(id);
     articles[id] = {
       id,
       title: unescapeTsValue(match[2]),
       excerpt: excerpts.get(id) ?? '',
     };
   }
-  return articles;
+  return { articles, titleIds, excerptIds: excerptMatches.map((match) => match[1]) };
 }
 
 /**
@@ -178,16 +180,33 @@ function parseArticleMeta(text, label) {
  * il file manca mentre slug/registro hanno record, continuare significherebbe
  * confrontare un contro-corpus troncato e lasciare passare un duplicato.
  */
-function assertArticleMetaCoverage({ slugIds, registryIds, articles }, label) {
+function assertArticleMetaCoverage({ slugIds, registryIds, articles, titleIds, excerptIds }, label) {
   const surfaceIds = new Set([...slugIds, ...registryIds]);
   const metaIds = new Set(Object.keys(articles));
   const missing = [...surfaceIds].filter((id) => !metaIds.has(id));
   const extra = [...metaIds].filter((id) => !surfaceIds.has(id));
-  if (missing.length === 0 && extra.length === 0) return;
+  const excerptCounts = new Map();
+  for (const id of excerptIds) excerptCounts.set(id, (excerptCounts.get(id) ?? 0) + 1);
+  const titleIdSet = new Set(titleIds);
+  const missingExcerpts = titleIds.filter((id) => !excerptCounts.has(id));
+  const orphanExcerpts = [...excerptCounts.keys()].filter((id) => !titleIdSet.has(id));
+  const duplicateExcerpts = [...excerptCounts.entries()]
+    .filter(([, count]) => count > 1)
+    .map(([id, count]) => `${id} (${count})`);
+  if (
+    missing.length === 0
+    && extra.length === 0
+    && missingExcerpts.length === 0
+    && orphanExcerpts.length === 0
+    && duplicateExcerpts.length === 0
+  ) return;
 
   const details = [];
   if (missing.length) details.push(`mancano ${missing.length} ID (${missing.slice(0, 5).join(', ')})`);
   if (extra.length) details.push(`ci sono ${extra.length} ID non presenti in slug/registro (${extra.slice(0, 5).join(', ')})`);
+  if (missingExcerpts.length) details.push(`mancano excerpt per ${missingExcerpts.slice(0, 5).join(', ')}`);
+  if (orphanExcerpts.length) details.push(`excerpt orfani (${orphanExcerpts.slice(0, 5).join(', ')})`);
+  if (duplicateExcerpts.length) details.push(`excerpt duplicati (${duplicateExcerpts.slice(0, 5).join(', ')})`);
   throw new Error(`${label}: meta IT assente o incoerente — ${details.join('; ')}`);
 }
 
@@ -212,8 +231,9 @@ export function snapshotSections(surfaces, readAt, label) {
   for (const s of surfaces) {
     const slugIds = slugIdsOf(read(s.slugDataFile));
     const registryIds = registryIdsOf(read(s.registryFile));
-    const articles = parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`);
-    assertArticleMetaCoverage({ slugIds, registryIds, articles }, `${label}:${s.metaFile}`);
+    const parsedMeta = parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`);
+    const { articles } = parsedMeta;
+    assertArticleMetaCoverage({ slugIds, registryIds, ...parsedMeta }, `${label}:${s.metaFile}`);
     out[s.section] = {
       slugIds,
       registryIds,

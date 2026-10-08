@@ -68,6 +68,7 @@ import {
   distinctiveEntities,
   extractKeyEntities,
 } from '../scripts/lib/dup-entities.mjs';
+import { findContentDuplicate } from '../scripts/lib/article-content-duplicate.mjs';
 
 // Taglia del corpus alla registrazione delle attese (3.768 titoli IT misurati
 // il 2026-08-08). La soglia titolo è adattiva MA satura al ceiling 0.85, e a
@@ -125,6 +126,28 @@ function checkDuplicate(newArticle, existingArticle, corpusSize = CORPUS_SIZE_AT
 
   return { isDuplicate, idSim, titleSim, excerptSim, entitySim, combinedScore };
 }
+
+describe('forma del payload del generatore', () => {
+  it('usa data.id quando content.it contiene solo i campi editoriali', () => {
+    const existing = {
+      id: 'pedemontana-frode-sms-email',
+      title: 'Pedemontana truffe via SMS',
+      excerpt: 'Avviso alle famiglie del quartiere.',
+    };
+    const candidate = {
+      id: 'pedemontana-frode-sms-email-frontalieri',
+      title: 'Pedemontana truffe via email',
+      excerpt: 'Dettagli diversi per i pendolari.',
+    };
+    const duplicate = findContentDuplicate({
+      id: candidate.id,
+      content: { it: { title: candidate.title, excerpt: candidate.excerpt } },
+    }, [existing]);
+
+    expect(duplicate?.existing?.id).toBe(existing.id);
+    expect(duplicate?.signals?.some((signal) => signal.startsWith('ID:'))).toBe(true);
+  });
+});
 
 // ── I tre duplicati noti del 2026-02-19 (fixture del sito, verbatim) ──
 
