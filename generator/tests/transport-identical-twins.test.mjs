@@ -891,7 +891,7 @@ test('sotto il tetto e con entrambe le metà presenti si copia tutto', () => {
   assert.equal(capped, 0);
 });
 
-test('il contratto crawler chiude workflow e artifact prima del tetto', () => {
+test('replay run 37699422170: il contratto crawler chiude workflow e artifact prima del tetto', () => {
   const manifest = {
     files: [
       { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' },
@@ -906,12 +906,15 @@ test('il contratto crawler chiude workflow e artifact prima del tetto', () => {
     artifacts: [{ file: 'translate-pending.yml' }],
   }));
   const couplingGraph = [...graph].map(([filePath, couplings]) => ({ path: filePath, couplings }));
-  const candidates = [
-    cand('.github/workflows/translate-pending.yml'),
-    ...Array.from({ length: 24 }, (_, index) => cand(`.github/workflows/filler-${String(index).padStart(2, '0')}.yml`)),
-    cand('generator/data/crawler-cross-repo-contract.json'),
-  ];
-  const { chosen, capped } = closeTransportSet(candidates, { maxFiles: 25, couplingGraph });
+  const observedRun = {
+    id: 37699422170,
+    candidates: [
+      cand('.github/workflows/translate-pending.yml'),
+      ...Array.from({ length: 24 }, (_, index) => cand(`.github/workflows/filler-${String(index).padStart(2, '0')}.yml`)),
+      cand('generator/data/crawler-cross-repo-contract.json'),
+    ],
+  };
+  const { chosen, capped } = closeTransportSet(observedRun.candidates, { maxFiles: 25, couplingGraph });
   const paths = chosen.map((candidate) => candidate.path);
   assert.ok(paths.includes('.github/workflows/translate-pending.yml'));
   assert.ok(paths.includes('generator/data/crawler-cross-repo-contract.json'));
