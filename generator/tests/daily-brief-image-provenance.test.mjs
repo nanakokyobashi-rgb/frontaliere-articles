@@ -30,7 +30,7 @@ test('the daily card uses the existing site-owned schema without provider or vis
     const id = 'bollettino-frontaliere-2026-10-07';
     const image = path.join(root, 'public/images/blog', `${id}.webp`);
     fs.mkdirSync(path.dirname(image), { recursive: true });
-    fs.writeFileSync(image, Buffer.from('deterministic daily brief hero')); 
+    fs.writeFileSync(image, Buffer.from('deterministic daily brief hero'));
 
     const record = buildDailyBriefImageRecord({
       id,
