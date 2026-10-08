@@ -5,11 +5,12 @@
  * articoli per cantone», P7b). Gemello di reconcile-article-shards.mjs per le
  * sezioni servite dal Worker invece che da uno shard Pages.
  *
- * Perche' serve: fast-publish-section.yml pubblica gli articoli del commit che
- * lo fa scattare (`git diff HEAD~1 HEAD`); un push con piu' commit, una run
- * fallita a meta' o un upload non confermato lasciano un articolo annunciato
- * in `slugs.json`, nella sitemap della sezione e nei feed, e assente su R2:
- * il Worker risponde 404 su un URL che il sito dichiara.
+ * Perche' serve: fast-publish-section.yml rende gli id del piano del push, ma
+ * lo stato delle chiavi gia' sull'edge vive nel manifest scritto solo dopo una
+ * pubblicazione verificata. Un push con piu' commit, una run fallita a meta' o
+ * un upload non confermato possono lasciare un articolo annunciato in
+ * `slugs.json`, nella sitemap della sezione e assente su R2; lo stesso
+ * manifest permette di vedere una pagina ritirata rimasta sull'edge.
  *
  * Cosa confronta, da UNA osservazione della superficie pubblicata (stesso
  * `commit` in manifest, sections, slugs e registro edge, altrimenti il deploy
@@ -18,7 +19,8 @@
  *   atteso    ogni URL annunciato dalla sitemap pubblicata della sezione
  *             (loc e tutti gli xhtml:link href), quindi landing, hub,
  *             archivio con ogni page-N e articoli nelle locali disponibili
- *   presente  HEAD sulla chiave che il Worker legge,
+ *   presente  HEAD sulla chiave che il Worker legge, per le pagine annunciate
+ *             e per le pagine articolo candidate come orfane dal manifest,
  *             `https://cdn.frontaliereticino.ch/edge/sections/<path>/index.html`
  *
  * Solo un 404 conta come «mancante». Ogni altra risposta (5xx, timeout) e'
@@ -100,12 +102,14 @@ export function expectedSectionPages(entry, slugs, sitemapXml) {
 }
 
 /**
- * Articoli che il manifest dell'edge considera presenti ma che la superficie
- * corrente non annuncia più, per ritiro o cambio di slug.
+ * Articoli che il manifest dell'edge considera presenti ma che il registro
+ * corrente non contiene più, oppure il cui slug è cambiato.
  */
-export function orphanedArticleCandidates(entry, manifest, slugs) {
+export function orphanedArticleCandidates(entry, manifest, slugs, activeIds = Object.keys(slugs ?? {})) {
+  const active = new Set(activeIds);
   return (manifest?.pages?.article ?? [])
     .filter((row) => {
+      if (!active.has(row.id)) return true;
       const expectedSlug = slugs?.[row.id]?.[row.locale];
       const expectedPath = expectedSlug ? `${entry.paths[row.locale]}${expectedSlug}/` : null;
       return expectedPath !== row.canonicalPath;
@@ -262,10 +266,14 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
     }
     const expected = expectedSectionPages(entry, slugs.cantons?.[entry.id] ?? {}, sitemapXml);
     const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
-    const pageManifest = await fetchPageManifest(pageManifestUrl(entry.id, CDN_BASE), { fetchImpl });
+    const activeRows = rows.filter((row) => row.section === entry.id);
+    const activeIds = activeRows.length
+      ? new Set(activeRows.map((row) => row.id))
+      : new Set(Object.keys(slugs.cantons?.[entry.id] ?? {}));
+    const pageManifest = await fetchPageManifest(pageManifestUrl(entry.id, CDN_BASE), { fetchImpl, section: entry.id });
     let orphanPages = [];
     if (pageManifest.state === 'ok') {
-      const candidates = orphanedArticleCandidates(entry, pageManifest.doc, slugs.cantons?.[entry.id] ?? {});
+      const candidates = orphanedArticleCandidates(entry, pageManifest.doc, slugs.cantons?.[entry.id] ?? {}, activeIds);
       const orphanStates = await mapLimit(candidates, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
       orphanPages = candidates.map((page, i) => ({ ...page, state: orphanStates[i] }));
     }

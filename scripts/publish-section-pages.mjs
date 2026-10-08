@@ -45,6 +45,10 @@
  *   il comportamento resta dry-run per compatibilita'; --dry-run lo rende
  *   esplicito e non si combina con --publish.
  *
+ * Le pagine obsolete si confrontano con `edge/sections/_page-manifests/`,
+ * scritto solo dopo upload, verify e delete riusciti. `--previous-revision`
+ * resta soltanto il ponte per la prima run, prima che esista il manifest.
+ *
  * Esce 1 se una pagina non passa la validazione, se un upload non e'
  * confermato o se il verify fallisce.
  */
@@ -192,6 +196,32 @@ function manifestPageEntries(section, manifest, kind) {
     }
     return kind === 'article' ? { ...page, id: row.id } : page;
   });
+}
+
+function manifestEntryFromReleasePage(section, page, kind) {
+  const entry = pageEntry(section, `${page.canonicalPath.slice(1)}index.html`, kind);
+  return kind === 'article' ? { ...entry, id: page.id } : entry;
+}
+
+/**
+ * Prima che esista il manifest edge, un giro article-only deve comunque
+ * lasciare un inventario completo abbastanza da far vedere al giro seguente
+ * le pagine che il parent del push non contiene più. Gli aggregati hanno
+ * percorsi derivati dal core; gli articoli e l'archivio arrivano dalla
+ * release precedente usata solo per questa migrazione.
+ */
+function migrationManifestPages(section, previousArticlePages, previousArchivePages) {
+  const routes = sectionRoutes(section);
+  const topicHubs = Object.values(ARTICLE_SECTION_CORE_ALL[section].topicHubs ?? {});
+  return [
+    ...previousArticlePages.map((page) => manifestEntryFromReleasePage(section, page, 'article')),
+    ...previousArchivePages.map((page) => manifestEntryFromReleasePage(section, page, 'archive')),
+    ...routes.flatMap((route) => {
+      const landing = pageEntry(section, `${route.prefix.slice(1)}index.html`, 'landing');
+      const hubs = topicHubs.map((slugs) => pageEntry(section, `${route.prefix.slice(1)}${slugs[route.locale]}/index.html`, 'hub'));
+      return [landing, ...hubs];
+    }),
+  ];
 }
 
 const RELEASE_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -524,7 +554,7 @@ function run(cmd, args) {
   return { code: res.status ?? 1, stdout: res.stdout ?? '' };
 }
 
-/** Scrive l'inventario solo dopo che il giro ha verificato anche le delete. */
+/** Scrive un checkpoint o la release solo nel punto deciso dal chiamante. */
 export function publishPageManifest({ manifest, distDir, runImpl = run }) {
   const local = path.join(distDir, `.section-page-manifest-${manifest.section}.json`);
   try {
@@ -799,7 +829,7 @@ export async function main(argv = process.argv.slice(2)) {
   let publishedManifest = { state: 'absent' };
   let publishedManifestPages = null;
   if (publishing) {
-    publishedManifest = await fetchPageManifest(pageManifestUrl(section, CDN_BASE));
+    publishedManifest = await fetchPageManifest(pageManifestUrl(section, CDN_BASE), { section });
     if (publishedManifest.state === 'ok') {
       try {
         publishedManifestPages = Object.fromEntries(
@@ -809,19 +839,18 @@ export async function main(argv = process.argv.slice(2)) {
         publishedManifest = { state: 'unknown', reason: error?.message ?? String(error) };
       }
     }
-    if (publishedManifest.state !== 'ok') {
+    if (publishedManifest.state === 'absent') {
       console.log(
-        `::warning::[${LOG}] manifest edge ${section} non disponibile (${publishedManifest.state}` +
-          `${publishedManifest.reason ? `: ${publishedManifest.reason}` : ''}); uso il commit precedente solo per la migrazione`,
+        `::warning::[${LOG}] manifest edge ${section} assente: uso il commit precedente solo per la migrazione`,
       );
     }
   }
   // Il manifest è la fonte normale. Il commit precedente resta solo un ponte
   // per la prima run dopo il deploy del fix, quando il manifest non esisteva.
   const previousArticlePages = publishedManifestPages?.article
-    ?? previousArticleReleasePages(ROOT_DIR, section, args.previousRevision);
+    ?? (publishedManifest.state === 'absent' ? previousArticleReleasePages(ROOT_DIR, section, args.previousRevision) : []);
   const previousArchivePages = publishedManifestPages?.archive
-    ?? previousArchiveReleasePages(ROOT_DIR, section, args.previousRevision);
+    ?? (publishedManifest.state === 'absent' ? previousArchiveReleasePages(ROOT_DIR, section, args.previousRevision) : []);
   // Preflight the same registry the Worker serves before deciding whether a
   // partial hub set is merely a draft refresh or a live-page defect. A draft
   // checkout must not override an edge registry that is still live.
@@ -885,6 +914,12 @@ export async function main(argv = process.argv.slice(2)) {
   const defects = [];
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
+  }
+  if (publishing && publishedManifest.state === 'unknown') {
+    defects.push(
+      `manifest edge ${section} non verificabile (${publishedManifest.reason ?? 'errore sconosciuto'}): ` +
+      'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
+    );
   }
   for (const page of pages) {
     const abs = path.join(distDir, page.rel);
@@ -977,9 +1012,28 @@ export async function main(argv = process.argv.slice(2)) {
     ]
     : pages.filter((page) => page.kind === 'article');
   const currentManifest = pageManifestFromPages({ section, commit: releaseCommit, pages: manifestPages });
-  const nextManifest = aggregatePagesAllowed || !publishedManifestPages
+  const migrationManifest = !publishedManifestPages && publishedManifest.state === 'absent'
+    ? pageManifestFromPages({
+      section,
+      commit: releaseCommit,
+      pages: migrationManifestPages(section, previousArticlePages, previousArchivePages),
+    })
+    : null;
+  const nextManifest = aggregatePagesAllowed
     ? currentManifest
-    : mergePageManifests(publishedManifest.doc, currentManifest);
+    : publishedManifestPages
+      ? mergePageManifests(publishedManifest.doc, currentManifest)
+      : mergePageManifests(migrationManifest, currentManifest);
+  if (migrationManifest) {
+    const seeded = publishPageManifest({ manifest: migrationManifest, distDir });
+    summary.migrationManifestSeeded = seeded;
+    if (!seeded) {
+      summary.published = { failures: 1, uploaded: 0, deleted: 0, status: null, manifestSeeded: false };
+      console.error(`::error::[${LOG}] checkpoint manifest edge ${section} non confermato: nessuna pagina viene pubblicata`);
+      writeSummary();
+      return 1;
+    }
+  }
   summary.published = await publish({ pages, cdnUploads, obsoletePages, distDir, section, releaseCommit });
   if (summary.published.failures === 0) {
     const manifestPublished = publishPageManifest({ manifest: nextManifest, distDir });

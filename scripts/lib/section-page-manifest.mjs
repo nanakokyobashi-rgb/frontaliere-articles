@@ -2,10 +2,11 @@
  * section-page-manifest.mjs — inventario delle pagine cantonali realmente
  * pubblicate dal publisher R2.
  *
- * Il manifest viene scritto solo dopo che upload, verify e cancellazioni della
- * release sono riusciti. Per questo un run fallito lascia leggibile il
- * manifest della release precedente e il giro successivo può ancora vedere le
- * chiavi che il run fallito non ha cancellato.
+ * Il manifest della release corrente viene scritto solo dopo che upload,
+ * verify e cancellazioni della release sono riusciti. Durante la prima
+ * migrazione, quando il manifest non esiste, il publisher può scrivere prima
+ * un checkpoint dell'inventario precedente: così anche un run fallito prima
+ * della prima cancellazione lascia una base leggibile al giro successivo.
  */
 
 export const PAGE_MANIFEST_SCHEMA = 1;
@@ -127,7 +128,7 @@ export function isValidPageManifest(doc, options) {
 }
 
 /** Lettura fail-closed del manifest pubblico: 404 = mai pubblicato, altro errore = unknown. */
-export async function fetchPageManifest(url, { fetchImpl = fetch } = {}) {
+export async function fetchPageManifest(url, { fetchImpl = fetch, section } = {}) {
   try {
     const response = await fetchImpl(`${url}${url.includes('?') ? '&' : '?'}_spm=${Date.now()}`, {
       headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
@@ -136,7 +137,7 @@ export async function fetchPageManifest(url, { fetchImpl = fetch } = {}) {
     if (response.status === 404) return { state: 'absent' };
     if (response.status !== 200 && !response.ok) return { state: 'unknown', reason: `HTTP ${response.status}` };
     const doc = await response.json();
-    const errors = pageManifestErrors(doc);
+    const errors = pageManifestErrors(doc, { section });
     return errors.length === 0 ? { state: 'ok', doc } : { state: 'unknown', reason: errors.join('; ') };
   } catch (error) {
     return { state: 'unknown', reason: error?.message ?? String(error) };
