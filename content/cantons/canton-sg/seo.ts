@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-spital-grabs-haus-o-vertice': {
+    title: 'Spital Grabs: Haus O raggiunge il punto più alto',
+    description: 'A settembre 2026 Haus O dello Spital Grabs ha raggiunto il punto più alto. Haus S è stato ampliato: nuovi spazi per radiologia e oncologia, lavori fino al 2028.',
+    keywords: 'frontalieri, ticino, svizzera, italia, spital, grabs, haus, raggiunge',
+    ogTitle: 'Spital Grabs: radiologia e oncologia nel nuovo Haus O',
+    ogDescription: 'Nel cantiere di Spital Grabs, HOCH Health Ostschweiz ha segnato un nuovo passaggio: Haus O ha raggiunto la massima altezza nel settembre 2026. La seconda fase di Haus S e il nuovo edificio proseguiranno fino al 2028.',
+    canonicalPath: '/articoli-san-gallo/spital-grabs-haus-o-vertice/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Spital Grabs: Haus O raggiunge il punto più alto",
+      "description": "A settembre 2026 Haus O dello Spital Grabs ha raggiunto il punto più alto. Haus S è stato ampliato: nuovi spazi per radiologia e oncologia, lavori fino al 2028.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-spital-grabs-haus-o-vertice.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere del nuovo Haus O allo Spital Grabs, nel Canton San Gallo."
+      },
+      "datePublished": "2026-10-08T11:13:38+00:00",
+      "dateModified": "2026-10-08T11:13:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/spital-grabs-haus-o-vertice/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'spital-grabs-haus-o-vertice',
+ category: 'novita',
+ date: '2026-10-08T11:13:38.471Z',
+ image: '/images/blog/article-spital-grabs-haus-o-vertice.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

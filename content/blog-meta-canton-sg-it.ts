@@ -12,6 +12,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.casse-malati-amministrazione-costi-2025.title': 'Casse malati: amministrazione varia da 103 a 445 franchi',
     'blog.article.casse-malati-amministrazione-costi-2025.excerpt': 'Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con minimo 103,35 CHF e massimo 445,20 CHF.',
     'blog.article.casse-malati-amministrazione-costi-2025.imageAlt': 'Ufficio di una cassa malati a San Gallo con persone che camminano davanti',
+    'blog.article.spital-grabs-haus-o-vertice.title': 'Spital Grabs: Haus O raggiunge il punto più alto',
+    'blog.article.spital-grabs-haus-o-vertice.excerpt': 'A settembre 2026 Haus O dello Spital Grabs ha raggiunto il punto più alto. Haus S è stato ampliato: nuovi spazi per radiologia e oncologia, lavori fino al 2028.',
+    'blog.article.spital-grabs-haus-o-vertice.imageAlt': 'Cantiere del nuovo Haus O allo Spital Grabs, nel Canton San Gallo.',
 };
 
 export default blogMetaCantonSgIt;
