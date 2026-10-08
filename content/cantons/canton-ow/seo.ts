@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Obvaldo segnala una revisione parziale della RTVV: adeguamento delle categorie tariffarie del contributo aziendale. Riferimento: Staatskanzlei di Sarnen.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/asilo-nido-custodia-bambini-canton-obvaldo-costi.webp`,
+        "url": `${BASE_URL}/images/blog/article-rtvv-obvaldo-categorie-aziendali.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Rathaus di Sarnen, sede indicata per la Staatskanzlei di Obvaldo"

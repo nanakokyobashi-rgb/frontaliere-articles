@@ -68,6 +68,7 @@ import {
   distinctiveEntities,
   extractKeyEntities,
 } from '../scripts/lib/dup-entities.mjs';
+import { findContentDuplicate } from '../scripts/lib/article-content-duplicate.mjs';
 
 // Taglia del corpus alla registrazione delle attese (3.768 titoli IT misurati
 // il 2026-08-08). La soglia titolo è adattiva MA satura al ceiling 0.85, e a
@@ -125,6 +126,28 @@ function checkDuplicate(newArticle, existingArticle, corpusSize = CORPUS_SIZE_AT
 
   return { isDuplicate, idSim, titleSim, excerptSim, entitySim, combinedScore };
 }
+
+describe('forma del payload del generatore', () => {
+  it('usa data.id quando content.it contiene solo i campi editoriali', () => {
+    const existing = {
+      id: 'pedemontana-frode-sms-email',
+      title: 'Pedemontana truffe via SMS',
+      excerpt: 'Avviso alle famiglie del quartiere.',
+    };
+    const candidate = {
+      id: 'pedemontana-frode-sms-email-frontalieri',
+      title: 'Pedemontana truffe via email',
+      excerpt: 'Dettagli diversi per i pendolari.',
+    };
+    const duplicate = findContentDuplicate({
+      id: candidate.id,
+      content: { it: { title: candidate.title, excerpt: candidate.excerpt } },
+    }, [existing]);
+
+    expect(duplicate?.existing?.id).toBe(existing.id);
+    expect(duplicate?.signals?.some((signal) => signal.startsWith('ID:'))).toBe(true);
+  });
+});
 
 // ── I tre duplicati noti del 2026-02-19 (fixture del sito, verbatim) ──
 
@@ -432,11 +455,14 @@ describe('Article duplicate detection (multi-signal, algoritmo ATTUALE)', () => 
 
 describe('drift guard — checkForDuplicates in create-article.mjs', () => {
   it('le soglie e le condizioni composte replicate qui esistono verbatim nel sorgente', () => {
-    const src = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf-8');
+    const src = readFileSync(new URL('../scripts/lib/article-content-duplicate.mjs', import.meta.url), 'utf-8');
+    const generatorSrc = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf-8');
 
-    // `localizedSlugs: false` e' il gate anticipato di Step 3a.0-dup: stesse
-    // soglie, solo lo slot IT degli slug (gli EN/DE/FR sono ancora provvisori).
-    expect(src).toContain('function checkForDuplicates(data, { localizedSlugs = true } = {})');
+    // Le soglie del contenuto sono qui, nella sorgente pura condivisa dal
+    // generatore e dal gate post-rebase; il controllo slug resta nel chiamante.
+    expect(src).toContain('export function findContentDuplicate(data, existingArticles)');
+    expect(generatorSrc).toContain("import { findContentDuplicate } from './lib/article-content-duplicate.mjs';");
+    expect(generatorSrc).toContain('const duplicate = findContentDuplicate(data, existingArticles);');
     expect(src).toContain('const ID_THRESHOLD = 0.72;');
     expect(src).toContain("computeAdaptiveEvergreenThresholds(existingArticles.length).titleJaccard");
     expect(src).toContain('const EXCERPT_THRESHOLD = 0.62;');

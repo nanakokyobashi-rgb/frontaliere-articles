@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'chiusura-strade-gallusmarkt-svitto',
  category: 'pratico',
  date: '2026-10-07T09:21:09.358Z',
- image: '/images/blog/logistica-pallet-analisi-mercato.webp',
+ image: '/images/blog/article-chiusura-strade-gallusmarkt-svitto.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SZ'],

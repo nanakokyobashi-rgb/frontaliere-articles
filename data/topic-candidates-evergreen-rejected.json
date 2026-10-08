@@ -795,14 +795,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 2
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954862/sentenza-del-cdm-sul-pg-pagani-anche-per-i-vertici-del-parlamento-e-tutto-a-posto": {
-      "section": "frontaliere",
-      "ts": 1791255421484
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/riforma-dellartigianato-confartigianato-varese-le-critiche-richiedono-dati-comparabili/2698681": {
-      "section": "frontaliere",
-      "ts": 1791255486922
-    },
     "frontaliere::https://www.tio.ch/ticino/cronaca/1954785/non-paga-la-cassa-malati-da-due-anni-ora-finisce-davanti-al-pretore": {
       "section": "frontaliere",
       "ts": 1791262333741
@@ -1098,6 +1090,10 @@
     "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
       "section": "svizzera",
       "ts": 1791424608347
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/varese/articolo/trasformare-le-microplastiche-in-nuove-risorse-il-progetto-propla-si-conclude-lanciando-la-sfida-di.html": {
+      "section": "frontaliere",
+      "ts": 1791430262025
     }
   }
 }

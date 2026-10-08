@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A settembre 2026 in Appenzello Esterno gli iscritti al RAV scendono a 819, 24 in meno; i disoccupati sono 455, 15 in meno, e il tasso passa dall'1,6% all'1,5%.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-lavoro-ar-rav-settembre-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Centro regionale di collocamento nel Canton Appenzello Esterno"

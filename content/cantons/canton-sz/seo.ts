@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Avviso chiusure stradali a Einsiedeln per il Gallusmarkt: Hauptstrasse e Sagenplatz inaccessibili dalle 5.00 alle 20.00. Info su rumori e perimetri.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/logistica-pallet-analisi-mercato.webp`,
+        "url": `${BASE_URL}/images/blog/article-chiusura-strade-gallusmarkt-svitto.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Strade di Einsiedeln durante l'allestimento del mercato"

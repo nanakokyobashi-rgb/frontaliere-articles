@@ -21,7 +21,7 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Canton Uri punta sulle misure energetiche per la protezione del clima: il titolo della notizia indica l'orientamento, senza dettagli operativi.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/svizzeri-chiedono-misure-clima.webp`,
+        "url": `${BASE_URL}/images/blog/article-uri-misure-energia-clima.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Paesaggio del Canton Uri associato alle misure energetiche per la protezione del clima"

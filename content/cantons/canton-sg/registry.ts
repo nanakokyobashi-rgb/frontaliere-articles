@@ -10,7 +10,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione',
  category: 'novita',
  date: '2026-10-07T10:15:11.276Z',
- image: '/images/blog/mercato-lavoro-canton-grigioni.webp',
+ image: '/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp',
  hasCalculator: false,
  articleType: 'news',
  canton: ['SG'],
