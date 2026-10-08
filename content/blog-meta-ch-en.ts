@@ -7934,6 +7934,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.frankencoin-kraken-zchf.title': 'Frankencoin, the CHF stablecoin arrives on Kraken',
     'blog.article.frankencoin-kraken-zchf.excerpt': 'Kraken adds Frankencoin (ZCHF) to trading The stablecoin is pegged to the Swiss franc The announcement comes from an association based in Zug Frankencoin',
     'blog.article.frankencoin-kraken-zchf.imageAlt': 'Swiss panorama with a visual reference to digital finance in Swiss francs',
+    'blog.article.forniture-cemento-aumento-terzo-trimestre.title': 'Cement supplies slightly up in the third quarter',
+    'blog.article.forniture-cemento-aumento-terzo-trimestre.excerpt': '988\'700 tonnes of cement in the third quarter Supplies up 1% on the same period More than 98% of the volume is low-clinker 32% by rail',
+    'blog.article.forniture-cemento-aumento-terzo-trimestre.imageAlt': 'Cement truck unloading material at a Swiss construction site with mountains in the background',
 };
 
 export default blogMetaChEn;

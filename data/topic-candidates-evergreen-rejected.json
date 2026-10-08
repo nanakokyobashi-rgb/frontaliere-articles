@@ -1108,6 +1108,30 @@
     "svizzera::https://www.rsi.ch/s/4145486": {
       "section": "svizzera",
       "ts": 1791477587516
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/caro-affitti-foletti-a-lugano-gli-alloggi-accessibili-sono-superiori-alla-domanda-444245": {
+      "section": "frontaliere",
+      "ts": 1791479844180
+    },
+    "frontaliere::https://comozero.it/attualita/la-super-autostrada-della-lombardia-a-che-punto-e-il-cantiere-cosa-e-successo-dopo-gli-allagamenti": {
+      "section": "frontaliere",
+      "ts": 1791479881983
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/nuovo-ospedale-bretella-di-gallarate-e-trasporto-pubblico-il-pd-di-busto-arsizio-chiede-chiarimenti-sul-piano-della-mobilita/2702584": {
+      "section": "frontaliere",
+      "ts": 1791479916005
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/salute-3/articolo/luoghi-di-lavoro-che-promuovono-salute-comune-di-varese-confindustria-varese-asst-sette-laghi-e-a.html": {
+      "section": "frontaliere",
+      "ts": 1791479937323
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/crisi-beko-il-presidente-magrini-dopo-il-tavolo-a-roma-risposte-insufficienti-servono-investimenti-realizzati-vendite-e-lavoro/2702620": {
+      "section": "frontaliere",
+      "ts": 1791479988690
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1955637/marchesi-dipartimento-stato-bertoli-personale-direttore-territorio": {
+      "section": "frontaliere",
+      "ts": 1791480032678
     }
   }
 }

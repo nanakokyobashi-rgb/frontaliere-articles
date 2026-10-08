@@ -100018,6 +100018,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-forniture-cemento-aumento-terzo-trimestre': {
+    title: 'Forniture di cemento in lieve aumento nel terzo trimestre',
+    description: '988\'700 tonnellate di cemento nel terzo trimestre Forniture in aumento dell\'1% sullo stesso periodo Oltre il 98% del volume è a basso clinker 32% via ferrovia',
+    keywords: 'frontalieri, ticino, svizzera, italia, forniture, cemento, lieve, aumento',
+    ogTitle: 'Forniture di cemento in lieve aumento nel terzo trimestre',
+    ogDescription: '988\'700 tonnellate di cemento nel terzo trimestre Forniture in aumento dell\'1% sullo stesso periodo Oltre il 98% del volume è a basso clinker 32% via ferrovia',
+    canonicalPath: '/articoli-svizzera/forniture-cemento-aumento-terzo-trimestre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Forniture di cemento in lieve aumento nel terzo trimestre",
+      "description": "988'700 tonnellate di cemento nel terzo trimestre Forniture in aumento dell'1% sullo stesso periodo Oltre il 98% del volume è a basso clinker 32% via ferrovia",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-casse-pensioni-migliorano-terzo-trimestre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Camion di cemento che scarica materiale presso un cantiere svizzero con montagne sullo sfondo"
+      },
+      "datePublished": "2026-10-08T17:40:48+00:00",
+      "dateModified": "2026-10-08T17:40:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/forniture-cemento-aumento-terzo-trimestre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

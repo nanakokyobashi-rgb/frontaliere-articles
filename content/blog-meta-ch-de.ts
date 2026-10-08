@@ -7934,6 +7934,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.frankencoin-kraken-zchf.title': 'Frankencoin, der Stablecoin in CHF, kommt auf Kraken',
     'blog.article.frankencoin-kraken-zchf.excerpt': 'Kraken nimmt Frankencoin (ZCHF) in den Handel auf Der Stablecoin ist an den Schweizer Franken gekoppelt Die Ankündigung stammt von einer Vereinigung mit Sitz in Zug Frankencoin',
     'blog.article.frankencoin-kraken-zchf.imageAlt': 'Schweizer Panorama mit einem visuellen Hinweis auf digitale Finanzen in Franken',
+    'blog.article.forniture-cemento-aumento-terzo-trimestre.title': 'Zementlieferungen im dritten Quartal leicht gestiegen',
+    'blog.article.forniture-cemento-aumento-terzo-trimestre.excerpt': '988\'700 Tonnen Zement im dritten Quartal Lieferungen gegenüber dem gleichen Zeitraum um 1% gestiegen Mehr als 98% des Volumens mit niedrigem Klinkeranteil 32% per Bahn',
+    'blog.article.forniture-cemento-aumento-terzo-trimestre.imageAlt': 'Zementlkw entlädt Material auf einer schweizerischen Baustelle mit Bergen im Hintergrund',
 };
 
 export default blogMetaChDe;

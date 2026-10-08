@@ -360,6 +360,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T17:03:41.260Z",
       "lastFailureAt": "2026-10-08T17:03:41.260Z"
+    },
+    {
+      "articleId": "forniture-cemento-aumento-terzo-trimestre",
+      "title": "Forniture di cemento in lieve aumento nel terzo trimestre",
+      "fallbackImage": "/images/blog/article-casse-pensioni-migliorano-terzo-trimestre.webp",
+      "reason": "All image providers failed for article-forniture-cemento-aumento-terzo-trimestre: openai-codex (vision gate rejected image: Generic AI-style Alpine cement-truck illustration, but s",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-08T17:40:48.716Z",
+      "lastFailureAt": "2026-10-08T17:40:48.716Z"
     }
   ]
 }
