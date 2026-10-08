@@ -20,6 +20,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../../engine/shared/corpusRouteOwne
 import {
   UPLOAD_ORDER,
   aggregatePageDefects,
+  articleManifestPages,
   archiveReleasePages,
   articleReleasePages,
   articleReleaseSnapshot,
@@ -86,6 +87,12 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   );
   assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
   assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
+  const manifestDeclaration = publisher.indexOf('const currentManifest =');
+  const publishCall = publisher.indexOf('summary.published = await publish(');
+  assert.ok(manifestDeclaration > publishCall, 'il manifest corrente si calcola solo dopo il publish verificato');
+  for (const match of publisher.matchAll(/\bcurrentManifest\b/g)) {
+    assert.ok(match.index >= manifestDeclaration, 'currentManifest non deve essere letto prima della dichiarazione');
+  }
 });
 
 test('publisher R2 rifiuta gli article ID richiesti che la pipeline trattiene', () => {
@@ -144,6 +151,41 @@ test('manifest edge: una release completa è validabile e un giro article-only c
   assert.deepEqual(pageManifestErrors(merged, { section: 'canton-ti' }), []);
   assert.equal(pageManifestKey('canton-ti'), 'edge/sections/_page-manifests/canton-ti.json');
   assert.equal(pageManifestUrl('canton-ti', 'https://cdn.test/'), 'https://cdn.test/edge/sections/_page-manifests/canton-ti.json');
+});
+
+test('manifest edge: uno slug nuovo resta fuori finche\' la sua pagina non e\' verificata', () => {
+  const previousArticle = { ...pageEntry('canton-ti', 'articoli-ticino/old/index.html', 'article'), id: 'kept' };
+  const currentArticle = { ...pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article'), id: 'kept' };
+  const previous = articleManifestPages({
+    section: 'canton-ti',
+    previousArticlePages: [previousArticle],
+    currentArticlePages: [currentArticle],
+    verifiedArticlePages: [],
+  });
+  assert.deepEqual(previous.map((page) => page.canonicalPath), ['/articoli-ticino/old/']);
+  assert.deepEqual(
+    articleManifestPages({
+      section: 'canton-ti',
+      previousArticlePages: [previousArticle],
+      currentArticlePages: [currentArticle],
+      verifiedArticlePages: [currentArticle],
+    }).map((page) => page.canonicalPath),
+    ['/articoli-ticino/new/'],
+  );
+  assert.deepEqual(obsoleteArticlePages([previousArticle], [currentArticle], []), []);
+  assert.deepEqual(obsoleteArticlePages([previousArticle], [currentArticle], [currentArticle]), [previousArticle]);
+
+  const reusedByAnotherId = { ...pageEntry('canton-ti', 'articoli-ticino/old/index.html', 'article'), id: 'replacement' };
+  assert.deepEqual(obsoleteArticlePages([previousArticle], [reusedByAnotherId], []), []);
+  assert.deepEqual(
+    articleManifestPages({
+      section: 'canton-ti',
+      previousArticlePages: [previousArticle],
+      currentArticlePages: [reusedByAnotherId],
+      verifiedArticlePages: [],
+    }).map((page) => page.id),
+    ['kept'],
+  );
 });
 
 test('manifest edge: un fallimento lascia la cancellazione in coda al push successivo', () => {
