@@ -6,6 +6,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
+  CATALOG_FALLBACK_MIN_SHARED_WORDS,
+  catalogFallbackSharedWordCount,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
 } from '../scripts/lib/article-cover-fallback.mjs';
@@ -60,10 +62,10 @@ function generatedCatalogRecord() {
   };
 }
 
-function article(id) {
+function article(id, title = 'Titolo di prova') {
   return {
     id,
-    content: { it: { title: 'Titolo di prova' } },
+    content: { it: { title } },
   };
 }
 
@@ -77,7 +79,7 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
     record.sha256 = sha256File(file);
     appendGeneratedImageRecord(root, record);
 
-    const data = article('article-cover-fallback');
+    const data = article('article-cover-fallback', 'Catalog fallback test');
     const result = resolveArticleCoverFallback(data, {
       root,
       findCatalogImage: () => record.imageUrl,
@@ -100,6 +102,60 @@ test('engine failure uses a record-bearing catalog cover and queues regeneration
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('un catalogo valido ma non pertinente non diventa la copertina finale', () => {
+  const root = tempRoot();
+  try {
+    const record = generatedCatalogRecord();
+    const file = path.join(root, 'public', record.imageUrl.slice(1));
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47));
+    record.sha256 = sha256File(file);
+    appendGeneratedImageRecord(root, record);
+
+    const data = article('article-cover-irrelevant', 'Aggressione turisti Como');
+    const result = resolveArticleCoverFallback(data, {
+      root,
+      findCatalogImage: () => record.imageUrl,
+      reason: 'Codex broker timed out after 119999ms',
+    });
+
+    assert.equal(result.source, 'static');
+    assert.equal(result.path, '/images/places/lugano-view.webp');
+    assert.equal(data._generatedImageRecord.scope, 'place');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('la pertinenza della cover usa il testo finale e una soglia condivisa', () => {
+  const data = article('article-cantello-teatro', 'Cantello teatro dialettale ottobre');
+  data.imagePrompt = 'Scena editoriale sul teatro dialettale di Cantello';
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/cantello-teatro-dialettale-ottobre-2026.webp'),
+    4,
+  );
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/sindacati-miazzina-diritti-9-ottobre.webp'),
+    1,
+  );
+  assert.equal(CATALOG_FALLBACK_MIN_SHARED_WORDS, 2);
+});
+
+test('la pertinenza confronta token esatti e ignora category e imagePrompt boilerplate', () => {
+  const data = article('article-casa-tassa', 'Casa tassa');
+  data.category = 'fiscale';
+  data.imagePrompt = 'Scena editoriale fiscale';
+
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/casale-tassazione.webp'),
+    0,
+  );
+  assert.equal(
+    catalogFallbackSharedWordCount(data, '/images/blog/fiscale-editoriale.webp'),
+    0,
+  );
 });
 
 test('when the catalog is empty, the governed static cover still publishes and deduplicates the queue', () => {
