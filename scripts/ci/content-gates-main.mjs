@@ -128,6 +128,9 @@ export const TITLE = 'gate content su main: offender nel corpus generato dai bot
  */
 export const CONTENT_GATES = [
   'generator/tests/brogeda-editorial-correction.test.mjs',
+  // Seconda correzione editoriale fissata da un test: il toponimo dell'incidente
+  // di Porlezza in tre articoli e nelle loro quattro lingue.
+  'generator/tests/porlezza-toponym-correction.test.mjs',
   'generator/tests/historical-unknown-dates.test.mjs',
   // Il test che dimostra la completezza del gate esegue anche il preflight
   // sul corpus reale: un registro o un pavimento pubblicato rotto deve aprire
