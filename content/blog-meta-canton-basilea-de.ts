@@ -12,6 +12,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.phishing-email-fisco-basel.title': 'Kanton Basel: Warnung vor gefälschten Steuer-E-Mails',
     'blog.article.phishing-email-fisco-basel.excerpt': 'Die Steuerverwaltung Basel-Stadt warnt vor gefälschten E-Mails zu Rückerstattungen, Mahnungen und Steuerrechnungen: löschen, ohne Links oder Anhänge zu öffnen.',
     'blog.article.phishing-email-fisco-basel.imageAlt': 'Schreibtisch mit verdächtiger Steuer-E-Mail, Briefumschlag und eBill in Basel',
+    'blog.article.tempo30-birsfelden-ottobre.title': 'Tempo 30 in Birsfelden ab dem 12. Oktober 2026',
+    'blog.article.tempo30-birsfelden-ottobre.excerpt': 'Im Baselbiet führt Birsfelden ab dem 12.',
+    'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Städtische Strasse in Birsfelden im Baselbiet mit Tempo-30-Signalisation',
 };
 
 export default blogMetaCantonBasileaDe;

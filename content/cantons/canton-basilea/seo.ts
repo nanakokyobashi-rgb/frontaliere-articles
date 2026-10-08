@@ -114,6 +114,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tempo30-birsfelden-ottobre': {
+    title: 'Tempo 30 a Birsfelden dal 12 ottobre 2026 | Frontaliere Ticino',
+    description: 'Birsfelden introdurrà il Tempo 30 nel Baselbiet da ottobre 2026; Münchenstein dovrà attendere. Il titolo indica due tempi diversi per la misura locale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tempo, birsfelden, ottobre, baselbiet',
+    ogTitle: 'Birsfelden: Tempo 30 dal 12 ottobre 2026',
+    ogDescription: 'Nel Baselbiet, Birsfelden passerà al Tempo 30 da ottobre 2026, mentre Münchenstein dovrà attendere. La notizia mette a confronto i tempi di attuazione nelle due località e aiuta a distinguere il calendario locale per gli spostamenti.',
+    canonicalPath: '/articoli-basilea/tempo30-birsfelden-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tempo 30 a Birsfelden dal 12 ottobre 2026",
+      "description": "Birsfelden introdurrà il Tempo 30 nel Baselbiet da ottobre 2026; Münchenstein dovrà attendere. Il titolo indica due tempi diversi per la misura locale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada urbana di Birsfelden nel Baselbiet con segnaletica del Tempo 30"
+      },
+      "datePublished": "2026-10-08T16:01:18+00:00",
+      "dateModified": "2026-10-08T16:01:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/tempo30-birsfelden-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
