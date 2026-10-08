@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
-      "section": "frontaliere",
-      "ts": 1791288629715
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1954989/ticino-ecap-appuntamento-lavoro-unia-portinerie-cugnasco-interesse": {
-      "section": "frontaliere",
-      "ts": 1791288979074
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/salute-3/articolo/luoghi-di-lavoro-che-promuovono-salute-comune-di-varese-confindustria-varese-asst-sette-laghi-e-a.html": {
-      "section": "frontaliere",
-      "ts": 1791289055770
-    },
     "svizzera::https://www.rsi.ch/s/4136096": {
       "section": "svizzera",
       "ts": 1791290234254
@@ -1100,6 +1088,22 @@
     "frontaliere::https://comozero.it/attualita/un-intero-settore-che-ha-fatto-la-storia-della-svizzera-e-in-crisi-maxi-taglio-addio-a-34-posti-di-lavoro": {
       "section": "frontaliere",
       "ts": 1791453970659
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
+      "section": "frontaliere",
+      "ts": 1791462252091
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
+      "section": "frontaliere",
+      "ts": 1791462268017
+    },
+    "frontaliere::https://www.tio.ch/dal-mondo/economia/1955562/petrolio-mercati-interpellata-diesel-acquisti": {
+      "section": "frontaliere",
+      "ts": 1791462286173
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/frankencoin-approda-alla-borsa-di-criptovalute-kraken/92186447": {
+      "section": "frontaliere",
+      "ts": 1791462305923
     }
   }
 }

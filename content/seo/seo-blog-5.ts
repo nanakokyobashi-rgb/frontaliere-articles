@@ -103195,6 +103195,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa': {
+    title: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    description: '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    keywords: 'frontalieri, ticino, svizzera, italia, porlezza, finto, carabiniere, chiede',
+    ogTitle: 'Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
+    ogDescription: '## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio',
+    canonicalPath: '/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porlezza: finto carabiniere chiede oro, figlio ferma truffa",
+      "description": "## In breve - A Porlezza tentata truffa del finto carabiniere - La telefonata risale al 7 ottobre 2026 - Chiesto oro per ottenere il rilascio del figlio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Porlezza: finto carabiniere chiede oro, figlio ferma truffa"
+      },
+      "datePublished": "2026-10-08T12:32:22+00:00",
+      "dateModified": "2026-10-08T12:32:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

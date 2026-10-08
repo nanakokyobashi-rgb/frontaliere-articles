@@ -12809,6 +12809,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.ferrovia-albate-molteno-elettrificazione.title': 'Électrification Albate-Molteno : travaux à partir de décembre 2024',
     'blog.article.ferrovia-albate-molteno-elettrificazione.excerpt': '## En bref - Chantiers pour l\'électrification lancés à la mi-décembre - Como-Lecco suspendue au moins jusqu\'en juin 2029 - Albate-Molteno : de 24 à 34 trains par jour',
     'blog.article.ferrovia-albate-molteno-elettrificazione.imageAlt': 'Train électrique sur la ligne Albate-Molteno vicino a Lugano con le Alpi sullo sfondo',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.title': 'Porlezza : un faux carabinier demande de l’or, le fils déjoue l’arnaque',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.excerpt': '## En bref - À Porlezza, tentative d’arnaque au faux carabinier - L’appel téléphonique remonte au 7 octobre 2026 - De l’or demandé pour obtenir la libération du fils',
+    'blog.article.porlezza-finto-carabiniere-chiede-oro-figlio-ferma-truffa.imageAlt': 'Image éditoriale relative à: Porlezza: finto carabiniere chiede oro, figlio ferma truffa',
 };
 
 export default blogMetaFr;
