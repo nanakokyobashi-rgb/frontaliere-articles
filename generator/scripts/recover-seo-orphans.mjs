@@ -321,10 +321,13 @@ function run(idsFile, { dryRun = false } = {}) {
       if (missingQueueItems.length > 0) {
         throw new Error(`cover regeneration queue missing: ${missingQueueItems.join(', ')}`);
       }
-      endRegisterLock(ROOT, 'frontaliere');
-      registrationLockHeld = false;
       endSeoBackfillLock(ROOT);
       seoLockHeld = false;
+      // Keep the section lock until the recovery marker is gone. If marker
+      // cleanup fails, the catch below must roll back while normal writers
+      // are still excluded from registry/SEO surfaces.
+      endRegisterLock(ROOT, 'frontaliere');
+      registrationLockHeld = false;
       return merged;
     } catch (error) {
       try {

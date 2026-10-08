@@ -260,6 +260,16 @@ test('la recovery detiene il lock coda mentre registra le mutazioni della transa
     /const queue = withImageRegenerationQueueLock\(ROOT, \(\{ read, write, append \}\) => \{/,
   );
   assert.match(source, /queueArticleCoverRegeneration\(ROOT, data, \{ append \}\)/);
+  const successPath = source.slice(
+    source.indexOf('const missingQueueItems'),
+    source.indexOf('    } catch (error)', source.indexOf('const missingQueueItems')),
+  );
+  const seoReleaseAt = successPath.indexOf('endSeoBackfillLock(ROOT);');
+  const registrationReleaseAt = successPath.indexOf("endRegisterLock(ROOT, 'frontaliere');");
+  assert.ok(
+    seoReleaseAt > -1 && seoReleaseAt < registrationReleaseAt,
+    'il marker SEO deve essere rimosso prima del lock di sezione condiviso',
+  );
 });
 
 test('mergeQueueWithSnapshot mette le voci nuove prima dell\'ultima che c\'era', () => {
