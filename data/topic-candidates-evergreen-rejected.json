@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
-      "section": "svizzera",
-      "ts": 1791297834567
-    },
-    "frontaliere::https://www.tio.ch/dal-mondo/economia/1955078/diesel-centesimi-decreto-governo-economia": {
-      "section": "frontaliere",
-      "ts": 1791299512487
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1955034/allevamenti-stati-abbattuti-malattia-tre-sgomberati": {
-      "section": "svizzera",
-      "ts": 1791300500426
-    },
     "frontaliere::https://comozero.it/magazine/oltre-11mila-assunzioni-in-tre-mesi-i-settori-che-cercano-personale-in-provincia-di-como": {
       "section": "frontaliere",
       "ts": 1791307493651
@@ -1100,6 +1088,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/monteviasco-la-pazienza-e-finita-otto-anni-di-attesa-ora-basta-vogliamo-poter-vivere-il-nostro-paese/2701789": {
       "section": "frontaliere",
       "ts": 1791470212872
+    },
+    "svizzera::https://www.swissinfo.ch/ita/gr%3a-iniziativa-su-carenza-di-alloggi-a-coira%2c-presentato-testo/92185340": {
+      "section": "svizzera",
+      "ts": 1791472390438
+    },
+    "frontaliere::https://comozero.it/cronaca/auto-rubata-patente-revocata-san-fermo": {
+      "section": "frontaliere",
+      "ts": 1791473915288
     }
   }
 }
