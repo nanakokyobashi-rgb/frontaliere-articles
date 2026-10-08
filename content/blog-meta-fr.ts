@@ -12798,6 +12798,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tifosi-lucerna-lugano-traffico.title': 'Supporters de Lucerna à Lugano : routes fermées et trafic',
     'blog.article.tifosi-lucerna-lugano-traffico.excerpt': '## En bref - Match à 18 h au stade de Cornaredo - Cortège entre 16 h et 17 h 30 environ - Temps d’attente de 15 à 30 minutes sur les routes concernées - Via Ciani',
     'blog.article.tifosi-lucerna-lugano-traffico.imageAlt': 'Rues de Lugano avec police et supporters se rendant au stade de Cornaredo',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.title': 'Électrification de la ligne ferroviaire Albate-Molteno : arrêt Como-Lecco',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.excerpt': 'Chantiers à la mi-décembre pour l’électrification Albate-Molteno, suspension du trafic Como-Lecco jusqu’en juin 2029. Investissement de 170 millions d’euros.',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.imageAlt': 'Image d\'une gare moderne au Tessin avec un train arrivant, par une journée lumineuse.',
 };
 
 export default blogMetaFr;

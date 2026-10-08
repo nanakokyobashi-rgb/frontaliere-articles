@@ -12797,6 +12797,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tifosi-lucerna-lugano-traffico.title': 'Tifosi Lucerna a Lugano: strade chiuse e traffico',
     'blog.article.tifosi-lucerna-lugano-traffico.excerpt': '## In breve - Partita alle 18 allo stadio di Cornaredo - Corteo tra le 16 e le 17.30 circa - Attese tra 15 e 30 minuti sulle strade coinvolte - Via Ciani',
     'blog.article.tifosi-lucerna-lugano-traffico.imageAlt': 'Strade di Lugano con polizia e tifosi diretti allo stadio di Cornaredo',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.title': 'Elettrificazione ferrovia albate-molteno: stop como-lecco',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.excerpt': 'Cantieri a metà dicembre per elettrificazione Albate-Molteno, sospensione traffico Como-Lecco fino a giugno 2029. Investimento di 170 milioni di euro.',
+    'blog.article.elettrificazione-ferrovia-albate-molteno.imageAlt': 'Immagine di una stazione ferroviaria moderna in Ticino con un treno in arrivo, in una giornata luminosa.',
 };
 
 export default blogMetaIt;

@@ -43147,6 +43147,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'elettrificazione-ferrovia-albate-molteno',
+ category: 'novita',
+ date: '2026-10-08T11:47:10.828Z',
+ image: '/images/blog/article-elettrificazione-ferrovia-albate-molteno.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
