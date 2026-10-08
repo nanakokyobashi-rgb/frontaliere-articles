@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lavoro-grigioni-settembre-2026.webp",
-      "sha256": "0466051aa6873a032617bc1949775f713499b433a11ef064efdb6d79f7c061f8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lavoro-grigioni-settembre-2026-480w.webp",
-      "sha256": "3b0cc21447235e24e19a472c19d54162be68cf2004273be1430e9fbc566d2d56"
-    }
-  ]
+  "items": []
 }
