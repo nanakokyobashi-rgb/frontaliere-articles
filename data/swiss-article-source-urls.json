@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948311/attacco-schweizerhof-credito-destinatari-dati": {
-    "articleId": "attacco-hacker-schweizerhof",
-    "ts": "2026-09-06T11:37:02.159Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948335/svizzera-budliger-artieda-direttrice-seco-multipolare-mondo": {
     "articleId": "svizzera-mondo-multipolare",
     "ts": "2026-09-06T15:10:22.740Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1955486/32-in-un-anno-il-mercato-del-lavoro-ia-cresce-rapidamente": {
     "articleId": "crescita-lavoro-intelligenza-artificiale",
     "ts": "2026-10-08T09:17:54.516Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1955482/tassi-raiffeisen-svizzera-bns-crescita-forte": {
+    "articleId": "raiffeisen-pil-inflazione-2026",
+    "ts": "2026-10-08T10:49:09.087Z",
     "keyForm": 2
   }
 }

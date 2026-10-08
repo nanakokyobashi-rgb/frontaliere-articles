@@ -26382,6 +26382,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'raiffeisen-pil-inflazione-2026',
+    category: 'pratico',
+    date: '2026-10-08T10:49:08.868Z',
+    image: '/images/blog/article-raiffeisen-pil-inflazione-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
