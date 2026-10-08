@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-incanto-brusimpiano-regina-acqua.webp",
+      "sha256": "ea9f8485ad4f77000bcacf2931b2f9a1ca44d1b085694107ceb78d62e64875f0"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-incanto-brusimpiano-regina-acqua-480w.webp",
+      "sha256": "48efcf1405493be5ec199ae4dcc695bc032cb4e057203a6335fbca68d01472b7"
+    }
+  ]
 }
