@@ -153,15 +153,77 @@ function thumbnailFileForRecord(root, record) {
   return path.join(path.dirname(imageFile), 'thumbnails', `${stem}-480w.webp`);
 }
 
-function hasValidThumbnail(root, record) {
+let sharpLoader;
+
+function hasCompleteWebpPayload(bytes) {
+  const buf = Buffer.isBuffer(bytes) ? bytes : Buffer.from(bytes ?? []);
+  if (buf.length < 20 || buf.toString('ascii', 0, 4) !== 'RIFF' || buf.toString('ascii', 8, 12) !== 'WEBP') {
+    return false;
+  }
+  if (buf.readUInt32LE(4) !== buf.length - 8) return false;
+
+  let offset = 12;
+  let imageChunks = 0;
+  while (offset < buf.length) {
+    if (offset + 8 > buf.length) return false;
+    const type = buf.toString('ascii', offset, offset + 4);
+    const size = buf.readUInt32LE(offset + 4);
+    const dataStart = offset + 8;
+    const dataEnd = dataStart + size;
+    const chunkEnd = dataEnd + (size & 1);
+    if (chunkEnd > buf.length) return false;
+
+    if (type === 'VP8 ') {
+      if (size < 10 || buf[dataStart + 3] !== 0x9d || buf[dataStart + 4] !== 0x01 || buf[dataStart + 5] !== 0x2a) return false;
+      imageChunks += 1;
+    } else if (type === 'VP8L') {
+      if (size < 5 || buf[dataStart] !== 0x2f) return false;
+      imageChunks += 1;
+    } else if (type === 'VP8X' && size !== 10) {
+      return false;
+    }
+    offset = chunkEnd;
+  }
+
+  return offset === buf.length && imageChunks === 1;
+}
+
+async function decodeWebp(bytes) {
+  if (!sharpLoader) {
+    sharpLoader = import('sharp')
+      .then((module) => module.default ?? module)
+      .catch((error) => {
+        // The dependency-free generator gates intentionally run without npm ci.
+        // The real drain installs sharp; only that path can provide full codec
+        // validation, while the structural check remains available to the gates.
+        if (error?.code === 'ERR_MODULE_NOT_FOUND') return null;
+        throw error;
+      });
+  }
+  const sharp = await sharpLoader;
+  if (!sharp) return null;
+  return sharp(bytes, { failOn: 'warning' })
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+}
+
+async function hasValidThumbnail(root, record) {
   const thumbnail = thumbnailFileForRecord(root, record);
   try {
     const stat = fs.lstatSync(thumbnail);
     if (!stat.isFile()) return false;
-    const dimensions = webpDimensions(fs.readFileSync(thumbnail));
-    return dimensions?.width === 480
+    const bytes = fs.readFileSync(thumbnail);
+    const dimensions = webpDimensions(bytes);
+    if (!(dimensions?.width === 480
       && dimensions.height > 0
-      && dimensions.height <= 480;
+      && dimensions.height <= 480)) return false;
+    if (!hasCompleteWebpPayload(bytes)) return false;
+
+    const decoded = await decodeWebp(bytes);
+    if (!decoded) return true;
+    return decoded.data.byteLength > 0
+      && decoded.info?.width === dimensions.width
+      && decoded.info.height === dimensions.height;
   } catch {
     return false;
   }
@@ -184,12 +246,12 @@ function existingRecordForArticle(root, articleId) {
   }
 }
 
-function alreadySatisfiedCover(root, item, registryFiles) {
+async function alreadySatisfiedCover(root, item, registryFiles) {
   try {
     const location = locateArticleRegistry(root, item.articleId, { registryFiles });
     const record = existingRecordForArticle(root, item.articleId);
     if (!record || location.previousImage !== record.imageUrl) return false;
-    if (!hasValidThumbnail(root, record)) return false;
+    if (!await hasValidThumbnail(root, record)) return false;
     const section = sectionForRegistry(location);
     const seo = locateArticleSeoImage(root, item.articleId, { section });
     return seo.previousImage === record.imageUrl;
@@ -257,8 +319,8 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   const seoLocation = locateArticleSeoImage(root, item.articleId, { section });
   trackFile(snapshots, absolute(root, seoLocation.path));
 
-  if (!hasValidThumbnail(root, record)) await generateThumbnail(destination, { root, item, record });
-  if (!hasValidThumbnail(root, record)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
+  if (!await hasValidThumbnail(root, record)) await generateThumbnail(destination, { root, item, record });
+  if (!await hasValidThumbnail(root, record)) throw new Error(`thumbnail is not materialized: ${thumbnail}`);
 
   const currentImage = location.previousImage;
   if (currentImage !== record.imageUrl) {
@@ -362,7 +424,7 @@ export async function drainQueuedCovers({
   const alreadySatisfiedIds = [];
   const unsatisfiedItems = [];
   for (const item of queue.items) {
-    if (alreadySatisfiedCover(root, item, registryFiles)) alreadySatisfiedIds.push(item.articleId);
+    if (await alreadySatisfiedCover(root, item, registryFiles)) alreadySatisfiedIds.push(item.articleId);
     else unsatisfiedItems.push(item);
   }
   if (alreadySatisfiedIds.length > 0) {

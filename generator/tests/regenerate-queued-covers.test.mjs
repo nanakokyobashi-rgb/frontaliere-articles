@@ -111,14 +111,10 @@ function item(articleId, requestedAt, title = articleId) {
 }
 
 function validThumbnailBytes() {
-  const bytes = Buffer.alloc(30);
-  bytes.write('RIFF', 0, 'ascii');
-  bytes.writeUInt32LE(22, 4);
-  bytes.write('WEBPVP8X', 8, 'ascii');
-  bytes.writeUInt32LE(10, 16);
-  bytes.writeUIntLE(479, 24, 3);
-  bytes.writeUIntLE(269, 27, 3);
-  return bytes;
+  return Buffer.from(
+    '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',
+    'base64',
+  );
 }
 
 function fakeCover(root) {
@@ -301,8 +297,8 @@ test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', asy
   }
 });
 
-test('una copertina con thumbnail mancante o invalido viene riparata prima di togliere la coda', async () => {
-  for (const thumbnailState of ['missing', 'invalid']) {
+test('una copertina con thumbnail mancante, invalido o troncato viene riparata prima di togliere la coda', async () => {
+  for (const thumbnailState of ['missing', 'invalid', 'truncated']) {
     const root = tempRoot();
     try {
       const articleId = `partial-thumbnail-${thumbnailState}`;
@@ -315,6 +311,13 @@ test('una copertina con thumbnail mancante o invalido viene riparata prima di to
       write(root, `public${imageUrl}`, bytes);
       if (thumbnailState === 'invalid') {
         write(root, `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`, 'not a webp');
+      }
+      if (thumbnailState === 'truncated') {
+        write(
+          root,
+          `public/images/blog/thumbnails/${articleImageAssetId(articleId)}-480w.webp`,
+          validThumbnailBytes().subarray(0, 30),
+        );
       }
       queue(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
 
