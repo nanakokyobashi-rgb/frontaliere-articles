@@ -37,12 +37,19 @@ permissions:
 jobs:
   drain:
     runs-on: ubuntu-latest
-    # Budget: 45m job timeout; 40m internal deadline after Remote Config, so
-    # 5m remain for ack, summary and cleanup. Each cover reserves 120s and the
+    # Budget: 45m job timeout; the first step starts a 40m internal deadline,
+    # so the 5m tail remains for ack, summary and cleanup even when checkout,
+    # npm and Remote Config consume time. Each cover reserves 120s and the
     # final publisher phase reserves 15m; the pre-generation publisher phase is
     # capped at 15m, so generation is reduced or skipped when both do not fit.
     timeout-minutes: 45
     steps:
+      - name: Start cover drain clock before checkout
+        run: |
+          set -euo pipefail
+          started_ms="$(node -e 'process.stdout.write(String(Date.now()))')"
+          printf '%s\n' "$started_ms" > "$RUNNER_TEMP/queued-cover-job-start-ms"
+
       - name: Checkout
         uses: actions/checkout@v7
         with:
@@ -78,14 +85,21 @@ jobs:
         env:
           DEADLINE_FILE: ${{ runner.temp }}/queued-cover-deadline-ms
           PREPUBLISH_DEADLINE_FILE: ${{ runner.temp }}/queued-cover-prepublish-deadline-ms
+          JOB_START_FILE: ${{ runner.temp }}/queued-cover-job-start-ms
           OUTBOX_FILE: data/image-regeneration-publish-outbox.json
         run: |
           set -euo pipefail
+          if [ ! -s "$JOB_START_FILE" ]; then
+            echo "::error::cover job start clock is missing"
+            exit 1
+          fi
+          job_started_ms="$(cat "$JOB_START_FILE")"
           now_ms="$(node -e 'process.stdout.write(String(Date.now()))')"
-          deadline_ms=$((now_ms + 40 * 60 * 1000))
+          deadline_ms=$((job_started_ms + 40 * 60 * 1000))
           prepublish_deadline_ms=$((now_ms + 15 * 60 * 1000))
-          if [ "$prepublish_deadline_ms" -gt "$deadline_ms" ]; then
-            prepublish_deadline_ms="$deadline_ms"
+          final_publisher_start_ms=$((deadline_ms - 15 * 60 * 1000))
+          if [ "$prepublish_deadline_ms" -gt "$final_publisher_start_ms" ]; then
+            prepublish_deadline_ms="$final_publisher_start_ms"
           fi
           printf '%s\n' "$deadline_ms" > "$DEADLINE_FILE"
           printf '%s\n' "$prepublish_deadline_ms" > "$PREPUBLISH_DEADLINE_FILE"

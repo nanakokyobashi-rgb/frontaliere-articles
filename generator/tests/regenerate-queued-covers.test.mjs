@@ -726,10 +726,14 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
 
 test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezione', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
+  const clock = workflow.indexOf('name: Start cover drain clock before checkout');
+  const checkout = workflow.indexOf('name: Checkout');
   const preDispatch = workflow.indexOf('name: Dispatch pending cover publishers before generation');
   const drain = workflow.indexOf('name: Drain queued covers');
   const dispatch = workflow.indexOf('name: Dispatch and complete pending cover publishers');
   const acknowledge = workflow.indexOf('name: Acknowledge cover publisher outbox');
+  assert.ok(clock >= 0);
+  assert.ok(checkout > clock);
   assert.ok(preDispatch >= 0);
   assert.ok(drain > preDispatch);
   assert.ok(dispatch > drain);
@@ -738,6 +742,8 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /cover-publisher-drain\.mjs[\s\S]*--mode ack/u);
   assert.doesNotMatch(workflow, /gh run watch/u);
   assert.match(workflow, /queued-cover-deadline-ms/);
+  assert.match(workflow, /queued-cover-job-start-ms/);
+  assert.match(workflow, /deadline_ms=\$\(\(job_started_ms \+ 40 \* 60 \* 1000\)\)/);
   assert.match(workflow, /40m internal deadline/);
   assert.match(workflow, /publisher_reserve_ms=\$\(\(15 \* 60 \* 1000\)\)/);
   assert.match(workflow, /skippedBeforeDrain:true/);
