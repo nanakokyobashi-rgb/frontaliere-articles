@@ -258,6 +258,9 @@ export const CONTENT_GATES = [
   'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs',
   'generator/tests/ts-literal-span.test.mjs',
   'generator/tests/vacant-key-facts.test.mjs',
+  // Tabella unica degli esonimi: ripete sul corpus storico e cantonale lo
+  // stesso controllo che il generatore esegue prima della registrazione.
+  'generator/tests/localized-toponyms.test.mjs',
   'generator/tests/wrong-latin-language-adoption.test.mjs',
 ];
 

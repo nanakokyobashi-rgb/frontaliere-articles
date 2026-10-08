@@ -189,6 +189,10 @@ import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { findOrphanedKeyFactsList } from './lib/key-facts-specificity.mjs';
 import { stripVacuousFacts } from './lib/key-facts-specificity.mjs';
 import { checkCantonToponymConsistency } from './lib/cantone-toponimi-coerenza.mjs';
+import {
+  findArticleLocalizedToponymMismatches,
+  localizedToponymInstruction,
+} from './lib/localized-toponyms.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord } from './lib/it-text-similarity.mjs';
 import { countLocalNewsHits, isLocalNews } from './lib/local-news.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
@@ -5539,6 +5543,24 @@ export async function repairGeneratedArticleSourceCopy(article, sourceText, {
 export function assertArticlePassesFactualityGates(data, options = {}) {
   assertItalianArticlePassesFactualityGates(data, options);
   assertTranslationsPassFactualityGates(data);
+  assertLocalizedToponyms(data);
+}
+
+/**
+ * Blocking exonym gate shared by the primary AI path and every direct
+ * producer. It runs on the final payload, after translation and all
+ * deterministic mutations, and before either writer acquires its register
+ * lock. The gate reports the source/target form and never rewrites content.
+ */
+function assertLocalizedToponyms(data) {
+  const issues = findArticleLocalizedToponymMismatches(data);
+  if (issues.length === 0) return;
+  const details = issues
+    .map((issue) => `[${issue.locale}] ${issue.code}.${issue.type}: "${issue.form}" → "${issue.expected}"`)
+    .join('; ');
+  const error = new Error(`Articolo rigettato — esonimo di cantone/capoluogo nella lingua sbagliata: ${details}`);
+  error.qualityReject = true;
+  throw error;
 }
 
 /**
@@ -12452,7 +12474,9 @@ async function translateArticle(data) {
 - Apostrofi: usa sempre ' (diritto), mai virgolette curve
 - I nomi propri di luoghi svizzeri (Sessa, Melide, Malcantone) restano invariati in tutte le lingue
 
-${terminologyByLang[targetLang] || ''}`;
+${terminologyByLang[targetLang] || ''}
+
+${localizedToponymInstruction(targetLang)}`;
 
     // Split into 4 parallel calls — one per field group — to stay within model output limits.
     // German/French expand ~30% vs Italian; some models cap output at ~2048-4096 tokens.

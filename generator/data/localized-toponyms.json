@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "locales": ["it", "en", "de", "fr"],
+  "entities": [
+    {
+      "code": "AG",
+      "canton": {"it": ["Argovia"], "en": ["Aargau"], "de": ["Aargau"], "fr": ["Argovie"]},
+      "capital": {"it": ["Aarau"], "en": ["Aarau"], "de": ["Aarau"], "fr": ["Aarau"]}
+    },
+    {
+      "code": "AI",
+      "canton": {"it": ["Appenzello Interno"], "en": ["Appenzell Innerrhoden"], "de": ["Appenzell Innerrhoden"], "fr": ["Appenzell Rhodes-Intérieures"]},
+      "capital": {"it": ["Appenzello"], "en": ["Appenzell"], "de": ["Appenzell"], "fr": ["Appenzell"]}
+    },
+    {
+      "code": "AR",
+      "canton": {"it": ["Appenzello Esterno"], "en": ["Appenzell Ausserrhoden"], "de": ["Appenzell Ausserrhoden"], "fr": ["Appenzell Rhodes-Extérieures"]},
+      "capital": {"it": ["Herisau"], "en": ["Herisau"], "de": ["Herisau"], "fr": ["Herisau"]}
+    },
+    {
+      "code": "BE",
+      "canton": {"it": ["Berna"], "en": ["Bern"], "de": ["Bern"], "fr": ["Berne"]},
+      "capital": {"it": ["Berna"], "en": ["Bern"], "de": ["Bern"], "fr": ["Berne"]}
+    },
+    {
+      "code": "BL",
+      "canton": {"it": ["Basilea Campagna"], "en": ["Basel-Landschaft"], "de": ["Basel-Landschaft"], "fr": ["Bâle-Campagne"]},
+      "capital": {"it": ["Liestal"], "en": ["Liestal"], "de": ["Liestal"], "fr": ["Liestal"]}
+    },
+    {
+      "code": "BS",
+      "canton": {"it": ["Basilea Città"], "en": ["Basel-Stadt"], "de": ["Basel-Stadt"], "fr": ["Bâle-Ville"]},
+      "capital": {"it": ["Basilea"], "en": ["Basel"], "de": ["Basel"], "fr": ["Bâle"]}
+    },
+    {
+      "code": "FR",
+      "canton": {"it": ["Friburgo"], "en": ["Fribourg"], "de": ["Freiburg"], "fr": ["Fribourg"]},
+      "capital": {"it": ["Friburgo"], "en": ["Fribourg"], "de": ["Freiburg"], "fr": ["Fribourg"]}
+    },
+    {
+      "code": "GE",
+      "canton": {"it": ["Ginevra"], "en": ["Geneva"], "de": ["Genf"], "fr": ["Genève"]},
+      "capital": {"it": ["Ginevra"], "en": ["Geneva"], "de": ["Genf"], "fr": ["Genève"]}
+    },
+    {
+      "code": "GL",
+      "canton": {"it": ["Glarona"], "en": ["Glarus"], "de": ["Glarus"], "fr": ["Glaris"]},
+      "capital": {"it": ["Glarona"], "en": ["Glarus"], "de": ["Glarus"], "fr": ["Glaris"]}
+    },
+    {
+      "code": "GR",
+      "canton": {"it": ["Grigioni"], "en": ["Graubünden"], "de": ["Graubünden"], "fr": ["Grisons"]},
+      "capital": {"it": ["Coira"], "en": ["Chur"], "de": ["Chur"], "fr": ["Coire"]}
+    },
+    {
+      "code": "JU",
+      "canton": {"it": ["Giura"], "en": ["Jura"], "de": ["Jura"], "fr": ["Jura"]},
+      "capital": {"it": ["Delémont"], "en": ["Delémont"], "de": ["Delsberg"], "fr": ["Delémont"]}
+    },
+    {
+      "code": "LU",
+      "canton": {"it": ["Lucerna"], "en": ["Lucerne"], "de": ["Luzern"], "fr": ["Lucerne"]},
+      "capital": {"it": ["Lucerna"], "en": ["Lucerne"], "de": ["Luzern"], "fr": ["Lucerne"]}
+    },
+    {
+      "code": "NE",
+      "canton": {"it": ["Neuchâtel"], "en": ["Neuchâtel"], "de": ["Neuenburg"], "fr": ["Neuchâtel"]},
+      "capital": {"it": ["Neuchâtel"], "en": ["Neuchâtel"], "de": ["Neuenburg"], "fr": ["Neuchâtel"]}
+    },
+    {
+      "code": "NW",
+      "canton": {"it": ["Nidvaldo"], "en": ["Nidwalden"], "de": ["Nidwalden"], "fr": ["Nidwald"]},
+      "capital": {"it": ["Stans"], "en": ["Stans"], "de": ["Stans"], "fr": ["Stans"]}
+    },
+    {
+      "code": "OW",
+      "canton": {"it": ["Obvaldo"], "en": ["Obwalden"], "de": ["Obwalden"], "fr": ["Obwald"]},
+      "capital": {"it": ["Sarnen"], "en": ["Sarnen"], "de": ["Sarnen"], "fr": ["Sarnen"]}
+    },
+    {
+      "code": "SG",
+      "canton": {"it": ["San Gallo"], "en": ["St. Gallen"], "de": ["St. Gallen"], "fr": ["Saint-Gall"]},
+      "capital": {"it": ["San Gallo"], "en": ["St. Gallen"], "de": ["St. Gallen"], "fr": ["Saint-Gall"]}
+    },
+    {
+      "code": "SH",
+      "canton": {"it": ["Sciaffusa"], "en": ["Schaffhausen"], "de": ["Schaffhausen"], "fr": ["Schaffhouse"]},
+      "capital": {"it": ["Sciaffusa"], "en": ["Schaffhausen"], "de": ["Schaffhausen"], "fr": ["Schaffhouse"]}
+    },
+    {
+      "code": "SO",
+      "canton": {"it": ["Soletta"], "en": ["Solothurn"], "de": ["Solothurn"], "fr": ["Soleure"]},
+      "capital": {"it": ["Soletta"], "en": ["Solothurn"], "de": ["Solothurn"], "fr": ["Soleure"]}
+    },
+    {
+      "code": "SZ",
+      "canton": {"it": ["Svitto"], "en": ["Schwyz"], "de": ["Schwyz"], "fr": ["Schwytz"]},
+      "capital": {"it": ["Svitto"], "en": ["Schwyz"], "de": ["Schwyz"], "fr": ["Schwytz"]}
+    },
+    {
+      "code": "TG",
+      "canton": {"it": ["Turgovia"], "en": ["Thurgau"], "de": ["Thurgau"], "fr": ["Thurgovie"]},
+      "capital": {"it": ["Frauenfeld"], "en": ["Frauenfeld"], "de": ["Frauenfeld"], "fr": ["Frauenfeld"]}
+    },
+    {
+      "code": "TI",
+      "canton": {"it": ["Ticino"], "en": ["Ticino"], "de": ["Tessin"], "fr": ["Tessin"]},
+      "capital": {"it": ["Bellinzona"], "en": ["Bellinzona"], "de": ["Bellinzona"], "fr": ["Bellinzona"]}
+    },
+    {
+      "code": "UR",
+      "canton": {"it": ["Uri"], "en": ["Uri"], "de": ["Uri"], "fr": ["Uri"]},
+      "capital": {"it": ["Altdorf"], "en": ["Altdorf"], "de": ["Altdorf"], "fr": ["Altdorf"]}
+    },
+    {
+      "code": "VD",
+      "canton": {"it": ["Vaud"], "en": ["Vaud"], "de": ["Waadt"], "fr": ["Vaud"]},
+      "capital": {"it": ["Losanna"], "en": ["Lausanne"], "de": ["Lausanne"], "fr": ["Lausanne"]}
+    },
+    {
+      "code": "VS",
+      "canton": {"it": ["Vallese"], "en": ["Valais"], "de": ["Wallis"], "fr": ["Valais"]},
+      "capital": {"it": ["Sion"], "en": ["Sion"], "de": ["Sitten"], "fr": ["Sion"]}
+    },
+    {
+      "code": "ZG",
+      "canton": {"it": ["Zugo"], "en": ["Zug"], "de": ["Zug"], "fr": ["Zoug"]},
+      "capital": {"it": ["Zugo"], "en": ["Zug"], "de": ["Zug"], "fr": ["Zoug"]}
+    },
+    {
+      "code": "ZH",
+      "canton": {"it": ["Zurigo"], "en": ["Zurich"], "de": ["Zürich"], "fr": ["Zurich"]},
+      "capital": {"it": ["Zurigo"], "en": ["Zurich"], "de": ["Zürich"], "fr": ["Zurich"]}
+    }
+  ]
+}
