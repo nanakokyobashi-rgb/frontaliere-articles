@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ferrovia-albate-molteno-elettrificazione.webp",
-      "sha256": "32eb7ba9e8a5ea12b390d25aea4796afbbc721adc3ae8647c0956dcc5325752d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ferrovia-albate-molteno-elettrificazione-480w.webp",
-      "sha256": "a8fac5cdf1a11be2687df5c232eabff83cc34e16a4974a4d989559177f6f46ae"
-    }
-  ]
+  "items": []
 }
