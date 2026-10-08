@@ -101,7 +101,11 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
   const publishedDoc = pageManifestFromPages({ section: 'canton-ti', commit: 'published', pages: [] });
   const events = [];
   const manifests = [];
+  const realConsoleLog = console.log;
+  const realConsoleError = console.error;
   try {
+    console.log = () => {};
+    console.error = () => {};
     const code = await main(
       ['--section', 'canton-ti', '--ids', '[]', '--out', path.join(fixtureRoot, 'dist'), '--summary', path.join(fixtureRoot, 'summary.json'), '--publish'],
       {
@@ -133,6 +137,8 @@ test('publisher --publish costruisce il manifest solo dopo una publish riuscita'
     assert.deepEqual(events, ['publish', 'manifest']);
     assert.equal(manifests.length, 1);
   } finally {
+    console.log = realConsoleLog;
+    console.error = realConsoleError;
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
 });

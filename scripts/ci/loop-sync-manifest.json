@@ -2105,7 +2105,7 @@
       "reason": "Inventario validato delle pagine cantonali realmente pubblicate sull'edge, usato dal publisher R2 e dal reconcile per conservare e ritirare chiavi fra publish parziali. Non esiste sul sito: il sito consuma le pagine via HTTP e la pubblicazione/riconciliazione delle sezioni vive solo nel corpus.",
       "baseline": {
         "site": null,
-        "corpus": "2b58fdec449d4b2c",
+        "corpus": "2851d35a800723cf",
         "alignedAt": "2026-10-08"
       }
     },
