@@ -28,10 +28,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { SECTIONS } from '../../scripts/lib/article-surfaces.mjs';
 import {
   SEO_COMPLETE_SENTENCE_RE,
+  SEO_TITLE_BRAND_SUFFIX,
   SEO_TITLE_FIELDS,
+  SEO_TITLE_MAX_CHARS,
   hasExemptProperNounTail,
   isClauseBoundarySeoTitlePrefix,
   isDanglingSeoTitle,
@@ -42,9 +45,12 @@ import {
 } from '../scripts/lib/seo-title-repair.mjs';
 import {
   fieldMatch,
+  formatReport,
+  planFromScan,
   planSeoTitleRepairs,
   repairFile,
   scanSeoTitleFields,
+  stringLiterals,
 } from '../scripts/repair-truncated-seo-titles.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -200,6 +206,18 @@ describe('prefisso del titolo vero — intenzionale solo su un confine di clauso
     });
   }
 
+  test('il taglio a metà parola del ripiego non passa per taglio accettato', () => {
+    // `truncateToClauseNonEmpty` deve sempre stampare qualcosa: quando il primo
+    // token da solo sfora il budget taglia dentro la parola. Un ogTitle uguale
+    // a quel taglio è un titolo rotto, non un taglio su una clausola.
+    const canonical = 'Rindfleischetikettierungsüberwachungsaufgabenübertragungsgesetz: la legge dal nome più lungo';
+    const stored = truncateToClauseNonEmpty(canonical, 60);
+    assert.equal(stored.length, 60, 'la premessa: il ripiego taglia a 60 caratteri esatti');
+    assert.match(canonical[60], /\p{L}/u, 'la premessa: il taglio cade dentro la parola');
+    assert.equal(seoTitleFieldDefect('ogTitle', stored, canonical), 'mid-clause-prefix');
+    assert.equal(repairSeoTitleValue('ogTitle', stored, canonical), canonical);
+  });
+
   // I casi della issue #2281. La prima versione li riparava con un nuovo
   // taglio a 60 caratteri; misurato sul corpus, quel taglio lascia code che la
   // lista non vede («…per la guerra, ma», «…di dimora: nuove», «…quali spese
@@ -338,6 +356,119 @@ test('il campo title non viene cercato dentro ogTitle', () => {
   assert.throws(() => fieldMatch(block, 'breadcrumbName'), /campo titolo SEO sconosciuto/);
 });
 
+describe('le proprietà si cercano fra i letterali, mai dentro', () => {
+  // Il modello ha già scritto un intero oggetto JSON-LD dentro un campo. Se
+  // quel testo sta in un campo che precede `structuredData`, un pattern sul
+  // blocco grezzo aggancia lo «headline» interno e la sostituzione finisce
+  // dentro la stringa sbagliata, lasciando rotto il campo vero.
+  const block = [
+    '{',
+    "  title: 'Titolo della voce',",
+    `  description: '{"@context":"https://schema.org","headline":"interno alla descrizione"}',`,
+    "  ogTitle: 'Titolo social',",
+    '  structuredData: {',
+    '    "@type": "NewsArticle",',
+    '    "headline": "quello vero",',
+    '  },',
+    '}',
+  ].join('\n');
+
+  test('headline: il JSON annidato in un campo precedente non è la proprietà', () => {
+    const headline = fieldMatch(block, 'headline');
+    assert.equal(block.slice(headline.start, headline.end), 'quello vero');
+    const repaired = repairFile(block, [{ ...headline, encoded: 'riparato' }]);
+    assert.ok(repaired.includes('"headline":"interno alla descrizione"'), 'la descrizione non va toccata');
+    assert.ok(repaired.includes('"headline": "riparato"'));
+  });
+
+  test('headline: nemmeno quando il testo è un elemento di un elenco', () => {
+    const listed = [
+      '{',
+      `  keywords: ['frontalieri', '"headline": "falso"'],`,
+      '  structuredData: { "headline": "quello vero" },',
+      '}',
+    ].join('\n');
+    const headline = fieldMatch(listed, 'headline');
+    assert.equal(listed.slice(headline.start, headline.end), 'quello vero');
+  });
+
+  test('title e ogTitle scritti dentro una stringa non sono proprietà', () => {
+    const tricky = [
+      '{',
+      "  description: 'copia di una voce: title: \\'falso\\', ogTitle: \\'falso\\'',",
+      "  title: 'vero',",
+      "  ogTitle: 'vero social',",
+      '}',
+    ].join('\n');
+    const title = fieldMatch(tricky, 'title');
+    const ogTitle = fieldMatch(tricky, 'ogTitle');
+    assert.equal(tricky.slice(title.start, title.end), 'vero');
+    assert.equal(tricky.slice(ogTitle.start, ogTitle.end), 'vero social');
+  });
+
+  test('i letterali rispettano escape, commenti e template', () => {
+    const source = "{ a: 'l\\'apice', /* \"commento\" */ b: `${BASE}/x`, // 'coda'\n c: \"d\" }";
+    assert.deepEqual(
+      stringLiterals(source).map((literal) => source.slice(literal.start, literal.end)),
+      ["l\\'apice", '${BASE}/x', 'd'],
+    );
+  });
+
+  test('una stringa non chiusa è un errore, non una coda letta a metà', () => {
+    assert.throws(() => stringLiterals("{ title: 'aperta "), /non chiusa/);
+  });
+});
+
+describe('ciò che non si può giudicare non passa in silenzio', () => {
+  const codec = { encode: (value) => value, decode: (value) => value };
+  const row = (overrides) => ({
+    section: 'svizzera', file: 'content/seo/seo-blog-ch.ts', absolute: '/x', id: 'voce',
+    field: 'ogTitle', start: 0, end: 0, ...codec, ...overrides,
+  });
+
+  test('una voce senza titolo vero finisce fra i non riparabili anche se i suoi campi non sono monchi', () => {
+    // Senza titolo vero la forma di prefisso non è confrontabile con niente:
+    // un campo integro in apparenza resterebbe fuori sia dai piani sia dai
+    // non riparabili, e il comando chiuderebbe con 0 senza averlo guardato.
+    const scan = {
+      rows: [row({ id: 'senza-titolo', value: 'Un titolo che non finisce monco', canonical: '', defect: null })],
+      orphans: [{ section: 'svizzera', file: 'content/seo/seo-blog-ch.ts', id: 'senza-titolo' }],
+    };
+    const { plans, unrepairable } = planFromScan(scan);
+    assert.deepEqual(plans, []);
+    assert.deepEqual(unrepairable.map((item) => [item.id, item.reason]), [['senza-titolo', 'missing-canonical']]);
+    const report = formatReport({ sections: [], files: [], entries: 1, titles: 0, plans, unrepairable, mode: 'dry-run' });
+    assert.match(report, /non riparabili/);
+    assert.match(report, /senza-titolo non ha un titolo italiano nella sezione 'svizzera'/);
+  });
+
+  test('un difetto con il titolo vero monco è non riparabile, uno riparabile diventa un piano', () => {
+    const scan = {
+      rows: [
+        row({ id: 'vero-monco', value: 'Titolo che finisce e', canonical: 'Titolo che finisce e', defect: 'dangling' }),
+        row({ id: 'riparabile', value: 'Titolo che finisce per i', canonical: 'Titolo che finisce per i frontalieri', defect: 'dangling' }),
+      ],
+      orphans: [],
+    };
+    const { plans, unrepairable } = planFromScan(scan);
+    assert.deepEqual(plans.map((plan) => [plan.id, plan.after]), [['riparabile', 'Titolo che finisce per i frontalieri']]);
+    assert.deepEqual(unrepairable.map((item) => [item.id, item.reason]), [['vero-monco', 'canonical-dangling']]);
+  });
+});
+
+test('marchio e tetto del title hanno una sola definizione', () => {
+  // `create-article.mjs` è un gemello adattato del sito e tiene i suoi
+  // letterali: il legame è per testo, così un cambio da una parte sola cade qui.
+  const generator = fs.readFileSync(path.join(ROOT, 'generator', 'scripts', 'create-article.mjs'), 'utf8');
+  const suffixes = [...generator.matchAll(/\bTITLE_SUFFIX = '([^']*)';/g)].map((match) => match[1]);
+  const caps = [...generator.matchAll(/\bTITLE_MAX_CHARS = (\d+);/g)].map((match) => Number(match[1]));
+  assert.ok(suffixes.length > 0 && caps.length > 0, 'letterali del title non trovati in create-article.mjs');
+  for (const suffix of suffixes) assert.equal(suffix, SEO_TITLE_BRAND_SUFFIX);
+  for (const cap of caps) assert.equal(cap, SEO_TITLE_MAX_CHARS);
+  const derivation = fs.readFileSync(path.join(ROOT, 'generator', 'scripts', 'lib', 'seo-metadata-derivation.mjs'), 'utf8');
+  assert.doesNotMatch(derivation, /const TITLE_(SUFFIX|MAX_CHARS) =/, 'seo-metadata-derivation.mjs deve importarli');
+});
+
 describe('corpus — nessun campo titolo SEO è un derivato rotto del titolo vero', () => {
   const scan = scanSeoTitleFields();
   const sections = Object.keys(SECTIONS);
@@ -363,7 +494,7 @@ describe('corpus — nessun campo titolo SEO è un derivato rotto del titolo ver
   test('ogni voce ha il suo titolo vero nella propria sezione', () => {
     // Senza titolo vero la forma di prefisso non è giudicabile: una sezione
     // letta contro il meta sbagliato passerebbe questo gate a vuoto.
-    const orphans = [...new Set(scan.rows.filter((row) => !row.canonical).map((row) => `${row.file}: ${row.id}`))];
+    const orphans = scan.orphans.map((orphan) => `${orphan.file}: ${orphan.id}`);
     assert.deepEqual(orphans, [], `voci SEO senza titolo italiano:\n${orphans.slice(0, 20).join('\n')}`);
   });
 

@@ -13,12 +13,17 @@
  *     `content/seo/` and `content/blog-meta-it.ts`, so the 2.637 `svizzera`
  *     entries were never looked at;
  *   - whole SEO entries through `findAllSeoEntryMatches`, never line patterns
- *     tied to an indentation: 663 entries are indented with one space.
+ *     tied to an indentation: 663 entries are indented with one space;
+ *   - properties through the entry's string literals, never a pattern over the
+ *     raw block: a field whose text contains `"headline": "…"` (the model has
+ *     written a whole JSON-LD object into a field before) must not be mistaken
+ *     for the JSON-LD property, or the edit lands inside the wrong string.
  *
  * What counts as broken, and what the repair is, is decided in one place —
  * `./lib/seo-title-repair.mjs`. A field is rewritten only when that module
- * proves the defect; a real title that dangles itself is reported as
- * unrepairable and left for a human, never copied into three more fields.
+ * proves the defect. What cannot be judged is never skipped in silence: an
+ * entry with no real title in its own section, and a real title that dangles
+ * itself, are both listed as unrepairable and make the command exit 1.
  *
  * Usage:
  *   node generator/scripts/repair-truncated-seo-titles.mjs --dry-run
@@ -41,14 +46,6 @@ import {
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-// The value group is anchored on the property name, so a title that contains
-// the word «ogTitle» cannot shift the offsets (see the offset test).
-const FIELD_PATTERNS = {
-  title: /\b(title\s*:\s*')((?:[^'\\]|\\.)*)'/,
-  ogTitle: /\b(ogTitle\s*:\s*')((?:[^'\\]|\\.)*)'/,
-  headline: /("headline"\s*:\s*")((?:[^"\\]|\\.)*)"/,
-};
-
 function decodeSingle(raw) {
   return unescapeTsValue(raw);
 }
@@ -69,20 +66,77 @@ function encodeDouble(value) {
   return encoded.slice(1, -1);
 }
 
-/** Locate one title field inside an SEO entry block, with its codec. */
-export function fieldMatch(block, field) {
-  const pattern = FIELD_PATTERNS[field];
-  if (!pattern) throw new Error(`campo titolo SEO sconosciuto: '${field}'`);
-  const match = pattern.exec(block);
-  if (!match) return null;
-  const doubleQuoted = field === 'headline';
+/**
+ * The string literals of one SEO entry block, in source order. `start`/`end`
+ * delimit the CONTENT (quotes excluded), `open`/`close` the literal itself.
+ * Comments are skipped; an unclosed literal is an error, never a silent tail.
+ */
+export function stringLiterals(block) {
+  const literals = [];
+  for (let i = 0; i < block.length; i += 1) {
+    const ch = block[i];
+    if (ch === '/' && block[i + 1] === '/') {
+      const end = block.indexOf('\n', i + 2);
+      i = end === -1 ? block.length : end;
+      continue;
+    }
+    if (ch === '/' && block[i + 1] === '*') {
+      const end = block.indexOf('*/', i + 2);
+      if (end === -1) throw new Error('commento multilinea non chiuso nella voce SEO');
+      i = end + 1;
+      continue;
+    }
+    if (ch !== "'" && ch !== '"' && ch !== '`') continue;
+    let j = i + 1;
+    while (j < block.length && block[j] !== ch) j += block[j] === '\\' ? 2 : 1;
+    if (j >= block.length) throw new Error(`stringa ${ch} non chiusa nella voce SEO`);
+    literals.push({ quote: ch, open: i, start: i + 1, end: j, close: j });
+    i = j;
+  }
+  return literals;
+}
+
+function codecFor(literal, block) {
+  const doubleQuoted = literal.quote === '"';
   return {
-    raw: match[2],
-    start: match.index + match[1].length,
-    end: match.index + match[1].length + match[2].length,
+    raw: block.slice(literal.start, literal.end),
+    start: literal.start,
+    end: literal.end,
     decode: doubleQuoted ? decodeDouble : decodeSingle,
     encode: doubleQuoted ? encodeDouble : encodeSingle,
   };
+}
+
+/**
+ * Locate one title field inside an SEO entry block, with its codec.
+ *
+ * `title` and `ogTitle` are identifiers followed by a single-quoted literal;
+ * `headline` is a double-quoted JSON key followed by a double-quoted literal.
+ * Both are matched between literals, so text INSIDE a literal is never a
+ * candidate, whatever it contains.
+ */
+export function fieldMatch(block, field) {
+  if (!SEO_TITLE_FIELDS.includes(field)) throw new Error(`campo titolo SEO sconosciuto: '${field}'`);
+  const literals = stringLiterals(block);
+  if (field === 'headline') {
+    for (let i = 0; i + 1 < literals.length; i += 1) {
+      const key = literals[i];
+      const value = literals[i + 1];
+      if (key.quote !== '"' || value.quote !== '"') continue;
+      if (block.slice(key.start, key.end) !== 'headline') continue;
+      if (!/^\s*:\s*$/.test(block.slice(key.close + 1, value.open))) continue;
+      return codecFor(value, block);
+    }
+    return null;
+  }
+  const property = new RegExp(`(?:^|[\\s{,])${field}\\s*:\\s*$`);
+  let previousClose = -1;
+  for (const literal of literals) {
+    const between = block.slice(previousClose + 1, literal.open);
+    previousClose = literal.close;
+    if (literal.quote === "'" && property.test(between)) return codecFor(literal, block);
+  }
+  return null;
 }
 
 /** The real Italian titles of one section, by article id. */
@@ -103,12 +157,15 @@ export function readSectionTitles(section, { root = ROOT } = {}) {
 
 /**
  * Every stored title field of every SEO entry, with its real title and the
- * defect the shared module finds in it (`null` when it is fine). The gates in
+ * defect the shared module finds in it (`null` when it is fine). `orphans`
+ * are the entries with no real title in their own section: their fields are
+ * still listed, but the prefix shape cannot be judged for them. The gates in
  * `generator/tests/` read the corpus through this same scan.
  */
 export function scanSeoTitleFields({ root = ROOT } = {}) {
   const rows = [];
   const files = [];
+  const orphans = [];
   let entries = 0;
   let titles = 0;
   for (const section of Object.keys(SECTIONS)) {
@@ -121,6 +178,7 @@ export function scanSeoTitleFields({ root = ROOT } = {}) {
       for (const entry of findAllSeoEntryMatches(source, file)) {
         entries += 1;
         const canonical = sectionTitles.get(entry.id) ?? '';
+        if (!canonical) orphans.push({ section, file, id: entry.id });
         const block = source.slice(entry.openIdx, entry.closeIdx + 1);
         for (const field of SEO_TITLE_FIELDS) {
           const match = fieldMatch(block, field);
@@ -144,29 +202,31 @@ export function scanSeoTitleFields({ root = ROOT } = {}) {
       }
     }
   }
-  return { sections: Object.keys(SECTIONS), files, entries, titles, rows };
+  return { sections: Object.keys(SECTIONS), files, entries, titles, rows, orphans };
 }
 
 /**
- * Plan all safe edits without writing. The returned offsets are source-local
- * and are applied from right to left by `repairFile`.
+ * Turn a scan into edits. Pure: nothing is read or written here.
+ *
+ * `unrepairable` holds what the command must not pass over: a defect whose
+ * real title cannot repair it, and every entry without a real title — for
+ * those a field that does not dangle would otherwise look fine while its
+ * prefix shape was never compared with anything.
  */
-export function planSeoTitleRepairs({ root = ROOT } = {}) {
-  const scan = scanSeoTitleFields({ root });
-  if (scan.files.length < 8) {
-    throw new Error(`checkout incompleto: attesi almeno 8 file SEO, trovati ${scan.files.length}`);
-  }
-  if (scan.titles < 3000) {
-    throw new Error(`checkout incompleto: attesi almeno 3000 titoli IT, trovati ${scan.titles}`);
-  }
-
+export function planFromScan(scan) {
   const plans = [];
-  const unrepairable = [];
+  const unrepairable = (scan.orphans ?? []).map((orphan) => ({
+    ...orphan,
+    field: '*',
+    value: '',
+    canonical: '',
+    reason: 'missing-canonical',
+  }));
   for (const row of scan.rows) {
     if (!row.defect) continue;
     const after = repairSeoTitleValue(row.field, row.value, row.canonical);
     if (after === row.value) {
-      unrepairable.push(row);
+      if (row.canonical) unrepairable.push({ ...row, reason: 'canonical-dangling' });
       continue;
     }
     const encoded = row.encode(after);
@@ -187,7 +247,22 @@ export function planSeoTitleRepairs({ root = ROOT } = {}) {
       encoded,
     });
   }
-  return { ...scan, plans, unrepairable };
+  return { plans, unrepairable };
+}
+
+/**
+ * Plan all safe edits without writing. The returned offsets are source-local
+ * and are applied from right to left by `repairFile`.
+ */
+export function planSeoTitleRepairs({ root = ROOT } = {}) {
+  const scan = scanSeoTitleFields({ root });
+  if (scan.files.length < 8) {
+    throw new Error(`checkout incompleto: attesi almeno 8 file SEO, trovati ${scan.files.length}`);
+  }
+  if (scan.titles < 3000) {
+    throw new Error(`checkout incompleto: attesi almeno 3000 titoli IT, trovati ${scan.titles}`);
+  }
+  return { ...scan, ...planFromScan(scan) };
 }
 
 export function repairFile(source, filePlans) {
@@ -242,14 +317,17 @@ export function formatReport({ sections, files, entries, titles, plans, unrepair
   }
   if (plans.length > 12) lines.push(`- … altri ${plans.length - 12} record`);
   if (unrepairable.length > 0) {
-    lines.push(`⚠️  non riparabili (titolo vero assente o monco, da correggere a mano): ${unrepairable.length}`);
+    lines.push(`✖ non riparabili, da correggere a mano in blog-meta-…-it.ts: ${unrepairable.length}`);
     for (const row of unrepairable) {
-      lines.push(`- ${row.file}: ${row.id}.${row.field} = "${row.value}" (titolo vero: "${row.canonical}")`);
+      lines.push(row.reason === 'missing-canonical'
+        ? `- ${row.file}: ${row.id} non ha un titolo italiano nella sezione '${row.section}'`
+        : `- ${row.file}: ${row.id}.${row.field} = "${row.value}" (titolo vero monco: "${row.canonical}")`);
     }
   }
   return lines.join('\n');
 }
 
+/** Exit status: 1 while something the command could not judge or repair is left. */
 export function main(argv = process.argv.slice(2)) {
   const apply = argv.includes('--apply');
   const dryRun = argv.includes('--dry-run') || !apply;
@@ -257,7 +335,7 @@ export function main(argv = process.argv.slice(2)) {
   const result = planSeoTitleRepairs();
   if (apply && !dryRun) applyPlans(result.plans);
   console.log(formatReport({ ...result, mode: apply ? 'apply' : 'dry-run' }));
-  return result.plans.length;
+  return result.unrepairable.length > 0 ? 1 : 0;
 }
 
 const invokedDirectly = (() => {
@@ -270,7 +348,7 @@ const invokedDirectly = (() => {
 
 if (invokedDirectly) {
   try {
-    main();
+    process.exitCode = main();
   } catch (error) {
     console.error(`✖ ${error.message}`);
     process.exitCode = 1;

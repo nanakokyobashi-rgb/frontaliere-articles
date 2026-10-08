@@ -2594,7 +2594,7 @@
       "reason": "Helper del generatore, della bonifica storica e dei gate del corpus per i campi titolo SEO (`title`, `ogTitle`, `headline`): `generator/scripts/create-article.mjs`, `generator/scripts/repair-truncated-seo-titles.mjs` e i test `seo-title-prefix-repair` e `seo-clause-truncation` leggono qui lo stesso predicato (coda monca, prefisso a meta' clausola, nome proprio in coda) e la stessa riparazione (il titolo vero). Il codice della generazione del corpus vive in `generator/` e questo helper non ha un consumer nel percorso di pubblicazione del sito, quindi non c'e' un gemello da portare.",
       "baseline": {
         "site": null,
-        "corpus": "1ccc5c6e29f546e6",
+        "corpus": "b42927d49a83dc78",
         "alignedAt": "2026-10-08"
       }
     },

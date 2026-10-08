@@ -30,7 +30,7 @@
 import {
   TRAILING_STOPWORDS,
   peelDanglingClauseTail,
-  truncateToClauseNonEmpty,
+  truncateToClause,
 } from '../../../host/shared/clauseTail.mjs';
 
 export const SEO_TITLE_FIELD_LIMITS = Object.freeze({
@@ -153,6 +153,12 @@ export function seoTitleFromCanonical(canonical) {
  *                       boundaries nor is the clause-safe cut earlier repairs
  *                       stored (those stay valid: they are not rewritten).
  *
+ * «Clause-safe» means `truncateToClause`, not `truncateToClauseNonEmpty`: the
+ * latter adds two fallbacks for callers that must print something, a
+ * word-boundary cut made of function words and a hard cut inside the first
+ * token. A stored value equal to one of those is still a broken title, and
+ * `truncateToClause` answers '' there, so it can never be mistaken for valid.
+ *
  * @param {'title'|'ogTitle'|'headline'} field
  */
 export function seoTitleFieldDefect(field, candidate, canonical) {
@@ -162,7 +168,7 @@ export function seoTitleFieldDefect(field, candidate, canonical) {
   const maxLen = SEO_TITLE_FIELD_LIMITS[field];
   if (!maxLen || !isStrictSeoTitlePrefix(value, canonical)) return null;
   if (isClauseBoundarySeoTitlePrefix(value, canonical)) return null;
-  if (value === truncateToClauseNonEmpty(normalizeSeoTitle(canonical), maxLen)) return null;
+  if (value === truncateToClause(normalizeSeoTitle(canonical), maxLen)) return null;
   return 'mid-clause-prefix';
 }
 
