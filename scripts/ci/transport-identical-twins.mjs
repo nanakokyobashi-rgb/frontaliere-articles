@@ -122,7 +122,13 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { classify, gitBlobSha, siteFile } from './loop-drift-check.mjs';
+import {
+  classify,
+  gitBlobSha,
+  resolveRelativeImport,
+  siteFile,
+} from './loop-drift-check.mjs';
+import { relativeImportSpecifiers } from './lib/import-specifiers.mjs';
 // Dalla libreria e non da `scan-failed-runs.mjs`: quello e' una CLI che apre
 // issue, e importarla per leggere un numero tira dentro
 // `github-issue-creator.mjs` e le sue costanti di argv.
@@ -232,6 +238,52 @@ const MAX_FAILURE_RATIO = parseRatio(process.env.TRANSPORT_MAX_FAILURE_RATIO, 0.
 });
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
+const sha256Full = (buf) => crypto.createHash('sha256').update(buf).digest('hex');
+
+export const CRAWLER_CONTRACT_REL = 'generator/data/crawler-cross-repo-contract.json';
+export const TRANSLATE_WORKFLOW_REL = '.github/workflows/translate-pending.yml';
+export const TRANSLATE_RECOVERY_REL = 'scripts/ci/translate-queue-recovery.mjs';
+
+/**
+ * Il budget di chiamate Codex e' un pin derivato dall'artifact workflow, non
+ * una scelta indipendente del corpus. Ritorna il fallback letterale del
+ * workflow; un budget fornito solo da una repository variable non e'
+ * derivabile e resta deliberatamente non attestato qui.
+ */
+export function translateCodexFallbackBudget(workflowContent) {
+  const match = /FREE_TRANSLATE_CODEX_MAX_CALLS=(\d+)/u.exec(String(workflowContent ?? ''));
+  return match ? Number(match[1]) : null;
+}
+
+/**
+ * Produce the one corpus-only pin that must follow a transported
+ * `translate-pending.yml`. The function is pure so the coupling between the
+ * transported bytes and the generated pin is testable without network or
+ * filesystem writes.
+ */
+export function translateRecoveryPinUpdate(workflowContent, recoverySource) {
+  const bytes = Buffer.isBuffer(workflowContent)
+    ? workflowContent
+    : Buffer.from(String(workflowContent ?? ''), 'utf8');
+  const source = String(recoverySource ?? '');
+  const blobSha = gitBlobSha(bytes);
+  const pinRe = /(export const TARGET_WORKFLOW_BLOB_SHA\s*=\s*')[0-9a-f]{40}(';)/u;
+  const match = pinRe.exec(source);
+  if (!match) {
+    return { path: TRANSLATE_RECOVERY_REL, source: TRANSLATE_WORKFLOW_REL, changed: false, reason: 'pin TARGET_WORKFLOW_BLOB_SHA non trovato' };
+  }
+  const content = source.slice(0, match.index)
+    + match[1] + blobSha + match[2]
+    + source.slice(match.index + match[0].length);
+  return {
+    path: TRANSLATE_RECOVERY_REL,
+    source: TRANSLATE_WORKFLOW_REL,
+    changed: content !== source,
+    content,
+    blobSha,
+    budget: translateCodexFallbackBudget(bytes),
+  };
+}
 
 /**
  * Decisione pura per il guard «una PR di trasporto alla volta».
@@ -354,6 +406,170 @@ export function scalarFingerprintCouplings(manifest) {
     out.get(artifact).push({ path: entry.path, mode: entry.mode || 'non registrato', declaredBy: 'scalarFingerprint' });
   }
   return out;
+}
+
+function addCoupling(map, source, coupling) {
+  if (!source || !coupling?.path) return;
+  if (!map.has(source)) map.set(source, []);
+  const current = map.get(source);
+  const key = `${coupling.path}\u0000${coupling.mode}\u0000${coupling.reason || ''}`;
+  if (!current.some((item) => `${item.path}\u0000${item.mode}\u0000${item.reason || ''}` === key)) {
+    current.push(coupling);
+  }
+}
+
+function mergeCouplings(...groups) {
+  const byPath = new Map();
+  for (const group of groups) {
+    for (const coupling of group || []) {
+      if (!coupling?.path) continue;
+      const previous = byPath.get(coupling.path);
+      if (!previous || (previous.mode === 'identical' && coupling.mode !== 'identical')) {
+        byPath.set(coupling.path, { ...coupling });
+        continue;
+      }
+      // Keep the conservative mode, while retaining the declaration marker
+      // that makes a derived coupling visible to `permanentBlock`.
+      if (coupling.declaredBy && !previous.declaredBy) previous.declaredBy = coupling.declaredBy;
+      if (coupling.reason && !previous.reason) previous.reason = coupling.reason;
+    }
+  }
+  return [...byPath.values()];
+}
+
+function parseCrawlerContract(value) {
+  if (value && typeof value === 'object' && !Buffer.isBuffer(value)) return value;
+  try {
+    return JSON.parse(Buffer.isBuffer(value) ? value.toString('utf8') : String(value ?? ''));
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Calcola la chiusura degli import relativi di un gemello rispetto ai due
+ * alberi. Se il file sul sito, sotto il suo `sitePath`, risolve un import a
+ * un path il cui gemello corpus e' diverso da quello risolto localmente, il
+ * gemello importato entra nello stesso componente di trasporto. Se il target
+ * non e' dichiarato dal manifest, il coupling e' bloccante: una copia a meta'
+ * e' peggio di un rinvio leggibile.
+ *
+ * @param {{path:string, sitePath?:string, mode:string}} entry
+ * @param {string|null} source testo corpus dell'entry
+ * @param {{files?:Array<object>}} manifest
+ * @param {(path:string)=>boolean} [corpusExists]
+ * @returns {Array<{path:string,mode:string,declaredBy:string,reason?:string}>}
+ */
+export function relativeImportCouplings(entry, source, manifest, corpusExists = (rel) => fs.existsSync(path.join(ROOT, rel))) {
+  if (!entry || entry.mode !== 'identical') return [];
+  if (typeof source !== 'string') {
+    return [{
+      path: entry.path,
+      mode: 'unreadable',
+      declaredBy: 'relative-import',
+      reason: 'sorgente del gemello non leggibile: chiusura degli import non verificabile',
+    }];
+  }
+
+  const entries = Array.isArray(manifest?.files) ? manifest.files : [];
+  const modeOf = new Map(entries.map((item) => [item.path, item.mode]));
+  const bySite = new Map(entries.filter((item) => typeof item.sitePath === 'string')
+    .map((item) => [item.sitePath, item]));
+  const corpusKnown = (candidate) => modeOf.has(candidate) || corpusExists(candidate);
+  const siteSource = entry.sitePath || entry.path;
+  const couplings = [];
+
+  for (const spec of relativeImportSpecifiers(source)) {
+    const localTarget = resolveRelativeImport(entry.path, spec, corpusKnown);
+    if (!localTarget) continue;
+    const siteTarget = resolveRelativeImport(siteSource, spec, (candidate) => bySite.has(candidate));
+    if (!siteTarget) {
+      couplings.push({
+        path: localTarget,
+        mode: modeOf.get(localTarget) || 'non registrato',
+        declaredBy: 'relative-import',
+        reason: `import relativo ${spec} risolve sul corpus a ${localTarget}, ma il target del sitePath ${siteSource} non e' nel manifest`,
+      });
+      continue;
+    }
+    const twin = bySite.get(siteTarget);
+    if (!twin) continue;
+    if (localTarget === twin.path && twin.mode === 'identical') continue;
+    couplings.push({
+      path: twin.path,
+      mode: twin.mode || 'non registrato',
+      declaredBy: 'relative-import',
+      reason: `import relativo ${spec} risolve sul corpus a ${localTarget}, mentre il gemello di ${siteTarget} e' ${twin.path}`,
+    });
+  }
+  return couplingSnapshot(couplings);
+}
+
+/**
+ * Grafo inverso del contratto crawler cross-repo. Il contratto e ogni artifact
+ * che elenca sono una sola unita' di trasporto quando entrambi sono candidati;
+ * `closeTransportSet()` applica poi il tetto all'intero componente, prima del
+ * taglio. I path stabili sono innocui: `alignedPaths` permette di trasportare
+ * un contratto che cambia senza ricopiare artifact che non sono cambiati.
+ */
+export function crawlerContractCouplings(manifest, contractSource) {
+  const graph = new Map();
+  const entries = Array.isArray(manifest?.files) ? manifest.files : [];
+  const byPath = new Map(entries.map((entry) => [entry.path, entry]));
+  const contractEntry = byPath.get(CRAWLER_CONTRACT_REL);
+  const contract = parseCrawlerContract(contractSource);
+  if (!contractEntry || !contract || !Array.isArray(contract.artifacts)) return graph;
+
+  for (const artifact of contract.artifacts) {
+    if (!artifact || typeof artifact.file !== 'string' || artifact.file.includes('..')) continue;
+    const artifactPath = `.github/workflows/${artifact.file}`;
+    const artifactEntry = byPath.get(artifactPath);
+    if (!artifactEntry) continue;
+    const contractMode = contractEntry.mode || 'non registrato';
+    const artifactMode = artifactEntry.mode || 'non registrato';
+    addCoupling(graph, CRAWLER_CONTRACT_REL, {
+      path: artifactPath,
+      mode: artifactMode,
+      declaredBy: 'crawler-contract',
+      reason: `artifact ${artifact.file} elencato dal contratto cross-repo`,
+    });
+    addCoupling(graph, artifactPath, {
+      path: CRAWLER_CONTRACT_REL,
+      mode: contractMode,
+      declaredBy: 'crawler-contract',
+      reason: `contratto cross-repo che elenca ${artifact.file}`,
+    });
+  }
+  return graph;
+}
+
+/**
+ * Hashes declared by the site contract but not reproduced by the corpus are
+ * not harmless metadata drift: they identify the artifact that must join a
+ * candidate contract before the file cap is applied. The caller supplies the
+ * corpus hash reader so this rule stays pure in tests.
+ */
+export function crawlerContractArtifactMismatches(manifest, contractSource, corpusHash = () => null) {
+  const entries = Array.isArray(manifest?.files) ? manifest.files : [];
+  const byPath = new Map(entries.map((entry) => [entry.path, entry]));
+  const contract = parseCrawlerContract(contractSource);
+  if (!contract || !Array.isArray(contract.artifacts)) return [];
+  const mismatches = [];
+  for (const artifact of contract.artifacts) {
+    if (!artifact || typeof artifact.file !== 'string' || artifact.file.includes('..')) continue;
+    const artifactPath = `.github/workflows/${artifact.file}`;
+    if (!byPath.has(artifactPath) || typeof artifact.artifactSha256 !== 'string') continue;
+    const actual = corpusHash(artifactPath);
+    if (actual !== artifact.artifactSha256) {
+      mismatches.push({
+        contractPath: CRAWLER_CONTRACT_REL,
+        artifactPath,
+        expected: artifact.artifactSha256,
+        actual,
+      });
+    }
+  }
+  return mismatches;
 }
 
 /**
@@ -511,7 +727,6 @@ export function transportVerdict(entry, now, base, { outOfScopePrefixes = [], co
  * candidati non copiati in questa passata — e `dropped` ne porta le ragioni.
  */
 export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = new Set(), couplingGraph = [], blockedForever = new Set() } = {}) {
-  const permanent = new Set(blockedForever);
   const candidatePaths = new Set(candidates.map((c) => c.path));
   const neighbours = new Map();
   const link = (a, b) => {
@@ -530,32 +745,79 @@ export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = ne
     }
   }
 
-  const kept = new Map(candidates.slice(0, maxFiles).map((c) => [c.path, c]));
-  const dropped = [];
-  // Punto fisso: scartare A può separare B da A, quindi una passata sola non
-  // basta. L'insieme si restringe a ogni giro, quindi termina.
-  for (let changed = true; changed; ) {
-    changed = false;
-    for (const [rel, c] of [...kept]) {
-      const split = [...(neighbours.get(rel) || [])].filter((q) => !kept.has(q) && !alignedPaths.has(q)).sort();
-      if (!split.length) continue;
-      const forever = split.filter((q) => permanent.has(q));
-      kept.delete(rel);
-      if (forever.length) permanent.add(rel);
-      dropped.push({
-        path: rel,
-        candidate: candidatePaths.has(rel),
-        split,
-        permanent: forever.length > 0,
-        reason: forever.length
-          ? `accoppiato a ${forever.join(', ')}, che nessun giro potra\u2019 copiare: il rinvio non scade, serve una copia a mano delle due meta\u2019 insieme`
-          : `separato dai suoi accoppiamenti (${split.join(', ')}): una metà copiata senza l\u2019altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`,
-      });
-      changed = true;
+  // Select connected units, not the first N raw paths. With the old slice a
+  // contract at position N+1 could strand the workflow at position N: both
+  // were then discarded, even when the two-file unit itself fit the cap. A
+  // unit that does not fit the remaining budget is still deferred whole.
+  const components = [];
+  const visited = new Set();
+  for (const candidate of candidates) {
+    if (visited.has(candidate.path)) continue;
+    const nodes = new Set([candidate.path]);
+    const queue = [candidate.path];
+    visited.add(candidate.path);
+    while (queue.length) {
+      const current = queue.shift();
+      for (const neighbour of neighbours.get(current) || []) {
+        if (visited.has(neighbour)) continue;
+        visited.add(neighbour);
+        nodes.add(neighbour);
+        queue.push(neighbour);
+      }
     }
+    const members = candidates.filter((item) => nodes.has(item.path));
+    components.push({
+      nodes,
+      members,
+      firstIndex: candidates.indexOf(members[0]),
+    });
+  }
+  components.sort((left, right) => left.firstIndex - right.firstIndex);
+
+  const kept = new Map();
+  const dropped = [];
+  const decisions = new Map();
+  let used = 0;
+  for (const component of components) {
+    const external = [...component.nodes].filter((rel) => !candidatePaths.has(rel)).sort();
+    const unsettled = external.filter((rel) => !alignedPaths.has(rel));
+    const forever = [...component.nodes].filter((rel) => blockedForever.has(rel)).sort();
+    const permanent = forever.length > 0;
+    const exceedsUnit = component.members.length > maxFiles;
+    const exceedsRemaining = !exceedsUnit && used + component.members.length > maxFiles;
+    let reason = null;
+    let split = [];
+    if (permanent) {
+      split = forever;
+      reason = `accoppiato a ${split.join(', ')}, che nessun giro potra\u2019 copiare: il rinvio non scade, serve una copia a mano delle due meta\u2019 insieme`;
+    } else if (unsettled.length) {
+      split = unsettled;
+      reason = `separato dai suoi accoppiamenti (${split.join(', ')}): una metà copiata senza l\u2019altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`;
+    } else if (exceedsUnit || exceedsRemaining) {
+      split = component.members.map((item) => item.path).filter((rel) => rel !== component.members[0].path).sort();
+      reason = `l’unita’ di trasporto (${component.members.length} file) non entra nel tetto di ${maxFiles}: una metà copiata senza l’altra mette rossa la PR di trasporto — aspetta il giro in cui ci stanno insieme`;
+    }
+    if (reason) {
+      for (const member of component.members) {
+        decisions.set(member.path, {
+          path: member.path,
+          candidate: true,
+          split,
+          permanent,
+          reason,
+        });
+      }
+      continue;
+    }
+    for (const member of component.members) kept.set(member.path, member);
+    used += component.members.length;
   }
 
   const chosen = candidates.filter((c) => kept.has(c.path));
+  for (const candidate of candidates) {
+    const decision = decisions.get(candidate.path);
+    if (decision) dropped.push(decision);
+  }
   return { chosen, dropped, capped: candidates.length - chosen.length };
 }
 
@@ -1874,6 +2136,8 @@ async function main() {
   const blockedForever = new Set();
   const realignCandidates = [];
   const needsReconcile = [];
+  const observations = new Map();
+  const siteContents = new Map();
   let couplingSnapshotChanged = false;
   let attempted = 0;
   let missingOnSite = 0;
@@ -1887,7 +2151,16 @@ async function main() {
     const declared = declaredCouplings.get(rel) || [];
     const fixture = isFixture(rel);
     const scanned = fixture ? localCouplings(rel, modeOf) : [];
-    const couplings = [...scanned, ...declared.filter((d) => !scanned.some((c) => c.path === d.path))];
+    let source = null;
+    try {
+      source = fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    } catch {
+      // `relativeImportCouplings` turns an unreadable source into a visible
+      // blocker; swallowing the read here would make the missing closure look
+      // like a file with no imports.
+    }
+    const imported = relativeImportCouplings(entry, source, manifest);
+    const couplings = mergeCouplings(scanned, declared, imported);
     if (fixture) {
       const currentSnapshot = couplingSnapshot(couplings);
       const diff = couplingDiff(entry.couplingSnapshot, currentSnapshot);
@@ -1910,6 +2183,7 @@ async function main() {
     attempted += 1;
     try {
       content = await siteFile(sitePath);
+      siteContents.set(sitePath, content);
       // Un 404 non lancia: qui non c'e' un errore da mettere in `failed`, ma
       // nemmeno una verifica. Contato a parte, e' la meta' del buio che
       // `fetchFailureVerdict` non poteva vedere.
@@ -1924,6 +2198,7 @@ async function main() {
     }
 
     const verdict = transportVerdict(entry, now, base, { outOfScopePrefixes, couplings });
+    observations.set(rel, { entry, path: rel, sitePath, content, now, base, couplings, verdict });
     if (verdict.realign) {
       realignCandidates.push({ entry, path: rel, sitePath, now, couplings });
       continue;
@@ -1949,6 +2224,66 @@ async function main() {
       continue;
     }
     candidates.push({ entry, path: rel, sitePath, content, now, base, couplings });
+  }
+
+  // The contract graph is read from the site bytes when available. Falling
+  // back to the local contract is conservative for a missing site artifact:
+  // it still prevents a known unit from being split, while the fetch verdict
+  // keeps the missing side out of the selected batch.
+  const contractEntry = manifest.files.find((entry) => entry.path === CRAWLER_CONTRACT_REL);
+  let contractSource = contractEntry ? siteContents.get(contractEntry.sitePath || contractEntry.path) : null;
+  if (contractSource == null && contractEntry) {
+    try {
+      contractSource = fs.readFileSync(path.join(ROOT, contractEntry.path), 'utf8');
+    } catch {
+      contractSource = null;
+    }
+  }
+  const contractGraph = crawlerContractCouplings(manifest, contractSource);
+  for (const [rel, couplings] of contractGraph) {
+    const node = couplingGraph.find((item) => item.path === rel);
+    if (node) node.couplings = mergeCouplings(node.couplings, couplings);
+    else couplingGraph.push({ path: rel, couplings });
+  }
+
+  // A changed contract can expose a stale artifact whose own baseline would
+  // otherwise call it stable. Promote that artifact only when the fetched site
+  // bytes reproduce the contract hash and the normal transport verdict still
+  // says `site-ahead`; local edits and malformed site contracts remain
+  // fail-closed instead of being overwritten by a derived guess.
+  const contractMismatches = crawlerContractArtifactMismatches(manifest, contractSource, (rel) => {
+    try {
+      return sha256Full(fs.readFileSync(path.join(ROOT, rel)));
+    } catch {
+      return null;
+    }
+  });
+  for (const mismatch of contractMismatches) {
+    const observation = observations.get(mismatch.artifactPath);
+    if (!observation || !Buffer.isBuffer(observation.content)) continue;
+    const siteHash = sha256Full(observation.content);
+    if (siteHash !== mismatch.expected) {
+      manual.push({
+        path: mismatch.artifactPath,
+        state: observation.verdict.state,
+        reason: `il contratto ${mismatch.contractPath} dichiara ${mismatch.expected}, ma il file servito dal sito ha hash ${siteHash}: unita’ non verificabile`,
+      });
+      continue;
+    }
+    if (observation.verdict.transport || observation.verdict.state !== 'site-ahead' || observation.verdict.permanent) continue;
+    alignedPaths.delete(mismatch.artifactPath);
+    for (let index = skipped.length - 1; index >= 0; index -= 1) {
+      if (skipped[index].path === mismatch.artifactPath) skipped.splice(index, 1);
+    }
+    candidates.push({
+      entry: observation.entry,
+      path: observation.path,
+      sitePath: observation.sitePath,
+      content: observation.content,
+      now: observation.now,
+      base: observation.base,
+      couplings: observation.couplings,
+    });
   }
 
   // Il tetto si applica DOPO aver raccolto tutti i candidati, non durante: e'
@@ -1991,6 +2326,30 @@ async function main() {
       entry.baseline = { site: now.site, corpus: now.site, alignedAt: today };
     }
     transported.push({ path: rel, sitePath, from: base.site, to: now.site });
+  }
+
+  // These corpus-only values are deterministic projections of the workflow
+  // bytes. Keeping them in the same apply pass prevents a transported
+  // `translate-pending.yml` from opening a green-looking PR whose recovery
+  // guard and wiring test still pin the previous budget/blob.
+  const derived = [];
+  const translated = chosen.find((candidate) => candidate.path === TRANSLATE_WORKFLOW_REL);
+  if (translated) {
+    const recoveryPath = path.join(ROOT, TRANSLATE_RECOVERY_REL);
+    const recoverySource = fs.readFileSync(recoveryPath, 'utf8');
+    const update = translateRecoveryPinUpdate(translated.content, recoverySource);
+    if (update.reason) {
+      throw new Error(`${TRANSLATE_RECOVERY_REL}: ${update.reason}`);
+    }
+    if (update.changed) {
+      if (APPLY) fs.writeFileSync(recoveryPath, update.content);
+      derived.push({
+        path: update.path,
+        source: update.source,
+        blobSha: update.blobSha,
+        budget: update.budget,
+      });
+    }
   }
 
   // I convergenti DOPO la copia: un fixture convergente si riattesta solo se i
@@ -2051,6 +2410,8 @@ async function main() {
       apply: APPLY,
       manifestChanged,
       transported,
+      derived,
+      contractMismatches,
       capped,
       realign,
       realignOverflow: realignPlan.overflow,
@@ -2068,6 +2429,7 @@ async function main() {
     const mode = APPLY ? 'APPLY' : 'dry-run';
     console.log(`transport-identical-twins (${mode}): ${transported.length} da portare, ${skipped.length} fermi, ${failed.length} non verificati`);
     for (const t of transported) console.log(`  ⬇ ${t.path}  ←  ${t.sitePath}  (${t.from} → ${t.to})`);
+    for (const d of derived) console.log(`  ⤷ ${d.path}  ←  ${d.source}  (workflow blob ${d.blobSha}${d.budget == null ? '' : `, budget ${d.budget}`})`);
     for (const d of couplingDelta) {
       const prefix = d.initialized ? 'inizializzato' : 'cambiato';
       console.log(`  🔗 accoppiamenti ${prefix}: ${d.path} (+${d.added.length}/-${d.removed.length})`);

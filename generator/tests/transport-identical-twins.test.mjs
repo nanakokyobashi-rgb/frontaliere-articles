@@ -62,14 +62,18 @@ import {
   reconcileSummaryMarkdown,
   realignFromCommitted,
   couplingScanRoot,
+  crawlerContractArtifactMismatches,
+  crawlerContractCouplings,
   hasTypeScriptTwin,
   importSpecifierRe,
   SET_DESCRIPTORS,
   unreadableCouplings,
   transportVerdict,
+  relativeImportCouplings,
+  translateRecoveryPinUpdate,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
-import { classify } from '../../scripts/ci/loop-drift-check.mjs';
+import { classify, gitBlobSha } from '../../scripts/ci/loop-drift-check.mjs';
 import { readManifestSnapshot } from '../../scripts/ci/handoff-to-site.mjs';
 import { parsePositiveNum } from '../../scripts/ci/scan-failed-runs.mjs';
 
@@ -885,6 +889,107 @@ test('sotto il tetto e con entrambe le metà presenti si copia tutto', () => {
   const { chosen, capped } = closeTransportSet(candidates, { maxFiles: 25 });
   assert.deepEqual(chosen.map((c) => c.path), ['host/tests/x.golden.json', 'host/x.ts']);
   assert.equal(capped, 0);
+});
+
+test('il contratto crawler chiude workflow e artifact prima del tetto', () => {
+  const manifest = {
+    files: [
+      { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' },
+      { path: '.github/workflows/translate-pending.yml', mode: 'identical' },
+      ...Array.from({ length: 24 }, (_, index) => ({
+        path: `.github/workflows/filler-${String(index).padStart(2, '0')}.yml`,
+        mode: 'identical',
+      })),
+    ],
+  };
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({
+    artifacts: [{ file: 'translate-pending.yml' }],
+  }));
+  const couplingGraph = [...graph].map(([path: filePath, couplings]) => ({ path: filePath, couplings }));
+  const candidates = [
+    cand('.github/workflows/translate-pending.yml'),
+    ...Array.from({ length: 24 }, (_, index) => cand(`.github/workflows/filler-${String(index).padStart(2, '0')}.yml`)),
+    cand('generator/data/crawler-cross-repo-contract.json'),
+  ];
+  const { chosen, capped } = closeTransportSet(candidates, { maxFiles: 25, couplingGraph });
+  const paths = chosen.map((candidate) => candidate.path);
+  assert.ok(paths.includes('.github/workflows/translate-pending.yml'));
+  assert.ok(paths.includes('generator/data/crawler-cross-repo-contract.json'));
+  assert.equal(paths.length, 25);
+  assert.equal(capped, 1);
+});
+
+test('un hash dell\u2019artifact dichiarato dal contratto promuove il gemello stale', () => {
+  const manifest = {
+    files: [{ path: '.github/workflows/translate-pending.yml', mode: 'identical' }],
+  };
+  const contract = JSON.stringify({ artifacts: [{
+    file: 'translate-pending.yml',
+    artifactSha256: crypto.createHash('sha256').update('site').digest('hex'),
+  }] });
+  const mismatches = crawlerContractArtifactMismatches(
+    manifest,
+    contract,
+    () => crypto.createHash('sha256').update('corpus').digest('hex'),
+  );
+  assert.deepEqual(mismatches, [{
+    contractPath: 'generator/data/crawler-cross-repo-contract.json',
+    artifactPath: '.github/workflows/translate-pending.yml',
+    expected: crypto.createHash('sha256').update('site').digest('hex'),
+    actual: crypto.createHash('sha256').update('corpus').digest('hex'),
+  }]);
+});
+
+test('la chiusura degli import relativi segue il twin del sitePath, non l\u2019alias corpus', () => {
+  const manifest = {
+    files: [
+      {
+        path: 'host/shared/inlineJsonScript.ts',
+        sitePath: 'build-plugins/shared/inlineJsonScript.ts',
+        mode: 'identical',
+      },
+      {
+        path: 'host/seo/organizationLd.ts',
+        sitePath: 'services/seo/organizationLd.ts',
+        mode: 'identical',
+      },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    "import { organizationLd } from '../../services/seo/organizationLd';\n",
+    manifest,
+    (rel) => rel === 'services/seo/organizationLd.ts',
+  );
+  assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+  assert.equal(couplings[0].mode, 'identical');
+});
+
+test('un import relativo verso un adapted viene dichiarato come blocco, non scoperto in review', () => {
+  const manifest = {
+    files: [
+      { path: 'host/shared/consumer.ts', sitePath: 'build-plugins/shared/consumer.ts', mode: 'identical' },
+      { path: 'host/shared/literalMarkdown.ts', sitePath: 'build-plugins/shared/literalMarkdown.ts', mode: 'adapted' },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    "import { literalMarkdown } from './literalMarkdown';\n",
+    manifest,
+    (rel) => rel === 'host/shared/literalMarkdown.ts',
+  );
+  assert.equal(couplings[0].mode, 'adapted');
+  assert.match(permanentBlock(manifest.files[0], { couplings }), /non `identical`/);
+});
+
+test('il pin recovery deriva blob e budget dal workflow trasportato', () => {
+  const workflow = Buffer.from('env:\n  FREE_TRANSLATE_CODEX_MAX_CALLS=350\n', 'utf8');
+  const source = "export const TARGET_WORKFLOW_BLOB_SHA = '0000000000000000000000000000000000000000';\n";
+  const update = translateRecoveryPinUpdate(workflow, source);
+  assert.equal(update.blobSha, gitBlobSha(workflow));
+  assert.equal(update.budget, 350);
+  assert.equal(update.changed, true);
+  assert.match(update.content, new RegExp(update.blobSha));
 });
 
 test('un accoppiamento non `identical` non diventa un arco: sarebbe un no permanente', () => {

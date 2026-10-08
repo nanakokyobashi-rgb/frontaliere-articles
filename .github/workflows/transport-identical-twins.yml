@@ -240,8 +240,10 @@ jobs:
             const fs = require("fs");
             const r = require("/tmp/transport.json");
             fs.writeFileSync("/tmp/transport-paths.tsv", r.transported.map((t) => t.path + "\t" + t.to).join("\n") + (r.transported.length ? "\n" : ""));
+            fs.writeFileSync("/tmp/transport-derived-paths.txt", (r.derived || []).map((t) => t.path).join("\n") + (r.derived && r.derived.length ? "\n" : ""));
           '
           cut -f1 /tmp/transport-paths.tsv | xargs -r -d '\n' git add --
+          xargs -r -d '\n' git add -- < /tmp/transport-derived-paths.txt
           git add -- scripts/ci/loop-sync-manifest.json
           git diff --cached --name-only
           git commit -m "chore(loop): porta ${PORTED} gemelli identical dal sito, riattesta ${REALIGNED} convergenti"
@@ -277,6 +279,8 @@ jobs:
                 const a = require("/tmp/realign.json");
                 const bad = new Set([...(a.mismatched || []), ...(a.normalization || [])].map((x) => x.path));
                 r.transported = r.transported.filter((x) => !bad.has(x.path));
+                r.derivedExcluded = (r.derived || []).filter((x) => bad.has(x.source)).map((x) => x.path).sort();
+                r.derived = (r.derived || []).filter((x) => !bad.has(x.source));
                 r.realignExcluded = [...bad].sort();
                 fs.writeFileSync("/tmp/transport.json", JSON.stringify(r, null, 2));
               '
@@ -302,6 +306,7 @@ jobs:
                 for (const item of ["mismatched", "normalization"]) {
                   for (const x of require("/tmp/realign.json")[item] || []) process.stdout.write(x.path + "\n");
                 }
+                for (const rel of require("/tmp/transport.json").derivedExcluded || []) process.stdout.write(rel + "\n");
               ' | while IFS= read -r rel; do
                 [ -z "$rel" ] || git restore --source=HEAD^ --staged --worktree -- "$rel"
               done
@@ -368,6 +373,14 @@ jobs:
                 git rm --cached --ignore-unmatch -- "$rel"
               fi
             done < <(node -e 'for (const p of require("/tmp/transport-fallback.json").excludedPaths || []) console.log(p)')
+            while IFS= read -r rel; do
+              [ -n "$rel" ] || continue
+              if git cat-file -e "HEAD^:$rel" 2>/dev/null; then
+                git restore --source=HEAD^ --staged --worktree -- "$rel"
+              else
+                git rm --cached --ignore-unmatch -- "$rel"
+              fi
+            done < <(node -e 'for (const p of require("/tmp/transport-fallback.json").excludedDerivedPaths || []) console.log(p)')
             git add -- scripts/ci/loop-sync-manifest.json
             if git diff --cached --quiet HEAD^; then
               echo "Dopo l'esclusione non restano path non-workflow nel tree: nessuna PR apribile."

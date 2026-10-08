@@ -234,9 +234,17 @@ export function removeWorkflowPathsFromReport(report, paths) {
   const excluded = new Set(report.workflowExcluded || []);
   for (const rel of workflowPaths) excluded.add(rel);
   const excludedSet = new Set(workflowPaths);
+  const derivedExcluded = sortedUnique([
+    ...(report.derivedExcluded || []),
+    ...(report.derived || [])
+      .filter((item) => excludedSet.has(item.source))
+      .map((item) => item.path),
+  ]);
   return {
     ...clone(report),
     transported: (report.transported || []).filter((item) => !excludedSet.has(item.path)),
+    derived: (report.derived || []).filter((item) => !excludedSet.has(item.source)),
+    derivedExcluded,
     workflowExcluded: sortedUnique([...excluded]),
   };
 }
@@ -287,7 +295,11 @@ function prepareFallback() {
 
   writeJson(manifestFile, restoredManifest);
   writeJson(reportFile, updatedReport);
-  console.log(JSON.stringify({ ...classification, excludedPaths: workflowPaths }, null, 2));
+  console.log(JSON.stringify({
+    ...classification,
+    excludedPaths: workflowPaths,
+    excludedDerivedPaths: updatedReport.derivedExcluded || [],
+  }, null, 2));
   return 0;
 }
 
