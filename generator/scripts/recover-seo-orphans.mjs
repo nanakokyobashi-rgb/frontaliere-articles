@@ -19,7 +19,8 @@ import { corpusCreditReader } from '../../scripts/lib/image-credit-records.mjs';
 import { unescapeTsString, tsStringEscapesWithNewlineAs } from './lib/unescape-ts-string.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 import { imageRecordForPath, STATIC_FALLBACK_IMAGE } from './lib/blog-image-registry.mjs';
-import { appendSeoEntrySource, buildSeoEntry, toIsoWithTz } from './lib/seo-entry-builder.mjs';
+import { buildSeoEntry, insertSeoEntriesAtHead, toIsoWithTz } from './lib/seo-entry-builder.mjs';
+import { mergeQueueWithSnapshot } from './lib/seo-recovery-queue.mjs';
 import { deriveSeoMetadata, normalizeSeoTitle } from './lib/seo-metadata-derivation.mjs';
 import { queueArticleCoverRegeneration, resolveArticleCoverFallback } from './lib/article-cover-fallback.mjs';
 import { updateArticleImageInRegistry } from './lib/article-registry-image.mjs';
@@ -104,16 +105,6 @@ function parseIds(file) {
   if (ids.length === 0) throw new Error(`ids file vuoto: ${file}`);
   if (new Set(ids).size !== ids.length) throw new Error(`ids file contiene duplicati: ${file}`);
   return ids;
-}
-
-function mergeQueueWithSnapshot(snapshot, current) {
-  const currentById = new Map(current.items.map((item) => [item?.articleId, item]));
-  const snapshotIds = new Set(snapshot.items.map((item) => item?.articleId));
-  const items = snapshot.items.map((item) => currentById.get(item?.articleId) || item);
-  for (const item of current.items) {
-    if (!snapshotIds.has(item?.articleId)) items.push(item);
-  }
-  return { ...current, items };
 }
 
 function existingTitleSet(titleById, currentId) {
@@ -242,13 +233,12 @@ function run(idsFile, { dryRun = false } = {}) {
       const removal = removeSeoEntriesFromSource(after, id, SEO_FILE);
       after = removal.src;
     }
-    for (const { entry } of entries) {
-      after = appendSeoEntrySource(after, entry, {
-        seoConstName: SEO_CONST_NAME,
-        updateRouterUnion: true,
-        fileLabel: SEO_FILE,
-      });
-    }
+    // At the head, not at the tail where the generator appends: see
+    // insertSeoEntriesAtHead.
+    after = insertSeoEntriesAtHead(after, entries.map(({ entry }) => entry), {
+      seoConstName: SEO_CONST_NAME,
+      fileLabel: SEO_FILE,
+    });
     const missingAfterWrite = ids.filter((id) => findSeoEntryMatches(after, id, SEO_FILE).length !== 1);
     if (missingAfterWrite.length > 0) throw new Error(`SEO entry count after build is not one for: ${missingAfterWrite.join(', ')}`);
     writeTextAtomic(seoPath, after);
@@ -262,7 +252,8 @@ function run(idsFile, { dryRun = false } = {}) {
     const missingSnapshotItems = queueSnapshot.items.some((item) => !currentQueue.items.some(
       (currentItem) => currentItem?.articleId === item?.articleId,
     ));
-    if (missingSnapshotItems || queue.items.length !== currentQueue.items.length) {
+    // The merged queue also differs from the current one by position alone.
+    if (missingSnapshotItems || JSON.stringify(queue.items) !== JSON.stringify(currentQueue.items)) {
       writeImageRegenerationQueue(ROOT, queue);
     }
     const missingQueueItems = fallbackIds.filter((id) => !queue.items.some(

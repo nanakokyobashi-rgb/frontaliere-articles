@@ -178,6 +178,32 @@ function replaceCaptureSafe(source, pattern, replacement) {
   return source.replace(pattern, (...args) => replacement(...args.slice(0, -2)));
 }
 
+/**
+ * Insert built entries right after the metadata object's opening brace.
+ *
+ * The article generator appends at the end of this file several times a day.
+ * A pull request that also appends there conflicts with every article
+ * generated while it waits for review (issue 2453: three realignments in one
+ * night). At the head the two changes never touch, so the merge is clean
+ * whatever the generator adds meanwhile; readers look entries up by id, the
+ * position carries no meaning.
+ */
+export function insertSeoEntriesAtHead(source, seoEntries, {
+  seoConstName,
+  fileLabel = 'SEO file',
+} = {}) {
+  if (typeof source !== 'string' || !Array.isArray(seoEntries)
+    || seoEntries.some((entry) => typeof entry !== 'string' || !entry.trim()) || !seoConstName) {
+    throw new TypeError('insertSeoEntriesAtHead: source, seoEntries and seoConstName are required');
+  }
+  if (seoEntries.length === 0) return source;
+  const openerPattern = new RegExp(`(const ${escapeRegExpLiteral(seoConstName)}(?:_\\d+)?[^=\\n]*=\\s*\\{[ \\t]*\\n)`);
+  if (!openerPattern.test(source)) {
+    throw new Error(`Cannot find the opener of ${seoConstName} in ${fileLabel}`);
+  }
+  return replaceCaptureSafe(source, openerPattern, (_match, opener) => `${opener}${seoEntries.join('\n')}\n`);
+}
+
 /** Append a built entry before the metadata object's closing brace. */
 export function appendSeoEntrySource(source, seoEntry, {
   seoConstName,
