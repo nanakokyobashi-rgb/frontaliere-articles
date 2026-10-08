@@ -531,7 +531,7 @@ export function relativeImportCouplings(entry, localSource, siteSourceBytes, man
     }
     const twin = bySite.get(siteTarget);
     if (!twin) continue;
-    if (localTarget === twin.path && localSpecs.has(spec)) continue;
+    if (localTarget === twin.path && localSpecs.has(spec) && twin.mode === 'identical') continue;
     couplings.push({
       path: twin.path,
       // Un import che il sito ha aggiunto puo' non avere un target risolto
@@ -551,8 +551,11 @@ export function relativeImportCouplings(entry, localSource, siteSourceBytes, man
  * Grafo inverso del contratto crawler cross-repo. Il contratto e ogni artifact
  * che elenca sono una sola unita' di trasporto quando entrambi sono candidati;
  * `closeTransportSet()` applica poi il tetto all'intero componente, prima del
- * taglio. I path stabili sono innocui: `alignedPaths` permette di trasportare
- * un contratto che cambia senza ricopiare artifact che non sono cambiati.
+ * taglio. Se il contratto non e' verificabile, il grafo lega invece l'intera
+ * famiglia dei workflow cross-repo potenziali al contratto, cosi' nessun
+ * artifact puo' entrare in `candidates` da solo. I path stabili sono innocui:
+ * `alignedPaths` permette di trasportare un contratto che cambia senza
+ * ricopiare artifact che non sono cambiati.
  */
 export function crawlerContractCouplings(manifest, contractSource) {
   const graph = new Map();
@@ -562,12 +565,40 @@ export function crawlerContractCouplings(manifest, contractSource) {
   const contract = parseCrawlerContract(contractSource);
   if (!contractEntry) return graph;
   if (!contract) {
+    // Senza `artifacts[]` non sappiamo quale subset del manifest il contratto
+    // descriva. Il fallback deve quindi essere conservativo sull'intera
+    // famiglia dei workflow cross-repo potenziali: altrimenti un artifact
+    // `identical` potrebbe passare il verdetto mentre il contratto resta
+    // escluso, spezzando il batch proprio nel caso non verificabile.
+    const potentialArtifacts = entries.filter((entry) => (
+      typeof entry?.path === 'string'
+      && entry.path.startsWith('.github/workflows/')
+      && (typeof entry.sitePath !== 'string' || (
+        entry.sitePath.startsWith('.github/corpus-workflows/')
+        && !entry.sitePath.includes('/observers/')
+      ))
+    ));
+    const reason = 'contratto crawler cross-repo malformato o privo di artifacts[]: intero insieme degli artifact non verificabile';
     addCoupling(graph, CRAWLER_CONTRACT_REL, {
       path: CRAWLER_CONTRACT_REL,
       mode: 'non verificabile',
       declaredBy: 'crawler-contract',
-      reason: 'contratto crawler cross-repo malformato o privo di artifacts[]: unita\u2019 non verificabile',
+      reason,
     });
+    for (const artifactEntry of potentialArtifacts) {
+      addCoupling(graph, CRAWLER_CONTRACT_REL, {
+        path: artifactEntry.path,
+        mode: artifactEntry.mode || 'non registrato',
+        declaredBy: 'crawler-contract',
+        reason,
+      });
+      addCoupling(graph, artifactEntry.path, {
+        path: CRAWLER_CONTRACT_REL,
+        mode: 'non verificabile',
+        declaredBy: 'crawler-contract',
+        reason,
+      });
+    }
     return graph;
   }
 

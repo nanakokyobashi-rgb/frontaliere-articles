@@ -976,6 +976,40 @@ test('un contratto malformato o senza `artifacts[]` è una unità non verifica
   }
 });
 
+test('un contratto non verificabile blocca l’intero insieme degli artifact prima del verdetto', () => {
+  const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
+  const artifactEntries = [
+    { path: '.github/workflows/crawler-group-01.yml', mode: 'identical' },
+    { path: '.github/workflows/crawler-group-02.yml', mode: 'identical' },
+  ];
+  const manifest = { files: [contractEntry, ...artifactEntries] };
+  const previousWorkflowScope = process.env.PAT_WORKFLOWS_SCOPE;
+  process.env.PAT_WORKFLOWS_SCOPE = 'true';
+  try {
+    for (const source of ['{', '{}']) {
+      const graph = crawlerContractCouplings(manifest, source);
+      for (const artifact of artifactEntries) {
+        const couplings = graph.get(artifact.path);
+        assert.ok(couplings?.some((coupling) => (
+          coupling.path === contractEntry.path
+          && coupling.mode === 'non verificabile'
+        )), `${artifact.path} deve restare accoppiato al contratto non verificabile`);
+        const verdict = transportVerdict(
+          artifact,
+          { site: 'bbbb', corpus: 'aaaa' },
+          BASE,
+          { couplings },
+        );
+        assert.equal(verdict.permanent, true);
+        assert.match(verdict.reason, /crawler-cross-repo-contract/);
+      }
+    }
+  } finally {
+    if (previousWorkflowScope === undefined) delete process.env.PAT_WORKFLOWS_SCOPE;
+    else process.env.PAT_WORKFLOWS_SCOPE = previousWorkflowScope;
+  }
+});
+
 test('un hash dell\u2019artifact dichiarato dal contratto promuove il gemello stale', () => {
   const manifest = {
     files: [{ path: '.github/workflows/translate-pending.yml', mode: 'identical' }],
@@ -1064,6 +1098,27 @@ test('un import relativo verso un adapted viene dichiarato come blocco, non scop
   );
   assert.equal(couplings[0].mode, 'adapted');
   assert.match(permanentBlock(manifest.files[0], { couplings }), /non `identical`/);
+});
+
+test('un import che risolve allo stesso path conserva il coupling se il twin non è `identical`', () => {
+  for (const mode of ['adapted', 'corpus-only', 'corpus-only-pending']) {
+    const manifest = {
+      files: [
+        { path: 'host/shared/consumer.ts', sitePath: 'build-plugins/shared/consumer.ts', mode: 'identical' },
+        { path: 'host/seo/organizationLd.ts', sitePath: 'services/seo/organizationLd.ts', mode },
+      ],
+    };
+    const couplings = relativeImportCouplings(
+      manifest.files[0],
+      "import { organizationLd } from '../../host/seo/organizationLd';\n",
+      "import { organizationLd } from '../../services/seo/organizationLd';\n",
+      manifest,
+      (rel) => rel === 'host/seo/organizationLd.ts',
+    );
+    assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+    assert.equal(couplings[0].mode, mode);
+    assert.match(permanentBlock(manifest.files[0], { couplings }), /non `identical`/);
+  }
 });
 
 test('il pin recovery deriva blob e budget dal workflow trasportato', () => {
