@@ -130,7 +130,7 @@ test('normalizza i trattini tipografici senza perdere gli esonimi composti', () 
   }]);
   const repaired = replaceLocalizedToponymMismatches({
     sourceText: 'Notizia sul cantone di Basilea Campagna',
-    targetText: 'Le notizie citano Basel–Landschaft.',
+    targetText: 'Le notizie citano Basel – Landschaft.',
     locale: 'fr',
   });
   assert.equal(repaired.text, 'Le notizie citano Bâle-Campagne.');

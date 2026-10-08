@@ -55,7 +55,8 @@ const ADDITIONAL_HTML_ENTITY_PATTERN = new RegExp(
 const NUMERIC_HTML_ENTITY_PATTERN = /&#(?:x([0-9a-f]+)|([0-9]+));/giu;
 const DASH_VARIANT_PATTERN = /[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/gu;
 const DASH_CHARACTER_PATTERN = /[-\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/u;
-const RAW_DASH_TERM_PATTERN = '(?:[-\\u2010-\\u2015\\u2212\\uFE58\\uFE63\\uFF0D]|&(?:ndash|mdash);|&#(?:8211|8212|x2013|x2014);)\\s*';
+const MATCH_DASH_TERM_PATTERN = '\\s*[-\\u2010-\\u2015\\u2212\\uFE58\\uFE63\\uFF0D]\\s*';
+const RAW_DASH_TERM_PATTERN = '\\s*(?:[-\\u2010-\\u2015\\u2212\\uFE58\\uFE63\\uFF0D]|&(?:ndash|mdash);|&#(?:8211|8212|x2013|x2014);)\\s*';
 const RAW_HTML_ENTITY_BY_CHARACTER = new Map();
 for (const [entity, character] of Object.entries({
   ...ADDITIONAL_HTML_ENTITIES,
@@ -85,8 +86,7 @@ export function normalizeLocalizedToponymText(value) {
 function normalizeToponymMatchText(value) {
   return normalizeLocalizedToponymText(value)
     .normalize('NFKC')
-    .replace(DASH_VARIANT_PATTERN, '-')
-    .replace(/\s*-\s*/gu, '-');
+    .replace(DASH_VARIANT_PATTERN, '-');
 }
 
 function escapeRegExp(value) {
@@ -94,11 +94,17 @@ function escapeRegExp(value) {
 }
 
 function termPattern(term) {
-  return String(term)
-    .trim()
-    .split(/\s+/u)
-    .map(escapeRegExp)
-    .join('\\s+');
+  let pattern = '';
+  for (const character of String(term).trim()) {
+    if (/\s/u.test(character)) {
+      pattern += '\\s+';
+    } else if (DASH_CHARACTER_PATTERN.test(character)) {
+      pattern += MATCH_DASH_TERM_PATTERN;
+    } else {
+      pattern += escapeRegExp(character);
+    }
+  }
+  return pattern;
 }
 
 function rawTermPattern(term) {
@@ -150,7 +156,11 @@ function entityForms(entity) {
 }
 
 function normalizeForm(value) {
-  return normalizeToponymMatchText(value).toLocaleLowerCase('en').replace(/\s+/gu, ' ').trim();
+  return normalizeToponymMatchText(value)
+    .toLocaleLowerCase('en')
+    .replace(/\s*-\s*/gu, '-')
+    .replace(/\s+/gu, ' ')
+    .trim();
 }
 
 function localizedSlugForm(value) {
