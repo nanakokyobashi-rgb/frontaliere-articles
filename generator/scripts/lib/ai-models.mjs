@@ -5403,7 +5403,7 @@ function _forcedChainFromEnv() {
  * caller-provided chain remains an exact contract.
  *
  * @param {{chain?: string[], includeExplicitFallbacks?: boolean,
- *   respectForceChain?: boolean}} [options]
+ *   respectForceChain?: boolean, checkRuntimeState?: boolean}} [options]
  * @returns {{ready: boolean, reason: string, rosterSize: number,
  *   availableModels: string[], availableProviders: string[],
  *   unavailableModels: Array<{model: string, provider: string, reason: string}>,
@@ -5424,6 +5424,7 @@ export function getProviderRosterStatus(options = {}) {
 
   const hasCustomChain = Object.prototype.hasOwnProperty.call(options, 'chain');
   const respectForceChain = options.respectForceChain !== false;
+  const checkRuntimeState = options.checkRuntimeState !== false;
   const forcedChain = respectForceChain ? _forcedChainFromEnv() : [];
   const customChain = hasCustomChain ? options.chain : null;
 
@@ -5466,10 +5467,10 @@ export function getProviderRosterStatus(options = {}) {
       if (!isModelAvailable(model)) {
         return { model, provider, ready: false, reason: 'unavailable' };
       }
-      if (isProviderCoolingDown(provider)) {
+      if (checkRuntimeState && isProviderCoolingDown(provider)) {
         return { model, provider, ready: false, reason: 'provider-cooldown' };
       }
-      if (isPerRunCallCapReached(model)) {
+      if (checkRuntimeState && isPerRunCallCapReached(model)) {
         return { model, provider, ready: false, reason: 'run-cap' };
       }
       return { model, provider, ready: true, reason: 'ready' };
@@ -5512,12 +5513,16 @@ export function providerRosterReady(options = {}) {
 }
 
 /**
- * Backward-compatible boolean view used by older callers. Both entry points
- * now share `getProviderRosterStatus()`, so a cooldown or an invalid roster
- * cannot be reported differently by two gates.
+ * Backward-compatible configuration view used by older callers. It ignores a
+ * diagnostic force-chain and runtime-only cooldown/cap state, preserving the
+ * old question: «is any configured model lane available in this process?»
  */
 export function isAnyModelAvailable() {
-  return providerRosterReady();
+  return getProviderRosterStatus({
+    respectForceChain: false,
+    includeExplicitFallbacks: true,
+    checkRuntimeState: false,
+  }).ready;
 }
 
 /**
