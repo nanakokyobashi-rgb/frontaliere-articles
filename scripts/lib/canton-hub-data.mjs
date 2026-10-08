@@ -87,19 +87,15 @@ function validateHubDocument(doc, section, topic, rel) {
     }
     if (!isIsoDate(entry.updatedAt)) throw new Error(`${rel}: updatedAt della locale "${locale}" non e' valida`);
   }
-  return doc.locales;
+  return doc;
 }
 
-/**
- * I dati di un hub per le quattro locali, o `null` se il file non esiste.
- * Un file presente ma malformato (JSON illeggibile, metadata/schema P10,
- * locale mancante o intro vuota) LANCIA: un hub pubblicato in tre lingue su
- * quattro avrebbe hreflang verso una pagina che non c'e'.
- *
- * @returns {Record<string, Record<string, unknown>> | null}
+/** Read, parse and validate the complete producer document, or `null` when it
+ * does not exist. A present but malformed file throws: publishing a hub in
+ * three locales out of four would create hreflang links to a missing page.
  */
-export function readCantonHubData(root, section, topic) {
-  if (!cantonHubTopics(section).includes(topic)) throw new Error(`readCantonHubData: tema "${topic}" sconosciuto per ${section}`);
+export function readCantonHubDocument(root, section, topic) {
+  if (!cantonHubTopics(section).includes(topic)) throw new Error(`readCantonHubDocument: tema "${topic}" sconosciuto per ${section}`);
   const rel = cantonHubDataFile(section, topic);
   let raw;
   try {
@@ -115,6 +111,17 @@ export function readCantonHubData(root, section, topic) {
     throw new Error(`${rel}: JSON illeggibile (${error.message})`, { cause: error });
   }
   return validateHubDocument(doc, section, topic, rel);
+}
+
+/**
+ * I dati di un hub per le quattro locali, o `null` se il file non esiste.
+ * Mantiene il contratto storico del publisher: il documento P10 completo resta
+ * interno al corpus, mentre questa funzione espone solo `locales` ai renderer.
+ *
+ * @returns {Record<string, Record<string, unknown>> | null}
+ */
+export function readCantonHubData(root, section, topic) {
+  return readCantonHubDocument(root, section, topic)?.locales ?? null;
 }
 
 /**
