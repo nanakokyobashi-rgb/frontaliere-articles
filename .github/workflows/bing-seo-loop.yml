@@ -50,6 +50,7 @@ jobs:
             generator/tests/article-fabrication-guard.test.mjs
             generator/tests/prompt-placeholder-guard.test.mjs
             generator/tests/lib/
+            generator/scripts/lib/escape-regexp.mjs
             generator/scripts/
             generator/data/
             generator/services/

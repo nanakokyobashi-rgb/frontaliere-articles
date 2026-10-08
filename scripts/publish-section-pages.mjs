@@ -60,7 +60,7 @@ import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
 import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
-import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline } from './lib/article-render-pipeline.mjs';
+import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline, rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
 import { CANTON_HUB_LOCALES, cantonHubDataFile, cantonHubTopics, readCantonHubData } from './lib/canton-hub-data.mjs';
 import { sourceRegistryIds } from './lib/corpus-floors.mjs';
 import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
@@ -786,7 +786,7 @@ export async function main(argv = process.argv.slice(2)) {
     section,
     ids,
     logPrefix: LOG,
-    beforeOffload: async ({ hubResult: archive }) => {
+    beforeOffload: async ({ hubResult: archive, releasedArticles }) => {
       for (const rel of CANTON_HUB_LOCALES.flatMap((loc) => archive.pathsByLocale[loc] ?? [])) {
         const abs = path.join(distDir, rel);
         const html = fs.readFileSync(abs, 'utf-8');
@@ -796,8 +796,11 @@ export async function main(argv = process.argv.slice(2)) {
       hubs = await renderHubs({ section, distDir });
       const { renderCantonSectionLandingPages } = await import('../engine/cantonSectionPages.ts');
       const landings = await renderCantonSectionLandingPages({ rootDir: renderRoot, section });
-      for (const page of landings) writePage(distDir, page.relPath, page.html);
-      landingPages = landings;
+      landingPages = landings.map((page) => ({
+        ...page,
+        html: rewriteGenericImageRefs(page.html, releasedArticles),
+      }));
+      for (const page of landingPages) writePage(distDir, page.relPath, page.html);
       return [...hubs.rels, ...landingPages.map((page) => page.relPath)];
     },
   });
