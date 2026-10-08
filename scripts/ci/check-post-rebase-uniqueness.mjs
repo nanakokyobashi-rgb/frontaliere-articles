@@ -172,6 +172,26 @@ function parseArticleMeta(text, label) {
 }
 
 /**
+ * Il meta IT deve descrivere esattamente gli ID gia' presenti sulle superfici
+ * che il gate usera' come riferimento. Un meta assente e' legittimo solo per
+ * una sezione senza articoli; se un parser ignora una riga non riconosciuta o
+ * il file manca mentre slug/registro hanno record, continuare significherebbe
+ * confrontare un contro-corpus troncato e lasciare passare un duplicato.
+ */
+function assertArticleMetaCoverage({ slugIds, registryIds, articles }, label) {
+  const surfaceIds = new Set([...slugIds, ...registryIds]);
+  const metaIds = new Set(Object.keys(articles));
+  const missing = [...surfaceIds].filter((id) => !metaIds.has(id));
+  const extra = [...metaIds].filter((id) => !surfaceIds.has(id));
+  if (missing.length === 0 && extra.length === 0) return;
+
+  const details = [];
+  if (missing.length) details.push(`mancano ${missing.length} ID (${missing.slice(0, 5).join(', ')})`);
+  if (extra.length) details.push(`ci sono ${extra.length} ID non presenti in slug/registro (${extra.slice(0, 5).join(', ')})`);
+  throw new Error(`${label}: meta IT assente o incoerente — ${details.join('; ')}`);
+}
+
+/**
  * Lo stato di tutte le sezioni a una revisione.
  *
  * @param {(path: string) => string|null} readAt lettore del file a quella revisione; null = assente.
@@ -190,10 +210,14 @@ export function snapshotSections(surfaces, readAt, label) {
   };
   const out = {};
   for (const s of surfaces) {
+    const slugIds = slugIdsOf(read(s.slugDataFile));
+    const registryIds = registryIdsOf(read(s.registryFile));
+    const articles = parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`);
+    assertArticleMetaCoverage({ slugIds, registryIds, articles }, `${label}:${s.metaFile}`);
     out[s.section] = {
-      slugIds: slugIdsOf(read(s.slugDataFile)),
-      registryIds: registryIdsOf(read(s.registryFile)),
-      articles: parseArticleMeta(read(s.metaFile), `${label}:${s.metaFile}`),
+      slugIds,
+      registryIds,
+      articles,
       ledger: parseLedger(read(s.sourceLedger), `${label}:${s.sourceLedger}`),
     };
   }

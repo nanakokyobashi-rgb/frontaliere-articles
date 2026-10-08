@@ -30,6 +30,7 @@ import {
   main as checkPostRebaseMain,
   registryIdsOf,
   sectionSurfaces,
+  snapshotSections,
   slugIdsOf,
 } from '../../scripts/ci/check-post-rebase-uniqueness.mjs';
 
@@ -128,6 +129,24 @@ test('una sezione nel core senza ledger dichiarato e\' un errore, non una sezion
     slugDataFile: 'packages/articles/content/cantons/canton-xx/slugs.ts',
   }];
   assert.throws(() => sectionSurfaces(core), /canton-xx.*ledger URL→id/);
+});
+
+test('il meta IT mancante con ID su registro/slug e\' un errore fail-closed', () => {
+  const files = sectionFiles(FIRST, { ids: ['esistente'] });
+  const readAt = (file) => file === FIRST.metaFile ? null : files[file] ?? null;
+  assert.throws(
+    () => snapshotSections([FIRST], readAt, 'against'),
+    /meta IT assente o incoerente.*esistente/,
+  );
+});
+
+test('un record meta con formato non riconosciuto non puo\' ridurre il contro-corpus', () => {
+  const files = sectionFiles(FIRST, { ids: ['esistente'] });
+  files[FIRST.metaFile] = "export const META = {\n  'blog.article.esistente.title': \"Titolo non letto\",\n};\n";
+  assert.throws(
+    () => snapshotSections([FIRST], (file) => files[file] ?? null, 'against'),
+    /meta IT assente o incoerente.*esistente/,
+  );
 });
 
 // ── La logica, sugli snapshot ──────────────────────────────────────────────
@@ -395,6 +414,41 @@ test('CLI titolo quasi identico: exit 1 e violazione di contenuto dopo il rebase
     const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
     assert.equal(code, 1, out);
     assert.match(out, new RegExp(`${VIOLATION_MARKER} kind=duplicate-content section=${FIRST.section} id=${candidate.id} otherId=${old.id}`));
+  } finally {
+    w.cleanup();
+  }
+});
+
+test('CLI meta IT incompleto: exit 2 con POST_REBASE_UNIQUENESS_ERROR, mai un falso ok', () => {
+  const old = 'articolo-esistente';
+  const candidate = 'articolo-nuovo';
+  const candidateArticle = {
+    id: candidate,
+    title: 'Titolo nuovo',
+    excerpt: 'Estratto nuovo',
+  };
+  const mine = sectionFiles(FIRST, {
+    ids: [candidate],
+    articles: { [candidate]: candidateArticle },
+  });
+  // L'upstream porta un record, ma il suo meta IT resta vuoto nel tree
+  // rigiocato: e' proprio il contro-corpus parziale che deve fermare il gate.
+  const upstream = {
+    [FIRST.registryFile]: registrySrc([old]),
+    [FIRST.slugDataFile]: slugSrc([old]),
+  };
+  const rebased = {
+    [FIRST.registryFile]: registrySrc([candidate, old]),
+    [FIRST.slugDataFile]: slugSrc([candidate, old]),
+    [FIRST.metaFile]: metaSrc([candidate], { [candidate]: candidateArticle }),
+  };
+  const w = world({ upstream, mine, rebased });
+  try {
+    const { code, out } = runScript(w.root, '--produced', w.produced, '--against', w.against);
+    assert.equal(code, 2, out);
+    assert.match(out, new RegExp(`${ERROR_MARKER}: .*meta IT assente o incoerente.*${old}`));
+    assert.doesNotMatch(out, new RegExp(OK_MARKER));
+    assert.doesNotMatch(out, new RegExp(VIOLATION_MARKER));
   } finally {
     w.cleanup();
   }
