@@ -254,9 +254,9 @@ jobs:
           # baseline si verifica contro di loro PRIMA del push, con `--amend`
           # dove va corretta per non lasciare due commit sullo stesso atto.
           #
-          # Un mismatch appartiene alla singola voce, non all'intero batch:
-          # raccogli il verdetto, togli quella voce dal commit e riallinea di
-          # nuovo le sole voci sane. Il rosso resta nel file di stato letto
+          # Un mismatch invalida la componente accoppiata, non l'intero batch:
+          # raccogli il verdetto, togli la componente dal commit e riallinea di
+          # nuovo le sole componenti sane. Il rosso resta nel file di stato letto
           # dall'ultimo step, quindi il canale prosegue senza assolversi.
           realign_rc=0
           if [ "$PORTED" != "0" ]; then
@@ -279,9 +279,14 @@ jobs:
                 const r = require("/tmp/transport.json");
                 const a = require("/tmp/realign.json");
                 const bad = new Set([...(a.mismatched || []), ...(a.normalization || [])].map((x) => x.path));
+                for (const component of r.transportComponents || []) {
+                  if (component.some((rel) => bad.has(rel))) {
+                    for (const rel of component) bad.add(rel);
+                  }
+                }
                 r.transported = r.transported.filter((x) => !bad.has(x.path));
-                r.derivedExcluded = (r.derived || []).filter((x) => bad.has(x.source)).map((x) => x.path).sort();
-                r.derived = (r.derived || []).filter((x) => !bad.has(x.source));
+                r.derivedExcluded = (r.derived || []).filter((x) => bad.has(x.source) || bad.has(x.path)).map((x) => x.path).sort();
+                r.derived = (r.derived || []).filter((x) => !bad.has(x.source) && !bad.has(x.path));
                 r.realignExcluded = [...bad].sort();
                 fs.writeFileSync("/tmp/transport.json", JSON.stringify(r, null, 2));
               '
@@ -290,7 +295,8 @@ jobs:
                 const { execFileSync } = require("child_process");
                 const current = JSON.parse(fs.readFileSync("scripts/ci/loop-sync-manifest.json", "utf8"));
                 const previous = JSON.parse(execFileSync("git", ["show", "HEAD^:scripts/ci/loop-sync-manifest.json"]));
-                const bad = new Set(require("/tmp/realign.json").mismatched.map((x) => x.path).concat(require("/tmp/realign.json").normalization.map((x) => x.path)));
+                const report = require("/tmp/transport.json");
+                const bad = new Set(report.realignExcluded || require("/tmp/realign.json").mismatched.map((x) => x.path).concat(require("/tmp/realign.json").normalization.map((x) => x.path)));
                 for (const rel of bad) {
                   const now = current.files.find((x) => x.path === rel);
                   const old = previous.files.find((x) => x.path === rel);
@@ -304,12 +310,15 @@ jobs:
               '
               node -e '
                 const fs = require("fs");
-                for (const item of ["mismatched", "normalization"]) {
-                  for (const x of require("/tmp/realign.json")[item] || []) process.stdout.write(x.path + "\n");
-                }
+                for (const rel of require("/tmp/transport.json").realignExcluded || []) process.stdout.write(rel + "\n");
                 for (const rel of require("/tmp/transport.json").derivedExcluded || []) process.stdout.write(rel + "\n");
               ' | while IFS= read -r rel; do
-                [ -z "$rel" ] || git restore --source=HEAD^ --staged --worktree -- "$rel"
+                [ -z "$rel" ] && continue
+                if git cat-file -e "HEAD^:$rel" 2>/dev/null; then
+                  git restore --source=HEAD^ --staged --worktree -- "$rel"
+                else
+                  git rm --cached --ignore-unmatch -- "$rel"
+                fi
               done
               git add -- scripts/ci/loop-sync-manifest.json
               git commit --amend --no-edit

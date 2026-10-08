@@ -70,6 +70,7 @@ import {
   unreadableCouplings,
   transportVerdict,
   relativeImportCouplings,
+  transportMaxFilesForContract,
   translateRecoveryPinUpdate,
   unsafeTarget,
 } from '../../scripts/ci/transport-identical-twins.mjs';
@@ -78,6 +79,7 @@ import { readManifestSnapshot } from '../../scripts/ci/handoff-to-site.mjs';
 import { parsePositiveNum } from '../../scripts/ci/scan-failed-runs.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
+const ARTIFACT_SHA = 'a'.repeat(64);
 
 /** Una voce `identical` con la baseline allineata su entrambi i lati. */
 const twin = (over = {}) => ({
@@ -881,6 +883,18 @@ test('un accoppiamento VERIFICATO allineato non blocca', () => {
   assert.deepEqual(chosen.map((c) => c.path), ['host/x.ts']);
 });
 
+test('un path aligned non resta un blocco permanente della componente', () => {
+  const candidates = [cand('host/x.ts')];
+  const graph = [{ path: 'host/tests/x.golden.json', couplings: [{ path: 'host/x.ts', mode: 'identical' }] }];
+  const { chosen } = closeTransportSet(candidates, {
+    maxFiles: 25,
+    couplingGraph: graph,
+    alignedPaths: new Set(['host/tests/x.golden.json']),
+    blockedForever: new Set(['host/tests/x.golden.json']),
+  });
+  assert.deepEqual(chosen.map((candidate) => candidate.path), ['host/x.ts']);
+});
+
 test('sotto il tetto e con entrambe le metà presenti si copia tutto', () => {
   const candidates = [
     cand('host/tests/x.golden.json', [{ path: 'host/x.ts', mode: 'identical' }]),
@@ -889,6 +903,17 @@ test('sotto il tetto e con entrambe le metà presenti si copia tutto', () => {
   const { chosen, capped } = closeTransportSet(candidates, { maxFiles: 25 });
   assert.deepEqual(chosen.map((c) => c.path), ['host/tests/x.golden.json', 'host/x.ts']);
   assert.equal(capped, 0);
+});
+
+test('il budget del contratto comprende il file contratto oltre al roster', () => {
+  const source = JSON.stringify({
+    artifacts: Array.from({ length: 25 }, (_, index) => ({
+      file: `crawler-group-${String(index + 1).padStart(2, '0')}.yml`,
+      artifactSha256: ARTIFACT_SHA,
+    })),
+  });
+  assert.equal(transportMaxFilesForContract(25, source), 26);
+  assert.equal(transportMaxFilesForContract(25, '{'), 25);
 });
 
 test('replay run 37699422170: il contratto crawler chiude workflow e artifact prima del tetto', () => {
@@ -903,7 +928,7 @@ test('replay run 37699422170: il contratto crawler chiude workflow e artifact pr
     ],
   };
   const graph = crawlerContractCouplings(manifest, JSON.stringify({
-    artifacts: [{ file: 'translate-pending.yml' }],
+    artifacts: [{ file: 'translate-pending.yml', artifactSha256: ARTIFACT_SHA }],
   }));
   const couplingGraph = [...graph].map(([filePath, couplings]) => ({ path: filePath, couplings }));
   const observedRun = {
@@ -925,7 +950,7 @@ test('replay run 37699422170: il contratto crawler chiude workflow e artifact pr
 test('il contratto blocca un artifact dichiarato ma assente dal manifest prima del verdetto', () => {
   const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
   const manifest = { files: [contractEntry] };
-  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'missing.yml' }] }));
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'missing.yml', artifactSha256: ARTIFACT_SHA }] }));
   const couplings = graph.get(contractEntry.path);
   assert.equal(couplings.length, 1);
   assert.equal(couplings[0].path, '.github/workflows/missing.yml');
@@ -944,7 +969,7 @@ test('il contratto blocca un artifact `adapted` invece di lasciarlo come arco ig
   const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
   const artifactEntry = { path: '.github/workflows/adapted.yml', mode: 'adapted' };
   const manifest = { files: [contractEntry, artifactEntry] };
-  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'adapted.yml' }] }));
+  const graph = crawlerContractCouplings(manifest, JSON.stringify({ artifacts: [{ file: 'adapted.yml', artifactSha256: ARTIFACT_SHA }] }));
   const contractCouplings = graph.get(contractEntry.path);
   assert.equal(contractCouplings[0].mode, 'adapted');
   const verdict = transportVerdict(
@@ -960,7 +985,7 @@ test('il contratto blocca un artifact `adapted` invece di lasciarlo come arco ig
 test('un contratto malformato o senza `artifacts[]` è una unità non verificabile', () => {
   const contractEntry = { path: 'generator/data/crawler-cross-repo-contract.json', mode: 'identical' };
   const manifest = { files: [contractEntry] };
-  for (const source of ['{', '{}']) {
+  for (const source of ['{', '{}', '{"artifacts":[]}', JSON.stringify({ artifacts: [{ file: 'missing-digest.yml' }] })]) {
     const graph = crawlerContractCouplings(manifest, source);
     const couplings = graph.get(contractEntry.path);
     assert.equal(couplings.length, 1);
@@ -1031,6 +1056,27 @@ test('un hash dell\u2019artifact dichiarato dal contratto promuove il gemello st
   }]);
 });
 
+test('il contratto confronta sia il corpus sia i byte dell\u2019artifact sul sito', () => {
+  const manifest = {
+    files: [{ path: '.github/workflows/translate-pending.yml', mode: 'identical' }],
+  };
+  const expected = crypto.createHash('sha256').update('expected').digest('hex');
+  const site = crypto.createHash('sha256').update('site-divergente').digest('hex');
+  const mismatches = crawlerContractArtifactMismatches(
+    manifest,
+    JSON.stringify({ artifacts: [{ file: 'translate-pending.yml', artifactSha256: expected }] }),
+    () => expected,
+    () => site,
+  );
+  assert.deepEqual(mismatches, [{
+    contractPath: 'generator/data/crawler-cross-repo-contract.json',
+    artifactPath: '.github/workflows/translate-pending.yml',
+    expected,
+    actual: expected,
+    actualSite: site,
+  }]);
+});
+
 test('la chiusura degli import relativi segue il twin del sitePath, non l\u2019alias corpus', () => {
   const manifest = {
     files: [
@@ -1080,6 +1126,70 @@ test('la chiusura degli import include una dipendenza aggiunta dal site-ahead', 
   );
   assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
   assert.equal(couplings[0].mode, 'identical');
+});
+
+test('la chiusura conserva anche il coupling quando entrambi i lati risolvono lo stesso twin identical', () => {
+  const manifest = {
+    files: [
+      {
+        path: 'host/shared/consumer.ts',
+        sitePath: 'build-plugins/shared/consumer.ts',
+        mode: 'identical',
+      },
+      {
+        path: 'host/seo/organizationLd.ts',
+        sitePath: 'build-plugins/seo/organizationLd.ts',
+        mode: 'identical',
+      },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    "import { organizationLd } from '../seo/organizationLd';\n",
+    "import { organizationLd } from '../seo/organizationLd';\n",
+    manifest,
+  );
+  assert.deepEqual(couplings.map((coupling) => coupling.path), ['host/seo/organizationLd.ts']);
+  assert.equal(couplings[0].mode, 'identical');
+  const graph = [{ path: manifest.files[0].path, couplings }];
+  assert.deepEqual(
+    closeTransportSet([cand(manifest.files[0].path)], { couplingGraph: graph }).chosen,
+    [],
+    'un twin non osservato non deve essere separato dal suo importatore',
+  );
+  assert.deepEqual(
+    closeTransportSet([cand(manifest.files[0].path)], {
+      couplingGraph: graph,
+      alignedPaths: new Set(['host/seo/organizationLd.ts']),
+    }).chosen.map((candidate) => candidate.path),
+    [manifest.files[0].path],
+  );
+});
+
+test('un workflow non viene scansionato come modulo per import inline in heredoc', () => {
+  const manifest = {
+    files: [
+      {
+        path: '.github/workflows/translate-pending.yml',
+        sitePath: '.github/corpus-workflows/translate-pending.yml',
+        mode: 'identical',
+      },
+      {
+        path: 'scripts/lib/translate-run-clock.mjs',
+        sitePath: 'scripts/lib/translate-run-clock.mjs',
+        mode: 'identical',
+      },
+    ],
+  };
+  assert.deepEqual(
+    relativeImportCouplings(
+      manifest.files[0],
+      "run: node --input-type=module <<'NODE'\nimport './scripts/lib/translate-run-clock.mjs';\nNODE\n",
+      "run: node --input-type=module <<'NODE'\nimport './scripts/lib/translate-run-clock.mjs';\nNODE\n",
+      manifest,
+    ),
+    [],
+  );
 });
 
 test('un import relativo verso un adapted viene dichiarato come blocco, non scoperto in review', () => {

@@ -173,7 +173,8 @@ const REALIGN_FILE = (RAW_ARGS.find((a) => a.startsWith('--realign=')) || '').sl
  * configura male (stessa classe degli override malformati di #797/#811).
  * `parsePositiveNum` è la sorgente unica di quella validazione.
  */
-const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, 25, {
+const DEFAULT_MAX_FILES = 25;
+const MAX_FILES = parsePositiveNum(process.env.TRANSPORT_MAX_FILES, DEFAULT_MAX_FILES, {
   label: 'TRANSPORT_MAX_FILES',
   tool: 'transport-identical-twins',
   // Un tetto FRAZIONARIO passa il test "positivo" e poi viene troncato:
@@ -446,12 +447,34 @@ function parseCrawlerContract(value) {
   } catch {
     return null;
   }
-  return parsed
-    && typeof parsed === 'object'
-    && !Array.isArray(parsed)
-    && Array.isArray(parsed.artifacts)
-    ? parsed
-    : null;
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed) || !Array.isArray(parsed.artifacts)) return null;
+  if (parsed.artifacts.length === 0 || !parsed.artifacts.every((artifact) => (
+    artifact
+    && typeof artifact === 'object'
+    && typeof artifact.file === 'string'
+    && artifact.file.trim() !== ''
+    && !artifact.file.includes('..')
+    && !artifact.file.includes('\\')
+    && !path.posix.isAbsolute(artifact.file)
+    && typeof artifact.artifactSha256 === 'string'
+    && /^[0-9a-f]{64}$/iu.test(artifact.artifactSha256)
+  ))) return null;
+  return parsed;
+}
+
+/**
+ * Una componente crawler deve entrare intera nel batch. Il contratto e' un
+ * file aggiuntivo rispetto al roster `artifacts[]`, quindi il budget minimo
+ * della sua unita' e' roster + contratto. Il limite configurato resta il
+ * minimo per le altre componenti; questa eccezione evita che l'unita'
+ * dichiarata dal contratto sia rinviata per sempre appena il roster raggiunge
+ * il tetto ordinario.
+ */
+export function transportMaxFilesForContract(maxFiles, contractSource) {
+  const contract = parseCrawlerContract(contractSource);
+  return contract
+    ? Math.max(maxFiles, contract.artifacts.length + 1)
+    : maxFiles;
 }
 
 /**
@@ -474,6 +497,8 @@ function parseCrawlerContract(value) {
  */
 export function relativeImportCouplings(entry, localSource, siteSourceBytes, manifest, corpusExists = (rel) => fs.existsSync(path.join(ROOT, rel))) {
   if (!entry || entry.mode !== 'identical') return [];
+  if (!MODULE_EXTENSIONS.has(path.extname(entry.path).toLowerCase())
+    || !MODULE_EXTENSIONS.has(path.extname(entry.sitePath || entry.path).toLowerCase())) return [];
   const localText = typeof localSource === 'string'
     ? localSource
     : Buffer.isBuffer(localSource) ? localSource.toString('utf8') : null;
@@ -531,7 +556,6 @@ export function relativeImportCouplings(entry, localSource, siteSourceBytes, man
     }
     const twin = bySite.get(siteTarget);
     if (!twin) continue;
-    if (localTarget === twin.path && localSpecs.has(spec) && twin.mode === 'identical') continue;
     couplings.push({
       path: twin.path,
       // Un import che il sito ha aggiunto puo' non avere un target risolto
@@ -649,12 +673,12 @@ export function crawlerContractCouplings(manifest, contractSource) {
 }
 
 /**
- * Hashes declared by the site contract but not reproduced by the corpus are
- * not harmless metadata drift: they identify the artifact that must join a
- * candidate contract before the file cap is applied. The caller supplies the
- * corpus hash reader so this rule stays pure in tests.
+ * Hashes declared by the site contract but not reproduced by either observed
+ * side are not harmless metadata drift: they identify the artifact that must
+ * join a candidate contract before the file cap is applied. The caller
+ * supplies both hash readers so this rule stays pure in tests.
  */
-export function crawlerContractArtifactMismatches(manifest, contractSource, corpusHash = () => null) {
+export function crawlerContractArtifactMismatches(manifest, contractSource, corpusHash = () => null, siteHash = null) {
   const entries = Array.isArray(manifest?.files) ? manifest.files : [];
   const byPath = new Map(entries.map((entry) => [entry.path, entry]));
   const contract = parseCrawlerContract(contractSource);
@@ -663,14 +687,18 @@ export function crawlerContractArtifactMismatches(manifest, contractSource, corp
   for (const artifact of contract.artifacts) {
     if (!artifact || typeof artifact.file !== 'string' || artifact.file.includes('..')) continue;
     const artifactPath = `.github/workflows/${artifact.file}`;
-    if (!byPath.has(artifactPath) || typeof artifact.artifactSha256 !== 'string') continue;
-    const actual = corpusHash(artifactPath);
-    if (actual !== artifact.artifactSha256) {
+    if (!byPath.has(artifactPath)) continue;
+    const expected = artifact.artifactSha256.toLowerCase();
+    const actualCorpus = corpusHash(artifactPath);
+    const actualSite = typeof siteHash === 'function' ? siteHash(artifactPath) : undefined;
+    if (actualCorpus !== expected
+      || (typeof siteHash === 'function' && actualSite !== expected)) {
       mismatches.push({
         contractPath: CRAWLER_CONTRACT_REL,
         artifactPath,
-        expected: artifact.artifactSha256,
-        actual,
+        expected,
+        actual: actualCorpus,
+        ...(typeof siteHash === 'function' ? { actualSite } : {}),
       });
     }
   }
@@ -884,7 +912,9 @@ export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = ne
   for (const component of components) {
     const external = [...component.nodes].filter((rel) => !candidatePaths.has(rel)).sort();
     const unsettled = external.filter((rel) => !alignedPaths.has(rel));
-    const forever = [...component.nodes].filter((rel) => blockedForever.has(rel)).sort();
+    const forever = [...component.nodes]
+      .filter((rel) => blockedForever.has(rel) && !alignedPaths.has(rel))
+      .sort();
     const permanent = forever.length > 0;
     const exceedsUnit = component.members.length > maxFiles;
     const exceedsRemaining = !exceedsUnit && used + component.members.length > maxFiles;
@@ -921,7 +951,16 @@ export function closeTransportSet(candidates, { maxFiles = 25, alignedPaths = ne
     const decision = decisions.get(candidate.path);
     if (decision) dropped.push(decision);
   }
-  return { chosen, dropped, capped: candidates.length - chosen.length };
+  const chosenComponents = components
+    .filter((component) => component.members.length > 0
+      && component.members.every((member) => kept.has(member.path)))
+    .map((component) => component.members.map((member) => member.path));
+  return {
+    chosen,
+    dropped,
+    capped: candidates.length - chosen.length,
+    components: chosenComponents,
+  };
 }
 
 /**
@@ -1622,6 +1661,7 @@ function walkSubtree(root, acc = [], blind = new Map()) {
  */
 const TYPE_SCRIPT_EXTENSIONS = new Set(['.ts', '.tsx', '.mts', '.cts']);
 const JAVASCRIPT_EXTENSIONS = new Set(['.js', '.jsx', '.mjs', '.cjs']);
+const MODULE_EXTENSIONS = new Set([...TYPE_SCRIPT_EXTENSIONS, ...JAVASCRIPT_EXTENSIONS]);
 
 /**
  * @param {string} base
@@ -2387,16 +2427,27 @@ async function main() {
     } catch {
       return null;
     }
+  }, (rel) => {
+    const observation = observations.get(rel);
+    if (!observation || observation.content == null) return null;
+    return sha256Full(observation.content);
   });
   for (const mismatch of contractMismatches) {
     const observation = observations.get(mismatch.artifactPath);
-    if (!observation || !Buffer.isBuffer(observation.content)) continue;
-    const siteHash = sha256Full(observation.content);
-    if (siteHash !== mismatch.expected) {
+    if (!observation || observation.content == null) continue;
+    if (mismatch.actualSite !== mismatch.expected) {
+      // Un artifact che il sito serve con byte diversi dal contratto rende
+      // inaffidabile l'intera componente, anche quando il suo verdetto
+      // individuale sarebbe `stable`: il contratto non puo' viaggiare da solo
+      // lasciando l'altro lato accoppiato a byte incoerenti.
+      alignedPaths.delete(CRAWLER_CONTRACT_REL);
+      alignedPaths.delete(mismatch.artifactPath);
+      blockedForever.add(CRAWLER_CONTRACT_REL);
+      blockedForever.add(mismatch.artifactPath);
       manual.push({
         path: mismatch.artifactPath,
         state: observation.verdict.state,
-        reason: `il contratto ${mismatch.contractPath} dichiara ${mismatch.expected}, ma il file servito dal sito ha hash ${siteHash}: unita’ non verificabile`,
+        reason: `il contratto ${mismatch.contractPath} dichiara ${mismatch.expected}, ma i byte osservati divergono (corpus ${mismatch.actual}, sito ${mismatch.actualSite}): unita’ non verificabile`,
       });
       continue;
     }
@@ -2421,8 +2472,9 @@ async function main() {
   // un import relativo dalla sua meta'. Una passata che copia una sola meta'
   // e' incoerente per costruzione — la stessa rottura prodotta dal tetto
   // invece che dal manifest.
-  const { chosen, dropped, capped } = closeTransportSet(candidates, {
-    maxFiles: MAX_FILES,
+  const transportMaxFiles = transportMaxFilesForContract(MAX_FILES, contractSource);
+  const { chosen, dropped, capped, components: transportComponents } = closeTransportSet(candidates, {
+    maxFiles: transportMaxFiles,
     alignedPaths,
     couplingGraph,
     blockedForever,
@@ -2540,6 +2592,7 @@ async function main() {
       apply: APPLY,
       manifestChanged,
       transported,
+      transportComponents,
       derived,
       contractMismatches,
       capped,
@@ -2566,7 +2619,7 @@ async function main() {
       for (const c of d.added) console.log(`     + ${c.path} (${c.mode})`);
       for (const c of d.removed) console.log(`     - ${c.path} (${c.mode})`);
     }
-    if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${MAX_FILES} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
+    if (capped) console.log(`  ⏸ altri ${capped} candidati non copiati oggi (tetto di ${transportMaxFiles} file, più le metà che il taglio avrebbe separato): restano al prossimo giro`);
     console.log(`  ${realign.length} convergenti da riattestare (solo baseline), ${needsReconcile.length} divergenti da riconciliare a mano`);
     for (const r of realign) console.log(`  ⟳ ${r.path}: baseline ${APPLY ? 'riattestata' : 'da riattestare'} su ${r.hash} (i due lati coincidono)`);
     if (realignPlan.overflow.length) console.log(`  ⏸ altri ${realignPlan.overflow.length} convergenti oltre il tetto di ${MAX_REALIGN}: restano al prossimo giro (${realignPlan.overflow.join(', ')})`);
