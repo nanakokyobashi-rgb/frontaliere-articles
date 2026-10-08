@@ -4,6 +4,8 @@
  */
 export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
  'esplosione-bancomat-thayngen': { it: 'esplosione-bancomat-thayngen', en: 'thayngen-atm-explosion', de: 'thayngen-geldautomat-gesprengt', fr: 'thayngen-distributeur-explose' },
+ 'sciaffusa-formazione-farmacie': { it: 'sciaffusa-formazione-farmacie', en: 'schaffhausen-pharmacy-training', de: 'schaffhausen-apotheken-schulung', fr: 'schaffhouse-formation-pharmacies' },
+ 'seehas-affollamento-mattutino': { it: 'seehas-affollamento-mattutino', en: 'more-crowded-seehas-and-longer-journeys-on-the-konstanz-singen-line', de: 'starker-ausgelasteter-seehas-und-langere-fahrten-auf-der-strecke-konstanz-singen', fr: 'seehas-plus-charge-et-trajets-plus-longs-sur-la-ligne-konstanz-singen' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

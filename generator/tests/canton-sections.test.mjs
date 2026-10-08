@@ -21,8 +21,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   DAILY_BUDGET_TIERS,
+  isWholeSiteBlock,
   NEWS_KINDS,
   PROFILE_REL,
+  robotsRuleBlocksCrawler,
   loadContext,
   validateCantonSections,
 } from '../../scripts/ci/validate-canton-sections.mjs';
@@ -91,25 +93,29 @@ test('la tabella D19 copre esattamente i 24 gruppi, una volta sola', () => {
 });
 
 test('la policy robots ha host bloccati da far valere su tutti i cantoni', () => {
-  // Se nessuna regola fosse riconosciuta come blocco dell'intero sito, il
-  // controllo cross-cantone del validatore non vedrebbe mai niente.
-  const wholeSite = PROFILE.cantons.flatMap((c) => [
-    ...(c.ownerDecisionPending || []),
-    ...(c.rejectedSources || []),
-  ]).filter((p) => /-> Disallow: \/(;|$)/.test(p.robotsRule));
-  assert.ok(wholeSite.length > 0);
+  // Il controllo cross-cantone deve riconoscere un divieto applicabile al
+  // nostro UA o a `*`, non il semplice fatto che un bot AI nominato abbia un
+  // Disallow: /.
+  assert.equal(isWholeSiteBlock('User-agent: GPTBot -> Disallow: /'), false);
+  assert.equal(isWholeSiteBlock('User-agent: * -> Disallow: /'), true);
+  const exception = 'User-agent: * -> Disallow: /; User-agent: * -> Allow: /news/';
+  assert.equal(isWholeSiteBlock(exception, 'FrontaliereTicinoBot', 'https://example.ch/news/item'), false);
+  assert.equal(isWholeSiteBlock(exception, 'FrontaliereTicinoBot', 'https://example.ch/private/item'), true);
+  assert.equal(robotsRuleBlocksCrawler('User-agent: GPTBot -> Disallow: /; User-agent: * -> Allow: /', 'https://example.ch/news'), false);
 });
 
-test('SHN e Schaffhausen24 esclusi definitivamente dopo la riverifica robots D10', () => {
+test('SHN e Schaffhausen24 sono ammesse quando il blocco robots è solo nominativo', () => {
   const c = canton(PROFILE, 'SH');
-  assert.equal(c.rejectedSources.length, 9);
-  assert.equal(c.ownerDecisionPending.some((p) => /shn\.ch|schaffhausen24\.ch/.test(p.url)), false);
-  for (const source of c.rejectedSources) {
-    assert.equal(source.reason, 'robotsAiDisallow');
-    assert.equal(source.decision, 'exclude');
-    assert.equal(source.decisionAt, '2026-10-08');
-    assert.equal(source.origin, 'rejected');
+  assert.equal(c.rejectedSources.length, 1);
+  assert.equal(c.ownerDecisionPending.length, 0);
+  assert.equal(c.newsSources.filter((s) => s.url.includes('shn.ch/')).length, 7);
+  assert.equal(c.newsSources.some((s) => s.url === 'https://www.schaffhausen24.ch/alle-news'), true);
+  assert.equal(c.categoryDataSources.eventi.some((s) => s.url === 'https://www.schaffhausen24.ch/agenda'), true);
+  for (const source of c.newsSources.filter((s) => s.url.includes('shn.ch/'))) {
+    assert.equal(source.quirks.excludePaywalledCards, true);
+    assert.equal(source.quirks.paywall, 'title+lead');
   }
+  assert.equal(c.ownerDecisionPending.some((p) => /shn\.ch|schaffhausen24\.ch/.test(p.url)), false);
 });
 
 // ── Ogni regola, rotta apposta ──────────────────────────────────────────────
@@ -156,14 +162,41 @@ test('viola: fonte gia\' nelle liste globali (D12 per il Ticino)', () => {
 test('viola: fonte in attesa di decisione robots rientrata fra le news dello stesso cantone', () => {
   const doc = clone();
   const c = canton(doc, 'AG');
-  const p = c.ownerDecisionPending[0];
+  const p = {
+    url: 'https://pending.example/news',
+    publisher: 'Pending example',
+    kind: 'media',
+    language: 'de',
+    intendedBucket: 'news',
+    blockedAgents: ['GPTBot'],
+    robotsRule: 'User-agent: GPTBot -> Disallow: /',
+    robotsCheckedAt: '2026-10-08',
+    items7d: 0,
+    origin: 'sources',
+  };
+  c.ownerDecisionPending = [p];
   c.newsSources.push({ ...c.newsSources[0], url: p.url });
   expectViolation(doc, /AG: ownerDecisionPending: URL duplicato/);
 });
 
 test('viola: host bloccato ai bot AI usato da un ALTRO cantone', () => {
   const doc = clone();
-  const blocked = canton(doc, 'AG').ownerDecisionPending.find((p) => /-> Disallow: \/(;|$)/.test(p.robotsRule));
+  const blocked = {
+    url: 'https://blocked.example/news',
+    publisher: 'Blocked example',
+    kind: 'media',
+    language: 'de',
+    intendedBucket: 'news',
+    blockedAgents: ['*'],
+    robotsRule: 'User-agent: * -> Disallow: /',
+    robotsCheckedAt: '2026-10-08',
+    items7d: 0,
+    decision: 'exclude',
+    decisionAt: '2026-10-08',
+    origin: 'rejected',
+    reason: 'robotsAiDisallow',
+  };
+  canton(doc, 'AG').rejectedSources = [blocked];
   const host = new URL(blocked.url).hostname;
   canton(doc, 'ZH').newsSources.push({ ...firstNews(doc, 'ZH'), url: `https://${host}/qualunque-altro-path.rss` });
   expectViolation(doc, new RegExp(`ZH: newsSources https://${host.replace(/\./g, '\\.')}/qualunque-altro-path\\.rss: host bloccato`));
@@ -236,10 +269,10 @@ test('viola: urlReusedForDifferentStories diverso da true o da una regex di path
   assert.deepEqual(validateCantonSections(doc, CTX), []);
 });
 
-test('viola: ai-input=no non puo\' stare in una fonte ammessa', () => {
+test('D10: ai-input=no e blocco nominativo altrui non escludono la fonte', () => {
   const doc = clone();
   firstNews(doc, 'NE').quirks.contentSignal = 'ai-train=no, ai-input=no';
-  expectViolation(doc, /NE: newsSources .*quirk contentSignal=.* non valido/);
+  assert.deepEqual(validateCantonSections(doc, CTX), []);
 });
 
 test('viola: cantone acceso senza fonti news', () => {
@@ -252,7 +285,19 @@ test('viola: cantone acceso senza fonti news', () => {
 
 test('viola: pendente senza la regola robots che lo giustifica', () => {
   const doc = clone();
-  const p = canton(doc, 'SO').ownerDecisionPending[0];
+  const p = {
+    url: 'https://pending.example/news',
+    publisher: 'Pending example',
+    kind: 'media',
+    language: 'de',
+    intendedBucket: 'news',
+    blockedAgents: ['GPTBot'],
+    robotsRule: 'User-agent: GPTBot -> Disallow: /',
+    robotsCheckedAt: '2026-10-08',
+    items7d: 0,
+    origin: 'sources',
+  };
+  canton(doc, 'SO').ownerDecisionPending = [p];
   p.robotsRule = '';
   p.blockedAgents = [];
   expectViolation(doc, /SO: ownerDecisionPending .*: blockedAgents vuoto/);
@@ -265,7 +310,7 @@ test('viola: esclusione definitiva senza motivo o data di decisione', () => {
   p.reason = 'manuale';
   p.decisionAt = '';
   p.origin = 'sources';
-  expectViolation(doc, /SH: rejectedSources .*: reason deve essere robotsAiDisallow/);
+  expectViolation(doc, /SH: rejectedSources .*: reason non valido/);
   expectViolation(doc, /SH: rejectedSources .*: decisionAt non YYYY-MM-DD/);
   expectViolation(doc, /SH: rejectedSources .*: origin deve essere rejected/);
 });
@@ -282,4 +327,11 @@ test('viola: articleContent con crawl-delay oltre il limite ha budget effettivo 
   const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.radiomunot.ch/');
   source.quirks.crawlDelaySeconds = 61;
   expectViolation(doc, /SH: newsSources .*: articleContent html-text .*budget effettivo >= 2/);
+});
+
+test('viola: articleDateFromDetail senza budget finito di pagine dettaglio', () => {
+  const doc = clone();
+  const source = canton(doc, 'SH').newsSources.find((item) => item.url === 'https://www.schaffhausen24.ch/alle-news');
+  delete source.quirks.maxRequestsPerRun;
+  expectViolation(doc, /SH: newsSources .*articleDateFromDetail html-meta richiede maxRequestsPerRun intero >= 2/);
 });

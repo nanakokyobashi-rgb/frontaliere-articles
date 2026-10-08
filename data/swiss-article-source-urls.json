@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948269/volo-swiss-zurigo-viaggio-emergenza": {
-    "articleId": "esercitazione-salvataggio-monte-ceneri",
-    "ts": "2026-09-06T11:06:06.916Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948311/attacco-schweizerhof-credito-destinatari-dati": {
     "articleId": "attacco-hacker-schweizerhof",
     "ts": "2026-09-06T11:37:02.159Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/fjg4xoims04s": {
     "articleId": "violazione-dati-publica-indagine",
     "ts": "2026-10-08T08:15:35.488Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1955486/32-in-un-anno-il-mercato-del-lavoro-ia-cresce-rapidamente": {
+    "articleId": "crescita-lavoro-intelligenza-artificiale",
+    "ts": "2026-10-08T09:17:54.516Z",
     "keyForm": 2
   }
 }

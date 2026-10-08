@@ -12782,6 +12782,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.title': 'Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.excerpt': '## In breve - Sei misure cautelari e sequestri per circa 11 milioni - Frode Iva in elettronica e informatica - 93 società nella parte italiana dell\'indagine',
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.imageAlt': 'Immagine editoriale relativa a: Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
+    'blog.article.bally-caslano-moratoria-tagli.title': 'Bally a Caslano: moratoria prorogata e altri tagli',
+    'blog.article.bally-caslano-moratoria-tagli.excerpt': 'La moratoria di Bally è stata prorogata. Dopo il licenziamento collettivo di 25 dipendenti, per l\'azienda attiva a Caslano ci sono state due offerte di acquisto.',
+    'blog.article.bally-caslano-moratoria-tagli.imageAlt': 'Caslano in Ticino, dove Bally era attiva nella vicenda sui tagli al personale',
+    'blog.article.salute-lavoro-progetti-ticino.title': 'Salute mentale sul lavoro: progetti in Ticino',
+    'blog.article.salute-lavoro-progetti-ticino.excerpt': '## In breve - In Svizzera una persona su tre è emotivamente spossata. - In Ticino quasi un apprendista su tre riferisce disturbi d\'ansia. - DSS e Forum GSA',
+    'blog.article.salute-lavoro-progetti-ticino.imageAlt': 'Team di lavoro a Bellinzona per la salute mentale',
+    'blog.article.bellinzona-nord-svincolo.title': 'Bellinzona Nord, chiusura notturna dello svincolo',
+    'blog.article.bellinzona-nord-svincolo.excerpt': '## In breve - Chiusura tra venerdì 9 e sabato 10 ottobre - Stop dalle 20.00 alle 5.00 - Direzione: Chiasso/San Gottardo - Alternative: Bellinzona Centro 46',
+    'blog.article.bellinzona-nord-svincolo.imageAlt': 'Svincolo autostradale di Bellinzona Nord durante una chiusura notturna',
 };
 
 export default blogMetaIt;

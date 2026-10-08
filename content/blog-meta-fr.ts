@@ -12783,6 +12783,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.title': 'Opération Hermes : fraudes à la TVA 450 mln, saisies 11 mln',
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.excerpt': '## En bref - Six mesures conservatoires et saisies pour environ 11 millions - Fraude à la TVA dans l\'électronique et l\'informatique - 93 sociétés dans la partie italienne de l\'enquête',
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.imageAlt': 'Image éditoriale relative à: Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
+    'blog.article.bally-caslano-moratoria-tagli.title': 'Bally à Caslano : moratoire prolongé et autres coupes',
+    'blog.article.bally-caslano-moratoria-tagli.excerpt': 'Le moratoire de Bally a été prolongé. Après le licenciement collectif de 25 employés, il y a eu deux offres de rachat pour l\'entreprise active à Caslano.',
+    'blog.article.bally-caslano-moratoria-tagli.imageAlt': 'Caslano au Tessin, où Bally était active dans l\'affaire des suppressions de postes',
+    'blog.article.salute-lavoro-progetti-ticino.title': 'Santé mentale au travail : projets au Tessin',
+    'blog.article.salute-lavoro-progetti-ticino.excerpt': '## En bref - En Suisse, une personne sur trois est émotionnellement épuisée. - Au Tessin, près d’un apprenti sur trois fait état de troubles anxieux. - DSS et Forum GSA',
+    'blog.article.salute-lavoro-progetti-ticino.imageAlt': 'Équipe discutant de la santé mentale au travail à Bellinzona',
+    'blog.article.bellinzona-nord-svincolo.title': 'Bellinzona Nord, fermeture nocturne de la jonction',
+    'blog.article.bellinzona-nord-svincolo.excerpt': '## En bref - Fermeture dans la nuit du vendredi 9 au samedi 10 octobre - Interruption de 20.00 à 5.00 - Direction : Chiasso/Saint-Gothard - Alternatives : Bellinzona Centre 46',
+    'blog.article.bellinzona-nord-svincolo.imageAlt': 'Échangeur autoroutier de Bellinzona Nord fermé durant la nuit',
 };
 
 export default blogMetaFr;

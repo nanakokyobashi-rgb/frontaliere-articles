@@ -23,6 +23,7 @@ const ENTRYPOINTS = [
   'scripts/publish-section-pages.mjs',
   'scripts/reconcile-article-shards.mjs',
   'scripts/reconcile-section-pages.mjs',
+  'scripts/backfill-image-credits.mjs',
   'scripts/find-dirty-content-ids.mjs',
   'scripts/ci/unwedge-pages-deploy-queue.mjs',
   'generator/scripts/backfill-article-cantons.mjs',

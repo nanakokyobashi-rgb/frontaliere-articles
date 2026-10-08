@@ -53,6 +53,7 @@
  *
  * Usage:
  *   npx -y tsx@4.23.15 scripts/refresh-hub-landing.mjs --out <dir> [--section frontaliere|svizzera]
+ *     [--released-articles-file <fast-publish-summary.json>]
  *
  * Emits: <out>/articoli-frontaliere/index.html          (it)
  *        <out>/<loc>/<localized-slug>/index.html        (en, de, fr)
@@ -71,6 +72,7 @@ import { reportStrippedControlChars } from '../generator/scripts/lib/control-cha
 import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 import { patchHubLandingMetadata } from './lib/hub-landing-meta.mjs';
+import { rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const argv = process.argv.slice(2);
@@ -83,6 +85,27 @@ const OUT = path.resolve(argOf('--out', path.join(ROOT, 'dist', 'hub-landing')))
 const SUMMARY = argOf('--summary', '');
 const ONLY_SECTION = argOf('--section', '');
 const LOCALES = argOf('--locales', 'it,en,de,fr').split(',').map((s) => s.trim()).filter(Boolean);
+const RELEASED_ARTICLES_FILE = argOf('--released-articles-file', '');
+
+function readReleasedArticles(file) {
+  if (!file) return [];
+  const abs = path.resolve(file);
+  const summary = JSON.parse(fs.readFileSync(abs, 'utf-8'));
+  // The summary carries the complete persistent map: current-batch releases
+  // alone would let a later registry-wide landing regeneration restore an old
+  // missing CDN image. Keep the legacy nested field as a compatibility fallback
+  // for summaries produced before the durable map was added.
+  const released = summary?.genericFallbackArticles ?? summary?.imagePostcondition?.releasedArticles;
+  if (!Array.isArray(released)) {
+    throw new Error(`${abs} has no genericFallbackArticles array`);
+  }
+  return released;
+}
+
+// The article renderer already rewrites archive and R2 landing files before
+// offload. Pages landings are produced by this separate writer afterwards, so
+// they need the same per-release fallback map explicitly.
+const RELEASED_ARTICLES = readReleasedArticles(RELEASED_ARTICLES_FILE);
 
 /**
  * Sanity floor for a fetched landing. The smallest real one was the svizzera
@@ -352,7 +375,7 @@ for (const section of SECTIONS) {
     }
     // Same rewrite the article path applies: the registry stores same-origin
     // image paths, and the shard origin does not serve /images/blog.
-    cards = rewriteBlogImageRefs(cards);
+    cards = rewriteGenericImageRefs(rewriteBlogImageRefs(cards), RELEASED_ARTICLES);
     if (hasBlogImageLeak(cards)) {
       console.error(`[hub-landing] ${section.name}/${locale}: same-origin image ref survived the CDN rewrite — left alone`);
       skipped++;

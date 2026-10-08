@@ -12,6 +12,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.lavoro-grigioni-settembre-2026.title': 'Unemployment in Graubünden: 1,1% in September 2026',
     'blog.article.lavoro-grigioni-settembre-2026.excerpt': 'In September 2026, the Grisons recorded 1.237 unemployed people, equivalent to 1,1%. The total number of people looking for work is 2.267.',
     'blog.article.lavoro-grigioni-settembre-2026.imageAlt': 'Graubünden Alpine landscape near a regional employment centre',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Grisons: avalanche funds in Rossa and a classroom in Roveredo',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '## TL;DR - The Grisons government approved 265\'650 francs for Pighé. - The wedge will be built west of the settlement area. - The avalanche-control works',
+    'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Avalanche protection structures in Pighé, Rossa, and a forest classroom in Roveredo, Canton Grigioni.',
 };
 
 export default blogMetaCantonGrEn;

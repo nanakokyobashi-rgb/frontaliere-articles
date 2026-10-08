@@ -33,13 +33,26 @@ import { corpusPath } from '../../generator/scripts/lib/corpus-paths.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { filterEntriesByImagePostcondition } from './article-image-postcondition.mjs';
 import { heldArticlesWithoutOnlinePage, releaseArticlesWithNothingToProtect } from './article-online-image-probe.mjs';
+import { CDN_BASE, fetchDeclaredImage } from './declared-image-fetch.mjs';
 
-export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
+export { CDN_BASE, fetchDeclaredImage };
+
 const SITE_ORIGIN = 'https://frontaliereticino.ch';
-const MAX_DECLARED_IMAGE_BYTES = 5 * 1024 * 1024;
-const IMAGE_FETCH_TIMEOUT_MS = 20_000;
-const IMAGE_FETCH_ATTEMPTS = 2;
 const IMAGE_FETCH_CONCURRENCY = 4;
+
+function mergeGenericFallbacks(...groups) {
+  const byImage = new Map();
+  for (const group of groups) {
+    for (const article of group ?? []) {
+      const declaredImage = article?.declaredImage ?? article?.image ?? article?.registryImage;
+      const articleId = String(article?.articleId ?? '').trim();
+      if (!articleId || !declaredImage) continue;
+      const key = `${articleId}:${declaredImage}`;
+      byImage.set(key, { ...article, articleId, declaredImage: String(declaredImage) });
+    }
+  }
+  return [...byImage.values()].sort((a, b) => String(a.articleId).localeCompare(String(b.articleId)));
+}
 
 /**
  * @param {object} opts
@@ -48,13 +61,14 @@ const IMAGE_FETCH_CONCURRENCY = 4;
  * @param {string} opts.section sezione ATTIVA del core
  * @param {string[]} opts.ids id articolo da rendere (vuoto = nessun articolo, solo archivio ed extra)
  * @param {string} [opts.logPrefix]
- * @param {(ctx: { distDir: string, entries: any[], hubResult: any }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
+ * @param {any[]} [opts.persistentReleasedArticles] fallback releases read from the durable observer ledger
+ * @param {(ctx: { distDir: string, entries: any[], hubResult: any, releasedArticles: any[], effectiveEntries: any[] }) => (string[] | void | Promise<string[] | void>)} [opts.beforeOffload]
  *   scrive pagine in piu' in distDir e ne restituisce i path relativi
  * @param {(url: string) => Promise<{ state: string, reason: string }>} [opts.probeOnlineImage]
  *   lettura della pagina online per gli articoli ricaduti sull'immagine generica (default: produzione)
- * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, aggregatePagesAllowed: boolean }>}
+ * @returns {Promise<{ written: number, entries: any[], hubResult: any, extraPaths: string[], locales: string[], declaredImages: object, downloadedImageKeys: string[], imageFetchFailures: any[], imagePostcondition: object, genericFallbackArticles: any[], aggregatePagesAllowed: boolean }>}
  */
-export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', beforeOffload, probeOnlineImage }) {
+export async function renderSectionArticlePipeline({ rootDir, distDir, section, ids, logPrefix = 'article-render-pipeline', persistentReleasedArticles = [], beforeOffload, probeOnlineImage }) {
   // build-plugins/constants.ts reads process.env.ASSET_CDN ONCE, at module
   // top-level evaluation (an IIFE, not a function call re-read per use), to
   // derive CDN_PRECONNECT_HINT (consumed by ogPagesPlugin.ts). the site repo's deploy workflow's
@@ -213,12 +227,17 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     );
   }
   // Un articolo trattenuto con la pagina online non ferma gli archivi: il link
-  // che lo elenca risponde. Li ferma quello la cui pagina non è dimostrata e,
-  // separatamente, qualunque articolo appena rilasciato con l'immagine generica:
-  // gli aggregati leggono il registro completo e conserverebbero il path
-  // dichiarato che non è ancora disponibile.
+  // che lo elenca risponde. Li ferma quello la cui pagina non è dimostrata.
+  // Un articolo rilasciato senza la sua immagine, invece, resta pubblicabile:
+  // gli aggregati sostituiscono il riferimento dichiarato con /og-image.png.
   const aggregateVerdict = aggregatePageVerdict(imagePostcondition);
   const { heldWithoutOnlinePage, releasedWithGenericImage } = aggregateVerdict;
+  // The current batch tells us what this render just released. The observer
+  // ledger supplies older releases, because a later batch re-renders the full
+  // archive and landing from the registry again. Keep both maps on every
+  // aggregate path, otherwise an old missing image comes back as a broken CDN
+  // reference on the next publication.
+  const genericFallbackArticles = mergeGenericFallbacks(persistentReleasedArticles, releasedWithGenericImage);
   if (heldWithoutOnlinePage.length > 0) {
     console.error(
       `[${logPrefix}] aggregate pages withheld: ${heldWithoutOnlinePage.length} held article(s) with no page proven online ` +
@@ -226,12 +245,17 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     );
   }
   if (releasedWithGenericImage.length > 0) {
-    console.error(
-      `[${logPrefix}] aggregate pages withheld: ${releasedWithGenericImage.length} article(s) released with the generic image ` +
-        `(${releasedWithGenericImage.slice(0, 10).map((article) => article.articleId).join(', ')})`,
-    );
+    console.error(`[${logPrefix}] aggregate pages use the generic image for ${releasedWithGenericImage.length} released article(s)`);
   }
   const aggregatePagesAllowed = aggregateVerdict.allowed;
+  // The registry declaration remains in imagePostcondition for diagnostics,
+  // but downstream hero upload must inspect the image actually rendered. A
+  // released article has `/og-image.png`, so treating its missing declaration
+  // as an upload defect would undo the owner decision at the next gate.
+  const releasedIds = new Set(releasedWithGenericImage.map((article) => article.articleId));
+  const effectiveEntries = imagePostcondition.entries.map((entry) =>
+    releasedIds.has(entry.articleId) ? { ...entry, img: '/og-image.png' } : entry,
+  );
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
   // Re-renders each section's `/tutti/` archive + pagination into the SAME
@@ -268,12 +292,9 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
   // wrong for the offload, which is a whole-dist pass every emitted page
   // needs — archive included.
   // Gli archivi e le pagine aggregate leggono l'intero registro, non il set
-  // filtrato appena sopra. Se un articolo trattenuto non ha una pagina
-  // dimostrata online, lasciare uscire quegli aggregati pubblicherebbe un link
-  // alla pagina omessa; se invece è stato rilasciato col fallback, gli aggregati
-  // conserverebbero ancora il path immagine dichiarato ma assente. In entrambi
-  // i casi restano online gli aggregati precedenti e questo giro pubblica solo
-  // le pagine articolo consentite.
+  // filtrato appena sopra. Un articolo trattenuto senza pagina dimostrata
+  // continua quindi a bloccare gli aggregati; uno rilasciato con fallback è
+  // sicuro perché i suoi riferimenti immagine vengono riscritti prima dell'upload.
   let hubResult = { written: 0, pathsByLocale: Object.fromEntries(locales.map((locale) => [locale, []])) };
   let extraPaths = [];
   if (aggregatePagesAllowed) {
@@ -306,7 +327,15 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     // devono esistere in distDir prima del passo 7 per la stessa ragione
     // dell'archivio (#5270) — l'offload e' il solo passaggio che porta sul CDN
     // gli `/assets/` same-origin, e va fatto dopo OGNI pagina resa.
-    extraPaths = beforeOffload ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult })) ?? [] : [];
+    extraPaths = beforeOffload
+      ? (await beforeOffload({ distDir, entries: imagePostcondition.entries, hubResult, releasedArticles: genericFallbackArticles, effectiveEntries })) ?? []
+      : [];
+
+    rewriteGenericImageFiles({
+      distDir,
+      relPaths: [...Object.values(hubResult.pathsByLocale).flat(), ...extraPaths],
+      releasedArticles: genericFallbackArticles,
+    });
 
     // Le immagini recuperate esistono sul CDN ma non nel checkout e quindi non
     // vengono ricaricate. Anche archivi, landing e hub possono riprenderne il
@@ -398,7 +427,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
 
   return {
     written,
-    entries: imagePostcondition.entries,
+    entries: effectiveEntries,
     hubResult,
     extraPaths,
     locales,
@@ -406,6 +435,7 @@ export async function renderSectionArticlePipeline({ rootDir, distDir, section, 
     downloadedImageKeys: imageStage.downloadedImageKeys,
     imageFetchFailures: imageStage.failures,
     imagePostcondition,
+    genericFallbackArticles,
     aggregatePagesAllowed,
   };
 }
@@ -458,35 +488,6 @@ function mirrorImageFiles(sourceDir, destinationDir) {
 function imageDownloadPath(reference) {
   const rel = imagePathFromReference(reference);
   return rel ? `/${rel}` : null;
-}
-
-export async function fetchDeclaredImage({ imagePath, destination, logPrefix, fetchImpl = globalThis.fetch }) {
-  const url = new URL(imagePath, `${CDN_BASE}/`);
-  if (url.origin !== new URL(CDN_BASE).origin || url.protocol !== 'https:') throw new Error('origine CDN non autorizzata');
-  let lastError = 'nessuna risposta';
-  for (let attempt = 1; attempt <= IMAGE_FETCH_ATTEMPTS; attempt += 1) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), IMAGE_FETCH_TIMEOUT_MS);
-    try {
-      const response = await fetchImpl(url, { redirect: 'manual', signal: controller.signal });
-      const contentType = String(response.headers?.get?.('content-type') || '').toLowerCase();
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      if (!contentType.startsWith('image/')) throw new Error(`content-type non immagine: ${contentType || 'assente'}`);
-      const contentLength = Number(response.headers?.get?.('content-length') || 0);
-      if (contentLength > MAX_DECLARED_IMAGE_BYTES) throw new Error('immagine oltre 5 MB');
-      const buffer = Buffer.from(await response.arrayBuffer());
-      if (buffer.byteLength > MAX_DECLARED_IMAGE_BYTES) throw new Error('immagine oltre 5 MB');
-      fs.mkdirSync(path.dirname(destination), { recursive: true });
-      fs.writeFileSync(destination, buffer);
-      return;
-    } catch (error) {
-      lastError = error?.name === 'AbortError' ? 'timeout 20s' : error?.message || String(error);
-      if (attempt < IMAGE_FETCH_ATTEMPTS) await new Promise((resolve) => setTimeout(resolve, 100 * attempt));
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-  throw new Error(lastError);
 }
 
 export async function prepareImageView({ rootDir, distDir, ids, declaredImages, logPrefix, fetchImpl = globalThis.fetch, logger = console }) {
@@ -578,12 +579,40 @@ export function rewriteDownloadedImageFiles({ distDir, relPaths = [], downloaded
   }
 }
 
-/** Aggregates are safe only when every registry image they retain is usable. */
+const GENERIC_IMAGE_PATH = '/og-image.png';
+
+/** Replace unavailable declared images with the same generic image as article pages. */
+export function rewriteGenericImageRefs(html, releasedArticles = []) {
+  let rewritten = String(html ?? '');
+  for (const article of releasedArticles) {
+    const imageKey = imagePathFromReference(article?.declaredImage ?? article?.image);
+    if (!imageKey) continue;
+    const escapedKey = escapeRegExp(imageKey);
+    const boundary = '(?![\\w./%-])';
+    rewritten = rewritten
+      .replace(new RegExp(`${escapeRegExp(SITE_ORIGIN)}/${escapedKey}${boundary}`, 'g'), GENERIC_IMAGE_PATH)
+      .replace(new RegExp(`${escapeRegExp(CDN_BASE)}/${escapedKey}${boundary}`, 'g'), GENERIC_IMAGE_PATH)
+      .replace(new RegExp(`(?<![\\w.@])/${escapedKey}${boundary}`, 'g'), GENERIC_IMAGE_PATH);
+  }
+  return rewritten;
+}
+
+export function rewriteGenericImageFiles({ distDir, relPaths = [], releasedArticles = [] }) {
+  for (const rel of new Set(relPaths.filter(Boolean))) {
+    const abs = path.join(distDir, rel);
+    if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) continue;
+    const html = fs.readFileSync(abs, 'utf-8');
+    const rewritten = rewriteGenericImageRefs(html, releasedArticles);
+    if (rewritten !== html) fs.writeFileSync(abs, rewritten, 'utf-8');
+  }
+}
+
+/** Aggregates are safe when held pages are absent; released pages use fallback images. */
 export function aggregatePageVerdict(imagePostcondition = {}) {
   const heldWithoutOnlinePage = heldArticlesWithoutOnlinePage(imagePostcondition.excludedArticles ?? []);
   const releasedWithGenericImage = imagePostcondition.releasedArticles ?? [];
   return {
-    allowed: heldWithoutOnlinePage.length === 0 && releasedWithGenericImage.length === 0,
+    allowed: heldWithoutOnlinePage.length === 0,
     heldWithoutOnlinePage,
     releasedWithGenericImage,
   };

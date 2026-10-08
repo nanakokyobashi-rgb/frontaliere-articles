@@ -12781,6 +12781,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.title': 'Operation Hermes: VAT fraud 450 mln, seizures 11 mln',
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.excerpt': '## TL;DR - Six precautionary measures and seizures totaling approximately 11 million - VAT fraud in electronics and IT - 93 companies in the Italian part of the investigation',
     'blog.article.operazione-hermes-frodi-iva-450-mln-sequestri-11-mln.imageAlt': 'Editorial image related to: Operazione Hermes: frodi Iva 450 mln, sequestri 11 mln',
+    'blog.article.bally-caslano-moratoria-tagli.title': 'Bally in Caslano: moratorium extended and further cuts',
+    'blog.article.bally-caslano-moratoria-tagli.excerpt': 'Bally\'s moratorium has been extended. Following the collective dismissal of 25 employees, there have been two purchase offers for the company operating in Caslano.',
+    'blog.article.bally-caslano-moratoria-tagli.imageAlt': 'Caslano in Ticino, where Bally was active during the personnel cuts',
+    'blog.article.salute-lavoro-progetti-ticino.title': 'Mental health at work: projects in Ticino',
+    'blog.article.salute-lavoro-progetti-ticino.excerpt': '## TL;DR - In Switzerland, one in three people is emotionally exhausted. - In Ticino, almost one in three apprentices reports anxiety disorders. - DSS and Forum GSA',
+    'blog.article.salute-lavoro-progetti-ticino.imageAlt': 'Team discussion on workplace mental health in Bellinzona',
+    'blog.article.bellinzona-nord-svincolo.title': 'Bellinzona Nord, nighttime closure of the interchange',
+    'blog.article.bellinzona-nord-svincolo.excerpt': '## TL;DR - Closure from Friday, October 9 to Saturday, October 10 - Stop from 20.00 to 5.00 - Direction: Chiasso/San Gottardo - Alternatives: Bellinzona Centro 46',
+    'blog.article.bellinzona-nord-svincolo.imageAlt': 'Bellinzona Nord motorway interchange during a night closure',
 };
 
 export default blogMetaEn;
