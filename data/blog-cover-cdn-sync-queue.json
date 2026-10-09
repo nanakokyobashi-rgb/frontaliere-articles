@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-teatro-intred-varese-stagione-2026.webp",
+      "sha256": "b7d561b51b9a9bb4c18511b1033c0efbfd4ded48ba2ccb607603aa7d8621c7fa"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-teatro-intred-varese-stagione-2026-480w.webp",
+      "sha256": "f281842ad5f19c4f7ef037ae49055523339c58d9ee52882ccfdd1d4ef7f672ba"
+    }
+  ]
 }
