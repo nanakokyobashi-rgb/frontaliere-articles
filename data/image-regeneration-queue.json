@@ -15,31 +15,11 @@
       "articleId": "unige-natura-equilibrio-mentale",
       "title": "UNIGE: salute mentale, 5-10 ottobre 2026",
       "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "All image providers failed for article-unige-natura-equilibrio-mentale: openai-codex (vision gate rejected image: Original generic Geneva illustration with no text, logo, or event-photograph cues; a recognizable foreground person violates t",
+      "reason": "All image providers failed for article-unige-natura-equilibrio-mentale: openai-codex (vision gate rejected image: Original generic illustration of a serene Canton GE lakeside scene, but it includes two recognizable foreground people.); gemi",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-09T16:43:09.597Z",
-      "lastFailureAt": "2026-10-09T16:55:28.997Z"
-    },
-    {
-      "articleId": "smottamento-sementina-code",
-      "title": "Smottamento a Sementina: traffico congestionato",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-smottamento-sementina-code: openai-codex (vision gate rejected image: Relevant generic landslide-and-traffic illustration, but visible red-an",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T16:55:33.673Z",
-      "lastFailureAt": "2026-10-09T16:55:33.673Z"
-    },
-    {
-      "articleId": "caslano-colombera-incidente-moto",
-      "title": "Caslano, traffico in tilt per incidente in via Colombera",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T17:27:51.749Z",
-      "lastFailureAt": "2026-10-09T17:27:51.749Z"
+      "lastFailureAt": "2026-10-09T17:35:12.253Z"
     }
   ]
 }
