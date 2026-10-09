@@ -18,6 +18,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.lavori-strada-wartau-plattis.title': 'Lavori sulla Hauptstrasse a Wartau dal 19 ottobre 2026',
     'blog.article.lavori-strada-wartau-plattis.excerpt': 'A Wartau i lavori sulla Hauptstrasse iniziano il 19 ottobre 2026: nel tratto Plattis saranno rinnovate le condotte di drenaggio e il fondo stradale.',
     'blog.article.lavori-strada-wartau-plattis.imageAlt': 'Lavori sulla Hauptstrasse nel tratto Plattis a Wartau',
+    'blog.article.hsg-spin-off-ufficiali.title': 'HSG a San Gallo: oltre 170 spin-off ufficiali',
+    'blog.article.hsg-spin-off-ufficiali.excerpt': 'La HSG sostiene gli studenti nella fondazione di imprese e presenta alcuni degli oltre 170 spin-off ufficiali HSG.',
+    'blog.article.hsg-spin-off-ufficiali.imageAlt': 'Studenti discutono di nuove imprese nel campus HSG a San Gallo',
 };
 
 export default blogMetaCantonSgIt;

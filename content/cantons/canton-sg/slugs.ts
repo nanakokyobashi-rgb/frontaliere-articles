@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'casse-malati-amministrazione-costi-2025': { it: 'casse-malati-amministrazione-costi-2025', en: 'health-insurance-funds-administration-ranges-from-103-to-445-francs', de: 'krankenkassen-verwaltungskosten-reichen-von-103-bis-445-franken', fr: 'caisses-maladie-les-couts-administratifs-varient-de-103-a-445-francs' },
  'spital-grabs-haus-o-vertice': { it: 'spital-grabs-haus-o-vertice', en: 'spital-grabs-haus-o-highest-point', de: 'spital-grabs-haus-o-hoechster-punkt', fr: 'spital-grabs-haus-o-point-le-plus-haut' },
  'lavori-strada-wartau-plattis': { it: 'lavori-strada-wartau-plattis', en: 'roadworks-wartau-plattis', de: 'bauarbeiten-wartau-plattis', fr: 'travaux-routiers-wartau-plattis' },
+ 'hsg-spin-off-ufficiali': { it: 'hsg-spin-off-ufficiali', en: 'hsg-official-spin-offs', de: 'hsg-offizielle-spin-offs', fr: 'hsg-spin-off-officiels' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

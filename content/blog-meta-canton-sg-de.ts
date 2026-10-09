@@ -18,6 +18,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.lavori-strada-wartau-plattis.title': 'Arbeiten an der Hauptstrasse in Wartau ab dem 19. Oktober 2026',
     'blog.article.lavori-strada-wartau-plattis.excerpt': 'In Wartau beginnen die Arbeiten an der Hauptstrasse am 19.',
     'blog.article.lavori-strada-wartau-plattis.imageAlt': 'Bauarbeiten an der Hauptstrasse im Abschnitt Plattis in Wartau',
+    'blog.article.hsg-spin-off-ufficiali.title': 'HSG in St. Gallen: über 170 offizielle Spin-offs',
+    'blog.article.hsg-spin-off-ufficiali.excerpt': 'Die HSG unterstützt Studierende bei der Gründung von Unternehmen und stellt einige der über 170 offiziellen HSG-Spin-offs vor.',
+    'blog.article.hsg-spin-off-ufficiali.imageAlt': 'Studierende besprechen neue Unternehmen auf dem HSG-Campus in St. Gallen',
 };
 
 export default blogMetaCantonSgDe;

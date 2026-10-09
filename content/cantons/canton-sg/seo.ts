@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hsg-spin-off-ufficiali': {
+    title: 'HSG a San Gallo: oltre 170 spin-off ufficiali | Frontaliere Ticino',
+    description: 'La HSG sostiene attivamente gli studenti che fondano imprese e presenta alcuni degli oltre 170 spin-off ufficiali nel focus Entrepreneurship di San Gallo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallo, oltre, spin-off, ufficiali',
+    ogTitle: 'HSG a San Gallo: oltre 170 spin-off ufficiali',
+    ogDescription: 'Il focus HSG Entrepreneurship presenta il sostegno agli studenti che fondano imprese e alcuni degli oltre 170 spin-off ufficiali HSG. Per il Canton San Gallo è una lettura locale dell\'imprenditorialità, separata dalle informazioni su programmi',
+    canonicalPath: '/articoli-san-gallo/hsg-spin-off-ufficiali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "HSG a San Gallo: oltre 170 spin-off ufficiali",
+      "description": "La HSG sostiene attivamente gli studenti che fondano imprese e presenta alcuni degli oltre 170 spin-off ufficiali nel focus Entrepreneurship di San Gallo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hsg-spin-off-ufficiali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti discutono di nuove imprese nel campus HSG a San Gallo"
+      },
+      "datePublished": "2026-10-09T20:43:41+00:00",
+      "dateModified": "2026-10-09T20:43:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/hsg-spin-off-ufficiali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
