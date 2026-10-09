@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-basel-klimpact-programma-2026.webp",
-      "sha256": "78afa7cf7229df7ee545db05f87cf01725cf638f184e07ff07e8d73f792f26fe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-basel-klimpact-programma-2026-480w.webp",
-      "sha256": "3127e9c5a4c54e52f0607e7a88285fa6007baf6324a962b106e4de19dc979dfe"
-    }
-  ]
+  "items": []
 }
