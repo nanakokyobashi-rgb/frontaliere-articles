@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/economia/speciale-economia/1948085/il-vicere-di-caracas-passato-da-lugano": {
-    "articleId": "vicere-caracas-indagine-lugano",
-    "ts": "2026-09-07T09:55:33.747Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/tragitto-casa-scuola%3a-per-41%25-genitori-%c3%a8-rischioso%2c-studio/92015568": {
     "articleId": "tragitto-casa-scuola-rischioso",
     "ts": "2026-09-07T10:21:29.053Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1955847/informatici-segnalazioni-criminali-numero-record": {
     "articleId": "cibersicurezza-svizzera-record-segnalazioni",
     "ts": "2026-10-09T16:39:10.250Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/diplomazia-svizzera/come-dovrebbe-comportarsi-un-paese-neutrale-come-la-svizzera-riguardo-allesportazione-di-armi-verso-zone-di-conflitto/90350624": {
+    "articleId": "voto-svizzera-esportazione-armi-2026",
+    "ts": "2026-10-09T17:48:06.655Z",
     "keyForm": 2
   }
 }

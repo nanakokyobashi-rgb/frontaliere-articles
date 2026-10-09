@@ -20,6 +20,16 @@
       "failureCount": 2,
       "requestedAt": "2026-10-09T16:43:09.597Z",
       "lastFailureAt": "2026-10-09T17:35:12.253Z"
+    },
+    {
+      "articleId": "voto-svizzera-esportazione-armi-2026",
+      "title": "Esportazione armi: il voto federale del 29 novembre 2026",
+      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
+      "reason": "All image providers failed for article-voto-svizzera-esportazione-armi-2026: openai-codex (vision gate rejected image: Illustrated Swiss Federal Palace scene, but decorative facade",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T17:48:06.653Z",
+      "lastFailureAt": "2026-10-09T17:48:06.653Z"
     }
   ]
 }
