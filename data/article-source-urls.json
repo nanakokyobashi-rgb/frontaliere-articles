@@ -1,5 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/di-chi-e-quel-pallet-la-domanda-che-apre-una-zona-dombra-nella-logistica/2656255": "logistica-pallet-analisi-mercato",
   "https://www.varesenoi.it/2026/08/13/leggi-notizia/argomenti/economia-13/articolo/lallarme-di-coldiretti-varese-carburanti-oltre-i-2-euro-aumentano-i-costi-per-imprese-agricole.html": "lallarme-di-coldiretti-varese",
   "https://www.varesenoi.it/2026/08/13/leggi-notizia/argomenti/cronaca-20/articolo/la-guardia-di-finanza-di-varese-scopre-cinquanta-lavoratori-in-nero-e-dieci-irregolari.html": "la-guardia-di-finanza-di-varese-scopre-lavoratori-in-nero",
   "https://www.tio.ch/svizzera/economia/1943622/banca-svizzera-semestre-primo-cler": "banca-cler-utili-aumento",
@@ -2280,6 +2279,11 @@
   "https://comozero.it/attualita/82-chili-di-carne-in-sacchi-e-sacchetti-e-492-bottiglie-di-vino-destinazione-svizzera-contrabbandieri-beccati-in-dogana": {
     "articleId": "carne-vino-dogana-mendrisiotto",
     "ts": "2026-10-09T14:17:30.391Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955858/protezione-emergenze-collaborazione-ticino-gestione": {
+    "articleId": "gestione-emergenze-ticino-lombardia",
+    "ts": "2026-10-09T15:24:27.442Z",
     "keyForm": 2
   }
 }
