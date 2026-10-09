@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'obvaldo-verkehr45-mobilita',
+ category: 'pratico',
+ date: '2026-10-09T11:28:57.973Z',
+ image: '/images/blog/article-obvaldo-verkehr45-mobilita.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['OW'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
