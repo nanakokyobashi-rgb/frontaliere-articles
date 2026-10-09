@@ -1,4 +1,49 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp",
+      "sha256": "92c7ae645fd2fe8258a54ef783609d8253d1f4f9243547fcc5a39a5ff9669b1b"
+    },
+    {
+      "path": "public/images/blog/article-confusione-tassa-salute-frontalieri.webp",
+      "sha256": "ab6bd52827c0966fd3a57cfbd72632b9c7745e0907c387ef039d058b12607e6b"
+    },
+    {
+      "path": "public/images/blog/article-detrazioni-figli-basel.webp",
+      "sha256": "edb94d248e69336c44dbd1ba4ffd1c011d9bb0e41148bd30c1d5d0f22019fda3"
+    },
+    {
+      "path": "public/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp",
+      "sha256": "3333e7293729c0afc1f246bdc9ee93821dae6eebae9b7021fca9a2c1ff8a4638"
+    },
+    {
+      "path": "public/images/blog/article-lopper-luce-pedoni-bici.webp",
+      "sha256": "b27b8bf0b746cfcf3fa8ad6d2df2afa5b1766f5c834ad4bc020c0a235c7c3c4d"
+    },
+    {
+      "path": "public/images/blog/article-lucerna-qualita-sviluppo-scuole.webp",
+      "sha256": "db80908032649330b63e58e9883db07f7a1935748f650e316acf94c156b2c1e1"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-confusione-tassa-salute-frontalieri-480w.webp",
+      "sha256": "e1bf6fbb6b12a6d9d027c43d9b7ed2df4bbeb1f7ddb7c6b69b19ae2ed833dc5f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-detrazioni-figli-basel-480w.webp",
+      "sha256": "b34a90ff204ca39ce5bec9207915c13af58f95428f4ede3196c52e7ba5b31383"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-disoccupazione-berna-settembre-2026-stabile-480w.webp",
+      "sha256": "6bcb51b1e7d938174a4bc5edce3c08d552cf0831905ef1c0c91bf5bbabd16519"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lopper-luce-pedoni-bici-480w.webp",
+      "sha256": "380f22cd8d31d5018e7328f974663c23c140e1f0c519454c6237eb5e3345bdee"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lucerna-qualita-sviluppo-scuole-480w.webp",
+      "sha256": "d38f09c0cf6f5809175fef816f3ac2fa65ced9e3b7d24ac8e73fb9bbcbfa0bda"
+    }
+  ]
 }
