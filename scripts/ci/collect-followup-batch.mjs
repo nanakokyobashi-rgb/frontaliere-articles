@@ -84,6 +84,7 @@ try {
 }
 
 const TRIAGE_COMMENT_PREFIX = '## Post-merge follow-up triage';
+const TRIAGE_CORRECTION_HEADER_RE = /^\s*##\s+Post-merge follow-up triage\s*(?:[—–-]|:)\s*correction\b/i;
 // Tetto duro della finestra di raccolta. Non è un'ottimizzazione: è ciò che
 // impedisce al watermark «ultima run di SUCCESSO» di diventare un ratchet
 // irreversibile (vedi l'intestazione). 48h = due giorni di triage, cioè il
@@ -398,6 +399,13 @@ function commentInstant(createdAt) {
  * porta, l'ultimo non e' dimostrabile e la funzione ritorna `null`, che il
  * chiamante tratta come marker non provato (la PR resta nel batch). A parita'
  * di timestamp vince la posizione successiva.
+ *
+ * Una correzione esplicita puo' essere un seguito parziale del marker precedente:
+ * se ripete gli stessi ID `FU-...` in bullet ma omette il bucket, il contesto
+ * persistente del marker precedente resta necessario per verificare la PR. La
+ * funzione lo ricompone solo quando il set di ID e' identico e il marker
+ * precedente dichiarava un bucket; una correzione senza questa prova resta
+ * non verificata (fail-closed). L'istante resta quello della correzione.
  */
 export function latestTriageCommentBody(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
   const marker = latestTriageComment(commentsJson, prefix);
@@ -433,7 +441,7 @@ export function latestTriageComment(commentsJson, prefix = TRIAGE_COMMENT_PREFIX
   if (markers.some((marker) => !Number.isFinite(marker.at))) return null;
   markers.sort((left, right) => (left.at - right.at) || (left.index - right.index));
   const latest = markers[markers.length - 1];
-  return { body: latest.body, at: latest.at };
+  return mergeTriageCorrection(markers, latest);
 }
 
 /**
@@ -580,9 +588,10 @@ function attestationLines(lines) {
  * contratto che una delle due parti non ha mai firmato.
  *
  * Il discriminante ora e' STRUTTURALE e non nomina nessun verbo:
- *  - un ITEM dichiarato e' una riga `Follow-up item: FU-YYYY-MM-DD-NNN`. Quel
- *    formato e' l'unica cosa che il prompt impone davvero al marker, ed e' lo
- *    stesso ID che compare nel corpo del bucket;
+ *  - un ITEM dichiarato e' una riga `Follow-up item: FU-YYYY-MM-DD-NNN`, oppure
+ *    un bullet che inizia con lo stesso ID stabile. La seconda forma copre le
+ *    correzioni che ripetono il contenuto del bucket senza il prefisso di
+ *    servizio; l'ID e' comunque strutturale, non una citazione inline;
  *  - un BUCKET citato e' un `#N` su una riga che dice «bucket», in qualunque
  *    ordine e con qualunque punteggiatura, esclusi i `#N` preceduti da `PR`
  *    (la PR sorgente citata sulla stessa riga non e' un bucket), oppure un
@@ -613,15 +622,13 @@ export function triageMarkerPersistenceExpectation(markerBody) {
   const body = String(markerBody || '');
   const lines = body.split(/\r?\n/);
   // `Follow-up item:` is a structural claim only when it starts its own
-  // marker line.  A partial daily-fix PR may quote its provenance inside a
-  // zero marker (`Addresses #bucket` + ``Follow-up item: FU-...``); counting
-  // that inline service reference as a newly created item contradicts the
-  // zero heading and quarantines an otherwise complete triage (issue #2299).
-  // Keep the line shape deliberately narrow: a real item remains fail-closed
-  // when it is declared in an unrecognised prose shape.
+  // marker line. A correction may instead repeat the stable ID at the start
+  // of a bullet (`- FU-... — titolo`), as PR #2416 did. In both forms the
+  // line shape is deliberately narrow: an inline service reference remains
+  // context and cannot turn a zero marker into an item (issue #2299).
   const items = [...new Set(attestationLines(lines)
     .flatMap((line) => [...line.matchAll(
-      /^\s*(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi,
+      /^\s*(?:(?:(?:[-*+]|\d+[.)])\s+)?Follow-up\s+item\s*:\s*|[-*+]\s+)(FU-\d{4}-\d{2}-\d{2}-\d{3})\b/gi,
     )].map((match) => match[1].toUpperCase())))];
   // Il `#N` deve stare accanto a «bucket»: cosi' un `PR concatenata #9050`
   // citato fra i drop non diventa un candidato. Prendiamo il primo numero dopo
@@ -666,6 +673,42 @@ export function triageMarkerPersistenceExpectation(markerBody) {
       (explicitZero || explicitAntiNipoteSkip)
       && uniqueItems.length === 0
     ),
+  };
+}
+
+function sameTriageItemIds(left, right) {
+  const leftIds = triageMarkerPersistenceExpectation(left).items;
+  const rightIds = triageMarkerPersistenceExpectation(right).items;
+  return leftIds.length === rightIds.length
+    && leftIds.every((id) => rightIds.includes(id));
+}
+
+/**
+ * A `— correction` comment may only amend the prose of the latest marker.
+ * Preserve the previous durable claim when the correction proves it is the
+ * same set of items; otherwise the latest comment remains fail-closed.
+ */
+function mergeTriageCorrection(markers, latest) {
+  if (!TRIAGE_CORRECTION_HEADER_RE.test(latest.body)) return { body: latest.body, at: latest.at };
+
+  const correction = triageMarkerPersistenceExpectation(latest.body);
+  if (correction.buckets.length || correction.explicitZero || correction.explicitAntiNipoteSkip
+      || correction.items.length === 0) {
+    return { body: latest.body, at: latest.at };
+  }
+
+  let previous = null;
+  for (let index = markers.length - 2; index >= 0; index -= 1) {
+    const candidate = triageMarkerPersistenceExpectation(markers[index].body);
+    if (candidate.buckets.length && sameTriageItemIds(latest.body, markers[index].body)) {
+      previous = markers[index];
+      break;
+    }
+  }
+  if (!previous) return { body: latest.body, at: latest.at };
+  return {
+    body: `${previous.body.trimEnd()}\n\n${latest.body.trimStart()}`,
+    at: latest.at,
   };
 }
 
