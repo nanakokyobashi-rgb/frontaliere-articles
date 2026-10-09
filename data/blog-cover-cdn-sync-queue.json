@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-acof-70-anni-premio-confindustria-varese.webp",
-      "sha256": "a92d8762175b241e6422db1b55461c9321db8fbe7db8fc636aa4508d16703971"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-acof-70-anni-premio-confindustria-varese-480w.webp",
-      "sha256": "9874e5dca5b05c05d83cd6eb12243dd499e25f49ecb291e7af9dd96c3f39c884"
-    }
-  ]
+  "items": []
 }
