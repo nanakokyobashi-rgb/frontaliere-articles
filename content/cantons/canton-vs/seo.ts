@@ -158,6 +158,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vallese-piano-acqua-2035': {
+    title: 'Vallese: approvato il Piano d\'azione acqua 2035',
+    description: 'Il Consiglio di Stato adotta il Piano d\'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione',
+    keywords: 'frontalieri, ticino, svizzera, italia, vallese, approvato, piano, azione',
+    ogTitle: 'Vallese: approvato il Piano d\'azione acqua 2035',
+    ogDescription: 'Il Consiglio di Stato adotta il Piano d\'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione',
+    canonicalPath: '/articoli-vallese/vallese-piano-acqua-2035/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vallese: approvato il Piano d'azione acqua 2035",
+      "description": "Il Consiglio di Stato adotta il Piano d'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-vallese-piano-acqua-2035.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Gestione dell'acqua nel Canton Vallese con montagne e laghi alpini"
+      },
+      "datePublished": "2026-10-09T16:44:17+00:00",
+      "dateModified": "2026-10-09T16:44:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/vallese-piano-acqua-2035/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

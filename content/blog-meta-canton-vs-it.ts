@@ -15,6 +15,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.maison-garde-ospedale-sion.title': 'Sion: apre la Maison de la garde per le urgenze',
     'blog.article.maison-garde-ospedale-sion.excerpt': 'Dal 1° settembre l\'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.',
     'blog.article.maison-garde-ospedale-sion.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.vallese-piano-acqua-2035.title': 'Vallese: approvato il Piano d\'azione acqua 2035',
+    'blog.article.vallese-piano-acqua-2035.excerpt': 'Il Consiglio di Stato adotta il Piano d\'azione 2035 Attuazione progressiva dal 2027, secondo priorità e risorse Le misure passano da 39 a 25 dopo la revisione',
+    'blog.article.vallese-piano-acqua-2035.imageAlt': 'Gestione dell\'acqua nel Canton Vallese con montagne e laghi alpini',
 };
 
 export default blogMetaCantonVsIt;

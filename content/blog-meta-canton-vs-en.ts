@@ -15,6 +15,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.maison-garde-ospedale-sion.title': 'Sion: the Maison de la garde opens for emergencies',
     'blog.article.maison-garde-ospedale-sion.excerpt': 'As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.',
     'blog.article.maison-garde-ospedale-sion.imageAlt': 'Illustration generated for this article',
+    'blog.article.vallese-piano-acqua-2035.title': 'Valais: Water Action Plan 2035 approved',
+    'blog.article.vallese-piano-acqua-2035.excerpt': 'The Council of State adopts the 2035 Action Plan Gradual implementation from 2027, according to priorities and resources The measures decrease from 39 to 25',
+    'blog.article.vallese-piano-acqua-2035.imageAlt': 'Water management in Canton Valais with mountains and alpine lakes',
 };
 
 export default blogMetaCantonVsEn;

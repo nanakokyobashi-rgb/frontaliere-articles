@@ -15,6 +15,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.maison-garde-ospedale-sion.title': 'Sitten: Die Maison de la garde für Notfälle öffnet',
     'blog.article.maison-garde-ospedale-sion.excerpt': 'Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.',
     'blog.article.maison-garde-ospedale-sion.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.vallese-piano-acqua-2035.title': 'Wallis: Wasser-Aktionsplan 2035 genehmigt',
+    'blog.article.vallese-piano-acqua-2035.excerpt': 'Der Staatsrat verabschiedet den Aktionsplan 2035 Schrittweise Umsetzung ab 2027 nach Prioritäten und Ressourcen Die Maßnahmen gehen nach der Überarbeitung',
+    'blog.article.vallese-piano-acqua-2035.imageAlt': 'Wasserwirtschaft im Kanton Wallis mit Bergen und Alpenseen',
 };
 
 export default blogMetaCantonVsDe;

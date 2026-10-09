@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vallese-piano-acqua-2035',
+ category: 'novita',
+ date: '2026-10-09T16:44:17.957Z',
+ image: '/images/blog/article-vallese-piano-acqua-2035.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VS'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
