@@ -1,37 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-cardano-al-campo-minorenne-arresto.webp",
-      "sha256": "0eba8097533d498f0d04156a5367bb2bd472a6640bcde514fbcfb6dc71b1fb95"
-    },
-    {
-      "path": "public/images/blog/article-lavori-strada-wartau-plattis.webp",
-      "sha256": "9f18bebc24cdcf4daec8dbcf1792333775be3c1d94fe88a8713046b5cc410986"
-    },
-    {
-      "path": "public/images/blog/article-mastercard-pagamenti-rete-assente.webp",
-      "sha256": "60f5a0872b68f1547d6cea088528d661d53616638666c61a4860d9ee039fe946"
-    },
-    {
-      "path": "public/images/blog/article-spesa-famiglie-inflazione.webp",
-      "sha256": "6c6933689d267f5e9abfb8d9193ab4d94b535e78de8e92b4a3c3c22a757b09e1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-cardano-al-campo-minorenne-arresto-480w.webp",
-      "sha256": "de20855d043ffa97456a7417a03fa73133446cf84dfb726bc864a558ce5bace3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lavori-strada-wartau-plattis-480w.webp",
-      "sha256": "81b622ee63defe9c478deaae120689b21ecf6cd24c22444b8e300c17e2e6174c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-mastercard-pagamenti-rete-assente-480w.webp",
-      "sha256": "0c20fd78b6e0b074543acec3dba3468508575a8131f807ae21bb79d18e2a2fe4"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-spesa-famiglie-inflazione-480w.webp",
-      "sha256": "314df65eccfd84d69cf23dc8f4ec52625faadbe5ae27989abca7f69d7aaa2dea"
-    }
-  ]
+  "items": []
 }
