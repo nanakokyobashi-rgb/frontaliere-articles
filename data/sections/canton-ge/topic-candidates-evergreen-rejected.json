@@ -9,6 +9,14 @@
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6052": {
       "section": "canton-ge",
       "ts": 1791563735245
+    },
+    "canton-ge::https://www.heidi.news/articles/amir-et-les-40-barbiers-ou-le-vilain-petit-secret-d-annemasse": {
+      "section": "canton-ge",
+      "ts": 1791564982893
+    },
+    "canton-ge::https://lecourrier.ch/2026/10/09/acte-criminel-a-lorigine-de-lincendie-des-voies-cff-a-eclepens": {
+      "section": "canton-ge",
+      "ts": 1791564997426
     }
   }
 }
