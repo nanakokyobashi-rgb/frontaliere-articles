@@ -12852,6 +12852,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lardi-dotlife-chiusura-alberghi-lugano.title': 'Villa Sassa closes: 140 employees out of work',
     'blog.article.lardi-dotlife-chiusura-alberghi-lugano.excerpt': 'Villa Sassa and Villa Principe Leopoldo closed for four months About 140 employees are out of work Winter alternatives in St.',
     'blog.article.lardi-dotlife-chiusura-alberghi-lugano.imageAlt': 'View of Lugano lake with hotels under renovation',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.title': 'Palestine Demonstration in Saronno Saturday, October 10',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.excerpt': 'Saturday, October 10 demonstration for Palestine at Saronno Meeting at 10 in Piazza San Francesco From there a procession will start through the streets of the city Join',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.imageAlt': 'Pro-Palestine demonstration in Saronno with march starting from Piazza San Francesco',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.title': 'Varese: over 400 thousand euros stolen by two carers',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.excerpt': 'Over 400 thousand euros disputed to two caregivers The complaint started from the daughter of the elderly The VIP of Varese ordered a preventive seizure',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.imageAlt': 'Editorial image related to: Varese: oltre 400mila euro sottratti da due badanti',
 };
 
 export default blogMetaEn;

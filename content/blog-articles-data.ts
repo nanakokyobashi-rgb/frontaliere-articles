@@ -43334,6 +43334,26 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'saronno-manifestazione-palestina-ottobre-2026',
+ category: 'novita',
+ date: '2026-10-09T05:35:41.804Z',
+ image: '/images/blog/article-saronno-manifestazione-palestina-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'varese-oltre-400mila-euro-sottratti-da-due-badanti',
+ category: 'novita',
+ date: '2026-10-09T05:57:28.186Z',
+ image: '/images/blog/article-varese-oltre-400mila-euro-sottratti-da-due-badanti.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

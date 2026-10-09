@@ -7958,6 +7958,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.nobel-economia-fehr-2026.title': 'Wirtschaftsnobelpreis 2026: Ernst Fehr unter den möglichen Preisträgern',
     'blog.article.nobel-economia-fehr-2026.excerpt': 'Der Wirtschaftsnobelpreis 2026 wird am 12.',
     'blog.article.nobel-economia-fehr-2026.imageAlt': 'Ernst Fehr unter den moglichen Wirtschaftsnobelpreis-Gewinnern',
+    'blog.article.guida-voto-cantonale-lucerna.title': 'Kantonale Abstimmung in Luzern: Leitfaden zu Initiativen und Referenden',
+    'blog.article.guida-voto-cantonale-lucerna.excerpt': 'Der Kalender sieht jedes Jahr vier eidgenössische Abstimmungstage vor Für eine eidgenössische Initiative müssen innerhalb von 18 Monaten 100\'000 Unterschriften gesammelt werden Das Referendum',
+    'blog.article.guida-voto-cantonale-lucerna.imageAlt': 'Landschaft des Kantons Luzern mit dem See und den umliegenden Bergen an einem sonnigen Tag',
+    'blog.article.ai-chip-scarzita-prezzi-pc.title': 'Teure PCs und Smartphones: KI beansprucht die Chips',
+    'blog.article.ai-chip-scarzita-prezzi-pc.excerpt': 'Von MediaMarkt gemeldete Preissteigerungen von 40% bis 120%.',
+    'blog.article.ai-chip-scarzita-prezzi-pc.imageAlt': 'Laptop und Smartphone auf einem Tisch in einer Schweizer Wohnung',
 };
 
 export default blogMetaChDe;

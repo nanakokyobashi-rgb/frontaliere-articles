@@ -100330,6 +100330,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guida-voto-cantonale-lucerna': {
+    title: 'Voto cantonale Lucerna: guida a iniziative e referendum',
+    description: 'Il calendario prevede quattro giornate di voto federale ogni anno Per un\'iniziativa federale occorrono 100\'000 firme raccolte nell\'arco di 18 mesi Il referendum',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, cantonale, lucerna, iniziative',
+    ogTitle: 'Voto cantonale Lucerna: guida a iniziative e referendum',
+    ogDescription: 'Il calendario prevede quattro giornate di voto federale ogni anno Per un\'iniziativa federale occorrono 100\'000 firme raccolte nell\'arco di 18 mesi Il referendum',
+    canonicalPath: '/articoli-svizzera/guida-voto-cantonale-lucerna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto cantonale Lucerna: guida a iniziative e referendum",
+      "description": "Il calendario prevede quattro giornate di voto federale ogni anno Per un'iniziativa federale occorrono 100'000 firme raccolte nell'arco di 18 mesi Il referendum",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-guida-voto-cantonale-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio del Cantone di Lucerna con il lago e le montagne circostanti in un giorno soleggiato"
+      },
+      "datePublished": "2026-10-09T04:49:15+00:00",
+      "dateModified": "2026-10-09T04:49:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-voto-cantonale-lucerna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ai-chip-scarzita-prezzi-pc': {
+    title: 'PC e smartphone cari: l\'AI assorbe i chip | Frontaliere Ticino',
+    description: 'Rincari dal 40% al 120% su RAM e SSD. MediaMarkt, Fust e Interdiscount descrivono la carenza di componenti per PC e telefoni in Svizzera. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, smartphone, cari, assorbe, chip',
+    ogTitle: 'PC e smartphone cari: l\'AI assorbe i chip',
+    ogDescription: 'L\'espansione dei data center per l\'AI sta assorbito RAM e archiviazione, causando rincari fino al 120% su PC e smartphone in Svizzera. Ecco cosa dicono i rivenditori.',
+    canonicalPath: '/articoli-svizzera/ai-chip-scarzita-prezzi-pc/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PC e smartphone cari: l'AI assorbe i chip",
+      "description": "Rincari dal 40% al 120% su RAM e SSD. MediaMarkt, Fust e Interdiscount descrivono la carenza di componenti per PC e telefoni in Svizzera. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ai-chip-scarzita-prezzi-pc.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laptop e smartphone su un tavolo in un appartamento svizzero"
+      },
+      "datePublished": "2026-10-09T05:00:36+00:00",
+      "dateModified": "2026-10-09T05:00:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ai-chip-scarzita-prezzi-pc/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
