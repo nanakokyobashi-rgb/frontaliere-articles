@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lucerna-elezioni-calendario-voto.webp",
-      "sha256": "cf643577c5c6301e20adaf343bdea1000155e5e52fa5b55428e1460a71c07c5a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lucerna-elezioni-calendario-voto-480w.webp",
-      "sha256": "3d1597b284db02713e2807710265f57aada8974b45ea665f7fd1e3de19879ac1"
-    }
-  ]
+  "items": []
 }
