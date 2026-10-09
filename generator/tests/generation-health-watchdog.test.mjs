@@ -632,6 +632,9 @@ function healthy() {
       count: 0,
       oldestRequestedAt: null,
       oldestAgeHours: null,
+      actionableCount: 0,
+      oldestActionableRequestedAt: null,
+      oldestActionableAgeHours: null,
       statuses: {},
     },
   };
@@ -649,6 +652,9 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
         count: 0,
         oldestRequestedAt: null,
         oldestAgeHours: null,
+        actionableCount: 0,
+        oldestActionableRequestedAt: null,
+        oldestActionableAgeHours: null,
         statuses: {},
       });
     } finally {
@@ -664,7 +670,12 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
         schema: 1,
         items: [
           { articleId: 'old', requestedAt: '2026-10-07T06:00:00.000Z', status: 'queued' },
-          { articleId: 'new', requestedAt: '2026-10-07T11:30:00.000Z', status: 'failed' },
+          {
+            articleId: 'new',
+            requestedAt: '2026-10-07T11:30:00.000Z',
+            lastFailureAt: '2026-10-07T11:45:00.000Z',
+            status: 'failed',
+          },
         ],
       }));
       const result = collectCoverQueue(root, Date.parse('2026-10-07T12:00:00.000Z'));
@@ -672,7 +683,55 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
       assert.equal(result.count, 2);
       assert.equal(result.oldestRequestedAt, '2026-10-07T06:00:00.000Z');
       assert.equal(result.oldestAgeHours, 6);
+      assert.equal(result.actionableCount, 1);
+      assert.equal(result.oldestActionableRequestedAt, '2026-10-07T06:00:00.000Z');
+      assert.equal(result.oldestActionableAgeHours, 6);
       assert.deepEqual(result.statuses, { queued: 1, failed: 1 });
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  test('un failed vecchio ma ancora in cooldown non diventa coda azionabile', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generation-health-cover-'));
+    try {
+      fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'data/image-regeneration-queue.json'), JSON.stringify({
+        schema: 1,
+        items: [{
+          articleId: 'cooling',
+          requestedAt: '2026-10-06T12:00:00.000Z',
+          lastFailureAt: '2026-10-07T11:00:00.000Z',
+          status: 'failed',
+        }],
+      }));
+      const result = collectCoverQueue(root, Date.parse('2026-10-07T12:00:00.000Z'));
+      assert.equal(result.oldestAgeHours, 24);
+      assert.equal(result.actionableCount, 0);
+      assert.equal(result.oldestActionableRequestedAt, null);
+      assert.equal(result.oldestActionableAgeHours, null);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  test('un failed diventa azionabile alla scadenza del cooldown', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generation-health-cover-'));
+    try {
+      fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'data/image-regeneration-queue.json'), JSON.stringify({
+        schema: 1,
+        items: [{
+          articleId: 'retryable',
+          requestedAt: '2026-10-06T12:00:00.000Z',
+          lastFailureAt: '2026-10-07T06:00:00.000Z',
+          status: 'failed',
+        }],
+      }));
+      const result = collectCoverQueue(root, Date.parse('2026-10-07T12:00:00.000Z'));
+      assert.equal(result.actionableCount, 1);
+      assert.equal(result.oldestActionableRequestedAt, '2026-10-06T12:00:00.000Z');
+      assert.equal(result.oldestActionableAgeHours, 24);
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }
@@ -732,10 +791,30 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
       count: 55,
       oldestRequestedAt: '2026-10-07T10:00:00.000Z',
       oldestAgeHours: 5.9,
+      actionableCount: 55,
+      oldestActionableRequestedAt: '2026-10-07T10:00:00.000Z',
+      oldestActionableAgeHours: 5.9,
       statuses: { queued: 55 },
     };
     assert.equal(verdictFor(m, 'cover-fallback-health').firing, false);
     assert.equal(COVER_QUEUE_MAX_AGE_HOURS, 6);
+  });
+
+  test('un failed anziano ma nel cooldown non riapre il watchdog', () => {
+    const m = healthy();
+    m.coverQueue = {
+      available: true,
+      count: 2,
+      oldestRequestedAt: '2026-10-06T12:00:00.000Z',
+      oldestAgeHours: 28,
+      actionableCount: 0,
+      oldestActionableRequestedAt: null,
+      oldestActionableAgeHours: null,
+      statuses: { failed: 2 },
+    };
+    const v = verdictFor(m, 'cover-fallback-health');
+    assert.equal(v.firing, false);
+    assert.equal(v.available, true);
   });
 
   test('il p95 per sezione (7,45h svizzera) non accende section-dry', () => {
@@ -951,6 +1030,9 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
       count: 55,
       oldestRequestedAt: '2026-10-07T04:45:22.263Z',
       oldestAgeHours: 6.5,
+      actionableCount: 55,
+      oldestActionableRequestedAt: '2026-10-07T04:45:22.263Z',
+      oldestActionableAgeHours: 6.5,
       statuses: { queued: 55 },
     };
     const v = verdictFor(m, 'cover-fallback-health');
@@ -968,6 +1050,9 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
       count: 55,
       oldestRequestedAt: '2026-10-07T04:45:22.263Z',
       oldestAgeHours: 6.5,
+      actionableCount: 55,
+      oldestActionableRequestedAt: '2026-10-07T04:45:22.263Z',
+      oldestActionableAgeHours: 6.5,
       statuses: { queued: 55 },
     };
     const v = verdictFor(m, 'cover-fallback-health');

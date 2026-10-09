@@ -8,6 +8,22 @@ export const IMAGE_REGENERATION_QUEUE_LOCK_REL = 'data/image-regeneration-queue-
 export const IMAGE_REGENERATION_QUEUE_PENDING_REL = 'data/image-regeneration-queue-pending.jsonl';
 export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
 
+/**
+ * A failed cover is retryable only after the caller's explicit cooldown.
+ * Keeping this predicate beside the queue schema prevents the drainer and
+ * watchdog from disagreeing about whether a failed item is actionable.
+ */
+export function failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHours) {
+  if (retryAfterHours === null) return true;
+  const retryHours = Number(retryAfterHours);
+  const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
+  return Number.isFinite(nowMs)
+    && Number.isFinite(retryHours)
+    && retryHours > 0
+    && Number.isFinite(lastFailureAt)
+    && nowMs - lastFailureAt >= retryHours * 3_600_000;
+}
+
 let lockSequence = 0;
 let pendingDrainSequence = 0;
 let pendingAppendSequence = 0;
