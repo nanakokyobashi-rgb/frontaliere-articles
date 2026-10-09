@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-midterm-usa-voto-svizzera.webp",
-      "sha256": "451068e63ba4b936c939fe9e406a81ffd50411bc625f3d479c712328cfba44d1"
-    },
-    {
-      "path": "public/images/blog/article-sciaffusa-dati-lavoro-2026.webp",
-      "sha256": "719ba7195e3c22d123160521312ecddac78103afcc92bbd48d963171ed129342"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-midterm-usa-voto-svizzera-480w.webp",
-      "sha256": "7572d21df90bcbc5d7980cd549528243ea0af705f86d24ea5c542c3db62d676f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sciaffusa-dati-lavoro-2026-480w.webp",
-      "sha256": "069decdcb160c0314e80b87e2b2a52470cdc475d8f70bafffb4d60fc41551798"
-    }
-  ]
+  "items": []
 }
