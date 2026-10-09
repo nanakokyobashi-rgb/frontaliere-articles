@@ -1,4 +1,53 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-autotrasporto-rincari-confine-2026.webp",
+      "sha256": "0e64bb0eb7011c1978c7fdf47cb2045a9bf835ce772329a5aefb05c9b4343f0b"
+    },
+    {
+      "path": "public/images/blog/article-bellinzona-nord-svincolo.webp",
+      "sha256": "a762fe49851b08c40c075c86cf09fd1705e5ed6f2319a4cf64d7fd3d10dd06e0"
+    },
+    {
+      "path": "public/images/blog/article-carburanti-rincari-confine-ticino.webp",
+      "sha256": "7288b36d5c29174ea8c123f82761f288251ffa52107d903f2ca266c45ca1fee4"
+    },
+    {
+      "path": "public/images/blog/article-chiusura-strada-kesswil.webp",
+      "sha256": "fc7459e90d0f978b631baeb534dcd57d179ef9cac8b584ac26bb87957031b6aa"
+    },
+    {
+      "path": "public/images/blog/article-imposizione-individuale-ticino-2026.webp",
+      "sha256": "77565fc4b372cae738ac7edda2901a86fe6f4a4ab470e7d83b1b04861c59a413"
+    },
+    {
+      "path": "public/images/blog/article-votazioni-imposizione-ticino-2026.webp",
+      "sha256": "e4ee261c97f12f717ca82bb6336cb0e99c8fe19f0343b21aa6c883fcde6e2bfd"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-autotrasporto-rincari-confine-2026-480w.webp",
+      "sha256": "eea5d0d2645750885e00cf9556e4d30c2af345ec3ad8179ddec2597592e3ea57"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-bellinzona-nord-svincolo-480w.webp",
+      "sha256": "a8d9f34b5484d8af3a4eb5cf226b7396456de7090451e6bc3afe72c331674a10"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-carburanti-rincari-confine-ticino-480w.webp",
+      "sha256": "152bb22e7bae0597f8ac3cdfdf10d259f3830f383fcb24a56ebf3745838e1ca1"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-chiusura-strada-kesswil-480w.webp",
+      "sha256": "349c9380673fd1c578975b055def8255bb0971eab756b7eeac8395e2b1a20a3b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-imposizione-individuale-ticino-2026-480w.webp",
+      "sha256": "e59afef37c37411a72cfdfa7335fbe77ff0e34062a80d4cab46259a17ecb706a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-votazioni-imposizione-ticino-2026-480w.webp",
+      "sha256": "3c1acc82a0368a1ab888c75465764f01fb760d23670da153954dad67a3826c80"
+    }
+  ]
 }
