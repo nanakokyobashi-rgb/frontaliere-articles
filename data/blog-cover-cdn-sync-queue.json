@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp",
+      "sha256": "5c682b322df8b0ffe1b07dcf066020dcac3a8c1093af151d011071c0accb2cf3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione-480w.webp",
+      "sha256": "39d31de4c6564188a6b9ee369612b1ca9289a0f5e08bd6c40e3a3225298526e3"
+    }
+  ]
 }
