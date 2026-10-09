@@ -100330,6 +100330,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guida-voto-cantonale-lucerna': {
+    title: 'Voto cantonale Lucerna: guida a iniziative e referendum',
+    description: 'Il calendario prevede quattro giornate di voto federale ogni anno Per un\'iniziativa federale occorrono 100\'000 firme raccolte nell\'arco di 18 mesi Il referendum',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, cantonale, lucerna, iniziative',
+    ogTitle: 'Voto cantonale Lucerna: guida a iniziative e referendum',
+    ogDescription: 'Il calendario prevede quattro giornate di voto federale ogni anno Per un\'iniziativa federale occorrono 100\'000 firme raccolte nell\'arco di 18 mesi Il referendum',
+    canonicalPath: '/articoli-svizzera/guida-voto-cantonale-lucerna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto cantonale Lucerna: guida a iniziative e referendum",
+      "description": "Il calendario prevede quattro giornate di voto federale ogni anno Per un'iniziativa federale occorrono 100'000 firme raccolte nell'arco di 18 mesi Il referendum",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-guida-voto-cantonale-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio del Cantone di Lucerna con il lago e le montagne circostanti in un giorno soleggiato"
+      },
+      "datePublished": "2026-10-09T04:49:15+00:00",
+      "dateModified": "2026-10-09T04:49:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-voto-cantonale-lucerna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ai-chip-scarzita-prezzi-pc': {
+    title: 'PC e smartphone cari: l\'AI assorbe i chip | Frontaliere Ticino',
+    description: 'Rincari dal 40% al 120% su RAM e SSD. MediaMarkt, Fust e Interdiscount descrivono la carenza di componenti per PC e telefoni in Svizzera. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, smartphone, cari, assorbe, chip',
+    ogTitle: 'PC e smartphone cari: l\'AI assorbe i chip',
+    ogDescription: 'L\'espansione dei data center per l\'AI sta assorbito RAM e archiviazione, causando rincari fino al 120% su PC e smartphone in Svizzera. Ecco cosa dicono i rivenditori.',
+    canonicalPath: '/articoli-svizzera/ai-chip-scarzita-prezzi-pc/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PC e smartphone cari: l'AI assorbe i chip",
+      "description": "Rincari dal 40% al 120% su RAM e SSD. MediaMarkt, Fust e Interdiscount descrivono la carenza di componenti per PC e telefoni in Svizzera. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ai-chip-scarzita-prezzi-pc.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laptop e smartphone su un tavolo in un appartamento svizzero"
+      },
+      "datePublished": "2026-10-09T05:00:36+00:00",
+      "dateModified": "2026-10-09T05:00:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ai-chip-scarzita-prezzi-pc/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-furti-statistica-svizzera-passaporto': {
+    title: 'Oltre l\'80% dei furti in Svizzera ha passaporto straniero',
+    description: '7.956 persone condannate per furto lo scorso anno Oltre l\'80% aveva un passaporto straniero Circa 1.500 condannati erano svizzeri Taskforce di Confederazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, oltre, furti, passaporto, straniero',
+    ogTitle: 'Oltre l\'80% dei furti in Svizzera ha passaporto straniero',
+    ogDescription: '7.956 persone condannate per furto lo scorso anno Oltre l\'80% aveva un passaporto straniero Circa 1.500 condannati erano svizzeri Taskforce di Confederazione',
+    canonicalPath: '/articoli-svizzera/furti-statistica-svizzera-passaporto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Oltre l'80% dei furti in Svizzera ha passaporto straniero",
+      "description": "7.956 persone condannate per furto lo scorso anno Oltre l'80% aveva un passaporto straniero Circa 1.500 condannati erano svizzeri Taskforce di Confederazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-furti-statistica-svizzera-passaporto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Via residenziale svizzera al crepuscolo con porta chiusa e ombra di passante, simbolo dei furti"
+      },
+      "datePublished": "2026-10-09T06:26:39+00:00",
+      "dateModified": "2026-10-09T06:26:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/furti-statistica-svizzera-passaporto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-luganistan-clan-ceresio': {
+    title: 'Luganistan, il giardino di casa di una cleptocrazia',
+    description: 'La quarta puntata sul commercio di materie prime racconta l\'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, luganistan, giardino, casa, cleptocrazia',
+    ogTitle: 'Clan Nazarbayev sul Ceresio: il caso Luganistan',
+    ogDescription: 'Il dossier porta sul Ceresio la quarta puntata dedicata al commercio di materie prime. Il racconto mette in fila il clan Nazarbayev, il petrolio, le ville e gli strani permessi di soggiorno indicati dalla fonte.',
+    canonicalPath: '/articoli-svizzera/luganistan-clan-ceresio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Luganistan, il giardino di casa di una cleptocrazia",
+      "description": "La quarta puntata sul commercio di materie prime racconta l'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-clan-nazarbayev-ceresio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Ceresio e le ville sul lago al centro del caso Luganistan"
+      },
+      "datePublished": "2026-10-09T06:48:32+00:00",
+      "dateModified": "2026-10-09T06:48:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/luganistan-clan-ceresio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

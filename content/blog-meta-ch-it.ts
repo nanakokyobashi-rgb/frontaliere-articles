@@ -7958,6 +7958,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.nobel-economia-fehr-2026.title': 'Nobel economia 2026: Ernst Fehr tra i possibili vincitori',
     'blog.article.nobel-economia-fehr-2026.excerpt': 'Il Nobel per l\'economia 2026 sarà annunciato il 12 ottobre Ernst Fehr è tra i possibili vincitori Clarivate ha indicato quattro economisti Polymarket stima Fehr',
     'blog.article.nobel-economia-fehr-2026.imageAlt': 'Ernst Fehr tra i possibili vincitori del Nobel per l\'economia',
+    'blog.article.guida-voto-cantonale-lucerna.title': 'Voto cantonale Lucerna: guida a iniziative e referendum',
+    'blog.article.guida-voto-cantonale-lucerna.excerpt': 'Il calendario prevede quattro giornate di voto federale ogni anno Per un\'iniziativa federale occorrono 100\'000 firme raccolte nell\'arco di 18 mesi Il referendum',
+    'blog.article.guida-voto-cantonale-lucerna.imageAlt': 'Paesaggio del Cantone di Lucerna con il lago e le montagne circostanti in un giorno soleggiato',
+    'blog.article.ai-chip-scarzita-prezzi-pc.title': 'PC e smartphone cari: l\'AI assorbe i chip',
+    'blog.article.ai-chip-scarzita-prezzi-pc.excerpt': 'Rincari dal 40% al 120% segnalati da MediaMarkt.',
+    'blog.article.ai-chip-scarzita-prezzi-pc.imageAlt': 'Laptop e smartphone su un tavolo in un appartamento svizzero',
+    'blog.article.furti-statistica-svizzera-passaporto.title': 'Oltre l\'80% dei furti in Svizzera ha passaporto straniero',
+    'blog.article.furti-statistica-svizzera-passaporto.excerpt': '7.956 persone condannate per furto lo scorso anno Oltre l\'80% aveva un passaporto straniero Circa 1.500 condannati erano svizzeri Taskforce di Confederazione',
+    'blog.article.furti-statistica-svizzera-passaporto.imageAlt': 'Via residenziale svizzera al crepuscolo con porta chiusa e ombra di passante, simbolo dei furti',
+    'blog.article.luganistan-clan-ceresio.title': 'Luganistan, il giardino di casa di una cleptocrazia',
+    'blog.article.luganistan-clan-ceresio.excerpt': 'La quarta puntata sul commercio di materie prime racconta l\'arrivo del clan Nazarbayev sul Ceresio, tra petrolio, ville e strani permessi di soggiorno.',
+    'blog.article.luganistan-clan-ceresio.imageAlt': 'Il Ceresio e le ville sul lago al centro del caso Luganistan',
 };
 
 export default blogMetaChIt;

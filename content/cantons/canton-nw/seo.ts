@@ -21,10 +21,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Circa 1,2 km del percorso pedonale e ciclabile sul Lopper, tra Stansstad e Hergiswil, saranno illuminati. Lavori da ottobre, accensione a fine novembre 2026.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/benzina-confine-svizzera-agosto-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lopper-luce-pedoni-bici.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Percorso pedonale e ciclabile sul Lopper tra Stansstad e Hergiswil"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T18:27:16+00:00",
       "dateModified": "2026-10-07T18:27:16+00:00",

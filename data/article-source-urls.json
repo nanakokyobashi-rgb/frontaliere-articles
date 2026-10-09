@@ -1,7 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/luganese/1943013/l-incidente-sull-a2-riapre-il-dibattito-sulla-gestione-del-traffico": "incidente-a2-dibattito-traffico-ticino",
-  "https://comozero.it/attualita/incubo-lariana-traffico-e-code-la-strettoia-di-nesso-tra-i-punti-critici": "incubo-lariana-traffico-e-code",
-  "https://www.tio.ch/ticino/politica/1943229/cupra-traffico-problema-a2-airolo": "leventina-traffico-problema-cupra-airolo",
   "https://www.laregione.ch/cantone/mendrisiotto/1942053/ufficio-doganale-unico-per-mendrisio-e-sopraceneri": "ufficio-doganale-unico-mendrisio-sopraceneri",
   "https://www.fiscoetasse.com/approfondimenti/17377-lavoratori-frontalieri-novita-2026-tra-protocollo-it-ch-e-interpelli.html": "lavoratori-frontalieri-novita-2026",
   "https://www.tio.ch/svizzera/economia/1943420/casse-rendimento-pensioni-luglio-mercato": "casse-pensioni-rendimento-luglio-2026",
@@ -2224,6 +2221,21 @@
   "https://www.varesenews.it/2026/10/il-karate-inizia-con-lalta-formazione/2702431": {
     "articleId": "karate-uisp-formazione-arcisate-2026",
     "ts": "2026-10-09T04:02:21.823Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4139591": {
+    "articleId": "lardi-dotlife-chiusura-alberghi-lugano",
+    "ts": "2026-10-09T04:27:23.181Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/giornata-mondiale-di-mobilitazione-per-la-palestina-sabato-mattina-la-manifestazione-a-saronno/2702461": {
+    "articleId": "saronno-manifestazione-palestina-ottobre-2026",
+    "ts": "2026-10-09T05:35:42.177Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/oltre-400-mila-euro-sottratti-allanziano-affidato-alle-loro-cure-due-badanti-denunciate-dalla-finanza-di-saronno/2702455": {
+    "articleId": "varese-oltre-400mila-euro-sottratti-da-due-badanti",
+    "ts": "2026-10-09T05:57:28.570Z",
     "keyForm": 2
   }
 }

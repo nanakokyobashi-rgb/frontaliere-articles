@@ -11,7 +11,7 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.wabern-tram-risanamento.imageAlt': 'Projet de tram à Kleinwabern et rénovation du centre de Wabern',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.title': 'Chômage stable à Berne en septembre 2026 : +78 personnes',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.excerpt': 'En septembre 2026, le canton de Berne compte 12.208 chômeurs (+78), taux de 2,2%, jeunes 1.435 (-11), secteur hôtelier +64, secteur sanitaire +35, MEM -50.',
-    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Chômage stable à Berne septembre 2026, hausse de 78 personnes',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Illustration générée pour cet article',
     'blog.article.ipsach-gru-linea-strada.title': 'Ipsach : une grue s\'effondre, chemin de fer et route fermés',
     'blog.article.ipsach-gru-linea-strada.excerpt': 'Une grue de chantier est tombée sur un bâtiment, la voie ferrée et la route.',
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Grue de chantier tombée sur voie ferrée et route à Ipsach',

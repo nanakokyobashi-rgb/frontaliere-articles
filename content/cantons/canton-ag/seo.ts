@@ -148,6 +148,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-obermumpf-strada-sanificazione-2024': {
+    title: 'Obermumpf: lavori sulla K491 fino all\'autunno 2027',
+    description: 'Lunedì 12 ottobre iniziano i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova',
+    keywords: 'frontalieri, ticino, svizzera, italia, obermumpf, lavori, sulla, k491',
+    ogTitle: 'Obermumpf: lavori sulla K491 fino all\'autunno 2027',
+    ogDescription: 'Il cantiere sulla Hauptstrasse K491 a Obermumpf partirà lunedì 12 ottobre e proseguirà fino all\'autunno 2027. Interesserà 1.250 metri di strada, renderà accessibili le fermate Bündtenmatt, Alte Post e Ausserdorf con bordi a 22 cm e realizzerà',
+    canonicalPath: '/articoli-argovia/obermumpf-strada-sanificazione-2024/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Obermumpf: lavori sulla K491 fino all'autunno 2027",
+      "description": "Lunedì 12 ottobre iniziano i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/mendrisio-strada-serpiano-urgenti-lavori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori di risanamento sulla Hauptstrasse K491 a Obermumpf con nuova passerella pedonale"
+      },
+      "datePublished": "2026-10-09T06:35:59+00:00",
+      "dateModified": "2026-10-09T06:35:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/obermumpf-strada-sanificazione-2024/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

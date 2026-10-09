@@ -569,10 +569,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-confusione-tassa-salute-frontalieri.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Vista del valico di Brogeda tra Ticino e Italia con traffico e paesaggi naturali"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-03-06T01:03:53+01:00",
       "dateModified": "2026-03-06T01:03:53+01:00",
@@ -102500,10 +102500,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Due date: 10 ottobre alle 21 e 18 ottobre alle 15",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
         "url": `${BASE_URL}/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Illustrazione editoriale del teatro dialettale al Teatro Pax di Cantello"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T16:05:11+00:00",
       "dateModified": "2026-10-07T16:05:11+00:00",
@@ -103788,6 +103793,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/karate-uisp-formazione-arcisate-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lardi-dotlife-chiusura-alberghi-lugano': {
+    title: 'Chiude Villa Sassa: 140 dipendenti senza lavoro',
+    description: 'Villa Sassa e Villa Principe Leopoldo chiusi per quattro mesi Circa 140 dipendenti restano senza lavoro Alternative invernali a St. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiude, villa, sassa, dipendenti',
+    ogTitle: 'Villa Sassa chiusa: 140 dipendenti senza lavoro',
+    ogDescription: 'Villa Sassa e Villa Principe Leopoldo chiusi per quattro mesi Circa 140 dipendenti restano senza lavoro Alternative invernali a St.',
+    canonicalPath: '/articoli-frontaliere/lardi-dotlife-chiusura-alberghi-lugano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiude Villa Sassa: 140 dipendenti senza lavoro",
+      "description": "Villa Sassa e Villa Principe Leopoldo chiusi per quattro mesi Circa 140 dipendenti restano senza lavoro Alternative invernali a St. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lardi-dotlife-chiusura-alberghi-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista sul Lago di Lugano con alberghi in ristrutturazione"
+      },
+      "datePublished": "2026-10-09T04:27:22+00:00",
+      "dateModified": "2026-10-09T04:27:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lardi-dotlife-chiusura-alberghi-lugano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-saronno-manifestazione-palestina-ottobre-2026': {
+    title: 'Manifestazione Palestina a Saronno sabato 10 ottobre',
+    description: 'Sabato 10 ottobre manifestazione per la Palestina a Saronno Ritrovo alle 10 in piazza San Francesco Da lì partirà un corteo per le vie della città Aderiscono',
+    keywords: 'frontalieri, ticino, svizzera, italia, manifestazione, palestina, saronno, sabato',
+    ogTitle: 'Manifestazione Palestina a Saronno sabato 10 ottobre 2026',
+    ogDescription: 'Sabato 10 ottobre manifestazione per la Palestina a Saronno Ritrovo alle 10 in piazza San Francesco Da lì partirà un corteo per le vie della città Aderiscono',
+    canonicalPath: '/articoli-frontaliere/saronno-manifestazione-palestina-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Manifestazione Palestina a Saronno sabato 10 ottobre",
+      "description": "Sabato 10 ottobre manifestazione per la Palestina a Saronno Ritrovo alle 10 in piazza San Francesco Da lì partirà un corteo per le vie della città Aderiscono",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-saronno-manifestazione-palestina-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Manifestazione pro Palestina a Saronno con corteo in piazza San Francesco"
+      },
+      "datePublished": "2026-10-09T05:35:41+00:00",
+      "dateModified": "2026-10-09T05:35:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saronno-manifestazione-palestina-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-varese-oltre-400mila-euro-sottratti-da-due-badanti': {
+    title: 'Varese: oltre 400mila euro sottratti da due badanti',
+    description: 'Oltre 400 mila euro contestati a due badanti La denuncia è partita dalla figlia dell\'anziano Il Gip di Varese ha disposto un sequestro preventivo',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, oltre, 400mila, euro',
+    ogTitle: 'Varese: oltre 400mila euro sottratti da due badanti',
+    ogDescription: 'Oltre 400 mila euro contestati a due badanti La denuncia è partita dalla figlia dell\'anziano Il Gip di Varese ha disposto un sequestro preventivo',
+    canonicalPath: '/articoli-frontaliere/varese-oltre-400mila-euro-sottratti-da-due-badanti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: oltre 400mila euro sottratti da due badanti",
+      "description": "Oltre 400 mila euro contestati a due badanti La denuncia è partita dalla figlia dell'anziano Il Gip di Varese ha disposto un sequestro preventivo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-varese-oltre-400mila-euro-sottratti-da-due-badanti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Varese: oltre 400mila euro sottratti da due badanti"
+      },
+      "datePublished": "2026-10-09T05:57:28+00:00",
+      "dateModified": "2026-10-09T05:57:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-oltre-400mila-euro-sottratti-da-due-badanti/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

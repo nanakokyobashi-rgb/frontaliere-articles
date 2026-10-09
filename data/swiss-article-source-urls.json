@@ -1,19 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/stabile-il-tasso-di-disoccupazione--4064238.html": {
-    "articleId": "disoccupazione-stabile-svizzera-agosto-2024",
-    "ts": "2026-09-07T08:14:50.079Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1948440/pilota-berna-citta-cannabis-lucerna": {
-    "articleId": "cannabis-farmacia-berna-bienne-lucerna",
-    "ts": "2026-09-07T08:23:18.638Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/attualita/1948425/mario-padula-ha-assunto-la-direzione-dell-istituto-di-ricerche-economiche-dell-usi": {
-    "articleId": "padula-direttore-ire-usi-2026",
-    "ts": "2026-09-07T08:34:49.663Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cannabis%3a-vendita-in-farmacia-riduce-rischi%2c-studio/92014893": {
     "articleId": "cannabis-farmacia-vendita",
     "ts": "2026-09-07T08:41:57.508Z",
@@ -2497,6 +2482,21 @@
   "https://www.tio.ch/svizzera/attualita/1955543/nobel-economia-universita-fehr-zurigo-riconoscimento-ernst-nomi": {
     "articleId": "nobel-economia-fehr-2026",
     "ts": "2026-10-09T03:22:16.249Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1953932/prezzi-componenti-mercato-difficolta-capacita-memoria-clienti-dispositivi-interdiscount-situazione": {
+    "articleId": "ai-chip-scarzita-prezzi-pc",
+    "ts": "2026-10-09T05:00:36.465Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1955478/furti-statistica-svizzera-passaporto-asilo": {
+    "articleId": "furti-statistica-svizzera-passaporto",
+    "ts": "2026-10-09T06:26:40.083Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/economia/economia/1955093/luganistan-il-giardino-di-casa-di-una-cleptocrazia": {
+    "articleId": "luganistan-clan-ceresio",
+    "ts": "2026-10-09T06:48:32.692Z",
     "keyForm": 2
   }
 }

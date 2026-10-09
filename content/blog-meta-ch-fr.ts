@@ -7958,6 +7958,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.nobel-economia-fehr-2026.title': 'Nobel d\'économie 2026 : Ernst Fehr parmi les lauréats potentiels',
     'blog.article.nobel-economia-fehr-2026.excerpt': 'Le Nobel d\'économie 2026 sera annoncé le 12 octobre Ernst Fehr figure parmi les lauréats potentiels Clarivate a cité quatre économistes Polymarket estime Fehr',
     'blog.article.nobel-economia-fehr-2026.imageAlt': 'Ernst Fehr parmi les potentiels laureats du prix Nobel d\'economie',
+    'blog.article.guida-voto-cantonale-lucerna.title': 'Votation cantonale à Lucerne : guide des initiatives et référendums',
+    'blog.article.guida-voto-cantonale-lucerna.excerpt': 'Le calendrier prévoit quatre journées de votation fédérale chaque année Pour une initiative fédérale, 100\'000 signatures recueillies sur une période de 18 mois sont nécessaires Le référendum',
+    'blog.article.guida-voto-cantonale-lucerna.imageAlt': 'Paysage du canton de Lucerne avec le lac et les montagnes environnantes par une journée ensoleillée',
+    'blog.article.ai-chip-scarzita-prezzi-pc.title': 'PC et smartphones chers : l’IA absorbe les puces',
+    'blog.article.ai-chip-scarzita-prezzi-pc.excerpt': 'Hausses de prix de 40 % à 120 % signalées par MediaMarkt.',
+    'blog.article.ai-chip-scarzita-prezzi-pc.imageAlt': 'Ordinateur portable et smartphone sur une table dans un appartement suisse',
+    'blog.article.furti-statistica-svizzera-passaporto.title': 'Plus de 80 % des vols en Suisse ont un passeport étranger',
+    'blog.article.furti-statistica-svizzera-passaporto.excerpt': '7.956 personnes condamnées pour vol l’année dernière Plus de 80 % avaient un passeport étranger Environ 1.500 condamnés étaient suisses Taskforce de la Confédération',
+    'blog.article.furti-statistica-svizzera-passaporto.imageAlt': 'Rue résidentielle suisse au crépuscule avec porte fermée et silhouette d\'un passant, symbole des vols',
+    'blog.article.luganistan-clan-ceresio.title': 'Luganistan, l’arrière-cour d’une kleptocratie',
+    'blog.article.luganistan-clan-ceresio.excerpt': 'Le quatrième épisode sur le commerce des matières premières raconte l’arrivée du clan Nazarbayev sur les rives du Ceresio, entre pétrole, villas et étranges permis de séjour.',
+    'blog.article.luganistan-clan-ceresio.imageAlt': 'Le Ceresio et les villas au bord du lac au cœur de l\'affaire Luganistan',
 };
 
 export default blogMetaChFr;

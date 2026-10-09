@@ -11,7 +11,7 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.wabern-tram-risanamento.imageAlt': 'Kleinwabern tram project and Wabern centre renovation',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.title': 'Unemployment steady in Bern in September 2026: +78 people',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.excerpt': 'In September 2026, the Canton of Bern counts 12.208 unemployed people (+78), rate 2,2%, young people 1.435 (-11), hospitality sector +64, healthcare +35, MEM -50.',
-    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Stable unemployment in Bern September 2026, increase of 78 persons',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Illustration generated for this article',
     'blog.article.ipsach-gru-linea-strada.title': 'Ipsach: crane collapses, railway and road closed',
     'blog.article.ipsach-gru-linea-strada.excerpt': 'A work crane fell onto a building, railway, and road.',
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Fallen construction crane over railway and road in Ipsach',

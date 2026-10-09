@@ -11,7 +11,7 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.wabern-tram-risanamento.imageAlt': 'Tramprojekt Kleinwabern und Sanierung des Zentrums Wabern',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.title': 'Arbeitslosigkeit in Bern im September 2026 stabil: +78 Personen',
     'blog.article.disoccupazione-berna-settembre-2026-stabile.excerpt': 'Im September 2026 zählt der Kanton Bern 12.208 Arbeitslose (+78), Arbeitslosenquote 2,2%, junge Arbeitslose 1.435 (-11), Hotellerie +64, Gesundheitswesen +35, MEM -50.',
-    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Stabile Arbeitslosigkeit im Kanton Bern September 2026, Zuwachs von 78 Personen',
+    'blog.article.disoccupazione-berna-settembre-2026-stabile.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.ipsach-gru-linea-strada.title': 'Ipsach: Kran stürzt um, Bahnstrecke und Strasse gesperrt',
     'blog.article.ipsach-gru-linea-strada.excerpt': 'Ein Arbeitskran ist auf ein Gebäude, die Bahnstrecke und die Strasse gestürzt.',
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Eingeknickter Arbeitskran über Bahnlinie und Strasse in Ipsach',

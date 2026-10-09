@@ -819,7 +819,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.trasporti-lombardia-ticino-record-tilo.imageAlt': 'Treno Tilo in viaggio verso il Canton Ticino.',
  'blog.article.confusione-tassa-salute-frontalieri.title': 'Frontalieri e tassa salute: la confusione tra politica e normativa',
  'blog.article.confusione-tassa-salute-frontalieri.excerpt': 'Le recenti dichiarazioni politiche sulla tassa salute creano incertezza tra i frontalieri e gli operatori del settore. Analisi delle posizioni e delle normative in vigore.',
- 'blog.article.confusione-tassa-salute-frontalieri.imageAlt': 'Vista del valico di Brogeda tra Ticino e Italia con traffico e paesaggi naturali',
+ 'blog.article.confusione-tassa-salute-frontalieri.imageAlt': 'Illustrazione generata per questo articolo',
  'blog.article.carburante-ticino-costo-aumenti.title': 'Il costo del carburante in Ticino si impenna: un problema globale con ripercussioni locali',
  'blog.article.carburante-ticino-costo-aumenti.excerpt': 'Aumenti fino a 14 centesimi su diesel e benzina in Ticino, riflesso della crisi energetica mondiale. La politica e il mercato influiscono sui prezzi locali.',
  'blog.article.carburante-ticino-costo-aumenti.imageAlt': 'Stazione di rifornimento a Lugano, auto in attesa di carburante, paesaggio Ticino.',
@@ -12748,7 +12748,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.caduta-scala-locate-varesino.imageAlt': 'Contesto rurale di un\'azienda agricola',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'Cantello torna il teatro dialettale “Quei giargianes da giappunes”',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': 'Due date: 10 ottobre alle 21 e 18 ottobre alle 15',
-    'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Locandina dello spettacolo dialettale “Quei giargianes da giappunes” al Teatro Pax di Cantello con la compagnia Tutti in Scena',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.title': 'Frontalieri della vendemmia: 15 franchi l\'ora',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.excerpt': 'Circa 50 frontalieri animano la vendemmia nel Mendrisiotto',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.imageAlt': 'Lavoratori frontalieri raccolgono uva sui colli del Mendrisiotto durante la vendemmia',
@@ -12850,6 +12850,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.karate-uisp-formazione-arcisate-2026.title': 'Karate UISP: la nuova stagione inizia da Arcisate',
     'blog.article.karate-uisp-formazione-arcisate-2026.excerpt': 'La nuova stagione UISP riparte da un incontro ad Arcisate.',
     'blog.article.karate-uisp-formazione-arcisate-2026.imageAlt': 'Pratica di karate Shotokan durante un incontro UISP a Varese.',
+    'blog.article.lardi-dotlife-chiusura-alberghi-lugano.title': 'Chiude Villa Sassa: 140 dipendenti senza lavoro',
+    'blog.article.lardi-dotlife-chiusura-alberghi-lugano.excerpt': 'Villa Sassa e Villa Principe Leopoldo chiusi per quattro mesi Circa 140 dipendenti restano senza lavoro Alternative invernali a St.',
+    'blog.article.lardi-dotlife-chiusura-alberghi-lugano.imageAlt': 'Vista sul Lago di Lugano con alberghi in ristrutturazione',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.title': 'Manifestazione Palestina a Saronno sabato 10 ottobre',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.excerpt': 'Sabato 10 ottobre manifestazione per la Palestina a Saronno Ritrovo alle 10 in piazza San Francesco Da lì partirà un corteo per le vie della città Aderiscono',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.imageAlt': 'Manifestazione pro Palestina a Saronno con corteo in piazza San Francesco',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.title': 'Varese: oltre 400mila euro sottratti da due badanti',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.excerpt': 'Oltre 400 mila euro contestati a due badanti La denuncia è partita dalla figlia dell\'anziano Il Gip di Varese ha disposto un sequestro preventivo',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.imageAlt': 'Immagine editoriale relativa a: Varese: oltre 400mila euro sottratti da due badanti',
 };
 
 export default blogMetaIt;

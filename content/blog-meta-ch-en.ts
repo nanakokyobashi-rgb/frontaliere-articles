@@ -7958,6 +7958,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.nobel-economia-fehr-2026.title': '2026 Nobel Prize in Economics: Ernst Fehr among the possible winners',
     'blog.article.nobel-economia-fehr-2026.excerpt': 'The 2026 Nobel Prize in Economics will be announced on October 12 Ernst Fehr is among the possible winners Clarivate has identified four economists Polymarket estimates Fehr',
     'blog.article.nobel-economia-fehr-2026.imageAlt': 'Ernst Fehr among potential Nobel Prize winners in economics',
+    'blog.article.guida-voto-cantonale-lucerna.title': 'Lucerne cantonal vote: guide to initiatives and referendums',
+    'blog.article.guida-voto-cantonale-lucerna.excerpt': 'The calendar provides for four federal voting days each year A federal initiative requires 100\'000 signatures collected over a period of 18 months The referendum',
+    'blog.article.guida-voto-cantonale-lucerna.imageAlt': 'Landscape of the Canton of Lucerne with the lake and surrounding mountains on a sunny day',
+    'blog.article.ai-chip-scarzita-prezzi-pc.title': 'Expensive PCs and smartphones: AI is absorbing chips',
+    'blog.article.ai-chip-scarzita-prezzi-pc.excerpt': 'Price increases ranging from 40% to 120% reported by MediaMarkt.',
+    'blog.article.ai-chip-scarzita-prezzi-pc.imageAlt': 'Laptop and smartphone on a table in a Swiss apartment',
+    'blog.article.furti-statistica-svizzera-passaporto.title': 'More than 80% of thefts in Switzerland involve people with foreign passports.',
+    'blog.article.furti-statistica-svizzera-passaporto.excerpt': '7.956 people convicted of theft last year More than 80% had a foreign passport Approximately 1.500 of those convicted were Swiss Confederation Taskforce',
+    'blog.article.furti-statistica-svizzera-passaporto.imageAlt': 'Swiss residential street at dusk with closed door and passerby silhouette, symbol of theft',
+    'blog.article.luganistan-clan-ceresio.title': 'Luganistan, the backyard of a kleptocracy',
+    'blog.article.luganistan-clan-ceresio.excerpt': 'The fourth installment on the commodities trade recounts the arrival of the Nazarbayev clan on Lake Ceresio, amid oil, villas and strange residence permits.',
+    'blog.article.luganistan-clan-ceresio.imageAlt': 'Lake Ceresio and lakeside villas at the heart of the Luganistan case',
 };
 
 export default blogMetaChEn;

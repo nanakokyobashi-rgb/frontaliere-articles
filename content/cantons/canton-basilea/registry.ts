@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'detrazioni-figli-basel',
  category: 'fiscale',
  date: '2026-10-07T11:11:39.950Z',
- image: '/images/blog/asilo-nido-e-custodia-bambini-canton-basilea-citta.webp',
+ image: '/images/blog/article-detrazioni-figli-basel.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['BASILEA'],

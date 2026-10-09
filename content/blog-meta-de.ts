@@ -818,7 +818,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.trasporti-lombardia-ticino-record-tilo.imageAlt': 'Tilo-Zug auf dem Weg in den Kanton Tessin.',
  'blog.article.confusione-tassa-salute-frontalieri.title': 'Grenzgänger und Gesundheitssteuer: Verwirrung zwischen Politik und Rechtsprechung',
  'blog.article.confusione-tassa-salute-frontalieri.excerpt': 'Die jüngsten politischen Äußerungen zur Gesundheitssteuer sorgen für Unsicherheit bei Grenzgängern und Fachleuten im Sektor. Analyse der Positionen und geltenden Regelungen.',
- 'blog.article.confusione-tassa-salute-frontalieri.imageAlt': 'Blick auf die Grenzstation Brogeda zwischen Tessin und Italien mit Verkehr und Natur',
+ 'blog.article.confusione-tassa-salute-frontalieri.imageAlt': 'Für diesen Artikel erstellte Illustration',
  'blog.article.carburante-ticino-costo-aumenti.title': 'Der Kraftstoffpreis im Tessin schießt in die Höhe: Ein globales Problem mit lokalen Auswirkungen',
  'blog.article.carburante-ticino-costo-aumenti.excerpt': 'Preiserhöhungen von bis zu 14 Rappen bei Diesel und Benzin im Tessin, Spiegelbild der weltweiten Energiekrise. Politik und Markt beeinflussen die lokalen Preise.',
  'blog.article.carburante-ticino-costo-aumenti.imageAlt': 'Tankstelle in Lugano, Auto tanken, Tessin Landschaft.',
@@ -12746,7 +12746,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.caduta-scala-locate-varesino.imageAlt': 'Ländliche Umgebung eines Landwirtschaftsbetriebs',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.title': 'In Cantello kehrt das Dialekttheater „Quei giargianes da giappunes“ zurück',
     'blog.article.cantello-teatro-dialettale-ottobre-2026.excerpt': '',
-    'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Plakat für das Dialektstück “Quei giargianes da giappunes” im Teatro Pax von Cantello mit der Gruppe Tutti in Scena',
+    'blog.article.cantello-teatro-dialettale-ottobre-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.title': 'Grenzgänger bei der Weinlese: 15 Franken pro Stunde',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.excerpt': '',
     'blog.article.vendemmia-mendrisiotto-lavoratori-terra.imageAlt': 'Grenzgänger bei der Weinlese in den Hügeln des Mendrisiotto',
@@ -12848,6 +12848,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.karate-uisp-formazione-arcisate-2026.title': 'UISP Karate: Die neue Staffel beginnt bei Arcisate',
     'blog.article.karate-uisp-formazione-arcisate-2026.excerpt': 'Die neue UISP-Saison beginnt erneut mit einem Meeting bei Arcisate.',
     'blog.article.karate-uisp-formazione-arcisate-2026.imageAlt': 'Shotokan-Karate-Praxis während eines UISP-Treffens in Varese.',
+    'blog.article.lardi-dotlife-chiusura-alberghi-lugano.title': 'Schließt Villa Sassa: 140 arbeitslose Mitarbeiter',
+    'blog.article.lardi-dotlife-chiusura-alberghi-lugano.excerpt': 'Villa Sassa und Villa Principe Leopoldo für vier Monate geschlossen Etwa 140 Mitarbeiter sind arbeitslos Winteralternativen in St.',
+    'blog.article.lardi-dotlife-chiusura-alberghi-lugano.imageAlt': 'Blick auf den Luganersee mit renovierten Hotels',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.title': 'Palästina-Demonstration in Saronno am Samstag, 10. Oktober',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.excerpt': 'Samstag, 10. (Saronno)',
+    'blog.article.saronno-manifestazione-palestina-ottobre-2026.imageAlt': 'Pro-Palästina-Demonstration in Saronno mit Marsch vom Piazza San Francesco',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.title': 'Varese: über 400.000 Euro von zwei Pflegekräften abgezogen',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.excerpt': 'Mehr als 400.000 Euro angefochten gegen zwei Betreuer Die Beschwerde ging von der Tochter des Ältesten aus Der Gip von Varese ordnete eine vorbeugende Beschlagnahme an',
+    'blog.article.varese-oltre-400mila-euro-sottratti-da-due-badanti.imageAlt': 'Redaktionelles Bild zu: Varese: oltre 400mila euro sottratti da due badanti',
 };
 
 export default blogMetaDe;

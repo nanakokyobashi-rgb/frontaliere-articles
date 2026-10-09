@@ -89,10 +89,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A settembre 2026 il Canton Berna conta 12.208 disoccupati (+78), tasso 2,2%, giovani 1.435 (-11), settore alberghiero +64, sanitario +35, MEM -50.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/disoccupazione-settembre-ticino-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Disoccupazione stabile a Berna settembre 2026, aumento di 78 persone"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T19:58:52+00:00",
       "dateModified": "2026-10-07T19:58:52+00:00",

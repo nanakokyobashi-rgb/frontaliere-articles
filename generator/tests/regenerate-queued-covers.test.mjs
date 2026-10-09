@@ -1046,14 +1046,17 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
   assert.match(workflow, /cron: '0 \* \* \* \*'/);
   assert.doesNotMatch(workflow, /cron: '0 \*\/2 \* \* \*'/);
-  assert.match(workflow, /workflow_run:\s*\n\s+workflows: \['Generation health watchdog'\]\s*\n\s+types: \[completed\]/u);
+  assert.match(workflow, /workflow_run:\s*\n\s+workflows: \['Generation health watchdog', 'Generate Blog Article'\]\s*\n\s+types: \[completed\]/u);
   assert.match(workflow, /recovery_gate:\s*[\s\S]*?should_drain: \$\{\{ steps\.resolve\.outputs\.should_drain \}\}/u);
-  assert.match(workflow, /WATCHDOG_CONCLUSION: \$\{\{ github\.event\.workflow_run\.conclusion \}\}/u);
-  assert.match(workflow, /WATCHDOG_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/u);
+  assert.match(workflow, /UPSTREAM_WORKFLOW: \$\{\{ github\.event\.workflow_run\.name \}\}/u);
+  assert.match(workflow, /UPSTREAM_CONCLUSION: \$\{\{ github\.event\.workflow_run\.conclusion \}\}/u);
+  assert.match(workflow, /UPSTREAM_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/u);
   assert.match(
     workflow,
-    /if \[ "\$\{WATCHDOG_EVENT:-\}" != 'schedule' \]; then\s+echo 'should_drain=false' >> "\$GITHUB_OUTPUT"\s+echo "watchdog event is \$\{WATCHDOG_EVENT:-unknown\}: cover drain deferred to the next backstop"/u,
+    /case "\$\{UPSTREAM_WORKFLOW:-\}" in[\s\S]*'Generation health watchdog'[\s\S]*if \[ "\$\{UPSTREAM_EVENT:-\}" != 'schedule' \]; then[\s\S]*watchdog event is \$\{UPSTREAM_EVENT:-unknown\}/u,
   );
+  assert.match(workflow, /'Generate Blog Article'[\s\S]*push\|schedule\)[\s\S]*generator event is \$\{UPSTREAM_EVENT:-unknown\}/u);
+  assert.doesNotMatch(workflow, /UPSTREAM_EVENT:-\}"[^\n]*workflow_dispatch/);
   assert.match(workflow, /watchdog_max_age_hours=.*COVER_QUEUE_MAX_AGE_HOURS/u);
   assert.match(workflow, /recovery_age_hours=\$\(\(watchdog_max_age_hours - 2\)\)/u);
   assert.match(workflow, /needs: recovery_gate\s*\n\s+if: needs\.recovery_gate\.outputs\.should_drain == 'true'/u);

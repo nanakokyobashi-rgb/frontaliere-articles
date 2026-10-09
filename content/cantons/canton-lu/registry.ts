@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'lucerna-qualita-sviluppo-scuole',
  category: 'novita',
  date: '2026-10-07T18:10:58.696Z',
- image: '/images/blog/apprendistato-formazione-canton-lucerna.webp',
+ image: '/images/blog/article-lucerna-qualita-sviluppo-scuole.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['LU'],

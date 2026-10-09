@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'riduzione-premi-argovia-2027': { it: 'riduzione-premi-argovia-2027', en: 'aargau-premium-reduction-2027', de: 'praemienverbilligung-aargau-2027', fr: 'reduction-primes-argovie-2027' },
  'argovia-parita-salariale': { it: 'argovia-parita-salariale', en: 'aargau-pay-equality', de: 'aargau-lohngleichheit', fr: 'argovie-egalite-salariale' },
  'chiusura-hochrheinbahn-2026': { it: 'chiusura-hochrheinbahn-2026', en: 'hochrheinbahn-basel-rheinfelden-closure-2026', de: 'hochrheinbahn-streckensperrung-2026', fr: 'fermeture-hochrheinbahn-bale-rheinfelden-2026' },
+ 'obermumpf-strada-sanificazione-2024': { it: 'obermumpf-strada-sanificazione-2024', en: 'obermumpf-construction-work-on-the-k491-until-autumn-2027', de: 'obermumpf-bauarbeiten-an-der-k491-bis-herbst-2027', fr: 'obermumpf-travaux-sur-la-k491-jusqu-a-l-automne-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
