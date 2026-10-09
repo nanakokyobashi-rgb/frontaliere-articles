@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T16:55:33.673Z",
       "lastFailureAt": "2026-10-09T16:55:33.673Z"
+    },
+    {
+      "articleId": "caslano-colombera-incidente-moto",
+      "title": "Caslano, traffico in tilt per incidente in via Colombera",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T17:27:51.749Z",
+      "lastFailureAt": "2026-10-09T17:27:51.749Z"
     }
   ]
 }
