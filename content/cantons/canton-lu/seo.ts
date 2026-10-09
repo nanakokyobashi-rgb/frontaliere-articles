@@ -80,6 +80,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kriens-torna-in-deficit': {
+    title: 'Kriens torna in rosso dopo surplus milionari | Frontaliere Ticino',
+    description: 'Kriens torna in deficit dopo surplus milionari: cosa indica il titolo e perché non è ancora possibile stimare effetti su imposte, budget e servizi locali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, kriens, torna, rosso, dopo',
+    ogTitle: 'Kriens torna in rosso dopo surplus milionari',
+    ogDescription: 'Il caso di Kriens torna in rosso dopo precedenti surplus milionari. Il titolo segnala il cambio di segno, ma senza cifra, periodo o causa non consente ancora di calcolare effetti su imposte, spese e bilanci familiari, né di stabilire se esista già',
+    canonicalPath: '/articoli-lucerna/kriens-torna-in-deficit/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kriens torna in rosso dopo surplus milionari",
+      "description": "Kriens torna in deficit dopo surplus milionari: cosa indica il titolo e perché non è ancora possibile stimare effetti su imposte, budget e servizi locali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kriens-torna-in-deficit.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista urbana di Kriens nel Canton Lucerna sul tema delle finanze comunali"
+      },
+      "datePublished": "2026-10-09T00:40:17+00:00",
+      "dateModified": "2026-10-09T00:40:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/kriens-torna-in-deficit/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

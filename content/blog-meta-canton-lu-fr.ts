@@ -9,6 +9,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-qualita-sviluppo-scuole.title': 'Lucerne, qualité et développement scolaire plus proches',
     'blog.article.lucerna-qualita-sviluppo-scuole.excerpt': 'Les gymnases de Lucerne réexaminent le cadre QM : l’année scolaire 2026/27 servira à concrétiser le lien avec le développement scolaire et pédagogique.',
     'blog.article.lucerna-qualita-sviluppo-scuole.imageAlt': 'Gymnases lucernois travaillant sur la qualité et le développement scolaires',
+    'blog.article.kriens-torna-in-deficit.title': 'Kriens repasse dans le rouge après des excédents de plusieurs millions',
+    'blog.article.kriens-torna-in-deficit.excerpt': 'Après des excédents de plusieurs millions, Kriens repasse en déficit : le titre signale un nouveau passif, mais n’indique encore ni montant, ni date ni cause.',
+    'blog.article.kriens-torna-in-deficit.imageAlt': 'Vue urbaine de Kriens dans le canton de Lucerne sur les finances communales',
 };
 
 export default blogMetaCantonLuFr;
