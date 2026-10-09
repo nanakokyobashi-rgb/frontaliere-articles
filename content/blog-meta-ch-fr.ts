@@ -7946,6 +7946,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.linea-ginevra-friburgo-pressione.title': 'Genève-Fribourg, une ligne ferroviaire sous pression',
     'blog.article.linea-ginevra-friburgo-pressione.excerpt': 'Treize interruptions sur la ligne depuis le début de l’année Plus de 150’000 passagers et plus de 700 trains chaque jour Des câbles incendiés, des voies endommagées et un volatile',
     'blog.article.linea-ginevra-friburgo-pressione.imageAlt': 'Train suisse dans une gare très fréquentée',
+    'blog.article.attacco-publica-dati-rubati.title': 'Noms, numéros AVS et salaires : voici les données volées à Publica',
+    'blog.article.attacco-publica-dati-rubati.excerpt': 'Fin septembre : attaque contre le fournisseur de logiciels de Publica Noms, numéros AVS et salaires parmi les données à risque Publica compte 66’000 assurés actifs et 40’000',
+    'blog.article.attacco-publica-dati-rubati.imageAlt': 'Siège institutionnel en Suisse lié à la caisse de pensions Publica',
+    'blog.article.fuga-dati-publica-cassa.title': 'Fuite de données chez Publica : attaque et enquête fédérale',
+    'blog.article.fuga-dati-publica-cassa.excerpt': 'Attaque fin septembre contre un fournisseur externe de Publica Fuite de données et dépôt immédiat d\'une plainte pénale Enquête du Ministère public de la Confédération',
+    'blog.article.fuga-dati-publica-cassa.imageAlt': 'Siege de la caisse de pensions Publica en Suisse',
 };
 
 export default blogMetaChFr;

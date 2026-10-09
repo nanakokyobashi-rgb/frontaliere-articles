@@ -43274,6 +43274,26 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vbs-pink-cup-ragazze',
+ category: 'novita',
+ date: '2026-10-09T01:02:39.485Z',
+ image: '/images/blog/article-vbs-pink-cup-ragazze.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'teatro-intred-varese-stagione-2026',
+ category: 'novita',
+ date: '2026-10-09T01:29:12.556Z',
+ image: '/images/blog/article-teatro-intred-varese-stagione-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

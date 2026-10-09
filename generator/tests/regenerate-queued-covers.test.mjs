@@ -1044,8 +1044,21 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
 
 test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezione', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /cron: '0 \* \* \* \*'/);
+  assert.doesNotMatch(workflow, /cron: '0 \*\/2 \* \* \*'/);
+  assert.match(workflow, /workflow_run:\s*\n\s+workflows: \['Generation health watchdog'\]\s*\n\s+types: \[completed\]/u);
+  assert.match(workflow, /recovery_gate:\s*[\s\S]*?should_drain: \$\{\{ steps\.resolve\.outputs\.should_drain \}\}/u);
+  assert.match(workflow, /WATCHDOG_CONCLUSION: \$\{\{ github\.event\.workflow_run\.conclusion \}\}/u);
+  assert.match(workflow, /WATCHDOG_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/u);
+  assert.match(
+    workflow,
+    /if \[ "\$\{WATCHDOG_EVENT:-\}" != 'schedule' \]; then\s+echo 'should_drain=false' >> "\$GITHUB_OUTPUT"\s+echo "watchdog event is \$\{WATCHDOG_EVENT:-unknown\}: cover drain deferred to the next backstop"/u,
+  );
+  assert.match(workflow, /watchdog_max_age_hours=.*COVER_QUEUE_MAX_AGE_HOURS/u);
+  assert.match(workflow, /recovery_age_hours=\$\(\(watchdog_max_age_hours - 2\)\)/u);
+  assert.match(workflow, /needs: recovery_gate\s*\n\s+if: needs\.recovery_gate\.outputs\.should_drain == 'true'/u);
   const clock = workflow.indexOf('name: Start cover drain clock before checkout');
-  const checkout = workflow.indexOf('name: Checkout');
+  const checkout = workflow.indexOf('name: Checkout\n');
   const preDispatch = workflow.indexOf('name: Dispatch pending cover publishers before generation');
   const drain = workflow.indexOf('name: Drain queued covers');
   const dispatch = workflow.indexOf('name: Dispatch and complete pending cover publishers');
