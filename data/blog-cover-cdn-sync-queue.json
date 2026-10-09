@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-voto-svizzera-esportazione-armi-2026.webp",
+      "sha256": "e668088266fa72cab66a97bcb952ad0562b199b651db88facf0ad3eeab77ad76"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-voto-svizzera-esportazione-armi-2026-480w.webp",
+      "sha256": "b8b80574ee5042cf8ebe69aaa1b5b795fd9253d24305a286ad31b996e085030a"
+    }
+  ]
 }
