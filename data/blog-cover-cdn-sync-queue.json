@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-perdite-agricole-canton-vaud-caldo.webp",
+      "sha256": "9e1c25f169bcb31b85d716988770b222f37932c16050c6fc907a09dfcf39b561"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-perdite-agricole-canton-vaud-caldo-480w.webp",
+      "sha256": "a9364ebc2a959516192520868506b63af35352898b480e4fb880d9899fded2f6"
+    }
+  ]
 }
