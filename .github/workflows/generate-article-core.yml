@@ -537,9 +537,16 @@ jobs:
               | grep -E "$BODY_PATH_RE" | head -1
           }
 
+          stagedContentPaths=()
           registration_state_dirty() {
-            git diff --cached --name-status -- content/ |
-              awk -F '\t' 'NF { print; exit }'
+            stagedContentPaths=()
+            while IFS= read -r staged_path; do
+              [ -n "$staged_path" ] || continue
+              case "$staged_path" in
+                content/*) stagedContentPaths+=("$staged_path") ;;
+              esac
+            done < <(git diff --cached --name-only --diff-filter=ACDMRTUXB --)
+            echo "stagedContentPaths.length=${#stagedContentPaths[@]}"
           }
 
           sections=("$TARGET_SECTION")
@@ -773,8 +780,9 @@ jobs:
             fi
             echo "section $sec produced no article"
 
-            registration_dirty="$(registration_state_dirty)"
-            if [ -n "$registration_dirty" ]; then
+            registration_state_dirty
+            if [ "${#stagedContentPaths[@]}" -gt 0 ]; then
+              registration_dirty="${stagedContentPaths[0]}"
               partial_failure=true
               all_declared=false
               [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha lasciato una transazione di registrazione dirty sulla sezione $sec senza un body (exit $rc): output parziale non pubblicabile"
