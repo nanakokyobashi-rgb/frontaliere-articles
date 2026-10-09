@@ -651,7 +651,12 @@ export function checkTree(root) {
     }
   }
 
-  const credited = new Set(entries.filter((e) => e.record?.status === 'ok').map((e) => e.key));
+  // The SEO-rights assertion is specifically about Wikimedia Commons covers:
+  // generated-provider records intentionally keep their provider/license
+  // fields in JSON-LD and are validated by create-article instead.
+  const credited = new Set(entries
+    .filter((e) => e.record?.status === 'ok' && e.record?.source === 'wikimedia-commons')
+    .map((e) => e.key));
   for (const claim of findCreditedRightsClaims(root, credited)) {
     problems.push(`${claim.file}: the literal of credited cover ${claim.cover} still carries ${claim.rights.join(', ')} — run --build`);
   }
