@@ -15,6 +15,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Grisons : fonds pour les avalanches à Rossa et classe en forêt à Roveredo',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': 'Le gouvernement grison a approuvé 265\'650 francs pour Pighé.',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Structures de protection contre les avalanches à Pighé, Rossa, et une salle de classe en forêt à Roveredo, Canton des Grisons.',
+    'blog.article.code-domenicali-landquart.title': 'Embouteillages dominicaux au Fashion Outlet de Landquart',
+    'blog.article.code-domenicali-landquart.excerpt': 'Le dimanche, des files se forment régulièrement à la sortie d’autoroute de Landquart : la source examine le rôle du Fashion Outlet et les contre-mesures.',
+    'blog.article.code-domenicali-landquart.imageAlt': 'Bouchons du dimanche à la sortie d\'autoroute près du Fashion Outlet de Landquart',
 };
 
 export default blogMetaCantonGrFr;

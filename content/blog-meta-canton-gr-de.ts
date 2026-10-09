@@ -15,6 +15,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Graubünden: Mittel für Lawinenschutz in Rossa und eine Aula in Roveredo',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Lawinenschutzbauten in Pighé, Rossa, und ein Waldklassenzimmer in Roveredo, Kanton Graubünden.',
+    'blog.article.code-domenicali-landquart.title': 'Sonntägliche Staus beim Fashion Outlet in Landquart',
+    'blog.article.code-domenicali-landquart.excerpt': 'Sonntags bilden sich regelmäßig Staus an der Autobahnausfahrt von Landquart: Die Quelle untersucht die Rolle des Fashion Outlet und die Gegenmaßnahmen.',
+    'blog.article.code-domenicali-landquart.imageAlt': 'Sonntäglicher Stau an der Autobahnausfahrt beim Fashion Outlet in Landquart',
 };
 
 export default blogMetaCantonGrDe;

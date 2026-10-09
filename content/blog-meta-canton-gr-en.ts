@@ -15,6 +15,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Graubünden: avalanche funds in Rossa and a classroom in Roveredo',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': '',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Avalanche protection structures in Pighé, Rossa, and a forest classroom in Roveredo, Canton Graubünden.',
+    'blog.article.code-domenicali-landquart.title': 'Sunday codes at the Fashion Outlet in Landquart',
+    'blog.article.code-domenicali-landquart.excerpt': 'On Sundays, traffic queues regularly form at the Landquart motorway exit: the source examines the role of the Fashion Outlet and the countermeasures.',
+    'blog.article.code-domenicali-landquart.imageAlt': 'Sunday traffic queues at the motorway exit near the Fashion Outlet in Landquart',
 };
 
 export default blogMetaCantonGrEn;

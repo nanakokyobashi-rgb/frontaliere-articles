@@ -15,6 +15,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.title': 'Grigioni: fondi per valanghe a Rossa e aula a Roveredo',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.excerpt': 'Il governo retico ha approvato 265\'650 franchi per Pighé.',
     'blog.article.grigioni-valanghe-scuola-rossa-roveredo.imageAlt': 'Strutture antivalanga a Pighé, Rossa, e un\'aula nel bosco a Roveredo, Canton Grigioni.',
+    'blog.article.code-domenicali-landquart.title': 'Code domenicali al Fashion Outlet di Landquart',
+    'blog.article.code-domenicali-landquart.excerpt': 'La domenica si formano regolarmente code all\'uscita autostradale di Landquart: la fonte esamina il ruolo del Fashion Outlet e le contromisure.',
+    'blog.article.code-domenicali-landquart.imageAlt': 'Code domenicali all\'uscita autostradale vicino al Fashion Outlet di Landquart',
 };
 
 export default blogMetaCantonGrIt;

@@ -158,6 +158,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-code-domenicali-landquart': {
+    title: 'Code domenicali al Fashion Outlet di Landquart',
+    description: 'A Landquart le code si formano regolarmente la domenica all\'uscita autostradale: la fonte esamina il ruolo del Fashion Outlet e le misure contro il traffico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, code, domenicali, fashion, outlet',
+    ogTitle: 'Code domenicali al Fashion Outlet di Landquart',
+    ogDescription: 'La domenica l\'uscita autostradale di Landquart è interessata regolarmente da code. Il materiale pubblico pone al centro due domande: quanto incide il Fashion Outlet e quali interventi vengono considerati per il traffico.',
+    canonicalPath: '/articoli-grigioni/code-domenicali-landquart/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Code domenicali al Fashion Outlet di Landquart",
+      "description": "A Landquart le code si formano regolarmente la domenica all'uscita autostradale: la fonte esamina il ruolo del Fashion Outlet e le misure contro il traffico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-code-domenicali-landquart.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Code domenicali all'uscita autostradale vicino al Fashion Outlet di Landquart"
+      },
+      "datePublished": "2026-10-09T11:20:41+00:00",
+      "dateModified": "2026-10-09T11:20:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/code-domenicali-landquart/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
