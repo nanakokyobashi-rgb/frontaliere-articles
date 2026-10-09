@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-code-domenicali-landquart.webp",
+      "sha256": "67e638adea8d432dca2e1ac75c88613b5333c055329fdf7cf20c884656275d9a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-code-domenicali-landquart-480w.webp",
+      "sha256": "d24d290ddda32234475bae48dccd129f5a38a3542aeab1eccd9a86f82bab3770"
+    }
+  ]
 }
