@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-trasporti-45-critiche-piano.webp",
+      "sha256": "46d6355cb86aa6de119c5156e1bb0f3efbf03d5250ba376009c1e9f175ecd160"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-trasporti-45-critiche-piano-480w.webp",
+      "sha256": "32df784a1d46f0da2a432fb598bffa4c3ead04059d62ee1b07c1dfbd42353be9"
+    }
+  ]
 }
