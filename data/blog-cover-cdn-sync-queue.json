@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-economia-svizzera-fiducia-calante.webp",
+      "sha256": "944cc8a1d4866e1ebceeb339c18c872503c74e6e278dc19e1ad896784d244fd0"
+    },
+    {
+      "path": "public/images/blog/article-gestione-emergenze-ticino-lombardia.webp",
+      "sha256": "9021757735ca526c2cbc0e2921a4c93e4eed40676f7e8143c3401e74511b5794"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-economia-svizzera-fiducia-calante-480w.webp",
+      "sha256": "419e635ed8e119dd758a30b938fb106825e399f7dba0c0abe1f8c5945a77915d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-gestione-emergenze-ticino-lombardia-480w.webp",
+      "sha256": "98aebb79777add7bb211180d419fc48f7cf830265d05f72346d81a8486595c39"
+    }
+  ]
 }
