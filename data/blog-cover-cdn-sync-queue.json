@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-saronno-manifestazione-palestina-ottobre-2026.webp",
-      "sha256": "4d22697dc93adef8fe3367dd8f13a8aecde10a6738b2dff4143d9fa4f2e8f271"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-saronno-manifestazione-palestina-ottobre-2026-480w.webp",
-      "sha256": "6e0bd40352de71939a3a12aa6a532b5e60950235fb733ddc26fa4be9e2c73fd6"
-    }
-  ]
+  "items": []
 }
