@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-guida-voto-cantonale-lucerna.webp",
+      "sha256": "998013d8180b197bfec9c6711502a788856c898a5c08eb4c7265e8e359962b54"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-guida-voto-cantonale-lucerna-480w.webp",
+      "sha256": "4fa0f7c7acd8e1080d77f5fab7fbee072e69dd3cf0ba8eef4de08d0bd3c7fd24"
+    }
+  ]
 }
