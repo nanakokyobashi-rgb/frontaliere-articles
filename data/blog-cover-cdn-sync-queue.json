@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-iniziativa-solari-senza-permesso.webp",
-      "sha256": "a6419dbc85547276accc2e6a5071987042fd16f576cee634f2c8c683e4950706"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-iniziativa-solari-senza-permesso-480w.webp",
-      "sha256": "859477b9cb0b5fdda898c25a991580234e7c4d5635d8118dd07b5d75ea82ccc3"
-    }
-  ]
+  "items": []
 }
