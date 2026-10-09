@@ -15,6 +15,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.tempo30-birsfelden-ottobre.title': 'Tempo 30 in Birsfelden ab dem 12. Oktober 2026',
     'blog.article.tempo30-birsfelden-ottobre.excerpt': 'Im Baselbiet führt Birsfelden ab dem 12.',
     'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.basel-klimpact-programma-2026.title': 'Basel lanciert Klimpact für einen grüneren Alltag',
+    'blog.article.basel-klimpact-programma-2026.excerpt': 'Basel-Stadt startet Klimpact, um Emissionen zu reduzieren.',
+    'blog.article.basel-klimpact-programma-2026.imageAlt': 'Basler Bewohner beim Fahrradfahren und Einkaufen auf einem Wochenmarkt',
 };
 
 export default blogMetaCantonBasileaDe;

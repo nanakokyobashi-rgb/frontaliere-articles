@@ -10,6 +10,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-09T16:43:09.597Z",
       "lastFailureAt": "2026-10-09T17:56:34.550Z"
+    },
+    {
+      "articleId": "basel-klimpact-programma-2026",
+      "title": "Basel lancia Klimpact per un quotidiano più verde",
+      "fallbackImage": "/images/blog/varese-whp-programma-lombardia-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T21:07:09.567Z",
+      "lastFailureAt": "2026-10-09T21:07:09.567Z"
     }
   ]
 }

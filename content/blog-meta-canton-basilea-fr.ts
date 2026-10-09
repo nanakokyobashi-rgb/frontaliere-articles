@@ -15,6 +15,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.tempo30-birsfelden-ottobre.title': 'Tempo 30 à Birsfelden à partir du 12 octobre 2026',
     'blog.article.tempo30-birsfelden-ottobre.excerpt': 'Dans le Baselbiet, Birsfelden introduit le Tempo 30 à partir du 12 octobre 2026, tandis que Münchenstein doit encore attendre.',
     'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.basel-klimpact-programma-2026.title': 'Bâle lance Klimpact pour un quotidien plus vert',
+    'blog.article.basel-klimpact-programma-2026.excerpt': 'Bâle-Ville lance Klimpact pour réduire les émissions.',
+    'blog.article.basel-klimpact-programma-2026.imageAlt': 'Résidents de Bâle utilisant des vélos et des marchés locaux sous le soleil',
 };
 
 export default blogMetaCantonBasileaFr;

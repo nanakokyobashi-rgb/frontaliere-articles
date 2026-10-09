@@ -15,6 +15,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.tempo30-birsfelden-ottobre.title': 'Tempo 30 a Birsfelden dal 12 ottobre 2026',
     'blog.article.tempo30-birsfelden-ottobre.excerpt': 'Nel Baselbiet Birsfelden introduce il Tempo 30 dal 12 ottobre 2026, mentre Münchenstein deve ancora attendere.',
     'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.basel-klimpact-programma-2026.title': 'Basel lancia Klimpact per un quotidiano più verde',
+    'blog.article.basel-klimpact-programma-2026.excerpt': 'Basel-Stadt avvia Klimpact per ridurre le emissioni.',
+    'blog.article.basel-klimpact-programma-2026.imageAlt': 'Cittadini di Basilea che usano biciclette e mercati locali in una via soleggiata',
 };
 
 export default blogMetaCantonBasileaIt;
