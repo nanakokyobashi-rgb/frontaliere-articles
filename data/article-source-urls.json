@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/bellinzonese/1943428/votazione-sulla-fortezza-costituito-il-comitato-civico-favorevole": "votazione-sulla-fortezza-2024",
   "https://www.tio.ch/svizzera/economia/1943379/ue-imballaggi-regole-microimprese-spedizioni": "frontaliereticino-chiasso-2026",
   "https://www.varesenews.it/2026/08/di-chi-e-quel-pallet-la-domanda-che-apre-una-zona-dombra-nella-logistica/2656255": "logistica-pallet-analisi-mercato",
   "https://www.varesenoi.it/2026/08/13/leggi-notizia/argomenti/economia-13/articolo/lallarme-di-coldiretti-varese-carburanti-oltre-i-2-euro-aumentano-i-costi-per-imprese-agricole.html": "lallarme-di-coldiretti-varese",
@@ -2272,6 +2271,11 @@
   "https://www.varesenews.it/2026/10/filo-elettrico-al-collo-della-moglie-condannato-a-5-anni-e-2-mesi-per-i-fatti-di-montegrino-valtravaglia/2703142": {
     "articleId": "montegrino-valtravaglia-aggressione-condanna",
     "ts": "2026-10-09T12:24:19.195Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/pedopornografia-online-sette-arresti-uno-anche-in-provincia-di-varese/2702764": {
+    "articleId": "operazione-upriver-arresti-varese-2026",
+    "ts": "2026-10-09T12:58:48.773Z",
     "keyForm": 2
   }
 }

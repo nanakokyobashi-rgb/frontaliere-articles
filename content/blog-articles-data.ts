@@ -43459,6 +43459,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'operazione-upriver-arresti-varese-2026',
+ category: 'novita',
+ date: '2026-10-09T12:58:48.117Z',
+ image: '/images/blog/article-operazione-upriver-arresti-varese-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
