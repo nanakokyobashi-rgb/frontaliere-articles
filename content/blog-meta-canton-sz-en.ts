@@ -8,7 +8,7 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.chiusura-strade-gallusmarkt-svitto.imageAlt': 'Streets of Einsiedeln during market setup',
     'blog.article.svitto-cambio-cassa-malati.title': 'Unfair competition in switching health insurers in Schwyz',
     'blog.article.svitto-cambio-cassa-malati.excerpt': 'Offers to switch health insurers are often deceptive: a local health insurer in Schwyz has to contend with a business described as unfair competition.',
-    'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Canton Schwyz scene for an article about switching health insurers',
+    'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonSzEn;

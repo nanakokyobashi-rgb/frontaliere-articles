@@ -11,7 +11,7 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.scambio-dati-salariali-2027.imageAlt': 'Veduta di Lugano con edifici moderni e uffici.',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.title': 'Decreto tassa salute frontalieri pubblicato: via libera regioni',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.excerpt': 'Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività',
-    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Immagine editoriale relativa a: Decreto tassa salute frontalieri pubblicato: via libera regioni',
+    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Edifici amministrativi a Bellinzona, sede di autorità fiscali del Canton Ticino',

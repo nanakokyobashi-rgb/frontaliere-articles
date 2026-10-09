@@ -11,7 +11,7 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.scambio-dati-salariali-2027.imageAlt': 'Blick auf Lugano mit modernen Gebäuden und Büros.',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.title': 'Gesundheitsabgabe für Grenzgänger: Dekret publiziert',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.excerpt': '',
-    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Redaktionelles Bild zu: Decreto tassa salute frontalieri pubblicato: via libera regioni',
+    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'BVG-Kapital: Tessin verweigert Rückerstattung der Quellensteuer',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': '',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Verwaltungsgebäude in Bellinzona, Sitz der Steuerbehörden des Kantons Tessin',

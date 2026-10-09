@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'svitto-cambio-cassa-malati',
  category: 'pratico',
  date: '2026-10-08T14:43:30.771Z',
- image: '/images/blog/article-tf-nega-sconto-cassa-malati-padre-affidamento-alternato.webp',
+ image: '/images/blog/article-svitto-cambio-cassa-malati.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SZ'],

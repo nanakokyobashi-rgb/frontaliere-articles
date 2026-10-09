@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'morges-mobilita-consultazione-2045',
  category: 'novita',
  date: '2026-10-08T11:29:50.102Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-morges-mobilita-consultazione-2045.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VD'],

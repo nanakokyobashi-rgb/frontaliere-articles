@@ -60,10 +60,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-tf-nega-sconto-cassa-malati-padre-affidamento-alternato.webp`,
+        "url": `${BASE_URL}/images/blog/article-svitto-cambio-cassa-malati.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Scena del Canton Svitto per un articolo sul cambio di cassa malati"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T14:43:30+00:00",
       "dateModified": "2026-10-08T14:43:30+00:00",

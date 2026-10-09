@@ -43194,7 +43194,7 @@ const RAW_ARTICLES = [
  id: 'mendrisiotto-aziende-conciliabilita',
  category: 'novita',
  date: '2026-10-08T12:50:35.045Z',
- image: '/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp',
+ image: '/images/blog/article-mendrisiotto-aziende-conciliabilita.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],

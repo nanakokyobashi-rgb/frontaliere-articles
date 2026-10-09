@@ -25,71 +25,31 @@
       "articleId": "mercato-lavoro-ia-svizzera",
       "title": "Mercato lavoro IA Svizzera: +32% in un anno",
       "fallbackImage": "/images/blog/mercato-lavoro-svizzera-giugno-2026.webp",
-      "reason": "All image providers failed for article-mercato-lavoro-ia-svizzera: openai-codex (vision gate rejected image: Generic Swiss alpine AI illustration with no text or logos, but it includes multiple recognizable human foreground figures and face",
+      "reason": "All image providers failed for article-mercato-lavoro-ia-svizzera: openai-codex (vision gate rejected image: Generic illustrative office scene with visible foreground people; no readable text, logos, or recognizable faces.); gemini (Gemini ",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-08T09:36:45.453Z",
-      "lastFailureAt": "2026-10-09T08:33:08.964Z"
+      "lastFailureAt": "2026-10-09T08:50:15.372Z"
     },
     {
       "articleId": "luterbach-a5-rampe-notte",
       "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
       "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
-      "reason": "All image providers failed for article-luterbach-a5-rampe-notte: openai-codex (vision gate rejected image: Generic illustrated night highway scene, but it contains prominent road-c",
+      "reason": "All image providers failed for article-luterbach-a5-rampe-notte: openai-codex (vision gate rejected image: Generic illustrated highway interchange relevant to closed ramps, but it contains multiple road-closure/no-entry signs.); gemini (Gem",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-08T11:26:57.084Z",
-      "lastFailureAt": "2026-10-08T11:26:57.084Z"
-    },
-    {
-      "articleId": "morges-mobilita-consultazione-2045",
-      "title": "Morges: le richieste sulla mobilità al 2045",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-morges-mobilita-consultazione-2045: openai-codex (vision gate rejected image: Generic illustrated urban scene, but it contains visible direct",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T11:29:50.112Z",
-      "lastFailureAt": "2026-10-08T11:29:50.112Z"
+      "lastFailureAt": "2026-10-09T08:51:55.296Z"
     },
     {
       "articleId": "tifosi-lucerna-lugano-traffico",
       "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
       "fallbackImage": "/images/blog/lucerna-voto-tifosi-ocse.webp",
-      "reason": "All image providers failed for article-tifosi-lucerna-lugano-traffico: openai-codex (vision gate rejected image: Generic illustrated scene with multiple roadwork and traffic signs;",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-08T11:31:48.777Z",
-      "lastFailureAt": "2026-10-08T11:31:48.777Z"
-    },
-    {
-      "articleId": "decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni",
-      "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
-      "fallbackImage": "/images/blog/tassa-salute-frontalieri-ticino-settembre.webp",
-      "reason": "All image providers failed for article-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni: openai-codex (vision gate rejected image: Generic stylized illustration with",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T11:44:40.252Z",
-      "lastFailureAt": "2026-10-08T11:44:40.252Z"
-    },
-    {
-      "articleId": "mendrisiotto-aziende-conciliabilita",
-      "title": "Mendrisiotto aziende a confronto su conciliabilità vita-lavoro",
-      "fallbackImage": "/images/blog/frontaliere-documenti-primo-giorno-lavoro-ticino-2026-famiglia-con-figli.webp",
-      "reason": "All image providers failed for article-mendrisiotto-aziende-conciliabilita: openai-codex (vision gate rejected image: Generic illustration with multiple clearly recognizable human",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T12:50:35.254Z",
-      "lastFailureAt": "2026-10-08T12:50:35.254Z"
-    },
-    {
-      "articleId": "svitto-cambio-cassa-malati",
-      "title": "Concorrenza sleale nel cambio cassa malati a Svitto",
-      "fallbackImage": "/images/blog/article-tf-nega-sconto-cassa-malati-padre-affidamento-alternato.webp",
-      "reason": "All image providers failed for article-svitto-cambio-cassa-malati: openai-codex (Codex broker timed out after 119999ms)",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T14:43:30.790Z",
-      "lastFailureAt": "2026-10-08T14:43:30.790Z"
+      "lastFailureAt": "2026-10-09T08:54:56.386Z"
     },
     {
       "articleId": "nuovo-piano-ciclabile-friburgo",

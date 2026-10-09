@@ -14,7 +14,7 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.losanna-budget-deficit-2027.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.morges-mobilita-consultazione-2045.title': 'Morges: Forderungen zur Mobilität für 2045',
     'blog.article.morges-mobilita-consultazione-2045.excerpt': '',
-    'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Stadtansicht von Morges mit Straßeninfrastruktur',
+    'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.vaud-budget-2027-revisione-12percento.title': 'Waadt überarbeitet das Budget 2027, um die 12%-Lücke zu schliessen',
     'blog.article.vaud-budget-2027-revisione-12percento.excerpt': '',
     'blog.article.vaud-budget-2027-revisione-12percento.imageAlt': 'Blick auf den Genfersee mit dem Lausanne-Skyline und kantonalen Gebäuden',

@@ -11,7 +11,7 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.scambio-dati-salariali-2027.imageAlt': 'View of Lugano with modern buildings and offices.',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.title': 'Healthcare tax decree for cross-border workers approved',
     'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.excerpt': '',
-    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Editorial image related to: Decreto tassa salute frontalieri pubblicato: via libera regioni',
+    'blog.article.decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.imageAlt': 'Illustration generated for this article',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'LPP capital: Ticino denies withholding tax refund',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': '',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Administrative buildings in Bellinzona, seat of Canton Ticino tax authorities',

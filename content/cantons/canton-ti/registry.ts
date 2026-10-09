@@ -32,7 +32,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni',
  category: 'novita',
  date: '2026-10-08T11:44:40.237Z',
- image: '/images/blog/tassa-salute-frontalieri-ticino-settembre.webp',
+ image: '/images/blog/article-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.webp',
  hasCalculator: false,
  articleType: 'news',
  canton: ['TI'],

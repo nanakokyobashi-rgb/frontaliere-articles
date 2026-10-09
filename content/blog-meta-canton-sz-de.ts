@@ -8,7 +8,7 @@ const blogMetaCantonSzDe: Record<string, string> = {
     'blog.article.chiusura-strade-gallusmarkt-svitto.imageAlt': 'Strassen von Einsiedeln während des Marktaufbaus',
     'blog.article.svitto-cambio-cassa-malati.title': 'Unlauterer Wettbewerb beim Krankenkassenwechsel in Schwyz',
     'blog.article.svitto-cambio-cassa-malati.excerpt': 'Die Angebote für einen Krankenkassenwechsel sind oft irreführend: Eine lokale Krankenkasse in Schwyz muss sich mit einem Geschäftsmodell auseinandersetzen, das als unlauterer Wettbewerb beschrieben wird.',
-    'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Szene im Kanton Schwyz zum Wechsel der Krankenkasse',
+    'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonSzDe;

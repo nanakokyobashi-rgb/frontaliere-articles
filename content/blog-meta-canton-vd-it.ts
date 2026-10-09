@@ -14,7 +14,7 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.losanna-budget-deficit-2027.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.morges-mobilita-consultazione-2045.title': 'Morges: le richieste sulla mobilità al 2045',
     'blog.article.morges-mobilita-consultazione-2045.excerpt': 'Morges interviene nella consultazione federale «Transports ’45»',
-    'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Veduta urbana di Morges con infrastrutture stradali',
+    'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.vaud-budget-2027-revisione-12percento.title': 'Vaud rivede il budget 2027 per coprire il buco dei 12%',
     'blog.article.vaud-budget-2027-revisione-12percento.excerpt': 'Minori entrate fiscali: 272 milioni di franchi',
     'blog.article.vaud-budget-2027-revisione-12percento.imageAlt': 'Vista del lago di Ginevra con lo skyline di Losanna e gli edifici cantonali',

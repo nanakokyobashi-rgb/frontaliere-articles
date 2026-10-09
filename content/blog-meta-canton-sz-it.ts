@@ -8,7 +8,7 @@ const blogMetaCantonSzIt: Record<string, string> = {
     'blog.article.chiusura-strade-gallusmarkt-svitto.imageAlt': 'Strade di Einsiedeln durante l\'allestimento del mercato',
     'blog.article.svitto-cambio-cassa-malati.title': 'Concorrenza sleale nel cambio cassa malati a Svitto',
     'blog.article.svitto-cambio-cassa-malati.excerpt': 'Le offerte per cambiare cassa malati spesso ingannano: una cassa locale di Svitto deve fare i conti con un business descritto come concorrenza sleale.',
-    'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Scena del Canton Svitto per un articolo sul cambio di cassa malati',
+    'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonSzIt;

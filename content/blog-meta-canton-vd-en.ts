@@ -14,7 +14,7 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.losanna-budget-deficit-2027.imageAlt': 'Illustration generated for this article',
     'blog.article.morges-mobilita-consultazione-2045.title': 'Morges: mobility requirements for 2045',
     'blog.article.morges-mobilita-consultazione-2045.excerpt': '',
-    'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Urban view of Morges with road infrastructure',
+    'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Illustration generated for this article',
     'blog.article.vaud-budget-2027-revisione-12percento.title': 'Vaud revises the 2027 budget to cover the 12% shortfall',
     'blog.article.vaud-budget-2027-revisione-12percento.excerpt': '',
     'blog.article.vaud-budget-2027-revisione-12percento.imageAlt': 'Lake Geneva view with Lausanne skyline and cantonal buildings',

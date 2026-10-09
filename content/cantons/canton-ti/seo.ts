@@ -89,10 +89,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/tassa-salute-frontalieri-ticino-settembre.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Immagine editoriale relativa a: Decreto tassa salute frontalieri pubblicato: via libera regioni"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T11:44:40+00:00",
       "dateModified": "2026-10-08T11:44:40+00:00",
