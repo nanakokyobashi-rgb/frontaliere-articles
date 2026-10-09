@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/attualita/1955186/sondaggio-voterai-sai-novembre-avs": {
-      "section": "frontaliere",
-      "ts": 1791353815883
-    },
     "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/lega-contro-il-cancro-90-anni-di-speranza-e-umanit%c3%a0--4140326.html": {
       "section": "frontaliere",
       "ts": 1791355598794
@@ -1124,6 +1120,18 @@
     "frontaliere::https://www.rsi.ch/s/4140344": {
       "section": "frontaliere",
       "ts": 1791525047882
+    },
+    "svizzera::https://www.swissinfo.ch/ita/nestl%c3%a9-raddoppia-gli-investimenti-in-messico%2c-pronti-due-miliardi/92189858": {
+      "section": "svizzera",
+      "ts": 1791525852135
+    },
+    "svizzera::https://www.laregione.ch/svizzera/svizzera/1955404/zurich-non-vuole-pagare-l-indennita-a-jessica-moretti": {
+      "section": "svizzera",
+      "ts": 1791526763168
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1955518/c-e-lo-scambio-d-abiti-nella-corte-del-municipio": {
+      "section": "svizzera",
+      "ts": 1791526780084
     }
   }
 }
