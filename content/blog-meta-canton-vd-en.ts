@@ -18,6 +18,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.vaud-budget-2027-revisione-12percento.title': 'Vaud revises the 2027 budget to cover the 12% shortfall',
     'blog.article.vaud-budget-2027-revisione-12percento.excerpt': '',
     'blog.article.vaud-budget-2027-revisione-12percento.imageAlt': 'Lake Geneva view with Lausanne skyline and cantonal buildings',
+    'blog.article.sussidi-malattia-lavoro-vaud.title': 'Vaud: works harder for LAMal subsidies',
+    'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Single person: threshold from 70% to 80% Couples without children: threshold from 140% to 160% Couples with children: threshold confirmed at 100% Expected',
+    'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Administrative building in Canton Vaud where new work thresholds for subsidies are discussed.',
 };
 
 export default blogMetaCantonVdEn;

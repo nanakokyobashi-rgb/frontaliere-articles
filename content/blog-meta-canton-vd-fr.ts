@@ -18,6 +18,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.vaud-budget-2027-revisione-12percento.title': 'Vaud revoit le budget 2027 pour combler le trou de 12 %',
     'blog.article.vaud-budget-2027-revisione-12percento.excerpt': 'Recettes fiscales en moins : 272 millions de francs',
     'blog.article.vaud-budget-2027-revisione-12percento.imageAlt': 'Vue du lac Léman avec la skyline de Lausanne et les bâtiments cantonaux',
+    'blog.article.sussidi-malattia-lavoro-vaud.title': 'Vaud : il faut travailler davantage pour les subsides LAMal',
+    'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Personne seule : seuil de 70% à 80% Couples sans enfants : seuil de 140% à 160% Couples avec enfants : seuil confirmé à 100% Économie prévue : 30 millions',
+    'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Batiment administratif dans le canton de Vaud ou l\'on discute des nouveaux seuils de travail pour les subsides.',
 };
 
 export default blogMetaCantonVdFr;

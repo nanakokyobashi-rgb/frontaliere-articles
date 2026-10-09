@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'sussidi-malattia-lavoro-vaud',
+ category: 'pratico',
+ date: '2026-10-09T12:01:29.729Z',
+ image: '/images/blog/article-sussidi-malattia-lavoro-vaud.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

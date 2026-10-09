@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sussidi-malattia-lavoro-vaud': {
+    title: 'Vaud: lavora di più per i sussidi LAMal | Frontaliere Ticino',
+    description: 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, vaud, lavora, sussidi, lamal',
+    ogTitle: 'Sussidi LAMal nel Canton Vaud: cambiano le soglie di lavoro',
+    ogDescription: 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni',
+    canonicalPath: '/articoli-vaud/sussidi-malattia-lavoro-vaud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vaud: lavora di più per i sussidi LAMal",
+      "description": "Persona sola: soglia dal 70% all'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sussidi-malattia-lavoro-vaud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo nel Canton Vaud dove si discutono le nuove soglie lavorative per i sussidi."
+      },
+      "datePublished": "2026-10-09T12:01:29+00:00",
+      "dateModified": "2026-10-09T12:01:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/sussidi-malattia-lavoro-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

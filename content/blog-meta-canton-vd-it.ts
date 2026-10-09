@@ -18,6 +18,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.vaud-budget-2027-revisione-12percento.title': 'Vaud rivede il budget 2027 per coprire il buco dei 12%',
     'blog.article.vaud-budget-2027-revisione-12percento.excerpt': 'Minori entrate fiscali: 272 milioni di franchi',
     'blog.article.vaud-budget-2027-revisione-12percento.imageAlt': 'Vista del lago di Ginevra con lo skyline di Losanna e gli edifici cantonali',
+    'blog.article.sussidi-malattia-lavoro-vaud.title': 'Vaud: lavora di più per i sussidi LAMal',
+    'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni',
+    'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Edificio amministrativo nel Canton Vaud dove si discutono le nuove soglie lavorative per i sussidi.',
 };
 
 export default blogMetaCantonVdIt;

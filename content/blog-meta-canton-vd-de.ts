@@ -18,6 +18,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.vaud-budget-2027-revisione-12percento.title': 'Waadt überarbeitet das Budget 2027, um die 12%-Lücke zu schliessen',
     'blog.article.vaud-budget-2027-revisione-12percento.excerpt': '',
     'blog.article.vaud-budget-2027-revisione-12percento.imageAlt': 'Blick auf den Genfersee mit dem Lausanne-Skyline und kantonalen Gebäuden',
+    'blog.article.sussidi-malattia-lavoro-vaud.title': 'Waadt: Für LAMal-Subventionen mehr arbeiten',
+    'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Alleinstehende Person: Schwelle von 70% auf 80% Kinderlose Paare: Schwelle von 140% auf 160% Paare mit Kindern: Schwelle bei 100% bestätigt Erwartete',
+    'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Verwaltungsgebaude im Kanton Waadt, in dem uber neue Arbeitsschwellen fur Subventionen diskutiert wird.',
 };
 
 export default blogMetaCantonVdDe;
