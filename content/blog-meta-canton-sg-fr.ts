@@ -15,6 +15,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.spital-grabs-haus-o-vertice.title': 'Spital Grabs : Haus O atteint son point le plus haut',
     'blog.article.spital-grabs-haus-o-vertice.excerpt': 'En septembre 2026, Haus O de Spital Grabs a atteint son point le plus haut. Haus S a été agrandi : de nouveaux espaces pour la radiologie et l’oncologie, travaux jusqu’en 2028.',
     'blog.article.spital-grabs-haus-o-vertice.imageAlt': 'Chantier du nouveau bâtiment Haus O à l\'hôpital de Grabs, dans le canton de Saint-Gall.',
+    'blog.article.lavori-strada-wartau-plattis.title': 'Travaux sur la Hauptstrasse à Wartau à partir du 19 octobre 2026',
+    'blog.article.lavori-strada-wartau-plattis.excerpt': 'À Wartau, les travaux sur la Hauptstrasse commencent le 19 octobre 2026 : sur le tronçon de Plattis, les conduites de drainage et la chaussée seront rénovées.',
+    'blog.article.lavori-strada-wartau-plattis.imageAlt': 'Travaux sur la Hauptstrasse dans le secteur de Plattis à Wartau',
 };
 
 export default blogMetaCantonSgFr;

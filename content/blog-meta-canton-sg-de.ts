@@ -15,6 +15,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.spital-grabs-haus-o-vertice.title': 'Spital Grabs: Haus O erreicht den höchsten Punkt',
     'blog.article.spital-grabs-haus-o-vertice.excerpt': 'Im September 2026 hat Haus O des Spital Grabs den höchsten Punkt erreicht. Haus S wurde erweitert: neue Räumlichkeiten für Radiologie und Onkologie, die Arbeiten dauern bis 2028.',
     'blog.article.spital-grabs-haus-o-vertice.imageAlt': 'Baustelle des neuen Hauses O am Spital Grabs im Kanton St. Gallen.',
+    'blog.article.lavori-strada-wartau-plattis.title': 'Arbeiten an der Hauptstrasse in Wartau ab dem 19. Oktober 2026',
+    'blog.article.lavori-strada-wartau-plattis.excerpt': 'In Wartau beginnen die Arbeiten an der Hauptstrasse am 19.',
+    'blog.article.lavori-strada-wartau-plattis.imageAlt': 'Bauarbeiten an der Hauptstrasse im Abschnitt Plattis in Wartau',
 };
 
 export default blogMetaCantonSgDe;

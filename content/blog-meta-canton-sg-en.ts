@@ -15,6 +15,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.spital-grabs-haus-o-vertice.title': 'Spital Grabs: Haus O reaches the highest point',
     'blog.article.spital-grabs-haus-o-vertice.excerpt': 'In September 2026, Haus O of Spital Grabs reached its highest point. Haus S was expanded: new spaces for radiology and oncology, work continuing until 2028.',
     'blog.article.spital-grabs-haus-o-vertice.imageAlt': 'Construction of the new Haus O at Spital Grabs in the Canton of St. Gallen.',
+    'blog.article.lavori-strada-wartau-plattis.title': 'Roadworks on Hauptstrasse in Wartau from October 19, 2026',
+    'blog.article.lavori-strada-wartau-plattis.excerpt': 'In Wartau, work on Hauptstrasse will begin on October 19, 2026: in the Plattis section, the drainage pipes and road surface will be renewed.',
+    'blog.article.lavori-strada-wartau-plattis.imageAlt': 'Roadworks on the Hauptstrasse in the Plattis section of Wartau',
 };
 
 export default blogMetaCantonSgEn;

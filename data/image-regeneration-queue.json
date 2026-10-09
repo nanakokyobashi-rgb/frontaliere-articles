@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T20:04:15.651Z",
       "lastFailureAt": "2026-10-09T20:04:15.651Z"
+    },
+    {
+      "articleId": "lavori-strada-wartau-plattis",
+      "title": "Lavori sulla Hauptstrasse a Wartau dal 19 ottobre 2026",
+      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T20:23:10.536Z",
+      "lastFailureAt": "2026-10-09T20:23:10.536Z"
     }
   ]
 }
