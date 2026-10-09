@@ -167,10 +167,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Canton Berna invita i familiari curanti a uno scambio e a un incontro: il titolo presenta l'iniziativa e il pubblico a cui si rivolge nel Canton Berna.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-berna.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-berna-familiari-curanti-incontro.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Familiari curanti si incontrano nel Canton Berna"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-09T06:53:22+00:00",
       "dateModified": "2026-10-09T06:53:22+00:00",

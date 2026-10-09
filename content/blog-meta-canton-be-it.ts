@@ -17,7 +17,7 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Gru da cantiere caduta su ferrovia e strada a Ipsach',
     'blog.article.berna-familiari-curanti-incontro.title': 'Berna invita i familiari curanti a un incontro',
     'blog.article.berna-familiari-curanti-incontro.excerpt': 'Il Canton Berna invita i familiari curanti a uno scambio e a un incontro.',
-    'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Familiari curanti si incontrano nel Canton Berna',
+    'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonBeIt;

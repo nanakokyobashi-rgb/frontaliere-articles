@@ -17,7 +17,7 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Eingeknickter Arbeitskran über Bahnlinie und Strasse in Ipsach',
     'blog.article.berna-familiari-curanti-incontro.title': 'Bern lädt pflegende Angehörige zu einem Treffen ein',
     'blog.article.berna-familiari-curanti-incontro.excerpt': 'Der Kanton Bern lädt pflegende Angehörige zu einem Austausch und einem Treffen ein.',
-    'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Betreuende Angehörige treffen sich im Kanton Bern',
+    'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonBeDe;

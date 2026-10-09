@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 247,
+  "assetCount": 249,
   "assets": [
     {
       "schema": 1,
@@ -8898,6 +8898,92 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic Alpine mobility illustration with train, bus, ferry, and mountain setting; no text, logos, or recognizable people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-concerti-borgo-musicale",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "0a8f93c93619969005b536e0b0d61b8673ec324cf54d2a284813c9beaae90615",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "28b741b76f7720c50ed92d8c9c489ee29c957da11cc8da29703aab3e4560f76d",
+      "bytes": 186668,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-09T11:25:44.925Z",
+      "verifiedAt": "2026-10-09T11:25:53.376Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-concerti-borgo-musicale.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic illustration of a Ticino-like lakeside landscape with a train and three concert stages; no people, text, logos, or signage."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-berna-familiari-curanti-incontro",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "268e700b078b6187ae03a963da32a0c4d2403290332ba6761bd62953ff727625",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "dfa5b094f7677502b0f861e27468c5e8de1ffe183a254c69c68eb12952da0cdb",
+      "bytes": 117534,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-09T11:31:40.906Z",
+      "verifiedAt": "2026-10-09T11:31:53.861Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-berna-familiari-curanti-incontro.webp",
+      "area": "Canton BE",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic illustration of a meeting setting in Bern; no readable text, logos, or identifiable faces."
       }
     }
   ]
