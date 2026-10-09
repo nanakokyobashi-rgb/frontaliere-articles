@@ -26641,7 +26641,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'economia-svizzera-fiducia-calante',
     category: 'novita',
     date: '2026-10-09T15:01:33.936Z',
-    image: '/images/blog/article-fiducia-consumatori-svizzeri-settembre.webp',
+    image: '/images/blog/article-economia-svizzera-fiducia-calante.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

@@ -20,26 +20,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-08T23:26:42.049Z",
       "lastFailureAt": "2026-10-09T12:32:13.228Z"
-    },
-    {
-      "articleId": "economia-svizzera-fiducia-calante",
-      "title": "Fiducia consumatori svizzeri peggiora: prezzi e lavoro",
-      "fallbackImage": "/images/blog/article-fiducia-consumatori-svizzeri-settembre.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T15:01:34.215Z",
-      "lastFailureAt": "2026-10-09T15:01:34.215Z"
-    },
-    {
-      "articleId": "gestione-emergenze-ticino-lombardia",
-      "title": "Gestione emergenze: si chiude Extramuro tra Ticino e Lombardia",
-      "fallbackImage": "/images/blog/article-carburanti-rincari-confine-ticino.webp",
-      "reason": "All image providers failed for article-gestione-emergenze-ticino-lombardia: openai-codex (vision gate rejected image: Relevant generic editorial illustration, but it contains multi",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T15:24:27.440Z",
-      "lastFailureAt": "2026-10-09T15:24:27.440Z"
     }
   ]
 }

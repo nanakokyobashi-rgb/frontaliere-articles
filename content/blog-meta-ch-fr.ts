@@ -7990,7 +7990,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.midterm-usa-voto-svizzera.imageAlt': 'Illustration générée pour cet article',
     'blog.article.economia-svizzera-fiducia-calante.title': 'La confiance des consommateurs suisses se détériore : prix et emploi',
     'blog.article.economia-svizzera-fiducia-calante.excerpt': 'En septembre, l\'indice SECO est tombé à -35,8 points Le chiffre a baissé de 3,0 points par rapport à août La sécurité de l\'emploi est tombée à -60,6 C\'est la première',
-    'blog.article.economia-svizzera-fiducia-calante.imageAlt': 'Un consommateur suisse inquiet regarde les prix dans un supermarché, reflétant l\'incertitude économique et l\'augmentation du coût de la vie.',
+    'blog.article.economia-svizzera-fiducia-calante.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;

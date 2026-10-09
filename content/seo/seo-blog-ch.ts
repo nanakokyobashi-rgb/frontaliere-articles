@@ -100739,10 +100739,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-fiducia-consumatori-svizzeri-settembre.webp`,
+        "url": `${BASE_URL}/images/blog/article-economia-svizzera-fiducia-calante.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Un consumatore svizzero preoccupato osserva i prezzi in un supermercato, riflettendo l'incertezza economica e l'aumento del costo della vita."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-09T15:01:33+00:00",
       "dateModified": "2026-10-09T15:01:33+00:00",

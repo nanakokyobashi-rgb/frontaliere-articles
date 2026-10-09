@@ -43483,7 +43483,7 @@ const RAW_ARTICLES = [
  id: 'gestione-emergenze-ticino-lombardia',
  category: 'novita',
  date: '2026-10-09T15:24:27.076Z',
- image: '/images/blog/article-carburanti-rincari-confine-ticino.webp',
+ image: '/images/blog/article-gestione-emergenze-ticino-lombardia.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],
