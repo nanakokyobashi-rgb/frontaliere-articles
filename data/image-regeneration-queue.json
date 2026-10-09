@@ -10,16 +10,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-08T23:26:42.049Z",
       "lastFailureAt": "2026-10-09T12:32:13.228Z"
-    },
-    {
-      "articleId": "comunicato-consiglio-stato-ginevra",
-      "title": "Comunicato Consiglio di Stato Ginevra: 7 ottobre 2026",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T16:16:45.047Z",
-      "lastFailureAt": "2026-10-09T16:16:45.047Z"
     }
   ]
 }

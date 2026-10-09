@@ -17,7 +17,7 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustration générée pour cet article',
     'blog.article.comunicato-consiglio-stato-ginevra.title': 'Communiqué du Conseil d\'État de Genève : 7 octobre 2026',
     'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'Le communiqué hebdomadaire du Conseil d\'État du 7 octobre 2026 : le matériel disponible identifie la publication, sans autres détails.',
-    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Scène institutionnelle à Genève un matin d\'octobre.',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonGeFr;

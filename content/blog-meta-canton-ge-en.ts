@@ -17,7 +17,7 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustration generated for this article',
     'blog.article.comunicato-consiglio-stato-ginevra.title': 'Geneva State Council press release: October 7, 2026',
     'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'The weekly press release of the Council of State of October 7, 2026: the available material identifies the publication, without further details.',
-    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Institutional scene in Geneva on an October morning.',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonGeEn;

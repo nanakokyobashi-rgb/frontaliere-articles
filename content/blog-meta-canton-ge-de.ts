@@ -17,7 +17,7 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.comunicato-consiglio-stato-ginevra.title': 'Mitteilung des Genfer Staatsrats: 7. Oktober 2026',
     'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'Die wöchentliche Mitteilung des Staatsrats vom 7.',
-    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Institutionelle Szene in Genf an einem Oktobermorgen.',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonGeDe;
