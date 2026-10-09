@@ -8,7 +8,7 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.lavoro-ar-rav-settembre-2026.imageAlt': 'Regional employment centre in Appenzell Ausserrhoden',
     'blog.article.heiden-tassa-base-rifiuti.title': 'Heiden increases the basic waste fee',
     'blog.article.heiden-tassa-base-rifiuti.excerpt': 'In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.',
-    'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Collection and recycling of municipal waste in the municipality of Heiden.',
+    'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonAppenzelloEn;

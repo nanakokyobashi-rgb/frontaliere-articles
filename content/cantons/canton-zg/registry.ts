@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'scuola-sternmatt-ia-2026',
  category: 'novita',
  date: '2026-10-08T18:01:57.824Z',
- image: '/images/blog/intelligenza-artificiale-cardiologia-2026-2.webp',
+ image: '/images/blog/article-scuola-sternmatt-ia-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['ZG'],

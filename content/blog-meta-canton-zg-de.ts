@@ -14,7 +14,7 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.scuola-sternmatt-ia-2026.title': 'Schule Sternmatt 1: KI prägt das Schuljahr 2026/27',
     'blog.article.scuola-sternmatt-ia-2026.excerpt': 'Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.',
-    'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Schule Sternmatt 1: Künstliche Intelligenz prägt das Schuljahr 2026/27',
+    'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonZgDe;

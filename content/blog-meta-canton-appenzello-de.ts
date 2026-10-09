@@ -8,7 +8,7 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.lavoro-ar-rav-settembre-2026.imageAlt': 'Regionales Arbeitsvermittlungszentrum in Appenzell Ausserrhoden',
     'blog.article.heiden-tassa-base-rifiuti.title': 'Heiden erhöht die Kehrichtgrundgebühr',
     'blog.article.heiden-tassa-base-rifiuti.excerpt': 'In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.',
-    'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Sammlung und Verwertung von Siedlungsabfällen in der Gemeinde Heiden.',
+    'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonAppenzelloDe;

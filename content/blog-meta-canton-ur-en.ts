@@ -8,7 +8,7 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.uri-misure-energia-clima.imageAlt': 'Canton Uri landscape associated with energy measures for climate protection',
     'blog.article.uri-chiusura-passhoehe.title': 'Passhöhe-Urnerboden: nighttime road closure',
     'blog.article.uri-chiusura-passhoehe.excerpt': 'Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.',
-    'blog.article.uri-chiusura-passhoehe.imageAlt': 'Cantonal road between Passhöhe and Urnerboden during paving work',
+    'blog.article.uri-chiusura-passhoehe.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonUrEn;

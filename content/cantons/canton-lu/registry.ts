@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'progetto-latte-climatico',
  category: 'novita',
  date: '2026-10-09T00:54:58.572Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-progetto-latte-climatico.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['LU'],

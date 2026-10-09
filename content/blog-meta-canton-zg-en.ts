@@ -14,7 +14,7 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Illustration generated for this article',
     'blog.article.scuola-sternmatt-ia-2026.title': 'Sternmatt School 1: AI marks 2026/27',
     'blog.article.scuola-sternmatt-ia-2026.excerpt': 'The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.',
-    'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Sternmatt 1 school: artificial intelligence at the centre of the 2026/27 school year',
+    'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonZgEn;

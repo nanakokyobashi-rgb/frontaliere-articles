@@ -2,16 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "benzina-grigioni-deviazione",
-      "title": "Prezzi benzina in Grigioni: quando conviene deviare",
-      "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
-      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (vision gate rejected image: Generic illustrated Alpine road-fork scene relevant to detouring in Canton GR; the car has a visible circular manufacturer badge/l",
-      "status": "queued",
-      "requestedAt": "2026-10-07T06:53:48.101Z",
-      "lastFailureAt": "2026-10-09T10:03:43.562Z",
-      "failureCount": 2
-    },
-    {
       "articleId": "costi-cure-domicilio-ticino-2026",
       "title": "Ticino: dal 2026 si pagherà per le cure a domicilio",
       "fallbackImage": "/images/places/lugano-view.webp",
@@ -32,74 +22,14 @@
       "lastFailureAt": "2026-10-09T09:41:26.693Z"
     },
     {
-      "articleId": "treno-foliage-locarno-2026",
-      "title": "Treno del Foliage 2026 tra Locarno e Domodossola",
-      "fallbackImage": "/images/blog/article-treno-foliage-locarno-domodossola.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-08T16:34:16.930Z",
-      "lastFailureAt": "2026-10-09T10:06:47.169Z"
-    },
-    {
-      "articleId": "scuola-sternmatt-ia-2026",
-      "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
-      "fallbackImage": "/images/blog/intelligenza-artificiale-cardiologia-2026-2.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T18:01:57.848Z",
-      "lastFailureAt": "2026-10-08T18:01:57.848Z"
-    },
-    {
-      "articleId": "richemont-montblanc-tagli",
-      "title": "Richemont: a Montblanc 17 trasferimenti e 6 licenziamenti",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T18:19:40.012Z",
-      "lastFailureAt": "2026-10-08T18:19:40.012Z"
-    },
-    {
-      "articleId": "heiden-tassa-base-rifiuti",
-      "title": "Heiden aumenta la tassa base sui rifiuti",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T18:18:38.698Z",
-      "lastFailureAt": "2026-10-08T18:18:38.698Z"
-    },
-    {
       "articleId": "cardano-al-campo-minorenne-arresto",
       "title": "Cardano al Campo: minorenne arrestato con hashish",
       "fallbackImage": "/images/blog/article-domodossola-arresto-hashish-stazione.webp",
-      "reason": "All image providers failed for article-cardano-al-campo-minorenne-arresto: openai-codex (vision gate rejected image: Original generic illustration with clearly recognizable foregro",
+      "reason": "All image providers failed for article-cardano-al-campo-minorenne-arresto: openai-codex (vision gate rejected image: Original generic illustration with a clear back-facing foreground person; no readable text, logos, or identifiable face.); ",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-08T23:26:42.049Z",
-      "lastFailureAt": "2026-10-08T23:26:42.049Z"
-    },
-    {
-      "articleId": "uri-chiusura-passhoehe",
-      "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
-      "fallbackImage": "/images/blog/article-strada-calanca-chiusura-preventiva.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T23:39:16.220Z",
-      "lastFailureAt": "2026-10-08T23:39:16.220Z"
-    },
-    {
-      "articleId": "progetto-latte-climatico",
-      "title": "Progetto latte: Nestlé ed Emmi puntano all'estensione",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T00:54:58.589Z",
-      "lastFailureAt": "2026-10-09T00:54:58.589Z"
+      "lastFailureAt": "2026-10-09T11:08:33.609Z"
     },
     {
       "articleId": "concerti-borgo-musicale",

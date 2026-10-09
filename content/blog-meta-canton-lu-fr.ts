@@ -14,7 +14,7 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.kriens-torna-in-deficit.imageAlt': 'Vue urbaine de Kriens dans le canton de Lucerne sur les finances communales',
     'blog.article.progetto-latte-climatico.title': 'Projet laitier : Nestlé et Emmi misent sur l\'extension',
     'blog.article.progetto-latte-climatico.excerpt': 'Depuis 2022, KlimaStaR Milch a réduit de 23 % les aliments comestibles et de 8 % les émissions par kg.',
-    'blog.article.progetto-latte-climatico.imageAlt': 'Éleveur avec tablette dans une étable de Suisse centrale, parmi des vaches laitières.',
+    'blog.article.progetto-latte-climatico.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonLuFr;

@@ -14,7 +14,7 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.kriens-torna-in-deficit.imageAlt': 'Stadtansicht von Kriens im Kanton Luzern zum Thema Gemeindefinanzen',
     'blog.article.progetto-latte-climatico.title': 'Milchprojekt: Nestlé und Emmi streben eine Ausweitung an',
     'blog.article.progetto-latte-climatico.excerpt': 'Seit 2022 hat KlimaStaR Milch die für die menschliche Ernährung geeigneten Futtermittel um 23% und die Emissionen pro kg um 8% reduziert.',
-    'blog.article.progetto-latte-climatico.imageAlt': 'Landwirt mit Tablet in einem Milchviehstall in der Zentralschweiz.',
+    'blog.article.progetto-latte-climatico.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonLuDe;

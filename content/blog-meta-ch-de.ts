@@ -7939,7 +7939,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.forniture-cemento-aumento-terzo-trimestre.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.richemont-montblanc-tagli.title': 'Richemont: bei Montblanc 17 Versetzungen und 6 Entlassungen',
     'blog.article.richemont-montblanc-tagli.excerpt': 'Richemont versetzt 17 Mitarbeitende von Montblanc Sechs Mitarbeitende wurden entlassen Unia weist auf die Krise der Uhrenindustrie hin Begriff Wert Unternehmen',
-    'blog.article.richemont-montblanc-tagli.imageAlt': 'Uhrenatelier in Le Locle vor dem Hintergrund der Branchenkrise',
+    'blog.article.richemont-montblanc-tagli.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.svizzera-soldi-delusione-lavoro.title': 'Wer nur wegen des Geldes in die Schweiz kommt, wird enttäuscht',
     'blog.article.svizzera-soldi-delusione-lavoro.excerpt': '80% der offenen Stellen werden mit lokalem Personal besetzt.',
     'blog.article.svizzera-soldi-delusione-lavoro.imageAlt': 'Berufstätiger arbeitet zu Hause mit Seeblick in der Schweiz',

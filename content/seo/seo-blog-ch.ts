@@ -100076,10 +100076,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-richemont-montblanc-tagli.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Atelier di orologeria a Le Locle nel quadro della crisi del settore"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T18:19:39+00:00",
       "dateModified": "2026-10-08T18:19:39+00:00",

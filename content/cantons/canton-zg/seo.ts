@@ -128,10 +128,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "La scuola Sternmatt 1 presenta il nuovo orientamento per il 2026/27: l'intelligenza artificiale sarà centrale, con un uso responsabile della tecnologia",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/intelligenza-artificiale-cardiologia-2026-2.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-scuola-sternmatt-ia-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Scuola Sternmatt 1: l'intelligenza artificiale al centro dell'anno 2026/27"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T18:01:57+00:00",
       "dateModified": "2026-10-08T18:01:57+00:00",

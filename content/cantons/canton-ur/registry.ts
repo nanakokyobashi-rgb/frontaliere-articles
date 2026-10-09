@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'uri-chiusura-passhoehe',
  category: 'pratico',
  date: '2026-10-08T23:39:16.200Z',
- image: '/images/blog/article-strada-calanca-chiusura-preventiva.webp',
+ image: '/images/blog/article-uri-chiusura-passhoehe.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['UR'],

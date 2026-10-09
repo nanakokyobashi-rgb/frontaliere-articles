@@ -14,7 +14,7 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Illustration générée pour cet article',
     'blog.article.scuola-sternmatt-ia-2026.title': 'École Sternmatt 1 : l’IA marque l’année 2026/27',
     'blog.article.scuola-sternmatt-ia-2026.excerpt': 'L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.',
-    'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'École Sternmatt 1: l\'intelligence artificielle au centre de l\'année scolaire 2026/27',
+    'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonZgFr;

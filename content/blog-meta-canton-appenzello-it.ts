@@ -8,7 +8,7 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.lavoro-ar-rav-settembre-2026.imageAlt': 'Centro regionale di collocamento nel Canton Appenzello Esterno',
     'blog.article.heiden-tassa-base-rifiuti.title': 'Heiden aumenta la tassa base sui rifiuti',
     'blog.article.heiden-tassa-base-rifiuti.excerpt': 'A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l\'anno per nucleo familiare e impresa.',
-    'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Raccolta e valorizzazione dei rifiuti urbani nel Comune di Heiden.',
+    'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

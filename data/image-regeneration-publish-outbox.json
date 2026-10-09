@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "benzina-grigioni-deviazione",
+      "section": "canton-gr"
+    },
+    {
+      "articleId": "treno-foliage-locarno-2026",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "scuola-sternmatt-ia-2026",
+      "section": "canton-zg"
+    },
+    {
+      "articleId": "heiden-tassa-base-rifiuti",
+      "section": "canton-appenzello"
+    },
+    {
+      "articleId": "richemont-montblanc-tagli",
+      "section": "svizzera"
+    },
+    {
+      "articleId": "uri-chiusura-passhoehe",
+      "section": "canton-ur"
+    },
+    {
+      "articleId": "progetto-latte-climatico",
+      "section": "canton-lu"
+    }
+  ]
+}

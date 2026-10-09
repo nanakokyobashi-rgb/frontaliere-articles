@@ -26466,7 +26466,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'richemont-montblanc-tagli',
     category: 'novita',
     date: '2026-10-08T18:19:39.642Z',
-    image: '/images/places/lugano-view.webp',
+    image: '/images/blog/article-richemont-montblanc-tagli.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

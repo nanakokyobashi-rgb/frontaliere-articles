@@ -8,7 +8,7 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.uri-misure-energia-clima.imageAlt': 'Paesaggio del Canton Uri associato alle misure energetiche per la protezione del clima',
     'blog.article.uri-chiusura-passhoehe.title': 'Passhöhe-Urnerboden: chiusura notturna della strada',
     'blog.article.uri-chiusura-passhoehe.excerpt': 'Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.',
-    'blog.article.uri-chiusura-passhoehe.imageAlt': 'Strada cantonale tra Passhöhe e Urnerboden durante i lavori di posa della pavimentazione',
+    'blog.article.uri-chiusura-passhoehe.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonUrIt;

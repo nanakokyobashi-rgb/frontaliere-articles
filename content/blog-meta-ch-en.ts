@@ -7939,7 +7939,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.forniture-cemento-aumento-terzo-trimestre.imageAlt': 'Illustration generated for this article',
     'blog.article.richemont-montblanc-tagli.title': 'Richemont: 17 transfers and 6 layoffs at Montblanc',
     'blog.article.richemont-montblanc-tagli.excerpt': 'Richemont transfers 17 Montblanc employees Six employees have been dismissed Unia reports the crisis in the watchmaking industry Deadline Value Company',
-    'blog.article.richemont-montblanc-tagli.imageAlt': 'Watchmaking workshop in Le Locle amid the industry\'s crisis',
+    'blog.article.richemont-montblanc-tagli.imageAlt': 'Illustration generated for this article',
     'blog.article.svizzera-soldi-delusione-lavoro.title': 'Anyone who comes to Switzerland just for the money will be disappointed.',
     'blog.article.svizzera-soldi-delusione-lavoro.excerpt': '80% of the vacant positions are filled by local staff.',
     'blog.article.svizzera-soldi-delusione-lavoro.imageAlt': 'Professional working from home with lake view in Switzerland',

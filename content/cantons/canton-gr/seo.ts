@@ -55,10 +55,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "In Grigioni, prezzi della benzina a livelli record: il calcolatore mostra quando il risparmio giustifica una deviazione verso una stazione più economica.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/benzina-diesel-prezzi-calano.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-benzina-grigioni-deviazione.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Auto davanti a un distributore lungo una strada dei Grigioni"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T06:53:48+00:00",
       "dateModified": "2026-10-07T06:53:48+00:00",

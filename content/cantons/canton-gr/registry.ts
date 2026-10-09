@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'benzina-grigioni-deviazione',
  category: 'pratico',
  date: '2026-10-07T06:53:48.091Z',
- image: '/images/blog/benzina-diesel-prezzi-calano.webp',
+ image: '/images/blog/article-benzina-grigioni-deviazione.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GR'],
