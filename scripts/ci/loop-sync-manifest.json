@@ -5875,7 +5875,7 @@
     {
       "path": "generator/scripts/regenerate-queued-covers.mjs",
       "mode": "corpus-only",
-      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: riconcilia all'avvio le copertine gia' soddisfatte, seleziona prima le voci mai tentate e poi quelle con meno fallimenti, applica il percorso governato, aggiorna registry, blocco `ImageObject` SEO, `imageAlt` localizzati, hero e thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
+      "reason": "Consumer del ledger `data/image-regeneration-queue.json`: riconcilia all'avvio le copertine gia' soddisfatte, seleziona la richiesta con `requestedAt` piu' vecchio con `failureCount` come solo spareggio deterministico, applica il percorso governato, aggiorna registry, blocco `ImageObject` SEO, `imageAlt` localizzati, hero e thumbnail in transazione e conserva le voci fallite. E' un workflow del corpus senza gemello sul sito.",
       "baseline": {
         "site": null,
         "corpus": null,
