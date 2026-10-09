@@ -95,6 +95,8 @@ on:
       - 'content/**'
       # An image arriving in a later commit is itself a publication event for
       # every registry article that declares it (issue #2448).
+      # A queued-cover drain is the explicit-outbox exception; its push is
+      # filtered by the shared commit marker before this workflow publishes.
       - 'public/images/**'
   workflow_dispatch:
     inputs:
@@ -165,6 +167,8 @@ jobs:
           ARTICLE_ID_INPUT: ${{ inputs.article_id }}
           SECTION_INPUT: ${{ inputs.section }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          EVENT_NAME: ${{ github.event_name }}
+          COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
@@ -172,6 +176,15 @@ jobs:
           groups='{}'
           body_section_seen=''
           write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
+          if [ "$EVENT_NAME" = 'push' ] && [ "$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)" = 'true' ]; then
+            echo 'cover-drain push is handled by the explicit publisher outbox dispatch; skipping automatic article publishing'
+            write_output 'skip=true'
+            write_output 'matrix=[]'
+            write_output 'any=false'
+            write_output 'dry=false'
+            write_output 'skip_reason=cover-drain-explicit-publisher'
+            exit 0
+          fi
           before="${PUSH_BEFORE:-}"
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
 
