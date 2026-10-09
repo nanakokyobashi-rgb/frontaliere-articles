@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-comunicato-consiglio-stato-ginevra.webp",
+      "sha256": "5191f3397e8785efe9d626a586c370a0094db83741eeb5037efc3bf422cccd6f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-comunicato-consiglio-stato-ginevra-480w.webp",
+      "sha256": "174fdf5aacc664093e7ec25a74a6a17027032c9d0eee93a4fb41ffac93ad06eb"
+    }
+  ]
 }
