@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-sussidi-malattia-lavoro-vaud.webp",
+      "sha256": "a1e752042371589303b69c95cad388a32c44065cd6175e1e51910540fea6a72b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-sussidi-malattia-lavoro-vaud-480w.webp",
+      "sha256": "b5255c021f3414399a2e7f38f1b22f0d8388b9e7417855ab190f6200e05a32c6"
+    }
+  ]
 }
