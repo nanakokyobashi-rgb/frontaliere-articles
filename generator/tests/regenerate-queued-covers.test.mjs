@@ -662,7 +662,7 @@ test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo'
   assert.match(NO_TEXT_IMAGE_RETRY_HINT, /lettering/);
 });
 
-test('non ritenta le voci failed in schedule e le riapre solo con retry esplicito', async () => {
+test('non ritenta le voci failed senza retry esplicito e il retry manuale e immediato', async () => {
   const root = tempRoot();
   try {
     const articleId = 'already-failed';
@@ -703,6 +703,53 @@ test('non ritenta le voci failed in schedule e le riapre solo con retry esplicit
     assert.deepEqual(retried.requeued, [articleId]);
     assert.equal(calls, 1);
     assert.equal(JSON.parse(fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8')).items.length, 0);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il retry automatico delle voci failed aspetta la finestra dall ultimo fallimento', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'stale-failed-cover';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [{
+      ...item(articleId, '2026-10-07T09:00:00.000Z'),
+      status: 'failed',
+      failureCount: 3,
+      lastFailureAt: '2026-10-09T08:00:00.000Z',
+    }]);
+
+    let calls = 0;
+    const generate = async (...args) => {
+      calls += 1;
+      return fakeCover(root)(...args);
+    };
+    const tooSoon = await drain({
+      root,
+      limit: 1,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-09T13:59:59.000Z',
+      generateCover: generate,
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(tooSoon.drained, 0);
+    assert.deepEqual(tooSoon.requeued, []);
+    assert.equal(calls, 0);
+
+    const eligible = await drain({
+      root,
+      limit: 1,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-09T14:00:00.000Z',
+      generateCover: generate,
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(eligible.drained, 1);
+    assert.deepEqual(eligible.requeued, [articleId]);
+    assert.equal(calls, 1);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -1052,6 +1099,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /UPSTREAM_CONCLUSION: \$\{\{ github\.event\.workflow_run\.conclusion \}\}/u);
   assert.match(workflow, /UPSTREAM_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/u);
   assert.match(workflow, /UPSTREAM_HEAD_COMMIT_MESSAGE: \$\{\{ github\.event\.workflow_run\.head_commit\.message \}\}/u);
+  assert.match(workflow, /EVENT_NAME: \$\{\{ github\.event_name \}\}/u);
   assert.match(
     workflow,
     /case "\$\{UPSTREAM_WORKFLOW:-\}" in[\s\S]*'Generation health watchdog'[\s\S]*if \[ "\$\{UPSTREAM_EVENT:-\}" != 'schedule' \]; then[\s\S]*watchdog event is \$\{UPSTREAM_EVENT:-unknown\}/u,
@@ -1064,6 +1112,8 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.doesNotMatch(workflow, /UPSTREAM_EVENT:-\}"[^\n]*workflow_dispatch/);
   assert.match(workflow, /watchdog_max_age_hours=.*COVER_QUEUE_MAX_AGE_HOURS/u);
   assert.match(workflow, /recovery_age_hours=\$\(\(watchdog_max_age_hours - 2\)\)/u);
+  assert.match(workflow, /--retry-failed-after-hours "\$retry_after_hours"/u);
+  assert.match(workflow, /COVER_QUEUE_MAX_AGE_HOURS/);
   assert.match(workflow, /needs: recovery_gate\s*\n\s+if: needs\.recovery_gate\.outputs\.should_drain == 'true'/u);
   const clock = workflow.indexOf('name: Start cover drain clock before checkout');
   const checkout = workflow.indexOf('name: Checkout\n');

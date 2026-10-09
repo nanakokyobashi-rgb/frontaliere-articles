@@ -5,7 +5,10 @@ run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
 # ora e si ferma da sola quando items[] e' vuoto e l'outbox publisher e'
 # vuoto. Il cron resta il backstop per gli eventi workflow_run persi; sia il
 # generation-health-watchdog sia il completamento del generatore principale
-# possono riaprire il drain quando la coda si avvicina alla soglia di eta'.
+# possono riaprire il drain quando la coda si avvicina alla soglia di eta'. Le
+# voci failed vengono riaperte dalle run automatiche solo dopo che l'ultimo
+# tentativo ha superato la soglia del watchdog; il dispatch manuale puo'
+# forzare un retry immediato.
 # I commit prodotti dal drain stesso sono esclusi dal wake-up del generatore:
 # altrimenti il completamento del generatore riaprirebbe il drain in una catena
 # autoreferenziale. Solo gli eventi automatici sono wake-up: una dispatch
@@ -345,6 +348,7 @@ jobs:
         if: steps.pre_ack.outcome == 'success'
         env:
           CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
+          EVENT_NAME: ${{ github.event_name }}
           LIMIT_INPUT: ${{ inputs.limit || '10' }}
           RETRY_FAILED: ${{ inputs.retry_failed || false }}
           SUMMARY_FILE: ${{ runner.temp }}/queued-cover-summary.json
@@ -365,6 +369,11 @@ jobs:
           fi
           retry_args=()
           if [ "$RETRY_FAILED" = 'true' ]; then retry_args+=(--retry-failed); fi
+          if [ "$RETRY_FAILED" != 'true' ] && { [ "$EVENT_NAME" = 'schedule' ] || [ "$EVENT_NAME" = 'workflow_run' ]; }; then
+            retry_after_hours="$(node --input-type=module -e "import('./scripts/ci/scan-generation-health.mjs').then(({ COVER_QUEUE_MAX_AGE_HOURS }) => process.stdout.write(String(COVER_QUEUE_MAX_AGE_HOURS)))")"
+            retry_args+=(--retry-failed --retry-failed-after-hours "$retry_after_hours")
+            echo "automatic stale-failure recovery enabled after ${retry_after_hours}h"
+          fi
           case "$LIMIT_INPUT" in
             ''|*[!0-9]*)
               echo "::error::limit must be an integer"
@@ -667,7 +676,7 @@ jobs:
               echo "- Residue: **$residual**"
               echo "- Fallite in questa run: **$failed**"
               echo "- Marcate dopo almeno tre fallimenti: **$marked**"
-              echo "- Riaccodate manualmente: **$requeued**"
+              echo "- Riaccodate per retry: **$requeued**"
               if [ "$marked" -gt 0 ]; then
                 echo "- ⚠️ ID marcati: $(jq -r '(.marked // []) | join(", ")' "$SUMMARY_FILE")"
               fi

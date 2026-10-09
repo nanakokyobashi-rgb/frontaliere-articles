@@ -200,6 +200,15 @@ function failureCountOf(item) {
   return Number.isFinite(requestedAt) && Number.isFinite(lastFailureAt) && lastFailureAt > requestedAt ? 1 : 0;
 }
 
+function failedRetryIsEligible(item, nowMs, retryFailedAfterHours) {
+  if (retryFailedAfterHours === null) return true;
+  const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
+  const cooldownMs = retryFailedAfterHours * 3_600_000;
+  return Number.isFinite(nowMs)
+    && Number.isFinite(lastFailureAt)
+    && nowMs - lastFailureAt >= cooldownMs;
+}
+
 function queueAttemptSort(a, b) {
   // The queue SLO is about request age. Sorting by failure count first lets a
   // stream of fresh, never-attempted items starve an older item forever when
@@ -488,9 +497,17 @@ export async function drainQueuedCovers({
   decodeThumbnail = decodeWebpThumbnail,
   registryFiles,
   retryFailed = false,
+  retryFailedAfterHours = null,
 } = {}) {
   return await withImageRegenerationQueueLockAsync(root, async ({ read, write }) => {
   const boundedLimit = parseLimit(limit);
+  if (retryFailedAfterHours !== null
+    && (!Number.isFinite(Number(retryFailedAfterHours)) || Number(retryFailedAfterHours) <= 0)) {
+    throw new Error('retryFailedAfterHours must be a positive number');
+  }
+  const retryAfterHours = retryFailedAfterHours === null ? null : Number(retryFailedAfterHours);
+  const nowValue = typeof now === 'function' ? now() : now;
+  const nowMs = Date.parse(String(nowValue || ''));
   const queue = read();
   const canonicalQueue = canonicalizeImageRegenerationQueue(queue);
   const hadDuplicateArticleIds = canonicalQueue.items.length !== queue.items.length;
@@ -509,7 +526,7 @@ export async function drainQueuedCovers({
   const requeued = [];
   if (retryFailed) {
     for (const item of queue.items) {
-      if (item.status !== 'failed') continue;
+      if (item.status !== 'failed' || !failedRetryIsEligible(item, nowMs, retryAfterHours)) continue;
       item.status = 'queued';
       item.failureCount = 0;
       requeued.push(item.articleId);
@@ -517,7 +534,7 @@ export async function drainQueuedCovers({
     if (requeued.length > 0) write(queue);
   }
   const selected = queue.items
-    .filter((item) => retryFailed || item.status !== 'failed')
+    .filter((item) => item.status !== 'failed')
     .map((item, index) => ({ item, index }))
     .sort(queueAttemptSort)
     .slice(0, boundedLimit)
@@ -610,6 +627,7 @@ function parseArgs(argv) {
     summary: null,
     root: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..'),
     retryFailed: false,
+    retryFailedAfterHours: null,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -617,6 +635,7 @@ function parseArgs(argv) {
     else if (arg === '--summary') options.summary = argv[++index];
     else if (arg === '--root') options.root = path.resolve(argv[++index]);
     else if (arg === '--retry-failed') options.retryFailed = true;
+    else if (arg === '--retry-failed-after-hours') options.retryFailedAfterHours = Number(argv[++index]);
     else throw new Error(`unknown argument: ${arg}`);
   }
   if (options.summary === '') throw new Error('--summary requires a file path');
