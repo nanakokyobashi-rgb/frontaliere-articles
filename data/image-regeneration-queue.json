@@ -2,16 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "costi-cure-domicilio-ticino-2026",
-      "title": "Ticino: dal 2026 si pagherà per le cure a domicilio",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-costi-cure-domicilio-ticino-2026: openai-codex (vision gate rejected image: Original illustrative Ticino lakeside scene, but it includes medical signage and an emblem on the tote bag.); gemini (Gemini ",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-07T23:29:33.847Z",
-      "lastFailureAt": "2026-10-09T08:25:48.499Z"
-    },
-    {
       "articleId": "mercato-lavoro-ia-svizzera",
       "title": "Mercato lavoro IA Svizzera: +32% in un anno",
       "fallbackImage": "/images/blog/mercato-lavoro-svizzera-giugno-2026.webp",

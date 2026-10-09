@@ -2930,7 +2930,7 @@ const RAW_ARTICLES = [
  id: 'costi-cure-domicilio-ticino-2026',
  category: 'novita',
  date: '2026-03-07T10:53:30.400Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-costi-cure-domicilio-ticino-2026.webp',
  hasCalculator: true,
  canton: ['TI'],
  authorSlug: 'marco-ferrari',
