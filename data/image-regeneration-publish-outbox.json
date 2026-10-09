@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "cardano-al-campo-minorenne-arresto",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "spesa-famiglie-inflazione",
+      "section": "svizzera"
+    },
+    {
+      "articleId": "mastercard-pagamenti-rete-assente",
+      "section": "svizzera"
+    },
+    {
+      "articleId": "lavori-strada-wartau-plattis",
+      "section": "canton-sg"
+    }
+  ]
+}

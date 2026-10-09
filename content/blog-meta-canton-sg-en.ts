@@ -17,7 +17,7 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.spital-grabs-haus-o-vertice.imageAlt': 'Construction of the new Haus O at Spital Grabs in the Canton of St. Gallen.',
     'blog.article.lavori-strada-wartau-plattis.title': 'Roadworks on Hauptstrasse in Wartau from October 19, 2026',
     'blog.article.lavori-strada-wartau-plattis.excerpt': 'In Wartau, work on Hauptstrasse will begin on October 19, 2026: in the Plattis section, the drainage pipes and road surface will be renewed.',
-    'blog.article.lavori-strada-wartau-plattis.imageAlt': 'Roadworks on the Hauptstrasse in the Plattis section of Wartau',
+    'blog.article.lavori-strada-wartau-plattis.imageAlt': 'Illustration generated for this article',
     'blog.article.hsg-spin-off-ufficiali.title': 'HSG in St. Gallen: over 170 official spin-offs',
     'blog.article.hsg-spin-off-ufficiali.excerpt': 'HSG supports students in founding companies and presents some of the more than 170 official HSG spin-offs.',
     'blog.article.hsg-spin-off-ufficiali.imageAlt': 'Students discuss new ventures on the HSG campus in St. Gallen',

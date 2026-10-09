@@ -2,16 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "cardano-al-campo-minorenne-arresto",
-      "title": "Cardano al Campo: minorenne arrestato con hashish",
-      "fallbackImage": "/images/blog/article-domodossola-arresto-hashish-stazione.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-08T23:26:42.049Z",
-      "lastFailureAt": "2026-10-09T12:32:13.228Z"
-    },
-    {
       "articleId": "unige-natura-equilibrio-mentale",
       "title": "UNIGE: salute mentale, 5-10 ottobre 2026",
       "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
@@ -20,36 +10,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-09T16:43:09.597Z",
       "lastFailureAt": "2026-10-09T17:56:34.550Z"
-    },
-    {
-      "articleId": "spesa-famiglie-inflazione",
-      "title": "Svizzera, consumi in crescita dello 0,9% a settembre",
-      "fallbackImage": "/images/blog/svizzeri-spesa-crescita-rallenta.webp",
-      "reason": "All image providers failed for article-spesa-famiglie-inflazione: openai-codex (vision gate rejected image: Generic Swiss shopping scene, but multiple recognizable human faces and",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T18:30:40.470Z",
-      "lastFailureAt": "2026-10-09T18:30:40.470Z"
-    },
-    {
-      "articleId": "mastercard-pagamenti-rete-assente",
-      "title": "Mastercard: pagamenti senza internet dal 2027",
-      "fallbackImage": "/images/blog/rientro-in-svizzera-senza-lavoro-guida.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T20:04:15.651Z",
-      "lastFailureAt": "2026-10-09T20:04:15.651Z"
-    },
-    {
-      "articleId": "lavori-strada-wartau-plattis",
-      "title": "Lavori sulla Hauptstrasse a Wartau dal 19 ottobre 2026",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T20:23:10.536Z",
-      "lastFailureAt": "2026-10-09T20:23:10.536Z"
     }
   ]
 }

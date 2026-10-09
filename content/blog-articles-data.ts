@@ -43268,7 +43268,7 @@ const RAW_ARTICLES = [
  id: 'cardano-al-campo-minorenne-arresto',
  category: 'novita',
  date: '2026-10-08T23:26:41.689Z',
- image: '/images/blog/article-domodossola-arresto-hashish-stazione.webp',
+ image: '/images/blog/article-cardano-al-campo-minorenne-arresto.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

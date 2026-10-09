@@ -54,7 +54,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'lavori-strada-wartau-plattis',
  category: 'pratico',
  date: '2026-10-09T20:23:10.514Z',
- image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ image: '/images/blog/article-lavori-strada-wartau-plattis.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SG'],
