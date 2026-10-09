@@ -45,6 +45,14 @@
     "canton-be::https://ajour.ch/story/700743/sbbbauarbeiten-hauptstrasse-bei-ligerz-in-der-nacht-auf-samstag-gesperrt": {
       "section": "canton-be",
       "ts": 1791487210955
+    },
+    "canton-be::https://ajour.ch/story/700772/poursuite-de-la-croissance-de-lconomie-bernoise": {
+      "section": "canton-be",
+      "ts": 1791528336367
+    },
+    "canton-be::https://ajour.ch/story/700727/pensionskasse-des-bundes-best%c3%a4tigt-cyberangriff-sind-bundesr%c3%a4te-betroffen": {
+      "section": "canton-be",
+      "ts": 1791528337488
     }
   }
 }

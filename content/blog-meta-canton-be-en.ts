@@ -15,6 +15,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.ipsach-gru-linea-strada.title': 'Ipsach: crane collapses, railway and road closed',
     'blog.article.ipsach-gru-linea-strada.excerpt': 'A work crane fell onto a building, railway, and road.',
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Fallen construction crane over railway and road in Ipsach',
+    'blog.article.berna-familiari-curanti-incontro.title': 'Bern invites family caregivers to a meeting',
+    'blog.article.berna-familiari-curanti-incontro.excerpt': 'The Canton of Bern invites family caregivers to an exchange and a meeting.',
+    'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Caregiving relatives meet in the canton of Bern',
 };
 
 export default blogMetaCantonBeEn;

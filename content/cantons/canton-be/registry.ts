@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'berna-familiari-curanti-incontro',
+ category: 'novita',
+ date: '2026-10-09T06:53:22.557Z',
+ image: '/images/blog/apprendistato-formazione-professionale-canton-berna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

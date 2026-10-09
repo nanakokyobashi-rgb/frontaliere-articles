@@ -15,6 +15,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.ipsach-gru-linea-strada.title': 'Ipsach : une grue s\'effondre, chemin de fer et route fermés',
     'blog.article.ipsach-gru-linea-strada.excerpt': 'Une grue de chantier est tombée sur un bâtiment, la voie ferrée et la route.',
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Grue de chantier tombée sur voie ferrée et route à Ipsach',
+    'blog.article.berna-familiari-curanti-incontro.title': 'Berne invite les proches aidants à une rencontre',
+    'blog.article.berna-familiari-curanti-incontro.excerpt': 'Le canton de Berne invite les proches aidants à un échange et à une rencontre.',
+    'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Proches aidants se rencontrent dans le canton de Berne',
 };
 
 export default blogMetaCantonBeFr;

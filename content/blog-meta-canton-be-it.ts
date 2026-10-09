@@ -15,6 +15,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.ipsach-gru-linea-strada.title': 'Ipsach: cede una gru, chiuse ferrovia e strada',
     'blog.article.ipsach-gru-linea-strada.excerpt': 'Una gru da lavoro è caduta su edificio, ferrovia e strada.',
     'blog.article.ipsach-gru-linea-strada.imageAlt': 'Gru da cantiere caduta su ferrovia e strada a Ipsach',
+    'blog.article.berna-familiari-curanti-incontro.title': 'Berna invita i familiari curanti a un incontro',
+    'blog.article.berna-familiari-curanti-incontro.excerpt': 'Il Canton Berna invita i familiari curanti a uno scambio e a un incontro.',
+    'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Familiari curanti si incontrano nel Canton Berna',
 };
 
 export default blogMetaCantonBeIt;

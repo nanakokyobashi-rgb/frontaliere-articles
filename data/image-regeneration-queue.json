@@ -370,6 +370,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T06:48:32.689Z",
       "lastFailureAt": "2026-10-09T06:48:32.689Z"
+    },
+    {
+      "articleId": "berna-familiari-curanti-incontro",
+      "title": "Berna invita i familiari curanti a un incontro",
+      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T06:53:22.567Z",
+      "lastFailureAt": "2026-10-09T06:53:22.567Z"
     }
   ]
 }
