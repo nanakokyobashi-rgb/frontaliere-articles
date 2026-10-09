@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/scienza-e-tecnologia/bepicolombo-verso-mercurio-la-missione-nella-fase-cruciale--4057341.html": {
-    "articleId": "bepi-colombo-missione-mercurio",
-    "ts": "2026-09-07T11:30:16.971Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/natura-e-animali/cibo-per-cani-e-gatti-i-cinque-errori-pi%c3%b9-comuni--4052856.html": {
     "articleId": "cibo-per-cani-gatti-errori-comuni",
     "ts": "2026-09-07T11:40:59.584Z",
@@ -2497,6 +2492,11 @@
   "https://lenews.ch/2026/10/09/swiss-parties-submit-referendum-to-preserve-ban-on-new-nuclear-power-plants": {
     "articleId": "referendum-nucleare-svizzera-2027",
     "ts": "2026-10-09T22:31:58.412Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/axpo-avvia-costruzione-di-un-impianto-solare-su-terreno-coltivato/92194182": {
+    "articleId": "axpo-solare-argovia",
+    "ts": "2026-10-09T23:11:14.173Z",
     "keyForm": 2
   }
 }
