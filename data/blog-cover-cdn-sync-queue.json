@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-operazione-upriver-arresti-varese-2026.webp",
+      "sha256": "35112f78ff456d2b1385ca8327fc863e6815ca9fa34f76dcce29e9b27534f5e7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-operazione-upriver-arresti-varese-2026-480w.webp",
+      "sha256": "ce288307eb6e650eb173eec40cb832d825f13bf4f79d5e5cef7755206a35917e"
+    }
+  ]
 }
