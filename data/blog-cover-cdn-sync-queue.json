@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lardi-dotlife-chiusura-alberghi-lugano.webp",
-      "sha256": "fab4cf291f069c5e5e912de9a6386769dd6d6e3eff43ac94b98869f2bebdd68b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lardi-dotlife-chiusura-alberghi-lugano-480w.webp",
-      "sha256": "78e63f9f09c1c5f7e1c55695040e0dc070b254a0c4cc959a3d3d61d3061fb0f5"
-    }
-  ]
+  "items": []
 }
