@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-barfusserplatz-riqualificazione-urbana.webp",
-      "sha256": "b565f9cd7be2c81cacc3c9ef008264a133671e3f36a3154e73f1f3ee167b4964"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-barfusserplatz-riqualificazione-urbana-480w.webp",
-      "sha256": "261db7caa393f8f4cd35c8d2b489fae4ebde675d360976fb9c4cef967d19b98f"
-    }
-  ]
+  "items": []
 }
