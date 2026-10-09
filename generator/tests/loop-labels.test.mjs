@@ -72,6 +72,10 @@ test('ogni label applicata dal ciclo è dichiarata in ensure-loop-labels', () =>
   // riga, perche' e' li' che la sottocomando compare.
   const CREATE_LABEL_RE = /--label[= ]+["']?([A-Za-z][\w:-]*)["']?/g;
   const LIST_CONTEXT_RE = /(?:issue|pr)["']?\s*,?\s*["']?list|(?:issue|pr) list/;
+  // `run-bounded-command.mjs` usa `--label` per il nome del comando nei log,
+  // non per una label GitHub. Il suo uso non e' un'azione del ciclo da
+  // dichiarare in `ensure-loop-labels.mjs`.
+  const NON_ISSUE_LABEL_SOURCES = new Set(['scripts/lib/run-bounded-command.mjs']);
 
   // ── Il punto cieco che e' costato l'intera Fase 0 ────────────────────────
   // Le label che un PROMPT istruisce l'agente ad applicare non hanno forma di
@@ -98,9 +102,11 @@ test('ogni label applicata dal ciclo è dichiarata in ensure-loop-labels', () =>
     const src = fs.readFileSync(f, 'utf8');
     for (const m of src.matchAll(APPLY_RE)) used.add(m[1].toLowerCase());
     for (const m of src.matchAll(CONST_RE)) used.add(m[1].toLowerCase());
-    for (const line of src.split('\n')) {
-      if (LIST_CONTEXT_RE.test(line)) continue;
-      for (const m of line.matchAll(CREATE_LABEL_RE)) used.add(m[1].toLowerCase());
+    if (!NON_ISSUE_LABEL_SOURCES.has(path.relative(ROOT, f))) {
+      for (const line of src.split('\n')) {
+        if (LIST_CONTEXT_RE.test(line)) continue;
+        for (const m of line.matchAll(CREATE_LABEL_RE)) used.add(m[1].toLowerCase());
+      }
     }
     for (const lineMatch of src.matchAll(PROMPT_LABEL_LINE_RE)) {
       for (const m of lineMatch[1].matchAll(PROMPT_TOKEN_RE)) {
