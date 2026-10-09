@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-cyberattacco-casse-pensione-berna.webp",
+      "sha256": "816f5be80a675a137943d94a15df986d06cc5234fa6def4764245515b2db8022"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-cyberattacco-casse-pensione-berna-480w.webp",
+      "sha256": "d9e7479587711cb84b396545ef372aa2bc65b05be0f7786dd7ccaa41a679e153"
+    }
+  ]
 }
