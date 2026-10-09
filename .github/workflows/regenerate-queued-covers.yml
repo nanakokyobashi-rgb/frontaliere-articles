@@ -3,10 +3,12 @@ run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
 
 # La coda e' un recupero dati, non una nuova pipeline editoriale: parte ogni
 # ora e si ferma da sola quando items[] e' vuoto e l'outbox publisher e'
-# vuoto. Il generation-health-watchdog puo' riaprire il drain quando la coda
-# si avvicina alla sua soglia di eta': il cron resta il backstop per gli eventi
-# workflow_run persi. Il dispatch manuale puo' abbassare o alzare il tetto e,
-# solo con una scelta esplicita, riaprire le voci marcate failed.
+# vuoto. Il cron resta il backstop per gli eventi workflow_run persi; il
+# generation-health-watchdog puo' riaprire il drain quando la coda si avvicina
+# alla sua soglia di eta', ma solo dai run schedule: una dispatch manuale del
+# watchdog, anche dry-run, lascia lavorare il cron backstop. Il dispatch
+# manuale del drain puo' abbassare o alzare il tetto e, solo con una scelta
+# esplicita, riaprire le voci marcate failed.
 on:
   schedule:
     # Il drain ha un batch limitato per riservare tempo al publisher: la
@@ -62,6 +64,7 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           WATCHDOG_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          WATCHDOG_EVENT: ${{ github.event.workflow_run.event }}
           QUEUE_FILE: data/image-regeneration-queue.json
         run: |
           set -euo pipefail
@@ -73,6 +76,11 @@ jobs:
           if [ "${WATCHDOG_CONCLUSION:-}" != 'success' ]; then
             echo 'should_drain=false' >> "$GITHUB_OUTPUT"
             echo "watchdog conclusion is ${WATCHDOG_CONCLUSION:-unknown}: cover drain deferred to the next backstop"
+            exit 0
+          fi
+          if [ "${WATCHDOG_EVENT:-}" != 'schedule' ]; then
+            echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+            echo "watchdog event is ${WATCHDOG_EVENT:-unknown}: cover drain deferred to the next backstop"
             exit 0
           fi
           if [ ! -s "$QUEUE_FILE" ]; then
