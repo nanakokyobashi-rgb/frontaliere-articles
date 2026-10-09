@@ -1,4 +1,29 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-nobel-economia-fehr-2026.webp",
+      "sha256": "9b9a7a6b777c7a486d2a57c755c8593202ec10f7889c98693ce7dc29eceab397"
+    },
+    {
+      "path": "public/images/blog/article-obermumpf-strada-sanificazione-2024.webp",
+      "sha256": "ad4715cd4058e73f5d6471f7f59ea80883544d90dc71c2c59fb9150340941369"
+    },
+    {
+      "path": "public/images/blog/article-rancio-valcuvia-statale-394.webp",
+      "sha256": "c880e96148f3703e4674825c7e125b2f7f433105c9ff9fbc641e95416716d5fb"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-nobel-economia-fehr-2026-480w.webp",
+      "sha256": "5bcfb359f4243b3fc049df91fb6758b3f73a6ebb698abe000d47dbbb11a0fc21"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-obermumpf-strada-sanificazione-2024-480w.webp",
+      "sha256": "22c7c82708c7320379c03ad81d811d479e4f87330dc21ce8fab12af46a0e5c13"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-rancio-valcuvia-statale-394-480w.webp",
+      "sha256": "84b72407eac19da0d98292cdb2bd99281b1269580a53b27ad84cde084e33df7b"
+    }
+  ]
 }
