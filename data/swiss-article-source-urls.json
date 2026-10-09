@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1948457/svizzera-action-negozio-20esimo-schattdorf": {
-    "articleId": "action-negozio-20esimo-schattdorf",
-    "ts": "2026-09-07T09:43:03.809Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/economia/speciale-economia/1948085/il-vicere-di-caracas-passato-da-lugano": {
     "articleId": "vicere-caracas-indagine-lugano",
     "ts": "2026-09-07T09:55:33.747Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/ricardo%3a-perdita-di-dati%2c-interessati-890%27000-account/92192985": {
     "articleId": "ricardo-account-esposti",
     "ts": "2026-10-09T15:39:40.102Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1955847/informatici-segnalazioni-criminali-numero-record": {
+    "articleId": "cibersicurezza-svizzera-record-segnalazioni",
+    "ts": "2026-10-09T16:39:10.250Z",
     "keyForm": 2
   }
 }
