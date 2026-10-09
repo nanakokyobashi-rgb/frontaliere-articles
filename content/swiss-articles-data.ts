@@ -26596,6 +26596,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'trasporti-45-critiche-piano',
+    category: 'novita',
+    date: '2026-10-09T10:55:13.917Z',
+    image: '/images/blog/article-trasporti-45-critiche-piano.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

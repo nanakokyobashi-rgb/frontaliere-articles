@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/the-black-keys-annullano-il-concerto-a-berna-per-malattia/92015069": {
-    "articleId": "black-keys-concerto-annullato-berna",
-    "ts": "2026-09-07T08:58:43.894Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948445/ta-auto-mondo-impressione-colore": {
     "articleId": "mondo-auto-grigio-impressione-colore",
     "ts": "2026-09-07T09:05:48.308Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/fiducia-dei-consumatori-svizzeri-peggiora%2c-timori-per-il-lavoro/92190634": {
     "articleId": "fiducia-consumatori-svizzeri-settembre",
     "ts": "2026-10-09T08:17:33.321Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1955773/progetto-trasporti-miliardi-federale-particolare-ferrovia-ampliamento-svizzera": {
+    "articleId": "trasporti-45-critiche-piano",
+    "ts": "2026-10-09T10:55:14.255Z",
     "keyForm": 2
   }
 }

@@ -797,14 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/teranga-dal-senegal-alla-lombardia-formazione-prima-del-lavoro/2700814": {
-      "section": "frontaliere",
-      "ts": 1791369676574
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1955269/svizzera-titoli-mercati-rendimenti-rialzo": {
-      "section": "frontaliere",
-      "ts": 1791369693894
-    },
     "frontaliere::https://www.varesenews.it/2026/10/tecnostampi-di-gornate-olona-ricerca-personale/2698927": {
       "section": "frontaliere",
       "ts": 1791371549305
@@ -1112,6 +1104,10 @@
     "frontaliere::https://www.tio.ch/svizzera/politica/1955773/progetto-trasporti-miliardi-federale-particolare-ferrovia-ampliamento-svizzera": {
       "section": "frontaliere",
       "ts": 1791541591545
+    },
+    "svizzera::https://www.swissinfo.ch/ita/%22ia-potrebbe-manipolare-mercati-finanziari%2c-pericoli-sottovalutati%22/92191096": {
+      "section": "svizzera",
+      "ts": 1791542516386
     }
   }
 }
