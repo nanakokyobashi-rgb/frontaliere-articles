@@ -1,5 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/amazon-non-si-presenta-in-prefettura-e-questione-di-policy-aziendale/2656564": "amazon-malpensa-montichiari-2026",
   "https://www.varesenews.it/2026/08/il-m5s-provinciale-contro-lo-spostamento-di-amazon-da-malpensa-salvaguardare-i-quasi-200-posti-di-lavoro/2656393": "malpensa-m5s-contre-spostamento-amazon",
   "stats-bfs://2026-q2": {
     "articleId": "lavoro-transfrontaliero-ticino-q2-2026",
@@ -2264,6 +2263,11 @@
   "https://www.tio.ch/rubriche/ospite/1955739/mendrisiotto-marchesi-poloni-giovanni-anni": {
     "articleId": "marchesi-mendrisiotto-priorita",
     "ts": "2026-10-09T10:20:03.259Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/incidente-e-auto-ribaltata-sulla-a9-tra-saronno-e-turate-lunghe-code-verso-como/2703160": {
+    "articleId": "incidente-a9-saronno-turate-code",
+    "ts": "2026-10-09T10:34:08.004Z",
     "keyForm": 2
   }
 }

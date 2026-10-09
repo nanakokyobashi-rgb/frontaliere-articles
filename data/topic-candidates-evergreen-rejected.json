@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.swissinfo.ch/ita/alloggio-in-propriet%c3%a0-sempre-pi%c3%b9-caro-in-svizzera%2c-%2b4%25-in-un-anno/92178985": {
-      "section": "frontaliere",
-      "ts": 1791367578797
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/dentro-la-fabbrica-dei-simulatori-qui-ci-si-prepara-anche-a-cio-che-in-volo-non-si-puo-provare/2700532": {
-      "section": "frontaliere",
-      "ts": 1791367627386
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955252/il-taglio-di-posteggi-soffoca-l-economia-di-bellinzona": {
-      "section": "frontaliere",
-      "ts": 1791367678092
-    },
     "frontaliere::https://www.varesenews.it/2026/10/teranga-dal-senegal-alla-lombardia-formazione-prima-del-lavoro/2700814": {
       "section": "frontaliere",
       "ts": 1791369676574
@@ -1120,6 +1108,10 @@
     "frontaliere::https://www.tio.ch/ticino/economia/1955776/plug-in-auto-spina-ticino-veicoli": {
       "section": "frontaliere",
       "ts": 1791539851603
+    },
+    "frontaliere::https://www.tio.ch/svizzera/politica/1955773/progetto-trasporti-miliardi-federale-particolare-ferrovia-ampliamento-svizzera": {
+      "section": "frontaliere",
+      "ts": 1791541591545
     }
   }
 }
