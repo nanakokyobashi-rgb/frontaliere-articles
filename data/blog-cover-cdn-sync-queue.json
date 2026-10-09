@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ai-chip-scarzita-prezzi-pc.webp",
+      "sha256": "a101db234e2ab4cc582f89c1be77cf6b752baa5c085a24b87ac2a9fa379ce118"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ai-chip-scarzita-prezzi-pc-480w.webp",
+      "sha256": "be4d9882f91f407ed92257a9308452e352a21d28e7d2946ee3a16a06f93db33c"
+    }
+  ]
 }
