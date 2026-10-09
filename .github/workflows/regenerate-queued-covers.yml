@@ -3,8 +3,10 @@ run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
 
 # La coda e' un recupero dati, non una nuova pipeline editoriale: parte ogni
 # ora e si ferma da sola quando items[] e' vuoto e l'outbox publisher e'
-# vuoto. Il dispatch manuale puo' abbassare o alzare il tetto e, solo con una
-# scelta esplicita, riaprire le voci marcate failed.
+# vuoto. Il generation-health-watchdog puo' riaprire il drain quando la coda
+# si avvicina alla sua soglia di eta': il cron resta il backstop per gli eventi
+# workflow_run persi. Il dispatch manuale puo' abbassare o alzare il tetto e,
+# solo con una scelta esplicita, riaprire le voci marcate failed.
 on:
   schedule:
     # Il drain ha un batch limitato per riservare tempo al publisher: la
@@ -23,6 +25,9 @@ on:
         required: false
         default: false
         type: boolean
+  workflow_run:
+    workflows: ['Generation health watchdog']
+    types: [completed]
 
 # Il gruppo condiviso `generate-article` e' una politica di scarto in entrambe
 # le direzioni: GitHub conserva una sola run pending e un arrivo del drain puo'
@@ -38,7 +43,86 @@ permissions:
   contents: read
 
 jobs:
+  recovery_gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      should_drain: ${{ steps.resolve.outputs.should_drain }}
+    steps:
+      - name: Checkout main for watchdog recovery gate
+        if: github.event_name == 'workflow_run'
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Resolve drain trigger
+        id: resolve
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          WATCHDOG_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          QUEUE_FILE: data/image-regeneration-queue.json
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" != 'workflow_run' ]; then
+            echo 'should_drain=true' >> "$GITHUB_OUTPUT"
+            echo 'regular schedule or manual dispatch: cover drain enabled'
+            exit 0
+          fi
+          if [ "${WATCHDOG_CONCLUSION:-}" != 'success' ]; then
+            echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+            echo "watchdog conclusion is ${WATCHDOG_CONCLUSION:-unknown}: cover drain deferred to the next backstop"
+            exit 0
+          fi
+          if [ ! -s "$QUEUE_FILE" ]; then
+            echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+            echo 'cover queue is absent or empty: no watchdog recovery needed'
+            exit 0
+          fi
+
+          # Keep the operational age threshold in scan-generation-health.mjs;
+          # this gate derives an early-recovery point two hours before it so a
+          # watchdog pass can recover a missed scheduler slot before the queue
+          # becomes stale. An invalid queue is fail-closed.
+          watchdog_max_age_hours="$(node --input-type=module -e "import('./scripts/ci/scan-generation-health.mjs').then(({ COVER_QUEUE_MAX_AGE_HOURS }) => process.stdout.write(String(COVER_QUEUE_MAX_AGE_HOURS)))")"
+          recovery_age_hours=$((watchdog_max_age_hours - 2))
+          if [ "$recovery_age_hours" -lt 1 ]; then
+            echo "::error::watchdog queue threshold is too small for the recovery margin: $watchdog_max_age_hours"
+            exit 1
+          fi
+          read -r queue_count oldest_age_hours < <(QUEUE_FILE="$QUEUE_FILE" node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+
+          const queue = JSON.parse(fs.readFileSync(process.env.QUEUE_FILE, 'utf8'));
+          if (queue?.schema !== 1 || !Array.isArray(queue.items)) {
+            throw new Error('invalid image regeneration queue');
+          }
+          const requestedAt = queue.items.map((item) => Date.parse(String(item?.requestedAt || '')));
+          if (requestedAt.some((timestamp) => !Number.isFinite(timestamp))) {
+            throw new Error('image regeneration queue contains an invalid requestedAt');
+          }
+          const oldest = requestedAt.length ? Math.min(...requestedAt) : null;
+          const ageHours = oldest === null ? 0 : Math.max(0, (Date.now() - oldest) / 3_600_000);
+          process.stdout.write(`${requestedAt.length} ${ageHours}\n`);
+          NODE
+          )
+          if [ "$queue_count" -eq 0 ]; then
+            echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+            echo 'cover queue is empty: no watchdog recovery needed'
+            exit 0
+          fi
+          if awk -v age="$oldest_age_hours" -v threshold="$recovery_age_hours" 'BEGIN { exit !(age >= threshold) }'; then
+            echo 'should_drain=true' >> "$GITHUB_OUTPUT"
+            echo "watchdog recovery enabled: oldest cover is ${oldest_age_hours}h old (early threshold ${recovery_age_hours}h; watchdog threshold ${watchdog_max_age_hours}h)"
+          else
+            echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+            echo "watchdog recovery deferred: oldest cover is ${oldest_age_hours}h old (early threshold ${recovery_age_hours}h)"
+          fi
+
   drain:
+    needs: recovery_gate
+    if: needs.recovery_gate.outputs.should_drain == 'true'
     runs-on: ubuntu-latest
     # Budget: 45m job timeout; the first step starts a 40m internal deadline,
     # so the 5m tail remains for ack, summary and cleanup even when checkout,
