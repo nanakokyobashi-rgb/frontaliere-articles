@@ -380,6 +380,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-08T23:39:16.220Z",
       "lastFailureAt": "2026-10-08T23:39:16.220Z"
+    },
+    {
+      "articleId": "progetto-latte-climatico",
+      "title": "Progetto latte: Nestlé ed Emmi puntano all'estensione",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T00:54:58.589Z",
+      "lastFailureAt": "2026-10-09T00:54:58.589Z"
     }
   ]
 }

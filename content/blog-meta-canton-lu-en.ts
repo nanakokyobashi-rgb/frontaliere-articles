@@ -12,6 +12,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.kriens-torna-in-deficit.title': 'Kriens back in the red after million-dollar surpluses',
     'blog.article.kriens-torna-in-deficit.excerpt': 'After multimillion surpluses, Kriens returns to a deficit: the headline indicates a new liability, but does not yet specify the amount, date, or cause.',
     'blog.article.kriens-torna-in-deficit.imageAlt': 'Urban view of Kriens in the canton of Lucerne focused on municipal finances',
+    'blog.article.progetto-latte-climatico.title': 'Milk project: Nestlé and Emmi are aiming for an extension',
+    'blog.article.progetto-latte-climatico.excerpt': 'Since 2022, KlimaStaR Milch has reduced edible feed by 23% and emissions per kg by 8%.',
+    'blog.article.progetto-latte-climatico.imageAlt': 'Farmer with a tablet in a Central Swiss dairy barn among milk cows.',
 };
 
 export default blogMetaCantonLuEn;
