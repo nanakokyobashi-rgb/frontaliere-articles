@@ -17,7 +17,7 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.basel-klimpact-programma-2026.title': 'Basel lanciert Klimpact für einen grüneren Alltag',
     'blog.article.basel-klimpact-programma-2026.excerpt': 'Basel-Stadt startet Klimpact, um Emissionen zu reduzieren.',
-    'blog.article.basel-klimpact-programma-2026.imageAlt': 'Basler Bewohner beim Fahrradfahren und Einkaufen auf einem Wochenmarkt',
+    'blog.article.basel-klimpact-programma-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.barfusserplatz-riqualificazione-urbana.title': 'Barfüsserplatz, das schwierige Sanierungsprojekt',
     'blog.article.barfusserplatz-riqualificazione-urbana.excerpt': 'Die Sanierung des Barfüsserplatzes rückt die Qualität des städtischen Raums in den Mittelpunkt: Für den Kommissionspräsidenten ist es fast unmöglich, einen schönen Platz zu schaffen.',
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz in Basel während eines städtebaulichen Umbaus',

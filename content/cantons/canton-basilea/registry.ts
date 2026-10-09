@@ -54,7 +54,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'basel-klimpact-programma-2026',
  category: 'novita',
  date: '2026-10-09T21:07:09.540Z',
- image: '/images/blog/varese-whp-programma-lombardia-2026.webp',
+ image: '/images/blog/article-basel-klimpact-programma-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['BASILEA'],

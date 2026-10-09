@@ -172,10 +172,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Basel-Stadt avvia Klimpact per ridurre le emissioni. Dati aggiornati 2026 per frontalieri in Ticino.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/varese-whp-programma-lombardia-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-basel-klimpact-programma-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cittadini di Basilea che usano biciclette e mercati locali in una via soleggiata"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-09T21:07:09+00:00",
       "dateModified": "2026-10-09T21:07:09+00:00",

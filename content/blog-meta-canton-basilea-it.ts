@@ -17,7 +17,7 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.basel-klimpact-programma-2026.title': 'Basel lancia Klimpact per un quotidiano più verde',
     'blog.article.basel-klimpact-programma-2026.excerpt': 'Basel-Stadt avvia Klimpact per ridurre le emissioni.',
-    'blog.article.basel-klimpact-programma-2026.imageAlt': 'Cittadini di Basilea che usano biciclette e mercati locali in una via soleggiata',
+    'blog.article.basel-klimpact-programma-2026.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.barfusserplatz-riqualificazione-urbana.title': 'Barfüsserplatz, il difficile progetto di riqualificazione',
     'blog.article.barfusserplatz-riqualificazione-urbana.excerpt': 'La ristrutturazione di Barfüsserplatz porta al centro la qualità dello spazio urbano: per il capo della Commissione, creare una bella piazza è quasi impossibile.',
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz a Basilea in una scena sul progetto di riqualificazione urbana',
