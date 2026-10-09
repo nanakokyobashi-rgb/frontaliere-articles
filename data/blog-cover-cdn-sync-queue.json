@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-karate-uisp-formazione-arcisate-2026.webp",
-      "sha256": "6027a3a91fc0c5006e1dda4f11759fa93383312ab972cdc7f3ee4d46f3942a06"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-karate-uisp-formazione-arcisate-2026-480w.webp",
-      "sha256": "d6783b9c4be812134f6cf4ba4d10c92620ba087a1ba5a74299682ee4b17334c2"
-    }
-  ]
+  "items": []
 }
