@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sicurezza-lavoro-turgovia-regole.webp",
-      "sha256": "35a9a9f8192871f56ab8858d212f7e57671e9c0f8679f7f650247d5ac03552f4"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sicurezza-lavoro-turgovia-regole-480w.webp",
-      "sha256": "50d1d3f844a6dd01ab50995ef6d0d96a027b48a505541a6c2d6f085f4d52c27f"
-    }
-  ]
+  "items": []
 }
