@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-permesso-edilizio-lucerna.webp",
+      "sha256": "c0441339d85ec92ece366e2e9f3f40c4580c93ae61605997aa4906556f981057"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-permesso-edilizio-lucerna-480w.webp",
+      "sha256": "81501ceaee67ca26b3f9e1ec86336f411dbefaf0dab8dc6f5d3c5dd2e26ae35f"
+    }
+  ]
 }
