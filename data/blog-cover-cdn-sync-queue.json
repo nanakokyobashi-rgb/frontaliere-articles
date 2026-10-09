@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lucerna-convocazioni-indennita.webp",
+      "sha256": "e0299257d4c8bac43eddf18bcfc1e29c6142a99455d84d4652b0e33058823dc3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lucerna-convocazioni-indennita-480w.webp",
+      "sha256": "4bd75339edd1b248ee4f14b89d9942da86d78f1933b3953056683c7c35a2e0ac"
+    }
+  ]
 }
