@@ -20,6 +20,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-09T16:43:09.597Z",
       "lastFailureAt": "2026-10-09T16:55:28.997Z"
+    },
+    {
+      "articleId": "smottamento-sementina-code",
+      "title": "Smottamento a Sementina: traffico congestionato",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-smottamento-sementina-code: openai-codex (vision gate rejected image: Relevant generic landslide-and-traffic illustration, but visible red-an",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T16:55:33.673Z",
+      "lastFailureAt": "2026-10-09T16:55:33.673Z"
     }
   ]
 }
