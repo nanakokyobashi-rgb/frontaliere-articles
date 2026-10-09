@@ -26575,6 +26575,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'fiducia-consumatori-svizzeri-settembre',
+    category: 'pratico',
+    date: '2026-10-09T08:17:32.970Z',
+    image: '/images/blog/article-fiducia-consumatori-svizzeri-settembre.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
