@@ -7979,6 +7979,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.trasporti-45-critiche-piano.title': 'Trasporti45, eine Flut von Kritik am Bundesplan',
     'blog.article.trasporti-45-critiche-piano.excerpt': 'Trasporti’45 sieht bis 2045 50 Milliarden vor Das erste Paket ist 2027 11 Milliarden wert Der Bahn fehlen 10 Milliarden Die Regierung schlägt vor',
     'blog.article.trasporti-45-critiche-piano.imageAlt': 'Verkehrsinfrastruktur in der Schweiz für das Projekt Transport45',
+    'blog.article.lucerna-convocazioni-indennita.title': 'Zivilschutz im Kanton Luzern: Voraussetzungen und Entschädigungen',
+    'blog.article.lucerna-convocazioni-indennita.excerpt': 'Luzern: kantonal koordinierter Zivilschutz Der Bezugsrahmen ist das Bundesgesetz Aufgebote und Entschädigungen: Überprüfung bei der Behörde',
+    'blog.article.lucerna-convocazioni-indennita.imageAlt': 'Zivilschutz im Kanton Luzern',
 };
 
 export default blogMetaChDe;

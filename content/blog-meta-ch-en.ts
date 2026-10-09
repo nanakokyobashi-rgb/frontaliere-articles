@@ -7979,6 +7979,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.trasporti-45-critiche-piano.title': 'Trasporti45, a barrage of criticism over the federal plan',
     'blog.article.trasporti-45-critiche-piano.excerpt': 'Trasporti’45 envisages 50 billion by 2045 The first package is worth 11 billion in 2027 The railway has a shortfall of 10 billion The Government proposes',
     'blog.article.trasporti-45-critiche-piano.imageAlt': 'Transport infrastructure in Switzerland for the Transport45 project',
+    'blog.article.lucerna-convocazioni-indennita.title': 'Civil protection in the Canton of Lucerne: requirements and compensation',
+    'blog.article.lucerna-convocazioni-indennita.excerpt': 'Lucerne: civil protection coordinated at cantonal level The framework is federal law Call-ups and compensation: check with the authority',
+    'blog.article.lucerna-convocazioni-indennita.imageAlt': 'Civil protection in the canton of Lucerne',
 };
 
 export default blogMetaChEn;

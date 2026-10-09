@@ -7979,6 +7979,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.trasporti-45-critiche-piano.title': 'Trasporti45, une pluie de critiques sur le plan fédéral',
     'blog.article.trasporti-45-critiche-piano.excerpt': 'Trasporti’45 prévoit 50 milliards d’ici 2045 Le premier paquet vaut 11 milliards en 2027 Le rail accuse un déficit de 10 milliards Le Gouvernement propose',
     'blog.article.trasporti-45-critiche-piano.imageAlt': 'Infrastructure de transport en Suisse pour le projet Transports45',
+    'blog.article.lucerna-convocazioni-indennita.title': 'Protection civile dans le canton de Lucerne : conditions et indemnités',
+    'blog.article.lucerna-convocazioni-indennita.excerpt': 'Lucerne : protection civile coordonnée au niveau cantonal Le cadre de référence est la loi fédérale Convocations et indemnités : vérification auprès de l’autorité',
+    'blog.article.lucerna-convocazioni-indennita.imageAlt': 'Protection civile dans le canton de Lucerne',
 };
 
 export default blogMetaChFr;

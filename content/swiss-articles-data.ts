@@ -26606,6 +26606,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'lucerna-convocazioni-indennita',
+    category: 'pratico',
+    date: '2026-10-09T11:15:58.644Z',
+    image: '/images/blog/article-lucerna-convocazioni-indennita.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['LU'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
