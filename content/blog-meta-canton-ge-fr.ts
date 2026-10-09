@@ -15,6 +15,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.title': 'Genève demande l\'arrêt des travaux de l\'autoroute A412',
     'blog.article.ginevra-stop-autostrada-a412.excerpt': 'La Ville de Genève demande l\'arrêt des travaux de l\'A412 Six communes genevoises adhèrent à la procédure La Cour d\'appel de Lyon statue le 14 octobre',
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.comunicato-consiglio-stato-ginevra.title': 'Communiqué du Conseil d\'État de Genève : 7 octobre 2026',
+    'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'Le communiqué hebdomadaire du Conseil d\'État du 7 octobre 2026 : le matériel disponible identifie la publication, sans autres détails.',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Scène institutionnelle à Genève un matin d\'octobre.',
 };
 
 export default blogMetaCantonGeFr;

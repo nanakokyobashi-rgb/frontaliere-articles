@@ -15,6 +15,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.title': 'Genf fordert den Baustopp für die Autobahn A412',
     'blog.article.ginevra-stop-autostrada-a412.excerpt': 'Die Stadt Genf fordert, die Arbeiten an der A412 einzustellen Sechs Genfer Gemeinden schließen sich dem Verfahren an Das Berufungsgericht von Lyon entscheidet',
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.comunicato-consiglio-stato-ginevra.title': 'Mitteilung des Genfer Staatsrats: 7. Oktober 2026',
+    'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'Die wöchentliche Mitteilung des Staatsrats vom 7.',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Institutionelle Szene in Genf an einem Oktobermorgen.',
 };
 
 export default blogMetaCantonGeDe;

@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'comunicato-consiglio-stato-ginevra',
+ category: 'novita',
+ date: '2026-10-09T16:16:45.029Z',
+ image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

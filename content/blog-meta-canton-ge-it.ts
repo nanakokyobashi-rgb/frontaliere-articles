@@ -15,6 +15,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.title': 'Ginevra chiede lo stop dei lavori per l\'autostrada A412',
     'blog.article.ginevra-stop-autostrada-a412.excerpt': 'La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d\'appel de Lyon decide il 14 ottobre Nel mirino',
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.comunicato-consiglio-stato-ginevra.title': 'Comunicato Consiglio di Stato Ginevra: 7 ottobre 2026',
+    'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'Il comunicato settimanale del Consiglio di Stato del 7 ottobre 2026: il materiale disponibile identifica la pubblicazione, senza altri dettagli.',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Scena istituzionale a Ginevra in una mattina d\'ottobre.',
 };
 
 export default blogMetaCantonGeIt;
