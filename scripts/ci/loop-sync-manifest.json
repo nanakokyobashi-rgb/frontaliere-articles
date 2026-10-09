@@ -2253,9 +2253,9 @@
       "path": "scripts/lib/run-bounded-command.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1d8f5cc7155c838f",
-        "corpus": "1d8f5cc7155c838f",
-        "alignedAt": "2026-10-08"
+        "site": "e3dd11821feb9dc1",
+        "corpus": "e3dd11821feb9dc1",
+        "alignedAt": "2026-10-09"
       }
     },
     {
