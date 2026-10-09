@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/rubriche/ospite/1948480/neutralita-il-27-settembre-scegliamo-la-svizzera": {
-    "articleId": "neutralita-svizzera-27-settembre",
-    "ts": "2026-09-07T11:10:20.424Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/scienza-e-tecnologia/bepicolombo-verso-mercurio-la-missione-nella-fase-cruciale--4057341.html": {
     "articleId": "bepi-colombo-missione-mercurio",
     "ts": "2026-09-07T11:30:16.971Z",
@@ -2497,6 +2492,11 @@
   "https://lenews.ch/2026/10/09/swiss-minister-defends-vat-rise-to-fund-higher-state-pension": {
     "articleId": "referendum-iva-2026-aumento-per-la-tredicesima-pensione",
     "ts": "2026-10-09T20:56:52.199Z",
+    "keyForm": 2
+  },
+  "https://lenews.ch/2026/10/09/swiss-parties-submit-referendum-to-preserve-ban-on-new-nuclear-power-plants": {
+    "articleId": "referendum-nucleare-svizzera-2027",
+    "ts": "2026-10-09T22:31:58.412Z",
     "keyForm": 2
   }
 }

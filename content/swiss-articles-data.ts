@@ -26707,6 +26707,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'referendum-nucleare-svizzera-2027',
+    category: 'novita',
+    date: '2026-10-09T22:31:58.060Z',
+    image: '/images/blog/article-referendum-nucleare-svizzera-2027.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
