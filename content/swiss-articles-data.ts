@@ -26545,6 +26545,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ai-chip-scarzita-prezzi-pc',
+    category: 'pratico',
+    date: '2026-10-09T05:00:36.179Z',
+    image: '/images/blog/article-ai-chip-scarzita-prezzi-pc.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
