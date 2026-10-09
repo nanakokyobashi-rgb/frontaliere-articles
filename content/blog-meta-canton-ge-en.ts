@@ -17,7 +17,10 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustration generated for this article',
     'blog.article.comunicato-consiglio-stato-ginevra.title': 'Geneva State Council press release: October 7, 2026',
     'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'The weekly press release of the Council of State of October 7, 2026: the available material identifies the publication, without further details.',
-    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Illustration generated for this article',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Institutional scene in Geneva on an October morning.',
+    'blog.article.unige-natura-equilibrio-mentale.title': 'UNIGE: mental health, October 5-10, 2026',
+    'blog.article.unige-natura-equilibrio-mentale.excerpt': 'Mental Health Week 2026 runs from October 5 to 10.',
+    'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Outdoor nature scene for the mental wellbeing of the UNIGE community',
 };
 
 export default blogMetaCantonGeEn;

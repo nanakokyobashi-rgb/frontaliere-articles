@@ -17,7 +17,10 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustration générée pour cet article',
     'blog.article.comunicato-consiglio-stato-ginevra.title': 'Communiqué du Conseil d\'État de Genève : 7 octobre 2026',
     'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'Le communiqué hebdomadaire du Conseil d\'État du 7 octobre 2026 : le matériel disponible identifie la publication, sans autres détails.',
-    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Scène institutionnelle à Genève un matin d\'octobre.',
+    'blog.article.unige-natura-equilibrio-mentale.title': 'UNIGE : santé mentale, 5-10 octobre 2026',
+    'blog.article.unige-natura-equilibrio-mentale.excerpt': 'La Semaine de la santé mentale 2026 va du 5 au 10 octobre.',
+    'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Scène en plein air dans la nature pour le bien-être mental de la communauté UNIGE',
 };
 
 export default blogMetaCantonGeFr;
