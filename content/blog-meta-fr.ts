@@ -12863,6 +12863,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.rancio-valcuvia-statale-394.title': 'Rancio Valcuvia : collision auto-moto sur N394',
     'blog.article.rancio-valcuvia-statale-394.excerpt': 'Accident peu après 7 heures sur la route 394 Collision entre une voiture et une moto à Rancio Valcuvia Femme de 26 ans secourue en code vert Trafic lourd',
     'blog.article.rancio-valcuvia-statale-394.imageAlt': 'Trafic matinal sur la route nationale 394 à Rancio Valcuvia après un accident auto-moto',
+    'blog.article.operazione-trotta-ebike-monopattini.title': 'Opération TROTTA : 35 sanctions contre deux-roues illégaux',
+    'blog.article.operazione-trotta-ebike-monopattini.excerpt': 'En huit jours de contrôles TROTTA au Tessin, 35 contraventions, 9 véhicules non conformes (puissance 1\'200-1\'600 W, vitesse jusqu’à 48 km/h) et 15 procédures judiciaires.',
+    'blog.article.operazione-trotta-ebike-monopattini.imageAlt': 'Contrôle de la police cantonale sur les vélos électriques et trottinettes au Tessin lors de l\'operazione TROTTA',
 };
 
 export default blogMetaFr;

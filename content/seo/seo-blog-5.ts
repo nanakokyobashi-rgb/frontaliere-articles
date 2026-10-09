@@ -103948,6 +103948,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-operazione-trotta-ebike-monopattini': {
+    title: 'Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge',
+    description: 'L\'operazione TROTTA della Polizia cantonale in Ticino ha portato a 35 contravvenzioni in otto giorni, 9 veicoli irregolari (potenza 1\'200-1\'600 W, velocità 48',
+    keywords: 'frontalieri, ticino, svizzera, italia, operazione, trotta, sanzioni, e-bike',
+    ogTitle: 'Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge',
+    ogDescription: 'Durante l\'operazione estiva TROTTA, conclusa il 30 settembre, le pattuglie della Polizia cantonale hanno controllato e-bike e monopattini elettrici in 11 postazioni tra Mendrisiotto, Luganese, Locarnese e Bellinzonese. Sono state elevate 35',
+    canonicalPath: '/articoli-frontaliere/operazione-trotta-ebike-monopattini/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge",
+      "description": "L'operazione TROTTA della Polizia cantonale in Ticino ha portato a 35 contravvenzioni in otto giorni, 9 veicoli irregolari (potenza 1'200-1'600 W, velocità 48",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controllo della Polizia cantonale su e-bike e monopattini elettrici in Ticino durante l'operazione TROTTA"
+      },
+      "datePublished": "2026-10-09T07:39:46+00:00",
+      "dateModified": "2026-10-09T07:39:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/operazione-trotta-ebike-monopattini/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

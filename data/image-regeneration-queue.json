@@ -350,6 +350,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T07:21:46.780Z",
       "lastFailureAt": "2026-10-09T07:21:46.780Z"
+    },
+    {
+      "articleId": "operazione-trotta-ebike-monopattini",
+      "title": "Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-operazione-trotta-ebike-monopattini: openai-codex (vision gate rejected image: Original generic illustration with no readable text, logos, or",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T07:39:46.662Z",
+      "lastFailureAt": "2026-10-09T07:39:46.662Z"
     }
   ]
 }
