@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-controlli-dogana-mendrisiotto.webp",
+      "sha256": "65b9f0395845eabccdff391523c36e27c030f70fab60166104c07a0fdd942692"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-controlli-dogana-mendrisiotto-480w.webp",
+      "sha256": "fe6526233b21023989e069968c1dfd25f0c3e9feecd58ca1191876e0ef85c50d"
+    }
+  ]
 }
