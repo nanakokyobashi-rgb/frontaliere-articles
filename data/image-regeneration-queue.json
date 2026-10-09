@@ -410,6 +410,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T03:22:16.123Z",
       "lastFailureAt": "2026-10-09T03:22:16.123Z"
+    },
+    {
+      "articleId": "obermumpf-strada-sanificazione-2024",
+      "title": "Obermumpf: lavori sulla K491 fino all'autunno 2027",
+      "fallbackImage": "/images/blog/mendrisio-strada-serpiano-urgenti-lavori.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T06:35:59.657Z",
+      "lastFailureAt": "2026-10-09T06:35:59.657Z"
     }
   ]
 }

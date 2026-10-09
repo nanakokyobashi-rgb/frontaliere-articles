@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'obermumpf-strada-sanificazione-2024',
+ category: 'pratico',
+ date: '2026-10-09T06:35:59.639Z',
+ image: '/images/blog/mendrisio-strada-serpiano-urgenti-lavori.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

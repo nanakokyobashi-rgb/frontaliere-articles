@@ -15,6 +15,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.chiusura-hochrheinbahn-2026.title': 'Hochrheinbahn closed: Basel-Rheinfelden from October 10',
     'blog.article.chiusura-hochrheinbahn-2026.excerpt': 'From October 10, 2026, the Hochrheinbahn will be closed between Basel and Rheinfelden: construction work, delays and replacement buses will affect commuters’ journeys.',
     'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Regional train route between Basel and Rheinfelden with a replacement bus',
+    'blog.article.obermumpf-strada-sanificazione-2024.title': 'Obermumpf: construction work on the K491 until autumn 2027',
+    'blog.article.obermumpf-strada-sanificazione-2024.excerpt': 'Monday, October 12, rehabilitation works begin on Hauptstrasse K491 in Obermumpf: 1.250 metres of road, accessible bus stops with 22 cm curbs and a new footbridge over the Fischingerbach, through autumn 2027.',
+    'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Road renovation works on Hauptstrasse K491 in Obermumpf with new pedestrian bridge',
 };
 
 export default blogMetaCantonAgEn;
