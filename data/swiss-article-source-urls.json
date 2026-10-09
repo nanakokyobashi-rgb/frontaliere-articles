@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/sport/hockey/1948451/z-rich-assicurazioni-sponsor-hcl-gold-rinnova": {
-    "articleId": "zurich-hcl-gold-sponsor-2030",
-    "ts": "2026-09-07T09:33:52.419Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948457/svizzera-action-negozio-20esimo-schattdorf": {
     "articleId": "action-negozio-20esimo-schattdorf",
     "ts": "2026-09-07T09:43:03.809Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1955759/fiducia-consumatori-prezzi-lavoro-peggiora": {
     "articleId": "economia-svizzera-fiducia-calante",
     "ts": "2026-10-09T15:01:34.217Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ricardo%3a-perdita-di-dati%2c-interessati-890%27000-account/92192985": {
+    "articleId": "ricardo-account-esposti",
+    "ts": "2026-10-09T15:39:40.102Z",
     "keyForm": 2
   }
 }
