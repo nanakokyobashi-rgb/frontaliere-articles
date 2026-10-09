@@ -26513,6 +26513,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'permesso-edilizio-lucerna',
+    category: 'pratico',
+    date: '2026-10-09T03:07:26.294Z',
+    image: '/images/blog/article-permesso-edilizio-lucerna.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['LU'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
