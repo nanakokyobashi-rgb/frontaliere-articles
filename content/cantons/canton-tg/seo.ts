@@ -211,10 +211,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp`,
+        "url": `${BASE_URL}/images/blog/article-sicurezza-lavoro-turgovia-regole.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Sicurezza e salute sul lavoro nel Canton Turgovia"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-09T16:02:21+00:00",
       "dateModified": "2026-10-09T16:02:21+00:00",

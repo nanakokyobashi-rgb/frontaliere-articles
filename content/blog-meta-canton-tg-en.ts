@@ -20,7 +20,7 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Aadorf town centre and municipal building in the canton of Thurgau on an autumn day',
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Occupational safety and health in the Canton of Thurgau',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'Occupational safety prevents accidents and occupational diseases.',
-    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Workplace safety and health in Canton Thurgau',
+    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonTgEn;

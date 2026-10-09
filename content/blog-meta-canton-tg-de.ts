@@ -20,7 +20,7 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Ortszentrum und Gemeindehaus von Aadorf im Kanton Thurgau an einem Herbsttag',
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Arbeitssicherheit und Gesundheitsschutz im Kanton Thurgau',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'Arbeitssicherheit verhindert Unfälle und Berufskrankheiten.',
-    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Arbeitssicherheit und Gesundheitsschutz im Kanton Thurgau',
+    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonTgDe;

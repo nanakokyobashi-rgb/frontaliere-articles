@@ -20,7 +20,7 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Centre d\'Aadorf et bâtiment communal dans le canton de Thurgovie, un jour d\'automne',
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Sécurité et santé au travail dans le canton de Thurgovie',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'La sécurité au travail prévient les accidents et les maladies professionnelles.',
-    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Securite et sante au travail dans le canton de Thurgovie',
+    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonTgFr;

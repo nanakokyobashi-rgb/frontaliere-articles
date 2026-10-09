@@ -10,16 +10,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-08T23:26:42.049Z",
       "lastFailureAt": "2026-10-09T12:32:13.228Z"
-    },
-    {
-      "articleId": "sicurezza-lavoro-turgovia-regole",
-      "title": "Sicurezza e salute sul lavoro nel Canton Turgovia",
-      "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T16:02:21.057Z",
-      "lastFailureAt": "2026-10-09T16:02:21.057Z"
     }
   ]
 }

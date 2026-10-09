@@ -20,7 +20,7 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Municipio e centro di Aadorf, nel Canton Turgovia, in una giornata autunnale',
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Sicurezza e salute sul lavoro nel Canton Turgovia',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'La sicurezza sul lavoro previene infortuni e malattie professionali.',
-    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Sicurezza e salute sul lavoro nel Canton Turgovia',
+    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonTgIt;

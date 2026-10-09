@@ -65,7 +65,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'sicurezza-lavoro-turgovia-regole',
  category: 'pratico',
  date: '2026-10-09T16:02:21.033Z',
- image: '/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp',
+ image: '/images/blog/article-sicurezza-lavoro-turgovia-regole.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TG'],
