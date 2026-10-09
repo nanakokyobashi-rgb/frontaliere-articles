@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-vallese-piano-acqua-2035.webp",
-      "sha256": "f6c73543e0646b258a44c41d4f801e2c96aa3cc5fad423d0842850a35d1e9ab1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-vallese-piano-acqua-2035-480w.webp",
-      "sha256": "c2c73d1ef793c121e0de77a5563342c5f6ccdfb5797b2bece8009b4471898af1"
-    }
-  ]
+  "items": []
 }
