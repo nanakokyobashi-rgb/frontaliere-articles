@@ -9,6 +9,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.svitto-cambio-cassa-malati.title': 'Unfair competition in switching health insurers in Schwyz',
     'blog.article.svitto-cambio-cassa-malati.excerpt': 'Offers to switch health insurers are often deceptive: a local health insurer in Schwyz has to contend with a business described as unfair competition.',
     'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Illustration generated for this article',
+    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.title': 'Military exercise in Egg and at the Sihlsee dam from 9 to 12 October 2026',
+    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.excerpt': 'Notice from the \'Schweizer Militär\': exercise from October 9 to 12, 2026, in Egg and at Sihlsee Dam.',
+    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.imageAlt': 'Sihlsee dam area at Egg during October 2026 military exercise',
 };
 
 export default blogMetaCantonSzEn;

@@ -9,6 +9,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.svitto-cambio-cassa-malati.title': 'Concurrence déloyale dans le changement de caisse-maladie à Schwytz',
     'blog.article.svitto-cambio-cassa-malati.excerpt': 'Les offres de changement de caisse-maladie sont souvent trompeuses : une caisse locale de Schwytz doit faire face à une activité décrite comme de la concurrence déloyale.',
     'blog.article.svitto-cambio-cassa-malati.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.title': 'Exercice militaire à Egg et au barrage du Sihlsee du 9 au 12 octobre 2026',
+    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.excerpt': 'Avis du \'Schweizer Militär\' : exercice du 9 au 12 octobre 2026 à Egg et au barrage du Sihlsee.',
+    'blog.article.esercitazione-militare-sihlsee-ottobre-2026.imageAlt': 'Zone du barrage du Sihlsee à Egg pendant l\'exercice militaire d\'octobre 2026',
 };
 
 export default blogMetaCantonSzFr;

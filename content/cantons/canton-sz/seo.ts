@@ -80,6 +80,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-esercitazione-militare-sihlsee-ottobre-2026': {
+    title: 'Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026',
+    description: 'Avviso ufficiale: esercitazione \'Schweizer Militär\' a Egg e diga Sihlsee dal 9 al 12 ottobre 2026. Possibile aumento rumore (anche notturno), veicoli',
+    keywords: 'frontalieri, ticino, svizzera, italia, esercitazione, militare, diga, sihlsee',
+    ogTitle: 'Esercitazione militare a Egg e diga Sihlsee: 9-12 ottobre 2026',
+    ogDescription: 'Il Comune di Einsiedeln comunica un\'esercitazione del \'Schweizer Militär\' nell\'area di Egg e della diga del Sihlsee dal 9 al 12 ottobre 2026. Sono possibili aumento del rumore (anche notturno), movimenti di veicoli militari, elicotteri e truppe',
+    canonicalPath: '/articoli-svitto/esercitazione-militare-sihlsee-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esercitazione militare a Egg e diga Sihlsee dal 9 al 12 ottobre 2026",
+      "description": "Avviso ufficiale: esercitazione 'Schweizer Militär' a Egg e diga Sihlsee dal 9 al 12 ottobre 2026. Possibile aumento rumore (anche notturno), veicoli",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-esercitazione-militare-sihlsee-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area della diga del Sihlsee a Egg durante l'esercitazione militare di ottobre 2026"
+      },
+      "datePublished": "2026-10-09T23:17:55+00:00",
+      "dateModified": "2026-10-09T23:17:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/esercitazione-militare-sihlsee-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

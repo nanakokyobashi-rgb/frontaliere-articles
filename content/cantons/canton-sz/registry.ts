@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'esercitazione-militare-sihlsee-ottobre-2026',
+ category: 'pratico',
+ date: '2026-10-09T23:17:55.280Z',
+ image: '/images/blog/article-esercitazione-militare-sihlsee-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
