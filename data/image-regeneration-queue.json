@@ -400,6 +400,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T02:51:10.406Z",
       "lastFailureAt": "2026-10-09T02:51:10.406Z"
+    },
+    {
+      "articleId": "nobel-economia-fehr-2026",
+      "title": "Nobel economia 2026: Ernst Fehr tra i possibili vincitori",
+      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
+      "reason": "All image providers failed for article-nobel-economia-fehr-2026: openai-codex (vision gate rejected image: Generic Zurich academic illustration, but it includes a recognizable fore",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T03:22:16.123Z",
+      "lastFailureAt": "2026-10-09T03:22:16.123Z"
     }
   ]
 }
