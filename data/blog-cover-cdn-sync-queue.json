@@ -1,4 +1,37 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni.webp",
+      "sha256": "9a3b33a9e1fac9fb25f333a2b9f0b507341867758911186791a9bc86b287e4b2"
+    },
+    {
+      "path": "public/images/blog/article-mendrisiotto-aziende-conciliabilita.webp",
+      "sha256": "0971b80b860b688d4fa56486489f33a5e49629c16043fbcd712b31a6cf7f734a"
+    },
+    {
+      "path": "public/images/blog/article-morges-mobilita-consultazione-2045.webp",
+      "sha256": "263a4dc2803c94e1d76712c5ceb9c55bf7384ba55ce77844e64a584b3d55d39b"
+    },
+    {
+      "path": "public/images/blog/article-svitto-cambio-cassa-malati.webp",
+      "sha256": "0259adfddce39f5407630260d7c030f392227155be0f70dbe3f3d98c2db425a5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni-480w.webp",
+      "sha256": "ec018b84b46eb9db3464742683ae3015ce61df937151919a470f5a74c1f85a26"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-mendrisiotto-aziende-conciliabilita-480w.webp",
+      "sha256": "9a1a9598a737ebfd2ee7d9e2cd42af2ac295d24aeedd2ccefd26aa5336bdfecc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-morges-mobilita-consultazione-2045-480w.webp",
+      "sha256": "e372827aa014773605b03c00df4811e07fec4848b8a01ae2d9c139fa70f3a93b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-svitto-cambio-cassa-malati-480w.webp",
+      "sha256": "fa4fdaacc314a10fde0c4b2cf55936cf66c6839170bc17d7c549fb9016652b6d"
+    }
+  ]
 }
