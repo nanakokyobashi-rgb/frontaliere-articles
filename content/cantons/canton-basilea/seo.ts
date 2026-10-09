@@ -55,10 +55,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A Basilea Città un'iniziativa propone di quadruplicare la detrazione fiscale per ogni figlio: la proposta riguarda i genitori del cantone sul piano fiscale.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/asilo-nido-e-custodia-bambini-canton-basilea-citta.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-detrazioni-figli-basel.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Genitori con figli in una scena urbana di Basilea Città sulle detrazioni fiscali"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T11:11:39+00:00",
       "dateModified": "2026-10-07T11:11:39+00:00",

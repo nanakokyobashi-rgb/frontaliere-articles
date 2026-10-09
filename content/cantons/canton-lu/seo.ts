@@ -60,10 +60,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Ginnasi di Lucerna al lavoro sul quadro QM: la conferenza del 27 e 28 agosto indica il 2026/27, con possibili progetti pilota nel nuovo anno scolastico.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-canton-lucerna.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-qualita-sviluppo-scuole.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ginnasi del Canton Lucerna durante il percorso di sviluppo della qualità scolastica"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T18:10:58+00:00",
       "dateModified": "2026-10-07T18:10:58+00:00",

@@ -8,7 +8,7 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.permessi-edilizi-digitali-basel.imageAlt': 'Demande de permis de construire numérique dans un bureau à Bâle',
     'blog.article.detrazioni-figli-basel.title': 'Bâle-Ville : déductions pour enfants quatre fois plus élevées',
     'blog.article.detrazioni-figli-basel.excerpt': 'Une initiative dans le canton de Bâle-Ville propose de rendre la déduction fiscale pour chaque enfant quatre fois plus élevée.',
-    'blog.article.detrazioni-figli-basel.imageAlt': 'Parents et enfants dans une scène urbaine de Bâle-Ville sur les déductions fiscales',
+    'blog.article.detrazioni-figli-basel.imageAlt': 'Illustration générée pour cet article',
     'blog.article.phishing-email-fisco-basel.title': 'Canton de Bâle : alerte concernant de faux e-mails fiscaux',
     'blog.article.phishing-email-fisco-basel.excerpt': 'L’administration fiscale de Bâle-Ville signale de faux e-mails concernant des remboursements, des rappels et des factures fiscales : les supprimer, sans ouvrir de liens ni de pièces jointes.',
     'blog.article.phishing-email-fisco-basel.imageAlt': 'Bureau avec un e-mail fiscal suspect, une enveloppe et eBill à Bâle',

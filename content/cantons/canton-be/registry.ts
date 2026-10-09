@@ -32,7 +32,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'disoccupazione-berna-settembre-2026-stabile',
  category: 'pratico',
  date: '2026-10-07T19:58:52.255Z',
- image: '/images/blog/disoccupazione-settembre-ticino-2026.webp',
+ image: '/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['BE'],

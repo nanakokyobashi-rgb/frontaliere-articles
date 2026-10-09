@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "detrazioni-figli-basel",
+      "section": "canton-basilea"
+    },
+    {
+      "articleId": "cantello-teatro-dialettale-ottobre-2026",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "lucerna-qualita-sviluppo-scuole",
+      "section": "canton-lu"
+    },
+    {
+      "articleId": "lopper-luce-pedoni-bici",
+      "section": "canton-nw"
+    },
+    {
+      "articleId": "disoccupazione-berna-settembre-2026-stabile",
+      "section": "canton-be"
+    },
+    {
+      "articleId": "confusione-tassa-salute-frontalieri",
+      "section": "frontaliere"
+    }
+  ]
+}

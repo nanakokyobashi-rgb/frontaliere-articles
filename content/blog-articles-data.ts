@@ -2773,7 +2773,7 @@ const RAW_ARTICLES = [
  id: 'confusione-tassa-salute-frontalieri',
  category: 'fiscale',
  date: '2026-03-06T00:03:53.612Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-confusione-tassa-salute-frontalieri.webp',
  hasCalculator: true,
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
