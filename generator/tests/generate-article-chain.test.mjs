@@ -284,7 +284,7 @@ exit 0
 // ── Il segnale: una definizione sola ──────────────────────────────────────────
 
 test('esiste una sola definizione di «articolo prodotto» in tutto il workflow', () => {
-  const probes = ACTIVE.match(/--diff-filter=A/g) || [];
+  const probes = ACTIVE.match(/--diff-filter=A(?:\s|$)/g) || [];
   assert.equal(
     probes.length,
     1,
