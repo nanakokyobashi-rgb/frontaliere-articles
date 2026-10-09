@@ -360,6 +360,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T06:35:59.657Z",
       "lastFailureAt": "2026-10-09T06:35:59.657Z"
+    },
+    {
+      "articleId": "luganistan-clan-ceresio",
+      "title": "Luganistan, il giardino di casa di una cleptocrazia",
+      "fallbackImage": "/images/blog/article-clan-nazarbayev-ceresio.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T06:48:32.689Z",
+      "lastFailureAt": "2026-10-09T06:48:32.689Z"
     }
   ]
 }
