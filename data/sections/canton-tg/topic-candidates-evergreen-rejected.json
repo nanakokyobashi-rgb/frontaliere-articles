@@ -2,9 +2,13 @@
   "keywords": [],
   "strikes": {},
   "topicGateUrls": {
-    "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12542": {
+    "canton-tg::https://www.tagblatt.ch/wirtschaft/ostschweiz/stadler-verdoppelt-seine-flotte-fuer-die-saudi-arabischen-eisenbahnen-ld.4248209": {
       "section": "canton-tg",
-      "ts": 1791369853469
+      "ts": 1791560356494
+    },
+    "canton-tg::https://awa.tg.ch/public/upload/assets/34935/infoblatt_was_tun_bei_ausstehendem_lohn.pdf?fp=1": {
+      "section": "canton-tg",
+      "ts": 1791560358106
     }
   }
 }

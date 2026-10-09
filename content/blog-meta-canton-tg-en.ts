@@ -15,6 +15,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.turgovia-occupazione-rav-settembre.title': 'Unemployment in Thurgau: rate stable at 2,2%',
     'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'In Thurgau, at the end of September, there were 3.558 unemployed people (+54). The unemployment rate remains at 2,2%; the number of people seeking employment is 7.155 and there are 1.824 vacancies.',
     'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Regional employment center in Thurgau with job postings',
+    'blog.article.aadorf-spese-sociali-2027.title': 'Aadorf: status S fee, higher social expenses in 2027',
+    'blog.article.aadorf-spese-sociali-2027.excerpt': 'In its 2027 budget, Aadorf expects significantly higher social costs and more tax revenue; the end of federal contributions for Ukrainians could weigh even more heavily.',
+    'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Aadorf town centre and municipal building in the canton of Thurgau on an autumn day',
 };
 
 export default blogMetaCantonTgEn;

@@ -15,6 +15,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.turgovia-occupazione-rav-settembre.title': 'Disoccupazione in Turgovia: quota stabile al 2,2%',
     'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'In Turgovia, a fine settembre, i disoccupati sono 3.558 (+54). La quota resta al 2,2%; le persone in cerca d\'impiego sono 7.155 e i posti vacanti 1.824.',
     'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Centro regionale per l\'impiego in Turgovia con annunci di lavoro',
+    'blog.article.aadorf-spese-sociali-2027.title': 'Aadorf: fine status S, più spese sociali nel 2027',
+    'blog.article.aadorf-spese-sociali-2027.excerpt': 'Nel budget 2027 Aadorf prevede costi sociali nettamente più alti e più entrate fiscali; la fine dei contributi federali per gli ucraini può pesare ancora di più.',
+    'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Municipio e centro di Aadorf, nel Canton Turgovia, in una giornata autunnale',
 };
 
 export default blogMetaCantonTgIt;

@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'rapporti-thurmed-turgovia': { it: 'rapporti-thurmed-turgovia', en: 'thurmed-thurgau-reports', de: 'thurmed-berichte-thurgau', fr: 'rapports-thurmed-thurgovie' },
  'chiusura-strada-kesswil': { it: 'chiusura-strada-kesswil', en: 'kesswil-road-closure-october-2026', de: 'strassensperrung-kesswil-oktober-2026', fr: 'fermeture-route-kesswil-octobre-2026' },
  'turgovia-occupazione-rav-settembre': { it: 'turgovia-occupazione-rav-settembre', en: 'thurgau-employment-rav-september', de: 'thurgau-arbeitsmarkt-rav-september', fr: 'thurgovie-emploi-rav-septembre' },
+ 'aadorf-spese-sociali-2027': { it: 'aadorf-spese-sociali-2027', en: 'aadorf-social-costs-2027', de: 'aadorf-sozialausgaben-2027', fr: 'aadorf-depenses-sociales-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

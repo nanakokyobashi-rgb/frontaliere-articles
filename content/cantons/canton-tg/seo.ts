@@ -153,6 +153,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aadorf-spese-sociali-2027': {
+    title: 'Aadorf: fine status S, più spese sociali nel 2027',
+    description: 'Aadorf: il budget 2027 prevede costi sociali nettamente più alti e maggiori entrate fiscali. La fine dei contributi federali per gli ucraini può pesare ancora.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aadorf, fine, status, spese',
+    ogTitle: 'Aadorf: fine status S, più spese sociali nel 2027',
+    ogDescription: 'Il budget 2027 di Aadorf combina due segnali: costi sociali nettamente più alti e maggiori entrate fiscali. Il venir meno dei contributi federali per le persone ucraine potrà incidere ancora di più sulle spese future del comune.',
+    canonicalPath: '/articoli-turgovia/aadorf-spese-sociali-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aadorf: fine status S, più spese sociali nel 2027",
+      "description": "Aadorf: il budget 2027 prevede costi sociali nettamente più alti e maggiori entrate fiscali. La fine dei contributi federali per gli ucraini può pesare ancora.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aadorf-spese-sociali-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Municipio e centro di Aadorf, nel Canton Turgovia, in una giornata autunnale"
+      },
+      "datePublished": "2026-10-09T15:46:11+00:00",
+      "dateModified": "2026-10-09T15:46:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/aadorf-spese-sociali-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

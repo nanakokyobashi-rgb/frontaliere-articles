@@ -15,6 +15,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.turgovia-occupazione-rav-settembre.title': 'Chômage en Thurgovie : taux stable à 2,2 %',
     'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'En Thurgovie, fin septembre, le nombre de chômeurs est de 3.558 (+54). Le taux reste à 2,2 % ; les personnes à la recherche d’un emploi sont au nombre de 7.155 et les postes vacants à 1.824.',
     'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Centre régional de placement en Thurgovie avec offres d\'emploi',
+    'blog.article.aadorf-spese-sociali-2027.title': 'Aadorf : fin du statut S, davantage de dépenses sociales en 2027',
+    'blog.article.aadorf-spese-sociali-2027.excerpt': 'Dans le budget 2027, Aadorf prévoit des coûts sociaux nettement plus élevés et davantage de recettes fiscales ; la fin des contributions fédérales pour les Ukrainiens peut peser encore davantage.',
+    'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Centre d\'Aadorf et bâtiment communal dans le canton de Thurgovie, un jour d\'automne',
 };
 
 export default blogMetaCantonTgFr;

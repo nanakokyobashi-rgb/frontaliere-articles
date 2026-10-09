@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'aadorf-spese-sociali-2027',
+ category: 'fiscale',
+ date: '2026-10-09T15:46:11.874Z',
+ image: '/images/blog/article-aadorf-spese-sociali-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

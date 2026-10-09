@@ -15,6 +15,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.turgovia-occupazione-rav-settembre.title': 'Arbeitslosigkeit im Thurgau: Quote stabil bei 2,2%',
     'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'Im Thurgau waren Ende September 3.558 Personen arbeitslos (+54). Die Quote bleibt bei 2,2%; die Zahl der Stellensuchenden liegt bei 7.155 und die der offenen Stellen bei 1.824.',
     'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Arbeitsvermittlungszentrum im Thurgau mit Stellenangeboten',
+    'blog.article.aadorf-spese-sociali-2027.title': 'Aadorf: Ende des Status S, höhere Sozialausgaben im Jahr 2027',
+    'blog.article.aadorf-spese-sociali-2027.excerpt': 'Im Budget 2027 sieht Aadorf deutlich höhere Sozialkosten und höhere Steuereinnahmen vor; das Ende der Bundesbeiträge für die Ukrainer kann noch stärker ins Gewicht fallen.',
+    'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Ortszentrum und Gemeindehaus von Aadorf im Kanton Thurgau an einem Herbsttag',
 };
 
 export default blogMetaCantonTgDe;
