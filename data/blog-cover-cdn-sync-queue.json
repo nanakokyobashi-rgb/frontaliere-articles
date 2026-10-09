@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-incidente-a9-saronno-turate-code.webp",
+      "sha256": "3522dcd4ca09bbe07b74d755144e42fffde8206189d67a21df2f54b56208c033"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-incidente-a9-saronno-turate-code-480w.webp",
+      "sha256": "baea4b8b1027ef7d66eb56fcef662b740cdd60bec0890b6d6189e80dde153d0e"
+    }
+  ]
 }
