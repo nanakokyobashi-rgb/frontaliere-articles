@@ -142,6 +142,60 @@ test('010: un solo marker non ha ordine da decidere, anche senza data', () => {
   assert.equal(latestTriageCommentBody('non json'), null);
 });
 
+test('2299: una correzione con gli stessi ID eredita il bucket del marker precedente', () => {
+  const original = [
+    '## Post-merge follow-up triage',
+    '',
+    'Created/updated: daily bucket #2544 `follow-up(daily:2026-10-09)` (corpus) con 2 item:',
+    '- FU-2026-10-09-001 — Probe del fallback confonde lock e scrittura corpus',
+    '- FU-2026-10-09-002 — Probe del fallback confonde lock e scrittura corpus',
+    '',
+    'Follow-up item: FU-2026-10-09-001',
+    'Follow-up item: FU-2026-10-09-002',
+  ].join('\n');
+  const correction = [
+    '## Post-merge follow-up triage — correction',
+    '',
+    'La claim precedente riportava il titolo del primo item anche sulla seconda riga; gli ID del bucket restano invariati:',
+    '- FU-2026-10-09-001 — Probe del fallback confonde lock e scrittura corpus',
+    '- FU-2026-10-09-002 — Rollback Firestore e commit del publisher non hanno una prova comune',
+  ].join('\n');
+  const comments = JSON.stringify({ comments: [
+    { body: original, createdAt: '2026-10-09T00:48:50Z' },
+    { body: correction, createdAt: '2026-10-09T00:50:10Z' },
+  ] });
+  const bucket = {
+    number: 2544,
+    title: 'follow-up(daily:2026-10-09): 27 items — nanakokyobashi-rgb/frontaliere-articles',
+    body: '### FU-2026-10-09-001 — x\n- Sources: PR #2416\n',
+  };
+
+  const correctionOnly = triageMarkerPersistenceExpectation(correction);
+  assert.deepEqual(correctionOnly.items, ['FU-2026-10-09-001', 'FU-2026-10-09-002']);
+  assert.deepEqual(correctionOnly.buckets, []);
+  assert.equal(correctionOnly.requiresBucket, true);
+
+  const selected = latestTriageCommentBody(comments);
+  const expectation = triageMarkerPersistenceExpectation(selected);
+  assert.deepEqual(expectation.items, ['FU-2026-10-09-001', 'FU-2026-10-09-002']);
+  assert.deepEqual(expectation.buckets, [2544]);
+  assert.equal(verifyTriageMarkerPersistence(selected, 2416, () => bucket, comments), true);
+});
+
+test('2299: una correzione con ID diversi non eredita il contesto precedente', () => {
+  const comments = JSON.stringify({ comments: [
+    { body: '## Post-merge follow-up triage\n\nBucket daily: #2544\nFollow-up item: FU-2026-10-09-001', createdAt: '2026-10-09T00:48:50Z' },
+    { body: '## Post-merge follow-up triage — correction\n\n- FU-2026-10-09-999 — item diverso', createdAt: '2026-10-09T00:50:10Z' },
+  ] });
+  const selected = latestTriageCommentBody(comments);
+  assert.deepEqual(triageMarkerPersistenceExpectation(selected).buckets, []);
+  assert.equal(verifyTriageMarkerPersistence(selected, 2416, () => ({
+    number: 2544,
+    title: 'follow-up(daily:2026-10-09): 27 items',
+    body: '### FU-2026-10-09-001 — x\n- Sources: PR #2416\n',
+  }), comments), false);
+});
+
 // Review del gemello del sito (valerielinc-ops/frontaliere-si-o-no#10288), stessa classe
 // di FU-009: la chiusura del recinto e la fine dell'intestazione.
 test('009: un ``` dentro un recinto di ```` e\' contenuto, non la chiusura', () => {
