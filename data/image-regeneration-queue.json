@@ -260,6 +260,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T07:39:46.662Z",
       "lastFailureAt": "2026-10-09T07:39:46.662Z"
+    },
+    {
+      "articleId": "a8-manutenzione-cavalcavia-ottobre-2026",
+      "title": "A8: chiusure notturne per cavalcavia Castronno-Solbiate",
+      "fallbackImage": "/images/blog/article-a9-chiusure-notturne-sion-sierre.webp",
+      "reason": "All image providers failed for article-a8-manutenzione-cavalcavia-ottobre-2026: openai-codex (vision gate rejected image: Generic night highway-construction illustration clearly ma",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T09:14:12.097Z",
+      "lastFailureAt": "2026-10-09T09:14:12.097Z"
     }
   ]
 }
