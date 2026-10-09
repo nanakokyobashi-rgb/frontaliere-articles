@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-attacco-publica-dati-rubati.webp",
-      "sha256": "f6e217bc04f4d1bbe7361dba30cabed9e02f95129070899ca01464c641640a6a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-attacco-publica-dati-rubati-480w.webp",
-      "sha256": "b109d41c08672d20e6c9ee2471cbc073dd190c46a2564a4b77094a0d2631121f"
-    }
-  ]
+  "items": []
 }
