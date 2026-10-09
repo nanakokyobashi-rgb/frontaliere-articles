@@ -8,7 +8,7 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.soletta-disoccupazione-settembre.imageAlt': 'People outside a public employment office in the canton of Solothurn',
     'blog.article.premi-malattia-soletta-2027.title': 'Health insurance premiums in Solothurn: +6% in 2027',
     'blog.article.premi-malattia-soletta-2027.excerpt': 'In the Canton of Solothurn, the average premium will rise by CHF 23.50 to CHF 417.50 in 2027, 5.50 more than the Swiss average.',
-    'blog.article.premi-malattia-soletta-2027.imageAlt': 'Health insurance premiums in the Canton of Solothurn in 2027',
+    'blog.article.premi-malattia-soletta-2027.imageAlt': 'Illustration generated for this article',
     'blog.article.luterbach-a5-rampe-notte.title': 'A5 at Luterbach: four ramps closed in October',
     'blog.article.luterbach-a5-rampe-notte.excerpt': 'At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.',
     'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Luterbach interchange on the A5 during night works and ramp closures',

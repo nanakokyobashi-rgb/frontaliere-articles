@@ -12,64 +12,14 @@
       "failureCount": 3
     },
     {
-      "articleId": "pedemontana-falso-pedaggio-sms",
-      "title": "Pedemontana: nessun pagamento pedaggio via SMS o email",
-      "fallbackImage": "/images/blog/pedemontana-avviso-truffa.webp",
-      "reason": "All image providers failed for article-pedemontana-falso-pedaggio-sms: openai-codex (Codex broker timed out after 119999ms)",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:51:03.474Z",
-      "lastFailureAt": "2026-10-08T11:14:47.861Z",
-      "failureCount": 1
-    },
-    {
-      "articleId": "premi-malattia-soletta-2027",
-      "title": "Premi cassa malati a Soletta: +6% nel 2027",
-      "fallbackImage": "/images/blog/premi-cassa-malati-lamal-2026-canton-zurigo.webp",
-      "reason": "All image providers failed for article-premi-malattia-soletta-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T10:54:53.704Z",
-      "lastFailureAt": "2026-10-07T11:11:51.126Z",
-      "failureCount": 0
-    },
-    {
-      "articleId": "aggressione-van-villa-olmo",
-      "title": "Como, turisti derubati e aggrediti nel van: arrestato 21enne",
-      "fallbackImage": "/images/blog/trenord-furto-di-cavi-sospesa-como-milano.webp",
-      "reason": "All image providers failed for article-aggressione-van-villa-olmo: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T11:07:36.355Z",
-      "lastFailureAt": "2026-10-07T11:07:36.355Z",
-      "failureCount": 0
-    },
-    {
       "articleId": "detrazioni-figli-basel",
       "title": "Basilea Città: detrazioni figli quattro volte più alte",
       "fallbackImage": "/images/blog/asilo-nido-e-custodia-bambini-canton-basilea-citta.webp",
-      "reason": "All image providers failed for article-detrazioni-figli-basel: Codex broker rejected the request: Codex CLI returned an empty last message",
+      "reason": "All image providers failed for article-detrazioni-figli-basel: openai-codex (vision gate rejected image: Generic Basel illustration relevant to children and financial deductions, but it contains a recognizable foreground person viewed from ",
       "status": "queued",
       "requestedAt": "2026-10-07T11:11:39.965Z",
-      "lastFailureAt": "2026-10-07T11:11:39.965Z",
-      "failureCount": 0
-    },
-    {
-      "articleId": "losanna-budget-deficit-2027",
-      "title": "Losanna: deficit di 77,7 milioni nel budget 2027",
-      "fallbackImage": "/images/blog/angestellte-schweiz-aumento-2027.webp",
-      "reason": "All image providers failed for article-losanna-budget-deficit-2027: Codex broker rejected the request: Codex CLI returned an empty last message",
-      "status": "queued",
-      "requestedAt": "2026-10-07T11:12:50.829Z",
-      "lastFailureAt": "2026-10-07T11:12:50.829Z",
-      "failureCount": 0
-    },
-    {
-      "articleId": "notte-bper-gallarate-bancomat",
-      "title": "Bancomat esploso: colpo notturno alla Bper di Gallarate",
-      "fallbackImage": "/images/blog/controlli-locali-busto-arsizio-gallarate.webp",
-      "reason": "All image providers failed for article-notte-bper-gallarate-bancomat: Codex broker timed out after 119998ms",
-      "status": "queued",
-      "requestedAt": "2026-10-07T12:19:47.220Z",
-      "lastFailureAt": "2026-10-07T12:19:47.220Z",
-      "failureCount": 0
+      "lastFailureAt": "2026-10-09T00:14:52.554Z",
+      "failureCount": 1
     },
     {
       "articleId": "cantello-teatro-dialettale-ottobre-2026",

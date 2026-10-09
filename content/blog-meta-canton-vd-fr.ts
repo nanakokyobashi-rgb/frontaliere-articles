@@ -11,7 +11,7 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.vaud-revision-bouclier-fiscal-2024.imageAlt': 'Le Grand Conseil du canton de Vaud à Lausanne, siège des décisions sur le bouclier fiscal.',
     'blog.article.losanna-budget-deficit-2027.title': 'Lausanne : déficit de 77,7 millions dans le budget 2027',
     'blog.article.losanna-budget-deficit-2027.excerpt': 'Le budget 2027 de Lausanne présente un déficit de 77,7 millions de francs.',
-    'blog.article.losanna-budget-deficit-2027.imageAlt': 'Vue urbaine de Lausanne liée au budget 2027 déficitaire.',
+    'blog.article.losanna-budget-deficit-2027.imageAlt': 'Illustration générée pour cet article',
     'blog.article.morges-mobilita-consultazione-2045.title': 'Morges : les demandes en matière de mobilité à l’horizon 2045',
     'blog.article.morges-mobilita-consultazione-2045.excerpt': 'Morges intervient dans la consultation fédérale « Transports ’45 »',
     'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Vue urbaine de Morges avec infrastructures routières',

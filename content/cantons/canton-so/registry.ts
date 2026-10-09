@@ -21,7 +21,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'premi-malattia-soletta-2027',
  category: 'pratico',
  date: '2026-10-07T11:11:51.115Z',
- image: '/images/blog/premi-cassa-malati-lamal-2026-canton-zurigo.webp',
+ image: '/images/blog/article-premi-malattia-soletta-2027.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SO'],

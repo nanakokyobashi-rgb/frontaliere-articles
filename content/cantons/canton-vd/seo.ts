@@ -89,10 +89,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il budget 2027 di Losanna presenta un deficit di 77,7 milioni di franchi: la cifra al centro della notizia sul bilancio 2027 della città vodese di Losanna.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/angestellte-schweiz-aumento-2027.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-losanna-budget-deficit-2027.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Veduta urbana di Losanna per il bilancio 2027 in deficit."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T11:12:50+00:00",
       "dateModified": "2026-10-07T11:12:50+00:00",

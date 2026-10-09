@@ -11,7 +11,7 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.vaud-revision-bouclier-fiscal-2024.imageAlt': 'Der Grosse Rat des Kantons Waadt in Lausanne, Sitz der Entscheidungen über die Steuerbremse.',
     'blog.article.losanna-budget-deficit-2027.title': 'Lausanne: Defizit von 77,7 Millionen im Budget 2027',
     'blog.article.losanna-budget-deficit-2027.excerpt': 'Das Budget 2027 von Lausanne weist ein Defizit von 77,7 Millionen Franken auf.',
-    'blog.article.losanna-budget-deficit-2027.imageAlt': 'Stadtansicht von Lausanne zum defizitären Budget 2027.',
+    'blog.article.losanna-budget-deficit-2027.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.morges-mobilita-consultazione-2045.title': 'Morges: Forderungen zur Mobilität für 2045',
     'blog.article.morges-mobilita-consultazione-2045.excerpt': '',
     'blog.article.morges-mobilita-consultazione-2045.imageAlt': 'Stadtansicht von Morges mit Straßeninfrastruktur',
