@@ -18,6 +18,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.solothurn-pneumonia-suini.title': 'Solothurn: 930 pigs killed due to enzootic pneumonia',
     'blog.article.solothurn-pneumonia-suini.excerpt': 'The Veterinary Service of the Canton of Solothurn has cleared out two farms: 80 sows and 50 young pigs slaughtered, 930 pigs killed and 1200 young pigs exported alive.',
     'blog.article.solothurn-pneumonia-suini.imageAlt': 'Pig farms in Canton Solothurn during veterinary disease controls',
+    'blog.article.furti-raggiro-soletta.title': 'Thefts by deception in Solothurn: police issue warning',
+    'blog.article.furti-raggiro-soletta.excerpt': 'The Solothurn cantonal police report around ten thefts involving deception in recent days: perpetrators use inexpensive jewelry to distract their victims.',
+    'blog.article.furti-raggiro-soletta.imageAlt': 'Symbolic urban scene in Solothurn linked to the warning about trick thefts',
 };
 
 export default blogMetaCantonSoEn;

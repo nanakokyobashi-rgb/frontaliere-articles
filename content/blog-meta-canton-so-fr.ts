@@ -18,6 +18,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.solothurn-pneumonia-suini.title': 'Soleure : 930 porcs tués en raison d\'une pneumonie enzootique',
     'blog.article.solothurn-pneumonia-suini.excerpt': 'Le Service vétérinaire du canton de Soleure a fait évacuer deux élevages : 80 truies et 50 jeunes porcs abattus, 930 porcs tués et 1200 jeunes porcs exportés vivants.',
     'blog.article.solothurn-pneumonia-suini.imageAlt': 'Élevages porcins dans le canton de Soleure lors de contrôles vétérinaires',
+    'blog.article.furti-raggiro-soletta.title': 'Vols par ruse à Soleure : la police met en garde',
+    'blog.article.furti-raggiro-soletta.excerpt': 'La Police cantonale de Soleure signale une dizaine de vols par ruse ces derniers jours : les autrices et auteurs utilisent des bijoux bon marché pour distraire les victimes.',
+    'blog.article.furti-raggiro-soletta.imageAlt': 'Scène urbaine symbolique à Soleure liée à l\'alerte sur les vols par ruse',
 };
 
 export default blogMetaCantonSoFr;

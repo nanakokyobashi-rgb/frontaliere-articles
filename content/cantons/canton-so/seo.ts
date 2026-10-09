@@ -197,6 +197,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-furti-raggiro-soletta': {
+    title: 'Furti con raggiro a Soletta: la polizia mette in guardia',
+    description: 'Nel Canton Soletta, circa dieci furti con raggiro negli ultimi giorni: la Polizia cantonale invita alla prudenza e indica il 117 per le segnalazioni immediate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, furti, raggiro, soletta, polizia',
+    ogTitle: 'Soletta: circa dieci furti con raggiro negli ultimi giorni',
+    ogDescription: 'Secondo i primi accertamenti, le autrici e gli autori si avvicinano a piedi o con un veicolo e fanno indossare gioielli economici. Nella distrazione, sottraggono i gioielli delle vittime: la Polizia cantonale di Soletta chiede prudenza e segnala',
+    canonicalPath: '/articoli-soletta/furti-raggiro-soletta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Furti con raggiro a Soletta: la polizia mette in guardia",
+      "description": "Nel Canton Soletta, circa dieci furti con raggiro negli ultimi giorni: la Polizia cantonale invita alla prudenza e indica il 117 per le segnalazioni immediate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena urbana simbolica nel Canton Soletta legata all'allerta sui furti con raggiro"
+      },
+      "datePublished": "2026-10-09T23:07:09+00:00",
+      "dateModified": "2026-10-09T23:07:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/furti-raggiro-soletta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

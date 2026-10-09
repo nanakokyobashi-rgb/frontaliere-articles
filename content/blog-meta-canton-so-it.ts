@@ -18,6 +18,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.solothurn-pneumonia-suini.title': 'Soletta: uccisi 930 suini per polmonite enzootica',
     'blog.article.solothurn-pneumonia-suini.excerpt': 'Il Servizio veterinario del Canton Soletta ha sgomberato due allevamenti: 80 scrofe e 50 giovani macellati, 930 suini uccisi e 1200 giovani esportati vivi.',
     'blog.article.solothurn-pneumonia-suini.imageAlt': 'Allevamenti di suini nel Canton Soletta durante i controlli veterinari',
+    'blog.article.furti-raggiro-soletta.title': 'Furti con raggiro a Soletta: la polizia mette in guardia',
+    'blog.article.furti-raggiro-soletta.excerpt': 'La Polizia cantonale di Soletta segnala circa dieci furti con raggiro negli ultimi giorni: autrici e autori usano gioielli economici per distrarre le vittime.',
+    'blog.article.furti-raggiro-soletta.imageAlt': 'Scena urbana simbolica nel Canton Soletta legata all\'allerta sui furti con raggiro',
 };
 
 export default blogMetaCantonSoIt;

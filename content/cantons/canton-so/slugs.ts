@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'luterbach-a5-rampe-notte': { it: 'luterbach-a5-rampe-notte', en: 'luterbach-a5-night-ramps', de: 'luterbach-a5-nachtsperren', fr: 'luterbach-a5-rampes-nuit' },
  'soletta-progetti-trasporto-governo': { it: 'soletta-progetti-trasporto-governo', en: 'solothurn-transport-projects-government', de: 'solothurn-verkehrsprojekte-regierung', fr: 'soleure-projets-transport-gouvernement' },
  'solothurn-pneumonia-suini': { it: 'solothurn-pneumonia-suini', en: 'solothurn-pig-pneumonia-cull', de: 'solothurn-schweinepneumonie-keulung', fr: 'soleure-pneumonie-porcine-abattage' },
+ 'furti-raggiro-soletta': { it: 'furti-raggiro-soletta', en: 'solothurn-trick-thefts-warning', de: 'solothurn-warnung-trickdiebstahle', fr: 'soleure-alerte-vols-par-ruse' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
