@@ -98,7 +98,8 @@ jobs:
               case "${UPSTREAM_EVENT:-}" in
                 push)
                   export COVER_DRAIN_COMMIT_MESSAGE="${UPSTREAM_HEAD_COMMIT_MESSAGE:-}"
-                  if [ "$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)" = 'true' ]; then
+                  cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
+                  if [ "$cover_drain_marker" = 'true' ]; then
                     echo 'should_drain=false' >> "$GITHUB_OUTPUT"
                     echo 'generator push came from this cover drain: cover drain deferred to the next backstop'
                     exit 0

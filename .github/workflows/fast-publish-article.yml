@@ -176,14 +176,17 @@ jobs:
           groups='{}'
           body_section_seen=''
           write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
-          if [ "$EVENT_NAME" = 'push' ] && [ "$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)" = 'true' ]; then
-            echo 'cover-drain push is handled by the explicit publisher outbox dispatch; skipping automatic article publishing'
-            write_output 'skip=true'
-            write_output 'matrix=[]'
-            write_output 'any=false'
-            write_output 'dry=false'
-            write_output 'skip_reason=cover-drain-explicit-publisher'
-            exit 0
+          if [ "$EVENT_NAME" = 'push' ]; then
+            cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
+            if [ "$cover_drain_marker" = 'true' ]; then
+              echo 'cover-drain push is handled by the explicit publisher outbox dispatch; skipping automatic article publishing'
+              write_output 'skip=true'
+              write_output 'matrix=[]'
+              write_output 'any=false'
+              write_output 'dry=false'
+              write_output 'skip_reason=cover-drain-explicit-publisher'
+              exit 0
+            fi
           fi
           before="${PUSH_BEFORE:-}"
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
