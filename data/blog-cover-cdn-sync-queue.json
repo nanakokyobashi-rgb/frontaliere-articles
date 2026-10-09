@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-costi-cure-domicilio-ticino-2026.webp",
-      "sha256": "669a204f24524f7a7910802dab0bebacbd6919fd2a35d71ba9fb62113624ebad"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-costi-cure-domicilio-ticino-2026-480w.webp",
-      "sha256": "3564839437a1dbc582e74f96ff824d2eb802131691481c10eef6b996a75bbe1f"
-    }
-  ]
+  "items": []
 }
