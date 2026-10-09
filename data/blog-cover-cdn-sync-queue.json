@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-buchs-deficit-2027-budget.webp",
-      "sha256": "34e6f2ce13173ab6bee931ce834b330f0f46f31d6b6eb6eb7dd41e11ec938c6d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-buchs-deficit-2027-budget-480w.webp",
-      "sha256": "22962f4bb4b8ae37ba2b39b529f0fba1feb9807726ee823e69a5c806046755a8"
-    }
-  ]
+  "items": []
 }
