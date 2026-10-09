@@ -373,7 +373,7 @@
       "reason": "Rilevatore condiviso dai workflow corpus-only `regenerate-queued-covers.yml`, `fast-publish-article.yml` e `fast-publish-section.yml` per distinguere i push di orchestrazione dai push editoriali. Il sito non possiede il drain delle copertine né questi publisher, quindi non esiste un gemello da portare: resta corpus-only per costruzione.",
       "baseline": {
         "site": null,
-        "corpus": "f68f59bf6c4ffab2",
+        "corpus": "db73dcaf2971be66",
         "alignedAt": "2026-10-09"
       }
     },
