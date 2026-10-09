@@ -100949,6 +100949,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-referendum-iva-2026-aumento-per-la-tredicesima-pensione': {
+    title: 'Referendum IVA 2026: aumento per la tredicesima pensione',
+    description: 'Il referendum sulla proposta si terrà il 29 novembre. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, referendum, aumento, tredicesima, pensione',
+    ogTitle: 'Referendum IVA 2026: aumento per la tredicesima pensione',
+    ogDescription: 'Il referendum sulla proposta si terrà il 29 novembre.',
+    canonicalPath: '/articoli-svizzera/referendum-iva-2026-aumento-per-la-tredicesima-pensione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Referendum IVA 2026: aumento per la tredicesima pensione",
+      "description": "Il referendum sulla proposta si terrà il 29 novembre. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-referendum-iva-2026-aumento-per-la-tredicesima-pensione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Referendum IVA 2026: aumento per la tredicesima pensione"
+      },
+      "datePublished": "2026-10-09T20:56:52+00:00",
+      "dateModified": "2026-10-09T20:56:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/referendum-iva-2026-aumento-per-la-tredicesima-pensione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

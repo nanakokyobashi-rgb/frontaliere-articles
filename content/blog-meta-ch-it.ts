@@ -8006,6 +8006,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mastercard-pagamenti-rete-assente.title': 'Mastercard: pagamenti senza internet dal 2027',
     'blog.article.mastercard-pagamenti-rete-assente.excerpt': 'Mastercard introdurrà la funzione in Svizzera dal 2027 Le nuove carte la supporteranno da febbraio 2027 Terminali nuovi o sostituiti: tecnologia entro maggio',
     'blog.article.mastercard-pagamenti-rete-assente.imageAlt': 'Terminale Mastercard in un negozio svizzero durante un\'interruzione internet',
+    'blog.article.referendum-iva-2026-aumento-per-la-tredicesima-pensione.title': 'Referendum IVA 2026: aumento per la tredicesima pensione',
+    'blog.article.referendum-iva-2026-aumento-per-la-tredicesima-pensione.excerpt': 'Il referendum sulla proposta si terrà il 29 novembre.',
+    'blog.article.referendum-iva-2026-aumento-per-la-tredicesima-pensione.imageAlt': 'Immagine editoriale relativa a: Referendum IVA 2026: aumento per la tredicesima pensione',
 };
 
 export default blogMetaChIt;

@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/mondo/la-%e2%80%9crana-del-caff%c3%a8%e2%80%9d-scoperta-una-nuova-specie-in-costa-rica--3945972.html": {
-    "articleId": "rana-caff-scoperta-costa-rica",
-    "ts": "2026-09-07T10:44:59.994Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/rubriche/ospite/1948480/neutralita-il-27-settembre-scegliamo-la-svizzera": {
     "articleId": "neutralita-svizzera-27-settembre",
     "ts": "2026-09-07T11:10:20.424Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/mastercard%2c-presto-pagamenti-possibili-anche-senza-internet/92192656": {
     "articleId": "mastercard-pagamenti-rete-assente",
     "ts": "2026-10-09T20:04:15.653Z",
+    "keyForm": 2
+  },
+  "https://lenews.ch/2026/10/09/swiss-minister-defends-vat-rise-to-fund-higher-state-pension": {
+    "articleId": "referendum-iva-2026-aumento-per-la-tredicesima-pensione",
+    "ts": "2026-10-09T20:56:52.199Z",
     "keyForm": 2
   }
 }
