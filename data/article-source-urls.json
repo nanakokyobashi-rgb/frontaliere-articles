@@ -1,9 +1,4 @@
 {
-  "stats-bfs://2026-q2": {
-    "articleId": "lavoro-transfrontaliero-ticino-q2-2026",
-    "ts": "2026-08-31T15:36:23.053Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/bellinzonese/1943428/votazione-sulla-fortezza-costituito-il-comitato-civico-favorevole": "votazione-sulla-fortezza-2024",
   "https://www.tio.ch/svizzera/economia/1943379/ue-imballaggi-regole-microimprese-spedizioni": "frontaliereticino-chiasso-2026",
   "https://www.varesenews.it/2026/08/di-chi-e-quel-pallet-la-domanda-che-apre-una-zona-dombra-nella-logistica/2656255": "logistica-pallet-analisi-mercato",
@@ -2272,6 +2267,11 @@
   "https://www.tio.ch/ticino/attualita/1955787/sostegno-progetti-bando-borse-franchi-creazione-tre-20mila": {
     "articleId": "borse-musica-ticino-2026",
     "ts": "2026-10-09T11:50:55.370Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/filo-elettrico-al-collo-della-moglie-condannato-a-5-anni-e-2-mesi-per-i-fatti-di-montegrino-valtravaglia/2703142": {
+    "articleId": "montegrino-valtravaglia-aggressione-condanna",
+    "ts": "2026-10-09T12:24:19.195Z",
     "keyForm": 2
   }
 }

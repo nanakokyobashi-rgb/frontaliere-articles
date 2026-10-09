@@ -12884,6 +12884,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.borse-musica-ticino-2026.title': 'Stipendien: drei Beiträge von 20\'000 CHF für Musik im Tessin',
     'blog.article.borse-musica-ticino-2026.excerpt': 'Drei Musikstipendien à 20\'000 Franken Bewerbungen bis 9.',
     'blog.article.borse-musica-ticino-2026.imageAlt': 'Musikkonzert im Tessin, mit Musikern auf der Bühne und Publikum, als Unterstützung für künstlerisches Schaffen',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.title': 'Montegrino Valtravaglia: Verurteilung wegen Angriff mit elektrischem Draht',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.excerpt': 'Verurteilung zu 5 Jahren und 2 Monaten für die Ereignisse vom 25. (Montegrino Valtravaglia)',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.imageAlt': 'Panoramablick auf den Luganersee oder Lago Maggiore mit Bergen und einem Dorf am Ufer, der die Region Varese heraufbeschwört.',
 };
 
 export default blogMetaDe;

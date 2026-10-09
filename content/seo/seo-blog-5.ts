@@ -104275,6 +104275,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-montegrino-valtravaglia-aggressione-condanna': {
+    title: 'Montegrino Valtravaglia: condanna per aggressione con filo elettrico',
+    description: 'Condanna a 5 anni e 2 mesi per i fatti del 25 novembre 2025 Il caso riguarda Montegrino Valtravaglia Disposta una provvisionale di 5 mila euro per la donna',
+    keywords: 'frontalieri, ticino, svizzera, italia, montegrino, valtravaglia, condanna, aggressione',
+    ogTitle: 'Montegrino Valtravaglia: condanna a 5 anni per aggressione',
+    ogDescription: 'Condanna a 5 anni e 2 mesi per i fatti del 25 novembre 2025 Il caso riguarda Montegrino Valtravaglia Disposta una provvisionale di 5 mila euro per la donna',
+    canonicalPath: '/articoli-frontaliere/montegrino-valtravaglia-aggressione-condanna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Montegrino Valtravaglia: condanna per aggressione con filo elettrico",
+      "description": "Condanna a 5 anni e 2 mesi per i fatti del 25 novembre 2025 Il caso riguarda Montegrino Valtravaglia Disposta una provvisionale di 5 mila euro per la donna",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-montegrino-valtravaglia-aggressione-condanna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del Lago di Lugano o Lago Maggiore con montagne e un borgo sulla riva, evocando la regione di Varese."
+      },
+      "datePublished": "2026-10-09T12:24:18+00:00",
+      "dateModified": "2026-10-09T12:24:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/montegrino-valtravaglia-aggressione-condanna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

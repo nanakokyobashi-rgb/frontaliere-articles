@@ -12885,6 +12885,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.borse-musica-ticino-2026.title': 'Scholarships: three grants of CHF 20,000 for music in Ticino',
     'blog.article.borse-musica-ticino-2026.excerpt': 'Three scholarships of 20,000francs for music Applications by 9 November 2026, at 12 Publication on the Official Sheet on 8 October 2026 → DECs Promoter',
     'blog.article.borse-musica-ticino-2026.imageAlt': 'Music concert in Ticino, with musicians on stage and audience, representing support for artistic creation',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.title': 'Montegrino Valtravaglia: sentence for assault with electric wire',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.excerpt': 'Sentence to 5 years and 2 months for the events of 25 November 2025 The case concerns Montegrino Valtravaglia Provisional order of 5 thousand euros for the woman',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.imageAlt': 'Panoramic view of Lake Lugano or Lake Maggiore with mountains and a village on the shore, evoking the Varese region.',
 };
 
 export default blogMetaEn;

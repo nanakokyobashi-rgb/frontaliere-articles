@@ -12886,6 +12886,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.borse-musica-ticino-2026.title': 'Borse di studio: tre contributi da 20\'000 CHF per la musica in Ticino',
     'blog.article.borse-musica-ticino-2026.excerpt': 'Tre borse da 20\'000 franchi per la musica Candidature entro il 9 novembre 2026, alle 12 Pubblicazione sul Foglio ufficiale l\'8 ottobre 2026 Promotore → DECS',
     'blog.article.borse-musica-ticino-2026.imageAlt': 'Concerto musicale in Ticino, con musicisti sul palco e pubblico, a rappresentare il sostegno alla creazione artistica',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.title': 'Montegrino Valtravaglia: condanna per aggressione con filo elettrico',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.excerpt': 'Condanna a 5 anni e 2 mesi per i fatti del 25 novembre 2025 Il caso riguarda Montegrino Valtravaglia Disposta una provvisionale di 5 mila euro per la donna',
+    'blog.article.montegrino-valtravaglia-aggressione-condanna.imageAlt': 'Vista panoramica del Lago di Lugano o Lago Maggiore con montagne e un borgo sulla riva, evocando la regione di Varese.',
 };
 
 export default blogMetaIt;
