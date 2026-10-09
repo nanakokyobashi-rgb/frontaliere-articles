@@ -114,6 +114,7 @@ function runGenerateStep({
   clockOffsetS = null,
   registrationDirtyOnAttempt = null,
   registrationDirtyPath = 'content/routerBlogData.ts',
+  stagedPathOnAttempt = null,
 } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'generate-article-chain-'));
   try {
@@ -167,19 +168,23 @@ i=0
 while [ "$i" -lt "$talk" ]; do sleep 1; echo "[stub] riga $i"; i=$((i + 1)); done
 if [ "$prod" = "1" ]; then echo "content/blog-body/it/articolo-$n.ts" >> "${staged}"; fi
 if [ -n "\${REGISTRATION_DIRTY_ATTEMPT:-}" ] && [ "$n" = "\${REGISTRATION_DIRTY_ATTEMPT:-}" ]; then printf '%s\\n' "\${REGISTRATION_DIRTY_PATH:-}" > "${registrationDirty}"; fi
+if [ -n "\${STAGED_PATH_ON_ATTEMPT:-}" ] && [ "$n" = "\${STAGED_PATH_ON_ATTEMPT:-}" ]; then printf '%s\\n' 'generator/data/register-in-progress-frontaliere.json.123.1.tmp' >> "${staged}"; fi
 exit "$rc"
 `;
-    // `git add -A` e' un no-op; il probe legge l'indice finto. Il ramo
-    // `--name-status` espone solamente il path dirty se il pathspec del
-    // workflow lo richiede davvero, cosi' marker e target sono regressioni
-    // eseguibili e non solo stringhe nel test.
+    // `git add -A` e' un no-op; il probe legge l'indice finto. La fixture puo'
+    // aggiungere un temporaneo di lock all'indice per dimostrare che la
+    // classificazione guarda solo i path reali sotto `content/`, mentre il
+    // target dirty resta una regressione eseguibile e non solo una stringa.
     const gitStub = `#!/usr/bin/env bash
 if [ "$1" = "diff" ]; then
-  if [ "\${3:-}" = "--name-status" ] && [ -f "${registrationDirty}" ]; then
+  if [ -f "${registrationDirty}" ]; then
     dirty="$(cat "${registrationDirty}")"
     case "$dirty" in
       content/*)
-        case "$*" in *"content/"*) printf 'M\\t%s\\n' "$dirty";; esac ;;
+        case "$*" in
+          *"--name-status"*) printf 'M\\t%s\\n' "$dirty";;
+          *) printf '%s\\n' "$dirty";;
+        esac ;;
     esac
   elif [ -f "${staged}" ]; then
     cat "${staged}"
@@ -238,6 +243,7 @@ exit 0
         ...(stallGrace === null ? {} : { GENERATE_STALL_GRACE_S: String(stallGrace) }),
         ...(registrationDirtyOnAttempt === null ? {} : { REGISTRATION_DIRTY_ATTEMPT: String(registrationDirtyOnAttempt) }),
         ...(registrationDirtyOnAttempt === null ? {} : { REGISTRATION_DIRTY_PATH: registrationDirtyPath }),
+        ...(stagedPathOnAttempt === null ? {} : { STAGED_PATH_ON_ATTEMPT: String(stagedPathOnAttempt) }),
       },
     });
     const elapsedMs = Date.now() - startedAt;
@@ -409,6 +415,21 @@ for (const registrationDirtyPath of ['content/routerBlogData.ts']) {
     assert.match(r.stdout, /output parziale non pubblicabile/);
   });
 }
+
+test('un temporaneo di lock staged fuori da content/ non blocca il fallback', () => {
+  const r = runGenerateStep({
+    section: 'svizzera',
+    plan: ['4 0', '0 1'],
+    // Simula anche il caso piu' severo di un temporaneo forzato nell'indice:
+    // un lock normale e' ignorato da git, ma non deve comunque essere scambiato
+    // per una scrittura del corpus se una fixture storica lo ha gia' tracciato.
+    stagedPathOnAttempt: 1,
+  });
+  assert.equal(r.outputs.article, 'true', 'il lock non e\' una registrazione parziale');
+  assert.equal(r.outputs.section, 'frontaliere');
+  assert.equal(r.invocations.length, 2, 'il fallback deve raggiungere la sezione gemella');
+  assert.match(r.stdout, /stagedContentPaths\.length=0/);
+});
 
 test('una dispatch manuale ottiene la sezione che ha chiesto e nessun\'altra', () => {
   const r = runGenerateStep({ section: 'svizzera', event: 'workflow_dispatch', plan: ['0 0'] });
