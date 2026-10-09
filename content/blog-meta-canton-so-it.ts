@@ -15,6 +15,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.soletta-progetti-trasporto-governo.title': 'Soletta: Governo chiede correzioni su progetti trasporti',
     'blog.article.soletta-progetti-trasporto-governo.excerpt': 'Soletta sostiene «Verkehr ’45» e chiede correzioni.',
     'blog.article.soletta-progetti-trasporto-governo.imageAlt': 'Veduta della stazione ferroviaria di Olten, con treni moderni e passeggeri, simbolo dell\'infrastruttura di trasporto nel Canton Soletta.',
+    'blog.article.solothurn-pneumonia-suini.title': 'Soletta: uccisi 930 suini per polmonite enzootica',
+    'blog.article.solothurn-pneumonia-suini.excerpt': 'Il Servizio veterinario del Canton Soletta ha sgomberato due allevamenti: 80 scrofe e 50 giovani macellati, 930 suini uccisi e 1200 giovani esportati vivi.',
+    'blog.article.solothurn-pneumonia-suini.imageAlt': 'Allevamenti di suini nel Canton Soletta durante i controlli veterinari',
 };
 
 export default blogMetaCantonSoIt;

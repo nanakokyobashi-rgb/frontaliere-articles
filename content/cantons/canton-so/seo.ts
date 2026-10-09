@@ -158,6 +158,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-solothurn-pneumonia-suini': {
+    title: 'Soletta: uccisi 930 suini per polmonite enzootica',
+    description: 'A Soletta la polmonite enzootica ha portato allo sgombero di due allevamenti: 930 suini uccisi, 1200 giovani esportati vivi e sorveglianza fino a fine ottobre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, uccisi, suini, polmonite',
+    ogTitle: 'Soletta: uccisi 930 suini per polmonite enzootica',
+    ogDescription: 'Il Servizio veterinario del Canton Soletta ha sottoposto a blocco sanitario tre aziende dopo un focolaio in un anello inter-cantonale. Due sono state sgomberate; la terza, da ingrasso, era ancora sotto misure di sicurezza e sorveglianza.',
+    canonicalPath: '/articoli-soletta/solothurn-pneumonia-suini/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: uccisi 930 suini per polmonite enzootica",
+      "description": "A Soletta la polmonite enzootica ha portato allo sgombero di due allevamenti: 930 suini uccisi, 1200 giovani esportati vivi e sorveglianza fino a fine ottobre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-solothurn-pneumonia-suini.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Allevamenti di suini nel Canton Soletta durante i controlli veterinari"
+      },
+      "datePublished": "2026-10-09T14:03:47+00:00",
+      "dateModified": "2026-10-09T14:03:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/solothurn-pneumonia-suini/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

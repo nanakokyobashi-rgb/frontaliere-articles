@@ -15,6 +15,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.soletta-progetti-trasporto-governo.title': 'Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten',
     'blog.article.soletta-progetti-trasporto-governo.excerpt': '',
     'blog.article.soletta-progetti-trasporto-governo.imageAlt': 'Ansicht des Bahnhofs Olten mit modernen Zügen und Fahrgästen, als Symbol für die Verkehrsinfrastruktur im Kanton Solothurn.',
+    'blog.article.solothurn-pneumonia-suini.title': 'Solothurn: 930 Schweine wegen enzootischer Pneumonie getötet',
+    'blog.article.solothurn-pneumonia-suini.excerpt': 'Der Veterinärdienst des Kantons Solothurn hat zwei Betriebe geräumt: 80 Sauen und 50 Jungtiere geschlachtet, 930 Schweine getötet und 1200 Jungtiere lebend exportiert.',
+    'blog.article.solothurn-pneumonia-suini.imageAlt': 'Schweinebetriebe im Kanton Solothurn während veterinärmedizinischer Kontrollen',
 };
 
 export default blogMetaCantonSoDe;

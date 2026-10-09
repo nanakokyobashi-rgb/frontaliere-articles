@@ -15,6 +15,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.soletta-progetti-trasporto-governo.title': 'Soleure : projets de transport, corrections demandées',
     'blog.article.soletta-progetti-trasporto-governo.excerpt': 'Soleure soutient « Verkehr ’45 » et demande des corrections.',
     'blog.article.soletta-progetti-trasporto-governo.imageAlt': 'Vue de la gare d\'Olten, avec des trains modernes et des passagers, symbolisant l\'infrastructure de transport dans le Canton de Soleure.',
+    'blog.article.solothurn-pneumonia-suini.title': 'Soleure : 930 porcs tués en raison d\'une pneumonie enzootique',
+    'blog.article.solothurn-pneumonia-suini.excerpt': 'Le Service vétérinaire du canton de Soleure a fait évacuer deux élevages : 80 truies et 50 jeunes porcs abattus, 930 porcs tués et 1200 jeunes porcs exportés vivants.',
+    'blog.article.solothurn-pneumonia-suini.imageAlt': 'Élevages porcins dans le canton de Soleure lors de contrôles vétérinaires',
 };
 
 export default blogMetaCantonSoFr;
