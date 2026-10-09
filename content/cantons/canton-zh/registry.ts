@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zurigo-velostrade-scuole',
+ category: 'novita',
+ date: '2026-10-09T22:34:18.458Z',
+ image: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

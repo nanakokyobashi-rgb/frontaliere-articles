@@ -15,6 +15,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.winterthur-governo-apprendisti.title': 'Zimmer Biomet: 580 Stellen in Winterthur gestrichen, Abschlüsse garantiert',
     'blog.article.winterthur-governo-apprendisti.excerpt': 'Der Regierungsrat des Kantons Zürich nimmt Stellung zu den 580 Stellenkürzungen bei Zimmer Biomet in Winterthur: Die Abschlüsse der Lernenden sind garantiert.',
     'blog.article.winterthur-governo-apprendisti.imageAlt': 'Industriegebiet in Winterthur im Zusammenhang mit dem Stellenabbau bei Zimmer Biomet',
+    'blog.article.zurigo-velostrade-scuole.title': 'Zürich: Nein zum Verbot von Velostrassen vor Schulen',
+    'blog.article.zurigo-velostrade-scuole.excerpt': 'Nach Einwänden aus Wollishofen stellt sich die Zürcher Kantonsregierung gegen das Verbot von Velostrassen vor Schulen.',
+    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Veloschnellstrasse vor einer Schule im Kanton Zürich',
 };
 
 export default blogMetaCantonZhDe;

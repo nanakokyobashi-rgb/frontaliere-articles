@@ -20,6 +20,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T21:07:09.567Z",
       "lastFailureAt": "2026-10-09T21:07:09.567Z"
+    },
+    {
+      "articleId": "zurigo-velostrade-scuole",
+      "title": "Zurigo: no al divieto delle velostrade davanti alle scuole",
+      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T22:34:18.489Z",
+      "lastFailureAt": "2026-10-09T22:34:18.489Z"
     }
   ]
 }

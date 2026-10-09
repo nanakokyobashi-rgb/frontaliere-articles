@@ -15,6 +15,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.winterthur-governo-apprendisti.title': 'Zimmer Biomet: 580 tagli a Winterthur, diplomi garantiti',
     'blog.article.winterthur-governo-apprendisti.excerpt': 'Il Regierungsrat del Canton Zurigo prende posizione sui 580 tagli di Zimmer Biomet a Winterthur: i diplomi degli apprendisti sono garantiti.',
     'blog.article.winterthur-governo-apprendisti.imageAlt': 'Area industriale di Winterthur collegata ai tagli di Zimmer Biomet',
+    'blog.article.zurigo-velostrade-scuole.title': 'Zurigo: no al divieto delle velostrade davanti alle scuole',
+    'blog.article.zurigo-velostrade-scuole.excerpt': 'Dopo le obiezioni provenienti da Wollishofen, il governo cantonale di Zurigo si schiera contro il divieto delle velostrade davanti alle scuole.',
+    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Pista ciclabile davanti a una scuola nel Canton Zurigo',
 };
 
 export default blogMetaCantonZhIt;
