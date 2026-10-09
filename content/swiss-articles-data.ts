@@ -26534,6 +26534,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'guida-voto-cantonale-lucerna',
+    category: 'pratico',
+    date: '2026-10-09T04:49:15.276Z',
+    image: '/images/blog/article-guida-voto-cantonale-lucerna.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['LU'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
