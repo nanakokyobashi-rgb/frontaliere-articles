@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/ostinelli-non-pago-piu-la-cassa-malati-444069": {
-      "section": "frontaliere",
-      "ts": 1791351168567
-    },
     "frontaliere::https://www.tio.ch/svizzera/attualita/1955186/sondaggio-voterai-sai-novembre-avs": {
       "section": "frontaliere",
       "ts": 1791353815883
@@ -1124,6 +1120,10 @@
     "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/varese/articolo/in-viale-borri-giu-lo-stabile-abbandonato-dellex-concessionaria-terziroli-al-suo-posto-arrivera.html": {
       "section": "frontaliere",
       "ts": 1791523774708
+    },
+    "frontaliere::https://www.rsi.ch/s/4140344": {
+      "section": "frontaliere",
+      "ts": 1791525047882
     }
   }
 }
