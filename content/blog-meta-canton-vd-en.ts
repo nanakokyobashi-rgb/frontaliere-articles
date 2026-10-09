@@ -21,6 +21,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.sussidi-malattia-lavoro-vaud.title': 'Vaud: works harder for LAMal subsidies',
     'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Single person: threshold from 70% to 80% Couples without children: threshold from 140% to 160% Couples with children: threshold confirmed at 100% Expected',
     'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Administrative building in Canton Vaud where new work thresholds for subsidies are discussed.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.title': 'Agricultural losses in the Canton of Vaud: over 100 million',
+    'blog.article.perdite-agricole-canton-vaud-caldo.excerpt': 'The estimates of the Vodese agricultural associations indicate losses of more than 100 million francs for the two-year period 2026-2027 due to drought.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.imageAlt': 'Agricultural fields in Canton Vaud affected by drought',
 };
 
 export default blogMetaCantonVdEn;

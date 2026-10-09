@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'perdite-agricole-canton-vaud-caldo',
+ category: 'novita',
+ date: '2026-10-09T12:27:10.778Z',
+ image: '/images/blog/article-perdite-agricole-canton-vaud-caldo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

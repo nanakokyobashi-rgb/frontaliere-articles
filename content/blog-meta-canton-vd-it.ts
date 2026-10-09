@@ -21,6 +21,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.sussidi-malattia-lavoro-vaud.title': 'Vaud: lavora di più per i sussidi LAMal',
     'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Persona sola: soglia dal 70% all\'80% Coppie senza figli: soglia dal 140% al 160% Coppie con figli: soglia confermata al 100% Risparmio previsto: 30 milioni',
     'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Edificio amministrativo nel Canton Vaud dove si discutono le nuove soglie lavorative per i sussidi.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.title': 'Perdite agricole nel Canton Vaud: oltre 100 milioni',
+    'blog.article.perdite-agricole-canton-vaud-caldo.excerpt': 'Le stime delle associazioni agricole vodesi indicano perdite superiori a 100 milioni di franchi per il biennio 2026-2027 a causa della siccità.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.imageAlt': 'Campi agricoli nel Canton Vaud colpiti da siccità',
 };
 
 export default blogMetaCantonVdIt;

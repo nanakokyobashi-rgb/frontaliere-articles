@@ -21,6 +21,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.sussidi-malattia-lavoro-vaud.title': 'Vaud : il faut travailler davantage pour les subsides LAMal',
     'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Personne seule : seuil de 70% à 80% Couples sans enfants : seuil de 140% à 160% Couples avec enfants : seuil confirmé à 100% Économie prévue : 30 millions',
     'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Batiment administratif dans le canton de Vaud ou l\'on discute des nouveaux seuils de travail pour les subsides.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.title': 'Pertes agricoles dans le canton de Vaud : plus de 100 millions',
+    'blog.article.perdite-agricole-canton-vaud-caldo.excerpt': 'Les estimations des associations agricoles vaudoises indiquent des pertes supérieures à 100 millions de francs pour la période 2026-2027 en raison de la sécheresse.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.imageAlt': 'Champs agricoles dans le canton de Vaud touchés par la sécheresse',
 };
 
 export default blogMetaCantonVdFr;

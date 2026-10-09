@@ -21,6 +21,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.sussidi-malattia-lavoro-vaud.title': 'Waadt: Für LAMal-Subventionen mehr arbeiten',
     'blog.article.sussidi-malattia-lavoro-vaud.excerpt': 'Alleinstehende Person: Schwelle von 70% auf 80% Kinderlose Paare: Schwelle von 140% auf 160% Paare mit Kindern: Schwelle bei 100% bestätigt Erwartete',
     'blog.article.sussidi-malattia-lavoro-vaud.imageAlt': 'Verwaltungsgebaude im Kanton Waadt, in dem uber neue Arbeitsschwellen fur Subventionen diskutiert wird.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.title': 'Landwirtschaftliche Verluste im Kanton Waadt: über 100 Millionen',
+    'blog.article.perdite-agricole-canton-vaud-caldo.excerpt': 'Die Waadtländer Bauernverbände schätzen, dass die Dürre im Zweijahreszeitraum 2026-2027 Verluste von über 100 Millionen Franken verursacht hat.',
+    'blog.article.perdite-agricole-canton-vaud-caldo.imageAlt': 'Landwirtschaftliche Felder im Kanton Waadt von Dürre betroffen',
 };
 
 export default blogMetaCantonVdDe;

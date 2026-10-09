@@ -231,6 +231,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-perdite-agricole-canton-vaud-caldo': {
+    title: 'Perdite agricole nel Canton Vaud: oltre 100 milioni',
+    description: 'Le stime nel Canton Vaud indicano perdite superiori a 100 milioni di franchi per il 2026-2027 a causa del calore. Scopri aiuti e anticipi. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, perdite, agricole, canton, vaud',
+    ogTitle: 'Perdite agricole nel Canton Vaud oltre 100 milioni',
+    ogDescription: 'Le ondate di calore e la siccità estiva nel Canton Vaud causano perdite stimate oltre i 100 milioni di franchi per il biennio 2026-2027. Ecco i dettagli sulle misure e sui sostegni anticipati dal Cantone.',
+    canonicalPath: '/articoli-vaud/perdite-agricole-canton-vaud-caldo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Perdite agricole nel Canton Vaud: oltre 100 milioni",
+      "description": "Le stime nel Canton Vaud indicano perdite superiori a 100 milioni di franchi per il 2026-2027 a causa del calore. Scopri aiuti e anticipi. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-perdite-agricole-canton-vaud-caldo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campi agricoli nel Canton Vaud colpiti da siccità"
+      },
+      "datePublished": "2026-10-09T12:27:10+00:00",
+      "dateModified": "2026-10-09T12:27:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/perdite-agricole-canton-vaud-caldo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
