@@ -12865,6 +12865,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.operazione-trotta-ebike-monopattini.title': 'Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge',
     'blog.article.operazione-trotta-ebike-monopattini.excerpt': 'In otto giorni di controlli TROTTA in Ticino, 35 contravvenzioni, 9 veicoli irregolari (potenza 1\'200-1\'600 W, velocità fino a 48 km/h) e 15 procedimenti giudiziari.',
     'blog.article.operazione-trotta-ebike-monopattini.imageAlt': 'Controllo della Polizia cantonale su e-bike e monopattini elettrici in Ticino durante l\'operazione TROTTA',
+    'blog.article.acof-70-anni-premio-confindustria-varese.title': 'Confindustria Varese premia ACOF per i 70 anni',
+    'blog.article.acof-70-anni-premio-confindustria-varese.excerpt': 'Nel 2026 ACOF Olga Fiorini festeggia 70 anni Confindustria Varese consegna una pergamena Il riconoscimento arriva in via Varzi, a Busto Arsizio ACOF opera su 20',
+    'blog.article.acof-70-anni-premio-confindustria-varese.imageAlt': 'Vista aerea del Lago di Lugano con montagne',
 };
 
 export default blogMetaIt;

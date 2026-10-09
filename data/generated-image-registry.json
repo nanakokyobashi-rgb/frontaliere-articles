@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 210,
+  "assetCount": 211,
   "assets": [
     {
       "schema": 1,
@@ -7307,6 +7307,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic illustrated scenic regional train journey; no readable text, logos, or identifiable people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-acof-70-anni-premio-confindustria-varese",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "8d4778c4d5d71a2d313c89bff128ccfc54a49b6ca98ed47a665728411bdbf043",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "a92d8762175b241e6422db1b55461c9321db8fbe7db8fc636aa4508d16703971",
+      "bytes": 190432,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-09T08:04:31.921Z",
+      "verifiedAt": "2026-10-09T08:04:40.265Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-acof-70-anni-premio-confindustria-varese.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic generated aerial illustration of Lake Lugano/Ticino with no people, text, signage, logos, or watermark."
       }
     }
   ]

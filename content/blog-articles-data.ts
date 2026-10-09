@@ -43375,6 +43375,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'acof-70-anni-premio-confindustria-varese',
+ category: 'novita',
+ date: '2026-10-09T08:04:40.702Z',
+ image: '/images/blog/article-acof-70-anni-premio-confindustria-varese.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

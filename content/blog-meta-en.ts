@@ -12864,6 +12864,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.operazione-trotta-ebike-monopattini.title': 'Operation TROTTA: 35 fines for modified e-bikes and illegal scooters',
     'blog.article.operazione-trotta-ebike-monopattini.excerpt': 'In eight days of TROTTA checks in Ticino, 35 citations, 9 non-compliant vehicles (power 1\'200-1\'600 W, speed up to 48 km/h) and 15 judicial proceedings.',
     'blog.article.operazione-trotta-ebike-monopattini.imageAlt': 'Police cantonale checking e-bikes and electric scooters in Ticino during operation TROTTA',
+    'blog.article.acof-70-anni-premio-confindustria-varese.title': 'Confindustria Varese honors ACOF for its 70th anniversary',
+    'blog.article.acof-70-anni-premio-confindustria-varese.excerpt': 'In 2026 ACOF Olga Fiorini celebrates 70 years Confindustria Varese presents a parchment The recognition arrives on Via Varzi, in Busto Arsizio ACOF operates on 20',
+    'blog.article.acof-70-anni-premio-confindustria-varese.imageAlt': 'Aerial view of Lake Lugano with mountains',
 };
 
 export default blogMetaEn;

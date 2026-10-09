@@ -103987,6 +103987,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-acof-70-anni-premio-confindustria-varese': {
+    title: 'Confindustria Varese premia ACOF per i 70 anni',
+    description: 'Nel 2026 ACOF Olga Fiorini festeggia 70 anni Confindustria Varese consegna una pergamena Il riconoscimento arriva in via Varzi, a Busto Arsizio ACOF opera su 20',
+    keywords: 'frontalieri, ticino, svizzera, italia, confindustria, varese, premia, acof',
+    ogTitle: 'Confindustria Varese premia ACOF per i 70 anni',
+    ogDescription: 'Nel 2026 ACOF Olga Fiorini festeggia 70 anni Confindustria Varese consegna una pergamena Il riconoscimento arriva in via Varzi, a Busto Arsizio ACOF opera su 20',
+    canonicalPath: '/articoli-frontaliere/acof-70-anni-premio-confindustria-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Confindustria Varese premia ACOF per i 70 anni",
+      "description": "Nel 2026 ACOF Olga Fiorini festeggia 70 anni Confindustria Varese consegna una pergamena Il riconoscimento arriva in via Varzi, a Busto Arsizio ACOF opera su 20",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-acof-70-anni-premio-confindustria-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea del Lago di Lugano con montagne"
+      },
+      "datePublished": "2026-10-09T08:04:40+00:00",
+      "dateModified": "2026-10-09T08:04:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/acof-70-anni-premio-confindustria-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
