@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-vbs-pink-cup-ragazze.webp",
+      "sha256": "a3106137d564063016f29713170abe55f7d3e288ba5dfaecf6787faa8e5f523b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-vbs-pink-cup-ragazze-480w.webp",
+      "sha256": "072f040004b2102b1b3688f3bb2b1af03151a7e36a91374ba06c28c00fd1a9bc"
+    }
+  ]
 }
