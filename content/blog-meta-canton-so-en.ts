@@ -11,7 +11,7 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.premi-malattia-soletta-2027.imageAlt': 'Illustration generated for this article',
     'blog.article.luterbach-a5-rampe-notte.title': 'A5 at Luterbach: four ramps closed in October',
     'blog.article.luterbach-a5-rampe-notte.excerpt': 'At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.',
-    'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Luterbach interchange on the A5 during night works and ramp closures',
+    'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Illustration generated for this article',
     'blog.article.soletta-progetti-trasporto-governo.title': 'Solothurn: Government calls for corrections to transport projects',
     'blog.article.soletta-progetti-trasporto-governo.excerpt': '',
     'blog.article.soletta-progetti-trasporto-governo.imageAlt': 'View of Olten train station, with modern trains and passengers, symbolizing transport infrastructure in Canton Solothurn.',

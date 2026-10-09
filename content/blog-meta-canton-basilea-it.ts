@@ -14,7 +14,7 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.phishing-email-fisco-basel.imageAlt': 'Scrivania con e-mail fiscale sospetta, busta postale ed eBill a Basilea',
     'blog.article.tempo30-birsfelden-ottobre.title': 'Tempo 30 a Birsfelden dal 12 ottobre 2026',
     'blog.article.tempo30-birsfelden-ottobre.excerpt': 'Nel Baselbiet Birsfelden introduce il Tempo 30 dal 12 ottobre 2026, mentre Münchenstein deve ancora attendere.',
-    'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Strada urbana di Birsfelden nel Baselbiet con segnaletica del Tempo 30',
+    'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonBasileaIt;

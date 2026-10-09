@@ -43143,7 +43143,7 @@ const RAW_ARTICLES = [
  id: 'tifosi-lucerna-lugano-traffico',
  category: 'pratico',
  date: '2026-10-08T11:31:48.408Z',
- image: '/images/blog/lucerna-voto-tifosi-ocse.webp',
+ image: '/images/blog/article-tifosi-lucerna-lugano-traffico.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI', 'LU'],

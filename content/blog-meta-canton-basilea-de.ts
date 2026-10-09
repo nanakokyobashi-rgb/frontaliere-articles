@@ -14,7 +14,7 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.phishing-email-fisco-basel.imageAlt': 'Schreibtisch mit verdächtiger Steuer-E-Mail, Briefumschlag und eBill in Basel',
     'blog.article.tempo30-birsfelden-ottobre.title': 'Tempo 30 in Birsfelden ab dem 12. Oktober 2026',
     'blog.article.tempo30-birsfelden-ottobre.excerpt': 'Im Baselbiet führt Birsfelden ab dem 12.',
-    'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Städtische Strasse in Birsfelden im Baselbiet mit Tempo-30-Signalisation',
+    'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonBasileaDe;

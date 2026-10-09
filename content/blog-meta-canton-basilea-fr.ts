@@ -14,7 +14,7 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.phishing-email-fisco-basel.imageAlt': 'Bureau avec un e-mail fiscal suspect, une enveloppe et eBill à Bâle',
     'blog.article.tempo30-birsfelden-ottobre.title': 'Tempo 30 à Birsfelden à partir du 12 octobre 2026',
     'blog.article.tempo30-birsfelden-ottobre.excerpt': 'Dans le Baselbiet, Birsfelden introduit le Tempo 30 à partir du 12 octobre 2026, tandis que Münchenstein doit encore attendre.',
-    'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Route urbaine à Birsfelden dans le Baselbiet avec signalisation Tempo 30',
+    'blog.article.tempo30-birsfelden-ottobre.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonBasileaFr;

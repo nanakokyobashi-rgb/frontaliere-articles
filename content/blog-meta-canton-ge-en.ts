@@ -14,7 +14,7 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Payroll document and calculator on a desk in Geneva',
     'blog.article.ginevra-stop-autostrada-a412.title': 'Geneva calls for work on the A412 motorway to be halted',
     'blog.article.ginevra-stop-autostrada-a412.excerpt': 'The City of Geneva calls for work on the A412 to be halted Six Geneva municipalities join the proceedings The Lyon Court of Appeal will rule on October 14',
-    'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'A412 highway construction site between France and Geneva',
+    'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonGeEn;

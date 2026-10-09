@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'ginevra-stop-autostrada-a412',
  category: 'novita',
  date: '2026-10-08T15:48:49.584Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-ginevra-stop-autostrada-a412.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GE'],

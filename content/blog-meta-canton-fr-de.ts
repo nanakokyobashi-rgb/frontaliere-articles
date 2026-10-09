@@ -14,7 +14,7 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Neues Velowegnetz im Kanton Freiburg für den Alltagsverkehr',
     'blog.article.friburgo-legge-lingue-ufficiali.title': 'Freiburg verabschiedet das Gesetz über die Amtssprachen',
     'blog.article.friburgo-legge-lingue-ufficiali.excerpt': 'Die Abgeordneten stimmten am Donnerstag ab Freiburg hat sein erstes Gesetz über die Amtssprachen Der Text fördert die Zweisprachigkeit Entscheidung → Abstimmung',
-    'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Freiburger Abgeordnete stimmen über das Gesetz zu den Amtssprachen ab',
+    'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonFrDe;

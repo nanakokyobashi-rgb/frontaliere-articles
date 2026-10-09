@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'friburgo-legge-lingue-ufficiali',
  category: 'novita',
  date: '2026-10-08T15:45:50.084Z',
- image: '/images/blog/apprendistato-formazione-professionale-canton-friburgo.webp',
+ image: '/images/blog/article-friburgo-legge-lingue-ufficiali.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['FR'],

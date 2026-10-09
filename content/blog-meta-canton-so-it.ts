@@ -11,7 +11,7 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.premi-malattia-soletta-2027.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.luterbach-a5-rampe-notte.title': 'A5 a Luterbach: quattro rampe chiuse a ottobre',
     'blog.article.luterbach-a5-rampe-notte.excerpt': 'A Luterbach, sulla A5, la viabilità cambia nell\'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.',
-    'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Svincolo di Luterbach sulla A5 durante lavori notturni e chiusure di rampe',
+    'blog.article.luterbach-a5-rampe-notte.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.soletta-progetti-trasporto-governo.title': 'Soletta: Governo chiede correzioni su progetti trasporti',
     'blog.article.soletta-progetti-trasporto-governo.excerpt': 'Soletta sostiene «Verkehr ’45» e chiede correzioni.',
     'blog.article.soletta-progetti-trasporto-governo.imageAlt': 'Veduta della stazione ferroviaria di Olten, con treni moderni e passeggeri, simbolo dell\'infrastruttura di trasporto nel Canton Soletta.',

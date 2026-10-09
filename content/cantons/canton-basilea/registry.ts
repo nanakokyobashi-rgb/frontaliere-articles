@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'tempo30-birsfelden-ottobre',
  category: 'pratico',
  date: '2026-10-08T16:01:18.338Z',
- image: '/images/blog/article-agrivarese-angera-ottobre-2026.webp',
+ image: '/images/blog/article-tempo30-birsfelden-ottobre.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['BASILEA'],

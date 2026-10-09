@@ -32,7 +32,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'luterbach-a5-rampe-notte',
  category: 'pratico',
  date: '2026-10-08T11:26:57.068Z',
- image: '/images/blog/article-agrivarese-angera-ottobre-2026.webp',
+ image: '/images/blog/article-luterbach-a5-rampe-notte.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SO'],

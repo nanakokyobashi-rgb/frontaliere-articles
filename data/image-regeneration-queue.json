@@ -5,11 +5,11 @@
       "articleId": "benzina-grigioni-deviazione",
       "title": "Prezzi benzina in Grigioni: quando conviene deviare",
       "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
-      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119999ms)",
-      "status": "failed",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (vision gate rejected image: Generic illustrated alpine road scene relevant to fuel-price detours in Grigioni, but it contains visible fuel-station signboards,",
+      "status": "queued",
       "requestedAt": "2026-10-07T06:53:48.101Z",
-      "lastFailureAt": "2026-10-08T11:09:39.116Z",
-      "failureCount": 3
+      "lastFailureAt": "2026-10-09T09:39:47.739Z",
+      "failureCount": 1
     },
     {
       "articleId": "costi-cure-domicilio-ticino-2026",
@@ -25,71 +25,21 @@
       "articleId": "mercato-lavoro-ia-svizzera",
       "title": "Mercato lavoro IA Svizzera: +32% in un anno",
       "fallbackImage": "/images/blog/mercato-lavoro-svizzera-giugno-2026.webp",
-      "reason": "All image providers failed for article-mercato-lavoro-ia-svizzera: openai-codex (vision gate rejected image: Generic illustrative office scene with visible foreground people; no readable text, logos, or recognizable faces.); gemini (Gemini ",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "All image providers failed for article-mercato-lavoro-ia-svizzera: openai-codex (vision gate rejected image: Generic Swiss alpine and AI workforce illustration, but several recognizable human figures appear in the foreground.); gemini (Gemi",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-08T09:36:45.453Z",
-      "lastFailureAt": "2026-10-09T08:50:15.372Z"
-    },
-    {
-      "articleId": "luterbach-a5-rampe-notte",
-      "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
-      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
-      "reason": "All image providers failed for article-luterbach-a5-rampe-notte: openai-codex (vision gate rejected image: Generic illustrated highway interchange relevant to closed ramps, but it contains multiple road-closure/no-entry signs.); gemini (Gem",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-08T11:26:57.084Z",
-      "lastFailureAt": "2026-10-09T08:51:55.296Z"
-    },
-    {
-      "articleId": "tifosi-lucerna-lugano-traffico",
-      "title": "Tifosi Lucerna a Lugano: strade chiuse e traffico",
-      "fallbackImage": "/images/blog/lucerna-voto-tifosi-ocse.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-08T11:31:48.777Z",
-      "lastFailureAt": "2026-10-09T08:54:56.386Z"
+      "lastFailureAt": "2026-10-09T09:41:26.693Z"
     },
     {
       "articleId": "nuovo-piano-ciclabile-friburgo",
       "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-nuovo-piano-ciclabile-friburgo: openai-codex (Codex broker timed out after 119998ms)",
+      "reason": "All image providers failed for article-nuovo-piano-ciclabile-friburgo: openai-codex (vision gate rejected image: Original scenic illustration with no text, logos, faces, or people, but it does not clearly depict a bicycle network or cycling",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-08T15:33:51.061Z",
-      "lastFailureAt": "2026-10-08T15:33:51.061Z"
-    },
-    {
-      "articleId": "friburgo-legge-lingue-ufficiali",
-      "title": "Friburgo approva la legge sulle lingue ufficiali",
-      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-friburgo.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T15:45:50.095Z",
-      "lastFailureAt": "2026-10-08T15:45:50.095Z"
-    },
-    {
-      "articleId": "ginevra-stop-autostrada-a412",
-      "title": "Ginevra chiede lo stop dei lavori per l'autostrada A412",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T15:48:49.599Z",
-      "lastFailureAt": "2026-10-08T15:48:49.599Z"
-    },
-    {
-      "articleId": "tempo30-birsfelden-ottobre",
-      "title": "Tempo 30 a Birsfelden dal 12 ottobre 2026",
-      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T16:01:18.356Z",
-      "lastFailureAt": "2026-10-08T16:01:18.356Z"
+      "lastFailureAt": "2026-10-09T09:45:37.097Z"
     },
     {
       "articleId": "treno-foliage-locarno-2026",

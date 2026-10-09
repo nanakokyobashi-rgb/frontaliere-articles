@@ -138,10 +138,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-tempo30-birsfelden-ottobre.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Strada urbana di Birsfelden nel Baselbiet con segnaletica del Tempo 30"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T16:01:18+00:00",
       "dateModified": "2026-10-08T16:01:18+00:00",

@@ -14,7 +14,7 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.salario-minimo-ginevra-2027.imageAlt': 'Documento di paga e calcolatrice su una scrivania a Ginevra',
     'blog.article.ginevra-stop-autostrada-a412.title': 'Ginevra chiede lo stop dei lavori per l\'autostrada A412',
     'blog.article.ginevra-stop-autostrada-a412.excerpt': 'La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d\'appel de Lyon decide il 14 ottobre Nel mirino',
-    'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Cantiere autostradale A412 tra Francia e Ginevra',
+    'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonGeIt;

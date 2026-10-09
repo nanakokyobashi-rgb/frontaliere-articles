@@ -128,10 +128,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "I deputati hanno votato giovedì Friburgo ha la sua prima legge sulle lingue ufficiali Il testo promuove il bilinguismo Decisione → voto dei deputati del Canton",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-friburgo.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-friburgo-legge-lingue-ufficiali.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Deputati del Canton Friburgo riuniti per il voto sulla legge sulle lingue ufficiali"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T15:45:50+00:00",
       "dateModified": "2026-10-08T15:45:50+00:00",

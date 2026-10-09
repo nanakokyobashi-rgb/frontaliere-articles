@@ -14,7 +14,7 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'New bicycle network in Canton Fribourg for daily mobility',
     'blog.article.friburgo-legge-lingue-ufficiali.title': 'Fribourg approves the law on official languages',
     'blog.article.friburgo-legge-lingue-ufficiali.excerpt': 'The deputies voted on Thursday Fribourg has its first law on official languages The text promotes bilingualism Decision → vote by the deputies of the Canton',
-    'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Fribourg deputies voting on the law on official languages',
+    'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonFrEn;
