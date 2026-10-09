@@ -1,4 +1,37 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-argovia-parita-salariale.webp",
+      "sha256": "084cb4df6511b682140e47bdb16ece703b2d08f5b336d184ad5a2179c94c0718"
+    },
+    {
+      "path": "public/images/blog/article-no-iniziativa-antidumping-ticino.webp",
+      "sha256": "8a2fc5f389e84552ce47e9da1c3ce00c027415484b154e46fa8f47f70db01dff"
+    },
+    {
+      "path": "public/images/blog/article-seehas-affollamento-mattutino.webp",
+      "sha256": "203dfce4353da837e817cb104caa88ea9ed984b4e736055112f40845529c0f91"
+    },
+    {
+      "path": "public/images/blog/article-varese-india-export-2026.webp",
+      "sha256": "c9e36a4e3359fe95767adf229c0bbe5429711a06bc16b3e96d5d4d6622dbf663"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-argovia-parita-salariale-480w.webp",
+      "sha256": "e1fec90a029ecea495f23ae9de889312ba407fb4e943ea42b0e26c59f6c414c6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-no-iniziativa-antidumping-ticino-480w.webp",
+      "sha256": "fce9a2f6366e03ba63b708276c8b99f71a5a628ff79aed2b9e6ea433f4e911c3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-seehas-affollamento-mattutino-480w.webp",
+      "sha256": "12ce740694fb2e1d5dd5d4a0dba63255052cb3110a61873b5dc66566ffca3bc0"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-varese-india-export-2026-480w.webp",
+      "sha256": "2f2c60d5e3ad34119ae03150f893d873196fa1094f80bf8ad87c5691a481ce77"
+    }
+  ]
 }
