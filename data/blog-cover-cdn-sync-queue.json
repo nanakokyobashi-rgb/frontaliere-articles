@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fiducia-consumatori-svizzeri-settembre.webp",
+      "sha256": "faba941bf5c30e07d515d32db5048511d98598ea9e468fe521fe0e3e315fab50"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fiducia-consumatori-svizzeri-settembre-480w.webp",
+      "sha256": "4dbaa835214e0b6e34deb579f39cc90f87b9403afca68407c098f0e6b1a8a333"
+    }
+  ]
 }
