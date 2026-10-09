@@ -167,10 +167,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Lunedì 12 ottobre iniziano i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/mendrisio-strada-serpiano-urgenti-lavori.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-obermumpf-strada-sanificazione-2024.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Lavori di risanamento sulla Hauptstrasse K491 a Obermumpf con nuova passerella pedonale"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-09T06:35:59+00:00",
       "dateModified": "2026-10-09T06:35:59+00:00",

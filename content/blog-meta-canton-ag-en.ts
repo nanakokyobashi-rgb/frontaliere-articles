@@ -17,7 +17,7 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Regional train route between Basel and Rheinfelden with a replacement bus',
     'blog.article.obermumpf-strada-sanificazione-2024.title': 'Obermumpf: construction work on the K491 until autumn 2027',
     'blog.article.obermumpf-strada-sanificazione-2024.excerpt': 'Monday, October 12, rehabilitation works begin on Hauptstrasse K491 in Obermumpf: 1.250 metres of road, accessible bus stops with 22 cm curbs and a new footbridge over the Fischingerbach, through autumn 2027.',
-    'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Road renovation works on Hauptstrasse K491 in Obermumpf with new pedestrian bridge',
+    'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonAgEn;

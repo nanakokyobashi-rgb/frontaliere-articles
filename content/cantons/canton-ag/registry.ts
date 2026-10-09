@@ -54,7 +54,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'obermumpf-strada-sanificazione-2024',
  category: 'pratico',
  date: '2026-10-09T06:35:59.639Z',
- image: '/images/blog/mendrisio-strada-serpiano-urgenti-lavori.webp',
+ image: '/images/blog/article-obermumpf-strada-sanificazione-2024.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['AG'],

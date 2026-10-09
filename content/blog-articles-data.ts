@@ -43358,7 +43358,7 @@ const RAW_ARTICLES = [
  id: 'rancio-valcuvia-statale-394',
  category: 'novita',
  date: '2026-10-09T07:21:46.410Z',
- image: '/images/blog/raduno-auto-moto-cocquio.webp',
+ image: '/images/blog/article-rancio-valcuvia-statale-394.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

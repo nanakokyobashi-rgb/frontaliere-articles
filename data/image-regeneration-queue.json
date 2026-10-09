@@ -32,44 +32,14 @@
       "lastFailureAt": "2026-10-09T12:32:13.228Z"
     },
     {
-      "articleId": "nobel-economia-fehr-2026",
-      "title": "Nobel economia 2026: Ernst Fehr tra i possibili vincitori",
-      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 2,
-      "requestedAt": "2026-10-09T03:22:16.123Z",
-      "lastFailureAt": "2026-10-09T12:34:13.283Z"
-    },
-    {
-      "articleId": "obermumpf-strada-sanificazione-2024",
-      "title": "Obermumpf: lavori sulla K491 fino all'autunno 2027",
-      "fallbackImage": "/images/blog/mendrisio-strada-serpiano-urgenti-lavori.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 2,
-      "requestedAt": "2026-10-09T06:35:59.657Z",
-      "lastFailureAt": "2026-10-09T12:36:13.337Z"
-    },
-    {
-      "articleId": "rancio-valcuvia-statale-394",
-      "title": "Rancio Valcuvia: scontro tra auto e moto sulla statale 394",
-      "fallbackImage": "/images/blog/raduno-auto-moto-cocquio.webp",
-      "reason": "All image providers failed for article-rancio-valcuvia-statale-394: openai-codex (vision gate rejected image: Generic illustrated car–motorcycle collision; the car has a visible brand emblem/logo.); gemini (Gemini image request failed with ",
-      "status": "queued",
-      "failureCount": 2,
-      "requestedAt": "2026-10-09T07:21:46.780Z",
-      "lastFailureAt": "2026-10-09T12:39:37.703Z"
-    },
-    {
       "articleId": "sciaffusa-dati-lavoro-2026",
       "title": "Disoccupazione nel Canton Sciaffusa: dati settembre 2026",
       "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
-      "reason": "All image providers failed for article-sciaffusa-dati-lavoro-2026: openai-codex (vision gate rejected image: Generic scenic illustration with work-related props, but no clear visual match to unemployment data in Canton Schaffhausen.); gemin",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-09T12:18:54.884Z",
-      "lastFailureAt": "2026-10-09T12:45:14.397Z"
+      "lastFailureAt": "2026-10-09T13:11:10.515Z"
     }
   ]
 }

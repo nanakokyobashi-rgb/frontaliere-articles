@@ -17,7 +17,7 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Regionalzugstrecke zwischen Basel und Rheinfelden mit Ersatzbus',
     'blog.article.obermumpf-strada-sanificazione-2024.title': 'Obermumpf: Bauarbeiten an der K491 bis Herbst 2027',
     'blog.article.obermumpf-strada-sanificazione-2024.excerpt': 'Am Montag, 12.',
-    'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Sanierungsarbeiten an der Hauptstrasse K491 in Obermumpf mit neuer Fussgängerbrücke',
+    'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonAgDe;

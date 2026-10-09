@@ -17,7 +17,7 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Treno regionale sulla linea tra Basilea e Rheinfelden con bus sostitutivo',
     'blog.article.obermumpf-strada-sanificazione-2024.title': 'Obermumpf: lavori sulla K491 fino all\'autunno 2027',
     'blog.article.obermumpf-strada-sanificazione-2024.excerpt': 'Lunedì 12 ottobre partono i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova passerella sul Fischingerbach, fino all\'autunno 2027.',
-    'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Lavori di risanamento sulla Hauptstrasse K491 a Obermumpf con nuova passerella pedonale',
+    'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonAgIt;
