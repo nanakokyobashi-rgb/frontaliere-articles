@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'barfusserplatz-riqualificazione-urbana',
+ category: 'novita',
+ date: '2026-10-09T21:31:16.945Z',
+ image: '/images/blog/article-barfusserplatz-riqualificazione-urbana.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
