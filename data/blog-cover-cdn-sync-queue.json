@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-teatro-locarno-fondi-pubblici.webp",
-      "sha256": "a10262f144f482db638228981aae08ea8a1e80e48543f8680badb055231f325c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-teatro-locarno-fondi-pubblici-480w.webp",
-      "sha256": "c9e902d5f2798535762c70cabf574df163f68b4bb2edcbf512c38bca12bf9e9d"
-    }
-  ]
+  "items": []
 }
