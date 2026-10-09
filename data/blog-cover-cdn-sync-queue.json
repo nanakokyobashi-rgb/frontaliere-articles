@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-aadorf-spese-sociali-2027.webp",
-      "sha256": "412564769344809d1abc0e75fc52c600b44af3d8420a55407e09c375d520fa12"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-aadorf-spese-sociali-2027-480w.webp",
-      "sha256": "5fa8be63dd82c3ce2d35add953a74d863f3b4232c1ff18a30bba24679cb1d9b9"
-    }
-  ]
+  "items": []
 }
