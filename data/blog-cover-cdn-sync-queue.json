@@ -1,4 +1,37 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-baar-rinnovo-comunale-2027.webp",
+      "sha256": "ca2fa9848753c022e0aa1535ebdcfcf364f8ecd9e9d6cdbf92fabf754e18dcaa"
+    },
+    {
+      "path": "public/images/blog/article-forniture-cemento-aumento-terzo-trimestre.webp",
+      "sha256": "f87c76b0a95760b5ac49ebb5629c3cc7900e3a3c64ce1edf63d6f32f04525d0c"
+    },
+    {
+      "path": "public/images/blog/article-maison-garde-ospedale-sion.webp",
+      "sha256": "8cbed53c16693fa487917b059521bff532bff9941b6f82c662d2abdcc677059a"
+    },
+    {
+      "path": "public/images/blog/article-nuovo-piano-ciclabile-friburgo.webp",
+      "sha256": "99b9305743067e3dda2996a0e1550392434be99761d3c31b0783a82b28609202"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-baar-rinnovo-comunale-2027-480w.webp",
+      "sha256": "5170801dd1b21548d22eb866d758f4bda155ef130b06b6db6fcb1df161a6ad06"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-forniture-cemento-aumento-terzo-trimestre-480w.webp",
+      "sha256": "9a9b810b4060c64a51e87504ffff7c9ac44a84f7999afc8a13fad20c6b5da8d6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-maison-garde-ospedale-sion-480w.webp",
+      "sha256": "4c88d2364c3d3876941e05fda7caf41021c05661f5cbdbb23da6dd7b7c84c510"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-nuovo-piano-ciclabile-friburgo-480w.webp",
+      "sha256": "f4f9c49b4518ca9f005cff1368fb9eb302651976873b667a39786221d4b5517d"
+    }
+  ]
 }
