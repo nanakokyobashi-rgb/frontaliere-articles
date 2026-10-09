@@ -814,7 +814,7 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
     };
     const v = verdictFor(m, 'cover-fallback-health');
     assert.equal(v.firing, false);
-    assert.equal(v.available, undefined);
+    assert.equal(v.available, true);
   });
 
   test('il p95 per sezione (7,45h svizzera) non accende section-dry', () => {
