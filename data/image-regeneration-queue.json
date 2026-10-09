@@ -380,6 +380,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T06:53:22.567Z",
       "lastFailureAt": "2026-10-09T06:53:22.567Z"
+    },
+    {
+      "articleId": "rancio-valcuvia-statale-394",
+      "title": "Rancio Valcuvia: scontro tra auto e moto sulla statale 394",
+      "fallbackImage": "/images/blog/raduno-auto-moto-cocquio.webp",
+      "reason": "All image providers failed for article-rancio-valcuvia-statale-394: openai-codex (vision gate rejected image: Visible vehicle emblems/brand badges are present; no readable text or",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T07:21:46.780Z",
+      "lastFailureAt": "2026-10-09T07:21:46.780Z"
     }
   ]
 }

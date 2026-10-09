@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/mendrisiotto/1942053/ufficio-doganale-unico-per-mendrisio-e-sopraceneri": "ufficio-doganale-unico-mendrisio-sopraceneri",
   "https://www.fiscoetasse.com/approfondimenti/17377-lavoratori-frontalieri-novita-2026-tra-protocollo-it-ch-e-interpelli.html": "lavoratori-frontalieri-novita-2026",
   "https://www.tio.ch/svizzera/economia/1943420/casse-rendimento-pensioni-luglio-mercato": "casse-pensioni-rendimento-luglio-2026",
   "https://www.tio.ch/svizzera/economia/1943399/aziende-settori-fallite-effetto-svizzera": "fallimenti-aziende-svizzera-1994",
@@ -2236,6 +2235,11 @@
   "https://www.varesenews.it/2026/10/oltre-400-mila-euro-sottratti-allanziano-affidato-alle-loro-cure-due-badanti-denunciate-dalla-finanza-di-saronno/2702455": {
     "articleId": "varese-oltre-400mila-euro-sottratti-da-due-badanti",
     "ts": "2026-10-09T05:57:28.570Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/rancio-valcuvia-scontro-tra-auto-e-moto-sulla-statale-394-traffico-in-tilt/2702791": {
+    "articleId": "rancio-valcuvia-statale-394",
+    "ts": "2026-10-09T07:21:46.782Z",
     "keyForm": 2
   }
 }

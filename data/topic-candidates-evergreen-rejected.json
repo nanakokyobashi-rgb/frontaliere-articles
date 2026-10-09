@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/lega-contro-il-cancro-90-anni-di-speranza-e-umanit%c3%a0--4140326.html": {
-      "section": "frontaliere",
-      "ts": 1791355598794
-    },
     "frontaliere::https://comozero.it/attualita/svizzera-lavori-in-edilizia-e-sei-giovane-10-settimane-di-vacanze-e-indennizzi-se-fa-troppo-caldo": {
       "section": "frontaliere",
       "ts": 1791358008892
@@ -1132,6 +1128,10 @@
     "svizzera::https://www.tio.ch/ticino/attualita/1955518/c-e-lo-scambio-d-abiti-nella-corte-del-municipio": {
       "section": "svizzera",
       "ts": 1791526780084
+    },
+    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955740/ffs-canalina-rogo-cavi-traffico": {
+      "section": "frontaliere",
+      "ts": 1791528931353
     }
   }
 }
