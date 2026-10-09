@@ -797,14 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/s/4140344": {
-      "section": "frontaliere",
-      "ts": 1791335342343
-    },
-    "frontaliere::https://www.tio.ch/rubriche/aziende-ticinesi-informano/1955095/con-i-profumi-d-autunno-e-di-nuovo-tempo-di-bellinzona-in-zucca": {
-      "section": "frontaliere",
-      "ts": 1791335755433
-    },
     "frontaliere::https://www.varesenews.it/2026/10/protezione-civile-la-cultura-della-sicurezza-entra-in-279-scuole-lombarde-37-gli-istituti-coinvolti-nel-varesotto/2699836": {
       "section": "frontaliere",
       "ts": 1791336821753
@@ -1144,6 +1136,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/una-vita-da-social-la-polizia-postale-incontra-i-ragazzi-delle-medie/2702428": {
       "section": "frontaliere",
       "ts": 1791507404729
+    },
+    "frontaliere::https://comozero.it/attualita/300-persone-da-como-a-roma-il-17-ottobre-salari-casa-sanita-scuola-pace-e-democrazia-servono-scelte-diverse": {
+      "section": "frontaliere",
+      "ts": 1791508356767
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/politica-20/articolo/il-cantiere-sanita-a-varese-licata-tante-eccellenze-ma-anche-criticita-su-cui-lavorare-1.html": {
+      "section": "frontaliere",
+      "ts": 1791508944798
     }
   }
 }

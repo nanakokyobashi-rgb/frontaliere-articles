@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 188,
+  "assetCount": 190,
   "assets": [
     {
       "schema": 1,
@@ -6361,6 +6361,92 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic illustration of a girls' basketball scene with Alpine/Ticino context; no text, logos, or identifiable people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-teatro-intred-varese-stagione-2026",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "6a62d517037f15bfdc4873f613b0f4d3bc41457118928484bce2dcabd110c71d",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "b7d561b51b9a9bb4c18511b1033c0efbfd4ded48ba2ccb607603aa7d8621c7fa",
+      "bytes": 141390,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-09T01:29:04.008Z",
+      "verifiedAt": "2026-10-09T01:29:12.125Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic editorial illustration of a modern theater exterior in an Italian alpine setting; no people, text, logos, or event-specific cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-attacco-publica-dati-rubati",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "207fb06989abd0165f59e38fb540643188f43bca031e7296efd1552948954b71",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "f6e217bc04f4d1bbe7361dba30cabed9e02f95129070899ca01464c641640a6a",
+      "bytes": 167654,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-09T01:39:50.445Z",
+      "verifiedAt": "2026-10-09T01:39:56.345Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-attacco-publica-dati-rubati.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic illustration of a Swiss corporate office building; no people, text, logos, or specific event."
       }
     }
   ]
