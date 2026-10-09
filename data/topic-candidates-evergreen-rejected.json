@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1955337/svizzera-collaboratori-tamedia-tagli-giornalismo": {
-      "section": "frontaliere",
-      "ts": 1791385506456
-    },
-    "frontaliere::https://comozero.it/attualita/lake-como-tourism-ora-nasce-il-progetto-dedicato-alle-aziende-che-scelgono-il-lago-di-como": {
-      "section": "frontaliere",
-      "ts": 1791387400355
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/personale-romando-di-tamedia%2c-%22basta-licenziamenti%22/92181974": {
-      "section": "frontaliere",
-      "ts": 1791387438818
-    },
     "frontaliere::https://www.varesenews.it/2026/10/vivere-piu-a-lungo-cambia-leconomia-imprese-e-territori-alla-prova-della-longevita/2701585": {
       "section": "frontaliere",
       "ts": 1791412459205
@@ -1140,6 +1128,10 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1955815/procedure-ticino-collaborazione-protezione-svizzera": {
       "section": "frontaliere",
       "ts": 1791551085234
+    },
+    "svizzera::https://www.tio.ch/rubriche/ospite/1955751/essere-carlo-cda-consigli-lavoro": {
+      "section": "svizzera",
+      "ts": 1791560729050
     }
   }
 }

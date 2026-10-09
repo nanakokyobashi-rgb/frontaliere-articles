@@ -18,6 +18,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.aadorf-spese-sociali-2027.title': 'Aadorf: fine status S, più spese sociali nel 2027',
     'blog.article.aadorf-spese-sociali-2027.excerpt': 'Nel budget 2027 Aadorf prevede costi sociali nettamente più alti e più entrate fiscali; la fine dei contributi federali per gli ucraini può pesare ancora di più.',
     'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Municipio e centro di Aadorf, nel Canton Turgovia, in una giornata autunnale',
+    'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Sicurezza e salute sul lavoro nel Canton Turgovia',
+    'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'La sicurezza sul lavoro previene infortuni e malattie professionali.',
+    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonTgIt;

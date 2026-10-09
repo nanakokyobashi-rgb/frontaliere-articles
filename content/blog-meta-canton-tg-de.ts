@@ -18,6 +18,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.aadorf-spese-sociali-2027.title': 'Aadorf: Ende des Status S, höhere Sozialausgaben im Jahr 2027',
     'blog.article.aadorf-spese-sociali-2027.excerpt': 'Im Budget 2027 sieht Aadorf deutlich höhere Sozialkosten und höhere Steuereinnahmen vor; das Ende der Bundesbeiträge für die Ukrainer kann noch stärker ins Gewicht fallen.',
     'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Ortszentrum und Gemeindehaus von Aadorf im Kanton Thurgau an einem Herbsttag',
+    'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Arbeitssicherheit und Gesundheitsschutz im Kanton Thurgau',
+    'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'Arbeitssicherheit verhindert Unfälle und Berufskrankheiten.',
+    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonTgDe;

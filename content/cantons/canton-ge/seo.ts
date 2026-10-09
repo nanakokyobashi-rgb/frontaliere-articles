@@ -153,6 +153,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-comunicato-consiglio-stato-ginevra': {
+    title: 'Comunicato Consiglio di Stato Ginevra: 7 ottobre 2026',
+    description: 'Il comunicato settimanale del Consiglio di Stato è datato 7 ottobre 2026: i dati identificabili e ciò che il materiale disponibile non consente di verificare.',
+    keywords: 'frontalieri, ticino, svizzera, italia, comunicato, consiglio, stato, ginevra',
+    ogTitle: 'Comunicato Consiglio di Stato Ginevra',
+    ogDescription: 'Il riferimento identifica il comunicato settimanale del Consiglio di Stato del 7 ottobre 2026. Il materiale disponibile non riporta decisioni, importi, destinatari o scadenze: l\'articolo separa i dati verificabili dalle informazioni assenti.',
+    canonicalPath: '/articoli-ginevra/comunicato-consiglio-stato-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comunicato Consiglio di Stato Ginevra: 7 ottobre 2026",
+      "description": "Il comunicato settimanale del Consiglio di Stato è datato 7 ottobre 2026: i dati identificabili e ciò che il materiale disponibile non consente di verificare.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena istituzionale a Ginevra in una mattina d'ottobre."
+      },
+      "datePublished": "2026-10-09T16:16:45+00:00",
+      "dateModified": "2026-10-09T16:16:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ginevra/comunicato-consiglio-stato-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -15,6 +15,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.ginevra-stop-autostrada-a412.title': 'Geneva calls for work on the A412 motorway to be halted',
     'blog.article.ginevra-stop-autostrada-a412.excerpt': 'The City of Geneva calls for work on the A412 to be halted Six Geneva municipalities join the proceedings The Lyon Court of Appeal will rule on October 14',
     'blog.article.ginevra-stop-autostrada-a412.imageAlt': 'Illustration generated for this article',
+    'blog.article.comunicato-consiglio-stato-ginevra.title': 'Geneva State Council press release: October 7, 2026',
+    'blog.article.comunicato-consiglio-stato-ginevra.excerpt': 'The weekly press release of the Council of State of October 7, 2026: the available material identifies the publication, without further details.',
+    'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Institutional scene in Geneva on an October morning.',
 };
 
 export default blogMetaCantonGeEn;

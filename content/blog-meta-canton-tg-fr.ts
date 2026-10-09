@@ -18,6 +18,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.aadorf-spese-sociali-2027.title': 'Aadorf : fin du statut S, davantage de dépenses sociales en 2027',
     'blog.article.aadorf-spese-sociali-2027.excerpt': 'Dans le budget 2027, Aadorf prévoit des coûts sociaux nettement plus élevés et davantage de recettes fiscales ; la fin des contributions fédérales pour les Ukrainiens peut peser encore davantage.',
     'blog.article.aadorf-spese-sociali-2027.imageAlt': 'Centre d\'Aadorf et bâtiment communal dans le canton de Thurgovie, un jour d\'automne',
+    'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Sécurité et santé au travail dans le canton de Thurgovie',
+    'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'La sécurité au travail prévient les accidents et les maladies professionnelles.',
+    'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonTgFr;

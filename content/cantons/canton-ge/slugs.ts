@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'accordo-cure-oncologiche-ginevra': { it: 'accordo-cure-oncologiche-ginevra', en: 'geneva-france-pediatric-cancer-care', de: 'grenzueberschreitende-kinderkrebsversorgung-genf', fr: 'cooperation-transfrontaliere-cancer-geneve' },
  'salario-minimo-ginevra-2027': { it: 'salario-minimo-ginevra-2027', en: 'geneva-minimum-wage-2027', de: 'mindestlohn-genf-2027', fr: 'salaire-minimum-geneve-2027' },
  'ginevra-stop-autostrada-a412': { it: 'ginevra-stop-autostrada-a412', en: 'geneva-stop-a412-highway', de: 'genf-stopp-autobahn-a412', fr: 'geneve-arret-travaux-a412' },
+ 'comunicato-consiglio-stato-ginevra': { it: 'comunicato-consiglio-stato-ginevra', en: 'geneva-state-council-communique', de: 'mitteilung-genfer-staatsrat', fr: 'communique-conseil-etat-geneve' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

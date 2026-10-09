@@ -169,7 +169,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
-import { readImageRegenerationQueue } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
+import {
+  failedImageRegenerationRetryIsEligible,
+  readImageRegenerationQueue,
+} from '../../generator/scripts/lib/image-regeneration-queue.mjs';
 import { SECRET_PATTERNS } from './scan-hardcoded-secrets.mjs';
 import { topicCoverageKey } from '../../generator/scripts/lib/topic-coverage-guard.mjs';
 
@@ -1381,7 +1384,8 @@ export const CONDITIONS = [
       const queue = m.coverQueue;
       const queueAvailable = queue?.available === true
         && Number.isFinite(queue.count)
-        && (queue.oldestAgeHours === null || Number.isFinite(queue.oldestAgeHours));
+        && (queue.oldestAgeHours === null || Number.isFinite(queue.oldestAgeHours))
+        && (queue.oldestActionableAgeHours === null || Number.isFinite(queue.oldestActionableAgeHours));
       const healthAvailable = health
         && Number.isFinite(health.observations)
         && Number.isFinite(health.fallbacks)
@@ -1391,8 +1395,8 @@ export const CONDITIONS = [
       const fallbackEvidenceAvailable = Boolean(healthAvailable && health.observations >= 1);
       const fallbackSignal = fallbackEvidenceAvailable
         && health.latestConsecutiveFallbacks >= COVER_FALLBACK_CONSECUTIVE_THRESHOLD;
-      const queueSignal = queueAvailable && Number.isFinite(queue.oldestAgeHours)
-        && queue.oldestAgeHours >= COVER_QUEUE_MAX_AGE_HOURS;
+      const queueSignal = queueAvailable && Number.isFinite(queue.oldestActionableAgeHours)
+        && queue.oldestActionableAgeHours >= COVER_QUEUE_MAX_AGE_HOURS;
       // The two signals are independent: an old queue item is actionable even
       // when recent run logs are unavailable, and a measured fallback streak
       // remains actionable even when the queue JSON cannot be read. When
@@ -1423,6 +1427,7 @@ export const CONDITIONS = [
         ? [
           `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
           `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${Number.isFinite(queue.oldestAgeHours) ? `${queue.oldestAgeHours.toFixed(1)}h` : '—'} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
+          `- Item azionabili: **${queue.actionableCount}**; più vecchio pronto al retry: **${queue.oldestActionableRequestedAt || '—'}** (${Number.isFinite(queue.oldestActionableAgeHours) ? `${queue.oldestActionableAgeHours.toFixed(1)}h` : 'nessuno — cooldown in corso'}).`,
         ]
         : [
           '- Coda rigenerazione: **non misurata** (JSON illeggibile o `requestedAt` non valido); questo segnale resta sconosciuto.',
@@ -2192,7 +2197,8 @@ export function formatCantonCommitSummary(perCanton) {
  * Legge la coda delle copertine senza interpretare un JSON parziale come una
  * coda sana. Un `requestedAt` invalido rende la misura non disponibile: l'età
  * minima sarebbe altrimenti un numero inventato proprio mentre il resolver ha
- * bisogno di un allarme.
+ * bisogno di un allarme. Gli item `failed` restano visibili nella diagnostica,
+ * ma non sono azionabili fino alla scadenza del cooldown condiviso col drain.
  */
 export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
   try {
@@ -2201,6 +2207,7 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
     const parsed = items.map((item) => ({
       item,
       requestedAt: Date.parse(String(item?.requestedAt || '')),
+      lastFailureAt: Date.parse(String(item?.lastFailureAt || '')),
     }));
     if (parsed.some(({ requestedAt }) => !Number.isFinite(requestedAt))) {
       return { available: false, reason: 'image regeneration queue contains an invalid requestedAt' };
@@ -2215,11 +2222,28 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
     if (!Number.isFinite(observedAt)) {
       return { available: false, reason: 'cover queue measurement received an invalid timestamp' };
     }
+    const actionable = parsed.filter(({ item, lastFailureAt }) => {
+      const status = String(item?.status || 'unknown');
+      if (status !== 'failed') return true;
+      // Missing failure metadata cannot prove that the cooldown is active.
+      // Keep the item visible as actionable rather than silently declaring it
+      // healthy; the drainer itself remains fail-closed for that retry.
+      return !Number.isFinite(lastFailureAt)
+        || failedImageRegenerationRetryIsEligible(item, observedAt, COVER_QUEUE_MAX_AGE_HOURS);
+    });
+    const oldestActionable = actionable.length
+      ? Math.min(...actionable.map(({ requestedAt }) => requestedAt))
+      : null;
     return {
       available: true,
       count: items.length,
       oldestRequestedAt: oldest === null ? null : new Date(oldest).toISOString(),
       oldestAgeHours: oldest === null ? null : Math.max(0, (observedAt - oldest) / 3_600_000),
+      actionableCount: actionable.length,
+      oldestActionableRequestedAt: oldestActionable === null ? null : new Date(oldestActionable).toISOString(),
+      oldestActionableAgeHours: oldestActionable === null
+        ? null
+        : Math.max(0, (observedAt - oldestActionable) / 3_600_000),
       statuses,
     };
   } catch (error) {
@@ -2462,7 +2486,9 @@ async function main() {
   if (measurements.coverQueue.available) {
     console.log(
       `[generation-health] cover-queue count=${measurements.coverQueue.count}`
-      + ` oldest-age-hours=${measurements.coverQueue.oldestAgeHours ?? 'n/d'}`,
+      + ` actionable=${measurements.coverQueue.actionableCount}`
+      + ` oldest-age-hours=${measurements.coverQueue.oldestAgeHours ?? 'n/d'}`
+      + ` oldest-actionable-age-hours=${measurements.coverQueue.oldestActionableAgeHours ?? 'n/d'}`,
     );
   }
 

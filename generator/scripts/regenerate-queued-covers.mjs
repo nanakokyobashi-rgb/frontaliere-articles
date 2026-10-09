@@ -33,6 +33,7 @@ import {
   IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
 } from './lib/image-regeneration-publish-outbox.mjs';
 import {
+  failedImageRegenerationRetryIsEligible,
   withImageRegenerationQueueLockAsync,
 } from './lib/image-regeneration-queue.mjs';
 import {
@@ -198,15 +199,6 @@ function failureCountOf(item) {
   const requestedAt = Date.parse(String(item?.requestedAt || ''));
   const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
   return Number.isFinite(requestedAt) && Number.isFinite(lastFailureAt) && lastFailureAt > requestedAt ? 1 : 0;
-}
-
-function failedRetryIsEligible(item, nowMs, retryFailedAfterHours) {
-  if (retryFailedAfterHours === null) return true;
-  const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
-  const cooldownMs = retryFailedAfterHours * 3_600_000;
-  return Number.isFinite(nowMs)
-    && Number.isFinite(lastFailureAt)
-    && nowMs - lastFailureAt >= cooldownMs;
 }
 
 function queueAttemptSort(a, b) {
@@ -526,7 +518,8 @@ export async function drainQueuedCovers({
   const requeued = [];
   if (retryFailed) {
     for (const item of queue.items) {
-      if (item.status !== 'failed' || !failedRetryIsEligible(item, nowMs, retryAfterHours)) continue;
+      if (item.status !== 'failed'
+        || !failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHours)) continue;
       item.status = 'queued';
       item.failureCount = 0;
       requeued.push(item.articleId);
