@@ -3,12 +3,13 @@ run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
 
 # La coda e' un recupero dati, non una nuova pipeline editoriale: parte ogni
 # ora e si ferma da sola quando items[] e' vuoto e l'outbox publisher e'
-# vuoto. Il cron resta il backstop per gli eventi workflow_run persi; il
-# generation-health-watchdog puo' riaprire il drain quando la coda si avvicina
-# alla sua soglia di eta', ma solo dai run schedule: una dispatch manuale del
-# watchdog, anche dry-run, lascia lavorare il cron backstop. Il dispatch
-# manuale del drain puo' abbassare o alzare il tetto e, solo con una scelta
-# esplicita, riaprire le voci marcate failed.
+# vuoto. Il cron resta il backstop per gli eventi workflow_run persi; sia il
+# generation-health-watchdog sia il completamento del generatore principale
+# possono riaprire il drain quando la coda si avvicina alla soglia di eta'.
+# Solo gli eventi automatici sono wake-up: una dispatch manuale del watchdog o
+# del generatore, anche se riuscita, lascia lavorare il cron backstop. Il
+# dispatch manuale del drain puo' abbassare o alzare il tetto e, solo con una
+# scelta esplicita, riaprire le voci marcate failed.
 on:
   schedule:
     # Il drain ha un batch limitato per riservare tempo al publisher: la
@@ -28,7 +29,7 @@ on:
         default: false
         type: boolean
   workflow_run:
-    workflows: ['Generation health watchdog']
+    workflows: ['Generation health watchdog', 'Generate Blog Article']
     types: [completed]
 
 # Il gruppo condiviso `generate-article` e' una politica di scarto in entrambe
@@ -63,8 +64,9 @@ jobs:
         id: resolve
         env:
           EVENT_NAME: ${{ github.event_name }}
-          WATCHDOG_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          WATCHDOG_EVENT: ${{ github.event.workflow_run.event }}
+          UPSTREAM_WORKFLOW: ${{ github.event.workflow_run.name }}
+          UPSTREAM_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          UPSTREAM_EVENT: ${{ github.event.workflow_run.event }}
           QUEUE_FILE: data/image-regeneration-queue.json
         run: |
           set -euo pipefail
@@ -73,16 +75,35 @@ jobs:
             echo 'regular schedule or manual dispatch: cover drain enabled'
             exit 0
           fi
-          if [ "${WATCHDOG_CONCLUSION:-}" != 'success' ]; then
+          if [ "${UPSTREAM_CONCLUSION:-}" != 'success' ]; then
             echo 'should_drain=false' >> "$GITHUB_OUTPUT"
-            echo "watchdog conclusion is ${WATCHDOG_CONCLUSION:-unknown}: cover drain deferred to the next backstop"
+            echo "upstream ${UPSTREAM_WORKFLOW:-unknown} conclusion is ${UPSTREAM_CONCLUSION:-unknown}: cover drain deferred to the next backstop"
             exit 0
           fi
-          if [ "${WATCHDOG_EVENT:-}" != 'schedule' ]; then
-            echo 'should_drain=false' >> "$GITHUB_OUTPUT"
-            echo "watchdog event is ${WATCHDOG_EVENT:-unknown}: cover drain deferred to the next backstop"
-            exit 0
-          fi
+          case "${UPSTREAM_WORKFLOW:-}" in
+            'Generation health watchdog')
+              if [ "${UPSTREAM_EVENT:-}" != 'schedule' ]; then
+                echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+                echo "watchdog event is ${UPSTREAM_EVENT:-unknown}: cover drain deferred to the next backstop"
+                exit 0
+              fi
+              ;;
+            'Generate Blog Article')
+              case "${UPSTREAM_EVENT:-}" in
+                push|schedule) ;;
+                *)
+                  echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+                  echo "generator event is ${UPSTREAM_EVENT:-unknown}: cover drain deferred to the next backstop"
+                  exit 0
+                  ;;
+              esac
+              ;;
+            *)
+              echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+              echo "upstream workflow is ${UPSTREAM_WORKFLOW:-unknown}: cover drain deferred to the next backstop"
+              exit 0
+              ;;
+          esac
           if [ ! -s "$QUEUE_FILE" ]; then
             echo 'should_drain=false' >> "$GITHUB_OUTPUT"
             echo 'cover queue is absent or empty: no watchdog recovery needed'
