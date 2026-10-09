@@ -1,4 +1,45 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-aggressione-van-villa-olmo.webp",
+      "sha256": "9f7bb5b1422eb569aa812fdabca1e80bbf831f7996c1350a91f24cf2b9fe8f13"
+    },
+    {
+      "path": "public/images/blog/article-losanna-budget-deficit-2027.webp",
+      "sha256": "81c47779fe1e608b59fcffc322f2cde17bd2ae4dcf11e60985cbf3be4134bf9f"
+    },
+    {
+      "path": "public/images/blog/article-notte-bper-gallarate-bancomat.webp",
+      "sha256": "3a2d08a657b3aa12713840286a724b58826469425f4a15f4a367df1726d78285"
+    },
+    {
+      "path": "public/images/blog/article-pedemontana-falso-pedaggio-sms.webp",
+      "sha256": "82c7d678b4c6c987f486aa0d896485daa239285c6e8def273fb2f3e1ea727ec2"
+    },
+    {
+      "path": "public/images/blog/article-premi-malattia-soletta-2027.webp",
+      "sha256": "f9f698fa45d4f673ef374ec473a5a2a63a87c3f910991e1b196fd9f3c6833034"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-aggressione-van-villa-olmo-480w.webp",
+      "sha256": "1dbb070c7ad75fe4ec426e07be77de05ab89ec303f1ec34d0f9a413dbe8cd840"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-losanna-budget-deficit-2027-480w.webp",
+      "sha256": "5ffb99dc71843e01eb08a127d3e95b5505568ddb084a84d02e92fe40b57a032b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-notte-bper-gallarate-bancomat-480w.webp",
+      "sha256": "524766d3613a7afa27822b0e2c46e28efd9452aca0d47f3b9bea318f2643ade7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-pedemontana-falso-pedaggio-sms-480w.webp",
+      "sha256": "67a7fd4bee74132a79f972bfad5e821d92e3d66588979cc48846167d45ee6757"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-premi-malattia-soletta-2027-480w.webp",
+      "sha256": "2bcbe07e3c403587a49e9a6fd492b8caf26fb5e477949cdc4aa9d6b492a6abbd"
+    }
+  ]
 }
