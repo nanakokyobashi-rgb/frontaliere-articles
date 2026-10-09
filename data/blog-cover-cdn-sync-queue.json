@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-esercitazione-militare-sihlsee-ottobre-2026.webp",
+      "sha256": "3faad4547d40c19b09eac3283b7e59d727582cc256e1399bcb8f89fedc50a824"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-esercitazione-militare-sihlsee-ottobre-2026-480w.webp",
+      "sha256": "c05797ae1f159385234024596d8612f3cdd7bd3e05d59b71d3d1661be34c4c14"
+    }
+  ]
 }
