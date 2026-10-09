@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-eolico-weinland-zurigo.webp",
+      "sha256": "bfb37f5f2a174beb8f5825b02efda010d669edd7db764b66b472529a60b99661"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-eolico-weinland-zurigo-480w.webp",
+      "sha256": "4a07428fa64b7b478decc3efc29dc42377a41534893268587b3b5af61320d08a"
+    }
+  ]
 }
