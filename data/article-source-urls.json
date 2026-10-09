@@ -1,5 +1,4 @@
 {
-  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/la-vigilanza-sulle-banche-in-svizzera-una-breve-storia-degli-scandali/91769861": "vigilanza-sulle-banche-in-svizzera",
   "https://www.laregione.ch/cantone/luganese/1943013/l-incidente-sull-a2-riapre-il-dibattito-sulla-gestione-del-traffico": "incidente-a2-dibattito-traffico-ticino",
   "https://comozero.it/attualita/incubo-lariana-traffico-e-code-la-strettoia-di-nesso-tra-i-punti-critici": "incubo-lariana-traffico-e-code",
   "https://www.tio.ch/ticino/politica/1943229/cupra-traffico-problema-a2-airolo": "leventina-traffico-problema-cupra-airolo",
@@ -2220,6 +2219,11 @@
   "https://www.varesenews.it/2026/10/a-galliate-lombardo-tre-concerti-per-il-progetto-30-anni-di-borgo-musicale/2702161": {
     "articleId": "concerti-borgo-musicale",
     "ts": "2026-10-09T02:51:10.407Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/il-karate-inizia-con-lalta-formazione/2702431": {
+    "articleId": "karate-uisp-formazione-arcisate-2026",
+    "ts": "2026-10-09T04:02:21.823Z",
     "keyForm": 2
   }
 }
