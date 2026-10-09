@@ -30,6 +30,11 @@ import {
   updateArticleSeoImageBlock,
 } from '../scripts/lib/article-registry-image.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
+import {
+  coverDrainCommitMessage,
+  coverPublisherAckCommitMessage,
+  isCoverDrainCommit,
+} from '../../scripts/ci/cover-drain-commit.mjs';
 import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 
 function tempRoot() {
@@ -947,6 +952,14 @@ test('il merge del registro applica solo il delta locale e conserva metadata ups
   assert.equal(merged.assetCount, 3);
 });
 
+test('il marker del cover drain distingue i commit di orchestrazione dai push normali', () => {
+  assert.equal(isCoverDrainCommit(coverDrainCommitMessage(2)), true);
+  assert.equal(isCoverDrainCommit(coverPublisherAckCommitMessage()), true);
+  assert.equal(isCoverDrainCommit(`${coverDrainCommitMessage(1)}\n\nbody`), true);
+  assert.equal(isCoverDrainCommit('chore(generator): publish a normal article'), false);
+  assert.throws(() => coverDrainCommitMessage('two'), /non-negative integer/);
+});
+
 function workflowConcurrencyGroups(source) {
   const lines = source.split('\n');
   const groups = [];
@@ -1106,7 +1119,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   );
   assert.match(
     workflow,
-    /'Generate Blog Article'[\s\S]*push\)[\s\S]*case "\$\{UPSTREAM_HEAD_COMMIT_MESSAGE:-\}" in[\s\S]*'chore\(generator\): drain queued article covers \('\*\|'chore\(generator\): acknowledge queued cover publishers \('\*[\s\S]*generator push came from this cover drain/u,
+    /'Generate Blog Article'[\s\S]*push\)[\s\S]*cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"[\s\S]*if \[ "\$cover_drain_marker" = 'true' \][\s\S]*generator push came from this cover drain/u,
   );
   assert.match(workflow, /schedule\) ;;[\s\S]*generator event is \$\{UPSTREAM_EVENT:-unknown\}/u);
   assert.doesNotMatch(workflow, /UPSTREAM_EVENT:-\}"[^\n]*workflow_dispatch/);
@@ -1160,6 +1173,15 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
   assert.match(articlePublisher, /publisher omitted requested article IDs/u);
+
+  const sectionPublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url), 'utf8');
+  for (const publisher of [articlePublisher, sectionPublisher]) {
+    assert.match(publisher, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/u);
+    assert.match(publisher, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);
+    assert.match(publisher, /if \[ "\$cover_drain_marker" = 'true' \]/u);
+    assert.doesNotMatch(publisher, /if \[ "\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)" = 'true' \]/u);
+    assert.match(publisher, /cover-drain push is handled by the explicit publisher outbox dispatch/u);
+  }
 
   const drainScript = fs.readFileSync(new URL('../../scripts/ci/cover-publisher-drain.mjs', import.meta.url), 'utf8');
   assert.match(drainScript, /displayTitle/u);

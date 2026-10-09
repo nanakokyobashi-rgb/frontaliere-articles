@@ -368,6 +368,16 @@
       }
     },
     {
+      "path": "scripts/ci/cover-drain-commit.mjs",
+      "mode": "corpus-only",
+      "reason": "Rilevatore condiviso dai workflow corpus-only `regenerate-queued-covers.yml`, `fast-publish-article.yml` e `fast-publish-section.yml` per distinguere i push di orchestrazione dai push editoriali. Il sito non possiede il drain delle copertine né questi publisher, quindi non esiste un gemello da portare: resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": "db73dcaf2971be66",
+        "alignedAt": "2026-10-09"
+      }
+    },
+    {
       "path": "scripts/ci/cover-publisher-drain.mjs",
       "mode": "corpus-only",
       "reason": "Orchestratore del drain dell'outbox delle copertine: raggruppa il dispatch per sezione, attende i publisher in parallelo entro una scadenza cumulativa e produce l'esito per l'ack parziale. Esiste solo nel corpus perche' il workflow `regenerate-queued-covers.yml`, l'outbox e i publisher fast appartengono al repo pubblicatore; non esiste un gemello da portare al sito.",

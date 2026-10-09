@@ -97,13 +97,13 @@ jobs:
             'Generate Blog Article')
               case "${UPSTREAM_EVENT:-}" in
                 push)
-                  case "${UPSTREAM_HEAD_COMMIT_MESSAGE:-}" in
-                    'chore(generator): drain queued article covers ('*|'chore(generator): acknowledge queued cover publishers ('*)
-                      echo 'should_drain=false' >> "$GITHUB_OUTPUT"
-                      echo 'generator push came from this cover drain: cover drain deferred to the next backstop'
-                      exit 0
-                      ;;
-                  esac
+                  export COVER_DRAIN_COMMIT_MESSAGE="${UPSTREAM_HEAD_COMMIT_MESSAGE:-}"
+                  cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
+                  if [ "$cover_drain_marker" = 'true' ]; then
+                    echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+                    echo 'generator push came from this cover drain: cover drain deferred to the next backstop'
+                    exit 0
+                  fi
                   ;;
                 schedule) ;;
                 *)
@@ -308,7 +308,8 @@ jobs:
           git add -A -- "$OUTBOX_FILE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(generator): acknowledge queued cover publishers (partial)"
+          ack_commit_message="$(node scripts/ci/cover-drain-commit.mjs ack-message)"
+          git commit -m "$ack_commit_message"
           remote="https://github.com/${GITHUB_REPOSITORY}.git"
           auth="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 -w 0)"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"
@@ -506,7 +507,8 @@ jobs:
           if [ -f "$SUMMARY_FILE" ]; then drained="$(jq -r '.drained // 0' "$SUMMARY_FILE")"; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(generator): drain queued article covers ($drained drained)"
+          drain_commit_message="$(node scripts/ci/cover-drain-commit.mjs drain-message "$drained")"
+          git commit -m "$drain_commit_message"
           PRODUCED="$(git rev-parse HEAD)"
           registry_base="$RUNNER_TEMP/generated-image-registry-base.json"
           registry_snapshot="$RUNNER_TEMP/generated-image-registry-replayed.json"
@@ -632,7 +634,8 @@ jobs:
           git add -A -- "$OUTBOX_FILE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore(generator): acknowledge queued cover publishers (partial)"
+          ack_commit_message="$(node scripts/ci/cover-drain-commit.mjs ack-message)"
+          git commit -m "$ack_commit_message"
           remote="https://github.com/${GITHUB_REPOSITORY}.git"
           auth="$(printf 'x-access-token:%s' "$GITHUB_PAT_NANAKO" | base64 -w 0)"
           git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $auth"

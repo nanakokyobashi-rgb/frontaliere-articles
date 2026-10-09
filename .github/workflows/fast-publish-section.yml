@@ -39,6 +39,8 @@ on:
       - 'content/blog-meta-canton-*'
       # A declared image may arrive after the article body. The resolver maps
       # this path through the registry to the owning canton article(s).
+      # A queued-cover drain is the explicit-outbox exception; its push is
+      # filtered by the shared commit marker before this workflow publishes.
       - 'public/images/**'
       - 'generator/scripts/lib/canton-hubs/paths.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
@@ -131,9 +133,23 @@ jobs:
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
+          EVENT_NAME: ${{ github.event_name }}
+          COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
+          if [ "$EVENT_NAME" = 'push' ]; then
+            cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
+            if [ "$cover_drain_marker" = 'true' ]; then
+              echo 'cover-drain push is handled by the explicit publisher outbox dispatch; skipping automatic section publishing'
+              {
+                echo 'matrix=[]'
+                echo 'any=false'
+                echo 'dry=false'
+              } >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
           before="${PUSH_BEFORE:-}"
           if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
