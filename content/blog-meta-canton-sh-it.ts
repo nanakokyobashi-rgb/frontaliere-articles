@@ -14,7 +14,7 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.seehas-affollamento-mattutino.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.sciaffusa-dati-lavoro-2026.title': 'Disoccupazione nel Canton Sciaffusa: dati settembre 2026',
     'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'Il Centro regionale di collocamento comunica i dati sulla disoccupazione nel Canton Sciaffusa per settembre 2026; il lead pubblico non riporta le cifre.',
-    'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Scena simbolica sul mercato del lavoro nel Canton Sciaffusa',
+    'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonShIt;

@@ -7987,7 +7987,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-solari-senza-permesso.imageAlt': 'Pannelli solari sul tetto di un edificio in Svizzera',
     'blog.article.midterm-usa-voto-svizzera.title': 'Midterm Usa: effetti su dazi, dollaro e mercati in Svizzera',
     'blog.article.midterm-usa-voto-svizzera.excerpt': 'Il voto Usa del 3 novembre può pesare sull\'economia svizzera.',
-    'blog.article.midterm-usa-voto-svizzera.imageAlt': 'Vista del lago di Lugano con le Alpi, simbolo dei legami economici Svizzera-USA',
+    'blog.article.midterm-usa-voto-svizzera.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;

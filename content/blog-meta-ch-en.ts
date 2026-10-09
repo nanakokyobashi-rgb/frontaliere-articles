@@ -7987,7 +7987,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-solari-senza-permesso.imageAlt': 'Solar panels on the roof of a building in Switzerland',
     'blog.article.midterm-usa-voto-svizzera.title': 'US Midterms: effects on tariffs, the dollar and markets in Switzerland',
     'blog.article.midterm-usa-voto-svizzera.excerpt': 'The U.S. vote on November 3 could weigh on the Swiss economy.',
-    'blog.article.midterm-usa-voto-svizzera.imageAlt': 'Lugano lake view with the Alps, symbol of Switzerland‑USA economic ties',
+    'blog.article.midterm-usa-voto-svizzera.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

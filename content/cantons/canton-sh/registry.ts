@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'sciaffusa-dati-lavoro-2026',
  category: 'novita',
  date: '2026-10-09T12:18:54.869Z',
- image: '/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp',
+ image: '/images/blog/article-sciaffusa-dati-lavoro-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SH'],

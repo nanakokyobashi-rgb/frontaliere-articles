@@ -14,7 +14,7 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.seehas-affollamento-mattutino.imageAlt': 'Illustration generated for this article',
     'blog.article.sciaffusa-dati-lavoro-2026.title': 'Unemployment in the Canton of Schaffhausen: September 2026 data',
     'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'The regional employment center reports unemployment data for the Canton of Schaffhausen for September 2026; the public lead does not include the figures.',
-    'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Symbolic scene of the labour market in the Canton of Schaffhausen',
+    'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonShEn;

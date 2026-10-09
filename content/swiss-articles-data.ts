@@ -26631,7 +26631,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'midterm-usa-voto-svizzera',
     category: 'pratico',
     date: '2026-10-09T14:00:45.907Z',
-    image: '/images/blog/crescita-economia-svizzera-seco-2026.webp',
+    image: '/images/blog/article-midterm-usa-voto-svizzera.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

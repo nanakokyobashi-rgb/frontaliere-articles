@@ -14,7 +14,7 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.seehas-affollamento-mattutino.imageAlt': 'Illustration générée pour cet article',
     'blog.article.sciaffusa-dati-lavoro-2026.title': 'Chômage dans le canton de Schaffhouse : données de septembre 2026',
     'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'Le Centre régional de placement communique les données sur le chômage dans le canton de Schaffhouse pour septembre 2026 ; le lead public ne rapporte pas les chiffres.',
-    'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Scène symbolique du marché du travail dans le canton de Schaffhouse',
+    'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonShFr;

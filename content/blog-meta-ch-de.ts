@@ -7987,7 +7987,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.iniziativa-solari-senza-permesso.imageAlt': 'Solarmodule auf dem Dach eines Gebäudes in der Schweiz',
     'blog.article.midterm-usa-voto-svizzera.title': 'US-Zwischenwahlen: Auswirkungen auf Zölle, Dollar und Märkte in der Schweiz',
     'blog.article.midterm-usa-voto-svizzera.excerpt': 'Die US-Wahl vom 3.',
-    'blog.article.midterm-usa-voto-svizzera.imageAlt': 'Blick auf den Luganer See mit den Alpen, Symbol der wirtschaftlichen Verbindungen Schweiz‑USA',
+    'blog.article.midterm-usa-voto-svizzera.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;
