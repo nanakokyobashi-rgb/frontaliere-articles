@@ -43324,6 +43324,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lardi-dotlife-chiusura-alberghi-lugano',
+ category: 'pratico',
+ date: '2026-10-09T04:27:22.850Z',
+ image: '/images/blog/article-lardi-dotlife-chiusura-alberghi-lugano.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

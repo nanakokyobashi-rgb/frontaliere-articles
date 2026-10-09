@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/luganese/1943013/l-incidente-sull-a2-riapre-il-dibattito-sulla-gestione-del-traffico": "incidente-a2-dibattito-traffico-ticino",
   "https://comozero.it/attualita/incubo-lariana-traffico-e-code-la-strettoia-di-nesso-tra-i-punti-critici": "incubo-lariana-traffico-e-code",
   "https://www.tio.ch/ticino/politica/1943229/cupra-traffico-problema-a2-airolo": "leventina-traffico-problema-cupra-airolo",
   "https://www.laregione.ch/cantone/mendrisiotto/1942053/ufficio-doganale-unico-per-mendrisio-e-sopraceneri": "ufficio-doganale-unico-mendrisio-sopraceneri",
@@ -2224,6 +2223,11 @@
   "https://www.varesenews.it/2026/10/il-karate-inizia-con-lalta-formazione/2702431": {
     "articleId": "karate-uisp-formazione-arcisate-2026",
     "ts": "2026-10-09T04:02:21.823Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4139591": {
+    "articleId": "lardi-dotlife-chiusura-alberghi-lugano",
+    "ts": "2026-10-09T04:27:23.181Z",
     "keyForm": 2
   }
 }
