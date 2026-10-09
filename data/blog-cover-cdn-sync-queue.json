@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-hsg-spin-off-ufficiali.webp",
-      "sha256": "3b5ea7919b3a7ae920264f1f80af13d10238a8a170caf8859e6c7704ec1e7cb3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-hsg-spin-off-ufficiali-480w.webp",
-      "sha256": "a3a18cbb123b0643a56d35b65e81a79e590e869196cb3332cb7e5d19119ddec2"
-    }
-  ]
+  "items": []
 }
