@@ -32,7 +32,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'nuovo-piano-ciclabile-friburgo',
  category: 'novita',
  date: '2026-10-08T15:33:51.044Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-nuovo-piano-ciclabile-friburgo.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['FR'],

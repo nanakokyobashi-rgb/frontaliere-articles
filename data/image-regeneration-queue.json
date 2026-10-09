@@ -5,11 +5,11 @@
       "articleId": "benzina-grigioni-deviazione",
       "title": "Prezzi benzina in Grigioni: quando conviene deviare",
       "fallbackImage": "/images/blog/benzina-diesel-prezzi-calano.webp",
-      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (vision gate rejected image: Generic illustrated alpine road scene relevant to fuel-price detours in Grigioni, but it contains visible fuel-station signboards,",
+      "reason": "All image providers failed for article-benzina-grigioni-deviazione: openai-codex (vision gate rejected image: Generic illustrated Alpine road-fork scene relevant to detouring in Canton GR; the car has a visible circular manufacturer badge/l",
       "status": "queued",
       "requestedAt": "2026-10-07T06:53:48.101Z",
-      "lastFailureAt": "2026-10-09T09:39:47.739Z",
-      "failureCount": 1
+      "lastFailureAt": "2026-10-09T10:03:43.562Z",
+      "failureCount": 2
     },
     {
       "articleId": "costi-cure-domicilio-ticino-2026",
@@ -32,54 +32,14 @@
       "lastFailureAt": "2026-10-09T09:41:26.693Z"
     },
     {
-      "articleId": "nuovo-piano-ciclabile-friburgo",
-      "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-nuovo-piano-ciclabile-friburgo: openai-codex (vision gate rejected image: Original scenic illustration with no text, logos, faces, or people, but it does not clearly depict a bicycle network or cycling",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-08T15:33:51.061Z",
-      "lastFailureAt": "2026-10-09T09:45:37.097Z"
-    },
-    {
       "articleId": "treno-foliage-locarno-2026",
       "title": "Treno del Foliage 2026 tra Locarno e Domodossola",
       "fallbackImage": "/images/blog/article-treno-foliage-locarno-domodossola.webp",
       "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-08T16:34:16.930Z",
-      "lastFailureAt": "2026-10-08T16:34:16.930Z"
-    },
-    {
-      "articleId": "maison-garde-ospedale-sion",
-      "title": "Sion: apre la Maison de la garde per le urgenze",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T17:03:41.260Z",
-      "lastFailureAt": "2026-10-08T17:03:41.260Z"
-    },
-    {
-      "articleId": "forniture-cemento-aumento-terzo-trimestre",
-      "title": "Forniture di cemento in lieve aumento nel terzo trimestre",
-      "fallbackImage": "/images/blog/article-casse-pensioni-migliorano-terzo-trimestre.webp",
-      "reason": "All image providers failed for article-forniture-cemento-aumento-terzo-trimestre: openai-codex (vision gate rejected image: Generic AI-style Alpine cement-truck illustration, but s",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T17:40:48.716Z",
-      "lastFailureAt": "2026-10-08T17:40:48.716Z"
-    },
-    {
-      "articleId": "baar-rinnovo-comunale-2027",
-      "title": "Baar: rinnovo del Gemeinderat per il 2027–2030",
-      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T17:50:07.621Z",
-      "lastFailureAt": "2026-10-08T17:50:07.621Z"
+      "lastFailureAt": "2026-10-09T10:06:47.169Z"
     },
     {
       "articleId": "scuola-sternmatt-ia-2026",

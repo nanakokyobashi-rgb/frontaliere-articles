@@ -11,7 +11,7 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.fribourg-modifica-licd.imageAlt': 'Öffentliches Büro in Freiburg mit Steuerzahlenden, die ihre Steuererklärung am Computer ausfüllen',
     'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Freiburg: Neuer Radnetzplan genehmigt',
     'blog.article.nuovo-piano-ciclabile-friburgo.excerpt': 'RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt',
-    'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Neues Velowegnetz im Kanton Freiburg für den Alltagsverkehr',
+    'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.friburgo-legge-lingue-ufficiali.title': 'Freiburg verabschiedet das Gesetz über die Amtssprachen',
     'blog.article.friburgo-legge-lingue-ufficiali.excerpt': 'Die Abgeordneten stimmten am Donnerstag ab Freiburg hat sein erstes Gesetz über die Amtssprachen Der Text fördert die Zweisprachigkeit Entscheidung → Abstimmung',
     'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Für diesen Artikel erstellte Illustration',

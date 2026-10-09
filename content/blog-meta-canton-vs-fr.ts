@@ -14,7 +14,7 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.a9-chiusure-notturne-sion-sierre.imageAlt': 'Fermeture nocturne de l\'A9 entre Sion et Sierre pour travaux',
     'blog.article.maison-garde-ospedale-sion.title': 'Sion : la Maison de la garde ouvre pour les urgences',
     'blog.article.maison-garde-ospedale-sion.excerpt': 'À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.',
-    'blog.article.maison-garde-ospedale-sion.imageAlt': 'Entrée de la Maison de la garde à l\'hôpital de Sion',
+    'blog.article.maison-garde-ospedale-sion.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonVsFr;

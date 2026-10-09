@@ -94,10 +94,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-agrivarese-angera-ottobre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-baar-rinnovo-comunale-2027.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Avvisi elettorali per il Gemeinderat di Baar"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T17:50:07+00:00",
       "dateModified": "2026-10-08T17:50:07+00:00",

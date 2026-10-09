@@ -43,7 +43,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'maison-garde-ospedale-sion',
  category: 'novita',
  date: '2026-10-08T17:03:41.241Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-maison-garde-ospedale-sion.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VS'],

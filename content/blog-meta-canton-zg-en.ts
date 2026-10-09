@@ -11,7 +11,7 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zug-rischio-coleottero-giapponese.imageAlt': 'Japanese beetle monitoring traps in the canton of Zug',
     'blog.article.baar-rinnovo-comunale-2027.title': 'Baar: renewal of the Municipal Council for 2027–2030',
     'blog.article.baar-rinnovo-comunale-2027.excerpt': 'Baarer Zytig reports the results of September 27 and the renewal of the Gemeinderat on October 4, 2026: seven members for the 2027–2030 term.',
-    'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Municipal council election notices in Baar',
+    'blog.article.baar-rinnovo-comunale-2027.imageAlt': 'Illustration generated for this article',
     'blog.article.scuola-sternmatt-ia-2026.title': 'Sternmatt School 1: AI marks 2026/27',
     'blog.article.scuola-sternmatt-ia-2026.excerpt': 'The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.',
     'blog.article.scuola-sternmatt-ia-2026.imageAlt': 'Sternmatt 1 school: artificial intelligence at the centre of the 2026/27 school year',

@@ -11,7 +11,7 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.fribourg-modifica-licd.imageAlt': 'Bureau public à Fribourg avec des contribuables remplissant leur déclaration d\'impôts sur un ordinateur',
     'blog.article.nuovo-piano-ciclabile-friburgo.title': 'Fribourg : le nouveau plan du réseau cyclable approuvé',
     'blog.article.nuovo-piano-ciclabile-friburgo.excerpt': 'RIMU approuve le nouveau plan cyclable cantonal Consultation : 80 avis et près de 270 observations Objectif : plus de vélos dans la vie quotidienne d\'ici 2042',
-    'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Nouveau réseau cyclable dans le canton de Fribourg pour la mobilité quotidienne',
+    'blog.article.nuovo-piano-ciclabile-friburgo.imageAlt': 'Illustration générée pour cet article',
     'blog.article.friburgo-legge-lingue-ufficiali.title': 'Fribourg approuve la loi sur les langues officielles',
     'blog.article.friburgo-legge-lingue-ufficiali.excerpt': 'Les députés ont voté jeudi Fribourg a sa première loi sur les langues officielles Le texte promeut le bilinguisme Décision → vote des députés du canton',
     'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Illustration générée pour cet article',
