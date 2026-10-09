@@ -25,91 +25,51 @@
       "articleId": "cardano-al-campo-minorenne-arresto",
       "title": "Cardano al Campo: minorenne arrestato con hashish",
       "fallbackImage": "/images/blog/article-domodossola-arresto-hashish-stazione.webp",
-      "reason": "All image providers failed for article-cardano-al-campo-minorenne-arresto: openai-codex (vision gate rejected image: Original stylized train-station illustration with no readable text, logos, or recognizable faces, but it includes a promine",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-08T23:26:42.049Z",
-      "lastFailureAt": "2026-10-09T11:24:13.019Z"
+      "lastFailureAt": "2026-10-09T12:32:13.228Z"
     },
     {
       "articleId": "nobel-economia-fehr-2026",
       "title": "Nobel economia 2026: Ernst Fehr tra i possibili vincitori",
       "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
-      "reason": "All image providers failed for article-nobel-economia-fehr-2026: openai-codex (vision gate rejected image: Original generic illustration with no text or logos; however, it contains a recognizable generic person in the foreground.); gemini (",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-09T03:22:16.123Z",
-      "lastFailureAt": "2026-10-09T11:27:37.987Z"
+      "lastFailureAt": "2026-10-09T12:34:13.283Z"
     },
     {
       "articleId": "obermumpf-strada-sanificazione-2024",
       "title": "Obermumpf: lavori sulla K491 fino all'autunno 2027",
       "fallbackImage": "/images/blog/mendrisio-strada-serpiano-urgenti-lavori.webp",
-      "reason": "All image providers failed for article-obermumpf-strada-sanificazione-2024: openai-codex (vision gate rejected image: Generic illustrative roadworks scene relevant to the subject, but visible road and construction signage is present.); gemi",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-09T06:35:59.657Z",
-      "lastFailureAt": "2026-10-09T11:29:08.559Z"
-    },
-    {
-      "articleId": "luganistan-clan-ceresio",
-      "title": "Luganistan, il giardino di casa di una cleptocrazia",
-      "fallbackImage": "/images/blog/article-clan-nazarbayev-ceresio.webp",
-      "reason": "All image providers failed for article-luganistan-clan-ceresio: openai-codex (vision gate rejected image: Relevant original editorial illustration, but a partially visible foreground person appears at the right edge.); gemini (Gemini image ",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-09T06:48:32.689Z",
-      "lastFailureAt": "2026-10-09T11:30:27.811Z"
+      "lastFailureAt": "2026-10-09T12:36:13.337Z"
     },
     {
       "articleId": "rancio-valcuvia-statale-394",
       "title": "Rancio Valcuvia: scontro tra auto e moto sulla statale 394",
       "fallbackImage": "/images/blog/raduno-auto-moto-cocquio.webp",
-      "reason": "All image providers failed for article-rancio-valcuvia-statale-394: openai-codex (vision gate rejected image: Generic illustrated car–motorcycle crash on a scenic mountain road; a visible vehicle emblem/logo triggers the exclusion.); gemini",
+      "reason": "All image providers failed for article-rancio-valcuvia-statale-394: openai-codex (vision gate rejected image: Generic illustrated car–motorcycle collision; the car has a visible brand emblem/logo.); gemini (Gemini image request failed with ",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-09T07:21:46.780Z",
-      "lastFailureAt": "2026-10-09T11:33:11.794Z"
-    },
-    {
-      "articleId": "operazione-trotta-ebike-monopattini",
-      "title": "Operazione TROTTA: 35 sanzioni e-bike truccate e monopattini fuorilegge",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-09T07:39:46.662Z",
-      "lastFailureAt": "2026-10-09T11:35:11.855Z"
-    },
-    {
-      "articleId": "a8-manutenzione-cavalcavia-ottobre-2026",
-      "title": "A8: chiusure notturne per cavalcavia Castronno-Solbiate",
-      "fallbackImage": "/images/blog/article-a9-chiusure-notturne-sion-sierre.webp",
-      "reason": "All image providers failed for article-a8-manutenzione-cavalcavia-ottobre-2026: openai-codex (vision gate rejected image: Generic night highway-construction illustration clearly ma",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T09:14:12.097Z",
-      "lastFailureAt": "2026-10-09T09:14:12.097Z"
-    },
-    {
-      "articleId": "flaesch-strada-sentieri-chiusi",
-      "title": "Fläsch chiude strada, sentieri e area d'arrampicata",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T11:33:58.566Z",
-      "lastFailureAt": "2026-10-09T11:33:58.566Z"
+      "lastFailureAt": "2026-10-09T12:39:37.703Z"
     },
     {
       "articleId": "sciaffusa-dati-lavoro-2026",
       "title": "Disoccupazione nel Canton Sciaffusa: dati settembre 2026",
       "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
-      "reason": "image generation deadline exceeded",
+      "reason": "All image providers failed for article-sciaffusa-dati-lavoro-2026: openai-codex (vision gate rejected image: Generic scenic illustration with work-related props, but no clear visual match to unemployment data in Canton Schaffhausen.); gemin",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-09T12:18:54.884Z",
-      "lastFailureAt": "2026-10-09T12:18:54.884Z"
+      "lastFailureAt": "2026-10-09T12:45:14.397Z"
     }
   ]
 }

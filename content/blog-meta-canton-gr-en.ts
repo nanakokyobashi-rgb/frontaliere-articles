@@ -20,7 +20,7 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.code-domenicali-landquart.imageAlt': 'Sunday traffic queues at the motorway exit near the Fashion Outlet in Landquart',
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch closes road, trails and climbing area',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Above Fläsch, the risk of rockfall leads to precautionary closures of the road, hiking trails, and climbing gym.',
-    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Precautionary closures of a road, trails and climbing area above Fläsch',
+    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonGrEn;

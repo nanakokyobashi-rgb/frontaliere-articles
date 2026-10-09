@@ -20,7 +20,7 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.code-domenicali-landquart.imageAlt': 'Bouchons du dimanche à la sortie d\'autoroute près du Fashion Outlet de Landquart',
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch ferme la route, les sentiers et le site d’escalade',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Au-dessus de Fläsch, le risque de chute de rochers entraîne la fermeture préventive de la route, des sentiers de randonnée et du site d’escalade.',
-    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Fermetures préventives d\'une route, de sentiers et d\'un site d\'escalade au-dessus de Fläsch',
+    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonGrFr;

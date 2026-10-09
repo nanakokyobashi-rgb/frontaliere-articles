@@ -26569,7 +26569,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'luganistan-clan-ceresio',
     category: 'novita',
     date: '2026-10-09T06:48:32.410Z',
-    image: '/images/blog/article-clan-nazarbayev-ceresio.webp',
+    image: '/images/blog/article-luganistan-clan-ceresio.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

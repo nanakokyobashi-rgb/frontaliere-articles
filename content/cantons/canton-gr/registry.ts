@@ -65,7 +65,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'flaesch-strada-sentieri-chiusi',
  category: 'pratico',
  date: '2026-10-09T11:33:58.551Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-flaesch-strada-sentieri-chiusi.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['GR'],

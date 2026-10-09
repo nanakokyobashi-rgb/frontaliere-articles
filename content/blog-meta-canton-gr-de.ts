@@ -20,7 +20,7 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.code-domenicali-landquart.imageAlt': 'Sonntäglicher Stau an der Autobahnausfahrt beim Fashion Outlet in Landquart',
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch sperrt Straße, Wanderwege und Klettergarten',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Oberhalb von Fläsch führt die Gefahr eines Felsabbruchs zu vorsorglichen Sperrungen der Straße, der Wanderwege und des Klettergartens.',
-    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Vorsorgliche Sperrungen von Strasse, Wanderwegen und Klettergarten oberhalb von Fläsch',
+    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonGrDe;
