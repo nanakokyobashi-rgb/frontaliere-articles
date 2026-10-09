@@ -40,13 +40,11 @@ import { eventsBasePathForCanton } from './lib/events-utils.mjs';
 import { HUB_LOCALES } from './lib/canton-hubs/format.mjs';
 import { loadSectionArticles } from './lib/canton-hubs/articles.mjs';
 import { borderRankingArticleId, buildHubLinks, eventsDigestArticleId } from './lib/canton-hubs/links.mjs';
+import { isRelevantCantonHubSitemap } from './lib/canton-hub-sitemaps.mjs';
 import { REWIRE_FETCH_HEADERS } from './lib/rewire-fetch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const ORIGIN = (process.env.SITE_ORIGIN || 'https://frontaliereticino.ch').replace(/\/$/, '');
-/** Le sitemap che contengono le pagine linkate: le altre (annunci, articoli) non servono. */
-const RELEVANT = /sitemap-(pages|fuel-[a-z-]+|border-wait|health-premiums|farmacie|plate-auctions-\d+|weather|eventi|jobs-[a-z-]+|blog)\.xml$/;
-
 const args = process.argv.slice(2);
 const warnOnly = args.includes('--warn');
 const softNetwork = args.includes('--soft-network');
@@ -83,7 +81,7 @@ try {
 } catch (err) {
   networkFailure(err);
 }
-const children = [...index.matchAll(LOC_RE)].map((m) => m[1]).filter((u) => RELEVANT.test(u));
+const children = [...index.matchAll(LOC_RE)].map((m) => m[1]).filter(isRelevantCantonHubSitemap);
 if (children.length === 0) {
   console.error('::error::[verify-canton-hub-links] nessuna sitemap pertinente nell\'indice: il controllo sarebbe vuoto');
   process.exit(1);
