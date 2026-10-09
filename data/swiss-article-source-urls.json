@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/tragitto-casa-scuola%3a-per-41%25-genitori-%c3%a8-rischioso%2c-studio/92015568": {
-    "articleId": "tragitto-casa-scuola-rischioso",
-    "ts": "2026-09-07T10:21:29.053Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1948469/settembre-e-il-mese-dell-ambiente": {
     "articleId": "settembre-mese-ambiente-collina-doro",
     "ts": "2026-09-07T10:35:33.405Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/diplomazia-svizzera/come-dovrebbe-comportarsi-un-paese-neutrale-come-la-svizzera-riguardo-allesportazione-di-armi-verso-zone-di-conflitto/90350624": {
     "articleId": "voto-svizzera-esportazione-armi-2026",
     "ts": "2026-10-09T17:48:06.655Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/svizzeri-spendono-di-pi%c3%b9%2c-malgrado-l%27aumento-dei-prezzi/92194362": {
+    "articleId": "spesa-famiglie-inflazione",
+    "ts": "2026-10-09T18:30:40.472Z",
     "keyForm": 2
   }
 }

@@ -26677,6 +26677,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'spesa-famiglie-inflazione',
+    category: 'novita',
+    date: '2026-10-09T18:30:40.205Z',
+    image: '/images/blog/svizzeri-spesa-crescita-rallenta.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

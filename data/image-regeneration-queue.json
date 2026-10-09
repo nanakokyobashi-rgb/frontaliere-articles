@@ -20,6 +20,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-09T16:43:09.597Z",
       "lastFailureAt": "2026-10-09T17:56:34.550Z"
+    },
+    {
+      "articleId": "spesa-famiglie-inflazione",
+      "title": "Svizzera, consumi in crescita dello 0,9% a settembre",
+      "fallbackImage": "/images/blog/svizzeri-spesa-crescita-rallenta.webp",
+      "reason": "All image providers failed for article-spesa-famiglie-inflazione: openai-codex (vision gate rejected image: Generic Swiss shopping scene, but multiple recognizable human faces and",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T18:30:40.470Z",
+      "lastFailureAt": "2026-10-09T18:30:40.470Z"
     }
   ]
 }
