@@ -20,6 +20,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-08T23:26:42.049Z",
       "lastFailureAt": "2026-10-09T12:32:13.228Z"
+    },
+    {
+      "articleId": "economia-svizzera-fiducia-calante",
+      "title": "Fiducia consumatori svizzeri peggiora: prezzi e lavoro",
+      "fallbackImage": "/images/blog/article-fiducia-consumatori-svizzeri-settembre.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T15:01:34.215Z",
+      "lastFailureAt": "2026-10-09T15:01:34.215Z"
     }
   ]
 }
