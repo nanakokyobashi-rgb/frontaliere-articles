@@ -6,10 +6,12 @@ run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
 # vuoto. Il cron resta il backstop per gli eventi workflow_run persi; sia il
 # generation-health-watchdog sia il completamento del generatore principale
 # possono riaprire il drain quando la coda si avvicina alla soglia di eta'.
-# Solo gli eventi automatici sono wake-up: una dispatch manuale del watchdog o
-# del generatore, anche se riuscita, lascia lavorare il cron backstop. Il
-# dispatch manuale del drain puo' abbassare o alzare il tetto e, solo con una
-# scelta esplicita, riaprire le voci marcate failed.
+# I commit prodotti dal drain stesso sono esclusi dal wake-up del generatore:
+# altrimenti il completamento del generatore riaprirebbe il drain in una catena
+# autoreferenziale. Solo gli eventi automatici sono wake-up: una dispatch
+# manuale del watchdog o del generatore, anche se riuscita, lascia lavorare il
+# cron backstop. Il dispatch manuale del drain puo' abbassare o alzare il tetto
+# e, solo con una scelta esplicita, riaprire le voci marcate failed.
 on:
   schedule:
     # Il drain ha un batch limitato per riservare tempo al publisher: la
@@ -67,6 +69,7 @@ jobs:
           UPSTREAM_WORKFLOW: ${{ github.event.workflow_run.name }}
           UPSTREAM_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
           UPSTREAM_EVENT: ${{ github.event.workflow_run.event }}
+          UPSTREAM_HEAD_COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
           QUEUE_FILE: data/image-regeneration-queue.json
         run: |
           set -euo pipefail
@@ -90,7 +93,16 @@ jobs:
               ;;
             'Generate Blog Article')
               case "${UPSTREAM_EVENT:-}" in
-                push|schedule) ;;
+                push)
+                  case "${UPSTREAM_HEAD_COMMIT_MESSAGE:-}" in
+                    'chore(generator): drain queued article covers ('*|'chore(generator): acknowledge queued cover publishers ('*)
+                      echo 'should_drain=false' >> "$GITHUB_OUTPUT"
+                      echo 'generator push came from this cover drain: cover drain deferred to the next backstop'
+                      exit 0
+                      ;;
+                  esac
+                  ;;
+                schedule) ;;
                 *)
                   echo 'should_drain=false' >> "$GITHUB_OUTPUT"
                   echo "generator event is ${UPSTREAM_EVENT:-unknown}: cover drain deferred to the next backstop"
