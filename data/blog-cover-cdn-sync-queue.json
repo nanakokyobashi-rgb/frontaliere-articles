@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-marchesi-mendrisiotto-priorita.webp",
-      "sha256": "5aa5b688ed62e161c382639e14928b1768f7ac62ee744873bc013e43c313baba"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-marchesi-mendrisiotto-priorita-480w.webp",
-      "sha256": "1f24ebd7ab781c89f0fdee09a1f00a03e954b672a12d5c83e36d8b38e2fa07d5"
-    }
-  ]
+  "items": []
 }
