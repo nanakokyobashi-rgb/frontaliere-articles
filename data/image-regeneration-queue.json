@@ -390,6 +390,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T00:54:58.589Z",
       "lastFailureAt": "2026-10-09T00:54:58.589Z"
+    },
+    {
+      "articleId": "concerti-borgo-musicale",
+      "title": "Tre concerti per i 30 anni del Borgo musicale",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-concerti-borgo-musicale: openai-codex (vision gate rejected image: Illustrated chamber-music scene relevant to Ticino concerts, with visible",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T02:51:10.406Z",
+      "lastFailureAt": "2026-10-09T02:51:10.406Z"
     }
   ]
 }
