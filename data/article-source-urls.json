@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/economia/1943256/harvey-catena-nichols-lusso-bancarotta": "harvey-nichols-bancarotta",
   "https://www.tio.ch/ticino/politica/1943337/una-mozione-per-un-fondo-cantonale-per-la-mobilita-sostenibile": "fondo-cantonale-mobilita-sostenibile",
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/la-vigilanza-sulle-banche-in-svizzera-una-breve-storia-degli-scandali/91769861": "vigilanza-sulle-banche-in-svizzera",
   "https://www.laregione.ch/cantone/luganese/1943013/l-incidente-sull-a2-riapre-il-dibattito-sulla-gestione-del-traffico": "incidente-a2-dibattito-traffico-ticino",
@@ -2212,6 +2211,11 @@
   "https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/varese/articolo/varese-su-il-sipario-domenica-parte-la-stagione-del-teatro-intred.html": {
     "articleId": "teatro-intred-varese-stagione-2026",
     "ts": "2026-10-09T01:29:12.928Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/cronaca-20/articolo/due-incidenti-nella-notte-a-varese-tre-persone-finiscono-al-pronto-soccorso.html": {
+    "articleId": "incidenti-notte-varese",
+    "ts": "2026-10-09T02:15:06.401Z",
     "keyForm": 2
   }
 }
