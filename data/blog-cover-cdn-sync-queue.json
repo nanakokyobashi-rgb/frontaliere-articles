@@ -1,4 +1,45 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-friburgo-legge-lingue-ufficiali.webp",
+      "sha256": "4abd39bd5e0700257365179f5175cefdbd66e4dda15c12bc3135e7ee9972538e"
+    },
+    {
+      "path": "public/images/blog/article-ginevra-stop-autostrada-a412.webp",
+      "sha256": "e804675b2f3e18bffa6b18718a359c87f1850490c72fd5f67fe8ff776624aaeb"
+    },
+    {
+      "path": "public/images/blog/article-luterbach-a5-rampe-notte.webp",
+      "sha256": "4847a8a3f6e1cfb9bd9950c522e9d10ec225cc793ad90ab176e73f8f48f6091d"
+    },
+    {
+      "path": "public/images/blog/article-tempo30-birsfelden-ottobre.webp",
+      "sha256": "70a84377d77a41c99b335b643cd6070f19f0c72f46d5252430faffefe228deb6"
+    },
+    {
+      "path": "public/images/blog/article-tifosi-lucerna-lugano-traffico.webp",
+      "sha256": "424e6ee90170bbd7dcede0d5f4b7973d3439d8d0b54f17b4fc74211be484da9e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-friburgo-legge-lingue-ufficiali-480w.webp",
+      "sha256": "a1e0ad77ccd713aedbf3a55f7befde8b16d10332ea6860376028d6be92a9056e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ginevra-stop-autostrada-a412-480w.webp",
+      "sha256": "19ce5387b4ba2283654ad7f85e26cbe2dcb3a629aa83b62ecefd09570304d446"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-luterbach-a5-rampe-notte-480w.webp",
+      "sha256": "3a79c81f47243b7f3bcd2f74444367eeb3a49e0405a89439eee0b6559ecc2728"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tempo30-birsfelden-ottobre-480w.webp",
+      "sha256": "0b1e3f68908037a90836f07f0583471e62ae5c7eacaa118656bfc33bd6596ad3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tifosi-lucerna-lugano-traffico-480w.webp",
+      "sha256": "86a90422587301f4f67738dfa237ccb3d61dea074a661eb201899195f2960c2e"
+    }
+  ]
 }
