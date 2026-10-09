@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T18:30:40.470Z",
       "lastFailureAt": "2026-10-09T18:30:40.470Z"
+    },
+    {
+      "articleId": "mastercard-pagamenti-rete-assente",
+      "title": "Mastercard: pagamenti senza internet dal 2027",
+      "fallbackImage": "/images/blog/rientro-in-svizzera-senza-lavoro-guida.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T20:04:15.651Z",
+      "lastFailureAt": "2026-10-09T20:04:15.651Z"
     }
   ]
 }

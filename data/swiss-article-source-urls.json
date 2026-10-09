@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948469/settembre-e-il-mese-dell-ambiente": {
-    "articleId": "settembre-mese-ambiente-collina-doro",
-    "ts": "2026-09-07T10:35:33.405Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/mondo/la-%e2%80%9crana-del-caff%c3%a8%e2%80%9d-scoperta-una-nuova-specie-in-costa-rica--3945972.html": {
     "articleId": "rana-caff-scoperta-costa-rica",
     "ts": "2026-09-07T10:44:59.994Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/svizzeri-spendono-di-pi%c3%b9%2c-malgrado-l%27aumento-dei-prezzi/92194362": {
     "articleId": "spesa-famiglie-inflazione",
     "ts": "2026-10-09T18:30:40.472Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/mastercard%2c-presto-pagamenti-possibili-anche-senza-internet/92192656": {
+    "articleId": "mastercard-pagamenti-rete-assente",
+    "ts": "2026-10-09T20:04:15.653Z",
     "keyForm": 2
   }
 }
