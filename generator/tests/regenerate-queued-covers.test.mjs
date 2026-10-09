@@ -1051,11 +1051,16 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /UPSTREAM_WORKFLOW: \$\{\{ github\.event\.workflow_run\.name \}\}/u);
   assert.match(workflow, /UPSTREAM_CONCLUSION: \$\{\{ github\.event\.workflow_run\.conclusion \}\}/u);
   assert.match(workflow, /UPSTREAM_EVENT: \$\{\{ github\.event\.workflow_run\.event \}\}/u);
+  assert.match(workflow, /UPSTREAM_HEAD_COMMIT_MESSAGE: \$\{\{ github\.event\.workflow_run\.head_commit\.message \}\}/u);
   assert.match(
     workflow,
     /case "\$\{UPSTREAM_WORKFLOW:-\}" in[\s\S]*'Generation health watchdog'[\s\S]*if \[ "\$\{UPSTREAM_EVENT:-\}" != 'schedule' \]; then[\s\S]*watchdog event is \$\{UPSTREAM_EVENT:-unknown\}/u,
   );
-  assert.match(workflow, /'Generate Blog Article'[\s\S]*push\|schedule\)[\s\S]*generator event is \$\{UPSTREAM_EVENT:-unknown\}/u);
+  assert.match(
+    workflow,
+    /'Generate Blog Article'[\s\S]*push\)[\s\S]*case "\$\{UPSTREAM_HEAD_COMMIT_MESSAGE:-\}" in[\s\S]*'chore\(generator\): drain queued article covers \('\*\|'chore\(generator\): acknowledge queued cover publishers \('\*[\s\S]*generator push came from this cover drain/u,
+  );
+  assert.match(workflow, /schedule\) ;;[\s\S]*generator event is \$\{UPSTREAM_EVENT:-unknown\}/u);
   assert.doesNotMatch(workflow, /UPSTREAM_EVENT:-\}"[^\n]*workflow_dispatch/);
   assert.match(workflow, /watchdog_max_age_hours=.*COVER_QUEUE_MAX_AGE_HOURS/u);
   assert.match(workflow, /recovery_age_hours=\$\(\(watchdog_max_age_hours - 2\)\)/u);
