@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-furti-statistica-svizzera-passaporto.webp",
-      "sha256": "c699dc46c7a93184af79808e020a3304ea4d4320592c50d326052f21004a1f54"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-furti-statistica-svizzera-passaporto-480w.webp",
-      "sha256": "ff8a9ee0818d404714df18def4c6e07dbc0fd87d47c919b3f186de19c48c44c6"
-    }
-  ]
+  "items": []
 }
