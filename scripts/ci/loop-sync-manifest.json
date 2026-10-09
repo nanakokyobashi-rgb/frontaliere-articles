@@ -3262,7 +3262,7 @@
       "reason": "Predicato del gate corpus che riconosce le famiglie di sitemap da usare per verificare i link degli hub cantonali, inclusi gli shard delle varianti localizzate. Il sito espone le sitemap ma non esegue questo gate del publisher; non esiste quindi un gemello da trasportare.",
       "baseline": {
         "site": null,
-        "corpus": "95034098bbd9ccf25",
+        "corpus": "0fb8253d59a91b4c",
         "alignedAt": "2026-10-09"
       }
     },
