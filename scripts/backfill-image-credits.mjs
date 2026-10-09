@@ -490,7 +490,9 @@ export function planBackfill(root, { snapshot, overrides }) {
 function creditedKeys(root, plan) {
   const keys = new Set(plan.records.keys());
   for (const { key, record } of readCreditRecords(root)) {
-    if (!plan.repoints.has(key) && record?.status === 'ok') keys.add(key);
+    // Only Commons records participate in the SEO-rights cleanup. Generated
+    // provider records intentionally keep their provider/license fields.
+    if (!plan.repoints.has(key) && record?.status === 'ok' && record?.source === 'wikimedia-commons') keys.add(key);
   }
   return keys;
 }
