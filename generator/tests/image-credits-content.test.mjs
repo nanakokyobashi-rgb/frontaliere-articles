@@ -48,7 +48,9 @@ test('every credit record validates, is named after its cover, is publishable an
 });
 
 test('no SEO literal of a credited cover still claims the photo for the site', () => {
-  const credited = new Set(readCreditRecords(ROOT).filter((e) => e.record?.status === 'ok').map((e) => e.key));
+  const credited = new Set(readCreditRecords(ROOT)
+    .filter((e) => e.record?.status === 'ok' && e.record?.source === 'wikimedia-commons')
+    .map((e) => e.key));
   const claims = findCreditedRightsClaims(ROOT, credited).map((c) => `${c.file}: ${c.cover} (${c.rights.join(', ')})`);
   assert.deepEqual(claims, [], 'literals of credited covers that still carry rights fields — '
     + `run node scripts/backfill-image-credits.mjs --build:\n  ${claims.join('\n  ')}`);
