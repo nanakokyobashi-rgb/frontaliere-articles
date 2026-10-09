@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3949338": "bernaribadisiposizionereferendumfacoltativo",
   "https://www.varesenews.it/2026/08/amazon-non-si-presenta-in-prefettura-e-questione-di-policy-aziendale/2656564": "amazon-malpensa-montichiari-2026",
   "https://www.varesenews.it/2026/08/il-m5s-provinciale-contro-lo-spostamento-di-amazon-da-malpensa-salvaguardare-i-quasi-200-posti-di-lavoro/2656393": "malpensa-m5s-contre-spostamento-amazon",
   "stats-bfs://2026-q2": {
@@ -2260,6 +2259,11 @@
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/traffico-di-cocaina-arrestato-21enne-albanese--4147685.html": {
     "articleId": "arresto-cocaina-massagno",
     "ts": "2026-10-09T09:51:04.483Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1955739/mendrisiotto-marchesi-poloni-giovanni-anni": {
+    "articleId": "marchesi-mendrisiotto-priorita",
+    "ts": "2026-10-09T10:20:03.259Z",
     "keyForm": 2
   }
 }
