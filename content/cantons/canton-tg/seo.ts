@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sicurezza-lavoro-turgovia-regole': {
+    title: 'Sicurezza e salute sul lavoro nel Canton Turgovia',
+    description: 'La sicurezza sul lavoro previene infortuni e malattie professionali. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sicurezza, salute, lavoro, canton',
+    ogTitle: 'Sicurezza e salute sul lavoro nel Canton Turgovia',
+    ogDescription: 'La sicurezza sul lavoro previene infortuni e malattie professionali.',
+    canonicalPath: '/articoli-turgovia/sicurezza-lavoro-turgovia-regole/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sicurezza e salute sul lavoro nel Canton Turgovia",
+      "description": "La sicurezza sul lavoro previene infortuni e malattie professionali. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sicurezza e salute sul lavoro nel Canton Turgovia"
+      },
+      "datePublished": "2026-10-09T16:02:21+00:00",
+      "dateModified": "2026-10-09T16:02:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/sicurezza-lavoro-turgovia-regole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
