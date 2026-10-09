@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-incidenti-notte-varese.webp",
-      "sha256": "f254d6c9b08574f1a66c28a9cfa9ba4845481837878865dc08930065fc4a01b6"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-incidenti-notte-varese-480w.webp",
-      "sha256": "b77ac29cacd5fae5c2d466c254a76983a5bcd69d9abdc83c9f902e121d94716b"
-    }
-  ]
+  "items": []
 }
