@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/tecnostampi-di-gornate-olona-ricerca-personale-tre-posizioni-aperte/2698927": {
-      "section": "frontaliere",
-      "ts": 1791363620522
-    },
     "frontaliere::https://www.swissinfo.ch/ita/alloggio-in-propriet%c3%a0-sempre-pi%c3%b9-caro-in-svizzera%2c-%2b4%25-in-un-anno/92178985": {
       "section": "frontaliere",
       "ts": 1791367578797
@@ -1112,6 +1108,14 @@
     "frontaliere::https://comozero.it/attualita/como-le-frane-nel-quartiere-quel-dubbio-con-foto-e-la-lettera-al-prefetto-cantiere-nel-punto-giusto-non-ci-pare-chiediamo-chiarezza": {
       "section": "frontaliere",
       "ts": 1791532591396
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1955759/fiducia-consumatori-prezzi-lavoro-peggiora": {
+      "section": "frontaliere",
+      "ts": 1791539122289
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/a13-chiusure-notturne-tra-pian-san-giacomo-e-malabarba-444279": {
+      "section": "frontaliere",
+      "ts": 1791539155028
     }
   }
 }
