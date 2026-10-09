@@ -15,21 +15,11 @@
       "articleId": "unige-natura-equilibrio-mentale",
       "title": "UNIGE: salute mentale, 5-10 ottobre 2026",
       "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "All image providers failed for article-unige-natura-equilibrio-mentale: openai-codex (vision gate rejected image: Original generic illustration of a serene Canton GE lakeside scene, but it includes two recognizable foreground people.); gemi",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-09T16:43:09.597Z",
-      "lastFailureAt": "2026-10-09T17:35:12.253Z"
-    },
-    {
-      "articleId": "voto-svizzera-esportazione-armi-2026",
-      "title": "Esportazione armi: il voto federale del 29 novembre 2026",
-      "fallbackImage": "/images/blog/voto-iva-avs-novembre-2026.webp",
-      "reason": "All image providers failed for article-voto-svizzera-esportazione-armi-2026: openai-codex (vision gate rejected image: Illustrated Swiss Federal Palace scene, but decorative facade",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T17:48:06.653Z",
-      "lastFailureAt": "2026-10-09T17:48:06.653Z"
+      "lastFailureAt": "2026-10-09T17:56:34.550Z"
     }
   ]
 }
