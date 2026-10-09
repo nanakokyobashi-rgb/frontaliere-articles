@@ -40,6 +40,16 @@
       "failureCount": 2,
       "requestedAt": "2026-10-09T12:18:54.884Z",
       "lastFailureAt": "2026-10-09T13:11:10.515Z"
+    },
+    {
+      "articleId": "midterm-usa-voto-svizzera",
+      "title": "Midterm Usa: effetti su dazi, dollaro e mercati in Svizzera",
+      "fallbackImage": "/images/blog/crescita-economia-svizzera-seco-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T14:00:46.259Z",
+      "lastFailureAt": "2026-10-09T14:00:46.259Z"
     }
   ]
 }
