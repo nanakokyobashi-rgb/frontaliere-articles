@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/ofsdv0mm5gua": {
-    "articleId": "mercato-lavoro-svizzera-agosto-2026",
-    "ts": "2026-09-07T07:38:19.064Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/scienza-e-tecnologia/cuore-e-intelligenza-artificiale-nuovi-strumenti-predittivi--4051665.html": {
     "articleId": "intelligenza-artificiale-cardiologia-2026",
     "ts": "2026-09-07T07:46:22.178Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4146368": {
     "articleId": "linea-ginevra-friburgo-pressione",
     "ts": "2026-10-08T21:08:07.972Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4145954": {
+    "articleId": "attacco-publica-dati-rubati",
+    "ts": "2026-10-09T01:39:56.742Z",
     "keyForm": 2
   }
 }
