@@ -20,7 +20,7 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.solothurn-pneumonia-suini.imageAlt': 'Pig farms in Canton Solothurn during veterinary disease controls',
     'blog.article.furti-raggiro-soletta.title': 'Thefts by deception in Solothurn: police issue warning',
     'blog.article.furti-raggiro-soletta.excerpt': 'The Solothurn cantonal police report around ten thefts involving deception in recent days: perpetrators use inexpensive jewelry to distract their victims.',
-    'blog.article.furti-raggiro-soletta.imageAlt': 'Symbolic urban scene in Solothurn linked to the warning about trick thefts',
+    'blog.article.furti-raggiro-soletta.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonSoEn;

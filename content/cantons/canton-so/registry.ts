@@ -65,7 +65,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'furti-raggiro-soletta',
  category: 'pratico',
  date: '2026-10-09T23:07:09.213Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-furti-raggiro-soletta.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SO'],

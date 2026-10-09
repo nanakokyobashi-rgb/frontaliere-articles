@@ -17,7 +17,7 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.winterthur-governo-apprendisti.imageAlt': 'Industriegebiet in Winterthur im Zusammenhang mit dem Stellenabbau bei Zimmer Biomet',
     'blog.article.zurigo-velostrade-scuole.title': 'Zürich: Nein zum Verbot von Velostrassen vor Schulen',
     'blog.article.zurigo-velostrade-scuole.excerpt': 'Nach Einwänden aus Wollishofen stellt sich die Zürcher Kantonsregierung gegen das Verbot von Velostrassen vor Schulen.',
-    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Veloschnellstrasse vor einer Schule im Kanton Zürich',
+    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.eolico-weinland-zurigo.title': 'Windenergie im Kanton Zürich: Skepsis im Weinland',
     'blog.article.eolico-weinland-zurigo.excerpt': 'Im Kanton Zürich käme fast die Hälfte des Windstroms aus dem Weinland.',
     'blog.article.eolico-weinland-zurigo.imageAlt': 'Landschaft im Zürcher Weinland im Mittelpunkt der Debatte über Windenergie',

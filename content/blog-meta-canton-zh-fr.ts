@@ -17,7 +17,7 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.winterthur-governo-apprendisti.imageAlt': 'Zone industrielle à Winterthour liée aux suppressions de postes chez Zimmer Biomet',
     'blog.article.zurigo-velostrade-scuole.title': 'Zurich : non à l’interdiction des véloroutes devant les écoles',
     'blog.article.zurigo-velostrade-scuole.excerpt': 'Après les objections venues de Wollishofen, le gouvernement cantonal de Zurich se prononce contre l’interdiction des véloroutes devant les écoles.',
-    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Voie cyclable devant une école dans le canton de Zurich',
+    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Illustration générée pour cet article',
     'blog.article.eolico-weinland-zurigo.title': 'Éolien dans le canton de Zurich : scepticisme dans le Weinland',
     'blog.article.eolico-weinland-zurigo.excerpt': 'Dans le canton de Zurich, près de la moitié de l\'électricité éolienne proviendrait du Weinland.',
     'blog.article.eolico-weinland-zurigo.imageAlt': 'Paysage du Weinland zurichois au cœur du débat sur l’énergie éolienne',

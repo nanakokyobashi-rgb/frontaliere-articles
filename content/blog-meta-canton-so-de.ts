@@ -20,7 +20,7 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.solothurn-pneumonia-suini.imageAlt': 'Schweinebetriebe im Kanton Solothurn während veterinärmedizinischer Kontrollen',
     'blog.article.furti-raggiro-soletta.title': 'Trickdiebstähle in Solothurn: Die Polizei warnt',
     'blog.article.furti-raggiro-soletta.excerpt': 'Die Kantonspolizei Solothurn meldet rund zehn Trickdiebstähle in den letzten Tagen: Täterinnen und Täter verwenden günstigen Schmuck, um die Opfer abzulenken.',
-    'blog.article.furti-raggiro-soletta.imageAlt': 'Symbolische Stadtszene im Kanton Solothurn zur Warnung vor Trickdiebstählen',
+    'blog.article.furti-raggiro-soletta.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonSoDe;

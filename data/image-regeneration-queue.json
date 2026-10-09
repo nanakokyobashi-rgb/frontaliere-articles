@@ -10,26 +10,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-09T16:43:09.597Z",
       "lastFailureAt": "2026-10-09T17:56:34.550Z"
-    },
-    {
-      "articleId": "zurigo-velostrade-scuole",
-      "title": "Zurigo: no al divieto delle velostrade davanti alle scuole",
-      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T22:34:18.489Z",
-      "lastFailureAt": "2026-10-09T22:34:18.489Z"
-    },
-    {
-      "articleId": "furti-raggiro-soletta",
-      "title": "Furti con raggiro a Soletta: la polizia mette in guardia",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-09T23:07:09.236Z",
-      "lastFailureAt": "2026-10-09T23:07:09.236Z"
     }
   ]
 }

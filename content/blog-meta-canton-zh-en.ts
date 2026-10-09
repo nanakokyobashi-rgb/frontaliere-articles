@@ -17,7 +17,7 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.winterthur-governo-apprendisti.imageAlt': 'Winterthur industrial area linked to Zimmer Biomet job cuts',
     'blog.article.zurigo-velostrade-scuole.title': 'Zurich: no to the ban on cycle highways in front of schools',
     'blog.article.zurigo-velostrade-scuole.excerpt': 'Following objections from Wollishofen, the cantonal government of Zurich opposes the ban on bicycle streets in front of schools.',
-    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Bike route in front of a school in the Canton of Zurich',
+    'blog.article.zurigo-velostrade-scuole.imageAlt': 'Illustration generated for this article',
     'blog.article.eolico-weinland-zurigo.title': 'Wind power in the Canton of Zurich: skepticism in the Weinland',
     'blog.article.eolico-weinland-zurigo.excerpt': 'In the Canton of Zurich, almost half of the wind-generated electricity would come from the Weinland.',
     'blog.article.eolico-weinland-zurigo.imageAlt': 'Zurich Weinland landscape linked to the canton’s wind-power debate',

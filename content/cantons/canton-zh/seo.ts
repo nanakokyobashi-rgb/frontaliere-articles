@@ -167,10 +167,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Zurigo: il governo cantonale è contro il divieto delle velostrade davanti alle scuole. La posizione segue obiezioni provenienti da Wollishofen nel Canton",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-velostrade-scuole.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Pista ciclabile davanti a una scuola nel Canton Zurigo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-09T22:34:18+00:00",
       "dateModified": "2026-10-09T22:34:18+00:00",

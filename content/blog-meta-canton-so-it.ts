@@ -20,7 +20,7 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.solothurn-pneumonia-suini.imageAlt': 'Allevamenti di suini nel Canton Soletta durante i controlli veterinari',
     'blog.article.furti-raggiro-soletta.title': 'Furti con raggiro a Soletta: la polizia mette in guardia',
     'blog.article.furti-raggiro-soletta.excerpt': 'La Polizia cantonale di Soletta segnala circa dieci furti con raggiro negli ultimi giorni: autrici e autori usano gioielli economici per distrarre le vittime.',
-    'blog.article.furti-raggiro-soletta.imageAlt': 'Scena urbana simbolica nel Canton Soletta legata all\'allerta sui furti con raggiro',
+    'blog.article.furti-raggiro-soletta.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonSoIt;
