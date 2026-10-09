@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-varese-oltre-400mila-euro-sottratti-da-due-badanti.webp",
-      "sha256": "b5eadb10f4881936606310914594a440c8bb0d19bbfa2781db27cda78e8135f0"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-varese-oltre-400mila-euro-sottratti-da-due-badanti-480w.webp",
-      "sha256": "d2fb3c6d1255a6b6188e171efadf0097286b167fed799b432aafdc8510010140"
-    }
-  ]
+  "items": []
 }
