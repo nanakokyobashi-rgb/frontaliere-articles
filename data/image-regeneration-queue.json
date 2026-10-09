@@ -15,81 +15,21 @@
       "articleId": "costi-cure-domicilio-ticino-2026",
       "title": "Ticino: dal 2026 si pagherà per le cure a domicilio",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "All image providers failed for article-costi-cure-domicilio-ticino-2026: openai-codex (vision gate rejected image: Original illustrative Ticino lakeside scene, but it includes medical signage and an emblem on the tote bag.); gemini (Gemini ",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-07T23:29:33.847Z",
-      "lastFailureAt": "2026-10-09T07:31:04.015Z"
-    },
-    {
-      "articleId": "autotrasporto-rincari-confine-2026",
-      "title": "Rincari carburante: rischio fermo autotrasportatori al confine",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-07T23:29:33.869Z",
-      "lastFailureAt": "2026-10-09T07:34:12.743Z"
-    },
-    {
-      "articleId": "carburanti-rincari-confine-ticino",
-      "title": "Rincaro carburanti: che impatto sui frontalieri ticinesi",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-07T23:29:33.879Z",
-      "lastFailureAt": "2026-10-09T07:36:12.832Z"
-    },
-    {
-      "articleId": "votazioni-imposizione-ticino-2026",
-      "title": "Voti 8 marzo: No al taglio canone, Sì all'imposizione individuale",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-votazioni-imposizione-ticino-2026: openai-codex (vision gate rejected image: Generic editorial illustration relevant to voting and Ticino commuting, but it contains prominent signage/pictograms and for",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-07T23:29:33.889Z",
-      "lastFailureAt": "2026-10-09T07:37:42.003Z"
-    },
-    {
-      "articleId": "imposizione-individuale-ticino-2026",
-      "title": "Svizzera: tassazione individuale, cosa cambia per il Ticino",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-imposizione-individuale-ticino-2026: openai-codex (vision gate rejected image: Original generic illustration relevant to Ticino lake scenery and cross-border rail/road commuting, but it contains multip",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-07T23:29:33.898Z",
-      "lastFailureAt": "2026-10-09T07:39:06.343Z"
+      "lastFailureAt": "2026-10-09T08:25:48.499Z"
     },
     {
       "articleId": "mercato-lavoro-ia-svizzera",
       "title": "Mercato lavoro IA Svizzera: +32% in un anno",
       "fallbackImage": "/images/blog/mercato-lavoro-svizzera-giugno-2026.webp",
-      "reason": "All image providers failed for article-mercato-lavoro-ia-svizzera: openai-codex (vision gate rejected image: Original generic illustration with visible human faces; no logos, reada",
+      "reason": "All image providers failed for article-mercato-lavoro-ia-svizzera: openai-codex (vision gate rejected image: Generic Swiss alpine AI illustration with no text or logos, but it includes multiple recognizable human foreground figures and face",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-08T09:36:45.453Z",
-      "lastFailureAt": "2026-10-08T09:36:45.453Z"
-    },
-    {
-      "articleId": "bellinzona-nord-svincolo",
-      "title": "Bellinzona Nord, chiusura notturna dello svincolo",
-      "fallbackImage": "/images/blog/centro-ovale-chiasso-nuova-proprieta.webp",
-      "reason": "All image providers failed for article-bellinzona-nord-svincolo: openai-codex (vision gate rejected image: Generic illustrated mountain interchange; traffic signage is present, tho",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T10:36:56.605Z",
-      "lastFailureAt": "2026-10-08T10:36:56.605Z"
-    },
-    {
-      "articleId": "chiusura-strada-kesswil",
-      "title": "Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026",
-      "fallbackImage": "/images/blog/article-agrivarese-angera-ottobre-2026.webp",
-      "reason": "All image providers failed for article-chiusura-strada-kesswil: openai-codex (vision gate rejected image: Generic illustrated scene with prominent road signage, including direction",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T11:25:33.527Z",
-      "lastFailureAt": "2026-10-08T11:25:33.527Z"
+      "lastFailureAt": "2026-10-09T08:33:08.964Z"
     },
     {
       "articleId": "luterbach-a5-rampe-notte",

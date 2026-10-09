@@ -32,7 +32,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'chiusura-strada-kesswil',
  category: 'pratico',
  date: '2026-10-08T11:25:33.511Z',
- image: '/images/blog/article-agrivarese-angera-ottobre-2026.webp',
+ image: '/images/blog/article-chiusura-strada-kesswil.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TG'],

@@ -11,7 +11,7 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.rapporti-thurmed-turgovia.imageAlt': 'Spitalgebäude im Kanton Thurgau zu den Berichten von thurmed und Spital Thurgau AG',
     'blog.article.chiusura-strada-kesswil.title': 'Kesswil: Uttwilerstrasse vom 15. bis 18. Oktober 2026 gesperrt',
     'blog.article.chiusura-strada-kesswil.excerpt': 'Die Uttwilerstrasse in Kesswil wird vom 15. Oktober 2026 um 7 Uhr bis zum 18. Oktober um 17 Uhr gesperrt. Der Verkehr wird umgeleitet, und wegen Regen oder Kälte ist eine Verschiebung möglich.',
-    'blog.article.chiusura-strada-kesswil.imageAlt': 'Kesswil: Bauarbeiten an der Kantonsstrasse H13 mit signalisierter Umleitung im Herbst.',
+    'blog.article.chiusura-strada-kesswil.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.turgovia-occupazione-rav-settembre.title': 'Arbeitslosigkeit im Thurgau: Quote stabil bei 2,2%',
     'blog.article.turgovia-occupazione-rav-settembre.excerpt': 'Im Thurgau waren Ende September 3.558 Personen arbeitslos (+54). Die Quote bleibt bei 2,2%; die Zahl der Stellensuchenden liegt bei 7.155 und die der offenen Stellen bei 1.824.',
     'blog.article.turgovia-occupazione-rav-settembre.imageAlt': 'Arbeitsvermittlungszentrum im Thurgau mit Stellenangeboten',
