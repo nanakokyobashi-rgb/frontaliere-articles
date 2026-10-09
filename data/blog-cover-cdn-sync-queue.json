@@ -1,4 +1,37 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "sha256": "39306d8e2e5f9565e4daba8b2d6b422ff3c8d655f4d187d768cb4a96e011b60b"
+    },
+    {
+      "path": "public/images/blog/article-flaesch-strada-sentieri-chiusi.webp",
+      "sha256": "a1294a61cc13e14687b19ecef8038ed5f126db89a780ffd7d9dd722cc46834ba"
+    },
+    {
+      "path": "public/images/blog/article-luganistan-clan-ceresio.webp",
+      "sha256": "7a16d52f548995363c54e0557bf5b5e6036e1752f3678162b861f8c8d282a292"
+    },
+    {
+      "path": "public/images/blog/article-operazione-trotta-ebike-monopattini.webp",
+      "sha256": "54fb35693a6e1a577978a8593ebba85323ae49429742c194b078b7ba5a9aadff"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-a8-manutenzione-cavalcavia-ottobre-2026-480w.webp",
+      "sha256": "88e7849ec6ef8304400a46ccc07038296158964b98cfc2a23fea2c6ea0775078"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-flaesch-strada-sentieri-chiusi-480w.webp",
+      "sha256": "8ac6c03ca56d567ef2c5b9123ac7d7521355942a509ac30d8098065effa5fbf8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-luganistan-clan-ceresio-480w.webp",
+      "sha256": "71f971e928921004ceff329f2dd521fbdcde31adfb74d835ea879668f92c06bc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-operazione-trotta-ebike-monopattini-480w.webp",
+      "sha256": "39b885c22711055edf0cd92d85c5656e03021042420b7650e7d4838f2723130d"
+    }
+  ]
 }
