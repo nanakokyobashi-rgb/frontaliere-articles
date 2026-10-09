@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ricardo-account-esposti.webp",
-      "sha256": "adc099d00963558f6fa6a5b49b2ef50c79436b65d84fda06e8e27a1856413bbe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ricardo-account-esposti-480w.webp",
-      "sha256": "49915d9c1ebdfeb75d9bcac89944e6f24d943bbe7512b42f2b4a81d71f978821"
-    }
-  ]
+  "items": []
 }
