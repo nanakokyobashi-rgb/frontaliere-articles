@@ -119,6 +119,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-progetto-latte-climatico': {
+    title: 'Progetto latte: Nestlé ed Emmi puntano all\'estensione',
+    description: 'Il progetto svizzero di Nestlé, Emmi e partner riduce mangimi ed emissioni per kg di latte. A fine 2025 coinvolgeva 219 aziende. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, progetto, latte, nestlé, emmi',
+    ogTitle: 'Progetto latte: Nestlé ed Emmi puntano all\'estensione',
+    ogDescription: 'Il bilancio dopo quattro anni mostra -23% nei mangimi utilizzabili dall\'uomo, -15% nel fabbisogno di superficie e -8% nelle emissioni per kg di latte. Il calcolatore climatico è aperto a tutti i produttori da luglio.',
+    canonicalPath: '/articoli-lucerna/progetto-latte-climatico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Progetto latte: Nestlé ed Emmi puntano all'estensione",
+      "description": "Il progetto svizzero di Nestlé, Emmi e partner riduce mangimi ed emissioni per kg di latte. A fine 2025 coinvolgeva 219 aziende. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Allevatore con tablet in una stalla della Svizzera centrale, tra vacche da latte."
+      },
+      "datePublished": "2026-10-09T00:54:58+00:00",
+      "dateModified": "2026-10-09T00:54:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/progetto-latte-climatico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

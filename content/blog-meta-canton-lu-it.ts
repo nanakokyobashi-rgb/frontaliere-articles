@@ -12,6 +12,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.kriens-torna-in-deficit.title': 'Kriens torna in rosso dopo surplus milionari',
     'blog.article.kriens-torna-in-deficit.excerpt': 'Dopo surplus milionari, Kriens torna in deficit: il titolo segnala un nuovo passivo, ma non indica ancora importo, data o causa.',
     'blog.article.kriens-torna-in-deficit.imageAlt': 'Vista urbana di Kriens nel Canton Lucerna sul tema delle finanze comunali',
+    'blog.article.progetto-latte-climatico.title': 'Progetto latte: Nestlé ed Emmi puntano all\'estensione',
+    'blog.article.progetto-latte-climatico.excerpt': 'Dal 2022, KlimaStaR Milch ha ridotto del 23% i mangimi commestibili e dell\'8% le emissioni per kg.',
+    'blog.article.progetto-latte-climatico.imageAlt': 'Allevatore con tablet in una stalla della Svizzera centrale, tra vacche da latte.',
 };
 
 export default blogMetaCantonLuIt;

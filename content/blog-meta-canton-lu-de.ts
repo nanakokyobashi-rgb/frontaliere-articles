@@ -12,6 +12,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.kriens-torna-in-deficit.title': 'Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen',
     'blog.article.kriens-torna-in-deficit.excerpt': 'Nach Überschüssen in Millionenhöhe ist Kriens wieder im Defizit: Die Überschrift weist auf einen neuen Fehlbetrag hin, nennt aber noch keinen Betrag, kein Datum und keine Ursache.',
     'blog.article.kriens-torna-in-deficit.imageAlt': 'Stadtansicht von Kriens im Kanton Luzern zum Thema Gemeindefinanzen',
+    'blog.article.progetto-latte-climatico.title': 'Milchprojekt: Nestlé und Emmi streben eine Ausweitung an',
+    'blog.article.progetto-latte-climatico.excerpt': 'Seit 2022 hat KlimaStaR Milch die für die menschliche Ernährung geeigneten Futtermittel um 23% und die Emissionen pro kg um 8% reduziert.',
+    'blog.article.progetto-latte-climatico.imageAlt': 'Landwirt mit Tablet in einem Milchviehstall in der Zentralschweiz.',
 };
 
 export default blogMetaCantonLuDe;

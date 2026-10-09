@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954599/mirante-avanti-con-ticino-lavoro-punta-a-un-seggio-in-governo": {
-      "section": "frontaliere",
-      "ts": 1791326608729
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955129/pompieri-all-ex-lati-doppio-passo-avanti-referendum-permettendo": {
-      "section": "frontaliere",
-      "ts": 1791327753721
-    },
-    "frontaliere::https://comozero.it/cronaca/provincia-di-como-schianto-tra-auto-una-persona-incastrata-tra-le-lamiere-in-ospedale": {
-      "section": "frontaliere",
-      "ts": 1791327814281
-    },
     "frontaliere::https://www.rsi.ch/s/4140344": {
       "section": "frontaliere",
       "ts": 1791335342343
@@ -1148,6 +1136,14 @@
     "svizzera::https://www.admin.ch/it/newnsb/denn9j7b-c4v": {
       "section": "svizzera",
       "ts": 1791499400466
+    },
+    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955129/pompieri-all-ex-lati-doppio-passo-avanti-referendum-permettendo": {
+      "section": "frontaliere",
+      "ts": 1791506160503
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/una-vita-da-social-la-polizia-postale-incontra-i-ragazzi-delle-medie/2702428": {
+      "section": "frontaliere",
+      "ts": 1791507404729
     }
   }
 }
