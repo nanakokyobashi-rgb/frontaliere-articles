@@ -10,6 +10,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-09T16:43:09.597Z",
       "lastFailureAt": "2026-10-09T17:56:34.550Z"
+    },
+    {
+      "articleId": "teatro-locarno-fondi-pubblici",
+      "title": "Teatro di Locarno: chiesti più fondi agli enti pubblici",
+      "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T23:43:17.891Z",
+      "lastFailureAt": "2026-10-09T23:43:17.891Z"
     }
   ]
 }

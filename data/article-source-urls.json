@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943622/banca-svizzera-semestre-primo-cler": "banca-cler-utili-aumento",
   "https://www.tio.ch/svizzera/economia/1943651/swissquote-borsa-criptovalute-debolezza-analisti": "swissquote-crollo-azienda",
   "https://www.tio.ch/ticino/attualita/1943672/online-puo-ripam-procedura-richiesta": "sussidi-cassa-malati-digitale",
   "https://www.tio.ch/svizzera/economia/1943663/svizzera-clausola-mfn-difficolta-interpharma": "interpharma-clausola-mfn-difficolta",
@@ -2292,6 +2291,11 @@
   "https://www.tio.ch/ticino/attualita/1955875/caslano-traffico-incidente-motociclista-ponte": {
     "articleId": "caslano-colombera-incidente-moto",
     "ts": "2026-10-09T17:27:51.751Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955827/teatro-assemblea-locarno-enti-difficolta-fondi": {
+    "articleId": "teatro-locarno-fondi-pubblici",
+    "ts": "2026-10-09T23:43:17.892Z",
     "keyForm": 2
   }
 }

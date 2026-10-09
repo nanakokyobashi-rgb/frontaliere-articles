@@ -43512,6 +43512,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'teatro-locarno-fondi-pubblici',
+ category: 'novita',
+ date: '2026-10-09T23:43:17.647Z',
+ image: '/images/blog/article-teatro-intred-varese-stagione-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
