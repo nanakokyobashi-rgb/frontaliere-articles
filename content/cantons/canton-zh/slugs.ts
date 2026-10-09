@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sbb-flotta-zurigo-500m': { it: 'sbb-flotta-zurigo-500m', en: 'sbb-zurich-sbahn-fleet', de: 'sbb-zuercher-sbahn-flotte', fr: 'sbb-flotte-sbahn-zurich' },
  'winterthur-governo-apprendisti': { it: 'winterthur-governo-apprendisti', en: 'winterthur-government-apprentices', de: 'winterthur-regierungsrat-lehrabschluesse', fr: 'winterthur-gouvernement-apprentis' },
  'zurigo-velostrade-scuole': { it: 'zurigo-velostrade-scuole', en: 'zurich-school-bike-routes-ban', de: 'zuerich-veloschnellstrassen-schulen', fr: 'zurich-veloroutes-ecoles' },
+ 'eolico-weinland-zurigo': { it: 'eolico-weinland-zurigo', en: 'wind-power-zurich-weinland', de: 'windkraft-zuerich-weinland', fr: 'eolien-weinland-zurich' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

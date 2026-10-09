@@ -187,6 +187,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-eolico-weinland-zurigo': {
+    title: 'Eolico nel Canton Zurigo: scetticismo nel Weinland',
+    description: 'Quasi metà dell\'elettricità eolica del Canton Zurigo arriverebbe dal Weinland: la notizia segnala lo scetticismo di una consigliera di sinistra nel cantone.',
+    keywords: 'frontalieri, ticino, svizzera, italia, eolico, canton, zurigo, scetticismo',
+    ogTitle: 'Eolico a Zurigo: il ruolo del Weinland',
+    ogDescription: 'Nel Canton Zurigo, il Weinland avrebbe un ruolo centrale nell\'energia eolica: quasi metà dell\'elettricità eolica arriverebbe da quest\'area. La stessa notizia segnala lo scetticismo di una consigliera cantonale di sinistra, senza indicare un esito',
+    canonicalPath: '/articoli-zurigo/eolico-weinland-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Eolico nel Canton Zurigo: scetticismo nel Weinland",
+      "description": "Quasi metà dell'elettricità eolica del Canton Zurigo arriverebbe dal Weinland: la notizia segnala lo scetticismo di una consigliera di sinistra nel cantone.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-eolico-weinland-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio del Weinland nel Canton Zurigo al centro del dibattito sull'eolico"
+      },
+      "datePublished": "2026-10-09T22:48:28+00:00",
+      "dateModified": "2026-10-09T22:48:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/eolico-weinland-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

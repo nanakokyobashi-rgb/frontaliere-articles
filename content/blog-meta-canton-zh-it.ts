@@ -18,6 +18,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-velostrade-scuole.title': 'Zurigo: no al divieto delle velostrade davanti alle scuole',
     'blog.article.zurigo-velostrade-scuole.excerpt': 'Dopo le obiezioni provenienti da Wollishofen, il governo cantonale di Zurigo si schiera contro il divieto delle velostrade davanti alle scuole.',
     'blog.article.zurigo-velostrade-scuole.imageAlt': 'Pista ciclabile davanti a una scuola nel Canton Zurigo',
+    'blog.article.eolico-weinland-zurigo.title': 'Eolico nel Canton Zurigo: scetticismo nel Weinland',
+    'blog.article.eolico-weinland-zurigo.excerpt': 'Nel Canton Zurigo, quasi metà dell\'elettricità eolica arriverebbe dal Weinland.',
+    'blog.article.eolico-weinland-zurigo.imageAlt': 'Paesaggio del Weinland nel Canton Zurigo al centro del dibattito sull\'eolico',
 };
 
 export default blogMetaCantonZhIt;
