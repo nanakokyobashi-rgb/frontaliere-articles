@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'flaesch-strada-sentieri-chiusi',
+ category: 'pratico',
+ date: '2026-10-09T11:33:58.551Z',
+ image: '/images/places/lugano-view.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

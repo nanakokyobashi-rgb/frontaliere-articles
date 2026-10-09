@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T09:14:12.097Z",
       "lastFailureAt": "2026-10-09T09:14:12.097Z"
+    },
+    {
+      "articleId": "flaesch-strada-sentieri-chiusi",
+      "title": "Fläsch chiude strada, sentieri e area d'arrampicata",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T11:33:58.566Z",
+      "lastFailureAt": "2026-10-09T11:33:58.566Z"
     }
   ]
 }

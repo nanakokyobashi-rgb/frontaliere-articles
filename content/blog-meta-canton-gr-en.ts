@@ -18,6 +18,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.code-domenicali-landquart.title': 'Sunday codes at the Fashion Outlet in Landquart',
     'blog.article.code-domenicali-landquart.excerpt': 'On Sundays, traffic queues regularly form at the Landquart motorway exit: the source examines the role of the Fashion Outlet and the countermeasures.',
     'blog.article.code-domenicali-landquart.imageAlt': 'Sunday traffic queues at the motorway exit near the Fashion Outlet in Landquart',
+    'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch closes road, trails and climbing area',
+    'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Above Fläsch, the risk of rockfall leads to precautionary closures of the road, hiking trails, and climbing gym.',
+    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Precautionary closures of a road, trails and climbing area above Fläsch',
 };
 
 export default blogMetaCantonGrEn;

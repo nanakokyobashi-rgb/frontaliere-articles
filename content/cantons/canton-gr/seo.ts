@@ -197,6 +197,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-flaesch-strada-sentieri-chiusi': {
+    title: 'Fläsch chiude strada, sentieri e area d\'arrampicata',
+    description: 'Sopra Fläsch una possibile caduta di roccia porta alla chiusura precauzionale di strada, sentieri e palestra d\'arrampicata. Gli esperti valutano le misure.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fläsch, chiude, strada, sentieri',
+    ogTitle: 'Rischio di roccia sopra Fläsch: chiusure precauzionali',
+    ogDescription: 'Una possibile caduta di roccia minaccia l\'area sopra Fläsch: il Comune chiude strada, sentieri escursionistici e palestra d\'arrampicata. Gli esperti stanno valutando le misure, mentre la notizia segnala un impatto finanziario favorevole per l\'ente.',
+    canonicalPath: '/articoli-grigioni/flaesch-strada-sentieri-chiusi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fläsch chiude strada, sentieri e area d'arrampicata",
+      "description": "Sopra Fläsch una possibile caduta di roccia porta alla chiusura precauzionale di strada, sentieri e palestra d'arrampicata. Gli esperti valutano le misure.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiusure precauzionali di strada, sentieri e area d'arrampicata sopra Fläsch"
+      },
+      "datePublished": "2026-10-09T11:33:58+00:00",
+      "dateModified": "2026-10-09T11:33:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/flaesch-strada-sentieri-chiusi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -18,6 +18,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.code-domenicali-landquart.title': 'Code domenicali al Fashion Outlet di Landquart',
     'blog.article.code-domenicali-landquart.excerpt': 'La domenica si formano regolarmente code all\'uscita autostradale di Landquart: la fonte esamina il ruolo del Fashion Outlet e le contromisure.',
     'blog.article.code-domenicali-landquart.imageAlt': 'Code domenicali all\'uscita autostradale vicino al Fashion Outlet di Landquart',
+    'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch chiude strada, sentieri e area d\'arrampicata',
+    'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Sopra Fläsch il rischio di distacco di roccia porta a chiusure precauzionali di strada, sentieri escursionistici e palestra d\'arrampicata.',
+    'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Chiusure precauzionali di strada, sentieri e area d\'arrampicata sopra Fläsch',
 };
 
 export default blogMetaCantonGrIt;
