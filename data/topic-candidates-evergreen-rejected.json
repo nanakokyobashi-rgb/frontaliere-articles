@@ -797,34 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/protezione-civile-la-cultura-della-sicurezza-entra-in-279-scuole-lombarde-37-gli-istituti-coinvolti-nel-varesotto/2699836": {
-      "section": "frontaliere",
-      "ts": 1791336821753
-    },
-    "frontaliere::https://www.tio.ch/ticino/cronaca/1954728/villa-lugano-tagli-hotel-personale-sassa-messaggio": {
-      "section": "frontaliere",
-      "ts": 1791342812579
-    },
-    "frontaliere::https://comozero.it/attualita/como-riccardo-disegna-il-sinigaglia-del-futuro-nella-tesi-di-laurea-12mila-posti-negozi-e-viale-puecher-pedonale": {
-      "section": "frontaliere",
-      "ts": 1791343024104
-    },
-    "frontaliere::https://www.rsi.ch/s/4139591": {
-      "section": "frontaliere",
-      "ts": 1791343037660
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954602/stop-all-aumento-dei-dipendenti-cantonali-il-comitato-pettina-il-parlamento": {
-      "section": "frontaliere",
-      "ts": 1791347037982
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/economia-della-longevita-confindustria-varese-analizza-sfide-e-opportunita-della-silver-economy/2699461": {
-      "section": "frontaliere",
-      "ts": 1791347106179
-    },
-    "frontaliere::https://www.laregione.ch/economia/economia/1955093/luganistan-il-giardino-di-casa-di-una-cleptocrazia": {
-      "section": "frontaliere",
-      "ts": 1791347139488
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/ostinelli-non-pago-piu-la-cassa-malati-444069": {
       "section": "frontaliere",
       "ts": 1791351168567
@@ -1144,6 +1116,14 @@
     "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/politica-20/articolo/il-cantiere-sanita-a-varese-licata-tante-eccellenze-ma-anche-criticita-su-cui-lavorare-1.html": {
       "section": "frontaliere",
       "ts": 1791508944798
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1955633/tra-lupo-mobilita-valli-territorio-e-strade-i-dossier-che-aspettano-marchesi": {
+      "section": "frontaliere",
+      "ts": 1791522454037
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/varese/articolo/in-viale-borri-giu-lo-stabile-abbandonato-dellex-concessionaria-terziroli-al-suo-posto-arrivera.html": {
+      "section": "frontaliere",
+      "ts": 1791523774708
     }
   }
 }
