@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-carne-vino-dogana-mendrisiotto.webp",
+      "sha256": "b63de76eb293e63e442e42484ebe9559d3fa5387f476f4402bbb6c6e5bb1ae3f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-carne-vino-dogana-mendrisiotto-480w.webp",
+      "sha256": "07acb4e63ff3a56b67db4c8337d858ddc129c4440acef7e962ea1133d11a8e9f"
+    }
+  ]
 }
