@@ -2,16 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "mercato-lavoro-ia-svizzera",
-      "title": "Mercato lavoro IA Svizzera: +32% in un anno",
-      "fallbackImage": "/images/blog/mercato-lavoro-svizzera-giugno-2026.webp",
-      "reason": "All image providers failed for article-mercato-lavoro-ia-svizzera: openai-codex (vision gate rejected image: Generic Swiss alpine and AI workforce illustration, but several recognizable human figures appear in the foreground.); gemini (Gemi",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-08T09:36:45.453Z",
-      "lastFailureAt": "2026-10-09T09:41:26.693Z"
-    },
-    {
       "articleId": "cardano-al-campo-minorenne-arresto",
       "title": "Cardano al Campo: minorenne arrestato con hashish",
       "fallbackImage": "/images/blog/article-domodossola-arresto-hashish-stazione.webp",
