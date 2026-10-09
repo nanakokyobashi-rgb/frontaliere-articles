@@ -18,6 +18,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.berna-familiari-curanti-incontro.title': 'Bern invites family caregivers to a meeting',
     'blog.article.berna-familiari-curanti-incontro.excerpt': 'The Canton of Bern invites family caregivers to an exchange and a meeting.',
     'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Illustration generated for this article',
+    'blog.article.cyberattacco-casse-pensione-berna.title': 'Cyberattack on the provider of Bernese pension funds',
+    'blog.article.cyberattacco-casse-pensione-berna.excerpt': 'An external software provider for BPK and BLVK was affected at the end of September.',
+    'blog.article.cyberattacco-casse-pensione-berna.imageAlt': 'Administrative building in the Canton of Bern linked to occupational pensions',
 };
 
 export default blogMetaCantonBeEn;

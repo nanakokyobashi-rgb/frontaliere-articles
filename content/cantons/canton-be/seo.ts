@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cyberattacco-casse-pensione-berna': {
+    title: 'Cyberattacco alla fornitrice delle casse pensioni bernesi',
+    description: 'Fornitrice software di BPK e BLVK colpita a fine settembre: la Procura federale indaga. Nessuna indicazione di dati rubati, ma l\'esclusione non è completa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cyberattacco, alla, fornitrice, casse',
+    ogTitle: 'Cyberattacco alla fornitrice delle casse pensioni bernesi',
+    ogDescription: 'Una fornitrice esterna di software di BPK e BLVK è stata attaccata a fine settembre. La Procura federale indaga. Al momento non ci sono indicazioni di dati rubati, ma l\'ipotesi non è completamente esclusa: le casse informeranno se confermata.',
+    canonicalPath: '/articoli-berna/cyberattacco-casse-pensione-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cyberattacco alla fornitrice delle casse pensioni bernesi",
+      "description": "Fornitrice software di BPK e BLVK colpita a fine settembre: la Procura federale indaga. Nessuna indicazione di dati rubati, ma l'esclusione non è completa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cyberattacco-casse-pensione-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo nel Canton Berna legato alla previdenza professionale"
+      },
+      "datePublished": "2026-10-09T23:26:36+00:00",
+      "dateModified": "2026-10-09T23:26:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/cyberattacco-casse-pensione-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

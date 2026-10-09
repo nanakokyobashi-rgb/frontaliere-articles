@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cyberattacco-casse-pensione-berna',
+ category: 'pensione',
+ date: '2026-10-09T23:26:36.398Z',
+ image: '/images/blog/article-cyberattacco-casse-pensione-berna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

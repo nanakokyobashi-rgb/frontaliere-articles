@@ -18,6 +18,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.berna-familiari-curanti-incontro.title': 'Berne invite les proches aidants à une rencontre',
     'blog.article.berna-familiari-curanti-incontro.excerpt': 'Le canton de Berne invite les proches aidants à un échange et à une rencontre.',
     'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.cyberattacco-casse-pensione-berna.title': 'Cyberattaque contre la fournisseuse des caisses de pension bernoises',
+    'blog.article.cyberattacco-casse-pensione-berna.excerpt': 'Une fournisseuse externe de logiciels de BPK et de BLVK a été touchée fin septembre.',
+    'blog.article.cyberattacco-casse-pensione-berna.imageAlt': 'Bâtiment administratif dans le canton de Berne lié à la prévoyance professionnelle',
 };
 
 export default blogMetaCantonBeFr;

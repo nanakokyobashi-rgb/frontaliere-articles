@@ -18,6 +18,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.berna-familiari-curanti-incontro.title': 'Bern lädt pflegende Angehörige zu einem Treffen ein',
     'blog.article.berna-familiari-curanti-incontro.excerpt': 'Der Kanton Bern lädt pflegende Angehörige zu einem Austausch und einem Treffen ein.',
     'blog.article.berna-familiari-curanti-incontro.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.cyberattacco-casse-pensione-berna.title': 'Cyberangriff auf die Anbieterin der bernischen Pensionskassen',
+    'blog.article.cyberattacco-casse-pensione-berna.excerpt': 'Eine externe Softwareanbieterin für BPK und BLVK wurde Ende September angegriffen.',
+    'blog.article.cyberattacco-casse-pensione-berna.imageAlt': 'Verwaltungsgebäude im Kanton Bern im Zusammenhang mit der beruflichen Vorsorge',
 };
 
 export default blogMetaCantonBeDe;
