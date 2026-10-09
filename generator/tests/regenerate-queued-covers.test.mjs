@@ -1044,6 +1044,8 @@ test('il drain verifica il residuo rebased senza confondere le aggiunte upstream
 
 test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezione', () => {
   const workflow = fs.readFileSync(new URL('../../.github/workflows/regenerate-queued-covers.yml', import.meta.url), 'utf8');
+  assert.match(workflow, /cron: '0 \* \* \* \*'/);
+  assert.doesNotMatch(workflow, /cron: '0 \*\/2 \* \* \*'/);
   const clock = workflow.indexOf('name: Start cover drain clock before checkout');
   const checkout = workflow.indexOf('name: Checkout');
   const preDispatch = workflow.indexOf('name: Dispatch pending cover publishers before generation');

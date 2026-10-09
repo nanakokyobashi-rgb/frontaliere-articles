@@ -2,12 +2,15 @@ name: Regenerate queued article covers
 run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
 
 # La coda e' un recupero dati, non una nuova pipeline editoriale: parte ogni
-# due ore e si ferma da sola quando items[] e' vuoto e l'outbox publisher e'
+# ora e si ferma da sola quando items[] e' vuoto e l'outbox publisher e'
 # vuoto. Il dispatch manuale puo' abbassare o alzare il tetto e, solo con una
 # scelta esplicita, riaprire le voci marcate failed.
 on:
   schedule:
-    - cron: '0 */2 * * *'
+    # Il drain ha un batch limitato per riservare tempo al publisher: la
+    # cadenza oraria evita che un errore transitorio faccia invecchiare una
+    # coda reale oltre la soglia del watchdog.
+    - cron: '0 * * * *'
   workflow_dispatch:
     inputs:
       limit:
