@@ -104,10 +104,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-seehas-affollamento-mattutino.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Pendolari sulla piattaforma della stazione di Schaffhausen con un treno S-Bahn Seehas in arrivo, indicante maggiore affollamento mattutino."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-08T09:19:35+00:00",
       "dateModified": "2026-10-08T09:19:35+00:00",

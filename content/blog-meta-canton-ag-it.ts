@@ -11,7 +11,7 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.riduzione-premi-argovia-2027.imageAlt': 'Argovia: residente controlla il codice SVA per la riduzione dei premi',
     'blog.article.argovia-parita-salariale.title': 'Argovia: iniziativa per la parità salariale',
     'blog.article.argovia-parita-salariale.excerpt': 'In Argovia l\'iniziativa per la parità salariale chiede analisi da 50 dipendenti, sanzioni e il ripristino dell\'ufficio per la parità.',
-    'blog.article.argovia-parita-salariale.imageAlt': 'Gruppo di lavoratrici e sostenitrici discute la parità salariale in Argovia',
+    'blog.article.argovia-parita-salariale.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.chiusura-hochrheinbahn-2026.title': 'Hochrheinbahn chiusa: Basilea-Rheinfelden dal 10 ottobre',
     'blog.article.chiusura-hochrheinbahn-2026.excerpt': 'Dal 10 ottobre 2026 la Hochrheinbahn chiude tra Basilea e Rheinfelden: lavori, ritardi e bus sostitutivi modificano gli spostamenti dei pendolari.',
     'blog.article.chiusura-hochrheinbahn-2026.imageAlt': 'Treno regionale sulla linea tra Basilea e Rheinfelden con bus sostitutivo',

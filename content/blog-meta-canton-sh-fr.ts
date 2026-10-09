@@ -11,7 +11,7 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sciaffusa-formazione-farmacie.imageAlt': 'Personnel de pharmacie formé à la violence domestique à Schaffhouse',
     'blog.article.seehas-affollamento-mattutino.title': 'Seehas plus chargé et trajets plus longs sur la ligne Konstanz-Singen',
     'blog.article.seehas-affollamento-mattutino.excerpt': 'En raison de la fermeture de la Schwarzwaldbahn, le Regionalexpress entre Konstanz et Singen est suspendu ; davantage de passagers utilisent le S-Bahn Seehas, qui peut devenir très bondé le matin et allonge les temps de trajet.',
-    'blog.article.seehas-affollamento-mattutino.imageAlt': 'Usagers sur le quai de la gare de Schaffhouse avec un train S-Bahn Seehas arrivant, indiquant une affluence matinale accrue.',
+    'blog.article.seehas-affollamento-mattutino.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonShFr;

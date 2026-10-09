@@ -12,94 +12,54 @@
       "failureCount": 3
     },
     {
-      "articleId": "argovia-parita-salariale",
-      "title": "Argovia: iniziativa per la parità salariale",
-      "fallbackImage": "/images/blog/imposte-cantonali-argovia-aliquote.webp",
-      "reason": "All image providers failed for article-argovia-parita-salariale: openai-codex (vision gate rejected image: Generic editorial illustration relevant to equal pay, but it prominently depicts two recognizable foreground people.); gemini (Gemini",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-07T19:59:34.747Z",
-      "lastFailureAt": "2026-10-09T06:40:40.105Z"
-    },
-    {
       "articleId": "costi-cure-domicilio-ticino-2026",
       "title": "Ticino: dal 2026 si pagherà per le cure a domicilio",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-costi-cure-domicilio-ticino-2026: openai-codex (vision gate rejected image: Original illustration with no text or logos, but it shows a recognizable foreground person from behind and does not clearly d",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-07T23:29:33.847Z",
-      "lastFailureAt": "2026-10-09T06:42:38.266Z"
-    },
-    {
-      "articleId": "varese-india-export-2026",
-      "title": "Varese punta a Oriente: l’export verso l’India cresce del 46%",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "declared cover has no governed provenance record",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-07T23:29:33.860Z",
-      "lastFailureAt": "2026-10-07T23:29:33.860Z"
+      "lastFailureAt": "2026-10-09T07:31:04.015Z"
     },
     {
       "articleId": "autotrasporto-rincari-confine-2026",
       "title": "Rincari carburante: rischio fermo autotrasportatori al confine",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "declared cover has no governed provenance record",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-07T23:29:33.869Z",
-      "lastFailureAt": "2026-10-07T23:29:33.869Z"
+      "lastFailureAt": "2026-10-09T07:34:12.743Z"
     },
     {
       "articleId": "carburanti-rincari-confine-ticino",
       "title": "Rincaro carburanti: che impatto sui frontalieri ticinesi",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "declared cover has no governed provenance record",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-07T23:29:33.879Z",
-      "lastFailureAt": "2026-10-07T23:29:33.879Z"
+      "lastFailureAt": "2026-10-09T07:36:12.832Z"
     },
     {
       "articleId": "votazioni-imposizione-ticino-2026",
       "title": "Voti 8 marzo: No al taglio canone, Sì all'imposizione individuale",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "declared cover has no governed provenance record",
+      "reason": "All image providers failed for article-votazioni-imposizione-ticino-2026: openai-codex (vision gate rejected image: Generic editorial illustration relevant to voting and Ticino commuting, but it contains prominent signage/pictograms and for",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-07T23:29:33.889Z",
-      "lastFailureAt": "2026-10-07T23:29:33.889Z"
+      "lastFailureAt": "2026-10-09T07:37:42.003Z"
     },
     {
       "articleId": "imposizione-individuale-ticino-2026",
       "title": "Svizzera: tassazione individuale, cosa cambia per il Ticino",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "declared cover has no governed provenance record",
+      "reason": "All image providers failed for article-imposizione-individuale-ticino-2026: openai-codex (vision gate rejected image: Original generic illustration relevant to Ticino lake scenery and cross-border rail/road commuting, but it contains multip",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-07T23:29:33.898Z",
-      "lastFailureAt": "2026-10-07T23:29:33.898Z"
-    },
-    {
-      "articleId": "no-iniziativa-antidumping-ticino",
-      "title": "Ticino: No all'iniziativa antidumping, soddisfazione per il Consiglio di Stato",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "declared cover has no governed provenance record",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-07T23:29:33.907Z",
-      "lastFailureAt": "2026-10-07T23:29:33.907Z"
-    },
-    {
-      "articleId": "seehas-affollamento-mattutino",
-      "title": "Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-seehas-affollamento-mattutino: openai-codex (vision gate rejected image: Generic illustration with small lettering/logo-like marking visible",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-08T09:19:35.709Z",
-      "lastFailureAt": "2026-10-08T09:19:35.709Z"
+      "lastFailureAt": "2026-10-09T07:39:06.343Z"
     },
     {
       "articleId": "mercato-lavoro-ia-svizzera",

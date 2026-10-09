@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "argovia-parita-salariale",
+      "section": "canton-ag"
+    },
+    {
+      "articleId": "varese-india-export-2026",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "no-iniziativa-antidumping-ticino",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "seehas-affollamento-mattutino",
+      "section": "canton-sh"
+    }
+  ]
+}

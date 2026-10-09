@@ -11,7 +11,7 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-formazione-farmacie.imageAlt': 'Apothekenpersonal bei einer Schulung zu häuslicher Gewalt in Schaffhausen',
     'blog.article.seehas-affollamento-mattutino.title': 'Stärker ausgelasteter Seehas und längere Fahrten auf der Strecke Konstanz-Singen',
     'blog.article.seehas-affollamento-mattutino.excerpt': 'Aufgrund der Sperrung der Schwarzwaldbahn verkehrt der Regionalexpress zwischen Konstanz und Singen nicht; mehr Fahrgäste nutzen die S-Bahn Seehas, die morgens sehr voll werden kann und die Fahrzeiten verlängert.',
-    'blog.article.seehas-affollamento-mattutino.imageAlt': 'Pendler auf dem Bahnsteig des Schaffhauser Bahnhofs mit einem einfahrenden S-Bahn Seehas-Zug, der auf erhöhte Morgenauslastung hinweist.',
+    'blog.article.seehas-affollamento-mattutino.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonShDe;

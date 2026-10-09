@@ -32,7 +32,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'seehas-affollamento-mattutino',
  category: 'pratico',
  date: '2026-10-08T09:19:35.696Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-seehas-affollamento-mattutino.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['SH'],

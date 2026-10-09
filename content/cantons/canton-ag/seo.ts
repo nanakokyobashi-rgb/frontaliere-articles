@@ -89,10 +89,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Argovia: analisi salariali da 50 dipendenti, sanzioni e ripristino dell'ufficio per la parità. La raccolta firme nel Cantone è iniziata il 14 giugno 2023.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/imposte-cantonali-argovia-aliquote.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-argovia-parita-salariale.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Gruppo di lavoratrici e sostenitrici discute la parità salariale in Argovia"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-07T19:59:34+00:00",
       "dateModified": "2026-10-07T19:59:34+00:00",
