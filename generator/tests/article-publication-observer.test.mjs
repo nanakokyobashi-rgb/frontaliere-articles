@@ -163,6 +163,40 @@ test('una voce senza updatedAt si confronta con la data di pubblicazione, non ri
   assert.match(behind.reason, /< date 2026-10-06T08:00:00\.000Z/);
 });
 
+test('il fallback sulla data di pubblicazione rispetta la precisione al giorno del sitemap', () => {
+  const publication = {
+    ...target(),
+    sourceUpdatedAt: null,
+    registryDate: '2026-02-25T13:42:33.526Z',
+  };
+  const sameDay = classifyPublicationLag({
+    target: publication,
+    page: parsePageObservation(page('2026-02-25T00:00:00+01:00')),
+    nowMs,
+  });
+  assert.equal(sameDay.lagging, false);
+  assert.equal(sameDay.reason, 'dateModified current');
+
+  const previousDay = classifyPublicationLag({
+    target: publication,
+    page: parsePageObservation(page('2026-02-24T00:00:00+01:00')),
+    nowMs,
+  });
+  assert.equal(previousDay.lagging, true);
+  assert.match(previousDay.reason, /< date 2026-02-25T13:42:33\.526Z/);
+});
+
+test('una pagina Event senza dateModified non è in ritardo', () => {
+  const observed = parsePageObservation(
+    '<meta property="og:image" content="https://frontaliereticino.ch/images/blog/article.webp">'
+      + '<script type="application/ld+json">{"@context":"https://schema.org","@type":"Event","name":"Mostra"}</script>',
+  );
+  assert.deepEqual(observed.schemaTypes, ['Event']);
+  const verdict = classifyPublicationLag({ target: target(), page: observed, nowMs });
+  assert.equal(verdict.lagging, false);
+  assert.equal(verdict.reason, 'schema Event: dateModified non applicabile');
+});
+
 test('senza alcuna data nel registro il confronto si salta; senza data nella pagina è un ritardo', () => {
   const undated = { ...target(), sourceUpdatedAt: null, registryDate: null };
   const skipped = classifyPublicationLag({ target: undated, page: parsePageObservation(page(currentDate)), nowMs });

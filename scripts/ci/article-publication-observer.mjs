@@ -4,11 +4,13 @@
  *
  * It samples only Italian article pages whose body changed recently on corpus
  * main. Publication lag is measured with dateModified versus the registry's
- * updatedAt; image degradation is a separate signal based on og:image versus
- * the registry image. The network loop is deliberately sequential and
- * rate-limited because this is a courtesy check, not a crawler. Degraded
- * articles are kept in the observer issue body until a live read is sane; at
- * most three proven image repairs are dispatched per run.
+ * updatedAt (or the publication day when updatedAt is absent); Event pages
+ * are exempt because their renderer intentionally omits dateModified. Image
+ * degradation is a separate signal based on og:image versus the registry
+ * image. The network loop is deliberately sequential and rate-limited because
+ * this is a courtesy check, not a crawler. Degraded articles are kept in the
+ * observer issue body until a live read is sane; at most three proven image
+ * repairs are dispatched per run.
  */
 
 import fs from 'node:fs';
@@ -172,24 +174,53 @@ function parseAttrs(tag) {
   return attrs;
 }
 
+function collectJsonLdTypes(value, types) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectJsonLdTypes(item, types);
+    return;
+  }
+  if (!value || typeof value !== 'object') return;
+  const type = value['@type'];
+  if (typeof type === 'string') types.add(type);
+  if (Array.isArray(type)) for (const item of type) if (typeof item === 'string') types.add(item);
+  for (const child of Object.values(value)) collectJsonLdTypes(child, types);
+}
+
+function parseJsonLdTypes(html) {
+  const types = new Set();
+  const scripts = String(html).matchAll(
+    /<script\b[^>]*\btype\s*=\s*(['"])application\/ld\+json\1[^>]*>([\s\S]*?)<\/script\s*>/gi,
+  );
+  for (const match of scripts) {
+    try {
+      collectJsonLdTypes(JSON.parse(match[2]), types);
+    } catch {
+      // One malformed JSON-LD block must not discard the other page signals.
+    }
+  }
+  return [...types];
+}
+
 export function parsePageObservation(html, status = 200) {
+  const rawHtml = String(html);
   let modifiedAt = null;
-  for (const match of String(html).matchAll(/<meta\b[^>]*\/?\s*>/gi)) {
+  for (const match of rawHtml.matchAll(/<meta\b[^>]*\/?\s*>/gi)) {
     const attrs = parseAttrs(match[0]);
     const name = String(attrs.name || '').toLowerCase();
     const property = String(attrs.property || '').toLowerCase();
     const content = String(attrs.content || '');
     if (name === 'datemodified' || property === 'article:modified_time') modifiedAt ||= content;
   }
-  modifiedAt ||= String(html).match(/"dateModified"\s*:\s*"([^"]+)"/)?.[1] || null;
-  return { status, modifiedAt, ogImage: extractOgImage(html), rawHtml: String(html) };
+  modifiedAt ||= rawHtml.match(/"dateModified"\s*:\s*"([^"]+)"/)?.[1] || null;
+  return { status, modifiedAt, ogImage: extractOgImage(rawHtml), schemaTypes: parseJsonLdTypes(rawHtml), rawHtml };
 }
 
 /**
  * The registry date a published page has to have caught up with: `updatedAt`
  * when the article was revised, its publication `date` otherwise. Only 311 of
  * the 4,209 frontaliere entries carry `updatedAt` (measured 2026-10-07), so an
- * entry without it is compared through `date`, never reported as lagging.
+ * entry without it is compared through the publication day represented by
+ * `date`, not an invented instant within that day.
  */
 export function registryReferenceDate(target) {
   return target?.sourceUpdatedAt || target?.registryDate || null;
@@ -197,12 +228,21 @@ export function registryReferenceDate(target) {
 
 /**
  * true/false when the two dates can be compared, null when they cannot.
+ * `granularity: 'day'` is used for the publication-date fallback: the site's
+ * sitemap intentionally emits `date` as a day, so an ISO timestamp in the
+ * registry must not make a same-day page look stale.
  * A date-only registry value is rendered as local midnight (measured:
  * `2026-09-25` → `2026-09-25T00:00:00+01:00`), so the page is current from the
  * earliest instant that day starts in Europe/Zurich. A full timestamp is
  * written by the renderer in whole seconds (`03:49:10.833Z` → `03:49:11`).
  */
-export function pageHasCaughtUp(pageModifiedAt, registryDate) {
+export function pageHasCaughtUp(pageModifiedAt, registryDate, { granularity = 'instant' } = {}) {
+  if (granularity === 'day') {
+    const pageDay = String(pageModifiedAt ?? '').match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || null;
+    const registryDay = String(registryDate ?? '').match(/^(\d{4}-\d{2}-\d{2})/)?.[1] || null;
+    if (!pageDay || !registryDay) return null;
+    return pageDay >= registryDay;
+  }
   const pageMs = Date.parse(String(pageModifiedAt ?? ''));
   if (!Number.isFinite(pageMs) || !registryDate) return null;
   const registry = String(registryDate);
@@ -225,6 +265,10 @@ export function classifyPublicationLag({ target, page, nowMs, staleMinutes = DEF
     return { lagging: true, degraded: false, reason: `HTTP ${page.status}` };
   }
 
+  if (page.schemaTypes?.includes('Event')) {
+    return { lagging: false, degraded, reason: 'schema Event: dateModified non applicabile', degradationReason };
+  }
+
   const reference = registryReferenceDate(target);
   if (!reference) {
     // Nothing to compare with is not a lag: the page answered and the image
@@ -234,7 +278,9 @@ export function classifyPublicationLag({ target, page, nowMs, staleMinutes = DEF
   if (!page.modifiedAt) {
     return { lagging: true, degraded, reason: 'pagina senza dateModified', degradationReason };
   }
-  const caughtUp = pageHasCaughtUp(page.modifiedAt, reference);
+  const caughtUp = pageHasCaughtUp(page.modifiedAt, reference, {
+    granularity: target.sourceUpdatedAt ? 'instant' : 'day',
+  });
   if (caughtUp === null) {
     return { lagging: false, degraded, reason: `date non confrontabili (${page.modifiedAt} / ${reference})`, degradationReason };
   }
