@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-borse-musica-ticino-2026.webp",
-      "sha256": "156ee987b31820cfcf1090fed13370b4d0750e196ead9d9882ebd1e509bf4727"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-borse-musica-ticino-2026-480w.webp",
-      "sha256": "eb489bc76c056ceb4ae63aaf6858600399b0a939276f93e424dacf7608404071"
-    }
-  ]
+  "items": []
 }
