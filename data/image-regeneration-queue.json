@@ -100,6 +100,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-09T11:33:58.566Z",
       "lastFailureAt": "2026-10-09T11:33:58.566Z"
+    },
+    {
+      "articleId": "sciaffusa-dati-lavoro-2026",
+      "title": "Disoccupazione nel Canton Sciaffusa: dati settembre 2026",
+      "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-09T12:18:54.884Z",
+      "lastFailureAt": "2026-10-09T12:18:54.884Z"
     }
   ]
 }

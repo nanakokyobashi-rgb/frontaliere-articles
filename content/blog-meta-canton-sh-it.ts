@@ -12,6 +12,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.seehas-affollamento-mattutino.title': 'Seehas più pieno e viaggi più lunghi sulla Konstanz-Singen',
     'blog.article.seehas-affollamento-mattutino.excerpt': 'A causa della chiusura della Schwarzwaldbahn, il Regionalexpress tra Konstanz e Singen è sospeso; più passeggeri utilizzano la S-Bahn Seehas, che al mattino può diventare molto affollata e allunga i tempi di viaggio.',
     'blog.article.seehas-affollamento-mattutino.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.sciaffusa-dati-lavoro-2026.title': 'Disoccupazione nel Canton Sciaffusa: dati settembre 2026',
+    'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'Il Centro regionale di collocamento comunica i dati sulla disoccupazione nel Canton Sciaffusa per settembre 2026; il lead pubblico non riporta le cifre.',
+    'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Scena simbolica sul mercato del lavoro nel Canton Sciaffusa',
 };
 
 export default blogMetaCantonShIt;

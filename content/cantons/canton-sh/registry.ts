@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sciaffusa-dati-lavoro-2026',
+ category: 'novita',
+ date: '2026-10-09T12:18:54.869Z',
+ image: '/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
