@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-referendum-nucleare-svizzera-2027.webp",
+      "sha256": "f1c598541c93bae546be2d78344a0f51855a7802cf4d68135dba2821a6dab832"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-referendum-nucleare-svizzera-2027-480w.webp",
+      "sha256": "3397eab04e1b23e6ad13da6fcc81e86640d50c80bcc2bec64c5b903a21a5d51c"
+    }
+  ]
 }
