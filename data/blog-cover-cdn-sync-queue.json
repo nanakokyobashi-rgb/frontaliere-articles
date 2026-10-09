@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-kriens-torna-in-deficit.webp",
-      "sha256": "6acf53fd19013a7fd5201e14a14e265c3138f56fbbcca489b9a8ee32a948c60b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-kriens-torna-in-deficit-480w.webp",
-      "sha256": "effbdf02af66b4e31ba9c90396ba99eaebce0d66edb5bafedc52253dc9a41ebe"
-    }
-  ]
+  "items": []
 }
