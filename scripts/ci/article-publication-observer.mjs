@@ -219,7 +219,8 @@ export function parsePageObservation(html, status = 200) {
  * The registry date a published page has to have caught up with: `updatedAt`
  * when the article was revised, its publication `date` otherwise. Only 311 of
  * the 4,209 frontaliere entries carry `updatedAt` (measured 2026-10-07), so an
- * entry without it is compared through `date`, never reported as lagging.
+ * entry without it is compared through the publication day represented by
+ * `date`, not an invented instant within that day.
  */
 export function registryReferenceDate(target) {
   return target?.sourceUpdatedAt || target?.registryDate || null;
