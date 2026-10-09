@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-caslano-colombera-incidente-moto.webp",
+      "sha256": "77bcae26dd50c4422bef3ca35b96937abc54b9eadd3a05bb4fbc1349873f6d5a"
+    },
+    {
+      "path": "public/images/blog/article-smottamento-sementina-code.webp",
+      "sha256": "01ae58d870ff83ae3a061cc9c3b6d5d2f13990b3591a29969796d23b05e9287b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-caslano-colombera-incidente-moto-480w.webp",
+      "sha256": "6695e7e224099e52960be641728cd68afa241821014f9ce3bac017c0581f7fc6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-smottamento-sementina-code-480w.webp",
+      "sha256": "36ff7ca30e04063daa59342bc08da91a3b81f77ed9b589fee68b3ef1c22e4995"
+    }
+  ]
 }
