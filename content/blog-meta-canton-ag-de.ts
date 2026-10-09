@@ -18,6 +18,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.obermumpf-strada-sanificazione-2024.title': 'Obermumpf: Bauarbeiten an der K491 bis Herbst 2027',
     'blog.article.obermumpf-strada-sanificazione-2024.excerpt': 'Am Montag, 12.',
     'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.buchs-deficit-2027-budget.title': 'Buchs rechnet im Budget 2027 mit einem Defizit von 3,1 Millionen',
+    'blog.article.buchs-deficit-2027-budget.excerpt': 'Die Gemeinde Buchs rechnet für 2027 mit einem Defizit von rund 3,1 Millionen Franken, hält den Steuerfuss bei 118% und sieht einen Anstieg der Restkosten für Pflege um 600\'000 Franken vor.',
+    'blog.article.buchs-deficit-2027-budget.imageAlt': 'Blick auf das Rathaus von Buchs mit Budgetunterlagen auf dem Tisch, Hintergrund Aargauer Landschaft',
 };
 
 export default blogMetaCantonAgDe;

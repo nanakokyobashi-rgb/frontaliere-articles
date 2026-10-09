@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'buchs-deficit-2027-budget',
+ category: 'fiscale',
+ date: '2026-10-09T18:37:12.986Z',
+ image: '/images/blog/article-buchs-deficit-2027-budget.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

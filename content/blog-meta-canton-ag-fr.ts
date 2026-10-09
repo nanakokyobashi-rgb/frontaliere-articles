@@ -18,6 +18,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.obermumpf-strada-sanificazione-2024.title': 'Obermumpf : travaux sur la K491 jusqu\'à l\'automne 2027',
     'blog.article.obermumpf-strada-sanificazione-2024.excerpt': 'Lundi 12 octobre débutent les travaux d\'assainissement de la Hauptstrasse K491 à Obermumpf : 1.250 mètres de route, arrêts de bus accessibles avec des bordures de 22 cm et nouvelle passerelle sur le Fischingerbach, jusqu\'à l\'automne 2027.',
     'blog.article.obermumpf-strada-sanificazione-2024.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.buchs-deficit-2027-budget.title': 'Buchs prévoit un déficit de 3,1 millions dans le budget 2027',
+    'blog.article.buchs-deficit-2027-budget.excerpt': 'La commune de Buchs prévoit un déficit d\'environ 3,1 millions de francs pour 2027, en maintenant le multiplicateur fiscal à 118% et en prévoyant une hausse des coûts résiduels de soins de 600\'000 francs.',
+    'blog.article.buchs-deficit-2027-budget.imageAlt': 'Vue de la mairie de Buchs avec les documents budgétaires sur une table, arrière-plan campagne argovienne',
 };
 
 export default blogMetaCantonAgFr;

@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-buchs-deficit-2027-budget': {
+    title: 'Buchs prevede disavanzo 3,1 milioni nel budget 2027',
+    description: 'Buchs prevede un disavanzo di 3,1 milioni di franchi nel budget 2027, moltiplicatore fiscale al 118%, aumento dei costi di cura di 600\'000 franchi',
+    keywords: 'frontalieri, ticino, svizzera, italia, buchs, prevede, disavanzo, milioni',
+    ogTitle: 'Buchs prevede disavanzo 3,1 milioni nel budget 2027',
+    ogDescription: 'Il Comune di Buchs ha approvato il budget 2027 con un disavanzo previsto di circa 3,1 milioni di franchi, mantenendo il moltiplicatore fiscale al 118%. I costi residui di cura aumenteranno di 600\'000 franchi (pari a circa quattro punti',
+    canonicalPath: '/articoli-argovia/buchs-deficit-2027-budget/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Buchs prevede disavanzo 3,1 milioni nel budget 2027",
+      "description": "Buchs prevede un disavanzo di 3,1 milioni di franchi nel budget 2027, moltiplicatore fiscale al 118%, aumento dei costi di cura di 600'000 franchi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-buchs-deficit-2027-budget.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del municipio di Buchs con documenti di bilancio sul tavolo, sfondo campagna argoviese"
+      },
+      "datePublished": "2026-10-09T18:37:13+00:00",
+      "dateModified": "2026-10-09T18:37:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/buchs-deficit-2027-budget/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
