@@ -166,7 +166,7 @@ export const REWIRE_CONTRACTS = [
     },
     readBy: [
       {
-        file: 'generator/scripts/refresh-border-wait-averages.mjs',
+        file: 'generator/scripts/lib/border-wait-averages.mjs',
         fields: ['morning', 'evening'],
       },
       {

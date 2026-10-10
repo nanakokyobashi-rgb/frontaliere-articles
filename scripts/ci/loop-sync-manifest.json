@@ -3277,6 +3277,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/border-wait-averages.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del consumatore REWIRE per `refresh-border-wait-averages.mjs`: prova le fonti in sequenza e rifiuta payload con forma invalida o con una riduzione anomala dei valichi. Vive solo nel generatore del corpus; il sito produce e pubblica `border-wait-averages.json` ma non esegue questo consumer e non ha un omonimo da allineare. `corpus-only` e' quindi la classificazione verificata dal codice, non un lavoro mancante sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "generator/scripts/lib/canton-hub-sitemaps.mjs",
       "mode": "corpus-only",
       "reason": "Predicato del gate corpus che riconosce le famiglie di sitemap da usare per verificare i link degli hub cantonali, inclusi gli shard delle varianti localizzate. Il sito espone le sitemap ma non esegue questo gate del publisher; non esiste quindi un gemello da trasportare.",
