@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-treni-vd-ritorno-normale.webp",
-      "sha256": "ec8c131fff566f7e3bb96d6c7abe9f05e44e3dbce2102f2a4e4f99539eb1f732"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-treni-vd-ritorno-normale-480w.webp",
-      "sha256": "5cf6ef0d9a88d7f650a7d2d13f06c4c6622fd2c9a18f32b2e7b70106f8965ab0"
-    }
-  ]
+  "items": []
 }
