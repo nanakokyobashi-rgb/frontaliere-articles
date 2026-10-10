@@ -5,6 +5,7 @@
 export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
  'lavoro-ar-rav-settembre-2026': { it: 'lavoro-ar-rav-settembre-2026', en: 'appenzell-ausserrhoden-rav-september-2026', de: 'arbeitslosenstatistik-ar-september-2026', fr: 'chomage-ar-septembre-2026' },
  'heiden-tassa-base-rifiuti': { it: 'heiden-tassa-base-rifiuti', en: 'heiden-base-waste-fee', de: 'heiden-kehrichtgrundgebuehr', fr: 'heiden-taxe-base-dechets' },
+ 'herisau-verkehr-appenzello': { it: 'herisau-verkehr-appenzello', en: 'herisau-transport-appenzell', de: 'herisau-verkehr-appenzell', fr: 'herisau-transports-appenzell' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
