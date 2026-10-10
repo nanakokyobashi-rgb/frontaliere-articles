@@ -12920,6 +12920,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.agenti-gobbi-rischio-licenziamento.title': 'Fall Gobbi, zwei Polizisten von Entlassung bedroht',
     'blog.article.agenti-gobbi-rischio-licenziamento.excerpt': 'Zwei der drei Polizisten könnten entlassen werden.',
     'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzona und die Kantonspolizei im Fall Gobbi',
+    'blog.article.ispezioni-gallerie-lago-como.title': 'A9 Como-Chiasso: nächtliche Sperrungen im Oktober',
+    'blog.article.ispezioni-gallerie-lago-como.excerpt': 'Sperrung in Richtung Lainate in den Nächten vom 12. (Como)',
+    'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Autobahn Richtung Chiasso während nächtlicher Tunnelsperrungen für Inspektionen.',
 };
 
 export default blogMetaDe;

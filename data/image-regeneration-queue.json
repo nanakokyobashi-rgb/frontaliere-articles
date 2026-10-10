@@ -1,4 +1,15 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "articleId": "ispezioni-gallerie-lago-como",
+      "title": "A9 Como-Chiasso: chiusure notturne a ottobre",
+      "fallbackImage": "/images/blog/article-a9-chiusure-notturne-sion-sierre.webp",
+      "reason": "All image providers failed for article-ispezioni-gallerie-lago-como: openai-codex (vision gate rejected image: Generic generated highway illustration relevant to Ticino cross-borde",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T08:47:31.158Z",
+      "lastFailureAt": "2026-10-10T08:47:31.158Z"
+    }
+  ]
 }

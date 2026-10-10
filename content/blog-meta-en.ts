@@ -12921,6 +12921,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.agenti-gobbi-rischio-licenziamento.title': 'Gobbi case, two officers at risk of dismissal',
     'blog.article.agenti-gobbi-rischio-licenziamento.excerpt': 'Two of the three agents would risk dismissal.',
     'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzona and the cantonal police in the Gobbi case',
+    'blog.article.ispezioni-gallerie-lago-como.title': 'A9 Como-Chiasso: nighttime closures in October',
+    'blog.article.ispezioni-gallerie-lago-como.excerpt': 'Closure towards Lainate on the nights of October 12–14 and 17–19 Closure towards Chiasso/Switzerland on the nights of 15–16 and 16–17 Como Center closed for entry in both cases',
+    'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Highway toward Chiasso during night closures for tunnel inspections.',
 };
 
 export default blogMetaEn;

@@ -12922,6 +12922,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.agenti-gobbi-rischio-licenziamento.title': 'Caso Gobbi, due agenti a rischio licenziamento',
     'blog.article.agenti-gobbi-rischio-licenziamento.excerpt': 'Due dei tre agenti rischierebbero il licenziamento.',
     'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzona e la Polizia cantonale nel caso Gobbi',
+    'blog.article.ispezioni-gallerie-lago-como.title': 'A9 Como-Chiasso: chiusure notturne a ottobre',
+    'blog.article.ispezioni-gallerie-lago-como.excerpt': 'Chiusura verso Lainate nelle notti 12-14 e 17-19 ottobre Chiusura verso Chiasso/Svizzera nelle notti 15-16 e 16-17 Como Centro chiuso in entrata in entrambe',
+    'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Autostrada verso Chiasso durante chiusure notturne per ispezioni alle gallerie.',
 };
 
 export default blogMetaIt;
