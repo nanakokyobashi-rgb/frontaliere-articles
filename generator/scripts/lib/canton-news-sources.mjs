@@ -97,7 +97,7 @@ import {
   newsUrlKey,
   withItemIdentity,
 } from './source-url-ledger.mjs';
-import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
@@ -1261,6 +1261,7 @@ export async function scanCantonSource(source, ctx) {
           if (!res.ok) {
             const error = new Error(`HTTP ${res.status}`);
             error.status = res.status;
+            releaseFetchWithRefTimeout(res);
             throw error;
           }
           // The body is still a network stream: ECONNRESET/UND_ERR_SOCKET or

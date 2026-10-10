@@ -51,7 +51,7 @@
 import path from 'node:path';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 import { applicationDefault, getApps, initializeApp } from 'firebase-admin/app';
 import { FieldValue, getFirestore } from 'firebase-admin/firestore';
 import {
@@ -302,7 +302,10 @@ async function resolveHeroImage(data, doc) {
     let destPath = null;
     try {
       const response = await fetchWithRefTimeout(rawImage, {}, 20_000);
-      if (!response.ok) throw new Error(`download failed: HTTP ${response.status}`);
+      if (!response.ok) {
+        releaseFetchWithRefTimeout(response);
+        throw new Error(`download failed: HTTP ${response.status}`);
+      }
       const contentType = response.headers.get('content-type') || '';
       if (!contentType.toLowerCase().startsWith('image/')) {
         throw new Error(`downloaded content is not an image (${contentType || 'missing content-type'})`);

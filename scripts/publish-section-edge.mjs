@@ -95,7 +95,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { fetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
 import { familySectionPages } from './lib/build-sitemap.mjs';
@@ -254,7 +254,11 @@ export const realIo = {
           headers: { 'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)' },
         }, 15000);
         if (res.status === 200) return { status: 200, body: Buffer.from(await res.arrayBuffer()) };
-        if (res.status === 404) return { status: 404 };
+        if (res.status === 404) {
+          releaseFetchWithRefTimeout(res);
+          return { status: 404 };
+        }
+        releaseFetchWithRefTimeout(res);
       } catch {
         /* ritenta */
       }

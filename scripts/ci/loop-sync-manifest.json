@@ -3511,11 +3511,12 @@
     {
       "path": "generator/scripts/lib/topic-sources/wordpressSearch.mjs",
       "sitePath": "scripts/lib/topic-sources/wordpressSearch.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "La base del parser resta byte-identica al sito, ma in questa PR il percorso corpus usa il helper corpus-only `generator/scripts/lib/fetch-with-ref-timeout.mjs` per mantenere il timeout durante il body e rilasciarlo nei rami status-only; il sito mantiene il proprio trasporto standalone e non puo' ricevere questo import senza portare anche il helper. La divergenza e' quindi intenzionale e va riapplicata a mano se il gemello sito cambia.",
       "baseline": {
         "site": "29304c56a0b58f82",
-        "corpus": "29304c56a0b58f82",
-        "alignedAt": "2026-10-02"
+        "corpus": "9298d7cd765a328a",
+        "alignedAt": "2026-10-10"
       }
     },
     {

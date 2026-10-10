@@ -29,7 +29,7 @@ import {
   rcValueState,
 } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
-import { fetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
 import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -230,6 +230,23 @@ test('fetchWithRefTimeout rimuove il timer anche se il reader lancia sincrono', 
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test('fetchWithRefTimeout permette di rilasciare una risposta letta solo per status', async () => {
+  let requestSignal;
+  const response = await fetchWithRefTimeout(
+    'https://status-only.example.test',
+    {},
+    20,
+    async (_url, { signal }) => {
+      requestSignal = signal;
+      return new Response('body', { status: 503 });
+    },
+  );
+  assert.equal(response.status, 503);
+  releaseFetchWithRefTimeout(response);
+  await new Promise((resolve) => setTimeout(resolve, 40));
+  assert.equal(requestSignal.aborted, false);
 });
 
 test('Google Cloud 401 consuma il body prima di proseguire la cascata', async () => {

@@ -9,7 +9,7 @@
  * della prima cancellazione lascia una base leggibile al giro successivo.
  */
 
-import { fetchWithRefTimeout } from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 export const PAGE_MANIFEST_SCHEMA = 1;
 export const PAGE_MANIFEST_PREFIX = 'edge/sections/_page-manifests';
@@ -162,8 +162,14 @@ export async function fetchPageManifest(url, { fetchImpl = fetch, section } = {}
     const response = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_spm=${Date.now()}`, {
       headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
     }, 20_000, fetchImpl);
-    if (response.status === 404) return { state: 'absent' };
-    if (response.status !== 200 && !response.ok) return { state: 'unknown', reason: `HTTP ${response.status}` };
+    if (response.status === 404) {
+      releaseFetchWithRefTimeout(response);
+      return { state: 'absent' };
+    }
+    if (response.status !== 200 && !response.ok) {
+      releaseFetchWithRefTimeout(response);
+      return { state: 'unknown', reason: `HTTP ${response.status}` };
+    }
     const doc = await response.json();
     const errors = pageManifestErrors(doc, { section });
     return errors.length === 0 ? { state: 'ok', doc } : { state: 'unknown', reason: errors.join('; ') };

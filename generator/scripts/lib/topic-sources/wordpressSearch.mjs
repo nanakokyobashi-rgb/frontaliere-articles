@@ -1,4 +1,5 @@
 import { decode as decodeHTML } from 'html-entities';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../fetch-with-ref-timeout.mjs';
 // scripts/lib/topic-sources/wordpressSearch.mjs
 //
 // Search-based ingestion via WordPress REST API.
@@ -56,15 +57,15 @@ async function fetchOneWpSite({ source, fetchImpl, maxAgeDays }) {
     `_fields=id,link,date,title,excerpt`;
 
   try {
-    const res = await fetchImpl(url, {
+    const res = await fetchWithRefTimeout(url, {
       headers: {
         'User-Agent': 'frontaliereticino-bot/1.0 (+https://frontaliereticino.ch)',
         'Accept': 'application/json',
       },
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
+    }, TIMEOUT_MS, fetchImpl);
     if (!res.ok) {
       console.error(`  🔌 wp-search ${source.host}: HTTP ${res.status}`);
+      releaseFetchWithRefTimeout(res);
       return [];
     }
     const posts = await res.json();

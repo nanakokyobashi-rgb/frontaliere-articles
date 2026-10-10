@@ -10,10 +10,11 @@
  */
 
 const BODY_METHODS = new Set(['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text']);
+const RESPONSE_CLEANUPS = new WeakMap();
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
 function withBodyDeadline(response, cleanup) {
-  return new Proxy(response, {
+  const wrapped = new Proxy(response, {
     get(target, property) {
       const value = Reflect.get(target, property, target);
       if (typeof value !== 'function') return value;
@@ -27,6 +28,22 @@ function withBodyDeadline(response, cleanup) {
       return value.bind(target);
     },
   });
+  RESPONSE_CLEANUPS.set(wrapped, cleanup);
+  return wrapped;
+}
+
+/**
+ * Release a response deadline when a caller intentionally does not consume
+ * the response body (for example, a status-only branch).
+ *
+ * Body readers release the same deadline automatically in `finally`; this
+ * explicit seam keeps the timer and upstream abort listener from living until
+ * the deadline in callers that only inspect `status`/`ok`.
+ *
+ * @param {Response} response
+ */
+export function releaseFetchWithRefTimeout(response) {
+  if (response && typeof response === 'object') RESPONSE_CLEANUPS.get(response)?.();
 }
 
 /**

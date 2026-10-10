@@ -29,7 +29,7 @@ import {
 import { hasUsableContentText, hasUsableTranslatedText } from './body2-payload-verdict.mjs';
 import { decodeHtmlEntities } from './decode-html-entities.mjs';
 import { maskInactiveMarkup } from './source-url-ledger.mjs';
-import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 export { hasUsableContentText };
 
@@ -1011,7 +1011,10 @@ export async function geocodeVenue(query, cache, fetchImpl = fetch) {
     const res = await fetchWithRefTimeout(`https://nominatim.openstreetmap.org/search?${params.toString()}`, {
       headers: { 'User-Agent': NOMINATIM_USER_AGENT },
     }, 10000, fetchImpl);
-    if (!res.ok) return null; // transient failure — don't cache, retry next run
+    if (!res.ok) {
+      releaseFetchWithRefTimeout(res);
+      return null; // transient failure — don't cache, retry next run
+    }
     const data = await res.json();
     const hit = Array.isArray(data) ? data[0] : null;
     const lat = hit ? Number.parseFloat(hit.lat) : NaN;

@@ -52,7 +52,7 @@ import {
   readCreditRecords,
 } from '../../../scripts/lib/image-credit-records.mjs';
 import { writeJsonAtomic } from './atomic-write-json.mjs';
-import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 export const COMMONS_API = 'https://commons.wikimedia.org/w/api.php';
 const COMMONS_FILE_PAGE = 'https://commons.wikimedia.org/wiki/File:';
@@ -798,7 +798,10 @@ export async function fetchCommonsFileInfo(title, { fetchImpl = globalThis.fetch
   const res = await fetchWithRefTimeout(url, {
     headers: { 'User-Agent': userAgent, 'Api-User-Agent': userAgent, Accept: 'application/json' },
   }, timeoutMs, fetchImpl);
-  if (!res.ok) throw new Error(`Commons API HTTP ${res.status}`);
+  if (!res.ok) {
+    releaseFetchWithRefTimeout(res);
+    throw new Error(`Commons API HTTP ${res.status}`);
+  }
   const json = await res.json();
   if (json?.error) throw new Error(`Commons API error ${json.error.code ?? 'unknown'}`);
   const pages = json?.query?.pages;
