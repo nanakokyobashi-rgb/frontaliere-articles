@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sgkb-filiali-fisiche.webp",
-      "sha256": "70785b66909cb174dad4792fb8b84a2b8f34c078a9d285e51115299232482aca"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sgkb-filiali-fisiche-480w.webp",
-      "sha256": "12fbdd64a417feeeb73d24173acb704bcbca1b7d01cbe1fbbfb893f875eb7d93"
-    }
-  ]
+  "items": []
 }
