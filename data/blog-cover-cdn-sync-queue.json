@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-carabinieri-ternate-marijuana-arresto.webp",
+      "sha256": "5f79c97b5afb97917be790c61d4bdae2ea48c56dd760fa7108900f2c5731cba5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-carabinieri-ternate-marijuana-arresto-480w.webp",
+      "sha256": "6ac0cb202ecafc0edfd49910e06da275d5a4dc6c734666d0f2e4d39706610d53"
+    }
+  ]
 }
