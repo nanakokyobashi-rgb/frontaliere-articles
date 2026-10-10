@@ -288,6 +288,24 @@ test('nessuna voce `corpus-only` porta un `sitePath`: sarebbe una classificazion
   }
 });
 
+test('redflag-doc-sections resta sorvegliato come gemello adapted del sito', () => {
+  const entry = entryFor('scripts/ci/redflag-doc-sections.mjs');
+  assert.ok(entry, 'redflag-doc-sections.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted');
+  assert.match(entry.baseline.site, /^[0-9a-f]{16}$/u);
+  assert.match(entry.baseline.corpus, /^[0-9a-f]{16}$/u);
+  assert.equal(
+    entry.baseline.corpus,
+    createHash('sha256')
+      .update(fs.readFileSync(path.join(ROOT, entry.path)))
+      .digest('hex')
+      .slice(0, 16),
+    'baseline corpus deve attestare il blob locale attuale',
+  );
+  assert.match(entry.reason, /sito ha un helper omonimo/iu);
+  assert.match(entry.reason, /`adapted`/u);
+});
+
 test('la reason di parse-positive-num restringe la copertura del gemello del sito', () => {
   const entry = entryFor('scripts/lib/parse-positive-num.mjs');
   assert.ok(entry);
