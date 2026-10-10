@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.rsi.ch/s/4145954": {
-      "section": "frontaliere",
-      "ts": 1791469395530
-    },
-    "frontaliere::https://www.rsi.ch/s/4137113": {
-      "section": "frontaliere",
-      "ts": 1791470194815
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/monteviasco-la-pazienza-e-finita-otto-anni-di-attesa-ora-basta-vogliamo-poter-vivere-il-nostro-paese/2701789": {
-      "section": "frontaliere",
-      "ts": 1791470212872
-    },
     "svizzera::https://www.swissinfo.ch/ita/gr%3a-iniziativa-su-carenza-di-alloggi-a-coira%2c-presentato-testo/92185340": {
       "section": "svizzera",
       "ts": 1791472390438
@@ -1116,6 +1104,14 @@
     "frontaliere::https://www.varesenoi.it/2026/10/10/leggi-notizia/argomenti/cronaca-20/articolo/coltivava-marijuana-in-un-magazzino-in-casa-e-nel-giardino-sequestrate-37-piante-e-arrestato-un-41e.html": {
       "section": "frontaliere",
       "ts": 1791639412702
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
+      "section": "frontaliere",
+      "ts": 1791641031373
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/09/leggi-notizia/argomenti/economia-13/articolo/plastipak-apre-le-porte-dello-stabilimento-di-verbania-un-viaggio-tra-innovazione-tecnologia-e-ric-3.html": {
+      "section": "frontaliere",
+      "ts": 1791643828049
     }
   }
 }

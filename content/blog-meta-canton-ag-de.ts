@@ -23,7 +23,7 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'Blick auf das Rathaus von Buchs mit Budgetunterlagen auf dem Tisch, Hintergrund Aargauer Landschaft',
     'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS im Aargau: Sanierungskosten weiterhin ungewiss',
     'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'Im Aargau haben nur zwei Drittel der Gemeinden zu PFAS geantwortet.',
-    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Industrieareal im Aargau im Zusammenhang mit PFAS-Sanierungen',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonAgDe;

@@ -76,7 +76,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'aargau-pfas-bonifiche-incerte',
  category: 'novita',
  date: '2026-10-10T12:56:57.784Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-aargau-pfas-bonifiche-incerte.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['AG'],
