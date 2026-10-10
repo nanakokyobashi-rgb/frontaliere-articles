@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tradate-moto-capriolo-ferito.webp",
+      "sha256": "20b3b00a1e9adda217691548e037172aff6587bd6b3e89ae3da37fd621fd98c2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tradate-moto-capriolo-ferito-480w.webp",
+      "sha256": "811369cbb4c69beea43a765c2124c3d3fd8355c9c60b6c881c688405080c9760"
+    }
+  ]
 }
