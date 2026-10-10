@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-agenti-gobbi-rischio-licenziamento.webp",
+      "sha256": "c86dd7da64814667ed598f3d331dbf884013fb25f83edcb1169f7683fddddcac"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-agenti-gobbi-rischio-licenziamento-480w.webp",
+      "sha256": "536bfd2de24ec3db59c3d3616cf73bf19ec81124730f79bea112f83af6580ed2"
+    }
+  ]
 }
