@@ -135,9 +135,10 @@ export function mirrorRoute({ path: cited, side, manifestFiles, existsHere, exis
 
   // Il path corrisponde solo al nome che una voce ha SUL GEMELLO. Se un file
   // con quel path esiste anche qui, è un omonimo senza voce su questo lato
-  // (`scripts/ci/redflag-doc-sections.mjs` esiste sul sito ed è `corpus-only`
-  // nel manifest): la voce non parla di lui, e `bin/where-to-fix` da qui
-  // risponde «nessun vincolo». Senza una risposta certa non si instrada.
+  // allora la voce non parla di lui, e `bin/where-to-fix` da qui risponde
+  // «nessun vincolo». `scripts/ci/redflag-doc-sections.mjs` ora è dichiarato
+  // `adapted`: il gemello del sito è sorvegliato, ma i due contratti restano
+  // distinti. Senza una risposta certa non si instrada.
   if (matches.length > 0 && matchedBy === twin) {
     const here = lookup(existsHere, target);
     if (here === true) return { repo: side, targetPath: target, why: 'no-entry:exists-here' };
