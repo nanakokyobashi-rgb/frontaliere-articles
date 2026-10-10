@@ -5030,7 +5030,7 @@
       "reason": "Scanner bilanciato delle righe del registry TypeScript: lo usano `scripts/build-blog-index.mjs`, `scripts/backfill-image-credits.mjs` e gli helper del generatore per leggere solo proprieta' top-level senza confondere delimitatori annidati, stringhe o commenti. Il sito consuma il corpus come JSON HTTP e non esegue questo reader del registry, quindi non esiste un gemello operativo da trasportare.",
       "baseline": {
         "site": null,
-        "corpus": "edc31c6e2638bf97",
+        "corpus": "a74d1f9df23ed2b1",
         "alignedAt": "2026-10-10"
       }
     },
