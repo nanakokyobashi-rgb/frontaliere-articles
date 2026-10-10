@@ -2704,6 +2704,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'assistenza-uri-requisiti-domanda': { it: 'assistenza-uri-requisiti-domanda', en: 'uri-social-assistance-requirements', de: 'sozialhilfe-uri-voraussetzungen-antrag', fr: 'aide-sociale-uri-conditions-demande' },
  'naters-francobolli-falsi-aliexpress': { it: 'naters-francobolli-falsi-aliexpress', en: 'naters-fake-stamps-aliexpress', de: 'naters-falsche-briefmarken-aliexpress', fr: 'naters-faux-timbres-aliexpress' },
  'imposta-veicoli-uri-calcolo': { it: 'imposta-veicoli-uri-calcolo', en: 'uri-vehicle-tax-calculation', de: 'uri-motorfahrzeugsteuer-berechnung', fr: 'taxe-vehicules-uri-calcul' },
+ 'amsa-bus-elettrici-mendrisiotto': { it: 'amsa-bus-elettrici-mendrisiotto', en: 'amsa-electric-buses-mendrisiotto', de: 'amsa-elektrobusse-mendrisiotto', fr: 'bus-electriques-amsa-mendrisiotto' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

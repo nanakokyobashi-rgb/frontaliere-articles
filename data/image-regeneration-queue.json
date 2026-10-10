@@ -10,6 +10,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T12:56:57.812Z",
       "lastFailureAt": "2026-10-10T12:56:57.812Z"
+    },
+    {
+      "articleId": "amsa-bus-elettrici-mendrisiotto",
+      "title": "AMSA inaugura i primi bus elettrici a Balerna",
+      "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T13:00:30.249Z",
+      "lastFailureAt": "2026-10-10T13:00:30.249Z"
     }
   ]
 }

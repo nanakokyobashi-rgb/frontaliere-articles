@@ -8044,7 +8044,10 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Swiss postage stamps on a table',
     'blog.article.imposta-veicoli-uri-calcolo.title': 'Uri motor vehicle tax: calculation and payment',
     'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'In the Canton of Uri, the calculation, deadlines and amounts of the motor vehicle tax follow cantonal rules: what to check for each vehicle and address.',
-    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Illustration generated for this article',
+    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Car on an Alpine road in the Canton of Uri for an article about vehicle tax',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA inaugurates the first electric buses in Balerna',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Four electric buses inaugurated in Balerna Marchesi in his first speech as State Councillor Lines involved: 2, 3 and 4 AMSA transition planned through 2032',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'AMSA electric bus in service in the Mendrisiotto region',
 };
 
 export default blogMetaChEn;

@@ -797,22 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
-      "section": "frontaliere",
-      "ts": 1791462252091
-    },
-    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
-      "section": "frontaliere",
-      "ts": 1791462268017
-    },
-    "frontaliere::https://www.tio.ch/dal-mondo/economia/1955562/petrolio-mercati-interpellata-diesel-acquisti": {
-      "section": "frontaliere",
-      "ts": 1791462286173
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/frankencoin-approda-alla-borsa-di-criptovalute-kraken/92186447": {
-      "section": "frontaliere",
-      "ts": 1791462305923
-    },
     "frontaliere::https://www.tio.ch/svizzera/attualita/1955543/nobel-economia-universita-fehr-zurigo-riconoscimento-ernst-nomi": {
       "section": "frontaliere",
       "ts": 1791465840350
@@ -1132,6 +1116,10 @@
     "svizzera::https://www.rsi.ch/s/4148438": {
       "section": "svizzera",
       "ts": 1791633402691
+    },
+    "svizzera::https://www.rsi.ch/s/4150082": {
+      "section": "svizzera",
+      "ts": 1791636559295
     }
   }
 }

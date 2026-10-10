@@ -8044,7 +8044,10 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Schweizer Briefmarken auf einem Tisch',
     'blog.article.imposta-veicoli-uri-calcolo.title': 'Motorfahrzeugsteuer Uri: Berechnung und Zahlung',
     'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'Im Kanton Uri richten sich Berechnung, Fristen und Beträge der Motorfahrzeugsteuer nach kantonalen Regeln: Was für Fahrzeug und Adresse zu prüfen ist.',
-    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Auto auf einer Alpenstrasse im Kanton Uri zum Thema Motorfahrzeugsteuer',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA weiht in Balerna die ersten Elektrobusse ein',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Vier Elektrobusse in Balerna eingeweiht Marchesi bei seiner ersten Rede als Staatsrat Betroffene Linien: 2, 3 und 4 AMSA-Umstellung bis 2032 vorgesehen',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'AMSA-Elektrobus im Einsatz in der Region Mendrisiotto',
 };
 
 export default blogMetaChDe;

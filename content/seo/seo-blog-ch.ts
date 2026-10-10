@@ -101468,6 +101468,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-amsa-bus-elettrici-mendrisiotto': {
+    title: 'AMSA inaugura i primi bus elettrici a Balerna | Frontaliere Ticino',
+    description: 'Quattro bus elettrici inaugurati a Balerna Marchesi al primo discorso da Consigliere di Stato Linee coinvolte: 2, 3 e 4 Transizione AMSA prevista fino al 2032',
+    keywords: 'frontalieri, ticino, svizzera, italia, amsa, inaugura, primi, elettrici',
+    ogTitle: 'AMSA inaugura i primi bus elettrici nel Mendrisiotto',
+    ogDescription: 'Quattro bus elettrici inaugurati a Balerna Marchesi al primo discorso da Consigliere di Stato Linee coinvolte: 2, 3 e 4 Transizione AMSA prevista fino al 2032',
+    canonicalPath: '/articoli-svizzera/amsa-bus-elettrici-mendrisiotto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AMSA inaugura i primi bus elettrici a Balerna",
+      "description": "Quattro bus elettrici inaugurati a Balerna Marchesi al primo discorso da Consigliere di Stato Linee coinvolte: 2, 3 e 4 Transizione AMSA prevista fino al 2032",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autobus elettrico AMSA in servizio nel Mendrisiotto"
+      },
+      "datePublished": "2026-10-10T13:00:29+00:00",
+      "dateModified": "2026-10-10T13:00:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/amsa-bus-elettrici-mendrisiotto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

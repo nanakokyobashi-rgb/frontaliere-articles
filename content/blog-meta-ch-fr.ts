@@ -8044,7 +8044,10 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Timbres-poste suisses sur une table',
     'blog.article.imposta-veicoli-uri-calcolo.title': 'Impôt sur les véhicules à moteur à Uri : calcul et paiement',
     'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'Dans le canton d\'Uri, le calcul, les délais et les montants de l\'impôt sur les véhicules à moteur suivent les règles cantonales : ce qu\'il faut vérifier pour le véhicule et l\'adresse.',
-    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Voiture sur une route alpine du canton d\'Uri sur la taxe automobile',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA inaugure les premiers bus électriques à Balerna',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Quatre bus électriques inaugurés à Balerna Marchesi lors de son premier discours en tant que conseiller d\'État Lignes concernées : 2, 3 et 4 Transition d\'AMSA prévue jusqu\'en 2032',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'Bus électrique AMSA en service dans la région du Mendrisiotto',
 };
 
 export default blogMetaChFr;

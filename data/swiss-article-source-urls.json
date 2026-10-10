@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/target/1948495/l-intelligenza-artificiale-spiegata-alla-terza-eta": {
-    "articleId": "laboratorio-intelligenza-artificiale-terza-eta",
-    "ts": "2026-09-07T12:03:46.404Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/impatto-ia-su-dipendenti-telecom%2c-syndicom-formula-rivendicazioni/92016507": {
     "articleId": "impatto-ia-dipendenti-telecom-syndicom-rivendicazioni",
     "ts": "2026-09-07T12:33:59.289Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/cronaca/1955954/franchi-francobolli-aliexpress-naters-risparmiare": {
     "articleId": "naters-francobolli-falsi-aliexpress",
     "ts": "2026-10-10T09:59:40.726Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1955939/amsa-inaugura-i-primi-bus-elettrici-marchesi-al-debutto-ufficiale": {
+    "articleId": "amsa-bus-elettrici-mendrisiotto",
+    "ts": "2026-10-10T13:00:30.251Z",
     "keyForm": 2
   }
 }
