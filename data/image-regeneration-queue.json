@@ -30,6 +30,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-10T22:59:11.214Z"
+    },
+    {
+      "articleId": "vademecum-funghi-sicurezza-varese",
+      "title": "Varese: vademecum funghi per ridurre incidenti nei boschi",
+      "fallbackImage": "/images/blog/article-incidenti-notte-varese.webp",
+      "reason": "All image providers failed for article-vademecum-funghi-sicurezza-varese: openai-codex (vision gate rejected image: Relevant original illustration, but it includes a recognizable f",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T23:02:36.168Z",
+      "lastFailureAt": "2026-10-10T23:02:36.168Z"
     }
   ]
 }

@@ -43709,6 +43709,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vademecum-funghi-sicurezza-varese',
+ category: 'pratico',
+ date: '2026-10-10T23:02:35.614Z',
+ image: '/images/blog/article-incidenti-notte-varese.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

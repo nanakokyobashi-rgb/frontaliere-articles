@@ -12964,6 +12964,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.esercitazione-soccorso-sasso.title': 'Secours alpin, exercice au Sasso Malascarpa',
     'blog.article.esercitazione-soccorso-sasso.excerpt': 'Exercice de la Station Triangolo Lariano Vingt-trois sauveteurs, avec trois instructeurs techniques et trois secouristes médicaux Deux scénarios technico-sanitaires au Sasso Malascarpa',
     'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Secouristes alpins lors d’un exercice avec une civière en montagne',
+    'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese : vademecum champignons pour réduire les accidents dans les bois',
+    'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'Le Préfet sollicite une campagne sur les risques dans les bois Le vade-mecum s\'intitule « Sûr de chercher des champignons » La demande implique les municipalités, les écoles, les communautés',
+    'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Randonneur vérifie champignons en forêt avec guide sécurité CNSAS',
 };
 
 export default blogMetaFr;

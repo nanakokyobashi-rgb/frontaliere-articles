@@ -12963,6 +12963,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.esercitazione-soccorso-sasso.title': 'Soccorso alpino, esercitazione al Sasso Malascarpa',
     'blog.article.esercitazione-soccorso-sasso.excerpt': 'Esercitazione della Stazione Triangolo Lariano Ventitré soccorritori, con tre istruttori tecnici e tre sanitari Due scenari tecnico-sanitari al Sasso Malascarpa',
     'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Soccorritori alpini durante un’esercitazione con barella in ambiente montano',
+    'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese: vademecum funghi per ridurre incidenti nei boschi',
+    'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'Il Prefetto sollecita una campagna sui rischi nei boschi Il vademecum si intitola «Sicuri a cercar funghi» La richiesta coinvolge Comuni, scuole, Comunità',
+    'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Escursionista controlla funghi nel bosco con vademecum sicurezza CNSAS',
 };
 
 export default blogMetaIt;
