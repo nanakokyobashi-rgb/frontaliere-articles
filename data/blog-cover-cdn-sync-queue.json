@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-vademecum-funghi-sicurezza-varese.webp",
+      "sha256": "43caff627eaf3bb4428c078f86a1f61d462625894ca5356bc1b4e01f5216647c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-vademecum-funghi-sicurezza-varese-480w.webp",
+      "sha256": "108fb2c2bef5b0dc8de755da0a69e531e3424196e27a8f92ec83e5bd5ff6f04a"
+    }
+  ]
 }
