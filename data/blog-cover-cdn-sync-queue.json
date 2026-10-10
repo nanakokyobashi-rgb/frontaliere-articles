@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lido-grono-estate-2027.webp",
-      "sha256": "676dd5ac6e3016be3927cbb30b5023ed9c53e1d01d1ddf5c692655e1c9bd51b9"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lido-grono-estate-2027-480w.webp",
-      "sha256": "6ecb6bec7299cd6433b972123c89cd544dbcc1061c660ca4fc942cbd767fcce0"
-    }
-  ]
+  "items": []
 }
