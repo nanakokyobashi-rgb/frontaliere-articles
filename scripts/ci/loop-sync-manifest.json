@@ -2763,7 +2763,7 @@
       "reason": "Modulo puro di contratto per il corpus: condivide il pavimento SEO e la validazione fail-closed fra la creazione degli articoli e il refresh in-place dei metadati, evitando che un write path aggiri il minimo. Sul sito non esiste un gemello: la SPA consuma il JSON pubblicato via HTTP e il writer legacy del sito non appartiene a questa pipeline.",
       "baseline": {
         "site": null,
-        "corpus": "1fdc3c06db8cf109",
+        "corpus": "ec439f7b588f1fd3",
         "alignedAt": "2026-10-10"
       }
     },
