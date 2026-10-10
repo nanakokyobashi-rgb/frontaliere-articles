@@ -1,15 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "articleId": "unige-natura-equilibrio-mentale",
-      "title": "UNIGE: salute mentale, 5-10 ottobre 2026",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-09T16:43:09.597Z",
-      "lastFailureAt": "2026-10-09T17:56:34.550Z"
-    }
-  ]
+  "items": []
 }

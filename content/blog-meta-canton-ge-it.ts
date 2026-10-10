@@ -20,7 +20,7 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Scena istituzionale a Ginevra in una mattina d\'ottobre.',
     'blog.article.unige-natura-equilibrio-mentale.title': 'UNIGE: salute mentale, 5-10 ottobre 2026',
     'blog.article.unige-natura-equilibrio-mentale.excerpt': 'La Settimana della salute mentale 2026 va dal 5 al 10 ottobre.',
-    'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Scena all\'aperto nella natura per il benessere mentale della comunità UNIGE',
+    'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonGeIt;
