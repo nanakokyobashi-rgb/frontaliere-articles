@@ -5116,9 +5116,12 @@ function qualityRejectError(message) {
 }
 
 function bodyFieldsForQuality(content) {
-  return Object.keys(content || {})
-    .filter((field) => /^body\d+$/.test(field))
-    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+  if (!content || typeof content !== 'object') return [];
+  // Keep quality reads on the exact string-valued field set emitted by
+  // buildBodyFile(): body1..body20. Extra bodyN keys are inert on the live
+  // article surface and must not become SEO source text.
+  return Array.from({ length: MAX_BODY_KEYS }, (_, index) => `body${index + 1}`)
+    .filter((field) => typeof content[field] === 'string');
 }
 
 function bodyTextForQuality(content) {
