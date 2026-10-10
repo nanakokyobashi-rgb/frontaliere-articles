@@ -241,7 +241,7 @@ describe('clampSeoDescriptions', () => {
 describe('ensureSeoDescriptionMinimum', () => {
   it('usa il corpo italiano quando description ed excerpt sono troppo brevi', () => {
     const body =
-      'Il Parlamento friburghese ha rinviato la mozione per una riduzione rapida dei premi malattia, lasciando aperto il confronto sulle conseguenze per famiglie e lavoratori nel Cantone.';
+      'Il Parlamento friburghese ha rinviato la mozione per ridurre rapidamente i premi malattia, lasciando aperto il confronto per famiglie e lavoratori.';
     const data = {
       id: 'friburgo-mozione-premi-malattia',
       seo: { description: 'Decisione sui premi malattia a Friburgo' },
