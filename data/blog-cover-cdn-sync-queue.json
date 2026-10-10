@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-naters-francobolli-falsi-aliexpress.webp",
-      "sha256": "a60b9d7524998fd1427ebc5ea549e2f4b60db7136e64b561aa2e7badda9d0fdd"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-naters-francobolli-falsi-aliexpress-480w.webp",
-      "sha256": "089b942760af8b4a3b96fe7dea075060addeb17b9178089578b90a85155264b7"
-    }
-  ]
+  "items": []
 }
