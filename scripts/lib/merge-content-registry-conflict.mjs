@@ -260,9 +260,10 @@ function idOf(c) {
  *  · `records`  = quanti figli ha il contenitore piu' popoloso — l'array
  *                 RAW_ARTICLES, la mappa BLOG_SLUGS, la mappa dei meta, la
  *                 mappa SEO, a seconda del file;
- *  · `literals` = quante stringhe DISTINTE compaiono nel file — l'unica misura
- *                 che vede crescere `blogArticleIds.ts`, che non ha contenitori
- *                 ma union di literal.
+ *  · `literals` = quante stringhe DISTINTE compaiono nel file — una misura
+ *                 diagnostica, non una garanzia di conservazione: nei meta
+ *                 localizzati il valore di una chiave può cambiare in un
+ *                 conflitto senza perdere la chiave stessa.
  * @param {string} src
  */
 export function countRecords(src) {
@@ -534,6 +535,15 @@ function typeUnions(src) {
     found.set(m[1], { start: m.index + m[0].indexOf(m[2]), end: m.index + m[0].indexOf(m[2]) + m[2].length, literals });
   }
   return found;
+}
+
+/** I membri delle union di literal, separati dai valori delle mappe. */
+function literalUnionKeys(src) {
+  const keys = new Set();
+  for (const union of typeUnions(src).values()) {
+    for (const literal of union.literals) keys.add(literal);
+  }
+  return keys;
 }
 
 /**
@@ -945,10 +955,18 @@ export function backstop(merged, ours, theirs) {
     problems.push(`(c) ${mergedCounts.records} record nel risultato, ne servono almeno ${needRecords} `
       + `(upstream ${oursCounts.records}, commit rigiocato ${theirsCounts.records})`);
   }
-  const needLiterals = Math.max(oursCounts.literals, theirsCounts.literals);
-  if (mergedCounts.literals < needLiterals) {
-    problems.push(`(c) ${mergedCounts.literals} literal distinti nel risultato, ne servono almeno ${needLiterals} `
-      + `(upstream ${oursCounts.literals}, commit rigiocato ${theirsCounts.literals})`);
+  // I valori stringa delle mappe non sono append-only: una generazione può
+  // sostituire il testo della stessa chiave con un valore già presente altrove.
+  // Il conteggio globale dei literal scenderebbe allora senza che un record sia
+  // perso. L'invariante quantitativo vale solo per i membri delle union di id;
+  // le chiavi dei record, controllate sopra, coprono già mappe e array.
+  const mergedUnionKeys = literalUnionKeys(merged);
+  const oursUnionKeys = literalUnionKeys(ours);
+  const theirsUnionKeys = literalUnionKeys(theirs);
+  const needUnionLiterals = Math.max(oursUnionKeys.size, theirsUnionKeys.size);
+  if (mergedUnionKeys.size < needUnionLiterals) {
+    problems.push(`(c) ${mergedUnionKeys.size} membri di union distinti nel risultato, ne servono almeno ${needUnionLiterals} `
+      + `(upstream ${oursUnionKeys.size}, commit rigiocato ${theirsUnionKeys.size})`);
   }
   return problems;
 }
