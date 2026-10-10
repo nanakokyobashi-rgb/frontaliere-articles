@@ -18,12 +18,13 @@
  * assegnazioni da verificare a mano.
  *
  * Idempotente: rieseguito su un registry gia' riempito non cambia nulla, e
- * riallinea le voci se il classificatore o il testo cambiano. Ogni registry e'
- * scritto in modo atomico, ma i due registry non insieme: un'interruzione fra
- * i due lascia il secondo come prima, e un nuovo `--write` lo completa.
+ * riallinea le voci se il classificatore o il testo cambiano. I due output
+ * vengono preparati prima della sostituzione e un errore sincrono di rename
+ * ripristina gli eventuali registry gia' sostituiti; crash tra rename non sono
+ * una transazione multi-file.
  */
 
-import { existsSync, readFileSync, realpathSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -31,6 +32,7 @@ import { fileURLToPath } from 'node:url';
 import { defaultCantonClassifier } from './lib/canton-classifier.mjs';
 import { applyRegistryCantons, readRegistryCantons, registryEntrySpans } from './lib/registry-canton-field.mjs';
 import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
+import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 
 // Riesportati: il lettore abita in `lib/ts-string-map.mjs`, condiviso con
 // `backfill-article-type.mjs`; i test del classificatore lo importano da qui.
@@ -103,24 +105,6 @@ export function loadSectionInputs(root, spec) {
   return { registrySrc, inputs };
 }
 
-let writeTmpSeq = 0;
-
-/**
- * Il registry e' un artefatto pubblicato: un'interruzione a meta' scrittura
- * non deve lasciarlo troncato (generator/tests/corpus-write-atomic.test.mjs).
- * Temp accanto al target, poi rename atomico.
- */
-function writeAtomic(file, content) {
-  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
-  try {
-    writeFileSync(tmp, content);
-    renameSync(tmp, file);
-  } catch (err) {
-    try { unlinkSync(tmp); } catch { /* temp gia' assente */ }
-    throw err;
-  }
-}
-
 const stableRank = (id) => createHash('sha256').update(`canton-sample:${id}`).digest('hex');
 
 /** Classifica tutte le sezioni. */
@@ -182,8 +166,9 @@ export function renderReport(results, { sampleSize = 50 } = {}) {
 }
 
 /** Riscrive i registry. @returns {{[section: string]: number}} voci cambiate */
-export function writeRegistries(results, root = ROOT) {
+export function writeRegistries(results, root = ROOT, { fsImpl } = {}) {
   const changed = {};
+  const writes = [];
   for (const [section, { spec, registrySrc, rows }] of Object.entries(results)) {
     const byId = new Map(rows.map((r) => [r.id, r.cantons.map((c) => c.canton)]));
     const { source, changed: n } = applyRegistryCantons(registrySrc, byId);
@@ -196,9 +181,10 @@ export function writeRegistries(results, root = ROOT) {
       const got = reread.get(id) || [];
       if (got.join(',') !== cantons.join(',')) throw new Error(`${spec.registry}: ${id} riletto ${got} invece di ${cantons}`);
     }
-    if (n > 0) writeAtomic(path.join(root, spec.registry), source);
+    writes.push({ file: path.join(root, spec.registry), before: registrySrc, after: source });
     changed[section] = n;
   }
+  writeFilePairAtomically(writes, { fsImpl });
   return changed;
 }
 

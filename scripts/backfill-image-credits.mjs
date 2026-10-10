@@ -56,6 +56,7 @@
  */
 
 import '../host/cantonSectionsBootstrap.mjs';
+import { writeFilePairAtomically } from './lib/write-file-pair-atomically.mjs';
 import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -499,9 +500,10 @@ function creditedKeys(root, plan) {
   return keys;
 }
 
-/** Points every registry row and SEO literal of a replaced cover at its replacement. */
-function repointCovers(root, repoints) {
+/** Points registry rows as one rollback-capable pair, then the SEO literals. */
+export function repointCovers(root, repoints) {
   let changed = 0;
+  const registryWrites = [];
   for (const rel of REGISTRY_FILES) {
     const file = path.join(root, rel);
     if (!fs.existsSync(file)) continue;
@@ -509,8 +511,11 @@ function repointCovers(root, repoints) {
     const out = src.replace(/(\bimage:\s*')\/images\/blog\/([A-Za-z0-9][A-Za-z0-9._-]*)\.webp(')/g, (m, open, key, close) => (
       repoints.has(key) ? `${open}${repoints.get(key)}${close}` : m
     ));
-    if (out !== src) { writeTextAtomic(file, out); changed += 1; }
+    registryWrites.push({ file, before: src, after: out });
   }
+  const changedRegistries = registryWrites.filter((write) => write.before !== write.after).length;
+  writeFilePairAtomically(registryWrites);
+  changed += changedRegistries;
   for (const rel of seoLiteralFiles(root)) {
     const file = path.join(root, rel);
     const src = fs.readFileSync(file, 'utf-8');

@@ -48,6 +48,32 @@ test('evergreen refresh: updatedAt non arretra davanti a uno snapshot vecchio', 
   }
 });
 
+test('evergreen refresh rifiuta uno snapshot quando il pair writer detiene il lock', () => {
+  const root = tempRepo();
+  try {
+    const registry = path.join(root, 'content', 'blog-articles-data.ts');
+    const source = [
+      'const articles = [',
+      '  {',
+      "    id: 'locked-demo',",
+      "    date: '2026-09-01T12:00:00Z',",
+      "    updatedAt: '2026-09-15',",
+      '  },',
+      '];',
+      '',
+    ].join('\n');
+    fs.writeFileSync(registry, source);
+    const lock = path.join(root, 'content', '.registry-pair-write.lock');
+    fs.writeFileSync(lock, 'pid=pair-writer\n');
+
+    assert.throws(() => bumpUpdatedAt('locked-demo', '2026-10-05', root), /lock presente/u);
+    assert.equal(fs.readFileSync(registry, 'utf8'), source);
+    assert.equal(fs.readFileSync(lock, 'utf8'), 'pid=pair-writer\n');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('evergreen refresh: inserisce updatedAt nella voce top-level corretta', () => {
   const root = tempRepo();
   try {

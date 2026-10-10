@@ -150,7 +150,11 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
       if (e.isDirectory()) { walk(p); continue; }
       if (!e.name.endsWith('.mjs')) continue;
       const src = fs.readFileSync(p, 'utf-8');
-      if (!/writeFileSync\(/.test(src)) continue;
+      // A choke point can use the shared snapshot writer instead of calling
+      // fs.writeFileSync directly. Count that explicit file-write helper too;
+      // otherwise moving an already-guarded write behind the helper makes the
+      // inventory silently lose the caller that sanitizes and reports it.
+      if (!/(?:writeFileSync|writeFileSnapshotAtomically)\(/.test(src)) continue;
       const used = sanitizers.filter((s) => new RegExp(`\\b${s}\\(`).test(src));
       if (used.length) seen.push({ rel: path.relative(root, p), src, used });
     }
@@ -158,10 +162,11 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
   walk(path.join(root, 'generator', 'scripts'));
   walk(path.join(root, 'scripts'));
 
-  // Un match non e' sempre un choke point: `sanitize*` e `writeFileSync` nello
-  // stesso file non provano che la cosa sanificata sia la cosa scritta. Le
-  // eccezioni si dichiarano QUI, con la ragione — non restringendo il pattern,
-  // che e' cio' che toglie al guard la capacita' di scoprire.
+  // Un match non e' sempre un choke point: `sanitize*` e una chiamata di
+  // scrittura diretta o tramite helper nello stesso file non provano da soli
+  // che la cosa sanificata sia quella scritta. Le eccezioni si dichiarano QUI,
+  // con la ragione — non restringendo il pattern, che toglierebbe al guard la
+  // capacita' di scoprire nuovi casi.
   const NON_CHOKE = new Map([
     ['scripts/find-dirty-content-ids.mjs',
      'sanifica l\'HTML SONDATO dal live per confrontarlo, e scrive il proprio report JSON: '

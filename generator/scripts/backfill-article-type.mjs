@@ -17,7 +17,7 @@
  */
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, realpathSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -26,6 +26,7 @@ import {
   readRegistryEntries,
   registryArticleTypeForRun,
 } from './lib/registry-article-type.mjs';
+import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
 
 // Riesportati per i test: il lettore e' quello condiviso col backfill dei cantoni.
@@ -278,85 +279,9 @@ export function planBackfill(root = ROOT) {
   return result;
 }
 
-let writeTmpSeq = 0;
-function writeAtomic(file, source) {
-  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
-  try {
-    writeFileSync(tmp, source, 'utf8');
-    renameSync(tmp, file);
-  } catch (error) {
-    try { unlinkSync(tmp); } catch { /* best effort */ }
-    throw error;
-  }
-}
-
-/**
- * Prepara entrambi i registry prima di sostituirne uno. Se un rename fallisce,
- * ripristina i file gia' sostituiti e lascia visibile ogni errore di rollback.
- * Il rollback copre errori sincroni del processo, non crash tra i rename.
- */
-export function writeRegistryPairAtomically(changes) {
-  if (!Array.isArray(changes)) throw new TypeError('writeRegistryPairAtomically: changes deve essere un array');
-  for (const change of changes) {
-    if (!change || typeof change.file !== 'string' || typeof change.before !== 'string' || typeof change.after !== 'string') {
-      throw new TypeError('writeRegistryPairAtomically: ogni modifica richiede file, before e after testuali');
-    }
-  }
-  const pending = changes.filter((change) => change.before !== change.after);
-  const seenFiles = new Set();
-  for (const change of pending) {
-    const resolved = path.resolve(change.file);
-    if (seenFiles.has(resolved)) throw new Error(`writeRegistryPairAtomically: file duplicato ${change.file}`);
-    seenFiles.add(resolved);
-  }
-  if (pending.length === 0) return;
-
-  const staged = [];
-  try {
-    for (const change of pending) {
-      const item = {
-        ...change,
-        tmp: `${change.file}.${process.pid}.${writeTmpSeq++}.pair.tmp`,
-      };
-      staged.push(item);
-      writeFileSync(item.tmp, item.after, 'utf8');
-    }
-  } catch (error) {
-    for (const item of staged) {
-      if (!item.tmp) continue;
-      try { unlinkSync(item.tmp); } catch { /* best effort; preserve the write error */ }
-    }
-    throw error;
-  }
-
-  const committed = [];
-  try {
-    for (const item of staged) {
-      renameSync(item.tmp, item.file);
-      item.tmp = null;
-      committed.push(item);
-    }
-  } catch (error) {
-    const rollbackErrors = [];
-    for (const item of committed.reverse()) {
-      try {
-        writeAtomic(item.file, item.before);
-      } catch (rollbackError) {
-        rollbackErrors.push(rollbackError);
-      }
-    }
-    for (const item of staged) {
-      if (!item.tmp) continue;
-      try { unlinkSync(item.tmp); } catch { /* preserve the commit/rollback errors */ }
-    }
-    if (rollbackErrors.length > 0) {
-      throw new AggregateError(
-        [error, ...rollbackErrors],
-        `writeRegistryPairAtomically: commit fallito e rollback incompleto (${rollbackErrors.length} errori)`,
-      );
-    }
-    throw error;
-  }
+/** Acceptance token per la scrittura con rollback della coppia di registry. */
+export function writeRegistryPairAtomically(changes, options) {
+  return writeFilePairAtomically(changes, options);
 }
 
 function parseArgs(argv) {
@@ -381,7 +306,7 @@ function printSummary(plan, apply) {
   console.log(apply ? 'modalità: apply' : 'modalità: dry-run (nessun file modificato)');
 }
 
-export function applyPlan(plan) {
+export function applyPlan(plan, { fsImpl } = {}) {
   const changed = {};
   const writes = [];
   for (const [section, row] of Object.entries(plan)) {
@@ -389,10 +314,10 @@ export function applyPlan(plan) {
     if (result.changed !== row.typesById.size) {
       throw new Error(`${section}: cambiate ${result.changed} voci su ${row.typesById.size} assegnazioni`);
     }
-    if (result.changed > 0) writes.push({ file: row.registryFile, before: row.source, after: result.source });
+    writes.push({ file: row.registryFile, before: row.source, after: result.source });
     changed[section] = result.changed;
   }
-  writeRegistryPairAtomically(writes);
+  writeRegistryPairAtomically(writes, { fsImpl });
   return changed;
 }
 

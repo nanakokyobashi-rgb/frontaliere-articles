@@ -7,7 +7,7 @@
  * dogane-ranking digest (and any future evergreen digest) reuses the exact
  * same balanced-record rewrite logic instead of a copy-pasted sibling.
  */
-import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
@@ -15,6 +15,7 @@ import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
+import { writeFileSnapshotAtomically } from '../../../scripts/lib/write-file-pair-atomically.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`, not `../..`. In the site repo this module sits at
@@ -40,21 +41,18 @@ const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 // writeFileSync on the target can leave it truncated mid-write. `renameSync`
 // is a single POSIX syscall, atomic on the same filesystem; the temp file
 // lives next to the target so the rename never crosses a filesystem boundary.
-let writeTmpSeq = 0;
-function writeCorpusFile(file, content) {
+function writeCorpusFile(file, content, before) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(file, content, clean);
-  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
-  try {
-    writeFileSync(tmp, clean, 'utf-8');
-    renameSync(tmp, file);
-  } catch (err) {
-    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
-    throw err;
-  }
+  writeFileSnapshotAtomically(file, before, clean);
+}
+
+function writeSnapshot(file, before, content, writeFile) {
+  if (writeFile === writeCorpusFile) return writeFile(file, content, before);
+  return writeFile(file, content);
 }
 
 function isAtOrAfter(stored, candidate) {
@@ -134,12 +132,12 @@ export function bumpUpdatedAt(
     if (isAtOrAfter(current, todayIso)) return true;
     const nextSource = replaceLiteral(src, updatedAtProperty, `'${todayIso}'`);
     if (nextSource === null) return false;
-    writeFile(file, nextSource);
+    writeSnapshot(file, src, nextSource, writeFile);
     return true;
   }
 
   if (!dateProperty || date === null) return false;
-  writeFile(file, insertUpdatedAt(src, record, dateProperty, todayIso));
+  writeSnapshot(file, src, insertUpdatedAt(src, record, dateProperty, todayIso), writeFile);
   return true;
 }
 
@@ -187,7 +185,7 @@ export function bumpDateModified(
   const current = block.match(dmRe);
   if (current && isAtOrAfter(current[1], effective)) return true;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
-  writeFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
+  writeSnapshot(file, src, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1), writeFile);
   return true;
 }
 

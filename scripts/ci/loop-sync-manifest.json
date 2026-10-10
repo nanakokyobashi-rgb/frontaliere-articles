@@ -871,6 +871,16 @@
       }
     },
     {
+      "path": "scripts/lib/write-file-pair-atomically.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del publisher per serializzare gli aggiornamenti dei registry nella directory `content/`, rifiutare snapshot concorrenti obsoleti, preparare insieme le uscite e ripristinare le sostituzioni gia' riuscite su errori sincroni. E' usato dai backfill di articleType/canton e dal repoint delle copertine; il sito consuma i JSON pubblicati via HTTP e non deve importare il writer del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "fb1726b001af46c4",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "scripts/ci/lib/constants.mjs",
       "mode": "adapted",
       "reason": "Il check required e il job di esecuzione coincidono: `VITEST_EXECUTION_JOB_NAME` segue `VITEST_CHECK_NAME`, mantenendo il nome locale del corpus e il suo override CI_CHECK_NAME. Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME. RICONCILIATO 2026-09-06 (#977 item 3) da `both-moved`: il sito si e' mosso una volta sola dalla baseline del 2026-09-03, con valerielinc-ops/frontaliere-si-o-no#7600, che porta la PRIMA forma posizionale di `REDFLAG_IMPORTANT_RE` (lead a classe negata semplice + lookbehind `(?<!`) ` di un carattere); qui quella forma e' arrivata prima (#959) ed e' gia' stata superata da #1106, che ne chiude i due residui (il lookbehind di un carattere spegneva il gate su una label incollata al marker; due finding sulla stessa riga diventavano verdi). Non c'e' quindi niente da riportare in giu': il contenuto del sito e' un sottoinsieme di questo, e la baseline registra la lettura di entrambi i lati. DEBITO VERSO IL SITO, non chiudibile da qui: `main` del sito gira ancora la regex pre-#977, quindi quei due buchi sono aperti la'; la risalita deve nascere sul sito (il mirror va in una direzione sola e questo repo non ha una credenziale cross-repo in scrittura). Le altre differenze del file — `GENERATOR_CI_JOB_NAME`, `GENERATOR_CI_TRIGGER_PATHS`, `REVIEWER_BOT_LOGIN_RE`/`_JQ` come prefisso, la lista `REVIEW_WORKFLOW_DRIFT_FILES` puntata a `tests.yml` — sono adattamenti gia' in essere alla baseline, non movimento del sito: il file NON differisce piu' di una riga sola, e dirlo qui evita che il prossimo lettore legga il resto come drift da riparare.",
@@ -5009,7 +5019,7 @@
       "reason": "Lettura fail-closed delle proprieta' image nei literal del registry, usata dal retirement del corpus per evitare di scambiare esempi/commenti, oggetti annidati o sintassi dinamica per evidenza valida. Gli altri reader del registry restano sullo scanner bilanciato condiviso da main; non esiste un registry editoriale corrispondente nel sito: il sito consuma il JSON pubblicato via HTTP, mentre questo flusso modifica e verifica le sorgenti del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "9e6dc8fe4f0a1857",
+        "corpus": "725fb6d8b38f0aa8",
         "alignedAt": "2026-10-10"
       }
     },
