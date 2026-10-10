@@ -34,7 +34,7 @@ import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 // Maps Remote Config parameter names to the environment variable names
 // that scripts expect.  One RC param may map to multiple env vars.
 
-const RC_TO_ENV = {
+export const RC_TO_ENV = {
   // Client-visible keys
   GEMINI_API_KEY:                 ['GEMINI_API_KEY', 'VITE_GEMINI_API_KEY'],
   BING_API_KEY:                   ['BING_API_KEY'],
@@ -224,6 +224,25 @@ const RC_TO_ENV = {
   SERVER_REDDIT_CLIENT_SECRET:    ['REDDIT_CLIENT_SECRET'],
   SERVER_REDDIT_PASSWORD:         ['REDDIT_PASSWORD'],
   SERVER_REDDIT_REFRESH_TOKEN:    ['REDDIT_REFRESH_TOKEN'],
+
+  // Instagram auto-posting (carousel — scripts/post-to-instagram.mjs). The
+  // account identifiers and token are optional; until the owner completes the
+  // Meta setup for instagram_content_publish the poster fail-soft-skips.
+  // These RC parameters must stay mapped here: this file is the only
+  // Remote Config → env bridge used by bin/rc-env.sh and corpus-side jobs.
+  INSTAGRAM_USERNAME:                  ['INSTAGRAM_USERNAME'],
+  INSTAGRAM_BUSINESS_ACCOUNT_ID:       ['INSTAGRAM_BUSINESS_ACCOUNT_ID'],
+  SERVER_INSTAGRAM_ACCESS_TOKEN:       ['INSTAGRAM_ACCESS_TOKEN'],
+
+  // TikTok auto-posting (carousel — scripts/post-to-tiktok.mjs). The account
+  // credentials are optional and the poster remains fail-soft until configured.
+  TIKTOK_USERNAME:                     ['TIKTOK_USERNAME'],
+  SERVER_TIKTOK_CLIENT_KEY:            ['TIKTOK_CLIENT_KEY'],
+  SERVER_TIKTOK_CLIENT_SECRET:         ['TIKTOK_CLIENT_SECRET'],
+  SERVER_TIKTOK_ACCESS_TOKEN:          ['TIKTOK_ACCESS_TOKEN'],
+  SERVER_TIKTOK_REFRESH_TOKEN:         ['TIKTOK_REFRESH_TOKEN'],
+  SERVER_TIKTOK_SANDBOX_CLIENT_KEY:    ['TIKTOK_SANDBOX_CLIENT_KEY'],
+  SERVER_TIKTOK_SANDBOX_CLIENT_SECRET: ['TIKTOK_SANDBOX_CLIENT_SECRET'],
 
   // LLM providers (AI model chain for articles + crawlers)
   GROQ_API_KEY:                   ['GROQ_API_KEY'],

@@ -24,6 +24,7 @@ import {
   formatMissingRcKeys,
   isRetryableRcFetchStatus,
   rcFetchBackoffMs,
+  RC_TO_ENV,
   RC_FETCH_TIMEOUT_MS,
   shouldExportRcValue,
   rcValueState,
@@ -108,6 +109,13 @@ test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', (
   assert.equal(rcValueState('', 'GEMINI_API_KEY'), 'empty');
   assert.equal(shouldExportRcValue(null, 'TELEGRAM_BOT_TOKEN'), false);
   assert.equal(shouldExportRcValue('', 'OMNIROUTE_PROVIDER_ALLOWLIST'), true);
+});
+
+test('il ponte RC espone le credenziali dei canali social al runtime locale', () => {
+  assert.deepEqual(RC_TO_ENV.INSTAGRAM_BUSINESS_ACCOUNT_ID, ['INSTAGRAM_BUSINESS_ACCOUNT_ID']);
+  assert.deepEqual(RC_TO_ENV.SERVER_INSTAGRAM_ACCESS_TOKEN, ['INSTAGRAM_ACCESS_TOKEN']);
+  assert.deepEqual(RC_TO_ENV.TIKTOK_USERNAME, ['TIKTOK_USERNAME']);
+  assert.deepEqual(RC_TO_ENV.SERVER_TIKTOK_ACCESS_TOKEN, ['TIKTOK_ACCESS_TOKEN']);
 });
 
 test('il fallback legacy non sovrascrive il token LSA già accodato', () => {
