@@ -48,6 +48,31 @@ test('evergreen refresh: updatedAt non arretra davanti a uno snapshot vecchio', 
   }
 });
 
+test('evergreen refresh: inserisce updatedAt nella voce top-level corretta', () => {
+  const root = tempRepo();
+  try {
+    const registry = path.join(root, 'content', 'blog-articles-data.ts');
+    fs.writeFileSync(registry, [
+      'const articles = [',
+      '  {',
+      "    id: 'demo-id',",
+      "    metadata: { date: '1900-01-01', updatedAt: '1900-01-02' },",
+      "    date: '2026-09-01T12:00:00Z',",
+      '  },',
+      '];',
+      '',
+    ].join('\n'));
+
+    assert.equal(bumpUpdatedAt('demo-id', '2026-10-05', root), true);
+    const next = fs.readFileSync(registry, 'utf8');
+    assert.equal((next.match(/updatedAt:/g) || []).length, 2);
+    assert.match(next, /date: '2026-09-01T12:00:00Z',\n    updatedAt: '2026-10-05',/);
+    assert.match(next, /metadata: \{ date: '1900-01-01', updatedAt: '1900-01-02' \}/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('evergreen refresh: dateModified non arretra davanti a uno snapshot vecchio', () => {
   const root = tempRepo();
   try {

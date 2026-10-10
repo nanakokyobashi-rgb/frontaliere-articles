@@ -5,7 +5,7 @@
  *
  * Extracted from generate-events-digest-article.mjs (issue #2963) so the
  * dogane-ranking digest (and any future evergreen digest) reuses the exact
- * same regex-scoped rewrite logic instead of a copy-pasted sibling.
+ * same balanced-record rewrite logic instead of a copy-pasted sibling.
  */
 import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
@@ -88,7 +88,7 @@ function insertUpdatedAt(source, record, dateProperty, todayIso) {
   const lineStart = source.lastIndexOf('\n', dateProperty.valueStart - 1) + 1;
   const indent = source.slice(lineStart, dateProperty.valueStart).match(/^[ \t]*/u)?.[0] ?? '';
   if (newline >= 0 && newline < close) {
-    const breakEnd = source[newline + 1] === '\n' ? newline + 2 : newline + 1;
+    const breakEnd = newline + 1;
     const lineBreak = source.slice(newline, breakEnd);
     return source.slice(0, breakEnd)
       + `${indent}updatedAt: '${todayIso}',${lineBreak}`
