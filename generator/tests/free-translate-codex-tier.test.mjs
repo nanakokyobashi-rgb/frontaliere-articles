@@ -113,7 +113,7 @@ test('il timeout HTTP referenziato risolve una fetch pendente senza handle di re
   try {
     await assert.rejects(
       fetchWithRefTimeout('https://stalled.invalid', {}, 10),
-      /aborted by test/,
+      { name: 'TimeoutError' },
     );
   } finally {
     globalThis.fetch = previousFetch;
@@ -141,7 +141,7 @@ test('il timeout HTTP referenziato resta attivo durante la lettura del body', as
         });
         await assert.rejects(
           Promise.race([response[reader](), guardPromise]),
-          new RegExp(`body ${reader} aborted by test`),
+          { name: 'TimeoutError' },
         );
       } finally {
         clearTimeout(guard);
