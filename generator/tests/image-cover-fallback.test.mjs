@@ -309,6 +309,13 @@ test('the generator lets the governed chain reach licensed photos and keeps the 
   assert.match(engine, /normalizedPath/);
   assert.match(engine, /parsed\.pathname = normalizedPath/);
   assert.match(engine, /return parsed\.toString\(\)/);
+  assert.match(engine, /export function photoPageUrlVariants\(provider, value\)/);
+  assert.match(engine, /export function photoRecordPageUrlVariants\(record\)/);
+  assert.match(engine, /LICENSED_PHOTO_PROVIDERS/);
+  assert.match(engine, /generated\.push\(\.\.\.aliases\)/);
+  assert.match(engine, /encodedPath/);
+  assert.match(engine, /encodedSuffixPath/);
+  assert.match(engine, /addPathVariants\(rawUrl, rawUrl\.pathname\)/);
   assert.match(engine, /parsed\.origin !== rule\.origin/);
   assert.match(engine, /pathPrefixes/);
   assert.match(engine, /parsed\.search/);
