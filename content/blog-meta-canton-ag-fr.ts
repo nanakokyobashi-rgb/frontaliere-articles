@@ -24,6 +24,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS en Argovie : coûts d\'assainissement encore incertains',
     'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'En Argovie, seuls deux tiers des communes ont répondu au sujet des PFAS.',
     'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.argovia-polizia-regionale-poteri.title': 'Argovie : plus de pouvoirs pour la police régionale dès 2028',
+    'blog.article.argovia-polizia-regionale-poteri.excerpt': 'Le gouvernement argovien propose au Grand Conseil de nouvelles tâches pour les polices régionales ; la loi entrerait en vigueur le 1er janvier 2028.',
+    'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Voiture de police régionale devant un bâtiment communal en Argovie.',
 };
 
 export default blogMetaCantonAgFr;

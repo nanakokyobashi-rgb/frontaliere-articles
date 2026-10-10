@@ -24,6 +24,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS in Argovia: costi di bonifica ancora incerti',
     'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'In Argovia solo due terzi dei Comuni hanno risposto sul PFAS.',
     'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.argovia-polizia-regionale-poteri.title': 'Argovia: più poteri alla polizia regionale dal 2028',
+    'blog.article.argovia-polizia-regionale-poteri.excerpt': 'Il Governo argoviese propone al Gran Consiglio nuovi compiti per le polizie regionali; la legge entrerebbe in vigore il 1° gennaio 2028.',
+    'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Auto della polizia regionale davanti a un edificio comunale in Argovia.',
 };
 
 export default blogMetaCantonAgIt;
