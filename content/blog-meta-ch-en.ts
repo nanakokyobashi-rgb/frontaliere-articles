@@ -8048,6 +8048,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA inaugurates the first electric buses in Balerna',
     'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Four electric buses inaugurated in Balerna Marchesi in his first speech as State Councillor Lines involved: 2, 3 and 4 AMSA transition planned through 2032',
     'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'AMSA electric bus in service in the Mendrisiotto region',
+    'blog.article.disagi-treni-vaud-eclepens.title': 'Railway: disruptions continue between Yverdon and Lausanne',
+    'blog.article.disagi-treni-vaud-eclepens.excerpt': 'The Yverdon-les-Bains-Lausanne line remains disrupted Two long-distance trains per hour, with delays Regional trains and Geneva airport: buses Problems',
+    'blog.article.disagi-treni-vaud-eclepens.imageAlt': 'Swiss railway tracks with a replacement bus near a station.',
 };
 
 export default blogMetaChEn;

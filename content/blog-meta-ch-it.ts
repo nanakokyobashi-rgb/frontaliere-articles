@@ -8048,6 +8048,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA inaugura i primi bus elettrici a Balerna',
     'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Quattro bus elettrici inaugurati a Balerna Marchesi al primo discorso da Consigliere di Stato Linee coinvolte: 2, 3 e 4 Transizione AMSA prevista fino al 2032',
     'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'Autobus elettrico AMSA in servizio nel Mendrisiotto',
+    'blog.article.disagi-treni-vaud-eclepens.title': 'Ferrovia: ancora disagi tra Yverdon e Losanna',
+    'blog.article.disagi-treni-vaud-eclepens.excerpt': 'La linea Yverdon-les-Bains-Losanna resta interrotta Due treni a lunga percorrenza all\'ora, con rallentamenti Regionali e aeroporto di Ginevra: autobus Problemi',
+    'blog.article.disagi-treni-vaud-eclepens.imageAlt': 'Binari ferroviari svizzeri con un autobus sostitutivo vicino a una stazione.',
 };
 
 export default blogMetaChIt;

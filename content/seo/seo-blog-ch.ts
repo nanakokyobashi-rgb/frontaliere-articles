@@ -101507,6 +101507,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-disagi-treni-vaud-eclepens': {
+    title: 'Ferrovia: ancora disagi tra Yverdon e Losanna | Frontaliere Ticino',
+    description: 'La linea Yverdon-les-Bains-Losanna resta interrotta Due treni a lunga percorrenza all\'ora, con rallentamenti Regionali e aeroporto di Ginevra: autobus Problemi',
+    keywords: 'frontalieri, ticino, svizzera, italia, ferrovia, ancora, disagi, yverdon',
+    ogTitle: 'Ferrovia: ancora disagi tra Yverdon e Losanna',
+    ogDescription: 'La linea Yverdon-les-Bains-Losanna resta interrotta Due treni a lunga percorrenza all\'ora, con rallentamenti Regionali e aeroporto di Ginevra: autobus Problemi',
+    canonicalPath: '/articoli-svizzera/disagi-treni-vaud-eclepens/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ferrovia: ancora disagi tra Yverdon e Losanna",
+      "description": "La linea Yverdon-les-Bains-Losanna resta interrotta Due treni a lunga percorrenza all'ora, con rallentamenti Regionali e aeroporto di Ginevra: autobus Problemi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-disagi-treni-vaud-eclepens.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Binari ferroviari svizzeri con un autobus sostitutivo vicino a una stazione."
+      },
+      "datePublished": "2026-10-10T13:48:28+00:00",
+      "dateModified": "2026-10-10T13:48:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/disagi-treni-vaud-eclepens/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
