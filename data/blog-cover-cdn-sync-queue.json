@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-traffico-berna-manifestazione.webp",
-      "sha256": "225c4da989322dcc39a5b50e780ee111bc611eee96c1e847099e625d80fdc788"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-traffico-berna-manifestazione-480w.webp",
-      "sha256": "a27955586424de8f95245a892910820e2dc7342b66aec31e9c8e12e7b92109a5"
-    }
-  ]
+  "items": []
 }
