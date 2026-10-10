@@ -100,7 +100,9 @@ export async function fetchWithRefTimeout(
   // promise when they are invoked.
   timeoutPromise.catch(() => {});
   let responseForCancellation;
+  let timedOut = false;
   const timer = setTimeout(() => {
+    timedOut = true;
     const reason = new DOMException('The operation timed out', 'TimeoutError');
     controller.abort(reason);
     timeoutReject(reason);
@@ -123,8 +125,17 @@ export async function fetchWithRefTimeout(
   }
 
   try {
+    const fetchPromise = Promise.resolve().then(
+      () => fetchImpl(url, { ...requestOptions, signal: controller.signal }),
+    );
+    // Abort is only a hint. If a fetch implementation ignores it and returns
+    // a Response after the caller has already timed out, release that late
+    // response body as well instead of leaking its transport resources.
+    fetchPromise.then((response) => {
+      if (timedOut) cancelBodyBestEffort(response);
+    }, () => {});
     const response = await Promise.race([
-      Promise.resolve().then(() => fetchImpl(url, { ...requestOptions, signal: controller.signal })),
+      fetchPromise,
       timeoutPromise,
     ]);
     responseForCancellation = response;

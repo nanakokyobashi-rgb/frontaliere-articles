@@ -196,6 +196,28 @@ test('fetchWithRefTimeout forza il timeout anche se il fetch ignora l’abort', 
   assert.equal(aborted, true);
 });
 
+test('fetchWithRefTimeout cancella una Response restituita dopo il timeout', async () => {
+  let resolveFetch;
+  let cancellations = 0;
+  const fetchPromise = new Promise((resolve) => { resolveFetch = resolve; });
+
+  await assert.rejects(
+    fetchWithRefTimeout('https://late-response.invalid', {}, 20, () => fetchPromise),
+    { name: 'TimeoutError' },
+  );
+
+  resolveFetch({
+    body: {
+      cancel() {
+        cancellations += 1;
+        return Promise.resolve();
+      },
+    },
+  });
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(cancellations, 1);
+});
+
 test('fetchWithRefTimeout forza il timeout anche se il body reader ignora l’abort', async () => {
   for (const reader of ['json', 'text']) {
     let aborted = false;
