@@ -9,6 +9,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.heiden-tassa-base-rifiuti.title': 'Heiden erhöht die Kehrichtgrundgebühr',
     'blog.article.heiden-tassa-base-rifiuti.excerpt': 'In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.',
     'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.herisau-verkehr-appenzello.title': 'Herisau: Die beiden Appenzell fordern mehr Tempo',
+    'blog.article.herisau-verkehr-appenzello.excerpt': 'Während der Vernehmlassung zu «Verkehr \'45» fordert Appenzell Ausserrhoden, den Vorschlag zu überarbeiten, und stellt die Ausrichtung des Bahnteils infrage.',
+    'blog.article.herisau-verkehr-appenzello.imageAlt': 'Strasse und Bahn in Herisau im Kanton Appenzell Ausserrhoden',
 };
 
 export default blogMetaCantonAppenzelloDe;

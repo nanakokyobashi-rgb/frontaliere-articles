@@ -21,6 +21,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.cyberattacco-casse-pensione-berna.title': 'Cyberangriff auf die Anbieterin der bernischen Pensionskassen',
     'blog.article.cyberattacco-casse-pensione-berna.excerpt': 'Eine externe Softwareanbieterin für BPK und BLVK wurde Ende September angegriffen.',
     'blog.article.cyberattacco-casse-pensione-berna.imageAlt': 'Verwaltungsgebäude im Kanton Bern im Zusammenhang mit der beruflichen Vorsorge',
+    'blog.article.traffico-berna-manifestazione.title': 'Bern: Nicht genehmigte Demonstrationen können zu Störungen führen.',
+    'blog.article.traffico-berna-manifestazione.excerpt': 'Bern meldet mögliche Straßensperrungen und Behinderungen am Sonntag, den 11.',
+    'blog.article.traffico-berna-manifestazione.imageAlt': 'Berner Strassen mit möglichen Verkehrseinschränkungen am Sonntag, 11. Oktober 2026',
 };
 
 export default blogMetaCantonBeDe;

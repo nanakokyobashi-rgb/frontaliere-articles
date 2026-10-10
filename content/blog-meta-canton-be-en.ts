@@ -21,6 +21,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.cyberattacco-casse-pensione-berna.title': 'Cyberattack on the provider of Bernese pension funds',
     'blog.article.cyberattacco-casse-pensione-berna.excerpt': 'An external software provider for BPK and BLVK was affected at the end of September.',
     'blog.article.cyberattacco-casse-pensione-berna.imageAlt': 'Administrative building in the Canton of Bern linked to occupational pensions',
+    'blog.article.traffico-berna-manifestazione.title': 'Bern: possible disruptions due to unauthorized demonstration',
+    'blog.article.traffico-berna-manifestazione.excerpt': 'Bern warns of possible road closures and disruptions on Sunday, October 11, 2026, due to an unauthorized demonstration: information for those traveling in the city.',
+    'blog.article.traffico-berna-manifestazione.imageAlt': 'Bern streets with possible traffic restrictions on Sunday, October 11, 2026',
 };
 
 export default blogMetaCantonBeEn;

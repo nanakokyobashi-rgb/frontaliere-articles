@@ -80,6 +80,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-herisau-verkehr-appenzello': {
+    title: 'Herisau: i due Appenzello chiedono più rapidità',
+    description: 'Durante la consultazione su «Verkehr \'45», Appenzello Esterno critica la proposta e chiede una revisione di fondo, soprattutto per la parte ferroviaria.',
+    keywords: 'frontalieri, ticino, svizzera, italia, herisau, appenzello, chiedono, rapidità',
+    ogTitle: 'Herisau: i due Appenzello chiedono più rapidità',
+    ogDescription: 'Durante la consultazione su «Verkehr \'45», Appenzello Esterno chiede una revisione di fondo della proposta e contesta l\'orientamento della parte ferroviaria. Il titolo della notizia richiama la Umfahrung Herisau e la richiesta di più rapidità dei due',
+    canonicalPath: '/articoli-appenzello/herisau-verkehr-appenzello/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Herisau: i due Appenzello chiedono più rapidità",
+      "description": "Durante la consultazione su «Verkehr '45», Appenzello Esterno critica la proposta e chiede una revisione di fondo, soprattutto per la parte ferroviaria.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-herisau-verkehr-appenzello.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Viabilità e ferrovia a Herisau, nel Canton Appenzello Esterno"
+      },
+      "datePublished": "2026-10-10T06:33:48+00:00",
+      "dateModified": "2026-10-10T06:33:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/herisau-verkehr-appenzello/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
