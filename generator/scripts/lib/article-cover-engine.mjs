@@ -2,7 +2,10 @@ import { rmSync } from 'node:fs';
 import '../../../host/cantonSectionsBootstrap.mjs';
 import path from 'node:path';
 
-import { generateImageFromSpec } from '../../../engine/shared/generatedImageEngine.mjs';
+import {
+  DEFAULT_GENERATION_PROVIDER_CHAIN,
+  generateImageFromSpec,
+} from '../../../engine/shared/generatedImageEngine.mjs';
 import {
   articleImageKeywords,
   articleImagePlace,
@@ -24,15 +27,20 @@ export {
 } from './article-cover-identity.mjs';
 
 /**
- * Return the identity used by the photo engine for one legacy credit record.
+ * Return the source-page identity the photo engine can actually compare for
+ * one legacy credit record.
  *
- * Older, readable ledgers can lack the source page URL even though they still
- * identify the cover through their source metadata (or at least through the
- * cover/file entry). Do not drop those records from `usedRecords`: an opaque
- * fallback is still a stable local identity and keeps the missing provenance
- * visible to the same deduplication path as URL-backed records.
+ * The engine's collision gate compares this value with the provider's real
+ * `sourcePageUrl`. A local cover/file key is not a substitute: it would look
+ * like a used record while matching no provider candidate. Missing or
+ * malformed URLs therefore return null and are handled by the caller's
+ * fail-closed provider policy. The old inline call shape
+ * `usedRecords: usedArticlePhotoRecords(root)` could not carry that policy
+ * decision alongside the comparable records, so the adapter now resolves the
+ * two values together before calling the engine.
  */
 export function legacyPhotoRecordKey(file, record) {
+  void file;
   const source = record?.source === 'licensed-photo'
     ? record.photo
     : record?.source === 'wikimedia-commons'
@@ -41,31 +49,30 @@ export function legacyPhotoRecordKey(file, record) {
   if (!source) return null;
 
   const pageUrl = String(source.pageUrl || '').trim();
-  if (pageUrl) return pageUrl;
-
-  const fallback = {
-    source: String(record.source || '').trim(),
-    provider: String(source.provider || '').trim(),
-    title: String(source.title || '').trim(),
-    cover: String(record.cover || '').trim(),
-    file: String(file || '').trim(),
-  };
-  return Object.values(fallback).some(Boolean)
-    ? `legacy-photo:${JSON.stringify(fallback)}`
-    : null;
+  return /^https:\/\//i.test(pageUrl) ? pageUrl : null;
 }
 
 function usedArticlePhotoRecords(root) {
   const generated = readGeneratedImageRecords(root);
-  const legacy = readCreditRecords(root)
-    .map(({ file, record }) => {
-      const sourcePageUrl = legacyPhotoRecordKey(file, record);
-      return sourcePageUrl
-        ? { scope: 'article-hero', assetId: `legacy-credit-${file}`, sourcePageUrl }
-        : null;
-    })
-    .filter(Boolean);
-  return [...generated, ...legacy];
+  const legacy = [];
+  let hasUnmatchableLegacy = false;
+  for (const { file, record } of readCreditRecords(root)) {
+    const isPhotoRecord = record?.source === 'licensed-photo' || record?.source === 'wikimedia-commons';
+    if (!isPhotoRecord) continue;
+    const sourcePageUrl = legacyPhotoRecordKey(file, record);
+    if (!sourcePageUrl) {
+      // Do not let an opaque local fallback enter the engine's URL/hash gate.
+      // Until this provenance can be resolved, a licensed-photo candidate is
+      // unsafe because its real source URL cannot be compared here.
+      hasUnmatchableLegacy = true;
+      continue;
+    }
+    legacy.push({ scope: 'article-hero', assetId: `legacy-credit-${file}`, sourcePageUrl });
+  }
+  return {
+    records: [...generated, ...legacy],
+    hasUnmatchableLegacy,
+  };
 }
 
 /**
@@ -102,6 +109,7 @@ export async function generateGovernedArticleHero({
   );
 
   try {
+    const photoUsage = usedArticlePhotoRecords(root);
     const result = await generateImageFromSpec(
       {
         scope: 'article-hero',
@@ -118,7 +126,8 @@ export async function generateGovernedArticleHero({
       {
         outputDir: stagingDir,
         assetId,
-        usedRecords: usedArticlePhotoRecords(root),
+        usedRecords: photoUsage.records,
+        ...(photoUsage.hasUnmatchableLegacy ? { chain: DEFAULT_GENERATION_PROVIDER_CHAIN } : {}),
         deadlineAt,
         onProviderAttempt,
       },

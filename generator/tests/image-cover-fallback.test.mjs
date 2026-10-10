@@ -292,11 +292,13 @@ test('the generator lets the governed chain reach licensed photos and keeps the 
   const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   const engine = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/article-cover-engine.mjs'), 'utf8');
   assert.doesNotMatch(engine, /maxAttempts:\s*1/);
-  assert.match(engine, /usedRecords: usedArticlePhotoRecords\(root\)/);
+  assert.match(engine, /usedRecords: photoUsage\.records/);
   assert.match(engine, /readCreditRecords\(root\)/);
   assert.match(engine, /export function legacyPhotoRecordKey\(file, record\)/);
   assert.match(engine, /legacyPhotoRecordKey\(file, record\)/);
-  assert.match(engine, /legacy-photo:/);
+  assert.doesNotMatch(engine, /legacy-photo:/);
+  assert.match(engine, /hasUnmatchableLegacy/);
+  assert.match(engine, /chain: DEFAULT_GENERATION_PROVIDER_CHAIN/);
   assert.match(engine, /topic: articleImageTopic/);
   assert.match(engine, /place: articleImagePlace\(articleData, area\)/);
   assert.match(engine, /keywords: articleImageKeywords/);
