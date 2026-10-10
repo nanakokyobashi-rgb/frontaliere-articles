@@ -40,7 +40,8 @@ fs.writeFileSync(SOCKET, '');
 for (const key of [
   'DEEPL_API_KEY_2', 'AZURE_TRANSLATOR_KEY_2', 'GSC_CLIENT_ID', 'GSC_CLIENT_SECRET',
   'GSC_REFRESH_TOKEN', 'HF_TOKEN', 'HUGGINGFACE_API_KEY', 'LIBRETRANSLATE_SELF_HOSTED_URL',
-  'MT_LOCAL_OPUSMT', 'ENABLE_CODEX_ARTICLE_FALLBACK', 'AI_MODELS_PREFER', 'AI_MODELS_FORCE_CHAIN',
+  'GOOGLE_APPLICATION_CREDENTIALS', 'MT_LOCAL_OPUSMT', 'ENABLE_CODEX_ARTICLE_FALLBACK',
+  'AI_MODELS_PREFER', 'AI_MODELS_FORCE_CHAIN',
   'FREE_TRANSLATE_CODEX_MAX_CALLS', 'FREE_TRANSLATE_CODEX_MAX_MS', 'FREE_TRANSLATE_CODEX_LANES',
   'FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS',
 ]) delete process.env[key];
@@ -431,6 +432,76 @@ test('il budget di chiamate ferma il tier con una riga sola', async () => {
     assert.ok(summary.lines.some((l) => l.includes('Codex Luna Max: 2/2 calls')));
   } finally {
     delete process.env.FREE_TRANSLATE_CODEX_MAX_CALLS;
+  }
+});
+
+test('codexBatchBoundary/codexFallbackAfterBudget/codexLaneBudget: 32 admission fisiche condivise tra EN/DE/FR', async () => {
+  const previousPremium = { deepl: premium.deepl, azure: premium.azure };
+  premium.deepl = 456;
+  premium.azure = 401;
+  process.env.FREE_TRANSLATE_CODEX_MAX_CALLS = '32';
+  process.env.FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS = '5';
+  try {
+    await withLanes(1, async () => {
+      const locales = ['en', 'de', 'fr'];
+      const localeNames = { English: 'en', German: 'de', French: 'fr' };
+      const localeCalls = { en: 0, de: 0, fr: 0 };
+      const calls = [];
+      let retryAdmissionAtCap = null;
+      setCodexTranslateCallForTests(async (messages, opts) => {
+        calls.push({ messages, opts });
+        const callNumber = calls.length;
+        const system = messages.find((message) => message.role === 'system').content;
+        const targetLang = localeNames[/to (English|German|French)/.exec(system)?.[1]];
+        localeCalls[targetLang] += 1;
+        const items = batchItems(messages);
+
+        if (callNumber === 32) {
+          assert.ok(items, 'l’ultima admission deve restare un batch intero');
+          assert.equal(items.length, 5);
+          retryAdmissionAtCap = opts.onCodexTransportRetry();
+          assert.equal(retryAdmissionAtCap, false, 'il retry non deve superare il budget fisico');
+          throw new Error('retry Codex rifiutato al confine del budget');
+        }
+
+        if (items) {
+          return JSON.stringify({ items: items.map(({ id, text }) => ({ id, text: translationOf(text) })) });
+        }
+        const user = messages.find((message) => message.role === 'user').content;
+        const source = /^BEGIN_TEXT_[A-Z0-9]{8}\n([\s\S]*)\nEND_TEXT_[A-Z0-9]{8}$/.exec(user)?.[1];
+        assert.ok(source, 'la prima admission deve essere una richiesta singola integra');
+        return translationOf(source);
+      });
+
+      const texts = numbered(180);
+      const tasks = texts.map((text, index) => freeTranslate({
+        text,
+        sourceLang: 'it',
+        targetLang: locales[index % locales.length],
+        fieldType: 'description',
+      }));
+      const { value, lines } = await captureLog(() => Promise.all(tasks));
+      const codexResults = value.filter((result, index) => result === translationOf(texts[index])).length;
+      const fallbackResults = value.filter((result) => result.startsWith('MYMEMORY ')).length;
+      const batchSizes = calls.map(({ messages }) => batchItems(messages)?.length ?? 1);
+
+      assert.equal(calls.length, 32, 'nessuna 33a richiesta fisica deve raggiungere il broker');
+      assert.equal(getCascadeStats().codexTranslation.calls, 32, 'il retry rifiutato non deve consumare una 33a admission');
+      assert.equal(retryAdmissionAtCap, false);
+      assert.equal(batchSizes.length, 32);
+      assert.equal(batchSizes[0], 1);
+      assert.ok(batchSizes.slice(1).every((size) => size === 5), 'i batch ammessi restano atomici fino al confine');
+      assert.equal(batchSizes.reduce((sum, size) => sum + size, 0), 156);
+      assert.deepEqual(localeCalls, { en: 11, de: 11, fr: 10 }, 'le tre lingue consumano un solo ledger, non tre budget per-locale');
+      assert.equal(codexResults, 151, 'il batch intero al confine non deve esporre traduzioni parziali');
+      assert.equal(fallbackResults, 29, 'fallback dopo l’esaurimento effettivo del budget');
+      assert.equal(lines.filter((line) => line.includes('budget di 32 chiamate esaurito')).length, 1);
+    });
+  } finally {
+    premium.deepl = previousPremium.deepl;
+    premium.azure = previousPremium.azure;
+    for (const key of ['FREE_TRANSLATE_CODEX_MAX_CALLS', 'FREE_TRANSLATE_CODEX_BATCH_MAX_TEXTS']) delete process.env[key];
+    setCodexTranslateCallForTests(null);
   }
 });
 
