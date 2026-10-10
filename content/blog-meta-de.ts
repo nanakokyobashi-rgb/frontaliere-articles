@@ -12934,6 +12934,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-10.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 10. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-10.seoDescription': 'Grenzgänger-Bulletin vom 10. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-10.ogDescription': 'Die Zahlen vom 10. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: Privater Kanal, zahlt der Eigentümer',
+    'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: Der Staatsrat hat entschieden, dass die Sanierung der privaten Kanalisation nach der von der Gemeinde Capriasca bezahlten Reparatur dem Eigentümer obliegt.',
+    'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Private Mauer in Tesserete bei der Kontrolle einer Kanalisation',
 };
 
 export default blogMetaDe;

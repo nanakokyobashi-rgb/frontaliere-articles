@@ -104904,6 +104904,44 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tesserete-canalizzazione-privata': {
+    title: 'Tesserete: canalizzazione privata, paga il proprietario',
+    description: 'Tesserete: il Consiglio di Stato attribuisce al proprietario i costi della bonifica della canalizzazione privata, riparata dal Comune di Capriasca.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tesserete, canalizzazione, privata, paga',
+    ogTitle: 'Tesserete: canalizzazione privata, paga il proprietario',
+    ogDescription: 'A Tesserete un liquido maleodorante usciva dal muro di una proprietà. Il Comune di Capriasca ha pagato la riparazione durante il ricorso, ma il Consiglio di Stato ha poi attribuito al privato i costi della canalizzazione.',
+    canonicalPath: '/articoli-frontaliere/tesserete-canalizzazione-privata/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tesserete: canalizzazione privata, paga il proprietario",
+      "description": "Tesserete: il Consiglio di Stato attribuisce al proprietario i costi della bonifica della canalizzazione privata, riparata dal Comune di Capriasca.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tesserete-canalizzazione-privata.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Muro privato a Tesserete durante un controllo della canalizzazione"
+      },
+      "datePublished": "2026-10-10T11:29:39+00:00",
+      "dateModified": "2026-10-10T11:29:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tesserete-canalizzazione-privata/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;

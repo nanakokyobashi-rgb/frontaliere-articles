@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/verita-immobiliari": "verita-immobiliari-ticino",
   "https://cassa-disoccupazione.unia.ch.ddev.site": "cassa-disoccupazione-unia",
   "https://unia.ch/it/salari-ccl/salari-minimi-legali": "salari-minimi-legali-ticino",
   "https://www.ocst.ch/aderisci-al-sindacato/associarsi-conviene": "vantaggi-associati-ocst-frontalieri",
@@ -2328,6 +2327,11 @@
   "https://comozero.it/attualita/provincia-di-como-tre-furti-nello-stesso-ristorante-fermato-un-20enne": {
     "articleId": "tre-furti-villa-guardia",
     "ts": "2026-10-10T10:37:56.292Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/la1/programmi/informazione/patti-chiari/cittadini-contro-autorit%c3%a0-alla-fine-chi-ha-pagato--4135691.html": {
+    "articleId": "tesserete-canalizzazione-privata",
+    "ts": "2026-10-10T11:29:39.643Z",
     "keyForm": 2
   }
 }

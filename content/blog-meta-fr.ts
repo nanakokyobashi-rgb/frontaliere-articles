@@ -12937,6 +12937,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-10.imageAlt': 'Les chiffres du jour pour les frontaliers – 10 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-10-10.seoDescription': 'Bulletin du frontalier du 10 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-10.ogDescription': 'Les chiffres du 10 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.tesserete-canalizzazione-privata.title': 'Carte : canalisation privée, paie le propriétaire',
+    'blog.article.tesserete-canalizzazione-privata.excerpt': 'Carte : le Conseil d\'État a décidé que la remise en état de la canalisation privée incombait au propriétaire, après réparation payée par la municipalité de Capriasca.',
+    'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Mur privé à Tesserete lors du contrôle d\'une canalisation',
 };
 
 export default blogMetaFr;
