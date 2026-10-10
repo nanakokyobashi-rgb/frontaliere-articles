@@ -12956,6 +12956,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lugano-bienne-vittoria-2026.title': 'Lugano beats Bienne 3-2, third positive result',
     'blog.article.lugano-bienne-vittoria-2026.excerpt': 'Lugano wins 3-2 at the Tissot Arena Third consecutive unbeaten result for the Bianconeri Brace by Innala, who has reached seven goals this season Seven points collected',
     'blog.article.lugano-bienne-vittoria-2026.imageAlt': 'HC Lugano celebrates the winning goal against Bienne at the Tissot Arena',
+    'blog.article.ambri-piotta-berna-abols.title': 'Ambrì Piotta beaten in overtime by Abols\'s goal',
+    'blog.article.ambri-piotta-berna-abols.excerpt': 'Ambrì Piotta defeated 2-1 by Bern in overtime Joly puts the blue-and-whites ahead in a 5-on-3 Fourth consecutive home defeat for Ambrì Abols scores',
+    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Ambrì Piotta hockey game against Bern at the Gottardo Arena',
 };
 
 export default blogMetaEn;

@@ -13,6 +13,10 @@
     "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-09-octobre-18-octobre-2026": {
       "section": "canton-vd",
       "ts": 1791650887973
+    },
+    "canton-vd::https://www.lausanne.ch/apps/actualites/index.php?actu_id=90520": {
+      "section": "canton-vd",
+      "ts": 1791666725569
     }
   }
 }

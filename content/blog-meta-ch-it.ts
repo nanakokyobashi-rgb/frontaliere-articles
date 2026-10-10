@@ -8059,7 +8059,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.treni-vd-ritorno-normale.imageAlt': 'Treno svizzero su una linea ferroviaria del Canton Vaud',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.title': 'Tox Info: aumento chiamate all’intelligenza artificiale',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.excerpt': 'Il 145 ha gestito quasi 45\'000 consulenze Le chiamate sono cresciute del 4,6% Medicinali 36%; pulizia domestica 23% Finanziamento sicuro entro fine 2027 Numero',
-    'blog.article.tox-info-chiamate-intelligenza-artificiale.imageAlt': 'Persona che consulta il servizio Tox Info al numero 145 mentre utilizza uno smartphone e un laptop con intelligenza artificiale in una cucina svizzera',
+    'blog.article.tox-info-chiamate-intelligenza-artificiale.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;
