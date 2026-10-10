@@ -12960,7 +12960,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lugano-bienne-vittoria-2026.imageAlt': 'HC Lugano célèbre le but gagnant contre Bienne à la Tissot Arena',
     'blog.article.ambri-piotta-berna-abols.title': 'Ambrì Piotta bafoué à l\'overtime par le réseau d\'Abols',
     'blog.article.ambri-piotta-berna-abols.excerpt': 'Ambrì Piotta vaincu 2-1 par Berne à l\'overtime Joly mène les blancs bleus en 5 contre 3 Quatrième défaite consécutive interne pour Ambrì Abols signature',
-    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Match de hockey d\'Ambrì Piotta contre Berne à la Gottardo Arena',
+    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

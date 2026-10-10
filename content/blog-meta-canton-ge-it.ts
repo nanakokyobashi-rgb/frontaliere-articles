@@ -23,10 +23,10 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.cantieri-mobilita-ginevra.title': 'Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026',
     'blog.article.cantieri-mobilita-ginevra.excerpt': 'Nuovi cantieri nel Canton Ginevra partiranno il 12 ottobre 2026 e avranno un impatto sugli spostamenti.',
-    'blog.article.cantieri-mobilita-ginevra.imageAlt': 'Nuovi cantieri nel Canton Ginevra con impatto sugli spostamenti dal 12 ottobre 2026.',
+    'blog.article.cantieri-mobilita-ginevra.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.indagini-imprese-ginevrine.title': 'Indagini congiunturali nelle imprese ginevrine',
     'blog.article.indagini-imprese-ginevrine.excerpt': 'La Repubblica e il Cantone di Ginevra segnala indagini congiunturali di settembre nelle imprese ginevrine.',
-    'blog.article.indagini-imprese-ginevrine.imageAlt': 'Indagini congiunturali nelle imprese ginevrine',
+    'blog.article.indagini-imprese-ginevrine.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonGeIt;

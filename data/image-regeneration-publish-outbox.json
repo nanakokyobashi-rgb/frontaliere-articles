@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "cantieri-mobilita-ginevra",
+      "section": "canton-ge"
+    },
+    {
+      "articleId": "indagini-imprese-ginevrine",
+      "section": "canton-ge"
+    },
+    {
+      "articleId": "ambri-piotta-berna-abols",
+      "section": "frontaliere"
+    }
+  ]
+}
