@@ -1903,7 +1903,7 @@
       "reason": "Provider host-side dei due slot pubblicitari delle pagine hub cantonali: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "0a1153a5d9c64381",
+        "corpus": "9cc7f520f28c72bb",
         "alignedAt": "2026-10-10"
       }
     },
@@ -1935,7 +1935,7 @@
       "reason": "Test node:test del provider host degli slot hub: fissa i contratti di slot, formato, placement, responsive behavior e min-height che impedisce il layout shift. E' specifico al markup/configurazione del corpus e non ha un gemello da pubblicare via HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "1c75eb33e71502e0",
+        "corpus": "d8cb54307e585b4e",
         "alignedAt": "2026-10-10"
       }
     },
