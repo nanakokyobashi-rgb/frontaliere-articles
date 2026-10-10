@@ -23,7 +23,7 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'Vue de la mairie de Buchs avec les documents budgétaires sur une table, arrière-plan campagne argovienne',
     'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS en Argovie : coûts d\'assainissement encore incertains',
     'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'En Argovie, seuls deux tiers des communes ont répondu au sujet des PFAS.',
-    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Zone industrielle en Argovie liée à l\'évaluation des assainissements PFAS',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonAgFr;

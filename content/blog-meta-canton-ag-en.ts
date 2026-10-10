@@ -23,7 +23,7 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'View of Buchs town hall with budget documents on a table, Aargau countryside background',
     'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS in Aargau: remediation costs still uncertain',
     'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'In Aargau, only two-thirds of the municipalities responded about PFAS.',
-    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Industrial area in Aargau linked to the assessment of PFAS remediation',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonAgEn;
