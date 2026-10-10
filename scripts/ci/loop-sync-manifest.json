@@ -158,7 +158,7 @@
     {
       "path": "scripts/ci/article-publication-observer.mjs",
       "mode": "corpus-only",
-      "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
+      "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dei blocker di preparazione, e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
       "baseline": {
         "site": null,
         "corpus": "24cb5ee74cbd396b",
