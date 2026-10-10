@@ -11,6 +11,7 @@ import {
   classifyPublicationLag,
   observePublicationLag,
   parseChangedBodyLog,
+  parseRegistryRecord,
   parsePageObservation,
   runObserver,
 } from '../../scripts/ci/article-publication-observer.mjs';
@@ -23,6 +24,27 @@ const currentDate = '2026-10-06T00:00:00Z';
 // Mezzogiorno del giorno prima: senza dubbio precedente al 2026-10-05 in ogni fuso.
 const staleDate = '2026-10-04T12:00:00Z';
 const ownImage = '/images/blog/article.webp';
+
+test('il registry observer legge solo i campi top-level dentro una voce bilanciata', () => {
+  const source = `const ARTICLES = [{
+    id: 'article',
+    metadata: { updatedAt: '1900-01-01', date: '1900-01-01', image: '/images/nested.webp' },
+    updatedAt: '2026-10-05',
+    date: '2026-10-04',
+    image: '/images/blog/article.webp',
+  }, {
+    id: 'second',
+    date: '2026-10-03',
+    image: '/images/blog/second.webp',
+  }];`;
+
+  assert.deepEqual(parseRegistryRecord(source, 'article'), {
+    articleId: 'article',
+    updatedAt: '2026-10-05',
+    date: '2026-10-04',
+    image: '/images/blog/article.webp',
+  });
+});
 
 function page(date, image = ownImage) {
   return `<meta property="og:image" content="https://frontaliereticino.ch${image}"><meta property="article:modified_time" content="${date}">`;

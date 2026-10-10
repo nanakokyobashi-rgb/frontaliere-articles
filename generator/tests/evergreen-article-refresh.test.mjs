@@ -23,6 +23,7 @@ test('evergreen refresh: updatedAt non arretra davanti a uno snapshot vecchio', 
       "const articles = [\n" +
       "  {\n" +
       "    id: 'demo-id',\n" +
+      "    metadata: { date: '1900-01-01', updatedAt: '1900-01-02' },\n" +
       "    date: '2026-09-01T12:00:00Z',\n" +
       "    updatedAt: '2026-09-15',\n" +
       "  },\n" +

@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
@@ -62,6 +63,45 @@ function isAtOrAfter(stored, candidate) {
   return !Number.isNaN(storedMs) && !Number.isNaN(candidateMs) && storedMs >= candidateMs;
 }
 
+function literalRange(source, property) {
+  if (!property) return null;
+  const raw = source.slice(property.valueStart, property.valueEnd);
+  const value = raw.trim();
+  if (!value) return null;
+  const offset = raw.indexOf(value);
+  return {
+    start: property.valueStart + offset,
+    end: property.valueStart + offset + value.length,
+    value,
+  };
+}
+
+function replaceLiteral(source, property, nextValue) {
+  const range = literalRange(source, property);
+  if (!range) return null;
+  return source.slice(0, range.start) + nextValue + source.slice(range.end);
+}
+
+function insertUpdatedAt(source, record, dateProperty, todayIso) {
+  const close = record.end - 1;
+  const newline = source.indexOf('\n', dateProperty.valueEnd);
+  const lineStart = source.lastIndexOf('\n', dateProperty.valueStart - 1) + 1;
+  const indent = source.slice(lineStart, dateProperty.valueStart).match(/^[ \t]*/u)?.[0] ?? '';
+  if (newline >= 0 && newline < close) {
+    const breakEnd = source[newline + 1] === '\n' ? newline + 2 : newline + 1;
+    const lineBreak = source.slice(newline, breakEnd);
+    return source.slice(0, breakEnd)
+      + `${indent}updatedAt: '${todayIso}',${lineBreak}`
+      + source.slice(breakEnd);
+  }
+
+  const trailing = source.slice(0, close).match(/[ \t]*$/u)?.[0] ?? '';
+  const insertAt = close - trailing.length;
+  return source.slice(0, insertAt)
+    + `, updatedAt: '${todayIso}'`
+    + source.slice(insertAt);
+}
+
 /** Bump (or insert) `updatedAt` on an article registry entry so sitemap lastmod reflects the refresh. */
 export function bumpUpdatedAt(
   id,
@@ -72,32 +112,34 @@ export function bumpUpdatedAt(
   readFile = readFileSync,
 ) {
   const file = path.join(repoRoot, corpusPath(registryFile));
-  let src = readFile(file, 'utf-8');
-  const entryRe = new RegExp(`(\\n([ \\t]*)id: '${id}',[\\s\\S]*?)(\\n[ \\t]*\\},)`);
-  const m = src.match(entryRe);
-  if (!m) return false;
-  const indent = m[2];
-  let block = m[1];
+  const src = readFile(file, 'utf-8');
+  const record = scanTopLevelArticleRecords(src).find((entry) => entry.id === id);
+  if (!record) return false;
+
+  const dateProperty = record.properties.get('date');
+  const date = readTopLevelString(record, 'date');
   // updatedAt is stored date-only (no time-of-day); if the entry's original
   // `date` timestamp falls later the same calendar day (article registered
   // earlier today), a midnight-anchored updatedAt would parse as *before* it —
   // an incoherent freshness signal (google-news-compliance.test.ts). Same
   // clamp rationale as bumpDateModified below; skip the bump in that
   // same-day case instead of writing a value that can never be >= `date`.
-  const dateMatch = block.match(/\n[ \t]*date: '([^']*)',/);
-  if (dateMatch && Date.parse(`${todayIso}T00:00:00Z`) < Date.parse(dateMatch[1])) {
+  if (date !== null && Date.parse(`${todayIso}T00:00:00Z`) < Date.parse(date)) {
     return true;
   }
-  const currentMatch = block.match(/updatedAt: '([^']*)'/);
-  if (currentMatch && isAtOrAfter(currentMatch[1], todayIso)) return true;
-  if (/updatedAt:/.test(block)) {
-    block = block.replace(/updatedAt: '[^']*'/, `updatedAt: '${todayIso}'`);
-  } else {
-    block = block.replace(/(\n[ \t]*date: '[^']*',)/, `$1\n${indent}updatedAt: '${todayIso}',`);
+  const updatedAtProperty = record.properties.get('updatedAt');
+  if (updatedAtProperty) {
+    const current = readTopLevelString(record, 'updatedAt');
+    if (current === null) return false;
+    if (isAtOrAfter(current, todayIso)) return true;
+    const nextSource = replaceLiteral(src, updatedAtProperty, `'${todayIso}'`);
+    if (nextSource === null) return false;
+    writeFile(file, nextSource);
+    return true;
   }
-  if (block === m[1]) return false;
-  src = src.replace(m[1], block);
-  writeFile(file, src);
+
+  if (!dateProperty || date === null) return false;
+  writeFile(file, insertUpdatedAt(src, record, dateProperty, todayIso));
   return true;
 }
 

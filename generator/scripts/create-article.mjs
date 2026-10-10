@@ -14411,10 +14411,6 @@ function loadExistingArticleSummaries() {
 // readAllSectionsMetaIt — le guide-mestiere vengono generate in entrambe le
 // sezioni e un gemello nella sezione sorella deve contare.
 //
-// Il regex accetta fino a 300 caratteri fra `id:` e `date:` perché nel
-// registro fra i due campi c'è `category:`; è ancorato a `id:` in modo che
-// una voce senza `date` non rubi la data della voce successiva (il primo
-// match per id vince e non si sovrascrive).
 let _existingArticleDatesCache = null;
 function loadExistingArticleDates() {
   if (_existingArticleDatesCache !== null) return _existingArticleDatesCache;
@@ -14424,10 +14420,9 @@ function loadExistingArticleDates() {
     try {
       src = read(cfg.registryFile);
     } catch { continue; } // registro assente (sezione non ancora popolata)
-    const re = /id:\s*'([^']+)',[\s\S]{0,300}?date:\s*'([^']+)'/g;
-    let m;
-    while ((m = re.exec(src)) !== null) {
-      if (!dates.has(m[1])) dates.set(m[1], m[2]);
+    for (const record of scanTopLevelArticleRecords(src)) {
+      const date = readTopLevelString(record, 'date');
+      if (date && !dates.has(record.id)) dates.set(record.id, date);
     }
   }
   _existingArticleDatesCache = dates;

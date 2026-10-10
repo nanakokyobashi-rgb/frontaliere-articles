@@ -167,6 +167,7 @@ import { promisify } from 'node:util';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../lib/article-registry-reader.mjs';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
 import {
@@ -2341,16 +2342,26 @@ export function collectCorpus(repoRoot = REPO_ROOT, now = Date.now()) {
     for (const m of src.matchAll(re)) if (!out.has(m[1])) out.set(m[1], pick(m));
     return out;
   };
+  const readRegistryDates = (rel) => {
+    const abs = path.join(repoRoot, 'content', rel);
+    if (!fs.existsSync(abs)) return new Map();
+    const out = new Map();
+    const src = fs.readFileSync(abs, 'utf8');
+    for (const record of scanTopLevelArticleRecords(src)) {
+      const date = readTopLevelString(record, 'date');
+      if (date && !out.has(record.id)) out.set(record.id, date);
+    }
+    return out;
+  };
   const titleRe = /'blog\.article\.([^.']+)\.title':\s*'((?:[^'\\]|\\.)*)'/g;
-  const dateRe = /id:\s*'([^']+)',[\s\S]{0,300}?date:\s*'([^']+)'/g;
 
   const titles = new Map([
     ...readMap('blog-meta-it.ts', titleRe, (m) => m[2].replace(/\\'/g, "'")),
     ...readMap('blog-meta-ch-it.ts', titleRe, (m) => m[2].replace(/\\'/g, "'")),
   ]);
   const dates = new Map([
-    ...readMap('blog-articles-data.ts', dateRe, (m) => m[2]),
-    ...readMap('swiss-articles-data.ts', dateRe, (m) => m[2]),
+    ...readRegistryDates('blog-articles-data.ts'),
+    ...readRegistryDates('swiss-articles-data.ts'),
   ]);
 
   if (titles.size === 0 || dates.size === 0) {
