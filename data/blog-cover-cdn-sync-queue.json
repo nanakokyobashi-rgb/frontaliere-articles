@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-uri-soglia-salariale-controlli.webp",
+      "sha256": "90e36c9c28ef7108c8a7c777867203c05111e564a4ca1ff6c13dbc8c75351f5c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-uri-soglia-salariale-controlli-480w.webp",
+      "sha256": "2bb9286f82ee2833a2c1e4174ec69419c98656bcefc5254849c4bc0bd292b403"
+    }
+  ]
 }
