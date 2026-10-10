@@ -38,8 +38,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  countCheckFailedPins,
   REUSABLE_PIN_STATE,
   localWorkflowSources,
+  noActionableSummary,
   reusablePinResults,
   reusablePinVerdict,
   siteReusablePins,
@@ -151,6 +153,11 @@ test('reusablePinResults: una lettura fallita non e\' un verdetto', async () => 
   });
   assert.equal(row.state, 'check-failed');
   assert.equal(row.actionable, false);
+  assert.equal(countCheckFailedPins([row]), 1);
+  assert.match(noActionableSummary([row]), /1 pin di workflow riutilizzabili non sono stati verificati/);
+  assert.match(noActionableSummary([row]), /non certifica l'allineamento/);
+  assert.doesNotMatch(noActionableSummary([row]), /Niente che richieda una decisione/);
+  assert.match(noActionableSummary([]), /Niente che richieda una decisione/);
 });
 
 // ── Il commit pinnato deve essere raggiungibile, non solo leggibile ──────────
