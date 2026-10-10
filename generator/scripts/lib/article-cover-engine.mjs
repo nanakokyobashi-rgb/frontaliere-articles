@@ -32,24 +32,68 @@ export {
  *
  * The engine's collision gate compares this value with the provider's real
  * `sourcePageUrl`. A local cover/file key is not a substitute: it would look
- * like a used record while matching no provider candidate. Missing or
- * malformed URLs therefore return null and are handled by the caller's
- * fail-closed provider policy. The old inline call shape
+ * like a used record while matching no provider candidate. Missing, malformed,
+ * or provider-mismatched URLs therefore return null and are handled by the
+ * caller's fail-closed provider policy. The old inline call shape
  * `usedRecords: usedArticlePhotoRecords(root)` could not carry that policy
  * decision alongside the comparable records, so the adapter now resolves the
  * two values together before calling the engine.
  */
+const LEGACY_PHOTO_PAGE_RULES = Object.freeze({
+  wikimedia: Object.freeze({
+    origin: 'https://commons.wikimedia.org',
+    pathPrefixes: Object.freeze(['/wiki/File:']),
+  }),
+  pexels: Object.freeze({
+    origin: 'https://www.pexels.com',
+    pathPrefixes: Object.freeze(['/photo/']),
+  }),
+  pixabay: Object.freeze({
+    origin: 'https://pixabay.com',
+    pathPrefixes: Object.freeze(['/photos/', '/users/']),
+  }),
+});
+
+function providerPageUrl(provider, value) {
+  if (typeof value !== 'string') return null;
+  const pageUrl = value.trim();
+  if (!pageUrl) return null;
+
+  let parsed;
+  try {
+    parsed = new URL(pageUrl);
+    decodeURIComponent(parsed.pathname);
+  } catch {
+    return null;
+  }
+
+  const rule = LEGACY_PHOTO_PAGE_RULES[provider];
+  if (!rule
+    || parsed.protocol !== 'https:'
+    || parsed.origin !== rule.origin
+    || parsed.username
+    || parsed.password
+    || parsed.port
+    || parsed.search
+    || parsed.hash) {
+    return null;
+  }
+
+  const path = parsed.pathname.toLowerCase();
+  const prefix = rule.pathPrefixes.find((candidate) => path.startsWith(candidate.toLowerCase()));
+  if (!prefix) return null;
+  const suffix = parsed.pathname.slice(prefix.length);
+  if (!suffix || /^\/+$/u.test(suffix)) return null;
+  return pageUrl;
+}
+
 export function legacyPhotoRecordKey(file, record) {
   void file;
-  const source = record?.source === 'licensed-photo'
-    ? record.photo
-    : record?.source === 'wikimedia-commons'
-      ? record.commons
-      : null;
+  const source = record?.source === 'licensed-photo' ? record.photo : record?.source === 'wikimedia-commons' ? record.commons : null;
   if (!source) return null;
 
-  const pageUrl = String(source.pageUrl || '').trim();
-  return /^https:\/\//i.test(pageUrl) ? pageUrl : null;
+  const provider = record?.source === 'licensed-photo' ? source.provider : 'wikimedia';
+  return providerPageUrl(provider, source.pageUrl);
 }
 
 function usedArticlePhotoRecords(root) {

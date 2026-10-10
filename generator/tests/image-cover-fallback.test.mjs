@@ -296,6 +296,13 @@ test('the generator lets the governed chain reach licensed photos and keeps the 
   assert.match(engine, /readCreditRecords\(root\)/);
   assert.match(engine, /export function legacyPhotoRecordKey\(file, record\)/);
   assert.match(engine, /legacyPhotoRecordKey\(file, record\)/);
+  assert.match(engine, /const LEGACY_PHOTO_PAGE_RULES/);
+  assert.match(engine, /parsed = new URL\(pageUrl\)/);
+  assert.match(engine, /decodeURIComponent\(parsed\.pathname\)/);
+  assert.match(engine, /parsed\.origin !== rule\.origin/);
+  assert.match(engine, /pathPrefixes/);
+  assert.match(engine, /parsed\.search/);
+  assert.match(engine, /parsed\.hash/);
   assert.doesNotMatch(engine, /legacy-photo:/);
   assert.match(engine, /hasUnmatchableLegacy/);
   assert.match(engine, /chain: DEFAULT_GENERATION_PROVIDER_CHAIN/);
