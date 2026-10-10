@@ -57,7 +57,8 @@
  * — the exact failure `seo-description-cap.test.mjs` exists to stop, and it
  * already happened twice (see that file's header).
  *
- * `SEO_DESCRIPTION_MAX`/`SEO_OG_DESCRIPTION_MAX` below are NOT imported from
+ * `SEO_DESCRIPTION_MIN` is imported from the shared contract so registration
+ * and refresh enforce the same floor. `SEO_DESCRIPTION_MAX`/`SEO_OG_DESCRIPTION_MAX` below are NOT imported from
  * create-article.mjs: importing that module pulls in its static `jsdom`
  * dependency, which this module deliberately stays free of (see above). They
  * are the same two numbers, kept in sync by
@@ -76,6 +77,7 @@ import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { assertPlainDescriptionFields } from './article-excerpt.mjs';
+import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './seo-description-contract.mjs';
 import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
@@ -353,6 +355,15 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
 
   try {
     const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
+    if (typeof clampedSeoTexts?.description === 'string' && clampedSeoTexts.description.trim() !== '') {
+      // This path rewrites an already-published SEO entry. No trustworthy
+      // fallback is available here, so reject a short result before any file
+      // write and leave the previous public value intact.
+      assertSeoDescriptionMinimum(clampedSeoTexts.description, {
+        id,
+        sourceDescriptionLength: seoTexts?.description?.length,
+      });
+    }
     let seoUpdate = null;
     const localeUpdates = [];
 

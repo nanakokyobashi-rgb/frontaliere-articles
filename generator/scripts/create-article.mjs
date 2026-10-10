@@ -336,6 +336,7 @@ import {
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
+import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
@@ -19356,7 +19357,6 @@ export function buildArticlePublishedUrls(data) {
  * above 170. The writer requires 80 characters of article-specific copy and
  * keeps the 160-character cap as headroom below the site's maximum.
  */
-const SEO_DESCRIPTION_MIN = 80;
 const SEO_DESCRIPTION_MAX = 160;
 
 /**
@@ -19468,23 +19468,24 @@ function ensureSeoDescriptionMinimum(data) {
   const excerpt = stripExcerptMarkdown(
     typeof data?.content?.it?.excerpt === 'string' ? data.content.it.excerpt : '',
   );
-
-  // Validate the value that will actually be written, not only the source
-  // candidate. Clause-safe truncation can peel a long tail back below the
-  // floor — or return an empty string when its first token alone exceeds the
-  // cap. Try the real Italian excerpt before failing closed, and never mutate
-  // the SEO field until a post-truncation candidate has passed the floor.
-  for (const candidate of [description, excerpt]) {
-    if (candidate.length < SEO_DESCRIPTION_MIN) continue;
-    const truncated = truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX);
-    if (truncated.length < SEO_DESCRIPTION_MIN) continue;
-    seo.description = truncated;
-    return truncated;
+  const candidates = [description, excerpt]
+    .filter((candidate) => candidate.length >= SEO_DESCRIPTION_MIN)
+    .map((candidate) => truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX));
+  const candidate = candidates.find((bounded) => bounded.trim().length >= SEO_DESCRIPTION_MIN);
+  if (!candidate) {
+    assertSeoDescriptionMinimum(candidates[0] ?? '', {
+      id: data?.id || 'unknown',
+      sourceDescriptionLength: description.length,
+      sourceExcerptLength: excerpt.length,
+    });
   }
 
-  throw new Error(
-    `SEO description for article "${data?.id || 'unknown'}" must contain at least ${SEO_DESCRIPTION_MIN} characters of article-specific text after clause-safe truncation (description: ${description.length}, excerpt: ${excerpt.length})`,
-  );
+  seo.description = assertSeoDescriptionMinimum(candidate, {
+    id: data?.id || 'unknown',
+    sourceDescriptionLength: description.length,
+    sourceExcerptLength: excerpt.length,
+  });
+  return seo.description;
 }
 
 function assertArticleDescriptionsArePlain(data) {

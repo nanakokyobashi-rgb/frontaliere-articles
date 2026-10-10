@@ -43,10 +43,14 @@ import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/da
 import { sanitizePromptPlaceholders } from '../scripts/lib/prompt-placeholder-guard.mjs';
 import { bumpDateModified } from '../scripts/lib/evergreen-article-refresh.mjs';
 import { registerLockPath } from '../scripts/lib/register-lock.mjs';
+import { SEO_DESCRIPTION_MIN } from '../scripts/lib/seo-description-contract.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
 const CREATE_ARTICLE = path.join(HERE, '..', 'scripts', 'create-article.mjs');
+const VALID_SEO_DESCRIPTION =
+  'I dati quotidiani sui valichi, i prezzi dei carburanti e gli annunci di lavoro in Svizzera sono verificati con fonti aggiornate.';
+assert.ok(VALID_SEO_DESCRIPTION.length >= SEO_DESCRIPTION_MIN);
 
 // ── 1a. upsertLocaleMetaFields ──────────────────────────────────────────────
 
@@ -314,7 +318,7 @@ test('refreshDescriptiveTexts: entry SEO duplicata — rifiuta prima di scrivere
       () => refreshDescriptiveTexts(
         'demo-id',
         { it: { excerpt: 'Nuovo excerpt' } },
-        { description: 'Nuova description' },
+        { description: VALID_SEO_DESCRIPTION },
         { repoRoot: root },
       ),
       /duplicata.*refresh rifiutato/,
@@ -390,7 +394,7 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
     const { changed, touched } = refreshDescriptiveTexts(
       'demo-id',
       localeTexts,
-      { description: 'SERP it', ogDescription: 'Social it' },
+      { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social it' },
       { repoRoot: root },
     );
     assert.equal(changed, true);
@@ -402,9 +406,9 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
     assert.ok(en.includes("'blog.article.demo-id.ogDescription': 'Social en',"));
 
     const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
-    assert.ok(seo.includes("description: 'SERP it',"));
+    assert.ok(seo.includes(`description: '${VALID_SEO_DESCRIPTION}',`));
     assert.ok(seo.includes("ogDescription: 'Social it',"));
-    assert.ok(seo.includes('"description": "SERP it"'));
+    assert.ok(seo.includes(`"description": "${VALID_SEO_DESCRIPTION}"`));
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -454,7 +458,7 @@ test('refreshDescriptiveTexts prende il section lock prima del read-modify-write
     refreshDescriptiveTexts(
       'demo-id',
       { it: { excerpt: 'Estratto sotto lock' } },
-      { description: 'SERP sotto lock' },
+      { description: VALID_SEO_DESCRIPTION },
       {
         repoRoot: root,
         writeFile(file, content) {
@@ -486,7 +490,7 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
     const result = refreshDescriptiveTexts(
       'demo-id',
       { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
-      { description: 'SERP staged', ogDescription: 'Social staged' },
+      { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
       { repoRoot: root, readFile: read, writeFile: write },
     );
 
@@ -498,7 +502,7 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
       refreshDescriptiveTexts(
         'demo-id',
         { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
-        { description: 'SERP staged', ogDescription: 'Social staged' },
+        { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
         { repoRoot: root, readFile: read, writeFile: write },
       ).changed,
       false,
@@ -529,7 +533,7 @@ test('refreshDescriptiveTexts: un writer staged che possiede già il lock lo con
     refreshDescriptiveTexts(
       'demo-id',
       { it: { excerpt: 'Estratto sotto transazione esterna' } },
-      { description: 'SERP sotto transazione esterna' },
+      { description: VALID_SEO_DESCRIPTION },
       {
         repoRoot: root,
         writeFile(file, content) { staged.set(file, content); },
@@ -553,7 +557,7 @@ test('refreshDescriptiveTexts: un secondo giro con gli stessi testi non scrive n
     for (const locale of ['it', 'en', 'de', 'fr']) {
       localeTexts[locale] = { excerpt: `E ${locale}`, seoDescription: `S ${locale}`, ogDescription: `O ${locale}` };
     }
-    const seoTexts = { description: 'S it', ogDescription: 'O it' };
+    const seoTexts = { description: VALID_SEO_DESCRIPTION, ogDescription: 'O it' };
     const first = refreshDescriptiveTexts('demo-id', localeTexts, seoTexts, { repoRoot: root });
     assert.equal(first.changed, true);
 
@@ -623,6 +627,31 @@ test('refreshDescriptiveTexts: una ogDescription oltre il proprio budget (250) v
     const ogMatch = it.match(/'blog\.article\.demo-id\.ogDescription': '([^']*)'/);
     assert.ok(ogMatch, 'ogDescription non scritta');
     assert.ok(ogMatch[1].length <= SEO_OG_DESCRIPTION_MAX, `ogDescription scritta fuori budget: ${ogMatch[1].length} chars`);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: rifiuta una SEO description sotto il floor prima di qualsiasi write', () => {
+  const root = syntheticCorpus();
+  try {
+    const metaPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const seoPath = path.join(root, 'content', 'seo', 'seo-blog-5.ts');
+    const metaBefore = fs.readFileSync(metaPath, 'utf-8');
+    const seoBefore = fs.readFileSync(seoPath, 'utf-8');
+
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { excerpt: 'Questo aggiornamento non deve essere scritto.' } },
+        { description: 'Descrizione troppo breve.' },
+        { repoRoot: root },
+      ),
+      /at least 80 characters of article-specific text/,
+    );
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'la locale non deve essere aggiornata prima del controllo');
+    assert.equal(fs.readFileSync(seoPath, 'utf-8'), seoBefore, 'l’entry SEO breve non deve essere pubblicata');
+    assert.equal(fs.existsSync(registerLockPath(root, 'frontaliere')), false, 'un rifiuto pre-write deve rilasciare il lock');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
