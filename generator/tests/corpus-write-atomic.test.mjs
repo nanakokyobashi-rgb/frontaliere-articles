@@ -165,7 +165,7 @@ for (const [rel, workflow] of CHOKE_POINTS) {
     if (SHARED_PAIR_WRITERS.has(rel)) {
       const helper = fs.readFileSync(SHARED_PAIR_HELPER, 'utf-8');
       assert.match(src, /import \{ writeFilePairAtomically \} from ['"][^'"]*write-file-pair-atomically\.mjs['"]/u);
-      assert.match(src, /(?:writeRegistryPairAtomically|writeFilePairAtomically)\(writes\)/u);
+      assert.match(src, /(?:writeRegistryPairAtomically|writeFilePairAtomically)\(writes(?:,\s*\{\s*fsImpl\s*\})?\)/u);
       assert.match(helper, /item\.tmp = `\$\{item\.file\}\.\$\{process\.pid\}\.\$\{temporarySequence\+\+\}\.pair\.tmp`/u);
       assert.match(helper, /fsImpl\.writeFileSync\(item\.tmp\s*,/u);
       assert.match(helper, /fsImpl\.renameSync\(item\.tmp\s*,\s*item\.file\)/u);

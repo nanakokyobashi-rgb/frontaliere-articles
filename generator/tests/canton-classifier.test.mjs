@@ -467,8 +467,21 @@ describe('backfill', () => {
       fs.mkdirSync(contentDir, { recursive: true });
       const firstFile = path.join(contentDir, 'blog-articles-data.ts');
       fs.writeFileSync(firstFile, registrySrc);
-      const blockedDirectory = path.join(contentDir, 'swiss-registry-as-directory.ts');
-      fs.mkdirSync(blockedDirectory);
+      const secondFile = path.join(contentDir, 'swiss-articles-data.ts');
+      fs.writeFileSync(secondFile, registrySrc);
+      let renames = 0;
+      const fsImpl = {
+        ...fs,
+        renameSync(from, to) {
+          renames += 1;
+          if (renames === 2) {
+            const error = new Error('injected second rename failure');
+            error.code = 'EIO';
+            throw error;
+          }
+          fs.renameSync(from, to);
+        },
+      };
       const row = { id: 'pair-item', cantons: [{ canton: 'TI' }] };
       const results = {
         frontaliere: {
@@ -477,15 +490,17 @@ describe('backfill', () => {
           rows: [row],
         },
         svizzera: {
-          spec: { registry: 'content/swiss-registry-as-directory.ts' },
+          spec: { registry: 'content/swiss-articles-data.ts' },
           registrySrc,
           rows: [row],
         },
       };
 
-      assert.throws(() => writeRegistries(results, dir), /EISDIR|EEXIST|directory/u);
+      assert.throws(() => writeRegistries(results, dir, { fsImpl }), /injected second rename failure/u);
       assert.equal(fs.readFileSync(firstFile, 'utf8'), registrySrc);
+      assert.equal(fs.readFileSync(secondFile, 'utf8'), registrySrc);
       assert.deepEqual(fs.readdirSync(contentDir).filter((name) => name.includes('.pair-')), []);
+      assert.equal(fs.existsSync(path.join(contentDir, '.registry-pair-write.lock')), false);
     } finally {
       fs.rmSync(dir, { recursive: true, force: true });
     }

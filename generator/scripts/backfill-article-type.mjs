@@ -280,8 +280,8 @@ export function planBackfill(root = ROOT) {
 }
 
 /** Acceptance token per la scrittura con rollback della coppia di registry. */
-export function writeRegistryPairAtomically(changes) {
-  return writeFilePairAtomically(changes);
+export function writeRegistryPairAtomically(changes, options) {
+  return writeFilePairAtomically(changes, options);
 }
 
 function parseArgs(argv) {
@@ -306,7 +306,7 @@ function printSummary(plan, apply) {
   console.log(apply ? 'modalità: apply' : 'modalità: dry-run (nessun file modificato)');
 }
 
-export function applyPlan(plan) {
+export function applyPlan(plan, { fsImpl } = {}) {
   const changed = {};
   const writes = [];
   for (const [section, row] of Object.entries(plan)) {
@@ -314,10 +314,10 @@ export function applyPlan(plan) {
     if (result.changed !== row.typesById.size) {
       throw new Error(`${section}: cambiate ${result.changed} voci su ${row.typesById.size} assegnazioni`);
     }
-    if (result.changed > 0) writes.push({ file: row.registryFile, before: row.source, after: result.source });
+    writes.push({ file: row.registryFile, before: row.source, after: result.source });
     changed[section] = result.changed;
   }
-  writeRegistryPairAtomically(writes);
+  writeRegistryPairAtomically(writes, { fsImpl });
   return changed;
 }
 

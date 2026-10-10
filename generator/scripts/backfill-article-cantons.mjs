@@ -166,7 +166,7 @@ export function renderReport(results, { sampleSize = 50 } = {}) {
 }
 
 /** Riscrive i registry. @returns {{[section: string]: number}} voci cambiate */
-export function writeRegistries(results, root = ROOT) {
+export function writeRegistries(results, root = ROOT, { fsImpl } = {}) {
   const changed = {};
   const writes = [];
   for (const [section, { spec, registrySrc, rows }] of Object.entries(results)) {
@@ -181,10 +181,10 @@ export function writeRegistries(results, root = ROOT) {
       const got = reread.get(id) || [];
       if (got.join(',') !== cantons.join(',')) throw new Error(`${spec.registry}: ${id} riletto ${got} invece di ${cantons}`);
     }
-    if (n > 0) writes.push({ file: path.join(root, spec.registry), before: registrySrc, after: source });
+    writes.push({ file: path.join(root, spec.registry), before: registrySrc, after: source });
     changed[section] = n;
   }
-  writeFilePairAtomically(writes);
+  writeFilePairAtomically(writes, { fsImpl });
   return changed;
 }
 

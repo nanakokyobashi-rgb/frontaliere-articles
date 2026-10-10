@@ -511,10 +511,11 @@ export function repointCovers(root, repoints) {
     const out = src.replace(/(\bimage:\s*')\/images\/blog\/([A-Za-z0-9][A-Za-z0-9._-]*)\.webp(')/g, (m, open, key, close) => (
       repoints.has(key) ? `${open}${repoints.get(key)}${close}` : m
     ));
-    if (out !== src) registryWrites.push({ file, before: src, after: out });
+    registryWrites.push({ file, before: src, after: out });
   }
+  const changedRegistries = registryWrites.filter((write) => write.before !== write.after).length;
   writeFilePairAtomically(registryWrites);
-  changed += registryWrites.length;
+  changed += changedRegistries;
   for (const rel of seoLiteralFiles(root)) {
     const file = path.join(root, rel);
     const src = fs.readFileSync(file, 'utf-8');

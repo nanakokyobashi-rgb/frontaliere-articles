@@ -873,10 +873,10 @@
     {
       "path": "scripts/lib/write-file-pair-atomically.mjs",
       "mode": "corpus-only",
-      "reason": "Helper del publisher per preparare insieme i registry del corpus e ripristinare le sostituzioni gia' riuscite su errori sincroni. E' usato dai backfill di articleType/canton e dal repoint delle copertine; il sito consuma i JSON pubblicati via HTTP e non deve importare il writer del corpus.",
+      "reason": "Helper del publisher per serializzare gli aggiornamenti dei registry nella directory `content/`, rifiutare snapshot concorrenti obsoleti, preparare insieme le uscite e ripristinare le sostituzioni gia' riuscite su errori sincroni. E' usato dai backfill di articleType/canton e dal repoint delle copertine; il sito consuma i JSON pubblicati via HTTP e non deve importare il writer del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "f5172c570c34c88d8612f92cc11e9f39de30fe2d",
+        "corpus": "c3b9919ae4b9ea8a48e432555ca091ba9134c23d",
         "alignedAt": "2026-10-10"
       }
     },

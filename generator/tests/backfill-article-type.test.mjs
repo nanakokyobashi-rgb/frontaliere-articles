@@ -1,5 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {
   mkdtempSync,
   mkdirSync,
@@ -331,15 +332,29 @@ describe('ledger di lettura e piano di backfill', () => {
     withFixture((root) => {
       const plan = backfillType.planBackfill(root);
       const frontFile = join(root, 'content/blog-articles-data.ts');
+      const swissFile = join(root, 'content/swiss-articles-data.ts');
       const before = readFileSync(frontFile, 'utf8');
-      const blockedSwissPath = join(root, 'swiss-registry-is-a-directory');
-      mkdirSync(blockedSwissPath);
-      plan.svizzera.registryFile = blockedSwissPath;
+      const swissBefore = readFileSync(swissFile, 'utf8');
+      let renames = 0;
+      const fsImpl = {
+        ...fs,
+        renameSync(from, to) {
+          renames += 1;
+          if (renames === 2) {
+            const error = new Error('injected second rename failure');
+            error.code = 'EIO';
+            throw error;
+          }
+          fs.renameSync(from, to);
+        },
+      };
 
-      assert.throws(() => backfillType.applyPlan(plan), /EISDIR|EEXIST|directory/u);
+      assert.throws(() => backfillType.applyPlan(plan, { fsImpl }), /injected second rename failure/u);
       assert.equal(readFileSync(frontFile, 'utf8'), before, 'il primo registry deve tornare ai byte originali');
+      assert.equal(readFileSync(swissFile, 'utf8'), swissBefore, 'il secondo registry deve restare invariato');
       assert.deepEqual(readdirSync(join(root, 'content')).filter((name) => name.endsWith('.tmp')), []);
       assert.deepEqual(readdirSync(root).filter((name) => name.endsWith('.pair.tmp')), []);
+      assert.equal(readdirSync(join(root, 'content')).includes('.registry-pair-write.lock'), false);
     });
   });
 
