@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tox-info-chiamate-intelligenza-artificiale.webp",
+      "sha256": "03f8d0df6f56cbb61c727d39cf93313a00d74ff7bb2aa861d00e3ba94923b71d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tox-info-chiamate-intelligenza-artificiale-480w.webp",
+      "sha256": "9ede71b34aa89472aebcb86a38ec24f6c554af48245ef578ea8ad7ca143ce889"
+    }
+  ]
 }
