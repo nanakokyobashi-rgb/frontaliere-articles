@@ -26,7 +26,9 @@ import {
 } from '../scripts/regenerate-queued-covers.mjs';
 import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
 import {
+  locateArticleRegistry,
   locateArticleSeoImage,
+  updateArticleImageInRegistry,
   updateArticleSeoImageBlock,
 } from '../scripts/lib/article-registry-image.mjs';
 import { mergeImageRegistryDelta } from '../../scripts/ci/merge-generated-image-registry.mjs';
@@ -106,6 +108,35 @@ function inlineSeoEntry(id, image = '/images/places/fallback.webp') {
 function seoFile(entries) {
   return `const BASE_URL = 'https://frontaliereticino.ch';\nconst BLOG_SEO_METADATA = {\n${entries.join('\n')}\n};\nexport default BLOG_SEO_METADATA;\n`;
 }
+
+test('la cover registry usa la voce bilanciata e il campo image top-level', () => {
+  const root = tempRoot();
+  const relativePath = 'content/blog-articles-data.ts';
+  try {
+    write(root, relativePath, [
+      'export const ARTICLES = [',
+      '  {',
+      "    id: 'nested-registry-image',",
+      "    metadata: { image: '/images/nested.webp', note: '},' },",
+      "    image: '/images/old.webp',",
+      '  },',
+      '];',
+      '',
+    ].join('\n'));
+
+    const located = locateArticleRegistry(root, 'nested-registry-image', { registryFiles: [relativePath] });
+    assert.equal(located.previousImage, '/images/old.webp');
+    const updated = updateArticleImageInRegistry(root, 'nested-registry-image', '/images/new.webp', {
+      registryFiles: [relativePath],
+    });
+    assert.equal(updated.changed, true);
+    const next = fs.readFileSync(path.join(root, relativePath), 'utf8');
+    assert.match(next, /metadata: \{ image: '\/images\/nested\.webp'/);
+    assert.match(next, /image: '\/images\/new\.webp'/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
 
 function writeImageAltMetadata(root, items, metaPrefix) {
   for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {

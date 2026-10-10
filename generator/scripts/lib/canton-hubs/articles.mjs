@@ -25,6 +25,7 @@ import { CANTON_HUB_TOPIC_CLUSTERS, cantonHubTopicForCluster } from '../../../..
 import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSectionCore.generated.mjs';
 import { sectionSourceSurfaces } from '../../../../scripts/lib/corpus-sections.mjs';
 import { sectionWriteSurfaces } from '../../../../scripts/lib/article-surfaces.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../../../scripts/lib/article-registry-reader.mjs';
 import { isReservedPublishedSlug } from '../../../../scripts/lib/published-slug-guard.mjs';
 import { readTsStringMap } from '../../backfill-article-cantons.mjs';
 import { readEntryCanton, registryEntrySpans } from '../registry-canton-field.mjs';
@@ -134,7 +135,8 @@ export function loadSectionArticles(root, section) {
   const out = [];
   for (const { id, text } of entries) {
     if (DAILY_EDITION_ID_RE.test(id)) continue;
-    const date = /\bdate:\s*'([^']+)'/u.exec(text)?.[1];
+    const [record] = scanTopLevelArticleRecords(text);
+    const date = readTopLevelString(record, 'date');
     // Una data impossibile nel registro non diventa la data di una news promossa.
     if (!date || !Number.isFinite(dateMs(date))) continue;
     const slug = slugs[id];
@@ -157,7 +159,7 @@ export function loadSectionArticles(root, section) {
       id,
       section,
       date,
-      category: /\bcategory:\s*'([^']+)'/u.exec(text)?.[1] ?? '',
+      category: readTopLevelString(record, 'category') ?? '',
       cantons: [...new Set([...(ownCanton ? [ownCanton] : []), ...labelled])],
       title,
       excerpt,
