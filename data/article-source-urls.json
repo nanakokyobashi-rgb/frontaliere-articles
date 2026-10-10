@@ -1,5 +1,4 @@
 {
-  "https://cassa-disoccupazione.unia.ch": "frontalieri-cassa-disoccupazione",
   "https://unia.ch/it/salari-ccl/calcolatore-salariale": "strumenti-controllo-salari-ticino",
   "https://unia.ch/it/professioni-rami/edilizia-principale/calcolatore-salariale-per-ledilizia": "calcolatore-salariale-edilizia-2026",
   "https://www.ticinonews.ch/ticino/sussidi-di-cassa-malati-ora-la-richiesta-si-puo-fare-anche-online-440599": "sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online",
@@ -2312,6 +2311,11 @@
   "https://comozero.it/attualita/como-si-schiantano-nella-notte-in-piazza-camerlata-4-giovanissimi-feriti": {
     "articleId": "schianto-camerlata-quattro-feriti",
     "ts": "2026-10-10T07:25:28.719Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1955886/gobbi-caso-agenti-dado-pronzini-due-licenziamento": {
+    "articleId": "agenti-gobbi-rischio-licenziamento",
+    "ts": "2026-10-10T07:56:56.719Z",
     "keyForm": 2
   }
 }

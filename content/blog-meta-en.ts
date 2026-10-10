@@ -12918,6 +12918,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.schianto-camerlata-quattro-feriti.title': 'Como, nighttime crash in Camerlata: 4 injured',
     'blog.article.schianto-camerlata-quattro-feriti.excerpt': 'The alarm was raised at 1.35am Crash in Piazzale Camerlata at Como Two girls and two boys involved Four injured transferred to yellow code Location →',
     'blog.article.schianto-camerlata-quattro-feriti.imageAlt': 'Nighttime urban square with emergency lights and rescue vehicles.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.title': 'Gobbi case, two officers at risk of dismissal',
+    'blog.article.agenti-gobbi-rischio-licenziamento.excerpt': 'Two of the three agents would risk dismissal.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzona and the cantonal police in the Gobbi case',
 };
 
 export default blogMetaEn;

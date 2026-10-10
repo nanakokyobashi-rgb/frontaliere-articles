@@ -104709,6 +104709,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-agenti-gobbi-rischio-licenziamento': {
+    title: 'Caso Gobbi, due agenti a rischio licenziamento',
+    description: 'Due dei tre agenti rischierebbero il licenziamento. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, caso, gobbi, agenti, rischio',
+    ogTitle: 'Caso Gobbi: due agenti a rischio licenziamento',
+    ogDescription: 'Due dei tre agenti rischierebbero il licenziamento.',
+    canonicalPath: '/articoli-frontaliere/agenti-gobbi-rischio-licenziamento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Caso Gobbi, due agenti a rischio licenziamento",
+      "description": "Due dei tre agenti rischierebbero il licenziamento. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-agenti-gobbi-rischio-licenziamento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bellinzona e la Polizia cantonale nel caso Gobbi"
+      },
+      "datePublished": "2026-10-10T07:56:56+00:00",
+      "dateModified": "2026-10-10T07:56:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/agenti-gobbi-rischio-licenziamento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

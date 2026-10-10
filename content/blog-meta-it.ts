@@ -12919,6 +12919,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.schianto-camerlata-quattro-feriti.title': 'Como, schianto notturno a Camerlata: 4 feriti',
     'blog.article.schianto-camerlata-quattro-feriti.excerpt': 'L\'allarme è scattato alle 1:35 Schianto in piazzale Camerlata a Como Coinvolti due ragazze e due ragazzi Quattro feriti trasferiti in codice giallo Luogo →',
     'blog.article.schianto-camerlata-quattro-feriti.imageAlt': 'Piazza urbana notturna con luci di emergenza e mezzi di soccorso.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.title': 'Caso Gobbi, due agenti a rischio licenziamento',
+    'blog.article.agenti-gobbi-rischio-licenziamento.excerpt': 'Due dei tre agenti rischierebbero il licenziamento.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzona e la Polizia cantonale nel caso Gobbi',
 };
 
 export default blogMetaIt;
