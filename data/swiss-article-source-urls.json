@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/confederazione-vuole-mantenere-aree-thun-per-esercito-e-difesa/92016218": {
-    "articleId": "confederazione-mantiene-aree-thun-difesa",
-    "ts": "2026-09-07T11:45:17.889Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948493/lavoro-mercato-anni-disoccupati-bastano": {
     "articleId": "disoccupazione-giovani-svizzera-agosto-2023",
     "ts": "2026-09-07T11:50:27.349Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4149614": {
     "articleId": "friedli-rinuncia-corsa-federale",
     "ts": "2026-10-10T00:22:01.927Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/banca-cantonale-san-gallo%3a-%22noi-puntiamo-sulle-filiali-fisiche%22/92194580": {
+    "articleId": "sgkb-filiali-fisiche",
+    "ts": "2026-10-10T03:27:02.989Z",
     "keyForm": 2
   }
 }
