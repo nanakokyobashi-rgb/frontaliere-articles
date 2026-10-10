@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-varese-adhd-days-ottobre-2026.webp",
+      "sha256": "23a48eab831837099f8664d4a008767d4b8a06ad2a8a19d1afa469a803dbd0bc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-varese-adhd-days-ottobre-2026-480w.webp",
+      "sha256": "d2c2f386805cb5c0d6eee39d61d6fe6f672a259ffebd8d76e7e2f67e3d242305"
+    }
+  ]
 }
