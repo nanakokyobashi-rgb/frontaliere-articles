@@ -2697,6 +2697,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'friedli-rinuncia-corsa-federale': { it: 'friedli-rinuncia-corsa-federale', en: 'esther-friedli-no-federal-council-bid', de: 'esther-friedli-keine-bundesratskandidatur', fr: 'esther-friedli-renonce-conseil-federal' },
  'lucerna-polizza-edifici-regole': { it: 'lucerna-polizza-edifici-regole', en: 'lucerne-building-insurance-rules', de: 'luzern-gebaeudeversicherung-regeln', fr: 'assurance-immeubles-lucerne-regles' },
  'seco-cambiamenti-istituzionali-2026': { it: 'seco-cambiamenti-istituzionali-2026', en: 'seco-institutional-changes-2026', de: 'seco-institutionelle-aenderungen-2026', fr: 'seco-changements-institutionnels-2026' },
+ 'corsi-contributi-lucerna': { it: 'corsi-contributi-lucerna', en: 'continuing-education-lucerne', de: 'weiterbildung-luzern', fr: 'formation-continue-lucerne' },
+ 'sgkb-filiali-fisiche': { it: 'sgkb-filiali-fisiche', en: 'sgkb-physical-branches', de: 'sgkb-physische-filialen', fr: 'sgkb-filiales-physiques' },
+ 'multe-como-targhe-estere': { it: 'multe-como-targhe-estere', en: 'como-fines-foreign-plates', de: 'como-strafen-auslaendische-kennzeichen', fr: 'amendes-come-plaques-etrangeres' },
+ 'uri-soglia-salariale-controlli': { it: 'uri-soglia-salariale-controlli', en: 'uri-minimum-wage-rules', de: 'uri-mindestlohn-regeln', fr: 'uri-salaire-minimum-regles' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

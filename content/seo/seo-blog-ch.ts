@@ -101193,6 +101193,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-corsi-contributi-lucerna': {
+    title: 'Formazione continua a Lucerna: requisiti e contributi',
+    description: 'Nel Cantone di Lucerna i contributi seguono regole cantonali. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, formazione, continua, lucerna, requisiti',
+    ogTitle: 'Formazione continua a Lucerna: requisiti e contributi',
+    ogDescription: 'Nel Cantone di Lucerna i contributi seguono regole cantonali.',
+    canonicalPath: '/articoli-svizzera/corsi-contributi-lucerna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Formazione continua a Lucerna: requisiti e contributi",
+      "description": "Nel Cantone di Lucerna i contributi seguono regole cantonali. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-corsi-contributi-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula svizzera per la formazione continua con computer e documenti"
+      },
+      "datePublished": "2026-10-10T02:37:57+00:00",
+      "dateModified": "2026-10-10T02:37:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/corsi-contributi-lucerna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sgkb-filiali-fisiche': {
+    title: 'SGKB conferma le 37 filiali fisiche | Frontaliere Ticino',
+    description: 'SGKB mantiene la rete di 37 sedi fisiche. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sgkb, conferma, filiali, fisiche',
+    ogTitle: 'SGKB: 37 filiali fisiche confermate',
+    ogDescription: 'SGKB mantiene la rete di 37 sedi fisiche.',
+    canonicalPath: '/articoli-svizzera/sgkb-filiali-fisiche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SGKB conferma le 37 filiali fisiche",
+      "description": "SGKB mantiene la rete di 37 sedi fisiche. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sgkb-filiali-fisiche.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Filiale fisica di una banca cantonale svizzera a San Gallo"
+      },
+      "datePublished": "2026-10-10T03:27:02+00:00",
+      "dateModified": "2026-10-10T03:27:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sgkb-filiali-fisiche/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-multe-como-targhe-estere': {
+    title: 'Como: 1.259 multe alle auto straniere in agosto',
+    description: '1.259 multe redatte a Como in agosto 102.738 euro in 31 giorni 3.322 euro al giorno nel mese di agosto Stime oltre l\'80% di verbali ignorati Luogo → Como',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, multe, alle, auto',
+    ogTitle: 'Multe a Como: 102.738 euro in agosto',
+    ogDescription: '1.259 multe redatte a Como in agosto 102.738 euro in 31 giorni 3.322 euro al giorno nel mese di agosto Stime oltre l\'80% di verbali ignorati Luogo → Como',
+    canonicalPath: '/articoli-svizzera/multe-como-targhe-estere/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como: 1.259 multe alle auto straniere in agosto",
+      "description": "1.259 multe redatte a Como in agosto 102.738 euro in 31 giorni 3.322 euro al giorno nel mese di agosto Stime oltre l'80% di verbali ignorati Luogo → Como",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-multe-como-targhe-estere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto con targa svizzera in sosta a Como"
+      },
+      "datePublished": "2026-10-10T04:09:02+00:00",
+      "dateModified": "2026-10-10T04:09:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/multe-como-targhe-estere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-uri-soglia-salariale-controlli': {
+    title: 'Salario minimo a Uri: requisiti e applicazione',
+    description: 'Salario minimo nel Cantone di Uri: guida pratica a disciplina cantonale, contratti collettivi, requisiti, controlli e voci della busta paga e trattenute.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, requisiti, applicazione',
+    ogTitle: 'Uri, salario minimo: requisiti e controlli',
+    ogDescription: 'In Svizzera non esiste un minimo federale. Per il Cantone di Uri la verifica passa da eventuale disciplina cantonale, settori, requisiti, controlli e contratti collettivi; la guida separa anche contributi sociali e LAMal.',
+    canonicalPath: '/articoli-svizzera/uri-soglia-salariale-controlli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario minimo a Uri: requisiti e applicazione",
+      "description": "Salario minimo nel Cantone di Uri: guida pratica a disciplina cantonale, contratti collettivi, requisiti, controlli e voci della busta paga e trattenute.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-uri-soglia-salariale-controlli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti di lavoro sul salario minimo nel Cantone di Uri"
+      },
+      "datePublished": "2026-10-10T05:33:50+00:00",
+      "dateModified": "2026-10-10T05:33:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/uri-soglia-salariale-controlli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

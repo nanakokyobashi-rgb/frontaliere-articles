@@ -797,14 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
-      "section": "svizzera",
-      "ts": 1791424608347
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/varese/articolo/trasformare-le-microplastiche-in-nuove-risorse-il-progetto-propla-si-conclude-lanciando-la-sfida-di.html": {
-      "section": "frontaliere",
-      "ts": 1791430262025
-    },
     "frontaliere::https://www.tio.ch/svizzera/economia/1955482/tassi-raiffeisen-svizzera-bns-crescita-forte": {
       "section": "frontaliere",
       "ts": 1791445759176
@@ -1132,6 +1124,30 @@
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955841/due-nuovi-tasselli-per-la-collina-d-avra-di-castel-san-pietro": {
       "section": "frontaliere",
       "ts": 1791594022844
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955803/incendio-blocca-le-ffs-la-polizia-e-doloso": {
+      "section": "svizzera",
+      "ts": 1791599128709
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1955736/federer-tennis-lavori-grigliata-organizzato-casa": {
+      "section": "svizzera",
+      "ts": 1791599309876
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1955840/il-fondo-per-la-formazione-professionale-risponde-ancora-ai-suoi-compiti": {
+      "section": "frontaliere",
+      "ts": 1791603217912
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-varese-pall-trieste-la-partita-in-diretta-2/2703394": {
+      "section": "frontaliere",
+      "ts": 1791604659254
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1955886/gobbi-caso-agenti-dado-pronzini-due-licenziamento": {
+      "section": "svizzera",
+      "ts": 1791604730875
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955733/chuv-documenti-medici-ustionati-stato-crans-montana-sospeso": {
+      "section": "svizzera",
+      "ts": 1791609987962
     }
   }
 }

@@ -1557,6 +1557,29 @@ test('il backstop rifiuta un risultato con id duplicati o con meno record dei du
   );
 });
 
+test('il backstop non tratta una sostituzione di valore nella stessa chiave come perdita di record', () => {
+  const upstream = [
+    'const META = {',
+    "  'blog.article.stesso.title': 'valore-upstream-unico',",
+    "  'blog.article.stesso.excerpt': 'valore-condiviso',",
+    '};',
+    '',
+  ].join('\n');
+  const replayed = [
+    'const META = {',
+    "  'blog.article.stesso.title': 'valore-condiviso',",
+    "  'blog.article.stesso.excerpt': 'valore-condiviso',",
+    '};',
+    '',
+  ].join('\n');
+
+  assert.deepEqual(
+    backstop(replayed, upstream, replayed),
+    [],
+    'un valore sostituito può ridurre i literal distinti senza perdere una chiave',
+  );
+});
+
 test('generate-article.yml dichiara come registro OGNI target di scrittura del generatore', () => {
   // La forma della issue #225: il difetto non era nell'helper, era un path che
   // il CHIAMANTE non dichiarava. Quindi l'elenco atteso NON si ricopia qui —
