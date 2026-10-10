@@ -9,7 +9,7 @@
  * Italian title is never shortened or disambiguated here: recovery does not
  * also rewrite the paired locale meta surface.
  */
-import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
+import { truncateToClause, truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 // Marchio e tetto del title hanno una sola definizione, quella della bonifica.
 import {
   SEO_TITLE_BRAND_SUFFIX as TITLE_SUFFIX,
@@ -79,14 +79,14 @@ export function deriveSeoMetadata(data) {
     if (description.length < 145) {
       description = `${description}${description.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
     }
-    return truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
+    return truncateToClause(description, DESCRIPTION_MAX_CHARS);
   };
 
   let description = '';
   if (persistedDescription.length >= SEO_DESCRIPTION_MIN) {
     // Recovery starts by retaining the already-published SERP/RSS copy and
     // applying the repository's hard cap; the post-cap floor is checked below.
-    description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
+    description = truncateToClause(persistedDescription, DESCRIPTION_MAX_CHARS);
   }
 
   // The persisted value can meet the floor before the hard cap and fall below

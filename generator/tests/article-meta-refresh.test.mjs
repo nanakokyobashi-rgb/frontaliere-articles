@@ -657,26 +657,38 @@ test('refreshDescriptiveTexts: rifiuta una SEO description sotto il floor prima 
   }
 });
 
-test('refreshDescriptiveTexts: un primo token oltre il budget non lascia il vecchio valore fuori cap', () => {
+test('refreshDescriptiveTexts: rifiuta un primo token oltre il budget prima di qualsiasi write', () => {
   const root = syntheticCorpus();
   try {
+    const metaPath = path.join(root, 'content', 'blog-meta-it.ts');
+    const seoPath = path.join(root, 'content', 'seo', 'seo-blog-5.ts');
+    const metaBefore = fs.readFileSync(metaPath, 'utf-8');
+    const seoBefore = fs.readFileSync(seoPath, 'utf-8');
     const tooLongToken = 'x'.repeat(SEO_DESCRIPTION_MAX + 1);
-    refreshDescriptiveTexts(
-      'demo-id',
-      { it: { seoDescription: tooLongToken } },
-      { description: tooLongToken },
-      { repoRoot: root },
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { seoDescription: tooLongToken } },
+        { description: tooLongToken },
+        { repoRoot: root },
+      ),
+      /no safe clause boundary.*refusing a mid-word write/,
     );
 
-    const meta = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf-8');
-    const metaMatch = meta.match(/'blog\.article\.demo-id\.seoDescription': '([^']*)'/);
-    assert.ok(metaMatch, 'seoDescription non scritta');
-    assert.equal(metaMatch[1].length, SEO_DESCRIPTION_MAX);
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'la locale non deve essere modificata');
+    assert.equal(fs.readFileSync(seoPath, 'utf-8'), seoBefore, 'la description SEO non deve essere pubblicata');
 
-    const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
-    const seoMatch = seo.match(/description: '([^']*)'/);
-    assert.ok(seoMatch, 'description non scritta');
-    assert.equal(seoMatch[1].length, SEO_DESCRIPTION_MAX);
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { seoDescription: tooLongToken } },
+        undefined,
+        { repoRoot: root },
+      ),
+      /no safe clause boundary.*refusing a mid-word write/,
+    );
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'la locale non deve essere modificata nel percorso senza SEO entry');
+    assert.equal(fs.existsSync(registerLockPath(root, 'frontaliere')), false, 'un rifiuto pre-write deve rilasciare il lock');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

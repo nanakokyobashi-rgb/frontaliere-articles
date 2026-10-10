@@ -62,14 +62,25 @@ test('la derivazione mantiene il titolo dei meta e usa la regola di troncamento 
   assert.match(data.seo.keywords, /^frontalieri, ticino, svizzera, italia,/);
 });
 
-test('la derivazione SEO non svuota descrizioni con una prima parola oltre il limite', () => {
+test('la recovery usa il fallback italiano quando una description persistita inizia con un token oltre il cap', () => {
+  const data = article();
+  data.seo = { description: 'X'.repeat(220) };
+
+  deriveSeoMetadata(data);
+
+  assert.equal(
+    data.seo.description,
+    'Una descrizione abbastanza lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite. Dati locali',
+  );
+  assert.ok(data.seo.description.length >= 80);
+  assert.ok(data.seo.description.length <= 160);
+  assert.ok(!data.seo.description.includes('X'));
+});
+
+test('la recovery rifiuta un excerpt che non può essere troncato senza tagliare il primo token', () => {
   const data = article();
   data.content.it.excerpt = 'X'.repeat(220);
-  deriveSeoMetadata(data);
-  assert.ok(data.seo.description.length > 0);
-  assert.ok(data.seo.description.length <= 160);
-  assert.ok(data.seo.ogDescription.length > 0);
-  assert.ok(data.seo.ogDescription.length <= 250);
+  assert.throws(() => deriveSeoMetadata(data), /must contain at least 80 characters/);
 });
 
 test('la recovery conserva seoDescription e ogDescription persistiti invece di derivarli dall excerpt', () => {
