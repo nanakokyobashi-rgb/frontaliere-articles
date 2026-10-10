@@ -40,6 +40,7 @@ import {
   extractJsonApiItems,
   extractJsonEntitiesItems,
   extractPublishedDateFromHtml,
+  selectPublishedTime,
   extractSitemapNewsItems,
   feedItemDocuments,
   filterArticleLinks,
@@ -194,10 +195,24 @@ test('date dettaglio: JSON-LD, meta e time sono letti senza usare il corpo', () 
     '2026-10-05T11:30:00.000Z',
   );
   assert.equal(
-    extractPublishedDateFromHtml('<article><time datetime="2026-10-05T14:00:00Z">5 ottobre</time><p>corpo</p></article>').toISOString(),
+    extractPublishedDateFromHtml('<article><time itemprop="datePublished" datetime="2026-10-05T14:00:00Z">5 ottobre</time><p>corpo</p></article>').toISOString(),
     '2026-10-05T14:00:00.000Z',
   );
   assert.equal(extractPublishedDateFromHtml('<article><p>nessuna data</p></article>'), null);
+});
+
+test('date dettaglio: selectPublishedTime ignora eventi generici e rifiuta due pubblicazioni discordanti', () => {
+  const eventOnly = '<article><time datetime="2026-10-11T12:30:00Z">evento</time></article>';
+  assert.equal(selectPublishedTime(eventOnly), null);
+  assert.equal(extractPublishedDateFromHtml(eventOnly), null);
+
+  const mixed = '<article><time datetime="2026-10-11T12:30:00Z">evento</time>'
+    + '<time itemprop="datePublished" datetime="2026-10-05T12:30:00Z">pubblicazione</time></article>';
+  assert.equal(selectPublishedTime(mixed)?.toISOString(), '2026-10-05T12:30:00.000Z');
+
+  const ambiguous = '<article><time itemprop="datePublished" datetime="2026-10-05T12:30:00Z">prima</time>'
+    + '<time class="publication-date" datetime="2026-10-06T12:30:00Z">seconda</time></article>';
+  assert.equal(selectPublishedTime(ambiguous), null);
 });
 
 test('json-api CMS SH: permalink, titolo kachellabel e publication_date dei portali ufficiali', () => {
@@ -693,6 +708,8 @@ test('html-links: SHN scarta le card paywall e conserva solo il lead pubblico de
     + '<article class="news-card"><a href="/region/kanton/2026-10-05/public-story">Öffentliche Meldung aus dem Kanton Schaffhausen</a><img title="Der öffentlich sichtbare Vorspann nennt die wichtigsten Fakten." src="/public.jpg"></article>'
     + '<article class="news-card paywall" data-paywall-entity-id="premium-1"><a href="/region/kanton/2026-10-05/premium-story">Premium-Meldung mit nur eingeschränkter öffentlicher Lesbarkeit</a><img title="Dieser Vorspann gehört zur Premiumkarte." src="/premium.jpg"></article>'
     + '<article class="news-card"><a class="paywall" data-paywall href="/region/kanton/2026-10-05/anchor-paywall">Card con marker paywall direttamente sul link e nessun corpo pubblico</a></article>'
+    + '<article class="news-card premiumContent"><a href="/region/kanton/2026-10-05/wrapper-premium">Premium wrapper meldet eingeschränkten Zugang zum vollständigen Artikel</a></article>'
+    + '<article class="news-card"><a class="isPremium" href="/region/kanton/2026-10-05/link-premium">Premium Link meldet eingeschränkten Zugang zum vollständigen Artikel</a></article>'
     + '</main>';
   const source = {
     url,
