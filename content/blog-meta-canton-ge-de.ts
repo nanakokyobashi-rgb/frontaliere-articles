@@ -20,7 +20,7 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.comunicato-consiglio-stato-ginevra.imageAlt': 'Institutionelle Szene in Genf an einem Oktobermorgen.',
     'blog.article.unige-natura-equilibrio-mentale.title': 'UNIGE: psychische Gesundheit, 5.–10. Oktober 2026',
     'blog.article.unige-natura-equilibrio-mentale.excerpt': 'Die Woche der psychischen Gesundheit 2026 findet vom 5.',
-    'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Szene in der Natur für das psychische Wohlbefinden der UNIGE-Gemeinschaft',
+    'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonGeDe;

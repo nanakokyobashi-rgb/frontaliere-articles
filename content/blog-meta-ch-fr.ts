@@ -8015,6 +8015,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.axpo-solare-argovia.title': 'Axpo : installation solaire sur un terrain agricole en Argovie',
     'blog.article.axpo-solare-argovia.excerpt': 'Axpo construit à Suhr une installation solaire La puissance prévue est de 600 kWp Les modules occuperont 1,2 hectares sur 2,8 Le FiBL étudiera les récoltes, l’eau',
     'blog.article.axpo-solare-argovia.imageAlt': 'Installation solaire sur une terre agricole à Suhr, dans le canton d\'Argovie',
+    'blog.article.friedli-rinuncia-corsa-federale.title': 'Esther Friedli ne se porte pas candidate au Conseil fédéral',
+    'blog.article.friedli-rinuncia-corsa-federale.excerpt': 'Esther Friedli ne se présentera pas au Conseil fédéral Elle veut rester à la Chambre haute pour Saint-Gall Elle vise sa réélection l’année prochaine Martullo-Blocher',
+    'blog.article.friedli-rinuncia-corsa-federale.imageAlt': 'Le Palais fédéral à Berne, symbole de la succession de Guy Parmelin.',
+    'blog.article.lucerna-polizza-edifici-regole.title': 'Assurance des immeubles à Lucerne : guide de l’obligation et des primes',
+    'blog.article.lucerna-polizza-edifici-regole.excerpt': 'Obligation cantonale, organisme compétent, couvertures, primes et sinistres : le guide de l’assurance des immeubles dans le canton de Lucerne.',
+    'blog.article.lucerna-polizza-edifici-regole.imageAlt': 'Immeuble résidentiel suisse et documents pour l\'assurance immobilière cantonale',
+    'blog.article.seco-cambiamenti-istituzionali-2026.title': 'SECO : droits de douane américains, votes et changement aux sommets',
+    'blog.article.seco-cambiamenti-istituzionali-2026.excerpt': 'À partir du 24 juillet 2026, droits de douane américains jusqu\'à 12,5 % sur les biens suisses.',
+    'blog.article.seco-cambiamenti-istituzionali-2026.imageAlt': 'Siège du Secrétariat d\'État à l\'économie SECO en Suisse',
 };
 
 export default blogMetaChFr;

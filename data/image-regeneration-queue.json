@@ -2,14 +2,14 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "unige-natura-equilibrio-mentale",
-      "title": "UNIGE: salute mentale, 5-10 ottobre 2026",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-09T16:43:09.597Z",
-      "lastFailureAt": "2026-10-09T17:56:34.550Z"
+      "articleId": "frana-sementina-h13-gudo",
+      "title": "Frana a Sementina: chiusa la H13 tra Sementina e Gudo",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-frana-sementina-h13-gudo: openai-codex (vision gate rejected image: Generic landslide road scene relevant to Ticino, but it contains multiple",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T02:19:32.015Z",
+      "lastFailureAt": "2026-10-10T02:19:32.015Z"
     }
   ]
 }

@@ -797,26 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
-      "section": "frontaliere",
-      "ts": 1791414140800
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/varese/articolo/caro-rette-il-comune-replica-alla-uil-a-varese-da-cinque-anni-il-nido-comunale-non-si-paga.html": {
-      "section": "frontaliere",
-      "ts": 1791414628991
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/a-varese-la-tappa-del-cantiere-sanita-la-fotografia-e-in-chiaro-scuro-ma-le-ombre-superano-le-luci/2701399": {
-      "section": "frontaliere",
-      "ts": 1791414777256
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/polmonite-suina-epidemia-sotto-controllo-nei-grigioni--4143791.html": {
-      "section": "frontaliere",
-      "ts": 1791414799594
-    },
-    "frontaliere::https://comozero.it/sanita/e-comasco-il-medico-che-ha-somministrato-il-maggior-numero-di-vaccini-in-lombardia-ed-e-stato-premiato": {
-      "section": "frontaliere",
-      "ts": 1791416146600
-    },
     "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
       "section": "svizzera",
       "ts": 1791424608347
@@ -1140,6 +1120,18 @@
     "frontaliere::https://www.varesenews.it/2026/10/inaugurata-la-tangenziale-nord-tra-cesano-maderno-e-seveso-investimento-da-oltre-21-milioni/2703658": {
       "section": "frontaliere",
       "ts": 1791586789541
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/banca-cantonale-san-gallo%3a-%22noi-puntiamo-sulle-filiali-fisiche%22/92194580": {
+      "section": "frontaliere",
+      "ts": 1791590975744
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/marchesi-al-territorio-spaccatura-tra-economia-ed-ecologisti-444320": {
+      "section": "frontaliere",
+      "ts": 1791592618249
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955841/due-nuovi-tasselli-per-la-collina-d-avra-di-castel-san-pietro": {
+      "section": "frontaliere",
+      "ts": 1791594022844
     }
   }
 }

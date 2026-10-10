@@ -26728,6 +26728,38 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'friedli-rinuncia-corsa-federale',
+    category: 'novita',
+    date: '2026-10-10T00:22:01.565Z',
+    image: '/images/blog/article-friedli-rinuncia-corsa-federale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['SG'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'lucerna-polizza-edifici-regole',
+    category: 'pratico',
+    date: '2026-10-10T01:12:10.158Z',
+    image: '/images/blog/article-lucerna-polizza-edifici-regole.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['LU'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'seco-cambiamenti-istituzionali-2026',
+    category: 'novita',
+    date: '2026-10-10T01:31:53.650Z',
+    image: '/images/blog/article-seco-cambiamenti-istituzionali-2026.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
