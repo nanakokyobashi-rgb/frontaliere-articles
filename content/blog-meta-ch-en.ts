@@ -8039,6 +8039,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.assistenza-uri-requisiti-domanda.title': 'Social assistance in the Canton of Uri: requirements and application',
     'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'In the canton of Uri, the condition of need counts Management is generally entrusted to the cantons and municipalities The application goes to the competent municipal or cantonal office',
     'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Swiss public building and document folder, symbolic image for social assistance',
+    'blog.article.naters-francobolli-falsi-aliexpress.title': 'Counterfeit stamps on AliExpress: woman sentenced in Naters',
+    'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Woman from Naters convicted for counterfeit postage stamps 100 stamps ordered on AliExpress for 48,59 francs List price of the order: 120 francs Fine',
+    'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Swiss postage stamps on a table',
 };
 
 export default blogMetaChEn;

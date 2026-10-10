@@ -8039,6 +8039,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.assistenza-uri-requisiti-domanda.title': 'Sozialhilfe im Kanton Uri: Voraussetzungen und Antrag',
     'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Im Kanton Uri ist die Bedürftigkeit maßgebend Die Zuständigkeit liegt in der Regel bei Kantonen und Gemeinden Der Antrag ist bei der zuständigen kommunalen oder kantonalen Stelle einzureichen',
     'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Schweizer öffentliches Gebäude und Dokumentenmappe, Symbolbild für die Sozialhilfe',
+    'blog.article.naters-francobolli-falsi-aliexpress.title': 'Gefälschte Briefmarken auf AliExpress: Frau in Naters verurteilt',
+    'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Frau aus Naters wegen gefälschter Briefmarken verurteilt 100 auf AliExpress für 48,59 Franken bestellte Briefmarken Listenpreis der Bestellung: 120 Franken Busse',
+    'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Schweizer Briefmarken auf einem Tisch',
 };
 
 export default blogMetaChDe;

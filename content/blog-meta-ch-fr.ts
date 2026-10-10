@@ -8039,6 +8039,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.assistenza-uri-requisiti-domanda.title': 'Aide sociale dans le canton d\'Uri : conditions et demande',
     'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Dans le canton d\'Uri, c\'est la situation de besoin qui compte La gestion est généralement confiée aux cantons et aux communes La demande doit être adressée à l\'office communal ou cantonal compétent',
     'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Bâtiment public suisse et dossier de documents, image symbolique de l\'aide sociale',
+    'blog.article.naters-francobolli-falsi-aliexpress.title': 'Faux timbres sur AliExpress : une femme condamnée à Naters',
+    'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Femme de Naters condamnée pour des timbres contrefaits 100 timbres commandés sur AliExpress pour 48,59 francs Valeur catalogue de la commande : 120 francs Amende',
+    'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Timbres-poste suisses sur une table',
 };
 
 export default blogMetaChFr;

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1948486/cassis-svizzera-intervista-ue-stati-uniti-neutralita-ogni-guerra-sanzionato": {
-    "articleId": "svizzera-sanzioni-stati-uniti-ignazio-cassis",
-    "ts": "2026-09-07T11:56:21.678Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/target/1948495/l-intelligenza-artificiale-spiegata-alla-terza-eta": {
     "articleId": "laboratorio-intelligenza-artificiale-terza-eta",
     "ts": "2026-09-07T12:03:46.404Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/sosta-selvaggia-a-como-in-un-mese-stangata-da-oltre-100mila-euro-per-le-auto-straniere": {
     "articleId": "multe-como-targhe-estere",
     "ts": "2026-10-10T04:09:02.542Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1955954/franchi-francobolli-aliexpress-naters-risparmiare": {
+    "articleId": "naters-francobolli-falsi-aliexpress",
+    "ts": "2026-10-10T09:59:40.726Z",
     "keyForm": 2
   }
 }

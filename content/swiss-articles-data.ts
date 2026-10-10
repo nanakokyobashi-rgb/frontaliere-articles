@@ -26813,6 +26813,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'naters-francobolli-falsi-aliexpress',
+    category: 'pratico',
+    date: '2026-10-10T09:59:40.388Z',
+    image: '/images/blog/article-naters-francobolli-falsi-aliexpress.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['VS'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

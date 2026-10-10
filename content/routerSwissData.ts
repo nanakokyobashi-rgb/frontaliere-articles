@@ -2702,6 +2702,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'multe-como-targhe-estere': { it: 'multe-como-targhe-estere', en: 'como-fines-foreign-plates', de: 'como-strafen-auslaendische-kennzeichen', fr: 'amendes-come-plaques-etrangeres' },
  'uri-soglia-salariale-controlli': { it: 'uri-soglia-salariale-controlli', en: 'uri-minimum-wage-rules', de: 'uri-mindestlohn-regeln', fr: 'uri-salaire-minimum-regles' },
  'assistenza-uri-requisiti-domanda': { it: 'assistenza-uri-requisiti-domanda', en: 'uri-social-assistance-requirements', de: 'sozialhilfe-uri-voraussetzungen-antrag', fr: 'aide-sociale-uri-conditions-demande' },
+ 'naters-francobolli-falsi-aliexpress': { it: 'naters-francobolli-falsi-aliexpress', en: 'naters-fake-stamps-aliexpress', de: 'naters-falsche-briefmarken-aliexpress', fr: 'naters-faux-timbres-aliexpress' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
