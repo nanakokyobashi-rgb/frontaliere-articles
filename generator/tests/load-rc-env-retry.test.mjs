@@ -315,5 +315,9 @@ test('_getGoogleCloudAccessToken in free-translate.mjs riusa il classificatore c
   assert.match(fnBody, /extractOAuthErrorReason\(text\)/, 'un 403 deve leggere il body per estrarre il codice errore OAuth, non fermarsi allo status');
   assert.match(fnBody, /isRetryableTokenExchangeStatus\(res\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore dedicato al token exchange');
   assert.match(fnBody, /for\s*\(let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt\+\+\)/, 'deve retryare fino a TOKEN_EXCHANGE_ATTEMPTS invece di arrendersi al primo fallimento');
-  assert.match(fnBody, /signal:\s*AbortSignal\.timeout\(TOKEN_EXCHANGE_TIMEOUT_MS\)/, 'deve condividere il timeout del token exchange, non uno slegato');
+  assert.match(
+    fnBody,
+    /fetchWithRefTimeout\(\s*['"]https:\/\/oauth2\.googleapis\.com\/token['"][\s\S]*?TOKEN_EXCHANGE_TIMEOUT_MS\s*\)/,
+    'deve condividere il timeout referenziato del token exchange, non uno slegato',
+  );
 });
