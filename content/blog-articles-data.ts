@@ -43595,6 +43595,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tre-furti-villa-guardia',
+ category: 'novita',
+ date: '2026-10-10T10:37:55.902Z',
+ image: '/images/blog/article-tre-furti-villa-guardia.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

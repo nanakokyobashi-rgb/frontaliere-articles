@@ -1,5 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/sussidi-di-cassa-malati-ora-la-richiesta-si-puo-fare-anche-online-440599": "sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online",
   "https://www.tio.ch/newsblog/verita-immobiliari": "verita-immobiliari-ticino",
   "https://cassa-disoccupazione.unia.ch.ddev.site": "cassa-disoccupazione-unia",
   "https://unia.ch/it/salari-ccl/salari-minimi-legali": "salari-minimi-legali-ticino",
@@ -2324,6 +2323,11 @@
   "https://www.varesenews.it/2026/10/energeticabiaglio-2026-a-castello-cabiaglio-un-festival-per-parlare-di-energia-sostenibilita-e-futuro/2703625": {
     "articleId": "festival-energetica-cabiaglio-2026",
     "ts": "2026-10-10T09:38:30.684Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/provincia-di-como-tre-furti-nello-stesso-ristorante-fermato-un-20enne": {
+    "articleId": "tre-furti-villa-guardia",
+    "ts": "2026-10-10T10:37:56.292Z",
     "keyForm": 2
   }
 }

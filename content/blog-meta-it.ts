@@ -12928,6 +12928,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.festival-energetica-cabiaglio-2026.title': 'Energeticabiaglio 2026: festival sull\'energia a Castello Cabiaglio',
     'blog.article.festival-energetica-cabiaglio-2026.excerpt': 'Festival Energeticabiaglio l\'18 ottobre 2026 a Castello Cabiaglio Focus su Comunità Energetiche Rinnovabili e crisi climatica Partecipano ricercatori JRC, IPCC',
     'blog.article.festival-energetica-cabiaglio-2026.imageAlt': 'Castello Cabiaglio durante l\'evento Energeticabiaglio 2026',
+    'blog.article.tre-furti-villa-guardia.title': 'Tre furti a Villa Guardia: denunciato un 20enne',
+    'blog.article.tre-furti-villa-guardia.excerpt': 'Tre furti in due mesi a Villa Guardia Denunciato un italiano di 20 anni Cassa: 940 euro in contanti Indagini coordinate dalla Procura di Como Luogo → Villa',
+    'blog.article.tre-furti-villa-guardia.imageAlt': 'Struttura ricettiva nel Mendrisiotto in una scena serale',
 };
 
 export default blogMetaIt;

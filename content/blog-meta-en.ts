@@ -12927,6 +12927,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.festival-energetica-cabiaglio-2026.title': 'Energeticabiaglio 2026: energy festival in Castello Cabiaglio',
     'blog.article.festival-energetica-cabiaglio-2026.excerpt': 'Festival Energeticabiaglio on 18 October 2026 at Castello Cabiaglio Focus on Renewable Energy Communities and the Climate Crisis Participating researchers JRC, IPCC',
     'blog.article.festival-energetica-cabiaglio-2026.imageAlt': 'Castello Cabiaglio during the Energeticabiaglio 2026 event',
+    'blog.article.tre-furti-villa-guardia.title': 'Three thefts at Villa Guardia: a 20-year-old man reported',
+    'blog.article.tre-furti-villa-guardia.excerpt': 'Three thefts in two months at Villa Guardia Reported a 20-year-old Italian Cash: 940 euros in cash Investigations coordinated by the Public Prosecutor\'s Office of Como Place → Villa',
+    'blog.article.tre-furti-villa-guardia.imageAlt': 'Hospitality building in the Mendrisiotto area in an evening scene',
 };
 
 export default blogMetaEn;

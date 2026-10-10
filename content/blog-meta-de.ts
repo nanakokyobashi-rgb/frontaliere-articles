@@ -12926,6 +12926,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.festival-energetica-cabiaglio-2026.title': 'Energeticabiaglio 2026: Energiefestival in Castello Cabiaglio',
     'blog.article.festival-energetica-cabiaglio-2026.excerpt': 'Festival Energeticabiaglio am 18. (Castello Cabiaglio)',
     'blog.article.festival-energetica-cabiaglio-2026.imageAlt': 'Castello Cabiaglio während der Veranstaltung Energeticabiaglio 2026',
+    'blog.article.tre-furti-villa-guardia.title': 'Drei Einbrüche in Villa Guardia: 20-Jähriger angezeigt',
+    'blog.article.tre-furti-villa-guardia.excerpt': 'Drei Diebstähle in zwei Monaten bei Villa Guardia Angeprangert von einem 20-jährigen Italiener Kasse: 940 Euro in bar Ermittlungen koordiniert von der Staatsanwaltschaft von Como Ort → Villa',
+    'blog.article.tre-furti-villa-guardia.imageAlt': 'Beherbergungsbetrieb im Mendrisiotto bei einer Abendszene',
 };
 
 export default blogMetaDe;
