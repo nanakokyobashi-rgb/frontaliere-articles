@@ -265,6 +265,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-indagini-imprese-ginevrine': {
+    title: 'Indagini congiunturali nelle imprese ginevrine',
+    description: 'La Repubblica e il Cantone di Ginevra presenta le indagini congiunturali del mese di settembre nelle imprese ginevrine, secondo il titolo del flusso RSS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, indagini, congiunturali, nelle, imprese',
+    ogTitle: 'Indagini congiunturali nelle imprese ginevrine',
+    ogDescription: 'Il flusso RSS della Repubblica e del Cantone di Ginevra presenta le indagini congiunturali del mese di settembre nelle imprese ginevrine. Il contenuto disponibile identifica tema, periodo e ambito, ma non riporta risultati o cifre.',
+    canonicalPath: '/articoli-ginevra/indagini-imprese-ginevrine/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Indagini congiunturali nelle imprese ginevrine",
+      "description": "La Repubblica e il Cantone di Ginevra presenta le indagini congiunturali del mese di settembre nelle imprese ginevrine, secondo il titolo del flusso RSS.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Indagini congiunturali nelle imprese ginevrine"
+      },
+      "datePublished": "2026-10-10T20:58:56+00:00",
+      "dateModified": "2026-10-10T20:58:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ginevra/indagini-imprese-ginevrine/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

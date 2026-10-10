@@ -24,6 +24,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.cantieri-mobilita-ginevra.title': 'Baustellen in Genf: Beeinträchtigte Mobilität ab 12. Oktober 2026',
     'blog.article.cantieri-mobilita-ginevra.excerpt': 'Neue Baustellen im Kanton Genf starten am 12.',
     'blog.article.cantieri-mobilita-ginevra.imageAlt': 'Neue Baustellen in Genf mit Auswirkungen auf die Mobilität ab 12. Oktober 2026.',
+    'blog.article.indagini-imprese-ginevrine.title': 'Konjunkturumfragen bei Genfer Unternehmen',
+    'blog.article.indagini-imprese-ginevrine.excerpt': 'Die Republik und der Kanton Genf melden Konjunkturumfragen im September bei Genfer Unternehmen.',
+    'blog.article.indagini-imprese-ginevrine.imageAlt': 'Konjunkturumfragen in Genfer Unternehmen',
 };
 
 export default blogMetaCantonGeDe;

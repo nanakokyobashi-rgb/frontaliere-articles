@@ -24,6 +24,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.cantieri-mobilita-ginevra.title': 'Construction work in Geneva: mobility affected from October 12, 2026',
     'blog.article.cantieri-mobilita-ginevra.excerpt': 'New construction projects in the Canton of Geneva will begin on October 12, 2026, and will affect travel.',
     'blog.article.cantieri-mobilita-ginevra.imageAlt': 'New construction works in Geneva affecting travel from October 12, 2026.',
+    'blog.article.indagini-imprese-ginevrine.title': 'Business surveys among Geneva companies',
+    'blog.article.indagini-imprese-ginevrine.excerpt': 'The Republic and Canton of Geneva reports September business surveys among Geneva companies.',
+    'blog.article.indagini-imprese-ginevrine.imageAlt': 'Business confidence surveys in Geneva companies',
 };
 
 export default blogMetaCantonGeEn;

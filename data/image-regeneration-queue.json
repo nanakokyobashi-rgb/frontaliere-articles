@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T20:45:24.130Z",
       "lastFailureAt": "2026-10-10T20:45:24.130Z"
+    },
+    {
+      "articleId": "indagini-imprese-ginevrine",
+      "title": "Indagini congiunturali nelle imprese ginevrine",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T20:58:56.060Z",
+      "lastFailureAt": "2026-10-10T20:58:56.060Z"
     }
   ]
 }
