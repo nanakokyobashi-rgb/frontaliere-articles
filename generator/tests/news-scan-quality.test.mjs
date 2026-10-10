@@ -60,12 +60,12 @@ const { selectUndatedBySourceQuota, UNDATED_TOTAL_BUDGET, UNDATED_PER_SOURCE_QUO
   '{ selectUndatedBySourceQuota, UNDATED_TOTAL_BUDGET, UNDATED_PER_SOURCE_QUOTA }',
 );
 
-const { parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS, parseFeedDate } = sandbox(
+const { parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS, parseFeedDate, extractCdataDate } = sandbox(
   sliceBlock('export const RECOGNIZED_HEADLINE_DATE_FORMATS = [', 'function monthFormatTag(name) {'),
-  '{ parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS, parseFeedDate }',
+  '{ parseHeadlineDate, RECOGNIZED_HEADLINE_DATE_FORMATS, parseFeedDate, extractCdataDate }',
 );
 
-// `extractRssItems` dipende da `parseFeedDate` (e questo da `buildCalendarDate`):
+// `extractRssItems` dipende da `parseFeedDate` (e questo da `buildFeedCalendarDate`):
 // stesso blocco dei formati + la funzione, valutati insieme.
 const { extractRssItems } = sandbox(
   sliceBlock('export const RECOGNIZED_HEADLINE_DATE_FORMATS = [', 'function monthFormatTag(name) {')
@@ -235,7 +235,7 @@ describe('(c) una fonte che risponde 200 e non produce nulla e’ «sterile», n
 // 9 novembre — una data FUTURA che `isWithinDays` conta come recente.
 
 describe('(d) parseFeedDate legge giorno-prima le date numeriche dei feed', () => {
-  const ymd = (d) => [d.getFullYear(), d.getMonth() + 1, d.getDate()];
+  const ymd = (d) => [d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate()];
 
   it('dd/mm/yyyy, dd.mm.yyyy e dd-mm-yyyy: giorno prima, mai mese prima', () => {
     assert.deepEqual(ymd(parseFeedDate('02/10/2026')), [2026, 10, 2]);
@@ -247,9 +247,49 @@ describe('(d) parseFeedDate legge giorno-prima le date numeriche dei feed', () =
 
   it('l’ora che segue la data, se c’e’, viene conservata', () => {
     const d = parseFeedDate('02/10/2026 14:35');
-    assert.deepEqual([...ymd(d), d.getHours(), d.getMinutes()], [2026, 10, 2, 14, 35]);
+    assert.deepEqual([...ymd(d), d.getUTCHours(), d.getUTCMinutes()], [2026, 10, 2, 14, 35]);
     const s = parseFeedDate('02/10/2026T08:05:09');
-    assert.deepEqual([s.getHours(), s.getMinutes(), s.getSeconds()], [8, 5, 9]);
+    assert.deepEqual([s.getUTCHours(), s.getUTCMinutes(), s.getUTCSeconds()], [8, 5, 9]);
+  });
+
+  it('dd/mm/yyyy con offset numerico restituisce l’istante UTC corretto', () => {
+    assert.equal(parseFeedDate('02/10/2026 14:35:12 +0200').toISOString(), '2026-10-02T12:35:12.000Z');
+    assert.equal(parseFeedDate('02/10/2026 14:35:12 -0530').toISOString(), '2026-10-02T20:05:12.000Z');
+    assert.equal(parseFeedDate('02/10/2026 14:35 +02:00').toISOString(), '2026-10-02T12:35:00.000Z');
+  });
+
+  it('RSS e Atom estraggono date racchiuse in CDATA', () => {
+    assert.equal(extractCdataDate('  <![CDATA[02/10/2026]]>  '), '02/10/2026');
+    const rss = `<?xml version="1.0"?><rss version="2.0"><channel>
+      <item><title>Notizia con data avvolta in CDATA</title><link>https://example.ch/rss</link><pubDate><![CDATA[02/10/2026 14:35:12 +0200]]></pubDate></item>
+    </channel></rss>`;
+    const [rssItem] = extractRssItems(rss, 'https://example.ch/feed.xml');
+    assert.equal(rssItem.date.toISOString(), '2026-10-02T12:35:12.000Z');
+
+    const atom = `<feed xmlns="http://www.w3.org/2005/Atom">
+      <entry><title>Notizia Atom con data CDATA</title><link href="https://example.ch/atom"/><updated><![CDATA[2026-10-02T14:35:12+02:00]]></updated></entry>
+    </feed>`;
+    const [atomItem] = extractRssItems(atom, 'https://example.ch/atom.xml');
+    assert.equal(atomItem.date.toISOString(), '2026-10-02T12:35:12.000Z');
+  });
+
+  it('le date feed senza fuso sono calendari UTC indipendenti dal fuso del runner', () => {
+    const originalTz = process.env.TZ;
+    try {
+      const results = [];
+      for (const tz of ['UTC', 'Europe/Zurich', 'America/Los_Angeles']) {
+        process.env.TZ = tz;
+        results.push(parseFeedDate('02/10/2026').toISOString());
+      }
+      assert.deepEqual(results, [
+        '2026-10-02T00:00:00.000Z',
+        '2026-10-02T00:00:00.000Z',
+        '2026-10-02T00:00:00.000Z',
+      ]);
+    } finally {
+      if (originalTz === undefined) delete process.env.TZ;
+      else process.env.TZ = originalTz;
+    }
   });
 
   it('date numeriche impossibili: null, non un trabocco nel mese dopo', () => {
@@ -303,6 +343,6 @@ describe('(d) parseFeedDate legge giorno-prima le date numeriche dei feed', () =
     assert.notEqual(at, -1);
     const body = SRC.slice(at, SRC.indexOf('\n}\n', at));
     assert.doesNotMatch(body, /new Date\(/, 'extractRssItems costruisce di nuovo le date a mano');
-    assert.equal((body.match(/parseFeedDate\(date\?\.\[1\]\)/g) || []).length, 2, 'Atom e RSS devono passare entrambi da parseFeedDate');
+    assert.equal((body.match(/parseFeedDate\(extractCdataDate\(date\?\.\[1\]\)\)/g) || []).length, 2, 'Atom e RSS devono normalizzare CDATA prima di parseFeedDate');
   });
 });

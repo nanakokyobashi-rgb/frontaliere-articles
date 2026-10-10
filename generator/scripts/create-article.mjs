@@ -8103,6 +8103,20 @@ function buildCalendarDate(year, month0, day) {
 }
 
 /**
+ * Costruisce una data feed in UTC, senza dipendere da TZ/DST del runner.
+ * Anche il round-trip del calendario usa UTC: Date.UTC normalizza date
+ * impossibili (per esempio il 31 aprile) invece di rifiutarle.
+ */
+function buildFeedCalendarDate(year, month0, day, hour = 0, minute = 0, second = 0) {
+  if (![year, month0, day, hour, minute, second].every(Number.isInteger)) return null;
+  if (year < 2000 || year > 2100 || month0 < 0 || month0 > 11 || day < 1 || day > 31) return null;
+  if (hour < 0 || hour > 23 || minute < 0 || minute > 59 || second < 0 || second > 59) return null;
+  const d = new Date(Date.UTC(year, month0, day, hour, minute, second));
+  if (d.getUTCFullYear() !== year || d.getUTCMonth() !== month0 || d.getUTCDate() !== day) return null;
+  return Number.isNaN(d.getTime()) ? null : d;
+}
+
+/**
  * Prima data riconoscibile in un frammento di testo, con il nome del formato.
  *
  * @param {string} text — testo (i tag possono esserci, vengono tolti qui)
@@ -8184,12 +8198,18 @@ export function parseHeadlineDate(text) {
 //
 // La forma numerica giorno-prima va quindi letta qui, esplicitamente, con la
 // stessa scelta dichiarata di `parseHeadlineDate` (fonti CH/IT/DE/FR: l'ordine
-// americano su questi domini non esiste) e la stessa validazione calendariale
-// di `buildCalendarDate`. Solo quando l'INTERO valore ha quella forma
-// (eventualmente seguita da un'ora): RFC-822 (`Mon, 05 Oct 2026 06:23:11
-// +0000`) e ISO-8601 non passano da qui e restano a `new Date`, esattamente
-// come prima.
-const FEED_DAY_FIRST_DATE_RE = /^([0-3]?\d)([./-])(0?[1-9]|1[0-2])\2(20\d{2})(?:[\sT,]+([01]?\d|2[0-3]):([0-5]\d)(?::([0-5]\d))?)?$/;
+// americano su questi domini non esiste) e la validazione UTC di
+// `buildFeedCalendarDate`. L'offset numerico descrive un istante e viene
+// applicato esplicitamente; RFC-822 e ISO-8601 restano al fallback `new Date`.
+const FEED_DAY_FIRST_DATE_RE = /^([0-3]?\d)([./-])(0?[1-9]|1[0-2])\2(20\d{2})(?:[\sT,]+([01]?\d|2[0-3]):([0-5]\d)(?::([0-5]\d))?(?:\s*(Z|([+-])(\d{2}):?(\d{2})))?)?$/i;
+
+/** Rimuove il wrapper XML CDATA da un singolo campo data, se presente. */
+export function extractCdataDate(raw) {
+  if (typeof raw !== 'string') return raw;
+  const value = raw.trim();
+  const cdata = value.match(/^<!\[CDATA\[([\s\S]*?)\]\]>$/i);
+  return cdata ? cdata[1].trim() : value;
+}
 
 /**
  * @param {string | null | undefined} raw — testo del campo data dell'item
@@ -8201,9 +8221,22 @@ export function parseFeedDate(raw) {
   if (!value) return null;
   const dayFirst = value.match(FEED_DAY_FIRST_DATE_RE);
   if (dayFirst) {
-    const d = buildCalendarDate(Number(dayFirst[4]), Number(dayFirst[3]) - 1, Number(dayFirst[1]));
+    const d = buildFeedCalendarDate(
+      Number(dayFirst[4]),
+      Number(dayFirst[3]) - 1,
+      Number(dayFirst[1]),
+      Number(dayFirst[5] || 0),
+      Number(dayFirst[6] || 0),
+      Number(dayFirst[7] || 0),
+    );
     if (!d) return null;
-    if (dayFirst[5] !== undefined) d.setHours(Number(dayFirst[5]), Number(dayFirst[6]), Number(dayFirst[7] || 0), 0);
+    if (dayFirst[8] && dayFirst[8].toUpperCase() !== 'Z') {
+      const offsetHours = Number(dayFirst[10]);
+      const offsetMinutes = Number(dayFirst[11]);
+      if (offsetHours > 23 || offsetMinutes > 59) return null;
+      const offsetMs = (offsetHours * 60 + offsetMinutes) * 60 * 1000;
+      d.setTime(d.getTime() + (dayFirst[9] === '+' ? -offsetMs : offsetMs));
+    }
     return d;
   }
   const d = new Date(value);
@@ -8722,14 +8755,14 @@ function extractRssItems(xml, feedUrl) {
       const title = block.match(/<title[^>]*><!\[CDATA\[([\s\S]*?)\]\]><\/title>|<title[^>]*>([\s\S]*?)<\/title>/i);
       const link = block.match(/<link[^>]*href=["']([^"']+)["']/i)
         || block.match(/<link[^>]*>([^<]+)<\/link>/i);
-      const date = block.match(/<updated>([^<]+)<\/updated>/i)
-        || block.match(/<published>([^<]+)<\/published>/i);
+      const date = block.match(/<updated>([\s\S]*?)<\/updated>/i)
+        || block.match(/<published>([\s\S]*?)<\/published>/i);
       const headline = (title?.[1] || title?.[2] || '').replace(/<[^>]+>/g, '').trim();
       const href = (link?.[1] || '').trim();
       if (!headline || headline.length < 10 || !href) continue;
       // `parseFeedDate`, non `new Date`: vedi il commento del 2026-10-05 sopra
       // la funzione (dd/mm/yyyy letto come mm/dd).
-      results.push({ url: href, headline, date: parseFeedDate(date?.[1]) });
+      results.push({ url: href, headline, date: parseFeedDate(extractCdataDate(date?.[1])) });
     }
   } else {
     // RSS 2.0: <item><title>…</title><link>…</link><pubDate>…</pubDate></item>
@@ -8739,16 +8772,16 @@ function extractRssItems(xml, feedUrl) {
       const block = im[0];
       const title = block.match(/<title[^>]*><!\[CDATA\[([\s\S]*?)\]\]><\/title>|<title[^>]*>([\s\S]*?)<\/title>/i);
       const link = block.match(/<link[^>]*>\s*<!\[CDATA\[([^\]]+)\]\]>\s*<\/link>|<link[^>]*>\s*([^<\s]+)\s*<\/link>/i);
-      const date = block.match(/<pubDate>([^<]+)<\/pubDate>/i)
-        || block.match(/<dc:date>([^<]+)<\/dc:date>/i)
-        || block.match(/<date>([^<]+)<\/date>/i);
+      const date = block.match(/<pubDate>([\s\S]*?)<\/pubDate>/i)
+        || block.match(/<dc:date>([\s\S]*?)<\/dc:date>/i)
+        || block.match(/<date>([\s\S]*?)<\/date>/i);
       const headline = (title?.[1] || title?.[2] || '').replace(/<[^>]+>/g, '').trim();
       let href = (link?.[1] || link?.[2] || '').trim();
       if (!headline || headline.length < 10) continue;
       // Resolve relative URLs
       if (href) { try { href = new URL(href, feedUrl).href; } catch { /* keep as-is */ } }
       if (!href || !href.startsWith('http')) continue;
-      results.push({ url: href, headline, date: parseFeedDate(date?.[1]) });
+      results.push({ url: href, headline, date: parseFeedDate(extractCdataDate(date?.[1])) });
     }
   }
 
