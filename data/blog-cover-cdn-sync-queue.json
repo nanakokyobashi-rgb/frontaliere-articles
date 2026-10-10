@@ -1,4 +1,29 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-assistenza-uri-requisiti-domanda.webp",
+      "sha256": "d60280883b694c95981408a9cce20164c0354a348a35d978321813371e16e950"
+    },
+    {
+      "path": "public/images/blog/article-imposta-veicoli-uri-calcolo.webp",
+      "sha256": "657ff2a1ccc93e83a1310a6437e7f52bcae7ccb244a5fb4e2a3aef7af2304b10"
+    },
+    {
+      "path": "public/images/blog/article-ispezioni-gallerie-lago-como.webp",
+      "sha256": "4fc658e623660f8a65e3c9e7bc100418dab598337f3aa7a77f40a1efeb088d7f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-assistenza-uri-requisiti-domanda-480w.webp",
+      "sha256": "9cc96b55af84016350f18f838e088553b5ee942ddb852d84c7066b6fa8dd2fd0"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-imposta-veicoli-uri-calcolo-480w.webp",
+      "sha256": "8d3ead513bfcd856d82d22595506c6cd0bc381d0335fd96614bc0b5a1e0a2ab2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ispezioni-gallerie-lago-como-480w.webp",
+      "sha256": "019b511f1fdee7e8b3b34e1640d2d3149750ab89f3513b23d15df002322f7c0b"
+    }
+  ]
 }
