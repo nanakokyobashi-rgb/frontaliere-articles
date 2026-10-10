@@ -1,5 +1,4 @@
 {
-  "http://www.cd-ocst.ch": "registrarsi-alla-cassa-di-disoccupazione-ocst",
   "https://www.ocst.ch/ocst-donna-lavoro": "ocst-donna-lavoro-servizi",
   "https://www.laregione.ch/cantone/ticino/1943526/ticino-2020-nessun-rimborso-ai-comuni-le-scelte-sono-state-condivise": "no-rimborso-ticino-2020",
   "https://www.varesenews.it/2026/08/crisi-aziendali-al-mimit-sono-37-i-tavoli-attivi-monitoraggio-per-beko-europe/2657086": "crisi-aziendali-mimit-tavoli-monitoraggio-2026",
@@ -2360,6 +2359,11 @@
   "https://www.laregione.ch/sport/hockey/1956001/ambri-piotta-beffato-all-overtime-dalla-rete-di-abols": {
     "articleId": "ambri-piotta-berna-abols",
     "ts": "2026-10-10T22:02:50.055Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/ecco-come-si-salva-una-vita-spettacolare-esercitazione-tra-i-monti-del-lago-di-como": {
+    "articleId": "esercitazione-soccorso-sasso",
+    "ts": "2026-10-10T22:34:10.253Z",
     "keyForm": 2
   }
 }

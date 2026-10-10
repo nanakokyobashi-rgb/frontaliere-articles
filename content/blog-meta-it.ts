@@ -12959,7 +12959,10 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lugano-bienne-vittoria-2026.imageAlt': 'HC Lugano festeggia il gol vincente contro il Bienne alla Tissot Arena',
     'blog.article.ambri-piotta-berna-abols.title': 'Ambrì Piotta beffato all\'overtime dalla rete di Abols',
     'blog.article.ambri-piotta-berna-abols.excerpt': 'Ambrì Piotta sconfitto 2-1 dal Berna all\'overtime Joly porta avanti i biancoblù in 5 contro 3 Quarta sconfitta consecutiva interna per l\'Ambrì Abols firma',
-    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Partita dell\'Ambrì Piotta alla Gottardo Arena contro il Berna',
+    'blog.article.esercitazione-soccorso-sasso.title': 'Soccorso alpino, esercitazione al Sasso Malascarpa',
+    'blog.article.esercitazione-soccorso-sasso.excerpt': 'Esercitazione della Stazione Triangolo Lariano Ventitré soccorritori, con tre istruttori tecnici e tre sanitari Due scenari tecnico-sanitari al Sasso Malascarpa',
+    'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Soccorritori alpini durante un’esercitazione con barella in ambiente montano',
 };
 
 export default blogMetaIt;

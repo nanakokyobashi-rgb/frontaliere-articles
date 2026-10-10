@@ -12958,7 +12958,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lugano-bienne-vittoria-2026.imageAlt': 'HC Lugano celebrates the winning goal against Bienne at the Tissot Arena',
     'blog.article.ambri-piotta-berna-abols.title': 'Ambrì Piotta beaten in overtime by Abols\'s goal',
     'blog.article.ambri-piotta-berna-abols.excerpt': 'Ambrì Piotta defeated 2-1 by Bern in overtime Joly puts the blue-and-whites ahead in a 5-on-3 Fourth consecutive home defeat for Ambrì Abols scores',
-    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Illustration generated for this article',
+    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Ambrì Piotta hockey game against Bern at the Gottardo Arena',
+    'blog.article.esercitazione-soccorso-sasso.title': 'Mountain rescue, exercise at Sasso Malascarpa',
+    'blog.article.esercitazione-soccorso-sasso.excerpt': 'Exercise of the Triangolo Lariano Station Twenty-three rescuers, with three technical instructors and three medical personnel Two technical-medical scenarios at Sasso Malascarpa',
+    'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Alpine rescuers training with a stretcher in a rugged mountain channel',
 };
 
 export default blogMetaEn;
