@@ -60,6 +60,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { stripExcerptMarkdown } from '../scripts/lib/article-excerpt.mjs';
+import {
+  SEO_DESCRIPTION_MIN as SHARED_SEO_DESCRIPTION_MIN,
+  assertSeoDescriptionMinimum,
+} from '../scripts/lib/seo-description-contract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -95,15 +99,12 @@ function sliceConst(src, header) {
 
 function extractCapBlock() {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
-  const min = src.match(/^const SEO_DESCRIPTION_MIN = (\d+);$/m);
-  if (!min) throw new Error('SEO_DESCRIPTION_MIN non trovato in create-article.mjs');
   const max = src.match(/^const SEO_DESCRIPTION_MAX = (\d+);$/m);
   if (!max) throw new Error('SEO_DESCRIPTION_MAX non trovato in create-article.mjs');
   const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
   if (!ogMax) throw new Error('SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs');
   const block = [
     sliceFn(src, 'function truncateAtWordBoundary(text, maxLen) {'),
-    `const SEO_DESCRIPTION_MIN = ${min[1]};`,
     `const SEO_DESCRIPTION_MAX = ${max[1]};`,
     `const SEO_OG_DESCRIPTION_MAX = ${ogMax[1]};`,
     // Estratto dal sorgente, non riscritto: se la mappa dei budget cambia
@@ -120,8 +121,10 @@ function extractCapBlock() {
   return new Function(
     'truncateToClause',
     'stripExcerptMarkdown',
+    'SEO_DESCRIPTION_MIN',
+    'assertSeoDescriptionMinimum',
     `${block}\nreturn { clampSeoDescriptions, ensureSeoDescriptionMinimum, truncateAtWordBoundary, SEO_DESCRIPTION_MIN, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS };`,
-  )(truncateToClause, stripExcerptMarkdown);
+  )(truncateToClause, stripExcerptMarkdown, SHARED_SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum);
 }
 
 const {
@@ -246,6 +249,34 @@ describe('ensureSeoDescriptionMinimum', () => {
     expect(excerpt.length).toBeGreaterThanOrEqual(SEO_DESCRIPTION_MIN);
     expect(ensureSeoDescriptionMinimum(data)).toBe(excerpt);
     expect(data.seo.description).toBe(excerpt);
+  });
+
+  it('usa l’excerpt quando il clamp della description primaria scende sotto il floor', () => {
+    const excerpt =
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+    const data = {
+      id: 'fischiava-treno-gorla',
+      seo: { description: 'x'.repeat(SEO_DESCRIPTION_MAX + 1) },
+      content: { it: { excerpt } },
+    };
+
+    expect(ensureSeoDescriptionMinimum(data)).toBe(excerpt);
+    expect(data.seo.description).toBe(excerpt);
+  });
+
+  it('rifiuta quando nessuna fonte resta sopra il floor dopo il clamp', () => {
+    const original = 'x'.repeat(SEO_DESCRIPTION_MAX + 1);
+    const data = {
+      id: 'single-token',
+      seo: { description: original },
+      content: { it: { excerpt: 'y'.repeat(SEO_DESCRIPTION_MAX + 1) } },
+    };
+
+    assert.throws(
+      () => ensureSeoDescriptionMinimum(data),
+      /at least 80 characters of article-specific text.*after cap: 0/,
+    );
+    expect(data.seo.description).toBe(original);
   });
 
   it('rifiuta fonti brevi senza aggiungere testo generico', () => {
