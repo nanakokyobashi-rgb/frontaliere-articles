@@ -87,6 +87,18 @@ test('la recovery conserva seoDescription e ogDescription persistiti invece di d
   assert.equal(data.seo.ogDescription, data.content.it.ogDescription);
 });
 
+test('la recovery riapre il fallback italiano se il cap porta la descrizione persistita sotto il floor', () => {
+  const data = article();
+  const fallbackExcerpt = 'Il corpo italiano riporta i valichi aperti, i prezzi dei carburanti e i nuovi annunci di lavoro in Svizzera per l’aggiornamento quotidiano del 2026.';
+  data.content.it.excerpt = fallbackExcerpt;
+  data.seo = { description: `${'A'.repeat(70)}. ${'B'.repeat(100)}` };
+
+  deriveSeoMetadata(data);
+
+  assert.equal(data.seo.description, fallbackExcerpt);
+  assert.ok(data.seo.description.length >= 80);
+});
+
 test('la recovery sostituisce una seoDescription persistita sotto il minimo con il fallback italiano', () => {
   const data = article();
   data.content.it.seoDescription = 'Troppo breve.';

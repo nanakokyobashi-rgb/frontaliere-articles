@@ -71,13 +71,7 @@ export function deriveSeoMetadata(data) {
   const persistedDescription = typeof data.seo.description === 'string'
     ? data.seo.description.replace(/\s+/g, ' ').trim()
     : '';
-  if (persistedDescription.length >= SEO_DESCRIPTION_MIN) {
-    // Recovery must retain the already-published SERP/RSS copy. Only apply
-    // the repository's hard cap when it already meets the public contract.
-    data.seo.description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
-  } else {
-    // A short persisted value is as unsafe as a missing value: recovery must
-    // replace it from Italian source copy, never carry it back into content/seo.
+  const fallbackDescription = () => {
     let description = String(it.excerpt || '').replace(/\s+/g, ' ').trim();
     if (!description) {
       description = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati ${year}.`;
@@ -85,9 +79,21 @@ export function deriveSeoMetadata(data) {
     if (description.length < 145) {
       description = `${description}${description.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
     }
-    data.seo.description = truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
+    return truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
+  };
+
+  let description = '';
+  if (persistedDescription.length >= SEO_DESCRIPTION_MIN) {
+    // Recovery starts by retaining the already-published SERP/RSS copy and
+    // applying the repository's hard cap; the post-cap floor is checked below.
+    description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
   }
-  assertSeoDescriptionMinimum(data.seo.description, {
+
+  // The persisted value can meet the floor before the hard cap and fall below
+  // it after a clause-safe cut. Reopen the Italian body excerpt in that case
+  // instead of failing on a value that recovery can safely reconstruct.
+  if (description.length < SEO_DESCRIPTION_MIN) description = fallbackDescription();
+  data.seo.description = assertSeoDescriptionMinimum(description, {
     id: data.id,
     sourceDescriptionLength: persistedDescription.length,
   });
