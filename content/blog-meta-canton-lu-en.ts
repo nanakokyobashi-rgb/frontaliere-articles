@@ -15,6 +15,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.progetto-latte-climatico.title': 'Milk project: Nestlé and Emmi are aiming for an extension',
     'blog.article.progetto-latte-climatico.excerpt': 'Since 2022, KlimaStaR Milch has reduced edible feed by 23% and emissions per kg by 8%.',
     'blog.article.progetto-latte-climatico.imageAlt': 'Illustration generated for this article',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.title': 'Premium reduction denied to divorced father in Lucerne',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.excerpt': 'The Federal Tribunal confirms: no flat rate of 9.000 CHF/child if maintenance contributions have already been deducted.',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Divorced father with children in Lucerne during alternating custody week',
 };
 
 export default blogMetaCantonLuEn;

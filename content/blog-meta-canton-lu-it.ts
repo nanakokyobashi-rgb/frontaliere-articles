@@ -15,6 +15,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.progetto-latte-climatico.title': 'Progetto latte: Nestlé ed Emmi puntano all\'estensione',
     'blog.article.progetto-latte-climatico.excerpt': 'Dal 2022, KlimaStaR Milch ha ridotto del 23% i mangimi commestibili e dell\'8% le emissioni per kg.',
     'blog.article.progetto-latte-climatico.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.title': 'Riduzione premi negata a padre divorziato a Lucerna',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.excerpt': 'Il Tribunale federale conferma: niente forfait 9.000 CHF/figlio se già detratti i contributi di mantenimento.',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Padre divorziato con figli a Lucerna durante settimana di custodia alternata',
 };
 
 export default blogMetaCantonLuIt;

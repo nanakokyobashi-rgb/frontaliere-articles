@@ -15,6 +15,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.progetto-latte-climatico.title': 'Milchprojekt: Nestlé und Emmi streben eine Ausweitung an',
     'blog.article.progetto-latte-climatico.excerpt': 'Seit 2022 hat KlimaStaR Milch die für die menschliche Ernährung geeigneten Futtermittel um 23% und die Emissionen pro kg um 8% reduziert.',
     'blog.article.progetto-latte-climatico.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.title': 'Prämienverbilligung für geschiedenen Vater in Luzern abgelehnt',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.excerpt': 'Das Bundesgericht bestätigt: kein Pauschalabzug von 9.000 CHF/Kind, wenn die Unterhaltsbeiträge bereits abgezogen wurden.',
+    'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Geschiedener Vater mit Kindern in Luzern während Wechselmodell-Woche',
 };
 
 export default blogMetaCantonLuDe;
