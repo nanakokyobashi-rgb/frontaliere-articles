@@ -8,6 +8,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni': { it: 'decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni', en: 'healthcare-tax-decree-for-cross-border-workers-approved', de: 'gesundheitsabgabe-fur-grenzganger-dekret-publiziert', fr: 'decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions' },
  'capitale-lpp-rimborso-imposta-fonte': { it: 'capitale-lpp-rimborso-imposta-fonte', en: 'lpp-capital-withholding-tax-refund', de: 'lpp-kapital-quellensteuer-rueckerstattung', fr: 'capital-lpp-remboursement-impot-source' },
  'autobus-elettrici-mendrisiotto-amsa': { it: 'autobus-elettrici-mendrisiotto-amsa', en: 'electric-buses-mendrisiotto-amsa', de: 'elektrobusse-mendrisiotto-amsa', fr: 'bus-electriques-mendrisiotto-amsa' },
+ 'nuovi-spazi-ambulatoriali-bellinzona': { it: 'nuovi-spazi-ambulatoriali-bellinzona', en: 'new-outpatient-spaces-bellinzona', de: 'neue-ambulante-raeume-bellinzona', fr: 'nouveaux-espaces-ambulatoires-bellinzona' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'nuovi-spazi-ambulatoriali-bellinzona',
+ category: 'novita',
+ date: '2026-10-10T11:19:26.395Z',
+ image: '/images/blog/article-nuovi-spazi-ambulatoriali-bellinzona.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
