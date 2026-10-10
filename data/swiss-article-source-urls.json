@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/natura-e-animali/cibo-per-cani-e-gatti-i-cinque-errori-pi%c3%b9-comuni--4052856.html": {
-    "articleId": "cibo-per-cani-gatti-errori-comuni",
-    "ts": "2026-09-07T11:40:59.584Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/confederazione-vuole-mantenere-aree-thun-per-esercito-e-difesa/92016218": {
     "articleId": "confederazione-mantiene-aree-thun-difesa",
     "ts": "2026-09-07T11:45:17.889Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/axpo-avvia-costruzione-di-un-impianto-solare-su-terreno-coltivato/92194182": {
     "articleId": "axpo-solare-argovia",
     "ts": "2026-10-09T23:11:14.173Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4149614": {
+    "articleId": "friedli-rinuncia-corsa-federale",
+    "ts": "2026-10-10T00:22:01.927Z",
     "keyForm": 2
   }
 }

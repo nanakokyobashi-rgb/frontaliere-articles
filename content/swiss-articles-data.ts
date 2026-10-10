@@ -26728,6 +26728,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'friedli-rinuncia-corsa-federale',
+    category: 'novita',
+    date: '2026-10-10T00:22:01.565Z',
+    image: '/images/blog/article-friedli-rinuncia-corsa-federale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['SG'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
