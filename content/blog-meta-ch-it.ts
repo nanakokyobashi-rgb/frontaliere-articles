@@ -8051,6 +8051,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.disagi-treni-vaud-eclepens.title': 'Ferrovia: ancora disagi tra Yverdon e Losanna',
     'blog.article.disagi-treni-vaud-eclepens.excerpt': 'La linea Yverdon-les-Bains-Losanna resta interrotta Due treni a lunga percorrenza all\'ora, con rallentamenti Regionali e aeroporto di Ginevra: autobus Problemi',
     'blog.article.disagi-treni-vaud-eclepens.imageAlt': 'Binari ferroviari svizzeri con un autobus sostitutivo vicino a una stazione.',
+    'blog.article.tirocinio-uri-guida-pratica.title': 'Apprendistato e formazione professionale Canton Uri',
+    'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Guida al tirocinio nel Cantone di Uri: contratto, salario, 5,3% AVS/AI/IPG, orari massimi e maturità professionale.',
+    'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Apprendista in aula durante una lezione di formazione professionale in Svizzera',
 };
 
 export default blogMetaChIt;

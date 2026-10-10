@@ -26857,6 +26857,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tirocinio-uri-guida-pratica',
+    category: 'pratico',
+    date: '2026-10-10T15:20:37.345Z',
+    image: '/images/blog/apprendistato-formazione-professionale-canton-berna.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['UR'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

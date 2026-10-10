@@ -10,6 +10,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-10T13:00:30.249Z",
       "lastFailureAt": "2026-10-10T14:31:06.970Z"
+    },
+    {
+      "articleId": "tirocinio-uri-guida-pratica",
+      "title": "Apprendistato e formazione professionale Canton Uri",
+      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T15:20:37.719Z",
+      "lastFailureAt": "2026-10-10T15:20:37.719Z"
     }
   ]
 }
