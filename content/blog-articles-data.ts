@@ -43585,6 +43585,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'festival-energetica-cabiaglio-2026',
+ category: 'novita',
+ date: '2026-10-10T09:38:29.994Z',
+ image: '/images/blog/article-festival-energetica-cabiaglio-2026.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

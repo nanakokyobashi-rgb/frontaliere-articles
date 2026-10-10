@@ -101349,6 +101349,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assistenza-uri-requisiti-domanda': {
+    title: 'Assistenza sociale Canton Uri: requisiti e domanda',
+    description: 'Nel Cantone di Uri conta la condizione di bisogno La gestione è affidata in genere a Cantoni e Comuni La domanda va all\'ufficio comunale o cantonale competente',
+    keywords: 'frontalieri, ticino, svizzera, italia, assistenza, sociale, canton, requisiti',
+    ogTitle: 'Assistenza sociale Canton Uri: requisiti e domanda',
+    ogDescription: 'Nel Cantone di Uri conta la condizione di bisogno La gestione è affidata in genere a Cantoni e Comuni La domanda va all\'ufficio comunale o cantonale competente',
+    canonicalPath: '/articoli-svizzera/assistenza-uri-requisiti-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assistenza sociale Canton Uri: requisiti e domanda",
+      "description": "Nel Cantone di Uri conta la condizione di bisogno La gestione è affidata in genere a Cantoni e Comuni La domanda va all'ufficio comunale o cantonale competente",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-assistenza-sociale-lucerna-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena svizzera con edificio pubblico e cartella documenti, immagine simbolica per l'assistenza sociale"
+      },
+      "datePublished": "2026-10-10T09:05:08+00:00",
+      "dateModified": "2026-10-10T09:05:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assistenza-uri-requisiti-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

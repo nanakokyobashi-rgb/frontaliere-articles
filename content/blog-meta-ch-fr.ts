@@ -8036,6 +8036,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.uri-soglia-salariale-controlli.title': 'Salaire minimum à Uri : exigences et application',
     'blog.article.uri-soglia-salariale-controlli.excerpt': 'En Suisse, il n\'existe pas de salaire minimum fédéral : pour l\'URI, il faut distinguer la discipline cantonale, les secteurs concernés et les conventions collectives.',
     'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Documents de travail sur le salaire minimum dans le canton d\'Uri',
+    'blog.article.assistenza-uri-requisiti-domanda.title': 'Aide sociale dans le canton d\'Uri : conditions et demande',
+    'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Dans le canton d\'Uri, c\'est la situation de besoin qui compte La gestion est généralement confiée aux cantons et aux communes La demande doit être adressée à l\'office communal ou cantonal compétent',
+    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Bâtiment public suisse et dossier de documents, image symbolique de l\'aide sociale',
 };
 
 export default blogMetaChFr;

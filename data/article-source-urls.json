@@ -1,5 +1,4 @@
 {
-  "https://unia.ch/it/professioni-rami/edilizia-principale/calcolatore-salariale-per-ledilizia": "calcolatore-salariale-edilizia-2026",
   "https://www.ticinonews.ch/ticino/sussidi-di-cassa-malati-ora-la-richiesta-si-puo-fare-anche-online-440599": "sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online",
   "https://www.tio.ch/newsblog/verita-immobiliari": "verita-immobiliari-ticino",
   "https://cassa-disoccupazione.unia.ch.ddev.site": "cassa-disoccupazione-unia",
@@ -2320,6 +2319,11 @@
   "https://comozero.it/attualita/autostrada-a9-arriva-una-settima-di-chiusure-ecco-tutti-i-dettagli": {
     "articleId": "ispezioni-gallerie-lago-como",
     "ts": "2026-10-10T08:47:31.160Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/energeticabiaglio-2026-a-castello-cabiaglio-un-festival-per-parlare-di-energia-sostenibilita-e-futuro/2703625": {
+    "articleId": "festival-energetica-cabiaglio-2026",
+    "ts": "2026-10-10T09:38:30.684Z",
     "keyForm": 2
   }
 }

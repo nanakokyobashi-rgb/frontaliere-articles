@@ -8036,6 +8036,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.uri-soglia-salariale-controlli.title': 'Mindestlohn pro Uri: Anforderungen und Anwendung',
     'blog.article.uri-soglia-salariale-controlli.excerpt': 'In der Schweiz gibt es keinen eidgenössischen Mindestlohn: Bei Uri sind kantonale Disziplin, betroffene Branchen und Kollektivverträge zu unterscheiden.',
     'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Arbeitsunterlagen zu Mindestlohnregeln im Kanton Uri',
+    'blog.article.assistenza-uri-requisiti-domanda.title': 'Sozialhilfe im Kanton Uri: Voraussetzungen und Antrag',
+    'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Im Kanton Uri ist die Bedürftigkeit maßgebend Die Zuständigkeit liegt in der Regel bei Kantonen und Gemeinden Der Antrag ist bei der zuständigen kommunalen oder kantonalen Stelle einzureichen',
+    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Schweizer öffentliches Gebäude und Dokumentenmappe, Symbolbild für die Sozialhilfe',
 };
 
 export default blogMetaChDe;

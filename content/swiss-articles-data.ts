@@ -26802,6 +26802,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'assistenza-uri-requisiti-domanda',
+    category: 'pratico',
+    date: '2026-10-10T09:05:08.307Z',
+    image: '/images/blog/article-assistenza-sociale-lucerna-requisiti.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['UR'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
