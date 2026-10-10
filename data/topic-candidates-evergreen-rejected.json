@@ -1116,6 +1116,22 @@
     "frontaliere::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
       "section": "frontaliere",
       "ts": 1791631360865
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/fondata-sul-lavoro-avs-e-sinistra-italiana-a-varese-per-rimettere-al-centro-salari-tutele-e-giovani/2704039": {
+      "section": "frontaliere",
+      "ts": 1791632860244
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1953522/brusino-arsizio-e-porto-ceresio-unite-dal-lago-lo-sport-e-l-unesco": {
+      "section": "frontaliere",
+      "ts": 1791633035654
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1955850/traffico-bloccato-frana-sementina-feriti": {
+      "section": "frontaliere",
+      "ts": 1791633204954
+    },
+    "svizzera::https://www.rsi.ch/s/4148438": {
+      "section": "svizzera",
+      "ts": 1791633402691
     }
   }
 }

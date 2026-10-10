@@ -8042,6 +8042,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.naters-francobolli-falsi-aliexpress.title': 'Faux timbres sur AliExpress : une femme condamnée à Naters',
     'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Femme de Naters condamnée pour des timbres contrefaits 100 timbres commandés sur AliExpress pour 48,59 francs Valeur catalogue de la commande : 120 francs Amende',
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Timbres-poste suisses sur une table',
+    'blog.article.imposta-veicoli-uri-calcolo.title': 'Impôt sur les véhicules à moteur à Uri : calcul et paiement',
+    'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'Dans le canton d\'Uri, le calcul, les délais et les montants de l\'impôt sur les véhicules à moteur suivent les règles cantonales : ce qu\'il faut vérifier pour le véhicule et l\'adresse.',
+    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Voiture sur une route alpine du canton d\'Uri sur la taxe automobile',
 };
 
 export default blogMetaChFr;
