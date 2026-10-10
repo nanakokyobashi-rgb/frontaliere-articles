@@ -12929,6 +12929,14 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tre-furti-villa-guardia.title': 'Drei Einbrüche in Villa Guardia: 20-Jähriger angezeigt',
     'blog.article.tre-furti-villa-guardia.excerpt': 'Drei Diebstähle in zwei Monaten bei Villa Guardia Angeprangert von einem 20-jährigen Italiener Kasse: 940 Euro in bar Ermittlungen koordiniert von der Staatsanwaltschaft von Como Ort → Villa',
     'blog.article.tre-furti-villa-guardia.imageAlt': 'Beherbergungsbetrieb im Mendrisiotto bei einer Abendszene',
+    'blog.article.bollettino-frontaliere-2026-10-10.title': 'Grenzgänger-Tagesbulletin – 10. Oktober 2026: 1\'596 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-10-10.excerpt': 'Die Zahlen von heute, 10. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-10.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 10. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-10.seoDescription': 'Grenzgänger-Bulletin vom 10. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-10.ogDescription': 'Die Zahlen vom 10. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: Privater Kanal, zahlt der Eigentümer',
+    'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: Der Staatsrat hat entschieden, dass die Sanierung der privaten Kanalisation nach der von der Gemeinde Capriasca bezahlten Reparatur dem Eigentümer obliegt.',
+    'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Private Mauer in Tesserete bei der Kontrolle einer Kanalisation',
 };
 
 export default blogMetaDe;

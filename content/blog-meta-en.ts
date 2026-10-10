@@ -12930,6 +12930,14 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tre-furti-villa-guardia.title': 'Three thefts at Villa Guardia: a 20-year-old man reported',
     'blog.article.tre-furti-villa-guardia.excerpt': 'Three thefts in two months at Villa Guardia Reported a 20-year-old Italian Cash: 940 euros in cash Investigations coordinated by the Public Prosecutor\'s Office of Como Place → Villa',
     'blog.article.tre-furti-villa-guardia.imageAlt': 'Hospitality building in the Mendrisiotto area in an evening scene',
+    'blog.article.bollettino-frontaliere-2026-10-10.title': 'Cross-border daily brief – October 10, 2026: 1\'596 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-10-10.excerpt': 'Today\'s numbers, October 10, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-10.imageAlt': 'The day\'s numbers for cross-border commuters – October 10, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-10-10.seoDescription': 'Cross-border brief, October 10, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-10.ogDescription': 'The numbers for October 10, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: private sewer connection, owner pays',
+    'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: the Council of State ruled that the rehabilitation of the private sewer was the owner\'s responsibility, following the repair paid for by the Municipality of Capriasca.',
+    'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Private wall in Tesserete during a sewer inspection',
 };
 
 export default blogMetaEn;
