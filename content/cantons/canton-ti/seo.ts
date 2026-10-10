@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuovi-spazi-ambulatoriali-bellinzona': {
+    title: 'Inaugurati nuovi spazi ambulatoriali a San Giovanni',
+    description: 'Oggi inaugurati nuovi spazi all\'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti',
+    keywords: 'frontalieri, ticino, svizzera, italia, inaugurati, nuovi, spazi, ambulatoriali',
+    ogTitle: 'Nuovi spazi ambulatoriali a San Giovanni, Bellinzona',
+    ogDescription: 'Oggi inaugurati nuovi spazi all\'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti',
+    canonicalPath: '/articoli-ticino/nuovi-spazi-ambulatoriali-bellinzona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Inaugurati nuovi spazi ambulatoriali a San Giovanni",
+      "description": "Oggi inaugurati nuovi spazi all'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-nuovi-spazi-ambulatoriali-bellinzona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuovi spazi del Poliambulatorio Turrita e dell'Ambulatorio di Dermatologia a San Giovanni, Bellinzona."
+      },
+      "datePublished": "2026-10-10T11:19:26+00:00",
+      "dateModified": "2026-10-10T11:19:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/nuovi-spazi-ambulatoriali-bellinzona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

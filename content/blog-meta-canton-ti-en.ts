@@ -18,6 +18,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.autobus-elettrici-mendrisiotto-amsa.title': 'Mendrisiotto: the first four AMSA electric buses are now in service',
     'blog.article.autobus-elettrici-mendrisiotto-amsa.excerpt': 'Four AMSA electric buses enter service Lines 2, 3 and 4 in Mendrisiotto involved The electrification project began in 2022',
     'blog.article.autobus-elettrici-mendrisiotto-amsa.imageAlt': 'AMSA electric bus operating in the Mendrisiotto region',
+    'blog.article.nuovi-spazi-ambulatoriali-bellinzona.title': 'New outpatient facilities inaugurated in San Giovanni',
+    'blog.article.nuovi-spazi-ambulatoriali-bellinzona.excerpt': 'New spaces inaugurated today at Ospedale San Giovanni Poliambulatorio Turrita and Dermatology at the Bellinzona site Spaces designed for patients',
+    'blog.article.nuovi-spazi-ambulatoriali-bellinzona.imageAlt': 'New outpatient spaces for Poliambulatorio Turrita and Dermatology clinic at San Giovanni, Bellinzona.',
 };
 
 export default blogMetaCantonTiEn;
