@@ -95,6 +95,11 @@ import {
   buildBlogImageCreditsAggregate,
   buildPublishedBlogImageRegistry,
 } from '../generator/scripts/lib/blog-image-registry.mjs';
+import {
+  readTopLevelBoolean,
+  readTopLevelString,
+  scanTopLevelArticleRecords,
+} from './lib/article-registry-reader.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -258,19 +263,15 @@ function readRegistry(rel) {
   if (!fs.existsSync(abs)) return [];
   const src = fs.readFileSync(abs, 'utf-8');
   const out = [];
-  const rx = /\{\s*id:\s*'([^']+)'([\s\S]*?)\}/g;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const [, id, body] = m;
-    const pick = (k) => (body.match(new RegExp(`\\b${k}:\\s*'([^']*)'`)) ?? [])[1];
-    const pickBool = (k) => new RegExp(`\\b${k}:\\s*true`).test(body);
+  for (const record of scanTopLevelArticleRecords(src)) {
+    const pick = (key) => readTopLevelString(record, key);
     out.push({
-      id,
+      id: record.id,
       category: pick('category') ?? '',
       date: pick('date') ?? '',
       updatedAt: pick('updatedAt') ?? undefined,
       image: cdnBlogImage(pick('image') ?? ''),
-      hasCalculator: pickBool('hasCalculator') || undefined,
+      hasCalculator: readTopLevelBoolean(record, 'hasCalculator') || undefined,
       authorSlug: pick('authorSlug') ?? undefined,
     });
   }

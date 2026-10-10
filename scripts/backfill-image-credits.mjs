@@ -59,6 +59,7 @@ import '../host/cantonSectionsBootstrap.mjs';
 import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readTopLevelString, scanTopLevelArticleRecords } from './lib/article-registry-reader.mjs';
 import {
   COMMONS_API,
   COMMONS_IMAGEINFO_PARAMS,
@@ -135,9 +136,9 @@ export function readRegistryImages(root) {
     const file = path.join(root, rel);
     if (!fs.existsSync(file)) continue;
     const src = fs.readFileSync(file, 'utf-8');
-    for (const m of src.matchAll(/\{\s*id:\s*'([^']+)'([\s\S]*?)\}/g)) {
-      const image = m[2].match(/\bimage:\s*'([^']*)'/)?.[1];
-      if (image && !images.has(m[1])) images.set(m[1], image);
+    for (const record of scanTopLevelArticleRecords(src)) {
+      const image = readTopLevelString(record, 'image');
+      if (image && !images.has(record.id)) images.set(record.id, image);
     }
   }
   return images;

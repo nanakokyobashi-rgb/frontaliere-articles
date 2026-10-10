@@ -409,6 +409,7 @@ import {
 import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import {
   assertSeoEntryAbsent,
   readSeoEntrySource,
@@ -1561,7 +1562,9 @@ const RECENT_ARTICLE_IMAGE_COUNT = 7;
 function _getRecentArticleImages() {
   try {
     const blogSrc = readFileSync(resolve('data/blog-articles-data.ts'), 'utf8');
-    const imageMatches = [...blogSrc.matchAll(/image:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
+    const imageMatches = scanTopLevelArticleRecords(blogSrc)
+      .map((record) => readTopLevelString(record, 'image'))
+      .filter(Boolean);
     return imageMatches.slice(-RECENT_ARTICLE_IMAGE_COUNT);
   } catch {
     return [];
