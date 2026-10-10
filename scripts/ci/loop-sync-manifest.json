@@ -2758,6 +2758,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/seo-description-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Modulo puro di contratto per il corpus: condivide il pavimento SEO e la validazione fail-closed fra la creazione degli articoli e il refresh in-place dei metadati, evitando che un write path aggiri il minimo. Sul sito non esiste un gemello: la SPA consuma il JSON pubblicato via HTTP e il writer legacy del sito non appartiene a questa pipeline.",
+      "baseline": {
+        "site": null,
+        "corpus": "ec439f7b588f1fd3",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "generator/scripts/lib/key-facts-specificity.mjs",
       "mode": "corpus-only",
       "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
@@ -5899,8 +5909,8 @@
       "reason": "Costruttore della voce SEO, del blocco `ImageObject` e inserimento in un chunk usati dal recupero degli orfani e dal drain delle copertine. Il writer normale conserva il suo percorso letterale in `create-article.mjs`; `generator/tests/seo-entry-equivalence.test.mjs` confronta il costruttore con le voci reali di main, così non nasce un secondo dialetto serializzato. È codice del generatore del corpus: il sito consuma il JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": null,
-        "alignedAt": "2026-10-08"
+        "corpus": "265d3cb531d40b61",
+        "alignedAt": "2026-10-10"
       }
     },
     {

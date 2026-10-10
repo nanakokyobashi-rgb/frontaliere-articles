@@ -9,12 +9,13 @@
  * Italian title is never shortened or disambiguated here: recovery does not
  * also rewrite the paired locale meta surface.
  */
-import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
+import { truncateToClause, truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
 // Marchio e tetto del title hanno una sola definizione, quella della bonifica.
 import {
   SEO_TITLE_BRAND_SUFFIX as TITLE_SUFFIX,
   SEO_TITLE_MAX_CHARS as TITLE_MAX_CHARS,
 } from './seo-title-repair.mjs';
+import { assertSeoDescriptionMinimum, SEO_DESCRIPTION_MIN } from './seo-description-contract.mjs';
 
 const DESCRIPTION_MAX_CHARS = 160;
 const OG_DESCRIPTION_MAX_CHARS = 250;
@@ -70,12 +71,7 @@ export function deriveSeoMetadata(data) {
   const persistedDescription = typeof data.seo.description === 'string'
     ? data.seo.description.replace(/\s+/g, ' ').trim()
     : '';
-  if (persistedDescription) {
-    // Recovery must retain the already-published SERP/RSS copy. Only apply
-    // the repository's hard cap; the minimum-length enrichment belongs to
-    // entries whose persisted field is genuinely absent.
-    data.seo.description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
-  } else {
+  const fallbackDescription = () => {
     let description = String(it.excerpt || '').replace(/\s+/g, ' ').trim();
     if (!description) {
       description = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati ${year}.`;
@@ -83,8 +79,24 @@ export function deriveSeoMetadata(data) {
     if (description.length < 145) {
       description = `${description}${description.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
     }
-    data.seo.description = truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
+    return truncateToClause(description, DESCRIPTION_MAX_CHARS);
+  };
+
+  let description = '';
+  if (persistedDescription.length >= SEO_DESCRIPTION_MIN) {
+    // Recovery starts by retaining the already-published SERP/RSS copy and
+    // applying the repository's hard cap; the post-cap floor is checked below.
+    description = truncateToClause(persistedDescription, DESCRIPTION_MAX_CHARS);
   }
+
+  // The persisted value can meet the floor before the hard cap and fall below
+  // it after a clause-safe cut. Reopen the Italian body excerpt in that case
+  // instead of failing on a value that recovery can safely reconstruct.
+  if (description.length < SEO_DESCRIPTION_MIN) description = fallbackDescription();
+  data.seo.description = assertSeoDescriptionMinimum(description, {
+    id: data.id,
+    sourceDescriptionLength: persistedDescription.length,
+  });
   const persistedOgDescription = typeof data.seo.ogDescription === 'string'
     ? data.seo.ogDescription.replace(/\s+/g, ' ').trim()
     : '';

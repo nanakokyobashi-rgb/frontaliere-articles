@@ -62,19 +62,30 @@ test('la derivazione mantiene il titolo dei meta e usa la regola di troncamento 
   assert.match(data.seo.keywords, /^frontalieri, ticino, svizzera, italia,/);
 });
 
-test('la derivazione SEO non svuota descrizioni con una prima parola oltre il limite', () => {
+test('la recovery usa il fallback italiano quando una description persistita inizia con un token oltre il cap', () => {
+  const data = article();
+  data.seo = { description: 'X'.repeat(220) };
+
+  deriveSeoMetadata(data);
+
+  assert.equal(
+    data.seo.description,
+    'Una descrizione abbastanza lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite. Dati locali',
+  );
+  assert.ok(data.seo.description.length >= 80);
+  assert.ok(data.seo.description.length <= 160);
+  assert.ok(!data.seo.description.includes('X'));
+});
+
+test('la recovery rifiuta un excerpt che non può essere troncato senza tagliare il primo token', () => {
   const data = article();
   data.content.it.excerpt = 'X'.repeat(220);
-  deriveSeoMetadata(data);
-  assert.ok(data.seo.description.length > 0);
-  assert.ok(data.seo.description.length <= 160);
-  assert.ok(data.seo.ogDescription.length > 0);
-  assert.ok(data.seo.ogDescription.length <= 250);
+  assert.throws(() => deriveSeoMetadata(data), /must contain at least 80 characters/);
 });
 
 test('la recovery conserva seoDescription e ogDescription persistiti invece di derivarli dall excerpt', () => {
   const data = article();
-  data.content.it.seoDescription = 'Descrizione SERP già pubblicata, distinta dall’estratto editoriale.';
+  data.content.it.seoDescription = 'Descrizione SERP già pubblicata, distinta dall’estratto editoriale e sufficientemente lunga per il contratto pubblico.';
   data.content.it.ogDescription = 'Descrizione social già pubblicata, più estesa e mantenuta per RSS e card.';
   data.seo = {
     description: data.content.it.seoDescription,
@@ -85,6 +96,43 @@ test('la recovery conserva seoDescription e ogDescription persistiti invece di d
 
   assert.equal(data.seo.description, data.content.it.seoDescription);
   assert.equal(data.seo.ogDescription, data.content.it.ogDescription);
+});
+
+test('la recovery riapre il fallback italiano se il cap porta la descrizione persistita sotto il floor', () => {
+  const data = article();
+  const fallbackExcerpt = 'Il corpo italiano riporta i valichi aperti, i prezzi dei carburanti e i nuovi annunci di lavoro in Svizzera per l’aggiornamento quotidiano del 2026.';
+  data.content.it.excerpt = fallbackExcerpt;
+  data.seo = { description: `${'A'.repeat(70)}. ${'B'.repeat(100)}` };
+
+  deriveSeoMetadata(data);
+
+  assert.equal(data.seo.description, fallbackExcerpt);
+  assert.ok(data.seo.description.length >= 80);
+});
+
+test('la recovery sostituisce una seoDescription persistita sotto il minimo con il fallback italiano', () => {
+  const data = article();
+  data.content.it.seoDescription = 'Troppo breve.';
+  data.seo = { description: data.content.it.seoDescription };
+
+  deriveSeoMetadata(data);
+
+  assert.notEqual(data.seo.description, data.content.it.seoDescription);
+  assert.ok(data.seo.description.length >= 80);
+  assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
+});
+
+test('la recovery usa il fallback italiano se il cap accorcia una descrizione persistita sotto il minimo', () => {
+  const data = article();
+  const firstClause = 'Descrizione persistita valida per il tema dei frontalieri nel Ticino.';
+  assert.ok(firstClause.length < 80);
+  data.seo = { description: `${firstClause} ${'X'.repeat(100)}` };
+
+  deriveSeoMetadata(data);
+
+  assert.ok(data.seo.description.length >= 80);
+  assert.ok(data.seo.description.length <= 160);
+  assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
 });
 
 test('il builder SEO rifiuta Markdown anche nel percorso di recovery diretto', () => {
@@ -105,6 +153,28 @@ test('il builder SEO rifiuta Markdown anche nel percorso di recovery diretto', (
       modifiedAt: data.date,
     }),
     /excerpt-plain.*seo\.description.*reference-link/,
+  );
+});
+
+test('il builder SEO rifiuta una description breve prima che la recovery possa scriverla', () => {
+  const data = article();
+  data.seo = {
+    title: 'Titolo',
+    description: 'Descrizione troppo breve.',
+    keywords: 'frontalieri, ticino',
+    ogTitle: 'Titolo',
+    ogDescription: 'Descrizione social semplice.',
+    headline: 'Titolo',
+    breadcrumbName: 'Titolo',
+  };
+
+  assert.throws(
+    () => buildSeoEntry(data, {
+      provenance: { kind: 'wikimedia-commons', record: { width: 1200, height: 675 } },
+      publishedAt: data.date,
+      modifiedAt: data.date,
+    }),
+    /must contain at least 80 characters/,
   );
 });
 

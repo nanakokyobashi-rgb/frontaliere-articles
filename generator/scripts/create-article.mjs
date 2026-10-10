@@ -336,6 +336,7 @@ import {
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
+import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
@@ -14230,12 +14231,7 @@ function optimizeSeoMetadata(data) {
     42,
   );
 
-  let desc = stripExcerptMarkdown(data.seo.description || it.excerpt || '');
-  if (!desc) desc = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati 2026.`;
-  if (desc.length < 145) {
-    desc = `${desc}${desc.endsWith('.') ? '' : '.'} Dati aggiornati 2026 per frontalieri in Ticino.`;
-  }
-  data.seo.description = truncateAtWordBoundary(desc, 160);
+  ensureSeoDescriptionMinimum(data);
   data.seo.ogDescription = truncateAtWordBoundary(
     stripExcerptMarkdown(data.seo.ogDescription || data.seo.description),
     SEO_OG_DESCRIPTION_MAX,
@@ -19357,9 +19353,9 @@ export function buildArticlePublishedUrls(data) {
 /**
  * Budget for `seo.description` / `seo.ogDescription`.
  *
- * The site's `tests/seo-description-length.test.ts` hard-fails above 170; 160
- * keeps a margin and matches what the AI flow here already enforced before this
- * became a shared rule.
+ * The site's `tests/seo-description-length.test.ts` hard-fails below 80 and
+ * above 170. The writer requires 80 characters of article-specific copy and
+ * keeps the 160-character cap as headroom below the site's maximum.
  */
 const SEO_DESCRIPTION_MAX = 160;
 
@@ -19460,6 +19456,38 @@ function clampSeoDescriptions(data) {
  * deterministic producers call `registerArticleFiles()` directly and must
  * meet the same contract before the first registry/meta write.
  */
+function ensureSeoDescriptionMinimum(data) {
+  const seo = data?.seo;
+  if (!seo || typeof seo !== 'object') {
+    throw new Error(`SEO description for article "${data?.id || 'unknown'}" is missing`);
+  }
+
+  const description = stripExcerptMarkdown(
+    typeof seo.description === 'string' ? seo.description : '',
+  );
+  const excerpt = stripExcerptMarkdown(
+    typeof data?.content?.it?.excerpt === 'string' ? data.content.it.excerpt : '',
+  );
+  const candidates = [description, excerpt]
+    .filter((candidate) => candidate.length >= SEO_DESCRIPTION_MIN)
+    .map((candidate) => truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX));
+  const candidate = candidates.find((bounded) => bounded.trim().length >= SEO_DESCRIPTION_MIN);
+  if (!candidate) {
+    assertSeoDescriptionMinimum(candidates[0] ?? '', {
+      id: data?.id || 'unknown',
+      sourceDescriptionLength: description.length,
+      sourceExcerptLength: excerpt.length,
+    });
+  }
+
+  seo.description = assertSeoDescriptionMinimum(candidate, {
+    id: data?.id || 'unknown',
+    sourceDescriptionLength: description.length,
+    sourceExcerptLength: excerpt.length,
+  });
+  return seo.description;
+}
+
 function assertArticleDescriptionsArePlain(data) {
   assertPlainDescriptionFields(data?.seo, {
     fieldPrefix: 'seo.',
@@ -19521,6 +19549,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // percorso AI primario.
   preserveMunicipalityNamesInMetadata(data);
   clampSeoDescriptions(data);
+  ensureSeoDescriptionMinimum(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();
