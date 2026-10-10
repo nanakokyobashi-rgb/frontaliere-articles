@@ -9,6 +9,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.heiden-tassa-base-rifiuti.title': 'Heiden increases the basic waste fee',
     'blog.article.heiden-tassa-base-rifiuti.excerpt': 'In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.',
     'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Illustration generated for this article',
+    'blog.article.herisau-verkehr-appenzello.title': 'Herisau: the two Appenzells call for greater speed',
+    'blog.article.herisau-verkehr-appenzello.excerpt': 'During the consultation on «Verkehr \'45», Appenzell Ausserrhoden calls for the proposal to be reviewed and challenges the direction of the railway component.',
+    'blog.article.herisau-verkehr-appenzello.imageAlt': 'Road and railway infrastructure in Herisau, Appenzell Ausserrhoden',
 };
 
 export default blogMetaCantonAppenzelloEn;
