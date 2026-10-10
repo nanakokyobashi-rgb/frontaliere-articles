@@ -797,38 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1955482/tassi-raiffeisen-svizzera-bns-crescita-forte": {
-      "section": "frontaliere",
-      "ts": 1791445759176
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/raiffeisen%3a-%22crescita-pi%c3%b9-forte-del-previsto%2c-ora-bns-alzer%c3%a0-tassi%22/92184611": {
-      "section": "frontaliere",
-      "ts": 1791449359731
-    },
-    "frontaliere::https://www.rsi.ch/s/4136807": {
-      "section": "frontaliere",
-      "ts": 1791449388982
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1955486/32-in-un-anno-il-mercato-del-lavoro-ia-cresce-rapidamente": {
-      "section": "frontaliere",
-      "ts": 1791449420518
-    },
-    "frontaliere::https://www.rsi.ch/s/4145129": {
-      "section": "frontaliere",
-      "ts": 1791449443633
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954988/traffico-merci-su-rotaia-nel-personale-c-e-apprensione-per-la-sicurezza": {
-      "section": "frontaliere",
-      "ts": 1791449488815
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1955499/aziende-cantonali-ma-quanto-prendono-i-membri-dei-cda": {
-      "section": "frontaliere",
-      "ts": 1791449510348
-    },
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955474/dati-publica-confederazione-fuga-pensioni-cassa": {
-      "section": "frontaliere",
-      "ts": 1791449541119
-    },
     "frontaliere::https://www.tio.ch/ticino/economia/1955537/shiu-wing-hong-valcambi-steel-kong-ministro": {
       "section": "frontaliere",
       "ts": 1791453246756
@@ -1148,6 +1116,10 @@
     "svizzera::https://www.tio.ch/svizzera/cronaca/1955733/chuv-documenti-medici-ustionati-stato-crans-montana-sospeso": {
       "section": "svizzera",
       "ts": 1791609987962
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
+      "section": "svizzera",
+      "ts": 1791622506439
     }
   }
 }

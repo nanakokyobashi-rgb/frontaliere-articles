@@ -10,6 +10,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T08:47:31.158Z",
       "lastFailureAt": "2026-10-10T08:47:31.158Z"
+    },
+    {
+      "articleId": "assistenza-uri-requisiti-domanda",
+      "title": "Assistenza sociale Canton Uri: requisiti e domanda",
+      "fallbackImage": "/images/blog/article-assistenza-sociale-lucerna-requisiti.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T09:05:08.712Z",
+      "lastFailureAt": "2026-10-10T09:05:08.712Z"
     }
   ]
 }

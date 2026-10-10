@@ -8036,6 +8036,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.uri-soglia-salariale-controlli.title': 'Salario minimo a Uri: requisiti e applicazione',
     'blog.article.uri-soglia-salariale-controlli.excerpt': 'In Svizzera non esiste un salario minimo federale: per Uri bisogna distinguere disciplina cantonale, settori interessati e contratti collettivi.',
     'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Documenti di lavoro sul salario minimo nel Cantone di Uri',
+    'blog.article.assistenza-uri-requisiti-domanda.title': 'Assistenza sociale Canton Uri: requisiti e domanda',
+    'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Nel Cantone di Uri conta la condizione di bisogno La gestione è affidata in genere a Cantoni e Comuni La domanda va all\'ufficio comunale o cantonale competente',
+    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Scena svizzera con edificio pubblico e cartella documenti, immagine simbolica per l\'assistenza sociale',
 };
 
 export default blogMetaChIt;

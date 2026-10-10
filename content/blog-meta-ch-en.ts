@@ -8036,6 +8036,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.uri-soglia-salariale-controlli.title': 'Minimum wage in Uri: requirements and implementation',
     'blog.article.uri-soglia-salariale-controlli.excerpt': 'In Switzerland, there is no federal minimum wage: for Uri, it is necessary to distinguish between cantonal regulations, the sectors concerned and collective agreements.',
     'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Employment documents about minimum wage rules in the canton of Uri',
+    'blog.article.assistenza-uri-requisiti-domanda.title': 'Social assistance in the Canton of Uri: requirements and application',
+    'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'In the canton of Uri, the condition of need counts Management is generally entrusted to the cantons and municipalities The application goes to the competent municipal or cantonal office',
+    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Swiss public building and document folder, symbolic image for social assistance',
 };
 
 export default blogMetaChEn;
