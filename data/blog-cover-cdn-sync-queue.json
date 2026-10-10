@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-argovia-polizia-regionale-poteri.webp",
-      "sha256": "3dd5a7a1c2d892309c7345466950a7147f9131e29521e014fd0a7c5d93fdc87e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-argovia-polizia-regionale-poteri-480w.webp",
-      "sha256": "dac885299fe854b602ebc64b4e34560607c1a13a005c81adbb0ddfc63a6a2f57"
-    }
-  ]
+  "items": []
 }
