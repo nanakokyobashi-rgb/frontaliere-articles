@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-frana-sementina-h13-gudo.webp",
+      "sha256": "96e52561121a4930ead703ca63c20ffd55ddb824b86d2a78db1411981608b6e4"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-frana-sementina-h13-gudo-480w.webp",
+      "sha256": "0e0e02a2fd64566e11eb04507f4ccf688cad31bf9b2f9026263ab8cf87df05fc"
+    }
+  ]
 }
