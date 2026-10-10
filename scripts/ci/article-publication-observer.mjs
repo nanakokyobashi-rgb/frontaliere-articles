@@ -39,8 +39,12 @@ import {
 export const OBSERVER_ISSUE_TITLE = 'Article publication lag (corpus → site)';
 export const DEFAULT_LOOKBACK_DAYS = 7;
 export const DEFAULT_STALE_MINUTES = 60;
-export const DEFAULT_MAX_PAGES = 300;
-export const DEFAULT_MIN_INTERVAL_MS = 500;
+// The observer must cover the whole seven-day window: a capped clean sample is
+// not evidence that publication is current. The 2026-10-10 production window
+// contained 2,817 targets; 5,000 leaves measured headroom while the 100 ms
+// courtesy interval keeps the sequential scan inside the workflow timeout.
+export const DEFAULT_MAX_PAGES = 5_000;
+export const DEFAULT_MIN_INTERVAL_MS = 100;
 export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
 export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
@@ -333,13 +337,14 @@ export async function observePublicationLag({
     degraded: checked.filter((entry) => entry.degraded),
     capped: targets.length > maxPages,
     unread: Math.max(0, targets.length - maxPages),
+    maxPages,
   };
 }
 
 export function formatObserverReport(report, { nowMs = Date.now(), skipped = [] } = {}) {
   const lines = [
     `Osservatore pubblicazione articoli — ${new Date(nowMs).toISOString()}`,
-    `Controllate: ${report.checked.length}; in ritardo: ${report.lagging.length}; immagini degradate: ${report.degraded.length}; limite: ${DEFAULT_MAX_PAGES}.`,
+    `Controllate: ${report.checked.length}; in ritardo: ${report.lagging.length}; immagini degradate: ${report.degraded.length}; limite: ${report.maxPages ?? DEFAULT_MAX_PAGES}.`,
   ];
   if (report.capped) lines.push(`⚠️ Lette le ${report.checked.length} pagine cambiate più di recente; ${report.unread ?? 'altre'} più vecchie nella finestra non sono state lette in questo giro.`);
   for (const item of report.lagging) {
@@ -530,6 +535,8 @@ export async function runObserver({
   fetchDeclaredImageImpl = fetchDeclaredImage,
   githubClient = null,
   repairCap = DEFAULT_REPAIR_CAP,
+  maxPages = DEFAULT_MAX_PAGES,
+  minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
   gitLogImpl = gitText,
 } = {}) {
   const since = new Date(nowMs - days * 24 * 60 * 60 * 1000).toISOString();
@@ -548,7 +555,13 @@ export async function runObserver({
     terminalRetentionDays: DEFAULT_TERMINAL_RETENTION_DAYS,
   });
   const prepared = buildObserverTargets({ changedBodies, ledgerItems: ledger, ...sources });
-  const report = await observePublicationLag({ targets: prepared.targets, nowMs, fetchImpl });
+  const report = await observePublicationLag({
+    targets: prepared.targets,
+    nowMs,
+    fetchImpl,
+    maxPages,
+    minIntervalMs,
+  });
   const description = formatObserverReport(report, { nowMs, skipped: prepared.skipped });
   const reconciled = await reconcileDispatches(ledger, github);
   ledger = reconciled.items;
@@ -584,7 +597,9 @@ export async function runObserver({
     if (proof.available) readyKeys.add(key);
   }
 
-  const actionable = report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
+  // A partial scan cannot prove the publication surface healthy. Keep the
+  // stable issue open (or create it) until every target in the window was read.
+  const actionable = report.capped || report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
   if (actionable && !issue) {
     issue = await github.createIssue(description);
     if (!issue) throw new Error('issue observer non trovata dopo la creazione');
@@ -612,7 +627,7 @@ export async function runObserver({
   }
 
   let resolved = null;
-  if (!report.lagging.length && !report.degraded.length && ledger.length === 0 && issue) {
+  if (!report.capped && !report.lagging.length && !report.degraded.length && ledger.length === 0 && issue) {
     resolved = await github.resolveIssue();
   }
   return { ...report, issue, resolved, dispatched, ledger, changedBodies, skipped: prepared.skipped, description };
@@ -623,7 +638,11 @@ if (invokedDirectly) {
   runObserver({ days: parseArgs(process.argv.slice(2)).days })
     .then((result) => {
       console.log(formatObserverReport(result, { skipped: result.skipped }));
-      if (result.lagging.length === 0 && result.degraded.length === 0) console.log('Nessun ritardo o degrado oltre la finestra di grazia.');
+      if (!result.capped && result.lagging.length === 0 && result.degraded.length === 0) {
+        console.log('Nessun ritardo o degrado oltre la finestra di grazia.');
+      } else if (result.capped) {
+        console.log(`Copertura incompleta: ${result.unread} pagine nella finestra non sono state lette.`);
+      }
     })
     .catch((error) => {
       console.error(`[article-publication-observer] fatal: ${error.message || error}`);

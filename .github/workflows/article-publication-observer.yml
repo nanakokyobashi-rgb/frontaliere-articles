@@ -32,7 +32,7 @@ jobs:
       issues: write
       actions: write
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     steps:
       - name: Checkout corpus history and observer inputs
         uses: actions/checkout@v7

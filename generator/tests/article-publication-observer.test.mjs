@@ -275,6 +275,8 @@ test('il tetto di pagine taglia i cambi più vecchi, non la fine dell’alfabeto
   assert.deepEqual(read, ['https://example.test/zeta-recente/']);
   assert.equal(result.capped, true);
   assert.equal(result.unread, 2);
+  assert.equal(result.maxPages, 1);
+  assert.match(formatObserverReport(result, { nowMs }), /limite: 1/);
   assert.match(formatObserverReport(result, { nowMs }), /2 più vecchie nella finestra non sono state lette/);
 });
 
@@ -452,6 +454,33 @@ test('una lettura sana rimuove il degradato durevole e risolve l issue senza dis
     assert.deepEqual(result.ledger, []);
     assert.deepEqual(result.dispatched, []);
     assert.ok(github.calls.some((call) => call.type === 'resolve'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('una scansione pulita ma incompleta apre il segnale e non risolve l issue stabile', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient();
+  const log = [
+    `commit ${'a'.repeat(40)} 1791417600`,
+    'content/blog-body/it/alpha.ts',
+    'content/blog-body/it/zeta.ts',
+  ].join('\n');
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      maxPages: 1,
+      minIntervalMs: 0,
+      fetchImpl: async () => ({ ok: true, status: 200, text: async () => ownPage('/images/blog/alpha.webp') }),
+    });
+    assert.equal(result.capped, true);
+    assert.equal(result.unread, 1);
+    assert.ok(github.calls.some((call) => call.type === 'create' && call.description.includes('1 più vecchie')));
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });
   }
