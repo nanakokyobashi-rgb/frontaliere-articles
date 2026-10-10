@@ -213,6 +213,25 @@ export function keywordTopicScore(article, topicConfig) {
 const titleKey = (title) => foldForMatch(title).replace(/[^a-z0-9]+/g, ' ').trim();
 
 /**
+ * Un hub rende ogni voce in tutte le locali. Mantiene il candidato meglio
+ * classificato quando ID distinti puntano allo stesso URL canonico in una
+ * qualsiasi locale, senza indebolire la validazione finale del renderer.
+ * @param {Array<{ article: any }>} candidates ordinati per ranking decrescente
+ */
+export function filterUniqueCuratedCandidates(candidates) {
+  const seenTitles = new Set();
+  const seenUrls = new Map(HUB_LOCALES.map((locale) => [locale, new Set()]));
+  return candidates.filter(({ article }) => {
+    const key = titleKey(article.title.it);
+    const localizedUrls = HUB_LOCALES.map((locale) => [locale, articleUrl(article, locale)]);
+    if (seenTitles.has(key) || localizedUrls.some(([locale, url]) => seenUrls.get(locale).has(url))) return false;
+    seenTitles.add(key);
+    for (const [locale, url] of localizedUrls) seenUrls.get(locale).add(url);
+    return true;
+  });
+}
+
+/**
  * Assegna e ordina le news promosse di ogni hub del cantone.
  *
  * @param {object} args
@@ -295,15 +314,8 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
 
   const max = config.maxCuratedArticles;
   for (const topic of CANTON_HUB_TOPIC_KEYS) {
-    const seenTitles = new Set();
-    byTopic[topic] = byTopic[topic]
-      .sort((x, y) => y.score - x.score || y.article.date.localeCompare(x.article.date) || x.article.id.localeCompare(y.article.id))
-      .filter(({ article }) => {
-        const key = titleKey(article.title.it);
-        if (seenTitles.has(key)) return false;
-        seenTitles.add(key);
-        return true;
-      })
+    byTopic[topic] = filterUniqueCuratedCandidates(byTopic[topic]
+      .sort((x, y) => y.score - x.score || y.article.date.localeCompare(x.article.date) || x.article.id.localeCompare(y.article.id)))
       .slice(0, max)
       .map(({ article }) => article);
   }
