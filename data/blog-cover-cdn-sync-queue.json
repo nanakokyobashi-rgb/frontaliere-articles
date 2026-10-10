@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lucerna-polizza-edifici-regole.webp",
-      "sha256": "e0c7a7ece0c852a09ee07cbe17d6b155656dd26cd0168ea5e414d3147f4abe2a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lucerna-polizza-edifici-regole-480w.webp",
-      "sha256": "10821abf1be951255602c3d9470410cf0092a81a6cd78ff4bd7c603a13009740"
-    }
-  ]
+  "items": []
 }
