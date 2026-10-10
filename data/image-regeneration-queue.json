@@ -20,6 +20,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-10T15:20:37.719Z",
       "lastFailureAt": "2026-10-10T19:13:45.171Z"
+    },
+    {
+      "articleId": "cantieri-mobilita-ginevra",
+      "title": "Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026",
+      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-ginevra.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T20:45:24.130Z",
+      "lastFailureAt": "2026-10-10T20:45:24.130Z"
     }
   ]
 }

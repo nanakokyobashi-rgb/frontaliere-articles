@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ginevra-stop-autostrada-a412': { it: 'ginevra-stop-autostrada-a412', en: 'geneva-stop-a412-highway', de: 'genf-stopp-autobahn-a412', fr: 'geneve-arret-travaux-a412' },
  'comunicato-consiglio-stato-ginevra': { it: 'comunicato-consiglio-stato-ginevra', en: 'geneva-state-council-communique', de: 'mitteilung-genfer-staatsrat', fr: 'communique-conseil-etat-geneve' },
  'unige-natura-equilibrio-mentale': { it: 'unige-natura-equilibrio-mentale', en: 'unige-nature-mental-wellbeing', de: 'unige-natur-psychisches-wohlbefinden', fr: 'unige-nature-sante-mentale' },
+ 'cantieri-mobilita-ginevra': { it: 'cantieri-mobilita-ginevra', en: 'geneva-mobility-construction', de: 'genf-mobilitaetsbaustellen', fr: 'chantiers-mobilite-geneve' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

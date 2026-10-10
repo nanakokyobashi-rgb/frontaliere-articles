@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'cantieri-mobilita-ginevra',
+ category: 'pratico',
+ date: '2026-10-10T20:45:24.102Z',
+ image: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-ginevra.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

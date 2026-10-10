@@ -231,6 +231,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cantieri-mobilita-ginevra': {
+    title: 'Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026',
+    description: 'Nuovi cantieri nel Canton Ginevra dal 12 ottobre 2026: l\'annuncio Impacts Mobilités indica un impatto sugli spostamenti e riguarda la mobilità cantonale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantieri, ginevra, mobilità, impattata',
+    ogTitle: 'Ginevra, nuovi cantieri: impatti sulla mobilità',
+    ogDescription: 'Dal 12 ottobre 2026 nuovi cantieri incideranno sugli spostamenti nel Canton Ginevra. La comunicazione Impacts Mobilités fissa la data di avvio, mentre i dettagli operativi sul percorso vanno verificati negli aggiornamenti disponibili.',
+    canonicalPath: '/articoli-ginevra/cantieri-mobilita-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026",
+      "description": "Nuovi cantieri nel Canton Ginevra dal 12 ottobre 2026: l'annuncio Impacts Mobilités indica un impatto sugli spostamenti e riguarda la mobilità cantonale.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuovi cantieri nel Canton Ginevra con impatto sugli spostamenti dal 12 ottobre 2026."
+      },
+      "datePublished": "2026-10-10T20:45:24+00:00",
+      "dateModified": "2026-10-10T20:45:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ginevra/cantieri-mobilita-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

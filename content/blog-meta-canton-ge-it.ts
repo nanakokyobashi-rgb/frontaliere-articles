@@ -21,6 +21,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.unige-natura-equilibrio-mentale.title': 'UNIGE: salute mentale, 5-10 ottobre 2026',
     'blog.article.unige-natura-equilibrio-mentale.excerpt': 'La Settimana della salute mentale 2026 va dal 5 al 10 ottobre.',
     'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.cantieri-mobilita-ginevra.title': 'Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026',
+    'blog.article.cantieri-mobilita-ginevra.excerpt': 'Nuovi cantieri nel Canton Ginevra partiranno il 12 ottobre 2026 e avranno un impatto sugli spostamenti.',
+    'blog.article.cantieri-mobilita-ginevra.imageAlt': 'Nuovi cantieri nel Canton Ginevra con impatto sugli spostamenti dal 12 ottobre 2026.',
 };
 
 export default blogMetaCantonGeIt;
