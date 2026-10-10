@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-aargau-pfas-bonifiche-incerte.webp",
-      "sha256": "6f0582617a0cacb38752a5d83a2a21bfdfbbd0d6e963c602d8d8c64891a8fce3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-aargau-pfas-bonifiche-incerte-480w.webp",
-      "sha256": "a0e95967443ba96fc6303bada8fadbab9acdf5fbaabe455eddf5d0fecd83036a"
-    }
-  ]
+  "items": []
 }
