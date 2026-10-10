@@ -161,8 +161,8 @@
       "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "b87855fe8d3bd05e",
-        "alignedAt": "2026-10-08"
+        "corpus": "24cb5ee74cbd396b",
+        "alignedAt": "2026-10-10"
       }
     },
     {
