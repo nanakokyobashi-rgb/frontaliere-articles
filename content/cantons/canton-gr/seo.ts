@@ -236,6 +236,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parco-solare-nalps-tujetsch': {
+    title: 'Avanza il progetto del parco solare alpino di Nalps',
+    description: 'Il progetto del parco solare alpino di Nalps a Tujetsch sta facendo progressi. Scopri i dettagli del servizio di Telesguard trasmesso su Play RTR.',
+    keywords: 'frontalieri, ticino, svizzera, italia, avanza, progetto, parco, solare',
+    ogTitle: 'Avanza il progetto del parco solare alpino di Nalps',
+    ogDescription: 'Il progetto per un parco solare alpino a Nalps, nella località di Tujetsch, sta facendo progressi. Il servizio completo è disponibile tramite il programma Telesguard su Play RTR.',
+    canonicalPath: '/articoli-grigioni/parco-solare-nalps-tujetsch/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avanza il progetto del parco solare alpino di Nalps",
+      "description": "Il progetto del parco solare alpino di Nalps a Tujetsch sta facendo progressi. Scopri i dettagli del servizio di Telesguard trasmesso su Play RTR.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-parco-solare-nalps-tujetsch.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio alpino della regione di Tujetsch nel Canton Grigioni"
+      },
+      "datePublished": "2026-10-10T18:34:27+00:00",
+      "dateModified": "2026-10-10T18:34:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/parco-solare-nalps-tujetsch/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

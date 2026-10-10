@@ -21,6 +21,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch chiude strada, sentieri e area d\'arrampicata',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Sopra Fläsch il rischio di distacco di roccia porta a chiusure precauzionali di strada, sentieri escursionistici e palestra d\'arrampicata.',
     'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.parco-solare-nalps-tujetsch.title': 'Avanza il progetto del parco solare alpino di Nalps',
+    'blog.article.parco-solare-nalps-tujetsch.excerpt': 'Il progetto per un parco solare alpino a Nalps, nella località di Tujetsch, sta facendo progressi, come riportato in un servizio di Telesguard su Play RTR.',
+    'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Paesaggio alpino della regione di Tujetsch nel Canton Grigioni',
 };
 
 export default blogMetaCantonGrIt;

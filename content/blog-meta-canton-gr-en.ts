@@ -21,6 +21,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch closes road, trails and climbing area',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Above Fläsch, the risk of rockfall leads to precautionary closures of the road, hiking trails, and climbing gym.',
     'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Illustration generated for this article',
+    'blog.article.parco-solare-nalps-tujetsch.title': 'Nalps alpine solar park project moves forward',
+    'blog.article.parco-solare-nalps-tujetsch.excerpt': 'The project for an alpine solar park in Nalps, in the locality of Tujetsch, is making progress, as reported in a Telesguard segment on Play RTR.',
+    'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Alpine landscape of the Tujetsch region in Canton Graubünden',
 };
 
 export default blogMetaCantonGrEn;

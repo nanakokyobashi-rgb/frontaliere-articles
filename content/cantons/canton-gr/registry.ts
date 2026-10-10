@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'parco-solare-nalps-tujetsch',
+ category: 'novita',
+ date: '2026-10-10T18:34:27.306Z',
+ image: '/images/blog/article-parco-solare-nalps-tujetsch.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

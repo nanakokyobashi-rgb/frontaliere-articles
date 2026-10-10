@@ -21,6 +21,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch sperrt Straße, Wanderwege und Klettergarten',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Oberhalb von Fläsch führt die Gefahr eines Felsabbruchs zu vorsorglichen Sperrungen der Straße, der Wanderwege und des Klettergartens.',
     'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.parco-solare-nalps-tujetsch.title': 'Das Projekt des alpinen Solarparks von Nalps schreitet voran',
+    'blog.article.parco-solare-nalps-tujetsch.excerpt': 'Das Projekt für einen alpinen Solarpark in Nalps, in der Ortschaft Tujetsch, macht Fortschritte, wie in einem Beitrag von Telesguard auf Play RTR berichtet wird.',
+    'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Alpinlandschaft der Region Tujetsch im Kanton Graubünden',
 };
 
 export default blogMetaCantonGrDe;

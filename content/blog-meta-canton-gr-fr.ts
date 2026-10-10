@@ -21,6 +21,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch ferme la route, les sentiers et le site d’escalade',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Au-dessus de Fläsch, le risque de chute de rochers entraîne la fermeture préventive de la route, des sentiers de randonnée et du site d’escalade.',
     'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.parco-solare-nalps-tujetsch.title': 'Le projet du parc solaire alpin de Nalps avance',
+    'blog.article.parco-solare-nalps-tujetsch.excerpt': 'Le projet d’un parc solaire alpin à Nalps, dans la localité de Tujetsch, progresse, comme le rapporte un sujet de Telesguard sur Play RTR.',
+    'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Paysage alpin de la région de Tujetsch dans le canton des Grisons',
 };
 
 export default blogMetaCantonGrFr;
