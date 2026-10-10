@@ -66,6 +66,7 @@ jobs:
             generator/scripts/load-rc-env.mjs
             generator/scripts/lib/source-copy-guard.mjs
             generator/scripts/lib/google-service-account-token.mjs
+            generator/scripts/lib/fetch-with-ref-timeout.mjs
           persist-credentials: false
 
       - name: Prepare Firebase credentials for runtime read token

@@ -34,7 +34,7 @@ import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mj
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { detectAiMetaResponse } from './ai-meta-response.mjs';
 import { repairLlmJson } from './llm-json-repair.mjs';
-import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 export { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 import {
   extractOAuthErrorReason,
@@ -1783,6 +1783,12 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
             const snippet = (await res.text().catch(() => '')).slice(0, 200);
             logOptionalTranslationTier(`[azure] HTTP ${res.status} (key #${idx + 1}, region="${AZURE_REGION}"): ${snippet}`, 'warn');
             logOptionalTranslationTier(`🔑 Azure key #${idx + 1} auth failure (${res.status}) — exhausting for the rest of the run`);
+          } else {
+            // Another concurrent translation may have exhausted this key after
+            // this request was sent. Do not leave this response's referenced
+            // deadline/listener alive just because the first failure already
+            // logged the body.
+            releaseFetchWithRefTimeout(res);
           }
           _azureExhaustedKeys.add(key);
           _cascadeStats.tierErrors.azure = (_cascadeStats.tierErrors.azure || 0) + 1;
