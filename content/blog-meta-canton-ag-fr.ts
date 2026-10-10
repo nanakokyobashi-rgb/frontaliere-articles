@@ -21,6 +21,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.title': 'Buchs prévoit un déficit de 3,1 millions dans le budget 2027',
     'blog.article.buchs-deficit-2027-budget.excerpt': 'La commune de Buchs prévoit un déficit d\'environ 3,1 millions de francs pour 2027, en maintenant le multiplicateur fiscal à 118% et en prévoyant une hausse des coûts résiduels de soins de 600\'000 francs.',
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'Vue de la mairie de Buchs avec les documents budgétaires sur une table, arrière-plan campagne argovienne',
+    'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS en Argovie : coûts d\'assainissement encore incertains',
+    'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'En Argovie, seuls deux tiers des communes ont répondu au sujet des PFAS.',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Zone industrielle en Argovie liée à l\'évaluation des assainissements PFAS',
 };
 
 export default blogMetaCantonAgFr;

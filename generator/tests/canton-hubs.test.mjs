@@ -26,7 +26,7 @@ import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
-import { keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
+import { articleUrl, filterUniqueCuratedCandidates, keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
 import { shapeFuelBlock } from '../scripts/lib/canton-hubs/blocks-fuel.mjs';
@@ -227,6 +227,29 @@ function buildOne(section, topic, overrides = {}) {
     ...overrides,
   });
 }
+
+test('canton-basilea/pensioni: gli articoli AVS distinti hanno URL francesi distinti', async () => {
+  const articles = loadSectionArticles(ROOT, 'svizzera');
+  const prestations = articles.find((article) => article.id === 'avs-prestazioni-complementari-basilicacampagna');
+  const firstPillar = articles.find((article) => article.id === 'avs-prestazioni-complementari-basilea-campagna');
+
+  assert.ok(prestations, 'articolo AVS con prestazioni complementari presente nel corpus');
+  assert.ok(firstPillar, 'articolo sul primo pilastro AVS presente nel corpus');
+  assert.equal(prestations.slug.fr, 'avs-prestations-complementaires-bale-campagne');
+  assert.equal(firstPillar.slug.fr, 'gestion-premier-pilier-avs-bale-campagne');
+  assert.notEqual(articleUrl(prestations, 'fr'), articleUrl(firstPillar, 'fr'));
+
+  const result = await generateCantonHubs({
+    root: ROOT,
+    sections: ['canton-basilea'],
+    topics: ['pensioni'],
+    dryRun: true,
+    nowMs: NOW,
+    datasets: NO_DATASETS,
+    log: quiet,
+  });
+  assert.deepEqual(result.errors, []);
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. Costruzione: 3 cantoni pilota x 6 temi x 4 locali
@@ -627,6 +650,21 @@ async function curatedFor(section, articles = CORPUS) {
   return { pool, ...selectCuratedArticles({ pool, section, config: CONFIG, engine, nowMs: NOW }) };
 }
 const idsOf = (list) => list.map((a) => a.id);
+
+test('le news promosse deduplicano gli URL localizzati anche con titoli IT distinti', () => {
+  const candidate = (id, frSlug) => ({ article: {
+    id,
+    section: 'svizzera',
+    title: { it: `Titolo distinto ${id}` },
+    slug: { it: `it-${id}`, en: `en-${id}`, de: `de-${id}`, fr: frSlug },
+  } });
+  const selected = filterUniqueCuratedCandidates([
+    candidate('meglio-classificato', 'prestations-complementaires-bale-campagne'),
+    candidate('collisione-fr', 'prestations-complementaires-bale-campagne'),
+    candidate('altro-url', 'prestations-complementaires-basel-campagne'),
+  ]);
+  assert.deepEqual(selected.map(({ article }) => article.id), ['meglio-classificato', 'altro-url']);
+});
 
 test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettati; un articolo sta in un solo hub', async () => {
   const { pool, byTopic } = await curatedFor('canton-ti');

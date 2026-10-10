@@ -8038,13 +8038,16 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Documents de travail sur le salaire minimum dans le canton d\'Uri',
     'blog.article.assistenza-uri-requisiti-domanda.title': 'Aide sociale dans le canton d\'Uri : conditions et demande',
     'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Dans le canton d\'Uri, c\'est la situation de besoin qui compte La gestion est généralement confiée aux cantons et aux communes La demande doit être adressée à l\'office communal ou cantonal compétent',
-    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Bâtiment public suisse et dossier de documents, image symbolique de l\'aide sociale',
+    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Illustration générée pour cet article',
     'blog.article.naters-francobolli-falsi-aliexpress.title': 'Faux timbres sur AliExpress : une femme condamnée à Naters',
     'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Femme de Naters condamnée pour des timbres contrefaits 100 timbres commandés sur AliExpress pour 48,59 francs Valeur catalogue de la commande : 120 francs Amende',
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Timbres-poste suisses sur une table',
     'blog.article.imposta-veicoli-uri-calcolo.title': 'Impôt sur les véhicules à moteur à Uri : calcul et paiement',
     'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'Dans le canton d\'Uri, le calcul, les délais et les montants de l\'impôt sur les véhicules à moteur suivent les règles cantonales : ce qu\'il faut vérifier pour le véhicule et l\'adresse.',
     'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Voiture sur une route alpine du canton d\'Uri sur la taxe automobile',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA inaugure les premiers bus électriques à Balerna',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Quatre bus électriques inaugurés à Balerna Marchesi lors de son premier discours en tant que conseiller d\'État Lignes concernées : 2, 3 et 4 Transition d\'AMSA prévue jusqu\'en 2032',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'Bus électrique AMSA en service dans la région du Mendrisiotto',
 };
 
 export default blogMetaChFr;

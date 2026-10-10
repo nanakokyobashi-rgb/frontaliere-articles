@@ -1922,7 +1922,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'avviare-azienda-grigioni-registro-commercio': { it: 'avviare-azienda-grigioni-registro-commercio', en: 'start-business-graubunden-registration-costs', de: 'betrieb-gruendung-graubuenden-handelsregister', fr: 'demarrer-entreprise-grisons-registre-commerce' },
  'affittare-bene-immobili-ticino': { it: 'affittare-bene-immobili-ticino', en: 'renting-well-properties-ticino', de: 'gut-vermieten-immobilien-tessin', fr: 'louer-bien-biens-tessin' },
  'neutralita-svizzera-prospeta': { it: 'neutralita-svizzera-prospeta', en: 'swiss-neutrality-prosperity', de: 'schweizer-neutralitaet-wohlstand', fr: 'neutralite-suisse-prosperite' },
- 'avs-prestazioni-complementari-basilea-campagna': { it: 'avs-prestazioni-complementari-basilea-campagna', en: 'avs-complementary-benefits-basel-countryside', de: 'avs-zusatzleistungen-baselland', fr: 'avs-prestations-complementaires-bale-campagne' },
+ 'avs-prestazioni-complementari-basilea-campagna': { it: 'avs-prestazioni-complementari-basilea-campagna', en: 'avs-complementary-benefits-basel-countryside', de: 'avs-zusatzleistungen-baselland', fr: 'gestion-premier-pilier-avs-bale-campagne' },
  'beloved-aiuto-vittime-crans-montana': { it: 'beloved-aiuto-vittime-crans-montana', en: 'beloved-assistance-victims-crans-montana', de: 'beloved-opferhilfe-crans-montana', fr: 'beloved-aide-victimes-crans-montana' },
  'naturalizzazione-vallese-requisiti-procedura': { it: 'naturalizzazione-vallese-requisiti-procedura', en: 'naturalization-canton-valais-requirements-procedure', de: 'einbuergerung-kanton-wallis-anforderungen-verfahren', fr: 'naturalisation-canton-valais-conditions-procedure' },
  'assegni-familiari-argovia': { it: 'assegni-familiari-argovia', en: 'family-allowances-aargau', de: 'familienleistungen-aargau', fr: 'allocations-familiales-argovie' },
@@ -2704,6 +2704,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'assistenza-uri-requisiti-domanda': { it: 'assistenza-uri-requisiti-domanda', en: 'uri-social-assistance-requirements', de: 'sozialhilfe-uri-voraussetzungen-antrag', fr: 'aide-sociale-uri-conditions-demande' },
  'naters-francobolli-falsi-aliexpress': { it: 'naters-francobolli-falsi-aliexpress', en: 'naters-fake-stamps-aliexpress', de: 'naters-falsche-briefmarken-aliexpress', fr: 'naters-faux-timbres-aliexpress' },
  'imposta-veicoli-uri-calcolo': { it: 'imposta-veicoli-uri-calcolo', en: 'uri-vehicle-tax-calculation', de: 'uri-motorfahrzeugsteuer-berechnung', fr: 'taxe-vehicules-uri-calcul' },
+ 'amsa-bus-elettrici-mendrisiotto': { it: 'amsa-bus-elettrici-mendrisiotto', en: 'amsa-electric-buses-mendrisiotto', de: 'amsa-elektrobusse-mendrisiotto', fr: 'bus-electriques-amsa-mendrisiotto' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

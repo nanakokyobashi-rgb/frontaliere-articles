@@ -21,6 +21,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.title': 'Buchs forecasts a 3,1 million deficit in the 2027 budget',
     'blog.article.buchs-deficit-2027-budget.excerpt': 'The Municipality of Buchs forecasts a deficit of approximately 3,1 million francs for 2027, maintaining the tax multiplier at 118% and anticipating an increase of 600\'000 francs in residual care costs.',
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'View of Buchs town hall with budget documents on a table, Aargau countryside background',
+    'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS in Aargau: remediation costs still uncertain',
+    'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'In Aargau, only two-thirds of the municipalities responded about PFAS.',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Industrial area in Aargau linked to the assessment of PFAS remediation',
 };
 
 export default blogMetaCantonAgEn;

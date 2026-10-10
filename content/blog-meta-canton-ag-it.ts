@@ -21,6 +21,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.title': 'Buchs prevede disavanzo 3,1 milioni nel budget 2027',
     'blog.article.buchs-deficit-2027-budget.excerpt': 'Il Comune di Buchs prevede un disavanzo di circa 3,1 milioni di franchi per il 2027, mantenendo il moltiplicatore fiscale al 118% e prevedendo un aumento dei costi residui di cura di 600\'000 franchi.',
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'Vista del municipio di Buchs con documenti di bilancio sul tavolo, sfondo campagna argoviese',
+    'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS in Argovia: costi di bonifica ancora incerti',
+    'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'In Argovia solo due terzi dei Comuni hanno risposto sul PFAS.',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Area industriale in Argovia associata alla verifica delle bonifiche PFAS',
 };
 
 export default blogMetaCantonAgIt;

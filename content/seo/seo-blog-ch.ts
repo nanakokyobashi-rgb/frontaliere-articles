@@ -101368,10 +101368,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-assistenza-sociale-lucerna-requisiti.webp`,
+        "url": `${BASE_URL}/images/blog/article-assistenza-uri-requisiti-domanda.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Scena svizzera con edificio pubblico e cartella documenti, immagine simbolica per l'assistenza sociale"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T09:05:08+00:00",
       "dateModified": "2026-10-10T09:05:08+00:00",
@@ -101441,15 +101441,17 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Imposta sugli autoveicoli nel Cantone di Uri: criteri di calcolo, scadenze, ufficio della circolazione, cambio veicolo e indirizzo. Guida pratica al pagamento.",
       "image": {
         "@type": "ImageObject",
-        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
-        "copyrightNotice": "Generated media; provider terms apply.",
-        "license": "https://openai.com/policies/terms-of-use/",
-        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
-        "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-imposta-autoveicoli-lucerna-calcolo.webp`,
+        "acquireLicensePage": "https://www.pexels.com/photo/scenic-mountain-landscape-in-unterschachen-switzerland-37425453/",
+        "copyrightNotice": "© Christopher Politano",
+        "license": "https://www.pexels.com/license/",
+        "creator": {"@type":"Person","@id":"https://www.pexels.com/@christopher-politano-978995","name":"Christopher Politano","url":"https://www.pexels.com/@christopher-politano-978995"},
+        "creditText": "Christopher Politano / Pexels",
+        "isBasedOn": "https://www.pexels.com/photo/scenic-mountain-landscape-in-unterschachen-switzerland-37425453/",
+        "description": "Resized derivative of the licensed source.",
+        "url": `${BASE_URL}/images/blog/article-imposta-veicoli-uri-calcolo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Auto su una strada alpina del Cantone di Uri per un articolo sull'imposta cantonale"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T12:04:45+00:00",
       "dateModified": "2026-10-10T12:04:45+00:00",
@@ -101462,6 +101464,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-veicoli-uri-calcolo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-amsa-bus-elettrici-mendrisiotto': {
+    title: 'AMSA inaugura i primi bus elettrici a Balerna | Frontaliere Ticino',
+    description: 'Quattro bus elettrici inaugurati a Balerna Marchesi al primo discorso da Consigliere di Stato Linee coinvolte: 2, 3 e 4 Transizione AMSA prevista fino al 2032',
+    keywords: 'frontalieri, ticino, svizzera, italia, amsa, inaugura, primi, elettrici',
+    ogTitle: 'AMSA inaugura i primi bus elettrici nel Mendrisiotto',
+    ogDescription: 'Quattro bus elettrici inaugurati a Balerna Marchesi al primo discorso da Consigliere di Stato Linee coinvolte: 2, 3 e 4 Transizione AMSA prevista fino al 2032',
+    canonicalPath: '/articoli-svizzera/amsa-bus-elettrici-mendrisiotto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AMSA inaugura i primi bus elettrici a Balerna",
+      "description": "Quattro bus elettrici inaugurati a Balerna Marchesi al primo discorso da Consigliere di Stato Linee coinvolte: 2, 3 e 4 Transizione AMSA prevista fino al 2032",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autobus elettrico AMSA in servizio nel Mendrisiotto"
+      },
+      "datePublished": "2026-10-10T13:00:29+00:00",
+      "dateModified": "2026-10-10T13:00:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/amsa-bus-elettrici-mendrisiotto/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

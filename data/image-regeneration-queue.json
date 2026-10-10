@@ -2,34 +2,24 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "ispezioni-gallerie-lago-como",
-      "title": "A9 Como-Chiasso: chiusure notturne a ottobre",
-      "fallbackImage": "/images/blog/article-a9-chiusure-notturne-sion-sierre.webp",
-      "reason": "All image providers failed for article-ispezioni-gallerie-lago-como: openai-codex (vision gate rejected image: Generic generated highway illustration relevant to Ticino cross-borde",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T08:47:31.158Z",
-      "lastFailureAt": "2026-10-10T08:47:31.158Z"
-    },
-    {
-      "articleId": "assistenza-uri-requisiti-domanda",
-      "title": "Assistenza sociale Canton Uri: requisiti e domanda",
-      "fallbackImage": "/images/blog/article-assistenza-sociale-lucerna-requisiti.webp",
+      "articleId": "aargau-pfas-bonifiche-incerte",
+      "title": "PFAS in Argovia: costi di bonifica ancora incerti",
+      "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "image generation deadline exceeded",
       "status": "queued",
       "failureCount": 0,
-      "requestedAt": "2026-10-10T09:05:08.712Z",
-      "lastFailureAt": "2026-10-10T09:05:08.712Z"
+      "requestedAt": "2026-10-10T12:56:57.812Z",
+      "lastFailureAt": "2026-10-10T12:56:57.812Z"
     },
     {
-      "articleId": "imposta-veicoli-uri-calcolo",
-      "title": "Imposta sugli autoveicoli Uri: calcolo e pagamento",
-      "fallbackImage": "/images/blog/article-imposta-autoveicoli-lucerna-calcolo.webp",
+      "articleId": "amsa-bus-elettrici-mendrisiotto",
+      "title": "AMSA inaugura i primi bus elettrici a Balerna",
+      "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
       "reason": "image generation deadline exceeded",
       "status": "queued",
       "failureCount": 0,
-      "requestedAt": "2026-10-10T12:04:45.616Z",
-      "lastFailureAt": "2026-10-10T12:04:45.616Z"
+      "requestedAt": "2026-10-10T13:00:30.249Z",
+      "lastFailureAt": "2026-10-10T13:00:30.249Z"
     }
   ]
 }

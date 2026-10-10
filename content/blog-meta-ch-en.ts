@@ -8038,13 +8038,16 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Employment documents about minimum wage rules in the canton of Uri',
     'blog.article.assistenza-uri-requisiti-domanda.title': 'Social assistance in the Canton of Uri: requirements and application',
     'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'In the canton of Uri, the condition of need counts Management is generally entrusted to the cantons and municipalities The application goes to the competent municipal or cantonal office',
-    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Swiss public building and document folder, symbolic image for social assistance',
+    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Illustration generated for this article',
     'blog.article.naters-francobolli-falsi-aliexpress.title': 'Counterfeit stamps on AliExpress: woman sentenced in Naters',
     'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Woman from Naters convicted for counterfeit postage stamps 100 stamps ordered on AliExpress for 48,59 francs List price of the order: 120 francs Fine',
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Swiss postage stamps on a table',
     'blog.article.imposta-veicoli-uri-calcolo.title': 'Uri motor vehicle tax: calculation and payment',
     'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'In the Canton of Uri, the calculation, deadlines and amounts of the motor vehicle tax follow cantonal rules: what to check for each vehicle and address.',
     'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Car on an Alpine road in the Canton of Uri for an article about vehicle tax',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA inaugurates the first electric buses in Balerna',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Four electric buses inaugurated in Balerna Marchesi in his first speech as State Councillor Lines involved: 2, 3 and 4 AMSA transition planned through 2032',
+    'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'AMSA electric bus in service in the Mendrisiotto region',
 };
 
 export default blogMetaChEn;
