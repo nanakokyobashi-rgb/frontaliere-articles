@@ -104,6 +104,8 @@ on:
       # either lands, republishes nothing, and the served surface keeps being
       # built by the old code until an unrelated corpus change happens along.
       - 'scripts/build-blog-index.mjs'
+      - 'scripts/lib/registry-image-reader.mjs'
+      - 'scripts/lib/ts-literals.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       # build-blog-index.mjs also emits the cover credits
       # (data/image-credits-<section>.json and data/image-credits-blog.json)

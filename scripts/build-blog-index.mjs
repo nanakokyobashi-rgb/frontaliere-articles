@@ -66,6 +66,7 @@
 import '../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
+import { readArticleRegistry } from './lib/registry-image-reader.mjs';
 // Same output-boundary guard build-api.mjs uses. This index is the LIST
 // surface: a control byte in a title here is rendered in every hub, archive
 // and homepage cell that shows the article. Measured on the live index,
@@ -244,37 +245,23 @@ function cdnBlogImage(p) {
   return `${CDN_BLOG_BASE}/${m[1]}`;
 }
 
-/**
- * Registry entries as `{ id: '…', category: '…', date: '…', image: '…' }`
- * object literals. Parsed with a regex rather than imported: this file must not
- * drag the corpus's TS module graph (and its extensionless specifiers) into a
- * plain-node script, and the shapes here are emitted by our own generator.
- *
- * `image` is the raw literal, so it is rewritten through `cdnBlogImage` above
- * to land on the value the registry's own export carries.
- */
+/** Read registry rows without importing the TS graph or guessing nested fields. */
 function readRegistry(rel) {
   const abs = path.join(ROOT, rel);
   if (!fs.existsSync(abs)) return [];
   const src = fs.readFileSync(abs, 'utf-8');
-  const out = [];
-  const rx = /\{\s*id:\s*'([^']+)'([\s\S]*?)\}/g;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const [, id, body] = m;
-    const pick = (k) => (body.match(new RegExp(`\\b${k}:\\s*'([^']*)'`)) ?? [])[1];
-    const pickBool = (k) => new RegExp(`\\b${k}:\\s*true`).test(body);
-    out.push({
+  return readArticleRegistry(src, rel).map(({ id, image, fields }) => {
+    const pick = (key) => typeof fields[key] === 'string' ? fields[key] : undefined;
+    return {
       id,
       category: pick('category') ?? '',
       date: pick('date') ?? '',
       updatedAt: pick('updatedAt') ?? undefined,
-      image: cdnBlogImage(pick('image') ?? ''),
-      hasCalculator: pickBool('hasCalculator') || undefined,
+      image: cdnBlogImage(image ?? ''),
+      hasCalculator: fields.hasCalculator === true || undefined,
       authorSlug: pick('authorSlug') ?? undefined,
-    });
-  }
-  return out;
+    };
+  });
 }
 
 /** `'blog.article.<id>.<field>': '<value>'` pairs out of a meta chunk. */

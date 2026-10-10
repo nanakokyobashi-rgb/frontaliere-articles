@@ -59,6 +59,7 @@ import '../host/cantonSectionsBootstrap.mjs';
 import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readArticleRegistry } from './lib/registry-image-reader.mjs';
 import {
   COMMONS_API,
   COMMONS_IMAGEINFO_PARAMS,
@@ -125,8 +126,7 @@ function writeTextAtomic(file, text) {
 }
 
 /**
- * `id → image` of every registry row, read the way build-blog-index.mjs
- * reads them (a regex over the generator's own literal shape, no TS import).
+ * `id → image` from the same top-level literal reader used by publication.
  */
 export function readRegistryImages(root) {
   /** @type {Map<string, string>} */
@@ -135,9 +135,8 @@ export function readRegistryImages(root) {
     const file = path.join(root, rel);
     if (!fs.existsSync(file)) continue;
     const src = fs.readFileSync(file, 'utf-8');
-    for (const m of src.matchAll(/\{\s*id:\s*'([^']+)'([\s\S]*?)\}/g)) {
-      const image = m[2].match(/\bimage:\s*'([^']*)'/)?.[1];
-      if (image && !images.has(m[1])) images.set(m[1], image);
+    for (const { id, image } of readArticleRegistry(src, rel)) {
+      if (image && !images.has(id)) images.set(id, image);
     }
   }
   return images;
