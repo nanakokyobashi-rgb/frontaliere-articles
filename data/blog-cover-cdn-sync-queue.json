@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-multe-como-targhe-estere.webp",
-      "sha256": "1d20a67e332bda4f4434f64e5ca5f5bd12f45413e6f780fd1fa73595543654d9"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-multe-como-targhe-estere-480w.webp",
-      "sha256": "e0745ba422e33dd82a9dd7c295825dfb45e4d2fafe5e9931aac0c5146910a204"
-    }
-  ]
+  "items": []
 }
