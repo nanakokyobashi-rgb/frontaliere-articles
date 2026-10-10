@@ -172,6 +172,40 @@ const GOOGLE_TRANSLATE_ENDPOINTS = [
 ];
 const TIMEOUT_MS = 15000;
 
+/**
+ * Fetch with a timeout whose timer keeps the Node process alive.
+ *
+ * `AbortSignal.timeout()` uses an unref'd timer. That is normally invisible
+ * while a request has an active socket, but a stalled DNS/TLS/undici request
+ * can leave an awaited translation promise pending after the event loop has
+ * no other referenced handles. Node then exits 0 and the caller never gets a
+ * rejection. Keep the timer referenced and merge any caller-provided abort
+ * signal so raced providers retain both cancellation and a hard deadline.
+ */
+export async function fetchWithRefTimeout(url, options = {}, timeoutMs = TIMEOUT_MS) {
+  const { signal: upstreamSignal, ...requestOptions } = options;
+  const controller = new AbortController();
+  const timer = setTimeout(() => {
+    controller.abort(new DOMException('The operation timed out', 'TimeoutError'));
+  }, timeoutMs);
+  const forwardAbort = () => controller.abort(upstreamSignal.reason);
+
+  if (upstreamSignal) {
+    if (upstreamSignal.aborted) {
+      forwardAbort();
+    } else {
+      upstreamSignal.addEventListener('abort', forwardAbort, { once: true });
+    }
+  }
+
+  try {
+    return await fetch(url, { ...requestOptions, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+    upstreamSignal?.removeEventListener('abort', forwardAbort);
+  }
+}
+
 // Lingva Translate instances (free Google Translate proxy)
 // Verified 2026-03-30 — only 2 alive; works locally but BLOCKED from GitHub Actions IPs
 const LINGVA_INSTANCES = [
@@ -201,7 +235,7 @@ const MOZHI_INSTANCES = [
 // (e.g., "Consulente Assicuravo" instead of "Assicurativo"). Fine for IT→EN/DE/FR.
 // translate.adminforge.de removed 2026-07-24 — consistent 500 errors from CI (3+ failures per run)
 // translate.cutie.dating removed 2026-06-16 — host fully dead from CI + local (HTTP 000 /
-// connection refused, burns the FULL 20s AbortSignal.timeout on EVERY attempt, then gets
+// connection refused, burns the FULL 20s request timeout on EVERY attempt, then gets
 // resurrected every HEALTH_RECOVERY_MS=2min → hours of pure timeout waste per translate run
 // (run 27606697505: ~3h burned, only 372 jobs drained). Same removal precedent as adminforge.
 const LIBRETRANSLATE_PUBLIC = [
@@ -220,7 +254,7 @@ const LIBRETRANSLATE_SELF_HOSTED = (process.env.LIBRETRANSLATE_SELF_HOSTED_URL |
 // under concurrency > 2 (each stalled request would otherwise burn the full timeout before
 // falling through to the next tier). In CI, translate-pending.yml overrides
 // LIBRETRANSLATE_TIMEOUT_MS to '5000' for tighter fail-fast; that only applies to warm calls.
-// A non-numeric or ≤0 override falls back to the 10s default (guards AbortSignal.timeout(NaN)).
+// A non-numeric or ≤0 override falls back to the 10s default (guards an invalid timeout).
 // AbortError is caught by the try/catch in translateWithLibreTranslateSelfHosted → '' → next tier.
 let _ltWarmupDone = false;
 const _ltTimeoutRaw = parseInt(process.env.LIBRETRANSLATE_TIMEOUT_MS || '', 10);
@@ -1315,15 +1349,14 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
     const MAX_429_RETRIES = 2;
     let res;
     for (let rl = 0; ; rl++) {
-      res = await fetch('https://api-free.deepl.com/v2/translate', {
+      res = await fetchWithRefTimeout('https://api-free.deepl.com/v2/translate', {
         method: 'POST',
         headers: {
           'Authorization': `DeepL-Auth-Key ${apiKey}`,
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: body.toString(),
-        signal: AbortSignal.timeout(TIMEOUT_MS),
-      });
+      }, TIMEOUT_MS);
       if (res.status === 456) {
         // Real monthly quota exhausted → mark key exhausted for the run.
         throw Object.assign(new Error('DeepL 456'), { quotaExhausted: true });
@@ -1430,13 +1463,12 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
     });
 
     try {
-      const res = await fetch(`${base}?${params.toString()}`, {
+      const res = await fetchWithRefTimeout(`${base}?${params.toString()}`, {
         headers: {
           'Accept': 'application/json,text/plain,*/*',
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
         },
-        signal: AbortSignal.timeout(TIMEOUT_MS),
-      });
+      }, TIMEOUT_MS);
       if (!res.ok) {
         noteTranslationOutcome(outcome, 'errors');
         continue;
@@ -1587,12 +1619,13 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
   const encoded = encodeURIComponent(q);
 
   return raceInstances(LINGVA_INSTANCES, async (base, signal, attemptOutcome) => {
-    const res = await fetch(
+    const res = await fetchWithRefTimeout(
       `${base}/api/v1/${sourceLang || 'auto'}/${targetLang}/${encoded}`,
       {
         headers: { 'User-Agent': 'FrontaliereTicino/1.0' },
-        signal: signal || AbortSignal.timeout(TIMEOUT_MS),
+        signal,
       },
+      TIMEOUT_MS,
     );
     if (!res.ok) return '';
     const data = await res.json();
@@ -1616,10 +1649,10 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
       to: targetLang,
       text: q,
     });
-    const res = await fetch(`${base}/api/translate/?${params.toString()}`, {
+    const res = await fetchWithRefTimeout(`${base}/api/translate/?${params.toString()}`, {
       headers: { 'User-Agent': 'FrontaliereTicino/1.0' },
-      signal: signal || AbortSignal.timeout(TIMEOUT_MS),
-    });
+      signal,
+    }, TIMEOUT_MS);
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeProviderBlock(data?.translated_text || '');
@@ -1637,12 +1670,11 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
   // Subsequent calls use the configured fast-fail timeout (see _ltWarmupDone above).
   const timeout = _ltWarmupDone ? LIBRETRANSLATE_TIMEOUT_MS : 30000;
   try {
-    const res = await fetch(`${LIBRETRANSLATE_SELF_HOSTED}/translate`, {
+    const res = await fetchWithRefTimeout(`${LIBRETRANSLATE_SELF_HOSTED}/translate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ q, source: sourceLang || 'auto', target: targetLang, format: 'text' }),
-      signal: AbortSignal.timeout(timeout),
-    });
+    }, timeout);
     if (!res.ok) {
       noteTranslationOutcome(outcome, 'errors');
       console.warn(`⚠️  LibreTranslate self-hosted: HTTP ${res.status}`);
@@ -1672,12 +1704,12 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
   if (!q || sourceLang === targetLang) return '';
 
   return raceInstances(LIBRETRANSLATE_PUBLIC, async (base, signal, attemptOutcome) => {
-    const res = await fetch(`${base}/translate`, {
+    const res = await fetchWithRefTimeout(`${base}/translate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ q, source: sourceLang || 'auto', target: targetLang, format: 'text' }),
-      signal: signal || AbortSignal.timeout(20000),
-    });
+      signal,
+    }, 20000);
     if (!res.ok) return '';
     const data = await res.json();
     const translated = normalizeProviderBlock(data?.translatedText || '');
@@ -1697,10 +1729,10 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
       to: targetLang,
       text: q,
     });
-    const res = await fetch(`${base}/api/translate?${params.toString()}`, {
+    const res = await fetchWithRefTimeout(`${base}/api/translate?${params.toString()}`, {
       headers: { 'User-Agent': 'FrontaliereTicino/1.0' },
-      signal: signal || AbortSignal.timeout(TIMEOUT_MS),
-    });
+      signal,
+    }, TIMEOUT_MS);
     if (!res.ok) return '';
     const data = await res.json();
     // Mozhi uses 'translated-text' (hyphenated) in its response
@@ -1744,7 +1776,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
         // failures. The key is exhausted for the rest of the run instead (see below),
         // making this self-healing: a VALID key returns 200, is never exhausted, and
         // a renewed key in Remote Config re-enables Azure with zero code change.
-        const res = await fetch(url, {
+        const res = await fetchWithRefTimeout(url, {
           method: 'POST',
           headers: {
             'Ocp-Apim-Subscription-Key': key,
@@ -1752,8 +1784,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
             'Content-Type': 'application/json',
           },
           body: JSON.stringify([{ Text: chunk }]),
-          signal: AbortSignal.timeout(TIMEOUT_MS),
-        });
+        }, TIMEOUT_MS);
         if (res.status === 401 || res.status === 403) {
           // Auth failure: invalid/missing/revoked credentials. Exhaust this key for
           // the rest of the process run (mirrors the DeepL `_deeplExhaustedKeys`
@@ -2602,7 +2633,7 @@ async function _getGoogleCloudAccessToken() {
   for (let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt++) {
     let res;
     try {
-      res = await fetch('https://oauth2.googleapis.com/token', {
+      res = await fetchWithRefTimeout('https://oauth2.googleapis.com/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
@@ -2611,8 +2642,7 @@ async function _getGoogleCloudAccessToken() {
           refresh_token: _gcOAuth.refreshToken,
           grant_type: 'refresh_token',
         }),
-        signal: AbortSignal.timeout(TOKEN_EXCHANGE_TIMEOUT_MS),
-      });
+      }, TOKEN_EXCHANGE_TIMEOUT_MS);
     } catch {
       // Timeout or a bare network failure (DNS/TLS/connection reset) — both
       // transient, same reasoning as exchangeAssertionForToken (#247).
@@ -2660,7 +2690,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       return '';
     }
 
-    const request = (bearer) => fetch('https://translation.googleapis.com/language/translate/v2', {
+    const request = (bearer) => fetchWithRefTimeout('https://translation.googleapis.com/language/translate/v2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -2668,8 +2698,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
         'x-goog-user-project': GCP_PROJECT_ID,
       },
       body: JSON.stringify({ q: clean, source: sourceLang, target: targetLang, format: 'text' }),
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
+    }, TIMEOUT_MS);
     let res = await request(token);
     // A service-account token the API rejects must not stay cached for the
     // rest of the run, or no later field ever reaches the OAuth fallback:
@@ -2744,15 +2773,14 @@ async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = 
   const truncated = clean.slice(0, 2000);
 
   try {
-    const res = await fetch(`https://router.huggingface.co/hf-inference/models/${model}`, {
+    const res = await fetchWithRefTimeout(`https://router.huggingface.co/hf-inference/models/${model}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${HF_TOKEN}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ inputs: truncated }),
-      signal: AbortSignal.timeout(TIMEOUT_MS),
-    });
+    }, TIMEOUT_MS);
     if (!res.ok) {
       noteTranslationOutcome(outcome, 'incomplete');
       return '';

@@ -60,6 +60,7 @@ const {
   codexCallDeadlineMs,
   beginCodexTranslationCall,
   withCodexTranslationLane,
+  fetchWithRefTimeout,
 } = await import('../scripts/lib/free-translate.mjs');
 const { AI_MODELS } = await import('../scripts/lib/ai-models.mjs');
 
@@ -102,6 +103,21 @@ globalThis.fetch = async (url) => {
   throw new Error('offline nel test');
 };
 after(() => { globalThis.fetch = realFetch; });
+
+test('il timeout HTTP referenziato risolve una fetch pendente senza handle di rete', async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async (_url, { signal }) => new Promise((_resolve, reject) => {
+    signal.addEventListener('abort', () => reject(new Error('aborted by test')), { once: true });
+  });
+  try {
+    await assert.rejects(
+      fetchWithRefTimeout('https://stalled.invalid', {}, 10),
+      /aborted by test/,
+    );
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
 
 /** Suffisso dei marcatori della chiamata, letto dal messaggio utente. */
 function markerOf(messages) {
