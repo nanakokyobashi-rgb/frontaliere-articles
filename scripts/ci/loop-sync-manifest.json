@@ -3088,7 +3088,7 @@
       "reason": "Helper locale per il corpus che mantiene il timer referenziato fino al consumo del body HTTP; e' condiviso dal loader Remote Config, dallo scambio OAuth e dalla cascata traduzioni adattata. Il sito mantiene il proprio trasporto standalone dentro `free-translate.mjs`, quindi non esiste qui un path gemello da sincronizzare senza cancellare gli adattamenti dichiarati.",
       "baseline": {
         "site": null,
-        "corpus": "1636b3ce523e198b",
+        "corpus": "7c90a6b48b4839fb",
         "alignedAt": "2026-10-10"
       }
     },
