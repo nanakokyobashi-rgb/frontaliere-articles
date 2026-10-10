@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-herisau-verkehr-appenzello.webp",
+      "sha256": "6ec2b52a69e296526668f5f2bd8e8d67c7e4000dcaab579f2698db4344ae8a24"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-herisau-verkehr-appenzello-480w.webp",
+      "sha256": "ea51f2d9e22becbebba0df8913c8933d8b917a70d3b68f7515b9525bd45ea979"
+    }
+  ]
 }
