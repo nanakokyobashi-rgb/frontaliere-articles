@@ -3015,7 +3015,7 @@
       "reason": "Helper del producer corpus-only generate-events-digest-article.mjs: ripara gli esonimi nei campi localizzati solo quando sono appaiati alla sorgente italiana e usa la tabella condivisa di toponimi. Il sito non genera questo articolo: riceve il JSON pubblicato via HTTP.",
       "baseline": {
         "site": null,
-        "corpus": "6b46f308842a9c62",
+        "corpus": "17de3eadfa084ba5",
         "alignedAt": "2026-10-10"
       }
     },
