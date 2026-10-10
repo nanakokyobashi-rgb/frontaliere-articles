@@ -25,11 +25,11 @@
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic alpine-rescue illustration with no text, logos, or recognizab",
+      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic alpine rescue illustration, but it contains clearly recognizable foreground climbers.); gemini (Gemini image request fail",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-10T22:34:10.251Z"
+      "lastFailureAt": "2026-10-10T22:59:11.214Z"
     }
   ]
 }
