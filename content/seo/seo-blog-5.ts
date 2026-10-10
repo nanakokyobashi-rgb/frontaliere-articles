@@ -104982,6 +104982,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-varese-adhd-days-ottobre-2026': {
+    title: 'ADHD Days Varese 2026: ottobre sulle fragilità invisibili',
+    description: 'A ottobre Varese propone percorsi sulle fragilità invisibili ADHD Days Varese 2026 in calendario il 15 e 16 ottobre Comune, associazioni, scuole e istituzioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, adhd, days, varese, ottobre',
+    ogTitle: 'ADHD Days Varese 2026: ottobre sulle fragilità invisibili',
+    ogDescription: 'A ottobre Varese propone percorsi sulle fragilità invisibili ADHD Days Varese 2026 in calendario il 15 e 16 ottobre Comune, associazioni, scuole e istituzioni',
+    canonicalPath: '/articoli-frontaliere/varese-adhd-days-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "ADHD Days Varese 2026: ottobre sulle fragilità invisibili",
+      "description": "A ottobre Varese propone percorsi sulle fragilità invisibili ADHD Days Varese 2026 in calendario il 15 e 16 ottobre Comune, associazioni, scuole e istituzioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-varese-adhd-days-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Adolescenti partecipano a un incontro su ADHD a Varese durante il mese di ottobre 2026"
+      },
+      "datePublished": "2026-10-10T14:59:50+00:00",
+      "dateModified": "2026-10-10T14:59:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-adhd-days-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
