@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-unige-natura-equilibrio-mentale.webp",
+      "sha256": "70d64f92cf49a6ac47af243cdedf4ea02f05bd275dd90cc7755723efbf2cc084"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-unige-natura-equilibrio-mentale-480w.webp",
+      "sha256": "002f3a2b9e1c3ed974c771927b1b991475978607a9b45e1b1aec53891cab0472"
+    }
+  ]
 }
