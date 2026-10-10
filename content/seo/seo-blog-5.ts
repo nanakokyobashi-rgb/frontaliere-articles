@@ -105138,6 +105138,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lugano-bienne-vittoria-2026': {
+    title: 'Lugano batte Bienne 3-2, terzo risultato utile',
+    description: 'Lugano vince 3-2 alla Tissot Arena Terzo risultato utile consecutivo per i bianconeri Doppietta di Innala, salito a sette reti stagionali Sette punti raccolti',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, batte, bienne, terzo',
+    ogTitle: 'Lugano batte Bienne 3-2, terzo risultato utile',
+    ogDescription: 'Lugano vince 3-2 alla Tissot Arena Terzo risultato utile consecutivo per i bianconeri Doppietta di Innala, salito a sette reti stagionali Sette punti raccolti',
+    canonicalPath: '/articoli-frontaliere/lugano-bienne-vittoria-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lugano batte Bienne 3-2, terzo risultato utile",
+      "description": "Lugano vince 3-2 alla Tissot Arena Terzo risultato utile consecutivo per i bianconeri Doppietta di Innala, salito a sette reti stagionali Sette punti raccolti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lugano-bienne-vittoria-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "HC Lugano festeggia il gol vincente contro il Bienne alla Tissot Arena"
+      },
+      "datePublished": "2026-10-10T20:55:56+00:00",
+      "dateModified": "2026-10-10T20:55:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lugano-bienne-vittoria-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

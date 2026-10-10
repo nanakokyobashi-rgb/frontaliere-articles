@@ -12953,6 +12953,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sfida-bar-quartiere-lugano.title': 'Neighborhood bars in Lugano: amid closures and new challenges',
     'blog.article.sfida-bar-quartiere-lugano.excerpt': 'Bar Laura closed after 32 years The Canton did not renew the contract Reto Blumenthal reopened in Molino Nuovo Bar Domingo opens at 6.30 and closes',
     'blog.article.sfida-bar-quartiere-lugano.imageAlt': 'Interior of a neighborhood cafe in Lugano with counter and coffee machine',
+    'blog.article.lugano-bienne-vittoria-2026.title': 'Lugano beats Bienne 3-2, third positive result',
+    'blog.article.lugano-bienne-vittoria-2026.excerpt': 'Lugano wins 3-2 at the Tissot Arena Third consecutive unbeaten result for the Bianconeri Brace by Innala, who has reached seven goals this season Seven points collected',
+    'blog.article.lugano-bienne-vittoria-2026.imageAlt': 'HC Lugano celebrates the winning goal against Bienne at the Tissot Arena',
 };
 
 export default blogMetaEn;

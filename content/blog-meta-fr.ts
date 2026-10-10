@@ -12955,6 +12955,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sfida-bar-quartiere-lugano.title': 'Bar de quartier à Lugano : entre fermetures et nouveaux défis',
     'blog.article.sfida-bar-quartiere-lugano.excerpt': 'Le Bar Laura a fermé après 32 ans Le canton n\'a pas renouvelé le contrat Reto Blumenthal a rouvert à Molino Nuovo Le Bar Domingo ouvre à 6h30 et ferme',
     'blog.article.sfida-bar-quartiere-lugano.imageAlt': 'Intérieur d\'un café de quartier à Lugano avec comptoir et machine à café',
+    'blog.article.lugano-bienne-vittoria-2026.title': 'Lugano bat Bienne 3-2, troisième résultat utile',
+    'blog.article.lugano-bienne-vittoria-2026.excerpt': 'Lugano gagne 3-2 à la Tissot Arena Troisième résultat utile consécutif pour les Bianconeri Doublé d\'Innala, grimpé à sept filets saisonniers Sept points récoltés',
+    'blog.article.lugano-bienne-vittoria-2026.imageAlt': 'HC Lugano célèbre le but gagnant contre Bienne à la Tissot Arena',
 };
 
 export default blogMetaFr;
