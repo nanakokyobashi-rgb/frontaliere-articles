@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-parco-solare-nalps-tujetsch.webp",
+      "sha256": "e643868445c0960a1d15e827d5397f6cd053c9ba33a751c1e963de2febe3716e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-parco-solare-nalps-tujetsch-480w.webp",
+      "sha256": "85c637e0d303803028b6c4f54d86a188831daa7c06e46f21b901fffa3e0e3a67"
+    }
+  ]
 }
