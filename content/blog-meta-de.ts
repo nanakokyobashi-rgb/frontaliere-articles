@@ -12937,12 +12937,6 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: Privater Kanal, zahlt der Eigentümer',
     'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: Der Staatsrat hat entschieden, dass die Sanierung der privaten Kanalisation nach der von der Gemeinde Capriasca bezahlten Reparatur dem Eigentümer obliegt.',
     'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Private Mauer in Tesserete bei der Kontrolle einer Kanalisation',
-    'blog.article.tradate-moto-capriolo-ferito.title': 'Tradate, Motorrad kollidiert mit einem Reh: 44-Jähriger verletzt',
-    'blog.article.tradate-moto-capriolo-ferito.excerpt': 'Freitag, 9. Oktober, Motorrad kollidiert in Tradate mit einem Reh Ein 44-jähriger Motorradfahrer wurde verletzt und mit dem Code Gelb eingestuft Das Reh starb an seinen Verletzungen Der Unfall',
-    'blog.article.tradate-moto-capriolo-ferito.imageAlt': 'Abgestelltes Motorrad auf einer bewaldeten Straße am Morgen',
-    'blog.article.varese-adhd-days-ottobre-2026.title': 'ADHD Days Varese 2026: Oktober im Zeichen unsichtbarer Vulnerabilitäten',
-    'blog.article.varese-adhd-days-ottobre-2026.excerpt': 'Im Oktober schlägt Varese Wege zu unsichtbaren Vulnerabilitäten vor ADHD Days Varese 2026 am 15.',
-    'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Jugendliche nehmen an einer ADHS-Aufklärungsveranstaltung in Varese im Oktober 2026 teil',
 };
 
 export default blogMetaDe;

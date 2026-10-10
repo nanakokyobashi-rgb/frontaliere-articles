@@ -12938,12 +12938,6 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: private sewer connection, owner pays',
     'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: the Council of State ruled that the rehabilitation of the private sewer was the owner\'s responsibility, following the repair paid for by the Municipality of Capriasca.',
     'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Private wall in Tesserete during a sewer inspection',
-    'blog.article.tradate-moto-capriolo-ferito.title': 'Tradate, motorcycle collides with a roe deer: 44-year-old injured',
-    'blog.article.tradate-moto-capriolo-ferito.excerpt': 'Friday, October 9, motorcycle collides with a roe deer at Tradate A 44-year-old motorcyclist injured, classified as yellow code The roe deer died from its injuries The accident',
-    'blog.article.tradate-moto-capriolo-ferito.imageAlt': 'Parked motorcycle on a wooded road in the morning',
-    'blog.article.varese-adhd-days-ottobre-2026.title': 'ADHD Days Varese 2026: October on invisible vulnerabilities',
-    'blog.article.varese-adhd-days-ottobre-2026.excerpt': 'In October Varese offers initiatives on invisible vulnerabilities ADHD Days Varese 2026 scheduled for October 15 and 16 Municipality, associations, schools and institutions',
-    'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Teenagers attend an ADHD awareness meeting in Varese during October 2026',
 };
 
 export default blogMetaEn;

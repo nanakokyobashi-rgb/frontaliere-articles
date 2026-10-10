@@ -2,14 +2,24 @@
   "schema": 1,
   "items": [
     {
+      "articleId": "aargau-pfas-bonifiche-incerte",
+      "title": "PFAS in Argovia: costi di bonifica ancora incerti",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T12:56:57.812Z",
+      "lastFailureAt": "2026-10-10T12:56:57.812Z"
+    },
+    {
       "articleId": "amsa-bus-elettrici-mendrisiotto",
       "title": "AMSA inaugura i primi bus elettrici a Balerna",
       "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
-      "reason": "All image providers failed for article-amsa-bus-elettrici-mendrisiotto: openai-codex (vision gate rejected image: Generic Swiss-town electric-bus illustration, but a faint W-like lettering/symbol is visible on the foreground bus windshield.",
+      "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 0,
       "requestedAt": "2026-10-10T13:00:30.249Z",
-      "lastFailureAt": "2026-10-10T14:31:06.970Z"
+      "lastFailureAt": "2026-10-10T13:00:30.249Z"
     }
   ]
 }

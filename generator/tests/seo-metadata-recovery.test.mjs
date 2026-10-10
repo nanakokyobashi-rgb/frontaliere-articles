@@ -111,6 +111,19 @@ test('la recovery sostituisce una seoDescription persistita sotto il minimo con 
   assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
 });
 
+test('la recovery usa il fallback italiano se il cap accorcia una descrizione persistita sotto il minimo', () => {
+  const data = article();
+  const firstClause = 'Descrizione persistita valida per il tema dei frontalieri nel Ticino.';
+  assert.ok(firstClause.length < 80);
+  data.seo = { description: `${firstClause} ${'X'.repeat(100)}` };
+
+  deriveSeoMetadata(data);
+
+  assert.ok(data.seo.description.length >= 80);
+  assert.ok(data.seo.description.length <= 160);
+  assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
+});
+
 test('il builder SEO rifiuta Markdown anche nel percorso di recovery diretto', () => {
   const data = article();
   data.seo = {

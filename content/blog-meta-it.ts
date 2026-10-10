@@ -12939,12 +12939,6 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: canalizzazione privata, paga il proprietario',
     'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: il Consiglio di Stato ha stabilito che la bonifica della canalizzazione privata spettava al proprietario, dopo la riparazione pagata dal Comune di Capriasca.',
     'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Muro privato a Tesserete durante un controllo della canalizzazione',
-    'blog.article.tradate-moto-capriolo-ferito.title': 'Tradate, moto contro un capriolo: ferito un 44enne',
-    'blog.article.tradate-moto-capriolo-ferito.excerpt': 'Venerdì 9 ottobre, moto contro un capriolo a Tradate Ferito in codice giallo un motociclista di 44 anni Il capriolo è morto per le ferite riportate L\'incidente',
-    'blog.article.tradate-moto-capriolo-ferito.imageAlt': 'Motocicletta ferma su una strada boschiva al mattino',
-    'blog.article.varese-adhd-days-ottobre-2026.title': 'ADHD Days Varese 2026: ottobre sulle fragilità invisibili',
-    'blog.article.varese-adhd-days-ottobre-2026.excerpt': 'A ottobre Varese propone percorsi sulle fragilità invisibili ADHD Days Varese 2026 in calendario il 15 e 16 ottobre Comune, associazioni, scuole e istituzioni',
-    'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Adolescenti partecipano a un incontro su ADHD a Varese durante il mese di ottobre 2026',
 };
 
 export default blogMetaIt;

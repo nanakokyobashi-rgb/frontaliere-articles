@@ -12940,12 +12940,6 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tesserete-canalizzazione-privata.title': 'Carte : canalisation privée, paie le propriétaire',
     'blog.article.tesserete-canalizzazione-privata.excerpt': 'Carte : le Conseil d\'État a décidé que la remise en état de la canalisation privée incombait au propriétaire, après réparation payée par la municipalité de Capriasca.',
     'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Mur privé à Tesserete lors du contrôle d\'une canalisation',
-    'blog.article.tradate-moto-capriolo-ferito.title': 'Tradate, une moto percute un chevreuil : un motocycliste de 44 ans blessé',
-    'blog.article.tradate-moto-capriolo-ferito.excerpt': 'Vendredi 9 octobre, une moto percute un chevreuil à Tradate Un motocycliste de 44 ans blessé en code jaune Le chevreuil est mort des suites de ses blessures L\'accident',
-    'blog.article.tradate-moto-capriolo-ferito.imageAlt': 'Moto à l\'arrêt sur une route boisée le matin',
-    'blog.article.varese-adhd-days-ottobre-2026.title': 'ADHD Days Varese 2026 : octobre sur les fragilités invisibles',
-    'blog.article.varese-adhd-days-ottobre-2026.excerpt': 'En octobre Varese propose des parcours sur les fragilités invisibles ADHD Days Varese 2026 au programme les 15 et 16 octobre Municipalité, associations, écoles et institutions',
-    'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Des adolescents participent à une réunion sur le TDAH à Varese en octobre 2026',
 };
 
 export default blogMetaFr;

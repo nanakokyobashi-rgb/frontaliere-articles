@@ -23,7 +23,7 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'Vista del municipio di Buchs con documenti di bilancio sul tavolo, sfondo campagna argoviese',
     'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS in Argovia: costi di bonifica ancora incerti',
     'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'In Argovia solo due terzi dei Comuni hanno risposto sul PFAS.',
-    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Area industriale in Argovia associata alla verifica delle bonifiche PFAS',
 };
 
 export default blogMetaCantonAgIt;
