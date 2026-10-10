@@ -248,7 +248,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'imposte-alla-fonte-ticino-calcolatore': { it: 'imposte-alla-fonte-ticino-calcolatore', en: 'withholding-tax-ticino-calculator', de: 'quellensteuer-tessin-rechner', fr: 'impot-source-tessin-calculateur' },
  'pensione-frontaliere-avs-inps-2026': { it: 'pensione-frontaliere-avs-inps-2026', en: 'frontier-worker-pension-avs-inps-2026', de: 'grenzarbeiter-rente-avs-inps-2026', fr: 'pension-travailleur-frontalier-avs-inps-2026' },
  'richiesta-permesso-g-step': { it: 'richiesta-permesso-g-step', en: 'g-permit-application-step-by-step', de: 'g-bewilligung-beantragen-schritt-fuer-schritt', fr: 'demande-permis-g-etape-par-etape' },
- 'imposte-alla-fonte-ticino': { it: 'imposte-alla-fonte-ticino', en: 'ticino-withholding-tax-calculator', de: 'quellensteuer-tessin-rechner', fr: 'impot-a-la-source-tessin-calculateur' },
+ 'imposte-alla-fonte-ticino': { it: 'imposte-alla-fonte-ticino', en: 'ticino-withholding-tax-calculator', de: 'quellensteuer-ticino-rechner', fr: 'impot-a-la-source-tessin-calculateur' },
  'aufenthaltsbewilligung-b-quellensteuer': { it: 'aufenthaltsbewilligung-b-quellensteuer', en: 'residence-permit-b-withholding-tax-2026', de: 'aufenthaltsbewilligung-b-quellensteuer-2026', fr: 'autorisation-de-sejour-b-impot-a-la-source-2026' },
  'quellensteuer-tarife-svizzera-2026': { it: 'quellensteuer-tarife-svizzera-2026', en: 'quellensteuer-switzerland-rates-2026', de: 'quellensteuer-tarife-schweiz-2026', fr: 'quellensteuer-tarifs-suisse-2026' },
  'g-bewilligung-antrag-2026-step': { it: 'g-bewilligung-antrag-2026-step', en: 'g-permit-application-2026', de: 'g-bewilligung-antrag-2026', fr: 'demande-permis-g-2026' },
@@ -2712,10 +2712,13 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
 export type SwissSlugFallbackReason = {
-  source: 'it-slug';
+  source: 'it-slug' | 'legacy-route';
   reason: string;
 };
 export const SWISS_SLUG_FALLBACK_REASONS: Record<string, Partial<Record<ArticleLocale, SwissSlugFallbackReason>>> = {
+  'imposte-alla-fonte-ticino': {
+    de: { source: 'legacy-route', reason: 'published-before-localized-exonym-repair; preserves-route-uniqueness' },
+  },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
