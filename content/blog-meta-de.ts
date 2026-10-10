@@ -12964,6 +12964,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese: Vademecum Pilze zur Reduzierung von Unfällen im Wald',
     'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'Der Präfekt fordert eine Kampagne zu den Risiken in den Wäldern Das Vademekum trägt den Titel «Sichere Suche nach Pilzen» Die Anfrage betrifft Gemeinden, Schulen, Gemeinden',
     'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.carabinieri-ternate-marijuana-arresto.title': 'Ternate: 41-Jähriger mit 37 Marihuanapflanzen festgenommen',
+    'blog.article.carabinieri-ternate-marijuana-arresto.excerpt': 'In Ternate auf frischer Tat ein 41-jähriger Italiener festgenommen 37 Marihuanapflanzen beschlagnahmt Einsatz am Vormittag des 8.',
+    'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'Ansicht eines Wohngebiets in Ternate, Varese',
 };
 
 export default blogMetaDe;

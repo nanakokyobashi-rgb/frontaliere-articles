@@ -12966,6 +12966,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese: vademecum funghi per ridurre incidenti nei boschi',
     'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'Il Prefetto sollecita una campagna sui rischi nei boschi Il vademecum si intitola «Sicuri a cercar funghi» La richiesta coinvolge Comuni, scuole, Comunità',
     'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.carabinieri-ternate-marijuana-arresto.title': 'Ternate: arrestato 41enne con 37 piante di marijuana',
+    'blog.article.carabinieri-ternate-marijuana-arresto.excerpt': 'A Ternate arrestato in flagranza un 41enne italiano Sequestrate 37 piante di marijuana Operazione svolta nella mattinata dell\'8 ottobre Trovati anche',
+    'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'Vista di una zona residenziale a Ternate, Varese',
 };
 
 export default blogMetaIt;

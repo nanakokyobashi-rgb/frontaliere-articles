@@ -12965,6 +12965,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese: mushroom guide to reduce accidents in the woods',
     'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'The Prefect urges a campaign on the risks in the woods The handbook is entitled «Safe Mushroom Hunting» The request involves Municipalities, schools, Communities',
     'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Illustration generated for this article',
+    'blog.article.carabinieri-ternate-marijuana-arresto.title': 'Ternate: 41-year-old arrested with 37 marijuana plants',
+    'blog.article.carabinieri-ternate-marijuana-arresto.excerpt': 'At Ternate, a 41-year-old Italian man arrested in the act 37 marijuana plants seized Operation carried out on the morning of October 8 Also found',
+    'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'View of a residential area in Ternate, Varese',
 };
 
 export default blogMetaEn;

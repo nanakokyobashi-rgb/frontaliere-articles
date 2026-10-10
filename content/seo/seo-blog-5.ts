@@ -105294,6 +105294,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-carabinieri-ternate-marijuana-arresto': {
+    title: 'Ternate: arrestato 41enne con 37 piante di marijuana',
+    description: 'A Ternate arrestato in flagranza un 41enne italiano Sequestrate 37 piante di marijuana Operazione svolta nella mattinata dell\'8 ottobre Trovati anche',
+    keywords: 'frontalieri, ticino, svizzera, italia, ternate, arrestato, 41enne, piante',
+    ogTitle: 'Ternate: arrestato 41enne con 37 piante di marijuana',
+    ogDescription: 'A Ternate arrestato in flagranza un 41enne italiano Sequestrate 37 piante di marijuana Operazione svolta nella mattinata dell\'8 ottobre Trovati anche',
+    canonicalPath: '/articoli-frontaliere/carabinieri-ternate-marijuana-arresto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ternate: arrestato 41enne con 37 piante di marijuana",
+      "description": "A Ternate arrestato in flagranza un 41enne italiano Sequestrate 37 piante di marijuana Operazione svolta nella mattinata dell'8 ottobre Trovati anche",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-carabinieri-ternate-marijuana-arresto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di una zona residenziale a Ternate, Varese"
+      },
+      "datePublished": "2026-10-10T23:49:22+00:00",
+      "dateModified": "2026-10-10T23:49:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/carabinieri-ternate-marijuana-arresto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

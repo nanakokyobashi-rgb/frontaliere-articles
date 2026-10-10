@@ -12967,6 +12967,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese : vademecum champignons pour réduire les accidents dans les bois',
     'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'Le Préfet sollicite une campagne sur les risques dans les bois Le vade-mecum s\'intitule « Sûr de chercher des champignons » La demande implique les municipalités, les écoles, les communautés',
     'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.carabinieri-ternate-marijuana-arresto.title': 'Ternate : arrestation d\'un homme de 41 ans avec 37 plants de marijuana',
+    'blog.article.carabinieri-ternate-marijuana-arresto.excerpt': 'À Ternate arrêté en flagrant délit un Italien de 41 ans 37 plants de marijuana saisis Opération menée dans la matinée du 8 octobre Également trouvés',
+    'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'Vue d\'une zone résidentielle à Ternate, Varese',
 };
 
 export default blogMetaFr;
