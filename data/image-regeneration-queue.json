@@ -25,11 +25,11 @@
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic illustrated alpine rescue scene with no text or logos; recognizable foreground rescuers violate the no-foreground-person ",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic alpine-rescue illustration with no text, logos, or identifiable faces; three clearly recognizable foreground rescuers are",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-10T23:18:13.322Z"
+      "lastFailureAt": "2026-10-10T23:57:50.484Z"
     },
     {
       "articleId": "juso-lucerna-humbel-governo",
