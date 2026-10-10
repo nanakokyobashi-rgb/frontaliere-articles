@@ -5116,9 +5116,12 @@ function qualityRejectError(message) {
 }
 
 function bodyFieldsForQuality(content) {
-  return Object.keys(content || {})
-    .filter((field) => /^body\d+$/.test(field))
-    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+  if (!content || typeof content !== 'object') return [];
+  // Keep quality reads on the exact string-valued field set emitted by
+  // buildBodyFile(): body1..body20. Extra bodyN keys are inert on the live
+  // article surface and must not become SEO source text.
+  return Array.from({ length: MAX_BODY_KEYS }, (_, index) => `body${index + 1}`)
+    .filter((field) => typeof content[field] === 'string');
 }
 
 function bodyTextForQuality(content) {
@@ -19468,7 +19471,13 @@ function ensureSeoDescriptionMinimum(data) {
   const excerpt = stripExcerptMarkdown(
     typeof data?.content?.it?.excerpt === 'string' ? data.content.it.excerpt : '',
   );
-  const candidates = [description, excerpt]
+  // A model can return a valid long-form article while emitting a short SEO
+  // summary (the canton-fr recurrence produced 54 chars for both fields).
+  // The body is the remaining article-specific source already in memory; use
+  // its plain-text lead before failing closed, rather than padding with generic
+  // copy or rejecting an otherwise publishable article.
+  const body = stripExcerptMarkdown(bodyTextForQuality(data?.content?.it || {}));
+  const candidates = [description, excerpt, body]
     .filter((candidate) => candidate.length >= SEO_DESCRIPTION_MIN)
     .map((candidate) => truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX));
   const candidate = candidates.find((bounded) => bounded.trim().length >= SEO_DESCRIPTION_MIN);

@@ -6,6 +6,7 @@ import path from 'node:path';
 import {
   OBSERVER_USER_AGENT,
   buildObserverTargets,
+  parseCoverageLedger,
   formatObserverReport,
   pageHasCaughtUp,
   classifyPublicationLag,
@@ -127,6 +128,13 @@ test('og:image dichiarata generica non apre il segnale degrado', () => {
   assert.equal(verdict.degraded, false);
 });
 
+test('deriva il flag og:image generico senza trattenere il body HTML', () => {
+  const observed = parsePageObservation(page(currentDate, '/og-image.png'));
+  assert.equal('rawHtml' in observed, false);
+  assert.equal(observed.genericOgImage, true);
+  assert.equal(observed.ogImage, 'https://frontaliereticino.ch/og-image.png');
+});
+
 test('usa fake HTTP sequenziale e restituisce due liste stabili', async () => {
   const requests = [];
   const userAgents = [];
@@ -159,6 +167,151 @@ test('usa fake HTTP sequenziale e restituisce due liste stabili', async () => {
   assert.deepEqual(sleeps, [500, 500, 500]);
   assert.deepEqual(result.lagging.map((item) => item.target.articleId), ['two', 'four']);
   assert.deepEqual(result.degraded.map((item) => item.target.articleId), ['three', 'four']);
+});
+
+test('la scansione conserva solo i segnali e i metadati, mai il body HTML', async () => {
+  const html = `${page(currentDate, ownImage)}<!--${'x'.repeat(1024 * 1024)}-->`;
+  const result = await observePublicationLag({
+    targets: [{ ...target(), url: 'https://example.test/large/' }],
+    nowMs,
+    maxPages: 1,
+    minIntervalMs: 0,
+    fetchImpl: async () => ({ ok: true, status: 200, text: async () => html }),
+  });
+  const observed = result.checked[0].page;
+  assert.deepEqual(Object.keys(observed).sort(), [
+    'genericOgImage', 'modifiedAt', 'ogImage', 'schemaTypes', 'status',
+  ]);
+  assert.equal(observed.modifiedAt, currentDate);
+  assert.equal(observed.ogImage, `https://frontaliereticino.ch${ownImage}`);
+  assert.equal(JSON.stringify(result).includes('x'.repeat(1024)), false);
+});
+
+test('un fetch bloccato viene abortito entro il timeout per richiesta', async () => {
+  let aborted = false;
+  const result = await observePublicationLag({
+    targets: [{ ...target(), url: 'https://example.test/hung/' }],
+    nowMs,
+    maxPages: 1,
+    minIntervalMs: 0,
+    fetchTimeoutMs: 10,
+    scanTimeoutMs: 100,
+    clock: () => 0,
+    fetchImpl: async (_url, options) => {
+      options.signal.addEventListener('abort', () => { aborted = true; });
+      return new Promise(() => {});
+    },
+  });
+  assert.equal(aborted, true);
+  assert.equal(result.timedOut, false);
+  assert.equal(result.checked.length, 1);
+  assert.equal(result.checked[0].page.timedOut, true);
+  assert.match(result.checked[0].page.error, /timeout fetch/);
+});
+
+test('un timeout fetch dentro la grace window resta copertura incompleta e nel residuo', async () => {
+  const result = await observePublicationLag({
+    targets: [{ ...target(), changedAt: nowMs - 5 * 60 * 1000, url: 'https://example.test/grace-timeout/' }],
+    nowMs,
+    maxPages: 1,
+    minIntervalMs: 0,
+    fetchTimeoutMs: 10,
+    scanTimeoutMs: 100,
+    clock: () => 0,
+    fetchImpl: async (_url, options) => {
+      options.signal.addEventListener('abort', () => {});
+      return new Promise(() => {});
+    },
+  });
+  assert.equal(result.lagging.length, 0);
+  assert.equal(result.timedOutPages.length, 1);
+  assert.match(formatObserverReport(result, { nowMs }), /fetch singoli sono scaduti/);
+  assert.match(formatObserverReport(result, { nowMs }), /grace-timeout/);
+});
+
+test('runObserver non risolve né omette l issue per un timeout fetch dentro la grace window', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient();
+  const recentEpoch = Math.floor((nowMs - 5 * 60 * 1000) / 1000);
+  const log = `commit ${'a'.repeat(40)} ${recentEpoch}\ncontent/blog-body/it/alpha.ts\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs,
+      githubClient: github.client,
+      gitLogImpl: () => log,
+      minIntervalMs: 0,
+      fetchTimeoutMs: 10,
+      scanTimeoutMs: 100,
+      clock: () => 0,
+      fetchImpl: async () => new Promise(() => {}),
+    });
+    assert.equal(result.coverageIncomplete, true);
+    assert.equal(result.timedOutPages.length, 1);
+    assert.ok(github.calls.some((call) => call.type === 'create'));
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+    assert.match(result.description, /restano nel residuo/);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('la deadline globale interrompe il fetch corrente e segnala la copertura incompleta', async () => {
+  const targets = ['one', 'two'].map((articleId) => ({
+    ...target(),
+    articleId,
+    url: `https://example.test/${articleId}/`,
+  }));
+  const result = await observePublicationLag({
+    targets,
+    nowMs,
+    maxPages: 2,
+    minIntervalMs: 0,
+    fetchTimeoutMs: 100,
+    scanTimeoutMs: 10,
+    fetchImpl: async () => new Promise(() => {}),
+  });
+  assert.equal(result.timedOut, true);
+  assert.equal(result.capped, true);
+  assert.equal(result.checked.length, 0);
+  assert.equal(result.unread, 2);
+  assert.equal(result.interruptedTarget.articleId, 'one');
+  assert.match(formatObserverReport(result, { nowMs }), /Deadline raggiunta/);
+});
+
+test('la deadline assoluta del job interrompe il fetch e persiste la copertura incompleta', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient();
+  const log = `commit ${'a'.repeat(40)} 1791417600\ncontent/blog-body/it/alpha.ts`;
+  let aborted = false;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      maxPages: 1,
+      minIntervalMs: 0,
+      fetchTimeoutMs: 1_000,
+      scanTimeoutMs: 60_000,
+      absoluteDeadlineAtMs: 100,
+      clock: () => 0,
+      fetchImpl: async (_url, options) => {
+        options.signal.addEventListener('abort', () => { aborted = true; });
+        return new Promise(() => {});
+      },
+    });
+    const create = github.calls.find((call) => call.type === 'create');
+    assert.equal(aborted, true);
+    assert.equal(result.timedOut, true);
+    assert.equal(result.coverageIncomplete, true);
+    assert.equal(result.absoluteDeadlineAtMs, 100);
+    assert.match(result.description, /Deadline assoluta del job/);
+    assert.match(create.description, /Deadline raggiunta/);
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
 });
 
 // I casi che seguono vengono dalla prima lettura dal vivo (2026-10-07): con le
@@ -275,6 +428,8 @@ test('il tetto di pagine taglia i cambi più vecchi, non la fine dell’alfabeto
   assert.deepEqual(read, ['https://example.test/zeta-recente/']);
   assert.equal(result.capped, true);
   assert.equal(result.unread, 2);
+  assert.equal(result.maxPages, 1);
+  assert.match(formatObserverReport(result, { nowMs }), /limite: 1/);
   assert.match(formatObserverReport(result, { nowMs }), /2 più vecchie nella finestra non sono state lette/);
 });
 
@@ -451,6 +606,109 @@ test('una lettura sana rimuove il degradato durevole e risolve l issue senza dis
     });
     assert.deepEqual(result.ledger, []);
     assert.deepEqual(result.dispatched, []);
+    assert.ok(github.calls.some((call) => call.type === 'resolve'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('una scansione pulita ma incompleta apre il segnale e non risolve l issue stabile', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient();
+  const log = [
+    `commit ${'a'.repeat(40)} 1791417600`,
+    'content/blog-body/it/alpha.ts',
+    'content/blog-body/it/zeta.ts',
+  ].join('\n');
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      maxPages: 1,
+      minIntervalMs: 0,
+      fetchImpl: async () => ({ ok: true, status: 200, text: async () => ownPage('/images/blog/alpha.webp') }),
+    });
+    assert.equal(result.capped, true);
+    assert.equal(result.unread, 1);
+    assert.ok(github.calls.some((call) => call.type === 'create' && call.description.includes('1 più vecchie')));
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('un target senza registry mantiene il segnale fail-closed e impedisce la risoluzione', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient({ issue: { number: 2448, body: '' } });
+  const log = `commit ${'f'.repeat(40)} 1791417600\ncontent/blog-body/it/senza-registry.ts\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('non deve leggere target non preparabili'); },
+    });
+    assert.equal(result.coverageIncomplete, true);
+    assert.equal(result.skipped.length, 1);
+    assert.match(result.description, /Copertura incompleta: 1 target non preparabili/);
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+    assert.ok(github.calls.some((call) => call.type === 'edit'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
+test('il blocker di preparazione persiste oltre la finestra Git finché il target non è osservato', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient();
+  const log = `commit ${'f'.repeat(40)} 1791417600\ncontent/blog-body/it/senza-registry.ts\n`;
+  try {
+    const first = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => log,
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('non deve leggere target non preparabili'); },
+    });
+    assert.equal(first.coverageBlockers.length, 1);
+    assert.ok(github.calls.some((call) => call.type === 'create' && call.description.includes('ARTICLE_PUBLICATION_COVERAGE_LEDGER')));
+    const persistedBody = github.calls.filter((call) => call.type === 'edit').at(-1).body;
+    assert.deepEqual(parseCoverageLedger(persistedBody).items.map((item) => item.articleId), ['senza-registry']);
+
+    const second = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-20T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => '',
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('il blocker deve restare non preparabile'); },
+    });
+    assert.equal(second.changedBodies.length, 0);
+    assert.equal(second.coverageIncomplete, true);
+    assert.equal(second.skipped.length, 1);
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+
+    fs.appendFileSync(
+      path.join(rootDir, 'content/blog-articles-data.ts'),
+      "\n{ id: 'senza-registry', date: '2026-09-01', image: '/images/blog/senza-registry.webp' },\n",
+    );
+    fs.appendFileSync(path.join(rootDir, 'content/routerBlogData.ts'), "\n'senza-registry': { it: 'senza-registry' },\n");
+    const third = await runObserver({
+      rootDir,
+      days: 1,
+      nowMs: Date.parse('2026-10-21T00:00:00Z'),
+      githubClient: github.client,
+      gitLogImpl: () => '',
+      minIntervalMs: 0,
+      fetchImpl: async () => ({ ok: true, status: 200, text: async () => ownPage('/images/blog/senza-registry.webp').replace('2026-09-02', '2026-10-21') }),
+    });
+    assert.deepEqual(third.coverageBlockers, []);
     assert.ok(github.calls.some((call) => call.type === 'resolve'));
   } finally {
     fs.rmSync(rootDir, { recursive: true, force: true });

@@ -32,8 +32,16 @@ jobs:
       issues: write
       actions: write
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # A job-start absolute cutoff leaves at least five minutes of this outer
+    # budget for persisting an incomplete-coverage issue before runner timeout.
+    timeout-minutes: 30
     steps:
+      - name: Set absolute observation deadline (reserve issue persistence time)
+        run: |
+          set -euo pipefail
+          deadline_ms=$(( $(date +%s) * 1000 + 25 * 60 * 1000 ))
+          printf 'OBSERVER_SCAN_DEADLINE_AT_MS=%s\n' "$deadline_ms" >> "$GITHUB_ENV"
+
       - name: Checkout corpus history and observer inputs
         uses: actions/checkout@v7
         with:

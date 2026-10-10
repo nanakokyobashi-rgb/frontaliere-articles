@@ -12957,6 +12957,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lugano-bienne-vittoria-2026.title': 'Lugano batte Bienne 3-2, terzo risultato utile',
     'blog.article.lugano-bienne-vittoria-2026.excerpt': 'Lugano vince 3-2 alla Tissot Arena Terzo risultato utile consecutivo per i bianconeri Doppietta di Innala, salito a sette reti stagionali Sette punti raccolti',
     'blog.article.lugano-bienne-vittoria-2026.imageAlt': 'HC Lugano festeggia il gol vincente contro il Bienne alla Tissot Arena',
+    'blog.article.ambri-piotta-berna-abols.title': 'Ambrì Piotta beffato all\'overtime dalla rete di Abols',
+    'blog.article.ambri-piotta-berna-abols.excerpt': 'Ambrì Piotta sconfitto 2-1 dal Berna all\'overtime Joly porta avanti i biancoblù in 5 contro 3 Quarta sconfitta consecutiva interna per l\'Ambrì Abols firma',
+    'blog.article.ambri-piotta-berna-abols.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

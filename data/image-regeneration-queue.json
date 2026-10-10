@@ -20,26 +20,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-10T15:20:37.719Z",
       "lastFailureAt": "2026-10-10T19:13:45.171Z"
-    },
-    {
-      "articleId": "cantieri-mobilita-ginevra",
-      "title": "Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026",
-      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-ginevra.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 2,
-      "requestedAt": "2026-10-10T20:45:24.130Z",
-      "lastFailureAt": "2026-10-10T21:38:09.365Z"
-    },
-    {
-      "articleId": "indagini-imprese-ginevrine",
-      "title": "Indagini congiunturali nelle imprese ginevrine",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-indagini-imprese-ginevrine: openai-codex (vision gate rejected image: Generic editorial illustration relevant to Geneva business surveys, but it includes multiple recognizable foreground people viewed ",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-10T20:58:56.060Z",
-      "lastFailureAt": "2026-10-10T21:39:39.012Z"
     }
   ]
 }

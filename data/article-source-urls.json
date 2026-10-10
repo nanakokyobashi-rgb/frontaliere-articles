@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/luganese/1943751/al-via-i-lavori-preparatori-per-il-piazzale-ex-scuole": "lavori-preparatori-piazzale-ex-scuole",
   "http://www.cd-ocst.ch": "registrarsi-alla-cassa-di-disoccupazione-ocst",
   "https://www.ocst.ch/ocst-donna-lavoro": "ocst-donna-lavoro-servizi",
   "https://www.laregione.ch/cantone/ticino/1943526/ticino-2020-nessun-rimborso-ai-comuni-le-scelte-sono-state-condivise": "no-rimborso-ticino-2020",
@@ -2356,6 +2355,11 @@
   "https://www.tio.ch/sport/hockey/1955976/lugano-bienne-bienne-lugano-hcl-punti": {
     "articleId": "lugano-bienne-vittoria-2026",
     "ts": "2026-10-10T20:55:56.868Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/sport/hockey/1956001/ambri-piotta-beffato-all-overtime-dalla-rete-di-abols": {
+    "articleId": "ambri-piotta-berna-abols",
+    "ts": "2026-10-10T22:02:50.055Z",
     "keyForm": 2
   }
 }

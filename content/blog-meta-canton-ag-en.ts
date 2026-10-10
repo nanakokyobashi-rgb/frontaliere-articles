@@ -24,6 +24,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS in Aargau: remediation costs still uncertain',
     'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'In Aargau, only two-thirds of the municipalities responded about PFAS.',
     'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Illustration generated for this article',
+    'blog.article.argovia-polizia-regionale-poteri.title': 'Aargau: more powers for the regional police from 2028',
+    'blog.article.argovia-polizia-regionale-poteri.excerpt': 'The Aargau government is proposing new tasks for the regional police forces to the Grand Council; the law would enter into force on January 1, 2028.',
+    'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Regional police car outside a municipal building in Aargau.',
 };
 
 export default blogMetaCantonAgEn;

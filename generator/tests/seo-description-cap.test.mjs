@@ -103,14 +103,19 @@ function extractCapBlock() {
   if (!max) throw new Error('SEO_DESCRIPTION_MAX non trovato in create-article.mjs');
   const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
   if (!ogMax) throw new Error('SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs');
+  const maxBodyKeys = src.match(/^const MAX_BODY_KEYS = (\d+);$/m);
+  if (!maxBodyKeys) throw new Error('MAX_BODY_KEYS non trovato in create-article.mjs');
   const block = [
     sliceFn(src, 'function truncateAtWordBoundary(text, maxLen) {'),
     `const SEO_DESCRIPTION_MAX = ${max[1]};`,
     `const SEO_OG_DESCRIPTION_MAX = ${ogMax[1]};`,
+    `const MAX_BODY_KEYS = ${maxBodyKeys[1]};`,
     // Estratto dal sorgente, non riscritto: se la mappa dei budget cambia
     // forma il test la vede, invece di misurare una copia divergente.
     sliceConst(src, 'const SEO_DESCRIPTION_BUDGETS = {'),
     sliceFn(src, 'function clampSeoDescriptions(data) {'),
+    sliceFn(src, 'function bodyFieldsForQuality(content) {'),
+    sliceFn(src, 'function bodyTextForQuality(content) {'),
     sliceFn(src, 'function ensureSeoDescriptionMinimum(data) {'),
   ].join('\n\n');
   // `truncateAtWordBoundary` non e' piu' autocontenuta: delega a
@@ -237,6 +242,48 @@ describe('clampSeoDescriptions', () => {
 });
 
 describe('ensureSeoDescriptionMinimum', () => {
+  it('usa il corpo italiano quando description ed excerpt sono troppo brevi', () => {
+    const body =
+      'Il Parlamento friburghese ha rinviato la mozione per ridurre rapidamente i premi malattia, lasciando aperto il confronto per famiglie e lavoratori.';
+    const data = {
+      id: 'friburgo-mozione-premi-malattia',
+      seo: { description: 'Decisione sui premi malattia a Friburgo' },
+      content: {
+        it: {
+          excerpt: 'La mozione sui premi malattia è stata rinviata.',
+          body1: body,
+          body2: 'Il dibattito parlamentare proseguirà con nuove valutazioni.',
+        },
+      },
+    };
+
+    const result = ensureSeoDescriptionMinimum(data);
+    expect(result.startsWith(body)).toBe(true);
+    expect(result.length).toBeGreaterThanOrEqual(SEO_DESCRIPTION_MIN);
+    expect(result.length <= SEO_DESCRIPTION_MAX).toBe(true);
+    expect(data.seo.description).toBe(result);
+    expect(data.seo.description).not.toMatch(/Dati aggiornati|Guida pratica/);
+  });
+
+  it('non usa un body oltre il limite pubblicato come sorgente SEO', () => {
+    const data = {
+      id: 'body-oltre-il-writer',
+      seo: { description: 'Descrizione breve' },
+      content: {
+        it: {
+          excerpt: 'Estratto breve.',
+          body21: 'Questo testo supera il minimo SEO, ma il writer non pubblica body21 nel body live.',
+        },
+      },
+    };
+
+    assert.throws(
+      () => ensureSeoDescriptionMinimum(data),
+      /at least 80 characters of article-specific text/,
+    );
+    expect(data.seo.description).toBe('Descrizione breve');
+  });
+
   it('usa l’excerpt italiano reale quando la description è troppo breve', () => {
     const excerpt =
       'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';

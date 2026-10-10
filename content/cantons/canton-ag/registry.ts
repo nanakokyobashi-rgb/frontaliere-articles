@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'argovia-polizia-regionale-poteri',
+ category: 'novita',
+ date: '2026-10-10T22:10:08.251Z',
+ image: '/images/blog/article-argovia-polizia-regionale-poteri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
