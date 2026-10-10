@@ -876,7 +876,7 @@
       "reason": "Helper del publisher per serializzare gli aggiornamenti dei registry nella directory `content/`, rifiutare snapshot concorrenti obsoleti, preparare insieme le uscite e ripristinare le sostituzioni gia' riuscite su errori sincroni. E' usato dai backfill di articleType/canton e dal repoint delle copertine; il sito consuma i JSON pubblicati via HTTP e non deve importare il writer del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "fb1726b001af46c4",
+        "corpus": "1bc5c31e4fcf5f32",
         "alignedAt": "2026-10-10"
       }
     },
