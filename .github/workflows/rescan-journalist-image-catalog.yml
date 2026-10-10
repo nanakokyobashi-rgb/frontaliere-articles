@@ -33,6 +33,7 @@ on:
     paths:
       - '.github/workflows/rescan-journalist-image-catalog.yml'
       - 'generator/scripts/generate-journalist-image-catalog.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
   workflow_dispatch:
     inputs:
       dry_run:

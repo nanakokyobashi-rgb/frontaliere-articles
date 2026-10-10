@@ -62,6 +62,7 @@ on:
     paths:
       - '.github/workflows/batch-faq-articles.yml'
       - 'generator/scripts/batch-add-faq-to-articles.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       - 'generator/scripts/fix-faq-locales.mjs'
       - 'generator/scripts/load-rc-env.mjs'
   workflow_dispatch:

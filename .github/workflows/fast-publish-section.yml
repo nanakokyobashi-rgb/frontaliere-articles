@@ -70,6 +70,7 @@ on:
       - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/lib/parse-positive-num.mjs'
       - 'generator/scripts/load-rc-env.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
   workflow_dispatch:
     inputs:
       section:

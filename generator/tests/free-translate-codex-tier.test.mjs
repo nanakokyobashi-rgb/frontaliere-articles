@@ -60,6 +60,7 @@ const {
   codexCallDeadlineMs,
   beginCodexTranslationCall,
   withCodexTranslationLane,
+  fetchWithRefTimeout,
 } = await import('../scripts/lib/free-translate.mjs');
 const { AI_MODELS } = await import('../scripts/lib/ai-models.mjs');
 
@@ -102,6 +103,53 @@ globalThis.fetch = async (url) => {
   throw new Error('offline nel test');
 };
 after(() => { globalThis.fetch = realFetch; });
+
+test('il timeout HTTP referenziato risolve una fetch pendente senza handle di rete', async () => {
+  const previousFetch = globalThis.fetch;
+  globalThis.fetch = async (_url, { signal }) => new Promise((_resolve, reject) => {
+    signal.addEventListener('abort', () => reject(new Error('aborted by test')), { once: true });
+  });
+  try {
+    await assert.rejects(
+      fetchWithRefTimeout('https://stalled.invalid', {}, 10),
+      /aborted by test/,
+    );
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
+
+test('il timeout HTTP referenziato resta attivo durante la lettura del body', async () => {
+  const previousFetch = globalThis.fetch;
+  try {
+    for (const reader of ['json', 'text']) {
+      globalThis.fetch = async (_url, { signal }) => ({
+        ok: true,
+        status: 200,
+        [reader]: () => new Promise((_resolve, reject) => {
+          const onAbort = () => reject(new Error(`body ${reader} aborted by test`));
+          if (signal.aborted) onAbort();
+          else signal.addEventListener('abort', onAbort, { once: true });
+        }),
+      });
+      let guard;
+      try {
+        const response = await fetchWithRefTimeout('https://stalled-body.invalid', {}, 10);
+        const guardPromise = new Promise((_, reject) => {
+          guard = setTimeout(() => reject(new Error(`body ${reader} guard expired`)), 100);
+        });
+        await assert.rejects(
+          Promise.race([response[reader](), guardPromise]),
+          new RegExp(`body ${reader} aborted by test`),
+        );
+      } finally {
+        clearTimeout(guard);
+      }
+    }
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
 
 /** Suffisso dei marcatori della chiamata, letto dal messaggio utente. */
 function markerOf(messages) {

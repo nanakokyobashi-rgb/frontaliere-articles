@@ -46,6 +46,7 @@ import { cantonHubTopicSlugs } from '../engine/shared/articleSectionCore.mjs';
 import { fetchPageManifest, pageManifestUrl } from './lib/section-page-manifest.mjs';
 import { sitemapPaths } from './publish-section-edge.mjs';
 import { validateEdgeSectionRegistry } from './lib/section-registry.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
@@ -152,14 +153,20 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
 }
 
 async function getJson(url, fetchImpl) {
-  const res = await fetchImpl(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(30000) });
-  if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+  const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+  if (!res.ok) {
+    releaseFetchWithRefTimeout(res);
+    throw new Error(`${url}: HTTP ${res.status}`);
+  }
   return res.json();
 }
 
 async function getText(url, fetchImpl) {
-  const res = await fetchImpl(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA }, signal: AbortSignal.timeout(30000) });
-  if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+  const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+  if (!res.ok) {
+    releaseFetchWithRefTimeout(res);
+    throw new Error(`${url}: HTTP ${res.status}`);
+  }
   return res.text();
 }
 
@@ -194,18 +201,31 @@ function sitemapFailureDetail(url, error) {
 export async function headState(url, fetchImpl = fetch) {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
-      const request = (method) => fetchImpl(`${url}?_rcb=${Date.now()}.${attempt}.${method.toLowerCase()}`, {
+      const request = (method) => fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}.${method.toLowerCase()}`, {
         method,
         headers: { 'user-agent': UA },
-        signal: AbortSignal.timeout(15000),
-      });
+      }, 15000, fetchImpl);
       const res = await request('HEAD');
-      if (res.status === 200) return 'present';
-      if (res.status === 404) return 'missing';
+      if (res.status === 200) {
+        releaseFetchWithRefTimeout(res);
+        return 'present';
+      }
+      if (res.status === 404) {
+        releaseFetchWithRefTimeout(res);
+        return 'missing';
+      }
+      releaseFetchWithRefTimeout(res);
       if (res.status !== 405 && res.status !== 501) continue;
       const get = await request('GET');
-      if (get.status === 200) return 'present';
-      if (get.status === 404) return 'missing';
+      if (get.status === 200) {
+        releaseFetchWithRefTimeout(get);
+        return 'present';
+      }
+      if (get.status === 404) {
+        releaseFetchWithRefTimeout(get);
+        return 'missing';
+      }
+      releaseFetchWithRefTimeout(get);
     } catch {
       /* ritenta, poi non verificabile */
     }

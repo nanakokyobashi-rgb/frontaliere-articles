@@ -5,6 +5,7 @@ import path from 'node:path';
 import { CODEX_FALLBACK_MODEL } from '../../../scripts/ci/claude-codex-fallback.mjs';
 import { exitAfterDrain } from './drain-stdio.mjs';
 import { GH_MODELS_URL } from './gh-models-endpoint.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 /**
  * Centralized AI Model Service — v15 (free-only, 115+ models, 14 providers)
@@ -911,14 +912,13 @@ async function _getGitHubModelsCatalog(apiKey, timeout) {
   const promise = (async () => {
     let res;
     try {
-      res = await fetch(GH_MODELS_CATALOG_URL, {
+      res = await fetchWithRefTimeout(GH_MODELS_CATALOG_URL, {
         method: 'GET',
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${apiKey}`,
         },
-        signal: AbortSignal.timeout(timeoutMs),
-      });
+      }, timeoutMs);
     } catch (error) {
       throw _githubModelsCatalogTransportError(error?.message || 'errore di trasporto');
     }
@@ -3823,20 +3823,15 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
   const apiKey = cfg.getKey();
   if (!apiKey) return { added: 0, stale: 0 };
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000);
   let res;
-  try {
-    res = await fetch(cfg.url, {
-      headers: { Authorization: `Bearer ${apiKey}`, ...(cfg.extraHeaders || {}) },
-      signal: controller.signal,
-    });
-  } finally {
-    clearTimeout(timeout);
-  }
+  res = await fetchWithRefTimeout(cfg.url, {
+    headers: { Authorization: `Bearer ${apiKey}`, ...(cfg.extraHeaders || {}) },
+  }, 10_000);
 
   if (!res.ok) {
+    releaseFetchWithRefTimeout(res);
     console.warn(`⚠️  [Discovery:${cfg.name}] API returned ${res.status} — using static list`);
+    releaseFetchWithRefTimeout(res);
     return { added: 0, stale: 0 };
   }
 
@@ -6238,7 +6233,7 @@ function _flapKeyFor(model, provider, err) {
  * A flap re-enters the generic retry loop (`maxRetriesPerModel` + `backoffMs`).
  * Near an expired `deadlineMs` that loop can empty the cascade on the
  * wall-clock branch before a healthy provider is reached. Worst case per
- * attempt is the request timeout (EAI_AGAIN can hang until AbortSignal.timeout)
+ * attempt is the request timeout (EAI_AGAIN can hang until the referenced transport timeout)
  * plus backoff after every non-final attempt.
  *
  * Pure: the loop asks, this answers. Non-finite `remainingMs` → full budget
@@ -7204,7 +7199,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
     _stats.calls++;
     let responseReceived = false;
     try {
-      const res = await requestFetch(endpoint, {
+      const res = await fetchWithRefTimeout(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -7212,12 +7207,11 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
           ...(extraHeaders || {}),
         },
         body: JSON.stringify(body),
-        signal: AbortSignal.timeout(opts.timeout),
         // Local CPU inference buffers the whole completion before sending
         // headers; without a dispatcher raising undici's 300s headersTimeout,
-        // a slow local model dies as `fetch failed` long before the AbortSignal.
+        // a slow local model dies as `fetch failed` long before the request timeout.
         ...(dispatcher ? { dispatcher } : {}),
-      });
+      }, opts.timeout, requestFetch);
       responseReceived = true;
 
       // OmniRoute's "auto" combo resolves to one specific underlying provider
@@ -7747,7 +7741,7 @@ function _callZai(model, messages, opts) {
 // `headersTimeout`/`bodyTimeout` to 300s; non-streaming CPU inference buffers the
 // whole completion before sending response headers, so a slow local model (e.g.
 // qwen2.5:7b on a CPU runner) trips that 300s limit and surfaces as
-// `TypeError: fetch failed` — long before our AbortSignal.timeout fires. Raising
+// `TypeError: fetch failed` — long before our referenced transport timeout fires. Raising
 // both undici timeouts to the real local budget lets a full generation complete.
 // Keyed by timeout and fetch implementation so a changed LOCAL_LLM_TIMEOUT_MS
 // or a test/mock fetch rebuilds the transport. `null` memoizes "undici
@@ -8839,12 +8833,11 @@ async function _callGeminiRaw(model, messages, opts) {
     _stats.calls++;
     let responseReceived = false;
     try {
-      const res = await fetch(endpoint, {
+      const res = await fetchWithRefTimeout(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
-        signal: AbortSignal.timeout(opts.timeout),
-      });
+      }, opts.timeout);
       responseReceived = true;
 
       const raw = await res.text();
@@ -8977,7 +8970,7 @@ async function _callGeminiRaw(model, messages, opts) {
 
 /**
  * Grace added on top of the computed worst case, so the provider's OWN abort
- * (AbortSignal.timeout / claude-CLI SIGKILL timer) always gets the first shot
+ * (the per-request transport / claude-CLI SIGKILL timer) always gets the first shot
  * at ending the call — the hard cap below is the backstop for when it doesn't.
  */
 const HARD_CALL_CAP_GRACE_MS = 60_000;
@@ -8985,7 +8978,7 @@ const HARD_CALL_CAP_GRACE_MS = 60_000;
 /**
  * Absolute wall-clock ceiling for ONE _callModel invocation, in ms.
  *
- * Every provider already sets its own per-request timeout (AbortSignal.timeout
+ * Every provider already sets its own per-request transport timeout
  * in the fetch callers, a SIGKILL timer in _runClaudeCliProcess), and callLLM
  * re-checks opts.deadlineMs BETWEEN models. Run 30436268314 proved that is not
  * enough: a single call hung 3h36m (08:54:32 → cancelled at 12:30) with ZERO

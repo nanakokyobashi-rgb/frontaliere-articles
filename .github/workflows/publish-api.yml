@@ -66,6 +66,7 @@ on:
       # kill-switch delle sezioni (CANTON_ARTICLE_SECTIONS_KILL) e il marker
       # RC_ENV_LOADED che build-api legge: un fix al loader deve ripubblicare.
       - 'generator/scripts/load-rc-env.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       # Il resto della chiusura degli import del publisher (build-api,
       # build-blog-index, verify-api-floors, publish-section-edge): ogni modulo
       # che uno di loro importa e' un input della superficie pubblicata, e un

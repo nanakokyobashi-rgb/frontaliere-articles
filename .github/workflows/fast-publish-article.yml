@@ -79,6 +79,7 @@ on:
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'generator/scripts/load-rc-env.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'engine/**'
       - 'host/**'

@@ -29,6 +29,7 @@ import {
   rcValueState,
 } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
 import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -139,24 +140,180 @@ test('RC_FETCH_TIMEOUT_MS e TOKEN_EXCHANGE_TIMEOUT_MS sono cap finiti e ragionev
   }
 });
 
-test('fetchTemplateViaRest passa RC_FETCH_TIMEOUT_MS come AbortSignal al fetch', () => {
+test('fetchTemplateViaRest passa RC_FETCH_TIMEOUT_MS al helper con timer referenziato', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
   const fnBody = sliceFrom(src, 'async function fetchTemplateViaRest');
   assert.match(
     fnBody,
-    /signal:\s*AbortSignal\.timeout\(RC_FETCH_TIMEOUT_MS\)/,
-    'il fetch verso Remote Config non ha (più) un AbortSignal.timeout(RC_FETCH_TIMEOUT_MS): un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre',
+    /fetchWithRefTimeout\([\s\S]*?RC_FETCH_TIMEOUT_MS\s*,?\s*\)/,
+    'il fetch verso Remote Config non usa il timeout condiviso: un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre',
   );
 });
 
-test('exchangeAssertionForToken passa TOKEN_EXCHANGE_TIMEOUT_MS come AbortSignal al fetch', () => {
+test('exchangeAssertionForToken passa TOKEN_EXCHANGE_TIMEOUT_MS al helper con timer referenziato', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/google-service-account-token.mjs'), 'utf8');
   const fnBody = sliceFrom(src, 'export async function exchangeAssertionForToken');
   assert.match(
     fnBody,
-    /signal:\s*AbortSignal\.timeout\(TOKEN_EXCHANGE_TIMEOUT_MS\)/,
-    "il fetch verso l'endpoint OAuth di Google non ha (più) un AbortSignal.timeout(TOKEN_EXCHANGE_TIMEOUT_MS): un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre",
+    /fetchWithRefTimeout\([\s\S]*?TOKEN_EXCHANGE_TIMEOUT_MS\s*\)/,
+    "il fetch verso l'endpoint OAuth di Google non usa il timeout condiviso: un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre",
   );
+});
+
+test('fetchWithRefTimeout mantiene il timeout attivo durante la lettura del body', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async (_url, { signal }) => ({
+      ok: true,
+      body: {},
+      json() {
+        return new Promise((resolve, reject) => {
+          signal.addEventListener('abort', () => reject(signal.reason), { once: true });
+        });
+      },
+    });
+    const response = await fetchWithRefTimeout('https://example.test', {}, 20);
+    await assert.rejects(response.json(), { name: 'TimeoutError' });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('fetchWithRefTimeout mantiene il brand della Response e accetta un fetch iniettato', async () => {
+  const response = await fetchWithRefTimeout(
+    'https://example.test',
+    {},
+    100,
+    async () => new Response('{"ok":true}', { headers: { 'content-type': 'application/json' } }),
+  );
+  assert.equal(response.ok, true);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('content-type'), 'application/json');
+  assert.deepEqual(await response.json(), { ok: true });
+});
+
+test('fetchWithRefTimeout conserva il brand di Response per proprietà, clone e body reader', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async () => new Response('{"ok":true}', {
+      status: 200,
+      headers: { 'x-test': 'yes' },
+    });
+    const response = await fetchWithRefTimeout('https://example.test', {}, 100);
+    assert.equal(response.ok, true);
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('x-test'), 'yes');
+    assert.equal(await response.clone().text(), '{"ok":true}');
+    assert.deepEqual(await response.json(), { ok: true });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('fetchWithRefTimeout rimuove il timer anche se il reader lancia sincrono', async () => {
+  const originalFetch = globalThis.fetch;
+  let requestSignal;
+  try {
+    globalThis.fetch = async (_url, { signal }) => {
+      requestSignal = signal;
+      return {
+        body: {},
+        json() {
+          throw new Error('body parse failed');
+        },
+      };
+    };
+    const response = await fetchWithRefTimeout('https://example.test', {}, 20);
+    await assert.rejects(response.json(), /body parse failed/);
+    await new Promise((resolve) => setTimeout(resolve, 40));
+    assert.equal(requestSignal.aborted, false);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('releaseFetchWithRefTimeout chiude i rami status-only senza lasciare timer o listener', async () => {
+  const upstream = new AbortController();
+  let requestSignal;
+  let cancellations = 0;
+  const response = await fetchWithRefTimeout(
+    'https://example.test',
+    { signal: upstream.signal },
+    20,
+    async (_url, { signal }) => {
+      requestSignal = signal;
+      return {
+        body: {
+          cancel() {
+            cancellations += 1;
+            return Promise.resolve();
+          },
+        },
+        ok: false,
+        status: 404,
+      };
+    },
+  );
+
+  releaseFetchWithRefTimeout(response);
+  releaseFetchWithRefTimeout(response);
+  upstream.abort();
+  await new Promise((resolve) => setTimeout(resolve, 40));
+
+  assert.equal(cancellations, 1);
+  assert.equal(requestSignal.aborted, false);
+});
+
+test('Google Cloud 401 consuma il body prima di proseguire la cascata', async () => {
+  const originalFetch = globalThis.fetch;
+  const envKeys = [
+    'GSC_CLIENT_ID',
+    'GSC_CLIENT_SECRET',
+    'GSC_REFRESH_TOKEN',
+    'GOOGLE_APPLICATION_CREDENTIALS',
+  ];
+  const previousEnv = new Map(envKeys.map((key) => [key, process.env[key]]));
+  let bodyRead = false;
+  try {
+    process.env.GSC_CLIENT_ID = 'test-client';
+    process.env.GSC_CLIENT_SECRET = 'test-client-secret';
+    process.env.GSC_REFRESH_TOKEN = 'test-refresh-token';
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(ROOT, '.missing-google-credentials-test.json');
+    globalThis.fetch = async (url) => {
+      const requestUrl = String(url);
+      if (requestUrl.includes('oauth2.googleapis.com/token')) {
+        return {
+          body: null,
+          ok: true,
+          status: 200,
+          json: async () => ({ access_token: 'test-access-token', expires_in: 3600 }),
+        };
+      }
+      if (requestUrl.includes('translation.googleapis.com/language/translate/v2')) {
+        return {
+          body: {},
+          ok: false,
+          status: 401,
+          text: async () => {
+            bodyRead = true;
+            return 'unauthorized';
+          },
+        };
+      }
+      throw new Error(`unexpected test URL: ${requestUrl}`);
+    };
+
+    const { translateWithGoogleCloud } = await import('../scripts/lib/free-translate.mjs');
+    assert.equal(await translateWithGoogleCloud('testo', 'it', 'en'), '');
+    assert.equal(bodyRead, true);
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const key of envKeys) {
+      const value = previousEnv.get(key);
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
 });
 
 // #247: un `fetch()` rifiutato senza Abort/TimeoutError — cioè un fallimento
@@ -315,5 +472,9 @@ test('_getGoogleCloudAccessToken in free-translate.mjs riusa il classificatore c
   assert.match(fnBody, /extractOAuthErrorReason\(text\)/, 'un 403 deve leggere il body per estrarre il codice errore OAuth, non fermarsi allo status');
   assert.match(fnBody, /isRetryableTokenExchangeStatus\(res\.status,\s*reason\)/, 'la reason estratta deve raggiungere il classificatore dedicato al token exchange');
   assert.match(fnBody, /for\s*\(let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt\+\+\)/, 'deve retryare fino a TOKEN_EXCHANGE_ATTEMPTS invece di arrendersi al primo fallimento');
-  assert.match(fnBody, /signal:\s*AbortSignal\.timeout\(TOKEN_EXCHANGE_TIMEOUT_MS\)/, 'deve condividere il timeout del token exchange, non uno slegato');
+  assert.match(
+    fnBody,
+    /fetchWithRefTimeout\(\s*['"]https:\/\/oauth2\.googleapis\.com\/token['"][\s\S]*?TOKEN_EXCHANGE_TIMEOUT_MS\s*\)/,
+    'deve condividere il timeout referenziato del token exchange, non uno slegato',
+  );
 });

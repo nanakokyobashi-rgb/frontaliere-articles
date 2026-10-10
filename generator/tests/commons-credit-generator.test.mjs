@@ -143,8 +143,10 @@ test('journalist URLs are downloaded only after the four-field upload check', ()
   assert.match(resolver, /appendEditorialImageRecord\(PROJECT_ROOT, record\)/);
   assert.match(resolver, /generateArticleImage\(data\)/);
   assert.match(resolver, /resolveArticleCoverFallback/);
+  const downloadIndex = resolver.search(/\b(?:fetch|fetchWithRefTimeout)\(rawImage/);
+  assert.ok(downloadIndex >= 0, 'rawImage is downloaded by the documented fetch wrapper');
   assert.ok(
-    resolver.indexOf('if (isEditorialUpload && upload)') < resolver.indexOf('fetch(rawImage'),
+    resolver.indexOf('if (isEditorialUpload && upload)') < downloadIndex,
     'rawImage is fetched only inside the documented upload branch',
   );
 });

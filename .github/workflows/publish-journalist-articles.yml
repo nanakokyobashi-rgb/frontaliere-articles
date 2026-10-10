@@ -63,6 +63,7 @@ on:
     paths:
       - '.github/workflows/publish-journalist-articles.yml'
       - 'generator/scripts/publish-journalist-article.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
   workflow_dispatch:
     inputs:
       dry_run:
