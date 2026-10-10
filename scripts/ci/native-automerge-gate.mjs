@@ -65,7 +65,7 @@ const LGTM_HEADING_RE = /^\s{0,3}##\s+LGTM\s*$/m;
 const TEST_ONLY_REVIEW_BOT_RE = /^(?:github-actions|frontaliere-automation)\[bot\]$/i;
 const MAX_TRANSIENT_GH_READ_ATTEMPTS = 3;
 const TRANSIENT_GH_READ_RETRY_DELAYS_MS = Object.freeze([250, 750]);
-const TRANSIENT_GH_READ_ERROR_RE = /(?:\bHTTP\s+5\d{2}\b|\b5\d{2}\s+(?:bad gateway|service unavailable|gateway timeout)\b|service unavailable|bad gateway|gateway timeout|timed?\s*out|ECONNRESET|ETIMEDOUT|EAI_AGAIN)/iu;
+const TRANSIENT_GH_READ_ERROR_RE = /(?:\bHTTP\s+5\d{2}\b|\b5\d{2}\s+(?:bad gateway|service unavailable|gateway timeout)\b|service unavailable|bad gateway|gateway timeout|timed?\s*out|\btimeout\b|ECONNRESET|ETIMEDOUT|EAI_AGAIN)/iu;
 
 function flattenPages(value) {
   if (!Array.isArray(value)) return [];

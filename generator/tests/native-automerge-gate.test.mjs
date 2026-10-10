@@ -407,6 +407,25 @@ test('ritenta solo letture GitHub transitorie con un limite esplicito', () => {
   assert.equal(isTransientGithubReadError(permanent), false);
 });
 
+test('ritenta il timeout GraphQL in forma i/o timeout restituito da gh', () => {
+  const timeout = Object.assign(new Error('Command failed: gh pr view 2480'), {
+    stderr: Buffer.from('Post "https://api.github.com/graphql": dial tcp: i/o timeout'),
+  });
+  const sleeps = [];
+  let attempts = 0;
+
+  const result = withTransientGithubReadRetry(() => {
+    attempts += 1;
+    if (attempts === 1) throw timeout;
+    return 'recovered';
+  }, { sleep: (delayMs) => sleeps.push(delayMs) });
+
+  assert.equal(isTransientGithubReadError(timeout), true);
+  assert.equal(result, 'recovered');
+  assert.equal(attempts, 2);
+  assert.deepEqual(sleeps, [250]);
+});
+
 test('lascia fail-closed un errore GitHub permanente senza ritentarlo', () => {
   const permanent = Object.assign(new Error('gh failed'), {
     stderr: 'HTTP 403: 403 Forbidden',
