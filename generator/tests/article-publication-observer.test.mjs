@@ -538,6 +538,29 @@ test('una scansione pulita ma incompleta apre il segnale e non risolve l issue s
   }
 });
 
+test('un target senza registry mantiene il segnale fail-closed e impedisce la risoluzione', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient({ issue: { number: 2448, body: '' } });
+  const log = `commit ${'f'.repeat(40)} 1791417600\ncontent/blog-body/it/senza-registry.ts\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      minIntervalMs: 0,
+      fetchImpl: async () => { throw new Error('non deve leggere target non preparabili'); },
+    });
+    assert.equal(result.coverageIncomplete, true);
+    assert.equal(result.skipped.length, 1);
+    assert.match(result.description, /Copertura incompleta: 1 target non preparabili/);
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+    assert.ok(github.calls.some((call) => call.type === 'edit'));
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
 test('una og:image propria ma diversa dal registro non rimuove il degradato', async () => {
   const rootDir = observerRoot();
   const github = issueClient({

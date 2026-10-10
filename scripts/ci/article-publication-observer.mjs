@@ -464,6 +464,9 @@ export function formatObserverReport(report, { nowMs = Date.now(), skipped = [] 
   } else if (report.capped) {
     lines.push(`⚠️ Lette le ${report.checked.length} pagine cambiate più di recente; ${report.unread ?? 'altre'} più vecchie nella finestra non sono state lette in questo giro.`);
   }
+  if (skipped.length > 0) {
+    lines.push(`⚠️ Copertura incompleta: ${skipped.length} target non preparabili per registro o slug mancante.`);
+  }
   for (const item of report.lagging) {
     const page = item.page.modifiedAt || item.page.error || `HTTP ${item.page.status}`;
     lines.push(`- Ritardo \`${item.target.articleId}\` (${item.target.section}) — commit corpus ${item.target.sourceCommit}; pagina ${page}; ${item.reason}; ${item.target.url}`);
@@ -691,7 +694,8 @@ export async function runObserver({
   // Persist the coverage failure before reconciling runs or proving images:
   // those follow-up calls must not be able to hide an incomplete scan behind
   // the workflow timeout.
-  const actionable = report.capped || report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
+  const coverageIncomplete = report.capped || prepared.skipped.length > 0;
+  const actionable = coverageIncomplete || report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
   if (actionable && !issue) {
     issue = await github.createIssue(description);
     if (!issue) throw new Error('issue observer non trovata dopo la creazione');
@@ -757,10 +761,10 @@ export async function runObserver({
   }
 
   let resolved = null;
-  if (!report.capped && !report.lagging.length && !report.degraded.length && ledger.length === 0 && issue) {
+  if (!coverageIncomplete && !report.lagging.length && !report.degraded.length && ledger.length === 0 && issue) {
     resolved = await github.resolveIssue();
   }
-  return { ...report, issue, resolved, dispatched, ledger, changedBodies, skipped: prepared.skipped, description };
+  return { ...report, coverageIncomplete, issue, resolved, dispatched, ledger, changedBodies, skipped: prepared.skipped, description };
 }
 
 const invokedDirectly = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -768,10 +772,10 @@ if (invokedDirectly) {
   runObserver({ days: parseArgs(process.argv.slice(2)).days })
     .then((result) => {
       console.log(formatObserverReport(result, { skipped: result.skipped }));
-      if (!result.capped && result.lagging.length === 0 && result.degraded.length === 0) {
+      if (!result.coverageIncomplete && result.lagging.length === 0 && result.degraded.length === 0) {
         console.log('Nessun ritardo o degrado oltre la finestra di grazia.');
-      } else if (result.capped) {
-        console.log(`Copertura incompleta: ${result.unread} pagine nella finestra non sono state lette.`);
+      } else if (result.coverageIncomplete) {
+        console.log(`Copertura incompleta: ${result.unread} pagine non lette e ${result.skipped.length} target non preparabili.`);
       }
     })
     .catch((error) => {
