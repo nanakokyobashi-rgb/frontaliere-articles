@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-riduzione-premi-padre-divorziato-lucerna.webp",
+      "sha256": "060ea6e9144894e1d06064fbe02a33716456f05e37cb75096540a1531005d447"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-riduzione-premi-padre-divorziato-lucerna-480w.webp",
+      "sha256": "98ce361d44443096fbad1090aaee970492762dc52cd6773eb40ac21abb09b89a"
+    }
+  ]
 }
