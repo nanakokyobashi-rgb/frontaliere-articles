@@ -1898,6 +1898,16 @@
       }
     },
     {
+      "path": "host/staticAdSlotHtml.ts",
+      "mode": "corpus-only",
+      "reason": "Provider host-side dei due slot pubblicitari delle pagine hub cantonali: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "9cc7f520f28c72bb",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "host/shared/clauseTail.mjs",
       "sitePath": "build-plugins/shared/clauseTail.mjs",
       "mode": "identical",
@@ -1917,6 +1927,16 @@
         "site": "2c0d386aea7eccd3",
         "corpus": "2c0d386aea7eccd3",
         "alignedAt": "2026-10-01"
+      }
+    },
+    {
+      "path": "host/tests/static-ad-slot.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Test node:test del provider host degli slot hub: fissa i contratti di slot, formato, placement, responsive behavior e min-height che impedisce il layout shift. E' specifico al markup/configurazione del corpus e non ha un gemello da pubblicare via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "d8cb54307e585b4e",
+        "alignedAt": "2026-10-10"
       }
     },
     {

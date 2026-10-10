@@ -398,6 +398,40 @@ const FALLBACK_MAPS = {
 const FALLBACK_FIELD_RE =
   /\b(en|de|fr)\s*:\s*\{\s*source\s*:\s*'([^']+)'\s*,\s*reason\s*:\s*'([^']+)'\s*\}/g;
 
+function findBalancedObjectEnd(source, openIndex) {
+  let depth = 0;
+  let quote = null;
+  let escaped = false;
+  for (let index = openIndex; index < source.length; index += 1) {
+    const character = source[index];
+    if (quote) {
+      if (escaped) escaped = false;
+      else if (character === '\\') escaped = true;
+      else if (character === quote) quote = null;
+      continue;
+    }
+    if (character === "'" || character === '"' || character === '`') {
+      quote = character;
+      continue;
+    }
+    if (character === '{') depth += 1;
+    else if (character === '}' && --depth === 0) return index;
+  }
+  return -1;
+}
+
+function readFallbackEntries(body) {
+  const entries = [];
+  const entryHeaderRe = /^\s*'([A-Za-z0-9._-]+)'\s*:\s*\{/gmu;
+  for (const match of body.matchAll(entryHeaderRe)) {
+    const openIndex = (match.index ?? 0) + match[0].lastIndexOf('{');
+    const closeIndex = findBalancedObjectEnd(body, openIndex);
+    assert.ok(closeIndex > openIndex, `provenienza non chiusa per ${match[1]}`);
+    entries.push({ id: match[1], body: body.slice(openIndex + 1, closeIndex) });
+  }
+  return entries;
+}
+
 function readSlugFallbackProvenance() {
   const out = [];
   for (const [file, constName] of Object.entries(FALLBACK_MAPS)) {
@@ -411,17 +445,15 @@ function readSlugFallbackProvenance() {
     const close = src.indexOf('\n};', open);
     assert.ok(open > start && close > open, `${constName} non ha una mappa chiusa in ${file}`);
     const body = src.slice(open + 1, close);
-    const entryRe = /^\s*'([A-Za-z0-9._-]+)'\s*:\s*\{\s*(.*?)\s*\},?\s*$/gm;
-    let entry;
-    while ((entry = entryRe.exec(body)) !== null) {
+    for (const entry of readFallbackEntries(body)) {
       FALLBACK_FIELD_RE.lastIndex = 0;
       let field;
       let fieldCount = 0;
-      while ((field = FALLBACK_FIELD_RE.exec(entry[2])) !== null) {
-        out.push({ file, id: entry[1], locale: field[1], source: field[2], reason: field[3] });
+      while ((field = FALLBACK_FIELD_RE.exec(entry.body)) !== null) {
+        out.push({ file, id: entry.id, locale: field[1], source: field[2], reason: field[3] });
         fieldCount += 1;
       }
-      assert.ok(fieldCount > 0, `provenienza senza locali per ${file}:${entry[1]}`);
+      assert.ok(fieldCount > 0, `provenienza senza locali per ${file}:${entry.id}`);
     }
   }
   return out;
