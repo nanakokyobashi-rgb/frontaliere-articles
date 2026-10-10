@@ -5,7 +5,7 @@ import path from 'node:path';
 import { CODEX_FALLBACK_MODEL } from '../../../scripts/ci/claude-codex-fallback.mjs';
 import { exitAfterDrain } from './drain-stdio.mjs';
 import { GH_MODELS_URL } from './gh-models-endpoint.mjs';
-import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 /**
  * Centralized AI Model Service — v15 (free-only, 115+ models, 14 providers)
@@ -3829,6 +3829,7 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
   }, 10_000);
 
   if (!res.ok) {
+    releaseFetchWithRefTimeout(res);
     console.warn(`⚠️  [Discovery:${cfg.name}] API returned ${res.status} — using static list`);
     return { added: 0, stale: 0 };
   }

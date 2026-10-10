@@ -29,7 +29,7 @@ import {
   rcValueState,
 } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
-import { fetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
 import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -230,6 +230,38 @@ test('fetchWithRefTimeout rimuove il timer anche se il reader lancia sincrono', 
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test('releaseFetchWithRefTimeout chiude i rami status-only senza lasciare timer o listener', async () => {
+  const upstream = new AbortController();
+  let requestSignal;
+  let cancellations = 0;
+  const response = await fetchWithRefTimeout(
+    'https://example.test',
+    { signal: upstream.signal },
+    20,
+    async (_url, { signal }) => {
+      requestSignal = signal;
+      return {
+        body: {
+          cancel() {
+            cancellations += 1;
+            return Promise.resolve();
+          },
+        },
+        ok: false,
+        status: 404,
+      };
+    },
+  );
+
+  releaseFetchWithRefTimeout(response);
+  releaseFetchWithRefTimeout(response);
+  upstream.abort();
+  await new Promise((resolve) => setTimeout(resolve, 40));
+
+  assert.equal(cancellations, 1);
+  assert.equal(requestSignal.aborted, false);
 });
 
 test('Google Cloud 401 consuma il body prima di proseguire la cascata', async () => {

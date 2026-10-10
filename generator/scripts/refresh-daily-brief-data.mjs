@@ -34,7 +34,7 @@ import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { decodeFields, buildDailyBrief, degradationAlarms, degradationState, isDegradationCarrier, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
 import { MIN_AVAILABLE_BLOCKS } from './lib/daily-brief-content.mjs';
 import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
-import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -100,7 +100,10 @@ async function getDoc(token, docPath) {
     const res = await fetchWithRefTimeout(`${FIRESTORE_BASE}/${docPath}`, {
       headers: { Authorization: `Bearer ${token}` },
     }, FETCH_TIMEOUT_MS);
-    if (res.status === 404) return null;
+    if (res.status === 404) {
+      releaseFetchWithRefTimeout(res);
+      return null;
+    }
     if (res.ok) {
       const doc = await res.json();
       return decodeFields(doc.fields);
