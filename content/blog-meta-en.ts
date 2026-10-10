@@ -12938,6 +12938,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: private sewer connection, owner pays',
     'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: the Council of State ruled that the rehabilitation of the private sewer was the owner\'s responsibility, following the repair paid for by the Municipality of Capriasca.',
     'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Private wall in Tesserete during a sewer inspection',
+    'blog.article.tradate-moto-capriolo-ferito.title': 'Tradate, motorcycle collides with a roe deer: 44-year-old injured',
+    'blog.article.tradate-moto-capriolo-ferito.excerpt': 'Friday, October 9, motorcycle collides with a roe deer at Tradate A 44-year-old motorcyclist injured, classified as yellow code The roe deer died from its injuries The accident',
+    'blog.article.tradate-moto-capriolo-ferito.imageAlt': 'Parked motorcycle on a wooded road in the morning',
 };
 
 export default blogMetaEn;

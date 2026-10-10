@@ -1,5 +1,4 @@
 {
-  "https://cassa-disoccupazione.unia.ch.ddev.site": "cassa-disoccupazione-unia",
   "https://unia.ch/it/salari-ccl/salari-minimi-legali": "salari-minimi-legali-ticino",
   "https://www.ocst.ch/aderisci-al-sindacato/associarsi-conviene": "vantaggi-associati-ocst-frontalieri",
   "https://www.varesenews.it/2026/08/italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139/2657131": "italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139",
@@ -2332,6 +2331,11 @@
   "https://www.rsi.ch/la1/programmi/informazione/patti-chiari/cittadini-contro-autorit%c3%a0-alla-fine-chi-ha-pagato--4135691.html": {
     "articleId": "tesserete-canalizzazione-privata",
     "ts": "2026-10-10T11:29:39.643Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/10/leggi-notizia/argomenti/cronaca-20/articolo/motociclista-investe-un-capriolo-ferito-a-tradate-un-44enne-morto-lanimale.html": {
+    "articleId": "tradate-moto-capriolo-ferito",
+    "ts": "2026-10-10T14:22:23.451Z",
     "keyForm": 2
   }
 }

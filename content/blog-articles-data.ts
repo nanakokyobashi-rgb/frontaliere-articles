@@ -43626,6 +43626,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tradate-moto-capriolo-ferito',
+ category: 'novita',
+ date: '2026-10-10T14:22:23.006Z',
+ image: '/images/blog/article-tradate-moto-capriolo-ferito.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

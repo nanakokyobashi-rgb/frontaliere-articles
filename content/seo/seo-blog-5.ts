@@ -104942,6 +104942,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-tradate-moto-capriolo-ferito': {
+    title: 'Tradate, moto contro un capriolo: ferito un 44enne',
+    description: 'Venerdì 9 ottobre, moto contro un capriolo a Tradate Ferito in codice giallo un motociclista di 44 anni Il capriolo è morto per le ferite riportate L\'incidente',
+    keywords: 'frontalieri, ticino, svizzera, italia, tradate, moto, contro, capriolo',
+    ogTitle: 'Tradate: motociclista ferito dopo l\'urto con un capriolo',
+    ogDescription: 'Venerdì 9 ottobre, moto contro un capriolo a Tradate Ferito in codice giallo un motociclista di 44 anni Il capriolo è morto per le ferite riportate L\'incidente',
+    canonicalPath: '/articoli-frontaliere/tradate-moto-capriolo-ferito/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tradate, moto contro un capriolo: ferito un 44enne",
+      "description": "Venerdì 9 ottobre, moto contro un capriolo a Tradate Ferito in codice giallo un motociclista di 44 anni Il capriolo è morto per le ferite riportate L'incidente",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tradate-moto-capriolo-ferito.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Motocicletta ferma su una strada boschiva al mattino"
+      },
+      "datePublished": "2026-10-10T14:22:23+00:00",
+      "dateModified": "2026-10-10T14:22:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tradate-moto-capriolo-ferito/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

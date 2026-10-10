@@ -12940,6 +12940,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tesserete-canalizzazione-privata.title': 'Carte : canalisation privée, paie le propriétaire',
     'blog.article.tesserete-canalizzazione-privata.excerpt': 'Carte : le Conseil d\'État a décidé que la remise en état de la canalisation privée incombait au propriétaire, après réparation payée par la municipalité de Capriasca.',
     'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Mur privé à Tesserete lors du contrôle d\'une canalisation',
+    'blog.article.tradate-moto-capriolo-ferito.title': 'Tradate, une moto percute un chevreuil : un motocycliste de 44 ans blessé',
+    'blog.article.tradate-moto-capriolo-ferito.excerpt': 'Vendredi 9 octobre, une moto percute un chevreuil à Tradate Un motocycliste de 44 ans blessé en code jaune Le chevreuil est mort des suites de ses blessures L\'accident',
+    'blog.article.tradate-moto-capriolo-ferito.imageAlt': 'Moto à l\'arrêt sur une route boisée le matin',
 };
 
 export default blogMetaFr;
