@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-friedli-rinuncia-corsa-federale.webp",
+      "sha256": "89ca63ac30834f2a9d84b56e60d0a621f0cbe55a47ad591b25c16940817ddc2a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-friedli-rinuncia-corsa-federale-480w.webp",
+      "sha256": "cb8bcfe8d87c015dbd8862a4e6047307c81b3349cf508cc0d72366a72dca98e7"
+    }
+  ]
 }
