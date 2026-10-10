@@ -15,6 +15,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.friburgo-legge-lingue-ufficiali.title': 'Fribourg approves the law on official languages',
     'blog.article.friburgo-legge-lingue-ufficiali.excerpt': 'The deputies voted on Thursday Fribourg has its first law on official languages The text promotes bilingualism Decision → vote by the deputies of the Canton',
     'blog.article.friburgo-legge-lingue-ufficiali.imageAlt': 'Illustration generated for this article',
+    'blog.article.garanzia-hib-payerne.title': 'Fribourg: CHF 44,8 million guarantee for HIB hospital',
+    'blog.article.garanzia-hib-payerne.excerpt': 'CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →',
+    'blog.article.garanzia-hib-payerne.imageAlt': 'Expansion project for the Intercantonal Hospital of the Broye in Payerne.',
 };
 
 export default blogMetaCantonFrEn;
