@@ -310,6 +310,24 @@ test('[road-events] la finestra dei 48h usa l’orologio dopo il fetch', async (
   }
 });
 
+test('[border-wait-averages] un HTTP 200 non JSON passa alla source di fallback', async () => {
+  const payload = servable(contract('border-wait-averages'));
+  const calls = [];
+  const result = await fetchFirstValidBorderWaitAverages(['cdn', 'same-origin'], {
+    previousCount: 0,
+    getBody: async (url) => {
+      calls.push(url);
+      return url === 'cdn' ? '<html>temporary CDN response</html>' : JSON.stringify(payload);
+    },
+  });
+
+  assert.deepEqual(calls, ['cdn', 'same-origin']);
+  assert.equal(result.ok, true);
+  assert.equal(result.url, 'same-origin');
+  assert.deepEqual(result.payload, payload);
+  assert.match(result.errors[0], /cdn is not valid JSON/);
+});
+
 test('[border-wait-averages] una risposta 200 non valida passa alla source di fallback', async () => {
   const payload = servable(contract('border-wait-averages'));
   const calls = [];
