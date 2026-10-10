@@ -5909,8 +5909,8 @@
       "reason": "Costruttore della voce SEO, del blocco `ImageObject` e inserimento in un chunk usati dal recupero degli orfani e dal drain delle copertine. Il writer normale conserva il suo percorso letterale in `create-article.mjs`; `generator/tests/seo-entry-equivalence.test.mjs` confronta il costruttore con le voci reali di main, così non nasce un secondo dialetto serializzato. È codice del generatore del corpus: il sito consuma il JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": null,
-        "alignedAt": "2026-10-08"
+        "corpus": "265d3cb531d40b61",
+        "alignedAt": "2026-10-10"
       }
     },
     {
@@ -5919,8 +5919,8 @@
       "reason": "Derivazione deterministica di `ogTitle`, `headline` e `keywords` dai metadati italiani già persistiti, per gli strumenti di recupero che non hanno un payload del modello. Riusa le regole di coda di frase di `host/shared/clauseTail.mjs` e la riparazione dei titoli esistente; nessun modello coinvolto. Sul sito questi campi arrivano dal generatore e non vengono ricostruiti.",
       "baseline": {
         "site": null,
-        "corpus": null,
-        "alignedAt": "2026-10-08"
+        "corpus": "5c1d8b1e9095477a",
+        "alignedAt": "2026-10-10"
       }
     },
     {
