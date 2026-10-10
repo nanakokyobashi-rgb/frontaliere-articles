@@ -29,6 +29,7 @@ import {
   rcValueState,
 } from '../scripts/load-rc-env.mjs';
 import { TOKEN_EXCHANGE_TIMEOUT_MS, extractOAuthErrorReason, isRetryableTokenExchangeStatus } from '../scripts/lib/google-service-account-token.mjs';
+import { fetchWithRefTimeout } from '../scripts/lib/fetch-with-ref-timeout.mjs';
 import { sliceBetween, sliceFrom } from './lib/anchored-slice.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -139,24 +140,43 @@ test('RC_FETCH_TIMEOUT_MS e TOKEN_EXCHANGE_TIMEOUT_MS sono cap finiti e ragionev
   }
 });
 
-test('fetchTemplateViaRest passa RC_FETCH_TIMEOUT_MS come AbortSignal al fetch', () => {
+test('fetchTemplateViaRest passa RC_FETCH_TIMEOUT_MS al helper con timer referenziato', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
   const fnBody = sliceFrom(src, 'async function fetchTemplateViaRest');
   assert.match(
     fnBody,
-    /signal:\s*AbortSignal\.timeout\(RC_FETCH_TIMEOUT_MS\)/,
-    'il fetch verso Remote Config non ha (più) un AbortSignal.timeout(RC_FETCH_TIMEOUT_MS): un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre',
+    /fetchWithRefTimeout\([\s\S]*?RC_FETCH_TIMEOUT_MS\s*,?\s*\)/,
+    'il fetch verso Remote Config non usa il timeout condiviso: un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre',
   );
 });
 
-test('exchangeAssertionForToken passa TOKEN_EXCHANGE_TIMEOUT_MS come AbortSignal al fetch', () => {
+test('exchangeAssertionForToken passa TOKEN_EXCHANGE_TIMEOUT_MS al helper con timer referenziato', () => {
   const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/google-service-account-token.mjs'), 'utf8');
   const fnBody = sliceFrom(src, 'export async function exchangeAssertionForToken');
   assert.match(
     fnBody,
-    /signal:\s*AbortSignal\.timeout\(TOKEN_EXCHANGE_TIMEOUT_MS\)/,
-    "il fetch verso l'endpoint OAuth di Google non ha (più) un AbortSignal.timeout(TOKEN_EXCHANGE_TIMEOUT_MS): un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre",
+    /fetchWithRefTimeout\([\s\S]*?TOKEN_EXCHANGE_TIMEOUT_MS\s*\)/,
+    "il fetch verso l'endpoint OAuth di Google non usa il timeout condiviso: un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre",
   );
+});
+
+test('fetchWithRefTimeout mantiene il timeout attivo durante la lettura del body', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async (_url, { signal }) => ({
+      ok: true,
+      body: {},
+      json() {
+        return new Promise((resolve, reject) => {
+          signal.addEventListener('abort', () => reject(signal.reason), { once: true });
+        });
+      },
+    });
+    const response = await fetchWithRefTimeout('https://example.test', {}, 20);
+    await assert.rejects(response.json(), { name: 'TimeoutError' });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 // #247: un `fetch()` rifiutato senza Abort/TimeoutError — cioè un fallimento

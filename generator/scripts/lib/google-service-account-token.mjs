@@ -12,6 +12,7 @@
  * Callers differ only by OAuth scope.
  */
 import { createSign } from 'node:crypto';
+import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 export const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
 const TOKEN_LIFETIME_SECONDS = 3600;
@@ -127,17 +128,16 @@ export async function exchangeAssertionForToken(assertion) {
   for (let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt++) {
     let res;
     try {
-      res = await fetch(GOOGLE_TOKEN_URL, {
+      res = await fetchWithRefTimeout(GOOGLE_TOKEN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
           grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
           assertion,
         }),
-        signal: AbortSignal.timeout(TOKEN_EXCHANGE_TIMEOUT_MS),
-      });
+      }, TOKEN_EXCHANGE_TIMEOUT_MS);
     } catch (err) {
-      // AbortSignal.timeout() rejects the fetch instead of resolving a status,
+      // fetchWithRefTimeout rejects the fetch instead of resolving a status,
       // and so does a raw network failure (DNS, TLS, connection reset — a bare
       // "fetch failed" TypeError with no status to check). Both are transient
       // and non-deterministic: issue #247 measured the network-failure case
