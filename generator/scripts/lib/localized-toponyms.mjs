@@ -409,6 +409,129 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
   return { text, replacements, replacementCounts, issues };
 }
 
+function parseEventsDigestBody2(text) {
+  if (typeof text !== 'string') return null;
+  const lines = text.split('\n');
+  const headings = [];
+  const events = [];
+  const eventCountsByHeading = [];
+  let currentHeading = -1;
+  let currentEvent = null;
+
+  for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+    const line = lines[lineIndex];
+    if (!line.trim()) {
+      currentEvent = null;
+      continue;
+    }
+
+    const headingMatch = /^(#{2,6})\s+/.exec(line);
+    if (headingMatch) {
+      currentHeading = headings.length;
+      headings.push({ lineIndex, level: headingMatch[1].length });
+      eventCountsByHeading.push(0);
+      currentEvent = null;
+      continue;
+    }
+
+    if (line.startsWith('- **')) {
+      if (currentHeading < 0) return null;
+      const separatorIndex = line.indexOf('** — ');
+      if (separatorIndex < 0) return null;
+      currentEvent = {
+        headingIndex: currentHeading,
+        lineIndices: [lineIndex],
+        titleStart: separatorIndex + '** — '.length,
+      };
+      events.push(currentEvent);
+      eventCountsByHeading[currentHeading] += 1;
+      continue;
+    }
+
+    // Event titles may span lines, but only while they remain within their
+    // original bullet. Any other body shape is deliberately unrecognized.
+    if (!currentEvent) return null;
+    currentEvent.lineIndices.push(lineIndex);
+  }
+
+  return {
+    lines,
+    headings,
+    events,
+    shape: headings.map((heading, index) => `${heading.level}:${eventCountsByHeading[index]}`),
+  };
+}
+
+function transformEventsDigestBody2({ sourceText = '', targetText = '', locale } = {}) {
+  const source = parseEventsDigestBody2(sourceText);
+  const target = parseEventsDigestBody2(targetText);
+  if (!source || !target) return null;
+  if (source.shape.length !== target.shape.length
+      || source.shape.some((part, index) => part !== target.shape[index])
+      || source.events.length !== target.events.length) return null;
+
+  for (let index = 0; index < source.events.length; index += 1) {
+    const sourceEvent = source.events[index];
+    const targetEvent = target.events[index];
+    if (sourceEvent.headingIndex !== targetEvent.headingIndex
+        || sourceEvent.lineIndices.length !== targetEvent.lineIndices.length) return null;
+  }
+
+  const lines = [...target.lines];
+  const issues = [];
+  const replacementCounts = new Map();
+  let replacements = 0;
+  const applyPair = (sourceValue, targetValue) => {
+    const result = replaceLocalizedToponymMismatches({ sourceText: sourceValue, targetText: targetValue, locale });
+    replacements += result.replacements;
+    for (const issue of result.issues) {
+      if (!issues.some((candidate) => issueKey(candidate) === issueKey(issue))) issues.push(issue);
+    }
+    for (const [key, count] of result.replacementCounts) {
+      replacementCounts.set(key, (replacementCounts.get(key) || 0) + count);
+    }
+    return result.text;
+  };
+
+  for (let index = 0; index < source.headings.length; index += 1) {
+    const sourceHeading = source.headings[index];
+    const targetHeading = target.headings[index];
+    lines[targetHeading.lineIndex] = applyPair(
+      source.lines[sourceHeading.lineIndex],
+      target.lines[targetHeading.lineIndex],
+    );
+  }
+
+  for (let index = 0; index < source.events.length; index += 1) {
+    const sourceEvent = source.events[index];
+    const targetEvent = target.events[index];
+    const sourceTitle = [
+      source.lines[sourceEvent.lineIndices[0]].slice(sourceEvent.titleStart),
+      ...sourceEvent.lineIndices.slice(1).map((lineIndex) => source.lines[lineIndex]),
+    ].join('\n');
+    const targetTitle = [
+      target.lines[targetEvent.lineIndices[0]].slice(targetEvent.titleStart),
+      ...targetEvent.lineIndices.slice(1).map((lineIndex) => target.lines[lineIndex]),
+    ].join('\n');
+    const repairedTitle = applyPair(sourceTitle, targetTitle).split('\n');
+    if (repairedTitle.length !== targetEvent.lineIndices.length) return null;
+    lines[targetEvent.lineIndices[0]] = target.lines[targetEvent.lineIndices[0]].slice(0, targetEvent.titleStart) + repairedTitle[0];
+    for (let lineIndex = 1; lineIndex < targetEvent.lineIndices.length; lineIndex += 1) {
+      lines[targetEvent.lineIndices[lineIndex]] = repairedTitle[lineIndex];
+    }
+  }
+
+  return { text: lines.join('\n'), replacements, replacementCounts, issues };
+}
+
+export function findEventsDigestBody2LocalizedToponymMismatches(options = {}) {
+  return transformEventsDigestBody2(options)?.issues ?? null;
+}
+
+export function replaceEventsDigestBody2LocalizedToponymMismatches(options = {}) {
+  return transformEventsDigestBody2(options);
+}
+
 function collectStrings(value, output = []) {
   if (typeof value === 'string') output.push(value);
   else if (Array.isArray(value)) value.forEach((item) => collectStrings(item, output));
@@ -430,31 +553,89 @@ function articleLocaleProjection(data, locale) {
   };
 }
 
+function omitEventsDigestBody2(projection) {
+  const content = projection?.content;
+  if (!content || typeof content !== 'object' || Array.isArray(content)) return projection;
+  return {
+    ...projection,
+    content: Object.fromEntries(Object.entries(content).filter(([key]) => key !== 'body2')),
+  };
+}
+
+function findEventsDigestArticleLocaleMismatches(data, locale, sourceText) {
+  const sourceProjection = articleLocaleProjection(data, 'it');
+  const targetProjection = articleLocaleProjection(data, locale);
+  const sourceWithoutBody2 = collectStrings(omitEventsDigestBody2(sourceProjection)).join('\n');
+  const targetWithoutBody2 = collectStrings({
+    ...omitEventsDigestBody2(targetProjection),
+    slug: undefined,
+  }).join('\n');
+  const issues = findLocalizedToponymMismatches({
+    sourceText: sourceWithoutBody2,
+    targetText: targetWithoutBody2,
+    locale,
+  });
+  const body2Issues = findEventsDigestBody2LocalizedToponymMismatches({
+    sourceText: sourceProjection.content?.body2,
+    targetText: targetProjection.content?.body2,
+    locale,
+  });
+  if (body2Issues === null) return null;
+  for (const issue of body2Issues) {
+    if (!issues.some((candidate) => issueKey(candidate) === issueKey(issue))) issues.push(issue);
+  }
+
+  const provisionalSlugs = new Set([
+    ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
+    ...(Array.isArray(data?._slugI18nFallbacks)
+      ? data._slugI18nFallbacks
+        .map((record) => typeof record === 'string' ? record : record?.locale)
+        .filter(Boolean)
+      : []),
+  ]);
+  if (targetProjection.slug && !provisionalSlugs.has(locale)) {
+    const slugIssues = findLocalizedToponymMismatches({
+      sourceText,
+      targetText: targetProjection.slug,
+      locale,
+      slug: true,
+    });
+    for (const issue of slugIssues) {
+      if (!issues.some((candidate) => issueKey(candidate) === issueKey(issue))) issues.push(issue);
+    }
+  }
+  return issues;
+}
+
 /** Returns the same deterministic check for the complete pre-write article. */
 export function findArticleLocalizedToponymMismatches(data) {
   const source = collectStrings(articleLocaleProjection(data, 'it')).join('\n');
   if (!source.trim()) return [];
 
   const issues = [];
+  const isEventsDigest = typeof data?.id === 'string' && data.id.startsWith('eventi-weekend-');
   for (const locale of LOCALIZED_TOPONYM_LOCALES.filter((item) => item !== 'it')) {
     const targetProjection = articleLocaleProjection(data, locale);
-    const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
-    const targetIssues = findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
-    const provisionalSlugs = new Set([
-      ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
-      ...(Array.isArray(data?._slugI18nFallbacks)
-        ? data._slugI18nFallbacks
-          .map((record) => typeof record === 'string' ? record : record?.locale)
-          .filter(Boolean)
-        : []),
-    ]);
-    if (targetProjection.slug && !provisionalSlugs.has(locale)) {
-      targetIssues.push(...findLocalizedToponymMismatches({
-        sourceText: source,
-        targetText: targetProjection.slug,
-        locale,
-        slug: true,
-      }));
+    let targetIssues = isEventsDigest ? findEventsDigestArticleLocaleMismatches(data, locale, source) : null;
+    if (targetIssues === null) {
+      const target = collectStrings({ ...targetProjection, slug: undefined }).join('\n');
+      targetIssues = findLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
+      const provisionalSlugs = new Set([
+        ...(Array.isArray(data?._slugsProvisionalFromIt) ? data._slugsProvisionalFromIt : []),
+        ...(Array.isArray(data?._slugI18nFallbacks)
+          ? data._slugI18nFallbacks
+            .map((record) => typeof record === 'string' ? record : record?.locale)
+            .filter(Boolean)
+          : []),
+      ]);
+      if (targetProjection.slug && !provisionalSlugs.has(locale)) {
+        targetIssues.push(...findLocalizedToponymMismatches({
+          sourceText: source,
+          targetText: targetProjection.slug,
+          locale,
+          slug: true,
+        }));
+      }
     }
     for (const issue of targetIssues) {
       issues.push({ ...issue, locale });

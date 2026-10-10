@@ -1,8 +1,19 @@
-import { LOCALIZED_TOPONYM_LOCALES, replaceLocalizedToponymMismatches } from './localized-toponyms.mjs';
+import {
+  LOCALIZED_TOPONYM_LOCALES,
+  replaceEventsDigestBody2LocalizedToponymMismatches,
+  replaceLocalizedToponymMismatches,
+} from './localized-toponyms.mjs';
 
-function repairParallelLocaleValue(source, target, locale) {
+function repairParallelLocaleValue(source, target, locale, key = '') {
   if (typeof target === 'string') {
     if (typeof source !== 'string') return target;
+    if (key === 'body2') {
+      return replaceEventsDigestBody2LocalizedToponymMismatches({
+        sourceText: source,
+        targetText: target,
+        locale,
+      })?.text ?? target;
+    }
     return replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale }).text;
   }
 
@@ -11,16 +22,18 @@ function repairParallelLocaleValue(source, target, locale) {
       Array.isArray(source) ? source[index] : undefined,
       value,
       locale,
+      key,
     ));
   }
 
   if (target && typeof target === 'object') {
-    return Object.fromEntries(Object.entries(target).map(([key, value]) => [
-      key,
+    return Object.fromEntries(Object.entries(target).map(([childKey, value]) => [
+      childKey,
       repairParallelLocaleValue(
-        source && typeof source === 'object' && !Array.isArray(source) ? source[key] : undefined,
+        source && typeof source === 'object' && !Array.isArray(source) ? source[childKey] : undefined,
         value,
         locale,
+        childKey,
       ),
     ]));
   }
