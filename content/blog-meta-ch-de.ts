@@ -8027,6 +8027,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.corsi-contributi-lucerna.title': 'Weiterbildung in Luzern: Voraussetzungen und Beiträge',
     'blog.article.corsi-contributi-lucerna.excerpt': 'Im Kanton Luzern richten sich die Beiträge nach kantonalen Regeln.',
     'blog.article.corsi-contributi-lucerna.imageAlt': 'Schweizer Weiterbildungsraum mit Computern und Kursunterlagen',
+    'blog.article.sgkb-filiali-fisiche.title': 'SGKB bestätigt die 37 physischen Filialen',
+    'blog.article.sgkb-filiali-fisiche.excerpt': 'SGKB hält am Netz von 37 physischen Standorten fest.',
+    'blog.article.sgkb-filiali-fisiche.imageAlt': 'Physische Filiale einer Schweizer Kantonalbank in St. Gallen',
+    'blog.article.multe-como-targhe-estere.title': 'Como: 1.259 Bußgelder für ausländische Autos im August',
+    'blog.article.multe-como-targhe-estere.excerpt': '1.259 in Como im August ausgestellte Bußgeldbescheide 102.738 Euro in 31 Tagen 3.322 Euro pro Tag im Monat August Schätzungen zufolge werden über 80% der Bußgeldbescheide ignoriert Ort → Como',
+    'blog.article.multe-como-targhe-estere.imageAlt': 'Auto mit Schweizer Kennzeichen in Como geparkt',
+    'blog.article.uri-soglia-salariale-controlli.title': 'Mindestlohn pro Uri: Anforderungen und Anwendung',
+    'blog.article.uri-soglia-salariale-controlli.excerpt': 'In der Schweiz gibt es keinen eidgenössischen Mindestlohn: Bei Uri sind kantonale Disziplin, betroffene Branchen und Kollektivverträge zu unterscheiden.',
+    'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Arbeitsunterlagen zu Mindestlohnregeln im Kanton Uri',
 };
 
 export default blogMetaChDe;

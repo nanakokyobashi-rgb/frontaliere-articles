@@ -8027,6 +8027,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.corsi-contributi-lucerna.title': 'Formazione continua a Lucerna: requisiti e contributi',
     'blog.article.corsi-contributi-lucerna.excerpt': 'Nel Cantone di Lucerna i contributi seguono regole cantonali.',
     'blog.article.corsi-contributi-lucerna.imageAlt': 'Aula svizzera per la formazione continua con computer e documenti',
+    'blog.article.sgkb-filiali-fisiche.title': 'SGKB conferma le 37 filiali fisiche',
+    'blog.article.sgkb-filiali-fisiche.excerpt': 'SGKB mantiene la rete di 37 sedi fisiche.',
+    'blog.article.sgkb-filiali-fisiche.imageAlt': 'Filiale fisica di una banca cantonale svizzera a San Gallo',
+    'blog.article.multe-como-targhe-estere.title': 'Como: 1.259 multe alle auto straniere in agosto',
+    'blog.article.multe-como-targhe-estere.excerpt': '1.259 multe redatte a Como in agosto 102.738 euro in 31 giorni 3.322 euro al giorno nel mese di agosto Stime oltre l\'80% di verbali ignorati Luogo → Como',
+    'blog.article.multe-como-targhe-estere.imageAlt': 'Auto con targa svizzera in sosta a Como',
+    'blog.article.uri-soglia-salariale-controlli.title': 'Salario minimo a Uri: requisiti e applicazione',
+    'blog.article.uri-soglia-salariale-controlli.excerpt': 'In Svizzera non esiste un salario minimo federale: per Uri bisogna distinguere disciplina cantonale, settori interessati e contratti collettivi.',
+    'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Documenti di lavoro sul salario minimo nel Cantone di Uri',
 };
 
 export default blogMetaChIt;
