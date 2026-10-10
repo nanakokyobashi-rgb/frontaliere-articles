@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tre-furti-villa-guardia.webp",
+      "sha256": "4ccd5279080856dc1e0c8b8ff0b399fb05c1252371c256c3f3b89a188f0f1a8a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tre-furti-villa-guardia-480w.webp",
+      "sha256": "ef1854a02a7e28d800430203d43c7edc3e48e4c3aa08353696a987e66dc3bc46"
+    }
+  ]
 }
