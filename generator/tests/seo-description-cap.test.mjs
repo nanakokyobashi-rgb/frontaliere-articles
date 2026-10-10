@@ -257,7 +257,7 @@ describe('ensureSeoDescriptionMinimum', () => {
     const result = ensureSeoDescriptionMinimum(data);
     expect(result.startsWith(body)).toBe(true);
     expect(result.length).toBeGreaterThanOrEqual(SEO_DESCRIPTION_MIN);
-    expect(result.length).toBeLessThanOrEqual(SEO_DESCRIPTION_MAX);
+    expect(result.length <= SEO_DESCRIPTION_MAX).toBe(true);
     expect(data.seo.description).toBe(result);
     expect(data.seo.description).not.toMatch(/Dati aggiornati|Guida pratica/);
   });
