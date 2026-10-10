@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/valute-e-frontiere": "valute-frontiere-svizzera-italia",
   "https://www.varesenews.it/2026/08/individuati-dalla-finanza-di-varese-oltre-50-lavoratori-in-nero-multe-per-mezzo-milione/2656495": "varese-lavoratori-nero-2026",
   "https://www.laregione.ch/cantone/luganese/1943751/al-via-i-lavori-preparatori-per-il-piazzale-ex-scuole": "lavori-preparatori-piazzale-ex-scuole",
   "http://www.cd-ocst.ch": "registrarsi-alla-cassa-di-disoccupazione-ocst",
@@ -2348,6 +2347,11 @@
   "https://www.ocst.ch/aderisci-al-sindacato/associarsi-conviene": {
     "articleId": "adesione-ocst-servizi-frontalieri",
     "ts": "2026-10-10T18:40:53.654Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/molto-pi%c3%b9-di-un-caff%c3%a8-la-sfida-dei-bar-di-quartiere--4150574.html": {
+    "articleId": "sfida-bar-quartiere-lugano",
+    "ts": "2026-10-10T19:06:16.785Z",
     "keyForm": 2
   }
 }

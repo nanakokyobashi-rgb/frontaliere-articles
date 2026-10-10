@@ -12951,6 +12951,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.adesione-ocst-servizi-frontalieri.title': 'Associarsi all\'OCST: vantaggi per frontalieri in Ticino',
     'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno',
     'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Lavoratore frontaliere che consulta i vantaggi OCST in ufficio a Mendrisio',
+    'blog.article.sfida-bar-quartiere-lugano.title': 'Bar di quartiere a Lugano: tra chiusure e nuove sfide',
+    'blog.article.sfida-bar-quartiere-lugano.excerpt': 'Il Bar Laura ha chiuso dopo 32 anni Il Cantone non ha rinnovato il contratto Reto Blumenthal ha riaperto a Molino Nuovo Il Bar Domingo apre alle 6.30 e chiude',
+    'blog.article.sfida-bar-quartiere-lugano.imageAlt': 'Interno di un bar di quartiere a Lugano con bancone e macchina del caffè',
 };
 
 export default blogMetaIt;

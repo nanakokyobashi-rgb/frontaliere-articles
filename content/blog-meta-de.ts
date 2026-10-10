@@ -12949,6 +12949,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.adesione-ocst-servizi-frontalieri.title': 'Dem OCST beitreten: Vorteile für Grenzgänger im Tessin',
     'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Beratung zu Arbeit, Lohnabrechnung, Steuerwesen und Miete Grenzgängerbüro für Steuern und soziale Sicherheit Patronato INAS in Chiasso, Mendrisio, Bioggio und Locarno',
     'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Grenzgänger, der die OCST-Vorteile im Büro in Mendrisio prüft',
+    'blog.article.sfida-bar-quartiere-lugano.title': 'Quartierbars in Lugano: Zwischen Schließungen und neuen Herausforderungen',
+    'blog.article.sfida-bar-quartiere-lugano.excerpt': 'Die Bar Laura hat nach 32 Jahren geschlossen Der Kanton hat den Vertrag nicht verlängert Reto Blumenthal hat in Molino Nuovo wiedereröffnet Die Bar Domingo öffnet um 6.30 Uhr und schließt',
+    'blog.article.sfida-bar-quartiere-lugano.imageAlt': 'Innenraum eines Quartiercafés in Lugano mit Tresen und Kaffeemaschine',
 };
 
 export default blogMetaDe;
