@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sfida-bar-quartiere-lugano.webp",
-      "sha256": "ac317b363358fc655d06ca561bc97ded28c32ae0bdfc9becb50292558dbd91bb"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sfida-bar-quartiere-lugano-480w.webp",
-      "sha256": "3953f5f85fea04e6fc5eebcc21e7d8a90ce28ca57c67fd131fa3997c04edc60d"
-    }
-  ]
+  "items": []
 }
