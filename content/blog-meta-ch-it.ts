@@ -8039,6 +8039,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.assistenza-uri-requisiti-domanda.title': 'Assistenza sociale Canton Uri: requisiti e domanda',
     'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Nel Cantone di Uri conta la condizione di bisogno La gestione è affidata in genere a Cantoni e Comuni La domanda va all\'ufficio comunale o cantonale competente',
     'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Scena svizzera con edificio pubblico e cartella documenti, immagine simbolica per l\'assistenza sociale',
+    'blog.article.naters-francobolli-falsi-aliexpress.title': 'Francobolli falsi su AliExpress: donna condannata a Naters',
+    'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Donna di Naters condannata per francobolli contraffatti 100 francobolli ordinati su AliExpress a 48,59 franchi Valore di listino dell\'ordine: 120 franchi Multa',
+    'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Francobolli svizzeri su un tavolo',
 };
 
 export default blogMetaChIt;

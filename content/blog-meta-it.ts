@@ -12925,6 +12925,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ispezioni-gallerie-lago-como.title': 'A9 Como-Chiasso: chiusure notturne a ottobre',
     'blog.article.ispezioni-gallerie-lago-como.excerpt': 'Chiusura verso Lainate nelle notti 12-14 e 17-19 ottobre Chiusura verso Chiasso/Svizzera nelle notti 15-16 e 16-17 Como Centro chiuso in entrata in entrambe',
     'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Autostrada verso Chiasso durante chiusure notturne per ispezioni alle gallerie.',
+    'blog.article.festival-energetica-cabiaglio-2026.title': 'Energeticabiaglio 2026: festival sull\'energia a Castello Cabiaglio',
+    'blog.article.festival-energetica-cabiaglio-2026.excerpt': 'Festival Energeticabiaglio l\'18 ottobre 2026 a Castello Cabiaglio Focus su Comunità Energetiche Rinnovabili e crisi climatica Partecipano ricercatori JRC, IPCC',
+    'blog.article.festival-energetica-cabiaglio-2026.imageAlt': 'Castello Cabiaglio durante l\'evento Energeticabiaglio 2026',
 };
 
 export default blogMetaIt;

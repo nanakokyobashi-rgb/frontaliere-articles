@@ -104787,6 +104787,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-festival-energetica-cabiaglio-2026': {
+    title: 'Energeticabiaglio 2026: festival sull\'energia a Castello Cabiaglio',
+    description: 'Festival Energeticabiaglio l\'18 ottobre 2026 a Castello Cabiaglio Focus su Comunità Energetiche Rinnovabili e crisi climatica Partecipano ricercatori JRC, IPCC',
+    keywords: 'frontalieri, ticino, svizzera, italia, energeticabiaglio, festival, sull, energia',
+    ogTitle: 'Energeticabiaglio 2026: il festival dell\'energia sostenibile',
+    ogDescription: 'Festival Energeticabiaglio l\'18 ottobre 2026 a Castello Cabiaglio Focus su Comunità Energetiche Rinnovabili e crisi climatica Partecipano ricercatori JRC, IPCC',
+    canonicalPath: '/articoli-frontaliere/festival-energetica-cabiaglio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Energeticabiaglio 2026: festival sull'energia a Castello Cabiaglio",
+      "description": "Festival Energeticabiaglio l'18 ottobre 2026 a Castello Cabiaglio Focus su Comunità Energetiche Rinnovabili e crisi climatica Partecipano ricercatori JRC, IPCC",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-festival-energetica-cabiaglio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castello Cabiaglio durante l'evento Energeticabiaglio 2026"
+      },
+      "datePublished": "2026-10-10T09:38:30+00:00",
+      "dateModified": "2026-10-10T09:38:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/festival-energetica-cabiaglio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

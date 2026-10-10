@@ -4755,12 +4755,12 @@
     },
     {
       "path": "scripts/ci/redflag-doc-sections.mjs",
-      "mode": "corpus-only",
-      "reason": "Estrae le sezioni vincolanti di `REVIEW.md` e `AGENTS.md` dalla base canonica e le valida prima che il `pr-redflag-fixer.yml` le scriva nell'output dello step `ctx`. E' un helper specifico del fixer corpus: il workflow qui e' adattato e il sito mantiene il proprio percorso di trasporto del contratto, quindi non esiste un gemello site-owned da sorvegliare.",
+      "mode": "adapted",
+      "reason": "Helper del `pr-redflag-fixer` corpus: estrae le sezioni vincolanti per Codex e le scrive in `GITHUB_OUTPUT`. Il sito ha un helper omonimo per il fixer Claude, ma heading richiesti e contratto `GITHUB_ENV` sono diversi. Va sorvegliato come `adapted`, non copiato byte per byte; nessun import attraversa il confine HTTP.",
       "baseline": {
-        "site": null,
+        "site": "f9f6b518d13e9989",
         "corpus": "823dbc6d71772b9d",
-        "alignedAt": "2026-09-27"
+        "alignedAt": "2026-10-10"
       }
     },
     {

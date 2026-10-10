@@ -101388,6 +101388,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-naters-francobolli-falsi-aliexpress': {
+    title: 'Francobolli falsi su AliExpress: donna condannata a Naters',
+    description: 'Donna di Naters condannata per francobolli contraffatti 100 francobolli ordinati su AliExpress a 48,59 franchi Valore di listino dell\'ordine: 120 franchi Multa',
+    keywords: 'frontalieri, ticino, svizzera, italia, francobolli, falsi, aliexpress, donna',
+    ogTitle: 'Francobolli falsi su AliExpress: donna condannata a Naters',
+    ogDescription: 'Donna di Naters condannata per francobolli contraffatti 100 francobolli ordinati su AliExpress a 48,59 franchi Valore di listino dell\'ordine: 120 franchi Multa',
+    canonicalPath: '/articoli-svizzera/naters-francobolli-falsi-aliexpress/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Francobolli falsi su AliExpress: donna condannata a Naters",
+      "description": "Donna di Naters condannata per francobolli contraffatti 100 francobolli ordinati su AliExpress a 48,59 franchi Valore di listino dell'ordine: 120 franchi Multa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-naters-francobolli-falsi-aliexpress.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Francobolli svizzeri su un tavolo"
+      },
+      "datePublished": "2026-10-10T09:59:40+00:00",
+      "dateModified": "2026-10-10T09:59:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/naters-francobolli-falsi-aliexpress/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
