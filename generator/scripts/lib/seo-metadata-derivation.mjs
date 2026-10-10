@@ -71,22 +71,27 @@ export function deriveSeoMetadata(data) {
   const persistedDescription = typeof data.seo.description === 'string'
     ? data.seo.description.replace(/\s+/g, ' ').trim()
     : '';
+  let description = '';
   if (persistedDescription.length >= SEO_DESCRIPTION_MIN) {
     // Recovery must retain the already-published SERP/RSS copy. Only apply
     // the repository's hard cap when it already meets the public contract.
-    data.seo.description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
-  } else {
-    // A short persisted value is as unsafe as a missing value: recovery must
-    // replace it from Italian source copy, never carry it back into content/seo.
-    let description = String(it.excerpt || '').replace(/\s+/g, ' ').trim();
-    if (!description) {
-      description = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati ${year}.`;
-    }
-    if (description.length < 145) {
-      description = `${description}${description.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
-    }
-    data.seo.description = truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
+    // A clause boundary can still bring the capped value below the minimum;
+    // that case falls through to the Italian-source fallback below.
+    description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
   }
+  if (description.length < SEO_DESCRIPTION_MIN) {
+    // A short persisted value (or one made short by the cap) is unsafe:
+    // replace it from Italian source copy, never write it back as SEO text.
+    let fallbackDescription = String(it.excerpt || '').replace(/\s+/g, ' ').trim();
+    if (!fallbackDescription) {
+      fallbackDescription = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati ${year}.`;
+    }
+    if (fallbackDescription.length < 145) {
+      fallbackDescription = `${fallbackDescription}${fallbackDescription.endsWith('.') ? '' : '.'} Dati aggiornati ${year} per frontalieri in Ticino.`;
+    }
+    description = truncateToClauseNonEmpty(fallbackDescription, DESCRIPTION_MAX_CHARS);
+  }
+  data.seo.description = description;
   assertSeoDescriptionMinimum(data.seo.description, {
     id: data.id,
     sourceDescriptionLength: persistedDescription.length,
