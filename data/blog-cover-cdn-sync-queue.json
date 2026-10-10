@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-tesserete-canalizzazione-privata.webp",
-      "sha256": "7c1ebb98687d5503d2aa122b3463e9eb94d64f248b39661d4bbe925078c556be"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tesserete-canalizzazione-privata-480w.webp",
-      "sha256": "b9d1127fd3a0425afe74a62808e58152b4e2983af565e59b1659028a49eab60c"
-    }
-  ]
+  "items": []
 }
