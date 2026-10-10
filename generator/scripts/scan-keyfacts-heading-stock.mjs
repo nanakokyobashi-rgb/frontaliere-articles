@@ -25,10 +25,10 @@ import { unescapeTs } from './scan-vacuous-key-facts.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const BODY_DIRS = Object.freeze(['blog-body', 'blog-body-ch']);
 export const STOCK_BASELINE = Object.freeze({
-  total: 108,
+  total: 0,
   byTree: Object.freeze({
-    'blog-body': 66,
-    'blog-body-ch': 42,
+    'blog-body': 0,
+    'blog-body-ch': 0,
   }),
 });
 
