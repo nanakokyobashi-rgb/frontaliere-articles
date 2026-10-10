@@ -354,6 +354,22 @@ test('charset: il prologo XML ISO-8859-1 vince sull\'assenza di charset nell\'he
   assert.ok(out.notes.includes('charset iso-8859-1'));
 });
 
+test('charset: rifiuta prima dell\'estrazione un charset dichiarato ma non supportato', async () => {
+  const bytes = fixture('ge-ocstat-latin1.xml');
+  const source = sourceOf('GE', 'https://statistique.ge.ch/rss');
+  const { impl } = fakeFetch({
+    'https://statistique.ge.ch/rss': {
+      body: bytes,
+      contentType: 'application/rss+xml; charset=x-unknown-cs',
+    },
+  });
+
+  await assert.rejects(
+    scanCantonSource(source, ctx(impl)),
+    /charset x-unknown-cs non supportato: risposta rifiutata prima dell'estrazione/,
+  );
+});
+
 test('charset: ignora dichiarazioni in markup inattivo prima della meta reale', () => {
   const head = '<!-- <meta charset="iso-8859-1"> -->'
     + '<template><meta charset="windows-1252"></template>'

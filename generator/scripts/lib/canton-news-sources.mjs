@@ -399,11 +399,12 @@ export function charsetFromDocumentHead(asciiHead) {
 
 /**
  * Decodifica il corpo di una risposta. Ordine: quirk `charset`, header,
- * documento, UTF-8. Un charset che TextDecoder non conosce ricade su UTF-8.
+ * documento, UTF-8. Un charset non supportato ricade su UTF-8 e viene
+ * annotato; il testo di fallback va respinto prima dell'estrazione.
  *
  * @param {Uint8Array | ArrayBuffer} body
  * @param {{ contentType?: string | null, forcedCharset?: string | null }} [opts]
- * @returns {{ text: string, charset: string }}
+ * @returns {{ text: string, charset: string, unsupported?: string }}
  */
 export function decodeResponseBody(body, { contentType = null, forcedCharset = null } = {}) {
   const bytes = body instanceof Uint8Array ? body : new Uint8Array(body);
@@ -422,6 +423,13 @@ export function decodeResponseBody(body, { contentType = null, forcedCharset = n
     decoder = new TextDecoder('utf-8');
   }
   return { text: decoder.decode(bytes), charset, ...(unsupported ? { unsupported } : {}) };
+}
+
+/** Rifiuta il fallback UTF-8 quando la risposta dichiara un charset sconosciuto. */
+function rejectUnsupportedCharset(decoded) {
+  if (decoded.unsupported) {
+    throw new Error(`charset ${decoded.unsupported} non supportato: risposta rifiutata prima dell'estrazione`);
+  }
 }
 
 // ── Entita' e testo ──────────────────────────────────────────────────────────
@@ -1308,8 +1316,8 @@ export async function scanCantonSource(source, ctx) {
             contentType: res.headers?.get?.('content-type') ?? null,
             forcedCharset: quirks.charset || null,
           });
-          if (decoded.unsupported) notes.push(`charset ${decoded.unsupported} non supportato: decodificato come UTF-8, testo forse alterato`);
-          else if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
+          rejectUnsupportedCharset(decoded);
+          if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
           return decoded.text;
         });
       } catch (error) {
