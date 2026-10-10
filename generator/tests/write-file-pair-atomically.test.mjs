@@ -5,7 +5,10 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
+import {
+  writeFilePairAtomically,
+  writeFileSnapshotAtomically,
+} from '../../scripts/lib/write-file-pair-atomically.mjs';
 
 function fixture() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'file-pair-atomic-'));
@@ -66,6 +69,23 @@ test('un writer concorrente non sovrascrive uno snapshot preparato prima del com
 
     assert.equal(fs.readFileSync(first, 'utf8'), 'first-after');
     assert.equal(fs.readFileSync(second, 'utf8'), 'second-after');
+    assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un writer singolo condivide lock e controllo snapshot con il writer di coppia', () => {
+  const root = fixture();
+  try {
+    const file = path.join(root, 'registry.ts');
+    fs.writeFileSync(file, 'before');
+
+    writeFileSnapshotAtomically(file, 'before', 'single-after');
+    assert.throws(() => writeFilePairAtomically([
+      { file, before: 'before', after: 'pair-stale' },
+    ]), /snapshot obsoleto/u);
+    assert.equal(fs.readFileSync(file, 'utf8'), 'single-after');
     assert.equal(fs.existsSync(path.join(root, '.registry-pair-write.lock')), false);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

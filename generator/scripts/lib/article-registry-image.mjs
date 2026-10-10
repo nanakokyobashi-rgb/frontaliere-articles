@@ -5,20 +5,12 @@ import path from 'node:path';
 import { ARTICLE_SECTION_CORE_ALL } from '../../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from './corpus-paths.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
+import { writeFileSnapshotAtomically } from '../../../scripts/lib/write-file-pair-atomically.mjs';
 
-let writeTmpSeq = 0;
-
-function writeTextAtomic(root, relativePath, text) {
+function writeTextAtomic(root, relativePath, text, before) {
   const target = absolute(root, relativePath);
-  const tmp = `${target}.${process.pid}.${writeTmpSeq++}.tmp`;
   fs.mkdirSync(path.dirname(target), { recursive: true });
-  try {
-    fs.writeFileSync(tmp, text, 'utf8');
-    fs.renameSync(tmp, target);
-  } catch (error) {
-    try { fs.unlinkSync(tmp); } catch {}
-    throw error;
-  }
+  writeFileSnapshotAtomically(target, before, text);
 }
 
 function absolute(root, relativePath) {
@@ -345,7 +337,7 @@ export function updateArticleImageInRegistry(root, articleId, imageUrl, options 
   const nextText = located.text.slice(0, located.imageLiteralStart)
     + `${quote}${imageUrl}${quote}`
     + located.text.slice(located.imageLiteralEnd);
-  writeTextAtomic(root, located.path, nextText);
+  writeTextAtomic(root, located.path, nextText, located.text);
   return { ...located, lines: nextText.split('\n'), changed: true, nextText };
 }
 
@@ -403,7 +395,7 @@ export function updateArticleImageInSeo(root, articleId, imageUrl, options = {})
   const nextSource = located.source.slice(0, lineStart)
     + replacement
     + located.source.slice(lineStart + located.line.length);
-  writeTextAtomic(root, located.path, nextSource);
+  writeTextAtomic(root, located.path, nextSource, located.source);
   return {
     ...located,
     changed: true,
@@ -433,7 +425,7 @@ export function updateArticleSeoImageBlock(root, articleId, imageBlock, options 
   const nextSource = located.source.slice(0, blockStart)
     + replacement
     + located.source.slice(blockEnd);
-  writeTextAtomic(root, located.path, nextSource);
+  writeTextAtomic(root, located.path, nextSource, located.source);
   return {
     ...located,
     changed: true,

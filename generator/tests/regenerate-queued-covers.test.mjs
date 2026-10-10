@@ -138,6 +138,33 @@ test('la cover registry usa la voce bilanciata e il campo image top-level', () =
   }
 });
 
+test('la cover registry rifiuta un aggiornamento concorrente col pair writer', () => {
+  const root = tempRoot();
+  const relativePath = 'content/blog-articles-data.ts';
+  try {
+    const source = [
+      'export const ARTICLES = [',
+      '  {',
+      "    id: 'locked-registry-image',",
+      "    image: '/images/old.webp',",
+      '  },',
+      '];',
+      '',
+    ].join('\n');
+    write(root, relativePath, source);
+    const lock = path.join(root, 'content', '.registry-pair-write.lock');
+    fs.writeFileSync(lock, 'pid=pair-writer\n');
+
+    assert.throws(() => updateArticleImageInRegistry(root, 'locked-registry-image', '/images/new.webp', {
+      registryFiles: [relativePath],
+    }), /lock presente/u);
+    assert.equal(fs.readFileSync(path.join(root, relativePath), 'utf8'), source);
+    assert.equal(fs.readFileSync(lock, 'utf8'), 'pid=pair-writer\n');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 function writeImageAltMetadata(root, items, metaPrefix) {
   for (const [locale, caption] of Object.entries(GENERATED_COVER_ALT_BY_LOCALE)) {
     const meta = items

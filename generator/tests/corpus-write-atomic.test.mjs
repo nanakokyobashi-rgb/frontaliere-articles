@@ -63,6 +63,10 @@ const SHARED_PAIR_WRITERS = new Set([
   'generator/scripts/backfill-article-cantons.mjs',
   'generator/scripts/backfill-article-type.mjs',
 ]);
+const SHARED_SNAPSHOT_WRITERS = new Set([
+  'generator/scripts/lib/article-registry-image.mjs',
+  'generator/scripts/lib/evergreen-article-refresh.mjs',
+]);
 const SHARED_PAIR_HELPER = path.join(root, 'scripts/lib/write-file-pair-atomically.mjs');
 
 // `create-article.mjs` e' nella classe ed e' gia' atomico dal round 1, ma la
@@ -141,7 +145,9 @@ for (const [rel, workflow] of CHOKE_POINTS) {
   test(`${rel} ha accesso a renameSync e unlinkSync`, () => {
     const src = fs.readFileSync(file, 'utf-8');
     const sharedPair = SHARED_PAIR_WRITERS.has(rel);
-    const pairHelper = sharedPair ? fs.readFileSync(SHARED_PAIR_HELPER, 'utf-8') : '';
+    const sharedSnapshot = SHARED_SNAPSHOT_WRITERS.has(rel);
+    const sharedWriter = sharedPair || sharedSnapshot;
+    const pairHelper = sharedWriter ? fs.readFileSync(SHARED_PAIR_HELPER, 'utf-8') : '';
     // Due forme in circolazione nel repo: named import da 'fs'/'node:fs', e
     // default import usato come `fs.renameSync`. Pretenderne una sola
     // trasformerebbe il test in una richiesta di stile invece che di sostanza.
@@ -150,7 +156,7 @@ for (const [rel, workflow] of CHOKE_POINTS) {
     for (const fn of ['renameSync', 'unlinkSync']) {
       const ok = new RegExp(`\\b${fn}\\b`).test(namedLine)
         || (hasDefaultFs && new RegExp(`\\bfs\\.${fn}\\(`).test(src))
-        || (sharedPair && new RegExp(`\\bfsImpl\\.${fn}\\(`).test(pairHelper));
+        || (sharedWriter && new RegExp(`\\bfsImpl\\.${fn}\\(`).test(pairHelper));
       assert.ok(ok,
         `${rel}: ${fn} non e' raggiungibile. `
         + (fn === 'renameSync'
@@ -161,6 +167,16 @@ for (const [rel, workflow] of CHOKE_POINTS) {
 
   test(`${rel} non scrive mai il corpus direttamente sul path finale (${workflow})`, () => {
     const src = fs.readFileSync(file, 'utf-8');
+
+    if (SHARED_SNAPSHOT_WRITERS.has(rel)) {
+      const helper = fs.readFileSync(SHARED_PAIR_HELPER, 'utf-8');
+      assert.match(src, /import \{ writeFileSnapshotAtomically \} from ['"][^'"]*write-file-pair-atomically\.mjs['"]/u);
+      assert.match(src, /writeFileSnapshotAtomically\(/u);
+      assert.match(helper, /writeFileSnapshotAtomically\(file, before, after/u);
+      assert.match(helper, /fsImpl\.openSync\(lock\.file, 'wx'/u);
+      assert.match(helper, /current !== change\.before/u);
+      return;
+    }
 
     if (SHARED_PAIR_WRITERS.has(rel)) {
       const helper = fs.readFileSync(SHARED_PAIR_HELPER, 'utf-8');
@@ -276,7 +292,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // stile e' esattamente il tipo di cecita' silenziosa che questo censimento
   // deve escludere. Ora il match e' sul NOME della primitiva senza pretendere
   // la parentesi, cosi' l'alias entra come la chiamata diretta.
-  const WRITER = /\b(?:writeFileAtomic|writeFilePairAtomically|writeFileSync|writeFile|appendFileSync|appendFile|createWriteStream|copyFileSync|cpSync)\b/;
+  const WRITER = /\b(?:writeFileAtomic|writeFilePairAtomically|writeFileSnapshotAtomically|writeFileSync|writeFile|appendFileSync|appendFile|createWriteStream|copyFileSync|cpSync)\b/;
 
   const found = [];
   const walk = (d) => {

@@ -158,3 +158,12 @@ export function writeFilePairAtomically(changes, { fsImpl = fs } = {}) {
     throw new AggregateError(lockCleanupErrors, `writeFilePairAtomically: rilascio lock incompleto (${lockCleanupErrors.length} errori)`);
   }
 }
+
+/**
+ * Commit one read/modify/write through the same directory lock as a registry
+ * pair. `before` must be the exact snapshot used to derive `after`; stale
+ * single-file writers then fail closed instead of racing a pair update.
+ */
+export function writeFileSnapshotAtomically(file, before, after, options = {}) {
+  return writeFilePairAtomically([{ file, before, after }], options);
+}

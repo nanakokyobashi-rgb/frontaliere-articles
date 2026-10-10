@@ -78,6 +78,7 @@ import {
   BLOG_IMAGE_QUALITY_PASSES,
 } from './lib/blog-image-policy.mjs';
 import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSyntheticSourceValidation } from './lib/synthetic-source-contract.mjs';
+import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -3033,8 +3034,13 @@ const NEWS_SOURCES_SVIZZERA_FALLBACK_MAP = {
 // `corpusPath()` a single choke point for the main→nanako layout difference
 // (`services/locales/…` → `content/…`) instead of ~30 edited literals. See
 // lib/corpus-paths.mjs for why the mapping is an explicit table.
+const readSnapshots = new Map();
+
 function read(rel) {
-  return readFileSync(resolve(rel), 'utf-8');
+  const target = resolve(rel);
+  const content = readFileSync(target, 'utf-8');
+  readSnapshots.set(target, content);
+  return content;
 }
 
 // Write-time guard (issue #66): a `.ts` under content/ must never carry a C0
@@ -3062,10 +3068,17 @@ function write(rel, content) {
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(rel, content, clean);
   const target = resolve(rel);
+  if (existsSync(target) && readSnapshots.has(target)) {
+    const previous = readSnapshots.get(target);
+    writeFileSnapshotAtomically(target, previous, clean);
+    readSnapshots.set(target, clean);
+    return;
+  }
   const tmp = `${target}.${process.pid}.${writeTmpSeq++}.tmp`;
   try {
     writeFileSync(tmp, clean, 'utf-8');
     renameSync(tmp, target);
+    readSnapshots.set(target, clean);
   } catch (err) {
     try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;
