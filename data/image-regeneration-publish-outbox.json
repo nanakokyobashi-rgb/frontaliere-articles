@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "articleId": "ispezioni-gallerie-lago-como",
+      "section": "frontaliere"
+    },
+    {
+      "articleId": "assistenza-uri-requisiti-domanda",
+      "section": "svizzera"
+    },
+    {
+      "articleId": "imposta-veicoli-uri-calcolo",
+      "section": "svizzera"
+    }
+  ]
+}

@@ -12925,7 +12925,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzone et la police cantonale dans l\'affaire Gobbi',
     'blog.article.ispezioni-gallerie-lago-como.title': 'A9 Como-Chiasso : fermetures nocturnes en octobre',
     'blog.article.ispezioni-gallerie-lago-como.excerpt': 'Fermeture en direction de Lainate les nuits du 12 au 14 et du 17 au 19 octobre Fermeture en direction de Chiasso/Suisse les nuits du 15 au 16 et du 16 au 17 Como Centro fermé à l\'entrée dans les deux',
-    'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Autoroute vers Chiasso lors de fermetures nocturnes pour inspection des tunnels.',
+    'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Illustration générée pour cet article',
     'blog.article.festival-energetica-cabiaglio-2026.title': 'Energeticabiaglio 2026 : festival sur l\'énergie à Castello Cabiaglio',
     'blog.article.festival-energetica-cabiaglio-2026.excerpt': 'Festival Energeticabiaglio le 18 octobre 2026 à Castello Cabiaglio Focus sur les Communautés Énergétiques Renouvelables et la crise climatique Des chercheurs du JRC, du GIEC y participent',
     'blog.article.festival-energetica-cabiaglio-2026.imageAlt': 'Castello Cabiaglio pendant l\'événement Energeticabiaglio 2026',

@@ -101368,10 +101368,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-assistenza-sociale-lucerna-requisiti.webp`,
+        "url": `${BASE_URL}/images/blog/article-assistenza-uri-requisiti-domanda.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Scena svizzera con edificio pubblico e cartella documenti, immagine simbolica per l'assistenza sociale"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T09:05:08+00:00",
       "dateModified": "2026-10-10T09:05:08+00:00",
@@ -101441,15 +101441,17 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Imposta sugli autoveicoli nel Cantone di Uri: criteri di calcolo, scadenze, ufficio della circolazione, cambio veicolo e indirizzo. Guida pratica al pagamento.",
       "image": {
         "@type": "ImageObject",
-        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
-        "copyrightNotice": "Generated media; provider terms apply.",
-        "license": "https://openai.com/policies/terms-of-use/",
-        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
-        "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-imposta-autoveicoli-lucerna-calcolo.webp`,
+        "acquireLicensePage": "https://www.pexels.com/photo/scenic-mountain-landscape-in-unterschachen-switzerland-37425453/",
+        "copyrightNotice": "© Christopher Politano",
+        "license": "https://www.pexels.com/license/",
+        "creator": {"@type":"Person","@id":"https://www.pexels.com/@christopher-politano-978995","name":"Christopher Politano","url":"https://www.pexels.com/@christopher-politano-978995"},
+        "creditText": "Christopher Politano / Pexels",
+        "isBasedOn": "https://www.pexels.com/photo/scenic-mountain-landscape-in-unterschachen-switzerland-37425453/",
+        "description": "Resized derivative of the licensed source.",
+        "url": `${BASE_URL}/images/blog/article-imposta-veicoli-uri-calcolo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Auto su una strada alpina del Cantone di Uri per un articolo sull'imposta cantonale"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T12:04:45+00:00",
       "dateModified": "2026-10-10T12:04:45+00:00",

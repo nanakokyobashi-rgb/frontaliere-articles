@@ -12923,7 +12923,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzona and the cantonal police in the Gobbi case',
     'blog.article.ispezioni-gallerie-lago-como.title': 'A9 Como-Chiasso: nighttime closures in October',
     'blog.article.ispezioni-gallerie-lago-como.excerpt': 'Closure towards Lainate on the nights of October 12–14 and 17–19 Closure towards Chiasso/Switzerland on the nights of 15–16 and 16–17 Como Center closed for entry in both cases',
-    'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Highway toward Chiasso during night closures for tunnel inspections.',
+    'blog.article.ispezioni-gallerie-lago-como.imageAlt': 'Illustration generated for this article',
     'blog.article.festival-energetica-cabiaglio-2026.title': 'Energeticabiaglio 2026: energy festival in Castello Cabiaglio',
     'blog.article.festival-energetica-cabiaglio-2026.excerpt': 'Festival Energeticabiaglio on 18 October 2026 at Castello Cabiaglio Focus on Renewable Energy Communities and the Climate Crisis Participating researchers JRC, IPCC',
     'blog.article.festival-energetica-cabiaglio-2026.imageAlt': 'Castello Cabiaglio during the Energeticabiaglio 2026 event',

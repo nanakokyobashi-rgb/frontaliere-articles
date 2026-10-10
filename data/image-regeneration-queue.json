@@ -1,35 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "articleId": "ispezioni-gallerie-lago-como",
-      "title": "A9 Como-Chiasso: chiusure notturne a ottobre",
-      "fallbackImage": "/images/blog/article-a9-chiusure-notturne-sion-sierre.webp",
-      "reason": "All image providers failed for article-ispezioni-gallerie-lago-como: openai-codex (vision gate rejected image: Generic generated highway illustration relevant to Ticino cross-borde",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T08:47:31.158Z",
-      "lastFailureAt": "2026-10-10T08:47:31.158Z"
-    },
-    {
-      "articleId": "assistenza-uri-requisiti-domanda",
-      "title": "Assistenza sociale Canton Uri: requisiti e domanda",
-      "fallbackImage": "/images/blog/article-assistenza-sociale-lucerna-requisiti.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T09:05:08.712Z",
-      "lastFailureAt": "2026-10-10T09:05:08.712Z"
-    },
-    {
-      "articleId": "imposta-veicoli-uri-calcolo",
-      "title": "Imposta sugli autoveicoli Uri: calcolo e pagamento",
-      "fallbackImage": "/images/blog/article-imposta-autoveicoli-lucerna-calcolo.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T12:04:45.616Z",
-      "lastFailureAt": "2026-10-10T12:04:45.616Z"
-    }
-  ]
+  "items": []
 }

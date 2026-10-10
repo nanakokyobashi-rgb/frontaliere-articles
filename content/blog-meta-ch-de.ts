@@ -8038,13 +8038,13 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Arbeitsunterlagen zu Mindestlohnregeln im Kanton Uri',
     'blog.article.assistenza-uri-requisiti-domanda.title': 'Sozialhilfe im Kanton Uri: Voraussetzungen und Antrag',
     'blog.article.assistenza-uri-requisiti-domanda.excerpt': 'Im Kanton Uri ist die Bedürftigkeit maßgebend Die Zuständigkeit liegt in der Regel bei Kantonen und Gemeinden Der Antrag ist bei der zuständigen kommunalen oder kantonalen Stelle einzureichen',
-    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Schweizer öffentliches Gebäude und Dokumentenmappe, Symbolbild für die Sozialhilfe',
+    'blog.article.assistenza-uri-requisiti-domanda.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.naters-francobolli-falsi-aliexpress.title': 'Gefälschte Briefmarken auf AliExpress: Frau in Naters verurteilt',
     'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Frau aus Naters wegen gefälschter Briefmarken verurteilt 100 auf AliExpress für 48,59 Franken bestellte Briefmarken Listenpreis der Bestellung: 120 Franken Busse',
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Schweizer Briefmarken auf einem Tisch',
     'blog.article.imposta-veicoli-uri-calcolo.title': 'Motorfahrzeugsteuer Uri: Berechnung und Zahlung',
     'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'Im Kanton Uri richten sich Berechnung, Fristen und Beträge der Motorfahrzeugsteuer nach kantonalen Regeln: Was für Fahrzeug und Adresse zu prüfen ist.',
-    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Auto auf einer Alpenstrasse im Kanton Uri zum Thema Motorfahrzeugsteuer',
+    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;
