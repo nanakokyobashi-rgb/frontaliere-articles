@@ -26824,6 +26824,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'imposta-veicoli-uri-calcolo',
+    category: 'fiscale',
+    date: '2026-10-10T12:04:45.262Z',
+    image: '/images/blog/article-imposta-autoveicoli-lucerna-calcolo.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['UR'],
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

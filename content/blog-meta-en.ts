@@ -12935,6 +12935,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-10.imageAlt': 'The day\'s numbers for cross-border commuters – October 10, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-10.seoDescription': 'Cross-border brief, October 10, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-10.ogDescription': 'The numbers for October 10, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.tesserete-canalizzazione-privata.title': 'Tesserete: private sewer connection, owner pays',
+    'blog.article.tesserete-canalizzazione-privata.excerpt': 'Tesserete: the Council of State ruled that the rehabilitation of the private sewer was the owner\'s responsibility, following the repair paid for by the Municipality of Capriasca.',
+    'blog.article.tesserete-canalizzazione-privata.imageAlt': 'Private wall in Tesserete during a sewer inspection',
 };
 
 export default blogMetaEn;

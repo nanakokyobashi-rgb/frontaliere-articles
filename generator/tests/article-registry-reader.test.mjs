@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -10,6 +11,7 @@ import {
 } from '../../scripts/lib/article-registry-reader.mjs';
 import { readRegistryEntries } from '../scripts/lib/registry-article-type.mjs';
 import { readRegistryCantons, registryEntrySpans } from '../scripts/lib/registry-canton-field.mjs';
+import { countRegistryArticles } from '../../scripts/lib/corpus-floors.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -52,6 +54,12 @@ test('tutti i reader del registry usano lo scanner condiviso', () => {
     'generator/scripts/create-article.mjs',
     'generator/scripts/lib/registry-article-type.mjs',
     'generator/scripts/lib/registry-canton-field.mjs',
+    'scripts/lib/corpus-floors.mjs',
+    'generator/scripts/lib/canton-hubs/articles.mjs',
+    'generator/scripts/lib/evergreen-article-refresh.mjs',
+    'generator/scripts/lib/article-registry-image.mjs',
+    'scripts/ci/article-publication-observer.mjs',
+    'scripts/ci/scan-generation-health.mjs',
   ];
   for (const relative of callers) {
     const src = fs.readFileSync(path.join(ROOT, relative), 'utf8');
@@ -81,4 +89,22 @@ test('i reader di articleType e canton non si fermano su una graffa annidata', (
   ]);
   assert.equal(registryEntrySpans(src).length, 2);
   assert.deepEqual([...readRegistryCantons(src)], [['reale', ['TI']]]);
+});
+
+test('il floor conta solo le voci del registry con id top-level', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'registry-floor-reader-'));
+  try {
+    fs.mkdirSync(path.join(root, 'content'), { recursive: true });
+    fs.writeFileSync(path.join(root, 'content/blog-articles-data.ts'), `const ARTICLES = [
+      {
+        id: 'reale',
+        metadata: { id: 'annidato' },
+        note: "testo con id: 'dentro-stringa'",
+      },
+    ];
+    `);
+    assert.equal(countRegistryArticles(root, 'frontaliere'), 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });

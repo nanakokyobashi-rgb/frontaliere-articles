@@ -325,6 +325,10 @@ export const NON_SONO_CONTENT_GATES = Object.freeze({
     'controlla la forma dei workflow produttori e specchia content/ in un '
     + 'repository git temporaneo per provare la guardia; il verdetto non dipende '
     + 'dal corpus pubblicato del checkout.',
+  'generator/tests/article-registry-reader.test.mjs':
+    'verifica il reader condiviso e applica countRegistryArticles a un corpus '
+    + 'sintetico sotto mkdtemp; il literal content/ e\' una fixture, non il corpus '
+    + 'reale del checkout, quindi un articolo pubblicato non puo\' renderla rossa.',
   'generator/tests/loop-workflow-triggers.test.mjs':
     'verifica solo trigger, concorrenza e forma dei workflow; le stringhe '
     + 'content/** sono valori attesi e nessun file del corpus viene aperto.',

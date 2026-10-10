@@ -25,6 +25,7 @@ import { CANTON_HUB_TOPIC_CLUSTERS, cantonHubTopicForCluster } from '../../../..
 import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSectionCore.generated.mjs';
 import { sectionSourceSurfaces } from '../../../../scripts/lib/corpus-sections.mjs';
 import { sectionWriteSurfaces } from '../../../../scripts/lib/article-surfaces.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../../../scripts/lib/article-registry-reader.mjs';
 import { isReservedPublishedSlug } from '../../../../scripts/lib/published-slug-guard.mjs';
 import { readTsStringMap } from '../../backfill-article-cantons.mjs';
 import { readEntryCanton, registryEntrySpans } from '../registry-canton-field.mjs';
@@ -134,7 +135,8 @@ export function loadSectionArticles(root, section) {
   const out = [];
   for (const { id, text } of entries) {
     if (DAILY_EDITION_ID_RE.test(id)) continue;
-    const date = /\bdate:\s*'([^']+)'/u.exec(text)?.[1];
+    const [record] = scanTopLevelArticleRecords(text);
+    const date = readTopLevelString(record, 'date');
     // Una data impossibile nel registro non diventa la data di una news promossa.
     if (!date || !Number.isFinite(dateMs(date))) continue;
     const slug = slugs[id];
@@ -157,7 +159,7 @@ export function loadSectionArticles(root, section) {
       id,
       section,
       date,
-      category: /\bcategory:\s*'([^']+)'/u.exec(text)?.[1] ?? '',
+      category: readTopLevelString(record, 'category') ?? '',
       cantons: [...new Set([...(ownCanton ? [ownCanton] : []), ...labelled])],
       title,
       excerpt,
@@ -209,6 +211,25 @@ export function keywordTopicScore(article, topicConfig) {
 }
 
 const titleKey = (title) => foldForMatch(title).replace(/[^a-z0-9]+/g, ' ').trim();
+
+/**
+ * Un hub rende ogni voce in tutte le locali. Mantiene il candidato meglio
+ * classificato quando ID distinti puntano allo stesso URL canonico in una
+ * qualsiasi locale, senza indebolire la validazione finale del renderer.
+ * @param {Array<{ article: any }>} candidates ordinati per ranking decrescente
+ */
+export function filterUniqueCuratedCandidates(candidates) {
+  const seenTitles = new Set();
+  const seenUrls = new Map(HUB_LOCALES.map((locale) => [locale, new Set()]));
+  return candidates.filter(({ article }) => {
+    const key = titleKey(article.title.it);
+    const localizedUrls = HUB_LOCALES.map((locale) => [locale, articleUrl(article, locale)]);
+    if (seenTitles.has(key) || localizedUrls.some(([locale, url]) => seenUrls.get(locale).has(url))) return false;
+    seenTitles.add(key);
+    for (const [locale, url] of localizedUrls) seenUrls.get(locale).add(url);
+    return true;
+  });
+}
 
 /**
  * Assegna e ordina le news promosse di ogni hub del cantone.
@@ -293,15 +314,8 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
 
   const max = config.maxCuratedArticles;
   for (const topic of CANTON_HUB_TOPIC_KEYS) {
-    const seenTitles = new Set();
-    byTopic[topic] = byTopic[topic]
-      .sort((x, y) => y.score - x.score || y.article.date.localeCompare(x.article.date) || x.article.id.localeCompare(y.article.id))
-      .filter(({ article }) => {
-        const key = titleKey(article.title.it);
-        if (seenTitles.has(key)) return false;
-        seenTitles.add(key);
-        return true;
-      })
+    byTopic[topic] = filterUniqueCuratedCandidates(byTopic[topic]
+      .sort((x, y) => y.score - x.score || y.article.date.localeCompare(x.article.date) || x.article.id.localeCompare(y.article.id)))
       .slice(0, max)
       .map(({ article }) => article);
   }

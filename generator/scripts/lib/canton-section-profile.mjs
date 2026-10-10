@@ -520,6 +520,7 @@ function sourceDomainMap() {
 }
 
 let _sourceUrlMap = null;
+let _sharedFeedOwnersByKey = null;
 const LOCAL_SOURCE_KINDS = new Set(['media', 'istituzionale', 'polizia']);
 
 /**
@@ -546,14 +547,37 @@ const SHARED_CANTON_AREA_ALIASES = Object.freeze({
  */
 const SHARED_CANTON_AMBIGUOUS_RE = /\b(?:unterwalden|ob[-\s]+und\s+nidwalden|nidwalden\s+und\s+obwalden|obwalden\s+und\s+nidwalden)\b/giu;
 
-/** URL che identificano una pagina-fonte strettamente cantonale. */
-function canonicalSourceUrl(url) {
+/**
+ * Chiave canonica di una URL sorgente. Riconosce equivalenti same-origin
+ * comuni nei redirect (HTTP→HTTPS, www, slash finale) e uniforma percent-
+ * encoding e forme Unicode composte/decomposte. Non indovina redirect
+ * cross-host: questi richiedono un alias verificato, altrimenti l'anchor resta
+ * chiusa.
+ */
+export function sourceUrlCanonicalKey(url) {
   try {
-    const parsed = new URL(String(url || ''));
+    const parsed = new URL(String(url || '').trim());
+    if (!['http:', 'https:'].includes(parsed.protocol) || parsed.username || parsed.password) return '';
+    if (parsed.protocol === 'http:' && !parsed.port) parsed.protocol = 'https:';
+    parsed.hostname = parsed.hostname.toLowerCase().replace(/^www\./u, '');
+
+    const normalizeSegment = (segment) => encodeURIComponent(decodeURIComponent(segment).normalize('NFC'));
+    let normalizedPath;
+    try {
+      normalizedPath = parsed.pathname.split('/').map(normalizeSegment).join('/');
+    } catch {
+      return '';
+    }
+    parsed.pathname = normalizedPath.replace(/\/+$/u, '') || '/';
+
+    const normalizedQuery = [...parsed.searchParams]
+      .map(([key, value]) => `${encodeURIComponent(key.normalize('NFC'))}=${encodeURIComponent(value.normalize('NFC'))}`)
+      .join('&');
+    parsed.search = normalizedQuery ? `?${normalizedQuery}` : '';
     parsed.hash = '';
     return parsed.toString();
   } catch {
-    return String(url || '').trim();
+    return '';
   }
 }
 
@@ -570,12 +594,79 @@ function cantonSourcePathTokens(code) {
     .filter((token) => token.length >= 4 && !stop.has(token)))];
 }
 
+function sharedFeedOwnersByKey(cantonSections = loadCantonSectionProfiles()) {
+  const ownersByKey = new Map();
+  for (const profile of cantonSections?.cantons || []) {
+    for (const source of profile.newsSources || []) {
+      const wanted = String(source.quirks?.filterByCanton || '').trim().toUpperCase();
+      if (!wanted || wanted !== String(profile.code || '').trim().toUpperCase()) continue;
+      const key = sourceUrlCanonicalKey(source.url);
+      if (!key) continue;
+      if (!ownersByKey.has(key)) ownersByKey.set(key, new Set());
+      ownersByKey.get(key).add(wanted);
+    }
+  }
+  return new Map([...ownersByKey].filter(([, owners]) => owners.size > 1));
+}
+
+class CantonSourceUrlMap extends Map {
+  has(url) {
+    return super.has(sourceUrlCanonicalKey(url));
+  }
+
+  get(url) {
+    return super.get(sourceUrlCanonicalKey(url));
+  }
+}
+
 /**
- * Mappa URL-fonte -> cantone solo quando la pagina e' locale senza ambiguita'.
- * Il dominio unico resta la regola principale. Per gli host condivisi si
- * accetta soltanto un URL esatto usato da un solo profilo il cui percorso
- * contiene il nome del cantone; i feed dichiarati `filterByCanton` restano
- * esclusi perche' il loro URL e' condiviso per costruzione.
+ * Restituisce il cantone identificato dal path di un articolo su un feed
+ * condiviso dichiarato in `canton-sections.json`; URL generiche o con segnali
+ * di piu' cantoni restano senza proprietario. `feedUrl` restringe il controllo
+ * al feed che ha effettivamente prodotto l'articolo.
+ */
+export function sharedCantonFeedUrl(url, feedUrl = '') {
+  let parsed;
+  try {
+    parsed = new URL(String(url || ''));
+  } catch {
+    return null;
+  }
+  const articleHost = registrableHost(parsed.href);
+  if (!articleHost) return null;
+
+  if (!_sharedFeedOwnersByKey) _sharedFeedOwnersByKey = sharedFeedOwnersByKey();
+  const configuredFeedKey = feedUrl ? sourceUrlCanonicalKey(feedUrl) : '';
+  const ownerSets = configuredFeedKey
+    ? [_sharedFeedOwnersByKey.get(configuredFeedKey)].filter(Boolean)
+    : [..._sharedFeedOwnersByKey]
+      .filter(([key]) => registrableHost(key) === articleHost)
+      .map(([, owners]) => owners);
+  const owners = new Set(ownerSets.flatMap((ownerSet) => [...ownerSet]));
+  if (!owners.size || (configuredFeedKey && registrableHost(configuredFeedKey) !== articleHost)) return null;
+
+  let path;
+  try {
+    path = decodeURIComponent(parsed.pathname);
+  } catch {
+    return null;
+  }
+  const matched = [...owners].filter((code) => {
+    const aliases = [
+      ...(SHARED_CANTON_AREA_ALIASES[code] || []),
+      ...cantonSourcePathTokens(code),
+    ];
+    return termHits(path, aliases) > 0;
+  });
+  return matched.length === 1 ? matched[0] : null;
+}
+
+/**
+ * Mappa chiavi URL canoniche -> cantone solo quando la pagina e' locale senza
+ * ambiguita'. Per gli host condivisi si accetta un percorso scoped o un
+ * contesto esplicito; chiavi canoniche attribuibili a piu' profili sono
+ * misurate in `sourceUrlMapConflicts` e omesse dalla mappa. I feed dichiarati
+ * `filterByCanton` restano esclusi perche' il loro URL e' condiviso per costruzione.
  *
  * @param {any} cantonSections
  */
@@ -584,26 +675,43 @@ export function buildCantonSourceUrlMap(cantonSections = loadCantonSectionProfil
   const candidates = new Map();
   for (const profile of cantonSections?.cantons || []) {
     for (const source of profile.newsSources || []) {
-      const url = canonicalSourceUrl(source.url);
-      if (!url) continue;
-      const host = registrableHost(url);
+      const key = sourceUrlCanonicalKey(source.url);
+      if (!key) continue;
+      const host = registrableHost(key);
       const hostIsLocal = domainMap.get(host) === profile.code;
-      const pathHasCanton = termHits(url, cantonSourcePathTokens(profile.code)) > 0;
+      const pathHasCanton = termHits(key, cantonSourcePathTokens(profile.code)) > 0;
       const explicitlyScoped = source.quirks?.localCantonContext === profile.code;
-      const scoped = hostIsLocal || (
-        !source.quirks?.filterByCanton && (
-          (LOCAL_SOURCE_KINDS.has(source.kind) && pathHasCanton)
-          || explicitlyScoped
-        )
+      const scoped = !source.quirks?.filterByCanton && (
+        hostIsLocal
+        || (LOCAL_SOURCE_KINDS.has(source.kind) && pathHasCanton)
+        || explicitlyScoped
       );
       if (!scoped) continue;
-      if (!candidates.has(url)) candidates.set(url, new Set());
-      candidates.get(url).add(profile.code);
+      if (!candidates.has(key)) candidates.set(key, new Set());
+      candidates.get(key).add(profile.code);
     }
   }
-  return new Map([...candidates]
+  const sourceUrlMapConflicts = [...candidates]
+    .filter(([, codes]) => codes.size > 1)
+    .map(([key, codes]) => Object.freeze({ key, cantons: Object.freeze([...codes].sort()) }))
+    .sort((a, b) => a.key.localeCompare(b.key));
+  const sourceMap = new CantonSourceUrlMap([...candidates]
     .filter(([, codes]) => codes.size === 1)
-    .map(([url, codes]) => [url, [...codes][0]]));
+    .map(([key, codes]) => [key, [...codes][0]]));
+  Object.defineProperty(sourceMap, 'sourceUrlMapConflicts', {
+    value: Object.freeze(sourceUrlMapConflicts),
+    enumerable: false,
+  });
+  return sourceMap;
+}
+
+/** Numeri deterministici del mapping: i conflitti non vengono mai risolti per ordine. */
+export function cantonSourceUrlMapMetrics(cantonSections = loadCantonSectionProfiles()) {
+  const map = buildCantonSourceUrlMap(cantonSections);
+  return Object.freeze({
+    sourceUrlMapEntries: map.size,
+    sourceUrlMapConflicts: map.sourceUrlMapConflicts.length,
+  });
 }
 
 function sourceUrlMap() {
@@ -634,9 +742,21 @@ export function filterCantonSourceHeadlines(profile, source, headlines) {
   const filtered = (headlines || []).filter((h) => {
     const text = `${h.headline || ''} ${h.lead || ''}`;
     const textWithoutSharedAlias = text.replace(SHARED_CANTON_AMBIGUOUS_RE, ' ');
+    const urlCanton = sharedCantonFeedUrl(h.url, source?.url);
+    if (urlCanton && urlCanton !== wanted) return false;
+    const textCantons = Object.entries(SHARED_CANTON_AREA_ALIASES)
+      .filter(([, areaAliases]) => termHits(
+        textWithoutSharedAlias,
+        areaAliases.filter((alias) => !alias.includes('.ch')),
+      ) > 0)
+      .map(([code]) => code);
+    // A scoped URL is evidence for one side, not permission to ignore explicit
+    // contradictory location text in the title or lead.
+    if (textCantons.some((code) => code !== wanted)) return false;
     return profile?.isLocalArea?.(textWithoutSharedAlias)
       || termHits(textWithoutSharedAlias, textAliases) > 0
-      || termHits(h.url || '', urlAliases) > 0;
+      || termHits(h.url || '', urlAliases) > 0
+      || urlCanton === wanted;
   });
   // Il filtro ha già dimostrato che questa voce appartiene al cantone
   // dichiarato. Conserviamo la prova come metadato interno: il successivo
@@ -713,7 +833,7 @@ export function buildCantonProfile(section, deps) {
       if (termHits(text, institutionNames) > 0) return true;
       const host = registrableHost(url || '');
       if (host && sourceDomainMap().get(host) === code) return true;
-      const configuredSource = canonicalSourceUrl(sourceUrl);
+      const configuredSource = sourceUrlCanonicalKey(sourceUrl);
       if (configuredSource && sourceUrlMap().get(configuredSource) === code) return true;
       return hasFrontalieriSignal(text);
     },

@@ -58,7 +58,7 @@ function creditFor(cover) {
  * svizzeri oltre al ritirato e al vincitore, `frontaliere` articoli del
  * registro frontaliere, entrambi come `{ id, cover }`.
  */
-function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = [] } = {}) {
+function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = [], retiredImageFields = null } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retire-credit-'));
   for (const file of relativeImportClosure(path.join(REPO, 'scripts/retire-article.mjs'))) {
     const rel = path.relative(REPO, file);
@@ -71,7 +71,13 @@ function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = []
   // committed input lookup.
   write(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
   write(root, 'generator/data/localized-toponyms.json', fs.readFileSync(path.join(REPO, 'generator/data/localized-toponyms.json'), 'utf8'));
-  const row = ({ id, cover = id }) => `  {\n    id: '${id}',\n    category: 'news',\n    date: '2026-10-01',\n    image: '/images/blog/${cover}.webp',\n  },\n`;
+  const row = ({ id, cover = id }) => {
+    const imageFields = id === RETIRED && retiredImageFields
+      ? retiredImageFields
+      : [`image: '/images/blog/${cover}.webp'`];
+    const fields = imageFields.length ? `    ${imageFields.join(',\n    ')},\n` : '';
+    return `  {\n    id: '${id}',\n    category: 'news',\n    date: '2026-10-01',\n${fields}  },\n`;
+  };
   const swissRows = [
     { id: RETIRED, cover: covers[RETIRED] ?? RETIRED },
     { id: WINNER, cover: covers[WINNER] ?? WINNER },
@@ -117,6 +123,17 @@ function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = []
 
 function retire(root, ...extra) {
   return spawnSync(process.execPath, [path.join(root, 'scripts/retire-article.mjs'), RETIRED, '--winner', WINNER, ...extra], { cwd: root, encoding: 'utf8' });
+}
+
+function assertRefusedBeforeWrites(root, message) {
+  const registry = path.join(root, 'content/swiss-articles-data.ts');
+  const before = fs.readFileSync(registry, 'utf8');
+  const result = retire(root);
+  assert.notEqual(result.status, 0, result.stdout);
+  assert.match(result.stderr, message);
+  assert.equal(fs.readFileSync(registry, 'utf8'), before, 'il registro resta intatto');
+  assert.ok(exists(root, `content/blog-body-ch/it/${RETIRED}.ts`), 'il body non viene rimosso parzialmente');
+  assert.ok(exists(root, `public/images/blog/${RETIRED}.webp`), 'nessuna copertina viene cancellata');
 }
 
 const exists = (root, rel) => fs.existsSync(path.join(root, rel));
@@ -204,6 +221,19 @@ test('una copertina condivisa nella stessa sezione resta, e il dry-run lo dice',
   }
 });
 
+test('un commento prima di image non nasconde la copertina condivisa al retirement', () => {
+  const root = corpusTree({
+    retiredImageFields: ["/* note before the field */ image: '/images/blog/vincitore-ch.webp'"],
+  });
+  try {
+    const result = retire(root);
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    assert.ok(exists(root, 'public/images/blog/vincitore-ch.webp'), 'la cover ancora usata dal vincitore resta');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('una copertina condivisa con un articolo dell\'altra sezione resta', () => {
   const root = corpusTree({ frontaliere: [{ id: 'gemella-frontaliere', cover: RETIRED }] });
   try {
@@ -231,5 +261,37 @@ test('ritirare chi riusa la copertina di un altro non tocca nulla dell\'altro', 
     assertCoverGone(root, RETIRED);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un image calcolato blocca il retirement invece di ripiegare sull\'id', () => {
+  const root = corpusTree({ retiredImageFields: ["image: coverForArticle('ritirata-ch')"] });
+  try {
+    assertRefusedBeforeWrites(root, /image non è una stringa letterale statica/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un campo image assente blocca il retirement invece di ripiegare sull\'id', () => {
+  const root = corpusTree({ retiredImageFields: [] });
+  try {
+    assertRefusedBeforeWrites(root, /campo image assente/);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('proprietà image duplicate o annidate bloccano la scelta della cover', () => {
+  for (const [fields, message] of [
+    [["image: '/images/blog/ritirata-ch.webp'", "image: '/images/blog/vincitore-ch.webp'"], /image ripetuta/],
+    [["image: '/images/blog/ritirata-ch.webp'", "metadata: { image: '/images/blog/vincitore-ch.webp' }"], /image annidata/],
+  ]) {
+    const root = corpusTree({ retiredImageFields: fields });
+    try {
+      assertRefusedBeforeWrites(root, message);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   }
 });

@@ -797,26 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/economia/1955537/shiu-wing-hong-valcambi-steel-kong-ministro": {
-      "section": "frontaliere",
-      "ts": 1791453246756
-    },
-    "frontaliere::https://www.rsi.ch/s/4136096": {
-      "section": "frontaliere",
-      "ts": 1791453556350
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/orientamento-e-cultura-a-varese-torna-il-salone-dei-mestieri-al-centro-congressi-ville-ponti/2701903": {
-      "section": "frontaliere",
-      "ts": 1791453894861
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954862/sentenza-del-cdm-sul-pg-pagani-anche-per-i-vertici-del-parlamento-e-tutto-a-posto": {
-      "section": "frontaliere",
-      "ts": 1791453931910
-    },
-    "frontaliere::https://comozero.it/attualita/un-intero-settore-che-ha-fatto-la-storia-della-svizzera-e-in-crisi-maxi-taglio-addio-a-34-posti-di-lavoro": {
-      "section": "frontaliere",
-      "ts": 1791453970659
-    },
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
       "section": "frontaliere",
       "ts": 1791462252091
@@ -1132,6 +1112,26 @@
     "frontaliere::https://www.varesenews.it/2026/10/finanza-etica-a-varese-una-serata-di-confronto-sul-rapporto-con-le-banche/2703112": {
       "section": "frontaliere",
       "ts": 1791624573116
+    },
+    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
+      "section": "frontaliere",
+      "ts": 1791631360865
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/fondata-sul-lavoro-avs-e-sinistra-italiana-a-varese-per-rimettere-al-centro-salari-tutele-e-giovani/2704039": {
+      "section": "frontaliere",
+      "ts": 1791632860244
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1953522/brusino-arsizio-e-porto-ceresio-unite-dal-lago-lo-sport-e-l-unesco": {
+      "section": "frontaliere",
+      "ts": 1791633035654
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1955850/traffico-bloccato-frana-sementina-feriti": {
+      "section": "frontaliere",
+      "ts": 1791633204954
+    },
+    "svizzera::https://www.rsi.ch/s/4148438": {
+      "section": "svizzera",
+      "ts": 1791633402691
     }
   }
 }

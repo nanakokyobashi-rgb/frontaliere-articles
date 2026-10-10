@@ -101427,6 +101427,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposta-veicoli-uri-calcolo': {
+    title: 'Imposta sugli autoveicoli Uri: calcolo e pagamento',
+    description: 'Imposta sugli autoveicoli nel Cantone di Uri: criteri di calcolo, scadenze, ufficio della circolazione, cambio veicolo e indirizzo. Guida pratica al pagamento.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, sugli, autoveicoli, calcolo',
+    ogTitle: 'Imposta autoveicoli Uri: calcolo, scadenze e pagamento',
+    ogDescription: 'Il calcolo dell\'imposta sugli autoveicoli a Uri dipende dalle regole cantonali. La guida chiarisce come verificare criteri, termini e importi, quale ufficio seguire e cosa controllare dopo un cambio di veicolo o di indirizzo.',
+    canonicalPath: '/articoli-svizzera/imposta-veicoli-uri-calcolo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta sugli autoveicoli Uri: calcolo e pagamento",
+      "description": "Imposta sugli autoveicoli nel Cantone di Uri: criteri di calcolo, scadenze, ufficio della circolazione, cambio veicolo e indirizzo. Guida pratica al pagamento.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imposta-autoveicoli-lucerna-calcolo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto su una strada alpina del Cantone di Uri per un articolo sull'imposta cantonale"
+      },
+      "datePublished": "2026-10-10T12:04:45+00:00",
+      "dateModified": "2026-10-10T12:04:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-veicoli-uri-calcolo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

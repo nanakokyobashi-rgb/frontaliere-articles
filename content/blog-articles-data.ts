@@ -43615,6 +43615,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'tesserete-canalizzazione-privata',
+ category: 'pratico',
+ date: '2026-10-10T11:29:39.232Z',
+ image: '/images/blog/article-tesserete-canalizzazione-privata.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

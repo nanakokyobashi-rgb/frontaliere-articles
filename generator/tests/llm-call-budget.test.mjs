@@ -502,7 +502,7 @@ test('④ la selezione headline eredita il deadlineMs dal wrapper callLLM', () =
   assert.match(line, /\.\.\.llmOpts\b/, 'un caller deve poter ancora sovrascrivere il default');
   assert.match(
     SRC,
-    /const \{ expectedFields: _expectedFieldsOpt, \.\.\.llmOpts \} = opts;/,
+    /const \{ expectedFields: _expectedFieldsOpt, (?:locale: primaryLocale = 'it', )?\.\.\.llmOpts \} = opts;/,
     'REGRESSIONE: `llmOpts` non deriva piu da `opts` — o il caller non sovrascrive piu i default, o `expectedFields` sta scendendo al provider',
   );
 

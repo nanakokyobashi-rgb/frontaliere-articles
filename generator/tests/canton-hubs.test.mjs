@@ -26,7 +26,7 @@ import { sectionSourceSurfaces } from '../../scripts/lib/corpus-sections.mjs';
 import { sectionRebaseSurfaces } from '../../scripts/ci/rebase-section-args.mjs';
 import { cantonSectionIds, cantonSectionProfile } from '../scripts/lib/canton-section-profile.mjs';
 import { CANTON_GROUPS, buildCantonServices } from '../scripts/lib/canton-services-data.mjs';
-import { keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
+import { filterUniqueCuratedCandidates, keywordTopicScore, loadCantonPool, loadSectionArticles, selectCuratedArticles, sidecarQuality } from '../scripts/lib/canton-hubs/articles.mjs';
 import { BLOCK_THRESHOLDS, CLOCK_SKEW_MS, DAY_MS, HOUR_MS, OMIT_CODES, dateMs, instantMs, isRealDay } from '../scripts/lib/canton-hubs/blocks-common.mjs';
 import { parseCrossingNames } from '../scripts/lib/canton-hubs/blocks-border-wait.mjs';
 import { shapeFuelBlock } from '../scripts/lib/canton-hubs/blocks-fuel.mjs';
@@ -180,6 +180,31 @@ function writeCorpus(root, articles = CORPUS) {
 
 const tmpRoot = () => fs.mkdtempSync(path.join(os.tmpdir(), 'canton-hubs-'));
 const quiet = () => {};
+
+test('gli hub leggono date e category solo come proprieta top-level', () => {
+  const root = writeCorpus(tmpRoot(), [
+    article('top-level-fields', 'canton-ti', 'Notizia del Ticino', 'Estratto della notizia.', {
+      category: 'novita',
+      days: 1,
+    }),
+  ]);
+  try {
+    const relativePath = sectionSourceSurfaces('canton-ti').registryFile;
+    const file = path.join(root, relativePath);
+    const source = fs.readFileSync(file, 'utf8').replace(
+      "    category: 'novita',",
+      "    metadata: { date: '1900-01-01', category: 'annidata' },\n    category: 'novita',",
+    );
+    fs.writeFileSync(file, source);
+
+    const [loaded] = loadSectionArticles(root, 'canton-ti');
+    assert.equal(loaded.id, 'top-level-fields');
+    assert.equal(loaded.date, ago(1));
+    assert.equal(loaded.category, 'novita');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
 
 async function runAll(root, { datasets = fixtureDatasets(), nowMs = NOW, sections = PILOTS, dryRun = false } = {}) {
   return generateCantonHubs({ root, sections, datasets, nowMs, dryRun, log: quiet });
@@ -602,6 +627,21 @@ async function curatedFor(section, articles = CORPUS) {
   return { pool, ...selectCuratedArticles({ pool, section, config: CONFIG, engine, nowMs: NOW }) };
 }
 const idsOf = (list) => list.map((a) => a.id);
+
+test('le news promosse deduplicano gli URL localizzati anche con titoli IT distinti', () => {
+  const candidate = (id, frSlug) => ({ article: {
+    id,
+    section: 'svizzera',
+    title: { it: `Titolo distinto ${id}` },
+    slug: { it: `it-${id}`, en: `en-${id}`, de: `de-${id}`, fr: frSlug },
+  } });
+  const selected = filterUniqueCuratedCandidates([
+    candidate('meglio-classificato', 'prestations-complementaires-bale-campagne'),
+    candidate('collisione-fr', 'prestations-complementaires-bale-campagne'),
+    candidate('altro-url', 'prestations-complementaires-basel-campagne'),
+  ]);
+  assert.deepEqual(selected.map(({ article }) => article.id), ['meglio-classificato', 'altro-url']);
+});
 
 test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettati; un articolo sta in un solo hub', async () => {
   const { pool, byTopic } = await curatedFor('canton-ti');

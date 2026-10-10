@@ -18,6 +18,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../lib/article-registry-reader.mjs';
 import { declaredImageIsOwn, extractOgImage, isGenericOgImage, normalizeImagePath } from '../lib/article-image-postcondition.mjs';
 import { fetchDeclaredImage } from '../lib/declared-image-fetch.mjs';
 import {
@@ -51,10 +52,6 @@ export const OBSERVER_USER_AGENT = 'frontaliere-publication-observer/1 (+https:/
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
-function escapeRegExp(value) {
-  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
 export function bodyPathInfo(rel) {
   const match = String(rel).replaceAll('\\', '/').match(
     /^content\/(blog-body|blog-body-ch)\/(it|en|de|fr)\/([^/]+)\.ts$/,
@@ -86,18 +83,15 @@ export function parseChangedBodyLog(log) {
   return [...latest.values()].sort((a, b) => b.changedAt - a.changedAt || a.articleId.localeCompare(b.articleId));
 }
 
-function sourceBlock(source, articleId) {
-  const id = escapeRegExp(articleId);
-  return String(source).match(new RegExp(`\\{\\s*id:\\s*['"]${id}['"][\\s\\S]*?\\},`))?.[0] || '';
-}
-
 export function parseRegistryRecord(source, articleId) {
-  const block = sourceBlock(source, articleId);
-  if (!block) return null;
-  const updatedAt = block.match(/\bupdatedAt:\s*['"]([^'"]+)['"]/)?.[1] || null;
-  const date = block.match(/\bdate:\s*['"]([^'"]*)['"]/)?.[1] || null;
-  const image = block.match(/\bimage:\s*['"]([^'"]+)['"]/)?.[1] || null;
-  return { articleId, updatedAt, date, image };
+  const record = scanTopLevelArticleRecords(source).find((entry) => entry.id === articleId);
+  if (!record) return null;
+  return {
+    articleId,
+    updatedAt: readTopLevelString(record, 'updatedAt') || null,
+    date: readTopLevelString(record, 'date') || null,
+    image: readTopLevelString(record, 'image') || null,
+  };
 }
 
 export function parseItalianSlug(source, articleId) {
