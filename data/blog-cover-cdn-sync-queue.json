@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-raffica-scontri-varesotto.webp",
-      "sha256": "14811c835962eaa133812215a641fefa37de719c52837aa254c74cfbab7d979a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-raffica-scontri-varesotto-480w.webp",
-      "sha256": "b887c4dee8d9e5785fd3925c0b59898f8e7ad799d8536d54b08fae6d48675cb0"
-    }
-  ]
+  "items": []
 }
