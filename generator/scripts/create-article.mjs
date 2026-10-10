@@ -6827,10 +6827,10 @@ async function callLLM(messages, opts = {}) {
   // esteso sulla funzione. Riassunto: il flag puo' RESTRINGERE i campi
   // attesi, mai spegnere la validazione.
   //
-  // `expectedFields` NON scende al provider: e' un'istruzione per il
-  // validatore, e infilarla nell'oggetto della richiesta la spedirebbe a
-  // ~180 modelli come parametro sconosciuto.
-  const { expectedFields: _expectedFieldsOpt, ...llmOpts } = opts;
+  // `expectedFields` e `locale` restano contesto del validatore e NON scendono
+  // al provider: inoltrarli nella richiesta li spedirebbe a ~180 modelli come
+  // parametri sconosciuti.
+  const { expectedFields: _expectedFieldsOpt, locale: primaryLocale = 'it', ...llmOpts } = opts;
   const _body2Validation = resolveBody2Validation({
     jsonMode: opts.jsonMode,
     expectedFields: _expectedFieldsOpt,
@@ -6878,7 +6878,7 @@ async function callLLM(messages, opts = {}) {
       // Il verdetto e' delegato a ./lib/body2-payload-verdict.mjs: e' li' che
       // vive la regola, ed e' li' che il test la esegue (questo file non e'
       // importabile senza `npm ci`, vedi l'intestazione del modulo).
-      const { verdict, itContent: _verdictContent, missing, salvagedPayload } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
+      const { verdict, itContent: _verdictContent, missing, salvagedPayload } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields, locale: primaryLocale });
       itContent = _verdictContent;
 
       // ── REGOLA #0: l'abort e' una risposta VALIDA, non un payload rotto ────
@@ -8554,11 +8554,33 @@ function isHeadlineCardNode(node) {
   return node.name === 'article' || node.name === 'li' || headlineNodeHasHint(node);
 }
 
-function headlineStackHasPaywall(stack) {
-  return stack.some((node) => {
+function headlineStackHasPremiumMarker(stack, inlineMarkup = '') {
+  const nodes = [...stack];
+  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
+  let match;
+  while ((match = tagRe.exec(inlineMarkup)) !== null) {
+    if (match[1]) continue;
+    nodes.push({ name: match[2].toLowerCase(), attrs: match[3] || '' });
+  }
+
+  return nodes.some((node) => {
+    const attrs = node.attrs || '';
     const className = headlineAttributeValue(node.attrs, 'class');
-    return /(?:^|[\s_-])paywall(?:$|[\s_-])/i.test(className)
-      || /\bdata-paywall(?:-[\w-]+)?(?![\w-])(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/i.test(node.attrs || '');
+    const classTokens = className
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter(Boolean);
+    const compactClass = classTokens.join('');
+    const classMarker = classTokens.some((token) => token === 'paywall' || token === 'premium')
+      || /^(?:subscribers?only|membersonly|exclusive(?:content)?|paidcontent|abopflichtig)$/.test(compactClass);
+    const attributeMarker = /\bdata-(?:paywall|premium|subscriber-only|members-only|subscription-required)(?:-[\w-]+)?(?![\w-])/i.test(attrs);
+    const access = headlineAttributeValue(attrs, 'data-access')
+      || headlineAttributeValue(attrs, 'data-content-access')
+      || headlineAttributeValue(attrs, 'data-subscription');
+    const normalizedAccess = access.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const accessMarker = /^(?:premium|paywall|paid|subscription|required|subscriber|subscribersonly|member|membersonly|exclusive|exclusivecontent|abopflichtig)$/.test(normalizedAccess);
+    return classMarker || attributeMarker || accessMarker;
   });
 }
 
@@ -8693,9 +8715,8 @@ function extractHeadlines(html, baseUrl) {
     const ancestors = headlineAncestorStack(html, m.index);
     const anchorTagEnd = m[0].indexOf('>');
     const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
-    const anchorAttrs = anchorTag.replace(/^<a\b/i, '').replace(/>\s*$/, '');
     if (source?.quirks?.excludePaywalledCards
-      && headlineStackHasPaywall([...ancestors, { name: 'a', attrs: anchorAttrs }])) continue;
+      && headlineStackHasPremiumMarker(ancestors, m[0])) continue;
     let href = m[1];
     let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
@@ -11037,8 +11058,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `call=1/2` e 0 `call=2/2` sulle 4 run del 2026-08-18; `roster_blocked`
     // 12 e 11 volte sulle due del 2026-08-19). Vedi #485.
     const rawBody = useGeminiDirect
-      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS })
-      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS });
+      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS, locale: primaryLocale })
+      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS, locale: primaryLocale });
     let bodyData;
     try {
       bodyData = JSON.parse(repairLlmJson(rawBody));
@@ -11275,8 +11296,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // di modello. `META_ONLY_FIELDS` le da' la validazione che le compete:
     // esattamente i due campi di testo che questa meta' produce.
     const rawMeta = useGeminiDirect
-      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS });
+      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale })
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
@@ -11523,10 +11544,10 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `_preferActiveThisAttempt` vale su ogni tentativo, quindi anche questi
     // rami passano da Codex e Claude prima di Gemini. Senza `prefer` il
     // tentativo 3 tornava sulla sola cascata free (review di #1751).
-    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
+    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale });
     console.error(`  ↪ Completato (slot Gemini ${AI_MODELS.GEMINI_FLASH})`);
   } else {
-    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS };
+    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale };
     try {
       itRaw = await callLLM(llmMessages, _optsUnica);
     } catch (e) {
@@ -11584,7 +11605,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     console.error(`  🔄 Retry IT con maxTokens=${retryTokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
     try {
       const itRaw2 = useGeminiDirect
-        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS })
+        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale })
         // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
         // `_preferActiveThisAttempt`, che dal 2026-09-24 vale su ogni
         // tentativo — vedi il commento su `_preferSenzaCap` sopra. E' anche la
@@ -11603,7 +11624,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
         // (vedi `_msgsUnica` sopra) e non e' garantito che rientri nel
         // budget: ricontattare il preferito qui rischierebbe di riesaurirlo
         // una seconda volta per un motivo (dimensione) che non e' il suo.
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
+        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
