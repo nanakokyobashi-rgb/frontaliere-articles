@@ -111,6 +111,8 @@ function extractCapBlock() {
     // forma il test la vede, invece di misurare una copia divergente.
     sliceConst(src, 'const SEO_DESCRIPTION_BUDGETS = {'),
     sliceFn(src, 'function clampSeoDescriptions(data) {'),
+    sliceFn(src, 'function bodyFieldsForQuality(content) {'),
+    sliceFn(src, 'function bodyTextForQuality(content) {'),
     sliceFn(src, 'function ensureSeoDescriptionMinimum(data) {'),
   ].join('\n\n');
   // `truncateAtWordBoundary` non e' piu' autocontenuta: delega a
@@ -237,6 +239,26 @@ describe('clampSeoDescriptions', () => {
 });
 
 describe('ensureSeoDescriptionMinimum', () => {
+  it('usa il corpo italiano quando description ed excerpt sono troppo brevi', () => {
+    const body =
+      'Il Parlamento friburghese ha rinviato la mozione per una riduzione rapida dei premi malattia, lasciando aperto il confronto sulle conseguenze per famiglie e lavoratori nel Cantone.';
+    const data = {
+      id: 'friburgo-mozione-premi-malattia',
+      seo: { description: 'Decisione sui premi malattia a Friburgo' },
+      content: {
+        it: {
+          excerpt: 'La mozione sui premi malattia è stata rinviata.',
+          body1: body,
+          body2: 'Il dibattito parlamentare proseguirà con nuove valutazioni.',
+        },
+      },
+    };
+
+    expect(ensureSeoDescriptionMinimum(data)).toBe(body);
+    expect(data.seo.description).toBe(body);
+    expect(data.seo.description).not.toMatch(/Dati aggiornati|Guida pratica/);
+  });
+
   it('usa l’excerpt italiano reale quando la description è troppo breve', () => {
     const excerpt =
       'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';

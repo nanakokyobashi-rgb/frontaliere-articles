@@ -19468,7 +19468,13 @@ function ensureSeoDescriptionMinimum(data) {
   const excerpt = stripExcerptMarkdown(
     typeof data?.content?.it?.excerpt === 'string' ? data.content.it.excerpt : '',
   );
-  const candidates = [description, excerpt]
+  // A model can return a valid long-form article while emitting a short SEO
+  // summary (the canton-fr recurrence produced 54 chars for both fields).
+  // The body is the remaining article-specific source already in memory; use
+  // its plain-text lead before failing closed, rather than padding with generic
+  // copy or rejecting an otherwise publishable article.
+  const body = stripExcerptMarkdown(bodyTextForQuality(data?.content?.it || {}));
+  const candidates = [description, excerpt, body]
     .filter((candidate) => candidate.length >= SEO_DESCRIPTION_MIN)
     .map((candidate) => truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX));
   const candidate = candidates.find((bounded) => bounded.trim().length >= SEO_DESCRIPTION_MIN);
