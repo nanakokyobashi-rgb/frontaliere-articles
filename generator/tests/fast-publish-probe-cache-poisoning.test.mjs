@@ -117,6 +117,12 @@ const stepText = (name) => {
 const PURGE = 'Purge the edge cache for what was published';
 const VERIFY = 'Verify the article is actually readable';
 const REPURGE = 'Re-purge the edge cache after the verification';
+const PAGES_BUILD_WAIT_BUDGET_SECONDS = Number(
+  /^ {10}PAGES_BUILD_WAIT_BUDGET_SECONDS=(\d+)$/m.exec(stepText(VERIFY))?.[1],
+);
+const PAGES_BUILD_WAIT_WINDOW_SECONDS = Number(
+  /^ {10}PAGES_BUILD_WAIT_WINDOW_SECONDS=(\d+)$/m.exec(stepText(VERIFY))?.[1],
+);
 
 test('i tre step esistono e sono in questo ordine: purge → verifica → ri-purge', () => {
   const p = indexOfStep(PURGE);
@@ -286,7 +292,7 @@ function eseguiSonde({
   codici,
   comandi,
   tetto = TETTO_RUN,
-  funzioni = ['probe_url', 'poll_origin', 'poll_batch_member'],
+  funzioni = ['probe_url', 'poll_origin', 'poll_origin_for', 'poll_batch_member'],
   shard = SHARD,
 }) {
   const dir = mkdtempSync(join(tmpdir(), 'fast-publish-probe-'));
@@ -299,6 +305,10 @@ function eseguiSonde({
       // Come lo step: una variabile non definita o un comando fallito fermano tutto.
       'set -euo pipefail',
       'shard="$SHARD"',
+      'SECONDS=0',
+      `PAGES_BUILD_WAIT_BUDGET_SECONDS=${PAGES_BUILD_WAIT_BUDGET_SECONDS}`,
+      `PAGES_BUILD_WAIT_WINDOW_SECONDS=${PAGES_BUILD_WAIT_WINDOW_SECONDS}`,
+      'PAGES_BUILD_WAIT_DEADLINE=$((SECONDS + PAGES_BUILD_WAIT_BUDGET_SECONDS))',
       'curl() {',
       '  local ultimo codice',
       '  for ultimo in "$@"; do :; done',
@@ -309,7 +319,7 @@ function eseguiSonde({
       '  if [ "$codice" = "SILENZIO" ]; then return 0; fi',
       '  printf \'%s\' "${codice:-coda-vuota}"',
       '}',
-      'sleep() { printf \'attesa %s\\n\' "$1" >> "$REGISTRO"; }',
+      'sleep() { SECONDS=$((SECONDS + $1)); printf \'attesa %s\\n\' "$1" >> "$REGISTRO"; }',
       'PROBE_SEQ=0',
       `TRANSIENT_RETRY_BUDGET=${tetto}`,
       ...funzioni.map(funzioneDelloStep),
@@ -350,6 +360,54 @@ test('eseguito: ogni sonda ha una chiave sua, anche sullo stesso percorso', () =
     funzioni: ['probe_url', 'poll_origin'],
   });
   assert.deepEqual(sonde, [1, 2, 3, 4, 5].map((n) => `${u}?_fpcb=777.2.${SHARD}.${n}`));
+});
+
+test('eseguito: il gate recupera una build Pages che supera i primi cinque minuti, entro il budget condiviso', () => {
+  assert.equal(PAGES_BUILD_WAIT_BUDGET_SECONDS, 600);
+  assert.equal(PAGES_BUILD_WAIT_WINDOW_SECONDS, 300);
+  const u = `${ORIGINE}/pages-building/`;
+  const tentativiFinestra = PAGES_BUILD_WAIT_WINDOW_SECONDS / 15;
+  const codici = [
+    ...Array(tentativiFinestra).fill(404),
+    ...Array(12).fill(404),
+    200,
+  ];
+  const { uscita, sonde, attese } = eseguiSonde({
+    codici,
+    funzioni: ['probe_url', 'poll_origin', 'poll_origin_for'],
+    comandi: [
+      `if poll_origin_for "${u}" "$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then echo "OK prima $POLL_CODE"; else echo "KO prima $POLL_CODE"; fi`,
+      `if poll_origin_for "${u}" "$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then echo "OK seconda $POLL_CODE"; else echo "KO seconda $POLL_CODE"; fi`,
+    ],
+  });
+
+  assert.deepEqual(uscita, ['KO prima 404', 'OK seconda 200']);
+  assert.equal(sonde.length, tentativiFinestra + 13);
+  assert.equal(new Set(sonde).size, sonde.length, 'le attese prolungate devono continuare a usare chiavi cache-busted uniche');
+  const secondiAttesi = attese.reduce((totale, attesa) => totale + Number(attesa), 0);
+  assert.ok(secondiAttesi > PAGES_BUILD_WAIT_WINDOW_SECONDS, 'il caso deve superare la prima finestra di cinque minuti');
+  assert.ok(secondiAttesi <= PAGES_BUILD_WAIT_BUDGET_SECONDS, 'il recupero deve restare entro il budget condiviso');
+});
+
+test('eseguito: una build Pages non leggibile fallisce ancora al budget massimo', () => {
+  const u = `${ORIGINE}/pages-still-building/`;
+  const tentativiFinestra = PAGES_BUILD_WAIT_WINDOW_SECONDS / 15;
+  const { uscita, sonde, attese } = eseguiSonde({
+    codici: Array(tentativiFinestra * 2).fill(404),
+    funzioni: ['probe_url', 'poll_origin', 'poll_origin_for'],
+    comandi: [
+      `if poll_origin_for "${u}" "$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then echo "OK prima $POLL_CODE"; else echo "KO prima $POLL_CODE"; fi`,
+      `if poll_origin_for "${u}" "$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then echo "OK seconda $POLL_CODE"; else echo "KO seconda $POLL_CODE"; fi`,
+    ],
+  });
+
+  assert.deepEqual(uscita, ['KO prima 404', 'KO seconda 404']);
+  assert.equal(sonde.length, tentativiFinestra * 2);
+  const secondiAttesi = attese.reduce((totale, attesa) => totale + Number(attesa), 0);
+  assert.ok(
+    secondiAttesi >= PAGES_BUILD_WAIT_BUDGET_SECONDS - 30 && secondiAttesi <= PAGES_BUILD_WAIT_BUDGET_SECONDS,
+    `il 404 persistente deve consumare il budget bounded senza superarlo: ${secondiAttesi}s`,
+  );
 });
 
 test('eseguito: due rami della matrice non chiedono mai la stessa chiave', () => {
@@ -446,8 +504,12 @@ test('il membro del lotto passa da poll_batch_member; il gate della lingua e l\'
     /if \[ -n "\$\{origin_locale_gate_started\[\$loc\]:-\}" \]; then\n\s+if poll_batch_member "\$u"; then/,
     'dopo il gate della lingua il membro del lotto deve passare da poll_batch_member',
   );
-  // Il primo percorso di ogni lingua aspetta la build: dodici tentativi, come prima.
-  assert.match(verify, /origin_locale_gate_started\[\$loc\]=1\n\s*\n?\s+if poll_origin "\$u" 12; then/);
+  // Il primo percorso e il recupero di ogni lingua condividono due finestre
+  // bounded, con un budget globale di dieci minuti per non superare il timeout del job.
+  assert.match(verify, /PAGES_BUILD_WAIT_BUDGET_SECONDS=600\n\s+PAGES_BUILD_WAIT_WINDOW_SECONDS=300/);
+  assert.match(verify, /PAGES_BUILD_WAIT_DEADLINE=\$\(\(SECONDS \+ PAGES_BUILD_WAIT_BUDGET_SECONDS\)\)/);
+  assert.match(verify, /origin_locale_gate_started\[\$loc\]=1\n\s*\n?\s+if poll_origin_for "\$u" "\$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then/);
+  assert.equal([...verify.matchAll(/if poll_origin_for "\$u" "\$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then/g)].length, 2);
   // L'apex resta a un tentativo e a warning: non decide l'esito dello step.
   assert.match(verify, /if poll_origin "\$u" 1 8; then echo " {2}200 {2}\$u"\n\s+else echo "::warning::/);
   // Lo shard del ramo della matrice fa parte della chiave.
