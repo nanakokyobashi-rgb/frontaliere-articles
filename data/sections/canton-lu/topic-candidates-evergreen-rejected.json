@@ -2,9 +2,13 @@
   "keywords": [],
   "strikes": {},
   "topicGateUrls": {
-    "canton-lu::https://news.lu.ch/html_mail.jsp?email=news.lu.ch&id=0&mailref=000m2ni000eyc0000000000000k0bud5": {
+    "canton-lu::https://www.nau.ch/news/wirtschaft/schweizer-ki-stellenmarkt-wachst-rasant-67186423": {
       "section": "canton-lu",
-      "ts": 1791394678875
+      "ts": 1791623359046
+    },
+    "canton-lu::https://www.zentralplus.ch/news/neue-partnervermittlung-startet-im-kanton-luzern-2903833": {
+      "section": "canton-lu",
+      "ts": 1791623368555
     }
   }
 }
