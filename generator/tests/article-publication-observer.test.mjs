@@ -169,6 +169,24 @@ test('usa fake HTTP sequenziale e restituisce due liste stabili', async () => {
   assert.deepEqual(result.degraded.map((item) => item.target.articleId), ['three', 'four']);
 });
 
+test('la scansione conserva solo i segnali e i metadati, mai il body HTML', async () => {
+  const html = `${page(currentDate, ownImage)}<!--${'x'.repeat(1024 * 1024)}-->`;
+  const result = await observePublicationLag({
+    targets: [{ ...target(), url: 'https://example.test/large/' }],
+    nowMs,
+    maxPages: 1,
+    minIntervalMs: 0,
+    fetchImpl: async () => ({ ok: true, status: 200, text: async () => html }),
+  });
+  const observed = result.checked[0].page;
+  assert.deepEqual(Object.keys(observed).sort(), [
+    'genericOgImage', 'modifiedAt', 'ogImage', 'schemaTypes', 'status',
+  ]);
+  assert.equal(observed.modifiedAt, currentDate);
+  assert.equal(observed.ogImage, `https://frontaliereticino.ch${ownImage}`);
+  assert.equal(JSON.stringify(result).includes('x'.repeat(1024)), false);
+});
+
 test('un fetch bloccato viene abortito entro il timeout per richiesta', async () => {
   let aborted = false;
   const result = await observePublicationLag({
@@ -259,6 +277,41 @@ test('la deadline globale interrompe il fetch corrente e segnala la copertura in
   assert.equal(result.unread, 2);
   assert.equal(result.interruptedTarget.articleId, 'one');
   assert.match(formatObserverReport(result, { nowMs }), /Deadline raggiunta/);
+});
+
+test('la deadline assoluta del job interrompe il fetch e persiste la copertura incompleta', async () => {
+  const rootDir = observerRoot();
+  const github = issueClient();
+  const log = `commit ${'a'.repeat(40)} 1791417600\ncontent/blog-body/it/alpha.ts`;
+  let aborted = false;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      maxPages: 1,
+      minIntervalMs: 0,
+      fetchTimeoutMs: 1_000,
+      scanTimeoutMs: 60_000,
+      absoluteDeadlineAtMs: 100,
+      clock: () => 0,
+      fetchImpl: async (_url, options) => {
+        options.signal.addEventListener('abort', () => { aborted = true; });
+        return new Promise(() => {});
+      },
+    });
+    const create = github.calls.find((call) => call.type === 'create');
+    assert.equal(aborted, true);
+    assert.equal(result.timedOut, true);
+    assert.equal(result.coverageIncomplete, true);
+    assert.equal(result.absoluteDeadlineAtMs, 100);
+    assert.match(result.description, /Deadline assoluta del job/);
+    assert.match(create.description, /Deadline raggiunta/);
+    assert.equal(github.calls.some((call) => call.type === 'resolve'), false);
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
 });
 
 // I casi che seguono vengono dalla prima lettura dal vivo (2026-10-07): con le

@@ -297,6 +297,25 @@ function parseAttrs(tag) {
   return attrs;
 }
 
+function copySmallMetadata(value) {
+  if (value == null) return null;
+  // Regex captures may be sliced strings backed by the full response body.
+  // Copy short signals before retaining them in the scan report.
+  return Buffer.from(String(value), 'utf8').toString('utf8');
+}
+
+function compactPageObservation(page) {
+  return {
+    status: page.status,
+    modifiedAt: copySmallMetadata(page.modifiedAt),
+    ogImage: copySmallMetadata(page.ogImage),
+    schemaTypes: Array.isArray(page.schemaTypes) ? page.schemaTypes.map(copySmallMetadata) : [],
+    genericOgImage: Boolean(page.genericOgImage),
+    ...(page.error ? { error: copySmallMetadata(page.error) } : {}),
+    ...(page.timedOut ? { timedOut: true } : {}),
+  };
+}
+
 function collectJsonLdTypes(value, types) {
   if (Array.isArray(value)) {
     for (const item of value) collectJsonLdTypes(item, types);
@@ -487,15 +506,19 @@ export async function observePublicationLag({
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
   fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
   scanTimeoutMs = DEFAULT_SCAN_TIMEOUT_MS,
+  absoluteDeadlineAtMs = null,
   sleepImpl = sleep,
   clock = () => Date.now(),
 }) {
   if (typeof fetchImpl !== 'function') throw new Error('fetch non disponibile');
   if (!Number.isFinite(fetchTimeoutMs) || fetchTimeoutMs <= 0) throw new Error('fetchTimeoutMs deve essere positivo');
   if (!Number.isFinite(scanTimeoutMs) || scanTimeoutMs <= 0) throw new Error('scanTimeoutMs deve essere positivo');
+  if (absoluteDeadlineAtMs !== null && (!Number.isFinite(absoluteDeadlineAtMs) || absoluteDeadlineAtMs <= 0)) {
+    throw new Error('absoluteDeadlineAtMs deve essere un timestamp positivo in millisecondi');
+  }
   const checked = [];
   const scanStartedAt = clock();
-  const scanDeadlineAt = scanStartedAt + scanTimeoutMs;
+  const scanDeadlineAt = Math.min(scanStartedAt + scanTimeoutMs, absoluteDeadlineAtMs ?? Infinity);
   const candidates = targets.slice(0, maxPages);
   let lastRequestAt = null;
   let timedOut = false;
@@ -536,12 +559,12 @@ export async function observePublicationLag({
     try {
       const requestTimeoutMs = Math.min(fetchTimeoutMs, remainingMs);
       const timeoutKind = remainingMs <= fetchTimeoutMs ? 'scan' : 'fetch';
-      page = await fetchPageObservation({
+      page = compactPageObservation(await fetchPageObservation({
         fetchImpl,
         target,
         timeoutMs: requestTimeoutMs,
         timeoutKind,
-      });
+      }));
     } catch (error) {
       if (error?.code === 'OBSERVER_TIMEOUT' && error.kind === 'scan') {
         timedOut = true;
@@ -572,6 +595,7 @@ export async function observePublicationLag({
     interruptedTarget,
     fetchTimeoutMs,
     scanTimeoutMs,
+    absoluteDeadlineAtMs,
     durationMs,
   };
 }
@@ -583,6 +607,9 @@ export function formatObserverReport(report, { nowMs = Date.now(), skipped = [] 
     `Controllate: ${report.checked.length}; in ritardo: ${report.lagging.length}; immagini degradate: ${report.degraded.length}; limite: ${report.maxPages ?? DEFAULT_MAX_PAGES}.`,
     `Budget scansione: ${report.scanTimeoutMs ?? DEFAULT_SCAN_TIMEOUT_MS} ms; fetch: ${report.fetchTimeoutMs ?? DEFAULT_FETCH_TIMEOUT_MS} ms; durata: ${report.durationMs ?? 'n/d'} ms.`,
   ];
+  if (Number.isFinite(report.absoluteDeadlineAtMs)) {
+    lines.push(`Deadline assoluta del job: ${new Date(report.absoluteDeadlineAtMs).toISOString()}.`);
+  }
   if (report.timedOut) {
     const target = report.interruptedTarget;
     const suffix = target ? ` Interrotta su ${target.articleId} (${target.section}).` : '';
@@ -800,6 +827,7 @@ export async function runObserver({
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
   fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
   scanTimeoutMs = DEFAULT_SCAN_TIMEOUT_MS,
+  absoluteDeadlineAtMs = null,
   sleepImpl = sleep,
   clock = () => Date.now(),
   gitLogImpl = gitText,
@@ -829,6 +857,7 @@ export async function runObserver({
     minIntervalMs,
     fetchTimeoutMs,
     scanTimeoutMs,
+    absoluteDeadlineAtMs,
     sleepImpl,
     clock,
   });
@@ -934,7 +963,11 @@ export async function runObserver({
 
 const invokedDirectly = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invokedDirectly) {
-  runObserver({ days: parseArgs(process.argv.slice(2)).days })
+  const configuredDeadline = process.env.OBSERVER_SCAN_DEADLINE_AT_MS;
+  runObserver({
+    days: parseArgs(process.argv.slice(2)).days,
+    absoluteDeadlineAtMs: configuredDeadline ? Number(configuredDeadline) : null,
+  })
     .then((result) => {
       console.log(formatObserverReport(result, { skipped: result.skipped }));
       if (!result.coverageIncomplete && result.lagging.length === 0 && result.degraded.length === 0) {
