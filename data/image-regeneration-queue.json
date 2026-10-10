@@ -1,4 +1,15 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "articleId": "frana-sementina-h13-gudo",
+      "title": "Frana a Sementina: chiusa la H13 tra Sementina e Gudo",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-frana-sementina-h13-gudo: openai-codex (vision gate rejected image: Generic landslide road scene relevant to Ticino, but it contains multiple",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T02:19:32.015Z",
+      "lastFailureAt": "2026-10-10T02:19:32.015Z"
+    }
+  ]
 }
