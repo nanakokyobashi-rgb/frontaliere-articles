@@ -111,6 +111,10 @@ on:
       # built by the old code until an unrelated corpus change happens along.
       - 'scripts/build-blog-index.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
+      # The blog index and the generator share the balanced registry reader;
+      # its delimiter scanner is a publisher input when the index runs here.
+      - 'scripts/lib/article-registry-reader.mjs'
+      - 'scripts/lib/ts-literals.mjs'
       # build-blog-index.mjs also emits the cover credits
       # (data/image-credits-<section>.json and data/image-credits-blog.json)
       # through this module; the records

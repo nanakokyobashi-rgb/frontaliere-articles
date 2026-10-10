@@ -95,6 +95,11 @@ import {
   buildBlogImageCreditsAggregate,
   buildPublishedBlogImageRegistry,
 } from '../generator/scripts/lib/blog-image-registry.mjs';
+import {
+  readTopLevelBoolean,
+  readTopLevelString,
+  scanTopLevelArticleRecords,
+} from './lib/article-registry-reader.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -246,9 +251,10 @@ function cdnBlogImage(p) {
 
 /**
  * Registry entries as `{ id: '…', category: '…', date: '…', image: '…' }`
- * object literals. Parsed with a regex rather than imported: this file must not
- * drag the corpus's TS module graph (and its extensionless specifiers) into a
- * plain-node script, and the shapes here are emitted by our own generator.
+ * object literals. Read with the shared balanced scanner rather than imported:
+ * this file must not drag the corpus's TS module graph (and its extensionless
+ * specifiers) into a plain-node script, and the shapes here are emitted by our
+ * own generator.
  *
  * `image` is the raw literal, so it is rewritten through `cdnBlogImage` above
  * to land on the value the registry's own export carries.
@@ -258,19 +264,15 @@ function readRegistry(rel) {
   if (!fs.existsSync(abs)) return [];
   const src = fs.readFileSync(abs, 'utf-8');
   const out = [];
-  const rx = /\{\s*id:\s*'([^']+)'([\s\S]*?)\}/g;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const [, id, body] = m;
-    const pick = (k) => (body.match(new RegExp(`\\b${k}:\\s*'([^']*)'`)) ?? [])[1];
-    const pickBool = (k) => new RegExp(`\\b${k}:\\s*true`).test(body);
+  for (const record of scanTopLevelArticleRecords(src)) {
+    const pick = (key) => readTopLevelString(record, key);
     out.push({
-      id,
+      id: record.id,
       category: pick('category') ?? '',
       date: pick('date') ?? '',
       updatedAt: pick('updatedAt') ?? undefined,
       image: cdnBlogImage(pick('image') ?? ''),
-      hasCalculator: pickBool('hasCalculator') || undefined,
+      hasCalculator: readTopLevelBoolean(record, 'hasCalculator') || undefined,
       authorSlug: pick('authorSlug') ?? undefined,
     });
   }

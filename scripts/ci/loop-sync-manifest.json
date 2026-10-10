@@ -5025,6 +5025,16 @@
       }
     },
     {
+      "path": "scripts/lib/article-registry-reader.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner bilanciato delle righe del registry TypeScript: lo usano `scripts/build-blog-index.mjs`, `scripts/backfill-image-credits.mjs` e gli helper del generatore per leggere solo proprieta' top-level senza confondere delimitatori annidati, stringhe o commenti. Il sito consuma il corpus come JSON HTTP e non esegue questo reader del registry, quindi non esiste un gemello operativo da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": "a74d1f9df23ed2b1",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "scripts/lib/mentions-id.mjs",
       "mode": "corpus-only",
       "reason": "La regola «l'id compare ancora COME id, e non solo come sottostringa di un id piu' lungo?», estratta da `scripts/retire-article.mjs` (passo 12) perche' serve identica al gate di PR `generator/tests/retired-articles-fully-removed.test.mjs`: due copie della stessa regola divergono, ed e' il difetto vietato da AGENTS.md #6. Resta `corpus-only` per la stessa ragione del suo unico chiamante di produzione: il ritiro di un articolo e' un'operazione sul CORPUS, e sul sito `scripts/retire-article.mjs` non esiste — dopo il cutover del 2026-08-02 la' non si registrano ne' si ritirano articoli. Non e' `corpus-only-pending`: non c'e' un lavoro da tracciare sul sito, portarlo aprirebbe una PR su un percorso morto. Modulo puro (nessun import), quindi copiabile senz'altro se un giorno il sito tornasse a generare.",
