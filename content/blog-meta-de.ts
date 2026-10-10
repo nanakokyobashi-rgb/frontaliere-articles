@@ -12917,6 +12917,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.schianto-camerlata-quattro-feriti.title': 'Como, nächtlicher Unfall in Camerlata: 4 Verletzte',
     'blog.article.schianto-camerlata-quattro-feriti.excerpt': 'Der Alarm wurde um 1:35 ausgelöst Absturz auf der Piazzale Camerlata in Como Betroffen waren zwei Mädchen und zwei Jungen Vier Verletzte, die in den gelben Code versetzt wurden Ort →',
     'blog.article.schianto-camerlata-quattro-feriti.imageAlt': 'Nächtlicher Stadtplatz mit Blaulicht und Rettungsfahrzeugen.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.title': 'Fall Gobbi, zwei Polizisten von Entlassung bedroht',
+    'blog.article.agenti-gobbi-rischio-licenziamento.excerpt': 'Zwei der drei Polizisten könnten entlassen werden.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzona und die Kantonspolizei im Fall Gobbi',
 };
 
 export default blogMetaDe;

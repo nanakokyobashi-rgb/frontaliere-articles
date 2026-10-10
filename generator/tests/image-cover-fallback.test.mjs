@@ -263,6 +263,13 @@ test('la pertinenza confronta token esatti e ignora category e imagePrompt boile
   );
 });
 
+test('the mirrored engine closes photo collisions across legacy URL spellings', () => {
+  const engine = fs.readFileSync(path.join(ROOT, 'engine/shared/generatedImageEngine.mjs'), 'utf8');
+  assert.match(engine, /export function canonicalPhotoSourceUrl\(value\)/);
+  assert.match(engine, /function recordSourcePageUrl\(record\)[\s\S]*?return canonicalPhotoSourceUrl\(record\?\.sourcePageUrl \|\| record\?\.pageUrl\)/);
+  assert.match(engine, /const excludedPages = new Set\(\(excludedSourcePageUrls[\s\S]*?\.map\(canonicalPhotoSourceUrl\)/);
+});
+
 test('when the catalog is empty, the governed static cover still publishes and deduplicates the queue', () => {
   const root = tempRoot();
   try {
@@ -292,8 +299,32 @@ test('the generator lets the governed chain reach licensed photos and keeps the 
   const source = fs.readFileSync(path.join(ROOT, 'generator/scripts/create-article.mjs'), 'utf8');
   const engine = fs.readFileSync(path.join(ROOT, 'generator/scripts/lib/article-cover-engine.mjs'), 'utf8');
   assert.doesNotMatch(engine, /maxAttempts:\s*1/);
-  assert.match(engine, /usedRecords: usedArticlePhotoRecords\(root\)/);
+  assert.match(engine, /usedRecords: photoUsage\.records/);
   assert.match(engine, /readCreditRecords\(root\)/);
+  assert.match(engine, /export function legacyPhotoRecordKey\(file, record\)/);
+  assert.match(engine, /legacyPhotoRecordKey\(file, record\)/);
+  assert.match(engine, /const LEGACY_PHOTO_PAGE_RULES/);
+  assert.match(engine, /parsed = new URL\(pageUrl\)/);
+  assert.match(engine, /decodeURIComponent\(parsed\.pathname\)/);
+  assert.match(engine, /normalizedPath/);
+  assert.match(engine, /parsed\.pathname = normalizedPath/);
+  assert.match(engine, /return parsed\.toString\(\)/);
+  assert.match(engine, /export function photoPageUrlVariants\(provider, value\)/);
+  assert.match(engine, /export function photoRecordPageUrlVariants\(record\)/);
+  assert.match(engine, /LICENSED_PHOTO_PROVIDERS/);
+  assert.match(engine, /generated\.push\(\.\.\.aliases\)/);
+  assert.match(engine, /encodedPath/);
+  assert.match(engine, /encodedSuffixPath/);
+  assert.match(engine, /addPathVariants\(rawUrl, rawUrl\.pathname\)/);
+  assert.match(engine, /parsed\.origin !== rule\.origin/);
+  assert.match(engine, /pathPrefixes/);
+  assert.match(engine, /parsed\.search/);
+  assert.match(engine, /parsed\.hash/);
+  assert.doesNotMatch(engine, /legacy-photo:/);
+  assert.match(engine, /record, parseError \} of readCreditRecords\(root\)/);
+  assert.match(engine, /if \(parseError !== null\)/);
+  assert.match(engine, /hasUnmatchableLegacy/);
+  assert.match(engine, /chain: DEFAULT_GENERATION_PROVIDER_CHAIN/);
   assert.match(engine, /topic: articleImageTopic/);
   assert.match(engine, /place: articleImagePlace\(articleData, area\)/);
   assert.match(engine, /keywords: articleImageKeywords/);

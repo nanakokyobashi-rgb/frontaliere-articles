@@ -12920,6 +12920,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.schianto-camerlata-quattro-feriti.title': 'Côme, accident nocturne à Camerlata : 4 blessés',
     'blog.article.schianto-camerlata-quattro-feriti.excerpt': 'L\'alarme a été déclenchée à 1:35 Crash sur la place Camerlata à Como Impliqué deux filles et deux garçons Quatre blessés transférés en code jaune Lieu →',
     'blog.article.schianto-camerlata-quattro-feriti.imageAlt': 'Place urbaine nocturne avec feux d\'urgence et véhicules de secours.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.title': 'Affaire Gobbi, deux agents menacés de licenciement',
+    'blog.article.agenti-gobbi-rischio-licenziamento.excerpt': 'Deux des trois agents risqueraient le licenciement.',
+    'blog.article.agenti-gobbi-rischio-licenziamento.imageAlt': 'Bellinzone et la police cantonale dans l\'affaire Gobbi',
 };
 
 export default blogMetaFr;
