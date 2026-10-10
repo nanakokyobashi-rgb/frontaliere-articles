@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-seco-cambiamenti-istituzionali-2026.webp",
-      "sha256": "ee3a224bc02db9c01fb130995fa676c80ef8f667a81d7ce30666458d2e1a43ce"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-seco-cambiamenti-istituzionali-2026-480w.webp",
-      "sha256": "3bc90f1e1d772686f06ef1bca2f4069de018d141c30c7944a6081c56bc8ec9af"
-    }
-  ]
+  "items": []
 }
