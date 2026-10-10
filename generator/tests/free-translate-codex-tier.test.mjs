@@ -119,6 +119,38 @@ test('il timeout HTTP referenziato risolve una fetch pendente senza handle di re
   }
 });
 
+test('il timeout HTTP referenziato resta attivo durante la lettura del body', async () => {
+  const previousFetch = globalThis.fetch;
+  try {
+    for (const reader of ['json', 'text']) {
+      globalThis.fetch = async (_url, { signal }) => ({
+        ok: true,
+        status: 200,
+        [reader]: () => new Promise((_resolve, reject) => {
+          const onAbort = () => reject(new Error(`body ${reader} aborted by test`));
+          if (signal.aborted) onAbort();
+          else signal.addEventListener('abort', onAbort, { once: true });
+        }),
+      });
+      let guard;
+      try {
+        const response = await fetchWithRefTimeout('https://stalled-body.invalid', {}, 10);
+        const guardPromise = new Promise((_, reject) => {
+          guard = setTimeout(() => reject(new Error(`body ${reader} guard expired`)), 100);
+        });
+        await assert.rejects(
+          Promise.race([response[reader](), guardPromise]),
+          new RegExp(`body ${reader} aborted by test`),
+        );
+      } finally {
+        clearTimeout(guard);
+      }
+    }
+  } finally {
+    globalThis.fetch = previousFetch;
+  }
+});
+
 /** Suffisso dei marcatori della chiamata, letto dal messaggio utente. */
 function markerOf(messages) {
   return /^BEGIN_TEXT_([A-Z0-9]{8})\n/.exec(messages.find((m) => m.role === 'user').content)?.[1];

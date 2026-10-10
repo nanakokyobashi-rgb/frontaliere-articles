@@ -171,6 +171,47 @@ const GOOGLE_TRANSLATE_ENDPOINTS = [
   'https://clients5.google.com/translate_a/t',
 ];
 const TIMEOUT_MS = 15000;
+const RESPONSE_BODY_READERS = ['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text'];
+
+function keepTimeoutUntilResponseBodyConsumed(response, cleanup) {
+  if (!response || (typeof response !== 'object' && typeof response !== 'function')) {
+    cleanup();
+    return response;
+  }
+
+  const readers = new Map();
+  for (const name of RESPONSE_BODY_READERS) {
+    const read = response[name];
+    if (typeof read !== 'function') continue;
+    readers.set(name, async (...args) => {
+      try {
+        return await read.apply(response, args);
+      } finally {
+        cleanup();
+      }
+    });
+  }
+  if (readers.size === 0) {
+    cleanup();
+    return response;
+  }
+
+  return new Proxy(response, {
+    get(target, property, receiver) {
+      return readers.get(property) || Reflect.get(target, property, receiver);
+    },
+  });
+}
+
+async function discardResponseBody(response) {
+  const reader = ['text', ...RESPONSE_BODY_READERS].find((name) => typeof response?.[name] === 'function');
+  if (!reader) return;
+  try {
+    await response[reader]();
+  } catch {
+    // The wrapper's cleanup runs for both a completed and an aborted body read.
+  }
+}
 
 /**
  * Fetch with a timeout whose timer keeps the Node process alive.
@@ -185,10 +226,25 @@ const TIMEOUT_MS = 15000;
 export async function fetchWithRefTimeout(url, options = {}, timeoutMs = TIMEOUT_MS) {
   const { signal: upstreamSignal, ...requestOptions } = options;
   const controller = new AbortController();
-  const timer = setTimeout(() => {
-    controller.abort(new DOMException('The operation timed out', 'TimeoutError'));
+  let timer;
+  let cleanedUp = false;
+  const cleanup = () => {
+    if (cleanedUp) return;
+    cleanedUp = true;
+    if (timer !== undefined) clearTimeout(timer);
+    upstreamSignal?.removeEventListener('abort', forwardAbort);
+  };
+  const forwardAbort = () => {
+    controller.abort(upstreamSignal.reason);
+    cleanup();
+  };
+  timer = setTimeout(() => {
+    try {
+      controller.abort(new DOMException('The operation timed out', 'TimeoutError'));
+    } finally {
+      cleanup();
+    }
   }, timeoutMs);
-  const forwardAbort = () => controller.abort(upstreamSignal.reason);
 
   if (upstreamSignal) {
     if (upstreamSignal.aborted) {
@@ -199,10 +255,11 @@ export async function fetchWithRefTimeout(url, options = {}, timeoutMs = TIMEOUT
   }
 
   try {
-    return await fetch(url, { ...requestOptions, signal: controller.signal });
-  } finally {
-    clearTimeout(timer);
-    upstreamSignal?.removeEventListener('abort', forwardAbort);
+    const response = await fetch(url, { ...requestOptions, signal: controller.signal });
+    return keepTimeoutUntilResponseBodyConsumed(response, cleanup);
+  } catch (error) {
+    cleanup();
+    throw error;
   }
 }
 
@@ -1358,10 +1415,12 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
         body: body.toString(),
       }, TIMEOUT_MS);
       if (res.status === 456) {
+        await discardResponseBody(res);
         // Real monthly quota exhausted → mark key exhausted for the run.
         throw Object.assign(new Error('DeepL 456'), { quotaExhausted: true });
       }
       if (res.status === 429) {
+        await discardResponseBody(res);
         _deepl429TotalCount++;
         if (_deepl429TotalCount >= DEEPL_429_CB_THRESHOLD) {
           // Sustained rate-limit: set the global flag so every subsequent chunk and
@@ -1381,7 +1440,10 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
       }
       break;
     }
-    if (!res.ok) return '';
+    if (!res.ok) {
+      await discardResponseBody(res);
+      return '';
+    }
     const data = await res.json();
     const t = data?.translations?.[0]?.text || '';
     if (!t) return '';
@@ -1470,6 +1532,7 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
         },
       }, TIMEOUT_MS);
       if (!res.ok) {
+        await discardResponseBody(res);
         noteTranslationOutcome(outcome, 'errors');
         continue;
       }
@@ -1627,7 +1690,10 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
       },
       TIMEOUT_MS,
     );
-    if (!res.ok) return '';
+    if (!res.ok) {
+      await discardResponseBody(res);
+      return '';
+    }
     const data = await res.json();
     const translated = normalizeProviderBlock(data?.translation || '');
     // Dentro `raceInstances`: se questa istanza rende l'eco NON deve vincere la
@@ -1653,7 +1719,10 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
       headers: { 'User-Agent': 'FrontaliereTicino/1.0' },
       signal,
     }, TIMEOUT_MS);
-    if (!res.ok) return '';
+    if (!res.ok) {
+      await discardResponseBody(res);
+      return '';
+    }
     const data = await res.json();
     const translated = normalizeProviderBlock(data?.translated_text || '');
     return acceptedRaceAnswer('simplyTranslate', q, translated, attemptOutcome);
@@ -1676,6 +1745,7 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
       body: JSON.stringify({ q, source: sourceLang || 'auto', target: targetLang, format: 'text' }),
     }, timeout);
     if (!res.ok) {
+      await discardResponseBody(res);
       noteTranslationOutcome(outcome, 'errors');
       console.warn(`⚠️  LibreTranslate self-hosted: HTTP ${res.status}`);
       return '';
@@ -1710,7 +1780,10 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
       body: JSON.stringify({ q, source: sourceLang || 'auto', target: targetLang, format: 'text' }),
       signal,
     }, 20000);
-    if (!res.ok) return '';
+    if (!res.ok) {
+      await discardResponseBody(res);
+      return '';
+    }
     const data = await res.json();
     const translated = normalizeProviderBlock(data?.translatedText || '');
     return acceptedRaceAnswer('libreTranslate', q, translated, attemptOutcome);
@@ -1733,7 +1806,10 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
       headers: { 'User-Agent': 'FrontaliereTicino/1.0' },
       signal,
     }, TIMEOUT_MS);
-    if (!res.ok) return '';
+    if (!res.ok) {
+      await discardResponseBody(res);
+      return '';
+    }
     const data = await res.json();
     // Mozhi uses 'translated-text' (hyphenated) in its response
     const translated = normalizeProviderBlock(data?.['translated-text'] || data?.translated_text || '');
@@ -1803,6 +1879,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
           throw Object.assign(new Error('Azure auth'), { quotaExhausted: true });
         }
         if (res.status === 429) {
+          await discardResponseBody(res);
           _azureExhaustedKeys.add(key);
           _cascadeStats.tierErrors.azure = (_cascadeStats.tierErrors.azure || 0) + 1;
           noteTranslationOutcome(outcome, 'errors');
@@ -2727,6 +2804,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       const refusal = res.status === 403 && typeof res.text === 'function'
         ? await res.text().catch(() => '')
         : '';
+      if (res.status !== 403) await discardResponseBody(res);
       const quota = res.status === 429 || GOOGLE_CLOUD_QUOTA_REFUSAL.test(refusal);
       _noteGoogleCloudFailure(`HTTP ${res.status}${quota && res.status === 403 ? ' quota' : ''}`);
       if (quota) _noteGoogleCloudQuotaRefusal();
@@ -2734,6 +2812,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       return ''; // quota exceeded, or API/scope not enabled for this token
     }
     if (!res.ok) {
+      await discardResponseBody(res);
       _noteGoogleCloudFailure(`HTTP ${res.status}`);
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
@@ -2782,6 +2861,7 @@ async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = 
       body: JSON.stringify({ inputs: truncated }),
     }, TIMEOUT_MS);
     if (!res.ok) {
+      await discardResponseBody(res);
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
     }
