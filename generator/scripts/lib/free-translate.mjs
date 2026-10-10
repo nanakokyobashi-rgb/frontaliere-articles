@@ -2712,7 +2712,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       res = await request(token);
     }
     if (res.status === 401 || res.status === 403 || res.status === 429) {
-      const refusal = (res.status === 403 || res.status === 429) && typeof res.text === 'function'
+      const refusal = typeof res.text === 'function'
         ? await res.text().catch(() => '')
         : '';
       const quota = res.status === 429 || GOOGLE_CLOUD_QUOTA_REFUSAL.test(refusal);

@@ -14,14 +14,18 @@ export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
 function withBodyDeadline(response, cleanup) {
   return new Proxy(response, {
-    get(target, property, receiver) {
-      if (BODY_METHODS.has(property)) {
-        const method = Reflect.get(target, property, target);
-        if (typeof method === 'function') {
-          return (...args) => Promise.resolve(method.apply(target, args)).finally(cleanup);
-        }
+    get(target, property) {
+      const value = Reflect.get(target, property, target);
+      if (BODY_METHODS.has(property) && typeof value === 'function') {
+        return (...args) => Promise.resolve()
+          .then(() => value.apply(target, args))
+          .finally(cleanup);
       }
-      return Reflect.get(target, property, receiver);
+      // Response methods such as clone() are brand-checked too. Returning a
+      // native method unbound would make `proxy.clone()` pass the proxy as
+      // `this`, so bind every other method to the real response as well.
+      if (typeof value === 'function') return value.bind(target);
+      return value;
     },
   });
 }

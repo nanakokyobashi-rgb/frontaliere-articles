@@ -179,6 +179,98 @@ test('fetchWithRefTimeout mantiene il timeout attivo durante la lettura del body
   }
 });
 
+test('fetchWithRefTimeout conserva il brand di Response per proprietà, clone e body reader', async () => {
+  const originalFetch = globalThis.fetch;
+  try {
+    globalThis.fetch = async () => new Response('{"ok":true}', {
+      status: 200,
+      headers: { 'x-test': 'yes' },
+    });
+    const response = await fetchWithRefTimeout('https://example.test', {}, 100);
+    assert.equal(response.ok, true);
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('x-test'), 'yes');
+    assert.equal(await response.clone().text(), '{"ok":true}');
+    assert.deepEqual(await response.json(), { ok: true });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('fetchWithRefTimeout rimuove il timer anche se il reader lancia sincrono', async () => {
+  const originalFetch = globalThis.fetch;
+  let requestSignal;
+  try {
+    globalThis.fetch = async (_url, { signal }) => {
+      requestSignal = signal;
+      return {
+        body: {},
+        json() {
+          throw new Error('body parse failed');
+        },
+      };
+    };
+    const response = await fetchWithRefTimeout('https://example.test', {}, 20);
+    await assert.rejects(response.json(), /body parse failed/);
+    await new Promise((resolve) => setTimeout(resolve, 40));
+    assert.equal(requestSignal.aborted, false);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test('Google Cloud 401 consuma il body prima di proseguire la cascata', async () => {
+  const originalFetch = globalThis.fetch;
+  const envKeys = [
+    'GSC_CLIENT_ID',
+    'GSC_CLIENT_SECRET',
+    'GSC_REFRESH_TOKEN',
+    'GOOGLE_APPLICATION_CREDENTIALS',
+  ];
+  const previousEnv = new Map(envKeys.map((key) => [key, process.env[key]]));
+  let bodyRead = false;
+  try {
+    process.env.GSC_CLIENT_ID = 'test-client';
+    process.env.GSC_CLIENT_SECRET = 'test-client-secret';
+    process.env.GSC_REFRESH_TOKEN = 'test-refresh-token';
+    process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(ROOT, '.missing-google-credentials-test.json');
+    globalThis.fetch = async (url) => {
+      const requestUrl = String(url);
+      if (requestUrl.includes('oauth2.googleapis.com/token')) {
+        return {
+          body: null,
+          ok: true,
+          status: 200,
+          json: async () => ({ access_token: 'test-access-token', expires_in: 3600 }),
+        };
+      }
+      if (requestUrl.includes('translation.googleapis.com/language/translate/v2')) {
+        return {
+          body: {},
+          ok: false,
+          status: 401,
+          text: async () => {
+            bodyRead = true;
+            return 'unauthorized';
+          },
+        };
+      }
+      throw new Error(`unexpected test URL: ${requestUrl}`);
+    };
+
+    const { translateWithGoogleCloud } = await import('../scripts/lib/free-translate.mjs?google-401-body-test');
+    assert.equal(await translateWithGoogleCloud('testo', 'it', 'en'), '');
+    assert.equal(bodyRead, true);
+  } finally {
+    globalThis.fetch = originalFetch;
+    for (const key of envKeys) {
+      const value = previousEnv.get(key);
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
+});
+
 // #247: un `fetch()` rifiutato senza Abort/TimeoutError — cioè un fallimento
 // di rete nudo (DNS, TLS, connection reset: un `TypeError: fetch failed`
 // senza status) — veniva ri-lanciato subito invece di rientrare nel retry
