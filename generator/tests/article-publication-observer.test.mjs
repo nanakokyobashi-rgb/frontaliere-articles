@@ -177,6 +177,7 @@ test('un fetch bloccato viene abortito entro il timeout per richiesta', async ()
     minIntervalMs: 0,
     fetchTimeoutMs: 10,
     scanTimeoutMs: 100,
+    clock: () => 0,
     fetchImpl: async (_url, options) => {
       options.signal.addEventListener('abort', () => { aborted = true; });
       return new Promise(() => {});
