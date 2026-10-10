@@ -5952,6 +5952,16 @@
         "corpus": null,
         "alignedAt": "2026-10-07"
       }
+    },
+    {
+      "path": "generator/scripts/lib/seo-description-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Sorgente unica del floor SEO di 80 caratteri e del controllo fail-closed usati dai writer del generatore per impedire descrizioni troppo brevi prima della scrittura. Il sito consuma il corpus via JSON HTTP e non esegue questo modulo, quindi non esiste un gemello operativo da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-10"
+      }
     }
   ]
 }
