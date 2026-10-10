@@ -101546,6 +101546,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tirocinio-uri-guida-pratica': {
+    title: 'Apprendistato e formazione professionale Canton Uri',
+    description: 'Guida all\'apprendistato nel Cantone di Uri: come cercare un tirocinio, leggere il contratto, valutare salario, contributi e maturità professionale in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, apprendistato, formazione, professionale, canton',
+    ogTitle: 'Apprendistato e formazione professionale Uri',
+    ogDescription: 'Dal posto di tirocinio al contratto: la guida spiega come leggere la retribuzione di un apprendista in Svizzera, distinguere contributi, imposte e premi LAMal e orientarsi sulla maturità professionale nel Cantone di Uri.',
+    canonicalPath: '/articoli-svizzera/tirocinio-uri-guida-pratica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Apprendistato e formazione professionale Canton Uri",
+      "description": "Guida all'apprendistato nel Cantone di Uri: come cercare un tirocinio, leggere il contratto, valutare salario, contributi e maturità professionale in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Apprendista in aula durante una lezione di formazione professionale in Svizzera"
+      },
+      "datePublished": "2026-10-10T15:20:37+00:00",
+      "dateModified": "2026-10-10T15:20:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tirocinio-uri-guida-pratica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

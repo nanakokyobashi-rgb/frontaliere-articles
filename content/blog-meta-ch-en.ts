@@ -8051,6 +8051,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.disagi-treni-vaud-eclepens.title': 'Railway: disruptions continue between Yverdon and Lausanne',
     'blog.article.disagi-treni-vaud-eclepens.excerpt': 'The Yverdon-les-Bains-Lausanne line remains disrupted Two long-distance trains per hour, with delays Regional trains and Geneva airport: buses Problems',
     'blog.article.disagi-treni-vaud-eclepens.imageAlt': 'Swiss railway tracks with a replacement bus near a station.',
+    'blog.article.tirocinio-uri-guida-pratica.title': 'Apprenticeships and vocational training Canton of Uri',
+    'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Guide to internships in the Canton of Uri: contract, salary, 5,3% AVS/AI/IPG, maximum working hours and vocational baccalaureate.',
+    'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Apprentice in a classroom during vocational training in Switzerland',
 };
 
 export default blogMetaChEn;
