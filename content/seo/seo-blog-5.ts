@@ -105177,6 +105177,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ambri-piotta-berna-abols': {
+    title: 'Ambrì Piotta beffato all\'overtime dalla rete di Abols',
+    description: 'Ambrì Piotta sconfitto 2-1 dal Berna all\'overtime Joly porta avanti i biancoblù in 5 contro 3 Quarta sconfitta consecutiva interna per l\'Ambrì Abols firma',
+    keywords: 'frontalieri, ticino, svizzera, italia, ambrì, piotta, beffato, overtime',
+    ogTitle: 'Ambrì Piotta beffato all\'overtime dalla rete di Abols',
+    ogDescription: 'Ambrì Piotta sconfitto 2-1 dal Berna all\'overtime Joly porta avanti i biancoblù in 5 contro 3 Quarta sconfitta consecutiva interna per l\'Ambrì Abols firma',
+    canonicalPath: '/articoli-frontaliere/ambri-piotta-berna-abols/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ambrì Piotta beffato all'overtime dalla rete di Abols",
+      "description": "Ambrì Piotta sconfitto 2-1 dal Berna all'overtime Joly porta avanti i biancoblù in 5 contro 3 Quarta sconfitta consecutiva interna per l'Ambrì Abols firma",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita dell'Ambrì Piotta alla Gottardo Arena contro il Berna"
+      },
+      "datePublished": "2026-10-10T22:02:49+00:00",
+      "dateModified": "2026-10-10T22:02:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ambri-piotta-berna-abols/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

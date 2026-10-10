@@ -40,6 +40,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-10T20:58:56.060Z",
       "lastFailureAt": "2026-10-10T21:39:39.012Z"
+    },
+    {
+      "articleId": "ambri-piotta-berna-abols",
+      "title": "Ambrì Piotta beffato all'overtime dalla rete di Abols",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-ambri-piotta-berna-abols: openai-codex (vision gate rejected image: Original generic hockey illustration with no text or logos; foreground pl",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T22:02:50.053Z",
+      "lastFailureAt": "2026-10-10T22:02:50.053Z"
     }
   ]
 }
