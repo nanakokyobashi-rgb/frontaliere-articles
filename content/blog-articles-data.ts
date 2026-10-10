@@ -43554,6 +43554,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'schianto-camerlata-quattro-feriti',
+ category: 'novita',
+ date: '2026-10-10T07:25:28.334Z',
+ image: '/images/blog/article-schianto-camerlata-quattro-feriti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
