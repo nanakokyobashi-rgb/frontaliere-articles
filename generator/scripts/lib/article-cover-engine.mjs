@@ -60,9 +60,10 @@ function providerPageUrl(provider, value) {
   if (!pageUrl) return null;
 
   let parsed;
+  let normalizedPath;
   try {
     parsed = new URL(pageUrl);
-    decodeURIComponent(parsed.pathname);
+    normalizedPath = decodeURIComponent(parsed.pathname).replace(/\/+$/u, '');
   } catch {
     return null;
   }
@@ -79,12 +80,16 @@ function providerPageUrl(provider, value) {
     return null;
   }
 
-  const path = parsed.pathname.toLowerCase();
+  if (!normalizedPath) return null;
+  const path = normalizedPath.toLowerCase();
   const prefix = rule.pathPrefixes.find((candidate) => path.startsWith(candidate.toLowerCase()));
   if (!prefix) return null;
-  const suffix = parsed.pathname.slice(prefix.length);
+  const suffix = normalizedPath.slice(prefix.length);
   if (!suffix || /^\/+$/u.test(suffix)) return null;
-  return pageUrl;
+  // URL serialization gives the collision gate one key for equivalent host,
+  // percent-encoding, and trailing-slash spellings on both sides.
+  parsed.pathname = normalizedPath;
+  return parsed.toString();
 }
 
 export function legacyPhotoRecordKey(file, record) {
@@ -100,7 +105,13 @@ function usedArticlePhotoRecords(root) {
   const generated = readGeneratedImageRecords(root);
   const legacy = [];
   let hasUnmatchableLegacy = false;
-  for (const { file, record } of readCreditRecords(root)) {
+  for (const { file, record, parseError } of readCreditRecords(root)) {
+    if (parseError !== null) {
+      // A corrupt credit file may be a legacy photo whose source identity is
+      // unavailable. Force the generative-only chain before trying photos.
+      hasUnmatchableLegacy = true;
+      continue;
+    }
     const isPhotoRecord = record?.source === 'licensed-photo' || record?.source === 'wikimedia-commons';
     if (!isPhotoRecord) continue;
     const sourcePageUrl = legacyPhotoRecordKey(file, record);
