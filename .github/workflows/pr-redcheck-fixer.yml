@@ -683,6 +683,7 @@ jobs:
         if: steps.claim.outputs.claim_allowed == 'true' && steps.quota_lease.outputs.lease_allowed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MARKER_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TRUSTED_GH_BIN: ${{ steps.trusted_gh.outputs.path }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
@@ -879,7 +880,7 @@ jobs:
           # Il marker del round si posta PRIMA di invocare Claude: se la run
           # muore, il round e' comunque contato e l'anti-loop tiene.
           marker_message=$(printf '_❌-check-fixer round %s/%s avviato (auto)._' "$NEXT" "$MAX_ROUNDS")
-          if ! marker_result=$(node "${{ steps.trusted_marker.outputs.path }}" \
+          if ! marker_result=$(GH_TOKEN="$MARKER_GH_TOKEN" node "${{ steps.trusted_marker.outputs.path }}" \
             --repo "$REPO" \
             --pr "$PR_NUMBER" \
             --marker REDCHECK_FIX_ROUND \
