@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1943663/svizzera-clausola-mfn-difficolta-interpharma": "interpharma-clausola-mfn-difficolta",
   "https://unia.ch/it/salari-ccl/contratto-collettivo-di-lavoro": "contratto-collettivo-lavoro-svizzera",
   "https://cassa-disoccupazione.unia.ch": "frontalieri-cassa-disoccupazione",
   "https://unia.ch/it/salari-ccl/calcolatore-salariale": "strumenti-controllo-salari-ticino",
@@ -2304,6 +2303,11 @@
   "https://www.ticinonews.ch/ticino/frana-a-sementina-disagi-al-traffico-444309": {
     "articleId": "frana-sementina-h13-gudo",
     "ts": "2026-10-10T02:19:32.017Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/lavori-di-sistemazione-sui-versanti-al-sacro-monte-scatta-il-senso-unico-alternato/2703262": {
+    "articleId": "viabilita-sacro-monte-varese",
+    "ts": "2026-10-10T03:14:55.471Z",
     "keyForm": 2
   }
 }
