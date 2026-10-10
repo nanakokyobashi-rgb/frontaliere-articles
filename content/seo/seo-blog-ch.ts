@@ -101580,6 +101580,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-treni-vd-ritorno-normale': {
+    title: 'Ferrovia Yverdon-Losanna: ritorno alle 05.40 | Frontaliere Ticino',
+    description: 'Tra Yverdon-les-Bains e Losanna si torna alla normalità alle 05.40 Oggi due treni a lunga percorrenza l\'ora, con forti rallentamenti Il traffico regionale è',
+    keywords: 'frontalieri, ticino, svizzera, italia, ferrovia, yverdon-losanna, ritorno, alle',
+    ogTitle: 'Tratta Yverdon-Losanna: servizio normale',
+    ogDescription: 'Tra Yverdon-les-Bains e Losanna si torna alla normalità alle 05.40 Oggi due treni a lunga percorrenza l\'ora, con forti rallentamenti Il traffico regionale è',
+    canonicalPath: '/articoli-svizzera/treni-vd-ritorno-normale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ferrovia Yverdon-Losanna: ritorno alle 05.40",
+      "description": "Tra Yverdon-les-Bains e Losanna si torna alla normalità alle 05.40 Oggi due treni a lunga percorrenza l'ora, con forti rallentamenti Il traffico regionale è",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-treni-vd-ritorno-normale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno svizzero su una linea ferroviaria del Canton Vaud"
+      },
+      "datePublished": "2026-10-10T17:52:43+00:00",
+      "dateModified": "2026-10-10T17:52:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/treni-vd-ritorno-normale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -2707,6 +2707,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'amsa-bus-elettrici-mendrisiotto': { it: 'amsa-bus-elettrici-mendrisiotto', en: 'amsa-electric-buses-mendrisiotto', de: 'amsa-elektrobusse-mendrisiotto', fr: 'bus-electriques-amsa-mendrisiotto' },
  'disagi-treni-vaud-eclepens': { it: 'disagi-treni-vaud-eclepens', en: 'rail-delays-vaud-eclepens', de: 'bahnstoerung-waadt-eclepens', fr: 'retards-trains-vaud-eclepens' },
  'tirocinio-uri-guida-pratica': { it: 'tirocinio-uri-guida-pratica', en: 'uri-apprenticeship-practical-guide', de: 'berufslehre-uri-praxisleitfaden', fr: 'apprentissage-uri-guide-pratique' },
+ 'treni-vd-ritorno-normale': { it: 'treni-vd-ritorno-normale', en: 'vd-trains-normal-service', de: 'vd-zugverkehr-wieder-normal', fr: 'trains-vd-retour-normal' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

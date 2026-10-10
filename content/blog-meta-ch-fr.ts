@@ -8054,6 +8054,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tirocinio-uri-guida-pratica.title': 'Apprentissage et formation professionnelle dans le canton d’Uri',
     'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Guide de l’apprentissage dans le canton d’Uri : contrat, salaire, 5,3% AVS/AI/APG, horaires maximaux et maturité professionnelle.',
     'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Apprenti en classe pendant une formation professionnelle en Suisse',
+    'blog.article.treni-vd-ritorno-normale.title': 'Ligne ferroviaire Yverdon-Lausanne : retour à la normale à 05.40',
+    'blog.article.treni-vd-ritorno-normale.excerpt': 'Entre Yverdon-les-Bains et Lausanne retour à la normale à 05.40 Aujourd’hui deux trains longue distance par heure avec de forts ralentissements Le trafic régional est',
+    'blog.article.treni-vd-ritorno-normale.imageAlt': 'Train suisse sur une ligne ferroviaire dans le canton de Vaud',
 };
 
 export default blogMetaChFr;

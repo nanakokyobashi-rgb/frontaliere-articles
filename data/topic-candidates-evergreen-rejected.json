@@ -797,30 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/caro-affitti-foletti-a-lugano-gli-alloggi-accessibili-sono-superiori-alla-domanda-444245": {
-      "section": "frontaliere",
-      "ts": 1791479844180
-    },
-    "frontaliere::https://comozero.it/attualita/la-super-autostrada-della-lombardia-a-che-punto-e-il-cantiere-cosa-e-successo-dopo-gli-allagamenti": {
-      "section": "frontaliere",
-      "ts": 1791479881983
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/nuovo-ospedale-bretella-di-gallarate-e-trasporto-pubblico-il-pd-di-busto-arsizio-chiede-chiarimenti-sul-piano-della-mobilita/2702584": {
-      "section": "frontaliere",
-      "ts": 1791479916005
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/salute-3/articolo/luoghi-di-lavoro-che-promuovono-salute-comune-di-varese-confindustria-varese-asst-sette-laghi-e-a.html": {
-      "section": "frontaliere",
-      "ts": 1791479937323
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/crisi-beko-il-presidente-magrini-dopo-il-tavolo-a-roma-risposte-insufficienti-servono-investimenti-realizzati-vendite-e-lavoro/2702620": {
-      "section": "frontaliere",
-      "ts": 1791479988690
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1955637/marchesi-dipartimento-stato-bertoli-personale-direttore-territorio": {
-      "section": "frontaliere",
-      "ts": 1791480032678
-    },
     "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1954858/a-sementina-preoccupano-viabilita-e-posteggi": {
       "section": "frontaliere",
       "ts": 1791482535018
@@ -1108,6 +1084,26 @@
     "frontaliere::https://comozero.it/attualita/elezioni-2027-avs-una-citta-piu-verde-e-sociale-e-un-sindaco-proveniente-dal-mondo-ambientalista": {
       "section": "frontaliere",
       "ts": 1791650877023
+    },
+    "svizzera::https://www.swissinfo.ch/ita/manifestazioni-per-gaza-in-diverse-citt%c3%a0-svizzere/92197474": {
+      "section": "svizzera",
+      "ts": 1791654076574
+    },
+    "svizzera::https://www.rsi.ch/s/4150643": {
+      "section": "svizzera",
+      "ts": 1791654101951
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1955960/alberi-iniziativa-bambini-adorna-vita-albero-centro-bambino-ogni": {
+      "section": "svizzera",
+      "ts": 1791654113879
+    },
+    "svizzera::https://www.rsi.ch/s/4150523": {
+      "section": "svizzera",
+      "ts": 1791654132363
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955992/ffs-traffico-losanna-normalita-yverdon": {
+      "section": "svizzera",
+      "ts": 1791654213910
     }
   }
 }

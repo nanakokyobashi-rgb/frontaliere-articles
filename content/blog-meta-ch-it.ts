@@ -8054,6 +8054,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tirocinio-uri-guida-pratica.title': 'Apprendistato e formazione professionale Canton Uri',
     'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Guida al tirocinio nel Cantone di Uri: contratto, salario, 5,3% AVS/AI/IPG, orari massimi e maturità professionale.',
     'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Apprendista in aula durante una lezione di formazione professionale in Svizzera',
+    'blog.article.treni-vd-ritorno-normale.title': 'Ferrovia Yverdon-Losanna: ritorno alle 05.40',
+    'blog.article.treni-vd-ritorno-normale.excerpt': 'Tra Yverdon-les-Bains e Losanna si torna alla normalità alle 05.40 Oggi due treni a lunga percorrenza l\'ora, con forti rallentamenti Il traffico regionale è',
+    'blog.article.treni-vd-ritorno-normale.imageAlt': 'Treno svizzero su una linea ferroviaria del Canton Vaud',
 };
 
 export default blogMetaChIt;

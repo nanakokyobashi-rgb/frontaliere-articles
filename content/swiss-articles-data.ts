@@ -26868,6 +26868,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'treni-vd-ritorno-normale',
+    category: 'novita',
+    date: '2026-10-10T17:52:43.456Z',
+    image: '/images/blog/article-treni-vd-ritorno-normale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['VD'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

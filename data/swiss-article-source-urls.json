@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948472/melide-igor": {
-    "articleId": "melide-riqualifica-centro",
-    "ts": "2026-09-07T12:45:00.187Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/festival-zurigo%3a-alla-svizzera-luna-wedler-il-golden-eye-award/92016935": {
     "articleId": "luna-wedler-golden-eye-award-zurigo",
     "ts": "2026-09-07T13:05:52.037Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/vd%3a-ferrovia%2c-ancora-disagi-tra-yverdon-e-losanna/92196903": {
     "articleId": "disagi-treni-vaud-eclepens",
     "ts": "2026-10-10T13:48:29.065Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/vd%3a-ferrovia-yverdon-losanna%2c-da-domani-ritorno-alla-normalit%c3%a0/92196903": {
+    "articleId": "treni-vd-ritorno-normale",
+    "ts": "2026-10-10T17:52:43.849Z",
     "keyForm": 2
   }
 }

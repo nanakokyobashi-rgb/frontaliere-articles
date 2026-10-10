@@ -8054,6 +8054,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tirocinio-uri-guida-pratica.title': 'Apprenticeships and vocational training Canton of Uri',
     'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Guide to internships in the Canton of Uri: contract, salary, 5,3% AVS/AI/IPG, maximum working hours and vocational baccalaureate.',
     'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Apprentice in a classroom during vocational training in Switzerland',
+    'blog.article.treni-vd-ritorno-normale.title': 'Yverdon-Lausanne railway: return at 05.40',
+    'blog.article.treni-vd-ritorno-normale.excerpt': 'Between Yverdon-les-Bains and Lausanne, service returns to normal at 05.40 Today, two long-distance trains per hour, with major delays Regional traffic is',
+    'blog.article.treni-vd-ritorno-normale.imageAlt': 'Swiss train on a railway line in Vaud',
 };
 
 export default blogMetaChEn;

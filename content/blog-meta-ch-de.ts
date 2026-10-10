@@ -8054,6 +8054,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tirocinio-uri-guida-pratica.title': 'Lehre und Berufsbildung im Kanton Uri',
     'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Leitfaden zur Lehre im Kanton Uri: Vertrag, Lohn, 5,3% AHV/IV/EO, Höchstarbeitszeiten und Berufsmaturität.',
     'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Lernende Person im Unterricht der Berufsbildung in der Schweiz',
+    'blog.article.treni-vd-ritorno-normale.title': 'Bahnstrecke Yverdon-Lausanne: Rückkehr zum Normalbetrieb um 05.40 Uhr',
+    'blog.article.treni-vd-ritorno-normale.excerpt': 'Zwischen Yverdon-les-Bains und Lausanne kehrt um 05.40 Uhr der Normalbetrieb zurück Heute zwei Fernverkehrszüge pro Stunde, mit starken Verspätungen Der Regionalverkehr ist',
+    'blog.article.treni-vd-ritorno-normale.imageAlt': 'Schweizer Zug auf einer Bahnstrecke im Kanton Waadt',
 };
 
 export default blogMetaChDe;
