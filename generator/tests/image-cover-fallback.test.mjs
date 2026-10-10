@@ -294,6 +294,9 @@ test('the generator lets the governed chain reach licensed photos and keeps the 
   assert.doesNotMatch(engine, /maxAttempts:\s*1/);
   assert.match(engine, /usedRecords: usedArticlePhotoRecords\(root\)/);
   assert.match(engine, /readCreditRecords\(root\)/);
+  assert.match(engine, /export function legacyPhotoRecordKey\(file, record\)/);
+  assert.match(engine, /legacyPhotoRecordKey\(file, record\)/);
+  assert.match(engine, /legacy-photo:/);
   assert.match(engine, /topic: articleImageTopic/);
   assert.match(engine, /place: articleImagePlace\(articleData, area\)/);
   assert.match(engine, /keywords: articleImageKeywords/);

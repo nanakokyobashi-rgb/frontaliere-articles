@@ -23,17 +23,45 @@ export {
   articleImageKeywords,
 } from './article-cover-identity.mjs';
 
+/**
+ * Return the identity used by the photo engine for one legacy credit record.
+ *
+ * Older, readable ledgers can lack the source page URL even though they still
+ * identify the cover through their source metadata (or at least through the
+ * cover/file entry). Do not drop those records from `usedRecords`: an opaque
+ * fallback is still a stable local identity and keeps the missing provenance
+ * visible to the same deduplication path as URL-backed records.
+ */
+export function legacyPhotoRecordKey(file, record) {
+  const source = record?.source === 'licensed-photo'
+    ? record.photo
+    : record?.source === 'wikimedia-commons'
+      ? record.commons
+      : null;
+  if (!source) return null;
+
+  const pageUrl = String(source.pageUrl || '').trim();
+  if (pageUrl) return pageUrl;
+
+  const fallback = {
+    source: String(record.source || '').trim(),
+    provider: String(source.provider || '').trim(),
+    title: String(source.title || '').trim(),
+    cover: String(record.cover || '').trim(),
+    file: String(file || '').trim(),
+  };
+  return Object.values(fallback).some(Boolean)
+    ? `legacy-photo:${JSON.stringify(fallback)}`
+    : null;
+}
+
 function usedArticlePhotoRecords(root) {
   const generated = readGeneratedImageRecords(root);
   const legacy = readCreditRecords(root)
     .map(({ file, record }) => {
-      const pageUrl = record?.source === 'licensed-photo'
-        ? record.photo?.pageUrl
-        : record?.source === 'wikimedia-commons'
-          ? record.commons?.pageUrl
-          : null;
-      return pageUrl
-        ? { scope: 'article-hero', assetId: `legacy-credit-${file}`, sourcePageUrl: pageUrl }
+      const sourcePageUrl = legacyPhotoRecordKey(file, record);
+      return sourcePageUrl
+        ? { scope: 'article-hero', assetId: `legacy-credit-${file}`, sourcePageUrl }
         : null;
     })
     .filter(Boolean);
