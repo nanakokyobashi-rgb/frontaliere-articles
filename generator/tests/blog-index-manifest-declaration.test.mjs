@@ -169,6 +169,10 @@ test('build-blog-index valida tutte le sezioni prima di scrivere qualsiasi shard
       join(root, 'generator/data/canton-sections.json'),
       readFileSync(resolve(ROOT, 'generator/data/canton-sections.json'), 'utf8'),
     );
+    writeFileSync(
+      join(root, 'generator/data/localized-toponyms.json'),
+      readFileSync(resolve(ROOT, 'generator/data/localized-toponyms.json'), 'utf8'),
+    );
     mkdirSync(join(root, 'content/blog-body/it'), { recursive: true });
     writeFileSync(join(root, 'content/blog-body/it/one.ts'), 'export const one = true;\n');
     writeFileSync(
