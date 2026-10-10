@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 316,
+  "assetCount": 317,
   "assets": [
     {
       "schema": 1,
@@ -11866,6 +11866,24 @@
         "is_topic_relevant": true,
         "notes": "Original generic illustration of a modern electric bus in a Swiss/Ticino-style village setting; no people, text, logos, or identifiable event."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-10",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "07816d3c3330ed09908d25f440812a5f678c63a3d1ef2c9677d8895e2f59b205",
+      "bytes": 26670,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-10.webp"
     }
   ]
 }
