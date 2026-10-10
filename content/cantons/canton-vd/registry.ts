@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'incendio-cavi-cff-eclepens',
+ category: 'novita',
+ date: '2026-10-10T21:04:30.030Z',
+ image: '/images/blog/article-incendio-cavi-cff-eclepens.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -24,6 +24,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.perdite-agricole-canton-vaud-caldo.title': 'Landwirtschaftliche Verluste im Kanton Waadt: über 100 Millionen',
     'blog.article.perdite-agricole-canton-vaud-caldo.excerpt': 'Die Waadtländer Bauernverbände schätzen, dass die Dürre im Zweijahreszeitraum 2026-2027 Verluste von über 100 Millionen Franken verursacht hat.',
     'blog.article.perdite-agricole-canton-vaud-caldo.imageAlt': 'Landwirtschaftliche Felder im Kanton Waadt von Dürre betroffen',
+    'blog.article.incendio-cavi-cff-eclepens.title': 'Feuer in Eclépens: Hypothese einer kriminellen Handlung',
+    'blog.article.incendio-cavi-cff-eclepens.excerpt': 'Feuer in der Nähe der CFF-Gleise in Eclépens am 9.',
+    'blog.article.incendio-cavi-cff-eclepens.imageAlt': 'CFF-Gleise bei Eclépens nach dem Brand vom 9. Oktober 2026',
 };
 
 export default blogMetaCantonVdDe;

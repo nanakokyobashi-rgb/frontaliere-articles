@@ -24,6 +24,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.perdite-agricole-canton-vaud-caldo.title': 'Pertes agricoles dans le canton de Vaud : plus de 100 millions',
     'blog.article.perdite-agricole-canton-vaud-caldo.excerpt': 'Les estimations des associations agricoles vaudoises indiquent des pertes supérieures à 100 millions de francs pour la période 2026-2027 en raison de la sécheresse.',
     'blog.article.perdite-agricole-canton-vaud-caldo.imageAlt': 'Champs agricoles dans le canton de Vaud touchés par la sécheresse',
+    'blog.article.incendio-cavi-cff-eclepens.title': 'Incendie à Eclépens : hypothèse d\'acte criminel',
+    'blog.article.incendio-cavi-cff-eclepens.excerpt': 'Incendie près des voies CFF à Eclépens le 9 octobre Câbles pour les signaux lumineux brûlés et hors d\'usage Circulation interrompue entre Lausanne',
+    'blog.article.incendio-cavi-cff-eclepens.imageAlt': 'Voies CFF près d\'Eclépens après l\'incendie du 9 octobre 2026',
 };
 
 export default blogMetaCantonVdFr;
