@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.lavoroediritti.com/pensioni-oggi/aumento-pensioni-2027-rivalutazione-importi": {
-      "section": "svizzera",
-      "ts": 1791424608347
-    },
     "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/varese/articolo/trasformare-le-microplastiche-in-nuove-risorse-il-progetto-propla-si-conclude-lanciando-la-sfida-di.html": {
       "section": "frontaliere",
       "ts": 1791430262025
@@ -1132,6 +1128,14 @@
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955841/due-nuovi-tasselli-per-la-collina-d-avra-di-castel-san-pietro": {
       "section": "frontaliere",
       "ts": 1791594022844
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955803/incendio-blocca-le-ffs-la-polizia-e-doloso": {
+      "section": "svizzera",
+      "ts": 1791599128709
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1955736/federer-tennis-lavori-grigliata-organizzato-casa": {
+      "section": "svizzera",
+      "ts": 1791599309876
     }
   }
 }
