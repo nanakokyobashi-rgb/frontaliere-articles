@@ -12951,7 +12951,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.audi-rubata-san-fermo.imageAlt': 'Illustration générée pour cet article',
     'blog.article.adesione-ocst-servizi-frontalieri.title': 'S\'affilier à l\'OCST : avantages pour les frontaliers au Tessin',
     'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Conseils en matière de travail, de fiches de salaire, de fiscalité et de location Bureau des frontaliers pour la fiscalité et la sécurité sociale Patronato INAS à Chiasso, Mendrisio, Bioggio et Locarno',
-    'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Travailleur frontalier consultant les avantages de l\'OCST dans un bureau à Mendrisio',
+    'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Illustration générée pour cet article',
     'blog.article.sfida-bar-quartiere-lugano.title': 'Bar de quartier à Lugano : entre fermetures et nouveaux défis',
     'blog.article.sfida-bar-quartiere-lugano.excerpt': 'Le Bar Laura a fermé après 32 ans Le canton n\'a pas renouvelé le contrat Reto Blumenthal a rouvert à Molino Nuovo Le Bar Domingo ouvre à 6h30 et ferme',
     'blog.article.sfida-bar-quartiere-lugano.imageAlt': 'Intérieur d\'un café de quartier à Lugano avec comptoir et machine à café',

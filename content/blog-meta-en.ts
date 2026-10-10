@@ -12949,7 +12949,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.audi-rubata-san-fermo.imageAlt': 'Illustration generated for this article',
     'blog.article.adesione-ocst-servizi-frontalieri.title': 'Joining OCST: benefits for cross-border workers in Ticino',
     'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Advice on employment, payslips, taxation and rental matters Cross-border workers office for tax and social security Patronato INAS in Chiasso, Mendrisio, Bioggio and Locarno',
-    'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Cross-border worker checking OCST benefits in an office in Mendrisio',
+    'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Illustration generated for this article',
     'blog.article.sfida-bar-quartiere-lugano.title': 'Neighborhood bars in Lugano: amid closures and new challenges',
     'blog.article.sfida-bar-quartiere-lugano.excerpt': 'Bar Laura closed after 32 years The Canton did not renew the contract Reto Blumenthal reopened in Molino Nuovo Bar Domingo opens at 6.30 and closes',
     'blog.article.sfida-bar-quartiere-lugano.imageAlt': 'Interior of a neighborhood cafe in Lugano with counter and coffee machine',

@@ -105074,10 +105074,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/caldo-lavoro-frontalieri-ticino.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-adesione-ocst-servizi-frontalieri.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Lavoratore frontaliere che consulta i vantaggi OCST in ufficio a Mendrisio"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T18:40:53+00:00",
       "dateModified": "2026-10-10T18:40:53+00:00",

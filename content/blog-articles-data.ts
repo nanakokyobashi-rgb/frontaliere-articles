@@ -43660,7 +43660,7 @@ const RAW_ARTICLES = [
  id: 'adesione-ocst-servizi-frontalieri',
  category: 'pratico',
  date: '2026-10-10T18:40:53.229Z',
- image: '/images/blog/caldo-lavoro-frontalieri-ticino.webp',
+ image: '/images/blog/article-adesione-ocst-servizi-frontalieri.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],
