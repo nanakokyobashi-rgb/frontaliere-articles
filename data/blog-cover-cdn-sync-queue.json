@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-audi-rubata-san-fermo.webp",
+      "sha256": "d696342b86d3b87fa283c0d96205d2a9b0520934fb75efd14843cc61c8ce00bc"
+    },
+    {
+      "path": "public/images/blog/article-postauto-orario-nidvaldo-2026.webp",
+      "sha256": "1b1aae2e6de8ab0651e27160954ca95235307feea41c5580a3c4ea1d83adaf82"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-audi-rubata-san-fermo-480w.webp",
+      "sha256": "e280d8a2171d0ddec559f3a0e8cc2a102ef61d0c5bcc2ba9ea53760ea4b88ff2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-postauto-orario-nidvaldo-2026-480w.webp",
+      "sha256": "de2d5faa9c586d2809f985065b02b0160e4e8a4e501455985465cd508891bd74"
+    }
+  ]
 }
