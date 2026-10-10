@@ -127,6 +127,13 @@ test('og:image dichiarata generica non apre il segnale degrado', () => {
   assert.equal(verdict.degraded, false);
 });
 
+test('deriva il flag og:image generico senza trattenere il body HTML', () => {
+  const observed = parsePageObservation(page(currentDate, '/og-image.png'));
+  assert.equal('rawHtml' in observed, false);
+  assert.equal(observed.genericOgImage, true);
+  assert.equal(observed.ogImage, 'https://frontaliereticino.ch/og-image.png');
+});
+
 test('usa fake HTTP sequenziale e restituisce due liste stabili', async () => {
   const requests = [];
   const userAgents = [];
@@ -159,6 +166,50 @@ test('usa fake HTTP sequenziale e restituisce due liste stabili', async () => {
   assert.deepEqual(sleeps, [500, 500, 500]);
   assert.deepEqual(result.lagging.map((item) => item.target.articleId), ['two', 'four']);
   assert.deepEqual(result.degraded.map((item) => item.target.articleId), ['three', 'four']);
+});
+
+test('un fetch bloccato viene abortito entro il timeout per richiesta', async () => {
+  let aborted = false;
+  const result = await observePublicationLag({
+    targets: [{ ...target(), url: 'https://example.test/hung/' }],
+    nowMs,
+    maxPages: 1,
+    minIntervalMs: 0,
+    fetchTimeoutMs: 10,
+    scanTimeoutMs: 100,
+    fetchImpl: async (_url, options) => {
+      options.signal.addEventListener('abort', () => { aborted = true; });
+      return new Promise(() => {});
+    },
+  });
+  assert.equal(aborted, true);
+  assert.equal(result.timedOut, false);
+  assert.equal(result.checked.length, 1);
+  assert.equal(result.checked[0].page.timedOut, true);
+  assert.match(result.checked[0].page.error, /timeout fetch/);
+});
+
+test('la deadline globale interrompe il fetch corrente e segnala la copertura incompleta', async () => {
+  const targets = ['one', 'two'].map((articleId) => ({
+    ...target(),
+    articleId,
+    url: `https://example.test/${articleId}/`,
+  }));
+  const result = await observePublicationLag({
+    targets,
+    nowMs,
+    maxPages: 2,
+    minIntervalMs: 0,
+    fetchTimeoutMs: 100,
+    scanTimeoutMs: 10,
+    fetchImpl: async () => new Promise(() => {}),
+  });
+  assert.equal(result.timedOut, true);
+  assert.equal(result.capped, true);
+  assert.equal(result.checked.length, 0);
+  assert.equal(result.unread, 2);
+  assert.equal(result.interruptedTarget.articleId, 'one');
+  assert.match(formatObserverReport(result, { nowMs }), /Deadline raggiunta/);
 });
 
 // I casi che seguono vengono dalla prima lettura dal vivo (2026-10-07): con le

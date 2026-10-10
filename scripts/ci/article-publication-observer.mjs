@@ -42,9 +42,15 @@ export const DEFAULT_STALE_MINUTES = 60;
 // The observer must cover the whole seven-day window: a capped clean sample is
 // not evidence that publication is current. The 2026-10-10 production window
 // contained 2,817 targets; 5,000 leaves measured headroom while the 100 ms
-// courtesy interval keeps the sequential scan inside the workflow timeout.
+// courtesy interval stays below the explicit scan deadline and preserves a
+// bounded window for issue persistence.
 export const DEFAULT_MAX_PAGES = 5_000;
 export const DEFAULT_MIN_INTERVAL_MS = 100;
+// The workflow has a 30-minute outer timeout. Keep the scan bounded below it
+// so an incomplete window can still be written to the stable issue and the
+// step summary before the runner is terminated.
+export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
+export const DEFAULT_SCAN_TIMEOUT_MS = 20 * 60 * 1000;
 export const DEFAULT_LEDGER_RETENTION_DAYS = 90;
 export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
 export const SITE_BASE_URL = 'https://frontaliereticino.ch';
@@ -201,6 +207,7 @@ function parseJsonLdTypes(html) {
 
 export function parsePageObservation(html, status = 200) {
   const rawHtml = String(html);
+  const ogImage = extractOgImage(rawHtml);
   let modifiedAt = null;
   for (const match of rawHtml.matchAll(/<meta\b[^>]*\/?\s*>/gi)) {
     const attrs = parseAttrs(match[0]);
@@ -210,7 +217,13 @@ export function parsePageObservation(html, status = 200) {
     if (name === 'datemodified' || property === 'article:modified_time') modifiedAt ||= content;
   }
   modifiedAt ||= rawHtml.match(/"dateModified"\s*:\s*"([^"]+)"/)?.[1] || null;
-  return { status, modifiedAt, ogImage: extractOgImage(rawHtml), schemaTypes: parseJsonLdTypes(rawHtml), rawHtml };
+  return {
+    status,
+    modifiedAt,
+    ogImage,
+    schemaTypes: parseJsonLdTypes(rawHtml),
+    genericOgImage: isGenericOgImage(rawHtml),
+  };
 }
 
 /**
@@ -254,7 +267,7 @@ export function pageHasCaughtUp(pageModifiedAt, registryDate, { granularity = 'i
 
 export function classifyPublicationLag({ target, page, nowMs, staleMinutes = DEFAULT_STALE_MINUTES }) {
   const ageMs = nowMs - target.changedAt;
-  const degraded = declaredImageIsOwn(target.registryImage) && isGenericOgImage(page.rawHtml || '');
+  const degraded = declaredImageIsOwn(target.registryImage) && Boolean(page.genericOgImage);
   const degradationReason = degraded ? `og:image generico mentre il registro dichiara ${target.registryImage}` : null;
   if (ageMs <= staleMinutes * 60 * 1000) {
     return { lagging: false, degraded, reason: 'grace window', degradationReason };
@@ -293,6 +306,54 @@ export function classifyPublicationLag({ target, page, nowMs, staleMinutes = DEF
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+class ObserverTimeoutError extends Error {
+  constructor(kind, timeoutMs) {
+    super(`${kind === 'scan' ? 'deadline scansione' : 'timeout fetch'} dopo ${timeoutMs} ms`);
+    this.name = 'ObserverTimeoutError';
+    this.code = 'OBSERVER_TIMEOUT';
+    this.kind = kind;
+    this.timeoutMs = timeoutMs;
+  }
+}
+
+async function fetchPageObservation({ fetchImpl, target, timeoutMs, timeoutKind }) {
+  const controller = new AbortController();
+  let timer;
+  const operation = (async () => {
+    const response = await fetchImpl(target.url, {
+      headers: { accept: 'text/html', 'user-agent': OBSERVER_USER_AGENT },
+      redirect: 'follow',
+      signal: controller.signal,
+    });
+    if (!response.ok) return parsePageObservation('', response.status);
+    return parsePageObservation(await response.text(), response.status);
+  })();
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      controller.abort();
+      reject(new ObserverTimeoutError(timeoutKind, timeoutMs));
+    }, timeoutMs);
+  });
+  try {
+    return await Promise.race([operation, timeout]);
+  } finally {
+    clearTimeout(timer);
+    controller.abort();
+  }
+}
+
+function failedPageObservation(error) {
+  return {
+    status: 0,
+    modifiedAt: null,
+    ogImage: null,
+    schemaTypes: [],
+    genericOgImage: false,
+    error: error?.message || String(error),
+    timedOut: error?.code === 'OBSERVER_TIMEOUT',
+  };
+}
+
 export async function observePublicationLag({
   targets,
   fetchImpl = globalThis.fetch,
@@ -300,44 +361,93 @@ export async function observePublicationLag({
   staleMinutes = DEFAULT_STALE_MINUTES,
   maxPages = DEFAULT_MAX_PAGES,
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
+  fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
+  scanTimeoutMs = DEFAULT_SCAN_TIMEOUT_MS,
   sleepImpl = sleep,
   clock = () => Date.now(),
 }) {
   if (typeof fetchImpl !== 'function') throw new Error('fetch non disponibile');
+  if (!Number.isFinite(fetchTimeoutMs) || fetchTimeoutMs <= 0) throw new Error('fetchTimeoutMs deve essere positivo');
+  if (!Number.isFinite(scanTimeoutMs) || scanTimeoutMs <= 0) throw new Error('scanTimeoutMs deve essere positivo');
   const checked = [];
+  const scanStartedAt = clock();
+  const scanDeadlineAt = scanStartedAt + scanTimeoutMs;
+  const candidates = targets.slice(0, maxPages);
   let lastRequestAt = null;
-  for (const target of targets.slice(0, maxPages)) {
+  let timedOut = false;
+  let interruptedTarget = null;
+  for (const target of candidates) {
     const before = clock();
+    if (before >= scanDeadlineAt) {
+      timedOut = true;
+      interruptedTarget = target;
+      break;
+    }
     if (lastRequestAt !== null) {
       const waitMs = minIntervalMs - (before - lastRequestAt);
-      if (waitMs > 0) await sleepImpl(waitMs);
+      if (waitMs > 0) {
+        const remainingMs = scanDeadlineAt - before;
+        if (remainingMs <= 0) {
+          timedOut = true;
+          interruptedTarget = target;
+          break;
+        }
+        await sleepImpl(Math.min(waitMs, remainingMs));
+        if (clock() >= scanDeadlineAt) {
+          timedOut = true;
+          interruptedTarget = target;
+          break;
+        }
+      }
     }
-    lastRequestAt = clock();
+    const requestStartedAt = clock();
+    const remainingMs = scanDeadlineAt - requestStartedAt;
+    if (remainingMs <= 0) {
+      timedOut = true;
+      interruptedTarget = target;
+      break;
+    }
+    lastRequestAt = requestStartedAt;
     let page;
     try {
-      const response = await fetchImpl(target.url, {
-        headers: { accept: 'text/html', 'user-agent': OBSERVER_USER_AGENT },
-        redirect: 'follow',
+      const requestTimeoutMs = Math.min(fetchTimeoutMs, remainingMs);
+      const timeoutKind = remainingMs <= fetchTimeoutMs ? 'scan' : 'fetch';
+      page = await fetchPageObservation({
+        fetchImpl,
+        target,
+        timeoutMs: requestTimeoutMs,
+        timeoutKind,
       });
-      if (!response.ok) {
-        page = parsePageObservation('', response.status);
-      } else {
-        const rawHtml = await response.text();
-        page = { ...parsePageObservation(rawHtml, response.status), rawHtml };
-      }
     } catch (error) {
-      page = { status: 0, modifiedAt: null, ogImage: null, rawHtml: '', error: error?.message || String(error) };
+      if (error?.code === 'OBSERVER_TIMEOUT' && error.kind === 'scan') {
+        timedOut = true;
+        interruptedTarget = target;
+        break;
+      }
+      page = failedPageObservation(error);
     }
     const verdict = classifyPublicationLag({ target, page, nowMs, staleMinutes });
     checked.push({ target, page, ...verdict });
+    if (clock() >= scanDeadlineAt) {
+      timedOut = true;
+      interruptedTarget = target;
+      break;
+    }
   }
+  const durationMs = Math.max(0, clock() - scanStartedAt);
+  const unread = Math.max(0, targets.length - checked.length);
   return {
     checked,
     lagging: checked.filter((entry) => entry.lagging),
     degraded: checked.filter((entry) => entry.degraded),
-    capped: targets.length > maxPages,
-    unread: Math.max(0, targets.length - maxPages),
+    capped: targets.length > maxPages || timedOut,
+    unread,
     maxPages,
+    timedOut,
+    interruptedTarget,
+    fetchTimeoutMs,
+    scanTimeoutMs,
+    durationMs,
   };
 }
 
@@ -345,10 +455,17 @@ export function formatObserverReport(report, { nowMs = Date.now(), skipped = [] 
   const lines = [
     `Osservatore pubblicazione articoli — ${new Date(nowMs).toISOString()}`,
     `Controllate: ${report.checked.length}; in ritardo: ${report.lagging.length}; immagini degradate: ${report.degraded.length}; limite: ${report.maxPages ?? DEFAULT_MAX_PAGES}.`,
+    `Budget scansione: ${report.scanTimeoutMs ?? DEFAULT_SCAN_TIMEOUT_MS} ms; fetch: ${report.fetchTimeoutMs ?? DEFAULT_FETCH_TIMEOUT_MS} ms; durata: ${report.durationMs ?? 'n/d'} ms.`,
   ];
-  if (report.capped) lines.push(`⚠️ Lette le ${report.checked.length} pagine cambiate più di recente; ${report.unread ?? 'altre'} più vecchie nella finestra non sono state lette in questo giro.`);
+  if (report.timedOut) {
+    const target = report.interruptedTarget;
+    const suffix = target ? ` Interrotta su ${target.articleId} (${target.section}).` : '';
+    lines.push(`⚠️ Deadline raggiunta: ${report.unread ?? 'alcune'} target nella finestra non sono state lette in questo giro.${suffix}`);
+  } else if (report.capped) {
+    lines.push(`⚠️ Lette le ${report.checked.length} pagine cambiate più di recente; ${report.unread ?? 'altre'} più vecchie nella finestra non sono state lette in questo giro.`);
+  }
   for (const item of report.lagging) {
-    const page = item.page.modifiedAt || `HTTP ${item.page.status}`;
+    const page = item.page.modifiedAt || item.page.error || `HTTP ${item.page.status}`;
     lines.push(`- Ritardo \`${item.target.articleId}\` (${item.target.section}) — commit corpus ${item.target.sourceCommit}; pagina ${page}; ${item.reason}; ${item.target.url}`);
   }
   for (const item of report.degraded) {
@@ -508,7 +625,7 @@ function saneLiveImage(entry) {
   return entry?.page?.status === 200
     && declaredImageIsOwn(entry.target.registryImage)
     && Boolean(liveImage && registryImage && liveImage === registryImage)
-    && !isGenericOgImage(entry.page.rawHtml || '');
+    && !entry.page.genericOgImage;
 }
 
 async function persistLedger(issue, items, github) {
@@ -537,6 +654,10 @@ export async function runObserver({
   repairCap = DEFAULT_REPAIR_CAP,
   maxPages = DEFAULT_MAX_PAGES,
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
+  fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
+  scanTimeoutMs = DEFAULT_SCAN_TIMEOUT_MS,
+  sleepImpl = sleep,
+  clock = () => Date.now(),
   gitLogImpl = gitText,
 } = {}) {
   const since = new Date(nowMs - days * 24 * 60 * 60 * 1000).toISOString();
@@ -561,8 +682,23 @@ export async function runObserver({
     fetchImpl,
     maxPages,
     minIntervalMs,
+    fetchTimeoutMs,
+    scanTimeoutMs,
+    sleepImpl,
+    clock,
   });
   const description = formatObserverReport(report, { nowMs, skipped: prepared.skipped });
+  // Persist the coverage failure before reconciling runs or proving images:
+  // those follow-up calls must not be able to hide an incomplete scan behind
+  // the workflow timeout.
+  const actionable = report.capped || report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
+  if (actionable && !issue) {
+    issue = await github.createIssue(description);
+    if (!issue) throw new Error('issue observer non trovata dopo la creazione');
+    if (!issue.body) issue.body = description;
+  }
+  if (issue) await persistLedger(issue, ledger, github);
+
   const reconciled = await reconcileDispatches(ledger, github);
   ledger = reconciled.items;
   ledger = markLedgerItemsAbsent(ledger, prepared.missingLedgerKeys, new Date(nowMs).toISOString());
@@ -585,6 +721,10 @@ export async function runObserver({
     new Date(nowMs).toISOString(),
   );
 
+  // Persist reconciliation and this scan's ledger changes after the early
+  // coverage checkpoint above.
+  if (issue) await persistLedger(issue, ledger, github);
+
   const readyKeys = new Set();
   for (const entry of report.degraded) {
     const key = ledgerKey(entry.target);
@@ -596,16 +736,6 @@ export async function runObserver({
     });
     if (proof.available) readyKeys.add(key);
   }
-
-  // A partial scan cannot prove the publication surface healthy. Keep the
-  // stable issue open (or create it) until every target in the window was read.
-  const actionable = report.capped || report.lagging.length > 0 || report.degraded.length > 0 || ledger.length > 0;
-  if (actionable && !issue) {
-    issue = await github.createIssue(description);
-    if (!issue) throw new Error('issue observer non trovata dopo la creazione');
-    if (!issue.body) issue.body = description;
-  }
-  if (issue) await persistLedger(issue, ledger, github);
 
   const candidates = repairCandidates(ledger, {
     readyKeys,
