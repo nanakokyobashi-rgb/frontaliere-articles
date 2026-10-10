@@ -69,6 +69,7 @@ import { differentiateH1FromTitle } from './shared/seoContentTokens';
 import { inlineScriptJson } from './shared/inlineJsonScript';
 import { CRITICAL_CSS_LINK } from './shared/criticalCss';
 import { railGutters } from './shared/railGutters';
+import { staticAdSlotHtml, type StaticAdSlotKey } from './staticAdSlotHtml';
 import { buildDayStampIso } from './shared/buildDayStamp';
 import { stripLiteralMarkdown } from './shared/stripLiteralMarkdown';
 import { imageObjectLd } from './seo/imageObjectLd';
@@ -88,7 +89,18 @@ import {
 } from './blogContextualLinksData';
 import { configureSiteShell, type SiteShellContract } from '../engine/siteShell';
 
-const contract: SiteShellContract = {
+/**
+ * The host half may merge immediately before the engine mirror during a
+ * rolling update. Keeping the new member in a local extension lets this file
+ * compile against both the old contract and the mirrored one; at runtime the
+ * host simply exposes the extra callback before the engine starts requesting
+ * it.
+ */
+type HostSiteShellContract = SiteShellContract & {
+  staticAdSlotHtml: (slot: StaticAdSlotKey) => string;
+};
+
+const contract: HostSiteShellContract = {
   baseUrl: BASE_URL,
   gtagSnippet: GTAG_SNIPPET,
   adsenseSnippet: ADSENSE_SNIPPET,
@@ -105,6 +117,7 @@ const contract: SiteShellContract = {
   rootShell,
 
   railGutters,
+  staticAdSlotHtml,
 
   buildDayStampIso,
 
