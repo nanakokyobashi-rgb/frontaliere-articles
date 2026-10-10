@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-corsi-contributi-lucerna.webp",
+      "sha256": "b2d18d9a1365ecfd0ba1bc11aad4065f2df8ebfaf066a687679ef7aa6f141a96"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-corsi-contributi-lucerna-480w.webp",
+      "sha256": "436c4c50039a0b0379753bce8fec89afef0f9ddd79e2a287ff49f425ba772e7d"
+    }
+  ]
 }
