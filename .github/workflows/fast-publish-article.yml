@@ -1005,6 +1005,37 @@ jobs:
             return 1
           }
 
+          # A Pages build can outlast the original two ~3-minute polls (issue
+          # #2390, run 37941413807: the shard was still `building` after the
+          # second poll). Give each check up to five minutes, with one ten-minute
+          # budget shared by every locale in this publish job. A build that is
+          # still not readable at the deadline remains a hard failure.
+          PAGES_BUILD_WAIT_BUDGET_SECONDS=600
+          PAGES_BUILD_WAIT_WINDOW_SECONDS=300
+          PAGES_BUILD_WAIT_DEADLINE=0
+          poll_origin_for() {
+            local u="$1" window_seconds="$2" timeout="${3:-20}"
+            local window_deadline deadline remaining delay probe_timeout
+            window_deadline=$((SECONDS + window_seconds))
+            deadline="$window_deadline"
+            if (( PAGES_BUILD_WAIT_DEADLINE < deadline )); then
+              deadline="$PAGES_BUILD_WAIT_DEADLINE"
+            fi
+            POLL_CODE=000
+            while (( SECONDS < deadline )); do
+              remaining=$((deadline - SECONDS))
+              probe_timeout="$timeout"
+              if (( remaining < probe_timeout )); then probe_timeout="$remaining"; fi
+              poll_origin "$u" 1 "$probe_timeout" && return 0
+              remaining=$((deadline - SECONDS))
+              (( remaining > 0 )) || break
+              delay=15
+              if (( remaining < delay )); then delay="$remaining"; fi
+              sleep "$delay"
+            done
+            return 1
+          }
+
           # Probe $1, one member of the batch, after its locale's deployment
           # gate. One attempt answers the question the gate leaves open — is
           # this article in the build that is now live — and a 404 answers it
@@ -1067,6 +1098,7 @@ jobs:
           echo "── origin (hard gate)"
           declare -A pages_rebuild_requested=()
           declare -A origin_locale_gate_started=()
+          PAGES_BUILD_WAIT_DEADLINE=$((SECONDS + PAGES_BUILD_WAIT_BUDGET_SECONDS))
           while IFS=$'\t' read -r loc p0; do
             u="https://origin-$shard-$loc.frontaliereticino.ch/${p0%index.html}"
             repo="$owner/frontaliere-$shard-$loc"
@@ -1087,7 +1119,7 @@ jobs:
             fi
             origin_locale_gate_started[$loc]=1
 
-            if poll_origin "$u" 12; then
+            if poll_origin_for "$u" "$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then
               echo "  200  $u"
               continue
             fi
@@ -1139,7 +1171,7 @@ jobs:
                 ;;
             esac
 
-            if poll_origin "$u" 12; then
+            if poll_origin_for "$u" "$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then
               echo "  200  $u  (recovered after the second poll)"
               continue
             fi
