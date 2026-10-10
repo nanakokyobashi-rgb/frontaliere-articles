@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-garanzia-hib-payerne.webp",
-      "sha256": "3e848dbabff3dd6c9724a2a29b6c70260b6087902dde862324a595fbebc91013"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-garanzia-hib-payerne-480w.webp",
-      "sha256": "193a20ac2329627f101cd0667489182393c6c39f5293bf433f559d0b0768814a"
-    }
-  ]
+  "items": []
 }
