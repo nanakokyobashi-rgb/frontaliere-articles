@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-schianto-camerlata-quattro-feriti.webp",
+      "sha256": "1cf30cf6753cf153fc96efc27f0e07dbb7fc7ad211d57cd295cc93cbd1f526cd"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-schianto-camerlata-quattro-feriti-480w.webp",
+      "sha256": "e09d55837a06580741208a3087102409fc43e614642124a869d4a26b0f96e86a"
+    }
+  ]
 }
