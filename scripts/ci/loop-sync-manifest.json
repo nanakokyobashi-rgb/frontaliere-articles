@@ -876,7 +876,7 @@
       "reason": "Helper del publisher per serializzare gli aggiornamenti dei registry nella directory `content/`, rifiutare snapshot concorrenti obsoleti, preparare insieme le uscite e ripristinare le sostituzioni gia' riuscite su errori sincroni. E' usato dai backfill di articleType/canton e dal repoint delle copertine; il sito consuma i JSON pubblicati via HTTP e non deve importare il writer del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "c3b9919ae4b9ea8a48e432555ca091ba9134c23d",
+        "corpus": "fb1726b001af46c4",
         "alignedAt": "2026-10-10"
       }
     },
@@ -5009,7 +5009,7 @@
       "reason": "Lettura fail-closed delle proprieta' image nei literal del registry, usata dal retirement del corpus per evitare di scambiare esempi/commenti, oggetti annidati o sintassi dinamica per evidenza valida. Gli altri reader del registry restano sullo scanner bilanciato condiviso da main; non esiste un registry editoriale corrispondente nel sito: il sito consuma il JSON pubblicato via HTTP, mentre questo flusso modifica e verifica le sorgenti del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "9e6dc8fe4f0a1857",
+        "corpus": "725fb6d8b38f0aa8",
         "alignedAt": "2026-10-10"
       }
     },
