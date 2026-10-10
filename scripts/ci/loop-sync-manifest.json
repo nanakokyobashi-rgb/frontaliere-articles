@@ -3083,6 +3083,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/fetch-with-ref-timeout.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper locale per il corpus che mantiene il timer referenziato fino al consumo del body HTTP; e' condiviso dal loader Remote Config, dallo scambio OAuth e dalla cascata traduzioni adattata. Il sito mantiene il proprio trasporto standalone dentro `free-translate.mjs`, quindi non esiste qui un path gemello da sincronizzare senza cancellare gli adattamenti dichiarati.",
+      "baseline": {
+        "site": null,
+        "corpus": "1636b3ce523e198b",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "generator/scripts/lib/free-translate.mjs",
       "sitePath": "scripts/lib/free-translate.mjs",
       "mode": "adapted",

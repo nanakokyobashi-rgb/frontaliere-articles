@@ -49,6 +49,7 @@ jobs:
           fetch-depth: 1
           sparse-checkout: |
             generator/scripts/load-rc-env.mjs
+            generator/scripts/lib/fetch-with-ref-timeout.mjs
             generator/scripts/lib/google-service-account-token.mjs
             generator/scripts/lib/source-copy-guard.mjs
             scripts/ci/report-rate-limit-budget.mjs
