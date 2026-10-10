@@ -12913,10 +12913,13 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.raffica-scontri-varesotto.imageAlt': 'Route calme au matin, image symbolique pour un reportage sur des accidents dans le Varesotto.',
     'blog.article.frana-sementina-h13-gudo.title': 'Glissement de terrain à Sementina : fermeture de la H13 entre Sementina et Gudo',
     'blog.article.frana-sementina-h13-gudo.excerpt': 'Glissement de terrain sur la route cantonale à Sementina Route bloquée et déviations activées H13 fermée entre Sementina et Gudo Aucun blessé ; dommages matériels',
-    'blog.article.frana-sementina-h13-gudo.imageAlt': 'Glissement de terrain sur la route cantonale à Sementina: la H13 vers Gudo est fermée',
+    'blog.article.frana-sementina-h13-gudo.imageAlt': 'Illustration générée pour cet article',
     'blog.article.viabilita-sacro-monte-varese.title': 'Sacro Monte : sens unique en alternance via Campo dei Fiori',
     'blog.article.viabilita-sacro-monte-varese.excerpt': 'Du 9 octobre au 30 novembre 2026, la route Via Campo dei Fiori change : feu de signalisation temporaire à sens unique alternatif et limite maximale de 30 km/h Travaux',
     'blog.article.viabilita-sacro-monte-varese.imageAlt': 'Route menant au Sacro Monte de Varese avec travaux routiers',
+    'blog.article.schianto-camerlata-quattro-feriti.title': 'Côme, accident nocturne à Camerlata : 4 blessés',
+    'blog.article.schianto-camerlata-quattro-feriti.excerpt': 'L\'alarme a été déclenchée à 1:35 Crash sur la place Camerlata à Como Impliqué deux filles et deux garçons Quatre blessés transférés en code jaune Lieu →',
+    'blog.article.schianto-camerlata-quattro-feriti.imageAlt': 'Place urbaine nocturne avec feux d\'urgence et véhicules de secours.',
 };
 
 export default blogMetaFr;
