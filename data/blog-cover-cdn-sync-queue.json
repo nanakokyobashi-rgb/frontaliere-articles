@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-viabilita-sacro-monte-varese.webp",
+      "sha256": "9bcf61020bd536d0b09dbf57b357c1cec9f3805028f48fafa2ecbfc9ad280ae6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-viabilita-sacro-monte-varese-480w.webp",
+      "sha256": "f52f6151cbc863a45e1250e7964e5684ebab1d2cd7397dfad3cbe2a4f582470f"
+    }
+  ]
 }
