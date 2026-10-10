@@ -274,7 +274,7 @@ function readRegistry(rel) {
       image: cdnBlogImage(pick('image') ?? ''),
       hasCalculator: readTopLevelBoolean(record, 'hasCalculator') || undefined,
       authorSlug: pick('authorSlug') ?? undefined,
-    };
+    });
   }
   return out;
 }
