@@ -1120,6 +1120,18 @@
     "svizzera::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
       "section": "svizzera",
       "ts": 1791622506439
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954988/traffico-merci-su-rotaia-nel-personale-c-e-apprensione-per-la-sicurezza": {
+      "section": "frontaliere",
+      "ts": 1791623772905
+    },
+    "frontaliere::https://cassa-disoccupazione.unia.ch": {
+      "section": "frontaliere",
+      "ts": 1791623787890
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/finanza-etica-a-varese-una-serata-di-confronto-sul-rapporto-con-le-banche/2703112": {
+      "section": "frontaliere",
+      "ts": 1791624573116
     }
   }
 }
