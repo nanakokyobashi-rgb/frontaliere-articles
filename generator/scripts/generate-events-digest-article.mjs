@@ -48,6 +48,7 @@ import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
+import { repairEventsDigestLocalizedToponyms } from './lib/events-digest-localization.mjs';
 
 // Scrittura ATOMICA del corpus: temp accanto al target + renameSync.
 // Questi file riscrivono un `content/*.ts` GIA' ESISTENTE (rerun idempotente
@@ -103,7 +104,7 @@ export { digestCantonFromArgs };
 export function buildData(todayIso, { canton, datasetPath = path.join(REPO_ROOT, 'data', 'events.json') } = {}) {
   const dataset = loadEventsDataset(datasetPath);
   const article = buildWeekendDigestArticle({ events: dataset.events, todayIso, canton });
-  return {
+  const data = {
     id: article.id,
     ...staticMetaForCanton(resolveDigestCanton(canton)),
     // Niente `inspectSlugForPromptPlaceholder` qui, e non e' una dimenticanza
@@ -120,6 +121,7 @@ export function buildData(todayIso, { canton, datasetPath = path.join(REPO_ROOT,
     _eventCount: article.eventCount,
     _weekend: `${article.weekendStart}..${article.weekendEnd}`,
   };
+  return repairEventsDigestLocalizedToponyms(data);
 }
 
 /** Rewrite only the 4 body files (idempotent refresh; registration is append-only). */
