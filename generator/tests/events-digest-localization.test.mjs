@@ -76,6 +76,8 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     const repaired = repairEventsDigestLocalizedToponyms(original);
 
     assert.equal(repaired.content.en.body2, 'Zürich');
-    assert.ok(findArticleLocalizedToponymMismatches(repaired).some(({ locale, code }) => locale === 'en' && code === 'ZH'));
+    assert.ok(findArticleLocalizedToponymMismatches(repaired).some(({ locale, code, type }) => (
+      locale === 'en' && code === 'BODY2' && type === 'structure'
+    )));
   });
 });

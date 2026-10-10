@@ -580,7 +580,15 @@ function findEventsDigestArticleLocaleMismatches(data, locale, sourceText) {
     targetText: targetProjection.content?.body2,
     locale,
   });
-  if (body2Issues === null) return null;
+  if (body2Issues === null) {
+    return [{
+      code: 'BODY2',
+      type: 'structure',
+      locale,
+      form: 'unpaired headings or event titles',
+      expected: 'matching source and target event structure',
+    }];
+  }
   for (const issue of body2Issues) {
     if (!issues.some((candidate) => issueKey(candidate) === issueKey(issue))) issues.push(issue);
   }
