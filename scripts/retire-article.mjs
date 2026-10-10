@@ -65,6 +65,7 @@ import {
 // la usa anche `generator/scripts/create-article.mjs`, che lo STESSO array lo
 // rigenera (vedi il file per il perché delle due euristiche cadute).
 import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
+import { readArticleRegistry } from './lib/registry-image-reader.mjs';
 import { removeSeoEntriesFromSource } from './lib/seo-entry.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from './lib/image-credit-records.mjs';
 import { isNewFamilySection } from './lib/corpus-floors.mjs';
@@ -252,153 +253,9 @@ function removeFromImageCatalog(file, keys) {
   return { changed: true, text: `${JSON.stringify(kept)}\n` };
 }
 
-/**
- * Ogni blocco `{ id: '…', … }` di un registro di sezione, delimitato con
- * `matchingDelimiter` come in `removeRegistryEntry`: una regex che si ferma
- * alla prima `}` perderebbe il campo `image` dietro un oggetto annidato, e qui
- * un'immagine persa vuol dire una copertina altrui cancellata. Graffe
- * sbilanciate sono un errore, non un registro più corto.
- *
- * Non importa `readRegistry` da `scripts/build-blog-index.mjs`: quel modulo
- * esegue la build all'import.
- */
+/** Article rows and cover literals from the shared lexical registry reader. */
 function registryBlocks(file) {
-  const src = read(file);
-  const out = [];
-  const rx = /\bid:\s*'([^']+)',/g;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const open = src.lastIndexOf('{', m.index);
-    if (open === -1) throw new Error(`${file}: nessuna '{' prima di id '${m[1]}'`);
-    const close = matchingDelimiter(src, open);
-    if (close === -1) throw new Error(`${file}: graffe sbilanciate attorno a ${m[1]}`);
-    out.push({ id: m[1], block: src.slice(open, close + 1) });
-    rx.lastIndex = close + 1;
-  }
-  return out;
-}
-
-/** Salta spazi e commenti TypeScript e restituisce il primo carattere utile. */
-function skipRegistryTrivia(src, start, limit = src.length) {
-  let i = start;
-  while (i < limit) {
-    if (/\s/.test(src[i])) { i += 1; continue; }
-    if (src[i] === '/' && src[i + 1] === '/') {
-      const newline = src.indexOf('\n', i + 2);
-      i = newline === -1 || newline >= limit ? limit : newline + 1;
-      continue;
-    }
-    if (src[i] === '/' && src[i + 1] === '*') {
-      const close = src.indexOf('*/', i + 2);
-      if (close === -1 || close + 2 > limit) throw new Error('commento non chiuso nel blocco di registro');
-      i = close + 2;
-      continue;
-    }
-    break;
-  }
-  return i;
-}
-
-/**
- * Trova le proprietà `image` in un blocco, distinguendo il livello del
- * registro da proprietà annidate e ignorando stringhe/commenti. Il registro è
- * sorgente dati, non codice da valutare: forme dinamiche o ambigue devono
- * fermare il retirement prima di scegliere quali asset cancellare.
- */
-function registryImageMatches(block) {
-  const open = block.indexOf('{');
-  const close = open === -1 ? -1 : matchingDelimiter(block, open);
-  if (close === -1) throw new Error('blocco di registro non delimitato');
-  const matches = [];
-  let braces = 0;
-  let brackets = 0;
-  let parens = 0;
-
-  for (let i = open + 1; i < close;) {
-    const ch = block[i];
-    if (ch === '.' && block.slice(i, i + 3) === '...'
-      && brackets === 0 && parens === 0
-      && ['{', ','].includes(block.slice(open, i).trimEnd().at(-1))) {
-      throw new Error('spread nel blocco di registro: proprietà image non determinabile');
-    }
-    if (ch === '[' && brackets === 0 && parens === 0
-      && ['{', ','].includes(block.slice(open, i).trimEnd().at(-1))) {
-      throw new Error('chiave calcolata nel blocco di registro: proprietà image non determinabile');
-    }
-    if (ch === '/' && (block[i + 1] === '/' || block[i + 1] === '*')) {
-      i = skipRegistryTrivia(block, i, close);
-      continue;
-    }
-    if (ch === "'" || ch === '"' || ch === '`') {
-      const quote = ch;
-      let end = i + 1;
-      while (end < close) {
-        if (block[end] === '\\') { end += 2; continue; }
-        if (block[end] === quote) break;
-        end += 1;
-      }
-      if (end >= close) throw new Error('stringa non chiusa nel blocco di registro');
-      const before = block.slice(open, i).trimEnd().at(-1);
-      const after = skipRegistryTrivia(block, end + 1, close);
-      if ((before === '{' || before === ',') && block.slice(i + 1, end) === 'image' && block[after] === ':') {
-        matches.push({ depth: braces + brackets + parens, colon: after });
-      }
-      i = end + 1;
-      continue;
-    }
-    if (/[A-Za-z_$]/.test(ch)) {
-      const start = i;
-      i += 1;
-      while (i < close && /[A-Za-z0-9_$]/.test(block[i])) i += 1;
-      if (block.slice(start, i) === 'image') {
-        const before = block.slice(open + 1, start).trimEnd().at(-1);
-        const memberStart = before === undefined || before === '{' || before === ',';
-        const after = skipRegistryTrivia(block, i, close);
-        if (memberStart) {
-          if (block[after] !== ':') throw new Error('forma shorthand/getter image non supportata nel blocco di registro');
-          matches.push({ depth: braces + brackets + parens, colon: after });
-        }
-      }
-      continue;
-    }
-    if (ch === '{') braces += 1;
-    else if (ch === '}') braces -= 1;
-    else if (ch === '[') brackets += 1;
-    else if (ch === ']') brackets -= 1;
-    else if (ch === '(') parens += 1;
-    else if (ch === ')') parens -= 1;
-    i += 1;
-  }
-  return matches;
-}
-
-/** Il valore letterale statico di `image`; forme assenti/dinamiche/ambigue non si indovinano. */
-function registryImageLiteral(block, id) {
-  const matches = registryImageMatches(block);
-  const nested = matches.filter((match) => match.depth !== 0);
-  const direct = matches.filter((match) => match.depth === 0);
-  if (nested.length > 0) throw new Error(`registry ${id}: proprietà image annidata, cover ambigua`);
-  if (direct.length > 1) throw new Error(`registry ${id}: proprietà image ripetuta, cover ambigua`);
-  if (direct.length === 0) return undefined;
-
-  const { colon } = direct[0];
-  const start = skipRegistryTrivia(block, colon + 1);
-  const quote = block[start];
-  if (quote !== "'" && quote !== '"') {
-    throw new Error(`registry ${id}: image non è una stringa letterale statica`);
-  }
-  let end = start + 1;
-  while (end < block.length && block[end] !== quote) {
-    if (block[end] === '\\') throw new Error(`registry ${id}: image contiene escape non supportati`);
-    end += 1;
-  }
-  if (end >= block.length) throw new Error(`registry ${id}: stringa image non chiusa`);
-  const value = block.slice(start + 1, end);
-  const tail = skipRegistryTrivia(block, end + 1);
-  if (block[tail] !== ',' && block[tail] !== '}') {
-    throw new Error(`registry ${id}: image ha un'espressione aggiuntiva, cover non letterale`);
-  }
-  return value;
+  return readArticleRegistry(read(file), file, { rejectNestedImage: true });
 }
 
 /**
@@ -416,9 +273,9 @@ function coverKeysInUse(excludeId) {
     // coppia assente e' uno stato valido per una famiglia vuota; una coppia
     // parziale, invece, resta fail-closed dentro isNewFamilySection().
     if (isNewFamilySection(ROOT, section)) continue;
-    for (const { id, block } of registryBlocks(cfg.registryFile)) {
+    for (const { id, image } of registryBlocks(cfg.registryFile)) {
       if (id === excludeId) continue;
-      const key = coverKey(registryImageLiteral(block, id));
+      const key = coverKey(image);
       if (!key) continue;
       if (!inUse.has(key)) inUse.set(key, []);
       inUse.get(key).push(id);
@@ -712,7 +569,7 @@ function main() {
   //     copertina, miniatura, credito (P14) e voce di catalogo descrivono il
   //     file, non l'articolo, e servono all'articolo che resta.
   const retiredBlock = registryBlocks(cfg.registryFile).find((b) => b.id === id);
-  const ownImage = retiredBlock ? registryImageLiteral(retiredBlock.block, id) : undefined;
+  const ownImage = retiredBlock?.image;
   if (!priorRetirement && ownImage === undefined) {
     throw new Error(`registry ${id}: campo image assente; impossibile determinare la copertina in sicurezza`);
   }

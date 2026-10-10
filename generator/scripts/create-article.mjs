@@ -67,6 +67,7 @@ import { createHash } from 'node:crypto';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
@@ -1561,7 +1562,9 @@ const RECENT_ARTICLE_IMAGE_COUNT = 7;
 function _getRecentArticleImages() {
   try {
     const blogSrc = readFileSync(resolve('data/blog-articles-data.ts'), 'utf8');
-    const imageMatches = [...blogSrc.matchAll(/image:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
+    const imageMatches = readArticleRegistry(blogSrc, 'data/blog-articles-data.ts')
+      .map(({ image }) => image)
+      .filter(Boolean);
     return imageMatches.slice(-RECENT_ARTICLE_IMAGE_COUNT);
   } catch {
     return [];

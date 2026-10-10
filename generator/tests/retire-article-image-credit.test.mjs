@@ -220,6 +220,19 @@ test('una copertina condivisa nella stessa sezione resta, e il dry-run lo dice',
   }
 });
 
+test('un commento prima di image non nasconde la copertina condivisa al retirement', () => {
+  const root = corpusTree({
+    retiredImageFields: ["/* note before the field */ image: '/images/blog/vincitore-ch.webp'"],
+  });
+  try {
+    const result = retire(root);
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    assert.ok(exists(root, 'public/images/blog/vincitore-ch.webp'), 'la cover ancora usata dal vincitore resta');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('una copertina condivisa con un articolo dell\'altra sezione resta', () => {
   const root = corpusTree({ frontaliere: [{ id: 'gemella-frontaliere', cover: RETIRED }] });
   try {
