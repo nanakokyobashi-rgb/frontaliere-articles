@@ -44,6 +44,7 @@ import { fileURLToPath } from 'node:url';
 import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
+import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CHECK_ONLY = process.argv.includes('--check');
@@ -87,6 +88,13 @@ function sweepFile(rel, patterns) {
       const { value, fixes } = fixMicrocopy(rawValue, opts);
       if (!fixes.length) return match;
       if (!assertEscapeSafe(rawValue, value, unescape, opts, problems, `${rel}@${offset}`)) return match;
+      if (rel.startsWith(path.join('content', 'seo') + path.sep)
+        && /(?:\n\s*description\s*:\s*'|"description"\s*:\s*")/.test(match)) {
+        assertSeoDescriptionMinimum(unescape(value), {
+          id: rel,
+          sourceDescriptionLength: unescape(rawValue).length,
+        });
+      }
       fileChanges++;
       for (const f of fixes) changes.push({ rel, rule: f.rule, found: f.found, expected: f.expected, before: unescape(rawValue), after: unescape(value) });
       return `${pre}${value}${post}`;

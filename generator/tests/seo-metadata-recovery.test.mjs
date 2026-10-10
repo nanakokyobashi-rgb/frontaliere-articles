@@ -74,7 +74,7 @@ test('la derivazione SEO non svuota descrizioni con una prima parola oltre il li
 
 test('la recovery conserva seoDescription e ogDescription persistiti invece di derivarli dall excerpt', () => {
   const data = article();
-  data.content.it.seoDescription = 'Descrizione SERP già pubblicata, distinta dall’estratto editoriale.';
+  data.content.it.seoDescription = 'Descrizione SERP già pubblicata, distinta dall’estratto editoriale e sufficientemente lunga per il contratto pubblico.';
   data.content.it.ogDescription = 'Descrizione social già pubblicata, più estesa e mantenuta per RSS e card.';
   data.seo = {
     description: data.content.it.seoDescription,
@@ -85,6 +85,18 @@ test('la recovery conserva seoDescription e ogDescription persistiti invece di d
 
   assert.equal(data.seo.description, data.content.it.seoDescription);
   assert.equal(data.seo.ogDescription, data.content.it.ogDescription);
+});
+
+test('la recovery sostituisce una seoDescription persistita sotto il minimo con il fallback italiano', () => {
+  const data = article();
+  data.content.it.seoDescription = 'Troppo breve.';
+  data.seo = { description: data.content.it.seoDescription };
+
+  deriveSeoMetadata(data);
+
+  assert.notEqual(data.seo.description, data.content.it.seoDescription);
+  assert.ok(data.seo.description.length >= 80);
+  assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
 });
 
 test('il builder SEO rifiuta Markdown anche nel percorso di recovery diretto', () => {
@@ -105,6 +117,28 @@ test('il builder SEO rifiuta Markdown anche nel percorso di recovery diretto', (
       modifiedAt: data.date,
     }),
     /excerpt-plain.*seo\.description.*reference-link/,
+  );
+});
+
+test('il builder SEO rifiuta una description breve prima che la recovery possa scriverla', () => {
+  const data = article();
+  data.seo = {
+    title: 'Titolo',
+    description: 'Descrizione troppo breve.',
+    keywords: 'frontalieri, ticino',
+    ogTitle: 'Titolo',
+    ogDescription: 'Descrizione social semplice.',
+    headline: 'Titolo',
+    breadcrumbName: 'Titolo',
+  };
+
+  assert.throws(
+    () => buildSeoEntry(data, {
+      provenance: { kind: 'wikimedia-commons', record: { width: 1200, height: 675 } },
+      publishedAt: data.date,
+      modifiedAt: data.date,
+    }),
+    /must contain at least 80 characters/,
   );
 });
 

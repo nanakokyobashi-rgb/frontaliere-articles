@@ -15,6 +15,7 @@ import {
   SEO_TITLE_BRAND_SUFFIX as TITLE_SUFFIX,
   SEO_TITLE_MAX_CHARS as TITLE_MAX_CHARS,
 } from './seo-title-repair.mjs';
+import { assertSeoDescriptionMinimum, SEO_DESCRIPTION_MIN } from './seo-description-contract.mjs';
 
 const DESCRIPTION_MAX_CHARS = 160;
 const OG_DESCRIPTION_MAX_CHARS = 250;
@@ -70,12 +71,13 @@ export function deriveSeoMetadata(data) {
   const persistedDescription = typeof data.seo.description === 'string'
     ? data.seo.description.replace(/\s+/g, ' ').trim()
     : '';
-  if (persistedDescription) {
+  if (persistedDescription.length >= SEO_DESCRIPTION_MIN) {
     // Recovery must retain the already-published SERP/RSS copy. Only apply
-    // the repository's hard cap; the minimum-length enrichment belongs to
-    // entries whose persisted field is genuinely absent.
+    // the repository's hard cap when it already meets the public contract.
     data.seo.description = truncateToClauseNonEmpty(persistedDescription, DESCRIPTION_MAX_CHARS);
   } else {
+    // A short persisted value is as unsafe as a missing value: recovery must
+    // replace it from Italian source copy, never carry it back into content/seo.
     let description = String(it.excerpt || '').replace(/\s+/g, ' ').trim();
     if (!description) {
       description = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati ${year}.`;
@@ -85,6 +87,10 @@ export function deriveSeoMetadata(data) {
     }
     data.seo.description = truncateToClauseNonEmpty(description, DESCRIPTION_MAX_CHARS);
   }
+  assertSeoDescriptionMinimum(data.seo.description, {
+    id: data.id,
+    sourceDescriptionLength: persistedDescription.length,
+  });
   const persistedOgDescription = typeof data.seo.ogDescription === 'string'
     ? data.seo.ogDescription.replace(/\s+/g, ' ').trim()
     : '';
