@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
+      "sha256": "7eb9c0ccd10932d78e6b025d59f246b04b15427861219842a03301b4c7edecdc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-autobus-elettrici-mendrisiotto-amsa-480w.webp",
+      "sha256": "3be45d04cbed7319cb2e28f0206593a5966ad5b6c64146976c19e82d3a766e13"
+    }
+  ]
 }
