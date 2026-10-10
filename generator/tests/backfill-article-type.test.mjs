@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   mkdtempSync,
   mkdirSync,
+  readdirSync,
   readFileSync,
   rmSync,
   writeFileSync,
@@ -186,16 +187,61 @@ describe('ledger di lettura e piano di backfill', () => {
 
   test('il ledger rifiuta id assenti e decisioni non ammesse', () => {
     withFixture((root) => {
-      const file = join(root, 'data/article-type-readings.json');
-      const rows = JSON.parse(readFileSync(file, 'utf8'));
+      const rows = backfillType.readArticleTypeReadings(root);
       rows[0].id = 'non-presente-nel-registry';
-      writeFileSync(file, `${JSON.stringify(rows, null, 2)}\n`);
+      writeLedger(root, rows);
       assert.throws(() => backfillType.readArticleTypeReadings(root), /id assente dal registry/u);
 
       rows[0].id = 'ledger-news';
       rows[0].decision = 'not-a-type';
-      writeFileSync(file, `${JSON.stringify(rows, null, 2)}\n`);
+      writeLedger(root, rows);
       assert.throws(() => backfillType.readArticleTypeReadings(root), /decisione non valida/u);
+    });
+  });
+
+  test('il manifesto rifiuta una riga editoriale omessa prima del fallback per citazione', () => {
+    withFixture((root) => {
+      const rows = backfillType.readArticleTypeReadings(root);
+      rows.push({
+        id: 'citation-news',
+        decision: 'unclassified',
+        reason: 'Lettura editoriale non conclusiva.',
+        readAt: '2026-10-06',
+        basis: 'reading',
+      });
+      writeLedger(root, rows);
+      const truncated = rows.filter((row) => row.id !== 'citation-news');
+      writeFileSync(join(root, 'data/article-type-readings.json'), `${JSON.stringify(truncated, null, 2)}\n`);
+
+      assert.throws(() => backfillType.planBackfill(root), /copertura incompleta/u);
+    });
+  });
+
+  test('il manifesto rifiuta contenuto alterato anche se il numero di righe non cambia', () => {
+    withFixture((root) => {
+      const rows = backfillType.readArticleTypeReadings(root);
+      writeLedger(root, rows);
+      const altered = rows.map((row, index) => index === 0 ? { ...row, reason: 'motivo alterato' } : row);
+      writeFileSync(join(root, 'data/article-type-readings.json'), `${JSON.stringify(altered, null, 2)}\n`);
+
+      assert.throws(
+        () => backfillType.readArticleTypeReadings(root),
+        /digest di copertura non corrispondente/u,
+      );
+    });
+  });
+
+  test('il ledger rifiuta readAt successivi al giorno di verifica', () => {
+    withFixture((root) => {
+      const rows = backfillType.readArticleTypeReadings(root);
+      rows[0].readAt = '2026-10-07';
+      writeLedger(root, rows);
+
+      assert.equal(backfillType.isReadAtNotFuture('2026-10-07', '2026-10-06'), false);
+      assert.throws(
+        () => backfillType.readArticleTypeReadings(root, { todayYmd: '2026-10-06' }),
+        /readAt nel futuro/u,
+      );
     });
   });
 
@@ -234,11 +280,11 @@ describe('ledger di lettura e piano di backfill', () => {
       join(root, 'content/blog-body-ch/it/swiss-citation.ts'),
       "const fields = {\n  'blog.article.swiss-citation.body3': 'Testo.\\n\\n*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/124)*',\n};\n",
     );
-    writeFileSync(join(root, 'data/article-type-readings.json'), `${JSON.stringify([
+    writeLedger(root, [
       { id: 'ledger-news', decision: 'news', reason: 'Cronaca datata inequivocabile.', readAt: '2026-10-06', basis: 'reading' },
       { id: 'ledger-guide', decision: 'evergreen', reason: 'Guida pratica inequivocabile.', readAt: '2026-10-06', basis: 'reading' },
       { id: 'ledger-uncertain', decision: 'unclassified', reason: 'La lettura non distingue con certezza il tipo.', readAt: '2026-10-06', basis: 'reading' },
-    ], null, 2)}\n`);
+    ]);
     try {
       return callback(root);
     } finally {
@@ -280,4 +326,31 @@ describe('ledger di lettura e piano di backfill', () => {
       assert.equal(readFileSync(join(root, 'content/blog-articles-data.ts'), 'utf8'), frontAfterFirst);
     });
   });
+
+  test('apply ripristina il primo registry se il rename del secondo fallisce', () => {
+    withFixture((root) => {
+      const plan = backfillType.planBackfill(root);
+      const frontFile = join(root, 'content/blog-articles-data.ts');
+      const before = readFileSync(frontFile, 'utf8');
+      const blockedSwissPath = join(root, 'swiss-registry-is-a-directory');
+      mkdirSync(blockedSwissPath);
+      plan.svizzera.registryFile = blockedSwissPath;
+
+      assert.throws(() => backfillType.applyPlan(plan), /EISDIR|EEXIST|directory/u);
+      assert.equal(readFileSync(frontFile, 'utf8'), before, 'il primo registry deve tornare ai byte originali');
+      assert.deepEqual(readdirSync(join(root, 'content')).filter((name) => name.endsWith('.tmp')), []);
+      assert.deepEqual(readdirSync(root).filter((name) => name.endsWith('.pair.tmp')), []);
+    });
+  });
+
+  function writeLedger(root, rows) {
+    const manifest = {
+      schemaVersion: 1,
+      expectedRows: rows.length,
+      rowsSha256: backfillType.articleTypeReadingsDigest(rows),
+    };
+    writeFileSync(join(root, 'data/article-type-readings.json'), `${JSON.stringify(rows, null, 2)}\n`);
+    writeFileSync(join(root, 'data/article-type-readings.manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
+    return manifest;
+  }
 });
