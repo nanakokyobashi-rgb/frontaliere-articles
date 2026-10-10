@@ -231,6 +231,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aargau-pfas-bonifiche-incerte': {
+    title: 'PFAS in Argovia: costi di bonifica ancora incerti',
+    description: 'In Argovia solo due terzi dei Comuni hanno risposto sul PFAS. La stima svizzera delle bonifiche va da 1 a 26 miliardi CHF, ma il conto cantonale resta incerto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pfas, argovia, costi, bonifica',
+    ogTitle: 'Bonifiche PFAS in Argovia: costi ancora incerti',
+    ogDescription: 'Il Governo argoviese sta completando il quadro sui precedenti impieghi di schiume PFAS. Mancano ancora limiti federali specifici e dati completi; per gli interventi dei vigili del fuoco pubblici la Confederazione copre il 40% dei costi indicati.',
+    canonicalPath: '/articoli-argovia/aargau-pfas-bonifiche-incerte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PFAS in Argovia: costi di bonifica ancora incerti",
+      "description": "In Argovia solo due terzi dei Comuni hanno risposto sul PFAS. La stima svizzera delle bonifiche va da 1 a 26 miliardi CHF, ma il conto cantonale resta incerto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Area industriale in Argovia associata alla verifica delle bonifiche PFAS"
+      },
+      "datePublished": "2026-10-10T12:56:57+00:00",
+      "dateModified": "2026-10-10T12:56:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/aargau-pfas-bonifiche-incerte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

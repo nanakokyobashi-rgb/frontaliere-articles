@@ -1,4 +1,15 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "articleId": "aargau-pfas-bonifiche-incerte",
+      "title": "PFAS in Argovia: costi di bonifica ancora incerti",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T12:56:57.812Z",
+      "lastFailureAt": "2026-10-10T12:56:57.812Z"
+    }
+  ]
 }
