@@ -65,7 +65,7 @@ const HALF_CANTONS = new Set(Object.values(cantonUrlSlugs.cantonGroups ?? {}).fl
 const log = (msg) => console.log(`[refresh-road-events] ${msg}`);
 const fail = (msg) => {
   console.error(`::error::[refresh-road-events] ${msg}`);
-  process.exit(1);
+  process.exitCode = 1;
 };
 
 // An explicit ISO-8601 instant (the producer writes toISOString()), not whatever
@@ -73,68 +73,113 @@ const fail = (msg) => {
 const ISO_INSTANT_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,9})?)?(?:Z|[+-]\d{2}:\d{2})$/;
 const isIso = (v) => typeof v === 'string' && ISO_INSTANT_RE.test(v) && Number.isFinite(Date.parse(v));
 
-const got = await fetchFirstOk(SOURCES);
-if (!got.ok) {
-  log(`no source reachable — keeping the existing cache\n  ${got.errors.join('\n  ')}`);
-  process.exit(0);
-}
-const SOURCE = got.url;
-
-let payload;
-try {
-  payload = JSON.parse(got.body);
-} catch (err) {
-  fail(`${SOURCE} is not valid JSON: ${err.message}`);
+/** Inclusive age window: exactly 48 hours old and exactly one hour ahead are valid. */
+export function isRoadEventsTimestampInWindow(value, now = Date.now()) {
+  if (!isIso(value)) return false;
+  const ageHours = (Number(now) - Date.parse(value)) / 3_600_000;
+  return ageHours >= -MAX_FUTURE_SKEW_HOURS && ageHours <= MAX_AGE_HOURS;
 }
 
-if (payload?.schemaVersion !== 1) {
-  fail(`${SOURCE}: schemaVersion is ${JSON.stringify(payload?.schemaVersion)}, expected 1 — refusing`);
-}
-if (!isIso(payload.generatedAt)) fail(`${SOURCE}: generatedAt is not an ISO date — refusing`);
-if (!Array.isArray(payload.events)) fail(`${SOURCE}: has no events[] array — refusing`);
-if (payload.events.length === 0) fail(`${SOURCE}: carries zero events — refusing`);
-
-const ageHours = (Date.now() - Date.parse(payload.generatedAt)) / 3_600_000;
-if (ageHours < -MAX_FUTURE_SKEW_HOURS) {
-  fail(`${SOURCE}: generatedAt ${payload.generatedAt} is in the future — refusing (a stuck clock would pass the age gate forever)`);
-}
-if (ageHours > MAX_AGE_HOURS) {
-  fail(`${SOURCE}: generatedAt ${payload.generatedAt} is ${Math.round(ageHours)}h old — refusing stale road events`);
-}
-
-const seenIds = new Set();
-payload.events.forEach((e, i) => {
-  const at = `events[${i}]`;
-  if (typeof e?.id !== 'string' || !e.id) fail(`${SOURCE}: ${at}.id missing — refusing`);
-  if (seenIds.has(e.id)) fail(`${SOURCE}: ${at}.id ${JSON.stringify(e.id)} is duplicated — refusing`);
+/** Return the first record-level validation error, preserving fail-closed semantics. */
+export function validateRoadEventsRecord(e, index, { seenIds = new Set() } = {}) {
+  const at = `events[${index}]`;
+  if (typeof e?.id !== 'string' || !e.id) return `${at}.id missing — refusing`;
+  if (seenIds.has(e.id)) return `${at}.id ${JSON.stringify(e.id)} is duplicated — refusing`;
   seenIds.add(e.id);
-  if (HALF_CANTONS.has(e.canton)) {
-    fail(`${SOURCE}: ${at}.canton is the half-canton ${e.canton}, not its URL group — refusing`);
-  }
-  if (!CANTON_GROUPS.has(e.canton)) {
-    fail(`${SOURCE}: ${at}.canton ${JSON.stringify(e.canton)} is not one of the 24 canton URL groups — refusing`);
-  }
-  if (!TYPES.has(e.type)) fail(`${SOURCE}: ${at}.type ${JSON.stringify(e.type)} is not one of ${[...TYPES].join('|')} — refusing`);
-  if (typeof e.title !== 'string' || !e.title.trim()) fail(`${SOURCE}: ${at}.title is empty — refusing`);
-  if (e.url !== null && !/^https:\/\//.test(String(e.url))) fail(`${SOURCE}: ${at}.url is not https or null — refusing`);
+  if (HALF_CANTONS.has(e.canton)) return `${at}.canton is the half-canton ${e.canton}, not its URL group — refusing`;
+  if (!CANTON_GROUPS.has(e.canton)) return `${at}.canton ${JSON.stringify(e.canton)} is not one of the 24 canton URL groups — refusing`;
+  if (!TYPES.has(e.type)) return `${at}.type ${JSON.stringify(e.type)} is not one of ${[...TYPES].join('|')} — refusing`;
+  if (typeof e.title !== 'string' || !e.title.trim()) return `${at}.title is empty — refusing`;
+  if (e.url !== null && !/^https:\/\//.test(String(e.url))) return `${at}.url is not https or null — refusing`;
   for (const k of ['validFrom', 'validTo']) {
-    if (e[k] !== null && !isIso(e[k])) fail(`${SOURCE}: ${at}.${k} is not an ISO date or null — refusing`);
+    if (e[k] !== null && !isIso(e[k])) return `${at}.${k} is not an ISO date or null — refusing`;
   }
   if (e.validFrom && e.validTo && Date.parse(e.validFrom) > Date.parse(e.validTo)) {
-    fail(`${SOURCE}: ${at}.validFrom is after validTo — refusing`);
+    return `${at}.validFrom is after validTo — refusing`;
   }
-  if (typeof e.source !== 'string' || !e.source) fail(`${SOURCE}: ${at}.source missing — refusing`);
-  if (!isIso(e.observedAt)) fail(`${SOURCE}: ${at}.observedAt is not an ISO date — refusing`);
-});
-
-const cantons = new Set(payload.events.map((e) => e.canton));
-if (CHECK_ONLY) {
-  log(`--check: ${payload.events.length} events in ${cantons.size} cantons, wrote nothing`);
-  process.exit(0);
+  if (typeof e.source !== 'string' || !e.source) return `${at}.source missing — refusing`;
+  if (!isIso(e.observedAt)) return `${at}.observedAt is not an ISO date — refusing`;
+  return null;
 }
-fs.mkdirSync(path.dirname(CACHE), { recursive: true });
-// temp + rename: a kill mid-write must not leave a truncated cache behind.
-const tmp = `${CACHE}.${process.pid}.tmp`;
-fs.writeFileSync(tmp, `${JSON.stringify(payload, null, 2)}\n`);
-fs.renameSync(tmp, CACHE);
-log(`cached ${payload.events.length} events in ${cantons.size} cantons (generated ${payload.generatedAt})`);
+
+/** Return a diagnostic for malformed or stale payloads, or null when servable. */
+export function validateRoadEventsPayload(payload, { now = Date.now() } = {}) {
+  if (payload?.schemaVersion !== 1) {
+    return `schemaVersion is ${JSON.stringify(payload?.schemaVersion)}, expected 1 — refusing`;
+  }
+  if (!isIso(payload.generatedAt)) return 'generatedAt is not an ISO date — refusing';
+  if (!Array.isArray(payload.events)) return 'has no events[] array — refusing';
+  if (payload.events.length === 0) return 'carries zero events — refusing';
+
+  const ageHours = (Number(now) - Date.parse(payload.generatedAt)) / 3_600_000;
+  if (!isRoadEventsTimestampInWindow(payload.generatedAt, now)) {
+    if (ageHours < -MAX_FUTURE_SKEW_HOURS) {
+      return `generatedAt ${payload.generatedAt} is in the future — refusing (a stuck clock would pass the age gate forever)`;
+    }
+    return `generatedAt ${payload.generatedAt} is ${Math.round(ageHours)}h old — refusing stale road events`;
+  }
+
+  const seenIds = new Set();
+  for (let i = 0; i < payload.events.length; i += 1) {
+    const error = validateRoadEventsRecord(payload.events[i], i, { seenIds });
+    if (error) return error;
+  }
+  return null;
+}
+
+/** Boolean facade used by admission checks; diagnostics remain available above. */
+export function isValidRoadEventsPayload(payload, options = {}) {
+  return validateRoadEventsPayload(payload, options) === null;
+}
+
+/**
+ * Try each source until its body parses AND passes the road-events contract.
+ * An HTTP 200 with malformed or invalid data is a rejected source, not success.
+ */
+export async function fetchFirstValidRoadEvents(urls, { getBody, now = Date.now() } = {}) {
+  return fetchFirstOk(urls, {
+    ...(getBody ? { getBody } : {}),
+    validate: (payload) => validateRoadEventsPayload(payload, { now }),
+  });
+}
+
+async function main() {
+  const got = await fetchFirstValidRoadEvents(SOURCES);
+  if (!got.ok) {
+    if (!got.sawResponse) {
+      log(`no source reachable — keeping the existing cache\n  ${got.errors.join('\n  ')}`);
+    } else {
+      fail(`no valid source — refusing to replace the existing cache\n  ${got.errors.join('\n  ')}`);
+    }
+    return;
+  }
+
+  const SOURCE = got.url;
+  const payload = got.payload;
+  const cantons = new Set(payload.events.map((e) => e.canton));
+  if (CHECK_ONLY) {
+    log(`--check: ${payload.events.length} events in ${cantons.size} cantons, wrote nothing`);
+    return;
+  }
+  fs.mkdirSync(path.dirname(CACHE), { recursive: true });
+  // temp + rename: a kill mid-write must not leave a truncated cache behind.
+  const tmp = `${CACHE}.${process.pid}.tmp`;
+  fs.writeFileSync(tmp, `${JSON.stringify(payload, null, 2)}\n`);
+  fs.renameSync(tmp, CACHE);
+  log(`cached ${payload.events.length} events in ${cantons.size} cantons (generated ${payload.generatedAt})`);
+}
+
+function isInvokedDirectly() {
+  if (!process.argv[1]) return false;
+  try {
+    // Node may canonicalize a temp-directory symlink in import.meta.url while
+    // argv retains the original path (the contract tests execute an isolated copy).
+    return fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url));
+  } catch {
+    return false;
+  }
+}
+
+if (isInvokedDirectly()) {
+  await main();
+}

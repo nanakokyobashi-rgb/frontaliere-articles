@@ -56,6 +56,13 @@ import { tmpdir } from 'node:os';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenRecording, freshenWindow, freshenYear } from './lib/rewire-contracts.mjs';
+import { fetchFirstOk } from '../scripts/lib/rewire-fetch.mjs';
+import {
+  fetchFirstValidRoadEvents,
+  isRoadEventsTimestampInWindow,
+  isValidRoadEventsPayload,
+  validateRoadEventsPayload,
+} from '../scripts/refresh-road-events.mjs';
 import { rankingFromStats, trendFromStats, MIN_SAMPLES_FOR_RANKING } from '../scripts/lib/border-wait-ranking.mjs';
 import { importSpecifiers, relativeImportSpecifiers } from '../../scripts/ci/lib/import-specifiers.mjs';
 
@@ -195,6 +202,106 @@ const mutated = (c, fn) => {
   const out = fn(payload);
   return asBody(out === undefined ? payload : out);
 };
+
+test('[rewire-fetch] un body non JSON prova la sorgente successiva prima del parse del consumer', async () => {
+  const calls = [];
+  const result = await fetchFirstOk(['primary', 'fallback'], {
+    getBody: async (url) => {
+      calls.push(url);
+      return url === 'primary' ? '{malformed json' : '{"valid":true}';
+    },
+  });
+
+  assert.deepEqual(calls, ['primary', 'fallback']);
+  assert.equal(result.ok, true);
+  assert.equal(result.url, 'fallback');
+  assert.deepEqual(result.payload, { valid: true });
+  assert.match(result.errors[0], /primary is not valid JSON/);
+
+  const noValidJson = await fetchFirstOk(['only-source'], {
+    getBody: async () => '{still malformed',
+  });
+  assert.equal(noValidJson.ok, true);
+  assert.equal(noValidJson.url, 'only-source');
+  assert.equal(noValidJson.payload, undefined);
+  assert.match(noValidJson.body, /still malformed/);
+});
+
+test('[road-events] un HTTP 200 malformato non impedisce il fallback valido', async () => {
+  const now = Date.now();
+  const payload = structuredClone(servable(contract('road-events')));
+  payload.generatedAt = new Date(now).toISOString();
+  const calls = [];
+  const result = await fetchFirstValidRoadEvents(['primary', 'fallback'], {
+    now,
+    getBody: async (url) => {
+      calls.push(url);
+      return url === 'primary' ? '{malformed json' : JSON.stringify(payload);
+    },
+  });
+
+  assert.deepEqual(calls, ['primary', 'fallback']);
+  assert.equal(result.ok, true);
+  assert.equal(result.url, 'fallback');
+  assert.equal(result.payload.generatedAt, payload.generatedAt);
+  assert.match(result.errors[0], /primary is not valid JSON/);
+});
+
+test('[road-events] un payload JSON non valido continua sul fallback e non viene ammesso', async () => {
+  const now = Date.now();
+  const payload = structuredClone(servable(contract('road-events')));
+  payload.generatedAt = new Date(now).toISOString();
+  const result = await fetchFirstValidRoadEvents(['primary', 'fallback'], {
+    now,
+    getBody: async (url) => JSON.stringify(url === 'primary' ? { schemaVersion: 2 } : payload),
+  });
+
+  assert.equal(result.ok, true);
+  assert.equal(result.url, 'fallback');
+  assert.match(result.errors[0], /schemaVersion is 2, expected 1/);
+
+  const rejected = await fetchFirstValidRoadEvents(['primary'], {
+    now,
+    getBody: async () => JSON.stringify({ schemaVersion: 2 }),
+  });
+  assert.equal(rejected.ok, false);
+  assert.equal(rejected.sawResponse, true);
+  assert.match(rejected.errors[0], /schemaVersion is 2, expected 1/);
+});
+
+test('[road-events] la finestra temporale include esattamente -1h e 48h', () => {
+  const now = Date.UTC(2026, 9, 10, 12);
+  const atFutureBoundary = new Date(now + 3_600_000).toISOString();
+  const atOldBoundary = new Date(now - 48 * 3_600_000).toISOString();
+  const futureOutside = new Date(now + 3_600_001).toISOString();
+  const oldOutside = new Date(now - 48 * 3_600_000 - 1).toISOString();
+
+  assert.equal(isRoadEventsTimestampInWindow(atFutureBoundary, now), true);
+  assert.equal(isRoadEventsTimestampInWindow(atOldBoundary, now), true);
+  assert.equal(isRoadEventsTimestampInWindow(futureOutside, now), false);
+  assert.equal(isRoadEventsTimestampInWindow(oldOutside, now), false);
+
+  const payload = structuredClone(servable(contract('road-events')));
+  payload.generatedAt = atOldBoundary;
+  assert.equal(isValidRoadEventsPayload(payload, { now }), true);
+  payload.generatedAt = oldOutside;
+  assert.match(validateRoadEventsPayload(payload, { now }), /is \d+h old — refusing stale road events/);
+});
+
+test('[road-events] la validazione combinata rifiuta duplicato, semicantone e intervallo invertito', () => {
+  const payload = structuredClone(servable(contract('road-events')));
+  const index = payload.events.findIndex((event, i) => i > 0 && event.validFrom && event.validTo);
+  assert.ok(index > 0, 'il fixture deve avere un secondo record con entrambe le date');
+  payload.events[index].id = payload.events[0].id;
+  payload.events[index].canton = 'BL';
+  [payload.events[index].validFrom, payload.events[index].validTo] = [
+    payload.events[index].validTo,
+    payload.events[index].validFrom,
+  ];
+
+  assert.equal(isValidRoadEventsPayload(payload), false);
+  assert.match(validateRoadEventsPayload(payload), /is duplicated — refusing/);
+});
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 1. Il registro non deve poter marcire
