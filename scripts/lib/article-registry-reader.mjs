@@ -197,6 +197,11 @@ export function readTopLevelString(record, key) {
   return stringBody(record?.properties?.get(key)?.raw);
 }
 
+/** Read the raw source text of one top-level property from a scanned row. */
+export function readTopLevelRaw(record, key) {
+  return record?.properties?.get(key)?.raw ?? null;
+}
+
 /** Read one top-level boolean property from a scanned article row. */
 export function readTopLevelBoolean(record, key) {
   return /^true\b/u.test(String(record?.properties?.get(key)?.raw ?? '').trim());

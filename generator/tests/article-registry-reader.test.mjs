@@ -8,6 +8,8 @@ import {
   readTopLevelString,
   scanTopLevelArticleRecords,
 } from '../../scripts/lib/article-registry-reader.mjs';
+import { readRegistryEntries } from '../scripts/lib/registry-article-type.mjs';
+import { readRegistryCantons, registryEntrySpans } from '../scripts/lib/registry-canton-field.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -43,11 +45,13 @@ test('lo scanner legge solo i campi top-level di ogni riga del registro', () => 
   assert.equal(readTopLevelBoolean(records[1], 'hasCalculator'), false);
 });
 
-test('i tre consumer usano lo scanner condiviso', () => {
+test('tutti i reader del registry usano lo scanner condiviso', () => {
   const callers = [
     'scripts/build-blog-index.mjs',
     'scripts/backfill-image-credits.mjs',
     'generator/scripts/create-article.mjs',
+    'generator/scripts/lib/registry-article-type.mjs',
+    'generator/scripts/lib/registry-canton-field.mjs',
   ];
   for (const relative of callers) {
     const src = fs.readFileSync(path.join(ROOT, relative), 'utf8');
@@ -55,4 +59,26 @@ test('i tre consumer usano lo scanner condiviso', () => {
     assert.doesNotMatch(src, /matchAll\(\/image:/, relative);
     assert.doesNotMatch(src, /matchAll\(\/\\{\\s\*id:/, relative);
   }
+});
+
+test('i reader di articleType e canton non si fermano su una graffa annidata', () => {
+  const src = `const RAW = [{
+    id: 'reale',
+    metadata: { id: 'annidato', date: '1900-01-01', canton: ['VS'] },
+    date: '2026-10-10',
+    image: '/images/blog/reale.webp',
+    articleType: 'news',
+    canton: ['TI'],
+  }, {
+    id: 'secondo',
+    date: '2026-10-09',
+    image: '/images/blog/secondo.webp',
+  }];`;
+
+  assert.deepEqual(readRegistryEntries(src), [
+    { id: 'reale', date: '2026-10-10', articleType: 'news', verifiedAt: undefined },
+    { id: 'secondo', date: '2026-10-09', articleType: undefined, verifiedAt: undefined },
+  ]);
+  assert.equal(registryEntrySpans(src).length, 2);
+  assert.deepEqual([...readRegistryCantons(src)], [['reale', ['TI']]]);
 });

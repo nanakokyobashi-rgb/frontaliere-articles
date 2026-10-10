@@ -40,6 +40,7 @@
 
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { registryEntrySpans, renderCantonLine } from './registry-canton-field.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 
 /** I due valori ammessi nel registry. */
 export const REGISTRY_ARTICLE_TYPES = Object.freeze(['news', 'evergreen']);
@@ -205,27 +206,19 @@ export function applyRegistryArticleTypes(source, typesById) {
 
 /**
  * Le voci di un sorgente di registry, lette con lo stesso pattern di
- * `scripts/build-blog-index.mjs:readRegistry` (regex, non import del modulo
- * TS: questo modulo deve restare caricabile da `node` puro).
+ * `scripts/build-blog-index.mjs:readRegistry` (scanner bilanciato, non import
+ * del modulo TS: questo modulo deve restare caricabile da `node` puro).
  *
  * @param {string} registrySource
  * @returns {{id: string, date: string, articleType?: string, verifiedAt?: string}[]}
  */
 export function readRegistryEntries(registrySource) {
-  const out = [];
-  const rx = /\{\s*id:\s*'([^']+)'([\s\S]*?)\}/g;
-  let m;
-  while ((m = rx.exec(String(registrySource || ''))) !== null) {
-    const [, id, body] = m;
-    const pick = (k) => (body.match(new RegExp(`\\b${k}:\\s*'([^']*)'`)) ?? [])[1];
-    out.push({
-      id,
-      date: pick('date') ?? '',
-      articleType: pick('articleType'),
-      verifiedAt: pick('verifiedAt'),
-    });
-  }
-  return out;
+  return scanTopLevelArticleRecords(registrySource).map((record) => ({
+    id: record.id,
+    date: readTopLevelString(record, 'date') ?? '',
+    articleType: readTopLevelString(record, 'articleType') ?? undefined,
+    verifiedAt: readTopLevelString(record, 'verifiedAt') ?? undefined,
+  }));
 }
 
 /**

@@ -251,9 +251,10 @@ function cdnBlogImage(p) {
 
 /**
  * Registry entries as `{ id: '…', category: '…', date: '…', image: '…' }`
- * object literals. Parsed with a regex rather than imported: this file must not
- * drag the corpus's TS module graph (and its extensionless specifiers) into a
- * plain-node script, and the shapes here are emitted by our own generator.
+ * object literals. Read with the shared balanced scanner rather than imported:
+ * this file must not drag the corpus's TS module graph (and its extensionless
+ * specifiers) into a plain-node script, and the shapes here are emitted by our
+ * own generator.
  *
  * `image` is the raw literal, so it is rewritten through `cdnBlogImage` above
  * to land on the value the registry's own export carries.

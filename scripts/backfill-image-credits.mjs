@@ -127,7 +127,8 @@ function writeTextAtomic(file, text) {
 
 /**
  * `id → image` of every registry row, read the way build-blog-index.mjs
- * reads them (a regex over the generator's own literal shape, no TS import).
+ * reads them (the shared balanced scanner over the generator's own literal
+ * shape, no TS import).
  */
 export function readRegistryImages(root) {
   /** @type {Map<string, string>} */
