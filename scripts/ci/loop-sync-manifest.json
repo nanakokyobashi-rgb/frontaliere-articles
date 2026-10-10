@@ -3000,6 +3000,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/events-digest-localization.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del producer corpus-only generate-events-digest-article.mjs: ripara gli esonimi nei campi localizzati solo quando sono appaiati alla sorgente italiana e usa la tabella condivisa di toponimi. Il sito non genera questo articolo: riceve il JSON pubblicato via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "96a2afa2a1367c6d",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "generator/scripts/lib/events-utils.mjs",
       "sitePath": "scripts/lib/events-utils.mjs",
       "mode": "adapted",
