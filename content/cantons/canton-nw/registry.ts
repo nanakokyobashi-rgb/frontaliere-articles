@@ -17,4 +17,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'postauto-orario-nidvaldo-2026',
+ category: 'novita',
+ date: '2026-10-10T17:33:10.930Z',
+ image: '/images/blog/apprendistato-nidvaldo-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NW'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -30,6 +30,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-10T16:58:42.995Z",
       "lastFailureAt": "2026-10-10T17:10:31.270Z"
+    },
+    {
+      "articleId": "postauto-orario-nidvaldo-2026",
+      "title": "PostAuto, nuovo orario in Nidvaldo dal 13 dicembre 2026",
+      "fallbackImage": "/images/blog/apprendistato-nidvaldo-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T17:33:10.952Z",
+      "lastFailureAt": "2026-10-10T17:33:10.952Z"
     }
   ]
 }
