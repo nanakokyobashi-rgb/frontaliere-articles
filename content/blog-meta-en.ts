@@ -12964,7 +12964,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Alpine rescuers training with a stretcher in a rugged mountain channel',
     'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese: mushroom guide to reduce accidents in the woods',
     'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'The Prefect urges a campaign on the risks in the woods The handbook is entitled «Safe Mushroom Hunting» The request involves Municipalities, schools, Communities',
-    'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Hiker checks mushrooms in woods with CNSAS safety guide',
+    'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

@@ -43713,7 +43713,7 @@ const RAW_ARTICLES = [
  id: 'vademecum-funghi-sicurezza-varese',
  category: 'pratico',
  date: '2026-10-10T23:02:35.614Z',
- image: '/images/blog/article-incidenti-notte-varese.webp',
+ image: '/images/blog/article-vademecum-funghi-sicurezza-varese.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

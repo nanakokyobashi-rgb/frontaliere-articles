@@ -25,21 +25,11 @@
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic alpine rescue illustration, but it contains clearly recognizable foreground climbers.); gemini (Gemini image request fail",
+      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic illustrated alpine rescue training scene; no text, logos, or recognizable faces, but multiple recognizable foreground peo",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-10T22:59:11.214Z"
-    },
-    {
-      "articleId": "vademecum-funghi-sicurezza-varese",
-      "title": "Varese: vademecum funghi per ridurre incidenti nei boschi",
-      "fallbackImage": "/images/blog/article-incidenti-notte-varese.webp",
-      "reason": "All image providers failed for article-vademecum-funghi-sicurezza-varese: openai-codex (vision gate rejected image: Relevant original illustration, but it includes a recognizable f",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T23:02:36.168Z",
-      "lastFailureAt": "2026-10-10T23:02:36.168Z"
+      "lastFailureAt": "2026-10-10T23:10:11.016Z"
     }
   ]
 }
