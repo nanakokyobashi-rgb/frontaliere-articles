@@ -43523,6 +43523,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'raffica-scontri-varesotto',
+ category: 'novita',
+ date: '2026-10-10T01:44:21.822Z',
+ image: '/images/blog/article-raffica-scontri-varesotto.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
