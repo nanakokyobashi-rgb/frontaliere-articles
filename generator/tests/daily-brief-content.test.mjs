@@ -25,6 +25,7 @@ import {
   humanDate,
 } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
+import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
 
 const BRIEF = {
   schemaVersion: 1,
@@ -114,6 +115,25 @@ test('every locale gets 4 bodies, its hub links and a 3-question FAQ', () => {
   assert.match(article.content.de.body1, /\/de\/wartezeit-grenze\//);
   assert.match(article.content.en.body2, /\/en\/gasoline-price-switzerland\/today\//);
   assert.match(article.content.fr.body4, /\/fr\/trouver-emploi-tessin\//);
+});
+
+test('localizes dynamic border-crossing exonyms before the shared factuality gate', () => {
+  const brief = structuredClone(BRIEF);
+  const name = 'Basel – Weil am Rhein, Autostrada A2/A5';
+  brief.blocks.borderWait.worst = { ...brief.blocks.borderWait.worst, name, waitMinutes: 47 };
+  brief.blocks.borderWait.crossings[0] = {
+    ...brief.blocks.borderWait.crossings[0],
+    name,
+    waitMinutes: 47,
+  };
+
+  const article = buildDailyBriefArticle(brief);
+  assert.match(article.content.fr.title, /à Bâle – Weil am Rhein/);
+  assert.match(article.content.fr.body1, /Bâle – Weil am Rhein/);
+  assert.match(article.content.it.title, /a Basilea – Weil am Rhein/);
+  assert.match(article.content.en.title, /at Basel – Weil am Rhein/);
+  assert.match(article.content.de.title, /in Basel – Weil am Rhein/);
+  assert.deepEqual(findArticleLocalizedToponymMismatches(article), []);
 });
 
 /**

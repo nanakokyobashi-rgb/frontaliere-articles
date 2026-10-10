@@ -20,6 +20,7 @@
  * `/prezzi-benzina/oggi/`).
  */
 import { readFileSync, existsSync } from 'node:fs';
+import { replaceLocalizedToponymMismatches } from './localized-toponyms.mjs';
 
 export const DAILY_BRIEF_ID_PREFIX = 'bollettino-frontaliere-';
 /** Keep this many editions in the blog sitemap; older ones are de-listed. */
@@ -113,6 +114,38 @@ function fmt(locale, n, digits = 0) {
 function signed(locale, n, digits) {
   if (!Number.isFinite(n)) return '—';
   return `${n > 0 ? '+' : ''}${fmt(locale, n, digits)}`;
+}
+
+/**
+ * Border-wait source names are canonical source labels, not locale-specific
+ * prose. Project canton/capital exonyms into the target locale before those
+ * labels enter a title or body; otherwise the shared factuality gate correctly
+ * rejects (for example) `Basel` in a French edition.
+ */
+function localizeBorderWaitName(value, locale) {
+  if (typeof value !== 'string' || !value) return value;
+  return replaceLocalizedToponymMismatches({
+    sourceText: value,
+    targetText: value,
+    locale,
+  }).text;
+}
+
+function localizeBorderWaitBlock(block, locale) {
+  if (!block || typeof block !== 'object') return block;
+  return {
+    ...block,
+    ...(block.worst && typeof block.worst === 'object'
+      ? { worst: { ...block.worst, name: localizeBorderWaitName(block.worst.name, locale) } }
+      : {}),
+    ...(Array.isArray(block.crossings)
+      ? {
+        crossings: block.crossings.map((crossing) => crossing && typeof crossing === 'object'
+          ? { ...crossing, name: localizeBorderWaitName(crossing.name, locale) }
+          : crossing),
+      }
+      : {}),
+  };
 }
 
 /**
@@ -523,7 +556,13 @@ function mdTable(headerCells, rows) {
 
 function buildLocaleContent(locale, brief, headline) {
   const t = T[locale];
-  const { blocks } = brief;
+  const blocks = {
+    ...brief.blocks,
+    borderWait: localizeBorderWaitBlock(brief.blocks?.borderWait, locale),
+  };
+  const localeHeadline = headline?.kind === 'borderWait'
+    ? { ...headline, name: localizeBorderWaitName(headline.name, locale) }
+    : headline;
   const dateLabel = humanDate(brief.dateIso, locale);
   const wd = weekday(brief.dateIso, locale);
 
@@ -600,7 +639,7 @@ function buildLocaleContent(locale, brief, headline) {
   // `buildMetaBlock` emits title/excerpt/imageAlt only, and `buildBodyFile`
   // scans body1..bodyN — extra keys here are inert in the corpus surface.
   return {
-    title: t.title(dateLabel, t.headline(headline)),
+    title: t.title(dateLabel, t.headline(localeHeadline)),
     excerpt: t.excerpt(dateLabel),
     seoDescription: t.seoDescription(dateLabel),
     ogDescription: t.ogDescription(dateLabel),
