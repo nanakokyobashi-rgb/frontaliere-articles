@@ -2713,13 +2713,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
 export type SwissSlugFallbackReason = {
-  source: 'it-slug' | 'legacy-route';
+  source: 'it-slug';
   reason: string;
 };
 export const SWISS_SLUG_FALLBACK_REASONS: Record<string, Partial<Record<ArticleLocale, SwissSlugFallbackReason>>> = {
-  'imposte-alla-fonte-ticino': {
-    de: { source: 'legacy-route', reason: 'published-before-localized-exonym-repair; preserves-route-uniqueness' },
-  },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
