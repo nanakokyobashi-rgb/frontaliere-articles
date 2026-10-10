@@ -195,12 +195,22 @@ function staticLiteral(property) {
   return undefined;
 }
 
+function isTypeDeclarationObject(source, open) {
+  const header = source.slice(Math.max(0, open - 512), open);
+  return /\binterface\s+[A-Za-z_$][\w$]*(?:\s+extends\s+[^{}]+)?\s*$/u.test(header)
+    || /\btype\s+[A-Za-z_$][\w$]*(?:<[^{}>]+>)?\s*=\s*[^{}]*$/u.test(header);
+}
+
 /**
  * Read the direct literal entries of a generated article registry. Nested
  * objects, strings, and comments are skipped; ambiguous image declarations
  * fail closed so callers never select or delete a guessed cover.
  */
-export function readArticleRegistry(source, label = 'registry', { rejectNestedImage = false } = {}) {
+export function readArticleRegistry(
+  source,
+  label = 'registry',
+  { rejectNestedImage = false, rejectDynamicId = true } = {},
+) {
   const entries = [];
   for (let i = 0; i < source.length;) {
     if (source[i] === '/' && (source[i + 1] === '/' || source[i + 1] === '*')) {
@@ -214,13 +224,22 @@ export function readArticleRegistry(source, label = 'registry', { rejectNestedIm
     if (source[i] !== '{') { i += 1; continue; }
 
     const object = parseObject(source, i, label);
+    // Registry files are TypeScript modules: skip the declared Article shape
+    // as a whole, rather than mistaking `id: string` for an ambiguous row.
+    if (isTypeDeclarationObject(source, i)) {
+      i = object.close + 1;
+      continue;
+    }
     const idProperties = object.properties.filter(({ key }) => key === 'id');
     if (idProperties.length > 0) {
       const staticIds = idProperties.map(staticLiteral).filter((value) => typeof value === 'string' && value.length > 0);
-      // TypeScript interfaces also declare `id: string`; only a static string
-      // value is an article row. Dynamic row ids were never accepted by the
-      // previous literal readers and are not evidence for a cover.
-      if (staticIds.length === 0) { i += 1; continue; }
+      // A dynamic id may still describe a live row whose cover must remain in
+      // use. Do not silently omit it from retirement evidence.
+      if (staticIds.length === 0) {
+        if (rejectDynamicId) throw new Error(`${label}: id del registro non è una stringa letterale univoca`);
+        i += 1;
+        continue;
+      }
       if (idProperties.length !== 1 || staticIds.length !== 1) {
         throw new Error(`${label}: id del registro non è una stringa letterale univoca`);
       }

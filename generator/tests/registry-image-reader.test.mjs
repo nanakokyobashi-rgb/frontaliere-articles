@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
 
 test('registry reader skips comments, strings and nested properties, keeping the direct image', () => {
-  const source = `export const articles = [{
+  const source = `export interface Article { id: string; image: string; }
+  export const articles = [{
     id: 'article-one',
     details: { image: '/nested.webp', text: "a closing } and image: '/string.webp'" },
     /* comment between the comma and the direct property */
@@ -30,6 +31,14 @@ test('registry reader fails closed on accessors, dynamic images and duplicate im
   assert.throws(
     () => readArticleRegistry("[{ id: 'duplicate', image: '/one.webp', 'image': '/two.webp' }]"),
     /proprietà image ripetuta/,
+  );
+  assert.throws(
+    () => readArticleRegistry(
+      "export interface Article { id: string; image: string; }\nconst rows = [{ id: resolveId(), image: '/possibly-live.webp' }];",
+      'fixture.ts',
+    ),
+    /id del registro non è una stringa letterale univoca/,
+    'una riga con id dinamico non deve sparire dalla prova di copertina in uso',
   );
 });
 
