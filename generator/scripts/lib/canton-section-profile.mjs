@@ -744,6 +744,15 @@ export function filterCantonSourceHeadlines(profile, source, headlines) {
     const textWithoutSharedAlias = text.replace(SHARED_CANTON_AMBIGUOUS_RE, ' ');
     const urlCanton = sharedCantonFeedUrl(h.url, source?.url);
     if (urlCanton && urlCanton !== wanted) return false;
+    const textCantons = Object.entries(SHARED_CANTON_AREA_ALIASES)
+      .filter(([, areaAliases]) => termHits(
+        textWithoutSharedAlias,
+        areaAliases.filter((alias) => !alias.includes('.ch')),
+      ) > 0)
+      .map(([code]) => code);
+    // A scoped URL is evidence for one side, not permission to ignore explicit
+    // contradictory location text in the title or lead.
+    if (textCantons.some((code) => code !== wanted)) return false;
     return profile?.isLocalArea?.(textWithoutSharedAlias)
       || termHits(textWithoutSharedAlias, textAliases) > 0
       || termHits(h.url || '', urlAliases) > 0

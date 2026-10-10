@@ -36,6 +36,15 @@ test('un feed cantonale condiviso usa il path della notizia solo se identifica u
     filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'NW' } }, headlines).map((item) => item.url),
     [nwUrl],
   );
+
+  const contradictory = [
+    { headline: 'Stans berichtet über Obwalden', url: nwUrl },
+    { headline: 'Engelberg berichtet über Nidwalden', url: owUrl },
+    { headline: 'Stans und Sarnen im gemeinsamen Bericht', url: nwUrl },
+  ];
+  const ow = buildCantonProfile('canton-ow', { nationalTopicalKeywords: [], nationalAdmissionKeywords: [] });
+  assert.deepEqual(filterCantonSourceHeadlines(nw, { quirks: { filterByCanton: 'NW' } }, contradictory), []);
+  assert.deepEqual(filterCantonSourceHeadlines(ow, { quirks: { filterByCanton: 'OW' } }, contradictory), []);
 });
 
 test('la chiave canonica normalizza encoding, diacritici Unicode e varianti same-host da redirect', () => {
