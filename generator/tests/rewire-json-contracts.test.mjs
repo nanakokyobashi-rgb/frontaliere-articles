@@ -57,6 +57,7 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { REWIRE_CONTRACTS, contract, freshenGeneratedAt, freshenRecording, freshenWindow, freshenYear } from './lib/rewire-contracts.mjs';
 import { fetchFirstOk } from '../scripts/lib/rewire-fetch.mjs';
+import { fetchFirstValidBorderWaitAverages } from '../scripts/lib/border-wait-averages.mjs';
 import {
   fetchFirstValidRoadEvents,
   isRoadEventsTimestampInWindow,
@@ -227,6 +228,23 @@ test('[rewire-fetch] un body non JSON prova la sorgente successiva prima del par
   assert.match(noValidJson.body, /still malformed/);
 });
 
+test('[rewire-fetch] un HTTP 200 vuoto conta come risposta e non come publisher irraggiungibile', async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({ ok: true, text: async () => '' });
+  try {
+    const result = await fetchFirstOk(['empty-200'], {
+      retries: 1,
+      validate: () => 'empty body is not a dataset',
+    });
+
+    assert.equal(result.ok, false);
+    assert.equal(result.sawResponse, true);
+    assert.match(result.errors[0], /empty-200 is not valid JSON/);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test('[road-events] un HTTP 200 malformato non impedisce il fallback valido', async () => {
   const now = Date.now();
   const payload = structuredClone(servable(contract('road-events')));
@@ -267,6 +285,48 @@ test('[road-events] un payload JSON non valido continua sul fallback e non viene
   assert.equal(rejected.ok, false);
   assert.equal(rejected.sawResponse, true);
   assert.match(rejected.errors[0], /schemaVersion is 2, expected 1/);
+});
+
+test('[road-events] la finestra dei 48h usa l’orologio dopo il fetch', async () => {
+  const startedAt = Date.UTC(2026, 9, 10, 12);
+  const originalNow = Date.now;
+  let currentNow = startedAt;
+  Date.now = () => currentNow;
+  try {
+    const payload = structuredClone(servable(contract('road-events')));
+    payload.generatedAt = new Date(startedAt - 48 * 3_600_000).toISOString();
+    const result = await fetchFirstValidRoadEvents(['delayed-primary'], {
+      getBody: async () => {
+        currentNow = startedAt + 1;
+        return JSON.stringify(payload);
+      },
+    });
+
+    assert.equal(result.ok, false);
+    assert.equal(result.sawResponse, true);
+    assert.match(result.errors[0], /refusing stale road events/);
+  } finally {
+    Date.now = originalNow;
+  }
+});
+
+test('[border-wait-averages] una risposta 200 non valida passa alla source di fallback', async () => {
+  const payload = servable(contract('border-wait-averages'));
+  const calls = [];
+  const result = await fetchFirstValidBorderWaitAverages(['primary', 'fallback'], {
+    previousCount: 0,
+    getBody: async (url) => {
+      calls.push(url);
+      return url === 'primary'
+        ? JSON.stringify({ 'chiasso-brogeda': { morning: 15 } })
+        : JSON.stringify(payload);
+    },
+  });
+
+  assert.deepEqual(calls, ['primary', 'fallback']);
+  assert.equal(result.ok, true);
+  assert.equal(result.url, 'fallback');
+  assert.match(result.errors[0], /not a "N min" or "N-M min" range/);
 });
 
 test('[road-events] la finestra temporale include esattamente -1h e 48h', () => {

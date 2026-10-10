@@ -136,10 +136,13 @@ export function isValidRoadEventsPayload(payload, options = {}) {
  * Try each source until its body parses AND passes the road-events contract.
  * An HTTP 200 with malformed or invalid data is a rejected source, not success.
  */
-export async function fetchFirstValidRoadEvents(urls, { getBody, now = Date.now() } = {}) {
+export async function fetchFirstValidRoadEvents(urls, { getBody, now } = {}) {
   return fetchFirstOk(urls, {
     ...(getBody ? { getBody } : {}),
-    validate: (payload) => validateRoadEventsPayload(payload, { now }),
+    // `now` is an optional deterministic test override. In production read the
+    // clock only after the body has arrived, so a fetch/retry cannot extend the
+    // accepted 48-hour window using its start time.
+    validate: (payload) => validateRoadEventsPayload(payload, { now: now ?? Date.now() }),
   });
 }
 

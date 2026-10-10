@@ -29,8 +29,10 @@ export async function getRewireUrl(url, { retries = 4, headers = REWIRE_FETCH_HE
       const res = await fetch(url, { redirect: 'follow', headers });
       if (res.ok) {
         const body = await res.text();
-        if (body.length > 0) return body;
-        lastErr = new Error('empty body');
+        // An empty 2xx response is still a response. Let the JSON/schema
+        // validator reject it so callers fail closed instead of treating two
+        // empty publications as an unreachable publisher and keeping stale data.
+        return body;
       } else {
         const err = new Error(`HTTP ${res.status}`);
         if (res.status < 500 && res.status !== 429) throw err;
