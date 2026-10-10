@@ -21,6 +21,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.cyberattacco-casse-pensione-berna.title': 'Cyberattaque contre la fournisseuse des caisses de pension bernoises',
     'blog.article.cyberattacco-casse-pensione-berna.excerpt': 'Une fournisseuse externe de logiciels de BPK et de BLVK a été touchée fin septembre.',
     'blog.article.cyberattacco-casse-pensione-berna.imageAlt': 'Bâtiment administratif dans le canton de Berne lié à la prévoyance professionnelle',
+    'blog.article.traffico-berna-manifestazione.title': 'Berne : perturbations possibles en raison d\'une manifestation non autorisée',
+    'blog.article.traffico-berna-manifestazione.excerpt': 'Berne signale de possibles fermetures de routes et des perturbations le dimanche 11 octobre 2026 en raison d\'une manifestation non autorisée : indications pour les personnes qui se déplacent en ville.',
+    'blog.article.traffico-berna-manifestazione.imageAlt': 'Rues de Berne avec restrictions de circulation possibles le dimanche 11 octobre 2026',
 };
 
 export default blogMetaCantonBeFr;

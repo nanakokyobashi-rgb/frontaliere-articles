@@ -231,6 +231,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-traffico-berna-manifestazione': {
+    title: 'Berna: possibili disagi per manifestazione non autorizzata',
+    description: 'Berna segnala possibili chiusure stradali e disagi domenica 11 ottobre 2026 per una manifestazione non autorizzata: indicazioni per chi viaggia in città.',
+    keywords: 'frontalieri, ticino, svizzera, italia, berna, possibili, disagi, manifestazione',
+    ogTitle: 'Berna: possibili disagi per manifestazione non autorizzata',
+    ogDescription: 'La Polizia cantonale bernese annuncia un dispositivo di sicurezza per domenica 11 ottobre 2026. Nel pomeriggio e in serata sono possibili chiusure temporanee, rallentamenti e deviazioni del trasporto pubblico: Bernmobil fornirà gli aggiornamenti.',
+    canonicalPath: '/articoli-berna/traffico-berna-manifestazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Berna: possibili disagi per manifestazione non autorizzata",
+      "description": "Berna segnala possibili chiusure stradali e disagi domenica 11 ottobre 2026 per una manifestazione non autorizzata: indicazioni per chi viaggia in città.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-traffico-berna-manifestazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strade di Berna con possibili limitazioni del traffico domenica 11 ottobre 2026"
+      },
+      "datePublished": "2026-10-10T07:15:47+00:00",
+      "dateModified": "2026-10-10T07:15:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/traffico-berna-manifestazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
