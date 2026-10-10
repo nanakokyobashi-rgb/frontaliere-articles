@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'autobus-elettrici-mendrisiotto-amsa',
+ category: 'novita',
+ date: '2026-10-10T10:49:09.228Z',
+ image: '/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

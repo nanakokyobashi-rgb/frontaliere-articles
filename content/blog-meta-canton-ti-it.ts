@@ -15,6 +15,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'Capitale LPP: Ticino nega rimborso imposta alla fonte',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': 'Dal 2024 il Ticino nega il rimborso dell\'imposta alla fonte',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Edifici amministrativi a Bellinzona, sede di autorità fiscali del Canton Ticino',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.title': 'Mendrisiotto: al via i primi quattro bus elettrici AMSA',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.excerpt': 'Quattro autobus elettrici AMSA entrano in servizio Coinvolte le linee 2, 3 e 4 nel Mendrisiotto Il progetto di elettrificazione è partito nel 2022',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.imageAlt': 'Autobus elettrico AMSA in servizio nel Mendrisiotto',
 };
 
 export default blogMetaCantonTiIt;

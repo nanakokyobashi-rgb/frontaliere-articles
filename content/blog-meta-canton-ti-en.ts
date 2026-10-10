@@ -15,6 +15,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'LPP capital: Ticino denies withholding tax refund',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': '',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Administrative buildings in Bellinzona, seat of Canton Ticino tax authorities',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.title': 'Mendrisiotto: the first four AMSA electric buses are now in service',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.excerpt': 'Four AMSA electric buses enter service Lines 2, 3 and 4 in Mendrisiotto involved The electrification project began in 2022',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.imageAlt': 'AMSA electric bus operating in the Mendrisiotto region',
 };
 
 export default blogMetaCantonTiEn;

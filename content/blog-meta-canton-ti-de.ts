@@ -15,6 +15,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'BVG-Kapital: Tessin verweigert Rückerstattung der Quellensteuer',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': '',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Verwaltungsgebäude in Bellinzona, Sitz der Steuerbehörden des Kantons Tessin',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.title': 'Mendrisiotto: Die ersten vier Elektrobusse von AMSA nehmen den Betrieb auf',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.excerpt': 'Vier Elektrobusse von AMSA nehmen den Betrieb auf Betroffen sind die Linien 2, 3 und 4 im Mendrisiotto Das Elektrifizierungsprojekt begann im Jahr 2022',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.imageAlt': 'AMSA Elektrobus im Einsatz in der Region Mendrisiotto',
 };
 
 export default blogMetaCantonTiDe;

@@ -15,6 +15,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.capitale-lpp-rimborso-imposta-fonte.title': 'Capital LPP : le Tessin refuse le remboursement de l\'impôt à la source',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.excerpt': 'Depuis 2024, le Tessin refuse le remboursement de l\'impôt à la source',
     'blog.article.capitale-lpp-rimborso-imposta-fonte.imageAlt': 'Bâtiments administratifs à Bellinzona, siège des autorités fiscales du Canton du Tessin',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.title': 'Mendrisiotto : mise en service des quatre premiers bus électriques AMSA',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.excerpt': 'Quatre autobus électriques AMSA entrent en service Les lignes 2, 3 et 4 du Mendrisiotto sont concernées Le projet d’électrification a débuté en 2022',
+    'blog.article.autobus-elettrici-mendrisiotto-amsa.imageAlt': 'Bus électrique AMSA en service dans le Mendrisiotto',
 };
 
 export default blogMetaCantonTiFr;
