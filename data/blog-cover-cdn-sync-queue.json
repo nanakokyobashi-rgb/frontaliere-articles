@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-nuovo-centro-asilo-couvet.webp",
-      "sha256": "4098563244b29add029247641707edf4d8b4ca7825b319063cadb80fb593e4fe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-nuovo-centro-asilo-couvet-480w.webp",
-      "sha256": "43677159f6b6288fd574696818de1f4170c7dc84429a9beec6af4a0f28317fba"
-    }
-  ]
+  "items": []
 }
