@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-nuovi-spazi-ambulatoriali-bellinzona.webp",
-      "sha256": "2975101fc8c020a628c68feaea5c7e5f7a9ea3ae878467e4e3fbacab5ce4a23d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-nuovi-spazi-ambulatoriali-bellinzona-480w.webp",
-      "sha256": "e2e03e96075bd7ac9ec3fc6e941d73d4cf9e0bb4130895f474645a6d521fe4c8"
-    }
-  ]
+  "items": []
 }
