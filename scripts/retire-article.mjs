@@ -65,6 +65,7 @@ import {
 // la usa anche `generator/scripts/create-article.mjs`, che lo STESSO array lo
 // rigenera (vedi il file per il perché delle due euristiche cadute).
 import { matchingDelimiter, removeFromIdListLiteral } from './lib/ts-literals.mjs';
+import { readArticleRegistry } from './lib/registry-image-reader.mjs';
 import { removeSeoEntriesFromSource } from './lib/seo-entry.mjs';
 import { IMAGE_CREDIT_RECORDS_DIR } from './lib/image-credit-records.mjs';
 import { isNewFamilySection } from './lib/corpus-floors.mjs';
@@ -252,35 +253,9 @@ function removeFromImageCatalog(file, keys) {
   return { changed: true, text: `${JSON.stringify(kept)}\n` };
 }
 
-/**
- * Ogni blocco `{ id: '…', … }` di un registro di sezione, delimitato con
- * `matchingDelimiter` come in `removeRegistryEntry`: una regex che si ferma
- * alla prima `}` perderebbe il campo `image` dietro un oggetto annidato, e qui
- * un'immagine persa vuol dire una copertina altrui cancellata. Graffe
- * sbilanciate sono un errore, non un registro più corto.
- *
- * Non importa `readRegistry` da `scripts/build-blog-index.mjs`: quel modulo
- * esegue la build all'import.
- */
+/** Article rows and cover literals from the shared lexical registry reader. */
 function registryBlocks(file) {
-  const src = read(file);
-  const out = [];
-  const rx = /\bid:\s*'([^']+)',/g;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const open = src.lastIndexOf('{', m.index);
-    if (open === -1) throw new Error(`${file}: nessuna '{' prima di id '${m[1]}'`);
-    const close = matchingDelimiter(src, open);
-    if (close === -1) throw new Error(`${file}: graffe sbilanciate attorno a ${m[1]}`);
-    out.push({ id: m[1], block: src.slice(open, close + 1) });
-    rx.lastIndex = close + 1;
-  }
-  return out;
-}
-
-/** Il valore letterale del campo `image` di un blocco di registro, o undefined. */
-function registryImage(block) {
-  return (block.match(/\bimage:\s*(['"`])([^'"`]*)\1/) ?? [])[2];
+  return readArticleRegistry(read(file), file, { rejectNestedImage: true });
 }
 
 /**
@@ -298,9 +273,9 @@ function coverKeysInUse(excludeId) {
     // coppia assente e' uno stato valido per una famiglia vuota; una coppia
     // parziale, invece, resta fail-closed dentro isNewFamilySection().
     if (isNewFamilySection(ROOT, section)) continue;
-    for (const { id, block } of registryBlocks(cfg.registryFile)) {
+    for (const { id, image } of registryBlocks(cfg.registryFile)) {
       if (id === excludeId) continue;
-      const key = coverKey(registryImage(block));
+      const key = coverKey(image);
       if (!key) continue;
       if (!inUse.has(key)) inUse.set(key, []);
       inUse.get(key).push(id);
@@ -594,7 +569,11 @@ function main() {
   //     copertina, miniatura, credito (P14) e voce di catalogo descrivono il
   //     file, non l'articolo, e servono all'articolo che resta.
   const retiredBlock = registryBlocks(cfg.registryFile).find((b) => b.id === id);
-  const ownKey = priorRetirement?.imageKey ?? coverKey(retiredBlock && registryImage(retiredBlock.block)) ?? id;
+  const ownImage = retiredBlock?.image;
+  if (!priorRetirement && ownImage === undefined) {
+    throw new Error(`registry ${id}: campo image assente; impossibile determinare la copertina in sicurezza`);
+  }
+  const ownKey = priorRetirement?.imageKey ?? coverKey(ownImage) ?? id;
   const inUse = coverKeysInUse(id);
   /** @type {string[]} */
   const removableCovers = [];

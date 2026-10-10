@@ -110,6 +110,8 @@ on:
       # either lands, republishes nothing, and the served surface keeps being
       # built by the old code until an unrelated corpus change happens along.
       - 'scripts/build-blog-index.mjs'
+      - 'scripts/lib/registry-image-reader.mjs'
+      - 'scripts/lib/ts-literals.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       # The blog index and the generator share the balanced registry reader;
       # its delimiter scanner is a publisher input when the index runs here.
