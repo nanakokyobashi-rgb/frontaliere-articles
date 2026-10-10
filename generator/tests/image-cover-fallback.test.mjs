@@ -263,6 +263,13 @@ test('la pertinenza confronta token esatti e ignora category e imagePrompt boile
   );
 });
 
+test('the mirrored engine closes photo collisions across legacy URL spellings', () => {
+  const engine = fs.readFileSync(path.join(ROOT, 'engine/shared/generatedImageEngine.mjs'), 'utf8');
+  assert.match(engine, /export function canonicalPhotoSourceUrl\(value\)/);
+  assert.match(engine, /function recordSourcePageUrl\(record\)[\s\S]*?return canonicalPhotoSourceUrl\(record\?\.sourcePageUrl \|\| record\?\.pageUrl\)/);
+  assert.match(engine, /const excludedPages = new Set\(\(excludedSourcePageUrls[\s\S]*?\.map\(canonicalPhotoSourceUrl\)/);
+});
+
 test('when the catalog is empty, the governed static cover still publishes and deduplicates the queue', () => {
   const root = tempRoot();
   try {
