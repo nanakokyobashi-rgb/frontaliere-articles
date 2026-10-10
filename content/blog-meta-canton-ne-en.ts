@@ -15,6 +15,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.aldi-chiude-centro-neuchatel.title': 'Aldi will close the downtown store in Neuchâtel',
     'blog.article.aldi-chiude-centro-neuchatel.excerpt': '',
     'blog.article.aldi-chiude-centro-neuchatel.imageAlt': 'Grocery store entrance on Rue Saint-Honoré in Neuchâtel',
+    'blog.article.nuovo-centro-asilo-couvet.title': 'New asylum reception centre in Couvet: the project starts',
+    'blog.article.nuovo-centro-asilo-couvet.excerpt': 'New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality',
+    'blog.article.nuovo-centro-asilo-couvet.imageAlt': 'Representation of a renovated public building in Couvet, Canton Neuchâtel',
 };
 
 export default blogMetaCantonNeEn;

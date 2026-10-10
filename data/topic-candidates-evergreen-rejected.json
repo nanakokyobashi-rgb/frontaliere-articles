@@ -797,14 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1954858/a-sementina-preoccupano-viabilita-e-posteggi": {
-      "section": "frontaliere",
-      "ts": 1791482535018
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/cronaca-20/articolo/frode-fiscale-internazionale-blitz-della-guardia-di-finanza-di-varese-sei-misure-cautelari-e-beni.html": {
-      "section": "frontaliere",
-      "ts": 1791482989872
-    },
     "frontaliere::https://www.laregione.ch/cantone/ticino/1955658/la-manifattura-va-meglio-del-previsto-le-banche-reggono-ma-cala-l-occupazione": {
       "section": "frontaliere",
       "ts": 1791490044037
@@ -1104,6 +1096,18 @@
     "svizzera::https://www.tio.ch/svizzera/cronaca/1955992/ffs-traffico-losanna-normalita-yverdon": {
       "section": "svizzera",
       "ts": 1791654213910
+    },
+    "frontaliere::https://www.vconews.it/2026/10/10/leggi-notizia/argomenti/viabilita-e-trasporti-9/articolo/ss-34-chiusa-di-notte-dal-21-ottobre-battelli-sostitutivi-tra-cannero-e-cannobio.html": {
+      "section": "frontaliere",
+      "ts": 1791660213562
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/donne-e-giovani-in-crescita-tra-i-campi-varesini-i-numeri-dellagricoltura-alla-vigilia-di-agrivarese/2702182": {
+      "section": "frontaliere",
+      "ts": 1791660534142
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1955996/riad-aeroporto-scalo-attacco-feriti-missile": {
+      "section": "svizzera",
+      "ts": 1791661004823
     }
   }
 }
