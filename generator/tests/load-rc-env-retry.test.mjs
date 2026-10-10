@@ -271,7 +271,7 @@ test('Google Cloud 401 consuma il body prima di proseguire la cascata', async ()
       throw new Error(`unexpected test URL: ${requestUrl}`);
     };
 
-    const { translateWithGoogleCloud } = await import('../scripts/lib/free-translate.mjs?google-401-body-test');
+    const { translateWithGoogleCloud } = await import('../scripts/lib/free-translate.mjs');
     assert.equal(await translateWithGoogleCloud('testo', 'it', 'en'), '');
     assert.equal(bodyRead, true);
   } finally {
