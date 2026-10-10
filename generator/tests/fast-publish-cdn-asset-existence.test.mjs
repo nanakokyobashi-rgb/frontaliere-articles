@@ -151,6 +151,20 @@ test('fallback GET: cleanup del body bounded anche se cancel non si risolve', as
   assert.ok(Date.now() - startedAt < 1_000, 'cancel del body ha bloccato il verificatore');
 });
 
+test('HEAD che ignora abort non blocca la verifica oltre il timeout referenziato', async () => {
+  const startedAt = Date.now();
+  const results = await verifyCdnAssetRefs({
+    urls: [`${CDN}/assets/fetch-pende.js`],
+    timeoutMs: 10,
+    budgetMs: 200,
+    makeSignal: () => undefined,
+    fetchImpl: async () => new Promise(() => {}),
+  });
+
+  assert.equal(results[0].state, 'unknown');
+  assert.ok(Date.now() - startedAt < 1_000, 'la fetch che ignora abort ha bloccato il verificatore');
+});
+
 test('formatCdnAssetReport avvisa SOLO sui mancanti', () => {
   const lines = formatCdnAssetReport([
     { url: `${CDN}/assets/ok.js`, state: 'present', status: 200, error: null },

@@ -89,6 +89,10 @@
  */
 
 import { ASSET_EXT_ALTERNATION, ASSETS_SAME_ORIGIN_RX } from '../../host/shared/cdnAssetOffloadRx.mjs';
+import {
+  fetchWithRefTimeout,
+  releaseFetchWithRefTimeout,
+} from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 /**
  * Estrae gli URL `${cdnBase}/assets/<file>` distinti da un testo HTML.
@@ -164,38 +168,6 @@ export function nextRequestTimeoutMs({ budgetRemainingMs, urlRemainingMs }) {
 }
 
 /**
- * Chiude il body di un fallback GET senza trasformare un errore di cleanup in
- * un verdetto sul CDN. Il cancel è best-effort ma bounded dal residuo del
- * timeout dell'asset: un body che non si chiude non può trattenere
- * verifyCdnAssetRefs oltre il suo budget.
- *
- * @param {Response|{body?: {cancel?: () => Promise<void>}}|null} response
- * @param {number} timeoutMs tempo massimo da attendere per il cleanup
- */
-async function cancelResponseBody(response, timeoutMs) {
-  if (typeof response?.body?.cancel !== 'function') return;
-  const cleanup = Promise.resolve().then(() => response.body.cancel());
-  if (!Number.isFinite(timeoutMs) || timeoutMs < 1) {
-    cleanup.catch(() => {});
-    return;
-  }
-  let timer;
-  try {
-    await Promise.race([
-      cleanup,
-      new Promise((resolve) => {
-        timer = setTimeout(resolve, timeoutMs);
-      }),
-    ]);
-  } catch {
-    // Il controllo è fail-open: un body che non si lascia cancellare non deve
-    // cambiare lo stato già determinato dalla risposta HTTP.
-  } finally {
-    if (timer !== undefined) clearTimeout(timer);
-  }
-}
-
-/**
  * Verifica l'esistenza di ogni URL con una HEAD, entro un tetto complessivo.
  *
  * Gli URL oltre il tetto NON vengono silenziosamente omessi: escono con
@@ -258,11 +230,21 @@ export async function verifyCdnAssetRefs({
         });
         continue;
       }
-      let res = await fetchImpl(url, { method: 'HEAD', redirect: 'follow', signal: makeSignal(headTimeout) });
+      let res = await fetchWithRefTimeout(
+        url,
+        { method: 'HEAD', redirect: 'follow', signal: makeSignal(headTimeout) },
+        headTimeout,
+        fetchImpl,
+      );
       // Alcune origin non implementano HEAD (405/501): la domanda è
       // sull'esistenza dell'oggetto, non sul metodo, quindi si ripiega su GET
       // invece di registrare un falso `missing`.
       if (res.status === 405 || res.status === 501) {
+        const headStatus = res.status;
+        // HEAD is status-only. Release its referenced deadline and body before
+        // starting the fallback so the shared asset budget covers both hops.
+        releaseFetchWithRefTimeout(res);
+        res = null;
         const getTimeout = nextTimeout();
         if (getTimeout === 0) {
           // Senza il GET l'esistenza resta indecisa: dirlo `unknown` la
@@ -270,14 +252,18 @@ export async function verifyCdnAssetRefs({
           results.push({
             url,
             state: 'skipped',
-            status: res.status,
-            error: `HEAD ${res.status} e nessun tempo residuo per il fallback GET ` +
+            status: headStatus,
+            error: `HEAD ${headStatus} e nessun tempo residuo per il fallback GET ` +
               `(budget di ${budgetMs}ms, timeout di ${timeoutMs}ms per asset)`,
           });
           continue;
         }
-        res = await fetchImpl(url, { method: 'GET', redirect: 'follow', signal: makeSignal(getTimeout) });
-        await cancelResponseBody(res, nextTimeout());
+        res = await fetchWithRefTimeout(
+          url,
+          { method: 'GET', redirect: 'follow', signal: makeSignal(getTimeout) },
+          getTimeout,
+          fetchImpl,
+        );
       }
       if (res.ok) {
         results.push({ url, state: 'present', status: res.status, error: null });
@@ -303,6 +289,11 @@ export async function verifyCdnAssetRefs({
       } else {
         results.push({ url, state: 'unknown', status: null, error: detail });
       }
+    } finally {
+      // The verifier only needs status and headers. This also cancels a
+      // response body from a test double or unusual fetch implementation, and
+      // always clears the wrapper's referenced timer.
+      releaseFetchWithRefTimeout(res);
     }
   }
   return results;
