@@ -179,6 +179,19 @@ test('fetchWithRefTimeout mantiene il timeout attivo durante la lettura del body
   }
 });
 
+test('fetchWithRefTimeout mantiene il brand della Response e accetta un fetch iniettato', async () => {
+  const response = await fetchWithRefTimeout(
+    'https://example.test',
+    {},
+    100,
+    async () => new Response('{"ok":true}', { headers: { 'content-type': 'application/json' } }),
+  );
+  assert.equal(response.ok, true);
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get('content-type'), 'application/json');
+  assert.deepEqual(await response.json(), { ok: true });
+});
+
 // #247: un `fetch()` rifiutato senza Abort/TimeoutError — cioè un fallimento
 // di rete nudo (DNS, TLS, connection reset: un `TypeError: fetch failed`
 // senza status) — veniva ri-lanciato subito invece di rientrare nel retry

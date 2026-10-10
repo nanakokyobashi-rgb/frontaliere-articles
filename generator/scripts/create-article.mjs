@@ -69,6 +69,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
+import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 import {
   BLOG_IMAGE_TARGET_MAX_BYTES,
   BLOG_IMAGE_HARD_MAX_BYTES,
@@ -2791,7 +2792,7 @@ const NEWS_SOURCES = [
   // connessione TCP va in timeout su apex e www, http e https, da rete diversa
   // da quella dei runner. Il sito e' giu', non spostato. Resta commentato e non
   // cancellato perche' se torna su basta togliere le due barre; finche' e' qui
-  // costa 15 secondi di `AbortSignal.timeout` per run e una fonte «fallita».
+  // costa 15 secondi di timeout HTTP referenziato per run e una fonte «fallita».
   // 'https://www.ilgiornaledelticino.ch/feed/',
   // copertura categoria economia per aumentare topic finanziari/lavoro
   'https://www.cdt.ch/news/economia',
@@ -7970,10 +7971,9 @@ async function fetchPageContent(url) {
   const absoluteUrl = url.startsWith('/') ? `${BASE_URL}${url}` : url;
   console.error(`📰 Fetching: ${absoluteUrl}`);
   try {
-    const res = await fetch(absoluteUrl, {
+    const res = await fetchWithRefTimeout(absoluteUrl, {
       headers: sourcePageFetchHeaders(),
-      signal: AbortSignal.timeout(15000),
-    });
+    }, 15000);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const html = await res.text();
     // Riduci la pagina alla sua radice editoriale PRIMA di estrarre (issue
@@ -8927,13 +8927,12 @@ async function scanNewsSources() {
         // contabilita' produttive/sterili/fallite sotto e' la stessa.
         headlines = await fetchCantonSourceHeadlines(sourceUrl, domain);
       } else {
-        const res = await fetch(sourceUrl, {
+        const res = await fetchWithRefTimeout(sourceUrl, {
           headers: {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
             'Accept': 'application/rss+xml, application/xml, text/xml, text/html, application/xhtml+xml',
           },
-          signal: AbortSignal.timeout(15000),
-        });
+        }, 15000);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const content = await res.text();
 
@@ -8951,13 +8950,12 @@ async function scanNewsSources() {
             const fallbackUrl = rssFallbackMap[sourceUrl];
             if (fallbackUrl) {
               try {
-                const fbRes = await fetch(fallbackUrl, {
+                const fbRes = await fetchWithRefTimeout(fallbackUrl, {
                   headers: {
                     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
                     'Accept': 'text/html,application/xhtml+xml',
                   },
-                  signal: AbortSignal.timeout(15000),
-                });
+                }, 15000);
                 if (fbRes.ok) {
                   const fbHtml = await fbRes.text();
                   headlines = extractHeadlines(fbHtml, fallbackUrl);
@@ -8976,13 +8974,12 @@ async function scanNewsSources() {
             const fallbackUrl = rssFallbackMap[sourceUrl];
             if (fallbackUrl) {
               try {
-                const fbRes = await fetch(fallbackUrl, {
+                const fbRes = await fetchWithRefTimeout(fallbackUrl, {
                   headers: {
                     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
                     'Accept': 'text/html,application/xhtml+xml',
                   },
-                  signal: AbortSignal.timeout(15000),
-                });
+                }, 15000);
                 if (fbRes.ok) {
                   const fbHtml = await fbRes.text();
                   headlines = extractHeadlines(fbHtml, fallbackUrl);

@@ -34,6 +34,7 @@ import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { decodeFields, buildDailyBrief, degradationAlarms, degradationState, isDegradationCarrier, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
 import { MIN_AVAILABLE_BLOCKS } from './lib/daily-brief-content.mjs';
 import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
+import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -63,7 +64,7 @@ const FETCH_ATTEMPTS = RC_FETCH_ATTEMPTS;
 async function fetchJson(url, headers = {}) {
   let lastErr;
   for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
-    const res = await fetch(url, { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+    const res = await fetchWithRefTimeout(url, { headers }, FETCH_TIMEOUT_MS);
     if (res.ok) return res.json();
     // A 403 needs the body to tell a transient quota rejection apart from a
     // real PERMISSION_DENIED — same reasoning as fetchTemplateViaRest in
@@ -96,10 +97,9 @@ async function listCollectionDocs(token, collectionId) {
 async function getDoc(token, docPath) {
   let lastErr;
   for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
-    const res = await fetch(`${FIRESTORE_BASE}/${docPath}`, {
+    const res = await fetchWithRefTimeout(`${FIRESTORE_BASE}/${docPath}`, {
       headers: { Authorization: `Bearer ${token}` },
-      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-    });
+    }, FETCH_TIMEOUT_MS);
     if (res.status === 404) return null;
     if (res.ok) {
       const doc = await res.json();

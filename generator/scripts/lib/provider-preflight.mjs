@@ -21,6 +21,7 @@ import {
   GH_MODELS_CATALOG_URL,
   isGitHubModelsRetiredResponse,
 } from './ai-models.mjs';
+import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 export const PROVIDER_PREFLIGHT_TIMEOUT_MS = 8_000;
 
@@ -215,12 +216,11 @@ async function probeProvider(group, {
       delete headers.Authorization;
     }
     try {
-      const response = await fetchImpl(url, {
+      const response = await fetchWithRefTimeout(url, {
         method: 'GET',
         headers,
         redirect: 'manual',
-        signal: AbortSignal.timeout(normalizeTimeoutMs(timeoutMs)),
-      });
+      }, normalizeTimeoutMs(timeoutMs), fetchImpl);
       // GitHub Models e' ritirato e l'host risponde 200 «OK» a tutto: lo
       // status da solo lo dava `ready`. Stessa firma del runtime, una sola
       // sorgente (isGitHubModelsRetiredResponse in ai-models.mjs).

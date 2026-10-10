@@ -181,6 +181,7 @@ on:
       # is what makes a new workflow dispatchable at all.
       - '.github/workflows/generate-article.yml'
       - 'generator/scripts/create-article.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       # THE CHAIN LINK. A corpus push means an article was actually produced, so
       # the next attempt starts immediately instead of waiting for a cron slot
       # that may never arrive. Runs that produce nothing touch only

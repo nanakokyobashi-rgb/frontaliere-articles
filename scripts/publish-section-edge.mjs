@@ -95,6 +95,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { fetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.mjs';
 import { familySectionPages } from './lib/build-sitemap.mjs';
@@ -249,10 +250,9 @@ export const realIo = {
   fetchBytes: async (url) => {
     for (let attempt = 1; attempt <= 3; attempt++) {
       try {
-        const res = await fetch(`${url}?_secb=${Date.now()}.${attempt}`, {
+        const res = await fetchWithRefTimeout(`${url}?_secb=${Date.now()}.${attempt}`, {
           headers: { 'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)' },
-          signal: AbortSignal.timeout(15000),
-        });
+        }, 15000);
         if (res.status === 200) return { status: 200, body: Buffer.from(await res.arrayBuffer()) };
         if (res.status === 404) return { status: 404 };
       } catch {

@@ -14,14 +14,17 @@ export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
 function withBodyDeadline(response, cleanup) {
   return new Proxy(response, {
-    get(target, property, receiver) {
+    get(target, property) {
+      const value = Reflect.get(target, property, target);
+      if (typeof value !== 'function') return value;
       if (BODY_METHODS.has(property)) {
-        const method = Reflect.get(target, property, target);
-        if (typeof method === 'function') {
-          return (...args) => Promise.resolve(method.apply(target, args)).finally(cleanup);
-        }
+        // Defer invocation so a synchronous brand/type error still reaches
+        // finally(cleanup), rather than leaking the referenced timer.
+        return (...args) => Promise.resolve().then(() => value.apply(target, args)).finally(cleanup);
       }
-      return Reflect.get(target, property, receiver);
+      // Response methods such as clone() are brand-checked too. Bind them to
+      // the real Response while leaving body readers under the deadline above.
+      return value.bind(target);
     },
   });
 }
@@ -30,19 +33,24 @@ function withBodyDeadline(response, cleanup) {
  * @param {string|URL} url
  * @param {RequestInit} [options]
  * @param {number} [timeoutMs]
+ * @param {typeof fetch} [fetchImpl]
  * @returns {Promise<Response>}
  */
 export async function fetchWithRefTimeout(
   url,
   options = {},
   timeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
+  fetchImpl = globalThis.fetch,
 ) {
   const { signal: upstreamSignal, ...requestOptions } = options;
   const controller = new AbortController();
+  const effectiveTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0
+    ? Math.max(1, Math.floor(timeoutMs))
+    : DEFAULT_FETCH_TIMEOUT_MS;
   let cleaned = false;
   const timer = setTimeout(() => {
     controller.abort(new DOMException('The operation timed out', 'TimeoutError'));
-  }, timeoutMs);
+  }, effectiveTimeoutMs);
   const forwardAbort = () => controller.abort(upstreamSignal.reason);
   const cleanup = () => {
     if (cleaned) return;
@@ -60,7 +68,7 @@ export async function fetchWithRefTimeout(
   }
 
   try {
-    const response = await fetch(url, { ...requestOptions, signal: controller.signal });
+    const response = await fetchImpl(url, { ...requestOptions, signal: controller.signal });
     // HEAD/204-style responses have no body to protect; ordinary responses
     // release the timer only after json/text/etc. has finished below.
     if (response.body === null) cleanup();
