@@ -225,6 +225,8 @@ const RECOVERABLE = [
   ['slug-gaggiolo-verkehr', 'gaggiolo-verkehr'],
   ['slug-traffico-da-record', 'traffico-da-record'],
   ['slug-terzo-pilastro-3a-vantaggi-2026-basilea', 'terzo-pilastro-3a-vantaggi-2026-basilea'],
+  ['slug-terzo-pilastro-3a-vantaggi-2026-basel', 'terzo-pilastro-3a-vantaggi-2026-basel'],
+  ['slug-terzo-pilastro-3a-vantaggi-2026-bale', 'terzo-pilastro-3a-vantaggi-2026-bale'],
   ['slug-terzo-pilastro-3a-switzerland', 'terzo-pilastro-3a-switzerland'],
   ['slug-terzo-pilastro-3a-schweiz', 'terzo-pilastro-3a-schweiz'],
   ['slug-terzo-pilastro-3a-suisse', 'terzo-pilastro-3a-suisse'],
@@ -451,7 +453,8 @@ test('derive: nessun log quando non c\'e\' niente da correggere', () => {
 // ── Lo scan sul registro pubblicato ────────────────────────────────────────
 
 /**
- * I 25 segnaposti gia' pubblicati, congelati. Chiave: `<sezione>|<id>|<locale>`.
+ * I segnaposti gia' pubblicati e non ancora riparati, congelati.
+ * Chiave: `<sezione>|<id>|<locale>`.
  * Vedi l'intestazione: la lista puo' solo restringersi, e restringerla e' una
  * modifica di codice.
  */
@@ -472,9 +475,6 @@ const LEGACY_OFFENDERS = new Set([
   'swiss|traffico-da-record|en',
   'swiss|traffico-da-record|de',
   'swiss|traffico-da-record|fr',
-  'swiss|terzo-pilastro-3a-vantaggi-2026-basilea|en',
-  'swiss|terzo-pilastro-3a-vantaggi-2026-basilea|de',
-  'swiss|terzo-pilastro-3a-vantaggi-2026-basilea|fr',
   'swiss|raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato|en',
   'swiss|raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato|de',
   'swiss|raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato|fr',
@@ -518,7 +518,7 @@ function readRegistry({ file, constName }) {
   return entries;
 }
 
-test('registro: nessun segnaposto oltre i 25 congelati, e la lista non e\' stantia', () => {
+test('registro: nessun segnaposto oltre gli offender congelati, e la lista non e\' stantia', () => {
   const found = new Set();
   const detail = new Map();
   let scanned = 0;

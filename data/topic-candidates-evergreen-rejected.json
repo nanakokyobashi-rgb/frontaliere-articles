@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1955658/la-manifattura-va-meglio-del-previsto-le-banche-reggono-ma-cala-l-occupazione": {
-      "section": "frontaliere",
-      "ts": 1791490044037
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/fotovoltaico-industriale-a-brunello-il-solar-wellness-day-di-elmec-focus-su-sicurezza-manutenzione-e-accumulo/2702671": {
-      "section": "frontaliere",
-      "ts": 1791491712997
-    },
-    "frontaliere::https://www.tio.ch/sport/hockey/1955641/fischer-xhaka-squalificato-stato-certificato-multa": {
-      "section": "frontaliere",
-      "ts": 1791491904793
-    },
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955098/il-governo-si-opponga-al-progetto-autostradale-meme": {
       "section": "frontaliere",
       "ts": 1791494209714
@@ -1108,6 +1096,10 @@
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1955996/riad-aeroporto-scalo-attacco-feriti-missile": {
       "section": "svizzera",
       "ts": 1791661004823
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/dal-business-plan-allagricoltura-a-ville-ponti-la-seconda-edizione-del-focus-day-nuove-imprese/2703904": {
+      "section": "frontaliere",
+      "ts": 1791665145016
     }
   }
 }

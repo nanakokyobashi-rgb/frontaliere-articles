@@ -21,6 +21,12 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.unige-natura-equilibrio-mentale.title': 'UNIGE : santé mentale, 5-10 octobre 2026',
     'blog.article.unige-natura-equilibrio-mentale.excerpt': 'La Semaine de la santé mentale 2026 va du 5 au 10 octobre.',
     'blog.article.unige-natura-equilibrio-mentale.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.cantieri-mobilita-ginevra.title': 'Chantiers à Genève : mobilité perturbée à partir du 12 octobre 2026',
+    'blog.article.cantieri-mobilita-ginevra.excerpt': 'De nouveaux chantiers dans le canton de Genève débuteront le 12 octobre 2026 et auront un impact sur les déplacements.',
+    'blog.article.cantieri-mobilita-ginevra.imageAlt': 'Nouveaux chantiers à Genève affectant les déplacements dès le 12 octobre 2026.',
+    'blog.article.indagini-imprese-ginevrine.title': 'Enquêtes conjoncturelles dans les entreprises genevoises',
+    'blog.article.indagini-imprese-ginevrine.excerpt': 'La République et le canton de Genève signale des enquêtes conjoncturelles de septembre dans les entreprises genevoises.',
+    'blog.article.indagini-imprese-ginevrine.imageAlt': 'Enquêtes conjoncturelles dans les entreprises genevoises',
 };
 
 export default blogMetaCantonGeFr;
