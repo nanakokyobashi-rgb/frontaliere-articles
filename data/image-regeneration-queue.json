@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T17:33:10.952Z",
       "lastFailureAt": "2026-10-10T17:33:10.952Z"
+    },
+    {
+      "articleId": "adesione-ocst-servizi-frontalieri",
+      "title": "Associarsi all'OCST: vantaggi per frontalieri in Ticino",
+      "fallbackImage": "/images/blog/caldo-lavoro-frontalieri-ticino.webp",
+      "reason": "All image providers failed for article-adesione-ocst-servizi-frontalieri: openai-codex (vision gate rejected image: Generic editorial illustration relevant to cross-border work in",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T18:40:53.652Z",
+      "lastFailureAt": "2026-10-10T18:40:53.652Z"
     }
   ]
 }

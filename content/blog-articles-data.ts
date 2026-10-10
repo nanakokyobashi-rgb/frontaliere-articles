@@ -43656,6 +43656,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'adesione-ocst-servizi-frontalieri',
+ category: 'pratico',
+ date: '2026-10-10T18:40:53.229Z',
+ image: '/images/blog/caldo-lavoro-frontalieri-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

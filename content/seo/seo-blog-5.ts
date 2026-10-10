@@ -105060,6 +105060,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-adesione-ocst-servizi-frontalieri': {
+    title: 'Associarsi all\'OCST: vantaggi per frontalieri in Ticino',
+    description: 'Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno',
+    keywords: 'frontalieri, ticino, svizzera, italia, associarsi, ocst, vantaggi, consulenza',
+    ogTitle: 'Associarsi all\'OCST: vantaggi per frontalieri in Ticino',
+    ogDescription: 'Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno',
+    canonicalPath: '/articoli-frontaliere/adesione-ocst-servizi-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Associarsi all'OCST: vantaggi per frontalieri in Ticino",
+      "description": "Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/caldo-lavoro-frontalieri-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore frontaliere che consulta i vantaggi OCST in ufficio a Mendrisio"
+      },
+      "datePublished": "2026-10-10T18:40:53+00:00",
+      "dateModified": "2026-10-10T18:40:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/adesione-ocst-servizi-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

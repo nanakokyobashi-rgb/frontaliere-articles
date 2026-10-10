@@ -12949,6 +12949,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.audi-rubata-san-fermo.title': 'Audi volée, tentative de fuite : un homme de 29 ans arrêté à San Fermo',
     'blog.article.audi-rubata-san-fermo.excerpt': 'Poursuite à San Fermo dans la soirée du 7 octobre Audi A3 noire signalée volée Interpellation d’un Roumain de 29 ans au permis révoqué Une meuleuse et 23 grammes retrouvés',
     'blog.article.audi-rubata-san-fermo.imageAlt': 'Audi A3 noire arrêtée par les Carabinieri à San Fermo (San Fermo della Battaglia)',
+    'blog.article.adesione-ocst-servizi-frontalieri.title': 'S\'affilier à l\'OCST : avantages pour les frontaliers au Tessin',
+    'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Conseils en matière de travail, de fiches de salaire, de fiscalité et de location Bureau des frontaliers pour la fiscalité et la sécurité sociale Patronato INAS à Chiasso, Mendrisio, Bioggio et Locarno',
+    'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Travailleur frontalier consultant les avantages de l\'OCST dans un bureau à Mendrisio',
 };
 
 export default blogMetaFr;
