@@ -16,20 +16,20 @@
       "title": "Apprendistato e formazione professionale Canton Uri",
       "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
       "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 2,
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-10T15:20:37.719Z",
-      "lastFailureAt": "2026-10-10T18:50:59.494Z"
+      "lastFailureAt": "2026-10-10T19:13:45.171Z"
     },
     {
       "articleId": "adesione-ocst-servizi-frontalieri",
       "title": "Associarsi all'OCST: vantaggi per frontalieri in Ticino",
       "fallbackImage": "/images/blog/caldo-lavoro-frontalieri-ticino.webp",
-      "reason": "All image providers failed for article-adesione-ocst-servizi-frontalieri: openai-codex (vision gate rejected image: Original generic illustration with no readable text, logos, or recognizable face; however, it prominently depicts a recogniz",
+      "reason": "All image providers failed for article-adesione-ocst-servizi-frontalieri: openai-codex (vision gate rejected image: Original generic illustration relevant to Ticino rail commuting, but it includes several recognizable foreground people.); g",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-10T18:40:53.652Z",
-      "lastFailureAt": "2026-10-10T18:55:33.856Z"
+      "lastFailureAt": "2026-10-10T19:14:54.072Z"
     }
   ]
 }
