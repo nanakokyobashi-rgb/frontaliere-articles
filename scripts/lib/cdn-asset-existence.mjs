@@ -218,6 +218,7 @@ export async function verifyCdnAssetRefs({
         budgetRemainingMs: budgetLeft(),
         urlRemainingMs: timeoutMs - (now() - urlStartedAt),
       });
+    let res = null;
     try {
       const headTimeout = nextTimeout();
       if (headTimeout === 0) {
@@ -230,7 +231,7 @@ export async function verifyCdnAssetRefs({
         });
         continue;
       }
-      let res = await fetchWithRefTimeout(
+      res = await fetchWithRefTimeout(
         url,
         { method: 'HEAD', redirect: 'follow', signal: makeSignal(headTimeout) },
         headTimeout,
