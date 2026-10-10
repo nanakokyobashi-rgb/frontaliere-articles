@@ -26883,7 +26883,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'tox-info-chiamate-intelligenza-artificiale',
     category: 'pratico',
     date: '2026-10-10T21:15:04.584Z',
-    image: '/images/blog/angestellte-schweiz-aumento-2027.webp',
+    image: '/images/blog/article-tox-info-chiamate-intelligenza-artificiale.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

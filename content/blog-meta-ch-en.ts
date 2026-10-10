@@ -8059,7 +8059,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.treni-vd-ritorno-normale.imageAlt': 'Swiss train on a railway line in Vaud',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.title': 'Tox Info: increase in calls to artificial intelligence',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.excerpt': '145 handled almost 45\'000 consultations Calls increased by 4,6% Medicines 36%; household cleaning 23% Secure financing by the end of 2027 Number',
-    'blog.article.tox-info-chiamate-intelligenza-artificiale.imageAlt': 'Person consulting the Tox Info service at number 145 while using a smartphone and a laptop with artificial intelligence in a Swiss kitchen',
+    'blog.article.tox-info-chiamate-intelligenza-artificiale.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;
