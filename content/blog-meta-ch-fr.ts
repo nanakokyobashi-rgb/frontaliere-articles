@@ -8057,6 +8057,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.treni-vd-ritorno-normale.title': 'Ligne ferroviaire Yverdon-Lausanne : retour à la normale à 05.40',
     'blog.article.treni-vd-ritorno-normale.excerpt': 'Entre Yverdon-les-Bains et Lausanne retour à la normale à 05.40 Aujourd’hui deux trains longue distance par heure avec de forts ralentissements Le trafic régional est',
     'blog.article.treni-vd-ritorno-normale.imageAlt': 'Train suisse sur une ligne ferroviaire dans le canton de Vaud',
+    'blog.article.tox-info-chiamate-intelligenza-artificiale.title': 'Tox Info : hausse des appels à l’intelligence artificielle',
+    'blog.article.tox-info-chiamate-intelligenza-artificiale.excerpt': 'Le 145 a traité près de 45\'000 consultations Les appels ont augmenté de 4,6% Médicaments 36%; produits ménagers 23% Financement assuré jusqu’à fin 2027 Numéro',
+    'blog.article.tox-info-chiamate-intelligenza-artificiale.imageAlt': 'Personne consultant le service Tox Info au numéro 145 tout en utilisant un smartphone et un ordinateur portable avec intelligence artificielle dans une cuisine suisse',
 };
 
 export default blogMetaChFr;

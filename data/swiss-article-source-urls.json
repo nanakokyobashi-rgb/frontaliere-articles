@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/festival-zurigo%3a-alla-svizzera-luna-wedler-il-golden-eye-award/92016935": {
-    "articleId": "luna-wedler-golden-eye-award-zurigo",
-    "ts": "2026-09-07T13:05:52.037Z",
-    "keyForm": 2
-  },
   "https://www.cdt.ch/news/svizzera/nei-parchi-giochi-svizzeri-91-mozziconi-di-sigarette-438534": {
     "articleId": "salute-parchi-giochi-svizzeri-mozziconi-sigarette",
     "ts": "2026-09-07T13:16:04.335Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/vd%3a-ferrovia-yverdon-losanna%2c-da-domani-ritorno-alla-normalit%c3%a0/92196903": {
     "articleId": "treni-vd-ritorno-normale",
     "ts": "2026-10-10T17:52:43.849Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4145486": {
+    "articleId": "tox-info-chiamate-intelligenza-artificiale",
+    "ts": "2026-10-10T21:15:04.962Z",
     "keyForm": 2
   }
 }

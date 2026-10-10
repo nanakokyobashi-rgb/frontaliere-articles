@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T20:58:56.060Z",
       "lastFailureAt": "2026-10-10T20:58:56.060Z"
+    },
+    {
+      "articleId": "tox-info-chiamate-intelligenza-artificiale",
+      "title": "Tox Info: aumento chiamate all’intelligenza artificiale",
+      "fallbackImage": "/images/blog/angestellte-schweiz-aumento-2027.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T21:15:04.960Z",
+      "lastFailureAt": "2026-10-10T21:15:04.960Z"
     }
   ]
 }

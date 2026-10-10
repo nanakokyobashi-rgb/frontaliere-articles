@@ -2708,6 +2708,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'disagi-treni-vaud-eclepens': { it: 'disagi-treni-vaud-eclepens', en: 'rail-delays-vaud-eclepens', de: 'bahnstoerung-waadt-eclepens', fr: 'retards-trains-vaud-eclepens' },
  'tirocinio-uri-guida-pratica': { it: 'tirocinio-uri-guida-pratica', en: 'uri-apprenticeship-practical-guide', de: 'berufslehre-uri-praxisleitfaden', fr: 'apprentissage-uri-guide-pratique' },
  'treni-vd-ritorno-normale': { it: 'treni-vd-ritorno-normale', en: 'vd-trains-normal-service', de: 'vd-zugverkehr-wieder-normal', fr: 'trains-vd-retour-normal' },
+ 'tox-info-chiamate-intelligenza-artificiale': { it: 'tox-info-chiamate-intelligenza-artificiale', en: 'tox-info-calls-artificial-intelligence', de: 'tox-info-anrufe-kuenstliche-intelligenz', fr: 'tox-info-appels-intelligence-artificielle' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

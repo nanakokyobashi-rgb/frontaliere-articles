@@ -101619,6 +101619,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tox-info-chiamate-intelligenza-artificiale': {
+    title: 'Tox Info: aumento chiamate all’intelligenza artificiale',
+    description: 'Il 145 ha gestito quasi 45\'000 consulenze Le chiamate sono cresciute del 4,6% Medicinali 36%; pulizia domestica 23% Finanziamento sicuro entro fine 2027 Numero',
+    keywords: 'frontalieri, ticino, svizzera, italia, info, aumento, chiamate, intelligenza',
+    ogTitle: 'Tox Info: aumento chiamate grazie all’intelligenza artificiale',
+    ogDescription: 'Il 145 ha gestito quasi 45\'000 consulenze Le chiamate sono cresciute del 4,6% Medicinali 36%; pulizia domestica 23% Finanziamento sicuro entro fine 2027 Numero',
+    canonicalPath: '/articoli-svizzera/tox-info-chiamate-intelligenza-artificiale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tox Info: aumento chiamate all’intelligenza artificiale",
+      "description": "Il 145 ha gestito quasi 45'000 consulenze Le chiamate sono cresciute del 4,6% Medicinali 36%; pulizia domestica 23% Finanziamento sicuro entro fine 2027 Numero",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/angestellte-schweiz-aumento-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona che consulta il servizio Tox Info al numero 145 mentre utilizza uno smartphone e un laptop con intelligenza artificiale in una cucina svizzera"
+      },
+      "datePublished": "2026-10-10T21:15:04+00:00",
+      "dateModified": "2026-10-10T21:15:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tox-info-chiamate-intelligenza-artificiale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
