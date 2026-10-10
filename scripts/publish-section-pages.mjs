@@ -68,6 +68,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.m
 import { CDN_BASE, heroCdnUploads, renderSectionArticlePipeline as defaultRenderSectionArticlePipeline, rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
 import { CANTON_HUB_LOCALES, cantonHubDataFile, cantonHubTopics, readCantonHubData } from './lib/canton-hub-data.mjs';
 import { sourceRegistryIds } from './lib/corpus-floors.mjs';
+import { scanTopLevelArticleRecords } from './lib/article-registry-reader.mjs';
 import { createEngineCorpusView } from './lib/engine-corpus-view.mjs';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
@@ -286,11 +287,10 @@ export function migrationManifestPages(section, previousArticlePages, previousAr
 }
 
 const RELEASE_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
-const REGISTRY_ID_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 function releaseRegistryIds(source, rel) {
-  const ids = [...source.matchAll(REGISTRY_ID_RE)].map((match) => match[1] ?? match[2]);
+  const ids = scanTopLevelArticleRecords(source).map(({ id }) => id);
   // Una sezione cantonale appena materializzata usa il suo registro-scheletro
   // `Article[] = [\n];`: zero articoli e' uno stato legittimo della famiglia,
   // non un corpus troncato. Una forma diversa senza id resta invece un errore.

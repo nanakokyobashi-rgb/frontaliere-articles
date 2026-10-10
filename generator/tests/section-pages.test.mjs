@@ -10,6 +10,7 @@
 import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import { existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -440,6 +441,46 @@ test('publisher: una sezione cantonale nuova o vuota ha una release articolo vuo
 };
 `);
   assert.throws(() => articleReleaseSnapshot(root, 'canton-ti'), /registry\/slugs incoerenti/);
+});
+
+test('publisher: snapshot release ignora id annidati nel registry corrente e in quello precedente', () => {
+  const source = sectionSourceSurfaces('canton-ti');
+  const root = mkdtempSync(path.join(tmpdir(), 'release-nested-id-'));
+  const registryPath = path.join(root, source.registryFile);
+  const slugPath = path.join(root, source.slugFile);
+  mkdirSync(path.dirname(registryPath), { recursive: true });
+  writeFileSync(registryPath, `export const CANTON_ARTICLES: Article[] = [
+  {
+    id: 'real-article',
+    audit: {
+      id: 'nested-not-an-article',
+    },
+  },
+];
+`);
+  writeFileSync(slugPath, `export const CANTON_SLUGS = {
+  'real-article': { it: 'articolo-reale', en: 'real-article', de: 'echter-artikel', fr: 'article-reel' },
+};
+`);
+
+  try {
+    execFileSync('git', ['init', '--quiet', '--initial-branch=main'], { cwd: root });
+    execFileSync('git', ['add', source.registryFile, source.slugFile], { cwd: root });
+    execFileSync('git', [
+      '-c', 'user.name=Fixture',
+      '-c', 'user.email=fixture@example.invalid',
+      'commit', '--quiet', '-m', 'release fixture',
+    ], { cwd: root });
+    const previousRevision = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim();
+
+    for (const revision of [null, previousRevision]) {
+      const pages = articleReleaseSnapshot(root, 'canton-ti', revision);
+      assert.deepEqual([...new Set(pages.map((page) => page.id))], ['real-article']);
+      assert.equal(pages.length, 4, 'una sola pagina articolo canonica per locale');
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('publisher/floors: una coppia cantonale parziale resta un rifiuto fail-closed', () => {
