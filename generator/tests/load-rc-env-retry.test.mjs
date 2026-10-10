@@ -179,6 +179,51 @@ test('fetchWithRefTimeout mantiene il timeout attivo durante la lettura del body
   }
 });
 
+test('fetchWithRefTimeout forza il timeout anche se il fetch ignora l’abort', async () => {
+  let aborted = false;
+  await assert.rejects(
+    fetchWithRefTimeout(
+      'https://ignored-abort.invalid',
+      {},
+      20,
+      async (_url, { signal }) => {
+        signal.addEventListener('abort', () => { aborted = true; }, { once: true });
+        return new Promise(() => {});
+      },
+    ),
+    { name: 'TimeoutError' },
+  );
+  assert.equal(aborted, true);
+});
+
+test('fetchWithRefTimeout forza il timeout anche se il body reader ignora l’abort', async () => {
+  for (const reader of ['json', 'text']) {
+    let aborted = false;
+    let cancellations = 0;
+    const response = await fetchWithRefTimeout(
+      'https://ignored-body-abort.invalid',
+      {},
+      20,
+      async (_url, { signal }) => ({
+        body: {
+          cancel() {
+            cancellations += 1;
+            return Promise.resolve();
+          },
+        },
+        [reader]() {
+          signal.addEventListener('abort', () => { aborted = true; }, { once: true });
+          return new Promise(() => {});
+        },
+      }),
+    );
+
+    await assert.rejects(response[reader](), { name: 'TimeoutError' });
+    assert.equal(aborted, true);
+    assert.equal(cancellations, 1);
+  }
+});
+
 test('fetchWithRefTimeout mantiene il brand della Response e accetta un fetch iniettato', async () => {
   const response = await fetchWithRefTimeout(
     'https://example.test',

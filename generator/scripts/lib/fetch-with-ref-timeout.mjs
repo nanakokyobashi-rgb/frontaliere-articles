@@ -2,18 +2,18 @@
  * Fetch with a referenced timeout that covers both response headers and body
  * consumption.
  *
- * `AbortSignal.timeout()` uses an unref'd timer, and clearing a regular timer
- * as soon as `fetch()` returns only protects the headers.  A provider can still
- * leave `response.json()`/`response.text()` pending forever after returning a
- * successful response.  Keep the timer and merged abort signal alive until a
- * body-reading method settles.
+ * `AbortSignal.timeout()` uses an unref'd timer, and an abort signal is only a
+ * cancellation hint: a provider can leave either `fetch()` or
+ * `response.json()`/`response.text()` pending forever after the deadline.
+ * Keep a referenced timer and race both phases against an explicit rejection;
+ * the abort remains the best-effort transport cancellation.
  */
 
 const BODY_METHODS = new Set(['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text']);
 const ACTIVE_DEADLINES = new WeakMap();
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
-function withBodyDeadline(response, cleanup) {
+function withBodyDeadline(response, cleanup, timeoutPromise) {
   let wrappedResponse;
   const trackedCleanup = () => {
     cleanup();
@@ -26,7 +26,10 @@ function withBodyDeadline(response, cleanup) {
       if (BODY_METHODS.has(property)) {
         // Defer invocation so a synchronous brand/type error still reaches
         // finally(cleanup), rather than leaking the referenced timer.
-        return (...args) => Promise.resolve().then(() => value.apply(target, args)).finally(trackedCleanup);
+        return (...args) => Promise.race([
+          Promise.resolve().then(() => value.apply(target, args)),
+          timeoutPromise,
+        ]).finally(trackedCleanup);
       }
       // Response methods such as clone() are brand-checked too. Bind them to
       // the real Response while leaving body readers under the deadline above.
@@ -35,6 +38,17 @@ function withBodyDeadline(response, cleanup) {
   });
   ACTIVE_DEADLINES.set(wrappedResponse, { response, cleanup: trackedCleanup });
   return wrappedResponse;
+}
+
+function cancelBodyBestEffort(response) {
+  try {
+    const body = response?.body;
+    if (typeof body?.cancel === 'function') {
+      Promise.resolve(body.cancel()).catch(() => {});
+    }
+  } catch {
+    // A body may be a minimal fetch double or expose a throwing cancel().
+  }
 }
 
 /**
@@ -52,12 +66,7 @@ export function releaseFetchWithRefTimeout(response) {
   if (!deadline) return;
   ACTIVE_DEADLINES.delete(response);
   try {
-    const body = deadline.response.body;
-    if (typeof body?.cancel === 'function') {
-      Promise.resolve(body.cancel()).catch(() => {});
-    }
-  } catch {
-    // A body may be a minimal fetch double or expose a throwing cancel().
+    cancelBodyBestEffort(deadline.response);
   } finally {
     deadline.cleanup();
   }
@@ -82,8 +91,20 @@ export async function fetchWithRefTimeout(
     ? Math.max(1, Math.floor(timeoutMs))
     : DEFAULT_FETCH_TIMEOUT_MS;
   let cleaned = false;
+  let timeoutReject;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeoutReject = reject;
+  });
+  // The deadline may fire before a caller starts reading the body. Keep the
+  // deferred rejection handled in that case; body readers race this same
+  // promise when they are invoked.
+  timeoutPromise.catch(() => {});
+  let responseForCancellation;
   const timer = setTimeout(() => {
-    controller.abort(new DOMException('The operation timed out', 'TimeoutError'));
+    const reason = new DOMException('The operation timed out', 'TimeoutError');
+    controller.abort(reason);
+    timeoutReject(reason);
+    cancelBodyBestEffort(responseForCancellation);
   }, effectiveTimeoutMs);
   const forwardAbort = () => controller.abort(upstreamSignal.reason);
   const cleanup = () => {
@@ -102,14 +123,18 @@ export async function fetchWithRefTimeout(
   }
 
   try {
-    const response = await fetchImpl(url, { ...requestOptions, signal: controller.signal });
+    const response = await Promise.race([
+      Promise.resolve().then(() => fetchImpl(url, { ...requestOptions, signal: controller.signal })),
+      timeoutPromise,
+    ]);
+    responseForCancellation = response;
     // HEAD/204-style responses have no body to protect; ordinary responses
     // release the timer only after json/text/etc. has finished below.
     if (response.body === null) {
       cleanup();
       return response;
     }
-    return withBodyDeadline(response, cleanup);
+    return withBodyDeadline(response, cleanup, timeoutPromise);
   } catch (error) {
     cleanup();
     throw error;
