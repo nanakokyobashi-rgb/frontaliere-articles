@@ -105021,6 +105021,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-audi-rubata-san-fermo': {
+    title: 'Audi rubata, tentata fuga: fermato 29enne a San Fermo',
+    description: 'Inseguimento a San Fermo nella serata del 7 ottobre Audi A3 nera risultata rubata Fermato un 29enne rumeno con patente revocata Trovati flessibile e 23 grammi',
+    keywords: 'frontalieri, ticino, svizzera, italia, audi, rubata, tentata, fuga',
+    ogTitle: 'Audi rubata, tentata fuga: fermato 29enne a San Fermo',
+    ogDescription: 'Inseguimento a San Fermo nella serata del 7 ottobre Audi A3 nera risultata rubata Fermato un 29enne rumeno con patente revocata Trovati flessibile e 23 grammi',
+    canonicalPath: '/articoli-frontaliere/audi-rubata-san-fermo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Audi rubata, tentata fuga: fermato 29enne a San Fermo",
+      "description": "Inseguimento a San Fermo nella serata del 7 ottobre Audi A3 nera risultata rubata Fermato un 29enne rumeno con patente revocata Trovati flessibile e 23 grammi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Audi A3 nera fermata dai carabinieri a San Fermo della Battaglia"
+      },
+      "datePublished": "2026-10-10T16:58:42+00:00",
+      "dateModified": "2026-10-10T16:58:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/audi-rubata-san-fermo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

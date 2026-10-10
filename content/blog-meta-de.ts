@@ -12943,6 +12943,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.varese-adhd-days-ottobre-2026.title': 'ADHD Days Varese 2026: Oktober im Zeichen unsichtbarer Vulnerabilitäten',
     'blog.article.varese-adhd-days-ottobre-2026.excerpt': 'Im Oktober schlägt Varese Wege zu unsichtbaren Vulnerabilitäten vor ADHD Days Varese 2026 am 15.',
     'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Jugendliche nehmen an einer ADHS-Aufklärungsveranstaltung in Varese im Oktober 2026 teil',
+    'blog.article.audi-rubata-san-fermo.title': 'Audi gestohlen, Fluchtversuch: 29-Jähriger in San Fermo festgenommen',
+    'blog.article.audi-rubata-san-fermo.excerpt': 'Verfolgungsjagd in San Fermo am Abend des 7.',
+    'blog.article.audi-rubata-san-fermo.imageAlt': 'Schwarzer Audi A3 von den Carabinieri in San Fermo gestoppt (San Fermo della Battaglia)',
 };
 
 export default blogMetaDe;

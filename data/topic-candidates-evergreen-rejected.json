@@ -797,26 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.swissinfo.ch/ita/gr%3a-iniziativa-su-carenza-di-alloggi-a-coira%2c-presentato-testo/92185340": {
-      "section": "svizzera",
-      "ts": 1791472390438
-    },
-    "frontaliere::https://comozero.it/cronaca/auto-rubata-patente-revocata-san-fermo": {
-      "section": "frontaliere",
-      "ts": 1791473915288
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1955632/montblanc-richemont-crisi-orologi-industria": {
-      "section": "frontaliere",
-      "ts": 1791475705419
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/economia-13/articolo/focus-day-sullagricoltura-che-guarda-ai-giovani-nel-varesotto-ce-spazio-per-nuove-impres.html": {
-      "section": "frontaliere",
-      "ts": 1791475762250
-    },
-    "svizzera::https://www.rsi.ch/s/4145486": {
-      "section": "svizzera",
-      "ts": 1791477587516
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/caro-affitti-foletti-a-lugano-gli-alloggi-accessibili-sono-superiori-alla-domanda-444245": {
       "section": "frontaliere",
       "ts": 1791479844180
@@ -1124,6 +1104,10 @@
     "svizzera::https://www.tio.ch/svizzera/attualita/1955626/popolazione-residente-nazionalita-furti-condanne-criminalita": {
       "section": "svizzera",
       "ts": 1791644835458
+    },
+    "frontaliere::https://comozero.it/attualita/elezioni-2027-avs-una-citta-piu-verde-e-sociale-e-un-sindaco-proveniente-dal-mondo-ambientalista": {
+      "section": "frontaliere",
+      "ts": 1791650877023
     }
   }
 }

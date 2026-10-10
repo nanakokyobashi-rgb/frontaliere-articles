@@ -20,6 +20,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T15:20:37.719Z",
       "lastFailureAt": "2026-10-10T15:20:37.719Z"
+    },
+    {
+      "articleId": "audi-rubata-san-fermo",
+      "title": "Audi rubata, tentata fuga: fermato 29enne a San Fermo",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T16:58:42.995Z",
+      "lastFailureAt": "2026-10-10T16:58:42.995Z"
     }
   ]
 }

@@ -12946,6 +12946,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.varese-adhd-days-ottobre-2026.title': 'ADHD Days Varese 2026 : octobre sur les fragilités invisibles',
     'blog.article.varese-adhd-days-ottobre-2026.excerpt': 'En octobre Varese propose des parcours sur les fragilités invisibles ADHD Days Varese 2026 au programme les 15 et 16 octobre Municipalité, associations, écoles et institutions',
     'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Des adolescents participent à une réunion sur le TDAH à Varese en octobre 2026',
+    'blog.article.audi-rubata-san-fermo.title': 'Audi volée, tentative de fuite : un homme de 29 ans arrêté à San Fermo',
+    'blog.article.audi-rubata-san-fermo.excerpt': 'Poursuite à San Fermo dans la soirée du 7 octobre Audi A3 noire signalée volée Interpellation d’un Roumain de 29 ans au permis révoqué Une meuleuse et 23 grammes retrouvés',
+    'blog.article.audi-rubata-san-fermo.imageAlt': 'Audi A3 noire arrêtée par les Carabinieri à San Fermo (San Fermo della Battaglia)',
 };
 
 export default blogMetaFr;
