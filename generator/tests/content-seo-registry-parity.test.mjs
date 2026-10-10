@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SECTIONS, seoFilesFor } from '../../scripts/lib/article-surfaces.mjs';
+import { scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -21,9 +22,7 @@ function readIfPresent(rel) {
 }
 
 function registryIds(source) {
-  const ids = [];
-  for (const match of source.matchAll(/^\s*id:\s*'([^']+)'\s*,/gm)) ids.push(match[1]);
-  return ids;
+  return scanTopLevelArticleRecords(source).map(({ id }) => id);
 }
 
 function seoIdCounts(sources) {

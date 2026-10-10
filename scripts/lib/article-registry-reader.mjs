@@ -151,7 +151,7 @@ function stringBody(raw) {
  * once their containing article row has been recognized.
  *
  * @param {string} src TypeScript source containing registry object literals
- * @returns {{ id: string, properties: Map<string, { key: string, raw: string, valueStart: number, valueEnd: number }>, start: number, end: number }[]}
+ * @returns {{ id: string, entries: { key: string, raw: string, valueStart: number, valueEnd: number }[], properties: Map<string, { key: string, raw: string, valueStart: number, valueEnd: number }>, start: number, end: number }[]}
  */
 export function scanTopLevelArticleRecords(src) {
   const text = String(src ?? '');
@@ -183,7 +183,7 @@ export function scanTopLevelArticleRecords(src) {
       for (const entry of entries) {
         if (!properties.has(entry.key)) properties.set(entry.key, entry);
       }
-      records.push({ id, properties, start: i, end: close + 1 });
+      records.push({ id, entries, properties, start: i, end: close + 1 });
       i = close + 1;
       continue;
     }
