@@ -8048,6 +8048,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.amsa-bus-elettrici-mendrisiotto.title': 'AMSA weiht in Balerna die ersten Elektrobusse ein',
     'blog.article.amsa-bus-elettrici-mendrisiotto.excerpt': 'Vier Elektrobusse in Balerna eingeweiht Marchesi bei seiner ersten Rede als Staatsrat Betroffene Linien: 2, 3 und 4 AMSA-Umstellung bis 2032 vorgesehen',
     'blog.article.amsa-bus-elettrici-mendrisiotto.imageAlt': 'AMSA-Elektrobus im Einsatz in der Region Mendrisiotto',
+    'blog.article.disagi-treni-vaud-eclepens.title': 'Bahnverkehr: weiterhin Beeinträchtigungen zwischen Yverdon und Lausanne',
+    'blog.article.disagi-treni-vaud-eclepens.excerpt': 'Die Strecke Yverdon-les-Bains-Lausanne bleibt unterbrochen Zwei Fernverkehrszüge pro Stunde, mit Verzögerungen Regionalverkehr und Flughafen Genf: Busse Probleme',
+    'blog.article.disagi-treni-vaud-eclepens.imageAlt': 'Schweizer Bahngleise mit einem Ersatzbus nahe einem Bahnhof.',
 };
 
 export default blogMetaChDe;

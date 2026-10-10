@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/impatto-ia-su-dipendenti-telecom%2c-syndicom-formula-rivendicazioni/92016507": {
-    "articleId": "impatto-ia-dipendenti-telecom-syndicom-rivendicazioni",
-    "ts": "2026-09-07T12:33:59.289Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1948472/melide-igor": {
     "articleId": "melide-riqualifica-centro",
     "ts": "2026-09-07T12:45:00.187Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1955939/amsa-inaugura-i-primi-bus-elettrici-marchesi-al-debutto-ufficiale": {
     "articleId": "amsa-bus-elettrici-mendrisiotto",
     "ts": "2026-10-10T13:00:30.251Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/vd%3a-ferrovia%2c-ancora-disagi-tra-yverdon-e-losanna/92196903": {
+    "articleId": "disagi-treni-vaud-eclepens",
+    "ts": "2026-10-10T13:48:29.065Z",
     "keyForm": 2
   }
 }
