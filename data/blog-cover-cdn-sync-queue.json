@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-disagi-treni-vaud-eclepens.webp",
-      "sha256": "c9822df8e603fdbd8f1113306090973e227e86b66dbd09dec005b2301ee8aa28"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-disagi-treni-vaud-eclepens-480w.webp",
-      "sha256": "b68b1d3f261074ed14fe7dcadbe0d2847eefc18833dad8d4881f0257c3d52743"
-    }
-  ]
+  "items": []
 }
