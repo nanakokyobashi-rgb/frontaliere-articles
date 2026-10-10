@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-festival-energetica-cabiaglio-2026.webp",
+      "sha256": "e8094879e527abebe9dcc28aef18a82cf370c6388d190a9ad53c3132a731f975"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-festival-energetica-cabiaglio-2026-480w.webp",
+      "sha256": "c87925c1520354bf1fe09a68ff996b284720035fe8adab4d2c2cf53cdc72a4ba"
+    }
+  ]
 }
