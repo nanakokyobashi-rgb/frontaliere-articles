@@ -12947,7 +12947,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Adolescenti partecipano a un incontro su ADHD a Varese durante il mese di ottobre 2026',
     'blog.article.audi-rubata-san-fermo.title': 'Audi rubata, tentata fuga: fermato 29enne a San Fermo',
     'blog.article.audi-rubata-san-fermo.excerpt': 'Inseguimento a San Fermo nella serata del 7 ottobre Audi A3 nera risultata rubata Fermato un 29enne rumeno con patente revocata Trovati flessibile e 23 grammi',
-    'blog.article.audi-rubata-san-fermo.imageAlt': 'Audi A3 nera fermata dai carabinieri a San Fermo della Battaglia',
+    'blog.article.audi-rubata-san-fermo.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.adesione-ocst-servizi-frontalieri.title': 'Associarsi all\'OCST: vantaggi per frontalieri in Ticino',
     'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno',
     'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Lavoratore frontaliere che consulta i vantaggi OCST in ufficio a Mendrisio',

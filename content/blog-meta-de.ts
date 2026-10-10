@@ -12945,7 +12945,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Jugendliche nehmen an einer ADHS-Aufklärungsveranstaltung in Varese im Oktober 2026 teil',
     'blog.article.audi-rubata-san-fermo.title': 'Audi gestohlen, Fluchtversuch: 29-Jähriger in San Fermo festgenommen',
     'blog.article.audi-rubata-san-fermo.excerpt': 'Verfolgungsjagd in San Fermo am Abend des 7.',
-    'blog.article.audi-rubata-san-fermo.imageAlt': 'Schwarzer Audi A3 von den Carabinieri in San Fermo gestoppt (San Fermo della Battaglia)',
+    'blog.article.audi-rubata-san-fermo.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.adesione-ocst-servizi-frontalieri.title': 'Dem OCST beitreten: Vorteile für Grenzgänger im Tessin',
     'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Beratung zu Arbeit, Lohnabrechnung, Steuerwesen und Miete Grenzgängerbüro für Steuern und soziale Sicherheit Patronato INAS in Chiasso, Mendrisio, Bioggio und Locarno',
     'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Grenzgänger, der die OCST-Vorteile im Büro in Mendrisio prüft',

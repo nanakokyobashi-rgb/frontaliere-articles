@@ -6,10 +6,10 @@
       "title": "AMSA inaugura i primi bus elettrici a Balerna",
       "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
       "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 2,
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-10T13:00:30.249Z",
-      "lastFailureAt": "2026-10-10T17:06:30.849Z"
+      "lastFailureAt": "2026-10-10T18:48:59.290Z"
     },
     {
       "articleId": "tirocinio-uri-guida-pratica",
@@ -17,39 +17,19 @@
       "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
       "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-10T15:20:37.719Z",
-      "lastFailureAt": "2026-10-10T17:08:31.081Z"
-    },
-    {
-      "articleId": "audi-rubata-san-fermo",
-      "title": "Audi rubata, tentata fuga: fermato 29enne a San Fermo",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-10T16:58:42.995Z",
-      "lastFailureAt": "2026-10-10T17:10:31.270Z"
-    },
-    {
-      "articleId": "postauto-orario-nidvaldo-2026",
-      "title": "PostAuto, nuovo orario in Nidvaldo dal 13 dicembre 2026",
-      "fallbackImage": "/images/blog/apprendistato-nidvaldo-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T17:33:10.952Z",
-      "lastFailureAt": "2026-10-10T17:33:10.952Z"
+      "lastFailureAt": "2026-10-10T18:50:59.494Z"
     },
     {
       "articleId": "adesione-ocst-servizi-frontalieri",
       "title": "Associarsi all'OCST: vantaggi per frontalieri in Ticino",
       "fallbackImage": "/images/blog/caldo-lavoro-frontalieri-ticino.webp",
-      "reason": "All image providers failed for article-adesione-ocst-servizi-frontalieri: openai-codex (vision gate rejected image: Generic editorial illustration relevant to cross-border work in",
+      "reason": "All image providers failed for article-adesione-ocst-servizi-frontalieri: openai-codex (vision gate rejected image: Original generic illustration with no readable text, logos, or recognizable face; however, it prominently depicts a recogniz",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-10T18:40:53.652Z",
-      "lastFailureAt": "2026-10-10T18:40:53.652Z"
+      "lastFailureAt": "2026-10-10T18:55:33.856Z"
     }
   ]
 }

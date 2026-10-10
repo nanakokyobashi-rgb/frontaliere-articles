@@ -12946,7 +12946,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Teenagers attend an ADHD awareness meeting in Varese during October 2026',
     'blog.article.audi-rubata-san-fermo.title': 'Stolen Audi, attempted getaway: 29-year-old arrested in San Fermo',
     'blog.article.audi-rubata-san-fermo.excerpt': 'Pursuit in San Fermo on the evening of October 7 Black Audi A3 found to have been stolen A 29-year-old Romanian man with a revoked license stopped Angle grinder and 23 grams found',
-    'blog.article.audi-rubata-san-fermo.imageAlt': 'Black Audi A3 stopped by Carabinieri in San Fermo della Battaglia',
+    'blog.article.audi-rubata-san-fermo.imageAlt': 'Illustration generated for this article',
     'blog.article.adesione-ocst-servizi-frontalieri.title': 'Joining OCST: benefits for cross-border workers in Ticino',
     'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Advice on employment, payslips, taxation and rental matters Cross-border workers office for tax and social security Patronato INAS in Chiasso, Mendrisio, Bioggio and Locarno',
     'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Cross-border worker checking OCST benefits in an office in Mendrisio',

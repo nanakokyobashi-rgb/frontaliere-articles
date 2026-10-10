@@ -8,7 +8,7 @@ const blogMetaCantonNwEn: Record<string, string> = {
     'blog.article.lopper-luce-pedoni-bici.imageAlt': 'Illustration generated for this article',
     'blog.article.postauto-orario-nidvaldo-2026.title': 'PostAuto, new timetable in Nidwalden from December 13, 2026',
     'blog.article.postauto-orario-nidvaldo-2026.excerpt': 'Starting December 13, 2026, the PostAuto timetable will change: the communication announces changes to the service offering in the cantons of Obwalden and Nidwalden.',
-    'blog.article.postauto-orario-nidvaldo-2026.imageAlt': 'PostAuto timetable change from 13 December 2026 in Canton Nidwalden',
+    'blog.article.postauto-orario-nidvaldo-2026.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonNwEn;

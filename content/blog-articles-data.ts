@@ -43650,7 +43650,7 @@ const RAW_ARTICLES = [
  id: 'audi-rubata-san-fermo',
  category: 'novita',
  date: '2026-10-10T16:58:42.536Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-audi-rubata-san-fermo.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
