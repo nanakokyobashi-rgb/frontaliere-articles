@@ -165,6 +165,7 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
     'generator/scripts/load-rc-env.mjs',
     'generator/scripts/lib/source-copy-guard.mjs',
     'generator/scripts/lib/google-service-account-token.mjs',
+    'generator/scripts/lib/fetch-with-ref-timeout.mjs',
   ]);
   // Every module the evaluator imports must be inside the sparse checkout,
   // or the green-run branch dies on ERR_MODULE_NOT_FOUND before any rerun.
