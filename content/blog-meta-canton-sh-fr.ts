@@ -15,6 +15,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sciaffusa-dati-lavoro-2026.title': 'Chômage dans le canton de Schaffhouse : données de septembre 2026',
     'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'Le Centre régional de placement communique les données sur le chômage dans le canton de Schaffhouse pour septembre 2026 ; le lead public ne rapporte pas les chiffres.',
     'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.finanze-cantone-sciaffusa-2027.title': 'Schaffhouse : des chiffres rouges prévus entre 2027 et 2030',
+    'blog.article.finanze-cantone-sciaffusa-2027.excerpt': 'Le gouvernement cantonal s’attend à des résultats négatifs pour la période quadriennale 2027-2030 en raison de la baisse des recettes provenant des impôts sur les entreprises.',
+    'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Bâtiments gouvernementaux du canton de Schaffhouse',
 };
 
 export default blogMetaCantonShFr;

@@ -163,6 +163,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finanze-cantone-sciaffusa-2027': {
+    title: 'Sciaffusa: previste cifre rosse tra il 2027 e il 2030',
+    description: 'Il governo di Sciaffusa prevede cifre rosse 2027-2030. Walter Hotz chiede chiarimenti sul dopo-2031 e misure per le società internazionali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, previste, cifre, rosse',
+    ogTitle: 'Sciaffusa: previste cifre rosse tra il 2027 e il 2030',
+    ogDescription: 'Il governo cantonale di Sciaffusa attende risultati negativi per il quadriennio 2027-2030. Walter Hotz chiede misure per trattenere le imprese internazionali e prospettive per il 2031.',
+    canonicalPath: '/articoli-sciaffusa/finanze-cantone-sciaffusa-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciaffusa: previste cifre rosse tra il 2027 e il 2030",
+      "description": "Il governo di Sciaffusa prevede cifre rosse 2027-2030. Walter Hotz chiede chiarimenti sul dopo-2031 e misure per le società internazionali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-finanze-cantone-sciaffusa-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici governativi del Canton Sciaffusa"
+      },
+      "datePublished": "2026-10-10T21:14:11+00:00",
+      "dateModified": "2026-10-10T21:14:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/finanze-cantone-sciaffusa-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

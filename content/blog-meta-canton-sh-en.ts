@@ -15,6 +15,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-dati-lavoro-2026.title': 'Unemployment in the Canton of Schaffhausen: September 2026 data',
     'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'The regional employment center reports unemployment data for the Canton of Schaffhausen for September 2026; the public lead does not include the figures.',
     'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Illustration generated for this article',
+    'blog.article.finanze-cantone-sciaffusa-2027.title': 'Schaffhausen: red figures expected between 2027 and 2030',
+    'blog.article.finanze-cantone-sciaffusa-2027.excerpt': 'The cantonal government expects negative results for the four-year period 2027–2030 due to declining revenue from corporate taxes.',
+    'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Government buildings of the Canton of Schaffhausen',
 };
 
 export default blogMetaCantonShEn;

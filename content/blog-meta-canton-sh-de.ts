@@ -15,6 +15,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-dati-lavoro-2026.title': 'Arbeitslosigkeit im Kanton Schaffhausen: Daten für September 2026',
     'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'Das Regionale Arbeitsvermittlungszentrum teilt die Arbeitslosigkeitsdaten im Kanton Schaffhausen für September 2026 mit; der öffentlich zugängliche Lead enthält keine Zahlen.',
     'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.finanze-cantone-sciaffusa-2027.title': 'Schaffhausen: Zwischen 2027 und 2030 werden rote Zahlen erwartet',
+    'blog.article.finanze-cantone-sciaffusa-2027.excerpt': 'Die Kantonsregierung rechnet für den Vierjahreszeitraum 2027–2030 aufgrund des Rückgangs der Einnahmen aus den Unternehmenssteuern mit negativen Ergebnissen.',
+    'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Regierungsgebäude des Kantons Schaffhausen',
 };
 
 export default blogMetaCantonShDe;
