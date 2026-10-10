@@ -18,6 +18,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.riduzione-premi-padre-divorziato-lucerna.title': 'Réduction des primes refusée à un père divorcé à Lucerne',
     'blog.article.riduzione-premi-padre-divorziato-lucerna.excerpt': 'Le Tribunal fédéral confirme : pas de forfait 9.000 CHF/enfant si les contributions d’entretien ont déjà été déduites.',
     'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Père divorcé avec enfants à Lucerne pendant semaine de garde alternée',
+    'blog.article.juso-lucerna-humbel-governo.title': 'Juso Lucerne : Valentin Humbel candidat au gouvernement',
+    'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel est le candidat de Juso au gouvernement lucernois.',
+    'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Scène urbaine à Lucerne liée à la politique cantonale',
 };
 
 export default blogMetaCantonLuFr;

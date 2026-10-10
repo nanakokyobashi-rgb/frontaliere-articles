@@ -18,6 +18,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.riduzione-premi-padre-divorziato-lucerna.title': 'Prämienverbilligung für geschiedenen Vater in Luzern abgelehnt',
     'blog.article.riduzione-premi-padre-divorziato-lucerna.excerpt': 'Das Bundesgericht bestätigt: kein Pauschalabzug von 9.000 CHF/Kind, wenn die Unterhaltsbeiträge bereits abgezogen wurden.',
     'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Geschiedener Vater mit Kindern in Luzern während Wechselmodell-Woche',
+    'blog.article.juso-lucerna-humbel-governo.title': 'Juso Luzern: Valentin Humbel kandidiert für den Regierungsrat',
+    'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel ist der Juso-Kandidat für den Luzerner Regierungsrat.',
+    'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Stadtszene in Luzern zur Politik der Kantonsregierung',
 };
 
 export default blogMetaCantonLuDe;

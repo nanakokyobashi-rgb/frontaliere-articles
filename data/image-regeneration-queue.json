@@ -30,6 +30,16 @@
       "failureCount": 2,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-10T23:18:13.322Z"
+    },
+    {
+      "articleId": "juso-lucerna-humbel-governo",
+      "title": "Juso Lucerna: Valentin Humbel candidato al governo",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T23:52:13.536Z",
+      "lastFailureAt": "2026-10-10T23:52:13.536Z"
     }
   ]
 }

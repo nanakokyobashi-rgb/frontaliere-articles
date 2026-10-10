@@ -18,6 +18,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.riduzione-premi-padre-divorziato-lucerna.title': 'Premium reduction denied to divorced father in Lucerne',
     'blog.article.riduzione-premi-padre-divorziato-lucerna.excerpt': 'The Federal Tribunal confirms: no flat rate of 9.000 CHF/child if maintenance contributions have already been deducted.',
     'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Divorced father with children in Lucerne during alternating custody week',
+    'blog.article.juso-lucerna-humbel-governo.title': 'Juso Lucerne: Valentin Humbel candidate for government',
+    'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel is the Juso candidate for the Lucerne cantonal government.',
+    'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Urban Lucerne scene linked to cantonal government politics',
 };
 
 export default blogMetaCantonLuEn;

@@ -202,6 +202,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-juso-lucerna-humbel-governo': {
+    title: 'Juso Lucerna: Valentin Humbel candidato al governo',
+    description: 'Valentin Humbel è il candidato Juso al governo lucernese. La nomina è avvenuta all\'assemblea di venerdì sera. Casa, salari, istruzione e mobilità sono i temi',
+    keywords: 'frontalieri, ticino, svizzera, italia, juso, lucerna, valentin, humbel',
+    ogTitle: 'Valentin Humbel candidato Juso al governo lucernese',
+    ogDescription: 'Valentin Humbel è il candidato Juso al governo lucernese.',
+    canonicalPath: '/articoli-lucerna/juso-lucerna-humbel-governo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Juso Lucerna: Valentin Humbel candidato al governo",
+      "description": "Valentin Humbel è il candidato Juso al governo lucernese. La nomina è avvenuta all'assemblea di venerdì sera. Casa, salari, istruzione e mobilità sono i temi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena urbana a Lucerna legata alla politica del governo cantonale"
+      },
+      "datePublished": "2026-10-10T23:52:13+00:00",
+      "dateModified": "2026-10-10T23:52:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/juso-lucerna-humbel-governo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
