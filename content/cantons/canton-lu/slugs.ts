@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lucerna-qualita-sviluppo-scuole': { it: 'lucerna-qualita-sviluppo-scuole', en: 'lucerne-school-quality-development', de: 'luzern-schulqualitaet-entwicklung', fr: 'lucerne-qualite-developpement-scolaire' },
  'kriens-torna-in-deficit': { it: 'kriens-torna-in-deficit', en: 'kriens-returns-to-deficit', de: 'kriens-rutscht-wieder-ins-minus', fr: 'kriens-repasse-dans-le-rouge' },
  'progetto-latte-climatico': { it: 'progetto-latte-climatico', en: 'swiss-milk-climate-project', de: 'schweizer-milch-klimaprojekt', fr: 'projet-lait-climatique-suisse' },
+ 'riduzione-premi-padre-divorziato-lucerna': { it: 'riduzione-premi-padre-divorziato-lucerna', en: 'premium-reduction-divorced-father-lucerne', de: 'praemienverbilligung-geschiedener-vater-luzern', fr: 'reduction-primes-pere-divorce-lucerne' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

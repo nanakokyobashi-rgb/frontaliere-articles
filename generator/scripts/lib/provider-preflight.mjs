@@ -21,6 +21,7 @@ import {
   GH_MODELS_CATALOG_URL,
   isGitHubModelsRetiredResponse,
 } from './ai-models.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 export const PROVIDER_PREFLIGHT_TIMEOUT_MS = 8_000;
 
@@ -215,12 +216,11 @@ async function probeProvider(group, {
       delete headers.Authorization;
     }
     try {
-      const response = await fetchImpl(url, {
+      const response = await fetchWithRefTimeout(url, {
         method: 'GET',
         headers,
         redirect: 'manual',
-        signal: AbortSignal.timeout(normalizeTimeoutMs(timeoutMs)),
-      });
+      }, normalizeTimeoutMs(timeoutMs), fetchImpl);
       // GitHub Models e' ritirato e l'host risponde 200 «OK» a tutto: lo
       // status da solo lo dava `ready`. Stessa firma del runtime, una sola
       // sorgente (isGitHubModelsRetiredResponse in ai-models.mjs).
@@ -228,6 +228,7 @@ async function probeProvider(group, {
         const body = await response.text().catch(() => '');
         const contentType = response.headers?.get?.('content-type');
         if (isGitHubModelsRetiredResponse(response.status, contentType, body)) {
+          releaseFetchWithRefTimeout(response);
           return {
             ...base,
             status: 'provider_unavailable',
@@ -237,6 +238,7 @@ async function probeProvider(group, {
           };
         }
       }
+      releaseFetchWithRefTimeout(response);
       lastResult = {
         ...base,
         ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, httpStatus: response.status }),
@@ -244,7 +246,11 @@ async function probeProvider(group, {
       };
       // One usable account is enough to keep GitHub in the generation pool;
       // the runtime rotates the same PAT set for the actual request.
-      if (lastResult.status === 'ready') return lastResult;
+      if (lastResult.status === 'ready') {
+        releaseFetchWithRefTimeout(response);
+        return lastResult;
+      }
+      releaseFetchWithRefTimeout(response);
     } catch (error) {
       const reason = safeErrorReason(error);
       lastResult = {

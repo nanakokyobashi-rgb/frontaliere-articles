@@ -104748,6 +104748,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ispezioni-gallerie-lago-como': {
+    title: 'A9 Como-Chiasso: chiusure notturne a ottobre | Frontaliere Ticino',
+    description: 'Chiusura verso Lainate nelle notti 12-14 e 17-19 ottobre Chiusura verso Chiasso/Svizzera nelle notti 15-16 e 16-17 Como Centro chiuso in entrata in entrambe',
+    keywords: 'frontalieri, ticino, svizzera, italia, como-chiasso, chiusure, notturne, ottobre',
+    ogTitle: 'A9 Como-Chiasso: chiusure notturne a ottobre',
+    ogDescription: 'Chiusura verso Lainate nelle notti 12-14 e 17-19 ottobre Chiusura verso Chiasso/Svizzera nelle notti 15-16 e 16-17 Como Centro chiuso in entrata in entrambe',
+    canonicalPath: '/articoli-frontaliere/ispezioni-gallerie-lago-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A9 Como-Chiasso: chiusure notturne a ottobre",
+      "description": "Chiusura verso Lainate nelle notti 12-14 e 17-19 ottobre Chiusura verso Chiasso/Svizzera nelle notti 15-16 e 16-17 Como Centro chiuso in entrata in entrambe",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a9-chiusure-notturne-sion-sierre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autostrada verso Chiasso durante chiusure notturne per ispezioni alle gallerie."
+      },
+      "datePublished": "2026-10-10T08:47:30+00:00",
+      "dateModified": "2026-10-10T08:47:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ispezioni-gallerie-lago-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

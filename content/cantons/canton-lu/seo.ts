@@ -163,6 +163,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-riduzione-premi-padre-divorziato-lucerna': {
+    title: 'Riduzione premi negata a padre divorziato a Lucerna',
+    description: 'Il Tribunale federale conferma il diniego della riduzione premi a un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF/figlio è esclusa se già',
+    keywords: 'frontalieri, ticino, svizzera, italia, riduzione, premi, negata, padre',
+    ogTitle: 'Niente riduzione premi per padre divorziato a Lucerna',
+    ogDescription: 'Il Tribunale federale respinge il ricorso di un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF per figlio per la riduzione dei premi non spetta se i contributi di mantenimento sono già stati detratti dal reddito. La custodia',
+    canonicalPath: '/articoli-lucerna/riduzione-premi-padre-divorziato-lucerna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riduzione premi negata a padre divorziato a Lucerna",
+      "description": "Il Tribunale federale conferma il diniego della riduzione premi a un padre divorziato lucernese: la deduzione forfettaria di 9.000 CHF/figlio è esclusa se già",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riduzione-premi-padre-divorziato-lucerna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Padre divorziato con figli a Lucerna durante settimana di custodia alternata"
+      },
+      "datePublished": "2026-10-10T09:02:37+00:00",
+      "dateModified": "2026-10-10T09:02:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/riduzione-premi-padre-divorziato-lucerna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

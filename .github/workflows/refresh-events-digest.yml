@@ -38,6 +38,7 @@ on:
     paths:
       - '.github/workflows/refresh-events-digest.yml'
       - 'generator/scripts/generate-events-digest-article.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       - 'generator/scripts/refresh-events-dataset.mjs'
       - 'generator/scripts/lib/rewire-fetch.mjs'
       - 'generator/scripts/lib/events-digest-content.mjs'

@@ -58,6 +58,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
@@ -665,12 +666,12 @@ async function probe(url, { attempts = 6, delayMs = 4000, want = () => true } = 
   let last = 'nessuna risposta';
   for (let i = 1; i <= attempts; i++) {
     try {
-      const res = await fetch(`${url}${url.includes('?') ? '&' : '?'}_spcb=${Date.now()}.${i}`, {
+      const res = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_spcb=${Date.now()}.${i}`, {
         redirect: 'manual',
         headers: { 'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)' },
-        signal: AbortSignal.timeout(20000),
-      });
+      }, 20000);
       const body = res.status === 200 ? await res.text() : '';
+      if (res.status !== 200) releaseFetchWithRefTimeout(res);
       if (res.status === 200 && want(body)) return { ok: true, status: 200, body };
       last = res.status === 200 ? 'risposta 200 senza il contenuto atteso' : `HTTP ${res.status}`;
     } catch (error) {
@@ -697,11 +698,13 @@ export async function publishedStatus(section) {
 
 async function fetchJsonAt(url, fetchImpl) {
   try {
-    const res = await fetchImpl(`${url}${url.includes('?') ? '&' : '?'}_sppr=${Date.now()}`, {
+    const res = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_sppr=${Date.now()}`, {
       headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
-      signal: AbortSignal.timeout(20000),
-    });
-    if (!res.ok) return null;
+    }, 20000, fetchImpl);
+    if (!res.ok) {
+      releaseFetchWithRefTimeout(res);
+      return null;
+    }
     return await res.json();
   } catch {
     return null;

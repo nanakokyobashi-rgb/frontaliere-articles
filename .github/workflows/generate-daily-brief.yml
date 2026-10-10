@@ -38,6 +38,7 @@ on:
     paths:
       - '.github/workflows/generate-daily-brief.yml'
       - 'generator/scripts/refresh-daily-brief-data.mjs'
+      - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       - 'generator/scripts/generate-daily-brief-article.mjs'
       - 'generator/scripts/lib/daily-brief-data.mjs'
       - 'generator/scripts/lib/daily-brief-content.mjs'

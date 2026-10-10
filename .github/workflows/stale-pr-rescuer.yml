@@ -224,6 +224,8 @@ jobs:
             > stale-rc-loader/generator/scripts/lib/source-copy-guard.mjs
           git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/google-service-account-token.mjs" \
             > stale-rc-loader/generator/scripts/lib/google-service-account-token.mjs
+          git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/fetch-with-ref-timeout.mjs" \
+            > stale-rc-loader/generator/scripts/lib/fetch-with-ref-timeout.mjs
           git -C stale-rc-loader show "origin/${DEFAULT_BRANCH}:generator/scripts/lib/source-copy-guard.mjs" \
             > stale-rc-loader/generator/scripts/lib/source-copy-guard.mjs
           # The report step runs for scoped workflow_run invocations too. The

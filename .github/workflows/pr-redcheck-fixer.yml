@@ -115,6 +115,8 @@ jobs:
             > generator/scripts/lib/source-copy-guard.mjs
           git show HEAD:generator/scripts/lib/google-service-account-token.mjs \
             > generator/scripts/lib/google-service-account-token.mjs
+          git show HEAD:generator/scripts/lib/fetch-with-ref-timeout.mjs \
+            > generator/scripts/lib/fetch-with-ref-timeout.mjs
           git show HEAD:generator/scripts/lib/source-copy-guard.mjs \
             > generator/scripts/lib/source-copy-guard.mjs
 

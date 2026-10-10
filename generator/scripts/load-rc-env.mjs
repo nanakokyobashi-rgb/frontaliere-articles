@@ -28,6 +28,7 @@
 import { realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { ARTICLE_SOURCE_COPY_MODE_ENV } from './lib/source-copy-guard.mjs';
+import { fetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 
 // ─── RC Param → Env Var Mapping ──────────────────────────────────────────
 // Maps Remote Config parameter names to the environment variable names
@@ -587,16 +588,16 @@ async function fetchTemplateViaRest() {
   for (let attempt = 1; attempt <= RC_FETCH_ATTEMPTS; attempt++) {
     let rcRes;
     try {
-      rcRes = await fetch(
+      rcRes = await fetchWithRefTimeout(
         `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}/remoteConfig`,
         {
           headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' },
-          signal: AbortSignal.timeout(RC_FETCH_TIMEOUT_MS),
         },
+        RC_FETCH_TIMEOUT_MS,
       );
     } catch (err) {
       // A rejected fetch() has no HTTP status to gate on, and it means one of
-      // two things: AbortSignal.timeout() firing, or a raw network failure
+      // two things: fetchWithRefTimeout firing, or a raw network failure
       // (DNS, TLS, connection reset) that surfaces as a bare "fetch failed"
       // TypeError. Issue #247 measured the latter landing 272ms after the
       // request started — far too fast to be the 30s timeout, but just as

@@ -97,6 +97,7 @@ import {
   newsUrlKey,
   withItemIdentity,
 } from './source-url-ledger.mjs';
+import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
@@ -1247,11 +1248,10 @@ export async function scanCantonSource(source, ctx) {
         return await throttle.run(host, quirks.crawlDelaySeconds || 0, async () => {
           let res;
           try {
-            res = await fetchImpl(url, {
+            res = await fetchWithRefTimeout(url, {
               headers: { 'User-Agent': CANTON_SOURCE_USER_AGENT, Accept: accept, 'Accept-Language': acceptLanguageFor(source) },
               redirect: 'follow',
-              signal: AbortSignal.timeout(CANTON_SOURCE_TIMEOUT_MS),
-            });
+            }, CANTON_SOURCE_TIMEOUT_MS, fetchImpl);
           } catch (error) {
             // Classify the transport error in the outer catch. Do not mark an
             // arbitrary thrown value: invalid URLs and redirect failures are
@@ -1259,8 +1259,10 @@ export async function scanCantonSource(source, ctx) {
             throw error;
           }
           if (!res.ok) {
+            releaseFetchWithRefTimeout(res);
             const error = new Error(`HTTP ${res.status}`);
             error.status = res.status;
+            releaseFetchWithRefTimeout(res);
             throw error;
           }
           // The body is still a network stream: ECONNRESET/UND_ERR_SOCKET or
