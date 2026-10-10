@@ -23,6 +23,7 @@ import {
   loadSnapshot,
   buildData,
   humanDate,
+  projectDailyBriefForLocale,
 } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
@@ -134,6 +135,26 @@ test('localizes dynamic border-crossing exonyms before the shared factuality gat
   assert.match(article.content.en.title, /at Basel – Weil am Rhein/);
   assert.match(article.content.de.title, /in Basel – Weil am Rhein/);
   assert.deepEqual(findArticleLocalizedToponymMismatches(article), []);
+});
+
+test('the hero card shares the article locale projection and slug fallbacks stay opaque', () => {
+  const brief = structuredClone(BRIEF);
+  const sourceName = 'Basel – Weil am Rhein, Autostrada A2/A5';
+  brief.blocks.borderWait.worst = { ...brief.blocks.borderWait.worst, name: sourceName };
+  brief.blocks.borderWait.crossings[0] = { ...brief.blocks.borderWait.crossings[0], name: sourceName };
+
+  const hero = buildDailyBriefSvg(projectDailyBriefForLocale(brief, 'it'), { locale: 'it' });
+  assert.match(hero, /Basilea – Weil am Rhein/);
+  assert.doesNotMatch(hero, /Basel – Weil am Rhein/);
+
+  const slugFallback = structuredClone(BRIEF);
+  const slug = 'basel-weil-am-rhein';
+  slugFallback.blocks.borderWait.worst = { ...slugFallback.blocks.borderWait.worst, slug, name: slug };
+  slugFallback.blocks.borderWait.crossings[0] = { ...slugFallback.blocks.borderWait.crossings[0], slug, name: slug };
+  const article = buildDailyBriefArticle(slugFallback);
+  const content = Object.values(article.content).map((locale) => `${locale.title}\n${locale.body1}`).join('\n');
+  assert.match(content, /basel-weil-am-rhein/);
+  assert.doesNotMatch(content, /Basilea-weil-am-rhein/);
 });
 
 /**

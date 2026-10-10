@@ -122,8 +122,12 @@ function signed(locale, n, digits) {
  * labels enter a title or body; otherwise the shared factuality gate correctly
  * rejects (for example) `Basel` in a French edition.
  */
-function localizeBorderWaitName(value, locale) {
+function localizeBorderWaitName(value, locale, sourceSlug) {
   if (typeof value !== 'string' || !value) return value;
+  // shapeBorderWait falls back to d.slug when the publisher has no display
+  // name. Keep that opaque identifier intact instead of translating only its
+  // first token into a hybrid label.
+  if (typeof sourceSlug === 'string' && value === sourceSlug) return value;
   return replaceLocalizedToponymMismatches({
     sourceText: value,
     targetText: value,
@@ -136,15 +140,28 @@ function localizeBorderWaitBlock(block, locale) {
   return {
     ...block,
     ...(block.worst && typeof block.worst === 'object'
-      ? { worst: { ...block.worst, name: localizeBorderWaitName(block.worst.name, locale) } }
+      ? { worst: { ...block.worst, name: localizeBorderWaitName(block.worst.name, locale, block.worst.slug) } }
       : {}),
     ...(Array.isArray(block.crossings)
       ? {
         crossings: block.crossings.map((crossing) => crossing && typeof crossing === 'object'
-          ? { ...crossing, name: localizeBorderWaitName(crossing.name, locale) }
+          ? { ...crossing, name: localizeBorderWaitName(crossing.name, locale, crossing.slug) }
           : crossing),
       }
       : {}),
+  };
+}
+
+/** The same locale projection feeds article text and its generated hero card. */
+export function projectDailyBriefForLocale(brief, locale) {
+  if (!brief || typeof brief !== 'object') return brief;
+  const sourceBlocks = brief.blocks && typeof brief.blocks === 'object' ? brief.blocks : {};
+  return {
+    ...brief,
+    blocks: {
+      ...sourceBlocks,
+      borderWait: localizeBorderWaitBlock(sourceBlocks.borderWait, locale),
+    },
   };
 }
 
@@ -556,12 +573,12 @@ function mdTable(headerCells, rows) {
 
 function buildLocaleContent(locale, brief, headline) {
   const t = T[locale];
-  const blocks = {
-    ...brief.blocks,
-    borderWait: localizeBorderWaitBlock(brief.blocks?.borderWait, locale),
-  };
+  const blocks = projectDailyBriefForLocale(brief, locale).blocks;
   const localeHeadline = headline?.kind === 'borderWait'
-    ? { ...headline, name: localizeBorderWaitName(headline.name, locale) }
+    ? {
+      ...headline,
+      name: localizeBorderWaitName(headline.name, locale, brief.blocks?.borderWait?.worst?.slug),
+    }
     : headline;
   const dateLabel = humanDate(brief.dateIso, locale);
   const wd = weekday(brief.dateIso, locale);

@@ -94,6 +94,7 @@ on:
       - 'scripts/lib/plate-auction-editorial.mjs'
       - 'generator/data/news-sitemap-whitelist.mjs'
       - 'generator/scripts/lib/daily-brief-content.mjs'
+      - 'generator/scripts/generate-daily-brief-article.mjs'
       # Dynamic crossing localization imports these helpers and reads this
       # committed table; each is a publisher input, including the data file.
       - 'generator/scripts/lib/localized-toponyms.mjs'
