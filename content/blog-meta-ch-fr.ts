@@ -8027,6 +8027,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.corsi-contributi-lucerna.title': 'Formation continue à Lucerne : exigences et subventions',
     'blog.article.corsi-contributi-lucerna.excerpt': 'Dans le canton de Lucerne, les subventions sont régies par des règles cantonales.',
     'blog.article.corsi-contributi-lucerna.imageAlt': 'Salle suisse de formation continue avec ordinateurs et documents',
+    'blog.article.sgkb-filiali-fisiche.title': 'SGKB confirme ses 37 agences physiques',
+    'blog.article.sgkb-filiali-fisiche.excerpt': 'SGKB maintient le réseau de 37 sites physiques.',
+    'blog.article.sgkb-filiali-fisiche.imageAlt': 'Agence physique d\'une banque cantonale suisse à Saint-Gall',
+    'blog.article.multe-como-targhe-estere.title': 'Como : 1.259 amendes infligées aux voitures étrangères en août',
+    'blog.article.multe-como-targhe-estere.excerpt': '1.259 amendes dressées à Como en août 102.738 euros en 31 jours 3.322 euros par jour au mois d\'août Estimations de plus de 80% de procès-verbaux ignorés Lieu → Como',
+    'blog.article.multe-como-targhe-estere.imageAlt': 'Voiture avec plaque suisse stationnée à Côme (Como)',
+    'blog.article.uri-soglia-salariale-controlli.title': 'Salaire minimum à Uri : exigences et application',
+    'blog.article.uri-soglia-salariale-controlli.excerpt': 'En Suisse, il n\'existe pas de salaire minimum fédéral : pour l\'URI, il faut distinguer la discipline cantonale, les secteurs concernés et les conventions collectives.',
+    'blog.article.uri-soglia-salariale-controlli.imageAlt': 'Documents de travail sur le salaire minimum dans le canton d\'Uri',
 };
 
 export default blogMetaChFr;
