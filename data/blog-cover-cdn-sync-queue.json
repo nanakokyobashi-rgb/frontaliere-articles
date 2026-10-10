@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lugano-bienne-vittoria-2026.webp",
+      "sha256": "d504bc4cced2e02ac60c3eac5073c7dac68c774fc3dcf050a9efeda1120c5b5c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lugano-bienne-vittoria-2026-480w.webp",
+      "sha256": "d246c40c2c6569e62528c54ba08509a9da9e5613751e651395e7ad7d4ebd7ab5"
+    }
+  ]
 }
