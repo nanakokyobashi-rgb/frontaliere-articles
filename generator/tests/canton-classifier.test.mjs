@@ -458,4 +458,36 @@ describe('backfill', () => {
     assert.deepEqual(writeRegistries(classifyCorpus(dir), dir), { frontaliere: 0, svizzera: 0 });
     fs.rmSync(dir, { recursive: true, force: true });
   });
+
+  test('il backfill canton ripristina il primo registry se il rename del secondo fallisce', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'canton-backfill-pair-'));
+    try {
+      const registrySrc = `const RAW_ARTICLES = [\n  {\n    id: 'pair-item',\n    category: 'novita',\n    date: '2026-10-05',\n    image: '/i.webp',\n    hasCalculator: false,\n  },\n];\n`;
+      const contentDir = path.join(dir, 'content');
+      fs.mkdirSync(contentDir, { recursive: true });
+      const firstFile = path.join(contentDir, 'blog-articles-data.ts');
+      fs.writeFileSync(firstFile, registrySrc);
+      const blockedDirectory = path.join(contentDir, 'swiss-registry-as-directory.ts');
+      fs.mkdirSync(blockedDirectory);
+      const row = { id: 'pair-item', cantons: [{ canton: 'TI' }] };
+      const results = {
+        frontaliere: {
+          spec: { registry: 'content/blog-articles-data.ts' },
+          registrySrc,
+          rows: [row],
+        },
+        svizzera: {
+          spec: { registry: 'content/swiss-registry-as-directory.ts' },
+          registrySrc,
+          rows: [row],
+        },
+      };
+
+      assert.throws(() => writeRegistries(results, dir), /EISDIR|EEXIST|directory/u);
+      assert.equal(fs.readFileSync(firstFile, 'utf8'), registrySrc);
+      assert.deepEqual(fs.readdirSync(contentDir).filter((name) => name.includes('.pair-')), []);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });
