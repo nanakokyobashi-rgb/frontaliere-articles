@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ipsach-gru-linea-strada': { it: 'ipsach-gru-linea-strada', en: 'ipsach-crane-railway-road', de: 'ipsach-arbeitskran-bahnstrasse', fr: 'ipsach-grue-voie-route' },
  'berna-familiari-curanti-incontro': { it: 'berna-familiari-curanti-incontro', en: 'bern-caregiving-relatives-meeting', de: 'bern-pflegende-angehoerige-treffen', fr: 'berne-proches-aidants-rencontre' },
  'cyberattacco-casse-pensione-berna': { it: 'cyberattacco-casse-pensione-berna', en: 'cyberattack-bern-pension-funds', de: 'cyberangriff-berner-pensionskassen', fr: 'cyberattaque-caisses-pension-berne' },
+ 'traffico-berna-manifestazione': { it: 'traffico-berna-manifestazione', en: 'bern-traffic-demonstration', de: 'bern-verkehr-kundgebung', fr: 'berne-trafic-manifestation' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

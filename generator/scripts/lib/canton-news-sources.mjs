@@ -1259,6 +1259,7 @@ export async function scanCantonSource(source, ctx) {
             throw error;
           }
           if (!res.ok) {
+            releaseFetchWithRefTimeout(res);
             const error = new Error(`HTTP ${res.status}`);
             error.status = res.status;
             releaseFetchWithRefTimeout(res);

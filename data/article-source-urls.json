@@ -1,5 +1,4 @@
 {
-  "https://unia.ch/it/salari-ccl/contratto-collettivo-di-lavoro": "contratto-collettivo-lavoro-svizzera",
   "https://cassa-disoccupazione.unia.ch": "frontalieri-cassa-disoccupazione",
   "https://unia.ch/it/salari-ccl/calcolatore-salariale": "strumenti-controllo-salari-ticino",
   "https://unia.ch/it/professioni-rami/edilizia-principale/calcolatore-salariale-per-ledilizia": "calcolatore-salariale-edilizia-2026",
@@ -2308,6 +2307,11 @@
   "https://www.varesenews.it/2026/10/lavori-di-sistemazione-sui-versanti-al-sacro-monte-scatta-il-senso-unico-alternato/2703262": {
     "articleId": "viabilita-sacro-monte-varese",
     "ts": "2026-10-10T03:14:55.471Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-si-schiantano-nella-notte-in-piazza-camerlata-4-giovanissimi-feriti": {
+    "articleId": "schianto-camerlata-quattro-feriti",
+    "ts": "2026-10-10T07:25:28.719Z",
     "keyForm": 2
   }
 }

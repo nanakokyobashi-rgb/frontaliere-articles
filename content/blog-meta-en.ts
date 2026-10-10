@@ -12911,10 +12911,13 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.raffica-scontri-varesotto.imageAlt': 'Quiet morning road with light traffic, symbolic image for a road incident report in the Varesotto area.',
     'blog.article.frana-sementina-h13-gudo.title': 'Landslide in Sementina: H13 closed between Sementina and Gudo',
     'blog.article.frana-sementina-h13-gudo.excerpt': 'Landslide on the cantonal road in Sementina Roadway blocked and detours activated H13 closed between Sementina and Gudo No injuries; material damage',
-    'blog.article.frana-sementina-h13-gudo.imageAlt': 'Landslide on the canton road in Sementina: the H13 toward Gudo is closed',
+    'blog.article.frana-sementina-h13-gudo.imageAlt': 'Illustration generated for this article',
     'blog.article.viabilita-sacro-monte-varese.title': 'Sacro Monte: alternating one-way traffic on Via Campo dei Fiori',
     'blog.article.viabilita-sacro-monte-varese.excerpt': 'From October 9 to November 30, 2026, traffic arrangements change on Via Campo dei Fiori: alternating one-way traffic Temporary traffic light and maximum speed limit of 30 km/h Roadworks',
     'blog.article.viabilita-sacro-monte-varese.imageAlt': 'Road leading to Sacro Monte in Varese with road works',
+    'blog.article.schianto-camerlata-quattro-feriti.title': 'Como, nighttime crash in Camerlata: 4 injured',
+    'blog.article.schianto-camerlata-quattro-feriti.excerpt': 'The alarm was raised at 1.35am Crash in Piazzale Camerlata at Como Two girls and two boys involved Four injured transferred to yellow code Location →',
+    'blog.article.schianto-camerlata-quattro-feriti.imageAlt': 'Nighttime urban square with emergency lights and rescue vehicles.',
 };
 
 export default blogMetaEn;

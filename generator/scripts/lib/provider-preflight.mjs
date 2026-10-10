@@ -238,6 +238,7 @@ async function probeProvider(group, {
           };
         }
       }
+      releaseFetchWithRefTimeout(response);
       lastResult = {
         ...base,
         ...classifyProviderProbe({ provider: group.provider, configured, mode: probe.mode, httpStatus: response.status }),

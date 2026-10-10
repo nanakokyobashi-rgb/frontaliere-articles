@@ -308,6 +308,7 @@ async function resolveHeroImage(data, doc) {
       }
       const contentType = response.headers.get('content-type') || '';
       if (!contentType.toLowerCase().startsWith('image/')) {
+        releaseFetchWithRefTimeout(response);
         throw new Error(`downloaded content is not an image (${contentType || 'missing content-type'})`);
       }
       const buffer = Buffer.from(await response.arrayBuffer());

@@ -232,20 +232,35 @@ test('fetchWithRefTimeout rimuove il timer anche se il reader lancia sincrono', 
   }
 });
 
-test('fetchWithRefTimeout permette di rilasciare una risposta letta solo per status', async () => {
+test('releaseFetchWithRefTimeout chiude i rami status-only senza lasciare timer o listener', async () => {
+  const upstream = new AbortController();
   let requestSignal;
+  let cancellations = 0;
   const response = await fetchWithRefTimeout(
-    'https://status-only.example.test',
-    {},
+    'https://example.test',
+    { signal: upstream.signal },
     20,
     async (_url, { signal }) => {
       requestSignal = signal;
-      return new Response('body', { status: 503 });
+      return {
+        body: {
+          cancel() {
+            cancellations += 1;
+            return Promise.resolve();
+          },
+        },
+        ok: false,
+        status: 404,
+      };
     },
   );
-  assert.equal(response.status, 503);
+
   releaseFetchWithRefTimeout(response);
+  releaseFetchWithRefTimeout(response);
+  upstream.abort();
   await new Promise((resolve) => setTimeout(resolve, 40));
+
+  assert.equal(cancellations, 1);
   assert.equal(requestSignal.aborted, false);
 });
 

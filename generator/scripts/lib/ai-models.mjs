@@ -3829,6 +3829,7 @@ export async function _discoverProvider(cfg, { recordScore = true } = {}) {
   }, 10_000);
 
   if (!res.ok) {
+    releaseFetchWithRefTimeout(res);
     console.warn(`⚠️  [Discovery:${cfg.name}] API returned ${res.status} — using static list`);
     releaseFetchWithRefTimeout(res);
     return { added: 0, stale: 0 };
