@@ -50,6 +50,8 @@ jobs:
             /generator/scripts/lib/google-service-account-token.mjs
             /generator/scripts/lib/source-copy-guard.mjs
             /scripts/ci/article-publication-observer.mjs
+            /scripts/lib/article-registry-reader.mjs
+            /scripts/lib/ts-literals.mjs
             /scripts/lib/article-image-postcondition.mjs
             /scripts/lib/article-image-degradation-ledger.mjs
             /scripts/lib/declared-image-fetch.mjs

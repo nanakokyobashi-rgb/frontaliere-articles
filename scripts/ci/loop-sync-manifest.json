@@ -4994,6 +4994,16 @@
       }
     },
     {
+      "path": "scripts/lib/registry-image-reader.mjs",
+      "mode": "corpus-only",
+      "reason": "Lettura fail-closed delle proprieta' image nei literal del registry, usata dal retirement del corpus per evitare di scambiare esempi/commenti, oggetti annidati o sintassi dinamica per evidenza valida. Gli altri reader del registry restano sullo scanner bilanciato condiviso da main; non esiste un registry editoriale corrispondente nel sito: il sito consuma il JSON pubblicato via HTTP, mentre questo flusso modifica e verifica le sorgenti del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "9e6dc8fe4f0a1857",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "scripts/lib/cdn-asset-existence.mjs",
       "mode": "adapted",
       "reason": "Gemello adattato della verifica degli `/assets/` riscritti sul CDN dal fast-publish (issue #788). Il corpus verifica gli URL estratti con l'alfabeto condiviso `host/shared/cdnAssetOffloadRx.mjs`; il sito mantiene invece una guardia autonoma per i soft-404 HTML e per il percorso di publish del sito. Il contratto e' comune, ma le dipendenze e i gate dei due cicli sono diversi per costruzione.",

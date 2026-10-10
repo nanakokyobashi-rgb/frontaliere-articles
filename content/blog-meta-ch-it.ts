@@ -8042,6 +8042,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.naters-francobolli-falsi-aliexpress.title': 'Francobolli falsi su AliExpress: donna condannata a Naters',
     'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Donna di Naters condannata per francobolli contraffatti 100 francobolli ordinati su AliExpress a 48,59 franchi Valore di listino dell\'ordine: 120 franchi Multa',
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Francobolli svizzeri su un tavolo',
+    'blog.article.imposta-veicoli-uri-calcolo.title': 'Imposta sugli autoveicoli Uri: calcolo e pagamento',
+    'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'Nel Cantone di Uri, calcolo, termini e importi dell\'imposta sugli autoveicoli seguono regole cantonali: cosa verificare per veicolo e indirizzo.',
+    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Auto su una strada alpina del Cantone di Uri per un articolo sull\'imposta cantonale',
 };
 
 export default blogMetaChIt;

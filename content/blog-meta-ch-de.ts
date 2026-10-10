@@ -8042,6 +8042,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.naters-francobolli-falsi-aliexpress.title': 'Gefälschte Briefmarken auf AliExpress: Frau in Naters verurteilt',
     'blog.article.naters-francobolli-falsi-aliexpress.excerpt': 'Frau aus Naters wegen gefälschter Briefmarken verurteilt 100 auf AliExpress für 48,59 Franken bestellte Briefmarken Listenpreis der Bestellung: 120 Franken Busse',
     'blog.article.naters-francobolli-falsi-aliexpress.imageAlt': 'Schweizer Briefmarken auf einem Tisch',
+    'blog.article.imposta-veicoli-uri-calcolo.title': 'Motorfahrzeugsteuer Uri: Berechnung und Zahlung',
+    'blog.article.imposta-veicoli-uri-calcolo.excerpt': 'Im Kanton Uri richten sich Berechnung, Fristen und Beträge der Motorfahrzeugsteuer nach kantonalen Regeln: Was für Fahrzeug und Adresse zu prüfen ist.',
+    'blog.article.imposta-veicoli-uri-calcolo.imageAlt': 'Auto auf einer Alpenstrasse im Kanton Uri zum Thema Motorfahrzeugsteuer',
 };
 
 export default blogMetaChDe;

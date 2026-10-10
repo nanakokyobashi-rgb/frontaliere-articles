@@ -83,6 +83,7 @@ import {
 import { RSS_SECTIONS } from '../../engine/rssFeeds.mjs';
 import { seoChunkSources } from '../../scripts/lib/engine-corpus-view.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
+import { scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const WORKFLOW = fs.readFileSync(join(ROOT, '.github/workflows/publish-api.yml'), 'utf-8');
@@ -170,9 +171,7 @@ test('listedFloor scala con il registro dopo le esclusioni legittime', () => {
 
 test('il floor sitemap conta una sola volta le entry IT effettivamente emesse', () => {
   const registryIds = (file) =>
-    [...readFileSync(join(ROOT, 'content', file), 'utf8').matchAll(/^\s*id:\s*['"]([^'"]+)/gm)].map(
-      (match) => match[1],
-    );
+    scanTopLevelArticleRecords(readFileSync(join(ROOT, 'content', file), 'utf8')).map(({ id }) => id);
   const overrideRows = (file) =>
     Object.keys(JSON.parse(readFileSync(join(ROOT, file), 'utf8')).overrides ?? {});
   const effectiveSource = {

@@ -4,6 +4,7 @@ import path from 'node:path';
 
 import { ARTICLE_SECTION_CORE_ALL } from '../../../engine/shared/articleSectionCore.mjs';
 import { corpusPath } from './corpus-paths.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 
 let writeTmpSeq = 0;
 
@@ -40,15 +41,6 @@ function registryDescriptors(registryFiles) {
     descriptors.push({ path: relativePath, section: section.section });
   }
   return descriptors;
-}
-
-function articleIdRegex(articleId) {
-  const escaped = String(articleId).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(`^\\s*id:\\s*(['"])${escaped}\\1\\s*,?\\s*$`);
-}
-
-function imageLineRegex() {
-  return /^(\s*image:\s*)(['"])([^'"]*)\2(\s*,?\s*)$/;
 }
 
 function seoSourcePaths(root, section) {
@@ -265,60 +257,44 @@ function renderSeoImageValue(location, imageUrl) {
   return `${location.quote}${prefix}${imageUrl}${location.quote}`;
 }
 
-function objectStart(lines, idIndex) {
-  for (let index = idIndex; index >= 0; index -= 1) {
-    if (/^\s*\{\s*$/.test(lines[index])) return index;
-  }
-  return -1;
-}
-
-function objectEnd(lines, startIndex) {
-  for (let index = startIndex + 1; index < lines.length; index += 1) {
-    if (/^\s*\},?\s*$/.test(lines[index])) return index;
-  }
-  return -1;
-}
-
 function locateArticleInText(text, articleId, relativePath, section) {
-  const lines = text.split('\n');
-  const idPattern = articleIdRegex(articleId);
-  const idIndexes = lines
-    .map((line, index) => (idPattern.test(line) ? index : -1))
-    .filter((index) => index >= 0);
-  if (idIndexes.length === 0) return null;
-  if (idIndexes.length > 1) {
+  const records = scanTopLevelArticleRecords(text).filter((record) => record.id === articleId);
+  if (records.length === 0) return null;
+  if (records.length > 1) {
     throw new Error(`article ${articleId} appears more than once in ${relativePath}`);
   }
 
-  const idIndex = idIndexes[0];
-  const startIndex = objectStart(lines, idIndex);
-  const endIndex = startIndex < 0 ? -1 : objectEnd(lines, startIndex);
-  if (startIndex < 0 || endIndex < 0 || idIndex > endIndex) {
-    throw new Error(`cannot isolate article ${articleId} in ${relativePath}`);
+  const record = records[0];
+  const imageProperties = record.entries.filter(({ key }) => key === 'image');
+  const imageProperty = imageProperties[0];
+  const previousImage = readTopLevelString(record, 'image');
+  if (imageProperties.length === 0 || previousImage === null) {
+    throw new Error(`article ${articleId} has no image field in ${relativePath}`);
+  }
+  if (imageProperties.length > 1) {
+    throw new Error(`article ${articleId} has duplicate image fields in ${relativePath}`);
   }
 
-  let imageIndex = -1;
-  let imageMatch = null;
-  for (let index = startIndex + 1; index < endIndex; index += 1) {
-    const match = lines[index].match(imageLineRegex());
-    if (match) {
-      if (imageIndex !== -1) throw new Error(`article ${articleId} has duplicate image fields in ${relativePath}`);
-      imageIndex = index;
-      imageMatch = match;
-    }
-  }
-  if (imageIndex === -1) throw new Error(`article ${articleId} has no image field in ${relativePath}`);
+  const rawValue = text.slice(imageProperty.valueStart, imageProperty.valueEnd);
+  const literal = rawValue.trim();
+  const literalOffset = rawValue.indexOf(literal);
+  const imageLiteralStart = imageProperty.valueStart + literalOffset;
+  const imageLiteralEnd = imageLiteralStart + literal.length;
+  const lineIndex = (offset) => text.slice(0, offset).split('\n').length - 1;
+  const idProperty = record.properties.get('id');
 
   return {
     path: relativePath,
     section,
     text,
-    lines,
-    idIndex,
-    startIndex,
-    endIndex,
-    imageIndex,
-    previousImage: imageMatch[3],
+    lines: text.split('\n'),
+    idIndex: lineIndex(idProperty.valueStart),
+    startIndex: lineIndex(record.start),
+    endIndex: lineIndex(record.end - 1),
+    imageIndex: lineIndex(imageLiteralStart),
+    imageLiteralStart,
+    imageLiteralEnd,
+    previousImage,
   };
 }
 
@@ -350,23 +326,27 @@ export function locateArticleRegistry(root, articleId, { registryFiles } = {}) {
  */
 export function updateArticleImageInRegistry(root, articleId, imageUrl, options = {}) {
   const located = locateArticleRegistry(root, articleId, options);
-  const currentLine = located.lines[located.imageIndex];
-  const match = currentLine.match(imageLineRegex());
-  if (!match) throw new Error(`article ${articleId} image field changed while updating ${located.path}`);
+  const literal = located.text.slice(located.imageLiteralStart, located.imageLiteralEnd);
+  const quote = literal[0];
+  if (!['\'', '"'].includes(quote) || literal.at(-1) !== quote) {
+    throw new Error(`article ${articleId} image field changed while updating ${located.path}`);
+  }
+  const currentImage = literal.slice(1, -1);
 
-  if (match[3] === imageUrl) {
+  if (currentImage === imageUrl) {
     return {
       ...located,
       changed: false,
-      previousImage: match[3],
+      previousImage: currentImage,
       nextText: located.text,
     };
   }
 
-  located.lines[located.imageIndex] = `${match[1]}${match[2]}${imageUrl}${match[2]}${match[4]}`;
-  const nextText = located.lines.join('\n');
+  const nextText = located.text.slice(0, located.imageLiteralStart)
+    + `${quote}${imageUrl}${quote}`
+    + located.text.slice(located.imageLiteralEnd);
   writeTextAtomic(root, located.path, nextText);
-  return { ...located, changed: true, nextText };
+  return { ...located, lines: nextText.split('\n'), changed: true, nextText };
 }
 
 /** Locate the canonical image URL inside an article's SEO/JSON-LD entry. */

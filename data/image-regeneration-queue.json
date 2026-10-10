@@ -20,6 +20,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T09:05:08.712Z",
       "lastFailureAt": "2026-10-10T09:05:08.712Z"
+    },
+    {
+      "articleId": "imposta-veicoli-uri-calcolo",
+      "title": "Imposta sugli autoveicoli Uri: calcolo e pagamento",
+      "fallbackImage": "/images/blog/article-imposta-autoveicoli-lucerna-calcolo.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-10T12:04:45.616Z",
+      "lastFailureAt": "2026-10-10T12:04:45.616Z"
     }
   ]
 }
