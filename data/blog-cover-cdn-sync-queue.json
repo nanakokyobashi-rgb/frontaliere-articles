@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-adesione-ocst-servizi-frontalieri.webp",
-      "sha256": "3efab3d0bbcf77178d77eee49a3b7b8ab15eba3f10096a9dd901c0962d1ea44d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-adesione-ocst-servizi-frontalieri-480w.webp",
-      "sha256": "a94a391a338e90bafe11a138123277cc14a5093883ecaf1d0135a5ec7c30e094"
-    }
-  ]
+  "items": []
 }
