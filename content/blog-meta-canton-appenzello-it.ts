@@ -9,6 +9,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.heiden-tassa-base-rifiuti.title': 'Heiden aumenta la tassa base sui rifiuti',
     'blog.article.heiden-tassa-base-rifiuti.excerpt': 'A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l\'anno per nucleo familiare e impresa.',
     'blog.article.heiden-tassa-base-rifiuti.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.herisau-verkehr-appenzello.title': 'Herisau: i due Appenzello chiedono più rapidità',
+    'blog.article.herisau-verkehr-appenzello.excerpt': 'Durante la consultazione su «Verkehr \'45», Appenzello Esterno chiede di rivedere la proposta e contesta l\'orientamento della parte ferroviaria.',
+    'blog.article.herisau-verkehr-appenzello.imageAlt': 'Viabilità e ferrovia a Herisau, nel Canton Appenzello Esterno',
 };
 
 export default blogMetaCantonAppenzelloIt;

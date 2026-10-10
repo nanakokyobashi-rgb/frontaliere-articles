@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'herisau-verkehr-appenzello',
+ category: 'novita',
+ date: '2026-10-10T06:33:48.256Z',
+ image: '/images/blog/article-herisau-verkehr-appenzello.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
