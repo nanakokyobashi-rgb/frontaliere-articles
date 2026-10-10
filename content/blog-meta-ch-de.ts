@@ -8051,6 +8051,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.disagi-treni-vaud-eclepens.title': 'Bahnverkehr: weiterhin Beeinträchtigungen zwischen Yverdon und Lausanne',
     'blog.article.disagi-treni-vaud-eclepens.excerpt': 'Die Strecke Yverdon-les-Bains-Lausanne bleibt unterbrochen Zwei Fernverkehrszüge pro Stunde, mit Verzögerungen Regionalverkehr und Flughafen Genf: Busse Probleme',
     'blog.article.disagi-treni-vaud-eclepens.imageAlt': 'Schweizer Bahngleise mit einem Ersatzbus nahe einem Bahnhof.',
+    'blog.article.tirocinio-uri-guida-pratica.title': 'Lehre und Berufsbildung im Kanton Uri',
+    'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Leitfaden zur Lehre im Kanton Uri: Vertrag, Lohn, 5,3% AHV/IV/EO, Höchstarbeitszeiten und Berufsmaturität.',
+    'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Lernende Person im Unterricht der Berufsbildung in der Schweiz',
 };
 
 export default blogMetaChDe;

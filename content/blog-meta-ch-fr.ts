@@ -8051,6 +8051,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.disagi-treni-vaud-eclepens.title': 'Chemin de fer : encore des perturbations entre Yverdon et Lausanne',
     'blog.article.disagi-treni-vaud-eclepens.excerpt': 'La ligne Yverdon-les-Bains-Lausanne reste interrompue Deux trains longue distance par heure, avec des ralentissements Trains régionaux et aéroport de Genève : bus Problèmes',
     'blog.article.disagi-treni-vaud-eclepens.imageAlt': 'Voies ferrées suisses avec un bus de remplacement près d\'une gare.',
+    'blog.article.tirocinio-uri-guida-pratica.title': 'Apprentissage et formation professionnelle dans le canton d’Uri',
+    'blog.article.tirocinio-uri-guida-pratica.excerpt': 'Guide de l’apprentissage dans le canton d’Uri : contrat, salaire, 5,3% AVS/AI/APG, horaires maximaux et maturité professionnelle.',
+    'blog.article.tirocinio-uri-guida-pratica.imageAlt': 'Apprenti en classe pendant une formation professionnelle en Suisse',
 };
 
 export default blogMetaChFr;
