@@ -34,6 +34,8 @@ import { translateWithLocalOpusMt, localOpusMtEnabled } from './local-opus-mt.mj
 import { getKeyFactsHeading, getTldrHeading } from './ai-search-template.mjs';
 import { detectAiMetaResponse } from './ai-meta-response.mjs';
 import { repairLlmJson } from './llm-json-repair.mjs';
+import { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+export { fetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 import {
   extractOAuthErrorReason,
   getServiceAccountAccessToken,
@@ -171,97 +173,6 @@ const GOOGLE_TRANSLATE_ENDPOINTS = [
   'https://clients5.google.com/translate_a/t',
 ];
 const TIMEOUT_MS = 15000;
-const RESPONSE_BODY_READERS = ['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text'];
-
-function keepTimeoutUntilResponseBodyConsumed(response, cleanup) {
-  if (!response || (typeof response !== 'object' && typeof response !== 'function')) {
-    cleanup();
-    return response;
-  }
-
-  const readers = new Map();
-  for (const name of RESPONSE_BODY_READERS) {
-    const read = response[name];
-    if (typeof read !== 'function') continue;
-    readers.set(name, async (...args) => {
-      try {
-        return await read.apply(response, args);
-      } finally {
-        cleanup();
-      }
-    });
-  }
-  if (readers.size === 0) {
-    cleanup();
-    return response;
-  }
-
-  return new Proxy(response, {
-    get(target, property, receiver) {
-      return readers.get(property) || Reflect.get(target, property, receiver);
-    },
-  });
-}
-
-async function discardResponseBody(response) {
-  const reader = ['text', ...RESPONSE_BODY_READERS].find((name) => typeof response?.[name] === 'function');
-  if (!reader) return;
-  try {
-    await response[reader]();
-  } catch {
-    // The wrapper's cleanup runs for both a completed and an aborted body read.
-  }
-}
-
-/**
- * Fetch with a timeout whose timer keeps the Node process alive.
- *
- * `AbortSignal.timeout()` uses an unref'd timer. That is normally invisible
- * while a request has an active socket, but a stalled DNS/TLS/undici request
- * can leave an awaited translation promise pending after the event loop has
- * no other referenced handles. Node then exits 0 and the caller never gets a
- * rejection. Keep the timer referenced and merge any caller-provided abort
- * signal so raced providers retain both cancellation and a hard deadline.
- */
-export async function fetchWithRefTimeout(url, options = {}, timeoutMs = TIMEOUT_MS) {
-  const { signal: upstreamSignal, ...requestOptions } = options;
-  const controller = new AbortController();
-  let timer;
-  let cleanedUp = false;
-  const cleanup = () => {
-    if (cleanedUp) return;
-    cleanedUp = true;
-    if (timer !== undefined) clearTimeout(timer);
-    upstreamSignal?.removeEventListener('abort', forwardAbort);
-  };
-  const forwardAbort = () => {
-    controller.abort(upstreamSignal.reason);
-    cleanup();
-  };
-  timer = setTimeout(() => {
-    try {
-      controller.abort(new DOMException('The operation timed out', 'TimeoutError'));
-    } finally {
-      cleanup();
-    }
-  }, timeoutMs);
-
-  if (upstreamSignal) {
-    if (upstreamSignal.aborted) {
-      forwardAbort();
-    } else {
-      upstreamSignal.addEventListener('abort', forwardAbort, { once: true });
-    }
-  }
-
-  try {
-    const response = await fetch(url, { ...requestOptions, signal: controller.signal });
-    return keepTimeoutUntilResponseBodyConsumed(response, cleanup);
-  } catch (error) {
-    cleanup();
-    throw error;
-  }
-}
 
 // Lingva Translate instances (free Google Translate proxy)
 // Verified 2026-03-30 — only 2 alive; works locally but BLOCKED from GitHub Actions IPs
@@ -1415,12 +1326,12 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
         body: body.toString(),
       }, TIMEOUT_MS);
       if (res.status === 456) {
-        await discardResponseBody(res);
+        await res.text().catch(() => '');
         // Real monthly quota exhausted → mark key exhausted for the run.
         throw Object.assign(new Error('DeepL 456'), { quotaExhausted: true });
       }
       if (res.status === 429) {
-        await discardResponseBody(res);
+        await res.text().catch(() => '');
         _deepl429TotalCount++;
         if (_deepl429TotalCount >= DEEPL_429_CB_THRESHOLD) {
           // Sustained rate-limit: set the global flag so every subsequent chunk and
@@ -1441,7 +1352,7 @@ async function _callDeepLWithKey(apiKey, text, srcCode, tgtCode) {
       break;
     }
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       return '';
     }
     const data = await res.json();
@@ -1532,7 +1443,7 @@ async function translateChunkGoogle(text, sourceLang, targetLang, outcome = null
         },
       }, TIMEOUT_MS);
       if (!res.ok) {
-        await discardResponseBody(res);
+        await res.text().catch(() => '');
         noteTranslationOutcome(outcome, 'errors');
         continue;
       }
@@ -1691,7 +1602,7 @@ async function translateWithLingva(text, sourceLang, targetLang, outcome = null)
       TIMEOUT_MS,
     );
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       return '';
     }
     const data = await res.json();
@@ -1720,7 +1631,7 @@ async function translateWithSimplyTranslate(text, sourceLang, targetLang, outcom
       signal,
     }, TIMEOUT_MS);
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       return '';
     }
     const data = await res.json();
@@ -1745,7 +1656,7 @@ async function translateWithLibreTranslateSelfHosted(text, sourceLang, targetLan
       body: JSON.stringify({ q, source: sourceLang || 'auto', target: targetLang, format: 'text' }),
     }, timeout);
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       noteTranslationOutcome(outcome, 'errors');
       console.warn(`⚠️  LibreTranslate self-hosted: HTTP ${res.status}`);
       return '';
@@ -1781,7 +1692,7 @@ async function translateWithLibreTranslate(text, sourceLang, targetLang, outcome
       signal,
     }, 20000);
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       return '';
     }
     const data = await res.json();
@@ -1807,7 +1718,7 @@ async function translateWithMozhiEngine(text, sourceLang, targetLang, engine = '
       signal,
     }, TIMEOUT_MS);
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       return '';
     }
     const data = await res.json();
@@ -1879,7 +1790,7 @@ async function translateWithAzure(text, sourceLang, targetLang, outcome = null) 
           throw Object.assign(new Error('Azure auth'), { quotaExhausted: true });
         }
         if (res.status === 429) {
-          await discardResponseBody(res);
+          await res.text().catch(() => '');
           _azureExhaustedKeys.add(key);
           _cascadeStats.tierErrors.azure = (_cascadeStats.tierErrors.azure || 0) + 1;
           noteTranslationOutcome(outcome, 'errors');
@@ -2801,10 +2712,9 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       res = await request(token);
     }
     if (res.status === 401 || res.status === 403 || res.status === 429) {
-      const refusal = res.status === 403 && typeof res.text === 'function'
+      const refusal = (res.status === 403 || res.status === 429) && typeof res.text === 'function'
         ? await res.text().catch(() => '')
         : '';
-      if (res.status !== 403) await discardResponseBody(res);
       const quota = res.status === 429 || GOOGLE_CLOUD_QUOTA_REFUSAL.test(refusal);
       _noteGoogleCloudFailure(`HTTP ${res.status}${quota && res.status === 403 ? ' quota' : ''}`);
       if (quota) _noteGoogleCloudQuotaRefusal();
@@ -2812,7 +2722,7 @@ export async function translateWithGoogleCloud(text, sourceLang, targetLang, out
       return ''; // quota exceeded, or API/scope not enabled for this token
     }
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       _noteGoogleCloudFailure(`HTTP ${res.status}`);
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
@@ -2861,7 +2771,7 @@ async function translateWithHuggingFace(text, sourceLang, targetLang, outcome = 
       body: JSON.stringify({ inputs: truncated }),
     }, TIMEOUT_MS);
     if (!res.ok) {
-      await discardResponseBody(res);
+      await res.text().catch(() => '');
       noteTranslationOutcome(outcome, 'incomplete');
       return '';
     }
