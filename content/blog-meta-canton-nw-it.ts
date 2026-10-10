@@ -8,7 +8,7 @@ const blogMetaCantonNwIt: Record<string, string> = {
     'blog.article.lopper-luce-pedoni-bici.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.postauto-orario-nidvaldo-2026.title': 'PostAuto, nuovo orario in Nidvaldo dal 13 dicembre 2026',
     'blog.article.postauto-orario-nidvaldo-2026.excerpt': 'Dal 13 dicembre 2026 cambia l\'orario PostAuto: la comunicazione segnala modifiche all\'offerta nei Cantoni Obvaldo e Nidvaldo.',
-    'blog.article.postauto-orario-nidvaldo-2026.imageAlt': 'Cambio d\'orario PostAuto dal 13 dicembre 2026 nel Canton Nidvaldo',
+    'blog.article.postauto-orario-nidvaldo-2026.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonNwIt;

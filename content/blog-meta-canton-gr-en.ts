@@ -21,6 +21,12 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch closes road, trails and climbing area',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Above Fläsch, the risk of rockfall leads to precautionary closures of the road, hiking trails, and climbing gym.',
     'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Illustration generated for this article',
+    'blog.article.parco-solare-nalps-tujetsch.title': 'Nalps alpine solar park project moves forward',
+    'blog.article.parco-solare-nalps-tujetsch.excerpt': 'The project for an alpine solar park in Nalps, in the locality of Tujetsch, is making progress, as reported in a Telesguard segment on Play RTR.',
+    'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Alpine landscape of the Tujetsch region in Canton Graubünden',
+    'blog.article.lido-grono-estate-2027.title': 'Lido Grono, opening confirmed for summer 2027',
+    'blog.article.lido-grono-estate-2027.excerpt': 'Opening of Lido Grono confirmed for summer 2027 Construction of the new municipal swimming pool still ongoing Expected costs: approximately 5 million Mayor\'s announcement',
+    'blog.article.lido-grono-estate-2027.imageAlt': 'Construction of Grono\'s new municipal pool for the confirmed summer 2027 opening.',
 };
 
 export default blogMetaCantonGrEn;

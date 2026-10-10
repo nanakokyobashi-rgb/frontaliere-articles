@@ -60,10 +60,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Dal 13 dicembre 2026 cambia l'orario PostAuto nei Cantoni Obvaldo e Nidvaldo: la comunicazione annuncia modifiche all'offerta e indica dove leggere i dettagli.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-nidvaldo-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-postauto-orario-nidvaldo-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cambio d'orario PostAuto dal 13 dicembre 2026 nel Canton Nidvaldo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T17:33:10+00:00",
       "dateModified": "2026-10-10T17:33:10+00:00",

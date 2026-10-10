@@ -12948,7 +12948,13 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.varese-adhd-days-ottobre-2026.imageAlt': 'Des adolescents participent à une réunion sur le TDAH à Varese en octobre 2026',
     'blog.article.audi-rubata-san-fermo.title': 'Audi volée, tentative de fuite : un homme de 29 ans arrêté à San Fermo',
     'blog.article.audi-rubata-san-fermo.excerpt': 'Poursuite à San Fermo dans la soirée du 7 octobre Audi A3 noire signalée volée Interpellation d’un Roumain de 29 ans au permis révoqué Une meuleuse et 23 grammes retrouvés',
-    'blog.article.audi-rubata-san-fermo.imageAlt': 'Audi A3 noire arrêtée par les Carabinieri à San Fermo (San Fermo della Battaglia)',
+    'blog.article.audi-rubata-san-fermo.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.adesione-ocst-servizi-frontalieri.title': 'S\'affilier à l\'OCST : avantages pour les frontaliers au Tessin',
+    'blog.article.adesione-ocst-servizi-frontalieri.excerpt': 'Conseils en matière de travail, de fiches de salaire, de fiscalité et de location Bureau des frontaliers pour la fiscalité et la sécurité sociale Patronato INAS à Chiasso, Mendrisio, Bioggio et Locarno',
+    'blog.article.adesione-ocst-servizi-frontalieri.imageAlt': 'Travailleur frontalier consultant les avantages de l\'OCST dans un bureau à Mendrisio',
+    'blog.article.sfida-bar-quartiere-lugano.title': 'Bar de quartier à Lugano : entre fermetures et nouveaux défis',
+    'blog.article.sfida-bar-quartiere-lugano.excerpt': 'Le Bar Laura a fermé après 32 ans Le canton n\'a pas renouvelé le contrat Reto Blumenthal a rouvert à Molino Nuovo Le Bar Domingo ouvre à 6h30 et ferme',
+    'blog.article.sfida-bar-quartiere-lugano.imageAlt': 'Intérieur d\'un café de quartier à Lugano avec comptoir et machine à café',
 };
 
 export default blogMetaFr;

@@ -8,7 +8,7 @@ const blogMetaCantonNwFr: Record<string, string> = {
     'blog.article.lopper-luce-pedoni-bici.imageAlt': 'Illustration générée pour cet article',
     'blog.article.postauto-orario-nidvaldo-2026.title': 'PostAuto, nouvel horaire dans le canton de Nidwald à partir du 13 décembre 2026',
     'blog.article.postauto-orario-nidvaldo-2026.excerpt': 'À partir du 13 décembre 2026, l’horaire de PostAuto change : la communication signale des modifications de l’offre dans les cantons d’Obwald et de Nidwald.',
-    'blog.article.postauto-orario-nidvaldo-2026.imageAlt': 'Changement d\'horaire PostAuto dès le 13 décembre 2026 dans le canton de Nidwald',
+    'blog.article.postauto-orario-nidvaldo-2026.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonNwFr;

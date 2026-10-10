@@ -105040,10 +105040,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-audi-rubata-san-fermo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Audi A3 nera fermata dai carabinieri a San Fermo della Battaglia"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T16:58:42+00:00",
       "dateModified": "2026-10-10T16:58:42+00:00",
@@ -105056,6 +105056,79 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/audi-rubata-san-fermo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-adesione-ocst-servizi-frontalieri': {
+    title: 'Associarsi all\'OCST: vantaggi per frontalieri in Ticino',
+    description: 'Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno',
+    keywords: 'frontalieri, ticino, svizzera, italia, associarsi, ocst, vantaggi, consulenza',
+    ogTitle: 'Associarsi all\'OCST: vantaggi per frontalieri in Ticino',
+    ogDescription: 'Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno',
+    canonicalPath: '/articoli-frontaliere/adesione-ocst-servizi-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Associarsi all'OCST: vantaggi per frontalieri in Ticino",
+      "description": "Consulenza su lavoro, busta paga, fiscalità e locazione Ufficio frontalieri per fisco e sicurezza sociale Patronato INAS a Chiasso, Mendrisio, Bioggio e Locarno",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/caldo-lavoro-frontalieri-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoratore frontaliere che consulta i vantaggi OCST in ufficio a Mendrisio"
+      },
+      "datePublished": "2026-10-10T18:40:53+00:00",
+      "dateModified": "2026-10-10T18:40:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/adesione-ocst-servizi-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sfida-bar-quartiere-lugano': {
+    title: 'Bar di quartiere a Lugano: tra chiusure e nuove sfide',
+    description: 'Il Bar Laura ha chiuso dopo 32 anni Il Cantone non ha rinnovato il contratto Reto Blumenthal ha riaperto a Molino Nuovo Il Bar Domingo apre alle 6.30 e chiude',
+    keywords: 'frontalieri, ticino, svizzera, italia, quartiere, lugano, chiusure, nuove',
+    ogTitle: 'Lugano: la sfida dei bar di quartiere',
+    ogDescription: 'Il Bar Laura ha chiuso dopo 32 anni Il Cantone non ha rinnovato il contratto Reto Blumenthal ha riaperto a Molino Nuovo Il Bar Domingo apre alle 6.30 e chiude',
+    canonicalPath: '/articoli-frontaliere/sfida-bar-quartiere-lugano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bar di quartiere a Lugano: tra chiusure e nuove sfide",
+      "description": "Il Bar Laura ha chiuso dopo 32 anni Il Cantone non ha rinnovato il contratto Reto Blumenthal ha riaperto a Molino Nuovo Il Bar Domingo apre alle 6.30 e chiude",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sfida-bar-quartiere-lugano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Interno di un bar di quartiere a Lugano con bancone e macchina del caffè"
+      },
+      "datePublished": "2026-10-10T19:06:16+00:00",
+      "dateModified": "2026-10-10T19:06:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sfida-bar-quartiere-lugano/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
