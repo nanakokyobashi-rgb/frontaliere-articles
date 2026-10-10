@@ -19468,15 +19468,23 @@ function ensureSeoDescriptionMinimum(data) {
   const excerpt = stripExcerptMarkdown(
     typeof data?.content?.it?.excerpt === 'string' ? data.content.it.excerpt : '',
   );
-  const candidate = description.length >= SEO_DESCRIPTION_MIN ? description : excerpt;
-  if (candidate.length < SEO_DESCRIPTION_MIN) {
-    throw new Error(
-      `SEO description for article "${data?.id || 'unknown'}" must contain at least ${SEO_DESCRIPTION_MIN} characters of article-specific text (description: ${description.length}, excerpt: ${excerpt.length})`,
-    );
+
+  // Validate the value that will actually be written, not only the source
+  // candidate. Clause-safe truncation can peel a long tail back below the
+  // floor — or return an empty string when its first token alone exceeds the
+  // cap. Try the real Italian excerpt before failing closed, and never mutate
+  // the SEO field until a post-truncation candidate has passed the floor.
+  for (const candidate of [description, excerpt]) {
+    if (candidate.length < SEO_DESCRIPTION_MIN) continue;
+    const truncated = truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX);
+    if (truncated.length < SEO_DESCRIPTION_MIN) continue;
+    seo.description = truncated;
+    return truncated;
   }
 
-  seo.description = truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX);
-  return seo.description;
+  throw new Error(
+    `SEO description for article "${data?.id || 'unknown'}" must contain at least ${SEO_DESCRIPTION_MIN} characters of article-specific text after clause-safe truncation (description: ${description.length}, excerpt: ${excerpt.length})`,
+  );
 }
 
 function assertArticleDescriptionsArePlain(data) {

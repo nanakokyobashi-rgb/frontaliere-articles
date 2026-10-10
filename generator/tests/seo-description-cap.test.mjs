@@ -271,6 +271,36 @@ describe('ensureSeoDescriptionMinimum', () => {
     expect(ensureSeoDescriptionMinimum(data)).toBe(description);
     expect(data.seo.description).toBe(description);
   });
+
+  it('usa l’excerpt se il taglio clause-safe porta la description sotto il floor', () => {
+    const description = `${'A'.repeat(78)} per ${'B'.repeat(100)}`;
+    const excerpt =
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+    const data = {
+      id: 'fischiava-treno-gorla',
+      seo: { description },
+      content: { it: { excerpt } },
+    };
+
+    expect(description.length).toBeGreaterThan(SEO_DESCRIPTION_MAX);
+    expect(ensureSeoDescriptionMinimum(data)).toBe(excerpt);
+    expect(data.seo.description).toBe(excerpt);
+  });
+
+  it('fallisce prima del write se il taglio non produce alcun valore valido', () => {
+    const description = 'X'.repeat(SEO_DESCRIPTION_MAX + 1);
+    const data = {
+      id: 'token-troppo-lungo',
+      seo: { description },
+      content: { it: { excerpt: 'Evento breve.' } },
+    };
+
+    assert.throws(
+      () => ensureSeoDescriptionMinimum(data),
+      /after clause-safe truncation/,
+    );
+    expect(data.seo.description).toBe(description);
+  });
 });
 
 // ── Wiring guard ───────────────────────────────────────────────────────────
