@@ -152,7 +152,7 @@ const ADDED_PILLARS = [
   'collaudo veicoli',
   'licenza esercizio pubblico',
   'tasse universitarie',
-  'integrazione e corsi lingua',
+  'integrazione e corsi di lingua',
 ];
 
 // ── 1. Taglia ────────────────────────────────────────────────────────────

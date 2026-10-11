@@ -4356,15 +4356,15 @@ function buildStructuralEvergreenTopicsSvizzera() {
       a: 'Imposta di successione e di donazione %C: aliquote per grado di parentela, esenzioni per coniuge e discendenti, dichiarazione e termini da rispettare.',
     },
     {
-      k: 'giorni festivi %c calendario e regole',
+      k: 'giorni festivi %c guida a calendario e regole',
       a: 'Giorni festivi %C: calendario dei giorni riconosciuti dal cantone, differenze rispetto ai giorni festivi federali, chiusure degli uffici e fonti ufficiali per verificare il calendario annuale.',
     },
     {
-      k: 'orari di apertura negozi %c domeniche e festivi',
+      k: 'orari di apertura negozi %c guida a domeniche e festivi',
       a: 'Orari di apertura dei negozi %C: regole cantonali, aperture domenicali e festive, autorizzazioni speciali e ufficio competente per le eccezioni.',
     },
     {
-      k: 'imposta sui cani %c importi e registrazione',
+      k: 'imposta sui cani %c guida a importi e registrazione',
       a: 'Imposta sui cani %C: obbligo eventuale, registrazione dell\'animale, autorità competente, esenzioni e modalità di pagamento secondo le regole cantonali e comunali.',
     },
     {
@@ -4376,7 +4376,7 @@ function buildStructuralEvergreenTopicsSvizzera() {
       a: 'Permesso di pesca %C: licenze, corsi o esami eventualmente richiesti, periodi e acque autorizzate, tariffe e autorità cantonale competente.',
     },
     {
-      k: 'targhe e immatricolazione %c procedura e costi',
+      k: 'targhe e immatricolazione %c guida a procedura e costi',
       a: 'Targhe e immatricolazione %C: registrazione del veicolo, documenti, targhe, cambio di proprietario e ufficio della circolazione competente.',
     },
     {
@@ -4388,11 +4388,11 @@ function buildStructuralEvergreenTopicsSvizzera() {
       a: 'Licenza per esercizio pubblico %C: requisiti per ristoranti e locali, formazione o responsabilità richiesta, domanda e autorità cantonale o comunale competente.',
     },
     {
-      k: 'tasse universitarie %c iscrizione e contributi',
+      k: 'tasse universitarie %c guida a iscrizione e contributi',
       a: 'Tasse universitarie %C: differenze tra istituzioni, categorie di studenti, iscrizione, esenzioni e contributi secondo l\'ente cantonale o l\'università competente.',
     },
     {
-      k: 'integrazione e corsi lingua %c contributi e requisiti',
+      k: 'integrazione e corsi di lingua %c contributi e requisiti',
       a: 'Integrazione e corsi di lingua %C: programmi riconosciuti, requisiti per i contributi, ufficio cantonale o comunale competente e documenti per la domanda.',
     },
   ];
@@ -6063,8 +6063,8 @@ ASSICURAZIONI:
 // not steered away from the (then correct) second-bracket rate. Measured on
 // the ASSEMBLED first-attempt evergreen prompt with the same estimator
 // (evergreenPrompt() in tests/news-prompt-token-budget.test.mjs): frontaliere
-// 7486 -> 7506 est. tokens (+20), svizzera 7662 unchanged; that test keeps
-// both under the 8000 cap. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
+// 7486 -> 7506 est. tokens (+20); the cap test keeps both assembled prompts
+// under 8000 tokens. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
 // criteria 3-4) grows 2830 -> 2980 chars (+150, ~43 est. tokens); it rides on up to 24000 chars of
 // article, so its admission is set by the article, not by this delta.
 const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
