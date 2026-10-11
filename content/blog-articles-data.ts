@@ -5946,7 +5946,7 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
-  {
+ {
  id: 'trovare-lavoro-ticino',
  category: 'pratico',
  date: '2026-04-03',
