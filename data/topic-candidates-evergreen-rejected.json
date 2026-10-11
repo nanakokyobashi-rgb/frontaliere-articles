@@ -797,14 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1955759/fiducia-consumatori-prezzi-lavoro-peggiora": {
-      "section": "frontaliere",
-      "ts": 1791539122289
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/a13-chiusure-notturne-tra-pian-san-giacomo-e-malabarba-444279": {
-      "section": "frontaliere",
-      "ts": 1791539155028
-    },
     "frontaliere::https://www.tio.ch/ticino/economia/1955776/plug-in-auto-spina-ticino-veicoli": {
       "section": "frontaliere",
       "ts": 1791539851603
@@ -1056,6 +1048,10 @@
     "svizzera::https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
       "section": "svizzera",
       "ts": 1791709473410
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/piu-di-cento-anni-di-storia": {
+      "section": "frontaliere",
+      "ts": 1791712283800
     }
   }
 }
