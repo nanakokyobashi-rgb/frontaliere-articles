@@ -8072,6 +8072,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.finanziamenti-start-up-ticino.title': 'Funding for start-ups in Ticino: the proposal',
     'blog.article.finanziamenti-start-up-ticino.excerpt': 'Tresoldi proposes studying support for start-ups in Ticino.',
     'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Business meeting in Lugano discussing start-up funding',
+    'blog.article.linea-yverdon-losanna-riaperta.title': 'Yverdon-Lausanne traffic: trains running regularly again',
+    'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Normal traffic between Yverdon and Lausanne from 05:40 Arson discovered on Friday at around 03:00 Traffic interrupted between Cossonay-Penthalaz and Chavornay',
+    'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

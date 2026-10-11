@@ -28,4 +28,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'imposta-seconde-case-glarona',
+ category: 'fiscale',
+ date: '2026-10-11T12:52:17.201Z',
+ image: '/images/blog/article-imposta-seconde-case-glarona.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

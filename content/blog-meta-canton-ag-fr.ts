@@ -27,6 +27,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.argovia-polizia-regionale-poteri.title': 'Argovie : plus de pouvoirs pour la police régionale dès 2028',
     'blog.article.argovia-polizia-regionale-poteri.excerpt': 'Le gouvernement argovien propose au Grand Conseil de nouvelles tâches pour les polices régionales ; la loi entrerait en vigueur le 1er janvier 2028.',
     'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Voiture de police régionale devant un bâtiment communal en Argovie.',
+    'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo et les concessions des centrales hydroélectriques',
+    'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo publie un White Paper : dans les prochaines années, les communes et les cantons pourront redéfinir la propriété, les participations et les risques.',
+    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonAgFr;

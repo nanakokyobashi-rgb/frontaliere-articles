@@ -27,6 +27,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.argovia-polizia-regionale-poteri.title': 'Aargau: mehr Befugnisse für die Regionalpolizei ab 2028',
     'blog.article.argovia-polizia-regionale-poteri.excerpt': 'Die Aargauer Regierung schlägt dem Grossen Rat neue Aufgaben für die Regionalpolizeien vor; das Gesetz würde am 1.',
     'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Regionalpolizeiauto vor einem Gemeindehaus im Aargau.',
+    'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo und die Konzessionen der Wasserkraftwerke',
+    'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo veröffentlicht ein White Paper: In den kommenden Jahren können Gemeinden und Kantone Eigentumsverhältnisse, Beteiligungen und Risiken neu gestalten.',
+    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonAgDe;

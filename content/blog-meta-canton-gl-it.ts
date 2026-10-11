@@ -9,6 +9,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.premi-standard-glarona.title': 'Glarona: di nuovo i premi standard più bassi',
     'blog.article.premi-standard-glarona.excerpt': 'La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà.',
     'blog.article.premi-standard-glarona.imageAlt': 'La Glarner Krankenversicherung torna ad avere i premi standard più bassi',
+    'blog.article.imposta-seconde-case-glarona.title': 'Imposta immobiliare seconde case Glarona: via libera dal Governo',
+    'blog.article.imposta-seconde-case-glarona.excerpt': 'La mozione è stata depositata il 10 settembre 2026.',
+    'blog.article.imposta-seconde-case-glarona.imageAlt': 'Imposta immobiliare sulle seconde case nel Canton Glarona',
 };
 
 export default blogMetaCantonGlIt;

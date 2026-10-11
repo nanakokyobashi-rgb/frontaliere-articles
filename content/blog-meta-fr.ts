@@ -367,8 +367,8 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.inflazione-frontalieri-ticino.title': 'Inflation stable en Suisse : impacts sur les frontaliers',
  'blog.article.inflazione-frontalieri-ticino.excerpt': 'L\'inflation suisse presque à l\'arrêt à 0,1 % : que signifie cela pour le pouvoir d\'achat des frontaliers et le taux de change franc-euro.',
  'blog.article.inflazione-frontalieri-ticino.imageAlt': 'Vue sur le lac de Lugano avec des drapeaux suisses à l\'aube et la ligne d\'horizon au loin',
- 'blog.article.aprire-conto-bancario-frontaliere.title': 'Compte bancaire frontaliers Suisse: guide complet 2026',
- 'blog.article.aprire-conto-bancario-frontaliere.excerpt': 'Ouvrir un compte bancaire en Suisse pour frontaliers: meilleures banques au Tessin, coûts, cartes et documents requis.',
+ 'blog.article.aprire-conto-bancario-frontaliere.title': 'Compte suisse pour frontaliers : coûts et documents',
+ 'blog.article.aprire-conto-bancario-frontaliere.excerpt': 'Comment comparer comptes, cartes, change CHF/EUR et conditions variables pour travailler au Tessin avec des sources officielles.',
  'blog.article.aprire-conto-bancario-frontaliere.imageAlt': 'Vue de Lugano avec un bâtiment bancaire et des piétons traversant la rue',
  'blog.article.strada-incidenti-vezia-cureglia.title': 'La route des accidents entre Vezia et Cureglia',
  'blog.article.strada-incidenti-vezia-cureglia.excerpt': 'Trop d\'accidents sur le tronçon Vezia-Cureglia : la Municipalité de Vezia demande des interventions au Canton pour améliorer la sécurité routière.',
@@ -1514,7 +1514,7 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.ogm-fallimento-ticino.excerpt': 'L’initiative populaire pour le contrôle des OGM en Suisse n’a pas atteint le quorum de 100’000 signatures, avec des implications importantes également pour le Tessin.',
  'blog.article.ogm-fallimento-ticino.imageAlt': 'Lac de Lugano avec montagnes en arrière-plan, paysage typique du Tessin',
  'blog.article.passaggio-statuto-s-permesso-b.title': 'Du statut S au permis B au Tessin',
- 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'Le passage du statut S au permis B concerne les réfugiés ukrainiens en Suisse, avec des implications économiques et sociales pour le canton du Tessin, jusqu\'en 2027.',
+ 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'Après au moins cinq ans de séjour ininterrompu, les bénéficiaires du statut S ont droit à une autorisation B liée : conditions, rôle du canton et prolongation fédérale jusqu’au 4 mars 2028.',
  'blog.article.passaggio-statuto-s-permesso-b.imageAlt': 'Vue panoramique de Bellinzona avec ses châteaux et ses montagnes environnantes, symbolisant la frontière suisse-italienne.',
  'blog.article.chiusure-notturne-autostrada.title': 'Fermetures nocturnes sur l\'autoroute A9',
  'blog.article.chiusure-notturne-autostrada.excerpt': 'La semaine prochaine, des fermetures nocturnes seront effectuées sur l\'autoroute A9',
@@ -13013,7 +13013,10 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'Les chiffres du 11 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.title': 'Openjobmetis-Trieste 85-84 : le podcast de l\'après-partie',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.excerpt': 'Openjobmetis bat Trieste 85-84 Della Valle marque le but à 7 dixièmes de la fin Varese centre la deuxième victoire consécutive Résultat → 85-84 Décisif →',
-    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Studio du podcast Dal Parquet de VareseNews',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.title': 'Fagnano Olona, succès pour les 40 ans de la Compagnie La Marmotta',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.excerpt': 'Environ 200 spectateurs et plus de 1600 euros collectés pour les Journées Mondiales de la Jeunesse lors du spectacle de charité à l\'Oratoire Saint Stanislas.',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.imageAlt': 'Spectacle théâtral de la compagnie La Marmotta à Fagnano Olona',
 };
 
 export default blogMetaFr;

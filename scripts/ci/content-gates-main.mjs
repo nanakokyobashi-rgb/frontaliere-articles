@@ -168,6 +168,7 @@ export const CONTENT_GATES = [
   'generator/tests/blog-title-casing.test.mjs',
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
   'generator/tests/evergreen-addizionale-irpef-mappa-comuni-refresh.test.mjs',
+  'generator/tests/evergreen-aprire-conto-bancario-frontaliere-refresh.test.mjs',
   // Lotto «assicurazione malattia» del 2026-10-07: quattro guide rilette contro
   // la scheda dei fatti verificati. Ogni test legge i body nelle quattro lingue
   // e, per due guide, anche estratti e voce SEO.
@@ -197,6 +198,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-lamal-vs-ssn-decisione-refresh.test.mjs',
   'generator/tests/evergreen-mappa-fiscale-comuni-frontiera-refresh.test.mjs',
   'generator/tests/evergreen-naspi-disoccupazione-frontalieri-refresh.test.mjs',
+  'generator/tests/evergreen-passaggio-statuto-s-permesso-b-refresh.test.mjs',
   'generator/tests/evergreen-maternita-paternita-frontaliere-guida-refresh.test.mjs',
   'generator/tests/evergreen-maternita-paternita-ticino-refresh.test.mjs',
   'generator/tests/evergreen-naspi-ex-frontalieri-2026-refresh.test.mjs',

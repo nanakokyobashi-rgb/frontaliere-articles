@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'buchs-deficit-2027-budget': { it: 'buchs-deficit-2027-budget', en: 'buchs-forecasts-a-3-1-million-deficit-in-the-2027-budget', de: 'buchs-rechnet-im-budget-2027-mit-einem-defizit-von-3-1-millionen', fr: 'buchs-prevoit-un-deficit-de-3-1-millions-dans-le-budget-2027' },
  'aargau-pfas-bonifiche-incerte': { it: 'aargau-pfas-bonifiche-incerte', en: 'aargau-pfas-site-costs', de: 'aargau-pfas-standorte-kosten', fr: 'argovie-sites-pfas-couts' },
  'argovia-polizia-regionale-poteri': { it: 'argovia-polizia-regionale-poteri', en: 'aargau-regional-police-powers', de: 'aargau-regionalpolizei-befugnisse', fr: 'argovie-police-regionale-pouvoirs' },
+ 'axpo-concessioni-idroelettriche': { it: 'axpo-concessioni-idroelettriche', en: 'axpo-hydropower-concessions', de: 'axpo-wasserkraftkonzessionen', fr: 'axpo-concessions-hydroelectriques' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

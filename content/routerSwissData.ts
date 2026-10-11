@@ -2713,6 +2713,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'riqualificazione-uri-domanda': { it: 'riqualificazione-uri-domanda', en: 'uri-energy-renovation', de: 'uri-energiesanierung', fr: 'renovation-energetique-uri' },
  'permesso-edilizio-uri': { it: 'permesso-edilizio-uri', en: 'uri-building-permit-requirements', de: 'baugesuch-uri-anforderungen', fr: 'permis-construire-uri-exigences' },
  'finanziamenti-start-up-ticino': { it: 'finanziamenti-start-up-ticino', en: 'startup-funding-ticino', de: 'startup-finanzierung-tessin', fr: 'financement-start-up-tessin' },
+ 'linea-yverdon-losanna-riaperta': { it: 'linea-yverdon-losanna-riaperta', en: 'yverdon-lausanne-rail-service-restored', de: 'bahnverkehr-yverdon-lausanne-wieder-normal', fr: 'trafic-ferroviaire-yverdon-lausanne-retabli' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

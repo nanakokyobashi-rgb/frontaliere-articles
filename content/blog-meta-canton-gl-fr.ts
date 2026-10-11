@@ -9,6 +9,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.premi-standard-glarona.title': 'Glaris : de nouveau les primes standard les plus basses',
     'blog.article.premi-standard-glarona.excerpt': 'La Glarner Krankenversicherung revient aux primes standard les plus basses. Par le passé, cette même distinction avait plongé la caisse dans de sérieuses difficultés.',
     'blog.article.premi-standard-glarona.imageAlt': 'La Glarner Krankenversicherung retrouve les primes standard les plus basses',
+    'blog.article.imposta-seconde-case-glarona.title': 'Impôt immobilier à Glaris : feu vert du Gouvernement',
+    'blog.article.imposta-seconde-case-glarona.excerpt': 'La motion a été déposée le 10 septembre 2026.',
+    'blog.article.imposta-seconde-case-glarona.imageAlt': 'Taxe immobilière sur les résidences secondaires dans le canton de Glaris',
 };
 
 export default blogMetaCantonGlFr;

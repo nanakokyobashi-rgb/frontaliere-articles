@@ -101819,6 +101819,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-linea-yverdon-losanna-riaperta': {
+    title: 'Traffico Yverdon-Losanna: treni di nuovo regolari',
+    description: 'Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay',
+    keywords: 'frontalieri, ticino, svizzera, italia, traffico, yverdon-losanna, treni, nuovo',
+    ogTitle: 'Traffico Yverdon-Losanna: treni di nuovo regolari',
+    ogDescription: 'Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay',
+    canonicalPath: '/articoli-svizzera/linea-yverdon-losanna-riaperta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Traffico Yverdon-Losanna: treni di nuovo regolari",
+      "description": "Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-linea-yverdon-losanna-riaperta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-11T13:01:23+00:00",
+      "dateModified": "2026-10-11T13:01:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/linea-yverdon-losanna-riaperta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

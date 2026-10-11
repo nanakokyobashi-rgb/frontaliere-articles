@@ -8072,6 +8072,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.finanziamenti-start-up-ticino.title': 'Finanziamenti per start-up in Ticino: la proposta',
     'blog.article.finanziamenti-start-up-ticino.excerpt': 'Tresoldi propone di studiare un sostegno alle start-up in Ticino.',
     'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Incontro economico a Lugano sul finanziamento delle start-up',
+    'blog.article.linea-yverdon-losanna-riaperta.title': 'Traffico Yverdon-Losanna: treni di nuovo regolari',
+    'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay',
+    'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;

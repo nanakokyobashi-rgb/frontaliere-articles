@@ -367,8 +367,8 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.inflazione-frontalieri-ticino.title': 'Inflazione stabile in Svizzera: impatti sui frontalieri',
  'blog.article.inflazione-frontalieri-ticino.excerpt': 'L\'inflazione svizzera quasi ferma all\'0,1%: cosa significa per il potere d\'acquisto dei frontalieri e il cambio franco-euro.',
  'blog.article.inflazione-frontalieri-ticino.imageAlt': 'Vista del lago di Lugano con bandiere svizzere all\'alba e skyline in lontananza',
- 'blog.article.aprire-conto-bancario-frontaliere.title': 'Come aprire un conto bancario svizzero da frontaliere',
- 'blog.article.aprire-conto-bancario-frontaliere.excerpt': 'Scopri le banche migliori in Ticino per i frontalieri, con focus su costi, carte e requisiti per l\'apertura del conto.',
+ 'blog.article.aprire-conto-bancario-frontaliere.title': 'Conto svizzero per frontalieri: costi, documenti e permesso G',
+ 'blog.article.aprire-conto-bancario-frontaliere.excerpt': 'Come confrontare conto, carte, cambio CHF/EUR e requisiti variabili per chi lavora in Ticino e vive in Italia, con fonti ufficiali aggiornate.',
  'blog.article.aprire-conto-bancario-frontaliere.imageAlt': 'Veduta di Lugano con un edificio bancario e pedoni che attraversano la strada',
  'blog.article.strada-incidenti-vezia-cureglia.title': 'La strada degli incidenti tra Vezia e Cureglia',
  'blog.article.strada-incidenti-vezia-cureglia.excerpt': 'Troppi sinistri sul tratto Vezia-Cureglia: il Municipio di Vezia chiede interventi al Cantone per migliorare la sicurezza stradale.',
@@ -1514,7 +1514,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.ogm-fallimento-ticino.excerpt': 'L’iniziativa popolare per il controllo degli OGM in Svizzera non ha raggiunto il quorum di 100’000 firme, con implicazioni significative anche per il Ticino.',
  'blog.article.ogm-fallimento-ticino.imageAlt': 'Lago di Lugano con montagne sullo sfondo, paesaggio naturale in Ticino',
  'blog.article.passaggio-statuto-s-permesso-b.title': 'Dallo statuto S al permesso B in Ticino',
- 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'Il passaggio dallo statuto S al permesso B riguarda i profughi ucraini in Svizzera, con implicazioni economiche e sociali per il Canton Ticino, fino al 2027.',
+ 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'Dopo almeno cinque anni di soggiorno ininterrotto, chi beneficia dello statuto S ha diritto a un permesso B collegato: requisiti, ruolo del Cantone e proroga federale fino al 4 marzo 2028.',
  'blog.article.passaggio-statuto-s-permesso-b.imageAlt': 'Panorama di Bellinzona con le sue torri e il paesaggio montano circostante, rappresentativo del confine tra Italia e Svizzera.',
  'blog.article.chiusure-notturne-autostrada.title': 'Chiusure notturne sull\'autostrada A9',
  'blog.article.chiusure-notturne-autostrada.excerpt': 'La prossima settimana saranno effettuate chiusure notturne sull\'autostrada A9',
@@ -13012,7 +13012,10 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'I numeri del 11 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.title': 'Openjobmetis-Trieste 85-84: il podcast del dopopartita',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.excerpt': 'Openjobmetis batte Trieste 85-84 Della Valle segna il libero a 7 decimi dalla fine Varese centra la seconda vittoria consecutiva Risultato → 85-84 Decisivo →',
-    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Studio del podcast Dal Parquet di VareseNews',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.title': 'Fagnano Olona, successo per i 40 anni della Compagnia La Marmotta',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.excerpt': 'Circa 200 spettatori e oltre 1600 euro raccolti per la Giornata Mondiale della Gioventù durante lo spettacolo di beneficenza all\'Oratorio San Stanislao.',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.imageAlt': 'Spettacolo teatrale della Compagnia La Marmotta a Fagnano Olona',
 };
 
 export default blogMetaIt;

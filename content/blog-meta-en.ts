@@ -367,8 +367,8 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.inflazione-frontalieri-ticino.title': 'Stable Inflation in Switzerland: Impact on Cross-Border Workers',
  'blog.article.inflazione-frontalieri-ticino.excerpt': 'Swiss inflation nearly flat at 0.1%: what it means for cross-border workers\' purchasing power and the CHF-EUR exchange rate.',
  'blog.article.inflazione-frontalieri-ticino.imageAlt': 'View of Lake Lugano with Swiss flags at dawn and skyline in the distance',
- 'blog.article.aprire-conto-bancario-frontaliere.title': 'How to Open a Swiss Bank Account as a Cross-Border Worker',
- 'blog.article.aprire-conto-bancario-frontaliere.excerpt': 'Discover the best banks in Ticino for cross-border workers, focusing on costs, cards, and account opening requirements.',
+ 'blog.article.aprire-conto-bancario-frontaliere.title': 'Swiss bank account for cross-border workers: fees and documents',
+ 'blog.article.aprire-conto-bancario-frontaliere.excerpt': 'How to compare accounts, cards, CHF/EUR exchange and variable requirements for people working in Ticino and living in Italy, with official sources.',
  'blog.article.aprire-conto-bancario-frontaliere.imageAlt': 'View of Lugano with a bank building and pedestrians crossing the street',
  'blog.article.strada-incidenti-vezia-cureglia.title': 'The Accident-Prone Road Between Vezia and Cureglia',
  'blog.article.strada-incidenti-vezia-cureglia.excerpt': 'Too many accidents on the Vezia-Cureglia stretch: Vezia\'s municipal council requests action from the Canton to improve road safety.',
@@ -1513,7 +1513,7 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.ogm-fallimento-ticino.excerpt': 'The popular initiative for GMO control in Switzerland did not reach the required 100,000 signatures, with significant implications also for Ticino.',
  'blog.article.ogm-fallimento-ticino.imageAlt': 'Lugano Lake with mountains in the background, typical Ticino landscape',
  'blog.article.passaggio-statuto-s-permesso-b.title': 'From S Status to B Permit in Ticino',
- 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'The transition from S status to B permit concerns Ukrainian refugees in Switzerland, with economic and social implications for the Canton of Ticino until 2027.',
+ 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'After at least five years of continuous residence, people with protection status S are entitled to a linked B permit: requirements, the cantonal role and the federal extension to 4 March 2028.',
  'blog.article.passaggio-statuto-s-permesso-b.imageAlt': 'Panoramic view of Bellinzona with its castles and surrounding mountains, symbolizing the Swiss-Italian border.',
  'blog.article.chiusure-notturne-autostrada.title': 'Nighttime Closures on A9 Highway',
  'blog.article.chiusure-notturne-autostrada.excerpt': 'Nighttime closures are scheduled for next week on the A9 highway',
@@ -13011,7 +13011,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'The numbers for October 11, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.title': 'Openjobmetis-Trieste 85-84: the post-match podcast',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.excerpt': 'Openjobmetis beats Trieste 85-84 Della Valle scores the free to 7 tenths from the end Varese centers the second consecutive victory Result → 85-84 Decisive →',
-    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Dal Parquet podcast studio at VareseNews',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Illustration generated for this article',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.title': 'Fagnano Olona, success for the 40th anniversary of the Compagnia La Marmotta',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.excerpt': 'About 200 spectators and over 1600 euros raised for World Youth Day during the charity show at the St.',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.imageAlt': 'Theater performance by La Marmotta company in Fagnano Olona',
 };
 
 export default blogMetaEn;

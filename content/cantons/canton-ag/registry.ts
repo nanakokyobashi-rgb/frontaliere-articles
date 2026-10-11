@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'axpo-concessioni-idroelettriche',
+ category: 'novita',
+ date: '2026-10-11T13:20:39.471Z',
+ image: '/images/blog/article-axpo-concessioni-idroelettriche.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

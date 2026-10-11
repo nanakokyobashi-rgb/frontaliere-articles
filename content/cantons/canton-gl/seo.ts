@@ -80,6 +80,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposta-seconde-case-glarona': {
+    title: 'Imposta immobiliare seconde case Glarona: via libera dal Governo',
+    description: 'La mozione è stata depositata il 10 settembre 2026. Dal 2029 i Comuni possono scegliere l\'imposta sulle seconde case. La decisione spetta ai singoli Comuni',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, immobiliare, seconde, case',
+    ogTitle: 'Imposta immobiliare sulle seconde case nel Canton Glarona',
+    ogDescription: 'La mozione è stata depositata il 10 settembre 2026.',
+    canonicalPath: '/articoli-glarona/imposta-seconde-case-glarona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta immobiliare seconde case Glarona: via libera dal Governo",
+      "description": "La mozione è stata depositata il 10 settembre 2026. Dal 2029 i Comuni possono scegliere l'imposta sulle seconde case. La decisione spetta ai singoli Comuni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imposta-seconde-case-glarona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imposta immobiliare sulle seconde case nel Canton Glarona"
+      },
+      "datePublished": "2026-10-11T12:52:17+00:00",
+      "dateModified": "2026-10-11T12:52:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/imposta-seconde-case-glarona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
