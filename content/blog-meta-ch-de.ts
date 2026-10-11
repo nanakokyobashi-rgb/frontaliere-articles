@@ -8060,6 +8060,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tox-info-chiamate-intelligenza-artificiale.title': 'Tox Info: Anstieg der Anrufe durch künstliche Intelligenz',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.excerpt': 'Die 145 wickelte fast 45\'000 Beratungen ab Die Anrufe nahmen um 4,6% zu Medikamente 36%; Haushaltsreinigung 23% Finanzierung bis Ende 2027 gesichert Nummer',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.accordo-ue-sovranita-fiscale.title': 'Abkommen mit der EU: Auch Abschied von der Steuerhoheit?',
+    'blog.article.accordo-ue-sovranita-fiscale.excerpt': 'Die NZZ schlug am 6.',
+    'blog.article.accordo-ue-sovranita-fiscale.imageAlt': 'Bundeshaus in Bern im Vordergrund',
 };
 
 export default blogMetaChDe;

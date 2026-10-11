@@ -101663,6 +101663,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-accordo-ue-sovranita-fiscale': {
+    title: 'Accordo con l’UE: addio anche alla sovranità fiscale?',
+    description: 'La NZZ ha lanciato l\'allarme il 6 ottobre Hongler e Imstepf indicano un rischio sulle regole fiscali UE Nel 2024 la Corte UE impose ad Apple 13 miliardi',
+    keywords: 'frontalieri, ticino, svizzera, italia, accordo, addio, anche, alla',
+    ogTitle: 'Accordo UE e sovranità fiscale: rischi per la Svizzera',
+    ogDescription: 'La NZZ ha lanciato l\'allarme il 6 ottobre Hongler e Imstepf indicano un rischio sulle regole fiscali UE Nel 2024 la Corte UE impose ad Apple 13 miliardi',
+    canonicalPath: '/articoli-svizzera/accordo-ue-sovranita-fiscale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accordo con l’UE: addio anche alla sovranità fiscale?",
+      "description": "La NZZ ha lanciato l'allarme il 6 ottobre Hongler e Imstepf indicano un rischio sulle regole fiscali UE Nel 2024 la Corte UE impose ad Apple 13 miliardi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-accordo-ue-sovranita-fiscale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio federale a Berna in primo piano"
+      },
+      "datePublished": "2026-10-11T07:00:07+00:00",
+      "dateModified": "2026-10-11T07:00:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/accordo-ue-sovranita-fiscale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

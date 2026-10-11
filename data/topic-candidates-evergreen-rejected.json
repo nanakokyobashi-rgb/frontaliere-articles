@@ -797,26 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1955633/tra-lupo-mobilita-valli-territorio-e-strade-i-dossier-che-aspettano-marchesi": {
-      "section": "frontaliere",
-      "ts": 1791522454037
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/varese/articolo/in-viale-borri-giu-lo-stabile-abbandonato-dellex-concessionaria-terziroli-al-suo-posto-arrivera.html": {
-      "section": "frontaliere",
-      "ts": 1791523774708
-    },
-    "frontaliere::https://www.rsi.ch/s/4140344": {
-      "section": "frontaliere",
-      "ts": 1791525047882
-    },
-    "svizzera::https://www.swissinfo.ch/ita/nestl%c3%a9-raddoppia-gli-investimenti-in-messico%2c-pronti-due-miliardi/92189858": {
-      "section": "svizzera",
-      "ts": 1791525852135
-    },
-    "svizzera::https://www.laregione.ch/svizzera/svizzera/1955404/zurich-non-vuole-pagare-l-indennita-a-jessica-moretti": {
-      "section": "svizzera",
-      "ts": 1791526763168
-    },
     "svizzera::https://www.tio.ch/ticino/attualita/1955518/c-e-lo-scambio-d-abiti-nella-corte-del-municipio": {
       "section": "svizzera",
       "ts": 1791526780084
@@ -1072,6 +1052,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/fendinebbia-duke-chirurgo-hale-e-renfro-sorprende-in-lunetta/2704417": {
       "section": "frontaliere",
       "ts": 1791683108431
+    },
+    "frontaliere::https://www.tio.ch/rubriche/ospite/1956002/ue-sovranita-accordo-addio-quadri-lorenzo": {
+      "section": "frontaliere",
+      "ts": 1791699575480
     }
   }
 }

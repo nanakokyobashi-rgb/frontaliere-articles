@@ -8060,6 +8060,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tox-info-chiamate-intelligenza-artificiale.title': 'Tox Info: aumento chiamate all’intelligenza artificiale',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.excerpt': 'Il 145 ha gestito quasi 45\'000 consulenze Le chiamate sono cresciute del 4,6% Medicinali 36%; pulizia domestica 23% Finanziamento sicuro entro fine 2027 Numero',
     'blog.article.tox-info-chiamate-intelligenza-artificiale.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.accordo-ue-sovranita-fiscale.title': 'Accordo con l’UE: addio anche alla sovranità fiscale?',
+    'blog.article.accordo-ue-sovranita-fiscale.excerpt': 'La NZZ ha lanciato l\'allarme il 6 ottobre Hongler e Imstepf indicano un rischio sulle regole fiscali UE Nel 2024 la Corte UE impose ad Apple 13 miliardi',
+    'blog.article.accordo-ue-sovranita-fiscale.imageAlt': 'Edificio federale a Berna in primo piano',
 };
 
 export default blogMetaChIt;
