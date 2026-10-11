@@ -13,11 +13,16 @@ import { ADSENSE_CLIENT_ID } from './constants';
  * during a rolling contract update. The engine declares the same semantic
  * union once its mirror PR lands.
  */
-export type StaticAdSlotKey = 'canton-hub-top' | 'canton-hub-end';
+export type StaticAdSlotKey =
+  | 'canton-hub-top'
+  | 'canton-hub-inline-1'
+  | 'canton-hub-inline-2'
+  | 'canton-hub-end';
 
 const STATIC_AD_SLOTS: Record<StaticAdSlotKey, {
   slot: string;
   format: string;
+  layout?: string;
   placeholderMinHeight: number;
   placement?: string;
   fullWidthResponsive: boolean;
@@ -27,6 +32,20 @@ const STATIC_AD_SLOTS: Record<StaticAdSlotKey, {
     format: 'horizontal',
     placeholderMinHeight: 100,
     fullWidthResponsive: true,
+  },
+  'canton-hub-inline-1': {
+    slot: '1982411173',
+    format: 'fluid',
+    layout: 'in-article',
+    placeholderMinHeight: 220,
+    fullWidthResponsive: false,
+  },
+  'canton-hub-inline-2': {
+    slot: '6483829128',
+    format: 'fluid',
+    layout: 'in-article',
+    placeholderMinHeight: 220,
+    fullWidthResponsive: false,
   },
   'canton-hub-end': {
     slot: '5196931137',
@@ -46,6 +65,7 @@ export function staticAdSlotHtml(slot: StaticAdSlotKey): string {
     `data-ad-slot="${config.slot}"`,
     `data-ad-format="${config.format}"`,
   ];
+  if (config.layout) attrs.push(`data-ad-layout="${config.layout}"`);
   if (config.placement) attrs.push(`data-ad-placement="${config.placement}"`);
   if (config.fullWidthResponsive) attrs.push('data-full-width-responsive="true"');
   return `<ins ${attrs.join(' ')}></ins>`;
