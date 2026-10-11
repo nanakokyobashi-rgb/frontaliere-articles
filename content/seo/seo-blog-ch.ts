@@ -101702,6 +101702,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-riqualificazione-uri-domanda': {
+    title: 'Incentivi energetici in Uri: requisiti e domanda',
+    description: 'Incentivi energetici nel Cantone di Uri: programmi per edifici e impianti, requisiti tecnici, domanda prima dei lavori e verifica presso l\'ufficio cantonale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incentivi, energetici, requisiti, domanda',
+    ogTitle: 'Incentivi energetici in Uri: requisiti e domanda',
+    ogDescription: 'Per chi programma un intervento energetico a Uri, la sequenza conta: leggere i requisiti tecnici, individuare l\'ufficio cantonale, controllare termini e importi sulla fonte ufficiale e presentare la domanda prima dell\'avvio dei lavori.',
+    canonicalPath: '/articoli-svizzera/riqualificazione-uri-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incentivi energetici in Uri: requisiti e domanda",
+      "description": "Incentivi energetici nel Cantone di Uri: programmi per edifici e impianti, requisiti tecnici, domanda prima dei lavori e verifica presso l'ufficio cantonale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incentivi-energetici-lucerna-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tecnico e proprietario esaminano un progetto di risanamento energetico in un edificio svizzero"
+      },
+      "datePublished": "2026-10-11T09:19:00+00:00",
+      "dateModified": "2026-10-11T09:19:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/riqualificazione-uri-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -8063,6 +8063,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.accordo-ue-sovranita-fiscale.title': 'Accordo con l’UE: addio anche alla sovranità fiscale?',
     'blog.article.accordo-ue-sovranita-fiscale.excerpt': 'La NZZ ha lanciato l\'allarme il 6 ottobre Hongler e Imstepf indicano un rischio sulle regole fiscali UE Nel 2024 la Corte UE impose ad Apple 13 miliardi',
     'blog.article.accordo-ue-sovranita-fiscale.imageAlt': 'Edificio federale a Berna in primo piano',
+    'blog.article.riqualificazione-uri-domanda.title': 'Incentivi energetici in Uri: requisiti e domanda',
+    'blog.article.riqualificazione-uri-domanda.excerpt': 'A Uri i programmi riguardano il risanamento di edifici e impianti.',
+    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Tecnico e proprietario esaminano un progetto di risanamento energetico in un edificio svizzero',
 };
 
 export default blogMetaChIt;

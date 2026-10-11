@@ -8063,6 +8063,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.accordo-ue-sovranita-fiscale.title': 'Agreement with the EU: goodbye to fiscal sovereignty too?',
     'blog.article.accordo-ue-sovranita-fiscale.excerpt': 'NZZ sounded the alarm on October 6 Hongler and Imstepf point to a risk regarding EU tax rules In 2024 the EU Court imposed 13 billion on Apple',
     'blog.article.accordo-ue-sovranita-fiscale.imageAlt': 'Federal building in Bern in the foreground',
+    'blog.article.riqualificazione-uri-domanda.title': 'Energy incentives in Uri: requirements and application',
+    'blog.article.riqualificazione-uri-domanda.excerpt': 'In Uri, the programs concern the renovation of buildings and facilities.',
+    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Technician and owner review an energy renovation plan in a Swiss building',
 };
 
 export default blogMetaChEn;

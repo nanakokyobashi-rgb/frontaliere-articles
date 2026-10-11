@@ -2710,6 +2710,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'treni-vd-ritorno-normale': { it: 'treni-vd-ritorno-normale', en: 'vd-trains-normal-service', de: 'vd-zugverkehr-wieder-normal', fr: 'trains-vd-retour-normal' },
  'tox-info-chiamate-intelligenza-artificiale': { it: 'tox-info-chiamate-intelligenza-artificiale', en: 'tox-info-calls-artificial-intelligence', de: 'tox-info-anrufe-kuenstliche-intelligenz', fr: 'tox-info-appels-intelligence-artificielle' },
  'accordo-ue-sovranita-fiscale': { it: 'accordo-ue-sovranita-fiscale', en: 'eu-agreement-tax-sovereignty', de: 'eu-abkommen-steuerliche-souveraenitaet', fr: 'accord-ue-souverainete-fiscale' },
+ 'riqualificazione-uri-domanda': { it: 'riqualificazione-uri-domanda', en: 'uri-energy-renovation', de: 'uri-energiesanierung', fr: 'renovation-energetique-uri' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
