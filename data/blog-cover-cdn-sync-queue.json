@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-openjobmetis-trieste-dopopartita-podcast.webp",
+      "sha256": "db6ad4250cd47d6511f187f27173e78af507e95654058c20c7a9af9ba36ef12f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-openjobmetis-trieste-dopopartita-podcast-480w.webp",
+      "sha256": "bbd56ca9974c272caa3bd76753261bb2a78f98477e49132398de44e7d5a0dfa4"
+    }
+  ]
 }
