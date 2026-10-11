@@ -43852,6 +43852,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bollettino-frontaliere-2026-10-11',
+ category: 'novita',
+ date: '2026-10-11T11:20:46.527Z',
+ image: '/images/blog/bollettino-frontaliere-2026-10-11.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -13003,6 +13003,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.malnate-imprenditrice-azienda-famiglia.title': 'Kranke Unternehmerin tot in Firma aufgefunden',
     'blog.article.malnate-imprenditrice-azienda-famiglia.excerpt': 'Bei Malnate wurde eine 52-jährige Frau tot aufgefunden.',
     'blog.article.malnate-imprenditrice-azienda-famiglia.imageAlt': 'Ruhige Industriestrasse im Tessin im Nachmittagslicht, mit nüchterner dokumentarischer Stimmung.',
+    'blog.article.bollettino-frontaliere-2026-10-11.title': 'Grenzgänger-Tagesbulletin – 11. Oktober 2026: 737 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-10-11.excerpt': 'Die Zahlen von heute, 11. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-11.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 11. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-11.seoDescription': 'Grenzgänger-Bulletin vom 11. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'Die Zahlen vom 11. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;

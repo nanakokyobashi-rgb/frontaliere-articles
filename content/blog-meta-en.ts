@@ -13004,6 +13004,11 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.malnate-imprenditrice-azienda-famiglia.title': 'Malnate, an entrepreneur found dead in the company',
     'blog.article.malnate-imprenditrice-azienda-famiglia.excerpt': 'At Malnate, a 52-year-old woman was found dead.',
     'blog.article.malnate-imprenditrice-azienda-famiglia.imageAlt': 'Quiet industrial street in Ticino at afternoon light, with a sober documentary mood.',
+    'blog.article.bollettino-frontaliere-2026-10-11.title': 'Cross-border daily brief – October 11, 2026: 737 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-10-11.excerpt': 'Today\'s numbers, October 11, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-11.imageAlt': 'The day\'s numbers for cross-border commuters – October 11, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-10-11.seoDescription': 'Cross-border brief, October 11, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'The numbers for October 11, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
 };
 
 export default blogMetaEn;
