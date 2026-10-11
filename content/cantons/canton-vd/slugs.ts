@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sussidi-malattia-lavoro-vaud': { it: 'sussidi-malattia-lavoro-vaud', en: 'health-subsidies-work-vaud', de: 'krankenkassen-subventionen-arbeit-waadt', fr: 'subsides-assurance-maladie-travail-vaud' },
  'perdite-agricole-canton-vaud-caldo': { it: 'perdite-agricole-canton-vaud-caldo', en: 'vaud-canton-agricultural-losses-heatwave', de: 'landwirtschaftliche-verluste-kanton-waadt-hitze', fr: 'pertes-agricoles-canton-vaud-canicule' },
  'incendio-cavi-cff-eclepens': { it: 'incendio-cavi-cff-eclepens', en: 'eclepens-cff-cable-fire', de: 'eclepens-cff-kabelbrand', fr: 'incendie-cables-cff-eclepens' },
+ 'funzione-pubblica-vaud-sciopero-2026': { it: 'funzione-pubblica-vaud-sciopero-2026', en: 'public-service-vaud-protest-2026', de: 'oeffentlicher-dienst-waadt-streik-2026', fr: 'fonction-publique-vaud-greve-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

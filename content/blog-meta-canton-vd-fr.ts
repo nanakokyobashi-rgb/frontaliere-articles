@@ -27,6 +27,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.incendio-cavi-cff-eclepens.title': 'Incendie à Eclépens : hypothèse d\'acte criminel',
     'blog.article.incendio-cavi-cff-eclepens.excerpt': 'Incendie près des voies CFF à Eclépens le 9 octobre Câbles pour les signaux lumineux brûlés et hors d\'usage Circulation interrompue entre Lausanne',
     'blog.article.incendio-cavi-cff-eclepens.imageAlt': 'Voies CFF près d\'Eclépens après l\'incendie du 9 octobre 2026',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.title': 'La fonction publique vaudoise dans la rue le 5 novembre 2026',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.excerpt': 'Manifestation syndicale prévue le 5 novembre 2026 Coupes contestées : 165 millions de francs Près de 100 militants ont voté en faveur En 2025, il y a eu 13',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Manifestation de la fonction publique dans le canton de Vaud',
 };
 
 export default blogMetaCantonVdFr;

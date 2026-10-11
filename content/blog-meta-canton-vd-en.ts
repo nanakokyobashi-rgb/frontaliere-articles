@@ -27,6 +27,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.incendio-cavi-cff-eclepens.title': 'Fire in Eclépens: hypothesis of criminal act',
     'blog.article.incendio-cavi-cff-eclepens.excerpt': 'Fire near CFF tracks in Eclépens on 9 October Cables for burned-out and out-of-use light signals Interrupted traffic between Lausanne and Yverdon/Vallorbe',
     'blog.article.incendio-cavi-cff-eclepens.imageAlt': 'CFF tracks near Eclépens after the fire on 9 October 2026',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.title': 'Vaud public service takes to the streets on November 5, 2026',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.excerpt': 'Union demonstration scheduled for November 5, 2026 Disputed cuts: 165 million francs Almost 100 activists voted in favor In 2025, there were 13 strike days',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Public service demonstration in Canton Vaud',
 };
 
 export default blogMetaCantonVdEn;

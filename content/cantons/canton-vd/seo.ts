@@ -309,6 +309,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-funzione-pubblica-vaud-sciopero-2026': {
+    title: 'Funzione pubblica Vaud in piazza il 5 novembre 2026',
+    description: 'Manifestazione sindacale prevista il 5 novembre 2026 Tagli contestati: 165 milioni di franchi Quasi 100 militanti hanno votato a favore Nel 2025 ci sono stati',
+    keywords: 'frontalieri, ticino, svizzera, italia, funzione, pubblica, vaud, piazza',
+    ogTitle: 'Funzione pubblica Vaud in piazza il 5 novembre 2026',
+    ogDescription: 'Manifestazione sindacale prevista il 5 novembre 2026 Tagli contestati: 165 milioni di franchi Quasi 100 militanti hanno votato a favore Nel 2025 ci sono stati',
+    canonicalPath: '/articoli-vaud/funzione-pubblica-vaud-sciopero-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Funzione pubblica Vaud in piazza il 5 novembre 2026",
+      "description": "Manifestazione sindacale prevista il 5 novembre 2026 Tagli contestati: 165 milioni di franchi Quasi 100 militanti hanno votato a favore Nel 2025 ci sono stati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-funzione-pubblica-vaud-sciopero-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Manifestazione della funzione pubblica nel Canton Vaud"
+      },
+      "datePublished": "2026-10-11T02:00:39+00:00",
+      "dateModified": "2026-10-11T02:00:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/funzione-pubblica-vaud-sciopero-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

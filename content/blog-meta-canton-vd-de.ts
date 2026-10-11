@@ -27,6 +27,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.incendio-cavi-cff-eclepens.title': 'Feuer in Eclépens: Hypothese einer kriminellen Handlung',
     'blog.article.incendio-cavi-cff-eclepens.excerpt': 'Feuer in der Nähe der CFF-Gleise in Eclépens am 9.',
     'blog.article.incendio-cavi-cff-eclepens.imageAlt': 'CFF-Gleise bei Eclépens nach dem Brand vom 9. Oktober 2026',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.title': 'Öffentlicher Dienst im Kanton Waadt am 5. November 2026 auf der Straße',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.excerpt': 'Für den 5. November 2026 geplante Gewerkschaftsdemonstration Umstrittene Kürzungen: 165 Millionen Franken Fast 100 Aktivisten stimmten dafür Im Jahr 2025 gab es',
+    'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Demonstration des öffentlichen Dienstes im Kanton Waadt',
 };
 
 export default blogMetaCantonVdDe;
