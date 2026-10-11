@@ -288,6 +288,10 @@ export const RC_TO_ENV = {
 
   // Feature flags
   ENABLE_JOB_ALERTS:              ['ENABLE_JOB_ALERTS'],
+  // Site-owned static employer-profile ad test. Keep this in the workspace
+  // loader so `bin/rc-env.sh` can activate the site build from one RC source;
+  // the corpus generator itself does not consume the flag.
+  EMPLOYER_PROFILE_MID_AD_TEST_VARIANT: ['EMPLOYER_PROFILE_MID_AD_TEST_VARIANT'],
   // Exact-job application-intent ranking (#9934); absent/false stays control.
   APPLICATION_INTENT_RANKING_ENABLED: ['APPLICATION_INTENT_RANKING_ENABLED'],
   // Job-email ranking (#7922). Keep the complete tuning surface in Remote
