@@ -31,6 +31,7 @@ import {
   allChecksDecision,
   allCheckRunsDecision,
   exactCheckRunSnapshot,
+  LOCKSTEP_HEAD_REF,
   lockstepPullRequestDecision,
   requiredCheckDecision,
   requiredCheckRunsDecision,
@@ -89,6 +90,15 @@ test('il lockstep non espone un dispatch manuale da un ref arbitrario', () => {
     'il dispatch manuale potrebbe eseguire una revisione non trusted prima dei gate');
   assert.match(wf, /check_suite:\n\s+types: \[completed\]/,
     'il trigger check_suite deve restare disponibile sul workflow trusted');
+  assert.match(wf, /workflow_run:\n\s+workflows: \[tests\]\n\s+types: \[completed\]/,
+    'il completamento del workflow tests deve riattivare il merge anche quando check_suite non viene consegnato');
+  const workflowRunBlock = wf.match(/workflow_run:[\s\S]*?(?=\n  schedule:)/)?.[0] ?? '';
+  const branchFilter = workflowRunBlock.match(/branches: \[([^\]]+)\]/)?.[1]?.trim();
+  assert.equal(
+    branchFilter,
+    LOCKSTEP_HEAD_REF,
+    'il trigger workflow_run deve restare limitato al branch posseduto dal mirror e alla policy condivisa',
+  );
   assert.match(wf, /schedule:\n\s+- cron:/,
     'il trigger schedule deve restare disponibile sul workflow trusted');
 });

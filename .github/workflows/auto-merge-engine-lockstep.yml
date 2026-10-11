@@ -33,9 +33,17 @@ on:
   # il gate sotto troverebbe sempre uno stato pendente.
   check_suite:
     types: [completed]
+  # `check_suite` non è una consegna affidabile per le suite prodotte da Actions.
+  # Il workflow `tests` è invece il segnale trusted che il required check della PR
+  # ha terminato; il gate rilegge comunque la HEAD e tutti i check prima del merge.
+  workflow_run:
+    workflows: [tests]
+    types: [completed]
+    branches: [engine-lockstep-auto]
   # Rete di sicurezza. `check_suite` può non arrivare (o arrivare mentre la PR è ancora in
-  # rebase) e senza il cron la PR resterebbe ferma esattamente come prima — che è il difetto
-  # che questo workflow chiude, quindi vale la pena avere due strade.
+  # rebase), e `workflow_run` può arrivare mentre la PR è ancora in rebase: senza il cron la
+  # PR resterebbe ferma esattamente come prima — che è il difetto che questo workflow chiude,
+  # quindi vale la pena avere una terza strada.
   schedule:
     - cron: '17 */2 * * *'
 
