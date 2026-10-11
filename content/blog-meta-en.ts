@@ -12989,6 +12989,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lombardia-partenza-ritardo.title': 'Giro di Lombardia, start delayed in Bergamo',
     'blog.article.lombardia-partenza-ritardo.excerpt': 'The peloton halts the start of the Lombardia for four to five minutes Remco Evenepoel speaks on behalf of the riders The protest comes after the incident at the Tre Valli',
     'blog.article.lombardia-partenza-ritardo.imageAlt': 'Illustration generated for this article',
+    'blog.article.adv-varese-trieste-basket.title': 'Varese beats Trieste 85-84 in Masnago',
+    'blog.article.adv-varese-trieste-basket.excerpt': 'Varese beats Trieste 85-84 at Masnago with Della Valle\'s decisive free throw and Ross\'s 25 points.',
+    'blog.article.adv-varese-trieste-basket.imageAlt': 'Basketball game at Masnago',
 };
 
 export default blogMetaEn;

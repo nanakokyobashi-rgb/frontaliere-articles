@@ -43800,6 +43800,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'adv-varese-trieste-basket',
+ category: 'pratico',
+ date: '2026-10-11T03:56:14.879Z',
+ image: '/images/blog/article-adv-varese-trieste-basket.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

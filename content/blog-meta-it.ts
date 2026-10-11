@@ -12990,6 +12990,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lombardia-partenza-ritardo.title': 'Giro di Lombardia, partenza in ritardo a Bergamo',
     'blog.article.lombardia-partenza-ritardo.excerpt': 'Il gruppo ferma il via del Lombardia per quattro-cinque minuti Remco Evenepoel parla a nome dei corridori La protesta arriva dopo l\'incidente alla Tre Valli',
     'blog.article.lombardia-partenza-ritardo.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.adv-varese-trieste-basket.title': 'Varese supera Trieste 85-84 a Masnago',
+    'blog.article.adv-varese-trieste-basket.excerpt': 'Varese batte Trieste 85-84 a Masnago con il libero decisivo di Della Valle e i 25 punti di Ross.',
+    'blog.article.adv-varese-trieste-basket.imageAlt': 'Partita di basket a Masnago',
 };
 
 export default blogMetaIt;

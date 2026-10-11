@@ -105601,6 +105601,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-adv-varese-trieste-basket': {
+    title: 'Varese supera Trieste 85-84 a Masnago | Frontaliere Ticino',
+    description: 'Varese supera Trieste 85-84 a Masnago grazie al libero decisivo di Della Valle e ai 25 punti di Ross. Leggi la cronaca e i dettagli della partita di basket.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, supera, trieste, 85-84',
+    ogTitle: 'Varese batte Trieste 85-84 a Masnago',
+    ogDescription: 'Varese supera Trieste 85-84 a Masnago in una gara senza padrone decisa nel finale. Cronaca e statistiche della partita con i 25 punti di Ross e la prestazione di Della Valle.',
+    canonicalPath: '/articoli-frontaliere/adv-varese-trieste-basket/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese supera Trieste 85-84 a Masnago",
+      "description": "Varese supera Trieste 85-84 a Masnago grazie al libero decisivo di Della Valle e ai 25 punti di Ross. Leggi la cronaca e i dettagli della partita di basket.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-adv-varese-trieste-basket.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di basket a Masnago"
+      },
+      "datePublished": "2026-10-11T03:56:14+00:00",
+      "dateModified": "2026-10-11T03:56:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/adv-varese-trieste-basket/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
