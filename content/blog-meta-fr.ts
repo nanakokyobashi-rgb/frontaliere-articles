@@ -12999,7 +12999,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.como-roma-serie-a-orario.imageAlt': 'Illustration générée pour cet article',
     'blog.article.faido-gallerie-notte.title': 'Faido, nuit de maintenance : qui nettoie les galeries',
     'blog.article.faido-gallerie-notte.excerpt': 'À Faido, l’équipe prépare la fermeture vers 18 h.',
-    'blog.article.faido-gallerie-notte.imageAlt': 'Travaux nocturnes d\'entretien dans un tunnel autoroutier près de Faido',
+    'blog.article.faido-gallerie-notte.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

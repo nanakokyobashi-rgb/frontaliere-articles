@@ -20,7 +20,7 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Geschiedener Vater mit Kindern in Luzern während Wechselmodell-Woche',
     'blog.article.juso-lucerna-humbel-governo.title': 'Juso Luzern: Valentin Humbel kandidiert für den Regierungsrat',
     'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel ist der Juso-Kandidat für den Luzerner Regierungsrat.',
-    'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Stadtszene in Luzern zur Politik der Kantonsregierung',
+    'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonLuDe;

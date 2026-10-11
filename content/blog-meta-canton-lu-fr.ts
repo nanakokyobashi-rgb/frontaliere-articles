@@ -20,7 +20,7 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.riduzione-premi-padre-divorziato-lucerna.imageAlt': 'Père divorcé avec enfants à Lucerne pendant semaine de garde alternée',
     'blog.article.juso-lucerna-humbel-governo.title': 'Juso Lucerne : Valentin Humbel candidat au gouvernement',
     'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel est le candidat de Juso au gouvernement lucernois.',
-    'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Scène urbaine à Lucerne liée à la politique cantonale',
+    'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonLuFr;

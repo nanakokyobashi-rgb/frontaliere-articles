@@ -65,7 +65,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'juso-lucerna-humbel-governo',
  category: 'novita',
  date: '2026-10-10T23:52:13.512Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-juso-lucerna-humbel-governo.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['LU'],

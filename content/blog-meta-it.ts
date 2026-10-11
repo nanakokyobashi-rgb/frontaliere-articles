@@ -12998,7 +12998,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.como-roma-serie-a-orario.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.faido-gallerie-notte.title': 'Faido, notte di manutenzione: chi pulisce le gallerie',
     'blog.article.faido-gallerie-notte.excerpt': 'A Faido la squadra prepara la chiusura verso le 18 Coni e cartelli elettronici segnalano la riduzione di velocità Si puliscono pareti, asfalto, ventole',
-    'blog.article.faido-gallerie-notte.imageAlt': 'Lavori notturni di manutenzione in una galleria autostradale presso Faido',
+    'blog.article.faido-gallerie-notte.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

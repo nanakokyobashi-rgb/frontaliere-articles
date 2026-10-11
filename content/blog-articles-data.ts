@@ -43824,7 +43824,7 @@ const RAW_ARTICLES = [
  id: 'faido-gallerie-notte',
  category: 'pratico',
  date: '2026-10-11T08:59:18.576Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-faido-gallerie-notte.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],

@@ -12,16 +12,6 @@
       "lastFailureAt": "2026-10-11T07:34:11.689Z"
     },
     {
-      "articleId": "juso-lucerna-humbel-governo",
-      "title": "Juso Lucerna: Valentin Humbel candidato al governo",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-juso-lucerna-humbel-governo: openai-codex (vision gate rejected image: Original illustration of Lucerne, but it includes a recognizable foreground person viewed from behind.); gemini (Gemini image requ",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-10T23:52:13.536Z",
-      "lastFailureAt": "2026-10-11T01:37:21.931Z"
-    },
-    {
       "articleId": "scontro-auto-gemonio-verdi",
       "title": "Gemonio, scontro tra due auto: traffico bloccato",
       "fallbackImage": "/images/blog/traffico-a2-bloccato.webp",
@@ -30,16 +20,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T06:38:00.945Z"
-    },
-    {
-      "articleId": "faido-gallerie-notte",
-      "title": "Faido, notte di manutenzione: chi pulisce le gallerie",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T08:59:18.983Z",
-      "lastFailureAt": "2026-10-11T08:59:18.983Z"
     }
   ]
 }
