@@ -3791,6 +3791,7 @@ const RAW_ARTICLES = [
  id: 'guida-cambio-franco-euro-frontaliere',
  category: 'pratico',
  date: '2026-03-15T20:00:00.000Z',
+ updatedAt: '2026-10-11',
  image: '/images/places/lugano-view.webp',
  hasCalculator: true,
  articleType: 'evergreen',
