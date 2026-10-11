@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-10T23:52:13.536Z",
       "lastFailureAt": "2026-10-10T23:52:13.536Z"
+    },
+    {
+      "articleId": "basilea-larvicida-quattro-settimane",
+      "title": "Basilea, zanzara tigre: trattamenti ogni 4 settimane",
+      "fallbackImage": "/images/blog/locarno-zanzara-tigre-campagna-rilancia-2026-2.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T00:07:19.620Z",
+      "lastFailureAt": "2026-10-11T00:07:19.620Z"
     }
   ]
 }

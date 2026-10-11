@@ -236,6 +236,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-basilea-larvicida-quattro-settimane': {
+    title: 'Basilea, zanzara tigre: trattamenti ogni 4 settimane',
+    description: 'Basel-Stadt: la tesi di Tim Kirrmann su 180 caditoie indica quattro settimane per il larvicida contro la zanzara tigre nel quartiere St. Johann di Basilea.',
+    keywords: 'frontalieri, ticino, svizzera, italia, basilea, zanzara, tigre, trattamenti',
+    ogTitle: 'Basilea: larvicida contro la zanzara tigre ogni 4 settimane',
+    ogDescription: 'Nel quartiere St. Johann, Tim Kirrmann ha analizzato 180 caditoie trattate a intervalli diversi. Il risultato: quattro settimane è la cadenza ottimale per il larvicida VectoMax FG, già recepita dal Tiefbauamt.',
+    canonicalPath: '/articoli-basilea/basilea-larvicida-quattro-settimane/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Basilea, zanzara tigre: trattamenti ogni 4 settimane",
+      "description": "Basel-Stadt: la tesi di Tim Kirrmann su 180 caditoie indica quattro settimane per il larvicida contro la zanzara tigre nel quartiere St. Johann di Basilea.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/locarno-zanzara-tigre-campagna-rilancia-2026-2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Caditoia trattata contro la zanzara tigre nel quartiere St. Johann a Basilea"
+      },
+      "datePublished": "2026-10-11T00:07:19+00:00",
+      "dateModified": "2026-10-11T00:07:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/basilea-larvicida-quattro-settimane/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

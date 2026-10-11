@@ -21,6 +21,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.barfusserplatz-riqualificazione-urbana.title': 'Barfüsserplatz, the challenging redevelopment project',
     'blog.article.barfusserplatz-riqualificazione-urbana.excerpt': 'The redevelopment of Barfüsserplatz puts the quality of urban space at the center: for the head of the Commission, creating a beautiful square is almost impossible.',
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz in Basel during an urban redesign project',
+    'blog.article.basilea-larvicida-quattro-settimane.title': 'Basel, tiger mosquito: treatments every 4 weeks',
+    'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'A master\'s thesis on 180 loopholes in the St.',
+    'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Drain treated against tiger mosquitoes in Basel\'s St. Johann district',
 };
 
 export default blogMetaCantonBasileaEn;

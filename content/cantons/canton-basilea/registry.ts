@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'basilea-larvicida-quattro-settimane',
+ category: 'pratico',
+ date: '2026-10-11T00:07:19.597Z',
+ image: '/images/blog/locarno-zanzara-tigre-campagna-rilancia-2026-2.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

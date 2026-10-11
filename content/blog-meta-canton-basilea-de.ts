@@ -21,6 +21,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.barfusserplatz-riqualificazione-urbana.title': 'Barfüsserplatz, das schwierige Sanierungsprojekt',
     'blog.article.barfusserplatz-riqualificazione-urbana.excerpt': 'Die Sanierung des Barfüsserplatzes rückt die Qualität des städtischen Raums in den Mittelpunkt: Für den Kommissionspräsidenten ist es fast unmöglich, einen schönen Platz zu schaffen.',
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz in Basel während eines städtebaulichen Umbaus',
+    'blog.article.basilea-larvicida-quattro-settimane.title': 'Basel, Tigermücke: Behandlungen alle 4 Wochen',
+    'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'Eine Masterarbeit über 180 Fallrohre im Stadtteil St.',
+    'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Behandelter Abfluss gegen Tigermücken im Basler Quartier St. Johann',
 };
 
 export default blogMetaCantonBasileaDe;

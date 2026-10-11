@@ -21,6 +21,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.barfusserplatz-riqualificazione-urbana.title': 'Barfüsserplatz, il difficile progetto di riqualificazione',
     'blog.article.barfusserplatz-riqualificazione-urbana.excerpt': 'La ristrutturazione di Barfüsserplatz porta al centro la qualità dello spazio urbano: per il capo della Commissione, creare una bella piazza è quasi impossibile.',
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz a Basilea in una scena sul progetto di riqualificazione urbana',
+    'blog.article.basilea-larvicida-quattro-settimane.title': 'Basilea, zanzara tigre: trattamenti ogni 4 settimane',
+    'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'Una tesi di master su 180 caditoie nel quartiere St.',
+    'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Caditoia trattata contro la zanzara tigre nel quartiere St. Johann a Basilea',
 };
 
 export default blogMetaCantonBasileaIt;
