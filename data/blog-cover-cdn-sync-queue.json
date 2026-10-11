@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-imposta-seconde-case-glarona.webp",
-      "sha256": "cfe2fc519764420d4bcea9d0bf23ad43f0b7125731eedbe4c44a06b140a54b31"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-imposta-seconde-case-glarona-480w.webp",
-      "sha256": "701c66519fc8e70b41cba9f8d65bc13691ec1d66662017fad99c3c434b123722"
-    }
-  ]
+  "items": []
 }
