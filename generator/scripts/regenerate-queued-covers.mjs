@@ -521,7 +521,9 @@ export async function drainQueuedCovers({
       if (item.status !== 'failed'
         || !failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHours)) continue;
       item.status = 'queued';
-      item.failureCount = 0;
+      // A cooldown changes eligibility, not the history of this request. Keep
+      // the count so persistent provider failures can be marked after three
+      // automatic attempts; only a fresh enqueue starts at zero.
       requeued.push(item.articleId);
     }
     if (requeued.length > 0) write(queue);

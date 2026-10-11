@@ -880,6 +880,57 @@ test('il primo fallimento automatico entra subito nel cooldown', async () => {
   }
 });
 
+test('i retry automatici conservano il conteggio dei fallimenti della richiesta', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'persistent-automatic-cover-failure';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+    const fail = async () => { throw new Error('provider unavailable'); };
+    const attempts = [
+      '2026-10-07T13:00:00.000Z',
+      '2026-10-07T19:00:00.000Z',
+      '2026-10-08T01:00:00.000Z',
+    ];
+
+    for (const [index, now] of attempts.entries()) {
+      const summary = await drain({
+        root,
+        limit: 1,
+        retryFailed: true,
+        retryFailedAfterHours: 6,
+        now: () => now,
+        generateCover: fail,
+        generateThumbnail: fakeThumbnail,
+      });
+      const remaining = JSON.parse(
+        fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+      ).items[0];
+      assert.equal(remaining.failureCount, index + 1);
+      assert.equal(remaining.status, 'failed');
+      if (index === 0) assert.deepEqual(summary.requeued, []);
+      else assert.deepEqual(summary.requeued, [articleId]);
+    }
+
+    const final = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items[0];
+    assert.equal(final.failureCount, 3);
+    assert.deepEqual(
+      (await drain({
+        root,
+        limit: 1,
+        retryFailed: false,
+        generateCover: fail,
+        generateThumbnail: fakeThumbnail,
+      })).marked,
+      [articleId],
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('un fallimento conserva articolo e coda, e il terzo tentativo resta marcato', async () => {
   const root = tempRoot();
   try {
