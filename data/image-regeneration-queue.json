@@ -5,11 +5,11 @@
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
+      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic illustrated alpine rescue scene relevant to the subject, but it contains recognizable foreground people.); gemini (Gemini",
       "status": "failed",
-      "failureCount": 3,
+      "failureCount": 1,
       "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-11T07:34:11.689Z"
+      "lastFailureAt": "2026-10-11T13:38:57.418Z"
     },
     {
       "articleId": "scontro-auto-gemonio-verdi",
@@ -20,16 +20,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T12:45:47.279Z"
-    },
-    {
-      "articleId": "axpo-concessioni-idroelettriche",
-      "title": "Axpo e le concessioni delle centrali idroelettriche",
-      "fallbackImage": "/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T13:20:39.497Z",
-      "lastFailureAt": "2026-10-11T13:20:39.497Z"
     }
   ]
 }

@@ -29,7 +29,7 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Auto della polizia regionale davanti a un edificio comunale in Argovia.',
     'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo e le concessioni delle centrali idroelettriche',
     'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo pubblica un White Paper: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.',
-    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Baden: Axpo presenta un White Paper sulle concessioni delle centrali idroelettriche.',
+    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonAgIt;

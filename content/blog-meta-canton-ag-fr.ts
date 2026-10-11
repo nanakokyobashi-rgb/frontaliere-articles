@@ -29,7 +29,7 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Voiture de police régionale devant un bâtiment communal en Argovie.',
     'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo et les concessions des centrales hydroélectriques',
     'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo publie un White Paper : dans les prochaines années, les communes et les cantons pourront redéfinir la propriété, les participations et les risques.',
-    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Baden: Axpo publie un livre blanc sur les concessions hydroélectriques.',
+    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonAgFr;

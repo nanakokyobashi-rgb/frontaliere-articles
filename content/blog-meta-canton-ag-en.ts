@@ -29,7 +29,7 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Regional police car outside a municipal building in Aargau.',
     'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo and the concessions for hydroelectric power plants',
     'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo publishes a White Paper: in the coming years, municipalities and cantons will be able to redesign ownership, holdings and risks.',
-    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Baden: Axpo presents a white paper on hydropower plant concessions.',
+    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonAgEn;

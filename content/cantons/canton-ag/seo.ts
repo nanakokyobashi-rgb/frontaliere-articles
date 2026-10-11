@@ -323,10 +323,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Axpo pubblica un White Paper sulle concessioni idroelettriche: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-axpo-concessioni-idroelettriche.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Baden: Axpo presenta un White Paper sulle concessioni delle centrali idroelettriche."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T13:20:39+00:00",
       "dateModified": "2026-10-11T13:20:39+00:00",
