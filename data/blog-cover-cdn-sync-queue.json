@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-linea-yverdon-losanna-riaperta.webp",
+      "sha256": "2decb8da08498d21bbafbd55c6fd5bb656a439bfb70acbbaa06a8b156c76760d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-linea-yverdon-losanna-riaperta-480w.webp",
+      "sha256": "e6ef7328cd1260bfd8f88769490f331e5e64375a43bf2ccea9b05d18fdbc4d4d"
+    }
+  ]
 }
