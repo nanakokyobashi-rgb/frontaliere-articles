@@ -13000,6 +13000,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.faido-gallerie-notte.title': 'Faido, nuit de maintenance : qui nettoie les galeries',
     'blog.article.faido-gallerie-notte.excerpt': 'À Faido, l’équipe prépare la fermeture vers 18 h.',
     'blog.article.faido-gallerie-notte.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.dosaggio-rampe-a2-chiasso.title': 'A2 en direction de Chiasso : l\'USTRA évalue le dosage aux rampes',
+    'blog.article.dosaggio-rampe-a2-chiasso.excerpt': 'L\'USTRA évalue plus de 120 points pour le dosage.',
+    'blog.article.dosaggio-rampe-a2-chiasso.imageAlt': 'A2 au Tessin avec feu de régulation à l\'entrée de l\'autoroute',
 };
 
 export default blogMetaFr;

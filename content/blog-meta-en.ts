@@ -12998,6 +12998,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.faido-gallerie-notte.title': 'Faido, maintenance night: who cleans the tunnels',
     'blog.article.faido-gallerie-notte.excerpt': 'At Faido the crew prepares the closure around 18 Cones and electronic signs signal the reduction in speed Walls, asphalt and fans are cleaned',
     'blog.article.faido-gallerie-notte.imageAlt': 'Illustration generated for this article',
+    'blog.article.dosaggio-rampe-a2-chiasso.title': 'A2 towards Chiasso: USTRA evaluates ramp metering',
+    'blog.article.dosaggio-rampe-a2-chiasso.excerpt': 'USTRA evaluates over 120 points for dosage.',
+    'blog.article.dosaggio-rampe-a2-chiasso.imageAlt': 'A2 motorway in Ticino with a ramp-metering traffic light',
 };
 
 export default blogMetaEn;

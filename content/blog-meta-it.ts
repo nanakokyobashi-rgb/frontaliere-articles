@@ -12999,6 +12999,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.faido-gallerie-notte.title': 'Faido, notte di manutenzione: chi pulisce le gallerie',
     'blog.article.faido-gallerie-notte.excerpt': 'A Faido la squadra prepara la chiusura verso le 18 Coni e cartelli elettronici segnalano la riduzione di velocità Si puliscono pareti, asfalto, ventole',
     'blog.article.faido-gallerie-notte.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.dosaggio-rampe-a2-chiasso.title': 'A2 verso Chiasso: USTRA valuta il dosaggio alle rampe',
+    'blog.article.dosaggio-rampe-a2-chiasso.excerpt': 'L\'USTRA valuta oltre 120 punti per il dosaggio.',
+    'blog.article.dosaggio-rampe-a2-chiasso.imageAlt': 'A2 in Ticino con semaforo di dosaggio alle rampe autostradali',
 };
 
 export default blogMetaIt;
