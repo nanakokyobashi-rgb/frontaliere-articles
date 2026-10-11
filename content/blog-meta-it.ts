@@ -1134,7 +1134,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.treni-varese-milano-ceresio-express.imageAlt': 'Treno pendolare sul lago di Lugano al tramonto con vista sulle montagne',
  // Evergreen SEO articles — March 2026
  'blog.article.guida-cambio-franco-euro-frontaliere.title': 'Cambio CHF-EUR per frontalieri: guida completa per risparmiare',
- 'blog.article.guida-cambio-franco-euro-frontaliere.excerpt': 'Come ottimizzare il cambio franco-euro: confronto tra banche, fintech e broker, strategie di cambio frazionato e impatto fiscale sulla dichiarazione dei redditi.',
+ 'blog.article.guida-cambio-franco-euro-frontaliere.excerpt': 'Guida aggiornata al cambio CHF-EUR: come leggere il tasso di riferimento, confrontare il costo totale di banche e fintech e separare cambio e fiscalità.',
  'blog.article.guida-cambio-franco-euro-frontaliere.imageAlt': 'Banconote in franchi svizzeri e euro su una scrivania con calcolatrice e grafici di cambio valuta',
 
  'blog.article.guida-pensione-frontaliere-avs-lpp.title': 'Pensione frontaliere 2026: AVS, LPP e terzo pilastro spiegati',

@@ -1133,7 +1133,7 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.treni-varese-milano-ceresio-express.imageAlt': 'Commuter train crossing Lake Lugano at sunset with mountain backdrop',
  // Evergreen SEO articles — March 2026
  'blog.article.guida-cambio-franco-euro-frontaliere.title': 'CHF-EUR Exchange for Cross-Border Workers: Complete Savings Guide',
- 'blog.article.guida-cambio-franco-euro-frontaliere.excerpt': 'How to optimize your franc-to-euro exchange: comparison of banks, fintech and brokers, split exchange strategies and tax impact on your return.',
+ 'blog.article.guida-cambio-franco-euro-frontaliere.excerpt': 'Updated CHF-EUR guide for cross-border workers: read the reference rate, compare the full cost of banks and fintech services, and separate exchange from tax rules.',
  'blog.article.guida-cambio-franco-euro-frontaliere.imageAlt': 'Swiss franc and euro banknotes on a desk with calculator and currency exchange charts',
 
  'blog.article.guida-pensione-frontaliere-avs-lpp.title': 'Cross-Border Worker Pension 2026: AVS, LPP and Third Pillar Explained',
