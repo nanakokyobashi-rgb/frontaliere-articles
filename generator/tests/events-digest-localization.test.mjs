@@ -103,4 +103,23 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.deepEqual(parsed.events[0].lineIndices, [3, 4, 5, 6]);
     assert.deepEqual(parsed.shape, ['2:0', '3:2']);
   });
+
+  it('uses the child block shape to distinguish a blank-separated title heading', () => {
+    const body = [
+      '## Gli eventi',
+      '',
+      '### [Ginevra](/it/events/geneva/)',
+      '- **2 gennaio** — Titolo',
+      '',
+      '### Nota interna del titolo',
+      '',
+      '- **Nota** — contenuto del titolo',
+    ].join('\n');
+
+    const parsed = parseEventsDigestBody2Safe(body);
+
+    assert.ok(parsed);
+    assert.equal(parsed.events.length, 1);
+    assert.deepEqual(parsed.events[0].lineIndices, [3, 4, 5, 6, 7]);
+  });
 });

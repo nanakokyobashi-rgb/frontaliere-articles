@@ -418,10 +418,28 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
 const EVENT_RECORD_SCHEDULE_PATTERN = /^(?:\d{1,2}\.?(?:\s+)\p{L}{3,}|(?:lunedi|lunedì|martedi|martedì|mercoledi|mercoledì|giovedi|giovedì|venerdi|venerdì|sabato|domenica|monday|tuesday|wednesday|thursday|friday|saturday|sunday|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche))(?:\s|$)/iu;
 const EVENT_RECORD_PATTERN = /^- \*\*([^*\r\n]+)\*\* — /u;
 const DIGEST_HEADING_PATTERN = /^(#{2,3})\s+\S/u;
+const DIGEST_LINK_HEADING_PATTERN = /^###\s+\[[^\]\r\n]+\]\([^)]+\)\s*$/u;
 
 function eventRecordMatch(line) {
   const match = EVENT_RECORD_PATTERN.exec(line);
   return match && EVENT_RECORD_SCHEDULE_PATTERN.test(match[1].trim()) ? match : null;
+}
+
+function nextNonBlankLineIndex(lines, lineIndex) {
+  for (let index = lineIndex + 1; index < lines.length; index += 1) {
+    if (lines[index].trim()) return index;
+  }
+  return -1;
+}
+
+/** A heading is a block delimiter only when its child has the digest shape. */
+function isStructuralDigestHeading(lines, lineIndex, headingMatch) {
+  const childIndex = nextNonBlankLineIndex(lines, lineIndex);
+  if (childIndex < 0) return false;
+  const child = lines[childIndex];
+  if (headingMatch[1].length === 2) return /^###\s+\S/u.test(child);
+  if (DIGEST_LINK_HEADING_PATTERN.test(lines[lineIndex])) return Boolean(eventRecordMatch(child));
+  return DIGEST_LINK_HEADING_PATTERN.test(child);
 }
 
 /**
@@ -466,6 +484,10 @@ export function parseEventsDigestBody2Safe(text) {
       // a new digest block.
       if (currentEvent && pendingBlankIndices.length === 0) {
         currentEvent.lineIndices.push(lineIndex);
+        continue;
+      }
+      if (currentEvent && !isStructuralDigestHeading(lines, lineIndex, headingMatch)) {
+        appendTitleLines(lineIndex);
         continue;
       }
       if (lineIndex > 0 && lines[lineIndex - 1].trim()) return null;
