@@ -797,14 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/ticino/attualita/1955518/c-e-lo-scambio-d-abiti-nella-corte-del-municipio": {
-      "section": "svizzera",
-      "ts": 1791526780084
-    },
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955740/ffs-canalina-rogo-cavi-traffico": {
-      "section": "frontaliere",
-      "ts": 1791528931353
-    },
     "frontaliere::https://comozero.it/attualita/como-le-frane-nel-quartiere-quel-dubbio-con-foto-e-la-lettera-al-prefetto-cantiere-nel-punto-giusto-non-ci-pare-chiediamo-chiarezza": {
       "section": "frontaliere",
       "ts": 1791532591396
@@ -1056,6 +1048,14 @@
     "frontaliere::https://www.tio.ch/rubriche/ospite/1956002/ue-sovranita-accordo-addio-quadri-lorenzo": {
       "section": "frontaliere",
       "ts": 1791699575480
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/notte-sull%e2%80%99autostrada-chi-pulisce-mentre-dormi--4145888.html": {
+      "section": "frontaliere",
+      "ts": 1791702854092
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1955633/tra-lupo-mobilita-valli-territorio-e-strade-i-dossier-che-aspettano-marchesi": {
+      "section": "frontaliere",
+      "ts": 1791703152160
     }
   }
 }

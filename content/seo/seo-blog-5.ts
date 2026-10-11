@@ -105640,6 +105640,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-como-roma-serie-a-orario': {
+    title: 'Como-Roma in Serie A: orario, formazioni e tv | Frontaliere Ticino',
+    description: 'Como-Roma si gioca domenica 11 ottobre alle 12:30: la Roma, prima con Inter e Lazio, sfida il Como ottavo a 10 punti. Diretta esclusiva su Dazn via app.',
+    keywords: 'frontalieri, ticino, svizzera, italia, como-roma, serie, orario, formazioni',
+    ogTitle: 'Como-Roma in Serie A: orario, formazioni e tv',
+    ogDescription: 'Como-Roma è il lunch match della sesta giornata: calcio d\'inizio domenica 11 ottobre alle 12:30. La Roma di Gasperini è prima con Inter e Lazio; il Como di Fabregas è ottavo a 10 punti dopo il ko contro il Frosinone. Diretta esclusiva su Dazn.',
+    canonicalPath: '/articoli-frontaliere/como-roma-serie-a-orario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como-Roma in Serie A: orario, formazioni e tv",
+      "description": "Como-Roma si gioca domenica 11 ottobre alle 12:30: la Roma, prima con Inter e Lazio, sfida il Como ottavo a 10 punti. Diretta esclusiva su Dazn via app.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di calcio seguita in un locale del Mendrisiotto"
+      },
+      "datePublished": "2026-10-11T07:26:56+00:00",
+      "dateModified": "2026-10-11T07:26:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-roma-serie-a-orario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

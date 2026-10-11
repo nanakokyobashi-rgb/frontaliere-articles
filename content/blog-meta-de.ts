@@ -12991,6 +12991,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.adv-varese-trieste-basket.title': 'Varese besiegt Trieste in Masnago mit 85-84',
     'blog.article.adv-varese-trieste-basket.excerpt': 'Varese besiegt Trieste in Masnago mit 85-84 dank des entscheidenden Freiwurfs von Della Valle und der 25 Punkte von Ross.',
     'blog.article.adv-varese-trieste-basket.imageAlt': 'Basketballspiel in Masnago',
+    'blog.article.como-roma-serie-a-orario.title': 'Como-Roma in Serie A: Zeitplan, Formationen und Fernsehen',
+    'blog.article.como-roma-serie-a-orario.excerpt': 'Como-Rom wird heute, Sonntag, 11.',
+    'blog.article.como-roma-serie-a-orario.imageAlt': 'Fußballübertragung in einem Café im Mendrisiotto',
 };
 
 export default blogMetaDe;
