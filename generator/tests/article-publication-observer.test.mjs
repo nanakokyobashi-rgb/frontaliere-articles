@@ -84,6 +84,16 @@ test('deriva un target per corpo cambiato e conserva il commit più recente', ()
   assert.equal(prepared.targets[0].registryImage, '/images/blog/costo.webp');
 });
 
+test('ignora i cambi dei body non italiani quando osserva le pagine italiane', () => {
+  const log = [
+    `commit ${sha} 1791158400`,
+    'content/blog-body/de/solo-traduzione.ts',
+    'content/blog-body/fr/solo-traduzione.ts',
+    'content/blog-body-ch/en/solo-traduzione-svizzera.ts',
+  ].join('\n');
+  assert.deepEqual(parseChangedBodyLog(log), []);
+});
+
 test('ordina il ledger durevole dopo i cambi recenti e non include exhausted', () => {
   const prepared = buildObserverTargets({
     changedBodies: [{ section: 'frontaliere', articleId: 'recent', changedAt: Date.parse('2026-10-07T00:00:00Z'), commit: sha }],
