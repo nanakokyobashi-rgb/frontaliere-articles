@@ -12993,7 +12993,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.adv-varese-trieste-basket.imageAlt': 'Basketballspiel in Masnago',
     'blog.article.como-roma-serie-a-orario.title': 'Como-Roma in Serie A: Zeitplan, Formationen und Fernsehen',
     'blog.article.como-roma-serie-a-orario.excerpt': 'Como-Rom wird heute, Sonntag, 11.',
-    'blog.article.como-roma-serie-a-orario.imageAlt': 'Fußballübertragung in einem Café im Mendrisiotto',
+    'blog.article.como-roma-serie-a-orario.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

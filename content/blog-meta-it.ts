@@ -12995,7 +12995,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.adv-varese-trieste-basket.imageAlt': 'Partita di basket a Masnago',
     'blog.article.como-roma-serie-a-orario.title': 'Como-Roma in Serie A: orario, formazioni e tv',
     'blog.article.como-roma-serie-a-orario.excerpt': 'Como-Roma si gioca oggi, domenica 11 ottobre, alle 12:30.',
-    'blog.article.como-roma-serie-a-orario.imageAlt': 'Partita di calcio seguita in un locale del Mendrisiotto',
+    'blog.article.como-roma-serie-a-orario.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

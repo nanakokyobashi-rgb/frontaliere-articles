@@ -12996,7 +12996,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.adv-varese-trieste-basket.imageAlt': 'Match de basket à Masnago',
     'blog.article.como-roma-serie-a-orario.title': 'Côme-Rome en Serie A : horaires, formations et télévision',
     'blog.article.como-roma-serie-a-orario.excerpt': 'Como-Rome se joue aujourd\'hui, dimanche 11 octobre, à 12h30.',
-    'blog.article.como-roma-serie-a-orario.imageAlt': 'Match de football suivi dans un café du Mendrisiotto',
+    'blog.article.como-roma-serie-a-orario.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

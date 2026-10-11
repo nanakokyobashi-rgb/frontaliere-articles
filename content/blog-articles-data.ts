@@ -43814,7 +43814,7 @@ const RAW_ARTICLES = [
  id: 'como-roma-serie-a-orario',
  category: 'novita',
  date: '2026-10-11T07:26:56.834Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-como-roma-serie-a-orario.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',
