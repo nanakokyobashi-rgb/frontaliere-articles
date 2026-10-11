@@ -185,7 +185,10 @@ export function parseChangedBodyLog(log) {
       continue;
     }
     const info = bodyPathInfo(line.trim());
-    if (!current || !info || latest.has(`${info.section}:${info.articleId}`)) continue;
+    // The observer fetches the Italian page for each article. A translation-only
+    // change does not mean that page needs a new publication, even though the
+    // localized files share the same article id.
+    if (!current || !info || info.locale !== 'it' || latest.has(`${info.section}:${info.articleId}`)) continue;
     latest.set(`${info.section}:${info.articleId}`, { ...info, ...current });
   }
   // Most recent first: the page cap must cut the oldest changes, not the end of
