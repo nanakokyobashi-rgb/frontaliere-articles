@@ -24,6 +24,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.basilea-larvicida-quattro-settimane.title': 'Bâle, moustique tigre : traitements toutes les 4 semaines',
     'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'Une thèse de master sur 180 caditoires dans le quartier St.',
     'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Avaloir traité contre le moustique tigre dans le quartier St. Johann à Bâle',
+    'blog.article.claraplatz-basel-cantieri.title': 'Bâle, travaux à Claraplatz : commerces en difficulté',
+    'blog.article.claraplatz-basel-cantieri.excerpt': 'À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.',
+    'blog.article.claraplatz-basel-cantieri.imageAlt': 'Chantiers et travaux en cours à Claraplatz à Bâle',
 };
 
 export default blogMetaCantonBasileaFr;

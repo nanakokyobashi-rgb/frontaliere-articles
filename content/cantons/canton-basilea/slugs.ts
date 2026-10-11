@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'basel-klimpact-programma-2026': { it: 'basel-klimpact-programma-2026', en: 'basel-launches-klimpact-for-a-greener-everyday-life', de: 'basel-lanciert-klimpact-fur-einen-gruneren-alltag', fr: 'bale-lance-klimpact-pour-un-quotidien-plus-vert' },
  'barfusserplatz-riqualificazione-urbana': { it: 'barfusserplatz-riqualificazione-urbana', en: 'basel-barfusserplatz-redesign', de: 'umbau-barfuesserplatz-basel', fr: 'reamenagement-barfusserplatz-bale' },
  'basilea-larvicida-quattro-settimane': { it: 'basilea-larvicida-quattro-settimane', en: 'basel-tiger-mosquito-four-weeks', de: 'basel-tigermuecke-vier-wochen', fr: 'bale-moustique-tigre-quatre-semaines' },
+ 'claraplatz-basel-cantieri': { it: 'claraplatz-basel-cantieri', en: 'claraplatz-basel-construction-sites', de: 'claraplatz-basel-baustellen', fr: 'claraplatz-bale-chantiers' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

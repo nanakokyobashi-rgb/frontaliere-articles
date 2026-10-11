@@ -50,6 +50,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-11T00:07:19.620Z",
       "lastFailureAt": "2026-10-11T00:07:19.620Z"
+    },
+    {
+      "articleId": "claraplatz-basel-cantieri",
+      "title": "Basilea, cantieri a Claraplatz: negozi in difficoltà",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T00:21:48.672Z",
+      "lastFailureAt": "2026-10-11T00:21:48.672Z"
     }
   ]
 }

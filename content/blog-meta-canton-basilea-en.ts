@@ -24,6 +24,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.basilea-larvicida-quattro-settimane.title': 'Basel, tiger mosquito: treatments every 4 weeks',
     'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'A master\'s thesis on 180 loopholes in the St.',
     'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Drain treated against tiger mosquitoes in Basel\'s St. Johann district',
+    'blog.article.claraplatz-basel-cantieri.title': 'Basel, construction work at Claraplatz: shops struggling',
+    'blog.article.claraplatz-basel-cantieri.excerpt': 'At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.',
+    'blog.article.claraplatz-basel-cantieri.imageAlt': 'Construction work and building sites at Claraplatz in Basel',
 };
 
 export default blogMetaCantonBasileaEn;

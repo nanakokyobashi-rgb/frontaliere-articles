@@ -270,6 +270,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-claraplatz-basel-cantieri': {
+    title: 'Basilea, cantieri a Claraplatz: negozi in difficoltà',
+    description: 'A Claraplatz a Basilea i cantieri causano cali di fatturato fino al 40% per i negozi. Lavori previsti fino al 2028 e ipotesi di un fondo di sostegno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, basilea, cantieri, claraplatz, negozi',
+    ogTitle: 'Basilea, cantieri a Claraplatz: negozi in difficoltà e calo di fatturato',
+    ogDescription: 'I cantieri tra Claraplatz e la Kaserne a Basilea mettono in difficoltà i negozi locali con cali di fatturato e disagi fino alla primavera 2028.',
+    canonicalPath: '/articoli-basilea/claraplatz-basel-cantieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Basilea, cantieri a Claraplatz: negozi in difficoltà",
+      "description": "A Claraplatz a Basilea i cantieri causano cali di fatturato fino al 40% per i negozi. Lavori previsti fino al 2028 e ipotesi di un fondo di sostegno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantieri e lavori in corso a Claraplatz, Basilea"
+      },
+      "datePublished": "2026-10-11T00:21:48+00:00",
+      "dateModified": "2026-10-11T00:21:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/claraplatz-basel-cantieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
