@@ -43784,7 +43784,7 @@ const RAW_ARTICLES = [
  id: 'openjobmetis-trieste-vittoria-kastritis',
  category: 'pratico',
  date: '2026-10-11T02:48:02.856Z',
- image: '/images/blog/article-kastritis-varese-momento-difficile.webp',
+ image: '/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

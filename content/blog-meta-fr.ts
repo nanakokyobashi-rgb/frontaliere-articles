@@ -12987,7 +12987,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Route de Mendrisio au crépuscule avec feux d\'urgence',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese bat Trieste : analyse et déclarations',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis remporte une rencontre décrite comme très compliquée Amedeo Della Valle fait son retour et décide de la fin Kastritis salue l’unité, la défense et le soutien des supporters',
-    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Match de basket Openjobmetis',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

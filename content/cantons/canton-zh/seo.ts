@@ -289,10 +289,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-vbz-centrale-problemi-quotidiani.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Personale nella centrale VBZ alle prese con problemi di tram e bus a Zurigo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T01:13:16+00:00",
       "dateModified": "2026-10-11T01:13:16+00:00",

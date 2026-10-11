@@ -26,7 +26,7 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Scène urbaine de Zurich liée au débat sur les exigences de fonds propres',
     'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ : jusqu’à 300 problèmes par jour au centre de contrôle',
     'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'Dans le centre de contrôle de VBZ, le personnel fait face à jusqu’à 300 problèmes par jour liés aux tramways et aux bus.',
-    'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Personnel du centre VBZ face aux problèmes de tram et de bus à Zurich',
+    'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonZhFr;

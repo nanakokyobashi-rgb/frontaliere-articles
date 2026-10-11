@@ -26,7 +26,7 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Stadtansicht von Zürich zum politischen Streit über Kapitalvorschriften',
     'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ: bis zu 300 Probleme pro Tag in der Leitstelle',
     'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'In der VBZ-Leitstelle bewältigt das Personal bis zu 300 Probleme pro Tag im Zusammenhang mit Trams und Bussen.',
-    'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Mitarbeitende der VBZ-Leitstelle bearbeiten Tram- und Busprobleme in Zürich',
+    'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonZhDe;

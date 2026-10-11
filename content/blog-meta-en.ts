@@ -12985,7 +12985,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Mendrisio road at dusk with emergency lights',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese beats Trieste: analysis and statements',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis wins a game described as very complicated Amedeo Della Valle returns and decides the ending Kastritis praises unity, defense and support from the fans',
-    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Openjobmetis basketball game',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

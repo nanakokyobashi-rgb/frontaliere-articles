@@ -12986,7 +12986,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Strada di Mendrisio al tramonto con luci di emergenza',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese batte Trieste: analisi e dichiarazioni',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis vince una partita definita molto complicata Amedeo Della Valle rientra e decide il finale Kastritis elogia unità, difesa e sostegno dei tifosi',
-    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Partita di basket Openjobmetis',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

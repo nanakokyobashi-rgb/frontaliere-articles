@@ -87,7 +87,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'vbz-centrale-problemi-quotidiani',
  category: 'pratico',
  date: '2026-10-11T01:13:16.512Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-vbz-centrale-problemi-quotidiani.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['ZH'],

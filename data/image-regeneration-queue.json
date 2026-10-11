@@ -22,34 +22,14 @@
       "lastFailureAt": "2026-10-11T01:37:21.931Z"
     },
     {
-      "articleId": "vbz-centrale-problemi-quotidiani",
-      "title": "VBZ: fino a 300 problemi al giorno in centrale",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-11T01:13:16.609Z",
-      "lastFailureAt": "2026-10-11T01:39:22.063Z"
-    },
-    {
       "articleId": "scontro-auto-gemonio-verdi",
       "title": "Gemonio, scontro tra due auto: traffico bloccato",
       "fallbackImage": "/images/blog/traffico-a2-bloccato.webp",
       "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-11T02:24:06.863Z",
-      "lastFailureAt": "2026-10-11T02:24:06.863Z"
-    },
-    {
-      "articleId": "openjobmetis-trieste-vittoria-kastritis",
-      "title": "Varese batte Trieste: analisi e dichiarazioni",
-      "fallbackImage": "/images/blog/article-kastritis-varese-momento-difficile.webp",
-      "reason": "All image providers failed for article-openjobmetis-trieste-vittoria-kastritis: openai-codex (vision gate rejected image: Original generic basketball illustration with no text, log",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T02:48:03.264Z",
-      "lastFailureAt": "2026-10-11T02:48:03.264Z"
+      "lastFailureAt": "2026-10-11T02:58:01.716Z"
     }
   ]
 }
