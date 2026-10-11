@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-frontalieri-friburgo-giugno-2026.webp",
+      "sha256": "4b6c9be22fd5498aeeaed34047b96aecfe1d0332160325fae8c8e159f6e515c5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-frontalieri-friburgo-giugno-2026-480w.webp",
+      "sha256": "c53a53794ef05b890ff3497423fd5b8f15927fa6c509a15605ebb3f974542d73"
+    }
+  ]
 }
