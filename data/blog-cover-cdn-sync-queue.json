@@ -1,4 +1,29 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-basilea-larvicida-quattro-settimane.webp",
+      "sha256": "b8b1d24df0f98c90596214b9e78c0339c36f8ca8b58ddba044ef543fc73d59ff"
+    },
+    {
+      "path": "public/images/blog/article-claraplatz-basel-cantieri.webp",
+      "sha256": "9d65fdec9b176ff238129649c86aab4438911363dc3e35ae6ab7e3dddc4f67a1"
+    },
+    {
+      "path": "public/images/blog/article-festival-biblioterapia-laveno-2026.webp",
+      "sha256": "e616a2ddb6cf459b7cd459227ad242b7b67573c41cec9fef8150210ba6171e89"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-basilea-larvicida-quattro-settimane-480w.webp",
+      "sha256": "b124dad816de463c0f1f8d6f1f1409877c679609cb80489a92b4a436ece24231"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-claraplatz-basel-cantieri-480w.webp",
+      "sha256": "bc6b654bc98f64be322e75abe082a78d857e153a9c24c433ecc5bce794a85952"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-festival-biblioterapia-laveno-2026-480w.webp",
+      "sha256": "87464dbf6906ed7871c078e349a67ba9acc8b603f1b0a3a0db05451c8f230678"
+    }
+  ]
 }
