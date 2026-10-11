@@ -293,7 +293,7 @@ test('il pool svizzero si ricostruisce da create-article.mjs, non e\' riscritto 
   // («Pre-flight check su 110 keyword», run 31315163916). Il 2026-08-10 quel
   // pool si e' rivelato troppo piccolo per restare vivo — 90 keyword su 110
   // bannate, quattro run scheduled di fila senza articolo — ed e' passato a
-  // 610 con `buildStructuralEvergreenTopicsSvizzera` (20 pilastri × 25
+  // 860 con `buildStructuralEvergreenTopicsSvizzera` (30 pilastri × 25
   // cantoni). La soglia qui resta volutamente bassa: questo test riguarda la
   // FORMA della ricostruzione, e la taglia del pool e' pinnata dove va,
   // in `evergreen-pool-svizzera.test.mjs`.

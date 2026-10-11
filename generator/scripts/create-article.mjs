@@ -4193,7 +4193,7 @@ function buildDynamicEvergreenTopicsSvizzera() {
 //        cioe' stantia per costruzione: dal 2027 l'anno sarebbe tornato un token
 //        DISTINTIVO, abbassando la similarita' di famiglia e riaprendo come nuovi
 //        candidati che sono near-duplicate (ora e' un test su 4 cifre, vedi li').
-//    Questi 20 pilastri sono nazionali e non datati (permesso C, naturalizzazione,
+//    Questi 30 pilastri sono nazionali e non datati (permesso C, naturalizzazione,
 //    successioni): l'anno non aggiunge intento di ricerca, aggiunge solo il
 //    riazzeramento della memoria. Fuori.
 //
@@ -4216,10 +4216,18 @@ function buildDynamicEvergreenTopicsSvizzera() {
 // ROTAZIONE 2026-10-04 (#2085). Il watchdog ha misurato 610/610 keyword
 // rifiutate: 300 dal ledger permanente, 12 da strike, 44 da copertura recente,
 // 228 dal title-Jaccard e 26 da famiglia satura. Allargare la soglia o svuotare
-// le bans avrebbe rimesso nel ciclo duplicati già confermati. Il denominatore
-// resta bounded a 610, ma dieci pilastri cantonali ormai esauriti vengono
-// sostituiti da dieci dimensioni nuove (250 keyword): la superficie utile cresce
-// senza indebolire i gate né dipendere da un'amnistia dello stato storico.
+// le bans avrebbe rimesso nel ciclo duplicati già confermati. La rotazione ha
+// mantenuto bounded a 610 il denominatore di quella versione, ma dieci pilastri
+// ormai esauriti vengono sostituiti da dieci dimensioni nuove (250 keyword):
+// la superficie utile cresce senza indebolire i gate né dipendere da
+// un'amnistia dello stato storico.
+// ESPANSIONE 2026-10-11. I 20 pilastri rimasti dopo la rotazione producono
+// ancora solo 500 varianti cantonali. Aggiungiamo dieci domini amministrativi
+// distinti (giorni festivi, commercio, caccia/pesca, veicoli, esercizi pubblici,
+// università e integrazione): 250 nuove keyword, per 30 pilastri × 25 cantoni =
+// 750 varianti strutturali e 860 candidati evergreen complessivi. Le nuove
+// chiavi hanno anch'esse una copertura tematica dedicata nel guard, così la
+// crescita non trasforma l'aumento di quantità in collisioni silenziose.
 //
 // NOTA PER CHI MODIFICA I PILASTRI. `evergreenTopicFamily` (piu' sotto) mappa
 // certe combinazioni di token su «famiglie», e sei di queste sono in
@@ -4346,6 +4354,46 @@ function buildStructuralEvergreenTopicsSvizzera() {
     {
       k: 'imposta di successione e donazione %c aliquote',
       a: 'Imposta di successione e di donazione %C: aliquote per grado di parentela, esenzioni per coniuge e discendenti, dichiarazione e termini da rispettare.',
+    },
+    {
+      k: 'giorni festivi %c guida a calendario e regole',
+      a: 'Giorni festivi %C: calendario dei giorni riconosciuti dal cantone, differenze rispetto ai giorni festivi federali, chiusure degli uffici e fonti ufficiali per verificare il calendario annuale.',
+    },
+    {
+      k: 'orari di apertura negozi %c guida a domeniche e festivi',
+      a: 'Orari di apertura dei negozi %C: regole cantonali, aperture domenicali e festive, autorizzazioni speciali e ufficio competente per le eccezioni.',
+    },
+    {
+      k: 'imposta sui cani %c guida a importi e registrazione',
+      a: 'Imposta sui cani %C: obbligo eventuale, registrazione dell\'animale, autorità competente, esenzioni e modalità di pagamento secondo le regole cantonali e comunali.',
+    },
+    {
+      k: 'licenza di caccia %c requisiti e domanda',
+      a: 'Licenza di caccia %C: requisiti, esami, periodi autorizzati, specie cacciabili, documenti e ufficio cantonale competente.',
+    },
+    {
+      k: 'permesso di pesca %c requisiti e stagioni',
+      a: 'Permesso di pesca %C: licenze, corsi o esami eventualmente richiesti, periodi e acque autorizzate, tariffe e autorità cantonale competente.',
+    },
+    {
+      k: 'targhe e immatricolazione %c guida a procedura e costi',
+      a: 'Targhe e immatricolazione %C: registrazione del veicolo, documenti, targhe, cambio di proprietario e ufficio della circolazione competente.',
+    },
+    {
+      k: 'collaudo veicoli %c convocazione e requisiti',
+      a: 'Collaudo dei veicoli %C: convocazione, documenti, requisiti tecnici, controlli periodici e procedura presso l\'ufficio cantonale della circolazione.',
+    },
+    {
+      k: 'licenza esercizio pubblico %c requisiti e domanda',
+      a: 'Licenza per esercizio pubblico %C: requisiti per ristoranti e locali, formazione o responsabilità richiesta, domanda e autorità cantonale o comunale competente.',
+    },
+    {
+      k: 'tasse universitarie %c guida a iscrizione e contributi',
+      a: 'Tasse universitarie %C: differenze tra istituzioni, categorie di studenti, iscrizione, esenzioni e contributi secondo l\'ente cantonale o l\'università competente.',
+    },
+    {
+      k: 'integrazione e corsi di lingua %c contributi e requisiti',
+      a: 'Integrazione e corsi di lingua %C: programmi riconosciuti, requisiti per i contributi, ufficio cantonale o comunale competente e documenti per la domanda.',
     },
   ];
 
@@ -6015,8 +6063,8 @@ ASSICURAZIONI:
 // not steered away from the (then correct) second-bracket rate. Measured on
 // the ASSEMBLED first-attempt evergreen prompt with the same estimator
 // (evergreenPrompt() in tests/news-prompt-token-budget.test.mjs): frontaliere
-// 7486 -> 7506 est. tokens (+20), svizzera 7662 unchanged; that test keeps
-// both under the 8000 cap. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
+// 7486 -> 7506 est. tokens (+20); the cap test keeps both assembled prompts
+// under 8000 tokens. The fact-check sheet (VERIFIED_DOMAIN_FACTS plus
 // criteria 3-4) grows 2830 -> 2980 chars (+150, ~43 est. tokens); it rides on up to 24000 chars of
 // article, so its admission is set by the article, not by this delta.
 const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
@@ -6068,6 +6116,7 @@ const EVERGREEN_FACTS_BRIEF_CH = `FATTI VERIFICATI (ground truth — il fact-che
 - Lavoro: NESSUN salario minimo federale (alcuni cantoni ne hanno uno proprio). Orario max 45 ore/sett (industria, uffici, vendita) o 50 ore altri settori. Vacanze min 4 sett (5 sotto i 20 anni). Maternita' 14 sett all'80% (IPG); paternita' 2 sett. Disdetta: 1/2/3 mesi (1° anno / 2°–9° / dal 10°).
 - Prestazioni e servizi cantonali: l'assistenza sociale e' generalmente amministrata da cantoni e comuni secondo il bisogno; imposta sugli autoveicoli, incentivi energetici, autorizzazioni edilizie e contributi alla formazione continua seguono regole e uffici cantonali, quindi requisiti, termini e importi vanno verificati sulla fonte ufficiale del cantone.
 - Immobili e protezione: l'assicurazione degli edifici e' obbligatoria o organizzata diversamente secondo il cantone; la protezione civile e' coordinata a livello cantonale nell'ambito della legge federale, con convocazioni e indennita' da verificare presso l'autorita' competente.
+- Altri servizi cantonali: giorni festivi, orari commerciali, licenze di caccia e pesca, immatricolazione e collaudo dei veicoli, esercizi pubblici, tasse universitarie e programmi di integrazione possono dipendere da cantone, comune o istituzione competente; requisiti, scadenze e importi vanno verificati sulla fonte ufficiale.
 - Democrazia diretta: 4 date di voto federale/anno. Iniziativa popolare 100'000 firme in 18 mesi; referendum facoltativo 50'000 firme in 100 giorni. Modifica costituzionale: DOPPIA maggioranza (popolo E cantoni).
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, UST/BFS, UFSP/BAG, AFC/ESTV, UFAS/BSV, SUVA, BNS/SNB, UDSC, Fedpol, ARE, USTAT (Ticino).
 - Cifre indicizzate ogni anno (massimale 3° pilastro 3a, soglia/deduzione coordinamento LPP, massimale AD/AC, premi medi LAMal, salario mediano): NON dare importi precisi se incerto sull'anno; spiega il meccanismo, rimanda alla fonte ufficiale.`;
@@ -16936,7 +16985,7 @@ async function main() {
       // draws from its own national pool (all-canton keywords) instead.
       //
       // 2026-08-10: `svizzera` ha ora anche il proprio pool strutturale
-      // (`buildStructuralEvergreenTopicsSvizzera`, 20 pilastri × 25 cantoni).
+      // (`buildStructuralEvergreenTopicsSvizzera`, 30 pilastri × 25 cantoni).
       // Senza, la sezione stava ferma a 110 keyword contro le 537 frontaliere,
       // ne aveva 90 gia' bannate, e OGNI run scheduled usciva in ~50s con
       // «Tutte le keyword evergreen risultano gia' coperte dal pre-flight» —

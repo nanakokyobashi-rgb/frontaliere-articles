@@ -447,6 +447,26 @@ describe('gate argomento-già-coperto — (pilastro tematico × cantone)', () =>
     }
   });
 
+  it('riconosce i dieci pilastri dell\'espansione per cantone', () => {
+    const cases = [
+      ['Giorni festivi canton Zurigo guida a calendario e regole', 'giorni-festivi:zurigo'],
+      ['Orari di apertura negozi canton Zurigo guida a domeniche e festivi', 'orari-negozi:zurigo'],
+      ['Imposta sui cani canton Zurigo guida a importi e registrazione', 'imposta-cani:zurigo'],
+      ['Licenza di caccia canton Zurigo requisiti e domanda', 'licenza-caccia:zurigo'],
+      ['Permesso di pesca canton Zurigo requisiti e stagioni', 'permesso-pesca:zurigo'],
+      ['Targhe e immatricolazione canton Zurigo guida a procedura e costi', 'immatricolazione-veicoli:zurigo'],
+      ['Collaudo veicoli canton Zurigo convocazione e requisiti', 'collaudo-veicoli:zurigo'],
+      ['Licenza esercizio pubblico canton Zurigo requisiti e domanda', 'esercizio-pubblico:zurigo'],
+      ['Tasse universitarie canton Zurigo guida a iscrizione e contributi', 'tasse-universitarie:zurigo'],
+      ['Integrazione e corsi di lingua canton Zurigo contributi e requisiti', 'integrazione-lingua:zurigo'],
+    ];
+    for (const [text, expected] of cases) {
+      expect(cantonThemeTopicKey(text)).toBe(expected);
+      const candidate = { id: text.toLowerCase().replaceAll(' ', '-'), title: text };
+      expect(keyOf(candidate)).toBe(`canton-theme:${expected}`);
+    }
+  });
+
   it('usa la chiave della keyword quando titolo e slug generati la perdono', () => {
     const data = {
       id: 'salario-minimo-requisiti-e-applicazione',
