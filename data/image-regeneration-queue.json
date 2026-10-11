@@ -5,11 +5,11 @@
       "articleId": "amsa-bus-elettrici-mendrisiotto",
       "title": "AMSA inaugura i primi bus elettrici a Balerna",
       "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 3,
+      "reason": "All image providers failed for article-amsa-bus-elettrici-mendrisiotto: openai-codex (vision gate rejected image: Generic illustrative electric bus charging in an Alpine/Swiss setting. A small brand-like emblem is visible on the bus front.)",
+      "status": "queued",
+      "failureCount": 1,
       "requestedAt": "2026-10-10T13:00:30.249Z",
-      "lastFailureAt": "2026-10-10T18:48:59.290Z"
+      "lastFailureAt": "2026-10-11T01:06:29.680Z"
     },
     {
       "articleId": "tirocinio-uri-guida-pratica",
@@ -35,11 +35,11 @@
       "articleId": "juso-lucerna-humbel-governo",
       "title": "Juso Lucerna: Valentin Humbel candidato al governo",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-juso-lucerna-humbel-governo: openai-codex (vision gate rejected image: Original generic illustration of a suited figure overlooking a Lucerne-like lakeside civic scene; no text, logos, visible face, or",
+      "reason": "All image providers failed for article-juso-lucerna-humbel-governo: openai-codex (vision gate rejected image: Original generic illustration with no text, logos, or visible face, but it prominently depicts a foreground person from behind and",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-10T23:52:13.536Z",
-      "lastFailureAt": "2026-10-11T00:41:30.862Z"
+      "lastFailureAt": "2026-10-11T01:08:27.420Z"
     }
   ]
 }
