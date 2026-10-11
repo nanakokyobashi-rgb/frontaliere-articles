@@ -5950,6 +5950,7 @@ const RAW_ARTICLES = [
  id: 'trovare-lavoro-ticino',
  category: 'pratico',
  date: '2026-04-03',
+ updatedAt: '2026-10-11',
  image: '/images/places/lugano-view.webp',
  hasCalculator: false,
  articleType: 'evergreen',

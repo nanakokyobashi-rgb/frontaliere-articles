@@ -215,6 +215,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-telelavoro-accordo-definitivo-italia-refresh.test.mjs',
   'generator/tests/evergreen-tredicesima-frontaliere-refresh.test.mjs',
   'generator/tests/evergreen-telelavoro-frontalieri-ratifica-refresh.test.mjs',
+  'generator/tests/evergreen-trovare-lavoro-ticino-refresh.test.mjs',
   'generator/tests/evergreen-triad-refresh.test.mjs',
   'generator/tests/faq-locale-consistency.test.mjs',
   // Censimento della trasformazione d'uscita delle traduzioni (#2311): passa
