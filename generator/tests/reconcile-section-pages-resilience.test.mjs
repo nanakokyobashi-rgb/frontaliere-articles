@@ -15,7 +15,7 @@ const CATALOG = {
   sitemap: '/sitemap-articles-canton-ti.xml',
 };
 
-function fakeFetch({ sitemap = '503' } = {}) {
+function fakeFetch({ sitemap = '503', sitemapXml } = {}) {
   const docs = {
     'manifest.json': { commit: 'abc1234' },
     'sections.json': { commit: 'abc1234', sections: [CATALOG] },
@@ -30,6 +30,9 @@ function fakeFetch({ sitemap = '503' } = {}) {
       return { ok: true, status: 200, json: async () => edgeRegistry };
     }
     if (clean.endsWith(CATALOG.sitemap)) {
+      if (sitemapXml !== undefined) {
+        return { ok: true, status: 200, text: async () => sitemapXml };
+      }
       if (sitemap instanceof Error) throw sitemap;
       return { ok: false, status: Number(sitemap), text: async () => '' };
     }
@@ -68,4 +71,23 @@ test('reconcile: timeout della sitemap e non verificabile allo stesso modo', asy
   assert.equal(report.sections[0].dispatch, false);
   assert.deepEqual(report.sections[0].missingIds, []);
   assert.deepEqual(report.sections[0].unknown, [`${API_BASE}${CATALOG.sitemap}: fetch failed: timeout`]);
+});
+
+test('reconcile: sitemap e slugs incoerenti non fanno fallire il run e non dispatchano', async () => {
+  const sitemapXml = [
+    '<urlset>',
+    '  <url><loc>https://frontaliereticino.ch/articoli-ticino/retired-not-in-slugs/</loc></url>',
+    '</urlset>',
+  ].join('');
+  const report = await reconcile({
+    apiBase: API_BASE,
+    fetchImpl: fakeFetch({ sitemapXml }),
+  });
+
+  assert.equal(report.skipped, null);
+  assert.equal(report.sections.length, 1);
+  assert.equal(report.sections[0].dispatch, false);
+  assert.equal(report.sections[0].expected, null);
+  assert.match(report.sections[0].unknown[0], /URL articolo \/articoli-ticino\/retired-not-in-slugs\/ non compare in slugs\.json\.cantons/);
+  assert.equal(report.sections[0].pageManifest, 'unknown');
 });

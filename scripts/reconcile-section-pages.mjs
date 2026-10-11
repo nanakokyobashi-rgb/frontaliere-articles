@@ -59,6 +59,19 @@ export function cdnUrlFor(canonicalPath) {
 }
 
 /**
+ * La sitemap e la mappa slug possono attraversare una pubblicazione Pages in
+ * momenti diversi pur portando lo stesso commit nel manifest. In quel caso la
+ * superficie non e' abbastanza affidabile per calcolare un backfill, ma non e'
+ * un errore di parsing del reconcile: il giro deve rimandare la sezione.
+ */
+export class SectionSitemapIncoherentError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'SectionSitemapIncoherentError';
+  }
+}
+
+/**
  * Le pagine attese di una sezione live.
  * @param {{ id: string, paths: Record<string, string> }} entry voce di sections.json
  * @param {Record<string, Record<string, string>>} slugs slugs.json.cantons[<sezione>]
@@ -84,7 +97,11 @@ export function expectedSectionPages(entry, slugs, sitemapXml) {
       const prefix = entry.paths[candidate];
       return typeof prefix === 'string' && (canonicalPath === prefix || canonicalPath.startsWith(prefix));
     });
-    if (!locale) throw new Error(`sitemap di ${entry.id}: URL ${canonicalPath} fuori dai prefissi della sezione`);
+    if (!locale) {
+      throw new SectionSitemapIncoherentError(
+        `sitemap di ${entry.id}: URL ${canonicalPath} fuori dai prefissi della sezione`,
+      );
+    }
     const prefix = entry.paths[locale];
     const archivePrefix = `${prefix}${CANTON_ARCHIVE_ALL_SLUG[locale]}/`;
     const isLanding = canonicalPath === prefix;
@@ -93,7 +110,7 @@ export function expectedSectionPages(entry, slugs, sitemapXml) {
       canonicalPath.startsWith(archivePrefix) && /^page-\d+\/$/.test(canonicalPath.slice(archivePrefix.length))
     );
     if (!isLanding && !isHub && !isArchive) {
-      throw new Error(
+      throw new SectionSitemapIncoherentError(
         `sitemap di ${entry.id}: URL articolo ${canonicalPath} non compare in slugs.json.cantons — ` +
           'superficie sitemap/slugs incoerente, backfill bloccato',
       );
@@ -170,7 +187,7 @@ async function getText(url, fetchImpl) {
   return res.text();
 }
 
-/** Piano conservativo per una sitemap che non si e' potuta leggere. */
+/** Piano conservativo per una sitemap che non si e' potuta verificare. */
 function unknownSitemapPlan(section, detail) {
   return {
     section,
@@ -284,7 +301,16 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
       sections.push(unknownSitemapPlan(entry.id, detail));
       continue;
     }
-    const expected = expectedSectionPages(entry, slugs.cantons?.[entry.id] ?? {}, sitemapXml);
+    let expected;
+    try {
+      expected = expectedSectionPages(entry, slugs.cantons?.[entry.id] ?? {}, sitemapXml);
+    } catch (error) {
+      if (!(error instanceof SectionSitemapIncoherentError)) throw error;
+      const detail = sitemapFailureDetail(sitemapUrl, error);
+      console.warn(`::warning::[reconcile-sections] ${entry.id}: sitemap non verificabile (${detail}); nessun backfill`);
+      sections.push(unknownSitemapPlan(entry.id, detail));
+      continue;
+    }
     const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
     const activeRows = rows.filter((row) => row.section === entry.id);
     const activeIds = activeRows.length
