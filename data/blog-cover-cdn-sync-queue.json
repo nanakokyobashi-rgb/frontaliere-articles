@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-funzione-pubblica-vaud-sciopero-2026.webp",
+      "sha256": "813303003902f5b84c9e165dc613a25879f54c7eb4b16a1f5868ed4d8094e556"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-funzione-pubblica-vaud-sciopero-2026-480w.webp",
+      "sha256": "61a17eecae1d50e5e5104850bfda32bf1cef377dc15f2e9d67213fc48b51a043"
+    }
+  ]
 }
