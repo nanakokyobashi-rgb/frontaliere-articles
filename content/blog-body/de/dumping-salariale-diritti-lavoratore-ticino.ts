@@ -52,6 +52,7 @@ Eine Kündigung nach einer Lohnmeldung ist nach Schweizer Recht nicht automatisc
 - [Tessiner Mindestlohnbeschluss 2026](https://m3.ti.ch/CAN/RLeggi/public/index.php/raccolta-leggi/pdfatto/atto/11806)
 - [Schweizerische Lohnstrukturerhebung 2024](https://dam-api.bfs.admin.ch/hub/api/dam/assets/36195849/master)
 - [SECO: Umsetzung der flankierenden Massnahmen](https://www.seco.admin.ch/it/esecuzione-delle-misure-collaterali)
+- [SECO: Kosten und Sanktionen bei Entsendungen](https://www.seco.admin.ch/it/distacco-spese-e-sanzioni)
 - [Tessiner Mindestlohnkontrollen 2025](https://www4.ti.ch/tich/area-media/comunicati/dettaglio-comunicato/?NEWS_ID=257720)
 - [Schweizerische Zivilprozessordnung](https://www.fedlex.admin.ch/eli/cc/2010/262/it) und [SECO-FAQ zur Kündigung](https://www.seco.admin.ch/it/faq-disdetta)
 

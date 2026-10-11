@@ -52,6 +52,7 @@ La legge non rende automaticamente nullo ogni licenziamento dopo una segnalazion
 - [Decreto ticinese sui salari minimi 2026](https://m3.ti.ch/CAN/RLeggi/public/index.php/raccolta-leggi/pdfatto/atto/11806)
 - [RSS 2024 dell’Ufficio federale di statistica](https://dam-api.bfs.admin.ch/hub/api/dam/assets/36195849/master)
 - [SECO: esecuzione delle misure collaterali](https://www.seco.admin.ch/it/esecuzione-delle-misure-collaterali)
+- [SECO: costi e sanzioni per il distacco](https://www.seco.admin.ch/it/distacco-spese-e-sanzioni)
 - [Controlli ticinesi sul salario minimo 2025](https://www4.ti.ch/tich/area-media/comunicati/dettaglio-comunicato/?NEWS_ID=257720)
 - [Codice di procedura civile, CPC](https://www.fedlex.admin.ch/eli/cc/2010/262/it) e [FAQ SECO sulla disdetta](https://www.seco.admin.ch/it/faq-disdetta)
 

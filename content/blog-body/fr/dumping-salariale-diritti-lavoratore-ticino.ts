@@ -52,6 +52,7 @@ Le droit suisse ne rend pas automatiquement nul tout licenciement qui suit une r
 - [Décret tessinois sur les salaires minimaux 2026](https://m3.ti.ch/CAN/RLeggi/public/index.php/raccolta-leggi/pdfatto/atto/11806)
 - [Enquête suisse sur la structure des salaires 2024](https://dam-api.bfs.admin.ch/hub/api/dam/assets/36195849/master)
 - [SECO : exécution des mesures d’accompagnement](https://www.seco.admin.ch/it/esecuzione-delle-misure-collaterali)
+- [SECO : frais et sanctions en cas de détachement](https://www.seco.admin.ch/it/distacco-spese-e-sanzioni)
 - [Contrôles tessinois du salaire minimum en 2025](https://www4.ti.ch/tich/area-media/comunicati/dettaglio-comunicato/?NEWS_ID=257720)
 - [Code de procédure civile suisse](https://www.fedlex.admin.ch/eli/cc/2010/262/it) et [FAQ SECO sur le licenciement](https://www.seco.admin.ch/it/faq-disdetta)
 
