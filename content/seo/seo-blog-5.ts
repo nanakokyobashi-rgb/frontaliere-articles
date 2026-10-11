@@ -105411,6 +105411,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-uyba-sconfitta-conegliano': {
+    title: 'Pallavolo: la UYBA cresce con Conegliano ma cede 3-0',
+    description: 'UYBA sconfitta 3-0 dalla corazzata Conegliano Grozer chiude con 15 punti Nel terzo set la sfida finisce 27-25 Conegliano attacca al 43% contro il 30% UYBA',
+    keywords: 'frontalieri, ticino, svizzera, italia, pallavolo, uyba, cresce, conegliano',
+    ogTitle: 'Pallavolo UYBA sconfitta 3-0 da Conegliano',
+    ogDescription: 'UYBA sconfitta 3-0 dalla corazzata Conegliano Grozer chiude con 15 punti Nel terzo set la sfida finisce 27-25 Conegliano attacca al 43% contro il 30% UYBA',
+    canonicalPath: '/articoli-frontaliere/uyba-sconfitta-conegliano/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pallavolo: la UYBA cresce con Conegliano ma cede 3-0",
+      "description": "UYBA sconfitta 3-0 dalla corazzata Conegliano Grozer chiude con 15 punti Nel terzo set la sfida finisce 27-25 Conegliano attacca al 43% contro il 30% UYBA",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-uyba-sconfitta-conegliano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di pallavolo della UYBA contro Conegliano"
+      },
+      "datePublished": "2026-10-11T01:26:38+00:00",
+      "dateModified": "2026-10-11T01:26:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/uyba-sconfitta-conegliano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

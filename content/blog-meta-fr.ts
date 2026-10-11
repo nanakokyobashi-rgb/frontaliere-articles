@@ -12976,6 +12976,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sementina-viabilita-posteggi-ciossetto.title': 'Sementina : parkings et viabilités au Ciossetto',
     'blog.article.sementina-viabilita-posteggi-ciossetto.excerpt': 'À Sementina, la réunion a mis en évidence les risques pour les piétons Via Alla Roggia est sans trottoir et a une limite de 30 km/h Le parking du Ciossetto permet des arrêts',
     'blog.article.sementina-viabilita-posteggi-ciossetto.imageAlt': 'Via Alla Roggia à Sementina, route sans trottoir et parking du Ciossetto',
+    'blog.article.uyba-sconfitta-conegliano.title': 'Volley-ball : l\'UYBA progresse face à Conegliano mais s\'incline 3-0',
+    'blog.article.uyba-sconfitta-conegliano.excerpt': 'UYBA battue 3-0 par le rouleau compresseur Conegliano Grozer termine avec 15 points Au troisième set le match se termine à 27-25 Conegliano attaque à 43 % contre 30 % pour UYBA',
+    'blog.article.uyba-sconfitta-conegliano.imageAlt': 'Match de volleyball de l\'UYBA contre Conegliano',
 };
 
 export default blogMetaFr;

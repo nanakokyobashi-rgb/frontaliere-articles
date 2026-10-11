@@ -12974,6 +12974,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sementina-viabilita-posteggi-ciossetto.title': 'Sementina: parking spaces and roads at the Ciossetto',
     'blog.article.sementina-viabilita-posteggi-ciossetto.excerpt': 'In Sementina the meeting highlighted risks for pedestrians Via Alla Roggia is without sidewalk and has a limit of 30 km/h The parking lot of the Ciossetto allows stops',
     'blog.article.sementina-viabilita-posteggi-ciossetto.imageAlt': 'Via Alla Roggia in Sementina, road without sidewalk and Ciossetto parking',
+    'blog.article.uyba-sconfitta-conegliano.title': 'Volleyball: UYBA improves against Conegliano but loses 3-0',
+    'blog.article.uyba-sconfitta-conegliano.excerpt': 'UYBA defeated 3-0 by powerhouse Conegliano Grozer finishes with 15 points In the third set the match ends 27-25 Conegliano attacks at 43% compared with UYBA\'s 30%',
+    'blog.article.uyba-sconfitta-conegliano.imageAlt': 'UYBA volleyball match against Conegliano',
 };
 
 export default blogMetaEn;

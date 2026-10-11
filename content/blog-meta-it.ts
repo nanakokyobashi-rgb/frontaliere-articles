@@ -12975,6 +12975,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sementina-viabilita-posteggi-ciossetto.title': 'Sementina: posteggi e viabilità al Ciossetto',
     'blog.article.sementina-viabilita-posteggi-ciossetto.excerpt': 'A Sementina l\'incontro ha evidenziato rischi per i pedoni Via Alla Roggia è senza marciapiede e ha limite di 30 km/h Il posteggio del Ciossetto consente soste',
     'blog.article.sementina-viabilita-posteggi-ciossetto.imageAlt': 'Via Alla Roggia a Sementina, strada senza marciapiede e posteggio del Ciossetto',
+    'blog.article.uyba-sconfitta-conegliano.title': 'Pallavolo: la UYBA cresce con Conegliano ma cede 3-0',
+    'blog.article.uyba-sconfitta-conegliano.excerpt': 'UYBA sconfitta 3-0 dalla corazzata Conegliano Grozer chiude con 15 punti Nel terzo set la sfida finisce 27-25 Conegliano attacca al 43% contro il 30% UYBA',
+    'blog.article.uyba-sconfitta-conegliano.imageAlt': 'Partita di pallavolo della UYBA contro Conegliano',
 };
 
 export default blogMetaIt;

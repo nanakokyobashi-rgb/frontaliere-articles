@@ -1,5 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/nuove-fioriere-ed-essenze-a-barasso-piazza-san-martino-si-rinnova-per-la-festa-dellassunta/2656285": "barasso-riqualificazione-piazza-san-martino",
   "https://www.varesenews.it/2026/08/ciclopedonale-del-piambello-il-traguardo-si-avvicina-nuovi-lavori-per-completare-il-percorso-dal-ceresio/2656261": "ciclopedonale-piambello-completamento",
   "https://www.varesenews.it/2026/08/cade-per-dieci-metri-mentre-lavora-in-alpeggio-grave-un-27enne-italiano-in-vallemaggia/2656195": "incidente-alpeggio-vallemaggia-2026",
   "https://www.varesenews.it/2026/08/imballaggi-realizzati-con-il-micelio-listituto-keynes-di-gazzada-premiato-in-europa-per-impresa-azione/2656084": "istituto-keynes-gazzada-micelio-imballaggi",
@@ -2380,6 +2379,11 @@
   "https://www.laregione.ch/cantone/bellinzonese/1954858/a-sementina-preoccupano-viabilita-e-posteggi": {
     "articleId": "sementina-viabilita-posteggi-ciossetto",
     "ts": "2026-10-11T00:58:55.729Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/la-uyba-cresce-con-conegliano-ma-cede-3-0-nel-terzo-set-sfiorato-il-colpaccio/2704297": {
+    "articleId": "uyba-sconfitta-conegliano",
+    "ts": "2026-10-11T01:26:38.314Z",
     "keyForm": 2
   }
 }
