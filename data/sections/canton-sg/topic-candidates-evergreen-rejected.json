@@ -2,9 +2,13 @@
   "keywords": [],
   "strikes": {},
   "topicGateUrls": {
-    "canton-sg::https://www.vaterland.li/liveticker/polizeiticker-155": {
+    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
       "section": "canton-sg",
-      "ts": 1791368675089
+      "ts": 1791678055636
+    },
+    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
+      "section": "canton-sg",
+      "ts": 1791678096997
     }
   }
 }
