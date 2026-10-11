@@ -168,6 +168,7 @@ export const CONTENT_GATES = [
   'generator/tests/blog-title-casing.test.mjs',
   'generator/tests/escaped-tab-marker-corpus.test.mjs',
   'generator/tests/evergreen-addizionale-irpef-mappa-comuni-refresh.test.mjs',
+  'generator/tests/evergreen-aprire-conto-bancario-frontaliere-refresh.test.mjs',
   // Lotto «assicurazione malattia» del 2026-10-07: quattro guide rilette contro
   // la scheda dei fatti verificati. Ogni test legge i body nelle quattro lingue
   // e, per due guide, anche estratti e voce SEO.

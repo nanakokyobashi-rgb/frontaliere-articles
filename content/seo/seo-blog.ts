@@ -3923,17 +3923,17 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
  },
 
  'blog-aprire-conto-bancario-frontaliere': {
- title: 'Conto bancario svizzero frontalieri: guida 2026 | Frontaliere Ticino',
- description: 'Come aprire un conto bancario svizzero da frontaliere: migliori banche in Ticino, costi, carte, online banking e documenti richiesti.',
+ title: 'Conto svizzero per frontalieri: costi e documenti | Frontaliere Ticino',
+ description: 'Conto svizzero per chi lavora in Ticino: costi pubblicati, requisiti variabili, permesso G, cambio CHF/EUR e fonti ufficiali.',
  keywords: 'conto bancario frontalieri svizzera, aprire conto bancario svizzero, compte bancaire frontaliers suisse, banche ticino, costi conto svizzero, carte debito credito svizzera',
- ogTitle: 'Conto bancario svizzero per frontalieri: guida completa',
- ogDescription: 'Quale banca scegliere in Ticino? Costi, carte, online banking e requisiti per frontalieri. Guida aggiornata 2026.',
+ ogTitle: 'Conto svizzero per frontalieri: guida aggiornata',
+ ogDescription: 'Come confrontare conto, carte, cambio CHF/EUR e documenti per chi lavora in Ticino e vive in Italia. Fonti verificate l’11 ottobre 2026.',
  canonicalPath: '/articoli-frontaliere/aprire-conto-bancario-frontalieri/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
- "headline": "Conto bancario svizzero per frontalieri: guida completa 2026",
- "description": "Come aprire un conto bancario svizzero da frontaliere: migliori banche in Ticino, costi, carte, online banking e documenti richiesti.",
+ "headline": "Conto svizzero per frontalieri: costi e documenti 2026",
+ "description": "Conto svizzero per chi lavora in Ticino: costi pubblicati, requisiti variabili, permesso G, cambio CHF/EUR e fonti ufficiali.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/aprire-conto-bancario-frontaliere.webp`,
  "width": 1344,
@@ -3941,7 +3941,7 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
  "caption": "Veduta di Lugano con un edificio bancario e pedoni che attraversano la strada"
  },
  "datePublished": "2026-02-25T00:00:00+01:00",
- "dateModified": "2026-02-25T00:00:00+01:00",
+ "dateModified": "2026-10-11T00:00:00+01:00",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
  "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/aprire-conto-bancario-frontalieri/`,
