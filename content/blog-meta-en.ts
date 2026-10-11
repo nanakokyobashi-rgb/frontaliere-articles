@@ -12995,6 +12995,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.como-roma-serie-a-orario.title': 'Como-Roma in Serie A: schedule, formations and TV',
     'blog.article.como-roma-serie-a-orario.excerpt': 'Como-Rome is played today, Sunday 11 October, at 12:30.',
     'blog.article.como-roma-serie-a-orario.imageAlt': 'Illustration generated for this article',
+    'blog.article.faido-gallerie-notte.title': 'Faido, maintenance night: who cleans the tunnels',
+    'blog.article.faido-gallerie-notte.excerpt': 'At Faido the crew prepares the closure around 18 Cones and electronic signs signal the reduction in speed Walls, asphalt and fans are cleaned',
+    'blog.article.faido-gallerie-notte.imageAlt': 'Night maintenance work inside a motorway tunnel near Faido',
 };
 
 export default blogMetaEn;

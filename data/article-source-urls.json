@@ -1,5 +1,4 @@
 {
-  "https://www.ocst.ch/il-sindacato/piu-di-cento-anni-di-storia": "storia-sindacale-ticino-ocst",
   "https://www.rsi.ch/info/economia/economia-svizzera-in-gran-recupero-nel-secondo-trimestre--3986376.html": "pil-svizzera-crescita-secondo-trimestre",
   "https://www.varesenoi.it/2026/08/14/leggi-notizia/argomenti/economia-13/articolo/i-frontalieri-italiani-in-canton-ticino-sono-in-calo.html": "frontalieri-italiani-canton-ticino-calano",
   "https://www.laregione.ch/cantone/luganese/1943933/infortunio-sul-lavoro-a-miglieglia-gravi-le-condizioni-dell-uomo-caduto-nel-dirupo": "infortunio-lavoro-miglieglia",
@@ -2408,6 +2407,11 @@
   "https://www.varesenoi.it/2026/10/11/leggi-notizia/articolo/serie-a-oggi-como-roma-orario-probabili-formazioni-e-dove-vederla-1.html": {
     "articleId": "como-roma-serie-a-orario",
     "ts": "2026-10-11T07:26:57.309Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4145888": {
+    "articleId": "faido-gallerie-notte",
+    "ts": "2026-10-11T08:59:18.984Z",
     "keyForm": 2
   }
 }

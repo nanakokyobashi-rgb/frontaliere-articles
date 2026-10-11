@@ -12997,6 +12997,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.como-roma-serie-a-orario.title': 'Côme-Rome en Serie A : horaires, formations et télévision',
     'blog.article.como-roma-serie-a-orario.excerpt': 'Como-Rome se joue aujourd\'hui, dimanche 11 octobre, à 12h30.',
     'blog.article.como-roma-serie-a-orario.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.faido-gallerie-notte.title': 'Faido, nuit de maintenance : qui nettoie les galeries',
+    'blog.article.faido-gallerie-notte.excerpt': 'À Faido, l’équipe prépare la fermeture vers 18 h.',
+    'blog.article.faido-gallerie-notte.imageAlt': 'Travaux nocturnes d\'entretien dans un tunnel autoroutier près de Faido',
 };
 
 export default blogMetaFr;

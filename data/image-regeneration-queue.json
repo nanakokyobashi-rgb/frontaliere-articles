@@ -30,6 +30,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T06:38:00.945Z"
+    },
+    {
+      "articleId": "faido-gallerie-notte",
+      "title": "Faido, notte di manutenzione: chi pulisce le gallerie",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T08:59:18.983Z",
+      "lastFailureAt": "2026-10-11T08:59:18.983Z"
     }
   ]
 }

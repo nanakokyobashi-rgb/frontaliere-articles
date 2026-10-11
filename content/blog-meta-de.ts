@@ -12994,6 +12994,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.como-roma-serie-a-orario.title': 'Como-Roma in Serie A: Zeitplan, Formationen und Fernsehen',
     'blog.article.como-roma-serie-a-orario.excerpt': 'Como-Rom wird heute, Sonntag, 11.',
     'blog.article.como-roma-serie-a-orario.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.faido-gallerie-notte.title': 'Faido, Wartungsnacht: Wer die Tunnel reinigt',
+    'blog.article.faido-gallerie-notte.excerpt': 'In Faido bereitet das Team gegen 18 Uhr die Sperrung vor Elektronische Leitkegel und Anzeigetafeln signalisieren die Geschwindigkeitsreduzierung Wände, Asphalt und Ventilatoren werden gereinigt',
+    'blog.article.faido-gallerie-notte.imageAlt': 'Nächtliche Wartungsarbeiten in einem Autobahntunnel bei Faido',
 };
 
 export default blogMetaDe;

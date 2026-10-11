@@ -105679,6 +105679,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-faido-gallerie-notte': {
+    title: 'Faido, notte di manutenzione: chi pulisce le gallerie',
+    description: 'A Faido la squadra prepara la chiusura verso le 18 Coni e cartelli elettronici segnalano la riduzione di velocità Si puliscono pareti, asfalto, ventole',
+    keywords: 'frontalieri, ticino, svizzera, italia, faido, notte, manutenzione, pulisce',
+    ogTitle: 'Faido: la notte di chi pulisce le gallerie',
+    ogDescription: 'A Faido la squadra prepara la chiusura verso le 18 Coni e cartelli elettronici segnalano la riduzione di velocità Si puliscono pareti, asfalto, ventole',
+    canonicalPath: '/articoli-frontaliere/faido-gallerie-notte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Faido, notte di manutenzione: chi pulisce le gallerie",
+      "description": "A Faido la squadra prepara la chiusura verso le 18 Coni e cartelli elettronici segnalano la riduzione di velocità Si puliscono pareti, asfalto, ventole",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori notturni di manutenzione in una galleria autostradale presso Faido"
+      },
+      "datePublished": "2026-10-11T08:59:18+00:00",
+      "dateModified": "2026-10-11T08:59:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/faido-gallerie-notte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
