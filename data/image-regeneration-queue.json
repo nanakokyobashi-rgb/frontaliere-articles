@@ -35,41 +35,11 @@
       "articleId": "juso-lucerna-humbel-governo",
       "title": "Juso Lucerna: Valentin Humbel candidato al governo",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
+      "reason": "All image providers failed for article-juso-lucerna-humbel-governo: openai-codex (vision gate rejected image: Original generic illustration of a suited figure overlooking a Lucerne-like lakeside civic scene; no text, logos, visible face, or",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-10T23:52:13.536Z",
-      "lastFailureAt": "2026-10-10T23:52:13.536Z"
-    },
-    {
-      "articleId": "basilea-larvicida-quattro-settimane",
-      "title": "Basilea, zanzara tigre: trattamenti ogni 4 settimane",
-      "fallbackImage": "/images/blog/locarno-zanzara-tigre-campagna-rilancia-2026-2.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T00:07:19.620Z",
-      "lastFailureAt": "2026-10-11T00:07:19.620Z"
-    },
-    {
-      "articleId": "claraplatz-basel-cantieri",
-      "title": "Basilea, cantieri a Claraplatz: negozi in difficoltà",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T00:21:48.672Z",
-      "lastFailureAt": "2026-10-11T00:21:48.672Z"
-    },
-    {
-      "articleId": "festival-biblioterapia-laveno-2026",
-      "title": "Laveno Mombello, al via il Festival della Biblioterapia",
-      "fallbackImage": "/images/blog/article-festival-energetica-cabiaglio-2026.webp",
-      "reason": "All image providers failed for article-festival-biblioterapia-laveno-2026: openai-codex (vision gate rejected image: Generic illustrated library scene with books and writing materi",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T00:34:30.815Z",
-      "lastFailureAt": "2026-10-11T00:34:30.815Z"
+      "lastFailureAt": "2026-10-11T00:41:30.862Z"
     }
   ]
 }

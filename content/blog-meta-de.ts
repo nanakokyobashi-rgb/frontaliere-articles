@@ -12969,7 +12969,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'Ansicht eines Wohngebiets in Ternate, Varese',
     'blog.article.festival-biblioterapia-laveno-2026.title': 'Laveno Mombello, das Festival der Bibliotherapie startet',
     'blog.article.festival-biblioterapia-laveno-2026.excerpt': 'In der Villa Frua haben die Workshops des Festivals begonnen.',
-    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Innenansicht der Villa Frua in Laveno Mombello während des Bibliotherapie-Festivals',
+    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

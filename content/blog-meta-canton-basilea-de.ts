@@ -23,10 +23,10 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz in Basel während eines städtebaulichen Umbaus',
     'blog.article.basilea-larvicida-quattro-settimane.title': 'Basel, Tigermücke: Behandlungen alle 4 Wochen',
     'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'Eine Masterarbeit über 180 Fallrohre im Stadtteil St.',
-    'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Behandelter Abfluss gegen Tigermücken im Basler Quartier St. Johann',
+    'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.claraplatz-basel-cantieri.title': 'Basel, Baustellen am Claraplatz: Geschäfte in Schwierigkeiten',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'Am Claraplatz setzen die Bauarbeiten den Geschäften zu, und der Kiosk verliert 40% seines Umsatzes.',
-    'blog.article.claraplatz-basel-cantieri.imageAlt': 'Baustellen und Bauarbeiten am Claraplatz in Basel',
+    'blog.article.claraplatz-basel-cantieri.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonBasileaDe;

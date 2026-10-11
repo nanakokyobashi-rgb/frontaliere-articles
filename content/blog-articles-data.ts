@@ -43733,7 +43733,7 @@ const RAW_ARTICLES = [
  id: 'festival-biblioterapia-laveno-2026',
  category: 'novita',
  date: '2026-10-11T00:34:30.539Z',
- image: '/images/blog/article-festival-energetica-cabiaglio-2026.webp',
+ image: '/images/blog/article-festival-biblioterapia-laveno-2026.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

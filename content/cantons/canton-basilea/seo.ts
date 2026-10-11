@@ -250,10 +250,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Basel-Stadt: la tesi di Tim Kirrmann su 180 caditoie indica quattro settimane per il larvicida contro la zanzara tigre nel quartiere St. Johann di Basilea.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/locarno-zanzara-tigre-campagna-rilancia-2026-2.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-basilea-larvicida-quattro-settimane.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Caditoia trattata contro la zanzara tigre nel quartiere St. Johann a Basilea"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T00:07:19+00:00",
       "dateModified": "2026-10-11T00:07:19+00:00",
@@ -289,10 +294,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-claraplatz-basel-cantieri.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cantieri e lavori in corso a Claraplatz, Basilea"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T00:21:48+00:00",
       "dateModified": "2026-10-11T00:21:48+00:00",

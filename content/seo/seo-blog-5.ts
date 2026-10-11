@@ -105352,10 +105352,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-festival-energetica-cabiaglio-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-festival-biblioterapia-laveno-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Interni di Villa Frua a Laveno Mombello durante il Festival della Biblioterapia"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T00:34:30+00:00",
       "dateModified": "2026-10-11T00:34:30+00:00",

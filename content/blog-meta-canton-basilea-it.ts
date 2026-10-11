@@ -23,10 +23,10 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.barfusserplatz-riqualificazione-urbana.imageAlt': 'Barfüsserplatz a Basilea in una scena sul progetto di riqualificazione urbana',
     'blog.article.basilea-larvicida-quattro-settimane.title': 'Basilea, zanzara tigre: trattamenti ogni 4 settimane',
     'blog.article.basilea-larvicida-quattro-settimane.excerpt': 'Una tesi di master su 180 caditoie nel quartiere St.',
-    'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Caditoia trattata contro la zanzara tigre nel quartiere St. Johann a Basilea',
+    'blog.article.basilea-larvicida-quattro-settimane.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.claraplatz-basel-cantieri.title': 'Basilea, cantieri a Claraplatz: negozi in difficoltà',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'A Claraplatz i cantieri colpiscono i negozi e il chiosco perde il 40% del fatturato.',
-    'blog.article.claraplatz-basel-cantieri.imageAlt': 'Cantieri e lavori in corso a Claraplatz, Basilea',
+    'blog.article.claraplatz-basel-cantieri.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonBasileaIt;
