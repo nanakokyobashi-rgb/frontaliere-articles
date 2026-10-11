@@ -8072,6 +8072,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.finanziamenti-start-up-ticino.title': 'Finanzierungen für Start-ups im Tessin: der Vorschlag',
     'blog.article.finanziamenti-start-up-ticino.excerpt': 'Tresoldi schlägt vor, eine Unterstützung für Start-ups im Tessin zu prüfen.',
     'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Geschäftstreffen in Lugano zur Startup-Finanzierung',
+    'blog.article.linea-yverdon-losanna-riaperta.title': 'Zugverkehr Yverdon-Lausanne: Züge wieder regulär',
+    'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Normaler Verkehr zwischen Yverdon und Lausanne ab 05:40 Brandstiftung am Freitag gegen 03:00 Uhr entdeckt Zugverkehr zwischen Cossonay-Penthalaz und Chavornay unterbrochen',
+    'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Zug am Morgen auf einer Schweizer Bahnstrecke.',
 };
 
 export default blogMetaChDe;

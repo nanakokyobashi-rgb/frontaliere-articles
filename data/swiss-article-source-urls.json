@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/cronaca/1948521/investito-mortalmente-da-un-treno-aveva-13-anni": {
-    "articleId": "investito-treno-13-anni-berna",
-    "ts": "2026-09-07T14:02:05.103Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/seco%3a-%22mercato-del-lavoro-svizzero-rimane-solido%22/92017594": {
     "articleId": "seco-mercato-lavoro-svizzero-solido",
     "ts": "2026-09-07T14:27:04.108Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1956031/chi-finanzia-le-idee-finanzia-il-futuro": {
     "articleId": "finanziamenti-start-up-ticino",
     "ts": "2026-10-11T11:40:47.906Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/traffico-ferroviario-tra-yverdon-e-losanna-torna-normale/92198573": {
+    "articleId": "linea-yverdon-losanna-riaperta",
+    "ts": "2026-10-11T13:01:23.585Z",
     "keyForm": 2
   }
 }
