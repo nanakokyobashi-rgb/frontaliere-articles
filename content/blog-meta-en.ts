@@ -1145,7 +1145,7 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.vivere-svizzera-vs-italia-frontaliere.imageAlt': 'Panoramic view of the Italian-Swiss border with Lake Lugano and Italian village rooftops',
 
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.title': 'Wage Dumping in Ticino: How to Recognize It and Protect Yourself',
- 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Guide to cross-border worker rights against wage dumping: common forms, who to contact, legal procedures and operational checklist.',
+ 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Source-backed guide to cross-border worker rights: the 2024 regional median, 2026 sector minimums in Ticino, reporting routes and procedure.',
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.imageAlt': 'Construction workers on a Ticino building site with safety helmets and contract documentation',
 
  'blog.article.malattia-frontaliere-guida-assicurazione.title': 'Illness and Injury for Cross-Border Workers: LAMal, IJM and Rights Guide',
