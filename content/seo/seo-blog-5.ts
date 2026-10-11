@@ -105450,6 +105450,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-varese-oltrepo-serie-d-2026': {
+    title: 'Varese-Oltrepò: data, orario e dove vedere la sfida',
+    description: 'Varese-Oltrepò si gioca domenica 11 ottobre alle 15 Il Varese arriva da due sconfitte consecutive Otto gol subiti nelle ultime due partite Obiettivo: la prima',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese-oltrepò, data, orario, dove',
+    ogTitle: 'Varese-Oltrepò: tutto sulla sfida di Serie D',
+    ogDescription: 'Varese-Oltrepò si gioca domenica 11 ottobre alle 15 Il Varese arriva da due sconfitte consecutive Otto gol subiti nelle ultime due partite Obiettivo: la prima',
+    canonicalPath: '/articoli-frontaliere/varese-oltrepo-serie-d-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese-Oltrepò: data, orario e dove vedere la sfida",
+      "description": "Varese-Oltrepò si gioca domenica 11 ottobre alle 15 Il Varese arriva da due sconfitte consecutive Otto gol subiti nelle ultime due partite Obiettivo: la prima",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-varese-oltrepo-serie-d-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stadio Franco Ossola di Varese per la partita di Serie D"
+      },
+      "datePublished": "2026-10-11T01:53:21+00:00",
+      "dateModified": "2026-10-11T01:53:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-oltrepo-serie-d-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

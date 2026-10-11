@@ -797,22 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955129/pompieri-all-ex-lati-doppio-passo-avanti-referendum-permettendo": {
-      "section": "frontaliere",
-      "ts": 1791506160503
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/una-vita-da-social-la-polizia-postale-incontra-i-ragazzi-delle-medie/2702428": {
-      "section": "frontaliere",
-      "ts": 1791507404729
-    },
-    "frontaliere::https://comozero.it/attualita/300-persone-da-como-a-roma-il-17-ottobre-salari-casa-sanita-scuola-pace-e-democrazia-servono-scelte-diverse": {
-      "section": "frontaliere",
-      "ts": 1791508356767
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/07/leggi-notizia/argomenti/politica-20/articolo/il-cantiere-sanita-a-varese-licata-tante-eccellenze-ma-anche-criticita-su-cui-lavorare-1.html": {
-      "section": "frontaliere",
-      "ts": 1791508944798
-    },
     "frontaliere::https://www.laregione.ch/cantone/ticino/1955633/tra-lupo-mobilita-valli-territorio-e-strade-i-dossier-che-aspettano-marchesi": {
       "section": "frontaliere",
       "ts": 1791522454037
@@ -1084,6 +1068,10 @@
     "frontaliere::https://comozero.it/attualita/provincia-di-como-schianto-tra-due-auto": {
       "section": "frontaliere",
       "ts": 1791673026487
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/fendinebbia-duke-chirurgo-hale-e-renfro-sorprende-in-lunetta/2704417": {
+      "section": "frontaliere",
+      "ts": 1791683108431
     }
   }
 }

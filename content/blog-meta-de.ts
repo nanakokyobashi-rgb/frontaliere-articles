@@ -12976,6 +12976,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.uyba-sconfitta-conegliano.title': 'Volleyball: UYBA steigert sich gegen Conegliano, verliert aber mit 3-0',
     'blog.article.uyba-sconfitta-conegliano.excerpt': 'UYBA von der Spitzenmannschaft Conegliano mit 3-0 besiegt Grozer kommt auf 15 Punkte Im dritten Satz endet das Duell 27-25 Conegliano kommt im Angriff auf 43% gegenüber 30% bei UYBA',
     'blog.article.uyba-sconfitta-conegliano.imageAlt': 'UYBA Volleyballspiel gegen Conegliano',
+    'blog.article.varese-oltrepo-serie-d-2026.title': 'Varese-Oltrepò: Datum, Uhrzeit und wo das Spiel zu sehen ist',
+    'blog.article.varese-oltrepo-serie-d-2026.excerpt': 'Varese-Oltrepò wird am Sonntag, 11.',
+    'blog.article.varese-oltrepo-serie-d-2026.imageAlt': 'Stadio Franco Ossola in Varese für das Serie-D-Spiel',
 };
 
 export default blogMetaDe;
