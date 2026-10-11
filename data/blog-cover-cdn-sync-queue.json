@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-dosaggio-rampe-a2-chiasso.webp",
+      "sha256": "b8fa639544c1535e761e67a1fc8dc4ae7d63e375eec3a8c922ba157e28e75466"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-dosaggio-rampe-a2-chiasso-480w.webp",
+      "sha256": "66bb94b700bf8c913a086675eb17c200741073ecb8504a6a6b92be9a4d029d0a"
+    }
+  ]
 }
