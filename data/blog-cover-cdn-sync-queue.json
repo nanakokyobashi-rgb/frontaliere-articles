@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-varese-oltrepo-serie-d-2026.webp",
-      "sha256": "80f0bc2c67087db453a41cc0deaa421a31c7ce5a9cc00e5f4360fc1a332b459d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-varese-oltrepo-serie-d-2026-480w.webp",
-      "sha256": "8d690ed0ee27b60753d4873fe3698239f469082b0b20f7e02f05f9ba81cb8192"
-    }
-  ]
+  "items": []
 }
