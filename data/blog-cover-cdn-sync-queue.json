@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fagnano-spettacolo-beneficenza-marmotta.webp",
+      "sha256": "732b44bf4f5fd7abb75e588f79845f17022496a36dcb6f63676e8f2120d724c6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fagnano-spettacolo-beneficenza-marmotta-480w.webp",
+      "sha256": "30228e4d53a02cd95cea248eb66de5a6450ce8deb0da2a572f8e1c0166c3fb17"
+    }
+  ]
 }
