@@ -2,17 +2,21 @@
   "keywords": [],
   "strikes": {},
   "topicGateUrls": {
-    "canton-sz::https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26254": {
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/klausenpass-nachtliche-sperrung-wegen-belagsarbeiten-art-1726290": {
       "section": "canton-sz",
-      "ts": 1791469993679
+      "ts": 1791759134514
     },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/lammschlucht-ab-montag-acht-wochen-komplett-gesperrt-art-1725935": {
+    "canton-sz::https://www.einsiedleranzeiger.ch/2026/10/09/schwyz-zeigt-an-der-olma-was-der-kanton-zu-bieten-hat": {
       "section": "canton-sz",
-      "ts": 1791470070397
+      "ts": 1791759615680
     },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/adligenswil-28-wohnungen-und-migros-filiale-auf-dem-buetzi-areal-art-1725707": {
+    "canton-sz::https://www.einsiedleranzeiger.ch/2026/10/09/svp-schwyz-will-rueegsegger-fuer-den-bundesrat": {
       "section": "canton-sz",
-      "ts": 1791470131623
+      "ts": 1791760827360
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/juso-luzern-nominiert-valentin-humbel-fuer-die-regierungsratswahl-art-1726255": {
+      "section": "canton-sz",
+      "ts": 1791760835259
     }
   }
 }
