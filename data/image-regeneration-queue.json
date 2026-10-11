@@ -10,16 +10,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-11T13:38:57.418Z"
-    },
-    {
-      "articleId": "scontro-auto-gemonio-verdi",
-      "title": "Gemonio, scontro tra due auto: traffico bloccato",
-      "fallbackImage": "/images/blog/traffico-a2-bloccato.webp",
-      "reason": "All image providers failed for article-scontro-auto-gemonio-verdi: openai-codex (vision gate rejected image: Generic illustrated traffic-collision scene with a queue of cars; visible vehicle emblems/logos disqualify it.); gemini (Gemini ima",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-11T02:24:06.863Z",
-      "lastFailureAt": "2026-10-11T12:45:47.279Z"
     }
   ]
 }

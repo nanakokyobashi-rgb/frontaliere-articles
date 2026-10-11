@@ -105503,10 +105503,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Scontro tra due auto in via Verdi a Gemonio Incidente intorno alle 18 di sabato 10 ottobre Coinvolti un uomo di 23 anni e una donna di 56 Due ambulanze inviate",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/traffico-a2-bloccato.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-scontro-auto-gemonio-verdi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Strada di Mendrisio al tramonto con luci di emergenza"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T02:24:06+00:00",
       "dateModified": "2026-10-11T02:24:06+00:00",
