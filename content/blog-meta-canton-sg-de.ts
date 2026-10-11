@@ -21,6 +21,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.hsg-spin-off-ufficiali.title': 'HSG in St. Gallen: über 170 offizielle Spin-offs',
     'blog.article.hsg-spin-off-ufficiali.excerpt': 'Die HSG unterstützt Studierende bei der Gründung von Unternehmen und stellt einige der über 170 offiziellen HSG-Spin-offs vor.',
     'blog.article.hsg-spin-off-ufficiali.imageAlt': 'Studierende besprechen neue Unternehmen auf dem HSG-Campus in St. Gallen',
+    'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck und Mels: zwei Unfälle wegen Aquaplaning',
+    'blog.article.rheineck-mels-aquaplaning.excerpt': 'Zwei Autos prallten am 10.',
+    'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Verregnete Autobahn im Kanton St. Gallen mit Leitplanken',
 };
 
 export default blogMetaCantonSgDe;

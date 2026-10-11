@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rheineck-mels-aquaplaning',
+ category: 'pratico',
+ date: '2026-10-11T10:22:49.614Z',
+ image: '/images/blog/article-rheineck-mels-aquaplaning.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

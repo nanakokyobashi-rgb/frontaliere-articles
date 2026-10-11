@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'spital-grabs-haus-o-vertice': { it: 'spital-grabs-haus-o-vertice', en: 'spital-grabs-haus-o-highest-point', de: 'spital-grabs-haus-o-hoechster-punkt', fr: 'spital-grabs-haus-o-point-le-plus-haut' },
  'lavori-strada-wartau-plattis': { it: 'lavori-strada-wartau-plattis', en: 'roadworks-wartau-plattis', de: 'bauarbeiten-wartau-plattis', fr: 'travaux-routiers-wartau-plattis' },
  'hsg-spin-off-ufficiali': { it: 'hsg-spin-off-ufficiali', en: 'hsg-official-spin-offs', de: 'hsg-offizielle-spin-offs', fr: 'hsg-spin-off-officiels' },
+ 'rheineck-mels-aquaplaning': { it: 'rheineck-mels-aquaplaning', en: 'rheineck-mels-aquaplaning-crashes', de: 'rheineck-mels-aquaplaning-unfaelle', fr: 'rheineck-mels-aquaplanage-accidents' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -21,6 +21,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.hsg-spin-off-ufficiali.title': 'HSG à Saint-Gall : plus de 170 spin-off officiels',
     'blog.article.hsg-spin-off-ufficiali.excerpt': 'La HSG soutient les étudiants dans la création d’entreprises et présente quelques-uns des plus de 170 spin-off officiels de la HSG.',
     'blog.article.hsg-spin-off-ufficiali.imageAlt': 'Des étudiants discutent de nouvelles entreprises sur le campus HSG à Saint-Gall',
+    'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck et Mels : deux accidents dus à l’aquaplanage',
+    'blog.article.rheineck-mels-aquaplaning.excerpt': 'Deux voitures ont heurté les glissières de sécurité le 10 octobre 2026 Accidents distincts sur l’A1 et la N13 Les deux conducteurs n’ont pas été blessés',
+    'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Autoroute mouillée par la pluie dans le canton de Saint-Gall',
 };
 
 export default blogMetaCantonSgFr;

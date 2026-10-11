@@ -21,6 +21,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.hsg-spin-off-ufficiali.title': 'HSG in St. Gallen: over 170 official spin-offs',
     'blog.article.hsg-spin-off-ufficiali.excerpt': 'HSG supports students in founding companies and presents some of the more than 170 official HSG spin-offs.',
     'blog.article.hsg-spin-off-ufficiali.imageAlt': 'Students discuss new ventures on the HSG campus in St. Gallen',
+    'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck and Mels: two hydroplaning accidents',
+    'blog.article.rheineck-mels-aquaplaning.excerpt': 'Two cars hit the guardrails on October 10, 2026 Separate accidents on A1 and N13 The two drivers were not injured Damage: approximately CHF 35\'000 and CHF 4\'000',
+    'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Rain-soaked motorway in the Canton of St. Gallen with guardrails',
 };
 
 export default blogMetaCantonSgEn;

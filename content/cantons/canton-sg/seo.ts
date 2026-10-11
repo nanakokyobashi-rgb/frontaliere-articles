@@ -231,6 +231,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rheineck-mels-aquaplaning': {
+    title: 'Rheineck e Mels: due incidenti per aquaplaning',
+    description: 'Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35\'000 e CHF',
+    keywords: 'frontalieri, ticino, svizzera, italia, rheineck, mels, incidenti, aquaplaning',
+    ogTitle: 'Rheineck e Mels: due incidenti per aquaplaning',
+    ogDescription: 'Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35\'000 e CHF',
+    canonicalPath: '/articoli-san-gallo/rheineck-mels-aquaplaning/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rheineck e Mels: due incidenti per aquaplaning",
+      "description": "Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35'000 e CHF",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rheineck-mels-aquaplaning.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autostrada bagnata nel Canton San Gallo con guardrail e cielo coperto"
+      },
+      "datePublished": "2026-10-11T10:22:49+00:00",
+      "dateModified": "2026-10-11T10:22:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/rheineck-mels-aquaplaning/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

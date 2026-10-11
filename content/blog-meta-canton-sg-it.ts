@@ -21,6 +21,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.hsg-spin-off-ufficiali.title': 'HSG a San Gallo: oltre 170 spin-off ufficiali',
     'blog.article.hsg-spin-off-ufficiali.excerpt': 'La HSG sostiene gli studenti nella fondazione di imprese e presenta alcuni degli oltre 170 spin-off ufficiali HSG.',
     'blog.article.hsg-spin-off-ufficiali.imageAlt': 'Studenti discutono di nuove imprese nel campus HSG a San Gallo',
+    'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck e Mels: due incidenti per aquaplaning',
+    'blog.article.rheineck-mels-aquaplaning.excerpt': 'Due auto hanno urtato i guardrail il 10 ottobre 2026 Incidenti distinti su A1 e N13 I due conducenti non hanno riportato ferite Danni: circa CHF 35\'000 e CHF',
+    'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Autostrada bagnata nel Canton San Gallo con guardrail e cielo coperto',
 };
 
 export default blogMetaCantonSgIt;
