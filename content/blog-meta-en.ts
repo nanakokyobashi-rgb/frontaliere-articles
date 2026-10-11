@@ -13001,6 +13001,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.dosaggio-rampe-a2-chiasso.title': 'A2 towards Chiasso: USTRA evaluates ramp metering',
     'blog.article.dosaggio-rampe-a2-chiasso.excerpt': 'USTRA evaluates over 120 points for dosage.',
     'blog.article.dosaggio-rampe-a2-chiasso.imageAlt': 'A2 motorway in Ticino with a ramp-metering traffic light',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.title': 'Malnate, an entrepreneur found dead in the company',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.excerpt': 'At Malnate, a 52-year-old woman was found dead.',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.imageAlt': 'Quiet industrial street in Ticino at afternoon light, with a sober documentary mood.',
 };
 
 export default blogMetaEn;

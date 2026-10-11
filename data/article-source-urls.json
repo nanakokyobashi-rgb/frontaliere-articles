@@ -1,5 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/08/14/leggi-notizia/argomenti/economia-13/articolo/i-frontalieri-italiani-in-canton-ticino-sono-in-calo.html": "frontalieri-italiani-canton-ticino-calano",
   "https://www.laregione.ch/cantone/luganese/1943933/infortunio-sul-lavoro-a-miglieglia-gravi-le-condizioni-dell-uomo-caduto-nel-dirupo": "infortunio-lavoro-miglieglia",
   "https://www.laregione.ch/cantone/mendrisiotto/1943904/ancora-in-calo-i-soggiorni-irregolari-alla-frontiera-sud": "calo-soggiorni-irregolari-luglio",
   "https://www.laregione.ch/cantone/luganese/1943896/atterra-ad-agno-con-un-bagaglio-carico-di-borse-griffate-false-e-abiti-non-dichiarati": "frontalieri-contraffazioni-svizzera",
@@ -2416,6 +2415,11 @@
   "https://www.ticinonews.ch/svizzera/code-in-autostrada-berna-studia-il-dosaggio-alle-entrate-444395": {
     "articleId": "dosaggio-rampe-a2-chiasso",
     "ts": "2026-10-11T10:28:46.645Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/sgomento-a-malnate-imprenditrice-trovata-senza-vita-nellazienda-di-famiglia/2704162": {
+    "articleId": "malnate-imprenditrice-azienda-famiglia",
+    "ts": "2026-10-11T10:55:35.074Z",
     "keyForm": 2
   }
 }

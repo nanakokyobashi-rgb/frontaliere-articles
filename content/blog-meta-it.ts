@@ -13002,6 +13002,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.dosaggio-rampe-a2-chiasso.title': 'A2 verso Chiasso: USTRA valuta il dosaggio alle rampe',
     'blog.article.dosaggio-rampe-a2-chiasso.excerpt': 'L\'USTRA valuta oltre 120 punti per il dosaggio.',
     'blog.article.dosaggio-rampe-a2-chiasso.imageAlt': 'A2 in Ticino con semaforo di dosaggio alle rampe autostradali',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.title': 'Malnate, imprenditrice trovata senza vita in ditta',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.excerpt': 'A Malnate è stata trovata senza vita una donna di 52 anni Il corpo è stato rinvenuto nell’azienda di famiglia, in via dei Tre Corsi Nel luogo del ritrovamento',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.imageAlt': 'Strada industriale ticinese in luce pomeridiana, con atmosfera sobria e documentaria.',
 };
 
 export default blogMetaIt;

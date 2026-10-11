@@ -13000,6 +13000,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.dosaggio-rampe-a2-chiasso.title': 'A2 Richtung Chiasso: USTRA prüft die Zuflussdosierung an den Rampen',
     'blog.article.dosaggio-rampe-a2-chiasso.excerpt': 'Die USTRA prüft mehr als 120 Punkte für die Zuflussdosierung.',
     'blog.article.dosaggio-rampe-a2-chiasso.imageAlt': 'A2 im Tessin mit Ampel zur Zuflussregelung an der Autobahnrampe',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.title': 'Kranke Unternehmerin tot in Firma aufgefunden',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.excerpt': 'Bei Malnate wurde eine 52-jährige Frau tot aufgefunden.',
+    'blog.article.malnate-imprenditrice-azienda-famiglia.imageAlt': 'Ruhige Industriestrasse im Tessin im Nachmittagslicht, mit nüchterner dokumentarischer Stimmung.',
 };
 
 export default blogMetaDe;
