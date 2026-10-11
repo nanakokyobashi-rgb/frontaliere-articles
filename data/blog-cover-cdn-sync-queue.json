@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-malnate-imprenditrice-azienda-famiglia.webp",
-      "sha256": "40d42b97749923f47c7c7ba99e25b0af10ee5dcff61b5752e30f45e7588144ed"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-malnate-imprenditrice-azienda-famiglia-480w.webp",
-      "sha256": "80f9bd0b5dfc7b5ee2d393608ee4c1ee5cfc30cad1400549b0af054abd20f49d"
-    }
-  ]
+  "items": []
 }
