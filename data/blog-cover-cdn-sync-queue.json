@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-sementina-viabilita-posteggi-ciossetto.webp",
+      "sha256": "690506c4f484fff95d72edc59224fc8232559597502f8f81056ec0c39153717f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-sementina-viabilita-posteggi-ciossetto-480w.webp",
+      "sha256": "9ade8f0d71238666730be7c2c0c6ea1820eb943a8fed28005a21dbba482bc88d"
+    }
+  ]
 }
