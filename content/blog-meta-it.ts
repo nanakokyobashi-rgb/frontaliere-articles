@@ -12981,6 +12981,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.varese-oltrepo-serie-d-2026.title': 'Varese-Oltrepò: data, orario e dove vedere la sfida',
     'blog.article.varese-oltrepo-serie-d-2026.excerpt': 'Varese-Oltrepò si gioca domenica 11 ottobre alle 15 Il Varese arriva da due sconfitte consecutive Otto gol subiti nelle ultime due partite Obiettivo: la prima',
     'blog.article.varese-oltrepo-serie-d-2026.imageAlt': 'Stadio Franco Ossola di Varese per la partita di Serie D',
+    'blog.article.scontro-auto-gemonio-verdi.title': 'Gemonio, scontro tra due auto: traffico bloccato',
+    'blog.article.scontro-auto-gemonio-verdi.excerpt': 'Scontro tra due auto in via Verdi a Gemonio Incidente intorno alle 18 di sabato 10 ottobre Coinvolti un uomo di 23 anni e una donna di 56 Due ambulanze inviate',
+    'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Strada di Mendrisio al tramonto con luci di emergenza',
 };
 
 export default blogMetaIt;

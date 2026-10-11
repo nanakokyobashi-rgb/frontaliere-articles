@@ -12979,6 +12979,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.varese-oltrepo-serie-d-2026.title': 'Varese-Oltrepò: Datum, Uhrzeit und wo das Spiel zu sehen ist',
     'blog.article.varese-oltrepo-serie-d-2026.excerpt': 'Varese-Oltrepò wird am Sonntag, 11.',
     'blog.article.varese-oltrepo-serie-d-2026.imageAlt': 'Stadio Franco Ossola in Varese für das Serie-D-Spiel',
+    'blog.article.scontro-auto-gemonio-verdi.title': 'Gemonio, Zusammenstoß zweier Autos: Verkehr blockiert',
+    'blog.article.scontro-auto-gemonio-verdi.excerpt': 'Zusammenstoß zwischen zwei Autos in der Via Verdi bei Gemonio Unfall gegen 18 Uhr am Samstag, 10.',
+    'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Strasse in Mendrisio bei Dämmerung mit Blaulicht',
 };
 
 export default blogMetaDe;

@@ -43770,6 +43770,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'scontro-auto-gemonio-verdi',
+ category: 'novita',
+ date: '2026-10-11T02:24:06.537Z',
+ image: '/images/blog/traffico-a2-bloccato.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

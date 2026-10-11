@@ -12980,6 +12980,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.varese-oltrepo-serie-d-2026.title': 'Varese-Oltrepò: date, time and where to watch the match',
     'blog.article.varese-oltrepo-serie-d-2026.excerpt': 'Varese-Oltrepò will be played on Sunday, October 11 at 15 Varese comes off two consecutive defeats Eight goals conceded in the last two matches Objective: the first one',
     'blog.article.varese-oltrepo-serie-d-2026.imageAlt': 'Franco Ossola stadium in Varese for the Serie D match',
+    'blog.article.scontro-auto-gemonio-verdi.title': 'Gemonio, clash between two cars: blocked traffic',
+    'blog.article.scontro-auto-gemonio-verdi.excerpt': 'Clash between two cars in Via Verdi at Gemonio Incident around 18:00 on Saturday 10 October Involved a 23-year-old man and a 56-year-old woman Two ambulances sent',
+    'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Mendrisio road at dusk with emergency lights',
 };
 
 export default blogMetaEn;

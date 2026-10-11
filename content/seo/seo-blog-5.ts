@@ -105489,6 +105489,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scontro-auto-gemonio-verdi': {
+    title: 'Gemonio, scontro tra due auto: traffico bloccato',
+    description: 'Scontro tra due auto in via Verdi a Gemonio Incidente intorno alle 18 di sabato 10 ottobre Coinvolti un uomo di 23 anni e una donna di 56 Due ambulanze inviate',
+    keywords: 'frontalieri, ticino, svizzera, italia, gemonio, scontro, auto, traffico',
+    ogTitle: 'Gemonio, scontro tra due auto e traffico in tilt',
+    ogDescription: 'Scontro tra due auto in via Verdi a Gemonio Incidente intorno alle 18 di sabato 10 ottobre Coinvolti un uomo di 23 anni e una donna di 56 Due ambulanze inviate',
+    canonicalPath: '/articoli-frontaliere/scontro-auto-gemonio-verdi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gemonio, scontro tra due auto: traffico bloccato",
+      "description": "Scontro tra due auto in via Verdi a Gemonio Incidente intorno alle 18 di sabato 10 ottobre Coinvolti un uomo di 23 anni e una donna di 56 Due ambulanze inviate",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/traffico-a2-bloccato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada di Mendrisio al tramonto con luci di emergenza"
+      },
+      "datePublished": "2026-10-11T02:24:06+00:00",
+      "dateModified": "2026-10-11T02:24:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scontro-auto-gemonio-verdi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
