@@ -8066,6 +8066,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.riqualificazione-uri-domanda.title': 'Incentivi energetici in Uri: requisiti e domanda',
     'blog.article.riqualificazione-uri-domanda.excerpt': 'A Uri i programmi riguardano il risanamento di edifici e impianti.',
     'blog.article.riqualificazione-uri-domanda.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.permesso-edilizio-uri.title': 'Autorizzazione edilizia canton Uri: requisiti e procedura',
+    'blog.article.permesso-edilizio-uri.excerpt': 'Nel Cantone di Uri l\'autorizzazione edilizia richiede verifiche su requisiti, documenti, uffici, termini e opposizioni: i lavori partono solo dopo il permesso.',
+    'blog.article.permesso-edilizio-uri.imageAlt': 'Piani edilizi e documenti per un\'autorizzazione nel Cantone di Uri',
 };
 
 export default blogMetaChIt;

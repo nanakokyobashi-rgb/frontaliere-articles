@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/economia/1955776/plug-in-auto-spina-ticino-veicoli": {
-      "section": "frontaliere",
-      "ts": 1791539851603
-    },
-    "frontaliere::https://www.tio.ch/svizzera/politica/1955773/progetto-trasporti-miliardi-federale-particolare-ferrovia-ampliamento-svizzera": {
-      "section": "frontaliere",
-      "ts": 1791541591545
-    },
-    "svizzera::https://www.swissinfo.ch/ita/%22ia-potrebbe-manipolare-mercati-finanziari%2c-pericoli-sottovalutati%22/92191096": {
-      "section": "svizzera",
-      "ts": 1791542516386
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/tilo-s50-soppressi-tra-malpensa-t1-e-t2-dal-12-al-24-ottobre-444291": {
       "section": "frontaliere",
       "ts": 1791545133570
@@ -1052,6 +1040,10 @@
     "frontaliere::https://www.ocst.ch/il-sindacato/piu-di-cento-anni-di-storia": {
       "section": "frontaliere",
       "ts": 1791712283800
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1956019/solari-quadri-e-huber-regina-e-re-del-tiro-al-san-gottardo": {
+      "section": "svizzera",
+      "ts": 1791717049929
     }
   }
 }

@@ -8066,6 +8066,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.riqualificazione-uri-domanda.title': 'Energetische Förderungen in Uri: Voraussetzungen und Antrag',
     'blog.article.riqualificazione-uri-domanda.excerpt': 'In Uri betreffen die Programme die Sanierung von Gebäuden und Anlagen.',
     'blog.article.riqualificazione-uri-domanda.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.permesso-edilizio-uri.title': 'Baubewilligung im Kanton Uri: Anforderungen und Verfahren',
+    'blog.article.permesso-edilizio-uri.excerpt': 'Im Kanton Uri erfordert die Baubewilligung die Prüfung von Anforderungen, Unterlagen, Behörden, Fristen und Einsprachen: Die Arbeiten beginnen erst nach der Bewilligung.',
+    'blog.article.permesso-edilizio-uri.imageAlt': 'Baupläne und Unterlagen für eine Baubewilligung im Kanton Uri',
 };
 
 export default blogMetaChDe;

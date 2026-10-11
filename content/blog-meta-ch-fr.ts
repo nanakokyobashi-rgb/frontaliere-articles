@@ -8066,6 +8066,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.riqualificazione-uri-domanda.title': 'Incitations énergétiques à Uri : exigences et demande',
     'blog.article.riqualificazione-uri-domanda.excerpt': 'À Uri, les programmes concernent l’assainissement de bâtiments et d’installations.',
     'blog.article.riqualificazione-uri-domanda.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.permesso-edilizio-uri.title': 'Autorisation de construire dans le canton d’Uri : exigences et procédure',
+    'blog.article.permesso-edilizio-uri.excerpt': 'Dans le canton d’Uri, l’autorisation de construire nécessite des vérifications concernant les exigences, les documents, les services compétents, les délais et les oppositions : les travaux ne commencent qu’après l’autorisation.',
+    'blog.article.permesso-edilizio-uri.imageAlt': 'Plans et documents pour une autorisation de construire dans le canton d\'Uri',
 };
 
 export default blogMetaChFr;

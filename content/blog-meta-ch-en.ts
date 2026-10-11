@@ -8066,6 +8066,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.riqualificazione-uri-domanda.title': 'Energy incentives in Uri: requirements and application',
     'blog.article.riqualificazione-uri-domanda.excerpt': 'In Uri, the programs concern the renovation of buildings and facilities.',
     'blog.article.riqualificazione-uri-domanda.imageAlt': 'Illustration generated for this article',
+    'blog.article.permesso-edilizio-uri.title': 'Building permit in the canton of Uri: requirements and procedure',
+    'blog.article.permesso-edilizio-uri.excerpt': 'In the Canton of Uri, a building permit requires checks on requirements, documents, offices, deadlines and objections: work may begin only after the permit has been issued.',
+    'blog.article.permesso-edilizio-uri.imageAlt': 'Building plans and documents for a permit in the canton of Uri',
 };
 
 export default blogMetaChEn;
