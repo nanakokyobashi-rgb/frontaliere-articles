@@ -12971,7 +12971,10 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'Vista di una zona residenziale a Ternate, Varese',
     'blog.article.festival-biblioterapia-laveno-2026.title': 'Laveno Mombello, al via il Festival della Biblioterapia',
     'blog.article.festival-biblioterapia-laveno-2026.excerpt': 'A Villa Frua sono iniziati i laboratori del festival.',
-    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Interni di Villa Frua a Laveno Mombello durante il Festival della Biblioterapia',
+    'blog.article.sementina-viabilita-posteggi-ciossetto.title': 'Sementina: posteggi e viabilità al Ciossetto',
+    'blog.article.sementina-viabilita-posteggi-ciossetto.excerpt': 'A Sementina l\'incontro ha evidenziato rischi per i pedoni Via Alla Roggia è senza marciapiede e ha limite di 30 km/h Il posteggio del Ciossetto consente soste',
+    'blog.article.sementina-viabilita-posteggi-ciossetto.imageAlt': 'Via Alla Roggia a Sementina, strada senza marciapiede e posteggio del Ciossetto',
 };
 
 export default blogMetaIt;

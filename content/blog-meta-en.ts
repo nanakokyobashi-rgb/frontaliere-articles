@@ -12970,7 +12970,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'View of a residential area in Ternate, Varese',
     'blog.article.festival-biblioterapia-laveno-2026.title': 'Laveno Mombello, the Bibliotherapy Festival gets underway',
     'blog.article.festival-biblioterapia-laveno-2026.excerpt': 'The festival workshops have begun at Villa Frua.',
-    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Illustration generated for this article',
+    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Interiors of Villa Frua in Laveno Mombello during the Bibliotherapy Festival',
+    'blog.article.sementina-viabilita-posteggi-ciossetto.title': 'Sementina: parking spaces and roads at the Ciossetto',
+    'blog.article.sementina-viabilita-posteggi-ciossetto.excerpt': 'In Sementina the meeting highlighted risks for pedestrians Via Alla Roggia is without sidewalk and has a limit of 30 km/h The parking lot of the Ciossetto allows stops',
+    'blog.article.sementina-viabilita-posteggi-ciossetto.imageAlt': 'Via Alla Roggia in Sementina, road without sidewalk and Ciossetto parking',
 };
 
 export default blogMetaEn;

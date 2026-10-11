@@ -105372,6 +105372,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sementina-viabilita-posteggi-ciossetto': {
+    title: 'Sementina: posteggi e viabilità al Ciossetto | Frontaliere Ticino',
+    description: 'A Sementina l\'incontro ha evidenziato rischi per i pedoni Via Alla Roggia è senza marciapiede e ha limite di 30 km/h Il posteggio del Ciossetto consente soste',
+    keywords: 'frontalieri, ticino, svizzera, italia, sementina, posteggi, viabilità, ciossetto',
+    ogTitle: 'Sementina: posteggi e viabilità al Ciossetto',
+    ogDescription: 'A Sementina l\'incontro ha evidenziato rischi per i pedoni Via Alla Roggia è senza marciapiede e ha limite di 30 km/h Il posteggio del Ciossetto consente soste',
+    canonicalPath: '/articoli-frontaliere/sementina-viabilita-posteggi-ciossetto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sementina: posteggi e viabilità al Ciossetto",
+      "description": "A Sementina l'incontro ha evidenziato rischi per i pedoni Via Alla Roggia è senza marciapiede e ha limite di 30 km/h Il posteggio del Ciossetto consente soste",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sementina-viabilita-posteggi-ciossetto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Via Alla Roggia a Sementina, strada senza marciapiede e posteggio del Ciossetto"
+      },
+      "datePublished": "2026-10-11T00:58:55+00:00",
+      "dateModified": "2026-10-11T00:58:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sementina-viabilita-posteggi-ciossetto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
