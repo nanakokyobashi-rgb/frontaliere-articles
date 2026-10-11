@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-rheineck-mels-aquaplaning.webp",
+      "sha256": "70d67c64f800ced2cbab2a352bf43c3d2dbc446f2156c469534ee4212fc7081f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-rheineck-mels-aquaplaning-480w.webp",
+      "sha256": "c396dae2677a4cd88ac78d118200027bedf6fdb80c862a652cbcc8d4840ff303"
+    }
+  ]
 }
