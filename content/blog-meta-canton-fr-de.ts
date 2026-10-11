@@ -18,6 +18,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.garanzia-hib-payerne.title': 'Freiburg: Garantie in Höhe von CHF 44,8 Millionen für das HIB-Spital',
     'blog.article.garanzia-hib-payerne.excerpt': 'CHF 44,8 Millionen für die Finanzierung des HIB 103 abgegebene Stimmen, alle dafür Bauarbeiten zwischen 2028 und 2032 vorgesehen Der Kanton Waadt muss noch CHF',
     'blog.article.garanzia-hib-payerne.imageAlt': 'Erweiterungsprojekt des Interkantonalen Spitals der Broye in Payerne.',
+    'blog.article.frontalieri-friburgo-giugno-2026.title': 'Freiburg: 2140 ausländische Grenzgänger Ende Juni 2026',
+    'blog.article.frontalieri-friburgo-giugno-2026.excerpt': 'Freiburg zählte Ende Juni 2026 2140 ausländische Grenzgänger: +940 seit 2021 und +280 im letzten Jahr, laut den von SSD und OFS veröffentlichten Daten.',
+    'blog.article.frontalieri-friburgo-giugno-2026.imageAlt': 'Pendler auf einer Strasse im Kanton Freiburg an einem Arbeitstag',
 };
 
 export default blogMetaCantonFrDe;

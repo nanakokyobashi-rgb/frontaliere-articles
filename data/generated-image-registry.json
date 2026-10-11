@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 360,
+  "assetCount": 361,
   "assets": [
     {
       "schema": 1,
@@ -13740,6 +13740,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic basketball illustration with no text, logos, watermarks, or identifiable people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-frontalieri-friburgo-giugno-2026",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "8f811b1e3fff78ab904040b2d94b65dcd8e72373cbf1c6e69bca85c9ffcc621b",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "4b6c9be22fd5498aeeaed34047b96aecfe1d0332160325fae8c8e159f6e515c5",
+      "bytes": 145892,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-11T06:17:58.832Z",
+      "verifiedAt": "2026-10-11T06:18:12.709Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-frontalieri-friburgo-giugno-2026.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic original editorial illustration of commuters in a Swiss urban setting, with no readable text, logos, or identifiable people."
       }
     }
   ]

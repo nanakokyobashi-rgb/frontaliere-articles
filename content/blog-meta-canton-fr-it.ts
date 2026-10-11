@@ -18,6 +18,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.garanzia-hib-payerne.title': 'Friburgo: garanzia da CHF 44,8 milioni per l\'ospedale HIB',
     'blog.article.garanzia-hib-payerne.excerpt': 'CHF 44,8 milioni per il finanziamento dell\'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2',
     'blog.article.garanzia-hib-payerne.imageAlt': 'Progetto di ampliamento dell\'ospedale intercantonale della Broye a Payerne.',
+    'blog.article.frontalieri-friburgo-giugno-2026.title': 'Friburgo: 2140 frontalieri esteri a fine giugno 2026',
+    'blog.article.frontalieri-friburgo-giugno-2026.excerpt': 'Friburgo contava 2140 frontalieri esteri a fine giugno 2026: +940 dal 2021 e +280 nell\'ultimo anno, nei dati pubblicati da SSD e OFS.',
+    'blog.article.frontalieri-friburgo-giugno-2026.imageAlt': 'Pendolari in una strada del Canton Friburgo durante una giornata lavorativa',
 };
 
 export default blogMetaCantonFrIt;

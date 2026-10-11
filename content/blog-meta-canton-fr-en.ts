@@ -18,6 +18,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.garanzia-hib-payerne.title': 'Fribourg: CHF 44,8 million guarantee for HIB hospital',
     'blog.article.garanzia-hib-payerne.excerpt': 'CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →',
     'blog.article.garanzia-hib-payerne.imageAlt': 'Expansion project for the Intercantonal Hospital of the Broye in Payerne.',
+    'blog.article.frontalieri-friburgo-giugno-2026.title': 'Fribourg: 2140 foreign cross-border commuters at the end of June 2026',
+    'blog.article.frontalieri-friburgo-giugno-2026.excerpt': 'Fribourg had 2140 foreign cross-border workers at the end of June 2026: +940 since 2021 and +280 over the past year, according to data published by SSD and OFS.',
+    'blog.article.frontalieri-friburgo-giugno-2026.imageAlt': 'Commuters on a street in the canton of Fribourg during a working day',
 };
 
 export default blogMetaCantonFrEn;

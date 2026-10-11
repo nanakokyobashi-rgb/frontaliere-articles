@@ -192,6 +192,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-friburgo-giugno-2026': {
+    title: 'Friburgo: 2140 frontalieri esteri a fine giugno 2026',
+    description: 'Friburgo contava 2140 frontalieri esteri a fine giugno 2026: +940 dal 2021 e +280 nell\'ultimo anno, nei dati pubblicati da SSD e OFS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, friburgo, 2140, esteri, fine',
+    ogTitle: 'Friburgo: 2140 frontalieri esteri a giugno 2026',
+    ogDescription: 'Il Service de la statistique et de la donnée pubblica per la prima volta i dati OFS sui lavoratori frontalieri esteri del Canton Friburgo: 2140 a fine giugno 2026, 940 in più rispetto a giugno 2021 e 280 nell\'ultimo anno.',
+    canonicalPath: '/articoli-friburgo/frontalieri-friburgo-giugno-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Friburgo: 2140 frontalieri esteri a fine giugno 2026",
+      "description": "Friburgo contava 2140 frontalieri esteri a fine giugno 2026: +940 dal 2021 e +280 nell'ultimo anno, nei dati pubblicati da SSD e OFS.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-friburgo-giugno-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pendolari in una strada del Canton Friburgo durante una giornata lavorativa"
+      },
+      "datePublished": "2026-10-11T06:18:12+00:00",
+      "dateModified": "2026-10-11T06:18:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/frontalieri-friburgo-giugno-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-friburgo-giugno-2026',
+ category: 'novita',
+ date: '2026-10-11T06:18:12.750Z',
+ image: '/images/blog/article-frontalieri-friburgo-giugno-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
