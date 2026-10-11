@@ -818,6 +818,68 @@ test('il retry automatico delle voci failed aspetta la finestra dall ultimo fall
   }
 });
 
+test('il primo fallimento automatico entra subito nel cooldown', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'automatic-cooldown-after-first-failure';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+
+    let calls = 0;
+    const generate = async (...args) => {
+      calls += 1;
+      if (calls === 1) throw new Error('provider unavailable');
+      return fakeCover(root)(...args);
+    };
+    const first = await drain({
+      root,
+      limit: 1,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-07T13:00:00.000Z',
+      generateCover: generate,
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(first.failed, 1);
+    assert.equal(calls, 1);
+    assert.deepEqual(first.requeued, []);
+    const afterFirstFailure = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items[0];
+    assert.equal(afterFirstFailure.status, 'failed');
+    assert.equal(afterFirstFailure.failureCount, 1);
+
+    const tooSoon = await drain({
+      root,
+      limit: 1,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-07T18:59:59.000Z',
+      generateCover: generate,
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(tooSoon.drained, 0);
+    assert.equal(tooSoon.failed, 0);
+    assert.deepEqual(tooSoon.requeued, []);
+    assert.equal(calls, 1);
+
+    const afterCooldown = await drain({
+      root,
+      limit: 1,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-07T19:00:00.000Z',
+      generateCover: generate,
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(afterCooldown.drained, 1);
+    assert.deepEqual(afterCooldown.requeued, [articleId]);
+    assert.equal(calls, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('un fallimento conserva articolo e coda, e il terzo tentativo resta marcato', async () => {
   const root = tempRoot();
   try {

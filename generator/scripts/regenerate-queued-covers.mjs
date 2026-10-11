@@ -595,7 +595,11 @@ export async function drainQueuedCovers({
       if (outcome?.snapshots) restoreTransaction(outcome.snapshots);
       const failureCount = Number.isInteger(item.failureCount) && item.failureCount >= 0 ? item.failureCount + 1 : 1;
       item.failureCount = failureCount;
-      item.status = failureCount >= 3 ? 'failed' : 'queued';
+      // Automatic runs pass an explicit cooldown. Persist the first failure as
+      // failed immediately so the next automatic run cannot select it while
+      // the cooldown is active. Manual callers keep the bounded immediate
+      // retry burst because they deliberately omit the cooldown.
+      item.status = retryAfterHours !== null || failureCount >= 3 ? 'failed' : 'queued';
       item.lastFailureAt = typeof now === 'function' ? now() : String(now);
       item.reason = normalizeReason(error);
       write(queue);
