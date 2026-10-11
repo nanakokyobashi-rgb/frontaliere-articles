@@ -43866,7 +43866,7 @@ const RAW_ARTICLES = [
  id: 'openjobmetis-trieste-dopopartita-podcast',
  category: 'pratico',
  date: '2026-10-11T12:37:34.866Z',
- image: '/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp',
+ image: '/images/blog/article-openjobmetis-trieste-dopopartita-podcast.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

@@ -13013,7 +13013,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'Les chiffres du 11 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.title': 'Openjobmetis-Trieste 85-84 : le podcast de l\'après-partie',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.excerpt': 'Openjobmetis bat Trieste 85-84 Della Valle marque le but à 7 dixièmes de la fin Varese centre la deuxième victoire consécutive Résultat → 85-84 Décisif →',
-    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Studio du podcast Dal Parquet de VareseNews',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

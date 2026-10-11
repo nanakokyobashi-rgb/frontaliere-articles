@@ -15,21 +15,11 @@
       "articleId": "scontro-auto-gemonio-verdi",
       "title": "Gemonio, scontro tra due auto: traffico bloccato",
       "fallbackImage": "/images/blog/traffico-a2-bloccato.webp",
-      "reason": "All image providers failed for article-scontro-auto-gemonio-verdi: openai-codex (vision gate rejected image: Generic editorial illustration of a two-car collision causing a traffic queue; visible automotive manufacturer badges/logos make it",
+      "reason": "All image providers failed for article-scontro-auto-gemonio-verdi: openai-codex (vision gate rejected image: Generic illustrated traffic-collision scene with a queue of cars; visible vehicle emblems/logos disqualify it.); gemini (Gemini ima",
       "status": "failed",
-      "failureCount": 3,
+      "failureCount": 1,
       "requestedAt": "2026-10-11T02:24:06.863Z",
-      "lastFailureAt": "2026-10-11T06:38:00.945Z"
-    },
-    {
-      "articleId": "openjobmetis-trieste-dopopartita-podcast",
-      "title": "Openjobmetis-Trieste 85-84: il podcast del dopopartita",
-      "fallbackImage": "/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T12:37:35.303Z",
-      "lastFailureAt": "2026-10-11T12:37:35.303Z"
+      "lastFailureAt": "2026-10-11T12:45:47.279Z"
     }
   ]
 }

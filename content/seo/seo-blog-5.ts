@@ -105854,10 +105854,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp`,
+        "url": `${BASE_URL}/images/blog/article-openjobmetis-trieste-dopopartita-podcast.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Studio del podcast Dal Parquet di VareseNews"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T12:37:34+00:00",
       "dateModified": "2026-10-11T12:37:34+00:00",

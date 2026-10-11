@@ -13010,7 +13010,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'Die Zahlen vom 11. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.title': 'Openjobmetis-Triest 85-84: der Post-Party-Podcast',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.excerpt': 'Openjobmetis schlägt Triest 85-84 Della Valle erzielt 7 Zehntel vor Ende Varese den zweiten Sieg in Folge Ergebnis → 85-84 Entscheidend →',
-    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Dal Parquet Podcast Studio von VareseNews',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;
