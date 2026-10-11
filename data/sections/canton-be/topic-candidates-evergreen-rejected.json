@@ -2,58 +2,6 @@
   "keywords": [],
   "strikes": {},
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/700414/berner-regierung-will-steuerbefreiung-f%c3%bcr-wohnimmobilien-ausdehnen": {
-      "section": "canton-be",
-      "ts": 1791444236235
-    },
-    "canton-be::https://ajour.ch/story/700232/kaum-geld-im-erneuerungsfonds-so-k%c3%b6nnen-sie-notwendige-renovationsarbeiten-finanzieren": {
-      "section": "canton-be",
-      "ts": 1791444243291
-    },
-    "canton-be::https://ajour.ch/story/700659/berner-mindestlohnkomitee-macht-druck-auf-verwaltungsgericht": {
-      "section": "canton-be",
-      "ts": 1791444244294
-    },
-    "canton-be::https://ajour.ch/story/700305/berne-acclre-la-transition-vers-les-vhicules-lectriques": {
-      "section": "canton-be",
-      "ts": 1791444245703
-    },
-    "canton-be::https://ajour.ch/story/700579/schlechtere-bedingungen-weniger-kunden-warum-der-strompreis-in-biel-steigt": {
-      "section": "canton-be",
-      "ts": 1791444246921
-    },
-    "canton-be::https://ajour.ch/story/700199/bieler-verkehrsknoten-wird-umgebaut": {
-      "section": "canton-be",
-      "ts": 1791444247985
-    },
-    "canton-be::https://ajour.ch/story/700368/arbeitslosenzahlen-sinken-leicht-und-sind-nun-genau-gleich-hoch-wie-vor-einem-jahr": {
-      "section": "canton-be",
-      "ts": 1791444249245
-    },
-    "canton-be::https://ajour.ch/story/700465/wegen-bauarbeiten-n%c3%a4chtliche-sperrungen-auf-der-autobahn-a5-bei-verzweigung-luterbach": {
-      "section": "canton-be",
-      "ts": 1791444250489
-    },
-    "canton-be::https://ajour.ch/story/700736/sperrungen-auf-der-a6-im-raum-br%c3%bcgg": {
-      "section": "canton-be",
-      "ts": 1791487193822
-    },
-    "canton-be::https://ajour.ch/story/700764/f%c3%bcr-die-berner-wirtschaft-k%c3%b6nnte-2026-besser-ausfallen-als-erwartet": {
-      "section": "canton-be",
-      "ts": 1791487200531
-    },
-    "canton-be::https://ajour.ch/story/700743/sbbbauarbeiten-hauptstrasse-bei-ligerz-in-der-nacht-auf-samstag-gesperrt": {
-      "section": "canton-be",
-      "ts": 1791487210955
-    },
-    "canton-be::https://ajour.ch/story/700772/poursuite-de-la-croissance-de-lconomie-bernoise": {
-      "section": "canton-be",
-      "ts": 1791528336367
-    },
-    "canton-be::https://ajour.ch/story/700727/pensionskasse-des-bundes-best%c3%a4tigt-cyberangriff-sind-bundesr%c3%a4te-betroffen": {
-      "section": "canton-be",
-      "ts": 1791528337488
-    },
     "canton-be::https://ajour.ch/story/700245/so-will-man-im-jurabogen-die-gesundheitskosten-senken": {
       "section": "canton-be",
       "ts": 1791616010457
@@ -65,6 +13,34 @@
     "canton-be::https://ajour.ch/story/701055/pr%c3%a4mien-wieso-ist-das-telefon-pl%c3%b6tzlich-teurer-als-der-arzt": {
       "section": "canton-be",
       "ts": 1791616015866
+    },
+    "canton-be::https://ajour.ch/story/700772/poursuite-de-la-croissance-de-lconomie-bernoise": {
+      "section": "canton-be",
+      "ts": 1791702881252
+    },
+    "canton-be::https://ajour.ch/story/700764/f%c3%bcr-die-berner-wirtschaft-k%c3%b6nnte-2026-besser-ausfallen-als-erwartet": {
+      "section": "canton-be",
+      "ts": 1791702882474
+    },
+    "canton-be::https://ajour.ch/story/700883/gewitterwolken-%c3%bcber-dem-finanzmarkt-partners-group-holt-die-segel-ein": {
+      "section": "canton-be",
+      "ts": 1791702883534
+    },
+    "canton-be::https://ajour.ch/story/701023/voici-comment-prend-forme-le-nouveau-complexe-immobilier-sur-le-site-spiess-bienne": {
+      "section": "canton-be",
+      "ts": 1791702884501
+    },
+    "canton-be::https://ajour.ch/story/700736/sperrungen-auf-der-a6-im-raum-br%c3%bcgg": {
+      "section": "canton-be",
+      "ts": 1791702885422
+    },
+    "canton-be::https://ajour.ch/story/700743/sbbbauarbeiten-hauptstrasse-bei-ligerz-in-der-nacht-auf-samstag-gesperrt": {
+      "section": "canton-be",
+      "ts": 1791702886162
+    },
+    "canton-be::https://ajour.ch/story/700783/freiburger-parlament-bringt-sprachengesetz-unter-dach": {
+      "section": "canton-be",
+      "ts": 1791702887176
     }
   }
 }
