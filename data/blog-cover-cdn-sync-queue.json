@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-adv-varese-trieste-basket.webp",
+      "sha256": "8c0bf13870e5f8ad2dc3b24184cd1615642578670ee5e77155c54e2e7c9e22b2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-adv-varese-trieste-basket-480w.webp",
+      "sha256": "4841525d0d35ef0e659a37d6de23c357513e40536da4221fb789b1cba2cd41ab"
+    }
+  ]
 }
