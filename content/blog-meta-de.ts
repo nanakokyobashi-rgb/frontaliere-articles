@@ -12987,7 +12987,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.lombardia-partenza-ritardo.title': 'Giro di Lombardia, verspäteter Start in Bergamo',
     'blog.article.lombardia-partenza-ritardo.excerpt': 'Das Peloton hält den Start des Lombardia vier bis fünf Minuten lang auf Remco Evenepoel spricht im Namen der Fahrer Der Protest folgt auf den Unfall bei der Tre Valli',
-    'blog.article.lombardia-partenza-ritardo.imageAlt': 'Gruppe von Profi-Radfahrern auf der Straße',
+    'blog.article.lombardia-partenza-ritardo.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

@@ -105576,10 +105576,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Il gruppo ferma il via del Lombardia per quattro-cinque minuti Remco Evenepoel parla a nome dei corridori La protesta arriva dopo l'incidente alla Tre Valli",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/emigrazione-tasse-obblighi-dopo-partenza.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lombardia-partenza-ritardo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Gruppo di corridori ciclisti in strada"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T03:21:32+00:00",
       "dateModified": "2026-10-11T03:21:32+00:00",

@@ -25,21 +25,11 @@
       "articleId": "scontro-auto-gemonio-verdi",
       "title": "Gemonio, scontro tra due auto: traffico bloccato",
       "fallbackImage": "/images/blog/traffico-a2-bloccato.webp",
-      "reason": "image generation deadline exceeded",
+      "reason": "All image providers failed for article-scontro-auto-gemonio-verdi: openai-codex (vision gate rejected image: Generic illustrated Alpine traffic collision with queued cars; vehicle brand emblems are visible.); gemini (Gemini image request fa",
       "status": "queued",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-11T02:24:06.863Z",
-      "lastFailureAt": "2026-10-11T02:58:01.716Z"
-    },
-    {
-      "articleId": "lombardia-partenza-ritardo",
-      "title": "Giro di Lombardia, partenza in ritardo a Bergamo",
-      "fallbackImage": "/images/blog/emigrazione-tasse-obblighi-dopo-partenza.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T03:21:32.962Z",
-      "lastFailureAt": "2026-10-11T03:21:32.962Z"
+      "lastFailureAt": "2026-10-11T03:35:14.822Z"
     }
   ]
 }

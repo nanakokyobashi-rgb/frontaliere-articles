@@ -43794,7 +43794,7 @@ const RAW_ARTICLES = [
  id: 'lombardia-partenza-ritardo',
  category: 'novita',
  date: '2026-10-11T03:21:32.399Z',
- image: '/images/blog/emigrazione-tasse-obblighi-dopo-partenza.webp',
+ image: '/images/blog/article-lombardia-partenza-ritardo.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

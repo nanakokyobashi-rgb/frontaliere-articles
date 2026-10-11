@@ -12989,7 +12989,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.lombardia-partenza-ritardo.title': 'Giro di Lombardia, partenza in ritardo a Bergamo',
     'blog.article.lombardia-partenza-ritardo.excerpt': 'Il gruppo ferma il via del Lombardia per quattro-cinque minuti Remco Evenepoel parla a nome dei corridori La protesta arriva dopo l\'incidente alla Tre Valli',
-    'blog.article.lombardia-partenza-ritardo.imageAlt': 'Gruppo di corridori ciclisti in strada',
+    'blog.article.lombardia-partenza-ritardo.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;
