@@ -5,6 +5,7 @@
 export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; fr: string }> = {
  'revisione-fiscale-canton-glarona': { it: 'revisione-fiscale-canton-glarona', en: 'tax-law-amendment-canton-glarus', de: 'steuergesetz-aenderung-kanton-glarus', fr: 'modification-de-la-loi-fiscale-canton-de-glaris' },
  'premi-standard-glarona': { it: 'premi-standard-glarona', en: 'glarner-lowest-standard-premiums', de: 'glarner-guenstigste-standardpraemien', fr: 'glarner-primes-standard-basses' },
+ 'imposta-seconde-case-glarona': { it: 'imposta-seconde-case-glarona', en: 'secondary-homes-tax-glarus', de: 'zweitwohnungssteuer-glarus', fr: 'taxe-residences-secondaires-glaris' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

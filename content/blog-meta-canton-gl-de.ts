@@ -9,6 +9,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.premi-standard-glarona.title': 'Glarus: wieder die niedrigsten Standardprämien',
     'blog.article.premi-standard-glarona.excerpt': 'Die Glarner Krankenversicherung hat wieder die niedrigsten Standardprämien. In der Vergangenheit hatte derselbe Spitzenplatz die Kasse in ernsthafte Schwierigkeiten gebracht.',
     'blog.article.premi-standard-glarona.imageAlt': 'Glarner Krankenversicherung wieder mit den günstigsten Standardprämien',
+    'blog.article.imposta-seconde-case-glarona.title': 'Immobiliensteuer für Zweitwohnungen in Glarus: grünes Licht von der Regierung',
+    'blog.article.imposta-seconde-case-glarona.excerpt': 'Die Motion wurde am 10.',
+    'blog.article.imposta-seconde-case-glarona.imageAlt': 'Liegenschaftssteuer auf Zweitwohnungen im Kanton Glarus',
 };
 
 export default blogMetaCantonGlDe;

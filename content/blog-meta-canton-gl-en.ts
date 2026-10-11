@@ -9,6 +9,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.premi-standard-glarona.title': 'Glarus: once again the lowest standard premiums',
     'blog.article.premi-standard-glarona.excerpt': 'Glarner Krankenversicherung returns to the lowest standard premiums. In the past, the same distinction had led the health insurer into serious difficulties.',
     'blog.article.premi-standard-glarona.imageAlt': 'Glarner Krankenversicherung again has the lowest standard premiums',
+    'blog.article.imposta-seconde-case-glarona.title': 'Glarus second-home property tax: government gives the green light',
+    'blog.article.imposta-seconde-case-glarona.excerpt': 'The motion was submitted on September 10, 2026.',
+    'blog.article.imposta-seconde-case-glarona.imageAlt': 'Real estate tax on secondary homes in Canton Glarus',
 };
 
 export default blogMetaCantonGlEn;
