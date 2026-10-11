@@ -30,6 +30,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T02:58:01.716Z"
+    },
+    {
+      "articleId": "lombardia-partenza-ritardo",
+      "title": "Giro di Lombardia, partenza in ritardo a Bergamo",
+      "fallbackImage": "/images/blog/emigrazione-tasse-obblighi-dopo-partenza.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T03:21:32.962Z",
+      "lastFailureAt": "2026-10-11T03:21:32.962Z"
     }
   ]
 }

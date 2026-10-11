@@ -12988,6 +12988,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese bat Trieste : analyse et déclarations',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis remporte une rencontre décrite comme très compliquée Amedeo Della Valle fait son retour et décide de la fin Kastritis salue l’unité, la défense et le soutien des supporters',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.lombardia-partenza-ritardo.title': 'Giro di Lombardia, départ retardé à Bergame',
+    'blog.article.lombardia-partenza-ritardo.excerpt': 'Le peloton bloque le départ de la Lombardia pendant quatre à cinq minutes Remco Evenepoel parle au nom des coureurs La protestation intervient après l\'accident à la Tre Valli',
+    'blog.article.lombardia-partenza-ritardo.imageAlt': 'Groupe de cyclistes professionnels sur la route',
 };
 
 export default blogMetaFr;

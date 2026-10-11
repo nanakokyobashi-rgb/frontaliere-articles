@@ -43790,6 +43790,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lombardia-partenza-ritardo',
+ category: 'novita',
+ date: '2026-10-11T03:21:32.399Z',
+ image: '/images/blog/emigrazione-tasse-obblighi-dopo-partenza.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

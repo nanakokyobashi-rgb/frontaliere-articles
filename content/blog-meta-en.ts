@@ -12986,6 +12986,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese beats Trieste: analysis and statements',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis wins a game described as very complicated Amedeo Della Valle returns and decides the ending Kastritis praises unity, defense and support from the fans',
     'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Illustration generated for this article',
+    'blog.article.lombardia-partenza-ritardo.title': 'Giro di Lombardia, start delayed in Bergamo',
+    'blog.article.lombardia-partenza-ritardo.excerpt': 'The peloton halts the start of the Lombardia for four to five minutes Remco Evenepoel speaks on behalf of the riders The protest comes after the incident at the Tre Valli',
+    'blog.article.lombardia-partenza-ritardo.imageAlt': 'Group of professional cyclists riding on the road',
 };
 
 export default blogMetaEn;

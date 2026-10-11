@@ -105562,6 +105562,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lombardia-partenza-ritardo': {
+    title: 'Giro di Lombardia, partenza in ritardo a Bergamo',
+    description: 'Il gruppo ferma il via del Lombardia per quattro-cinque minuti Remco Evenepoel parla a nome dei corridori La protesta arriva dopo l\'incidente alla Tre Valli',
+    keywords: 'frontalieri, ticino, svizzera, italia, giro, lombardia, partenza, ritardo',
+    ogTitle: 'Giro di Lombardia: partenza in ritardo e protesta a Bergamo',
+    ogDescription: 'Il gruppo ferma il via del Lombardia per quattro-cinque minuti Remco Evenepoel parla a nome dei corridori La protesta arriva dopo l\'incidente alla Tre Valli',
+    canonicalPath: '/articoli-frontaliere/lombardia-partenza-ritardo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giro di Lombardia, partenza in ritardo a Bergamo",
+      "description": "Il gruppo ferma il via del Lombardia per quattro-cinque minuti Remco Evenepoel parla a nome dei corridori La protesta arriva dopo l'incidente alla Tre Valli",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/emigrazione-tasse-obblighi-dopo-partenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Gruppo di corridori ciclisti in strada"
+      },
+      "datePublished": "2026-10-11T03:21:32+00:00",
+      "dateModified": "2026-10-11T03:21:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lombardia-partenza-ritardo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
