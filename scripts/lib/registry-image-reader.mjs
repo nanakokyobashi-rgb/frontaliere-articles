@@ -190,8 +190,8 @@ function staticLiteral(property) {
     if (skipTrivia(raw, token.end) === raw.length) return token.value;
     return undefined;
   }
-  if (raw === 'true') return true;
-  if (raw === 'false') return false;
+  if (raw.startsWith('true') && skipTrivia(raw, 'true'.length) === raw.length) return true;
+  if (raw.startsWith('false') && skipTrivia(raw, 'false'.length) === raw.length) return false;
   return undefined;
 }
 
@@ -200,7 +200,6 @@ function isTypeDeclarationObject(source, open) {
   return /\binterface\s+[A-Za-z_$][\w$]*(?:\s+extends\s+[^{}]+)?\s*$/u.test(header)
     || /\btype\s+[A-Za-z_$][\w$]*(?:<[^{}>]+>)?\s*=\s*[^{}]*$/u.test(header);
 }
-
 /**
  * Read the direct literal entries of a generated article registry. Nested
  * objects, strings, and comments are skipped; ambiguous image declarations

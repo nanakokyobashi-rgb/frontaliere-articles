@@ -19,6 +19,11 @@ test('registry reader skips comments, strings and nested properties, keeping the
   assert.match(entry.block, /details: \{ image: '\/nested\.webp'/);
 });
 
+test('registry reader preserves boolean fields followed by inline comments', () => {
+  const [entry] = readArticleRegistry("[{ id: 'calculator', image: '/cover.webp', hasCalculator: true // calculator\n }]");
+  assert.equal(entry.fields.hasCalculator, true);
+});
+
 test('registry reader fails closed on accessors, dynamic images and duplicate image keys', () => {
   assert.throws(
     () => readArticleRegistry("[{ id: 'accessor', get image() { return '/live.webp'; } }]"),

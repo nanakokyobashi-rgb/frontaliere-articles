@@ -60,7 +60,7 @@ import { writeFilePairAtomically } from './lib/write-file-pair-atomically.mjs';
 import fs, { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readTopLevelString, scanTopLevelArticleRecords } from './lib/article-registry-reader.mjs';
+import { readArticleRegistry } from './lib/registry-image-reader.mjs';
 import {
   COMMONS_API,
   COMMONS_IMAGEINFO_PARAMS,
@@ -127,9 +127,7 @@ function writeTextAtomic(file, text) {
 }
 
 /**
- * `id → image` of every registry row, read the way build-blog-index.mjs
- * reads them (the shared balanced scanner over the generator's own literal
- * shape, no TS import).
+ * `id → image` from the same top-level literal reader used by publication.
  */
 export function readRegistryImages(root) {
   /** @type {Map<string, string>} */
@@ -138,9 +136,8 @@ export function readRegistryImages(root) {
     const file = path.join(root, rel);
     if (!fs.existsSync(file)) continue;
     const src = fs.readFileSync(file, 'utf-8');
-    for (const record of scanTopLevelArticleRecords(src)) {
-      const image = readTopLevelString(record, 'image');
-      if (image && !images.has(record.id)) images.set(record.id, image);
+    for (const { id, image } of readArticleRegistry(src, rel)) {
+      if (image && !images.has(id)) images.set(id, image);
     }
   }
   return images;
