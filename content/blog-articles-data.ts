@@ -3824,6 +3824,7 @@ const RAW_ARTICLES = [
  id: 'dumping-salariale-diritti-lavoratore-ticino',
  category: 'fiscale',
  date: '2026-03-15T20:03:00.000Z',
+ updatedAt: '2026-10-11',
  image: '/images/places/mendrisio.webp',
  hasCalculator: true,
  articleType: 'evergreen',

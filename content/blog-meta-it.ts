@@ -1146,7 +1146,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.vivere-svizzera-vs-italia-frontaliere.imageAlt': 'Vista panoramica del confine italo-svizzero con il lago di Lugano e i tetti di un villaggio italiano',
 
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.title': 'Dumping salariale in Ticino: come riconoscerlo e difendersi',
- 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Guida ai diritti del lavoratore frontaliere contro il dumping salariale: forme più comuni, a chi rivolgersi, procedure legali e checklist operativa.',
+ 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Guida source-backed ai diritti del lavoratore frontaliere: mediana salariale regionale 2024, minimi ticinesi 2026 per settore, segnalazioni e procedura.',
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.imageAlt': 'Operai su un cantiere edile in Ticino con elmetti di sicurezza e documentazione contrattuale',
 
  'blog.article.malattia-frontaliere-guida-assicurazione.title': 'Malattia e infortunio frontaliere: guida LAMal, IJM e diritti',

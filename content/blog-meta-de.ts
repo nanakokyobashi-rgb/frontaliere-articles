@@ -1145,7 +1145,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.vivere-svizzera-vs-italia-frontaliere.imageAlt': 'Panoramablick auf die italienisch-schweizerische Grenze mit dem Luganer See und italienischen Dorfhäusern',
 
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.title': 'Lohndumping im Tessin: Erkennen und sich schützen',
- 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Leitfaden zu den Rechten der Grenzgänger gegen Lohndumping: häufige Formen, Ansprechpartner, rechtliche Verfahren und Checkliste.',
+ 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Quellenbasierter Leitfaden für Grenzgänger: regionaler Median 2024, Tessiner Branchenmindestlöhne 2026, Meldestellen und Verfahren.',
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.imageAlt': 'Bauarbeiter auf einer Tessiner Baustelle mit Schutzhelmen und Vertragsunterlagen',
 
  'blog.article.malattia-frontaliere-guida-assicurazione.title': 'Krankheit und Unfall für Grenzgänger: KVG, IJM und Rechte',

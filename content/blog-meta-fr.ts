@@ -1146,7 +1146,7 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.vivere-svizzera-vs-italia-frontaliere.imageAlt': 'Vue panoramique de la frontière italo-suisse avec le lac de Lugano et les toits d\'un village italien',
 
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.title': 'Dumping salarial au Tessin : comment le reconnaître et se protéger',
- 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Guide des droits des frontaliers contre le dumping salarial : formes courantes, recours, procédures légales et checklist opérationnelle.',
+ 'blog.article.dumping-salariale-diritti-lavoratore-ticino.excerpt': 'Guide fondé sur les sources officielles : salaire médian régional 2024, minima tessinois par branche en 2026, signalement et procédure.',
  'blog.article.dumping-salariale-diritti-lavoratore-ticino.imageAlt': 'Ouvriers sur un chantier tessinois avec casques de sécurité et documents contractuels',
 
  'blog.article.malattia-frontaliere-guida-assicurazione.title': 'Maladie et accident pour frontaliers : guide LAMal, IJM et droits',
