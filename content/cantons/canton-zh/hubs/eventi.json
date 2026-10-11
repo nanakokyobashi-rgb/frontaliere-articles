@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "bb2536c95027b5fbc79f76bea744ab01b561d6f46e1da462f16ae25d05e2145a",
+  "updatedAt": "2026-10-11T23:14:32.116Z",
+  "contentHash": "3a8b8b80a090a0da3e85679f752dadae94202f99694bdfc9452bfcd910169b42",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-11T17:50:26.068Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "213",
+          "value": "288",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Festa del vino",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/festa-del-vino/"
+              "label": "2. LAZY SMOKING SUNDAY 2026 by BIG SMOKE",
+              "detail": "Casinotheater, Winterthur",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen ein selbstfahrendes Fahrzeug»",
-              "detail": "Hinwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-ein-selbstfahrendes-fahrzeug-1/"
+              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Kindercoiffeur",
+              "label": "Sterilisieren mit Hans",
               "detail": "Urdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-2/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
             },
             {
-              "label": "KINDERFÜHRUNG SONDERAUSSTELLUNG",
-              "detail": "Bubikon",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderfuehrung-sonderausstellung/"
+              "label": "Grasshopper Club Zürich - BSC Young Boys",
+              "detail": "Stadion Letzigrund, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
             },
             {
-              "label": "Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Eulachpark, Winterthur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/circolino-pipistrello-spielt-der-kroko-deal-11/"
+              "label": "Kunst und Natur 2026",
+              "detail": "Botanischer Garten der Universität Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
             },
             {
-              "label": "English Stand-Up Comedy Night",
-              "detail": "ROOM21 - Eventlocation, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/english-stand-up-comedy-night/"
+              "label": "Groove Your Labour",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
             },
             {
-              "label": "Open Mic im Stadtkeller Dietikon",
-              "detail": "Stadtkeller Dietikon, Dietikon",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/open-mic-im-stadtkeller-dietikon_Av9R2pG"
-            },
-            {
-              "label": "Pub Quiz @ Edi's Weinstube",
-              "detail": "Edi's Weinstube, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pub-quiz-edis-weinstube/"
-            },
-            {
-              "label": "Fast Fashion - Vortrag und Workshop",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kloten/fast-fashion-vortrag-und-workshop_AKkY92Q"
-            },
-            {
-              "label": "Modeselektor",
+              "label": "«Beethoven und Bruckner» – Chorsinfonik",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/modeselektor/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Aula alte Turnhalle",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
+            },
+            {
+              "label": "Ein Sommer-nachtstraum",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
+            },
+            {
+              "label": "Tarja - Frisson Live 2026",
+              "detail": "Club Vaudeville, Lindau",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-11T17:50:26.068Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +116,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-11T23:14:32.116Z"
     },
     "en": {
       "canton": "ZH",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "213",
+          "value": "288",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,69 +137,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Festa del vino",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/festa-del-vino/"
+              "label": "2. LAZ SM SMOKING SUNDA 2",
+              "detail": "Casinotheater, Winterthur",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen ein selbstfahrendes Fahrzeug»",
-              "detail": "Hinwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-ein-selbstfahrendes-fahrzeug-1/"
+              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Kindercoiffeur",
+              "label": "Sterilisieren mit Hans",
               "detail": "Urdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-2/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
             },
             {
-              "label": "KINDERFÜHRUNG SONDERAUSSTELLUNG",
-              "detail": "Bubikon",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderfuehrung-sonderausstellung/"
+              "label": "Grasshopper Club Zürich - BSC Young Boys",
+              "detail": "Stadion Letzigrund, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
             },
             {
-              "label": "Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Eulachpark, Winterthur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/circolino-pipistrello-spielt-der-kroko-deal-11/"
+              "label": "Kunst und Natur 2026",
+              "detail": "Botanischer Garten der Universität Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
             },
             {
-              "label": "English Stand-Up Comedy Night",
-              "detail": "ROOM21 - Eventlocation, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/english-stand-up-comedy-night/"
+              "label": "Groove Your Labor",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
             },
             {
-              "label": "Open Mic im Stadtkeller Dietikon",
-              "detail": "Stadtkeller Dietikon, Dietikon",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/open-mic-im-stadtkeller-dietikon_Av9R2pG"
-            },
-            {
-              "label": "Pub Quiz @ Edi's Weinstube",
-              "detail": "Edi's Weinstube, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pub-quiz-edis-weinstube/"
-            },
-            {
-              "label": "Fast Fashion - Vortrag und Workshop",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kloten/fast-fashion-vortrag-und-workshop_AKkY92Q"
-            },
-            {
-              "label": "Modeselektor",
+              "label": "«Beethoven und Bruckner» – Chorsinfonik",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/modeselektor/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Aula alte Turnhalle",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
+            },
+            {
+              "label": "Ein Sommer-nachtstraum",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
+            },
+            {
+              "label": "Tarja - Frisson Live 2026",
+              "detail": "Club Vaudeville, Lindau",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-11T17:50:26.068Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-11T23:14:32.116Z"
     },
     "de": {
       "canton": "ZH",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "213",
+          "value": "288",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -241,69 +241,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Festa del vino",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/festa-del-vino/"
+              "label": "2. LAZY SMOKING SUNDAY 2026 VON BIG SMOKE",
+              "detail": "Casinotheater, Winterthur",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen ein selbstfahrendes Fahrzeug»",
-              "detail": "Hinwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-ein-selbstfahrendes-fahrzeug-1/"
+              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Kindercoiffeur",
+              "label": "Sterilisieren mit Hans",
               "detail": "Urdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-2/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
             },
             {
-              "label": "KINDERFÜHRUNG SONDERAUSSTELLUNG",
-              "detail": "Bubikon",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderfuehrung-sonderausstellung/"
+              "label": "Grasshopper Club Zürich - BSC Young Boys",
+              "detail": "Stadion Letzigrund, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
             },
             {
-              "label": "Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Eulachpark, Winterthur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/circolino-pipistrello-spielt-der-kroko-deal-11/"
+              "label": "Kunst und Natur 2026",
+              "detail": "Botanischer Garten der Universität Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
             },
             {
-              "label": "English Stand-Up Comedy Night",
-              "detail": "ROOM21 - Eventlocation, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/english-stand-up-comedy-night/"
+              "label": "Groove deine Arbeit",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
             },
             {
-              "label": "Open Mic im Stadtkeller Dietikon",
-              "detail": "Stadtkeller Dietikon, Dietikon",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/open-mic-im-stadtkeller-dietikon_Av9R2pG"
-            },
-            {
-              "label": "Pub Quiz @ Edi's Weinstube",
-              "detail": "Edi's Weinstube, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pub-quiz-edis-weinstube/"
-            },
-            {
-              "label": "Fast Fashion - Vortrag und Workshop",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kloten/fast-fashion-vortrag-und-workshop_AKkY92Q"
-            },
-            {
-              "label": "Modeselektor",
+              "label": "«Beethoven und Bruckner» – Chorsinfonik",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/modeselektor/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Aula alte Turnhalle",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
+            },
+            {
+              "label": "Ein Sommer-nachtstraum",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
+            },
+            {
+              "label": "Tarja - Frisson Live 2026",
+              "detail": "Club Vaudeville, Lindau",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-11T17:50:26.068Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-11T23:14:32.116Z"
     },
     "fr": {
       "canton": "ZH",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "213",
+          "value": "288",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -345,69 +345,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Festa del vino",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/festa-del-vino/"
+              "label": "2. LE DIMANCHE PARESSEUX DE LA FUMÉE 2026 par BIG SMOKE",
+              "detail": "Casinotheater, Winterthur",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
             },
             {
-              "label": "Tüftelwerkstatt «Wir bauen ein selbstfahrendes Fahrzeug»",
-              "detail": "Hinwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tueftelwerkstatt-wir-bauen-ein-selbstfahrendes-fahrzeug-1/"
+              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Coiffeur pour enfants",
+              "label": "Sterilisieren mit Hans",
               "detail": "Urdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindercoiffeur-2/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
             },
             {
-              "label": "KINDERFÜHRUNG SONDERAUSSTELLUNG",
-              "detail": "Bubikon",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kinderfuehrung-sonderausstellung/"
+              "label": "Grasshopper Club Zürich - BSC Young Boys",
+              "detail": "Stadion Letzigrund, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
             },
             {
-              "label": "Circolino Pipistrello spielt \"Der Kroko-Deal\"",
-              "detail": "Eulachpark, Winterthur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/circolino-pipistrello-spielt-der-kroko-deal-11/"
+              "label": "Kunst und Natur 2026",
+              "detail": "Botanischer Garten der Universität Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
             },
             {
-              "label": "English Stand-Up Comedy Night",
-              "detail": "ROOM21 - Eventlocation, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/english-stand-up-comedy-night/"
+              "label": "Boostez votre travail",
+              "detail": "Tanzhaus Zürich, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
             },
             {
-              "label": "Open Mic im Stadtkeller Dietikon",
-              "detail": "Stadtkeller Dietikon, Dietikon",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/open-mic-im-stadtkeller-dietikon_Av9R2pG"
-            },
-            {
-              "label": "Pub Quiz @ Edi's Weinstube",
-              "detail": "Edi's Weinstube, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pub-quiz-edis-weinstube/"
-            },
-            {
-              "label": "Fast Fashion - Vortrag und Workshop",
-              "detail": "Hegnerhof, Kloten",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kloten/fast-fashion-vortrag-und-workshop_AKkY92Q"
-            },
-            {
-              "label": "Modeselektor",
+              "label": "«Beethoven und Bruckner» – Chorsinfonik",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/modeselektor/"
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
+            },
+            {
+              "label": "«LEIDENSCHAFT & SAMBA»",
+              "detail": "Aula alte Turnhalle",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
+            },
+            {
+              "label": "Ein Sommer-nachtstraum",
+              "detail": "Opernhaus, Zürich",
+              "date": "2026-10-11",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
+            },
+            {
+              "label": "Tarja - Frisson Live 2026",
+              "detail": "Club Vaudeville, Lindau",
+              "date": "2026-10-11",
+              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-11T17:50:26.068Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-11T23:14:32.116Z"
     }
   }
 }
