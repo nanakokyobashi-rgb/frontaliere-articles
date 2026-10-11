@@ -1513,7 +1513,7 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.ogm-fallimento-ticino.excerpt': 'The popular initiative for GMO control in Switzerland did not reach the required 100,000 signatures, with significant implications also for Ticino.',
  'blog.article.ogm-fallimento-ticino.imageAlt': 'Lugano Lake with mountains in the background, typical Ticino landscape',
  'blog.article.passaggio-statuto-s-permesso-b.title': 'From S Status to B Permit in Ticino',
- 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'The transition from S status to B permit concerns Ukrainian refugees in Switzerland, with economic and social implications for the Canton of Ticino until 2027.',
+ 'blog.article.passaggio-statuto-s-permesso-b.excerpt': 'After at least five years of continuous residence, people with protection status S are entitled to a linked B permit: requirements, the cantonal role and the federal extension to 4 March 2028.',
  'blog.article.passaggio-statuto-s-permesso-b.imageAlt': 'Panoramic view of Bellinzona with its castles and surrounding mountains, symbolizing the Swiss-Italian border.',
  'blog.article.chiusure-notturne-autostrada.title': 'Nighttime Closures on A9 Highway',
  'blog.article.chiusure-notturne-autostrada.excerpt': 'Nighttime closures are scheduled for next week on the A9 highway',
