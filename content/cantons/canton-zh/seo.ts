@@ -270,6 +270,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vbz-centrale-problemi-quotidiani': {
+    title: 'VBZ: fino a 300 problemi al giorno in centrale',
+    description: 'Fino a 300 volte al giorno, la centrale VBZ di Zurigo affronta problemi grandi e piccoli di tram e bus: servono sangue freddo, flessibilità e annunci curati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fino, problemi, giorno, centrale',
+    ogTitle: 'Nella centrale VBZ: fino a 300 problemi al giorno',
+    ogDescription: 'Il lavoro nella centrale VBZ ruota attorno a problemi grandi e piccoli che coinvolgono tram e bus. Il lead pubblico evidenzia fino a 300 situazioni al giorno e un principio: gli annunci non sono lasciati al caso.',
+    canonicalPath: '/articoli-zurigo/vbz-centrale-problemi-quotidiani/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "VBZ: fino a 300 problemi al giorno in centrale",
+      "description": "Fino a 300 volte al giorno, la centrale VBZ di Zurigo affronta problemi grandi e piccoli di tram e bus: servono sangue freddo, flessibilità e annunci curati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Personale nella centrale VBZ alle prese con problemi di tram e bus a Zurigo"
+      },
+      "datePublished": "2026-10-11T01:13:16+00:00",
+      "dateModified": "2026-10-11T01:13:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/vbz-centrale-problemi-quotidiani/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

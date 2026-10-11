@@ -24,6 +24,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.lex-ubs-zurigo-capitale.title': 'Carmen Walker Späh: meno vincoli di capitale per UBS',
     'blog.article.lex-ubs-zurigo-capitale.excerpt': 'Walker Späh e Filippo Leutenegger cercano a Berna sostegno FDP per regole di capitale meno severe per UBS.',
     'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Scena urbana del Canton Zurigo legata al dibattito sulle regole di capitale',
+    'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ: fino a 300 problemi al giorno in centrale',
+    'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'Nella centrale VBZ il personale affronta fino a 300 problemi al giorno legati a tram e bus.',
+    'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Personale nella centrale VBZ alle prese con problemi di tram e bus a Zurigo',
 };
 
 export default blogMetaCantonZhIt;

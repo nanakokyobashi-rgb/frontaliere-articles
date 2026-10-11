@@ -40,6 +40,16 @@
       "failureCount": 2,
       "requestedAt": "2026-10-10T23:52:13.536Z",
       "lastFailureAt": "2026-10-11T01:08:27.420Z"
+    },
+    {
+      "articleId": "vbz-centrale-problemi-quotidiani",
+      "title": "VBZ: fino a 300 problemi al giorno in centrale",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T01:13:16.609Z",
+      "lastFailureAt": "2026-10-11T01:13:16.609Z"
     }
   ]
 }

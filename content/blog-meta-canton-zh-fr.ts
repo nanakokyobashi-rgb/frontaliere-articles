@@ -24,6 +24,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.lex-ubs-zurigo-capitale.title': 'Carmen Walker Späh : moins de contraintes de fonds propres pour UBS',
     'blog.article.lex-ubs-zurigo-capitale.excerpt': 'Walker Späh et Filippo Leutenegger cherchent à Berne le soutien du FDP en faveur de règles de fonds propres moins strictes pour UBS.',
     'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Scène urbaine de Zurich liée au débat sur les exigences de fonds propres',
+    'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ : jusqu’à 300 problèmes par jour au centre de contrôle',
+    'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'Dans le centre de contrôle de VBZ, le personnel fait face à jusqu’à 300 problèmes par jour liés aux tramways et aux bus.',
+    'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Personnel du centre VBZ face aux problèmes de tram et de bus à Zurich',
 };
 
 export default blogMetaCantonZhFr;

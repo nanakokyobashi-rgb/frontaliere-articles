@@ -24,6 +24,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.lex-ubs-zurigo-capitale.title': 'Carmen Walker Späh: fewer capital constraints for UBS',
     'blog.article.lex-ubs-zurigo-capitale.excerpt': 'Walker Späh and Filippo Leutenegger seek FDP support in Bern for less stringent capital rules for UBS.',
     'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Zurich urban scene linked to the debate on capital requirements',
+    'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ: up to 300 problems a day at headquarters',
+    'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'At the VBZ control center, staff deal with up to 300 problems a day related to trams and buses.',
+    'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'VBZ control-centre staff handling tram and bus issues in Zurich',
 };
 
 export default blogMetaCantonZhEn;
