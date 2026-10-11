@@ -409,7 +409,33 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
   return { text, replacements, replacementCounts, issues };
 }
 
-function parseEventsDigestBody2(text) {
+/**
+ * The digest producer emits a date (or a weekday in older already-published
+ * bodies) before the event separator.  Requiring that stable prefix prevents a
+ * Markdown list in an event title from becoming a second event record merely
+ * because it starts with `- **...** — ...`.
+ */
+const EVENT_RECORD_SCHEDULE_PATTERN = /^(?:\d{1,2}\.?(?:\s+)\p{L}{3,}|(?:lunedi|lunedì|martedi|martedì|mercoledi|mercoledì|giovedi|giovedì|venerdi|venerdì|sabato|domenica|monday|tuesday|wednesday|thursday|friday|saturday|sunday|montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche))(?:\s|$)/iu;
+const EVENT_RECORD_PATTERN = /^- \*\*([^*\r\n]+)\*\* — /u;
+const DIGEST_HEADING_PATTERN = /^(#{2,3})\s+\S/u;
+
+function eventRecordMatch(line) {
+  const match = EVENT_RECORD_PATTERN.exec(line);
+  return match && EVENT_RECORD_SCHEDULE_PATTERN.test(match[1].trim()) ? match : null;
+}
+
+/**
+ * Parse body2 without confusing Markdown-looking title content with record
+ * delimiters. A heading is structural only at a blank-line boundary; while an
+ * event is open, heading-like and non-record bullet lines belong to its title.
+ * Blank lines are held until the next line proves that they separate blocks,
+ * so a multiline title is preserved as one event as well.
+ *
+ * `null` is intentional: the caller turns it into the BODY2 structure issue
+ * and leaves the target untouched. An unrecognizable shape must never be
+ * guessed into a different event pairing.
+ */
+export function parseEventsDigestBody2Safe(text) {
   if (typeof text !== 'string') return null;
   const lines = text.split('\n');
   const headings = [];
@@ -417,27 +443,52 @@ function parseEventsDigestBody2(text) {
   const eventCountsByHeading = [];
   let currentHeading = -1;
   let currentEvent = null;
+  let pendingBlankIndices = [];
+
+  const appendTitleLines = (lineIndex) => {
+    if (!currentEvent) return false;
+    currentEvent.lineIndices.push(...pendingBlankIndices, lineIndex);
+    pendingBlankIndices = [];
+    return true;
+  };
 
   for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
     const line = lines[lineIndex];
     if (!line.trim()) {
-      currentEvent = null;
+      if (currentEvent) pendingBlankIndices.push(lineIndex);
       continue;
     }
 
-    const headingMatch = /^(#{2,6})\s+/.exec(line);
+    const headingMatch = DIGEST_HEADING_PATTERN.exec(line);
     if (headingMatch) {
+      // The generator writes a blank line before every section/municipality
+      // heading. Without that boundary this is Markdown inside the title, not
+      // a new digest block.
+      if (currentEvent && pendingBlankIndices.length === 0) {
+        currentEvent.lineIndices.push(lineIndex);
+        continue;
+      }
+      if (lineIndex > 0 && lines[lineIndex - 1].trim()) return null;
+
       currentHeading = headings.length;
       headings.push({ lineIndex, level: headingMatch[1].length });
       eventCountsByHeading.push(0);
       currentEvent = null;
+      pendingBlankIndices = [];
       continue;
     }
 
-    if (line.startsWith('- **')) {
+    const eventMatch = eventRecordMatch(line);
+    if (eventMatch) {
+      if (currentEvent && pendingBlankIndices.length > 0) {
+        // Consecutive generated records have no blank line. A blank followed
+        // by a record therefore belongs to a multiline title; retaining it is
+        // safer than inventing a new event boundary.
+        appendTitleLines(lineIndex);
+        continue;
+      }
       if (currentHeading < 0) return null;
       const separatorIndex = line.indexOf('** — ');
-      if (separatorIndex < 0) return null;
       currentEvent = {
         headingIndex: currentHeading,
         lineIndices: [lineIndex],
@@ -448,10 +499,10 @@ function parseEventsDigestBody2(text) {
       continue;
     }
 
-    // Event titles may span lines, but only while they remain within their
-    // original bullet. Any other body shape is deliberately unrecognized.
-    if (!currentEvent) return null;
-    currentEvent.lineIndices.push(lineIndex);
+    // Any non-record line is title content while an event is open. In
+    // particular, a `###` line or a Markdown bullet in the title must not
+    // alter the block shape. Outside an event the shape is not determinable.
+    if (!appendTitleLines(lineIndex)) return null;
   }
 
   return {
@@ -463,8 +514,8 @@ function parseEventsDigestBody2(text) {
 }
 
 function transformEventsDigestBody2({ sourceText = '', targetText = '', locale } = {}) {
-  const source = parseEventsDigestBody2(sourceText);
-  const target = parseEventsDigestBody2(targetText);
+  const source = parseEventsDigestBody2Safe(sourceText);
+  const target = parseEventsDigestBody2Safe(targetText);
   if (!source || !target) return null;
   if (source.shape.length !== target.shape.length
       || source.shape.some((part, index) => part !== target.shape[index])

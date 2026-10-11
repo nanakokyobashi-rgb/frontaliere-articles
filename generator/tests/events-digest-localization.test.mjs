@@ -1,6 +1,9 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
-import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
+import {
+  findArticleLocalizedToponymMismatches,
+  parseEventsDigestBody2Safe,
+} from '../scripts/lib/localized-toponyms.mjs';
 import { repairEventsDigestLocalizedToponyms } from '../scripts/lib/events-digest-localization.mjs';
 
 function incidentArticle() {
@@ -79,5 +82,25 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.ok(findArticleLocalizedToponymMismatches(repaired).some(({ locale, code, type }) => (
       locale === 'en' && code === 'BODY2' && type === 'structure'
     )));
+  });
+
+  it('keeps heading-like and non-record bullet lines inside a multiline event title', () => {
+    const body = [
+      '## Gli eventi',
+      '',
+      '### [Ginevra](/it/events/geneva/)',
+      '- **sabato 16:00** — Concerto a Zurigo',
+      '### Nota interna del titolo',
+      '- **Nota** — non è un nuovo evento',
+      'dettaglio del titolo',
+      '- **domenica 20:30** — Festival a Ginevra',
+    ].join('\n');
+
+    const parsed = parseEventsDigestBody2Safe(body);
+
+    assert.ok(parsed);
+    assert.equal(parsed.events.length, 2);
+    assert.deepEqual(parsed.events[0].lineIndices, [3, 4, 5, 6]);
+    assert.deepEqual(parsed.shape, ['2:0', '3:2']);
   });
 });
