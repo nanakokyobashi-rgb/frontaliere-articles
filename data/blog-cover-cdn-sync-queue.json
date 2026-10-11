@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp",
+      "sha256": "4f02df22b3a3d6c684cad9532fe2251d7066e6fa92103090b9573ed3858b6710"
+    },
+    {
+      "path": "public/images/blog/article-vbz-centrale-problemi-quotidiani.webp",
+      "sha256": "68c9531ad98b48fd9716160ac4976b9973fc1eeba49d1dbaa1899d4170dc4ed3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-openjobmetis-trieste-vittoria-kastritis-480w.webp",
+      "sha256": "5cf596ca2c5b2d9e083b7fabc70a2f568857dc2a25edafb54bcba76bdc4420fd"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-vbz-centrale-problemi-quotidiani-480w.webp",
+      "sha256": "22c237af36aa91506f50b6e4660a569b7ec7a59fe49666f41ca17633170dfee9"
+    }
+  ]
 }
