@@ -13010,6 +13010,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-11.imageAlt': 'I numeri del giorno per i frontalieri – 11 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-10-11.seoDescription': 'Bollettino frontalieri del 11 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-10-11.ogDescription': 'I numeri del 11 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.title': 'Openjobmetis-Trieste 85-84: il podcast del dopopartita',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.excerpt': 'Openjobmetis batte Trieste 85-84 Della Valle segna il libero a 7 decimi dalla fine Varese centra la seconda vittoria consecutiva Risultato → 85-84 Decisivo →',
+    'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Studio del podcast Dal Parquet di VareseNews',
 };
 
 export default blogMetaIt;

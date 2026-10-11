@@ -20,6 +20,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T06:38:00.945Z"
+    },
+    {
+      "articleId": "openjobmetis-trieste-dopopartita-podcast",
+      "title": "Openjobmetis-Trieste 85-84: il podcast del dopopartita",
+      "fallbackImage": "/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T12:37:35.303Z",
+      "lastFailureAt": "2026-10-11T12:37:35.303Z"
     }
   ]
 }

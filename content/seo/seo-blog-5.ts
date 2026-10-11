@@ -105835,6 +105835,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-openjobmetis-trieste-dopopartita-podcast': {
+    title: 'Openjobmetis-Trieste 85-84: il podcast del dopopartita',
+    description: 'Openjobmetis batte Trieste 85-84 Della Valle segna il libero a 7 decimi dalla fine Varese centra la seconda vittoria consecutiva Risultato → 85-84 Decisivo →',
+    keywords: 'frontalieri, ticino, svizzera, italia, openjobmetis-trieste, 85-84, podcast, dopopartita',
+    ogTitle: 'Openjobmetis-Trieste 85-84: il dopopartita nel podcast',
+    ogDescription: 'Openjobmetis batte Trieste 85-84 Della Valle segna il libero a 7 decimi dalla fine Varese centra la seconda vittoria consecutiva Risultato → 85-84 Decisivo →',
+    canonicalPath: '/articoli-frontaliere/openjobmetis-trieste-dopopartita-podcast/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Openjobmetis-Trieste 85-84: il podcast del dopopartita",
+      "description": "Openjobmetis batte Trieste 85-84 Della Valle segna il libero a 7 decimi dalla fine Varese centra la seconda vittoria consecutiva Risultato → 85-84 Decisivo →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studio del podcast Dal Parquet di VareseNews"
+      },
+      "datePublished": "2026-10-11T12:37:34+00:00",
+      "dateModified": "2026-10-11T12:37:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/openjobmetis-trieste-dopopartita-podcast/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

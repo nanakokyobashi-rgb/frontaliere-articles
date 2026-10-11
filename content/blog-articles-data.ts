@@ -43862,6 +43862,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'openjobmetis-trieste-dopopartita-podcast',
+ category: 'pratico',
+ date: '2026-10-11T12:37:34.866Z',
+ image: '/images/blog/article-openjobmetis-trieste-vittoria-kastritis.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
