@@ -39,6 +39,7 @@ on:
   workflow_run:
     workflows: [tests]
     types: [completed]
+    branches: [engine-lockstep-auto]
   # Rete di sicurezza. `check_suite` può non arrivare (o arrivare mentre la PR è ancora in
   # rebase), e `workflow_run` può arrivare mentre la PR è ancora in rebase: senza il cron la
   # PR resterebbe ferma esattamente come prima — che è il difetto che questo workflow chiude,
