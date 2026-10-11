@@ -8069,6 +8069,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-edilizio-uri.title': 'Autorizzazione edilizia canton Uri: requisiti e procedura',
     'blog.article.permesso-edilizio-uri.excerpt': 'Nel Cantone di Uri l\'autorizzazione edilizia richiede verifiche su requisiti, documenti, uffici, termini e opposizioni: i lavori partono solo dopo il permesso.',
     'blog.article.permesso-edilizio-uri.imageAlt': 'Piani edilizi e documenti per un\'autorizzazione nel Cantone di Uri',
+    'blog.article.finanziamenti-start-up-ticino.title': 'Finanziamenti per start-up in Ticino: la proposta',
+    'blog.article.finanziamenti-start-up-ticino.excerpt': 'Tresoldi propone di studiare un sostegno alle start-up in Ticino.',
+    'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Incontro economico a Lugano sul finanziamento delle start-up',
 };
 
 export default blogMetaChIt;

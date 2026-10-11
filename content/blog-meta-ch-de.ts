@@ -8069,6 +8069,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-edilizio-uri.title': 'Baubewilligung im Kanton Uri: Anforderungen und Verfahren',
     'blog.article.permesso-edilizio-uri.excerpt': 'Im Kanton Uri erfordert die Baubewilligung die Prüfung von Anforderungen, Unterlagen, Behörden, Fristen und Einsprachen: Die Arbeiten beginnen erst nach der Bewilligung.',
     'blog.article.permesso-edilizio-uri.imageAlt': 'Baupläne und Unterlagen für eine Baubewilligung im Kanton Uri',
+    'blog.article.finanziamenti-start-up-ticino.title': 'Finanzierungen für Start-ups im Tessin: der Vorschlag',
+    'blog.article.finanziamenti-start-up-ticino.excerpt': 'Tresoldi schlägt vor, eine Unterstützung für Start-ups im Tessin zu prüfen.',
+    'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Geschäftstreffen in Lugano zur Startup-Finanzierung',
 };
 
 export default blogMetaChDe;

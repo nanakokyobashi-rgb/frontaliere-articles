@@ -101780,6 +101780,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finanziamenti-start-up-ticino': {
+    title: 'Finanziamenti per start-up in Ticino: la proposta',
+    description: 'Tresoldi propone di studiare un sostegno alle start-up in Ticino. Senza capitale iniziale, anche un buon progetto può restare sulla carta. La selezione dovrebbe',
+    keywords: 'frontalieri, ticino, svizzera, italia, finanziamenti, start-up, proposta, tresoldi',
+    ogTitle: 'Finanziamenti start-up in Ticino: la proposta di Christian Tresoldi',
+    ogDescription: 'Tresoldi propone di studiare un sostegno alle start-up in Ticino.',
+    canonicalPath: '/articoli-svizzera/finanziamenti-start-up-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Finanziamenti per start-up in Ticino: la proposta",
+      "description": "Tresoldi propone di studiare un sostegno alle start-up in Ticino. Senza capitale iniziale, anche un buon progetto può restare sulla carta. La selezione dovrebbe",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-finanziamenti-start-up-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incontro economico a Lugano sul finanziamento delle start-up"
+      },
+      "datePublished": "2026-10-11T11:40:47+00:00",
+      "dateModified": "2026-10-11T11:40:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/finanziamenti-start-up-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/cronaca/1948503/vittime-morte-nepal-lutto-inondazione": {
-    "articleId": "nepal-inondazione-lutto-vittime",
-    "ts": "2026-09-07T13:46:52.537Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/cronaca/1948521/investito-mortalmente-da-un-treno-aveva-13-anni": {
     "articleId": "investito-treno-13-anni-berna",
     "ts": "2026-09-07T14:02:05.103Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1956002/ue-sovranita-accordo-addio-quadri-lorenzo": {
     "articleId": "accordo-ue-sovranita-fiscale",
     "ts": "2026-10-11T07:00:07.374Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1956031/chi-finanzia-le-idee-finanzia-il-futuro": {
+    "articleId": "finanziamenti-start-up-ticino",
+    "ts": "2026-10-11T11:40:47.906Z",
     "keyForm": 2
   }
 }

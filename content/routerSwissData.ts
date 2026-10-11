@@ -2712,6 +2712,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'accordo-ue-sovranita-fiscale': { it: 'accordo-ue-sovranita-fiscale', en: 'eu-agreement-tax-sovereignty', de: 'eu-abkommen-steuerliche-souveraenitaet', fr: 'accord-ue-souverainete-fiscale' },
  'riqualificazione-uri-domanda': { it: 'riqualificazione-uri-domanda', en: 'uri-energy-renovation', de: 'uri-energiesanierung', fr: 'renovation-energetique-uri' },
  'permesso-edilizio-uri': { it: 'permesso-edilizio-uri', en: 'uri-building-permit-requirements', de: 'baugesuch-uri-anforderungen', fr: 'permis-construire-uri-exigences' },
+ 'finanziamenti-start-up-ticino': { it: 'finanziamenti-start-up-ticino', en: 'startup-funding-ticino', de: 'startup-finanzierung-tessin', fr: 'financement-start-up-tessin' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

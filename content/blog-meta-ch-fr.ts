@@ -8069,6 +8069,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-edilizio-uri.title': 'Autorisation de construire dans le canton d’Uri : exigences et procédure',
     'blog.article.permesso-edilizio-uri.excerpt': 'Dans le canton d’Uri, l’autorisation de construire nécessite des vérifications concernant les exigences, les documents, les services compétents, les délais et les oppositions : les travaux ne commencent qu’après l’autorisation.',
     'blog.article.permesso-edilizio-uri.imageAlt': 'Plans et documents pour une autorisation de construire dans le canton d\'Uri',
+    'blog.article.finanziamenti-start-up-ticino.title': 'Financements pour les start-up au Tessin : la proposition',
+    'blog.article.finanziamenti-start-up-ticino.excerpt': 'Tresoldi propose d’étudier un soutien aux start-up au Tessin.',
+    'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Réunion d\'affaires à Lugano sur le financement des start-up',
 };
 
 export default blogMetaChFr;

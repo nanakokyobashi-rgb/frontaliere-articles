@@ -8069,6 +8069,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-edilizio-uri.title': 'Building permit in the canton of Uri: requirements and procedure',
     'blog.article.permesso-edilizio-uri.excerpt': 'In the Canton of Uri, a building permit requires checks on requirements, documents, offices, deadlines and objections: work may begin only after the permit has been issued.',
     'blog.article.permesso-edilizio-uri.imageAlt': 'Building plans and documents for a permit in the canton of Uri',
+    'blog.article.finanziamenti-start-up-ticino.title': 'Funding for start-ups in Ticino: the proposal',
+    'blog.article.finanziamenti-start-up-ticino.excerpt': 'Tresoldi proposes studying support for start-ups in Ticino.',
+    'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Business meeting in Lugano discussing start-up funding',
 };
 
 export default blogMetaChEn;
