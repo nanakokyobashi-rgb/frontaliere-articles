@@ -1787,7 +1787,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.lamal-vs-ssn-decisione.imageAlt': 'Mendrisio al tramonto con vista sulle montagne del Canton Ticino.',
 
  'blog.article.trovare-lavoro-ticino.title': 'Come trovare lavoro in Ticino da frontaliere: guida completa 2026',
- 'blog.article.trovare-lavoro-ticino.excerpt': 'Portali di ricerca, settori che assumono, CV svizzero, colloquio e stipendi medi: tutto per trovare lavoro in Canton Ticino dall\'Italia.',
+ 'blog.article.trovare-lavoro-ticino.excerpt': 'Dati USTAT e SECO, canali ufficiali, CV, permesso G e benchmark salariali: come candidarsi per un lavoro in Ticino dall’Italia.',
  'blog.article.trovare-lavoro-ticino.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne, cuore economico del Ticino.',
 
  'blog.article.guida-completa-frontaliere.title': 'Guida completa per diventare frontaliere in Svizzera nel 2026',

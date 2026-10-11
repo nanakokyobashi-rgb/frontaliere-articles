@@ -1787,7 +1787,7 @@ const blogMetaFr: Record<string, string> = {
  'blog.article.lamal-vs-ssn-decisione.imageAlt': 'Mendrisio au coucher du soleil avec vue sur les montagnes du Tessin.',
 
  'blog.article.trovare-lavoro-ticino.title': 'Comment trouver un emploi au Tessin en tant que frontalier : guide 2026',
- 'blog.article.trovare-lavoro-ticino.excerpt': 'Portails d\'emploi, secteurs qui recrutent, CV suisse, entretien et salaires moyens : tout pour trouver un emploi au canton du Tessin depuis l\'Italie.',
+ 'blog.article.trovare-lavoro-ticino.excerpt': 'Données USTAT et SECO, canaux officiels, CV, permis G et repères salariaux : candidater pour travailler au Tessin depuis l’Italie.',
  'blog.article.trovare-lavoro-ticino.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes, cœur économique du Tessin.',
 
  'blog.article.guida-completa-frontaliere.title': 'Guide complet pour devenir frontalier en Suisse en 2026',

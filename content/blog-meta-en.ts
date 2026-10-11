@@ -1786,7 +1786,7 @@ const blogMetaEn: Record<string, string> = {
  'blog.article.lamal-vs-ssn-decisione.imageAlt': 'Mendrisio at sunset with Canton Ticino mountain views.',
 
  'blog.article.trovare-lavoro-ticino.title': 'How to Find a Job in Ticino as a Cross-Border Worker: 2026 Guide',
- 'blog.article.trovare-lavoro-ticino.excerpt': 'Job portals, hiring sectors, Swiss CV format, interview tips and average salaries: everything you need to find work in Canton Ticino from Italy.',
+ 'blog.article.trovare-lavoro-ticino.excerpt': 'USTAT and SECO data, official job channels, CV, G permit and salary benchmarks: how to apply for work in Ticino from Italy.',
  'blog.article.trovare-lavoro-ticino.imageAlt': 'Panoramic view of Lugano with the lake and mountains, the economic heart of Ticino.',
 
  'blog.article.guida-completa-frontaliere.title': 'Complete Guide to Becoming a Cross-Border Worker in Switzerland 2026',
