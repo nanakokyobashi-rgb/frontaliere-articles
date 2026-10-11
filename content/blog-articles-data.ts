@@ -5017,6 +5017,7 @@ const RAW_ARTICLES = [
  id: 'passaggio-statuto-s-permesso-b',
  category: 'pratico',
  date: '2026-03-22T09:44:18.179Z',
+ updatedAt: '2026-10-11',
  image: '/images/blog/passaggio-statuto-s-permesso-b.webp',
  hasCalculator: true,
  articleType: 'evergreen',

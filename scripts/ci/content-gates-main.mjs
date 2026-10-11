@@ -194,6 +194,7 @@ export const CONTENT_GATES = [
   'generator/tests/evergreen-lamal-vs-ssn-decisione-refresh.test.mjs',
   'generator/tests/evergreen-mappa-fiscale-comuni-frontiera-refresh.test.mjs',
   'generator/tests/evergreen-naspi-disoccupazione-frontalieri-refresh.test.mjs',
+  'generator/tests/evergreen-passaggio-statuto-s-permesso-b-refresh.test.mjs',
   'generator/tests/evergreen-maternita-paternita-frontaliere-guida-refresh.test.mjs',
   'generator/tests/evergreen-maternita-paternita-ticino-refresh.test.mjs',
   'generator/tests/evergreen-naspi-ex-frontalieri-2026-refresh.test.mjs',

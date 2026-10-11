@@ -619,10 +619,10 @@ const BLOG_SEO_METADATA_3: Record<string, SEOMetadata> = {
 
  'blog-passaggio-statuto-s-permesso-b': {
  title: 'Dallo statuto S al permesso B in Ticino | Frontaliere Ticino',
- description: 'Il passaggio dallo statuto S al permesso B riguarda i profughi ucraini in Svizzera, con implicazioni economiche e sociali per il Canton Ticino, fino al 2027.',
- keywords: 'frontalieri, ticino, svizzera, italia, dallo, statuto, permesso, passaggio',
+ description: 'Dopo almeno cinque anni di soggiorno ininterrotto, chi beneficia dello statuto S ha diritto a un permesso B collegato: requisiti, ruolo del Cantone e proroga federale fino al 4 marzo 2028.',
+ keywords: 'frontalieri, ticino, svizzera, ucraina, statuto, protezione, permesso, soggiorno, B',
  ogTitle: 'Dallo statuto S al permesso B in Ticino',
- ogDescription: 'Il passaggio dallo statuto S al permesso B riguarda i profughi ucraini in Svizzera, con implicazioni economiche e sociali per il Canton Ticino, fino al 2027.',
+ ogDescription: 'Dopo almeno cinque anni di soggiorno ininterrotto, chi beneficia dello statuto S ha diritto a un permesso B collegato: requisiti, ruolo del Cantone e proroga federale fino al 4 marzo 2028.',
  canonicalPath: '/articoli-frontaliere/passaggio-statuto-s-permesso-b/',
  structuredData: {
  "@context": "https://schema.org",
@@ -636,7 +636,7 @@ const BLOG_SEO_METADATA_3: Record<string, SEOMetadata> = {
  "caption": "Panorama di Bellinzona con le sue torri e il paesaggio montano circostante, rappresentativo del confine tra Italia e Svizzera."
  },
  "datePublished": "2026-03-22T09:44:18+00:00",
- "dateModified": "2026-03-22T09:44:18+00:00",
+ "dateModified": "2026-10-11T00:00:00+00:00",
  "inLanguage": "it",
  "author": {"@type": "Person", "name": "Valerie Linc", "jobTitle": "Esperta fiscale frontalieri", "url": "https://frontaliereticino.ch/chi-siamo/", "sameAs": "https://www.linkedin.com/in/valerie-linc/"},
  "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
