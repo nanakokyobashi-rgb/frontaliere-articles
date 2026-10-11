@@ -48,6 +48,17 @@ test('extractBodyFields decodifica le stringhe TS senza confondere gli escape JS
   ]);
 });
 
+test('extractBodyFields legge anche chiavi e valori delimitati da doppi apici', () => {
+  const entries = extractBodyFields([
+    '"blog.article.demo.body1": "Titolo \\"citato\\"\\nseconda"',
+    '"blog.article.demo.body2": "Secondo corpo"',
+  ].join('\n'));
+  assert.deepEqual(entries, [
+    { id: 'demo', field: 'body1', value: 'Titolo "citato"\nseconda' },
+    { id: 'demo', field: 'body2', value: 'Secondo corpo' },
+  ]);
+});
+
 test('extractBodyFields include i body opzionali emessi dal writer fino a body20', () => {
   const entries = extractBodyFields(
     "'blog.article.demo.body4': 'Quattro',\n"
