@@ -65,6 +65,34 @@ for (const [file, marker, supersededEcho, cleanupFlag] of [
   });
 }
 
+test('redcheck posta il marker con GITHUB_TOKEN senza cambiare l identita operativa del PAT', () => {
+  const source = readFileSync(path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml'), 'utf8');
+  const start = source.indexOf('      - name: Round cap + capability guard + tier');
+  assert.ok(start >= 0, 'guard redcheck non trovato');
+  const next = source.indexOf('\n      - name: ', start + 10);
+  const guard = source.slice(start, next < 0 ? undefined : next);
+  assert.match(guard, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+  assert.match(guard, /MARKER_GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
+    'il token Actions deve restare disponibile separatamente dal PAT runtime');
+  assert.match(guard, /export GH_TOKEN="\$GITHUB_PAT_NANAKO"/,
+    'le letture e le operazioni operative continuano a usare il PAT runtime');
+  assert.match(guard, /marker_result=\$\(GH_TOKEN="\$MARKER_GH_TOKEN" node /,
+    'solo la creazione/verifica del marker deve usare l identita github-actions[bot]');
+});
+
+test('il gemello redflag mantiene il token Actions nel guard del marker', () => {
+  const source = readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
+  const start = source.indexOf('      - name: Round cap + capability guard + tier');
+  assert.ok(start >= 0, 'guard redflag non trovato');
+  const next = source.indexOf('\n      - name: ', start + 10);
+  const guard = source.slice(start, next < 0 ? undefined : next);
+  assert.match(guard, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+  assert.doesNotMatch(guard, /export GH_TOKEN="\$GITHUB_PAT_NANAKO"/,
+    'redflag non deve introdurre la stessa divergenza di identita');
+  assert.match(guard, /marker_result=\$\(node /,
+    'il marker resta attribuito a github-actions[bot] tramite il token Actions del guard');
+});
+
 test('helper marker: snapshot paginata e prova finale restano fail-closed', () => {
   const helper = readFileSync(path.join(ROOT, 'scripts/ci/fixer-round-marker.mjs'), 'utf8');
   assert.match(helper, /const afterComments = readPr\(repo, pr\)/);

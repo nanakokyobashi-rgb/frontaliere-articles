@@ -21,6 +21,12 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.title': 'Buchs prévoit un déficit de 3,1 millions dans le budget 2027',
     'blog.article.buchs-deficit-2027-budget.excerpt': 'La commune de Buchs prévoit un déficit d\'environ 3,1 millions de francs pour 2027, en maintenant le multiplicateur fiscal à 118% et en prévoyant une hausse des coûts résiduels de soins de 600\'000 francs.',
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'Vue de la mairie de Buchs avec les documents budgétaires sur une table, arrière-plan campagne argovienne',
+    'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS en Argovie : coûts d\'assainissement encore incertains',
+    'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'En Argovie, seuls deux tiers des communes ont répondu au sujet des PFAS.',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.argovia-polizia-regionale-poteri.title': 'Argovie : plus de pouvoirs pour la police régionale dès 2028',
+    'blog.article.argovia-polizia-regionale-poteri.excerpt': 'Le gouvernement argovien propose au Grand Conseil de nouvelles tâches pour les polices régionales ; la loi entrerait en vigueur le 1er janvier 2028.',
+    'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Voiture de police régionale devant un bâtiment communal en Argovie.',
 };
 
 export default blogMetaCantonAgFr;

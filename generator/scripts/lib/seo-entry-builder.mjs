@@ -10,6 +10,7 @@
 import '../../../host/cantonSectionsBootstrap.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { assertPlainDescriptionFields } from './article-excerpt.mjs';
+import { assertSeoDescriptionMinimum } from './seo-description-contract.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
   DETERMINISTIC_CARD_KIND,
@@ -196,6 +197,10 @@ export function buildSeoEntry(data, {
     fieldPrefix: 'seo.',
     id: data.id,
     locale: 'it',
+  });
+  assertSeoDescriptionMinimum(data.seo.description, {
+    id: data.id,
+    sourceDescriptionLength: data.seo.description?.length,
   });
   const imagePath = data._generatedImagePath.replace(/^\//, '');
   const canonicalPath = `/${hubSlug}/${data.slugs.it}/`;

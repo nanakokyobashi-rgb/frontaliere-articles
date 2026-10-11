@@ -270,6 +270,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incendio-cavi-cff-eclepens': {
+    title: 'Incendio a Eclépens: ipotesi di atto criminale',
+    description: 'Incendio vicino ai binari CFF a Eclépens il 9 ottobre Cavi per i segnali luminosi bruciati e fuori uso Traffico interrotto tra Lausanne e Yverdon/Vallorbe',
+    keywords: 'frontalieri, ticino, svizzera, italia, incendio, eclépens, ipotesi, atto',
+    ogTitle: 'Eclépens, incendio vicino ai binari CFF',
+    ogDescription: 'Incendio vicino ai binari CFF a Eclépens il 9 ottobre Cavi per i segnali luminosi bruciati e fuori uso Traffico interrotto tra Lausanne e Yverdon/Vallorbe',
+    canonicalPath: '/articoli-vaud/incendio-cavi-cff-eclepens/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incendio a Eclépens: ipotesi di atto criminale",
+      "description": "Incendio vicino ai binari CFF a Eclépens il 9 ottobre Cavi per i segnali luminosi bruciati e fuori uso Traffico interrotto tra Lausanne e Yverdon/Vallorbe",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incendio-cavi-cff-eclepens.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Binari CFF vicino a Eclépens dopo l'incendio del 9 ottobre 2026"
+      },
+      "datePublished": "2026-10-10T21:04:30+00:00",
+      "dateModified": "2026-10-10T21:04:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/incendio-cavi-cff-eclepens/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

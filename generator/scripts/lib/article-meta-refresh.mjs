@@ -57,15 +57,16 @@
  * — the exact failure `seo-description-cap.test.mjs` exists to stop, and it
  * already happened twice (see that file's header).
  *
- * `SEO_DESCRIPTION_MAX`/`SEO_OG_DESCRIPTION_MAX` below are NOT imported from
+ * `SEO_DESCRIPTION_MIN` is imported from the shared contract so registration
+ * and refresh enforce the same floor. `SEO_DESCRIPTION_MAX`/`SEO_OG_DESCRIPTION_MAX` below are NOT imported from
  * create-article.mjs: importing that module pulls in its static `jsdom`
  * dependency, which this module deliberately stays free of (see above). They
  * are the same two numbers, kept in sync by
  * `article-meta-refresh.test.mjs`'s budget-sync test, per AGENTS.md #6 (a
  * value that cannot be imported gets the link covered by a test instead).
- * `truncateToClauseNonEmpty` IS imported, from the same dependency-free module
- * `clampSeoDescriptions` itself delegates to — the truncation ALGORITHM has
- * one source; only the two threshold numbers are duplicated, and covered.
+ * `truncateToClause` is imported from the same dependency-free module
+ * `clampSeoDescriptions` delegates to. Refusing an overlong first token is
+ * intentional here: repair must not publish a mid-word SEO description.
  */
 import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
@@ -76,7 +77,8 @@ import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { assertPlainDescriptionFields } from './article-excerpt.mjs';
-import { truncateToClauseNonEmpty } from '../../../host/shared/clauseTail.mjs';
+import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './seo-description-contract.mjs';
+import { truncateToClause } from '../../../host/shared/clauseTail.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
   REGISTER_LOCK_KIND_ARTICLE_REFRESH,
@@ -123,7 +125,7 @@ const SEO_ENTRY_DESCRIPTION_BUDGETS = {
 
 function clampField(value, maxLen) {
   if (typeof value !== 'string' || value.length <= maxLen) return value;
-  return truncateToClauseNonEmpty(value, maxLen);
+  return truncateToClause(value, maxLen);
 }
 
 /** Clamp only the budgeted fields of a per-locale `{excerpt, seoDescription,
@@ -135,6 +137,11 @@ function clampBudgetedFields(fields, budgets) {
   for (const [field, max] of Object.entries(budgets)) {
     if (!(field in fields)) continue;
     const clamped = clampField(fields[field], max);
+    if (typeof fields[field] === 'string' && fields[field].length > max && clamped === '') {
+      throw new Error(
+        `clampBudgetedFields: ${field} has no safe clause boundary within ${max} characters; refusing a mid-word write.`,
+      );
+    }
     if (clamped !== fields[field]) {
       if (out === fields) out = { ...fields };
       out[field] = clamped;
@@ -353,6 +360,15 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
 
   try {
     const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
+    if (typeof clampedSeoTexts?.description === 'string') {
+      // This path rewrites an already-published SEO entry. No trustworthy
+      // fallback is available here, so reject a short result before any file
+      // write and leave the previous public value intact.
+      assertSeoDescriptionMinimum(clampedSeoTexts.description, {
+        id,
+        sourceDescriptionLength: seoTexts?.description?.length,
+      });
+    }
     let seoUpdate = null;
     const localeUpdates = [];
 

@@ -9,10 +9,15 @@
  * scritta dal generatore, col tipo che il writer assegna a quella run
  * (`registryArticleTypeForRun`). Una decisione `unclassified` e ogni voce
  * ambigua restano senza tipo. Il ledger non autorizza mai la scrittura di
- * `verifiedAt` o di altri campi.
+ * `verifiedAt` o di altri campi. Il manifesto laterale pinna cardinalita' e
+ * digest del set approvato, cosi' una riga persa non ricade silenziosamente
+ * nel fallback. I due registry sono preparati entrambi prima delle
+ * sostituzioni; errori sincroni di rename attivano il rollback, ma non si
+ * promette atomicita' contro crash tra i rename.
  */
 
-import { existsSync, readFileSync, realpathSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -21,6 +26,7 @@ import {
   readRegistryEntries,
   registryArticleTypeForRun,
 } from './lib/registry-article-type.mjs';
+import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
 
 // Riesportati per i test: il lettore e' quello condiviso col backfill dei cantoni.
@@ -29,9 +35,68 @@ export { readTsStringLiteral, readTsStringMap };
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 export const ARTICLE_TYPE_READINGS_PATH = 'data/article-type-readings.json';
+export const ARTICLE_TYPE_READINGS_MANIFEST_PATH = 'data/article-type-readings.manifest.json';
 
 const LEDGER_DECISIONS = new Set(['news', 'evergreen', 'unclassified']);
 const LEDGER_KEYS = ['basis', 'decision', 'id', 'readAt', 'reason'];
+const LEDGER_SCHEMA_VERSION = 1;
+
+function canonicalJsonValue(value) {
+  if (Array.isArray(value)) return value.map(canonicalJsonValue);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.keys(value).sort().map((key) => [key, canonicalJsonValue(value[key])]),
+    );
+  }
+  return value;
+}
+
+/** Digest semantico del ledger: ignora spazi e ordine delle chiavi, non le righe. */
+export function articleTypeReadingsDigest(rows) {
+  return createHash('sha256').update(JSON.stringify(canonicalJsonValue(rows))).digest('hex');
+}
+
+/** Rifiuta un ledger troncato o alterato prima che una riga mancante ricada nel fallback. */
+export function assertCompleteArticleTypeLedger(ledger) {
+  if (!ledger || typeof ledger !== 'object' || Array.isArray(ledger)) {
+    throw new Error('ledger article type: la radice deve contenere il manifesto di copertura');
+  }
+  const expectedKeys = ['expectedRows', 'rows', 'rowsSha256', 'schemaVersion'].sort().join('|');
+  if (Object.keys(ledger).sort().join('|') !== expectedKeys) {
+    throw new Error('ledger article type: manifesto di copertura con forma inattesa');
+  }
+  if (ledger.schemaVersion !== LEDGER_SCHEMA_VERSION) {
+    throw new Error(`ledger article type: schema non supportato ${JSON.stringify(ledger.schemaVersion)}`);
+  }
+  if (!Number.isInteger(ledger.expectedRows) || ledger.expectedRows < 0) {
+    throw new Error('ledger article type: expectedRows non valido');
+  }
+  if (!Array.isArray(ledger.rows)) throw new Error('ledger article type: rows deve essere un array');
+  if (ledger.rows.length !== ledger.expectedRows) {
+    throw new Error(
+      `ledger article type: copertura incompleta (attese ${ledger.expectedRows} righe, trovate ${ledger.rows.length})`,
+    );
+  }
+  if (!/^[a-f0-9]{64}$/u.test(ledger.rowsSha256 || '')) {
+    throw new Error('ledger article type: rowsSha256 non valido');
+  }
+  const actualDigest = articleTypeReadingsDigest(ledger.rows);
+  if (actualDigest !== ledger.rowsSha256) {
+    throw new Error('ledger article type: digest di copertura non corrispondente');
+  }
+  return ledger.rows;
+}
+
+function isCalendarDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/u.test(String(value || ''))) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
+
+/** `readAt` deve essere una data valida non successiva al giorno del backfill. */
+export function isReadAtNotFuture(readAt, todayYmd) {
+  return isCalendarDate(readAt) && isCalendarDate(todayYmd) && readAt <= todayYmd;
+}
 
 export const SECTIONS = Object.freeze({
   frontaliere: {
@@ -100,25 +165,36 @@ function body3For(root, bodyDir, id) {
  *
  * Il ledger e' intenzionalmente indipendente da
  * `data/evergreen-verifications.json`: una decisione editoriale di tipo non
- * e' una verifica di freschezza. Fail-closed su forma, duplicati e ID che non
- * esistono nel registry frontaliere.
+ * e' una verifica di freschezza. Fail-closed su manifesto, copertura, date
+ * future, forma, duplicati e ID che non esistono nel registry frontaliere.
  */
-export function readArticleTypeReadings(root = ROOT) {
+export function readArticleTypeReadings(root = ROOT, { todayYmd = new Date().toISOString().slice(0, 10) } = {}) {
   const file = path.join(root, ARTICLE_TYPE_READINGS_PATH);
+  const manifestFile = path.join(root, ARTICLE_TYPE_READINGS_MANIFEST_PATH);
   let rows;
+  let manifest;
   try {
     rows = JSON.parse(readFileSync(file, 'utf8'));
+    manifest = JSON.parse(readFileSync(manifestFile, 'utf8'));
   } catch (error) {
-    throw new Error(`ledger article type illeggibile (${file}): ${error.message}`);
+    throw new Error(`ledger article type o manifesto illeggibile (${file}; ${manifestFile}): ${error.message}`);
   }
-  if (!Array.isArray(rows)) throw new Error('ledger article type: la radice deve essere un array');
+  const manifestKeys = ['expectedRows', 'rowsSha256', 'schemaVersion'].sort().join('|');
+  if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)
+    || Object.keys(manifest).sort().join('|') !== manifestKeys) {
+    throw new Error('ledger article type: manifesto di copertura con forma inattesa');
+  }
+  const completeRows = assertCompleteArticleTypeLedger({ ...manifest, rows });
+  if (!isCalendarDate(todayYmd)) {
+    throw new Error(`ledger article type: todayYmd non valida: ${JSON.stringify(todayYmd)}`);
+  }
 
   const registryFile = path.join(root, SECTIONS.frontaliere.registry);
   const registryIds = new Set(readRegistryEntries(readFileSync(registryFile, 'utf8')).map((entry) => entry.id));
   const seen = new Set();
   const expectedKeys = [...LEDGER_KEYS].sort().join('|');
 
-  for (const [index, row] of rows.entries()) {
+  for (const [index, row] of completeRows.entries()) {
     if (!row || typeof row !== 'object' || Array.isArray(row)) {
       throw new Error(`ledger article type: voce ${index + 1} non e' un oggetto`);
     }
@@ -143,18 +219,17 @@ export function readArticleTypeReadings(root = ROOT) {
     if (typeof row.reason !== 'string' || row.reason.trim() === '') {
       throw new Error(`ledger article type: motivo mancante per ${row.id}`);
     }
-    if (!/^\d{4}-\d{2}-\d{2}$/u.test(row.readAt)) {
-      throw new Error(`ledger article type: readAt non valida per ${row.id}: ${JSON.stringify(row.readAt)}`);
-    }
-    const readAt = new Date(`${row.readAt}T00:00:00Z`);
-    if (Number.isNaN(readAt.getTime()) || readAt.toISOString().slice(0, 10) !== row.readAt) {
+    if (!isCalendarDate(row.readAt)) {
       throw new Error(`ledger article type: readAt non valida per ${row.id}: ${row.readAt}`);
+    }
+    if (!isReadAtNotFuture(row.readAt, todayYmd)) {
+      throw new Error(`ledger article type: readAt nel futuro per ${row.id}: ${row.readAt} (oggi ${todayYmd})`);
     }
     if (row.basis !== 'reading') {
       throw new Error(`ledger article type: basis non valida per ${row.id}: ${JSON.stringify(row.basis)}`);
     }
   }
-  return rows;
+  return completeRows;
 }
 
 /** Costruisce il piano senza scrivere file. */
@@ -204,16 +279,9 @@ export function planBackfill(root = ROOT) {
   return result;
 }
 
-let writeTmpSeq = 0;
-function writeAtomic(file, source) {
-  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
-  try {
-    writeFileSync(tmp, source, 'utf8');
-    renameSync(tmp, file);
-  } catch (error) {
-    try { unlinkSync(tmp); } catch { /* best effort */ }
-    throw error;
-  }
+/** Acceptance token per la scrittura con rollback della coppia di registry. */
+export function writeRegistryPairAtomically(changes, options) {
+  return writeFilePairAtomically(changes, options);
 }
 
 function parseArgs(argv) {
@@ -238,16 +306,18 @@ function printSummary(plan, apply) {
   console.log(apply ? 'modalità: apply' : 'modalità: dry-run (nessun file modificato)');
 }
 
-export function applyPlan(plan) {
+export function applyPlan(plan, { fsImpl } = {}) {
   const changed = {};
+  const writes = [];
   for (const [section, row] of Object.entries(plan)) {
     const result = applyRegistryArticleTypes(row.source, row.typesById);
     if (result.changed !== row.typesById.size) {
       throw new Error(`${section}: cambiate ${result.changed} voci su ${row.typesById.size} assegnazioni`);
     }
-    if (result.changed > 0) writeAtomic(row.registryFile, result.source);
+    writes.push({ file: row.registryFile, before: row.source, after: result.source });
     changed[section] = result.changed;
   }
+  writeRegistryPairAtomically(writes, { fsImpl });
   return changed;
 }
 

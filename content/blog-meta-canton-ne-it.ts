@@ -15,6 +15,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.aldi-chiude-centro-neuchatel.title': 'Aldi chiuderà il negozio in centro a Neuchâtel',
     'blog.article.aldi-chiude-centro-neuchatel.excerpt': 'Aldi chiuderà a fine novembre 2026.',
     'blog.article.aldi-chiude-centro-neuchatel.imageAlt': 'Ingresso di un negozio alimentare in Rue Saint-Honoré a Neuchâtel',
+    'blog.article.nuovo-centro-asilo-couvet.title': 'Nuovo centro accoglienza asilo a Couvet: parte il progetto',
+    'blog.article.nuovo-centro-asilo-couvet.excerpt': 'Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers',
+    'blog.article.nuovo-centro-asilo-couvet.imageAlt': 'Rappresentazione di un edificio pubblico ristrutturato a Couvet, Canton Neuchâtel',
 };
 
 export default blogMetaCantonNeIt;

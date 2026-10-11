@@ -56,8 +56,8 @@
  *                            pubblico della card o il `title` dell'immagine
  *                            editoriale
  *   - `articleDateFromDetail: html-meta` → per le card senza data legge solo
- *                            JSON-LD/meta/time della pagina dettaglio entro
- *                            `maxRequestsPerRun`, senza estrarne il corpo
+ *                            JSON-LD/meta e `<time>` marcati come pubblicazione
+ *                            entro `maxRequestsPerRun`, senza estrarne il corpo
  *   - `datetimeYearOffset` → `<time datetime>` con l'anno sbagliato (ur.ch:
  *                            2626): le date oltre domani si correggono dell'offset
  *   - `articlePathPattern` → fonti `html-links`: regex su path + query dei link
@@ -399,11 +399,12 @@ export function charsetFromDocumentHead(asciiHead) {
 
 /**
  * Decodifica il corpo di una risposta. Ordine: quirk `charset`, header,
- * documento, UTF-8. Un charset che TextDecoder non conosce ricade su UTF-8.
+ * documento, UTF-8. Un charset non supportato ricade su UTF-8 e viene
+ * annotato; il testo di fallback va respinto prima dell'estrazione.
  *
  * @param {Uint8Array | ArrayBuffer} body
  * @param {{ contentType?: string | null, forcedCharset?: string | null }} [opts]
- * @returns {{ text: string, charset: string }}
+ * @returns {{ text: string, charset: string, unsupported?: string }}
  */
 export function decodeResponseBody(body, { contentType = null, forcedCharset = null } = {}) {
   const bytes = body instanceof Uint8Array ? body : new Uint8Array(body);
@@ -422,6 +423,13 @@ export function decodeResponseBody(body, { contentType = null, forcedCharset = n
     decoder = new TextDecoder('utf-8');
   }
   return { text: decoder.decode(bytes), charset, ...(unsupported ? { unsupported } : {}) };
+}
+
+/** Rifiuta il fallback UTF-8 quando la risposta dichiara un charset sconosciuto. */
+function rejectUnsupportedCharset(decoded) {
+  if (decoded.unsupported) {
+    throw new Error(`charset ${decoded.unsupported} non supportato: risposta rifiutata prima dell'estrazione`);
+  }
 }
 
 // ── Entita' e testo ──────────────────────────────────────────────────────────
@@ -461,11 +469,55 @@ function validDate(raw) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
+function htmlAttributeValue(attrs, name) {
+  const re = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'=<>]+))`, 'i');
+  const found = re.exec(attrs || '');
+  return found ? decodeHtmlEntities(found[1] ?? found[2] ?? found[3] ?? '') : '';
+}
+
+/** Seleziona solo `<time>` con semantica esplicita di data di pubblicazione. */
+export function selectPublishedTime(html) {
+  const input = String(html || '');
+  const publicationDates = [];
+  const time = /<time\b([^>]*)>/gi;
+  let match;
+  while ((match = time.exec(input)) !== null) {
+    const attrs = match[1] || '';
+    const itemprop = htmlAttributeValue(attrs, 'itemprop');
+    const property = htmlAttributeValue(attrs, 'property');
+    const className = htmlAttributeValue(attrs, 'class');
+    const compactClass = className
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/[^a-z0-9]/gi, '')
+      .toLowerCase();
+    const semanticMarker = [itemprop, property].some((value) => {
+      const compact = String(value).replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/[^a-z0-9]/gi, '').toLowerCase();
+      return /(?:datepublished|publicationdate)$/.test(compact);
+    });
+    const classTokens = className
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .split(/[^a-z0-9]+/i)
+      .map((token) => token.toLowerCase())
+      .filter(Boolean);
+    const classMarker = classTokens.some((token) => /^(?:published|pubdate|datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(token))
+      || /^(?:(?:article|news|post))?(?:datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(compactClass);
+    const dataMarker = /(?:^|\s)data-(?:published|date-published)(?:\s|=|$)/i.test(attrs);
+    if (!semanticMarker && !classMarker && !dataMarker) continue;
+
+    const date = validDate(htmlAttributeValue(attrs, 'datetime'));
+    if (date) publicationDates.push(date);
+  }
+
+  const timestamps = new Set(publicationDates.map((date) => date.getTime()));
+  return timestamps.size === 1 ? publicationDates[0] : null;
+}
+
 /**
  * Estrae la data editoriale pubblica di una pagina dettaglio senza leggere il
  * corpo. Serve ai portali (per esempio Schaffhausen24) che ordinano le card
  * per ID ma non stampano la data nell'elenco. L'ordine è intenzionale: JSON-LD,
- * meta editoriali, poi `<time>`. Un markup non valido lascia l'item undated.
+ * meta editoriali, poi `<time>` esplicitamente marcati come pubblicazione. Un
+ * `<time>` generico può essere una data d'evento e resta undated.
  */
 export function extractPublishedDateFromHtml(html) {
   const input = String(html || '');
@@ -477,26 +529,16 @@ export function extractPublishedDateFromHtml(html) {
     if (date) return date;
   }
 
-  const attribute = (attrs, name) => {
-    const re = new RegExp(`(?:^|\\s)${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'=<>]+))`, 'i');
-    const found = re.exec(attrs || '');
-    return found ? decodeHtmlEntities(found[1] ?? found[2] ?? found[3] ?? '') : '';
-  };
   const meta = /<meta\b([^>]*)>/gi;
   while ((match = meta.exec(input)) !== null) {
     const attrs = match[1] || '';
-    const key = attribute(attrs, 'property') || attribute(attrs, 'name');
+    const key = htmlAttributeValue(attrs, 'property') || htmlAttributeValue(attrs, 'name');
     if (!/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) continue;
-    const date = validDate(attribute(attrs, 'content'));
+    const date = validDate(htmlAttributeValue(attrs, 'content'));
     if (date) return date;
   }
 
-  const time = /<time\b([^>]*)>/gi;
-  while ((match = time.exec(input)) !== null) {
-    const date = validDate(attribute(match[1] || '', 'datetime'));
-    if (date) return date;
-  }
-  return null;
+  return selectPublishedTime(input);
 }
 
 /** `dd.mm.yyyy` (e `dd.mm.yyyy hh:mm:ss`) → Date locale, o null. */
@@ -1274,8 +1316,8 @@ export async function scanCantonSource(source, ctx) {
             contentType: res.headers?.get?.('content-type') ?? null,
             forcedCharset: quirks.charset || null,
           });
-          if (decoded.unsupported) notes.push(`charset ${decoded.unsupported} non supportato: decodificato come UTF-8, testo forse alterato`);
-          else if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
+          rejectUnsupportedCharset(decoded);
+          if (decoded.charset !== 'utf-8') notes.push(`charset ${decoded.charset}`);
           return decoded.text;
         });
       } catch (error) {

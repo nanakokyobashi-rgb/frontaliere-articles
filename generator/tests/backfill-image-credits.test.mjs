@@ -25,6 +25,7 @@ import {
   checkTree,
   fetchSnapshot,
   liveCommonsCovers,
+  repointCovers,
   retryAfterSeconds,
   serializeSnapshot,
   titleBatches,
@@ -199,6 +200,27 @@ test('--build without curation: credits what it can, strips those literals, and 
     const check = run(root, '--check');
     assert.equal(check.status, 1);
     assert.equal(check.stderr.split('\n').filter((l) => l.includes('needs a human')).length, 4);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('repointCovers aggiorna insieme i registry frontaliere e svizzera', () => {
+  const root = corpusTree();
+  try {
+    const changed = repointCovers(root, new Map([
+      ['locarno-uno', '/images/blog/locarno-new.webp'],
+      ['ch-locarno', '/images/blog/ch-locarno-new.webp'],
+    ]));
+    assert.equal(changed, 4, 'due registry e i due file SEO che li rispecchiano');
+    assert.match(
+      fs.readFileSync(path.join(root, 'content/blog-articles-data.ts'), 'utf8'),
+      /image: '\/images\/blog\/locarno-new\.webp'/u,
+    );
+    assert.match(
+      fs.readFileSync(path.join(root, 'content/swiss-articles-data.ts'), 'utf8'),
+      /image: '\/images\/blog\/ch-locarno-new\.webp'/u,
+    );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

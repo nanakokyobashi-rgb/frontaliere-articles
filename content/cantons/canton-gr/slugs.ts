@@ -9,6 +9,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'grigioni-valanghe-scuola-rossa-roveredo': { it: 'grigioni-valanghe-scuola-rossa-roveredo', en: 'graubunden-avalanches-school-rossa-roveredo', de: 'graubuenden-lawinen-schule-rossa-roveredo', fr: 'grisons-avalanches-ecole-rossa-roveredo' },
  'code-domenicali-landquart': { it: 'code-domenicali-landquart', en: 'sunday-traffic-landquart', de: 'sonntagsstau-landquart-outlet', fr: 'bouchons-dimanche-landquart' },
  'flaesch-strada-sentieri-chiusi': { it: 'flaesch-strada-sentieri-chiusi', en: 'flaesch-road-trails-closed', de: 'flaesch-strasse-wanderwege-gesperrt', fr: 'flaesch-route-sentiers-fermes' },
+ 'parco-solare-nalps-tujetsch': { it: 'parco-solare-nalps-tujetsch', en: 'nalps-alpine-solar-park-tujetsch', de: 'alpin-solarpark-nalps-tujetsch', fr: 'parc-solaire-alpin-nalps-tujetsch' },
+ 'lido-grono-estate-2027': { it: 'lido-grono-estate-2027', en: 'grono-pool-opening-2027', de: 'grono-schwimmbad-2027', fr: 'piscine-grono-ete-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

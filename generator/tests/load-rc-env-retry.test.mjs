@@ -24,6 +24,7 @@ import {
   formatMissingRcKeys,
   isRetryableRcFetchStatus,
   rcFetchBackoffMs,
+  RC_TO_ENV,
   RC_FETCH_TIMEOUT_MS,
   shouldExportRcValue,
   rcValueState,
@@ -110,6 +111,19 @@ test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', (
   assert.equal(shouldExportRcValue('', 'OMNIROUTE_PROVIDER_ALLOWLIST'), true);
 });
 
+test('il ponte RC espone le credenziali dei canali social al runtime locale', () => {
+  const socialMappings = {
+    INSTAGRAM_BUSINESS_ACCOUNT_ID: ['INSTAGRAM_BUSINESS_ACCOUNT_ID'],
+    SERVER_INSTAGRAM_ACCESS_TOKEN: ['INSTAGRAM_ACCESS_TOKEN'],
+    TIKTOK_USERNAME: ['TIKTOK_USERNAME'],
+    SERVER_TIKTOK_ACCESS_TOKEN: ['TIKTOK_ACCESS_TOKEN'],
+  };
+  for (const [key, envKeys] of Object.entries(socialMappings)) {
+    assert.deepEqual(RC_TO_ENV[key], envKeys, `${key} deve raggiungere il runtime`);
+    assert.equal(EXPECTED_ABSENT_RC_KEYS.has(key), true, `${key} deve essere assente prevista finché il canale non è configurato`);
+  }
+});
+
 test('il fallback legacy non sovrascrive il token LSA già accodato', () => {
   const queuedEnvKeys = new Set();
   const emittedValues = [];
@@ -176,6 +190,73 @@ test('fetchWithRefTimeout mantiene il timeout attivo durante la lettura del body
     await assert.rejects(response.json(), { name: 'TimeoutError' });
   } finally {
     globalThis.fetch = originalFetch;
+  }
+});
+
+test('fetchWithRefTimeout forza il timeout anche se il fetch ignora l’abort', async () => {
+  let aborted = false;
+  await assert.rejects(
+    fetchWithRefTimeout(
+      'https://ignored-abort.invalid',
+      {},
+      20,
+      async (_url, { signal }) => {
+        signal.addEventListener('abort', () => { aborted = true; }, { once: true });
+        return new Promise(() => {});
+      },
+    ),
+    { name: 'TimeoutError' },
+  );
+  assert.equal(aborted, true);
+});
+
+test('fetchWithRefTimeout cancella una Response restituita dopo il timeout', async () => {
+  let resolveFetch;
+  let cancellations = 0;
+  const fetchPromise = new Promise((resolve) => { resolveFetch = resolve; });
+
+  await assert.rejects(
+    fetchWithRefTimeout('https://late-response.invalid', {}, 20, () => fetchPromise),
+    { name: 'TimeoutError' },
+  );
+
+  resolveFetch({
+    body: {
+      cancel() {
+        cancellations += 1;
+        return Promise.resolve();
+      },
+    },
+  });
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(cancellations, 1);
+});
+
+test('fetchWithRefTimeout forza il timeout anche se il body reader ignora l’abort', async () => {
+  for (const reader of ['json', 'text']) {
+    let aborted = false;
+    let cancellations = 0;
+    const response = await fetchWithRefTimeout(
+      'https://ignored-body-abort.invalid',
+      {},
+      20,
+      async (_url, { signal }) => ({
+        body: {
+          cancel() {
+            cancellations += 1;
+            return Promise.resolve();
+          },
+        },
+        [reader]() {
+          signal.addEventListener('abort', () => { aborted = true; }, { once: true });
+          return new Promise(() => {});
+        },
+      }),
+    );
+
+    await assert.rejects(response[reader](), { name: 'TimeoutError' });
+    assert.equal(aborted, true);
+    assert.equal(cancellations, 1);
   }
 });
 

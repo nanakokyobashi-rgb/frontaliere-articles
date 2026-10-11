@@ -70,6 +70,7 @@ function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = []
   // fixture so the test reaches its own assertions instead of failing on the
   // committed input lookup.
   write(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
+  write(root, 'generator/data/localized-toponyms.json', fs.readFileSync(path.join(REPO, 'generator/data/localized-toponyms.json'), 'utf8'));
   const row = ({ id, cover = id }) => {
     const imageFields = id === RETIRED && retiredImageFields
       ? retiredImageFields

@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'finanze-cantone-sciaffusa-2027',
+ category: 'fiscale',
+ date: '2026-10-10T21:14:11.679Z',
+ image: '/images/blog/article-finanze-cantone-sciaffusa-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

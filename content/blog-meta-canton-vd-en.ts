@@ -24,6 +24,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.perdite-agricole-canton-vaud-caldo.title': 'Agricultural losses in the Canton of Vaud: over 100 million',
     'blog.article.perdite-agricole-canton-vaud-caldo.excerpt': 'The estimates of the Vodese agricultural associations indicate losses of more than 100 million francs for the two-year period 2026-2027 due to drought.',
     'blog.article.perdite-agricole-canton-vaud-caldo.imageAlt': 'Agricultural fields in Canton Vaud affected by drought',
+    'blog.article.incendio-cavi-cff-eclepens.title': 'Fire in Eclépens: hypothesis of criminal act',
+    'blog.article.incendio-cavi-cff-eclepens.excerpt': 'Fire near CFF tracks in Eclépens on 9 October Cables for burned-out and out-of-use light signals Interrupted traffic between Lausanne and Yverdon/Vallorbe',
+    'blog.article.incendio-cavi-cff-eclepens.imageAlt': 'CFF tracks near Eclépens after the fire on 9 October 2026',
 };
 
 export default blogMetaCantonVdEn;

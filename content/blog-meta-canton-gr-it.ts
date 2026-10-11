@@ -21,6 +21,12 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.flaesch-strada-sentieri-chiusi.title': 'Fläsch chiude strada, sentieri e area d\'arrampicata',
     'blog.article.flaesch-strada-sentieri-chiusi.excerpt': 'Sopra Fläsch il rischio di distacco di roccia porta a chiusure precauzionali di strada, sentieri escursionistici e palestra d\'arrampicata.',
     'blog.article.flaesch-strada-sentieri-chiusi.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.parco-solare-nalps-tujetsch.title': 'Avanza il progetto del parco solare alpino di Nalps',
+    'blog.article.parco-solare-nalps-tujetsch.excerpt': 'Il progetto per un parco solare alpino a Nalps, nella località di Tujetsch, sta facendo progressi, come riportato in un servizio di Telesguard su Play RTR.',
+    'blog.article.parco-solare-nalps-tujetsch.imageAlt': 'Paesaggio alpino della regione di Tujetsch nel Canton Grigioni',
+    'blog.article.lido-grono-estate-2027.title': 'Lido Grono, apertura confermata per l\'estate 2027',
+    'blog.article.lido-grono-estate-2027.excerpt': 'Apertura del Lido Grono confermata per l\'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco',
+    'blog.article.lido-grono-estate-2027.imageAlt': 'Cantiere della nuova piscina comunale di Grono per l\'apertura confermata nell\'estate 2027.',
 };
 
 export default blogMetaCantonGrIt;

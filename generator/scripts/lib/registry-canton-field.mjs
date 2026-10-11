@@ -13,11 +13,12 @@
  *
  * Funzioni su testo e solo builtin (l'unica lettura e' l'elenco dei codici da
  * `canton-url-slugs.json`): le importano il backfill e i test `node --test`
- * senza `npm ci`, e il registry resta un sorgente TS letto come testo (stesso
- * pattern di `registry-article-type.mjs:readRegistryEntries`).
+ * senza `npm ci`, e il registry resta un sorgente TS letto come testo dallo
+ * scanner bilanciato condiviso con `registry-article-type.mjs`.
  */
 
 import { readFileSync } from 'node:fs';
+import { readTopLevelRaw, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 
 /**
  * I codici ammessi sono i 24 gruppi URL di `generator/data/canton-url-slugs.json`
@@ -37,18 +38,20 @@ export function cantonGroupCodes() {
  * `start`/`end` delimitano l'oggetto `{ ... }` della voce.
  */
 export function registryEntrySpans(source) {
-  const out = [];
-  const rx = /\{\s*id:\s*'([^']+)'[\s\S]*?\}/gu;
-  let m;
-  while ((m = rx.exec(String(source || ''))) !== null) {
-    out.push({ id: m[1], start: m.index, end: m.index + m[0].length, text: m[0] });
-  }
-  return out;
+  const text = String(source || '');
+  return scanTopLevelArticleRecords(text).map(({ id, start, end }) => ({
+    id,
+    start,
+    end,
+    text: text.slice(start, end),
+  }));
 }
 
 /** Il valore di `canton` di una voce, o `undefined` se assente. */
 export function readEntryCanton(entryText) {
-  const m = /\bcanton:\s*\[([^\]]*)\]/u.exec(String(entryText || ''));
+  const [record] = scanTopLevelArticleRecords(entryText);
+  const raw = readTopLevelRaw(record, 'canton');
+  const m = /^\[([^\]]*)\]$/u.exec(String(raw ?? '').trim());
   if (!m) return undefined;
   return [...m[1].matchAll(/'([^']*)'/gu)].map((x) => x[1]);
 }

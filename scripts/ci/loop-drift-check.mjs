@@ -841,6 +841,20 @@ async function reusablePinResults({ workflows, readSite, isReachable = null, sit
   return out;
 }
 
+/** Count reusable-workflow pins whose evidence could not be read. */
+function countCheckFailedPins(results = []) {
+  return results.filter((row) => row?.mode === 'reusable-pin' && row?.state === 'check-failed').length;
+}
+
+/** A failed pin read is not drift, but it must not read like a clean audit. */
+function noActionableSummary(results = []) {
+  const unverifiedPins = countCheckFailedPins(results);
+  if (unverifiedPins > 0) {
+    return `Nessuna deriva verificata, ma ${unverifiedPins} pin di workflow riutilizzabili non sono stati verificati; questo passaggio non certifica l'allineamento per quei pin.`;
+  }
+  return 'Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.';
+}
+
 function scalarFingerprintVerdict(entry, { site, corpus }) {
   const spec = entry.scalarFingerprint;
   if (!spec) return { checked: false, valid: true, matches: true };
@@ -2402,7 +2416,9 @@ async function main() {
   }));
 
   const actionable = results.filter((r) => r.actionable);
+  const checkFailedPins = countCheckFailedPins(results);
   const jsonReport = { siteRepo: SITE_REPO, siteRef: SITE_REF, alignedAt: manifest.alignedAt, results, actionable: actionable.length };
+  jsonReport.checkFailedPins = checkFailedPins;
 
   // Il report strutturato su file, accanto al testo: il gate a ratchet dei
   // gemelli `adapted` (`adapted-drift-ratchet.mjs`, issue #339) lo legge nello
@@ -2418,9 +2434,12 @@ async function main() {
     console.log(`Ciclo autonomo — divergenza vs ${SITE_REPO}@${SITE_REF}`);
     console.log(`Baseline dell'ultimo allineamento: ${manifest.alignedAt || '(mai registrata)'}\n`);
     console.log(`${results.length} file sorvegliati — ${Object.entries(byState).map(([k, v]) => `${k}:${v}`).join('  ')}\n`);
+    if (checkFailedPins > 0) {
+      console.log(`Pin di workflow riutilizzabili non verificati: ${checkFailedPins}`);
+    }
 
     if (!actionable.length) {
-      console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
+      console.log(noActionableSummary(results));
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
       const ORDER = ['ghost-baseline', REUSABLE_PIN_STATE, 'corpus-only-twin', 'identical-unmirrorable', 'stranded-twin', 'undeclared-drift', SECTION_DRIFT_STATE, 'both-moved', 'both-moved-converged', 'site-ahead', 'corpus-only-pending-landed', 'corpus-only-pending-stale-twin', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
@@ -2523,3 +2542,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
 // accettata in PR verrebbe dichiarata fantasma il mattino dopo — o peggio, il
 // contrario. Una seconda copia della regola lo renderebbe inevitabile.
 export { classify, parseOnly, onlyArgError, forceArgError, resolveInitTargets, initWriteVerdict, initAttestVerdict, initPassOutcome, initBaseline, initOnlyManifestUnchanged, localHash, ghostVerdict, strandedVerdict, provenanceRateLimitVerdict, corpusOnlyTwinVerdict, unmirrorableDepsVerdict, implicitPinnersVerdict, declaredAbsentCiters, crawlerContractIsActive, resetPinnerIndex, DECLARED_ABSENT_REGISTRY_REL, CRAWLER_CONTRACT_REL, DORMANT_WITH_CRAWLER_CONTRACT, resolvedLocalImports, resolveRelativeImport, gitBlobSha, scalarFingerprintVerdict, siteFile, sha256, repoHistoryMatch, checkBaselineProvenance, siteReusablePins, reusablePinVerdict, reusablePinResults, localWorkflowSources, REUSABLE_PIN_STATE, identicalSectionsVerdict, withIdenticalSections, SECTION_DRIFT_STATE };
+export { countCheckFailedPins, noActionableSummary };

@@ -56,6 +56,7 @@ import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
 import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
+import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import {
   findPromptPlaceholders,
   stripFaqNumberedLabels,
@@ -261,6 +262,12 @@ function sweep(rel, re, { unescape, escape, contextOf, repair }) {
     if (!fixed) {
       residuals.push({ label, ...ctx, value: value.slice(0, 120), reason: 'nessuna ricostruzione deterministica' });
       return match;
+    }
+    if (ctx.field === 'description' || ctx.field === 'sd.description') {
+      assertSeoDescriptionMinimum(fixed.value, {
+        id: ctx.id || rel,
+        sourceDescriptionLength: value.length,
+      });
     }
     const left = findPromptPlaceholders(fixed.value);
     if (left.length) {

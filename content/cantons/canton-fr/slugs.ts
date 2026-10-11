@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'fribourg-modifica-licd': { it: 'fribourg-modifica-licd', en: 'fribourg-adjusts-direct-taxes-for-bracket-creep', de: 'freiburg-passt-die-direkten-steuern-an-die-kalte-progression-an', fr: 'fribourg-adapte-les-impots-directs-a-la-progression-a-froid' },
  'nuovo-piano-ciclabile-friburgo': { it: 'nuovo-piano-ciclabile-friburgo', en: 'fribourg-new-bicycle-network-plan', de: 'freiburg-neuer-velowegnetzplan', fr: 'fribourg-nouveau-plan-reseau-cyclable' },
  'friburgo-legge-lingue-ufficiali': { it: 'friburgo-legge-lingue-ufficiali', en: 'fribourg-official-languages-law', de: 'freiburg-amtssprachen-gesetz', fr: 'fribourg-loi-langues-officielles' },
+ 'garanzia-hib-payerne': { it: 'garanzia-hib-payerne', en: 'fribourg-hib-guarantee', de: 'freiburg-hib-buergschaft', fr: 'fribourg-garantie-hib' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

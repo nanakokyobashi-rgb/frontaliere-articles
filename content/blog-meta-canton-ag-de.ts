@@ -21,6 +21,12 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.buchs-deficit-2027-budget.title': 'Buchs rechnet im Budget 2027 mit einem Defizit von 3,1 Millionen',
     'blog.article.buchs-deficit-2027-budget.excerpt': 'Die Gemeinde Buchs rechnet für 2027 mit einem Defizit von rund 3,1 Millionen Franken, hält den Steuerfuss bei 118% und sieht einen Anstieg der Restkosten für Pflege um 600\'000 Franken vor.',
     'blog.article.buchs-deficit-2027-budget.imageAlt': 'Blick auf das Rathaus von Buchs mit Budgetunterlagen auf dem Tisch, Hintergrund Aargauer Landschaft',
+    'blog.article.aargau-pfas-bonifiche-incerte.title': 'PFAS im Aargau: Sanierungskosten weiterhin ungewiss',
+    'blog.article.aargau-pfas-bonifiche-incerte.excerpt': 'Im Aargau haben nur zwei Drittel der Gemeinden zu PFAS geantwortet.',
+    'blog.article.aargau-pfas-bonifiche-incerte.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.argovia-polizia-regionale-poteri.title': 'Aargau: mehr Befugnisse für die Regionalpolizei ab 2028',
+    'blog.article.argovia-polizia-regionale-poteri.excerpt': 'Die Aargauer Regierung schlägt dem Grossen Rat neue Aufgaben für die Regionalpolizeien vor; das Gesetz würde am 1.',
+    'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Regionalpolizeiauto vor einem Gemeindehaus im Aargau.',
 };
 
 export default blogMetaCantonAgDe;

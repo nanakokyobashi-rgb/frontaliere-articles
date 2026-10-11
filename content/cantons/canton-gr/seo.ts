@@ -236,6 +236,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parco-solare-nalps-tujetsch': {
+    title: 'Avanza il progetto del parco solare alpino di Nalps',
+    description: 'Il progetto del parco solare alpino di Nalps a Tujetsch sta facendo progressi. Scopri i dettagli del servizio di Telesguard trasmesso su Play RTR.',
+    keywords: 'frontalieri, ticino, svizzera, italia, avanza, progetto, parco, solare',
+    ogTitle: 'Avanza il progetto del parco solare alpino di Nalps',
+    ogDescription: 'Il progetto per un parco solare alpino a Nalps, nella località di Tujetsch, sta facendo progressi. Il servizio completo è disponibile tramite il programma Telesguard su Play RTR.',
+    canonicalPath: '/articoli-grigioni/parco-solare-nalps-tujetsch/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avanza il progetto del parco solare alpino di Nalps",
+      "description": "Il progetto del parco solare alpino di Nalps a Tujetsch sta facendo progressi. Scopri i dettagli del servizio di Telesguard trasmesso su Play RTR.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-parco-solare-nalps-tujetsch.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio alpino della regione di Tujetsch nel Canton Grigioni"
+      },
+      "datePublished": "2026-10-10T18:34:27+00:00",
+      "dateModified": "2026-10-10T18:34:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/parco-solare-nalps-tujetsch/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lido-grono-estate-2027': {
+    title: 'Lido Grono, apertura confermata per l\'estate 2027',
+    description: 'Apertura del Lido Grono confermata per l\'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco',
+    keywords: 'frontalieri, ticino, svizzera, italia, lido, grono, apertura, confermata',
+    ogTitle: 'Lido Grono: apertura confermata nell\'estate 2027',
+    ogDescription: 'Apertura del Lido Grono confermata per l\'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco',
+    canonicalPath: '/articoli-grigioni/lido-grono-estate-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lido Grono, apertura confermata per l'estate 2027",
+      "description": "Apertura del Lido Grono confermata per l'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lido-grono-estate-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere della nuova piscina comunale di Grono per l'apertura confermata nell'estate 2027."
+      },
+      "datePublished": "2026-10-10T18:56:18+00:00",
+      "dateModified": "2026-10-10T18:56:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/lido-grono-estate-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

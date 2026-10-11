@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'vaud-budget-2027-revisione-12percento': { it: 'vaud-budget-2027-revisione-12percento', en: 'vaud-revises-the-2027-budget-to-cover-the-12-shortfall', de: 'waadt-uberarbeitet-das-budget-2027-um-die-12-lucke-zu-schliessen', fr: 'vaud-revoit-le-budget-2027-pour-combler-le-trou-de-12' },
  'sussidi-malattia-lavoro-vaud': { it: 'sussidi-malattia-lavoro-vaud', en: 'health-subsidies-work-vaud', de: 'krankenkassen-subventionen-arbeit-waadt', fr: 'subsides-assurance-maladie-travail-vaud' },
  'perdite-agricole-canton-vaud-caldo': { it: 'perdite-agricole-canton-vaud-caldo', en: 'vaud-canton-agricultural-losses-heatwave', de: 'landwirtschaftliche-verluste-kanton-waadt-hitze', fr: 'pertes-agricoles-canton-vaud-canicule' },
+ 'incendio-cavi-cff-eclepens': { it: 'incendio-cavi-cff-eclepens', en: 'eclepens-cff-cable-fire', de: 'eclepens-cff-kabelbrand', fr: 'incendie-cables-cff-eclepens' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

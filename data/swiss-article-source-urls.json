@@ -1,29 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1948486/cassis-svizzera-intervista-ue-stati-uniti-neutralita-ogni-guerra-sanzionato": {
-    "articleId": "svizzera-sanzioni-stati-uniti-ignazio-cassis",
-    "ts": "2026-09-07T11:56:21.678Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/newsblog/target/1948495/l-intelligenza-artificiale-spiegata-alla-terza-eta": {
-    "articleId": "laboratorio-intelligenza-artificiale-terza-eta",
-    "ts": "2026-09-07T12:03:46.404Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/impatto-ia-su-dipendenti-telecom%2c-syndicom-formula-rivendicazioni/92016507": {
-    "articleId": "impatto-ia-dipendenti-telecom-syndicom-rivendicazioni",
-    "ts": "2026-09-07T12:33:59.289Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/ticino/attualita/1948472/melide-igor": {
-    "articleId": "melide-riqualifica-centro",
-    "ts": "2026-09-07T12:45:00.187Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/festival-zurigo%3a-alla-svizzera-luna-wedler-il-golden-eye-award/92016935": {
-    "articleId": "luna-wedler-golden-eye-award-zurigo",
-    "ts": "2026-09-07T13:05:52.037Z",
-    "keyForm": 2
-  },
   "https://www.cdt.ch/news/svizzera/nei-parchi-giochi-svizzeri-91-mozziconi-di-sigarette-438534": {
     "articleId": "salute-parchi-giochi-svizzeri-mozziconi-sigarette",
     "ts": "2026-09-07T13:16:04.335Z",
@@ -2497,6 +2472,31 @@
   "https://comozero.it/attualita/sosta-selvaggia-a-como-in-un-mese-stangata-da-oltre-100mila-euro-per-le-auto-straniere": {
     "articleId": "multe-como-targhe-estere",
     "ts": "2026-10-10T04:09:02.542Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1955954/franchi-francobolli-aliexpress-naters-risparmiare": {
+    "articleId": "naters-francobolli-falsi-aliexpress",
+    "ts": "2026-10-10T09:59:40.726Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1955939/amsa-inaugura-i-primi-bus-elettrici-marchesi-al-debutto-ufficiale": {
+    "articleId": "amsa-bus-elettrici-mendrisiotto",
+    "ts": "2026-10-10T13:00:30.251Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/vd%3a-ferrovia%2c-ancora-disagi-tra-yverdon-e-losanna/92196903": {
+    "articleId": "disagi-treni-vaud-eclepens",
+    "ts": "2026-10-10T13:48:29.065Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/vd%3a-ferrovia-yverdon-losanna%2c-da-domani-ritorno-alla-normalit%c3%a0/92196903": {
+    "articleId": "treni-vd-ritorno-normale",
+    "ts": "2026-10-10T17:52:43.849Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4145486": {
+    "articleId": "tox-info-chiamate-intelligenza-artificiale",
+    "ts": "2026-10-10T21:15:04.962Z",
     "keyForm": 2
   }
 }

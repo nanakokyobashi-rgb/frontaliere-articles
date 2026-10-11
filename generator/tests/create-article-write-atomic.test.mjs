@@ -72,3 +72,12 @@ test('write() non chiama mai writeFileSync sul path finale, solo su un temp segu
     `atteso renameSync(${tmpVar}, ${targetVar}) a chiudere la scrittura: senza, un kill esterno puo' ` +
     'lasciare il file a meta\' scritto al path finale');
 });
+
+test('read-modify-write usa lo stesso lock del pair writer e il suo snapshot', () => {
+  const readBody = extractFunctionBody(src, 'function read(rel) {');
+  const writeBody = extractFunctionBody(src, 'function write(rel, content) {');
+  assert.match(src, /import \{ writeFileSnapshotAtomically \} from ['"][^'"]*write-file-pair-atomically\.mjs['"]/u);
+  assert.match(readBody, /readSnapshots\.set\(target,\s*content\)/u);
+  assert.match(writeBody, /writeFileSnapshotAtomically\(target,\s*previous,\s*clean\)/u);
+  assert.match(writeBody, /readSnapshots\.set\(target,\s*clean\)/u);
+});

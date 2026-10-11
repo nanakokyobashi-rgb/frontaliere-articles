@@ -638,3 +638,38 @@ test('#16 faq nella meta BODY sopravvive al merge dello split', async () => {
   assert.deepEqual(merged.content.it.faq, faq);
 });
 
+test('#17 callLLM valida il body2 nella locale primaria della lane', async () => {
+  const germanBody = 'Die Behörden prüfen die Unterlagen und veröffentlichen die endgültige Entscheidung nach einer sorgfältigen Bewertung der vorliegenden Informationen.';
+  const response = JSON.stringify({ content: { de: { body1: germanBody, body2: germanBody, body3: germanBody } } });
+  const withoutLocale = makeCallLLM({ risposte: [response] });
+  await assert.rejects(
+    () => withoutLocale.callLLM(
+      [{ role: 'user', content: PROMPT_BODY }],
+      { jsonMode: true, expectedFields: BODY_ONLY_FIELDS },
+    ),
+    (error) => error.qualityReject === true && /content\.it non normalizzabile/.test(error.message),
+  );
+  assert.equal(withoutLocale.provider.length, 5, 'senza contesto non si deve indovinare la lingua dal payload');
+
+  const { callLLM, provider, righe } = makeCallLLM({ risposte: [response] });
+
+  const out = await callLLM(
+    [{ role: 'user', content: PROMPT_BODY }],
+    { jsonMode: true, expectedFields: BODY_ONLY_FIELDS, locale: 'de' },
+  );
+
+  assert.equal(out, response);
+  assert.equal(provider.length, 1, `una lane DE valida non deve essere rigenerata:\n${righe.join('\n')}`);
+  assert.ok(!('locale' in provider[0].opts), 'la locale e\u0027 contesto locale del validatore, non un parametro provider');
+});
+
+test('#18 ogni chiamata con campi body2 attesi propaga la locale primaria', () => {
+  const callSites = src.split('\n').filter((line) =>
+    (line.includes('callLLM(') || line.includes('_optsUnica'))
+      && /expectedFields:\s*(?:BODY_ONLY_FIELDS|META_ONLY_FIELDS|REQUIRED_IT_BODY_FIELDS)/.test(line));
+  assert.equal(callSites.length, 8, `conteggio dei call-site da ri-verificare: ${callSites.length}`);
+  for (const line of callSites) {
+    assert.match(line, /locale:\s*primaryLocale/, `locale mancante: ${line.trim()}`);
+  }
+});
+

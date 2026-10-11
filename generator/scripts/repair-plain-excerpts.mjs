@@ -23,6 +23,7 @@ import {
   escapeForSingleQuoteTS,
   unescapeForSingleQuoteTS,
 } from './lib/article-meta-block.mjs';
+import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '..', '..');
@@ -101,6 +102,12 @@ function repairSeoFile(relativeFile) {
   };
   const repair = (value, id, field) => {
     const result = repairValue(value, { field, id, locale: 'it' });
+    if (result.changed && (field === 'description' || field === 'structuredData.description')) {
+      assertSeoDescriptionMinimum(result.value, {
+        id,
+        sourceDescriptionLength: value.length,
+      });
+    }
     if (result.changed) {
       changed += 1;
       details.push({ section, locale: 'it', id, field, defects: result.defects });

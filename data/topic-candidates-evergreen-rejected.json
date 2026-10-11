@@ -797,150 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/economia/1955537/shiu-wing-hong-valcambi-steel-kong-ministro": {
-      "section": "frontaliere",
-      "ts": 1791453246756
-    },
-    "frontaliere::https://www.rsi.ch/s/4136096": {
-      "section": "frontaliere",
-      "ts": 1791453556350
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/orientamento-e-cultura-a-varese-torna-il-salone-dei-mestieri-al-centro-congressi-ville-ponti/2701903": {
-      "section": "frontaliere",
-      "ts": 1791453894861
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1954862/sentenza-del-cdm-sul-pg-pagani-anche-per-i-vertici-del-parlamento-e-tutto-a-posto": {
-      "section": "frontaliere",
-      "ts": 1791453931910
-    },
-    "frontaliere::https://comozero.it/attualita/un-intero-settore-che-ha-fatto-la-storia-della-svizzera-e-in-crisi-maxi-taglio-addio-a-34-posti-di-lavoro": {
-      "section": "frontaliere",
-      "ts": 1791453970659
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955008/aziende-del-mendrisiotto-a-confronto-su-conciliabilita-vita-e-lavoro": {
-      "section": "frontaliere",
-      "ts": 1791462252091
-    },
-    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
-      "section": "frontaliere",
-      "ts": 1791462268017
-    },
-    "frontaliere::https://www.tio.ch/dal-mondo/economia/1955562/petrolio-mercati-interpellata-diesel-acquisti": {
-      "section": "frontaliere",
-      "ts": 1791462286173
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/frankencoin-approda-alla-borsa-di-criptovalute-kraken/92186447": {
-      "section": "frontaliere",
-      "ts": 1791462305923
-    },
-    "frontaliere::https://www.tio.ch/svizzera/attualita/1955543/nobel-economia-universita-fehr-zurigo-riconoscimento-ernst-nomi": {
-      "section": "frontaliere",
-      "ts": 1791465840350
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/nobel-economia%2c-in-corsa-c%27%c3%a8-anche-uno-svizzero-con-dottorato-usi/92187525": {
-      "section": "frontaliere",
-      "ts": 1791466123599
-    },
-    "frontaliere::https://www.rsi.ch/s/4145954": {
-      "section": "frontaliere",
-      "ts": 1791469395530
-    },
-    "frontaliere::https://www.rsi.ch/s/4137113": {
-      "section": "frontaliere",
-      "ts": 1791470194815
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/monteviasco-la-pazienza-e-finita-otto-anni-di-attesa-ora-basta-vogliamo-poter-vivere-il-nostro-paese/2701789": {
-      "section": "frontaliere",
-      "ts": 1791470212872
-    },
-    "svizzera::https://www.swissinfo.ch/ita/gr%3a-iniziativa-su-carenza-di-alloggi-a-coira%2c-presentato-testo/92185340": {
-      "section": "svizzera",
-      "ts": 1791472390438
-    },
-    "frontaliere::https://comozero.it/cronaca/auto-rubata-patente-revocata-san-fermo": {
-      "section": "frontaliere",
-      "ts": 1791473915288
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1955632/montblanc-richemont-crisi-orologi-industria": {
-      "section": "frontaliere",
-      "ts": 1791475705419
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/economia-13/articolo/focus-day-sullagricoltura-che-guarda-ai-giovani-nel-varesotto-ce-spazio-per-nuove-impres.html": {
-      "section": "frontaliere",
-      "ts": 1791475762250
-    },
-    "svizzera::https://www.rsi.ch/s/4145486": {
-      "section": "svizzera",
-      "ts": 1791477587516
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/caro-affitti-foletti-a-lugano-gli-alloggi-accessibili-sono-superiori-alla-domanda-444245": {
-      "section": "frontaliere",
-      "ts": 1791479844180
-    },
-    "frontaliere::https://comozero.it/attualita/la-super-autostrada-della-lombardia-a-che-punto-e-il-cantiere-cosa-e-successo-dopo-gli-allagamenti": {
-      "section": "frontaliere",
-      "ts": 1791479881983
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/nuovo-ospedale-bretella-di-gallarate-e-trasporto-pubblico-il-pd-di-busto-arsizio-chiede-chiarimenti-sul-piano-della-mobilita/2702584": {
-      "section": "frontaliere",
-      "ts": 1791479916005
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/06/leggi-notizia/argomenti/salute-3/articolo/luoghi-di-lavoro-che-promuovono-salute-comune-di-varese-confindustria-varese-asst-sette-laghi-e-a.html": {
-      "section": "frontaliere",
-      "ts": 1791479937323
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/crisi-beko-il-presidente-magrini-dopo-il-tavolo-a-roma-risposte-insufficienti-servono-investimenti-realizzati-vendite-e-lavoro/2702620": {
-      "section": "frontaliere",
-      "ts": 1791479988690
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1955637/marchesi-dipartimento-stato-bertoli-personale-direttore-territorio": {
-      "section": "frontaliere",
-      "ts": 1791480032678
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1954858/a-sementina-preoccupano-viabilita-e-posteggi": {
-      "section": "frontaliere",
-      "ts": 1791482535018
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/08/leggi-notizia/argomenti/cronaca-20/articolo/frode-fiscale-internazionale-blitz-della-guardia-di-finanza-di-varese-sei-misure-cautelari-e-beni.html": {
-      "section": "frontaliere",
-      "ts": 1791482989872
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1955658/la-manifattura-va-meglio-del-previsto-le-banche-reggono-ma-cala-l-occupazione": {
-      "section": "frontaliere",
-      "ts": 1791490044037
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/fotovoltaico-industriale-a-brunello-il-solar-wellness-day-di-elmec-focus-su-sicurezza-manutenzione-e-accumulo/2702671": {
-      "section": "frontaliere",
-      "ts": 1791491712997
-    },
-    "frontaliere::https://www.tio.ch/sport/hockey/1955641/fischer-xhaka-squalificato-stato-certificato-multa": {
-      "section": "frontaliere",
-      "ts": 1791491904793
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955098/il-governo-si-opponga-al-progetto-autostradale-meme": {
-      "section": "frontaliere",
-      "ts": 1791494209714
-    },
-    "svizzera::https://www.rsi.ch/s/4136096": {
-      "section": "svizzera",
-      "ts": 1791495264173
-    },
-    "svizzera::https://www.rsi.ch/s/4146464": {
-      "section": "svizzera",
-      "ts": 1791495281413
-    },
-    "svizzera::https://www.swissinfo.ch/ita/olma%3a-parmelin-inaugura-fiera-agricola%2c-ma-%22vivienne%22-%c3%a8-scontenta/92186973": {
-      "section": "svizzera",
-      "ts": 1791495299262
-    },
-    "svizzera::https://www.tio.ch/svizzera/attualita/1955614/svizzera-popolazioni-specie-paradiso-wwf": {
-      "section": "svizzera",
-      "ts": 1791499390049
-    },
-    "svizzera::https://www.admin.ch/it/newnsb/denn9j7b-c4v": {
-      "section": "svizzera",
-      "ts": 1791499400466
-    },
     "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955129/pompieri-all-ex-lati-doppio-passo-avanti-referendum-permettendo": {
       "section": "frontaliere",
       "ts": 1791506160503
@@ -1120,6 +976,114 @@
     "svizzera::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
       "section": "svizzera",
       "ts": 1791622506439
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954988/traffico-merci-su-rotaia-nel-personale-c-e-apprensione-per-la-sicurezza": {
+      "section": "frontaliere",
+      "ts": 1791623772905
+    },
+    "frontaliere::https://cassa-disoccupazione.unia.ch": {
+      "section": "frontaliere",
+      "ts": 1791623787890
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/finanza-etica-a-varese-una-serata-di-confronto-sul-rapporto-con-le-banche/2703112": {
+      "section": "frontaliere",
+      "ts": 1791624573116
+    },
+    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
+      "section": "frontaliere",
+      "ts": 1791631360865
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/fondata-sul-lavoro-avs-e-sinistra-italiana-a-varese-per-rimettere-al-centro-salari-tutele-e-giovani/2704039": {
+      "section": "frontaliere",
+      "ts": 1791632860244
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1953522/brusino-arsizio-e-porto-ceresio-unite-dal-lago-lo-sport-e-l-unesco": {
+      "section": "frontaliere",
+      "ts": 1791633035654
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1955850/traffico-bloccato-frana-sementina-feriti": {
+      "section": "frontaliere",
+      "ts": 1791633204954
+    },
+    "svizzera::https://www.rsi.ch/s/4148438": {
+      "section": "svizzera",
+      "ts": 1791633402691
+    },
+    "svizzera::https://www.rsi.ch/s/4150082": {
+      "section": "svizzera",
+      "ts": 1791636559295
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/10/leggi-notizia/argomenti/cronaca-20/articolo/coltivava-marijuana-in-un-magazzino-in-casa-e-nel-giardino-sequestrate-37-piante-e-arrestato-un-41e.html": {
+      "section": "frontaliere",
+      "ts": 1791639412702
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
+      "section": "frontaliere",
+      "ts": 1791641031373
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/09/leggi-notizia/argomenti/economia-13/articolo/plastipak-apre-le-porte-dello-stabilimento-di-verbania-un-viaggio-tra-innovazione-tecnologia-e-ric-3.html": {
+      "section": "frontaliere",
+      "ts": 1791643828049
+    },
+    "svizzera::https://www.swissinfo.ch/ita/disturbi-psichici%3a-manifestazione-a-berna-per-sensibilizzare/92197173": {
+      "section": "svizzera",
+      "ts": 1791644814694
+    },
+    "svizzera::https://www.tio.ch/ticino/cronaca/1955612/una-tonnellata-e-mezza-di-castagne-e-tremila-piatti-di-gnocchi-la-sagra-da-i-numeri": {
+      "section": "svizzera",
+      "ts": 1791644820504
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1955626/popolazione-residente-nazionalita-furti-condanne-criminalita": {
+      "section": "svizzera",
+      "ts": 1791644835458
+    },
+    "frontaliere::https://comozero.it/attualita/elezioni-2027-avs-una-citta-piu-verde-e-sociale-e-un-sindaco-proveniente-dal-mondo-ambientalista": {
+      "section": "frontaliere",
+      "ts": 1791650877023
+    },
+    "svizzera::https://www.swissinfo.ch/ita/manifestazioni-per-gaza-in-diverse-citt%c3%a0-svizzere/92197474": {
+      "section": "svizzera",
+      "ts": 1791654076574
+    },
+    "svizzera::https://www.rsi.ch/s/4150643": {
+      "section": "svizzera",
+      "ts": 1791654101951
+    },
+    "svizzera::https://www.tio.ch/ticino/attualita/1955960/alberi-iniziativa-bambini-adorna-vita-albero-centro-bambino-ogni": {
+      "section": "svizzera",
+      "ts": 1791654113879
+    },
+    "svizzera::https://www.rsi.ch/s/4150523": {
+      "section": "svizzera",
+      "ts": 1791654132363
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1955992/ffs-traffico-losanna-normalita-yverdon": {
+      "section": "svizzera",
+      "ts": 1791654213910
+    },
+    "frontaliere::https://www.vconews.it/2026/10/10/leggi-notizia/argomenti/viabilita-e-trasporti-9/articolo/ss-34-chiusa-di-notte-dal-21-ottobre-battelli-sostitutivi-tra-cannero-e-cannobio.html": {
+      "section": "frontaliere",
+      "ts": 1791660213562
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/donne-e-giovani-in-crescita-tra-i-campi-varesini-i-numeri-dellagricoltura-alla-vigilia-di-agrivarese/2702182": {
+      "section": "frontaliere",
+      "ts": 1791660534142
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1955996/riad-aeroporto-scalo-attacco-feriti-missile": {
+      "section": "svizzera",
+      "ts": 1791661004823
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/dal-business-plan-allagricoltura-a-ville-ponti-la-seconda-edizione-del-focus-day-nuove-imprese/2703904": {
+      "section": "frontaliere",
+      "ts": 1791665145016
+    },
+    "frontaliere::http://www.cd-ocst.ch": {
+      "section": "frontaliere",
+      "ts": 1791672816476
+    },
+    "frontaliere::https://comozero.it/attualita/provincia-di-como-schianto-tra-due-auto": {
+      "section": "frontaliere",
+      "ts": 1791673026487
     }
   }
 }

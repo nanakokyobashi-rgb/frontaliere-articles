@@ -15,6 +15,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.aldi-chiude-centro-neuchatel.title': 'Aldi wird die Filiale im Zentrum von Neuenburg schließen',
     'blog.article.aldi-chiude-centro-neuchatel.excerpt': '',
     'blog.article.aldi-chiude-centro-neuchatel.imageAlt': 'Eingang eines Lebensmittelgeschäfts an der Rue Saint-Honoré in Neuenburg',
+    'blog.article.nuovo-centro-asilo-couvet.title': 'Neue Kindertagesstätte in Couvet: Das Projekt beginnt',
+    'blog.article.nuovo-centro-asilo-couvet.excerpt': 'Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes',
+    'blog.article.nuovo-centro-asilo-couvet.imageAlt': 'Darstellung eines renovierten öffentlichen Gebäudes in Couvet, Kanton Neuenburg',
 };
 
 export default blogMetaCantonNeDe;

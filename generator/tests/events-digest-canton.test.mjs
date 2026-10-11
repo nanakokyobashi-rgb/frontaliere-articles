@@ -97,6 +97,9 @@ describe('metadati evergreen per cantone', () => {
     const src = fs.readFileSync(PRODUCER, 'utf-8');
     assert.match(src, /const canton = digestCantonFromArgs\(\);\n\s*const data = buildData\(todayIso, \{ canton \}\);/);
     assert.match(src, /buildWeekendDigestArticle\(\{ events: dataset\.events, todayIso, canton \}\)/);
+    const repairIndex = src.indexOf('return repairEventsDigestLocalizedToponyms(data);');
+    const gateIndex = src.indexOf('assertArticlePassesFactualityGates(data);', repairIndex);
+    assert.ok(repairIndex >= 0 && gateIndex > repairIndex, 'the deterministic repair runs before the final factuality gate');
     assert.match(src, /\.\.\.staticMetaForCanton\(resolveDigestCanton\(canton\)\),/);
     assert.match(src, /if \(groupKey === 'TI'\) return STATIC_META;/);
   });

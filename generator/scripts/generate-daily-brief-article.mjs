@@ -49,7 +49,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 // loadSnapshot/buildData live in the lib (not here) so `node --test` can pin
 // the refusal rules without importing create-article.mjs, whose static deps
 // (jsdom) exist only where `npm ci` ran.
-import { loadSnapshot, buildData } from './lib/daily-brief-content.mjs';
+import { loadSnapshot, buildData, projectDailyBriefForLocale } from './lib/daily-brief-content.mjs';
 import { buildDailyBriefImageRecord, buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
 import { appendGeneratedImageRecord, sha256File } from './lib/blog-image-registry.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
@@ -177,6 +177,7 @@ async function main() {
   // `generator/tests/prompt-placeholder-guard.test.mjs` lo verifica, e diventa
   // rosso il giorno in cui uno arriva.
   const data = buildData(brief);
+  const heroBrief = projectDailyBriefForLocale(brief, 'it');
   // Il marker di un run interrotto va risolto PRIMA di decidere sulla presenza
   // dell'id (issue #964): dopo un kill a meta' registrazione l'id e' gia' nella
   // registry, quindi `checkArticleIdExists()` risponde `true` sopra un corpus
@@ -196,7 +197,7 @@ async function main() {
     console.log('DRY_RUN — no files written.');
     console.log('  IT title :', data.content.it.title);
     console.log('  IT body1 :', data.content.it.body1.slice(0, 180).replace(/\n/g, ' '));
-    const svg = buildDailyBriefSvg(brief, { locale: 'it' });
+    const svg = buildDailyBriefSvg(heroBrief, { locale: 'it' });
     console.log(`  hero SVG : ${svg.length} bytes (would render 1200×675 webp + 480w thumb)`);
     return;
   }
@@ -204,7 +205,7 @@ async function main() {
   // Image FIRST, and fatally: a registered edition without its unique hero
   // would ship exactly the recycled-image profile this project is escaping.
   const { hero, thumb } = heroPaths(data.id);
-  const svg = buildDailyBriefSvg(brief, { locale: 'it' });
+  const svg = buildDailyBriefSvg(heroBrief, { locale: 'it' });
   const { heroBytes, thumbBytes } = await renderDailyBriefImage(svg, hero, thumb);
   // The card is site-owned deterministic media, so persist its byte-level
   // provenance immediately after the same render that materializes the hero.

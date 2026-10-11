@@ -158,7 +158,7 @@
     {
       "path": "scripts/ci/article-publication-observer.mjs",
       "mode": "corpus-only",
-      "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
+      "reason": "Osservatore e repairer bounded della pubblicazione articoli: legge la storia dei body nel corpus, confronta le revisioni con le pagine servite dai due publisher, conserva nel body di una issue stabile l elenco durevole delle pagine degradate e dei blocker di preparazione, e dispatcha il publisher solo dopo una prova live + immagine disponibile. Vive solo qui perche' la sorgente delle revisioni e il coordinamento dei publisher appartengono al corpus; il sito consuma la superficie pubblicata e non deve osservare la propria copia del corpus.",
       "baseline": {
         "site": null,
         "corpus": "b87855fe8d3bd05e",
@@ -868,6 +868,16 @@
         "site": "1ae49b1d896e4463",
         "corpus": "1ae49b1d896e4463",
         "alignedAt": "2026-09-23"
+      }
+    },
+    {
+      "path": "scripts/lib/write-file-pair-atomically.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del publisher per serializzare gli aggiornamenti dei registry nella directory `content/`, rifiutare snapshot concorrenti obsoleti, preparare insieme le uscite e ripristinare le sostituzioni gia' riuscite su errori sincroni. E' usato dai backfill di articleType/canton e dal repoint delle copertine; il sito consuma i JSON pubblicati via HTTP e non deve importare il writer del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "1bc5c31e4fcf5f32",
+        "alignedAt": "2026-10-10"
       }
     },
     {
@@ -1888,6 +1898,16 @@
       }
     },
     {
+      "path": "host/staticAdSlotHtml.ts",
+      "mode": "corpus-only",
+      "reason": "Provider host-side dei due slot pubblicitari delle pagine hub cantonali: il sito espone il callback nel contratto dell'engine e qui lo concretizza con client, slot, formato, altezza riservata e placement del corpus. Non e' un gemello da mirrorare: il sito possiede solo il bootstrap che collega il provider, mentre il markup resta dipendente dalla configurazione host del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "9cc7f520f28c72bb",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "host/shared/clauseTail.mjs",
       "sitePath": "build-plugins/shared/clauseTail.mjs",
       "mode": "identical",
@@ -1907,6 +1927,16 @@
         "site": "2c0d386aea7eccd3",
         "corpus": "2c0d386aea7eccd3",
         "alignedAt": "2026-10-01"
+      }
+    },
+    {
+      "path": "host/tests/static-ad-slot.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Test node:test del provider host degli slot hub: fissa i contratti di slot, formato, placement, responsive behavior e min-height che impedisce il layout shift. E' specifico al markup/configurazione del corpus e non ha un gemello da pubblicare via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "d8cb54307e585b4e",
+        "alignedAt": "2026-10-10"
       }
     },
     {
@@ -2748,6 +2778,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/seo-description-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Modulo puro di contratto per il corpus: condivide il pavimento SEO e la validazione fail-closed fra la creazione degli articoli e il refresh in-place dei metadati, evitando che un write path aggiri il minimo. Sul sito non esiste un gemello: la SPA consuma il JSON pubblicato via HTTP e il writer legacy del sito non appartiene a questa pipeline.",
+      "baseline": {
+        "site": null,
+        "corpus": "ec439f7b588f1fd3",
+        "alignedAt": "2026-10-10"
+      }
+    },
+    {
       "path": "generator/scripts/lib/key-facts-specificity.mjs",
       "mode": "corpus-only",
       "reason": "Rilevatore puro dei fatti chiave senza valore nelle quattro lingue. Lo scanner di #1054 usa la forma di riferimento per misurare 53 file-locale/29 articoli; il gate di #1055 rimuove una coppia solo se restano almeno tre fatti e rifiuta il payload sotto soglia. E' una libreria del generatore del corpus e non ha gemello sul sito.",
@@ -2987,6 +3027,16 @@
         "site": null,
         "corpus": "8cc84eaadb3db65c",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/events-digest-localization.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del producer corpus-only generate-events-digest-article.mjs: ripara gli esonimi nei campi localizzati solo quando sono appaiati alla sorgente italiana e usa la tabella condivisa di toponimi. Il sito non genera questo articolo: riceve il JSON pubblicato via HTTP.",
+      "baseline": {
+        "site": null,
+        "corpus": "17de3eadfa084ba5",
+        "alignedAt": "2026-10-10"
       }
     },
     {
@@ -3274,6 +3324,16 @@
         "site": null,
         "corpus": "d98eed3c66417fef",
         "alignedAt": "2026-08-25"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/border-wait-averages.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper del consumatore REWIRE per `refresh-border-wait-averages.mjs`: prova le fonti in sequenza e rifiuta payload con forma invalida o con una riduzione anomala dei valichi. Vive solo nel generatore del corpus; il sito produce e pubblica `border-wait-averages.json` ma non esegue questo consumer e non ha un omonimo da allineare. `corpus-only` e' quindi la classificazione verificata dal codice, non un lavoro mancante sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-10"
       }
     },
     {
@@ -4755,12 +4815,12 @@
     },
     {
       "path": "scripts/ci/redflag-doc-sections.mjs",
-      "mode": "corpus-only",
-      "reason": "Estrae le sezioni vincolanti di `REVIEW.md` e `AGENTS.md` dalla base canonica e le valida prima che il `pr-redflag-fixer.yml` le scriva nell'output dello step `ctx`. E' un helper specifico del fixer corpus: il workflow qui e' adattato e il sito mantiene il proprio percorso di trasporto del contratto, quindi non esiste un gemello site-owned da sorvegliare.",
+      "mode": "adapted",
+      "reason": "Helper del `pr-redflag-fixer` corpus: estrae le sezioni vincolanti per Codex e le scrive in `GITHUB_OUTPUT`. Il sito ha un helper omonimo per il fixer Claude, ma heading richiesti e contratto `GITHUB_ENV` sono diversi. Va sorvegliato come `adapted`, non copiato byte per byte; nessun import attraversa il confine HTTP.",
       "baseline": {
-        "site": null,
+        "site": "f9f6b518d13e9989",
         "corpus": "823dbc6d71772b9d",
-        "alignedAt": "2026-09-27"
+        "alignedAt": "2026-10-10"
       }
     },
     {
@@ -5032,6 +5092,16 @@
         "site": null,
         "corpus": "f3524e6d7e6ebd56",
         "alignedAt": "2026-09-06"
+      }
+    },
+    {
+      "path": "scripts/lib/article-registry-reader.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner bilanciato delle righe del registry TypeScript: lo usano `scripts/build-blog-index.mjs`, `scripts/backfill-image-credits.mjs` e gli helper del generatore per leggere solo proprieta' top-level senza confondere delimitatori annidati, stringhe o commenti. Il sito consuma il corpus come JSON HTTP e non esegue questo reader del registry, quindi non esiste un gemello operativo da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": "a74d1f9df23ed2b1",
+        "alignedAt": "2026-10-10"
       }
     },
     {
@@ -5869,8 +5939,8 @@
       "reason": "Costruttore della voce SEO, del blocco `ImageObject` e inserimento in un chunk usati dal recupero degli orfani e dal drain delle copertine. Il writer normale conserva il suo percorso letterale in `create-article.mjs`; `generator/tests/seo-entry-equivalence.test.mjs` confronta il costruttore con le voci reali di main, così non nasce un secondo dialetto serializzato. È codice del generatore del corpus: il sito consuma il JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": null,
-        "alignedAt": "2026-10-08"
+        "corpus": "265d3cb531d40b61",
+        "alignedAt": "2026-10-10"
       }
     },
     {

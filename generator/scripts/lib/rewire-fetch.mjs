@@ -29,8 +29,10 @@ export async function getRewireUrl(url, { retries = 4, headers = REWIRE_FETCH_HE
       const res = await fetch(url, { redirect: 'follow', headers });
       if (res.ok) {
         const body = await res.text();
-        if (body.length > 0) return body;
-        lastErr = new Error('empty body');
+        // An empty 2xx response is still a response. Let the JSON/schema
+        // validator reject it so callers fail closed instead of treating two
+        // empty publications as an unreachable publisher and keeping stale data.
+        return body;
       } else {
         const err = new Error(`HTTP ${res.status}`);
         if (res.status < 500 && res.status !== 429) throw err;
@@ -45,15 +47,63 @@ export async function getRewireUrl(url, { retries = 4, headers = REWIRE_FETCH_HE
   throw lastErr;
 }
 
+/**
+ * Select the first source whose response is valid JSON and passes `validate`.
+ * With no validator, if every HTTP-success body is non-JSON, return the first
+ * such body as `ok` so the existing consumer parser still fails hard instead
+ * of misclassifying a malformed publication as an unreachable source.
+ * `validate(payload)` may return null/undefined/true for acceptance, false or a
+ * diagnostic string for rejection. A supplied validator that rejects every
+ * response returns `ok: false` with `sawResponse: true` for hard-fail handling.
+ */
 export async function fetchFirstOk(urls, opts = {}) {
+  const { validate, getBody = getRewireUrl, ...fetchOpts } = opts;
   const errors = [];
+  let firstInvalidJson;
+  let sawResponse = false;
   for (const url of urls) {
+    let body;
     try {
-      const body = await getRewireUrl(url, opts);
-      return { ok: true, url, body, errors };
+      body = await getBody(url, fetchOpts);
+      sawResponse = true;
     } catch (err) {
       errors.push(`${url}: ${err.message}`);
+      continue;
     }
+
+    let payload;
+    try {
+      payload = JSON.parse(body);
+    } catch (err) {
+      errors.push(`${url} is not valid JSON: ${err.message}`);
+      firstInvalidJson ??= { url, body };
+      continue;
+    }
+
+    if (typeof validate === 'function') {
+      let verdict;
+      try {
+        verdict = validate(payload);
+      } catch (err) {
+        verdict = `validator threw: ${err?.message || err}`;
+      }
+      if (verdict === false || (typeof verdict === 'string' && verdict.length > 0)) {
+        errors.push(`${url}: ${typeof verdict === 'string' ? verdict : 'payload validation failed'}`);
+        continue;
+      }
+    }
+
+    if (errors.length) {
+      console.warn(`[rewire-fetch] selected ${url} after rejecting earlier source(s):\n  ${errors.join('\n  ')}`);
+    }
+    return { ok: true, url, body, payload, errors, sawResponse };
   }
-  return { ok: false, url: undefined, body: undefined, errors };
+
+  if (typeof validate === 'function') {
+    return { ok: false, url: undefined, body: undefined, payload: undefined, errors, sawResponse };
+  }
+  if (firstInvalidJson) {
+    return { ok: true, ...firstInvalidJson, payload: undefined, errors, sawResponse };
+  }
+  return { ok: false, url: undefined, body: undefined, payload: undefined, errors, sawResponse };
 }

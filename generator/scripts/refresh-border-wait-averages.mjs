@@ -37,6 +37,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { fetchFirstValidBorderWaitAverages } from './lib/border-wait-averages.mjs';
 
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(
@@ -94,82 +95,31 @@ function fail(msg) {
   process.exit(1);
 }
 
-let raw;
-let SOURCE;
-{
-  const errors = [];
-  for (const url of SOURCES) {
-    try {
-      const res = await fetch(url, { redirect: 'follow' });
-      if (!res.ok) {
-        errors.push(`${url}: HTTP ${res.status}`);
-        continue;
-      }
-      raw = await res.text();
-      SOURCE = url;
-      break;
-    } catch (err) {
-      errors.push(`${url}: ${err.message}`);
-    }
-  }
-  // Soft: the overlay is cosmetic and borderCrossings.ts falls back to the
-  // editorial defaults, so an unreachable publisher must not fail generation.
-  if (raw === undefined) skip(`no source reachable —\n  ${errors.join('\n  ')}`);
-}
-
-let payload;
-try {
-  payload = JSON.parse(raw);
-} catch (err) {
-  fail(`${SOURCE} is not valid JSON: ${err.message}`);
-}
-
-// Shape gate. The published file is a flat map of crossing-slug → {morning?,
-// evening?} range strings. An HTML error page that came back with a 200 parses
-// as neither, and an array or a scalar means the publisher changed shape.
-if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
-  fail(`${SOURCE} is not a crossing-slug map — refusing to cache it`);
-}
-
-const slugs = Object.keys(payload);
-if (slugs.length === 0) fail(`${SOURCE} carries zero crossings — refusing`);
-
-for (const slug of slugs) {
-  const entry = payload[slug];
-  if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
-    fail(`${SOURCE}: '${slug}' is not an object — refusing`);
-  }
-  for (const window of ['morning', 'evening']) {
-    const value = entry[window];
-    if (value === undefined) continue;
-    // "2-13 min", or "2 min" when p25 == p75 — `formatRange()` in main's
-    // compute-border-wait-averages.mjs collapses a degenerate range to the
-    // single value rather than printing "2-2 min". Format-checking rather than
-    // trusting it keeps a raw number or a localised string from reaching an
-    // article body verbatim.
-    if (typeof value !== 'string' || !/^\d+(-\d+)? min$/.test(value)) {
-      fail(
-        `${SOURCE}: '${slug}'.${window} is ${JSON.stringify(value)}, ` +
-          `not a "N min" or "N-M min" range`,
-      );
-    }
-  }
-}
-
 // Shrink guard, same spirit as main's pull script: the crossing set is stable
 // (it tracks physical border posts), so a sharp drop means a truncated publish
-// rather than closed borders.
+// rather than closed borders. Pass the threshold into source selection so a
+// valid fallback can win over a truncated 2xx primary response.
+let previousCount;
 if (fs.existsSync(CACHE)) {
   try {
     const current = JSON.parse(fs.readFileSync(CACHE, 'utf-8'));
-    const before = Object.keys(current).length;
-    if (slugs.length < before / 2) {
-      fail(`would shrink from ${before} to ${slugs.length} crossings — refusing`);
-    }
+    previousCount = Object.keys(current).length;
   } catch {
     // An unreadable cache is exactly what we are here to replace.
   }
 }
+
+const got = await fetchFirstValidBorderWaitAverages(SOURCES, { previousCount });
+if (!got.ok) {
+  // Soft: the overlay is cosmetic and borderCrossings.ts falls back to the
+  // editorial defaults when no publisher responds.
+  if (!got.sawResponse) skip(`no source reachable —\n  ${got.errors.join('\n  ')}`);
+  fail(`no valid source — refusing to replace the existing cache\n  ${got.errors.join('\n  ')}`);
+}
+
+const SOURCE = got.url;
+const payload = got.payload;
+const slugs = Object.keys(payload);
 
 if (CHECK_ONLY) {
   log(`--check: ${slugs.length} crossings validated, wrote nothing`);

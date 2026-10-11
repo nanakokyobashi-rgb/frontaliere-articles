@@ -5,15 +5,17 @@
  *
  * Extracted from generate-events-digest-article.mjs (issue #2963) so the
  * dogane-ranking digest (and any future evergreen digest) reuses the exact
- * same regex-scoped rewrite logic instead of a copy-pasted sibling.
+ * same balanced-record rewrite logic instead of a copy-pasted sibling.
  */
-import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
+import { writeFileSnapshotAtomically } from '../../../scripts/lib/write-file-pair-atomically.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`, not `../..`. In the site repo this module sits at
@@ -39,27 +41,63 @@ const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 // writeFileSync on the target can leave it truncated mid-write. `renameSync`
 // is a single POSIX syscall, atomic on the same filesystem; the temp file
 // lives next to the target so the rename never crosses a filesystem boundary.
-let writeTmpSeq = 0;
-function writeCorpusFile(file, content) {
+function writeCorpusFile(file, content, before) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(file, content, clean);
-  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
-  try {
-    writeFileSync(tmp, clean, 'utf-8');
-    renameSync(tmp, file);
-  } catch (err) {
-    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
-    throw err;
-  }
+  writeFileSnapshotAtomically(file, before, clean);
+}
+
+function writeSnapshot(file, before, content, writeFile) {
+  if (writeFile === writeCorpusFile) return writeFile(file, content, before);
+  return writeFile(file, content);
 }
 
 function isAtOrAfter(stored, candidate) {
   const storedMs = Date.parse(stored);
   const candidateMs = Date.parse(candidate);
   return !Number.isNaN(storedMs) && !Number.isNaN(candidateMs) && storedMs >= candidateMs;
+}
+
+function literalRange(source, property) {
+  if (!property) return null;
+  const raw = source.slice(property.valueStart, property.valueEnd);
+  const value = raw.trim();
+  if (!value) return null;
+  const offset = raw.indexOf(value);
+  return {
+    start: property.valueStart + offset,
+    end: property.valueStart + offset + value.length,
+    value,
+  };
+}
+
+function replaceLiteral(source, property, nextValue) {
+  const range = literalRange(source, property);
+  if (!range) return null;
+  return source.slice(0, range.start) + nextValue + source.slice(range.end);
+}
+
+function insertUpdatedAt(source, record, dateProperty, todayIso) {
+  const close = record.end - 1;
+  const newline = source.indexOf('\n', dateProperty.valueEnd);
+  const lineStart = source.lastIndexOf('\n', dateProperty.valueStart - 1) + 1;
+  const indent = source.slice(lineStart, dateProperty.valueStart).match(/^[ \t]*/u)?.[0] ?? '';
+  if (newline >= 0 && newline < close) {
+    const breakEnd = newline + 1;
+    const lineBreak = source.slice(newline, breakEnd);
+    return source.slice(0, breakEnd)
+      + `${indent}updatedAt: '${todayIso}',${lineBreak}`
+      + source.slice(breakEnd);
+  }
+
+  const trailing = source.slice(0, close).match(/[ \t]*$/u)?.[0] ?? '';
+  const insertAt = close - trailing.length;
+  return source.slice(0, insertAt)
+    + `, updatedAt: '${todayIso}'`
+    + source.slice(insertAt);
 }
 
 /** Bump (or insert) `updatedAt` on an article registry entry so sitemap lastmod reflects the refresh. */
@@ -72,32 +110,34 @@ export function bumpUpdatedAt(
   readFile = readFileSync,
 ) {
   const file = path.join(repoRoot, corpusPath(registryFile));
-  let src = readFile(file, 'utf-8');
-  const entryRe = new RegExp(`(\\n([ \\t]*)id: '${id}',[\\s\\S]*?)(\\n[ \\t]*\\},)`);
-  const m = src.match(entryRe);
-  if (!m) return false;
-  const indent = m[2];
-  let block = m[1];
+  const src = readFile(file, 'utf-8');
+  const record = scanTopLevelArticleRecords(src).find((entry) => entry.id === id);
+  if (!record) return false;
+
+  const dateProperty = record.properties.get('date');
+  const date = readTopLevelString(record, 'date');
   // updatedAt is stored date-only (no time-of-day); if the entry's original
   // `date` timestamp falls later the same calendar day (article registered
   // earlier today), a midnight-anchored updatedAt would parse as *before* it —
   // an incoherent freshness signal (google-news-compliance.test.ts). Same
   // clamp rationale as bumpDateModified below; skip the bump in that
   // same-day case instead of writing a value that can never be >= `date`.
-  const dateMatch = block.match(/\n[ \t]*date: '([^']*)',/);
-  if (dateMatch && Date.parse(`${todayIso}T00:00:00Z`) < Date.parse(dateMatch[1])) {
+  if (date !== null && Date.parse(`${todayIso}T00:00:00Z`) < Date.parse(date)) {
     return true;
   }
-  const currentMatch = block.match(/updatedAt: '([^']*)'/);
-  if (currentMatch && isAtOrAfter(currentMatch[1], todayIso)) return true;
-  if (/updatedAt:/.test(block)) {
-    block = block.replace(/updatedAt: '[^']*'/, `updatedAt: '${todayIso}'`);
-  } else {
-    block = block.replace(/(\n[ \t]*date: '[^']*',)/, `$1\n${indent}updatedAt: '${todayIso}',`);
+  const updatedAtProperty = record.properties.get('updatedAt');
+  if (updatedAtProperty) {
+    const current = readTopLevelString(record, 'updatedAt');
+    if (current === null) return false;
+    if (isAtOrAfter(current, todayIso)) return true;
+    const nextSource = replaceLiteral(src, updatedAtProperty, `'${todayIso}'`);
+    if (nextSource === null) return false;
+    writeSnapshot(file, src, nextSource, writeFile);
+    return true;
   }
-  if (block === m[1]) return false;
-  src = src.replace(m[1], block);
-  writeFile(file, src);
+
+  if (!dateProperty || date === null) return false;
+  writeSnapshot(file, src, insertUpdatedAt(src, record, dateProperty, todayIso), writeFile);
   return true;
 }
 
@@ -145,7 +185,7 @@ export function bumpDateModified(
   const current = block.match(dmRe);
   if (current && isAtOrAfter(current[1], effective)) return true;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
-  writeFile(file, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1));
+  writeSnapshot(file, src, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1), writeFile);
   return true;
 }
 

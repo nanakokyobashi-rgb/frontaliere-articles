@@ -79,6 +79,7 @@ import {
   BLOG_IMAGE_QUALITY_PASSES,
 } from './lib/blog-image-policy.mjs';
 import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSyntheticSourceValidation } from './lib/synthetic-source-contract.mjs';
+import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -336,6 +337,7 @@ import {
 import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
+import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
@@ -410,6 +412,7 @@ import {
 import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import {
   assertSeoEntryAbsent,
   readSeoEntrySource,
@@ -3033,8 +3036,13 @@ const NEWS_SOURCES_SVIZZERA_FALLBACK_MAP = {
 // `corpusPath()` a single choke point for the main→nanako layout difference
 // (`services/locales/…` → `content/…`) instead of ~30 edited literals. See
 // lib/corpus-paths.mjs for why the mapping is an explicit table.
+const readSnapshots = new Map();
+
 function read(rel) {
-  return readFileSync(resolve(rel), 'utf-8');
+  const target = resolve(rel);
+  const content = readFileSync(target, 'utf-8');
+  readSnapshots.set(target, content);
+  return content;
 }
 
 // Write-time guard (issue #66): a `.ts` under content/ must never carry a C0
@@ -3062,10 +3070,17 @@ function write(rel, content) {
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(rel, content, clean);
   const target = resolve(rel);
+  if (existsSync(target) && readSnapshots.has(target)) {
+    const previous = readSnapshots.get(target);
+    writeFileSnapshotAtomically(target, previous, clean);
+    readSnapshots.set(target, clean);
+    return;
+  }
   const tmp = `${target}.${process.pid}.${writeTmpSeq++}.tmp`;
   try {
     writeFileSync(tmp, clean, 'utf-8');
     renameSync(tmp, target);
+    readSnapshots.set(target, clean);
   } catch (err) {
     try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;
@@ -5102,9 +5117,12 @@ function qualityRejectError(message) {
 }
 
 function bodyFieldsForQuality(content) {
-  return Object.keys(content || {})
-    .filter((field) => /^body\d+$/.test(field))
-    .sort((a, b) => Number(a.slice(4)) - Number(b.slice(4)));
+  if (!content || typeof content !== 'object') return [];
+  // Keep quality reads on the exact string-valued field set emitted by
+  // buildBodyFile(): body1..body20. Extra bodyN keys are inert on the live
+  // article surface and must not become SEO source text.
+  return Array.from({ length: MAX_BODY_KEYS }, (_, index) => `body${index + 1}`)
+    .filter((field) => typeof content[field] === 'string');
 }
 
 function bodyTextForQuality(content) {
@@ -6827,10 +6845,10 @@ async function callLLM(messages, opts = {}) {
   // esteso sulla funzione. Riassunto: il flag puo' RESTRINGERE i campi
   // attesi, mai spegnere la validazione.
   //
-  // `expectedFields` NON scende al provider: e' un'istruzione per il
-  // validatore, e infilarla nell'oggetto della richiesta la spedirebbe a
-  // ~180 modelli come parametro sconosciuto.
-  const { expectedFields: _expectedFieldsOpt, ...llmOpts } = opts;
+  // `expectedFields` e `locale` restano contesto del validatore e NON scendono
+  // al provider: inoltrarli nella richiesta li spedirebbe a ~180 modelli come
+  // parametri sconosciuti.
+  const { expectedFields: _expectedFieldsOpt, locale: primaryLocale = 'it', ...llmOpts } = opts;
   const _body2Validation = resolveBody2Validation({
     jsonMode: opts.jsonMode,
     expectedFields: _expectedFieldsOpt,
@@ -6878,7 +6896,7 @@ async function callLLM(messages, opts = {}) {
       // Il verdetto e' delegato a ./lib/body2-payload-verdict.mjs: e' li' che
       // vive la regola, ed e' li' che il test la esegue (questo file non e'
       // importabile senza `npm ci`, vedi l'intestazione del modulo).
-      const { verdict, itContent: _verdictContent, missing, salvagedPayload } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
+      const { verdict, itContent: _verdictContent, missing, salvagedPayload } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields, locale: primaryLocale });
       itContent = _verdictContent;
 
       // ── REGOLA #0: l'abort e' una risposta VALIDA, non un payload rotto ────
@@ -8554,11 +8572,33 @@ function isHeadlineCardNode(node) {
   return node.name === 'article' || node.name === 'li' || headlineNodeHasHint(node);
 }
 
-function headlineStackHasPaywall(stack) {
-  return stack.some((node) => {
+function headlineStackHasPremiumMarker(stack, inlineMarkup = '') {
+  const nodes = [...stack];
+  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
+  let match;
+  while ((match = tagRe.exec(inlineMarkup)) !== null) {
+    if (match[1]) continue;
+    nodes.push({ name: match[2].toLowerCase(), attrs: match[3] || '' });
+  }
+
+  return nodes.some((node) => {
+    const attrs = node.attrs || '';
     const className = headlineAttributeValue(node.attrs, 'class');
-    return /(?:^|[\s_-])paywall(?:$|[\s_-])/i.test(className)
-      || /\bdata-paywall(?:-[\w-]+)?(?![\w-])(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?/i.test(node.attrs || '');
+    const classTokens = className
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter(Boolean);
+    const compactClass = classTokens.join('');
+    const classMarker = classTokens.some((token) => token === 'paywall' || token === 'premium')
+      || /^(?:subscribers?only|membersonly|exclusive(?:content)?|paidcontent|abopflichtig)$/.test(compactClass);
+    const attributeMarker = /\bdata-(?:paywall|premium|subscriber-only|members-only|subscription-required)(?:-[\w-]+)?(?![\w-])/i.test(attrs);
+    const access = headlineAttributeValue(attrs, 'data-access')
+      || headlineAttributeValue(attrs, 'data-content-access')
+      || headlineAttributeValue(attrs, 'data-subscription');
+    const normalizedAccess = access.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const accessMarker = /^(?:premium|paywall|paid|subscription|required|subscriber|subscribersonly|member|membersonly|exclusive|exclusivecontent|abopflichtig)$/.test(normalizedAccess);
+    return classMarker || attributeMarker || accessMarker;
   });
 }
 
@@ -8693,9 +8733,8 @@ function extractHeadlines(html, baseUrl) {
     const ancestors = headlineAncestorStack(html, m.index);
     const anchorTagEnd = m[0].indexOf('>');
     const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
-    const anchorAttrs = anchorTag.replace(/^<a\b/i, '').replace(/>\s*$/, '');
     if (source?.quirks?.excludePaywalledCards
-      && headlineStackHasPaywall([...ancestors, { name: 'a', attrs: anchorAttrs }])) continue;
+      && headlineStackHasPremiumMarker(ancestors, m[0])) continue;
     let href = m[1];
     let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
     const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
@@ -11037,8 +11076,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `call=1/2` e 0 `call=2/2` sulle 4 run del 2026-08-18; `roster_blocked`
     // 12 e 11 volte sulle due del 2026-08-19). Vedi #485.
     const rawBody = useGeminiDirect
-      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS })
-      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS });
+      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS, locale: primaryLocale })
+      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS, locale: primaryLocale });
     let bodyData;
     try {
       bodyData = JSON.parse(repairLlmJson(rawBody));
@@ -11275,8 +11314,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // di modello. `META_ONLY_FIELDS` le da' la validazione che le compete:
     // esattamente i due campi di testo che questa meta' produce.
     const rawMeta = useGeminiDirect
-      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS });
+      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale })
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS, locale: primaryLocale });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
@@ -11523,10 +11562,10 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `_preferActiveThisAttempt` vale su ogni tentativo, quindi anche questi
     // rami passano da Codex e Claude prima di Gemini. Senza `prefer` il
     // tentativo 3 tornava sulla sola cascata free (review di #1751).
-    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
+    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale });
     console.error(`  ↪ Completato (slot Gemini ${AI_MODELS.GEMINI_FLASH})`);
   } else {
-    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS };
+    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale };
     try {
       itRaw = await callLLM(llmMessages, _optsUnica);
     } catch (e) {
@@ -11584,7 +11623,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     console.error(`  🔄 Retry IT con maxTokens=${retryTokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
     try {
       const itRaw2 = useGeminiDirect
-        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS })
+        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale })
         // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
         // `_preferActiveThisAttempt`, che dal 2026-09-24 vale su ogni
         // tentativo — vedi il commento su `_preferSenzaCap` sopra. E' anche la
@@ -11603,7 +11642,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
         // (vedi `_msgsUnica` sopra) e non e' garantito che rientri nel
         // budget: ricontattare il preferito qui rischierebbe di riesaurirlo
         // una seconda volta per un motivo (dimensione) che non e' il suo.
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
+        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS, locale: primaryLocale });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
@@ -14196,12 +14235,7 @@ function optimizeSeoMetadata(data) {
     42,
   );
 
-  let desc = stripExcerptMarkdown(data.seo.description || it.excerpt || '');
-  if (!desc) desc = `${seoTitleCore}. Guida pratica per frontalieri tra Ticino e Italia con dati aggiornati 2026.`;
-  if (desc.length < 145) {
-    desc = `${desc}${desc.endsWith('.') ? '' : '.'} Dati aggiornati 2026 per frontalieri in Ticino.`;
-  }
-  data.seo.description = truncateAtWordBoundary(desc, 160);
+  ensureSeoDescriptionMinimum(data);
   data.seo.ogDescription = truncateAtWordBoundary(
     stripExcerptMarkdown(data.seo.ogDescription || data.seo.description),
     SEO_OG_DESCRIPTION_MAX,
@@ -14411,10 +14445,6 @@ function loadExistingArticleSummaries() {
 // readAllSectionsMetaIt — le guide-mestiere vengono generate in entrambe le
 // sezioni e un gemello nella sezione sorella deve contare.
 //
-// Il regex accetta fino a 300 caratteri fra `id:` e `date:` perché nel
-// registro fra i due campi c'è `category:`; è ancorato a `id:` in modo che
-// una voce senza `date` non rubi la data della voce successiva (il primo
-// match per id vince e non si sovrascrive).
 let _existingArticleDatesCache = null;
 function loadExistingArticleDates() {
   if (_existingArticleDatesCache !== null) return _existingArticleDatesCache;
@@ -14424,10 +14454,9 @@ function loadExistingArticleDates() {
     try {
       src = read(cfg.registryFile);
     } catch { continue; } // registro assente (sezione non ancora popolata)
-    const re = /id:\s*'([^']+)',[\s\S]{0,300}?date:\s*'([^']+)'/g;
-    let m;
-    while ((m = re.exec(src)) !== null) {
-      if (!dates.has(m[1])) dates.set(m[1], m[2]);
+    for (const record of scanTopLevelArticleRecords(src)) {
+      const date = readTopLevelString(record, 'date');
+      if (date && !dates.has(record.id)) dates.set(record.id, date);
     }
   }
   _existingArticleDatesCache = dates;
@@ -19328,9 +19357,9 @@ export function buildArticlePublishedUrls(data) {
 /**
  * Budget for `seo.description` / `seo.ogDescription`.
  *
- * The site's `tests/seo-description-length.test.ts` hard-fails above 170; 160
- * keeps a margin and matches what the AI flow here already enforced before this
- * became a shared rule.
+ * The site's `tests/seo-description-length.test.ts` hard-fails below 80 and
+ * above 170. The writer requires 80 characters of article-specific copy and
+ * keeps the 160-character cap as headroom below the site's maximum.
  */
 const SEO_DESCRIPTION_MAX = 160;
 
@@ -19431,6 +19460,44 @@ function clampSeoDescriptions(data) {
  * deterministic producers call `registerArticleFiles()` directly and must
  * meet the same contract before the first registry/meta write.
  */
+function ensureSeoDescriptionMinimum(data) {
+  const seo = data?.seo;
+  if (!seo || typeof seo !== 'object') {
+    throw new Error(`SEO description for article "${data?.id || 'unknown'}" is missing`);
+  }
+
+  const description = stripExcerptMarkdown(
+    typeof seo.description === 'string' ? seo.description : '',
+  );
+  const excerpt = stripExcerptMarkdown(
+    typeof data?.content?.it?.excerpt === 'string' ? data.content.it.excerpt : '',
+  );
+  // A model can return a valid long-form article while emitting a short SEO
+  // summary (the canton-fr recurrence produced 54 chars for both fields).
+  // The body is the remaining article-specific source already in memory; use
+  // its plain-text lead before failing closed, rather than padding with generic
+  // copy or rejecting an otherwise publishable article.
+  const body = stripExcerptMarkdown(bodyTextForQuality(data?.content?.it || {}));
+  const candidates = [description, excerpt, body]
+    .filter((candidate) => candidate.length >= SEO_DESCRIPTION_MIN)
+    .map((candidate) => truncateAtWordBoundary(candidate, SEO_DESCRIPTION_MAX));
+  const candidate = candidates.find((bounded) => bounded.trim().length >= SEO_DESCRIPTION_MIN);
+  if (!candidate) {
+    assertSeoDescriptionMinimum(candidates[0] ?? '', {
+      id: data?.id || 'unknown',
+      sourceDescriptionLength: description.length,
+      sourceExcerptLength: excerpt.length,
+    });
+  }
+
+  seo.description = assertSeoDescriptionMinimum(candidate, {
+    id: data?.id || 'unknown',
+    sourceDescriptionLength: description.length,
+    sourceExcerptLength: excerpt.length,
+  });
+  return seo.description;
+}
+
 function assertArticleDescriptionsArePlain(data) {
   assertPlainDescriptionFields(data?.seo, {
     fieldPrefix: 'seo.',
@@ -19492,6 +19559,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // percorso AI primario.
   preserveMunicipalityNamesInMetadata(data);
   clampSeoDescriptions(data);
+  ensureSeoDescriptionMinimum(data);
   assertArticleDescriptionsArePlain(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   assertSlugFallbackRunBudget();

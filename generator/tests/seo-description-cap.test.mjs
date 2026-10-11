@@ -53,11 +53,17 @@
  * un'edizione, il difetto e' nel template, non qui.
  */
 import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
 import { expect } from './lib/expect-shim.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
+import { stripExcerptMarkdown } from '../scripts/lib/article-excerpt.mjs';
+import {
+  SEO_DESCRIPTION_MIN as SHARED_SEO_DESCRIPTION_MIN,
+  assertSeoDescriptionMinimum,
+} from '../scripts/lib/seo-description-contract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -65,6 +71,7 @@ const SEO_DIR = path.join(ROOT, 'content', 'seo');
 
 /** Il tetto duro di `tests/seo-description-length.test.ts` sul sito. */
 const SITE_HARD_MAX = 170;
+const SITE_HARD_MIN = 80;
 
 // ── Estrazione in sandbox delle funzioni pure ──────────────────────────────
 
@@ -96,14 +103,20 @@ function extractCapBlock() {
   if (!max) throw new Error('SEO_DESCRIPTION_MAX non trovato in create-article.mjs');
   const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
   if (!ogMax) throw new Error('SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs');
+  const maxBodyKeys = src.match(/^const MAX_BODY_KEYS = (\d+);$/m);
+  if (!maxBodyKeys) throw new Error('MAX_BODY_KEYS non trovato in create-article.mjs');
   const block = [
     sliceFn(src, 'function truncateAtWordBoundary(text, maxLen) {'),
     `const SEO_DESCRIPTION_MAX = ${max[1]};`,
     `const SEO_OG_DESCRIPTION_MAX = ${ogMax[1]};`,
+    `const MAX_BODY_KEYS = ${maxBodyKeys[1]};`,
     // Estratto dal sorgente, non riscritto: se la mappa dei budget cambia
     // forma il test la vede, invece di misurare una copia divergente.
     sliceConst(src, 'const SEO_DESCRIPTION_BUDGETS = {'),
     sliceFn(src, 'function clampSeoDescriptions(data) {'),
+    sliceFn(src, 'function bodyFieldsForQuality(content) {'),
+    sliceFn(src, 'function bodyTextForQuality(content) {'),
+    sliceFn(src, 'function ensureSeoDescriptionMinimum(data) {'),
   ].join('\n\n');
   // `truncateAtWordBoundary` non e' piu' autocontenuta: delega a
   // `truncateToClause` di host/shared/clauseTail.mjs (vedi
@@ -112,11 +125,21 @@ function extractCapBlock() {
   // dello stesso troncamento, che e' il difetto che quella fix ha chiuso.
   return new Function(
     'truncateToClause',
-    `${block}\nreturn { clampSeoDescriptions, truncateAtWordBoundary, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS };`,
-  )(truncateToClause);
+    'stripExcerptMarkdown',
+    'SEO_DESCRIPTION_MIN',
+    'assertSeoDescriptionMinimum',
+    `${block}\nreturn { clampSeoDescriptions, ensureSeoDescriptionMinimum, truncateAtWordBoundary, SEO_DESCRIPTION_MIN, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS };`,
+  )(truncateToClause, stripExcerptMarkdown, SHARED_SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum);
 }
 
-const { clampSeoDescriptions, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS } =
+const {
+  clampSeoDescriptions,
+  ensureSeoDescriptionMinimum,
+  SEO_DESCRIPTION_MIN,
+  SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX,
+  SEO_DESCRIPTION_BUDGETS,
+} =
   extractCapBlock();
 
 /** Il testo esatto che ha rotto il sito, due giorni di fila. */
@@ -128,6 +151,11 @@ const OFFENDER =
 // ── Unit ───────────────────────────────────────────────────────────────────
 
 describe('clampSeoDescriptions', () => {
+  it('mantiene entrambi i limiti hard della description del sito', () => {
+    expect(SEO_DESCRIPTION_MIN).toBe(SITE_HARD_MIN);
+    expect(SEO_DESCRIPTION_MAX).toBeLessThan(SITE_HARD_MAX);
+  });
+
   it('lascia margine sotto il tetto del sito', () => {
     expect(SEO_DESCRIPTION_MAX).toBeLessThan(SITE_HARD_MAX);
   });
@@ -213,9 +241,156 @@ describe('clampSeoDescriptions', () => {
   });
 });
 
+describe('ensureSeoDescriptionMinimum', () => {
+  it('usa il corpo italiano quando description ed excerpt sono troppo brevi', () => {
+    const body =
+      'Il Parlamento friburghese ha rinviato la mozione per ridurre rapidamente i premi malattia, lasciando aperto il confronto per famiglie e lavoratori.';
+    const data = {
+      id: 'friburgo-mozione-premi-malattia',
+      seo: { description: 'Decisione sui premi malattia a Friburgo' },
+      content: {
+        it: {
+          excerpt: 'La mozione sui premi malattia è stata rinviata.',
+          body1: body,
+          body2: 'Il dibattito parlamentare proseguirà con nuove valutazioni.',
+        },
+      },
+    };
+
+    const result = ensureSeoDescriptionMinimum(data);
+    expect(result.startsWith(body)).toBe(true);
+    expect(result.length).toBeGreaterThanOrEqual(SEO_DESCRIPTION_MIN);
+    expect(result.length <= SEO_DESCRIPTION_MAX).toBe(true);
+    expect(data.seo.description).toBe(result);
+    expect(data.seo.description).not.toMatch(/Dati aggiornati|Guida pratica/);
+  });
+
+  it('non usa un body oltre il limite pubblicato come sorgente SEO', () => {
+    const data = {
+      id: 'body-oltre-il-writer',
+      seo: { description: 'Descrizione breve' },
+      content: {
+        it: {
+          excerpt: 'Estratto breve.',
+          body21: 'Questo testo supera il minimo SEO, ma il writer non pubblica body21 nel body live.',
+        },
+      },
+    };
+
+    assert.throws(
+      () => ensureSeoDescriptionMinimum(data),
+      /at least 80 characters of article-specific text/,
+    );
+    expect(data.seo.description).toBe('Descrizione breve');
+  });
+
+  it('usa l’excerpt italiano reale quando la description è troppo breve', () => {
+    const excerpt =
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+    const data = {
+      id: 'fischiava-treno-gorla',
+      seo: { description: 'Domenica 11 ottobre 2026 a Gorla Minore' },
+      content: { it: { excerpt } },
+    };
+
+    expect(excerpt.length).toBeGreaterThanOrEqual(SEO_DESCRIPTION_MIN);
+    expect(ensureSeoDescriptionMinimum(data)).toBe(excerpt);
+    expect(data.seo.description).toBe(excerpt);
+  });
+
+  it('usa l’excerpt quando il clamp della description primaria scende sotto il floor', () => {
+    const excerpt =
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+    const data = {
+      id: 'fischiava-treno-gorla',
+      seo: { description: 'x'.repeat(SEO_DESCRIPTION_MAX + 1) },
+      content: { it: { excerpt } },
+    };
+
+    expect(ensureSeoDescriptionMinimum(data)).toBe(excerpt);
+    expect(data.seo.description).toBe(excerpt);
+  });
+
+  it('rifiuta quando nessuna fonte resta sopra il floor dopo il clamp', () => {
+    const original = 'x'.repeat(SEO_DESCRIPTION_MAX + 1);
+    const data = {
+      id: 'single-token',
+      seo: { description: original },
+      content: { it: { excerpt: 'y'.repeat(SEO_DESCRIPTION_MAX + 1) } },
+    };
+
+    assert.throws(
+      () => ensureSeoDescriptionMinimum(data),
+      /at least 80 characters of article-specific text.*after cap: 0/,
+    );
+    expect(data.seo.description).toBe(original);
+  });
+
+  it('rifiuta fonti brevi senza aggiungere testo generico', () => {
+    const original = 'Domenica 11 ottobre 2026 a Gorla Minore';
+    const data = {
+      id: 'fischiava-treno-gorla',
+      seo: { description: original },
+      content: { it: { excerpt: 'Evento ferroviario a Gorla Minore.' } },
+    };
+
+    assert.throws(
+      () => ensureSeoDescriptionMinimum(data),
+      /at least 80 characters of article-specific text/,
+    );
+    expect(data.seo.description).toBe(original);
+  });
+
+  it('non riscrive una description già valida', () => {
+    const description =
+      'La festa ferroviaria di Gorla Minore si svolge vicino alla vecchia stazione con pranzo condiviso, esposizioni di trenini e attività per famiglie.';
+    const data = { seo: { description }, content: { it: { excerpt: 'Excerpt alternativo abbastanza lungo ma non selezionato.' } } };
+
+    expect(ensureSeoDescriptionMinimum(data)).toBe(description);
+    expect(data.seo.description).toBe(description);
+  });
+
+  it('usa l’excerpt se il taglio clause-safe porta la description sotto il floor', () => {
+    const description = `${'A'.repeat(78)} per ${'B'.repeat(100)}`;
+    const excerpt =
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+    const data = {
+      id: 'fischiava-treno-gorla',
+      seo: { description },
+      content: { it: { excerpt } },
+    };
+
+    expect(description.length).toBeGreaterThan(SEO_DESCRIPTION_MAX);
+    expect(ensureSeoDescriptionMinimum(data)).toBe(excerpt);
+    expect(data.seo.description).toBe(excerpt);
+  });
+
+  it('fallisce prima del write se il taglio non produce alcun valore valido', () => {
+    const description = 'X'.repeat(SEO_DESCRIPTION_MAX + 1);
+    const data = {
+      id: 'token-troppo-lungo',
+      seo: { description },
+      content: { it: { excerpt: 'Evento breve.' } },
+    };
+
+    assert.throws(
+      () => ensureSeoDescriptionMinimum(data),
+      /after cap: 0/,
+    );
+    expect(data.seo.description).toBe(description);
+  });
+});
+
 // ── Wiring guard ───────────────────────────────────────────────────────────
 
 describe('wiring', () => {
+  it('the primary optimizer uses the source-backed minimum, not generic padding', () => {
+    const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
+    const optimizer = sliceFn(src, 'function optimizeSeoMetadata(data) {');
+    expect(optimizer.includes('ensureSeoDescriptionMinimum(data);')).toBe(true);
+    expect(optimizer.includes('Dati aggiornati 2026 per frontalieri in Ticino.')).toBe(false);
+  });
+
   /**
    * Il prompt e' un contratto SENZA forma di import: nessun guard che segue gli
    * import lo vede, e finche' istruiva "OG desc (≤ 160 caratteri)" il tetto a
@@ -238,10 +413,12 @@ describe('wiring', () => {
     const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
     const body = sliceFn(src, 'export async function registerArticleFiles(data, opts = {}) {');
     const clampAt = body.indexOf('clampSeoDescriptions(data);');
+    const minimumAt = body.indexOf('ensureSeoDescriptionMinimum(data);');
     const writeAt = body.indexOf('modifySeoService(data);');
     expect(clampAt).toBeGreaterThan(-1);
+    expect(minimumAt).toBeGreaterThan(clampAt);
     expect(writeAt).toBeGreaterThan(-1);
-    expect(clampAt).toBeLessThan(writeAt);
+    expect(minimumAt).toBeLessThan(writeAt);
   });
 });
 
@@ -270,7 +447,7 @@ function readQuoted(src, pos) {
 const OUTPUT_MAX = { description: SITE_HARD_MAX, ogDescription: SEO_OG_DESCRIPTION_MAX };
 
 describe('corpus pubblicato', () => {
-  it(`nessuna description in content/seo/ supera il suo tetto (${SITE_HARD_MAX} SERP / ${SEO_OG_DESCRIPTION_MAX} social)`, () => {
+  it(`nessuna description in content/seo/ scende sotto ${SITE_HARD_MIN} o supera il tetto SERP/social`, () => {
     const files = fs.readdirSync(SEO_DIR).filter((f) => f.startsWith('seo-blog') && f.endsWith('.ts'));
     expect(files.length).toBeGreaterThan(0);
 
@@ -286,11 +463,12 @@ describe('corpus pubblicato', () => {
           const value = readQuoted(src, at + needle.length);
           if (value !== null) {
             measured++;
-            if (value.length > limit) {
+            if (value.length > limit || (field === 'description' && value.length < SITE_HARD_MIN)) {
               // Risali alla chiave dell'entry per un messaggio azionabile.
               const keyAt = src.lastIndexOf("\n  '", at);
               const key = keyAt === -1 ? '?' : src.slice(keyAt + 4, src.indexOf("'", keyAt + 4));
-              offenders.push(`${file} ${key}.${field}: ${value.length} chars (max ${limit})`);
+              const bound = value.length < SITE_HARD_MIN ? `min ${SITE_HARD_MIN}` : `max ${limit}`;
+              offenders.push(`${file} ${key}.${field}: ${value.length} chars (${bound})`);
             }
           }
           at = src.indexOf(needle, at + needle.length);

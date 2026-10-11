@@ -56,6 +56,12 @@ const CONTENT_GATES_WORKFLOW = path.join(ROOT, '.github/workflows/content-gates-
 const TESTS_WORKFLOW = path.join(ROOT, '.github/workflows/tests.yml');
 const HISTORICAL_BODY_ROOTS = BLOG_BODY_ROOTS.filter(({ section }) => floorPolicyOf(section) !== 'family');
 
+// I fixture devono avere la stessa forma dei registry reali: il reader
+// condiviso conta solo record-oggetto con `id` top-level, non proprietà isolate
+// che potrebbero appartenere a una stringa o a un oggetto annidato.
+const registrySource = (ids, name) =>
+  `const ${name} = [\n${ids.map((id) => `  { id: '${id}' },`).join('\n')}\n];\n`;
+
 // Questa e' la forma unica della guardia: deve riconoscere import/export
 // statici, anche braced su piu' righe, ma non una stringa `esbuild` in coda a
 // un commento sulla riga di un import builtin.
@@ -170,8 +176,8 @@ test('il modello non conta la directory del gate e rifiuta un riferimento assent
     const content = path.join(dir, 'content');
     fs.mkdirSync(path.join(content, 'blog-body', 'it'), { recursive: true });
     fs.writeFileSync(path.join(content, 'blog-body', 'it', 'extra.ts'), 'export default ``;');
-    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'a'\nid: 'b'\n");
-    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 's'\n");
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), registrySource(['a', 'b'], 'ARTICLES'));
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), registrySource(['s'], 'SWISS_ARTICLES'));
     for (const locale of ['it', 'en', 'de', 'fr']) {
       fs.writeFileSync(
         path.join(content, `blog-meta-${locale}.ts`),
@@ -224,11 +230,11 @@ test('un registro troncato viene confrontato con il high-water della revisione p
   const writeCorpus = (frontIds, swissIds) => {
     fs.writeFileSync(
       path.join(dir, 'content', 'blog-articles-data.ts'),
-      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+      registrySource(frontIds, 'ARTICLES'),
     );
     fs.writeFileSync(
       path.join(dir, 'content', 'swiss-articles-data.ts'),
-      swissIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+      registrySource(swissIds, 'SWISS_ARTICLES'),
     );
     for (const locale of ['it', 'en', 'de', 'fr']) {
       fs.writeFileSync(
@@ -277,9 +283,9 @@ test('un blob storico illeggibile (partial clone, fetch fallito) fallisce chiuso
   const writeCorpus = (frontIds) => {
     fs.writeFileSync(
       path.join(dir, 'content', 'blog-articles-data.ts'),
-      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+      registrySource(frontIds, 'ARTICLES'),
     );
-    fs.writeFileSync(path.join(dir, 'content', 'swiss-articles-data.ts'), "id: 'swiss-0'\n");
+    fs.writeFileSync(path.join(dir, 'content', 'swiss-articles-data.ts'), registrySource(['swiss-0'], 'SWISS_ARTICLES'));
     for (const locale of ['it', 'en', 'de', 'fr']) {
       fs.writeFileSync(
         path.join(dir, 'content', `blog-meta-${locale}.ts`),
@@ -321,11 +327,11 @@ test('un push multi-commit usa la base dell\'evento, non il commit intermedio', 
   const writeCorpus = (frontIds, swissIds) => {
     fs.writeFileSync(
       path.join(dir, 'content', 'blog-articles-data.ts'),
-      frontIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+      registrySource(frontIds, 'ARTICLES'),
     );
     fs.writeFileSync(
       path.join(dir, 'content', 'swiss-articles-data.ts'),
-      swissIds.map((id) => `id: '${id}'`).join('\n') + '\n',
+      registrySource(swissIds, 'SWISS_ARTICLES'),
     );
     for (const locale of ['it', 'en', 'de', 'fr']) {
       fs.writeFileSync(
@@ -411,8 +417,8 @@ test('un checkout shallow e una storia assente restano fail-closed', () => {
   try {
     const content = path.join(dir, 'content');
     fs.mkdirSync(content, { recursive: true });
-    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'front-0'\n");
-    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 'swiss-0'\n");
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), registrySource(['front-0'], 'ARTICLES'));
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), registrySource(['swiss-0'], 'SWISS_ARTICLES'));
     for (const locale of ['it', 'en', 'de', 'fr']) {
       fs.writeFileSync(path.join(content, `blog-meta-${locale}.ts`), "'blog.article.front-0.title': 'A',\n");
       fs.writeFileSync(path.join(content, `blog-meta-ch-${locale}.ts`), "'blog.article.swiss-0.title': 'S',\n");
@@ -485,8 +491,8 @@ test('una meta con cardinalità plausibile ma ID sostituito viene rifiutata', ()
   try {
     const content = path.join(dir, 'content');
     fs.mkdirSync(content, { recursive: true });
-    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), "id: 'a'\nid: 'b'\n");
-    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), "id: 's'\n");
+    fs.writeFileSync(path.join(content, 'blog-articles-data.ts'), registrySource(['a', 'b'], 'ARTICLES'));
+    fs.writeFileSync(path.join(content, 'swiss-articles-data.ts'), registrySource(['s'], 'SWISS_ARTICLES'));
     for (const locale of ['it', 'en', 'de', 'fr']) {
       fs.writeFileSync(
         path.join(content, `blog-meta-${locale}.ts`),

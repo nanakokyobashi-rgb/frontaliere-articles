@@ -15,6 +15,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-dati-lavoro-2026.title': 'Disoccupazione nel Canton Sciaffusa: dati settembre 2026',
     'blog.article.sciaffusa-dati-lavoro-2026.excerpt': 'Il Centro regionale di collocamento comunica i dati sulla disoccupazione nel Canton Sciaffusa per settembre 2026; il lead pubblico non riporta le cifre.',
     'blog.article.sciaffusa-dati-lavoro-2026.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.finanze-cantone-sciaffusa-2027.title': 'Sciaffusa: previste cifre rosse tra il 2027 e il 2030',
+    'blog.article.finanze-cantone-sciaffusa-2027.excerpt': 'Il governo cantonale attende risultati negativi per il quadriennio 2027-2030 a causa del calo delle entrate dalle imposte sulle imprese.',
+    'blog.article.finanze-cantone-sciaffusa-2027.imageAlt': 'Edifici governativi del Canton Sciaffusa',
 };
 
 export default blogMetaCantonShIt;

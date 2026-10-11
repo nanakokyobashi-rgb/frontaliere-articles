@@ -1,5 +1,26 @@
 {
   "keywords": [],
   "strikes": {},
-  "topicGateUrls": {}
+  "topicGateUrls": {
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
+      "section": "canton-sh",
+      "ts": 1791665318110
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-07/georg-fischer-schlaegt-ton-buechner-als-neuen-praesidenten": {
+      "section": "canton-sh",
+      "ts": 1791665339910
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
+      "section": "canton-sh",
+      "ts": 1791665780414
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
+      "section": "canton-sh",
+      "ts": 1791665785557
+    },
+    "canton-sh::https://www.radiomunot.ch/p/regionalnachrichten-vom-9-oktober-2026-1630-uhr-6t6jwn7to3u92tkozx3voy": {
+      "section": "canton-sh",
+      "ts": 1791666405996
+    }
+  }
 }

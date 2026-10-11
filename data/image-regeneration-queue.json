@@ -2,24 +2,34 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "ispezioni-gallerie-lago-como",
-      "title": "A9 Como-Chiasso: chiusure notturne a ottobre",
-      "fallbackImage": "/images/blog/article-a9-chiusure-notturne-sion-sierre.webp",
-      "reason": "All image providers failed for article-ispezioni-gallerie-lago-como: openai-codex (vision gate rejected image: Generic generated highway illustration relevant to Ticino cross-borde",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T08:47:31.158Z",
-      "lastFailureAt": "2026-10-10T08:47:31.158Z"
+      "articleId": "amsa-bus-elettrici-mendrisiotto",
+      "title": "AMSA inaugura i primi bus elettrici a Balerna",
+      "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 3,
+      "requestedAt": "2026-10-10T13:00:30.249Z",
+      "lastFailureAt": "2026-10-10T18:48:59.290Z"
     },
     {
-      "articleId": "assistenza-uri-requisiti-domanda",
-      "title": "Assistenza sociale Canton Uri: requisiti e domanda",
-      "fallbackImage": "/images/blog/article-assistenza-sociale-lucerna-requisiti.webp",
+      "articleId": "tirocinio-uri-guida-pratica",
+      "title": "Apprendistato e formazione professionale Canton Uri",
+      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
       "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 3,
+      "requestedAt": "2026-10-10T15:20:37.719Z",
+      "lastFailureAt": "2026-10-10T19:13:45.171Z"
+    },
+    {
+      "articleId": "esercitazione-soccorso-sasso",
+      "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic illustrated alpine rescue scene with no text or logos; recognizable foreground rescuers violate the no-foreground-person ",
       "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-10T09:05:08.712Z",
-      "lastFailureAt": "2026-10-10T09:05:08.712Z"
+      "failureCount": 2,
+      "requestedAt": "2026-10-10T22:34:10.251Z",
+      "lastFailureAt": "2026-10-10T23:18:13.322Z"
     }
   ]
 }

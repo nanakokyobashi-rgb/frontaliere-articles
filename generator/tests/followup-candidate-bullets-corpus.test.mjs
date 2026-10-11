@@ -120,6 +120,23 @@ test('un corpus-only resta qui, un adapted esistente qui resta qui', () => {
   assert.deepEqual({ repo: route.repo, targetPath: route.targetPath }, { repo: 'corpus', targetPath: adapted.path });
 });
 
+test('redflag-doc-sections usa il routing della sua voce adapted reale', () => {
+  const entry = MANIFEST_FILES.find((e) => e.path === 'scripts/ci/redflag-doc-sections.mjs');
+  assert.ok(entry, 'premessa: redflag-doc-sections è censito');
+  assert.equal(entry.mode, 'adapted');
+  const route = mirrorRoute({
+    path: entry.path,
+    side: 'corpus',
+    manifestFiles: MANIFEST_FILES,
+    existsHere: () => true,
+    existsTwin: () => true,
+  });
+  assert.deepEqual(
+    { repo: route.repo, targetPath: route.targetPath, why: route.why },
+    { repo: 'corpus', targetPath: entry.path, why: 'manifest:adapted:exists-here' },
+  );
+});
+
 test('senza manifest la risposta è unknown, mai il corpus per sola esistenza', () => {
   const route = mirrorRoute({
     path: 'host/batchWrite.ts',

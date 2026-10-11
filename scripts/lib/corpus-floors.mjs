@@ -32,6 +32,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
+import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
@@ -348,7 +349,6 @@ export function familyFloorVerdict(rows, retention = FLOOR_RETENTION) {
 /** Locali che build-api.mjs carica per ogni sezione. */
 export const SECTION_META_LOCALES = SECTION_LOCALES;
 
-const REGISTRY_ENTRY_RE = /^\s*id:\s*(?:'([^']+)'|"([^"]+)")/gm;
 const META_TITLE_KEY_RE = /['"]blog\.article\.([^'"]+)\.title['"]\s*:/g;
 /** Quante immagini hero questo repo tiene davvero (sorgente di `images-manifest.json`). */
 export const IMAGE_SOURCE_DIR = path.join('public', 'images', 'blog');
@@ -398,9 +398,9 @@ function readReference(root, rel, what) {
 }
 
 function registryDataFromSource(source, rel, what) {
-  const entries = [...source.matchAll(REGISTRY_ENTRY_RE)];
+  const entries = scanTopLevelArticleRecords(source);
   if (entries.length === 0) throw missingReference(what, rel);
-  const entryIds = entries.map((match) => match[1] ?? match[2]);
+  const entryIds = entries.map(({ id }) => id);
   return {
     count: entries.length,
     ids: new Set(entryIds),

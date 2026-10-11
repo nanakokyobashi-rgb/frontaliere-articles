@@ -34,6 +34,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { expect } from './lib/expect-shim.mjs';
+import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import {
   assertComuneTitleMatchesSlug,
   assertTopicNotRecentlyCovered,
@@ -593,9 +594,10 @@ function loadMetaTitles(rel) {
 function loadRegistryDates(rel) {
   const src = readFileSync(corpusUrl(rel), 'utf-8');
   const out = new Map();
-  const re = /id:\s*'([^']+)',[\s\S]{0,300}?date:\s*'([^']+)'/g;
-  let m;
-  while ((m = re.exec(src)) !== null) if (!out.has(m[1])) out.set(m[1], m[2]);
+  for (const record of scanTopLevelArticleRecords(src)) {
+    const date = readTopLevelString(record, 'date');
+    if (date && !out.has(record.id)) out.set(record.id, date);
+  }
   return out;
 }
 

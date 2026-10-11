@@ -23,8 +23,10 @@ import {
   loadSnapshot,
   buildData,
   humanDate,
+  projectDailyBriefForLocale,
 } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
+import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
 
 const BRIEF = {
   schemaVersion: 1,
@@ -114,6 +116,45 @@ test('every locale gets 4 bodies, its hub links and a 3-question FAQ', () => {
   assert.match(article.content.de.body1, /\/de\/wartezeit-grenze\//);
   assert.match(article.content.en.body2, /\/en\/gasoline-price-switzerland\/today\//);
   assert.match(article.content.fr.body4, /\/fr\/trouver-emploi-tessin\//);
+});
+
+test('localizes dynamic border-crossing exonyms before the shared factuality gate', () => {
+  const brief = structuredClone(BRIEF);
+  const name = 'Basel – Weil am Rhein, Autostrada A2/A5';
+  brief.blocks.borderWait.worst = { ...brief.blocks.borderWait.worst, name, waitMinutes: 47 };
+  brief.blocks.borderWait.crossings[0] = {
+    ...brief.blocks.borderWait.crossings[0],
+    name,
+    waitMinutes: 47,
+  };
+
+  const article = buildDailyBriefArticle(brief);
+  assert.match(article.content.fr.title, /à Bâle – Weil am Rhein/);
+  assert.match(article.content.fr.body1, /Bâle – Weil am Rhein/);
+  assert.match(article.content.it.title, /a Basilea – Weil am Rhein/);
+  assert.match(article.content.en.title, /at Basel – Weil am Rhein/);
+  assert.match(article.content.de.title, /in Basel – Weil am Rhein/);
+  assert.deepEqual(findArticleLocalizedToponymMismatches(article), []);
+});
+
+test('the hero card shares the article locale projection and slug fallbacks stay opaque', () => {
+  const brief = structuredClone(BRIEF);
+  const sourceName = 'Basel – Weil am Rhein, Autostrada A2/A5';
+  brief.blocks.borderWait.worst = { ...brief.blocks.borderWait.worst, name: sourceName };
+  brief.blocks.borderWait.crossings[0] = { ...brief.blocks.borderWait.crossings[0], name: sourceName };
+
+  const hero = buildDailyBriefSvg(projectDailyBriefForLocale(brief, 'it'), { locale: 'it' });
+  assert.match(hero, /Basilea – Weil am Rhein/);
+  assert.doesNotMatch(hero, /Basel – Weil am Rhein/);
+
+  const slugFallback = structuredClone(BRIEF);
+  const slug = 'basel-weil-am-rhein';
+  slugFallback.blocks.borderWait.worst = { ...slugFallback.blocks.borderWait.worst, slug, name: slug };
+  slugFallback.blocks.borderWait.crossings[0] = { ...slugFallback.blocks.borderWait.crossings[0], slug, name: slug };
+  const article = buildDailyBriefArticle(slugFallback);
+  const content = Object.values(article.content).map((locale) => `${locale.title}\n${locale.body1}`).join('\n');
+  assert.match(content, /basel-weil-am-rhein/);
+  assert.doesNotMatch(content, /Basilea-weil-am-rhein/);
 });
 
 /**

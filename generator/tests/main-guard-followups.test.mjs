@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
@@ -32,6 +34,23 @@ const ENTRYPOINTS = [
   'generator/scripts/backfill-article-cantons.mjs',
   'generator/scripts/measure-article-waste.mjs',
 ];
+const SYMLINK_ENTRYPOINTS = [
+  {
+    relativePath: 'scripts/reconcile-section-pages.mjs',
+    status: 1,
+    stderr: /\[reconcile-sections\] manca --out <report\.json>/,
+  },
+  {
+    relativePath: 'scripts/publish-section-pages.mjs',
+    status: 1,
+    stderr: /\[publish-section-pages\] manca --section/,
+  },
+  {
+    relativePath: 'scripts/backfill-image-credits.mjs',
+    status: 2,
+    stderr: /usage: node scripts\/backfill-image-credits\.mjs/,
+  },
+];
 
 test('i producer/repairer del follow-up canonicalizzano entrambi i lati del main-guard', () => {
   for (const relativePath of ENTRYPOINTS) {
@@ -42,5 +61,26 @@ test('i producer/repairer del follow-up canonicalizzano entrambi i lati del main
     assert.match(guard, /realpathSync\(process\.argv\[1\]\s*\|\|\s*['"]['"]\)/, relativePath);
     assert.doesNotMatch(guard, /pathToFileURL\(process\.argv\[1\]/, relativePath);
     assert.doesNotMatch(guard, /path\.resolve\(process\.argv\[1\]\)/, relativePath);
+  }
+});
+
+test('gli entrypoint di #2317 eseguono davvero main quando invocati tramite symlink', () => {
+  const tempDir = mkdtempSync(path.join(os.tmpdir(), 'frontaliere-followup-main-guard-'));
+  try {
+    for (const entrypoint of SYMLINK_ENTRYPOINTS) {
+      const link = path.join(tempDir, path.basename(entrypoint.relativePath));
+      symlinkSync(path.join(ROOT, entrypoint.relativePath), link);
+      const result = spawnSync(process.execPath, [link], {
+        cwd: ROOT,
+        encoding: 'utf8',
+        timeout: 30_000,
+      });
+
+      assert.ifError(result.error);
+      assert.equal(result.status, entrypoint.status, `${entrypoint.relativePath}: ${result.stderr}`);
+      assert.match(result.stderr, entrypoint.stderr, entrypoint.relativePath);
+    }
+  } finally {
+    rmSync(tempDir, { recursive: true, force: true });
   }
 });
