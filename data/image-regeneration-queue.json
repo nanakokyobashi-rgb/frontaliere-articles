@@ -5,11 +5,11 @@
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic alpine-rescue illustration with no text, logos, or identifiable faces; three clearly recognizable foreground rescuers are",
-      "status": "failed",
-      "failureCount": 3,
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 1,
       "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-10T23:57:50.484Z"
+      "lastFailureAt": "2026-10-11T06:36:12.336Z"
     },
     {
       "articleId": "juso-lucerna-humbel-governo",
@@ -25,11 +25,11 @@
       "articleId": "scontro-auto-gemonio-verdi",
       "title": "Gemonio, scontro tra due auto: traffico bloccato",
       "fallbackImage": "/images/blog/traffico-a2-bloccato.webp",
-      "reason": "All image providers failed for article-scontro-auto-gemonio-verdi: openai-codex (vision gate rejected image: Generic illustrated Alpine traffic collision with queued cars; vehicle brand emblems are visible.); gemini (Gemini image request fa",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "All image providers failed for article-scontro-auto-gemonio-verdi: openai-codex (vision gate rejected image: Generic editorial illustration of a two-car collision causing a traffic queue; visible automotive manufacturer badges/logos make it",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-11T02:24:06.863Z",
-      "lastFailureAt": "2026-10-11T03:35:14.822Z"
+      "lastFailureAt": "2026-10-11T06:38:00.945Z"
     }
   ]
 }
