@@ -11,7 +11,7 @@
  *
  * Il controllo è intenzionalmente dependency-free: gira prima di npm e non
  * importa il parser TypeScript. Legge soltanto la forma emessa dagli writer
- * del corpus (chiavi quoted e stringhe single-quoted/template-literal).
+ * del corpus (chiavi quoted e stringhe single/double-quoted/template-literal).
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -65,7 +65,7 @@ export const MIN_ITALIAN_FIELDS = 3000;
 export const LANGUAGE_CHECK_MIN_CHARS = 120;
 export const LANGUAGE_CHECK_MIN_CONFIDENCE = 0.65;
 
-const STRING_QUOTES = new Set(["'", '`']);
+const STRING_QUOTES = new Set(["'", '"', '`']);
 const BODY_KEY_VALUE_RE = /^blog\.article\.([^'"\r\n]+)\.(body(?:[1-9]|1[0-9]|20))$/u;
 
 function decodeTsString(raw) {
