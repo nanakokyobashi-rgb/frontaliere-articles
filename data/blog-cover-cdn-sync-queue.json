@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-uyba-sconfitta-conegliano.webp",
-      "sha256": "46b7b1a7a1e05dbbcf3d07a3a02635d8125475e28ba4f83afca6c39c4e4483c3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-uyba-sconfitta-conegliano-480w.webp",
-      "sha256": "b80eed0e1c5ca55b27d20ae2a2dd104d37a7b7d1adaa3eb66eb2e690c900121a"
-    }
-  ]
+  "items": []
 }
