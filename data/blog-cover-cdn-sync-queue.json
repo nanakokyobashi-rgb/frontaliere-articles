@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/bollettino-frontaliere-2026-10-11.webp",
+      "sha256": "1df6d0200aab532f95e7f8bf2f029e2f9795e29c33ffe110981e4941484ca621"
+    },
+    {
+      "path": "public/images/blog/thumbnails/bollettino-frontaliere-2026-10-11-480w.webp",
+      "sha256": "bb18c3c8e412f6926499837ca4b298f46476020fc2a38d362d1217b54c1ad2d9"
+    }
+  ]
 }
