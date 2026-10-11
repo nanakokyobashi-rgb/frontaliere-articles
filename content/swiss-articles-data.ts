@@ -26936,7 +26936,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'linea-yverdon-losanna-riaperta',
     category: 'pratico',
     date: '2026-10-11T13:01:23.198Z',
-    image: '/images/blog/article-treni-vd-ritorno-normale.webp',
+    image: '/images/blog/article-linea-yverdon-losanna-riaperta.webp',
     hasCalculator: true,
     articleType: 'news',
     canton: ['VD'],

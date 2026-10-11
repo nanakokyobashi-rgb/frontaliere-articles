@@ -20,16 +20,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T12:45:47.279Z"
-    },
-    {
-      "articleId": "linea-yverdon-losanna-riaperta",
-      "title": "Traffico Yverdon-Losanna: treni di nuovo regolari",
-      "fallbackImage": "/images/blog/article-treni-vd-ritorno-normale.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T13:01:23.583Z",
-      "lastFailureAt": "2026-10-11T13:01:23.583Z"
     }
   ]
 }

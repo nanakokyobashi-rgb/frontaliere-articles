@@ -101838,10 +101838,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-treni-vd-ritorno-normale.webp`,
+        "url": `${BASE_URL}/images/blog/article-linea-yverdon-losanna-riaperta.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Treno in partenza su una linea ferroviaria svizzera al mattino."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-11T13:01:23+00:00",
       "dateModified": "2026-10-11T13:01:23+00:00",

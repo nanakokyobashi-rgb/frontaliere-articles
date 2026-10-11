@@ -8074,7 +8074,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.finanziamenti-start-up-ticino.imageAlt': 'Business meeting in Lugano discussing start-up funding',
     'blog.article.linea-yverdon-losanna-riaperta.title': 'Yverdon-Lausanne traffic: trains running regularly again',
     'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Normal traffic between Yverdon and Lausanne from 05:40 Arson discovered on Friday at around 03:00 Traffic interrupted between Cossonay-Penthalaz and Chavornay',
-    'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Train leaving a Swiss railway line in the morning.',
+    'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;
