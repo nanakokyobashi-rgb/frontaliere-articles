@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-accordo-ue-sovranita-fiscale.webp",
+      "sha256": "c851966194b4bf4174c1ce6552591c6796662ee1d829992af64aebeab7be53b6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-accordo-ue-sovranita-fiscale-480w.webp",
+      "sha256": "7b22252e2f660b04811820fcf6455ad28d998c441206ad4953e9febb39303e1f"
+    }
+  ]
 }
