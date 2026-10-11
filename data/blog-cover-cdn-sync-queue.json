@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-amsa-bus-elettrici-mendrisiotto.webp",
-      "sha256": "240fb8d2ad93e1a7eb3a4fc18c0300b6a95127f57c258c1afe47c884544f7444"
-    },
-    {
-      "path": "public/images/blog/article-tirocinio-uri-guida-pratica.webp",
-      "sha256": "d974630911678675ca98c668d2f62f8961c7785e8282e6a3417fb39436f37350"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-amsa-bus-elettrici-mendrisiotto-480w.webp",
-      "sha256": "3d9d38261333a669f4393a9fdec129c8b2036b2153f05be8666771dfde5d2852"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tirocinio-uri-guida-pratica-480w.webp",
-      "sha256": "8a5f9294fd78bc22f8441fed9b6a122cf71d12926149505602e3c12014a58966"
-    }
-  ]
+  "items": []
 }
