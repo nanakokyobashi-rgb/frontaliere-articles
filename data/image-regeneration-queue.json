@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T02:24:06.863Z"
+    },
+    {
+      "articleId": "openjobmetis-trieste-vittoria-kastritis",
+      "title": "Varese batte Trieste: analisi e dichiarazioni",
+      "fallbackImage": "/images/blog/article-kastritis-varese-momento-difficile.webp",
+      "reason": "All image providers failed for article-openjobmetis-trieste-vittoria-kastritis: openai-codex (vision gate rejected image: Original generic basketball illustration with no text, log",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T02:48:03.264Z",
+      "lastFailureAt": "2026-10-11T02:48:03.264Z"
     }
   ]
 }

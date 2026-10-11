@@ -12985,6 +12985,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.scontro-auto-gemonio-verdi.title': 'Gemonio, collision entre deux voitures : circulation bloquée',
     'blog.article.scontro-auto-gemonio-verdi.excerpt': 'Collision entre deux voitures sur la Via Verdi à Gemonio Accident vers 18h le samedi 10 octobre Impliqué un homme de 23 ans et une femme de 56 ans Deux ambulances envoyées',
     'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Route de Mendrisio au crépuscule avec feux d\'urgence',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese bat Trieste : analyse et déclarations',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis remporte une rencontre décrite comme très compliquée Amedeo Della Valle fait son retour et décide de la fin Kastritis salue l’unité, la défense et le soutien des supporters',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Match de basket Openjobmetis',
 };
 
 export default blogMetaFr;

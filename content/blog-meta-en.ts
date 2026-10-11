@@ -12983,6 +12983,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.scontro-auto-gemonio-verdi.title': 'Gemonio, clash between two cars: blocked traffic',
     'blog.article.scontro-auto-gemonio-verdi.excerpt': 'Clash between two cars in Via Verdi at Gemonio Incident around 18:00 on Saturday 10 October Involved a 23-year-old man and a 56-year-old woman Two ambulances sent',
     'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Mendrisio road at dusk with emergency lights',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese beats Trieste: analysis and statements',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis wins a game described as very complicated Amedeo Della Valle returns and decides the ending Kastritis praises unity, defense and support from the fans',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Openjobmetis basketball game',
 };
 
 export default blogMetaEn;

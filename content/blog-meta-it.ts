@@ -12984,6 +12984,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.scontro-auto-gemonio-verdi.title': 'Gemonio, scontro tra due auto: traffico bloccato',
     'blog.article.scontro-auto-gemonio-verdi.excerpt': 'Scontro tra due auto in via Verdi a Gemonio Incidente intorno alle 18 di sabato 10 ottobre Coinvolti un uomo di 23 anni e una donna di 56 Due ambulanze inviate',
     'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Strada di Mendrisio al tramonto con luci di emergenza',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese batte Trieste: analisi e dichiarazioni',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis vince una partita definita molto complicata Amedeo Della Valle rientra e decide il finale Kastritis elogia unità, difesa e sostegno dei tifosi',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Partita di basket Openjobmetis',
 };
 
 export default blogMetaIt;

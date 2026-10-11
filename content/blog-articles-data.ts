@@ -43780,6 +43780,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'openjobmetis-trieste-vittoria-kastritis',
+ category: 'pratico',
+ date: '2026-10-11T02:48:02.856Z',
+ image: '/images/blog/article-kastritis-varese-momento-difficile.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

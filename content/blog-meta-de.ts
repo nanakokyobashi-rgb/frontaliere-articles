@@ -12982,6 +12982,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.scontro-auto-gemonio-verdi.title': 'Gemonio, Zusammenstoß zweier Autos: Verkehr blockiert',
     'blog.article.scontro-auto-gemonio-verdi.excerpt': 'Zusammenstoß zwischen zwei Autos in der Via Verdi bei Gemonio Unfall gegen 18 Uhr am Samstag, 10.',
     'blog.article.scontro-auto-gemonio-verdi.imageAlt': 'Strasse in Mendrisio bei Dämmerung mit Blaulicht',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.title': 'Varese schlägt Triest: Analysen und Erklärungen',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.excerpt': 'Openjobmetis gewinnt ein sehr kompliziertes definiertes Spiel Amedeo Della Valle kehrt zurück und entscheidet das Finale Kastritis lobt Einheit, Verteidigung und Unterstützung der Fans',
+    'blog.article.openjobmetis-trieste-vittoria-kastritis.imageAlt': 'Openjobmetis Basketballspiel',
 };
 
 export default blogMetaDe;
