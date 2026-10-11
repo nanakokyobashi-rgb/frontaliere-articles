@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lex-ubs-zurigo-capitale',
+ category: 'novita',
+ date: '2026-10-11T00:57:18.753Z',
+ image: '/images/blog/article-lex-ubs-zurigo-capitale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

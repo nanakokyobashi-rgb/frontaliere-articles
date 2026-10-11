@@ -21,6 +21,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.eolico-weinland-zurigo.title': 'Windenergie im Kanton Zürich: Skepsis im Weinland',
     'blog.article.eolico-weinland-zurigo.excerpt': 'Im Kanton Zürich käme fast die Hälfte des Windstroms aus dem Weinland.',
     'blog.article.eolico-weinland-zurigo.imageAlt': 'Landschaft im Zürcher Weinland im Mittelpunkt der Debatte über Windenergie',
+    'blog.article.lex-ubs-zurigo-capitale.title': 'Carmen Walker Späh: Weniger Kapitalzwänge für UBS',
+    'blog.article.lex-ubs-zurigo-capitale.excerpt': 'Walker Späh und Filippo Leutenegger suchen in Bern FDP-Unterstützung für weniger strenge Kapitalregeln für UBS.',
+    'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Stadtansicht von Zürich zum politischen Streit über Kapitalvorschriften',
 };
 
 export default blogMetaCantonZhDe;

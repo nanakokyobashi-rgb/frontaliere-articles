@@ -21,6 +21,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.eolico-weinland-zurigo.title': 'Éolien dans le canton de Zurich : scepticisme dans le Weinland',
     'blog.article.eolico-weinland-zurigo.excerpt': 'Dans le canton de Zurich, près de la moitié de l\'électricité éolienne proviendrait du Weinland.',
     'blog.article.eolico-weinland-zurigo.imageAlt': 'Paysage du Weinland zurichois au cœur du débat sur l’énergie éolienne',
+    'blog.article.lex-ubs-zurigo-capitale.title': 'Carmen Walker Späh : moins de contraintes de fonds propres pour UBS',
+    'blog.article.lex-ubs-zurigo-capitale.excerpt': 'Walker Späh et Filippo Leutenegger cherchent à Berne le soutien du FDP en faveur de règles de fonds propres moins strictes pour UBS.',
+    'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Scène urbaine de Zurich liée au débat sur les exigences de fonds propres',
 };
 
 export default blogMetaCantonZhFr;

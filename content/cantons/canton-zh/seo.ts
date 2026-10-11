@@ -231,6 +231,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lex-ubs-zurigo-capitale': {
+    title: 'Carmen Walker Späh: meno vincoli di capitale per UBS',
+    description: 'Walker Späh, presidente del governo zurighese, e Filippo Leutenegger cercano a Berna sostegno dei colleghi FDP per regole di capitale meno severe per UBS.',
+    keywords: 'frontalieri, ticino, svizzera, italia, carmen, walker, späh, meno',
+    ogTitle: 'Lex UBS: la richiesta di Carmen Walker Späh a Berna',
+    ogDescription: 'La presidente del governo zurighese Carmen Walker Späh fa lobbying a Berna per regole di capitale meno severe. Con il presidente della FDP zurighese Filippo Leutenegger guarda ai colleghi di partito nel Bundeshaus.',
+    canonicalPath: '/articoli-zurigo/lex-ubs-zurigo-capitale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Carmen Walker Späh: meno vincoli di capitale per UBS",
+      "description": "Walker Späh, presidente del governo zurighese, e Filippo Leutenegger cercano a Berna sostegno dei colleghi FDP per regole di capitale meno severe per UBS.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lex-ubs-zurigo-capitale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena urbana del Canton Zurigo legata al dibattito sulle regole di capitale"
+      },
+      "datePublished": "2026-10-11T00:57:18+00:00",
+      "dateModified": "2026-10-11T00:57:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/lex-ubs-zurigo-capitale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

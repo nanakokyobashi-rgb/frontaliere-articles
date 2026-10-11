@@ -21,6 +21,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.eolico-weinland-zurigo.title': 'Wind power in the Canton of Zurich: skepticism in the Weinland',
     'blog.article.eolico-weinland-zurigo.excerpt': 'In the Canton of Zurich, almost half of the wind-generated electricity would come from the Weinland.',
     'blog.article.eolico-weinland-zurigo.imageAlt': 'Zurich Weinland landscape linked to the canton’s wind-power debate',
+    'blog.article.lex-ubs-zurigo-capitale.title': 'Carmen Walker Späh: fewer capital constraints for UBS',
+    'blog.article.lex-ubs-zurigo-capitale.excerpt': 'Walker Späh and Filippo Leutenegger seek FDP support in Bern for less stringent capital rules for UBS.',
+    'blog.article.lex-ubs-zurigo-capitale.imageAlt': 'Zurich urban scene linked to the debate on capital requirements',
 };
 
 export default blogMetaCantonZhEn;
