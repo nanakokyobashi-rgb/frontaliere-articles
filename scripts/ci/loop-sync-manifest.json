@@ -2391,9 +2391,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "9633813da0529c82",
-        "corpus": "9633813da0529c82",
-        "alignedAt": "2026-10-07"
+        "site": "1e5ae2d628914224",
+        "corpus": "1e5ae2d628914224",
+        "alignedAt": "2026-10-11"
       }
     },
     {
@@ -2411,9 +2411,9 @@
       "mode": "identical",
       "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275, #12299 e #12305): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; poi chiede l'URL delle pagine nelle due varianti di cache per ogni file, anche per quelli che la sonda mostra (la HEAD della sonda legge R2 e non vede un 404 tenuto dall'edge): un file che la sonda non ha mostrato, o che a quell'URL non risponde, viene invalidato all'edge e riconfermato, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
       "baseline": {
-        "site": "e3d195c4dd987f6f",
-        "corpus": "e3d195c4dd987f6f",
-        "alignedAt": "2026-10-08"
+        "site": "0c0beaca0d92eaf5",
+        "corpus": "0c0beaca0d92eaf5",
+        "alignedAt": "2026-10-11"
       }
     },
     {
@@ -2505,9 +2505,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "636d181718b28132",
-        "corpus": "636d181718b28132",
-        "alignedAt": "2026-10-05"
+        "site": "3a0ba1d6b2f707d1",
+        "corpus": "3a0ba1d6b2f707d1",
+        "alignedAt": "2026-10-11"
       }
     },
     {
@@ -2922,9 +2922,9 @@
       "sitePath": "scripts/lib/discovery/googleNewsUrlResolver.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e67cdf47b126d68b",
-        "corpus": "e67cdf47b126d68b",
-        "alignedAt": "2026-08-09"
+        "site": "4ad0070a23a601d7",
+        "corpus": "4ad0070a23a601d7",
+        "alignedAt": "2026-10-11"
       }
     },
     {
@@ -3391,9 +3391,9 @@
       "sitePath": "scripts/lib/mymemory-translate.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2677822dde8452e3",
-        "corpus": "2677822dde8452e3",
-        "alignedAt": "2026-08-09"
+        "site": "1a6a7a45110a3c97",
+        "corpus": "1a6a7a45110a3c97",
+        "alignedAt": "2026-10-11"
       }
     },
     {
@@ -3717,9 +3717,9 @@
       "sitePath": "services/seo/imageObjectLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "8ebeaf931647a156",
-        "corpus": "8ebeaf931647a156",
-        "alignedAt": "2026-10-05"
+        "site": "baf2693412c35ed8",
+        "corpus": "baf2693412c35ed8",
+        "alignedAt": "2026-10-11"
       }
     },
     {
@@ -3727,9 +3727,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "45f8bd93152a8515",
-        "corpus": "45f8bd93152a8515",
-        "alignedAt": "2026-10-07"
+        "site": "b012a9d1b3ada67a",
+        "corpus": "b012a9d1b3ada67a",
+        "alignedAt": "2026-10-11"
       }
     },
     {
@@ -4696,9 +4696,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "adc6f92b284d1b2c",
-        "corpus": "adc6f92b284d1b2c",
-        "alignedAt": "2026-10-07"
+        "site": "9b9bfdb0aca0843d",
+        "corpus": "9b9bfdb0aca0843d",
+        "alignedAt": "2026-10-11"
       }
     },
     {
