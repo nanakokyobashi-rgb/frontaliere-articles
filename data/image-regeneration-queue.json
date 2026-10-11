@@ -2,26 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "amsa-bus-elettrici-mendrisiotto",
-      "title": "AMSA inaugura i primi bus elettrici a Balerna",
-      "fallbackImage": "/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp",
-      "reason": "All image providers failed for article-amsa-bus-elettrici-mendrisiotto: openai-codex (vision gate rejected image: Generic illustrative electric bus charging in an Alpine/Swiss setting. A small brand-like emblem is visible on the bus front.)",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-10T13:00:30.249Z",
-      "lastFailureAt": "2026-10-11T01:06:29.680Z"
-    },
-    {
-      "articleId": "tirocinio-uri-guida-pratica",
-      "title": "Apprendistato e formazione professionale Canton Uri",
-      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 3,
-      "requestedAt": "2026-10-10T15:20:37.719Z",
-      "lastFailureAt": "2026-10-10T19:13:45.171Z"
-    },
-    {
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
@@ -35,11 +15,11 @@
       "articleId": "juso-lucerna-humbel-governo",
       "title": "Juso Lucerna: Valentin Humbel candidato al governo",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-juso-lucerna-humbel-governo: openai-codex (vision gate rejected image: Original generic illustration with no text, logos, or visible face, but it prominently depicts a foreground person from behind and",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "All image providers failed for article-juso-lucerna-humbel-governo: openai-codex (vision gate rejected image: Original illustration of Lucerne, but it includes a recognizable foreground person viewed from behind.); gemini (Gemini image requ",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-10T23:52:13.536Z",
-      "lastFailureAt": "2026-10-11T01:08:27.420Z"
+      "lastFailureAt": "2026-10-11T01:37:21.931Z"
     },
     {
       "articleId": "vbz-centrale-problemi-quotidiani",
@@ -47,9 +27,9 @@
       "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "image generation deadline exceeded",
       "status": "queued",
-      "failureCount": 0,
+      "failureCount": 1,
       "requestedAt": "2026-10-11T01:13:16.609Z",
-      "lastFailureAt": "2026-10-11T01:13:16.609Z"
+      "lastFailureAt": "2026-10-11T01:39:22.063Z"
     }
   ]
 }

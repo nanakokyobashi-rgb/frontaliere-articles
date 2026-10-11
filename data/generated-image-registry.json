@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 352,
+  "assetCount": 354,
   "assets": [
     {
       "schema": 1,
@@ -13396,6 +13396,92 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic illustrated volleyball venue scene; no readable text, logos, or identifiable people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-amsa-bus-elettrici-mendrisiotto",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "1ca0a4769203ce483e24fbadc047b015fd2e3cfd65e890e07664228f04ab2161",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "240fb8d2ad93e1a7eb3a4fc18c0300b6a95127f57c258c1afe47c884544f7444",
+      "bytes": 160998,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-11T01:34:25.108Z",
+      "verifiedAt": "2026-10-11T01:34:31.642Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-amsa-bus-elettrici-mendrisiotto.webp",
+      "area": "Svizzera. Safety retry: absolutely no signs, lettering, words, numbers, logos, labels, banners, watermarks, or signature-like marks anywhere in the image.",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic illustration of electric buses in a Swiss alpine town; no people, readable text, signage, watermarks, logos, or trademarks."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-tirocinio-uri-guida-pratica",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "4cf01c99cb7bc65bdeb9b90e299c44437117c0acb7fb341242c72d296d2ce518",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "d974630911678675ca98c668d2f62f8961c7785e8282e6a3417fb39436f37350",
+      "bytes": 134636,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-11T01:35:37.083Z",
+      "verifiedAt": "2026-10-11T01:35:57.200Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-tirocinio-uri-guida-pratica.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic illustration of a Swiss alpine woodworking and vocational-training workshop, with no readable text, logos, or recognizable people."
       }
     }
   ]

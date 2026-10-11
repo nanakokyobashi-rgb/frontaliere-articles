@@ -101487,10 +101487,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-autobus-elettrici-mendrisiotto-amsa.webp`,
+        "url": `${BASE_URL}/images/blog/article-amsa-bus-elettrici-mendrisiotto.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Autobus elettrico AMSA in servizio nel Mendrisiotto"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T13:00:29+00:00",
       "dateModified": "2026-10-10T13:00:29+00:00",
@@ -101560,10 +101560,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Guida all'apprendistato nel Cantone di Uri: come cercare un tirocinio, leggere il contratto, valutare salario, contributi e maturità professionale in Svizzera.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-professionale-canton-berna.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tirocinio-uri-guida-pratica.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Apprendista in aula durante una lezione di formazione professionale in Svizzera"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-10T15:20:37+00:00",
       "dateModified": "2026-10-10T15:20:37+00:00",
