@@ -628,7 +628,7 @@ const BLOG_SEO_METADATA_3: Record<string, SEOMetadata> = {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
  "headline": "Dallo statuto S al permesso B in Ticino",
- "description": "Il passaggio dallo statuto S al permesso B riguarda i profughi ucraini in Svizzera, con implicazioni economiche e sociali per il Canton Ticino, fino al 2027.",
+ "description": "Dopo almeno cinque anni di soggiorno ininterrotto, chi beneficia dello statuto S ha diritto a un permesso B collegato: requisiti, ruolo del Cantone e proroga federale fino al 4 marzo 2028.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/passaggio-statuto-s-permesso-b.webp`,
  "width": 1344,
