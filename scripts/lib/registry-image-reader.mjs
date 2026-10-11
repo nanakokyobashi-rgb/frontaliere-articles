@@ -190,8 +190,8 @@ function staticLiteral(property) {
     if (skipTrivia(raw, token.end) === raw.length) return token.value;
     return undefined;
   }
-  if (raw === 'true') return true;
-  if (raw === 'false') return false;
+  if (raw.startsWith('true') && skipTrivia(raw, 'true'.length) === raw.length) return true;
+  if (raw.startsWith('false') && skipTrivia(raw, 'false'.length) === raw.length) return false;
   return undefined;
 }
 
