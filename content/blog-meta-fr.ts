@@ -13014,6 +13014,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.openjobmetis-trieste-dopopartita-podcast.title': 'Openjobmetis-Trieste 85-84 : le podcast de l\'après-partie',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.excerpt': 'Openjobmetis bat Trieste 85-84 Della Valle marque le but à 7 dixièmes de la fin Varese centre la deuxième victoire consécutive Résultat → 85-84 Décisif →',
     'blog.article.openjobmetis-trieste-dopopartita-podcast.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.title': 'Fagnano Olona, succès pour les 40 ans de la Compagnie La Marmotta',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.excerpt': 'Environ 200 spectateurs et plus de 1600 euros collectés pour les Journées Mondiales de la Jeunesse lors du spectacle de charité à l\'Oratoire Saint Stanislas.',
+    'blog.article.fagnano-spettacolo-beneficenza-marmotta.imageAlt': 'Spectacle théâtral de la compagnie La Marmotta à Fagnano Olona',
 };
 
 export default blogMetaFr;

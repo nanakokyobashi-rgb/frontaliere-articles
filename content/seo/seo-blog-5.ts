@@ -105874,6 +105874,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fagnano-spettacolo-beneficenza-marmotta': {
+    title: 'Fagnano Olona, successo per i 40 anni della Compagnia La Marmotta',
+    description: 'Circa 200 spettatori e oltre 1600 euro raccolti per la Giornata Mondiale della Gioventù nello spettacolo teatrale benefico a Fagnano Olona.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fagnano, olona, successo, anni',
+    ogTitle: 'Fagnano Olona, successo per i 40 anni della Compagnia La Marmotta',
+    ogDescription: 'Circa 200 spettatori e oltre 1600 euro raccolti per la Giornata Mondiale della Gioventù nello spettacolo teatrale benefico a Fagnano Olona.',
+    canonicalPath: '/articoli-frontaliere/fagnano-spettacolo-beneficenza-marmotta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fagnano Olona, successo per i 40 anni della Compagnia La Marmotta",
+      "description": "Circa 200 spettatori e oltre 1600 euro raccolti per la Giornata Mondiale della Gioventù nello spettacolo teatrale benefico a Fagnano Olona.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fagnano-spettacolo-beneficenza-marmotta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Spettacolo teatrale della Compagnia La Marmotta a Fagnano Olona"
+      },
+      "datePublished": "2026-10-11T13:18:42+00:00",
+      "dateModified": "2026-10-11T13:18:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fagnano-spettacolo-beneficenza-marmotta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

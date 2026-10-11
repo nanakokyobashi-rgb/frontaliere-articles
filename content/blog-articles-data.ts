@@ -43873,6 +43873,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fagnano-spettacolo-beneficenza-marmotta',
+ category: 'novita',
+ date: '2026-10-11T13:18:42.377Z',
+ image: '/images/blog/article-fagnano-spettacolo-beneficenza-marmotta.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
