@@ -8065,7 +8065,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.accordo-ue-sovranita-fiscale.imageAlt': 'Federal building in Bern in the foreground',
     'blog.article.riqualificazione-uri-domanda.title': 'Energy incentives in Uri: requirements and application',
     'blog.article.riqualificazione-uri-domanda.excerpt': 'In Uri, the programs concern the renovation of buildings and facilities.',
-    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Technician and owner review an energy renovation plan in a Swiss building',
+    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

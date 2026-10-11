@@ -26903,7 +26903,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'riqualificazione-uri-domanda',
     category: 'pratico',
     date: '2026-10-11T09:19:00.569Z',
-    image: '/images/blog/article-incentivi-energetici-lucerna-requisiti.webp',
+    image: '/images/blog/article-riqualificazione-uri-domanda.webp',
     hasCalculator: true,
     articleType: 'evergreen',
     canton: ['UR'],

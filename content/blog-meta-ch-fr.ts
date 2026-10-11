@@ -8065,7 +8065,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.accordo-ue-sovranita-fiscale.imageAlt': 'Palais fédéral à Berne au premier plan',
     'blog.article.riqualificazione-uri-domanda.title': 'Incitations énergétiques à Uri : exigences et demande',
     'blog.article.riqualificazione-uri-domanda.excerpt': 'À Uri, les programmes concernent l’assainissement de bâtiments et d’installations.',
-    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Un technicien et un propriétaire examinent un projet de rénovation énergétique en Suisse',
+    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;

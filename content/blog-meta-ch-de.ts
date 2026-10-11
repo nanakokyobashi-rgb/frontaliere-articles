@@ -8065,7 +8065,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.accordo-ue-sovranita-fiscale.imageAlt': 'Bundeshaus in Bern im Vordergrund',
     'blog.article.riqualificazione-uri-domanda.title': 'Energetische Förderungen in Uri: Voraussetzungen und Antrag',
     'blog.article.riqualificazione-uri-domanda.excerpt': 'In Uri betreffen die Programme die Sanierung von Gebäuden und Anlagen.',
-    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Techniker und Eigentümer prüfen einen energetischen Sanierungsplan in einem Schweizer Gebäude',
+    'blog.article.riqualificazione-uri-domanda.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

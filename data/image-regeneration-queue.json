@@ -20,16 +20,6 @@
       "failureCount": 3,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T06:38:00.945Z"
-    },
-    {
-      "articleId": "riqualificazione-uri-domanda",
-      "title": "Incentivi energetici in Uri: requisiti e domanda",
-      "fallbackImage": "/images/blog/article-incentivi-energetici-lucerna-requisiti.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-11T09:19:00.804Z",
-      "lastFailureAt": "2026-10-11T09:19:00.804Z"
     }
   ]
 }
