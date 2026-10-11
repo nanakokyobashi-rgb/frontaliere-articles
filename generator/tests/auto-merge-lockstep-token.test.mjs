@@ -89,6 +89,8 @@ test('il lockstep non espone un dispatch manuale da un ref arbitrario', () => {
     'il dispatch manuale potrebbe eseguire una revisione non trusted prima dei gate');
   assert.match(wf, /check_suite:\n\s+types: \[completed\]/,
     'il trigger check_suite deve restare disponibile sul workflow trusted');
+  assert.match(wf, /workflow_run:\n\s+workflows: \[tests\]\n\s+types: \[completed\]/,
+    'il completamento del workflow tests deve riattivare il merge anche quando check_suite non viene consegnato');
   assert.match(wf, /schedule:\n\s+- cron:/,
     'il trigger schedule deve restare disponibile sul workflow trusted');
 });
