@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lombardia-partenza-ritardo.webp",
+      "sha256": "f6a12d9f0b908e11247f9c858fe99f7fd1539021081b1b2f989014fce613b633"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lombardia-partenza-ritardo-480w.webp",
+      "sha256": "324969d94dee368ae91b2a3950efbd3d054e871807ffc805033c3287b2084179"
+    }
+  ]
 }
