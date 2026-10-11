@@ -3792,6 +3792,7 @@ const RAW_ARTICLES = [
  id: 'guida-cambio-franco-euro-frontaliere',
  category: 'pratico',
  date: '2026-03-15T20:00:00.000Z',
+ updatedAt: '2026-10-11',
  image: '/images/places/lugano-view.webp',
  hasCalculator: true,
  articleType: 'evergreen',
@@ -5947,10 +5948,11 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
-  {
+ {
  id: 'trovare-lavoro-ticino',
  category: 'pratico',
  date: '2026-04-03',
+ updatedAt: '2026-10-11',
  image: '/images/places/lugano-view.webp',
  hasCalculator: false,
  articleType: 'evergreen',

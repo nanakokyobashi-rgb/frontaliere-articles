@@ -5056,7 +5056,7 @@
     {
       "path": "scripts/lib/registry-image-reader.mjs",
       "mode": "corpus-only",
-      "reason": "Lettura fail-closed delle proprieta' image nei literal del registry, usata dal retirement del corpus per evitare di scambiare esempi/commenti, oggetti annidati o sintassi dinamica per evidenza valida. Gli altri reader del registry restano sullo scanner bilanciato condiviso da main; non esiste un registry editoriale corrispondente nel sito: il sito consuma il JSON pubblicato via HTTP, mentre questo flusso modifica e verifica le sorgenti del corpus.",
+      "reason": "Lettura fail-closed delle proprieta' image nei literal del registry, condivisa da retirement, backfill crediti e generazione articoli del corpus per evitare di scambiare esempi/commenti, oggetti annidati o sintassi dinamica per evidenza valida. Non esiste un registry editoriale corrispondente nel sito: il sito consuma il JSON pubblicato via HTTP, mentre questi flussi modificano e verificano le sorgenti del corpus.",
       "baseline": {
         "site": null,
         "corpus": "725fb6d8b38f0aa8",

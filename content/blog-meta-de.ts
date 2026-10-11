@@ -1133,7 +1133,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.treni-varese-milano-ceresio-express.imageAlt': 'Pendlerzug über den Luganer See bei Sonnenuntergang mit Bergkulisse',
  // Evergreen SEO articles — March 2026
  'blog.article.guida-cambio-franco-euro-frontaliere.title': 'CHF-EUR-Wechselkurs für Grenzgänger: Vollständiger Sparratgeber',
- 'blog.article.guida-cambio-franco-euro-frontaliere.excerpt': 'So optimieren Sie den Franken-Euro-Wechsel: Vergleich von Banken, Fintech und Brokern, Strategien und steuerliche Auswirkungen.',
+ 'blog.article.guida-cambio-franco-euro-frontaliere.excerpt': 'Aktualisierter CHF-EUR-Ratgeber: Referenzkurs richtig lesen, Gesamtkosten von Banken und Fintechs vergleichen und Wechselkurs von Steuerregeln trennen.',
  'blog.article.guida-cambio-franco-euro-frontaliere.imageAlt': 'Schweizer Franken und Euro-Banknoten auf einem Schreibtisch mit Taschenrechner und Wechselkursdiagrammen',
 
  'blog.article.guida-pensione-frontaliere-avs-lpp.title': 'Grenzgänger-Rente 2026: AHV, BVG und Säule 3a erklärt',
@@ -1786,7 +1786,7 @@ const blogMetaDe: Record<string, string> = {
  'blog.article.lamal-vs-ssn-decisione.imageAlt': 'Mendrisio bei Sonnenuntergang mit Blick auf die Tessiner Berge.',
 
  'blog.article.trovare-lavoro-ticino.title': 'Arbeit im Tessin finden als Grenzgänger: Leitfaden 2026',
- 'blog.article.trovare-lavoro-ticino.excerpt': 'Jobportale, Branchen mit offenen Stellen, Schweizer Lebenslauf, Bewerbungstipps und Durchschnittslöhne: alles für die Jobsuche im Kanton Tessin.',
+ 'blog.article.trovare-lavoro-ticino.excerpt': 'USTAT- und SECO-Daten, offizielle Jobkanäle, Lebenslauf, G-Bewilligung und Lohnbenchmarks: Arbeit im Tessin gezielt suchen.',
  'blog.article.trovare-lavoro-ticino.imageAlt': 'Panoramablick auf Lugano mit See und Bergen, wirtschaftliches Herz des Tessins.',
 
  'blog.article.guida-completa-frontaliere.title': 'Kompletter Leitfaden: Grenzgänger in der Schweiz werden 2026',

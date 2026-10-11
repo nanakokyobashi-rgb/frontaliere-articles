@@ -13,6 +13,10 @@
     "canton-tg::https://polizei-tg.ch/kanton-thurgau-zwei-fahrunfaehige-lenker-verunfallt": {
       "section": "canton-tg",
       "ts": 1791676737378
+    },
+    "canton-tg::https://polizei-tg.ch/kanton-thurgau-drei-fahrunfaehige-autofahrer-erwischt": {
+      "section": "canton-tg",
+      "ts": 1791731534891
     }
   }
 }

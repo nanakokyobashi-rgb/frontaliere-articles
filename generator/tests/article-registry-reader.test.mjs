@@ -63,7 +63,7 @@ test('tutti i reader del registry usano lo scanner condiviso', () => {
   ];
   for (const relative of callers) {
     const src = fs.readFileSync(path.join(ROOT, relative), 'utf8');
-    assert.match(src, /article-registry-reader\.mjs/, relative);
+    assert.match(src, /(?:article-registry-reader|registry-image-reader)\.mjs/, relative);
     assert.doesNotMatch(src, /matchAll\(\/image:/, relative);
     assert.doesNotMatch(src, /matchAll\(\/\\{\\s\*id:/, relative);
   }
