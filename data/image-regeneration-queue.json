@@ -20,6 +20,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-11T02:24:06.863Z",
       "lastFailureAt": "2026-10-11T12:45:47.279Z"
+    },
+    {
+      "articleId": "axpo-concessioni-idroelettriche",
+      "title": "Axpo e le concessioni delle centrali idroelettriche",
+      "fallbackImage": "/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T13:20:39.497Z",
+      "lastFailureAt": "2026-10-11T13:20:39.497Z"
     }
   ]
 }

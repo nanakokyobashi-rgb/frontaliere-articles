@@ -27,6 +27,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.argovia-polizia-regionale-poteri.title': 'Aargau: more powers for the regional police from 2028',
     'blog.article.argovia-polizia-regionale-poteri.excerpt': 'The Aargau government is proposing new tasks for the regional police forces to the Grand Council; the law would enter into force on January 1, 2028.',
     'blog.article.argovia-polizia-regionale-poteri.imageAlt': 'Regional police car outside a municipal building in Aargau.',
+    'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo and the concessions for hydroelectric power plants',
+    'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo publishes a White Paper: in the coming years, municipalities and cantons will be able to redesign ownership, holdings and risks.',
+    'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Baden: Axpo presents a white paper on hydropower plant concessions.',
 };
 
 export default blogMetaCantonAgEn;

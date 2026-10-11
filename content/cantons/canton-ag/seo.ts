@@ -309,6 +309,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-axpo-concessioni-idroelettriche': {
+    title: 'Axpo e le concessioni delle centrali idroelettriche',
+    description: 'Axpo pubblica un White Paper sulle concessioni idroelettriche: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, axpo, concessioni, centrali, idroelettriche',
+    ogTitle: 'Axpo e il rinnovo delle concessioni idroelettriche',
+    ogDescription: 'Il documento di Axpo offre a decisori politici e pubblico informazioni di fondo sulle concessioni idroelettriche: alla scadenza, l\'ente pubblico può scegliere tra Heimfall e rinnovo, con nuovi assetti di partecipazione.',
+    canonicalPath: '/articoli-argovia/axpo-concessioni-idroelettriche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Axpo e le concessioni delle centrali idroelettriche",
+      "description": "Axpo pubblica un White Paper sulle concessioni idroelettriche: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/frontalieri-tassa-ingresso-rischi-comuni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Baden: Axpo presenta un White Paper sulle concessioni delle centrali idroelettriche."
+      },
+      "datePublished": "2026-10-11T13:20:39+00:00",
+      "dateModified": "2026-10-11T13:20:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/axpo-concessioni-idroelettriche/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
