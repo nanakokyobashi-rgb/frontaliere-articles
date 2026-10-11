@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-como-roma-serie-a-orario.webp",
-      "sha256": "f3aafeb40239c075d90a92821dd78e87905f0bd6f4568bd4b51b066cc228a0c0"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-como-roma-serie-a-orario-480w.webp",
-      "sha256": "43894252e2d36e39ca3e76513df54cf3be2a1c16e5b91ab68d437130f8f1756a"
-    }
-  ]
+  "items": []
 }
