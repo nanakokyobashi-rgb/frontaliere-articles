@@ -5,6 +5,8 @@ const { staticAdSlotHtml } = await import('../staticAdSlotHtml.ts');
 
 test('canton hub ad placements keep the reserved formats and slots', () => {
   const top = staticAdSlotHtml('canton-hub-top');
+  const inlineOne = staticAdSlotHtml('canton-hub-inline-1');
+  const inlineTwo = staticAdSlotHtml('canton-hub-inline-2');
   const end = staticAdSlotHtml('canton-hub-end');
 
   assert.match(top, /<ins class="adsbygoogle" style="display:block;min-height:100px"/);
@@ -12,6 +14,15 @@ test('canton hub ad placements keep the reserved formats and slots', () => {
   assert.match(top, /data-ad-format="horizontal"/);
   assert.match(top, /data-full-width-responsive="true"/);
   assert.doesNotMatch(top, /data-ad-placement/);
+
+  for (const inline of [inlineOne, inlineTwo]) {
+    assert.match(inline, /<ins class="adsbygoogle" style="display:block;min-height:220px"/);
+    assert.match(inline, /data-ad-format="fluid"/);
+    assert.match(inline, /data-ad-layout="in-article"/);
+    assert.doesNotMatch(inline, /data-full-width-responsive/);
+  }
+  assert.match(inlineOne, /data-ad-slot="1982411173"/);
+  assert.match(inlineTwo, /data-ad-slot="6483829128"/);
 
   assert.match(end, /<ins class="adsbygoogle" style="display:block;min-height:400px"/);
   assert.match(end, /data-ad-slot="5196931137"/);
