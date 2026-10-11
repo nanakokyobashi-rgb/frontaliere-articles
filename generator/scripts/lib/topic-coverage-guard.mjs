@@ -772,6 +772,9 @@ const CANTON_ALIASES = [
  * e confonderli marcava una coppia legittima su Basilea). Anche
  * `imposta-autoveicoli` precede `imposta-cantonale`: «imposta cantonale sugli
  * autoveicoli» è il pilastro specifico, non quello generico.
+ * I dieci pilastri dell'espansione 2026-10-11 hanno anch'essi una chiave
+ * esplicita: aggiungere keyword al pool senza aggiungere il riconoscimento
+ * lascerebbe passare due articoli sullo stesso servizio cantonale.
  */
 const CANTON_THEMES = [
   ['sistema-sanitario', /(sistema sanitario)/],
@@ -789,6 +792,16 @@ const CANTON_THEMES = [
   ['protezione-civile', /(protezione civile)/],
   ['assicurazione-immobili', /(assicurazione (degli )?(immobili|edifici))/],
   ['formazione-continua', /(formazione continua)/],
+  ['giorni-festivi', /(giorni festivi)/],
+  ['orari-negozi', /(orari (di )?apertura (dei )?negozi|apertura domenicale)/],
+  ['imposta-cani', /(imposta|tassa) sui cani/],
+  ['licenza-caccia', /(licenza di caccia|licenza caccia)/],
+  ['permesso-pesca', /(permesso di pesca|licenza di pesca)/],
+  ['immatricolazione-veicoli', /(targhe e immatricolazione|immatricolazione (dei )?veicoli)/],
+  ['collaudo-veicoli', /(collaudo (dei )?veicoli)/],
+  ['esercizio-pubblico', /(licenza (per )?esercizio pubblico|esercizi pubblici)/],
+  ['tasse-universitarie', /(tasse universitarie)/],
+  ['integrazione-lingua', /(integrazione e corsi di lingua|corsi di lingua.*integrazione)/],
   ['dichiarazione-imposte', /(dichiarazione (delle )?imposte)/],
   ['costo-vita', /(costo (della )?vita)/],
   ['affitti', /(mercato immobiliare|affitti)/],

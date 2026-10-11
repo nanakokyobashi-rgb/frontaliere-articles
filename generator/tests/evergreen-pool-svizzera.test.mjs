@@ -142,6 +142,19 @@ const FRESH_PILLARS = [
   'formazione continua',
 ];
 
+const ADDED_PILLARS = [
+  'giorni festivi',
+  'orari di apertura negozi',
+  'imposta sui cani',
+  'licenza di caccia',
+  'permesso di pesca',
+  'targhe e immatricolazione',
+  'collaudo veicoli',
+  'licenza esercizio pubblico',
+  'tasse universitarie',
+  'integrazione e corsi lingua',
+];
+
 // ── 1. Taglia ────────────────────────────────────────────────────────────
 
 test('il pool svizzero non e\' piu\' un decimo di quello frontaliere', () => {
@@ -150,7 +163,7 @@ test('il pool svizzero non e\' piu\' un decimo di quello frontaliere', () => {
     tuttoIlPool.length > frontaliereRicostruibile,
     `pool svizzero ${tuttoIlPool.length} vs parte frontaliere ricostruibile ${frontaliereRicostruibile}`,
   );
-  // Floor assoluto. 610 e' il valore misurato il 2026-08-10 (20 + 90 + 500)
+  // Floor assoluto. 860 e' il valore dopo l'espansione (20 + 90 + 750)
   // contro i 537 del pool frontaliere COMPLETO (122 + 105 + 310, misurato con
   // `tsx`): stesso ordine di grandezza, che e' il punto. La soglia sta sotto
   // per lasciare spazio a una riformulazione, non a un dimezzamento.
@@ -159,9 +172,9 @@ test('il pool svizzero non e\' piu\' un decimo di quello frontaliere', () => {
   assert.ok(tuttoIlPool.length >= 110 * 4, `pool svizzero a ${tuttoIlPool.length}: siamo tornati vicino alle 110 di #96`);
 });
 
-test('il pool strutturale nazionale e\' 20 pilastri × 25 cantoni, senza collisioni', () => {
-  assert.equal(SVI.strutturali.length, 500);
-  assert.equal(new Set(SVI.strutturali.map((t) => t.keyword)).size, 500, 'due pilastri generano la stessa keyword');
+test('il pool strutturale nazionale e\' 30 pilastri × 25 cantoni, senza collisioni', () => {
+  assert.equal(SVI.strutturali.length, 750);
+  assert.equal(new Set(SVI.strutturali.map((t) => t.keyword)).size, 750, 'due pilastri generano la stessa keyword');
   for (const t of SVI.strutturali) {
     assert.equal(typeof t.keyword, 'string');
     assert.equal(typeof t.angle, 'string');
@@ -181,6 +194,13 @@ test('la rotazione sostituisce dieci pilastri esauriti con 250 keyword nuove', (
   for (const root of FRESH_PILLARS) {
     const count = SVI.strutturali.filter((t) => t.keyword.startsWith(`${root} canton `)).length;
     assert.equal(count, 25, `il pilastro nuovo non copre tutti i cantoni: ${root} (${count}/25)`);
+  }
+});
+
+test('l\'espansione aggiunge dieci pilastri amministrativi per ogni cantone', () => {
+  for (const root of ADDED_PILLARS) {
+    const count = SVI.strutturali.filter((t) => t.keyword.startsWith(`${root} canton `)).length;
+    assert.equal(count, 25, `il pilastro aggiunto non copre tutti i cantoni: ${root} (${count}/25)`);
   }
 });
 
