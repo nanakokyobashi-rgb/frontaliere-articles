@@ -1299,6 +1299,7 @@ const RAW_ARTICLES = [
  id: 'aprire-conto-bancario-frontaliere',
  category: 'pratico',
  date: '2026-02-25T07:38:10.866Z',
+ updatedAt: '2026-10-11',
  image: '/images/blog/aprire-conto-bancario-frontaliere.webp',
  hasCalculator: true,
  articleType: 'evergreen',
