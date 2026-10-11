@@ -12968,6 +12968,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.carabinieri-ternate-marijuana-arresto.title': 'Ternate: 41-year-old arrested with 37 marijuana plants',
     'blog.article.carabinieri-ternate-marijuana-arresto.excerpt': 'At Ternate, a 41-year-old Italian man arrested in the act 37 marijuana plants seized Operation carried out on the morning of October 8 Also found',
     'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'View of a residential area in Ternate, Varese',
+    'blog.article.festival-biblioterapia-laveno-2026.title': 'Laveno Mombello, the Bibliotherapy Festival gets underway',
+    'blog.article.festival-biblioterapia-laveno-2026.excerpt': 'The festival workshops have begun at Villa Frua.',
+    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Interiors of Villa Frua in Laveno Mombello during the Bibliotherapy Festival',
 };
 
 export default blogMetaEn;

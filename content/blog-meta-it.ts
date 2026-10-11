@@ -12969,6 +12969,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.carabinieri-ternate-marijuana-arresto.title': 'Ternate: arrestato 41enne con 37 piante di marijuana',
     'blog.article.carabinieri-ternate-marijuana-arresto.excerpt': 'A Ternate arrestato in flagranza un 41enne italiano Sequestrate 37 piante di marijuana Operazione svolta nella mattinata dell\'8 ottobre Trovati anche',
     'blog.article.carabinieri-ternate-marijuana-arresto.imageAlt': 'Vista di una zona residenziale a Ternate, Varese',
+    'blog.article.festival-biblioterapia-laveno-2026.title': 'Laveno Mombello, al via il Festival della Biblioterapia',
+    'blog.article.festival-biblioterapia-laveno-2026.excerpt': 'A Villa Frua sono iniziati i laboratori del festival.',
+    'blog.article.festival-biblioterapia-laveno-2026.imageAlt': 'Interni di Villa Frua a Laveno Mombello durante il Festival della Biblioterapia',
 };
 
 export default blogMetaIt;

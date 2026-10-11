@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-11T00:21:48.672Z",
       "lastFailureAt": "2026-10-11T00:21:48.672Z"
+    },
+    {
+      "articleId": "festival-biblioterapia-laveno-2026",
+      "title": "Laveno Mombello, al via il Festival della Biblioterapia",
+      "fallbackImage": "/images/blog/article-festival-energetica-cabiaglio-2026.webp",
+      "reason": "All image providers failed for article-festival-biblioterapia-laveno-2026: openai-codex (vision gate rejected image: Generic illustrated library scene with books and writing materi",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-11T00:34:30.815Z",
+      "lastFailureAt": "2026-10-11T00:34:30.815Z"
     }
   ]
 }
