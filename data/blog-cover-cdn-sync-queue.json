@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-riqualificazione-uri-domanda.webp",
-      "sha256": "6ee34bb996b61c6cbd05052a11c84199280c47c837bfbcbe29dbd26e4891d069"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-riqualificazione-uri-domanda-480w.webp",
-      "sha256": "1910cbbbeff1dc78159f2087f61c9b343f9e76a2eeefd24686285cb5b42b1e13"
-    }
-  ]
+  "items": []
 }
