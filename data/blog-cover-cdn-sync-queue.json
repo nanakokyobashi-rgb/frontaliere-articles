@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-faido-gallerie-notte.webp",
-      "sha256": "c06e1429aa828dde9ea0d48a31af27b2cae0811620f02ac3e6613dcc667855b7"
-    },
-    {
-      "path": "public/images/blog/article-juso-lucerna-humbel-governo.webp",
-      "sha256": "70c175a0eb0be596c251e2cd6ae7ffc2ae94201179dbf0b92b51882227d08d44"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-faido-gallerie-notte-480w.webp",
-      "sha256": "75b5ec7a123a54c67099e2e3808ef1f5ab8e70c6b1d6b63b15010d4b9c5d680b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-juso-lucerna-humbel-governo-480w.webp",
-      "sha256": "614f4b1cff57fa7317123ea769d219dbb09c6922870fbbab752365d204d10490"
-    }
-  ]
+  "items": []
 }
