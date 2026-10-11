@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-finanziamenti-start-up-ticino.webp",
-      "sha256": "73fbb3baf84850cae2d77b40066ec1771c59ac740cca84b15d81fecbfadb0a32"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-finanziamenti-start-up-ticino-480w.webp",
-      "sha256": "ca726abfef98536e457f1f0383acea392d96ba11ddbc7c9e4fe0afed577619cb"
-    }
-  ]
+  "items": []
 }
