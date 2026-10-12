@@ -348,6 +348,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pensione-multipla-francia-svizzera-2026': {
+    title: 'Pensioni multiple Francia/Svizzera: leggere il netto riga per riga',
+    description: 'Il netto del relevé non riflette sempre la pensione. Variazioni in CSG, CRDS e CASA dal 2026. Verificare ogni flusso separatamente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pensioni, multiple, francia, leggere',
+    ogTitle: 'Pensioni multiple Francia/Svizzera: leggere il netto riga per riga',
+    ogDescription: 'Il netto indicato sul relevé può non corrispondere a quello atteso. Per chi riceve più pensioni da regimi diversi, la verifica deve partire dalle singole linee del prospetto.',
+    canonicalPath: '/articoli-vaud/pensione-multipla-francia-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pensioni multiple Francia/Svizzera: leggere il netto riga per riga",
+      "description": "Il netto del relevé non riflette sempre la pensione. Variazioni in CSG, CRDS e CASA dal 2026. Verificare ogni flusso separatamente.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documento pensionistico bilingue su scrivania in un ufficio del Canton Vaud"
+      },
+      "datePublished": "2026-10-12T02:50:47+00:00",
+      "dateModified": "2026-10-12T02:50:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/pensione-multipla-francia-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

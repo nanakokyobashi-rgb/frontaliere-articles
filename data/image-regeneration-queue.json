@@ -20,6 +20,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T01:35:59.601Z",
       "lastFailureAt": "2026-10-12T02:36:17.628Z"
+    },
+    {
+      "articleId": "pensione-multipla-francia-svizzera-2026",
+      "title": "Pensioni multiple Francia/Svizzera: leggere il netto riga per riga",
+      "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T02:50:47.700Z",
+      "lastFailureAt": "2026-10-12T02:50:47.700Z"
     }
   ]
 }

@@ -30,6 +30,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.funzione-pubblica-vaud-sciopero-2026.title': 'La fonction publique vaudoise dans la rue le 5 novembre 2026',
     'blog.article.funzione-pubblica-vaud-sciopero-2026.excerpt': 'Manifestation syndicale prévue le 5 novembre 2026 Coupes contestées : 165 millions de francs Près de 100 militants ont voté en faveur En 2025, il y a eu 13',
     'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Manifestation de la fonction publique dans le canton de Vaud',
+    'blog.article.pensione-multipla-francia-svizzera-2026.title': 'Pensions multiples France/Suisse : lire le net ligne par ligne',
+    'blog.article.pensione-multipla-francia-svizzera-2026.excerpt': 'Le net du relevé ne reflète pas toujours la pension.',
+    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Document de retraite bilingue sur un bureau',
 };
 
 export default blogMetaCantonVdFr;

@@ -30,6 +30,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.funzione-pubblica-vaud-sciopero-2026.title': 'Öffentlicher Dienst im Kanton Waadt am 5. November 2026 auf der Straße',
     'blog.article.funzione-pubblica-vaud-sciopero-2026.excerpt': 'Für den 5. November 2026 geplante Gewerkschaftsdemonstration Umstrittene Kürzungen: 165 Millionen Franken Fast 100 Aktivisten stimmten dafür Im Jahr 2025 gab es',
     'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Demonstration des öffentlichen Dienstes im Kanton Waadt',
+    'blog.article.pensione-multipla-francia-svizzera-2026.title': 'Mehrere Renten aus Frankreich/der Schweiz: den Nettobetrag Zeile für Zeile lesen',
+    'blog.article.pensione-multipla-francia-svizzera-2026.excerpt': 'Der Nettobetrag der Abrechnung entspricht nicht immer der Rente.',
+    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Zweisprachiger Rentenbrief auf einem Schreibtisch in einem Büro',
 };
 
 export default blogMetaCantonVdDe;
