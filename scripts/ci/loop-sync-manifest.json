@@ -4513,11 +4513,11 @@
     {
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
-      "mode": "identical",
-      "reason": "Riallineato il 2026-10-01 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono ora byte-identici fra sito e corpus, con il roster corrente di 624 crawler.",
+      "mode": "adapted",
+      "reason": "Il contratto trasportato mantiene una provenance corpus-specifica: `sourceCommit` e `artifactObservation.sourceCommit` puntano al commit del sito che ha emesso lo snapshot, mentre la copia nel sito conserva la propria lineage; i digest e gli artifact restano verificati separatamente.",
       "baseline": {
         "site": "924f5b6b3dc36213",
-        "corpus": "924f5b6b3dc36213",
+        "corpus": "5e101cb92024ad43",
         "alignedAt": "2026-10-12"
       }
     },
