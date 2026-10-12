@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-talenti-in-movimento-oltreconfinti.webp",
-      "sha256": "40e95d381284d2fc113014a27625770cc2a7e7346fa541414fb38edd02a1c44d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-talenti-in-movimento-oltreconfinti-480w.webp",
-      "sha256": "2dddb1f46cb1d227d67e8c3e7e75781591b3ddbd9b859d466c5e2fd46f196c73"
-    }
-  ]
+  "items": []
 }
