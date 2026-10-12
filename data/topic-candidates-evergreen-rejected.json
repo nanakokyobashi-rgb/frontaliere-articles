@@ -797,30 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/attualita/elezioni-2027-avs-una-citta-piu-verde-e-sociale-e-un-sindaco-proveniente-dal-mondo-ambientalista": {
-      "section": "frontaliere",
-      "ts": 1791650877023
-    },
-    "svizzera::https://www.swissinfo.ch/ita/manifestazioni-per-gaza-in-diverse-citt%c3%a0-svizzere/92197474": {
-      "section": "svizzera",
-      "ts": 1791654076574
-    },
-    "svizzera::https://www.rsi.ch/s/4150643": {
-      "section": "svizzera",
-      "ts": 1791654101951
-    },
-    "svizzera::https://www.tio.ch/ticino/attualita/1955960/alberi-iniziativa-bambini-adorna-vita-albero-centro-bambino-ogni": {
-      "section": "svizzera",
-      "ts": 1791654113879
-    },
-    "svizzera::https://www.rsi.ch/s/4150523": {
-      "section": "svizzera",
-      "ts": 1791654132363
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1955992/ffs-traffico-losanna-normalita-yverdon": {
-      "section": "svizzera",
-      "ts": 1791654213910
-    },
     "frontaliere::https://www.vconews.it/2026/10/10/leggi-notizia/argomenti/viabilita-e-trasporti-9/articolo/ss-34-chiusa-di-notte-dal-21-ottobre-battelli-sostitutivi-tra-cannero-e-cannobio.html": {
       "section": "frontaliere",
       "ts": 1791660213562
@@ -948,6 +924,14 @@
     "frontaliere::https://www.tio.ch/svizzera/economia/1956240/case-svizzera-aumento-mattone-grigioni-vallese-ticino": {
       "section": "frontaliere",
       "ts": 1791819629687
+    },
+    "svizzera::https://www.tio.ch/svizzera/attualita/1956139/svizzera-osteoporosi-ossa-reumatismo-salute": {
+      "section": "svizzera",
+      "ts": 1791826435071
+    },
+    "frontaliere::https://www.tio.ch/ticino/economia/1956277/network-swiss-medical-phoenix-pharma": {
+      "section": "frontaliere",
+      "ts": 1791828181990
     }
   }
 }
