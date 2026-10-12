@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-svizzera-mirino-007-stranieri.webp",
-      "sha256": "98154d28cbe8530f86444af754363f661f82dc649b7185a24507cd4b90e7c7ac"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-svizzera-mirino-007-stranieri-480w.webp",
-      "sha256": "b12ed5cce45b0c358233df9e95ee2ab63142406a09b0fa2dff5a308128674f38"
-    }
-  ]
+  "items": []
 }
