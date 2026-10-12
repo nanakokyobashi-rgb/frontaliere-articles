@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-indennita-lavoro-ridotto.webp",
-      "sha256": "075a0b3b8407384cfc68e98f42f94c5c40c0764e770becc3cfb53b841e42c2df"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-indennita-lavoro-ridotto-480w.webp",
-      "sha256": "ed5cb5067324d12638fb865582e8675a3eecfbee8f32bdae25aabd7fbf13ea8f"
-    }
-  ]
+  "items": []
 }
