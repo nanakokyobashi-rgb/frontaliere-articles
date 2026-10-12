@@ -2725,6 +2725,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'camion-pesanti-uno-su-quattro-e-elettrico-nel-2026': { it: 'camion-pesanti-uno-su-quattro-e-elettrico-nel-2026', en: 'heavy-trucks-one-in-four-will-be-electric-in-2026', de: 'schwere-lastwagen-2026-ist-jeder-vierte-elektrisch', fr: 'poids-lourds-un-sur-quatre-est-electrique-en-2026' },
  'carburanti-dopo-record-settembre': { it: 'carburanti-dopo-record-settembre', en: 'fuel-prices-switzerland-after-september-records', de: 'treibstoffpreise-schweiz-nach-september', fr: 'prix-carburants-suisse-apres-records-septembre' },
  'svizzera-mirino-007-stranieri': { it: 'svizzera-mirino-007-stranieri', en: 'switzerland-target-foreign-spies', de: 'schweiz-im-visier-auslandischer-spione', fr: 'suisse-dans-le-viseur-des-espions-etrangers' },
+ 'benu-rete-santanna-sanita': { it: 'benu-rete-santanna-sanita', en: 'benu-santanna-network-ticino', de: 'benu-santanna-netzwerk-tessin', fr: 'benu-reseau-santanna-tessin' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

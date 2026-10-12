@@ -8108,6 +8108,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-mirino-007-stranieri.title': 'Switzerland in the sights of foreign spies',
     'blog.article.svizzera-mirino-007-stranieri.excerpt': 'John Kiriakou considers Swiss intelligence first-rate August Hanning has held positions on boards in Lucerne Private companies operate in Switzerland',
     'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Realistic view of Lugano lake and Alps, discreet figure with notebook suggesting intelligence activity',
+    'blog.article.benu-rete-santanna-sanita.title': 'Swiss medical network and phoenix pharma: alliance in Ticino',
+    'blog.article.benu-rete-santanna-sanita.excerpt': 'Swiss Medical Network partners with Phoenix Pharma Switzerland Benu will join the Sant\'Anna Network in Ticino With Viva, people will be able to turn to Benu for four services',
+    'blog.article.benu-rete-santanna-sanita.imageAlt': 'Ticino Benu pharmacy joining Swiss Medical Network\'s Sant\'Anna network',
 };
 
 export default blogMetaChEn;

@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1948658/arresto-novartis-battuta-fallimento-multinazionale": {
-    "articleId": "novartis-battuta-arresto-neuromuscolare",
-    "ts": "2026-09-08T05:53:31.138Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948651/autorita-anni-asilo-ricongiungimento-bambini": {
     "articleId": "ricongiungimento-familiare-burocrazia",
     "ts": "2026-09-08T06:06:42.217Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1956159/la-svizzera-nel-mirino-degli-007-stranieri": {
     "articleId": "svizzera-mirino-007-stranieri",
     "ts": "2026-10-12T19:26:24.176Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/economia/1956277/network-swiss-medical-phoenix-pharma": {
+    "articleId": "benu-rete-santanna-sanita",
+    "ts": "2026-10-12T21:32:17.758Z",
     "keyForm": 2
   }
 }

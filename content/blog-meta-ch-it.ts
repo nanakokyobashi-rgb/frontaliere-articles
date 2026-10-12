@@ -8108,6 +8108,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzera-mirino-007-stranieri.title': 'La Svizzera nel mirino degli 007 stranieri',
     'blog.article.svizzera-mirino-007-stranieri.excerpt': 'John Kiriakou giudica di prim\'ordine l\'intelligence svizzera August Hanning ha ricoperto incarichi nei consigli a Lucerna In Svizzera operano società private',
     'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Vista realistica di Lugano con lago e Alpi, figura discreta con taccuino che suggerisce attività di intelligence',
+    'blog.article.benu-rete-santanna-sanita.title': 'Swiss medical network e phoenix pharma: alleanza in Ticino',
+    'blog.article.benu-rete-santanna-sanita.excerpt': 'Swiss Medical Network alleata con Phoenix Pharma Switzerland Benu entrerà nella Rete Sant\'Anna in Ticino Con Viva si potrà rivolgersi a Benu per quattro servizi',
+    'blog.article.benu-rete-santanna-sanita.imageAlt': 'Farmacia ticinese Benu collegata alla Rete Sant\'Anna di Swiss Medical Network',
 };
 
 export default blogMetaChIt;

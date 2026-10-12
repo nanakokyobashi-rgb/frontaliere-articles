@@ -30,6 +30,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T19:46:57.256Z",
       "lastFailureAt": "2026-10-12T19:53:17.478Z"
+    },
+    {
+      "articleId": "benu-rete-santanna-sanita",
+      "title": "Swiss medical network e phoenix pharma: alleanza in Ticino",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-benu-rete-santanna-sanita: openai-codex (vision gate rejected image: Generic illustrated pharmacy scene with a Swiss lakeside setting, but it",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T21:32:17.757Z",
+      "lastFailureAt": "2026-10-12T21:32:17.757Z"
     }
   ]
 }

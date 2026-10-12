@@ -102287,6 +102287,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-benu-rete-santanna-sanita': {
+    title: 'Swiss medical network e phoenix pharma: alleanza in Ticino',
+    description: 'Swiss Medical Network alleata con Phoenix Pharma Switzerland Benu entrerà nella Rete Sant\'Anna in Ticino Con Viva si potrà rivolgersi a Benu per quattro servizi',
+    keywords: 'frontalieri, ticino, svizzera, italia, swiss, medical, network, phoenix',
+    ogTitle: 'Benu e Rete Sant\'Anna: novità per il Ticino',
+    ogDescription: 'Swiss Medical Network alleata con Phoenix Pharma Switzerland Benu entrerà nella Rete Sant\'Anna in Ticino Con Viva si potrà rivolgersi a Benu per quattro servizi',
+    canonicalPath: '/articoli-svizzera/benu-rete-santanna-sanita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Swiss medical network e phoenix pharma: alleanza in Ticino",
+      "description": "Swiss Medical Network alleata con Phoenix Pharma Switzerland Benu entrerà nella Rete Sant'Anna in Ticino Con Viva si potrà rivolgersi a Benu per quattro servizi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Farmacia ticinese Benu collegata alla Rete Sant'Anna di Swiss Medical Network"
+      },
+      "datePublished": "2026-10-12T21:32:17+00:00",
+      "dateModified": "2026-10-12T21:32:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/benu-rete-santanna-sanita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

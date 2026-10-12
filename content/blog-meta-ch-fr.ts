@@ -8108,6 +8108,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.svizzera-mirino-007-stranieri.title': 'La Suisse dans le viseur des 007 étrangers',
     'blog.article.svizzera-mirino-007-stranieri.excerpt': 'John Kiriakou juge le renseignement suisse de premier ordre August Hanning a siégé dans des conseils à Lucerne Des sociétés privées opèrent en Suisse',
     'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Vue réaliste du lac de Lugano et des Alpes, personnage discret avec carnet suggérant une activité de renseignement',
+    'blog.article.benu-rete-santanna-sanita.title': 'Swiss Medical Network et Phoenix Pharma : alliance au Tessin',
+    'blog.article.benu-rete-santanna-sanita.excerpt': 'Swiss Medical Network alliée à Phoenix Pharma Switzerland Benu fera son entrée dans la Rete Sant\'Anna au Tessin Avec Viva, il sera possible de s\'adresser à Benu pour quatre services',
+    'blog.article.benu-rete-santanna-sanita.imageAlt': 'Pharmacie Benu au Tessin intégrant le réseau Sant\'Anna de Swiss Medical Network',
 };
 
 export default blogMetaChFr;
