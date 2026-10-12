@@ -1,5 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/a-saronno-fumo-e-odore-di-bruciato-al-supermercato-evacuati-clienti-e-personale/2658652": "saronno-supermercato-evacuati",
   "https://www.laregione.ch/cantone/ticino/1944464/la-concorrenza-interna-mobilitera-gli-elettori": "concorsa-interna-ticino",
   "https://www.ticinonews.ch/ticino/rsi-e-molestie-sul-lavoro-il-governo-deve-prevenire-non-soltanto-reagire-440830": "rsi-molestie-lavoro-governo-prevenzione",
   "https://www.ticinonews.ch/ticino/lugano-primo-passo-verso-la-mobilita-del-futuro-440831": "lugano-mobilita-del-futuro",
@@ -2464,6 +2463,11 @@
   "https://www.varesenews.it/2026/10/truffa-online-da-30mila-euro-la-polizia-di-como-recupera-tutti-i-soldi/2705458": {
     "articleId": "como-truffa-30mila-euro",
     "ts": "2026-10-12T13:20:27.002Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/provincia-di-como-prima-la-fuga-nel-bosco-e-poi-calci-e-spintoni-ai-carabinieri-2-arresti": {
+    "articleId": "montano-lucino-fuga-arresti",
+    "ts": "2026-10-12T13:43:03.681Z",
     "keyForm": 2
   }
 }

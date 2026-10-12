@@ -13042,7 +13042,10 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Foto del Palazzo dei Congressi di Lugano durante l’evento Talenti in movimento con professionisti e ricercatori',
     'blog.article.como-truffa-30mila-euro.title': 'Como, truffa online da 30mila euro: polizia recupera tutto',
     'blog.article.como-truffa-30mila-euro.excerpt': 'A Como sottratti 30mila euro con lo spoofing Vittima un\'impiegata di una fondazione Bonifico istantaneo verso Poste Italiane Somma recuperata e restituita',
-    'blog.article.como-truffa-30mila-euro.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.como-truffa-30mila-euro.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo',
+    'blog.article.montano-lucino-fuga-arresti.title': 'Montano Lucino: fuga, calci, spintoni e due arresti',
+    'blog.article.montano-lucino-fuga-arresti.excerpt': 'Nella serata del 10 ottobre 2026, a Montano Lucino Due cittadini marocchini di 29 e 37 anni arrestati Fuga nei boschi e calci e spintoni ai Carabinieri Rito',
+    'blog.article.montano-lucino-fuga-arresti.imageAlt': 'Area boschiva nell\'area di Montano Lucino',
 };
 
 export default blogMetaIt;
