@@ -8102,6 +8102,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.title': 'Schwere Lastwagen: 2026 ist jeder vierte elektrisch',
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.excerpt': '28\'431 in den ersten neun Monaten des Jahres 2026 zugelassene Nutzfahrzeuge 847 Elektro-Lastwagen: Anteil von 27,4% bei über 16 Tonnen Im Segment 3,5-16 Tonnen',
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Redaktionelles Bild zu: Camion pesanti: uno su quattro è elettrico nel 2026',
+    'blog.article.carburanti-dopo-record-settembre.title': 'Kraftstoffe in der Schweiz: Benzin und Diesel sinken',
+    'blog.article.carburanti-dopo-record-settembre.excerpt': 'Laut TCS sinkt Benzin 95 auf 2,11 Franken pro Liter, Benzin 98 auf 2,22 und Diesel auf 2,40, nach den Rekordpreisen im September.',
+    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Schweizer Tankstelle mit Auto und Anzeige der Treibstoffpreise',
 };
 
 export default blogMetaChDe;

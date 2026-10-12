@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948606/deposito-scorie-rosti-compensazioni-sito": {
-    "articleId": "rosti-deposito-scorie-compensazioni",
-    "ts": "2026-09-08T05:29:01.240Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/vaihkpwvhud1": {
     "articleId": "sanzioni-onu-sesam-aggiornamento",
     "ts": "2026-09-08T05:41:38.148Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/nuovi-camion-pesanti%2c-uno-su-quattro-%c3%a8-elettrico/92203460": {
     "articleId": "camion-pesanti-uno-su-quattro-e-elettrico-nel-2026",
     "ts": "2026-10-12T14:36:01.459Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/prezzo-di-benzina-e-diesel-in-calo%2c-dopo-i-record-di-settembre/92204582": {
+    "articleId": "carburanti-dopo-record-settembre",
+    "ts": "2026-10-12T16:48:09.156Z",
     "keyForm": 2
   }
 }

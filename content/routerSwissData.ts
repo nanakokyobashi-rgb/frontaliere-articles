@@ -2723,6 +2723,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'rincaro-whey-galaxus': { it: 'rincaro-whey-galaxus', en: 'whey-price-rise-galaxus', de: 'whey-preisanstieg-galaxus', fr: 'hausse-prix-whey-galaxus' },
  'piogge-siccita-rischio-incendi': { it: 'piogge-siccita-rischio-incendi', en: 'rain-drought-fire-risk', de: 'regen-duerre-waldbrandrisiko', fr: 'pluies-secheresse-risque-incendie' },
  'camion-pesanti-uno-su-quattro-e-elettrico-nel-2026': { it: 'camion-pesanti-uno-su-quattro-e-elettrico-nel-2026', en: 'heavy-trucks-one-in-four-will-be-electric-in-2026', de: 'schwere-lastwagen-2026-ist-jeder-vierte-elektrisch', fr: 'poids-lourds-un-sur-quatre-est-electrique-en-2026' },
+ 'carburanti-dopo-record-settembre': { it: 'carburanti-dopo-record-settembre', en: 'fuel-prices-switzerland-after-september-records', de: 'treibstoffpreise-schweiz-nach-september', fr: 'prix-carburants-suisse-apres-records-septembre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

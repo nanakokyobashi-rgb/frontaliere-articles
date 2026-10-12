@@ -102209,6 +102209,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-carburanti-dopo-record-settembre': {
+    title: 'Carburanti in Svizzera: benzina e diesel calano',
+    description: 'I rilevamenti del TCS indicano benzina 95 a 2,11 franchi al litro, benzina 98 a 2,22 e diesel a 2,40: il carburante cala dopo i record di settembre in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, carburanti, benzina, diesel, calano',
+    ogTitle: 'Carburanti in calo dopo i record di settembre',
+    ogDescription: 'Dopo i massimi di settembre, il Touring Club Svizzero rileva prezzi medi più bassi: la benzina senza piombo 95 e 98 arretra di 3 centesimi, mentre il diesel scende di 6, fino a 2,40 franchi al litro.',
+    canonicalPath: '/articoli-svizzera/carburanti-dopo-record-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Carburanti in Svizzera: benzina e diesel calano",
+      "description": "I rilevamenti del TCS indicano benzina 95 a 2,11 franchi al litro, benzina 98 a 2,22 e diesel a 2,40: il carburante cala dopo i record di settembre in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/benzina-diesel-prezzi-calano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione di servizio svizzera con auto e pannello dei prezzi del carburante"
+      },
+      "datePublished": "2026-10-12T16:48:08+00:00",
+      "dateModified": "2026-10-12T16:48:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/carburanti-dopo-record-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

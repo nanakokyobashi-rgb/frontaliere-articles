@@ -8102,6 +8102,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.title': 'Camion pesanti: uno su quattro è elettrico nel 2026',
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.excerpt': '28\'431 veicoli commerciali immatricolati nei primi nove mesi del 2026 847 camion elettrici: quota del 27,4% oltre 16 tonnellate Nel segmento 3,5-16 tonnellate',
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Immagine editoriale relativa a: Camion pesanti: uno su quattro è elettrico nel 2026',
+    'blog.article.carburanti-dopo-record-settembre.title': 'Carburanti in Svizzera: benzina e diesel calano',
+    'blog.article.carburanti-dopo-record-settembre.excerpt': 'Secondo il TCS, la benzina 95 scende a 2,11 franchi al litro, la 98 a 2,22 e il diesel a 2,40, dopo i record di settembre.',
+    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Stazione di servizio svizzera con auto e pannello dei prezzi del carburante',
 };
 
 export default blogMetaChIt;
