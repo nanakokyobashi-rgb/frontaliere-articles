@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-semafori-autostrade-ustra-ticino.webp",
-      "sha256": "400afefd163d4ef6e9a929bd1f71b018634292d7b564bb34c902625d0eb9a2fa"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-semafori-autostrade-ustra-ticino-480w.webp",
-      "sha256": "b068c620ec9cdf0f3e7ada07af84f3cee87424e4b64765a1a203939483ee4dd5"
-    }
-  ]
+  "items": []
 }
