@@ -2,13 +2,33 @@
   "keywords": [],
   "strikes": {},
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/295606/der-pr%c3%a4mienhammer-trifft-freiburg-und-knappe-haushaltsbudgets-besonders": {
-      "section": "canton-fr",
-      "ts": 1791571137942
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/296142/freiburg-sagt-ja-zum-ausbau-des-spitals-payerne-nun-ist-die-waadt-an-der-reihe": {
       "section": "canton-fr",
       "ts": 1791699072687
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/296362/pr%c3%a4mien-wieso-ist-das-telefon-pl%c3%b6tzlich-teurer-als-der-arzt": {
+      "section": "canton-fr",
+      "ts": 1791786025482
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/294705/herbstferien-f%c3%bcr-0-franken-10-kostenlose-ausflugstipps-im-kanton-freiburg": {
+      "section": "canton-fr",
+      "ts": 1791786047072
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/296132/sp-will-krankenkassenpr%c3%a4mien-senken-doch-der-rat-bremst": {
+      "section": "canton-fr",
+      "ts": 1791786053007
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/296280/sabotageakt-feuer-legt-sbbstrecke-lahm": {
+      "section": "canton-fr",
+      "ts": 1791786849132
+    },
+    "canton-fr::https://www.laliberte.ch/articles/regions/canton/voici-pourquoi-vous-avez-ete-touche-par-une-panne-delectricite-ce-vendredi-1462043": {
+      "section": "canton-fr",
+      "ts": 1791786853199
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/295885/neue-r%c3%a4ume-f%c3%bcr-eine-wachsende-schule": {
+      "section": "canton-fr",
+      "ts": 1791786858066
     }
   }
 }
