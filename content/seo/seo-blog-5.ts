@@ -106152,6 +106152,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incontro-parita-salariale-varese': {
+    title: 'Parità salariale a Varese: incontro su Decreto 96/2026',
+    description: 'Decreto 96/2026: più attenzione a parità e trasparenza Incontro il 13 ottobre a Villa Recalcati, Varese Tavola rotonda e tre testimonianze aziendali Cosa →',
+    keywords: 'frontalieri, ticino, svizzera, italia, parità, salariale, varese, incontro',
+    ogTitle: 'Parità salariale a Varese: incontro su Decreto 96/2026',
+    ogDescription: 'Decreto 96/2026: più attenzione a parità e trasparenza Incontro il 13 ottobre a Villa Recalcati, Varese Tavola rotonda e tre testimonianze aziendali Cosa →',
+    canonicalPath: '/articoli-frontaliere/incontro-parita-salariale-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parità salariale a Varese: incontro su Decreto 96/2026",
+      "description": "Decreto 96/2026: più attenzione a parità e trasparenza Incontro il 13 ottobre a Villa Recalcati, Varese Tavola rotonda e tre testimonianze aziendali Cosa →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incontro-parita-salariale-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionisti in una sala riunioni a Lugano che discutono di parità salariale e trasparenza retributiva"
+      },
+      "datePublished": "2026-10-12T11:54:15+00:00",
+      "dateModified": "2026-10-12T11:54:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incontro-parita-salariale-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

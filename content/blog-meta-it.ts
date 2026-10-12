@@ -13034,6 +13034,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.indennita-lavoro-ridotto.title': 'Cassa Unia: disoccupazione, lavoro ridotto e intemperie',
     'blog.article.indennita-lavoro-ridotto.excerpt': 'La Cassa di disoccupazione Unia presenta informazioni su indennità di disoccupazione, lavoro ridotto, intemperie e un calcolatore.',
     'blog.article.indennita-lavoro-ridotto.imageAlt': 'Scrivania con laptop e calcolatore in un ufficio informativo del Ticino.',
+    'blog.article.incontro-parita-salariale-varese.title': 'Parità salariale a Varese: incontro su Decreto 96/2026',
+    'blog.article.incontro-parita-salariale-varese.excerpt': 'Decreto 96/2026: più attenzione a parità e trasparenza Incontro il 13 ottobre a Villa Recalcati, Varese Tavola rotonda e tre testimonianze aziendali Cosa →',
+    'blog.article.incontro-parita-salariale-varese.imageAlt': 'Professionisti in una sala riunioni a Lugano che discutono di parità salariale e trasparenza retributiva',
 };
 
 export default blogMetaIt;

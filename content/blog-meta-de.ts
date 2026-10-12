@@ -13032,6 +13032,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.indennita-lavoro-ridotto.title': 'Unia-Kasse: Arbeitslosigkeit, Kurzarbeit und Schlechtwetter',
     'blog.article.indennita-lavoro-ridotto.excerpt': 'Die Arbeitslosenkasse Unia bietet Informationen zu Arbeitslosenentschädigung, Kurzarbeit und Schlechtwetter sowie einen Rechner an.',
     'blog.article.indennita-lavoro-ridotto.imageAlt': 'Schreibtisch mit Laptop und Rechner in einer Informationsstelle im Tessin.',
+    'blog.article.incontro-parita-salariale-varese.title': 'Lohngleichheit in Varese: Treffen zum Dekret 96/2026',
+    'blog.article.incontro-parita-salariale-varese.excerpt': 'Dekret 96/2026: Mehr Aufmerksamkeit für Gleichheit und Transparenz Treffen am 13. (Varese)',
+    'blog.article.incontro-parita-salariale-varese.imageAlt': 'Fachleute in einem Besprechungsraum in Lugano, die über Lohngleichheit und Lohntransparenz sprechen',
 };
 
 export default blogMetaDe;
