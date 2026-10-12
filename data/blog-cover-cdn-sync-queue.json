@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-bambino-investito-gallarate-cedrate.webp",
+      "sha256": "0c7fd71c92269f4d8918bd13694375bf3f18f55643a2a7fd2d579a6a52d55c8e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-bambino-investito-gallarate-cedrate-480w.webp",
+      "sha256": "24ab2da7b9b65ee8bd713a95665f9891d044a04fdadeeb9c894f9c1ab73da8a6"
+    }
+  ]
 }
