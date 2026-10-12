@@ -13046,6 +13046,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.montano-lucino-fuga-arresti.title': 'Montano Lucino: fuga, calci, spintoni e due arresti',
     'blog.article.montano-lucino-fuga-arresti.excerpt': 'Nella serata del 10 ottobre 2026, a Montano Lucino Due cittadini marocchini di 29 e 37 anni arrestati Fuga nei boschi e calci e spintoni ai Carabinieri Rito',
     'blog.article.montano-lucino-fuga-arresti.imageAlt': 'Area boschiva nell\'area di Montano Lucino',
+    'blog.article.lite-stradale-castronno-traffico.title': 'Lite a Castronno: automobilista a terra, traffico bloccato',
+    'blog.article.lite-stradale-castronno-traffico.excerpt': 'A Castronno una lite è partita da un sorpasso Un uomo di 46 anni è finito a terra Traffico bloccato almeno fino alle 12 Luogo → via Vittorio Veneto, zona',
+    'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Incidente stradale a Castronno con automobilista a terra e traffico bloccato',
 };
 
 export default blogMetaIt;

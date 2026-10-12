@@ -43990,6 +43990,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lite-stradale-castronno-traffico',
+ category: 'pratico',
+ date: '2026-10-12T14:15:19.647Z',
+ image: '/images/blog/article-lite-stradale-castronno-traffico.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

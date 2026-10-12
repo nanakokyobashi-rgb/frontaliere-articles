@@ -106308,6 +106308,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lite-stradale-castronno-traffico': {
+    title: 'Lite a Castronno: automobilista a terra, traffico bloccato',
+    description: 'A Castronno una lite è partita da un sorpasso Un uomo di 46 anni è finito a terra Traffico bloccato almeno fino alle 12 Luogo → via Vittorio Veneto, zona',
+    keywords: 'frontalieri, ticino, svizzera, italia, lite, castronno, automobilista, terra',
+    ogTitle: 'Lite a Castronno: automobilista a terra, traffico bloccato',
+    ogDescription: 'A Castronno una lite è partita da un sorpasso Un uomo di 46 anni è finito a terra Traffico bloccato almeno fino alle 12 Luogo → via Vittorio Veneto, zona',
+    canonicalPath: '/articoli-frontaliere/lite-stradale-castronno-traffico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lite a Castronno: automobilista a terra, traffico bloccato",
+      "description": "A Castronno una lite è partita da un sorpasso Un uomo di 46 anni è finito a terra Traffico bloccato almeno fino alle 12 Luogo → via Vittorio Veneto, zona",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lite-stradale-castronno-traffico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incidente stradale a Castronno con automobilista a terra e traffico bloccato"
+      },
+      "datePublished": "2026-10-12T14:15:19+00:00",
+      "dateModified": "2026-10-12T14:15:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lite-stradale-castronno-traffico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

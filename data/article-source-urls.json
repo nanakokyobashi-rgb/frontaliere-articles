@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/ticino/1944464/la-concorrenza-interna-mobilitera-gli-elettori": "concorsa-interna-ticino",
   "https://www.ticinonews.ch/ticino/rsi-e-molestie-sul-lavoro-il-governo-deve-prevenire-non-soltanto-reagire-440830": "rsi-molestie-lavoro-governo-prevenzione",
   "https://www.ticinonews.ch/ticino/lugano-primo-passo-verso-la-mobilita-del-futuro-440831": "lugano-mobilita-del-futuro",
   "https://www.varesenews.it/2026/08/uil-infortuni-sul-lavoro-a-varese-7-morti-in-6-mesi/2658733": "infortuni-lavoro-varese-uil-2026",
@@ -2468,6 +2467,11 @@
   "https://comozero.it/attualita/provincia-di-como-prima-la-fuga-nel-bosco-e-poi-calci-e-spintoni-ai-carabinieri-2-arresti": {
     "articleId": "montano-lucino-fuga-arresti",
     "ts": "2026-10-12T13:43:03.681Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/lite-dopo-un-tamponamento-a-castronno-un-automobilista-finisce-a-terra-traffico-paralizzato-a-cascine-maggio/2705254": {
+    "articleId": "lite-stradale-castronno-traffico",
+    "ts": "2026-10-12T14:15:20.076Z",
     "keyForm": 2
   }
 }

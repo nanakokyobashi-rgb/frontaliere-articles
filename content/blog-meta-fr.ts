@@ -13047,6 +13047,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.montano-lucino-fuga-arresti.title': 'Montano Lucino : fuite, coups de pied, bousculades et deux arrestations',
     'blog.article.montano-lucino-fuga-arresti.excerpt': 'Dans la soirée du 10 octobre 2026, à Montano Lucino Deux citoyens marocains de 29 et 37 ans arrêtés Fuite dans les bois, coups de pied et bousculades contre les Carabinieri Procédure',
     'blog.article.montano-lucino-fuga-arresti.imageAlt': 'Zone boisée à Montano Lucino',
+    'blog.article.lite-stradale-castronno-traffico.title': 'Lite à Castronno : automobiliste au sol, circulation bloquée',
+    'blog.article.lite-stradale-castronno-traffico.excerpt': 'À Castronno, une dispute a commencé par un dépassement Un homme de 46 ans s\'est retrouvé au sol Trafic bloqué au moins jusqu\'à 12 heures Lieu → via Vittorio Veneto, zone',
+    'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Accident de la route à Castronno avec un conducteur au sol et trafic bloqué',
 };
 
 export default blogMetaFr;

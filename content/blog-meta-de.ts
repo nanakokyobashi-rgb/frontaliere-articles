@@ -13044,6 +13044,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.montano-lucino-fuga-arresti.title': 'Montano Lucino: Flucht, Tritte, Schubser und zwei Festnahmen',
     'blog.article.montano-lucino-fuga-arresti.excerpt': 'Am Abend des 10. (Montano Lucino)',
     'blog.article.montano-lucino-fuga-arresti.imageAlt': 'Waldgebiet in Montano Lucino',
+    'blog.article.lite-stradale-castronno-traffico.title': 'Lite in Castronno: Autofahrer am Boden, Verkehr gesperrt',
+    'blog.article.lite-stradale-castronno-traffico.excerpt': 'Bei Castronno begann ein Streit mit einem Überholmanöver Ein 46-jähriger Mann landete am Boden Verkehr gesperrt mindestens bis 12 Uhr Ort → Via Vittorio Veneto, Zone',
+    'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Straßenunfall in Castronno mit Fahrer am Boden und blockiertem Verkehr',
 };
 
 export default blogMetaDe;

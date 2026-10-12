@@ -13045,6 +13045,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.montano-lucino-fuga-arresti.title': 'Montano Lucino: escape, kicks, shoves and two arrests',
     'blog.article.montano-lucino-fuga-arresti.excerpt': 'On the evening of October 10, 2026, at Montano Lucino Two Moroccan citizens aged 29 and 37 arrested Escape into the woods and kicks and shoves at the Carabinieri Rite',
     'blog.article.montano-lucino-fuga-arresti.imageAlt': 'Wooded area in Montano Lucino',
+    'blog.article.lite-stradale-castronno-traffico.title': 'Lite in Castronno: motorist on the ground, traffic blocked',
+    'blog.article.lite-stradale-castronno-traffico.excerpt': 'At Castronno a fight started from an overtake A 46-year-old man ended up on the ground Traffic blocked at least until 12 o\'clock Place → via Vittorio Veneto, area',
+    'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Road accident in Castronno with a driver on the ground and blocked traffic',
 };
 
 export default blogMetaEn;
