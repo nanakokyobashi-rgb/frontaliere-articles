@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-piogge-siccita-rischio-incendi.webp",
+      "sha256": "21529c7402d39a7f56eff1e069830b60f34ed1ca3116b66205455753cfa91e30"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-piogge-siccita-rischio-incendi-480w.webp",
+      "sha256": "503170cfb7b071358dee38ad85f6c64b509820caf62006ef14c1525c582fd65a"
+    }
+  ]
 }
