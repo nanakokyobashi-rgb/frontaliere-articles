@@ -36,6 +36,7 @@ import {
   RECOVERY_REQUIRED_JOBS,
   hasRequiredRecoveryJobs,
   dropUnprovenRecoveryRuns,
+  assessProvenBranchRecovery,
   hasReadableAnnotations,
   hasTimeoutAnnotation,
   hasNoTimeoutEvidenceFromJobs,
@@ -285,6 +286,25 @@ test('la prova di recovery del publisher usa il contratto corpus, non il wrapper
   );
   assert.equal(seen.length, 1);
   assert.equal(proven.length, 1);
+});
+
+test('una verde wrapper non provata fuori finestra non completa la streak di recovery', () => {
+  const workflowName = 'Publish article data API';
+  const issue = { createdAt: new Date(NOW - 1000 * 60000).toISOString() };
+  const seen = [];
+  const decision = assessProvenBranchRecovery(
+    workflowName,
+    history([[5, true], [60, true], [900, true]]),
+    (databaseId) => {
+      seen.push(databaseId);
+      return { jobs: [{ name: 'publish', conclusion: 'success' }] };
+    },
+    { ...opts, issue, minGreenStreak: 3 },
+  );
+
+  assert.equal(decision.greenStreak, 2);
+  assert.equal(decision.recovered, false);
+  assert.deepEqual(seen, [100005, 100060]);
 });
 
 // ── Il marcatore di ricorrenza non si muove ─────────────────────────────────
