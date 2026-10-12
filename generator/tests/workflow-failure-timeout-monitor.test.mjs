@@ -26,6 +26,20 @@ const FAILED_RUNS_SCANNER = readFileSync(
   'utf8',
 );
 
+/**
+ * A CLI child must not inherit the outer node:test worker protocol. Node then
+ * treats the child as a nested test worker and exits 0 without running the
+ * script, which would make these integration checks vacuous.
+ */
+function childEnv(extra = {}) {
+  const env = { ...process.env, ...extra };
+  for (const key of Object.keys(env)) {
+    if (key.startsWith('NODE_TEST_')) delete env[key];
+  }
+  delete env.NODE_OPTIONS;
+  return env;
+}
+
 function workflowStep(name) {
   const marker = `      - name: ${name}`;
   const start = WORKFLOW.indexOf(marker);
@@ -182,14 +196,13 @@ esac
   try {
     const result = spawnSync(process.execPath, [TIMEOUT_SCANNER_PATH, '--dry-run'], {
       encoding: 'utf8',
-      env: {
-        ...process.env,
+      env: childEnv({
         PATH: `${binDir}:${process.env.PATH}`,
         ARGS_LOG: argsLog,
         GH_REPO: 'o/r',
         TIMEOUT_SCAN_LOOKBACK_MINUTES: '40',
         TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
-      },
+      }),
     });
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /1 cancelled \+ 0 failed \+ 0 startup_failure run\(s\)/);
@@ -263,14 +276,13 @@ esac
   try {
     const result = spawnSync(process.execPath, [TIMEOUT_SCANNER_PATH, '--dry-run'], {
       encoding: 'utf8',
-      env: {
-        ...process.env,
+      env: childEnv({
         PATH: `${binDir}:${process.env.PATH}`,
         ARGS_LOG: argsLog,
         GH_REPO: 'o/r',
         TIMEOUT_SCAN_LOOKBACK_MINUTES: '40',
         TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
-      },
+      }),
     });
     assert.equal(result.status, 0, result.stderr);
     assert.match(result.stdout, /0 cancelled \+ 1 failed \+ 1 startup_failure run\(s\)/);
@@ -296,12 +308,11 @@ printf '%s' '[]'
   try {
     const result = spawnSync(process.execPath, [TIMEOUT_SCANNER_PATH, '--dry-run'], {
       encoding: 'utf8',
-      env: {
-        ...process.env,
+      env: childEnv({
         PATH: `${binDir}:${process.env.PATH}`,
         GH_REPO: 'o/r',
         TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
-      },
+      }),
     });
     assert.equal(result.status, 1);
     assert.match(result.stderr, /impossibile leggere la history delle scansioni schedule riuscite/);
@@ -412,11 +423,10 @@ fi
       [path.join(ROOT, 'scripts', 'ci', 'scan-failed-runs.mjs'), '--dry-run', '--lookback-min', '40'],
       {
         encoding: 'utf8',
-        env: {
-          ...process.env,
+        env: childEnv({
           PATH: `${binDir}:${process.env.PATH}`,
           GITHUB_REPOSITORY: 'o/r',
-        },
+        }),
       },
     );
     assert.equal(result.status, 0, result.stderr);

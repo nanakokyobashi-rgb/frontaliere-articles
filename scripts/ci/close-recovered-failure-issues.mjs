@@ -190,6 +190,7 @@ import { fileURLToPath } from 'node:url';
 import { resolveGithubIssueByNumber, commentOnGithubIssue, isFailureReportingDisabled } from '../lib/github-issue-creator.mjs';
 import { isCrawlerGenerationToken } from '../lib/crawler-generation-token.mjs';
 import { createdFromFilter, createdSinceFilter } from './lib/run-listing-window.mjs';
+import { manifestPinnedIssues, pinnedBy } from './manifest-pinned-issues.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -886,6 +887,58 @@ export const RUN_HISTORY_STATUS_FILTERS = Object.freeze([
   'timed_out',
   'startup_failure',
 ]);
+
+/**
+ * Recovery proof required by workflows whose run conclusion is not enough on
+ * its own. The corpus publisher has one job: a green wrapper run is useful
+ * evidence only when the `publish` job itself completed successfully.
+ *
+ * This table is deliberately corpus-owned: the site publishes through a
+ * different wrapper and must keep its own contract in its mirror.
+ */
+export const RECOVERY_REQUIRED_JOBS = Object.freeze({
+  'Publish article data API': Object.freeze(['publish']),
+});
+
+/**
+ * True only when every required recovery job is present and green.
+ * Unknown workflows have no extra contract and retain the historical behavior.
+ * A malformed or incomplete Jobs API payload is never proof of recovery.
+ */
+export function hasRequiredRecoveryJobs(workflowName, data) {
+  const required = RECOVERY_REQUIRED_JOBS[workflowName];
+  if (!required) return true;
+  if (!Array.isArray(data?.jobs)) return false;
+  return required.every((jobName) => {
+    const matches = data.jobs.filter((job) => job?.name === jobName);
+    if (matches.length !== 1) return false;
+    const [job] = matches;
+    return job?.conclusion === 'success'
+      && (job?.status === undefined || job.status === 'completed');
+  });
+}
+
+/**
+ * Remove only success runs whose required job proof cannot be read or is not
+ * green. Failure observations remain in the history; an unproven success is
+ * not turned into a failure, it simply cannot unlock an auto-close.
+ */
+export function dropUnprovenRecoveryRuns(workflowName, runs, readJobs, _options = {}) {
+  if (!Array.isArray(runs)) return [];
+  if (!Object.hasOwn(RECOVERY_REQUIRED_JOBS, workflowName)) return runs.slice();
+  return runs.filter((run) => {
+    if (run?.conclusion !== 'success') return true;
+    const databaseId = Number(run?.databaseId);
+    if (!Number.isSafeInteger(databaseId) || typeof readJobs !== 'function') return false;
+    let jobs;
+    try {
+      jobs = readJobs(databaseId);
+    } catch {
+      jobs = null;
+    }
+    return hasRequiredRecoveryJobs(workflowName, jobs);
+  });
+}
 
 /** Stati della lettura usati per non confondere assenza, rinomina e errore API. */
 export const RUN_HISTORY_KINDS = Object.freeze([
@@ -1824,7 +1877,16 @@ function computeRunHistory(workflowName, repo, token, options = {}) {
     }
     results.push(result);
   }
-  return mergeRunHistoryResults(results);
+  const merged = mergeRunHistoryResults(results);
+  if (merged.kind !== 'ok' || !Object.hasOwn(RECOVERY_REQUIRED_JOBS, workflowName)) return merged;
+  const proven = dropUnprovenRecoveryRuns(
+    workflowName,
+    merged.runs,
+    (databaseId) => readRunJobs(databaseId, repo, token),
+  );
+  return proven.length > 0
+    ? { ...merged, runs: proven }
+    : { kind: 'no-run-window', runs: null };
 }
 
 const recentRunHistory = createRunHistoryMemo(computeRunHistory);
@@ -2452,8 +2514,9 @@ export function decideFailureIssueClose({ issue, run, history, comments, labels,
  *
  * Contratto per chi legge il file: il campo da confrontare è `action`. `reason` è un
  * codice stabile solo per `keep` (`run-not-resolvable`, `green-predates-issue`,
- * `still-red`) e per `close-not-planned` (`verdict-only-thread`); per gli hold e per
- * `close` è testo per umani, con numeri che cambiano.
+ * `still-red`, `manifest-pinned`) e per `close-not-planned`
+ * (`verdict-only-thread`); per gli hold e per `close` è testo per umani, con numeri
+ * che cambiano.
  */
 export function verdictRecord(issue, verdict, repo = REPO) {
   return {
@@ -2553,6 +2616,7 @@ function main() {
   // questa: se la passata muore a metà, il chiamante non trova niente.
   if (verdictsOut) fs.rmSync(verdictsOut, { force: true });
   const verdicts = [];
+  const pinnedIssues = manifestPinnedIssues();
 
   const issues = listFailureIssues();
   const maxDays = holdMaxDays();
@@ -2580,6 +2644,20 @@ function main() {
   };
 
   for (const it of issues) {
+    const pinnedPath = pinnedIssues.size > 0 ? pinnedBy(it.number, REPO, pinnedIssues) : null;
+    if (pinnedPath) {
+      console.log(`  #${it.number} kept open — pinned by manifest (${pinnedPath})`);
+      verdicts.push({
+        number: it.number,
+        title: it.title,
+        action: 'keep',
+        reason: 'manifest-pinned',
+        runId: null,
+        runRepo: null,
+      });
+      kept++;
+      continue;
+    }
     const crawlerStepMatch = CRAWLER_STEP_RE.exec(it.workflow);
     const isCrawlerStepIdentifier = it.title.startsWith('Crawler Failure:') && crawlerStepMatch;
 
