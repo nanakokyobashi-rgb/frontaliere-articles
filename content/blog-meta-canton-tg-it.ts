@@ -24,6 +24,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.servizi-imprese-turgovia-rav.title': 'Lavoro in Turgovia: aiuto alle imprese e permessi',
     'blog.article.servizi-imprese-turgovia-rav.excerpt': 'In Turgovia i RAV di Amriswil, Frauenfeld e Kreuzlingen aiutano le imprese a trovare personale e offrono consulenza su permessi, lavoro ridotto e tutela.',
     'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'RAV e servizi per i datori di lavoro nel Canton Turgovia',
+    'blog.article.sportello-digitale-turgovia.title': 'Turgovia: Sportello digitale per pratiche e documenti',
+    'blog.article.sportello-digitale-turgovia.excerpt': 'Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un\'area protetta per estratti, permessi e altri documenti.',
+    'blog.article.sportello-digitale-turgovia.imageAlt': 'Sportello digitale del Canton Turgovia per servizi, domande e documenti',
 };
 
 export default blogMetaCantonTgIt;
