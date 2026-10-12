@@ -21,6 +21,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Arbeitssicherheit und Gesundheitsschutz im Kanton Thurgau',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'Arbeitssicherheit verhindert Unfälle und Berufskrankheiten.',
     'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.servizi-imprese-turgovia-rav.title': 'Arbeit im Thurgau: Unterstützung für Unternehmen und Bewilligungen',
+    'blog.article.servizi-imprese-turgovia-rav.excerpt': 'Im Thurgau helfen die RAV in Amriswil, Frauenfeld und Kreuzlingen Unternehmen dabei, Personal zu finden, und bieten Beratung zu Bewilligungen, Kurzarbeit und Arbeitsschutz.',
+    'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'RAV und Arbeitgeberdienste im Kanton Thurgau',
 };
 
 export default blogMetaCantonTgDe;

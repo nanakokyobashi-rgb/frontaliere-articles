@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'turgovia-occupazione-rav-settembre': { it: 'turgovia-occupazione-rav-settembre', en: 'thurgau-employment-rav-september', de: 'thurgau-arbeitsmarkt-rav-september', fr: 'thurgovie-emploi-rav-septembre' },
  'aadorf-spese-sociali-2027': { it: 'aadorf-spese-sociali-2027', en: 'aadorf-social-costs-2027', de: 'aadorf-sozialausgaben-2027', fr: 'aadorf-depenses-sociales-2027' },
  'sicurezza-lavoro-turgovia-regole': { it: 'sicurezza-lavoro-turgovia-regole', en: 'workplace-safety-thurgau-rules', de: 'arbeitssicherheit-turgau-regeln', fr: 'securite-travail-thurgovie-regles' },
+ 'servizi-imprese-turgovia-rav': { it: 'servizi-imprese-turgovia-rav', en: 'thurgau-employer-support-permits', de: 'thurgau-arbeitgeber-rav-bewilligungen', fr: 'thurgovie-services-employeurs-permis' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

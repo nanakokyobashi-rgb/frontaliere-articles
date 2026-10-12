@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'servizi-imprese-turgovia-rav',
+ category: 'pratico',
+ date: '2026-10-12T00:12:21.272Z',
+ image: '/images/blog/article-servizi-imprese-turgovia-rav.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

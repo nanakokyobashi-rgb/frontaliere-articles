@@ -21,6 +21,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Occupational safety and health in the Canton of Thurgau',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'Occupational safety prevents accidents and occupational diseases.',
     'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustration generated for this article',
+    'blog.article.servizi-imprese-turgovia-rav.title': 'Working in Thurgau: support for businesses and permits',
+    'blog.article.servizi-imprese-turgovia-rav.excerpt': 'In Thurgau, the RAV offices in Amriswil, Frauenfeld and Kreuzlingen help companies find staff and offer advice on permits, short-time work and protection.',
+    'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'RAV and employer services in the canton of Thurgau',
 };
 
 export default blogMetaCantonTgEn;

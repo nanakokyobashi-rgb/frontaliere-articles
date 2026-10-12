@@ -21,6 +21,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Sicurezza e salute sul lavoro nel Canton Turgovia',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'La sicurezza sul lavoro previene infortuni e malattie professionali.',
     'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.servizi-imprese-turgovia-rav.title': 'Lavoro in Turgovia: aiuto alle imprese e permessi',
+    'blog.article.servizi-imprese-turgovia-rav.excerpt': 'In Turgovia i RAV di Amriswil, Frauenfeld e Kreuzlingen aiutano le imprese a trovare personale e offrono consulenza su permessi, lavoro ridotto e tutela.',
+    'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'RAV e servizi per i datori di lavoro nel Canton Turgovia',
 };
 
 export default blogMetaCantonTgIt;

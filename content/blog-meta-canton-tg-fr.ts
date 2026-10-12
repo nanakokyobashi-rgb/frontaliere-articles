@@ -21,6 +21,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.sicurezza-lavoro-turgovia-regole.title': 'Sécurité et santé au travail dans le canton de Thurgovie',
     'blog.article.sicurezza-lavoro-turgovia-regole.excerpt': 'La sécurité au travail prévient les accidents et les maladies professionnelles.',
     'blog.article.sicurezza-lavoro-turgovia-regole.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.servizi-imprese-turgovia-rav.title': 'Travail en Thurgovie : aide aux entreprises et permis',
+    'blog.article.servizi-imprese-turgovia-rav.excerpt': 'En Thurgovie, les ORP d’Amriswil, de Frauenfeld et de Kreuzlingen aident les entreprises à trouver du personnel et proposent des conseils sur les permis, la réduction de l’horaire de travail et la protection.',
+    'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'ORP et services aux employeurs dans le canton de Thurgovie',
 };
 
 export default blogMetaCantonTgFr;
