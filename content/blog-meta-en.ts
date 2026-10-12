@@ -13020,7 +13020,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.semafori-autostrade-ustra-ticino.imageAlt': 'Motorway traffic lights and congestion in Ticino',
     'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0: Cogliati and Beretta seal the victory',
     'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Varese beat Oltrepò 2-0 with goals from Cogliati and Beretta.',
-    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Varese versus Oltrepò football match',
+    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

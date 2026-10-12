@@ -20,16 +20,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T01:35:59.601Z",
       "lastFailureAt": "2026-10-12T02:36:17.628Z"
-    },
-    {
-      "articleId": "varese-oltrepo-cronaca-sportiva",
-      "title": "Varese-Oltrepò 2-0: Cogliati e Beretta firmano il successo",
-      "fallbackImage": "/images/blog/article-varese-oltrepo-serie-d-2026.webp",
-      "reason": "All image providers failed for article-varese-oltrepo-cronaca-sportiva: openai-codex (vision gate rejected image: Generic illustrated football match scene relevant to the subject,",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T03:33:12.968Z",
-      "lastFailureAt": "2026-10-12T03:33:12.968Z"
     }
   ]
 }

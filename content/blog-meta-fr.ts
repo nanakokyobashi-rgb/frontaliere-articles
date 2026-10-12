@@ -13022,7 +13022,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.semafori-autostrade-ustra-ticino.imageAlt': 'Feux de signalisation autoroutiers et trafic au Tessin',
     'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0 : Cogliati et Beretta signent le succès',
     'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Le Varese bat l\'Oltrepò 2-0 avec les buts de Cogliati et Beretta.',
-    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Match de football Varese contre Oltrepò',
+    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

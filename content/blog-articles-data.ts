@@ -43901,7 +43901,7 @@ const RAW_ARTICLES = [
  id: 'varese-oltrepo-cronaca-sportiva',
  category: 'pratico',
  date: '2026-10-12T03:33:12.550Z',
- image: '/images/blog/article-varese-oltrepo-serie-d-2026.webp',
+ image: '/images/blog/article-varese-oltrepo-cronaca-sportiva.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
