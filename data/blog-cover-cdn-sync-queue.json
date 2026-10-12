@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-montano-lucino-fuga-arresti.webp",
-      "sha256": "1ca9ced40e375e8843808640435c70d0df210a1ce5d8e5e732fe98eb496096bf"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-montano-lucino-fuga-arresti-480w.webp",
-      "sha256": "ab308969a911150a887e9bbf36fdd2fde918b2a6956c5a6f85d88cbd6e84439f"
-    }
-  ]
+  "items": []
 }
