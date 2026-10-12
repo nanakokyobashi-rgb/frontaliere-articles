@@ -91,7 +91,6 @@
       "paths": {
         "it": "/statistiche/prezzi-benzina-confine/",
         "en": "/en/statistics/border-fuel-prices/",
-        "de": "/de/statistiken/spritpreise-grenze/",
         "fr": "/fr/statistiques/prix-essence-frontiere/"
       }
     },
