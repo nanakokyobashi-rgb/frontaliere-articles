@@ -14,6 +14,7 @@ import {
   transportIdenticalRoutingDecision,
   isTransientGithubReadError,
   withTransientGithubReadRetry,
+  revokeNativeAutoMergeSafely,
   REVIEW_GATE_STEP_NAMES,
 } from '../../scripts/ci/native-automerge-gate.mjs';
 
@@ -424,6 +425,53 @@ test('ritenta il timeout GraphQL in forma i/o timeout restituito da gh', () => {
   assert.equal(result, 'recovered');
   assert.equal(attempts, 2);
   assert.deepEqual(sleeps, [250]);
+});
+
+test('la revoca non muta una PR già chiusa o con opt-in assente', () => {
+  let disableCalls = 0;
+  const result = revokeNativeAutoMergeSafely({
+    readPullRequest: () => ({ state: 'MERGED', autoMergeRequest: null }),
+    disableAutoMerge: () => { disableCalls += 1; },
+  });
+
+  assert.equal(result, 'already-satisfied');
+  assert.equal(disableCalls, 0);
+
+  const alreadyDisabled = revokeNativeAutoMergeSafely({
+    readPullRequest: () => ({ state: 'OPEN', autoMergeRequest: null }),
+    disableAutoMerge: () => { disableCalls += 1; },
+  });
+  assert.equal(alreadyDisabled, 'already-satisfied');
+  assert.equal(disableCalls, 0);
+});
+
+test('conferma la revoca se la PR viene mergiata durante la mutation', () => {
+  const snapshots = [
+    { state: 'OPEN', id: 'PR_node', autoMergeRequest: { enabledAt: '2026-10-10T20:00:00Z' } },
+    { state: 'MERGED', id: 'PR_node', autoMergeRequest: null },
+  ];
+  let reads = 0;
+  let disableCalls = 0;
+
+  const result = revokeNativeAutoMergeSafely({
+    readPullRequest: () => snapshots[Math.min(reads++, snapshots.length - 1)],
+    disableAutoMerge: () => {
+      disableCalls += 1;
+      throw new Error("Can't disable auto-merge for this pull request.");
+    },
+  });
+
+  assert.equal(result, 'already-satisfied');
+  assert.equal(reads, 2);
+  assert.equal(disableCalls, 1);
+});
+
+test('la revoca resta fail-closed se un errore lascia attivo l’opt-in', () => {
+  const mutationError = new Error('GitHub mutation failed');
+  assert.throws(() => revokeNativeAutoMergeSafely({
+    readPullRequest: () => ({ state: 'OPEN', id: 'PR_node', autoMergeRequest: { enabledAt: '2026-10-10T20:00:00Z' } }),
+    disableAutoMerge: () => { throw mutationError; },
+  }), (error) => error === mutationError);
 });
 
 test('lascia fail-closed un errore GitHub permanente senza ritentarlo', () => {
