@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3990051": "semafori-grigioni-traffico-parassitario",
   "https://www.rsi.ch/s/3992937": "salari-difficili-discussioni",
   "https://www.varesenoi.it/2026/08/17/leggi-notizia/argomenti/economia-13/articolo/come-va-leconomia-di-confine-con-il-canton-ticino-regge-ma-ci-sono-fragilita.html": "come-va-leconomia-di-confine-con-il-canton-ticino",
   "https://www.tio.ch/svizzera/economia/1944375/pernottamenti-ripresa-luglio-aumento-mercato": "pernottamenti-alberghieri-a-luglio",
@@ -2448,6 +2447,11 @@
   "https://www.varesenoi.it/2026/10/12/leggi-notizia/argomenti/trasporti/articolo/lavori-serali-e-notturni-sullautolaghi-e-la-varese-gazzada-in-arrivo-unaltra-settimana-di-cantier.html": {
     "articleId": "lavori-autolaghi-ottobre-2026",
     "ts": "2026-10-12T10:44:07.399Z",
+    "keyForm": 2
+  },
+  "https://cassa-disoccupazione.unia.ch": {
+    "articleId": "indennita-lavoro-ridotto",
+    "ts": "2026-10-12T11:33:22.867Z",
     "keyForm": 2
   }
 }

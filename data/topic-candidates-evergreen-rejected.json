@@ -797,22 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
-      "section": "svizzera",
-      "ts": 1791622506439
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1954988/traffico-merci-su-rotaia-nel-personale-c-e-apprensione-per-la-sicurezza": {
-      "section": "frontaliere",
-      "ts": 1791623772905
-    },
-    "frontaliere::https://cassa-disoccupazione.unia.ch": {
-      "section": "frontaliere",
-      "ts": 1791623787890
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/finanza-etica-a-varese-una-serata-di-confronto-sul-rapporto-con-le-banche/2703112": {
-      "section": "frontaliere",
-      "ts": 1791624573116
-    },
     "frontaliere::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
       "section": "frontaliere",
       "ts": 1791631360865
@@ -976,6 +960,10 @@
     "svizzera::https://www.tio.ch/svizzera/attualita/1956038/puo-sintomi-disturbi-sclerosi-quando-diagnosi-casa-possono-ospedale-rimandata": {
       "section": "svizzera",
       "ts": 1791791774942
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1956149/strategia-associazione-ated-ticino-cantone-critica-aziende-digital": {
+      "section": "frontaliere",
+      "ts": 1791803836141
     }
   }
 }

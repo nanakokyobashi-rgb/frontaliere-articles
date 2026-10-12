@@ -13031,6 +13031,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lavori-autolaghi-ottobre-2026.title': 'Lavori notturni A8 e A9: chiusure e percorsi alternativi',
     'blog.article.lavori-autolaghi-ottobre-2026.excerpt': 'Chiusa la A8 tra Castellanza e Fiera verso Milano Legnano: entrata chiusa in entrambe le direzioni per due notti A9: ramo verso Milano chiuso da Chiasso/Como',
     'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.indennita-lavoro-ridotto.title': 'Cassa Unia: disoccupazione, lavoro ridotto e intemperie',
+    'blog.article.indennita-lavoro-ridotto.excerpt': 'La Cassa di disoccupazione Unia presenta informazioni su indennità di disoccupazione, lavoro ridotto, intemperie e un calcolatore.',
+    'blog.article.indennita-lavoro-ridotto.imageAlt': 'Scrivania con laptop e calcolatore in un ufficio informativo del Ticino.',
 };
 
 export default blogMetaIt;
