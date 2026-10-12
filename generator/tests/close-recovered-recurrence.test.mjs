@@ -33,6 +33,9 @@ import {
   CHRONIC_LABELS,
   DEFAULT_CHRONIC_RECURRENCES,
   DEFAULT_RECURRENCE_WINDOW_HOURS,
+  RECOVERY_REQUIRED_JOBS,
+  hasRequiredRecoveryJobs,
+  dropUnprovenRecoveryRuns,
   hasReadableAnnotations,
   hasTimeoutAnnotation,
   hasNoTimeoutEvidenceFromJobs,
@@ -252,6 +255,36 @@ test('il titolo dell\'articolo perso resta FUORI dalla famiglia coperta dal clos
 test('i default sono quelli misurati', () => {
   assert.equal(DEFAULT_RECURRENCE_WINDOW_HOURS, 8);
   assert.equal(DEFAULT_CHRONIC_RECURRENCES, 5);
+});
+
+test('la prova di recovery del publisher usa il contratto corpus, non il wrapper Pages del sito', () => {
+  const workflow = fs.readFileSync(
+    path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', '.github/workflows/publish-api.yml'),
+    'utf8',
+  );
+  const workflowName = /^name:\s*(.+)$/m.exec(workflow)?.[1];
+  assert.equal(workflowName, 'Publish article data API');
+  assert.deepEqual(RECOVERY_REQUIRED_JOBS[workflowName], ['publish']);
+  assert.equal(hasRequiredRecoveryJobs(workflowName, {
+    jobs: [{ name: 'publish', conclusion: 'success' }],
+  }), true);
+  assert.equal(hasRequiredRecoveryJobs(workflowName, {
+    jobs: [{ name: 'publish', conclusion: 'failure' }],
+  }), false);
+  assert.equal(Object.hasOwn(RECOVERY_REQUIRED_JOBS, 'Publish to GitHub Pages (deploy + validate)'), false);
+
+  const seen = [];
+  const proven = dropUnprovenRecoveryRuns(
+    workflowName,
+    history([[5, true]]),
+    (databaseId) => {
+      seen.push(databaseId);
+      return { jobs: [{ name: 'publish', conclusion: 'success' }] };
+    },
+    opts,
+  );
+  assert.equal(seen.length, 1);
+  assert.equal(proven.length, 1);
 });
 
 // ── Il marcatore di ricorrenza non si muove ─────────────────────────────────

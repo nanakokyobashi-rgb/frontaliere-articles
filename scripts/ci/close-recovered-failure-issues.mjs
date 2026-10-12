@@ -468,15 +468,12 @@ export const DEFAULT_RECURRENCE_WINDOW_HOURS = 8;
 /**
  * A green wrapper run is recovery evidence only when these jobs actually ran.
  *
- * `deploy-publish.yml` is triggered by several `workflow_run` sources. Its admission
- * resolver deliberately exits green for an irrelevant source, while deploy and both
- * validators are skipped. GitHub still records the wrapper run as `success`, so the
- * workflow-level conclusion alone is not proof that the failing validation recovered.
+ * In this corpus `publish-api.yml` has one publisher job, `publish`. A green workflow
+ * record without that job is not proof that the article-data publication recovered.
  */
 export const RECOVERY_REQUIRED_JOBS = Object.freeze({
-  'Publish to GitHub Pages (deploy + validate)': Object.freeze([
-    'validate-dist / validate-dist-postbuild',
-    'validate-live / validate-live',
+  'Publish article data API': Object.freeze([
+    'publish',
   ]),
 });
 /** Fallimenti tollerati nella finestra: 1 è quello che ha aperto la issue. */
