@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sportello-digitale-turgovia.webp",
-      "sha256": "c42ebd385677d2947fa6eef290539168164aa3ef9f83cd934847147b530c5b1c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sportello-digitale-turgovia-480w.webp",
-      "sha256": "27789e0f8148ebfdebcab7996f870360bb56b87b580ac19bbdaa66a625d1143a"
-    }
-  ]
+  "items": []
 }
