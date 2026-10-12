@@ -28156,6 +28156,7 @@ const RAW_ARTICLES = [
  id: 'classifica-dogane-ticino',
  category: 'novita',
  date: '2026-07-03T11:13:04.641Z',
+ updatedAt: '2026-10-12',
  image: '/images/places/mendrisio.webp',
  hasCalculator: false,
  canton: ['TI'],
