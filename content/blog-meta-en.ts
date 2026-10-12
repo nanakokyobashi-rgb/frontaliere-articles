@@ -13018,6 +13018,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.semafori-autostrade-ustra-ticino.title': 'Traffic lights on motorways: USTRA\'s traffic plan',
     'blog.article.semafori-autostrade-ustra-ticino.excerpt': 'USTRA considers more than 120 traffic lights at interchanges In 2025 the motorways recorded 68\'040 hours of congestion The systems can increase capacity by up to 5%',
     'blog.article.semafori-autostrade-ustra-ticino.imageAlt': 'Motorway traffic lights and congestion in Ticino',
+    'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0: Cogliati and Beretta seal the victory',
+    'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Varese beat Oltrepò 2-0 with goals from Cogliati and Beretta.',
+    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Varese versus Oltrepò football match',
 };
 
 export default blogMetaEn;

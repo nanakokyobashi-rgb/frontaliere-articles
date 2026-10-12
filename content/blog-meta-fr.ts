@@ -13020,6 +13020,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.semafori-autostrade-ustra-ticino.title': 'Feux de signalisation sur l’autoroute : le plan de l’USTRA pour le trafic',
     'blog.article.semafori-autostrade-ustra-ticino.excerpt': 'L’USTRA évalue plus de 120 feux de signalisation aux échangeurs En 2025 les autoroutes ont enregistré 68\'040 heures d’embouteillage Les installations peuvent augmenter jusqu’à 5%',
     'blog.article.semafori-autostrade-ustra-ticino.imageAlt': 'Feux de signalisation autoroutiers et trafic au Tessin',
+    'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0 : Cogliati et Beretta signent le succès',
+    'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Le Varese bat l\'Oltrepò 2-0 avec les buts de Cogliati et Beretta.',
+    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Match de football Varese contre Oltrepò',
 };
 
 export default blogMetaFr;

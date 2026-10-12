@@ -43897,6 +43897,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'varese-oltrepo-cronaca-sportiva',
+ category: 'pratico',
+ date: '2026-10-12T03:33:12.550Z',
+ image: '/images/blog/article-varese-oltrepo-serie-d-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

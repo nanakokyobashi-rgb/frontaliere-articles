@@ -13019,6 +13019,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.semafori-autostrade-ustra-ticino.title': 'Semafori in autostrada: il piano USTRA per il traffico',
     'blog.article.semafori-autostrade-ustra-ticino.excerpt': 'USTRA valuta oltre 120 semafori agli svincoli Nel 2025 le autostrade hanno registrato 68\'040 ore di ingorgo Gli impianti possono aumentare fino al 5%',
     'blog.article.semafori-autostrade-ustra-ticino.imageAlt': 'Semafori autostradali e traffico in Ticino',
+    'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0: Cogliati e Beretta firmano il successo',
+    'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Il Varese batte l\'Oltrepò 2-0 con le reti di Cogliati e Beretta.',
+    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Partita di calcio Varese contro Oltrepò',
 };
 
 export default blogMetaIt;

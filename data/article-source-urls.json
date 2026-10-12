@@ -1,5 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/tra-sesto-calende-e-castelletto-ticino-si-e-rinnovato-il-gemellaggio-dellassunta/2658226": "rinnovato-gemellaggio-assunta-ticino",
   "https://www.varesenews.it/2026/08/controlli-in-tre-locali-di-busto-arsizio-e-gallarate-irregolarita-su-igiene-lavoro-e-sicurezza/2658181": "controlli-locali-busto-arsizio-gallarate",
   "https://www.laregione.ch/cantone/ticino/1944053/assunzione-di-maria-de-raemy-da-carona-invita-a-essere-caritatevoli": "assunzione-maria-2023-ticino",
   "https://www.tio.ch/svizzera/economia/1943875/burro-svizzero-venduto-all-estero-a-prezzi-stracciati-persi-27-milioni": "burro-svizzero-esportazioni-perdite",
@@ -2432,6 +2431,11 @@
   "https://www.tio.ch/svizzera/attualita/1956053/strade-ustra-semafori-code-citta-ingorghi-cantoni-quartieri-autostrada-rischio": {
     "articleId": "semafori-autostrade-ustra-ticino",
     "ts": "2026-10-12T03:14:18.797Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/i-voti-del-varese-cogliati-torna-al-gol-esordio-con-assist-per-zaffanelli/2704435": {
+    "articleId": "varese-oltrepo-cronaca-sportiva",
+    "ts": "2026-10-12T03:33:12.970Z",
     "keyForm": 2
   }
 }

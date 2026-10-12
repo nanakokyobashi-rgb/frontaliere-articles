@@ -13017,6 +13017,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.semafori-autostrade-ustra-ticino.title': 'Ampeln auf der Autobahn: der Verkehrsplan der USTRA',
     'blog.article.semafori-autostrade-ustra-ticino.excerpt': 'USTRA prüft mehr als 120 Ampeln an den Anschlussstellen Im Jahr 2025 verzeichneten die Autobahnen 68\'040 Staustunden Bei den Anlagen ist eine Steigerung um bis zu 5% möglich',
     'blog.article.semafori-autostrade-ustra-ticino.imageAlt': 'Autobahnampeln und Stau im Tessin',
+    'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0: Cogliati und Beretta besiegeln den Erfolg',
+    'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Der Varese besiegt Oltrepò mit 2-0 dank der Tore von Cogliati und Beretta.',
+    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Varese gegen Oltrepò Fußballspiel',
 };
 
 export default blogMetaDe;
