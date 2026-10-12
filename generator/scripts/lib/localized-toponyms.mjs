@@ -546,12 +546,21 @@ function digestHeadingStableKey(line) {
     return digestHeadingLinkStableKey(linkMatch[1]);
   }
 
-  // Non-linked canton headings (e.g. `Svitto` / `Schwyz`) have no URL slug,
-  // but the canonical table still gives them a stable BFS code. Generic prose
+  const heading = String(line ?? '').replace(/^#{2,3}\s+/u, '').trim();
+  const canonicalCantonSlug = localizedSlugForm(heading);
+  if (DIGEST_CANTON_KEY_BY_SLUG.has(canonicalCantonSlug)) {
+    const cantonKey = DIGEST_CANTON_KEY_BY_SLUG.get(canonicalCantonSlug);
+    // The rendered non-linked label comes from the canonical canton URL slug.
+    // An ambiguous slug must not silently become a pairing identity.
+    return cantonKey ? `canton:${cantonKey}` : null;
+  }
+
+  // Legacy non-linked canton headings may not be an exact URL-slug label, but
+  // the localized table still gives them a stable BFS code. Generic prose
   // headings remain unpaired; callers must fail closed if a heading contains
   // toponyms but has no unambiguous identity.
   const cantonCodes = [...new Set(
-    localizedToponymHits(String(line ?? '').replace(/^#{2,3}\s+/u, ''))
+    localizedToponymHits(heading)
       .filter((hit) => hit.type === 'canton')
       .map((hit) => hit.entity.code),
   )];

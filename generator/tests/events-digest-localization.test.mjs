@@ -238,6 +238,38 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.doesNotMatch(repaired.content.en.body2, /\[Genève\]\(\/en\/events\/ticino\/geneva\/\)/);
   });
 
+  it('pairs non-linked canton headings through canonical slug identities', () => {
+    const sections = [
+      { source: 'Graubünden', target: 'Graubunden', slug: 'graubunden', place: 'venue-gr' },
+      { source: 'Genève', target: 'Geneve', slug: 'geneve', place: 'venue-ge' },
+      { source: 'Neuchâtel', target: 'Neuchatel', slug: 'neuchatel', place: 'venue-ne' },
+      { source: 'Zürich', target: 'Zurich', slug: 'zurich', place: 'venue-zh' },
+    ];
+    const renderBody = (locale, labelKey) => [
+      locale === 'it' ? '## Gli eventi' : '## Events',
+      '',
+      ...sections.flatMap(({ source, target, slug, place }) => [
+        `### ${labelKey === 'source' ? source : target}`,
+        '',
+        `### [Venue](/${locale === 'it' ? 'eventi' : 'en/events'}/${slug}/${place}/)`,
+        `- **${locale === 'it' ? 'sabato' : 'Saturday'} 16:00** — ${locale === 'it' ? 'Evento in Zurigo' : 'Event in Zürich'}`,
+        '',
+      ]),
+    ].join('\n');
+    const original = {
+      id: 'eventi-weekend-ticino',
+      content: {
+        it: { body2: renderBody('it', 'source') },
+        en: { body2: renderBody('en', 'target') },
+      },
+    };
+
+    const repaired = repairEventsDigestLocalizedToponyms(original);
+
+    assert.match(repaired.content.en.body2, /Event in Zurich/);
+    assert.doesNotMatch(repaired.content.en.body2, /Event in Zürich/);
+  });
+
   it('does not repair body2 when event structure cannot be paired and keeps the gate fail-closed', () => {
     const original = incidentArticle();
     original.content.en.body2 = 'Zürich';
