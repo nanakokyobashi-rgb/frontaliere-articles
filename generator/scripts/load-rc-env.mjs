@@ -383,9 +383,10 @@ export const RC_TO_ENV = {
  * anche quando non legge niente), quindi l'ASSENZA di una variabile non
  * distingue «Remote Config non la definisce» da «Remote Config non ha
  * risposto». Per i parametri la cui assenza e' il default sicuro di un
- * override (oggi CANTON_ARTICLE_SECTIONS_KILL) la differenza conta: il marker
- * viene scritto SOLO dopo aver letto il template, e sempre (anche se gia'
- * presente nell'ambiente: descrive questa esecuzione).
+ * override (CANTON_ARTICLE_SECTIONS_KILL) o per i gate che devono provare la
+ * disponibilita' del template (generazione cantonale) la differenza conta: il
+ * marker viene scritto SOLO dopo aver letto il template, e sempre (anche se
+ * gia' presente nell'ambiente: descrive questa esecuzione).
  */
 export const RC_LOADED_MARKER = 'RC_ENV_LOADED';
 
