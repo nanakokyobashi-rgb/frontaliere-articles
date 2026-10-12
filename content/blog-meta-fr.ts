@@ -13031,7 +13031,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.imageAlt': 'Vue panoramique de Lugano, lieu de travail pour de nombreux frontaliers.',
     'blog.article.lavori-autolaghi-ottobre-2026.title': 'Travaux nocturnes sur les A8 et A9 : fermetures et itinéraires alternatifs',
     'blog.article.lavori-autolaghi-ottobre-2026.excerpt': 'A8 fermée entre Castellanza et Fiera en direction de Milan Legnano : entrée fermée dans les deux sens pendant deux nuits A9 : bretelle en direction de Milan fermée depuis Chiasso/Como',
-    'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Panneau de signalisation autoroutière au Tessin own at twilight',
+    'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

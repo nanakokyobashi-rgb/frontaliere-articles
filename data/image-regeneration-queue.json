@@ -5,41 +5,11 @@
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Original alpine-rescue illustration with no text, logos, or recognizable faces, but it contains recognizable foreground rescuers.",
+      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Original generic alpine-rescue illustration with multiple recognizable foreground people; no text, logos, or identifiable faces.)",
       "status": "failed",
-      "failureCount": 3,
+      "failureCount": 4,
       "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-12T03:21:50.465Z"
-    },
-    {
-      "articleId": "crisi-resilienza-zurigo",
-      "title": "Zurigo prepara i residenti alle crisi: 9 litri d'acqua",
-      "fallbackImage": "/images/blog/article-giorni-festivi-canton-zurigo-guida.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-12T01:35:59.601Z",
-      "lastFailureAt": "2026-10-12T02:36:17.628Z"
-    },
-    {
-      "articleId": "ust-formazione-svizzera-2035",
-      "title": "Crescita universitaria e calo scolastico: UST 2026-2035",
-      "fallbackImage": "/images/blog/asb-banche-svizzera-crescita-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T10:17:39.068Z",
-      "lastFailureAt": "2026-10-12T10:17:39.068Z"
-    },
-    {
-      "articleId": "lavori-autolaghi-ottobre-2026",
-      "title": "Lavori notturni A8 e A9: chiusure e percorsi alternativi",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "All image providers failed for article-lavori-autolaghi-ottobre-2026: openai-codex (vision gate rejected image: Relevant generic alpine motorway scene, but prominent overhead road",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T10:44:07.397Z",
-      "lastFailureAt": "2026-10-12T10:44:07.397Z"
+      "lastFailureAt": "2026-10-12T10:51:24.379Z"
     }
   ]
 }

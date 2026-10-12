@@ -43932,7 +43932,7 @@ const RAW_ARTICLES = [
  id: 'lavori-autolaghi-ottobre-2026',
  category: 'pratico',
  date: '2026-10-12T10:44:06.998Z',
- image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ image: '/images/blog/article-lavori-autolaghi-ottobre-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

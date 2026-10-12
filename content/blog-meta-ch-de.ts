@@ -8089,7 +8089,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Foto eines Hundes mit Halsband vor einem Zürcher Gemeindeamt',
     'blog.article.ust-formazione-svizzera-2035.title': 'Wachstum an den Hochschulen und Rückgang im Schulbereich: UST 2026–2035',
     'blog.article.ust-formazione-svizzera-2035.excerpt': 'Die Zahl der Studierenden wird in den nächsten neun Jahren um mehr als 20% steigen Primarstufe: Höchststand zwischen 2027 und 2028, danach -8% bis 2035 Sekundarstufe II: +10%',
-    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Universitätsstudierende, die den Lugano-Campus entlanggehen, reale Szene',
+    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

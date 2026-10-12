@@ -32,7 +32,7 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.bank-now-dipendenti-zurigo.imageAlt': 'Immeubles de bureaux dans le quartier financier de Zurich',
     'blog.article.crisi-resilienza-zurigo.title': 'Zurich prépare ses habitants aux crises : 9 litres d’eau',
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Les semaines de la résilience de Zurich abordent deux scénarios : des informations sans électricité ni internet et 9 litres d’eau pour trois jours.',
-    'blog.article.crisi-resilienza-zurigo.imageAlt': 'Fontaine d\'eau et point d\'information d\'urgence à Zurich',
+    'blog.article.crisi-resilienza-zurigo.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonZhFr;

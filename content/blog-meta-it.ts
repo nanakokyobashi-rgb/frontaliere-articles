@@ -13030,7 +13030,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.imageAlt': 'Vista panoramica di Lugano, luogo di lavoro per molti frontalieri.',
     'blog.article.lavori-autolaghi-ottobre-2026.title': 'Lavori notturni A8 e A9: chiusure e percorsi alternativi',
     'blog.article.lavori-autolaghi-ottobre-2026.excerpt': 'Chiusa la A8 tra Castellanza e Fiera verso Milano Legnano: entrata chiusa in entrambe le direzioni per due notti A9: ramo verso Milano chiuso da Chiasso/Como',
-    'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Cartello stradale autostradale in Ticino al crepuscolo',
+    'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

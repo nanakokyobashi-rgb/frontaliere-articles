@@ -102028,10 +102028,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Gli universitari cresceranno di oltre il 20% nei prossimi nove anni Primarie: picco tra il 2027 e il 2028, poi -8% entro il 2035 Secondario II: +10%",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/asb-banche-svizzera-crescita-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ust-formazione-svizzera-2035.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Studenti universitari che camminano nel campus di Lugano, scena reale"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T10:17:38+00:00",
       "dateModified": "2026-10-12T10:17:38+00:00",

@@ -32,7 +32,7 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.bank-now-dipendenti-zurigo.imageAlt': 'Office buildings in Zurich\'s financial district',
     'blog.article.crisi-resilienza-zurigo.title': 'Zurich prepares residents for crises: 9 liters of water',
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Zurich\'s resilience weeks address two scenarios: information without electricity and internet and 9 liters of water for three days.',
-    'blog.article.crisi-resilienza-zurigo.imageAlt': 'Water fountain and emergency information point for urban resilience in Zurich',
+    'blog.article.crisi-resilienza-zurigo.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonZhEn;

@@ -26991,7 +26991,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'ust-formazione-svizzera-2035',
     category: 'novita',
     date: '2026-10-12T10:17:38.700Z',
-    image: '/images/blog/asb-banche-svizzera-crescita-2026.webp',
+    image: '/images/blog/article-ust-formazione-svizzera-2035.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',
