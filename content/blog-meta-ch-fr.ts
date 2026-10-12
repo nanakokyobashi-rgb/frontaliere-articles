@@ -8095,7 +8095,10 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration générée pour cet article',
     'blog.article.rincaro-whey-galaxus.title': 'Protéines en poudre, prix proches de 55 francs le kilo',
     'blog.article.rincaro-whey-galaxus.excerpt': 'En septembre, la Whey coûte près de 55 francs le kilo La moyenne de 2025 était de 46 francs le kilo La demande et les coûts de production font grimper les prix Caséine',
-    'blog.article.rincaro-whey-galaxus.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Produits de protéines Whey dans un rayon d\'un magasin suisse',
+    'blog.article.piogge-siccita-rischio-incendi.title': 'Sécheresse en Suisse : la pluie ne suffit pas',
+    'blog.article.piogge-siccita-rischio-incendi.excerpt': 'Les pluies récentes n\'ont atténué la sécheresse que temporairement Au cours des 30 derniers jours les précipitations ont été inférieures à 50% Le Rhin entre le lac de Constance',
+    'blog.article.piogge-siccita-rischio-incendi.imageAlt': 'Lac suisse aux niveaux d\'eau très bas pendant une période de sécheresse',
 };
 
 export default blogMetaChFr;

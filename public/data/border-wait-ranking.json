@@ -1,229 +1,224 @@
 {
-  "updatedAt": "2026-09-28",
+  "updatedAt": "2026-10-12",
   "windowDays": 7,
-  "weekStart": "2026-09-21",
-  "weekEnd": "2026-09-27",
+  "weekStart": "2026-10-05",
+  "weekEnd": "2026-10-11",
   "ranking": [
     {
-      "slug": "bizzarone-novazzano",
+      "slug": "dumenza-cassinone",
       "rank": 1,
       "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -0.8
-    },
-    {
-      "slug": "camedo",
-      "rank": 2,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": -0.1
-    },
-    {
-      "slug": "crociale-dei-mulini",
-      "rank": 3,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": -0.1
-    },
-    {
-      "slug": "drezzo-pedrinate",
-      "rank": 4,
-      "avgMinutes": 0,
-      "totalSamples": 71,
+      "totalSamples": 47,
       "trend": "flat",
       "deltaMinutes": 0
     },
     {
-      "slug": "dumenza-cassinone",
-      "rank": 5,
+      "slug": "piaggio-valmara",
+      "rank": 2,
       "avgMinutes": 0,
-      "totalSamples": 71,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0
+    },
+    {
+      "slug": "drezzo-pedrinate",
+      "rank": 3,
+      "avgMinutes": 0,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0
+    },
+    {
+      "slug": "cremenaga-ponte-cremenaga",
+      "rank": 4,
+      "avgMinutes": 0.1,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.1
+    },
+    {
+      "slug": "ronago-novazzano",
+      "rank": 5,
+      "avgMinutes": 0.1,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.1
+    },
+    {
+      "slug": "biegno-indemini",
+      "rank": 6,
+      "avgMinutes": 0.2,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.2
+    },
+    {
+      "slug": "luino-fornasette",
+      "rank": 7,
+      "avgMinutes": 0.3,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.3
+    },
+    {
+      "slug": "camedo",
+      "rank": 8,
+      "avgMinutes": 0.3,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.3
+    },
+    {
+      "slug": "zenna-dirinella",
+      "rank": 9,
+      "avgMinutes": 0.4,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.2
+    },
+    {
+      "slug": "oria-gandria",
+      "rank": 10,
+      "avgMinutes": 0.5,
+      "totalSamples": 47,
       "trend": "flat",
       "deltaMinutes": 0
     },
     {
       "slug": "lanzo-d-intelvi-arogno",
-      "rank": 6,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": -0.2
-    },
-    {
-      "slug": "maslianico-pizzamiglio",
-      "rank": 7,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": -0.3
-    },
-    {
-      "slug": "piaggio-valmara",
-      "rank": 8,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": 0
-    },
-    {
-      "slug": "ronago-novazzano",
-      "rank": 9,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": 0
-    },
-    {
-      "slug": "zenna-dirinella",
-      "rank": 10,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": -0.1
-    },
-    {
-      "slug": "clivio-ligornetto",
       "rank": 11,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -0.5
+      "avgMinutes": 0.5,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.1
     },
     {
-      "slug": "cremenaga-ponte-cremenaga",
+      "slug": "crociale-dei-mulini",
       "rank": 12,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": -0.2
-    },
-    {
-      "slug": "luino-fornasette",
-      "rank": 13,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -0.6
-    },
-    {
-      "slug": "ponte-tresa",
-      "rank": 14,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -0.8
-    },
-    {
-      "slug": "porto-ceresio-brusino",
-      "rank": 15,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -1.5
-    },
-    {
-      "slug": "saltrio-arzo",
-      "rank": 16,
-      "avgMinutes": 0,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": -0.4
-    },
-    {
-      "slug": "biegno-indemini",
-      "rank": 17,
-      "avgMinutes": 0.1,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -0.6
-    },
-    {
-      "slug": "oria-gandria",
-      "rank": 18,
-      "avgMinutes": 0.1,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -1.2
-    },
-    {
-      "slug": "campione-d-italia-bissone",
-      "rank": 19,
-      "avgMinutes": 1.1,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": 0.2
-    },
-    {
-      "slug": "chiasso-centro",
-      "rank": 20,
-      "avgMinutes": 1.5,
-      "totalSamples": 71,
-      "trend": "flat",
-      "deltaMinutes": 0.4
-    },
-    {
-      "slug": "chiasso-strada",
-      "rank": 21,
-      "avgMinutes": 1.8,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -2
-    },
-    {
-      "slug": "chiasso-brogeda",
-      "rank": 22,
-      "avgMinutes": 2.5,
-      "totalSamples": 71,
-      "trend": "better",
-      "deltaMinutes": -3.8
-    },
-    {
-      "slug": "gaggiolo",
-      "rank": 23,
-      "avgMinutes": 2.9,
-      "totalSamples": 71,
+      "avgMinutes": 0.6,
+      "totalSamples": 47,
       "trend": "flat",
       "deltaMinutes": 0.5
     },
     {
-      "slug": "san-pietro",
-      "rank": 24,
-      "avgMinutes": 3.1,
-      "totalSamples": 71,
+      "slug": "maslianico-pizzamiglio",
+      "rank": 13,
+      "avgMinutes": 0.8,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.4
+    },
+    {
+      "slug": "clivio-ligornetto",
+      "rank": 14,
+      "avgMinutes": 0.8,
+      "totalSamples": 47,
       "trend": "worse",
-      "deltaMinutes": 0.9
+      "deltaMinutes": 0.6
+    },
+    {
+      "slug": "saltrio-arzo",
+      "rank": 15,
+      "avgMinutes": 0.8,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.5
+    },
+    {
+      "slug": "campione-d-italia-bissone",
+      "rank": 16,
+      "avgMinutes": 1.7,
+      "totalSamples": 47,
+      "trend": "worse",
+      "deltaMinutes": 1
+    },
+    {
+      "slug": "bizzarone-novazzano",
+      "rank": 17,
+      "avgMinutes": 2.5,
+      "totalSamples": 47,
+      "trend": "worse",
+      "deltaMinutes": 1.7
+    },
+    {
+      "slug": "chiasso-centro",
+      "rank": 18,
+      "avgMinutes": 3.1,
+      "totalSamples": 47,
+      "trend": "worse",
+      "deltaMinutes": 1.9
+    },
+    {
+      "slug": "porto-ceresio-brusino",
+      "rank": 19,
+      "avgMinutes": 4.1,
+      "totalSamples": 47,
+      "trend": "worse",
+      "deltaMinutes": 2.2
+    },
+    {
+      "slug": "san-pietro",
+      "rank": 20,
+      "avgMinutes": 4.3,
+      "totalSamples": 47,
+      "trend": "worse",
+      "deltaMinutes": 1.4
+    },
+    {
+      "slug": "gaggiolo",
+      "rank": 21,
+      "avgMinutes": 6,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0.1
+    },
+    {
+      "slug": "chiasso-brogeda",
+      "rank": 22,
+      "avgMinutes": 6.4,
+      "totalSamples": 47,
+      "trend": "worse",
+      "deltaMinutes": 2.7
+    },
+    {
+      "slug": "ponte-tresa",
+      "rank": 23,
+      "avgMinutes": 7.1,
+      "totalSamples": 47,
+      "trend": "flat",
+      "deltaMinutes": 0
+    },
+    {
+      "slug": "chiasso-strada",
+      "rank": 24,
+      "avgMinutes": 15,
+      "totalSamples": 47,
+      "trend": "worse",
+      "deltaMinutes": 6.4
     }
   ],
   "funFacts": {
-    "bestSlug": "bizzarone-novazzano",
-    "worstSlug": "san-pietro",
-    "deltaMinutesPerCrossing": 3.1,
-    "minutesPerYear": 1406,
-    "hoursPerYear": 23.4,
-    "workingDaysLostPerYear": 1
+    "bestSlug": "dumenza-cassinone",
+    "worstSlug": "chiasso-strada",
+    "deltaMinutesPerCrossing": 15,
+    "minutesPerYear": 6920,
+    "hoursPerYear": 115.3,
+    "workingDaysLostPerYear": 4.8
   },
   "movers": {
-    "improved": [
-      {
-        "slug": "chiasso-brogeda",
-        "deltaMinutes": -3.8129890453834117
-      },
+    "improved": [],
+    "worsened": [
       {
         "slug": "chiasso-strada",
-        "deltaMinutes": -2.0172143974960877
+        "deltaMinutes": 6.446808510638297
+      },
+      {
+        "slug": "chiasso-brogeda",
+        "deltaMinutes": 2.680851063829787
       },
       {
         "slug": "porto-ceresio-brusino",
-        "deltaMinutes": -1.5306545153272577
-      }
-    ],
-    "worsened": [
-      {
-        "slug": "san-pietro",
-        "deltaMinutes": 0.8896713615023475
+        "deltaMinutes": 2.212765957446808
       }
     ]
   }

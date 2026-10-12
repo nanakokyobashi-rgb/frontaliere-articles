@@ -8095,7 +8095,10 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration generated for this article',
     'blog.article.rincaro-whey-galaxus.title': 'Protein powder, prices close to 55 francs per kilo',
     'blog.article.rincaro-whey-galaxus.excerpt': 'In September Whey costs almost 55 francs per kilo The 2025 average was 46 francs per kilo Demand and production costs drive prices Casein',
-    'blog.article.rincaro-whey-galaxus.imageAlt': 'Illustration generated for this article',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Whey protein products on a shelf in a Swiss retail store',
+    'blog.article.piogge-siccita-rischio-incendi.title': 'Drought in Switzerland: rain is not enough',
+    'blog.article.piogge-siccita-rischio-incendi.excerpt': 'Recent rains have only temporarily alleviated the drought In the last 30 days, precipitation has been below 50% The Rhine between Lake Constance',
+    'blog.article.piogge-siccita-rischio-incendi.imageAlt': 'Swiss lake with low water levels during a period of drought',
 };
 
 export default blogMetaChEn;
