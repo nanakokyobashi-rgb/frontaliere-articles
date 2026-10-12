@@ -13068,6 +13068,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco vor dem Abschied von Galatasaray: drei fatale Niederlagen',
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco und Galatasaray vor der Trennung Drei Niederlagen in Folge zum Saisonauftakt Die letzte Niederlage kam gegen Bursaspor Vereinbarung vorgesehen bis',
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Sonnenuntergang am Luganersee mit Bergkulisse',
+    'blog.article.minibasket-inclusivo-varese-2026.title': 'Minibasket Inclusivo in Varese: Start der Spendenaktion mit Verdopplung',
+    'blog.article.minibasket-inclusivo-varese-2026.excerpt': 'VBS startet die dritte Ausgabe des Minibasket Inclusivo Spenden werden von der Stiftung vom 1.',
+    'blog.article.minibasket-inclusivo-varese-2026.imageAlt': 'Kinder spielen inklusives Minibasket auf einem sonnigen Platz mit Bergen im Hintergrund',
 };
 
 export default blogMetaDe;

@@ -20,6 +20,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T21:32:17.757Z",
       "lastFailureAt": "2026-10-12T21:40:42.815Z"
+    },
+    {
+      "articleId": "minibasket-inclusivo-varese-2026",
+      "title": "Minibasket inclusivo a Varese: al via la raccolta fondi raddoppiata",
+      "fallbackImage": "/images/blog/article-varese-adhd-days-ottobre-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T23:37:30.823Z",
+      "lastFailureAt": "2026-10-12T23:37:30.823Z"
     }
   ]
 }

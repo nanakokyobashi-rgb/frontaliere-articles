@@ -106615,6 +106615,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-minibasket-inclusivo-varese-2026': {
+    title: 'Minibasket inclusivo a Varese: al via la raccolta fondi raddoppiata',
+    description: 'VBS lancia la terza edizione del Minibasket Inclusivo Donazioni raddoppiate dalla Fondazione dall\'1 al 31 ottobre Allenamenti ogni martedì alla Palestra Pellico',
+    keywords: 'frontalieri, ticino, svizzera, italia, minibasket, inclusivo, varese, raccolta',
+    ogTitle: 'Minibasket inclusivo a Varese: donazioni raddoppiate per tutto ottobre',
+    ogDescription: 'VBS lancia la terza edizione del Minibasket Inclusivo Donazioni raddoppiate dalla Fondazione dall\'1 al 31 ottobre Allenamenti ogni martedì alla Palestra Pellico',
+    canonicalPath: '/articoli-frontaliere/minibasket-inclusivo-varese-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Minibasket inclusivo a Varese: al via la raccolta fondi raddoppiata",
+      "description": "VBS lancia la terza edizione del Minibasket Inclusivo Donazioni raddoppiate dalla Fondazione dall'1 al 31 ottobre Allenamenti ogni martedì alla Palestra Pellico",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-varese-adhd-days-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bambini che giocano a minibasket inclusivo in un campo soleggiato con montagne sullo sfondo"
+      },
+      "datePublished": "2026-10-12T23:37:30+00:00",
+      "dateModified": "2026-10-12T23:37:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/minibasket-inclusivo-varese-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -13070,6 +13070,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco verso l\'addio al Galatasaray: tre ko fatali',
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco e Galatasaray verso la separazione Tre ko consecutivi in avvio di campionato L\'ultimo ko è arrivato contro Bursaspor Accordo previsto fino',
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Vista sul lago di Lugano al tramonto con montagne sullo sfondo',
+    'blog.article.minibasket-inclusivo-varese-2026.title': 'Minibasket inclusivo a Varese: al via la raccolta fondi raddoppiata',
+    'blog.article.minibasket-inclusivo-varese-2026.excerpt': 'VBS lancia la terza edizione del Minibasket Inclusivo Donazioni raddoppiate dalla Fondazione dall\'1 al 31 ottobre Allenamenti ogni martedì alla Palestra Pellico',
+    'blog.article.minibasket-inclusivo-varese-2026.imageAlt': 'Bambini che giocano a minibasket inclusivo in un campo soleggiato con montagne sullo sfondo',
 };
 
 export default blogMetaIt;
