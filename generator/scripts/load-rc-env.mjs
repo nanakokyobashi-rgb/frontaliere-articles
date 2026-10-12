@@ -376,6 +376,11 @@ export const RC_TO_ENV = {
   // default = nessun override. Chi lo legge (scripts/lib/section-registry.mjs)
   // non si fida della sua assenza senza il marker RC_ENV_LOADED qui sotto.
   CANTON_ARTICLE_SECTIONS_KILL:   ['CANTON_ARTICLE_SECTIONS_KILL'],
+  // Public experiment controls consumed by the site's TikTok poster. Keeping
+  // them in this adapted RC bridge prevents the Firebase values from becoming
+  // inert when the shared workspace loader is used.
+  TIKTOK_VIDEO_CREATIVE_MODE:             ['TIKTOK_VIDEO_CREATIVE_MODE'],
+  TIKTOK_VIDEO_CREATIVE_ROLLOUT_PERCENT:  ['TIKTOK_VIDEO_CREATIVE_ROLLOUT_PERCENT'],
 };
 
 /**
@@ -440,6 +445,8 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'SERVER_TIKTOK_REFRESH_TOKEN',
   'SERVER_TIKTOK_SANDBOX_CLIENT_KEY',
   'SERVER_TIKTOK_SANDBOX_CLIENT_SECRET',
+  'TIKTOK_VIDEO_CREATIVE_MODE',
+  'TIKTOK_VIDEO_CREATIVE_ROLLOUT_PERCENT',
   'PER_USER_SEND_TIME',
   'NEAR_DUP_COSINE',
   'ENABLE_HAIKU_ARTICLE_FALLBACK',
