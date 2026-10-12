@@ -26,7 +26,7 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'ORP et services aux employeurs dans le canton de Thurgovie',
     'blog.article.sportello-digitale-turgovia.title': 'Thurgovie : Guichet numérique pour les démarches et les documents',
     'blog.article.sportello-digitale-turgovia.excerpt': 'Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.',
-    'blog.article.sportello-digitale-turgovia.imageAlt': 'Guichet numérique de Thurgovie pour services, demandes et documents',
+    'blog.article.sportello-digitale-turgovia.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonTgFr;

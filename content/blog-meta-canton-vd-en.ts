@@ -30,6 +30,12 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.funzione-pubblica-vaud-sciopero-2026.title': 'Vaud public service takes to the streets on November 5, 2026',
     'blog.article.funzione-pubblica-vaud-sciopero-2026.excerpt': 'Union demonstration scheduled for November 5, 2026 Disputed cuts: 165 million francs Almost 100 activists voted in favor In 2025, there were 13 strike days',
     'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Public service demonstration in Canton Vaud',
+    'blog.article.pensione-multipla-francia-svizzera-2026.title': 'Multiple French/Swiss pensions: read the net amount line by line',
+    'blog.article.pensione-multipla-francia-svizzera-2026.excerpt': 'The net amount on the statement does not always reflect the pension.',
+    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Illustration generated for this article',
+    'blog.article.cff-eclepens-treni-ripresa.title': 'CFF trains between Yverdon-les-Bains and Lausanne: service resumed',
+    'blog.article.cff-eclepens-treni-ripresa.excerpt': 'Traffic resumed at 05:40 on Sunday Yverdon-les-Bains–Lausanne line back to normal Arson in Eclépens: disruptions since Friday CFF mobilized: approximately 100',
+    'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'CFF train on the Yverdon-les-Bains–Lausanne line after rail service resumed.',
 };
 
 export default blogMetaCantonVdEn;

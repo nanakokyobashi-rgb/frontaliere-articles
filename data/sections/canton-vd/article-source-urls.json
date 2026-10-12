@@ -38,5 +38,15 @@
     "articleId": "funzione-pubblica-vaud-sciopero-2026",
     "ts": "2026-10-11T02:00:39.743Z",
     "keyForm": 2
+  },
+  "https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
+    "articleId": "pensione-multipla-francia-svizzera-2026",
+    "ts": "2026-10-12T02:50:47.701Z",
+    "keyForm": 2
+  },
+  "https://latele.ch/articles/le-trafic-cff-entre-yverdon-et-lausanne-a-repris-dimanche-matin": {
+    "articleId": "cff-eclepens-treni-ripresa",
+    "ts": "2026-10-12T03:05:29.497Z",
+    "keyForm": 2
   }
 }

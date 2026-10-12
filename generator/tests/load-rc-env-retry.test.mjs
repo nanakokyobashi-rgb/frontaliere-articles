@@ -101,6 +101,19 @@ test('i workflow immagini ricevono entrambe le chiavi foto dal loader RC', () =>
   assert.match(source, /SERVER_PIXABAY_API_KEY:\s+\['PIXABAY_API_KEY'\]/);
 });
 
+test('il loader mantiene attivabile il checkout SumUp senza renderlo il default', () => {
+  const sumupKeys = [
+    'ASSISTED_APPLICATION_PAYMENT_PROVIDER',
+    'SUMUP_API_KEY',
+    'SUMUP_MERCHANT_CODE',
+    'SUMUP_ASSISTED_APPLICATION_WEBHOOK_URL',
+  ];
+  for (const key of sumupKeys) {
+    assert.ok(RC_TO_ENV[key], `${key} deve essere mappata nel runtime`);
+    assert.equal(EXPECTED_ABSENT_RC_KEYS.has(key), true, `${key} deve restare opzionale finché SumUp non è provisionato`);
+  }
+});
+
 test('il loader separa assenza prevista, assenza inattesa ed empty esplicito', () => {
   assert.equal(EXPECTED_ABSENT_RC_KEYS.has('TELEGRAM_BOT_TOKEN'), true);
   assert.equal(rcValueState(null, 'TELEGRAM_BOT_TOKEN'), 'expected-absent');

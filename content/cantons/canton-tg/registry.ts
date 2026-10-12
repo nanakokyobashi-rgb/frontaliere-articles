@@ -87,7 +87,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'sportello-digitale-turgovia',
  category: 'pratico',
  date: '2026-10-12T00:30:28.713Z',
- image: '/images/blog/article-servizi-imprese-turgovia-rav.webp',
+ image: '/images/blog/article-sportello-digitale-turgovia.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TG'],

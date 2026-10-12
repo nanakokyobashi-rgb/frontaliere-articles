@@ -13014,6 +13014,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fagnano-spettacolo-beneficenza-marmotta.title': 'Fagnano Olona, Erfolg zum 40-jährigen Bestehen der Compagnia La Marmotta',
     'blog.article.fagnano-spettacolo-beneficenza-marmotta.excerpt': 'Rund 200 Zuschauer und über 1600 Euro wurden für den Weltjugendtag während der Benefizveranstaltung im Oratorium San Stanislao gesammelt.',
     'blog.article.fagnano-spettacolo-beneficenza-marmotta.imageAlt': 'Theateraufführung der Kompagnie La Marmotta in Fagnano Olona',
+    'blog.article.semafori-autostrade-ustra-ticino.title': 'Ampeln auf der Autobahn: der Verkehrsplan der USTRA',
+    'blog.article.semafori-autostrade-ustra-ticino.excerpt': 'USTRA prüft mehr als 120 Ampeln an den Anschlussstellen Im Jahr 2025 verzeichneten die Autobahnen 68\'040 Staustunden Bei den Anlagen ist eine Steigerung um bis zu 5% möglich',
+    'blog.article.semafori-autostrade-ustra-ticino.imageAlt': 'Autobahnampeln und Stau im Tessin',
+    'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0: Cogliati und Beretta besiegeln den Erfolg',
+    'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Der Varese besiegt Oltrepò mit 2-0 dank der Tore von Cogliati und Beretta.',
+    'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

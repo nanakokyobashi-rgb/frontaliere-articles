@@ -8078,6 +8078,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.giorni-festivi-canton-zurigo-guida.title': 'Giorni festivi Cantone Zurigo: guida a calendario e regole',
     'blog.article.giorni-festivi-canton-zurigo-guida.excerpt': 'Come distinguere le festività cantonali da quelle federali.',
     'blog.article.giorni-festivi-canton-zurigo-guida.imageAlt': 'Edificio governativo nel Cantone di Zurigo',
+    'blog.article.orari-negozi-zurigo-guida.title': 'Orari negozi Cantone Zurigo: guida a domeniche e festivi',
+    'blog.article.orari-negozi-zurigo-guida.excerpt': 'Le regole degli orari commerciali sono cantonali.',
+    'blog.article.orari-negozi-zurigo-guida.imageAlt': 'Negozi in una via commerciale di Zurigo',
 };
 
 export default blogMetaChIt;

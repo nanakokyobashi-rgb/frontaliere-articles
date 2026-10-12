@@ -797,22 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/marchesi-al-territorio-spaccatura-tra-economia-ed-ecologisti-444320": {
-      "section": "frontaliere",
-      "ts": 1791592618249
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1955841/due-nuovi-tasselli-per-la-collina-d-avra-di-castel-san-pietro": {
-      "section": "frontaliere",
-      "ts": 1791594022844
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1955803/incendio-blocca-le-ffs-la-polizia-e-doloso": {
-      "section": "svizzera",
-      "ts": 1791599128709
-    },
-    "svizzera::https://www.tio.ch/svizzera/attualita/1955736/federer-tennis-lavori-grigliata-organizzato-casa": {
-      "section": "svizzera",
-      "ts": 1791599309876
-    },
     "frontaliere::https://www.laregione.ch/cantone/ticino/1955840/il-fondo-per-la-formazione-professionale-risponde-ancora-ai-suoi-compiti": {
       "section": "frontaliere",
       "ts": 1791603217912
@@ -972,6 +956,34 @@
     "svizzera::https://www.tio.ch/svizzera/cronaca/1956064/manifestazione-berna-centinaia-manifestanti-svizzera": {
       "section": "svizzera",
       "ts": 1791764478452
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/veicolo-in-fiamme-tra-giornico-e-la-galleria-della-biaschina-444417": {
+      "section": "frontaliere",
+      "ts": 1791769790125
+    },
+    "frontaliere::https://www.vconews.it/2026/10/11/leggi-notizia/argomenti/attualita-27/articolo/ennesimo-sos-sulla-carenza-di-personale-al-tribunale-di-verbania.html": {
+      "section": "frontaliere",
+      "ts": 1791770880500
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/11/leggi-notizia/argomenti/cronaca-20/articolo/notte-di-incidenti-a-varese-ragazza-contro-ostacolo-in-via-autostrada-pedone-investito-fuori-dal-t.html": {
+      "section": "frontaliere",
+      "ts": 1791771133917
+    },
+    "svizzera::https://www.tio.ch/ticino/cronaca/1956049/tutti-pazzi-per-la-sagra-della-castagna-ma-quelle-servite-non-sono-ticinesi": {
+      "section": "svizzera",
+      "ts": 1791771952452
+    },
+    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1956041/stati-costa-florida-tempesta-elettricita-centinaia-morti-quattro-isaias-migliaia": {
+      "section": "svizzera",
+      "ts": 1791771970263
+    },
+    "svizzera::https://www.swissinfo.ch/ita/mille-persone-a-manifestazione-berna-a-un-anno-da-disordini/92200201": {
+      "section": "svizzera",
+      "ts": 1791773313704
+    },
+    "svizzera::https://www.swissinfo.ch/ita/polizia-in-forze-a-berna-per-manifestazione-non-autorizzata/92199608": {
+      "section": "svizzera",
+      "ts": 1791773335359
     }
   }
 }

@@ -2715,6 +2715,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'finanziamenti-start-up-ticino': { it: 'finanziamenti-start-up-ticino', en: 'startup-funding-ticino', de: 'startup-finanzierung-tessin', fr: 'financement-start-up-tessin' },
  'linea-yverdon-losanna-riaperta': { it: 'linea-yverdon-losanna-riaperta', en: 'yverdon-lausanne-rail-service-restored', de: 'bahnverkehr-yverdon-lausanne-wieder-normal', fr: 'trafic-ferroviaire-yverdon-lausanne-retabli' },
  'giorni-festivi-canton-zurigo-guida': { it: 'giorni-festivi-canton-zurigo-guida', en: 'public-holidays-zurich-canton-guide', de: 'feiertage-kanton-zuerich-leitfaden', fr: 'jours-feries-canton-zurich-guide' },
+ 'orari-negozi-zurigo-guida': { it: 'orari-negozi-zurigo-guida', en: 'zurich-shop-opening-hours-guide', de: 'ladenoffnungszeiten-zuerich-leitfaden', fr: 'heures-ouverture-magasins-zurich-guide' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

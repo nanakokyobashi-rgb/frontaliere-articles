@@ -26,7 +26,7 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'RAV e servizi per i datori di lavoro nel Canton Turgovia',
     'blog.article.sportello-digitale-turgovia.title': 'Turgovia: Sportello digitale per pratiche e documenti',
     'blog.article.sportello-digitale-turgovia.excerpt': 'Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un\'area protetta per estratti, permessi e altri documenti.',
-    'blog.article.sportello-digitale-turgovia.imageAlt': 'Sportello digitale del Canton Turgovia per servizi, domande e documenti',
+    'blog.article.sportello-digitale-turgovia.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonTgIt;

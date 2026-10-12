@@ -8078,6 +8078,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.giorni-festivi-canton-zurigo-guida.title': 'Public holidays in the Canton of Zurich: guide to the calendar and rules',
     'blog.article.giorni-festivi-canton-zurigo-guida.excerpt': 'How to distinguish cantonal holidays from federal ones.',
     'blog.article.giorni-festivi-canton-zurigo-guida.imageAlt': 'Government building in the Canton of Zurich',
+    'blog.article.orari-negozi-zurigo-guida.title': 'Shop opening hours in the Canton of Zurich: guide to Sundays and public holidays',
+    'blog.article.orari-negozi-zurigo-guida.excerpt': 'Business hours regulations are cantonal.',
+    'blog.article.orari-negozi-zurigo-guida.imageAlt': 'Shops in a shopping street in Zurich',
 };
 
 export default blogMetaChEn;

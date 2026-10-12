@@ -348,6 +348,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pensione-multipla-francia-svizzera-2026': {
+    title: 'Pensioni multiple Francia/Svizzera: leggere il netto riga per riga',
+    description: 'Il netto del relevé non riflette sempre la pensione. Variazioni in CSG, CRDS e CASA dal 2026. Verificare ogni flusso separatamente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pensioni, multiple, francia, leggere',
+    ogTitle: 'Pensioni multiple Francia/Svizzera: leggere il netto riga per riga',
+    ogDescription: 'Il netto indicato sul relevé può non corrispondere a quello atteso. Per chi riceve più pensioni da regimi diversi, la verifica deve partire dalle singole linee del prospetto.',
+    canonicalPath: '/articoli-vaud/pensione-multipla-francia-svizzera-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pensioni multiple Francia/Svizzera: leggere il netto riga per riga",
+      "description": "Il netto del relevé non riflette sempre la pensione. Variazioni in CSG, CRDS e CASA dal 2026. Verificare ogni flusso separatamente.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pensione-multipla-francia-svizzera-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Illustrazione generata per questo articolo"
+      },
+      "datePublished": "2026-10-12T02:50:47+00:00",
+      "dateModified": "2026-10-12T02:50:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/pensione-multipla-francia-svizzera-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cff-eclepens-treni-ripresa': {
+    title: 'Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso',
+    description: 'Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100',
+    keywords: 'frontalieri, ticino, svizzera, italia, treni, yverdon-les-bains, losanna, traffico',
+    ogTitle: 'Treni CFF tra Yverdon e Losanna: traffico ripreso',
+    ogDescription: 'Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100',
+    canonicalPath: '/articoli-vaud/cff-eclepens-treni-ripresa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso",
+      "description": "Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cff-eclepens-treni-ripresa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Treno CFF sulla linea tra Yverdon-les-Bains e Losanna dopo la ripresa del traffico."
+      },
+      "datePublished": "2026-10-12T03:05:29+00:00",
+      "dateModified": "2026-10-12T03:05:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/cff-eclepens-treni-ripresa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
