@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'cff-eclepens-treni-ripresa',
+ category: 'pratico',
+ date: '2026-10-12T03:05:29.472Z',
+ image: '/images/blog/article-cff-eclepens-treni-ripresa.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
