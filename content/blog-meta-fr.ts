@@ -13050,6 +13050,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.title': 'Lite à Castronno : automobiliste au sol, circulation bloquée',
     'blog.article.lite-stradale-castronno-traffico.excerpt': 'À Castronno, une dispute a commencé par un dépassement Un homme de 46 ans s\'est retrouvé au sol Trafic bloqué au moins jusqu\'à 12 heures Lieu → via Vittorio Veneto, zone',
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Accident de la route à Castronno avec un conducteur au sol et trafic bloqué',
+    'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, pass auto des résidents : le renouvellement devient annuel',
+    'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Le pass des résidents doit être renouvelé chaque année.',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Centre historique de Como avec voitures anciennes sous panneau ZTL et Alpes en arrière-plan',
 };
 
 export default blogMetaFr;

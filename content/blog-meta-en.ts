@@ -13048,6 +13048,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.title': 'Lite in Castronno: motorist on the ground, traffic blocked',
     'blog.article.lite-stradale-castronno-traffico.excerpt': 'At Castronno a fight started from an overtake A 46-year-old man ended up on the ground Traffic blocked at least until 12 o\'clock Place → via Vittorio Veneto, area',
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Road accident in Castronno with a driver on the ground and blocked traffic',
+    'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, residents’ car pass: renewal becomes annual',
+    'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'The residents\' pass must be renewed every year.',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Historic Como centre with vintage cars under a ZTL sign and the Alps in the background',
 };
 
 export default blogMetaEn;

@@ -106347,6 +106347,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-como-pass-auto-rinnovo-annuale': {
+    title: 'Como, pass auto residenti: rinnovo diventa annuale',
+    description: 'Il pass dei residenti va rinnovato ogni anno. Scadenza: 31 dicembre, anche nel 2026. Con posto auto: due targhe; con abbonamento: fino a quattro. Senza posto',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, pass, auto, residenti',
+    ogTitle: 'Como, pass auto residenti: rinnovo diventa annuale',
+    ogDescription: 'Il pass dei residenti va rinnovato ogni anno.',
+    canonicalPath: '/articoli-frontaliere/como-pass-auto-rinnovo-annuale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, pass auto residenti: rinnovo diventa annuale",
+      "description": "Il pass dei residenti va rinnovato ogni anno. Scadenza: 31 dicembre, anche nel 2026. Con posto auto: due targhe; con abbonamento: fino a quattro. Senza posto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro storico di Como con auto storiche sotto segnale ZTL e Alpi sullo sfondo"
+      },
+      "datePublished": "2026-10-12T15:55:14+00:00",
+      "dateModified": "2026-10-12T15:55:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-pass-auto-rinnovo-annuale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

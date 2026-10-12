@@ -13047,6 +13047,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.title': 'Lite in Castronno: Autofahrer am Boden, Verkehr gesperrt',
     'blog.article.lite-stradale-castronno-traffico.excerpt': 'Bei Castronno begann ein Streit mit einem Überholmanöver Ein 46-jähriger Mann landete am Boden Verkehr gesperrt mindestens bis 12 Uhr Ort → Via Vittorio Veneto, Zone',
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Straßenunfall in Castronno mit Fahrer am Boden und blockiertem Verkehr',
+    'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, Anwohnerparkausweis: Erneuerung erfolgt jährlich',
+    'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Der Anwohnerparkausweis muss jedes Jahr erneuert werden.',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Historisches Zentrum von Como mit Oldtimer unter ZTL-Schild und Alpen im Hintergrund',
 };
 
 export default blogMetaDe;

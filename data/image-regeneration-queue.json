@@ -10,6 +10,16 @@
       "failureCount": 4,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-12T10:51:24.379Z"
+    },
+    {
+      "articleId": "como-pass-auto-rinnovo-annuale",
+      "title": "Como, pass auto residenti: rinnovo diventa annuale",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-como-pass-auto-rinnovo-annuale: openai-codex (vision gate rejected image: Relevant Como street scene, but it contains prominent traffic signa",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T15:55:15.160Z",
+      "lastFailureAt": "2026-10-12T15:55:15.160Z"
     }
   ]
 }

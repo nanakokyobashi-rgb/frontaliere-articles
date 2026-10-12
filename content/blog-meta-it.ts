@@ -13049,6 +13049,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.title': 'Lite a Castronno: automobilista a terra, traffico bloccato',
     'blog.article.lite-stradale-castronno-traffico.excerpt': 'A Castronno una lite è partita da un sorpasso Un uomo di 46 anni è finito a terra Traffico bloccato almeno fino alle 12 Luogo → via Vittorio Veneto, zona',
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Incidente stradale a Castronno con automobilista a terra e traffico bloccato',
+    'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, pass auto residenti: rinnovo diventa annuale',
+    'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Il pass dei residenti va rinnovato ogni anno.',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Centro storico di Como con auto storiche sotto segnale ZTL e Alpi sullo sfondo',
 };
 
 export default blogMetaIt;

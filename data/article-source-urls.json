@@ -1,5 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/rsi-e-molestie-sul-lavoro-il-governo-deve-prevenire-non-soltanto-reagire-440830": "rsi-molestie-lavoro-governo-prevenzione",
   "https://www.ticinonews.ch/ticino/lugano-primo-passo-verso-la-mobilita-del-futuro-440831": "lugano-mobilita-del-futuro",
   "https://www.varesenews.it/2026/08/uil-infortuni-sul-lavoro-a-varese-7-morti-in-6-mesi/2658733": "infortuni-lavoro-varese-uil-2026",
   "https://www.varesenews.it/2026/08/controlli-di-ferragosto-della-guardia-di-finanza-9-lavoratori-irregolari-e-sospensione-per-due-attivita/2658979": "controlli-lavoratori-irregolari-ticino",
@@ -2472,6 +2471,11 @@
   "https://www.varesenews.it/2026/10/lite-dopo-un-tamponamento-a-castronno-un-automobilista-finisce-a-terra-traffico-paralizzato-a-cascine-maggio/2705254": {
     "articleId": "lite-stradale-castronno-traffico",
     "ts": "2026-10-12T14:15:20.076Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-residenti-del-centro-storico-attenzione-il-rinnovo-del-pass-auto-diventa-annuale-e-un-riassunto-di-tutte-le-novita": {
+    "articleId": "como-pass-auto-rinnovo-annuale",
+    "ts": "2026-10-12T15:55:15.163Z",
     "keyForm": 2
   }
 }
