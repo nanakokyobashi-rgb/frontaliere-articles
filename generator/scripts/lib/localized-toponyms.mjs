@@ -472,6 +472,53 @@ function normalizeDigestScheduleToken(value) {
     .trim();
 }
 
+const CANTON_URL_SLUGS = JSON.parse(
+  readFileSync(new URL('../../data/canton-url-slugs.json', import.meta.url), 'utf8'),
+);
+const DIGEST_CANTON_KEY_BY_SLUG = new Map();
+for (const [cantonKey, record] of Object.entries(CANTON_URL_SLUGS.cantons ?? {})) {
+  for (const locale of LOCALIZED_TOPONYM_LOCALES) {
+    const slug = localizedSlugForm(record?.[locale] ?? '');
+    if (!slug) continue;
+    const previous = DIGEST_CANTON_KEY_BY_SLUG.get(slug);
+    if (previous && previous !== cantonKey) {
+      // An ambiguous URL slug must not silently create a new pairing identity.
+      DIGEST_CANTON_KEY_BY_SLUG.set(slug, null);
+    } else if (!DIGEST_CANTON_KEY_BY_SLUG.has(slug)) {
+      DIGEST_CANTON_KEY_BY_SLUG.set(slug, cantonKey);
+    }
+  }
+}
+
+function digestHeadingLinkStableKey(href) {
+  const path = String(href ?? '').split(/[?#]/u, 1)[0];
+  const segments = path
+    .split('/')
+    .filter(Boolean)
+    .map((segment) => {
+      try {
+        return localizedSlugForm(decodeURIComponent(segment));
+      } catch {
+        return localizedSlugForm(segment);
+      }
+    });
+  const routeSegments = ['it', 'en', 'de', 'fr'].includes(segments[0])
+    ? segments.slice(1)
+    : segments;
+  const placeSlug = routeSegments.at(-1);
+  if (!placeSlug) return null;
+
+  const baseSegments = routeSegments.slice(0, -1);
+  const cantonKey = DIGEST_CANTON_KEY_BY_SLUG.get(baseSegments.at(-1));
+  if (cantonKey) return `place:${cantonKey}:${placeSlug}`;
+
+  // Keep the non-canton base path when it is not in the shared table. This
+  // preserves the old synthetic/test route shape while avoiding a bare final
+  // slug for any unknown nested base path.
+  const fallbackBasePath = baseSegments.slice(1).join('/');
+  return fallbackBasePath ? `place-path:${fallbackBasePath}/${placeSlug}` : `place:${placeSlug}`;
+}
+
 function normalizeDigestTime(value) {
   const match = /^(\d{1,2}):(\d{2})$/u.exec(String(value ?? ''));
   if (!match) return null;
@@ -485,9 +532,7 @@ function normalizeDigestTime(value) {
 function digestHeadingStableKey(line) {
   const linkMatch = DIGEST_LINK_HEADING_CAPTURE_PATTERN.exec(String(line ?? ''));
   if (linkMatch) {
-    const path = linkMatch[1].split(/[?#]/u, 1)[0];
-    const slug = path.split('/').filter(Boolean).at(-1);
-    if (slug) return `place:${normalizeDigestScheduleToken(slug)}`;
+    return digestHeadingLinkStableKey(linkMatch[1]);
   }
 
   // Non-linked canton headings (e.g. `Svitto` / `Schwyz`) have no URL slug,
@@ -700,24 +745,11 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
     return result.text;
   };
 
-  const sourceHeadingKeys = source.headings.map((heading) => digestHeadingStableKey(source.lines[heading.lineIndex])).filter(Boolean);
-  const targetHeadingKeys = target.headings.map((heading) => digestHeadingStableKey(target.lines[heading.lineIndex])).filter(Boolean);
-  if (sourceHeadingKeys.join('|') === targetHeadingKeys.join('|')) {
-    for (let index = 0; index < source.headings.length; index += 1) {
-      const sourceHeading = source.headings[index];
-      const targetHeading = target.headings[index];
-      lines[targetHeading.lineIndex] = applyPair(
-        source.lines[sourceHeading.lineIndex],
-        target.lines[targetHeading.lineIndex],
-      );
-    }
-  } else {
-    for (const { sourceHeading, targetHeading } of headingPairs) {
-      lines[targetHeading.lineIndex] = applyPair(
-        source.lines[sourceHeading.lineIndex],
-        target.lines[targetHeading.lineIndex],
-      );
-    }
+  for (const { sourceHeading, targetHeading } of headingPairs) {
+    lines[targetHeading.lineIndex] = applyPair(
+      source.lines[sourceHeading.lineIndex],
+      target.lines[targetHeading.lineIndex],
+    );
   }
 
   for (const { sourceEvent, targetEvent } of eventPairs) {

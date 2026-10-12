@@ -93,6 +93,64 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.doesNotMatch(repaired.content.en.body2, /Sunday 20:30.*Zurich Film Festival/);
   });
 
+  it('keeps the canton base path in the stable key when place slugs collide', () => {
+    const sourceBody = [
+      '## Gli eventi',
+      '',
+      '### [Ginevra](/eventi/ticino/geneva/)',
+      '- **sabato 16:00** — Evento in Zurigo',
+      '',
+      '### [Ginevra](/eventi/ginevra/geneva/)',
+      '- **domenica 20:30** — Secondo evento in Zurigo',
+    ].join('\n');
+    const targetBody = [
+      '## Events',
+      '',
+      '### [Genève](/en/events/ticino/geneva/)',
+      '- **Saturday 16:00** — Event in Zürich',
+      '',
+      '### [Genève](/en/events/geneva/geneva/)',
+      '- **Sunday 20:30** — Second event in Zürich',
+    ].join('\n');
+
+    const sourceParsed = parseEventsDigestBody2Safe(sourceBody);
+    const targetParsed = parseEventsDigestBody2Safe(targetBody);
+    const pairs = pairEventsByStableKey(sourceParsed, targetParsed);
+
+    assert.equal(pairs?.length, 2);
+  });
+
+  it('pairs headings by stable key when an unlinked section changes position', () => {
+    const original = incidentArticle();
+    original.content.it.body2 = [
+      '## Gli eventi',
+      '',
+      '### [Ginevra](/eventi/ticino/geneva/)',
+      '- **sabato 16:00** — Concerto a Zurigo',
+      '',
+      '### Eventi extra',
+      '',
+      '### [Zurigo](/eventi/ticino/zurich/)',
+      '- **domenica 20:30** — Festival a Ginevra',
+    ].join('\n');
+    original.content.en.body2 = [
+      '## Events',
+      '',
+      '### More events',
+      '',
+      '### [Genève](/en/events/ticino/geneva/)',
+      '- **Saturday 16:00** — Concert in Zürich',
+      '',
+      '### [Zürich](/en/events/ticino/zurich/)',
+      '- **Sunday 20:30** — Festival in Genève',
+    ].join('\n');
+
+    const repaired = repairEventsDigestLocalizedToponyms(original);
+
+    assert.match(repaired.content.en.body2, /\[Geneva\]\(\/en\/events\/ticino\/geneva\/\)/);
+    assert.doesNotMatch(repaired.content.en.body2, /\[Genève\]\(\/en\/events\/ticino\/geneva\/\)/);
+  });
+
   it('does not repair body2 when event structure cannot be paired and keeps the gate fail-closed', () => {
     const original = incidentArticle();
     original.content.en.body2 = 'Zürich';
