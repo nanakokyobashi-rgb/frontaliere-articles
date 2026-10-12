@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'argovia-cani-divieto-respinto',
+ category: 'novita',
+ date: '2026-10-12T06:22:16.181Z',
+ image: '/images/blog/article-argovia-cani-divieto-respinto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

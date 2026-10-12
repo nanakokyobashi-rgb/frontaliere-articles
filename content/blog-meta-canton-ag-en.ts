@@ -30,6 +30,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo and the concessions for hydroelectric power plants',
     'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo publishes a White Paper: in the coming years, municipalities and cantons will be able to redesign ownership, holdings and risks.',
     'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Illustration generated for this article',
+    'blog.article.argovia-cani-divieto-respinto.title': 'Aargau: ban on dangerous dogs rejected',
+    'blog.article.argovia-cani-divieto-respinto.excerpt': 'The Aargau government rejects the ban on dangerous dogs: in two years, none of the six serious injuries to people involved a dog from the list.',
+    'blog.article.argovia-cani-divieto-respinto.imageAlt': 'Leashed dog in a Swiss landscape',
 };
 
 export default blogMetaCantonAgEn;

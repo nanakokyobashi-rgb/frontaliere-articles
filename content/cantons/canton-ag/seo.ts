@@ -348,6 +348,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-argovia-cani-divieto-respinto': {
+    title: 'Argovia: respinto il divieto per i cani pericolosi',
+    description: 'Il governo cantonale argoviese respinge il divieto dei cani pericolosi: sei gravi ferimenti da morso in due anni, nessuno coinvolgeva un cane della lista.',
+    keywords: 'frontalieri, ticino, svizzera, italia, argovia, respinto, divieto, cani',
+    ogTitle: 'Argovia: respinto il divieto per i cani pericolosi',
+    ogDescription: 'La mozione di SVP, Mitte, SP, Grüne, FDP ed EVP chiedeva il divieto di cani potenzialmente pericolosi. Il governo cita sei gravi ferimenti da morso in due anni, nessuno con un cane della lista, e propone la formazione obbligatoria per i detentori.',
+    canonicalPath: '/articoli-argovia/argovia-cani-divieto-respinto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Argovia: respinto il divieto per i cani pericolosi",
+      "description": "Il governo cantonale argoviese respinge il divieto dei cani pericolosi: sei gravi ferimenti da morso in due anni, nessuno coinvolgeva un cane della lista.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-argovia-cani-divieto-respinto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cane al guinzaglio in un paesaggio svizzero"
+      },
+      "datePublished": "2026-10-12T06:22:16+00:00",
+      "dateModified": "2026-10-12T06:22:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/argovia-cani-divieto-respinto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -30,6 +30,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo und die Konzessionen der Wasserkraftwerke',
     'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo veröffentlicht ein White Paper: In den kommenden Jahren können Gemeinden und Kantone Eigentumsverhältnisse, Beteiligungen und Risiken neu gestalten.',
     'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.argovia-cani-divieto-respinto.title': 'Aargau: Verbot für gefährliche Hunde abgelehnt',
+    'blog.article.argovia-cani-divieto-respinto.excerpt': 'Die Aargauer Regierung lehnt das Verbot gefährlicher Hunde ab: In zwei Jahren war bei keinem der sechs schweren Verletzungsfälle an Menschen ein Hund von der Liste beteiligt.',
+    'blog.article.argovia-cani-divieto-respinto.imageAlt': 'Angeleinter Hund in einer Schweizer Landschaft',
 };
 
 export default blogMetaCantonAgDe;

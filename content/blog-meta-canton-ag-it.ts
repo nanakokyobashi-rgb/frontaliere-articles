@@ -30,6 +30,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.axpo-concessioni-idroelettriche.title': 'Axpo e le concessioni delle centrali idroelettriche',
     'blog.article.axpo-concessioni-idroelettriche.excerpt': 'Axpo pubblica un White Paper: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.',
     'blog.article.axpo-concessioni-idroelettriche.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.argovia-cani-divieto-respinto.title': 'Argovia: respinto il divieto per i cani pericolosi',
+    'blog.article.argovia-cani-divieto-respinto.excerpt': 'Il governo argoviese respinge il divieto dei cani pericolosi: in due anni, nessuno dei sei gravi ferimenti a persone ha coinvolto un cane della lista.',
+    'blog.article.argovia-cani-divieto-respinto.imageAlt': 'Cane al guinzaglio in un paesaggio svizzero',
 };
 
 export default blogMetaCantonAgIt;
