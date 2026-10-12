@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'autobus-elettrici-mendrisiotto-amsa': { it: 'autobus-elettrici-mendrisiotto-amsa', en: 'electric-buses-mendrisiotto-amsa', de: 'elektrobusse-mendrisiotto-amsa', fr: 'bus-electriques-mendrisiotto-amsa' },
  'nuovi-spazi-ambulatoriali-bellinzona': { it: 'nuovi-spazi-ambulatoriali-bellinzona', en: 'new-outpatient-spaces-bellinzona', de: 'neue-ambulante-raeume-bellinzona', fr: 'nouveaux-espaces-ambulatoires-bellinzona' },
  'frontalieri-disoccupazione-criterio-lavoro': { it: 'frontalieri-disoccupazione-criterio-lavoro', en: 'cross-border-unemployment-work-country-criterion', de: 'grenzgaenger-arbeitslosigkeit-arbeitsstaat-kriterium', fr: 'frontaliers-chomage-criteret-pays-travail' },
+ 'uscita-svizzera-schengen-controlli': { it: 'uscita-svizzera-schengen-controlli', en: 'switzerland-exit-schengen-border-controls', de: 'schweiz-schengen-austritt-grenzkontrollen', fr: 'suisse-sortie-schengen-controles-frontaliers' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -23,7 +23,10 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.imageAlt': 'Nuovi spazi del Poliambulatorio Turrita e dell\'Ambulatorio di Dermatologia a San Giovanni, Bellinzona.',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.title': 'Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.excerpt': 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
-    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Pendolare frontaliero alla stazione di Mendrisio con sfondo delle Alpi svizzere',
+    'blog.article.uscita-svizzera-schengen-controlli.title': 'Schengen: possibili controlli sistematici ai confini',
+    'blog.article.uscita-svizzera-schengen-controlli.excerpt': 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi',
+    'blog.article.uscita-svizzera-schengen-controlli.imageAlt': 'Traffico al confine tra Italia e Svizzera in Canton Ticino',
 };
 
 export default blogMetaCantonTiIt;

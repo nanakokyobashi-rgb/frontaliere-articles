@@ -270,6 +270,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-uscita-svizzera-schengen-controlli': {
+    title: 'Schengen: possibili controlli sistematici ai confini',
+    description: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi',
+    keywords: 'frontalieri, ticino, svizzera, italia, schengen, possibili, controlli, sistematici',
+    ogTitle: 'Schengen: possibili controlli sistematici ai confini',
+    ogDescription: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi',
+    canonicalPath: '/articoli-ticino/uscita-svizzera-schengen-controlli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Schengen: possibili controlli sistematici ai confini",
+      "description": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-uscita-svizzera-schengen-controlli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico al confine tra Italia e Svizzera in Canton Ticino"
+      },
+      "datePublished": "2026-10-12T23:42:13+00:00",
+      "dateModified": "2026-10-12T23:42:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/uscita-svizzera-schengen-controlli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
