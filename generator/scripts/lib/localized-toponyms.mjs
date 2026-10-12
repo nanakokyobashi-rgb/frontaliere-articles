@@ -428,8 +428,8 @@ const DIGEST_MONTH_NAME_TO_INDEX = new Map([
   ['july', 7], ['august', 8], ['september', 9], ['october', 10], ['november', 11], ['december', 12],
   ['januar', 1], ['februar', 2], ['marz', 3], ['mai', 5], ['juni', 6], ['juli', 7],
   ['oktober', 10], ['dezember', 12],
-  ['janvier', 1], ['fevrier', 2], ['avril', 4], ['juin', 6], ['juillet', 7], ['aout', 8],
-  ['octobre', 10], ['novembre', 11], ['decembre', 12],
+  ['janvier', 1], ['fevrier', 2], ['mars', 3], ['avril', 4], ['juin', 6], ['juillet', 7], ['aout', 8],
+  ['septembre', 9], ['octobre', 10], ['novembre', 11], ['decembre', 12],
 ]);
 const DIGEST_WEEKDAY_NAME_TO_INDEX = new Map([
   ['lunedi', 1], ['monday', 1], ['montag', 1], ['lundi', 1],
