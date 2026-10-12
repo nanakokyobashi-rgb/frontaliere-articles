@@ -13026,6 +13026,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.title': 'Grenzgänger: Wo sie arbeiten, ist wichtig: Klarstellung der Steuerbehörden.',
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.excerpt': 'Entscheidend ist der tatsächliche Aufführungsort, nicht der eingetragene Firmensitz.',
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.imageAlt': 'Panoramablick auf Lugano, Arbeitsort für viele Grenzgänger.',
+    'blog.article.lavori-autolaghi-ottobre-2026.title': 'Nachtarbeiten auf der A8 und A9: Sperrungen und alternative Routen',
+    'blog.article.lavori-autolaghi-ottobre-2026.excerpt': 'Die A8 zwischen Castellanza und Fiera in Richtung Mailand gesperrt Legnano: Einfahrt in beiden Richtungen für zwei Nächte gesperrt A9: Abzweig in Richtung Mailand ab Chiasso/Como gesperrt',
+    'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Autobahn-Schilder in Ticinoen am Abend',
 };
 
 export default blogMetaDe;

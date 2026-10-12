@@ -13027,6 +13027,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.title': 'Cross-border workers, where you work matters: the Tax Authority’s clarification',
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.excerpt': 'The actual place of performance matters, not the registered office.',
     'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.imageAlt': 'Panoramic view of Lugano, place of work for many cross-border commuters.',
+    'blog.article.lavori-autolaghi-ottobre-2026.title': 'A8 and A9 night work: closures and alternative routes',
+    'blog.article.lavori-autolaghi-ottobre-2026.excerpt': 'A8 closed between Castellanza and Fiera toward Milan Legnano: entrance closed in both directions for two nights A9: branch toward Milan closed from Chiasso/Como',
+    'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Highway road sign in Ticino at twilight',
 };
 
 export default blogMetaEn;

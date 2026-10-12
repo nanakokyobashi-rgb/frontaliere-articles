@@ -106074,6 +106074,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavori-autolaghi-ottobre-2026': {
+    title: 'Lavori notturni A8 e A9: chiusure e percorsi alternativi',
+    description: 'Chiusa la A8 tra Castellanza e Fiera verso Milano Legnano: entrata chiusa in entrambe le direzioni per due notti A9: ramo verso Milano chiuso da Chiasso/Como',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavori, notturni, chiusure, percorsi',
+    ogTitle: 'Lavori notturni A8 e A9: chiusure e alternative',
+    ogDescription: 'Chiusa la A8 tra Castellanza e Fiera verso Milano Legnano: entrata chiusa in entrambe le direzioni per due notti A9: ramo verso Milano chiuso da Chiasso/Como',
+    canonicalPath: '/articoli-frontaliere/lavori-autolaghi-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavori notturni A8 e A9: chiusure e percorsi alternativi",
+      "description": "Chiusa la A8 tra Castellanza e Fiera verso Milano Legnano: entrata chiusa in entrambe le direzioni per due notti A9: ramo verso Milano chiuso da Chiasso/Como",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cartello stradale autostradale in Ticino al crepuscolo"
+      },
+      "datePublished": "2026-10-12T10:44:07+00:00",
+      "dateModified": "2026-10-12T10:44:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lavori-autolaghi-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

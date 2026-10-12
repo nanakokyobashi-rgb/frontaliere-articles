@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-12T10:17:39.068Z",
       "lastFailureAt": "2026-10-12T10:17:39.068Z"
+    },
+    {
+      "articleId": "lavori-autolaghi-ottobre-2026",
+      "title": "Lavori notturni A8 e A9: chiusure e percorsi alternativi",
+      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
+      "reason": "All image providers failed for article-lavori-autolaghi-ottobre-2026: openai-codex (vision gate rejected image: Relevant generic alpine motorway scene, but prominent overhead road",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T10:44:07.397Z",
+      "lastFailureAt": "2026-10-12T10:44:07.397Z"
     }
   ]
 }
