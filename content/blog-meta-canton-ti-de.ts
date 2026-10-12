@@ -23,7 +23,7 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.imageAlt': 'Neue ambulante Räumlichkeiten des Poliambulatorio Turrita und der Dermatologie in San Giovanni, Bellinzona.',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.title': 'Grenzgänger und Arbeitslosigkeit: EU-Regeln ändern sich',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.excerpt': 'Die EU hat neue Regeln zur Arbeitslosigkeit von Grenzgängern verabschiedet Das künftige Kriterium wäre der Staat, in dem gearbeitet wird Für die Schweiz erfolgt die Übernahme nicht',
-    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Grenzgänger am Bahnhof Mendrisio mit Schweizer Alpen im Hintergrund',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonTiDe;

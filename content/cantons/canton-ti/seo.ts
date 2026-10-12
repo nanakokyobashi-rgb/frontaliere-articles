@@ -245,10 +245,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "L'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l'entrata non è",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apertura-conto-svizzera-frontalieri.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Pendolare frontaliero alla stazione di Mendrisio con sfondo delle Alpi svizzere"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T23:14:18+00:00",
       "dateModified": "2026-10-12T23:14:18+00:00",

@@ -23,7 +23,7 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.imageAlt': 'Nuovi spazi del Poliambulatorio Turrita e dell\'Ambulatorio di Dermatologia a San Giovanni, Bellinzona.',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.title': 'Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.excerpt': 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
-    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Pendolare frontaliero alla stazione di Mendrisio con sfondo delle Alpi svizzere',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaCantonTiIt;

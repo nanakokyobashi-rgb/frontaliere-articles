@@ -23,7 +23,7 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.imageAlt': 'Nouveaux espaces ambulatoires du Poliambulatorio Turrita et de la dermatologie à San Giovanni, Bellinzona.',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.title': 'Frontaliers et chômage : l’UE retient l’État de travail',
     'blog.article.frontalieri-disoccupazione-criterio-lavoro.excerpt': 'L\'UE a approuvé de nouvelles règles sur le chômage des travailleurs frontaliers Le critère futur serait l\'État où l\'on travaille Pour la Suisse l\'entrée n\'est pas',
-    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Navetteur frontalier à la gare de Mendrisio avec les Alpes suisses en arrière-plan',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaCantonTiFr;

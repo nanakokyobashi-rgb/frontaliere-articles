@@ -30,16 +30,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T21:32:17.757Z",
       "lastFailureAt": "2026-10-12T21:40:42.815Z"
-    },
-    {
-      "articleId": "frontalieri-disoccupazione-criterio-lavoro",
-      "title": "Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro",
-      "fallbackImage": "/images/blog/apertura-conto-svizzera-frontalieri.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T23:14:18.983Z",
-      "lastFailureAt": "2026-10-12T23:14:18.983Z"
     }
   ]
 }

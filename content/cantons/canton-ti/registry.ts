@@ -76,7 +76,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'frontalieri-disoccupazione-criterio-lavoro',
  category: 'novita',
  date: '2026-10-12T23:14:18.965Z',
- image: '/images/blog/apertura-conto-svizzera-frontalieri.webp',
+ image: '/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],
