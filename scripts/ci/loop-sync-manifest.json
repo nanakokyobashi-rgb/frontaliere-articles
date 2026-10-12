@@ -607,10 +607,10 @@
       "mode": "adapted",
       "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco. MOVIMENTO CORPUS 2026-09-20: `stripFencedBlocks` e' stata ESPORTATA perche' `scripts/ci/lib/review-findings.mjs` (sceso dal sito con #9318) la riusa invece di riscriverla; `commandReferent()` ora accetta anche file senza estensione e directory, cioe' il contratto adattato del follow-up #8067. MOVIMENTO CORPUS 2026-10-12: portata dalla PR sito #12658 la normalizzazione del solo span Markdown inline-code completo nei campi `Target repository`, mantenendo la risoluzione di locator e gli altri contratti adattati del corpus.",
       "baseline": {
-        "site": "9d02fce29db5e79d",
-        "corpus": "29609a6b75d08f0d",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T23:19:28.281Z"
+        "site": "8e96dd403273e416",
+        "corpus": "cf11b993cf839dd5",
+        "alignedAt": "2026-10-12",
+        "forcedAt": "2026-10-12T15:50:23.150Z"
       }
     },
     {
