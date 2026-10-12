@@ -13023,6 +13023,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lastminute-nuovo-finanze.title': 'Lastminute.com, neuer Finanzchef in Chiasso',
     'blog.article.lastminute-nuovo-finanze.excerpt': 'Ludovic Boisseau wird der neue Finanzchef sein Die Ernennung tritt am 16.',
     'blog.article.lastminute-nuovo-finanze.imageAlt': 'Stadtansicht von Chiasso zur Finanzmeldung von Lastminute.com',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.title': 'Grenzgänger: Wo sie arbeiten, ist wichtig: Klarstellung der Steuerbehörden.',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.excerpt': 'Entscheidend ist der tatsächliche Aufführungsort, nicht der eingetragene Firmensitz.',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.imageAlt': 'Panoramablick auf Lugano, Arbeitsort für viele Grenzgänger.',
 };
 
 export default blogMetaDe;

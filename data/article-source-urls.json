@@ -1,5 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/ticino/1944053/assunzione-di-maria-de-raemy-da-carona-invita-a-essere-caritatevoli": "assunzione-maria-2023-ticino",
   "https://www.tio.ch/svizzera/economia/1943875/burro-svizzero-venduto-all-estero-a-prezzi-stracciati-persi-27-milioni": "burro-svizzero-esportazioni-perdite",
   "https://www.rsi.ch/s/3990051": "semafori-grigioni-traffico-parassitario",
   "https://www.rsi.ch/s/3992937": "salari-difficili-discussioni",
@@ -2440,6 +2439,11 @@
   "https://www.ticinonews.ch/economia/lastminutecom-ha-un-nuovo-responsabile-delle-finanze-444436": {
     "articleId": "lastminute-nuovo-finanze",
     "ts": "2026-10-12T06:55:43.907Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/magazine/lagenzia-delle-entrate-mette-un-punto-fermo-sui-frontalieri-italia-svizzera-conta-dove-il-dipendente-lavora-davvero-non-lindirizzo-della-sede-dellazienda": {
+    "articleId": "agenzia-entrate-luogo-lavoro-frontaliere",
+    "ts": "2026-10-12T07:16:43.468Z",
     "keyForm": 2
   }
 }

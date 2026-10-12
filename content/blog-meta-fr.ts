@@ -13026,6 +13026,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lastminute-nuovo-finanze.title': 'Lastminute.com, nouveau responsable des finances à Chiasso',
     'blog.article.lastminute-nuovo-finanze.excerpt': 'Ludovic Boisseau sera le nouveau responsable des finances La nomination prendra effet le 16 novembre Le centre opérationnel de Lastminute.com se trouve à Chiasso Les résultats',
     'blog.article.lastminute-nuovo-finanze.imageAlt': 'Vue urbaine de Chiasso liée à l\'actualité financière de Lastminute.com',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.title': 'Frontaliers, l’endroit où vous travaillez compte : la clarification du fisc',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.excerpt': 'C’est le lieu effectif de la prestation qui compte, et non le siège légal.',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.imageAlt': 'Vue panoramique de Lugano, lieu de travail pour de nombreux frontaliers.',
 };
 
 export default blogMetaFr;

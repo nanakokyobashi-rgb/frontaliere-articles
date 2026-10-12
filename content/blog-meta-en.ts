@@ -13024,6 +13024,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lastminute-nuovo-finanze.title': 'Lastminute.com, new head of finance in Chiasso',
     'blog.article.lastminute-nuovo-finanze.excerpt': 'Ludovic Boisseau will be the new head of finance The appointment will take effect on November 16 Lastminute.com\'s operations center is in Chiasso The results',
     'blog.article.lastminute-nuovo-finanze.imageAlt': 'Chiasso city scene linked to the Lastminute.com finance news',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.title': 'Cross-border workers, where you work matters: the Tax Authority’s clarification',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.excerpt': 'The actual place of performance matters, not the registered office.',
+    'blog.article.agenzia-entrate-luogo-lavoro-frontaliere.imageAlt': 'Panoramic view of Lugano, place of work for many cross-border commuters.',
 };
 
 export default blogMetaEn;
