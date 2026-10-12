@@ -27041,7 +27041,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'carburanti-dopo-record-settembre',
     category: 'pratico',
     date: '2026-10-12T16:48:08.772Z',
-    image: '/images/blog/benzina-diesel-prezzi-calano.webp',
+    image: '/images/blog/article-carburanti-dopo-record-settembre.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

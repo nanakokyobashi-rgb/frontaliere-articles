@@ -13055,7 +13055,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Centre historique de Como avec voitures anciennes sous panneau ZTL et Alpes en arrière-plan',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 nouveaux feux de signalisation aux échangeurs suisses',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Plus de 120 nouveaux feux de signalisation sont à l’étude aux échangeurs suisses En 2025, les embouteillages ont atteint 68.040 heures Les heures d’embouteillage ont augmenté de 20%',
-    'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Feux de signalisation aux sorties d\'autoroute suisses',
+    'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

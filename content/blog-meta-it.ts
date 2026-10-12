@@ -13054,7 +13054,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Centro storico di Como con auto storiche sotto segnale ZTL e Alpi sullo sfondo',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 nuovi semafori agli svincoli svizzeri',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Oltre 120 nuovi semafori sono allo studio agli svincoli svizzeri Nel 2025 gli ingorghi hanno raggiunto 68.040 ore Le ore di ingorgo sono cresciute del 20%',
-    'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Semafori agli svincoli autostradali svizzeri',
+    'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

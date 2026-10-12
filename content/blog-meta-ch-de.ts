@@ -8104,7 +8104,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Redaktionelles Bild zu: Camion pesanti: uno su quattro è elettrico nel 2026',
     'blog.article.carburanti-dopo-record-settembre.title': 'Kraftstoffe in der Schweiz: Benzin und Diesel sinken',
     'blog.article.carburanti-dopo-record-settembre.excerpt': 'Laut TCS sinkt Benzin 95 auf 2,11 Franken pro Liter, Benzin 98 auf 2,22 und Diesel auf 2,40, nach den Rekordpreisen im September.',
-    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Schweizer Tankstelle mit Auto und Anzeige der Treibstoffpreise',
+    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

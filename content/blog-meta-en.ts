@@ -13053,7 +13053,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Historic Como centre with vintage cars under a ZTL sign and the Alps in the background',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 new traffic lights at Swiss interchanges',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'More than 120 new traffic lights are being considered at Swiss junctions In 2025, traffic jams reached 68.040 hours Traffic jam hours increased by 20%',
-    'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Traffic lights at Swiss highway junctions',
+    'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

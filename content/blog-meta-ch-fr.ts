@@ -8104,7 +8104,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Image éditoriale relative à: Camion pesanti: uno su quattro è elettrico nel 2026',
     'blog.article.carburanti-dopo-record-settembre.title': 'Carburants en Suisse : l’essence et le diesel baissent',
     'blog.article.carburanti-dopo-record-settembre.excerpt': 'Selon le TCS, l’essence 95 baisse à 2,11 francs le litre, la 98 à 2,22 et le diesel à 2,40, après les records de septembre.',
-    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Station-service suisse avec une voiture et un panneau des prix des carburants',
+    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;

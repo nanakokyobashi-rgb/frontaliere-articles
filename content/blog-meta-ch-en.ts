@@ -8104,7 +8104,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Editorial image related to: Camion pesanti: uno su quattro è elettrico nel 2026',
     'blog.article.carburanti-dopo-record-settembre.title': 'Fuel prices in Switzerland: petrol and diesel fall',
     'blog.article.carburanti-dopo-record-settembre.excerpt': 'According to the TCS, 95 gasoline falls to 2.11 francs per liter, 98 to 2.22 and diesel to 2.40, after September’s records.',
-    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Swiss petrol station with a car and a fuel price display',
+    'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

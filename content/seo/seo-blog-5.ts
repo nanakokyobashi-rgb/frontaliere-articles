@@ -106405,10 +106405,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.webp`,
+        "url": `${BASE_URL}/images/blog/article-semafori-svizzera-ustra-traffico.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Semafori agli svincoli autostradali svizzeri"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T17:16:35+00:00",
       "dateModified": "2026-10-12T17:16:35+00:00",

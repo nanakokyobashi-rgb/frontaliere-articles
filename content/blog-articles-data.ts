@@ -44014,7 +44014,7 @@ const RAW_ARTICLES = [
  id: 'semafori-svizzera-ustra-traffico',
  category: 'pratico',
  date: '2026-10-12T17:16:34.877Z',
- image: '/images/blog/article-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.webp',
+ image: '/images/blog/article-semafori-svizzera-ustra-traffico.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

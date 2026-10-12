@@ -102223,10 +102223,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "I rilevamenti del TCS indicano benzina 95 a 2,11 franchi al litro, benzina 98 a 2,22 e diesel a 2,40: il carburante cala dopo i record di settembre in Svizzera.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/benzina-diesel-prezzi-calano.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-carburanti-dopo-record-settembre.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Stazione di servizio svizzera con auto e pannello dei prezzi del carburante"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T16:48:08+00:00",
       "dateModified": "2026-10-12T16:48:08+00:00",
