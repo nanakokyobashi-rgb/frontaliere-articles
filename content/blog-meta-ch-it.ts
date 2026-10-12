@@ -8084,6 +8084,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.regole-orari-negozi-zurigo.title': 'Orari negozi Canton Zurigo: guida a domeniche e festivi',
     'blog.article.regole-orari-negozi-zurigo.excerpt': 'Nel Canton Zurigo, gli orari commerciali variano per comune.',
     'blog.article.regole-orari-negozi-zurigo.imageAlt': 'Facciata di negozi in una via commerciale svizzera.',
+    'blog.article.imposta-cani-zurigo-guida.title': 'Imposta sui cani a Zurigo: guida alla registrazione',
+    'blog.article.imposta-cani-zurigo-guida.excerpt': 'Nel Cantone di Zurigo l\'imposta sui cani segue regole cantonali e comunali.',
+    'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Foto di un cane con collare davanti a un ufficio comunale zurighese',
 };
 
 export default blogMetaChIt;

@@ -8084,6 +8084,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.regole-orari-negozi-zurigo.title': 'Ladenöffnungszeiten Zürich: Sonntag und Feiertage',
     'blog.article.regole-orari-negozi-zurigo.excerpt': 'Im Kanton Zürich unterscheiden sich die Ladenöffnungszeiten je nach Gemeinde.',
     'blog.article.regole-orari-negozi-zurigo.imageAlt': 'Ladengeschäfte in einer Schweizer Einkaufsstraße.',
+    'blog.article.imposta-cani-zurigo-guida.title': 'Hundesteuer in Zürich: Leitfaden zur Registrierung',
+    'blog.article.imposta-cani-zurigo-guida.excerpt': 'Im Kanton Zürich richtet sich die Hundesteuer nach kantonalen und kommunalen Vorschriften.',
+    'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Foto eines Hundes mit Halsband vor einem Zürcher Gemeindeamt',
 };
 
 export default blogMetaChDe;

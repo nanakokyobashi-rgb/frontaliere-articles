@@ -101975,6 +101975,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposta-cani-zurigo-guida': {
+    title: 'Imposta sui cani a Zurigo: guida alla registrazione',
+    description: 'Nel Cantone di Zurigo l\'imposta sui cani segue regole cantonali e comunali. L\'obbligo può essere eventuale e va verificato per il caso applicabile',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, cani, zurigo, alla',
+    ogTitle: 'Imposta sui cani a Zurigo: guida alla registrazione',
+    ogDescription: 'Nel Cantone di Zurigo l\'imposta sui cani segue regole cantonali e comunali.',
+    canonicalPath: '/articoli-svizzera/imposta-cani-zurigo-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta sui cani a Zurigo: guida alla registrazione",
+      "description": "Nel Cantone di Zurigo l'imposta sui cani segue regole cantonali e comunali. L'obbligo può essere eventuale e va verificato per il caso applicabile",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imposta-cani-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto di un cane con collare davanti a un ufficio comunale zurighese"
+      },
+      "datePublished": "2026-10-12T08:03:47+00:00",
+      "dateModified": "2026-10-12T08:03:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-cani-zurigo-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

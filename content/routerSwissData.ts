@@ -2717,6 +2717,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'giorni-festivi-canton-zurigo-guida': { it: 'giorni-festivi-canton-zurigo-guida', en: 'public-holidays-zurich-canton-guide', de: 'feiertage-kanton-zuerich-leitfaden', fr: 'jours-feries-canton-zurich-guide' },
  'orari-negozi-zurigo-guida': { it: 'orari-negozi-zurigo-guida', en: 'zurich-shop-opening-hours-guide', de: 'ladenoffnungszeiten-zuerich-leitfaden', fr: 'heures-ouverture-magasins-zurich-guide' },
  'regole-orari-negozi-zurigo': { it: 'regole-orari-negozi-zurigo', en: 'zurich-shop-hours-guide', de: 'zuerich-ladenoffnungszeiten-leitfaden', fr: 'horaires-magasins-zurich-guide' },
+ 'imposta-cani-zurigo-guida': { it: 'imposta-cani-zurigo-guida', en: 'dog-tax-in-zurich-registration-guide', de: 'hundesteuer-in-zurich-leitfaden-zur-registrierung', fr: 'taxe-sur-les-chiens-a-zurich-guide-d-enregistrement' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

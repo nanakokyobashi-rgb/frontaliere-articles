@@ -8084,6 +8084,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.regole-orari-negozi-zurigo.title': 'Zurich Shop Hours: Guide to Sundays and Holidays',
     'blog.article.regole-orari-negozi-zurigo.excerpt': 'In the Canton of Zurich, business hours vary by municipality.',
     'blog.article.regole-orari-negozi-zurigo.imageAlt': 'Retail storefronts on a commercial street in Switzerland.',
+    'blog.article.imposta-cani-zurigo-guida.title': 'Dog tax in Zurich: registration guide',
+    'blog.article.imposta-cani-zurigo-guida.excerpt': 'In the Canton of Zurich, the dog tax follows cantonal and municipal rules.',
+    'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Photo of a dog with collar in front of a Zurich municipal office',
 };
 
 export default blogMetaChEn;

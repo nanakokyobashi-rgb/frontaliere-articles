@@ -26976,6 +26976,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'imposta-cani-zurigo-guida',
+    category: 'fiscale',
+    date: '2026-10-12T08:03:47.898Z',
+    image: '/images/blog/article-imposta-cani-zurigo-guida.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
