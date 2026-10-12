@@ -43959,6 +43959,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'talenti-in-movimento-oltreconfinti',
+ category: 'pratico',
+ date: '2026-10-12T12:50:14.228Z',
+ image: '/images/blog/article-talenti-in-movimento-oltreconfinti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

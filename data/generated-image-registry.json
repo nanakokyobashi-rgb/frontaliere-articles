@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 401,
+  "assetCount": 402,
   "assets": [
     {
       "schema": 1,
@@ -15478,6 +15478,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic illustrated Swiss lake scene with visibly low waterline and dry exposed shore; no people, text, logos, or identifiable event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-talenti-in-movimento-oltreconfinti",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "1bee1bc36d00e39a1fb01994d282204764f9f92e03c54a3cce9d4cfc2bdf5c45",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "40e95d381284d2fc113014a27625770cc2a7e7346fa541414fb38edd02a1c44d",
+      "bytes": 148532,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-12T12:49:57.660Z",
+      "verifiedAt": "2026-10-12T12:50:13.784Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-talenti-in-movimento-oltreconfinti.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic editorial illustration of professionals moving toward a modern lakeside building in an Alpine/Ticino setting; no text, logos, recognizable faces, or specific real event."
       }
     }
   ]
