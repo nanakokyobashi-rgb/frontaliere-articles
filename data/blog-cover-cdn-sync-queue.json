@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-como-truffa-30mila-euro.webp",
+      "sha256": "98ea8fbeaa4ba631873baa5765e6c3251a30d4af2c5301ecbca073a75542fd55"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-como-truffa-30mila-euro-480w.webp",
+      "sha256": "e970c83c20de919daaa92c9071dbd411c3b67d44a159462e99df091b3f43d777"
+    }
+  ]
 }
