@@ -13023,6 +13023,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0 : Cogliati et Beretta signent le succès',
     'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Le Varese bat l\'Oltrepò 2-0 avec les buts de Cogliati et Beretta.',
     'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.lastminute-nuovo-finanze.title': 'Lastminute.com, nouveau responsable des finances à Chiasso',
+    'blog.article.lastminute-nuovo-finanze.excerpt': 'Ludovic Boisseau sera le nouveau responsable des finances La nomination prendra effet le 16 novembre Le centre opérationnel de Lastminute.com se trouve à Chiasso Les résultats',
+    'blog.article.lastminute-nuovo-finanze.imageAlt': 'Vue urbaine de Chiasso liée à l\'actualité financière de Lastminute.com',
 };
 
 export default blogMetaFr;

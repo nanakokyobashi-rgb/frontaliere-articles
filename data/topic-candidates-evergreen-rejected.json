@@ -797,22 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1955840/il-fondo-per-la-formazione-professionale-risponde-ancora-ai-suoi-compiti": {
-      "section": "frontaliere",
-      "ts": 1791603217912
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-varese-pall-trieste-la-partita-in-diretta-2/2703394": {
-      "section": "frontaliere",
-      "ts": 1791604659254
-    },
-    "svizzera::https://www.tio.ch/ticino/attualita/1955886/gobbi-caso-agenti-dado-pronzini-due-licenziamento": {
-      "section": "svizzera",
-      "ts": 1791604730875
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1955733/chuv-documenti-medici-ustionati-stato-crans-montana-sospeso": {
-      "section": "svizzera",
-      "ts": 1791609987962
-    },
     "svizzera::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
       "section": "svizzera",
       "ts": 1791622506439
@@ -984,6 +968,10 @@
     "svizzera::https://www.swissinfo.ch/ita/polizia-in-forze-a-berna-per-manifestazione-non-autorizzata/92199608": {
       "section": "svizzera",
       "ts": 1791773335359
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1955840/il-fondo-per-la-formazione-professionale-risponde-ancora-ai-suoi-compiti": {
+      "section": "frontaliere",
+      "ts": 1791787103981
     }
   }
 }

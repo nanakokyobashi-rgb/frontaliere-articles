@@ -13020,6 +13020,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.varese-oltrepo-cronaca-sportiva.title': 'Varese-Oltrepò 2-0: Cogliati und Beretta besiegeln den Erfolg',
     'blog.article.varese-oltrepo-cronaca-sportiva.excerpt': 'Der Varese besiegt Oltrepò mit 2-0 dank der Tore von Cogliati und Beretta.',
     'blog.article.varese-oltrepo-cronaca-sportiva.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.lastminute-nuovo-finanze.title': 'Lastminute.com, neuer Finanzchef in Chiasso',
+    'blog.article.lastminute-nuovo-finanze.excerpt': 'Ludovic Boisseau wird der neue Finanzchef sein Die Ernennung tritt am 16.',
+    'blog.article.lastminute-nuovo-finanze.imageAlt': 'Stadtansicht von Chiasso zur Finanzmeldung von Lastminute.com',
 };
 
 export default blogMetaDe;

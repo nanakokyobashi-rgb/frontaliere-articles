@@ -1,5 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/controlli-in-tre-locali-di-busto-arsizio-e-gallarate-irregolarita-su-igiene-lavoro-e-sicurezza/2658181": "controlli-locali-busto-arsizio-gallarate",
   "https://www.laregione.ch/cantone/ticino/1944053/assunzione-di-maria-de-raemy-da-carona-invita-a-essere-caritatevoli": "assunzione-maria-2023-ticino",
   "https://www.tio.ch/svizzera/economia/1943875/burro-svizzero-venduto-all-estero-a-prezzi-stracciati-persi-27-milioni": "burro-svizzero-esportazioni-perdite",
   "https://www.rsi.ch/s/3990051": "semafori-grigioni-traffico-parassitario",
@@ -2436,6 +2435,11 @@
   "https://www.varesenews.it/2026/10/i-voti-del-varese-cogliati-torna-al-gol-esordio-con-assist-per-zaffanelli/2704435": {
     "articleId": "varese-oltrepo-cronaca-sportiva",
     "ts": "2026-10-12T03:33:12.970Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/economia/lastminutecom-ha-un-nuovo-responsabile-delle-finanze-444436": {
+    "articleId": "lastminute-nuovo-finanze",
+    "ts": "2026-10-12T06:55:43.907Z",
     "keyForm": 2
   }
 }

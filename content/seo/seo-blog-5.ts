@@ -105996,6 +105996,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lastminute-nuovo-finanze': {
+    title: 'Lastminute.com, nuovo responsabile finanze a Chiasso',
+    description: 'Ludovic Boisseau sarà il nuovo responsabile delle finanze La nomina avrà effetto dal 16 novembre Il centro operativo di Lastminute.com è a Chiasso I risultati',
+    keywords: 'frontalieri, ticino, svizzera, italia, lastminute, nuovo, responsabile, finanze',
+    ogTitle: 'Lastminute.com: Boisseau nuovo responsabile finanze',
+    ogDescription: 'Ludovic Boisseau sarà il nuovo responsabile delle finanze La nomina avrà effetto dal 16 novembre Il centro operativo di Lastminute.com è a Chiasso I risultati',
+    canonicalPath: '/articoli-frontaliere/lastminute-nuovo-finanze/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lastminute.com, nuovo responsabile finanze a Chiasso",
+      "description": "Ludovic Boisseau sarà il nuovo responsabile delle finanze La nomina avrà effetto dal 16 novembre Il centro operativo di Lastminute.com è a Chiasso I risultati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lastminute-nuovo-finanze.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro urbano di Chiasso associato alla notizia su Lastminute.com"
+      },
+      "datePublished": "2026-10-12T06:55:43+00:00",
+      "dateModified": "2026-10-12T06:55:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lastminute-nuovo-finanze/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
