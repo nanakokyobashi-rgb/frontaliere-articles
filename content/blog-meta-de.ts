@@ -13053,6 +13053,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 neue Ampeln an Schweizer Anschlussstellen',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Mehr als 120 neue Ampeln an Schweizer Anschlussstellen werden geprüft Im Jahr 2025 summierten sich die Staus auf 68.040 Stunden Die Stauzeiten stiegen um 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.tassa-salute-ristorni-17-settembre.title': 'Gesundheitssteuer & Rückerstattungen: Termin in Bern',
+    'blog.article.tassa-salute-ristorni-17-settembre.excerpt': 'Am 17. September wird über die Gesundheitssteuer, die Doppelbesteuerung und den Status diskutiert; das Tessin droht, die Steuerrückvergütungen zu blockieren, und gefährdet damit 120 Millionen Franken für die Grenzgemeinden.',
+    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Blick auf den Luganer See mit den Bergen im Hintergrund, repräsentiert die Grenzzone des Tessin',
 };
 
 export default blogMetaDe;

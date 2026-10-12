@@ -44020,6 +44020,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'tassa-salute-ristorni-17-settembre',
+ category: 'fiscale',
+ date: '2026-10-12T19:46:56.997Z',
+ image: '/images/blog/tassa-salute-frontalieri-ticino-settembre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

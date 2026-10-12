@@ -106425,6 +106425,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tassa-salute-ristorni-17-settembre': {
+    title: 'Tassa salute e ristorni: tavolo del 17 settembre a Berna',
+    description: 'Il 17 settembre a Berna si è discusso di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, rischiando 120 milioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, salute, ristorni, tavolo',
+    ogTitle: 'Tassa salute e ristorni: tavolo del 17 settembre a Berna',
+    ogDescription: 'Il tavolo del 17 settembre a Berna ha affrontato la tassa sulla salute, la doppia imposizione e lo statuto dei frontalieri, mentre il Ticino ha minacciato di sospendere i ristorni ai Comuni di frontiera, mettendo a rischio 120 milioni di franchi',
+    canonicalPath: '/articoli-frontaliere/tassa-salute-ristorni-17-settembre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tassa salute e ristorni: tavolo del 17 settembre a Berna",
+      "description": "Il 17 settembre a Berna si è discusso di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, rischiando 120 milioni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/tassa-salute-frontalieri-ticino-settembre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con le montagne sullo sfondo, simbolo della regione di frontiera ticinese"
+      },
+      "datePublished": "2026-10-12T19:46:57+00:00",
+      "dateModified": "2026-10-12T19:46:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tassa-salute-ristorni-17-settembre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -13054,6 +13054,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 new traffic lights at Swiss interchanges',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'More than 120 new traffic lights are being considered at Swiss junctions In 2025, traffic jams reached 68.040 hours Traffic jam hours increased by 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustration generated for this article',
+    'blog.article.tassa-salute-ristorni-17-settembre.title': 'Health tax and rebates: roundtable on September 17 in Bern',
+    'blog.article.tassa-salute-ristorni-17-settembre.excerpt': 'On September 17, the health tax, double taxation and statute will be discussed; Ticino threatens to block the tax rebates, putting 120 million francs for border municipalities at risk.',
+    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'View of Lake Lugano with mountains in the background, representing the Ticino border region',
 };
 
 export default blogMetaEn;

@@ -13055,6 +13055,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 nuovi semafori agli svincoli svizzeri',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Oltre 120 nuovi semafori sono allo studio agli svincoli svizzeri Nel 2025 gli ingorghi hanno raggiunto 68.040 ore Le ore di ingorgo sono cresciute del 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.tassa-salute-ristorni-17-settembre.title': 'Tassa salute e ristorni: tavolo del 17 settembre a Berna',
+    'blog.article.tassa-salute-ristorni-17-settembre.excerpt': 'Il 17 settembre si discute di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, mettendo a rischio 120 milioni di franchi per i Comuni di frontiera.',
+    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo, simbolo della regione di frontiera ticinese',
 };
 
 export default blogMetaIt;

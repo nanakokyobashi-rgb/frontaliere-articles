@@ -20,6 +20,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T15:55:15.160Z",
       "lastFailureAt": "2026-10-12T16:03:14.293Z"
+    },
+    {
+      "articleId": "tassa-salute-ristorni-17-settembre",
+      "title": "Tassa salute e ristorni: tavolo del 17 settembre a Berna",
+      "fallbackImage": "/images/blog/tassa-salute-frontalieri-ticino-settembre.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T19:46:57.256Z",
+      "lastFailureAt": "2026-10-12T19:46:57.256Z"
     }
   ]
 }
