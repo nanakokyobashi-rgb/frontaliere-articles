@@ -8092,7 +8092,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Universitätsstudierende, die den Lugano-Campus entlanggehen, reale Szene',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Immobilienbewertungen: Abweichungen von bis zu 13%',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Bewertungen weichen im Durchschnitt um 11 bis 13% ab Nur 30-35% der Transaktionen verfügen über verifizierte Daten 3% von 50\'000 Franken entsprechen 1\'500 Franken In Genf der Zugang',
-    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Immobilienbewertungstreffen in der Schweiz mit modernem Haus und Fachmann, der Unterlagen prüft.',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

@@ -102067,10 +102067,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Valutazioni divergono in media dall'11 al 13% Solo il 30-35% delle transazioni ha dati verificati Il 3% su 50'000 franchi vale 1'500 franchi A Ginevra l'accesso",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/comprare-casa-ginevra-mutuo-ipotecario.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-valutazioni-immobiliari-trasparenza-casa.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Incontro di valutazione immobiliare in Svizzera con casa moderna e professionista che esamina documenti sul tavolo."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T11:08:59+00:00",
       "dateModified": "2026-10-12T11:08:59+00:00",

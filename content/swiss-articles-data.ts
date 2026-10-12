@@ -27001,7 +27001,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'valutazioni-immobiliari-trasparenza-casa',
     category: 'pratico',
     date: '2026-10-12T11:08:59.259Z',
-    image: '/images/blog/comprare-casa-ginevra-mutuo-ipotecario.webp',
+    image: '/images/blog/article-valutazioni-immobiliari-trasparenza-casa.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

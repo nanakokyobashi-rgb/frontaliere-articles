@@ -8092,7 +8092,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ust-formazione-svizzera-2035.imageAlt': 'University students walking on the Lugano campus, real-life scene',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Real estate valuations: differences of up to 13%',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Valuations differ on average from 11 to 13% Only 30-35% of transactions have verified data 3% of 50\'000 francs is worth 1\'500 francs In Geneva access',
-    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Swiss property appraisal meeting with a modern house and professional reviewing documents.',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

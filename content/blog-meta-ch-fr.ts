@@ -8092,7 +8092,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Des étudiants universitaires qui marchent sur le campus de Lugano, scène réelle',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Évaluations immobilières : écarts jusqu\'à 13%',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Les évaluations divergent en moyenne de 11 à 13% Seules 30-35% des transactions disposent de données vérifiées 3% de 50\'000 francs représentent 1\'500 francs À Genève, l\'accès',
-    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Réunion d\'évaluation immobilière en Suisse avec maison moderne et professionnel examinant des documents.',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;
