@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-como-pass-auto-rinnovo-annuale.webp",
+      "sha256": "87959c2cd0337607e8b958de7d91905769af843c2435cd196d3eb0fbda8d38a8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-como-pass-auto-rinnovo-annuale-480w.webp",
+      "sha256": "3606feffa17d2a44c387a1bac3d1e0645c36103a7fe7b85f7e94bf65143cc5b1"
+    }
+  ]
 }
