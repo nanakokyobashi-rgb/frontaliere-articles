@@ -1,5 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1944568/migros-delica-werner-nuovo-direttore-moritz": "migros-delica-nuovo-direttore-2027",
   "https://www.varesenoi.it/2026/08/18/leggi-notizia/argomenti/cronaca-20/articolo/cade-dal-ponte-della-ferrovia-a-besnate-in-gravi-condizioni-una-donna-di-68-anni.html": {
     "articleId": "besnate-ponte-ferrovia-incidente",
     "ts": "2026-08-18T11:37:53.323Z"
@@ -2492,6 +2491,11 @@
   "https://www.varesenews.it/2026/10/laggressione-simulata-le-telecamere-e-le-contraddizioni-perche-la-corte-dappello-ha-condannato-lagente-di-polizia-locale-di-busto-arsizio/2705752": {
     "articleId": "busto-arsizio-agente-condannato",
     "ts": "2026-10-12T22:40:47.932Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/gianmarco-pozzecco-via-dal-galatasaray-decisive-le-sconfitte-in-avvio-di-stagione-per-lex-poz-varesino/2706154": {
+    "articleId": "pozzecco-galatasaray-risoluzione-contratto",
+    "ts": "2026-10-12T22:55:33.171Z",
     "keyForm": 2
   }
 }

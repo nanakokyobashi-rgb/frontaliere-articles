@@ -44061,6 +44061,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'pozzecco-galatasaray-risoluzione-contratto',
+ category: 'novita',
+ date: '2026-10-12T22:55:32.897Z',
+ image: '/images/blog/article-pozzecco-galatasaray-risoluzione-contratto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

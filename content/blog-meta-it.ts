@@ -13067,6 +13067,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio: agente condannato per aggressione simulata',
     'blog.article.busto-arsizio-agente-condannato.excerpt': 'Due anni di reclusione per l\'agente della Polizia Locale I filmati escludono l\'aggressione denunciata Al Comune 5mila euro di provvisionale Oltre 9mila euro',
     'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco verso l\'addio al Galatasaray: tre ko fatali',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco e Galatasaray verso la separazione Tre ko consecutivi in avvio di campionato L\'ultimo ko è arrivato contro Bursaspor Accordo previsto fino',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Vista sul lago di Lugano al tramonto con montagne sullo sfondo',
 };
 
 export default blogMetaIt;

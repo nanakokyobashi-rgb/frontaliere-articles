@@ -13066,6 +13066,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio: officer convicted over staged assault',
     'blog.article.busto-arsizio-agente-condannato.excerpt': 'Two years\' imprisonment for the Local Police officer The footage rules out the reported assault 5mila euro in provisional damages for the municipality More than 9mila euro',
     'blog.article.busto-arsizio-agente-condannato.imageAlt': 'View of Lake Lugano with mountains in the background',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco heading for a Galatasaray exit: three fatal defeats',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco and Galatasaray heading for a parting of ways Three consecutive defeats at the start of the league season The latest defeat came against Bursaspor Deal expected to run until',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Lake Lugano sunset view with mountains background',
 };
 
 export default blogMetaEn;

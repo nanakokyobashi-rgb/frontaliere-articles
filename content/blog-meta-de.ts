@@ -13065,6 +13065,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.busto-arsizio-agente-condannato.title': 'Büste Arsizio: Agent wegen simulierter Aggression verurteilt',
     'blog.article.busto-arsizio-agente-condannato.excerpt': 'Zwei Jahre Haft für den örtlichen Polizeibeamten Die Filme schließen die der Gemeinde gemeldete Aggression aus 5.000 Euro provisorische Über 9.000 Euro',
     'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Blick auf den Luganer See mit den Bergen im Hintergrund',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco vor dem Abschied von Galatasaray: drei fatale Niederlagen',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco und Galatasaray vor der Trennung Drei Niederlagen in Folge zum Saisonauftakt Die letzte Niederlage kam gegen Bursaspor Vereinbarung vorgesehen bis',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Sonnenuntergang am Luganersee mit Bergkulisse',
 };
 
 export default blogMetaDe;
