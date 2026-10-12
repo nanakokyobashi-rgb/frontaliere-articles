@@ -13051,7 +13051,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Incidente stradale a Castronno con automobilista a terra e traffico bloccato',
     'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, pass auto residenti: rinnovo diventa annuale',
     'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Il pass dei residenti va rinnovato ogni anno.',
-    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Centro storico di Como con auto storiche sotto segnale ZTL e Alpi sullo sfondo',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 nuovi semafori agli svincoli svizzeri',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Oltre 120 nuovi semafori sono allo studio agli svincoli svizzeri Nel 2025 gli ingorghi hanno raggiunto 68.040 ore Le ore di ingorgo sono cresciute del 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustrazione generata per questo articolo',

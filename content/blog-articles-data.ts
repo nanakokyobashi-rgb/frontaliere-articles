@@ -44004,7 +44004,7 @@ const RAW_ARTICLES = [
  id: 'como-pass-auto-rinnovo-annuale',
  category: 'pratico',
  date: '2026-10-12T15:55:14.661Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-como-pass-auto-rinnovo-annuale.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
