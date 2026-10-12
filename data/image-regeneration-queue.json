@@ -10,6 +10,16 @@
       "failureCount": 2,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-11T20:48:05.530Z"
+    },
+    {
+      "articleId": "sportello-digitale-turgovia",
+      "title": "Turgovia: Sportello digitale per pratiche e documenti",
+      "fallbackImage": "/images/blog/article-servizi-imprese-turgovia-rav.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T00:30:28.743Z",
+      "lastFailureAt": "2026-10-12T00:30:28.743Z"
     }
   ]
 }

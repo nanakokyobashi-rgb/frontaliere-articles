@@ -8075,6 +8075,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.linea-yverdon-losanna-riaperta.title': 'Trafic Yverdon-Lausanne : trains à nouveau réguliers',
     'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Trafic normal entre Yverdon et Lausanne dès 05:40 Incendie criminel découvert vendredi vers 03:00 Circulation interrompue entre Cossonay-Penthalaz et Chavornay',
     'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.giorni-festivi-canton-zurigo-guida.title': 'Jours fériés du canton de Zurich : guide du calendrier et des règles',
+    'blog.article.giorni-festivi-canton-zurigo-guida.excerpt': 'Comment distinguer les jours fériés cantonaux des jours fériés fédéraux.',
+    'blog.article.giorni-festivi-canton-zurigo-guida.imageAlt': 'Bâtiment gouvernemental dans le canton de Zurich',
 };
 
 export default blogMetaChFr;

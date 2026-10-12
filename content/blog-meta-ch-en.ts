@@ -8075,6 +8075,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.linea-yverdon-losanna-riaperta.title': 'Yverdon-Lausanne traffic: trains running regularly again',
     'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Normal traffic between Yverdon and Lausanne from 05:40 Arson discovered on Friday at around 03:00 Traffic interrupted between Cossonay-Penthalaz and Chavornay',
     'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Illustration generated for this article',
+    'blog.article.giorni-festivi-canton-zurigo-guida.title': 'Public holidays in the Canton of Zurich: guide to the calendar and rules',
+    'blog.article.giorni-festivi-canton-zurigo-guida.excerpt': 'How to distinguish cantonal holidays from federal ones.',
+    'blog.article.giorni-festivi-canton-zurigo-guida.imageAlt': 'Government building in the Canton of Zurich',
 };
 
 export default blogMetaChEn;

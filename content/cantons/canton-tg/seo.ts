@@ -231,6 +231,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-servizi-imprese-turgovia-rav': {
+    title: 'Lavoro in Turgovia: aiuto alle imprese e permessi',
+    description: 'Tre RAV in Turgovia aiutano le imprese a trovare personale. Offerte gratuite su arbeit.swiss e consulenza su permessi, lavoro ridotto e tutela sul lavoro.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavoro, turgovia, aiuto, alle',
+    ogTitle: 'Turgovia: servizi RAV per imprese e permessi',
+    ogDescription: 'Amriswil, Frauenfeld e Kreuzlingen sono le tre sedi RAV per aiutare le imprese a trovare personale. La consulenza copre autorizzazioni, lavoro ridotto, maltempo, tutela sul lavoro, rumore, libera circolazione, procedure di notifica e lavoro nero.',
+    canonicalPath: '/articoli-turgovia/servizi-imprese-turgovia-rav/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavoro in Turgovia: aiuto alle imprese e permessi",
+      "description": "Tre RAV in Turgovia aiutano le imprese a trovare personale. Offerte gratuite su arbeit.swiss e consulenza su permessi, lavoro ridotto e tutela sul lavoro.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-servizi-imprese-turgovia-rav.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "RAV e servizi per i datori di lavoro nel Canton Turgovia"
+      },
+      "datePublished": "2026-10-12T00:12:21+00:00",
+      "dateModified": "2026-10-12T00:12:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/servizi-imprese-turgovia-rav/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sportello-digitale-turgovia': {
+    title: 'Turgovia: Sportello digitale per pratiche e documenti',
+    description: 'Lo Sportello digitale del Canton Turgovia raccoglie i servizi più usati, offre informazioni e video brevi e riunisce documenti e permessi in un\'area protetta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, turgovia, sportello, digitale, pratiche',
+    ogTitle: 'Turgovia, Sportello digitale per pratiche e documenti',
+    ogDescription: 'Il portale Digitaler Schalter raccoglie i servizi più usati per ordini e domande, offre informazioni sul servizio, brevi video sulle domande più importanti e un\'area protetta con estratti, permessi e altri documenti da consultare.',
+    canonicalPath: '/articoli-turgovia/sportello-digitale-turgovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Turgovia: Sportello digitale per pratiche e documenti",
+      "description": "Lo Sportello digitale del Canton Turgovia raccoglie i servizi più usati, offre informazioni e video brevi e riunisce documenti e permessi in un'area protetta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-servizi-imprese-turgovia-rav.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sportello digitale del Canton Turgovia per servizi, domande e documenti"
+      },
+      "datePublished": "2026-10-12T00:30:28+00:00",
+      "dateModified": "2026-10-12T00:30:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/sportello-digitale-turgovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

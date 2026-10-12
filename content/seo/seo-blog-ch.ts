@@ -101858,6 +101858,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-giorni-festivi-canton-zurigo-guida': {
+    title: 'Giorni festivi Cantone Zurigo: guida a calendario e regole',
+    description: 'Guida pratica sui giorni festivi nel Cantone di Zurigo: come consultare il calendario ufficiale, distinguere le festività federali e verificare le chiusure.',
+    keywords: 'frontalieri, ticino, svizzera, italia, giorni, festivi, cantone, zurigo',
+    ogTitle: 'Giorni festivi Cantone Zurigo: guida a calendario e regole',
+    ogDescription: 'Hai dubbi sulle festività nel Cantone di Zurigo? Scopri come leggere correttamente il calendario ufficiale, confrontare le date federali e verificare le chiusure di uffici e servizi.',
+    canonicalPath: '/articoli-svizzera/giorni-festivi-canton-zurigo-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giorni festivi Cantone Zurigo: guida a calendario e regole",
+      "description": "Guida pratica sui giorni festivi nel Cantone di Zurigo: come consultare il calendario ufficiale, distinguere le festività federali e verificare le chiusure.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-giorni-festivi-canton-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio governativo nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-12T00:26:51+00:00",
+      "dateModified": "2026-10-12T00:26:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/giorni-festivi-canton-zurigo-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -8075,6 +8075,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.linea-yverdon-losanna-riaperta.title': 'Zugverkehr Yverdon-Lausanne: Züge wieder regulär',
     'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Normaler Verkehr zwischen Yverdon und Lausanne ab 05:40 Brandstiftung am Freitag gegen 03:00 Uhr entdeckt Zugverkehr zwischen Cossonay-Penthalaz und Chavornay unterbrochen',
     'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.giorni-festivi-canton-zurigo-guida.title': 'Feiertage im Kanton Zürich: Leitfaden zu Kalender und Regeln',
+    'blog.article.giorni-festivi-canton-zurigo-guida.excerpt': 'Wie man kantonale Feiertage von eidgenössischen unterscheidet.',
+    'blog.article.giorni-festivi-canton-zurigo-guida.imageAlt': 'Regierungsgebäude im Kanton Zürich',
 };
 
 export default blogMetaChDe;

@@ -26943,6 +26943,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'giorni-festivi-canton-zurigo-guida',
+    category: 'pratico',
+    date: '2026-10-12T00:26:51.075Z',
+    image: '/images/blog/article-giorni-festivi-canton-zurigo-guida.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
