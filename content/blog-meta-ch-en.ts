@@ -8089,7 +8089,10 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Photo of a dog with collar in front of a Zurich municipal office',
     'blog.article.ust-formazione-svizzera-2035.title': 'University growth and school decline: UST 2026-2035',
     'blog.article.ust-formazione-svizzera-2035.excerpt': 'University students will grow by over 20% over the next nine years Primary schools: peak between 2027 and 2028, then -8% by 2035 Upper secondary: +10%',
-    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Illustration generated for this article',
+    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'University students walking on the Lugano campus, real-life scene',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Real estate valuations: differences of up to 13%',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Valuations differ on average from 11 to 13% Only 30-35% of transactions have verified data 3% of 50\'000 francs is worth 1\'500 francs In Geneva access',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;
