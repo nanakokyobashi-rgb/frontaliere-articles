@@ -13035,6 +13035,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.indennita-lavoro-ridotto.title': 'Caisse Unia : chômage, réduction de l\'horaire de travail et intempéries',
     'blog.article.indennita-lavoro-ridotto.excerpt': 'La Caisse de chômage Unia présente des informations sur les indemnités de chômage, la réduction de l\'horaire de travail, les intempéries et un calculateur.',
     'blog.article.indennita-lavoro-ridotto.imageAlt': 'Bureau avec ordinateur portable et calculateur dans un point d\'information au Tessin.',
+    'blog.article.incontro-parita-salariale-varese.title': 'Égalité salariale à Varese : rencontre sur le Décret 96/2026',
+    'blog.article.incontro-parita-salariale-varese.excerpt': 'Décret 96/2026 : plus d’attention portée à l’égalité et à la transparence Rencontre le 13 octobre à Villa Recalcati, Varese Table ronde et trois témoignages d’entreprises Quoi →',
+    'blog.article.incontro-parita-salariale-varese.imageAlt': 'Professionnels dans une salle de réunion à Lugano discutant de l\'égalité salariale et de la transparence de la rémunération',
 };
 
 export default blogMetaFr;

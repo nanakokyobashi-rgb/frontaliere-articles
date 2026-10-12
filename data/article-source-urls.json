@@ -1,5 +1,4 @@
 {
-  "https://www.rsi.ch/s/3992937": "salari-difficili-discussioni",
   "https://www.varesenoi.it/2026/08/17/leggi-notizia/argomenti/economia-13/articolo/come-va-leconomia-di-confine-con-il-canton-ticino-regge-ma-ci-sono-fragilita.html": "come-va-leconomia-di-confine-con-il-canton-ticino",
   "https://www.tio.ch/svizzera/economia/1944375/pernottamenti-ripresa-luglio-aumento-mercato": "pernottamenti-alberghieri-a-luglio",
   "https://www.varesenews.it/2026/08/a-saronno-fumo-e-odore-di-bruciato-al-supermercato-evacuati-clienti-e-personale/2658652": "saronno-supermercato-evacuati",
@@ -2452,6 +2451,11 @@
   "https://cassa-disoccupazione.unia.ch": {
     "articleId": "indennita-lavoro-ridotto",
     "ts": "2026-10-12T11:33:22.867Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/parita-salariale-a-varese-il-confronto-sulle-nuove-regole/2704996": {
+    "articleId": "incontro-parita-salariale-varese",
+    "ts": "2026-10-12T11:54:15.726Z",
     "keyForm": 2
   }
 }
