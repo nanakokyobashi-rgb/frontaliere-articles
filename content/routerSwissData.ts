@@ -2726,6 +2726,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'carburanti-dopo-record-settembre': { it: 'carburanti-dopo-record-settembre', en: 'fuel-prices-switzerland-after-september-records', de: 'treibstoffpreise-schweiz-nach-september', fr: 'prix-carburants-suisse-apres-records-septembre' },
  'svizzera-mirino-007-stranieri': { it: 'svizzera-mirino-007-stranieri', en: 'switzerland-target-foreign-spies', de: 'schweiz-im-visier-auslandischer-spione', fr: 'suisse-dans-le-viseur-des-espions-etrangers' },
  'benu-rete-santanna-sanita': { it: 'benu-rete-santanna-sanita', en: 'benu-santanna-network-ticino', de: 'benu-santanna-netzwerk-tessin', fr: 'benu-reseau-santanna-tessin' },
+ 'ia-pubblica-amministrazione-ticino': { it: 'ia-pubblica-amministrazione-ticino', en: 'ai-public-administration-ticino', de: 'ki-oeffentliche-verwaltung-tessin', fr: 'ia-administration-publique-tessin' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

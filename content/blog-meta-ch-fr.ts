@@ -8111,6 +8111,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.benu-rete-santanna-sanita.title': 'Swiss Medical Network et Phoenix Pharma : alliance au Tessin',
     'blog.article.benu-rete-santanna-sanita.excerpt': 'Swiss Medical Network alliée à Phoenix Pharma Switzerland Benu fera son entrée dans la Rete Sant\'Anna au Tessin Avec Viva, il sera possible de s\'adresser à Benu pour quatre services',
     'blog.article.benu-rete-santanna-sanita.imageAlt': 'Pharmacie Benu au Tessin intégrant le réseau Sant\'Anna de Swiss Medical Network',
+    'blog.article.ia-pubblica-amministrazione-ticino.title': 'IA dans l’AP tessinoise : innovation ou problèmes ?',
+    'blog.article.ia-pubblica-amministrazione-ticino.excerpt': 'Le Tessin allie recherche avancée et bureaucratie lente USI et SUPSI sont des références pour le Canton Les talents tessinois se tournent vers les écoles polytechniques fédérales L’IA',
+    'blog.article.ia-pubblica-amministrazione-ticino.imageAlt': 'Palais du gouvernement à Bellinzone avec éléments numériques symbolisant l\'IA dans l\'administration publique',
 };
 
 export default blogMetaChFr;
