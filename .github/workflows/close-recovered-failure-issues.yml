@@ -11,11 +11,11 @@ run-name: ${{ github.event_name == 'workflow_dispatch' && inputs.loop_clock != '
 # smetterebbe di significare qualcosa.
 #
 # Portato dal sito (manifest: `adapted` — solo la cadenza cambia). Lo script
-# `scripts/ci/close-recovered-failure-issues.mjs` è dichiarato `identical` nel
-# manifest — il che vuol dire «deve tornare identico», non «lo è adesso»: il
-# manifest tiene tre hash (sito, corpus, baseline) proprio perché i due lati
-# possono divergere, e `loop-drift-check.mjs` chiama quello stato `corpus-ahead`.
-# Prima di dare per scontata l'identità, misurala:
+# `scripts/ci/close-recovered-failure-issues.mjs` è dichiarato `adapted` nel
+# manifest: la logica è comune, ma il registro della prova di recovery segue il
+# publisher locale (`publish-api.yml` e il suo job `publish`). Il manifest tiene
+# gli hash separati proprio per rendere visibile questa divergenza intenzionale.
+# Prima di cambiare il modulo, verifica il contratto del publisher locale:
 #
 #   shasum -a 256 scripts/ci/close-recovered-failure-issues.mjs | cut -c1-16
 #

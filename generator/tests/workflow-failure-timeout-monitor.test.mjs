@@ -26,6 +26,20 @@ const FAILED_RUNS_SCANNER = readFileSync(
   'utf8',
 );
 
+/**
+ * A CLI child must not inherit the outer node:test worker protocol. Node then
+ * treats the child as a nested test worker and exits 0 without running the
+ * script, which would make these integration checks vacuous.
+ */
+function childEnv(extra = {}) {
+  const env = { ...process.env, ...extra };
+  for (const key of Object.keys(env)) {
+    if (key.startsWith('NODE_TEST_')) delete env[key];
+  }
+  delete env.NODE_OPTIONS;
+  return env;
+}
+
 function workflowStep(name) {
   const marker = `      - name: ${name}`;
   const start = WORKFLOW.indexOf(marker);
@@ -182,17 +196,16 @@ esac
   try {
     const result = spawnSync(process.execPath, [TIMEOUT_SCANNER_PATH, '--dry-run'], {
       encoding: 'utf8',
-      env: {
-        ...process.env,
+      env: childEnv({
         PATH: `${binDir}:${process.env.PATH}`,
         ARGS_LOG: argsLog,
         GH_REPO: 'o/r',
         TIMEOUT_SCAN_LOOKBACK_MINUTES: '40',
         TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
-      },
+      }),
     });
     assert.equal(result.status, 0, result.stderr);
-    assert.match(result.stdout, /1 cancelled \+ 0 failed run\(s\)/);
+    assert.match(result.stdout, /1 cancelled \+ 0 failed \+ 0 startup_failure run\(s\)/);
     assert.match(result.stdout, /\(dry-run\) would report "CI Failure: Translate pending articles"/);
 
     const historyListing = readFileSync(argsLog, 'utf8')
@@ -209,8 +222,83 @@ esac
     const [oldest] = created.split('..');
     const expectedHorizonMs = (35 * 24 * 60 + 40) * 60_000;
     const observedHorizonMs = now - Date.parse(oldest);
-    assert.ok(observedHorizonMs >= expectedHorizonMs - 1_000, `${observedHorizonMs}ms`);
+    // The scanner captures its own clock in the child process. Account for the
+    // parent→child startup and execution time, otherwise a correct horizon can
+    // appear short by the time spent in the fixture.
+    const childElapsedMs = Date.now() - now;
+    assert.ok(
+      observedHorizonMs >= expectedHorizonMs - childElapsedMs - 1_000,
+      `${observedHorizonMs}ms (child elapsed ${childElapsedMs}ms)`,
+    );
     assert.ok(observedHorizonMs < expectedHorizonMs + 60_000, `${observedHorizonMs}ms`);
+  } finally {
+    rmSync(binDir, { recursive: true, force: true });
+  }
+});
+
+test('startup_failure e failure senza job sono rilevati solo con una risposta jobs leggibile e vuota', () => {
+  const binDir = mkdtempSync(path.join(os.tmpdir(), 'timeout-startup-gh-'));
+  const ghPath = path.join(binDir, 'gh');
+  const argsLog = path.join(binDir, 'args.log');
+  const now = Date.now();
+  const startupRun = {
+    id: 111,
+    name: 'Workflow startup failure',
+    conclusion: 'startup_failure',
+    event: 'schedule',
+    head_branch: 'main',
+    created_at: new Date(now - 60_000).toISOString(),
+    updated_at: new Date(now - 30_000).toISOString(),
+    html_url: 'https://github.com/o/r/actions/runs/111',
+  };
+  const zeroJobRun = {
+    id: 222,
+    name: 'Workflow failed before jobs',
+    conclusion: 'failure',
+    event: 'schedule',
+    head_branch: 'main',
+    created_at: new Date(now - 60_000).toISOString(),
+    updated_at: new Date(now - 30_000).toISOString(),
+    html_url: 'https://github.com/o/r/actions/runs/222',
+  };
+  writeFileSync(ghPath, `#!/bin/sh
+printf '%s\n' "$2" >> "$ARGS_LOG"
+case "$2" in
+  *"status=success&event=schedule"*)
+    printf '%s' '{"workflow_runs":[]}' ;;
+  *"actions/runs?status=cancelled"*)
+    printf '%s' '{"workflow_runs":[]}' ;;
+  *"actions/runs?status=failure"*)
+    printf '%s' '${JSON.stringify({ workflow_runs: [zeroJobRun] })}' ;;
+  *"actions/runs?status=startup_failure"*)
+    printf '%s' '${JSON.stringify({ workflow_runs: [startupRun] })}' ;;
+  "repos/o/r/actions/runs/111/jobs?per_page=100"|"repos/o/r/actions/runs/222/jobs?per_page=100")
+    printf '%s' '{"total_count":0,"jobs":[]}' ;;
+  *)
+    printf '%s' '[]' ;;
+esac
+`);
+  chmodSync(ghPath, 0o755);
+
+  try {
+    const result = spawnSync(process.execPath, [TIMEOUT_SCANNER_PATH, '--dry-run'], {
+      encoding: 'utf8',
+      env: childEnv({
+        PATH: `${binDir}:${process.env.PATH}`,
+        ARGS_LOG: argsLog,
+        GH_REPO: 'o/r',
+        TIMEOUT_SCAN_LOOKBACK_MINUTES: '40',
+        TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
+      }),
+    });
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /0 cancelled \+ 1 failed \+ 1 startup_failure run\(s\)/);
+    assert.match(result.stdout, /would report "CI Failure: Workflow startup failure"/);
+    assert.match(result.stdout, /would report "CI Failure: Workflow failed before jobs"/);
+
+    const calls = readFileSync(argsLog, 'utf8');
+    assert.match(calls, /actions\/runs\/111\/jobs\?per_page=100/);
+    assert.match(calls, /actions\/runs\/222\/jobs\?per_page=100/);
   } finally {
     rmSync(binDir, { recursive: true, force: true });
   }
@@ -227,12 +315,11 @@ printf '%s' '[]'
   try {
     const result = spawnSync(process.execPath, [TIMEOUT_SCANNER_PATH, '--dry-run'], {
       encoding: 'utf8',
-      env: {
-        ...process.env,
+      env: childEnv({
         PATH: `${binDir}:${process.env.PATH}`,
         GH_REPO: 'o/r',
         TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: String(35 * 24 * 60),
-      },
+      }),
     });
     assert.equal(result.status, 1);
     assert.match(result.stderr, /impossibile leggere la history delle scansioni schedule riuscite/);
@@ -343,11 +430,10 @@ fi
       [path.join(ROOT, 'scripts', 'ci', 'scan-failed-runs.mjs'), '--dry-run', '--lookback-min', '40'],
       {
         encoding: 'utf8',
-        env: {
-          ...process.env,
+        env: childEnv({
           PATH: `${binDir}:${process.env.PATH}`,
           GITHUB_REPOSITORY: 'o/r',
-        },
+        }),
       },
     );
     assert.equal(result.status, 0, result.stderr);
