@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "sha256": "b41e31a0476af357126a0273eda238bc96c3638129455aa96a7bb28871da5572"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-frontalieri-disoccupazione-criterio-lavoro-480w.webp",
-      "sha256": "3a0fd3576f7d13274e71a4111a8c5fc53edff43166a697affda1cb49fa5a8c85"
-    }
-  ]
+  "items": []
 }
