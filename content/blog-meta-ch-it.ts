@@ -8075,6 +8075,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.linea-yverdon-losanna-riaperta.title': 'Traffico Yverdon-Losanna: treni di nuovo regolari',
     'blog.article.linea-yverdon-losanna-riaperta.excerpt': 'Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay',
     'blog.article.linea-yverdon-losanna-riaperta.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.giorni-festivi-canton-zurigo-guida.title': 'Giorni festivi Cantone Zurigo: guida a calendario e regole',
+    'blog.article.giorni-festivi-canton-zurigo-guida.excerpt': 'Come distinguere le festività cantonali da quelle federali.',
+    'blog.article.giorni-festivi-canton-zurigo-guida.imageAlt': 'Edificio governativo nel Cantone di Zurigo',
 };
 
 export default blogMetaChIt;

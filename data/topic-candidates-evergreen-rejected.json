@@ -797,82 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/tilo-s50-soppressi-tra-malpensa-t1-e-t2-dal-12-al-24-ottobre-444291": {
-      "section": "frontaliere",
-      "ts": 1791545133570
-    },
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955803/incendio-blocca-le-ffs-l-incendio-e-doloso": {
-      "section": "frontaliere",
-      "ts": 1791547083321
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1955252/il-taglio-di-posteggi-soffoca-l-economia-di-bellinzona": {
-      "section": "frontaliere",
-      "ts": 1791547113885
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/largo-flaiano-pronto-il-restyling-verde-affidati-i-lavori-per-rotatoria-e-ponti-ferroviari/2703274": {
-      "section": "frontaliere",
-      "ts": 1791548252943
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/varese-2040-il-centrosinistra-lancia-il-cantiere-di-idee-due-giorni-di-tavoli-diffusi-per-disegnare-il-programma/2703283": {
-      "section": "frontaliere",
-      "ts": 1791548279088
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/%22ia-potrebbe-manipolare-mercati-finanziari%2c-pericoli-sottovalutati%22/92191096": {
-      "section": "frontaliere",
-      "ts": 1791548300935
-    },
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955803/incendio-blocca-le-ffs-la-polizia-e-doloso": {
-      "section": "frontaliere",
-      "ts": 1791549443056
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/mastercard%2c-presto-pagamenti-possibili-anche-senza-internet/92192656": {
-      "section": "frontaliere",
-      "ts": 1791550096307
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1955518/c-e-lo-scambio-d-abiti-nella-corte-del-municipio": {
-      "section": "frontaliere",
-      "ts": 1791550207278
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1955815/procedure-ticino-collaborazione-protezione-svizzera": {
-      "section": "frontaliere",
-      "ts": 1791551085234
-    },
-    "svizzera::https://www.tio.ch/rubriche/ospite/1955751/essere-carlo-cda-consigli-lavoro": {
-      "section": "svizzera",
-      "ts": 1791560729050
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/sciopero-atm-le-chiusure-della-metro-e-le-fasce-di-garanzia/2702947": {
-      "section": "frontaliere",
-      "ts": 1791565331491
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/nel-weekend-del-25-e-26-ottobre-arriva-il-temuto-cambio-dellora-i-consigli-della-psicologa-per-affrontarlo/2703547": {
-      "section": "frontaliere",
-      "ts": 1791565381961
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/tragico-infortunio-sul-lavoro-a-filago-uomo-di-62-anni-travolto-a-morte-da-un-escavatore/2702917": {
-      "section": "frontaliere",
-      "ts": 1791568488721
-    },
-    "frontaliere::https://www.rsi.ch/s/4148438": {
-      "section": "frontaliere",
-      "ts": 1791569851476
-    },
-    "frontaliere::https://comozero.it/attualita/lautostrada-da-900-milioni-e-il-pedaggio-pesante-sulla-milano-meda-convocare-incontro-su-pedemontana": {
-      "section": "frontaliere",
-      "ts": 1791576665606
-    },
-    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
-      "section": "frontaliere",
-      "ts": 1791586133406
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/inaugurata-la-tangenziale-nord-tra-cesano-maderno-e-seveso-investimento-da-oltre-21-milioni/2703658": {
-      "section": "frontaliere",
-      "ts": 1791586789541
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/banca-cantonale-san-gallo%3a-%22noi-puntiamo-sulle-filiali-fisiche%22/92194580": {
-      "section": "frontaliere",
-      "ts": 1791590975744
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/marchesi-al-territorio-spaccatura-tra-economia-ed-ecologisti-444320": {
       "section": "frontaliere",
       "ts": 1791592618249
@@ -1044,6 +968,10 @@
     "svizzera::https://www.tio.ch/ticino/attualita/1956019/solari-quadri-e-huber-regina-e-re-del-tiro-al-san-gottardo": {
       "section": "svizzera",
       "ts": 1791717049929
+    },
+    "svizzera::https://www.tio.ch/svizzera/cronaca/1956064/manifestazione-berna-centinaia-manifestanti-svizzera": {
+      "section": "svizzera",
+      "ts": 1791764478452
     }
   }
 }
