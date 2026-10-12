@@ -8105,6 +8105,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.carburanti-dopo-record-settembre.title': 'Carburants en Suisse : l’essence et le diesel baissent',
     'blog.article.carburanti-dopo-record-settembre.excerpt': 'Selon le TCS, l’essence 95 baisse à 2,11 francs le litre, la 98 à 2,22 et le diesel à 2,40, après les records de septembre.',
     'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.svizzera-mirino-007-stranieri.title': 'La Suisse dans le viseur des 007 étrangers',
+    'blog.article.svizzera-mirino-007-stranieri.excerpt': 'John Kiriakou juge le renseignement suisse de premier ordre August Hanning a siégé dans des conseils à Lucerne Des sociétés privées opèrent en Suisse',
+    'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Vue réaliste du lac de Lugano et des Alpes, personnage discret avec carnet suggérant une activité de renseignement',
 };
 
 export default blogMetaChFr;

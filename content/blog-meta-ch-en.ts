@@ -8105,6 +8105,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.carburanti-dopo-record-settembre.title': 'Fuel prices in Switzerland: petrol and diesel fall',
     'blog.article.carburanti-dopo-record-settembre.excerpt': 'According to the TCS, 95 gasoline falls to 2.11 francs per liter, 98 to 2.22 and diesel to 2.40, after September’s records.',
     'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Illustration generated for this article',
+    'blog.article.svizzera-mirino-007-stranieri.title': 'Switzerland in the sights of foreign spies',
+    'blog.article.svizzera-mirino-007-stranieri.excerpt': 'John Kiriakou considers Swiss intelligence first-rate August Hanning has held positions on boards in Lucerne Private companies operate in Switzerland',
+    'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Realistic view of Lugano lake and Alps, discreet figure with notebook suggesting intelligence activity',
 };
 
 export default blogMetaChEn;

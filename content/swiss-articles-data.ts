@@ -27047,6 +27047,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzera-mirino-007-stranieri',
+    category: 'novita',
+    date: '2026-10-12T19:26:23.766Z',
+    image: '/images/blog/article-svizzera-mirino-007-stranieri.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

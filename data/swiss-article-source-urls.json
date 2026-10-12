@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/vaihkpwvhud1": {
-    "articleId": "sanzioni-onu-sesam-aggiornamento",
-    "ts": "2026-09-08T05:41:38.148Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948658/arresto-novartis-battuta-fallimento-multinazionale": {
     "articleId": "novartis-battuta-arresto-neuromuscolare",
     "ts": "2026-09-08T05:53:31.138Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/prezzo-di-benzina-e-diesel-in-calo%2c-dopo-i-record-di-settembre/92204582": {
     "articleId": "carburanti-dopo-record-settembre",
     "ts": "2026-10-12T16:48:09.156Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1956159/la-svizzera-nel-mirino-degli-007-stranieri": {
+    "articleId": "svizzera-mirino-007-stranieri",
+    "ts": "2026-10-12T19:26:24.176Z",
     "keyForm": 2
   }
 }

@@ -102248,6 +102248,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svizzera-mirino-007-stranieri': {
+    title: 'La Svizzera nel mirino degli 007 stranieri | Frontaliere Ticino',
+    description: 'John Kiriakou giudica di prim\'ordine l\'intelligence svizzera August Hanning ha ricoperto incarichi nei consigli a Lucerna In Svizzera operano società private',
+    keywords: 'frontalieri, ticino, svizzera, italia, mirino, stranieri, john, kiriakou',
+    ogTitle: 'La Svizzera nel mirino degli 007 stranieri',
+    ogDescription: 'John Kiriakou giudica di prim\'ordine l\'intelligence svizzera August Hanning ha ricoperto incarichi nei consigli a Lucerna In Svizzera operano società private',
+    canonicalPath: '/articoli-svizzera/svizzera-mirino-007-stranieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La Svizzera nel mirino degli 007 stranieri",
+      "description": "John Kiriakou giudica di prim'ordine l'intelligence svizzera August Hanning ha ricoperto incarichi nei consigli a Lucerna In Svizzera operano società private",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-svizzera-mirino-007-stranieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista realistica di Lugano con lago e Alpi, figura discreta con taccuino che suggerisce attività di intelligence"
+      },
+      "datePublished": "2026-10-12T19:26:23+00:00",
+      "dateModified": "2026-10-12T19:26:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-mirino-007-stranieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

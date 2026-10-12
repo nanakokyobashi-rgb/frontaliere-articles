@@ -8105,6 +8105,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.carburanti-dopo-record-settembre.title': 'Carburanti in Svizzera: benzina e diesel calano',
     'blog.article.carburanti-dopo-record-settembre.excerpt': 'Secondo il TCS, la benzina 95 scende a 2,11 franchi al litro, la 98 a 2,22 e il diesel a 2,40, dopo i record di settembre.',
     'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.svizzera-mirino-007-stranieri.title': 'La Svizzera nel mirino degli 007 stranieri',
+    'blog.article.svizzera-mirino-007-stranieri.excerpt': 'John Kiriakou giudica di prim\'ordine l\'intelligence svizzera August Hanning ha ricoperto incarichi nei consigli a Lucerna In Svizzera operano società private',
+    'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Vista realistica di Lugano con lago e Alpi, figura discreta con taccuino che suggerisce attività di intelligence',
 };
 
 export default blogMetaChIt;

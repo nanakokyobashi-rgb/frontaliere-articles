@@ -8105,6 +8105,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.carburanti-dopo-record-settembre.title': 'Kraftstoffe in der Schweiz: Benzin und Diesel sinken',
     'blog.article.carburanti-dopo-record-settembre.excerpt': 'Laut TCS sinkt Benzin 95 auf 2,11 Franken pro Liter, Benzin 98 auf 2,22 und Diesel auf 2,40, nach den Rekordpreisen im September.',
     'blog.article.carburanti-dopo-record-settembre.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.svizzera-mirino-007-stranieri.title': 'Die Schweiz im Visier ausländischer 007-Agenten',
+    'blog.article.svizzera-mirino-007-stranieri.excerpt': 'John Kiriakou hält den Schweizer Nachrichtendienst für erstklassig August Hanning hatte Verwaltungsratsmandate in Luzern In der Schweiz sind private Unternehmen tätig',
+    'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Realistische Ansicht von Lugano See und Alpen, diskrete Figur mit Notizbuch die auf Geheimdienstaktivität hinweist',
 };
 
 export default blogMetaChDe;
