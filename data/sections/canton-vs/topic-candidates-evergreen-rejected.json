@@ -2,10 +2,6 @@
   "keywords": [],
   "strikes": {},
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/812865/sabotageakt-feuer-legt-sbbstrecke-lahm": {
-      "section": "canton-vs",
-      "ts": 1791563544965
-    },
     "canton-vs::https://www.pomona.ch/story/811569/schweizer-krankenkassen-im-vergleich-sodalis-arbeitet-am-effizientesten": {
       "section": "canton-vs",
       "ts": 1791594672166
@@ -49,6 +45,14 @@
     "canton-vs::https://www.pomona.ch/story/813022/er-soll-die-stimmen-der-migrantischen-jugend-holen-bally-bagayoko-ist-mlenchons-banlieuejoker": {
       "section": "canton-vs",
       "ts": 1791678272933
+    },
+    "canton-vs::https://www.pomona.ch/story/812865/sabotageakt-feuer-legt-sbbstrecke-lahm": {
+      "section": "canton-vs",
+      "ts": 1791766234441
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
+      "section": "canton-vs",
+      "ts": 1791766235670
     }
   }
 }
