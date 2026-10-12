@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-bank-now-dipendenti-zurigo.webp",
-      "sha256": "11a9a7aee7ccac30e22c55db6bf4c5d6498e8fefdc209369132061b3280d304e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-bank-now-dipendenti-zurigo-480w.webp",
-      "sha256": "ba343223ab33526c97efc59b2cdfd7ed76d0e0c7ecee1c8a1b29baf8d65cf962"
-    }
-  ]
+  "items": []
 }
