@@ -68,9 +68,11 @@ function corpusTree({ credited = true, covers = {}, swiss = [], frontaliere = []
   // D22: the retire path reaches the corpus bootstrap before it can inspect
   // the image-credit surfaces. Keep the activation profile in this isolated
   // fixture so the test reaches its own assertions instead of failing on the
-  // committed input lookup.
+  // committed input lookup. The digest pairing helper additionally reads the
+  // canonical canton URL-slug table, so copy that data dependency as well.
   write(root, 'generator/data/canton-sections.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-sections.json'), 'utf8'));
   write(root, 'generator/data/localized-toponyms.json', fs.readFileSync(path.join(REPO, 'generator/data/localized-toponyms.json'), 'utf8'));
+  write(root, 'generator/data/canton-url-slugs.json', fs.readFileSync(path.join(REPO, 'generator/data/canton-url-slugs.json'), 'utf8'));
   const row = ({ id, cover = id }) => {
     const imageFields = id === RETIRED && retiredImageFields
       ? retiredImageFields
