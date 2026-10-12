@@ -102014,6 +102014,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ust-formazione-svizzera-2035': {
+    title: 'Crescita universitaria e calo scolastico: UST 2026-2035',
+    description: 'Gli universitari cresceranno di oltre il 20% nei prossimi nove anni Primarie: picco tra il 2027 e il 2028, poi -8% entro il 2035 Secondario II: +10%',
+    keywords: 'frontalieri, ticino, svizzera, italia, crescita, universitaria, calo, scolastico',
+    ogTitle: 'Crescita universitaria e calo scolastico: scenari UST 2026‑2035',
+    ogDescription: 'Gli universitari cresceranno di oltre il 20% nei prossimi nove anni Primarie: picco tra il 2027 e il 2028, poi -8% entro il 2035 Secondario II: +10%',
+    canonicalPath: '/articoli-svizzera/ust-formazione-svizzera-2035/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crescita universitaria e calo scolastico: UST 2026-2035",
+      "description": "Gli universitari cresceranno di oltre il 20% nei prossimi nove anni Primarie: picco tra il 2027 e il 2028, poi -8% entro il 2035 Secondario II: +10%",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/asb-banche-svizzera-crescita-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti universitari che camminano nel campus di Lugano, scena reale"
+      },
+      "datePublished": "2026-10-12T10:17:38+00:00",
+      "dateModified": "2026-10-12T10:17:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ust-formazione-svizzera-2035/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

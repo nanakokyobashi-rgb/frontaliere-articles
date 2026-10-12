@@ -8087,6 +8087,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.imposta-cani-zurigo-guida.title': 'Imposta sui cani a Zurigo: guida alla registrazione',
     'blog.article.imposta-cani-zurigo-guida.excerpt': 'Nel Cantone di Zurigo l\'imposta sui cani segue regole cantonali e comunali.',
     'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Foto di un cane con collare davanti a un ufficio comunale zurighese',
+    'blog.article.ust-formazione-svizzera-2035.title': 'Crescita universitaria e calo scolastico: UST 2026-2035',
+    'blog.article.ust-formazione-svizzera-2035.excerpt': 'Gli universitari cresceranno di oltre il 20% nei prossimi nove anni Primarie: picco tra il 2027 e il 2028, poi -8% entro il 2035 Secondario II: +10%',
+    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Studenti universitari che camminano nel campus di Lugano, scena reale',
 };
 
 export default blogMetaChIt;

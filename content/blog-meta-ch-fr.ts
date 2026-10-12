@@ -8087,6 +8087,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.imposta-cani-zurigo-guida.title': 'Taxe sur les chiens à Zurich : guide d\'enregistrement',
     'blog.article.imposta-cani-zurigo-guida.excerpt': 'Dans le canton de Zurich, l\'impôt sur les chiens suit les règles cantonales et communales.',
     'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Photo d\'un chien avec collier devant un bureau municipal zurichois',
+    'blog.article.ust-formazione-svizzera-2035.title': 'Croissance universitaire et baisse scolaire : UST 2026-2035',
+    'blog.article.ust-formazione-svizzera-2035.excerpt': 'Les effectifs universitaires augmenteront de plus de 20 % au cours des neuf prochaines années École primaire : pic entre 2027 et 2028, puis -8 % d’ici 2035 Secondaire II : +10 %',
+    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Des étudiants universitaires qui marchent sur le campus de Lugano, scène réelle',
 };
 
 export default blogMetaChFr;

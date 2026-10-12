@@ -20,6 +20,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T01:35:59.601Z",
       "lastFailureAt": "2026-10-12T02:36:17.628Z"
+    },
+    {
+      "articleId": "ust-formazione-svizzera-2035",
+      "title": "Crescita universitaria e calo scolastico: UST 2026-2035",
+      "fallbackImage": "/images/blog/asb-banche-svizzera-crescita-2026.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T10:17:39.068Z",
+      "lastFailureAt": "2026-10-12T10:17:39.068Z"
     }
   ]
 }
