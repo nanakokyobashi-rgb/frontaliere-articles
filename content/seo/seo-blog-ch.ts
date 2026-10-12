@@ -102170,6 +102170,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026': {
+    title: 'Camion pesanti: uno su quattro è elettrico nel 2026',
+    description: '28\'431 veicoli commerciali immatricolati nei primi nove mesi del 2026 847 camion elettrici: quota del 27,4% oltre 16 tonnellate Nel segmento 3,5-16 tonnellate',
+    keywords: 'frontalieri, ticino, svizzera, italia, camion, pesanti, quattro, elettrico',
+    ogTitle: 'Camion pesanti: uno su quattro è elettrico nel 2026',
+    ogDescription: '28\'431 veicoli commerciali immatricolati nei primi nove mesi del 2026 847 camion elettrici: quota del 27,4% oltre 16 tonnellate Nel segmento 3,5-16 tonnellate',
+    canonicalPath: '/articoli-svizzera/camion-pesanti-uno-su-quattro-e-elettrico-nel-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Camion pesanti: uno su quattro è elettrico nel 2026",
+      "description": "28'431 veicoli commerciali immatricolati nei primi nove mesi del 2026 847 camion elettrici: quota del 27,4% oltre 16 tonnellate Nel segmento 3,5-16 tonnellate",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Camion pesanti: uno su quattro è elettrico nel 2026"
+      },
+      "datePublished": "2026-10-12T14:36:01+00:00",
+      "dateModified": "2026-10-12T14:36:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/camion-pesanti-uno-su-quattro-e-elettrico-nel-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

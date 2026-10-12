@@ -8099,6 +8099,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.piogge-siccita-rischio-incendi.title': 'Sécheresse en Suisse : la pluie ne suffit pas',
     'blog.article.piogge-siccita-rischio-incendi.excerpt': 'Les pluies récentes n\'ont atténué la sécheresse que temporairement Au cours des 30 derniers jours les précipitations ont été inférieures à 50% Le Rhin entre le lac de Constance',
     'blog.article.piogge-siccita-rischio-incendi.imageAlt': 'Lac suisse aux niveaux d\'eau très bas pendant une période de sécheresse',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.title': 'Poids lourds : un sur quatre est électrique en 2026',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.excerpt': '28\'431 véhicules utilitaires immatriculés au cours des neuf premiers mois de 2026 847 camions électriques : part de 27,4% au-delà de 16 tonnes Dans le segment de 3,5-16 tonnes',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Image éditoriale relative à: Camion pesanti: uno su quattro è elettrico nel 2026',
 };
 
 export default blogMetaChFr;

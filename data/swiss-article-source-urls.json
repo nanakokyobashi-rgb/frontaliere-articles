@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948418/fecondazione-in-vitro-non-rimborsabile-e-un-ingiustizia": {
-    "articleId": "fiv-costi-assicurazione-svizzera",
-    "ts": "2026-09-08T05:18:16.295Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948606/deposito-scorie-rosti-compensazioni-sito": {
     "articleId": "rosti-deposito-scorie-compensazioni",
     "ts": "2026-09-08T05:29:01.240Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/piogge-hanno-attenuato-siccit%c3%a0-solo-temporaneamente/92199258": {
     "articleId": "piogge-siccita-rischio-incendi",
     "ts": "2026-10-12T12:29:08.702Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/nuovi-camion-pesanti%2c-uno-su-quattro-%c3%a8-elettrico/92203460": {
+    "articleId": "camion-pesanti-uno-su-quattro-e-elettrico-nel-2026",
+    "ts": "2026-10-12T14:36:01.459Z",
     "keyForm": 2
   }
 }

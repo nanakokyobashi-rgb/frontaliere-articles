@@ -8099,6 +8099,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.piogge-siccita-rischio-incendi.title': 'Dürre in der Schweiz: Der Regen reicht nicht aus',
     'blog.article.piogge-siccita-rischio-incendi.excerpt': 'Die jüngsten Regenfälle haben die Dürre nur vorübergehend abgeschwächt In den letzten 30 Tagen lagen die Niederschläge unter 50% Der Rhein zwischen dem Bodensee',
     'blog.article.piogge-siccita-rischio-incendi.imageAlt': 'Schweizer See mit sehr niedrigem Wasserstand während einer Dürreperiode',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.title': 'Schwere Lastwagen: 2026 ist jeder vierte elektrisch',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.excerpt': '28\'431 in den ersten neun Monaten des Jahres 2026 zugelassene Nutzfahrzeuge 847 Elektro-Lastwagen: Anteil von 27,4% bei über 16 Tonnen Im Segment 3,5-16 Tonnen',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Redaktionelles Bild zu: Camion pesanti: uno su quattro è elettrico nel 2026',
 };
 
 export default blogMetaChDe;

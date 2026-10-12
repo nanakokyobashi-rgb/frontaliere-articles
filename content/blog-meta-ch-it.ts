@@ -8099,6 +8099,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.piogge-siccita-rischio-incendi.title': 'Siccità in Svizzera: la pioggia non basta',
     'blog.article.piogge-siccita-rischio-incendi.excerpt': 'Le piogge recenti hanno attenuato solo temporaneamente la siccità Negli ultimi 30 giorni le precipitazioni sono state sotto il 50% Il Reno tra Lago di Costanza',
     'blog.article.piogge-siccita-rischio-incendi.imageAlt': 'Lago svizzero con livelli d\'acqua bassi durante una fase di siccità',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.title': 'Camion pesanti: uno su quattro è elettrico nel 2026',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.excerpt': '28\'431 veicoli commerciali immatricolati nei primi nove mesi del 2026 847 camion elettrici: quota del 27,4% oltre 16 tonnellate Nel segmento 3,5-16 tonnellate',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Immagine editoriale relativa a: Camion pesanti: uno su quattro è elettrico nel 2026',
 };
 
 export default blogMetaChIt;

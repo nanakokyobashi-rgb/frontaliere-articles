@@ -8099,6 +8099,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.piogge-siccita-rischio-incendi.title': 'Drought in Switzerland: rain is not enough',
     'blog.article.piogge-siccita-rischio-incendi.excerpt': 'Recent rains have only temporarily alleviated the drought In the last 30 days, precipitation has been below 50% The Rhine between Lake Constance',
     'blog.article.piogge-siccita-rischio-incendi.imageAlt': 'Swiss lake with low water levels during a period of drought',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.title': 'Heavy trucks: one in four will be electric in 2026',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.excerpt': '28\'431 commercial vehicles registered in the first nine months of 2026 847 electric trucks: 27,4% share over 16 tonnes In the 3,5-16-tonne segment',
+    'blog.article.camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.imageAlt': 'Editorial image related to: Camion pesanti: uno su quattro è elettrico nel 2026',
 };
 
 export default blogMetaChEn;
