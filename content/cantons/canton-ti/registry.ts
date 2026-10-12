@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-disoccupazione-criterio-lavoro',
+ category: 'novita',
+ date: '2026-10-12T23:14:18.965Z',
+ image: '/images/blog/apertura-conto-svizzera-frontalieri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

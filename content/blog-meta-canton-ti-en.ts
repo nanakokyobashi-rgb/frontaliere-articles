@@ -21,6 +21,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.title': 'New outpatient facilities inaugurated in San Giovanni',
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.excerpt': 'New spaces inaugurated today at Ospedale San Giovanni Poliambulatorio Turrita and Dermatology at the Bellinzona site Spaces designed for patients',
     'blog.article.nuovi-spazi-ambulatoriali-bellinzona.imageAlt': 'New outpatient spaces for Poliambulatorio Turrita and Dermatology clinic at San Giovanni, Bellinzona.',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.title': 'Cross-Border Workers: EU Unemployment, Country-of-Work Rule',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.excerpt': 'The EU has approved new rules on unemployment among cross-border workers The future criterion would be the state where one works For Switzerland, entry is not',
+    'blog.article.frontalieri-disoccupazione-criterio-lavoro.imageAlt': 'Cross-border commuter at Mendrisio station with Swiss Alps background',
 };
 
 export default blogMetaCantonTiEn;

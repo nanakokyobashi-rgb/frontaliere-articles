@@ -231,6 +231,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-disoccupazione-criterio-lavoro': {
+    title: 'Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro',
+    description: 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
+    keywords: 'frontalieri, ticino, svizzera, italia, disoccupazione, cambia, regole, criterio',
+    ogTitle: 'Frontalieri e disoccupazione: UE sposta criterio allo Stato di lavoro',
+    ogDescription: 'L\'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l\'entrata non è',
+    canonicalPath: '/articoli-ticino/frontalieri-disoccupazione-criterio-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri e disoccupazione: UE cambia regole, criterio Stato lavoro",
+      "description": "L'UE ha approvato nuove regole sulla disoccupazione dei frontalieri Il criterio futuro sarebbe lo Stato in cui si lavora Per la Svizzera l'entrata non è",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apertura-conto-svizzera-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pendolare frontaliero alla stazione di Mendrisio con sfondo delle Alpi svizzere"
+      },
+      "datePublished": "2026-10-12T23:14:18+00:00",
+      "dateModified": "2026-10-12T23:14:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/frontalieri-disoccupazione-criterio-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
