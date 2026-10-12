@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-varese-oltrepo-cronaca-sportiva.webp",
-      "sha256": "f6b727bcc57a6d312f6ddf9d23074aeb2b32f92fa5d96efa08599d5f37013b7b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-varese-oltrepo-cronaca-sportiva-480w.webp",
-      "sha256": "82ffad90e3c3b2f8b53bee1ba00e123b2124f642603fbba4ae4eb6860431bfbe"
-    }
-  ]
+  "items": []
 }
