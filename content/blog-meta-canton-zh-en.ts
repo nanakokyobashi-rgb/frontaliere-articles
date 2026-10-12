@@ -27,6 +27,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ: up to 300 problems a day at headquarters',
     'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'At the VBZ control center, staff deal with up to 300 problems a day related to trams and buses.',
     'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Illustration generated for this article',
+    'blog.article.bank-now-dipendenti-zurigo.title': 'Bank-now: 300 employees move to Zurich',
+    'blog.article.bank-now-dipendenti-zurigo.excerpt': 'Bank-now leaves Horgen: 300 employees move to Zurich.',
+    'blog.article.bank-now-dipendenti-zurigo.imageAlt': 'Office buildings in Zurich\'s financial district',
 };
 
 export default blogMetaCantonZhEn;

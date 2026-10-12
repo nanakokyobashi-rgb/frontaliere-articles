@@ -27,6 +27,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ: bis zu 300 Probleme pro Tag in der Leitstelle',
     'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'In der VBZ-Leitstelle bewältigt das Personal bis zu 300 Probleme pro Tag im Zusammenhang mit Trams und Bussen.',
     'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.bank-now-dipendenti-zurigo.title': 'Bank-now: 300 Mitarbeiter wechseln nach Zürich',
+    'blog.article.bank-now-dipendenti-zurigo.excerpt': 'Bank-now verlässt Horgen: 300 Mitarbeiter wechseln nach Zürich.',
+    'blog.article.bank-now-dipendenti-zurigo.imageAlt': 'Bürogebäude im Finanzviertel von Zürich',
 };
 
 export default blogMetaCantonZhDe;
