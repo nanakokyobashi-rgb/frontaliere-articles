@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-deficit-comune-preventivo-2027.webp",
-      "sha256": "e9e163a105646e35da10b99596f4ba03615afff8edb834616ac8936925176f72"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-deficit-comune-preventivo-2027-480w.webp",
-      "sha256": "a0d36d8488d7c963fff141fa3d4dd285f6f1edba21e8388e4b378abd0b7798ae"
-    }
-  ]
+  "items": []
 }
