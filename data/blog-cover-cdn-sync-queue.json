@@ -1,4 +1,29 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-crisi-resilienza-zurigo.webp",
+      "sha256": "99ccaa04a47925d5ed2ecec04cf717da1916125e80f74aec4e19d5db5223eb26"
+    },
+    {
+      "path": "public/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
+      "sha256": "9200fca3da0bdf6d61795b6be3bd27af2c4ed249e5d6d89634ae8ed1aad935bb"
+    },
+    {
+      "path": "public/images/blog/article-ust-formazione-svizzera-2035.webp",
+      "sha256": "0bc8ff3f48227c8f78876890f7c451845822174a49cf0ec2a3496228c19cf11b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-crisi-resilienza-zurigo-480w.webp",
+      "sha256": "f444780e3cd2601682d76c6b69daf17965a6bd742b41645da59a94655eb8322f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lavori-autolaghi-ottobre-2026-480w.webp",
+      "sha256": "038da049126d0a566ac147947d2a15dad41b5dc19c9d97799f4bf34974447536"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ust-formazione-svizzera-2035-480w.webp",
+      "sha256": "da47e5465da48177462d0264fbb83d0a22058112f94241fc74777216102b96f7"
+    }
+  ]
 }
