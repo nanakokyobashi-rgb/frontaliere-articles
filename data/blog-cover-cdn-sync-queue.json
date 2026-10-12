@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-esercitazione-soccorso-sasso.webp",
+      "sha256": "ac30f6069e14353642d9aded3ae52e596d3ddb6cd6df80dc5bb86da7c44917a7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-esercitazione-soccorso-sasso-480w.webp",
+      "sha256": "5289ac3a6756ec203a1c6fccd49be969fb6ca0aa951eea6a9c290fe79bf06615"
+    }
+  ]
 }
