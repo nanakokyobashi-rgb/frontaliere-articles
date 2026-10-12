@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lastminute-nuovo-finanze.webp",
+      "sha256": "cdd0570325bf0c92d96eddbc390e35ef232ebe2c5b1d31884b329880d018d4fe"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lastminute-nuovo-finanze-480w.webp",
+      "sha256": "b2a1dec59c553c7d38bd2481d962a506be926399fa5ce385a4ee1ece87e62312"
+    }
+  ]
 }
