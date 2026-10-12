@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lite-stradale-castronno-traffico.webp",
+      "sha256": "6277a9fc1f4a4ea5a05c99a437b4fc7b9bd3b6b70d64d0cd953274933f99a617"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lite-stradale-castronno-traffico-480w.webp",
+      "sha256": "f9683baf5baf5c4085bb1a1432eac4deedd3c25dea8ead3a80ca6f35059097e7"
+    }
+  ]
 }
