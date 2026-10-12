@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-argovia-cani-divieto-respinto.webp",
+      "sha256": "a9d7ec0f073039b352fc9b10c91a7e6fd93c94c0a171b2bb8445d816095c1e99"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-argovia-cani-divieto-respinto-480w.webp",
+      "sha256": "28aa19af0e15ed7c608a91fcd7983663ffd78a4e006f7f84245f17550ad2cd72"
+    }
+  ]
 }
