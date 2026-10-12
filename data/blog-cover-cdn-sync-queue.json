@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-regole-orari-negozi-zurigo.webp",
+      "sha256": "b9008ee905ead95704d13dcb45a9dd3dcdfa8e5ded830fd0f333a4ebb30e9988"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-regole-orari-negozi-zurigo-480w.webp",
+      "sha256": "306b7b1a5ef9f9dbb652ecd57226988ae7d7b53837d49b8c7e7842c65629a8e2"
+    }
+  ]
 }
