@@ -12,24 +12,14 @@
       "lastFailureAt": "2026-10-11T20:48:05.530Z"
     },
     {
-      "articleId": "sportello-digitale-turgovia",
-      "title": "Turgovia: Sportello digitale per pratiche e documenti",
-      "fallbackImage": "/images/blog/article-servizi-imprese-turgovia-rav.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T00:30:28.743Z",
-      "lastFailureAt": "2026-10-12T00:30:28.743Z"
-    },
-    {
       "articleId": "crisi-resilienza-zurigo",
       "title": "Zurigo prepara i residenti alle crisi: 9 litri d'acqua",
       "fallbackImage": "/images/blog/article-giorni-festivi-canton-zurigo-guida.webp",
       "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-12T01:35:59.601Z",
-      "lastFailureAt": "2026-10-12T01:35:59.601Z"
+      "lastFailureAt": "2026-10-12T02:36:17.628Z"
     }
   ]
 }

@@ -26,7 +26,7 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'RAV and employer services in the canton of Thurgau',
     'blog.article.sportello-digitale-turgovia.title': 'Thurgau: Digital portal for procedures and documents',
     'blog.article.sportello-digitale-turgovia.excerpt': 'The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.',
-    'blog.article.sportello-digitale-turgovia.imageAlt': 'Digital counter in Thurgau for services, applications and documents',
+    'blog.article.sportello-digitale-turgovia.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaCantonTgEn;

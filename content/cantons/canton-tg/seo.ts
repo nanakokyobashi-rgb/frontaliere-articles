@@ -289,10 +289,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-servizi-imprese-turgovia-rav.webp`,
+        "url": `${BASE_URL}/images/blog/article-sportello-digitale-turgovia.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Sportello digitale del Canton Turgovia per servizi, domande e documenti"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T00:30:28+00:00",
       "dateModified": "2026-10-12T00:30:28+00:00",

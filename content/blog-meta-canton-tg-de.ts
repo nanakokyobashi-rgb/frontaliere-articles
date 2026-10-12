@@ -26,7 +26,7 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.servizi-imprese-turgovia-rav.imageAlt': 'RAV und Arbeitgeberdienste im Kanton Thurgau',
     'blog.article.sportello-digitale-turgovia.title': 'Thurgau: Digitaler Schalter für Anliegen und Dokumente',
     'blog.article.sportello-digitale-turgovia.excerpt': 'Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.',
-    'blog.article.sportello-digitale-turgovia.imageAlt': 'Digitaler Schalter im Thurgau für Dienstleistungen, Gesuche und Dokumente',
+    'blog.article.sportello-digitale-turgovia.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaCantonTgDe;
