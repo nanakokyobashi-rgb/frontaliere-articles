@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-orari-negozi-zurigo-guida.webp",
+      "sha256": "c2c2b8ceb4e0915ab61eb3817f175d105f7a64dee012a389dd531e6ce5a02eef"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-orari-negozi-zurigo-guida-480w.webp",
+      "sha256": "6d3af7368d7843efca1f5832884c2d4a13484b870f44abdd80c648d241b6be3f"
+    }
+  ]
 }
