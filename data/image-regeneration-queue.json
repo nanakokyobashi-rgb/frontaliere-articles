@@ -10,6 +10,16 @@
       "failureCount": 4,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-12T10:51:24.379Z"
+    },
+    {
+      "articleId": "como-truffa-30mila-euro",
+      "title": "Como, truffa online da 30mila euro: polizia recupera tutto",
+      "fallbackImage": "/images/blog/article-varese-oltre-400mila-euro-sottratti-da-due-badanti.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T13:20:27.000Z",
+      "lastFailureAt": "2026-10-12T13:20:27.000Z"
     }
   ]
 }

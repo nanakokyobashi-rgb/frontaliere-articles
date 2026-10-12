@@ -106230,6 +106230,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-como-truffa-30mila-euro': {
+    title: 'Como, truffa online da 30mila euro: polizia recupera tutto',
+    description: 'A Como sottratti 30mila euro con lo spoofing Vittima un\'impiegata di una fondazione Bonifico istantaneo verso Poste Italiane Somma recuperata e restituita',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, truffa, online, 30mila',
+    ogTitle: 'Como, truffa online da 30mila euro: polizia recupera tutto',
+    ogDescription: 'A Como sottratti 30mila euro con lo spoofing Vittima un\'impiegata di una fondazione Bonifico istantaneo verso Poste Italiane Somma recuperata e restituita',
+    canonicalPath: '/articoli-frontaliere/como-truffa-30mila-euro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, truffa online da 30mila euro: polizia recupera tutto",
+      "description": "A Como sottratti 30mila euro con lo spoofing Vittima un'impiegata di una fondazione Bonifico istantaneo verso Poste Italiane Somma recuperata e restituita",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-varese-oltre-400mila-euro-sottratti-da-due-badanti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con le montagne sullo sfondo"
+      },
+      "datePublished": "2026-10-12T13:20:26+00:00",
+      "dateModified": "2026-10-12T13:20:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-truffa-30mila-euro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
