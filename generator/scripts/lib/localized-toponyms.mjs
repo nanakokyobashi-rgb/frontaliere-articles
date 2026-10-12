@@ -590,8 +590,8 @@ function digestEventStableKey(parsed, event) {
 /**
  * Pair source and localized digest records by their rendered stable identity,
  * never by array position. A missing identity or a different multiplicity is
- * structural ambiguity and fails closed; a duplicate identity with matching
- * multiplicity is isolated so the unambiguous records can still be repaired.
+ * structural ambiguity and fails closed. A duplicate identity has no rendered
+ * discriminator, so repairing only the other records could hide a mismatch.
  */
 export function pairEventsByStableKey(source, target) {
   if (!source || !target || !Array.isArray(source.events) || !Array.isArray(target.events)) return null;
@@ -616,9 +616,9 @@ export function pairEventsByStableKey(source, target) {
   for (const [key, sourceEvents] of sourceByKey) {
     const targetEvents = targetByKey.get(key);
     if (!targetEvents || targetEvents.length !== sourceEvents.length) return null;
-    // There is no rendered discriminator for these records. Do not guess by
-    // position, but do not discard unrelated records from the whole digest.
-    if (sourceEvents.length !== 1) continue;
+    // There is no rendered discriminator for duplicate records. Do not let a
+    // partial repair hide a localized-toponym mismatch in one of them.
+    if (sourceEvents.length !== 1) return null;
     pairs.push({ key, sourceEvent: sourceEvents[0], targetEvent: targetEvents[0] });
   }
   return pairs;

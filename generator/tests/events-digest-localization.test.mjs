@@ -142,7 +142,7 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.equal(pairs?.length, 1);
   });
 
-  it('isolates duplicate rendered event keys and still repairs unique records', () => {
+  it('fails closed when rendered event keys are duplicated', () => {
     const original = {
       id: 'eventi-weekend-ticino',
       content: {
@@ -172,9 +172,12 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     const target = parseEventsDigestBody2Safe(original.content.en.body2);
     const pairs = pairEventsByStableKey(source, target);
 
-    assert.equal(pairs?.length, 1);
+    assert.equal(pairs, null);
     const repaired = repairEventsDigestLocalizedToponyms(original);
-    assert.match(repaired.content.en.body2, /Sunday.*Event in Zurich/);
+    assert.equal(repaired.content.en.body2, original.content.en.body2);
+    assert.ok(findArticleLocalizedToponymMismatches(repaired).some(({ locale, code, type }) => (
+      locale === 'en' && code === 'BODY2' && type === 'structure'
+    )));
   });
 
   it('fails closed for an unlinked heading containing ambiguous toponyms', () => {
