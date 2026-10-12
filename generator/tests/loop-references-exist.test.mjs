@@ -300,6 +300,15 @@ const DECLARED_ABSENT = {
       'interroga solo `WORKFLOW_FILE = \'publish-api.yml\'`, e il legame con quel file e\' ' +
       'asserito da generator/tests/unwedge-pages-deploy-queue.test.mjs.',
   },
+  'scripts/ci/close-recovered-failure-issues.mjs :: deploy-publish.yml': {
+    kind: 'site-only',
+    reason:
+      'Il blocco `RECOVERY_REQUIRED_JOBS` di close-recovered-failure-issues.mjs viene consultato ' +
+      'da `hasRequiredRecoveryJobs` e `dropUnprovenRecoveryRuns` solo per il workflow name ' +
+      '`Publish to GitHub Pages (deploy + validate)`, che non esiste nei workflow del corpus: qui ' +
+      'il publisher e\' `publish-api.yml`. La citazione descrive il wrapper del sito e il file ' +
+      'citante e\' `identical`; nessun percorso runtime locale dipende da `deploy-publish.yml`.',
+  },
   '.github/workflows/housekeeping-jobs.yml :: .github/workflows/housekeeping-jobs-logic.yml': {
     kind: 'site-only',
     reason:
