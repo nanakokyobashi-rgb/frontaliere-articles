@@ -419,6 +419,27 @@ const EVENT_RECORD_SCHEDULE_PATTERN = /^(?:\d{1,2}\.?(?:\s+)\p{L}{3,}|(?:lunedi|
 const EVENT_RECORD_PATTERN = /^- \*\*([^*\r\n]+)\*\* — /u;
 const DIGEST_HEADING_PATTERN = /^(#{2,3})\s+\S/u;
 const DIGEST_LINK_HEADING_PATTERN = /^###\s+\[[^\]\r\n]+\]\([^)]+\)\s*$/u;
+const DIGEST_LINK_HEADING_CAPTURE_PATTERN = /^###\s+\[[^\]\r\n]+\]\(([^)\r\n]+)\)\s*$/u;
+
+const DIGEST_MONTH_NAME_TO_INDEX = new Map([
+  ['gennaio', 1], ['febbraio', 2], ['marzo', 3], ['aprile', 4], ['maggio', 5], ['giugno', 6],
+  ['luglio', 7], ['agosto', 8], ['settembre', 9], ['ottobre', 10], ['novembre', 11], ['dicembre', 12],
+  ['january', 1], ['february', 2], ['march', 3], ['april', 4], ['may', 5], ['june', 6],
+  ['july', 7], ['august', 8], ['september', 9], ['october', 10], ['november', 11], ['december', 12],
+  ['januar', 1], ['februar', 2], ['marz', 3], ['mai', 5], ['juni', 6], ['juli', 7],
+  ['oktober', 10], ['dezember', 12],
+  ['janvier', 1], ['fevrier', 2], ['avril', 4], ['juin', 6], ['juillet', 7], ['aout', 8],
+  ['octobre', 10], ['novembre', 11], ['decembre', 12],
+]);
+const DIGEST_WEEKDAY_NAME_TO_INDEX = new Map([
+  ['lunedi', 1], ['monday', 1], ['montag', 1], ['lundi', 1],
+  ['martedi', 2], ['tuesday', 2], ['dienstag', 2], ['mardi', 2],
+  ['mercoledi', 3], ['wednesday', 3], ['mittwoch', 3], ['mercredi', 3],
+  ['giovedi', 4], ['thursday', 4], ['donnerstag', 4], ['jeudi', 4],
+  ['venerdi', 5], ['friday', 5], ['freitag', 5], ['vendredi', 5],
+  ['sabato', 6], ['saturday', 6], ['samstag', 6], ['samedi', 6],
+  ['domenica', 7], ['sunday', 7], ['sonntag', 7], ['dimanche', 7],
+]);
 
 function eventRecordMatch(line) {
   const match = EVENT_RECORD_PATTERN.exec(line);
@@ -440,6 +461,122 @@ function isStructuralDigestHeading(lines, lineIndex, headingMatch) {
   if (headingMatch[1].length === 2) return /^###\s+\S/u.test(child);
   if (DIGEST_LINK_HEADING_PATTERN.test(lines[lineIndex])) return Boolean(eventRecordMatch(child));
   return DIGEST_LINK_HEADING_PATTERN.test(child);
+}
+
+function normalizeDigestScheduleToken(value) {
+  return String(value ?? '')
+    .normalize('NFKD')
+    .replace(/\p{M}/gu, '')
+    .toLocaleLowerCase('en')
+    .replace(/\s+/gu, ' ')
+    .trim();
+}
+
+function normalizeDigestTime(value) {
+  const match = /^(\d{1,2}):(\d{2})$/u.exec(String(value ?? ''));
+  if (!match) return null;
+  const hour = Number(match[1]);
+  const minute = Number(match[2]);
+  if (hour > 23 || minute > 59) return null;
+  return `${String(hour).padStart(2, '0')}:${match[2]}`;
+}
+
+/** Return the locale-independent identity of a rendered digest heading. */
+function digestHeadingStableKey(line) {
+  const linkMatch = DIGEST_LINK_HEADING_CAPTURE_PATTERN.exec(String(line ?? ''));
+  if (linkMatch) {
+    const path = linkMatch[1].split(/[?#]/u, 1)[0];
+    const slug = path.split('/').filter(Boolean).at(-1);
+    if (slug) return `place:${normalizeDigestScheduleToken(slug)}`;
+  }
+
+  // Non-linked canton headings (e.g. `Svitto` / `Schwyz`) have no URL slug,
+  // but the canonical table still gives them a stable BFS code. Ignore generic
+  // prose headings and ambiguous labels rather than guessing a pairing.
+  const cantonCodes = [...new Set(
+    localizedToponymHits(String(line ?? '').replace(/^#{2,3}\s+/u, ''))
+      .filter((hit) => hit.type === 'canton')
+      .map((hit) => hit.entity.code),
+  )];
+  return cantonCodes.length === 1 ? `canton:${cantonCodes[0]}` : null;
+}
+
+function digestScheduleStableKey(schedule) {
+  const normalized = normalizeDigestScheduleToken(schedule);
+  const timeMatch = /(?:\s*[·•]\s*|\s+)(\d{1,2}:\d{2})$/u.exec(normalized);
+  const time = timeMatch ? normalizeDigestTime(timeMatch[1]) : '';
+  if (timeMatch && !time) return null;
+  const label = timeMatch ? normalized.slice(0, timeMatch.index).trim() : normalized;
+
+  const dateMatch = /^(\d{1,2})\.?\s+([a-z]+)$/u.exec(label);
+  if (dateMatch) {
+    const day = Number(dateMatch[1]);
+    const month = DIGEST_MONTH_NAME_TO_INDEX.get(dateMatch[2]);
+    if (month && day >= 1 && day <= 31) {
+      return `date:${String(day).padStart(2, '0')}-${String(month).padStart(2, '0')}|time:${time}`;
+    }
+  }
+
+  const weekday = DIGEST_WEEKDAY_NAME_TO_INDEX.get(label);
+  return weekday ? `weekday:${weekday}|time:${time}` : null;
+}
+
+function digestEventStableKey(parsed, event) {
+  const heading = parsed?.headings?.[event?.headingIndex];
+  const line = parsed?.lines?.[event?.lineIndices?.[0]];
+  const record = eventRecordMatch(line);
+  const headingKey = heading ? digestHeadingStableKey(parsed.lines[heading.lineIndex]) : null;
+  const scheduleKey = record ? digestScheduleStableKey(record[1]) : null;
+  return headingKey && scheduleKey ? `${headingKey}|${scheduleKey}` : null;
+}
+
+/**
+ * Pair source and localized digest records by their rendered stable identity,
+ * never by array position. A missing or duplicate identity is ambiguous, so
+ * callers must fail closed instead of applying a potentially wrong rewrite.
+ */
+export function pairEventsByStableKey(source, target) {
+  if (!source || !target || !Array.isArray(source.events) || !Array.isArray(target.events)) return null;
+
+  const sourceByKey = new Map();
+  for (const sourceEvent of source.events) {
+    const key = digestEventStableKey(source, sourceEvent);
+    if (!key || sourceByKey.has(key)) return null;
+    sourceByKey.set(key, sourceEvent);
+  }
+
+  const pairs = [];
+  const targetKeys = new Set();
+  for (const targetEvent of target.events) {
+    const key = digestEventStableKey(target, targetEvent);
+    if (!key || targetKeys.has(key) || !sourceByKey.has(key)) return null;
+    targetKeys.add(key);
+    pairs.push({ key, sourceEvent: sourceByKey.get(key), targetEvent });
+  }
+  return pairs.length === source.events.length ? pairs : null;
+}
+
+function pairDigestHeadingsByStableKey(source, target) {
+  if (!source || !target || !Array.isArray(source.headings) || !Array.isArray(target.headings)) return null;
+  const collect = (parsed) => {
+    const byKey = new Map();
+    for (const heading of parsed.headings) {
+      const key = digestHeadingStableKey(parsed.lines[heading.lineIndex]);
+      if (!key) continue;
+      if (byKey.has(key)) return null;
+      byKey.set(key, heading);
+    }
+    return byKey;
+  };
+  const sourceByKey = collect(source);
+  const targetByKey = collect(target);
+  if (!sourceByKey || !targetByKey || sourceByKey.size !== targetByKey.size) return null;
+  for (const key of sourceByKey.keys()) if (!targetByKey.has(key)) return null;
+  return [...sourceByKey].map(([key, sourceHeading]) => ({
+    key,
+    sourceHeading,
+    targetHeading: targetByKey.get(key),
+  }));
 }
 
 /**
@@ -540,15 +677,12 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
   const target = parseEventsDigestBody2Safe(targetText);
   if (!source || !target) return null;
   if (source.shape.length !== target.shape.length
-      || source.shape.some((part, index) => part !== target.shape[index])
       || source.events.length !== target.events.length) return null;
 
-  for (let index = 0; index < source.events.length; index += 1) {
-    const sourceEvent = source.events[index];
-    const targetEvent = target.events[index];
-    if (sourceEvent.headingIndex !== targetEvent.headingIndex
-        || sourceEvent.lineIndices.length !== targetEvent.lineIndices.length) return null;
-  }
+  if ([...source.shape].sort().join('|') !== [...target.shape].sort().join('|')) return null;
+  const eventPairs = pairEventsByStableKey(source, target);
+  const headingPairs = pairDigestHeadingsByStableKey(source, target);
+  if (!eventPairs || !headingPairs) return null;
 
   const lines = [...target.lines];
   const issues = [];
@@ -566,18 +700,28 @@ function transformEventsDigestBody2({ sourceText = '', targetText = '', locale }
     return result.text;
   };
 
-  for (let index = 0; index < source.headings.length; index += 1) {
-    const sourceHeading = source.headings[index];
-    const targetHeading = target.headings[index];
-    lines[targetHeading.lineIndex] = applyPair(
-      source.lines[sourceHeading.lineIndex],
-      target.lines[targetHeading.lineIndex],
-    );
+  const sourceHeadingKeys = source.headings.map((heading) => digestHeadingStableKey(source.lines[heading.lineIndex])).filter(Boolean);
+  const targetHeadingKeys = target.headings.map((heading) => digestHeadingStableKey(target.lines[heading.lineIndex])).filter(Boolean);
+  if (sourceHeadingKeys.join('|') === targetHeadingKeys.join('|')) {
+    for (let index = 0; index < source.headings.length; index += 1) {
+      const sourceHeading = source.headings[index];
+      const targetHeading = target.headings[index];
+      lines[targetHeading.lineIndex] = applyPair(
+        source.lines[sourceHeading.lineIndex],
+        target.lines[targetHeading.lineIndex],
+      );
+    }
+  } else {
+    for (const { sourceHeading, targetHeading } of headingPairs) {
+      lines[targetHeading.lineIndex] = applyPair(
+        source.lines[sourceHeading.lineIndex],
+        target.lines[targetHeading.lineIndex],
+      );
+    }
   }
 
-  for (let index = 0; index < source.events.length; index += 1) {
-    const sourceEvent = source.events[index];
-    const targetEvent = target.events[index];
+  for (const { sourceEvent, targetEvent } of eventPairs) {
+    if (sourceEvent.lineIndices.length !== targetEvent.lineIndices.length) return null;
     const sourceTitle = [
       source.lines[sourceEvent.lineIndices[0]].slice(sourceEvent.titleStart),
       ...sourceEvent.lineIndices.slice(1).map((lineIndex) => source.lines[lineIndex]),
@@ -786,6 +930,7 @@ export default {
   normalizeLocalizedToponymText,
   assertLocalizedToponymPair,
   replaceLocalizedToponymMismatches,
+  pairEventsByStableKey,
   findArticleLocalizedToponymMismatches,
   localizedToponymInstruction,
   validateLocalizedToponymTable,

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   findArticleLocalizedToponymMismatches,
   parseEventsDigestBody2Safe,
+  pairEventsByStableKey,
 } from '../scripts/lib/localized-toponyms.mjs';
 import { repairEventsDigestLocalizedToponyms } from '../scripts/lib/events-digest-localization.mjs';
 
@@ -70,6 +71,26 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.equal(repaired.content.en.faq[0].q, 'Events in Geneva?');
     assert.match(original.content.en.body2, /Concert in Zürich/);
     assert.deepEqual(repairEventsDigestLocalizedToponyms(repaired), repaired);
+  });
+
+  it('pairs reordered event records by heading, day and time instead of array position', () => {
+    const original = incidentArticle();
+    const lines = original.content.en.body2.split('\n');
+    const saturday = lines.findIndex((line) => line.includes('Saturday 16:00'));
+    const sunday = lines.findIndex((line) => line.includes('Sunday 20:30'));
+    [lines[saturday], lines[sunday]] = [lines[sunday], lines[saturday]];
+    original.content.en.body2 = lines.join('\n');
+
+    const sourceParsed = parseEventsDigestBody2Safe(incidentArticle().content.it.body2);
+    const targetParsed = parseEventsDigestBody2Safe(original.content.en.body2);
+    const pairs = pairEventsByStableKey(sourceParsed, targetParsed);
+    assert.equal(pairs?.length, 2);
+
+    const repaired = repairEventsDigestLocalizedToponyms(original);
+    assert.match(repaired.content.en.body2, /Saturday 16:00.*Concert in Zurich/);
+    assert.match(repaired.content.en.body2, /Sunday 20:30.*Zürich Film Festival/);
+    assert.doesNotMatch(repaired.content.en.body2, /Saturday 16:00.*Concert in Zürich/);
+    assert.doesNotMatch(repaired.content.en.body2, /Sunday 20:30.*Zurich Film Festival/);
   });
 
   it('does not repair body2 when event structure cannot be paired and keeps the gate fail-closed', () => {
