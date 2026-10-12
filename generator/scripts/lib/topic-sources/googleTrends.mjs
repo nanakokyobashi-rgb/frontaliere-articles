@@ -267,37 +267,13 @@ function sleep(ms) {
 //     <ht:news_item><ht:news_item_title>...</ht:news_item_title>...</ht:news_item>
 //     <pubDate>...</pubDate>
 //   </item>
-function cancelResponseBodyBestEffort(response) {
-  try {
-    Promise.resolve(response?.body?.cancel?.()).catch(() => {});
-  } catch {
-    // Minimal fetch doubles and already-consumed bodies may reject cancellation.
-  }
-}
-
-async function fetchTrendsRss(geo, fetchImpl = fetch, timeoutMs = REQUEST_TIMEOUT_MS) {
+async function fetchTrendsRss(geo, fetchImpl = fetch) {
   const url = `https://trends.google.com/trending/rss?geo=${encodeURIComponent(geo)}`;
   const ac = new AbortController();
-  const effectiveTimeoutMs = Number.isFinite(timeoutMs)
-    ? Math.max(1, Math.floor(timeoutMs))
-    : REQUEST_TIMEOUT_MS;
-  let response;
-  let timedOut = false;
-  let rejectTimeout;
-  const timeoutPromise = new Promise((_, reject) => {
-    rejectTimeout = reject;
-  });
-  timeoutPromise.catch(() => {});
-  const t = setTimeout(() => {
-    timedOut = true;
-    const reason = new Error(`trends-rss timeout after ${effectiveTimeoutMs}ms`);
-    reason.name = 'TimeoutError';
-    ac.abort(reason);
-    rejectTimeout(reason);
-    cancelResponseBodyBestEffort(response);
-  }, effectiveTimeoutMs);
-  const fetchPromise = Promise.resolve().then(() =>
-    fetchImpl(url, {
+  const t = setTimeout(() => ac.abort(), REQUEST_TIMEOUT_MS);
+  if (t && typeof t.unref === 'function') t.unref();
+  try {
+    const res = await fetchImpl(url, {
       headers: {
         // A plausible-browser UA reduces the chance of a defensive 403.
         'User-Agent':
@@ -305,23 +281,13 @@ async function fetchTrendsRss(geo, fetchImpl = fetch, timeoutMs = REQUEST_TIMEOU
         Accept: 'application/rss+xml, application/xml, text/xml',
       },
       signal: ac.signal,
-    }),
-  );
-  fetchPromise.then((lateResponse) => {
-    if (timedOut) cancelResponseBodyBestEffort(lateResponse);
-  }, () => {});
-  try {
-    response = await Promise.race([fetchPromise, timeoutPromise]);
-    if (!response.ok) {
-      cancelResponseBodyBestEffort(response);
-      const e = new Error(`trends-rss ${response.status}`);
-      e.status = response.status;
+    });
+    if (!res.ok) {
+      const e = new Error(`trends-rss ${res.status}`);
+      e.status = res.status;
       throw e;
     }
-    return await Promise.race([
-      Promise.resolve().then(() => response.text()),
-      timeoutPromise,
-    ]);
+    return await res.text();
   } finally {
     clearTimeout(t);
   }
@@ -363,7 +329,6 @@ const LOMBARDIA_HINT_RE =
  * @param {object} [opts.googleTrendsImpl] — test override (must expose `.relatedQueries`).
  * @param {Function} [opts.playwrightFallback] — test override.
  * @param {Function} [opts.sleepFn] — test override (default real timer).
- * @param {number} [opts.rssRequestTimeoutMs] — RSS header/body deadline.
  * @returns {Promise<{ ok: boolean, perGeo: Record<string, {ok: boolean, candidates: any[], reason?: string}>, candidates: any[] }>}
  */
 export async function fetchGoogleTrendsCandidates(opts = {}) {
@@ -392,8 +357,7 @@ export async function fetchGoogleTrendsCandidates(opts = {}) {
   const perGeo = {};
   const all = [];
   const fetchImpl = opts.fetchImpl ?? globalThis.fetch;
-  const rssImpl = opts.fetchTrendsRssImpl ?? ((geo) =>
-    fetchTrendsRss(geo, fetchImpl, opts.rssRequestTimeoutMs));
+  const rssImpl = opts.fetchTrendsRssImpl ?? ((geo) => fetchTrendsRss(geo, fetchImpl));
 
   // Pull country-level RSS once per RSS-enabled geo BEFORE the per-seed lib
   // loop. RSS is unblocked from CI IPs and doesn't need keyword seeds — it
