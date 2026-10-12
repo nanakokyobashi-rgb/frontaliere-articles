@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'crisi-resilienza-zurigo',
+ category: 'pratico',
+ date: '2026-10-12T01:35:59.572Z',
+ image: '/images/blog/article-giorni-festivi-canton-zurigo-guida.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

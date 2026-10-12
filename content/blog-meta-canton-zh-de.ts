@@ -30,6 +30,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.bank-now-dipendenti-zurigo.title': 'Bank-now: 300 Mitarbeiter wechseln nach Zürich',
     'blog.article.bank-now-dipendenti-zurigo.excerpt': 'Bank-now verlässt Horgen: 300 Mitarbeiter wechseln nach Zürich.',
     'blog.article.bank-now-dipendenti-zurigo.imageAlt': 'Bürogebäude im Finanzviertel von Zürich',
+    'blog.article.crisi-resilienza-zurigo.title': 'Zürich bereitet die Einwohner auf Krisen vor: 9 Liter Wasser',
+    'blog.article.crisi-resilienza-zurigo.excerpt': 'Die Zürcher Resilienzwochen befassen sich mit zwei Szenarien: Informationen ohne Strom und Internet sowie 9 Liter Wasser für drei Tage.',
+    'blog.article.crisi-resilienza-zurigo.imageAlt': 'Trinkbrunnen und Notfall-Informationspunkt für die Resilienz in Zürich',
 };
 
 export default blogMetaCantonZhDe;

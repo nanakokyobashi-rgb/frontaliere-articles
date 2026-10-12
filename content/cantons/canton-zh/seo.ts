@@ -348,6 +348,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-crisi-resilienza-zurigo': {
+    title: 'Zurigo prepara i residenti alle crisi: 9 litri d\'acqua',
+    description: 'La città di Zurigo prepara i residenti alle crisi: le settimane della resilienza affrontano elettricità, internet e 9 litri d\'acqua per sopravvivere tre giorni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, prepara, residenti, alle',
+    ogTitle: 'Zurigo, resilienza e 9 litri d\'acqua',
+    ogDescription: 'Dalle fontane di acqua sorgiva ai punti d\'incontro d\'emergenza, il programma della città di Zurigo porta in primo piano due domande concrete: come informarsi senza elettricità e internet e quanta acqua serve per tre giorni.',
+    canonicalPath: '/articoli-zurigo/crisi-resilienza-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo prepara i residenti alle crisi: 9 litri d'acqua",
+      "description": "La città di Zurigo prepara i residenti alle crisi: le settimane della resilienza affrontano elettricità, internet e 9 litri d'acqua per sopravvivere tre giorni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-giorni-festivi-canton-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Fontana d'acqua e punto informativo per la resilienza urbana a Zurigo"
+      },
+      "datePublished": "2026-10-12T01:35:59+00:00",
+      "dateModified": "2026-10-12T01:35:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/crisi-resilienza-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
