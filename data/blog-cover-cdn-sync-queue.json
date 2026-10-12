@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-pozzecco-galatasaray-risoluzione-contratto.webp",
-      "sha256": "e86b529067d9422f4ebfefea2414384fd05514c4e18787f25f0280f0dc82525a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-pozzecco-galatasaray-risoluzione-contratto-480w.webp",
-      "sha256": "1b2cdb2f8a36f6450671ffb7c280cad36e1632104247cfbf5deee256cb404de5"
-    }
-  ]
+  "items": []
 }
