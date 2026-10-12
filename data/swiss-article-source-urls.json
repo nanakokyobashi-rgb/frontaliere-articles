@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4066013": {
-    "articleId": "posta-svizzera-taglio-posti",
-    "ts": "2026-09-07T14:48:37.923Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/bns%3a-riserve-di-divise-aumentano-ulteriormente-in-agosto/92018100": {
     "articleId": "riserve-bns-aumento-agosto",
     "ts": "2026-09-07T15:16:14.556Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/in-futuro-caleranno-gli-scolari-e-cresceranno-gli-studenti%2c-ust/92201908": {
     "articleId": "ust-formazione-svizzera-2035",
     "ts": "2026-10-12T10:17:39.070Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956185/svizzera-valutazioni-vendita-trasparenza-allarme-casa": {
+    "articleId": "valutazioni-immobiliari-trasparenza-casa",
+    "ts": "2026-10-12T11:08:59.554Z",
     "keyForm": 2
   }
 }

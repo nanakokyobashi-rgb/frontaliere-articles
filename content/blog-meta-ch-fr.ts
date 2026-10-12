@@ -8089,7 +8089,10 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.imposta-cani-zurigo-guida.imageAlt': 'Photo d\'un chien avec collier devant un bureau municipal zurichois',
     'blog.article.ust-formazione-svizzera-2035.title': 'Croissance universitaire et baisse scolaire : UST 2026-2035',
     'blog.article.ust-formazione-svizzera-2035.excerpt': 'Les effectifs universitaires augmenteront de plus de 20 % au cours des neuf prochaines années École primaire : pic entre 2027 et 2028, puis -8 % d’ici 2035 Secondaire II : +10 %',
-    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.ust-formazione-svizzera-2035.imageAlt': 'Des étudiants universitaires qui marchent sur le campus de Lugano, scène réelle',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Évaluations immobilières : écarts jusqu\'à 13%',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Les évaluations divergent en moyenne de 11 à 13% Seules 30-35% des transactions disposent de données vérifiées 3% de 50\'000 francs représentent 1\'500 francs À Genève, l\'accès',
+    'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Réunion d\'évaluation immobilière en Suisse avec maison moderne et professionnel examinant des documents.',
 };
 
 export default blogMetaChFr;

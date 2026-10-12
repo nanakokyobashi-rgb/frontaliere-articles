@@ -102053,6 +102053,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-valutazioni-immobiliari-trasparenza-casa': {
+    title: 'Valutazioni immobiliari: differenze fino al 13%',
+    description: 'Valutazioni divergono in media dall\'11 al 13% Solo il 30-35% delle transazioni ha dati verificati Il 3% su 50\'000 franchi vale 1\'500 franchi A Ginevra l\'accesso',
+    keywords: 'frontalieri, ticino, svizzera, italia, valutazioni, immobiliari, differenze, fino',
+    ogTitle: 'Valutazioni immobiliari divergenti e scarsa trasparenza',
+    ogDescription: 'Valutazioni divergono in media dall\'11 al 13% Solo il 30-35% delle transazioni ha dati verificati Il 3% su 50\'000 franchi vale 1\'500 franchi A Ginevra l\'accesso',
+    canonicalPath: '/articoli-svizzera/valutazioni-immobiliari-trasparenza-casa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Valutazioni immobiliari: differenze fino al 13%",
+      "description": "Valutazioni divergono in media dall'11 al 13% Solo il 30-35% delle transazioni ha dati verificati Il 3% su 50'000 franchi vale 1'500 franchi A Ginevra l'accesso",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/comprare-casa-ginevra-mutuo-ipotecario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Incontro di valutazione immobiliare in Svizzera con casa moderna e professionista che esamina documenti sul tavolo."
+      },
+      "datePublished": "2026-10-12T11:08:59+00:00",
+      "dateModified": "2026-10-12T11:08:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/valutazioni-immobiliari-trasparenza-casa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

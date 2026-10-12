@@ -10,6 +10,16 @@
       "failureCount": 4,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-12T10:51:24.379Z"
+    },
+    {
+      "articleId": "valutazioni-immobiliari-trasparenza-casa",
+      "title": "Valutazioni immobiliari: differenze fino al 13%",
+      "fallbackImage": "/images/blog/comprare-casa-ginevra-mutuo-ipotecario.webp",
+      "reason": "All image providers failed for article-valutazioni-immobiliari-trasparenza-casa: openai-codex (vision gate rejected image: Generic Swiss Alpine property-appraisal illustration, but",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T11:08:59.551Z",
+      "lastFailureAt": "2026-10-12T11:08:59.551Z"
     }
   ]
 }

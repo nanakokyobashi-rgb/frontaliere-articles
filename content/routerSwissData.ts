@@ -2719,6 +2719,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'regole-orari-negozi-zurigo': { it: 'regole-orari-negozi-zurigo', en: 'zurich-shop-hours-guide', de: 'zuerich-ladenoffnungszeiten-leitfaden', fr: 'horaires-magasins-zurich-guide' },
  'imposta-cani-zurigo-guida': { it: 'imposta-cani-zurigo-guida', en: 'dog-tax-in-zurich-registration-guide', de: 'hundesteuer-in-zurich-leitfaden-zur-registrierung', fr: 'taxe-sur-les-chiens-a-zurich-guide-d-enregistrement' },
  'ust-formazione-svizzera-2035': { it: 'ust-formazione-svizzera-2035', en: 'university-growth-and-school-decline-ust-2026-2035', de: 'wachstum-an-den-hochschulen-und-ruckgang-im-schulbereich-ust-2026-2035', fr: 'croissance-universitaire-et-baisse-scolaire-ust-2026-2035' },
+ 'valutazioni-immobiliari-trasparenza-casa': { it: 'valutazioni-immobiliari-trasparenza-casa', en: 'real-estate-valuation-transparency', de: 'immobilienbewertung-transparenz', fr: 'evaluation-immobiliere-transparence' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

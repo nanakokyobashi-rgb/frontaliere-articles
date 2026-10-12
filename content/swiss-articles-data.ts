@@ -26997,6 +26997,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'valutazioni-immobiliari-trasparenza-casa',
+    category: 'pratico',
+    date: '2026-10-12T11:08:59.259Z',
+    image: '/images/blog/comprare-casa-ginevra-mutuo-ipotecario.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
