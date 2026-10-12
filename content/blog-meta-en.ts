@@ -13050,7 +13050,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Road accident in Castronno with a driver on the ground and blocked traffic',
     'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, residents’ car pass: renewal becomes annual',
     'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'The residents\' pass must be renewed every year.',
-    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Historic Como centre with vintage cars under a ZTL sign and the Alps in the background',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Illustration generated for this article',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 new traffic lights at Swiss interchanges',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'More than 120 new traffic lights are being considered at Swiss junctions In 2025, traffic jams reached 68.040 hours Traffic jam hours increased by 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustration generated for this article',
@@ -13063,6 +13063,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': '5-year-old boy hit by a vehicle in Cedrate: he is in very serious condition',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Shortly before 17:00, a 5-year-old boy was struck.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lake Lugano at sunset with reflected mountains',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio: officer convicted over staged assault',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Two years\' imprisonment for the Local Police officer The footage rules out the reported assault 5mila euro in provisional damages for the municipality More than 9mila euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'View of Lake Lugano with mountains in the background',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco heading for a Galatasaray exit: three fatal defeats',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco and Galatasaray heading for a parting of ways Three consecutive defeats at the start of the league season The latest defeat came against Bursaspor Deal expected to run until',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Lake Lugano sunset view with mountains background',
 };
 
 export default blogMetaEn;

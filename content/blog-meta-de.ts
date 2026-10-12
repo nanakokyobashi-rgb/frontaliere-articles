@@ -13049,7 +13049,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Straßenunfall in Castronno mit Fahrer am Boden und blockiertem Verkehr',
     'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, Anwohnerparkausweis: Erneuerung erfolgt jährlich',
     'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Der Anwohnerparkausweis muss jedes Jahr erneuert werden.',
-    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Historisches Zentrum von Como mit Oldtimer unter ZTL-Schild und Alpen im Hintergrund',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 neue Ampeln an Schweizer Anschlussstellen',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Mehr als 120 neue Ampeln an Schweizer Anschlussstellen werden geprüft Im Jahr 2025 summierten sich die Staus auf 68.040 Stunden Die Stauzeiten stiegen um 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Für diesen Artikel erstellte Illustration',
@@ -13062,6 +13062,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': '5-jähriger Junge in Cedrate angefahren: Er ist schwerst verletzt',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Kurz vor 17 Uhr wurde ein 5-jähriger Junge angefahren.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Luganersee bei Sonnenuntergang mit gespiegelten Bergen',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Büste Arsizio: Agent wegen simulierter Aggression verurteilt',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Zwei Jahre Haft für den örtlichen Polizeibeamten Die Filme schließen die der Gemeinde gemeldete Aggression aus 5.000 Euro provisorische Über 9.000 Euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Blick auf den Luganer See mit den Bergen im Hintergrund',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco vor dem Abschied von Galatasaray: drei fatale Niederlagen',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco und Galatasaray vor der Trennung Drei Niederlagen in Folge zum Saisonauftakt Die letzte Niederlage kam gegen Bursaspor Vereinbarung vorgesehen bis',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Sonnenuntergang am Luganersee mit Bergkulisse',
 };
 
 export default blogMetaDe;

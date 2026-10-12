@@ -13051,7 +13051,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Incidente stradale a Castronno con automobilista a terra e traffico bloccato',
     'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, pass auto residenti: rinnovo diventa annuale',
     'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Il pass dei residenti va rinnovato ogni anno.',
-    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Centro storico di Como con auto storiche sotto segnale ZTL e Alpi sullo sfondo',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 nuovi semafori agli svincoli svizzeri',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Oltre 120 nuovi semafori sono allo studio agli svincoli svizzeri Nel 2025 gli ingorghi hanno raggiunto 68.040 ore Le ore di ingorgo sono cresciute del 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustrazione generata per questo articolo',
@@ -13064,6 +13064,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': 'Bimbo di 5 anni investito a Cedrate: è gravissimo',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Poco prima delle 17 un bimbo di 5 anni è stato investito.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lago di Lugano al tramonto con montagne riflesse',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio: agente condannato per aggressione simulata',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Due anni di reclusione per l\'agente della Polizia Locale I filmati escludono l\'aggressione denunciata Al Comune 5mila euro di provvisionale Oltre 9mila euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco verso l\'addio al Galatasaray: tre ko fatali',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco e Galatasaray verso la separazione Tre ko consecutivi in avvio di campionato L\'ultimo ko è arrivato contro Bursaspor Accordo previsto fino',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Vista sul lago di Lugano al tramonto con montagne sullo sfondo',
 };
 
 export default blogMetaIt;

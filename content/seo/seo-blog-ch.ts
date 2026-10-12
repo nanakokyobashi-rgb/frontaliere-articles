@@ -102326,6 +102326,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ia-pubblica-amministrazione-ticino': {
+    title: 'IA nella PA ticinese: innovazione o problemi digitalizzati?',
+    description: 'Il Ticino unisce ricerca avanzata e burocrazia lenta USI e SUPSI sono riferimenti per il Cantone I talenti ticinesi guardano ai Politecnici federali L\'IA',
+    keywords: 'frontalieri, ticino, svizzera, italia, nella, ticinese, innovazione, problemi',
+    ogTitle: 'IA nella PA ticinese: innovazione o problemi digitalizzati?',
+    ogDescription: 'Il Ticino unisce ricerca avanzata e burocrazia lenta USI e SUPSI sono riferimenti per il Cantone I talenti ticinesi guardano ai Politecnici federali L\'IA',
+    canonicalPath: '/articoli-svizzera/ia-pubblica-amministrazione-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "IA nella PA ticinese: innovazione o problemi digitalizzati?",
+      "description": "Il Ticino unisce ricerca avanzata e burocrazia lenta USI e SUPSI sono riferimenti per il Cantone I talenti ticinesi guardano ai Politecnici federali L'IA",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ia-pubblica-amministrazione-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo del governo a Bellinzona con elementi digitali che simboleggiano l'IA nella PA"
+      },
+      "datePublished": "2026-10-12T22:15:36+00:00",
+      "dateModified": "2026-10-12T22:15:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ia-pubblica-amministrazione-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

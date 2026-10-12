@@ -13052,7 +13052,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lite-stradale-castronno-traffico.imageAlt': 'Accident de la route à Castronno avec un conducteur au sol et trafic bloqué',
     'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, pass auto des résidents : le renouvellement devient annuel',
     'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Le pass des résidents doit être renouvelé chaque année.',
-    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Centre historique de Como avec voitures anciennes sous panneau ZTL et Alpes en arrière-plan',
+    'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Illustration générée pour cet article',
     'blog.article.semafori-svizzera-ustra-traffico.title': '120 nouveaux feux de signalisation aux échangeurs suisses',
     'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Plus de 120 nouveaux feux de signalisation sont à l’étude aux échangeurs suisses En 2025, les embouteillages ont atteint 68.040 heures Les heures d’embouteillage ont augmenté de 20%',
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustration générée pour cet article',
@@ -13065,6 +13065,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': 'Un garçon de 5 ans renversé à Cedrate : son état est très grave',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Peu avant 17 heures, un garçon de 5 ans a été renversé.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lac de Lugano au coucher du soleil avec montagnes reflétées',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio : agent condamné pour agression simulée',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Deux ans de réclusion pour l’agent de la police municipale Les vidéos excluent l’agression dénoncée À la municipalité 5mila euro de provision Plus de 9mila euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Vue sur le lac de Lugano avec les montagnes en arrière-plan',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.title': 'Pozzecco vers un départ de Galatasaray : trois défaites fatales',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.excerpt': 'Pozzecco et Galatasaray vers la séparation Trois défaites consécutives en début de championnat La dernière défaite est survenue contre Bursaspor Accord prévu jusqu\'à',
+    'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Vue sur le lac de Lugano au coucher du soleil avec montagnes',
 };
 
 export default blogMetaFr;

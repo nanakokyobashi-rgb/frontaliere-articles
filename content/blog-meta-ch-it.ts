@@ -8111,6 +8111,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.benu-rete-santanna-sanita.title': 'Swiss medical network e phoenix pharma: alleanza in Ticino',
     'blog.article.benu-rete-santanna-sanita.excerpt': 'Swiss Medical Network alleata con Phoenix Pharma Switzerland Benu entrerà nella Rete Sant\'Anna in Ticino Con Viva si potrà rivolgersi a Benu per quattro servizi',
     'blog.article.benu-rete-santanna-sanita.imageAlt': 'Farmacia ticinese Benu collegata alla Rete Sant\'Anna di Swiss Medical Network',
+    'blog.article.ia-pubblica-amministrazione-ticino.title': 'IA nella PA ticinese: innovazione o problemi digitalizzati?',
+    'blog.article.ia-pubblica-amministrazione-ticino.excerpt': 'Il Ticino unisce ricerca avanzata e burocrazia lenta USI e SUPSI sono riferimenti per il Cantone I talenti ticinesi guardano ai Politecnici federali L\'IA',
+    'blog.article.ia-pubblica-amministrazione-ticino.imageAlt': 'Palazzo del governo a Bellinzona con elementi digitali che simboleggiano l\'IA nella PA',
 };
 
 export default blogMetaChIt;
