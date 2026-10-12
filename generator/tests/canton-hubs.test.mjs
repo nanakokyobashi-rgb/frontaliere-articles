@@ -936,6 +936,9 @@ test('link: il catalogo e\' fatto di path verificati sulle sitemap, non di URL c
   assert.match(CATALOGUE.verifiedAt, /^\d{4}-\d{2}-\d{2}$/);
   const groups = Object.keys(CANTON_URL_SLUGS.cantons);
   const ids = new Set();
+  const fuelBorderStats = CATALOGUE.static.find((entry) => entry.id === 'fuel-border-stats');
+  assert.ok(fuelBorderStats, 'catalogo carburanti senza la voce delle statistiche al confine');
+  assert.equal(fuelBorderStats.paths.de, undefined, 'non riemettere il path tedesco assente dalle sitemap pubblicate');
   for (const entry of CATALOGUE.static) {
     assert.ok(!ids.has(entry.id), `id duplicato ${entry.id}`);
     ids.add(entry.id);
