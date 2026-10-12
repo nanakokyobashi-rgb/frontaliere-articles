@@ -13036,6 +13036,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incontro-parita-salariale-varese.title': 'Equal pay in Varese: meeting on Decree 96/2026',
     'blog.article.incontro-parita-salariale-varese.excerpt': 'Decree 96/2026: greater focus on equality and transparency Meeting on October 13 at Villa Recalcati, Varese Roundtable and three company testimonials What →',
     'blog.article.incontro-parita-salariale-varese.imageAlt': 'Professionals in a meeting room in Lugano discussing pay equality and pay transparency',
+    'blog.article.talenti-in-movimento-oltreconfinti.title': 'Talents on the move: OltreconfiniTi connects research and professionals',
+    'blog.article.talenti-in-movimento-oltreconfinti.excerpt': 'In Lugano, the “Talent on the Move” event took place At the center attractiveness, young people and professionals OltreconfiniTi connects businesses, research and skills',
+    'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Photo of Lugano Congress Palace during the Talenti in movimento event with professionals and researchers',
 };
 
 export default blogMetaEn;

@@ -13035,6 +13035,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incontro-parita-salariale-varese.title': 'Lohngleichheit in Varese: Treffen zum Dekret 96/2026',
     'blog.article.incontro-parita-salariale-varese.excerpt': 'Dekret 96/2026: Mehr Aufmerksamkeit für Gleichheit und Transparenz Treffen am 13. (Varese)',
     'blog.article.incontro-parita-salariale-varese.imageAlt': 'Fachleute in einem Besprechungsraum in Lugano, die über Lohngleichheit und Lohntransparenz sprechen',
+    'blog.article.talenti-in-movimento-oltreconfinti.title': 'Talente in Bewegung: OltreconfiniTi verbindet Forschung und Fachkräfte',
+    'blog.article.talenti-in-movimento-oltreconfinti.excerpt': 'In Lugano fand die Veranstaltung «Talente in Bewegung» statt Im Mittelpunkt stehen Standortattraktivität, junge Menschen und Fachkräfte OltreconfiniTi verbindet Unternehmen, Forschung und Kompetenzen',
+    'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Foto vom Kongresspalast Lugano beim Event Talenti in movimento mit Fachkräften und Forschern',
 };
 
 export default blogMetaDe;

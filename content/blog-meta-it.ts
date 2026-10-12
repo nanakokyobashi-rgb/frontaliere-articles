@@ -13037,6 +13037,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incontro-parita-salariale-varese.title': 'Parità salariale a Varese: incontro su Decreto 96/2026',
     'blog.article.incontro-parita-salariale-varese.excerpt': 'Decreto 96/2026: più attenzione a parità e trasparenza Incontro il 13 ottobre a Villa Recalcati, Varese Tavola rotonda e tre testimonianze aziendali Cosa →',
     'blog.article.incontro-parita-salariale-varese.imageAlt': 'Professionisti in una sala riunioni a Lugano che discutono di parità salariale e trasparenza retributiva',
+    'blog.article.talenti-in-movimento-oltreconfinti.title': 'Talenti in movimento: OltreconfiniTi collega ricerca e professionisti',
+    'blog.article.talenti-in-movimento-oltreconfinti.excerpt': 'A Lugano si è svolto l’evento «Talenti in movimento» Al centro attrattività, giovani e professionisti OltreconfiniTi collega imprese, ricerca e competenze',
+    'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Foto del Palazzo dei Congressi di Lugano durante l’evento Talenti in movimento con professionisti e ricercatori',
 };
 
 export default blogMetaIt;
