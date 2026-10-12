@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-rincaro-whey-galaxus.webp",
+      "sha256": "aa412593c5d2bb21176417ddb9cb0080ad1518b3e057ee303df70782560e343a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-rincaro-whey-galaxus-480w.webp",
+      "sha256": "fbff3a66eeaed8ff720d5afb4b24c411b8cac73f6be7027f0b816e2f519f51b9"
+    }
+  ]
 }
