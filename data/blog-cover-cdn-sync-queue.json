@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-agenzia-entrate-luogo-lavoro-frontaliere.webp",
+      "sha256": "1d695a121eb30a084169278ea089a3cee635fb3494574261717d4e81c2632075"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-agenzia-entrate-luogo-lavoro-frontaliere-480w.webp",
+      "sha256": "55b84c48ace55247b2c1d4699c1d959e5b1aff2ab93f0be312babdf4e630100f"
+    }
+  ]
 }
