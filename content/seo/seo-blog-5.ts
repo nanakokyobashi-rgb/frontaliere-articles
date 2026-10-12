@@ -105918,6 +105918,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-semafori-autostrade-ustra-ticino': {
+    title: 'Semafori in autostrada: il piano USTRA per il traffico',
+    description: 'USTRA valuta oltre 120 semafori agli svincoli Nel 2025 le autostrade hanno registrato 68\'040 ore di ingorgo Gli impianti possono aumentare fino al 5%',
+    keywords: 'frontalieri, ticino, svizzera, italia, semafori, autostrada, piano, ustra',
+    ogTitle: 'Semafori in autostrada: il piano USTRA per il traffico',
+    ogDescription: 'USTRA valuta oltre 120 semafori agli svincoli Nel 2025 le autostrade hanno registrato 68\'040 ore di ingorgo Gli impianti possono aumentare fino al 5%',
+    canonicalPath: '/articoli-frontaliere/semafori-autostrade-ustra-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Semafori in autostrada: il piano USTRA per il traffico",
+      "description": "USTRA valuta oltre 120 semafori agli svincoli Nel 2025 le autostrade hanno registrato 68'040 ore di ingorgo Gli impianti possono aumentare fino al 5%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-semafori-autostrade-ustra-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Semafori autostradali e traffico in Ticino"
+      },
+      "datePublished": "2026-10-12T03:14:18+00:00",
+      "dateModified": "2026-10-12T03:14:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/semafori-autostrade-ustra-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

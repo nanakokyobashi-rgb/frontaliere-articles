@@ -43887,6 +43887,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'semafori-autostrade-ustra-ticino',
+ category: 'pratico',
+ date: '2026-10-12T03:14:18.284Z',
+ image: '/images/blog/article-semafori-autostrade-ustra-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
