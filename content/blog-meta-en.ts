@@ -13063,6 +13063,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': '5-year-old boy hit by a vehicle in Cedrate: he is in very serious condition',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Shortly before 17:00, a 5-year-old boy was struck.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lake Lugano at sunset with reflected mountains',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio: officer convicted over staged assault',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Two years\' imprisonment for the Local Police officer The footage rules out the reported assault 5mila euro in provisional damages for the municipality More than 9mila euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'View of Lake Lugano with mountains in the background',
 };
 
 export default blogMetaEn;

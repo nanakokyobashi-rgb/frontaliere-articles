@@ -13062,6 +13062,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': '5-jähriger Junge in Cedrate angefahren: Er ist schwerst verletzt',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Kurz vor 17 Uhr wurde ein 5-jähriger Junge angefahren.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Luganersee bei Sonnenuntergang mit gespiegelten Bergen',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Büste Arsizio: Agent wegen simulierter Aggression verurteilt',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Zwei Jahre Haft für den örtlichen Polizeibeamten Die Filme schließen die der Gemeinde gemeldete Aggression aus 5.000 Euro provisorische Über 9.000 Euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Blick auf den Luganer See mit den Bergen im Hintergrund',
 };
 
 export default blogMetaDe;

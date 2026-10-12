@@ -13064,6 +13064,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': 'Bimbo di 5 anni investito a Cedrate: è gravissimo',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Poco prima delle 17 un bimbo di 5 anni è stato investito.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lago di Lugano al tramonto con montagne riflesse',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio: agente condannato per aggressione simulata',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Due anni di reclusione per l\'agente della Polizia Locale I filmati escludono l\'aggressione denunciata Al Comune 5mila euro di provvisionale Oltre 9mila euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo',
 };
 
 export default blogMetaIt;

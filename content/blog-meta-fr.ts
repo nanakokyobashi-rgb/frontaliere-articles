@@ -13065,6 +13065,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bambino-investito-gallarate-cedrate.title': 'Un garçon de 5 ans renversé à Cedrate : son état est très grave',
     'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Peu avant 17 heures, un garçon de 5 ans a été renversé.',
     'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lac de Lugano au coucher du soleil avec montagnes reflétées',
+    'blog.article.busto-arsizio-agente-condannato.title': 'Busto Arsizio : agent condamné pour agression simulée',
+    'blog.article.busto-arsizio-agente-condannato.excerpt': 'Deux ans de réclusion pour l’agent de la police municipale Les vidéos excluent l’agression dénoncée À la municipalité 5mila euro de provision Plus de 9mila euro',
+    'blog.article.busto-arsizio-agente-condannato.imageAlt': 'Vue sur le lac de Lugano avec les montagnes en arrière-plan',
 };
 
 export default blogMetaFr;
