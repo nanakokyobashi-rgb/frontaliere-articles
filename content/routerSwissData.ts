@@ -2727,6 +2727,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'svizzera-mirino-007-stranieri': { it: 'svizzera-mirino-007-stranieri', en: 'switzerland-target-foreign-spies', de: 'schweiz-im-visier-auslandischer-spione', fr: 'suisse-dans-le-viseur-des-espions-etrangers' },
  'benu-rete-santanna-sanita': { it: 'benu-rete-santanna-sanita', en: 'benu-santanna-network-ticino', de: 'benu-santanna-netzwerk-tessin', fr: 'benu-reseau-santanna-tessin' },
  'ia-pubblica-amministrazione-ticino': { it: 'ia-pubblica-amministrazione-ticino', en: 'ai-public-administration-ticino', de: 'ki-oeffentliche-verwaltung-tessin', fr: 'ia-administration-publique-tessin' },
+ 'cdf-procedure-fitosanitari': { it: 'cdf-procedure-fitosanitari', en: 'cdf-plant-protection-approval', de: 'cdf-zulassung-pflanzenschutz', fr: 'cdf-homologation-phytosanitaire' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -8114,6 +8114,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ia-pubblica-amministrazione-ticino.title': 'AI in Ticino’s public administration: innovation or digitized problems?',
     'blog.article.ia-pubblica-amministrazione-ticino.excerpt': 'Ticino combines advanced research and slow bureaucracy USI and SUPSI are points of reference for the Canton Ticino talent looks to the Federal Institutes of Technology AI',
     'blog.article.ia-pubblica-amministrazione-ticino.imageAlt': 'Government building in Bellinzona with digital elements symbolizing AI in public administration',
+    'blog.article.cdf-procedure-fitosanitari.title': 'CDF: complex approval of plant protection products',
+    'blog.article.cdf-procedure-fitosanitari.excerpt': 'The CDF audit was published on October 12, 2026 Five federal offices examine plant protection products Structures and processes are too complex',
+    'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Swiss federal offices and a dossier on plant protection product approval',
 };
 
 export default blogMetaChEn;

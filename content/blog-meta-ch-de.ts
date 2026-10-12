@@ -8114,6 +8114,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ia-pubblica-amministrazione-ticino.title': 'KI in der Tessiner Verwaltung: Innovation oder digitalisierte Probleme?',
     'blog.article.ia-pubblica-amministrazione-ticino.excerpt': 'Das Tessin verbindet fortschrittliche Forschung und langsame Bürokratie USI und SUPSI sind Bezugspunkte für den Kanton Tessiner Talente blicken auf die Eidgenössischen Technischen Hochschulen Die KI',
     'blog.article.ia-pubblica-amministrazione-ticino.imageAlt': 'Regierungsgebäude in Bellinzona mit digitalen Elementen die KI in der öffentlichen Verwaltung symbolisieren',
+    'blog.article.cdf-procedure-fitosanitari.title': 'CDF: Zulassung von Pflanzenschutzmitteln komplex',
+    'blog.article.cdf-procedure-fitosanitari.excerpt': 'Am 12. Oktober 2026 wurde die Prüfung des CDF veröffentlicht Fünf Bundesämter prüfen die Pflanzenschutzmittel Strukturen und Prozesse sind zu komplex',
+    'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Schweizer Bundesämter und Unterlagen zur Zulassung von Pflanzenschutzmitteln',
 };
 
 export default blogMetaChDe;

@@ -102365,6 +102365,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cdf-procedure-fitosanitari': {
+    title: 'CDF: omologazione dei prodotti fitosanitari complessa',
+    description: 'Il 12 ottobre 2026 è stata pubblicata la verifica del CDF Cinque uffici federali esaminano i prodotti fitosanitari Strutture e processi sono troppo complessi',
+    keywords: 'frontalieri, ticino, svizzera, italia, omologazione, prodotti, fitosanitari, complessa',
+    ogTitle: 'Prodotti fitosanitari, la verifica del CDF',
+    ogDescription: 'Il 12 ottobre 2026 è stata pubblicata la verifica del CDF Cinque uffici federali esaminano i prodotti fitosanitari Strutture e processi sono troppo complessi',
+    canonicalPath: '/articoli-svizzera/cdf-procedure-fitosanitari/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CDF: omologazione dei prodotti fitosanitari complessa",
+      "description": "Il 12 ottobre 2026 è stata pubblicata la verifica del CDF Cinque uffici federali esaminano i prodotti fitosanitari Strutture e processi sono troppo complessi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cdf-procedure-fitosanitari.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Uffici federali svizzeri e dossier per l'omologazione di prodotti fitosanitari"
+      },
+      "datePublished": "2026-10-12T23:17:07+00:00",
+      "dateModified": "2026-10-12T23:17:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cdf-procedure-fitosanitari/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

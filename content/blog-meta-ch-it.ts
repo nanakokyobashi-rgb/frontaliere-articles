@@ -8114,6 +8114,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ia-pubblica-amministrazione-ticino.title': 'IA nella PA ticinese: innovazione o problemi digitalizzati?',
     'blog.article.ia-pubblica-amministrazione-ticino.excerpt': 'Il Ticino unisce ricerca avanzata e burocrazia lenta USI e SUPSI sono riferimenti per il Cantone I talenti ticinesi guardano ai Politecnici federali L\'IA',
     'blog.article.ia-pubblica-amministrazione-ticino.imageAlt': 'Palazzo del governo a Bellinzona con elementi digitali che simboleggiano l\'IA nella PA',
+    'blog.article.cdf-procedure-fitosanitari.title': 'CDF: omologazione dei prodotti fitosanitari complessa',
+    'blog.article.cdf-procedure-fitosanitari.excerpt': 'Il 12 ottobre 2026 è stata pubblicata la verifica del CDF Cinque uffici federali esaminano i prodotti fitosanitari Strutture e processi sono troppo complessi',
+    'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Uffici federali svizzeri e dossier per l\'omologazione di prodotti fitosanitari',
 };
 
 export default blogMetaChIt;

@@ -27079,6 +27079,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'cdf-procedure-fitosanitari',
+    category: 'novita',
+    date: '2026-10-12T23:17:07.651Z',
+    image: '/images/blog/article-cdf-procedure-fitosanitari.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

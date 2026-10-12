@@ -8114,6 +8114,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ia-pubblica-amministrazione-ticino.title': 'IA dans l’AP tessinoise : innovation ou problèmes ?',
     'blog.article.ia-pubblica-amministrazione-ticino.excerpt': 'Le Tessin allie recherche avancée et bureaucratie lente USI et SUPSI sont des références pour le Canton Les talents tessinois se tournent vers les écoles polytechniques fédérales L’IA',
     'blog.article.ia-pubblica-amministrazione-ticino.imageAlt': 'Palais du gouvernement à Bellinzone avec éléments numériques symbolisant l\'IA dans l\'administration publique',
+    'blog.article.cdf-procedure-fitosanitari.title': 'CDF : homologation complexe des produits phytosanitaires',
+    'blog.article.cdf-procedure-fitosanitari.excerpt': 'Le 12 octobre 2026, l’audit du CDF a été publié Cinq offices fédéraux examinent les produits phytosanitaires Les structures et les processus sont trop complexes',
+    'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Bureaux fédéraux suisses et dossier d\'homologation de produits phytosanitaires',
 };
 
 export default blogMetaChFr;

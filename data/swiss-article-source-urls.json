@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/verita-immobiliari/1948435/il-tuo-affitto-non-scende-da-solo-devi-chiederlo": {
-    "articleId": "affitto-scende-chiedi",
-    "ts": "2026-09-08T06:24:48.998Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948672/franco-chfd-test-aziende-nove": {
     "articleId": "franco-chfd-test-aziende-2026",
     "ts": "2026-09-08T07:44:11.547Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/rubriche/ospite/1956285/intelligenza-competenze-ia-biaggio-elio-sa-amministrazione": {
     "articleId": "ia-pubblica-amministrazione-ticino",
     "ts": "2026-10-12T22:15:36.364Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/wedt6jh4fyie": {
+    "articleId": "cdf-procedure-fitosanitari",
+    "ts": "2026-10-12T23:17:08.068Z",
     "keyForm": 2
   }
 }

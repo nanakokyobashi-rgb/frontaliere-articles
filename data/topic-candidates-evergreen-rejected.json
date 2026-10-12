@@ -797,14 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1791672816476
-    },
-    "frontaliere::https://comozero.it/attualita/provincia-di-como-schianto-tra-due-auto": {
-      "section": "frontaliere",
-      "ts": 1791673026487
-    },
     "frontaliere::https://www.varesenews.it/2026/10/fendinebbia-duke-chirurgo-hale-e-renfro-sorprende-in-lunetta/2704417": {
       "section": "frontaliere",
       "ts": 1791683108431
@@ -980,6 +972,10 @@
     "frontaliere::https://www.swissinfo.ch/ita/kof-sui-nobel-economia%2c-%22loro-lavoro-importante-per-la-svizzera%22/92203941": {
       "section": "frontaliere",
       "ts": 1791844301527
+    },
+    "svizzera::https://www.rsi.ch/s/4153382": {
+      "section": "svizzera",
+      "ts": 1791846071629
     }
   }
 }
