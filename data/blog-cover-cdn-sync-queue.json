@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-imposta-cani-zurigo-guida.webp",
+      "sha256": "456a43d67277448f1d81e7c7dea25a9132c3d71eacfa77d2bc9c8a6b5079032d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-imposta-cani-zurigo-guida-480w.webp",
+      "sha256": "fbde99db883fc30991b13b4d437df2f40cc859cde2e6a95ba4fb931f6b18f8a2"
+    }
+  ]
 }
