@@ -13041,7 +13041,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Photo of Lugano Congress Palace during the Talenti in movimento event with professionals and researchers',
     'blog.article.como-truffa-30mila-euro.title': 'Como, online scam worth 30 thousand euros: police recover everything',
     'blog.article.como-truffa-30mila-euro.excerpt': '30mila euro stolen from Como through spoofing Victim an employee of a foundation Instant bank transfer to Poste Italiane Amount recovered and returned',
-    'blog.article.como-truffa-30mila-euro.imageAlt': 'View of Lake Lugano with mountains in the background',
+    'blog.article.como-truffa-30mila-euro.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

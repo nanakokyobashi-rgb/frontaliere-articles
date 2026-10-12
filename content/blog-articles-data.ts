@@ -43974,7 +43974,7 @@ const RAW_ARTICLES = [
  id: 'como-truffa-30mila-euro',
  category: 'novita',
  date: '2026-10-12T13:20:26.521Z',
- image: '/images/blog/article-varese-oltre-400mila-euro-sottratti-da-due-badanti.webp',
+ image: '/images/blog/article-como-truffa-30mila-euro.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',
