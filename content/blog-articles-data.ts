@@ -44010,6 +44010,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'semafori-svizzera-ustra-traffico',
+ category: 'pratico',
+ date: '2026-10-12T17:16:34.877Z',
+ image: '/images/blog/article-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

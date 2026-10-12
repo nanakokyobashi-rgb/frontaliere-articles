@@ -1,5 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/lugano-primo-passo-verso-la-mobilita-del-futuro-440831": "lugano-mobilita-del-futuro",
   "https://www.varesenews.it/2026/08/uil-infortuni-sul-lavoro-a-varese-7-morti-in-6-mesi/2658733": "infortuni-lavoro-varese-uil-2026",
   "https://www.varesenews.it/2026/08/controlli-di-ferragosto-della-guardia-di-finanza-9-lavoratori-irregolari-e-sospensione-per-due-attivita/2658979": "controlli-lavoratori-irregolari-ticino",
   "https://www.varesenews.it/2026/08/ecco-le-imprese-che-pagano-piu-imposte-nel-varesotto/2659201": "economia-varese-2024-imposte",
@@ -2476,6 +2475,11 @@
   "https://comozero.it/attualita/como-residenti-del-centro-storico-attenzione-il-rinnovo-del-pass-auto-diventa-annuale-e-un-riassunto-di-tutte-le-novita": {
     "articleId": "como-pass-auto-rinnovo-annuale",
     "ts": "2026-10-12T15:55:15.163Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/frontalieri-in-arrivo-120-nuovi-semafori-incubo-sulle-autostrade-svizzere": {
+    "articleId": "semafori-svizzera-ustra-traffico",
+    "ts": "2026-10-12T17:16:35.294Z",
     "keyForm": 2
   }
 }

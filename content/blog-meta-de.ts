@@ -13050,6 +13050,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.como-pass-auto-rinnovo-annuale.title': 'Como, Anwohnerparkausweis: Erneuerung erfolgt jährlich',
     'blog.article.como-pass-auto-rinnovo-annuale.excerpt': 'Der Anwohnerparkausweis muss jedes Jahr erneuert werden.',
     'blog.article.como-pass-auto-rinnovo-annuale.imageAlt': 'Historisches Zentrum von Como mit Oldtimer unter ZTL-Schild und Alpen im Hintergrund',
+    'blog.article.semafori-svizzera-ustra-traffico.title': '120 neue Ampeln an Schweizer Anschlussstellen',
+    'blog.article.semafori-svizzera-ustra-traffico.excerpt': 'Mehr als 120 neue Ampeln an Schweizer Anschlussstellen werden geprüft Im Jahr 2025 summierten sich die Staus auf 68.040 Stunden Die Stauzeiten stiegen um 20%',
+    'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Ampeln an Schweizer Autobahnanschlüssen',
 };
 
 export default blogMetaDe;

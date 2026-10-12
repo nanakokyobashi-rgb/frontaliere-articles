@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-12T16:48:09.155Z",
       "lastFailureAt": "2026-10-12T16:48:09.155Z"
+    },
+    {
+      "articleId": "semafori-svizzera-ustra-traffico",
+      "title": "120 nuovi semafori agli svincoli svizzeri",
+      "fallbackImage": "/images/blog/article-rendimenti-titoli-svizzeri-in-rialzo-bns-allo-0.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-12T17:16:35.292Z",
+      "lastFailureAt": "2026-10-12T17:16:35.292Z"
     }
   ]
 }
