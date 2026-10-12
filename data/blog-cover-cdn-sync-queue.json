@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-valutazioni-immobiliari-trasparenza-casa.webp",
+      "sha256": "5541f810de9125af9a2964564aec2fa5f3e02b0675b973127bef5c9e41bf5d86"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-valutazioni-immobiliari-trasparenza-casa-480w.webp",
+      "sha256": "430f15a8647762fb8aed8a7786445d9973757e9c8c74db1d069ee92d8ff4804f"
+    }
+  ]
 }
