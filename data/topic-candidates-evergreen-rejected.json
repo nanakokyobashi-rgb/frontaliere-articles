@@ -932,6 +932,30 @@
     "frontaliere::https://www.tio.ch/ticino/economia/1956277/network-swiss-medical-phoenix-pharma": {
       "section": "frontaliere",
       "ts": 1791828181990
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1956261/azienda-wagner-chiude-ar-svizzera": {
+      "section": "frontaliere",
+      "ts": 1791828762392
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/patente-dal-2027-cambiano-le-regole--4157678.html": {
+      "section": "frontaliere",
+      "ts": 1791828783778
+    },
+    "frontaliere::https://comozero.it/attualita/attivita-trasferite-in-svizzera-chiude-unazienda-storica-licenziamento-per-quasi-70-lavoratori": {
+      "section": "frontaliere",
+      "ts": 1791828804483
+    },
+    "frontaliere::https://www.ticinonews.ch/economia/swiss-medical-network-si-allea-con-phoenix-pharma-in-ticino-444490": {
+      "section": "frontaliere",
+      "ts": 1791828823342
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/formazione-e-lavoro-per-giovani-migranti-con-il-progetto-bridge-il-70-trova-un-impiego-in-due-mesi/2706079": {
+      "section": "frontaliere",
+      "ts": 1791829289772
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/ascend-sport-technology-sbarcher%c3%a0-in-borsa/92203008": {
+      "section": "frontaliere",
+      "ts": 1791829330871
     }
   }
 }
