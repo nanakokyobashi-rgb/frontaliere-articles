@@ -120,6 +120,90 @@ describe('repairEventsDigestLocalizedToponyms', () => {
     assert.equal(pairs?.length, 2);
   });
 
+  it('uses one identity for the canton-neutral bucket across localized paths', () => {
+    const sourceBody = [
+      '## Gli eventi',
+      '',
+      '### [Buchs](/eventi/altri-cantoni/buchs/)',
+      '- **sabato 16:00** — Evento in Zurigo',
+    ].join('\n');
+    const targetBody = [
+      '## Events',
+      '',
+      '### [Buchs](/en/events/other-cantons/buchs/)',
+      '- **Saturday 16:00** — Event in Zürich',
+    ].join('\n');
+
+    const pairs = pairEventsByStableKey(
+      parseEventsDigestBody2Safe(sourceBody),
+      parseEventsDigestBody2Safe(targetBody),
+    );
+
+    assert.equal(pairs?.length, 1);
+  });
+
+  it('isolates duplicate rendered event keys and still repairs unique records', () => {
+    const original = {
+      id: 'eventi-weekend-ticino',
+      content: {
+        it: {
+          body2: [
+            '## Gli eventi',
+            '',
+            '### [Lugano](/eventi/ticino/lugano/)',
+            '- **sabato** — Primo evento',
+            '- **sabato** — Secondo evento',
+            '- **domenica** — Evento in Zurigo',
+          ].join('\n'),
+        },
+        en: {
+          body2: [
+            '## Events',
+            '',
+            '### [Lugano](/en/events/ticino/lugano/)',
+            '- **Saturday** — First event',
+            '- **Saturday** — Second event',
+            '- **Sunday** — Event in Zürich',
+          ].join('\n'),
+        },
+      },
+    };
+    const source = parseEventsDigestBody2Safe(original.content.it.body2);
+    const target = parseEventsDigestBody2Safe(original.content.en.body2);
+    const pairs = pairEventsByStableKey(source, target);
+
+    assert.equal(pairs?.length, 1);
+    const repaired = repairEventsDigestLocalizedToponyms(original);
+    assert.match(repaired.content.en.body2, /Sunday.*Event in Zurich/);
+  });
+
+  it('fails closed for an unlinked heading containing ambiguous toponyms', () => {
+    const original = incidentArticle();
+    original.content.it.body2 = [
+      '## Gli eventi',
+      '',
+      '### Zurigo e Ginevra',
+      '',
+      '### [Lugano](/eventi/ticino/lugano/)',
+      '- **sabato 16:00** — Evento',
+    ].join('\n');
+    original.content.en.body2 = [
+      '## Events',
+      '',
+      '### Zurich e Ginevra',
+      '',
+      '### [Lugano](/en/events/ticino/lugano/)',
+      '- **Saturday 16:00** — Event',
+    ].join('\n');
+
+    const repaired = repairEventsDigestLocalizedToponyms(original);
+
+    assert.equal(repaired.content.en.body2, original.content.en.body2);
+    assert.ok(findArticleLocalizedToponymMismatches(repaired).some(({ locale, code, type }) => (
+      locale === 'en' && code === 'BODY2' && type === 'structure'
+    )));
+  });
+
   it('pairs headings by stable key when an unlinked section changes position', () => {
     const original = incidentArticle();
     original.content.it.body2 = [

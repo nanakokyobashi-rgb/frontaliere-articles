@@ -509,8 +509,19 @@ function digestHeadingLinkStableKey(href) {
   if (!placeSlug) return null;
 
   const baseSegments = routeSegments.slice(0, -1);
-  const cantonKey = DIGEST_CANTON_KEY_BY_SLUG.get(baseSegments.at(-1));
-  if (cantonKey) return `place:${cantonKey}:${placeSlug}`;
+  const cantonSlug = baseSegments.at(-1);
+  if (DIGEST_CANTON_KEY_BY_SLUG.has(cantonSlug)) {
+    const cantonKey = DIGEST_CANTON_KEY_BY_SLUG.get(cantonSlug);
+    // An ambiguous URL slug must not silently become a pairing identity.
+    if (!cantonKey) return null;
+    return `place:${cantonKey}:${placeSlug}`;
+  }
+
+  // The events route has exactly two base segments: a localized feature
+  // segment and either a canton slug or the canton-neutral bucket. The latter
+  // is localized (`altri-cantoni`/`other-cantons`/...) but has one shared
+  // pairing identity. Keep deeper unknown paths disambiguated below.
+  if (baseSegments.length === 2) return `place:canton-neutral:${placeSlug}`;
 
   // Keep the non-canton base path when it is not in the shared table. This
   // preserves the old synthetic/test route shape while avoiding a bare final
@@ -536,8 +547,9 @@ function digestHeadingStableKey(line) {
   }
 
   // Non-linked canton headings (e.g. `Svitto` / `Schwyz`) have no URL slug,
-  // but the canonical table still gives them a stable BFS code. Ignore generic
-  // prose headings and ambiguous labels rather than guessing a pairing.
+  // but the canonical table still gives them a stable BFS code. Generic prose
+  // headings remain unpaired; callers must fail closed if a heading contains
+  // toponyms but has no unambiguous identity.
   const cantonCodes = [...new Set(
     localizedToponymHits(String(line ?? '').replace(/^#{2,3}\s+/u, ''))
       .filter((hit) => hit.type === 'canton')
@@ -577,28 +589,43 @@ function digestEventStableKey(parsed, event) {
 
 /**
  * Pair source and localized digest records by their rendered stable identity,
- * never by array position. A missing or duplicate identity is ambiguous, so
- * callers must fail closed instead of applying a potentially wrong rewrite.
+ * never by array position. A missing identity or a different multiplicity is
+ * structural ambiguity and fails closed; a duplicate identity with matching
+ * multiplicity is isolated so the unambiguous records can still be repaired.
  */
 export function pairEventsByStableKey(source, target) {
   if (!source || !target || !Array.isArray(source.events) || !Array.isArray(target.events)) return null;
 
-  const sourceByKey = new Map();
-  for (const sourceEvent of source.events) {
-    const key = digestEventStableKey(source, sourceEvent);
-    if (!key || sourceByKey.has(key)) return null;
-    sourceByKey.set(key, sourceEvent);
-  }
+  const collect = (parsed) => {
+    const byKey = new Map();
+    for (const event of parsed.events) {
+      const key = digestEventStableKey(parsed, event);
+      if (!key) return null;
+      const events = byKey.get(key) || [];
+      events.push(event);
+      byKey.set(key, events);
+    }
+    return byKey;
+  };
+
+  const sourceByKey = collect(source);
+  const targetByKey = collect(target);
+  if (!sourceByKey || !targetByKey || sourceByKey.size !== targetByKey.size) return null;
 
   const pairs = [];
-  const targetKeys = new Set();
-  for (const targetEvent of target.events) {
-    const key = digestEventStableKey(target, targetEvent);
-    if (!key || targetKeys.has(key) || !sourceByKey.has(key)) return null;
-    targetKeys.add(key);
-    pairs.push({ key, sourceEvent: sourceByKey.get(key), targetEvent });
+  for (const [key, sourceEvents] of sourceByKey) {
+    const targetEvents = targetByKey.get(key);
+    if (!targetEvents || targetEvents.length !== sourceEvents.length) return null;
+    // There is no rendered discriminator for these records. Do not guess by
+    // position, but do not discard unrelated records from the whole digest.
+    if (sourceEvents.length !== 1) continue;
+    pairs.push({ key, sourceEvent: sourceEvents[0], targetEvent: targetEvents[0] });
   }
-  return pairs.length === source.events.length ? pairs : null;
+  return pairs;
+}
+
+function headingContainsToponyms(line) {
+  return localizedToponymHits(String(line ?? '').replace(/^#{2,3}\s+/u, '')).length > 0;
 }
 
 function pairDigestHeadingsByStableKey(source, target) {
@@ -606,8 +633,15 @@ function pairDigestHeadingsByStableKey(source, target) {
   const collect = (parsed) => {
     const byKey = new Map();
     for (const heading of parsed.headings) {
-      const key = digestHeadingStableKey(parsed.lines[heading.lineIndex]);
-      if (!key) continue;
+      const line = parsed.lines[heading.lineIndex];
+      const key = digestHeadingStableKey(line);
+      if (!key) {
+        // Generic unlinked prose is irrelevant to this repair. An unlinked
+        // toponym, however, is not safely position-pairable: leave the whole
+        // body2 untouched instead of silently missing the mismatch.
+        if (headingContainsToponyms(line)) return null;
+        continue;
+      }
       if (byKey.has(key)) return null;
       byKey.set(key, heading);
     }
