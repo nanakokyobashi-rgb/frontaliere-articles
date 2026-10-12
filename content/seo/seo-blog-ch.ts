@@ -102131,6 +102131,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-piogge-siccita-rischio-incendi': {
+    title: 'Siccità in Svizzera: la pioggia non basta | Frontaliere Ticino',
+    description: 'Le piogge recenti hanno attenuato solo temporaneamente la siccità Negli ultimi 30 giorni le precipitazioni sono state sotto il 50% Il Reno tra Lago di Costanza',
+    keywords: 'frontalieri, ticino, svizzera, italia, siccità, pioggia, basta, piogge',
+    ogTitle: 'Siccità svizzera: la pioggia non basta',
+    ogDescription: 'Le piogge recenti hanno attenuato solo temporaneamente la siccità Negli ultimi 30 giorni le precipitazioni sono state sotto il 50% Il Reno tra Lago di Costanza',
+    canonicalPath: '/articoli-svizzera/piogge-siccita-rischio-incendi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Siccità in Svizzera: la pioggia non basta",
+      "description": "Le piogge recenti hanno attenuato solo temporaneamente la siccità Negli ultimi 30 giorni le precipitazioni sono state sotto il 50% Il Reno tra Lago di Costanza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-piogge-siccita-rischio-incendi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lago svizzero con livelli d'acqua bassi durante una fase di siccità"
+      },
+      "datePublished": "2026-10-12T12:29:08+00:00",
+      "dateModified": "2026-10-12T12:29:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/piogge-siccita-rischio-incendi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

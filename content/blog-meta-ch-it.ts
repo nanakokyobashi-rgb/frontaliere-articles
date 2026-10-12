@@ -8095,7 +8095,10 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.rincaro-whey-galaxus.title': 'Proteine in polvere, prezzi quasi a 55 franchi al chilo',
     'blog.article.rincaro-whey-galaxus.excerpt': 'A settembre il Whey costa quasi 55 franchi al chilo La media del 2025 era di 46 franchi al chilo Domanda e costi di produzione spingono i prezzi Caseina',
-    'blog.article.rincaro-whey-galaxus.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Scaffale di proteine Whey in un negozio svizzero',
+    'blog.article.piogge-siccita-rischio-incendi.title': 'Siccità in Svizzera: la pioggia non basta',
+    'blog.article.piogge-siccita-rischio-incendi.excerpt': 'Le piogge recenti hanno attenuato solo temporaneamente la siccità Negli ultimi 30 giorni le precipitazioni sono state sotto il 50% Il Reno tra Lago di Costanza',
+    'blog.article.piogge-siccita-rischio-incendi.imageAlt': 'Lago svizzero con livelli d\'acqua bassi durante una fase di siccità',
 };
 
 export default blogMetaChIt;

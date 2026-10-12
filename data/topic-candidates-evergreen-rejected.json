@@ -797,26 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1955952/gli-rubano-l-auto-sotto-il-naso-poi-la-fuga-spericolata-in-autostrada": {
-      "section": "frontaliere",
-      "ts": 1791631360865
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/fondata-sul-lavoro-avs-e-sinistra-italiana-a-varese-per-rimettere-al-centro-salari-tutele-e-giovani/2704039": {
-      "section": "frontaliere",
-      "ts": 1791632860244
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1953522/brusino-arsizio-e-porto-ceresio-unite-dal-lago-lo-sport-e-l-unesco": {
-      "section": "frontaliere",
-      "ts": 1791633035654
-    },
-    "frontaliere::https://www.tio.ch/ticino/cronaca/1955850/traffico-bloccato-frana-sementina-feriti": {
-      "section": "frontaliere",
-      "ts": 1791633204954
-    },
-    "svizzera::https://www.rsi.ch/s/4148438": {
-      "section": "svizzera",
-      "ts": 1791633402691
-    },
     "svizzera::https://www.rsi.ch/s/4150082": {
       "section": "svizzera",
       "ts": 1791636559295
@@ -964,6 +944,14 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1956149/strategia-associazione-ated-ticino-cantone-critica-aziende-digital": {
       "section": "frontaliere",
       "ts": 1791803836141
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/rubawc8r9zfg": {
+      "section": "svizzera",
+      "ts": 1791807477151
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/ldno-vhhpxdv": {
+      "section": "svizzera",
+      "ts": 1791807495376
     }
   }
 }
