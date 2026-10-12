@@ -101936,6 +101936,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-regole-orari-negozi-zurigo': {
+    title: 'Orari negozi Canton Zurigo: guida a domeniche e festivi',
+    description: 'Guida pratica agli orari di apertura dei negozi nel Canton Zurigo: come verificare regole per domeniche, festivi e autorizzazioni speciali presso gli enti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, orari, negozi, canton, zurigo',
+    ogTitle: 'Orari negozi Canton Zurigo: guida a domeniche e festivi',
+    ogDescription: 'Scopri come consultare correttamente le regole sugli orari di apertura dei negozi nel Canton Zurigo. Una guida per gestire domeniche, giorni festivi e autorizzazioni speciali.',
+    canonicalPath: '/articoli-svizzera/regole-orari-negozi-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Orari negozi Canton Zurigo: guida a domeniche e festivi",
+      "description": "Guida pratica agli orari di apertura dei negozi nel Canton Zurigo: come verificare regole per domeniche, festivi e autorizzazioni speciali presso gli enti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-regole-orari-negozi-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Facciata di negozi in una via commerciale svizzera."
+      },
+      "datePublished": "2026-10-12T07:39:52+00:00",
+      "dateModified": "2026-10-12T07:39:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/regole-orari-negozi-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

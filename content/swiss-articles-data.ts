@@ -26965,6 +26965,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'regole-orari-negozi-zurigo',
+    category: 'pratico',
+    date: '2026-10-12T07:39:52.115Z',
+    image: '/images/blog/article-regole-orari-negozi-zurigo.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

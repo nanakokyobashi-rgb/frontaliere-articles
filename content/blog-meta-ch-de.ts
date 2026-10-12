@@ -8081,6 +8081,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.orari-negozi-zurigo-guida.title': 'Ladenöffnungszeiten im Kanton Zürich: Leitfaden zu Sonntagen und Feiertagen',
     'blog.article.orari-negozi-zurigo-guida.excerpt': 'Die Regeln für die Ladenöffnungszeiten sind kantonal.',
     'blog.article.orari-negozi-zurigo-guida.imageAlt': 'Geschäfte in einer Einkaufsstraße in Zürich',
+    'blog.article.regole-orari-negozi-zurigo.title': 'Ladenöffnungszeiten Zürich: Sonntag und Feiertage',
+    'blog.article.regole-orari-negozi-zurigo.excerpt': 'Im Kanton Zürich unterscheiden sich die Ladenöffnungszeiten je nach Gemeinde.',
+    'blog.article.regole-orari-negozi-zurigo.imageAlt': 'Ladengeschäfte in einer Schweizer Einkaufsstraße.',
 };
 
 export default blogMetaChDe;

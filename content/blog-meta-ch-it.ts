@@ -8081,6 +8081,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.orari-negozi-zurigo-guida.title': 'Orari negozi Cantone Zurigo: guida a domeniche e festivi',
     'blog.article.orari-negozi-zurigo-guida.excerpt': 'Le regole degli orari commerciali sono cantonali.',
     'blog.article.orari-negozi-zurigo-guida.imageAlt': 'Negozi in una via commerciale di Zurigo',
+    'blog.article.regole-orari-negozi-zurigo.title': 'Orari negozi Canton Zurigo: guida a domeniche e festivi',
+    'blog.article.regole-orari-negozi-zurigo.excerpt': 'Nel Canton Zurigo, gli orari commerciali variano per comune.',
+    'blog.article.regole-orari-negozi-zurigo.imageAlt': 'Facciata di negozi in una via commerciale svizzera.',
 };
 
 export default blogMetaChIt;
