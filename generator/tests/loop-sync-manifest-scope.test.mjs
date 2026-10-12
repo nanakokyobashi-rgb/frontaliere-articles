@@ -123,6 +123,14 @@ test('scope: ogni root esiste e ogni regola porta una ragione scritta', () => {
   }
 });
 
+test('scope: lo snapshot storico delle immagini resta fuori dal trasporto vivo', () => {
+  const legacySnapshot = 'data/blog-images-used-site-legacy.json';
+  const entry = manifest.scope.outOfScope.find((x) => x.prefix === legacySnapshot);
+
+  assert.ok(entry?.reason.includes('Snapshot storico congelato'));
+  assert.equal(coveredByManifest(manifest)(legacySnapshot), true);
+});
+
 /**
  * IL GUARD. Sotto un albero censito, un file senza voce di manifest non passa.
  *
