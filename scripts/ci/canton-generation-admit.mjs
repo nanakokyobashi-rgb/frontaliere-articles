@@ -14,9 +14,10 @@
  *   1. LA SEZIONE PUO' GENERARE? (D16)
  *      - Remote Config e' stato caricato davvero? `load-rc-env.mjs` esce 0 anche
  *        quando non carica niente (fail-open, per scelta), quindi il controllo
- *        e' esplicito: una variabile che arriva SOLO da Remote Config
- *        (`GITHUB_PAT_NANAKO`) deve essere nell'ambiente. Senza, la lista dei
- *        cantoni accesi non e' leggibile e la risposta e' «no», non «forse».
+ *        e' esplicito: il marker `RC_ENV_LOADED`, scritto dal loader soltanto
+ *        dopo aver letto il template, deve essere nell'ambiente. Senza, la
+ *        lista dei cantoni accesi non e' leggibile e la risposta e' «no», non
+ *        «forse». Un PAT opzionale non e' una prova di caricamento affidabile.
  *      - la sezione e' accesa? Stessa funzione che usa `create-article.mjs`
  *        (`resolveCantonSectionGate`: `enabled` nel profilo corpus E
  *        `CANTON_ARTICLE_SECTIONS_ENABLED` da Remote Config). Assente o vuoto =
@@ -73,11 +74,12 @@ import {
   cantonSectionProfile,
   resolveCantonSectionGate,
 } from '../../generator/scripts/lib/canton-section-profile.mjs';
+import { RC_LOADED_MARKER } from '../../generator/scripts/load-rc-env.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-/** Variabile che arriva SOLO da Remote Config: la sua presenza prova il caricamento. */
-export const RC_SENTINEL_ENV = 'GITHUB_PAT_NANAKO';
+/** Marker scritto dal loader soltanto dopo una lettura riuscita del template. */
+export const RC_SENTINEL_ENV = RC_LOADED_MARKER;
 
 /** Tetto globale di cantoni che generano insieme, se `vars` non lo imposta. */
 export const DEFAULT_MAX_PARALLEL = 3;
@@ -93,7 +95,7 @@ export const CANTON_WORKFLOW_PATH_RE = /^\.github\/workflows\/generate-article-[
 
 /** Remote Config e' stato caricato in questo job? */
 export function remoteConfigLoaded(env = process.env) {
-  return typeof env?.[RC_SENTINEL_ENV] === 'string' && env[RC_SENTINEL_ENV].trim() !== '';
+  return env?.[RC_SENTINEL_ENV] === '1';
 }
 
 /** Un intero positivo scritto come stringa, oppure `fallback`. */

@@ -55,7 +55,7 @@ const DISABLED_SECTION = PROFILES.cantons.find((profile) => profile.enabled !== 
 const TI_BUDGET = PROFILES.cantons.find((c) => c.section === SECTION).dailyBudget;
 
 /** Ambiente di un job in cui Remote Config e' arrivato e TI e' acceso. */
-const ENV_ON = { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: 'TI, GR' };
+const ENV_ON = { [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: 'TI, GR' };
 
 /** Letture che contano quante volte vengono chiamate. */
 function readers({ subjects = [], runs = [], beacon = { active: false, resetsAt: null } } = {}) {
@@ -86,20 +86,24 @@ const run = (id, file, createdAt) => ({ id, path: `.github/workflows/${file}`, c
 
 test('Remote Config non caricato: la sezione resta spenta, senza leggere niente', () => {
   const r = readers();
-  // Il loader e' fail-open: esce 0 anche quando non carica. Senza la sentinella
-  // la lista dei cantoni accesi non e' leggibile — nemmeno se la variabile c'e'.
+  assert.equal(RC_SENTINEL_ENV, 'RC_ENV_LOADED');
+  // Il loader e' fail-open: esce 0 anche quando non carica. Senza il marker di
+  // successo la lista dei cantoni accesi non e' leggibile — nemmeno se la
+  // variabile c'e'.
   const v = decide({ env: { [CANTON_SECTIONS_ENABLED_ENV]: 'all' } }, r);
   assert.equal(v.proceed, false);
   assert.equal(v.reason, 'rc-unavailable');
   assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 });
   assert.equal(remoteConfigLoaded({ [RC_SENTINEL_ENV]: '   ' }), false, 'una sentinella vuota non prova niente');
+  assert.equal(remoteConfigLoaded({ [RC_SENTINEL_ENV]: 'true' }), false, 'solo il marker emesso dal loader prova la lettura');
+  assert.equal(remoteConfigLoaded({ [RC_SENTINEL_ENV]: '1' }), true);
 });
 
 test('flag assente o vuoto: nessun cantone genera', () => {
   for (const value of [undefined, '', '  ', 'GR, BE']) {
     const r = readers();
     const v = decide({
-      env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: value },
+      env: { [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: value },
       profiles: DISABLED_PROFILES,
     }, r);
     assert.equal(v.proceed, false, `flag=${JSON.stringify(value)}`);
@@ -111,7 +115,7 @@ test('flag assente o vuoto: nessun cantone genera', () => {
 test('D22 enabled nel profilo non bypassa il gate D16 di Remote Config', () => {
   const r = readers();
   const v = decide({
-    env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: '' },
+    env: { [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: '' },
   }, r);
   assert.equal(v.proceed, false);
   assert.equal(v.reason, 'canton-disabled');
@@ -138,13 +142,30 @@ test('sezione accesa ma non attiva nel core: non genera', () => {
 test('una sezione fuori dall\'insieme attivo non passa nemmeno col flag', () => {
   const v = decideCantonAdmission({
     section: SECTION,
-    env: { [RC_SENTINEL_ENV]: 'pat', [CANTON_SECTIONS_ENABLED_ENV]: 'all' },
+    env: { [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: 'all' },
     activeSections: { frontaliere: {}, svizzera: {} },
     eventName: 'schedule',
     ...readers(),
   });
   assert.equal(v.proceed, false);
   assert.equal(v.reason, 'canton-inactive');
+});
+
+test('rollout pilot: canton-ti passa ma un sibling non nominato resta spento', () => {
+  const env = { [RC_SENTINEL_ENV]: '1', [CANTON_SECTIONS_ENABLED_ENV]: 'canton-ti' };
+  assert.equal(decide({ env }, readers()).proceed, true);
+
+  const r = readers();
+  const sibling = decideCantonAdmission({
+    section: 'canton-gr',
+    env,
+    eventName: 'schedule',
+    activeSections: activeCorpusCoreMap(),
+    ...r,
+  });
+  assert.equal(sibling.proceed, false);
+  assert.equal(sibling.reason, 'canton-disabled');
+  assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 });
 });
 
 test('una sezione non cantonale e\' un errore d\'uso, non un salto', () => {
@@ -285,7 +306,7 @@ test('un dispatch manuale salta budget, tetto e beacon — mai il flag', () => {
   assert.equal(v.reason, 'manual-dispatch');
   assert.deepEqual(r.calls, { subjects: 0, runs: 0, beacon: 0 });
 
-  const off = decide({ eventName: 'workflow_dispatch', env: { [RC_SENTINEL_ENV]: 'pat' }, profiles: DISABLED_PROFILES });
+  const off = decide({ eventName: 'workflow_dispatch', env: { [RC_SENTINEL_ENV]: '1' }, profiles: DISABLED_PROFILES });
   assert.equal(off.proceed, false);
   assert.equal(off.reason, 'canton-disabled');
 });
@@ -318,7 +339,7 @@ test('CLI: sezione spenta esce 0 con lo stesso marcatore di create-article.mjs',
     t.skip('il profilo di test non contiene una sezione spenta');
     return;
   }
-  const res = runCli({ SECTION: DISABLED_SECTION, [RC_SENTINEL_ENV]: 'pat' });
+  const res = runCli({ SECTION: DISABLED_SECTION, [RC_SENTINEL_ENV]: '1' });
   assert.equal(res.status, 0, res.stderr);
   assert.match(res.stdout, new RegExp(`^${CANTON_SECTION_DISABLED_MARKER} section=${DISABLED_SECTION}$`, 'm'));
   assert.match(res.stdout, new RegExp(`GENERATION_OUTCOME kind=skipped reason=canton-disabled section=${DISABLED_SECTION}`));
@@ -367,6 +388,7 @@ test('il gate legge il token del runner, non un PAT interpolato dal contesto env
   assert.match(gate, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
   assert.match(gate, /\n {6}actions: read\n/, 'senza actions: read le run in_progress non si leggono');
   assert.match(gate, /CANTON_GENERATION_MAX_PARALLEL: \$\{\{ vars\.CANTON_GENERATION_MAX_PARALLEL \}\}/);
+  assert.match(gate, /CANTON_DAILY_BUDGET_CAP: \$\{\{ vars\.CANTON_DAILY_BUDGET_CAP \}\}/);
 });
 
 /** Chiusura degli import relativi (statici e dinamici) a partire da un file. */
