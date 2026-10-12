@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-incontro-parita-salariale-varese.webp",
-      "sha256": "a019f1f59b9a92856d3149412fc3cab1d72d3fa6fbe0d0255d7c5f6c1c5c566f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-incontro-parita-salariale-varese-480w.webp",
-      "sha256": "3e238e842cd64cd91be8b7209212a556fa931923cb77e644294296d3669b10e3"
-    }
-  ]
+  "items": []
 }
