@@ -44031,6 +44031,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'scontro-corso-europa-verbania',
+ category: 'novita',
+ date: '2026-10-12T21:13:40.857Z',
+ image: '/images/blog/article-scontro-corso-europa-verbania.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

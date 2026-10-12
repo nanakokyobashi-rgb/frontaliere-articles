@@ -13059,6 +13059,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.tassa-salute-ristorni-17-settembre.title': 'Taxe santé et rétrocessions : réunion du 17 septembre à Berne',
     'blog.article.tassa-salute-ristorni-17-settembre.excerpt': 'Le 17 septembre, il sera question de taxe sur la santé, de double imposition et de statut ; le Tessin menace de bloquer les rétrocessions, mettant en péril 120 millions de francs pour les communes frontalières.',
     'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Vue du lac de Lugano avec les montagnes en arrière-plan, symbole de la région frontalière du Tessin',
+    'blog.article.scontro-corso-europa-verbania.title': 'Accident en cours en Europe : voitures et motos à Verbania',
+    'blog.article.scontro-corso-europa-verbania.excerpt': 'Collision latérale entre une voiture et une moto en cours Europe La moto venait de Pallanza Choc près du distributeur Tamoil Motocycliste à l\'hôpital, conducteur',
+    'blog.article.scontro-corso-europa-verbania.imageAlt': 'Route urbaine à Verbania près d\'une station-service',
 };
 
 export default blogMetaFr;
