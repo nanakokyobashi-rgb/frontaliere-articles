@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-uscita-svizzera-schengen-controlli.webp",
-      "sha256": "371d96212de9730c344de7fd20dc5b618eb35c326a923f3fcd2dc1aebf64d9eb"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-uscita-svizzera-schengen-controlli-480w.webp",
-      "sha256": "fa39dcadd7c8b166e1083f1e671cca90ec8a9f163e0c6743449517daa1687486"
-    }
-  ]
+  "items": []
 }
