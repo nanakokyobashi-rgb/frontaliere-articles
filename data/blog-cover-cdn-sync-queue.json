@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-busto-arsizio-agente-condannato.webp",
+      "sha256": "2237edc55392262f5704fbcae7c1d43f51a228aa687898abd24a3023538101f0"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-busto-arsizio-agente-condannato-480w.webp",
+      "sha256": "cc89e276c8c759a99dcb421bbffa5884998f4c2bf65f7d90e418e01a6671537a"
+    }
+  ]
 }
