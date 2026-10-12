@@ -8093,6 +8093,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Real estate valuations: differences of up to 13%',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Valuations differ on average from 11 to 13% Only 30-35% of transactions have verified data 3% of 50\'000 francs is worth 1\'500 francs In Geneva access',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration generated for this article',
+    'blog.article.rincaro-whey-galaxus.title': 'Protein powder, prices close to 55 francs per kilo',
+    'blog.article.rincaro-whey-galaxus.excerpt': 'In September Whey costs almost 55 francs per kilo The 2025 average was 46 francs per kilo Demand and production costs drive prices Casein',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

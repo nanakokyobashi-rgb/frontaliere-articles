@@ -1192,8 +1192,15 @@ export function dailyKeyFromBucketBody(body) {
     : null;
 }
 
+/** Remove only one complete Markdown inline-code delimiter around a repository field. */
+export function normalizeRepositoryFieldValue(value) {
+  const source = String(value ?? '').trim();
+  const codeSpan = /^(`+)([^`\r\n]+)\1$/u.exec(source);
+  return codeSpan ? codeSpan[2] : source;
+}
+
 function normalizeRepositoryPart(value) {
-  return String(value || '').trim().toLowerCase();
+  return normalizeRepositoryFieldValue(value).toLowerCase();
 }
 
 /** Return the single live bucket-level Target repository field, or null. */
@@ -1202,7 +1209,7 @@ export function dailyBucketTargetRepository(body) {
   const firstItem = parseFollowupItems(source)[0];
   const head = source.slice(0, firstItem?.start ?? source.length);
   const values = headerFieldValuesOutsideMarkdownProtection(head, 'Target repository');
-  if (values.length === 1) return values[0].trim();
+  if (values.length === 1) return normalizeRepositoryFieldValue(values[0]);
   if (values.length) return null;
 
   // A bucket without a header is still safe to inspect when every item declares
@@ -1210,7 +1217,7 @@ export function dailyBucketTargetRepository(body) {
   // of items: that would let a mixed bucket cross the site/corpus boundary.
   const itemRepositories = parseFollowupItems(source).map((item) => {
     const declared = fieldValuesOutsideMarkdownProtection(item.text, 'Target repository');
-    return declared.length === 1 ? declared[0].trim() : null;
+    return declared.length === 1 ? normalizeRepositoryFieldValue(declared[0]) : null;
   });
   const normalized = [...new Set(itemRepositories.filter(Boolean).map(normalizeRepositoryPart))];
   if (!itemRepositories.length || itemRepositories.some((value) => !value) || normalized.length !== 1) return null;

@@ -19,9 +19,61 @@ import {
   countAggregateHeadingItems,
   dedupeDailyItems,
   detectAlreadyResolved,
+  dailyBucketTargetRepository,
+  dailyBucketTitle,
+  hasDailyBucketRepositoryConsistency,
   hasEnumeratedItems,
+  normalizeRepositoryFieldValue,
   parseFollowupItems,
 } from '../../scripts/ci/followup-resolution-match.mjs';
+
+const TARGET_REPOSITORY = 'nanakokyobashi-rgb/frontaliere-articles';
+
+function dailyBucketBody(headerRepository, itemRepository) {
+  return [
+    `## ${dailyBucketTitle('2026-10-07', TARGET_REPOSITORY, 1)}`,
+    `- Target repository: ${headerRepository}`,
+    '',
+    '### FU-2026-10-07-001 — follow-up item',
+    `- Target repository: ${itemRepository}`,
+    '- Target file: scripts/ci/followup-resolution-match.mjs',
+    '- Acceptance token: `runTask()`',
+    '- State: open',
+  ].join('\n');
+}
+
+test('Target repository normalizza solo uno span inline-code completo', () => {
+  assert.equal(normalizeRepositoryFieldValue(`  \`${TARGET_REPOSITORY}\`  `), TARGET_REPOSITORY);
+  assert.equal(normalizeRepositoryFieldValue(`\`\`${TARGET_REPOSITORY}\`\``), TARGET_REPOSITORY);
+  assert.equal(normalizeRepositoryFieldValue(`\`${TARGET_REPOSITORY}\` trailing`), `\`${TARGET_REPOSITORY}\` trailing`);
+  assert.equal(normalizeRepositoryFieldValue('owner/`repository`'), 'owner/`repository`');
+});
+
+test('Target repository in inline code remains the same repository in header and item', () => {
+  const body = dailyBucketBody(`\`${TARGET_REPOSITORY}\``, `\`${TARGET_REPOSITORY}\``);
+
+  assert.equal(dailyBucketTargetRepository(body), TARGET_REPOSITORY);
+  assert.equal(hasDailyBucketRepositoryConsistency(body, TARGET_REPOSITORY), true);
+  assert.equal(hasDailyBucketRepositoryConsistency(body, 'another/repo'), false);
+  assert.equal(
+    hasDailyBucketRepositoryConsistency(
+      dailyBucketBody(`\`${TARGET_REPOSITORY}\``, '`another/repo`'),
+      TARGET_REPOSITORY,
+    ),
+    false,
+    'un repository diverso deve restare un veto anche se il codice inline e valido',
+  );
+});
+
+test('a bucket without a repository header normalizes every inline-code item declaration', () => {
+  const body = [
+    '## 2026-10-07 — daily bucket',
+    '### FU-2026-10-07-001 — follow-up item',
+    `- Target repository: \`${TARGET_REPOSITORY}\``,
+  ].join('\n');
+
+  assert.equal(dailyBucketTargetRepository(body), TARGET_REPOSITORY);
+});
 
 test('legacy quoted source paths remain file locators without widening token scope', () => {
   const target = '.github/workflows/crawler-group-01.yml';

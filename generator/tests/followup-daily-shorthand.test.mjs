@@ -3,6 +3,7 @@ import test from 'node:test';
 
 import {
   bucketState,
+  dailyBucketInfo,
   dailyKeyFromBucketBody,
   hasDailyBucketRepositoryConsistency,
   parseFollowupItems,
@@ -75,5 +76,28 @@ test('il reconciler usa l acceptance token strutturale del daily item', () => {
   assert.equal(
     hasStrongDailyAcceptanceEvidence(parseFollowupItems(result.body), result.changes[0].evidence),
     true,
+  );
+});
+
+test('il close gate accetta il Target repository formattato come codice inline', () => {
+  const body = BODY
+    .replace('State: collecting', 'State: sealed')
+    .replace('- Target repository: owner/repo', '- Target repository: `owner/repo`')
+    .replace('- Suggested action: verificare `firstGuard()` in scripts/example.mjs',
+      '- Suggested action: verificare `firstGuard()` in scripts/example.mjs\n- State: open');
+  const io = {
+    fileExists: (path) => path === 'scripts/example.mjs',
+    readFile: () => 'const value = firstGuard(input);',
+  };
+
+  const result = reconcileDailyItems(body, io, DAY, 'owner/repo', 1);
+  assert.equal(result.changed, true);
+  assert.equal(parseFollowupItems(result.body)[0].state, 'done');
+  const title = `follow-up(daily:${DAY}): 1 item — \`owner/repo\``;
+  const daily = dailyBucketInfo(title);
+  assert.equal(daily.targetRepository, '`owner/repo`');
+  assert.equal(
+    dailyBucketCloseGate(result.body, io, daily.dailyKey, daily.targetRepository, daily.itemCount).blocks,
+    false,
   );
 });

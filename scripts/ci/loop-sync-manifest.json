@@ -136,6 +136,10 @@
         "reason": "Registro delle verifiche evergreen scritto dal generatore (#2096), che oggi contiene solo `{}`: il censimento lo trova 'byte-identico' a `packages/articles/engine/shared/article-reviewed-by.json` del sito perche' due JSON vuoti hanno lo stesso sha del blob, non perche' siano lo stesso file. Il sito non ha nessun gemello di questo registro e non c'e' una fix che scende o risale. Se il registro diventa codice condiviso col sito, la riga va tolta e il file registrato."
       },
       {
+        "prefix": "data/blog-images-used-site-legacy.json",
+        "reason": "Snapshot storico congelato del catalogo immagini del sito, introdotto dalla PR #2120 per conservare nel corpus la mappa byte-per-byte precedente alla migrazione. Non e' un manifest runtime ne' una copia da mantenere in sync: il censimento lo trova identico perche' e' stato intenzionalmente archiviato, quindi resta fuori dal trasporto e non va registrato come gemello vivo."
+      },
+      {
         "prefix": "services/seo/imageObjectLd.ts",
         "reason": "Supporto runtime byte-identico richiesto dal relativo import conservato in `host/shared/inlineJsonScript.ts`. La sorgente è già censita dal gemello `host/seo/imageObjectLd.ts`; registrare una seconda voce con lo stesso `sitePath` fa fallire il gate di handoff, quindi questo alias resta fuori dal trasporto automatico."
       },
@@ -601,7 +605,7 @@
     {
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "adapted",
-      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco. MOVIMENTO CORPUS 2026-09-20: `stripFencedBlocks` e' stata ESPORTATA perche' `scripts/ci/lib/review-findings.mjs` (sceso dal sito con #9318) la riusa invece di riscriverla; `commandReferent()` ora accetta anche file senza estensione e directory, cioe' il contratto adattato del follow-up #8067. Aggiornata la SOLA baseline `corpus`: il lato `site` e `alignedAt` restano al 2026-09-13 perche' il sito si e' mosso per conto suo da allora e quel drift non l'ha riconciliato nessuno — riscriverlo qui lo cancellerebbe dal report senza che nessuno lo abbia guardato.",
+      "reason": "Il corpus espone il contratto aggregate canonical ai consumer locali e conserva la propria risoluzione di locator sul percorso di pubblicazione; per questo la copia non è byte-identica al matcher sorgente del sito. La baseline registra separatamente i due blob e il trasporto successivo deve preservare l'adattamento, non sovrascriverlo con un mirror cieco. MOVIMENTO CORPUS 2026-09-20: `stripFencedBlocks` e' stata ESPORTATA perche' `scripts/ci/lib/review-findings.mjs` (sceso dal sito con #9318) la riusa invece di riscriverla; `commandReferent()` ora accetta anche file senza estensione e directory, cioe' il contratto adattato del follow-up #8067. MOVIMENTO CORPUS 2026-10-12: portata dalla PR sito #12658 la normalizzazione del solo span Markdown inline-code completo nei campi `Target repository`, mantenendo la risoluzione di locator e gli altri contratti adattati del corpus.",
       "baseline": {
         "site": "9d02fce29db5e79d",
         "corpus": "29609a6b75d08f0d",

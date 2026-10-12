@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/bns%3a-riserve-di-divise-aumentano-ulteriormente-in-agosto/92018100": {
-    "articleId": "riserve-bns-aumento-agosto",
-    "ts": "2026-09-07T15:16:14.556Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/g8rrikjnignr": {
     "articleId": "incontro-pensioni-salute-2026",
     "ts": "2026-09-07T19:26:55.921Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956185/svizzera-valutazioni-vendita-trasparenza-allarme-casa": {
     "articleId": "valutazioni-immobiliari-trasparenza-casa",
     "ts": "2026-10-12T11:08:59.554Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/proteine-in-polvere-vanno-a-ruba-e-i-prezzi-salgono/92201789": {
+    "articleId": "rincaro-whey-galaxus",
+    "ts": "2026-10-12T12:10:33.712Z",
     "keyForm": 2
   }
 }

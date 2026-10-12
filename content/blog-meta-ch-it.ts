@@ -8093,6 +8093,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Valutazioni immobiliari: differenze fino al 13%',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Valutazioni divergono in media dall\'11 al 13% Solo il 30-35% delle transazioni ha dati verificati Il 3% su 50\'000 franchi vale 1\'500 franchi A Ginevra l\'accesso',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.rincaro-whey-galaxus.title': 'Proteine in polvere, prezzi quasi a 55 franchi al chilo',
+    'blog.article.rincaro-whey-galaxus.excerpt': 'A settembre il Whey costa quasi 55 franchi al chilo La media del 2025 era di 46 franchi al chilo Domanda e costi di produzione spingono i prezzi Caseina',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;

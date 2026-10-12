@@ -8093,6 +8093,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Immobilienbewertungen: Abweichungen von bis zu 13%',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Bewertungen weichen im Durchschnitt um 11 bis 13% ab Nur 30-35% der Transaktionen verfügen über verifizierte Daten 3% von 50\'000 Franken entsprechen 1\'500 Franken In Genf der Zugang',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.rincaro-whey-galaxus.title': 'Proteinpulver, Preise bei fast 55 Franken pro Kilo',
+    'blog.article.rincaro-whey-galaxus.excerpt': 'Im September kostet Whey fast 55 Franken pro Kilo Der Durchschnitt für 2025 lag bei 46 Franken pro Kilo Nachfrage und Produktionskosten treiben die Preise Kasein',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

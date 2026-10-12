@@ -13033,6 +13033,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.indennita-lavoro-ridotto.title': 'Unia Fund: unemployment, short-time work and bad weather',
     'blog.article.indennita-lavoro-ridotto.excerpt': 'The Unia unemployment fund provides information on unemployment benefits, short-time work, bad weather and a calculator.',
     'blog.article.indennita-lavoro-ridotto.imageAlt': 'Desk with a laptop and calculator in a Ticino information office.',
+    'blog.article.incontro-parita-salariale-varese.title': 'Equal pay in Varese: meeting on Decree 96/2026',
+    'blog.article.incontro-parita-salariale-varese.excerpt': 'Decree 96/2026: greater focus on equality and transparency Meeting on October 13 at Villa Recalcati, Varese Roundtable and three company testimonials What →',
+    'blog.article.incontro-parita-salariale-varese.imageAlt': 'Professionals in a meeting room in Lugano discussing pay equality and pay transparency',
 };
 
 export default blogMetaEn;
