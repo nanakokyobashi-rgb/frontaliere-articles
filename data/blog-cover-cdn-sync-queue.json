@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ia-pubblica-amministrazione-ticino.webp",
-      "sha256": "e94c4eca42d6f37d20207f78a112d9cf862137003a90c0ea47588a3a68107e28"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ia-pubblica-amministrazione-ticino-480w.webp",
-      "sha256": "7b15e1d360204dc2480c68aefb32143c8eea8a17c52f34c5076e0462f7176136"
-    }
-  ]
+  "items": []
 }
