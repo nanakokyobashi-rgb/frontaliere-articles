@@ -3055,11 +3055,12 @@
       "path": "generator/scripts/lib/evergreen-article-refresh.mjs",
       "sitePath": "scripts/lib/evergreen-article-refresh.mjs",
       "mode": "adapted",
-      "reason": "Refresh degli articoli evergreen. Tre adattamenti veri: `DEFAULT_REPO_ROOT` a `../../..` (il trasporto ha spostato il modulo da `scripts/lib/` a `generator/scripts/lib/`, quindi due livelli su cadono in `generator/`), `corpusPath()` su ogni lettura, e `bumpSitemapLastmod` ridotta a no-op perche' `public/sitemap-blog.xml` qui non esiste — `scripts/build-api.mjs` rigenera quella sitemap dal corpus a ogni pubblicazione prendendo `<lastmod>` da `updatedAt || date`, che `bumpUpdatedAt` ha gia' scritto. Piu' `writeCorpusFile` per la guardia control char (#66). RIALLINEATO 2026-09-25 (corpus-ahead post-cutover valerielinc-ops/frontaliere-si-o-no#4974 item 3, issue #1816, figlia di valerielinc-ops/frontaliere-si-o-no#7483): il sito e' fermo alla baseline del 2026-08-09 (`c3d355c001c85c25`), qui `1d14b06861873773`. Il delta e' tutto di questo lato: #131 (report degli strip dei control char), #564 (write atomico temp+rename), #1419 (`bumpDateModified` rifiuta un'entry SEO duplicata prima di scrivere, via `scripts/lib/seo-entry.mjs`, corpus-only), #1499 (`bumpUpdatedAt` monotono, con registro e I/O iniettabili per le guide evergreen delle farmacie). Non si porta al sito, per scelta: sul sito il modulo e' importato solo da `generate-events-digest-article.mjs` e `generate-border-wait-ranking-article.mjs`, entrambi dormienti dal cutover; qui lo importano anche `generate-daily-brief-article.mjs` e `generate-pharmacy-evergreen-guides.mjs`, che esistono solo in questo repo. Il producer vivo e' questo: baseline corpus rigenerata sull'hash di oggi, baseline sito invariata.",
+      "reason": "Refresh degli articoli evergreen. Tre adattamenti veri: `DEFAULT_REPO_ROOT` a `../../..` (il trasporto ha spostato il modulo da `scripts/lib/` a `generator/scripts/lib/`, quindi due livelli su cadono in `generator/`), `corpusPath()` su ogni lettura, e `bumpSitemapLastmod` ridotta a no-op perche' `public/sitemap-blog.xml` qui non esiste — `scripts/build-api.mjs` rigenera quella sitemap dal corpus a ogni pubblicazione prendendo `<lastmod>` da `updatedAt || date`, che `bumpUpdatedAt` ha gia' scritto. Piu' `writeCorpusFile` per la guardia control char (#66). RIALLINEATO 2026-10-12 (valerielinc-ops/frontaliere-si-o-no#12834, PR sito #12891): il sito ha ricevuto il contratto strutturale e atomico maturato qui — rifiuto dei duplicati, diagnostica dei caratteri di controllo e commit temp+rename — preservando i suoi path locali, `dateModified` e la sitemap reale. Il corpus conserva gli adattamenti sopra e i consumer corpus-only; la baseline registra questa riconciliazione verificata dai test mirati del sito (35/35), senza modifiche al publish API.",
       "baseline": {
-        "site": "c3d355c001c85c25",
-        "corpus": "1d14b06861873773",
-        "alignedAt": "2026-09-25"
+        "site": "e175df56f76b258f",
+        "corpus": "27f6455212184fe9",
+        "alignedAt": "2026-10-12",
+        "forcedAt": "2026-10-12T08:05:23.201Z"
       }
     },
     {
