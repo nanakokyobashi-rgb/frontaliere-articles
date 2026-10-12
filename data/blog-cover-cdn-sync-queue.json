@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026.webp",
-      "sha256": "193a52c06b90f372def9158b5b5be493dc14365b09b7f65d3953436909e9981d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-camion-pesanti-uno-su-quattro-e-elettrico-nel-2026-480w.webp",
-      "sha256": "494351e855ec1ab6fdec17fd5081991aa865fa41ee966d80364752ce9b45776c"
-    }
-  ]
+  "items": []
 }
