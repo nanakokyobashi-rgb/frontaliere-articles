@@ -5,11 +5,11 @@
       "articleId": "esercitazione-soccorso-sasso",
       "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic alpine-rescue illustration; foreground people are clearly recognizable despite faces not being visible.); gemini (Gemini ",
+      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Original alpine-rescue illustration with no text, logos, or recognizable faces, but it contains recognizable foreground rescuers.",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-11T20:48:05.530Z"
+      "lastFailureAt": "2026-10-12T03:21:50.465Z"
     },
     {
       "articleId": "crisi-resilienza-zurigo",
@@ -20,16 +20,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-12T01:35:59.601Z",
       "lastFailureAt": "2026-10-12T02:36:17.628Z"
-    },
-    {
-      "articleId": "pensione-multipla-francia-svizzera-2026",
-      "title": "Pensioni multiple Francia/Svizzera: leggere il netto riga per riga",
-      "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T02:50:47.700Z",
-      "lastFailureAt": "2026-10-12T02:50:47.700Z"
     }
   ]
 }

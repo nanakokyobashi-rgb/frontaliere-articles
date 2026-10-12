@@ -32,7 +32,7 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Manifestazione della funzione pubblica nel Canton Vaud',
     'blog.article.pensione-multipla-francia-svizzera-2026.title': 'Pensioni multiple Francia/Svizzera: leggere il netto riga per riga',
     'blog.article.pensione-multipla-francia-svizzera-2026.excerpt': 'Il netto del relevé non riflette sempre la pensione.',
-    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Documento pensionistico bilingue su scrivania in un ufficio del Canton Vaud',
+    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.cff-eclepens-treni-ripresa.title': 'Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso',
     'blog.article.cff-eclepens-treni-ripresa.excerpt': 'Traffico ripreso alle 05:40 di domenica Linea Yverdon-les-Bains–Losanna tornata normale Incendio doloso a Eclépens: disagi da venerdì CFF mobilitati: circa 100',
     'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'Treno CFF sulla linea tra Yverdon-les-Bains e Losanna dopo la ripresa del traffico.',

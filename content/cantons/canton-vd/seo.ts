@@ -362,10 +362,15 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il netto del relevé non riflette sempre la pensione. Variazioni in CSG, CRDS e CASA dal 2026. Verificare ogni flusso separatamente.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pensione-multipla-francia-svizzera-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Documento pensionistico bilingue su scrivania in un ufficio del Canton Vaud"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T02:50:47+00:00",
       "dateModified": "2026-10-12T02:50:47+00:00",

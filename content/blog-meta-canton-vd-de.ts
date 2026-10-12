@@ -32,7 +32,7 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Demonstration des öffentlichen Dienstes im Kanton Waadt',
     'blog.article.pensione-multipla-francia-svizzera-2026.title': 'Mehrere Renten aus Frankreich/der Schweiz: den Nettobetrag Zeile für Zeile lesen',
     'blog.article.pensione-multipla-francia-svizzera-2026.excerpt': 'Der Nettobetrag der Abrechnung entspricht nicht immer der Rente.',
-    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Zweisprachiger Rentenbrief auf einem Schreibtisch in einem Büro',
+    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.cff-eclepens-treni-ripresa.title': 'CFF-Züge zwischen Yverdon-les-Bains und Lausanne: Verkehr wieder aufgenommen',
     'blog.article.cff-eclepens-treni-ripresa.excerpt': 'Verkehr am Sonntag um 05:40 Uhr wieder aufgenommen Bahnlinie Yverdon-les-Bains–Lausanne wieder im Normalbetrieb Brandstiftung in Eclépens: Beeinträchtigungen',
     'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'CFF-Zug auf der Strecke Yverdon-les-Bains–Lausanne nach der Wiederaufnahme.',

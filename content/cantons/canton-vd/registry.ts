@@ -109,7 +109,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'pensione-multipla-francia-svizzera-2026',
  category: 'pensione',
  date: '2026-10-12T02:50:47.675Z',
- image: '/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp',
+ image: '/images/blog/article-pensione-multipla-francia-svizzera-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VD'],

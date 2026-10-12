@@ -32,7 +32,7 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.funzione-pubblica-vaud-sciopero-2026.imageAlt': 'Public service demonstration in Canton Vaud',
     'blog.article.pensione-multipla-francia-svizzera-2026.title': 'Multiple French/Swiss pensions: read the net amount line by line',
     'blog.article.pensione-multipla-francia-svizzera-2026.excerpt': 'The net amount on the statement does not always reflect the pension.',
-    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Bilingual pension document on a desk in a Vaud office',
+    'blog.article.pensione-multipla-francia-svizzera-2026.imageAlt': 'Illustration generated for this article',
     'blog.article.cff-eclepens-treni-ripresa.title': 'CFF trains between Yverdon-les-Bains and Lausanne: service resumed',
     'blog.article.cff-eclepens-treni-ripresa.excerpt': 'Traffic resumed at 05:40 on Sunday Yverdon-les-Bains–Lausanne line back to normal Arson in Eclépens: disruptions since Friday CFF mobilized: approximately 100',
     'blog.article.cff-eclepens-treni-ripresa.imageAlt': 'CFF train on the Yverdon-les-Bains–Lausanne line after rail service resumed.',
