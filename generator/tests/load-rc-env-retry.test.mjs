@@ -130,6 +130,8 @@ test('il ponte RC espone le credenziali dei canali social al runtime locale', ()
     SERVER_INSTAGRAM_ACCESS_TOKEN: ['INSTAGRAM_ACCESS_TOKEN'],
     TIKTOK_USERNAME: ['TIKTOK_USERNAME'],
     SERVER_TIKTOK_ACCESS_TOKEN: ['TIKTOK_ACCESS_TOKEN'],
+    TIKTOK_VIDEO_CREATIVE_MODE: ['TIKTOK_VIDEO_CREATIVE_MODE'],
+    TIKTOK_VIDEO_CREATIVE_ROLLOUT_PERCENT: ['TIKTOK_VIDEO_CREATIVE_ROLLOUT_PERCENT'],
   };
   for (const [key, envKeys] of Object.entries(socialMappings)) {
     assert.deepEqual(RC_TO_ENV[key], envKeys, `${key} deve raggiungere il runtime`);
