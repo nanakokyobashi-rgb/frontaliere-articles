@@ -12,6 +12,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.herisau-verkehr-appenzello.title': 'Herisau : les deux Appenzell demandent plus de rapidité',
     'blog.article.herisau-verkehr-appenzello.excerpt': 'Lors de la consultation sur «Verkehr \'45», Appenzell Rhodes-Extérieures demande de revoir la proposition et conteste l\'orientation de la partie ferroviaire.',
     'blog.article.herisau-verkehr-appenzello.imageAlt': 'Route et voie ferrée à Herisau, dans le canton d\'Appenzell Rhodes-Extérieures',
+    'blog.article.deficit-comune-preventivo-2027.title': 'Déficit communal de CHF 169\'500 dans le budget 2027',
+    'blog.article.deficit-comune-preventivo-2027.excerpt': 'Le budget 2027 prévoit un déficit de CHF 169\'500.',
+    'blog.article.deficit-comune-preventivo-2027.imageAlt': 'Bâtiment communal dans un village du canton d’Appenzell',
 };
 
 export default blogMetaCantonAppenzelloFr;

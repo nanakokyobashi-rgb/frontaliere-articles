@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'deficit-comune-preventivo-2027',
+ category: 'novita',
+ date: '2026-10-12T06:43:23.669Z',
+ image: '/images/blog/article-deficit-comune-preventivo-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

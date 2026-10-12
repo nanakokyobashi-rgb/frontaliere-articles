@@ -119,6 +119,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-deficit-comune-preventivo-2027': {
+    title: 'Deficit comunale di CHF 169\'500 nel preventivo 2027',
+    description: 'Il preventivo 2027 prevede un disavanzo di CHF 169\'500. Prima era stato registrato un avanzo di CHF 37\'400; pesano i trasferimenti non influenzabili in aumento.',
+    keywords: 'frontalieri, ticino, svizzera, italia, deficit, comunale, preventivo, prevede',
+    ogTitle: 'Preventivo 2027: deficit comunale di CHF 169\'500',
+    ogDescription: 'Il Comune prevede nel conto economico 2027 un disavanzo di CHF 169\'500, dopo l\'avanzo di CHF 37\'400 dell\'esercizio precedente. La cancelleria collega il dato alla crescita della spesa e ai trasferimenti non influenzabili.',
+    canonicalPath: '/articoli-appenzello/deficit-comune-preventivo-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Deficit comunale di CHF 169'500 nel preventivo 2027",
+      "description": "Il preventivo 2027 prevede un disavanzo di CHF 169'500. Prima era stato registrato un avanzo di CHF 37'400; pesano i trasferimenti non influenzabili in aumento.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-deficit-comune-preventivo-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio comunale in un villaggio del Canton Appenzello"
+      },
+      "datePublished": "2026-10-12T06:43:23+00:00",
+      "dateModified": "2026-10-12T06:43:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/deficit-comune-preventivo-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

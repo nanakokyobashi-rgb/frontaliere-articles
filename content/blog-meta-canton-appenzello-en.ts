@@ -12,6 +12,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.herisau-verkehr-appenzello.title': 'Herisau: the two Appenzells call for greater speed',
     'blog.article.herisau-verkehr-appenzello.excerpt': 'During the consultation on «Verkehr \'45», Appenzell Ausserrhoden calls for the proposal to be reviewed and challenges the direction of the railway component.',
     'blog.article.herisau-verkehr-appenzello.imageAlt': 'Road and railway infrastructure in Herisau, Appenzell Ausserrhoden',
+    'blog.article.deficit-comune-preventivo-2027.title': 'Municipal deficit of CHF 169\'500 in the 2027 budget',
+    'blog.article.deficit-comune-preventivo-2027.excerpt': 'The 2027 budget estimates a deficit of CHF 169\'500.',
+    'blog.article.deficit-comune-preventivo-2027.imageAlt': 'Municipal building in a village in the Canton of Appenzell',
 };
 
 export default blogMetaCantonAppenzelloEn;

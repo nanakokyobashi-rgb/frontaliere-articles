@@ -12,6 +12,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.herisau-verkehr-appenzello.title': 'Herisau: Die beiden Appenzell fordern mehr Tempo',
     'blog.article.herisau-verkehr-appenzello.excerpt': 'Während der Vernehmlassung zu «Verkehr \'45» fordert Appenzell Ausserrhoden, den Vorschlag zu überarbeiten, und stellt die Ausrichtung des Bahnteils infrage.',
     'blog.article.herisau-verkehr-appenzello.imageAlt': 'Strasse und Bahn in Herisau im Kanton Appenzell Ausserrhoden',
+    'blog.article.deficit-comune-preventivo-2027.title': 'Gemeindedefizit von CHF 169\'500 im Voranschlag 2027',
+    'blog.article.deficit-comune-preventivo-2027.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von CHF 169\'500 vor.',
+    'blog.article.deficit-comune-preventivo-2027.imageAlt': 'Gemeindehaus in einem Dorf im Kanton Appenzell',
 };
 
 export default blogMetaCantonAppenzelloDe;
