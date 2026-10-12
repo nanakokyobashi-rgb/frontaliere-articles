@@ -8078,6 +8078,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.giorni-festivi-canton-zurigo-guida.title': 'Feiertage im Kanton Zürich: Leitfaden zu Kalender und Regeln',
     'blog.article.giorni-festivi-canton-zurigo-guida.excerpt': 'Wie man kantonale Feiertage von eidgenössischen unterscheidet.',
     'blog.article.giorni-festivi-canton-zurigo-guida.imageAlt': 'Regierungsgebäude im Kanton Zürich',
+    'blog.article.orari-negozi-zurigo-guida.title': 'Ladenöffnungszeiten im Kanton Zürich: Leitfaden zu Sonntagen und Feiertagen',
+    'blog.article.orari-negozi-zurigo-guida.excerpt': 'Die Regeln für die Ladenöffnungszeiten sind kantonal.',
+    'blog.article.orari-negozi-zurigo-guida.imageAlt': 'Geschäfte in einer Einkaufsstraße in Zürich',
 };
 
 export default blogMetaChDe;

@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/svizzera/attualita/1955736/federer-tennis-lavori-grigliata-organizzato-casa": {
-      "section": "svizzera",
-      "ts": 1791599309876
-    },
     "frontaliere::https://www.laregione.ch/cantone/ticino/1955840/il-fondo-per-la-formazione-professionale-risponde-ancora-ai-suoi-compiti": {
       "section": "frontaliere",
       "ts": 1791603217912
@@ -980,6 +976,14 @@
     "svizzera::https://www.tio.ch/dal-mondo/cronaca/1956041/stati-costa-florida-tempesta-elettricita-centinaia-morti-quattro-isaias-migliaia": {
       "section": "svizzera",
       "ts": 1791771970263
+    },
+    "svizzera::https://www.swissinfo.ch/ita/mille-persone-a-manifestazione-berna-a-un-anno-da-disordini/92200201": {
+      "section": "svizzera",
+      "ts": 1791773313704
+    },
+    "svizzera::https://www.swissinfo.ch/ita/polizia-in-forze-a-berna-per-manifestazione-non-autorizzata/92199608": {
+      "section": "svizzera",
+      "ts": 1791773335359
     }
   }
 }
