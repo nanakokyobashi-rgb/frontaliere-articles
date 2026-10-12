@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-scontro-corso-europa-verbania.webp",
+      "sha256": "dc97281bcfa24bf1c205b5539bdf74c0646ae4d021a9a5364d24f5fe547fe928"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-scontro-corso-europa-verbania-480w.webp",
+      "sha256": "fd3775bb058b9b73d3730be21ff397c14ae4b7d488b35065d7174c38e22f959a"
+    }
+  ]
 }
