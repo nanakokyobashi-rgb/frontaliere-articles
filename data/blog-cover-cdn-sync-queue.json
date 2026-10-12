@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-carburanti-dopo-record-settembre.webp",
-      "sha256": "18a2334b3c8379087448d2f46b9b32a0ed71ad81da8b9ab50857fe31c865661a"
-    },
-    {
-      "path": "public/images/blog/article-semafori-svizzera-ustra-traffico.webp",
-      "sha256": "0d79b9790c5eec450ed5489fd57b34f439240f37264d503a317153403e18af12"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-carburanti-dopo-record-settembre-480w.webp",
-      "sha256": "d0d18100f10a1982b1fbcf7d0b22ec0ea2540390d33c3b472def9a13c89a0976"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-semafori-svizzera-ustra-traffico-480w.webp",
-      "sha256": "f46f78bc2d7f79661a2d7eb0a867735b687dc2e731622cbcafb5993494607605"
-    }
-  ]
+  "items": []
 }
