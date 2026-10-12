@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-servizi-imprese-turgovia-rav.webp",
-      "sha256": "bae15c43f9d7f7f6fe00fd96bfdd0d40612d9cf985b55e84b7c17a30a0022aec"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-servizi-imprese-turgovia-rav-480w.webp",
-      "sha256": "9223e3a99c3c2c3be774f3fd085c5b9aca7b375fd7de47dbd4ebe55d892c383f"
-    }
-  ]
+  "items": []
 }
