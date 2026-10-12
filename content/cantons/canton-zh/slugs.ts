@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'eolico-weinland-zurigo': { it: 'eolico-weinland-zurigo', en: 'wind-power-zurich-weinland', de: 'windkraft-zuerich-weinland', fr: 'eolien-weinland-zurich' },
  'lex-ubs-zurigo-capitale': { it: 'lex-ubs-zurigo-capitale', en: 'zurich-ubs-capital-rules', de: 'zuerich-ubs-kapitalregeln', fr: 'zurich-ubs-regles-capital' },
  'vbz-centrale-problemi-quotidiani': { it: 'vbz-centrale-problemi-quotidiani', en: 'vbz-control-centre-daily-issues', de: 'vbz-leitstelle-taegliche-probleme', fr: 'vbz-centre-controle-problemes' },
+ 'bank-now-dipendenti-zurigo': { it: 'bank-now-dipendenti-zurigo', en: 'bank-now-employees-zurich', de: 'bank-now-mitarbeitende-zuerich', fr: 'bank-now-employes-zurich' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

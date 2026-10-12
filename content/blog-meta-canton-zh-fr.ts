@@ -27,6 +27,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.vbz-centrale-problemi-quotidiani.title': 'VBZ : jusqu’à 300 problèmes par jour au centre de contrôle',
     'blog.article.vbz-centrale-problemi-quotidiani.excerpt': 'Dans le centre de contrôle de VBZ, le personnel fait face à jusqu’à 300 problèmes par jour liés aux tramways et aux bus.',
     'blog.article.vbz-centrale-problemi-quotidiani.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.bank-now-dipendenti-zurigo.title': 'Bank-now : 300 employés déménagent à Zurich',
+    'blog.article.bank-now-dipendenti-zurigo.excerpt': 'Bank-now quitte Horgen : 300 employés déménagent à Zurich.',
+    'blog.article.bank-now-dipendenti-zurigo.imageAlt': 'Immeubles de bureaux dans le quartier financier de Zurich',
 };
 
 export default blogMetaCantonZhFr;

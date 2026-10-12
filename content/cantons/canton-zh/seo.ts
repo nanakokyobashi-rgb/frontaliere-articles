@@ -309,6 +309,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bank-now-dipendenti-zurigo': {
+    title: 'Bank-now: 300 dipendenti si spostano a Zurigo | Frontaliere Ticino',
+    description: 'Bank-now lascia Horgen: 300 dipendenti si trasferiscono a Zurigo. La notizia descrive lo spostamento della banca e del personale verso la città di Zurigo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bank-now, dipendenti, spostano, zurigo',
+    ogTitle: 'Bank-now: 300 dipendenti si spostano a Zurigo',
+    ogDescription: 'La Bank-now lascia Horgen e indica Zurigo come destinazione per 300 dipendenti. Il trasferimento riguarda il luogo di lavoro e mette al centro il passaggio da una località all\'altra, con la banca e il personale coinvolti nella stessa operazione.',
+    canonicalPath: '/articoli-zurigo/bank-now-dipendenti-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bank-now: 300 dipendenti si spostano a Zurigo",
+      "description": "Bank-now lascia Horgen: 300 dipendenti si trasferiscono a Zurigo. La notizia descrive lo spostamento della banca e del personale verso la città di Zurigo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bank-now-dipendenti-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edifici per uffici nel distretto finanziario di Zurigo"
+      },
+      "datePublished": "2026-10-12T01:21:37+00:00",
+      "dateModified": "2026-10-12T01:21:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/bank-now-dipendenti-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
