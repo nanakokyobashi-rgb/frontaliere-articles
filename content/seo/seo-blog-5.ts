@@ -106498,6 +106498,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bambino-investito-gallarate-cedrate': {
+    title: 'Bimbo di 5 anni investito a Cedrate: è gravissimo',
+    description: 'Poco prima delle 17 un bimbo di 5 anni è stato investito. L\'incidente è avvenuto in via Arconti, a Cedrate. Il minore è in pericolo di vita ed è stato',
+    keywords: 'frontalieri, ticino, svizzera, italia, bimbo, anni, investito, cedrate',
+    ogTitle: 'Bimbo di 5 anni investito a Cedrate: condizioni gravissime',
+    ogDescription: 'Poco prima delle 17 un bimbo di 5 anni è stato investito.',
+    canonicalPath: '/articoli-frontaliere/bambino-investito-gallarate-cedrate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bimbo di 5 anni investito a Cedrate: è gravissimo",
+      "description": "Poco prima delle 17 un bimbo di 5 anni è stato investito. L'incidente è avvenuto in via Arconti, a Cedrate. Il minore è in pericolo di vita ed è stato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bambino-investito-gallarate-cedrate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lago di Lugano al tramonto con montagne riflesse"
+      },
+      "datePublished": "2026-10-12T21:57:02+00:00",
+      "dateModified": "2026-10-12T21:57:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bambino-investito-gallarate-cedrate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

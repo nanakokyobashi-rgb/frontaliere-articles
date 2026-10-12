@@ -797,22 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.vconews.it/2026/10/10/leggi-notizia/argomenti/viabilita-e-trasporti-9/articolo/ss-34-chiusa-di-notte-dal-21-ottobre-battelli-sostitutivi-tra-cannero-e-cannobio.html": {
-      "section": "frontaliere",
-      "ts": 1791660213562
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/donne-e-giovani-in-crescita-tra-i-campi-varesini-i-numeri-dellagricoltura-alla-vigilia-di-agrivarese/2702182": {
-      "section": "frontaliere",
-      "ts": 1791660534142
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1955996/riad-aeroporto-scalo-attacco-feriti-missile": {
-      "section": "svizzera",
-      "ts": 1791661004823
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/dal-business-plan-allagricoltura-a-ville-ponti-la-seconda-edizione-del-focus-day-nuove-imprese/2703904": {
-      "section": "frontaliere",
-      "ts": 1791665145016
-    },
     "frontaliere::http://www.cd-ocst.ch": {
       "section": "frontaliere",
       "ts": 1791672816476
@@ -956,6 +940,18 @@
     "frontaliere::https://www.swissinfo.ch/ita/ascend-sport-technology-sbarcher%c3%a0-in-borsa/92203008": {
       "section": "frontaliere",
       "ts": 1791829330871
+    },
+    "frontaliere::https://www.ticinonews.ch/economia/il-mattone-in-svizzera-e-sempre-piu-caro-444479": {
+      "section": "frontaliere",
+      "ts": 1791841217570
+    },
+    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
+      "section": "frontaliere",
+      "ts": 1791841632349
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1956165/tina-lavoro-anni-maglia-figli-locarno-decana": {
+      "section": "frontaliere",
+      "ts": 1791841650479
     }
   }
 }

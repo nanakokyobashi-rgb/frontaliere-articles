@@ -13061,6 +13061,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.scontro-corso-europa-verbania.title': 'Incidente in corso Europa: auto e moto a Verbania',
     'blog.article.scontro-corso-europa-verbania.excerpt': 'Scontro laterale tra un\'auto e una moto in corso Europa La moto proveniva da Pallanza Urto vicino al distributore Tamoil Motociclista in ospedale, conducente',
     'blog.article.scontro-corso-europa-verbania.imageAlt': 'Strada urbana di Verbania vicino a un distributore di carburante',
+    'blog.article.bambino-investito-gallarate-cedrate.title': 'Bimbo di 5 anni investito a Cedrate: è gravissimo',
+    'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Poco prima delle 17 un bimbo di 5 anni è stato investito.',
+    'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lago di Lugano al tramonto con montagne riflesse',
 };
 
 export default blogMetaIt;

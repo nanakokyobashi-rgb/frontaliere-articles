@@ -13062,6 +13062,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.scontro-corso-europa-verbania.title': 'Accident en cours en Europe : voitures et motos à Verbania',
     'blog.article.scontro-corso-europa-verbania.excerpt': 'Collision latérale entre une voiture et une moto en cours Europe La moto venait de Pallanza Choc près du distributeur Tamoil Motocycliste à l\'hôpital, conducteur',
     'blog.article.scontro-corso-europa-verbania.imageAlt': 'Route urbaine à Verbania près d\'une station-service',
+    'blog.article.bambino-investito-gallarate-cedrate.title': 'Un garçon de 5 ans renversé à Cedrate : son état est très grave',
+    'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Peu avant 17 heures, un garçon de 5 ans a été renversé.',
+    'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lac de Lugano au coucher du soleil avec montagnes reflétées',
 };
 
 export default blogMetaFr;

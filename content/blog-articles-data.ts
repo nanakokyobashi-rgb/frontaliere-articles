@@ -44041,6 +44041,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bambino-investito-gallarate-cedrate',
+ category: 'novita',
+ date: '2026-10-12T21:57:01.981Z',
+ image: '/images/blog/article-bambino-investito-gallarate-cedrate.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

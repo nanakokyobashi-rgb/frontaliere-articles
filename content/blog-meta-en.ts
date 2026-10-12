@@ -13060,6 +13060,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.scontro-corso-europa-verbania.title': 'Accident in progress in Europe: cars and motorcycles in Verbania',
     'blog.article.scontro-corso-europa-verbania.excerpt': 'Side collision between a car and a motorcycle in progress Europe The motorcycle came from Pallanza Collision near the Tamoil distributor Motorcyclist in the hospital, driver',
     'blog.article.scontro-corso-europa-verbania.imageAlt': 'Urban road in Verbania near a fuel station',
+    'blog.article.bambino-investito-gallarate-cedrate.title': '5-year-old boy hit by a vehicle in Cedrate: he is in very serious condition',
+    'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Shortly before 17:00, a 5-year-old boy was struck.',
+    'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Lake Lugano at sunset with reflected mountains',
 };
 
 export default blogMetaEn;

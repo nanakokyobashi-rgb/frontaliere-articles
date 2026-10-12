@@ -13059,6 +13059,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.scontro-corso-europa-verbania.title': 'Unfall in Europa: Autos und Motorräder in Verbania',
     'blog.article.scontro-corso-europa-verbania.excerpt': 'Seitlicher Zusammenstoß zwischen einem Auto und einem Motorrad im Gange Europa Das Motorrad kam aus Pallanza Impto in der Nähe des Tamoil-Händlers Motorradfahrer im Krankenhaus, Fahrer',
     'blog.article.scontro-corso-europa-verbania.imageAlt': 'Stadtstraße in Verbania nahe einer Tankstelle',
+    'blog.article.bambino-investito-gallarate-cedrate.title': '5-jähriger Junge in Cedrate angefahren: Er ist schwerst verletzt',
+    'blog.article.bambino-investito-gallarate-cedrate.excerpt': 'Kurz vor 17 Uhr wurde ein 5-jähriger Junge angefahren.',
+    'blog.article.bambino-investito-gallarate-cedrate.imageAlt': 'Luganersee bei Sonnenuntergang mit gespiegelten Bergen',
 };
 
 export default blogMetaDe;
