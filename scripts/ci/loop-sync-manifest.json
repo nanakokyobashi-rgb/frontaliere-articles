@@ -2295,12 +2295,21 @@
       }
     },
     {
+      "path": "scripts/lib/pipeline-phase-timing.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c85bf41b32069f6c",
+        "corpus": "c85bf41b32069f6c",
+        "alignedAt": "2026-10-13"
+      }
+    },
+    {
       "path": "scripts/lib/run-bounded-command.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e3dd11821feb9dc1",
-        "corpus": "e3dd11821feb9dc1",
-        "alignedAt": "2026-10-09"
+        "site": "708cfff27d76d925",
+        "corpus": "708cfff27d76d925",
+        "alignedAt": "2026-10-13"
       }
     },
     {
