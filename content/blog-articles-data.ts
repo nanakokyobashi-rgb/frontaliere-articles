@@ -43709,7 +43709,7 @@ const RAW_ARTICLES = [
  id: 'esercitazione-soccorso-sasso',
  category: 'novita',
  date: '2026-10-10T22:34:09.569Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-esercitazione-soccorso-sasso.webp',
  hasCalculator: true,
  articleType: 'news',
  authorSlug: 'redazione',

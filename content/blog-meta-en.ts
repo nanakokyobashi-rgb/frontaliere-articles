@@ -12961,7 +12961,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.ambri-piotta-berna-abols.imageAlt': 'Ambrì Piotta hockey game against Bern at the Gottardo Arena',
     'blog.article.esercitazione-soccorso-sasso.title': 'Mountain rescue, exercise at Sasso Malascarpa',
     'blog.article.esercitazione-soccorso-sasso.excerpt': 'Exercise of the Triangolo Lariano Station Twenty-three rescuers, with three technical instructors and three medical personnel Two technical-medical scenarios at Sasso Malascarpa',
-    'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Alpine rescuers training with a stretcher in a rugged mountain channel',
+    'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Illustration generated for this article',
     'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese: mushroom guide to reduce accidents in the woods',
     'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'The Prefect urges a campaign on the risks in the woods The handbook is entitled «Safe Mushroom Hunting» The request involves Municipalities, schools, Communities',
     'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Illustration generated for this article',

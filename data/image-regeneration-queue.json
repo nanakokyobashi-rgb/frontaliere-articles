@@ -2,16 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "esercitazione-soccorso-sasso",
-      "title": "Soccorso alpino, esercitazione al Sasso Malascarpa",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-esercitazione-soccorso-sasso: openai-codex (vision gate rejected image: Generic illustrated alpine-rescue exercise scene, clearly relevant to the subject, but it contains recognizable foreground rescue",
-      "status": "failed",
-      "failureCount": 5,
-      "requestedAt": "2026-10-10T22:34:10.251Z",
-      "lastFailureAt": "2026-10-12T17:24:44.806Z"
-    },
-    {
       "articleId": "tassa-salute-ristorni-17-settembre",
       "title": "Tassa salute e ristorni: tavolo del 17 settembre a Berna",
       "fallbackImage": "/images/blog/tassa-salute-frontalieri-ticino-settembre.webp",

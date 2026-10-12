@@ -12960,7 +12960,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.ambri-piotta-berna-abols.imageAlt': 'Eishockeyspiel von Ambrì Piotta gegen Bern in der Gottardo Arena',
     'blog.article.esercitazione-soccorso-sasso.title': 'Bergrettung, Übung am Sasso Malascarpa',
     'blog.article.esercitazione-soccorso-sasso.excerpt': 'Übung der Station Triangolo Lariano Dreiundzwanzig Rettungskräfte, mit drei technischen Ausbildern und drei Sanitätern Zwei technisch-medizinische Szenarien am Sasso Malascarpa',
-    'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Bergretter bei einer Übung mit einer Trage in einem unwegsamen Bergkanal',
+    'blog.article.esercitazione-soccorso-sasso.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.vademecum-funghi-sicurezza-varese.title': 'Varese: Vademecum Pilze zur Reduzierung von Unfällen im Wald',
     'blog.article.vademecum-funghi-sicurezza-varese.excerpt': 'Der Präfekt fordert eine Kampagne zu den Risiken in den Wäldern Das Vademekum trägt den Titel «Sichere Suche nach Pilzen» Die Anfrage betrifft Gemeinden, Schulen, Gemeinden',
     'blog.article.vademecum-funghi-sicurezza-varese.imageAlt': 'Für diesen Artikel erstellte Illustration',

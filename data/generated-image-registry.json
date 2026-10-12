@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 417,
+  "assetCount": 418,
   "assets": [
     {
       "schema": 1,
@@ -16166,6 +16166,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Original generic illustration of Canton Ticino with trains and a location marker; no text, logos, faces, or identifiable people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-esercitazione-soccorso-sasso",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "7252fe54e1ac138dc32368ac25c4910450e552c24e73d301d13f9d1287e1c807",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "ac30f6069e14353642d9aded3ae52e596d3ddb6cd6df80dc5bb86da7c44917a7",
+      "bytes": 206578,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-12T23:35:47.456Z",
+      "verifiedAt": "2026-10-12T23:35:56.484Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-esercitazione-soccorso-sasso.webp",
+      "area": "Ticino e pendolarismo transfrontaliero",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic alpine rescue training illustration with no text, logos, or identifiable people."
       }
     }
   ]
