@@ -1664,10 +1664,10 @@
       "mode": "adapted",
       "reason": "Scan anti-allucinazioni su tutti i corpi (istituzioni/acronimi inventati, fatti errati noti, statistiche a fonte vaga). Adattamenti: path content/ al posto di services/locales/, node:test + expect-shim, offender aggregati per classe invece di it.each per file, sanity >3000 corpi IT perche' uno sparse checkout senza content/ non passi a vuoto. I PATTERN restano byte-identici al sito: nuove voci si aggiungono prima la' e si ricopiano qui. Misurato al porting: 0 offender su 15.076 file.",
       "baseline": {
-        "site": "f4a9f610932ba9e9",
-        "corpus": "1ed72d4ab7dea050",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "site": "e9c32748b04fcdd7",
+        "corpus": "1c0e6a4cee00eee4",
+        "alignedAt": "2026-10-12",
+        "forcedAt": "2026-10-12T07:48:18.708Z"
       }
     },
     {
