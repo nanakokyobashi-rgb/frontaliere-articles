@@ -1021,10 +1021,10 @@
     {
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "adapted",
-      "reason": "La logica di riconciliazione resta comune, ma la prova di recovery dipende dal publisher del repository: il sito usa il proprio wrapper Pages e i suoi job di validazione, mentre qui `publish-api.yml` espone il solo job `publish`. La tabella `RECOVERY_REQUIRED_JOBS` e il commento devono quindi restare adattati al contratto corpus, invece di essere copiati verbatim dal sito; il resto del modulo continua a essere sorvegliato dal manifest.",
+      "reason": "La logica di riconciliazione resta comune, ma la prova di recovery dipende dal publisher del repository: il sito usa il proprio wrapper Pages e i suoi job di validazione, mentre qui `publish-api.yml` espone il solo job `publish`. La tabella `RECOVERY_REQUIRED_JOBS`, il guard sui pin del manifest e il commento devono quindi restare adattati al contratto corpus, invece di essere copiati verbatim dal sito; il resto del modulo continua a essere sorvegliato dal manifest.",
       "baseline": {
         "site": "5b325f4cd429a56c",
-        "corpus": "fe69ea4b93cd1b15",
+        "corpus": "303509b037d1dc11",
         "alignedAt": "2026-10-12",
         "forcedAt": "2026-10-12T11:30:00.000Z"
       }

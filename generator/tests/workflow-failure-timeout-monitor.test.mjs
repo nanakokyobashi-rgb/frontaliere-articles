@@ -222,7 +222,14 @@ esac
     const [oldest] = created.split('..');
     const expectedHorizonMs = (35 * 24 * 60 + 40) * 60_000;
     const observedHorizonMs = now - Date.parse(oldest);
-    assert.ok(observedHorizonMs >= expectedHorizonMs - 1_000, `${observedHorizonMs}ms`);
+    // The scanner captures its own clock in the child process. Account for the
+    // parent→child startup and execution time, otherwise a correct horizon can
+    // appear short by the time spent in the fixture.
+    const childElapsedMs = Date.now() - now;
+    assert.ok(
+      observedHorizonMs >= expectedHorizonMs - childElapsedMs - 1_000,
+      `${observedHorizonMs}ms (child elapsed ${childElapsedMs}ms)`,
+    );
     assert.ok(observedHorizonMs < expectedHorizonMs + 60_000, `${observedHorizonMs}ms`);
   } finally {
     rmSync(binDir, { recursive: true, force: true });

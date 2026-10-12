@@ -189,6 +189,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveGithubIssueByNumber, commentOnGithubIssue, isFailureReportingDisabled } from '../lib/github-issue-creator.mjs';
 import { isCrawlerGenerationToken } from '../lib/crawler-generation-token.mjs';
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 import { createdFromFilter, createdSinceFilter } from './lib/run-listing-window.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -464,6 +465,18 @@ export function ttlReleaseNote({ code, maxDays = DEFAULT_HOLD_MAX_DAYS, ageDays 
 
 /** La finestra recente su cui si misura la ricorrenza. Vedi la misura qui sopra. */
 export const DEFAULT_RECURRENCE_WINDOW_HOURS = 8;
+
+/**
+ * A green wrapper run is recovery evidence only when these jobs actually ran.
+ *
+ * In this corpus `publish-api.yml` has one publisher job, `publish`. A green workflow
+ * record without that job is not proof that the article-data publication recovered.
+ */
+export const RECOVERY_REQUIRED_JOBS = Object.freeze({
+  'Publish article data API': Object.freeze([
+    'publish',
+  ]),
+});
 /** Fallimenti tollerati nella finestra: 1 è quello che ha aperto la issue. */
 export const DEFAULT_MAX_RECURRENCES = 1;
 /** Run verdi consecutive richieste quando nella finestra c'è stato un fallimento. */
@@ -1449,6 +1462,63 @@ export function dropPhantomCancellations(runs, isPhantom) {
 export function dropSkippedRuns(runs) {
   if (!Array.isArray(runs)) return [];
   return runs.filter((r) => r?.conclusion !== 'skipped');
+}
+
+/** True when a workflow's required recovery jobs all completed successfully. */
+export function hasRequiredRecoveryJobs(workflowName, jobsPayload) {
+  const required = RECOVERY_REQUIRED_JOBS[workflowName];
+  if (!required) return true;
+  if (!Array.isArray(jobsPayload?.jobs)) return false;
+  return required.every((name) => jobsPayload.jobs.some((job) => (
+    job?.name === name && job?.conclusion === 'success'
+  )));
+}
+
+/**
+ * Remove wrapper-level greens that did not execute the jobs which prove recovery.
+ *
+ * Jobs API reads stay bounded to the decision prefix and the recurrence window. Once a
+ * meaningful deciding run is known, successes older than the window cannot affect the
+ * decision, green streak, or failure-rate denominator and need no extra read.
+ * Unreadable jobs are not proof: fail closed by excluding that green observation.
+ */
+export function dropUnprovenRecoveryRuns(workflowName, runs, readJobs, {
+  now = Date.now(),
+  windowHours = DEFAULT_RECURRENCE_WINDOW_HOURS,
+} = {}) {
+  if (!RECOVERY_REQUIRED_JOBS[workflowName]) return runs;
+  if (!Array.isArray(runs)) return runs;
+
+  const cutoff = now - windowHours * 3600 * 1000;
+  let decidingRunFound = false;
+  return runs.filter((run) => {
+    if (run?.conclusion !== 'success') {
+      decidingRunFound = true;
+      return true;
+    }
+
+    const createdAt = Date.parse(run?.createdAt ?? '');
+    const safelyOutsideWindow = Number.isFinite(createdAt) && createdAt < cutoff;
+    if (decidingRunFound && safelyOutsideWindow) return true;
+
+    const jobs = typeof readJobs === 'function' ? readJobs(run?.databaseId) : null;
+    const proven = hasRequiredRecoveryJobs(workflowName, jobs);
+    if (proven) decidingRunFound = true;
+    return proven;
+  });
+}
+
+/**
+ * Apply workflow-specific recovery proof before evaluating the stricter branch gate.
+ * The branch selector must never retain a wrapper-level green that the required-job
+ * filter later removes, otherwise its explicit `run` bypasses `decidingRun(history)`.
+ */
+export function assessProvenBranchRecovery(workflowName, runs, readJobs, options = {}) {
+  const provenRuns = dropUnprovenRecoveryRuns(workflowName, runs, readJobs, {
+    now: options.now,
+    windowHours: options.windowHours,
+  });
+  return assessBranchRecovery(provenRuns, options);
 }
 
 // ── Step-verdetto: un rosso VOLUTO non è un guasto (LC-03, issue 9243) ────────────────
@@ -2580,6 +2650,25 @@ function main() {
   };
 
   for (const it of issues) {
+    // `corpus-only-pending` pins are deliberate work owned by the other repo. This
+    // adapted closer must not auto-close their tracking issue merely because the
+    // publisher happened to turn green; the manifest is the source of truth for
+    // that cross-repo hold, just as it is for handoff/drainer consumers.
+    const pinnedEntry = pinnedBy(it.number, REPO);
+    if (pinnedEntry) {
+      console.log(`  #${it.number} manifest pin ${pinnedEntry} — keep open`);
+      verdicts.push({
+        number: it.number,
+        title: it.title,
+        action: 'keep',
+        reason: `manifest-pin:${pinnedEntry}`,
+        runId: null,
+        runRepo: null,
+      });
+      kept++;
+      continue;
+    }
+
     const crawlerStepMatch = CRAWLER_STEP_RE.exec(it.workflow);
     const isCrawlerStepIdentifier = it.title.startsWith('Crawler Failure:') && crawlerStepMatch;
 
@@ -2645,7 +2734,11 @@ function main() {
             branchOptions,
           );
           if (branchHistory.kind === 'ok') {
-            branchEvidence = assessBranchRecovery(branchHistory.runs, {
+            branchEvidence = assessProvenBranchRecovery(it.workflow, branchHistory.runs, (databaseId) => readRunJobs(
+              databaseId,
+              historySource.repo,
+              crawlerRunToken(historySource.repo),
+            ), {
               issue: it,
               scope,
               failureCreatedAt: branchOptions.historyStartAt,
@@ -2717,6 +2810,19 @@ function main() {
         historyIssueKind = mainHistory.kind;
       }
     }
+
+    rawHistory = historySource
+      ? dropUnprovenRecoveryRuns(
+        it.workflow,
+        rawHistory,
+        (databaseId) => readRunJobs(
+          databaseId,
+          historySource.repo,
+          crawlerRunToken(historySource.repo),
+        ),
+        { now: Date.now(), windowHours: rec.windowHours },
+      )
+      : rawHistory;
 
     // LC-03: per i soli workflow del registro, le rosse più recenti si leggono job per job
     // e quelle di solo verdetto escono dalla storia (vedi `markVerdictOnlyRuns`).
