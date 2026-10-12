@@ -13040,7 +13040,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Foto vom Kongresspalast Lugano beim Event Talenti in movimento mit Fachkräften und Forschern',
     'blog.article.como-truffa-30mila-euro.title': 'Como, 30.000 Euro Online-Betrug: Polizei holt alles zurück',
     'blog.article.como-truffa-30mila-euro.excerpt': 'Bei Como wurden 30.000 Euro durch Spoofing abgezogen Opfer eine Angestellte einer Stiftung Sofortige Überweisung an die italienische Post Eingezogener und zurückerstatteter Betrag',
-    'blog.article.como-truffa-30mila-euro.imageAlt': 'Blick auf den Luganersee mit den Bergen im Hintergrund',
+    'blog.article.como-truffa-30mila-euro.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

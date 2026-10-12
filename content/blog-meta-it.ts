@@ -13042,7 +13042,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Foto del Palazzo dei Congressi di Lugano durante l’evento Talenti in movimento con professionisti e ricercatori',
     'blog.article.como-truffa-30mila-euro.title': 'Como, truffa online da 30mila euro: polizia recupera tutto',
     'blog.article.como-truffa-30mila-euro.excerpt': 'A Como sottratti 30mila euro con lo spoofing Vittima un\'impiegata di una fondazione Bonifico istantaneo verso Poste Italiane Somma recuperata e restituita',
-    'blog.article.como-truffa-30mila-euro.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo',
+    'blog.article.como-truffa-30mila-euro.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;
