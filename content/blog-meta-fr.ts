@@ -13041,6 +13041,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.talenti-in-movimento-oltreconfinti.title': 'Talents en mouvement : OltreconfiniTi relie recherche et pro',
     'blog.article.talenti-in-movimento-oltreconfinti.excerpt': 'À Lugano s’est tenu l’événement « Talents en mouvement » Au centre, l’attractivité, les jeunes et les professionnels OltreconfiniTi met en relation les entreprises, la recherche et les compétences',
     'blog.article.talenti-in-movimento-oltreconfinti.imageAlt': 'Photo du Palais des congrès de Lugano lors de l’événement Talenti en mouvement avec des professionnels et des chercheurs',
+    'blog.article.como-truffa-30mila-euro.title': 'Côme, arnaque en ligne de 30mila euro : la police récupère tout',
+    'blog.article.como-truffa-30mila-euro.excerpt': 'À Como 30mila euro dérobés par spoofing Victime une employée d\'une fondation Virement instantané vers Poste Italiane Somme récupérée et restituée',
+    'blog.article.como-truffa-30mila-euro.imageAlt': 'Vue sur le lac de Lugano avec les montagnes en arrière-plan',
 };
 
 export default blogMetaFr;

@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.rsi.ch/s/4150082": {
-      "section": "svizzera",
-      "ts": 1791636559295
-    },
     "frontaliere::https://www.varesenoi.it/2026/10/10/leggi-notizia/argomenti/cronaca-20/articolo/coltivava-marijuana-in-un-magazzino-in-casa-e-nel-giardino-sequestrate-37-piante-e-arrestato-un-41e.html": {
       "section": "frontaliere",
       "ts": 1791639412702
@@ -952,6 +948,14 @@
     "svizzera::https://www.admin.ch/it/newnsb/ldno-vhhpxdv": {
       "section": "svizzera",
       "ts": 1791807495376
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/beko-europe-vertenza-aperta-a-cassinetta-sciopero-e-assemblee-sul-futuro-del-sito/2705041": {
+      "section": "frontaliere",
+      "ts": 1791809968654
+    },
+    "frontaliere::https://comozero.it/ambiente/il-creator-digitale-svizzero-stronca-il-treno-italiano-su-cibo-velocita-e-comodita-ma-ha-sbagliato-tutto": {
+      "section": "frontaliere",
+      "ts": 1791810429098
     }
   }
 }

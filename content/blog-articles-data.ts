@@ -43970,6 +43970,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'como-truffa-30mila-euro',
+ category: 'novita',
+ date: '2026-10-12T13:20:26.521Z',
+ image: '/images/blog/article-varese-oltre-400mila-euro-sottratti-da-due-badanti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
