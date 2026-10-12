@@ -102111,10 +102111,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-casse-malati-amministrazione-costi-2025.webp`,
+        "url": `${BASE_URL}/images/blog/article-rincaro-whey-galaxus.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Scaffale di proteine Whey in un negozio svizzero"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T12:10:33+00:00",
       "dateModified": "2026-10-12T12:10:33+00:00",

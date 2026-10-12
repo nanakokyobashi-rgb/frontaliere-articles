@@ -27011,7 +27011,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'rincaro-whey-galaxus',
     category: 'novita',
     date: '2026-10-12T12:10:33.324Z',
-    image: '/images/blog/article-casse-malati-amministrazione-costi-2025.webp',
+    image: '/images/blog/article-rincaro-whey-galaxus.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

@@ -8095,7 +8095,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.rincaro-whey-galaxus.title': 'Proteinpulver, Preise bei fast 55 Franken pro Kilo',
     'blog.article.rincaro-whey-galaxus.excerpt': 'Im September kostet Whey fast 55 Franken pro Kilo Der Durchschnitt für 2025 lag bei 46 Franken pro Kilo Nachfrage und Produktionskosten treiben die Preise Kasein',
-    'blog.article.rincaro-whey-galaxus.imageAlt': 'Whey-Proteine in einem Regal eines Schweizer Geschäfts',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

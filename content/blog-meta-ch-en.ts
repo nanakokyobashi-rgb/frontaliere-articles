@@ -8095,7 +8095,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration generated for this article',
     'blog.article.rincaro-whey-galaxus.title': 'Protein powder, prices close to 55 francs per kilo',
     'blog.article.rincaro-whey-galaxus.excerpt': 'In September Whey costs almost 55 francs per kilo The 2025 average was 46 francs per kilo Demand and production costs drive prices Casein',
-    'blog.article.rincaro-whey-galaxus.imageAlt': 'Whey protein products on a shelf in a Swiss retail store',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

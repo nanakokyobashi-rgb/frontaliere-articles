@@ -10,16 +10,6 @@
       "failureCount": 4,
       "requestedAt": "2026-10-10T22:34:10.251Z",
       "lastFailureAt": "2026-10-12T10:51:24.379Z"
-    },
-    {
-      "articleId": "rincaro-whey-galaxus",
-      "title": "Proteine in polvere, prezzi quasi a 55 franchi al chilo",
-      "fallbackImage": "/images/blog/article-casse-malati-amministrazione-costi-2025.webp",
-      "reason": "All image providers failed for article-rincaro-whey-galaxus: openai-codex (vision gate rejected image: Generic protein-powder retail illustration, but it includes recognizable fore",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T12:10:33.711Z",
-      "lastFailureAt": "2026-10-12T12:10:33.711Z"
     }
   ]
 }

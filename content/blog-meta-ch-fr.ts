@@ -8095,7 +8095,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration générée pour cet article',
     'blog.article.rincaro-whey-galaxus.title': 'Protéines en poudre, prix proches de 55 francs le kilo',
     'blog.article.rincaro-whey-galaxus.excerpt': 'En septembre, la Whey coûte près de 55 francs le kilo La moyenne de 2025 était de 46 francs le kilo La demande et les coûts de production font grimper les prix Caséine',
-    'blog.article.rincaro-whey-galaxus.imageAlt': 'Produits de protéines Whey dans un rayon d\'un magasin suisse',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;
