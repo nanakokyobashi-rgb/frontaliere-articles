@@ -13032,6 +13032,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lavori-autolaghi-ottobre-2026.title': 'Travaux nocturnes sur les A8 et A9 : fermetures et itinéraires alternatifs',
     'blog.article.lavori-autolaghi-ottobre-2026.excerpt': 'A8 fermée entre Castellanza et Fiera en direction de Milan Legnano : entrée fermée dans les deux sens pendant deux nuits A9 : bretelle en direction de Milan fermée depuis Chiasso/Como',
     'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.indennita-lavoro-ridotto.title': 'Caisse Unia : chômage, réduction de l\'horaire de travail et intempéries',
+    'blog.article.indennita-lavoro-ridotto.excerpt': 'La Caisse de chômage Unia présente des informations sur les indemnités de chômage, la réduction de l\'horaire de travail, les intempéries et un calculateur.',
+    'blog.article.indennita-lavoro-ridotto.imageAlt': 'Bureau avec ordinateur portable et calculateur dans un point d\'information au Tessin.',
 };
 
 export default blogMetaFr;

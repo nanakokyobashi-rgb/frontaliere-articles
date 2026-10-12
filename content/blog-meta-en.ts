@@ -13030,6 +13030,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lavori-autolaghi-ottobre-2026.title': 'A8 and A9 night work: closures and alternative routes',
     'blog.article.lavori-autolaghi-ottobre-2026.excerpt': 'A8 closed between Castellanza and Fiera toward Milan Legnano: entrance closed in both directions for two nights A9: branch toward Milan closed from Chiasso/Como',
     'blog.article.lavori-autolaghi-ottobre-2026.imageAlt': 'Illustration generated for this article',
+    'blog.article.indennita-lavoro-ridotto.title': 'Unia Fund: unemployment, short-time work and bad weather',
+    'blog.article.indennita-lavoro-ridotto.excerpt': 'The Unia unemployment fund provides information on unemployment benefits, short-time work, bad weather and a calculator.',
+    'blog.article.indennita-lavoro-ridotto.imageAlt': 'Desk with a laptop and calculator in a Ticino information office.',
 };
 
 export default blogMetaEn;

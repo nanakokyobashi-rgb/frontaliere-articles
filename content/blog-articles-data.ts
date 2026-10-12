@@ -43938,6 +43938,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'indennita-lavoro-ridotto',
+ category: 'pratico',
+ date: '2026-10-12T11:33:22.436Z',
+ image: '/images/blog/article-indennita-lavoro-ridotto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

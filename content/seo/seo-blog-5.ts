@@ -106113,6 +106113,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-indennita-lavoro-ridotto': {
+    title: 'Cassa Unia: disoccupazione, lavoro ridotto e intemperie',
+    description: 'La Cassa di disoccupazione Unia illustra le indennità per disoccupazione, lavoro ridotto e intemperie e offre un calcolatore per orientarsi sul servizio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, unia, disoccupazione, lavoro',
+    ogTitle: 'Cassa Unia: disoccupazione e lavoro ridotto',
+    ogDescription: 'Chi rischia di perdere il lavoro o vuole capire se ha diritto a un\'indennità trova nella pagina Unia tre riferimenti: disoccupazione, lavoro ridotto e intemperie. Il calcolatore completa l\'orientamento offerto dalla Cassa di disoccupazione.',
+    canonicalPath: '/articoli-frontaliere/indennita-lavoro-ridotto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa Unia: disoccupazione, lavoro ridotto e intemperie",
+      "description": "La Cassa di disoccupazione Unia illustra le indennità per disoccupazione, lavoro ridotto e intemperie e offre un calcolatore per orientarsi sul servizio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-indennita-lavoro-ridotto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scrivania con laptop e calcolatore in un ufficio informativo del Ticino."
+      },
+      "datePublished": "2026-10-12T11:33:22+00:00",
+      "dateModified": "2026-10-12T11:33:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/indennita-lavoro-ridotto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
