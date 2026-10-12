@@ -3736,12 +3736,12 @@
       "path": "host/seoHubsData.ts",
       "sitePath": "build-plugins/seoHubsData.ts",
       "mode": "adapted",
-      "reason": "Dati slug/locale degli hub letti dall'engine via SiteShellContract. Estratto per chiusura di `build-plugins/seoHubsData.ts` (321 righe la', 64 qui); `SLUG_TABLES` non e' trasportato perche' la chiusura ne raggiunge due campi per locale, inlineati. Stessa nota sulla guardia inesistente.",
+      "reason": "Dati slug/locale e page size letti dall'engine via SiteShellContract. Il corpus conserva un estratto adattato: deriva `ARTICLES_PAGE_SIZE` dall'engine, inlina gli slug blog/blogCh per quattro locale e mantiene il bootstrap host-only; il sito conserva `hubSlugFor`, paginazione, `SEO_HUB_RESERVED_SLUGS` e URL con slash finale. Non copiare verbatim.",
       "baseline": {
-        "site": "1f017e5c86ede66c",
-        "corpus": "6e22c674d71bf3a4",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T02:04:36.000Z"
+        "site": "f7e41be33ba6e480",
+        "corpus": "3e092effbee0aaab",
+        "alignedAt": "2026-10-12",
+        "forcedAt": "2026-10-12T07:43:17.000Z"
       }
     },
     {
