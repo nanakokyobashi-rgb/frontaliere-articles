@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-giorni-festivi-canton-zurigo-guida.webp",
-      "sha256": "71f26369e92aa051b53f0ae5f62a6bea71d8cd3d418661f4d41ec1d943e57c47"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-giorni-festivi-canton-zurigo-guida-480w.webp",
-      "sha256": "a3c177e70b60c16e7f6265ad5bf9f2c0c478fa2791f628ba4a3ada3580663700"
-    }
-  ]
+  "items": []
 }
