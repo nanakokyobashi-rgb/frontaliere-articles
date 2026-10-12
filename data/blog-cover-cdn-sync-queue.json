@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-pensione-multipla-francia-svizzera-2026.webp",
+      "sha256": "6efa5a1e7c4afd13c84c80327f92c06277a97aab3e959957319b50fa9521a99e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-pensione-multipla-francia-svizzera-2026-480w.webp",
+      "sha256": "c9f297caa94da36837c80a38a1f40fed83f7534c1425b4632ba61782ac0e7566"
+    }
+  ]
 }
