@@ -8093,6 +8093,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.valutazioni-immobiliari-trasparenza-casa.title': 'Évaluations immobilières : écarts jusqu\'à 13%',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.excerpt': 'Les évaluations divergent en moyenne de 11 à 13% Seules 30-35% des transactions disposent de données vérifiées 3% de 50\'000 francs représentent 1\'500 francs À Genève, l\'accès',
     'blog.article.valutazioni-immobiliari-trasparenza-casa.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.rincaro-whey-galaxus.title': 'Protéines en poudre, prix proches de 55 francs le kilo',
+    'blog.article.rincaro-whey-galaxus.excerpt': 'En septembre, la Whey coûte près de 55 francs le kilo La moyenne de 2025 était de 46 francs le kilo La demande et les coûts de production font grimper les prix Caséine',
+    'blog.article.rincaro-whey-galaxus.imageAlt': 'Produits de protéines Whey dans un rayon d\'un magasin suisse',
 };
 
 export default blogMetaChFr;

@@ -102092,6 +102092,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rincaro-whey-galaxus': {
+    title: 'Proteine in polvere, prezzi quasi a 55 franchi al chilo',
+    description: 'A settembre il Whey costa quasi 55 franchi al chilo La media del 2025 era di 46 franchi al chilo Domanda e costi di produzione spingono i prezzi Caseina',
+    keywords: 'frontalieri, ticino, svizzera, italia, proteine, polvere, prezzi, quasi',
+    ogTitle: 'Whey quasi a 55 franchi al chilo a settembre',
+    ogDescription: 'A settembre il Whey costa quasi 55 franchi al chilo La media del 2025 era di 46 franchi al chilo Domanda e costi di produzione spingono i prezzi Caseina',
+    canonicalPath: '/articoli-svizzera/rincaro-whey-galaxus/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Proteine in polvere, prezzi quasi a 55 franchi al chilo",
+      "description": "A settembre il Whey costa quasi 55 franchi al chilo La media del 2025 era di 46 franchi al chilo Domanda e costi di produzione spingono i prezzi Caseina",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-casse-malati-amministrazione-costi-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scaffale di proteine Whey in un negozio svizzero"
+      },
+      "datePublished": "2026-10-12T12:10:33+00:00",
+      "dateModified": "2026-10-12T12:10:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rincaro-whey-galaxus/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
