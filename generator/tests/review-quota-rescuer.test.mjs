@@ -35,6 +35,8 @@ import {
   RATE_LIMIT_RESET_GRACE_SEC,
   RATE_LIMIT_WINDOW_SEC,
   rateLimitEvidence,
+  quotaRecoveryOutcome,
+  QUOTA_RECOVERY_OUTCOMES,
   rateLimitRerunCandidates,
   reviewRateLimitRetryAdmission,
   reviewRateLimitRetryBody,
@@ -918,6 +920,42 @@ test('rate limit: la prova viene dalle annotation failure del job, col reset del
   assert.equal(rateLimitEvidence([{ annotation_level: 'failure', message: 'Nessuna review Claude approvante sulla head' }], { completedAt: rlIso(RL_NOW) }), null);
   // Senza un momento ricavabile non c'e' un rerun sicuro.
   assert.equal(rateLimitEvidence([{ annotation_level: 'failure', message: 'API rate limit exceeded' }], { completedAt: '' }), null);
+});
+
+test('quotaRecoveryOutcome separa quota/installazione, review gate e prova insufficiente', () => {
+  const resetAt = RL_NOW - 60;
+  const installation = quotaRecoveryOutcome({
+    annotations: [{
+      annotation_level: 'failure',
+      message: `Resolve review input revision: ${rateLimitMarker({ resource: 'core', resetAt })}`,
+    }],
+    completedAt: rlIso(RL_NOW - 600),
+    steps: [{ name: 'Require approving Codex review', conclusion: 'failure' }],
+  });
+  assert.deepEqual(installation, {
+    outcome: QUOTA_RECOVERY_OUTCOMES.INSTALLATION_QUOTA,
+    resetAt,
+  });
+
+  const reviewGate = quotaRecoveryOutcome({
+    steps: [
+      { name: 'Require approving Codex review', conclusion: 'failure' },
+      { name: 'Classify review gate failure', conclusion: 'failure' },
+    ],
+  });
+  assert.deepEqual(reviewGate, {
+    outcome: QUOTA_RECOVERY_OUTCOMES.REVIEW_GATE,
+    resetAt: null,
+    gateFailureKind: 'verdict',
+  });
+
+  assert.deepEqual(quotaRecoveryOutcome({
+    annotations: [{ annotation_level: 'failure', message: 'test assertion failed' }],
+    steps: [{ name: 'Run node:test', conclusion: 'failure' }],
+  }), {
+    outcome: QUOTA_RECOVERY_OUTCOMES.UNVERIFIED,
+    resetAt: null,
+  });
 });
 
 test('rate limit: il marker durevole fa andata e ritorno e rifiuta le forme spurie', () => {
