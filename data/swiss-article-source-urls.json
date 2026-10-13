@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4067776": {
-    "articleId": "bollette-energia-calo-2027",
-    "ts": "2026-09-08T10:15:59.098Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948716/bls-centri-treni-posti-viaggi": {
     "articleId": "bls-tagli-posti-trasporto-svizzera",
     "ts": "2026-09-08T10:46:19.759Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956342/svizzera-potrebbe-guerra-oriente-potrebbero-benzina-escalation": {
     "articleId": "guerra-medio-oriente-benzina-svizzera",
     "ts": "2026-10-13T05:33:34.655Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1956173/tunnel-societa-pannelli-sa-galleria": {
+    "articleId": "tunnel-gran-san-bernardo-fotovoltaico",
+    "ts": "2026-10-13T05:54:58.136Z",
     "keyForm": 2
   }
 }

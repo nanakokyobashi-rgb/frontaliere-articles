@@ -8137,7 +8137,10 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Closed industrial plant in Waldstatt, Appenzell Ausserrhoden',
     'blog.article.guerra-medio-oriente-benzina-svizzera.title': 'Gasoline price shock in Switzerland: how much does the war cost',
     'blog.article.guerra-medio-oriente-benzina-svizzera.excerpt': 'Since February, gasoline has risen to 2,11 francs per liter 15\'000 km annually and 6 l/100 km: 423 francs more Kerosene costs twice as much as last year',
-    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Illustration generated for this article',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Swiss gasoline price at 2.11 francs per litre',
+    'blog.article.tunnel-gran-san-bernardo-fotovoltaico.title': 'Gran San Bernardo Tunnel: 1000 solar panels cover half of energy needs',
+    'blog.article.tunnel-gran-san-bernardo-fotovoltaico.excerpt': '1000 panels on the Swiss side of the Great St Bernard Pass 7000 m² of planned photovoltaic area 450 MWh annually: half of the tunnel\'s needs',
+    'blog.article.tunnel-gran-san-bernardo-fotovoltaico.imageAlt': 'Photovoltaic panels on Grand St. Bernard tunnel gallery at Bourg-Saint-Pierre',
 };
 
 export default blogMetaChEn;

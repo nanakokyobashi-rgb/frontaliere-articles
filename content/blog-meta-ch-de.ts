@@ -8137,7 +8137,10 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Geschlossenes Industriegebäude in Waldstatt, Appenzell Ausserrhoden',
     'blog.article.guerra-medio-oriente-benzina-svizzera.title': 'Benzinpreisschock in der Schweiz: Wie viel kostet der Krieg',
     'blog.article.guerra-medio-oriente-benzina-svizzera.excerpt': 'Seit Februar ist der Benzinpreis auf 2,11 Franken pro Liter gestiegen 15\'000 km pro Jahr und 6 l/100 km: 423 Franken mehr Kerosin kostet doppelt so viel wie im vergangenen Jahr',
-    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Schweizer Benzinpreis bei 2,11 Franken pro Liter',
+    'blog.article.tunnel-gran-san-bernardo-fotovoltaico.title': 'Tunnel Gran San Bernardo: 1000 Solarpaneele decken die Hälfte des Bedarfs',
+    'blog.article.tunnel-gran-san-bernardo-fotovoltaico.excerpt': '1000 Paneele auf der Schweizer Seite des Gran San Bernardo 7000 m² geplante Photovoltaikfläche 450 MWh jährlich: die Hälfte des Bedarfs des Tunnels',
+    'blog.article.tunnel-gran-san-bernardo-fotovoltaico.imageAlt': 'Photovoltaikmodule an der Tunnelgalerie Grosser St. Bernhard in Bourg-Saint-Pierre',
 };
 
 export default blogMetaChDe;

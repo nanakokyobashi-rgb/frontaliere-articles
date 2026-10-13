@@ -27160,6 +27160,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tunnel-gran-san-bernardo-fotovoltaico',
+    category: 'novita',
+    date: '2026-10-13T05:54:57.779Z',
+    image: '/images/blog/article-tunnel-gran-san-bernardo-fotovoltaico.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
