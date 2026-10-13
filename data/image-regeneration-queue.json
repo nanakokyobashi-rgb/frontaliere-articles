@@ -30,16 +30,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T06:45:42.103Z",
       "lastFailureAt": "2026-10-13T06:56:07.129Z"
-    },
-    {
-      "articleId": "vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv",
-      "title": "Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "All image providers failed for article-vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv: openai-codex (vision gate rejected image: Relevant illustrated vaccination scene, but t",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-13T11:54:19.602Z",
-      "lastFailureAt": "2026-10-13T11:54:19.602Z"
     }
   ]
 }

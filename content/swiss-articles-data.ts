@@ -27224,7 +27224,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv',
     category: 'novita',
     date: '2026-10-13T11:54:19.232Z',
-    image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+    image: '/images/blog/article-vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.webp',
     hasCalculator: false,
     articleType: 'news',
     authorSlug: 'redazione',

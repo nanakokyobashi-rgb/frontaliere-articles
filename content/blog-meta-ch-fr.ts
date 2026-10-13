@@ -8158,7 +8158,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.divario-reddito-donne-uomini-scende-al-14.imageAlt': 'Image éditoriale relative à: Divario reddito donne-uomini: scende al 14%',
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.title': 'Vaccinations automnales 2026 : grippe, COVID-19 et VRS',
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.excerpt': 'Communiqué publié le 13 octobre 2026.',
-    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.imageAlt': 'Image éditoriale relative à: Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;

@@ -102930,10 +102930,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Immagine editoriale relativa a: Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T11:54:19+00:00",
       "dateModified": "2026-10-13T11:54:19+00:00",
