@@ -103393,10 +103393,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Scopri come navigare parlament.ch: Camere, commissioni, delegazioni, votazioni, Curia Vista e archivio storico per seguire l'attività legislativa.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-parlamento-svizzero-portale-guida.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Palazzo federale a Berna sede del Parlamento svizzero"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T22:27:40+00:00",
       "dateModified": "2026-10-13T22:27:40+00:00",

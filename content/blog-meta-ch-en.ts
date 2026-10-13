@@ -8194,7 +8194,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Swiss supermarket refrigeration units with technician checking control panel, indoor natural light',
     'blog.article.parlamento-svizzero-portale-guida.title': 'The Swiss Parliament portal: structure and research paths',
     'blog.article.parlamento-svizzero-portale-guida.excerpt': 'Guide to navigating parlament.ch: Chambers, committees, international delegations, votes, Curia Vista and historical archive.',
-    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Federal Palace in Bern seat of Swiss Parliament',
+    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

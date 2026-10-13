@@ -10,16 +10,6 @@
       "failureCount": 4,
       "requestedAt": "2026-10-13T00:24:03.070Z",
       "lastFailureAt": "2026-10-13T19:36:20.177Z"
-    },
-    {
-      "articleId": "parlamento-svizzero-portale-guida",
-      "title": "Il portale del Parlamento svizzero: struttura e percorsi di ricerca",
-      "fallbackImage": "/images/blog/sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea.webp",
-      "reason": "All image providers failed for article-parlamento-svizzero-portale-guida: openai-codex (vision gate rejected image: Illustrated Swiss Parliament scene; decorative facade lettering",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-13T22:27:40.786Z",
-      "lastFailureAt": "2026-10-13T22:27:40.786Z"
     }
   ]
 }

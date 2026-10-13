@@ -8194,7 +8194,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Schweizer Supermarkt-Kühlgeräte mit Techniker, der das Steuerfeld überprüft, natürliche Innenbeleuchtung',
     'blog.article.parlamento-svizzero-portale-guida.title': 'Das Portal des Schweizer Parlaments: Struktur und Recherchewege',
     'blog.article.parlamento-svizzero-portale-guida.excerpt': 'Leitfaden zur Navigation auf parlament.ch: Räte, Kommissionen, internationale Delegationen, Abstimmungen, Curia Vista und historisches Archiv.',
-    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Bundeshaus in Bern Sitz des Schweizer Parlaments',
+    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

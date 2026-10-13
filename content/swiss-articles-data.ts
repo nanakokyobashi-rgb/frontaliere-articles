@@ -27345,7 +27345,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'parlamento-svizzero-portale-guida',
     category: 'pratico',
     date: '2026-10-13T22:27:40.404Z',
-    image: '/images/blog/sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea.webp',
+    image: '/images/blog/article-parlamento-svizzero-portale-guida.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',
