@@ -102462,10 +102462,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-karate-uisp-formazione-arcisate-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-ust-scenari-formazione-2035.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Studenti universitari svizzeri che studiano in biblioteca, con grafici demografici sullo schermo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T02:24:13+00:00",
       "dateModified": "2026-10-13T02:24:13+00:00",

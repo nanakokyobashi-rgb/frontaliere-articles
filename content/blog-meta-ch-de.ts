@@ -8122,7 +8122,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'Universitätsstudenten gehen auf einem Schweizer Campus im Herbst',
     'blog.article.ust-scenari-formazione-2035.title': 'UST: Ausbildungsszenarien 2035, +21% Hochschule',
     'blog.article.ust-scenari-formazione-2035.excerpt': 'UST: Hochschulen mit +21% zwischen 2026 und 2035 Grundschule: Reduktion um 8% im gleichen Zeitraum 305 000 Bachelor- und Masterstudenten im Jahr 2035 Drei',
-    'blog.article.ust-scenari-formazione-2035.imageAlt': 'Schweizer Studierende in der Bibliothek, demografische Grafiken auf dem Bildschirm',
+    'blog.article.ust-scenari-formazione-2035.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

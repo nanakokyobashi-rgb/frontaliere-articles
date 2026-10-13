@@ -8122,7 +8122,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'Studenti universitari camminano in un campus svizzero durante l\'autunno',
     'blog.article.ust-scenari-formazione-2035.title': 'UST: scenari formazione 2035, +21% università',
     'blog.article.ust-scenari-formazione-2035.excerpt': 'UST: scuole universitarie a +21% tra il 2026 e il 2035 Elementare: riduzione dell\'8% nello stesso periodo 305 000 studenti bachelor e master nel 2035 Tre',
-    'blog.article.ust-scenari-formazione-2035.imageAlt': 'Studenti universitari svizzeri che studiano in biblioteca, con grafici demografici sullo schermo',
+    'blog.article.ust-scenari-formazione-2035.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;

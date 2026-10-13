@@ -44024,7 +44024,7 @@ const RAW_ARTICLES = [
  id: 'tassa-salute-ristorni-17-settembre',
  category: 'fiscale',
  date: '2026-10-12T19:46:56.997Z',
- image: '/images/blog/tassa-salute-frontalieri-ticino-settembre.webp',
+ image: '/images/blog/article-tassa-salute-ristorni-17-settembre.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],

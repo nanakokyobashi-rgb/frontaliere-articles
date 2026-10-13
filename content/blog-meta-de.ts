@@ -13055,7 +13055,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.tassa-salute-ristorni-17-settembre.title': 'Gesundheitssteuer & Rückerstattungen: Termin in Bern',
     'blog.article.tassa-salute-ristorni-17-settembre.excerpt': 'Am 17. September wird über die Gesundheitssteuer, die Doppelbesteuerung und den Status diskutiert; das Tessin droht, die Steuerrückvergütungen zu blockieren, und gefährdet damit 120 Millionen Franken für die Grenzgemeinden.',
-    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Blick auf den Luganer See mit den Bergen im Hintergrund, repräsentiert die Grenzzone des Tessin',
+    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.scontro-corso-europa-verbania.title': 'Unfall in Europa: Autos und Motorräder in Verbania',
     'blog.article.scontro-corso-europa-verbania.excerpt': 'Seitlicher Zusammenstoß zwischen einem Auto und einem Motorrad im Gange Europa Das Motorrad kam aus Pallanza Impto in der Nähe des Tamoil-Händlers Motorradfahrer im Krankenhaus, Fahrer',
     'blog.article.scontro-corso-europa-verbania.imageAlt': 'Stadtstraße in Verbania nahe einer Tankstelle',

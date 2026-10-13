@@ -13057,7 +13057,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.tassa-salute-ristorni-17-settembre.title': 'Tassa salute e ristorni: tavolo del 17 settembre a Berna',
     'blog.article.tassa-salute-ristorni-17-settembre.excerpt': 'Il 17 settembre si discute di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, mettendo a rischio 120 milioni di franchi per i Comuni di frontiera.',
-    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Vista del lago di Lugano con le montagne sullo sfondo, simbolo della regione di frontiera ticinese',
+    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.scontro-corso-europa-verbania.title': 'Incidente in corso Europa: auto e moto a Verbania',
     'blog.article.scontro-corso-europa-verbania.excerpt': 'Scontro laterale tra un\'auto e una moto in corso Europa La moto proveniva da Pallanza Urto vicino al distributore Tamoil Motociclista in ospedale, conducente',
     'blog.article.scontro-corso-europa-verbania.imageAlt': 'Strada urbana di Verbania vicino a un distributore di carburante',

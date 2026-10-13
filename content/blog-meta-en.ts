@@ -13056,7 +13056,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.semafori-svizzera-ustra-traffico.imageAlt': 'Illustration generated for this article',
     'blog.article.tassa-salute-ristorni-17-settembre.title': 'Health tax and rebates: roundtable on September 17 in Bern',
     'blog.article.tassa-salute-ristorni-17-settembre.excerpt': 'On September 17, the health tax, double taxation and statute will be discussed; Ticino threatens to block the tax rebates, putting 120 million francs for border municipalities at risk.',
-    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'View of Lake Lugano with mountains in the background, representing the Ticino border region',
+    'blog.article.tassa-salute-ristorni-17-settembre.imageAlt': 'Illustration generated for this article',
     'blog.article.scontro-corso-europa-verbania.title': 'Accident in progress in Europe: cars and motorcycles in Verbania',
     'blog.article.scontro-corso-europa-verbania.excerpt': 'Side collision between a car and a motorcycle in progress Europe The motorcycle came from Pallanza Collision near the Tamoil distributor Motorcyclist in the hospital, driver',
     'blog.article.scontro-corso-europa-verbania.imageAlt': 'Urban road in Verbania near a fuel station',

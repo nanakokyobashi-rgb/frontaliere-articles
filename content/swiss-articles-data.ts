@@ -27103,7 +27103,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'ust-scenari-formazione-2035',
     category: 'novita',
     date: '2026-10-13T02:24:12.940Z',
-    image: '/images/blog/article-karate-uisp-formazione-arcisate-2026.webp',
+    image: '/images/blog/article-ust-scenari-formazione-2035.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',
