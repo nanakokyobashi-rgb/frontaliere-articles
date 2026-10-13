@@ -13119,6 +13119,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.verbania-cantieri-allarme-m5s.title': 'Alerte du M5S : « Trois chantiers risquent de paralyser la ville »',
     'blog.article.verbania-cantieri-allarme-m5s.excerpt': 'À partir du 12 octobre la SS 34 circule en sens unique alterné À partir du 21 octobre fermeture nocturne de 21 heures à 5 heures Le pont San Giovanni Bosco vaut 3,15 millions Quatre',
     'blog.article.verbania-cantieri-allarme-m5s.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.pensione-contributi-anni-lavoro.title': 'Réforme AVS2030 : retraite liée aux années de cotisation',
+    'blog.article.pensione-contributi-anni-lavoro.excerpt': 'La proposition lie le départ à la retraite aux années de cotisation Le modèle Centre Patronal exige 44 années pour la rente complète Le modèle mentionne 62 ans',
+    'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Personne à l\'âge de la retraite regardant le paysage tessinois, symbolisant la planification de la retraite',
 };
 
 export default blogMetaFr;

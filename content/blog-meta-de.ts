@@ -13116,6 +13116,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.verbania-cantieri-allarme-m5s.title': 'Alarm M5S: \'Drei Baustellen könnten die Stadt lahmlegen\'',
     'blog.article.verbania-cantieri-allarme-m5s.excerpt': 'Ab dem 12. Oktober verkehrt die SS 34 einbahnig Ab dem 21. Oktober nachts von 21 bis 5 Uhr geschlossen Die Brücke San Giovanni Bosco hat einen Wert von 3,15 Millionen Vier',
     'blog.article.verbania-cantieri-allarme-m5s.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.pensione-contributi-anni-lavoro.title': 'AHV2030-Reform: Rente an Beitragsjahre geknüpft',
+    'blog.article.pensione-contributi-anni-lavoro.excerpt': 'Der Vorschlag knüpft den Renteneintritt an die Beitragsjahre Das Modell Centre Patronal verlangt 44 Jahre für die volle Rente Das Modell nennt 62 Jahre',
+    'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Person im Rentenalter blickt auf die Tessiner Landschaft, symbolisiert die Pensionsplanung',
 };
 
 export default blogMetaDe;

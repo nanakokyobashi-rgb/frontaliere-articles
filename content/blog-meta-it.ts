@@ -13118,6 +13118,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.verbania-cantieri-allarme-m5s.title': 'Allarme M5S: \'Tre cantieri rischiano di paralizzare la città\'',
     'blog.article.verbania-cantieri-allarme-m5s.excerpt': 'Dal 12 ottobre la SS 34 viaggia a senso unico alternato Dal 21 ottobre chiusura notturna dalle 21 alle 5 Il ponte San Giovanni Bosco vale 3,15 milioni Quattro',
     'blog.article.verbania-cantieri-allarme-m5s.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.pensione-contributi-anni-lavoro.title': 'Riforma AVS2030: pensione legata ad anni di contributi',
+    'blog.article.pensione-contributi-anni-lavoro.excerpt': 'La proposta lega il pensionamento agli anni di contributi Il modello Centre Patronal richiede 44 anni per la rendita completa Il modello cita 62 anni',
+    'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Persona in età pre-pensionistica che osserva il paesaggio ticinese, simbolo della pianificazione della rendita',
 };
 
 export default blogMetaIt;

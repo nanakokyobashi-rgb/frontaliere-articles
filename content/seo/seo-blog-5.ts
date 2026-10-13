@@ -107244,6 +107244,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pensione-contributi-anni-lavoro': {
+    title: 'Riforma AVS2030: pensione legata ad anni di contributi',
+    description: 'La proposta lega il pensionamento agli anni di contributi Il modello Centre Patronal richiede 44 anni per la rendita completa Il modello cita 62 anni',
+    keywords: 'frontalieri, ticino, svizzera, italia, riforma, avs2030, pensione, legata',
+    ogTitle: 'AVS2030: pensione legata agli anni di contributi versati',
+    ogDescription: 'La proposta lega il pensionamento agli anni di contributi Il modello Centre Patronal richiede 44 anni per la rendita completa Il modello cita 62 anni',
+    canonicalPath: '/articoli-frontaliere/pensione-contributi-anni-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riforma AVS2030: pensione legata ad anni di contributi",
+      "description": "La proposta lega il pensionamento agli anni di contributi Il modello Centre Patronal richiede 44 anni per la rendita completa Il modello cita 62 anni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pensione-contributi-anni-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona in età pre-pensionistica che osserva il paesaggio ticinese, simbolo della pianificazione della rendita"
+      },
+      "datePublished": "2026-10-13T09:39:12+00:00",
+      "dateModified": "2026-10-13T09:39:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pensione-contributi-anni-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

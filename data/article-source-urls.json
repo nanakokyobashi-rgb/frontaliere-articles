@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1946248/sindacato-attrezzature-dogane-mezzi-formazione": {
-    "articleId": "carenze-dogane-sicurezza-ticino",
-    "ts": "2026-08-26T18:08:23.011Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1946149/deputazione-ticinese-ticino-sessione-berna": {
     "articleId": "consiglio-stato-deputazione-ticino-agosto",
     "ts": "2026-08-27T00:25:28.514Z",
@@ -2497,6 +2492,11 @@
   "https://www.vconews.it/2026/10/13/leggi-notizia/argomenti/verbania/articolo/verbania-allarme-m5s-tre-cantieri-rischiano-di-paralizzare-la-citta.html": {
     "articleId": "verbania-cantieri-allarme-m5s",
     "ts": "2026-10-13T08:46:23.540Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1956367/chi-non-lavora-non-va-in-pensione": {
+    "articleId": "pensione-contributi-anni-lavoro",
+    "ts": "2026-10-13T09:39:12.482Z",
     "keyForm": 2
   }
 }

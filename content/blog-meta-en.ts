@@ -13117,6 +13117,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.verbania-cantieri-allarme-m5s.title': 'M5S warning: \'Three construction sites risk paralyzing the city\'',
     'blog.article.verbania-cantieri-allarme-m5s.excerpt': 'Starting October 12, SS 34 operates under alternating one-way traffic Starting October 21 nighttime closure from 21 to 5 The San Giovanni Bosco bridge is worth 3,15 million Four',
     'blog.article.verbania-cantieri-allarme-m5s.imageAlt': 'Illustration generated for this article',
+    'blog.article.pensione-contributi-anni-lavoro.title': 'AVS2030 reform: pension linked to years of contributions',
+    'blog.article.pensione-contributi-anni-lavoro.excerpt': 'The proposal links retirement to years of contributions The Centre Patronal model requires 44 years for a full pension The model mentions age 62',
+    'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Person near retirement age looking at the Ticino landscape, symbolizing pension planning',
 };
 
 export default blogMetaEn;
