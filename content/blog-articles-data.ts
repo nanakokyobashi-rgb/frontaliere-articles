@@ -44300,7 +44300,7 @@ const RAW_ARTICLES = [
  id: 'allarme-bernasconi-artificieri',
  category: 'novita',
  date: '2026-10-13T14:39:37.564Z',
- image: '/images/places/lugano-view.webp',
+ image: '/images/blog/article-allarme-bernasconi-artificieri.webp',
  hasCalculator: false,
  articleType: 'news',
  canton: ['TI'],

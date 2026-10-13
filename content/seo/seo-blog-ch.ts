@@ -103354,10 +103354,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Attacco a circa 150 supermercati in Francia Frigoriferi fino a 50 gradi e tonnellate di alimenti buttate Danfoss: vulnerabilità nei sistemi collegati a Internet",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/attacco-hacker-liechtenstein-svizzera.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-attacco-frigoriferi-svizzera-rischio.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Frigoriferi di un supermercato svizzero con pannello di controllo tecnico, illuminazione interna naturale"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T21:39:06+00:00",
       "dateModified": "2026-10-13T21:39:06+00:00",

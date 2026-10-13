@@ -13139,7 +13139,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'VAT increase to finance the 13th AVS pension',
     'blog.article.allarme-bernasconi-artificieri.title': 'Chiasso, suspicious backpack: bank evacuated, no danger',
     'blog.article.allarme-bernasconi-artificieri.excerpt': 'Alert after 12.30 in Piazza Bernasconi A bank evacuated and the area cordoned off Suspicious objects checked, including a backpack Area reopened at 14, no',
-    'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Piazza Bernasconi in Chiasso, a bank evacuated and the area checked by cantonal police.',
+    'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;

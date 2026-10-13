@@ -13140,7 +13140,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'Aumento dell\'IVA per finanziare la 13esima rendita AVS',
     'blog.article.allarme-bernasconi-artificieri.title': 'Chiasso, zaino sospetto: banca evacuata, nessun pericolo',
     'blog.article.allarme-bernasconi-artificieri.excerpt': 'Allarme dopo le 12.30 in piazza Bernasconi Evacuata una banca e isolata l\'area Controllati oggetti sospetti, tra cui uno zaino Zona riaperta alle 14, nessun',
-    'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Piazza Bernasconi a Chiasso, banca evacuata e area controllata dalla Polizia cantonale.',
+    'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

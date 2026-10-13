@@ -13138,7 +13138,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'Mehrwertsteuererhöhung zur Finanzierung der 13. AHV-Rente',
     'blog.article.allarme-bernasconi-artificieri.title': 'Chiasso, verdächtiger Rucksack: Bank evakuiert, keine Gefahr',
     'blog.article.allarme-bernasconi-artificieri.excerpt': 'Alarm nach 12.30 Uhr auf der Piazza Bernasconi Eine Bank evakuiert und das Gebiet abgeriegelt Verdächtige Gegenstände, darunter ein Rucksack, kontrolliert Gebiet um 14 Uhr wieder geöffnet, keine',
-    'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Piazza Bernasconi in Chiasso mit evakuierter Bank und Kontrolle durch die Kantonspolizei.',
+    'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

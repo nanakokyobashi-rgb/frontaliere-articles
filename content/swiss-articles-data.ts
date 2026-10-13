@@ -27335,7 +27335,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'attacco-frigoriferi-svizzera-rischio',
     category: 'novita',
     date: '2026-10-13T21:39:06.706Z',
-    image: '/images/blog/attacco-hacker-liechtenstein-svizzera.webp',
+    image: '/images/blog/article-attacco-frigoriferi-svizzera-rischio.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',
