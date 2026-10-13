@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-100-848-firme-contro-il-controprogetto-sulle-pigioni.webp",
-      "sha256": "57dbb433338722270c2c5acb84d21a45ad4b9244249467a8824fb3864edd6916"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-100-848-firme-contro-il-controprogetto-sulle-pigioni-480w.webp",
-      "sha256": "2a21efbfa4a65c338fdeb21770e64b89b19b008e66f6d7888d6d971acf3ac044"
-    }
-  ]
+  "items": []
 }
