@@ -13136,6 +13136,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.zaino-sospetto-chiasso.title': 'Sac à dos suspect à Chiasso : fausse alerte',
     'blog.article.zaino-sospetto-chiasso.excerpt': 'Alerte déclenchée peu après 12.30 à Chiasso Objets suspects signalés sur la piazza Bernasconi Démineurs : les objets ne constituaient pas un danger Dispositif',
     'blog.article.zaino-sospetto-chiasso.imageAlt': 'Zone isolée à Chiasso après l\'alerte liée à un sac à dos suspect près du Palazzo Mercurio',
+    'blog.article.aumento-iva-tredicesima-avs.title': 'Hausse de la TVA pour la 13e rente AVS : le oui de l’alliance',
+    'blog.article.aumento-iva-tredicesima-avs.excerpt': 'La gauche, le Centre et le Parti évangélique soutiennent la proposition.',
+    'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'Hausse de la TVA pour financer la 13e rente AVS',
 };
 
 export default blogMetaFr;

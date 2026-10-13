@@ -13134,6 +13134,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.zaino-sospetto-chiasso.title': 'Suspicious backpack in Chiasso: false alarm',
     'blog.article.zaino-sospetto-chiasso.excerpt': 'Alarm triggered shortly after 12:30 in Chiasso Suspicious objects reported in Piazza Bernasconi Bomb disposal experts: the objects did not pose a danger Device',
     'blog.article.zaino-sospetto-chiasso.imageAlt': 'Isolated area in Chiasso after an alarm over a suspicious backpack near Palazzo Mercurio',
+    'blog.article.aumento-iva-tredicesima-avs.title': 'VAT increase for the 13th AVS pension payment: the alliance’s yes',
+    'blog.article.aumento-iva-tredicesima-avs.excerpt': 'Left, Centre and Evangelical Party support the proposal.',
+    'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'VAT increase to finance the 13th AVS pension',
 };
 
 export default blogMetaEn;

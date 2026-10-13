@@ -13135,6 +13135,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.zaino-sospetto-chiasso.title': 'Zaino sospetto a Chiasso: falso allarme',
     'blog.article.zaino-sospetto-chiasso.excerpt': 'Allarme scattato poco dopo le 12.30 a Chiasso Oggetti sospetti segnalati in piazza Bernasconi Artificieri: gli oggetti non costituivano un pericolo Dispositivo',
     'blog.article.zaino-sospetto-chiasso.imageAlt': 'Area isolata a Chiasso dopo l\'allarme per uno zaino sospetto vicino a Palazzo Mercurio',
+    'blog.article.aumento-iva-tredicesima-avs.title': 'Aumento IVA per la 13esima AVS: il sì dell\'alleanza',
+    'blog.article.aumento-iva-tredicesima-avs.excerpt': 'Sinistra, Centro e Partito evangelico sostengono la proposta.',
+    'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'Aumento dell\'IVA per finanziare la 13esima rendita AVS',
 };
 
 export default blogMetaIt;

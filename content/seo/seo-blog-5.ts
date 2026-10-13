@@ -107439,6 +107439,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aumento-iva-tredicesima-avs': {
+    title: 'Aumento IVA per la 13esima AVS: il sì dell\'alleanza',
+    description: 'Sinistra, Centro e Partito evangelico sostengono la proposta. Il Parlamento propone 0,4 punti IVA per la 13esima AVS. Il voto popolare è fissato al 29 novembre',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, 13esima, dell, alleanza',
+    ogTitle: '13esima AVS: l\'alleanza difende l\'aumento IVA',
+    ogDescription: 'Sinistra, Centro e Partito evangelico sostengono la proposta.',
+    canonicalPath: '/articoli-frontaliere/aumento-iva-tredicesima-avs/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aumento IVA per la 13esima AVS: il sì dell'alleanza",
+      "description": "Sinistra, Centro e Partito evangelico sostengono la proposta. Il Parlamento propone 0,4 punti IVA per la 13esima AVS. Il voto popolare è fissato al 29 novembre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aumento-iva-tredicesima-avs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aumento dell'IVA per finanziare la 13esima rendita AVS"
+      },
+      "datePublished": "2026-10-13T13:15:02+00:00",
+      "dateModified": "2026-10-13T13:15:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/aumento-iva-tredicesima-avs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

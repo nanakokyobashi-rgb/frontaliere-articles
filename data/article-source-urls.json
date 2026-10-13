@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4014973": {
-    "articleId": "finanziamento-statuto-s-avs",
-    "ts": "2026-08-27T10:37:35.434Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/08/il-costo-della-vita-aumenta-non-possiamo-continuare-a-ridurre-il-valore-del-lavoro/2664346": {
     "articleId": "costo-vita-salari-lgn",
     "ts": "2026-08-27T11:43:35.719Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1956431/borsa-scatta-zona-chiasso-palazzo": {
     "articleId": "zaino-sospetto-chiasso",
     "ts": "2026-10-13T12:58:48.100Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4160092": {
+    "articleId": "aumento-iva-tredicesima-avs",
+    "ts": "2026-10-13T13:15:02.970Z",
     "keyForm": 2
   }
 }

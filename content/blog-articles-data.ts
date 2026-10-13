@@ -44286,6 +44286,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'aumento-iva-tredicesima-avs',
+ category: 'pensione',
+ date: '2026-10-13T13:15:02.522Z',
+ image: '/images/blog/article-aumento-iva-tredicesima-avs.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

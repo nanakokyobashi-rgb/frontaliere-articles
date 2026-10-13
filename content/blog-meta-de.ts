@@ -13133,6 +13133,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.zaino-sospetto-chiasso.title': 'Verdächtiger Rucksack in Chiasso: Fehlalarm',
     'blog.article.zaino-sospetto-chiasso.excerpt': 'Alarm kurz nach 12.30 Uhr in Chiasso ausgelöst Verdächtige Gegenstände auf der Piazza Bernasconi gemeldet Bombenentschärfer: Die Gegenstände stellten keine Gefahr dar Dispositiv',
     'blog.article.zaino-sospetto-chiasso.imageAlt': 'Abgesperrter Bereich in Chiasso nach Alarm wegen eines verdächtigen Rucksacks nahe Palazzo Mercurio',
+    'blog.article.aumento-iva-tredicesima-avs.title': 'Mehrwertsteuererhöhung für die 13. AHV-Rente: das Ja der Allianz',
+    'blog.article.aumento-iva-tredicesima-avs.excerpt': 'Die Linke, das Zentrum und die Evangelische Partei unterstützen den Vorschlag.',
+    'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'Mehrwertsteuererhöhung zur Finanzierung der 13. AHV-Rente',
 };
 
 export default blogMetaDe;
