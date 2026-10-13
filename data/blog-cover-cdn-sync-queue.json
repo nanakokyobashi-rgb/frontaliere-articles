@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-poker-room-admiral-mendrisio-chiude.webp",
-      "sha256": "078542f9e10d3e4913d661c4fa2ccdd6e21bd9f32adc163e266540a2ba313249"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-poker-room-admiral-mendrisio-chiude-480w.webp",
-      "sha256": "5fb9ae141a21d3c2bdca10ed49c056110a7630df379666df545bf0506002a25d"
-    }
-  ]
+  "items": []
 }
