@@ -13083,6 +13083,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.rio-scorta-giro-como.title': 'À Côme, Rio naît sous escorte pendant le Giro',
     'blog.article.rio-scorta-giro-como.excerpt': 'À Como, pendant le Tour de Lombardie, la circulation était bloquée Elisa a appelé après avoir perdu les eaux Rio est né à 16.57, après une escorte à moto',
     'blog.article.rio-scorta-giro-como.imageAlt': 'Deux motos de la police locale escortent une voiture familiale vers l\'hôpital pendant le Tour de Lombardie.',
+    'blog.article.jazz-concerti-castellanza.title': 'Eventi in Jazz 2026 : concerts à Castellanza',
+    'blog.article.jazz-concerti-castellanza.excerpt': 'Mardi 20 octobre, à 21 h, le Davide Pannozzo Trio se produit.',
+    'blog.article.jazz-concerti-castellanza.imageAlt': 'Scène de jazz au Cinema Teatro Dante de Castellanza pour Eventi in Jazz 2026',
 };
 
 export default blogMetaFr;

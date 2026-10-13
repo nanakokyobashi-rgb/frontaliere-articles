@@ -44111,6 +44111,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'jazz-concerti-castellanza',
+ category: 'novita',
+ date: '2026-10-13T01:28:02.923Z',
+ image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

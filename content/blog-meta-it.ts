@@ -13082,6 +13082,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.rio-scorta-giro-como.title': 'Como, Rio nasce con la scorta durante il Giro',
     'blog.article.rio-scorta-giro-como.excerpt': 'A Como, durante il Giro di Lombardia, la viabilità era bloccata Elisa ha chiamato dopo aver rotto le acque Rio è nato alle 16.57, dopo una scorta in moto',
     'blog.article.rio-scorta-giro-como.imageAlt': 'Due moto della Polizia Locale scortano l\'auto di una famiglia verso l\'ospedale durante il Giro di Lombardia.',
+    'blog.article.jazz-concerti-castellanza.title': 'Eventi in Jazz 2026: concerti a Castellanza',
+    'blog.article.jazz-concerti-castellanza.excerpt': 'Martedì 20 ottobre, alle 21, arriva il Davide Pannozzo Trio Venerdì 30 ottobre, alle 21, suona la Simply Bop Big Band Biglietto intero: 12 euro Under 20 gratis',
+    'blog.article.jazz-concerti-castellanza.imageAlt': 'Scena jazz al Cinema Teatro Dante di Castellanza per Eventi in Jazz 2026',
 };
 
 export default blogMetaIt;

@@ -106771,6 +106771,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-jazz-concerti-castellanza': {
+    title: 'Eventi in Jazz 2026: concerti a Castellanza | Frontaliere Ticino',
+    description: 'Martedì 20 ottobre, alle 21, arriva il Davide Pannozzo Trio Venerdì 30 ottobre, alle 21, suona la Simply Bop Big Band Biglietto intero: 12 euro Under 20 gratis',
+    keywords: 'frontalieri, ticino, svizzera, italia, eventi, jazz, concerti, castellanza',
+    ogTitle: 'Jazz a Castellanza: due concerti al Teatro Dante',
+    ogDescription: 'Martedì 20 ottobre, alle 21, arriva il Davide Pannozzo Trio Venerdì 30 ottobre, alle 21, suona la Simply Bop Big Band Biglietto intero: 12 euro Under 20 gratis',
+    canonicalPath: '/articoli-frontaliere/jazz-concerti-castellanza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Eventi in Jazz 2026: concerti a Castellanza",
+      "description": "Martedì 20 ottobre, alle 21, arriva il Davide Pannozzo Trio Venerdì 30 ottobre, alle 21, suona la Simply Bop Big Band Biglietto intero: 12 euro Under 20 gratis",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena jazz al Cinema Teatro Dante di Castellanza per Eventi in Jazz 2026"
+      },
+      "datePublished": "2026-10-13T01:28:03+00:00",
+      "dateModified": "2026-10-13T01:28:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/jazz-concerti-castellanza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

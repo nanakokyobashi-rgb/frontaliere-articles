@@ -13081,6 +13081,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.rio-scorta-giro-como.title': 'Como, Rio is born under escort during the Giro',
     'blog.article.rio-scorta-giro-como.excerpt': 'At Como, during the Giro di Lombardia, traffic was blocked Elisa called after her water broke Rio was born at 16.57, after a motorcycle escort',
     'blog.article.rio-scorta-giro-como.imageAlt': 'Two local police motorcycles escort a family car to hospital during the Giro di Lombardia.',
+    'blog.article.jazz-concerti-castellanza.title': 'Events in Jazz 2026: concerts in Castellanza',
+    'blog.article.jazz-concerti-castellanza.excerpt': 'Tuesday, October 20, at 21, the Davide Pannozzo Trio arrives Friday, October 30, at 21, the Simply Bop Big Band plays Full-price ticket: 12 euros Under 20 free',
+    'blog.article.jazz-concerti-castellanza.imageAlt': 'Jazz stage at the Cinema Teatro Dante in Castellanza for Eventi in Jazz 2026',
 };
 
 export default blogMetaEn;
