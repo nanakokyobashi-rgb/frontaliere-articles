@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-migros-ecublens-57-posti.webp",
-      "sha256": "8b66c0fdfd3e7752c97de97ace12d2af31fd8997e65682bebe967af742a1fdda"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-migros-ecublens-57-posti-480w.webp",
-      "sha256": "93e4b8f25f36812c02718a46baef11352994748608f7420b0f98b92b3f6c69c4"
-    }
-  ]
+  "items": []
 }
