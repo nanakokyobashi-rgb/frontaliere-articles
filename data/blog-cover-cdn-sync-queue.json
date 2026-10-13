@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-benu-rete-santanna-sanita.webp",
+      "sha256": "4a1ef92f32f09d0454dd9818ce11fee844f6b903fbaadefbd4bf486895f3e68f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-benu-rete-santanna-sanita-480w.webp",
+      "sha256": "d84e28272c18a152b52166638927eb72b589735f06a1f7e16a038b6f12e3a111"
+    }
+  ]
 }
