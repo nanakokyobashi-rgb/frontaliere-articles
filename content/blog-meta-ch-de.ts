@@ -8153,6 +8153,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.franco-euro-rafforzamento-stucki.title': 'Franco stärkt den Euro: Stuckis Prognose',
     'blog.article.franco-euro-rafforzamento-stucki.excerpt': 'Stucki sieht bis Ende Jahr den stärksten Franken gegenüber dem Euro Wechselkurs fiel von 95 auf 93 Cent Das französische Defizit liegt bei etwa 5% des BIP Die SNB sollte',
     'blog.article.franco-euro-rafforzamento-stucki.imageAlt': 'Panoramablick auf Lugano mit See und Bergen, Symbol für wirtschaftliche Stabilität in der Schweiz.',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.title': 'Einkommenslücke zwischen Frauen und Männern: sinkt auf 14%',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.excerpt': 'Die Einkommenslücke sinkt zwischen den Generationen von 55% auf 14%.',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.imageAlt': 'Redaktionelles Bild zu: Divario reddito donne-uomini: scende al 14%',
 };
 
 export default blogMetaChDe;

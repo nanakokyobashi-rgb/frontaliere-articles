@@ -8153,6 +8153,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.franco-euro-rafforzamento-stucki.title': 'Franc strengthens against the euro: Stucki’s forecasts',
     'blog.article.franco-euro-rafforzamento-stucki.excerpt': 'Stucki sees the franc stronger against the euro by the end of the year The exchange rate has fallen from 95 to 93 centimes The French deficit is about 5% of GDP The SNB should not',
     'blog.article.franco-euro-rafforzamento-stucki.imageAlt': 'Panoramic view of Lugano with the lake and mountains, symbolizing economic stability in Switzerland.',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.title': 'Women-men income gap: falls to 14%',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.excerpt': 'The income gap declines from 55% to 14% between generations.',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.imageAlt': 'Editorial image related to: Divario reddito donne-uomini: scende al 14%',
 };
 
 export default blogMetaChEn;

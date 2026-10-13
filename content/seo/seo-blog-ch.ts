@@ -102872,6 +102872,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-divario-reddito-donne-uomini-scende-al-14': {
+    title: 'Divario reddito donne-uomini: scende al 14% | Frontaliere Ticino',
+    description: 'Il divario di reddito scende dal 55% al 14% tra generazioni. Nel 2025, titolo terziario: 54% donne contro 48% uomini. Le ore lavorate passano da 17 a meno',
+    keywords: 'frontalieri, ticino, svizzera, italia, divario, reddito, donne-uomini, scende',
+    ogTitle: 'Divario reddito donne-uomini: scende al 14%',
+    ogDescription: 'Il divario di reddito scende dal 55% al 14% tra generazioni.',
+    canonicalPath: '/articoli-svizzera/divario-reddito-donne-uomini-scende-al-14/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Divario reddito donne-uomini: scende al 14%",
+      "description": "Il divario di reddito scende dal 55% al 14% tra generazioni. Nel 2025, titolo terziario: 54% donne contro 48% uomini. Le ore lavorate passano da 17 a meno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-divario-reddito-donne-uomini-scende-al-14.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Divario reddito donne-uomini: scende al 14%"
+      },
+      "datePublished": "2026-10-13T10:59:34+00:00",
+      "dateModified": "2026-10-13T10:59:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/divario-reddito-donne-uomini-scende-al-14/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

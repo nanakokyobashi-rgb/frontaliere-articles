@@ -8153,6 +8153,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.franco-euro-rafforzamento-stucki.title': 'Franco se renforce sur l\'euro : les prévisions de Stucki',
     'blog.article.franco-euro-rafforzamento-stucki.excerpt': 'Stucki voit le franc le plus fort sur l\'euro d\'ici la fin de l\'année Le taux de change est passé de 95 à 93 cents Le déficit français est d\'environ 5% du PIB La BNS ne devrait pas',
     'blog.article.franco-euro-rafforzamento-stucki.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes, symbole de stabilité économique en Suisse.',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.title': 'Écart de revenus femmes-hommes : baisse à 14 %',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.excerpt': 'L’écart de revenus passe de 55 % à 14 % entre les générations.',
+    'blog.article.divario-reddito-donne-uomini-scende-al-14.imageAlt': 'Image éditoriale relative à: Divario reddito donne-uomini: scende al 14%',
 };
 
 export default blogMetaChFr;
