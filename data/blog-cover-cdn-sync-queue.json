@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-franco-euro-rafforzamento-stucki.webp",
+      "sha256": "1f258f06daa386fa9dfe651712dae888879deed08e3ec19a4744a32ae6bc9a0c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-franco-euro-rafforzamento-stucki-480w.webp",
+      "sha256": "b380c116d01e08c443e4f71ddd414f9f481b2e5f92538757206d44f301000d24"
+    }
+  ]
 }
