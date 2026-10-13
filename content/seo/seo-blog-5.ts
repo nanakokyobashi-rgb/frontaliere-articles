@@ -106732,6 +106732,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rio-scorta-giro-como': {
+    title: 'Como, Rio nasce con la scorta durante il Giro | Frontaliere Ticino',
+    description: 'A Como, durante il Giro di Lombardia, la viabilità era bloccata Elisa ha chiamato dopo aver rotto le acque Rio è nato alle 16.57, dopo una scorta in moto',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, nasce, scorta, durante',
+    ogTitle: 'Como, Rio nasce con la scorta durante il Giro',
+    ogDescription: 'A Como, durante il Giro di Lombardia, la viabilità era bloccata Elisa ha chiamato dopo aver rotto le acque Rio è nato alle 16.57, dopo una scorta in moto',
+    canonicalPath: '/articoli-frontaliere/rio-scorta-giro-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, Rio nasce con la scorta durante il Giro",
+      "description": "A Como, durante il Giro di Lombardia, la viabilità era bloccata Elisa ha chiamato dopo aver rotto le acque Rio è nato alle 16.57, dopo una scorta in moto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Due moto della Polizia Locale scortano l'auto di una famiglia verso l'ospedale durante il Giro di Lombardia."
+      },
+      "datePublished": "2026-10-13T01:05:40+00:00",
+      "dateModified": "2026-10-13T01:05:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/rio-scorta-giro-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

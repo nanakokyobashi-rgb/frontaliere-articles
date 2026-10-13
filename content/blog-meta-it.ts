@@ -13079,6 +13079,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi apre la stagione teatrale di Varese',
     'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi torna a teatro dopo venticinque anni BIOL',
     'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Pubblico al Teatro di Varese durante lo spettacolo di Fabio De Luigi',
+    'blog.article.rio-scorta-giro-como.title': 'Como, Rio nasce con la scorta durante il Giro',
+    'blog.article.rio-scorta-giro-como.excerpt': 'A Como, durante il Giro di Lombardia, la viabilità era bloccata Elisa ha chiamato dopo aver rotto le acque Rio è nato alle 16.57, dopo una scorta in moto',
+    'blog.article.rio-scorta-giro-como.imageAlt': 'Due moto della Polizia Locale scortano l\'auto di una famiglia verso l\'ospedale durante il Giro di Lombardia.',
 };
 
 export default blogMetaIt;

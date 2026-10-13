@@ -13077,6 +13077,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi eröffnet die Theatersaison in Varese',
     'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi kehrt nach 25 Jahren ins Theater zurück BIOL',
     'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Publikum im Teatro di Varese während der Show von Fabio De Luigi',
+    'blog.article.rio-scorta-giro-como.title': 'Como, Rio wird mit Begleitung während des Giro geboren',
+    'blog.article.rio-scorta-giro-como.excerpt': 'Bei Como, während der Lombardei-Rundfahrt, war die Straße blockiert Elisa rief an, nachdem sie das Wasser gebrochen hatte Rio wurde um 16.57 Uhr geboren, nach einer Begleitung mit dem Motorrad',
+    'blog.article.rio-scorta-giro-como.imageAlt': 'Zwei Motorräder der Ortspolizei begleiten ein Familienauto während der Lombardei-Rundfahrt ins Krankenhaus.',
 };
 
 export default blogMetaDe;

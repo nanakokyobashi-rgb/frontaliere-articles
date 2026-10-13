@@ -1,9 +1,4 @@
 {
-  "https://www.fiscoetasse.com/approfondimenti/17386-lavoratori-frontalieri-le-novita-del-2026-tra-protocollo-di-modifica-it-ch.html": {
-    "articleId": "novita-frontalieri-legge-217-2025",
-    "ts": "2026-08-20T09:20:04.022Z",
-    "keyForm": 2
-  },
   "https://www.fiscoetasse.com/approfondimenti/17386-frontaliere-svizzeri-scambio-automatico-dati.html": {
     "articleId": "frontaliere-svizzera-dati",
     "ts": "2026-08-20T12:14:10.606Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/tra-piadine-e-delfini-fabio-de-luigi-apre-la-stagione-del-teatro-di-varese/2705023": {
     "articleId": "fabio-de-luigi-biol-varese",
     "ts": "2026-10-13T00:24:03.071Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-giro-di-lombardia-con-fiocco-azzurro-la-polizia-locale-scorta-mamma-e-papa-in-ospedale-dove-nasce-il-piccolo-rio": {
+    "articleId": "rio-scorta-giro-como",
+    "ts": "2026-10-13T01:05:41.017Z",
     "keyForm": 2
   }
 }

@@ -13078,6 +13078,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi opens Varese\'s theater season',
     'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi returns to the theater after twenty-five years BIOL',
     'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Audience at Teatro di Varese during Fabio De Luigi\'s show',
+    'blog.article.rio-scorta-giro-como.title': 'Como, Rio is born under escort during the Giro',
+    'blog.article.rio-scorta-giro-como.excerpt': 'At Como, during the Giro di Lombardia, traffic was blocked Elisa called after her water broke Rio was born at 16.57, after a motorcycle escort',
+    'blog.article.rio-scorta-giro-como.imageAlt': 'Two local police motorcycles escort a family car to hospital during the Giro di Lombardia.',
 };
 
 export default blogMetaEn;
