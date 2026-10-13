@@ -8159,6 +8159,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.title': 'Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.excerpt': 'Comunicato pubblicato il 13 ottobre 2026.',
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.formulario-averi-iran-ottobre.title': 'Iran: DEFR aggiorna il formulario per trasferimenti di averi',
+    'blog.article.formulario-averi-iran-ottobre.excerpt': 'Il DEFR ha adattato il formulario il 13 ottobre 2026 Riguarda trasferimenti di averi ai sensi dell\'art.',
+    'blog.article.formulario-averi-iran-ottobre.imageAlt': 'Formulario aggiornato per trasferimenti di averi secondo l\'ordinanza sull\'Iran',
 };
 
 export default blogMetaChIt;

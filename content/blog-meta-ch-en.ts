@@ -8159,6 +8159,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.title': 'Autumn vaccinations 2026: influenza, COVID-19 and RSV',
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.excerpt': 'Press release published on October 13, 2026.',
     'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.imageAlt': 'Illustration generated for this article',
+    'blog.article.formulario-averi-iran-ottobre.title': 'Iran: DEFR updates the form for asset transfers',
+    'blog.article.formulario-averi-iran-ottobre.excerpt': 'The DEFR adapted the form on October 13, 2026 It concerns transfers of assets pursuant to Art.',
+    'blog.article.formulario-averi-iran-ottobre.imageAlt': 'Updated form for asset transfers under the Iran-related ordinance',
 };
 
 export default blogMetaChEn;

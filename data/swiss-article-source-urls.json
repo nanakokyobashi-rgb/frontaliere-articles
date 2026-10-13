@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/politica/1948813/salario-legge-referendum-ticino-beneficiari": {
-    "articleId": "salario-minimo-ticino-mozione-ettlin",
-    "ts": "2026-09-08T15:06:51.557Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/casse-pensioni%2c-buoni-rendimenti-grazie-alle-azioni/92023367": {
     "articleId": "casse-pensioni-rendimenti-2025",
     "ts": "2026-09-08T19:20:17.760Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/uhz5xgu3ltn4": {
     "articleId": "vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv",
     "ts": "2026-10-13T11:54:19.604Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/ynzpu65j-cgp": {
+    "articleId": "formulario-averi-iran-ottobre",
+    "ts": "2026-10-13T12:41:14.547Z",
     "keyForm": 2
   }
 }

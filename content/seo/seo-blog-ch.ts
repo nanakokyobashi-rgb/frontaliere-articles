@@ -102950,6 +102950,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-formulario-averi-iran-ottobre': {
+    title: 'Iran: DEFR aggiorna il formulario per trasferimenti di averi',
+    description: 'Il DEFR ha adattato il formulario il 13 ottobre 2026 Riguarda trasferimenti di averi ai sensi dell\'art.',
+    keywords: 'frontalieri, ticino, svizzera, italia, iran, defr, aggiorna, formulario',
+    ogTitle: 'Iran: DEFR aggiorna il formulario per trasferimenti di averi',
+    ogDescription: 'Il DEFR ha adattato il formulario il 13 ottobre 2026 Riguarda trasferimenti di averi ai sensi dell\'art.',
+    canonicalPath: '/articoli-svizzera/formulario-averi-iran-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Iran: DEFR aggiorna il formulario per trasferimenti di averi",
+      "description": "Il DEFR ha adattato il formulario il 13 ottobre 2026 Riguarda trasferimenti di averi ai sensi dell'art.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-formulario-averi-iran-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Formulario aggiornato per trasferimenti di averi secondo l'ordinanza sull'Iran"
+      },
+      "datePublished": "2026-10-13T12:41:14+00:00",
+      "dateModified": "2026-10-13T12:41:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/formulario-averi-iran-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
