@@ -2750,6 +2750,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ruppen-valuta-candidatura': { it: 'ruppen-valuta-candidatura', en: 'ruppen-weighs-federal-council-bid', de: 'ruppen-prueft-kandidatur-bundesrat', fr: 'ruppen-evalue-candidature-conseil-federal' },
  'swisscom-fibra-multa-taf': { it: 'swisscom-fibra-multa-taf', en: 'swisscom-wins-taf-appeal-18-million-fine-annulled', de: 'swisscom-gewinnt-die-beschwerde-vor-dem-taf-18-millionen-busse-aufgehoben', fr: 'swisscom-remporte-son-recours-devant-le-taf-amende-de-18-millions-annulee' },
  'iniziativa-keller-sutter-imposizione-coniugi': { it: 'iniziativa-keller-sutter-imposizione-coniugi', en: 'keller-sutter-launches-the-no-campaign-against-the-taxation-of-married-couples', de: 'keller-sutter-lanciert-die-nein-kampagne-zur-ehepaarbesteuerung', fr: 'keller-sutter-lance-la-campagne-du-non-sur-l-imposition-des-couples-maries' },
+ 'hacker-casse-pensioni-svizzera': { it: 'hacker-casse-pensioni-svizzera', en: 'hackers-swiss-pension-funds', de: 'hacker-schweizer-pensionskassen', fr: 'hackers-caisses-de-pension-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

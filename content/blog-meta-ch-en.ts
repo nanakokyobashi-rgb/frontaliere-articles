@@ -8183,6 +8183,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-keller-sutter-imposizione-coniugi.title': 'Keller-Sutter launches the No campaign against the taxation of married couples',
     'blog.article.iniziativa-keller-sutter-imposizione-coniugi.excerpt': 'Keller-Sutter launches the No campaign in Bern.',
     'blog.article.iniziativa-keller-sutter-imposizione-coniugi.imageAlt': 'Federal Finance Ministry building in Bern with Swiss flags and tax document in foreground',
+    'blog.article.hacker-casse-pensioni-svizzera.title': 'Hackers and pension funds: the risk of concentration',
+    'blog.article.hacker-casse-pensioni-svizzera.excerpt': 'FAR: approximately 20\'000 beneficiaries notified after an attack Publica: approximately 112\'000 people potentially involved A software provider can expose',
+    'blog.article.hacker-casse-pensioni-svizzera.imageAlt': 'Swiss pension fund office with digital security protection',
 };
 
 export default blogMetaChEn;

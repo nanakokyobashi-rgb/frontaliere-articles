@@ -27310,6 +27310,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'hacker-casse-pensioni-svizzera',
+    category: 'pensione',
+    date: '2026-10-13T20:26:15.063Z',
+    image: '/images/blog/article-hacker-casse-pensioni-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

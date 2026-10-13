@@ -8183,6 +8183,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-keller-sutter-imposizione-coniugi.title': 'Keller-Sutter lancia la campagna del No sull\'imposizione dei coniugi',
     'blog.article.iniziativa-keller-sutter-imposizione-coniugi.excerpt': 'Keller-Sutter apre a Berna la campagna per il No.',
     'blog.article.iniziativa-keller-sutter-imposizione-coniugi.imageAlt': 'Edificio del DFF a Berna con bandiere svizzere e documento fiscale in primo piano',
+    'blog.article.hacker-casse-pensioni-svizzera.title': 'Hacker e casse pensioni: il rischio della concentrazione',
+    'blog.article.hacker-casse-pensioni-svizzera.excerpt': 'FAR: circa 20\'000 beneficiari avvisati dopo un attacco Publica: circa 112\'000 persone potenzialmente coinvolte Un fornitore software può esporre più casse',
+    'blog.article.hacker-casse-pensioni-svizzera.imageAlt': 'Ufficio di una cassa pensioni in Svizzera con protezione digitale',
 };
 
 export default blogMetaChIt;
