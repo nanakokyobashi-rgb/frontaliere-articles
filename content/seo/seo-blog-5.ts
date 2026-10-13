@@ -107185,10 +107185,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-festival-racconto-varese-ottobre.webp`,
+        "url": `${BASE_URL}/images/blog/article-bissone-torneo-scacchi.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Giovani scacchisti durante il Festival di Bissone"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T08:19:26+00:00",
       "dateModified": "2026-10-13T08:19:26+00:00",
@@ -107224,10 +107224,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-verbania-cantieri-allarme-m5s.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Veduta serale di una cittadina sul lago con luci che si riflettono sull'acqua, che rappresenta Verbania e i suoi dintorni."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T08:46:23+00:00",
       "dateModified": "2026-10-13T08:46:23+00:00",
