@@ -44121,6 +44121,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'erreci-busto-marsala-vittoria',
+ category: 'pratico',
+ date: '2026-10-13T01:58:39.603Z',
+ image: '/images/blog/article-erreci-busto-marsala-vittoria.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

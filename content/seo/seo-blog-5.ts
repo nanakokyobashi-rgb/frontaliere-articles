@@ -106810,6 +106810,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-erreci-busto-marsala-vittoria': {
+    title: 'Erreci Busto vince a Marsala e resta a punteggio pieno',
+    description: 'La Futura Volley Giovani vince 0-3 a Marsala con Mija Šiftar MVP e resta in vetta a punteggio pieno in Serie A2. Tutti i dettagli della gara.',
+    keywords: 'frontalieri, ticino, svizzera, italia, erreci, busto, vince, marsala',
+    ogTitle: 'Erreci Busto vince a Marsala e resta in vetta alla Serie A2',
+    ogDescription: 'La Futura Volley Giovani espugna Marsala con un netto 0-3 grazie a una super Mija Šiftar. Le biancorosse mantengono il punteggio pieno in vetta alla classifica di Serie A2.',
+    canonicalPath: '/articoli-frontaliere/erreci-busto-marsala-vittoria/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Erreci Busto vince a Marsala e resta a punteggio pieno",
+      "description": "La Futura Volley Giovani vince 0-3 a Marsala con Mija Šiftar MVP e resta in vetta a punteggio pieno in Serie A2. Tutti i dettagli della gara.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-erreci-busto-marsala-vittoria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Partita di pallavolo della Erreci Busto Arsizio"
+      },
+      "datePublished": "2026-10-13T01:58:39+00:00",
+      "dateModified": "2026-10-13T01:58:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/erreci-busto-marsala-vittoria/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

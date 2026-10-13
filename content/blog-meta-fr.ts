@@ -13086,6 +13086,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.jazz-concerti-castellanza.title': 'Eventi in Jazz 2026 : concerts à Castellanza',
     'blog.article.jazz-concerti-castellanza.excerpt': 'Mardi 20 octobre, à 21 h, le Davide Pannozzo Trio se produit.',
     'blog.article.jazz-concerti-castellanza.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto s\'impose à Marsala et reste à plein de points',
+    'blog.article.erreci-busto-marsala-vittoria.excerpt': 'La Futura Volley Giovani s\'impose à Marsala sur le score de 0-3 avec Šiftar MVP et reste en tête avec le maximum de points en Serie A2.',
+    'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Match de volley-ball de l\'Erreci Busto Arsizio',
 };
 
 export default blogMetaFr;

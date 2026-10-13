@@ -13085,6 +13085,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.jazz-concerti-castellanza.title': 'Eventi in Jazz 2026: concerti a Castellanza',
     'blog.article.jazz-concerti-castellanza.excerpt': 'Martedì 20 ottobre, alle 21, arriva il Davide Pannozzo Trio Venerdì 30 ottobre, alle 21, suona la Simply Bop Big Band Biglietto intero: 12 euro Under 20 gratis',
     'blog.article.jazz-concerti-castellanza.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto vince a Marsala e resta a punteggio pieno',
+    'blog.article.erreci-busto-marsala-vittoria.excerpt': 'La Futura Volley Giovani conquista Marsala per 0-3 con Šiftar MVP e resta in vetta a punteggio pieno in Serie A2.',
+    'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Partita di pallavolo della Erreci Busto Arsizio',
 };
 
 export default blogMetaIt;

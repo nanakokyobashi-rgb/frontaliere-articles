@@ -13083,6 +13083,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.jazz-concerti-castellanza.title': 'Eventi in Jazz 2026: Konzerte in Castellanza',
     'blog.article.jazz-concerti-castellanza.excerpt': 'Am Dienstag, 20.',
     'blog.article.jazz-concerti-castellanza.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto gewinnt in Marsala und bleibt mit voller Punktzahl',
+    'blog.article.erreci-busto-marsala-vittoria.excerpt': 'Futura Volley Giovani setzt sich in Marsala mit 0-3 durch, mit Šiftar als MVP, und bleibt in der Serie A2 mit voller Punktzahl an der Tabellenspitze.',
+    'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Erreci Busto Arsizio Volleyballspiel',
 };
 
 export default blogMetaDe;

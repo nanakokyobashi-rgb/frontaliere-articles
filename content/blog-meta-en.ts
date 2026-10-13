@@ -13084,6 +13084,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.jazz-concerti-castellanza.title': 'Events in Jazz 2026: concerts in Castellanza',
     'blog.article.jazz-concerti-castellanza.excerpt': 'Tuesday, October 20, at 21, the Davide Pannozzo Trio arrives Friday, October 30, at 21, the Simply Bop Big Band plays Full-price ticket: 12 euros Under 20 free',
     'blog.article.jazz-concerti-castellanza.imageAlt': 'Illustration generated for this article',
+    'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto wins in Marsala and remains on a perfect score',
+    'blog.article.erreci-busto-marsala-vittoria.excerpt': 'Futura Volley Giovani defeat Marsala 0-3, with Šiftar as MVP, and remain top of Serie A2 with a perfect record.',
+    'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Erreci Busto Arsizio volleyball match',
 };
 
 export default blogMetaEn;

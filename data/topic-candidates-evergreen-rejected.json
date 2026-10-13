@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/fendinebbia-duke-chirurgo-hale-e-renfro-sorprende-in-lunetta/2704417": {
-      "section": "frontaliere",
-      "ts": 1791683108431
-    },
     "frontaliere::https://www.tio.ch/rubriche/ospite/1956002/ue-sovranita-accordo-addio-quadri-lorenzo": {
       "section": "frontaliere",
       "ts": 1791699575480
@@ -1000,6 +996,10 @@
     "frontaliere::https://www.tio.ch/ticino/economia/1956143/nuovo-cfo-boisseau-dedichera-ludovic": {
       "section": "frontaliere",
       "ts": 1791852960971
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/in-pullman-a-trento-per-tifare-openjobmetis/2705287": {
+      "section": "frontaliere",
+      "ts": 1791856266058
     }
   }
 }
