@@ -106893,6 +106893,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-itelyum-peristeri-bcl-masnago': {
+    title: 'Itelyum-Peristeri: BCL alle 20 a Masnago | Frontaliere Ticino',
+    description: 'Itelyum cerca il primo successo in BCL dopo Murcia Peristeri arriva a Masnago con tre vittorie ufficiali Ty Nichols ha segnato 33 punti contro Iraklis Gara',
+    keywords: 'frontalieri, ticino, svizzera, italia, itelyum-peristeri, alle, masnago, itelyum',
+    ogTitle: 'Itelyum-Peristeri: BCL alle 20 a Masnago',
+    ogDescription: 'Itelyum cerca il primo successo in BCL dopo Murcia Peristeri arriva a Masnago con tre vittorie ufficiali Ty Nichols ha segnato 33 punti contro Iraklis Gara',
+    canonicalPath: '/articoli-frontaliere/itelyum-peristeri-bcl-masnago/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Itelyum-Peristeri: BCL alle 20 a Masnago",
+      "description": "Itelyum cerca il primo successo in BCL dopo Murcia Peristeri arriva a Masnago con tre vittorie ufficiali Ty Nichols ha segnato 33 punti contro Iraklis Gara",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-itelyum-peristeri-bcl-masnago.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "PalaMasnago durante la partita di Basketball Champions League tra Itelyum Varese e Peristeri Atene"
+      },
+      "datePublished": "2026-10-13T03:45:15+00:00",
+      "dateModified": "2026-10-13T03:45:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/itelyum-peristeri-bcl-masnago/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

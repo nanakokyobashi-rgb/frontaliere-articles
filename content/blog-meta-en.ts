@@ -13090,6 +13090,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.festival-varese-cavolo-castronno.title': 'Varese, City of Cabbage: the festival presents itself in Castronno',
     'blog.article.festival-varese-cavolo-castronno.excerpt': 'On October 15 the project will be presented at Castronno Materia hosts culture and a cabbage-themed dinner The festival celebrates Varese brassicas Involved',
     'blog.article.festival-varese-cavolo-castronno.imageAlt': 'Cabbage Festival in Castronno: gardens and brassicas at the center of the Varesino cultural and gastronomic event.',
+    'blog.article.itelyum-peristeri-bcl-masnago.title': 'Itelyum-Peristeri: BCL at 8 p.m. at Masnago',
+    'blog.article.itelyum-peristeri-bcl-masnago.excerpt': 'Itelyum seeks its first BCL win after Murcia Peristeri arrives at Masnago with three official victories Ty Nichols scored 33 points against Iraklis Game',
+    'blog.article.itelyum-peristeri-bcl-masnago.imageAlt': 'PalaMasnago during the Basketball Champions League match between Itelyum Varese and Peristeri Athens',
 };
 
 export default blogMetaEn;

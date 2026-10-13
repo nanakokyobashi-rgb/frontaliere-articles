@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/08/21/leggi-notizia/argomenti/salute-3/articolo/carenza-di-infermieri-lordine-professionale-di-varese-chiede-interventi-finanziati-e-tempi-certi.html": {
-    "articleId": "carenza-infermieri-varese",
-    "ts": "2026-08-21T11:44:44.859Z",
-    "keyForm": 2
-  },
   "https://www.vconews.it/2026/08/21/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/frontalieri-italiani-in-calo-diminuiscono-anche-i-lavoratori-diretti-in-ticino-1.html": {
     "articleId": "frontalieri-calo-secondo-trimestre-2026",
     "ts": "2026-08-21T16:15:54.544Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/varese-che-citta-del-cavolo-il-festival-che-mette-al-centro-orti-fiori-e-ristoratori-si-presenta/2705893": {
     "articleId": "festival-varese-cavolo-castronno",
     "ts": "2026-10-13T02:35:01.402Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/itelyum-esame-di-greco-a-masnago-arriva-limbattuto-peristeri-del-bomber-nichols/2705512": {
+    "articleId": "itelyum-peristeri-bcl-masnago",
+    "ts": "2026-10-13T03:45:16.103Z",
     "keyForm": 2
   }
 }

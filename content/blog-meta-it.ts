@@ -13091,6 +13091,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.festival-varese-cavolo-castronno.title': 'Varese città del Cavolo: il festival si presenta a Castronno',
     'blog.article.festival-varese-cavolo-castronno.excerpt': 'Il 15 ottobre il progetto sarà presentato a Castronno Materia ospita cultura e cena a tema cavolo Il festival valorizza le brassicacee varesine Coinvolti',
     'blog.article.festival-varese-cavolo-castronno.imageAlt': 'Festival del cavolo a Castronno: orti e brassicacee al centro dell\'evento culturale e gastronomico varesino.',
+    'blog.article.itelyum-peristeri-bcl-masnago.title': 'Itelyum-Peristeri: BCL alle 20 a Masnago',
+    'blog.article.itelyum-peristeri-bcl-masnago.excerpt': 'Itelyum cerca il primo successo in BCL dopo Murcia Peristeri arriva a Masnago con tre vittorie ufficiali Ty Nichols ha segnato 33 punti contro Iraklis Gara',
+    'blog.article.itelyum-peristeri-bcl-masnago.imageAlt': 'PalaMasnago durante la partita di Basketball Champions League tra Itelyum Varese e Peristeri Atene',
 };
 
 export default blogMetaIt;

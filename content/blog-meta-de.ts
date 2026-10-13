@@ -13089,6 +13089,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.festival-varese-cavolo-castronno.title': 'Varese, Stadt des Kohls: Das Festival stellt sich in Castronno vor',
     'blog.article.festival-varese-cavolo-castronno.excerpt': 'Am 15. Oktober wird das Projekt in Castronno vorgestellt Materia bietet Kultur und ein Abendessen rund um den Kohl Das Festival würdigt die Brassicaceae aus Varese Beteiligt',
     'blog.article.festival-varese-cavolo-castronno.imageAlt': 'Kohlfestival in Castronno: Gärten und Kreuzblütler im Mittelpunkt des kulturellen und gastronomischen Events.',
+    'blog.article.itelyum-peristeri-bcl-masnago.title': 'Itelyum-Peristeri: BCL um 20 Uhr in Masnago',
+    'blog.article.itelyum-peristeri-bcl-masnago.excerpt': 'Itelyum sucht den ersten Erfolg in der BCL nach Murcia Peristeri kommt mit drei offiziellen Siegen nach Masnago Ty Nichols hat gegen Iraklis 33 Punkte erzielt Spiel',
+    'blog.article.itelyum-peristeri-bcl-masnago.imageAlt': 'PalaMasnago während des Basketball Champions League Spiels zwischen Itelyum Varese und Peristeri Athen',
 };
 
 export default blogMetaDe;

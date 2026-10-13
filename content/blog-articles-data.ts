@@ -44141,6 +44141,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'itelyum-peristeri-bcl-masnago',
+ category: 'novita',
+ date: '2026-10-13T03:45:15.670Z',
+ image: '/images/blog/article-itelyum-peristeri-bcl-masnago.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
