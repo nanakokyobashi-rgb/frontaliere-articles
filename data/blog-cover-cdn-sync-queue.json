@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-itelyum-peristeri-bcl-masnago.webp",
-      "sha256": "8eb00c69205032df81ffd5eb67664e6dd5790133c4271cfb95739b165ee4869f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-itelyum-peristeri-bcl-masnago-480w.webp",
-      "sha256": "08cb85420e73374556a29569bc745730b33e2cc07c3b75f9edbe46e6aac96cd9"
-    }
-  ]
+  "items": []
 }
