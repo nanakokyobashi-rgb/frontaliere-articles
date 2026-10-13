@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/1mie201yrzoa": {
-    "articleId": "bollette-26-centesimi-2027",
-    "ts": "2026-09-08T11:56:17.568Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948761/migros-online-centro-nuovo-capacita-regensdorf-prodotti-punta": {
     "articleId": "migros-online-regensdorf-2026",
     "ts": "2026-09-08T12:11:42.703Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956358/fatture-suva-franchi-controlli-prestazioni": {
     "articleId": "suva-fatture-controlli-risparmio",
     "ts": "2026-10-13T07:33:06.414Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1956394/federale-consiglio-pigioni-firme-raccolte-progetto": {
+    "articleId": "100-848-firme-contro-il-controprogetto-sulle-pigioni",
+    "ts": "2026-10-13T09:06:11.803Z",
     "keyForm": 2
   }
 }

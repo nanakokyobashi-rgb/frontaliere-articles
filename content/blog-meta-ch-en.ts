@@ -8147,6 +8147,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.suva-fatture-controlli-risparmio.title': 'Suva: 123 million saved on bills',
     'blog.article.suva-fatture-controlli-risparmio.excerpt': 'Suva saved 123 million in 2025 Approximately 2,9 million invoices checked 297\'000 invoices had errors or inaccuracies Without the checks, average premiums',
     'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Illustration generated for this article',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.title': '100\'848 signatures against the counterproposal on rents',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.excerpt': 'ASI has submitted 100\'848 signatures to the Federal Chancellery The appeal calls for the counterproposal to be withdrawn The project concerns the review of rents',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.imageAlt': 'Editorial image related to: 100\'848 firme contro il controprogetto sulle pigioni',
 };
 
 export default blogMetaChEn;

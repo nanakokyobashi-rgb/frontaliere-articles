@@ -102794,6 +102794,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-100-848-firme-contro-il-controprogetto-sulle-pigioni': {
+    title: '100\'848 firme contro il controprogetto sulle pigioni',
+    description: 'L\'ASI ha consegnato 100\'848 firme alla Cancelleria federale L\'appello chiede di ritirare il controprogetto Il progetto riguarda il riesame delle pigioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, firme, contro, controprogetto, sulle',
+    ogTitle: '100\'848 firme contro il controprogetto sulle pigioni',
+    ogDescription: 'L\'ASI ha consegnato 100\'848 firme alla Cancelleria federale L\'appello chiede di ritirare il controprogetto Il progetto riguarda il riesame delle pigioni',
+    canonicalPath: '/articoli-svizzera/100-848-firme-contro-il-controprogetto-sulle-pigioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "100'848 firme contro il controprogetto sulle pigioni",
+      "description": "L'ASI ha consegnato 100'848 firme alla Cancelleria federale L'appello chiede di ritirare il controprogetto Il progetto riguarda il riesame delle pigioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-100-848-firme-contro-il-controprogetto-sulle-pigioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: 100'848 firme contro il controprogetto sulle pigioni"
+      },
+      "datePublished": "2026-10-13T09:06:11+00:00",
+      "dateModified": "2026-10-13T09:06:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/100-848-firme-contro-il-controprogetto-sulle-pigioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

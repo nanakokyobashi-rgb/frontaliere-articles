@@ -2738,6 +2738,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tunnel-gran-san-bernardo-fotovoltaico': { it: 'tunnel-gran-san-bernardo-fotovoltaico', en: 'grand-st-bernard-tunnel-photovoltaic', de: 'grosser-st-bernhard-tunnel-photovoltaik', fr: 'tunnel-grand-st-bernard-photovoltaique' },
  'aumento-tassi-ipotecari-q3': { it: 'aumento-tassi-ipotecari-q3', en: 'increase-in-mortgage-rates-in-the-third-quarter-of-2024', de: 'anstieg-der-hypothekarzinsen-im-dritten-quartal-2024', fr: 'hausse-des-taux-hypothecaires-au-troisieme-trimestre-2024' },
  'suva-fatture-controlli-risparmio': { it: 'suva-fatture-controlli-risparmio', en: 'suva-invoice-checks-savings', de: 'suva-rechnungspruefung-einsparungen', fr: 'suva-controle-factures-economies' },
+ '100-848-firme-contro-il-controprogetto-sulle-pigioni': { it: '100-848-firme-contro-il-controprogetto-sulle-pigioni', en: '100-848-signatures-against-the-counterproposal-on-rents', de: '100-848-unterschriften-gegen-den-gegenvorschlag-zu-den-mietzinsen', fr: '100-848-signatures-contre-le-contre-projet-sur-les-loyers' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

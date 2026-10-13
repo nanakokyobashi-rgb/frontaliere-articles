@@ -8147,6 +8147,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.suva-fatture-controlli-risparmio.title': 'Suva: 123 milioni risparmiati sulle fatture',
     'blog.article.suva-fatture-controlli-risparmio.excerpt': 'Suva ha risparmiato 123 milioni nel 2025 Controllate circa 2,9 milioni di fatture 297\'000 fatture avevano errori o imprecisioni Senza i controlli, premi medi',
     'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.title': '100\'848 firme contro il controprogetto sulle pigioni',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.excerpt': 'L\'ASI ha consegnato 100\'848 firme alla Cancelleria federale L\'appello chiede di ritirare il controprogetto Il progetto riguarda il riesame delle pigioni',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.imageAlt': 'Immagine editoriale relativa a: 100\'848 firme contro il controprogetto sulle pigioni',
 };
 
 export default blogMetaChIt;

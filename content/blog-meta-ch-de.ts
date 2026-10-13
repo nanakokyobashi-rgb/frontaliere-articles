@@ -8147,6 +8147,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.suva-fatture-controlli-risparmio.title': 'Suva: 123 Millionen bei den Rechnungen eingespart',
     'blog.article.suva-fatture-controlli-risparmio.excerpt': 'Suva hat 2025 123 Millionen eingespart Kontrolliert wurden etwa 2,9 Millionen Rechnungen 297\'000 Rechnungen enthielten Fehler oder Ungenauigkeiten Ohne die Kontrollen, durchschnittliche Prämien',
     'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.title': '100\'848 Unterschriften gegen den Gegenvorschlag zu den Mietzinsen',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.excerpt': 'Die ASI hat der Bundeskanzlei 100\'848 Unterschriften übergeben Der Aufruf fordert den Rückzug des Gegenvorschlags Das Projekt betrifft die Überprüfung der Mietzinse',
+    'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.imageAlt': 'Redaktionelles Bild zu: 100\'848 firme contro il controprogetto sulle pigioni',
 };
 
 export default blogMetaChDe;
