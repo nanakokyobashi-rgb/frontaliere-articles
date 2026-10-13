@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-pensione-contributi-anni-lavoro.webp",
-      "sha256": "cca5c7e76205ec15cc81b41728260f0ecd7c0698cdf1f7e7d4ee799e6bf6164f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-pensione-contributi-anni-lavoro-480w.webp",
-      "sha256": "692cbed39eb44fd4559032fba0e1c116a8ef9dda8a9c03c8736cce70721b9090"
-    }
-  ]
+  "items": []
 }
