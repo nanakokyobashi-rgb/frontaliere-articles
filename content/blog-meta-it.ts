@@ -13121,6 +13121,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.pensione-contributi-anni-lavoro.title': 'Riforma AVS2030: pensione legata ad anni di contributi',
     'blog.article.pensione-contributi-anni-lavoro.excerpt': 'La proposta lega il pensionamento agli anni di contributi Il modello Centre Patronal richiede 44 anni per la rendita completa Il modello cita 62 anni',
     'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Persona in età pre-pensionistica che osserva il paesaggio ticinese, simbolo della pianificazione della rendita',
+    'blog.article.scontro-galleria-cernobbio-varese.title': 'Incidente a Cernobbio: 21enne grave, trasportata a Varese',
+    'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Incidente poco dopo le 9 a Cernobbio 21enne grave dopo lo scontro in galleria Elisoccorso da Milano verso Varese Tre uomini feriti, codice giallo Luogo →',
+    'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Galleria stradale nella regione dei laghi tra Ticino e Como',
 };
 
 export default blogMetaIt;

@@ -44245,6 +44245,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'scontro-galleria-cernobbio-varese',
+ category: 'novita',
+ date: '2026-10-13T10:10:34.859Z',
+ image: '/images/blog/article-scontro-galleria-cernobbio-varese.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

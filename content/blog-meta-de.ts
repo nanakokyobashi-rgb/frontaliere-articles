@@ -13119,6 +13119,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.pensione-contributi-anni-lavoro.title': 'AHV2030-Reform: Rente an Beitragsjahre geknüpft',
     'blog.article.pensione-contributi-anni-lavoro.excerpt': 'Der Vorschlag knüpft den Renteneintritt an die Beitragsjahre Das Modell Centre Patronal verlangt 44 Jahre für die volle Rente Das Modell nennt 62 Jahre',
     'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Person im Rentenalter blickt auf die Tessiner Landschaft, symbolisiert die Pensionsplanung',
+    'blog.article.scontro-galleria-cernobbio-varese.title': 'Unfall in Cernobbio: 21-Jährige schwer verletzt, nach Varese gebracht',
+    'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Unfall kurz nach 9 Uhr in Cernobbio 21-Jährige nach dem Zusammenstoß im Tunnel schwer verletzt Rettungshubschrauber aus Mailand in Richtung Varese Drei Männer verletzt, gelber Code Ort →',
+    'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Straßentunnel in der Seenregion zwischen Tessin und Como',
 };
 
 export default blogMetaDe;

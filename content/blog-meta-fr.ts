@@ -13122,6 +13122,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.pensione-contributi-anni-lavoro.title': 'Réforme AVS2030 : retraite liée aux années de cotisation',
     'blog.article.pensione-contributi-anni-lavoro.excerpt': 'La proposition lie le départ à la retraite aux années de cotisation Le modèle Centre Patronal exige 44 années pour la rente complète Le modèle mentionne 62 ans',
     'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Personne à l\'âge de la retraite regardant le paysage tessinois, symbolisant la planification de la retraite',
+    'blog.article.scontro-galleria-cernobbio-varese.title': 'Accident à Cernobbio : 21 ans grave, transporté à Varèse',
+    'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Accident peu après 9h à Cernobbio 21 ans grave après l\'affrontement dans le tunnel Elisoccorso de Milan vers Varese Trois hommes blessés, code jaune Lieu →',
+    'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Tunnel routier dans la région des lacs entre le Tessin et Côme (Como)',
 };
 
 export default blogMetaFr;

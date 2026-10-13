@@ -13120,6 +13120,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.pensione-contributi-anni-lavoro.title': 'AVS2030 reform: pension linked to years of contributions',
     'blog.article.pensione-contributi-anni-lavoro.excerpt': 'The proposal links retirement to years of contributions The Centre Patronal model requires 44 years for a full pension The model mentions age 62',
     'blog.article.pensione-contributi-anni-lavoro.imageAlt': 'Person near retirement age looking at the Ticino landscape, symbolizing pension planning',
+    'blog.article.scontro-galleria-cernobbio-varese.title': 'Incident in Cernobbio: 21-year-old seriously injured, transported to Varese',
+    'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Accident shortly after 9 in Cernobbio 21-year-old seriously injured after a collision in a tunnel Air ambulance from Milan toward Varese Three men injured, yellow code Location →',
+    'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Road tunnel in the lake region between Ticino and Como',
 };
 
 export default blogMetaEn;

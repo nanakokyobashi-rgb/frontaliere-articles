@@ -107283,6 +107283,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-scontro-galleria-cernobbio-varese': {
+    title: 'Incidente a Cernobbio: 21enne grave, trasportata a Varese',
+    description: 'Incidente poco dopo le 9 a Cernobbio 21enne grave dopo lo scontro in galleria Elisoccorso da Milano verso Varese Tre uomini feriti, codice giallo Luogo →',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, cernobbio, 21enne, grave',
+    ogTitle: 'Cernobbio, 21enne grave dopo lo scontro in galleria',
+    ogDescription: 'Incidente poco dopo le 9 a Cernobbio 21enne grave dopo lo scontro in galleria Elisoccorso da Milano verso Varese Tre uomini feriti, codice giallo Luogo →',
+    canonicalPath: '/articoli-frontaliere/scontro-galleria-cernobbio-varese/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente a Cernobbio: 21enne grave, trasportata a Varese",
+      "description": "Incidente poco dopo le 9 a Cernobbio 21enne grave dopo lo scontro in galleria Elisoccorso da Milano verso Varese Tre uomini feriti, codice giallo Luogo →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-scontro-galleria-cernobbio-varese.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Galleria stradale nella regione dei laghi tra Ticino e Como"
+      },
+      "datePublished": "2026-10-13T10:10:35+00:00",
+      "dateModified": "2026-10-13T10:10:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/scontro-galleria-cernobbio-varese/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
