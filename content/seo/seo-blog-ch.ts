@@ -103418,6 +103418,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bcg-consiglio-mueller': {
+    title: 'Banca cantonale grigione: Reto Müller nel Consiglio',
+    description: 'Il Governo retico nomina Müller nel Consiglio di banca BCG Mandato: 1° luglio 2027',
+    keywords: 'frontalieri, ticino, svizzera, italia, banca, cantonale, grigione, reto',
+    ogTitle: 'Reto Müller nel Consiglio della BCG',
+    ogDescription: 'Il Governo retico nomina Müller nel Consiglio di banca BCG Mandato: 1° luglio 2027',
+    canonicalPath: '/articoli-svizzera/bcg-consiglio-mueller/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Banca cantonale grigione: Reto Müller nel Consiglio",
+      "description": "Il Governo retico nomina Müller nel Consiglio di banca BCG Mandato: 1° luglio 2027",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bcg-consiglio-mueller.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Rinnovo del Consiglio di banca della Banca cantonale grigione"
+      },
+      "datePublished": "2026-10-13T22:56:26+00:00",
+      "dateModified": "2026-10-13T22:56:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bcg-consiglio-mueller/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

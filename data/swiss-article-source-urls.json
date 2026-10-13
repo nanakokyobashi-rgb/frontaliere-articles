@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1948849/modelli-intelligenza-nestle-gruppo-consumatori": {
-    "articleId": "nestle-ai-consumatori-ricerca",
-    "ts": "2026-09-09T02:03:59.538Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4068571": {
     "articleId": "f35-caccia-commissione-amherd",
     "ts": "2026-09-09T02:21:06.197Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956517/attacco-frigoriferi-svizzera-francia-esperto-rischio-hacker-puo": {
     "articleId": "attacco-frigoriferi-svizzera-rischio",
     "ts": "2026-10-13T21:39:07.091Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/banca-cantonale-grigione%3a-reto-m%c3%bcller-nuovo-membro-consiglio-banca/92210917": {
+    "articleId": "bcg-consiglio-mueller",
+    "ts": "2026-10-13T22:56:26.657Z",
     "keyForm": 2
   }
 }

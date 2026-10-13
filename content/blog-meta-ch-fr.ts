@@ -8194,7 +8194,10 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Units de réfrigération d\'un supermarché suisse avec technicien vérifiant le panneau de commande, éclairage intérieur naturel',
     'blog.article.parlamento-svizzero-portale-guida.title': 'Le portail du Parlement suisse : structure et parcours de recherche',
     'blog.article.parlamento-svizzero-portale-guida.excerpt': 'Guide de navigation de parlament.ch : Chambres, commissions, délégations internationales, votes, Curia Vista et archives historiques.',
-    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Palais fédéral à Berne siège du Parlement suisse',
+    'blog.article.bcg-consiglio-mueller.title': 'Banque cantonale des Grisons : Reto Müller au Conseil',
+    'blog.article.bcg-consiglio-mueller.excerpt': 'Le gouvernement grison nomme Müller au Conseil de banque de la BCG Mandat : 1er juillet 2027',
+    'blog.article.bcg-consiglio-mueller.imageAlt': 'Renouvellement du conseil de la Banque cantonale des Grisons',
 };
 
 export default blogMetaChFr;

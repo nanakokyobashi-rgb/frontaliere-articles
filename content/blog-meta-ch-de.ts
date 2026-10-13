@@ -8194,7 +8194,10 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Schweizer Supermarkt-Kühlgeräte mit Techniker, der das Steuerfeld überprüft, natürliche Innenbeleuchtung',
     'blog.article.parlamento-svizzero-portale-guida.title': 'Das Portal des Schweizer Parlaments: Struktur und Recherchewege',
     'blog.article.parlamento-svizzero-portale-guida.excerpt': 'Leitfaden zur Navigation auf parlament.ch: Räte, Kommissionen, internationale Delegationen, Abstimmungen, Curia Vista und historisches Archiv.',
-    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Bundeshaus in Bern Sitz des Schweizer Parlaments',
+    'blog.article.bcg-consiglio-mueller.title': 'Banca cantonale grigione: Reto Müller im Bankrat',
+    'blog.article.bcg-consiglio-mueller.excerpt': 'Die Bündner Regierung ernennt Müller in den Bankrat der BCG Amtszeit: 1.',
+    'blog.article.bcg-consiglio-mueller.imageAlt': 'Erneuerung des Bankrats der Bündner Kantonalbank',
 };
 
 export default blogMetaChDe;

@@ -8194,7 +8194,10 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Frigoriferi di un supermercato svizzero con pannello di controllo tecnico, illuminazione interna naturale',
     'blog.article.parlamento-svizzero-portale-guida.title': 'Il portale del Parlamento svizzero: struttura e percorsi di ricerca',
     'blog.article.parlamento-svizzero-portale-guida.excerpt': 'Guida alla navigazione di parlament.ch: Camere, commissioni, delegazioni internazionali, votazioni, Curia Vista e archivio storico.',
-    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Palazzo federale a Berna sede del Parlamento svizzero',
+    'blog.article.bcg-consiglio-mueller.title': 'Banca cantonale grigione: Reto Müller nel Consiglio',
+    'blog.article.bcg-consiglio-mueller.excerpt': 'Il Governo retico nomina Müller nel Consiglio di banca BCG Mandato: 1° luglio 2027',
+    'blog.article.bcg-consiglio-mueller.imageAlt': 'Rinnovo del Consiglio di banca della Banca cantonale grigione',
 };
 
 export default blogMetaChIt;
