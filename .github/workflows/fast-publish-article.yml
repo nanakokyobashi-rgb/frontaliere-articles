@@ -989,6 +989,10 @@ jobs:
             local u="$1" attempts="$2" timeout="${3:-20}" i
             POLL_CODE=000
             for i in $(seq 1 "$attempts"); do
+              # curl interprets --max-time 0 as unlimited. A deadline can expire
+              # between the caller's loop condition and its remaining-time
+              # calculation, so never issue a probe with a zero budget.
+              (( timeout > 0 )) || return 1
               echo "poll_origin attempt $i/$attempts"
               probe_url "$u"
               set +e
@@ -1025,8 +1029,10 @@ jobs:
             POLL_CODE=000
             while (( SECONDS < deadline )); do
               remaining=$((deadline - SECONDS))
+              (( remaining > 0 )) || break
               probe_timeout="$timeout"
               if (( remaining < probe_timeout )); then probe_timeout="$remaining"; fi
+              (( probe_timeout > 0 )) || break
               poll_origin "$u" 1 "$probe_timeout" && return 0
               remaining=$((deadline - SECONDS))
               (( remaining > 0 )) || break
