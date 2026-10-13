@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.webp",
-      "sha256": "76acfe5fffcac1a50c6f291785d0f3e2f3b9c0f7b87437cb21593e1b5cb2d155"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv-480w.webp",
-      "sha256": "5cce4b42ec717d40eaead0af25a2e1f23b74208e4759f1530793aefc6d5e31d7"
-    }
-  ]
+  "items": []
 }
