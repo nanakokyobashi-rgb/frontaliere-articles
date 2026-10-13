@@ -8135,6 +8135,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.title': 'Wagner schließt in Waldstatt: 69 Arbeitsplätze gehen verloren',
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.excerpt': 'Wagner schließt in Waldstatt, im Kanton Appenzell Ausserrhoden Die Schließung betrifft 69 Arbeitsplätze Die Aktivitäten werden schrittweise an externe Partner übertragen',
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Geschlossenes Industriegebäude in Waldstatt, Appenzell Ausserrhoden',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.title': 'Benzinpreisschock in der Schweiz: Wie viel kostet der Krieg',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.excerpt': 'Seit Februar ist der Benzinpreis auf 2,11 Franken pro Liter gestiegen 15\'000 km pro Jahr und 6 l/100 km: 423 Franken mehr Kerosin kostet doppelt so viel wie im vergangenen Jahr',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Schweizer Benzinpreis bei 2,11 Franken pro Liter',
 };
 
 export default blogMetaChDe;

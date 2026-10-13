@@ -102638,6 +102638,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-guerra-medio-oriente-benzina-svizzera': {
+    title: 'Stangata benzina in Svizzera: quanto costa la guerra',
+    description: 'Da febbraio la benzina è salita a 2,11 franchi al litro 15\'000 km annui e 6 l/100 km: 423 franchi in più Il cherosene costa il doppio rispetto allo scorso anno',
+    keywords: 'frontalieri, ticino, svizzera, italia, stangata, benzina, quanto, costa',
+    ogTitle: 'Stangata benzina in Svizzera: quanto costa la guerra',
+    ogDescription: 'Da febbraio la benzina è salita a 2,11 franchi al litro 15\'000 km annui e 6 l/100 km: 423 franchi in più Il cherosene costa il doppio rispetto allo scorso anno',
+    canonicalPath: '/articoli-svizzera/guerra-medio-oriente-benzina-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stangata benzina in Svizzera: quanto costa la guerra",
+      "description": "Da febbraio la benzina è salita a 2,11 franchi al litro 15'000 km annui e 6 l/100 km: 423 franchi in più Il cherosene costa il doppio rispetto allo scorso anno",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/benzina-confine-svizzera-agosto-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Prezzo della benzina svizzera a 2,11 franchi al litro"
+      },
+      "datePublished": "2026-10-13T05:33:34+00:00",
+      "dateModified": "2026-10-13T05:33:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guerra-medio-oriente-benzina-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

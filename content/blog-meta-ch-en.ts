@@ -8135,6 +8135,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.title': 'Wagner closes in Waldstatt: 69 jobs lost',
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.excerpt': 'Wagner is closing in Waldstatt, in the canton of Appenzell Ausserrhoden The closure affects 69 jobs Operations are gradually being transferred to external partners',
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Closed industrial plant in Waldstatt, Appenzell Ausserrhoden',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.title': 'Gasoline price shock in Switzerland: how much does the war cost',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.excerpt': 'Since February, gasoline has risen to 2,11 francs per liter 15\'000 km annually and 6 l/100 km: 423 francs more Kerosene costs twice as much as last year',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Swiss gasoline price at 2.11 francs per litre',
 };
 
 export default blogMetaChEn;

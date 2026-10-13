@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1948713/tariffe-elettricita-prezzi-franchi-elcom": {
-    "articleId": "tariffe-elettricita-2027-calo",
-    "ts": "2026-09-08T09:46:42.439Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4067776": {
     "articleId": "bollette-energia-calo-2027",
     "ts": "2026-09-08T10:15:59.098Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956261/azienda-wagner-chiude-ar-svizzera": {
     "articleId": "wagner-chiude-waldstatt-69-licenziamenti",
     "ts": "2026-10-13T04:32:01.946Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956342/svizzera-potrebbe-guerra-oriente-potrebbero-benzina-escalation": {
+    "articleId": "guerra-medio-oriente-benzina-svizzera",
+    "ts": "2026-10-13T05:33:34.655Z",
     "keyForm": 2
   }
 }

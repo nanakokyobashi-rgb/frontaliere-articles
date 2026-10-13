@@ -10,6 +10,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T00:24:03.070Z",
       "lastFailureAt": "2026-10-13T00:31:55.123Z"
+    },
+    {
+      "articleId": "guerra-medio-oriente-benzina-svizzera",
+      "title": "Stangata benzina in Svizzera: quanto costa la guerra",
+      "fallbackImage": "/images/blog/benzina-confine-svizzera-agosto-2026.webp",
+      "reason": "All image providers failed for article-guerra-medio-oriente-benzina-svizzera: openai-codex (vision gate rejected image: Clear generic fuel-pumping illustration relevant to Switzerl",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T05:33:34.653Z",
+      "lastFailureAt": "2026-10-13T05:33:34.653Z"
     }
   ]
 }

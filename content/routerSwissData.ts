@@ -2734,6 +2734,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'case-svizzera-rialzo-trimestre': { it: 'case-svizzera-rialzo-trimestre', en: 'swiss-home-prices-third-quarter', de: 'schweizer-hauspreise-drittes-quartal', fr: 'prix-maisons-suisses-troisieme-trimestre' },
  'kof-nobel-svizzera': { it: 'kof-nobel-svizzera', en: 'kof-nobel-switzerland', de: 'kof-wirtschaftsnobelpreis-schweiz', fr: 'kof-nobel-economie-suisse' },
  'wagner-chiude-waldstatt-69-licenziamenti': { it: 'wagner-chiude-waldstatt-69-licenziamenti', en: 'wagner-closes-waldstatt-69-layoffs', de: 'wagner-schliesst-waldstatt-69-kundigungen', fr: 'wagner-ferme-waldstatt-69-licenciements' },
+ 'guerra-medio-oriente-benzina-svizzera': { it: 'guerra-medio-oriente-benzina-svizzera', en: 'gasoline-price-shock-in-switzerland-how-much-does-the-war-cost', de: 'benzinpreisschock-in-der-schweiz-wie-viel-kostet-der-krieg', fr: 'coup-de-massue-sur-l-essence-en-suisse-combien-coute-la-guerre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
