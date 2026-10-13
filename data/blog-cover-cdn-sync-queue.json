@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-guerra-medio-oriente-benzina-svizzera.webp",
+      "sha256": "434fc911c5ed9f70d1ccc401afe17cb7b99d56631efc5830a76f558c6ec123c9"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-guerra-medio-oriente-benzina-svizzera-480w.webp",
+      "sha256": "12c170819fb2906d34956018ac835d5c33917a440a0f6d8144c66775d6f11291"
+    }
+  ]
 }
