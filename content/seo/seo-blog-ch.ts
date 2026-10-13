@@ -103379,6 +103379,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parlamento-svizzero-portale-guida': {
+    title: 'Il portale del Parlamento svizzero: struttura e percorsi di ricerca',
+    description: 'Scopri come navigare parlament.ch: Camere, commissioni, delegazioni, votazioni, Curia Vista e archivio storico per seguire l\'attività legislativa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, portale, parlamento, svizzero, struttura',
+    ogTitle: 'Il portale del Parlamento svizzero: struttura e percorsi',
+    ogDescription: 'Una guida pratica per orientarsi su parlament.ch: dalle due Camere alle commissioni, dalle delegazioni internazionali all\'archivio storico, fino agli strumenti per votazioni e finanze federali.',
+    canonicalPath: '/articoli-svizzera/parlamento-svizzero-portale-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il portale del Parlamento svizzero: struttura e percorsi di ricerca",
+      "description": "Scopri come navigare parlament.ch: Camere, commissioni, delegazioni, votazioni, Curia Vista e archivio storico per seguire l'attività legislativa.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna sede del Parlamento svizzero"
+      },
+      "datePublished": "2026-10-13T22:27:40+00:00",
+      "dateModified": "2026-10-13T22:27:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parlamento-svizzero-portale-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

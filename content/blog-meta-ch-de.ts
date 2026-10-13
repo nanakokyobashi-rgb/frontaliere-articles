@@ -8191,7 +8191,10 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.migros-ecublens-57-posti.imageAlt': 'Lebensmittelproduktionsbetrieb von Migros in Écublens im Kanton Waadt.',
     'blog.article.attacco-frigoriferi-svizzera-rischio.title': 'Hacker legen Kühlschränke lahm: «Das kann auch in der Schweiz passieren»',
     'blog.article.attacco-frigoriferi-svizzera-rischio.excerpt': 'Angriff auf rund 150 Supermärkte in Frankreich Kühlschränke mit Temperaturen bis zu 50 Grad und tonnenweise weggeworfene Lebensmittel Danfoss: Schwachstellen in mit dem Internet verbundenen Systemen',
-    'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Schweizer Supermarkt-Kühlgeräte mit Techniker, der das Steuerfeld überprüft, natürliche Innenbeleuchtung',
+    'blog.article.parlamento-svizzero-portale-guida.title': 'Das Portal des Schweizer Parlaments: Struktur und Recherchewege',
+    'blog.article.parlamento-svizzero-portale-guida.excerpt': 'Leitfaden zur Navigation auf parlament.ch: Räte, Kommissionen, internationale Delegationen, Abstimmungen, Curia Vista und historisches Archiv.',
+    'blog.article.parlamento-svizzero-portale-guida.imageAlt': 'Bundeshaus in Bern Sitz des Schweizer Parlaments',
 };
 
 export default blogMetaChDe;
