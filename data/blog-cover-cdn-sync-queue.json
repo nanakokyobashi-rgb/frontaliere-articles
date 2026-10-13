@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-festival-varese-cavolo-castronno.webp",
+      "sha256": "522390848a40484c2e6c442eef33989b6efebad4fb72d34696c75b93b21bbaa1"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-festival-varese-cavolo-castronno-480w.webp",
+      "sha256": "a740931ca37d4ffb66df928c3822866bb4211678b62644079a2f1437d14f8e7a"
+    }
+  ]
 }
