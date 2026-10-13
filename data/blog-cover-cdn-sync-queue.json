@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-formulario-averi-iran-ottobre.webp",
+      "sha256": "84839d68914c5609e81b4b253108dc7d091608841e043c2f2767211fd7b2e21d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-formulario-averi-iran-ottobre-480w.webp",
+      "sha256": "9f8fc1c9c1e80b5c5a1ab86edbd33ae0dcfeac499b21241fc5eef569ccdc4056"
+    }
+  ]
 }
