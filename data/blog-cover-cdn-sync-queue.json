@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-iniziativa-limitazione-fuochi-artificio.webp",
-      "sha256": "311e035af3e7d02247a6b841d2c3fb0b9ca4b6f69be8db4e9ee91c01f5c04f53"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-iniziativa-limitazione-fuochi-artificio-480w.webp",
-      "sha256": "ad32217c44e7b08926374d5b786920cad67bb4c6a4ea3ecae7898f707b055efd"
-    }
-  ]
+  "items": []
 }
