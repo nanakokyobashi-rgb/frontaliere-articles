@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-minibasket-inclusivo-varese-2026.webp",
+      "sha256": "144c6c66fc1c627b28df9af6eefc05db5b2a3f7fb8dfcee50c1e9e57bae924b7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-minibasket-inclusivo-varese-2026-480w.webp",
+      "sha256": "00cf806b86d03c23c667cad967496fd7df1381fb70f4f29e75ff01f35ef19bf0"
+    }
+  ]
 }
