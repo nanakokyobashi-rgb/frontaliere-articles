@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948673/infortuni-gravi-quasi-il-90-torna-al-lavoro": {
-    "articleId": "infortuni-reinserimento-suva",
-    "ts": "2026-09-08T07:58:32.227Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/exngffkwhuwn": {
     "articleId": "economia-svizzera-q2-2026",
     "ts": "2026-09-08T08:15:54.115Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1956145/scuole-studenti-universitari-calo-nascite": {
     "articleId": "proiezioni-scuola-universita-2035",
     "ts": "2026-10-13T00:48:51.083Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/w-g-02vj62k8": {
+    "articleId": "ust-scenari-formazione-2035",
+    "ts": "2026-10-13T02:24:13.292Z",
     "keyForm": 2
   }
 }

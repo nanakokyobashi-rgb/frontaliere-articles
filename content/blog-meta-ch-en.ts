@@ -8120,6 +8120,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.proiezioni-scuola-universita-2035.title': 'Schools and universities: FSO projections to 2035',
     'blog.article.proiezioni-scuola-universita-2035.excerpt': 'The peak of primary is expected between 2027 and 2028.',
     'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'University students walking on a Swiss campus during autumn',
+    'blog.article.ust-scenari-formazione-2035.title': 'UST: 2035 training scenarios, +21% university',
+    'blog.article.ust-scenari-formazione-2035.excerpt': 'UST: university schools at +21% between 2026 and 2035 Elementary: reduction of 8% in the same period 305,000 bachelor and master students in 2035 Three',
+    'blog.article.ust-scenari-formazione-2035.imageAlt': 'Swiss university students studying in a library, demographic charts on screen',
 };
 
 export default blogMetaChEn;

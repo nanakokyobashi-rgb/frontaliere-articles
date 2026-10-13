@@ -2729,6 +2729,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ia-pubblica-amministrazione-ticino': { it: 'ia-pubblica-amministrazione-ticino', en: 'ai-public-administration-ticino', de: 'ki-oeffentliche-verwaltung-tessin', fr: 'ia-administration-publique-tessin' },
  'cdf-procedure-fitosanitari': { it: 'cdf-procedure-fitosanitari', en: 'cdf-plant-protection-approval', de: 'cdf-zulassung-pflanzenschutz', fr: 'cdf-homologation-phytosanitaire' },
  'proiezioni-scuola-universita-2035': { it: 'proiezioni-scuola-universita-2035', en: 'school-university-projections-2035', de: 'schul-hochschul-projektionen-2035', fr: 'projections-ecoles-universites-2035' },
+ 'ust-scenari-formazione-2035': { it: 'ust-scenari-formazione-2035', en: 'ust-education-scenarios-2035', de: 'bfs-bildungsszenarien-2035', fr: 'ofs-scenarios-formation-2035' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

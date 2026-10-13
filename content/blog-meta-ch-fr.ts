@@ -8120,6 +8120,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.proiezioni-scuola-universita-2035.title': 'Écoles et universités : projections FSO pour 2035',
     'blog.article.proiezioni-scuola-universita-2035.excerpt': 'Le pic des primaires est attendu entre 2027 et 2028.',
     'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'Étudiants universitaires se promènent sur un campus suisse en automne',
+    'blog.article.ust-scenari-formazione-2035.title': 'OFS : scénarios formation 2035, +21% université',
+    'blog.article.ust-scenari-formazione-2035.excerpt': 'UST : hautes écoles à +21% entre 2026 et 2035 Élémentaire : réduction de 8% sur la même période 305 000 étudiants bacheliers et masters en 2035 Trois',
+    'blog.article.ust-scenari-formazione-2035.imageAlt': 'Étudiants suisses étudiant dans une bibliothèque, graphiques démographiques à l\'écran',
 };
 
 export default blogMetaChFr;

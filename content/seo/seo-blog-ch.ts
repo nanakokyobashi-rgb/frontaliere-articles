@@ -102443,6 +102443,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ust-scenari-formazione-2035': {
+    title: 'UST: scenari formazione 2035, +21% università | Frontaliere Ticino',
+    description: 'UST: scuole universitarie a +21% tra il 2026 e il 2035 Elementare: riduzione dell\'8% nello stesso periodo 305 000 studenti bachelor e master nel 2035 Tre',
+    keywords: 'frontalieri, ticino, svizzera, italia, scenari, formazione, università, scuole',
+    ogTitle: 'UST: scenari formazione 2035, +21% università',
+    ogDescription: 'UST: scuole universitarie a +21% tra il 2026 e il 2035 Elementare: riduzione dell\'8% nello stesso periodo 305 000 studenti bachelor e master nel 2035 Tre',
+    canonicalPath: '/articoli-svizzera/ust-scenari-formazione-2035/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "UST: scenari formazione 2035, +21% università",
+      "description": "UST: scuole universitarie a +21% tra il 2026 e il 2035 Elementare: riduzione dell'8% nello stesso periodo 305 000 studenti bachelor e master nel 2035 Tre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-karate-uisp-formazione-arcisate-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti universitari svizzeri che studiano in biblioteca, con grafici demografici sullo schermo"
+      },
+      "datePublished": "2026-10-13T02:24:13+00:00",
+      "dateModified": "2026-10-13T02:24:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ust-scenari-formazione-2035/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
