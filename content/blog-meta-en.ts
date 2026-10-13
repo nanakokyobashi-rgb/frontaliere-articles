@@ -13093,6 +13093,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.itelyum-peristeri-bcl-masnago.title': 'Itelyum-Peristeri: BCL at 8 p.m. at Masnago',
     'blog.article.itelyum-peristeri-bcl-masnago.excerpt': 'Itelyum seeks its first BCL win after Murcia Peristeri arrives at Masnago with three official victories Ty Nichols scored 33 points against Iraklis Game',
     'blog.article.itelyum-peristeri-bcl-masnago.imageAlt': 'PalaMasnago during the Basketball Champions League match between Itelyum Varese and Peristeri Athens',
+    'blog.article.tai-chi-arte-castiglione.title': 'Castiglione Olona: Tai Chi and art on Sunday, November 1',
+    'blog.article.tai-chi-arte-castiglione.excerpt': 'On Sunday, November 1, the initiative stops in Castiglione Olona.',
+    'blog.article.tai-chi-arte-castiglione.imageAlt': 'Tai Chi practice near a historic building in Castiglione Olona',
 };
 
 export default blogMetaEn;

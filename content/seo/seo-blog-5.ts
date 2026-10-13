@@ -106932,6 +106932,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tai-chi-arte-castiglione': {
+    title: 'Castiglione Olona: Tai Chi e arte domenica 1 novembre',
+    description: 'Domenica 1 novembre l\'iniziativa fa tappa a Castiglione Olona. Lo stage Itcca Italia è in programma dalle 16 alle 19. Alle 17 sono previste le visite a Palazzo',
+    keywords: 'frontalieri, ticino, svizzera, italia, castiglione, olona, arte, domenica',
+    ogTitle: 'Castiglione Olona: Tai Chi e arte domenica 1 novembre',
+    ogDescription: 'Domenica 1 novembre l\'iniziativa fa tappa a Castiglione Olona.',
+    canonicalPath: '/articoli-frontaliere/tai-chi-arte-castiglione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Castiglione Olona: Tai Chi e arte domenica 1 novembre",
+      "description": "Domenica 1 novembre l'iniziativa fa tappa a Castiglione Olona. Lo stage Itcca Italia è in programma dalle 16 alle 19. Alle 17 sono previste le visite a Palazzo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tai-chi-arte-castiglione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pratica di Tai Chi presso un edificio storico a Castiglione Olona"
+      },
+      "datePublished": "2026-10-13T04:03:20+00:00",
+      "dateModified": "2026-10-13T04:03:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tai-chi-arte-castiglione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
