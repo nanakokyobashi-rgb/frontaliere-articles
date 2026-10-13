@@ -80,6 +80,21 @@ test('redcheck posta il marker con GITHUB_TOKEN senza cambiare l identita operat
     'solo la creazione/verifica del marker deve usare l identita github-actions[bot]');
 });
 
+test('redcheck rimborsa il marker SUPERSEDED con GITHUB_TOKEN senza cambiare l identita operativa del PAT', () => {
+  const source = readFileSync(path.join(ROOT, '.github/workflows/pr-redcheck-fixer.yml'), 'utf8');
+  const start = source.indexOf('      - name: Classify outcome (work-done, not CLI exit)');
+  assert.ok(start >= 0, 'classificatore redcheck non trovato');
+  const next = source.indexOf('\n      - name: ', start + 10);
+  const classify = source.slice(start, next < 0 ? undefined : next);
+  assert.match(classify, /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/);
+  assert.match(classify, /MARKER_GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
+    'il token Actions deve restare disponibile separatamente dal PAT runtime');
+  assert.match(classify, /export GH_TOKEN="\$GITHUB_PAT_NANAKO"/,
+    'le letture e le operazioni operative continuano a usare il PAT runtime');
+  assert.match(classify, /refund_result=\$\(GH_TOKEN="\$MARKER_GH_TOKEN" node "\$TRUSTED_MARKER_HELPER" --refund-superseded/,
+    'il rimborso deve conservare l identita github-actions[bot] del marker iniziale');
+});
+
 test('il gemello redflag mantiene il token Actions nel guard del marker', () => {
   const source = readFileSync(path.join(ROOT, '.github/workflows/pr-redflag-fixer.yml'), 'utf8');
   const start = source.indexOf('      - name: Round cap + capability guard + tier');
