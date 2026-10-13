@@ -36,6 +36,21 @@ describe('articleType dal corpo italiano', () => {
     assert.equal(articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`), 'news');
   });
 
+  test('riconosce URL Markdown con parentesi bilanciate', () => {
+    const balanced = String.raw`Testo della notizia.
+
+*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/articolo_(completo).html)*`;
+    assert.equal(articleTypeFromItalianBody(balanced), 'news');
+  });
+
+  test('riconosce parentesi escaped e conserva la citazione semplice', () => {
+    const escaped = String.raw`Testo della notizia.
+
+*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/articolo\(completo\).html)*`;
+    assert.equal(articleTypeFromItalianBody(escaped), 'news');
+    assert.equal(articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`), 'news');
+  });
+
   test('lascia senza tipo una citazione non finale o non unica', () => {
     assert.equal(articleTypeFromItalianBody(`${SOURCE}\n\nAltro testo.`), undefined);
     assert.equal(articleTypeFromItalianBody(`Primo\n\n${SOURCE}\n\nSecondo\n\n${SOURCE}`), undefined);
@@ -73,6 +88,15 @@ describe('articleType dal corpo italiano', () => {
 });
 
 describe('premesse sul generatore: chi porta la citazione e\' nato da una run non evergreen', () => {
+  test('la postcondizione cantonale usa lo stripper Fonte condiviso e bilanciato', () => {
+    const at = CREATE_ARTICLE.indexOf('function bodyTextForCantonPostcondition(data) {');
+    const end = CREATE_ARTICLE.indexOf('\n}\n', at);
+    assert.ok(at !== -1 && end !== -1, 'postcondizione cantonale non trovata');
+    const body = CREATE_ARTICLE.slice(at, end);
+    assert.match(body, /stripSourceCitations\(/);
+    assert.doesNotMatch(body, /\\\*Fonte:/);
+  });
+
   test('la citazione finale e\' scritta da un solo punto e mai per un URL evergreen://', () => {
     const scritture = CREATE_ARTICLE.split('\n')
       .filter((line) => line.includes('[${sourceDomain}](${citationUrl})'));
