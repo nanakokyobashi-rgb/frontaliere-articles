@@ -13075,6 +13075,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.manutenzione-prato-franco-ossola-2026.title': 'Varese: Green Range takes care of the meadow of Franco Ossola 2026/2027',
     'blog.article.manutenzione-prato-franco-ossola-2026.excerpt': 'Gamma Verde takes care of the Franco Ossola lawn in 2026/2027 Municipal act: 12 October 2026 7% discount on auction prices Amount: 38,114.13 euros over',
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Franco Ossola stadium in Varese with green pitch',
+    'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi opens Varese\'s theater season',
+    'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi returns to the theater after twenty-five years BIOL',
+    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Audience at Teatro di Varese during Fabio De Luigi\'s show',
 };
 
 export default blogMetaEn;

@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/ticino/1944420/bene-il-telelavoro-ma-diminuire-postazioni-superfici-e-spese-immobiliari": {
-    "articleId": "bene-telelavoro-ticino",
-    "ts": "2026-08-20T02:07:20.567Z",
-    "keyForm": 2
-  },
   "https://www.fiscoetasse.com/approfondimenti/17386-lavoratori-frontalieri-le-novita-del-2026-tra-protocollo-di-modifica-it-ch.html": {
     "articleId": "novita-frontalieri-legge-217-2025",
     "ts": "2026-08-20T09:20:04.022Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/cura-del-campo-al-franco-ossola-il-comune-assegna-la-manutenzione-del-prato-a-gamma-verde/2705941": {
     "articleId": "manutenzione-prato-franco-ossola-2026",
     "ts": "2026-10-13T00:08:43.704Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/tra-piadine-e-delfini-fabio-de-luigi-apre-la-stagione-del-teatro-di-varese/2705023": {
+    "articleId": "fabio-de-luigi-biol-varese",
+    "ts": "2026-10-13T00:24:03.071Z",
     "keyForm": 2
   }
 }

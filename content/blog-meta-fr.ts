@@ -13077,6 +13077,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.manutenzione-prato-franco-ossola-2026.title': 'Varese : Gamma Verde s\'occupe de la pelouse du Franco Ossola 2026/2027',
     'blog.article.manutenzione-prato-franco-ossola-2026.excerpt': 'Gamme verte s\'occupe de la pelouse du Franc Ossola en 2026/2027 Acte municipal : 12 octobre 2026 Réduction de 7 % sur les prix aux enchères Montant : 38 114,13 euros de plus',
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Stade Franco Ossola à Varese avec pelouse verte',
+    'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi ouvre la saison théâtrale de Varese',
+    'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi revient au théâtre après vingt-cinq ans BIOL',
+    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Public au Teatro di Varese pendant le spectacle de Fabio De Luigi',
 };
 
 export default blogMetaFr;

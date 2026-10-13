@@ -13074,6 +13074,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.manutenzione-prato-franco-ossola-2026.title': 'Varese: Gamma Verde pflegt den Rasen des Franco Ossola 2026/2027',
     'blog.article.manutenzione-prato-franco-ossola-2026.excerpt': 'Gamma Verde pflegt die Wiese von Franco Ossola im Jahr 2026/2027 Gemeinderat: 12.',
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Franco-Ossola-Stadion in Varese mit grünem Rasen',
+    'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi eröffnet die Theatersaison in Varese',
+    'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi kehrt nach 25 Jahren ins Theater zurück BIOL',
+    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Publikum im Teatro di Varese während der Show von Fabio De Luigi',
 };
 
 export default blogMetaDe;

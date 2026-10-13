@@ -13076,6 +13076,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.manutenzione-prato-franco-ossola-2026.title': 'Varese: Gamma Verde cura il prato del Franco Ossola 2026/2027',
     'blog.article.manutenzione-prato-franco-ossola-2026.excerpt': 'Gamma Verde cura il prato del Franco Ossola nel 2026/2027 Atto comunale: 12 ottobre 2026 Ribasso del 7% sui prezzi a base d\'asta Importo: 38.114,13 euro oltre',
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Stadio Franco Ossola di Varese con prato verde',
+    'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi apre la stagione teatrale di Varese',
+    'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi torna a teatro dopo venticinque anni BIOL',
+    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Pubblico al Teatro di Varese durante lo spettacolo di Fabio De Luigi',
 };
 
 export default blogMetaIt;
