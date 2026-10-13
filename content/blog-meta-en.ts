@@ -13072,6 +13072,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.minibasket-inclusivo-varese-2026.title': 'Inclusive mini-basketball in Varese: doubled fundraising campaign gets underway',
     'blog.article.minibasket-inclusivo-varese-2026.excerpt': 'VBS launches the third edition of Inclusive Minibasket Donations doubled by the Foundation from October 1 to 31 Training every Tuesday at Palestra Pellico',
     'blog.article.minibasket-inclusivo-varese-2026.imageAlt': 'Children playing inclusive minibasket on a sunny court with mountains in background',
+    'blog.article.manutenzione-prato-franco-ossola-2026.title': 'Varese: Green Range takes care of the meadow of Franco Ossola 2026/2027',
+    'blog.article.manutenzione-prato-franco-ossola-2026.excerpt': 'Gamma Verde takes care of the Franco Ossola lawn in 2026/2027 Municipal act: 12 October 2026 7% discount on auction prices Amount: 38,114.13 euros over',
+    'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Franco Ossola stadium in Varese with green pitch',
 };
 
 export default blogMetaEn;

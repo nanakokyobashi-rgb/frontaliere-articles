@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/3996558": {
-    "articleId": "posta-riduce-tagli-informatica",
-    "ts": "2026-08-19T10:37:20.549Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/ticino/1944420/bene-il-telelavoro-ma-diminuire-postazioni-superfici-e-spese-immobiliari": {
     "articleId": "bene-telelavoro-ticino",
     "ts": "2026-08-20T02:07:20.567Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/minibasket-inclusivo-a-varese-e-partita-la-raccolta-fondi-di-vbs-con-fondazione-comunitaria-del-varesotto/2705227": {
     "articleId": "minibasket-inclusivo-varese-2026",
     "ts": "2026-10-12T23:37:30.824Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/cura-del-campo-al-franco-ossola-il-comune-assegna-la-manutenzione-del-prato-a-gamma-verde/2705941": {
+    "articleId": "manutenzione-prato-franco-ossola-2026",
+    "ts": "2026-10-13T00:08:43.704Z",
     "keyForm": 2
   }
 }

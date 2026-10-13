@@ -106654,6 +106654,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-manutenzione-prato-franco-ossola-2026': {
+    title: 'Varese: Gamma Verde cura il prato del Franco Ossola 2026/2027',
+    description: 'Gamma Verde cura il prato del Franco Ossola nel 2026/2027 Atto comunale: 12 ottobre 2026 Ribasso del 7% sui prezzi a base d\'asta Importo: 38.114,13 euro oltre',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, gamma, verde, cura',
+    ogTitle: 'Varese: Gamma Verde cura il prato del Franco Ossola 2026/2027',
+    ogDescription: 'Gamma Verde cura il prato del Franco Ossola nel 2026/2027 Atto comunale: 12 ottobre 2026 Ribasso del 7% sui prezzi a base d\'asta Importo: 38.114,13 euro oltre',
+    canonicalPath: '/articoli-frontaliere/manutenzione-prato-franco-ossola-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese: Gamma Verde cura il prato del Franco Ossola 2026/2027",
+      "description": "Gamma Verde cura il prato del Franco Ossola nel 2026/2027 Atto comunale: 12 ottobre 2026 Ribasso del 7% sui prezzi a base d'asta Importo: 38.114,13 euro oltre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-manutenzione-prato-franco-ossola-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stadio Franco Ossola di Varese con prato verde"
+      },
+      "datePublished": "2026-10-13T00:08:43+00:00",
+      "dateModified": "2026-10-13T00:08:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/manutenzione-prato-franco-ossola-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
