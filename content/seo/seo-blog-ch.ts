@@ -103179,6 +103179,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-swisscom-fibra-multa-taf': {
+    title: 'Swisscom vince il ricorso TAF: multa 18 milioni annullata',
+    description: 'TAF annulla la multa Swisscom da 18 milioni La Comco aveva imposto condizioni e sanzione La sentenza riguarda l\'ampliamento in fibra ottica Il ricorso',
+    keywords: 'frontalieri, ticino, svizzera, italia, swisscom, vince, ricorso, multa',
+    ogTitle: 'Swisscom vince il ricorso TAF: multa 18 milioni annullata',
+    ogDescription: 'TAF annulla la multa Swisscom da 18 milioni La Comco aveva imposto condizioni e sanzione La sentenza riguarda l\'ampliamento in fibra ottica Il ricorso',
+    canonicalPath: '/articoli-svizzera/swisscom-fibra-multa-taf/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Swisscom vince il ricorso TAF: multa 18 milioni annullata",
+      "description": "TAF annulla la multa Swisscom da 18 milioni La Comco aveva imposto condizioni e sanzione La sentenza riguarda l'ampliamento in fibra ottica Il ricorso",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fibra-ottica-limiti-2028.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tecnici che installano cavo fibra ottica in una strada urbana svizzera"
+      },
+      "datePublished": "2026-10-13T19:28:14+00:00",
+      "dateModified": "2026-10-13T19:28:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/swisscom-fibra-multa-taf/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

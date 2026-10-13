@@ -8177,6 +8177,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.title': 'Franz Ruppen valuta la candidatura al Consiglio federale',
     'blog.article.ruppen-valuta-candidatura.excerpt': 'Franz Ruppen riflette sulla successione di Guy Parmelin Esther Friedli ha citato il suo nome domenica sera La risposta è attesa alla fine della prossima',
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Scena istituzionale svizzera con bandiere rossocrociate.',
+    'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom vince il ricorso TAF: multa 18 milioni annullata',
+    'blog.article.swisscom-fibra-multa-taf.excerpt': 'TAF annulla la multa Swisscom da 18 milioni La Comco aveva imposto condizioni e sanzione La sentenza riguarda l\'ampliamento in fibra ottica Il ricorso',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Tecnici che installano cavo fibra ottica in una strada urbana svizzera',
 };
 
 export default blogMetaChIt;

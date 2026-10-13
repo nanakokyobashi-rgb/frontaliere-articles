@@ -30,6 +30,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T14:39:37.817Z",
       "lastFailureAt": "2026-10-13T14:46:51.849Z"
+    },
+    {
+      "articleId": "swisscom-fibra-multa-taf",
+      "title": "Swisscom vince il ricorso TAF: multa 18 milioni annullata",
+      "fallbackImage": "/images/blog/article-fibra-ottica-limiti-2028.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T19:28:14.697Z",
+      "lastFailureAt": "2026-10-13T19:28:14.697Z"
     }
   ]
 }

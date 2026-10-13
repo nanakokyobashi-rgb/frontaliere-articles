@@ -27290,6 +27290,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'swisscom-fibra-multa-taf',
+    category: 'novita',
+    date: '2026-10-13T19:28:14.374Z',
+    image: '/images/blog/article-fibra-ottica-limiti-2028.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

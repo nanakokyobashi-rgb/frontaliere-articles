@@ -2748,6 +2748,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'iniziativa-limitazione-fuochi-artificio': { it: 'iniziativa-limitazione-fuochi-artificio', en: 'initiative-fireworks-limitation-switzerland', de: 'initiative-feuerwerk-beschrankung-schweiz', fr: 'initiative-limitation-feux-artifice-suisse' },
  'diritto-lavoro-telelavoro-cet-s': { it: 'diritto-lavoro-telelavoro-cet-s', en: 'swiss-labour-law-home-office-cet-s', de: 'schweizer-arbeitsrecht-homeoffice-cet-s', fr: 'droit-travail-teletravail-cet-s' },
  'ruppen-valuta-candidatura': { it: 'ruppen-valuta-candidatura', en: 'ruppen-weighs-federal-council-bid', de: 'ruppen-prueft-kandidatur-bundesrat', fr: 'ruppen-evalue-candidature-conseil-federal' },
+ 'swisscom-fibra-multa-taf': { it: 'swisscom-fibra-multa-taf', en: 'swisscom-wins-taf-appeal-18-million-fine-annulled', de: 'swisscom-gewinnt-die-beschwerde-vor-dem-taf-18-millionen-busse-aufgehoben', fr: 'swisscom-remporte-son-recours-devant-le-taf-amende-de-18-millions-annulee' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

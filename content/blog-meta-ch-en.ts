@@ -8177,6 +8177,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.title': 'Franz Ruppen considers candidacy for the Federal Council',
     'blog.article.ruppen-valuta-candidatura.excerpt': 'Franz Ruppen reflects on the succession of Guy Parmelin Esther Friedli mentioned his name on Sunday evening The answer is expected by the end of next',
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Swiss institutional scene with red-and-white flags.',
+    'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom wins TAF appeal: 18 million fine annulled',
+    'blog.article.swisscom-fibra-multa-taf.excerpt': 'TAF cancels Swisscom\'s 18 million fine Comco had imposed conditions and a fine The ruling concerns the fiber-optic expansion The appeal',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Technicians installing fiber-optic cable in a Swiss city street',
 };
 
 export default blogMetaChEn;
