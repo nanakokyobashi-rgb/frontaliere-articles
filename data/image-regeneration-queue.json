@@ -5,11 +5,11 @@
       "articleId": "fabio-de-luigi-biol-varese",
       "title": "Fabio De Luigi apre la stagione teatrale di Varese",
       "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
-      "reason": "All image providers failed for article-fabio-de-luigi-biol-varese: openai-codex (vision gate rejected image: Original illustration with a prominent foreground person seen from behind; no readable text, logos, or recognizable face.); gemini ",
+      "reason": "All image providers failed for article-fabio-de-luigi-biol-varese: openai-codex (vision gate rejected image: Original generic illustration with a clearly visible foreground woman on stage.); gemini (Gemini image request failed with HTTP 429",
       "status": "failed",
-      "failureCount": 3,
+      "failureCount": 4,
       "requestedAt": "2026-10-13T00:24:03.070Z",
-      "lastFailureAt": "2026-10-13T13:06:01.041Z"
+      "lastFailureAt": "2026-10-13T19:36:20.177Z"
     },
     {
       "articleId": "voto-matrimonio-tassazione-coppie",
@@ -30,16 +30,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T14:39:37.817Z",
       "lastFailureAt": "2026-10-13T14:46:51.849Z"
-    },
-    {
-      "articleId": "swisscom-fibra-multa-taf",
-      "title": "Swisscom vince il ricorso TAF: multa 18 milioni annullata",
-      "fallbackImage": "/images/blog/article-fibra-ottica-limiti-2028.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-13T19:28:14.697Z",
-      "lastFailureAt": "2026-10-13T19:28:14.697Z"
     }
   ]
 }

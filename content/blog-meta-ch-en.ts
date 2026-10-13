@@ -8179,7 +8179,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Swiss institutional scene with red-and-white flags.',
     'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom wins TAF appeal: 18 million fine annulled',
     'blog.article.swisscom-fibra-multa-taf.excerpt': 'TAF cancels Swisscom\'s 18 million fine Comco had imposed conditions and a fine The ruling concerns the fiber-optic expansion The appeal',
-    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Technicians installing fiber-optic cable in a Swiss city street',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;

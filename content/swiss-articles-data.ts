@@ -27294,7 +27294,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'swisscom-fibra-multa-taf',
     category: 'novita',
     date: '2026-10-13T19:28:14.374Z',
-    image: '/images/blog/article-fibra-ottica-limiti-2028.webp',
+    image: '/images/blog/article-swisscom-fibra-multa-taf.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

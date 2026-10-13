@@ -8179,7 +8179,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Scena istituzionale svizzera con bandiere rossocrociate.',
     'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom vince il ricorso TAF: multa 18 milioni annullata',
     'blog.article.swisscom-fibra-multa-taf.excerpt': 'TAF annulla la multa Swisscom da 18 milioni La Comco aveva imposto condizioni e sanzione La sentenza riguarda l\'ampliamento in fibra ottica Il ricorso',
-    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Tecnici che installano cavo fibra ottica in una strada urbana svizzera',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;
