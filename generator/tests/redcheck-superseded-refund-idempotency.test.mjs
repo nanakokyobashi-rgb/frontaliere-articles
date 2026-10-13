@@ -219,6 +219,9 @@ function classifyEnv(world, githubEnv) {
   return world.env({
     REPO: 'example/repo',
     GH_REPO: 'example/repo',
+    // Il workflow dichiara questo token separatamente dal GH_TOKEN operativo
+    // per il read-back attribuito a github-actions[bot].
+    MARKER_GH_TOKEN: 'actions-token',
     PR_NUMBER: '7',
     HEAD_REF: 'fix/body-outcome',
     HEAD_SHA,
