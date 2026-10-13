@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-case-svizzera-rialzo-trimestre.webp",
-      "sha256": "1b426a1de3bf326df17054a930c55207937f2476878f8afa6e2048b35d620c1e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-case-svizzera-rialzo-trimestre-480w.webp",
-      "sha256": "1b230472058a903eff3428f843679bdcfb36e61e7dcf97a851b32242772267d9"
-    }
-  ]
+  "items": []
 }
