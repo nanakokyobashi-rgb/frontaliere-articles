@@ -27264,7 +27264,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'iniziativa-limitazione-fuochi-artificio',
     category: 'novita',
     date: '2026-10-13T15:24:22.646Z',
-    image: '/images/blog/voto-iniziativa-alimentazione-svizzera.webp',
+    image: '/images/blog/article-iniziativa-limitazione-fuochi-artificio.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',

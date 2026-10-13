@@ -8170,7 +8170,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Unterschriftensammlung in der Schweiz gegen das Freihandelsabkommen mit dem Mercosur',
     'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Feuerwerk: Initiative zur Begrenzung seiner Nutzung',
     'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'Die eidgenössische Abstimmung ist für den 29.',
-    'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Schweizer Agrarlandschaft mit Wiesen und Dorf',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaChDe;

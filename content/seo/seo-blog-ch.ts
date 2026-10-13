@@ -103076,10 +103076,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il voto federale è previsto il 29 novembre Lo slogan è «Non tutti festeggiano» In Svizzera: 1'300 tonnellate di rifiuti annui La Suva registra 260 infortuni",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/voto-iniziativa-alimentazione-svizzera.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-iniziativa-limitazione-fuochi-artificio.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Paesaggio rurale svizzero con prati e villaggio"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T15:24:22+00:00",
       "dateModified": "2026-10-13T15:24:22+00:00",

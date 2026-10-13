@@ -8170,7 +8170,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Raccolta firme in Svizzera contro l\'accordo di libero scambio con il Mercosur',
     'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Fuochi d\'artificio: iniziativa per limitarne l\'uso',
     'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'Il voto federale è previsto il 29 novembre Lo slogan è «Non tutti festeggiano» In Svizzera: 1\'300 tonnellate di rifiuti annui La Suva registra 260 infortuni',
-    'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Paesaggio rurale svizzero con prati e villaggio',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;
