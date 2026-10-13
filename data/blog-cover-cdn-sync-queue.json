@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ruppen-valuta-candidatura.webp",
-      "sha256": "c4da150913cf72557f2ebeeedb1e8dd8bc085d1d9324dfe8cfac4fada3e42df0"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ruppen-valuta-candidatura-480w.webp",
-      "sha256": "e55577452c0c65146cd91db66c3a1f100c7b774ae937db4cf8852dc35a15eac7"
-    }
-  ]
+  "items": []
 }
