@@ -8129,6 +8129,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.case-svizzera-rialzo-trimestre.title': 'Prix des logements en Suisse : +2% en trois mois',
     'blog.article.case-svizzera-rialzo-trimestre.excerpt': 'Maisons individuelles : prix +2% en trois mois Appartements : prix +1,7% en trois mois Sur un an : +3,6% maisons, +5,9% appartements Suisse méridionale',
     'blog.article.case-svizzera-rialzo-trimestre.imageAlt': 'Maisons et appartements suisses dans un marché immobilier en hausse.',
+    'blog.article.kof-nobel-svizzera.title': 'KOF : un Nobel d\'économie important pour la Suisse',
+    'blog.article.kof-nobel-svizzera.excerpt': 'Robert Hall et Michael Woodford reçoivent le Nobel d\'économie.',
+    'blog.article.kof-nobel-svizzera.imageAlt': 'Vue urbaine suisse liée à l\'analyse de la politique monétaire',
 };
 
 export default blogMetaChFr;

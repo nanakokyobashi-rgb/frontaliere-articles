@@ -8129,6 +8129,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.case-svizzera-rialzo-trimestre.title': 'Prezzi delle case in Svizzera: +2% in tre mesi',
     'blog.article.case-svizzera-rialzo-trimestre.excerpt': 'Case unifamiliari: prezzi +2% in tre mesi Appartamenti: prezzi +1,7% in tre mesi Su base annua: +3,6% case, +5,9% appartamenti Svizzera meridionale',
     'blog.article.case-svizzera-rialzo-trimestre.imageAlt': 'Case e appartamenti in Svizzera, con i prezzi immobiliari in rialzo.',
+    'blog.article.kof-nobel-svizzera.title': 'KOF: Nobel dell\'economia importante per la Svizzera',
+    'blog.article.kof-nobel-svizzera.excerpt': 'Robert Hall e Michael Woodford ricevono il Nobel dell\'economia.',
+    'blog.article.kof-nobel-svizzera.imageAlt': 'Veduta urbana svizzera associata all\'analisi della politica monetaria',
 };
 
 export default blogMetaChIt;

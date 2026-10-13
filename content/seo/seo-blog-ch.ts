@@ -102560,6 +102560,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kof-nobel-svizzera': {
+    title: 'KOF: Nobel dell\'economia importante per la Svizzera',
+    description: 'Robert Hall e Michael Woodford ricevono il Nobel dell\'economia. Le aspettative sul futuro incidono sulle decisioni attuali. La rilevanza svizzera riguarda BNS',
+    keywords: 'frontalieri, ticino, svizzera, italia, nobel, dell, economia, importante',
+    ogTitle: 'KOF: Nobel dell\'economia, rilievo per la Svizzera',
+    ogDescription: 'Robert Hall e Michael Woodford ricevono il Nobel dell\'economia.',
+    canonicalPath: '/articoli-svizzera/kof-nobel-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "KOF: Nobel dell'economia importante per la Svizzera",
+      "description": "Robert Hall e Michael Woodford ricevono il Nobel dell'economia. Le aspettative sul futuro incidono sulle decisioni attuali. La rilevanza svizzera riguarda BNS",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kof-nobel-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta urbana svizzera associata all'analisi della politica monetaria"
+      },
+      "datePublished": "2026-10-13T04:15:39+00:00",
+      "dateModified": "2026-10-13T04:15:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/kof-nobel-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
