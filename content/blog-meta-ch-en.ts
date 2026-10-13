@@ -8189,6 +8189,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.migros-ecublens-57-posti.title': 'Migros evaluates the closure in Écublens: 57 places',
     'blog.article.migros-ecublens-57-posti.excerpt': 'Migros assesses the closure of the Traiteur At-Risk Plant 57 jobs in Écublens Consultation with staff is ongoing No final decision has been',
     'blog.article.migros-ecublens-57-posti.imageAlt': 'Migros food-production facility in Écublens, canton of Vaud.',
+    'blog.article.attacco-frigoriferi-svizzera-rischio.title': 'Hackers send refrigerators haywire: “It could happen in Switzerland too”',
+    'blog.article.attacco-frigoriferi-svizzera-rischio.excerpt': 'Attack on around 150 supermarkets in France Refrigerators up to 50 degrees and tons of food thrown away Danfoss: vulnerabilities in Internet-connected systems',
+    'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Swiss supermarket refrigeration units with technician checking control panel, indoor natural light',
 };
 
 export default blogMetaChEn;

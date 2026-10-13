@@ -2752,6 +2752,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'iniziativa-keller-sutter-imposizione-coniugi': { it: 'iniziativa-keller-sutter-imposizione-coniugi', en: 'keller-sutter-launches-the-no-campaign-against-the-taxation-of-married-couples', de: 'keller-sutter-lanciert-die-nein-kampagne-zur-ehepaarbesteuerung', fr: 'keller-sutter-lance-la-campagne-du-non-sur-l-imposition-des-couples-maries' },
  'hacker-casse-pensioni-svizzera': { it: 'hacker-casse-pensioni-svizzera', en: 'hackers-swiss-pension-funds', de: 'hacker-schweizer-pensionskassen', fr: 'hackers-caisses-de-pension-suisse' },
  'migros-ecublens-57-posti': { it: 'migros-ecublens-57-posti', en: 'migros-ecublens-57-jobs', de: 'migros-ecublens-57-stellen', fr: 'migros-ecublens-57-emplois' },
+ 'attacco-frigoriferi-svizzera-rischio': { it: 'attacco-frigoriferi-svizzera-rischio', en: 'hackers-send-refrigerators-haywire-it-could-happen-in-switzerland-too', de: 'hacker-legen-kuhlschranke-lahm-das-kann-auch-in-der-schweiz-passieren', fr: 'des-hackers-mettent-les-refrigerateurs-hors-service-cela-peut-aussi-arriver-en' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

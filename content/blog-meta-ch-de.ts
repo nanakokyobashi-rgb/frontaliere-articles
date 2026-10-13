@@ -8189,6 +8189,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.migros-ecublens-57-posti.title': 'Migros prüft Schließung in Écublens: 57 Plätze',
     'blog.article.migros-ecublens-57-posti.excerpt': 'Migros prüft Schließung der Zentrale Traiteur A Risk 57 Stellen in Écublens Konsultation des Personals läuft Keine abschließende Entscheidung getroffen',
     'blog.article.migros-ecublens-57-posti.imageAlt': 'Lebensmittelproduktionsbetrieb von Migros in Écublens im Kanton Waadt.',
+    'blog.article.attacco-frigoriferi-svizzera-rischio.title': 'Hacker legen Kühlschränke lahm: «Das kann auch in der Schweiz passieren»',
+    'blog.article.attacco-frigoriferi-svizzera-rischio.excerpt': 'Angriff auf rund 150 Supermärkte in Frankreich Kühlschränke mit Temperaturen bis zu 50 Grad und tonnenweise weggeworfene Lebensmittel Danfoss: Schwachstellen in mit dem Internet verbundenen Systemen',
+    'blog.article.attacco-frigoriferi-svizzera-rischio.imageAlt': 'Schweizer Supermarkt-Kühlgeräte mit Techniker, der das Steuerfeld überprüft, natürliche Innenbeleuchtung',
 };
 
 export default blogMetaChDe;

@@ -103340,6 +103340,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-attacco-frigoriferi-svizzera-rischio': {
+    title: 'Hacker mandano in tilt i frigoriferi: «Può succedere anche in Svizzera»',
+    description: 'Attacco a circa 150 supermercati in Francia Frigoriferi fino a 50 gradi e tonnellate di alimenti buttate Danfoss: vulnerabilità nei sistemi collegati a Internet',
+    keywords: 'frontalieri, ticino, svizzera, italia, hacker, mandano, tilt, frigoriferi',
+    ogTitle: 'Hacker mandano in tilt i frigoriferi: «Può succedere anche in Svizzera»',
+    ogDescription: 'Attacco a circa 150 supermercati in Francia Frigoriferi fino a 50 gradi e tonnellate di alimenti buttate Danfoss: vulnerabilità nei sistemi collegati a Internet',
+    canonicalPath: '/articoli-svizzera/attacco-frigoriferi-svizzera-rischio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hacker mandano in tilt i frigoriferi: «Può succedere anche in Svizzera»",
+      "description": "Attacco a circa 150 supermercati in Francia Frigoriferi fino a 50 gradi e tonnellate di alimenti buttate Danfoss: vulnerabilità nei sistemi collegati a Internet",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/attacco-hacker-liechtenstein-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frigoriferi di un supermercato svizzero con pannello di controllo tecnico, illuminazione interna naturale"
+      },
+      "datePublished": "2026-10-13T21:39:06+00:00",
+      "dateModified": "2026-10-13T21:39:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/attacco-frigoriferi-svizzera-rischio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

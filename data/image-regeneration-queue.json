@@ -20,6 +20,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T14:39:37.817Z",
       "lastFailureAt": "2026-10-13T14:46:51.849Z"
+    },
+    {
+      "articleId": "attacco-frigoriferi-svizzera-rischio",
+      "title": "Hacker mandano in tilt i frigoriferi: «Può succedere anche in Svizzera»",
+      "fallbackImage": "/images/blog/attacco-hacker-liechtenstein-svizzera.webp",
+      "reason": "All image providers failed for article-attacco-frigoriferi-svizzera-rischio: openai-codex (vision gate rejected image: Generic editorial illustration relevant to supermarket refrig",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T21:39:07.090Z",
+      "lastFailureAt": "2026-10-13T21:39:07.090Z"
     }
   ]
 }
