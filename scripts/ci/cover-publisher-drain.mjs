@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 export const PUBLISH_OUTBOX_SCHEMA = 1;
 export const RUN_LOOKUP_ATTEMPTS = 20;
 export const RUN_LOOKUP_INTERVAL_MS = 2_000;
+export const PUBLISHER_WATCH_INTERVAL_MS = 2_000;
 
 const PUBLISH_WORKFLOW_FOR_SECTION = {
   frontaliere: 'fast-publish-article.yml',
@@ -269,52 +270,58 @@ async function defaultDispatch({ repo, workflow, section, articleIds, token, dea
   return { runId, dispatchAccepted: true, dispatchNonce };
 }
 
-function appendOutput(current, chunk) {
-  const next = `${current}${chunk}`;
-  return next.length > 8_000 ? next.slice(-8_000) : next;
+async function readPublisherRun({ repo, runId, token, deadlineAt, now = Date.now }) {
+  const output = await runGh([
+    'run', 'view', runId,
+    '--repo', repo,
+    '--json', 'status,conclusion,jobs',
+  ], { token, deadlineAt, now });
+  try {
+    return JSON.parse(output || '{}');
+  } catch (error) {
+    throw new Error(`publisher run ${runId} returned malformed status: ${textError(error)}`);
+  }
 }
 
-function defaultWatch({ repo, runId, token, deadlineAt, now = Date.now }) {
-  return new Promise((resolve) => {
-    const child = spawn('gh', ['run', 'watch', runId, '--repo', repo, '--exit-status'], {
-      env: commandEnvironment(token),
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    let output = '';
-    let timedOut = false;
-    let settled = false;
-    let killTimer;
-    const remaining = Math.max(0, deadlineAt - now());
-    const deadlineTimer = setTimeout(() => {
-      timedOut = true;
-      child.kill('SIGTERM');
-      killTimer = setTimeout(() => child.kill('SIGKILL'), 1_000);
-    }, remaining);
-
-    const finish = (result) => {
-      if (settled) return;
-      settled = true;
-      clearTimeout(deadlineTimer);
-      if (killTimer) clearTimeout(killTimer);
-      resolve(result);
-    };
-
-    child.stdout?.on('data', (chunk) => { output = appendOutput(output, chunk); });
-    child.stderr?.on('data', (chunk) => { output = appendOutput(output, chunk); });
-    child.on('error', (error) => finish({ status: timedOut ? 'in-progress' : 'failed', error: textError(error) }));
-    child.on('close', (code, signal) => {
-      if (timedOut) {
-        finish({ status: 'in-progress', error: `deadline reached while watching run ${runId}` });
-      } else if (code === 0) {
-        finish({ status: 'success' });
-      } else {
-        finish({
+export async function watchPublisherRun({
+  repo,
+  runId,
+  token,
+  deadlineAt,
+  now = Date.now,
+  readRun = readPublisherRun,
+  sleepFor = sleep,
+  intervalMs = PUBLISHER_WATCH_INTERVAL_MS,
+} = {}) {
+  let lastError = null;
+  while (now() < deadlineAt) {
+    try {
+      const run = await readRun({ repo, runId, token, deadlineAt, now });
+      if (run?.status === 'completed') {
+        if (run.conclusion === 'success') return { status: 'success' };
+        return {
           status: 'failed',
-          error: textError(output || `gh run watch exited with ${signal || `code ${code}`}`),
-        });
+          error: `publisher run ${runId} concluded ${run.conclusion || 'without a conclusion'}`,
+        };
       }
-    });
-  });
+      lastError = null;
+    } catch (error) {
+      // A dispatched run can exist before its jobs are visible to the API. Keep
+      // observing it instead of turning that transient race into a failed
+      // publisher and an unnecessary durable outbox retry.
+      lastError = error;
+    }
+
+    const remaining = deadlineAt - now();
+    if (remaining <= 0) break;
+    await sleepFor(Math.min(intervalMs, remaining));
+  }
+
+  const detail = lastError ? `; last observation error: ${textError(lastError)}` : '';
+  return {
+    status: 'in-progress',
+    error: `deadline reached while watching run ${runId}${detail}`,
+  };
 }
 
 function resultCounts(sections) {
@@ -339,7 +346,7 @@ export async function drainCoverPublishers({
   deadlineAt,
   now = Date.now,
   dispatch = defaultDispatch,
-  watch = defaultWatch,
+  watch = watchPublisherRun,
   token,
 } = {}) {
   const groups = groupPublisherOutbox(outbox);
