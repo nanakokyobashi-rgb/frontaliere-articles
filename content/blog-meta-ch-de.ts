@@ -8162,6 +8162,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.formulario-averi-iran-ottobre.title': 'Iran: DEFR aktualisiert das Formular für Vermögensübertragungen',
     'blog.article.formulario-averi-iran-ottobre.excerpt': 'Das DEFR hat das Formular am 13.',
     'blog.article.formulario-averi-iran-ottobre.imageAlt': 'Aktualisiertes Formular für Vermögensübertragungen nach der Iran-Verordnung',
+    'blog.article.voto-matrimonio-tassazione-coppie.title': 'Ehe, die Regierung gegen die Initiative von Centro',
+    'blog.article.voto-matrimonio-tassazione-coppie.excerpt': 'Der Bundesrat und das Parlament fordern, den Text abzulehnen Die Abstimmung über die Initiative ist auf den 29.',
+    'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Schweizer Paar prüft Unterlagen zur direkten Bundessteuer',
 };
 
 export default blogMetaChDe;

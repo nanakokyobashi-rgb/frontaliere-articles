@@ -10,6 +10,16 @@
       "failureCount": 3,
       "requestedAt": "2026-10-13T00:24:03.070Z",
       "lastFailureAt": "2026-10-13T13:06:01.041Z"
+    },
+    {
+      "articleId": "voto-matrimonio-tassazione-coppie",
+      "title": "Matrimonio, il Governo contro l'iniziativa del Centro",
+      "fallbackImage": "/images/blog/consiglio-federale-no-iniziativa-finanziaria.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T14:05:29.730Z",
+      "lastFailureAt": "2026-10-13T14:05:29.730Z"
     }
   ]
 }

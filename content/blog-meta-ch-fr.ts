@@ -8162,6 +8162,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.formulario-averi-iran-ottobre.title': 'Iran : le DEFR met à jour le formulaire pour les transferts d\'avoirs',
     'blog.article.formulario-averi-iran-ottobre.excerpt': 'Le DEFR a adapté le formulaire le 13 octobre 2026 Il concerne les transferts d\'avoirs au sens de l\'art.',
     'blog.article.formulario-averi-iran-ottobre.imageAlt': 'Formulaire actualisé pour les transferts d\'avoirs selon l\'ordonnance sur l\'Iran',
+    'blog.article.voto-matrimonio-tassazione-coppie.title': 'Mariage, le Gouvernement contre l\'initiative du Centre',
+    'blog.article.voto-matrimonio-tassazione-coppie.excerpt': 'Le Conseil fédéral et le Parlement demandent de rejeter le texte Le vote sur l\'initiative est fixé au 29 novembre Le texte concerne l\'impôt fédéral',
+    'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Couple suisse examinant des documents sur l\'impôt fédéral direct',
 };
 
 export default blogMetaChFr;

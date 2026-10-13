@@ -8162,6 +8162,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.formulario-averi-iran-ottobre.title': 'Iran: DEFR aggiorna il formulario per trasferimenti di averi',
     'blog.article.formulario-averi-iran-ottobre.excerpt': 'Il DEFR ha adattato il formulario il 13 ottobre 2026 Riguarda trasferimenti di averi ai sensi dell\'art.',
     'blog.article.formulario-averi-iran-ottobre.imageAlt': 'Formulario aggiornato per trasferimenti di averi secondo l\'ordinanza sull\'Iran',
+    'blog.article.voto-matrimonio-tassazione-coppie.title': 'Matrimonio, il Governo contro l\'iniziativa del Centro',
+    'blog.article.voto-matrimonio-tassazione-coppie.excerpt': 'Il Consiglio federale e il Parlamento chiedono di respingere il testo Il voto sull\'iniziativa è fissato al 29 novembre Il testo riguarda l\'imposta federale',
+    'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Coppia svizzera esamina documenti sull\'imposta federale diretta',
 };
 
 export default blogMetaChIt;

@@ -8162,6 +8162,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.formulario-averi-iran-ottobre.title': 'Iran: DEFR updates the form for asset transfers',
     'blog.article.formulario-averi-iran-ottobre.excerpt': 'The DEFR adapted the form on October 13, 2026 It concerns transfers of assets pursuant to Art.',
     'blog.article.formulario-averi-iran-ottobre.imageAlt': 'Updated form for asset transfers under the Iran-related ordinance',
+    'blog.article.voto-matrimonio-tassazione-coppie.title': 'Marriage, the Government against the Centre\'s initiative',
+    'blog.article.voto-matrimonio-tassazione-coppie.excerpt': 'The Federal Council and Parliament call for the text to be rejected The vote on the initiative is scheduled for November 29 The text concerns the federal tax',
+    'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Swiss couple reviews documents about direct federal tax',
 };
 
 export default blogMetaChEn;

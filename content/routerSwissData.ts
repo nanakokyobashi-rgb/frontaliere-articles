@@ -2743,6 +2743,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'divario-reddito-donne-uomini-scende-al-14': { it: 'divario-reddito-donne-uomini-scende-al-14', en: 'women-men-income-gap-falls-to-14', de: 'einkommenslucke-zwischen-frauen-und-mannern-sinkt-auf-14', fr: 'ecart-de-revenus-femmes-hommes-baisse-a-14' },
  'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv': { it: 'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv', en: 'autumn-vaccinations-2026-influenza-covid-19-and-rsv', de: 'herbstimpfungen-2026-grippe-covid-19-und-rsv', fr: 'vaccinations-automnales-2026-grippe-covid-19-et-vrs' },
  'formulario-averi-iran-ottobre': { it: 'formulario-averi-iran-ottobre', en: 'iran-asset-transfer-form', de: 'iran-formular-vermoegensuebertragung', fr: 'formulaire-avoirs-iran-octobre' },
+ 'voto-matrimonio-tassazione-coppie': { it: 'voto-matrimonio-tassazione-coppie', en: 'swiss-marriage-tax-vote', de: 'schweiz-ehe-steuer-abstimmung', fr: 'vote-suisse-impot-mariage' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

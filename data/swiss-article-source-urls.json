@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/casse-pensioni%2c-buoni-rendimenti-grazie-alle-azioni/92023367": {
-    "articleId": "casse-pensioni-rendimenti-2025",
-    "ts": "2026-09-08T19:20:17.760Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948794/cure-professioni-condizioni-vpod-sistema-oss-professionisti": {
     "articleId": "ospedali-svizzeri-infermieri-fuga-anno",
     "ts": "2026-09-08T19:39:29.166Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/ynzpu65j-cgp": {
     "articleId": "formulario-averi-iran-ottobre",
     "ts": "2026-10-13T12:41:14.547Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4160536": {
+    "articleId": "voto-matrimonio-tassazione-coppie",
+    "ts": "2026-10-13T14:05:29.732Z",
     "keyForm": 2
   }
 }

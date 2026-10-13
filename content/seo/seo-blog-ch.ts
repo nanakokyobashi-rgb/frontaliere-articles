@@ -102989,6 +102989,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-voto-matrimonio-tassazione-coppie': {
+    title: 'Matrimonio, il Governo contro l\'iniziativa del Centro',
+    description: 'Il Consiglio federale e il Parlamento chiedono di respingere il testo Il voto sull\'iniziativa è fissato al 29 novembre Il testo riguarda l\'imposta federale',
+    keywords: 'frontalieri, ticino, svizzera, italia, matrimonio, governo, contro, iniziativa',
+    ogTitle: 'Iniziativa matrimonio, il Governo raccomanda il no',
+    ogDescription: 'Il Consiglio federale e il Parlamento chiedono di respingere il testo Il voto sull\'iniziativa è fissato al 29 novembre Il testo riguarda l\'imposta federale',
+    canonicalPath: '/articoli-svizzera/voto-matrimonio-tassazione-coppie/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Matrimonio, il Governo contro l'iniziativa del Centro",
+      "description": "Il Consiglio federale e il Parlamento chiedono di respingere il testo Il voto sull'iniziativa è fissato al 29 novembre Il testo riguarda l'imposta federale",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-no-iniziativa-finanziaria.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Coppia svizzera esamina documenti sull'imposta federale diretta"
+      },
+      "datePublished": "2026-10-13T14:05:29+00:00",
+      "dateModified": "2026-10-13T14:05:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/voto-matrimonio-tassazione-coppie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
