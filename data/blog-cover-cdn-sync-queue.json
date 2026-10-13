@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-proiezioni-scuola-universita-2035.webp",
+      "sha256": "5d31087e95ce30d0b0d92103547b50b29824a0f71ac4bf70bc2c0fbb6c677e2c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-proiezioni-scuola-universita-2035-480w.webp",
+      "sha256": "2bac291214089519571606115d366cd7a30477b9b8413274aa0f030241e8132a"
+    }
+  ]
 }
