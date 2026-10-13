@@ -98,16 +98,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-iniziative-casse-malati-2026': {
-    title: 'Iniziative casse malati 2026: il governo non può bloccare l\'entrata in vigore',
+    title: 'Casse malati Ticino 2026: iniziative e tempi | Frontaliere Ticino',
     description: 'Il Consiglio di Stato non può bloccare l\'entrata in vigore delle iniziative sulle casse malati approvate dal popolo il 28 settembre. Scopri l\'impatto e le',
     keywords: 'frontalieri, ticino, svizzera, italia, iniziative, casse, malati, governo',
-    ogTitle: 'Iniziative casse malati 2026: il governo non può bloccare l\'entrata in vigore',
+    ogTitle: 'Casse malati Ticino 2026: iniziative e tempi',
     ogDescription: 'Il Consiglio di Stato non può bloccare l\'entrata in vigore delle iniziative sulle casse malati approvate dal popolo il 28 settembre. Scopri l\'impatto e le',
     canonicalPath: '/articoli-svizzera/iniziative-casse-malati-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Iniziative casse malati 2026: il governo non può bloccare l'entrata in vigore",
+      "headline": "Casse malati Ticino 2026: iniziative e tempi",
       "description": "Il Consiglio di Stato non può bloccare l'entrata in vigore delle iniziative sulle casse malati approvate dal popolo il 28 settembre. Scopri l'impatto e le",
       "image": {
         "@type": "ImageObject",
@@ -546,16 +546,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-festivita-ticino-2026': {
-    title: 'Festività in Ticino 2026 | Frontaliere Ticino',
+    title: 'Festività in Ticino 2026: calendario | Frontaliere Ticino',
     description: 'Scopri le principali festività previste in Ticino nel 2026 e come influenzeranno la vita quotidiana dei residenti e dei frontalieri. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, festività, scopri, principali, previste',
-    ogTitle: 'Festività in Ticino 2026',
+    ogTitle: 'Festività in Ticino 2026: calendario',
     ogDescription: 'Tutte le informazioni sulle festività in Ticino nel 2026.',
     canonicalPath: '/articoli-svizzera/festivita-ticino-2026/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Festività in Ticino 2026",
+      "headline": "Festività in Ticino 2026: calendario",
       "description": "Scopri le principali festività previste in Ticino nel 2026 e come influenzeranno la vita quotidiana dei residenti e dei frontalieri. Dati aggiornati 2026 per",
       "image": {
         "@type": "ImageObject",
@@ -658,16 +658,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-frontalieri-svizzera': {
-    title: 'Frontalieri in Svizzera | Frontaliere Ticino',
+    title: 'Frontalieri in Svizzera: lavoro e permessi | Frontaliere Ticino',
     description: 'Informazioni pratiche per frontalieri in Svizzera. Scopri le implicazioni pratiche e come affrontare le sfide della vita da frontaliere. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, informazioni, pratiche, frontalieri-svizzera',
-    ogTitle: 'Frontalieri in Svizzera',
+    ogTitle: 'Frontalieri in Svizzera: lavoro e permessi',
     ogDescription: 'Informazioni pratiche per frontalieri in Svizzera',
     canonicalPath: '/articoli-svizzera/frontalieri-svizzera/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Frontalieri in Svizzera",
+      "headline": "Frontalieri in Svizzera: lavoro e permessi",
       "description": "Informazioni pratiche per frontalieri in Svizzera. Scopri le implicazioni pratiche e come affrontare le sfide della vita da frontaliere. Dati aggiornati 2026",
       "image": {
         "@type": "ImageObject",
@@ -1389,16 +1389,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-premi-di-cassa-malati-ticino': {
-    title: 'Parlamento spacchetta premi di cassa malati | Frontaliere Ticino',
+    title: 'Premi di cassa malati in Ticino: cosa cambia | Frontaliere Ticino',
     description: 'Il Parlamento ticinese ha deciso di dividere l\'applicazione delle due misure promosse da Lega e PS e votate dal popolo lo scorso settembre. Dati aggiornati 2026',
     keywords: 'frontalieri, ticino, svizzera, italia, parlamento, spacchetta, premi, cassa',
-    ogTitle: 'Il Parlamento spacchetta le iniziative sui premi di cassa malati: ecco le tempistiche',
+    ogTitle: 'Premi di cassa malati in Ticino: cosa cambia',
     ogDescription: 'Il Parlamento ticinese ha deciso di dividere l\'applicazione delle due misure promosse da Lega e PS e votate dal popolo lo scorso settembre.',
     canonicalPath: '/articoli-svizzera/premi-di-cassa-malati-ticino/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Parlamento spacchetta premi di cassa malati",
+      "headline": "Premi di cassa malati in Ticino: cosa cambia",
       "description": "Il Parlamento ticinese ha deciso di dividere l'applicazione delle due misure promosse da Lega e PS e votate dal popolo lo scorso settembre. Dati aggiornati 2026",
       "image": {
         "@type": "ImageObject",
@@ -1506,16 +1506,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-givaudan-licenziamenti': {
-    title: 'Givaudan licenza dipendenti | Frontaliere Ticino',
+    title: 'Givaudan: licenziamenti per furto di essenze | Frontaliere Ticino',
     description: 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta. Dati aggiornati 2026 per frontalieri in',
     keywords: 'frontalieri, ticino, svizzera, italia, givaudan, licenza, dipendenti, leader',
-    ogTitle: 'Givaudan licenza dipendenti',
+    ogTitle: 'Givaudan: licenziamenti per furto di essenze',
     ogDescription: 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta.',
     canonicalPath: '/articoli-svizzera/givaudan-licenziamenti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Givaudan licenza dipendenti",
+      "headline": "Givaudan: licenziamenti per furto di essenze",
       "description": "Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta. Dati aggiornati 2026 per frontalieri in",
       "image": {
         "@type": "ImageObject",
@@ -1662,16 +1662,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-pensione-avs-inps-2026-famiglia-con-figli': {
-    title: 'Pensione frontaliere 2026: coordinamento AVS/INPS e totalizzazione senza esempi personali',
+    title: 'Pensione frontalieri 2026: AVS, INPS e totalizzazione | Frontaliere Ticino',
     description: 'La pensione frontaliere 2026 prevede un coordinamento tra AVS e INPS. Scopri come funziona e come pianificare la tua pensione. Dati aggiornati 2026 per',
     keywords: 'frontalieri, ticino, svizzera, italia, pensione, coordinamento, inps, totalizzazione',
-    ogTitle: 'Pensione frontaliere 2026: come funziona il coordinamento AVS/INPS',
+    ogTitle: 'Pensione frontalieri 2026: AVS, INPS e totalizzazione',
     ogDescription: 'La pensione frontaliere 2026 prevede un coordinamento tra AVS e INPS. Scopri come funziona e come pianificare la tua pensione.',
     canonicalPath: '/articoli-svizzera/pensione-avs-inps-2026-famiglia-con-figli/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Pensione frontaliere 2026: coordinamento AVS/INPS e totalizzazione senza esempi personali",
+      "headline": "Pensione frontalieri 2026: AVS, INPS e totalizzazione",
       "description": "La pensione frontaliere 2026 prevede un coordinamento tra AVS e INPS. Scopri come funziona e come pianificare la tua pensione. Dati aggiornati 2026 per",
       "image": {
         "@type": "ImageObject",
