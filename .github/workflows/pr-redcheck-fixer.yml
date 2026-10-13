@@ -1315,6 +1315,7 @@ jobs:
         if: always() && steps.guard.outputs.proceed == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MARKER_GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           GH_REPO: ${{ github.repository }}
           PR_NUMBER: ${{ needs.preflight.outputs.pr_number }}
@@ -1496,7 +1497,7 @@ jobs:
             if ! confirm_remote_head "$REMOTE_SHA"; then
               fail_remote_head_unverified "prima del rimborso"
             fi
-            if ! refund_result=$(node "$TRUSTED_MARKER_HELPER" --refund-superseded \
+            if ! refund_result=$(GH_TOKEN="$MARKER_GH_TOKEN" node "$TRUSTED_MARKER_HELPER" --refund-superseded \
               --repo "$REPO" --pr "$PR_NUMBER" --marker "$FIX_ROUND_MARKER" \
               --round "$FIX_ROUND" --comment-id "$MARKER_COMMENT_ID" \
               --expected-head "$MARKER_HEAD" --expected-body-revision "$MARKER_BODY_REVISION" \
