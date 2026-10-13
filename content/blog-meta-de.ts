@@ -13122,6 +13122,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.scontro-galleria-cernobbio-varese.title': 'Unfall in Cernobbio: 21-Jährige schwer verletzt, nach Varese gebracht',
     'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Unfall kurz nach 9 Uhr in Cernobbio 21-Jährige nach dem Zusammenstoß im Tunnel schwer verletzt Rettungshubschrauber aus Mailand in Richtung Varese Drei Männer verletzt, gelber Code Ort →',
     'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Straßentunnel in der Seenregion zwischen Tessin und Como',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.title': 'AHV: Mehrwertsteuer-Abstimmung am 29. November für die 13. Rente',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.excerpt': 'Die Abstimmung über die Mehrwertsteuer für die AHV findet am 29.',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.imageAlt': 'Redaktionelles Bild zu: AVS: Voto IVA il 29 novembre per la 13esima rendita',
 };
 
 export default blogMetaDe;

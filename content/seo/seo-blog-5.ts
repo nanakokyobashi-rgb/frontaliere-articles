@@ -107322,6 +107322,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-avs-voto-iva-il-29-novembre-per-la-13esima-rendita': {
+    title: 'AVS: Voto IVA il 29 novembre per la 13esima rendita',
+    description: 'Il voto sull\'IVA per l\'AVS è fissato al 29 novembre. L\'aumento proposto porterebbe l\'IVA all\'8,5%. La 13esima AVS costa 4-5 miliardi di franchi l\'anno. Dal 2028',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, novembre, 13esima, rendita',
+    ogTitle: 'AVS: Voto IVA il 29 novembre per la 13esima rendita',
+    ogDescription: 'Il voto sull\'IVA per l\'AVS è fissato al 29 novembre.',
+    canonicalPath: '/articoli-frontaliere/avs-voto-iva-il-29-novembre-per-la-13esima-rendita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS: Voto IVA il 29 novembre per la 13esima rendita",
+      "description": "Il voto sull'IVA per l'AVS è fissato al 29 novembre. L'aumento proposto porterebbe l'IVA all'8,5%. La 13esima AVS costa 4-5 miliardi di franchi l'anno. Dal 2028",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: AVS: Voto IVA il 29 novembre per la 13esima rendita"
+      },
+      "datePublished": "2026-10-13T12:14:54+00:00",
+      "dateModified": "2026-10-13T12:14:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/avs-voto-iva-il-29-novembre-per-la-13esima-rendita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

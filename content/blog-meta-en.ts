@@ -13123,6 +13123,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.scontro-galleria-cernobbio-varese.title': 'Incident in Cernobbio: 21-year-old seriously injured, transported to Varese',
     'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Accident shortly after 9 in Cernobbio 21-year-old seriously injured after a collision in a tunnel Air ambulance from Milan toward Varese Three men injured, yellow code Location →',
     'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Road tunnel in the lake region between Ticino and Como',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.title': 'AVS: VAT vote on November 29 for the 13th pension payment',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.excerpt': 'The vote on VAT for AVS is scheduled for November 29.',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.imageAlt': 'Editorial image related to: AVS: Voto IVA il 29 novembre per la 13esima rendita',
 };
 
 export default blogMetaEn;

@@ -13124,6 +13124,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.scontro-galleria-cernobbio-varese.title': 'Incidente a Cernobbio: 21enne grave, trasportata a Varese',
     'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Incidente poco dopo le 9 a Cernobbio 21enne grave dopo lo scontro in galleria Elisoccorso da Milano verso Varese Tre uomini feriti, codice giallo Luogo →',
     'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Galleria stradale nella regione dei laghi tra Ticino e Como',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.title': 'AVS: Voto IVA il 29 novembre per la 13esima rendita',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.excerpt': 'Il voto sull\'IVA per l\'AVS è fissato al 29 novembre.',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.imageAlt': 'Immagine editoriale relativa a: AVS: Voto IVA il 29 novembre per la 13esima rendita',
 };
 
 export default blogMetaIt;

@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/raiffeisen-svizzera-taglia-fino-a-180-posti-di-lavoro--4012810.html": {
-    "articleId": "raiffeisen-ristrutturazione-2026",
-    "ts": "2026-08-27T05:30:34.874Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/08/varese-svizzera-la-mobilita-dei-frontalieri-cambia-rotta-perche-il-noleggio-a-lungo-termine-sta-sostituendo-lauto-di-proprieta/2664253": {
     "articleId": "cambio-mobilita-frontalieri-ticino",
     "ts": "2026-08-27T06:30:08.355Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/incidente-in-galleria-a-cernobbio-grave-una-21enne-trasportata-a-varese/2706391": {
     "articleId": "scontro-galleria-cernobbio-varese",
     "ts": "2026-10-13T10:10:35.604Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/%22s%c3%ac-ad-aumento-iva-per-l%27avs%2c-altrimenti-sar%c3%a0-in-difficolt%c3%a0%22/92208616": {
+    "articleId": "avs-voto-iva-il-29-novembre-per-la-13esima-rendita",
+    "ts": "2026-10-13T12:14:55.013Z",
     "keyForm": 2
   }
 }

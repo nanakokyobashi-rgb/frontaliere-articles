@@ -44255,6 +44255,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'avs-voto-iva-il-29-novembre-per-la-13esima-rendita',
+ category: 'novita',
+ date: '2026-10-13T12:14:54.578Z',
+ image: '/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -13125,6 +13125,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.scontro-galleria-cernobbio-varese.title': 'Accident à Cernobbio : 21 ans grave, transporté à Varèse',
     'blog.article.scontro-galleria-cernobbio-varese.excerpt': 'Accident peu après 9h à Cernobbio 21 ans grave après l\'affrontement dans le tunnel Elisoccorso de Milan vers Varese Trois hommes blessés, code jaune Lieu →',
     'blog.article.scontro-galleria-cernobbio-varese.imageAlt': 'Tunnel routier dans la région des lacs entre le Tessin et Côme (Como)',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.title': 'AVS : Vote sur la TVA le 29 novembre pour la 13e rente',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.excerpt': 'Le vote sur la TVA pour l\'AVS est fixé au 29 novembre.',
+    'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.imageAlt': 'Image éditoriale relative à: AVS: Voto IVA il 29 novembre per la 13esima rendita',
 };
 
 export default blogMetaFr;
