@@ -27270,6 +27270,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'diritto-lavoro-telelavoro-cet-s',
+    category: 'novita',
+    date: '2026-10-13T18:20:51.200Z',
+    image: '/images/blog/article-diritto-lavoro-telelavoro-cet-s.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

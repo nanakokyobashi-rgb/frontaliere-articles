@@ -8171,6 +8171,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Feuerwerk: Initiative zur Begrenzung seiner Nutzung',
     'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'Die eidgenössische Abstimmung ist für den 29.',
     'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.title': 'Homeoffice: Die CET-S schlägt flexiblere Regeln vor',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.excerpt': 'Die CET-S befürwortet weniger strenge Regeln für das Homeoffice Die ausdrückliche Regelung zur Nichterreichbarkeit würde gestrichen Die Sonntagsarbeit bliebe unterworfen',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.imageAlt': 'Homeoffice-Arbeitsplatz in der Schweiz mit Landschaftsblick',
 };
 
 export default blogMetaChDe;

@@ -8171,6 +8171,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Fuochi d\'artificio: iniziativa per limitarne l\'uso',
     'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'Il voto federale è previsto il 29 novembre Lo slogan è «Non tutti festeggiano» In Svizzera: 1\'300 tonnellate di rifiuti annui La Suva registra 260 infortuni',
     'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.title': 'Lavoro da casa: la CET-S propone regole più flessibili',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.excerpt': 'La CET-S sostiene regole meno rigide per il lavoro da casa La disconnessione esplicita verrebbe stralciata Il lavoro domenicale resterebbe soggetto',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.imageAlt': 'Postazione di lavoro da casa in Svizzera con vista paesaggistica',
 };
 
 export default blogMetaChIt;

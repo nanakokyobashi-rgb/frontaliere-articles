@@ -8171,6 +8171,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Fireworks: initiative to limit their use',
     'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'The federal vote is scheduled for November 29 The slogan is «Not everyone celebrates» In Switzerland: 1\'300 tonnes of waste per year Suva records 260 accidents',
     'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Illustration generated for this article',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.title': 'Working from home: CET-S proposes more flexible rules',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.excerpt': 'CET-S supports less stringent rules for working from home Explicit disconnection would be scrapped Sunday work would remain subject',
+    'blog.article.diritto-lavoro-telelavoro-cet-s.imageAlt': 'Home office workstation in Switzerland with a scenic view',
 };
 
 export default blogMetaChEn;

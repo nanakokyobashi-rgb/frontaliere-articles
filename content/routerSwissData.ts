@@ -2746,6 +2746,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'voto-matrimonio-tassazione-coppie': { it: 'voto-matrimonio-tassazione-coppie', en: 'swiss-marriage-tax-vote', de: 'schweiz-ehe-steuer-abstimmung', fr: 'vote-suisse-impot-mariage' },
  'referendum-mercosur-firme-berna': { it: 'referendum-mercosur-firme-berna', en: 'mercosur-referendum-signatures-bern', de: 'mercosur-referendum-unterschriften-bern', fr: 'referendum-mercosur-signatures-berne' },
  'iniziativa-limitazione-fuochi-artificio': { it: 'iniziativa-limitazione-fuochi-artificio', en: 'initiative-fireworks-limitation-switzerland', de: 'initiative-feuerwerk-beschrankung-schweiz', fr: 'initiative-limitation-feux-artifice-suisse' },
+ 'diritto-lavoro-telelavoro-cet-s': { it: 'diritto-lavoro-telelavoro-cet-s', en: 'swiss-labour-law-home-office-cet-s', de: 'schweizer-arbeitsrecht-homeoffice-cet-s', fr: 'droit-travail-teletravail-cet-s' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
