@@ -334,7 +334,13 @@ import {
   filterCantonSourceHeadlines,
   resolveCantonSectionGate,
 } from './lib/canton-section-profile.mjs';
-import { CANTON_SOURCE_USER_AGENT, createHostThrottle, scanCantonSource, sourceRequestBudget } from './lib/canton-news-sources.mjs';
+import {
+  CANTON_SOURCE_USER_AGENT,
+  createHostThrottle,
+  scanCantonSource,
+  sourceRequestBudget,
+  stripSourceCitations,
+} from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
@@ -5188,10 +5194,10 @@ function bodyTextForCantonPostcondition(data) {
     ...CTA_POOL.map((cta) => cta.it),
     ...Object.values(INTERNAL_LINK_BLOCK.it),
   ];
-  return appendages.reduce(
+  return stripSourceCitations(appendages.reduce(
     (body, appendage) => body.replaceAll(appendage, ''),
     bodyTextForQuality(data?.content?.it || {}),
-  ).replace(/\n\n\*Fonte: \[[^\]]+\]\([^)]*\)\*/gu, '');
+  ), { requireParagraphBreak: true });
 }
 
 /**
@@ -8386,10 +8392,15 @@ function nestedNeuhausenCards(html, baseUrl) {
     if (!dateSection) continue;
     try {
       const href = new URL(link[1], baseUrl).href;
-      if (href.startsWith('http')) datesByUrl.set(href, dateSection.date);
+      if (!href.startsWith('http')) continue;
+      const specificity = dateSection.contentEnd - dateSection.contentStart;
+      const previous = datesByUrl.get(href);
+      if (!previous || specificity < previous.specificity) {
+        datesByUrl.set(href, { date: dateSection.date, specificity });
+      }
     } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
   }
-  return datesByUrl;
+  return new Map([...datesByUrl].map(([href, entry]) => [href, entry.date]));
 }
 
 /** Build a map of URL → date from <time> elements found near <a> links in the HTML */

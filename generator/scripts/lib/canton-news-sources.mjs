@@ -99,6 +99,73 @@ import {
 } from './source-url-ledger.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 
+const SOURCE_CITATION_PREFIX_RE = /\*Fonte:\s*\[([^\]]+)\]\(/gu;
+
+function decodeSourceCitationUrl(body, start) {
+  let depth = 0;
+  let escaped = false;
+  for (let index = start; index < body.length; index += 1) {
+    const character = body[index];
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if (character === '\\') {
+      escaped = true;
+      continue;
+    }
+    if (/\s/u.test(character)) return null;
+    if (character === '(') {
+      depth += 1;
+    } else if (character === ')') {
+      if (depth === 0) {
+        return {
+          url: body.slice(start, index).replace(/\\([()])/gu, '$1'),
+          closeIndex: index,
+        };
+      }
+      depth -= 1;
+    }
+  }
+  return null;
+}
+
+/** Parse the generated Italian source citations with balanced Markdown URLs. */
+export function parseSourceCitations(body) {
+  const text = String(body ?? '');
+  const citations = [];
+  const prefixRe = new RegExp(SOURCE_CITATION_PREFIX_RE.source, SOURCE_CITATION_PREFIX_RE.flags);
+  let prefix;
+  while ((prefix = prefixRe.exec(text)) !== null) {
+    const destination = decodeSourceCitationUrl(text, prefixRe.lastIndex);
+    if (!destination || !/^https?:\/\/[^\s]+$/u.test(destination.url)) continue;
+    if (text[destination.closeIndex + 1] !== '*') continue;
+    citations.push({
+      start: prefix.index,
+      end: destination.closeIndex + 2,
+      label: prefix[1],
+      url: destination.url,
+    });
+    prefixRe.lastIndex = destination.closeIndex + 2;
+  }
+  return citations;
+}
+
+/** Remove parsed citations while preserving the rest of the article body. */
+export function stripSourceCitations(body, { requireParagraphBreak = false } = {}) {
+  const text = String(body ?? '');
+  const citations = parseSourceCitations(text);
+  let stripped = text;
+  for (let index = citations.length - 1; index >= 0; index -= 1) {
+    const citation = citations[index];
+    const hasParagraphBreak = text.slice(citation.start - 2, citation.start) === '\n\n';
+    if (requireParagraphBreak && !hasParagraphBreak) continue;
+    const start = hasParagraphBreak ? citation.start - 2 : citation.start;
+    stripped = stripped.slice(0, start) + stripped.slice(citation.end);
+  }
+  return stripped;
+}
+
 /** UA dichiarato delle richieste alle fonti cantonali (D10). */
 export const CANTON_SOURCE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
 

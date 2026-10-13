@@ -26,6 +26,7 @@ import {
   readRegistryEntries,
   registryArticleTypeForRun,
 } from './lib/registry-article-type.mjs';
+import { parseSourceCitations } from './lib/canton-news-sources.mjs';
 import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
 
@@ -109,56 +110,6 @@ export const SECTIONS = Object.freeze({
   },
 });
 
-const SOURCE_CITATION_PREFIX_RE = /\*Fonte:\s*\[([^\]]+)\]\(/gu;
-
-function decodeSourceCitationUrl(body, start) {
-  let depth = 0;
-  let escaped = false;
-  for (let index = start; index < body.length; index += 1) {
-    const character = body[index];
-    if (escaped) {
-      escaped = false;
-      continue;
-    }
-    if (character === '\\') {
-      escaped = true;
-      continue;
-    }
-    if (/\s/u.test(character)) return null;
-    if (character === '(') {
-      depth += 1;
-    } else if (character === ')') {
-      if (depth === 0) {
-        return {
-          url: body.slice(start, index).replace(/\\([()])/gu, '$1'),
-          closeIndex: index,
-        };
-      }
-      depth -= 1;
-    }
-  }
-  return null;
-}
-
-function sourceCitations(body) {
-  const citations = [];
-  const prefixRe = new RegExp(SOURCE_CITATION_PREFIX_RE.source, SOURCE_CITATION_PREFIX_RE.flags);
-  let prefix;
-  while ((prefix = prefixRe.exec(body)) !== null) {
-    const destination = decodeSourceCitationUrl(body, prefixRe.lastIndex);
-    if (!destination || !/^https?:\/\/[^\s]+$/u.test(destination.url)) continue;
-    if (body[destination.closeIndex + 1] !== '*') continue;
-    citations.push({
-      start: prefix.index,
-      end: destination.closeIndex + 2,
-      label: prefix[1],
-      url: destination.url,
-    });
-    prefixRe.lastIndex = destination.closeIndex + 2;
-  }
-  return citations;
-}
-
 function normalizedHostname(url) {
   try {
     return new URL(url).hostname.replace(/^www\./u, '');
@@ -187,7 +138,7 @@ function normalizedHostname(url) {
  */
 export function articleTypeFromItalianBody(body3) {
   const body = String(body3 || '').trimEnd();
-  const citations = sourceCitations(body);
+  const citations = parseSourceCitations(body);
   if (citations.length !== 1) return undefined;
   const [citation] = citations;
   if (citation.end !== body.length || !body.slice(0, citation.start).endsWith('\n\n')) return undefined;

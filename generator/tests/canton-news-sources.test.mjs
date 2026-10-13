@@ -45,10 +45,12 @@ import {
   feedItemDocuments,
   filterArticleLinks,
   isoWeekOf,
+  parseSourceCitations,
   parseDottedDate,
   periodSitemapUrls,
   scanCantonSource,
   sourceRequestBudget,
+  stripSourceCitations,
   stripPageChrome,
 } from '../scripts/lib/canton-news-sources.mjs';
 import { itemIdentityOf, newsUrlKey, stripItemIdentity } from '../scripts/lib/source-url-ledger.mjs';
@@ -896,6 +898,26 @@ test('html-links: le date h4 restano associate alla sezione annidata che le dich
   assert.equal(items[1].date?.getFullYear(), 2026);
   assert.equal(items[1].date?.getMonth(), 4);
   assert.equal(items[1].date?.getDate(), 14);
+});
+
+test('html-links: una URL ripetuta conserva la data della sezione piu\u0300 interna', () => {
+  const url = 'https://neuhausen.example/aktuelles';
+  const html = '<section class="outer"><h4>11.05.2026</h4><section class="inner"><h4>14.05.2026</h4><a href="/news/shared">Gemeinde informiert über wichtige neue Verkehrsmassnahmen</a></section><a href="/news/shared">Gemeinde informiert über wichtige neue Verkehrsmassnahmen</a></section>';
+  const source = { quirks: { dateFromSectionHeading: 'h4' } };
+  const items = extractHeadlines(html, url, source);
+  assert.equal(items.length, 1);
+  assert.equal(items[0].date?.getFullYear(), 2026);
+  assert.equal(items[0].date?.getMonth(), 4);
+  assert.equal(items[0].date?.getDate(), 14);
+});
+
+test('le citazioni Fonte condividono parser bilanciato e stripper', () => {
+  const body = String.raw`Testo.
+
+*Fonte: [example.com](https://example.com/articolo\(completo\).html)*`;
+  const [citation] = parseSourceCitations(body);
+  assert.equal(citation.url, 'https://example.com/articolo(completo).html');
+  assert.equal(stripSourceCitations(body, { requireParagraphBreak: true }), 'Testo.');
 });
 
 test('html-links: i landmark interni restano contenuto, la navigazione resta esclusa', () => {

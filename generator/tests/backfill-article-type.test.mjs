@@ -88,6 +88,15 @@ describe('articleType dal corpo italiano', () => {
 });
 
 describe('premesse sul generatore: chi porta la citazione e\' nato da una run non evergreen', () => {
+  test('la postcondizione cantonale usa lo stripper Fonte condiviso e bilanciato', () => {
+    const at = CREATE_ARTICLE.indexOf('function bodyTextForCantonPostcondition(data) {');
+    const end = CREATE_ARTICLE.indexOf('\n}\n', at);
+    assert.ok(at !== -1 && end !== -1, 'postcondizione cantonale non trovata');
+    const body = CREATE_ARTICLE.slice(at, end);
+    assert.match(body, /stripSourceCitations\(/);
+    assert.doesNotMatch(body, /\\\*Fonte:/);
+  });
+
   test('la citazione finale e\' scritta da un solo punto e mai per un URL evergreen://', () => {
     const scritture = CREATE_ARTICLE.split('\n')
       .filter((line) => line.includes('[${sourceDomain}](${citationUrl})'));
