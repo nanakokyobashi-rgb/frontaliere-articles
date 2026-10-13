@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-wagner-chiude-waldstatt-69-licenziamenti.webp",
+      "sha256": "1f412847475e899102cfbc678b8b5763deb000f9fb81d610298368db4366027a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-wagner-chiude-waldstatt-69-licenziamenti-480w.webp",
+      "sha256": "d39c8a1189bd00212cd703eedfba41f90dbc40058ea8b0b991752e625a512924"
+    }
+  ]
 }
