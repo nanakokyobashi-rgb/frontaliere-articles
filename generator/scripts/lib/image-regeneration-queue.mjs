@@ -23,7 +23,7 @@ export function failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHo
     && Number.isFinite(retryHours)
     && retryHours > 0
     && Number.isFinite(lastFailureAt)
-    && nowMs - lastFailureAt >= retryHours * 3_600_000;
+    && nowMs - lastFailureAt >= retryHours * HOUR_MS;
 }
 
 /**

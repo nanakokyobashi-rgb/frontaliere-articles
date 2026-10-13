@@ -1431,7 +1431,7 @@ export const CONDITIONS = [
         ? [
           `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
           `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${Number.isFinite(queue.oldestAgeHours) ? `${queue.oldestAgeHours.toFixed(1)}h` : '—'} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
-          `- Item azionabili: **${queue.actionableCount}**; richiesta più vecchia pronta al retry: **${queue.oldestActionableRequestedAt || '—'}** (${Number.isFinite(queue.oldestActionableAgeHours) ? `${queue.oldestActionableAgeHours.toFixed(1)}h` : 'nessuno — cooldown in corso'} di attesa azionabile; pronta dal ${queue.oldestActionableAt || '—'}).`,
+          `- Item azionabili: **${queue.actionableCount}**; richiesta più vecchia pronta al retry: **${queue.oldestActionableRequestedAt || '—'}** (${Number.isFinite(queue.oldestActionableAgeHours) ? `${queue.oldestActionableAgeHours.toFixed(1)}h di attesa azionabile; pronta dal ${queue.oldestActionableAt || '—'}` : 'nessuno — cooldown in corso'}).`,
         ]
         : [
           '- Coda rigenerazione: **non misurata** (JSON illeggibile o `requestedAt` non valido); questo segnale resta sconosciuto.',

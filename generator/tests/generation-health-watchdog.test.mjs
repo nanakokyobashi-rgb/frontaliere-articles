@@ -634,6 +634,7 @@ function healthy() {
       oldestAgeHours: null,
       actionableCount: 0,
       oldestActionableRequestedAt: null,
+      oldestActionableAt: null,
       oldestActionableAgeHours: null,
       statuses: {},
     },
@@ -654,6 +655,7 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
         oldestAgeHours: null,
         actionableCount: 0,
         oldestActionableRequestedAt: null,
+        oldestActionableAt: null,
         oldestActionableAgeHours: null,
         statuses: {},
       });
@@ -685,6 +687,7 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
       assert.equal(result.oldestAgeHours, 6);
       assert.equal(result.actionableCount, 1);
       assert.equal(result.oldestActionableRequestedAt, '2026-10-07T06:00:00.000Z');
+      assert.equal(result.oldestActionableAt, '2026-10-07T06:00:00.000Z');
       assert.equal(result.oldestActionableAgeHours, 6);
       assert.deepEqual(result.statuses, { queued: 1, failed: 1 });
     } finally {
@@ -709,6 +712,7 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
       assert.equal(result.oldestAgeHours, 24);
       assert.equal(result.actionableCount, 0);
       assert.equal(result.oldestActionableRequestedAt, null);
+      assert.equal(result.oldestActionableAt, null);
       assert.equal(result.oldestActionableAgeHours, null);
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
@@ -731,7 +735,8 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
       const result = collectCoverQueue(root, Date.parse('2026-10-07T12:00:00.000Z'));
       assert.equal(result.actionableCount, 1);
       assert.equal(result.oldestActionableRequestedAt, '2026-10-06T12:00:00.000Z');
-      assert.equal(result.oldestActionableAgeHours, 24);
+      assert.equal(result.oldestActionableAt, '2026-10-07T12:00:00.000Z');
+      assert.equal(result.oldestActionableAgeHours, 0);
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }
@@ -793,6 +798,7 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
       oldestAgeHours: 5.9,
       actionableCount: 55,
       oldestActionableRequestedAt: '2026-10-07T10:00:00.000Z',
+      oldestActionableAt: '2026-10-07T10:00:00.000Z',
       oldestActionableAgeHours: 5.9,
       statuses: { queued: 55 },
     };
@@ -809,12 +815,29 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
       oldestAgeHours: 28,
       actionableCount: 0,
       oldestActionableRequestedAt: null,
+      oldestActionableAt: null,
       oldestActionableAgeHours: null,
       statuses: { failed: 2 },
     };
     const v = verdictFor(m, 'cover-fallback-health');
     assert.equal(v.firing, false);
     assert.equal(v.available, true);
+  });
+
+  test('un failed appena uscito dal cooldown non conta la sua età di richiesta', () => {
+    const m = healthy();
+    m.coverQueue = {
+      available: true,
+      count: 2,
+      oldestRequestedAt: '2026-10-07T00:24:03.070Z',
+      oldestAgeHours: 21.2,
+      actionableCount: 1,
+      oldestActionableRequestedAt: '2026-10-07T14:39:37.817Z',
+      oldestActionableAt: '2026-10-07T20:46:51.849Z',
+      oldestActionableAgeHours: 0.85,
+      statuses: { failed: 2 },
+    };
+    assert.equal(verdictFor(m, 'cover-fallback-health').firing, false);
   });
 
   test('il p95 per sezione (7,45h svizzera) non accende section-dry', () => {
@@ -1032,6 +1055,7 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
       oldestAgeHours: 6.5,
       actionableCount: 55,
       oldestActionableRequestedAt: '2026-10-07T04:45:22.263Z',
+      oldestActionableAt: '2026-10-07T04:45:22.263Z',
       oldestActionableAgeHours: 6.5,
       statuses: { queued: 55 },
     };
@@ -1052,6 +1076,7 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
       oldestAgeHours: 6.5,
       actionableCount: 55,
       oldestActionableRequestedAt: '2026-10-07T04:45:22.263Z',
+      oldestActionableAt: '2026-10-07T04:45:22.263Z',
       oldestActionableAgeHours: 6.5,
       statuses: { queued: 55 },
     };
