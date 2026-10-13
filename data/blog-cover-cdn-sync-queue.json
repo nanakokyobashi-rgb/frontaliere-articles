@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-bcg-consiglio-mueller.webp",
+      "sha256": "ea68d393d02eda63bd8686cae417c3541840de1a6be79656d4901a6bc1cf9c0f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-bcg-consiglio-mueller-480w.webp",
+      "sha256": "5721a88455c942ab92a202701926006a16d3ed11c878108a0a5e83779ad664bb"
+    }
+  ]
 }
