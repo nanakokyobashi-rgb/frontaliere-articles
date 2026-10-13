@@ -107205,6 +107205,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-verbania-cantieri-allarme-m5s': {
+    title: 'Allarme M5S: \'Tre cantieri rischiano di paralizzare la città\'',
+    description: 'Dal 12 ottobre la SS 34 viaggia a senso unico alternato Dal 21 ottobre chiusura notturna dalle 21 alle 5 Il ponte San Giovanni Bosco vale 3,15 milioni Quattro',
+    keywords: 'frontalieri, ticino, svizzera, italia, allarme, cantieri, rischiano, paralizzare',
+    ogTitle: 'Cantieri Verbania: allarme M5S per viabilità e frontalieri',
+    ogDescription: 'Dal 12 ottobre la SS 34 viaggia a senso unico alternato Dal 21 ottobre chiusura notturna dalle 21 alle 5 Il ponte San Giovanni Bosco vale 3,15 milioni Quattro',
+    canonicalPath: '/articoli-frontaliere/verbania-cantieri-allarme-m5s/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Allarme M5S: 'Tre cantieri rischiano di paralizzare la città'",
+      "description": "Dal 12 ottobre la SS 34 viaggia a senso unico alternato Dal 21 ottobre chiusura notturna dalle 21 alle 5 Il ponte San Giovanni Bosco vale 3,15 milioni Quattro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta serale di una cittadina sul lago con luci che si riflettono sull'acqua, che rappresenta Verbania e i suoi dintorni."
+      },
+      "datePublished": "2026-10-13T08:46:23+00:00",
+      "dateModified": "2026-10-13T08:46:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/verbania-cantieri-allarme-m5s/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

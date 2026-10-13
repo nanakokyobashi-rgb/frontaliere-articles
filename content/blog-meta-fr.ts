@@ -13116,6 +13116,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bissone-torneo-scacchi.title': 'Échecs à Bissone : les vainqueurs du VI Festival',
     'blog.article.bissone-torneo-scacchi.excerpt': 'Dimanche 11 octobre s’est déroulée la sixième édition Christian De Lucia a remporté le Trophée Borromini Under 16 Vladimir Paleologu a conquis le titre Semilampo',
     'blog.article.bissone-torneo-scacchi.imageAlt': 'Jeunes joueurs d\'echecs au festival de Bissone',
+    'blog.article.verbania-cantieri-allarme-m5s.title': 'Alerte du M5S : « Trois chantiers risquent de paralyser la ville »',
+    'blog.article.verbania-cantieri-allarme-m5s.excerpt': 'À partir du 12 octobre la SS 34 circule en sens unique alterné À partir du 21 octobre fermeture nocturne de 21 heures à 5 heures Le pont San Giovanni Bosco vaut 3,15 millions Quatre',
+    'blog.article.verbania-cantieri-allarme-m5s.imageAlt': 'Vue en soirée d\'une ville lacustre avec des lumières se reflétant sur l\'eau, représentant Verbania et ses environs.',
 };
 
 export default blogMetaFr;

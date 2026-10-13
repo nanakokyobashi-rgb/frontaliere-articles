@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-13T08:19:27.043Z",
       "lastFailureAt": "2026-10-13T08:19:27.043Z"
+    },
+    {
+      "articleId": "verbania-cantieri-allarme-m5s",
+      "title": "Allarme M5S: 'Tre cantieri rischiano di paralizzare la città'",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T08:46:23.538Z",
+      "lastFailureAt": "2026-10-13T08:46:23.538Z"
     }
   ]
 }

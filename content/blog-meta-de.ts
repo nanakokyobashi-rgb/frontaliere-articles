@@ -13113,6 +13113,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bissone-torneo-scacchi.title': 'Schach in Bissone: die Gewinner des VI Festivals',
     'blog.article.bissone-torneo-scacchi.excerpt': 'Am Sonntag, dem 11.',
     'blog.article.bissone-torneo-scacchi.imageAlt': 'Junge Schachspieler beim Festival in Bissone',
+    'blog.article.verbania-cantieri-allarme-m5s.title': 'Alarm M5S: \'Drei Baustellen könnten die Stadt lahmlegen\'',
+    'blog.article.verbania-cantieri-allarme-m5s.excerpt': 'Ab dem 12. Oktober verkehrt die SS 34 einbahnig Ab dem 21. Oktober nachts von 21 bis 5 Uhr geschlossen Die Brücke San Giovanni Bosco hat einen Wert von 3,15 Millionen Vier',
+    'blog.article.verbania-cantieri-allarme-m5s.imageAlt': 'Abendansicht einer Seestadt mit Lichtern, die sich auf dem Wasser spiegeln und Verbania und ihre Umgebung darstellen.',
 };
 
 export default blogMetaDe;

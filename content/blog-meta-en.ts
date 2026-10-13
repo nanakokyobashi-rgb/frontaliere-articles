@@ -13114,6 +13114,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bissone-torneo-scacchi.title': 'Chess in Bissone: the winners of the VI Festival',
     'blog.article.bissone-torneo-scacchi.excerpt': 'On Sunday, October 11, the sixth edition took place Christian De Lucia won the Borromini Under 16 Trophy Vladimir Paleologu won the Rapid title',
     'blog.article.bissone-torneo-scacchi.imageAlt': 'Young chess players during the festival in Bissone',
+    'blog.article.verbania-cantieri-allarme-m5s.title': 'M5S warning: \'Three construction sites risk paralyzing the city\'',
+    'blog.article.verbania-cantieri-allarme-m5s.excerpt': 'Starting October 12, SS 34 operates under alternating one-way traffic Starting October 21 nighttime closure from 21 to 5 The San Giovanni Bosco bridge is worth 3,15 million Four',
+    'blog.article.verbania-cantieri-allarme-m5s.imageAlt': 'Evening view of a lakeside town with lights reflecting on the water, representing Verbania and its surroundings.',
 };
 
 export default blogMetaEn;

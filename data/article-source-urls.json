@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/carburanti-finiscono-le-risorse-per-lo-sconto-proroga-del-gasolio-fino-a-mercoledi/2662153": {
-    "articleId": "gasolio-sconto-17-centesimi-agosto",
-    "ts": "2026-08-26T12:56:12.217Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1946248/sindacato-attrezzature-dogane-mezzi-formazione": {
     "articleId": "carenze-dogane-sicurezza-ticino",
     "ts": "2026-08-26T18:08:23.011Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1956354/giovani-bissone-scacchi-festival-under": {
     "articleId": "bissone-torneo-scacchi",
     "ts": "2026-10-13T08:19:27.045Z",
+    "keyForm": 2
+  },
+  "https://www.vconews.it/2026/10/13/leggi-notizia/argomenti/verbania/articolo/verbania-allarme-m5s-tre-cantieri-rischiano-di-paralizzare-la-citta.html": {
+    "articleId": "verbania-cantieri-allarme-m5s",
+    "ts": "2026-10-13T08:46:23.540Z",
     "keyForm": 2
   }
 }
