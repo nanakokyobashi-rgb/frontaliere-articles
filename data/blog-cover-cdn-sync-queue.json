@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tunnel-gran-san-bernardo-fotovoltaico.webp",
+      "sha256": "78600ef1b9a218a3acef883d136aa5cf7e42722c348010d106fe7d9f402d5aeb"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tunnel-gran-san-bernardo-fotovoltaico-480w.webp",
+      "sha256": "a35d0e98861f02a69c6565f7682d99dbbd7d8dcd9c2e35522dccd8735f95394b"
+    }
+  ]
 }
