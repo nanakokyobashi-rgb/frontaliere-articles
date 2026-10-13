@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-allarme-bernasconi-artificieri.webp",
+      "sha256": "a39f5e8ec15c13c39b8a602c4f138f7f9b0eb06c4c6b01fe79f599579a3066ca"
+    },
+    {
+      "path": "public/images/blog/article-attacco-frigoriferi-svizzera-rischio.webp",
+      "sha256": "6808bd7a3dc1aeec9b03bf3125fb56bcc8b7b5683bec6b17ea9424723d73f092"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-allarme-bernasconi-artificieri-480w.webp",
+      "sha256": "e2ddf03386214d3860d1c0a482acf066ce0b0b486268424c3f4b365c00cb9580"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-attacco-frigoriferi-svizzera-rischio-480w.webp",
+      "sha256": "d9e340e32bca4b21059a2a6e097fc486c2757d697766220d0fcc4f57acef4368"
+    }
+  ]
 }
