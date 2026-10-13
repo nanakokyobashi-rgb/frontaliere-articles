@@ -8137,7 +8137,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Stabilimento industriale chiuso a Waldstatt, Appenzello Esterno',
     'blog.article.guerra-medio-oriente-benzina-svizzera.title': 'Stangata benzina in Svizzera: quanto costa la guerra',
     'blog.article.guerra-medio-oriente-benzina-svizzera.excerpt': 'Da febbraio la benzina è salita a 2,11 franchi al litro 15\'000 km annui e 6 l/100 km: 423 franchi in più Il cherosene costa il doppio rispetto allo scorso anno',
-    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Prezzo della benzina svizzera a 2,11 franchi al litro',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;

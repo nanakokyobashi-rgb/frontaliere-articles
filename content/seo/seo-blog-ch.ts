@@ -102652,10 +102652,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Da febbraio la benzina è salita a 2,11 franchi al litro 15'000 km annui e 6 l/100 km: 423 franchi in più Il cherosene costa il doppio rispetto allo scorso anno",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/benzina-confine-svizzera-agosto-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-guerra-medio-oriente-benzina-svizzera.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Prezzo della benzina svizzera a 2,11 franchi al litro"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T05:33:34+00:00",
       "dateModified": "2026-10-13T05:33:34+00:00",

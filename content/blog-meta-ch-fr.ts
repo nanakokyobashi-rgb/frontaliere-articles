@@ -8137,7 +8137,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Usine fermée à Waldstatt, Appenzell Rhodes-Extérieures',
     'blog.article.guerra-medio-oriente-benzina-svizzera.title': 'Coup de massue sur l\'essence en Suisse : combien coûte la guerre',
     'blog.article.guerra-medio-oriente-benzina-svizzera.excerpt': 'Depuis février l\'essence est passée à 2,11 francs le litre 15\'000 km par an et 6 l/100 km : 423 francs de plus Le kérosène coûte deux fois plus cher que l\'an dernier',
-    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Prix de l\'essence suisse à 2,11 francs le litre',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;

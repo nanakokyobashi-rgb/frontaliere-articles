@@ -8137,7 +8137,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Closed industrial plant in Waldstatt, Appenzell Ausserrhoden',
     'blog.article.guerra-medio-oriente-benzina-svizzera.title': 'Gasoline price shock in Switzerland: how much does the war cost',
     'blog.article.guerra-medio-oriente-benzina-svizzera.excerpt': 'Since February, gasoline has risen to 2,11 francs per liter 15\'000 km annually and 6 l/100 km: 423 francs more Kerosene costs twice as much as last year',
-    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Swiss gasoline price at 2.11 francs per litre',
+    'blog.article.guerra-medio-oriente-benzina-svizzera.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaChEn;
