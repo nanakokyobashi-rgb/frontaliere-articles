@@ -5,31 +5,11 @@
       "articleId": "fabio-de-luigi-biol-varese",
       "title": "Fabio De Luigi apre la stagione teatrale di Varese",
       "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
-      "reason": "All image providers failed for article-fabio-de-luigi-biol-varese: openai-codex (vision gate rejected image: Generic editorial illustration relevant to theatre and cross-border rail travel, but it includes a prominent foreground person view",
+      "reason": "All image providers failed for article-fabio-de-luigi-biol-varese: openai-codex (vision gate rejected image: Original illustration with a prominent foreground person seen from behind; no readable text, logos, or recognizable face.); gemini ",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-13T00:24:03.070Z",
-      "lastFailureAt": "2026-10-13T06:53:08.386Z"
-    },
-    {
-      "articleId": "incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione",
-      "title": "Incidente all'alba a Brezzo di Bedero: elisoccorso in azione",
-      "fallbackImage": "/images/blog/article-como-pass-auto-rinnovo-annuale.webp",
-      "reason": "All image providers failed for article-incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione: openai-codex (vision gate rejected image: Generic illustrated rescue scene; foreground emergency responders are visibly depicted from behind",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-13T06:23:36.863Z",
-      "lastFailureAt": "2026-10-13T06:54:30.525Z"
-    },
-    {
-      "articleId": "rientro-ticino-salario-fattori",
-      "title": "Rientro in Ticino: il salario non è l'unico fattore decisivo",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-rientro-ticino-salario-fattori: openai-codex (vision gate rejected image: Original editorial illustration relevant to Ticino and commuting, but it contains a recognizable foreground commuter viewed fro",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-13T06:45:42.103Z",
-      "lastFailureAt": "2026-10-13T06:56:07.129Z"
+      "lastFailureAt": "2026-10-13T13:06:01.041Z"
     }
   ]
 }

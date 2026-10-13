@@ -107068,10 +107068,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-como-pass-auto-rinnovo-annuale.webp`,
+        "url": `${BASE_URL}/images/blog/article-incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Immagine editoriale relativa a: Incidente all'alba a Brezzo di Bedero: elisoccorso in azione"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T06:23:36+00:00",
       "dateModified": "2026-10-13T06:23:36+00:00",
@@ -107107,10 +107107,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-rientro-ticino-salario-fattori.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Giovani professionisti al Palazzo dei Congressi di Lugano durante evento sui rientri in Ticino"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T06:45:41+00:00",
       "dateModified": "2026-10-13T06:45:41+00:00",
