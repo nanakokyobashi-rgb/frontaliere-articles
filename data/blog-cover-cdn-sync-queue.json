@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-divario-reddito-donne-uomini-scende-al-14.webp",
+      "sha256": "795f5c55e1e8c6e8670491f53fc89c7a904ddaa61440525bbfaf75ffa83b6bb8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-divario-reddito-donne-uomini-scende-al-14-480w.webp",
+      "sha256": "116eb590d5f1b49c23ec1642995dda3a91b428772e42c4a87a6b0892836b2360"
+    }
+  ]
 }
