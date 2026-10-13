@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-diritto-lavoro-telelavoro-cet-s.webp",
+      "sha256": "fe43da5368ca6e60be60dfc3bfdb8aa01ddec9aef08cd57486ac9bef12f9c48f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-diritto-lavoro-telelavoro-cet-s-480w.webp",
+      "sha256": "d5dcaba83f9cfa2aff8747bb714bb5f2bacc65013a8b8c36385315e3454d06c7"
+    }
+  ]
 }
