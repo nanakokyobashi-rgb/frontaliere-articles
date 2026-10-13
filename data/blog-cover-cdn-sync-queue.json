@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ascend-evonext-quotazione.webp",
-      "sha256": "10a0622a1fd2ce3155ae77a3de4db4d4f38783e971bf891d4aeaa01a1a51d5e9"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ascend-evonext-quotazione-480w.webp",
-      "sha256": "e956e08f70320bdcd459a461a6ffbdcccceb9a3f360c7616ca686bb21634b3ff"
-    }
-  ]
+  "items": []
 }
