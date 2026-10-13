@@ -107088,6 +107088,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rientro-ticino-salario-fattori': {
+    title: 'Rientro in Ticino: il salario non è l\'unico fattore decisivo',
+    description: 'I salari pesano, ma non decidono da soli il rientro. Per un impiego da laureato, salari inferiori del 38% a Zurigo. Più della metà dei partenti rientra entro',
+    keywords: 'frontalieri, ticino, svizzera, italia, rientro, salario, unico, fattore',
+    ogTitle: 'Rientro in Ticino: perché il salario non basta per decidere',
+    ogDescription: 'I salari pesano, ma non decidono da soli il rientro.',
+    canonicalPath: '/articoli-frontaliere/rientro-ticino-salario-fattori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rientro in Ticino: il salario non è l'unico fattore decisivo",
+      "description": "I salari pesano, ma non decidono da soli il rientro. Per un impiego da laureato, salari inferiori del 38% a Zurigo. Più della metà dei partenti rientra entro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovani professionisti al Palazzo dei Congressi di Lugano durante evento sui rientri in Ticino"
+      },
+      "datePublished": "2026-10-13T06:45:41+00:00",
+      "dateModified": "2026-10-13T06:45:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/rientro-ticino-salario-fattori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

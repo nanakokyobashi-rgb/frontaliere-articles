@@ -13106,6 +13106,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.title': 'Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.excerpt': 'Scontro tra due auto sulla statale 69 intorno alle 6 del 13 ottobre; elisoccorso da Como, ambulanze da Luino e Cunardo, code ancora alle 7,30.',
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.imageAlt': 'Immagine editoriale relativa a: Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
+    'blog.article.rientro-ticino-salario-fattori.title': 'Rientro in Ticino: il salario non è l\'unico fattore decisivo',
+    'blog.article.rientro-ticino-salario-fattori.excerpt': 'I salari pesano, ma non decidono da soli il rientro.',
+    'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Giovani professionisti al Palazzo dei Congressi di Lugano durante evento sui rientri in Ticino',
 };
 
 export default blogMetaIt;

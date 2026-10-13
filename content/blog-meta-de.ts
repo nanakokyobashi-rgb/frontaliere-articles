@@ -13104,6 +13104,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.title': 'Unfall im Morgengrauen in Brezzo di Bedero: Rettungshubschrauber im Einsatz',
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.excerpt': 'Zusammenstoß zwischen zwei Autos auf der Staatsstraße 69 gegen 6 Uhr am 13. (Cunardo, Luino, Como)',
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.imageAlt': 'Redaktionelles Bild zu: Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
+    'blog.article.rientro-ticino-salario-fattori.title': 'Rückkehr ins Tessin: Das Gehalt ist nicht der einzige entscheidende Faktor',
+    'blog.article.rientro-ticino-salario-fattori.excerpt': 'Die Gehälter spielen eine Rolle, entscheiden aber nicht allein über die Rückkehr.',
+    'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Junge Berufstätige im Kongresszentrum Lugano bei Veranstaltung über Rückkehr ins Tessin',
 };
 
 export default blogMetaDe;

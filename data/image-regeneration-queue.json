@@ -20,6 +20,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-13T06:23:36.863Z",
       "lastFailureAt": "2026-10-13T06:23:36.863Z"
+    },
+    {
+      "articleId": "rientro-ticino-salario-fattori",
+      "title": "Rientro in Ticino: il salario non è l'unico fattore decisivo",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T06:45:42.103Z",
+      "lastFailureAt": "2026-10-13T06:45:42.103Z"
     }
   ]
 }

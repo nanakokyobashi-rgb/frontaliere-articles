@@ -13107,6 +13107,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.title': 'Accident à l\'aube à Brezzo di Bedero : secours héliportés en action',
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.excerpt': 'Collision entre deux voitures sur la route nationale 69 vers 6 heures le 13 octobre ; secours héliportés depuis Como, ambulances depuis Luino et Cunardo, embouteillages encore à 7,30.',
     'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.imageAlt': 'Image éditoriale relative à: Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
+    'blog.article.rientro-ticino-salario-fattori.title': 'Retour au Tessin : le salaire n\'est pas le seul facteur décisif',
+    'blog.article.rientro-ticino-salario-fattori.excerpt': 'Les salaires comptent, mais ils ne déterminent pas à eux seuls le retour.',
+    'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Jeunes professionnels au Palais des Congrès de Lugano lors d\'un événement sur les retours au Tessin',
 };
 
 export default blogMetaFr;
