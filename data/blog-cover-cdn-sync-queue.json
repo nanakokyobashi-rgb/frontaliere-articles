@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-jazz-concerti-castellanza.webp",
+      "sha256": "ec2699c21322269789cbc5504e761e9ce9f1154c44ab733f56b065d57c085480"
+    },
+    {
+      "path": "public/images/blog/article-rio-scorta-giro-como.webp",
+      "sha256": "31f9d30ba7e452bc9b27fc9095998ffa8f19b2a91abbb9076415ebd848d86a83"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-jazz-concerti-castellanza-480w.webp",
+      "sha256": "d0a3264497480b343de67cef8f8b76f36e663433e784aaa931a56ff0bbc6674f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-rio-scorta-giro-como-480w.webp",
+      "sha256": "53123267760ab7714dc3ca409a7c2feefe47568e664f70b745bdb02f132cc026"
+    }
+  ]
 }
