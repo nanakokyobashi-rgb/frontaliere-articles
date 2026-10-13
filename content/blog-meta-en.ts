@@ -13087,6 +13087,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto wins in Marsala and remains on a perfect score',
     'blog.article.erreci-busto-marsala-vittoria.excerpt': 'Futura Volley Giovani defeat Marsala 0-3, with Šiftar as MVP, and remain top of Serie A2 with a perfect record.',
     'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Erreci Busto Arsizio volleyball match',
+    'blog.article.festival-varese-cavolo-castronno.title': 'Varese, City of Cabbage: the festival presents itself in Castronno',
+    'blog.article.festival-varese-cavolo-castronno.excerpt': 'On October 15 the project will be presented at Castronno Materia hosts culture and a cabbage-themed dinner The festival celebrates Varese brassicas Involved',
+    'blog.article.festival-varese-cavolo-castronno.imageAlt': 'Cabbage Festival in Castronno: gardens and brassicas at the center of the Varesino cultural and gastronomic event.',
 };
 
 export default blogMetaEn;

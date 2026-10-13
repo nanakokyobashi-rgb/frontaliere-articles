@@ -13086,6 +13086,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto gewinnt in Marsala und bleibt mit voller Punktzahl',
     'blog.article.erreci-busto-marsala-vittoria.excerpt': 'Futura Volley Giovani setzt sich in Marsala mit 0-3 durch, mit Šiftar als MVP, und bleibt in der Serie A2 mit voller Punktzahl an der Tabellenspitze.',
     'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Erreci Busto Arsizio Volleyballspiel',
+    'blog.article.festival-varese-cavolo-castronno.title': 'Varese, Stadt des Kohls: Das Festival stellt sich in Castronno vor',
+    'blog.article.festival-varese-cavolo-castronno.excerpt': 'Am 15. Oktober wird das Projekt in Castronno vorgestellt Materia bietet Kultur und ein Abendessen rund um den Kohl Das Festival würdigt die Brassicaceae aus Varese Beteiligt',
+    'blog.article.festival-varese-cavolo-castronno.imageAlt': 'Kohlfestival in Castronno: Gärten und Kreuzblütler im Mittelpunkt des kulturellen und gastronomischen Events.',
 };
 
 export default blogMetaDe;

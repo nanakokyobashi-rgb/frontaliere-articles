@@ -44131,6 +44131,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'festival-varese-cavolo-castronno',
+ category: 'novita',
+ date: '2026-10-13T02:35:00.982Z',
+ image: '/images/blog/article-festival-varese-cavolo-castronno.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

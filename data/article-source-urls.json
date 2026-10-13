@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/08/20/leggi-notizia/argomenti/cronaca-20/articolo/scontro-sulla-strada-dei-frontalieri-tra-varese-e-cantello-due-feriti.html": {
-    "articleId": "incidente-strada-frontalieri-cantello",
-    "ts": "2026-08-20T18:24:33.515Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/08/21/leggi-notizia/argomenti/salute-3/articolo/carenza-di-infermieri-lordine-professionale-di-varese-chiede-interventi-finanziati-e-tempi-certi.html": {
     "articleId": "carenza-infermieri-varese",
     "ts": "2026-08-21T11:44:44.859Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/futura-concreta-e-vincente-a-marsala-le-biancorosse-restano-a-punteggio-pieno/2705077": {
     "articleId": "erreci-busto-marsala-vittoria",
     "ts": "2026-10-13T01:58:40.409Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/varese-che-citta-del-cavolo-il-festival-che-mette-al-centro-orti-fiori-e-ristoratori-si-presenta/2705893": {
+    "articleId": "festival-varese-cavolo-castronno",
+    "ts": "2026-10-13T02:35:01.402Z",
     "keyForm": 2
   }
 }

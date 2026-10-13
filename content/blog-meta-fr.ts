@@ -13089,6 +13089,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto s\'impose à Marsala et reste à plein de points',
     'blog.article.erreci-busto-marsala-vittoria.excerpt': 'La Futura Volley Giovani s\'impose à Marsala sur le score de 0-3 avec Šiftar MVP et reste en tête avec le maximum de points en Serie A2.',
     'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Match de volley-ball de l\'Erreci Busto Arsizio',
+    'blog.article.festival-varese-cavolo-castronno.title': 'Varese, ville du chou : le festival se présente à Castronno',
+    'blog.article.festival-varese-cavolo-castronno.excerpt': 'Le 15 octobre, le projet sera présenté à Castronno Materia accueille la culture et un dîner sur le thème du chou Le festival met en valeur les brassicacées de Varese Impliqués',
+    'blog.article.festival-varese-cavolo-castronno.imageAlt': 'Festival du chou à Castronno : jardins et brassicacées au centre de l\'événement culturel et gastronomique.',
 };
 
 export default blogMetaFr;

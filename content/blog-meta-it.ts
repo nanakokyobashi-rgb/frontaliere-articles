@@ -13088,6 +13088,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.erreci-busto-marsala-vittoria.title': 'Erreci Busto vince a Marsala e resta a punteggio pieno',
     'blog.article.erreci-busto-marsala-vittoria.excerpt': 'La Futura Volley Giovani conquista Marsala per 0-3 con Šiftar MVP e resta in vetta a punteggio pieno in Serie A2.',
     'blog.article.erreci-busto-marsala-vittoria.imageAlt': 'Partita di pallavolo della Erreci Busto Arsizio',
+    'blog.article.festival-varese-cavolo-castronno.title': 'Varese città del Cavolo: il festival si presenta a Castronno',
+    'blog.article.festival-varese-cavolo-castronno.excerpt': 'Il 15 ottobre il progetto sarà presentato a Castronno Materia ospita cultura e cena a tema cavolo Il festival valorizza le brassicacee varesine Coinvolti',
+    'blog.article.festival-varese-cavolo-castronno.imageAlt': 'Festival del cavolo a Castronno: orti e brassicacee al centro dell\'evento culturale e gastronomico varesino.',
 };
 
 export default blogMetaIt;
