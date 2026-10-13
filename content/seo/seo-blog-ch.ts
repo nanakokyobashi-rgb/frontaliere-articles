@@ -103062,6 +103062,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-limitazione-fuochi-artificio': {
+    title: 'Fuochi d\'artificio: iniziativa per limitarne l\'uso',
+    description: 'Il voto federale è previsto il 29 novembre Lo slogan è «Non tutti festeggiano» In Svizzera: 1\'300 tonnellate di rifiuti annui La Suva registra 260 infortuni',
+    keywords: 'frontalieri, ticino, svizzera, italia, fuochi, artificio, iniziativa, limitarne',
+    ogTitle: 'Fuochi d\'artificio: iniziativa per limitarne l\'uso',
+    ogDescription: 'Il voto federale è previsto il 29 novembre Lo slogan è «Non tutti festeggiano» In Svizzera: 1\'300 tonnellate di rifiuti annui La Suva registra 260 infortuni',
+    canonicalPath: '/articoli-svizzera/iniziativa-limitazione-fuochi-artificio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fuochi d'artificio: iniziativa per limitarne l'uso",
+      "description": "Il voto federale è previsto il 29 novembre Lo slogan è «Non tutti festeggiano» In Svizzera: 1'300 tonnellate di rifiuti annui La Suva registra 260 infortuni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/voto-iniziativa-alimentazione-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio rurale svizzero con prati e villaggio"
+      },
+      "datePublished": "2026-10-13T15:24:22+00:00",
+      "dateModified": "2026-10-13T15:24:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-limitazione-fuochi-artificio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

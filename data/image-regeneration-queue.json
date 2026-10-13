@@ -30,6 +30,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T14:39:37.817Z",
       "lastFailureAt": "2026-10-13T14:46:51.849Z"
+    },
+    {
+      "articleId": "iniziativa-limitazione-fuochi-artificio",
+      "title": "Fuochi d'artificio: iniziativa per limitarne l'uso",
+      "fallbackImage": "/images/blog/voto-iniziativa-alimentazione-svizzera.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T15:24:22.881Z",
+      "lastFailureAt": "2026-10-13T15:24:22.881Z"
     }
   ]
 }

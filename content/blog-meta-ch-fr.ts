@@ -8168,6 +8168,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.referendum-mercosur-firme-berna.title': 'Mercosur, lancement de la collecte de signatures pour le référendum',
     'blog.article.referendum-mercosur-firme-berna.excerpt': 'Une large alliance a lancé la collecte de signatures pour le référendum Les opposants ont pris la parole mardi après-midi à Berne Forêt amazonienne, droits humains',
     'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Collecte de signatures en Suisse contre l\'accord de libre-échange avec le Mercosur',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Feux d’artifice : initiative visant à en limiter l’usage',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'La votation fédérale est prévue le 29 novembre Le slogan est « Tout le monde ne fait pas la fête » En Suisse : 1\'300 tonnes de déchets par an La Suva enregistre 260 accidents',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Paysage rural suisse avec prairies et village',
 };
 
 export default blogMetaChFr;

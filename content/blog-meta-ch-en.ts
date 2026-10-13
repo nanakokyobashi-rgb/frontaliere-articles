@@ -8168,6 +8168,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.referendum-mercosur-firme-berna.title': 'Mercosur, signature collection launched for the referendum',
     'blog.article.referendum-mercosur-firme-berna.excerpt': 'A broad alliance has launched the signature collection for the referendum Opponents spoke Tuesday afternoon in Bern Amazon rainforest, human rights',
     'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Signature collection in Switzerland against the Mercosur free trade agreement',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Fireworks: initiative to limit their use',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'The federal vote is scheduled for November 29 The slogan is «Not everyone celebrates» In Switzerland: 1\'300 tonnes of waste per year Suva records 260 accidents',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Swiss rural landscape with meadows and village',
 };
 
 export default blogMetaChEn;

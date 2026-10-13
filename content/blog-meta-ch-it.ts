@@ -8168,6 +8168,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.referendum-mercosur-firme-berna.title': 'Mercosur, lanciata la raccolta firme per il referendum',
     'blog.article.referendum-mercosur-firme-berna.excerpt': 'Un\'ampia alleanza ha lanciato la raccolta firme per il referendum Gli oppositori hanno parlato martedì pomeriggio a Berna Foresta amazzonica, diritti umani',
     'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Raccolta firme in Svizzera contro l\'accordo di libero scambio con il Mercosur',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.title': 'Fuochi d\'artificio: iniziativa per limitarne l\'uso',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.excerpt': 'Il voto federale è previsto il 29 novembre Lo slogan è «Non tutti festeggiano» In Svizzera: 1\'300 tonnellate di rifiuti annui La Suva registra 260 infortuni',
+    'blog.article.iniziativa-limitazione-fuochi-artificio.imageAlt': 'Paesaggio rurale svizzero con prati e villaggio',
 };
 
 export default blogMetaChIt;

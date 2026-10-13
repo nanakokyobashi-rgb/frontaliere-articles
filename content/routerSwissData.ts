@@ -2745,6 +2745,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'formulario-averi-iran-ottobre': { it: 'formulario-averi-iran-ottobre', en: 'iran-asset-transfer-form', de: 'iran-formular-vermoegensuebertragung', fr: 'formulaire-avoirs-iran-octobre' },
  'voto-matrimonio-tassazione-coppie': { it: 'voto-matrimonio-tassazione-coppie', en: 'swiss-marriage-tax-vote', de: 'schweiz-ehe-steuer-abstimmung', fr: 'vote-suisse-impot-mariage' },
  'referendum-mercosur-firme-berna': { it: 'referendum-mercosur-firme-berna', en: 'mercosur-referendum-signatures-bern', de: 'mercosur-referendum-unterschriften-bern', fr: 'referendum-mercosur-signatures-berne' },
+ 'iniziativa-limitazione-fuochi-artificio': { it: 'iniziativa-limitazione-fuochi-artificio', en: 'initiative-fireworks-limitation-switzerland', de: 'initiative-feuerwerk-beschrankung-schweiz', fr: 'initiative-limitation-feux-artifice-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
