@@ -13133,6 +13133,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-13.imageAlt': 'Les chiffres du jour pour les frontaliers – 13 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-10-13.seoDescription': 'Bulletin du frontalier du 13 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-13.ogDescription': 'Les chiffres du 13 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.zaino-sospetto-chiasso.title': 'Sac à dos suspect à Chiasso : fausse alerte',
+    'blog.article.zaino-sospetto-chiasso.excerpt': 'Alerte déclenchée peu après 12.30 à Chiasso Objets suspects signalés sur la piazza Bernasconi Démineurs : les objets ne constituaient pas un danger Dispositif',
+    'blog.article.zaino-sospetto-chiasso.imageAlt': 'Zone isolée à Chiasso après l\'alerte liée à un sac à dos suspect près du Palazzo Mercurio',
 };
 
 export default blogMetaFr;

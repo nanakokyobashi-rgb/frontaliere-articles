@@ -13130,6 +13130,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-13.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 13. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-13.seoDescription': 'Grenzgänger-Bulletin vom 13. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-13.ogDescription': 'Die Zahlen vom 13. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.zaino-sospetto-chiasso.title': 'Verdächtiger Rucksack in Chiasso: Fehlalarm',
+    'blog.article.zaino-sospetto-chiasso.excerpt': 'Alarm kurz nach 12.30 Uhr in Chiasso ausgelöst Verdächtige Gegenstände auf der Piazza Bernasconi gemeldet Bombenentschärfer: Die Gegenstände stellten keine Gefahr dar Dispositiv',
+    'blog.article.zaino-sospetto-chiasso.imageAlt': 'Abgesperrter Bereich in Chiasso nach Alarm wegen eines verdächtigen Rucksacks nahe Palazzo Mercurio',
 };
 
 export default blogMetaDe;

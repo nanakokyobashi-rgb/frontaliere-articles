@@ -13131,6 +13131,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-13.imageAlt': 'The day\'s numbers for cross-border commuters – October 13, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-13.seoDescription': 'Cross-border brief, October 13, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-13.ogDescription': 'The numbers for October 13, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.zaino-sospetto-chiasso.title': 'Suspicious backpack in Chiasso: false alarm',
+    'blog.article.zaino-sospetto-chiasso.excerpt': 'Alarm triggered shortly after 12:30 in Chiasso Suspicious objects reported in Piazza Bernasconi Bomb disposal experts: the objects did not pose a danger Device',
+    'blog.article.zaino-sospetto-chiasso.imageAlt': 'Isolated area in Chiasso after an alarm over a suspicious backpack near Palazzo Mercurio',
 };
 
 export default blogMetaEn;

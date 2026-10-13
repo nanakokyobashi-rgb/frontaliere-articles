@@ -44275,6 +44275,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'zaino-sospetto-chiasso',
+ category: 'novita',
+ date: '2026-10-13T12:58:47.737Z',
+ image: '/images/blog/article-zaino-sospetto-chiasso.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
