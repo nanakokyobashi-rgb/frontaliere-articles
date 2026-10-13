@@ -8164,7 +8164,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.formulario-averi-iran-ottobre.imageAlt': 'Formulaire actualisé pour les transferts d\'avoirs selon l\'ordonnance sur l\'Iran',
     'blog.article.voto-matrimonio-tassazione-coppie.title': 'Mariage, le Gouvernement contre l\'initiative du Centre',
     'blog.article.voto-matrimonio-tassazione-coppie.excerpt': 'Le Conseil fédéral et le Parlement demandent de rejeter le texte Le vote sur l\'initiative est fixé au 29 novembre Le texte concerne l\'impôt fédéral',
-    'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Couple suisse examinant des documents sur l\'impôt fédéral direct',
+    'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Illustration générée pour cet article',
     'blog.article.referendum-mercosur-firme-berna.title': 'Mercosur, lancement de la collecte de signatures pour le référendum',
     'blog.article.referendum-mercosur-firme-berna.excerpt': 'Une large alliance a lancé la collecte de signatures pour le référendum Les opposants ont pris la parole mardi après-midi à Berne Forêt amazonienne, droits humains',
     'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Collecte de signatures en Suisse contre l\'accord de libre-échange avec le Mercosur',

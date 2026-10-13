@@ -103003,10 +103003,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Consiglio federale e il Parlamento chiedono di respingere il testo Il voto sull'iniziativa è fissato al 29 novembre Il testo riguarda l'imposta federale",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/consiglio-federale-no-iniziativa-finanziaria.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-matrimonio-tassazione-coppie.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Coppia svizzera esamina documenti sull'imposta federale diretta"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T14:05:29+00:00",
       "dateModified": "2026-10-13T14:05:29+00:00",

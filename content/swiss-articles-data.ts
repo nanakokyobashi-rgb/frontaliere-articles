@@ -27244,7 +27244,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'voto-matrimonio-tassazione-coppie',
     category: 'fiscale',
     date: '2026-10-13T14:05:29.355Z',
-    image: '/images/blog/consiglio-federale-no-iniziativa-finanziaria.webp',
+    image: '/images/blog/article-voto-matrimonio-tassazione-coppie.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'marco-ferrari',

@@ -12,16 +12,6 @@
       "lastFailureAt": "2026-10-13T19:36:20.177Z"
     },
     {
-      "articleId": "voto-matrimonio-tassazione-coppie",
-      "title": "Matrimonio, il Governo contro l'iniziativa del Centro",
-      "fallbackImage": "/images/blog/consiglio-federale-no-iniziativa-finanziaria.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 1,
-      "requestedAt": "2026-10-13T14:05:29.730Z",
-      "lastFailureAt": "2026-10-13T14:31:27.172Z"
-    },
-    {
       "articleId": "allarme-bernasconi-artificieri",
       "title": "Chiasso, zaino sospetto: banca evacuata, nessun pericolo",
       "fallbackImage": "/images/places/lugano-view.webp",
