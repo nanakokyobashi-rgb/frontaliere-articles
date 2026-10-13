@@ -102306,10 +102306,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-benu-rete-santanna-sanita.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Farmacia ticinese Benu collegata alla Rete Sant'Anna di Swiss Medical Network"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-12T21:32:17+00:00",
       "dateModified": "2026-10-12T21:32:17+00:00",

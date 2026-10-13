@@ -8110,7 +8110,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-mirino-007-stranieri.imageAlt': 'Realistic view of Lugano lake and Alps, discreet figure with notebook suggesting intelligence activity',
     'blog.article.benu-rete-santanna-sanita.title': 'Swiss medical network and phoenix pharma: alliance in Ticino',
     'blog.article.benu-rete-santanna-sanita.excerpt': 'Swiss Medical Network partners with Phoenix Pharma Switzerland Benu will join the Sant\'Anna Network in Ticino With Viva, people will be able to turn to Benu for four services',
-    'blog.article.benu-rete-santanna-sanita.imageAlt': 'Ticino Benu pharmacy joining Swiss Medical Network\'s Sant\'Anna network',
+    'blog.article.benu-rete-santanna-sanita.imageAlt': 'Illustration generated for this article',
     'blog.article.ia-pubblica-amministrazione-ticino.title': 'AI in Ticino’s public administration: innovation or digitized problems?',
     'blog.article.ia-pubblica-amministrazione-ticino.excerpt': 'Ticino combines advanced research and slow bureaucracy USI and SUPSI are points of reference for the Canton Ticino talent looks to the Federal Institutes of Technology AI',
     'blog.article.ia-pubblica-amministrazione-ticino.imageAlt': 'Government building in Bellinzona with digital elements symbolizing AI in public administration',

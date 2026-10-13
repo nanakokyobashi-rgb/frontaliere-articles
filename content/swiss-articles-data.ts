@@ -27061,7 +27061,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'benu-rete-santanna-sanita',
     category: 'novita',
     date: '2026-10-12T21:32:17.379Z',
-    image: '/images/places/lugano-view.webp',
+    image: '/images/blog/article-benu-rete-santanna-sanita.webp',
     hasCalculator: true,
     articleType: 'news',
     canton: ['TI'],

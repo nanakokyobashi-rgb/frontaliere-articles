@@ -2,16 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "benu-rete-santanna-sanita",
-      "title": "Swiss medical network e phoenix pharma: alleanza in Ticino",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "failed",
-      "failureCount": 2,
-      "requestedAt": "2026-10-12T21:32:17.757Z",
-      "lastFailureAt": "2026-10-13T04:01:06.542Z"
-    },
-    {
       "articleId": "fabio-de-luigi-biol-varese",
       "title": "Fabio De Luigi apre la stagione teatrale di Varese",
       "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
