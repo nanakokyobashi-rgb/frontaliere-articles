@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-voto-matrimonio-tassazione-coppie.webp",
-      "sha256": "aa57a3138e5f88ad7ccc070850e1aec6a6348c5e67ba7130c1608cf4e2a9bb9e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-voto-matrimonio-tassazione-coppie-480w.webp",
-      "sha256": "3abf4811b7b1f5535b3fd2cbd8f1e65be94d0b1632b3e806b81c70b0bb83ca38"
-    }
-  ]
+  "items": []
 }
