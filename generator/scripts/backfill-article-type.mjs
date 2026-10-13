@@ -26,6 +26,7 @@ import {
   readRegistryEntries,
   registryArticleTypeForRun,
 } from './lib/registry-article-type.mjs';
+import { parseSourceCitations } from './lib/canton-news-sources.mjs';
 import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
 
@@ -109,9 +110,6 @@ export const SECTIONS = Object.freeze({
   },
 });
 
-const CITATION_RE = /\*Fonte:\s*\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\*/gu;
-const TAIL_CITATION_RE = /\n\n\*Fonte:\s*\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\*$/u;
-
 function normalizedHostname(url) {
   try {
     return new URL(url).hostname.replace(/^www\./u, '');
@@ -140,11 +138,11 @@ function normalizedHostname(url) {
  */
 export function articleTypeFromItalianBody(body3) {
   const body = String(body3 || '').trimEnd();
-  const tail = body.match(TAIL_CITATION_RE);
-  if (!tail) return undefined;
-  const citations = [...body.matchAll(CITATION_RE)];
+  const citations = parseSourceCitations(body);
   if (citations.length !== 1) return undefined;
-  const [, label, url] = tail;
+  const [citation] = citations;
+  if (citation.end !== body.length || !body.slice(0, citation.start).endsWith('\n\n')) return undefined;
+  const { label, url } = citation;
   const domain = normalizedHostname(url);
   if (!domain || label !== domain) return undefined;
   // L'etichetta di telemetria della run non e' nel corpus; `undefined` e' il

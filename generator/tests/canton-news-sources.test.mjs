@@ -45,10 +45,12 @@ import {
   feedItemDocuments,
   filterArticleLinks,
   isoWeekOf,
+  parseSourceCitations,
   parseDottedDate,
   periodSitemapUrls,
   scanCantonSource,
   sourceRequestBudget,
+  stripSourceCitations,
   stripPageChrome,
 } from '../scripts/lib/canton-news-sources.mjs';
 import { itemIdentityOf, newsUrlKey, stripItemIdentity } from '../scripts/lib/source-url-ledger.mjs';
@@ -694,6 +696,19 @@ test('html-links: la data YYMMDD nel path delle card newsBox non finisce nel sec
   assert.equal(out.headlines[0].date.getDate(), 29);
 });
 
+test('html-links: estrae YYMMDD dal segmento finale seguito da slash', async () => {
+  const url = 'https://spitaeler-sh.ch/News/';
+  const html = '<main><div class="newsBox"><div class="text"><h2>Neuer Leiter Unternehmensbereich Medizinische Plattformen</h2><a href="/News/eintraege/260929-Neuer-Leiter-Unternehmensbereich-Medizinische-Plattformen/">MEHR ERFAHREN</a></div></div></main>';
+  const source = { url, parser: 'html-links', language: 'de', quirks: { articlePathPattern: '^/News/eintraege/', urlDateFormat: 'YYMMDD' } };
+  const { impl } = fakeFetch({ [url]: { body: html, contentType: 'text/html' } });
+  const out = await scanCantonSource(source, ctx(impl));
+  assert.equal(out.headlines.length, 1);
+  assert.ok(out.headlines[0].date instanceof Date, 'la data nel segmento YYMMDD non deve restare undated');
+  assert.equal(out.headlines[0].date.getFullYear(), 2026);
+  assert.equal(out.headlines[0].date.getMonth(), 8);
+  assert.equal(out.headlines[0].date.getDate(), 29);
+});
+
 test('html-links: Radio Munot legge titolo da title e publishDate dal page-state nonostante lo script rimosso', async () => {
   const url = 'https://www.radiomunot.ch/';
   const headline = 'Neues Polizeiboot seit über einem Jahr im Einsatz';
@@ -869,6 +884,40 @@ test('html-links: una data evento nel corpo non sostituisce la data h4 della car
   assert.equal(out.headlines[0].date.getFullYear(), 2026);
   assert.equal(out.headlines[0].date.getMonth(), 4);
   assert.equal(out.headlines[0].date.getDate(), 11);
+});
+
+test('html-links: le date h4 restano associate alla sezione annidata che le dichiara', () => {
+  const url = 'https://neuhausen.example/aktuelles';
+  const html = '<section class="outer"><h4>11.05.2026</h4><a href="/news/outer">Mitwirkung zum Angebotskonzept erfolgreich abgeschlossen</a><section class="inner"><h4>14.05.2026</h4><a href="/news/inner">Gemeinde informiert über wichtige neue Verkehrsmassnahmen</a></section></section>';
+  const source = { quirks: { dateFromSectionHeading: 'h4' } };
+  const items = extractHeadlines(html, url, source);
+  assert.equal(items.length, 2);
+  assert.equal(items[0].date?.getFullYear(), 2026);
+  assert.equal(items[0].date?.getMonth(), 4);
+  assert.equal(items[0].date?.getDate(), 11);
+  assert.equal(items[1].date?.getFullYear(), 2026);
+  assert.equal(items[1].date?.getMonth(), 4);
+  assert.equal(items[1].date?.getDate(), 14);
+});
+
+test('html-links: una URL ripetuta conserva la data della sezione piu\u0300 interna', () => {
+  const url = 'https://neuhausen.example/aktuelles';
+  const html = '<section class="outer"><h4>11.05.2026</h4><section class="inner"><h4>14.05.2026</h4><a href="/news/shared">Gemeinde informiert über wichtige neue Verkehrsmassnahmen</a></section><a href="/news/shared">Gemeinde informiert über wichtige neue Verkehrsmassnahmen</a></section>';
+  const source = { quirks: { dateFromSectionHeading: 'h4' } };
+  const items = extractHeadlines(html, url, source);
+  assert.equal(items.length, 1);
+  assert.equal(items[0].date?.getFullYear(), 2026);
+  assert.equal(items[0].date?.getMonth(), 4);
+  assert.equal(items[0].date?.getDate(), 14);
+});
+
+test('le citazioni Fonte condividono parser bilanciato e stripper', () => {
+  const body = String.raw`Testo.
+
+*Fonte: [example.com](https://example.com/articolo\(completo\).html)*`;
+  const [citation] = parseSourceCitations(body);
+  assert.equal(citation.url, 'https://example.com/articolo(completo).html');
+  assert.equal(stripSourceCitations(body, { requireParagraphBreak: true }), 'Testo.');
 });
 
 test('html-links: i landmark interni restano contenuto, la navigazione resta esclusa', () => {
