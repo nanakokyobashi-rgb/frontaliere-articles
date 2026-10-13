@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-parlamento-svizzero-portale-guida.webp",
+      "sha256": "bb55a3cd70acc1bbc10381092a64ca39863cbbe0445c7378394b31c4f98665a2"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-parlamento-svizzero-portale-guida-480w.webp",
+      "sha256": "6ad2dcc337d4cae3488b2ea90a7d51adcd99993d22911b76498344252f71a7a2"
+    }
+  ]
 }
