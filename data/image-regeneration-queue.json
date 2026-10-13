@@ -25,11 +25,11 @@
       "articleId": "allarme-bernasconi-artificieri",
       "title": "Chiasso, zaino sospetto: banca evacuata, nessun pericolo",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-allarme-bernasconi-artificieri: openai-codex (vision gate rejected image: Generic editorial illustration of a transit square with a cordoned suspicious backpack; recognizable foreground people are pres",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-13T14:39:37.817Z",
-      "lastFailureAt": "2026-10-13T14:39:37.817Z"
+      "lastFailureAt": "2026-10-13T14:46:51.849Z"
     }
   ]
 }
