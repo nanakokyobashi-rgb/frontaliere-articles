@@ -126,8 +126,8 @@ test('il watcher ritenta una lettura transitoria prima di classificare la run', 
     readRun: async () => {
       observations += 1;
       if (observations === 1) throw new Error('jobs are not visible yet');
-      if (observations === 2) return { status: 'queued', conclusion: null, jobs: [] };
-      return { status: 'completed', conclusion: 'success', jobs: [{ conclusion: 'success' }] };
+      if (observations === 2) return { status: 'queued', conclusion: null };
+      return { status: 'completed', conclusion: 'success' };
     },
     sleepFor: async (ms) => {
       sleeps.push(ms);
@@ -147,7 +147,7 @@ test('il watcher segnala solo una conclusione terminale negativa come fallimento
     runId: '123',
     deadlineAt: 10_000,
     now: () => 0,
-    readRun: async () => ({ status: 'completed', conclusion: 'failure', jobs: [] }),
+    readRun: async () => ({ status: 'completed', conclusion: 'failure' }),
     sleepFor: async () => assert.fail('non deve attendere una run già conclusa'),
   });
 

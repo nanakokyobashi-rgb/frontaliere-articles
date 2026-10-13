@@ -274,7 +274,7 @@ async function readPublisherRun({ repo, runId, token, deadlineAt, now = Date.now
   const output = await runGh([
     'run', 'view', runId,
     '--repo', repo,
-    '--json', 'status,conclusion,jobs',
+    '--json', 'status,conclusion',
   ], { token, deadlineAt, now });
   try {
     return JSON.parse(output || '{}');
