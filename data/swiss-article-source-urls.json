@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1948678/svizzera-media-punti-ocse-giovani-matematica-lettura-risultati-prestazioni-scienze": {
-    "articleId": "studenti-svizzeri-lettura-pisa-2025",
-    "ts": "2026-09-08T11:37:33.137Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/1mie201yrzoa": {
     "articleId": "bollette-26-centesimi-2027",
     "ts": "2026-09-08T11:56:17.568Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/aumento-dei-tassi-ipotecari-nel-terzo-trimestre/92206194": {
     "articleId": "aumento-tassi-ipotecari-q3",
     "ts": "2026-10-13T07:05:25.132Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956358/fatture-suva-franchi-controlli-prestazioni": {
+    "articleId": "suva-fatture-controlli-risparmio",
+    "ts": "2026-10-13T07:33:06.414Z",
     "keyForm": 2
   }
 }

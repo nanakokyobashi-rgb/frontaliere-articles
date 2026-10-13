@@ -8144,6 +8144,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.aumento-tassi-ipotecari-q3.title': 'Anstieg der Hypothekarzinsen im dritten Quartal 2024',
     'blog.article.aumento-tassi-ipotecari-q3.excerpt': 'Die Kosten für Hypotheken sind im dritten Quartal gestiegen.',
     'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Schweizer Haus mit Hypothekenvertrag auf Tisch und Alpen im Hintergrund',
+    'blog.article.suva-fatture-controlli-risparmio.title': 'Suva: 123 Millionen bei den Rechnungen eingespart',
+    'blog.article.suva-fatture-controlli-risparmio.excerpt': 'Suva hat 2025 123 Millionen eingespart Kontrolliert wurden etwa 2,9 Millionen Rechnungen 297\'000 Rechnungen enthielten Fehler oder Ungenauigkeiten Ohne die Kontrollen, durchschnittliche Prämien',
+    'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Suva prüft medizinische und therapeutische Rechnungen',
 };
 
 export default blogMetaChDe;

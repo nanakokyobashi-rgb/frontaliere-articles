@@ -8144,6 +8144,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aumento-tassi-ipotecari-q3.title': 'Increase in mortgage rates in the third quarter of 2024',
     'blog.article.aumento-tassi-ipotecari-q3.excerpt': 'The cost of mortgages rose in the third quarter.',
     'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Swiss house with mortgage document on table and Alps in the background',
+    'blog.article.suva-fatture-controlli-risparmio.title': 'Suva: 123 million saved on bills',
+    'blog.article.suva-fatture-controlli-risparmio.excerpt': 'Suva saved 123 million in 2025 Approximately 2,9 million invoices checked 297\'000 invoices had errors or inaccuracies Without the checks, average premiums',
+    'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Suva checks medical and therapy invoices',
 };
 
 export default blogMetaChEn;

@@ -102755,6 +102755,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-suva-fatture-controlli-risparmio': {
+    title: 'Suva: 123 milioni risparmiati sulle fatture | Frontaliere Ticino',
+    description: 'Suva ha risparmiato 123 milioni nel 2025 Controllate circa 2,9 milioni di fatture 297\'000 fatture avevano errori o imprecisioni Senza i controlli, premi medi',
+    keywords: 'frontalieri, ticino, svizzera, italia, suva, milioni, risparmiati, sulle',
+    ogTitle: 'Suva: controlli sulle fatture e risparmio nel 2025',
+    ogDescription: 'Suva ha risparmiato 123 milioni nel 2025 Controllate circa 2,9 milioni di fatture 297\'000 fatture avevano errori o imprecisioni Senza i controlli, premi medi',
+    canonicalPath: '/articoli-svizzera/suva-fatture-controlli-risparmio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Suva: 123 milioni risparmiati sulle fatture",
+      "description": "Suva ha risparmiato 123 milioni nel 2025 Controllate circa 2,9 milioni di fatture 297'000 fatture avevano errori o imprecisioni Senza i controlli, premi medi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Controlli Suva su fatture mediche e terapeutiche"
+      },
+      "datePublished": "2026-10-13T07:33:06+00:00",
+      "dateModified": "2026-10-13T07:33:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/suva-fatture-controlli-risparmio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
