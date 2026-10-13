@@ -235,16 +235,16 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
  },
 
  'blog-franco-forte-stipendio-frontalieri': {
- title: 'Franco Forte: Impatto sul Stipendio | Frontaliere Ticino',
+ title: 'Franco forte: impatto EUR/CHF sullo stipendio dei frontalieri | Frontaliere Ticino',
  description: 'Il franco svizzero si rafforza sull\'euro: scopri come il tasso di cambio CHF-EUR incide sullo stipendio netto dei frontalieri in Ticino.',
  keywords: 'franco forte, cambio CHF EUR, stipendio frontalieri, tasso cambio 2026, franco svizzero euro, frontalieri ticino stipendio, conversione franchi euro',
- ogTitle: 'Franco Forte: Come Cambia lo Stipendio dei Frontalieri',
+ ogTitle: 'Franco forte: impatto EUR/CHF sullo stipendio dei frontalieri',
  ogDescription: 'Il CHF si rafforza: effetti diretti sullo stipendio netto dei frontalieri. Calcola l\'impatto con il simulatore.',
  canonicalPath: '/articoli-frontaliere/franco-forte-effetti-stipendio-frontalieri/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
- "headline": "Franco forte: come il cambio CHF-EUR incide sullo stipendio dei frontalieri",
+ "headline": "Franco forte: impatto EUR/CHF sullo stipendio dei frontalieri",
  "description": "Il franco svizzero continua a rafforzarsi sull'euro. Per i frontalieri che spendono in Italia, il tasso di cambio può valere centinaia di euro in più o in meno al mese.",
  "image": { "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/places/lac-lugano.webp`, "width": 1344, "height": 756, "caption": "Veduta del lago di Lugano con le montagne, simbolo del franco forte e del lavoro frontaliero." },
  "datePublished": "2026-02-18T00:00:00+01:00",

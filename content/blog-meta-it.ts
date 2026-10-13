@@ -26,7 +26,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.casa-oltre-confine-ticino.title': 'Comprare casa in Italia: quando il Ticino è troppo caro',
  'blog.article.casa-oltre-confine-ticino.excerpt': 'Sempre più residenti ticinesi, soprattutto giovani famiglie, si trasferiscono nelle zone di confine italiane per acquistare casa, diventando pendolari transfrontalieri.',
  'blog.article.casa-oltre-confine-ticino.imageAlt': 'Veduta del borgo di Gandria sul lago di Lugano, meta ideale per chi cerca casa oltre confine.',
- 'blog.article.franco-forte-stipendio-frontalieri.title': 'Franco forte: come il cambio CHF-EUR incide sullo stipendio dei frontalieri',
+ 'blog.article.franco-forte-stipendio-frontalieri.title': 'Franco forte: impatto EUR/CHF sullo stipendio dei frontalieri',
  'blog.article.franco-forte-stipendio-frontalieri.excerpt': 'Il franco svizzero continua a rafforzarsi sull\'euro. Per i frontalieri che spendono in Italia, il tasso di cambio può valere centinaia di euro in più o in meno al mese.',
  'blog.article.franco-forte-stipendio-frontalieri.imageAlt': 'Veduta del lago di Lugano con le montagne, simbolo del franco forte e del lavoro frontaliero.',
  'blog.article.cu-2026-novita-frontalieri.title': 'CU 2026: Scadenze e Telelavoro per Frontalieri',
