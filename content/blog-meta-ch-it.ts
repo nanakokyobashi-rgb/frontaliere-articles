@@ -8146,7 +8146,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Casa svizzera con documento di mutuo sul tavolo e Alpi sullo sfondo',
     'blog.article.suva-fatture-controlli-risparmio.title': 'Suva: 123 milioni risparmiati sulle fatture',
     'blog.article.suva-fatture-controlli-risparmio.excerpt': 'Suva ha risparmiato 123 milioni nel 2025 Controllate circa 2,9 milioni di fatture 297\'000 fatture avevano errori o imprecisioni Senza i controlli, premi medi',
-    'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Controlli Suva su fatture mediche e terapeutiche',
+    'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaChIt;

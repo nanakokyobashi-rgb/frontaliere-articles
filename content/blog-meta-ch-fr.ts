@@ -8146,7 +8146,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Maison suisse avec document de hypothèque sur table et Alpes en arrière-plan',
     'blog.article.suva-fatture-controlli-risparmio.title': 'Suva : 123 millions économisés sur les factures',
     'blog.article.suva-fatture-controlli-risparmio.excerpt': 'Suva a économisé 123 millions en 2025 Environ 2,9 millions de factures contrôlées 297\'000 factures comportaient des erreurs ou des imprécisions Sans les contrôles, primes moyennes',
-    'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Suva contrôle des factures médicales et thérapeutiques',
+    'blog.article.suva-fatture-controlli-risparmio.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaChFr;

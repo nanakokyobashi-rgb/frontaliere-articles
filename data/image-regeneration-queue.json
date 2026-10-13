@@ -30,16 +30,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T06:45:42.103Z",
       "lastFailureAt": "2026-10-13T06:56:07.129Z"
-    },
-    {
-      "articleId": "suva-fatture-controlli-risparmio",
-      "title": "Suva: 123 milioni risparmiati sulle fatture",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-suva-fatture-controlli-risparmio: openai-codex (vision gate rejected image: Generic generated editorial illustration relevant to Swiss insura",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-13T07:33:06.412Z",
-      "lastFailureAt": "2026-10-13T07:33:06.412Z"
     }
   ]
 }
