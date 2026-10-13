@@ -44183,6 +44183,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione',
+ category: 'novita',
+ date: '2026-10-13T06:23:36.431Z',
+ image: '/images/blog/article-como-pass-auto-rinnovo-annuale.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

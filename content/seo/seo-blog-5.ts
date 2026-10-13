@@ -107049,6 +107049,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione': {
+    title: 'Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
+    description: 'Scontro tra due auto sulla statale 69 intorno alle 6 del 13 ottobre; elisoccorso da Como, ambulanze da Luino e Cunardo, code ancora alle 7,30.',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, alba, brezzo, bedero',
+    ogTitle: 'Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
+    ogDescription: 'Scontro tra due auto sulla statale 69 intorno alle 6 del 13 ottobre; elisoccorso da Como, ambulanze da Luino e Cunardo, code ancora alle 7,30.',
+    canonicalPath: '/articoli-frontaliere/incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente all'alba a Brezzo di Bedero: elisoccorso in azione",
+      "description": "Scontro tra due auto sulla statale 69 intorno alle 6 del 13 ottobre; elisoccorso da Como, ambulanze da Luino e Cunardo, code ancora alle 7,30.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-pass-auto-rinnovo-annuale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Incidente all'alba a Brezzo di Bedero: elisoccorso in azione"
+      },
+      "datePublished": "2026-10-13T06:23:36+00:00",
+      "dateModified": "2026-10-13T06:23:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

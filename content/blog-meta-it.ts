@@ -13103,6 +13103,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.poker-room-admiral-mendrisio-chiude.title': 'Chiude la poker room del Casinò Admiral di Mendrisio',
     'blog.article.poker-room-admiral-mendrisio-chiude.excerpt': 'La poker room del Casinò Admiral chiude il 30 novembre Il progetto era partito il 1° gennaio 2022 Per i 15 collaboratori sono previste ricollocazione',
     'blog.article.poker-room-admiral-mendrisio-chiude.imageAlt': 'Tavolo da poker nel Casinò Admiral di Mendrisio con fiches e carte illuminate',
+    'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.title': 'Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
+    'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.excerpt': 'Scontro tra due auto sulla statale 69 intorno alle 6 del 13 ottobre; elisoccorso da Como, ambulanze da Luino e Cunardo, code ancora alle 7,30.',
+    'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.imageAlt': 'Immagine editoriale relativa a: Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
 };
 
 export default blogMetaIt;

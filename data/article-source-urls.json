@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1945877/mappo-minusio-chiusure-rampe-lavori": {
-    "articleId": "a13-chiusure-mappo-minusio-2026",
-    "ts": "2026-08-26T00:40:22.082Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/economia/vola-il-prezzo-del-diesel-in-svizzera--4010873.html": {
     "articleId": "diesel-prezzo-frontalieri-agosto",
     "ts": "2026-08-26T01:23:04.896Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1956222/poker-ruiu-mendrisio-marketing-casino-gioco-room-anni-azienda-admiral": {
     "articleId": "poker-room-admiral-mendrisio-chiude",
     "ts": "2026-10-13T05:13:58.694Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/grave-incidente-allalba-a-brezzo-di-bedero-elisoccorso-in-azione/2706196": {
+    "articleId": "incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione",
+    "ts": "2026-10-13T06:23:36.864Z",
     "keyForm": 2
   }
 }

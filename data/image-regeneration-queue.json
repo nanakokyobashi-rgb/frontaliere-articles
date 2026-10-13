@@ -10,6 +10,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T00:24:03.070Z",
       "lastFailureAt": "2026-10-13T00:31:55.123Z"
+    },
+    {
+      "articleId": "incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione",
+      "title": "Incidente all'alba a Brezzo di Bedero: elisoccorso in azione",
+      "fallbackImage": "/images/blog/article-como-pass-auto-rinnovo-annuale.webp",
+      "reason": "All image providers failed for article-incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione: openai-codex (vision gate rejected image: Relevant generic rescue illustration,",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T06:23:36.863Z",
+      "lastFailureAt": "2026-10-13T06:23:36.863Z"
     }
   ]
 }

@@ -13104,6 +13104,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.poker-room-admiral-mendrisio-chiude.title': 'La salle de poker du Casinò Admiral de Mendrisio ferme',
     'blog.article.poker-room-admiral-mendrisio-chiude.excerpt': 'La salle de poker du Casinò Admiral ferme le 30 novembre Le projet avait débuté le 1er janvier 2022 Pour les 15 collaborateurs, un reclassement est prévu',
     'blog.article.poker-room-admiral-mendrisio-chiude.imageAlt': 'Table de poker au Casino Admiral de Mendrisio con jetons et cartes sous éclairage d\'ambiance',
+    'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.title': 'Accident à l\'aube à Brezzo di Bedero : secours héliportés en action',
+    'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.excerpt': 'Collision entre deux voitures sur la route nationale 69 vers 6 heures le 13 octobre ; secours héliportés depuis Como, ambulances depuis Luino et Cunardo, embouteillages encore à 7,30.',
+    'blog.article.incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.imageAlt': 'Image éditoriale relative à: Incidente all\'alba a Brezzo di Bedero: elisoccorso in azione',
 };
 
 export default blogMetaFr;
