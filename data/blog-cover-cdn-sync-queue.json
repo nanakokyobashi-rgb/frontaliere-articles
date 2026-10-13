@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-aumento-iva-tredicesima-avs.webp",
+      "sha256": "7d3abedf75c9361e0be11d401e6446a2dc8909a2861595009891986822b694a7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-aumento-iva-tredicesima-avs-480w.webp",
+      "sha256": "24c0572eee398c885c73db4ce0496336826fa0e2fe4f7dd139035e9e97b2c068"
+    }
+  ]
 }
