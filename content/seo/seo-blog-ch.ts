@@ -102716,6 +102716,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aumento-tassi-ipotecari-q3': {
+    title: 'Aumento dei tassi ipotecari nel terzo trimestre 2024',
+    description: 'Il costo delle ipoteche è salito nel terzo trimestre. Il fisso decennale era al 2,07% a fine settembre. Il quinquennale era all\'1,9%; il triennale all\'1,75%',
+    keywords: 'frontalieri, ticino, svizzera, italia, aumento, tassi, ipotecari, terzo',
+    ogTitle: 'Aumento tassi ipotecari terzo trimestre 2024 Svizzera',
+    ogDescription: 'Il costo delle ipoteche è salito nel terzo trimestre.',
+    canonicalPath: '/articoli-svizzera/aumento-tassi-ipotecari-q3/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aumento dei tassi ipotecari nel terzo trimestre 2024",
+      "description": "Il costo delle ipoteche è salito nel terzo trimestre. Il fisso decennale era al 2,07% a fine settembre. Il quinquennale era all'1,9%; il triennale all'1,75%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-aumento-tassi-ipotecari-q3.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Casa svizzera con documento di mutuo sul tavolo e Alpi sullo sfondo"
+      },
+      "datePublished": "2026-10-13T07:05:24+00:00",
+      "dateModified": "2026-10-13T07:05:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aumento-tassi-ipotecari-q3/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

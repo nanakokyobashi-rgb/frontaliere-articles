@@ -8141,6 +8141,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.title': 'Tunnel Gran San Bernardo: 1000 Solarpaneele decken die Hälfte des Bedarfs',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.excerpt': '1000 Paneele auf der Schweizer Seite des Gran San Bernardo 7000 m² geplante Photovoltaikfläche 450 MWh jährlich: die Hälfte des Bedarfs des Tunnels',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.imageAlt': 'Photovoltaikmodule an der Tunnelgalerie Grosser St. Bernhard in Bourg-Saint-Pierre',
+    'blog.article.aumento-tassi-ipotecari-q3.title': 'Anstieg der Hypothekarzinsen im dritten Quartal 2024',
+    'blog.article.aumento-tassi-ipotecari-q3.excerpt': 'Die Kosten für Hypotheken sind im dritten Quartal gestiegen.',
+    'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Schweizer Haus mit Hypothekenvertrag auf Tisch und Alpen im Hintergrund',
 };
 
 export default blogMetaChDe;

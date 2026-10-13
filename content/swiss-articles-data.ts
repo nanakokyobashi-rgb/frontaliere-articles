@@ -27170,6 +27170,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'aumento-tassi-ipotecari-q3',
+    category: 'novita',
+    date: '2026-10-13T07:05:24.754Z',
+    image: '/images/blog/article-aumento-tassi-ipotecari-q3.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

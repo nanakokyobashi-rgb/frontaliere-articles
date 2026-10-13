@@ -8141,6 +8141,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.title': 'Gran San Bernardo Tunnel: 1000 solar panels cover half of energy needs',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.excerpt': '1000 panels on the Swiss side of the Great St Bernard Pass 7000 m² of planned photovoltaic area 450 MWh annually: half of the tunnel\'s needs',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.imageAlt': 'Photovoltaic panels on Grand St. Bernard tunnel gallery at Bourg-Saint-Pierre',
+    'blog.article.aumento-tassi-ipotecari-q3.title': 'Increase in mortgage rates in the third quarter of 2024',
+    'blog.article.aumento-tassi-ipotecari-q3.excerpt': 'The cost of mortgages rose in the third quarter.',
+    'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Swiss house with mortgage document on table and Alps in the background',
 };
 
 export default blogMetaChEn;

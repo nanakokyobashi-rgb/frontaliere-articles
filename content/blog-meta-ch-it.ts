@@ -8141,6 +8141,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.title': 'Tunnel Gran San Bernardo: 1000 pannelli solari coprono metà fabbisogno',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.excerpt': '1000 pannelli sul versante svizzero del Gran San Bernardo 7000 m² di superficie fotovoltaica prevista 450 MWh annui: metà del fabbisogno della galleria',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.imageAlt': 'Pannelli fotovoltaici sulla galleria del Tunnel Gran San Bernardo a Bourg-Saint-Pierre',
+    'blog.article.aumento-tassi-ipotecari-q3.title': 'Aumento dei tassi ipotecari nel terzo trimestre 2024',
+    'blog.article.aumento-tassi-ipotecari-q3.excerpt': 'Il costo delle ipoteche è salito nel terzo trimestre.',
+    'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Casa svizzera con documento di mutuo sul tavolo e Alpi sullo sfondo',
 };
 
 export default blogMetaChIt;

@@ -8141,6 +8141,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.title': 'Tunnel du Grand-Saint-Bernard : 1000 panneaux solaires, 50%',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.excerpt': '1000 panneaux sur le versant suisse du Grand-Saint-Bernard 7000 m² de surface photovoltaïque prévue 450 MWh par an : la moitié des besoins du tunnel',
     'blog.article.tunnel-gran-san-bernardo-fotovoltaico.imageAlt': 'Panneaux photovoltaïques sur la galerie du Tunnel Grand-Saint-Bernard à Bourg-Saint-Pierre',
+    'blog.article.aumento-tassi-ipotecari-q3.title': 'Hausse des taux hypothécaires au troisième trimestre 2024',
+    'blog.article.aumento-tassi-ipotecari-q3.excerpt': 'Le coût des hypothèques a augmenté au troisième trimestre.',
+    'blog.article.aumento-tassi-ipotecari-q3.imageAlt': 'Maison suisse avec document de hypothèque sur table et Alpes en arrière-plan',
 };
 
 export default blogMetaChFr;
