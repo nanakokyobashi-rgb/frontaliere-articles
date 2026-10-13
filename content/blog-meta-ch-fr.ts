@@ -8150,6 +8150,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.title': '100\'848 signatures contre le contre-projet sur les loyers',
     'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.excerpt': 'L\'ASI a remis 100\'848 signatures à la Chancellerie fédérale L\'appel demande de retirer le contre-projet Le projet concerne le réexamen des loyers',
     'blog.article.100-848-firme-contro-il-controprogetto-sulle-pigioni.imageAlt': 'Image éditoriale relative à: 100\'848 firme contro il controprogetto sulle pigioni',
+    'blog.article.franco-euro-rafforzamento-stucki.title': 'Franco se renforce sur l\'euro : les prévisions de Stucki',
+    'blog.article.franco-euro-rafforzamento-stucki.excerpt': 'Stucki voit le franc le plus fort sur l\'euro d\'ici la fin de l\'année Le taux de change est passé de 95 à 93 cents Le déficit français est d\'environ 5% du PIB La BNS ne devrait pas',
+    'blog.article.franco-euro-rafforzamento-stucki.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes, symbole de stabilité économique en Suisse.',
 };
 
 export default blogMetaChFr;
