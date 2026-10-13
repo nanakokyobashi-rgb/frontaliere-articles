@@ -27220,6 +27220,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv',
+    category: 'novita',
+    date: '2026-10-13T11:54:19.232Z',
+    image: '/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp',
+    hasCalculator: false,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -102911,6 +102911,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv': {
+    title: 'Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
+    description: 'Comunicato pubblicato il 13 ottobre 2026. Influenza: raccomandata alle persone ad alto rischio. Settimane nazionali: dal 2 al 7 e dal 23 al 28 novembre 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vaccinazioni, autunnali, influenza, covid-19',
+    ogTitle: 'Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
+    ogDescription: 'Comunicato pubblicato il 13 ottobre 2026.',
+    canonicalPath: '/articoli-svizzera/vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV",
+      "description": "Comunicato pubblicato il 13 ottobre 2026. Influenza: raccomandata alle persone ad alto rischio. Settimane nazionali: dal 2 al 7 e dal 23 al 28 novembre 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV"
+      },
+      "datePublished": "2026-10-13T11:54:19+00:00",
+      "dateModified": "2026-10-13T11:54:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

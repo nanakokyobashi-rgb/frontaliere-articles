@@ -8156,6 +8156,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.divario-reddito-donne-uomini-scende-al-14.title': 'Divario reddito donne-uomini: scende al 14%',
     'blog.article.divario-reddito-donne-uomini-scende-al-14.excerpt': 'Il divario di reddito scende dal 55% al 14% tra generazioni.',
     'blog.article.divario-reddito-donne-uomini-scende-al-14.imageAlt': 'Immagine editoriale relativa a: Divario reddito donne-uomini: scende al 14%',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.title': 'Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.excerpt': 'Comunicato pubblicato il 13 ottobre 2026.',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.imageAlt': 'Immagine editoriale relativa a: Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
 };
 
 export default blogMetaChIt;

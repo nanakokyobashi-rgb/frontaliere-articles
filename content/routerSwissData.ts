@@ -2741,6 +2741,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  '100-848-firme-contro-il-controprogetto-sulle-pigioni': { it: '100-848-firme-contro-il-controprogetto-sulle-pigioni', en: '100-848-signatures-against-the-counterproposal-on-rents', de: '100-848-unterschriften-gegen-den-gegenvorschlag-zu-den-mietzinsen', fr: '100-848-signatures-contre-le-contre-projet-sur-les-loyers' },
  'franco-euro-rafforzamento-stucki': { it: 'franco-euro-rafforzamento-stucki', en: 'franc-euro-strengthening-stucki', de: 'franken-euro-staerkung-stucki', fr: 'franc-euro-renforcement-stucki' },
  'divario-reddito-donne-uomini-scende-al-14': { it: 'divario-reddito-donne-uomini-scende-al-14', en: 'women-men-income-gap-falls-to-14', de: 'einkommenslucke-zwischen-frauen-und-mannern-sinkt-auf-14', fr: 'ecart-de-revenus-femmes-hommes-baisse-a-14' },
+ 'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv': { it: 'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv', en: 'autumn-vaccinations-2026-influenza-covid-19-and-rsv', de: 'herbstimpfungen-2026-grippe-covid-19-und-rsv', fr: 'vaccinations-automnales-2026-grippe-covid-19-et-vrs' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

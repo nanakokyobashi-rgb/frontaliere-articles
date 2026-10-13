@@ -8156,6 +8156,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.divario-reddito-donne-uomini-scende-al-14.title': 'Einkommenslücke zwischen Frauen und Männern: sinkt auf 14%',
     'blog.article.divario-reddito-donne-uomini-scende-al-14.excerpt': 'Die Einkommenslücke sinkt zwischen den Generationen von 55% auf 14%.',
     'blog.article.divario-reddito-donne-uomini-scende-al-14.imageAlt': 'Redaktionelles Bild zu: Divario reddito donne-uomini: scende al 14%',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.title': 'Herbstimpfungen 2026: Grippe, COVID-19 und RSV',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.excerpt': 'Mitteilung veröffentlicht am 13.',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.imageAlt': 'Redaktionelles Bild zu: Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
 };
 
 export default blogMetaChDe;

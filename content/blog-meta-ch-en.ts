@@ -8156,6 +8156,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.divario-reddito-donne-uomini-scende-al-14.title': 'Women-men income gap: falls to 14%',
     'blog.article.divario-reddito-donne-uomini-scende-al-14.excerpt': 'The income gap declines from 55% to 14% between generations.',
     'blog.article.divario-reddito-donne-uomini-scende-al-14.imageAlt': 'Editorial image related to: Divario reddito donne-uomini: scende al 14%',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.title': 'Autumn vaccinations 2026: influenza, COVID-19 and RSV',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.excerpt': 'Press release published on October 13, 2026.',
+    'blog.article.vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv.imageAlt': 'Editorial image related to: Vaccinazioni autunnali 2026: influenza, COVID-19 e RSV',
 };
 
 export default blogMetaChEn;
