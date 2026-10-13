@@ -36,7 +36,7 @@ import { isPrimaryRateLimitError, parseRateLimitMarker } from './lib/gh-rate-lim
 import { VITEST_CHECK_NAME } from './lib/constants.mjs';
 import {
   REVIEW_GATE_FAILURE_STEP_NAME,
-  REVIEW_GATE_STEP_NAME,
+  vitestFailureIsReviewGate,
 } from './lib/vitestCheck.mjs';
 
 export const REVIEW_QUOTA_RETRY_MARKER = '<!-- REVIEW_QUOTA_RETRY:';
@@ -1355,21 +1355,18 @@ export function quotaRecoveryOutcome({ annotations = [], completedAt = '', steps
     };
   }
 
-  if (Array.isArray(steps)) {
-    const gate = steps.find((step) => step?.name === REVIEW_GATE_STEP_NAME);
-    if (gate?.conclusion === 'failure') {
-      const classifier = steps.find((step) => step?.name === REVIEW_GATE_FAILURE_STEP_NAME);
-      const gateFailureKind = classifier?.conclusion === 'failure'
-        ? 'verdict'
-        : classifier?.conclusion === 'success'
-          ? 'transient'
-          : 'unknown';
-      return {
-        outcome: QUOTA_RECOVERY_OUTCOMES.REVIEW_GATE,
-        resetAt: null,
-        gateFailureKind,
-      };
-    }
+  if (Array.isArray(steps) && vitestFailureIsReviewGate(steps)) {
+    const classifier = steps.find((step) => step?.name === REVIEW_GATE_FAILURE_STEP_NAME);
+    const gateFailureKind = classifier?.conclusion === 'failure'
+      ? 'verdict'
+      : classifier?.conclusion === 'success'
+        ? 'transient'
+        : 'unknown';
+    return {
+      outcome: QUOTA_RECOVERY_OUTCOMES.REVIEW_GATE,
+      resetAt: null,
+      gateFailureKind,
+    };
   }
 
   return {
@@ -1568,7 +1565,7 @@ function rescueRateLimitedTests(prs, commentsByPr, nowSec = Math.floor(Date.now(
       head,
       sourceRunId: String(run.id),
       sourceAttempt: Number(run.run_attempt) || 1,
-      resetAt: evidence.resetAt,
+      resetAt: recovery.resetAt,
       runId: process.env.GITHUB_RUN_ID || 'review-rate-limit-rescuer',
     };
     if (DRY_RUN) {
