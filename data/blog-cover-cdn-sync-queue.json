@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-referendum-mercosur-firme-berna.webp",
-      "sha256": "658ba1f39b07af68d93fadffef2f29b98c01c0b57b5ec38f38c1a2ffbe43f61f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-referendum-mercosur-firme-berna-480w.webp",
-      "sha256": "c7376222e5b6021f7ab1ca01ec060acf654031d571858fa2be624498e740f4d7"
-    }
-  ]
+  "items": []
 }
