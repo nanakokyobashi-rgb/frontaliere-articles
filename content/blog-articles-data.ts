@@ -44075,7 +44075,7 @@ const RAW_ARTICLES = [
  id: 'minibasket-inclusivo-varese-2026',
  category: 'novita',
  date: '2026-10-12T23:37:30.406Z',
- image: '/images/blog/article-varese-adhd-days-ottobre-2026.webp',
+ image: '/images/blog/article-minibasket-inclusivo-varese-2026.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

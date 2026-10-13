@@ -13070,7 +13070,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Sonnenuntergang am Luganersee mit Bergkulisse',
     'blog.article.minibasket-inclusivo-varese-2026.title': 'Minibasket Inclusivo in Varese: Start der Spendenaktion mit Verdopplung',
     'blog.article.minibasket-inclusivo-varese-2026.excerpt': 'VBS startet die dritte Ausgabe des Minibasket Inclusivo Spenden werden von der Stiftung vom 1.',
-    'blog.article.minibasket-inclusivo-varese-2026.imageAlt': 'Kinder spielen inklusives Minibasket auf einem sonnigen Platz mit Bergen im Hintergrund',
+    'blog.article.minibasket-inclusivo-varese-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.manutenzione-prato-franco-ossola-2026.title': 'Varese: Gamma Verde pflegt den Rasen des Franco Ossola 2026/2027',
     'blog.article.manutenzione-prato-franco-ossola-2026.excerpt': 'Gamma Verde pflegt die Wiese von Franco Ossola im Jahr 2026/2027 Gemeinderat: 12.',
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Franco-Ossola-Stadion in Varese mit grünem Rasen',

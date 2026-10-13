@@ -13073,7 +13073,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.pozzecco-galatasaray-risoluzione-contratto.imageAlt': 'Vue sur le lac de Lugano au coucher du soleil avec montagnes',
     'blog.article.minibasket-inclusivo-varese-2026.title': 'Minibasket inclusif à Varese : lancement de la collecte de fonds doublée',
     'blog.article.minibasket-inclusivo-varese-2026.excerpt': 'VBS lance la troisième édition du Minibasket inclusif Dons doublés par la Fondation du 1er au 31 octobre Entraînements chaque mardi à la Palestra Pellico',
-    'blog.article.minibasket-inclusivo-varese-2026.imageAlt': 'Enfants jouant au minibasket inclusif sur un terrain ensoleillé avec des montagnes en arrière-plan',
+    'blog.article.minibasket-inclusivo-varese-2026.imageAlt': 'Illustration générée pour cet article',
     'blog.article.manutenzione-prato-franco-ossola-2026.title': 'Varese : Gamma Verde s\'occupe de la pelouse du Franco Ossola 2026/2027',
     'blog.article.manutenzione-prato-franco-ossola-2026.excerpt': 'Gamme verte s\'occupe de la pelouse du Franc Ossola en 2026/2027 Acte municipal : 12 octobre 2026 Réduction de 7 % sur les prix aux enchères Montant : 38 114,13 euros de plus',
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Stade Franco Ossola à Varese avec pelouse verte',

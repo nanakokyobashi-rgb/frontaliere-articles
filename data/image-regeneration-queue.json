@@ -22,24 +22,14 @@
       "lastFailureAt": "2026-10-12T21:40:42.815Z"
     },
     {
-      "articleId": "minibasket-inclusivo-varese-2026",
-      "title": "Minibasket inclusivo a Varese: al via la raccolta fondi raddoppiata",
-      "fallbackImage": "/images/blog/article-varese-adhd-days-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-12T23:37:30.823Z",
-      "lastFailureAt": "2026-10-12T23:37:30.823Z"
-    },
-    {
       "articleId": "fabio-de-luigi-biol-varese",
       "title": "Fabio De Luigi apre la stagione teatrale di Varese",
       "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-fabio-de-luigi-biol-varese: openai-codex (vision gate rejected image: Generic theatrical illustration with no text, logos, or visible faces, but it includes a recognizable foreground person.); gemini (",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-13T00:24:03.070Z",
-      "lastFailureAt": "2026-10-13T00:24:03.070Z"
+      "lastFailureAt": "2026-10-13T00:31:55.123Z"
     }
   ]
 }
