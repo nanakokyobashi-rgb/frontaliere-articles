@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-manutenzione-prato-franco-ossola-2026.webp",
+      "sha256": "7da4c5d2ec290be1b4cdfe1fbed7b14d3175379495b017b2e6f41568abf6b434"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-manutenzione-prato-franco-ossola-2026-480w.webp",
+      "sha256": "46300406d57775e7801e900766a8c07c2ff73a52b48ead0608c829656d3b9a68"
+    }
+  ]
 }
