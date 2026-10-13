@@ -8198,6 +8198,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bcg-consiglio-mueller.title': 'Banque cantonale des Grisons : Reto Müller au Conseil',
     'blog.article.bcg-consiglio-mueller.excerpt': 'Le gouvernement grison nomme Müller au Conseil de banque de la BCG Mandat : 1er juillet 2027',
     'blog.article.bcg-consiglio-mueller.imageAlt': 'Renouvellement du conseil de la Banque cantonale des Grisons',
+    'blog.article.offerte-formazione-federale.title': 'Administration fédérale : travail, stages et formation',
+    'blog.article.offerte-formazione-federale.excerpt': 'L\'Administration fédérale propose un travail porteur de sens Les étudiants fraîchement diplômés ont un large choix de stages 50 formations sont disponibles',
+    'blog.article.offerte-formazione-federale.imageAlt': 'Castelgrande à Bellinzone, décor suisse pour le travail fédéral',
 };
 
 export default blogMetaChFr;

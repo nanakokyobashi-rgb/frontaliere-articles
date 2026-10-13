@@ -8198,6 +8198,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bcg-consiglio-mueller.title': 'Banca cantonale grigione: Reto Müller im Bankrat',
     'blog.article.bcg-consiglio-mueller.excerpt': 'Die Bündner Regierung ernennt Müller in den Bankrat der BCG Amtszeit: 1.',
     'blog.article.bcg-consiglio-mueller.imageAlt': 'Erneuerung des Bankrats der Bündner Kantonalbank',
+    'blog.article.offerte-formazione-federale.title': 'Bundesverwaltung: Arbeit, Praktika und Ausbildung',
+    'blog.article.offerte-formazione-federale.excerpt': 'Die Bundesverwaltung bietet eine sinnstiftende Arbeit an Frisch diplomierten Studierenden steht eine breite Auswahl an Praktika zur Verfügung 50 Ausbildungen stehen zur Verfügung',
+    'blog.article.offerte-formazione-federale.imageAlt': 'Castelgrande in Bellinzona, Schweizer Motiv zur Arbeit beim Bund',
 };
 
 export default blogMetaChDe;

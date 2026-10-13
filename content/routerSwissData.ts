@@ -2755,6 +2755,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'attacco-frigoriferi-svizzera-rischio': { it: 'attacco-frigoriferi-svizzera-rischio', en: 'hackers-send-refrigerators-haywire-it-could-happen-in-switzerland-too', de: 'hacker-legen-kuhlschranke-lahm-das-kann-auch-in-der-schweiz-passieren', fr: 'des-hackers-mettent-les-refrigerateurs-hors-service-cela-peut-aussi-arriver-en' },
  'parlamento-svizzero-portale-guida': { it: 'parlamento-svizzero-portale-guida', en: 'swiss-parliament-portal-guide', de: 'schweizer-parlament-portal-fuehrer', fr: 'parlement-suisse-portail-guide' },
  'bcg-consiglio-mueller': { it: 'bcg-consiglio-mueller', en: 'graubunden-bank-mueller-board', de: 'graubuenden-bankrat-mueller', fr: 'banque-grisons-conseil-mueller' },
+ 'offerte-formazione-federale': { it: 'offerte-formazione-federale', en: 'federal-jobs-training', de: 'bund-jobs-ausbildung', fr: 'emploi-federal-formation' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

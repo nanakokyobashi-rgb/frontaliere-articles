@@ -8198,6 +8198,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bcg-consiglio-mueller.title': 'Graubünden Cantonal Bank: Reto Müller on the Board',
     'blog.article.bcg-consiglio-mueller.excerpt': 'The Rhaetian Government appoints Müller to the BCG Bank Council Term: July 1, 2027',
     'blog.article.bcg-consiglio-mueller.imageAlt': 'Renewal of the Bank Council at Graubünden Cantonal Bank',
+    'blog.article.offerte-formazione-federale.title': 'Federal Administration: jobs, internships and training',
+    'blog.article.offerte-formazione-federale.excerpt': 'The Federal Administration offers meaningful work Recent graduates have a wide range of internships 50 training programs are available',
+    'blog.article.offerte-formazione-federale.imageAlt': 'Castelgrande in Bellinzona, Swiss setting for federal employment',
 };
 
 export default blogMetaChEn;

@@ -8198,6 +8198,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bcg-consiglio-mueller.title': 'Banca cantonale grigione: Reto Müller nel Consiglio',
     'blog.article.bcg-consiglio-mueller.excerpt': 'Il Governo retico nomina Müller nel Consiglio di banca BCG Mandato: 1° luglio 2027',
     'blog.article.bcg-consiglio-mueller.imageAlt': 'Rinnovo del Consiglio di banca della Banca cantonale grigione',
+    'blog.article.offerte-formazione-federale.title': 'Amministrazione federale: lavoro, praticantati e formazione',
+    'blog.article.offerte-formazione-federale.excerpt': 'L\'Amministrazione federale propone un lavoro significativo Gli studenti neolaureati hanno un\'ampia gamma di praticantati Sono disponibili 50 formazioni',
+    'blog.article.offerte-formazione-federale.imageAlt': 'Castelgrande a Bellinzona, immagine svizzera per il lavoro federale',
 };
 
 export default blogMetaChIt;
