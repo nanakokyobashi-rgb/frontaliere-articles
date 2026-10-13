@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/il-costo-della-vita-aumenta-non-possiamo-continuare-a-ridurre-il-valore-del-lavoro/2664346": {
-    "articleId": "costo-vita-salari-lgn",
-    "ts": "2026-08-27T11:43:35.719Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/economia/gli-svizzeri-non-hanno-mai-guadagnato-e-risparmiato-come-oggi--4010966.html": {
     "articleId": "reddito-record-svizzera-2025",
     "ts": "2026-08-27T15:49:08.082Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4160092": {
     "articleId": "aumento-iva-tredicesima-avs",
     "ts": "2026-10-13T13:15:02.970Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/zaino-sospetto-davanti-a-una-banca-a-chiasso-evacuato-ledificio-nessun-pericolo/2706709": {
+    "articleId": "allarme-bernasconi-artificieri",
+    "ts": "2026-10-13T14:39:37.819Z",
     "keyForm": 2
   }
 }

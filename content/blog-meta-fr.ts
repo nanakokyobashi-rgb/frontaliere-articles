@@ -13139,6 +13139,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.aumento-iva-tredicesima-avs.title': 'Hausse de la TVA pour la 13e rente AVS : le oui de l’alliance',
     'blog.article.aumento-iva-tredicesima-avs.excerpt': 'La gauche, le Centre et le Parti évangélique soutiennent la proposition.',
     'blog.article.aumento-iva-tredicesima-avs.imageAlt': 'Hausse de la TVA pour financer la 13e rente AVS',
+    'blog.article.allarme-bernasconi-artificieri.title': 'Chiasso, sac à dos suspect : banque évacuée, aucun danger',
+    'blog.article.allarme-bernasconi-artificieri.excerpt': 'Alerte après 12.30 sur la place Bernasconi Banque évacuée et zone isolée Objets suspects contrôlés, dont un sac à dos Zone rouverte à 14, aucun',
+    'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Piazza Bernasconi à Chiasso, banque évacuée et zone contrôlée par la police cantonale.',
 };
 
 export default blogMetaFr;

@@ -107478,6 +107478,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-allarme-bernasconi-artificieri': {
+    title: 'Chiasso, zaino sospetto: banca evacuata, nessun pericolo',
+    description: 'Allarme dopo le 12.30 in piazza Bernasconi Evacuata una banca e isolata l\'area Controllati oggetti sospetti, tra cui uno zaino Zona riaperta alle 14, nessun',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiasso, zaino, sospetto, banca',
+    ogTitle: 'Chiasso, zaino sospetto: nessun pericolo',
+    ogDescription: 'Allarme dopo le 12.30 in piazza Bernasconi Evacuata una banca e isolata l\'area Controllati oggetti sospetti, tra cui uno zaino Zona riaperta alle 14, nessun',
+    canonicalPath: '/articoli-frontaliere/allarme-bernasconi-artificieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Chiasso, zaino sospetto: banca evacuata, nessun pericolo",
+      "description": "Allarme dopo le 12.30 in piazza Bernasconi Evacuata una banca e isolata l'area Controllati oggetti sospetti, tra cui uno zaino Zona riaperta alle 14, nessun",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Piazza Bernasconi a Chiasso, banca evacuata e area controllata dalla Polizia cantonale."
+      },
+      "datePublished": "2026-10-13T14:39:37+00:00",
+      "dateModified": "2026-10-13T14:39:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/allarme-bernasconi-artificieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
