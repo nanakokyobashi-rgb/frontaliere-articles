@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-zaino-sospetto-chiasso.webp",
-      "sha256": "d5d4836beb2fa1d22be34b230ee70b4a01a4dfce9862a2386c028ab37281c747"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-zaino-sospetto-chiasso-480w.webp",
-      "sha256": "679bc188081e01493731fc386fba9b28d3ea02948bedc9d789173c4af783a046"
-    }
-  ]
+  "items": []
 }
