@@ -8126,6 +8126,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ascend-evonext-quotazione.title': 'Ascend Sport Technology verso la borsa svizzera',
     'blog.article.ascend-evonext-quotazione.excerpt': 'Ascend Sport Technology punta alla borsa svizzera Fusione con Evonext, già quotata Valutazione: 500 milioni di franchi Chiusura prevista entro fine anno Società',
     'blog.article.ascend-evonext-quotazione.imageAlt': 'Ascend Sport Technology, impresa lucernese, verso la borsa svizzera',
+    'blog.article.case-svizzera-rialzo-trimestre.title': 'Prezzi delle case in Svizzera: +2% in tre mesi',
+    'blog.article.case-svizzera-rialzo-trimestre.excerpt': 'Case unifamiliari: prezzi +2% in tre mesi Appartamenti: prezzi +1,7% in tre mesi Su base annua: +3,6% case, +5,9% appartamenti Svizzera meridionale',
+    'blog.article.case-svizzera-rialzo-trimestre.imageAlt': 'Case e appartamenti in Svizzera, con i prezzi immobiliari in rialzo.',
 };
 
 export default blogMetaChIt;

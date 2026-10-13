@@ -2731,6 +2731,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'proiezioni-scuola-universita-2035': { it: 'proiezioni-scuola-universita-2035', en: 'school-university-projections-2035', de: 'schul-hochschul-projektionen-2035', fr: 'projections-ecoles-universites-2035' },
  'ust-scenari-formazione-2035': { it: 'ust-scenari-formazione-2035', en: 'ust-education-scenarios-2035', de: 'bfs-bildungsszenarien-2035', fr: 'ofs-scenarios-formation-2035' },
  'ascend-evonext-quotazione': { it: 'ascend-evonext-quotazione', en: 'ascend-evonext-listing', de: 'ascend-evonext-boersengang', fr: 'ascend-evonext-cotation' },
+ 'case-svizzera-rialzo-trimestre': { it: 'case-svizzera-rialzo-trimestre', en: 'swiss-home-prices-third-quarter', de: 'schweizer-hauspreise-drittes-quartal', fr: 'prix-maisons-suisses-troisieme-trimestre' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

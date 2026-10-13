@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1948693/lettura-ticino-media-punti-risultati-ocse-scuola-scienze-competenze-matematica": {
-    "articleId": "ticino-scuola-pisa-2025-calo",
-    "ts": "2026-09-08T08:32:27.590Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948704/carenza-di-benzina-e-gasolio-si-attinge-alle-scorte-obbligatorie": {
     "articleId": "carenza-benzina-gasolio-scorte",
     "ts": "2026-09-08T08:48:17.144Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/ascend-sport-technology-sbarcher%c3%a0-in-borsa/92203008": {
     "articleId": "ascend-evonext-quotazione",
     "ts": "2026-10-13T03:04:35.228Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/mattone-sempre-pi%c3%b9-caro%2c-in-tre-mesi-prezzi-%2b2%25/92205139": {
+    "articleId": "case-svizzera-rialzo-trimestre",
+    "ts": "2026-10-13T03:27:03.464Z",
     "keyForm": 2
   }
 }

@@ -8126,6 +8126,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ascend-evonext-quotazione.title': 'Ascend Sport Technology to the Swiss Stock Exchange',
     'blog.article.ascend-evonext-quotazione.excerpt': 'Ascend Sport Technology points to the Swiss Merger Exchange with Evonext, already listed Valuation: 500 million francs Expected closure by the end of the year Company',
     'blog.article.ascend-evonext-quotazione.imageAlt': 'Lucerne-based Ascend Sport Technology heading to the Swiss stock exchange',
+    'blog.article.case-svizzera-rialzo-trimestre.title': 'House prices in Switzerland: +2% in three months',
+    'blog.article.case-svizzera-rialzo-trimestre.excerpt': 'Single-family homes: prices +2% in three months Apartments: prices +1,7% in three months Year-on-year: +3,6% homes, +5,9% apartments Southern Switzerland',
+    'blog.article.case-svizzera-rialzo-trimestre.imageAlt': 'Swiss houses and apartments as residential property prices rise.',
 };
 
 export default blogMetaChEn;

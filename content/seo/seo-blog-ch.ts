@@ -102521,6 +102521,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-case-svizzera-rialzo-trimestre': {
+    title: 'Prezzi delle case in Svizzera: +2% in tre mesi',
+    description: 'Case unifamiliari: prezzi +2% in tre mesi Appartamenti: prezzi +1,7% in tre mesi Su base annua: +3,6% case, +5,9% appartamenti Svizzera meridionale',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, case, mesi, unifamiliari',
+    ogTitle: 'Case in Svizzera: +2% in tre mesi',
+    ogDescription: 'Case unifamiliari: prezzi +2% in tre mesi Appartamenti: prezzi +1,7% in tre mesi Su base annua: +3,6% case, +5,9% appartamenti Svizzera meridionale',
+    canonicalPath: '/articoli-svizzera/case-svizzera-rialzo-trimestre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi delle case in Svizzera: +2% in tre mesi",
+      "description": "Case unifamiliari: prezzi +2% in tre mesi Appartamenti: prezzi +1,7% in tre mesi Su base annua: +3,6% case, +5,9% appartamenti Svizzera meridionale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-case-svizzera-rialzo-trimestre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Case e appartamenti in Svizzera, con i prezzi immobiliari in rialzo."
+      },
+      "datePublished": "2026-10-13T03:27:03+00:00",
+      "dateModified": "2026-10-13T03:27:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/case-svizzera-rialzo-trimestre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
