@@ -362,6 +362,30 @@ test('eseguito: ogni sonda ha una chiave sua, anche sullo stesso percorso', () =
   assert.deepEqual(sonde, [1, 2, 3, 4, 5].map((n) => `${u}?_fpcb=777.2.${SHARD}.${n}`));
 });
 
+test('eseguito: nessuna sonda passa --max-time 0 a curl', () => {
+  const u = `${ORIGINE}/deadline-expired/`;
+  const { sonde } = eseguiSonde({
+    codici: [200],
+    funzioni: ['probe_url', 'poll_origin'],
+    comandi: [`poll_origin "${u}" 1 0 || true`],
+  });
+
+  assert.deepEqual(sonde, []);
+});
+
+test('poll_origin_for ricontrolla il budget prima della sonda', () => {
+  const funzione = funzioneDelloStep('poll_origin_for');
+
+  assert.match(
+    funzione,
+    /remaining=\$\(\(deadline - SECONDS\)\)\n\s+\(\( remaining > 0 \)\) \|\| break\n\s+probe_timeout=/,
+  );
+  assert.match(
+    funzione,
+    /\(\( remaining < probe_timeout \)\); then probe_timeout="\$remaining"; fi\n\s+\(\( probe_timeout > 0 \)\) \|\| break\n\s+poll_origin/,
+  );
+});
+
 test('eseguito: il gate recupera una build Pages che supera i primi cinque minuti, entro il budget condiviso', () => {
   assert.equal(PAGES_BUILD_WAIT_BUDGET_SECONDS, 600);
   assert.equal(PAGES_BUILD_WAIT_WINDOW_SECONDS, 300);
