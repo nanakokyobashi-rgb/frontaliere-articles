@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-bissone-torneo-scacchi.webp",
-      "sha256": "4ae2b3ff5b078b1c748472fd1d153cedef79de1b1b631039c7adfc204893a212"
-    },
-    {
-      "path": "public/images/blog/article-verbania-cantieri-allarme-m5s.webp",
-      "sha256": "67fd9d8f7e996173cfb0b194f4c27cd78b56462f67a66f5921d650b7302c9299"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-bissone-torneo-scacchi-480w.webp",
-      "sha256": "6a3f20c9aa0b981383e2b618e2a744519b6a507946591fdb84475357024bd715"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-verbania-cantieri-allarme-m5s-480w.webp",
-      "sha256": "39cf33fdf045a55fe100595b6631816c5bfb2c9ecf711d43eb1b322ec00de2f6"
-    }
-  ]
+  "items": []
 }
