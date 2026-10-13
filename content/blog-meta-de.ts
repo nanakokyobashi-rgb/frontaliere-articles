@@ -13079,10 +13079,10 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Publikum im Teatro di Varese während der Show von Fabio De Luigi',
     'blog.article.rio-scorta-giro-como.title': 'Como, Rio wird mit Begleitung während des Giro geboren',
     'blog.article.rio-scorta-giro-como.excerpt': 'Bei Como, während der Lombardei-Rundfahrt, war die Straße blockiert Elisa rief an, nachdem sie das Wasser gebrochen hatte Rio wurde um 16.57 Uhr geboren, nach einer Begleitung mit dem Motorrad',
-    'blog.article.rio-scorta-giro-como.imageAlt': 'Zwei Motorräder der Ortspolizei begleiten ein Familienauto während der Lombardei-Rundfahrt ins Krankenhaus.',
+    'blog.article.rio-scorta-giro-como.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.jazz-concerti-castellanza.title': 'Eventi in Jazz 2026: Konzerte in Castellanza',
     'blog.article.jazz-concerti-castellanza.excerpt': 'Am Dienstag, 20.',
-    'blog.article.jazz-concerti-castellanza.imageAlt': 'Jazzbühne im Cinema Teatro Dante in Castellanza bei Eventi in Jazz 2026',
+    'blog.article.jazz-concerti-castellanza.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

@@ -30,26 +30,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T00:24:03.070Z",
       "lastFailureAt": "2026-10-13T00:31:55.123Z"
-    },
-    {
-      "articleId": "rio-scorta-giro-como",
-      "title": "Como, Rio nasce con la scorta durante il Giro",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-13T01:05:41.015Z",
-      "lastFailureAt": "2026-10-13T01:05:41.015Z"
-    },
-    {
-      "articleId": "jazz-concerti-castellanza",
-      "title": "Eventi in Jazz 2026: concerti a Castellanza",
-      "fallbackImage": "/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp",
-      "reason": "All image providers failed for article-jazz-concerti-castellanza: openai-codex (vision gate rejected image: Relevant generic jazz concert illustration, but it contains visible fore",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-13T01:28:03.332Z",
-      "lastFailureAt": "2026-10-13T01:28:03.332Z"
     }
   ]
 }

@@ -106751,10 +106751,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-rio-scorta-giro-como.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Due moto della Polizia Locale scortano l'auto di una famiglia verso l'ospedale durante il Giro di Lombardia."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T01:05:40+00:00",
       "dateModified": "2026-10-13T01:05:40+00:00",
@@ -106790,10 +106790,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-a8-manutenzione-cavalcavia-ottobre-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-jazz-concerti-castellanza.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Scena jazz al Cinema Teatro Dante di Castellanza per Eventi in Jazz 2026"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T01:28:03+00:00",
       "dateModified": "2026-10-13T01:28:03+00:00",
