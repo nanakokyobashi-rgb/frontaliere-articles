@@ -107127,6 +107127,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-loreto-pavimentazione-notte': {
+    title: 'Via Mazzini a Loreto chiusa di notte dal 19 al 23 ottobre',
+    description: 'Via Mazzini chiusa a Loreto dal 19 al 23 ottobre Sbarramento notturno dalle 20 alle 6 Lavori per la nuova pavimentazione stradale Accessi da Riva Antonio Caccia',
+    keywords: 'frontalieri, ticino, svizzera, italia, mazzini, loreto, chiusa, notte',
+    ogTitle: 'Lavori notturni in via Mazzini a Loreto',
+    ogDescription: 'Via Mazzini chiusa a Loreto dal 19 al 23 ottobre Sbarramento notturno dalle 20 alle 6 Lavori per la nuova pavimentazione stradale Accessi da Riva Antonio Caccia',
+    canonicalPath: '/articoli-frontaliere/loreto-pavimentazione-notte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Via Mazzini a Loreto chiusa di notte dal 19 al 23 ottobre",
+      "description": "Via Mazzini chiusa a Loreto dal 19 al 23 ottobre Sbarramento notturno dalle 20 alle 6 Lavori per la nuova pavimentazione stradale Accessi da Riva Antonio Caccia",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lavori-autolaghi-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Via Mazzini a Loreto, Lugano, interessata da lavori notturni per la nuova pavimentazione"
+      },
+      "datePublished": "2026-10-13T07:51:32+00:00",
+      "dateModified": "2026-10-13T07:51:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/loreto-pavimentazione-notte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

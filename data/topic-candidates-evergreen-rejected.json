@@ -797,18 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/rubriche/ospite/1956002/ue-sovranita-accordo-addio-quadri-lorenzo": {
-      "section": "frontaliere",
-      "ts": 1791699575480
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/notte-sull%e2%80%99autostrada-chi-pulisce-mentre-dormi--4145888.html": {
-      "section": "frontaliere",
-      "ts": 1791702854092
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1955633/tra-lupo-mobilita-valli-territorio-e-strade-i-dossier-che-aspettano-marchesi": {
-      "section": "frontaliere",
-      "ts": 1791703152160
-    },
     "svizzera::https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
       "section": "svizzera",
       "ts": 1791709473410
@@ -1040,6 +1028,14 @@
     "frontaliere::https://www.varesenoi.it/2026/10/13/leggi-notizia/argomenti/economia-13/articolo/benzinai-dove-ha-retto-lo-sconto-in-provincia-di-varese.html": {
       "section": "frontaliere",
       "ts": 1791871986979
+    },
+    "frontaliere::https://www.laregione.ch/cantone/locarnese/1956205/aggregazione-brissago-ronco-arriva-la-sospensione-provvisoria": {
+      "section": "frontaliere",
+      "ts": 1791877220078
+    },
+    "frontaliere::https://www.tio.ch/dal-mondo/cronaca/1956363/feriti-supermercato-accoltellamento-aggressione-corea": {
+      "section": "frontaliere",
+      "ts": 1791877238303
     }
   }
 }

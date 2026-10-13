@@ -13108,6 +13108,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.rientro-ticino-salario-fattori.title': 'Returning to Ticino: salary is not the only decisive factor',
     'blog.article.rientro-ticino-salario-fattori.excerpt': 'Salaries matter, but they alone do not determine the return.',
     'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Young professionals at Lugano Congress Center during event on returns to Ticino',
+    'blog.article.loreto-pavimentazione-notte.title': 'Via Mazzini in Loreto closed at night from October 19 to 23',
+    'blog.article.loreto-pavimentazione-notte.excerpt': 'Via Mazzini closed in Loreto from October 19 to 23 Overnight closure from 8 p.m.',
+    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Night roadworks on Via Mazzini in Loreto, Lugano, for new street paving',
 };
 
 export default blogMetaEn;

@@ -13110,6 +13110,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.rientro-ticino-salario-fattori.title': 'Retour au Tessin : le salaire n\'est pas le seul facteur décisif',
     'blog.article.rientro-ticino-salario-fattori.excerpt': 'Les salaires comptent, mais ils ne déterminent pas à eux seuls le retour.',
     'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Jeunes professionnels au Palais des Congrès de Lugano lors d\'un événement sur les retours au Tessin',
+    'blog.article.loreto-pavimentazione-notte.title': 'Via Mazzini à Loreto fermée de nuit du 19 au 23 octobre',
+    'blog.article.loreto-pavimentazione-notte.excerpt': 'Via Mazzini fermée à Loreto du 19 au 23 octobre Barrage nocturne de 20 à 6 Travaux pour le nouveau revêtement routier Accès par Riva Antonio Caccia',
+    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Travaux nocturnes sur la Via Mazzini à Loreto, Lugano, pour le nouveau revêtement routier',
 };
 
 export default blogMetaFr;

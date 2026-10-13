@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/in-lombardia-benzina-oltre-i-2-euro-fare-il-pieno-in-svizzera-non-conviene-piu/2663494": {
-    "articleId": "benzina-confine-svizzera-agosto-2026",
-    "ts": "2026-08-26T07:06:03.036Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/la-coda-al-san-gottardo-piu-lunga-degli-ultimi-4-anni-441356": {
     "articleId": "san-gottardo-code-20-km-luglio",
     "ts": "2026-08-26T09:56:28.232Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4156758": {
     "articleId": "rientro-ticino-salario-fattori",
     "ts": "2026-10-13T06:45:42.105Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1956360/loreto-lavori-mazzini-traffico-posa": {
+    "articleId": "loreto-pavimentazione-notte",
+    "ts": "2026-10-13T07:51:33.090Z",
     "keyForm": 2
   }
 }

@@ -13107,6 +13107,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.rientro-ticino-salario-fattori.title': 'Rückkehr ins Tessin: Das Gehalt ist nicht der einzige entscheidende Faktor',
     'blog.article.rientro-ticino-salario-fattori.excerpt': 'Die Gehälter spielen eine Rolle, entscheiden aber nicht allein über die Rückkehr.',
     'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Junge Berufstätige im Kongresszentrum Lugano bei Veranstaltung über Rückkehr ins Tessin',
+    'blog.article.loreto-pavimentazione-notte.title': 'Via Mazzini in Loreto nachts vom 19. bis 23. Oktober gesperrt',
+    'blog.article.loreto-pavimentazione-notte.excerpt': 'Via Mazzini in Loreto vom 19.',
+    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Nächtliche Bauarbeiten an der Via Mazzini in Loreto, Lugano, für den neuen Strassenbelag',
 };
 
 export default blogMetaDe;
