@@ -102599,6 +102599,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-wagner-chiude-waldstatt-69-licenziamenti': {
+    title: 'Wagner chiude a Waldstatt: 69 posti persi | Frontaliere Ticino',
+    description: 'Wagner chiude a Waldstatt, nel cantone di Appenzello Esterno La chiusura riguarda 69 posti di lavoro Le attività passano gradualmente a partner esterni',
+    keywords: 'frontalieri, ticino, svizzera, italia, wagner, chiude, waldstatt, posti',
+    ogTitle: 'Wagner chiude a Waldstatt: 69 posti di lavoro persi',
+    ogDescription: 'Wagner chiude a Waldstatt, nel cantone di Appenzello Esterno La chiusura riguarda 69 posti di lavoro Le attività passano gradualmente a partner esterni',
+    canonicalPath: '/articoli-svizzera/wagner-chiude-waldstatt-69-licenziamenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Wagner chiude a Waldstatt: 69 posti persi",
+      "description": "Wagner chiude a Waldstatt, nel cantone di Appenzello Esterno La chiusura riguarda 69 posti di lavoro Le attività passano gradualmente a partner esterni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-wagner-chiude-waldstatt-69-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stabilimento industriale chiuso a Waldstatt, Appenzello Esterno"
+      },
+      "datePublished": "2026-10-13T04:32:01+00:00",
+      "dateModified": "2026-10-13T04:32:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/wagner-chiude-waldstatt-69-licenziamenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

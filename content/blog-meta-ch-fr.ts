@@ -8132,6 +8132,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.kof-nobel-svizzera.title': 'KOF : un Nobel d\'économie important pour la Suisse',
     'blog.article.kof-nobel-svizzera.excerpt': 'Robert Hall et Michael Woodford reçoivent le Nobel d\'économie.',
     'blog.article.kof-nobel-svizzera.imageAlt': 'Vue urbaine suisse liée à l\'analyse de la politique monétaire',
+    'blog.article.wagner-chiude-waldstatt-69-licenziamenti.title': 'Wagner ferme à Waldstatt : 69 emplois perdus',
+    'blog.article.wagner-chiude-waldstatt-69-licenziamenti.excerpt': 'Wagner ferme à Waldstatt, dans le canton d’Appenzell Rhodes-Extérieures La fermeture concerne 69 emplois Les activités sont progressivement confiées à des partenaires externes',
+    'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Usine fermée à Waldstatt, Appenzell Rhodes-Extérieures',
 };
 
 export default blogMetaChFr;

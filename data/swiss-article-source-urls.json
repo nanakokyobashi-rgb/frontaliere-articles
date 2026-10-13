@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1948679/amag-volkswagen-vw-mercato-svizzera-futuro-clienti-prova-assicura": {
-    "articleId": "volkswagen-tagli-amag-rassicura",
-    "ts": "2026-09-08T09:12:19.366Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948713/tariffe-elettricita-prezzi-franchi-elcom": {
     "articleId": "tariffe-elettricita-2027-calo",
     "ts": "2026-09-08T09:46:42.439Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/kof-sui-nobel-economia%2c-%22loro-lavoro-importante-per-la-svizzera%22/92203941": {
     "articleId": "kof-nobel-svizzera",
     "ts": "2026-10-13T04:15:39.337Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956261/azienda-wagner-chiude-ar-svizzera": {
+    "articleId": "wagner-chiude-waldstatt-69-licenziamenti",
+    "ts": "2026-10-13T04:32:01.946Z",
     "keyForm": 2
   }
 }

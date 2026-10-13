@@ -8132,6 +8132,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.kof-nobel-svizzera.title': 'KOF: Nobel Prize in Economics important for Switzerland',
     'blog.article.kof-nobel-svizzera.excerpt': 'Robert Hall and Michael Woodford receive the Nobel Prize in Economics.',
     'blog.article.kof-nobel-svizzera.imageAlt': 'Swiss city view associated with monetary policy analysis',
+    'blog.article.wagner-chiude-waldstatt-69-licenziamenti.title': 'Wagner closes in Waldstatt: 69 jobs lost',
+    'blog.article.wagner-chiude-waldstatt-69-licenziamenti.excerpt': 'Wagner is closing in Waldstatt, in the canton of Appenzell Ausserrhoden The closure affects 69 jobs Operations are gradually being transferred to external partners',
+    'blog.article.wagner-chiude-waldstatt-69-licenziamenti.imageAlt': 'Closed industrial plant in Waldstatt, Appenzell Ausserrhoden',
 };
 
 export default blogMetaChEn;

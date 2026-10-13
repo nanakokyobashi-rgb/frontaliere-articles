@@ -2733,6 +2733,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ascend-evonext-quotazione': { it: 'ascend-evonext-quotazione', en: 'ascend-evonext-listing', de: 'ascend-evonext-boersengang', fr: 'ascend-evonext-cotation' },
  'case-svizzera-rialzo-trimestre': { it: 'case-svizzera-rialzo-trimestre', en: 'swiss-home-prices-third-quarter', de: 'schweizer-hauspreise-drittes-quartal', fr: 'prix-maisons-suisses-troisieme-trimestre' },
  'kof-nobel-svizzera': { it: 'kof-nobel-svizzera', en: 'kof-nobel-switzerland', de: 'kof-wirtschaftsnobelpreis-schweiz', fr: 'kof-nobel-economie-suisse' },
+ 'wagner-chiude-waldstatt-69-licenziamenti': { it: 'wagner-chiude-waldstatt-69-licenziamenti', en: 'wagner-closes-waldstatt-69-layoffs', de: 'wagner-schliesst-waldstatt-69-kundigungen', fr: 'wagner-ferme-waldstatt-69-licenciements' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
