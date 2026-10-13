@@ -172,6 +172,7 @@ import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creat
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
 import {
   failedImageRegenerationRetryIsEligible,
+  imageRegenerationActionableAt,
   readImageRegenerationQueue,
 } from '../../generator/scripts/lib/image-regeneration-queue.mjs';
 import { SECRET_PATTERNS } from './scan-hardcoded-secrets.mjs';
@@ -607,8 +608,10 @@ export const MIN_LOG_SUCCESS_RATE = 0.5;
 /**
  * `cover-fallback-health` — quattro ripieghi consecutivi sono già oltre la
  * normalità osservabile; tre è il limite che l'operatore può tollerare senza
- * aprire un incidente. La coda è un secondo segnale indipendente: un item che
- * aspetta sei ore è già più vecchio della finestra operativa del generatore.
+ * aprire un incidente. La coda è un secondo segnale indipendente: un item
+ * azionabile che resta pronto per sei ore è già oltre la finestra operativa
+ * del generatore. Per un fallimento, l'orologio parte dopo il cooldown, non
+ * dalla richiesta originaria.
  */
 export const COVER_FALLBACK_CONSECUTIVE_THRESHOLD = 4;
 export const COVER_QUEUE_MAX_AGE_HOURS = 6;
@@ -1428,7 +1431,7 @@ export const CONDITIONS = [
         ? [
           `- Coda rigenerazione: **${queue.count}** item; stati: ${statuses}.`,
           `- Item più vecchio: **${queue.oldestRequestedAt || '—'}** (${Number.isFinite(queue.oldestAgeHours) ? `${queue.oldestAgeHours.toFixed(1)}h` : '—'} — soglia ${COVER_QUEUE_MAX_AGE_HOURS}h).`,
-          `- Item azionabili: **${queue.actionableCount}**; più vecchio pronto al retry: **${queue.oldestActionableRequestedAt || '—'}** (${Number.isFinite(queue.oldestActionableAgeHours) ? `${queue.oldestActionableAgeHours.toFixed(1)}h` : 'nessuno — cooldown in corso'}).`,
+          `- Item azionabili: **${queue.actionableCount}**; richiesta più vecchia pronta al retry: **${queue.oldestActionableRequestedAt || '—'}** (${Number.isFinite(queue.oldestActionableAgeHours) ? `${queue.oldestActionableAgeHours.toFixed(1)}h` : 'nessuno — cooldown in corso'} di attesa azionabile; pronta dal ${queue.oldestActionableAt || '—'}).`,
         ]
         : [
           '- Coda rigenerazione: **non misurata** (JSON illeggibile o `requestedAt` non valido); questo segnale resta sconosciuto.',
@@ -2199,7 +2202,8 @@ export function formatCantonCommitSummary(perCanton) {
  * coda sana. Un `requestedAt` invalido rende la misura non disponibile: l'età
  * minima sarebbe altrimenti un numero inventato proprio mentre il resolver ha
  * bisogno di un allarme. Gli item `failed` restano visibili nella diagnostica,
- * ma non sono azionabili fino alla scadenza del cooldown condiviso col drain.
+ * ma non sono azionabili fino alla scadenza del cooldown condiviso col drain;
+ * quando lo diventano, l'età SLO parte da quella scadenza.
  */
 export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
   try {
@@ -2209,6 +2213,7 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
       item,
       requestedAt: Date.parse(String(item?.requestedAt || '')),
       lastFailureAt: Date.parse(String(item?.lastFailureAt || '')),
+      actionableAt: imageRegenerationActionableAt(item, COVER_QUEUE_MAX_AGE_HOURS),
     }));
     if (parsed.some(({ requestedAt }) => !Number.isFinite(requestedAt))) {
       return { available: false, reason: 'image regeneration queue contains an invalid requestedAt' };
@@ -2223,8 +2228,9 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
     if (!Number.isFinite(observedAt)) {
       return { available: false, reason: 'cover queue measurement received an invalid timestamp' };
     }
-    const actionable = parsed.filter(({ item, lastFailureAt }) => {
+    const actionable = parsed.filter(({ item, lastFailureAt, actionableAt }) => {
       const status = String(item?.status || 'unknown');
+      if (!Number.isFinite(actionableAt) || actionableAt > observedAt) return false;
       if (status !== 'failed') return true;
       // Missing failure metadata cannot prove that the cooldown is active.
       // Keep the item visible as actionable rather than silently declaring it
@@ -2233,7 +2239,9 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
         || failedImageRegenerationRetryIsEligible(item, observedAt, COVER_QUEUE_MAX_AGE_HOURS);
     });
     const oldestActionable = actionable.length
-      ? Math.min(...actionable.map(({ requestedAt }) => requestedAt))
+      ? actionable.reduce((oldest, candidate) => (
+        oldest === null || candidate.actionableAt < oldest.actionableAt ? candidate : oldest
+      ), null)
       : null;
     return {
       available: true,
@@ -2241,10 +2249,11 @@ export function collectCoverQueue(repoRoot = REPO_ROOT, now = Date.now()) {
       oldestRequestedAt: oldest === null ? null : new Date(oldest).toISOString(),
       oldestAgeHours: oldest === null ? null : Math.max(0, (observedAt - oldest) / 3_600_000),
       actionableCount: actionable.length,
-      oldestActionableRequestedAt: oldestActionable === null ? null : new Date(oldestActionable).toISOString(),
+      oldestActionableRequestedAt: oldestActionable === null ? null : new Date(oldestActionable.requestedAt).toISOString(),
+      oldestActionableAt: oldestActionable === null ? null : new Date(oldestActionable.actionableAt).toISOString(),
       oldestActionableAgeHours: oldestActionable === null
         ? null
-        : Math.max(0, (observedAt - oldestActionable) / 3_600_000),
+        : Math.max(0, (observedAt - oldestActionable.actionableAt) / 3_600_000),
       statuses,
     };
   } catch (error) {

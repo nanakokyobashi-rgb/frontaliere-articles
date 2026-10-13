@@ -8,6 +8,8 @@ export const IMAGE_REGENERATION_QUEUE_LOCK_REL = 'data/image-regeneration-queue-
 export const IMAGE_REGENERATION_QUEUE_PENDING_REL = 'data/image-regeneration-queue-pending.jsonl';
 export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
 
+const HOUR_MS = 3_600_000;
+
 /**
  * A failed cover is retryable only after the caller's explicit cooldown.
  * Keeping this predicate beside the queue schema prevents the drainer and
@@ -22,6 +24,31 @@ export function failedImageRegenerationRetryIsEligible(item, nowMs, retryAfterHo
     && retryHours > 0
     && Number.isFinite(lastFailureAt)
     && nowMs - lastFailureAt >= retryHours * 3_600_000;
+}
+
+/**
+ * Return the timestamp from which a queue item counts as actionable.
+ *
+ * A queued item is actionable from its request. A failed item is actionable
+ * only after the cooldown that starts at its last failure; using requestedAt
+ * after that point makes an old failure look like an old ready retry and lets
+ * the watchdog fire immediately when the cooldown ends. Missing failure
+ * metadata falls back to requestedAt so diagnostics remain fail-open, while
+ * the drainer's stricter retry predicate remains fail-closed.
+ */
+export function imageRegenerationActionableAt(item, retryAfterHours) {
+  const requestedAt = Date.parse(String(item?.requestedAt || ''));
+  if (!Number.isFinite(requestedAt)) return null;
+  if (String(item?.status || 'unknown') !== 'failed' || retryAfterHours === null) {
+    return requestedAt;
+  }
+
+  const retryHours = Number(retryAfterHours);
+  const lastFailureAt = Date.parse(String(item?.lastFailureAt || ''));
+  if (!Number.isFinite(retryHours) || retryHours <= 0 || !Number.isFinite(lastFailureAt)) {
+    return requestedAt;
+  }
+  return Math.max(requestedAt, lastFailureAt + retryHours * HOUR_MS);
 }
 
 let lockSequence = 0;

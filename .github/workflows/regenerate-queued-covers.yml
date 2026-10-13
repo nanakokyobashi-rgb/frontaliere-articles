@@ -5,10 +5,11 @@ run-name: Regenerate queued covers (${{ inputs.limit || '10' }})
 # ora e si ferma da sola quando items[] e' vuoto e l'outbox publisher e'
 # vuoto. Il cron resta il backstop per gli eventi workflow_run persi; sia il
 # generation-health-watchdog sia il completamento del generatore principale
-# possono riaprire il drain quando la coda si avvicina alla soglia di eta'. Le
-# voci failed vengono riaperte dalle run automatiche solo dopo che l'ultimo
-# tentativo ha superato la soglia del watchdog; il dispatch manuale puo'
-# forzare un retry immediato.
+# possono riaprire il drain quando un item azionabile si avvicina alla soglia
+# di eta'. Le voci failed vengono riaperte dalle run automatiche solo dopo che
+# l'ultimo tentativo ha superato la soglia del watchdog; il dispatch manuale
+# puo' forzare un retry immediato. Un fallimento in cooldown non consuma eta'
+# azionabile: il suo orologio riparte dalla scadenza del cooldown.
 # I commit prodotti dal drain stesso sono esclusi dal wake-up del generatore:
 # altrimenti il completamento del generatore riaprirebbe il drain in una catena
 # autoreferenziale. Solo gli eventi automatici sono wake-up: una dispatch
@@ -135,8 +136,9 @@ jobs:
             echo "::error::watchdog queue threshold is too small for the recovery margin: $watchdog_max_age_hours"
             exit 1
           fi
-          read -r queue_count oldest_age_hours < <(QUEUE_FILE="$QUEUE_FILE" node --input-type=module <<'NODE'
+          read -r queue_count oldest_actionable_age_hours < <(QUEUE_FILE="$QUEUE_FILE" RETRY_AFTER_HOURS="$watchdog_max_age_hours" node --input-type=module <<'NODE'
           import fs from 'node:fs';
+          import { imageRegenerationActionableAt } from './generator/scripts/lib/image-regeneration-queue.mjs';
 
           const queue = JSON.parse(fs.readFileSync(process.env.QUEUE_FILE, 'utf8'));
           if (queue?.schema !== 1 || !Array.isArray(queue.items)) {
@@ -146,8 +148,14 @@ jobs:
           if (requestedAt.some((timestamp) => !Number.isFinite(timestamp))) {
             throw new Error('image regeneration queue contains an invalid requestedAt');
           }
-          const oldest = requestedAt.length ? Math.min(...requestedAt) : null;
-          const ageHours = oldest === null ? 0 : Math.max(0, (Date.now() - oldest) / 3_600_000);
+          const now = Date.now();
+          const actionableAt = queue.items
+            .map((item) => imageRegenerationActionableAt(item, Number(process.env.RETRY_AFTER_HOURS)))
+            .filter((timestamp) => Number.isFinite(timestamp) && timestamp <= now);
+          const oldestActionable = actionableAt.length ? Math.min(...actionableAt) : null;
+          const ageHours = oldestActionable === null
+            ? 0
+            : Math.max(0, (now - oldestActionable) / 3_600_000);
           process.stdout.write(`${requestedAt.length} ${ageHours}\n`);
           NODE
           )
@@ -156,12 +164,12 @@ jobs:
             echo 'cover queue is empty: no watchdog recovery needed'
             exit 0
           fi
-          if awk -v age="$oldest_age_hours" -v threshold="$recovery_age_hours" 'BEGIN { exit !(age >= threshold) }'; then
+          if awk -v age="$oldest_actionable_age_hours" -v threshold="$recovery_age_hours" 'BEGIN { exit !(age >= threshold) }'; then
             echo 'should_drain=true' >> "$GITHUB_OUTPUT"
-            echo "watchdog recovery enabled: oldest cover is ${oldest_age_hours}h old (early threshold ${recovery_age_hours}h; watchdog threshold ${watchdog_max_age_hours}h)"
+            echo "watchdog recovery enabled: oldest actionable cover is ${oldest_actionable_age_hours}h old (early threshold ${recovery_age_hours}h; watchdog threshold ${watchdog_max_age_hours}h)"
           else
             echo 'should_drain=false' >> "$GITHUB_OUTPUT"
-            echo "watchdog recovery deferred: oldest cover is ${oldest_age_hours}h old (early threshold ${recovery_age_hours}h)"
+            echo "watchdog recovery deferred: oldest actionable cover is ${oldest_actionable_age_hours}h old (early threshold ${recovery_age_hours}h)"
           fi
 
   drain:
