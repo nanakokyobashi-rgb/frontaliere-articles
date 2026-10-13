@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-erreci-busto-marsala-vittoria.webp",
+      "sha256": "8371869c45511fbadd0cea97531f19ad4c7f8c00fede7e8aea7f96bc2c7204cd"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-erreci-busto-marsala-vittoria-480w.webp",
+      "sha256": "2d4a6b8169c00d6ac01b470d849f7c03650bc0e534288f042ba7f9acaa222f1d"
+    }
+  ]
 }
