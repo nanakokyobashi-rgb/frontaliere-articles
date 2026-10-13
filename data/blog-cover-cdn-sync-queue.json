@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita.webp",
-      "sha256": "b1ca23ef497305bfb9159c44c07d6d10a932ddb0f1b4965840ae8f447a23e1fe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-avs-voto-iva-il-29-novembre-per-la-13esima-rendita-480w.webp",
-      "sha256": "756dabdcc7a183f8291b7da37e768adf962d2e689bf6f0c06dbd022a94accff6"
-    }
-  ]
+  "items": []
 }
