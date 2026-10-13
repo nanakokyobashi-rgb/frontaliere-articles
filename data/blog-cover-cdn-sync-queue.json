@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-kof-nobel-svizzera.webp",
-      "sha256": "16e3a40516474e3acf21d1d0705093db3235de886427b9effac7c11496d2b989"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-kof-nobel-svizzera-480w.webp",
-      "sha256": "211537acb148553e67c3276eb2a61d1ab6e1a2295612c2c2a97aa025638fba19"
-    }
-  ]
+  "items": []
 }
