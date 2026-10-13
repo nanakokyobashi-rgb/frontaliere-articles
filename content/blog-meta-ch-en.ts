@@ -8117,6 +8117,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.cdf-procedure-fitosanitari.title': 'CDF: complex approval of plant protection products',
     'blog.article.cdf-procedure-fitosanitari.excerpt': 'The CDF audit was published on October 12, 2026 Five federal offices examine plant protection products Structures and processes are too complex',
     'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Swiss federal offices and a dossier on plant protection product approval',
+    'blog.article.proiezioni-scuola-universita-2035.title': 'Schools and universities: FSO projections to 2035',
+    'blog.article.proiezioni-scuola-universita-2035.excerpt': 'The peak of primary is expected between 2027 and 2028.',
+    'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'University students walking on a Swiss campus during autumn',
 };
 
 export default blogMetaChEn;

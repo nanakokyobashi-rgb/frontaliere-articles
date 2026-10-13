@@ -8117,6 +8117,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.cdf-procedure-fitosanitari.title': 'CDF: omologazione dei prodotti fitosanitari complessa',
     'blog.article.cdf-procedure-fitosanitari.excerpt': 'Il 12 ottobre 2026 è stata pubblicata la verifica del CDF Cinque uffici federali esaminano i prodotti fitosanitari Strutture e processi sono troppo complessi',
     'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Uffici federali svizzeri e dossier per l\'omologazione di prodotti fitosanitari',
+    'blog.article.proiezioni-scuola-universita-2035.title': 'Scuole e università: le proiezioni UST al 2035',
+    'blog.article.proiezioni-scuola-universita-2035.excerpt': 'Il picco della primaria è atteso tra il 2027 e il 2028.',
+    'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'Studenti universitari camminano in un campus svizzero durante l\'autunno',
 };
 
 export default blogMetaChIt;

@@ -8117,6 +8117,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.cdf-procedure-fitosanitari.title': 'CDF : homologation complexe des produits phytosanitaires',
     'blog.article.cdf-procedure-fitosanitari.excerpt': 'Le 12 octobre 2026, l’audit du CDF a été publié Cinq offices fédéraux examinent les produits phytosanitaires Les structures et les processus sont trop complexes',
     'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Bureaux fédéraux suisses et dossier d\'homologation de produits phytosanitaires',
+    'blog.article.proiezioni-scuola-universita-2035.title': 'Écoles et universités : projections FSO pour 2035',
+    'blog.article.proiezioni-scuola-universita-2035.excerpt': 'Le pic des primaires est attendu entre 2027 et 2028.',
+    'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'Étudiants universitaires se promènent sur un campus suisse en automne',
 };
 
 export default blogMetaChFr;

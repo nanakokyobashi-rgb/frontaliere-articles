@@ -8117,6 +8117,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.cdf-procedure-fitosanitari.title': 'CDF: Zulassung von Pflanzenschutzmitteln komplex',
     'blog.article.cdf-procedure-fitosanitari.excerpt': 'Am 12. Oktober 2026 wurde die Prüfung des CDF veröffentlicht Fünf Bundesämter prüfen die Pflanzenschutzmittel Strukturen und Prozesse sind zu komplex',
     'blog.article.cdf-procedure-fitosanitari.imageAlt': 'Schweizer Bundesämter und Unterlagen zur Zulassung von Pflanzenschutzmitteln',
+    'blog.article.proiezioni-scuola-universita-2035.title': 'Schulen und Universitäten: FSO-Prognosen bis 2035',
+    'blog.article.proiezioni-scuola-universita-2035.excerpt': 'Der Höhepunkt der Vorwahl wird zwischen 2027 und 2028 erwartet.',
+    'blog.article.proiezioni-scuola-universita-2035.imageAlt': 'Universitätsstudenten gehen auf einem Schweizer Campus im Herbst',
 };
 
 export default blogMetaChDe;

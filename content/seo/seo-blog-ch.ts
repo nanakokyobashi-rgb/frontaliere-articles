@@ -102404,6 +102404,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-proiezioni-scuola-universita-2035': {
+    title: 'Scuole e università: le proiezioni UST al 2035',
+    description: 'Il picco della primaria è atteso tra il 2027 e il 2028. Dal 2029 gli iscritti alle elementari inizieranno a diminuire. Nel 2035 le università potrebbero',
+    keywords: 'frontalieri, ticino, svizzera, italia, scuole, università, proiezioni, picco',
+    ogTitle: 'Proiezioni UST: calo elementari, boom università',
+    ogDescription: 'Il picco della primaria è atteso tra il 2027 e il 2028.',
+    canonicalPath: '/articoli-svizzera/proiezioni-scuola-universita-2035/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scuole e università: le proiezioni UST al 2035",
+      "description": "Il picco della primaria è atteso tra il 2027 e il 2028. Dal 2029 gli iscritti alle elementari inizieranno a diminuire. Nel 2035 le università potrebbero",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-proiezioni-scuola-universita-2035.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studenti universitari camminano in un campus svizzero durante l'autunno"
+      },
+      "datePublished": "2026-10-13T00:48:50+00:00",
+      "dateModified": "2026-10-13T00:48:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/proiezioni-scuola-universita-2035/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
