@@ -565,14 +565,19 @@ function parseCompactPathDate(raw) {
   return date.getFullYear() === year && date.getMonth() === month && date.getDate() === day ? date : null;
 }
 
+function spitalerPermalinkDate(url) {
+  let pathName = '';
+  try { pathName = new URL(url).pathname; } catch { return null; }
+  const normalizedPathName = pathName.replace(/\/+$/u, '');
+  const match = /(?:^|\/)(\d{6})-[^/]+(?:\.[^/]+)?$/u.exec(normalizedPathName);
+  return parseCompactPathDate(match?.[1]);
+}
+
 function applyUrlDateFormat(headlines, source) {
   if (source?.quirks?.urlDateFormat !== 'YYMMDD') return headlines;
   return headlines.map((h) => {
     if (h.date) return h;
-    let pathName = '';
-    try { pathName = new URL(h.url).pathname; } catch { return h; }
-    const match = /(?:^|\/)(\d{6})-[^/]+(?:\.[^/]+)?$/u.exec(pathName);
-    const date = parseCompactPathDate(match?.[1]);
+    const date = spitalerPermalinkDate(h.url);
     return date ? { ...h, date } : h;
   });
 }

@@ -109,8 +109,55 @@ export const SECTIONS = Object.freeze({
   },
 });
 
-const CITATION_RE = /\*Fonte:\s*\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\*/gu;
-const TAIL_CITATION_RE = /\n\n\*Fonte:\s*\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)\*$/u;
+const SOURCE_CITATION_PREFIX_RE = /\*Fonte:\s*\[([^\]]+)\]\(/gu;
+
+function decodeSourceCitationUrl(body, start) {
+  let depth = 0;
+  let escaped = false;
+  for (let index = start; index < body.length; index += 1) {
+    const character = body[index];
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+    if (character === '\\') {
+      escaped = true;
+      continue;
+    }
+    if (/\s/u.test(character)) return null;
+    if (character === '(') {
+      depth += 1;
+    } else if (character === ')') {
+      if (depth === 0) {
+        return {
+          url: body.slice(start, index).replace(/\\([()])/gu, '$1'),
+          closeIndex: index,
+        };
+      }
+      depth -= 1;
+    }
+  }
+  return null;
+}
+
+function sourceCitations(body) {
+  const citations = [];
+  const prefixRe = new RegExp(SOURCE_CITATION_PREFIX_RE.source, SOURCE_CITATION_PREFIX_RE.flags);
+  let prefix;
+  while ((prefix = prefixRe.exec(body)) !== null) {
+    const destination = decodeSourceCitationUrl(body, prefixRe.lastIndex);
+    if (!destination || !/^https?:\/\/[^\s]+$/u.test(destination.url)) continue;
+    if (body[destination.closeIndex + 1] !== '*') continue;
+    citations.push({
+      start: prefix.index,
+      end: destination.closeIndex + 2,
+      label: prefix[1],
+      url: destination.url,
+    });
+    prefixRe.lastIndex = destination.closeIndex + 2;
+  }
+  return citations;
+}
 
 function normalizedHostname(url) {
   try {
@@ -140,11 +187,11 @@ function normalizedHostname(url) {
  */
 export function articleTypeFromItalianBody(body3) {
   const body = String(body3 || '').trimEnd();
-  const tail = body.match(TAIL_CITATION_RE);
-  if (!tail) return undefined;
-  const citations = [...body.matchAll(CITATION_RE)];
+  const citations = sourceCitations(body);
   if (citations.length !== 1) return undefined;
-  const [, label, url] = tail;
+  const [citation] = citations;
+  if (citation.end !== body.length || !body.slice(0, citation.start).endsWith('\n\n')) return undefined;
+  const { label, url } = citation;
   const domain = normalizedHostname(url);
   if (!domain || label !== domain) return undefined;
   // L'etichetta di telemetria della run non e' nel corpus; `undefined` e' il

@@ -8324,6 +8324,74 @@ function monthFormatTag(name) {
   return 'en-textual';
 }
 
+/** URL → data delle card Neuhausen, con i confini delle section annidate rispettati. */
+function nestedNeuhausenCards(html, baseUrl) {
+  const sectionTagRe = /<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script\s*>|<style\b[^>]*>[\s\S]*?<\/style\s*>|<\/?section\b[^>]*>/gi;
+  const rootSections = [];
+  const sectionStack = [];
+  let tag;
+  while ((tag = sectionTagRe.exec(html)) !== null) {
+    const markup = tag[0];
+    if (/^(?:<!--|<script\b|<style\b)/i.test(markup)) continue;
+    if (/^<\//u.test(markup)) {
+      const section = sectionStack.pop();
+      if (!section) continue;
+      section.contentEnd = tag.index;
+      section.closeEnd = sectionTagRe.lastIndex;
+      const parent = sectionStack[sectionStack.length - 1];
+      (parent ? parent.children : rootSections).push(section);
+    } else if (!/\/\s*>$/u.test(markup)) {
+      sectionStack.push({
+        contentStart: sectionTagRe.lastIndex,
+        contentEnd: null,
+        closeEnd: null,
+        children: [],
+        openStart: tag.index,
+      });
+    }
+  }
+
+  const ownSectionContent = (section) => {
+    let cursor = section.contentStart;
+    let content = '';
+    for (const child of section.children) {
+      content += html.slice(cursor, child.openStart);
+      cursor = child.closeEnd;
+    }
+    return content + html.slice(cursor, section.contentEnd);
+  };
+  const sections = [];
+  const collectSections = (section) => {
+    sections.push(section);
+    for (const child of section.children) collectSections(child);
+  };
+  for (const section of rootSections) collectSections(section);
+  for (const section of sections) {
+    const dateNode = ownSectionContent(section).match(/<h4\b[^>]*>([\s\S]*?)<\/h4>/i);
+    section.date = parseHeadlineDate(dateNode?.[1] || '')?.date || null;
+  }
+
+  const datesByUrl = new Map();
+  const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>/gi;
+  let link;
+  while ((link = linkRe.exec(html)) !== null) {
+    let dateSection = null;
+    for (const section of sections) {
+      if (!section.date || link.index < section.contentStart || link.index >= section.contentEnd) continue;
+      if (!dateSection
+        || section.contentEnd - section.contentStart < dateSection.contentEnd - dateSection.contentStart) {
+        dateSection = section;
+      }
+    }
+    if (!dateSection) continue;
+    try {
+      const href = new URL(link[1], baseUrl).href;
+      if (href.startsWith('http')) datesByUrl.set(href, dateSection.date);
+    } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
+  }
+  return datesByUrl;
+}
+
 /** Build a map of URL → date from <time> elements found near <a> links in the HTML */
 function extractDatesFromHtml(html, baseUrl) {
   const quirks = arguments[2] || {};
@@ -8347,24 +8415,11 @@ function extractDatesFromHtml(html, baseUrl) {
 
   // Alcune liste istituzionali mettono il link al PDF in fondo alla card,
   // dopo date d'evento nel corpo (Neuhausen: «28. Februar 2027»). Quando la
-  // fonte dichiara esplicitamente che l'`h4` della sezione è la data della
-  // card, quella è la sola data da associare ai link della sezione.
+  // fonte dichiara esplicitamente che l'`h4` di una section è la data della
+  // card, i link ricevono la data dalla section datata più interna che li
+  // contiene: le card annidate non ereditano la data della sezione esterna.
   if (quirks?.dateFromSectionHeading === 'h4') {
-    const sectionRe = /<section\b[^>]*>([\s\S]*?)<\/section>/gi;
-    let section;
-    while ((section = sectionRe.exec(html)) !== null) {
-      const dateNode = section[1].match(/<h4\b[^>]*>([\s\S]*?)<\/h4>/i);
-      const hit = parseHeadlineDate(dateNode?.[1] || '');
-      if (!hit) continue;
-      const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>/gi;
-      let link;
-      while ((link = linkRe.exec(section[1])) !== null) {
-        try {
-          const href = new URL(link[1], baseUrl).href;
-          if (href.startsWith('http')) dateMap.set(href, hit.date);
-        } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
-      }
-    }
+    for (const [href, date] of nestedNeuhausenCards(html, baseUrl)) dateMap.set(href, date);
   }
 
   // Plain-text DD.MM.YYYY dates nested inside the link — institutional listings

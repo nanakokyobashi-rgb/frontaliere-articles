@@ -36,6 +36,21 @@ describe('articleType dal corpo italiano', () => {
     assert.equal(articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`), 'news');
   });
 
+  test('riconosce URL Markdown con parentesi bilanciate', () => {
+    const balanced = String.raw`Testo della notizia.
+
+*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/articolo_(completo).html)*`;
+    assert.equal(articleTypeFromItalianBody(balanced), 'news');
+  });
+
+  test('riconosce parentesi escaped e conserva la citazione semplice', () => {
+    const escaped = String.raw`Testo della notizia.
+
+*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/articolo\(completo\).html)*`;
+    assert.equal(articleTypeFromItalianBody(escaped), 'news');
+    assert.equal(articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`), 'news');
+  });
+
   test('lascia senza tipo una citazione non finale o non unica', () => {
     assert.equal(articleTypeFromItalianBody(`${SOURCE}\n\nAltro testo.`), undefined);
     assert.equal(articleTypeFromItalianBody(`Primo\n\n${SOURCE}\n\nSecondo\n\n${SOURCE}`), undefined);
