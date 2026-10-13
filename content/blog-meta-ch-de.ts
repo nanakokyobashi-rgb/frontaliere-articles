@@ -8165,6 +8165,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.voto-matrimonio-tassazione-coppie.title': 'Ehe, die Regierung gegen die Initiative von Centro',
     'blog.article.voto-matrimonio-tassazione-coppie.excerpt': 'Der Bundesrat und das Parlament fordern, den Text abzulehnen Die Abstimmung über die Initiative ist auf den 29.',
     'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Schweizer Paar prüft Unterlagen zur direkten Bundessteuer',
+    'blog.article.referendum-mercosur-firme-berna.title': 'Mercosur, Unterschriftensammlung für das Referendum gestartet',
+    'blog.article.referendum-mercosur-firme-berna.excerpt': 'Eine breite Allianz hat die Unterschriftensammlung für das Referendum gestartet Die Gegner haben am Dienstagnachmittag in Bern gesprochen Amazonas-Regenwald, Menschenrechte',
+    'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Unterschriftensammlung in der Schweiz gegen das Freihandelsabkommen mit dem Mercosur',
 };
 
 export default blogMetaChDe;

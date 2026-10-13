@@ -8165,6 +8165,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.voto-matrimonio-tassazione-coppie.title': 'Matrimonio, il Governo contro l\'iniziativa del Centro',
     'blog.article.voto-matrimonio-tassazione-coppie.excerpt': 'Il Consiglio federale e il Parlamento chiedono di respingere il testo Il voto sull\'iniziativa è fissato al 29 novembre Il testo riguarda l\'imposta federale',
     'blog.article.voto-matrimonio-tassazione-coppie.imageAlt': 'Coppia svizzera esamina documenti sull\'imposta federale diretta',
+    'blog.article.referendum-mercosur-firme-berna.title': 'Mercosur, lanciata la raccolta firme per il referendum',
+    'blog.article.referendum-mercosur-firme-berna.excerpt': 'Un\'ampia alleanza ha lanciato la raccolta firme per il referendum Gli oppositori hanno parlato martedì pomeriggio a Berna Foresta amazzonica, diritti umani',
+    'blog.article.referendum-mercosur-firme-berna.imageAlt': 'Raccolta firme in Svizzera contro l\'accordo di libero scambio con il Mercosur',
 };
 
 export default blogMetaChIt;

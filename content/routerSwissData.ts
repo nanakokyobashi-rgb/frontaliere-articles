@@ -2744,6 +2744,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv': { it: 'vaccinazioni-autunnali-2026-influenza-covid-19-e-rsv', en: 'autumn-vaccinations-2026-influenza-covid-19-and-rsv', de: 'herbstimpfungen-2026-grippe-covid-19-und-rsv', fr: 'vaccinations-automnales-2026-grippe-covid-19-et-vrs' },
  'formulario-averi-iran-ottobre': { it: 'formulario-averi-iran-ottobre', en: 'iran-asset-transfer-form', de: 'iran-formular-vermoegensuebertragung', fr: 'formulaire-avoirs-iran-octobre' },
  'voto-matrimonio-tassazione-coppie': { it: 'voto-matrimonio-tassazione-coppie', en: 'swiss-marriage-tax-vote', de: 'schweiz-ehe-steuer-abstimmung', fr: 'vote-suisse-impot-mariage' },
+ 'referendum-mercosur-firme-berna': { it: 'referendum-mercosur-firme-berna', en: 'mercosur-referendum-signatures-bern', de: 'mercosur-referendum-unterschriften-bern', fr: 'referendum-mercosur-signatures-berne' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
