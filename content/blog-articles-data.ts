@@ -44208,7 +44208,7 @@ const RAW_ARTICLES = [
  id: 'loreto-pavimentazione-notte',
  category: 'novita',
  date: '2026-10-13T07:51:32.531Z',
- image: '/images/blog/article-lavori-autolaghi-ottobre-2026.webp',
+ image: '/images/blog/article-loreto-pavimentazione-notte.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'redazione',

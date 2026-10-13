@@ -30,16 +30,6 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T06:45:42.103Z",
       "lastFailureAt": "2026-10-13T06:56:07.129Z"
-    },
-    {
-      "articleId": "loreto-pavimentazione-notte",
-      "title": "Via Mazzini a Loreto chiusa di notte dal 19 al 23 ottobre",
-      "fallbackImage": "/images/blog/article-lavori-autolaghi-ottobre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-13T07:51:33.088Z",
-      "lastFailureAt": "2026-10-13T07:51:33.088Z"
     }
   ]
 }

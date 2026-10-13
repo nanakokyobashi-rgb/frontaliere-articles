@@ -13111,7 +13111,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Giovani professionisti al Palazzo dei Congressi di Lugano durante evento sui rientri in Ticino',
     'blog.article.loreto-pavimentazione-notte.title': 'Via Mazzini a Loreto chiusa di notte dal 19 al 23 ottobre',
     'blog.article.loreto-pavimentazione-notte.excerpt': 'Via Mazzini chiusa a Loreto dal 19 al 23 ottobre Sbarramento notturno dalle 20 alle 6 Lavori per la nuova pavimentazione stradale Accessi da Riva Antonio Caccia',
-    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Via Mazzini a Loreto, Lugano, interessata da lavori notturni per la nuova pavimentazione',
+    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;
