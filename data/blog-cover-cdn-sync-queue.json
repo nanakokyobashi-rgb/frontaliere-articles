@@ -1,4 +1,21 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione.webp",
+      "sha256": "d5eb56664e4e9eafd4c1ca9f01c85d3a5db37d3efb03c55d7eee8199c585139b"
+    },
+    {
+      "path": "public/images/blog/article-rientro-ticino-salario-fattori.webp",
+      "sha256": "df7f9a3eb8639880922fe02ca96bddc41039651624a98c318d015df43337475a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-incidente-all-alba-a-brezzo-di-bedero-elisoccorso-in-azione-480w.webp",
+      "sha256": "5dd48f095641bbe1590eb650f75caf5176288de21ea128ec5c1bf0e6d93a955f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-rientro-ticino-salario-fattori-480w.webp",
+      "sha256": "2619a8e62424783fc59bc0f04402fd7d25184eef07f6ff5df50b4f01a33c2d39"
+    }
+  ]
 }
