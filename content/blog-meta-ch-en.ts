@@ -8179,7 +8179,10 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Swiss institutional scene with red-and-white flags.',
     'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom wins TAF appeal: 18 million fine annulled',
     'blog.article.swisscom-fibra-multa-taf.excerpt': 'TAF cancels Swisscom\'s 18 million fine Comco had imposed conditions and a fine The ruling concerns the fiber-optic expansion The appeal',
-    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Illustration generated for this article',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Technicians installing fiber-optic cable in a Swiss city street',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.title': 'Keller-Sutter launches the No campaign against the taxation of married couples',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.excerpt': 'Keller-Sutter launches the No campaign in Bern.',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.imageAlt': 'Federal Finance Ministry building in Bern with Swiss flags and tax document in foreground',
 };
 
 export default blogMetaChEn;

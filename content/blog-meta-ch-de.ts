@@ -8179,7 +8179,10 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Schweizer Institutionengebäude mit rot-weissen Fahnen.',
     'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom gewinnt die Beschwerde vor dem TAF: 18-Millionen-Busse aufgehoben',
     'blog.article.swisscom-fibra-multa-taf.excerpt': 'TAF hebt die 18-Millionen-Busse gegen Swisscom auf Die Comco hatte Auflagen und eine Sanktion verhängt Das Urteil betrifft den Ausbau des Glasfasernetzes Die Beschwerde',
-    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Techniker, die ein Glasfaserkabel in einer schweizerischen Stadtstraße verlegen',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.title': 'Keller-Sutter lanciert die Nein-Kampagne zur Ehepaarbesteuerung',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.excerpt': 'Keller-Sutter eröffnet in Bern die Nein-Kampagne.',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.imageAlt': 'Gebäude des Eidgenössischen Finanzdepartements in Bern mit Schweizer Fahnen und Steuerdokument im Vordergrund',
 };
 
 export default blogMetaChDe;
