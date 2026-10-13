@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-cuoco-dietetica-apf-ticino-mercato.webp",
+      "sha256": "6c0513d14fb34bd89e8e37e081e92ecbbe3f597886064e068f124fa70f8d99d5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-cuoco-dietetica-apf-ticino-mercato-480w.webp",
+      "sha256": "5783824a54443231ba8382c4a871d857c924d6c84384acd93bf48e4aa0150633"
+    }
+  ]
 }
