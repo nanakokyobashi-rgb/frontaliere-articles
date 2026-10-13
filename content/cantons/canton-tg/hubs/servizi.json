@@ -4,22 +4,22 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "3be2441d2482336fba76c742381929c32e94196c242122e18a8de504c99d2edc",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "b974cd0ac3ab31e7bfb7947fb2421b366f158ff096105b4b1076b9ccd50d2866",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -38,7 +38,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "44",
+          "value": "47",
           "note": "offerta mediana 600 CHF"
         }
       ],
@@ -56,13 +56,20 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
           "title": "Aste delle targhe",
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
+            {
+              "label": "TG455555",
+              "value": "1560 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109686"
+            },
             {
               "label": "TG999099",
               "value": "1160 CHF",
@@ -71,23 +78,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109664"
             },
             {
-              "label": "TG777666",
-              "value": "1040 CHF",
+              "label": "TG997997",
+              "value": "920 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109632"
-            },
-            {
-              "label": "TG27017",
-              "value": "1010 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109628"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109683"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,10 +125,16 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Turgovia: Sportello digitale per pratiche e documenti",
+          "url": "/articoli-turgovia/sportello-digitale-turgovia/",
+          "excerpt": "Il Digitaler Schalter del Canton Turgovia riunisce i servizi più usati, informazioni, video brevi e un'area protetta per estratti, permessi e altri documenti.",
+          "date": "2026-10-12T00:30:28.713Z"
+        },
         {
           "title": "Permesso di dimora B nel Cantone di Turgovia: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-canton-turgovia-requisiti-rinnovo/",
@@ -168,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "TG",
@@ -184,7 +190,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "44",
+          "value": "47",
           "note": "typical bid 600 CHF"
         }
       ],
@@ -202,13 +208,20 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
           "title": "Number plate auctions",
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
+            {
+              "label": "TG455555",
+              "value": "1,560 CHF",
+              "detail": "current bid",
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109686"
+            },
             {
               "label": "TG999099",
               "value": "1,160 CHF",
@@ -217,23 +230,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109664"
             },
             {
-              "label": "TG777666",
-              "value": "1,040 CHF",
+              "label": "TG997997",
+              "value": "920 CHF",
               "detail": "current bid",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109632"
-            },
-            {
-              "label": "TG27017",
-              "value": "1,010 CHF",
-              "detail": "current bid",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109628"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109683"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,13 +277,19 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
+          "title": "Thurgau: Digital portal for procedures and documents",
+          "url": "/en/thurgau-articles/thurgau-digital-counter/",
+          "excerpt": "The Digitaler Schalter of the Canton of Thurgau brings together the most frequently used services, information, short videos, and a protected area for extracts, permits, and other documents.",
+          "date": "2026-10-12T00:30:28.713Z"
+        },
+        {
           "title": "Residence permit B in the Canton of Thurgau: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-canton-turgovia-requirements-renewal/",
+          "url": "/en/swiss-articles/residence-permit-b-canton-thurgau-requirements-renewal/",
           "excerpt": "Learn about the requirements and procedure for renewing a B residence permit in the Canton of Thurgau.",
           "date": "2026-09-07T03:40:46.786Z"
         },
@@ -310,7 +322,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "TG",
@@ -326,7 +338,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "44",
+          "value": "47",
           "note": "mittleres Gebot 600 CHF"
         }
       ],
@@ -344,13 +356,20 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
           "title": "Kontrollschild-Auktionen",
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
+            {
+              "label": "TG455555",
+              "value": "1’560 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109686"
+            },
             {
               "label": "TG999099",
               "value": "1’160 CHF",
@@ -359,23 +378,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109664"
             },
             {
-              "label": "TG777666",
-              "value": "1’040 CHF",
+              "label": "TG997997",
+              "value": "920 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109632"
-            },
-            {
-              "label": "TG27017",
-              "value": "1’010 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109628"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109683"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -413,10 +425,16 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Thurgau: Digitaler Schalter für Anliegen und Dokumente",
+          "url": "/de/thurgau-artikel/digitaler-schalter-thurgau/",
+          "excerpt": "Der Dienst Digitaler Schalter des Kantons Thurgau bündelt die meistgenutzten Dienstleistungen, Informationen, kurze Videos und einen geschützten Bereich für Auszüge, Bewilligungen und andere Dokumente.",
+          "date": "2026-10-12T00:30:28.713Z"
+        },
         {
           "title": "Aufenthaltsbewilligung B im Kanton Thurgau: Voraussetzungen und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-thurgau-voraussetzungen-verlaengerung/",
@@ -452,7 +470,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "TG",
@@ -468,7 +486,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "44",
+          "value": "47",
           "note": "offre centrale 600 CHF"
         }
       ],
@@ -486,13 +504,20 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
           "title": "Enchères de plaques",
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
+            {
+              "label": "TG455555",
+              "value": "1 560 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109686"
+            },
             {
               "label": "TG999099",
               "value": "1 160 CHF",
@@ -501,23 +526,16 @@
               "url": "https://www.auktion.tg.ch/de/auction/109664"
             },
             {
-              "label": "TG777666",
-              "value": "1 040 CHF",
+              "label": "TG997997",
+              "value": "920 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109632"
-            },
-            {
-              "label": "TG27017",
-              "value": "1 010 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-07T17:00:00.000Z",
-              "url": "https://www.auktion.tg.ch/de/auction/109628"
+              "date": "2026-10-21T17:00:00.000Z",
+              "url": "https://www.auktion.tg.ch/de/auction/109683"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -555,10 +573,16 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/07/pd-dr-med-ralf-joukhadar-wird-anfang-oktober-chefarzt-der-frauenklinik-am-kantonsspital-frauenfeld/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Thurgovie : Guichet numérique pour les démarches et les documents",
+          "url": "/fr/articles-thurgovie/guichet-numerique-thurgovie/",
+          "excerpt": "Le Digitaler Schalter du canton de Thurgovie réunit les services les plus utilisés, des informations, de courtes vidéos et un espace protégé pour les extraits, permis et autres documents.",
+          "date": "2026-10-12T00:30:28.713Z"
+        },
         {
           "title": "Permis de séjour B dans le canton de Thurgovie : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-de-sejour-b-canton-de-thurgovie-exigences-renouvellement/",
@@ -590,7 +614,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

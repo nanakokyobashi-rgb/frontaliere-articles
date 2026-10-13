@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "9b08fe005075c668e6ecab62781d14c1d21b223d03646f105d7696d510528948",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "b70b1035783b2880b10ffe4815407ed5d005f193ee9d4352dbaa406681842570",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -160,7 +160,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BE",
@@ -270,13 +270,13 @@
         },
         {
           "title": "Cantonal taxes in the Canton of Bern: rates and deductions",
-          "url": "/en/swiss-articles/imposte-cantonal-berna-aliquote-deduzioni/",
+          "url": "/en/swiss-articles/imposte-cantonal-bern-aliquote-deduzioni/",
           "excerpt": "Cantonal taxes in the Canton of Bern are managed by the cantonal administration and have different rates based on the income bracket.",
           "date": "2026-08-12T06:10:54.824Z"
         },
         {
           "title": "Inheritance taxes in the Canton of Bern",
-          "url": "/en/swiss-articles/inheritance-and-donation-tax-canton-berne-rates/",
+          "url": "/en/swiss-articles/inheritance-and-donation-tax-canton-bern-rates/",
           "excerpt": "Know the kinship rates and exemptions for spouses and descendants",
           "date": "2026-08-14T01:09:05.964Z"
         }
@@ -303,7 +303,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BE",
@@ -446,7 +446,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BE",
@@ -589,7 +589,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

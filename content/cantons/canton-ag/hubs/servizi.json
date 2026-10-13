@@ -4,22 +4,22 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "c6f51a177be0c8c6887786642d45fd30d8cdc3d373ebee052dde7d72ac640a24",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "56c24f3ea39a547b7757ff57fc6a5f4e866919d381aa78da985482db114918d2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 1960 CHF"
+          "note": "offerta mediana 2190 CHF"
         }
       ],
       "dataBlocks": [
@@ -56,7 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -79,7 +79,7 @@
             },
             {
               "label": "AG9194",
-              "value": "5200 CHF",
+              "value": "5600 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58773"
@@ -87,13 +87,18 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Einbürgerungsgesuche",
+              "date": "2026-10-09",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11863"
+            },
             {
               "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
               "date": "2026-09-25",
@@ -118,14 +123,9 @@
               "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
               "date": "2026-08-10",
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
-            },
-            {
-              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
-              "date": "2026-07-30",
-              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -168,7 +168,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "AG",
@@ -185,7 +185,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 1,960 CHF"
+          "note": "typical bid 2,190 CHF"
         }
       ],
       "dataBlocks": [
@@ -202,7 +202,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -225,7 +225,7 @@
             },
             {
               "label": "AG9194",
-              "value": "5,200 CHF",
+              "value": "5,600 CHF",
               "detail": "current bid",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58773"
@@ -233,13 +233,18 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Einbürgerungsgesuche",
+              "date": "2026-10-09",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11863"
+            },
             {
               "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
               "date": "2026-09-25",
@@ -264,14 +269,9 @@
               "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
               "date": "2026-08-10",
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
-            },
-            {
-              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
-              "date": "2026-07-30",
-              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -310,7 +310,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "AG",
@@ -327,7 +327,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 1’960 CHF"
+          "note": "mittleres Gebot 2’190 CHF"
         }
       ],
       "dataBlocks": [
@@ -344,7 +344,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -367,7 +367,7 @@
             },
             {
               "label": "AG9194",
-              "value": "5’200 CHF",
+              "value": "5’600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58773"
@@ -375,13 +375,18 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Einbürgerungsgesuche",
+              "date": "2026-10-09",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11863"
+            },
             {
               "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
               "date": "2026-09-25",
@@ -406,14 +411,9 @@
               "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
               "date": "2026-08-10",
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
-            },
-            {
-              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
-              "date": "2026-07-30",
-              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +452,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "AG",
@@ -469,7 +469,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 1 960 CHF"
+          "note": "offre centrale 2 190 CHF"
         }
       ],
       "dataBlocks": [
@@ -486,7 +486,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -509,7 +509,7 @@
             },
             {
               "label": "AG9194",
-              "value": "5 200 CHF",
+              "value": "5 600 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58773"
@@ -517,13 +517,18 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Einbürgerungsgesuche",
+              "date": "2026-10-09",
+              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11863"
+            },
             {
               "label": "Publikation: Ausschreibung Taxi-Betriebsbewilligung A",
               "date": "2026-09-25",
@@ -548,14 +553,9 @@
               "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
               "date": "2026-08-10",
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
-            },
-            {
-              "label": "Simon Stämpfli wird neuer Chefarzt Kardiologie am KSB",
-              "date": "2026-07-30",
-              "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -590,7 +590,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

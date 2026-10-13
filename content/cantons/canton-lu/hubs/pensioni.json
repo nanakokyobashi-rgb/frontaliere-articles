@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "98dc09d17a523c75fe7a176a40a55d595d4291a179f6136b2b6727bf20548c86",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "677aeede60768b106e95cbf3f303a922b83451f9c5e51090477d3d8c8f3bed03",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -166,7 +166,7 @@
               "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-2"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -175,6 +175,12 @@
           "url": "/articoli-svizzera/bvg-lucerna-previdenza-2026/",
           "excerpt": "Contributi LPP dal 7% al 18% per età, prelievo, riscatto lacune e pianificazione: guida 2026 per il canton Lucerna, con contributi e imposte nel quadro svizzero.",
           "date": "2026-10-02T22:04:40.257Z"
+        },
+        {
+          "title": "Formazione continua a Lucerna: requisiti e contributi",
+          "url": "/articoli-svizzera/corsi-contributi-lucerna/",
+          "excerpt": "Nel Cantone di Lucerna i contributi seguono regole cantonali.",
+          "date": "2026-10-10T02:37:57.583Z"
         },
         {
           "title": "avs e prestazioni complementari canton Lucerna cassa di compensazione",
@@ -201,7 +207,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "LU",
@@ -340,7 +346,7 @@
               "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-2"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -349,6 +355,12 @@
           "url": "/en/swiss-articles/bvg-lucerne-pension-2026/",
           "excerpt": "LPP contributions from 7% to 18% by age, withdrawals, buy-ins to fill gaps and planning: 2026 guide for the canton of Lucerne, with contributions and taxes in the Swiss context.",
           "date": "2026-10-02T22:04:40.257Z"
+        },
+        {
+          "title": "Continuing education in Lucerne: requirements and contributions",
+          "url": "/en/swiss-articles/continuing-education-lucerne/",
+          "excerpt": "In the Canton of Lucerne, contributions follow cantonal rules.",
+          "date": "2026-10-10T02:37:57.583Z"
         },
         {
           "title": "avs and complementary services canton Lucerne compensation fund",
@@ -375,7 +387,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "LU",
@@ -514,7 +526,7 @@
               "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-2"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -525,8 +537,14 @@
           "date": "2026-10-02T22:04:40.257Z"
         },
         {
+          "title": "Weiterbildung in Luzern: Voraussetzungen und Beiträge",
+          "url": "/de/schweiz-artikel/weiterbildung-luzern/",
+          "excerpt": "Im Kanton Luzern richten sich die Beiträge nach kantonalen Regeln.",
+          "date": "2026-10-10T02:37:57.583Z"
+        },
+        {
           "title": "avs und Ergänzungsleistungen Kanton Luzern Ausgleichskasse",
-          "url": "/de/schweiz-artikel/avs-und-komplementaere-leistungen-kanton-lucerne/",
+          "url": "/de/schweiz-artikel/avs-und-komplementaere-leistungen-kanton-luzern/",
           "excerpt": "Die erste Säule im Kanton Luzern: kantonale Ausgleichskasse, AHV-Rentenberechnung, Beitragslücken und Ergänzungsleistungen zur Deckung des Existenzminimums.",
           "date": "2026-08-15T18:52:25.383Z"
         }
@@ -549,7 +567,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "LU",
@@ -688,7 +706,7 @@
               "url": "https://www.lupk.ch/de/aktuell/raphael-zellweger-wird-neuer-leiter-versicherung-der-lupk-2-2"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -697,6 +715,12 @@
           "url": "/fr/articles-suisse/bvg-lucerne-prevoyance-2026/",
           "excerpt": "Cotisations LPP de 7% à 18% selon l’âge, retraits, rachats de lacunes et planification : guide 2026 pour le canton de Lucerne, avec cotisations et impôts dans le cadre suisse.",
           "date": "2026-10-02T22:04:40.257Z"
+        },
+        {
+          "title": "Formation continue à Lucerne : exigences et subventions",
+          "url": "/fr/articles-suisse/formation-continue-lucerne/",
+          "excerpt": "Dans le canton de Lucerne, les subventions sont régies par des règles cantonales.",
+          "date": "2026-10-10T02:37:57.583Z"
         },
         {
           "title": "avs et prestations complémentaires canton Lucerne caisse de compensation",
@@ -723,7 +747,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

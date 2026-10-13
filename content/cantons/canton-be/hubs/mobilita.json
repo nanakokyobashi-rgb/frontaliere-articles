@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "3eaea1e608d8623c782a474f5b743553ea31d61dddc32cc9fe2e7418567afec6",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "2ef4b8e8839d1c0eebbd899ea54efb1c202e11c33e4673d18b72ce7934ae507f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "updatedAt": "2026-10-13T01:02:53.675Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "32",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "25",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "90",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "91",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,13 +91,33 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
+              "date": "2026-10-12T10:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
+            },
+            {
+              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
+              "date": "2026-10-11",
+              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
+            },
+            {
+              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
+              "date": "2026-10-08T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
+            },
+            {
+              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
+              "date": "2026-10-08",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
+            },
             {
               "label": "Plangenehmigung Tram Kleinwabern erteilt",
               "date": "2026-10-06",
@@ -107,29 +127,9 @@
               "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
               "date": "2026-09-28T13:28:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
-              "date": "2026-09-28T10:05:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern-Ostermundigen",
-              "date": "2026-09-28",
-              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
-            },
-            {
-              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
-              "date": "2026-09-27T14:24:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
-            },
-            {
-              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
-              "date": "2026-09-17T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BE",
@@ -160,13 +160,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "32",
-          "note": "reports as of 6 October 2026"
+          "value": "25",
+          "note": "reports as of 13 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "90",
-          "note": "reports as of 6 October 2026"
+          "value": "91",
+          "note": "reports as of 13 October 2026"
         }
       ],
       "dataBlocks": [
@@ -224,13 +224,33 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
+              "date": "2026-10-12T10:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
+            },
+            {
+              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
+              "date": "2026-10-11",
+              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
+            },
+            {
+              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
+              "date": "2026-10-08T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
+            },
+            {
+              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
+              "date": "2026-10-08",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
+            },
             {
               "label": "Plangenehmigung Tram Kleinwabern erteilt",
               "date": "2026-10-06",
@@ -240,35 +260,15 @@
               "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
               "date": "2026-09-28T13:28:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
-              "date": "2026-09-28T10:05:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern-Ostermundigen",
-              "date": "2026-09-28",
-              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
-            },
-            {
-              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
-              "date": "2026-09-27T14:24:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
-            },
-            {
-              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
-              "date": "2026-09-17T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Public transport passes Canton Bern: zones and fares",
-          "url": "/en/swiss-articles/public-transport-canton-berne-subscriptions/",
+          "url": "/en/swiss-articles/public-transport-canton-bern-subscriptions/",
           "excerpt": "Information on areas and fares for public transport passes in the Canton of Bern",
           "date": "2026-08-13T07:24:39.765Z"
         }
@@ -283,7 +283,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BE",
@@ -293,13 +293,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "32",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "25",
+          "note": "Meldungen vom 13. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "90",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "91",
+          "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -357,13 +357,33 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
+              "date": "2026-10-12T10:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
+            },
+            {
+              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
+              "date": "2026-10-11",
+              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
+            },
+            {
+              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
+              "date": "2026-10-08T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
+            },
+            {
+              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
+              "date": "2026-10-08",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
+            },
             {
               "label": "Plangenehmigung Tram Kleinwabern erteilt",
               "date": "2026-10-06",
@@ -373,29 +393,9 @@
               "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
               "date": "2026-09-28T13:28:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
-              "date": "2026-09-28T10:05:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern-Ostermundigen",
-              "date": "2026-09-28",
-              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
-            },
-            {
-              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
-              "date": "2026-09-27T14:24:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
-            },
-            {
-              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
-              "date": "2026-09-17T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BE",
@@ -426,13 +426,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "32",
-          "note": "signalements au 6 octobre 2026"
+          "value": "25",
+          "note": "signalements au 13 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "90",
-          "note": "signalements au 6 octobre 2026"
+          "value": "91",
+          "note": "signalements au 13 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -490,13 +490,33 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Sanierungsarbeiten an der Brunnadernstrasse",
+              "date": "2026-10-12T10:30:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
+            },
+            {
+              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
+              "date": "2026-10-11",
+              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
+            },
+            {
+              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
+              "date": "2026-10-08T10:00:00.000Z",
+              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
+            },
+            {
+              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
+              "date": "2026-10-08",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
+            },
             {
               "label": "Plangenehmigung Tram Kleinwabern erteilt",
               "date": "2026-10-06",
@@ -506,29 +526,9 @@
               "label": "Die Berner Kunsteisbahnen starten in die neue Saison",
               "date": "2026-09-28T13:28:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/die-berner-kunsteisbahnen-starten-in-die-neue-saison"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern – Ostermundigen erteilt",
-              "date": "2026-09-28T10:05:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/baubewilligung-fuer-tram-bern-ostermundigen-erteilt"
-            },
-            {
-              "label": "Baubewilligung für Tram Bern-Ostermundigen",
-              "date": "2026-09-28",
-              "url": "https://www.bernmobil.ch/de/baubewilligung-fuer-tram-bern-ostermundigen"
-            },
-            {
-              "label": "Ja zur Erweiterung der Velostation Bahnhofzugang Länggasse",
-              "date": "2026-09-27T14:24:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/ja-zur-erweiterung-der-velostation-bahnhofzugang-laenggasse"
-            },
-            {
-              "label": "Rahmenkredit für Sanierung der Strasseninfrastruktur",
-              "date": "2026-09-17T05:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/rahmenkredit-fuer-sanierung-der-strasseninfrastruktur"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

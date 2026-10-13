@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "e92ecb9e3169c6404d6a3098a6695f4c36daca17f56505b0818e70465045e78b",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "da239614dd46b323699e195c26ced9a4a41578f98ed138018a6d705ad591d824",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "50",
+          "value": "68",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/89788"
+              "label": "d'Wärchi - ElKi Dienstagmorgen",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94357"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92668"
+            },
+            {
+              "label": "Heimische Vitalpilze",
+              "detail": "Schulhaus Kniri, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94450"
+            },
+            {
+              "label": "Wandern 60plus",
+              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/88946"
+            },
+            {
+              "label": "Elternabend Medienschulung",
+              "detail": "MZA Steini, Dallenwil, Dallenwil",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92200"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.nw.ch/_rte/anlass/93010"
             },
             {
               "label": "Pilze am Wegrand",
               "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
-              "label": "Herbstferien",
-              "detail": "Emmetten — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/93979"
+              "label": "d'Wärchi - Batik-Workshop",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/94213"
             },
             {
-              "label": "Wildpflanzen am Wegrand - Sonntags",
-              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+              "label": "Kasperlitheater",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/86329"
             },
             {
-              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
-              "detail": "kath. Pfarrhaus, Buochs, Buochs",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/94018"
-            },
-            {
-              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93337"
-            },
-            {
-              "label": "Nidwaldner GenussMarkt",
-              "detail": "Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93505"
-            },
-            {
-              "label": "Oeltrotte-Zmorgä",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93061"
-            },
-            {
-              "label": "Yoga auf dem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/90382"
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92008"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "NW",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "50",
+          "value": "68",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,69 +130,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/89788"
+              "label": "d'Wärchi - ElKi Dienstagmorgen",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94357"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92668"
+            },
+            {
+              "label": "Heimische Vitalpilze",
+              "detail": "Schulhaus Kniri, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94450"
+            },
+            {
+              "label": "Wandern 60plus",
+              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/88946"
+            },
+            {
+              "label": "Elternabend Medienschulung",
+              "detail": "MZA Steini, Dallenwil, Dallenwil",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92200"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.nw.ch/_rte/anlass/93010"
             },
             {
               "label": "Pilze am Wegrand",
               "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
-              "label": "Herbstferien",
-              "detail": "Emmetten — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/93979"
+              "label": "d'Wärchi - Batik-Workshop",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/94213"
             },
             {
-              "label": "Wildpflanzen am Wegrand - Sonntags",
-              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+              "label": "Kasperlitheater",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/86329"
             },
             {
-              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
-              "detail": "kath. Pfarrhaus, Buochs, Buochs",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/94018"
-            },
-            {
-              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93337"
-            },
-            {
-              "label": "Nidwaldner GenussMarkt",
-              "detail": "Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93505"
-            },
-            {
-              "label": "Oeltrotte-Zmorgä",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93061"
-            },
-            {
-              "label": "Yoga auf dem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/90382"
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92008"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "NW",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "50",
+          "value": "68",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,69 +227,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/89788"
+              "label": "d'Wärchi - ElKi Dienstagmorgen",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94357"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92668"
+            },
+            {
+              "label": "Heimische Vitalpilze",
+              "detail": "Schulhaus Kniri, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94450"
+            },
+            {
+              "label": "Wandern 60plus",
+              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/88946"
+            },
+            {
+              "label": "Elternabend Medienschulung",
+              "detail": "MZA Steini, Dallenwil, Dallenwil",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92200"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.nw.ch/_rte/anlass/93010"
             },
             {
               "label": "Pilze am Wegrand",
               "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
-              "label": "Herbstferien",
-              "detail": "Emmetten — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/93979"
+              "label": "d'Wärchi - Batik-Workshop",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/94213"
             },
             {
-              "label": "Wildpflanzen am Wegrand - Sonntags",
-              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+              "label": "Kasperlitheater",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/86329"
             },
             {
-              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
-              "detail": "kath. Pfarrhaus, Buochs, Buochs",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/94018"
-            },
-            {
-              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93337"
-            },
-            {
-              "label": "Nidwaldner GenussMarkt",
-              "detail": "Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93505"
-            },
-            {
-              "label": "Oeltrotte-Zmorgä",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93061"
-            },
-            {
-              "label": "Yoga auf dem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/90382"
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92008"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "NW",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "50",
+          "value": "68",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,69 +324,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/89788"
+              "label": "d'Wärchi - ElKi Dienstagmorgen",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94357"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92668"
+            },
+            {
+              "label": "Heimische Vitalpilze",
+              "detail": "Schulhaus Kniri, Stans, Stans",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/94450"
+            },
+            {
+              "label": "Wandern 60plus",
+              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/88946"
+            },
+            {
+              "label": "Elternabend Medienschulung",
+              "detail": "MZA Steini, Dallenwil, Dallenwil",
+              "date": "2026-10-13",
+              "url": "https://www.nw.ch/_rte/anlass/92200"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.nw.ch/_rte/anlass/93010"
             },
             {
               "label": "Pilze am Wegrand",
               "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
             },
             {
-              "label": "Herbstferien",
-              "detail": "Emmetten — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.nw.ch/_rte/anlass/93979"
+              "label": "d'Wärchi - Batik-Workshop",
+              "detail": "d'Wärchi, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/94213"
             },
             {
-              "label": "Wildpflanzen am Wegrand - Sonntags",
-              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildpflanzen-am-wegrand-sonntags/"
+              "label": "Kasperlitheater",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/86329"
             },
             {
-              "label": "Chum und luäg - Tag des offenen Pfarrhauses",
-              "detail": "kath. Pfarrhaus, Buochs, Buochs",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/94018"
-            },
-            {
-              "label": "Kastanientag - Tauchen Sie ein in die faszinierende Welt der Kastanie",
-              "detail": "Culinarium Alpinum, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93337"
-            },
-            {
-              "label": "Nidwaldner GenussMarkt",
-              "detail": "Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93505"
-            },
-            {
-              "label": "Oeltrotte-Zmorgä",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/93061"
-            },
-            {
-              "label": "Yoga auf dem Stanserhorn",
-              "detail": "Stanserhorn, Stans, Stans",
-              "date": "2026-10-10",
-              "url": "https://www.nw.ch/_rte/anlass/90382"
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92008"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

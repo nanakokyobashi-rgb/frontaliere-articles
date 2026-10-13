@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "5e23afe1f00e2d82f495b04edaba6190c07924908e5536168747f042c0de67bd",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "65582838a82dd438ed6cececfa98c3b63e721c1d814c8e7e34dbe21b5c3585a5",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Polysportives J+S-Jugendsportcamp Tenero",
+              "date": "2026-10-12",
+              "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
+            },
+            {
+              "label": "Samstag, 10.10.2026 LH Wallner erteilt Erbschaftssteuer klare Absage: „Leistung darf nicht bestraft werden“",
+              "date": "2026-10-10",
+              "url": "https://presse.vorarlberg.at/land/public/LH-Wallner-erteilt-Erbschaftssteuer-klare-Absage-Leistung-darf-nicht-bestraft-werden"
+            },
+            {
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
@@ -128,19 +138,9 @@
               "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
-            },
-            {
-              "label": "Kantonaler Schulsporttag Leichtathletik",
-              "date": "2026-09-14",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/kantonaler-schulsporttag-leichtathletik.html"
-            },
-            {
-              "label": "Die Regierung stärkt Bewegung und Sport",
-              "date": "2026-09-11",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/die-regierung-staerkt-bewegung-und-sport.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -201,7 +201,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SG",
@@ -289,6 +289,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Polysportives J+S-Jugendsportcamp Tenero",
+              "date": "2026-10-12",
+              "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
+            },
+            {
+              "label": "Samstag, 10.10.2026 LH Wallner erteilt Erbschaftssteuer klare Absage: „Leistung darf nicht bestraft werden“",
+              "date": "2026-10-10",
+              "url": "https://presse.vorarlberg.at/land/public/LH-Wallner-erteilt-Erbschaftssteuer-klare-Absage-Leistung-darf-nicht-bestraft-werden"
+            },
+            {
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
@@ -307,19 +317,9 @@
               "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
-            },
-            {
-              "label": "Kantonaler Schulsporttag Leichtathletik",
-              "date": "2026-09-14",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/kantonaler-schulsporttag-leichtathletik.html"
-            },
-            {
-              "label": "Die Regierung stärkt Bewegung und Sport",
-              "date": "2026-09-11",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/die-regierung-staerkt-bewegung-und-sport.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -337,7 +337,7 @@
         },
         {
           "title": "St Gallen Inheritance Tax: Rates and Exemptions",
-          "url": "/en/swiss-articles/succession-tax-saint-gall-rates-exemptions/",
+          "url": "/en/swiss-articles/succession-tax-st-gallen-rates-exemptions/",
           "excerpt": "How inheritance and gift tax works in the Canton of St. Gallen: rates for degree of kinship, exemptions for spouse and descendants, declaration procedure and legal terms.",
           "date": "2026-08-30T16:16:46.912Z"
         },
@@ -380,7 +380,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SG",
@@ -468,6 +468,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Polysportives J+S-Jugendsportcamp Tenero",
+              "date": "2026-10-12",
+              "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
+            },
+            {
+              "label": "Samstag, 10.10.2026 LH Wallner erteilt Erbschaftssteuer klare Absage: „Leistung darf nicht bestraft werden“",
+              "date": "2026-10-10",
+              "url": "https://presse.vorarlberg.at/land/public/LH-Wallner-erteilt-Erbschaftssteuer-klare-Absage-Leistung-darf-nicht-bestraft-werden"
+            },
+            {
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
@@ -486,19 +496,9 @@
               "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
-            },
-            {
-              "label": "Kantonaler Schulsporttag Leichtathletik",
-              "date": "2026-09-14",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/kantonaler-schulsporttag-leichtathletik.html"
-            },
-            {
-              "label": "Die Regierung stärkt Bewegung und Sport",
-              "date": "2026-09-11",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/die-regierung-staerkt-bewegung-und-sport.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -559,7 +559,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SG",
@@ -647,6 +647,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Polysportives J+S-Jugendsportcamp Tenero",
+              "date": "2026-10-12",
+              "url": "https://www.sg.ch/news/sgch_sport/2026/10/polysportives-j-s-jugendsportcamp-tenero.html"
+            },
+            {
+              "label": "Samstag, 10.10.2026 LH Wallner erteilt Erbschaftssteuer klare Absage: „Leistung darf nicht bestraft werden“",
+              "date": "2026-10-10",
+              "url": "https://presse.vorarlberg.at/land/public/LH-Wallner-erteilt-Erbschaftssteuer-klare-Absage-Leistung-darf-nicht-bestraft-werden"
+            },
+            {
               "label": "Sportsymposium Bodensee 2026: Ernährung im Nachwuchssport im Fokus",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/sportsymposium-bodensee-2026--ernaehrung-im-nachwuchssport-im-fo.html"
@@ -665,19 +675,9 @@
               "label": "Erste Durchführung der Talent Days Bodensee 2026 war ein voller Erfolg!",
               "date": "2026-09-28",
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
-            },
-            {
-              "label": "Kantonaler Schulsporttag Leichtathletik",
-              "date": "2026-09-14",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/kantonaler-schulsporttag-leichtathletik.html"
-            },
-            {
-              "label": "Die Regierung stärkt Bewegung und Sport",
-              "date": "2026-09-11",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/die-regierung-staerkt-bewegung-und-sport.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +738,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

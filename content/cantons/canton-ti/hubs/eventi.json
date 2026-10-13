@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "ccd5061b2ebdbc45dc122651eaa12bbca4ab00767153e1b1531386f8c8258cd4",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "cdb30a6e5f31872ac6afa981b08dda5431542dfa9cdecd221cca9c60644846fe",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-06T18:23:08.067Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "220",
+          "value": "231",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,72 +33,78 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - pittore",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+              "label": "Gyotaku - Tracce di pesci",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/61721"
             },
             {
-              "label": "Fuori di Zucca, il villaggio delle zucche",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+              "label": "Jannis Kounellis: Io sono un pittore",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63037"
             },
             {
-              "label": "In orbita - mostra di ceramiche",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+              "label": "Mona Caron - La resilienza della vita",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63363"
             },
             {
-              "label": "Pierrette Bloch. Il gesto di scrivere",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+              "label": "A fox under the pink moon",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63915"
             },
             {
-              "label": "Ceramiche dell'antico Perù. Dal Pacifico alle Ande",
-              "detail": "Palazzo comunale, Riva San Vitale",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+              "label": "Immaginario illustrato",
+              "detail": "Il Rifugio Letterario, Massagno",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64190"
             },
             {
-              "label": "Locarno Organ Festival",
-              "detail": "Collegiata S. Antonio, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+              "label": "Bertille Bak. Voci dalla terra",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62429"
             },
             {
-              "label": "Ri-creazione: cambiamo le regole del gioco?",
-              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+              "label": "Kaari Upson. Dollhouse – Una retrospettiva",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63581"
             },
             {
-              "label": "Adriano Pitschen. 'Nitori', incisioni scelte",
-              "detail": "Biblioteca Salita dei Frati, Lugano",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+              "label": "Sentimento e osservazione",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/53980"
             },
             {
-              "label": "Next Generation | Evensong",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62804"
             },
             {
-              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
-              "date": "2026-10-07",
-              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+              "label": "DONAZIONE DI SANGUE",
+              "detail": "centro La Torre, Losone",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64425"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Scacchi a Bissone: i vincitori del VI Festival",
+          "url": "/articoli-frontaliere/bissone-torneo-scacchi/",
+          "excerpt": "Domenica 11 ottobre si è svolta la sesta edizione Christian De Lucia ha vinto il Trofeo Borromini Under 16 Vladimir Paleologu ha conquistato il titolo Semilampo",
+          "date": "2026-10-13T08:19:26.782Z"
+        },
         {
           "title": "Mendrisiotto: tre eventi e strade chiuse nel fine settimana",
           "url": "/articoli-frontaliere/mendrisiotto-strade-chiuse-weekend/",
@@ -140,12 +146,6 @@
           "url": "/articoli-frontaliere/presidente-locarno-film-festival/",
           "excerpt": "Il Locarno Film Festival cerca un nuovo presidente. Le voci si rincorrono, ma nessuna conferma ufficiale.",
           "date": "2026-08-08T23:56:06.372Z"
-        },
-        {
-          "title": "Locarno Film Festival: la cultura come legame",
-          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
-          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "TI",
@@ -172,7 +172,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "220",
+          "value": "231",
           "note": "from the site’s events calendar"
         }
       ],
@@ -183,72 +183,78 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - painter",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+              "label": "Gyotaku - Fish Trails",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/61721"
             },
             {
-              "label": "Outside of Zucca, the village of pumpkins",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+              "label": "Jannis Kounellis: I am a painter",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63037"
             },
             {
-              "label": "In orbit - ceramics exhibition",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+              "label": "Mona Caron - The Resilience of Life",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63363"
             },
             {
-              "label": "Pierrette Bloch. The gesture of writing",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+              "label": "Under the pink moon",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63915"
             },
             {
-              "label": "Ceramics of ancient Peru. From the Pacific to the Andes",
-              "detail": "Palazzo comunale, Riva San Vitale",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+              "label": "Picture illustrated",
+              "detail": "Il Rifugio Letterario, Massagno",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64190"
             },
             {
-              "label": "Locarno Organ Festival",
-              "detail": "Collegiata S. Antonio, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+              "label": "Bertille Bak. Voices from the Earth",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62429"
             },
             {
-              "label": "Re-creation: Shall we change the rules of the game?",
-              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+              "label": "Kaari Upson. Dollhouse – A Retrospective",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63581"
             },
             {
-              "label": "Adriano Pitschen. 'Nitori', selected engravings",
-              "detail": "Biblioteca Salita dei Frati, Lugano",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+              "label": "Feeling and Observation",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/53980"
             },
             {
-              "label": "Ne Gener",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62804"
             },
             {
-              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
-              "date": "2026-10-07",
-              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+              "label": "Blood donation",
+              "detail": "centro La Torre, Losone",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64425"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Chess in Bissone: the winners of the VI Festival",
+          "url": "/en/cross-border-articles/bissone-chess-festival-winners/",
+          "excerpt": "On Sunday, October 11, the sixth edition took place Christian De Lucia won the Borromini Under 16 Trophy Vladimir Paleologu won the Rapid title",
+          "date": "2026-10-13T08:19:26.782Z"
+        },
         {
           "title": "Mendrisiotto: three events and roads closed at the weekend",
           "url": "/en/cross-border-articles/mendrisiotto-road-closures-weekend/",
@@ -290,12 +296,6 @@
           "url": "/en/cross-border-articles/locarno-film-festival-president/",
           "excerpt": "The Locarno Film Festival is looking for a new president. The rumors chase each other, but no official confirmation.",
           "date": "2026-08-08T23:56:06.372Z"
-        },
-        {
-          "title": "Locarno Film Festival: culture as a link",
-          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
-          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -312,7 +312,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "TI",
@@ -322,7 +322,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "220",
+          "value": "231",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -333,76 +333,82 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - Maler",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+              "label": "Gyotaku - Spuren von Fischen",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/61721"
             },
             {
-              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+              "label": "Jannis Kounellis: Ich bin Maler",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63037"
             },
             {
-              "label": "Im Orbit – Keramikausstellung",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+              "label": "Mona Caron - Die Belastbarkeit des Lebens",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63363"
             },
             {
-              "label": "Pierrette Bloch. Die Geste des Schreibens",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+              "label": "Ein Fuchs unter dem rosa Mond",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63915"
             },
             {
-              "label": "Keramik aus dem alten Peru. Vom Pazifik bis in die Anden",
-              "detail": "Palazzo comunale, Riva San Vitale",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+              "label": "Imaginär illustriert",
+              "detail": "Il Rifugio Letterario, Massagno",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64190"
             },
             {
-              "label": "Locarno Orgelfestival",
-              "detail": "Collegiata S. Antonio, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+              "label": "Bertille Bak. Stimmen aus der Erde",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62429"
             },
             {
-              "label": "Re-Kreation: Ändern wir die Spielregeln?",
-              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+              "label": "Kaari Upson. Dollhouse – Eine Retrospektive",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63581"
             },
             {
-              "label": "Adriano Pitschen. 'Nitori', ausgewählte Gravuren",
-              "detail": "Biblioteca Salita dei Frati, Lugano",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+              "label": "Gefühl und Beobachtung",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/53980"
             },
             {
-              "label": "Nächste Generation | Evensong",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62804"
             },
             {
-              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
-              "date": "2026-10-07",
-              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+              "label": "Blutspende",
+              "detail": "centro La Torre, Losone",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64425"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
         {
+          "title": "Schach in Bissone: die Gewinner des VI Festivals",
+          "url": "/de/grenzgaenger-artikel/schachfestival-bissone-sieger/",
+          "excerpt": "Am Sonntag, dem 11.",
+          "date": "2026-10-13T08:19:26.782Z"
+        },
+        {
           "title": "Mendrisiotto: Drei Veranstaltungen und gesperrte Straßen am Wochenende",
           "url": "/de/grenzgaenger-artikel/mendrisiotto-strassensperrungen-wochenende/",
-          "excerpt": "Vom 18. bis 20. September verursachen die Rally del Ticino, Peniamo und Chiasso-Pedrinate Straßensperrungen, Einschränkungen für Fußgänger und umgeleitete Busse im Mendrisiotto.",
+          "excerpt": "Vom 18. bis 20. September verursachen die Rally del Tessin, Peniamo und Chiasso-Pedrinate Straßensperrungen, Einschränkungen für Fußgänger und umgeleitete Busse im Mendrisiotto.",
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
@@ -431,7 +437,7 @@
         },
         {
           "title": "Tessin-Musik macht man zu viert (Konzerte)",
-          "url": "/de/grenzgaenger-artikel/tacito-musica-ticino-konzerte/",
+          "url": "/de/grenzgaenger-artikel/tacito-musica-tessin-konzerte/",
           "excerpt": "Das Tessiner Musikfestival wird mit einem Tag voller Veranstaltungen fortgesetzt, die das Publikum von Nachmittag bis Abend begleiten werden.",
           "date": "2026-07-28T05:51:38.011Z"
         },
@@ -440,12 +446,6 @@
           "url": "/de/grenzgaenger-artikel/locarno-filmfestival-praesident/",
           "excerpt": "Das Locarno Film Festival sucht einen neuen Präsidenten. Gerüchte werden gejagt, aber keine offizielle Bestätigung.",
           "date": "2026-08-08T23:56:06.372Z"
-        },
-        {
-          "title": "Locarno Film Festival: Kultur als Verbindung",
-          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
-          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -462,7 +462,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "TI",
@@ -472,7 +472,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "220",
+          "value": "231",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -483,72 +483,78 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - peintre",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63364"
+              "label": "Gyotaku - Traces de poissons",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/61721"
             },
             {
-              "label": "En dehors de Zucca, le village des citrouilles",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64302"
+              "label": "Jannis Kounellis : Je suis un peintre",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63037"
             },
             {
-              "label": "In orbit - exposition de céramique",
-              "detail": "Galleria Job, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63668"
+              "label": "Mona Caron - La résilience de la vie",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63363"
             },
             {
-              "label": "Pierrette Bloch. Le geste d'écrire",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64342"
+              "label": "Un renard sous la lune rose",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63915"
             },
             {
-              "label": "Céramiques de l'ancien Pérou. Du Pacifique aux Andes",
-              "detail": "Palazzo comunale, Riva San Vitale",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/64065"
+              "label": "Imaginaire illustré",
+              "detail": "Il Rifugio Letterario, Massagno",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64190"
             },
             {
-              "label": "Festival d'orgue de Locarno",
-              "detail": "Collegiata S. Antonio, Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63675"
+              "label": "Bertille Bak. Des voix de la terre",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62429"
             },
             {
-              "label": "Ré-création : changeons-nous les règles du jeu ?",
-              "detail": "Dipartimento formazione e apprendimento (DFA), Locarno",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63966"
+              "label": "Kaari Upson. Dollhouse – Une rétrospective",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/63581"
             },
             {
-              "label": "Adriano Pitschen. 'Nitori', gravures choisies",
-              "detail": "Biblioteca Salita dei Frati, Lugano",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/63618"
+              "label": "Sentiment et observation",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/53980"
             },
             {
-              "label": "Nouvelle génération | Chant du soir",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona",
-              "date": "2026-10-07",
-              "url": "https://www.tio.ch/agenda/day/20261007/62691"
+              "label": "Umberto Boccioni a écrit:",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/62804"
             },
             {
-              "label": "Next Generation XVI | Ascona Choral Academy | Evensong",
-              "detail": "Chiesa dei Santi Pietro e Paolo, Ascona, Ascona",
-              "date": "2026-10-07",
-              "url": "https://classicascona.ch/concerti/next-generation-xvi-ascona-choral-academy-evensong/"
+              "label": "Don de sang",
+              "detail": "centro La Torre, Losone",
+              "date": "2026-10-13",
+              "url": "https://www.tio.ch/agenda/day/20261013/64425"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Échecs à Bissone : les vainqueurs du VI Festival",
+          "url": "/fr/articles-frontalier/festival-echecs-bissone-gagnants/",
+          "excerpt": "Dimanche 11 octobre s’est déroulée la sixième édition Christian De Lucia a remporté le Trophée Borromini Under 16 Vladimir Paleologu a conquis le titre Semilampo",
+          "date": "2026-10-13T08:19:26.782Z"
+        },
         {
           "title": "Mendrisiotto : trois événements et des routes fermées le week-end",
           "url": "/fr/articles-frontalier/mendrisiotto-routes-fermees-week-end/",
@@ -581,8 +587,8 @@
         },
         {
           "title": "Tessin Musique se fait en quatre (concerts)",
-          "url": "/fr/articles-frontalier/tacito-musica-ticino-concerts/",
-          "excerpt": "Le Festival Ticino Musica se poursuit avec une journée riche en événements qui accompagneront le public de l'après-midi au soir.",
+          "url": "/fr/articles-frontalier/tacito-musica-tessin-concerts/",
+          "excerpt": "Le Festival Tessin Musica se poursuit avec une journée riche en événements qui accompagneront le public de l'après-midi au soir.",
           "date": "2026-07-28T05:51:38.011Z"
         },
         {
@@ -590,12 +596,6 @@
           "url": "/fr/articles-frontalier/president-festival-locarno/",
           "excerpt": "Le Locarno Film Festival cherche un nouveau président. Les rumeurs courent, mais pas de confirmation officielle.",
           "date": "2026-08-08T23:56:06.372Z"
-        },
-        {
-          "title": "Festival du film de Locarno : la culture comme lien",
-          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
-          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
-          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -612,7 +612,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

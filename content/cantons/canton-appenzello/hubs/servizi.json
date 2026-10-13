@@ -4,22 +4,22 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "87b49117dfd90c52786f1a3101d5188bb219edb84b17ce8b388071bc78a6b457",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "ec28974e120148736d5d715c6ccbbdb379b6eb38dc8bfab6482a9da99251d75b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -61,7 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -70,7 +70,7 @@
           "items": [
             {
               "label": "AR2771",
-              "value": "800 CHF",
+              "value": "2000 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
@@ -92,7 +92,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,10 +130,16 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Heiden aumenta la tassa base sui rifiuti",
+          "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
+          "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
         {
           "title": "Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe",
           "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-appenzello-interno/",
@@ -175,12 +181,6 @@
           "url": "/articoli-svizzera/premi-franchigie-appenzello-esterno/",
           "excerpt": "Come funziona l'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.",
           "date": "2026-08-21T00:08:39.612Z"
-        },
-        {
-          "title": "Premi cassa malati Appenzello Interno: franchigie e riduzione",
-          "url": "/articoli-svizzera/franchigie-riduzione-appenzello/",
-          "excerpt": "Franchigie da CHF 300 a 2.500 e procedure per ottenere il sussidio cantonale di riduzione. Guida operativa ai premi LAMal e ai criteri di accesso in Appenzello Interno.",
-          "date": "2026-08-21T04:19:19.463Z"
         }
       ],
       "links": [
@@ -217,7 +217,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -256,7 +256,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -265,7 +265,7 @@
           "items": [
             {
               "label": "AR2771",
-              "value": "800 CHF",
+              "value": "2,000 CHF",
               "detail": "current bid",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
@@ -287,7 +287,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -325,10 +325,16 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Heiden increases the basic waste fee",
+          "url": "/en/appenzell-articles/heiden-base-waste-fee/",
+          "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
         {
           "title": "Nursery and childcare in the Inner Appenzell Canton: costs and fees",
           "url": "/en/swiss-articles/daycare-childcare-canton-appenzell-innerrhoden/",
@@ -337,8 +343,8 @@
         },
         {
           "title": "Residence permit B in the Inner Appenzell Canton: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-appenzello-interno-requirements-renewal/",
-          "excerpt": "Find out the requirements and the procedure for renewing the B residence permit in the Canton of Appenzello Interno.",
+          "url": "/en/swiss-articles/residence-permit-b-appenzell-interno-requirements-renewal/",
+          "excerpt": "Find out the requirements and the procedure for renewing the B residence permit in the Canton of Appenzell Innerrhoden.",
           "date": "2026-09-02T23:10:49.584Z"
         },
         {
@@ -348,34 +354,28 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "External Appenzello Driving License: Conversion and Exams",
+          "title": "External Appenzell Driving License: Conversion and Exams",
           "url": "/en/swiss-articles/driving-license-appenzell-eastern-conversion/",
           "excerpt": "How to convert the foreign license to External Appenzell: theoretical, practical exam, courses and procedure at the Cantonal Traffic Office.",
           "date": "2026-09-07T00:59:19.046Z"
         },
         {
           "title": "Sick pay premiums in the Inner Appenzell Canton and premium reductions",
-          "url": "/en/swiss-articles/health-insurance-premiums-appenzello-interno-reduction/",
-          "excerpt": "Discover the premium ranges, deductibles and alternative models for compulsory health insurance in the Canton of Appenzello Interno.",
+          "url": "/en/swiss-articles/health-insurance-premiums-appenzell-interno-reduction/",
+          "excerpt": "Discover the premium ranges, deductibles and alternative models for compulsory health insurance in the Canton of Appenzell Innerrhoden.",
           "date": "2026-09-02T23:34:05.913Z"
         },
         {
-          "title": "Nursery and care: costs in the External Appenzello",
+          "title": "Nursery and care: costs in the External Appenzell",
           "url": "/en/swiss-articles/childcare-daycare-appenzell-rhodes-outer/",
-          "excerpt": "Rates calculated on income, cantonal subsidies and tax deductions: all on kindergartens, day families and after-school in the canton of Appenzello Esterno.",
+          "excerpt": "Rates calculated on income, cantonal subsidies and tax deductions: all on kindergartens, day families and after-school in the canton of Appenzell Ausserrhoden.",
           "date": "2026-08-21T01:51:49.937Z"
         },
         {
-          "title": "Sick pay premiums Appenzello Esterno: deductibles and subsidies",
+          "title": "Sick pay premiums Appenzell Ausserrhoden: deductibles and subsidies",
           "url": "/en/swiss-articles/health-insurance-appenzell-outsrhoden-deductibles/",
-          "excerpt": "How health insurance works in Appenzello Esterno: available deductibles, coverage models and procedures to access premium subsidies.",
+          "excerpt": "How health insurance works in Appenzell Ausserrhoden: available deductibles, coverage models and procedures to access premium subsidies.",
           "date": "2026-08-21T00:08:39.612Z"
-        },
-        {
-          "title": "Inner Appenzello sick pay premiums: deductibles and reduction",
-          "url": "/en/swiss-articles/deductibles-reduction-appenzell-rhodes/",
-          "excerpt": "Deductibles from CHF 300 to 2,500 and procedures to obtain the cantonal reduction subsidy. Operational guide to LAMal awards and access criteria in Appenzello Interno.",
-          "date": "2026-08-21T04:19:19.463Z"
         }
       ],
       "links": [
@@ -404,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -443,7 +443,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -452,7 +452,7 @@
           "items": [
             {
               "label": "AR2771",
-              "value": "800 CHF",
+              "value": "2’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
@@ -474,7 +474,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -512,10 +512,16 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Heiden erhöht die Kehrichtgrundgebühr",
+          "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
+          "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
         {
           "title": "Kinderbetreuung Appenzell: Kosten & Tarife",
           "url": "/de/schweiz-artikel/kindertagesstatte-kinderbetreuung-kanton-appenzell-innerrhoden/",
@@ -524,7 +530,7 @@
         },
         {
           "title": "Aufenthaltserlaubnis B im Kanton Appenzell Innerrhoden: Anforderungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-appenzello-interno-anforderungen-verlangerung/",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-appenzell-interno-anforderungen-verlangerung/",
           "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Appenzell Innerrhoden.",
           "date": "2026-09-02T23:10:49.584Z"
         },
@@ -542,7 +548,7 @@
         },
         {
           "title": "Krankenkassenprämien im Kanton Appenzell Innerrhoden und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/krankenversicherungspramien-appenzello-interno-reduktion/",
+          "url": "/de/schweiz-artikel/krankenversicherungspramien-appenzell-interno-reduktion/",
           "excerpt": "Entdecken Sie die Prämiensparten, Franchisen und alternativen Modelle für die obligatorische Krankenversicherung im Kanton Appenzell Innerrhoden.",
           "date": "2026-09-02T23:34:05.913Z"
         },
@@ -557,12 +563,6 @@
           "url": "/de/schweiz-artikel/praemien-franchisen-appenzell-ausserrhoden/",
           "excerpt": "So funktioniert die Krankenversicherung in Appenzell Ausserrhoden: verfügbare Selbstbehalte, Deckungsmodelle und Verfahren für den Zugang zu Prämienbeiträgen.",
           "date": "2026-08-21T00:08:39.612Z"
-        },
-        {
-          "title": "Krankenkassenprämien Appenzell Innerrhoden: Selbstbehalte und Ermäßigung",
-          "url": "/de/schweiz-artikel/selbstbehalte-ermaessigung-appenzell/",
-          "excerpt": "Franchisen von CHF 300 bis 2.500 und Verfahren zur Erlangung des kantonalen Reduktionszuschusses. Leitfaden zu den KVG-Prämien und Zugangskriterien in Appenzell Innerrhoden.",
-          "date": "2026-08-21T04:19:19.463Z"
         }
       ],
       "links": [
@@ -591,7 +591,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -630,7 +630,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -639,7 +639,7 @@
           "items": [
             {
               "label": "AR2771",
-              "value": "800 CHF",
+              "value": "2 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
@@ -661,7 +661,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -699,10 +699,16 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Heiden augmente la taxe de base sur les déchets",
+          "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
+          "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
+          "date": "2026-10-08T18:18:38.682Z"
+        },
         {
           "title": "Garderie et garde d'enfants dans le canton d'Appenzell : coûts et tarifs",
           "url": "/fr/articles-suisse/garde-d-enfants-canton-appenzell-rhodes-interieures/",
@@ -711,7 +717,7 @@
         },
         {
           "title": "Permis B Appenzell, Innerrhoden : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-de-sejour-b-appenzello-interno-conditions-renouvellement/",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-appenzell-interno-conditions-renouvellement/",
           "excerpt": "Renseignez-vous sur les exigences et la procédure pour renouveler votre permis de séjour B dans le canton d'Appenzell, en Inerrhoden.",
           "date": "2026-09-02T23:10:49.584Z"
         },
@@ -729,7 +735,7 @@
         },
         {
           "title": "Récompenses de la caisse-maladie dans le canton d'Appenzell Interne et réduction des primes",
-          "url": "/fr/articles-suisse/primes-d-assurance-maladie-appenzello-interno-reduction/",
+          "url": "/fr/articles-suisse/primes-d-assurance-maladie-appenzell-interno-reduction/",
           "excerpt": "Découvrez les fourchettes de primes, franchises et modèles alternatifs pour l'assurance maladie obligatoire dans le canton d'Appenzell Intérieur.",
           "date": "2026-09-02T23:34:05.913Z"
         },
@@ -744,12 +750,6 @@
           "url": "/fr/articles-suisse/primes-franchises-appenzell-rhodes-exterieures/",
           "excerpt": "Comment fonctionne l'assurance maladie à Appenzell Extérieur : franchises disponibles, modèles de couverture et procédures d'accès aux allocations sur primes.",
           "date": "2026-08-21T00:08:39.612Z"
-        },
-        {
-          "title": "Primes caisse-maladie Appenzell Interne : franchises et réduction",
-          "url": "/fr/articles-suisse/franchises-reduction-appenzell/",
-          "excerpt": "Franchises de 300 CHF à 2 500 CHF et procédures d'obtention de l'allocation cantonale de réduction. Guide opérationnel des prix LAMal et des critères d'accès à Appenzell Interne.",
-          "date": "2026-08-21T04:19:19.463Z"
         }
       ],
       "links": [
@@ -770,7 +770,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "ea54cce9a14f7e2bb0ef2d52499c09a512964d1132abefe043564863c4245467",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "621e11cf557b80e1bdb0c3331fc9a46c4adb9d35f07aadcb5b7918d39e765106",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "84",
+          "value": "97",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+              "label": "Nicole Johänntgen «Henry»",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
             },
             {
-              "label": "Jugendzirkus Robiano – Und Action!",
-              "detail": "Sportplatz Eisweiher",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
-            },
-            {
-              "label": "Polysport-Camp & Tagesferien",
-              "detail": "Riehen — in corso, ultimo giorno: 9 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+              "label": "…die holdesten Laute, die je über Menschenlippen als Mitlauter der Seele…",
+              "detail": "DISTL Dichter:innen- und Stadtmuseum Liestal, Liestal",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/die-holdesten-laute-die-je-ueber-menschenlippen-als-mitlauter-der-seele_AC4AvKe"
             },
             {
               "label": "Römer-Weekends",
               "detail": "Augusta Raurica, Augst — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
             },
             {
-              "label": "Oktoberfest im Zic Zac",
-              "detail": "Zic Zac, Allschwil — in corso, ultimo giorno: 10 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+              "label": "Ice Skating Lessons at the Margarethen Artificial Ice Rink",
+              "detail": "Kunsteisbahn Margarethen, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
             },
             {
-              "label": "Sculture di René Küng nel giardino del museo",
-              "detail": "Allschwil — in corso, ultimo giorno: 9 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+              "label": "Art Snack",
+              "detail": "Kunst Raum Riehen, Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
             },
             {
-              "label": "2-Hour Pickleball Beginner Workshop in Basel",
-              "detail": "Union Sport x Pickleball Hub Basel, Basel — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
             },
             {
-              "label": "BackJumps – The Live Issue: Reality Check",
-              "detail": "Colab Gallery, Basel — in corso, ultimo giorno: 7 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+              "label": "Basement Saints",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
             },
             {
-              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
-              "detail": "Basel",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+              "label": "Dominic Deville - OFF!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
             },
             {
-              "label": "IRISH MUSIC SESSION BASEL 2026",
-              "detail": "Kulturhuus Häbse, Basel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+              "label": "TRIGGERFINGER",
+              "detail": "Werkraum Warteck pp",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
+            },
+            {
+              "label": "8 octopi",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "84",
+          "value": "97",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,69 +130,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+              "label": "Nicole Johänntgen «Henry»",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
             },
             {
-              "label": "Jugendzirkus Robiano - Und Action!",
-              "detail": "Sportplatz Eisweiher",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
-            },
-            {
-              "label": "Polysport-Camp & Tagesferien",
-              "detail": "Riehen — ongoing, last day: 9 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+              "label": "…die holdesten Laute, die je über Menschenlippen als Mitlauter der Seele…",
+              "detail": "DISTL Dichter:innen- und Stadtmuseum Liestal, Liestal",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/die-holdesten-laute-die-je-ueber-menschenlippen-als-mitlauter-der-seele_AC4AvKe"
             },
             {
               "label": "Römer-Weekends",
               "detail": "Augusta Raurica, Augst — ongoing, last day: 18 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
             },
             {
-              "label": "Oktoberfest im Zic Zac",
-              "detail": "Zic Zac, Allschwil — ongoing, last day: 10 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+              "label": "Ice Skating Lessons at the Margarethen Artificial Ice Rink",
+              "detail": "Kunsteisbahn Margarethen, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
             },
             {
-              "label": "Sculptures by René Küng in the museum garden",
-              "detail": "Allschwil — ongoing, last day: 9 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+              "label": "Art Snack",
+              "detail": "Kunst Raum Riehen, Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
             },
             {
-              "label": "2-Hour Pickleball Beginner Workshop in Basel",
-              "detail": "Union Sport x Pickleball Hub Basel, Basel — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
             },
             {
-              "label": "BackJumps – The Live Issue: Reality Check",
-              "detail": "Colab Gallery, Basel — ongoing, last day: 7 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+              "label": "Basement Saints",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
             },
             {
-              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
-              "detail": "Basel",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+              "label": "Dominic Deville - OFF!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
             },
             {
-              "label": "IRISH MUSIC SESSION BASEL 2026",
-              "detail": "Kulturhuus Häbse, Basel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+              "label": "TRIGGERFINGER",
+              "detail": "Werkraum Warteck pp",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
+            },
+            {
+              "label": "8 octopi",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "84",
+          "value": "97",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,69 +227,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+              "label": "Nicole Johänntgen «Henry»",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
             },
             {
-              "label": "Jugendzirkus Robiano - Und Action!",
-              "detail": "Sportplatz Eisweiher",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
-            },
-            {
-              "label": "Polysport-Camp & Tagesferien",
-              "detail": "Riehen — läuft, letzter Tag: 9. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+              "label": "…die holdesten Laute, die je über Menschenlippen als Mitlauter der Seele…",
+              "detail": "DISTL Dichter:innen- und Stadtmuseum Liestal, Liestal",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/die-holdesten-laute-die-je-ueber-menschenlippen-als-mitlauter-der-seele_AC4AvKe"
             },
             {
               "label": "Römer-Weekends",
               "detail": "Augusta Raurica, Augst — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
             },
             {
-              "label": "Oktoberfest im Zic Zac",
-              "detail": "Zic Zac, Allschwil — läuft, letzter Tag: 10. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+              "label": "Eislaufkurs Kunsteisbahn Margarethen",
+              "detail": "Kunsteisbahn Margarethen, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
             },
             {
-              "label": "Skulpturen René Küng im Museumsgarten",
-              "detail": "Allschwil — läuft, letzter Tag: 9. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+              "label": "Kunstsnack",
+              "detail": "Kunst Raum Riehen, Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
             },
             {
-              "label": "Pickleball 2-stündiger Einsteiger Workshop Basel",
-              "detail": "Union Sport x Pickleball Hub Basel, Basel — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
             },
             {
-              "label": "BackJumps – The Live Issue: Reality Check",
-              "detail": "Colab Gallery, Basel — läuft, letzter Tag: 7. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+              "label": "Basement Saints",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
             },
             {
-              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
-              "detail": "Basel",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+              "label": "Dominic Deville - OFF!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
             },
             {
-              "label": "IRISH MUSIC SESSION BASEL 2026",
-              "detail": "Kulturhuus Häbse, Basel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+              "label": "TRIGGERFINGER",
+              "detail": "Werkraum Warteck pp",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
+            },
+            {
+              "label": "8 octopi",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "84",
+          "value": "97",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,69 +324,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Der «Blüthner» auf Reisen",
-              "detail": "Museum Kleines Klingental",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/der-bluethner-auf-reisen_AdJE62T"
+              "label": "Nicole Johänntgen «Henry»",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nicole-johaenntgen-henry_A6csqXE"
             },
             {
-              "label": "Jugendzirkus Robiano – Und Action !",
-              "detail": "Sportplatz Eisweiher",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/eventos/musica/oberwil-bl/jugendzirkus-robiano-und-action_Aca2ssS"
-            },
-            {
-              "label": "Polysport-Camp & Tagesferien",
-              "detail": "Riehen — en cours, dernier jour : 9 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysportcamp-tagesferien-3/"
+              "label": "…die holdesten Laute, die je über Menschenlippen als Mitlauter der Seele…",
+              "detail": "DISTL Dichter:innen- und Stadtmuseum Liestal, Liestal",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/liestal/die-holdesten-laute-die-je-ueber-menschenlippen-als-mitlauter-der-seele_AC4AvKe"
             },
             {
               "label": "Römer-Weekends",
               "detail": "Augusta Raurica, Augst — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/roemer-weekends/"
             },
             {
-              "label": "Oktoberfest im Zic Zac",
-              "detail": "Zic Zac, Allschwil — en cours, dernier jour : 10 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-im-zic-zac/"
+              "label": "Cours de patinage à la patinoire artificielle de Margarethen",
+              "detail": "Kunsteisbahn Margarethen, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cours-de-patinage-a-la-patinoire-artificielle-de-margarethen/"
             },
             {
-              "label": "Les sculptures de René Küng dans le jardin du musée",
-              "detail": "Allschwil — en cours, dernier jour : 9 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sculture-di-rene-kueng-nel-giardino-del-museo/"
+              "label": "Art Snack",
+              "detail": "Kunst Raum Riehen, Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/art-snack/"
             },
             {
-              "label": "2-Hour Pickleball Beginner Workshop in Basel",
-              "detail": "Union Sport x Pickleball Hub Basel, Basel — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pickleball-2-stuendiger-einsteiger-workshop-basel/"
+              "label": "Kreatives Töpfern für Kinder",
+              "detail": "Riehen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kreatives-toepfern-fuer-kinder-1/"
             },
             {
-              "label": "BackJumps – The Live Issue: Reality Check",
-              "detail": "Colab Gallery, Basel — en cours, dernier jour : 7 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/backjumps-the-live-issue-reality-check/"
+              "label": "Basement Saints",
+              "detail": "Z7 Konzertfabrik Pratteln, Pratteln",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/pratteln/basement-saints_ADHqaFW"
             },
             {
-              "label": "Marcel Schaffner. Ein Querschnitt. Arbeiten von 1950 - 2009",
-              "detail": "Basel",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/marcel-schaffner-ein-querschnitt-arbeiten-von-1950-2009/"
+              "label": "Dominic Deville - OFF!",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/dominic-deville-off-1/"
             },
             {
-              "label": "IRISH MUSIC SESSION BASEL 2026",
-              "detail": "Kulturhuus Häbse, Basel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/events/music/basel/irish-music-session-basel-2026_Aj4eRHx"
+              "label": "TRIGGERFINGER",
+              "detail": "Werkraum Warteck pp",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/triggerfinger_AJUGyFT"
+            },
+            {
+              "label": "8 octopi",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/8-octopi_AJkNLfX"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

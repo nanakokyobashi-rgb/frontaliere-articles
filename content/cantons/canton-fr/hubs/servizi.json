@@ -4,22 +4,22 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "0e17b46d80cd6f9715637140182b1aa66950f08a10f7568f8b4e68633c2a0841",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "5cd9cb3a15c7188b072d5f3842fbdb142f835fa4150be3bd572e61d6ee91c148",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "14",
-          "note": "offerta mediana 175 CHF"
+          "note": "offerta mediana 187,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -61,7 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -69,30 +69,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "FR18251",
-              "value": "550 CHF",
+              "label": "FR10057",
+              "value": "1000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
             },
             {
-              "label": "FR20890",
-              "value": "400 CHF",
+              "label": "FR15841",
+              "value": "600 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
             },
             {
-              "label": "FR37807",
-              "value": "300 CHF",
+              "label": "FR16051",
+              "value": "500 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -100,40 +100,46 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+              "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/primes-abordables-le-contre-projet-indirect-du-conseil-detat-a-linitiative-cantonale-transmis-au-grand-conseil"
             },
             {
-              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+              "label": "Bezahlbare Prämien: Indirekter Gegenvorschlag des Staatsrats zur kantonalen Initiative wird dem Grossrat übergeben",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             },
             {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-01T09:56:06.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+              "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
             },
             {
-              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
-              "date": "2026-09-30",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             },
             {
-              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
-              "date": "2026-09-25T11:47:08.000Z",
-              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+              "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             },
             {
-              "label": "Mois de la santé mentale 2026",
-              "date": "2026-09-25T07:40:51.000Z",
-              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Friburgo: garanzia da CHF 44,8 milioni per l'ospedale HIB",
+          "url": "/articoli-friburgo/garanzia-hib-payerne/",
+          "excerpt": "CHF 44,8 milioni per il finanziamento dell'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2",
+          "date": "2026-10-10T17:43:08.538Z"
+        },
         {
           "title": "Permesso di dimora B nel Canton Friburgo: requisiti, rinnovo e procedure",
           "url": "/articoli-svizzera/permesso-dimora-b-canton-friburgo-requisiti-rinnovo/",
@@ -171,12 +177,6 @@
           "date": "2026-09-01T20:58:54.961Z"
         },
         {
-          "title": "Asilo nido Friburgo: custodia bambini, costi",
-          "url": "/articoli-svizzera/custodia-bambini-friburgo-costi-sussidi/",
-          "excerpt": "Custodia bambini nel Canton Friburgo: tariffe, sussidi disponibili e procedure per richiedere i contributi cantonali alle famiglie.",
-          "date": "2026-09-01T19:42:33.243Z"
-        },
-        {
           "title": "Ospedale di Friburgo cerca infermieri con contratto di 12 mesi",
           "url": "/articoli-svizzera/ospedale-friburgo-posto-lavoro/",
           "excerpt": "L'ospedale di Friburgo cerca infermieri con contratto CDD di 12 mesi al 60-100% di impiego",
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "FR",
@@ -226,7 +226,7 @@
         {
           "label": "Plate auctions running",
           "value": "14",
-          "note": "typical bid 175 CHF"
+          "note": "typical bid 187.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -248,7 +248,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -256,30 +256,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "FR18251",
-              "value": "550 CHF",
+              "label": "FR10057",
+              "value": "1,000 CHF",
               "detail": "current bid",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
             },
             {
-              "label": "FR20890",
-              "value": "400 CHF",
+              "label": "FR15841",
+              "value": "600 CHF",
               "detail": "current bid",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
             },
             {
-              "label": "FR37807",
-              "value": "300 CHF",
+              "label": "FR16051",
+              "value": "500 CHF",
               "detail": "current bid",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,40 +287,46 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+              "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/primes-abordables-le-contre-projet-indirect-du-conseil-detat-a-linitiative-cantonale-transmis-au-grand-conseil"
             },
             {
-              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+              "label": "Bezahlbare Prämien: Indirekter Gegenvorschlag des Staatsrats zur kantonalen Initiative wird dem Grossrat übergeben",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             },
             {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-01T09:56:06.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+              "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
             },
             {
-              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
-              "date": "2026-09-30",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             },
             {
-              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
-              "date": "2026-09-25T11:47:08.000Z",
-              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+              "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             },
             {
-              "label": "Mois de la santé mentale 2026",
-              "date": "2026-09-25T07:40:51.000Z",
-              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fribourg: CHF 44,8 million guarantee for HIB hospital",
+          "url": "/en/fribourg-articles/fribourg-hib-guarantee/",
+          "excerpt": "CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →",
+          "date": "2026-10-10T17:43:08.538Z"
+        },
         {
           "title": "Residence permit B in Fribourg: requirements, renewal & procedures",
           "url": "/en/swiss-articles/residence-permit-b-canton-fribourg-requirements-renewal/",
@@ -328,45 +334,39 @@
           "date": "2026-09-22T05:16:15.207Z"
         },
         {
-          "title": "Residence Permit B Freiburg: Requirements and Renewal",
+          "title": "Residence Permit B Fribourg: Requirements and Renewal",
           "url": "/en/swiss-articles/residence-permit-b-fribourg-requirements-renewal/",
-          "excerpt": "Permit B in Freiburg: requirements for EU/EFTA and third countries, renewal procedures, necessary documents and roles of the SEM and cantonal administration.",
+          "excerpt": "Permit B in Fribourg: requirements for EU/EFTA and third countries, renewal procedures, necessary documents and roles of the SEM and cantonal administration.",
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
-          "title": "Nursery and childcare in the Canton of Freiburg: costs and options",
-          "url": "/en/swiss-articles/nursery-and-childcare-in-the-canton-of-freiburg-costs-and-options/",
-          "excerpt": "The Canton of Freiburg offers several daycare and childcare options, with income-based fees and cantonal subsidies available.",
+          "title": "Nursery and childcare in the Canton of Fribourg: costs and options",
+          "url": "/en/swiss-articles/nursery-and-childcare-in-the-canton-of-fribourg-costs-and-options/",
+          "excerpt": "The Canton of Fribourg offers several daycare and childcare options, with income-based fees and cantonal subsidies available.",
           "date": "2026-08-18T00:24:16.744Z"
         },
         {
-          "title": "Driving licence in Freiburg: conversion and requirements",
+          "title": "Driving licence in Fribourg: conversion and requirements",
           "url": "/en/swiss-articles/driving-license-fribourg-conversion-and-exams/",
-          "excerpt": "Conversion of the foreign driver's license in the Canton of Freiburg, theoretical and practical exams, compulsory courses and competent traffic office.",
+          "excerpt": "Conversion of the foreign driver's license in the Canton of Fribourg, theoretical and practical exams, compulsory courses and competent traffic office.",
           "date": "2026-08-18T01:35:04.695Z"
         },
         {
-          "title": "Sick pay premiums Freiburg: reduction and subsidies",
+          "title": "Sick pay premiums Fribourg: reduction and subsidies",
           "url": "/en/swiss-articles/fribourg-health-insurance-premiums-2026/",
           "excerpt": "Guide to compulsory health insurance premiums in the Canton of Fribourg: deductibles, alternative models and procedure for obtaining premium reductions",
           "date": "2026-08-31T23:41:46.736Z"
         },
         {
-          "title": "Driving license in Freiburg: conversion and exams",
+          "title": "Driving license in Fribourg: conversion and exams",
           "url": "/en/swiss-articles/driving-license-fribourg-procedure/",
-          "excerpt": "Procedure for converting a foreign driver's license in the Canton of Freiburg: compulsory courses, theoretical and practical exams, required documents and step-by-step roadmaps.",
+          "excerpt": "Procedure for converting a foreign driver's license in the Canton of Fribourg: compulsory courses, theoretical and practical exams, required documents and step-by-step roadmaps.",
           "date": "2026-09-01T20:58:54.961Z"
         },
         {
-          "title": "Kindergarten Freiburg: childcare, costs",
-          "url": "/en/swiss-articles/childcare-friburgo-costs-subsidies/",
-          "excerpt": "Child custody in the canton of Fribourg: rates, subsidies available and procedures for applying for cantonal contributions to families.",
-          "date": "2026-09-01T19:42:33.243Z"
-        },
-        {
-          "title": "Freiburg Hospital seeks nurses with 12-month contract",
+          "title": "Fribourg Hospital seeks nurses with 12-month contract",
           "url": "/en/swiss-articles/fribourg-hospital-job-nurse/",
-          "excerpt": "Freiburg hospital is looking for nurses with a 12-month CDD contract at 60-100% employment",
+          "excerpt": "Fribourg hospital is looking for nurses with a 12-month CDD contract at 60-100% employment",
           "date": "2026-06-26T02:41:15.688Z"
         }
       ],
@@ -392,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "FR",
@@ -409,7 +409,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "14",
-          "note": "mittleres Gebot 175 CHF"
+          "note": "mittleres Gebot 187.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -431,7 +431,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -439,30 +439,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "FR18251",
-              "value": "550 CHF",
+              "label": "FR10057",
+              "value": "1’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
             },
             {
-              "label": "FR20890",
-              "value": "400 CHF",
+              "label": "FR15841",
+              "value": "600 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
             },
             {
-              "label": "FR37807",
-              "value": "300 CHF",
+              "label": "FR16051",
+              "value": "500 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -470,40 +470,46 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+              "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/primes-abordables-le-contre-projet-indirect-du-conseil-detat-a-linitiative-cantonale-transmis-au-grand-conseil"
             },
             {
-              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+              "label": "Bezahlbare Prämien: Indirekter Gegenvorschlag des Staatsrats zur kantonalen Initiative wird dem Grossrat übergeben",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             },
             {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-01T09:56:06.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+              "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
             },
             {
-              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
-              "date": "2026-09-30",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             },
             {
-              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
-              "date": "2026-09-25T11:47:08.000Z",
-              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+              "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             },
             {
-              "label": "Mois de la santé mentale 2026",
-              "date": "2026-09-25T07:40:51.000Z",
-              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Freiburg: Garantie in Höhe von CHF 44,8 Millionen für das HIB-Spital",
+          "url": "/de/freiburg-artikel/freiburg-hib-buergschaft/",
+          "excerpt": "CHF 44,8 Millionen für die Finanzierung des HIB 103 abgegebene Stimmen, alle dafür Bauarbeiten zwischen 2028 und 2032 vorgesehen Der Kanton Waadt muss noch CHF",
+          "date": "2026-10-10T17:43:08.538Z"
+        },
         {
           "title": "Aufenthaltsbewilligung B in Freiburg: Voraussetzungen & Verfahren",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-freiburg-voraussetzungen-verlaengerung/",
@@ -518,7 +524,7 @@
         },
         {
           "title": "Kindertagesstätte und Kinderbetreuung im Kanton Freiburg: Kosten und Optionen",
-          "url": "/de/schweiz-artikel/asilo-nido-custodia-friburgo-kosten/",
+          "url": "/de/schweiz-artikel/asilo-nido-custodia-freiburg-kosten/",
           "excerpt": "Der Kanton Freiburg bietet verschiedene Möglichkeiten der Kindertagesstätte und Kinderbetreuung mit einkommensabhängigen Tarifen und kantonalen Zuschüssen an.",
           "date": "2026-08-18T00:24:16.744Z"
         },
@@ -539,12 +545,6 @@
           "url": "/de/schweiz-artikel/fuehrerschein-freiburg-verfahren/",
           "excerpt": "Umwandlungsverfahren des ausländischen Führerscheins im Kanton Freiburg: Pflichtkurse, theoretische und praktische Prüfungen, erforderliche Unterlagen und Schritt-für-Schritt-Roadmaps.",
           "date": "2026-09-01T20:58:54.961Z"
-        },
-        {
-          "title": "Kindertagesstätte Freiburg: Kinderbetreuung, Kosten",
-          "url": "/de/schweiz-artikel/kinderbetreuung-freiburg-kosten-subventionen/",
-          "excerpt": "Kinderbetreuung im Kanton Freiburg: Tarife, verfügbare Zuschüsse und Verfahren für die Beantragung von kantonalen Familienbeiträgen.",
-          "date": "2026-09-01T19:42:33.243Z"
         },
         {
           "title": "Spital Freiburg sucht Krankenschwestern mit 12-monatigem Vertrag",
@@ -575,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "FR",
@@ -592,7 +592,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "14",
-          "note": "offre centrale 175 CHF"
+          "note": "offre centrale 187,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -614,7 +614,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -622,30 +622,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "FR18251",
-              "value": "550 CHF",
+              "label": "FR10057",
+              "value": "1 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7251&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7267&locale=fr_ch"
             },
             {
-              "label": "FR20890",
-              "value": "400 CHF",
+              "label": "FR15841",
+              "value": "600 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7252&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7268&locale=fr_ch"
             },
             {
-              "label": "FR37807",
-              "value": "300 CHF",
+              "label": "FR16051",
+              "value": "500 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-12T10:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7253&locale=fr_ch"
+              "date": "2026-10-19T10:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7269&locale=fr_ch"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -653,40 +653,46 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Le chômage recule dans le canton de Fribourg en septembre 2026, à 2,5%",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/deef/spe/actualites/le-chomage-recule-dans-le-canton-de-fribourg-en-septembre-2026-a-25"
+              "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/primes-abordables-le-contre-projet-indirect-du-conseil-detat-a-linitiative-cantonale-transmis-au-grand-conseil"
             },
             {
-              "label": "Rückgang der Arbeitslosigkeit im Kanton Freiburg im September 2026 auf 2,5 %",
-              "date": "2026-10-06T12:37:33.000Z",
-              "url": "https://www.fr.ch/de/vwbd/ama/news/rueckgang-der-arbeitslosigkeit-im-kanton-freiburg-im-september-2026-auf-25"
+              "label": "Bezahlbare Prämien: Indirekter Gegenvorschlag des Staatsrats zur kantonalen Initiative wird dem Grossrat übergeben",
+              "date": "2026-10-12T14:34:28.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/bezahlbare-praemien-indirekter-gegenvorschlag-des-staatsrats-zur-kantonalen-initiative-wird-dem-grossrat-uebergeben"
             },
             {
-              "label": "Demandes de permis de construire et de démolir",
-              "date": "2026-10-01T09:56:06.000Z",
-              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-268"
+              "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
             },
             {
-              "label": "De Morat-Fribourg au Comptoir gruérien: un programme mobilisateur pour Octobre Rose",
-              "date": "2026-09-30",
-              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/de-morat-fribourg-au-comptoir-gruerien-un-programme-mobilisateur-pour-octobre-rose"
+              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
+              "date": "2026-10-09T07:04:27.000Z",
+              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             },
             {
-              "label": "Mois de la santé mentale : 27 actions pour briser les tabous et mieux faire connaître les ressources disponibles",
-              "date": "2026-09-25T11:47:08.000Z",
-              "url": "https://www.fr.ch/dsas/actualites/mois-de-la-sante-mentale-27-actions-pour-briser-les-tabous-et-mieux-faire-connaitre-les-ressources-disponibles"
+              "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             },
             {
-              "label": "Mois de la santé mentale 2026",
-              "date": "2026-09-25T07:40:51.000Z",
-              "url": "https://www.fr.ch/dsas/mois-de-la-sante-mentale-2026"
+              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
+              "date": "2026-10-08T14:00:37.000Z",
+              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fribourg : garantie de 44,8 millions de CHF pour l'hôpital HIB",
+          "url": "/fr/articles-fribourg/fribourg-garantie-hib/",
+          "excerpt": "44,8 millions de CHF pour le financement de l'HIB 103 votes exprimés, tous favorables Travaux prévus entre 2028 et 2032 Le canton de Vaud doit encore approuver",
+          "date": "2026-10-10T17:43:08.538Z"
+        },
         {
           "title": "Permis B Fribourg : exigences, renouvellement et démarches",
           "url": "/fr/articles-suisse/permis-sejour-b-canton-fribourg-exigences-renouvellement/",
@@ -724,12 +730,6 @@
           "date": "2026-09-01T20:58:54.961Z"
         },
         {
-          "title": "Garderie Fribourg : garde d'enfants, frais",
-          "url": "/fr/articles-suisse/garde-enfants-fribourg-couts-subventions/",
-          "excerpt": "Garde d'enfants dans le canton de Fribourg : tarifs, subventions disponibles et procédures pour demander les contributions cantonales aux familles.",
-          "date": "2026-09-01T19:42:33.243Z"
-        },
-        {
           "title": "Hôpital de Fribourg à la recherche d'infirmières sous contrat de 12 mois",
           "url": "/fr/articles-suisse/hopital-fribourg-emploi-infirmiere/",
           "excerpt": "L'hôpital de Fribourg recherche des infirmières sous contrat CDD de 12 mois à 60-100% d'emploi",
@@ -754,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

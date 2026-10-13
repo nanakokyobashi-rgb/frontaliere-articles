@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "8d47996f846bdafeedcab1f8dab3b08f73fda323a52d46a24fbb05ca8d2ff96c",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "57e7bd19eb33bb1ef117b8b9de5b51c584d0b1b9fbb1e9da7c60d4ad09f540e1",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -154,7 +154,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "ZG",
@@ -291,7 +291,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "ZG",
@@ -428,7 +428,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "ZG",
@@ -537,9 +537,9 @@
           "date": "2026-08-17T17:45:01.928Z"
         },
         {
-          "title": "Lucerne dépasse Zug: nouveau paradis fiscal pour les entreprises",
+          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
           "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
-          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zug. Impact sur les frontaliers et comparaison avec l'UE.",
+          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
           "date": "2026-05-07T09:05:42.794Z"
         }
       ],
@@ -565,7 +565,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

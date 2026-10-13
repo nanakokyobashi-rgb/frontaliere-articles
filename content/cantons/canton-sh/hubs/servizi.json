@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "3dd0aa33e8e51b09421373a311d925396eb303613460967dc45a088723f56fc0",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "49ffda25d681497e427c581d5307c0b1307e1f1abc83ac3d58095690a3d4a22a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     }
   ],
@@ -33,7 +33,7 @@
         },
         {
           "label": "Aste di targhe in corso",
-          "value": "37",
+          "value": "38",
           "note": "offerta mediana 300 CHF"
         }
       ],
@@ -56,7 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -64,33 +64,39 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "SH9300",
-              "value": "1990 CHF",
+              "label": "SH4279",
+              "value": "1000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69587"
             },
             {
-              "label": "SH1383",
-              "value": "1150 CHF",
+              "label": "SH4385",
+              "value": "1000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69589"
             },
             {
-              "label": "SH2994",
-              "value": "1100 CHF",
+              "label": "SH4651",
+              "value": "1000 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69588"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Sciaffusa: e-learning per farmacie sulla violenza domestica",
+          "url": "/articoli-sciaffusa/sciaffusa-formazione-farmacie/",
+          "excerpt": "Sciaffusa: moduli e-learning volontari per le farmacie, dedicati a segnali di violenza domestica, colloquio riservato e rinvio ai servizi.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
         {
           "title": "Permesso dimora B Sciaffusa: requisiti e rinnovo",
           "url": "/articoli-svizzera/sciaffusa-permesso-dimora-b/",
@@ -130,7 +136,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SH",
@@ -146,7 +152,7 @@
         },
         {
           "label": "Plate auctions running",
-          "value": "37",
+          "value": "38",
           "note": "typical bid 300 CHF"
         }
       ],
@@ -169,7 +175,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -177,33 +183,39 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "SH9300",
-              "value": "1,990 CHF",
+              "label": "SH4279",
+              "value": "1,000 CHF",
               "detail": "current bid",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69587"
             },
             {
-              "label": "SH1383",
-              "value": "1,150 CHF",
+              "label": "SH4385",
+              "value": "1,000 CHF",
               "detail": "current bid",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69589"
             },
             {
-              "label": "SH2994",
-              "value": "1,100 CHF",
+              "label": "SH4651",
+              "value": "1,000 CHF",
               "detail": "current bid",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69588"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Schaffhausen: e-learning for pharmacies on domestic violence",
+          "url": "/en/schaffhausen-articles/schaffhausen-pharmacy-training/",
+          "excerpt": "Schaffhausen: voluntary e-learning modules for pharmacies, focused on signs of domestic violence, confidential conversations, and referrals to services.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
         {
           "title": "Residence permit B Schaffhausen: requirements and renewal",
           "url": "/en/swiss-articles/schaffhausen-residence-permit-category-b/",
@@ -239,7 +251,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SH",
@@ -255,7 +267,7 @@
         },
         {
           "label": "Laufende Kontrollschild-Auktionen",
-          "value": "37",
+          "value": "38",
           "note": "mittleres Gebot 300 CHF"
         }
       ],
@@ -278,7 +290,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -286,33 +298,39 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "SH9300",
-              "value": "1’990 CHF",
+              "label": "SH4279",
+              "value": "1’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69587"
             },
             {
-              "label": "SH1383",
-              "value": "1’150 CHF",
+              "label": "SH4385",
+              "value": "1’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69589"
             },
             {
-              "label": "SH2994",
-              "value": "1’100 CHF",
+              "label": "SH4651",
+              "value": "1’000 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69588"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Schaffhausen: E-Learning für Apotheken zum Thema häusliche Gewalt",
+          "url": "/de/schaffhausen-artikel/schaffhausen-apotheken-schulung/",
+          "excerpt": "Schaffhausen: Freiwillige E-Learning-Module für Apotheken zu Anzeichen häuslicher Gewalt, vertraulichen Gesprächen und der Weitervermittlung an Unterstützungsangebote.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
         {
           "title": "Aufenthaltsbewilligung B Schaffhausen: Voraussetzungen und Verlängerung",
           "url": "/de/schweiz-artikel/schaffhausen-aufenthaltsgenehmigung-kategorie-b/",
@@ -348,7 +366,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SH",
@@ -364,7 +382,7 @@
         },
         {
           "label": "Enchères de plaques en cours",
-          "value": "37",
+          "value": "38",
           "note": "offre centrale 300 CHF"
         }
       ],
@@ -387,7 +405,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -395,33 +413,39 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "SH9300",
-              "value": "1 990 CHF",
+              "label": "SH4279",
+              "value": "1 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69553"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69587"
             },
             {
-              "label": "SH1383",
-              "value": "1 150 CHF",
+              "label": "SH4385",
+              "value": "1 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69548"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69589"
             },
             {
-              "label": "SH2994",
-              "value": "1 100 CHF",
+              "label": "SH4651",
+              "value": "1 000 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-07T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69549"
+              "date": "2026-10-14T20:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69588"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Schaffhouse : e-learning pour les pharmacies sur la violence domestique",
+          "url": "/fr/articles-schaffhouse/schaffhouse-formation-pharmacies/",
+          "excerpt": "Schaffhouse : modules d’e-learning volontaires pour les pharmacies, consacrés aux signes de violence domestique, à l’entretien confidentiel et à l’orientation vers les services.",
+          "date": "2026-10-08T08:29:37.131Z"
+        },
         {
           "title": "Permis de séjour B Schaffhouse : exigences et renouvellement",
           "url": "/fr/articles-suisse/schaffhouse-permis-de-sejour-categorie-b/",
@@ -453,7 +477,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

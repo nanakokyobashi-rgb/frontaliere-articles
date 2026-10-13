@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "22772ee3c79a2c9d87e3d4887837b7bc44f067e20028ddd28a30eae1539c697d",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "e1d6bcec291e3079e065b33600a25ddf91ac8b13d7519b8ee721102ba8276871",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -154,19 +154,9 @@
               "label": "Formation médecins traitant·e·s - 22 avril 2027",
               "date": "2026-06-17",
               "url": "https://www.ecasfr.ch/fr/Actualites/Formation-medecins-traitante-s-1er-octobre-2026.html"
-            },
-            {
-              "label": "Redistribution du produit de la taxe sur le CO2 aux entreprises",
-              "date": "2026-06-11",
-              "url": "https://www.ecasfr.ch/fr/Actualites/Redistribution-du-produit-de-la-taxe-sur-le-CO2-aux-entreprises-3.html"
-            },
-            {
-              "label": "Attention aux arnaques par téléphone",
-              "date": "2026-06-11",
-              "url": "https://www.cpef.ch/actualites/attention-aux-arnaques-par-telephone"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -201,7 +191,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "FR",
@@ -328,32 +318,22 @@
               "label": "Formation médecins traitant·e·s - 22 avril 2027",
               "date": "2026-06-17",
               "url": "https://www.ecasfr.ch/fr/Actualites/Formation-medecins-traitante-s-1er-octobre-2026.html"
-            },
-            {
-              "label": "Redistribution du produit de la taxe sur le CO2 aux entreprises",
-              "date": "2026-06-11",
-              "url": "https://www.ecasfr.ch/fr/Actualites/Redistribution-du-produit-de-la-taxe-sur-le-CO2-aux-entreprises-3.html"
-            },
-            {
-              "label": "Attention aux arnaques par téléphone",
-              "date": "2026-06-11",
-              "url": "https://www.cpef.ch/actualites/attention-aux-arnaques-par-telephone"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "AVS and complementary services in the canton of Fribourg: an income guide",
           "url": "/en/swiss-articles/avs-pension-benefits-fribourg-compensation-fund/",
-          "excerpt": "How the first federal pillar works in the canton of Freiburg: AVS rates, the role of the cantonal compensation fund, pension calculation and supplementary benefits for the living minimum.",
+          "excerpt": "How the first federal pillar works in the canton of Fribourg: AVS rates, the role of the cantonal compensation fund, pension calculation and supplementary benefits for the living minimum.",
           "date": "2026-08-24T01:24:46.910Z"
         },
         {
-          "title": "AVS and complementary services in the Canton of Freiburg",
+          "title": "AVS and complementary services in the Canton of Fribourg",
           "url": "/en/swiss-articles/avs-benefits-fribourg/",
-          "excerpt": "Analysis of the first pillar in the Canton of Freiburg: cantonal compensation fund, calculation of annuities, gaps and complementary benefits.",
+          "excerpt": "Analysis of the first pillar in the Canton of Fribourg: cantonal compensation fund, calculation of annuities, gaps and complementary benefits.",
           "date": "2026-08-18T00:49:28.665Z"
         }
       ],
@@ -375,7 +355,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "FR",
@@ -502,19 +482,9 @@
               "label": "Formation médecins traitant·e·s - 22 avril 2027",
               "date": "2026-06-17",
               "url": "https://www.ecasfr.ch/fr/Actualites/Formation-medecins-traitante-s-1er-octobre-2026.html"
-            },
-            {
-              "label": "Redistribution du produit de la taxe sur le CO2 aux entreprises",
-              "date": "2026-06-11",
-              "url": "https://www.ecasfr.ch/fr/Actualites/Redistribution-du-produit-de-la-taxe-sur-le-CO2-aux-entreprises-3.html"
-            },
-            {
-              "label": "Attention aux arnaques par téléphone",
-              "date": "2026-06-11",
-              "url": "https://www.cpef.ch/actualites/attention-aux-arnaques-par-telephone"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -526,7 +496,7 @@
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Freiburg",
-          "url": "/de/schweiz-artikel/avs-leistungen-fribourg/",
+          "url": "/de/schweiz-artikel/avs-leistungen-freiburg/",
           "excerpt": "Analyse der ersten Säule im Kanton Freiburg: Kantonale Ausgleichskasse, Rentenberechnung, Lücken und Ergänzungsleistungen.",
           "date": "2026-08-18T00:49:28.665Z"
         }
@@ -549,7 +519,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "FR",
@@ -676,19 +646,9 @@
               "label": "Formation médecins traitant·e·s - 22 avril 2027",
               "date": "2026-06-17",
               "url": "https://www.ecasfr.ch/fr/Actualites/Formation-medecins-traitante-s-1er-octobre-2026.html"
-            },
-            {
-              "label": "Redistribution du produit de la taxe sur le CO2 aux entreprises",
-              "date": "2026-06-11",
-              "url": "https://www.ecasfr.ch/fr/Actualites/Redistribution-du-produit-de-la-taxe-sur-le-CO2-aux-entreprises-3.html"
-            },
-            {
-              "label": "Attention aux arnaques par téléphone",
-              "date": "2026-06-11",
-              "url": "https://www.cpef.ch/actualites/attention-aux-arnaques-par-telephone"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -723,7 +683,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

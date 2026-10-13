@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "80acc1cb82dbf89a554ef942d433b2cd0fb01432fcf40c33e7a831c2290cbf6c",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "22b8bf3b129afc7f41f9e7aee4eabdc51c4a4e37949ff461aa6e4b90026b3503",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -135,7 +135,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -186,7 +186,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GL",
@@ -299,7 +299,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -323,7 +323,7 @@
         },
         {
           "title": "Glarus Landsgemeinde 2026: tax rate and housing at heart of debates",
-          "url": "/en/cross-border-articles/glarona-landsgemeinde-2026-finances-housing/",
+          "url": "/en/cross-border-articles/glarus-landsgemeinde-2026-finances-housing/",
           "excerpt": "The Glarus Landsgemeinde voted on financial and housing issues. Tax rate confirmed at 58%, new deductions for commuters and health insurance subsidies.",
           "date": "2026-05-03T16:15:24.619Z"
         }
@@ -350,7 +350,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GL",
@@ -463,7 +463,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -514,7 +514,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GL",
@@ -627,7 +627,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -639,7 +639,7 @@
         },
         {
           "title": "Impôts cantonaux dans le canton de Glaris : taux et déductions",
-          "url": "/fr/articles-suisse/canton-de-glarus-imposition-cantonaux-taux-et-deductions/",
+          "url": "/fr/articles-suisse/canton-de-glaris-imposition-cantonaux-taux-et-deductions/",
           "excerpt": "Taxes cantonales dans le canton de Glare : taxes, tranches, déductions, délais de livraison et portail en ligne de l'administration fiscale cantonale.",
           "date": "2026-08-16T23:39:37.272Z"
         },
@@ -678,7 +678,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

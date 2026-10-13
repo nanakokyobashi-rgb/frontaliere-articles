@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "61cb6c58f333b9ec53fc6b5f839ffe1a1e7a404baacced55d64955f6ba7bb9be",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "ddad779e3f25997e8428783d8ffb4a6b2b8d9a6f4b041a1d2f8678171a8ce362",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-06T18:23:08.067Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "170",
+          "value": "211",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Wattenwil-Märit",
-              "detail": "Wattenwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wattenwil-maerit-1/"
+              "label": "Afternoon Tea at Lake Thun",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Führung hinter die Kulissen: Zwischen Illusion und Idylle – Die Afrika-Dioramen",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fuehrung-hinter-die-kulissen-zwischen-illusion-und-idylle-die-afrika-dioramen/"
+              "label": "Andy Trinkler Solo / CH",
+              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
             },
             {
-              "label": "Bier-KulTour Öffentliche Führung",
-              "detail": "Kornhaus Burgdorf, Burgdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bier-kultour-oeffentliche-fuehrung/"
+              "label": "Lisa Catena & Rolf Marti Mys Käthi schmöckt nach Schoggola – Hommage an den Berner Troubadour Bernhard Stirnemann",
+              "detail": "La Cappella",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
             },
             {
-              "label": "Kosheen Live - Exklusive Schweizer Show!",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/kosheen-live-exklusive-schweizer-show_AJewZxY"
+              "label": "Ungerwäx – un concerto commentato",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+            },
+            {
+              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
+              "detail": "Süri — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+            },
+            {
+              "label": "Oktoberfest Süri",
+              "detail": "Laupenstrasse 21, Mühleberg — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+            },
+            {
+              "label": "Herbstausstellung 2026",
+              "detail": "Rütschelen — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+            },
+            {
+              "label": "Making a chocolate cow at Early Beck",
+              "detail": "Early Beck Productions, Saanen — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
             },
             {
               "label": "Observing red deer in enclousure",
               "detail": "3777 Saanenmöser, Saanen — in corso, ultimo giorno: 13 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
-            },
-            {
-              "label": "Praisefestival Biel/Bienne",
-              "detail": "Biel, Biel/Bienne — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/72h-anbetung-gebet-prophetie/"
-            },
-            {
-              "label": "Victorinox Outdoor & Sports Camp",
-              "detail": "Ferienheim Honegg, Oberlangenegg — in corso, ultimo giorno: 9 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/victorinox-outdoor-sports-camp/"
             },
             {
               "label": "L'arte delle marionette: Visita guidata e conferenza di Sasha Morgenthaler",
               "detail": "Puppenklinik Sashaswelt, Büren an der Aare — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
-            },
-            {
-              "label": "Wine Harvest Festival Ligerz",
-              "detail": "Dorfgasse, Ligerz — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ligerzer-laeset-sunntige/"
-            },
-            {
-              "label": "Pilz- Workshop & Dinner",
-              "detail": "Lenk Lodge & Umgebung, Lenk — in corso, ultimo giorno: 10 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilz-workshop-dinner/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BE",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "170",
+          "value": "211",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,69 +130,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Wattenwil-Märit",
-              "detail": "Wattenwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wattenwil-maerit-1/"
+              "label": "Afternoon Tea at Lake Thun",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Führung hinter die Kulissen: Zwischen Illusion und Idylle – Die Afrika-Dioramen",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fuehrung-hinter-die-kulissen-zwischen-illusion-und-idylle-die-afrika-dioramen/"
+              "label": "Andy Trinkler Solo / CH",
+              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
             },
             {
-              "label": "Bier-KulTour Öffentliche Führung",
-              "detail": "Kornhaus Burgdorf, Burgdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bier-kultour-oeffentliche-fuehrung/"
+              "label": "Lisa Catena & Rolf Marti: “Mys Käthi” Smells Like Chocolate – A Tribute to the Bernese Troubadour Bernhard Stirnemann",
+              "detail": "La Cappella",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
             },
             {
-              "label": "Kosheen Live-Ek",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/kosheen-live-exklusive-schweizer-show_AJewZxY"
+              "label": "Ungerwäx—A Concert with Commentary",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+            },
+            {
+              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
+              "detail": "Süri — ongoing, last day: 24 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+            },
+            {
+              "label": "Oktoberfest Süri",
+              "detail": "Laupenstrasse 21, Mühleberg — ongoing, last day: 24 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+            },
+            {
+              "label": "Herbstausstellung 2026",
+              "detail": "Rütschelen — ongoing, last day: 18 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+            },
+            {
+              "label": "Making a chocolate cow at Early Beck",
+              "detail": "Early Beck Productions, Saanen — ongoing, last day: 15 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
             },
             {
               "label": "Observing red deer in enclousure",
               "detail": "3777 Saanenmöser, Saanen — ongoing, last day: 13 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
-            },
-            {
-              "label": "Praisefestival Biel/Bienne",
-              "detail": "Biel, Biel/Bienne — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/72h-anbetung-gebet-prophetie/"
-            },
-            {
-              "label": "Victorinox Outdoor & Sports Camp",
-              "detail": "Ferienheim Honegg, Oberlangenegg — ongoing, last day: 9 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/victorinox-outdoor-sports-camp/"
             },
             {
               "label": "The art of puppets: Guided tour & lecture on Sasha Morgenthaler",
               "detail": "Puppenklinik Sashaswelt, Büren an der Aare — ongoing, last day: 19 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
-            },
-            {
-              "label": "Wine Harvest Festival Ligerz",
-              "detail": "Dorfgasse, Ligerz — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ligerzer-laeset-sunntige/"
-            },
-            {
-              "label": "Pilz- Workshop & Dinner",
-              "detail": "Lenk Lodge & Umgebung, Lenk — ongoing, last day: 10 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilz-workshop-dinner/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BE",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "170",
+          "value": "211",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,69 +227,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Wattenwil-Märit",
-              "detail": "Wattenwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wattenwil-maerit-1/"
+              "label": "Afternoon Tea Thunersee",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Führung hinter die Kulissen: Zwischen Illusion und Idylle – Die Afrika-Dioramen",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fuehrung-hinter-die-kulissen-zwischen-illusion-und-idylle-die-afrika-dioramen/"
+              "label": "Andy Trinkler Solo / CH",
+              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
             },
             {
-              "label": "Bier-KulTour Öffentliche Führung",
-              "detail": "Kornhaus Burgdorf, Burgdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bier-kultour-oeffentliche-fuehrung/"
+              "label": "Lisa Catena & Rolf Marti: „Mys Käthi schmöckt nach Schoggola“ – Eine Hommage an den Berner Troubadour Bernhard…",
+              "detail": "La Cappella",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
             },
             {
-              "label": "Kosheen Live – Exklusive Schweizer Show!",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/kosheen-live-exklusive-schweizer-show_AJewZxY"
+              "label": "Ungerwäx - ein kommentiertes Konzert",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+            },
+            {
+              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
+              "detail": "Süri — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+            },
+            {
+              "label": "Oktoberfest Süri",
+              "detail": "Laupenstrasse 21, Mühleberg — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+            },
+            {
+              "label": "Herbstausstellung 2026",
+              "detail": "Rütschelen — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+            },
+            {
+              "label": "Schokoladenkuh herstellen bei Early Beck",
+              "detail": "Early Beck Productions, Saanen — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
             },
             {
               "label": "Rothirsche im Gehege beobachten",
               "detail": "3777 Saanenmöser, Saanen — läuft, letzter Tag: 13. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
-            },
-            {
-              "label": "Praisefestival Biel/Bienne",
-              "detail": "Biel, Biel/Bienne — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/72h-anbetung-gebet-prophetie/"
-            },
-            {
-              "label": "Victorinox Outdoor & Sport Camp",
-              "detail": "Ferienheim Honegg, Oberlangenegg — läuft, letzter Tag: 9. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/victorinox-outdoor-sports-camp/"
             },
             {
               "label": "Die Kunst der Puppen: Führung & Vortrag zu Sasha Morgenthaler",
               "detail": "Puppenklinik Sashaswelt, Büren an der Aare — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
-            },
-            {
-              "label": "Ligerzer Läset Sunntige",
-              "detail": "Dorfgasse, Ligerz — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ligerzer-laeset-sunntige/"
-            },
-            {
-              "label": "Pilz- Workshop & Dinner",
-              "detail": "Lenk Lodge & Umgebung, Lenk — läuft, letzter Tag: 10. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilz-workshop-dinner/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BE",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "170",
+          "value": "211",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,69 +324,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Wattenwil-Märit",
-              "detail": "Wattenwil",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wattenwil-maerit-1/"
+              "label": "Thé de l'après-midi au lac de Thoune",
+              "detail": "Thunersee, Thun",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
             },
             {
-              "label": "Führung hinter die Kulissen: Zwischen Illusion und Idylle – Die Afrika-Dioramen",
-              "detail": "Naturhistorisches Museum Bern, Bern",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fuehrung-hinter-die-kulissen-zwischen-illusion-und-idylle-die-afrika-dioramen/"
+              "label": "Andy Trinkler Solo / CH",
+              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
             },
             {
-              "label": "Bier-KulTour Öffentliche Führung",
-              "detail": "Kornhaus Burgdorf, Burgdorf",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bier-kultour-oeffentliche-fuehrung/"
+              "label": "Lisa Catena & Rolf Marti : « Mys Käthi » a un goût de chocolat – Hommage au troubadour bernois Bernhard Stirnemann",
+              "detail": "La Cappella",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
             },
             {
-              "label": "Kosheen Live - Exklusive Schweizer Show !",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/rubigen/kosheen-live-exklusive-schweizer-show_AJewZxY"
+              "label": "Ungerwäx – un concert commenté",
+              "detail": "Zentrum Artos, Interlaken",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+            },
+            {
+              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
+              "detail": "Süri — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+            },
+            {
+              "label": "Oktoberfest Süri",
+              "detail": "Laupenstrasse 21, Mühleberg — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+            },
+            {
+              "label": "Herbstausstellung 2026",
+              "detail": "Rütschelen — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+            },
+            {
+              "label": "Fabriquer une vache en chocolat chez Early Beck",
+              "detail": "Early Beck Productions, Saanen — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
             },
             {
               "label": "Observer les cerfs rouges dans l'enclos",
               "detail": "3777 Saanenmöser, Saanen — en cours, dernier jour : 13 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
-            },
-            {
-              "label": "Praisefestival Biel/Bienne",
-              "detail": "Biel, Biel/Bienne — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/72h-anbetung-gebet-prophetie/"
-            },
-            {
-              "label": "Camp Victorinox Outdoor & Sport",
-              "detail": "Ferienheim Honegg, Oberlangenegg — en cours, dernier jour : 9 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/victorinox-outdoor-sports-camp/"
             },
             {
               "label": "L'art des marionnettes : Visite guidée & conférence sur Sasha Morgenthaler",
               "detail": "Puppenklinik Sashaswelt, Büren an der Aare — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
-            },
-            {
-              "label": "Fêtes des Vendanges de Gléresse",
-              "detail": "Dorfgasse, Ligerz — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ligerzer-laeset-sunntige/"
-            },
-            {
-              "label": "Pilz- Workshop & Dinner",
-              "detail": "Lenk Lodge & Umgebung, Lenk — en cours, dernier jour : 10 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilz-workshop-dinner/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

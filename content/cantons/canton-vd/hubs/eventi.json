@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "d99e8566cd00093a216c03c85ab52e1fc6d9bb6866e41824871f88fe3cbda755",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "4753383eded4f3afc53b6418dc801bc33d6c12bbeaecc4549a758b89cce5eedc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "88",
+          "value": "68",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "\"Tous en Salles\": Movie and Dinner Night—Destination Somalia",
-              "detail": "Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
-            },
-            {
-              "label": "Concert",
-              "detail": "Centre de Jour du Panorama, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
-            },
-            {
-              "label": "Movie and Drinks at La Byronne",
-              "detail": "Association La Byronne, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
-            },
-            {
-              "label": "Écoles - Lance ton initiative!",
+              "label": "Améliorez votre allemand au musée",
               "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ameliorez-votre-allemand-au-musee/"
             },
             {
-              "label": "Humour sur la côte - Les décoiffeuses",
-              "detail": "Etoy",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+              "label": "fit4future Camp Lausanne",
+              "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
+            },
+            {
+              "label": "Semaine Olympique",
+              "detail": "Lausanne — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Festival Le Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+            },
+            {
+              "label": "Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
+            },
+            {
+              "label": "Château de Mathod & Truffles",
+              "detail": "Château de Mathod, Mathod — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
               "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-07",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "Trad Jazz Session",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
-            },
-            {
-              "label": "Salon d'art et d'artisanat local",
-              "detail": "Salle Communal de Perdtemps, Nyon — in corso, ultimo giorno: 8 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
             },
             {
               "label": "The weekly markets in Aigle",
               "detail": "Rue Farel, Aigle — in corso, ultimo giorno: 20 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
             },
             {
-              "label": "Stéphane Zaech’s ‘Aberdeen’ exhibition",
-              "detail": "Centre d'art Abstract, Grandson — in corso, ultimo giorno: 10 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+              "label": "The Sky in All Its Forms",
+              "detail": "Vevey — in corso, ultimo giorno: 21 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sky-in-all-its-forms/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,12 +108,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
+              "date": "2026-10-08T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90520"
+            },
+            {
               "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
               "date": "2026-10-01T11:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +132,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "VD",
@@ -137,7 +142,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "88",
+          "value": "68",
           "note": "from the site’s events calendar"
         }
       ],
@@ -148,69 +153,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "\"Tous en Salles\": Movie and Dinner Night—Destination Somalia",
-              "detail": "Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
-            },
-            {
-              "label": "Concert",
-              "detail": "Centre de Jour du Panorama, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
-            },
-            {
-              "label": "Movie and Drinks at La Byronne",
-              "detail": "Association La Byronne, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
-            },
-            {
-              "label": "Écoles - Lance ton initiative!",
+              "label": "Améliorez votre allemand au musée",
               "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ameliorez-votre-allemand-au-musee/"
             },
             {
-              "label": "Humour sur la côte - Les décoiffeuses",
-              "detail": "Etoy",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+              "label": "fit4future Camp Lausanne",
+              "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — ongoing, last day: 16 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
+            },
+            {
+              "label": "Semaine Olympique",
+              "detail": "Lausanne — ongoing, last day: 15 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 17 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+            },
+            {
+              "label": "Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
+            },
+            {
+              "label": "Château de Mathod & Truffles",
+              "detail": "Château de Mathod, Mathod — ongoing, last day: 24 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
               "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-07",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 29 October 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "Trad Sess",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
-            },
-            {
-              "label": "Salon d'art et d'artisanat local",
-              "detail": "Salle Communal de Perdtemps, Nyon — ongoing, last day: 8 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
             },
             {
               "label": "The weekly markets in Aigle",
               "detail": "Rue Farel, Aigle — ongoing, last day: 20 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
             },
             {
-              "label": "Stéphane Zaech’s ‘Aberdeen’ exhibition",
-              "detail": "Centre d'art Abstract, Grandson — ongoing, last day: 10 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+              "label": "The Sky in All Its Forms",
+              "detail": "Vevey — ongoing, last day: 21 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sky-in-all-its-forms/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -218,12 +223,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
+              "date": "2026-10-08T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90520"
+            },
+            {
               "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
               "date": "2026-10-01T11:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +247,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "VD",
@@ -247,7 +257,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "88",
+          "value": "68",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -258,69 +268,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "„Tous en Salles“: Filmabend mit Abendessen – Reiseziel Somalia",
-              "detail": "Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
-            },
-            {
-              "label": "Konzert",
-              "detail": "Centre de Jour du Panorama, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
-            },
-            {
-              "label": "Apéro-Kino in der Byronne",
-              "detail": "Association La Byronne, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
-            },
-            {
-              "label": "Écoles - Lance ton initiative!",
+              "label": "Améliorez votre allemand au musée",
               "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ameliorez-votre-allemand-au-musee/"
             },
             {
-              "label": "Humour sur la côte - Les décoiffeuses",
-              "detail": "Etoy",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+              "label": "fit4future Camp Lausanne",
+              "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
+            },
+            {
+              "label": "Semaine Olympique",
+              "detail": "Lausanne — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Bois qui Gesang",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+            },
+            {
+              "label": "Festival Le Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
+            },
+            {
+              "label": "Château de Mathod & Trüffel",
+              "detail": "Château de Mathod, Mathod — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
               "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-07",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "Traditionelle Jazz-Session",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
-            },
-            {
-              "label": "Salon d'art et d'artisanat local",
-              "detail": "Salle Communal de Perdtemps, Nyon — läuft, letzter Tag: 8. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
             },
             {
               "label": "Die Wochenmärkte von Aigle",
               "detail": "Rue Farel, Aigle — läuft, letzter Tag: 20. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
             },
             {
-              "label": "Ausstellung „Aberdeen“ von Stéphane Zaech",
-              "detail": "Centre d'art Abstract, Grandson — läuft, letzter Tag: 10. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+              "label": "Der Himmel in all seinen Facetten",
+              "detail": "Vevey — läuft, letzter Tag: 21. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sky-in-all-its-forms/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -328,12 +338,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
+              "date": "2026-10-08T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90520"
+            },
+            {
               "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
               "date": "2026-10-01T11:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +362,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "VD",
@@ -357,7 +372,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "88",
+          "value": "68",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -368,69 +383,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Tous en Salles: soirée film&repas - destination Somalie",
-              "detail": "Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tous-en-salles-movie-and-dinner-nightdestination-somalia/"
-            },
-            {
-              "label": "Concert - La Fanfare de l'Automne Blonay",
-              "detail": "Centre de Jour du Panorama, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/concert-1/"
-            },
-            {
-              "label": "Apéro-ciné à la Byronne",
-              "detail": "Association La Byronne, Vevey",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/movie-and-drinks-at-la-byronne/"
-            },
-            {
-              "label": "Écoles - Lance ton initiative!",
+              "label": "Améliorez votre allemand au musée",
               "detail": "Musée national suisse, Prangins",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ecoles-lance-ton-initiative-1/"
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ameliorez-votre-allemand-au-musee/"
             },
             {
-              "label": "Humour sur la côte - Les décoiffeuses",
-              "detail": "Etoy",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/humour-sur-la-cote-les-decoiffeuses/"
+              "label": "fit4future Camp Lausanne",
+              "detail": "Salle Omnisports du Vieux-Moulin, Lausanne — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fit4future-camp-lausanne/"
+            },
+            {
+              "label": "Semaine Olympique",
+              "detail": "Lausanne — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/semaine-olympique/"
+            },
+            {
+              "label": "Der Himmel über Berlin",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/der-himmel-ueber-berlin/"
+            },
+            {
+              "label": "Festival Le Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+            },
+            {
+              "label": "Festival Le Bois qui Chante",
+              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
+            },
+            {
+              "label": "Mathod & Truffe : Visite de la Truffière, cavage et apéritif truffé",
+              "detail": "Château de Mathod, Mathod — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
               "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne",
-              "date": "2026-10-07",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
-            },
-            {
-              "label": "Séance de jazz traditionnel",
-              "detail": "Ecole de Jazz et de Musique Actuelle de Lausanne, Lausanne",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/trad-jazz-session_AsUWPE3"
-            },
-            {
-              "label": "Salon d'art et d'artisanat local",
-              "detail": "Salle Communal de Perdtemps, Nyon — en cours, dernier jour : 8 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/salon-dart-et-dartisanat-local/"
             },
             {
               "label": "Les marchés hebdomadaires d'Aigle",
               "detail": "Rue Farel, Aigle — en cours, dernier jour : 20 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/the-weekly-markets-in-aigle/"
             },
             {
-              "label": "Exposition Aberdeen de Stéphane Zaech",
-              "detail": "Centre d'art Abstract, Grandson — en cours, dernier jour : 10 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ausstellung-aberdeen-von-stephane-zaech/"
+              "label": "Le ciel dans tous ses états",
+              "detail": "Vevey — en cours, dernier jour : 21 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-sky-in-all-its-forms/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -438,12 +453,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Réponse à la question de M. Hadrien Buclin «Adapter la fête du bois au réchauffement climatique?»",
+              "date": "2026-10-08T11:30:00.000Z",
+              "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90520"
+            },
+            {
               "label": "Rapport d'audit - Gestion des autorisations commerciales et des manifestations",
               "date": "2026-10-01T11:30:00.000Z",
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +477,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

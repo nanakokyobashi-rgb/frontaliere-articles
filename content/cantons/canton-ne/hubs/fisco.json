@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "20239a9a5225e419a478c3a6d539ee6d82d68c5f546b7b8703da9ca676e79603",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "367532e5c8d527e3a98cb495bc9b4f5396af037670b84397a94238746b64ad9a",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -134,7 +134,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "NE",
@@ -251,7 +251,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "NE",
@@ -337,7 +337,7 @@
       "curatedArticles": [
         {
           "title": "Erbschaftssteuer Neuenburg: Steuersätze und Befreiungen",
-          "url": "/de/schweiz-artikel/erbschaft-und-spendensteuer-neuchatel-satz/",
+          "url": "/de/schweiz-artikel/erbschaft-und-spendensteuer-neuenburg-satz/",
           "excerpt": "Informieren Sie sich über die Erbschafts- und Schenkungssteuersätze im Kanton Neuenburg, die Befreiungen für Ehegatten und Nachkommen und die Fristen für die Deklaration.",
           "date": "2026-09-07T13:29:25.010Z"
         }
@@ -368,7 +368,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "NE",
@@ -485,7 +485,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

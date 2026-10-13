@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "3deafc975dcc325085976dfa8c87a7915b7c35bd23e8aa80c7fbfe0177f301e9",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "f47173ed98df7b89266246b6926f3d97303200feb82bc1d66426d7ac52c30dbe",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -138,6 +138,18 @@
           "date": "2026-09-28T21:32:07.062Z"
         },
         {
+          "title": "Vaud: sì al taglio del 12% delle imposte",
+          "url": "/articoli-svizzera/vaud-voto-taglio-fiscale/",
+          "excerpt": "Il 53,1% dei votanti nel canton Vaud approva un taglio del 12% alle imposte su reddito e sostanza; partecipazione al 50,0%.",
+          "date": "2026-09-27T13:05:48.387Z"
+        },
+        {
+          "title": "Imposta cantonale: confronto Svizzera 2026 - Cantone Vaud",
+          "url": "/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-vaud/",
+          "excerpt": "Il cantone Vaud ha un'aliquota di imposta cantonale del 10,5%.",
+          "date": "2026-08-09T22:03:21.979Z"
+        },
+        {
           "title": "Scontro sulle tasse: sfida alla voracità fiscale nel Canton Vaud",
           "url": "/articoli-svizzera/scontro-tasse-vodese-2024/",
           "excerpt": "L'iniziativa del 12% propone uno sconto del 12% sull'imposta cantonale sul reddito e sul patrimonio.",
@@ -148,12 +160,6 @@
           "url": "/articoli-svizzera/imposta-successione-donazione-vaud/",
           "excerpt": "Guida alle aliquote e alle esenzioni per eredi e donatari nel sistema fiscale del Cantone di Vaud, con focus sui rapporti di parentela.",
           "date": "2026-09-05T09:40:27.337Z"
-        },
-        {
-          "title": "Imposta cantonale: confronto Svizzera 2026 - Cantone Vaud",
-          "url": "/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-vaud/",
-          "excerpt": "Il cantone Vaud ha un'aliquota di imposta cantonale del 10,5%.",
-          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Imposta cantonale: confronto 2026 e focus sul Canton Vaud",
@@ -188,7 +194,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "VD",
@@ -281,7 +287,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -304,6 +310,18 @@
           "date": "2026-09-28T21:32:07.062Z"
         },
         {
+          "title": "Vaud: yes to a 12% cut in taxes",
+          "url": "/en/swiss-articles/vaud-vote-tax-cut/",
+          "excerpt": "53.1% of voters in the canton of Vaud approve a 12% cut to income and wealth taxes; turnout at 50.0%.",
+          "date": "2026-09-27T13:05:48.387Z"
+        },
+        {
+          "title": "Cantonal tax: comparison Switzerland 2026 - Canton Vaud",
+          "url": "/en/swiss-articles/tax-cantonal-comparison-switzerland-2026-canton-vaud/",
+          "excerpt": "The canton of Vaud has a cantonal tax rate of 10.5%.",
+          "date": "2026-08-09T22:03:21.979Z"
+        },
+        {
           "title": "Tax Clash: Challenging Tax Voracity in the Canton of Vaud",
           "url": "/en/swiss-articles/tax-clash-challenging-tax-voracity-in-the-canton-of-vaud/",
           "excerpt": "The 12% initiative proposes a 12% discount on cantonal income and wealth tax.",
@@ -314,12 +332,6 @@
           "url": "/en/swiss-articles/inheritance-gift-tax-vaud-canton/",
           "excerpt": "Guide to rates and exemptions for heirs and donors in the tax system of the Canton of Vaud, with a focus on kinship relationships.",
           "date": "2026-09-05T09:40:27.337Z"
-        },
-        {
-          "title": "Cantonal tax: comparison Switzerland 2026 - Canton Vaud",
-          "url": "/en/swiss-articles/tax-cantonal-comparison-switzerland-2026-canton-vaud/",
-          "excerpt": "The canton of Vaud has a cantonal tax rate of 10.5%.",
-          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Cantonal tax: comparison 2026 and focus on the canton of Vaud",
@@ -354,7 +366,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "VD",
@@ -447,12 +459,12 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Steuererklärung Schweiz: Leitfaden Vaud 2026",
+          "title": "Steuererklärung Schweiz: Leitfaden Waadt 2026",
           "url": "/de/schweiz-artikel/steuererklaerung-waadt-2026/",
           "excerpt": "Drei Steuerstufen, kommunaler Steuerfuss und Online-Verfahren: der Leitfaden 2026 zur Steuererklärung in der Schweiz mit Fokus auf den Kanton Waadt.",
           "date": "2026-10-03T11:04:13.754Z"
@@ -465,9 +477,21 @@
         },
         {
           "title": "Waadt, Steuersenkung von 12% auf Einkommen und Vermögen",
-          "url": "/de/schweiz-artikel/vaud-steuersenkung-einkommen-vermoegen/",
+          "url": "/de/schweiz-artikel/waadt-steuersenkung-einkommen-vermoegen/",
           "excerpt": "Das Waadtland genehmigt eine Senkung der kantonalen Einkommens- und Vermögenssteuern um 12%. Man spricht von 272 Millionen weniger ab dem 1. Januar.",
           "date": "2026-09-28T21:32:07.062Z"
+        },
+        {
+          "title": "Waadt: Ja zur Senkung der Steuern um 12%",
+          "url": "/de/schweiz-artikel/waadt-abstimmung-steuersenkung/",
+          "excerpt": "53,1% der Stimmberechtigten im Kanton Waadt befürworten eine Senkung der Einkommens- und Vermögenssteuern um 12%; Stimmbeteiligung bei 50,0%.",
+          "date": "2026-09-27T13:05:48.387Z"
+        },
+        {
+          "title": "Kantonssteuer: Vergleich Schweiz 2026 - Kanton Waadt",
+          "url": "/de/schweiz-artikel/steuerliche-vergleichung-schweiz-2026-kanton-waadt/",
+          "excerpt": "Der Kanton Waadt hat einen kantonalen Steuersatz von 10,5%.",
+          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Steuerstreit: Herausforderung Steuergier im Kanton Waadt",
@@ -482,15 +506,9 @@
           "date": "2026-09-05T09:40:27.337Z"
         },
         {
-          "title": "Kantonssteuer: Vergleich Schweiz 2026 - Kanton Waadt",
-          "url": "/de/schweiz-artikel/steuerliche-vergleichung-schweiz-2026-kanton-vaud/",
-          "excerpt": "Der Kanton Waadt hat einen kantonalen Steuersatz von 10,5%.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
           "title": "Kantonssteuer: Vergleich 2026 und Fokus auf den Kanton Waadt",
           "url": "/de/schweiz-artikel/kantonale-steuervergleich-2026-waadt/",
-          "excerpt": "Analyse der kantonalen Steuersätze für 2026, Unterschiede zwischen Schweizer Kantonen und besonderer Fokus auf das Steuersystem des Kantons Vaud.",
+          "excerpt": "Analyse der kantonalen Steuersätze für 2026, Unterschiede zwischen Schweizer Kantonen und besonderer Fokus auf das Steuersystem des Kantons Waadt.",
           "date": "2026-08-02T02:12:08.749Z"
         }
       ],
@@ -520,7 +538,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "VD",
@@ -613,7 +631,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -636,6 +654,18 @@
           "date": "2026-09-28T21:32:07.062Z"
         },
         {
+          "title": "Vaud : oui à la réduction de 12% des impôts",
+          "url": "/fr/articles-suisse/vaud-vote-baisse-impots/",
+          "excerpt": "53,1% des votants dans le canton de Vaud approuvent une réduction de 12% des impôts sur le revenu et la fortune ; participation à 50,0%.",
+          "date": "2026-09-27T13:05:48.387Z"
+        },
+        {
+          "title": "Impôt cantonal : comparaison Suisse 2026 - Canton de Vaud",
+          "url": "/fr/articles-suisse/comparaison-fiscale-suisse-2026-canton-vaud/",
+          "excerpt": "Le canton de Vaud a un taux d'imposition cantonal de 10,5 %.",
+          "date": "2026-08-09T22:03:21.979Z"
+        },
+        {
           "title": "Choc fiscal : défi à la voracité fiscale dans le canton de Vaud",
           "url": "/fr/articles-suisse/choc-fiscal-defi-a-la-voracite-fiscale-dans-le-canton-de-vaud/",
           "excerpt": "L'initiative des 12% propose une remise de 12% sur l'impôt cantonal sur le revenu et la fortune.",
@@ -646,12 +676,6 @@
           "url": "/fr/articles-suisse/impot-succession-donation-canton-vaud/",
           "excerpt": "Guide des taux et des exonérations pour les héritiers et les donataires dans le système fiscal du canton de Vaud, en mettant l'accent sur les relations de parenté.",
           "date": "2026-09-05T09:40:27.337Z"
-        },
-        {
-          "title": "Impôt cantonal : comparaison Suisse 2026 - Canton de Vaud",
-          "url": "/fr/articles-suisse/comparaison-fiscale-suisse-2026-canton-vaud/",
-          "excerpt": "Le canton de Vaud a un taux d'imposition cantonal de 10,5 %.",
-          "date": "2026-08-09T22:03:21.979Z"
         },
         {
           "title": "Taxe cantonale : comparaison 2026 et focus sur le canton de Vaud",
@@ -686,7 +710,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

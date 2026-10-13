@@ -4,12 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "cee7c3b08b6f574c678e0e2b913d1c6f127106aff785c408803d6ea83788aa46",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "8baf22cf33028d07442352d5400794243111c594410b88ca61469d9a2a3ae8b0",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "390",
+          "value": "300",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "\"C'est décidé, je me lance! Clarifier ses motivations et affirmer sa légitimité\"",
+              "label": "Cod'Echange #2 Projection du film \"Elles les (in)visibles\"",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decide-lance-clarifier-motivations-affirmer-legitimite"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/coechange-2-projection-film-invisibles"
             },
             {
-              "label": "A M O R - Choisir sans renoncer",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/choisir-renoncer"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Accompagner l’entrée et la sortie de la scolarité. Logiques institutionnelles, collectives et individuelles à…",
+              "label": "Dance First Think Later - Vernissage",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/accompagner-entree-sortie-scolarite-logiques-institutionnelles-collectives-individuelles-epreuve-transitions"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later-vernissage"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "Du cru du cru du cru",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/du"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
             },
             {
-              "label": "Atelier Interactif: Décider à l'ère de l'IA - Emploi des jeunes et confiance démocratique",
+              "label": "Fantasy",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-interactif-decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/fantasy"
             },
             {
-              "label": "Balade littéraire : Musiques et littératures",
+              "label": "Festival Chopin 2026 : récital de piano MATEUSZ KRZYŻOWSKI",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/balade-litteraire-musiques-litteratures"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/festival-chopin-2026-recital-piano-mateusz-krzyzowski"
             },
             {
-              "label": "Café quartier : un libraire passionné",
+              "label": "Genève et sa démocratie : quels défis, quelles innovations ?",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-libraire-passionne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/geneve-democratie-defis-innovations"
             },
             {
-              "label": "De l’art au Jardin",
+              "label": "H comme Hodler, le regard d'un écrivain sur un peintre",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/art-jardin"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/hodler-regard-ecrivain-peintre"
             },
             {
-              "label": "Décider à l’ère de l’IA: emploi des jeunes et confiance démocratique",
+              "label": "Improvisation - Les grains de folie",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GE",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "390",
+          "value": "300",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,69 +130,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "\"C'est décidé, je me lance! Clarifier ses motivations et affirmer sa légitimité\"",
+              "label": "Cod'Echange #2 Projection du film \"Elles les (in)visibles\"",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decide-lance-clarifier-motivations-affirmer-legitimite"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/coechange-2-projection-film-invisibles"
             },
             {
-              "label": "A M O R - Choisir sans renoncer",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/choisir-renoncer"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Accompagner l’entrée et la sortie de la scolarité. Logiques institutionnelles, collectives et individuelles à…",
+              "label": "Dance First Think Later - Vernissage",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/accompagner-entree-sortie-scolarite-logiques-institutionnelles-collectives-individuelles-epreuve-transitions"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later-vernissage"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "Du cru du cru du cru",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/du"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
             },
             {
-              "label": "Atelier Interactif: Décider à l'ère de l'IA - Emploi des jeunes et confiance démocratique",
+              "label": "Fantasy",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-interactif-decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/fantasy"
             },
             {
-              "label": "Balade littéraire : Musiques et littératures",
+              "label": "Festival Chopin 2026 : récital de piano MATEUSZ KRZYŻOWSKI",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/balade-litteraire-musiques-litteratures"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/festival-chopin-2026-recital-piano-mateusz-krzyzowski"
             },
             {
-              "label": "Café quartier : un libraire passionné",
+              "label": "Genève et sa démocratie : quels défis, quelles innovations ?",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-libraire-passionne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/geneve-democratie-defis-innovations"
             },
             {
-              "label": "De l’art au Jardin",
+              "label": "H comme Hodler, le regard d'un écrivain sur un peintre",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/art-jardin"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/hodler-regard-ecrivain-peintre"
             },
             {
-              "label": "Décider à l’ère de l’IA: emploi des jeunes et confiance démocratique",
+              "label": "Improvisation - Les grains de folie",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GE",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "390",
+          "value": "300",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,69 +227,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "\"C'est décidé, je me lance! Clarifier ses motivations et affirmer sa légitimité\"",
+              "label": "Cod'Echange #2 Projection du film \"Elles les (in)visibles\"",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decide-lance-clarifier-motivations-affirmer-legitimite"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/coechange-2-projection-film-invisibles"
             },
             {
-              "label": "A M O R - Choisir sans renoncer",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/choisir-renoncer"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Accompagner l’entrée et la sortie de la scolarité. Logiques institutionnelles, collectives et individuelles à…",
+              "label": "Dance First Think Later - Vernissage",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/accompagner-entree-sortie-scolarite-logiques-institutionnelles-collectives-individuelles-epreuve-transitions"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later-vernissage"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "Du cru du cru du cru",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/du"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
             },
             {
-              "label": "Atelier Interactif: Décider à l'ère de l'IA - Emploi des jeunes et confiance démocratique",
+              "label": "Fantasy",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-interactif-decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/fantasy"
             },
             {
-              "label": "Balade littéraire : Musiques et littératures",
+              "label": "Festival Chopin 2026 : récital de piano MATEUSZ KRZYŻOWSKI",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/balade-litteraire-musiques-litteratures"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/festival-chopin-2026-recital-piano-mateusz-krzyzowski"
             },
             {
-              "label": "Café quartier : un libraire passionné",
+              "label": "Genève et sa démocratie : quels défis, quelles innovations ?",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-libraire-passionne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/geneve-democratie-defis-innovations"
             },
             {
-              "label": "De l’art au Jardin",
+              "label": "H comme Hodler, le regard d'un écrivain sur un peintre",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/art-jardin"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/hodler-regard-ecrivain-peintre"
             },
             {
-              "label": "Décider à l’ère de l’IA: emploi des jeunes et confiance démocratique",
+              "label": "Improvisation - Les grains de folie",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GE",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "390",
+          "value": "300",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,69 +324,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "\"C'est décidé, je me lance! Clarifier ses motivations et affirmer sa légitimité\"",
+              "label": "Cod'Echange #2 Projection du film \"Elles les (in)visibles\"",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decide-lance-clarifier-motivations-affirmer-legitimite"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/coechange-2-projection-film-invisibles"
             },
             {
-              "label": "A M O R - Choisir sans renoncer",
+              "label": "Cours Tango Argentin niv. debutant",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/choisir-renoncer"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-debutant"
             },
             {
-              "label": "Accompagner l’entrée et la sortie de la scolarité. Logiques institutionnelles, collectives et individuelles à…",
+              "label": "Dance First Think Later - Vernissage",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/accompagner-entree-sortie-scolarite-logiques-institutionnelles-collectives-individuelles-epreuve-transitions"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later-vernissage"
             },
             {
-              "label": "Armures et paillettes",
+              "label": "Du cru du cru du cru",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/armures-paillettes"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/du"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "Exposition du concours d'architecture pluridisciplinaire | Transformation du Centre sportif du Bout-du-Monde",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/exposition-concours-architecture-pluridisciplinaire-transformation-centre-sportif-bout-monde"
             },
             {
-              "label": "Atelier Interactif: Décider à l'ère de l'IA - Emploi des jeunes et confiance démocratique",
+              "label": "Fantasy",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/atelier-interactif-decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/fantasy"
             },
             {
-              "label": "Balade littéraire : Musiques et littératures",
+              "label": "Festival Chopin 2026 : récital de piano MATEUSZ KRZYŻOWSKI",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/balade-litteraire-musiques-litteratures"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/festival-chopin-2026-recital-piano-mateusz-krzyzowski"
             },
             {
-              "label": "Café quartier : un libraire passionné",
+              "label": "Genève et sa démocratie : quels défis, quelles innovations ?",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-libraire-passionne"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/geneve-democratie-defis-innovations"
             },
             {
-              "label": "De l’art au Jardin",
+              "label": "H comme Hodler, le regard d'un écrivain sur un peintre",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/art-jardin"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/hodler-regard-ecrivain-peintre"
             },
             {
-              "label": "Décider à l’ère de l’IA: emploi des jeunes et confiance démocratique",
+              "label": "Improvisation - Les grains de folie",
               "detail": "Genève",
-              "date": "2026-10-07",
-              "url": "https://www.geneve.ch/agenda/decider-emploi-jeunes-confiance-democratique"
+              "date": "2026-10-13",
+              "url": "https://www.geneve.ch/agenda/improvisation-grains-folie"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

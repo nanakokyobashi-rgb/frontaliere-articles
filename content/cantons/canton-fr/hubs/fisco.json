@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "bd2807b3413c0f452f74a809299e42d289b128ff6e985eab3282ec59cb9530dd",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "8076429848dd8a53bc52babea7b0ab22919886fbe9840dadb11b3c764fd1f5fe",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -129,7 +129,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -142,7 +142,7 @@
         {
           "title": "Fribourg adegua imposte dirette alla progressione a freddo",
           "url": "/articoli-friburgo/fribourg-modifica-licd/",
-          "excerpt": "## In breve - Voto: 97 favorevoli, 1 contrario, nessuna astensione - La revisione della LICD comprende nove aspetti - Scale fiscali e deduzioni sociali si",
+          "excerpt": "Voto: 97 favorevoli, 1 contrario, nessuna astensione",
           "date": "2026-10-07T10:27:22.581Z"
         },
         {
@@ -180,7 +180,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "FR",
@@ -287,7 +287,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -300,7 +300,6 @@
         {
           "title": "Fribourg adjusts direct taxes for bracket creep",
           "url": "/en/fribourg-articles/fribourg-adjusts-direct-taxes-for-bracket-creep/",
-          "excerpt": "## TL;DR - Vote: 97 in favour, 1 against, no abstentions - The revision of the LICD covers nine aspects - Tax scales and social deductions are adjusted",
           "date": "2026-10-07T10:27:22.581Z"
         },
         {
@@ -338,7 +337,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "FR",
@@ -445,7 +444,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -456,9 +455,8 @@
           "date": "2026-09-28T04:25:31.514Z"
         },
         {
-          "title": "Fribourg passt die direkten Steuern an die kalte Progression an",
-          "url": "/de/freiburg-artikel/fribourg-passt-die-direkten-steuern-an-die-kalte-progression-an/",
-          "excerpt": "## Auf einen Blick - Abstimmung: 97 Ja-Stimmen, 1 Gegenstimme, keine Enthaltung - Die Revision der LICD umfasst neun Aspekte - Die Steuerskalen und Sozialabzüge",
+          "title": "Freiburg passt die direkten Steuern an die kalte Progression an",
+          "url": "/de/freiburg-artikel/freiburg-passt-die-direkten-steuern-an-die-kalte-progression-an/",
           "date": "2026-10-07T10:27:22.581Z"
         },
         {
@@ -496,7 +494,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "FR",
@@ -603,7 +601,7 @@
               "url": "https://www.fr.ch/dfin/scc/actualites/modification-des-codes-qr"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +614,7 @@
         {
           "title": "Fribourg adapte les impôts directs à la progression à froid",
           "url": "/fr/articles-fribourg/fribourg-adapte-les-impots-directs-a-la-progression-a-froid/",
-          "excerpt": "## En bref - Vote : 97 voix favorables, 1 voix contre, aucune abstention - La révision de la LICD comprend neuf aspects - Les barèmes fiscaux et les déductions",
+          "excerpt": "Vote : 97 voix favorables, 1 voix contre, aucune abstention",
           "date": "2026-10-07T10:27:22.581Z"
         },
         {
@@ -654,7 +652,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

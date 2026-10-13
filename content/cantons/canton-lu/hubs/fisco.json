@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "041766023735cc6d8cb8e12d564e20fc42b5e8ad8328eacc2a66208718118229",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "9b7cdf161185bb6bb1c565b5a55b127ed54eba67519582af6a26d2de8e007af8",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Imposta sugli autoveicoli canton Lucerna: calcolo e pagamento",
+          "url": "/articoli-svizzera/imposta-autoveicoli-lucerna-calcolo/",
+          "excerpt": "Imposta sugli autoveicoli nel Cantone di Lucerna: calcolo, scadenze, importi e pagamento. Cambio veicolo e indirizzo secondo le regole cantonali di Lucerna.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
         {
           "title": "Imposta cantonale confronto Svizzera 2026: canton Lucerna",
           "url": "/articoli-svizzera/fisco-lucerna-tre-livelli-2026/",
@@ -178,7 +184,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "LU",
@@ -271,10 +277,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Motor vehicle tax in the canton of Lucerne: calculation and payment",
+          "url": "/en/swiss-articles/lucerne-vehicle-tax-calculation/",
+          "excerpt": "Motor vehicle tax in the Canton of Lucerne: calculation, deadlines, amounts and payment. Change of vehicle and address according to the cantonal rules of Lucerne.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
         {
           "title": "Swiss Cantonal Tax Comparison 2026: Canton of Lucerne",
           "url": "/en/swiss-articles/lucerne-tax-three-levels-2026/",
@@ -301,7 +313,7 @@
         },
         {
           "title": "Inheritance and gift tax in the Canton of Lucerne",
-          "url": "/en/swiss-articles/imposta-di-succesione-e-donazione-canton-lucerna-en/",
+          "url": "/en/swiss-articles/imposta-di-succesione-e-donazione-canton-lucerne-en/",
           "excerpt": "Different rates are provided according to the degree of kinship between beneficiaries and donors.",
           "date": "2026-08-15T22:49:24.474Z"
         },
@@ -334,7 +346,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "LU",
@@ -427,10 +439,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung und Zahlung",
+          "url": "/de/schweiz-artikel/luzern-motorfahrzeugsteuer-berechnung/",
+          "excerpt": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung, Fristen, Beträge und Zahlung. Fahrzeug- und Adresswechsel gemäß den kantonalen Regeln von Luzern.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
         {
           "title": "Kantonale Steuern im Vergleich – Schweiz 2026: Kanton Luzern",
           "url": "/de/schweiz-artikel/steuern-luzern-drei-ebenen-2026/",
@@ -457,7 +475,7 @@
         },
         {
           "title": "Erbschafts- und Schenkungssteuer im Kanton Luzern",
-          "url": "/de/schweiz-artikel/imposta-di-succesione-e-donazione-canton-lucerna-de/",
+          "url": "/de/schweiz-artikel/imposta-di-succesione-e-donazione-canton-luzern-de/",
           "excerpt": "Je nach Verwandtschaftsgrad zwischen den Begünstigten und den Spendern gibt es unterschiedliche Sätze.",
           "date": "2026-08-15T22:49:24.474Z"
         },
@@ -490,7 +508,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "LU",
@@ -583,10 +601,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Impôt sur les véhicules à Lucerne : calcul et paiement",
+          "url": "/fr/articles-suisse/lucerne-impot-vehicules-calcul/",
+          "excerpt": "Impôt sur les véhicules automobiles dans le canton de Lucerne : calcul, échéances, montants et paiement. Changement de véhicule et d’adresse selon les règles cantonales de Lucerne.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
         {
           "title": "Comparaison fiscale cantonale en Suisse 2026 : canton de Lucerne",
           "url": "/fr/articles-suisse/impots-lucerne-trois-niveaux-2026/",
@@ -613,14 +637,14 @@
         },
         {
           "title": "Droits de succession et de donation dans le canton de Lucerne",
-          "url": "/fr/articles-suisse/imposta-di-succesione-e-donazione-canton-lucerna-fr/",
+          "url": "/fr/articles-suisse/imposta-di-succesione-e-donazione-canton-lucerne-fr/",
           "excerpt": "Des taux différents sont prévus en fonction du degré de parenté entre les bénéficiaires et les donneurs.",
           "date": "2026-08-15T22:49:24.474Z"
         },
         {
-          "title": "Lucerne dépasse Zug: nouveau paradis fiscal pour les entreprises",
+          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
           "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
-          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zug. Impact sur les frontaliers et comparaison avec l'UE.",
+          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
           "date": "2026-05-07T09:05:42.794Z"
         }
       ],
@@ -646,7 +670,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

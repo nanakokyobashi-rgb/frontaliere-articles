@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "68b797f59671a8eb36abf29f276f85e237a64f5b059e4239ca5c62e8bc08899a",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "651fe350cfeb017af95f0da5ee1703ce5579f6cdec45a649b4d0f069e49db6d1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -46,7 +46,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -74,7 +74,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -85,16 +85,16 @@
           "date": "2026-09-16T11:54:46.142Z"
         },
         {
-          "title": "Permesso di domicilio C Canton Glarona: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-c-glarona-requisiti/",
-          "excerpt": "Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.",
-          "date": "2026-09-18T04:16:44.938Z"
-        },
-        {
           "title": "Permessi di dimora B nel Canton di Glarona: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-canton-glarona-requisiti-e-rinnovo/",
           "excerpt": "Il permesso di dimora B nel Canton di Glarona è valido per un massimo di 1 anno. I requisiti e i documenti richiesti sono specificati nella Convenzione italo-svizzera contro le doppie imposizioni.",
           "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Permesso di domicilio C Canton Glarona: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-glarona-requisiti/",
+          "excerpt": "Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.",
+          "date": "2026-09-18T04:16:44.938Z"
         },
         {
           "title": "Premi cassa malati Glarona: come ottenere riduzione",
@@ -153,7 +153,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GL",
@@ -182,7 +182,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -210,7 +210,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -221,16 +221,16 @@
           "date": "2026-09-16T11:54:46.142Z"
         },
         {
-          "title": "Residence permit C Canton Glarus: requirements and application",
-          "url": "/en/swiss-articles/permit-c-glarona-requirements/",
-          "excerpt": "Guide to the requirements for the C permit in Glarus: years of residence, language integration and issuance procedure for EU/EFTA citizens and third states.",
-          "date": "2026-09-18T04:16:44.938Z"
-        },
-        {
           "title": "Residence permits B in the Canton of Glarus: requirements and renewal",
-          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-glarona-requisiti-e-rinnovo/",
+          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-glarus-requisiti-e-rinnovo/",
           "excerpt": "The residence permit B in the Canton of Glarus is valid for a maximum of 1 year. The requirements and documents required are specified in the Italian-Swiss Double Taxation Convention.",
           "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Residence permit C Canton Glarus: requirements and application",
+          "url": "/en/swiss-articles/permit-c-glarus-requirements/",
+          "excerpt": "Guide to the requirements for the C permit in Glarus: years of residence, language integration and issuance procedure for EU/EFTA citizens and third states.",
+          "date": "2026-09-18T04:16:44.938Z"
         },
         {
           "title": "Glarus health insurance premiums: how to obtain a reduction",
@@ -252,7 +252,7 @@
         },
         {
           "title": "Nursery and childcare Canton Glarus costs",
-          "url": "/en/swiss-articles/nursery-and-custody-of-children-in-the-canton-of-glarona/",
+          "url": "/en/swiss-articles/nursery-and-custody-of-children-in-the-canton-of-glarus/",
           "excerpt": "Income Calculated Rates and Cantonal Subsidies Available for Low-Income Families",
           "date": "2026-08-17T03:47:42.989Z"
         },
@@ -285,7 +285,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GL",
@@ -314,7 +314,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -342,7 +342,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -353,16 +353,16 @@
           "date": "2026-09-16T11:54:46.142Z"
         },
         {
-          "title": "Niederlassungsbewilligung C Kanton Glarus: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/bewilligung-c-glarona-anforderungen/",
-          "excerpt": "Leitfaden zu den Voraussetzungen für die Bewilligung C in Glarus: Aufenthaltsjahre, Sprachintegration und Erteilungsverfahren für EU-/EFTA-Bürger und Drittstaaten.",
-          "date": "2026-09-18T04:16:44.938Z"
-        },
-        {
           "title": "Aufenthaltsbewilligungen B im Kanton Glarus: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-glarona-requisiti-e-rinnovo/",
+          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-glarus-requisiti-e-rinnovo/",
           "excerpt": "Die Aufenthaltsbewilligung B im Kanton Glarus ist maximal 1 Jahr gültig. Die Anforderungen und erforderlichen Unterlagen sind im italienisch-schweizerischen Doppelbesteuerungsabkommen festgelegt.",
           "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C Kanton Glarus: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/bewilligung-c-glarus-anforderungen/",
+          "excerpt": "Leitfaden zu den Voraussetzungen für die Bewilligung C in Glarus: Aufenthaltsjahre, Sprachintegration und Erteilungsverfahren für EU-/EFTA-Bürger und Drittstaaten.",
+          "date": "2026-09-18T04:16:44.938Z"
         },
         {
           "title": "Krankenkassenprämien Glarus: So erhalten Sie eine Ermäßigung",
@@ -384,7 +384,7 @@
         },
         {
           "title": "Kindertagesstätte und Kinderbetreuung Kanton Glarus Kosten",
-          "url": "/de/schweiz-artikel/kindergarten-und-custodia-dei-bambini-im-kanton-glarona/",
+          "url": "/de/schweiz-artikel/kindergarten-und-custodia-dei-bambini-im-kanton-glarus/",
           "excerpt": "Berechnete Einkommenstarife und kantonale Zuschüsse für einkommensschwache Haushalte verfügbar",
           "date": "2026-08-17T03:47:42.989Z"
         },
@@ -417,7 +417,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GL",
@@ -446,7 +446,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -474,7 +474,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -485,16 +485,16 @@
           "date": "2026-09-16T11:54:46.142Z"
         },
         {
-          "title": "Permis de séjour C Canton de Glaris : exigences et demande",
-          "url": "/fr/articles-suisse/permis-c-glarona-conditions/",
-          "excerpt": "Guide des exigences pour le permis C à Glaris : années de résidence, intégration linguistique et procédure de délivrance pour les citoyens de l'UE/AELE et des pays tiers.",
-          "date": "2026-09-18T04:16:44.938Z"
-        },
-        {
           "title": "Permis de séjour B dans le canton de Glaris : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-glarona-requisiti-e-rinnovo/",
+          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-glaris-requisiti-e-rinnovo/",
           "excerpt": "Le permis de séjour B dans le canton de Glaris est valable pour une durée maximale d'un an. Les exigences et les documents requis sont spécifiés dans la Convention italo-suisse contre les doubles impositions.",
           "date": "2026-08-17T02:02:39.630Z"
+        },
+        {
+          "title": "Permis de séjour C Canton de Glaris : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-glaris-conditions/",
+          "excerpt": "Guide des exigences pour le permis C à Glaris : années de résidence, intégration linguistique et procédure de délivrance pour les citoyens de l'UE/AELE et des pays tiers.",
+          "date": "2026-09-18T04:16:44.938Z"
         },
         {
           "title": "Primes caisse-maladie Glaris : comment obtenir une réduction",
@@ -516,13 +516,13 @@
         },
         {
           "title": "Garderie et garde d'enfants Canton de Glaris coûts",
-          "url": "/fr/articles-suisse/creche-et-custodia-des-enfants-au-canton-de-glarona/",
+          "url": "/fr/articles-suisse/creche-et-custodia-des-enfants-au-canton-de-glaris/",
           "excerpt": "Tarifs calculés sur le revenu et allocations cantonales disponibles pour les ménages à faible revenu",
           "date": "2026-08-17T03:47:42.989Z"
         },
         {
           "title": "Permis de séjour C dans le canton de Glaris : exigences et demande",
-          "url": "/fr/articles-suisse/permis-de-domicile-c-canton-de-glarus-exigences-et-demande/",
+          "url": "/fr/articles-suisse/permis-de-domicile-c-canton-de-glaris-exigences-et-demande/",
           "excerpt": "Que faut-il pour obtenir un permis de séjour C dans le canton de Glaris ?",
           "date": "2026-08-17T03:18:43.556Z"
         }
@@ -545,7 +545,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

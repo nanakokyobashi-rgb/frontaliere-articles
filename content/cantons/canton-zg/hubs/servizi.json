@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "690098c4a00980d44ba1199b98a0f44f007a70f92c30e211b9cd54594ea94f7a",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "dc0af84d712cd38e196a8640a2943e4ae791c3c556bcbea344b516448334d4c8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -46,7 +46,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -84,7 +84,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -157,7 +157,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "ZG",
@@ -186,7 +186,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +224,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -242,13 +242,13 @@
         },
         {
           "title": "Canton Zug health insurance premiums and premium reductions",
-          "url": "/en/swiss-articles/zugo-lamal-premium-subsidy/",
+          "url": "/en/swiss-articles/zug-lamal-premium-subsidy/",
           "excerpt": "How LAMal premiums work in the Canton of Zug, the six deductibles available and how to access cantonal benefits to reduce the cost of health insurance.",
           "date": "2026-08-23T15:41:16.849Z"
         },
         {
           "title": "Zug kindergarten: cantonal costs, fees and subsidies",
-          "url": "/en/swiss-articles/childcare-zugo-tariffs-subsidies/",
+          "url": "/en/swiss-articles/childcare-zug-tariffs-subsidies/",
           "excerpt": "In the canton of Zug, nurseries and childcare facilities follow progressive rates on an income basis. Learn about available options, cantonal subsidies, and access procedures.",
           "date": "2026-09-04T23:16:38.350Z"
         },
@@ -260,7 +260,7 @@
         },
         {
           "title": "Canton Zug health insurance premiums and premium reductions",
-          "url": "/en/swiss-articles/premi-cassa-malati-canton-zugo-riduzione-premi/",
+          "url": "/en/swiss-articles/premi-cassa-malati-canton-zug-riduzione-premi/",
           "excerpt": "Premiums for compulsory health insurance in the canton of Zug: premium ranges, deductibles, alternative models and requirements for benefiting from premium reductions.",
           "date": "2026-08-17T08:03:04.287Z"
         },
@@ -293,7 +293,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "ZG",
@@ -322,7 +322,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -360,7 +360,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -378,7 +378,7 @@
         },
         {
           "title": "Krankenkassenprämien Kanton Zug und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/zugo-krankenkasse-praemien-reduktion/",
+          "url": "/de/schweiz-artikel/zug-krankenkasse-praemien-reduktion/",
           "excerpt": "Wie die KVG-Prämien im Kanton Zug funktionieren, welche sechs Franchisen zur Verfügung stehen und wie Sie auf kantonale Beiträge zugreifen können, um die Kosten der Krankenversicherung zu senken.",
           "date": "2026-08-23T15:41:16.849Z"
         },
@@ -390,13 +390,13 @@
         },
         {
           "title": "Kindertagesstätte und Kinderbetreuung im Kanton Zug: Kosten",
-          "url": "/de/schweiz-artikel/asilo-nido-e-custodia-bambini-canton-zugo-kosten/",
+          "url": "/de/schweiz-artikel/asilo-nido-e-custodia-bambini-canton-zug-kosten/",
           "excerpt": "Die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zug können je nach dem berechneten Einkommenstarif und den verfügbaren kantonalen Leistungen variieren.",
           "date": "2026-08-17T15:14:36.291Z"
         },
         {
           "title": "Krankenversicherungsprämien im Kanton Zug und Prämiensenkungen",
-          "url": "/de/schweiz-artikel/premi-cassa-malati-kanton-zugo-riduzione-premi/",
+          "url": "/de/schweiz-artikel/premi-cassa-malati-kanton-zug-riduzione-premi/",
           "excerpt": "Prämien für die Pflichtkrankenversicherung im Kanton Zug: Prämienbereiche, Selbstbeteiligungen, alternative Modelle und Anforderungen für den Vorteil von Prämiensenkungen.",
           "date": "2026-08-17T08:03:04.287Z"
         },
@@ -429,7 +429,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "ZG",
@@ -458,7 +458,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -496,7 +496,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -508,13 +508,13 @@
         },
         {
           "title": "Permis de conduire Zoug : conversion, examens, démarches",
-          "url": "/fr/articles-suisse/zug-permis-conduite-conversion-examens/",
+          "url": "/fr/articles-suisse/zoug-permis-conduite-conversion-examens/",
           "excerpt": "Guide complet pour convertir un permis de conduire étranger dans le canton de Zoug : documents obligatoires, examens théoriques et pratiques, cours obligatoires et délais.",
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
           "title": "Primes caisse-maladie canton de Zoug et réduction des primes",
-          "url": "/fr/articles-suisse/zugo-reduction-primes-maladie/",
+          "url": "/fr/articles-suisse/zoug-reduction-primes-maladie/",
           "excerpt": "Comment fonctionnent les primes LAMal dans le canton de Zoug, les six franchises disponibles et comment accéder aux allocations cantonales pour réduire le coût de l'assurance maladie.",
           "date": "2026-08-23T15:41:16.849Z"
         },
@@ -526,7 +526,7 @@
         },
         {
           "title": "Garderie et garde d'enfants dans le canton de Zoug : coûts",
-          "url": "/fr/articles-suisse/asilo-nido-e-custodia-bambini-canton-zugo-couts/",
+          "url": "/fr/articles-suisse/asilo-nido-e-custodia-bambini-canton-zoug-couts/",
           "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Zoug peuvent varier en fonction du tarif calculé sur le revenu et des allocations cantonales disponibles.",
           "date": "2026-08-17T15:14:36.291Z"
         },
@@ -561,7 +561,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

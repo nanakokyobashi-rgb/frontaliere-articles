@@ -4,22 +4,22 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "14cafd09c8d9ea6d75a4e43f398e15d3c8cb9ec2916fc2b55e7c450844dd1a9c",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "5accdd4aedbb378af025cb3606e180a9e2b7ee9e74baab3f52b61d9cdae08cb1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "11",
-          "note": "offerta mediana 350 CHF"
+          "note": "offerta mediana 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -56,7 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -65,7 +65,7 @@
           "items": [
             {
               "label": "SZ6920",
-              "value": "5000 CHF",
+              "value": "5010 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-13T20:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
@@ -78,22 +78,27 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
             },
             {
-              "label": "SZ12136",
-              "value": "640 CHF",
+              "label": "SZ14988",
+              "value": "860 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-13T20:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1586"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Depression stärker ins öffentliche Bewusstsein rücken",
+              "date": "2026-10-07",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
+            },
             {
               "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
               "date": "2026-09-30",
@@ -118,17 +123,18 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "Anpassung im Bereich der Notfallversorgung",
-              "date": "2026-07-01",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Concorrenza sleale nel cambio cassa malati a Svitto",
+          "url": "/articoli-svitto/svitto-cambio-cassa-malati/",
+          "excerpt": "Le offerte per cambiare cassa malati spesso ingannano: una cassa locale di Svitto deve fare i conti con un business descritto come concorrenza sleale.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
         {
           "title": "Permesso di dimora B canton Svitto: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-b-svitto-requisiti-rinnovo/",
@@ -192,7 +198,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SZ",
@@ -209,7 +215,7 @@
         {
           "label": "Plate auctions running",
           "value": "11",
-          "note": "typical bid 350 CHF"
+          "note": "typical bid 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -226,7 +232,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -235,7 +241,7 @@
           "items": [
             {
               "label": "SZ6920",
-              "value": "5,000 CHF",
+              "value": "5,010 CHF",
               "detail": "current bid",
               "date": "2026-10-13T20:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
@@ -248,22 +254,27 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
             },
             {
-              "label": "SZ12136",
-              "value": "640 CHF",
+              "label": "SZ14988",
+              "value": "860 CHF",
               "detail": "current bid",
               "date": "2026-10-13T20:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1586"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Depression stärker ins öffentliche Bewusstsein rücken",
+              "date": "2026-10-07",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
+            },
             {
               "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
               "date": "2026-09-30",
@@ -288,31 +299,32 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "Anpassung im Bereich der Notfallversorgung",
-              "date": "2026-07-01",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Residence permit B canton Svitto: requirements and renewal",
+          "title": "Unfair competition in switching health insurers in Schwyz",
+          "url": "/en/schwyz-articles/schwyz-health-insurance-switch/",
+          "excerpt": "Offers to switch health insurers are often deceptive: a local health insurer in Schwyz has to contend with a business described as unfair competition.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Residence permit B canton Schwyz: requirements and renewal",
           "url": "/en/swiss-articles/residence-permit-b-canton-schwyz-requirements-renewal/",
-          "excerpt": "Residence permit B in canton Svitto allows foreign nationals to reside and work in Switzerland. Discover requirements, documents and how to renew it according to SEM regulations.",
+          "excerpt": "Residence permit B in canton Schwyz allows foreign nationals to reside and work in Switzerland. Discover requirements, documents and how to renew it according to SEM regulations.",
           "date": "2026-08-23T00:53:12.602Z"
         },
         {
-          "title": "Driving licence in the Canton of Svitto: procedure and examinations",
+          "title": "Driving licence in the Canton of Schwyz: procedure and examinations",
           "url": "/en/swiss-articles/driving-licence-schwyz-conversion-and-exams/",
           "excerpt": "How to obtain or convert your driver's license in the Canton of Schwyz: registration, theoretical and practical exams and compulsory courses according to federal regulations.",
           "date": "2026-08-30T01:23:24.295Z"
         },
         {
-          "title": "Driving licence in Svitto: conversion, exams and office",
+          "title": "Driving licence in Schwyz: conversion, exams and office",
           "url": "/en/swiss-articles/driving-license-conversion-schwyz/",
           "excerpt": "Complete guide to converting your foreign driving licence in the Canton of Schwyz, with details on examinations, compulsory courses and offices.",
           "date": "2026-08-16T14:08:59.768Z"
@@ -330,7 +342,7 @@
           "date": "2026-08-16T11:13:39.319Z"
         },
         {
-          "title": "Svitto sick pay premiums: bands, deductibles and subsidies",
+          "title": "Schwyz sick pay premiums: bands, deductibles and subsidies",
           "url": "/en/swiss-articles/schwyz-health-insurance-premiums/",
           "excerpt": "Analysis of compulsory health insurance premiums in the Canton of Schwyz: premium brackets, deductibles, models and requirements for reduction.",
           "date": "2026-08-16T11:05:05.342Z"
@@ -358,7 +370,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SZ",
@@ -375,7 +387,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "11",
-          "note": "mittleres Gebot 350 CHF"
+          "note": "mittleres Gebot 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -392,7 +404,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -401,7 +413,7 @@
           "items": [
             {
               "label": "SZ6920",
-              "value": "5’000 CHF",
+              "value": "5’010 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-13T20:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
@@ -414,22 +426,27 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
             },
             {
-              "label": "SZ12136",
-              "value": "640 CHF",
+              "label": "SZ14988",
+              "value": "860 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-13T20:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1586"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Depression stärker ins öffentliche Bewusstsein rücken",
+              "date": "2026-10-07",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
+            },
             {
               "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
               "date": "2026-09-30",
@@ -454,17 +471,18 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "Anpassung im Bereich der Notfallversorgung",
-              "date": "2026-07-01",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Unlauterer Wettbewerb beim Krankenkassenwechsel in Schwyz",
+          "url": "/de/schwyz-artikel/schwyz-krankenkassenwechsel/",
+          "excerpt": "Die Angebote für einen Krankenkassenwechsel sind oft irreführend: Eine lokale Krankenkasse in Schwyz muss sich mit einem Geschäftsmodell auseinandersetzen, das als unlauterer Wettbewerb beschrieben wird.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
         {
           "title": "Aufenthaltsbewilligung B Kanton Schwyz: Voraussetzungen und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-kanton-schwyz-anforderungen-verlangerung/",
@@ -485,7 +503,7 @@
         },
         {
           "title": "Kinderkrippe und Kinderbetreuung im Kanton Schwyz: Kosten und Optionen",
-          "url": "/de/schweiz-artikel/asilo-nido-custodia-bambini-canton-svitto-kosten/",
+          "url": "/de/schweiz-artikel/asilo-nido-custodia-bambini-canton-schwyz-kosten/",
           "excerpt": "Die Kosten für Kindergärten im Kanton Schwyz variieren je nach Altersgruppe und Bedürfnissen der Eltern.",
           "date": "2026-08-16T12:01:45.370Z"
         },
@@ -524,7 +542,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SZ",
@@ -541,7 +559,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "11",
-          "note": "offre centrale 350 CHF"
+          "note": "offre centrale 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -558,7 +576,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -567,7 +585,7 @@
           "items": [
             {
               "label": "SZ6920",
-              "value": "5 000 CHF",
+              "value": "5 010 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-13T20:00:00.000Z",
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1582"
@@ -580,22 +598,27 @@
               "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1583"
             },
             {
-              "label": "SZ12136",
-              "value": "640 CHF",
+              "label": "SZ14988",
+              "value": "860 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-13T20:00:00.000Z",
-              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1584"
+              "url": "https://cariegov.sz.ch/ecari-auction/ui/app/details/app?id=1586"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Depression stärker ins öffentliche Bewusstsein rücken",
+              "date": "2026-10-07",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
+            },
             {
               "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
               "date": "2026-09-30",
@@ -620,51 +643,52 @@
               "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
               "date": "2026-07-02",
               "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
-            },
-            {
-              "label": "Anpassung im Bereich der Notfallversorgung",
-              "date": "2026-07-01",
-              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/anpassung-im-bereich-der-notfallversorgung-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Permis de séjour B canton Schwyz : exigences et renouvellement",
+          "title": "Concurrence déloyale dans le changement de caisse-maladie à Schwytz",
+          "url": "/fr/articles-schwytz/schwytz-changement-caisse-maladie/",
+          "excerpt": "Les offres de changement de caisse-maladie sont souvent trompeuses : une caisse locale de Schwytz doit faire face à une activité décrite comme de la concurrence déloyale.",
+          "date": "2026-10-08T14:43:30.771Z"
+        },
+        {
+          "title": "Permis de séjour B canton Schwytz : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-de-residence-b-canton-schwytz-exigences-renouvellement/",
           "excerpt": "Le permis de séjour B dans le canton de Schwytz permet aux ressortissants étrangers de résider et de travailler en Suisse. Découvrez les exigences, les documents et comment les renouveler selon les réglementations SEM.",
           "date": "2026-08-23T00:53:12.602Z"
         },
         {
-          "title": "Permis de conduire dans le canton de Schwyz : procédure et examens",
-          "url": "/fr/articles-suisse/permis-conduire-schwyz-conversion-et-examens/",
-          "excerpt": "Comment obtenir ou convertir le permis dans le canton de Schwyz : inscription, examens théoriques et pratiques et cours obligatoires selon la réglementation fédérale.",
+          "title": "Permis de conduire dans le canton de Schwytz : procédure et examens",
+          "url": "/fr/articles-suisse/permis-conduire-schwytz-conversion-et-examens/",
+          "excerpt": "Comment obtenir ou convertir le permis dans le canton de Schwytz : inscription, examens théoriques et pratiques et cours obligatoires selon la réglementation fédérale.",
           "date": "2026-08-30T01:23:24.295Z"
         },
         {
-          "title": "Permis de conduire à Schwyz : conversion, examens et bureau",
-          "url": "/fr/articles-suisse/conversion-permis-conduire-schwyz/",
-          "excerpt": "Guide complet de la conversion du permis de conduire étranger dans le canton de Schwyz, avec des détails sur les examens, les cours obligatoires et les bureaux.",
+          "title": "Permis de conduire à Schwytz : conversion, examens et bureau",
+          "url": "/fr/articles-suisse/conversion-permis-conduire-schwytz/",
+          "excerpt": "Guide complet de la conversion du permis de conduire étranger dans le canton de Schwytz, avec des détails sur les examens, les cours obligatoires et les bureaux.",
           "date": "2026-08-16T14:08:59.768Z"
         },
         {
-          "title": "Garderie et garde d'enfants dans le canton de Schwyz : coûts et options",
-          "url": "/fr/articles-suisse/asilo-nido-custodia-bambini-canton-svitto-couts/",
-          "excerpt": "Les coûts des crèches dans le canton de Schwyz varient en fonction de la tranche d'âge et des besoins des parents.",
+          "title": "Garderie et garde d'enfants dans le canton de Schwytz : coûts et options",
+          "url": "/fr/articles-suisse/asilo-nido-custodia-bambini-canton-schwytz-couts/",
+          "excerpt": "Les coûts des crèches dans le canton de Schwytz varient en fonction de la tranche d'âge et des besoins des parents.",
           "date": "2026-08-16T12:01:45.370Z"
         },
         {
-          "title": "Permis de séjour C dans le canton de Schwyz : exigences et demande",
-          "url": "/fr/articles-suisse/permis-de-sejour-c-dans-le-canton-de-schwyz-exigences-et-demande/",
-          "excerpt": "Pour obtenir un permis de séjour C dans le canton de Schwyz, les frontaliers doivent respecter certaines exigences et suivre une procédure spécifique.",
+          "title": "Permis de séjour C dans le canton de Schwytz : exigences et demande",
+          "url": "/fr/articles-suisse/permis-de-sejour-c-dans-le-canton-de-schwytz-exigences-et-demande/",
+          "excerpt": "Pour obtenir un permis de séjour C dans le canton de Schwytz, les frontaliers doivent respecter certaines exigences et suivre une procédure spécifique.",
           "date": "2026-08-16T11:13:39.319Z"
         },
         {
-          "title": "Primes caisse-maladie Schwyz : tranches, franchises et subventions",
+          "title": "Primes caisse-maladie Schwytz : tranches, franchises et subventions",
           "url": "/fr/articles-suisse/primes-assurance-maladie-schwytz/",
-          "excerpt": "Analyse des primes de l'assurance maladie obligatoire dans le canton de Schwyz : fourchettes de primes, franchises, modèles et conditions de réduction.",
+          "excerpt": "Analyse des primes de l'assurance maladie obligatoire dans le canton de Schwytz : fourchettes de primes, franchises, modèles et conditions de réduction.",
           "date": "2026-08-16T11:05:05.342Z"
         }
       ],
@@ -686,7 +710,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

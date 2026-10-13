@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "74837a737e088f5206bb6bd764ed082f1c5d5eea8c7b37e9f0471e8bd5190921",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "859ee9292acdf572967def098f97fc38908aaa1cddc54f421f4db3d1cff02ca8",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -176,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GR",
@@ -269,19 +269,19 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Starting a Business in Graubünden: A Guide to Costs and Taxes",
-          "url": "/en/swiss-articles/start-business-grisons-cost-guide/",
+          "url": "/en/swiss-articles/start-business-graubunden-cost-guide/",
           "excerpt": "From Legal Structure to Payroll Taxes: A Practical Guide to the Three Tax Levels and Social Security Obligations for Those Starting a Business in Graubünden.",
           "date": "2026-10-02T07:24:44.114Z"
         },
         {
           "title": "Living by Month and Working in Graubünden: A Tax Guide",
-          "url": "/en/cross-border-articles/guide-living-mese-grisons/",
+          "url": "/en/cross-border-articles/guide-living-mese-graubunden/",
           "excerpt": "Permit G, tax at source and deductible of border income: a guide for those who live in Mese and work in Swiss Graubünden. Standards 2024, LAMal, procedure.",
           "date": "2026-09-02T23:43:39.896Z"
         },
@@ -299,8 +299,8 @@
         },
         {
           "title": "Paisco Loveno-Grisioni: border guide, taxes, permits",
-          "url": "/en/cross-border-articles/living-paisco-loveno-working-grisons-cross-border/",
-          "excerpt": "Working in Grisons from Paisco Loveno: G Permit, withholding tax, €10,000 exemption, LAMal, tax credit and procedure from 2024.",
+          "url": "/en/cross-border-articles/living-paisco-loveno-working-graubunden-cross-border/",
+          "excerpt": "Working in Graubünden from Paisco Loveno: G Permit, withholding tax, €10,000 exemption, LAMal, tax credit and procedure from 2024.",
           "date": "2026-08-25T10:25:07.764Z"
         }
       ],
@@ -330,7 +330,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GR",
@@ -423,7 +423,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -484,7 +484,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GR",
@@ -577,7 +577,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -606,7 +606,7 @@
           "date": "2026-08-22T02:15:33.938Z"
         },
         {
-          "title": "Paisco Loveno-Grigioni : guide frontalier, taxes, permis",
+          "title": "Paisco Loveno-Grisons : guide frontalier, taxes, permis",
           "url": "/fr/articles-frontalier/vivre-paisco-loveno-travailler-grisons-frontalier/",
           "excerpt": "Travailler dans les Grisons de Paisco Loveno : Permis G, retenues à la source, exonération € 10'000, LAMal, crédit d'impôt et procédure à partir de 2024.",
           "date": "2026-08-25T10:25:07.764Z"
@@ -638,7 +638,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "8862845760ad729a945c786876492cd46cd6a9ad75910ed7fdd1be2c7451d78a",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "1e10f37ff31da5cb8bdf4f76916c40948fbc60e92624224f0805bed0abd10933",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -57,7 +57,7 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -84,7 +84,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GL",
@@ -129,13 +129,13 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Glarus transport subscriptions: zones, rates and discounts",
-          "url": "/en/swiss-articles/glarona-transport-passes-zones-fares/",
+          "url": "/en/swiss-articles/glarus-transport-passes-zones-fares/",
           "excerpt": "Tariff zone system, annual and monthly subscriptions, combination with half-price AG and discounts for students and apprentices in the Canton of Glarus.",
           "date": "2026-08-23T14:43:40.056Z"
         },
@@ -156,7 +156,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GL",
@@ -201,13 +201,13 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Fahrkarten Glarus: Zonen, Tarife und Rabatte",
-          "url": "/de/schweiz-artikel/glarona-verkehrskarten-zonen-tarife/",
+          "url": "/de/schweiz-artikel/glarus-verkehrskarten-zonen-tarife/",
           "excerpt": "Tarifzonen-System, Jahres- und Monatsabonnements, Kombination mit GA-Halbtax und Rabatten für Studierende und Lernende im Kanton Glarus.",
           "date": "2026-08-23T14:43:40.056Z"
         },
@@ -228,7 +228,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GL",
@@ -273,18 +273,18 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Abonnements transports Glaris : zones, tarifs et réductions",
-          "url": "/fr/articles-suisse/glarona-abonnements-transport-zones-tarifs/",
+          "url": "/fr/articles-suisse/glaris-abonnements-transport-zones-tarifs/",
           "excerpt": "Système de zones tarifaires, abonnements annuels et mensuels, combinaison avec demi-tarif AG et réductions pour étudiants et apprentis dans le canton de Glaris.",
           "date": "2026-08-23T14:43:40.056Z"
         },
         {
-          "title": "Abbonamenti Glarona: zone, tarifs",
+          "title": "Abbonamenti Glaris: zone, tarifs",
           "url": "/fr/articles-suisse/transport-en-commun-glauis/",
           "excerpt": "Découvrez les détails sur les abonnements transports publics dans le canton de Glaris, y compris les zones, les tarifs et les combinaisons avec demi-tarif et AG",
           "date": "2026-08-17T05:40:06.559Z"
@@ -300,7 +300,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

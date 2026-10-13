@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "10e31bb8191c1c8b8912f7d827bee749b5ea16df89da4450979f8662f909e64e",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "452d06fcd38fe6c690fb0dfab0a23a504a30a0beb5c0f866fc43c1a6e5c81eb2",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -151,10 +151,16 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Le casse pensioni svizzere migliorano Q3 2026",
+          "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
+          "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
         {
           "title": "Moutier: oltre 400 pensionati ricevono una doppia rendita AVS per errore",
           "url": "/articoli-svizzera/malinteso-rendite-avs-moutier/",
@@ -180,7 +186,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "JU",
@@ -304,10 +310,16 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Swiss pension funds improve Q3 2026",
+          "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
+          "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
         {
           "title": "Moutier: over 400 pensioners receive a double AVS pension by mistake",
           "url": "/en/swiss-articles/moutier-avs-pension-misunderstanding/",
@@ -333,7 +345,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "JU",
@@ -457,10 +469,16 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Schweizer Pensionskassen verbessern Q3 2026",
+          "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
+          "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
         {
           "title": "Moutier: Über 400 Rentner erhalten versehentlich eine doppelte AHV-Rente",
           "url": "/de/schweiz-artikel/missverstaendnis-ueber-ahv-renten-in-moutier/",
@@ -486,7 +504,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "JU",
@@ -610,10 +628,16 @@
               "url": "https://www.ecasjura.ch/fr/Actualites/Mois-de-la-sante-mentale-Conference-L-AI-a-vos-cotes-pour-preserver-l-emploi-15-09-2026.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Les caisses de pension suisses améliorent Q3 2026",
+          "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
+          "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
+          "date": "2026-10-08T15:48:11.331Z"
+        },
         {
           "title": "Moutier : plus de 400 retraités reçoivent une double rente AVS par erreur",
           "url": "/fr/articles-suisse/malentendu-sur-les-rentes-avs-a-moutier/",
@@ -639,7 +663,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

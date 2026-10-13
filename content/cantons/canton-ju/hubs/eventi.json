@@ -4,17 +4,58 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "736ca5fd003c0c065202df2d5c6c1df13c305b279fcae8b5ba12e00ad44064c2",
-  "blocks": [],
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "d37ee4175527a13c8779fee9e281b8e4c1725ea468cd5e8596bb8f5d2cfa4139",
+  "blocks": [
+    {
+      "id": "prossimi-eventi",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "keyFacts": 1
+    }
+  ],
   "locales": {
     "it": {
       "canton": "JU",
       "topic": "eventi",
       "locale": "it",
       "intro": "Nel Canton Giura, il calendario di fiere, concerti, mercati e manifestazioni cambia ogni settimana. Questa pagina riunisce i prossimi appuntamenti dell’agenda eventi del sito e gli articoli della redazione su che cosa fare sul territorio, dal fine settimana alle ricorrenze dell’anno.\n\nIl territorio confina con la Francia: per chi attraversa il confine ogni giorno contano le regole e i prezzi di entrambi i lati. Le fonti ufficiali pubblicano in francese; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Eventi in calendario nei prossimi 14 giorni",
+          "value": "3",
+          "note": "dall’agenda eventi del sito"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Eventi dei prossimi 14 giorni",
+          "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
+          "items": [
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
+            },
+            {
+              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
+              "detail": "Kultur-Werkstatt, Alle",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
+            },
+            {
+              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
+              "detail": "Alti Moschti, Alle",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            }
+          ],
+          "sourceName": "Agenda eventi di Frontaliere Ticino",
+          "sourceUrl": "/eventi/giura/",
+          "updatedAt": "2026-10-13T00:02:43.981Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -26,15 +67,50 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "JU",
       "topic": "eventi",
       "locale": "en",
       "intro": "In the canton of Jura, the calendar of fairs, concerts, markets and festivals changes every week. This page brings together the upcoming dates from the site’s events calendar and our articles on what to do locally, from the weekend to the yearly fixtures.\n\nThe area borders France: for those who cross the border every day, the rules and prices on both sides matter. Official sources publish in French; data, notices and articles are collected here and updated when they change.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Events scheduled in the next 14 days",
+          "value": "3",
+          "note": "from the site’s events calendar"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Events in the next 14 days",
+          "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
+          "items": [
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
+            },
+            {
+              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
+              "detail": "Kultur-Werkstatt, Alle",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
+            },
+            {
+              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
+              "detail": "Alti Moschti, Alle",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino events calendar",
+          "sourceUrl": "/en/events/jura/",
+          "updatedAt": "2026-10-13T00:02:43.981Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -46,15 +122,50 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "JU",
       "topic": "eventi",
       "locale": "de",
       "intro": "Im Kanton Jura ändert sich der Kalender mit Messen, Konzerten, Märkten und Festen jede Woche. Diese Seite bündelt die nächsten Termine aus dem Veranstaltungskalender der Website und die Artikel der Redaktion dazu, was vor Ort los ist – vom Wochenende bis zu den festen Terminen des Jahres.\n\nDas Gebiet grenzt an Frankreich: Wer täglich die Grenze überquert, muss Regeln und Preise auf beiden Seiten kennen. Die offiziellen Quellen publizieren auf Französisch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Veranstaltungen in den nächsten 14 Tagen",
+          "value": "3",
+          "note": "aus dem Veranstaltungskalender der Website"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Veranstaltungen der nächsten 14 Tage",
+          "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
+          "items": [
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
+            },
+            {
+              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
+              "detail": "Kultur-Werkstatt, Alle",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
+            },
+            {
+              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
+              "detail": "Alti Moschti, Alle",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            }
+          ],
+          "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
+          "sourceUrl": "/de/veranstaltungen/jura/",
+          "updatedAt": "2026-10-13T00:02:43.981Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -66,15 +177,50 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "JU",
       "topic": "eventi",
       "locale": "fr",
       "intro": "Dans le canton du Jura, le calendrier des foires, concerts, marchés et manifestations change chaque semaine. Cette page réunit les prochains rendez-vous de l’agenda du site et les articles de la rédaction sur ce qu’il y a à faire sur place, du week-end aux rendez-vous de l’année.\n\nLe territoire a une frontière avec la France : pour celles et ceux qui la franchissent chaque jour, les règles et les prix des deux côtés comptent. Les sources officielles publient en français ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
-      "keyFacts": [],
-      "dataBlocks": [],
+      "keyFacts": [
+        {
+          "label": "Événements prévus dans les 14 prochains jours",
+          "value": "3",
+          "note": "d’après l’agenda du site"
+        }
+      ],
+      "dataBlocks": [
+        {
+          "id": "prossimi-eventi",
+          "title": "Événements des 14 prochains jours",
+          "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
+          "items": [
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
+            },
+            {
+              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
+              "detail": "Kultur-Werkstatt, Alle",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
+            },
+            {
+              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
+              "detail": "Alti Moschti, Alle",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            }
+          ],
+          "sourceName": "Agenda des événements de Frontaliere Ticino",
+          "sourceUrl": "/fr/evenements/jura/",
+          "updatedAt": "2026-10-13T00:02:43.981Z"
+        }
+      ],
       "curatedArticles": [],
       "links": [
         {
@@ -86,7 +232,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

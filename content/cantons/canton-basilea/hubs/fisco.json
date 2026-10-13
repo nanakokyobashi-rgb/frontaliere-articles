@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T11:25:23.150Z",
-  "contentHash": "5d123899e5db8ab1ec4e61a763f2c7f81ee0fd6be500b2b27efef197ab9ab052",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "20e8d41cb43442f8fb944f1de318e552b147dc97b53bd0ee0c02cf3275c5540c",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -216,7 +216,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T11:25:23.150Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -415,7 +415,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T11:25:23.150Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -614,7 +614,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T11:25:23.150Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -770,7 +770,7 @@
         },
         {
           "title": "Impôts cantonaux et communaux à Bâle-Ville : taux et déductions",
-          "url": "/fr/articles-suisse/impots-canton-de-basel-ville-imposition/",
+          "url": "/fr/articles-suisse/impots-canton-de-bale-ville-imposition/",
           "excerpt": "Les impôts cantonaux et communaux à Bâle-Ville sont parmi les plus élevés de Suisse.",
           "date": "2026-08-18T06:47:30.240Z"
         },
@@ -782,8 +782,8 @@
         },
         {
           "title": "Basile : imposition à la source approuvée",
-          "url": "/fr/articles-suisse/impot-source-basel/",
-          "excerpt": "Les votes cantonaux de Basilea ont approuvé l'introduction de l'imposition à la source, avec 53,4 % des voix, modifiant le système fiscal local.",
+          "url": "/fr/articles-suisse/impot-source-bale/",
+          "excerpt": "Les votes cantonaux de Bâle ont approuvé l'introduction de l'imposition à la source, avec 53,4 % des voix, modifiant le système fiscal local.",
           "date": "2026-06-15T05:26:26.152Z"
         }
       ],
@@ -813,7 +813,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T11:25:23.150Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

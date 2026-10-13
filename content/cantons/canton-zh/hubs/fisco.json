@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "1dfb5b6ba353bc9fdcd5c090193b301c357fe7f73b0eb69189ae00b790762de9",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "a5033b4699ac0beef9165123acca7cd626a4f8c1f8a0429b1d8cd03c7b19281a",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,6 +108,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "Imposta sui cani a Zurigo: guida alla registrazione",
+          "url": "/articoli-svizzera/imposta-cani-zurigo-guida/",
+          "excerpt": "Nel Cantone di Zurigo l'imposta sui cani segue regole cantonali e comunali.",
+          "date": "2026-10-12T08:03:47.898Z"
+        },
+        {
           "title": "Imposta di successione Zurigo: aliquote e deduzioni",
           "url": "/articoli-svizzera/imposta-successione-zurigo-aliquote/",
           "excerpt": "Come funziona la tassazione di successione nel Canton Zurigo: sistema progressivo, esenzioni per coniuge e discendenti, dichiarazione e scadenze.",
@@ -164,7 +170,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "ZH",
@@ -255,6 +261,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "Dog tax in Zurich: registration guide",
+          "url": "/en/swiss-articles/dog-tax-in-zurich-registration-guide/",
+          "excerpt": "In the Canton of Zurich, the dog tax follows cantonal and municipal rules.",
+          "date": "2026-10-12T08:03:47.898Z"
+        },
+        {
           "title": "Zurich Inheritance Tax: Rates and Deductions",
           "url": "/en/swiss-articles/inheritance-tax-zurich-rates/",
           "excerpt": "How inheritance taxation works in the Canton of Zurich: progressive system, exemptions for spouse and descendants, declaration and deadlines.",
@@ -311,7 +323,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "ZH",
@@ -402,6 +414,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "Hundesteuer in Zürich: Leitfaden zur Registrierung",
+          "url": "/de/schweiz-artikel/hundesteuer-in-zurich-leitfaden-zur-registrierung/",
+          "excerpt": "Im Kanton Zürich richtet sich die Hundesteuer nach kantonalen und kommunalen Vorschriften.",
+          "date": "2026-10-12T08:03:47.898Z"
+        },
+        {
           "title": "Erbschaftssteuer Zürich: Steuersätze und Abzüge",
           "url": "/de/schweiz-artikel/erbschaftssteuer-zuerich-saetze/",
           "excerpt": "Wie die Erbschaftsbesteuerung im Kanton Zürich funktioniert: progressives System, Befreiungen für Ehegatten und Nachkommen, Erklärung und Fristen.",
@@ -458,7 +476,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "ZH",
@@ -549,6 +567,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "Taxe sur les chiens à Zurich : guide d'enregistrement",
+          "url": "/fr/articles-suisse/taxe-sur-les-chiens-a-zurich-guide-d-enregistrement/",
+          "excerpt": "Dans le canton de Zurich, l'impôt sur les chiens suit les règles cantonales et communales.",
+          "date": "2026-10-12T08:03:47.898Z"
+        },
+        {
           "title": "Impôt sur les successions Zurich : taux et déductions",
           "url": "/fr/articles-suisse/impot-succession-zurich-taux/",
           "excerpt": "Comment fonctionne la fiscalité successorale dans le canton de Zurich : système progressif, exonérations pour conjoint et descendants, déclaration et délais.",
@@ -605,7 +629,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

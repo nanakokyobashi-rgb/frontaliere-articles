@@ -4,22 +4,22 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "845bedc76651783f43ab92a63eaac2beafa01cdbdb1781f3c793813d60a2b212",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "cbe33c1ee8b0e7568a22ec78ce8c450e8d6875fe4ba4a69c87a7c8c016e28ad3",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "updatedAt": "2026-10-12T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "updatedAt": "2026-10-13T01:02:53.675Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -32,72 +32,72 @@
       "keyFacts": [
         {
           "label": "Valico più scorrevole della settimana",
-          "value": "0,7 min",
-          "note": "Riehen – Weil am Rhein, settimana conclusa: 5 ottobre 2026"
+          "value": "0,6 min",
+          "note": "Riehen – Weil am Rhein, settimana conclusa: 12 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "23",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "32",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "33",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 ottobre 2026 – 12 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
-              "value": "0,7 min",
-              "detail": "42 rilevazioni",
+              "value": "0,6 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/riehen-weil-am-rhein/oggi/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0,7 min",
-              "detail": "42 rilevazioni",
+              "value": "0,9 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/basel-weil-am-rhein-freiburgerstrasse/oggi/"
             },
             {
-              "label": "Riehen – Lörrach-Stetten",
-              "value": "0,9 min",
-              "detail": "42 rilevazioni",
-              "url": "/traffico-dogane/riehen-lorrach-stetten/oggi/"
-            },
-            {
               "label": "Inzlingen – Riehen",
-              "value": "1 min",
-              "detail": "42 rilevazioni",
+              "value": "0,9 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/inzlingen-riehen/oggi/"
             },
             {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "1 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/riehen-lorrach-stetten/oggi/"
+            },
+            {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "1,7 min",
-              "detail": "42 rilevazioni",
+              "value": "1,4 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/basel-weil-am-rhein-autostrada-a2-a5/oggi/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "2,3 min",
-              "detail": "42 rilevazioni",
+              "value": "1,7 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/basel-weil-am-rhein-hiltalingerstrasse/oggi/"
             },
             {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "4,9 min",
-              "detail": "42 rilevazioni",
+              "value": "2,8 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/grenzach-wyhlen-riehen/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -154,13 +154,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
+              "date": "2026-10-08T03:00:30.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
+            },
             {
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
@@ -185,14 +190,9 @@
               "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
               "date": "2026-09-11T08:18:25.000Z",
               "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
-            },
-            {
-              "label": "Gesucht: Werkstudent*in Content Produktion",
-              "date": "2026-09-08T08:50:15.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -251,7 +251,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -261,72 +261,72 @@
       "keyFacts": [
         {
           "label": "Fastest crossing of the week",
-          "value": "0.7 min",
-          "note": "Riehen – Weil am Rhein, week ending 5 October 2026"
+          "value": "0.6 min",
+          "note": "Riehen – Weil am Rhein, week ending 12 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "23",
-          "note": "reports as of 6 October 2026"
+          "note": "reports as of 13 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "32",
-          "note": "reports as of 6 October 2026"
+          "value": "33",
+          "note": "reports as of 13 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 6 October 2026 to 12 October 2026, fastest first.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
-              "value": "0.7 min",
-              "detail": "42 readings",
+              "value": "0.6 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/riehen-weil-am-rhein/today/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0.7 min",
-              "detail": "42 readings",
+              "value": "0.9 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/basel-weil-am-rhein-freiburgerstrasse/today/"
             },
             {
-              "label": "Riehen – Lörrach-Stetten",
-              "value": "0.9 min",
-              "detail": "42 readings",
-              "url": "/en/border-wait/riehen-lorrach-stetten/today/"
-            },
-            {
               "label": "Inzlingen – Riehen",
-              "value": "1 min",
-              "detail": "42 readings",
+              "value": "0.9 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/inzlingen-riehen/today/"
             },
             {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "1 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/riehen-lorrach-stetten/today/"
+            },
+            {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "1.7 min",
-              "detail": "42 readings",
+              "value": "1.4 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/basel-weil-am-rhein-autostrada-a2-a5/today/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "2.3 min",
-              "detail": "42 readings",
+              "value": "1.7 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/basel-weil-am-rhein-hiltalingerstrasse/today/"
             },
             {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "4.9 min",
-              "detail": "42 readings",
+              "value": "2.8 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/grenzach-wyhlen-riehen/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -383,13 +383,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
+              "date": "2026-10-08T03:00:30.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
+            },
             {
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
@@ -414,14 +419,9 @@
               "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
               "date": "2026-09-11T08:18:25.000Z",
               "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
-            },
-            {
-              "label": "Gesucht: Werkstudent*in Content Produktion",
-              "date": "2026-09-08T08:50:15.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -445,7 +445,7 @@
         },
         {
           "title": "Graubünden does not use the Basel model to manage traffic",
-          "url": "/en/swiss-articles/grisons-basel-model-traffic/",
+          "url": "/en/swiss-articles/graubunden-basel-model-traffic/",
           "excerpt": "The Grison government is sceptical about adopting the Birsfelden model of sanctions to divert holiday and tourist traffic.",
           "date": "2026-06-29T16:07:16.810Z"
         }
@@ -480,7 +480,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -490,72 +490,72 @@
       "keyFacts": [
         {
           "label": "Schnellster Grenzübergang der Woche",
-          "value": "0.7 Min.",
-          "note": "Riehen – Weil am Rhein, Woche bis 5. Oktober 2026"
+          "value": "0.6 Min.",
+          "note": "Riehen – Weil am Rhein, Woche bis 12. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "23",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "note": "Meldungen vom 13. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "32",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "33",
+          "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. Oktober 2026 bis 12. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
-              "value": "0.7 Min.",
-              "detail": "42 Messungen",
+              "value": "0.6 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/riehen-weil-am-rhein/heute/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0.7 Min.",
-              "detail": "42 Messungen",
+              "value": "0.9 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/basel-weil-am-rhein-freiburgerstrasse/heute/"
             },
             {
-              "label": "Riehen – Lörrach-Stetten",
-              "value": "0.9 Min.",
-              "detail": "42 Messungen",
-              "url": "/de/wartezeit-grenze/riehen-lorrach-stetten/heute/"
-            },
-            {
               "label": "Inzlingen – Riehen",
-              "value": "1 Min.",
-              "detail": "42 Messungen",
+              "value": "0.9 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/inzlingen-riehen/heute/"
             },
             {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "1 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/riehen-lorrach-stetten/heute/"
+            },
+            {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "1.7 Min.",
-              "detail": "42 Messungen",
+              "value": "1.4 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/basel-weil-am-rhein-autostrada-a2-a5/heute/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "2.3 Min.",
-              "detail": "42 Messungen",
+              "value": "1.7 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/basel-weil-am-rhein-hiltalingerstrasse/heute/"
             },
             {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "4.9 Min.",
-              "detail": "42 Messungen",
+              "value": "2.8 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/grenzach-wyhlen-riehen/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -612,13 +612,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
+              "date": "2026-10-08T03:00:30.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
+            },
             {
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
@@ -643,14 +648,9 @@
               "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
               "date": "2026-09-11T08:18:25.000Z",
               "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
-            },
-            {
-              "label": "Gesucht: Werkstudent*in Content Produktion",
-              "date": "2026-09-08T08:50:15.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -709,7 +709,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -719,72 +719,72 @@
       "keyFacts": [
         {
           "label": "Poste-frontière le plus fluide de la semaine",
-          "value": "0,7 min",
-          "note": "Riehen – Weil am Rhein, semaine jusqu’au 5 octobre 2026"
+          "value": "0,6 min",
+          "note": "Riehen – Weil am Rhein, semaine jusqu’au 12 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "23",
-          "note": "signalements au 6 octobre 2026"
+          "note": "signalements au 13 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "32",
-          "note": "signalements au 6 octobre 2026"
+          "value": "33",
+          "note": "signalements au 13 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 octobre 2026 au 12 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Riehen – Weil am Rhein",
-              "value": "0,7 min",
-              "detail": "42 relevés",
+              "value": "0,6 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/riehen-weil-am-rhein/aujourd-hui/"
             },
             {
               "label": "Basel – Weil am Rhein, Freiburgerstrasse",
-              "value": "0,7 min",
-              "detail": "42 relevés",
+              "value": "0,9 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/basel-weil-am-rhein-freiburgerstrasse/aujourd-hui/"
             },
             {
-              "label": "Riehen – Lörrach-Stetten",
-              "value": "0,9 min",
-              "detail": "42 relevés",
-              "url": "/fr/temps-attente-douane/riehen-lorrach-stetten/aujourd-hui/"
-            },
-            {
               "label": "Inzlingen – Riehen",
-              "value": "1 min",
-              "detail": "42 relevés",
+              "value": "0,9 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/inzlingen-riehen/aujourd-hui/"
             },
             {
+              "label": "Riehen – Lörrach-Stetten",
+              "value": "1 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/riehen-lorrach-stetten/aujourd-hui/"
+            },
+            {
               "label": "Basel – Weil am Rhein, Autostrada A2/A5",
-              "value": "1,7 min",
-              "detail": "42 relevés",
+              "value": "1,4 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/basel-weil-am-rhein-autostrada-a2-a5/aujourd-hui/"
             },
             {
               "label": "Basel – Weil am Rhein, Hiltalingerstrasse",
-              "value": "2,3 min",
-              "detail": "42 relevés",
+              "value": "1,7 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/basel-weil-am-rhein-hiltalingerstrasse/aujourd-hui/"
             },
             {
               "label": "Grenzach-Wyhlen – Riehen",
-              "value": "4,9 min",
-              "detail": "42 relevés",
+              "value": "2,8 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/grenzach-wyhlen-riehen/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -841,13 +841,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Haltestelle Dreispitz in Richtung St. Jakob verschoben",
+              "date": "2026-10-08T03:00:30.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/08/haltestelle-dreispitz-in-richtung-st-jakob-verschoben/"
+            },
             {
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
@@ -872,14 +877,9 @@
               "label": "Erfolgreiche Aufrichte Neubau Garage Rank",
               "date": "2026-09-11T08:18:25.000Z",
               "url": "https://www.bvb.ch/de/2026/09/11/erfolgreiche-aufrichte-neubau-garage-rank/"
-            },
-            {
-              "label": "Gesucht: Werkstudent*in Content Produktion",
-              "date": "2026-09-08T08:50:15.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/08/gesucht-werkstudentin-content-produktion/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -938,7 +938,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "3337a21b992c39905b0b5ab12278e0560eca460da85ed6b1990825443465ad91",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "3e1bd24b09b8cfece391eec7f216723219e967129322d1df645d1f17e635cc54",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -158,7 +158,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SZ",
@@ -294,7 +294,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SZ",
@@ -430,7 +430,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SZ",
@@ -536,15 +536,15 @@
       ],
       "curatedArticles": [
         {
-          "title": "Prestations complémentaires Schwyz : AVS et minimum vital",
-          "url": "/fr/articles-suisse/calcul-rente-avs-schwyz/",
-          "excerpt": "Guide de calcul de la rente AVS, des écarts de cotisations et des prestations complémentaires dans le canton de Schwyz. Rôle de la caisse de compensation cantonale et procédures pratiques pour assurer le minimum vital.",
+          "title": "Prestations complémentaires Schwytz : AVS et minimum vital",
+          "url": "/fr/articles-suisse/calcul-rente-avs-schwytz/",
+          "excerpt": "Guide de calcul de la rente AVS, des écarts de cotisations et des prestations complémentaires dans le canton de Schwytz. Rôle de la caisse de compensation cantonale et procédures pratiques pour assurer le minimum vital.",
           "date": "2026-08-23T01:43:06.089Z"
         },
         {
-          "title": "AVS et prestazioni nel Canton de Schwyz",
-          "url": "/fr/articles-suisse/avs-et-prestations-complementaires-canton-de-schwyz-fonds-de-compensation/",
-          "excerpt": "Le canton de Schwyz dispose d'une caisse de compensation qui gère les prestations AVS et complémentaires pour ses habitants.",
+          "title": "AVS et prestazioni nel Canton de Schwytz",
+          "url": "/fr/articles-suisse/avs-et-prestations-complementaires-canton-de-schwytz-fonds-de-compensation/",
+          "excerpt": "Le canton de Schwytz dispose d'une caisse de compensation qui gère les prestations AVS et complémentaires pour ses habitants.",
           "date": "2026-08-16T13:23:52.059Z"
         }
       ],
@@ -566,7 +566,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

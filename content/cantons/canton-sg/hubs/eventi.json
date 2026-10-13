@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "fefc891ada21ea552a7bd1b6e2dd7789f01ce09845f7b6e3dc72ba0d6ce7972c",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "fe0b29777a5b390d19ae6bff2c3f8c746debeb382b61f07fa0f4d5fd1e774dad",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "57",
+          "value": "87",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
-              "detail": "Unterwasser",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
+              "detail": "Parkplatz SeeJet, Quarten",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
+            },
+            {
+              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
+              "detail": "Rheumaliga",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
+            },
+            {
+              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
+              "detail": "Rheumaliga, St. Gallen",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
+            },
+            {
+              "label": "83a OLMA - Fiera svizzera dell'agricoltura e dell'alimentazione",
+              "detail": "Olma Areal — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
             },
             {
               "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
               "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Erlebniswoche",
-              "detail": "Klangwelt Toggenburg — in corso, ultimo giorno: 10 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+              "label": "Emily Lane – Singer-Songwriterin",
+              "detail": "DenkBar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/emily-lane-singer-songwriterin_AqXCRBc"
             },
             {
-              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
-              "detail": "Galerie Fafou, Uzwil — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-3/"
             },
             {
-              "label": "Minerva IV / IV: Thinking with hands",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+              "label": "Bright",
+              "detail": "Restaurant Werk 1",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/gossau-sg/bright_AwkBJEa"
             },
             {
-              "label": "83a OLMA - Fiera svizzera dell'agricoltura e dell'alimentazione",
-              "detail": "Olma Areal",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Musik und Tanz mit \"Ghörsch\"",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
-            },
-            {
-              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
-            },
-            {
-              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
-              "detail": "St. Gallen",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
-            },
-            {
-              "label": "Django Chutney",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+              "label": "Mäkkelä",
+              "detail": "Lukas Bar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SG",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "57",
+          "value": "87",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,69 +130,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
-              "detail": "Unterwasser",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
+              "detail": "Parkplatz SeeJet, Quarten",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
+            },
+            {
+              "label": "Ausir Stress auf die Gesundheit reduzieren - k",
+              "detail": "Rheumaliga",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
+            },
+            {
+              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
+              "detail": "Rheumaliga, St. Gallen",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
+            },
+            {
+              "label": "83rd OLMA - Swiss Agriculture and Food Fair",
+              "detail": "Olma Areal — ongoing, last day: 18 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
             },
             {
               "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
               "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Erlebniswoche",
-              "detail": "Klangwelt Toggenburg — ongoing, last day: 10 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+              "label": "Emily Lane – Singer-Songwriter",
+              "detail": "DenkBar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/emily-lane-singer-songwriterin_AqXCRBc"
             },
             {
-              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
-              "detail": "Galerie Fafou, Uzwil — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-3/"
             },
             {
-              "label": "Minerva IV / IV: Thinking with hands",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+              "label": "Bright",
+              "detail": "Restaurant Werk 1",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/gossau-sg/bright_AwkBJEa"
             },
             {
-              "label": "83rd OLMA - Swiss Agriculture and Food Fair",
-              "detail": "Olma Areal",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Music and Dance with \"Ghörsch\"",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
-            },
-            {
-              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
-            },
-            {
-              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
-              "detail": "St. Gallen",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
-            },
-            {
-              "label": "Django Chutney",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+              "label": "Mäkkelä",
+              "detail": "Lukas Bar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SG",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "57",
+          "value": "87",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,69 +227,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
-              "detail": "Unterwasser",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
+              "detail": "Parkplatz SeeJet, Quarten",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
+            },
+            {
+              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren – was kann ich tun?",
+              "detail": "Rheumaliga",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
+            },
+            {
+              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
+              "detail": "Rheumaliga, St. Gallen",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
+            },
+            {
+              "label": "83. OLMA – Schweizer Messe für Landwirtschaft und Ernährung",
+              "detail": "Olma Areal — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
             },
             {
               "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
               "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Erlebniswoche",
-              "detail": "Klangwelt Toggenburg — läuft, letzter Tag: 10. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+              "label": "Emily Lane – Singer-Songwriter",
+              "detail": "DenkBar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/emily-lane-singer-songwriterin_AqXCRBc"
             },
             {
-              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
-              "detail": "Galerie Fafou, Uzwil — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-3/"
             },
             {
-              "label": "Minerva IV / IV: Thinking with hands",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+              "label": "Bright",
+              "detail": "Restaurant Werk 1",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/gossau-sg/bright_AwkBJEa"
             },
             {
-              "label": "83. OLMA – Schweizer Messe für Landwirtschaft und Ernährung",
-              "detail": "Olma Areal",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Musik und Tanz mit „Ghörsch“",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
-            },
-            {
-              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
-            },
-            {
-              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
-              "detail": "St. Gallen",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
-            },
-            {
-              "label": "Django Chutney",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+              "label": "Mäkkelä",
+              "detail": "Lukas Bar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SG",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "57",
+          "value": "87",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,69 +324,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
-              "detail": "Unterwasser",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-2/"
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
+              "detail": "Parkplatz SeeJet, Quarten",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
+            },
+            {
+              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun ?",
+              "detail": "Rheumaliga",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
+            },
+            {
+              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
+              "detail": "Rheumaliga, St. Gallen",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
+            },
+            {
+              "label": "83e OLMA - Foire suisse de l'agriculture et de l'alimentation",
+              "detail": "Olma Areal — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
             },
             {
               "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
               "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "Erlebniswoche",
-              "detail": "Klangwelt Toggenburg — en cours, dernier jour : 10 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/erlebniswoche/"
+              "label": "Emily Lane – Auteure-compositrice-interprète",
+              "detail": "DenkBar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/emily-lane-singer-songwriterin_AqXCRBc"
             },
             {
-              "label": "Spurensucher - Solo-Ausstellung von Raffaele Ferraro",
-              "detail": "Galerie Fafou, Uzwil — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spurensucher-solo-ausstellung-von-raffaele-ferraro/"
+              "label": "Naturjodel Schnupperkurs - für Gäste und Einheimische",
+              "detail": "Unterwasser",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturjodel-schnupperkurs-fuer-gaeste-und-einheimische-3/"
             },
             {
-              "label": "Minerva IV / IV: Thinking with hands",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/minerva-iv-thinking-with-hands/"
+              "label": "Bright",
+              "detail": "Restaurant Werk 1",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/gossau-sg/bright_AwkBJEa"
             },
             {
-              "label": "83e OLMA - Foire suisse de l'agriculture et de l'alimentation",
-              "detail": "Olma Areal",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Musik und Tanz mit « Ghörsch »",
-              "detail": "Berggasthaus Nestel, Ebnat-Kappel",
-              "date": "2026-10-08",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/musik-und-tanz-mit-ghoersch_Ade6HbX"
-            },
-            {
-              "label": "Podiumsgespräch mit Künstlerin Christine Gallmetzer",
-              "detail": "Forum Würth Rorschach, Rorschach",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/podiumsgespraech-mit-kuenstlerin-christine-gallmetzer/"
-            },
-            {
-              "label": "Finissage - Coming of Age: 15 Jahre Kunstkiosk",
-              "detail": "St. Gallen",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-coming-of-age-15-jahre-kunstkiosk/"
-            },
-            {
-              "label": "Django Chutney",
-              "detail": "Dixie- und Jazz-Club, Sargans",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/sargans/django-chutney_AWVP8W6"
+              "label": "Mäkkelä",
+              "detail": "Lukas Bar",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

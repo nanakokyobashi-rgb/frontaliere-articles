@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "75970a0b9ae0be906539e8e77d44232aac83f1c235b91453e5befae0eca4f96f",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "6ba9d67aa6dcdaeb240c5c9b4578f6ca80177166927493d0b3ee394d2562c930",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "12",
+          "value": "16",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,46 +33,10 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Mostra del bestiame Walzenhausen",
-              "detail": "Grund 542, Walzenhausen",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
-            },
-            {
-              "label": "Ziegenschau –«Gässschau»",
-              "detail": "Appenzell",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
-            },
-            {
-              "label": "Mercato di primavera Heiden",
-              "detail": "Il maestoso centro curativo - Heiden, Heiden",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
-            },
-            {
-              "label": "Mostra del bestiame di Hundwil",
-              "detail": "Hundwil",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
-            },
-            {
-              "label": "Mostra ovina di Teufen",
-              "detail": "Zeughausplatz, Teufen (AR)",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
-            },
-            {
-              "label": "BandXOst Quali 2026",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
-            },
-            {
-              "label": "Lisa Christ «Ideal»",
-              "detail": "Kunsthalle Ziegelhütte, Appenzell",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+              "label": "4 x Murbach \"2 generazioni - 4 persone - 1 mostra\"",
+              "detail": "Gais",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
             },
             {
               "label": "Giovedì conferenza Museo Heiden / Gertrud Kurz",
@@ -91,11 +55,47 @@
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            },
+            {
+              "label": "Trio Lowell Coppo Kaerner",
+              "detail": "Kulturmüli, Urnäsch",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "Cinema: Mondi intermedi",
+              "detail": "Herisau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinema-mondi-intermedi-3/"
+            },
+            {
+              "label": "Bluegrass und Piratengeschichten",
+              "detail": "Bibliothek Speicher Trogen, Speicher",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/speicher/bluegrass-und-piratengeschichten_AWfGDTj"
+            },
+            {
+              "label": "J. S. Bach: BWV 124 \"Gesù mio non me ne andrò\".",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
+            },
+            {
+              "label": "Mark Geary",
+              "detail": "Besucherzentrum Brauquöll",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
+            },
+            {
+              "label": "The Fools On The Hill",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "12",
+          "value": "16",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,46 +130,10 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Cattle show Walzenhausen",
-              "detail": "Grund 542, Walzenhausen",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
-            },
-            {
-              "label": "Ziegenschau –«Gässschau»",
-              "detail": "Appenzell",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
-            },
-            {
-              "label": "Spring market Heiden",
-              "detail": "Il maestoso centro curativo - Heiden, Heiden",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
-            },
-            {
-              "label": "Hundwil cattle show",
-              "detail": "Hundwil",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
-            },
-            {
-              "label": "Teufen Sheep Show",
-              "detail": "Zeughausplatz, Teufen (AR)",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
-            },
-            {
-              "label": "BandXOst Quali 2026",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
-            },
-            {
-              "label": "Lisa Christ «Ideal»",
-              "detail": "Kunsthalle Ziegelhütte, Appenzell",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+              "label": "4 x Murbach \"2 Generations - 4 People - 1 Exhibition\"",
+              "detail": "Gais",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
             },
             {
               "label": "Thursday lecture Museum Heiden / Gertrud Kurz",
@@ -188,11 +152,47 @@
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            },
+            {
+              "label": "Trio Lowell Coppo Kaerner",
+              "detail": "Kulturmüli, Urnäsch",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "Movies: Between Worlds",
+              "detail": "Herisau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinema-mondi-intermedi-3/"
+            },
+            {
+              "label": "Bluegrass und Piratengeschichten",
+              "detail": "Bibliothek Speicher Trogen, Speicher",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/speicher/bluegrass-und-piratengeschichten_AWfGDTj"
+            },
+            {
+              "label": "J. S. Bach: BWV 124 \"My Jesus I will not leave\"",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
+            },
+            {
+              "label": "Mark Geary",
+              "detail": "Besucherzentrum Brauquöll",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
+            },
+            {
+              "label": "The Fools On The Hill",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "12",
+          "value": "16",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,46 +227,10 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Viehschau Walzenhausen",
-              "detail": "Grund 542, Walzenhausen",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
-            },
-            {
-              "label": "Ziegenschau –«Gässschau»",
-              "detail": "Appenzell",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
-            },
-            {
-              "label": "Häädler Jahrmarkt",
-              "detail": "Il maestoso centro curativo - Heiden, Heiden",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
-            },
-            {
-              "label": "Viehschau Hundwil",
-              "detail": "Hundwil",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
-            },
-            {
-              "label": "Kantonale Schafschau Teufen",
-              "detail": "Zeughausplatz, Teufen (AR)",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
-            },
-            {
-              "label": "BandXOst Quali 2026",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
-            },
-            {
-              "label": "Lisa Christ «Ideal»",
-              "detail": "Kunsthalle Ziegelhütte, Appenzell",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+              "label": "4 x Murbach \"2 Generationen - 4 Personen - 1 Ausstellung\"",
+              "detail": "Gais",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
             },
             {
               "label": "Donnerstagsvortrag Museum Heiden / Gertrud Kurz",
@@ -285,11 +249,47 @@
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            },
+            {
+              "label": "Trio Lowell Coppo Kaerner",
+              "detail": "Kulturmüli, Urnäsch",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "Kino: Beyond Tradition",
+              "detail": "Herisau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinema-mondi-intermedi-3/"
+            },
+            {
+              "label": "Bluegrass und Piratengeschichten",
+              "detail": "Bibliothek Speicher Trogen, Speicher",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/speicher/bluegrass-und-piratengeschichten_AWfGDTj"
+            },
+            {
+              "label": "J. S. Bach: BWV 124 «Meinen Jesum laß ich nicht»",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
+            },
+            {
+              "label": "Mark Geary",
+              "detail": "Besucherzentrum Brauquöll",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
+            },
+            {
+              "label": "The Fools On The Hill",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "12",
+          "value": "16",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,46 +324,10 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Exposition de bétail à Walzenhausen",
-              "detail": "Grund 542, Walzenhausen",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viehschau-walzenhausen-1/"
-            },
-            {
-              "label": "Ziegenschau –«Gässschau»",
-              "detail": "Appenzell",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ziegenschau-gaessschau/"
-            },
-            {
-              "label": "Marché de printemps à Heiden",
-              "detail": "Il maestoso centro curativo - Heiden, Heiden",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercato-di-primavera-heiden-1/"
-            },
-            {
-              "label": "Exposition de bétail à Hundwil",
-              "detail": "Hundwil",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-del-bestiame-di-hundwil/"
-            },
-            {
-              "label": "Exposition ovine de Teufen",
-              "detail": "Zeughausplatz, Teufen (AR)",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-ovina-di-teufen-3/"
-            },
-            {
-              "label": "BandXOst Quali 2026",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-10",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/bandxost-quali-2026_AZnSCf7"
-            },
-            {
-              "label": "Lisa Christ «Ideal»",
-              "detail": "Kunsthalle Ziegelhütte, Appenzell",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lisa-christ-ideal-scharfzuengige-satire/"
+              "label": "4 x Murbach « 2 générations - 4 personnes - 1 exposition »",
+              "detail": "Gais",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/4-x-murbach-2-generazioni-4-persone-1-mostra/"
             },
             {
               "label": "Conférence du jeudi Musée de Heiden / Gertrud Kurz",
@@ -382,11 +346,47 @@
               "detail": "Teufen, Teufen (AR)",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-cantonale-dei-tori-e-dellautunno-a-teufen/"
+            },
+            {
+              "label": "Trio Lowell Coppo Kaerner",
+              "detail": "Kulturmüli, Urnäsch",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/urnaesch/trio-lowell-coppo-kaerner_AgPn5BC"
+            },
+            {
+              "label": "Cinéma : Entre deux mondes",
+              "detail": "Herisau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinema-mondi-intermedi-3/"
+            },
+            {
+              "label": "Bluegrass und Piratengeschichten",
+              "detail": "Bibliothek Speicher Trogen, Speicher",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/speicher/bluegrass-und-piratengeschichten_AWfGDTj"
+            },
+            {
+              "label": "J. S. Bach : BWV 124 \"Mon Jésus, je ne le laisse pas\".",
+              "detail": "Evang.-ref. Kirche Trogen, Trogen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
+            },
+            {
+              "label": "Mark Geary",
+              "detail": "Besucherzentrum Brauquöll",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
+            },
+            {
+              "label": "The Fools On The Hill",
+              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

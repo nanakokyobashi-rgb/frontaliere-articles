@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "7c61a940e17edd4183168eeb39e87aa61cfa7aae8ceb62b3a8a0ef3a7d6ecebb",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "a783f54d7ed9859d63ceb235f29c84b3d66b9c97f8f1cfb26f790c9a37c8abea",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SZ",
@@ -253,26 +253,26 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Inheritance and donation tax: Svitto guide",
+          "title": "Inheritance and donation tax: Schwyz guide",
           "url": "/en/swiss-articles/guide-inheritance-gift-tax-schwyz/",
           "excerpt": "Inheritance and gift taxes in the Canton of Schwyz: rates, exemptions, declaration, terms. Complete guide on wealth taxation.",
           "date": "2026-09-04T01:10:48.921Z"
         },
         {
-          "title": "Inheritance and donation tax: the Svitto rates",
+          "title": "Inheritance and donation tax: the Schwyz rates",
           "url": "/en/swiss-articles/schwyz-inheritance-tax-rates/",
           "excerpt": "How inheritance and gift tax works in the Canton of Schwyz: rates for degree of kinship, exemptions and deadlines for declaration.",
           "date": "2026-08-23T05:00:01.584Z"
         },
         {
-          "title": "Cantonal taxes in Svitto: rates and deductions",
-          "url": "/en/swiss-articles/cantonal-taxes-svitto-rates-deductions/",
-          "excerpt": "Cantonal taxes in Svitto will be determined by the Canton of Svitto.",
+          "title": "Cantonal taxes in Schwyz: rates and deductions",
+          "url": "/en/swiss-articles/cantonal-taxes-schwyz-rates-deductions/",
+          "excerpt": "Cantonal taxes in Schwyz will be determined by the Canton of Schwyz.",
           "date": "2026-08-16T11:01:27.469Z"
         }
       ],
@@ -298,7 +298,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SZ",
@@ -391,7 +391,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -409,7 +409,7 @@
         },
         {
           "title": "Kantonale Steuern in Schwyz: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/kantonale-steuern-svitto-steuersaetze-abzuege/",
+          "url": "/de/schweiz-artikel/kantonale-steuern-schwyz-steuersaetze-abzuege/",
           "excerpt": "Die Kantonssteuern in Schwyz werden vom Kanton Schwyz festgelegt.",
           "date": "2026-08-16T11:01:27.469Z"
         }
@@ -436,7 +436,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SZ",
@@ -529,26 +529,26 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Droit de succession et donation : guide Schwyz",
+          "title": "Droit de succession et donation : guide Schwytz",
           "url": "/fr/articles-suisse/guide-droits-succession-donation-schwytz/",
-          "excerpt": "Droits de succession et de donation dans le canton de Schwyz : taux, exonérations, déclaration, délais. Guide complet sur la fiscalité du patrimoine.",
+          "excerpt": "Droits de succession et de donation dans le canton de Schwytz : taux, exonérations, déclaration, délais. Guide complet sur la fiscalité du patrimoine.",
           "date": "2026-09-04T01:10:48.921Z"
         },
         {
-          "title": "Droits de succession et de donation : les taux de Schwyz",
-          "url": "/fr/articles-suisse/schwyz-impot-succession-taux/",
-          "excerpt": "Comment fonctionne l'impôt sur les successions et les donations dans le canton de Schwyz : taux par degré de parenté, exemptions et délais de déclaration.",
+          "title": "Droits de succession et de donation : les taux de Schwytz",
+          "url": "/fr/articles-suisse/schwytz-impot-succession-taux/",
+          "excerpt": "Comment fonctionne l'impôt sur les successions et les donations dans le canton de Schwytz : taux par degré de parenté, exemptions et délais de déclaration.",
           "date": "2026-08-23T05:00:01.584Z"
         },
         {
-          "title": "Impôts cantonaux à Schwyz : taux et déductions",
-          "url": "/fr/articles-suisse/impots-cantonaux-svitto-taux-deductions/",
-          "excerpt": "Les impôts cantonaux en Schwyz seront déterminés par le canton de Schwyz.",
+          "title": "Impôts cantonaux à Schwytz : taux et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-schwytz-taux-deductions/",
+          "excerpt": "Les impôts cantonaux en Schwytz seront déterminés par le canton de Schwytz.",
           "date": "2026-08-16T11:01:27.469Z"
         }
       ],
@@ -574,7 +574,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

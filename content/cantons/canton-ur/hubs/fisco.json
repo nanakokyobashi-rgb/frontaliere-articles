@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "657f5f16987e62f7fd04babe00d493a15ed1e775882ed2d4050cd455127c19ae",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "b11d786a706bb0bf7a1c91e0125d5507037dbdf1229a9b7fc8ef6e48822d716b",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,16 +102,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Imposta di successione e donazione nel Cantone Uri: guida",
-          "url": "/articoli-svizzera/imposta-successione-donazione-uri-guida/",
-          "excerpt": "Come funziona la tassazione di successioni e donazioni nel Cantone Uri: aliquote per grado di parentela, moltiplicatore comunale e obblighi dichiarativi.",
-          "date": "2026-08-29T19:27:10.119Z"
+          "title": "Imposta sugli autoveicoli Uri: calcolo e pagamento",
+          "url": "/articoli-svizzera/imposta-veicoli-uri-calcolo/",
+          "excerpt": "Nel Cantone di Uri, calcolo, termini e importi dell'imposta sugli autoveicoli seguono regole cantonali: cosa verificare per veicolo e indirizzo.",
+          "date": "2026-10-10T12:04:45.262Z"
         },
         {
           "title": "Imposte cantonali Cantone di Uri: aliquote e deduzioni",
           "url": "/articoli-svizzera/imposte-cantonal-ur-aliquote-deduzioni/",
           "excerpt": "Scopri le aliquote e le deduzioni ammesse per le imposte cantonali nel Cantone di Uri",
           "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "Imposta di successione e donazione nel Cantone Uri: guida",
+          "url": "/articoli-svizzera/imposta-successione-donazione-uri-guida/",
+          "excerpt": "Come funziona la tassazione di successioni e donazioni nel Cantone Uri: aliquote per grado di parentela, moltiplicatore comunale e obblighi dichiarativi.",
+          "date": "2026-08-29T19:27:10.119Z"
         },
         {
           "title": "Uri: aliquote di successione e donazione per grado di parentela",
@@ -142,7 +148,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "UR",
@@ -227,16 +233,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Inheritance and gift tax in Canton Uri: guide",
-          "url": "/en/swiss-articles/inheritance-gift-tax-uri-guide/",
-          "excerpt": "How inheritance and gift taxation works in Canton Uri: rates by degree of kinship, municipal multiplier and declaratory obligations.",
-          "date": "2026-08-29T19:27:10.119Z"
+          "title": "Uri motor vehicle tax: calculation and payment",
+          "url": "/en/swiss-articles/uri-vehicle-tax-calculation/",
+          "excerpt": "In the Canton of Uri, the calculation, deadlines and amounts of the motor vehicle tax follow cantonal rules: what to check for each vehicle and address.",
+          "date": "2026-10-10T12:04:45.262Z"
         },
         {
           "title": "Cantonal taxes Canton of Uri: rates and deductions",
           "url": "/en/swiss-articles/uri-cantonal-taxes/",
           "excerpt": "Find out the rates and deductions allowed for cantonal taxes in the Canton of Uri",
           "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "Inheritance and gift tax in Canton Uri: guide",
+          "url": "/en/swiss-articles/inheritance-gift-tax-uri-guide/",
+          "excerpt": "How inheritance and gift taxation works in Canton Uri: rates by degree of kinship, municipal multiplier and declaratory obligations.",
+          "date": "2026-08-29T19:27:10.119Z"
         },
         {
           "title": "Uri: inheritance and donation rates by degree of kinship",
@@ -267,7 +279,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "UR",
@@ -352,16 +364,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Erbschafts- und Schenkungssteuer im Kanton Uri: Leitfaden",
-          "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-uri-leitfaden/",
-          "excerpt": "Wie funktioniert die Erbschafts- und Schenkungsbesteuerung im Kanton Uri: Sätze pro Verwandtschaftsgrad, kommunaler Multiplikator und Meldepflichten.",
-          "date": "2026-08-29T19:27:10.119Z"
+          "title": "Motorfahrzeugsteuer Uri: Berechnung und Zahlung",
+          "url": "/de/schweiz-artikel/uri-motorfahrzeugsteuer-berechnung/",
+          "excerpt": "Im Kanton Uri richten sich Berechnung, Fristen und Beträge der Motorfahrzeugsteuer nach kantonalen Regeln: Was für Fahrzeug und Adresse zu prüfen ist.",
+          "date": "2026-10-10T12:04:45.262Z"
         },
         {
           "title": "Kantonale Steuern Kanton Uri: Steuersätze und Abzüge",
           "url": "/de/schweiz-artikel/kanton-ur-steuern/",
           "excerpt": "Entdecken Sie die zulässigen Sätze und Abzüge für die kantonalen Steuern im Kanton Uri",
           "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer im Kanton Uri: Leitfaden",
+          "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-uri-leitfaden/",
+          "excerpt": "Wie funktioniert die Erbschafts- und Schenkungsbesteuerung im Kanton Uri: Sätze pro Verwandtschaftsgrad, kommunaler Multiplikator und Meldepflichten.",
+          "date": "2026-08-29T19:27:10.119Z"
         },
         {
           "title": "URI: Erbschafts- und Schenkungssätze nach Verwandtschaftsgrad",
@@ -392,7 +410,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "UR",
@@ -477,16 +495,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Droits de succession et de donation dans le canton d'Uri : guide",
-          "url": "/fr/articles-suisse/impot-succession-donation-uri-guide/",
-          "excerpt": "Comment fonctionne la fiscalité des successions et donations dans le canton d'Uri : taux par degré de parenté, multiplicateur communal et obligations déclaratives.",
-          "date": "2026-08-29T19:27:10.119Z"
+          "title": "Impôt sur les véhicules à moteur à Uri : calcul et paiement",
+          "url": "/fr/articles-suisse/taxe-vehicules-uri-calcul/",
+          "excerpt": "Dans le canton d'Uri, le calcul, les délais et les montants de l'impôt sur les véhicules à moteur suivent les règles cantonales : ce qu'il faut vérifier pour le véhicule et l'adresse.",
+          "date": "2026-10-10T12:04:45.262Z"
         },
         {
           "title": "Impôts cantonaux Canton d'Uri : taux et déductions",
           "url": "/fr/articles-suisse/imposts-cantonaux-ur/",
           "excerpt": "Découvrez les taux et déductions admis pour les impôts cantonaux dans le canton d'Uri",
           "date": "2026-08-16T00:02:21.694Z"
+        },
+        {
+          "title": "Droits de succession et de donation dans le canton d'Uri : guide",
+          "url": "/fr/articles-suisse/impot-succession-donation-uri-guide/",
+          "excerpt": "Comment fonctionne la fiscalité des successions et donations dans le canton d'Uri : taux par degré de parenté, multiplicateur communal et obligations déclaratives.",
+          "date": "2026-08-29T19:27:10.119Z"
         },
         {
           "title": "URI : taux de succession et de donation par degré de parenté",
@@ -517,7 +541,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

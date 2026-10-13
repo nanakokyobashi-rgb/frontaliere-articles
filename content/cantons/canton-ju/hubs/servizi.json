@@ -4,17 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "8119892a79d54900b93592e4f9c2cf0eec501ca22c7e097a379dd69d8ff023ea",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "409b85fbbe7ba643e3130734d3b9cb3befaabb3af7693f97900120ba6832e15c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-13T08:13:47.853Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -46,7 +51,47 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Benu-Gare",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-13T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-14T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-15T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -64,7 +109,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -113,7 +158,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "JU",
@@ -142,7 +187,47 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Benu-Gare",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-13T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-14T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-15T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -160,7 +245,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +290,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "JU",
@@ -234,7 +319,47 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Benu-Gare",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-13T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-14T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-15T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -252,7 +377,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -297,7 +422,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "JU",
@@ -326,7 +451,47 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Benu-Gare",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Sun Store Esplanade",
+              "detail": "Porrentruy, Ajoie",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-13T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-14T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-15T16:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -344,7 +509,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -385,7 +550,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

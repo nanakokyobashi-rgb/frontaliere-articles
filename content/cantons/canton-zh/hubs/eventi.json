@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-11T23:14:32.116Z",
-  "contentHash": "3a8b8b80a090a0da3e85679f752dadae94202f99694bdfc9452bfcd910169b42",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "668a8fe06d2868acdfe2350f61c67acf0561aa69cc7b5f1be6fd18a9ddc25923",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-11T17:50:26.068Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "288",
+          "value": "310",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "2. LAZY SMOKING SUNDAY 2026 by BIG SMOKE",
-              "detail": "Casinotheater, Winterthur",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+            },
+            {
+              "label": "Hommage à Géza Anda",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+            },
+            {
+              "label": "Ivo Martin",
+              "detail": "Komplex457",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+            },
+            {
+              "label": "DanyMar",
+              "detail": "Aelpli Bar",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+            },
+            {
+              "label": "Judith Hill",
+              "detail": "Kaufleuten",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+            },
+            {
+              "label": "Jazz Jam",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+            },
+            {
+              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
+              "detail": "Dietikon — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+            },
+            {
+              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
+              "detail": "Zurich, Zürich — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
             },
             {
               "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich",
-              "date": "2026-10-11",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Sterilisieren mit Hans",
-              "detail": "Urdorf",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
-            },
-            {
-              "label": "Grasshopper Club Zürich - BSC Young Boys",
-              "detail": "Stadion Letzigrund, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
-            },
-            {
-              "label": "Kunst und Natur 2026",
-              "detail": "Botanischer Garten der Universität Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
-            },
-            {
-              "label": "Groove Your Labour",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
-            },
-            {
-              "label": "«Beethoven und Bruckner» – Chorsinfonik",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Aula alte Turnhalle",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
-            },
-            {
-              "label": "Ein Sommer-nachtstraum",
-              "detail": "Opernhaus, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
-            },
-            {
-              "label": "Tarja - Frisson Live 2026",
-              "detail": "Club Vaudeville, Lindau",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
+              "label": "Viaggio in Giappone: I sapori dell'autunno",
+              "detail": "Zurigo, Zürich — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-11T17:50:26.068Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +116,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-11T23:14:32.116Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "ZH",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "288",
+          "value": "310",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,69 +137,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "2. LAZ SM SMOKING SUNDA 2",
-              "detail": "Casinotheater, Winterthur",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+            },
+            {
+              "label": "Hommage à Géza Anda",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+            },
+            {
+              "label": "Ivo Martin",
+              "detail": "Komplex457",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+            },
+            {
+              "label": "DanyMar",
+              "detail": "Aelpli Bar",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+            },
+            {
+              "label": "Judith Hill",
+              "detail": "Kaufleuten",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+            },
+            {
+              "label": "Jazz Jam",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+            },
+            {
+              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
+              "detail": "Dietikon — ongoing, last day: 15 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+            },
+            {
+              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
+              "detail": "Zurich, Zürich — ongoing, last day: 15 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
             },
             {
               "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich",
-              "date": "2026-10-11",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich — ongoing, last day: 1 November 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Sterilisieren mit Hans",
-              "detail": "Urdorf",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
-            },
-            {
-              "label": "Grasshopper Club Zürich - BSC Young Boys",
-              "detail": "Stadion Letzigrund, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
-            },
-            {
-              "label": "Kunst und Natur 2026",
-              "detail": "Botanischer Garten der Universität Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
-            },
-            {
-              "label": "Groove Your Labor",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
-            },
-            {
-              "label": "«Beethoven und Bruckner» – Chorsinfonik",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Aula alte Turnhalle",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
-            },
-            {
-              "label": "Ein Sommer-nachtstraum",
-              "detail": "Opernhaus, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
-            },
-            {
-              "label": "Tarja - Frisson Live 2026",
-              "detail": "Club Vaudeville, Lindau",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
+              "label": "Japanese Journey: A Taste of Autumn",
+              "detail": "Zurigo, Zürich — ongoing, last day: 17 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-11T17:50:26.068Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-11T23:14:32.116Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "ZH",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "288",
+          "value": "310",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -241,69 +241,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "2. LAZY SMOKING SUNDAY 2026 VON BIG SMOKE",
-              "detail": "Casinotheater, Winterthur",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+            },
+            {
+              "label": "Hommage à Géza Anda",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+            },
+            {
+              "label": "Ivo Martin",
+              "detail": "Komplex457",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+            },
+            {
+              "label": "DanyMar",
+              "detail": "Aelpli Bar",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+            },
+            {
+              "label": "Judith Hill",
+              "detail": "Kaufleuten",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+            },
+            {
+              "label": "Jazz Jam",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+            },
+            {
+              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
+              "detail": "Dietikon — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+            },
+            {
+              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
+              "detail": "Zurich, Zürich — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
             },
             {
               "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich",
-              "date": "2026-10-11",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Sterilisieren mit Hans",
-              "detail": "Urdorf",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
-            },
-            {
-              "label": "Grasshopper Club Zürich - BSC Young Boys",
-              "detail": "Stadion Letzigrund, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
-            },
-            {
-              "label": "Kunst und Natur 2026",
-              "detail": "Botanischer Garten der Universität Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
-            },
-            {
-              "label": "Groove deine Arbeit",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
-            },
-            {
-              "label": "«Beethoven und Bruckner» – Chorsinfonik",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Aula alte Turnhalle",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
-            },
-            {
-              "label": "Ein Sommer-nachtstraum",
-              "detail": "Opernhaus, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
-            },
-            {
-              "label": "Tarja - Frisson Live 2026",
-              "detail": "Club Vaudeville, Lindau",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
+              "label": "Japanese Journey: Taste of Autumn",
+              "detail": "Zurigo, Zürich — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-11T17:50:26.068Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-11T23:14:32.116Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "ZH",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "288",
+          "value": "310",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -345,69 +345,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "2. LE DIMANCHE PARESSEUX DE LA FUMÉE 2026 par BIG SMOKE",
-              "detail": "Casinotheater, Winterthur",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/2-lazy-smoking-sunday-2026-by-big-smoke/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+            },
+            {
+              "label": "Hommage à Géza Anda",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+            },
+            {
+              "label": "Ivo Martin",
+              "detail": "Komplex457",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+            },
+            {
+              "label": "DanyMar",
+              "detail": "Aelpli Bar",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+            },
+            {
+              "label": "Judith Hill",
+              "detail": "Kaufleuten",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+            },
+            {
+              "label": "Jazz Jam",
+              "detail": "Musikklub Mehrspur",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+            },
+            {
+              "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
+              "detail": "Dietikon — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
+            },
+            {
+              "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
+              "detail": "Zurich, Zürich — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
             },
             {
               "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich",
-              "date": "2026-10-11",
+              "detail": "Bauschänzli Biergarten & Grill, Zürich — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
             },
             {
-              "label": "Sterilisieren mit Hans",
-              "detail": "Urdorf",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sterilisieren-mit-hans/"
-            },
-            {
-              "label": "Grasshopper Club Zürich - BSC Young Boys",
-              "detail": "Stadion Letzigrund, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grasshopper-club-zuerich-bsc-young-boys/"
-            },
-            {
-              "label": "Kunst und Natur 2026",
-              "detail": "Botanischer Garten der Universität Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kunst-und-natur-2026-4/"
-            },
-            {
-              "label": "Boostez votre travail",
-              "detail": "Tanzhaus Zürich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/groove-your-labour_ASBViBT"
-            },
-            {
-              "label": "«Beethoven und Bruckner» – Chorsinfonik",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/beethoven-und-bruckner-chorsinfonik-2/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Aula alte Turnhalle",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wetzikon-zh/leidenschaft-und-samba_AsASqdc"
-            },
-            {
-              "label": "Ein Sommer-nachtstraum",
-              "detail": "Opernhaus, Zürich",
-              "date": "2026-10-11",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ein-sommer-nachtstraum/"
-            },
-            {
-              "label": "Tarja - Frisson Live 2026",
-              "detail": "Club Vaudeville, Lindau",
-              "date": "2026-10-11",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/lindau-bodensee/tarja-frisson-live-2026_ACBkqv5"
+              "label": "Voyage au Japon : Saveurs d'automne",
+              "detail": "Zurigo, Zürich — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-11T17:50:26.068Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-11T23:14:32.116Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

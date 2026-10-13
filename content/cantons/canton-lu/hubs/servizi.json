@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "f6f9c20c8ddbe0b50a5e85763a74fa94537cff1f8c252c3c2a72edf46fbe7a60",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "937d94394223f7441ead93122809a6c7dbd2839fdb6c861d554a95301696dc45",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -56,13 +56,18 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
+              "date": "2026-08-26",
+              "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
+            },
             {
               "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
               "date": "2026-08-18",
@@ -87,14 +92,9 @@
               "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
               "date": "2026-07-02",
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
-            },
-            {
-              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +161,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "LU",
@@ -200,13 +200,18 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
+              "date": "2026-08-26",
+              "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
+            },
             {
               "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
               "date": "2026-08-18",
@@ -231,14 +236,9 @@
               "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
               "date": "2026-07-02",
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
-            },
-            {
-              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -301,7 +301,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "LU",
@@ -340,13 +340,18 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
+              "date": "2026-08-26",
+              "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
+            },
             {
               "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
               "date": "2026-08-18",
@@ -371,14 +376,9 @@
               "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
               "date": "2026-07-02",
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
-            },
-            {
-              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -441,7 +441,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "LU",
@@ -480,13 +480,18 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Wir reden weiter: Aktionstag Psychische Gesundheit am 10. Oktober 2026",
+              "date": "2026-08-26",
+              "url": "https://www.lups.ch/2026/10/08/wir-reden-weiter-aktionstag-psychische-gesundheit-am-10-oktober-2026/"
+            },
             {
               "label": "Luzerner Psychiatrie AG feiert 20-Jahr-Jubiläum und stellt Weichen für die Zukunft",
               "date": "2026-08-18",
@@ -511,14 +516,9 @@
               "label": "Chefarzt der Stationären Dienste verlässt die Luzerner Psychiatrie",
               "date": "2026-07-02",
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
-            },
-            {
-              "label": "Norbert Arnet wird neuer Leiter Finanzen & ICT und Mitglied der Geschäftsleitung der Luzerner Psychiatrie AG",
-              "date": "2026-07-02",
-              "url": "https://www.lups.ch/2026/07/13/norbert-arnet-wird-neuer-leiter-finanzen-ict-und-mitglied-der-geschaeftsleitung-der-luzerner-psychiatrie-ag/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -577,7 +577,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

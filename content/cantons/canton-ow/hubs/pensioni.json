@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "a83d3d39c63eac36411b737ae9545f6fb742671969cebb2a4c4eab3920391e14",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "f848465f04ddacc3f8bd3dc1673e4c80baa8d6f48d35b24e74b4fde9dd41ce72",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -136,7 +136,7 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -177,7 +177,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "OW",
@@ -286,26 +286,26 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "AVS and complementary services in the Canton of Obvaldo: how the cashier works",
+          "title": "AVS and complementary services in the Canton of Obwalden: how the cashier works",
           "url": "/en/swiss-articles/avs-supplementary-benefits-obwalden-fund/",
-          "excerpt": "AVS Compensation Fund of the Canton of Obvaldo: contributions, calculation of the annuity, redemption of gaps and complementary benefits for the minimum living.",
+          "excerpt": "AVS Compensation Fund of the Canton of Obwalden: contributions, calculation of the annuity, redemption of gaps and complementary benefits for the minimum living.",
           "date": "2026-08-30T05:42:46.372Z"
         },
         {
-          "title": "AVS in Obvaldo: annuity and complementary services",
+          "title": "AVS in Obwalden: annuity and complementary services",
           "url": "/en/swiss-articles/avc-contribution-gaps-benefits/",
-          "excerpt": "How the first pillar and complementary services work in the Obvaldo Canton. An AVS annuity guide.",
+          "excerpt": "How the first pillar and complementary services work in the Obwalden Canton. An AVS annuity guide.",
           "date": "2026-08-23T08:07:53.918Z"
         },
         {
-          "title": "AVS and complementary services in Canton Obvaldo: the guide",
+          "title": "AVS and complementary services in Canton Obwalden: the guide",
           "url": "/en/swiss-articles/avs-supplementary-benefits-obwalden-guide/",
-          "excerpt": "How the first AVS pillar works in the Obvaldo Canton: role of the compensation fund, contribution gaps and complementary benefits to cover the minimum living wage in 2026.",
+          "excerpt": "How the first AVS pillar works in the Obwalden Canton: role of the compensation fund, contribution gaps and complementary benefits to cover the minimum living wage in 2026.",
           "date": "2026-08-30T05:56:32.507Z"
         }
       ],
@@ -327,7 +327,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "OW",
@@ -436,7 +436,7 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -477,7 +477,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "OW",
@@ -586,7 +586,7 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -627,7 +627,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

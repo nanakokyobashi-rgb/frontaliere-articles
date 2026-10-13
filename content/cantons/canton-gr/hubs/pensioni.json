@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "7d84c89944aaf8760e9058b28d9deffb96cc408ea26ac290377c17f9f35e85f5",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "86f4a7d8a8bc689398bd16ed9ea7fe92ab487024a822d4bc463b191d30dab2dc",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -152,7 +152,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GR",
@@ -259,7 +259,7 @@
       "curatedArticles": [
         {
           "title": "AVS and complementary services in the Canton of Graubünden",
-          "url": "/en/swiss-articles/avs-complementary-benefits-canton-grisons/",
+          "url": "/en/swiss-articles/avs-complementary-benefits-canton-graubunden/",
           "excerpt": "First pillar, contribution gaps and access to supplementary benefits: a practical guide for residents and taxpayers of the Canton of Graubünden.",
           "date": "2026-09-02T01:39:16.684Z"
         }
@@ -282,7 +282,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GR",
@@ -412,7 +412,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GR",
@@ -542,7 +542,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

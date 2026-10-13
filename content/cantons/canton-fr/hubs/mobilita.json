@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "e0ad3b91b5cc52e93877af475b8194c422edab5802dba469d6653667337d2b2e",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "eda4b09d1dc68983355bdc6fe4715480a3380d4e4cfd6f7b564ded2bdc370350",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "updatedAt": "2026-10-13T01:02:53.675Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "21",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,13 +92,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
+              "date": "2026-10-07T13:45:16.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
+            },
             {
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
@@ -123,17 +128,18 @@
               "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
-            },
-            {
-              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
-              "date": "2026-10-01T08:52:05.000Z",
-              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
+          "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
+          "excerpt": "Tredici interruzioni sulla linea dall'inizio dell'anno Oltre 150’000 passeggeri e più di 700 treni ogni giorno Cavi incendiati, binari danneggiati e un volatile",
+          "date": "2026-10-08T21:08:07.621Z"
+        },
         {
           "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-friburgo-zone-tariffe/",
@@ -147,16 +153,16 @@
           "date": "2026-08-24T01:48:56.377Z"
         },
         {
-          "title": "Friburgo: 117 milioni per 13 nuovi treni Flirt",
-          "url": "/articoli-svizzera/stadler-rail-friburgo-117-milioni/",
-          "excerpt": "Stadler Rail fornirà 13 nuovi treni Flirt Evo ai Trasporti pubblici friburghesi per 117 milioni CHF. Prime consegne a dicembre 2028.",
-          "date": "2026-08-21T09:43:21.760Z"
-        },
-        {
           "title": "Abbonamenti trasporti pubblici nel Cantone di Friburgo: zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
           "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Friburgo: 117 milioni per 13 nuovi treni Flirt",
+          "url": "/articoli-svizzera/stadler-rail-friburgo-117-milioni/",
+          "excerpt": "Stadler Rail fornirà 13 nuovi treni Flirt Evo ai Trasporti pubblici friburghesi per 117 milioni CHF. Prime consegne a dicembre 2028.",
+          "date": "2026-08-21T09:43:21.760Z"
         }
       ],
       "links": [
@@ -169,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "FR",
@@ -179,13 +185,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
-          "note": "reports as of 6 October 2026"
+          "value": "21",
+          "note": "reports as of 13 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "7",
-          "note": "reports as of 6 October 2026"
+          "value": "5",
+          "note": "reports as of 13 October 2026"
         }
       ],
       "dataBlocks": [
@@ -244,13 +250,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
+              "date": "2026-10-07T13:45:16.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
+            },
             {
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
@@ -275,40 +286,41 @@
               "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
-            },
-            {
-              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
-              "date": "2026-10-01T08:52:05.000Z",
-              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Public transport tickets canton Freiburg: zones and fares",
+          "title": "Geneva–Fribourg, a railway route under pressure",
+          "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
+          "excerpt": "Thirteen disruptions on the line since the beginning of the year More than 150’000 passengers and over 700 trains every day Burnt cables, damaged tracks and a bird",
+          "date": "2026-10-08T21:08:07.621Z"
+        },
+        {
+          "title": "Public transport tickets canton Fribourg: zones and fares",
           "url": "/en/swiss-articles/fribourg-public-transport-subscriptions-zones/",
-          "excerpt": "Progressive fare zones, annual and monthly subscriptions, discounts for students: a complete guide to public transport in Freiburg and the country.",
+          "excerpt": "Progressive fare zones, annual and monthly subscriptions, discounts for students: a complete guide to public transport in Fribourg and the country.",
           "date": "2026-08-24T02:28:56.399Z"
         },
         {
-          "title": "Freiburg Transport Subscriptions: Zones and Rates",
-          "url": "/en/swiss-articles/public-transport-subscriptions-friburgo/",
+          "title": "Fribourg Transport Subscriptions: Zones and Rates",
+          "url": "/en/swiss-articles/public-transport-subscriptions-fribourg/",
           "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
           "date": "2026-08-24T01:48:56.377Z"
         },
         {
-          "title": "Freiburg: 117 million for 13 new Flirt trains",
-          "url": "/en/swiss-articles/stadler-rail-fribourg-117-million/",
-          "excerpt": "Stadler Rail will supply 13 new Flirt Evo trains to the Freiburg Public Transport for CHF 117 million. First deliveries in December 2028.",
-          "date": "2026-08-21T09:43:21.760Z"
+          "title": "Public transport passes in the canton of Fribourg: zones and fares",
+          "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
+          "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
+          "date": "2026-08-18T00:58:21.517Z"
         },
         {
-          "title": "Public transport passes in the canton of Freiburg: zones and fares",
-          "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
-          "excerpt": "Here are the details on public transport subscriptions in the Canton of Freiburg.",
-          "date": "2026-08-18T00:58:21.517Z"
+          "title": "Fribourg: 117 million for 13 new Flirt trains",
+          "url": "/en/swiss-articles/stadler-rail-fribourg-117-million/",
+          "excerpt": "Stadler Rail will supply 13 new Flirt Evo trains to the Fribourg Public Transport for CHF 117 million. First deliveries in December 2028.",
+          "date": "2026-08-21T09:43:21.760Z"
         }
       ],
       "links": [
@@ -321,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "FR",
@@ -331,13 +343,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "21",
+          "note": "Meldungen vom 13. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "7",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "5",
+          "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -396,13 +408,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
+              "date": "2026-10-07T13:45:16.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
+            },
             {
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
@@ -427,17 +444,18 @@
               "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
-            },
-            {
-              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
-              "date": "2026-10-01T08:52:05.000Z",
-              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
+          "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
+          "excerpt": "Dreizehn Unterbrechungen auf der Strecke seit Jahresbeginn Über 150’000 Fahrgäste und mehr als 700 Züge täglich Verbrannte Kabel, beschädigte Gleise und ein Vogel",
+          "date": "2026-10-08T21:08:07.621Z"
+        },
         {
           "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
           "url": "/de/schweiz-artikel/freiburg-fahrkarten-abo-zonen-tarife/",
@@ -451,16 +469,16 @@
           "date": "2026-08-24T01:48:56.377Z"
         },
         {
+          "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
+          "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
+          "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
           "title": "Freiburg: 117 Millionen für 13 neue FLIRT-Züge",
           "url": "/de/schweiz-artikel/stadler-rail-freiburg-117-millionen/",
           "excerpt": "Stadler Rail wird 13 neue Flirt Evo-Züge für CHF 117 Mio. an den öffentlichen Verkehr in Freiburg liefern. Erste Auslieferungen im Dezember 2028.",
           "date": "2026-08-21T09:43:21.760Z"
-        },
-        {
-          "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/fribourg-oeffentliche-verkehr-abos/",
-          "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
-          "date": "2026-08-18T00:58:21.517Z"
         }
       ],
       "links": [
@@ -473,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "FR",
@@ -483,13 +501,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
-          "note": "signalements au 6 octobre 2026"
+          "value": "21",
+          "note": "signalements au 13 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "7",
-          "note": "signalements au 6 octobre 2026"
+          "value": "5",
+          "note": "signalements au 13 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -548,13 +566,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
+              "date": "2026-10-07T13:45:16.000Z",
+              "url": "https://www.fr.ch/de/rimu/news/ein-meilenstein-fuer-das-velofahren-im-alltag-der-neue-kantonale-velowegnetzplan-liegt-vor"
+            },
             {
               "label": "Restriction de circulation - Route de Champriond - du 12 octobre au 27 novembre 2026",
               "date": "2026-10-05T13:37:46.000Z",
@@ -579,17 +602,18 @@
               "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
-            },
-            {
-              "label": "Course pédestre Morat – Fribourg : fermeture de la route cantonale",
-              "date": "2026-10-01T08:52:05.000Z",
-              "url": "https://www.fr.ch/dsjs/pol/actualites/course-pedestre-morat-fribourg-fermeture-de-la-route-cantonale-4"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
+          "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
+          "excerpt": "Treize interruptions sur la ligne depuis le début de l’année Plus de 150’000 passagers et plus de 700 trains chaque jour Des câbles incendiés, des voies endommagées et un volatile",
+          "date": "2026-10-08T21:08:07.621Z"
+        },
         {
           "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
           "url": "/fr/articles-suisse/fribourg-abonnements-transports-zones-tarifs/",
@@ -603,16 +627,16 @@
           "date": "2026-08-24T01:48:56.377Z"
         },
         {
-          "title": "Fribourg : 117 millions pour 13 nouveaux trains Flirt",
-          "url": "/fr/articles-suisse/stadler-rail-fribourg-117-millions/",
-          "excerpt": "Stadler Rail fournira 13 nouveaux trains Flirt Evo aux Transports publics fribourgeois pour CHF 117 millions. Premières livraisons en décembre 2028.",
-          "date": "2026-08-21T09:43:21.760Z"
-        },
-        {
           "title": "Abonnements transports publics dans le canton de Fribourg : zones et tarifs",
           "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
           "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
           "date": "2026-08-18T00:58:21.517Z"
+        },
+        {
+          "title": "Fribourg : 117 millions pour 13 nouveaux trains Flirt",
+          "url": "/fr/articles-suisse/stadler-rail-fribourg-117-millions/",
+          "excerpt": "Stadler Rail fournira 13 nouveaux trains Flirt Evo aux Transports publics fribourgeois pour CHF 117 millions. Premières livraisons en décembre 2028.",
+          "date": "2026-08-21T09:43:21.760Z"
         }
       ],
       "links": [
@@ -625,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

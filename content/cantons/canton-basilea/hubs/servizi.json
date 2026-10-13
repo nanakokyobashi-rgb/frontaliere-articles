@@ -4,22 +4,22 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "2b862334c0d2b77da5b594bd2d01475d7402015436db33c49e93a0d9db40da1d",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "33d35b1e5c7898783a5de77efe4f95a5164e3aa9f84cf6ae51f202e9a1122b0a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-07T00:42:24.752Z",
+      "updatedAt": "2026-10-13T08:13:47.853Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     }
   ],
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "4",
-          "note": "offerta mediana 561,50 CHF"
+          "note": "offerta mediana 541 CHF"
         }
       ],
       "dataBlocks": [
@@ -66,7 +66,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -76,37 +76,37 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -114,30 +114,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "BL3100",
-              "value": "2000 CHF",
+              "label": "BL5474",
+              "value": "920 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1153"
             },
             {
-              "label": "BL4655",
-              "value": "922 CHF",
+              "label": "BL9018",
+              "value": "920 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1152"
             },
             {
-              "label": "BL17655",
-              "value": "201 CHF",
+              "label": "BL36636",
+              "value": "162 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1154"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -241,7 +241,7 @@
         {
           "label": "Plate auctions running",
           "value": "4",
-          "note": "typical bid 561.50 CHF"
+          "note": "typical bid 541 CHF"
         }
       ],
       "dataBlocks": [
@@ -268,7 +268,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -278,37 +278,37 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -316,30 +316,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "BL3100",
-              "value": "2,000 CHF",
+              "label": "BL5474",
+              "value": "920 CHF",
               "detail": "current bid",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1153"
             },
             {
-              "label": "BL4655",
-              "value": "922 CHF",
+              "label": "BL9018",
+              "value": "920 CHF",
               "detail": "current bid",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1152"
             },
             {
-              "label": "BL17655",
-              "value": "201 CHF",
+              "label": "BL36636",
+              "value": "162 CHF",
               "detail": "current bid",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1154"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +363,7 @@
         },
         {
           "title": "Residence permit B in Basel City: requirements and procedure",
-          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-basilea-citta-en/",
+          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-basel-citta-en/",
           "excerpt": "Here are the requirements and documents necessary to obtain the residence permit B in the Canton of Basel-City, as well as the renewal procedure and the competent office.",
           "date": "2026-08-18T06:57:51.193Z"
         },
@@ -418,7 +418,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -435,7 +435,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "4",
-          "note": "mittleres Gebot 561.50 CHF"
+          "note": "mittleres Gebot 541 CHF"
         }
       ],
       "dataBlocks": [
@@ -462,7 +462,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -472,37 +472,37 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -510,30 +510,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "BL3100",
-              "value": "2’000 CHF",
+              "label": "BL5474",
+              "value": "920 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1153"
             },
             {
-              "label": "BL4655",
-              "value": "922 CHF",
+              "label": "BL9018",
+              "value": "920 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1152"
             },
             {
-              "label": "BL17655",
-              "value": "201 CHF",
+              "label": "BL36636",
+              "value": "162 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1154"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
         },
         {
           "title": "Aufenthaltsbewilligung B in Basel-Stadt: Voraussetzungen und Verfahren",
-          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-basilea-citta-de/",
+          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-basel-citta-de/",
           "excerpt": "Hier finden Sie die Voraussetzungen und Unterlagen zur Erlangung der Aufenthaltsbewilligung B im Kanton Basel-Stadt sowie das Erneuerungsverfahren und die zuständige Stelle.",
           "date": "2026-08-18T06:57:51.193Z"
         },
@@ -612,7 +612,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -629,7 +629,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "4",
-          "note": "offre centrale 561,50 CHF"
+          "note": "offre centrale 541 CHF"
         }
       ],
       "dataBlocks": [
@@ -656,7 +656,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -666,37 +666,37 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -704,30 +704,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "BL3100",
-              "value": "2 000 CHF",
+              "label": "BL5474",
+              "value": "920 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1147"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1153"
             },
             {
-              "label": "BL4655",
-              "value": "922 CHF",
+              "label": "BL9018",
+              "value": "920 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1148"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1152"
             },
             {
-              "label": "BL17655",
-              "value": "201 CHF",
+              "label": "BL36636",
+              "value": "162 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1149"
+              "date": "2026-10-18T18:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1154"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
         },
         {
           "title": "Permis de séjour B à Bâle-Ville : exigences et procédure",
-          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-basilea-citta-fr/",
+          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-bale-citta-fr/",
           "excerpt": "Voici les conditions et les documents nécessaires pour obtenir le permis de séjour B dans le canton de Bâle-Ville, ainsi que la procédure de renouvellement et le bureau compétent.",
           "date": "2026-08-18T06:57:51.193Z"
         },
@@ -798,7 +798,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

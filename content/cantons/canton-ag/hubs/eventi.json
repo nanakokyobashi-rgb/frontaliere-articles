@@ -4,17 +4,17 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "2f7f7108519683cded96514a90ca4661d07ba1a656ad0352bc094e8cfc9ef344",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "f665bb499523171905c1a49d87e7a69162b2c48d348b77b03cb5c86a66c04ba6",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "76",
+          "value": "87",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Herbst Kinderferienwoche, Mittwoch, 7.10.26",
-              "detail": "Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-mittwoch-71026/"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Eniwa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
             },
             {
-              "label": "Ein Blick: Susanne Brem",
-              "detail": "Singisen Forum",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-susanne-brem_ABkNUPU"
-            },
-            {
-              "label": "Die Fledermäuse sind los!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-fledermaeuse-sind-los/"
-            },
-            {
-              "label": "«Märchen im Museum»",
-              "detail": "Schweizer Kindermuseum, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/maerchen-im-museum/"
+              "label": "Seelentanz-Achterbahn",
+              "detail": "Reusspark - Zentrum für Pflege und Betreung",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
             },
             {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Wandern in der UNESCO Biosphäre Entlebuch",
-              "detail": "out & ABOUT, Biberstein — in corso, ultimo giorno: 7 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wandern-in-der-unesco-biosphaere-entlebuch/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
             },
             {
               "label": "Naturspaziergang",
               "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — in corso, ultimo giorno: 13 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
-              "label": "Hoftheater \"Camping forever\"",
-              "detail": "Gröflikeller — in corso, ultimo giorno: 10 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoftheater-camping-forever/"
+              "label": "Afterwork Live Musik - The Cordon Blues Band",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-cordon-blues-band_ANMHAC4"
             },
             {
-              "label": "Herbst Kinderferienwoche, Donnerstag, 8.10.26",
+              "label": "Vortrag und Buchvernissage: Masterarbeit zum Bilderverkauf",
               "detail": "Baden",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-donnerstag-81026/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-buchvernissage-masterarbeit-zum-bilderverkauf/"
+            },
+            {
+              "label": "SLOPE (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/slope-de_AFR3ch6"
+            },
+            {
+              "label": "The Beauty of Gemina (LI/CH) – «VEIL OF RAIN TOUR 2026»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/the-beauty-of-gemina-lich-veil-of-rain-tour-2026_ALRRFix"
+            },
+            {
+              "label": "POLARBAEREN x LA NEFERA",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +127,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "AG",
@@ -137,7 +137,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "76",
+          "value": "87",
           "note": "from the site’s events calendar"
         }
       ],
@@ -148,69 +148,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Herbst Kinderferienwoche, Mittwoch, 7.10.26",
-              "detail": "Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-mittwoch-71026/"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Eniwa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
             },
             {
-              "label": "Ein Blick: Susanne Brem",
-              "detail": "Singisen Forum",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-susanne-brem_ABkNUPU"
-            },
-            {
-              "label": "Die Fledermäuse sind los!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-fledermaeuse-sind-los/"
-            },
-            {
-              "label": "«Märchen im Museum»",
-              "detail": "Schweizer Kindermuseum, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/maerchen-im-museum/"
+              "label": "Seelentanz-Achterbahn",
+              "detail": "Reusspark - Zentrum für Pflege und Betreung",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
             },
             {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — ongoing, last day: 19 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Wandern in der UNESCO Biosphäre Entlebuch",
-              "detail": "out & ABOUT, Biberstein — ongoing, last day: 7 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wandern-in-der-unesco-biosphaere-entlebuch/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — ongoing, last day: 17 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
             },
             {
               "label": "Naturspaziergang",
               "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — ongoing, last day: 13 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
-              "label": "Hoftheater \"Camping forever\"",
-              "detail": "Gröflikeller — ongoing, last day: 10 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoftheater-camping-forever/"
+              "label": "Afterwork Live Musik - The Cordon Blues Band",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-cordon-blues-band_ANMHAC4"
             },
             {
-              "label": "Herbst Kinderferienwoche, Donnerstag, 8.10.26",
+              "label": "Vortrag und Buchvernissage: Masterarbeit zum Bilderverkauf",
               "detail": "Baden",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-donnerstag-81026/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-buchvernissage-masterarbeit-zum-bilderverkauf/"
+            },
+            {
+              "label": "SLOPE (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/slope-de_AFR3ch6"
+            },
+            {
+              "label": "The Beauty of Gemina (LI/CH) – «VEIL OF RAIN TOUR 2026»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/the-beauty-of-gemina-lich-veil-of-rain-tour-2026_ALRRFix"
+            },
+            {
+              "label": "POLARBAEREN x LA NEFERA",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +223,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +237,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "AG",
@@ -247,7 +247,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "76",
+          "value": "87",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -258,69 +258,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Herbst Kinderferienwoche, Mittwoch, 7.10.26",
-              "detail": "Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-mittwoch-71026/"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Eniwa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
             },
             {
-              "label": "Ein Blick: Susanne Brem",
-              "detail": "Singisen Forum",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-susanne-brem_ABkNUPU"
-            },
-            {
-              "label": "Die Fledermäuse sind los!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-fledermaeuse-sind-los/"
-            },
-            {
-              "label": "«Märchen im Museum»",
-              "detail": "Schweizer Kindermuseum, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/maerchen-im-museum/"
+              "label": "Seelentanz-Achterbahn",
+              "detail": "Reusspark - Zentrum für Pflege und Betreung",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
             },
             {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Wandern in der UNESCO Biosphäre Entlebuch",
-              "detail": "out & ABOUT, Biberstein — läuft, letzter Tag: 7. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wandern-in-der-unesco-biosphaere-entlebuch/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
             },
             {
               "label": "Naturspaziergang",
               "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — läuft, letzter Tag: 13. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
-              "label": "Hoftheater \"Camping forever\"",
-              "detail": "Gröflikeller — läuft, letzter Tag: 10. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoftheater-camping-forever/"
+              "label": "Afterwork Live Musik - The Cordon Blues Band",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-cordon-blues-band_ANMHAC4"
             },
             {
-              "label": "Herbst Kinderferienwoche, Donnerstag, 8.10.26",
+              "label": "Vortrag und Buchvernissage: Masterarbeit zum Bilderverkauf",
               "detail": "Baden",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-donnerstag-81026/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-buchvernissage-masterarbeit-zum-bilderverkauf/"
+            },
+            {
+              "label": "SLOPE (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/slope-de_AFR3ch6"
+            },
+            {
+              "label": "The Beauty of Gemina (LI/CH) – «VEIL OF RAIN TOUR 2026»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/the-beauty-of-gemina-lich-veil-of-rain-tour-2026_ALRRFix"
+            },
+            {
+              "label": "POLARBAEREN x LA NEFERA",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +333,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +347,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "AG",
@@ -357,7 +357,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "76",
+          "value": "87",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -368,69 +368,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Herbst Kinderferienwoche, Mittwoch, 7.10.26",
-              "detail": "Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-mittwoch-71026/"
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Eniwa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
             },
             {
-              "label": "Ein Blick: Susanne Brem",
-              "detail": "Singisen Forum",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/muri-ag/ein-blick-susanne-brem_ABkNUPU"
-            },
-            {
-              "label": "Die Fledermäuse sind los!",
-              "detail": "Historisches Museum Baden, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-fledermaeuse-sind-los/"
-            },
-            {
-              "label": "«Märchen im Museum»",
-              "detail": "Schweizer Kindermuseum, Baden",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/maerchen-im-museum/"
+              "label": "Seelentanz-Achterbahn",
+              "detail": "Reusspark - Zentrum für Pflege und Betreung",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
             },
             {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
-            {
-              "label": "Wandern in der UNESCO Biosphäre Entlebuch",
-              "detail": "out & ABOUT, Biberstein — en cours, dernier jour : 7 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wandern-in-der-unesco-biosphaere-entlebuch/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
             },
             {
               "label": "Naturspaziergang",
               "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — en cours, dernier jour : 13 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
-              "label": "Hoftheater \"Camping forever\"",
-              "detail": "Gröflikeller — en cours, dernier jour : 10 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hoftheater-camping-forever/"
+              "label": "Afterwork Live Musik - The Cordon Blues Band",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-the-cordon-blues-band_ANMHAC4"
             },
             {
-              "label": "Herbst Kinderferienwoche, Donnerstag, 8.10.26",
+              "label": "Vortrag und Buchvernissage: Masterarbeit zum Bilderverkauf",
               "detail": "Baden",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbst-kinderferienwoche-donnerstag-81026/"
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-und-buchvernissage-masterarbeit-zum-bilderverkauf/"
+            },
+            {
+              "label": "SLOPE (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/slope-de_AFR3ch6"
+            },
+            {
+              "label": "The Beauty of Gemina (LI/CH) – «VEIL OF RAIN TOUR 2026»",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/the-beauty-of-gemina-lich-veil-of-rain-tour-2026_ALRRFix"
+            },
+            {
+              "label": "POLARBAEREN x LA NEFERA",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-15",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

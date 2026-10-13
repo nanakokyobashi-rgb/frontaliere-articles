@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "d52f20f455d999db67a89f961f2cd57da4ba8c1e238a5e07e9afefe94845babb",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "49a08ca26f2176b39799e24078425071cee72e5b6527a0ac3ee4afe433322916",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -46,7 +46,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -59,7 +59,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -108,7 +108,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "NE",
@@ -137,7 +137,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -150,7 +150,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -195,7 +195,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "NE",
@@ -224,7 +224,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -237,25 +237,25 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
           "title": "Führerschein im Kanton Neuenburg: Umschulung und Prüfungen",
-          "url": "/de/schweiz-artikel/fuhrerschein-neuchatel-umwandlung-und-pruefungen/",
+          "url": "/de/schweiz-artikel/fuhrerschein-neuenburg-umwandlung-und-pruefungen/",
           "excerpt": "Erfahren Sie, wie Sie Ihren ausländischen Führerschein umtauschen und Prüfungen im Kanton Neuenburg ablegen können.",
           "date": "2026-09-07T10:58:31.983Z"
         },
         {
           "title": "Krankenkassenprämien Neuenburg für junge Erwachsene 19-25 Jahre",
-          "url": "/de/schweiz-artikel/krankenkasse-neuchatel-jugendliche/",
+          "url": "/de/schweiz-artikel/krankenkasse-neuenburg-jugendliche/",
           "excerpt": "Analyse der Bedingungen, Prämien und Optionen der Krankenkassen für junge Erwachsene mit Wohnsitz in Neuenburg im Alter von 19-25 Jahren.",
           "date": "2026-06-25T19:27:13.945Z"
         },
         {
           "title": "Krankenkasse Neuenburg: Leitfaden für junge Erwachsene 19-25 Jahre",
-          "url": "/de/grenzgaenger-artikel/krankenkasse-neuchatel-junge-erwachsene/",
+          "url": "/de/grenzgaenger-artikel/krankenkasse-neuenburg-junge-erwachsene/",
           "excerpt": "Übersicht Krankenkassen in Neuenburg für junge Erwachsene 19-25 Jahre. Details zu den Anforderungen und Verfahren, praktische Informationen.",
           "date": "2026-06-25T14:56:45.223Z"
         }
@@ -282,7 +282,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "NE",
@@ -311,7 +311,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -324,7 +324,7 @@
               "url": "https://www.ne.ch/communiques-de-presse/stabilite-du-taux-de-chomage-au-mois-de-septembre-2026"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -365,7 +365,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "6c5e91dadd58f0b842a9b92dfaccee8925919fa10224dc584d6c60ebb48130bb",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "303b227a7fa108108daab122c7ca920e34278fa3c08e89f64e0f3d376950e126",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-07T00:42:23.283Z",
+      "updatedAt": "2026-10-13T08:13:44.684Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -51,7 +51,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -61,43 +61,53 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-07T00:42:23.283Z"
+          "updatedAt": "2026-10-13T08:13:44.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Indexation du salaire minimum pour 2027",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/45114"
+            },
+            {
+              "label": "J'arrive en fin de droit, et après ?",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/261"
+            },
             {
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
@@ -117,19 +127,9 @@
               "label": "Santé mentale : un programme 2026 dédié aux arts",
               "date": "2026-10-05",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
-            },
-            {
-              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45124"
-            },
-            {
-              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/15164"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -178,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GE",
@@ -207,7 +207,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -217,43 +217,53 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-07T00:42:23.283Z"
+          "updatedAt": "2026-10-13T08:13:44.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Indexation du salaire minimum pour 2027",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/45114"
+            },
+            {
+              "label": "J'arrive en fin de droit, et après ?",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/261"
+            },
             {
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
@@ -273,19 +283,9 @@
               "label": "Santé mentale : un programme 2026 dédié aux arts",
               "date": "2026-10-05",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
-            },
-            {
-              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45124"
-            },
-            {
-              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/15164"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -330,7 +330,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GE",
@@ -359,7 +359,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -369,43 +369,53 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-07T00:42:23.283Z"
+          "updatedAt": "2026-10-13T08:13:44.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Indexation du salaire minimum pour 2027",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/45114"
+            },
+            {
+              "label": "J'arrive en fin de droit, et après ?",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/261"
+            },
             {
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
@@ -425,19 +435,9 @@
               "label": "Santé mentale : un programme 2026 dédié aux arts",
               "date": "2026-10-05",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
-            },
-            {
-              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45124"
-            },
-            {
-              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/15164"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GE",
@@ -511,7 +511,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -521,43 +521,53 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-06T22:00:00.000Z"
+              "date": "2026-10-12T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-07T22:00:00.000Z"
+              "date": "2026-10-13T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-08T22:00:00.000Z"
+              "date": "2026-10-14T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-09T22:00:00.000Z"
+              "date": "2026-10-15T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-10T22:00:00.000Z"
+              "date": "2026-10-16T22:00:00.000Z"
             },
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-11T22:00:00.000Z"
+              "date": "2026-10-17T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-07T00:42:23.283Z"
+          "updatedAt": "2026-10-13T08:13:44.684Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Indexation du salaire minimum pour 2027",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/45114"
+            },
+            {
+              "label": "J'arrive en fin de droit, et après ?",
+              "date": "2026-10-07",
+              "url": "https://www.ge.ch/node/261"
+            },
             {
               "label": "Le chômage dans le canton de Genève en septembre 2026",
               "date": "2026-10-06T07:15:00.000Z",
@@ -577,19 +587,9 @@
               "label": "Santé mentale : un programme 2026 dédié aux arts",
               "date": "2026-10-05",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/sante-mentale-un-programme-2026-dedie-aux-arts"
-            },
-            {
-              "label": "Vaccinons-nous contre la grippe - Vidéo promotionnelle",
-              "date": "2026-10-05",
-              "url": "https://www.ge.ch/node/45124"
-            },
-            {
-              "label": "Liste des entreprises liées par une CCT d'entreprise en vigueur à Genève",
-              "date": "2026-10-02",
-              "url": "https://www.ge.ch/node/15164"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -630,7 +630,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "3b8ef7d988cfeb08d5d98479b27ed702d0a815359dd2f726ff11c77bc849a604",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "c21b055a2990c557cb9d49142bc2cf04285c78bfca39592a37ac99c35ea5cb37",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-06T18:23:08.067Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "142",
+          "value": "102",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Giri in pony in Piazza Catrina",
-              "detail": "Catrina Experience",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+              "label": "Die versteckte Burg in Waltensburg",
+              "detail": "Parking/Talstation (Curtginet), Breil/Brigels",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-versteckte-burg-in-waltensburg/"
             },
             {
-              "label": "Bartgeier-Tannenhähr-Arve",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+              "label": "Bergkirchli-Konzert mit Christian Albrecht",
+              "detail": "Bergkirchli, Arosa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/arosa/bergkirchli-konzert-mit-christian-albrecht_ACnGRTy"
             },
             {
-              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
-              "detail": "Chur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+              "label": "Kinder- und Jugendzirkuswoche Savognin",
+              "detail": "Val Surses: Savognin, Surses — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
-              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
-              "detail": "Versam, Safiental",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             },
             {
-              "label": "Kids-Nachmittag mit Buchvorlesung",
-              "detail": "Thusis",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+              "label": "MOOS, FARN & SCHACHTELHALM...die Blütenlosen",
+              "detail": "7526 Cinuos-chel — in corso, ultimo giorno: 14 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moos-farn-schachtelhalmdie-bluetenlosen/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
-              "label": "Abendstille in Clugin",
-              "detail": "Clugin",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
             },
             {
-              "label": "Orthodoxe Gesänge – Konzert in Andeer",
-              "detail": "Katholische Fatima-Kirche, Andeer",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             },
             {
-              "label": "Konzert Symphonic Brass Project",
-              "detail": "Hotel Laudinella, St. Moritz",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+              "label": "Brotbacken wie zu Grossmutters Zeiten in Obersaxen-Tomahüs",
+              "detail": "Obersaxen Affeier — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brotbacken-wie-zu-grossmutters-zeiten-in-obersaxen-tomahues/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -128,7 +128,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GR",
@@ -138,7 +138,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "142",
+          "value": "102",
           "note": "from the site’s events calendar"
         }
       ],
@@ -149,69 +149,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Pony rides in Piazza Catrina",
-              "detail": "Catrina Experience",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+              "label": "Die versteckte Burg in Waltensburg",
+              "detail": "Parking/Talstation (Curtginet), Breil/Brigels",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-versteckte-burg-in-waltensburg/"
             },
             {
-              "label": "Bartgeier-Tannenhähr-Arve",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+              "label": "Bergkirchli-Konzert mit Christian Albrecht",
+              "detail": "Bergkirchli, Arosa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/arosa/bergkirchli-konzert-mit-christian-albrecht_ACnGRTy"
             },
             {
-              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
-              "detail": "Chur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+              "label": "Kinder- und Jugendzirkuswoche Savognin",
+              "detail": "Val Surses: Savognin, Surses — ongoing, last day: 16 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
-              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
-              "detail": "Versam, Safiental",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — ongoing, last day: 16 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             },
             {
-              "label": "Kids-Nachmittag mit Buchvorlesung",
-              "detail": "Thusis",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — ongoing, last day: 18 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+              "label": "MOOS, FARN & SCHACHTELHALM...die Blütenlosen",
+              "detail": "7526 Cinuos-chel — ongoing, last day: 14 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moos-farn-schachtelhalmdie-bluetenlosen/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
-              "label": "Abendstille in Clugin",
-              "detail": "Clugin",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — ongoing, last day: 18 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
             },
             {
-              "label": "Orthodoxe Gesänge – Konzert in Andeer",
-              "detail": "Katholische Fatima-Kirche, Andeer",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — ongoing, last day: 15 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             },
             {
-              "label": "Konzert Symphonic Brass Project",
-              "detail": "Hotel Laudinella, St. Moritz",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+              "label": "Brotbacken wie zu Grossmutters Zeiten in Obersaxen-Tomahüs",
+              "detail": "Obersaxen Affeier — ongoing, last day: 15 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brotbacken-wie-zu-grossmutters-zeiten-in-obersaxen-tomahues/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -244,7 +244,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GR",
@@ -254,7 +254,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "142",
+          "value": "102",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -265,69 +265,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Ponyreiten auf der Piazza Catrina",
-              "detail": "Catrina Experience",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+              "label": "Die versteckte Burg in Waltensburg",
+              "detail": "Parking/Talstation (Curtginet), Breil/Brigels",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-versteckte-burg-in-waltensburg/"
             },
             {
-              "label": "Bartgeier-Tannenhäher-Arve",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+              "label": "Bergkirchli-Konzert mit Christian Albrecht",
+              "detail": "Bergkirchli, Arosa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/arosa/bergkirchli-konzert-mit-christian-albrecht_ACnGRTy"
             },
             {
-              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
-              "detail": "Chur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+              "label": "Kinder- und Jugendzirkuswoche Savognin",
+              "detail": "Val Surses: Savognin, Surses — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
-              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
-              "detail": "Versam, Safiental",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             },
             {
-              "label": "Kids-Nachmittag mit Buchvorlesung",
-              "detail": "Thusis",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+              "label": "Werde ein Naturdetektiv und entdecke wie Pflanzen und Tiere sich auf den Winter vorbereiten",
+              "detail": "7526 Cinuos-chel — läuft, letzter Tag: 14. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moos-farn-schachtelhalmdie-bluetenlosen/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
-              "label": "Abendstille in Clugin",
-              "detail": "Clugin",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
             },
             {
-              "label": "Orthodoxe Gesänge – Konzert in Andeer",
-              "detail": "Katholische Fatima-Kirche, Andeer",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             },
             {
-              "label": "Konzert Symphonic Brass Project",
-              "detail": "Hotel Laudinella, St. Moritz",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+              "label": "Brotbacken wie zu Grossmutters Zeiten in Obersaxen-Tomahüs",
+              "detail": "Obersaxen Affeier — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brotbacken-wie-zu-grossmutters-zeiten-in-obersaxen-tomahues/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -360,7 +360,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GR",
@@ -370,7 +370,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "142",
+          "value": "102",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -381,69 +381,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Promenades à poney sur la Piazza Catrina",
-              "detail": "Catrina Experience",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+              "label": "Die versteckte Burg in Waltensburg",
+              "detail": "Parking/Talstation (Curtginet), Breil/Brigels",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-versteckte-burg-in-waltensburg/"
             },
             {
-              "label": "Bartgeier-Tannenhähr-Arve",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bartgeier-tannenhaehr-arve/"
+              "label": "Bergkirchli-Konzert mit Christian Albrecht",
+              "detail": "Bergkirchli, Arosa",
+              "date": "2026-10-13",
+              "url": "https://www.guidle.com/it/events/music/arosa/bergkirchli-konzert-mit-christian-albrecht_ACnGRTy"
             },
             {
-              "label": "Kunst am Mittag zu Ernst Ludwig Kirchners \"Reiter\"",
-              "detail": "Chur",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kunst-am-mittag-zu-ernst-ludwig-kirchners-reiter/"
+              "label": "Kinder- und Jugendzirkuswoche Savognin",
+              "detail": "Val Surses: Savognin, Surses — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kinder-und-jugendzirkuswoche-savognin/"
             },
             {
-              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
-              "detail": "Versam, Safiental",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+              "label": "Polysport-Camp Chur",
+              "detail": "Chur — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/polysport-camp-chur-1/"
             },
             {
-              "label": "Kids-Nachmittag mit Buchvorlesung",
-              "detail": "Thusis",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kids-nachmittag-mit-buchvorlesung-1/"
+              "label": "Oktober-Brunch im Bergrestaurant Triel in Vella",
+              "detail": "Bergrestaurant Triel, Lumnezia — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktober-brunch-im-bergrestaurant-triel-in-vella/"
             },
             {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-5/"
+              "label": "MOOS, FARN & SCHACHTELHALM...die Blütenlosen",
+              "detail": "7526 Cinuos-chel — en cours, dernier jour : 14 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/moos-farn-schachtelhalmdie-bluetenlosen/"
             },
             {
-              "label": "Spieleabend in der libraria",
-              "detail": "Scuol",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spieleabend-in-der-libraria-1/"
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
             },
             {
-              "label": "Abendstille in Clugin",
-              "detail": "Clugin",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendstille-in-clugin-6/"
+              "label": "ORIGEN | GIULIO CESARE",
+              "detail": "Clavadeira Riom, Surses — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/origen-giulio-cesare/"
             },
             {
-              "label": "Orthodoxe Gesänge – Konzert in Andeer",
-              "detail": "Katholische Fatima-Kirche, Andeer",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/orthodoxe-gesaenge-konzert-in-andeer/"
+              "label": "Dorfführung in Valendas",
+              "detail": "Valendas, Safiental — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/dorffuehrung-in-valendas/"
             },
             {
-              "label": "Konzert Symphonic Brass Project",
-              "detail": "Hotel Laudinella, St. Moritz",
-              "date": "2026-10-07",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-moritz/konzert-symphonic-brass-project_AYHpdhT"
+              "label": "Brotbacken wie zu Grossmutters Zeiten in Obersaxen-Tomahüs",
+              "detail": "Obersaxen Affeier — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/brotbacken-wie-zu-grossmutters-zeiten-in-obersaxen-tomahues/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-06T18:23:08.067Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         }
       ],
       "curatedArticles": [
@@ -476,7 +476,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

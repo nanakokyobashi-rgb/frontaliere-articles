@@ -4,22 +4,22 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "24dac053f33e24e04d7abef40fdfc6f5e1c91f6a41aadd918427cd121a04575f",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "4d3f78c3502b52d79f8291841efdcb32e15d3ca367d1a0662bcbf88ff56969b3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -66,7 +66,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -74,30 +74,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "BE64946",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231033"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231122"
             },
             {
-              "label": "BE89689",
+              "label": "BE58358",
               "value": "690 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231032"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231118"
             },
             {
-              "label": "BE328328",
+              "label": "BE384444",
               "value": "490 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231030"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231111"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -110,7 +110,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BE",
@@ -215,7 +215,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -223,30 +223,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "BE64946",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "current bid",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231033"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231122"
             },
             {
-              "label": "BE89689",
+              "label": "BE58358",
               "value": "690 CHF",
               "detail": "current bid",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231032"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231118"
             },
             {
-              "label": "BE328328",
+              "label": "BE384444",
               "value": "490 CHF",
               "detail": "current bid",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231030"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231111"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +259,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -316,7 +316,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BE",
@@ -360,7 +360,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -368,30 +368,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "BE64946",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231033"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231122"
             },
             {
-              "label": "BE89689",
+              "label": "BE58358",
               "value": "690 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231032"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231118"
             },
             {
-              "label": "BE328328",
+              "label": "BE384444",
               "value": "490 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231030"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231111"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -404,7 +404,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -461,7 +461,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BE",
@@ -505,7 +505,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -513,30 +513,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "BE64946",
+              "label": "BE85958",
               "value": "790 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231033"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231122"
             },
             {
-              "label": "BE89689",
+              "label": "BE58358",
               "value": "690 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231032"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231118"
             },
             {
-              "label": "BE328328",
+              "label": "BE384444",
               "value": "490 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-07T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231030"
+              "date": "2026-10-14T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231111"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +549,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -602,7 +602,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

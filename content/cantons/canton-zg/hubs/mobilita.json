@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "196c09a3277de8e4a67ff93086d38b4f37178dba10d01a11cdb0e82073b6b4d9",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "015f0c6116ae6185382ce54f10362e3035229469ab9b204894eeacf701d86751",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "updatedAt": "2026-10-13T01:02:53.675Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "6",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "4",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -67,38 +67,43 @@
               "date": "2026-10-06T05:46:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zürich tra Svincolo autostradale Cham E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 12 ottobre 2026",
-              "date": "2026-09-14T07:00:00.000Z"
-            },
-            {
-              "label": "A14 Diramazione Blegi -> Walterswil Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 13 ottobre 2026",
-              "date": "2026-09-16T06:30:00.000Z"
-            },
-            {
               "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Baar E Svincolo autostradale Zug Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Limitazione del traffico: corsie strette…",
               "value": "Cantiere",
               "detail": "fine prevista: 14 ottobre 2026",
               "date": "2026-09-21T09:07:00.000Z"
             },
             {
-              "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 2.3 Limitazione del traffico: corsie…",
+              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Baar E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 1.9 Limitazione del traffico: corsie…",
               "value": "Cantiere",
-              "detail": "fine prevista: 13 ottobre 2026",
-              "date": "2026-09-21T09:07:00.000Z"
+              "detail": "fine prevista: 19 ottobre 2026",
+              "date": "2026-09-21T09:08:00.000Z"
+            },
+            {
+              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Baar E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 19 ottobre 2026",
+              "date": "2026-10-06T10:26:00.000Z"
+            },
+            {
+              "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 23 ottobre 2026",
+              "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Belagsarbeiten an der Artherstrasse in Zug",
+              "date": "2026-10-09",
+              "url": "https://zg.ch/de/news/2026/September/Belagsarbeiten-an-der-Artherstrasse-in-Zug"
+            },
             {
               "label": "Belagsarbeiten an der Neuheimerstrasse in Baar",
               "date": "2026-10-05",
@@ -115,7 +120,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -136,7 +141,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,12 +152,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 6 October 2026"
+          "note": "reports as of 13 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "6",
-          "note": "reports as of 6 October 2026"
+          "value": "4",
+          "note": "reports as of 13 October 2026"
         }
       ],
       "dataBlocks": [
@@ -186,38 +191,43 @@
               "date": "2026-10-06T05:46:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zürich tra Svincolo autostradale Cham E Raccordo autostradale Diramazione Blegi Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza…",
-              "value": "Roadworks",
-              "detail": "until 12 October 2026",
-              "date": "2026-09-14T07:00:00.000Z"
-            },
-            {
-              "label": "A14 Diramazione Blegi -> Walterswil Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.2",
-              "value": "Roadworks",
-              "detail": "until 13 October 2026",
-              "date": "2026-09-16T06:30:00.000Z"
-            },
-            {
               "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Baar E Svincolo autostradale Zug Situazione: problemi di traffico cantiere, lunghezza [km] 0.9 Limitazione del traffico: corsie strette…",
               "value": "Roadworks",
               "detail": "until 14 October 2026",
               "date": "2026-09-21T09:07:00.000Z"
             },
             {
-              "label": "A14 Walterswil -> Diramazione Blegi tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 2.3 Limitazione del traffico: corsie…",
+              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Baar E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 1.9 Limitazione del traffico: corsie…",
               "value": "Roadworks",
-              "detail": "until 13 October 2026",
-              "date": "2026-09-21T09:07:00.000Z"
+              "detail": "until 19 October 2026",
+              "date": "2026-09-21T09:08:00.000Z"
+            },
+            {
+              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Baar E Svincolo autostradale Walterswil Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 19 October 2026",
+              "date": "2026-10-06T10:26:00.000Z"
+            },
+            {
+              "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 23 October 2026",
+              "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Belagsarbeiten an der Artherstrasse in Zug",
+              "date": "2026-10-09",
+              "url": "https://zg.ch/de/news/2026/September/Belagsarbeiten-an-der-Artherstrasse-in-Zug"
+            },
             {
               "label": "Belagsarbeiten an der Neuheimerstrasse in Baar",
               "date": "2026-10-05",
@@ -234,7 +244,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -255,7 +265,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "ZG",
@@ -266,12 +276,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "note": "Meldungen vom 13. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "6",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "4",
+          "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -305,38 +315,43 @@
               "date": "2026-10-06T05:46:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zürich zwischen Anschluss Cham und Autobahndreieck Verzweigung Blegi Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 12. Oktober 2026",
-              "date": "2026-09-14T07:00:00.000Z"
-            },
-            {
-              "label": "A14 Verzweigung Blegi -> Walterswil Anschluss Baar Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2",
-              "value": "Baustelle",
-              "detail": "bis 13. Oktober 2026",
-              "date": "2026-09-16T06:30:00.000Z"
-            },
-            {
               "label": "A14 Walterswil -> Verzweigung Blegi zwischen Anschluss Baar und Anschluss Zug Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.9 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
               "value": "Baustelle",
               "detail": "bis 14. Oktober 2026",
               "date": "2026-09-21T09:07:00.000Z"
             },
             {
-              "label": "A14 Walterswil -> Verzweigung Blegi zwischen Anschluss Walterswil und Anschluss Baar Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.3 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
+              "label": "A14 Verzweigung Blegi -> Walterswil zwischen Anschluss Baar und Anschluss Walterswil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.9 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
               "value": "Baustelle",
-              "detail": "bis 13. Oktober 2026",
-              "date": "2026-09-21T09:07:00.000Z"
+              "detail": "bis 19. Oktober 2026",
+              "date": "2026-09-21T09:08:00.000Z"
+            },
+            {
+              "label": "A14 Verzweigung Blegi -> Walterswil zwischen Anschluss Baar und Anschluss Walterswil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
+              "value": "Baustelle",
+              "detail": "bis 19. Oktober 2026",
+              "date": "2026-10-06T10:26:00.000Z"
+            },
+            {
+              "label": "A14 Verzweigung Blegi <-> Walterswil zwischen Anschluss Walterswil und Anschluss Baar Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Fahrbahnverengung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 23. Oktober 2026",
+              "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Belagsarbeiten an der Artherstrasse in Zug",
+              "date": "2026-10-09",
+              "url": "https://zg.ch/de/news/2026/September/Belagsarbeiten-an-der-Artherstrasse-in-Zug"
+            },
             {
               "label": "Belagsarbeiten an der Neuheimerstrasse in Baar",
               "date": "2026-10-05",
@@ -353,7 +368,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -374,7 +389,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "ZG",
@@ -385,12 +400,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 6 octobre 2026"
+          "note": "signalements au 13 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "6",
-          "note": "signalements au 6 octobre 2026"
+          "value": "4",
+          "note": "signalements au 13 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -424,38 +439,43 @@
               "date": "2026-10-06T05:46:00.000Z"
             },
             {
-              "label": "A4 Brunnen -> Zurich entre Jonction autoroutière Cham et Echangeur Echangeur de Blegi Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de…",
-              "value": "Chantier",
-              "detail": "jusqu’au 12 octobre 2026",
-              "date": "2026-09-14T07:00:00.000Z"
-            },
-            {
-              "label": "A14 Echangeur de Blegi -> Walterswil Jonction autoroutière Baar Situation: trafic perturbé travaux, longueur [km] 0.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 13 octobre 2026",
-              "date": "2026-09-16T06:30:00.000Z"
-            },
-            {
               "label": "A14 Walterswil -> Echangeur de Blegi entre Jonction autoroutière Baar et Jonction autoroutière Zoug Situation: trafic perturbé travaux, longueur [km] 0.9 Gestion du trafic: rétrécissement des voies…",
               "value": "Chantier",
               "detail": "jusqu’au 14 octobre 2026",
               "date": "2026-09-21T09:07:00.000Z"
             },
             {
-              "label": "A14 Walterswil -> Echangeur de Blegi entre Jonction autoroutière Walterswil et Jonction autoroutière Baar Situation: trafic perturbé travaux, longueur [km] 2.3 Gestion du trafic: rétrécissement des…",
+              "label": "A14 Echangeur de Blegi -> Walterswil entre Jonction autoroutière Baar et Jonction autoroutière Walterswil Situation: trafic perturbé travaux, longueur [km] 1.9 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
-              "detail": "jusqu’au 13 octobre 2026",
-              "date": "2026-09-21T09:07:00.000Z"
+              "detail": "jusqu’au 19 octobre 2026",
+              "date": "2026-09-21T09:08:00.000Z"
+            },
+            {
+              "label": "A14 Echangeur de Blegi -> Walterswil entre Jonction autoroutière Baar et Jonction autoroutière Walterswil Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: rétrécissement des…",
+              "value": "Chantier",
+              "detail": "jusqu’au 19 octobre 2026",
+              "date": "2026-10-06T10:26:00.000Z"
+            },
+            {
+              "label": "A14 Echangeur de Blegi <-> Walterswil entre Jonction autoroutière Walterswil et Jonction autoroutière Baar Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: rétrécissement des…",
+              "value": "Chantier",
+              "detail": "jusqu’au 23 octobre 2026",
+              "date": "2026-10-12T07:36:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Belagsarbeiten an der Artherstrasse in Zug",
+              "date": "2026-10-09",
+              "url": "https://zg.ch/de/news/2026/September/Belagsarbeiten-an-der-Artherstrasse-in-Zug"
+            },
             {
               "label": "Belagsarbeiten an der Neuheimerstrasse in Baar",
               "date": "2026-10-05",
@@ -472,7 +492,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -493,7 +513,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "6320049d9ce3f7b573f2a8a7815a9de8e24dca699037d4383b4ecec6f18d2de4",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "61bebac582b40b0a7c2048e6d3209b6568bd6a6d21efa242720bb2bcc99ec5a5",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -160,7 +160,7 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -223,7 +223,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -361,36 +361,36 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Inner Appenzello succession tax: rates and exemptions",
-          "url": "/en/swiss-articles/inheritance-tax-appenzello-innerrhoden-rates/",
+          "title": "Inner Appenzell succession tax: rates and exemptions",
+          "url": "/en/swiss-articles/inheritance-tax-appenzell-innerrhoden-rates/",
           "excerpt": "Guide to inheritance taxation in Inner Appenzell: how rates work by degree of kinship, spouse and children exemptions, declaration procedure.",
           "date": "2026-09-09T04:27:23.212Z"
         },
         {
           "title": "Appenzell Innerrhoden inheritance tax",
-          "url": "/en/swiss-articles/estate-tax-inheritance-appenzello-interno/",
+          "url": "/en/swiss-articles/estate-tax-inheritance-appenzell-interno/",
           "excerpt": "Inheritance and gift taxation in the canton of Appenzell Innerrhoden: rates by degree of kinship, exemptions for spouses and descendants, declaration procedures and cantonal deadlines.",
           "date": "2026-09-03T20:00:36.821Z"
         },
         {
-          "title": "Appenzello Interno cantonal taxes: rates and deductions",
+          "title": "Appenzell Innerrhoden cantonal taxes: rates and deductions",
           "url": "/en/swiss-articles/cantonal-taxes-appenzell-innerrhoden/",
           "excerpt": "How cantonal taxes work in the Inner Appenzell Canton: the 3 tax levels, allowable deductions, reporting deadlines and portal of the cantonal administration.",
           "date": "2026-08-21T03:56:52.687Z"
         },
         {
-          "title": "Appenzello inheritance taxes: rates and procedures",
+          "title": "Appenzell inheritance taxes: rates and procedures",
           "url": "/en/swiss-articles/inheritance-tax-appenzell/",
           "excerpt": "Inheritance tax in Appenzell: cantonal jurisdiction, rates for kinship, exemptions for spouse. Declaration within 30-90 days. 6-step procedure.",
           "date": "2026-08-27T04:36:47.376Z"
         },
         {
-          "title": "Inheritance and donation tax in Appenzello Esterno",
+          "title": "Inheritance and donation tax in Appenzell Ausserrhoden",
           "url": "/en/swiss-articles/inheritance-tax-appenzell-rhodes-outer/",
           "excerpt": "Rates for degree of kinship, exemptions for spouse and direct descendants, declaration and payment terms in the Outer Appenzell Canton.",
           "date": "2026-09-07T02:20:47.161Z"
@@ -398,7 +398,7 @@
         {
           "title": "Cantonal taxes External Appenzell: rates and deductions",
           "url": "/en/swiss-articles/canton-appenzell-ausserrhoden-cantonal-taxes-rates/",
-          "excerpt": "Complete guide to cantonal and municipal taxes in Appenzello Esterno: 3-level structure, rates, allowable deductions, declaratory deadlines and online procedure.",
+          "excerpt": "Complete guide to cantonal and municipal taxes in Appenzell Ausserrhoden: 3-level structure, rates, allowable deductions, declaratory deadlines and online procedure.",
           "date": "2026-08-25T03:40:05.091Z"
         }
       ],
@@ -424,7 +424,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -562,7 +562,7 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -763,7 +763,7 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -826,7 +826,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "d516c8d57f75652538cf9f93ca580b1669764bfac553bad8acf3e70b9c0a8eb1",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "4a7e1155dc5bc8b5bc656b0b54fa5228aad4e4788412f6304afdcb0d825b0281",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
+          "url": "/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/",
+          "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "Come calcolare imposta fonte Ticino",
           "url": "/articoli-frontaliere/calcolare-imposta-fonte-ticino/",
           "excerpt": "Guida pratica al calcolo dell'imposta alla fonte per frontalieri Ticino-Italia: aliquote, franchigie 2024, credito d'imposta nel 730 e simulatore interattivo.",
@@ -142,12 +148,6 @@
           "url": "/articoli-frontaliere/mornago-frontaliere/",
           "excerpt": "Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri garantisce franchigia €10.000 ai nuovi frontalieri. Scopri tassazione, AVS, LPP e LAMal per chi vive a Mornago e lavora in Ticino.",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Frontaliere Lezzeno-Ticino: permesso G, tasse e procedimenti",
-          "url": "/articoli-frontaliere/vivere-lezzeno-lavorare-ticino-frontaliere/",
-          "excerpt": "Chi vive a Lezzeno e lavora in Ticino può lavorare con il permesso G da frontaliere. Imposta alla fonte in Svizzera, ristorni, AVS, LPP e LAMal: tutto quello che serve sapere.",
-          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -176,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "TI",
@@ -261,6 +261,11 @@
       ],
       "curatedArticles": [
         {
+          "title": "LPP capital: Ticino denies withholding tax refund",
+          "url": "/en/ticino-articles/lpp-capital-withholding-tax-refund/",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "How to calculate Ticino source tax",
           "url": "/en/cross-border-articles/calculate-withholding-tax-ticino/",
           "excerpt": "Practical guide to the calculation of the tax at source for border workers Ticino-Italy: rates, 2024 deductibles, tax credit in 730 and interactive simulator.",
@@ -301,12 +306,6 @@
           "url": "/en/cross-border-articles/live-mornago-work-ticino-cross-border/",
           "excerpt": "From 1 January 2024, the New Frontier Agreement guarantees a €10,000 exemption to new frontier workers. Discover taxation, AVS, LPP and LAMal for those who live in Mornago and work in Ticino.",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Lezzeno-Ticino border guards: G permit, taxes and procedures",
-          "url": "/en/cross-border-articles/live-lezzeno-work-ticino-commuter/",
-          "excerpt": "Those who live in Lezzeno and work in Ticino can work with the G permit as border workers. Tax at source in Switzerland, refreshments, AVS, LPP and LAMal: everything you need to know.",
-          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -335,7 +334,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "TI",
@@ -420,8 +419,13 @@
       ],
       "curatedArticles": [
         {
+          "title": "BVG-Kapital: Tessin verweigert Rückerstattung der Quellensteuer",
+          "url": "/de/tessin-artikel/lpp-kapital-quellensteuer-rueckerstattung/",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "So berechnen Sie die Quellensteuer Tessin",
-          "url": "/de/grenzgaenger-artikel/quellensteuer-ticino-berechnen/",
+          "url": "/de/grenzgaenger-artikel/quellensteuer-tessin-berechnen/",
           "excerpt": "Praktischer Leitfaden zur Berechnung der Quellensteuer für Grenzgänger Tessin-Italien: Sätze, Franchisen 2024, Steuergutschrift im Jahr 730 und interaktiver Simulator.",
           "date": "2026-08-22T08:37:30.365Z"
         },
@@ -460,12 +464,6 @@
           "url": "/de/grenzgaenger-artikel/in-mornago-leben-im-tessin-arbeiten-grenzgaenger/",
           "excerpt": "Ab dem 1. Januar 2024 garantiert die Neue Grenzgängervereinbarung den neuen Grenzgängern eine Selbstbeteiligung von 10.000 €. Entdecken Sie Besteuerung, AHV, BVG und KVG für diejenigen, die in Mornago leben und im…",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Grenzgänger Lezzeno-Ticino: G-Genehmigung, Gebühren und Verfahren",
-          "url": "/de/grenzgaenger-artikel/in-lezzeno-leben-ticino-arbeiten/",
-          "excerpt": "Wer in Lezzeno lebt und im Tessin arbeitet, kann mit der Grenzgängerbewilligung G arbeiten. Quellensteuer in der Schweiz, Rückerstattungen, AHV, BVG und KVG: Alles, was Sie wissen müssen.",
-          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -494,7 +492,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "TI",
@@ -579,8 +577,14 @@
       ],
       "curatedArticles": [
         {
+          "title": "Capital LPP : le Tessin refuse le remboursement de l'impôt à la source",
+          "url": "/fr/articles-tessin/capital-lpp-remboursement-impot-source/",
+          "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "Comment calculer l'impôt source Tessin",
-          "url": "/fr/articles-frontalier/calculer-impot-source-ticino/",
+          "url": "/fr/articles-frontalier/calculer-impot-source-tessin/",
           "excerpt": "Guide pratique pour le calcul de l'impôt à la source pour les frontaliers Tessin-Italie : taux, franchises 2024, crédit d'impôt en 730 et simulateur interactif.",
           "date": "2026-08-22T08:37:30.365Z"
         },
@@ -619,12 +623,6 @@
           "url": "/fr/articles-frontalier/vivre-mornago-travailler-tessin-frontalier/",
           "excerpt": "À partir du 1er janvier 2024, le nouvel accord frontalier garantit une franchise de 10 000 € aux nouveaux frontaliers. Découvrez la fiscalité, l'AVS, la LPP et la LAMal pour ceux qui vivent à Mornago et travaillent au…",
           "date": "2026-09-02T13:35:07.451Z"
-        },
-        {
-          "title": "Frontière Lezzeno-Ticino : permis G, taxes et procédures",
-          "url": "/fr/articles-frontalier/vivre-lezzeno-travailler-tessin-frontalier/",
-          "excerpt": "Ceux qui vivent à Lezzeno et travaillent au Tessin peuvent travailler avec le permis G en tant que frontalier. Taxe à la source en Suisse, restaurations, AVS, LPP et LAMal : tout ce qu'il faut savoir.",
-          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -653,7 +651,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

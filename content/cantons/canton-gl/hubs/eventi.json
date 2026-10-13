@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "2884e32f3886e85c5981d906e88e53273ab68b17180d98f604612c445b11fe96",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "5389d03aec3ffb423146c97a1ffc26d45f897e202f0f7bde2d38036723abbf3b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Buchstart für Kinder im Oktober",
-              "detail": "Glarus — in corso, ultimo giorno: 9 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-oktober/"
+              "label": "Familienprogramm: Kinder-Klettern Gumen, 13. Oktober 2026",
+              "detail": "Klettersteige Braunwald, Glarus Süd",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienprogramm-kinderklettern-auf-dem-gumen-dienstag-13-oktober-2026/"
+            },
+            {
+              "label": "Kletterlager Mettmen",
+              "detail": "Naturfründehuus Mettmen — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
-              "label": "Wild im Ortstockhaus, 26.09. - 11.10.2026",
-              "detail": "Ortstockhaus, Glarus Süd — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-im-ortstockhaus/"
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
             },
             {
-              "label": "Öffentliche Führungen Schiefertafelfabrik Elm 2026",
-              "detail": "Schiefertafelfabrik Elm, Glarus Süd — in corso, ultimo giorno: 11 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-fuehrungen-schiefertafelfabrik-elm-2026/"
+              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
+              "detail": "Gäste-Info Elm, Glarus Süd",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
             },
             {
-              "label": "Raclette-Abend im Panoramahotel",
-              "detail": "Panoramahotel, Glarus Süd",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-abend-im-panoramahotel/"
-            },
-            {
-              "label": "Cloks Tik",
-              "detail": "gastrorollbar, Glarus",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cloks-tik/"
-            },
-            {
-              "label": "Zehnernötli Wandertag",
-              "detail": "Elm",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zehnernoetli-wandertag/"
-            },
-            {
-              "label": "Alpine Gouache - Herbst Art Workshop, 10. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpine-gouache-herbst-art-workshop-10-oktober-2026/"
-            },
-            {
-              "label": "Malworkshop in der Chämistube, 10. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/malworkshop-in-der-chaemistube-10-oktober-2026/"
-            },
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 10. Oktober 2026",
+              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-10-oktober-2026/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
+            },
+            {
+              "label": "Finissage Wild, Wein & Kunst",
+              "detail": "Näfels, Glarus Nord",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
+            },
+            {
+              "label": "Nicole Johänntgen «Henry» – Original Quartett",
+              "detail": "Anna Göldi Museum",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
+            },
+            {
+              "label": "Elmer Wandertag",
+              "detail": "Sportbahnen Elm",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +127,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GL",
@@ -137,7 +137,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -148,69 +148,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Buchstart für Kinder im Oktober",
-              "detail": "Glarus — ongoing, last day: 9 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-oktober/"
+              "label": "Familienprogramm: Kinder-Klettern Gumen, 13. Oktober 2026",
+              "detail": "Klettersteige Braunwald, Glarus Süd",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienprogramm-kinderklettern-auf-dem-gumen-dienstag-13-oktober-2026/"
+            },
+            {
+              "label": "Kletterlager Mettmen",
+              "detail": "Naturfründehuus Mettmen — ongoing, last day: 16 October 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
-              "label": "Ort dm Ortstockhaus, 26.09. - 11.10.2026",
-              "detail": "Ortstockhaus, Glarus Süd — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-im-ortstockhaus/"
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
             },
             {
-              "label": "Öffentliche Führungen Schiefertafelfabrik Elm 2026",
-              "detail": "Schiefertafelfabrik Elm, Glarus Süd — ongoing, last day: 11 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-fuehrungen-schiefertafelfabrik-elm-2026/"
+              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
+              "detail": "Gäste-Info Elm, Glarus Süd",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
             },
             {
-              "label": "Raclette-Abend im Panoramahotel",
-              "detail": "Panoramahotel, Glarus Süd",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-abend-im-panoramahotel/"
-            },
-            {
-              "label": "Cloks Tik",
-              "detail": "gastrorollbar, Glarus",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cloks-tik/"
-            },
-            {
-              "label": "Zehnernötli Wandertag",
-              "detail": "Elm",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zehnernoetli-wandertag/"
-            },
-            {
-              "label": "Alpine Gouache - Herbst Art Workshop, 10. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpine-gouache-herbst-art-workshop-10-oktober-2026/"
-            },
-            {
-              "label": "Malworkshop in der Chämistube, 10. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/malworkshop-in-der-chaemistube-10-oktober-2026/"
-            },
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 10. Oktober 2026",
+              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-10-oktober-2026/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
+            },
+            {
+              "label": "Finissage Wild, Wein & Kunst",
+              "detail": "Näfels, Glarus Nord",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
+            },
+            {
+              "label": "Nicole Johänntgen «Henry» – Original Quartett",
+              "detail": "Anna Göldi Museum",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
+            },
+            {
+              "label": "Elmer Wandertag",
+              "detail": "Sportbahnen Elm",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +223,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +237,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GL",
@@ -247,7 +247,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -258,69 +258,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Buchstart für Kinder im Oktober",
-              "detail": "Glarus — läuft, letzter Tag: 9. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-oktober/"
+              "label": "Familienprogramm: Kinder-Klettern Gumen, 13. Oktober 2026",
+              "detail": "Klettersteige Braunwald, Glarus Süd",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienprogramm-kinderklettern-auf-dem-gumen-dienstag-13-oktober-2026/"
+            },
+            {
+              "label": "Kletterlager Mettmen",
+              "detail": "Naturfründehuus Mettmen — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
-              "label": "Wild im Ortstockhaus, 26:09. - 11.10.2026",
-              "detail": "Ortstockhaus, Glarus Süd — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-im-ortstockhaus/"
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
             },
             {
-              "label": "Öffentliche Führungen Schiefertafelfabrik Elm 2026",
-              "detail": "Schiefertafelfabrik Elm, Glarus Süd — läuft, letzter Tag: 11. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-fuehrungen-schiefertafelfabrik-elm-2026/"
+              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
+              "detail": "Gäste-Info Elm, Glarus Süd",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
             },
             {
-              "label": "Raclette-Abend im Panoramahotel",
-              "detail": "Panoramahotel, Glarus Süd",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-abend-im-panoramahotel/"
-            },
-            {
-              "label": "Cloks Tik",
-              "detail": "gastrorollbar, Glarus",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cloks-tik/"
-            },
-            {
-              "label": "Zehnernötli Wandertag",
-              "detail": "Elm",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zehnernoetli-wandertag/"
-            },
-            {
-              "label": "Alpine Gouache - Herbst Art Workshop, 10. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpine-gouache-herbst-art-workshop-10-oktober-2026/"
-            },
-            {
-              "label": "Malworkshop in der Chämistube, 10. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/malworkshop-in-der-chaemistube-10-oktober-2026/"
-            },
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 10. Oktober 2026",
+              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-10-oktober-2026/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
+            },
+            {
+              "label": "Finissage Wild, Wein & Kunst",
+              "detail": "Näfels, Glarus Nord",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
+            },
+            {
+              "label": "Nicole Johänntgen «Henry» – Original Quartett",
+              "detail": "Anna Göldi Museum",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
+            },
+            {
+              "label": "Elmer Wandertag",
+              "detail": "Sportbahnen Elm",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +333,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +347,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GL",
@@ -357,7 +357,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -368,69 +368,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Buchstart für Kinder im Oktober",
-              "detail": "Glarus — en cours, dernier jour : 9 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchstart-fuer-kinder-im-oktober/"
+              "label": "Familienprogramm: Kinder-Klettern Gumen, 13. Oktober 2026",
+              "detail": "Klettersteige Braunwald, Glarus Süd",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familienprogramm-kinderklettern-auf-dem-gumen-dienstag-13-oktober-2026/"
+            },
+            {
+              "label": "Kletterlager Mettmen",
+              "detail": "Naturfründehuus Mettmen — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-13",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kletterlager-mettmen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-07",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
-              "label": "Wild im Ortstockhaus, 26,09. - 11.10.2026",
-              "detail": "Ortstockhaus, Glarus Süd — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wild-im-ortstockhaus/"
+              "label": "Familienprogramm: Drachen basteln, 15. Oktober 2026",
+              "detail": "Bergrestaurant Ch�mistube",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/familienprogramm-drachen-basteln-donnerstag-15-oktober-2026/"
             },
             {
-              "label": "Öffentliche Führungen Schiefertafelfabrik Elm 2026",
-              "detail": "Schiefertafelfabrik Elm, Glarus Süd — en cours, dernier jour : 11 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oeffentliche-fuehrungen-schiefertafelfabrik-elm-2026/"
+              "label": "Geführte Wildbeobachtung auf der Mettmen Alp",
+              "detail": "Gäste-Info Elm, Glarus Süd",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gefuehrte-wildbeobachtung-auf-der-mettmen-alp/"
             },
             {
-              "label": "Raclette-Abend im Panoramahotel",
-              "detail": "Panoramahotel, Glarus Süd",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/raclette-abend-im-panoramahotel/"
-            },
-            {
-              "label": "Cloks Tik",
-              "detail": "gastrorollbar, Glarus",
-              "date": "2026-10-08",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cloks-tik/"
-            },
-            {
-              "label": "Zehnernötli Wandertag",
-              "detail": "Elm",
-              "date": "2026-10-09",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zehnernoetli-wandertag/"
-            },
-            {
-              "label": "Alpine Gouache - Herbst Art Workshop, 10. Oktober 2026",
-              "detail": "Bergrestaurant Ch�mistube, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/alpine-gouache-herbst-art-workshop-10-oktober-2026/"
-            },
-            {
-              "label": "Malworkshop in der Chämistube, 10. Oktober 2026",
-              "detail": "Braunwald, Glarus Süd",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/malworkshop-in-der-chaemistube-10-oktober-2026/"
-            },
-            {
-              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 10. Oktober 2026",
+              "label": "Samstags-Brunch im Bergrestaurant Chämistube, 17. Oktober 2026",
               "detail": "Braunwald",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-10-oktober-2026/"
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/samstagsbrunch-im-bergrestaurant-chaemistube-17-oktober-2026/"
+            },
+            {
+              "label": "Finissage Wild, Wein & Kunst",
+              "detail": "Näfels, Glarus Nord",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/finissage-wild-wein-kunst/"
+            },
+            {
+              "label": "Nicole Johänntgen «Henry» – Original Quartett",
+              "detail": "Anna Göldi Museum",
+              "date": "2026-10-17",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ennenda/nicole-johaenntgen-henry-original-quartett_AkSvnhF"
+            },
+            {
+              "label": "Mercado Latino - Salsa Night",
+              "detail": "Glarus",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mercado-latino-salsa-night-2/"
+            },
+            {
+              "label": "Elmer Wandertag",
+              "detail": "Sportbahnen Elm",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/elm/elmer-wandertag_AQY5Jh9"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

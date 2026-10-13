@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "617919f14a62e56c52bf43c0a9e05c022dd705123713717e86dd299500cea7e0",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "063d801d29f36ed944e2a91e364aa89429e6018b84ccfdef506be14c547dc063",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
+              "date": "2026-10-08",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
+            },
+            {
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
@@ -149,14 +154,9 @@
               "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
               "date": "2026-06-26",
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
-            },
-            {
-              "label": "Accès à nos bureaux du 12 au 18 juin",
-              "date": "2026-06-10",
-              "url": "https://www.cpeg.ch/information-generale/acces-a-nos-bureaux-du-12-au-18-juin/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -197,7 +197,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GE",
@@ -306,6 +306,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
+              "date": "2026-10-08",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
+            },
+            {
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
@@ -319,14 +324,9 @@
               "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
               "date": "2026-06-26",
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
-            },
-            {
-              "label": "Accès à nos bureaux du 12 au 18 juin",
-              "date": "2026-06-10",
-              "url": "https://www.cpeg.ch/information-generale/acces-a-nos-bureaux-du-12-au-18-juin/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -367,7 +367,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GE",
@@ -476,6 +476,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
+              "date": "2026-10-08",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
+            },
+            {
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
@@ -489,14 +494,9 @@
               "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
               "date": "2026-06-26",
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
-            },
-            {
-              "label": "Accès à nos bureaux du 12 au 18 juin",
-              "date": "2026-06-10",
-              "url": "https://www.cpeg.ch/information-generale/acces-a-nos-bureaux-du-12-au-18-juin/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -537,7 +537,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GE",
@@ -646,6 +646,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Le téléphone au volant peut entraîner une suspension administrative du permis de conduire",
+              "date": "2026-10-08",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19086"
+            },
+            {
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
@@ -659,14 +664,9 @@
               "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
               "date": "2026-06-26",
               "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
-            },
-            {
-              "label": "Accès à nos bureaux du 12 au 18 juin",
-              "date": "2026-06-10",
-              "url": "https://www.cpeg.ch/information-generale/acces-a-nos-bureaux-du-12-au-18-juin/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -707,7 +707,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "de7985e31fada1b7cf8aca62761490cc142dbf0b5ea114580fea4063768de278",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "cf1c0b8cb7626a88fd7a318b6b3e17b249d8c909ee5130020ab61f73b8802ecf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +39,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "5",
-          "note": "offerta mediana 600 CHF"
+          "note": "offerta mediana 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -66,7 +66,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -74,30 +74,30 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "GR11215",
-              "value": "1050 CHF",
+              "label": "GR11376",
+              "value": "550 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
             },
             {
-              "label": "GR13809",
-              "value": "600 CHF",
+              "label": "GR16361",
+              "value": "550 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
-              "label": "GR16271",
-              "value": "600 CHF",
+              "label": "GR13843",
+              "value": "500 CHF",
               "detail": "offerta attuale",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GR",
@@ -226,7 +226,7 @@
         {
           "label": "Plate auctions running",
           "value": "5",
-          "note": "typical bid 600 CHF"
+          "note": "typical bid 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -253,7 +253,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -261,30 +261,30 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "GR11215",
-              "value": "1,050 CHF",
+              "label": "GR11376",
+              "value": "550 CHF",
               "detail": "current bid",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
             },
             {
-              "label": "GR13809",
-              "value": "600 CHF",
+              "label": "GR16361",
+              "value": "550 CHF",
               "detail": "current bid",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
-              "label": "GR16271",
-              "value": "600 CHF",
+              "label": "GR13843",
+              "value": "500 CHF",
               "detail": "current bid",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +317,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -329,13 +329,13 @@
         },
         {
           "title": "Graubünden Hospital: 518 million over 12 years",
-          "url": "/en/swiss-articles/grisons-hospital-expansion-500m/",
+          "url": "/en/swiss-articles/graubunden-hospital-expansion-500m/",
           "excerpt": "The new wing of the Cantonal Hospital of Graubünden comes into service at the end of November 2026 after 518 million invested. Operating rooms increase from 10 to 13.",
           "date": "2026-08-18T19:56:19.062Z"
         },
         {
           "title": "Graubünden Hospital: 518 million for new wing",
-          "url": "/en/swiss-articles/grisons-hospital-expansion-2026/",
+          "url": "/en/swiss-articles/graubunden-hospital-expansion-2026/",
           "excerpt": "Twelve years of construction end. The cantonal hospital of Graubünden in Chur inaugurates the new structure with 518 million francs invested. Operating rooms increased, moving at the end of November.",
           "date": "2026-08-18T19:20:17.561Z"
         },
@@ -347,26 +347,26 @@
         },
         {
           "title": "LAMal Grisioni: premiums, deductibles and reduction",
-          "url": "/en/swiss-articles/lamal-grisons-premiums-reduction/",
+          "url": "/en/swiss-articles/lamal-graubunden-premiums-reduction/",
           "excerpt": "Find out how LAMal health insurance works in the canton of Graubünden, which deductibles to choose and how to access cantonal premium reduction subsidies.",
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Graubünden: hospitals' finances return to service",
-          "url": "/en/swiss-articles/financial-recovery-grisons-hospitals/",
+          "url": "/en/swiss-articles/financial-recovery-graubunden-hospitals/",
           "excerpt": "After a difficult 2024, Grisonian nosocomes register positive results in 2025. Here is the financial overview of the main healthcare facilities.",
           "date": "2026-07-14T13:24:13.191Z"
         },
         {
           "title": "Grison: Self-declaration of criminal records for residence permits",
-          "url": "/en/cross-border-articles/grisons-residence-permits-2026/",
+          "url": "/en/cross-border-articles/graubunden-residence-permits-2026/",
           "excerpt": "From May 2026, anyone applying for a residence permit in Grison will need to declare any criminal records or ongoing proceedings.",
           "date": "2026-04-23T21:32:48.344Z"
         },
         {
-          "title": "Grisons, stricter rules for residence permits after mafia infiltration in Roveredo",
-          "url": "/en/cross-border-articles/grisons-tightens-residence-permits-2026/",
-          "excerpt": "New rules for residence permits in the Grisons: mandatory declaration of criminal records and ongoing proceedings.",
+          "title": "Graubünden, stricter rules for residence permits after mafia infiltration in Roveredo",
+          "url": "/en/cross-border-articles/graubunden-tightens-residence-permits-2026/",
+          "excerpt": "New rules for residence permits in the Graubünden: mandatory declaration of criminal records and ongoing proceedings.",
           "date": "2026-04-25T16:21:51.853Z"
         }
       ],
@@ -392,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GR",
@@ -409,7 +409,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "5",
-          "note": "mittleres Gebot 600 CHF"
+          "note": "mittleres Gebot 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -436,7 +436,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -444,30 +444,30 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "GR11215",
-              "value": "1’050 CHF",
+              "label": "GR11376",
+              "value": "550 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
             },
             {
-              "label": "GR13809",
-              "value": "600 CHF",
+              "label": "GR16361",
+              "value": "550 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
-              "label": "GR16271",
-              "value": "600 CHF",
+              "label": "GR13843",
+              "value": "500 CHF",
               "detail": "aktuelles Gebot",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -500,7 +500,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -575,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GR",
@@ -592,7 +592,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "5",
-          "note": "offre centrale 600 CHF"
+          "note": "offre centrale 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -619,7 +619,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -627,30 +627,30 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "GR11215",
-              "value": "1 050 CHF",
+              "label": "GR11376",
+              "value": "550 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
             },
             {
-              "label": "GR13809",
-              "value": "600 CHF",
+              "label": "GR16361",
+              "value": "550 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2255&locale=de_ch"
             },
             {
-              "label": "GR16271",
-              "value": "600 CHF",
+              "label": "GR13843",
+              "value": "500 CHF",
               "detail": "offre actuelle",
-              "date": "2026-10-11T18:00:00.000Z",
-              "url": "https://eauktion.gr.ch/"
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2254&locale=de_ch"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -683,7 +683,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

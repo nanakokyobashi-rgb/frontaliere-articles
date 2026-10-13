@@ -4,22 +4,27 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "b52d12427bb951983ac9327c069b361ce458f64848bd1ed7670c9993947b9c7f",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "18438edf7f7a211a08ebf74b25aae6e8358c5f8b63e7848d4776a236e899f042",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-07T00:42:24.752Z",
+      "updatedAt": "2026-10-13T08:13:47.853Z",
       "keyFacts": 0
     },
     {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "keyFacts": 1
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +40,11 @@
           "value": "606 CHF",
           "note": "regione di premio 0, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "6",
+          "note": "offerta mediana 870 CHF"
         }
       ],
       "dataBlocks": [
@@ -51,7 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -61,22 +71,53 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-11T07:00:00.000Z"
+              "date": "2026-10-18T07:00:00.000Z"
             },
             {
-              "label": "Apotheke Coop-Vitality - Grenchen",
-              "detail": "Grenchen, Solothurn",
-              "date": "2026-10-11T08:00:00.000Z"
-            },
-            {
-              "label": "Apotheke zum Kreuz",
+              "label": "Central-Apotheke Olten",
               "detail": "Olten, Olten",
-              "date": "2026-10-11T08:00:00.000Z"
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SO3558",
+              "value": "1600 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3355"
+            },
+            {
+              "label": "SO9662",
+              "value": "1500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3356"
+            },
+            {
+              "label": "SO9667",
+              "value": "1500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3357"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -104,7 +145,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -183,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SO",
@@ -196,6 +237,11 @@
           "value": "606 CHF",
           "note": "premium region 0, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "6",
+          "note": "typical bid 870 CHF"
         }
       ],
       "dataBlocks": [
@@ -212,7 +258,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -222,22 +268,53 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-11T07:00:00.000Z"
+              "date": "2026-10-18T07:00:00.000Z"
             },
             {
-              "label": "Apotheke Coop-Vitality - Grenchen",
-              "detail": "Grenchen, Solothurn",
-              "date": "2026-10-11T08:00:00.000Z"
-            },
-            {
-              "label": "Apotheke zum Kreuz",
+              "label": "Central-Apotheke Olten",
               "detail": "Olten, Olten",
-              "date": "2026-10-11T08:00:00.000Z"
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SO3558",
+              "value": "1,600 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3355"
+            },
+            {
+              "label": "SO9662",
+              "value": "1,500 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3356"
+            },
+            {
+              "label": "SO9667",
+              "value": "1,500 CHF",
+              "detail": "current bid",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3357"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -265,7 +342,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -313,7 +390,7 @@
         },
         {
           "title": "Residence permit B Slab: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-soletta-requirements-renewal/",
+          "url": "/en/swiss-articles/residence-permit-b-solothurn-requirements-renewal/",
           "excerpt": "Complete guide to permit B in the canton of Solothurn. Discover requirements, documents to be produced, duration 5 years and renewal procedure within 3 months of expiry.",
           "date": "2026-08-24T04:51:47.353Z"
         }
@@ -340,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SO",
@@ -353,6 +430,11 @@
           "value": "606 CHF",
           "note": "Prämienregion 0, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "6",
+          "note": "mittleres Gebot 870 CHF"
         }
       ],
       "dataBlocks": [
@@ -369,7 +451,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -379,22 +461,53 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-11T07:00:00.000Z"
+              "date": "2026-10-18T07:00:00.000Z"
             },
             {
-              "label": "Apotheke Coop-Vitality - Grenchen",
-              "detail": "Grenchen, Solothurn",
-              "date": "2026-10-11T08:00:00.000Z"
-            },
-            {
-              "label": "Apotheke zum Kreuz",
+              "label": "Central-Apotheke Olten",
               "detail": "Olten, Olten",
-              "date": "2026-10-11T08:00:00.000Z"
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SO3558",
+              "value": "1’600 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3355"
+            },
+            {
+              "label": "SO9662",
+              "value": "1’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3356"
+            },
+            {
+              "label": "SO9667",
+              "value": "1’500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3357"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -422,7 +535,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -446,7 +559,7 @@
         },
         {
           "title": "Aufenthaltsbewilligung B in Solothurn: Voraussetzungen und Verfahren",
-          "url": "/de/schweiz-artikel/permesso-di-dimora-b-kanton-soletta/",
+          "url": "/de/schweiz-artikel/permesso-di-dimora-b-kanton-solothurn/",
           "excerpt": "Die Voraussetzungen für eine Aufenthaltsbewilligung B im Kanton Solothurn sind im kantonalen Gesetz festgelegt.",
           "date": "2026-08-18T01:22:42.942Z"
         },
@@ -470,7 +583,7 @@
         },
         {
           "title": "Aufenthaltsbewilligung B Solothurn: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-soletta-anforderungen-erneuerung/",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-solothurn-anforderungen-erneuerung/",
           "excerpt": "Vollständiger Führerschein B im Kanton Solothurn. Entdecken Sie die Anforderungen, die einzureichenden Dokumente, die Dauer von 5 Jahren und das Erneuerungsverfahren innerhalb von 3 Monaten nach Ablauf.",
           "date": "2026-08-24T04:51:47.353Z"
         }
@@ -497,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SO",
@@ -510,6 +623,11 @@
           "value": "606 CHF",
           "note": "région de primes 0, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "6",
+          "note": "offre centrale 870 CHF"
         }
       ],
       "dataBlocks": [
@@ -526,7 +644,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -536,22 +654,53 @@
             {
               "label": "Saner Apotheke Dornach",
               "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-11T07:00:00.000Z"
+              "date": "2026-10-18T07:00:00.000Z"
             },
             {
-              "label": "Apotheke Coop-Vitality - Grenchen",
-              "detail": "Grenchen, Solothurn",
-              "date": "2026-10-11T08:00:00.000Z"
-            },
-            {
-              "label": "Apotheke zum Kreuz",
+              "label": "Central-Apotheke Olten",
               "detail": "Olten, Olten",
-              "date": "2026-10-11T08:00:00.000Z"
+              "date": "2026-10-18T08:00:00.000Z"
+            },
+            {
+              "label": "Medbase Apotheke - Zuchwil",
+              "detail": "Zuchwil, Solothurn",
+              "date": "2026-10-18T08:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-07T00:42:24.752Z"
+          "updatedAt": "2026-10-13T08:13:47.853Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SO3558",
+              "value": "1 600 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3355"
+            },
+            {
+              "label": "SO9662",
+              "value": "1 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3356"
+            },
+            {
+              "label": "SO9667",
+              "value": "1 500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-14T15:00:00.000Z",
+              "url": "https://eauktion.so.ch/ecari-auction/ui/app/details/app?id=3357"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.so.ch/ecari-auction",
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -579,7 +728,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -627,7 +776,7 @@
         },
         {
           "title": "Permis de séjour B Soleure : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-de-sejour-b-soletta-exigences-renouvellement/",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-soleure-exigences-renouvellement/",
           "excerpt": "Guide complet du permis B dans le canton de Soleure. Découvrez les exigences, les documents à produire, la durée de 5 ans et la procédure de renouvellement dans les 3 mois suivant l'expiration.",
           "date": "2026-08-24T04:51:47.353Z"
         }
@@ -650,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

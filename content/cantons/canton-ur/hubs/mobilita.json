@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "217da9f4a61bcd7cc79207ab9b3a1910e5de2d6a70260fcb2e86949774093716",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "46e8837f30646aa8f029f05734759f6b000c5760d71989e327f9c92a979d66d6",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "updatedAt": "2026-10-13T01:02:53.675Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "7",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +114,7 @@
               "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +153,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "UR",
@@ -164,12 +164,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 6 October 2026"
+          "note": "reports as of 13 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
-          "note": "reports as of 6 October 2026"
+          "value": "7",
+          "note": "reports as of 13 October 2026"
         }
       ],
       "dataBlocks": [
@@ -227,7 +227,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -250,7 +250,7 @@
               "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +289,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "UR",
@@ -300,12 +300,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "note": "Meldungen vom 13. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "7",
+          "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -363,7 +363,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +386,7 @@
               "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +425,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "UR",
@@ -436,12 +436,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 6 octobre 2026"
+          "note": "signalements au 13 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
-          "note": "signalements au 6 octobre 2026"
+          "value": "7",
+          "note": "signalements au 13 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -499,7 +499,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -522,7 +522,7 @@
               "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +561,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

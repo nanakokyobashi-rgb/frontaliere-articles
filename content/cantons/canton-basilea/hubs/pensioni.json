@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "ac28ca3e24a3b14adad179bfb050a6b63be6d9525d518091e71ca5ced021835c",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "b8c8bc68492f437f69b787c39a965294a8987f703cec3c938e7b5bc39ecf4304",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -166,14 +166,9 @@
               "label": "Die blpk investiert nicht in verbotene Waffen",
               "date": "2026-06-17",
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
-            },
-            {
-              "label": "Schneller, einfacher, effizienter: Unsere Grundbuchgeschäfte werden digital",
-              "date": "2026-06-15",
-              "url": "https://www.blpk.ch/infocenter/news/digitaler-grundbucheintrag.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -226,7 +221,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -365,14 +360,9 @@
               "label": "Die blpk investiert nicht in verbotene Waffen",
               "date": "2026-06-17",
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
-            },
-            {
-              "label": "Schneller, einfacher, effizienter: Unsere Grundbuchgeschäfte werden digital",
-              "date": "2026-06-15",
-              "url": "https://www.blpk.ch/infocenter/news/digitaler-grundbucheintrag.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +415,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -564,14 +554,9 @@
               "label": "Die blpk investiert nicht in verbotene Waffen",
               "date": "2026-06-17",
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
-            },
-            {
-              "label": "Schneller, einfacher, effizienter: Unsere Grundbuchgeschäfte werden digital",
-              "date": "2026-06-15",
-              "url": "https://www.blpk.ch/infocenter/news/digitaler-grundbucheintrag.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -624,7 +609,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -763,14 +748,9 @@
               "label": "Die blpk investiert nicht in verbotene Waffen",
               "date": "2026-06-17",
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
-            },
-            {
-              "label": "Schneller, einfacher, effizienter: Unsere Grundbuchgeschäfte werden digital",
-              "date": "2026-06-15",
-              "url": "https://www.blpk.ch/infocenter/news/digitaler-grundbucheintrag.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -788,7 +768,7 @@
         },
         {
           "title": "Gestion du premier pilier AVS dans le canton de Bâle-Campagne",
-          "url": "/fr/articles-suisse/avs-prestations-complementaires-basel-campagne/",
+          "url": "/fr/articles-suisse/gestion-premier-pilier-avs-bale-campagne/",
           "excerpt": "Le canton de Bâle-Campagne gère le premier pilier AVS avec une caisse de compensation cantonale, garantissant le minimum vital.",
           "date": "2026-09-06T07:48:25.232Z"
         },
@@ -823,7 +803,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

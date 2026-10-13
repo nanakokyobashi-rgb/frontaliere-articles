@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "b9522261fbe5dea05bfd5e8f38d231bce74c76257baaedbda77de73638718356",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "6e48cee6bd501739d1ff29a47517cda45ec13e14ac5166d99e979883e71bd776",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -181,7 +181,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -304,19 +304,19 @@
       ],
       "curatedArticles": [
         {
-          "title": "Management of the first AVS pillar in the Canton of Appenzello Outer",
+          "title": "Management of the first AVS pillar in the Canton of Appenzell Outer",
           "url": "/en/swiss-articles/avs-complementary-benefits-appenzell-outer-rhodes/",
-          "excerpt": "The Canton of Appenzello Outermost manages the first AVS pillar through a cantonal compensation fund, guaranteeing benefits to taxpayers.",
+          "excerpt": "The Canton of Appenzell Outermost manages the first AVS pillar through a cantonal compensation fund, guaranteeing benefits to taxpayers.",
           "date": "2026-09-06T23:29:51.554Z"
         },
         {
-          "title": "AVS and complementary services in Appenzello Interno",
+          "title": "AVS and complementary services in Appenzell Innerrhoden",
           "url": "/en/swiss-articles/avs-appenzell-internal-compensation/",
           "excerpt": "First pillar in Inner Appenzell: guide to the compensation fund, calculation of the AVS annuity and complementary benefits for the minimum living.",
           "date": "2026-08-26T04:04:05.833Z"
         },
         {
-          "title": "AVS and complementary services: External Appenzello",
+          "title": "AVS and complementary services: External Appenzell",
           "url": "/en/swiss-articles/avs-benefits-appenzell-rhodes-compensation-fund/",
           "excerpt": "First pillar in the Canton of Outer Appenzell: how the compensation fund works, calculation of the AVS pension, management of contribution gaps and access to supplementary benefits to cover the minimum living wage.",
           "date": "2026-08-25T05:20:21.610Z"
@@ -340,7 +340,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -499,7 +499,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -658,7 +658,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

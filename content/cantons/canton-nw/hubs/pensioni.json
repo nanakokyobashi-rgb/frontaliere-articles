@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "84eed5b3d99067a79304d6e951e61f394d06a2590752e4b757b654ea83b938ca",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "e949f41c2465d81f51cbda194028cbfb061495393e110e28acfed9dc1dccb975",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -164,7 +164,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "NW",
@@ -270,21 +270,21 @@
       ],
       "curatedArticles": [
         {
-          "title": "AVS and complementary services in Nidvaldo: practical guide",
-          "url": "/en/swiss-articles/avs-nidvaldo-compensation-fund/",
-          "excerpt": "How the first pillar of social security works in the canton of Nidvaldo: calculation of AVS annuity, contribution gaps and access to supplementary benefits.",
+          "title": "AVS and complementary services in Nidwalden: practical guide",
+          "url": "/en/swiss-articles/avs-nidwalden-compensation-fund/",
+          "excerpt": "How the first pillar of social security works in the canton of Nidwalden: calculation of AVS annuity, contribution gaps and access to supplementary benefits.",
           "date": "2026-08-23T11:20:18.776Z"
         },
         {
-          "title": "AVS and complementary services Nidvaldo: cash and annuities",
-          "url": "/en/swiss-articles/avs-and-complementary-services-nidvaldo-cash-and-annuities/",
-          "excerpt": "Analysis of the pension provision of the first pillar in the Canton of Nidvaldo, with a focus on the cantonal compensation fund, calculation of the AVS pension, contribution gaps and complementary benefits.",
+          "title": "AVS and complementary services Nidwalden: cash and annuities",
+          "url": "/en/swiss-articles/avs-and-complementary-services-nidwalden-cash-and-annuities/",
+          "excerpt": "Analysis of the pension provision of the first pillar in the Canton of Nidwalden, with a focus on the cantonal compensation fund, calculation of the AVS pension, contribution gaps and complementary benefits.",
           "date": "2026-08-16T23:18:02.666Z"
         },
         {
-          "title": "AVS and complementary services Canton Nidvaldo",
+          "title": "AVS and complementary services Canton Nidwalden",
           "url": "/en/swiss-articles/first-pillar-nidvwald-pension-ahv/",
-          "excerpt": "The first pillar in Nidvaldo: AVS, compensation fund, contribution gaps and complementary benefits to cover the minimum living wage.",
+          "excerpt": "The first pillar in Nidwalden: AVS, compensation fund, contribution gaps and complementary benefits to cover the minimum living wage.",
           "date": "2026-08-23T11:40:32.193Z"
         }
       ],
@@ -306,7 +306,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "NW",
@@ -413,7 +413,7 @@
       "curatedArticles": [
         {
           "title": "AHV und Ergänzungsleistungen in Nidwalden: Praxisleitfaden",
-          "url": "/de/schweiz-artikel/avs-nidvaldo-ausgleichskasse/",
+          "url": "/de/schweiz-artikel/avs-nidwalden-ausgleichskasse/",
           "excerpt": "So funktioniert die erste Säule der Vorsorge im Kanton Nidwalden: AHV-Rentenberechnung, Beitragslücken und Zugang zu Ergänzungsleistungen.",
           "date": "2026-08-23T11:20:18.776Z"
         },
@@ -448,7 +448,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "NW",
@@ -555,7 +555,7 @@
       "curatedArticles": [
         {
           "title": "AVS et prestations complémentaires à Nidwald : guide pratique",
-          "url": "/fr/articles-suisse/avs-nidvaldo-caisse-compensation/",
+          "url": "/fr/articles-suisse/avs-nidwald-caisse-compensation/",
           "excerpt": "Comment fonctionne le premier pilier de la prévoyance dans le canton de Nidwald : calcul de la rente AVS, lacunes de cotisation et accès aux prestations complémentaires.",
           "date": "2026-08-23T11:20:18.776Z"
         },
@@ -590,7 +590,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

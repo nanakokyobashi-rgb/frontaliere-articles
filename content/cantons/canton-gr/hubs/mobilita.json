@@ -4,22 +4,22 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "afd678fd8430c8972f6f751598c4c98eee678d64b8ad3156cf9173dc606cf870",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "81d0d0dcc2f84831a832c9a519b97d9b38281c211372dfca9428ebb57e18db3e",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-05T23:59:59.000Z",
+      "updatedAt": "2026-10-12T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-06T22:51:50.713Z",
+      "updatedAt": "2026-10-13T01:02:53.675Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -33,77 +33,77 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), settimana conclusa: 5 ottobre 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), settimana conclusa: 12 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "14",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "14",
-          "note": "segnalazioni aggiornate: 6 ottobre 2026"
+          "value": "12",
+          "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 29 settembre 2026 – 5 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 ottobre 2026 – 12 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0 min",
-              "detail": "42 rilevazioni",
-              "url": "/traffico-dogane/giogo-di-santa-maria/oggi/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "42 rilevazioni",
-              "url": "/traffico-dogane/samnaun-spiss/oggi/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/st-luzisteig/oggi/"
-            },
-            {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
-              "value": "0 min",
-              "detail": "42 rilevazioni",
-              "url": "/traffico-dogane/tunnel-munt-la-schera/oggi/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 min",
-              "detail": "42 rilevazioni",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/martina-nauders/oggi/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0,2 min",
-              "detail": "42 rilevazioni",
-              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
+              "label": "Campocologno-Tirano",
+              "value": "0,1 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/campocologno-tirano/oggi/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0,1 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/giogo-di-santa-maria/oggi/"
             },
             {
               "label": "Forcola di Livigno",
-              "value": "0,4 min",
-              "detail": "42 rilevazioni",
+              "value": "0,2 min",
+              "detail": "47 rilevazioni",
               "url": "/traffico-dogane/forcola-di-livigno/oggi/"
             },
             {
-              "label": "Campocologno-Tirano",
-              "value": "0,4 min",
-              "detail": "42 rilevazioni",
-              "url": "/traffico-dogane/campocologno-tirano/oggi/"
+              "label": "Samnaun-Spiss",
+              "value": "0,2 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/samnaun-spiss/oggi/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0,3 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/castasegna-villa-di-chiavenna/oggi/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0,3 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/passo-dello-spluga/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -153,14 +153,14 @@
               "date": "2026-09-17T10:45:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
+              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
               "value": "Chiusura",
-              "detail": "fine prevista: 8 ottobre 2026",
+              "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -191,14 +191,9 @@
               "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
               "date": "2026-06-23",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
-            },
-            {
-              "label": "Positive Stimmung an der GV der RhB",
-              "date": "2026-06-12",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -239,16 +234,16 @@
           "date": "2026-08-22T01:23:08.125Z"
         },
         {
+          "title": "Grigioni: traffico di sviamento, UDC critica il Governo",
+          "url": "/articoli-svizzera/grigioni-traffico-sviamento-udc/",
+          "excerpt": "L'UDC grigionese propone il modello di Birsfelden per contrastare il traffico di sviamento sulla A13. Il Governo chiede chiarezza giuridica prima di procedere.",
+          "date": "2026-07-21T16:56:20.835Z"
+        },
+        {
           "title": "Grigioni inviano fattura all'Italia per i costi del traffico olimpico",
           "url": "/articoli-frontaliere/grigioni-fattura-italia-olimpiadi/",
           "excerpt": "Il cantone dei Grigioni ha inviato una fattura da 2,6 milioni di franchi all'Italia per coprire i costi del piano trasporti durante le Olimpiadi di Milano-Cortina 2026.",
           "date": "2026-05-08T04:56:14.368Z"
-        },
-        {
-          "title": "Grigioni non riprendono il modello basilese per gestire il traffico",
-          "url": "/articoli-svizzera/grigioni-modello-basilese-traffico/",
-          "excerpt": "Il governo grigionese è scettico sull'adozione del modello di sanzioni di Birsfelden per deviare il traffico festivo e turistico.",
-          "date": "2026-06-29T16:07:16.810Z"
         }
       ],
       "links": [
@@ -289,7 +284,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GR",
@@ -300,77 +295,77 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), week ending 5 October 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), week ending 12 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "16",
-          "note": "reports as of 6 October 2026"
+          "value": "14",
+          "note": "reports as of 13 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "14",
-          "note": "reports as of 6 October 2026"
+          "value": "12",
+          "note": "reports as of 13 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 29 September 2026 to 5 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 6 October 2026 to 12 October 2026, fastest first.",
           "items": [
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0 min",
-              "detail": "42 readings",
-              "url": "/en/border-wait/giogo-di-santa-maria/today/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "42 readings",
-              "url": "/en/border-wait/samnaun-spiss/today/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/st-luzisteig/today/"
-            },
-            {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
-              "value": "0 min",
-              "detail": "42 readings",
-              "url": "/en/border-wait/tunnel-munt-la-schera/today/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 min",
-              "detail": "42 readings",
+              "detail": "47 readings",
               "url": "/en/border-wait/martina-nauders/today/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0.2 min",
-              "detail": "42 readings",
-              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
+              "label": "Campocologno-Tirano",
+              "value": "0.1 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/campocologno-tirano/today/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0.1 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/giogo-di-santa-maria/today/"
             },
             {
               "label": "Forcola di Livigno",
-              "value": "0.4 min",
-              "detail": "42 readings",
+              "value": "0.2 min",
+              "detail": "47 readings",
               "url": "/en/border-wait/forcola-di-livigno/today/"
             },
             {
-              "label": "Campocologno-Tirano",
-              "value": "0.4 min",
-              "detail": "42 readings",
-              "url": "/en/border-wait/campocologno-tirano/today/"
+              "label": "Samnaun-Spiss",
+              "value": "0.2 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/samnaun-spiss/today/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0.3 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/castasegna-villa-di-chiavenna/today/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0.3 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/passo-dello-spluga/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -420,14 +415,14 @@
               "date": "2026-09-17T10:45:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Rothenbrunnen E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
+              "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
               "value": "Closure",
-              "detail": "until 8 October 2026",
+              "detail": "until 13 November 2026",
               "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -458,14 +453,9 @@
               "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
               "date": "2026-06-23",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
-            },
-            {
-              "label": "Positive Stimmung an der GV der RhB",
-              "date": "2026-06-12",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -477,7 +467,7 @@
         },
         {
           "title": "Living in Ponte in Valtellina, working in Graubünden",
-          "url": "/en/cross-border-articles/live-ponte-valtelline-work-grisons/",
+          "url": "/en/cross-border-articles/live-ponte-valtelline-work-graubunden/",
           "excerpt": "Complete guide for border workers: source tax, G Permit, €10k deductible, AVS/LAMal, cost of living. Since 2024.",
           "date": "2026-09-06T23:13:28.583Z"
         },
@@ -500,22 +490,22 @@
           "date": "2026-08-09T00:40:13.497Z"
         },
         {
-          "title": "Berzo Demo and Grisons: living as frontiersmen at the border",
-          "url": "/en/cross-border-articles/living-berzo-demo-working-grisons/",
-          "excerpt": "Complete guide for those who live in Berzo Demo and work in Grisons: Swiss tax regulations, G Permit, AVS/LAMal, deductibles, contributions and procedures.",
+          "title": "Berzo Demo and Graubünden: living as frontiersmen at the border",
+          "url": "/en/cross-border-articles/living-berzo-demo-working-graubunden/",
+          "excerpt": "Complete guide for those who live in Berzo Demo and work in Graubünden: Swiss tax regulations, G Permit, AVS/LAMal, deductibles, contributions and procedures.",
           "date": "2026-08-22T01:23:08.125Z"
         },
         {
-          "title": "Grisons send Italy bill for Olympic traffic costs",
-          "url": "/en/cross-border-articles/grisons-bill-italy-olympics/",
-          "excerpt": "The canton of Grisons has sent a bill for 2.6 million francs to Italy to cover the costs of the transport plan during the Milan-Cortina 2026 Olympics.",
-          "date": "2026-05-08T04:56:14.368Z"
+          "title": "Graubünden: diversion traffic, UDC criticizes the Government",
+          "url": "/en/swiss-articles/graubunden-diversion-traffic-udc/",
+          "excerpt": "The greyish CDU proposes the Birsfelden model to counteract diversion traffic on the A13. The Government asks for legal clarity before proceeding.",
+          "date": "2026-07-21T16:56:20.835Z"
         },
         {
-          "title": "Graubünden does not use the Basel model to manage traffic",
-          "url": "/en/swiss-articles/grisons-basel-model-traffic/",
-          "excerpt": "The Grison government is sceptical about adopting the Birsfelden model of sanctions to divert holiday and tourist traffic.",
-          "date": "2026-06-29T16:07:16.810Z"
+          "title": "Graubünden send Italy bill for Olympic traffic costs",
+          "url": "/en/cross-border-articles/graubunden-bill-italy-olympics/",
+          "excerpt": "The canton of Graubünden has sent a bill for 2.6 million francs to Italy to cover the costs of the transport plan during the Milan-Cortina 2026 Olympics.",
+          "date": "2026-05-08T04:56:14.368Z"
         }
       ],
       "links": [
@@ -556,7 +546,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GR",
@@ -567,77 +557,77 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), Woche bis 5. Oktober 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), Woche bis 12. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "16",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "14",
+          "note": "Meldungen vom 13. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "14",
-          "note": "Meldungen vom 6. Oktober 2026"
+          "value": "12",
+          "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 29. September 2026 bis 5. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. Oktober 2026 bis 12. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0 Min.",
-              "detail": "42 Messungen",
-              "url": "/de/wartezeit-grenze/giogo-di-santa-maria/heute/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 Min.",
-              "detail": "42 Messungen",
-              "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/st-luzisteig/heute/"
-            },
-            {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
-              "value": "0 Min.",
-              "detail": "42 Messungen",
-              "url": "/de/wartezeit-grenze/tunnel-munt-la-schera/heute/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 Min.",
-              "detail": "42 Messungen",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/martina-nauders/heute/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0.2 Min.",
-              "detail": "42 Messungen",
-              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
+              "label": "Campocologno-Tirano",
+              "value": "0.1 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/campocologno-tirano/heute/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0.1 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/giogo-di-santa-maria/heute/"
             },
             {
               "label": "Forcola di Livigno",
-              "value": "0.4 Min.",
-              "detail": "42 Messungen",
+              "value": "0.2 Min.",
+              "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/forcola-di-livigno/heute/"
             },
             {
-              "label": "Campocologno-Tirano",
-              "value": "0.4 Min.",
-              "detail": "42 Messungen",
-              "url": "/de/wartezeit-grenze/campocologno-tirano/heute/"
+              "label": "Samnaun-Spiss",
+              "value": "0.2 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/samnaun-spiss/heute/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0.3 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/castasegna-villa-di-chiavenna/heute/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0.3 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/passo-dello-spluga/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -687,14 +677,14 @@
               "date": "2026-09-17T10:45:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Rothenbrunnen und Anschluss Reichenau Sachlage: Strecke gesperrt Baustelle",
+              "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Bonaduz und Anschluss Reichenau Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
-              "detail": "bis 8. Oktober 2026",
+              "detail": "bis 13. November 2026",
               "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -725,14 +715,9 @@
               "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
               "date": "2026-06-23",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
-            },
-            {
-              "label": "Positive Stimmung an der GV der RhB",
-              "date": "2026-06-12",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -773,16 +758,16 @@
           "date": "2026-08-22T01:23:08.125Z"
         },
         {
+          "title": "Graubünden: Umleitungsverkehr, SVP kritisiert Regierung",
+          "url": "/de/schweiz-artikel/graubuenden-ausweichverkehr-svp/",
+          "excerpt": "Die Bündner SVP schlägt das Birsfelden-Modell vor, um dem Umleitungsverkehr auf der A13 entgegenzuwirken. Die Regierung verlangt rechtliche Klarheit, bevor sie fortfährt.",
+          "date": "2026-07-21T16:56:20.835Z"
+        },
+        {
           "title": "Graubünden stellt Italien Rechnung für olympischen Verkehr",
           "url": "/de/grenzgaenger-artikel/graubunden-rechnung-italien-olympiade/",
           "excerpt": "Der Kanton Graubünden hat Italien eine Rechnung über 2,6 Millionen Franken für die Transportkosten während der Olympischen Spiele Mailand-Cortina 2026 gestellt.",
           "date": "2026-05-08T04:56:14.368Z"
-        },
-        {
-          "title": "Graubünden greift bei der Verkehrssteuerung nicht auf das Basler Modell zurück",
-          "url": "/de/schweiz-artikel/graubuenden-basler-modell-verkehr/",
-          "excerpt": "Die Bündner Regierung ist skeptisch gegenüber der Einführung des Birsfeldener Sanktionsmodells, um den Urlaubs- und Tourismusverkehr abzulenken.",
-          "date": "2026-06-29T16:07:16.810Z"
         }
       ],
       "links": [
@@ -823,7 +808,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GR",
@@ -834,77 +819,77 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Giogo di Santa Maria (Passo dell'Umbrail), semaine jusqu’au 5 octobre 2026"
+          "note": "St. Luzisteig (Fläsch-Balzers), semaine jusqu’au 12 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "16",
-          "note": "signalements au 6 octobre 2026"
+          "value": "14",
+          "note": "signalements au 13 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "14",
-          "note": "signalements au 6 octobre 2026"
+          "value": "12",
+          "note": "signalements au 13 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 29 septembre 2026 au 5 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 octobre 2026 au 12 octobre 2026, du plus fluide au plus lent.",
           "items": [
-            {
-              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
-              "value": "0 min",
-              "detail": "42 relevés",
-              "url": "/fr/temps-attente-douane/giogo-di-santa-maria/aujourd-hui/"
-            },
-            {
-              "label": "Samnaun-Spiss",
-              "value": "0 min",
-              "detail": "42 relevés",
-              "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
-            },
             {
               "label": "St. Luzisteig (Fläsch-Balzers)",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/st-luzisteig/aujourd-hui/"
-            },
-            {
-              "label": "Tunnel Munt La Schera (Passo del Gallo)",
-              "value": "0 min",
-              "detail": "42 relevés",
-              "url": "/fr/temps-attente-douane/tunnel-munt-la-schera/aujourd-hui/"
             },
             {
               "label": "Martina-Nauders (Finstermünz)",
               "value": "0 min",
-              "detail": "42 relevés",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/martina-nauders/aujourd-hui/"
             },
             {
-              "label": "Castasegna-Villa di Chiavenna",
-              "value": "0,2 min",
-              "detail": "42 relevés",
-              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
+              "label": "Campocologno-Tirano",
+              "value": "0,1 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/campocologno-tirano/aujourd-hui/"
+            },
+            {
+              "label": "Giogo di Santa Maria (Passo dell'Umbrail)",
+              "value": "0,1 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/giogo-di-santa-maria/aujourd-hui/"
             },
             {
               "label": "Forcola di Livigno",
-              "value": "0,4 min",
-              "detail": "42 relevés",
+              "value": "0,2 min",
+              "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/forcola-di-livigno/aujourd-hui/"
             },
             {
-              "label": "Campocologno-Tirano",
-              "value": "0,4 min",
-              "detail": "42 relevés",
-              "url": "/fr/temps-attente-douane/campocologno-tirano/aujourd-hui/"
+              "label": "Samnaun-Spiss",
+              "value": "0,2 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/samnaun-spiss/aujourd-hui/"
+            },
+            {
+              "label": "Castasegna-Villa di Chiavenna",
+              "value": "0,3 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/castasegna-villa-di-chiavenna/aujourd-hui/"
+            },
+            {
+              "label": "Passo dello Spluga (Montespluga)",
+              "value": "0,3 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/passo-dello-spluga/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-05T23:59:59.000Z"
+          "updatedAt": "2026-10-12T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -954,14 +939,14 @@
               "date": "2026-09-17T10:45:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Rothenbrunnen et Jonction autoroutière Reichenau Situation: fermé travaux",
+              "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Bonaduz et Jonction autoroutière Reichenau Situation: fermé travaux",
               "value": "Fermeture",
-              "detail": "jusqu’au 8 octobre 2026",
+              "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-06T22:51:50.713Z"
+          "updatedAt": "2026-10-13T01:02:53.675Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -992,14 +977,9 @@
               "label": "Fideris – Küblis: Neue Linienführung für Bahn und Strasse",
               "date": "2026-06-23",
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
-            },
-            {
-              "label": "Positive Stimmung an der GV der RhB",
-              "date": "2026-06-12",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/positive-stimmung-an-der-gv-der-rhb/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -1040,16 +1020,16 @@
           "date": "2026-08-22T01:23:08.125Z"
         },
         {
+          "title": "Grisons : trafic de détournement, UDC critique le gouvernement",
+          "url": "/fr/articles-suisse/grisons-trafic-evitement-udc/",
+          "excerpt": "L'UDC grisonne propose le modèle de Birsfelden pour contrer le trafic de détournement sur l'A13. Le Gouvernement demande des éclaircissements juridiques avant de procéder.",
+          "date": "2026-07-21T16:56:20.835Z"
+        },
+        {
           "title": "Les Grisons envoient une facture à l'Italie pour les coûts du trafic olympique",
           "url": "/fr/articles-frontalier/grisons-facture-italie-olympiades/",
           "excerpt": "Le canton des Grisons a envoyé une facture de 2,6 millions de francs à l'Italie pour couvrir les coûts du plan de transport pendant les Jeux olympiques de Milan-Cortina 2026.",
           "date": "2026-05-08T04:56:14.368Z"
-        },
-        {
-          "title": "Grisons ne reprennent pas le modèle bâlois pour gérer le trafic",
-          "url": "/fr/articles-suisse/grisons-modele-bale-trafic/",
-          "excerpt": "Le gouvernement grison est sceptique quant à l'adoption du modèle de sanctions de Birsfelden pour détourner le trafic festif et touristique.",
-          "date": "2026-06-29T16:07:16.810Z"
         }
       ],
       "links": [
@@ -1090,7 +1070,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

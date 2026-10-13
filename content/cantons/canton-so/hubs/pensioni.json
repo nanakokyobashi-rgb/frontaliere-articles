@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:41:07.739Z",
-  "contentHash": "b4d701e32eb4f81436d4f8b24d49a333a2e331c77e6a2ca710e94bbfb5dc81c4",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "22b3fce41eccf868d7a7a887f8d4745c9998a2536978c5b40200437d8bff2c6a",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -164,7 +164,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SO",
@@ -271,7 +271,7 @@
       "curatedArticles": [
         {
           "title": "AVS and complementary services in the Canton of Solothurn",
-          "url": "/en/swiss-articles/avs-complementary-benefits-soletta/",
+          "url": "/en/swiss-articles/avs-complementary-benefits-solothurn/",
           "excerpt": "The cantonal compensation fund of Solothurn manages the first AVS pillar, calculating complementary annuities and benefits to ensure the minimum living.",
           "date": "2026-09-06T02:10:52.722Z"
         },
@@ -283,7 +283,7 @@
         },
         {
           "title": "AVS and complementary services in the canton of Solothurn",
-          "url": "/en/swiss-articles/first-pillar-soletta-benefits/",
+          "url": "/en/swiss-articles/first-pillar-solothurn-benefits/",
           "excerpt": "AVS in the canton of Solothurn: compensation fund, calculation of annuity, filling in contribution gaps, supplementary benefits for minimum subsistence. Complete guide.",
           "date": "2026-08-24T08:57:23.510Z"
         }
@@ -306,7 +306,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SO",
@@ -413,7 +413,7 @@
       "curatedArticles": [
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Solothurn",
-          "url": "/de/schweiz-artikel/avs-zusatzleistungen-soletta/",
+          "url": "/de/schweiz-artikel/avs-zusatzleistungen-solothurn/",
           "excerpt": "Die kantonale Ausgleichskasse Solothurn betreibt die erste AHV-Säule und berechnet Renten und Ergänzungsleistungen zur Sicherung des Existenzminimums.",
           "date": "2026-09-06T02:10:52.722Z"
         },
@@ -425,7 +425,7 @@
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Solothurn",
-          "url": "/de/schweiz-artikel/erste-saeule-soletta-leistungen/",
+          "url": "/de/schweiz-artikel/erste-saeule-solothurn-leistungen/",
           "excerpt": "AHV im Kanton Solothurn: Ausgleichskasse, Rentenberechnung, Beitragslücken schliessen, Ergänzungsleistungen bei Lebensminimum. Komplette Anleitung.",
           "date": "2026-08-24T08:57:23.510Z"
         }
@@ -448,7 +448,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SO",
@@ -555,7 +555,7 @@
       "curatedArticles": [
         {
           "title": "AVS et prestations complémentaires dans le canton de Soleure",
-          "url": "/fr/articles-suisse/avs-prestations-complementaires-soletta/",
+          "url": "/fr/articles-suisse/avs-prestations-complementaires-soleure/",
           "excerpt": "La caisse de compensation cantonale de Soleure gère le premier pilier AVS, calculant les rentes et prestations complémentaires pour assurer le minimum vital.",
           "date": "2026-09-06T02:10:52.722Z"
         },
@@ -567,7 +567,7 @@
         },
         {
           "title": "AVS et prestations complémentaires dans le canton de Soleure",
-          "url": "/fr/articles-suisse/premier-pilier-soletta-prestations/",
+          "url": "/fr/articles-suisse/premier-pilier-soleure-prestations/",
           "excerpt": "AVS dans le canton de Soleure : caisse de compensation, calcul rente, comblement des lacunes contributives, prestations complémentaires pour minimum vital. Guide complet.",
           "date": "2026-08-24T08:57:23.510Z"
         }
@@ -590,7 +590,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

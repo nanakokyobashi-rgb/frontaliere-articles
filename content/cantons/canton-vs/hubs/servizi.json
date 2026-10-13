@@ -4,22 +4,22 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T15:40:47.440Z",
-  "contentHash": "48b8536db64916672830d648e4e3a4758f7af2bc52d866ba564bff32b8304220",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "076536eb2d8b956289de52c9164b4f5fe608e54defc9cc560e38c28278d0b153",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -61,7 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -70,35 +70,40 @@
           "items": [
             {
               "label": "VS111",
-              "value": "21.100 CHF",
+              "value": "23.000 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "13.100 CHF",
+              "value": "15.000 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
-              "label": "VS559955",
+              "label": "VS406666",
               "value": "400 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
+              "date": "2026-10-12",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
+            },
             {
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
@@ -123,17 +128,18 @@
               "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
               "date": "2026-09-24",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
-            },
-            {
-              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
-              "date": "2026-09-08",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Sion: apre la Maison de la garde per le urgenze",
+          "url": "/articoli-vallese/maison-garde-ospedale-sion/",
+          "excerpt": "Dal 1° settembre l'ospedale di Sion ha attivato un nuovo presidio per i casi non vitali, attivo ogni giorno dalle 18 alle 22.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
         {
           "title": "Asilo nido e custodia bambini in Vallese: costi",
           "url": "/articoli-svizzera/custodia-bambini-vallese-sussidi/",
@@ -203,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "VS",
@@ -242,7 +248,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -251,35 +257,40 @@
           "items": [
             {
               "label": "VS111",
-              "value": "21,100 CHF",
+              "value": "23,000 CHF",
               "detail": "current bid",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "13,100 CHF",
+              "value": "15,000 CHF",
               "detail": "current bid",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
-              "label": "VS559955",
+              "label": "VS406666",
               "value": "400 CHF",
               "detail": "current bid",
               "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
+              "date": "2026-10-12",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
+            },
             {
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
@@ -304,17 +315,18 @@
               "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
               "date": "2026-09-24",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
-            },
-            {
-              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
-              "date": "2026-09-08",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Sion: the Maison de la garde opens for emergencies",
+          "url": "/en/valais-articles/maison-garde-sion-hospital/",
+          "excerpt": "As of September 1st, Sion Hospital has opened a new facility for non-life-threatening cases, open every day from 18 to 22.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
         {
           "title": "Daycare and Childcare in Valais: Costs",
           "url": "/en/swiss-articles/childcare-costs-valais/",
@@ -380,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "VS",
@@ -419,7 +431,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -428,35 +440,40 @@
           "items": [
             {
               "label": "VS111",
-              "value": "21’100 CHF",
+              "value": "23’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "13’100 CHF",
+              "value": "15’000 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
-              "label": "VS559955",
+              "label": "VS406666",
               "value": "400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
+              "date": "2026-10-12",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
+            },
             {
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
@@ -481,17 +498,18 @@
               "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
               "date": "2026-09-24",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
-            },
-            {
-              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
-              "date": "2026-09-08",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Sitten: Die Maison de la garde für Notfälle öffnet",
+          "url": "/de/wallis-artikel/maison-garde-spital-sitten/",
+          "excerpt": "Seit dem 1. September hat das Spital von Sitten eine neue Anlaufstelle für nicht lebensbedrohliche Fälle eingerichtet, die täglich von 18 bis 22 Uhr geöffnet ist.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
         {
           "title": "Kindertagesstätte und Kinderbetreuung im Wallis: Kosten",
           "url": "/de/schweiz-artikel/kinderbetreuung-kosten-wallis/",
@@ -512,7 +530,7 @@
         },
         {
           "title": "KVG-Prämien im Wallis: Zeitabschnitte und Kürzungen 2026",
-          "url": "/de/schweiz-artikel/vallese-lamal-praemien-reduktion/",
+          "url": "/de/schweiz-artikel/wallis-lamal-praemien-reduktion/",
           "excerpt": "Leitfaden zu den obligatorischen Krankenkassenprämien im Kanton Wallis: verfügbare Franchisen, Versicherungsmodelle, Prämienverbilligung und Verfahren zur Erlangung kantonaler Beiträge.",
           "date": "2026-09-05T16:42:46.103Z"
         },
@@ -557,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "VS",
@@ -596,7 +614,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -605,35 +623,40 @@
           "items": [
             {
               "label": "VS111",
-              "value": "21 100 CHF",
+              "value": "23 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=939"
             },
             {
               "label": "VS52",
-              "value": "13 100 CHF",
+              "value": "15 000 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-15T13:00:00.000Z",
               "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=938"
             },
             {
-              "label": "VS559955",
+              "label": "VS406666",
               "value": "400 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-15T13:00:00.000Z",
-              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=942"
+              "url": "https://ecari.vs.ch/ecari-auction/ui/app/details/app?id=940"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ecari.vs.ch/ecari-auction/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Invitation à la journée des proches aidants le 30 octobre à Sion",
+              "date": "2026-10-12",
+              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/10/12/journee-des-proches-aidants-du-vendredi-30-octobre-2026-a-lhopital-de-sion"
+            },
             {
               "label": "Haut-Valais: Caroline Berchtold-Hutter nommée directrice des soins & MTT",
               "date": "2026-10-02",
@@ -658,17 +681,18 @@
               "label": "Semaine de la santé mentale : l’Hôpital du Valais se mobilise aux côtés du Canton",
               "date": "2026-09-24",
               "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/24/semaine-de-la-sante-mentale-lhopital-du-valais-se-mobilise-aux-cotes-du-canton"
-            },
-            {
-              "label": "Journée nationale du don d’organes et de tissus : informer et sensibiliser",
-              "date": "2026-09-08",
-              "url": "https://www.hopitalduvalais.ch/lhopital-du-valais/actualites/en-detail/2026/9/8/2026-journee-nationale-du-don-dorganes-et-de-tissus-informer-et-sensibiliser"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Sion : la Maison de la garde ouvre pour les urgences",
+          "url": "/fr/articles-valais/maison-garde-hopital-sion/",
+          "excerpt": "À partir du 1er septembre, l’hôpital de Sion a mis en place un nouveau dispositif pour les cas non vitaux, ouvert tous les jours de 18 à 22 heures.",
+          "date": "2026-10-08T17:03:41.241Z"
+        },
         {
           "title": "Crèche et garde d’enfants en Valais : coûts",
           "url": "/fr/articles-suisse/garde-enfants-couts-valais/",
@@ -730,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-07T15:40:47.440Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

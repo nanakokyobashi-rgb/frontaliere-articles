@@ -4,27 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "aaab6642c30bbb2f865a41a5bfbe98f39d12a016d642628eba7e281c64dfa812",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "a4eeb50476df82c770be6964abefc7b78df9f466f4141092ce5414f5be746c0c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-04T10:36:48.239Z",
+      "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
     },
     {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-06T21:07:44.226Z",
-      "keyFacts": 0
-    },
-    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-06T18:25:29.905Z",
+      "updatedAt": "2026-10-13T00:45:03.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -66,47 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Stazione",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-02T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Bozzoreda",
-              "detail": "Pregassona, Luganese",
-              "date": "2026-10-03T06:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-05T16:30:00.000Z"
-            },
-            {
-              "label": "Contrada dei Patrizi",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-06T06:00:00.000Z"
-            },
-            {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
-              "label": "Malè",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-09T16:30:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-06T21:07:44.226Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -130,13 +85,23 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
+              "date": "2026-10-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
+            },
+            {
+              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
+              "date": "2026-10-08",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
+            },
             {
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
@@ -156,19 +121,9 @@
               "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
               "date": "2026-09-28",
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -255,7 +210,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "TI",
@@ -294,47 +249,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Stazione",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-02T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Bozzoreda",
-              "detail": "Pregassona, Luganese",
-              "date": "2026-10-03T06:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-05T16:30:00.000Z"
-            },
-            {
-              "label": "Contrada dei Patrizi",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-06T06:00:00.000Z"
-            },
-            {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
-              "label": "Malè",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-09T16:30:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-06T21:07:44.226Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -358,13 +273,23 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
+              "date": "2026-10-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
+            },
+            {
+              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
+              "date": "2026-10-08",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
+            },
             {
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
@@ -384,19 +309,9 @@
               "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
               "date": "2026-09-28",
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +394,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "TI",
@@ -518,47 +433,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Stazione",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-02T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Bozzoreda",
-              "detail": "Pregassona, Luganese",
-              "date": "2026-10-03T06:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-05T16:30:00.000Z"
-            },
-            {
-              "label": "Contrada dei Patrizi",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-06T06:00:00.000Z"
-            },
-            {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
-              "label": "Malè",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-09T16:30:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-06T21:07:44.226Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -582,13 +457,23 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
+              "date": "2026-10-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
+            },
+            {
+              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
+              "date": "2026-10-08",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
+            },
             {
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
@@ -608,19 +493,9 @@
               "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
               "date": "2026-09-28",
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -703,7 +578,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "TI",
@@ -742,47 +617,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-04T10:36:48.239Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Stazione",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-02T16:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Bozzoreda",
-              "detail": "Pregassona, Luganese",
-              "date": "2026-10-03T06:00:00.000Z"
-            },
-            {
-              "label": "S. Gottardo",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-05T16:30:00.000Z"
-            },
-            {
-              "label": "Contrada dei Patrizi",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-06T06:00:00.000Z"
-            },
-            {
-              "label": "Moderna",
-              "detail": "Bodio, Biasca e Valli",
-              "date": "2026-10-09T16:00:00.000Z"
-            },
-            {
-              "label": "Malè",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-09T16:30:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-06T21:07:44.226Z"
+          "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
           "id": "aste-targhe",
@@ -806,13 +641,23 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-06T18:25:29.905Z"
+          "updatedAt": "2026-10-13T00:45:03.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
+              "date": "2026-10-12",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/Blocco-operatorio-San-Giovanni-Bellinzona.html"
+            },
+            {
+              "label": "Nuovi spazi per la medicina ambulatoriale specialistica all’Ospedale San Giovanni di Bellinzona",
+              "date": "2026-10-08",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CS-osg-ambulatoriale.html"
+            },
             {
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
@@ -832,19 +677,9 @@
               "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
               "date": "2026-09-28",
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
-            },
-            {
-              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
-              "date": "2026-09-27",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -923,7 +758,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

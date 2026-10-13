@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:49:20.921Z",
-  "contentHash": "cb75d95545c9d3c41447fd5615cea6fe3c95b39a1d5ed706feae789927faa434",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "81e8ea1f4fe73ef721f032e59a934c787deadc70bae53f35da4969cb557b4768",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -110,7 +110,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Rachats rétroactifs dans le pilier 3a: ce qui change à partir de 2026",
+              "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/34212"
+            },
+            {
+              "label": "AFC Infos - Octobre 2026",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45195"
+            },
+            {
+              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45125"
             },
@@ -128,19 +138,9 @@
               "label": "Personnes morales 2023. Baisse des recettes fiscales",
               "date": "2026-09-29T12:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
-            },
-            {
-              "label": "Dites STOP à l'envoi de papier!",
-              "date": "2026-09-29",
-              "url": "https://www.ge.ch/node/45036"
-            },
-            {
-              "label": "Guide fiscal 2025 pour les indépendants",
-              "date": "2026-09-08",
-              "url": "https://www.ge.ch/node/44809"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -183,7 +183,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "GE",
@@ -271,7 +271,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Rachats rétroactifs dans le pilier 3a: ce qui change à partir de 2026",
+              "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/34212"
+            },
+            {
+              "label": "AFC Infos - Octobre 2026",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45195"
+            },
+            {
+              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45125"
             },
@@ -289,19 +299,9 @@
               "label": "Personnes morales 2023. Baisse des recettes fiscales",
               "date": "2026-09-29T12:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
-            },
-            {
-              "label": "Dites STOP à l'envoi de papier!",
-              "date": "2026-09-29",
-              "url": "https://www.ge.ch/node/45036"
-            },
-            {
-              "label": "Guide fiscal 2025 pour les indépendants",
-              "date": "2026-09-08",
-              "url": "https://www.ge.ch/node/44809"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -344,7 +344,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "GE",
@@ -432,7 +432,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Rachats rétroactifs dans le pilier 3a: ce qui change à partir de 2026",
+              "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/34212"
+            },
+            {
+              "label": "AFC Infos - Octobre 2026",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45195"
+            },
+            {
+              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45125"
             },
@@ -450,19 +460,9 @@
               "label": "Personnes morales 2023. Baisse des recettes fiscales",
               "date": "2026-09-29T12:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
-            },
-            {
-              "label": "Dites STOP à l'envoi de papier!",
-              "date": "2026-09-29",
-              "url": "https://www.ge.ch/node/45036"
-            },
-            {
-              "label": "Guide fiscal 2025 pour les indépendants",
-              "date": "2026-09-08",
-              "url": "https://www.ge.ch/node/44809"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -505,7 +505,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "GE",
@@ -593,7 +593,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Rachats rétroactifs dans le pilier 3a: ce qui change à partir de 2026",
+              "label": "Guide d'utilisation de l'Impôt à la Source en Ligne (ISeL)",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/34212"
+            },
+            {
+              "label": "AFC Infos - Octobre 2026",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45195"
+            },
+            {
+              "label": "Rachats dans le 3e pilier A: ce qui change dans la déclaration d'impôt 2026",
               "date": "2026-10-06",
               "url": "https://www.ge.ch/node/45125"
             },
@@ -611,19 +621,9 @@
               "label": "Personnes morales 2023. Baisse des recettes fiscales",
               "date": "2026-09-29T12:30:00.000Z",
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
-            },
-            {
-              "label": "Dites STOP à l'envoi de papier!",
-              "date": "2026-09-29",
-              "url": "https://www.ge.ch/node/45036"
-            },
-            {
-              "label": "Guide fiscal 2025 pour les indépendants",
-              "date": "2026-09-08",
-              "url": "https://www.ge.ch/node/44809"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
@@ -666,7 +666,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:49:20.921Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

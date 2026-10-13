@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "d0cb383f269c900792bcf906468e7c2872a80b9c44e9df2af0bfcd7664c897bc",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "bf7e3f570920681332d62686a94da026817033416ed5dcb5e74010962d67e168",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-06T13:36:10.911Z",
+      "updatedAt": "2026-10-12T16:03:22.277Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-13T13:36:10.911Z"
+      "carryUntilAt": "2026-10-19T16:03:22.277Z"
     }
   ],
   "locales": {
@@ -22,16 +22,16 @@
       "intro": "In Appenzello, benzina e diesel sono una voce fissa nel bilancio di chi usa l’auto per andare al lavoro. Questa pagina riunisce i prezzi medi rilevati alla pompa, il confronto con le aree oltreconfine quando esiste un dato pubblico e gli articoli della redazione su carburanti ed energia.\n\nIl territorio non ha un confine nazionale: i temi che contano sono quelli di chi vive e lavora in Svizzera. Le fonti ufficiali pubblicano in tedesco; dati, avvisi e articoli sono raccolti qui e aggiornati quando cambiano.",
       "keyFacts": [
         {
-          "label": "Benzina 95 — Austria",
-          "value": "1,828 EUR/l",
-          "note": "media regionale, 6 ottobre 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Benzina 95 — Svizzera",
+          "value": "2,020 CHF/l",
+          "note": "media nazionale ufficiale, 1 settembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Austria",
-          "value": "2,096 EUR/l",
-          "note": "media regionale, 6 ottobre 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Diesel — Svizzera",
+          "value": "2,270 CHF/l",
+          "note": "media nazionale ufficiale, 1 settembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -41,20 +41,32 @@
           "description": "Prezzi medi alla pompa rilevati sul territorio e, dove esiste un dato pubblico, nelle aree oltreconfine. Ogni riga riporta la valuta della rilevazione: i prezzi non sono convertiti.",
           "items": [
             {
+              "label": "Benzina 95 — Svizzera",
+              "value": "2,020 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Svizzera",
+              "value": "2,270 CHF/l",
+              "detail": "media nazionale ufficiale",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzina 95 — Austria",
-              "value": "1,828 EUR/l",
-              "detail": "media regionale: minimo 1,818 EUR/l, 10 stazioni rilevate",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "1,865 EUR/l",
+              "detail": "media regionale: minimo 1,839 EUR/l, 10 stazioni rilevate",
+              "date": "2026-10-12T16:03:22.277Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,096 EUR/l",
-              "detail": "media regionale: minimo 2,088 EUR/l, 12 stazioni rilevate",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "2,157 EUR/l",
+              "detail": "media regionale: minimo 2,100 EUR/l, 12 stazioni rilevate",
+              "date": "2026-10-12T16:03:22.277Z"
             }
           ],
-          "sourceName": "E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-06T13:36:10.911Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-12T16:03:22.277Z"
         }
       ],
       "curatedArticles": [],
@@ -68,7 +80,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -77,16 +89,16 @@
       "intro": "In Appenzell, petrol and diesel are a fixed item in the budget of anyone who drives to work. This page brings together the average pump prices on record, the comparison with the other side of the border where public data exists, and our articles on fuel and energy.\n\nThe area has no national border: the topics that matter are those of people living and working in Switzerland. Official sources publish in German; data, notices and articles are collected here and updated when they change.",
       "keyFacts": [
         {
-          "label": "Petrol 95 — Austria",
-          "value": "1.828 EUR/l",
-          "note": "regional average, 6 October 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Petrol 95 — Switzerland",
+          "value": "2.020 CHF/l",
+          "note": "official national average, 1 September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Austria",
-          "value": "2.096 EUR/l",
-          "note": "regional average, 6 October 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Diesel — Switzerland",
+          "value": "2.270 CHF/l",
+          "note": "official national average, 1 September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -96,20 +108,32 @@
           "description": "Average pump prices recorded locally and, where public data exists, across the border. Each row keeps the currency of the survey: prices are not converted.",
           "items": [
             {
+              "label": "Petrol 95 — Switzerland",
+              "value": "2.020 CHF/l",
+              "detail": "official national average",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Switzerland",
+              "value": "2.270 CHF/l",
+              "detail": "official national average",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
               "label": "Petrol 95 — Austria",
-              "value": "1.828 EUR/l",
-              "detail": "regional average: lowest 1.818 EUR/l, 10 stations surveyed",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "1.865 EUR/l",
+              "detail": "regional average: lowest 1.839 EUR/l, 10 stations surveyed",
+              "date": "2026-10-12T16:03:22.277Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.096 EUR/l",
-              "detail": "regional average: lowest 2.088 EUR/l, 12 stations surveyed",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "2.157 EUR/l",
+              "detail": "regional average: lowest 2.100 EUR/l, 12 stations surveyed",
+              "date": "2026-10-12T16:03:22.277Z"
             }
           ],
-          "sourceName": "E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-06T13:36:10.911Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-12T16:03:22.277Z"
         }
       ],
       "curatedArticles": [],
@@ -123,7 +147,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -132,16 +156,16 @@
       "intro": "Im Appenzellerland sind Benzin und Diesel ein fester Posten im Budget aller, die mit dem Auto zur Arbeit fahren. Diese Seite bündelt die erhobenen Durchschnittspreise an der Zapfsäule, den Vergleich mit dem Gebiet jenseits der Grenze, sofern öffentliche Daten vorliegen, und die Artikel der Redaktion zu Treibstoff und Energie.\n\nDas Gebiet hat keine Landesgrenze: Es zählen die Themen jener, die in der Schweiz leben und arbeiten. Die offiziellen Quellen publizieren auf Deutsch; Daten, Mitteilungen und Artikel werden hier gesammelt und bei Änderungen aktualisiert.",
       "keyFacts": [
         {
-          "label": "Benzin 95 — Österreich",
-          "value": "1.828 EUR/l",
-          "note": "regionaler Durchschnitt, 6. Oktober 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Benzin 95 — Schweiz",
+          "value": "2.020 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Österreich",
-          "value": "2.096 EUR/l",
-          "note": "regionaler Durchschnitt, 6. Oktober 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Diesel — Schweiz",
+          "value": "2.270 CHF/l",
+          "note": "offizieller nationaler Durchschnitt, 1. September 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -151,20 +175,32 @@
           "description": "Durchschnittliche Preise an der Zapfsäule im Gebiet und, wo öffentliche Daten vorliegen, jenseits der Grenze. Jede Zeile nennt die Währung der Erhebung: Die Preise werden nicht umgerechnet.",
           "items": [
             {
+              "label": "Benzin 95 — Schweiz",
+              "value": "2.020 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Schweiz",
+              "value": "2.270 CHF/l",
+              "detail": "offizieller nationaler Durchschnitt",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
               "label": "Benzin 95 — Österreich",
-              "value": "1.828 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.818 EUR/l, 10 erfasste Tankstellen",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "1.865 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.839 EUR/l, 10 erfasste Tankstellen",
+              "date": "2026-10-12T16:03:22.277Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.096 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.088 EUR/l, 12 erfasste Tankstellen",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "2.157 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-10-12T16:03:22.277Z"
             }
           ],
-          "sourceName": "E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-06T13:36:10.911Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-12T16:03:22.277Z"
         }
       ],
       "curatedArticles": [],
@@ -178,7 +214,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -187,16 +223,16 @@
       "intro": "En Appenzell, l’essence et le diesel sont un poste fixe du budget de celles et ceux qui prennent la voiture pour aller travailler. Cette page réunit les prix moyens relevés à la pompe, la comparaison avec l’autre côté de la frontière lorsqu’une donnée publique existe et les articles de la rédaction sur les carburants et l’énergie.\n\nLe territoire n’a pas de frontière nationale : les thèmes qui comptent sont ceux des personnes qui vivent et travaillent en Suisse. Les sources officielles publient en allemand ; données, avis et articles sont réunis ici et mis à jour lorsqu’ils changent.",
       "keyFacts": [
         {
-          "label": "Essence 95 — Autriche",
-          "value": "1,828 EUR/l",
-          "note": "moyenne régionale, 6 octobre 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Essence 95 — Suisse",
+          "value": "2,020 CHF/l",
+          "note": "moyenne nationale officielle, 1er septembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         },
         {
-          "label": "Diesel — Autriche",
-          "value": "2,096 EUR/l",
-          "note": "moyenne régionale, 6 octobre 2026",
-          "sourceName": "E-Control Spritpreisrechner"
+          "label": "Diesel — Suisse",
+          "value": "2,270 CHF/l",
+          "note": "moyenne nationale officielle, 1er septembre 2026",
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)"
         }
       ],
       "dataBlocks": [
@@ -206,20 +242,32 @@
           "description": "Prix moyens à la pompe relevés sur le territoire et, lorsqu’une donnée publique existe, de l’autre côté de la frontière. Chaque ligne conserve la monnaie du relevé : les prix ne sont pas convertis.",
           "items": [
             {
+              "label": "Essence 95 — Suisse",
+              "value": "2,020 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
+              "label": "Diesel — Suisse",
+              "value": "2,270 CHF/l",
+              "detail": "moyenne nationale officielle",
+              "date": "2026-09-01T00:00:00.000Z"
+            },
+            {
               "label": "Essence 95 — Autriche",
-              "value": "1,828 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,818 EUR/l, 10 stations relevées",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "1,865 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,839 EUR/l, 10 stations relevées",
+              "date": "2026-10-12T16:03:22.277Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,096 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,088 EUR/l, 12 stations relevées",
-              "date": "2026-10-06T13:36:10.911Z"
+              "value": "2,157 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 12 stations relevées",
+              "date": "2026-10-12T16:03:22.277Z"
             }
           ],
-          "sourceName": "E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-06T13:36:10.911Z"
+          "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
+          "updatedAt": "2026-10-12T16:03:22.277Z"
         }
       ],
       "curatedArticles": [],
@@ -233,7 +281,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

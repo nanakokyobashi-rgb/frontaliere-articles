@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-07T10:11:40.832Z",
-  "contentHash": "3a5a442f84cb866a9678980a350dc956156d14a7076798708b3edea65d2b475f",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "0adbea9d1a94695e6828f7a09a8777a3b77b89d38caae1990b725a3d79335693",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-07T00:37:21.979Z",
+      "updatedAt": "2026-10-13T00:02:43.981Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "15",
+          "value": "19",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,40 +38,10 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Haunted House for the Rheinlicht Festival",
-              "detail": "KULTURLABOR.sh, Schaffhausen — in corso, ultimo giorno: 7 ottobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/haunted-house-for-the-rheinlicht-festival/"
-            },
-            {
-              "label": "DOUG SHORTS [US] & THE RUFFCATS [DE] | Support: NAMAY KUSH [CH]",
-              "detail": "TapTab",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/rah-und-the-ruffcats-de-support-namay-kush-ch_AV5kVEF"
-            },
-            {
               "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-10-10",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "Painting studio",
-              "detail": "KULTURLABOR.sh, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/painting-studio/"
-            },
-            {
-              "label": "So ein Käse! – Führung mit Workshop für Erwachsene",
-              "detail": "Museum Lindwurm, Stein am Rhein",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/so-ein-kaese-fuehrung-mit-workshop-fuer-erwachsene/"
-            },
-            {
-              "label": "Banned From Utopia [US]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/banned-from-utopia-us/"
             },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
@@ -96,11 +66,41 @@
               "detail": "Sciaffusa",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
+            },
+            {
+              "label": "Sagi Fish",
+              "detail": "Buchberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Public Moped Tour in Chläggli",
+              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
+            },
+            {
+              "label": "Conferenza: \"Bisogna morire mentre si è in vita, per vivere quando si muore.\"",
+              "detail": "Christliche Gemeinde Neuhausen (CGN)",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "My Fair Lady",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +127,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "SH",
@@ -137,7 +137,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "15",
+          "value": "19",
           "note": "from the site’s events calendar"
         }
       ],
@@ -148,40 +148,10 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Haunted House for the Rheinlicht Festival",
-              "detail": "KULTURLABOR.sh, Schaffhausen — ongoing, last day: 7 October 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/haunted-house-for-the-rheinlicht-festival/"
-            },
-            {
-              "label": "JESSICA [US] & JESSICA [DE] | Support: JESSICA [CH]",
-              "detail": "TapTab",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/rah-und-the-ruffcats-de-support-namay-kush-ch_AV5kVEF"
-            },
-            {
               "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-10-10",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "Painting studio",
-              "detail": "KULTURLABOR.sh, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/painting-studio/"
-            },
-            {
-              "label": "So ein Käse! – Führung mit Workshop für Erwachsene",
-              "detail": "Museum Lindwurm, Stein am Rhein",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/so-ein-kaese-fuehrung-mit-workshop-fuer-erwachsene/"
-            },
-            {
-              "label": "Banned From Utopia [US]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/banned-from-utopia-us/"
             },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
@@ -206,11 +176,41 @@
               "detail": "Sciaffusa",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
+            },
+            {
+              "label": "Sagi Fish",
+              "detail": "Buchberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Public Moped Tour in Chläggli",
+              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
+            },
+            {
+              "label": "Presentation: \"You must die while you live, so that you live when you die.\"",
+              "detail": "Christliche Gemeinde Neuhausen (CGN)",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "My Fair Lady",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +223,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +237,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "SH",
@@ -247,7 +247,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "15",
+          "value": "19",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -258,40 +258,10 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Geisterbahn für das Rheinlicht Festival",
-              "detail": "KULTURLABOR.sh, Schaffhausen — läuft, letzter Tag: 7. Oktober 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/haunted-house-for-the-rheinlicht-festival/"
-            },
-            {
-              "label": "DOUG SHORTS [US] & THE RUFFCATS [DE] | Unterstützung: NAMAY KUSH [CH]",
-              "detail": "TapTab",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/rah-und-the-ruffcats-de-support-namay-kush-ch_AV5kVEF"
-            },
-            {
               "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-10-10",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "Mal-Atelier",
-              "detail": "KULTURLABOR.sh, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/painting-studio/"
-            },
-            {
-              "label": "So ein Käse! – Führung mit Workshop für Erwachsene",
-              "detail": "Museum Lindwurm, Stein am Rhein",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/so-ein-kaese-fuehrung-mit-workshop-fuer-erwachsene/"
-            },
-            {
-              "label": "Banned From Utopia [US]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/banned-from-utopia-us/"
             },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
@@ -316,11 +286,41 @@
               "detail": "Sciaffusa",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
+            },
+            {
+              "label": "Sagi-Fisch",
+              "detail": "Buchberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Öffentliche Töffli Tour im Chläggli",
+              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
+            },
+            {
+              "label": "Vortrag: «Du musst sterben, während du lebst, damit du lebst, wenn du stirbst.»",
+              "detail": "Christliche Gemeinde Neuhausen (CGN)",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "My Fair Lady",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +333,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +347,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "SH",
@@ -357,7 +357,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "15",
+          "value": "19",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -368,40 +368,10 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Un train fantôme pour le festival « Rheinlicht »",
-              "detail": "KULTURLABOR.sh, Schaffhausen — en cours, dernier jour : 7 octobre 2026",
-              "date": "2026-10-07",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/haunted-house-for-the-rheinlicht-festival/"
-            },
-            {
-              "label": "DOUG SHORTS [US] & THE RUFFCATS [DE] | Support : NAMAY KUSH [CH]",
-              "detail": "TapTab",
-              "date": "2026-10-09",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/rah-und-the-ruffcats-de-support-namay-kush-ch_AV5kVEF"
-            },
-            {
               "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau",
-              "date": "2026-10-10",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-13",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "Atelier de peinture",
-              "detail": "KULTURLABOR.sh, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/painting-studio/"
-            },
-            {
-              "label": "So ein Käse! – Führung mit Workshop für Erwachsene",
-              "detail": "Museum Lindwurm, Stein am Rhein",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/so-ein-kaese-fuehrung-mit-workshop-fuer-erwachsene/"
-            },
-            {
-              "label": "Bannis de l'Utopie [US]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-10",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/banned-from-utopia-us/"
             },
             {
               "label": "Bocktoberfest Schaffhausen 2026",
@@ -426,11 +396,41 @@
               "detail": "Sciaffusa",
               "date": "2026-10-17",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/auf-den-spuren-der-hugenotten-und-waldenser/"
+            },
+            {
+              "label": "Poisson sagi",
+              "detail": "Buchberg",
+              "date": "2026-10-17",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
+            },
+            {
+              "label": "Balade publique en mobylette au Chläggli",
+              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
+              "date": "2026-10-18",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
+            },
+            {
+              "label": "Conférence «Il faut mourir pendant qu’on vit, afin de vivre quand on meurt.»",
+              "detail": "Christliche Gemeinde Neuhausen (CGN)",
+              "date": "2026-10-18",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
+            },
+            {
+              "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "My Fair Lady",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-07T00:37:21.979Z"
+          "updatedAt": "2026-10-13T00:02:43.981Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-07T10:11:40.832Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

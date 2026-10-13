@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T06:57:59.693Z",
-  "contentHash": "22cbc2bf562d08e019e0093e6aea894b4adae86cebe4c3a6977f7999512c3076",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "c540c58544b91781e712a56f2ba8f9674efce55ae03e039e8a166d256ed117f0",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -146,15 +146,21 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "AVS e prestazioni complementari nel Canton Berna",
-          "url": "/articoli-svizzera/avs-integrazioni-canton-berna/",
-          "excerpt": "Come funziona il calcolo della rendita AVS nel Canton Berna: contributi obbligatori, lacune contributive, prestazioni complementari e copertura del minimo vitale.",
-          "date": "2026-09-07T05:07:41.223Z"
+          "title": "Cyberattacco alla fornitrice delle casse pensioni bernesi",
+          "url": "/articoli-berna/cyberattacco-casse-pensione-berna/",
+          "excerpt": "Una fornitrice software esterna di BPK e BLVK è stata colpita a fine settembre.",
+          "date": "2026-10-09T23:26:36.398Z"
+        },
+        {
+          "title": "AVS Cantone Berna: rendita, lacune e prestazioni",
+          "url": "/articoli-svizzera/avs-berna-rendita-lacune-contributive/",
+          "excerpt": "Primo pilastro AVS nel Cantone di Berna: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari al minimo vitale.",
+          "date": "2026-08-22T02:05:16.385Z"
         },
         {
           "title": "Terzo pilastro 3a svizzera: vantaggi 2026 canton Berna",
@@ -163,10 +169,10 @@
           "date": "2026-10-03T13:22:34.891Z"
         },
         {
-          "title": "AVS Cantone Berna: rendita, lacune e prestazioni",
-          "url": "/articoli-svizzera/avs-berna-rendita-lacune-contributive/",
-          "excerpt": "Primo pilastro AVS nel Cantone di Berna: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari al minimo vitale.",
-          "date": "2026-08-22T02:05:16.385Z"
+          "title": "AVS e prestazioni complementari nel Canton Berna",
+          "url": "/articoli-svizzera/avs-integrazioni-canton-berna/",
+          "excerpt": "Come funziona il calcolo della rendita AVS nel Canton Berna: contributi obbligatori, lacune contributive, prestazioni complementari e copertura del minimo vitale.",
+          "date": "2026-09-07T05:07:41.223Z"
         },
         {
           "title": "AVS e prestazioni complementari nel Cantone Berna",
@@ -193,7 +199,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "BE",
@@ -312,21 +318,15 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "AVS and complementary services in Canton Bern",
-          "url": "/en/swiss-articles/avs-integrations-canton-berna/",
-          "excerpt": "How the calculation of the AVS pension works in the Canton of Bern: mandatory contributions, contribution gaps, supplementary benefits and coverage of the minimum living allowance.",
-          "date": "2026-09-07T05:07:41.223Z"
-        },
-        {
-          "title": "Swiss third pillar 3a: 2026 benefits in the canton of Bern",
-          "url": "/en/swiss-articles/swiss-3a-pillar-bern-guide/",
-          "excerpt": "2026 Guide to 3a in the canton of Bern: indexed maximum, three tax levels, and comparison between banking and insurance providers.",
-          "date": "2026-10-03T13:22:34.891Z"
+          "title": "Cyberattack on the provider of Bernese pension funds",
+          "url": "/en/bern-articles/cyberattack-bern-pension-funds/",
+          "excerpt": "An external software provider for BPK and BLVK was affected at the end of September.",
+          "date": "2026-10-09T23:26:36.398Z"
         },
         {
           "title": "AVS Canton Bern: annuity, gaps and benefits",
@@ -335,8 +335,20 @@
           "date": "2026-08-22T02:05:16.385Z"
         },
         {
+          "title": "Swiss third pillar 3a: 2026 benefits in the canton of Bern",
+          "url": "/en/swiss-articles/swiss-3a-pillar-bern-guide/",
+          "excerpt": "2026 Guide to 3a in the canton of Bern: indexed maximum, three tax levels, and comparison between banking and insurance providers.",
+          "date": "2026-10-03T13:22:34.891Z"
+        },
+        {
           "title": "AVS and complementary services in Canton Bern",
-          "url": "/en/swiss-articles/avs-and-complementary-benefits-cantone-berna-compensation-fund/",
+          "url": "/en/swiss-articles/avs-integrations-canton-bern/",
+          "excerpt": "How the calculation of the AVS pension works in the Canton of Bern: mandatory contributions, contribution gaps, supplementary benefits and coverage of the minimum living allowance.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
+          "title": "AVS and complementary services in Canton Bern",
+          "url": "/en/swiss-articles/avs-and-complementary-benefits-cantone-bern-compensation-fund/",
           "excerpt": "The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.",
           "date": "2026-08-13T16:04:43.335Z"
         }
@@ -359,7 +371,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "BE",
@@ -478,21 +490,15 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "AHV und Ergänzungsleistungen im Kanton Bern",
-          "url": "/de/schweiz-artikel/ahv-zulagen-kanton-bern/",
-          "excerpt": "So funktioniert die Berechnung der AHV-Rente im Kanton Bern: Pflichtbeiträge, Beitragslücken, Ergänzungsleistungen und Lebensminimum.",
-          "date": "2026-09-07T05:07:41.223Z"
-        },
-        {
-          "title": "Schweizer Säule 3a: Vorteile 2026 im Kanton Bern",
-          "url": "/de/schweiz-artikel/3a-saeule-bern-leitfaden/",
-          "excerpt": "Leitfaden 2026 zur Säule 3a im Kanton Bern: indexierter Höchstbetrag, drei Steuerebenen und Vergleich von Bank- und Versicherungsanbietern.",
-          "date": "2026-10-03T13:22:34.891Z"
+          "title": "Cyberangriff auf die Anbieterin der bernischen Pensionskassen",
+          "url": "/de/bern-artikel/cyberangriff-berner-pensionskassen/",
+          "excerpt": "Eine externe Softwareanbieterin für BPK und BLVK wurde Ende September angegriffen.",
+          "date": "2026-10-09T23:26:36.398Z"
         },
         {
           "title": "AHV Kanton Bern: Rente, Lücken und Leistungen",
@@ -501,8 +507,20 @@
           "date": "2026-08-22T02:05:16.385Z"
         },
         {
+          "title": "Schweizer Säule 3a: Vorteile 2026 im Kanton Bern",
+          "url": "/de/schweiz-artikel/3a-saeule-bern-leitfaden/",
+          "excerpt": "Leitfaden 2026 zur Säule 3a im Kanton Bern: indexierter Höchstbetrag, drei Steuerebenen und Vergleich von Bank- und Versicherungsanbietern.",
+          "date": "2026-10-03T13:22:34.891Z"
+        },
+        {
           "title": "AHV und Ergänzungsleistungen im Kanton Bern",
-          "url": "/de/schweiz-artikel/avs-und-zusatzleistungen-cantone-berna-entschadigungsfonds/",
+          "url": "/de/schweiz-artikel/ahv-zulagen-kanton-bern/",
+          "excerpt": "So funktioniert die Berechnung der AHV-Rente im Kanton Bern: Pflichtbeiträge, Beitragslücken, Ergänzungsleistungen und Lebensminimum.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
+          "title": "AHV und Ergänzungsleistungen im Kanton Bern",
+          "url": "/de/schweiz-artikel/avs-und-zusatzleistungen-cantone-bern-entschadigungsfonds/",
           "excerpt": "Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.",
           "date": "2026-08-13T16:04:43.335Z"
         }
@@ -525,7 +543,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "BE",
@@ -644,21 +662,15 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "AVS et prestations complémentaires dans le canton de Berne",
-          "url": "/fr/articles-suisse/ava-allocations-canton-berne/",
-          "excerpt": "Comment fonctionne le calcul de la rente AVS dans le canton de Berne : cotisations obligatoires, lacunes de cotisation, prestations complémentaires et couverture du minimum vital.",
-          "date": "2026-09-07T05:07:41.223Z"
-        },
-        {
-          "title": "Troisième pilier 3a suisse : avantages 2026 dans le canton de Berne",
-          "url": "/fr/articles-suisse/pilier-3a-berne-guide/",
-          "excerpt": "Guide 2026 du pilier 3a dans le canton de Berne : plafond indexé, trois niveaux fiscaux et comparaison entre les prestataires bancaires et les assureurs.",
-          "date": "2026-10-03T13:22:34.891Z"
+          "title": "Cyberattaque contre la fournisseuse des caisses de pension bernoises",
+          "url": "/fr/articles-berne/cyberattaque-caisses-pension-berne/",
+          "excerpt": "Une fournisseuse externe de logiciels de BPK et de BLVK a été touchée fin septembre.",
+          "date": "2026-10-09T23:26:36.398Z"
         },
         {
           "title": "AVS Canton de Berne : rente, lacunes et prestations",
@@ -667,8 +679,20 @@
           "date": "2026-08-22T02:05:16.385Z"
         },
         {
+          "title": "Troisième pilier 3a suisse : avantages 2026 dans le canton de Berne",
+          "url": "/fr/articles-suisse/pilier-3a-berne-guide/",
+          "excerpt": "Guide 2026 du pilier 3a dans le canton de Berne : plafond indexé, trois niveaux fiscaux et comparaison entre les prestataires bancaires et les assureurs.",
+          "date": "2026-10-03T13:22:34.891Z"
+        },
+        {
           "title": "AVS et prestations complémentaires dans le canton de Berne",
-          "url": "/fr/articles-suisse/avs-et-benefices-complementaires-cantone-berna-fonds-de-compensation/",
+          "url": "/fr/articles-suisse/ava-allocations-canton-berne/",
+          "excerpt": "Comment fonctionne le calcul de la rente AVS dans le canton de Berne : cotisations obligatoires, lacunes de cotisation, prestations complémentaires et couverture du minimum vital.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
+          "title": "AVS et prestations complémentaires dans le canton de Berne",
+          "url": "/fr/articles-suisse/avs-et-benefices-complementaires-cantone-berne-fonds-de-compensation/",
           "excerpt": "La caisse de compensation du canton de Berne influe sur les prestations complémentaires de l'AVS, mais la source ne fournit pas d'informations spécifiques.",
           "date": "2026-08-13T16:04:43.335Z"
         }
@@ -691,7 +715,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T06:57:59.693Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }

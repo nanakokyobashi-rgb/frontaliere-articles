@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:25:04.311Z",
-  "contentHash": "7cc9ffe54dbe65ca390bd8fb1ad3efe57d40437df71a6a1f28e28806e2df6070",
+  "updatedAt": "2026-10-13T16:09:21.473Z",
+  "contentHash": "2d333b6e544fdb3cbae85b3285a5a36266af7bfc4ed7ac9dd745786db4d4adc5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-12T23:48:12.301Z",
       "keyFacts": 0
     }
   ],
@@ -166,10 +166,16 @@
               "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Pensioni multiple Francia/Svizzera: leggere il netto riga per riga",
+          "url": "/articoli-vaud/pensione-multipla-francia-svizzera-2026/",
+          "excerpt": "Il netto del relevé non riflette sempre la pensione.",
+          "date": "2026-10-12T02:50:47.675Z"
+        },
         {
           "title": "Terzo pilastro 3a: vantaggi 2026 nel canton Vaud",
           "url": "/articoli-svizzera/guida-3a-fisco-vaud/",
@@ -207,7 +213,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "en": {
       "canton": "VD",
@@ -346,10 +352,16 @@
               "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Multiple French/Swiss pensions: read the net amount line by line",
+          "url": "/en/vaud-articles/multi-country-pension-france-switzerland-2026/",
+          "excerpt": "The net amount on the statement does not always reflect the pension.",
+          "date": "2026-10-12T02:50:47.675Z"
+        },
         {
           "title": "Third pillar 3a: 2026 benefits in the canton of Vaud",
           "url": "/en/swiss-articles/third-pillar-3a-vaud-guide/",
@@ -387,7 +399,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "de": {
       "canton": "VD",
@@ -526,19 +538,25 @@
               "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Dritte Säule 3a: Vorteile 2026 im Kanton Vaud",
+          "title": "Mehrere Renten aus Frankreich/der Schweiz: den Nettobetrag Zeile für Zeile lesen",
+          "url": "/de/waadt-artikel/mehrsprachige-rente-frankreich-schweiz-2026/",
+          "excerpt": "Der Nettobetrag der Abrechnung entspricht nicht immer der Rente.",
+          "date": "2026-10-12T02:50:47.675Z"
+        },
+        {
+          "title": "Dritte Säule 3a: Vorteile 2026 im Kanton Waadt",
           "url": "/de/schweiz-artikel/3a-saeule-steuern-waadt/",
-          "excerpt": "Leitfaden 2026 zur dritten Säule 3a im Kanton Vaud: Steuervorteile, drei Besteuerungsebenen, indexierter Höchstbetrag und nationaler Vergleich.",
+          "excerpt": "Leitfaden 2026 zur dritten Säule 3a im Kanton Waadt: Steuervorteile, drei Besteuerungsebenen, indexierter Höchstbetrag und nationaler Vergleich.",
           "date": "2026-10-03T14:44:40.044Z"
         },
         {
           "title": "BVG in der Schweiz: Beiträge und Vorsorgeplanung im Kanton Waadt",
-          "url": "/de/schweiz-artikel/guida-lpp-secondo-pilastro-2026-vaud-de/",
+          "url": "/de/schweiz-artikel/guida-lpp-secondo-pilastro-2026-waadt-de/",
           "excerpt": "Der Leitfaden zur zweiten Säule BVG deckt Beiträge, Bezug, Lückenrückkauf und Vorsorgeplanung im Kanton Waadt ab.",
           "date": "2026-08-10T00:29:07.213Z"
         },
@@ -567,7 +585,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     },
     "fr": {
       "canton": "VD",
@@ -706,10 +724,16 @@
               "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-12T23:48:12.301Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Pensions multiples France/Suisse : lire le net ligne par ligne",
+          "url": "/fr/articles-vaud/retraite-multi-pays-france-suisse-2026/",
+          "excerpt": "Le net du relevé ne reflète pas toujours la pension.",
+          "date": "2026-10-12T02:50:47.675Z"
+        },
         {
           "title": "Troisième pilier 3a : avantages 2026 dans le canton de Vaud",
           "url": "/fr/articles-suisse/pilier-3a-fiscalite-vaud/",
@@ -747,7 +771,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:25:04.311Z"
+      "updatedAt": "2026-10-13T16:09:21.473Z"
     }
   }
 }
