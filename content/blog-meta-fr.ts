@@ -13112,7 +13112,10 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Jeunes professionnels au Palais des Congrès de Lugano lors d\'un événement sur les retours au Tessin',
     'blog.article.loreto-pavimentazione-notte.title': 'Via Mazzini à Loreto fermée de nuit du 19 au 23 octobre',
     'blog.article.loreto-pavimentazione-notte.excerpt': 'Via Mazzini fermée à Loreto du 19 au 23 octobre Barrage nocturne de 20 à 6 Travaux pour le nouveau revêtement routier Accès par Riva Antonio Caccia',
-    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Travaux nocturnes sur la Via Mazzini à Loreto, Lugano, pour le nouveau revêtement routier',
+    'blog.article.bissone-torneo-scacchi.title': 'Échecs à Bissone : les vainqueurs du VI Festival',
+    'blog.article.bissone-torneo-scacchi.excerpt': 'Dimanche 11 octobre s’est déroulée la sixième édition Christian De Lucia a remporté le Trophée Borromini Under 16 Vladimir Paleologu a conquis le titre Semilampo',
+    'blog.article.bissone-torneo-scacchi.imageAlt': 'Jeunes joueurs d\'echecs au festival de Bissone',
 };
 
 export default blogMetaFr;

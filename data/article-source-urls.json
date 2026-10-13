@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/la-coda-al-san-gottardo-piu-lunga-degli-ultimi-4-anni-441356": {
-    "articleId": "san-gottardo-code-20-km-luglio",
-    "ts": "2026-08-26T09:56:28.232Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/08/carburanti-finiscono-le-risorse-per-lo-sconto-proroga-del-gasolio-fino-a-mercoledi/2662153": {
     "articleId": "gasolio-sconto-17-centesimi-agosto",
     "ts": "2026-08-26T12:56:12.217Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1956360/loreto-lavori-mazzini-traffico-posa": {
     "articleId": "loreto-pavimentazione-notte",
     "ts": "2026-10-13T07:51:33.090Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1956354/giovani-bissone-scacchi-festival-under": {
+    "articleId": "bissone-torneo-scacchi",
+    "ts": "2026-10-13T08:19:27.045Z",
     "keyForm": 2
   }
 }

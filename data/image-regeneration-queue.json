@@ -30,6 +30,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-13T06:45:42.103Z",
       "lastFailureAt": "2026-10-13T06:56:07.129Z"
+    },
+    {
+      "articleId": "bissone-torneo-scacchi",
+      "title": "Scacchi a Bissone: i vincitori del VI Festival",
+      "fallbackImage": "/images/blog/article-festival-racconto-varese-ottobre.webp",
+      "reason": "All image providers failed for article-bissone-torneo-scacchi: openai-codex (vision gate rejected image: Original stylized illustration with no text or logos, but multiple clearly",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-13T08:19:27.043Z",
+      "lastFailureAt": "2026-10-13T08:19:27.043Z"
     }
   ]
 }

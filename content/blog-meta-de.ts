@@ -13109,7 +13109,10 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Junge Berufstätige im Kongresszentrum Lugano bei Veranstaltung über Rückkehr ins Tessin',
     'blog.article.loreto-pavimentazione-notte.title': 'Via Mazzini in Loreto nachts vom 19. bis 23. Oktober gesperrt',
     'blog.article.loreto-pavimentazione-notte.excerpt': 'Via Mazzini in Loreto vom 19.',
-    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Nächtliche Bauarbeiten an der Via Mazzini in Loreto, Lugano, für den neuen Strassenbelag',
+    'blog.article.bissone-torneo-scacchi.title': 'Schach in Bissone: die Gewinner des VI Festivals',
+    'blog.article.bissone-torneo-scacchi.excerpt': 'Am Sonntag, dem 11.',
+    'blog.article.bissone-torneo-scacchi.imageAlt': 'Junge Schachspieler beim Festival in Bissone',
 };
 
 export default blogMetaDe;

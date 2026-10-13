@@ -13110,7 +13110,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.rientro-ticino-salario-fattori.imageAlt': 'Young professionals at Lugano Congress Center during event on returns to Ticino',
     'blog.article.loreto-pavimentazione-notte.title': 'Via Mazzini in Loreto closed at night from October 19 to 23',
     'blog.article.loreto-pavimentazione-notte.excerpt': 'Via Mazzini closed in Loreto from October 19 to 23 Overnight closure from 8 p.m.',
-    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Illustration generated for this article',
+    'blog.article.loreto-pavimentazione-notte.imageAlt': 'Night roadworks on Via Mazzini in Loreto, Lugano, for new street paving',
+    'blog.article.bissone-torneo-scacchi.title': 'Chess in Bissone: the winners of the VI Festival',
+    'blog.article.bissone-torneo-scacchi.excerpt': 'On Sunday, October 11, the sixth edition took place Christian De Lucia won the Borromini Under 16 Trophy Vladimir Paleologu won the Rapid title',
+    'blog.article.bissone-torneo-scacchi.imageAlt': 'Young chess players during the festival in Bissone',
 };
 
 export default blogMetaEn;
