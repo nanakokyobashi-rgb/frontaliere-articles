@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-aumento-tassi-ipotecari-q3.webp",
+      "sha256": "5fa8764df0d62aef9b6f76ecc998acf5b5187d9e4c363b3f076247d0877d37af"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-aumento-tassi-ipotecari-q3-480w.webp",
+      "sha256": "9d1a6a851236d09fc05d0687e8793f948a68eb64fd227b74a9e402ece52b4d12"
+    }
+  ]
 }
