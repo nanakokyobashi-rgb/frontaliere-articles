@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-scontro-galleria-cernobbio-varese.webp",
+      "sha256": "7e6afe8401d788b5e765fabe7993c8e8c30a62236a6563b4f5056223381a3c59"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-scontro-galleria-cernobbio-varese-480w.webp",
+      "sha256": "9cabb45bb6efddfc18091f4caa9b2015d5ee77be40d27ca32659f769bf0a2d8f"
+    }
+  ]
 }
