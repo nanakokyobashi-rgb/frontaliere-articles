@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1948825/washington-f-35a-berna-concordato-prezzo": {
-    "articleId": "f35a-prezzo-fisso-non-concordato",
-    "ts": "2026-09-08T21:22:31.064Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948824/svizzera-esercito-capo-obiettivo-mosca": {
     "articleId": "svizzera-obiettivo-mosca-esercito",
     "ts": "2026-09-08T21:40:21.849Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1956495/consiglio-progetto-diritto-lavoro-stati-nazionale-commissione": {
     "articleId": "diritto-lavoro-telelavoro-cet-s",
     "ts": "2026-10-13T18:20:51.602Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1956413/franz-ruppen-candidatura-consiglio-udc": {
+    "articleId": "ruppen-valuta-candidatura",
+    "ts": "2026-10-13T19:03:54.735Z",
     "keyForm": 2
   }
 }

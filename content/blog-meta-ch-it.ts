@@ -8174,6 +8174,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.diritto-lavoro-telelavoro-cet-s.title': 'Lavoro da casa: la CET-S propone regole più flessibili',
     'blog.article.diritto-lavoro-telelavoro-cet-s.excerpt': 'La CET-S sostiene regole meno rigide per il lavoro da casa La disconnessione esplicita verrebbe stralciata Il lavoro domenicale resterebbe soggetto',
     'blog.article.diritto-lavoro-telelavoro-cet-s.imageAlt': 'Postazione di lavoro da casa in Svizzera con vista paesaggistica',
+    'blog.article.ruppen-valuta-candidatura.title': 'Franz Ruppen valuta la candidatura al Consiglio federale',
+    'blog.article.ruppen-valuta-candidatura.excerpt': 'Franz Ruppen riflette sulla successione di Guy Parmelin Esther Friedli ha citato il suo nome domenica sera La risposta è attesa alla fine della prossima',
+    'blog.article.ruppen-valuta-candidatura.imageAlt': 'Scena istituzionale svizzera con bandiere rossocrociate.',
 };
 
 export default blogMetaChIt;

@@ -8174,6 +8174,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.diritto-lavoro-telelavoro-cet-s.title': 'Travail à domicile : la CET-S propose des règles plus flexibles',
     'blog.article.diritto-lavoro-telelavoro-cet-s.excerpt': 'La CET-S est favorable à des règles moins strictes pour le travail à domicile La déconnexion explicite serait supprimée Le travail dominical resterait soumis',
     'blog.article.diritto-lavoro-telelavoro-cet-s.imageAlt': 'Poste de travail à domicile en Suisse avec vue panoramique',
+    'blog.article.ruppen-valuta-candidatura.title': 'Franz Ruppen évalue la candidature au Conseil fédéral',
+    'blog.article.ruppen-valuta-candidatura.excerpt': 'Franz Ruppen réfléchit sur la succession de Guy Parmelin Esther Friedli a cité son nom dimanche soir La réponse est attendue à la fin de la prochaine',
+    'blog.article.ruppen-valuta-candidatura.imageAlt': 'Scène institutionnelle suisse avec des drapeaux rouges et blancs.',
 };
 
 export default blogMetaChFr;

@@ -2747,6 +2747,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'referendum-mercosur-firme-berna': { it: 'referendum-mercosur-firme-berna', en: 'mercosur-referendum-signatures-bern', de: 'mercosur-referendum-unterschriften-bern', fr: 'referendum-mercosur-signatures-berne' },
  'iniziativa-limitazione-fuochi-artificio': { it: 'iniziativa-limitazione-fuochi-artificio', en: 'initiative-fireworks-limitation-switzerland', de: 'initiative-feuerwerk-beschrankung-schweiz', fr: 'initiative-limitation-feux-artifice-suisse' },
  'diritto-lavoro-telelavoro-cet-s': { it: 'diritto-lavoro-telelavoro-cet-s', en: 'swiss-labour-law-home-office-cet-s', de: 'schweizer-arbeitsrecht-homeoffice-cet-s', fr: 'droit-travail-teletravail-cet-s' },
+ 'ruppen-valuta-candidatura': { it: 'ruppen-valuta-candidatura', en: 'ruppen-weighs-federal-council-bid', de: 'ruppen-prueft-kandidatur-bundesrat', fr: 'ruppen-evalue-candidature-conseil-federal' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

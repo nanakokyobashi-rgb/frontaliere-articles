@@ -103140,6 +103140,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ruppen-valuta-candidatura': {
+    title: 'Franz Ruppen valuta la candidatura al Consiglio federale',
+    description: 'Franz Ruppen riflette sulla successione di Guy Parmelin Esther Friedli ha citato il suo nome domenica sera La risposta è attesa alla fine della prossima',
+    keywords: 'frontalieri, ticino, svizzera, italia, franz, ruppen, valuta, candidatura',
+    ogTitle: 'Franz Ruppen valuta la candidatura al Consiglio federale',
+    ogDescription: 'Franz Ruppen riflette sulla successione di Guy Parmelin Esther Friedli ha citato il suo nome domenica sera La risposta è attesa alla fine della prossima',
+    canonicalPath: '/articoli-svizzera/ruppen-valuta-candidatura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Franz Ruppen valuta la candidatura al Consiglio federale",
+      "description": "Franz Ruppen riflette sulla successione di Guy Parmelin Esther Friedli ha citato il suo nome domenica sera La risposta è attesa alla fine della prossima",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ruppen-valuta-candidatura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena istituzionale svizzera con bandiere rossocrociate."
+      },
+      "datePublished": "2026-10-13T19:03:54+00:00",
+      "dateModified": "2026-10-13T19:03:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ruppen-valuta-candidatura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

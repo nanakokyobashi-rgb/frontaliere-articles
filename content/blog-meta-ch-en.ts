@@ -8174,6 +8174,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.diritto-lavoro-telelavoro-cet-s.title': 'Working from home: CET-S proposes more flexible rules',
     'blog.article.diritto-lavoro-telelavoro-cet-s.excerpt': 'CET-S supports less stringent rules for working from home Explicit disconnection would be scrapped Sunday work would remain subject',
     'blog.article.diritto-lavoro-telelavoro-cet-s.imageAlt': 'Home office workstation in Switzerland with a scenic view',
+    'blog.article.ruppen-valuta-candidatura.title': 'Franz Ruppen considers candidacy for the Federal Council',
+    'blog.article.ruppen-valuta-candidatura.excerpt': 'Franz Ruppen reflects on the succession of Guy Parmelin Esther Friedli mentioned his name on Sunday evening The answer is expected by the end of next',
+    'blog.article.ruppen-valuta-candidatura.imageAlt': 'Swiss institutional scene with red-and-white flags.',
 };
 
 export default blogMetaChEn;

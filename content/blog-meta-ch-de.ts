@@ -8174,6 +8174,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.diritto-lavoro-telelavoro-cet-s.title': 'Homeoffice: Die CET-S schlägt flexiblere Regeln vor',
     'blog.article.diritto-lavoro-telelavoro-cet-s.excerpt': 'Die CET-S befürwortet weniger strenge Regeln für das Homeoffice Die ausdrückliche Regelung zur Nichterreichbarkeit würde gestrichen Die Sonntagsarbeit bliebe unterworfen',
     'blog.article.diritto-lavoro-telelavoro-cet-s.imageAlt': 'Homeoffice-Arbeitsplatz in der Schweiz mit Landschaftsblick',
+    'blog.article.ruppen-valuta-candidatura.title': 'Franz Ruppen bewertet die Kandidatur für den Bundesrat',
+    'blog.article.ruppen-valuta-candidatura.excerpt': 'Franz Ruppen reflektiert über die Nachfolge von Guy Parmelin Esther Friedli zitierte seinen Namen Sonntagabend Die Antwort wird am Ende des nächsten erwartet',
+    'blog.article.ruppen-valuta-candidatura.imageAlt': 'Schweizer Institutionengebäude mit rot-weissen Fahnen.',
 };
 
 export default blogMetaChDe;
