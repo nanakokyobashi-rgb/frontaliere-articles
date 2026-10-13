@@ -8179,7 +8179,10 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Scène institutionnelle suisse avec des drapeaux rouges et blancs.',
     'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom remporte son recours devant le TAF : amende de 18 millions annulée',
     'blog.article.swisscom-fibra-multa-taf.excerpt': 'Le TAF annule l\'amende de 18 millions infligée à Swisscom La Comco avait imposé des conditions et une sanction L\'arrêt concerne l\'extension de la fibre optique Le recours',
-    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Techniciens installant un câble fibre optique dans une rue urbaine suisse',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.title': 'Keller-Sutter lance la campagne du non sur l’imposition des couples mariés',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.excerpt': 'Keller-Sutter lance à Berne la campagne pour le non.',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.imageAlt': 'Bâtiment du DFÉ à Berne avec drapeaux suisses et document fiscal au premier plan',
 };
 
 export default blogMetaChFr;

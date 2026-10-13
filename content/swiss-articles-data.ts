@@ -27300,6 +27300,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'iniziativa-keller-sutter-imposizione-coniugi',
+    category: 'fiscale',
+    date: '2026-10-13T19:48:49.663Z',
+    image: '/images/blog/article-iniziativa-keller-sutter-imposizione-coniugi.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

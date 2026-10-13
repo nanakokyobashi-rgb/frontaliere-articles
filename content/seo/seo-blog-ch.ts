@@ -103218,6 +103218,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-keller-sutter-imposizione-coniugi': {
+    title: 'Keller-Sutter lancia la campagna del No sull\'imposizione dei coniugi',
+    description: 'Keller-Sutter apre a Berna la campagna per il No. Il voto su popolo e Cantoni è fissato al 29 novembre. L\'8 marzo 2026 il 54,2% ha approvato la tassazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, keller-sutter, lancia, campagna, sull',
+    ogTitle: 'Keller-Sutter lancia la campagna del No sull\'imposizione dei coniugi',
+    ogDescription: 'Keller-Sutter apre a Berna la campagna per il No.',
+    canonicalPath: '/articoli-svizzera/iniziativa-keller-sutter-imposizione-coniugi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Keller-Sutter lancia la campagna del No sull'imposizione dei coniugi",
+      "description": "Keller-Sutter apre a Berna la campagna per il No. Il voto su popolo e Cantoni è fissato al 29 novembre. L'8 marzo 2026 il 54,2% ha approvato la tassazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-iniziativa-keller-sutter-imposizione-coniugi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio del DFF a Berna con bandiere svizzere e documento fiscale in primo piano"
+      },
+      "datePublished": "2026-10-13T19:48:49+00:00",
+      "dateModified": "2026-10-13T19:48:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-keller-sutter-imposizione-coniugi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -8179,7 +8179,10 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ruppen-valuta-candidatura.imageAlt': 'Scena istituzionale svizzera con bandiere rossocrociate.',
     'blog.article.swisscom-fibra-multa-taf.title': 'Swisscom vince il ricorso TAF: multa 18 milioni annullata',
     'blog.article.swisscom-fibra-multa-taf.excerpt': 'TAF annulla la multa Swisscom da 18 milioni La Comco aveva imposto condizioni e sanzione La sentenza riguarda l\'ampliamento in fibra ottica Il ricorso',
-    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.swisscom-fibra-multa-taf.imageAlt': 'Tecnici che installano cavo fibra ottica in una strada urbana svizzera',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.title': 'Keller-Sutter lancia la campagna del No sull\'imposizione dei coniugi',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.excerpt': 'Keller-Sutter apre a Berna la campagna per il No.',
+    'blog.article.iniziativa-keller-sutter-imposizione-coniugi.imageAlt': 'Edificio del DFF a Berna con bandiere svizzere e documento fiscale in primo piano',
 };
 
 export default blogMetaChIt;
