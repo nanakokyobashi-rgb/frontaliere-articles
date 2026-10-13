@@ -44172,6 +44172,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'poker-room-admiral-mendrisio-chiude',
+ category: 'novita',
+ date: '2026-10-13T05:13:58.327Z',
+ image: '/images/blog/article-poker-room-admiral-mendrisio-chiude.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

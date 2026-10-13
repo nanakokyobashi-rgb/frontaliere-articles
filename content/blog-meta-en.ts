@@ -13099,6 +13099,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cuoco-dietetica-apf-ticino-mercato.title': 'Dietetic chef with an APF in Ticino: a niche with few positions',
     'blog.article.cuoco-dietetica-apf-ticino-mercato.excerpt': 'Between 2023 and 2025, unemployment among UNI and SUP graduates is increasing The APF dietetics cook has few specific career prospects in Ticino The specific offers',
     'blog.article.cuoco-dietetica-apf-ticino-mercato.imageAlt': 'Professional kitchen at EOC Mendrisio preparing dietetic meals for patients',
+    'blog.article.poker-room-admiral-mendrisio-chiude.title': 'The poker room at Casinò Admiral in Mendrisio is closing',
+    'blog.article.poker-room-admiral-mendrisio-chiude.excerpt': 'The poker room at Casinò Admiral closes on November 30 The project had started on January 1, 2022 Redeployment is planned for the 15 employees',
+    'blog.article.poker-room-admiral-mendrisio-chiude.imageAlt': 'Poker table at the Admiral Casino in Mendrisio with chips and cards under ambient lighting',
 };
 
 export default blogMetaEn;

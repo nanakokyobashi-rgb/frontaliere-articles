@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1942938/lavoro-svizzera-frontalieri-tempo-quali-effetti": {
-    "articleId": "svizzera-lavoro-temporaneo-frontalieri",
-    "ts": "2026-08-24T06:25:23.541Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/attualita/1945877/mappo-minusio-chiusure-rampe-lavori": {
     "articleId": "a13-chiusure-mappo-minusio-2026",
     "ts": "2026-08-26T00:40:22.082Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1949575/formazione-lavoro-lugano-marco-federale": {
     "articleId": "cuoco-dietetica-apf-ticino-mercato",
     "ts": "2026-10-13T04:51:58.216Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1956222/poker-ruiu-mendrisio-marketing-casino-gioco-room-anni-azienda-admiral": {
+    "articleId": "poker-room-admiral-mendrisio-chiude",
+    "ts": "2026-10-13T05:13:58.694Z",
     "keyForm": 2
   }
 }

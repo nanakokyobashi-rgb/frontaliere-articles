@@ -13100,6 +13100,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.cuoco-dietetica-apf-ticino-mercato.title': 'Cuoco in dietetica APF in Ticino: nicchia con pochi posti',
     'blog.article.cuoco-dietetica-apf-ticino-mercato.excerpt': 'Tra il 2023 e il 2025 cresce la disoccupazione tra diplomati UNI e SUP Il cuoco in dietetica APF ha pochi sbocchi specifici in Ticino Le offerte specifiche',
     'blog.article.cuoco-dietetica-apf-ticino-mercato.imageAlt': 'Cucina professionale dell\'EOC Mendrisio con pasti dietetici per pazienti',
+    'blog.article.poker-room-admiral-mendrisio-chiude.title': 'Chiude la poker room del Casinò Admiral di Mendrisio',
+    'blog.article.poker-room-admiral-mendrisio-chiude.excerpt': 'La poker room del Casinò Admiral chiude il 30 novembre Il progetto era partito il 1° gennaio 2022 Per i 15 collaboratori sono previste ricollocazione',
+    'blog.article.poker-room-admiral-mendrisio-chiude.imageAlt': 'Tavolo da poker nel Casinò Admiral di Mendrisio con fiches e carte illuminate',
 };
 
 export default blogMetaIt;

@@ -13098,6 +13098,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.cuoco-dietetica-apf-ticino-mercato.title': 'APF-Diätkoch im Tessin: Nische mit wenigen Plätzen',
     'blog.article.cuoco-dietetica-apf-ticino-mercato.excerpt': 'Zwischen 2023 und 2025 steigt die Arbeitslosigkeit zwischen UNI- und Sup-Absolventen Der Küchenchef in der Diätetik APF hat nur wenige spezifische Absatzmärkte im Tessin Die spezifischen Angebote',
     'blog.article.cuoco-dietetica-apf-ticino-mercato.imageAlt': 'Professionelle Küche im EOC Mendrisio mit Diätmahlzeiten für Patienten',
+    'blog.article.poker-room-admiral-mendrisio-chiude.title': 'Der Pokerraum des Casinò Admiral in Mendrisio schließt',
+    'blog.article.poker-room-admiral-mendrisio-chiude.excerpt': 'Der Pokerraum des Casinò Admiral schließt am 30.',
+    'blog.article.poker-room-admiral-mendrisio-chiude.imageAlt': 'Poker-Tisch im Admiral Casino Mendrisio mit Jetons und Karten bei ambiente Beleuchtung',
 };
 
 export default blogMetaDe;
