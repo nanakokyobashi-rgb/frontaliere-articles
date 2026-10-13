@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-iniziativa-keller-sutter-imposizione-coniugi.webp",
+      "sha256": "1e0d5b0231a870357d47d2f27edc89a2d3dbeb73943db2af4fe4fb6cbf8b1faa"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-iniziativa-keller-sutter-imposizione-coniugi-480w.webp",
+      "sha256": "752ed10e4de7006153dad5839c27907a671d8b3d506c43324494cc13a34a3da3"
+    }
+  ]
 }
