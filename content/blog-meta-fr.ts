@@ -13128,6 +13128,11 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.title': 'AVS : Vote sur la TVA le 29 novembre pour la 13e rente',
     'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.excerpt': 'Le vote sur la TVA pour l\'AVS est fixé au 29 novembre.',
     'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.imageAlt': 'Image éditoriale relative à: AVS: Voto IVA il 29 novembre per la 13esima rendita',
+    'blog.article.bollettino-frontaliere-2026-10-13.title': 'Bulletin du frontalier – 13 octobre 2026 : 858 nouvelles offres d\'emploi hier',
+    'blog.article.bollettino-frontaliere-2026-10-13.excerpt': 'Les chiffres du jour, 13 octobre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-13.imageAlt': 'Les chiffres du jour pour les frontaliers – 13 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-13.seoDescription': 'Bulletin du frontalier du 13 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-13.ogDescription': 'Les chiffres du 13 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
 };
 
 export default blogMetaFr;

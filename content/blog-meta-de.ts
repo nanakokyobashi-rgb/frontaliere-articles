@@ -13125,6 +13125,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.title': 'AHV: Mehrwertsteuer-Abstimmung am 29. November für die 13. Rente',
     'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.excerpt': 'Die Abstimmung über die Mehrwertsteuer für die AHV findet am 29.',
     'blog.article.avs-voto-iva-il-29-novembre-per-la-13esima-rendita.imageAlt': 'Redaktionelles Bild zu: AVS: Voto IVA il 29 novembre per la 13esima rendita',
+    'blog.article.bollettino-frontaliere-2026-10-13.title': 'Grenzgänger-Tagesbulletin – 13. Oktober 2026: 858 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-10-13.excerpt': 'Die Zahlen von heute, 13. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-13.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 13. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-10-13.seoDescription': 'Grenzgänger-Bulletin vom 13. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-13.ogDescription': 'Die Zahlen vom 13. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;

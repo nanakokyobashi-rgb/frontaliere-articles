@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 451,
+  "assetCount": 452,
   "assets": [
     {
       "schema": 1,
@@ -17629,6 +17629,24 @@
         "is_topic_relevant": true,
         "notes": "Original generic editorial illustration depicting voting, coins, rail travel, and a Ticino-like alpine lake setting; no text, logos, people, or identifiable event."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-13",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "341b3ae5e48cb746a2508cfd708e3b404807b91a5a31d85d984b7c0b51eac21f",
+      "bytes": 27116,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-13.webp"
     }
   ]
 }
