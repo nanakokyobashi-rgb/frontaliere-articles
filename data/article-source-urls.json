@@ -1,9 +1,4 @@
 {
-  "https://www.ocst.ch/il-lavoro/411-professioni/401-edilizia/2610-edilizia-un-accordo-per-i-prossimi-sei-anni": {
-    "articleId": "accordo-edilizia-ticino-nuovo",
-    "ts": "2026-09-04T06:45:59.549Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/newsblog/valute-e-frontiere/1942938/lavoro-svizzera-frontalieri-tempo-quali-effetti": {
     "articleId": "svizzera-lavoro-temporaneo-frontalieri",
     "ts": "2026-08-24T06:25:23.541Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/un-pomeriggio-a-castiglione-olona-tra-arte-e-cultura-con-camminare-nel-tai-chi/2705863": {
     "articleId": "tai-chi-arte-castiglione",
     "ts": "2026-10-13T04:03:20.314Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1949575/formazione-lavoro-lugano-marco-federale": {
+    "articleId": "cuoco-dietetica-apf-ticino-mercato",
+    "ts": "2026-10-13T04:51:58.216Z",
     "keyForm": 2
   }
 }

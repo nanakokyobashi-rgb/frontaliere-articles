@@ -13095,6 +13095,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.tai-chi-arte-castiglione.title': 'Castiglione Olona: Tai Chi und Kunst am Sonntag, 1. November',
     'blog.article.tai-chi-arte-castiglione.excerpt': 'Am Sonntag, dem 1. (Castiglione Olona)',
     'blog.article.tai-chi-arte-castiglione.imageAlt': 'Tai-Chi-Übung an einem historischen Gebäude in Castiglione Olona',
+    'blog.article.cuoco-dietetica-apf-ticino-mercato.title': 'APF-Diätkoch im Tessin: Nische mit wenigen Plätzen',
+    'blog.article.cuoco-dietetica-apf-ticino-mercato.excerpt': 'Zwischen 2023 und 2025 steigt die Arbeitslosigkeit zwischen UNI- und Sup-Absolventen Der Küchenchef in der Diätetik APF hat nur wenige spezifische Absatzmärkte im Tessin Die spezifischen Angebote',
+    'blog.article.cuoco-dietetica-apf-ticino-mercato.imageAlt': 'Professionelle Küche im EOC Mendrisio mit Diätmahlzeiten für Patienten',
 };
 
 export default blogMetaDe;

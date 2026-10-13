@@ -44161,6 +44161,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cuoco-dietetica-apf-ticino-mercato',
+ category: 'pratico',
+ date: '2026-10-13T04:51:57.746Z',
+ image: '/images/blog/article-cuoco-dietetica-apf-ticino-mercato.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
