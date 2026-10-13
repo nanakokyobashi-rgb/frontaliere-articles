@@ -8123,6 +8123,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ust-scenari-formazione-2035.title': 'UST: Ausbildungsszenarien 2035, +21% Hochschule',
     'blog.article.ust-scenari-formazione-2035.excerpt': 'UST: Hochschulen mit +21% zwischen 2026 und 2035 Grundschule: Reduktion um 8% im gleichen Zeitraum 305 000 Bachelor- und Masterstudenten im Jahr 2035 Drei',
     'blog.article.ust-scenari-formazione-2035.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.ascend-evonext-quotazione.title': 'Ascend Sport Technology an die Schweizer Börse',
+    'blog.article.ascend-evonext-quotazione.excerpt': 'Ascend Sport Technology zielt auf die Schweizer Börse Fusion mit Evonext, bereits notiert Bewertung: 500 Millionen Franken Abschluss bis Ende des Jahres geplant Unternehmen',
+    'blog.article.ascend-evonext-quotazione.imageAlt': 'Das Luzerner Unternehmen Ascend Sport Technology vor dem Gang an die Schweizer Börse',
 };
 
 export default blogMetaChDe;

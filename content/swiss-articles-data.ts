@@ -27109,6 +27109,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ascend-evonext-quotazione',
+    category: 'novita',
+    date: '2026-10-13T03:04:34.888Z',
+    image: '/images/blog/article-ascend-evonext-quotazione.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

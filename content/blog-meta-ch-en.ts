@@ -8123,6 +8123,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ust-scenari-formazione-2035.title': 'UST: 2035 training scenarios, +21% university',
     'blog.article.ust-scenari-formazione-2035.excerpt': 'UST: university schools at +21% between 2026 and 2035 Elementary: reduction of 8% in the same period 305,000 bachelor and master students in 2035 Three',
     'blog.article.ust-scenari-formazione-2035.imageAlt': 'Illustration generated for this article',
+    'blog.article.ascend-evonext-quotazione.title': 'Ascend Sport Technology to the Swiss Stock Exchange',
+    'blog.article.ascend-evonext-quotazione.excerpt': 'Ascend Sport Technology points to the Swiss Merger Exchange with Evonext, already listed Valuation: 500 million francs Expected closure by the end of the year Company',
+    'blog.article.ascend-evonext-quotazione.imageAlt': 'Lucerne-based Ascend Sport Technology heading to the Swiss stock exchange',
 };
 
 export default blogMetaChEn;

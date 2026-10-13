@@ -102482,6 +102482,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ascend-evonext-quotazione': {
+    title: 'Ascend Sport Technology verso la borsa svizzera',
+    description: 'Ascend Sport Technology punta alla borsa svizzera Fusione con Evonext, già quotata Valutazione: 500 milioni di franchi Chiusura prevista entro fine anno Società',
+    keywords: 'frontalieri, ticino, svizzera, italia, ascend, sport, technology, verso',
+    ogTitle: 'Ascend Sport Technology, fusione con Evonext',
+    ogDescription: 'Ascend Sport Technology punta alla borsa svizzera Fusione con Evonext, già quotata Valutazione: 500 milioni di franchi Chiusura prevista entro fine anno Società',
+    canonicalPath: '/articoli-svizzera/ascend-evonext-quotazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ascend Sport Technology verso la borsa svizzera",
+      "description": "Ascend Sport Technology punta alla borsa svizzera Fusione con Evonext, già quotata Valutazione: 500 milioni di franchi Chiusura prevista entro fine anno Società",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ascend-evonext-quotazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ascend Sport Technology, impresa lucernese, verso la borsa svizzera"
+      },
+      "datePublished": "2026-10-13T03:04:34+00:00",
+      "dateModified": "2026-10-13T03:04:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ascend-evonext-quotazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
