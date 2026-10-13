@@ -27320,6 +27320,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'migros-ecublens-57-posti',
+    category: 'novita',
+    date: '2026-10-13T21:00:56.385Z',
+    image: '/images/blog/article-migros-ecublens-57-posti.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['VD'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

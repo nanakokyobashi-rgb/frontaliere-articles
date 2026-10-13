@@ -8186,6 +8186,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.hacker-casse-pensioni-svizzera.title': 'Hacker und Pensionskassen: das Risiko der Konzentration',
     'blog.article.hacker-casse-pensioni-svizzera.excerpt': 'FAR: etwa 20\'000 Begünstigte nach einem Angriff benachrichtigt Publica: etwa 112\'000 potenziell betroffene Personen Ein Softwareanbieter kann mehrere Kassen',
     'blog.article.hacker-casse-pensioni-svizzera.imageAlt': 'Swiss pension fund office with digital security protection',
+    'blog.article.migros-ecublens-57-posti.title': 'Migros prüft Schließung in Écublens: 57 Plätze',
+    'blog.article.migros-ecublens-57-posti.excerpt': 'Migros prüft Schließung der Zentrale Traiteur A Risk 57 Stellen in Écublens Konsultation des Personals läuft Keine abschließende Entscheidung getroffen',
+    'blog.article.migros-ecublens-57-posti.imageAlt': 'Lebensmittelproduktionsbetrieb von Migros in Écublens im Kanton Waadt.',
 };
 
 export default blogMetaChDe;

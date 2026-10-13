@@ -8186,6 +8186,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.hacker-casse-pensioni-svizzera.title': 'Hackers and pension funds: the risk of concentration',
     'blog.article.hacker-casse-pensioni-svizzera.excerpt': 'FAR: approximately 20\'000 beneficiaries notified after an attack Publica: approximately 112\'000 people potentially involved A software provider can expose',
     'blog.article.hacker-casse-pensioni-svizzera.imageAlt': 'Swiss pension fund office with digital security protection',
+    'blog.article.migros-ecublens-57-posti.title': 'Migros evaluates the closure in Écublens: 57 places',
+    'blog.article.migros-ecublens-57-posti.excerpt': 'Migros assesses the closure of the Traiteur At-Risk Plant 57 jobs in Écublens Consultation with staff is ongoing No final decision has been',
+    'blog.article.migros-ecublens-57-posti.imageAlt': 'Migros food-production facility in Écublens, canton of Vaud.',
 };
 
 export default blogMetaChEn;
