@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-swisscom-fibra-multa-taf.webp",
-      "sha256": "8e6b75bdf5243453d731f3536c7e17223c82004e043058e80748f4c4ceed33f5"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-swisscom-fibra-multa-taf-480w.webp",
-      "sha256": "4252eb8ae81eabf455b256269e5ceb04d2490c93b411ce25d32d9a0fb0d2215c"
-    }
-  ]
+  "items": []
 }
