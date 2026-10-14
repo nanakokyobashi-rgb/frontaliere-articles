@@ -169,6 +169,19 @@ describe('omonimi e falsi amici', () => {
       'Decine di ticinesi attendono il rimpatrio.',
       '68enne ticinese ferito.',
       'Quarantenne ticinese soccorso.',
+      'Studentesse ticinesi in gara.',
+      'Giocatrici ticinesi in finale.',
+      'Lavoratrici ticinesi in sciopero.',
+      'Dipendenti ticinesi chiedono un aumento.',
+      'Sei ticinesi bloccati all\'estero.',
+      'Sette ticinesi rientrano.',
+      'Otto ticinesi sono stati soccorsi.',
+      'Nove ticinesi attendono assistenza.',
+      'Qualche ticinese attende aiuto.',
+      'Numerose ticinesi rientrano.',
+      'Varie ticinesi sono state soccorse.',
+      'Ventiduenne ticinese ferita.',
+      'Quarantaduenne ticinese soccorsa.',
     ]) {
       assert.equal(c.mentionsIn(text).find((m) => m.group === 'TI')?.who, true, text);
     }
@@ -226,6 +239,20 @@ describe('regole di assegnazione', () => {
       excerpt: 'Circa 400 turisti svizzeri bloccati senza comunicazioni.',
       body: 'Turisti ticinesi bloccati negli Emirati. I ticinesi chiedono aiuto. Altri ticinesi in attesa.',
     }), []);
+    for (const title of [
+      'Studentesse ticinesi in gara',
+      'Giocatrici ticinesi in finale',
+      'Lavoratrici ticinesi in sciopero',
+      'Dipendenti ticinesi chiedono un aumento',
+      'Sei ticinesi bloccati in Medio Oriente',
+      'Qualche ticinese attende aiuto',
+      'Numerose ticinesi rientrano',
+      'Varie ticinesi sono state soccorse',
+      'Ventiduenne ticinese ferita',
+      'Quarantaduenne ticinese soccorsa',
+    ]) {
+      assert.deepEqual(codes({ title, excerpt: title, body: '' }), [], title);
+    }
     assert.deepEqual(codes({
       title: 'Ristoratore ticinese sorprende ladro',
       excerpt: 'Furto in un ristorante di Mendrisio.',
@@ -264,6 +291,9 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Implicazioni per gli abitanti del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per la popolazione del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Impatto sul mercato del Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Impatto sul lavoro in Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Cosa cambia per il lavoro in Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
     // Un fatto in Ticino resta in Ticino.
     assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);

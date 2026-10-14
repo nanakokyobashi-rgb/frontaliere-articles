@@ -332,9 +332,10 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
 }
 
-// Il destinatario puo' contenere un nome comune («gli abitanti del Ticino»),
-// ma il termine finale deve essere un nome di cantone noto. Un regex su parole
-// maiuscole arbitrarie oscurerebbe anche comuni reali come «Lugano».
+// Il destinatario puo' contenere una testa esplicitamente personale («gli
+// abitanti del Ticino»), ma non un nome settoriale («il lavoro in Ticino»).
+// Il termine finale deve inoltre essere un cantone noto: maiuscole arbitrarie
+// oscurerebbero anche comuni reali come «Lugano».
 const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ names = [], guarded = [] }) => [
   ...names,
   ...guarded,
@@ -344,7 +345,11 @@ const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ 
   .join('|');
 const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}|${caseInitial('l')}['’]?\\s*)?`;
 const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
-const AUDIENCE_RECIPIENT = `(?:\\p{Ll}[\\p{L}'-]*\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
+const AUDIENCE_RECIPIENT_HEAD = `(?:${[
+  'chi', 'abitant[ei]', 'popolazion[ei]', 'lavorator[ei]', 'frontalier[ei]', 'resident[ei]',
+  'cittadin[aoei]', 'dipendent[ei]', 'person[ae]', 'famigli[ae]', 'student[ei]', 'pendolar[ei]',
+].map(caseInitial).join('|')})`;
+const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'-]*){0,2}\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
 const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
 const AUDIENCE_TARGET = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
@@ -354,7 +359,7 @@ const AUDIENCE_RES = [
   new RegExp(`\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+(?:[\\p{L}']+\\s+){0,3}?${AUDIENCE_LINK}${AUDIENCE_TARGET}`, 'gu'),
   // «cosa cambia per chi lavora in Ticino», «cosa significa per il Ticino»:
   // serve il «per» del destinatario, non «cosa cambia in Ticino dal 2026».
-  new RegExp(`\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}(?:\\s+(?:[\\p{L}']+\\s+){0,4}?(?:${['in', 'nel', 'sul', 'per', 'del', 'dei'].map(caseInitial).join('|')}))?${AUDIENCE_TARGET}`, 'gu'),
+  new RegExp(`\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}${AUDIENCE_TARGET}`, 'gu'),
 ];
 
 /**
@@ -386,16 +391,18 @@ const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
  */
 const PERSON_LEAD_WORDS = new Set([
   'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'dieci', 'cento', 'mille', 'molti', 'tanti',
-  'alcuni', 'tutti', 'altri', 'altre', 'molte', 'diversi', 'numerosi', 'migliaia', 'centinaia', 'decine',
+  'sei', 'sette', 'otto', 'nove', 'alcuni', 'alcune', 'tutti', 'tutte', 'altri', 'altre', 'molte', 'diversi', 'diverse',
+  'numerosi', 'numerose', 'qualche', 'varie', 'vari', 'pochi', 'poche', 'parecchi', 'parecchie',
+  'migliaia', 'centinaia', 'decine',
   'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'del', 'dello', 'della', 'dei', 'degli', 'delle',
   'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
   'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'col', 'colla', 'coi', 'cogli', 'colle',
   'all', 'dall', 'nell', 'sull', 'coll',
 ]);
 /** Forme lessicali complete: evita falsi prefissi come «atletica» e «target». */
-const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
-/** Eta' scritta in cifre o in forma lessicale: «68enne», «quarantenne». */
-const PERSON_AGE_RE = /^(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]$/u;
+const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|lavoratric[ei]|dipendent[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|giocatric[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|studentess[ae]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
+/** Eta' scritta in cifre o in forma lessicale, anche composta: «68enne», «ventiduenne». */
+const PERSON_AGE_RE = /^(?:(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]|(?:venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)(?:du|tre|quattr|cinqu|sei|sett|nov)enn[ei]|(?:vent|trent|quarant|cinquant|sessant|settant|ottant|novant)(?:un|ott)enn[ei])$/u;
 /** Quantita' che possono reggere «di + demonimo»: «decine di ticinesi». */
 const PERSON_QUANTITY_RE = /^(?:pai[oa]|decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */
