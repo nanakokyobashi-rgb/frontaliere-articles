@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-ordinanza-animali-compagnia-ue.webp",
-      "sha256": "60648f5f7ff473bc3d0656a7197a0db311670012a56919322456471d5b51c697"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-ordinanza-animali-compagnia-ue-480w.webp",
-      "sha256": "b7a9c337e2db0d2c05a0b0f990e5e3d2a0f2b892e1d8511c93d4c0a4655c00b6"
-    }
-  ]
+  "items": []
 }
