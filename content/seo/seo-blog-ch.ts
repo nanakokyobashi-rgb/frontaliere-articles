@@ -103627,10 +103627,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Informazioni su requisiti, esami, scadenze e importi per la licenza di caccia nel Cantone di Zurigo. Verifica la fonte ufficiale.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-zurigo-guida.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-licenza-caccia-zurigo-requisiti.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cacciatore che prepara l'attrezzatura in un bosco svizzero con vista sul lago, luce mattutina."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T01:47:38+00:00",
       "dateModified": "2026-10-14T01:47:38+00:00",
@@ -103661,10 +103666,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Guida pratico a targhe e immatricolazione a Zurigo: registro, documenti, cambio proprietario e costi. Verifica presso l'ufficio della circolazione competente.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-zurigo-guida.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-targhe-immatricolazione-guida.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Mani che trattano una targa svizzera in un ufficio dell'autorità di circolazione a Zurigo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T02:15:21+00:00",
       "dateModified": "2026-10-14T02:15:21+00:00",
@@ -103734,10 +103744,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell'iter",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-collaudo-veicoli-canton-zurigo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Centro di collaudo veicoli nel Cantone di Zurigo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T03:22:14+00:00",
       "dateModified": "2026-10-14T03:22:14+00:00",
