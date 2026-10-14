@@ -319,6 +319,12 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Implicazioni per gli abitanti del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per la popolazione del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
+    for (const text of [
+      'Implicazioni per i lavoratori frontalieri in Ticino',
+      'Implicazioni per i frontalieri che lavorano in Ticino',
+    ]) {
+      assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
+    }
     assert.deepEqual(classifier.mentionsIn('Impatto sul mercato del Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Impatto sul lavoro in Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia per il lavoro in Ticino').map((m) => m.group), ['TI']);
@@ -336,6 +342,7 @@ describe('regole di assegnazione', () => {
       'Impatto per gli abitanti residenti e iscritti del Canton Ticino',
       'Implicazioni per gli abitanti del Canton Ticino, dei Grigioni e del Vallese',
       'Cosa cambia per il Ticino e i Grigioni e il Vallese',
+      'Cosa cambia per i lavoratori di Como e per il Ticino',
     ]) {
       assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
     }

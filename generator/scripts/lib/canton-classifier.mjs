@@ -361,7 +361,7 @@ const AUDIENCE_RECIPIENT_HEAD = `(?:${AUDIENCE_RECIPIENT_HEADS.map(caseInitial).
 // I qualificatori del destinatario sono intenzionalmente chiusi: una coda
 // libera puo' assorbire un fatto locativo, per esempio «famiglie colpite dal
 // terremoto in Ticino», come se «in Ticino» qualificasse le famiglie.
-const AUDIENCE_RECIPIENT_QUALIFIER = `(?:${['residenti', 'iscritti'].map(caseInitial).join('|')})`;
+const AUDIENCE_RECIPIENT_QUALIFIER = `(?:${['residenti', 'iscritti', 'frontalieri'].map(caseInitial).join('|')}|${caseInitial('che')}\\s+${caseInitial('lavorano')})`;
 const AUDIENCE_RECIPIENT_QUALIFIERS = `${AUDIENCE_RECIPIENT_QUALIFIER}(?:\\s+(?:${caseInitial('e')}|${caseInitial('ed')})\\s+${AUDIENCE_RECIPIENT_QUALIFIER}){0,2}`;
 const AUDIENCE_RECIPIENT = `(?:(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+${AUDIENCE_RECIPIENT_QUALIFIERS})?|${caseInitial('chi')}\\s+${caseInitial('lavora')})\\s+${AUDIENCE_RECIPIENT_LINK_PREFIX})?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
@@ -375,7 +375,7 @@ const AUDIENCE_TARGET_LONG = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_LONG_ITEM}(?
 // italiano e uno cantonale. La coda e' finita: non puo' saltare da un link
 // non cantonale a un successivo `per`/`sul` in un'altra parte della frase.
 const AUDIENCE_RECIPIENT_COORDINATED = new RegExp(
-  `${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK_PREFIX}${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'’\\-]*){0,4}?\\s+${AUDIENCE_COORDINATOR}\\s+${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
+  `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK_PREFIX}|${AUDIENCE_COSA_PREFIX}\\s+)${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'’\\-]*){0,4}?\\s+${AUDIENCE_COORDINATOR}\\s+${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
   'gu',
 );
 const AUDIENCE_RES = [
