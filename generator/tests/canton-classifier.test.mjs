@@ -321,6 +321,7 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
     for (const text of [
       'Implicazioni per i lavoratori frontalieri in Ticino',
+      'Implicazioni per i lavoratori frontalieri che lavorano in Ticino',
       'Implicazioni per i frontalieri che lavorano in Ticino',
     ]) {
       assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
@@ -332,6 +333,10 @@ describe('regole di assegnazione', () => {
     const milanoAudience = 'Conseguenze per i lavoratori di Milano e per il Ticino';
     assert.equal(classifier.mentionsItalianPlace(milanoAudience), true);
     assert.deepEqual(codes({ title: milanoAudience }), []);
+    const longMilanoAudience = 'Cosa cambia per i lavoratori frontalieri che lavorano a Milano e per il Ticino';
+    assert.deepEqual(classifier.mentionsIn(longMilanoAudience).map((m) => m.group), []);
+    assert.equal(classifier.mentionsItalianPlace(longMilanoAudience), true);
+    assert.deepEqual(codes({ title: longMilanoAudience }), []);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
     for (const text of [
       'Implicazioni per il Ticino e i Grigioni e il Vallese',
