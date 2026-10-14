@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T13:35:23.185Z",
       "lastFailureAt": "2026-10-14T13:35:23.185Z"
+    },
+    {
+      "articleId": "soccorsi-coda-autostrada-lombarda",
+      "title": "Incidente sulla A8 tra Castellanza e Busto: lunga coda",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-soccorsi-coda-autostrada-lombarda: openai-codex (vision gate rejected image: Photorealistic documentary-style motorway traffic image with vis",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T15:46:26.992Z",
+      "lastFailureAt": "2026-10-14T15:46:26.992Z"
     }
   ]
 }

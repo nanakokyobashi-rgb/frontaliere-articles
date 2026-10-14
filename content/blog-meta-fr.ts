@@ -13183,6 +13183,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.title': 'Fibre optique : fin travaux 145 communes du Como, 27,9 M€',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Réseau en cours d\'achèvement dans 145 municipalités de Comas Plus de 27,9 millions de fonds publics à Como Adhésion à la bande ultra-large : 23% contre 17% Plan Italie 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Installation de câble fibre optique dans une commune de la province de Côme, vue détaillée. (Como)',
+    'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Accident sur l’A8 entre Castellanza et Busto : longue file',
+    'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Accident sur l’A8 peu après 16 heures Quatre personnes impliquées Deux ambulances et un véhicule médicalisé en code rouge Longue file depuis la bifurcation A8/A9 Quoi : accident de la route',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Bouchon sur l\'autoroute A8 entre Castellanza et Busto Arsizio après un accident',
 };
 
 export default blogMetaFr;

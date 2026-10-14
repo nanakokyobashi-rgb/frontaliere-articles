@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/con-il-primo-settembre-aumentano-biglietti-e-abbonamenti-trenord/2667790": {
-    "articleId": "mobilita-trenord-aumento-biglietti-2026",
-    "ts": "2026-09-01T12:31:53.105Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/dogane%3a-nuova-informatica-a-udsc%2c-costi-gi%c3%b9%2c-benefici-per-economia/91987363": {
     "articleId": "dogane-udsc-nuova-informatica",
     "ts": "2026-09-01T13:39:37.686Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/lavori-finiti-fibra-ottica-in-145-comuni-della-provincia-di-como-costo-totale-28-milioni-di-euro": {
     "articleId": "fibra-ottica-145-comuni-como",
     "ts": "2026-10-14T14:32:25.967Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/incidente-in-autostrada-a8-tra-castellanza-e-busto-soccorsi-e-lunga-coda/2708227": {
+    "articleId": "soccorsi-coda-autostrada-lombarda",
+    "ts": "2026-10-14T15:46:26.994Z",
     "keyForm": 2
   }
 }

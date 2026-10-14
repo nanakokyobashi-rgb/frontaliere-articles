@@ -13181,6 +13181,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.title': 'Completion of fiber-optic work in 145 municipalities in Como, 27,9 mln €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Network nearing completion in 145 municipalities in the Como area More than 27,9 million in public funds for Como Adoption of ultra-broadband: 23% versus 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Fiber optic cable installation in a Como province town, close-up and detailed view.',
+    'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Accident on the A8 between Castellanza and Busto: long tailback',
+    'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Accident on the A8 shortly after 4 p.m.',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Traffic queue on the A8 motorway between Castellanza and Busto Arsizio after a crash',
 };
 
 export default blogMetaEn;

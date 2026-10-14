@@ -13182,6 +13182,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.title': 'Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Installazione di cavo in fibra ottica in un comune della provincia di Como, vista ravvicinata e dettagliata.',
+    'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Incidente sulla A8 tra Castellanza e Busto: lunga coda',
+    'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un\'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Coda sull\'autostrada A8 tra Castellanza e Busto Arsizio dopo un incidente',
 };
 
 export default blogMetaIt;

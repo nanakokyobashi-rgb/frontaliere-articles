@@ -13180,6 +13180,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.title': 'Glasfaserarbeiten: 145 Gemeinden Como fertig, 27,9 Mio €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Netz in 145 Gemeinden der Provinz Como kurz vor der Fertigstellung Über 27,9 Millionen an öffentlichen Mitteln für Como Anschlussquote beim Ultrabreitband: 23% gegenüber 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Glasfaserkabelinstallation in einer Gemeinde der Provinz Como, Nahaufnahme mit vielen Details.',
+    'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Unfall auf der A8 zwischen Castellanza und Busto: langer Stau',
+    'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Unfall auf der A8 kurz nach 16 Uhr Vier Personen beteiligt Zwei Rettungswagen und ein Notarzteinsatzfahrzeug mit höchster Dringlichkeitsstufe Langer Stau ab der Verzweigung A8/A9 Was: Verkehrsunfall',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Stau auf der A8 zwischen Castellanza und Busto Arsizio nach einem Unfall',
 };
 
 export default blogMetaDe;
