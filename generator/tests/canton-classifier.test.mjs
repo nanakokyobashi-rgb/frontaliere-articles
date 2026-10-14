@@ -160,6 +160,9 @@ describe('omonimi e falsi amici', () => {
     const c = defaultCantonClassifier();
     assert.deepEqual(c.mentionsIn('Il Lugano batte il San Gallo 2-1.').map((m) => m.group), []);
     assert.deepEqual(c.mentionsIn('Filippo, un ticinese alla guida del festival.').map((m) => m.group), []);
+    assert.equal(c.mentionsIn('Atletica ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
+    assert.equal(c.mentionsIn('Target ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
+    assert.equal(c.mentionsIn('Atleti ticinesi in gara.').find((m) => m.group === 'TI')?.who, true);
     assert.deepEqual(
       [...new Set(c.mentionsIn('Pfäffikon (Kanton Schwyz): tre arresti.').map((m) => m.group))],
       ['SZ'],
@@ -241,6 +244,10 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Cosa Cambia per Il Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per il Ticino e i Grigioni').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per il Canton San Gallo, Basilea Campagna e il Vallese').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per gli abitanti del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per la popolazione del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
     // Un fatto in Ticino resta in Ticino.
     assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia in Ticino dal 2026').map((m) => m.group), ['TI']);

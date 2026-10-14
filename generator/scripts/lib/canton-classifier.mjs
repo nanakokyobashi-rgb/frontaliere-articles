@@ -327,9 +327,26 @@ const FRAMING_PHRASES = [
 const caseInitial = (word) => `[${word[0].toUpperCase()}${word[0]}]${word.slice(1)}`;
 const AUDIENCE_HEADS = ['implicazion[ei]', 'impatt[oi]', 'effett[oi]', 'conseguenz[ae]', 'ricadut[ae]',
   'riflessi', 'influisc\\p{L}*', 'influenz\\p{L}*'];
-const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui'].map(caseInitial).join('|')}|${caseInitial('anche')}\\s+${caseInitial('per')})`;
-const AUDIENCE_NAME = '\\p{Lu}\\p{L}+(?:[-\\s]+\\p{Lu}\\p{L}+)*';
-const AUDIENCE_TARGET_ITEM = `(?:${caseInitial('il')}\\s+|${caseInitial('i')}\\s+|${caseInitial('l')}['’]?\\s*)?(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della'].map(caseInitial).join('|')}))?\\s+)?${AUDIENCE_NAME}`;
+const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui', 'sugli', 'sulle'].map(caseInitial).join('|')}|${caseInitial('anche')}\\s+${caseInitial('per')})`;
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+}
+
+// Il destinatario puo' contenere un nome comune («gli abitanti del Ticino»),
+// ma il termine finale deve essere un nome di cantone noto. Un regex su parole
+// maiuscole arbitrarie oscurerebbe anche comuni reali come «Lugano».
+const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ names = [], guarded = [] }) => [
+  ...names,
+  ...guarded,
+].map((name) => foldKeepCase(name))))]
+  .sort((a, b) => b.length - a.length)
+  .map(escapeRegExp)
+  .join('|');
+const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}${caseInitial('l')}['’]?\\s*)?`;
+const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
+const AUDIENCE_RECIPIENT = `(?:\\p{Ll}[\\p{L}'-]*\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
+const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della'].map(caseInitial).join('|')}))?\\s+)?`;
+const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
 const AUDIENCE_TARGET = `\\s+${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
 const AUDIENCE_RES = [
   // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
@@ -369,16 +386,11 @@ const PERSON_LEAD_WORDS = new Set([
   'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'dieci', 'cento', 'mille', 'molti', 'tanti',
   'alcuni', 'tutti', 'altri', 'altre', 'molte', 'diversi', 'numerosi', 'migliaia', 'centinaia', 'decine',
 ]);
-const PERSON_HEAD_STEMS = [
-  'turist', 'frontalier', 'lavorator', 'pendolar', 'resident', 'cittadin', 'abitant', 'medic', 'oftalmolog',
-  'infermier', 'atlet', 'sportiv', 'giocator', 'tennist', 'scalator', 'alpinist', 'student', 'giovan', 'anzian',
-  'famigli', 'pazient', 'allevator', 'agricoltor', 'contadin', 'imprenditor', 'automobilist', 'motociclist',
-  'ciclist', 'camionist', 'autist', 'conducent', 'passegger', 'viaggiator', 'escursionist', 'emigrat', 'emigrant',
-  'donn', 'uomin', 'uomo', 'ragazz', 'bambin', 'coppi', 'person', 'veicol', 'camion', 'furgon', 'targ',
-];
+/** Forme lessicali complete: evita falsi prefissi come «atletica» e «target». */
+const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */
 const PERSON_HEAD_WORDS = new Set(['auto', 'automobile', 'automobili', 'moto']);
-const PERSON_GROUP_STEMS = ['grupp', 'comitiv', 'delegazion', 'squadr', 'famigli', 'coppi'];
+const PERSON_GROUP_RE = /^(?:grupp[oi]|comitiv[ae]|delegazion[ei]|squadr[ae]|famigli[ae]|coppi[ae])$/u;
 const PERSON_GROUP_LINKS = new Set(['di', 'dei', 'degli', 'delle']);
 
 /**
@@ -394,10 +406,7 @@ const NATIONAL_SCOPE_LEAD_RE = /\b(?:tutti\s+i\s+cantoni|comuni\s+svizzeri|canto
 const WEF_RE = /\b(?:WEF|World\s+Economic\s+Forum|Forum\s+economico\s+mondiale|Forum\s+di\s+Davos)\b/iu;
 
 /** Parole che dicono residenza o provenienza di una persona. */
-const ORIGIN_STEMS = [
-  'resident', 'domiciliat', 'originari', 'provenient', 'immatricolat', 'targat',
-  'abitant', 'nativ',
-];
+const ORIGIN_RE = /^(?:resident[ei]|domiciliat[aeio]|originari[aeio]|provenient[ei]|immatricolat[aeio]|targat[aeio]|abitant[ei]|nativ[aeio])$/u;
 const ORIGIN_WORDS = new Set(['nato', 'nata', 'nati', 'nate', 'targa', 'targhe']);
 const ORIGIN_WINDOW = 6;
 
@@ -677,7 +686,7 @@ export function createCantonClassifier({
     for (let k = i - 1; k >= 0 && k >= i - ORIGIN_WINDOW; k -= 1) {
       if (sentenceBreak(text, tokens[k], tokens[k + 1])) return false;
       const w = tokens[k].norm;
-      if (ORIGIN_WORDS.has(w) || ORIGIN_STEMS.some((s) => w.startsWith(s))) return true;
+      if (ORIGIN_WORDS.has(w) || ORIGIN_RE.test(w)) return true;
     }
     return false;
   }
@@ -711,16 +720,16 @@ export function createCantonClassifier({
     return PERSON_ARTICLES.has(tokens[k].norm);
   }
 
-  /** Vedi PERSON_HEAD_STEMS: il demonimo dice chi o da dove. */
+  /** Vedi PERSON_HEAD_RE: il demonimo dice chi o da dove. */
   function isWhoDemonym(text, tokens, i) {
     const k = i - 1;
     if (k < 0 || sentenceBreak(text, tokens[k], tokens[i])) return true;
     const prev = tokens[k].norm;
     if (PERSON_LEAD_WORDS.has(prev) || PERSON_HEAD_WORDS.has(prev) || /^\d+$/u.test(prev)
-      || PERSON_HEAD_STEMS.some((stem) => prev.startsWith(stem))) return true;
+      || PERSON_HEAD_RE.test(prev)) return true;
     const head = tokens[k - 1];
     return Boolean(head) && !sentenceBreak(text, head, tokens[k]) && PERSON_GROUP_LINKS.has(prev)
-      && PERSON_GROUP_STEMS.some((stem) => head.norm.startsWith(stem));
+      && PERSON_GROUP_RE.test(head.norm);
   }
 
   function isClubContext(text, tokens, i) {
