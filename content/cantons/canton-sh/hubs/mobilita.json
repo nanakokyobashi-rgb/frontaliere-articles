@@ -4,12 +4,12 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "9ac5e0837a8aa349483f49881d8b7b1d9a97ac8d3a8b61899927c1112a4f33fe",
+  "updatedAt": "2026-10-14T10:32:27.019Z",
+  "contentHash": "3e5da0d99ce7f9f9bc5a3f14924306ab8aeb22343d86d3861e3554b9bbcf1584",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-12T23:59:59.000Z",
+      "updatedAt": "2026-10-13T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -28,14 +28,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 12 ottobre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 13 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 ottobre 2026 – 12 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 7 ottobre 2026 – 13 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -80,15 +80,15 @@
               "url": "/traffico-dogane/hilzingen-thayngen-schlattergasse/oggi/"
             },
             {
-              "label": "Merishausen – Tengen",
+              "label": "Klettgau – Trasadingen",
               "value": "0 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/merishausen-tengen/oggi/"
+              "url": "/traffico-dogane/klettgau-trasadingen/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -167,7 +167,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "en": {
       "canton": "SH",
@@ -178,14 +178,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 12 October 2026"
+          "note": "Bargen SH – Tengen, week ending 13 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 6 October 2026 to 12 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 7 October 2026 to 13 October 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -230,15 +230,15 @@
               "url": "/en/border-wait/hilzingen-thayngen-schlattergasse/today/"
             },
             {
-              "label": "Merishausen – Tengen",
+              "label": "Klettgau – Trasadingen",
               "value": "0 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/merishausen-tengen/today/"
+              "url": "/en/border-wait/klettgau-trasadingen/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +317,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "de": {
       "canton": "SH",
@@ -328,14 +328,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 12. Oktober 2026"
+          "note": "Bargen SH – Tengen, Woche bis 13. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. Oktober 2026 bis 12. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 7. Oktober 2026 bis 13. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -380,15 +380,15 @@
               "url": "/de/wartezeit-grenze/hilzingen-thayngen-schlattergasse/heute/"
             },
             {
-              "label": "Merishausen – Tengen",
+              "label": "Klettgau – Trasadingen",
               "value": "0 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/merishausen-tengen/heute/"
+              "url": "/de/wartezeit-grenze/klettgau-trasadingen/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "fr": {
       "canton": "SH",
@@ -478,14 +478,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 12 octobre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 13 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 octobre 2026 au 12 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 7 octobre 2026 au 13 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -530,15 +530,15 @@
               "url": "/fr/temps-attente-douane/hilzingen-thayngen-schlattergasse/aujourd-hui/"
             },
             {
-              "label": "Merishausen – Tengen",
+              "label": "Klettgau – Trasadingen",
               "value": "0 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/merishausen-tengen/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/klettgau-trasadingen/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -617,7 +617,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     }
   }
 }

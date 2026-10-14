@@ -13147,13 +13147,21 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Circulation en file près du tunnel Vedeggio-Cassarate à Lugano',
     'blog.article.easy-work-chiusura-264.title': 'Easy Work ferme ses portes : 264 emplois menacés à Chiasso.',
     'blog.article.easy-work-chiusura-264.excerpt': 'Easy Work fermera ses portes le 31 décembre.',
-    'blog.article.easy-work-chiusura-264.imageAlt': 'Fermeture du bureau Easy Work à Chiasso, corso San Gottardo 106, avec panneau de fermeture',
+    'blog.article.easy-work-chiusura-264.imageAlt': 'Illustration générée pour cet article',
     'blog.article.incidente-varesina-venegono.title': 'Carambolage sur la Varesina : quatre blessés à Venegono',
     'blog.article.incidente-varesina-venegono.excerpt': 'Accident à 7 h sur la Sp 233 à Venegono Inferiore Quatre voitures impliquées et quatre personnes blessées Deux ambulances, un véhicule médicalisé, les sapeurs-pompiers et les carabiniers',
     'blog.article.incidente-varesina-venegono.imageAlt': 'Circulation bloquée sur la Varesina après un accident à Venegono Inferiore',
     'blog.article.arresti-truffa-chiamate-ticino.title': 'Escroquerie appel choc : trois arrestations dans le canton du Tessin',
     'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'Un réseau d\'escrocs spécialisés dans les soi-disant chocs a été démantelé dans le canton du Tessin : trois personnes ont été arrêtées.',
     'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'Vue de Lugano avec un smartphone au premier plan',
+    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Bulletin du frontalier – 14 octobre 2026 : 921 nouvelles offres d\'emploi hier',
+    'blog.article.bollettino-frontaliere-2026-10-14.excerpt': 'Les chiffres du jour, 14 octobre 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'Les chiffres du jour pour les frontaliers – 14 octobre 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Bulletin du frontalier du 14 octobre 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'Les chiffres du 14 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Chômage au Tessin : 3,45 % prévu début 2027',
+    'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Chômage au Tessin en hausse : prévu 3,45 % au début de 2027 Résidents étrangers et jeunes les plus touchés par le phénomène Taux actuel à 2,87 % au troisième',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;
