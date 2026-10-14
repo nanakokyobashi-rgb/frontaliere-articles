@@ -326,14 +326,15 @@ const FRAMING_PHRASES = [
 const caseInitial = (word) => `[${word[0].toUpperCase()}${word[0]}]${word.slice(1)}`;
 const AUDIENCE_HEADS = ['implicazion[ei]', 'impatt[oi]', 'effett[oi]', 'conseguenz[ae]', 'ricadut[ae]',
   'riflessi', 'influisc\\p{L}*', 'influenz\\p{L}*'];
-const AUDIENCE_TARGET = `\\s+(?:il\\s+|i\\s+|l')?\\p{Lu}\\p{L}+`;
+const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui'].map(caseInitial).join('|')}|${caseInitial('anche')}\\s+${caseInitial('per')})`;
+const AUDIENCE_TARGET = `\\s+(?:${caseInitial('il')}\\s+|${caseInitial('i')}\\s+|${caseInitial('l')}')?(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della'].map(caseInitial).join('|')}))?\\s+)?\\p{Lu}\\p{L}+`;
 const AUDIENCE_RES = [
   // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
   // maltempo in Ticino», che e' un fatto in Ticino.
-  new RegExp(`\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+(?:[\\p{L}']+\\s+){0,3}?(?:per|sul|sulla|sui|anche\\s+per)${AUDIENCE_TARGET}`, 'gu'),
+  new RegExp(`\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+(?:[\\p{L}']+\\s+){0,3}?${AUDIENCE_LINK}${AUDIENCE_TARGET}`, 'gu'),
   // «cosa cambia per chi lavora in Ticino», «cosa significa per il Ticino»:
   // serve il «per» del destinatario, non «cosa cambia in Ticino dal 2026».
-  new RegExp(`\\b${caseInitial('cosa')}\\s+(?:cambia|significa|comporta)\\s+per(?:\\s+(?:[\\p{L}']+\\s+){0,4}?(?:in|nel|sul|per|del|dei))?${AUDIENCE_TARGET}`, 'gu'),
+  new RegExp(`\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}(?:\\s+(?:[\\p{L}']+\\s+){0,4}?(?:${['in', 'nel', 'sul', 'per', 'del', 'dei'].map(caseInitial).join('|')}))?${AUDIENCE_TARGET}`, 'gu'),
 ];
 
 /**
@@ -374,6 +375,8 @@ const PERSON_HEAD_STEMS = [
 ];
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */
 const PERSON_HEAD_WORDS = new Set(['auto', 'automobile', 'automobili', 'moto']);
+const PERSON_GROUP_STEMS = ['grupp', 'comitiv', 'delegazion', 'squadr', 'famigli', 'coppi'];
+const PERSON_GROUP_LINKS = new Set(['di', 'dei', 'degli', 'delle']);
 
 /**
  * Portata nazionale dichiarata nel titolo, nell'excerpt o nell'attacco: una
@@ -710,8 +713,11 @@ export function createCantonClassifier({
     const k = i - 1;
     if (k < 0 || sentenceBreak(text, tokens[k], tokens[i])) return true;
     const prev = tokens[k].norm;
-    return PERSON_LEAD_WORDS.has(prev) || PERSON_HEAD_WORDS.has(prev) || /^\d+$/u.test(prev)
-      || PERSON_HEAD_STEMS.some((stem) => prev.startsWith(stem));
+    if (PERSON_LEAD_WORDS.has(prev) || PERSON_HEAD_WORDS.has(prev) || /^\d+$/u.test(prev)
+      || PERSON_HEAD_STEMS.some((stem) => prev.startsWith(stem))) return true;
+    const head = tokens[k - 1];
+    return Boolean(head) && !sentenceBreak(text, head, tokens[k]) && PERSON_GROUP_LINKS.has(prev)
+      && PERSON_GROUP_STEMS.some((stem) => head.norm.startsWith(stem));
   }
 
   function isClubContext(text, tokens, i) {

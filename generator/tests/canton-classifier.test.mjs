@@ -219,6 +219,12 @@ describe('regole di assegnazione', () => {
       excerpt: 'Furto in un ristorante di Mendrisio.',
       body: 'A Mendrisio un ristoratore ha sorpreso un ladro. Il ticinese ha chiamato la polizia.',
     }), ['TI']);
+    assert.deepEqual(codes({
+      title: 'Gruppo di ticinesi bloccato in Medio Oriente',
+      excerpt: 'La comitiva attende assistenza consolare.',
+      sourceUrl: 'https://www.tio.ch/estero/cronaca/123456/gruppo-bloccato',
+      body: 'Il gruppo di ticinesi attende un volo. I ticinesi chiedono aiuto.',
+    }), []);
   });
 
   test('il cantone come destinatario non e\' il luogo della notizia, neppure nel titolo', () => {
@@ -230,6 +236,9 @@ describe('regole di assegnazione', () => {
     const classifier = defaultCantonClassifier();
     assert.deepEqual(classifier.mentionsIn('Benzinai esauriti, cosa cambia per chi lavora in Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('L\'impatto sul Ticino della riforma').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per il Canton Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per il Cantone di Ginevra').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Cosa Cambia per Il Ticino').map((m) => m.group), []);
     // Un fatto in Ticino resta in Ticino.
     assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia in Ticino dal 2026').map((m) => m.group), ['TI']);
