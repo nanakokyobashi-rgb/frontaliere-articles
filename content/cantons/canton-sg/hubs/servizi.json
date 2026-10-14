@@ -4,17 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T17:09:39.574Z",
-  "contentHash": "5c755b4ce4966c55e1fdb10f2d3581bb874345133467a8e252aee144269c7769",
+  "updatedAt": "2026-10-14T17:36:44.683Z",
+  "contentHash": "2694cb8db9f9b524c1e20034f25b5b24e985ca65b26c6a70f435ced328dd59e1",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-14T04:58:40.892Z",
       "keyFacts": 1
     },
     {
@@ -35,11 +30,6 @@
           "value": "577,10 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "10",
-          "note": "offerta mediana 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -67,37 +57,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "SG6135",
-              "value": "3500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6632"
-            },
-            {
-              "label": "SG10188",
-              "value": "1500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6633"
-            },
-            {
-              "label": "SG31087",
-              "value": "820 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6634"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -214,7 +173,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T17:36:44.683Z"
     },
     "en": {
       "canton": "SG",
@@ -227,11 +186,6 @@
           "value": "577.10 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "10",
-          "note": "typical bid 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -259,37 +213,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "SG6135",
-              "value": "3,500 CHF",
-              "detail": "current bid",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6632"
-            },
-            {
-              "label": "SG10188",
-              "value": "1,500 CHF",
-              "detail": "current bid",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6633"
-            },
-            {
-              "label": "SG31087",
-              "value": "820 CHF",
-              "detail": "current bid",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6634"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +325,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T17:36:44.683Z"
     },
     "de": {
       "canton": "SG",
@@ -415,11 +338,6 @@
           "value": "577.10 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "10",
-          "note": "mittleres Gebot 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -447,37 +365,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "SG6135",
-              "value": "3’500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6632"
-            },
-            {
-              "label": "SG10188",
-              "value": "1’500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6633"
-            },
-            {
-              "label": "SG31087",
-              "value": "820 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6634"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -590,7 +477,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T17:36:44.683Z"
     },
     "fr": {
       "canton": "SG",
@@ -603,11 +490,6 @@
           "value": "577,10 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "10",
-          "note": "offre centrale 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -635,37 +517,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "SG6135",
-              "value": "3 500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6632"
-            },
-            {
-              "label": "SG10188",
-              "value": "1 500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6633"
-            },
-            {
-              "label": "SG31087",
-              "value": "820 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-14T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6634"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -774,7 +625,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T17:36:44.683Z"
     }
   }
 }
