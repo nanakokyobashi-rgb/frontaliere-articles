@@ -1,3 +1,4 @@
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { matchContentLinks } from '../../../engine/shared/contentLinkVocabulary.mjs';
 import { getServiceAccountAccessToken } from './google-service-account-token.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
@@ -10,13 +11,8 @@ const THEMES = {
   'tax-return': 'tax', calendar: 'tax', ristorni: 'tax', health: 'health',
   pension: 'pension', pillar3: 'pension', 'cost-of-living': 'living',
 };
-export const DEMAND_THEMES = Object.freeze({
-  jobs: ['Lavoro', 'Jobs', 'Arbeit', 'Emploi'], salary: ['Stipendio netto', 'Net salary', 'Nettolohn', 'Salaire net'],
-  fuel: ['Carburanti', 'Fuel', 'Kraftstoff', 'Carburants'], exchange: ['Cambio CHF/EUR', 'CHF/EUR exchange', 'CHF/EUR Wechselkurs', 'Change CHF/EUR'],
-  traffic: ['Valichi e mobilità', 'Border crossings and mobility', 'Grenze und Mobilität', 'Frontière et mobilité'],
-  tax: ['Fisco', 'Taxes', 'Steuern', 'Fiscalité'], health: ['Cassa malati', 'Health insurance', 'Krankenversicherung', 'Assurance maladie'],
-  pension: ['Pensione', 'Pension', 'Rente', 'Retraite'], living: ['Costo della vita', 'Cost of living', 'Lebenshaltungskosten', 'Coût de la vie'],
-});
+import { DEMAND_THEMES } from './daily-brief-insights.mjs';
+export { DEMAND_THEMES } from './daily-brief-insights.mjs';
 
 /** Only predefined theme IDs and aggregate counters leave this function. */
 export function shapeSearchDemand({ gscRows = [], ga4Rows = [], startDate, endDate, gscAvailable = false, ga4Available = false, partial = false }) {

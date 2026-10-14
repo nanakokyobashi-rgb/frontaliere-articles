@@ -1,3 +1,4 @@
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { linkContentKeywords } from '../../../engine/shared/linkContentKeywords.mjs';
 
 /** Link existing localized prose. Missing translations and missing intent

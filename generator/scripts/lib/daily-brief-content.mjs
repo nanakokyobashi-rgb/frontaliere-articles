@@ -21,7 +21,7 @@
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { replaceLocalizedToponymMismatches } from './localized-toponyms.mjs';
-import { DEMAND_THEMES } from './daily-brief-demand.mjs';
+import { DEMAND_THEMES } from './daily-brief-insights.mjs';
 
 export const DAILY_BRIEF_ID_PREFIX = 'bollettino-frontaliere-';
 /** Keep this many editions in the blog sitemap; older ones are de-listed. */
