@@ -271,10 +271,10 @@ test('un registro troncato viene confrontato con il high-water della revisione p
 });
 
 test('un blob storico illeggibile (partial clone, fetch fallito) fallisce chiuso, non azzera l\'high-water', () => {
-  // `tests.yml` fa un checkout `filter: blob:none`: il registro della base
-  // arriva su richiesta. Se quel fetch fallisce, `git show` esce != 0 come per
-  // un path assente — ma il tree dice che il file c'e', quindi non e' "nessuna
-  // storia" e il troncamento non deve poter passare in silenzio.
+  // Il gate resta fail-closed anche se un chiamante usa un partial clone:
+  // `git show` può fallire sia per un path assente sia per un blob promisor non
+  // leggibile. Il tree distingue i casi: se il file c'e', il troncamento non
+  // deve poter passare in silenzio. `tests.yml` usa ora un checkout completo.
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-body-floor-missing-blob-'));
   const git = (...args) => execFileSync('git', ['-C', dir, ...args], {
     encoding: 'utf8',
@@ -447,6 +447,15 @@ test('i gate realistici fanno checkout della storia completa richiesta dal floor
       `${path.basename(workflow)} deve rendere verificabile la revisione precedente`,
     );
   }
+});
+
+test('tests.yml scarica i blob storici nel checkout iniziale', () => {
+  const workflow = fs.readFileSync(TESTS_WORKFLOW, 'utf8');
+  assert.doesNotMatch(
+    workflow,
+    /^\s*filter:\s*\S/m,
+    'il check richiesto per tutte le PR non deve dipendere dal fetch on-demand di blob promisor',
+  );
 });
 
 test('i workflow passano al preflight la base dell\'evento', () => {
