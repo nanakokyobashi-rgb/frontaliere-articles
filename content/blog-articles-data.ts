@@ -44419,6 +44419,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel',
+ category: 'novita',
+ date: '2026-10-14T13:35:22.725Z',
+ image: '/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -50,6 +50,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T12:50:17.019Z",
       "lastFailureAt": "2026-10-14T12:50:17.019Z"
+    },
+    {
+      "articleId": "gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel",
+      "title": "Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football",
+      "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
+      "reason": "All image providers failed for article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel: openai-codex (spawn codex ENOENT); gemini (Gemini image requ",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T13:35:23.185Z",
+      "lastFailureAt": "2026-10-14T13:35:23.185Z"
     }
   ]
 }

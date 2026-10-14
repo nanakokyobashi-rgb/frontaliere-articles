@@ -107946,6 +107946,39 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel': {
+    title: 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    description: 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asvz, blackbirds, vincono, champions',
+    ogTitle: 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    ogDescription: 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
+    canonicalPath: '/articoli-frontaliere/gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football",
+      "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football"
+      },
+      "datePublished": "2026-10-14T13:35:22+00:00",
+      "dateModified": "2026-10-14T13:35:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;

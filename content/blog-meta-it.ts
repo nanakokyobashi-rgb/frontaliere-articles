@@ -13176,6 +13176,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ispezione-edile-lurate.title': 'Cantiere sospeso a Lurate Caccivio: denuncia',
     'blog.article.ispezione-edile-lurate.excerpt': '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
     'blog.article.ispezione-edile-lurate.imageAlt': 'Cantiere edile a Lurate Caccivio sottoposto a controlli e sospeso.',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.title': 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.excerpt': 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Immagine editoriale relativa a: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
 };
 
 export default blogMetaIt;
