@@ -8243,6 +8243,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.title': 'Permis de chasse dans le canton de Berne : conditions et demande',
     'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.',
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paysage du canton de Berne en Suisse',
+    'blog.article.investimenti-illiquidi-pensione-2026.title': 'Caisses de pension : investissements illiquides à 36% du patrimoine',
+    'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% du patrimoine est investi dans des actifs non immédiatement négociables La part a augmenté au cours des 15 dernières années L’immobilier, les hypothèques et les placements alternatifs offrent de la stabilité',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Bureau de caisse de pension à Zurich avec analystes examinant des portefeuilles illiquides',
 };
 
 export default blogMetaChFr;
