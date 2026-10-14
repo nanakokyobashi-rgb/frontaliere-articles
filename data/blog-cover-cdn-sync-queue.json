@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ispezione-edile-lurate.webp",
+      "sha256": "5ed2b7071d0ebe357aa67e2c464f2fd40da9c798871871fad3e1f447bd0625a9"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ispezione-edile-lurate-480w.webp",
+      "sha256": "72397a3581bc8237ce8b5891190ccf2e3c1d0b39ce2b641ab406775429ae245e"
+    }
+  ]
 }
