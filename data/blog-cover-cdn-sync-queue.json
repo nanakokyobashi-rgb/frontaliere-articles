@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fibra-ottica-145-comuni-como.webp",
+      "sha256": "4fc7a88ddfe7daa8374b412faa96017bb1c90227a8afaf62b81b31a2d6ad6529"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fibra-ottica-145-comuni-como-480w.webp",
+      "sha256": "db59fb9f4503123bc499114bf72711cc0d362f7e312d9b847a849fa82677fe04"
+    }
+  ]
 }
