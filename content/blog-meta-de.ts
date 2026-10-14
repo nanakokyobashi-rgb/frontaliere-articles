@@ -13151,7 +13151,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.arresti-truffa-chiamate-ticino.title': 'Schock-Betrug: drei Festnahmen im Kanton Tessin',
     'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'Im Kanton Tessin wurde ein Netzwerk von Betrügern zerschlagen, die sich auf sogenannte Schocks spezialisiert haben: Drei Personen wurden verhaftet.',
     'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'Ansicht von Lugano mit einem Smartphone im Vordergrund',
-    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Grenzgänger-Tagesbulletin – 14. Oktober 2026: 921 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Grenzgänger: 921 neue Stellen in der Schweiz gestern — 14. Oktober 2026',
     'blog.article.bollettino-frontaliere-2026-10-14.excerpt': 'Die Zahlen von heute, 14. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
     'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 14. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Grenzgänger-Bulletin vom 14. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
@@ -13165,6 +13165,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Arbeitsunfälle Lombardei: Daten 2026 verschlechtern sich, Spitzenwerte Como',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Über 75.293 Unfälle in der Lombardei zwischen Januar und August 2026 Die Gesamtzahl der Todesfälle steigt auf 101, gegenüber 97 im Jahr 2025 Como verzeichnet 3.795 Beschwerden und einen Anstieg',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Redaktionelles Bild zu: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    'blog.article.arresti-auto-como-minacce.title': 'Zwei Festnahmen in Como: Autodiebstahl und verletzter Autofahrer',
+    'blog.article.arresti-auto-como-minacce.excerpt': 'Zwei Verhaftungen bei Como nach Meldungen von Anwohnern Ein erzwungenes Auto und ein zweites beschädigtes Fahrzeug Ein Autofahrer meldet eine Verletzung an einem Arm',
+    'blog.article.arresti-auto-como-minacce.imageAlt': 'Stadtstrasse nahe der Grenze mit parkierten Autos und Parkhaus im Morgengrauen',
+    'blog.article.disavanzo-cantonale-2027-2030.title': 'Erwartetes Defizit des Kantons Tessin von bis zu 460 Millionen',
+    'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von 98,5 Millionen vor.',
+    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Blick auf den Luganer See mit Stadtpanorama und ruhiger Promenade',
+    'blog.article.ispezione-edile-lurate.title': 'Baustelle in Lurate Caccivio stillgelegt: Anzeige',
+    'blog.article.ispezione-edile-lurate.excerpt': '12. Oktober 2026: Kontrollen auf einer Baustelle in Lurate Caccivio. Inspektion durch die Carabinieri von Como und das Arbeitsinspektorat. Mängel beim POS und bei den Leitern festgestellt.',
+    'blog.article.ispezione-edile-lurate.imageAlt': 'Baustelle in Lurate Caccivio nach Sicherheitskontrollen stillgelegt.',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.title': 'ASVZ Blackbirds gewinnen den Champions Bowl',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.excerpt': 'Die ASVZ Blackbirds triumphieren beim Champions Bowl 2026 und erobern den ersten historischen europäischen Flaggenfußball-Titel für ein Schweizer Team.',
+    'blog.article.gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel.imageAlt': 'Redaktionelles Bild zu: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
 };
 
 export default blogMetaDe;

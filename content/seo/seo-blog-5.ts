@@ -107674,16 +107674,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-bollettino-frontaliere-2026-10-14': {
-    title: 'Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri',
+    title: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
     description: 'Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
-    ogTitle: 'Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri',
+    ogTitle: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
     ogDescription: 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
     canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-14/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri",
+      "headline": "Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026",
       "description": "Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
       "image": {
         "@type": "ImageObject",
@@ -107829,6 +107829,156 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-arresti-auto-como-minacce': {
+    title: 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    description: 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    keywords: 'frontalieri, ticino, svizzera, italia, arresti, como, furti, nelle',
+    ogTitle: 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    ogDescription: 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    canonicalPath: '/articoli-frontaliere/arresti-auto-como-minacce/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Due arresti a Como: furti nelle auto e automobilista ferito",
+      "description": "Due arresti a Como dopo le segnalazioni dei residenti Un'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-pass-auto-rinnovo-annuale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada urbana vicino al confine con auto parcheggiate e autosilo all'alba"
+      },
+      "datePublished": "2026-10-14T12:24:36+00:00",
+      "dateModified": "2026-10-14T12:24:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresti-auto-como-minacce/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-disavanzo-cantonale-2027-2030': {
+    title: 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
+    description: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni. Il deficit prospettato arriva a 460 milioni nel 2030. Dal 2028 l’autofinanziamento dovrebbe diventare',
+    keywords: 'frontalieri, ticino, svizzera, italia, disavanzo, cantonale, ticinese, previsto',
+    ogTitle: 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
+    ogDescription: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
+    canonicalPath: '/articoli-frontaliere/disavanzo-cantonale-2027-2030/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disavanzo cantonale ticinese previsto fino a 460 milioni",
+      "description": "Il Preventivo 2027 prevede un disavanzo di 98,5 milioni. Il deficit prospettato arriva a 460 milioni nel 2030. Dal 2028 l’autofinanziamento dovrebbe diventare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-deficit-comune-preventivo-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con skyline cittadino e passeggiata tranquilla"
+      },
+      "datePublished": "2026-10-14T12:50:16+00:00",
+      "dateModified": "2026-10-14T12:50:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disavanzo-cantonale-2027-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ispezione-edile-lurate': {
+    title: 'Cantiere sospeso a Lurate Caccivio: denuncia | Frontaliere Ticino',
+    description: '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantiere, sospeso, lurate, caccivio',
+    ogTitle: 'Lurate Caccivio, cantiere sospeso dai controlli',
+    ogDescription: '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
+    canonicalPath: '/articoli-frontaliere/ispezione-edile-lurate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantiere sospeso a Lurate Caccivio: denuncia",
+      "description": "12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell'Ispettorato del Lavoro Rilevate carenze su POS, scale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ispezione-edile-lurate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere edile a Lurate Caccivio sottoposto a controlli e sospeso."
+      },
+      "datePublished": "2026-10-14T13:27:50+00:00",
+      "dateModified": "2026-10-14T13:27:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ispezione-edile-lurate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel': {
+    title: 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    description: 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asvz, blackbirds, vincono, champions',
+    ogTitle: 'Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football',
+    ogDescription: 'Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.',
+    canonicalPath: '/articoli-frontaliere/gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football",
+      "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/asvz-blackbirds-champions-bowl-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football"
+      },
+      "datePublished": "2026-10-14T13:35:22+00:00",
+      "dateModified": "2026-10-14T13:35:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;

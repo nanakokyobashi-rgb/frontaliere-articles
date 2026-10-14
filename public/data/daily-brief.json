@@ -1,1012 +1,1153 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T10:02:36.611Z",
+  "generatedAt": "2026-10-14T11:55:25.567Z",
   "dateIso": "2026-10-14",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
-    "fuelMunicipalities": 518,
+    "fuelMunicipalities": 0,
     "exchangePoints": 31,
-    "jobsActive": 32083
+    "jobsActive": 32395
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-10-14T07:08:31.745Z",
+      "updatedAt": "2026-10-14T11:09:15.945Z",
       "count": 141,
-      "zeroWaitCount": 141,
+      "zeroWaitCount": 139,
       "worst": {
-        "slug": "anieres",
-        "name": "Anières",
-        "waitMinutes": 0
+        "slug": "gaggiolo",
+        "name": "Gaggiolo (Cantello-Stabio)",
+        "waitMinutes": 8
       },
       "crossings": [
+        {
+          "slug": "gaggiolo",
+          "name": "Gaggiolo (Cantello-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
+        },
+        {
+          "slug": "san-pietro",
+          "name": "San Pietro (Clivio-Stabio)",
+          "waitMinutes": 8,
+          "status": "yellow",
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
+        },
         {
           "slug": "anieres",
           "name": "Anières",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "au-lustenau",
           "name": "Au-Lustenau",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "bad-sackingen-stein-ag",
           "name": "Bad Säckingen – Stein AG",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "bardonnex",
           "name": "Bardonnex",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "bargen-sh-tengen",
           "name": "Bargen SH – Tengen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "basel-weil-am-rhein-autostrada-a2-a5",
           "name": "Basel – Weil am Rhein, Autostrada A2/A5",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "basel-weil-am-rhein-freiburgerstrasse",
           "name": "Basel – Weil am Rhein, Freiburgerstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "basel-weil-am-rhein-hiltalingerstrasse",
           "name": "Basel – Weil am Rhein, Hiltalingerstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "biaufond",
           "name": "Biaufond",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "biegno-indemini",
           "name": "Biegno-Indemini",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "bizzarone-novazzano",
           "name": "Bizzarone-Novazzano",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "blumberg-bargen-sh-alte-bargener-strasse",
           "name": "Blumberg – Bargen SH, Alte Bargener Strasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "blumberg-bargen-sh-autostrasse-h4",
           "name": "Blumberg – Bargen SH, Autostrasse H4",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "blumberg-beggingen",
           "name": "Blumberg – Beggingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "boncourt-delle",
           "name": "Boncourt-Delle (A16)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "buchs-schaan",
           "name": "Buchs (SG)-Schaan",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-dorflingen-busingerstrasse",
           "name": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-dorflingen-l202",
           "name": "Büsingen am Hochrhein – Dörflingen, L202",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-dorflingen-siedlerstrasse",
           "name": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-stemmer",
           "name": "Büsingen am Hochrhein – Schaffhausen-Stemmer",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-felsgasse",
           "name": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse",
           "name": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-rheinhaldenstrasse",
           "name": "Büsingen am Hochrhein – Schaffhausen, Rheinhaldenstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-vogelingasschen",
           "name": "Büsingen am Hochrhein – Schaffhausen, Vögelingässchen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "camedo",
           "name": "Camedo (Re-Centovalli)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "campione-d-italia-bissone",
           "name": "Campione d'Italia-Bissone",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "campocologno-tirano",
           "name": "Campocologno-Tirano",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "castasegna-villa-di-chiavenna",
           "name": "Castasegna-Villa di Chiavenna",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "chavannes-de-bogis-divonne",
           "name": "Chavannes-de-Bogis-Divonne",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "chiasso-centro",
           "name": "Chiasso Centro (Ponte Chiasso)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "chiasso-brogeda",
           "name": "Chiasso-Brogeda",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "chiasso-strada",
           "name": "Chiasso-Strada",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "clivio-ligornetto",
           "name": "Clivio-Ligornetto",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "col-des-roches",
           "name": "Col-des-Roches (Col France)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "crassier-divonne",
           "name": "Crassier-Divonne",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "cremenaga-ponte-cremenaga",
           "name": "Cremenaga-Ponte Cremenaga",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "crociale-dei-mulini",
           "name": "Crociale dei Mulini",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "dettighofen-rafz",
           "name": "Dettighofen – Rafz",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "dettighofen-wil-zh",
           "name": "Dettighofen – Wil ZH",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "diepoldsau-hohenems",
           "name": "Diepoldsau-Hohenems",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "diessenhofen-gailingen-am-hochrhein",
           "name": "Diessenhofen – Gailingen am Hochrhein",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "dorflingen-gailingen-am-hochrhein-hinterdorf",
           "name": "Dörflingen – Gailingen am Hochrhein, Hinterdorf",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "dorflingen-gottmadingen-randegg",
           "name": "Dörflingen – Gottmadingen-Randegg",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "drezzo-pedrinate",
           "name": "Drezzo-Pedrinate",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "dumenza-cassinone",
           "name": "Dumenza-Cassinone",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "eggingen-hallau",
           "name": "Eggingen – Hallau",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "fahy-abbevillers",
           "name": "Fahy-Abbévillers",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "ferney-voltaire-grand-saconnex",
           "name": "Ferney-Voltaire / Grand-Saconnex",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "forcola-di-livigno",
           "name": "Forcola di Livigno",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "gaggiolo",
-          "name": "Gaggiolo (Cantello-Stabio)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "gailingen-am-hochrhein-dorflingen",
           "name": "Gailingen am Hochrhein – Dörflingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "gailingen-am-hochrhein-ramsen-sh",
           "name": "Gailingen am Hochrhein – Ramsen SH",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "giogo-di-santa-maria",
           "name": "Giogo di Santa Maria (Passo dell'Umbrail)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "gottmadingen-buch-sh",
           "name": "Gottmadingen – Buch SH",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "gottmadingen-buch-blindenhausen-sh",
           "name": "Gottmadingen – Buch-Blindenhausen SH",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "gottmadingen-ramsen-hofenacker",
           "name": "Gottmadingen – Ramsen-Hofenacker",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "gottmadingen-thayngen-autostrada-a81-a4",
           "name": "Gottmadingen – Thayngen, Autostrada A81/A4",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "gottmadingen-thayngen-ebringerstrasse",
           "name": "Gottmadingen – Thayngen, Ebringerstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "goumois",
           "name": "Goumois",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "grenzach-wyhlen-riehen",
           "name": "Grenzach-Wyhlen – Riehen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "haag-bendern",
           "name": "Haag-Bendern",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "hermance",
           "name": "Hermance",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "hilzingen-thayngen-barzheimer-strasse",
           "name": "Hilzingen – Thayngen, Barzheimer Strasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "hilzingen-thayngen-schlattergasse",
           "name": "Hilzingen – Thayngen, Schlattergasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "hohentengen-am-hochrhein-kaiserstuhl-ag",
           "name": "Hohentengen am Hochrhein – Kaiserstuhl AG",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "hohentengen-am-hochrhein-wasterkingen",
           "name": "Hohentengen am Hochrhein – Wasterkingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "inzlingen-riehen",
           "name": "Inzlingen – Riehen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "jestetten-laufen-uhwiesen-dorfstrasse",
           "name": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "jestetten-laufen-uhwiesen-grenzstrasse",
           "name": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "jestetten-neuhausen-am-rheinfall-buchweg",
           "name": "Jestetten – Neuhausen am Rheinfall, Buchweg",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "jestetten-neuhausen-am-rheinfall-zollstrasse",
           "name": "Jestetten – Neuhausen am Rheinfall, Zollstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "jestetten-rheinau",
           "name": "Jestetten – Rheinau",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "jestetten-wilchingen",
           "name": "Jestetten – Wilchingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "klettgau-trasadingen",
           "name": "Klettgau – Trasadingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "klettgau-wil-zh",
           "name": "Klettgau – Wil ZH",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "klettgau-wilchingen",
           "name": "Klettgau – Wilchingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "konstanz-kreuzlingen",
           "name": "Konstanz – Kreuzlingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
           "name": "Konstanz – Tägerwilen, Autostrada B33n/A7",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "konstanz-tagerwilen-gottlieber-strasse",
           "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "kriessern-mader",
           "name": "Kriessern-Mäder",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "kussaberg-bad-zurzach-ag",
           "name": "Küssaberg – Bad Zurzach AG",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "l-auberson-les-fourgs",
           "name": "L'Auberson-Les Fourgs",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "la-cure-les-rousses",
           "name": "La Cure-Les Rousses",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "landecy",
           "name": "Landecy",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "lanzo-d-intelvi-arogno",
           "name": "Lanzo d'Intelvi-Arogno",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "laufenburg-laufenburg-ag",
           "name": "Laufenburg (Baden) – Laufenburg AG",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "le-brassus-bois-d-amont",
           "name": "Le Brassus-Bois-d'Amont",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "le-chatelard-vallorcine",
           "name": "Le Châtelard-Vallorcine",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "les-verrieres",
           "name": "Les Verrières",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "lottstetten-nack",
           "name": "Lottstetten – Nack",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "lottstetten-rafz-landstrasse",
           "name": "Lottstetten – Rafz, Landstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "lottstetten-rafz-schaffhausener-strasse",
           "name": "Lottstetten – Rafz, Schaffhausener Strasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "lottstetten-rudlingen",
           "name": "Lottstetten – Rüdlingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "luino-fornasette",
           "name": "Luino-Fornasette",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "martina-nauders",
           "name": "Martina-Nauders (Finstermünz)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "maslianico-pizzamiglio",
           "name": "Maslianico-Pizzamiglio",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "merishausen-tengen",
           "name": "Merishausen – Tengen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "meyrin-cern",
           "name": "Meyrin / CERN",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "moillesulaz",
           "name": "Moillesulaz",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "montlingen-koblach",
           "name": "Montlingen-Koblach",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "morgins-chatel",
           "name": "Morgins-Châtel (Pas de Morgins)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "ohningen-stein-am-rhein",
           "name": "Öhningen – Stein am Rhein",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "opfertshofen-tengen",
           "name": "Opfertshofen – Tengen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "oria-gandria",
           "name": "Oria-Gandria",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "passo-dello-spluga",
           "name": "Passo dello Spluga (Montespluga)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "perly",
           "name": "Perly (Perly-Certoux)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "piaggio-valmara",
           "name": "Piaggio Valmara (Cannobio-Brissago)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "ponte-tresa",
           "name": "Ponte Tresa",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "porto-ceresio-brusino",
           "name": "Porto Ceresio-Brusino",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "ramsen-moskau-rielasingen-worblingen",
           "name": "Ramsen-Moskau – Rielasingen-Worblingen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "rheineck-gai-au",
           "name": "Rheineck-Gaißau",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
           "name": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "rheinfelden-rheinfelden-ag-autostrada-a861-a3",
           "name": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "riehen-lorrach-stetten",
           "name": "Riehen – Lörrach-Stetten",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "riehen-weil-am-rhein",
           "name": "Riehen – Weil am Rhein",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "rielasingen-worblingen-ramsen-hofenacker",
           "name": "Rielasingen-Worblingen – Ramsen-Hofenacker",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "ronago-novazzano",
           "name": "Ronago-Novazzano",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "ruthi-meiningen",
           "name": "Rüthi-Meiningen",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "saint-gingolph",
           "name": "Saint-Gingolph",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "salez-ruggell",
           "name": "Salez-Ruggell",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "saltrio-arzo",
           "name": "Saltrio-Arzo",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "samnaun-spiss",
           "name": "Samnaun-Spiss",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
-        },
-        {
-          "slug": "san-pietro",
-          "name": "San Pietro (Clivio-Stabio)",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "sauverny",
           "name": "Sauverny",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "sempione",
           "name": "Sempione (Iselle-Gondo)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "sevelen-vaduz",
           "name": "Sevelen-Vaduz",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "st-luzisteig",
           "name": "St. Luzisteig (Fläsch-Balzers)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "st-margrethen-hochst",
           "name": "St. Margrethen-Höchst",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "stuhlingen-hallau",
           "name": "Stühlingen – Hallau",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "stuhlingen-schleitheim",
           "name": "Stühlingen – Schleitheim",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "tengen-thayngen-l188",
           "name": "Tengen – Thayngen, L188",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "tengen-thayngen-wiechserstrasse",
           "name": "Tengen – Thayngen, Wiechserstrasse",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "thonex-vallard",
           "name": "Thônex-Vallard (Autoroute Blanche)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "traforo-del-gran-san-bernardo",
           "name": "Traforo del Gran San Bernardo",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "trubbach-balzers",
           "name": "Trübbach-Balzers",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "tunnel-munt-la-schera",
           "name": "Tunnel Munt La Schera (Passo del Gallo)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "vallorbe-jougne",
           "name": "Vallorbe-Jougne (La Ferrière)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "waldshut-tiengen-koblenz-ag",
           "name": "Waldshut-Tiengen – Koblenz AG",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "widnau-lustenau-schmitterbrucke",
           "name": "Widnau-Lustenau (Schmitterbrücke)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "widnau-lustenau",
           "name": "Widnau-Lustenau (Wiesenrain)",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         },
         {
           "slug": "zenna-dirinella",
           "name": "Zenna-Dirinella",
           "waitMinutes": 0,
           "status": "green",
-          "direction": null
+          "direction": null,
+          "updatedAt": "2026-10-14T11:09:15.945Z"
         }
       ],
       "degradedEditions": 0
@@ -1014,40 +1155,78 @@
     "fuel": {
       "available": true,
       "generatedAt": "2026-10-14T06:42:38.098Z",
-      "municipalityCount": 518,
-      "cheaperItalyCount": 114,
-      "cheaperSwissCount": 16,
-      "tieCount": 1,
+      "municipalityCount": null,
+      "comparedMunicipalityCount": null,
+      "sources": {
+        "switzerland": {
+          "stationCount": 236,
+          "latestObservedUpdate": "2026-10-14T06:42:30.562Z",
+          "provider": "TCS Benzinpreis",
+          "dieselStationCount": 228,
+          "dieselCoveragePct": 96.6,
+          "providerUrl": "https://benzin.tcs.ch/de/map/SP95"
+        },
+        "italy": {
+          "pricesUrl": "https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv",
+          "provider": "MIMIT Open Data",
+          "priceSnapshotDate": "2026-10-12",
+          "stationsUrl": "https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv"
+        },
+        "exchangeRate": {
+          "eurPerChf": 1.073883,
+          "provider": "ECB",
+          "chfPerEur": 0.9312,
+          "sourceUrl": "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+        }
+      },
+      "cheaperItalyCount": null,
+      "cheaperSwissCount": null,
+      "tieCount": null,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
           "province": "SO",
           "minPriceEur": 1.206,
-          "stationName": "ENI TREPALLE"
-        },
-        {
-          "municipality": "Arcisate",
-          "province": "VA",
-          "minPriceEur": 1.854,
-          "stationName": "ENI 2904"
+          "stationName": "ENI TREPALLE",
+          "stationId": "9205",
+          "dieselPriceEur": 1.292,
+          "observedAt": "09/10/2026 18:21:14"
         },
         {
           "municipality": "Aprica",
           "province": "SO",
           "minPriceEur": 1.919,
-          "stationName": "DISTRIBUTORE ENI APRICA"
+          "stationName": "DISTRIBUTORE ENI APRICA",
+          "stationId": "48129",
+          "dieselPriceEur": 2.064,
+          "observedAt": "09/10/2026 21:58:00"
         },
         {
-          "municipality": "Aosta",
-          "province": "AO",
-          "minPriceEur": 1.984,
-          "stationName": "STAR OIL DI SVR CARBURANTI DI SEVERINO SIMONE E C.SNC"
-        },
-        {
-          "municipality": "Anzano del Parco",
+          "municipality": "Bregnano",
           "province": "CO",
           "minPriceEur": 1.989,
-          "stationName": "ANZANO DEL PARCO-C/O BENNET SNC"
+          "stationName": "COIL BREGNANO",
+          "stationId": "57645",
+          "dieselPriceEur": 2.249,
+          "observedAt": "12/10/2026 06:25:24"
+        },
+        {
+          "municipality": "Cermenate",
+          "province": "CO",
+          "minPriceEur": 1.989,
+          "stationName": "COIL CERMENATE",
+          "stationId": "54717",
+          "dieselPriceEur": 2.29,
+          "observedAt": "12/10/2026 07:58:46"
+        },
+        {
+          "municipality": "Gera Lario",
+          "province": "CO",
+          "minPriceEur": 1.989,
+          "stationName": "IPERAL CARBURANTI GERA LARIO",
+          "stationId": "56188",
+          "dieselPriceEur": 2.249,
+          "observedAt": "11/10/2026 14:25:45"
         }
       ],
       "bestSavings": [
@@ -1070,13 +1249,13 @@
           "saving50LEur": 17.9
         },
         {
-          "municipality": "Teglio",
-          "province": "SO",
+          "municipality": "Gera Lario",
+          "province": "CO",
           "cheaperCountry": "IT",
-          "italyPriceEur": 1.994,
-          "swissPriceEur": 2.277,
-          "swissPriceChf": 2.12,
-          "saving50LEur": 14.15
+          "italyPriceEur": 1.989,
+          "swissPriceEur": 2.191,
+          "swissPriceChf": 2.04,
+          "saving50LEur": 10.1
         }
       ],
       "cheapestSwissStation": null,
@@ -1084,26 +1263,122 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0738,
-      "lastDate": "2026-10-13",
+      "rate": 1.0735,
+      "lastDate": "2026-10-14",
       "prevRate": 1.0738,
-      "prevDate": "2026-10-12",
-      "delta1d": 0,
-      "rate7dAgo": 1.0715,
-      "delta7d": 0.0023,
+      "prevDate": "2026-10-13",
+      "delta1d": -0.0003,
+      "rate7dAgo": 1.0703,
+      "delta7d": 0.0032,
       "source": "frankfurter",
       "pointCount": 31,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-10-14T01:09:05.694Z",
-      "activeJobs": 32083,
+      "generatedAt": "2026-10-14T06:22:28.249Z",
+      "activeJobs": 32395,
       "activeCompanies": 863,
-      "todayAdded": 578,
+      "todayAdded": 890,
       "yesterdayAdded": 921,
-      "last7dAdded": 7158,
+      "last7dAdded": 7470,
       "degradedEditions": 0
+    }
+  },
+  "insights": {
+    "jobs": {
+      "lastClosedDay": "2026-10-13",
+      "currentWeekAdded": 7483,
+      "previousWeekAdded": 9836,
+      "weeklyChange": -2353,
+      "weeklyChangePct": -23.9,
+      "topCompanies": [
+        {
+          "name": "fachkraft.ch GmbH",
+          "count": 3731
+        },
+        {
+          "name": "STA Personal AG",
+          "count": 1740
+        },
+        {
+          "name": "Coop Genossenschaft",
+          "count": 1007
+        },
+        {
+          "name": "yellowshark AG",
+          "count": 912
+        },
+        {
+          "name": "Stellentreff AG",
+          "count": 886
+        }
+      ],
+      "topLocations": [
+        {
+          "name": "Zürich",
+          "count": 3958
+        },
+        {
+          "name": "Luzern",
+          "count": 1228
+        },
+        {
+          "name": "Bern",
+          "count": 1218
+        },
+        {
+          "name": "Winterthur",
+          "count": 870
+        },
+        {
+          "name": "Basel",
+          "count": 863
+        }
+      ]
+    },
+    "exchange": {
+      "referenceSalaryChf": 4000,
+      "salaryValueEur": 4294,
+      "weeklySalaryChangeEur": 12.8,
+      "lastDate": "2026-10-14"
+    },
+    "searchDemand": {
+      "available": true,
+      "startDate": "2026-10-05",
+      "endDate": "2026-10-11",
+      "topics": [
+        {
+          "theme": "jobs",
+          "impressions": 3260,
+          "searches": 5537
+        },
+        {
+          "theme": "fuel",
+          "impressions": 1170,
+          "searches": 0
+        },
+        {
+          "theme": "salary",
+          "impressions": 59,
+          "searches": 0
+        },
+        {
+          "theme": "traffic",
+          "impressions": 32,
+          "searches": 0
+        },
+        {
+          "theme": "pension",
+          "impressions": 29,
+          "searches": 0
+        }
+      ],
+      "partial": true,
+      "sources": {
+        "gsc": true,
+        "ga4": true
+      }
     }
   }
 }

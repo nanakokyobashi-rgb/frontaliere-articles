@@ -1889,9 +1889,10 @@
       "mode": "adapted",
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
       "baseline": {
-        "site": "44b4dcb727b012ea",
-        "corpus": "e48b58a762604895",
-        "alignedAt": "2026-08-14"
+        "site": "dd9f281a289f5eca",
+        "corpus": "82e9f9c3b8abcd50",
+        "alignedAt": "2026-10-14",
+        "forcedAt": "2026-10-14T13:11:05Z"
       }
     },
     {
@@ -2721,6 +2722,16 @@
         "site": null,
         "corpus": "0d418d160b45beb5",
         "alignedAt": "2026-10-05"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/decisions-api.mjs",
+      "mode": "corpus-only",
+      "reason": "Client server-side del pre-spend topic gate per OpenAI Decisions API. Il generatore e la sua chiave Remote Config vivono nel corpus; il sito consuma gli articoli pubblicati e non ha un gemello operativo di questo client.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -6026,7 +6037,7 @@
       "reason": "Collector opzionale del bollettino: legge Search Console e Firebase Analytics con il service account del producer e pubblica solo aggregati predefiniti. Il sito consuma la superficie JSON via HTTP, senza questo collector.",
       "baseline": {
         "site": null,
-        "corpus": "aae10c23b8672fe8",
+        "corpus": "a9b22932398764fc",
         "alignedAt": "2026-10-14"
       }
     },
@@ -6036,7 +6047,7 @@
       "reason": "Composizione pura delle osservazioni e delle etichette del bollettino datato: settimane complete, cambio, valichi e domanda aggregata. Bollettino e writer vivono nel corpus; il sito consuma il JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "9bb19ddc86fdb034",
+        "corpus": "01aaf92a0eb715a2",
         "alignedAt": "2026-10-14"
       }
     },

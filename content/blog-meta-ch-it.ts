@@ -125,7 +125,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': 'La 13esima AVS va in conferenza di conciliazione',
     'blog.article.avs-finanziamento-13esima.excerpt': 'Nessun accordo tra Consiglio Nazionale e Stati sul finanziamento della 13esima AVS',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Edificio del Parlamento svizzero a Berna con logo AVS',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan: licenziamenti per furto di essenze',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan licenzia dipendenti a Vernier (Ginevra)',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Industria chimica in Svizzera',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi cambia ai vertici e cerca nuovi soci',
@@ -8246,6 +8246,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Casse pensioni: investimenti illiquidi al 36% del patrimonio',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': 'Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità',
     'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vista del lago di Lugano con edifici uffici e acqua calma, giorno sereno',
+    'blog.article.prezzi-auto-nuove-usate-calo.title': 'Prezzi auto nuove e usate in calo grazie ai marchi cinesi',
+    'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Nel terzo trimestre calano i prezzi medi delle auto nuove.',
+    'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Lot di automobili nuove e usate in una concessionaria svizzera con prezzi visibili',
 };
 
 export default blogMetaChIt;

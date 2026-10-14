@@ -1506,16 +1506,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-givaudan-licenziamenti': {
-    title: 'Givaudan: licenziamenti per furto di essenze | Frontaliere Ticino',
+    title: 'Givaudan licenzia dipendenti a Vernier (Ginevra)',
     description: 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta. Dati aggiornati 2026 per frontalieri in',
     keywords: 'frontalieri, ticino, svizzera, italia, givaudan, licenza, dipendenti, leader',
-    ogTitle: 'Givaudan: licenziamenti per furto di essenze',
+    ogTitle: 'Givaudan licenzia dipendenti a Vernier (Ginevra)',
     ogDescription: 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta.',
     canonicalPath: '/articoli-svizzera/givaudan-licenziamenti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Givaudan: licenziamenti per furto di essenze",
+      "headline": "Givaudan licenzia dipendenti a Vernier (Ginevra)",
       "description": "Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta. Dati aggiornati 2026 per frontalieri in",
       "image": {
         "@type": "ImageObject",
@@ -104072,6 +104072,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/investimenti-illiquidi-pensione-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fallimenti-aziendali-svizzera-aumento': {
+    title: 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
+    description: '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, fallimenti, aziendali, netto, aumento',
+    ogTitle: 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
+    ogDescription: '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
+    canonicalPath: '/articoli-svizzera/fallimenti-aziendali-svizzera-aumento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fallimenti aziendali in netto aumento, record nel 2025-2026",
+      "description": "11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fallimenti-aziendali-svizzera-aumento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con edifici uffici e acqua calma, giorno sereno"
+      },
+      "datePublished": "2026-10-14T13:06:00+00:00",
+      "dateModified": "2026-10-14T13:06:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fallimenti-aziendali-svizzera-aumento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-prezzi-auto-nuove-usate-calo': {
+    title: 'Prezzi auto nuove e usate in calo grazie ai marchi cinesi',
+    description: 'Nel terzo trimestre calano i prezzi medi delle auto nuove. Anche l\'usato scende, con un\'offerta in aumento. I marchi cinesi aumentano la pressione sui prezzi',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, auto, nuove, usate',
+    ogTitle: 'Prezzi auto nuove e usate in calo grazie ai marchi cinesi',
+    ogDescription: 'Nel terzo trimestre calano i prezzi medi delle auto nuove.',
+    canonicalPath: '/articoli-svizzera/prezzi-auto-nuove-usate-calo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi auto nuove e usate in calo grazie ai marchi cinesi",
+      "description": "Nel terzo trimestre calano i prezzi medi delle auto nuove. Anche l'usato scende, con un'offerta in aumento. I marchi cinesi aumentano la pressione sui prezzi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-prezzi-auto-nuove-usate-calo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lot di automobili nuove e usate in una concessionaria svizzera con prezzi visibili"
+      },
+      "datePublished": "2026-10-14T13:53:50+00:00",
+      "dateModified": "2026-10-14T13:53:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-auto-nuove-usate-calo/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

@@ -30,6 +30,36 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T11:36:00.094Z",
       "lastFailureAt": "2026-10-14T11:36:00.094Z"
+    },
+    {
+      "articleId": "arresti-auto-como-minacce",
+      "title": "Due arresti a Como: furti nelle auto e automobilista ferito",
+      "fallbackImage": "/images/blog/article-como-pass-auto-rinnovo-annuale.webp",
+      "reason": "All image providers failed for article-arresti-auto-como-minacce: openai-codex (vision gate rejected image: Generic synthetic dawn street scene relevant to the subject, with no peo",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T12:24:36.676Z",
+      "lastFailureAt": "2026-10-14T12:24:36.676Z"
+    },
+    {
+      "articleId": "disavanzo-cantonale-2027-2030",
+      "title": "Disavanzo cantonale ticinese previsto fino a 460 milioni",
+      "fallbackImage": "/images/blog/article-deficit-comune-preventivo-2027.webp",
+      "reason": "All image providers failed for article-disavanzo-cantonale-2027-2030: openai-codex (vision gate rejected image: Synthetic editorial illustration of Lake Lugano/Ticino; generic fore",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T12:50:17.019Z",
+      "lastFailureAt": "2026-10-14T12:50:17.019Z"
+    },
+    {
+      "articleId": "gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel",
+      "title": "Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football",
+      "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
+      "reason": "All image providers failed for article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel: openai-codex (spawn codex ENOENT); gemini (Gemini image requ",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T13:35:23.185Z",
+      "lastFailureAt": "2026-10-14T13:35:23.185Z"
     }
   ]
 }

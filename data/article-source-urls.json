@@ -1,19 +1,4 @@
 {
-  "https://comozero.it/attualita/provincia-di-como-sempre-meno-case-per-lavoratori-giovani-e-famiglie-sono-1302-gli-alloggi-sfitti": {
-    "articleId": "como-crisi-abitativa-alloggi-sfitti",
-    "ts": "2026-08-31T21:24:57.974Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/mendrisiotto/1947144/municipio-di-chiasso-extra-muros-proiezioni-finanziarie-complicate": {
-    "articleId": "chiasso-potenziamento-a2-misure",
-    "ts": "2026-09-01T05:24:55.241Z",
-    "keyForm": 2
-  },
-  "https://www.ticinonews.ch/ticino/galleria-moscia-acapulco-il-progetto-entra-nel-vivo-un-investimento-da-180-milioni-441726": {
-    "articleId": "galleria-moscia-acapulco-180-milioni",
-    "ts": "2026-09-01T10:37:01.451Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/chiusure-notturne-tra-a8-e-diramazione-gallarate-gattico-il-4-settembre-percorsi-alternativi-e-orari/2667724": {
     "articleId": "chiusure-notturne-a8-dir-gallarate-gattico",
     "ts": "2026-09-01T12:13:48.256Z",
@@ -2497,6 +2482,21 @@
   "https://comozero.it/attualita/infortuni-sul-lavoro-i-dati-peggiorano-in-tutta-la-lombardia-picchi-a-pavia-e-como-numeri-alti-a-milano-e-brescia": {
     "articleId": "infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como",
     "ts": "2026-10-14T11:18:47.543Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/dal-mondo/cronaca/1956683/21enne-19enne-due-auto-automobilista-minacce-como-ferito": {
+    "articleId": "arresti-auto-como-minacce",
+    "ts": "2026-10-14T12:24:36.678Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/conti-cantonali-disavanzo-fino-a-460-milioni-perche-il-governo-rinvia-le-scelte-444581": {
+    "articleId": "disavanzo-cantonale-2027-2030",
+    "ts": "2026-10-14T12:50:17.020Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/i-carabinieri-arrivano-sul-cantiere-in-provincia-di-como-tutto-sospeso-e-sanzioni-per-26mila-euro": {
+    "articleId": "ispezione-edile-lurate",
+    "ts": "2026-10-14T13:27:51.187Z",
     "keyForm": 2
   }
 }

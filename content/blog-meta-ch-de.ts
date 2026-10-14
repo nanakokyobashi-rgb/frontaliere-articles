@@ -125,7 +125,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': 'Die 13. AHV kommt in die Schlichtungskonferenz',
     'blog.article.avs-finanziamento-13esima.excerpt': 'Keine Einigung zwischen Nationalrat und Ständerat über die Finanzierung der 13. AHV',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Gebäude des Schweizer Parlaments in Bern mit AHV-Logo',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan entlässt Mitarbeiter',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan entlässt Mitarbeitende in Vernier (Genf)',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, Weltmarktführer bei Aromen und Düften, entlässt Mitarbeiter wegen Diebstahl von Essenzen.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Chemische Industrie in der Schweiz',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi cambia vertici e cerca nuovi soci',
@@ -8246,6 +8246,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pensionskassen: Illiquide Anlagen machen 36% des Vermögens aus',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% des Vermögens sind in nicht unmittelbar handelbaren Anlagen investiert Der Anteil ist in den letzten 15 Jahren gestiegen Immobilien, Hypotheken und alternative Anlagen bieten Stabilität',
     'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pensionskassen-Büro in Zürich mit Analysten, die illiquide Portfolios prüfen',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Unternehmensinsolvenzen deutlich gestiegen, Rekord 2025-2026',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvente Unternehmen zwischen Januar und September Unternehmenskonkurse bei 13’660, +38,4% im Jahresvergleich Neue Eintragungen ins Register: 41’706 Privatpersonen: 8’003 Konkurse',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Blick auf den Luganer See mit Bürogebäuden und ruhigem Wasser, klarer Tag',
+    'blog.article.prezzi-auto-nuove-usate-calo.title': 'Preise für Neu- und Gebrauchtwagen sinken dank chinesischer Marken',
+    'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Im dritten Quartal sinken die Durchschnittspreise für Neuwagen.',
+    'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Schweizer Autohaus-Lot mit neuen und gebrauchten Fahrzeugen und sichtbaren Preisschildern',
 };
 
 export default blogMetaChDe;

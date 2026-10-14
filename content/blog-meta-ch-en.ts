@@ -125,7 +125,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': '13th AHV goes to conciliation conference',
     'blog.article.avs-finanziamento-13esima.excerpt': 'No agreement between National Council and States on financing the 13th AHV',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Swiss Parliament building in Bern with AVS logo',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan fires staff',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan fires staff in Vernier, Geneva',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, global leader in fragrances and flavors, fires employees for stealing essences.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Chemical industry in Switzerland',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi shakes up leadership and seeks new partners',
@@ -8246,6 +8246,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pension funds: illiquid investments account for 36% of assets',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% of the assets are in investments that are not immediately tradable The share has grown over the past 15 years Real estate, mortgages and alternative investments offer stability',
     'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pension fund office in Zurich with analysts reviewing illiquid portfolios',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Corporate bankruptcies sharply on the rise, record high in 2025-2026',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvent companies between January and September Company bankruptcies at 13’660, +38,4% year-on-year New registrations in the register: 41’706 Individuals: 8’003 bankruptcies',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Lugano lake view with office buildings and calm water, clear day',
+    'blog.article.prezzi-auto-nuove-usate-calo.title': 'New and used car prices falling thanks to Chinese brands',
+    'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'In the third quarter, average prices of new cars decline.',
+    'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Swiss car dealership lot showing new and used vehicles with visible price tags',
 };
 
 export default blogMetaChEn;

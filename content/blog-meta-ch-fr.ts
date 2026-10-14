@@ -125,7 +125,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': 'La 13e AVS en conférence de conciliation',
     'blog.article.avs-finanziamento-13esima.excerpt': 'Pas d\'accord entre le Conseil national et les États sur le financement de la 13e AVS',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Bâtiment du Parlement suisse à Berne avec logo AVS',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan licencie des employés',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan licencie des employés à Vernier (Genève)',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, leader mondial des arômes et parfums, licencie des employés pour vol d\'essences.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Industrie chimique en Suisse',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi change de tête et cherche de nouveaux associés',
@@ -8246,6 +8246,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Caisses de pension : investissements illiquides à 36% du patrimoine',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% du patrimoine est investi dans des actifs non immédiatement négociables La part a augmenté au cours des 15 dernières années L’immobilier, les hypothèques et les placements alternatifs offrent de la stabilité',
     'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Bureau de caisse de pension à Zurich avec analystes examinant des portefeuilles illiquides',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Faillites d’entreprises en forte hausse, record en 2025-2026',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 entreprises insolvables entre janvier et septembre Faillites d’entreprises à 13’660, +38,4% sur un an Nouvelles inscriptions au registre : 41’706 Particuliers : 8’003 faillites',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vue sur le lac de Lugano avec des bâtiments de bureau et de l\'eau calme, journée dégagée',
+    'blog.article.prezzi-auto-nuove-usate-calo.title': 'Les prix des voitures neuves et d’occasion baissent grâce aux marques chinoises',
+    'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Au troisième trimestre, les prix moyens des voitures neuves baissent.',
+    'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Lot d\'une concession suisse montrant des véhicules neufs et d\'occasion avec étiquettes de prix visibles',
 };
 
 export default blogMetaChFr;

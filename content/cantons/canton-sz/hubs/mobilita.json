@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T10:32:27.019Z",
-  "contentHash": "5cd9c018d8baf23338cb40d67307596a1d19db2a0f48e4cc352652dec160201a",
+  "updatedAt": "2026-10-14T14:01:15.778Z",
+  "contentHash": "b5b24dbaec47e27bcf81ab3e85bfe4dc314ad2930eb54241f5f3cad0c026ca4f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
+          "value": "3",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         }
       ],
@@ -65,12 +65,6 @@
               "value": "Cantiere",
               "detail": "fine prevista: 23 ottobre 2026",
               "date": "2026-10-05T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen tra Svincolo autostradale Goldau E Svincolo autostradale Svitto Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 14 ottobre 2026",
-              "date": "2026-10-08T04:00:00.000Z"
             },
             {
               "label": "A3 Zürich <-> Chur tra Galleria Galleria Entlisberg E Raccordo autostradale Diramazione Reichenburg Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1…",
@@ -141,7 +135,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:01:15.778Z"
     },
     "en": {
       "canton": "SZ",
@@ -156,7 +150,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "4",
+          "value": "3",
           "note": "reports as of 14 October 2026"
         }
       ],
@@ -189,12 +183,6 @@
               "value": "Roadworks",
               "detail": "until 23 October 2026",
               "date": "2026-10-05T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen tra Svincolo autostradale Goldau E Svincolo autostradale Svitto Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1: limite temporaneo…",
-              "value": "Roadworks",
-              "detail": "until 14 October 2026",
-              "date": "2026-10-08T04:00:00.000Z"
             },
             {
               "label": "A3 Zürich <-> Chur tra Galleria Galleria Entlisberg E Raccordo autostradale Diramazione Reichenburg Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1…",
@@ -265,7 +253,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:01:15.778Z"
     },
     "de": {
       "canton": "SZ",
@@ -280,7 +268,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
+          "value": "3",
           "note": "Meldungen vom 14. Oktober 2026"
         }
       ],
@@ -313,12 +301,6 @@
               "value": "Baustelle",
               "detail": "bis 23. Oktober 2026",
               "date": "2026-10-05T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen zwischen Anschluss Goldau und Anschluss Schwyz Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 14. Oktober 2026",
-              "date": "2026-10-08T04:00:00.000Z"
             },
             {
               "label": "A3 Zürich <-> Chur zwischen Tunnel Entlisberg-Tunnel und Autobahndreieck Verzweigung Reichenburg Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende…",
@@ -389,7 +371,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:01:15.778Z"
     },
     "fr": {
       "canton": "SZ",
@@ -404,7 +386,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
+          "value": "3",
           "note": "signalements au 14 octobre 2026"
         }
       ],
@@ -437,12 +419,6 @@
               "value": "Chantier",
               "detail": "jusqu’au 23 octobre 2026",
               "date": "2026-10-05T07:00:00.000Z"
-            },
-            {
-              "label": "A4 Zurich -> Brunnen entre Jonction autoroutière Goldau et Jonction autoroutière Schwytz Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation…",
-              "value": "Chantier",
-              "detail": "jusqu’au 14 octobre 2026",
-              "date": "2026-10-08T04:00:00.000Z"
             },
             {
               "label": "A3 Zurich <-> Coire entre Tunnel Tunnel d'Entlisberg et Echangeur Echangeur de Reichenburg Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation…",
@@ -513,7 +489,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:01:15.778Z"
     }
   }
 }
