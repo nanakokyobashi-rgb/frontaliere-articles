@@ -402,7 +402,7 @@ function createAudienceRecipientCoordinated(italianPlaces) {
     .map((name) => name.split(' ').map(caseInsensitiveLiteral).join(`(?:\\s+|['’\\-])`))
     .join('|');
   const italianDestination = italianDestinationNames
-    ? `${AUDIENCE_ITALIAN_DESTINATION_LINK}\\s+(?:${italianDestinationNames})`
+    ? `(?:${AUDIENCE_ITALIAN_DESTINATION_LINK}\\s+|${AUDIENCE_APOSTROPHE_LINK})(?:${italianDestinationNames})`
     : '(?!)';
   return new RegExp(
     `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_HEAD_PREAMBLE}${AUDIENCE_LINK_PREFIX}|${AUDIENCE_COSA_PREFIX}\\s+)${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT_BODY}`
@@ -424,7 +424,7 @@ const AUDIENCE_RES = [
 const AUDIENCE_POLICY_MEASURES = `${caseInitial('le')}\\s+${caseInitial('nuove')}\\s+${caseInitial('misure')}\\s+${caseInitial('fiscali')}\\s+${caseInitial('e')}\\s+${caseInitial('sociali')}`;
 const AUDIENCE_POLICY_PREFIX = `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK_PREFIX}|${AUDIENCE_COSA_PREFIX}\\s+)`;
 const AUDIENCE_RES_LONG = new RegExp(
-  `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK}|${AUDIENCE_COSA_PREFIX})${AUDIENCE_TARGET_LONG}`
+  `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_HEAD_PREAMBLE}${AUDIENCE_LINK}|${AUDIENCE_COSA_PREFIX})${AUDIENCE_TARGET_LONG}`
     + `|${AUDIENCE_POLICY_PREFIX}${AUDIENCE_POLICY_MEASURES}\\s+${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
   'gu',
 );

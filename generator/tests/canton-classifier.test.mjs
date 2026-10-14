@@ -345,6 +345,12 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(codes({ title: longMilanoAudience }), []);
     const invalidItalianDestination = 'Conseguenze per i lavoratori a Milano cambiano e per il Ticino';
     assert.deepEqual(classifier.mentionsIn(invalidItalianDestination).map((m) => m.group), ['TI']);
+    const apostropheItalianDestination = "Implicazioni per i lavoratori dell'Italia e per il Ticino";
+    assert.deepEqual(classifier.mentionsIn(apostropheItalianDestination).map((m) => m.group), [], apostropheItalianDestination);
+    assert.deepEqual(codes({ title: apostropheItalianDestination }), [], apostropheItalianDestination);
+    const prefacedCoordinatedAudience = 'Effetti pratici per il Ticino, per il Vallese, per i Grigioni';
+    assert.deepEqual(classifier.mentionsIn(prefacedCoordinatedAudience).map((m) => m.group), [], prefacedCoordinatedAudience);
+    assert.deepEqual(codes({ title: prefacedCoordinatedAudience }), [], prefacedCoordinatedAudience);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
     for (const text of [
       'Implicazioni per il Ticino e i Grigioni e il Vallese',
