@@ -4,17 +4,17 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "7af49b12ca9608ad182ee9e3ea4cf703abbc40f47253ce66f59f5414668b2563",
+  "updatedAt": "2026-10-14T10:32:27.019Z",
+  "contentHash": "ff3623dc96aa5cdd796102e96fc5144f452c53a7ddb3c2d73da232be1c80234f",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-12T23:59:59.000Z",
+      "updatedAt": "2026-10-13T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T19:37:23.778Z",
+      "updatedAt": "2026-10-14T05:32:06.894Z",
       "keyFacts": 2
     },
     {
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Piaggio Valmara (Cannobio-Brissago), settimana conclusa: 12 ottobre 2026"
+          "note": "Piaggio Valmara (Cannobio-Brissago), settimana conclusa: 13 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "40",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "note": "segnalazioni aggiornate: 14 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 ottobre 2026 – 12 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 7 ottobre 2026 – 13 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
@@ -77,33 +77,33 @@
               "url": "/traffico-dogane/ronago-novazzano/oggi/"
             },
             {
+              "label": "Oria-Gandria",
+              "value": "0,1 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/oria-gandria/oggi/"
+            },
+            {
+              "label": "Zenna-Dirinella",
+              "value": "0,1 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/zenna-dirinella/oggi/"
+            },
+            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0,2 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
             },
             {
-              "label": "Zenna-Dirinella",
-              "value": "0,3 min",
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0,2 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/zenna-dirinella/oggi/"
-            },
-            {
-              "label": "Biegno-Indemini",
-              "value": "0,3 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/biegno-indemini/oggi/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0,3 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/oria-gandria/oggi/"
+              "url": "/traffico-dogane/lanzo-d-intelvi-arogno/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -135,32 +135,28 @@
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Mendrisio E Galleria Galleria San Nicolao Situazione: colonna Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "date": "2026-10-14T04:09:00.000Z"
             },
             {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+              "date": "2026-10-14T04:44:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "H2 Bellinzona -> Chiasso tra Svincolo autostradale Bellinzona Sud E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-14T05:21:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Luogo Contone Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-14T05:21:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +289,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "en": {
       "canton": "TI",
@@ -304,24 +300,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Piaggio Valmara (Cannobio-Brissago), week ending 12 October 2026"
+          "note": "Piaggio Valmara (Cannobio-Brissago), week ending 13 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 13 October 2026"
+          "note": "reports as of 14 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "40",
-          "note": "reports as of 13 October 2026"
+          "note": "reports as of 14 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 6 October 2026 to 12 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 7 October 2026 to 13 October 2026, fastest first.",
           "items": [
             {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
@@ -348,33 +344,33 @@
               "url": "/en/border-wait/ronago-novazzano/today/"
             },
             {
+              "label": "Oria-Gandria",
+              "value": "0.1 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/oria-gandria/today/"
+            },
+            {
+              "label": "Zenna-Dirinella",
+              "value": "0.1 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/zenna-dirinella/today/"
+            },
+            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0.2 min",
               "detail": "47 readings",
               "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
             },
             {
-              "label": "Zenna-Dirinella",
-              "value": "0.3 min",
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0.2 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/zenna-dirinella/today/"
-            },
-            {
-              "label": "Biegno-Indemini",
-              "value": "0.3 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/biegno-indemini/today/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0.3 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/oria-gandria/today/"
+              "url": "/en/border-wait/lanzo-d-intelvi-arogno/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -406,32 +402,28 @@
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Mendrisio E Galleria Galleria San Nicolao Situazione: colonna Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "date": "2026-10-14T04:09:00.000Z"
             },
             {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+              "date": "2026-10-14T04:44:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "H2 Bellinzona -> Chiasso tra Svincolo autostradale Bellinzona Sud E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-14T05:21:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Luogo Contone Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-14T05:21:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -563,7 +555,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "de": {
       "canton": "TI",
@@ -574,24 +566,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Piaggio Valmara (Cannobio-Brissago), Woche bis 12. Oktober 2026"
+          "note": "Piaggio Valmara (Cannobio-Brissago), Woche bis 13. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "note": "Meldungen vom 14. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "40",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "note": "Meldungen vom 14. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. Oktober 2026 bis 12. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 7. Oktober 2026 bis 13. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
@@ -618,33 +610,33 @@
               "url": "/de/wartezeit-grenze/ronago-novazzano/heute/"
             },
             {
+              "label": "Oria-Gandria",
+              "value": "0.1 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/oria-gandria/heute/"
+            },
+            {
+              "label": "Zenna-Dirinella",
+              "value": "0.1 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/zenna-dirinella/heute/"
+            },
+            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0.2 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
             },
             {
-              "label": "Zenna-Dirinella",
-              "value": "0.3 Min.",
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0.2 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/zenna-dirinella/heute/"
-            },
-            {
-              "label": "Biegno-Indemini",
-              "value": "0.3 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/biegno-indemini/heute/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0.3 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/oria-gandria/heute/"
+              "url": "/de/wartezeit-grenze/lanzo-d-intelvi-arogno/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -676,32 +668,28 @@
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Mendrisio und Tunnel S. Nicolao-Tunnel Sachlage: Stau Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "date": "2026-10-14T04:09:00.000Z"
             },
             {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 Gotthard -> Chiasso zwischen Anschluss Chiasso-Centro und Parkplatz Chiasso-Warenzoll Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+              "date": "2026-10-14T04:44:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "H2 Bellinzona -> Chiasso zwischen Anschluss Bellinzona-Süd und Ortschaft Cadenazzo Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-14T05:21:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Cadenazzo -> Riazzino zwischen Ortschaft Cadenazzo und Ortschaft Contone Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-14T05:21:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -833,7 +821,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "fr": {
       "canton": "TI",
@@ -844,24 +832,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Piaggio Valmara (Cannobio-Brissago), semaine jusqu’au 12 octobre 2026"
+          "note": "Piaggio Valmara (Cannobio-Brissago), semaine jusqu’au 13 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 13 octobre 2026"
+          "note": "signalements au 14 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "40",
-          "note": "signalements au 13 octobre 2026"
+          "note": "signalements au 14 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 octobre 2026 au 12 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 7 octobre 2026 au 13 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Piaggio Valmara (Cannobio-Brissago)",
@@ -888,33 +876,33 @@
               "url": "/fr/temps-attente-douane/ronago-novazzano/aujourd-hui/"
             },
             {
+              "label": "Oria-Gandria",
+              "value": "0,1 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/oria-gandria/aujourd-hui/"
+            },
+            {
+              "label": "Zenna-Dirinella",
+              "value": "0,1 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/zenna-dirinella/aujourd-hui/"
+            },
+            {
               "label": "Cremenaga-Ponte Cremenaga",
               "value": "0,2 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
             },
             {
-              "label": "Zenna-Dirinella",
-              "value": "0,3 min",
+              "label": "Lanzo d'Intelvi-Arogno",
+              "value": "0,2 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/zenna-dirinella/aujourd-hui/"
-            },
-            {
-              "label": "Biegno-Indemini",
-              "value": "0,3 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/biegno-indemini/aujourd-hui/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0,3 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/oria-gandria/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/lanzo-d-intelvi-arogno/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -946,32 +934,28 @@
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "Incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Mendrisio et Tunnel Tunnel de S. Nicolao Situation: bouchon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
+              "date": "2026-10-14T04:09:00.000Z"
             },
             {
-              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
+              "label": "A2 St-Gothard -> Chiasso entre Jonction autoroutière Chiasso-Centro et Parking Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-13T19:37:23.778Z",
-              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
+              "date": "2026-10-14T04:44:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
+              "label": "H2 Bellinzone -> Chiasso entre Jonction autoroutière Bellinzone-Sud et Localité Cadenazzo Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-14T05:21:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
+              "label": "406 Cadenazzo -> Riazzino entre Localité Cadenazzo et Localité Contone Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-14T05:21:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1104,7 +1088,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     }
   }
 }

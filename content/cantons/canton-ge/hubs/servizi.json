@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T08:24:32.182Z",
-  "contentHash": "0a98e3bfbdc9e10704a99e298ab4770fab869b07862e562c8e9b575b9e0498c3",
+  "updatedAt": "2026-10-14T10:32:27.019Z",
+  "contentHash": "6597062f8f3d545b06681592747f2200fa7f41faeba754f8ee1b54c32e90ea65",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,12 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-13T20:56:47.350Z",
+      "updatedAt": "2026-10-14T04:51:49.166Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-14T05:03:24.038Z",
       "keyFacts": 0
     },
     {
@@ -91,7 +96,21 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-13T20:56:47.350Z"
+          "updatedAt": "2026-10-14T04:51:49.166Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "oggi da 11 a 21 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-14T05:03:24.038Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -208,7 +227,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "en": {
       "canton": "GE",
@@ -277,7 +296,21 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-13T20:56:47.350Z"
+          "updatedAt": "2026-10-14T04:51:49.166Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "today from 11 to 21 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-14T05:03:24.038Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -389,7 +422,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "de": {
       "canton": "GE",
@@ -458,7 +491,21 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-13T20:56:47.350Z"
+          "updatedAt": "2026-10-14T04:51:49.166Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "heute 11 bis 21 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-14T05:03:24.038Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -570,7 +617,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     },
     "fr": {
       "canton": "GE",
@@ -639,7 +686,21 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-13T20:56:47.350Z"
+          "updatedAt": "2026-10-14T04:51:49.166Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 11 à 21 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-14T05:03:24.038Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -748,7 +809,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T08:24:32.182Z"
+      "updatedAt": "2026-10-14T10:32:27.019Z"
     }
   }
 }
