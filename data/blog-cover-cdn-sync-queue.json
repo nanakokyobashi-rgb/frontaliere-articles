@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-pfister-risorse-difesa-federale.webp",
-      "sha256": "8973a5b8e178ed555cf3dfe604979ec03f993a95b65316b7113de8f199a29900"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-pfister-risorse-difesa-federale-480w.webp",
-      "sha256": "014b174e73339f9a1f0fdc243506aedf391508f98328654a47dde48164830db6"
-    }
-  ]
+  "items": []
 }
