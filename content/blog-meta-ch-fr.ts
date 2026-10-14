@@ -8261,6 +8261,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.nuovo-accordo-commercio-elettronico.title': 'Nouvel accord sur le commerce électronique',
     'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'Le Conseil fédéral lance la consultation sur l\'ACE.',
     'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Ordinateur montrant un graphique du commerce électronique devant le lac de Lugano',
+    'blog.article.assunzioni-svizzera-cautela-2026.title': 'Recrutements en Suisse : entreprises prudentes malgré le PIB',
+    'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'NEO suisse à +21% pour octobre-décembre 2026 NEO mondial +29%; moyenne européenne +20% PIB suisse en hausse de 1,5% au deuxième trimestre 2026 Junior : 35% de plus',
+    'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Bureau suisse moderne avec vue sur le lac représentant le marché du travail',
 };
 
 export default blogMetaChFr;

@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T16:21:06.223Z",
       "lastFailureAt": "2026-10-14T16:21:06.223Z"
+    },
+    {
+      "articleId": "assunzioni-svizzera-cautela-2026",
+      "title": "Assunzioni in Svizzera: aziende caute nonostante il PIL",
+      "fallbackImage": "/images/blog/asb-banche-svizzera-crescita-2026.webp",
+      "reason": "All image providers failed for article-assunzioni-svizzera-cautela-2026: openai-codex (vision gate rejected image: Generic synthetic business scene relevant to the topic, with no t",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T17:31:30.645Z",
+      "lastFailureAt": "2026-10-14T17:31:30.645Z"
     }
   ]
 }

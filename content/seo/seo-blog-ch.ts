@@ -104271,6 +104271,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assunzioni-svizzera-cautela-2026': {
+    title: 'Assunzioni in Svizzera: aziende caute nonostante il PIL',
+    description: 'NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell\'1,5% nel secondo trimestre 2026 Junior: 35% più',
+    keywords: 'frontalieri, ticino, svizzera, italia, assunzioni, aziende, caute, nonostante',
+    ogTitle: 'Assunzioni Svizzera 2026: Prudenza nonostante il PIL',
+    ogDescription: 'NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell\'1,5% nel secondo trimestre 2026 Junior: 35% più',
+    canonicalPath: '/articoli-svizzera/assunzioni-svizzera-cautela-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assunzioni in Svizzera: aziende caute nonostante il PIL",
+      "description": "NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell'1,5% nel secondo trimestre 2026 Junior: 35% più",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/asb-banche-svizzera-crescita-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno in Svizzera con vista sul lago per rappresentare il mercato del lavoro"
+      },
+      "datePublished": "2026-10-14T17:31:30+00:00",
+      "dateModified": "2026-10-14T17:31:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assunzioni-svizzera-cautela-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

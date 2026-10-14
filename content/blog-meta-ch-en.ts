@@ -8261,6 +8261,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.nuovo-accordo-commercio-elettronico.title': 'New e-commerce agreement',
     'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'The Federal Council launches the consultation on ACE.',
     'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop with digital trade chart in front of Lake Lugano',
+    'blog.article.assunzioni-svizzera-cautela-2026.title': 'Hiring in Switzerland: companies cautious despite GDP',
+    'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'Swiss NEO at +21% for October–December 2026 Global NEO +29%; European average +20% Swiss GDP growing by 1,5% in the second quarter of 2026 Junior: 35% more',
+    'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Modern Swiss office with lake view representing the labor market',
 };
 
 export default blogMetaChEn;

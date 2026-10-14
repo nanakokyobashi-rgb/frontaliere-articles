@@ -8261,6 +8261,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.nuovo-accordo-commercio-elettronico.title': 'Neues Abkommen über den elektronischen Handel',
     'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'Der Bundesrat eröffnet die Vernehmlassung zum ACE.',
     'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop mit Digitalhandel‑Diagramm vor dem Luganersee',
+    'blog.article.assunzioni-svizzera-cautela-2026.title': 'Neueinstellungen in der Schweiz: Unternehmen trotz des BIP vorsichtig',
+    'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'Schweizer NEO bei +21% für Oktober–Dezember 2026 Globaler NEO +29%; europäischer Durchschnitt +20% Schweizer BIP wächst im zweiten Quartal 2026 um 1,5% Junior: 35% mehr',
+    'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Modernes Schweizer Büro mit Seeblick als Symbol für den Arbeitsmarkt',
 };
 
 export default blogMetaChDe;

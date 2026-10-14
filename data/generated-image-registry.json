@@ -19800,24 +19800,6 @@
     },
     {
       "schema": 1,
-      "assetId": "bollettino-frontaliere-2026-10-14",
-      "source": "deterministic-card",
-      "provider": "site-owned",
-      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
-      "credit": "frontaliereticino.ch",
-      "producer": "generator/scripts/lib/daily-brief-image.mjs",
-      "templateVersion": "frontaliereticino.daily-brief-card.v1",
-      "license": "private-grant",
-      "sha256": "ea47fde9323d7abafe562cf69afedfa969c190607ed3717023c1afae1fa87a39",
-      "bytes": 27306,
-      "width": 1200,
-      "height": 675,
-      "format": "webp",
-      "scope": "article-hero",
-      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-14.webp"
-    },
-    {
-      "schema": 1,
       "assetId": "article-nuovo-accordo-commercio-elettronico",
       "kind": "generated",
       "provider": "openai-codex",
@@ -19858,6 +19840,24 @@
         "is_topic_relevant": true,
         "notes": "Original generic synthetic editorial illustration of a laptop displaying digital trade flows in a Swiss lake-and-Alps setting; no readable text, logos, people, or specific event."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-14",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "c757e047dd4f105c1b0a14ab1c58202282e2d5d4723d4a955ec3436842f57373",
+      "bytes": 27142,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-14.webp"
     }
   ]
 }
