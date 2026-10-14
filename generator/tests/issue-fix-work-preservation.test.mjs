@@ -178,3 +178,22 @@ test('il preflight del daily usa il mutex FU selezionato e attribuisce il verdet
   assert.match(SRC, /FOLLOWUP_ITEM: \$\{\{ steps\.tier\.outputs\.selected_item_id \}\}/);
   assert.match(SRC, /il drainer applica l'esito solo a quell'item/);
 });
+
+test('il capability guard workflows legge solo il FU daily scelto e annota il verdetto nello stesso commento', () => {
+  const input = step('Pre-flight — freeze daily item scope (zero-Claude)');
+  const guard = step('Pre-flight — workflows-scope capability guard (zero-Claude)');
+  assert.ok(input, 'manca lo snapshot per-item prima del capability guard');
+  assert.ok(guard, 'manca il capability guard workflows');
+  assert.match(input, /parseFollowupItems\(issue\.body \|\| ''\)/);
+  assert.match(input, /candidate\.state === 'open'/);
+  assert.match(input, /body: info \? item\.raw : issue\.body/);
+  assert.match(guard, /ISSUE_FIX_SNAPSHOT_FILE: \$\{\{ steps\.scope_input\.outputs\.scope_snapshot_file \}\}/);
+  assert.match(guard, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);
+  assert.match(guard, /FIX_OUTCOME: blocked-workflows-scope[\s\S]*FOLLOWUP_ITEM/);
+  assert.match(guard, /gh issue comment "\$ISSUE_NUMBER" --repo "\$GH_REPO" --body-file/);
+  assert.ok(
+    SRC.indexOf('- name: Pre-flight — freeze daily item scope (zero-Claude)')
+      < SRC.indexOf('- name: Pre-flight — workflows-scope capability guard (zero-Claude)'),
+    'lo snapshot per-item deve precedere il guard che può parcheggiare la issue',
+  );
+});

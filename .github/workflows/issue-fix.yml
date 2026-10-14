@@ -325,6 +325,52 @@ jobs:
           STAGE: fix
         run: node scripts/ci/check-stale-issue-dispatch.mjs
 
+      # Il guard di capability è un gemello identical e legge un solo issue
+      # payload. Per un daily quel payload deve essere l'item selezionato, non
+      # il contenitore: altrimenti un path workflow di un FU diverso parcheggia
+      # l'intero bucket. Questo snapshot è anche la sorgente stabile per il
+      # marker FOLLOWUP_ITEM emesso quando il guard blocca l'item.
+      - name: Pre-flight — freeze daily item scope (zero-Claude)
+        id: scope_input
+        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
+        run: |
+          set -euo pipefail
+          mkdir -p "$CTX_DIR"
+          gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json number,title,body,labels,state > "$CTX_DIR/issue.json"
+          node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" >> "$GITHUB_OUTPUT" <<'NODE'
+          import fs from 'node:fs';
+          import { dailyBucketInfo, parseFollowupItems } from './scripts/ci/followup-resolution-match.mjs';
+
+          const [issuePath, scopePath, issueNumber, repository] = process.argv.slice(2);
+          const issue = JSON.parse(fs.readFileSync(issuePath, 'utf8'));
+          const info = dailyBucketInfo(issue.title || '');
+          const item = info
+            ? parseFollowupItems(issue.body || '').find((candidate) => candidate.id && candidate.state === 'open')
+            : null;
+          if (info && !item) {
+            throw new Error('daily bucket senza un FU open stabile per il guard workflows');
+          }
+
+          const scoped = {
+            target: { issue: Number(issueNumber), repo: repository },
+            state: String(issue.state || 'OPEN').toUpperCase(),
+            // Un titolo item-scoped evita che il recurrence mode del guard
+            // erediti la diagnosi di un altro item dello stesso contenitore.
+            title: info ? `${issue.title} — ${item.id}` : issue.title,
+            body: info ? item.raw : issue.body,
+            labels: issue.labels,
+          };
+          fs.writeFileSync(scopePath, `${JSON.stringify(scoped)}\n`);
+          console.log(`is_daily_bucket=${info ? 'true' : 'false'}`);
+          console.log(`selected_item_id=${item?.id || ''}`);
+          console.log(`scope_snapshot_file=${scopePath}`);
+          NODE
+
       # ── Pre-flight 2d: diagnosi gia' consegnata al sito ───────────────────
       # Il POST-step qui sotto («Consegna al sito…») consegna e, se la consegna
       # non chiude, parcheggia in `automation-deferred`. Da li' la issue RIENTRA: il
@@ -352,7 +398,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_FIX_SNAPSHOT_FILE: ${{ steps.scope_input.outputs.scope_snapshot_file }}
+          DAILY_BUCKET: ${{ steps.scope_input.outputs.is_daily_bucket }}
+          DAILY_ITEM_ID: ${{ steps.scope_input.outputs.selected_item_id }}
         run: |
+          set -uo pipefail
           echo "has_workflows_token=false" >> "$GITHUB_OUTPUT"
           if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
             echo "GITHUB_PAT_NANAKO runtime presente → capability workflows lasciata al token del fixer."
@@ -361,6 +411,27 @@ jobs:
             exit 0
           fi
           node scripts/ci/check-workflows-scope.mjs
+          blocked=$(awk -F= '$1 == "workflows_blocked" { value = $2 } END { print value }' "$GITHUB_OUTPUT")
+          if [ "${DAILY_BUCKET:-false}" = 'true' ] && [ "${blocked:-false}" = 'true' ]; then
+            marker_file="$RUNNER_TEMP/daily-workflows-scope-${ISSUE_NUMBER}.md"
+            {
+              cat <<'EOF'
+          ⏭️ **Pre-flight (auto, zero-Claude) — blocco scope `workflows` per item daily**
+
+          Il guard ha esaminato esclusivamente l'item daily selezionato. Il fixer non viene avviato perché il token non può modificare il workflow citato; il bucket resta aperto e gli altri FU non vengono dichiarati risolti.
+
+          EOF
+              printf 'Item attribuito: `%s`\n\n' "$DAILY_ITEM_ID"
+              cat <<'EOF'
+          <!-- FIX_OUTCOME: blocked-workflows-scope -->
+          EOF
+              printf '<!-- FOLLOWUP_ITEM: %s -->\n' "$DAILY_ITEM_ID"
+            } > "$marker_file"
+            if ! gh issue comment "$ISSUE_NUMBER" --repo "$GH_REPO" --body-file "$marker_file"; then
+              echo "::error::marker daily workflows-scope non postato: esito non ammesso senza FOLLOWUP_ITEM"
+              exit 1
+            fi
+          fi
 
       # ── Pre-flight 4: contesto di gruppo prima del claim ──────────────────
       - name: Load issue group context (B19, zero-Claude)
@@ -585,16 +656,17 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
+          DAILY_SCOPE_ITEM_ID: ${{ steps.scope_input.outputs.selected_item_id }}
         # I cap turni sono anti-runaway sopra il p99 dei run sani, non budget di
         # lavoro: un run che muore al cap brucia la quota intera e non consegna
         # niente, che è peggio di qualche turno in più.
         run: |
           set -euo pipefail
           mkdir -p "$CTX_DIR"
-          # Daily selection and tiering use one immutable issue snapshot.
-          gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json title,body > "$CTX_DIR/issue.json"
-          labels_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json labels --jq '[.labels[].name]')
-          decision=$(node scripts/lib/classify-issue.mjs "$ISSUE_TITLE" "$labels_json")
+          # Daily selection, scope guard and tiering use one immutable issue snapshot.
+          issue_title=$(jq -r '.title // ""' "$CTX_DIR/issue.json")
+          labels_json=$(jq -c '[.labels[]?.name]' "$CTX_DIR/issue.json")
+          decision=$(node scripts/lib/classify-issue.mjs "$issue_title" "$labels_json")
           cat=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).category)" "$decision")
           echo "category=$cat"
 
@@ -624,7 +696,13 @@ jobs:
           const issue = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
           const info = dailyBucketInfo(issue.title || '');
           const items = parseFollowupItems(issue.body || '');
-          const open = items.find((item) => item.id && item.state === 'open');
+          const selected = process.env.DAILY_SCOPE_ITEM_ID || '';
+          const open = selected
+            ? items.find((item) => item.id === selected && item.state === 'open')
+            : items.find((item) => item.id && item.state === 'open');
+          if (selected && !open) {
+            throw new Error(`daily item snapshot stale or no longer open: ${selected}`);
+          }
           console.log('is_daily_bucket=true');
           console.log(`daily_key=${info?.dailyKey || ''}`);
           console.log(`selected_item_id=${open?.id || ''}`);

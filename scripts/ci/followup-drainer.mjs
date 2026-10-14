@@ -6389,16 +6389,32 @@ export function runDrain() {
     // NB: una riga sola, per contratto — `tests/issue-fix-app-token-wiring.test.ts` asserisce
     // la forma testuale di questa condizione (`!issueFixCanPushWorkflows && body && detectWorkflowScoped`)
     // e che la capacità arrivi da `canPushWorkflows()`, non da una singola env.
-    if (!issueFixCanPushWorkflows && body && detectWorkflowScoped(`${cand.title}\n${body}`, { title: cand.title, labels: cand.labels })) {
+    // A daily bucket is a container: inspect only the FU selected above. A
+    // workflow path belonging to a later item must not park this bucket before
+    // issue-fix reaches that item.
+    const workflowScopeItem = dailyQueue.item;
+    const workflowScopeText = workflowScopeItem
+      ? workflowScopeItem.raw
+      : `${cand.title}\n${body}`;
+    const workflowScopeMeta = workflowScopeItem
+      ? { title: '', labels: [] }
+      : { title: cand.title, labels: cand.labels };
+    if (!issueFixCanPushWorkflows && body && detectWorkflowScoped(workflowScopeText, workflowScopeMeta)) {
       // Title INCLUDED (#5595): a monitor auto-file ("Workflow Failure: <name>") names its
       // workflow subject only there, so a body-only scan renders an empty `(...)` list.
-      const wfRefs = extractWorkflowRefs(`${cand.title}\n${body}`).slice(0, 5).join(', ');
+      // Daily items deliberately suppress that title/label shortcut: the
+      // aggregate title is not evidence about the selected FU.
+      const wfRefs = extractWorkflowRefs(workflowScopeText).slice(0, 5).join(', ');
       const subject = wfRefs || 'workflow indicato dal monitor che ha aperto la issue';
       console.log(`PARK #${cand.number} (workflow-scoped: ${subject}) → no promozione, evito run bloccato`);
       const note = `⏭️ **Pre-flight drainer (zero-Claude, #1724/#5595)**: il fix di questa follow-up tocca **esclusivamente** file \`.github/workflows/**\` (${subject}), che l'identità con cui \`issue-fix\` pusha su questo repo non può modificare (capacità letta da \`canPushWorkflows()\`: né la GitHub App ha \`workflows: write\`, né il PAT di push espone lo scope \`workflow\`). Promuoverla a \`agent:fix\` brucerebbe ~1M token in un run che finirebbe comunque \`blocked-workflows-scope\`. **Non promuovo**: serve un PAT abilitato o mano umana. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: blocked-workflows-scope -->`;
+      const itemMarker = workflowScopeItem
+        ? `\n<!-- FOLLOWUP_ITEM: ${workflowScopeItem.id} -->`
+        : '';
+      const outcomeNote = `${note}${itemMarker}`;
       if (DRY) { console.log(`[dry] park #${cand.number} (workflow-scoped)`); continue; }
-      commentIssue(cand.number, note, 'workflow-scoped park comment');
-      edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
+      if (!commentIssue(cand.number, outcomeNote, 'workflow-scoped park comment')) continue;
+      if (!edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] })) continue;
       continue; // prova il prossimo in coda
     }
 

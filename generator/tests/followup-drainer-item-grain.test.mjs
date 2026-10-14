@@ -277,6 +277,19 @@ test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide'
   assert.match(DRAINER, /const dailyBucket = dailyBucketInfo\(iss\?\.title/);
 });
 
+test('il guard workflow del drainer è per-item e annota il blocco nello stesso esito', () => {
+  const start = DRAINER.indexOf('const issueFixCanPushWorkflows = canPushWorkflows();');
+  const end = DRAINER.indexOf('// Check: wide-scope aggregate', start);
+  assert.ok(start >= 0 && end > start, 'guard workflow del drainer non trovato');
+  const stage = DRAINER.slice(start, end);
+  assert.match(stage, /const workflowScopeItem = dailyQueue\.item/);
+  assert.match(stage, /detectWorkflowScoped\(workflowScopeText, workflowScopeMeta\)/);
+  assert.match(stage, /const itemMarker = workflowScopeItem/);
+  assert.match(stage, /FIX_OUTCOME: blocked-workflows-scope/);
+  assert.match(stage, /FOLLOWUP_ITEM: \$\{workflowScopeItem\.id\}/);
+  assert.match(stage, /commentIssue\(cand\.number, outcomeNote/);
+});
+
 const DAILY_TITLE = 'follow-up(daily:2026-10-02): 3 items — nanakokyobashi-rgb/frontaliere-articles';
 const DAILY_BODY = [
   '### FU-2026-10-02-001 — Soglia del gate di qualità',
