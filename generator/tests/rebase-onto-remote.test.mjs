@@ -49,6 +49,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
 const QUEUE_RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-image-regeneration-queue.mjs');
 const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
+const DAILY_BRIEF_WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-daily-brief.yml');
 const CORE_WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article-core.yml');
 const JOURNALIST_WORKFLOW = path.resolve(HERE, '../../.github/workflows/publish-journalist-articles.yml');
 const DRAIN_WORKFLOW = path.resolve(HERE, '../../.github/workflows/regenerate-queued-covers.yml');
@@ -368,7 +369,7 @@ function parseHelperArgs(yamlText) {
       registries.push(...derived.registries);
       takeTheirs.push(...derived.takeTheirs);
     } else if (clean.startsWith('--take-theirs')) {
-      const prefix = clean.split(/\s+/)[1];
+      const prefix = clean.split(/\s+/)[1]?.replace(/^(['"])(.*)\1$/, '$2');
       if (prefix) takeTheirs.push(prefix.replace(/\s*\|\|\s*true$/, ''));
     } else if (clean.startsWith('--merge-counter')) {
       const spec = clean.split(/\s+/)[1];
@@ -380,8 +381,9 @@ function parseHelperArgs(yamlText) {
       const target = line.includes('--merge-registry') ? registries
         : line.includes('--merge-queue') ? queues
           : bookkeeping;
-      for (const token of clean.split(/\s+/)) {
-        if (/^[\w./-]+\.(?:json|ts|mjs)$/.test(token)) target.push(token);
+      for (const rawToken of clean.split(/\s+/)) {
+        const token = rawToken.replace(/^(['"])(.*)\1$/, '$2');
+        if (/^[\w./*-]+\.(?:json|ts|mjs)$/.test(token)) target.push(token);
       }
     }
     if (!/\\\s*$/.test(line)) break; // the shell continuation ended
@@ -1171,8 +1173,8 @@ function allIds(ids) {
 }
 
 /** Gli argomenti che il WORKFLOW passa davvero, non una lista riscritta qui. */
-function helperArgsFromWorkflow() {
-  const { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(readFileSync(WORKFLOW, 'utf8'));
+function helperArgsFromWorkflowText(yamlText) {
+  const { bookkeeping, registries, queues, takeTheirs, counters, sectionSurfaces } = parseHelperArgs(yamlText);
   if (sectionSurfaces) {
     // Come nel workflow: il flag, non la sua espansione. Cosi' i casi git sotto
     // passano davvero dalla derivazione dentro rebase-onto-remote.sh.
@@ -1193,6 +1195,10 @@ function helperArgsFromWorkflow() {
     ...registries.flatMap((r) => ['--merge-registry', r]),
     ...takeTheirs.flatMap((p) => ['--take-theirs', p]),
   ];
+}
+
+function helperArgsFromWorkflow() {
+  return helperArgsFromWorkflowText(readFileSync(WORKFLOW, 'utf8'));
 }
 
 test('due articoli appesi allo stesso punto sopravvivono entrambi (FRONTALIERE, #255)', () => {
@@ -1634,6 +1640,85 @@ test('generate-article.yml dichiara come registro OGNI target di scrittura del g
   // upstream» cancella l'articolo appena generato.
   const bookkeeping = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
   for (const p of bookkeeping) assert.ok(!registries.includes(p), `${p} non puo' stare in tutte e due le categorie`);
+});
+
+test('generate-daily-brief.yml classifica i registri e gli asset del bollettino per il rebase (#1696)', () => {
+  const { bookkeeping, registries, takeTheirs } = parseHelperArgs(readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'));
+  const expectedRegistries = [
+    'content/blog-articles-data.ts',
+    'content/blogArticleIds.ts',
+    'content/routerBlogData.ts',
+    'content/blog-meta-it.ts',
+    'content/blog-meta-en.ts',
+    'content/blog-meta-de.ts',
+    'content/blog-meta-fr.ts',
+    'content/seo/seo-blog-5.ts',
+  ];
+
+  for (const file of expectedRegistries) {
+    const declared = registries.some((pattern) => pattern === file
+      || (pattern === 'content/seo/seo-blog-*.ts' && /^content\/seo\/seo-blog-.*\.ts$/.test(file)));
+    assert.ok(declared, `${file} deve essere fuso come registro append-only; dichiarati: ${JSON.stringify(registries)}`);
+  }
+  assert.ok(takeTheirs.includes('content/blog-body/'), 'i body del bollettino sono file per-articolo');
+  assert.ok(takeTheirs.includes('public/images/blog/'), 'hero e thumbnail sono file per-articolo');
+  assert.ok(bookkeeping.includes(GENERATED_IMAGE_REGISTRY),
+    'il ledger immagini resta nel percorso di merge dedicato del workflow');
+  assert.ok(!registries.includes(GENERATED_IMAGE_REGISTRY),
+    'il ledger immagini non va passato al resolver dei registri editoriali');
+});
+
+test('un push concorrente del daily brief fonde i registri e conserva entrambe le edizioni (#1696)', () => {
+  const dailyArgs = helperArgsFromWorkflowText(readFileSync(DAILY_BRIEF_WORKFLOW, 'utf8'));
+  const w = makeWorld();
+  const registryFiles = (ids) => [
+    [REGISTRY, articlesRegistry(ids)],
+    ['content/blogArticleIds.ts', idUnion(ids)],
+    ['content/routerBlogData.ts', `${slugMap('BLOG_SLUGS', ids)}\n${allIds(ids)}`],
+    ...['it', 'en', 'de', 'fr'].map((locale) => [
+      `content/blog-meta-${locale}.ts`,
+      metaFile(`blogMeta${locale[0].toUpperCase()}${locale.slice(1)}`, ids),
+    ]),
+    ['content/seo/seo-blog-5.ts', seoFile('BLOG_SEO_METADATA', 'blog', ids)],
+  ];
+
+  try {
+    for (const [file, contents] of registryFiles(['articolo-base'])) write(w.work, file, contents);
+    commitAll(w.work, 'seed daily brief registries');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    const upstreamFiles = registryFiles(['articolo-base', 'articolo-concorrente']);
+    landUpstream(w, upstreamFiles.map(([file, contents]) => [file, contents, `concurrent publisher updates ${file}`]));
+
+    for (const [file, contents] of registryFiles(['articolo-base', 'bollettino-frontaliere-2026-10-14'])) {
+      write(w.work, file, contents);
+    }
+    write(w.work, 'content/blog-body/it/bollettino-frontaliere-2026-10-14.ts', 'export const body = "daily brief";\n');
+    write(w.work, 'public/images/blog/bollettino-frontaliere-2026-10-14.webp', 'daily brief hero\n');
+    write(w.work, 'public/images/blog/thumbnails/bollettino-frontaliere-2026-10-14-480w.webp', 'daily brief thumbnail\n');
+    commitAll(w.work, 'Generate the daily brief edition');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...dailyArgs);
+    assert.equal(code, 0, `il rebase deve fondere i registri e conservare l'edizione:\n${out}`);
+    assert.match(out, /merge per-record:/);
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    for (const [file] of registryFiles([])) {
+      const landed = git(w.work, 'show', `HEAD:${file}`);
+      assert.match(landed, /articolo-base/, `${file}: il record preesistente deve restare`);
+      assert.match(landed, /articolo-concorrente/, `${file}: il record concorrente deve restare`);
+      assert.match(landed, /bollettino-frontaliere-2026-10-14/, `${file}: il bollettino deve restare`);
+      assert.doesNotMatch(landed, /<{7}|={7}|>{7}/, `${file}: non devono restare marker di conflitto`);
+    }
+    for (const file of [
+      'content/blog-body/it/bollettino-frontaliere-2026-10-14.ts',
+      'public/images/blog/bollettino-frontaliere-2026-10-14.webp',
+      'public/images/blog/thumbnails/bollettino-frontaliere-2026-10-14-480w.webp',
+    ]) assert.ok(existsSync(path.join(w.work, file)), `${file}: asset del bollettino perso nel rebase`);
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'il rebase deve lasciare il worktree pulito');
+  } finally {
+    w.cleanup();
+  }
 });
 
 test('i registri VERI del corpus passano l\'analizzatore del resolver', () => {

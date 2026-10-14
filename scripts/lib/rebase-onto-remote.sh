@@ -4,7 +4,7 @@
 #
 # Usage:
 #   bash scripts/lib/rebase-onto-remote.sh <remote-url> <target-branch> [bookkeeping-path...]
-#     [--merge-registry <path>] [--merge-queue <path>] [--take-theirs <prefix/>]
+#     [--merge-registry <path-or-pattern>] [--merge-queue <path>] [--take-theirs <prefix/>]
 #     [--merge-counter <path>:<field>]
 #     [--section-surfaces]   # i path di ogni sezione ATTIVA del core, derivati
 #                            # da scripts/ci/rebase-section-args.mjs
@@ -116,7 +116,7 @@ COUNTER_RESOLVER="$SCRIPT_DIR/merge-counter-conflict.mjs"
 # the file, and collapsing any two of them resolves a conflict the wrong way.
 #
 #   (bare path)        cache di bookkeeping   → prendi UPSTREAM
-#   --merge-registry   registro append-only   → unisci i RECORD
+#   --merge-registry   registro append-only (anche pattern) → unisci i RECORD
 #   --merge-queue      coda globale per articleId → unisci gli ITEM
 #   --take-theirs      file PER-ARTICOLO      → prendi il commit rigiocato
 #   --merge-counter    contatore (path:campo) → upstream + incremento rigiocato
@@ -239,6 +239,22 @@ EOF
   return 1
 }
 
+# `--merge-registry` accepts exact paths and shell-style path patterns. The
+# caller quotes patterns so they reach this helper intact; match them against
+# concrete unmerged paths before passing only those paths to the resolver.
+is_registry() {
+  local candidate="$1" pattern
+  case "$REGISTRIES" in *[![:space:]]*) ;; *) return 1 ;; esac
+  local -a registry_patterns=()
+  read -r -a registry_patterns <<< "$REGISTRIES"
+  for pattern in "${registry_patterns[@]}"; do
+    case "$candidate" in
+      $pattern) return 0 ;;
+    esac
+  done
+  return 1
+}
+
 rebase_in_progress() {
   [ -d "$(git rev-parse --git-path rebase-merge)" ] || [ -d "$(git rev-parse --git-path rebase-apply)" ]
 }
@@ -332,12 +348,10 @@ for _pass in $(seq 1 20); do
     queue_set=""
     while IFS= read -r f; do
       [ -n "$f" ] || continue
-      case "$REGISTRIES" in
-        *" $f "*)
-          registry_set="$registry_set$f "
-          continue
-          ;;
-      esac
+      if is_registry "$f"; then
+        registry_set="$registry_set$f "
+        continue
+      fi
       case "$QUEUES" in
         *" $f "*)
           queue_set="$queue_set$f "
@@ -442,9 +456,7 @@ EOF
 
     while IFS= read -r f; do
       [ -n "$f" ] || continue
-      case "$REGISTRIES" in
-        *" $f "*) continue ;;  # gia' risolto dal merge per record
-      esac
+      is_registry "$f" && continue  # gia' risolto dal merge per record
       case "$QUEUES" in
         *" $f "*) continue ;;  # gia' risolto dal merge per articleId
       esac
