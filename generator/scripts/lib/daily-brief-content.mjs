@@ -275,11 +275,11 @@ const T = {
     imageAlt: (dateLabel) => `I numeri del giorno per i frontalieri – ${dateLabel}: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro`,
     intro: (wd, dateLabel) =>
       `Buongiorno, è ${wd} ${dateLabel}. Questo è il bollettino quotidiano per chi vive da una parte del confine e lavora dall'altra: quattro temi seguiti dal nostro monitoraggio — code ai valichi, benzina, cambio e lavoro — con i link alle pagine live per seguirli durante la giornata.`,
-    bwH: 'Attese ai valichi: ultimo rilevamento',
+    bwH: 'Attese ai valichi: rilevamenti disponibili',
     bwLead: (b) =>
       b.worst.waitMinutes >= 10
-        ? `Il rilevamento più recente (${b.count} valichi monitorati) segna l'attesa più lunga a **${b.worst.name}: ${b.worst.waitMinutes} minuti**. ${b.zeroWaitCount} valichi risultano senza coda.`
-        : `Il rilevamento più recente indica traffico scorrevole: su ${b.count} valichi monitorati, ${b.zeroWaitCount} risultano senza coda e l'attesa più lunga è di appena **${b.worst.waitMinutes} minuti** (${b.worst.name}).`,
+        ? `Tra i rilevamenti disponibili (${b.count} valichi monitorati), l'attesa massima risulta a **${b.worst.name}: ${b.worst.waitMinutes} minuti**. ${b.zeroWaitCount} valichi risultano senza coda.`
+        : `Tra i rilevamenti disponibili il traffico risulta scorrevole: su ${b.count} valichi monitorati, ${b.zeroWaitCount} risultano senza coda e l'attesa massima registrata è di appena **${b.worst.waitMinutes} minuti** (${b.worst.name}).`,
     bwCols: ['Valico', 'Attesa', 'Stato'],
     bwMin: (n) => `${n} min`,
     bwLink: `Il traffico cambia di ora in ora: la situazione live di ogni valico è sulla [pagina del traffico alle dogane](${HUB.traffic.it}).`,
@@ -294,7 +294,7 @@ const T = {
     fuelSwiss: (st) =>
       st ? `Il distributore svizzero con il prezzo comunicato più basso è **${st.name}** (${fmt('it', st.sp95PriceChf, 2)} CHF/L, ≈ ${fmt('it', st.sp95PriceEur, 3)} €/L), vicino a ${st.nearestMunicipality}.` : '',
     fuelLink: `Prezzi comune per comune, aggiornati ogni giorno: [prezzi benzina al confine, oggi](${HUB.fuel.it}).`,
-    fuelDown: '⚠️ Il monitoraggio carburanti non ha dati verificabili per questa edizione: il blocco torna appena la fonte riprende. Intanto: [prezzi benzina al confine](/prezzi-benzina/oggi/).',
+    fuelDown: '⚠️ Il monitoraggio carburanti non ha dati verificabili per questa edizione: la sezione torna quando sono di nuovo disponibili dati verificabili. Intanto: [prezzi benzina al confine](/prezzi-benzina/oggi/).',
     fxH: 'Cambio franco–euro',
     fxLead: (e) =>
       `Un franco vale **${fmt('it', e.rate, 4)} €** (rilevamento del ${e.lastDate}). Rispetto al giorno precedente ${describeDeltaIt(e.delta1d)}; su sette giorni la variazione è di ${signed('it', e.delta7d, 4)} €.`,
@@ -336,11 +336,11 @@ const T = {
     imageAlt: (dateLabel) => `The day's numbers for cross-border commuters – ${dateLabel}: border waits, fuel prices, CHF-EUR rate and job listings`,
     intro: (wd, dateLabel) =>
       `Hello — it's ${wd}, ${dateLabel}. This is the daily brief for people who live on one side of the border and work on the other: four topics tracked by our monitoring — border queues, fuel, the exchange rate and jobs — each with a link to its live page.`,
-    bwH: 'Latest border waits',
+    bwH: 'Border waits: available readings',
     bwLead: (b) =>
       b.worst.waitMinutes >= 10
-        ? `The latest reading (${b.count} crossings monitored) puts the longest wait at **${b.worst.name}: ${b.worst.waitMinutes} minutes**. ${b.zeroWaitCount} crossings report no queue.`
-        : `The latest reading shows smooth crossings: of ${b.count} monitored crossings, ${b.zeroWaitCount} report no queue and the longest wait is just **${b.worst.waitMinutes} minutes** (${b.worst.name}).`,
+        ? `Among the available readings (${b.count} crossings monitored), the longest recorded wait is at **${b.worst.name}: ${b.worst.waitMinutes} minutes**. ${b.zeroWaitCount} crossings report no queue.`
+        : `The available readings show smooth crossings: of ${b.count} monitored crossings, ${b.zeroWaitCount} report no queue and the longest recorded wait is just **${b.worst.waitMinutes} minutes** (${b.worst.name}).`,
     bwCols: ['Crossing', 'Wait', 'Status'],
     bwMin: (n) => `${n} min`,
     bwLink: `Traffic shifts by the hour — every crossing's live status is on the [border traffic page](${HUB.traffic.en}).`,
@@ -355,7 +355,7 @@ const T = {
     fuelSwiss: (st) =>
       st ? `The Swiss station with the lowest reported price is **${st.name}** (CHF ${fmt('en', st.sp95PriceChf, 2)}/L, ≈ €${fmt('en', st.sp95PriceEur, 3)}/L), near ${st.nearestMunicipality}.` : '',
     fuelLink: `Prices town by town, updated daily: [border fuel prices today](${HUB.fuel.en}).`,
-    fuelDown: '⚠️ Fuel monitoring has no verifiable data for this edition; this section returns once the source is back. Meanwhile: [border fuel prices](/en/gasoline-price-switzerland/today/).',
+    fuelDown: '⚠️ Fuel monitoring has no verifiable data for this edition; this section returns when verifiable data are available again. Meanwhile: [border fuel prices](/en/gasoline-price-switzerland/today/).',
     fxH: 'CHF–EUR exchange rate',
     fxLead: (e) =>
       `One franc buys **€${fmt('en', e.rate, 4)}** (reported on ${e.lastDate}). Versus the previous day ${describeDeltaEn(e.delta1d)}; over seven days the move is ${signed('en', e.delta7d, 4)} €.`,
@@ -397,11 +397,11 @@ const T = {
     imageAlt: (dateLabel) => `Die Zahlen des Tages für Grenzgänger – ${dateLabel}: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote`,
     intro: (wd, dateLabel) =>
       `Guten Tag — heute ist ${wd}, der ${dateLabel}. Das ist das tägliche Bulletin für alle, die auf der einen Seite der Grenze wohnen und auf der anderen arbeiten: vier Themen aus unserem Monitoring — Staus an den Übergängen, Benzin, Wechselkurs und Arbeitsmarkt — jeweils mit Link zur Live-Seite.`,
-    bwH: 'Zuletzt gemeldete Wartezeiten an der Grenze',
+    bwH: 'Wartezeiten laut verfügbaren Messungen',
     bwLead: (b) =>
       b.worst.waitMinutes >= 10
-        ? `Die jüngste Messung (${b.count} überwachte Übergänge) zeigt die längste Wartezeit in **${b.worst.name}: ${b.worst.waitMinutes} Minuten**. ${b.zeroWaitCount} Übergänge melden keine Warteschlange.`
-        : `Laut letzter Messung läuft es: Von ${b.count} überwachten Übergängen melden ${b.zeroWaitCount} keine Warteschlange, die längste Wartezeit beträgt nur **${b.worst.waitMinutes} Minuten** (${b.worst.name}).`,
+        ? `Unter den verfügbaren Messungen (${b.count} überwachte Übergänge) ist die längste Wartezeit bei **${b.worst.name}: ${b.worst.waitMinutes} Minuten**. ${b.zeroWaitCount} Übergänge melden keine Warteschlange.`
+        : `Die verfügbaren Messungen zeigen fließenden Verkehr: Von ${b.count} überwachten Übergängen melden ${b.zeroWaitCount} keine Warteschlange; die längste erfasste Wartezeit beträgt nur **${b.worst.waitMinutes} Minuten** (${b.worst.name}).`,
     bwCols: ['Übergang', 'Wartezeit', 'Status'],
     bwMin: (n) => `${n} Min.`,
     bwLink: `Der Verkehr ändert sich stündlich — der Live-Status jedes Übergangs steht auf der [Seite zur Wartezeit an der Grenze](${HUB.traffic.de}).`,
@@ -412,11 +412,11 @@ const T = {
     fuelCols: ['Gemeinde (IT)', 'Bleifrei, gemeldeter Tiefstpreis'],
     fuelPrice: (p) => `${fmt('de', p, 3)} €/L`,
     fuelSaving: (s) =>
-      `📊 **Die richtige Seite für eine volle Tankfüllung.** In **${s.municipality}** (${s.province}) beträgt die Differenz der gemeldeten Preise **${fmt('de', s.saving50LEur, 2)} € pro 50-Liter-Tank** wert (${fmt('de', s.italyPriceEur, 3)} €/L in Italien gegenüber ${fmt('de', s.swissPriceEur, 3)} €/L an der nächsten Schweizer Tankstelle).`,
+      `📊 **Die richtige Seite für eine volle Tankfüllung.** In **${s.municipality}** (${s.province}) beträgt die Differenz der gemeldeten Preise **${fmt('de', s.saving50LEur, 2)} € pro 50-Liter-Tank** (${fmt('de', s.italyPriceEur, 3)} €/L in Italien gegenüber ${fmt('de', s.swissPriceEur, 3)} €/L an der nächsten Schweizer Tankstelle).`,
     fuelSwiss: (st) =>
       st ? `Die Schweizer Tankstelle mit dem niedrigsten gemeldeten Preis ist **${st.name}** (${fmt('de', st.sp95PriceChf, 2)} CHF/L, ≈ ${fmt('de', st.sp95PriceEur, 3)} €/L), bei ${st.nearestMunicipality}.` : '',
     fuelLink: `Preise Gemeinde für Gemeinde, täglich aktualisiert: [Benzinpreise an der Grenze, heute](${HUB.fuel.de}).`,
-    fuelDown: '⚠️ Die Kraftstoffüberwachung hat keine verifizierbaren Daten für diese Ausgabe; der Abschnitt kehrt zurück, sobald die Quelle wieder liefert. Inzwischen: [Benzinpreise an der Grenze](/de/benzinpreis-schweiz/heute/).',
+    fuelDown: '⚠️ Die Kraftstoffüberwachung hat keine verifizierbaren Daten für diese Ausgabe; der Abschnitt kehrt zurück, sobald wieder verifizierbare Daten vorliegen. Inzwischen: [Benzinpreise an der Grenze](/de/benzinpreis-schweiz/heute/).',
     fxH: 'Wechselkurs Franken–Euro',
     fxLead: (e) =>
       `Ein Franken ist **${fmt('de', e.rate, 4)} €** wert (Stand ${e.lastDate}). Gegenüber dem Vortag ${describeDeltaDe(e.delta1d)}; über sieben Tage beträgt die Veränderung ${signed('de', e.delta7d, 4)} €.`,
@@ -458,11 +458,11 @@ const T = {
     imageAlt: (dateLabel) => `Les chiffres du jour pour les frontaliers – ${dateLabel} : attentes aux douanes, prix de l'essence, taux CHF-EUR et offres d'emploi`,
     intro: (wd, dateLabel) =>
       `Bonjour — nous sommes ${wd} ${dateLabel}. Voici le bulletin quotidien pour celles et ceux qui vivent d'un côté de la frontière et travaillent de l'autre : quatre thèmes suivis par notre monitoring — files aux douanes, essence, taux de change et emploi — chacun avec le lien vers sa page en direct.`,
-    bwH: 'Dernières attentes aux douanes',
+    bwH: 'Attentes selon les relevés disponibles',
     bwLead: (b) =>
       b.worst.waitMinutes >= 10
-        ? `Le dernier relevé (${b.count} passages surveillés) place l'attente la plus longue à **${b.worst.name} : ${b.worst.waitMinutes} minutes**. ${b.zeroWaitCount} passages ne signalent aucune file.`
-        : `Le dernier relevé indique un trafic fluide : sur ${b.count} passages surveillés, ${b.zeroWaitCount} ne signalent aucune file et l'attente la plus longue n'est que de **${b.worst.waitMinutes} minutes** (${b.worst.name}).`,
+        ? `Parmi les relevés disponibles (${b.count} passages surveillés), l'attente la plus longue est à **${b.worst.name} : ${b.worst.waitMinutes} minutes**. ${b.zeroWaitCount} passages ne signalent aucune file.`
+        : `Les relevés disponibles indiquent un trafic fluide : sur ${b.count} passages surveillés, ${b.zeroWaitCount} ne signalent aucune file et l'attente maximale relevée n'est que de **${b.worst.waitMinutes} minutes** (${b.worst.name}).`,
     bwCols: ['Douane', 'Attente', 'État'],
     bwMin: (n) => `${n} min`,
     bwLink: `Le trafic change d'heure en heure — l'état en direct de chaque douane est sur la [page du temps d'attente](${HUB.traffic.fr}).`,
@@ -477,7 +477,7 @@ const T = {
     fuelSwiss: (st) =>
       st ? `La station suisse avec le prix communiqué le plus bas est **${st.name}** (${fmt('fr', st.sp95PriceChf, 2)} CHF/L, ≈ ${fmt('fr', st.sp95PriceEur, 3)} €/L), près de ${st.nearestMunicipality}.` : '',
     fuelLink: `Les prix commune par commune, mis à jour chaque jour : [prix de l'essence à la frontière, aujourd'hui](${HUB.fuel.fr}).`,
-    fuelDown: '⚠️ Le suivi des carburants n’a pas de données vérifiables pour cette édition ; la section revient dès que la source reprend. En attendant : [prix de l’essence à la frontière](/fr/prix-essence-suisse/aujourd-hui/).',
+    fuelDown: '⚠️ Le suivi des carburants n’a pas de données vérifiables pour cette édition ; la section revient dès que des données vérifiables sont de nouveau disponibles. En attendant : [prix de l’essence à la frontière](/fr/prix-essence-suisse/aujourd-hui/).',
     fxH: 'Taux de change franc–euro',
     fxLead: (e) =>
       `Un franc vaut **${fmt('fr', e.rate, 4)} €** (relevé du ${e.lastDate}). Par rapport à la veille ${describeDeltaFr(e.delta1d)} ; sur sept jours, la variation est de ${signed('fr', e.delta7d, 4)} €.`,

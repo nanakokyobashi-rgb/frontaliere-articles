@@ -118,6 +118,25 @@ test('every locale gets 4 bodies, its hub links and a 3-question FAQ', () => {
   assert.match(article.content.fr.body4, /\/fr\/trouver-emploi-tessin\//);
 });
 
+test('the published copy reflects available observations and verified-data recovery', () => {
+  const article = buildDailyBriefArticle(BRIEF);
+  assert.match(article.content.it.body1, /Tra i rilevamenti disponibili/);
+  assert.match(article.content.en.body1, /Among the available readings/);
+  assert.match(article.content.de.body1, /Unter den verfügbaren Messungen/);
+  assert.match(article.content.fr.body1, /Parmi les relevés disponibles/);
+
+  const degradedFuel = structuredClone(BRIEF);
+  degradedFuel.blocks.fuel.available = false;
+  const degradedArticle = buildDailyBriefArticle(degradedFuel);
+  assert.match(degradedArticle.content.it.body2, /quando sono di nuovo disponibili dati verificabili/);
+  assert.match(degradedArticle.content.en.body2, /when verifiable data are available again/);
+  assert.match(degradedArticle.content.de.body2, /sobald wieder verifizierbare Daten vorliegen/);
+  assert.match(degradedArticle.content.fr.body2, /dès que des données vérifiables sont de nouveau disponibles/);
+
+  assert.match(article.content.de.body2, /beträgt die Differenz der gemeldeten Preise .* pro 50-Liter-Tank/);
+  assert.doesNotMatch(article.content.de.body2, /pro 50-Liter-Tank\*\* wert/);
+});
+
 test('localizes dynamic border-crossing exonyms before the shared factuality gate', () => {
   const brief = structuredClone(BRIEF);
   const name = 'Basel – Weil am Rhein, Autostrada A2/A5';
