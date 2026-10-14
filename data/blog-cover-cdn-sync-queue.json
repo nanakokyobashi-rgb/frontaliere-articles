@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-negozi-berna-orari-festivi-regole.webp",
+      "sha256": "31bc52d3c001caca3542739911f80a045baff361bad0d6affd1efb08a69e4d3d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-negozi-berna-orari-festivi-regole-480w.webp",
+      "sha256": "8837c170a353824a8ba70d56bc914c327e999d0005419e40ac180333ed1e011c"
+    }
+  ]
 }
