@@ -8264,6 +8264,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.assunzioni-svizzera-cautela-2026.title': 'Hiring in Switzerland: companies cautious despite GDP',
     'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'Swiss NEO at +21% for October–December 2026 Global NEO +29%; European average +20% Swiss GDP growing by 1,5% in the second quarter of 2026 Junior: 35% more',
     'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Modern Swiss office with lake view representing the labor market',
+    'blog.article.legge-piattaforme-tutela-giovani.title': 'Federal Council strengthens protection of young people on platforms',
+    'blog.article.legge-piattaforme-tutela-giovani.excerpt': 'The Federal Council decides on October 14, 2026.',
+    'blog.article.legge-piattaforme-tutela-giovani.imageAlt': 'Swiss teen using a laptop with social media icons in front of the Alps',
 };
 
 export default blogMetaChEn;

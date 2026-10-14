@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1949067/ubs-yumo-svizzera-piattaforma-giovani-insegna-fare-risparmi-investimenti": {
-    "articleId": "ubs-yumo-educazione-finanziaria",
-    "ts": "2026-09-09T14:43:40.499Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/attualita/1948814/svizzera-accordo-rete-alleanza-elettricita-isola": {
     "articleId": "alleanza-energia-elettrica-svizzera",
     "ts": "2026-09-09T15:04:55.514Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/aziende-caute-nell%27assumere%2c-malgrado-la-buona-congiuntura/92217267": {
     "articleId": "assunzioni-svizzera-cautela-2026",
     "ts": "2026-10-14T17:31:30.647Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/nmn5s24l8njq": {
+    "articleId": "legge-piattaforme-tutela-giovani",
+    "ts": "2026-10-14T17:57:03.784Z",
     "keyForm": 2
   }
 }

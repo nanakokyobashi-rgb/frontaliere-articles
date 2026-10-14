@@ -99,10 +99,13 @@ import {
 } from './source-url-ledger.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
 import {
+  findHtmlTagEndOutsideQuotes,
   findHtmlRawTextClosingTag as rawTextClosingTag,
   nextHtmlTag,
   nextHtmlTagOutsideRawText,
 } from './html-tag-scanner.mjs';
+
+export { findHtmlTagEndOutsideQuotes };
 
 const SOURCE_CITATION_PREFIX_RE = /\*Fonte:\s*\[([^\]]+)\]\(/gu;
 
@@ -286,22 +289,8 @@ function isHtmlWhitespace(char) {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
 }
 
-function findCharsetTagEnd(html, start) {
-  let quote = '';
-  for (let i = start + 1; i < html.length; i++) {
-    const char = html[i];
-    if (quote) {
-      if (char === quote) quote = '';
-    } else if (char === '"' || char === "'") {
-      quote = char;
-    } else if (char === '>') {
-      return i;
-    }
-  }
-  return -1;
-}
-
-function isCharsetSelfClosingStartTag(html, nameEnd, end) {
+/** Legge gli stati degli attributi fino al `>` per distinguere `/` sintattico da un valore. */
+function isHtmlSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && isHtmlWhitespace(html[i])) i++;
@@ -346,7 +335,7 @@ function readCharsetTag(html, start) {
   if (i === nameStart) return null;
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
-  const end = findCharsetTagEnd(html, start);
+  const end = findHtmlTagEndOutsideQuotes(html, start);
   if (end < 0) return null;
   const name = html.slice(nameStart, i).toLowerCase();
   return {
@@ -354,7 +343,7 @@ function readCharsetTag(html, start) {
     end,
     name,
     selfClosing: !closing && CHARSET_VOID_ELEMENTS.has(name)
-      && isCharsetSelfClosingStartTag(html, i, end),
+      && isHtmlSelfClosingStartTag(html, i, end),
   };
 }
 
@@ -521,7 +510,20 @@ export function decodeHtmlEntities(value) {
 }
 
 function stripTags(value) {
-  return decodeHtmlEntities(String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, ' '))
+  const source = String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
+  let text = '';
+  let cursor = 0;
+  let tagStart = source.indexOf('<');
+  while (tagStart !== -1) {
+    const tagEnd = findHtmlTagEndOutsideQuotes(source, tagStart);
+    if (tagEnd < 0) break;
+    text += source.slice(cursor, tagStart);
+    text += ' ';
+    cursor = tagEnd + 1;
+    tagStart = source.indexOf('<', cursor);
+  }
+  text += source.slice(cursor);
+  return decodeHtmlEntities(text)
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -600,39 +602,45 @@ export function selectPublishedTime(html) {
  */
 export function extractPublishedDateFromHtml(html) {
   const input = String(html || '');
+  let jsonLdDate = null;
+  let metaDate = null;
   let tag = nextHtmlTag(input);
   while (tag) {
-    if (!tag.closing && !tag.selfClosing && tag.name === 'script') {
-      const close = rawTextClosingTag(input, tag.end, 'script');
+    if (tag.closing) {
+      tag = nextHtmlTag(input, tag.end);
+      continue;
+    }
+
+    if (tag.name === 'script') {
+      const close = rawTextClosingTag(input, tag.end, tag.name);
       if (!close) break;
-      const type = htmlAttributeValue(tag.attrs, 'type');
-      if (/^application\/ld\+json$/i.test(type)) {
-        const body = input.slice(tag.end, close.start);
-        const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(body));
-        const date = validDate(value?.[1]);
-        if (date) return date;
+      const type = htmlAttributeValue(tag.attrs, 'type').split(';', 1)[0].trim().toLowerCase();
+      if (!jsonLdDate && type === 'application/ld+json') {
+        const scriptBody = input.slice(tag.end, close.start);
+        const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(scriptBody));
+        jsonLdDate = validDate(value?.[1]);
       }
       tag = nextHtmlTag(input, close.end);
+      continue;
+    }
+
+    if (tag.name === 'meta' && !metaDate) {
+      const key = htmlAttributeValue(tag.attrs, 'property') || htmlAttributeValue(tag.attrs, 'name');
+      if (/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) {
+        metaDate = validDate(htmlAttributeValue(tag.attrs, 'content'));
+      }
+    }
+
+    if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const close = rawTextClosingTag(input, tag.end, tag.name);
+      tag = close ? nextHtmlTag(input, close.end) : null;
       continue;
     }
     tag = nextHtmlTag(input, tag.end);
   }
 
-  tag = nextHtmlTagOutsideRawText(input);
-  while (tag) {
-    if (tag.closing || tag.name !== 'meta') {
-      tag = nextHtmlTagOutsideRawText(input, tag.end);
-      continue;
-    }
-    const attrs = tag.attrs || '';
-    const key = htmlAttributeValue(attrs, 'property') || htmlAttributeValue(attrs, 'name');
-    if (/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) {
-      const date = validDate(htmlAttributeValue(attrs, 'content'));
-      if (date) return date;
-    }
-    tag = nextHtmlTagOutsideRawText(input, tag.end);
-  }
-
+  if (jsonLdDate) return jsonLdDate;
+  if (metaDate) return metaDate;
   return selectPublishedTime(input);
 }
 
@@ -758,22 +766,22 @@ export function stripPageChrome(html) {
   const roleSectionEnds = [];
   let tag = nextHtmlTag(masked);
   while (tag) {
-    const { closing, name, attrs } = tag;
-    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= tag.start) roleSectionEnds.pop();
+    const { start, end, closing, name, attrs, selfClosing } = tag;
+    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= start) roleSectionEnds.pop();
     if (SECTIONING_TAGS.has(name)) {
-      sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
+      if (!selfClosing) sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
       if (closing) {
-        tag = nextHtmlTag(masked, tag.end);
+        tag = nextHtmlTag(masked, end);
         continue;
       }
     }
-    if (closing || /\/\s*$/.test(attrs)) {
-      tag = nextHtmlTag(masked, tag.end);
+    if (closing || selfClosing) {
+      tag = nextHtmlTag(masked, end);
       continue;
     }
     const roles = roleTokens(attrs);
     if (!SECTIONING_TAGS.has(name) && roles.some((r) => SECTIONING_ROLES.has(r))) {
-      const sectionEnd = matchingCloseEnd(masked, name, tag.end);
+      const sectionEnd = matchingCloseEnd(masked, name, end);
       if (sectionEnd !== -1) roleSectionEnds.push(sectionEnd);
     }
     const inSection = sectioningDepth > 0 || roleSectionEnds.length > 0;
@@ -781,26 +789,26 @@ export function stripPageChrome(html) {
       || roles.some((r) => CHROME_ROLES.has(r))
       || ((name === 'header' || name === 'footer') && !inSection);
     if (!isChrome) {
-      tag = nextHtmlTag(masked, tag.end);
+      tag = nextHtmlTag(masked, end);
       continue;
     }
-    const end = matchingCloseEnd(masked, name, tag.end);
-    if (end === -1) {
-      tag = nextHtmlTag(masked, tag.end);
+    const sectionEnd = matchingCloseEnd(masked, name, end);
+    if (sectionEnd === -1) {
+      tag = nextHtmlTag(masked, end);
       continue;
     }
     // Una «navigazione» che contiene il contenuto principale e' un wrapper
     // marcato male, non un menu: aarau.ch avvolge sottomenu E `<main>` in un
     // `<div role="navigation">`, e tagliarlo toglieva 15 comunicati datati su
     // 15. Si scende dentro: i `<nav>` veri che contiene cadono lo stesso.
-    if (containsMainContent(masked.slice(tag.end, end))) {
-      tag = nextHtmlTag(masked, tag.end);
+    if (containsMainContent(masked.slice(end, sectionEnd))) {
+      tag = nextHtmlTag(masked, end);
       continue;
     }
-    ranges.push([tag.start, end]);
+    ranges.push([start, sectionEnd]);
     // L'area intera e' tolta: quello che contiene (anche i tag di sezione,
     // aperti E chiusi li' dentro) non sposta il conteggio.
-    tag = nextHtmlTag(masked, end);
+    tag = nextHtmlTag(masked, sectionEnd);
   }
   if (ranges.length === 0) return { html: masked, removed: 0 };
   let out = '';
@@ -866,13 +874,17 @@ function sourceArticleText(html, requestedHeadline = '') {
 
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
 function matchingCloseEnd(masked, name, from) {
-  let tag = nextHtmlTag(masked, from);
   let depth = 1;
+  let tag = nextHtmlTag(masked, from);
   while (tag) {
-    if (tag.name === name && tag.closing) {
+    if (tag.name !== name) {
+      tag = nextHtmlTag(masked, tag.end);
+      continue;
+    }
+    if (tag.closing) {
       depth -= 1;
       if (depth === 0) return tag.end;
-    } else if (tag.name === name && !tag.closing && !tag.selfClosing) {
+    } else if (!tag.selfClosing) {
       depth += 1;
     }
     tag = nextHtmlTag(masked, tag.end);
@@ -962,20 +974,38 @@ export function extractJsonEntitiesItems(html, pageUrl) {
   return dedupByUrl(out);
 }
 
+/** Alias CMS SH in ordine di priorità: la prima forma stabile prima dei fallback. */
+const CMS_TITLE_FIELDS = Object.freeze(['kachellabel', 'listlabel', 'articleHeadline', 'label']);
+
 /**
- * `json-api`: le due API cantonali del profilo, riconosciute dalla forma.
- *   - zh.ch: `{ news: [{ title, date: 'dd.mm.yyyy', link: '/de/…', teaserText }] }`
- *   - be.ch: `[{ id, publishOn, contentList: [{ title, lead, languageCode }] }]`,
- *     pagina pubblica `https://www.be.ch/<lingua>/start.html?newsID=<id>` (la
- *     forma che la news sitemap di be.ch elenca)
- * Una forma diversa torna [] e la fonte risulta sterile: un'API non
- * documentata che cambia forma si deve vedere nel log, non indovinare.
- *
+ * Forma titolo dei CMS SH: il payload può contenere più alias, anche vuoti.
+ * Si sceglie il primo titolo leggibile nell'ordine documentato, rendendo
+ * osservabile quando il valore arriva da un alias successivo. I valori non
+ * stringa restano nei campi osservati per la diagnostica, ma non sono titoli.
+ */
+export function cmsPayloadShape(row) {
+  const fields = CMS_TITLE_FIELDS.filter((field) => Object.hasOwn(row || {}, field) && row[field] != null);
+  const selected = fields
+    .filter((field) => typeof row[field] === 'string')
+    .map((field) => ({ field, headline: stripTags(row[field]) }))
+    .find(({ headline }) => headline.length >= 10);
+  return {
+    fields,
+    titleField: selected?.field ?? null,
+    headline: selected?.headline ?? '',
+    mixed: fields.length > 1,
+    fallback: Boolean(selected && fields[0] !== selected.field),
+  };
+}
+
+/**
+ * Estrae solo le forme JSON API riconosciute; le forme sconosciute restano
+ * sterili e i payload CMS misti aggiungono una nota diagnostica.
  * @param {string} text
  * @param {string} apiUrl
- * @returns {Array<{url: string, headline: string, date: Date | null, lead?: string, sourceContent?: string}>}
+ * @param {{ notes?: string[] }} [options]
  */
-export function extractJsonApiItems(text, apiUrl) {
+export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
   let data;
   try {
     data = JSON.parse(String(text || ''));
@@ -1042,7 +1072,17 @@ export function extractJsonApiItems(text, apiUrl) {
   if (Array.isArray(data) && data.some((n) => n && n.permalink && n.publication_date)) {
     for (const n of data) {
       const url = absoluteUrl(n?.permalink, apiUrl);
-      const headline = stripTags(n?.kachellabel ?? n?.listlabel ?? n?.articleHeadline ?? n?.label);
+      const shape = cmsPayloadShape(n);
+      if ((shape.mixed || shape.fallback) && Array.isArray(notes)) {
+        const fields = shape.fields.join(', ') || 'nessun alias titolo';
+        notes.push(
+          'CMS payload misto: campi titolo '
+            + fields
+            + '; usato '
+            + (shape.titleField || 'nessun titolo valido'),
+        );
+      }
+      const headline = shape.headline;
       if (!url || headline.length < 10) continue;
       // `publication_date` is day-only on the CMS; `transactiontime` carries
       // the publication timestamp and keeps the 3-day window honest around
@@ -1480,7 +1520,7 @@ export async function scanCantonSource(source, ctx) {
       case 'json-entities':
         return extractJsonEntitiesItems(text, url);
       case 'json-api':
-        return extractJsonApiItems(text, url);
+        return extractJsonApiItems(text, url, { notes });
       default:
         // news-sitemap, sitemap, weekly-sitemap
         return extractSitemapNewsItems(text, url, { dedup: !quirks.urlReusedForDifferentStories });

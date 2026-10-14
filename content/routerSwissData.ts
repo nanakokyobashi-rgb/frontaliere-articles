@@ -2777,6 +2777,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'rapporto-riciclaggio-denaro-svizzera': { it: 'rapporto-riciclaggio-denaro-svizzera', en: 'switzerland-money-laundering-report', de: 'schweiz-geldwaesche-bericht', fr: 'suisse-rapport-blanchiment-argent' },
  'nuovo-accordo-commercio-elettronico': { it: 'nuovo-accordo-commercio-elettronico', en: 'new-agreement-electronic-commerce', de: 'neues-abkommen-elektronischer-handel', fr: 'nouvel-accord-commerce-electronique' },
  'assunzioni-svizzera-cautela-2026': { it: 'assunzioni-svizzera-cautela-2026', en: 'switzerland-hiring-caution-2026', de: 'schweiz-einstellungen-vorsicht-2026', fr: 'suisse-recrutement-prudence-2026' },
+ 'legge-piattaforme-tutela-giovani': { it: 'legge-piattaforme-tutela-giovani', en: 'law-platforms-youth-protection', de: 'gesetz-plattformen-jugendschutz', fr: 'loi-plateformes-protection-jeunes' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

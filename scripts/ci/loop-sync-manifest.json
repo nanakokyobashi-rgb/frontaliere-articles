@@ -650,7 +650,7 @@
       "baseline": {
         "site": "6734a795e12f49c9",
         "corpus": "6734a795e12f49c9",
-        "alignedAt": "2026-10-07"
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -782,9 +782,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 come chiusura transitiva del trasporto di scripts/ci/scan-job-timeouts.mjs per #1110: lo scanner Site importa isFailureReportingDisabled, assente nella copia Corpus precedente. Copia byte-identica dal sito, senza adattamenti locali.",
       "baseline": {
-        "site": "fd74a582718ff11f",
-        "corpus": "fd74a582718ff11f",
-        "alignedAt": "2026-10-07"
+        "site": "9809517e88621e2c",
+        "corpus": "9809517e88621e2c",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -1539,9 +1539,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0ed67b775327e23d",
-        "corpus": "0ed67b775327e23d",
-        "alignedAt": "2026-10-12"
+        "site": "cb98d57267b1062b",
+        "corpus": "cb98d57267b1062b",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -2522,8 +2522,8 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "cf99554fa328e354",
-        "corpus": "cf99554fa328e354",
+        "site": "3604c629453c9f0b",
+        "corpus": "3604c629453c9f0b",
         "alignedAt": "2026-10-14"
       }
     },

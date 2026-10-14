@@ -8264,6 +8264,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.assunzioni-svizzera-cautela-2026.title': 'Recrutements en Suisse : entreprises prudentes malgré le PIB',
     'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'NEO suisse à +21% pour octobre-décembre 2026 NEO mondial +29%; moyenne européenne +20% PIB suisse en hausse de 1,5% au deuxième trimestre 2026 Junior : 35% de plus',
     'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Bureau suisse moderne avec vue sur le lac représentant le marché du travail',
+    'blog.article.legge-piattaforme-tutela-giovani.title': 'Le Conseil fédéral renforce la protection des jeunes sur les plateformes',
+    'blog.article.legge-piattaforme-tutela-giovani.excerpt': 'Le Conseil fédéral décide le 14 octobre 2026.',
+    'blog.article.legge-piattaforme-tutela-giovani.imageAlt': 'Adolescent suisse utilisant un ordinateur avec icônes des réseaux sociaux devant les Alpes',
 };
 
 export default blogMetaChFr;

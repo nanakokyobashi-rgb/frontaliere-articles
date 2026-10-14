@@ -141,11 +141,16 @@ export function findHtmlRawTextClosingTag(html, from, name) {
   return match ? { start: match.index, end: closing.lastIndex } : null;
 }
 
+const HTML_RAW_TEXT_TAGS = new Set([
+  'script', 'style', 'textarea', 'title', 'noscript', 'iframe', 'xmp',
+  'noembed', 'noframes',
+]);
+
 /** Cerca markup visibile saltando commenti e i contenuti raw di script/style. */
 export function nextHtmlTagOutsideRawText(html, from = 0) {
   let tag = nextHtmlTag(html, from, true);
   while (tag) {
-    if (!tag.closing && !tag.selfClosing && (tag.name === 'script' || tag.name === 'style')) {
+    if (!tag.closing && !tag.selfClosing && HTML_RAW_TEXT_TAGS.has(tag.name)) {
       const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
       if (!close) return null;
       tag = nextHtmlTag(html, close.end, true);
