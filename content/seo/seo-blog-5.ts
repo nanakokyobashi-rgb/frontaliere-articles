@@ -107629,6 +107629,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-arresti-truffa-chiamate-ticino': {
+    title: 'Truffa chiamate shock: tre arresti in Canton Ticino',
+    description: 'Autorità del Canton Ticino arrestano tre persone per la truffa delle \'chiamate shock\'. Scopri come funziona l\'inganno e come proteggersi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, truffa, chiamate, shock, arresti',
+    ogTitle: 'Truffa chiamate shock: tre arresti in Canton Ticino',
+    ogDescription: 'Smantellata in Canton Ticino una rete di truffatori che utilizzava le \'chiamate shock\' per estorcere denaro. Ecco i dettagli dell\'operazione e i consigli per i frontalieri.',
+    canonicalPath: '/articoli-frontaliere/arresti-truffa-chiamate-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Truffa chiamate shock: tre arresti in Canton Ticino",
+      "description": "Autorità del Canton Ticino arrestano tre persone per la truffa delle 'chiamate shock'. Scopri come funziona l'inganno e come proteggersi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-arresti-truffa-chiamate-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con smartphone in primo piano"
+      },
+      "datePublished": "2026-10-14T08:56:53+00:00",
+      "dateModified": "2026-10-14T08:56:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresti-truffa-chiamate-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

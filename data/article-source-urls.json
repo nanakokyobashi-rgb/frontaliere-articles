@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1947014/unia-lavori-cantieri-sindacato-stati-misure-canicola": {
-    "articleId": "unia-pause-calore-cantieri",
-    "ts": "2026-08-31T11:05:48.991Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/traffico-ferroviario-in-tilt-tra-arbedo-castione-e-biasca-441666": {
     "articleId": "traffico-ferroviario-bloccato-ticino",
     "ts": "2026-08-31T13:43:29.183Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenoi.it/2026/10/14/leggi-notizia/argomenti/cronaca-20/articolo/foto-carambola-sulla-varesina-a-vengono-inferiore-quattro-feriti-e-traffico-in-tilt.html": {
     "articleId": "incidente-varesina-venegono",
     "ts": "2026-10-14T07:58:32.066Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/13/leggi-notizia/argomenti/cronaca-20/articolo/truffa-delle-chiamate-shock-tre-arresti-in-canton-ticino.html": {
+    "articleId": "arresti-truffa-chiamate-ticino",
+    "ts": "2026-10-14T08:56:53.878Z",
     "keyForm": 2
   }
 }
