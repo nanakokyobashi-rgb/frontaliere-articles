@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/ubs-lancia-yumo%2c-piattaforma-spiega-ai-giovani-denaro-ed-economia/92031883": {
-    "articleId": "yumo-piattaforma-giovani-finanza",
-    "ts": "2026-09-09T20:44:51.116Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/b8vgbeq0hug8": {
     "articleId": "commissioni-extraparlamentari-riorganizzazione",
     "ts": "2026-09-09T23:11:29.217Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956716/trump-dazi-seco-oro-popolo-orologio-lingotto": {
     "articleId": "orologio-lingotto-trump-seco",
     "ts": "2026-10-14T23:41:42.253Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/jjqfufo9sd05": {
+    "articleId": "ordinanza-dispositivi-vitali",
+    "ts": "2026-10-14T23:53:34.689Z",
     "keyForm": 2
   }
 }
