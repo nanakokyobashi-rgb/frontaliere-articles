@@ -93,3 +93,53 @@ test('the generator links relevant multilingual prose with one shared budget', (
   assert.equal(data.content.fr.body2, 'En attente.');
   assert.equal(Object.hasOwn(data.content.fr, 'body3'), false);
 });
+
+test('fuel savings require a matching fresh Italian quote and a fresh explicit Swiss quote', () => {
+  const fresh = { municipality: 'Fresh', province: 'ZZ', minPriceEur: 1.7, cheapestStation: { updatedAt: `${day(1)}T00:00:00Z` } };
+  const old = { municipality: 'Old', province: 'ZZ', minPriceEur: 1.1, cheapestStation: { updatedAt: `${day(20)}T00:00:00Z` } };
+  const saving = { municipality: 'Fresh', province: 'ZZ', cheaperCountry: 'IT', italyPriceEur: 1.7, swissPriceEur: 2.1, saving50LEur: 20, swissStation: { updatedAt: `${day(1)}T00:00:00Z`, sp95PriceEur: 2.1 } };
+  const fuel = shapeFuel({ generatedAt: new Date(now - 1000).toISOString(), summary: { municipalityCount: 999, cheaperItalyCount: 888, cheaperSwissCount: 777 }, rankings: {
+    cheapestItalyMunicipalities: [fresh, old], bestCrossBorderSavings: [
+      { ...saving, municipality: 'Unverifiable' }, { ...saving, municipality: 'Old', italyPriceEur: 1.1 },
+      { ...saving, italyPriceEur: 1.5 }, { ...saving, swissStation: { updatedAt: `${day(20)}T00:00:00Z` } }, saving,
+    ],
+  } }, { nowMs: now });
+  assert.equal(fuel.available, true);
+  assert.deepEqual(fuel.bestSavings.map(row => row.municipality), ['Fresh']);
+  for (const field of ['municipalityCount', 'cheaperItalyCount', 'cheaperSwissCount', 'comparedMunicipalityCount', 'tieCount']) assert.equal(fuel[field], null);
+  const article = buildDailyBriefArticle({ dateIso: day(0), blocks: { fuel } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.doesNotMatch(article.content[locale].body2, /999|888|777|Unverifiable|Old/);
+    assert.match(article.content[locale].body2, /Fresh/);
+  }
+});
+
+test('ISO and date-first fuel observations reject nonexistent civil days', () => {
+  const march = Date.parse('2026-03-03T12:00:00Z');
+  for (const updatedAt of ['2026-02-29T11:00:00Z', '2026-02-30T11:00:00Z', '2026-02-31T11:00:00Z', '31/02/2026 11:00:00', '03/03/2026 99:00:00']) {
+    assert.equal(fuelQuoteIsFresh({ updatedAt }, march), false, updatedAt);
+  }
+  assert.equal(fuelQuoteIsFresh({ updatedAt: '2028-02-29T11:00:00Z' }, Date.parse('2028-03-01T12:00:00Z')), true);
+  const fuel = shapeFuel({ generatedAt: '2026-02-31T11:00:00Z', rankings: { cheapestItalyMunicipalities: [{ municipality: 'Fresh', minPriceEur: 1.7 }] } }, { nowMs: march });
+  assert.equal(fuel.available, false, 'aggregate timestamps obey the same civil-date guard');
+});
+
+test('HTTP 200 reports with null rows degrade the optional audience block without throwing', async () => {
+  const demand = await fetchSearchDemand({}, day(0), { tokenImpl: async () => 'fixture', fetchImpl: async () => ({ ok: true, json: async () => ({ rows: null }) }) });
+  assert.equal(demand.available, false);
+  assert.equal(demand.partial, true);
+  assert.deepEqual(demand.sources, { gsc: false, ga4: false });
+  const blocks = { jobs: { available: true }, exchange: { available: true, rate: 1.07 }, fuel: { available: true }, borderWait: { available: true } };
+  const before = structuredClone(blocks);
+  assert.equal(buildDailyBriefInsights({ todayIso: day(0), blocks, searchDemand: demand }).searchDemand, undefined);
+  assert.deepEqual(blocks, before);
+});
+
+test('leader labels cannot introduce Markdown syntax into observed tables', () => {
+  const insights = buildDailyBriefInsights({ todayIso: day(0), blocks: { jobs: { available: true } }, jobsStats: { leaders: {
+    topCompaniesActive: [{ name: 'A*Company* `_Group_`|[Ltd]', count: 10 }, { name: '*_`', count: 9 }],
+    topLocationsActive: [{ name: 'Some_Town*`', count: 8 }],
+  } } });
+  assert.equal(insights.jobs.topCompanies.length, 1);
+  for (const row of [...insights.jobs.topCompanies, ...insights.jobs.topLocations]) assert.doesNotMatch(row.name, /[*_`|\[\]<>]/);
+});
