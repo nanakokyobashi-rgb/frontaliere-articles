@@ -27,6 +27,7 @@ import {
 } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
+import { shapeBorderWait, shapeFuel, BORDER_WAIT_MIN_CROSSINGS } from '../scripts/lib/daily-brief-data.mjs';
 
 const BRIEF = {
   schemaVersion: 1,
@@ -207,6 +208,43 @@ const SURFACE_BUDGETS = {
 };
 /** The site's hard bound on `description`, mirrored so a drift here is loud. */
 const SITE_DESCRIPTION_HARD_MAX = 170;
+
+test('the maximum wait is attributed to available observations, not the newest crossing update', () => {
+  const nowMs = Date.parse('2026-10-14T15:00:00Z');
+  const older = '2026-10-14T14:00:00Z';
+  const newer = '2026-10-14T14:58:00Z';
+  for (const maximum of [8, 30]) {
+    const docs = Array.from({ length: BORDER_WAIT_MIN_CROSSINGS }, (_, i) => ({
+      slug: `crossing-${i}`, crossingName: i === 0 ? 'Worst Border' : `Border ${i}`,
+      waitTimeMinutes: i === 0 ? maximum : 0, lastUpdate: i === 0 ? older : newer,
+    }));
+    const borderWait = shapeBorderWait(docs, { nowMs });
+    assert.equal(borderWait.available, true);
+    assert.equal(borderWait.worst.waitMinutes, maximum);
+    assert.equal(Date.parse(borderWait.updatedAt), Date.parse(newer));
+    assert.equal(borderWait.crossings[0].updatedAt, older);
+    const article = buildDailyBriefArticle({ dateIso: '2026-10-14', blocks: { borderWait } });
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      assert.match(article.content[locale].body1, new RegExp(`Worst Border.*${maximum}|${maximum}.*Worst Border`, 's'));
+      assert.doesNotMatch(article.content[locale].body1, /rilevamento più recente|latest reading|jüngste Messung|letzter Messung|dernier relevé/i);
+    }
+  }
+});
+
+test('fresh fuel metadata rejected by validation is not described as a stopped source', () => {
+  const nowMs = Date.parse('2026-10-14T15:00:00Z');
+  const fuel = shapeFuel({ generatedAt: '2026-10-14T14:59:00Z', rankings: {
+    cheapestItalyMunicipalities: [{ municipality: 'Rejected quote', minPriceEur: -1 }],
+    bestCrossBorderSavings: [],
+  } }, { nowMs });
+  assert.equal(fuel.available, false);
+  assert.equal(fuel.reason, 'fuel rankings are empty');
+  const article = buildDailyBriefArticle({ ...BRIEF, blocks: { ...BRIEF.blocks, fuel } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.doesNotMatch(article.content[locale].body2, /fonte riprende|source is back|Quelle wieder liefert|source reprend|48/);
+    assert.match(article.content[locale].body2, /verificabili|verifiable|verifizierbare|vérifiables/);
+  }
+});
 
 test('the three descriptive surfaces each fit their own budget, every locale, every date', () => {
   assert.ok(
