@@ -103754,6 +103754,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-licenza-pubblico-zurigo-requisiti': {
+    title: 'Licenza esercizio pubblico Zurigo: requisiti e domanda',
+    description: 'Scopri come richiedere la licenza per esercizi pubblici a Zurigo. Regole, autorità competenti, requisiti, fisco svizzero e gestione del personale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenza, esercizio, pubblico, zurigo',
+    ogTitle: 'Licenza esercizio pubblico Zurigo: requisiti e domanda',
+    ogDescription: 'Guida completa per la licenza di esercizi pubblici nel Cantone di Zurigo: autorità competenti, requisiti, scadenze, tassazione e regole per il personale.',
+    canonicalPath: '/articoli-svizzera/licenza-pubblico-zurigo-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Licenza esercizio pubblico Zurigo: requisiti e domanda",
+      "description": "Scopri come richiedere la licenza per esercizi pubblici a Zurigo. Regole, autorità competenti, requisiti, fisco svizzero e gestione del personale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-licenza-pubblico-zurigo-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Licenza per esercizio pubblico nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-14T03:42:26+00:00",
+      "dateModified": "2026-10-14T03:42:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenza-pubblico-zurigo-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

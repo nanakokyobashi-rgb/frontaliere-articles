@@ -8222,6 +8222,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.collaudo-veicoli-canton-zurigo.title': 'Contrôle véhicules Zurich : convocations et requis',
     'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'À Zurich, le contrôle technique relève du niveau cantonal La procédure comprend la convocation, les documents et les exigences techniques Les contrôles périodiques font partie de la procédure',
     'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Centre de contrôle des véhicules dans le canton de Zurich',
+    'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Licence d’établissement public à Zurich : conditions et demande',
+    'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Guide de la licence pour les établissements publics dans le canton de Zurich : autorités compétentes, conditions, délais, fiscalité et gestion du personnel.',
+    'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Licence d\'établissement public dans le canton de Zurich',
 };
 
 export default blogMetaChFr;

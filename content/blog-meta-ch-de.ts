@@ -8222,6 +8222,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.collaudo-veicoli-canton-zurigo.title': 'Fahrzeugprüfung Kanton Zürich: Aufgebot und Anforderungen',
     'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'In Zürich erfolgt die Fahrzeugprüfung auf kantonaler Ebene Das Verfahren umfasst Aufgebot, Dokumente und technische Anforderungen Die periodischen Kontrollen sind Teil des Verfahrens',
     'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Fahrzeugprüfzentrum im Kanton Zürich',
+    'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Gastgewerbebewilligung Zürich: Voraussetzungen und Antrag',
+    'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Leitfaden zur Bewilligung für Gastgewerbebetriebe im Kanton Zürich: zuständige Behörden, Voraussetzungen, Fristen, Steuern und Personalführung.',
+    'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Gastgewerbebewilligung im Kanton Zürich',
 };
 
 export default blogMetaChDe;

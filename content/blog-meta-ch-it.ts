@@ -8222,6 +8222,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.collaudo-veicoli-canton-zurigo.title': 'Collaudo veicoli Canton Zurigo: convocazione e requisiti',
     'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell\'iter',
     'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Centro di collaudo veicoli nel Cantone di Zurigo',
+    'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Licenza esercizio pubblico Zurigo: requisiti e domanda',
+    'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Guida alla licenza per esercizi pubblici nel Cantone di Zurigo: autorità competenti, requisiti, scadenze, fisco e gestione del personale.',
+    'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Licenza per esercizio pubblico nel Cantone di Zurigo',
 };
 
 export default blogMetaChIt;
