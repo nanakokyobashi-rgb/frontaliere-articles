@@ -8237,6 +8237,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.negozi-berna-orari-festivi-regole.title': 'Magasins Berne : horaires et jours fériés',
     'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Guide officielle des horaires commerciaux, des jours fériés, des autorisations spéciales et des limites de travail dans le canton de Berne.',
     'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Horaires et reglementation commerciale dans le canton de Berne',
+    'blog.article.imposta-cani-berna-guida.title': 'Impôt sur les chiens dans le canton de Berne : guide des montants et des règles',
+    'blog.article.imposta-cani-berna-guida.excerpt': 'Guide pratique de l\'impôt sur les chiens dans le canton de Berne : obligation éventuelle, enregistrement, exemptions et autorités compétentes.',
+    'blog.article.imposta-cani-berna-guida.imageAlt': 'Taxe sur les chiens dans le canton de Berne: règles et enregistrement',
 };
 
 export default blogMetaChFr;

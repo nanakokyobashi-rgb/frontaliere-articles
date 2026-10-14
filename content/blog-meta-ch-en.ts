@@ -8237,6 +8237,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.negozi-berna-orari-festivi-regole.title': 'Bern Canton shop hours: holidays and rules',
     'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Official guide to business hours, public holidays, special permits, and work restrictions in the Canton of Bern.',
     'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Business hours and retail regulations in the Canton of Bern',
+    'blog.article.imposta-cani-berna-guida.title': 'Dog tax in the Canton of Bern: guide to amounts and rules',
+    'blog.article.imposta-cani-berna-guida.excerpt': 'Practical guide to the dog tax in the Canton of Bern: possible obligation, registration, exemptions and competent authorities.',
+    'blog.article.imposta-cani-berna-guida.imageAlt': 'Dog tax in Canton Bern: rules and registration',
 };
 
 export default blogMetaChEn;
