@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T14:37:09.792Z",
-  "contentHash": "98fd26c040000ff9df8d264f79ff181747a59233c420455407c4d017a517f550",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "ead0e6440377217d3cb1bf2a3ab30f6a4964ace897be57a0d4a586f9349d14cd",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-14T12:29:53.970Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
+          "value": "4",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "40",
+          "value": "41",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         }
       ],
@@ -123,39 +123,41 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Chiusura",
+              "date": "2026-10-14T10:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Mendrisio E Galleria Galleria San Nicolao Situazione: colonna Causa: traffico congestionato",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20",
               "value": "Traffico",
-              "date": "2026-10-14T04:09:00.000Z"
+              "date": "2026-10-14T10:22:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato",
+              "label": "Revocato: H2 Bellinzona -> Chiasso tra Svincolo autostradale Bellinzona Sud E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-14T04:44:00.000Z"
+              "date": "2026-10-14T11:30:00.000Z"
             },
             {
-              "label": "H2 Bellinzona -> Chiasso tra Svincolo autostradale Bellinzona Sud E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
               "value": "Traffico",
-              "date": "2026-10-14T05:21:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
             },
             {
-              "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Luogo Contone Situazione: colonna Causa: traffico congestionato",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Traffico",
-              "date": "2026-10-14T05:21:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-14T05:22:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -193,7 +195,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -288,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T14:37:09.792Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "TI",
@@ -303,12 +305,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
+          "value": "4",
           "note": "reports as of 14 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "40",
+          "value": "41",
           "note": "reports as of 14 October 2026"
         }
       ],
@@ -389,39 +391,41 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Closure",
+              "date": "2026-10-14T10:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Closure",
               "detail": "until 22 October 2026",
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Mendrisio E Galleria Galleria San Nicolao Situazione: colonna Causa: traffico congestionato",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 2.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 20",
               "value": "Traffic",
-              "date": "2026-10-14T04:09:00.000Z"
+              "date": "2026-10-14T10:22:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Parcheggio Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato",
+              "label": "Revocato: H2 Bellinzona -> Chiasso tra Svincolo autostradale Bellinzona Sud E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-14T04:44:00.000Z"
+              "date": "2026-10-14T11:30:00.000Z"
             },
             {
-              "label": "H2 Bellinzona -> Chiasso tra Svincolo autostradale Bellinzona Sud E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
               "value": "Traffic",
-              "date": "2026-10-14T05:21:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
             },
             {
-              "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Luogo Contone Situazione: colonna Causa: traffico congestionato",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Traffic",
-              "date": "2026-10-14T05:21:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-14T05:22:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -459,7 +463,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T14:37:09.792Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "TI",
@@ -568,12 +572,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
+          "value": "4",
           "note": "Meldungen vom 14. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "40",
+          "value": "41",
           "note": "Meldungen vom 14. Oktober 2026"
         }
       ],
@@ -654,39 +658,41 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-14T10:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Mendrisio und Tunnel S. Nicolao-Tunnel Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 2.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 20",
               "value": "Verkehr",
-              "date": "2026-10-14T04:09:00.000Z"
+              "date": "2026-10-14T10:22:00.000Z"
             },
             {
-              "label": "A2 Gotthard -> Chiasso zwischen Anschluss Chiasso-Centro und Parkplatz Chiasso-Warenzoll Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
+              "label": "Aufgehoben: H2 Bellinzona -> Chiasso zwischen Anschluss Bellinzona-Süd und Ortschaft Cadenazzo Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-14T04:44:00.000Z"
+              "date": "2026-10-14T11:30:00.000Z"
             },
             {
-              "label": "H2 Bellinzona -> Chiasso zwischen Anschluss Bellinzona-Süd und Ortschaft Cadenazzo Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
               "value": "Verkehr",
-              "date": "2026-10-14T05:21:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
             },
             {
-              "label": "406 Cadenazzo -> Riazzino zwischen Ortschaft Cadenazzo und Ortschaft Contone Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Verkehr",
-              "date": "2026-10-14T05:21:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo zwischen Anschluss Flughafen Locarno und Ortschaft Cadenazzo Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-14T05:22:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -724,7 +730,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -818,7 +824,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T14:37:09.792Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "TI",
@@ -833,12 +839,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
+          "value": "4",
           "note": "signalements au 14 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "40",
+          "value": "41",
           "note": "signalements au 14 octobre 2026"
         }
       ],
@@ -919,39 +925,41 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+              "value": "Fermeture",
+              "date": "2026-10-14T10:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
               "date": "2026-10-21T20:00:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Mendrisio et Tunnel Tunnel de S. Nicolao Situation: bouchon Raison: surcharge de trafic",
+              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 2.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 20",
               "value": "Trafic",
-              "date": "2026-10-14T04:09:00.000Z"
+              "date": "2026-10-14T10:22:00.000Z"
             },
             {
-              "label": "A2 St-Gothard -> Chiasso entre Jonction autoroutière Chiasso-Centro et Parking Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
+              "label": "Révoqué: H2 Bellinzone -> Chiasso entre Jonction autoroutière Bellinzone-Sud et Localité Cadenazzo Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-14T04:44:00.000Z"
+              "date": "2026-10-14T11:30:00.000Z"
             },
             {
-              "label": "H2 Bellinzone -> Chiasso entre Jonction autoroutière Bellinzone-Sud et Localité Cadenazzo Situation: bouchon Raison: surcharge de trafic",
+              "label": "Incidente della circolazione stradale nel Mendrisiotto",
               "value": "Trafic",
-              "date": "2026-10-14T05:21:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261190"
             },
             {
-              "label": "406 Cadenazzo -> Riazzino entre Localité Cadenazzo et Localité Contone Situation: bouchon Raison: surcharge de trafic",
+              "label": "Complemento incidente della circolazione stradale nel Mendrisiotto",
               "value": "Trafic",
-              "date": "2026-10-14T05:21:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo entre Jonction autoroutière Aeroprt de Locarno et Localité Cadenazzo Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-14T05:22:00.000Z"
+              "date": "2026-10-14T12:29:53.970Z",
+              "url": "https://www4.ti.ch/di/pol-new/comunicazioni/comunicati-stampa-1/dettaglio/?user_polizia_pi1[newsId]=261193"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -989,7 +997,7 @@
               "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -1084,7 +1092,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T14:37:09.792Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

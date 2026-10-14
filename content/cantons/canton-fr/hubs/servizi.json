@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T17:09:39.574Z",
-  "contentHash": "f5cc42ed1705a083fa816b2add1f70faf495264e47bf308107251e27dbe30c3d",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "f6dc430c277ce3b572187a2adc728aef846e8694d5df61f3f0429243e337e443",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T04:58:40.892Z",
+      "updatedAt": "2026-10-14T11:56:34.678Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-14T13:49:58.818Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -92,13 +97,32 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "20 °C",
+              "detail": "oggi da 10 a 20 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-14T08:24:38.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-270"
+            },
             {
               "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
               "date": "2026-10-12T14:34:28.000Z",
@@ -123,14 +147,9 @@
               "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
               "date": "2026-10-08T14:00:37.000Z",
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
-            },
-            {
-              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
-              "date": "2026-10-08T14:00:37.000Z",
-              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "FR",
@@ -279,13 +298,32 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "20 °C",
+              "detail": "today from 10 to 20 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-14T08:24:38.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-270"
+            },
             {
               "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
               "date": "2026-10-12T14:34:28.000Z",
@@ -310,14 +348,9 @@
               "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
               "date": "2026-10-08T14:00:37.000Z",
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
-            },
-            {
-              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
-              "date": "2026-10-08T14:00:37.000Z",
-              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -392,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "FR",
@@ -462,13 +495,32 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "20 °C",
+              "detail": "heute 10 bis 20 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-14T08:24:38.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-270"
+            },
             {
               "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
               "date": "2026-10-12T14:34:28.000Z",
@@ -493,14 +545,9 @@
               "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
               "date": "2026-10-08T14:00:37.000Z",
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
-            },
-            {
-              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
-              "date": "2026-10-08T14:00:37.000Z",
-              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -575,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "FR",
@@ -645,13 +692,32 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "20 °C",
+              "detail": "aujourd’hui de 10 à 20 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Demandes de permis de construire et de démolir",
+              "date": "2026-10-14T08:24:38.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-270"
+            },
             {
               "label": "Primes abordables : le contre-projet indirect du Conseil d’Etat à l’initiative cantonale transmis au Grand Conseil",
               "date": "2026-10-12T14:34:28.000Z",
@@ -676,14 +742,9 @@
               "label": "Le Centre fribourgeois de santé sexuelle fête ses 40 ans",
               "date": "2026-10-08T14:00:37.000Z",
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
-            },
-            {
-              "label": "40 Jahre Freiburger Fachstelle für sexuelle Gesundheit",
-              "date": "2026-10-08T14:00:37.000Z",
-              "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "15a6c56428e05c7b5a60c52e5015b2e94ff72c4cb19a4a8aefb4b143d1991652",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "0324df6ba1966654f145db17099f7526ef8eb7103a624145d8ce1ed3d860d005",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "69",
+          "value": "70",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -54,6 +54,12 @@
               "detail": "Divers lieux, Lausanne",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Mostra di Cedric Zellweger",
+              "detail": "Vevey",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-cedric-zellweger/"
             },
             {
               "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
@@ -90,17 +96,11 @@
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -132,7 +132,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "VD",
@@ -142,7 +142,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "69",
+          "value": "70",
           "note": "from the site’s events calendar"
         }
       ],
@@ -169,6 +169,12 @@
               "detail": "Divers lieux, Lausanne",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Exhibition by Cedric Zellweger",
+              "detail": "Vevey",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-cedric-zellweger/"
             },
             {
               "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
@@ -205,17 +211,11 @@
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -233,7 +233,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -247,7 +247,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "VD",
@@ -257,7 +257,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "69",
+          "value": "70",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,6 +284,12 @@
               "detail": "Divers lieux, Lausanne",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Ausstellung von Cedric Zellweger",
+              "detail": "Vevey",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-cedric-zellweger/"
             },
             {
               "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
@@ -320,17 +326,11 @@
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Festival Le Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -348,7 +348,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -362,7 +362,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "VD",
@@ -372,7 +372,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "69",
+          "value": "70",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -399,6 +399,12 @@
               "detail": "Divers lieux, Lausanne",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+            },
+            {
+              "label": "Exposition de Cédric Zellweger",
+              "detail": "Vevey",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-cedric-zellweger/"
             },
             {
               "label": "Lumières d'automne, un atelier \"esprit Halloween\"",
@@ -435,17 +441,11 @@
               "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
-            },
-            {
-              "label": "Festival Le Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-14",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/bois-qui-chante/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -463,7 +463,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -477,7 +477,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

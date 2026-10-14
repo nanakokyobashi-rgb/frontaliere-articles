@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T10:32:27.019Z",
-  "contentHash": "3949fa6bdf4be8eff2dc369ff45b6ce1f39905ec67cfd0569da76706686090bb",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "3cfd4510436b2ca0be6bd96a93b9bcddc30320a1bec8310d6d2524eb3ba8ef48",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-14T12:29:53.970Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "9",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         }
       ],
@@ -92,13 +92,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-10-14T00:21:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
@@ -123,14 +128,9 @@
               "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
-            },
-            {
-              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -187,7 +187,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "FR",
@@ -202,7 +202,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "9",
           "note": "reports as of 14 October 2026"
         }
       ],
@@ -262,13 +262,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-10-14T00:21:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
@@ -293,14 +298,9 @@
               "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
-            },
-            {
-              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -357,7 +357,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "FR",
@@ -372,7 +372,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "9",
           "note": "Meldungen vom 14. Oktober 2026"
         }
       ],
@@ -432,13 +432,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-10-14T00:21:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
@@ -463,14 +468,9 @@
               "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
-            },
-            {
-              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -527,7 +527,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "FR",
@@ -542,7 +542,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "9",
           "note": "signalements au 14 octobre 2026"
         }
       ],
@@ -602,13 +602,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Restrictions de circulation dues aux manifestations",
+              "date": "2026-10-14T00:21:00.000Z",
+              "url": "https://www.ville-fribourg.ch/actualites/restrictions-de-circulation-dues-aux-manifestations"
+            },
             {
               "label": "Ein Meilenstein für das Velofahren im Alltag: Der neue kantonale Velowegnetzplan liegt vor",
               "date": "2026-10-07T13:45:16.000Z",
@@ -633,14 +638,9 @@
               "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
               "date": "2026-10-01T14:19:43.000Z",
               "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
-            },
-            {
-              "label": "Mise à l’enquête publique du projet de route de contournement de Chiètres",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/dime/actualites/mise-a-lenquete-publique-du-projet-de-route-de-contournement-de-chietres"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -697,7 +697,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

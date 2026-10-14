@@ -4,12 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "9a33de72d9476d324ec71539b82c7aa0788fa60e9ac983285e7306d033a852ce",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "9cce1ca3e80da366607fe588c54a4003028d0c23de850898516ac201fb49e26a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "304",
+          "value": "305",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -57,6 +57,12 @@
               "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
             },
             {
+              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+            },
+            {
               "label": "Armures et paillettes",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -69,6 +75,12 @@
               "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Belles et Rebelles",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -79,23 +91,11 @@
               "detail": "Genève",
               "date": "2026-10-14",
               "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - conférence",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-conference"
-            },
-            {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -116,7 +116,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "GE",
@@ -126,7 +126,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "304",
+          "value": "305",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,6 +161,12 @@
               "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
             },
             {
+              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+            },
+            {
               "label": "Armures et paillettes",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -173,6 +179,12 @@
               "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Belles et Rebelles",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -183,23 +195,11 @@
               "detail": "Genève",
               "date": "2026-10-14",
               "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - conférence",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-conference"
-            },
-            {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -220,7 +220,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "GE",
@@ -230,7 +230,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "304",
+          "value": "305",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -265,6 +265,12 @@
               "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
             },
             {
+              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+            },
+            {
               "label": "Armures et paillettes",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -277,6 +283,12 @@
               "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Belles et Rebelles",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -287,23 +299,11 @@
               "detail": "Genève",
               "date": "2026-10-14",
               "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - conférence",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-conference"
-            },
-            {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "GE",
@@ -334,7 +334,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "304",
+          "value": "305",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -369,6 +369,12 @@
               "url": "https://www.geneve.ch/agenda/yoshi-samourai-peur-rien-autres-contes-japonais"
             },
             {
+              "label": "Animations et conseils autour de la borne de réparation vélo du carrefour Aïre-Furet (1203)",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/animations-conseils-autour-borne-reparation-velo-carrefour-aire-furet-1203"
+            },
+            {
               "label": "Armures et paillettes",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -381,6 +387,12 @@
               "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-14",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Belles et Rebelles",
               "detail": "Genève",
               "date": "2026-10-14",
@@ -391,23 +403,11 @@
               "detail": "Genève",
               "date": "2026-10-14",
               "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-47-histoire-squats-geneve-conference-causerie-balades"
-            },
-            {
-              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - conférence",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-conference"
-            },
-            {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
-              "detail": "Genève",
-              "date": "2026-10-14",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

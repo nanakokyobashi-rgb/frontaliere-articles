@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T14:01:15.778Z",
-  "contentHash": "592f91c6979c1c7189ff3f19ba0316bbe1eea9ae99c94fedd56df01be9581bb0",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "9938927803892fe09115f46d2196088ef7e60fdfb1c8e9af4a1d4092b7a13ccb",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-14T12:29:53.970Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
+          "value": "8",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
@@ -79,26 +79,31 @@
               "date": "2026-10-11T18:00:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Raccordo autostradale Diramazione Lopper E Svincolo autostradale Hergiswil Nord Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 ottobre 2026",
-              "date": "2026-09-22T05:22:00.000Z"
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Hergiswil Sud Situazione: chiusa cantiere, lunghezza [km] 4.0",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 novembre 2026",
+              "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Stansstad Situazione: si prevedono problemi di traffico cantiere, lunghezza [km] 0.9 Limitazione del traffico…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 15 ottobre 2026",
-              "date": "2026-09-22T12:09:00.000Z"
+              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Hergiswil Sud Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 28 ottobre 2026",
+              "date": "2026-10-14T07:54:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
+              "date": "2026-10-14",
+              "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
@@ -123,14 +128,9 @@
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
               "date": "2026-10-01",
               "url": "https://www.buochs.ch/_rte/information/3000736"
-            },
-            {
-              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
-              "date": "2026-09-29",
-              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -157,7 +157,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T14:01:15.778Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "NW",
@@ -167,7 +167,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
+          "value": "8",
           "note": "reports as of 14 October 2026"
         },
         {
@@ -219,26 +219,31 @@
               "date": "2026-10-11T18:00:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Raccordo autostradale Diramazione Lopper E Svincolo autostradale Hergiswil Nord Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico…",
-              "value": "Roadworks",
-              "detail": "until 16 October 2026",
-              "date": "2026-09-22T05:22:00.000Z"
+              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Hergiswil Sud Situazione: chiusa cantiere, lunghezza [km] 4.0",
+              "value": "Closure",
+              "detail": "until 4 November 2026",
+              "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Stans Nord E Svincolo autostradale Stansstad Situazione: si prevedono problemi di traffico cantiere, lunghezza [km] 0.9 Limitazione del traffico…",
-              "value": "Roadworks",
-              "detail": "until 15 October 2026",
-              "date": "2026-09-22T12:09:00.000Z"
+              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Hergiswil Sud Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 28 October 2026",
+              "date": "2026-10-14T07:54:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
+              "date": "2026-10-14",
+              "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
@@ -263,14 +268,9 @@
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
               "date": "2026-10-01",
               "url": "https://www.buochs.ch/_rte/information/3000736"
-            },
-            {
-              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
-              "date": "2026-09-29",
-              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -297,7 +297,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T14:01:15.778Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "NW",
@@ -307,7 +307,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
+          "value": "8",
           "note": "Meldungen vom 14. Oktober 2026"
         },
         {
@@ -359,26 +359,31 @@
               "date": "2026-10-11T18:00:00.000Z"
             },
             {
-              "label": "A2 Gotthard -> Luzern zwischen Autobahndreieck Verzweigung Lopper und Anschluss Hergiswil Nord Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 16. Oktober 2026",
-              "date": "2026-09-22T05:22:00.000Z"
+              "label": "A2 Gotthard -> Luzern zwischen Anschluss Stans-Nord und Anschluss Hergiswil Süd Sachlage: Strecke gesperrt Baustelle, Länge [km] 4.0",
+              "value": "Sperrung",
+              "detail": "bis 4. November 2026",
+              "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 Gotthard -> Luzern zwischen Anschluss Stans-Nord und Anschluss Stansstad Sachlage: Verkehrsbehinderung zu erwarten Baustelle, Länge [km] 0.9 Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 15. Oktober 2026",
-              "date": "2026-09-22T12:09:00.000Z"
+              "label": "A2 Gotthard -> Luzern Anschluss Hergiswil Süd Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 28. Oktober 2026",
+              "date": "2026-10-14T07:54:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
+              "date": "2026-10-14",
+              "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
@@ -403,14 +408,9 @@
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
               "date": "2026-10-01",
               "url": "https://www.buochs.ch/_rte/information/3000736"
-            },
-            {
-              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
-              "date": "2026-09-29",
-              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T14:01:15.778Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "NW",
@@ -447,7 +447,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
+          "value": "8",
           "note": "signalements au 14 octobre 2026"
         },
         {
@@ -499,26 +499,31 @@
               "date": "2026-10-11T18:00:00.000Z"
             },
             {
-              "label": "A2 St-Gothard -> Lucerne entre Echangeur Echangeur du Lopper et Jonction autoroutière Hergiswil Nord Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies…",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 octobre 2026",
-              "date": "2026-09-22T05:22:00.000Z"
+              "label": "A2 St-Gothard -> Lucerne entre Jonction autoroutière Stans-Nord et Jonction autoroutière Hergiswil Sud Situation: fermé travaux, longueur [km] 4.0",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 novembre 2026",
+              "date": "2026-10-14T07:53:00.000Z"
             },
             {
-              "label": "A2 St-Gothard -> Lucerne entre Jonction autoroutière Stans-Nord et Jonction autoroutière Stansstad Situation: ralentissements prévus travaux, longueur [km] 0.9 Gestion du trafic: rétrécissement des…",
-              "value": "Chantier",
-              "detail": "jusqu’au 15 octobre 2026",
-              "date": "2026-09-22T12:09:00.000Z"
+              "label": "A2 St-Gothard -> Lucerne Jonction autoroutière Hergiswil Sud Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 28 octobre 2026",
+              "date": "2026-10-14T07:54:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "A2 Lehnenviadukt Beckenried - Verkehrsumstellung für die nächste Bauphase und die Reinigung des Seelisbergtunnels",
+              "date": "2026-10-14",
+              "url": "https://www.buochs.ch/_rte/information/3010885"
+            },
             {
               "label": "Älperchilbi: Einschränkungen im Verkehr",
               "date": "2026-10-13",
@@ -543,14 +548,9 @@
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
               "date": "2026-10-01",
               "url": "https://www.buochs.ch/_rte/information/3000736"
-            },
-            {
-              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
-              "date": "2026-09-29",
-              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -577,7 +577,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T14:01:15.778Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

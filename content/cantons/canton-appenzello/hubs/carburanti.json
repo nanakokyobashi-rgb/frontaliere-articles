@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "b44a83c08f903086100e7fb287fc8d3b75c2e0a4618c540f9c6e02a76e005a16",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "b56330073d53eb64879df25bdd027ddf974e95a0644ef5c56f60d20e3c1d6702",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-13T14:34:38.425Z",
+      "updatedAt": "2026-10-14T12:19:54.698Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-20T14:34:38.425Z"
+      "carryUntilAt": "2026-10-21T12:19:54.698Z"
     }
   ],
   "locales": {
@@ -54,19 +54,19 @@
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,878 EUR/l",
-              "detail": "media regionale: minimo 1,873 EUR/l, 11 stazioni rilevate",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "1,891 EUR/l",
+              "detail": "media regionale: minimo 1,884 EUR/l, 12 stazioni rilevate",
+              "date": "2026-10-14T12:19:54.698Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,168 EUR/l",
-              "detail": "media regionale: minimo 2,100 EUR/l, 11 stazioni rilevate",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "2,170 EUR/l",
+              "detail": "media regionale: minimo 2,100 EUR/l, 10 stazioni rilevate",
+              "date": "2026-10-14T12:19:54.698Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-13T14:34:38.425Z"
+          "updatedAt": "2026-10-14T12:19:54.698Z"
         }
       ],
       "curatedArticles": [],
@@ -80,7 +80,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -121,19 +121,19 @@
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.878 EUR/l",
-              "detail": "regional average: lowest 1.873 EUR/l, 11 stations surveyed",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "1.891 EUR/l",
+              "detail": "regional average: lowest 1.884 EUR/l, 12 stations surveyed",
+              "date": "2026-10-14T12:19:54.698Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.168 EUR/l",
-              "detail": "regional average: lowest 2.100 EUR/l, 11 stations surveyed",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "2.170 EUR/l",
+              "detail": "regional average: lowest 2.100 EUR/l, 10 stations surveyed",
+              "date": "2026-10-14T12:19:54.698Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-13T14:34:38.425Z"
+          "updatedAt": "2026-10-14T12:19:54.698Z"
         }
       ],
       "curatedArticles": [],
@@ -147,7 +147,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -188,19 +188,19 @@
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.878 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.873 EUR/l, 11 erfasste Tankstellen",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "1.891 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.884 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-10-14T12:19:54.698Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.168 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 11 erfasste Tankstellen",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "2.170 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 10 erfasste Tankstellen",
+              "date": "2026-10-14T12:19:54.698Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-13T14:34:38.425Z"
+          "updatedAt": "2026-10-14T12:19:54.698Z"
         }
       ],
       "curatedArticles": [],
@@ -214,7 +214,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -255,19 +255,19 @@
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,878 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,873 EUR/l, 11 stations relevées",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "1,891 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,884 EUR/l, 12 stations relevées",
+              "date": "2026-10-14T12:19:54.698Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,168 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 11 stations relevées",
-              "date": "2026-10-13T14:34:38.425Z"
+              "value": "2,170 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 10 stations relevées",
+              "date": "2026-10-14T12:19:54.698Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-13T14:34:38.425Z"
+          "updatedAt": "2026-10-14T12:19:54.698Z"
         }
       ],
       "curatedArticles": [],
@@ -281,7 +281,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

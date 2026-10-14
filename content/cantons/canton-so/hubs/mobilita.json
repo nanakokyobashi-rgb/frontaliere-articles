@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T13:00:39.075Z",
-  "contentHash": "d44de3d191b3412c1b61043eecb912c8ec71ba9abc4aa0ba576b12c7eeed60d4",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "2bc603b164379fc4acfbf073955b76765dc82c0bbf106e746cf4b990d998fea1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-14T12:29:53.970Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
+          "value": "7",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
@@ -79,18 +79,20 @@
               "date": "2026-10-02T04:18:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-14T04:19:00.000Z"
+              "label": "A1 Zürich -> Bern tra Area di servizio Gunzgen Nord E Raccordo autostradale Diramazione Härkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 5 novembre 2026",
+              "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Solothurn -> Bienne tra Raccordo autostradale Diramazione Brüggmoos E Incrocio Bernstrasse Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-14T05:18:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 dicembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +110,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +149,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "SO",
@@ -157,7 +159,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
+          "value": "7",
           "note": "reports as of 14 October 2026"
         },
         {
@@ -209,18 +211,20 @@
               "date": "2026-10-02T04:18:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-14T04:19:00.000Z"
+              "label": "A1 Zürich -> Bern tra Area di servizio Gunzgen Nord E Raccordo autostradale Diramazione Härkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.15 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 5 November 2026",
+              "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Solothurn -> Bienne tra Raccordo autostradale Diramazione Brüggmoos E Incrocio Bernstrasse Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-14T05:18:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Roadworks",
+              "detail": "until 31 December 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -238,7 +242,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -276,7 +280,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "SO",
@@ -286,7 +290,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
+          "value": "7",
           "note": "Meldungen vom 14. Oktober 2026"
         },
         {
@@ -338,18 +342,20 @@
               "date": "2026-10-02T04:18:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern zwischen Autobahndreieck Verzweigung Härkingen und Autobahndreieck Verzweigung Luterbach Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-14T04:19:00.000Z"
+              "label": "A1 Zürich -> Bern zwischen Raststätte Gunzgen-Nord und Autobahndreieck Verzweigung Härkingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.15 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 5. November 2026",
+              "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Solothurn -> Biel zwischen Autobahndreieck Verzweigung Brüggmoos und Kreuzung Bernstrasse Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-14T05:18:00.000Z"
+              "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
+              "value": "Baustelle",
+              "detail": "bis 31. Dezember 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -367,7 +373,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -405,7 +411,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "SO",
@@ -415,7 +421,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
+          "value": "7",
           "note": "signalements au 14 octobre 2026"
         },
         {
@@ -467,18 +473,20 @@
               "date": "2026-10-02T04:18:00.000Z"
             },
             {
-              "label": "A1 Zurich -> Berne entre Echangeur Echangeur de Härkingen et Echangeur Echangeur de Luterbach Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-14T04:19:00.000Z"
+              "label": "A1 Zurich -> Berne entre Aire de service Gunzgen-Nord et Echangeur Echangeur de Härkingen Situation: trafic perturbé travaux, longueur [km] 0.15 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 5 novembre 2026",
+              "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A5 Soleure -> Bienne entre Echangeur Echangeur de Brüggmoos et Carrefour Bernstrasse Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-14T05:18:00.000Z"
+              "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 décembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -496,7 +504,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -535,7 +543,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T13:00:39.075Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

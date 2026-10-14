@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T17:09:39.574Z",
-  "contentHash": "94332504849f7809fbf9c93a1ce3494fa71d3d4b7ff96038a6f4bbaf339393d3",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "47f2dff0e8de314584608f19d764450983a8cdcd44226b9b51679e578028f19d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-14T04:58:40.892Z",
+      "updatedAt": "2026-10-14T11:56:34.678Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-14T13:49:58.818Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "19 °C",
+              "detail": "oggi da 10 a 19 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -198,7 +217,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "TG",
@@ -263,7 +282,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "19 °C",
+              "detail": "today from 10 to 19 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +334,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -370,7 +403,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "TG",
@@ -435,7 +468,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "19 °C",
+              "detail": "heute 10 bis 19 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -473,7 +520,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +589,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "TG",
@@ -607,7 +654,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-14T04:58:40.892Z"
+          "updatedAt": "2026-10-14T11:56:34.678Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "19 °C",
+              "detail": "aujourd’hui de 10 à 19 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -645,7 +706,7 @@
               "url": "https://www.stgag.ch/news/detail/2026/08/27/reconstructive-robotic-urology-erfolgreiche-premiere-der-ersten-masterclass-in-der-urologie-spital-thurgau-ag/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -710,7 +771,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T17:09:39.574Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

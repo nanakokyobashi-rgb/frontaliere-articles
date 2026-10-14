@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T16:03:46.555Z",
-  "contentHash": "b25a4a4535711d05f9f581800776391cfd035ac346352c47d5042a275669bc32",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "8d15ce046d9599b4c9c9f281200e562b564d22889d828f043fdc498b7fe3903e",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-14T12:29:53.970Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -154,13 +154,28 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
+              "date": "2026-10-14T10:30:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-dem-maess-draemmli-an-die-herbstmesse-%f0%9f%8e%a1/"
+            },
+            {
+              "label": "Mit dem Mäss-Drämmli an die Basler Herbstmesse",
+              "date": "2026-10-14T08:18:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
+            },
+            {
+              "label": "Linie 3: Ersatzverkehr in Frankreich",
+              "date": "2026-10-14T03:10:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/linie-3-ersatzverkehr-in-frankreich/"
+            },
             {
               "label": "Tram-Museum Basel: Letzter Öffnungstag des Jahres",
               "date": "2026-10-13T11:43:26.000Z",
@@ -175,24 +190,9 @@
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
               "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
-            },
-            {
-              "label": "slowUp: Busumleitungen am Sonntag",
-              "date": "2026-09-17T06:48:07.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
-            },
-            {
-              "label": "Mobil bleiben – heute und morgen",
-              "date": "2026-09-17T06:18:35.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
-            },
-            {
-              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
-              "date": "2026-09-15T08:07:17.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -275,7 +275,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T16:03:46.555Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -407,13 +407,28 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
+              "date": "2026-10-14T10:30:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-dem-maess-draemmli-an-die-herbstmesse-%f0%9f%8e%a1/"
+            },
+            {
+              "label": "Mit dem Mäss-Drämmli an die Basler Herbstmesse",
+              "date": "2026-10-14T08:18:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
+            },
+            {
+              "label": "Linie 3: Ersatzverkehr in Frankreich",
+              "date": "2026-10-14T03:10:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/linie-3-ersatzverkehr-in-frankreich/"
+            },
             {
               "label": "Tram-Museum Basel: Letzter Öffnungstag des Jahres",
               "date": "2026-10-13T11:43:26.000Z",
@@ -428,24 +443,9 @@
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
               "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
-            },
-            {
-              "label": "slowUp: Busumleitungen am Sonntag",
-              "date": "2026-09-17T06:48:07.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
-            },
-            {
-              "label": "Mobil bleiben – heute und morgen",
-              "date": "2026-09-17T06:18:35.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
-            },
-            {
-              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
-              "date": "2026-09-15T08:07:17.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -528,7 +528,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T16:03:46.555Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -660,13 +660,28 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
+              "date": "2026-10-14T10:30:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-dem-maess-draemmli-an-die-herbstmesse-%f0%9f%8e%a1/"
+            },
+            {
+              "label": "Mit dem Mäss-Drämmli an die Basler Herbstmesse",
+              "date": "2026-10-14T08:18:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
+            },
+            {
+              "label": "Linie 3: Ersatzverkehr in Frankreich",
+              "date": "2026-10-14T03:10:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/linie-3-ersatzverkehr-in-frankreich/"
+            },
             {
               "label": "Tram-Museum Basel: Letzter Öffnungstag des Jahres",
               "date": "2026-10-13T11:43:26.000Z",
@@ -681,24 +696,9 @@
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
               "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
-            },
-            {
-              "label": "slowUp: Busumleitungen am Sonntag",
-              "date": "2026-09-17T06:48:07.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
-            },
-            {
-              "label": "Mobil bleiben – heute und morgen",
-              "date": "2026-09-17T06:18:35.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
-            },
-            {
-              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
-              "date": "2026-09-15T08:07:17.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -781,7 +781,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T16:03:46.555Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -913,13 +913,28 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Mit dem Mäss-Drämmli an die Herbstmesse 🎡",
+              "date": "2026-10-14T10:30:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-dem-maess-draemmli-an-die-herbstmesse-%f0%9f%8e%a1/"
+            },
+            {
+              "label": "Mit dem Mäss-Drämmli an die Basler Herbstmesse",
+              "date": "2026-10-14T08:18:07.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/mit-der-bvb-an-die-basler-herbstmesse-2026/"
+            },
+            {
+              "label": "Linie 3: Ersatzverkehr in Frankreich",
+              "date": "2026-10-14T03:10:27.000Z",
+              "url": "https://www.bvb.ch/de/2026/10/14/linie-3-ersatzverkehr-in-frankreich/"
+            },
             {
               "label": "Tram-Museum Basel: Letzter Öffnungstag des Jahres",
               "date": "2026-10-13T11:43:26.000Z",
@@ -934,24 +949,9 @@
               "label": "Auf der Suche nach einem originellen Geschenk?",
               "date": "2026-09-21T14:13:47.000Z",
               "url": "https://www.bvb.ch/de/2026/09/21/auf-der-suche-nach-einem-originellen-geschenk/"
-            },
-            {
-              "label": "slowUp: Busumleitungen am Sonntag",
-              "date": "2026-09-17T06:48:07.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/slowup-busumleitungen-am-sonntag/"
-            },
-            {
-              "label": "Mobil bleiben – heute und morgen",
-              "date": "2026-09-17T06:18:35.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/17/mobil-bleiben-heute-und-morgen/"
-            },
-            {
-              "label": "Diesen Sonntag: Erlebnistag BVB-Oldtimer",
-              "date": "2026-09-15T08:07:17.000Z",
-              "url": "https://www.bvb.ch/de/2026/09/15/diesen-sonntag-erlebnistag-bvb-oldtimer/"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -1034,7 +1034,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T16:03:46.555Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

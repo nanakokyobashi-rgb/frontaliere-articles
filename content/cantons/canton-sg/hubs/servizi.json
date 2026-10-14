@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T17:36:44.683Z",
-  "contentHash": "2694cb8db9f9b524c1e20034f25b5b24e985ca65b26c6a70f435ced328dd59e1",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "1c4f8c02f18e28321e8d994e5c43262892d34cfd6c67d025860417ec1fed1974",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-14T13:49:58.818Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -59,10 +64,29 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "16 °C",
+              "detail": "oggi da 10 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
+              "date": "2026-10-14",
+              "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
+            },
             {
               "label": "DUO-Ausgabe 02/2026 online",
               "date": "2026-10-13",
@@ -87,14 +111,9 @@
               "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
               "date": "2026-10-06",
               "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
-            },
-            {
-              "label": "Regierung nimmt Bauzustandsanalyse über das Liechtensteinische Landesspital zur Kenntnis",
-              "date": "2026-10-06",
-              "url": "https://www.regierung.li/medienportal-medium/16182/234960/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +192,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T17:36:44.683Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "SG",
@@ -215,10 +234,29 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "16 °C",
+              "detail": "today from 10 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
+              "date": "2026-10-14",
+              "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
+            },
             {
               "label": "DUO-Ausgabe 02/2026 online",
               "date": "2026-10-13",
@@ -243,14 +281,9 @@
               "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
               "date": "2026-10-06",
               "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
-            },
-            {
-              "label": "Regierung nimmt Bauzustandsanalyse über das Liechtensteinische Landesspital zur Kenntnis",
-              "date": "2026-10-06",
-              "url": "https://www.regierung.li/medienportal-medium/16182/234960/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +358,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T17:36:44.683Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "SG",
@@ -367,10 +400,29 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "16 °C",
+              "detail": "heute 10 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
+              "date": "2026-10-14",
+              "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
+            },
             {
               "label": "DUO-Ausgabe 02/2026 online",
               "date": "2026-10-13",
@@ -395,14 +447,9 @@
               "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
               "date": "2026-10-06",
               "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
-            },
-            {
-              "label": "Regierung nimmt Bauzustandsanalyse über das Liechtensteinische Landesspital zur Kenntnis",
-              "date": "2026-10-06",
-              "url": "https://www.regierung.li/medienportal-medium/16182/234960/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -477,7 +524,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T17:36:44.683Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "SG",
@@ -519,10 +566,29 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "St. Gallen",
+              "value": "16 °C",
+              "detail": "aujourd’hui de 10 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-14T13:49:58.818Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "HOCH Health Ostschweiz eröffnet in der Stadt St.Gallen eine Augenarztpraxis",
+              "date": "2026-10-14",
+              "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-eroeffnet-in-der-stadt-st-gallen-eine-augenarztpraxis-2026-10-14/"
+            },
             {
               "label": "DUO-Ausgabe 02/2026 online",
               "date": "2026-10-13",
@@ -547,14 +613,9 @@
               "label": "Spital Grabs: Neubau Haus O erreicht den höchsten Punkt",
               "date": "2026-10-06",
               "url": "https://www.h-och.ch/ueber-uns/news/spital-grabs-neubau-haus-o-erreicht-den-hoechsten-punkt-2026-10-06/"
-            },
-            {
-              "label": "Regierung nimmt Bauzustandsanalyse über das Liechtensteinische Landesspital zur Kenntnis",
-              "date": "2026-10-06",
-              "url": "https://www.regierung.li/medienportal-medium/16182/234960/0/medienmitteilung"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +686,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T17:36:44.683Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

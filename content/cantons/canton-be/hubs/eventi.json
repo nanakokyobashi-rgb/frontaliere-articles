@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "2e7ae940fece65abc0db438b1ed42b02883442732868a1f0ee90297a6d2e2f1f",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "e907ec0e8633c64e6f635f23c46998efdba98801469cabfd94d53e50ae69b135",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "212",
+          "value": "213",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "Vieh- Beständeschau Frutigen",
+              "detail": "Frutigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vieh-bestaendeschau-frutigen/"
+            },
             {
               "label": "Wie die Eiszeiten unsere Landschaft prägten",
               "detail": "KAGA, Kies AG Aaretal, Kiesen",
@@ -85,17 +91,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
-            },
-            {
-              "label": "Judith Hill",
-              "detail": "Bierhübeli",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -134,7 +134,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "BE",
@@ -144,7 +144,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "212",
+          "value": "213",
           "note": "from the site’s events calendar"
         }
       ],
@@ -154,6 +154,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "Vieh- Beständeschau Frutigen",
+              "detail": "Frutigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vieh-bestaendeschau-frutigen/"
+            },
             {
               "label": "Wie die Eiszeiten unsere Landschaft prägten",
               "detail": "KAGA, Kies AG Aaretal, Kiesen",
@@ -207,17 +213,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
-            },
-            {
-              "label": "Judith Hill",
-              "detail": "Bierhübeli",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +256,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "BE",
@@ -266,7 +266,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "212",
+          "value": "213",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -276,6 +276,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "Vieh- Beständeschau Frutigen",
+              "detail": "Frutigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vieh-bestaendeschau-frutigen/"
+            },
             {
               "label": "Wie die Eiszeiten unsere Landschaft prägten",
               "detail": "KAGA, Kies AG Aaretal, Kiesen",
@@ -329,17 +335,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
-            },
-            {
-              "label": "Judith Hill",
-              "detail": "Bierhübeli",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -378,7 +378,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "BE",
@@ -388,7 +388,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "212",
+          "value": "213",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -398,6 +398,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "Vieh- Beständeschau Frutigen",
+              "detail": "Frutigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vieh-bestaendeschau-frutigen/"
+            },
             {
               "label": "Wie die Eiszeiten unsere Landschaft prägten",
               "detail": "KAGA, Kies AG Aaretal, Kiesen",
@@ -451,17 +457,11 @@
               "detail": "Mühle Hunziken, Rubigen",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
-            },
-            {
-              "label": "Judith Hill",
-              "detail": "Bierhübeli",
-              "date": "2026-10-14",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         }
       ],
       "curatedArticles": [
@@ -500,7 +500,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

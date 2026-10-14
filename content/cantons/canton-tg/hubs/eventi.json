@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "3c770166b8329b3ce44692f07d20e5edf5b6f3899060b7d8a3626ba3b800c143",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "12cce64fed36578c9167f5ac0d7100c96935a6c9b620bc3daef9d3932b31d899",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,12 +108,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
+              "date": "2026-10-14",
+              "url": "https://www.tg.ch/news.html/485/news/80414"
+            },
+            {
               "label": "Erste «Messe 60 Plus» trifft einen Nerv",
               "date": "2026-10-07T14:43:16.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +132,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "TG",
@@ -210,7 +215,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -218,12 +223,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
+              "date": "2026-10-14",
+              "url": "https://www.tg.ch/news.html/485/news/80414"
+            },
+            {
               "label": "Erste «Messe 60 Plus» trifft einen Nerv",
               "date": "2026-10-07T14:43:16.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +247,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "TG",
@@ -320,7 +330,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -328,12 +338,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
+              "date": "2026-10-14",
+              "url": "https://www.tg.ch/news.html/485/news/80414"
+            },
+            {
               "label": "Erste «Messe 60 Plus» trifft einen Nerv",
               "date": "2026-10-07T14:43:16.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +362,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "TG",
@@ -430,7 +445,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -438,12 +453,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
+              "date": "2026-10-14",
+              "url": "https://www.tg.ch/news.html/485/news/80414"
+            },
+            {
               "label": "Erste «Messe 60 Plus» trifft einen Nerv",
               "date": "2026-10-07T14:43:16.000Z",
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +477,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }

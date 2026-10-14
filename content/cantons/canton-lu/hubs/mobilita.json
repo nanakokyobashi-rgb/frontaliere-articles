@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T10:32:27.019Z",
-  "contentHash": "f2887eead54b3faa20756ef00275548bc0727d954da8b13370ef2c87e579a461",
+  "updatedAt": "2026-10-14T20:08:23.890Z",
+  "contentHash": "5e474ea41fcd863fa2277d741080b2370c35e5e8daaf9a6dafac48846a97f3d0",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-14T05:32:06.894Z",
+      "updatedAt": "2026-10-14T12:29:53.970Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
+          "value": "3",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
@@ -53,6 +53,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 5 novembre 2026",
               "date": "2026-10-13T05:24:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Luzern-Horw Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 22 ottobre 2026",
+              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -83,16 +89,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -110,7 +110,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "en": {
       "canton": "LU",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
+          "value": "3",
           "note": "reports as of 14 October 2026"
         },
         {
@@ -191,6 +191,12 @@
               "value": "Closure",
               "detail": "until 5 November 2026",
               "date": "2026-10-13T05:24:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Luzern-Horw Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "value": "Closure",
+              "detail": "until 22 October 2026",
+              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -221,16 +227,10 @@
               "value": "Roadworks",
               "detail": "until 12 November 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
-              "value": "Roadworks",
-              "detail": "until 13 November 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -248,7 +248,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +291,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "de": {
       "canton": "LU",
@@ -301,7 +301,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
+          "value": "3",
           "note": "Meldungen vom 14. Oktober 2026"
         },
         {
@@ -327,6 +327,12 @@
               "value": "Sperrung",
               "detail": "bis 5. November 2026",
               "date": "2026-10-13T05:24:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Luzern Anschluss Luzern-Horw Sachlage: Einfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 22. Oktober 2026",
+              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -357,16 +363,10 @@
               "value": "Baustelle",
               "detail": "bis 12. November 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Parkplatz Sonnenberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.2",
-              "value": "Baustelle",
-              "detail": "bis 13. November 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -384,7 +384,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     },
     "fr": {
       "canton": "LU",
@@ -437,7 +437,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
+          "value": "3",
           "note": "signalements au 14 octobre 2026"
         },
         {
@@ -463,6 +463,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 5 novembre 2026",
               "date": "2026-10-13T05:24:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Lucerne Jonction autoroutière Lucerne-Horw Situation: entrée fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 22 octobre 2026",
+              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -493,16 +499,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle Parking Sonnenberg Situation: parking fermé travaux, longueur [km] 0.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-14T05:32:06.894Z"
+          "updatedAt": "2026-10-14T12:29:53.970Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -520,7 +520,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +565,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T20:08:23.890Z"
     }
   }
 }
