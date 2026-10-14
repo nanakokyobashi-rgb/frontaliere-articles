@@ -107907,6 +107907,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ispezione-edile-lurate': {
+    title: 'Cantiere sospeso a Lurate Caccivio: denuncia | Frontaliere Ticino',
+    description: '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantiere, sospeso, lurate, caccivio',
+    ogTitle: 'Lurate Caccivio, cantiere sospeso dai controlli',
+    ogDescription: '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
+    canonicalPath: '/articoli-frontaliere/ispezione-edile-lurate/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantiere sospeso a Lurate Caccivio: denuncia",
+      "description": "12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell'Ispettorato del Lavoro Rilevate carenze su POS, scale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ispezione-edile-lurate.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere edile a Lurate Caccivio sottoposto a controlli e sospeso."
+      },
+      "datePublished": "2026-10-14T13:27:50+00:00",
+      "dateModified": "2026-10-14T13:27:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ispezione-edile-lurate/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

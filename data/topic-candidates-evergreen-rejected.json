@@ -800,22 +800,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.admin.ch/it/newnsb/rubawc8r9zfg": {
-      "section": "svizzera",
-      "ts": 1791807477151
-    },
-    "svizzera::https://www.admin.ch/it/newnsb/ldno-vhhpxdv": {
-      "section": "svizzera",
-      "ts": 1791807495376
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/beko-europe-vertenza-aperta-a-cassinetta-sciopero-e-assemblee-sul-futuro-del-sito/2705041": {
-      "section": "frontaliere",
-      "ts": 1791809968654
-    },
-    "frontaliere::https://comozero.it/ambiente/il-creator-digitale-svizzero-stronca-il-treno-italiano-su-cibo-velocita-e-comodita-ma-ha-sbagliato-tutto": {
-      "section": "frontaliere",
-      "ts": 1791810429098
-    },
     "frontaliere::https://www.tio.ch/svizzera/economia/1956216/calo-prezzo-benzina-diesel-automobilisti": {
       "section": "frontaliere",
       "ts": 1791811742588
@@ -1095,6 +1079,14 @@
     "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/all%e2%80%99usi-un-nuovo-master-in-oncologia-e-immunologia--4162690.html": {
       "section": "frontaliere",
       "ts": 1791980257895
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/fotovoltaico-boom-di-richieste-dalle-imprese-varesine-esauriti-in-un-giorno-i-280mila-euro-del-bando/2707603": {
+      "section": "frontaliere",
+      "ts": 1791983613803
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/il-novantesimo-supermercato-tigros-apre-a-borgomanero-45-lavoratori-nel-nuovo-negozio-di-via-matteotti/2707177": {
+      "section": "frontaliere",
+      "ts": 1791983942721
     }
   }
 }

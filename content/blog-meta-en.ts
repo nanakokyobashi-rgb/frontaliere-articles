@@ -13172,6 +13172,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.disavanzo-cantonale-2027-2030.title': 'Ticino cantonal deficit expected to reach 460 million',
     'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'The 2027 budget forecasts a deficit of 98,5 million.',
     'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'View of Lake Lugano with city skyline and tranquil promenade',
+    'blog.article.ispezione-edile-lurate.title': 'Construction site suspended in Lurate Caccivio: complaint',
+    'blog.article.ispezione-edile-lurate.excerpt': 'October 12, 2026: checks at a construction site in Lurate Caccivio Inspection by the Carabinieri of Como and the Labor Inspectorate Shortcomings found regarding the POS and ladders',
+    'blog.article.ispezione-edile-lurate.imageAlt': 'Building site in Lurate Caccivio inspected and suspended after safety violations.',
 };
 
 export default blogMetaEn;
