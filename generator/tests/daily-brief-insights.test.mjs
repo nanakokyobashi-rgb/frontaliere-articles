@@ -101,7 +101,7 @@ test('fuel savings require a matching fresh Italian quote and a fresh explicit S
   const fuel = shapeFuel({ generatedAt: new Date(now - 1000).toISOString(), summary: { municipalityCount: 999, cheaperItalyCount: 888, cheaperSwissCount: 777 }, rankings: {
     cheapestItalyMunicipalities: [fresh, old], bestCrossBorderSavings: [
       { ...saving, municipality: 'Unverifiable' }, { ...saving, municipality: 'Old', italyPriceEur: 1.1 },
-      { ...saving, italyPriceEur: 1.5 }, { ...saving, swissStation: { updatedAt: `${day(20)}T00:00:00Z` } }, saving,
+      { ...saving, italyPriceEur: 1.5 }, { ...saving, cheaperCountry: 'CH' }, { ...saving, saving50LEur: 80 }, { ...saving, swissStation: { updatedAt: `${day(20)}T00:00:00Z` } }, saving,
     ],
   } }, { nowMs: now });
   assert.equal(fuel.available, true);

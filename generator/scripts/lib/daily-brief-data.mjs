@@ -354,6 +354,15 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
     // A matching municipality alone cannot attest to a different Italian quote.
     if (!ranked || round(m.italyPriceEur, 3) !== round(ranked.minPriceEur, 3)) return false;
     if (!fuelQuoteIsFresh(m.swissStation, nowMs)) return false;
+    const italyPrice = round(m.italyPriceEur, 3);
+    const swissPrice = round(m.swissPriceEur, 3);
+    if (!(italyPrice > 0) || !(swissPrice > 0)) return false;
+    const cheaperCountry = italyPrice < swissPrice ? 'IT' : italyPrice > swissPrice ? 'CH' : null;
+    if (m.cheaperCountry !== cheaperCountry) return false;
+    // Displayed prices are rounded to 0.001 EUR/L; two quote roundings can
+    // explain at most 0.05 EUR on 50 L, not an unrelated stale advantage.
+    const expectedSaving = round(Math.abs(italyPrice - swissPrice) * 50, 2);
+    if (Math.abs(round(m.saving50LEur, 2) - expectedSaving) > 0.050001) return false;
     const swissQuote = round(m.swissStation?.sp95PriceEur, 3);
     if (swissQuote != null && swissQuote !== round(m.swissPriceEur, 3)) return false;
     return true;
