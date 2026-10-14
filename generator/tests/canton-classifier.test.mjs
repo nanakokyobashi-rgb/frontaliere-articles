@@ -319,10 +319,53 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Implicazioni per gli abitanti del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per la popolazione del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
+    for (const text of [
+      'Implicazioni per i lavoratori frontalieri in Ticino',
+      'Implicazioni per i lavoratori frontalieri che lavorano in Ticino',
+      'Implicazioni per i lavoratori italiani in Ticino',
+      'Implicazioni per i frontalieri che lavorano in Ticino',
+      'Impatto per i cittadini italiani residenti in Ticino',
+      'Impatto per i lavoratori italiani che lavorano in Ticino',
+    ]) {
+      assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
+    }
     assert.deepEqual(classifier.mentionsIn('Impatto sul mercato del Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Impatto sul lavoro in Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia per il lavoro in Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('effetti sulle famiglie colpite dal terremoto in Ticino').map((m) => m.group), ['TI']);
+    const milanoAudience = 'Conseguenze per i lavoratori di Milano e per il Ticino';
+    assert.equal(classifier.mentionsItalianPlace(milanoAudience), true);
+    assert.deepEqual(codes({ title: milanoAudience }), []);
+    const prefacedMilanoAudience = 'Implicazioni concrete per i lavoratori di Milano e per il Ticino';
+    assert.equal(classifier.mentionsItalianPlace(prefacedMilanoAudience), true);
+    assert.deepEqual(codes({ title: prefacedMilanoAudience }), []);
+    const longMilanoAudience = 'Cosa cambia per i lavoratori frontalieri che lavorano a Milano e per il Ticino';
+    assert.deepEqual(classifier.mentionsIn(longMilanoAudience).map((m) => m.group), []);
+    assert.equal(classifier.mentionsItalianPlace(longMilanoAudience), true);
+    assert.deepEqual(codes({ title: longMilanoAudience }), []);
+    const invalidItalianDestination = 'Conseguenze per i lavoratori a Milano cambiano e per il Ticino';
+    assert.deepEqual(classifier.mentionsIn(invalidItalianDestination).map((m) => m.group), ['TI']);
+    const apostropheItalianDestination = "Implicazioni per i lavoratori dell'Italia e per il Ticino";
+    assert.deepEqual(classifier.mentionsIn(apostropheItalianDestination).map((m) => m.group), [], apostropheItalianDestination);
+    assert.deepEqual(codes({ title: apostropheItalianDestination }), [], apostropheItalianDestination);
+    const prefacedCoordinatedAudience = 'Effetti pratici per il Ticino, per il Vallese, per i Grigioni';
+    assert.deepEqual(classifier.mentionsIn(prefacedCoordinatedAudience).map((m) => m.group), [], prefacedCoordinatedAudience);
+    assert.deepEqual(codes({ title: prefacedCoordinatedAudience }), [], prefacedCoordinatedAudience);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
+    for (const text of [
+      'Implicazioni per il Ticino e i Grigioni e il Vallese',
+      'Implicazioni per il Ticino ed Uri e del Vallese',
+      'Implicazioni per il Ticino, i Grigioni, il Vallese, Ginevra e Berna',
+      'Conseguenze per il Canton San Gallo, Basilea Campagna, Appenzello Esterno e il Vallese',
+      'Implicazioni per le nuove misure fiscali e sociali per il Ticino',
+      'Cosa cambia per le nuove misure fiscali e sociali per il Ticino',
+      'Impatto per gli abitanti residenti e iscritti del Canton Ticino',
+      'Implicazioni per gli abitanti del Canton Ticino, dei Grigioni e del Vallese',
+      'Cosa cambia per il Ticino e i Grigioni e il Vallese',
+      'Cosa cambia per i lavoratori di Como e per il Ticino',
+    ]) {
+      assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
+    }
     // Un fatto in Ticino resta in Ticino.
     assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia in Ticino dal 2026').map((m) => m.group), ['TI']);

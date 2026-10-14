@@ -8245,7 +8245,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landschaft im Kanton Bern in der Schweiz',
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pensionskassen: Illiquide Anlagen machen 36% des Vermögens aus',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% des Vermögens sind in nicht unmittelbar handelbaren Anlagen investiert Der Anteil ist in den letzten 15 Jahren gestiegen Immobilien, Hypotheken und alternative Anlagen bieten Stabilität',
-    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pensionskassen-Büro in Zürich mit Analysten, die illiquide Portfolios prüfen',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Unternehmensinsolvenzen deutlich gestiegen, Rekord 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvente Unternehmen zwischen Januar und September Unternehmenskonkurse bei 13’660, +38,4% im Jahresvergleich Neue Eintragungen ins Register: 41’706 Privatpersonen: 8’003 Konkurse',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Blick auf den Luganer See mit Bürogebäuden und ruhigem Wasser, klarer Tag',
@@ -8255,6 +8255,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.diritti-politici-disabilita.title': 'Menschen mit geistiger Behinderung, Vernehmlassung zu den politischen Rechten',
     'blog.article.diritti-politici-disabilita.excerpt': 'Der Bundesrat eröffnet die Vernehmlassung am 14.',
     'blog.article.diritti-politici-disabilita.imageAlt': 'Schweizerisches Amtsgebäude als Symbol für politische Teilhabe',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Geldwäscherei in der Schweiz: Mehr Ressourcen und Sanktionen sind nötig',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Die Risiken bleiben in der Schweiz hoch Der Bundesrat nimmt den dritten Bericht zur Kenntnis Die GCRF formuliert acht Empfehlungen Mehr Ressourcen und Sanktionen sind nötig',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Bundesrates',
+    'blog.article.nuovo-accordo-commercio-elettronico.title': 'Neues Abkommen über den elektronischen Handel',
+    'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'Der Bundesrat eröffnet die Vernehmlassung zum ACE.',
+    'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop mit Digitalhandel‑Diagramm vor dem Luganersee',
+    'blog.article.assunzioni-svizzera-cautela-2026.title': 'Neueinstellungen in der Schweiz: Unternehmen trotz des BIP vorsichtig',
+    'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'Schweizer NEO bei +21% für Oktober–Dezember 2026 Globaler NEO +29%; europäischer Durchschnitt +20% Schweizer BIP wächst im zweiten Quartal 2026 um 1,5% Junior: 35% mehr',
+    'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Modernes Schweizer Büro mit Seeblick als Symbol für den Arbeitsmarkt',
 };
 
 export default blogMetaChDe;

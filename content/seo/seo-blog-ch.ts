@@ -104056,10 +104056,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/accordo-investimenti-saudi-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-investimenti-illiquidi-pensione-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T11:35:59+00:00",
       "dateModified": "2026-10-14T11:35:59+00:00",
@@ -104189,6 +104194,113 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-politici-disabilita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rapporto-riciclaggio-denaro-svizzera': {
+    title: 'Riciclaggio in Svizzera: servono più risorse e sanzioni',
+    description: 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, riciclaggio, servono, risorse, sanzioni',
+    ogTitle: 'Riciclaggio in Svizzera: rischi elevati e nuove misure',
+    ogDescription: 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
+    canonicalPath: '/articoli-svizzera/rapporto-riciclaggio-denaro-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riciclaggio in Svizzera: servono più risorse e sanzioni",
+      "description": "I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/accordi-svizzera-ue-consiglio-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del Consiglio federale svizzero"
+      },
+      "datePublished": "2026-10-14T16:21:05+00:00",
+      "dateModified": "2026-10-14T16:21:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rapporto-riciclaggio-denaro-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-nuovo-accordo-commercio-elettronico': {
+    title: 'Nuovo accordo per il commercio elettronico | Frontaliere Ticino',
+    description: 'Il Consiglio federale avvia la consultazione sull\'ACE. L\'accordo riunisce 67 membri dell\'OMC. La consultazione termina il 28 gennaio 2027. L\'ACE vieta i dazi',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovo, accordo, commercio, elettronico',
+    ogTitle: 'Nuovo accordo per il commercio elettronico',
+    ogDescription: 'Il Consiglio federale avvia la consultazione sull\'ACE.',
+    canonicalPath: '/articoli-svizzera/nuovo-accordo-commercio-elettronico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuovo accordo per il commercio elettronico",
+      "description": "Il Consiglio federale avvia la consultazione sull'ACE. L'accordo riunisce 67 membri dell'OMC. La consultazione termina il 28 gennaio 2027. L'ACE vieta i dazi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-nuovo-accordo-commercio-elettronico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laptop con grafico del commercio digitale davanti al lago Lugano"
+      },
+      "datePublished": "2026-10-14T17:04:53+00:00",
+      "dateModified": "2026-10-14T17:04:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/nuovo-accordo-commercio-elettronico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assunzioni-svizzera-cautela-2026': {
+    title: 'Assunzioni in Svizzera: aziende caute nonostante il PIL',
+    description: 'NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell\'1,5% nel secondo trimestre 2026 Junior: 35% più',
+    keywords: 'frontalieri, ticino, svizzera, italia, assunzioni, aziende, caute, nonostante',
+    ogTitle: 'Assunzioni Svizzera 2026: Prudenza nonostante il PIL',
+    ogDescription: 'NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell\'1,5% nel secondo trimestre 2026 Junior: 35% più',
+    canonicalPath: '/articoli-svizzera/assunzioni-svizzera-cautela-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assunzioni in Svizzera: aziende caute nonostante il PIL",
+      "description": "NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell'1,5% nel secondo trimestre 2026 Junior: 35% più",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/asb-banche-svizzera-crescita-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno in Svizzera con vista sul lago per rappresentare il mercato del lavoro"
+      },
+      "datePublished": "2026-10-14T17:31:30+00:00",
+      "dateModified": "2026-10-14T17:31:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assunzioni-svizzera-cautela-2026/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

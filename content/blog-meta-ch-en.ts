@@ -8245,7 +8245,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landscape of the Canton of Bern in Switzerland',
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pension funds: illiquid investments account for 36% of assets',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% of the assets are in investments that are not immediately tradable The share has grown over the past 15 years Real estate, mortgages and alternative investments offer stability',
-    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pension fund office in Zurich with analysts reviewing illiquid portfolios',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Illustration generated for this article',
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Corporate bankruptcies sharply on the rise, record high in 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvent companies between January and September Company bankruptcies at 13’660, +38,4% year-on-year New registrations in the register: 41’706 Individuals: 8’003 bankruptcies',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Lugano lake view with office buildings and calm water, clear day',
@@ -8255,6 +8255,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.diritti-politici-disabilita.title': 'People with intellectual disabilities, consultation on political rights',
     'blog.article.diritti-politici-disabilita.excerpt': 'The Federal Council launches the consultation on October 14, 2026 Consultation deadline: January 28 Proposed: federal vote and signing of initiatives',
     'blog.article.diritti-politici-disabilita.imageAlt': 'Swiss civic building symbolizing inclusive political participation',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Recycling in Switzerland: more resources and penalties are needed',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Risks remain high in Switzerland The Federal Council takes note of the third report The GCRF makes eight recommendations More resources and sanctions are needed',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Federal Palace in Bern, seat of the Swiss Federal Council',
+    'blog.article.nuovo-accordo-commercio-elettronico.title': 'New e-commerce agreement',
+    'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'The Federal Council launches the consultation on ACE.',
+    'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop with digital trade chart in front of Lake Lugano',
+    'blog.article.assunzioni-svizzera-cautela-2026.title': 'Hiring in Switzerland: companies cautious despite GDP',
+    'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'Swiss NEO at +21% for October–December 2026 Global NEO +29%; European average +20% Swiss GDP growing by 1,5% in the second quarter of 2026 Junior: 35% more',
+    'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Modern Swiss office with lake view representing the labor market',
 };
 
 export default blogMetaChEn;

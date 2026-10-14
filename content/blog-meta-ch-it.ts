@@ -8245,7 +8245,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paesaggio del Cantone di Berna in Svizzera',
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Casse pensioni: investimenti illiquidi al 36% del patrimonio',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': 'Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità',
-    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vista del lago di Lugano con edifici uffici e acqua calma, giorno sereno',
@@ -8255,6 +8255,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.diritti-politici-disabilita.title': 'Disabili intellettivi, consultazione sui diritti politici',
     'blog.article.diritti-politici-disabilita.excerpt': 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Scadenza della consultazione: 28 gennaio In proposta voto federale e firma di iniziative',
     'blog.article.diritti-politici-disabilita.imageAlt': 'Edificio civico svizzero, simbolo della partecipazione politica inclusiva',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Riciclaggio in Svizzera: servono più risorse e sanzioni',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Palazzo federale a Berna, sede del Consiglio federale svizzero',
+    'blog.article.nuovo-accordo-commercio-elettronico.title': 'Nuovo accordo per il commercio elettronico',
+    'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'Il Consiglio federale avvia la consultazione sull\'ACE.',
+    'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop con grafico del commercio digitale davanti al lago Lugano',
+    'blog.article.assunzioni-svizzera-cautela-2026.title': 'Assunzioni in Svizzera: aziende caute nonostante il PIL',
+    'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell\'1,5% nel secondo trimestre 2026 Junior: 35% più',
+    'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Ufficio moderno in Svizzera con vista sul lago per rappresentare il mercato del lavoro',
 };
 
 export default blogMetaChIt;

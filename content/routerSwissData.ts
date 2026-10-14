@@ -2774,6 +2774,9 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'fallimenti-aziendali-svizzera-aumento': { it: 'fallimenti-aziendali-svizzera-aumento', en: 'corporate-bankruptcies-sharply-on-the-rise-record-high-in-2025-2026', de: 'unternehmensinsolvenzen-deutlich-gestiegen-rekord-2025-2026', fr: 'faillites-d-entreprises-en-forte-hausse-record-en-2025-2026' },
  'prezzi-auto-nuove-usate-calo': { it: 'prezzi-auto-nuove-usate-calo', en: 'new-and-used-car-prices-falling-thanks-to-chinese-brands', de: 'preise-fur-neu-und-gebrauchtwagen-sinken-dank-chinesischer-marken', fr: 'les-prix-des-voitures-neuves-et-d-occasion-baissent-grace-aux-marques-chinoises' },
  'diritti-politici-disabilita': { it: 'diritti-politici-disabilita', en: 'political-rights-intellectual-disability', de: 'politische-rechte-geistige-behinderung', fr: 'droits-politiques-handicap-intellectuel' },
+ 'rapporto-riciclaggio-denaro-svizzera': { it: 'rapporto-riciclaggio-denaro-svizzera', en: 'switzerland-money-laundering-report', de: 'schweiz-geldwaesche-bericht', fr: 'suisse-rapport-blanchiment-argent' },
+ 'nuovo-accordo-commercio-elettronico': { it: 'nuovo-accordo-commercio-elettronico', en: 'new-agreement-electronic-commerce', de: 'neues-abkommen-elektronischer-handel', fr: 'nouvel-accord-commerce-electronique' },
+ 'assunzioni-svizzera-cautela-2026': { it: 'assunzioni-svizzera-cautela-2026', en: 'switzerland-hiring-caution-2026', de: 'schweiz-einstellungen-vorsicht-2026', fr: 'suisse-recrutement-prudence-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

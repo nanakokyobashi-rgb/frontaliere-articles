@@ -106717,10 +106717,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-teatro-intred-varese-stagione-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-fabio-de-luigi-biol-varese.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Pubblico al Teatro di Varese durante lo spettacolo di Fabio De Luigi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T00:24:02+00:00",
       "dateModified": "2026-10-13T00:24:02+00:00",
@@ -107675,16 +107675,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-bollettino-frontaliere-2026-10-14': {
     title: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
-    description: 'Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    description: 'Bollettino frontalieri del 14 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
     ogTitle: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
-    ogDescription: 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    ogDescription: 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.',
     canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-14/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026",
-      "description": "Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "description": "Bollettino frontalieri del 14 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -107848,10 +107848,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-como-pass-auto-rinnovo-annuale.webp`,
+        "url": `${BASE_URL}/images/blog/article-arresti-auto-como-minacce.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Strada urbana vicino al confine con auto parcheggiate e autosilo all'alba"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T12:24:36+00:00",
       "dateModified": "2026-10-14T12:24:36+00:00",
@@ -107887,10 +107887,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-deficit-comune-preventivo-2027.webp`,
+        "url": `${BASE_URL}/images/blog/article-disavanzo-cantonale-2027-2030.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Vista del lago di Lugano con skyline cittadino e passeggiata tranquilla"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T12:50:16+00:00",
       "dateModified": "2026-10-14T12:50:16+00:00",
@@ -107960,6 +107960,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://drive.google.com/drive/folders/1nR9HcOlLeFGJ0_KfNVwsFfuARTujcNup?usp=sharing",
+        "copyrightNotice": "© Football Flag / Swiss American Football Verband (SAFV)",
+        "license": "Uso editoriale con attribuzione a Noa Monn",
+        "creator": { "@type": "Person", "name": "Noa Monn" },
+        "creditText": "Noa Monn",
         "url": `${BASE_URL}/images/blog/asvz-blackbirds-champions-bowl-2026.webp`,
         "width": 1200,
         "height": 675,
@@ -108015,6 +108020,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fibra-ottica-145-comuni-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-soccorsi-coda-autostrada-lombarda': {
+    title: 'Incidente sulla A8 tra Castellanza e Busto: lunga coda',
+    description: 'Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un\'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, sulla, castellanza, busto',
+    ogTitle: 'Incidente A8: coda tra Castellanza e Busto Arsizio',
+    ogDescription: 'Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un\'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale',
+    canonicalPath: '/articoli-frontaliere/soccorsi-coda-autostrada-lombarda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente sulla A8 tra Castellanza e Busto: lunga coda",
+      "description": "Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Coda sull'autostrada A8 tra Castellanza e Busto Arsizio dopo un incidente"
+      },
+      "datePublished": "2026-10-14T15:46:26+00:00",
+      "dateModified": "2026-10-14T15:46:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/soccorsi-coda-autostrada-lombarda/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
