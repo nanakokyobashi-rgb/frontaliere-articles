@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/f3icqi3q6dhy": {
-    "articleId": "giornata-informativa-esercito-donne",
-    "ts": "2026-09-09T13:28:14.375Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/tcvrfkjrt6rn": {
     "articleId": "legge-militare-struttura-condotta-2026",
     "ts": "2026-09-09T13:43:52.956Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/vetture-nuove-e-usate%2c-prezzi-medi-in-calo-grazie-ai-marchi-cinesi/92214642": {
     "articleId": "prezzi-auto-nuove-usate-calo",
     "ts": "2026-10-14T13:53:50.845Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4162597": {
+    "articleId": "diritti-politici-disabilita",
+    "ts": "2026-10-14T15:17:54.350Z",
     "keyForm": 2
   }
 }

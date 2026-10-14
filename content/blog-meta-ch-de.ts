@@ -8252,6 +8252,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.prezzi-auto-nuove-usate-calo.title': 'Preise für Neu- und Gebrauchtwagen sinken dank chinesischer Marken',
     'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Im dritten Quartal sinken die Durchschnittspreise für Neuwagen.',
     'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Schweizer Autohaus-Lot mit neuen und gebrauchten Fahrzeugen und sichtbaren Preisschildern',
+    'blog.article.diritti-politici-disabilita.title': 'Menschen mit geistiger Behinderung, Vernehmlassung zu den politischen Rechten',
+    'blog.article.diritti-politici-disabilita.excerpt': 'Der Bundesrat eröffnet die Vernehmlassung am 14.',
+    'blog.article.diritti-politici-disabilita.imageAlt': 'Schweizerisches Amtsgebäude als Symbol für politische Teilhabe',
 };
 
 export default blogMetaChDe;

@@ -800,14 +800,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/economia/1956216/calo-prezzo-benzina-diesel-automobilisti": {
-      "section": "frontaliere",
-      "ts": 1791811742588
-    },
-    "frontaliere::https://comozero.it/attualita/uber-si-espande-apre-la-societa-di-google-guida-autonoma-la-svizzera-prepara-la-fine-dei-tassisti-in-5-anni": {
-      "section": "frontaliere",
-      "ts": 1791811975502
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/in-ticino-ci-sono-17-nuovi-falegnami-444478": {
       "section": "frontaliere",
       "ts": 1791818538235
@@ -1087,6 +1079,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/il-novantesimo-supermercato-tigros-apre-a-borgomanero-45-lavoratori-nel-nuovo-negozio-di-via-matteotti/2707177": {
       "section": "frontaliere",
       "ts": 1791983942721
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/casse-pensioni%2c-pi%c3%b9-investimenti-illiquidi%3a-opportunit%c3%a0-e-rischi/92215997": {
+      "section": "frontaliere",
+      "ts": 1791989471570
+    },
+    "frontaliere::https://www.rsi.ch/s/4160788": {
+      "section": "frontaliere",
+      "ts": 1791990092032
     }
   }
 }
