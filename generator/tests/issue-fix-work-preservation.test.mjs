@@ -114,6 +114,9 @@ test('il backstop FIX_OUTCOME non sovrascrive il marker granulare dell\'agente',
       'completarlo.',
   );
   assert.match(s, /continue-on-error: true/, 'la telemetria non deve mai far fallire il job');
+  assert.match(s, /DAILY_ITEM_ID: \$\{\{ steps\.tier\.outputs\.selected_item_id \}\}/);
+  assert.match(s, /FOLLOWUP_ITEM: %s/);
+  assert.match(s, /item_marker/);
 });
 
 test('il backstop considera solo marker creati dal run corrente', () => {
@@ -209,8 +212,10 @@ test('il capability guard workflows legge solo il FU daily scelto e annota il ve
   const guard = step('Pre-flight — workflows-scope capability guard (zero-Claude)');
   assert.ok(input, 'manca lo snapshot per-item prima del capability guard');
   assert.ok(guard, 'manca il capability guard workflows');
-  assert.match(input, /parseFollowupItems\(issue\.body \|\| ''\)/);
-  assert.match(input, /candidate\.state === 'open'/);
+  assert.match(input, /dailyBucketScopeDecision\(issue\.title \|\| '', issue\.body \|\| ''\)/);
+  assert.match(input, /const item = dailyScope\.item/);
+  assert.match(input, /info && dailyScope\.valid && dailyScope\.terminal/);
+  assert.match(input, /daily_scope_valid=/);
   assert.match(input, /body: info && item \? item\.raw : issue\.body/);
   assert.match(guard, /ISSUE_FIX_SNAPSHOT_FILE: \$\{\{ steps\.scope_input\.outputs\.scope_snapshot_file \}\}/);
   assert.match(guard, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);

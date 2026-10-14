@@ -81,12 +81,8 @@ import { pinnedBy } from './manifest-pinned-issues.mjs';
 import { conflictHandoffOriginPr } from './check-issue-already-resolved.mjs';
 import {
   bucketState,
-  dailyKeyFromBucketBody,
   dailyBucketInfo,
-  hasDailyBucketRepositoryConsistency,
-  hasStableItemIds,
-  hasStableItemIdsForDailyKey,
-  hasUnterminatedMarkdownFence,
+  dailyBucketScopeDecision,
   isDailyBucketTitle,
   followupItemMarkers,
   parseFollowupItems,
@@ -381,29 +377,11 @@ export function isDailyBucketCollecting(issue) {
  * while the fixer receives exactly one stable item at a time through the workflow.
  */
 export function dailyBucketQueueDecision(issue) {
-  const info = dailyBucketInfo(issue?.title || '');
-  if (!info) return { eligible: true, reason: null, item: null };
-  if (hasUnterminatedMarkdownFence(issue?.body || '')) {
-    return { eligible: false, reason: 'unterminated-markdown-fence', item: null };
-  }
-  if (bucketState(issue?.body || '') !== 'sealed') return { eligible: false, reason: 'bucket-collecting', item: null };
-  if (dailyKeyFromBucketBody(issue?.body || '') !== info.dailyKey) {
-    return { eligible: false, reason: 'mismatched-daily-key', item: null };
-  }
-  if (!hasDailyBucketRepositoryConsistency(issue?.body || '', info.targetRepository)) {
-    return { eligible: false, reason: 'mismatched-target-repository', item: null };
-  }
-  const items = parseFollowupItems(issue?.body || '');
-  if (info.itemCount !== items.length) {
-    return { eligible: false, reason: 'mismatched-item-count', item: null };
-  }
-  if (!hasStableItemIds(issue?.body || '')) return { eligible: false, reason: 'missing-stable-item-id', item: null };
-  if (!hasStableItemIdsForDailyKey(issue?.body || '', info.dailyKey)) {
-    return { eligible: false, reason: 'mismatched-stable-item-id', item: null };
-  }
-  const item = selectFirstOpenItem(issue?.body || '');
-  return item
-    ? { eligible: true, reason: null, item }
+  const scope = dailyBucketScopeDecision(issue?.title || '', issue?.body || '');
+  if (!scope.isDaily) return { eligible: true, reason: null, item: null };
+  if (!scope.valid) return { eligible: false, reason: scope.reason, item: null };
+  return scope.item
+    ? { eligible: true, reason: null, item: scope.item }
     : { eligible: false, reason: 'no-open-item', item: null };
 }
 
@@ -1107,9 +1085,9 @@ function dailyBucketRouting(body) {
  * `handled: true` with a non-mutating action is deliberate: an unattributed or
  * malformed verdict must not fall through to issue-wide close/flag behavior.
  */
-export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody) {
+export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody, { verifiedMergedItemId = null } = {}) {
   if (!dailyBucketInfo(issue?.title || '')
-      || (!NON_RETRYABLE.has(outcome) && !DAILY_TRANSIENT_OUTCOMES.has(outcome))) {
+      || (!NON_RETRYABLE.has(outcome) && !DAILY_TRANSIENT_OUTCOMES.has(outcome) && outcome !== 'pr-created')) {
     return { handled: false, action: 'not-applicable' };
   }
   const validation = dailyBucketQueueDecision(issue);
@@ -1123,6 +1101,15 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
   const item = items.find((candidate) => candidate.id?.toUpperCase() === itemId);
   if (!item || !item.state) {
     return { handled: true, action: 'item-missing', itemId, reason: 'FU assente o privo di State nel bucket' };
+  }
+  if (outcome === 'pr-created'
+      && String(verifiedMergedItemId || '').toUpperCase() !== itemId) {
+    return {
+      handled: true,
+      action: 'awaiting-merged-pr',
+      itemId,
+      reason: 'nessuna PR mergiata con marker Follow-up item coincidente dopo il FIX_OUTCOME',
+    };
   }
   if (DAILY_TRANSIENT_OUTCOMES.has(outcome)) {
     // Il retry agisce sulla label aggregata, che seleziona sempre il primo FU
@@ -1160,7 +1147,18 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
     };
   }
 
-  const state = outcome === 'already-fixed' ? 'done' : 'blocked';
+  if (outcome !== 'pr-created'
+      && validation.item
+      && validation.item.id?.toUpperCase() !== itemId) {
+    return {
+      handled: true,
+      action: 'stale-attribution',
+      itemId,
+      reason: 'FOLLOWUP_ITEM non coincide con il primo FU aperto',
+    };
+  }
+
+  const state = outcome === 'already-fixed' || outcome === 'pr-created' ? 'done' : 'blocked';
   const body = updateFollowupItemState(issue.body, itemId, state);
   if (body === null) {
     return { handled: true, action: 'item-uneditable', itemId, reason: 'State FU non aggiornabile in modo sicuro' };
@@ -3417,46 +3415,72 @@ function editChecked(num, { add = [], remove = [] }) {
 }
 
 /**
- * Replace a daily issue body only if the exact snapshot we parsed is still live.
- * GitHub issue edits have no body CAS; all automated daily-body writers must
- * therefore stay in the shared repo-scoped `followup-daily-` Actions mutex.
- * The fresh-read comparison is an additional stale-snapshot guard, not CAS.
+ * Recompose one item transition from a fresh body when a producer has changed
+ * the bucket. GitHub's issue endpoint does not support conditional PATCH, so
+ * the re-read/abort/recompose guard is paired with the shared repo-scoped `followup-daily-` Actions mutex
+ * used by every automated body writer. A bounded retry never writes a
+ * stale full-body snapshot over a newly appended FU.
  */
-function updateDailyIssueBody(issue, nextBody) {
-  const expectedTitle = String(issue?.title || '');
-  const expectedBody = String(issue?.body || '');
-  if (String(nextBody || '') === expectedBody) return true;
-  if (DRY) {
-    console.log(`[dry] update daily bucket body #${issue.number} (item State only)`);
-    return true;
-  }
-
-  const latest = (() => {
+function updateDailyIssueBody(issue, composeTransition, expectedTransition) {
+  const number = Number(issue?.number);
+  const sameDecision = (left, right) => left?.action === right?.action
+    && left?.itemId === right?.itemId
+    && left?.state === right?.state;
+  const readLatest = () => {
     try {
-      return gh(['issue', 'view', String(issue.number), '--repo', REPO, '--json', 'title,body']);
+      return gh(['issue', 'view', String(number), '--repo', REPO, '--json', 'title,body']);
     } catch {
       return null;
     }
-  })();
-  if (!latest || String(latest.title || '') !== expectedTitle || String(latest.body || '') !== expectedBody) {
-    console.log(`DAILY-OUTCOME-SKIP #${issue.number}: titolo/body cambiato o illeggibile prima della scrittura.`);
-    return false;
+  };
+  if (DRY) {
+    const transition = composeTransition(issue);
+    console.log(`[dry] update daily bucket body #${number} (item State only)`);
+    return { ok: true, transition };
   }
 
-  const file = `/tmp/frontaliere-daily-outcome-${process.pid}-${randomUUID()}.md`;
-  try {
-    writeFileSync(file, String(nextBody || ''), { mode: 0o600 });
-    gh(['issue', 'edit', String(issue.number), '--repo', REPO, '--body-file', file], {
-      json: false,
-      stage: 'daily item outcome body',
-    });
-    return true;
-  } catch (error) {
-    console.log(`::warning::DAILY-OUTCOME #${issue.number}: aggiornamento body fallito: ${String(error).slice(0, 160)}`);
-    return false;
-  } finally {
-    try { rmSync(file, { force: true }); } catch {}
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const latest = readLatest();
+    if (!latest || typeof latest.body !== 'string') {
+      console.log(`DAILY-OUTCOME-SKIP #${number}: titolo/body live non leggibile.`);
+      return { ok: false, transition: null };
+    }
+    const transition = composeTransition(latest);
+    if (!transition?.handled || !sameDecision(transition, expectedTransition)) {
+      console.log(`DAILY-OUTCOME-SKIP #${number}: scope/esito cambiato durante il re-read; nuova composizione al prossimo tick.`);
+      return { ok: false, transition };
+    }
+    const expectedBody = String(latest.body || '');
+    const nextBody = transition.body;
+    if (typeof nextBody !== 'string' || nextBody === expectedBody) return { ok: true, transition };
+
+    // Re-read immediately before the full-body write. If a producer appended
+    // or changed an item, retry from that newer snapshot instead of replacing it.
+    const beforeWrite = readLatest();
+    if (!beforeWrite || typeof beforeWrite.body !== 'string') {
+      console.log(`DAILY-OUTCOME-SKIP #${number}: body non verificabile prima della scrittura.`);
+      return { ok: false, transition: null };
+    }
+    if (String(beforeWrite.title || '') !== String(latest.title || '')
+        || String(beforeWrite.body || '') !== expectedBody) continue;
+
+    const file = `/tmp/frontaliere-daily-outcome-${process.pid}-${randomUUID()}.md`;
+    try {
+      writeFileSync(file, nextBody, { mode: 0o600 });
+      gh(['issue', 'edit', String(number), '--repo', REPO, '--body-file', file], {
+        json: false,
+        stage: 'daily item outcome body',
+      });
+      return { ok: true, transition };
+    } catch (error) {
+      console.log(`::warning::DAILY-OUTCOME #${number}: aggiornamento body fallito: ${String(error).slice(0, 160)}`);
+      return { ok: false, transition };
+    } finally {
+      try { rmSync(file, { force: true }); } catch {}
+    }
   }
+  console.log(`DAILY-OUTCOME-SKIP #${number}: body cambiato durante tre re-read; nessuna sovrascrittura.`);
+  return { ok: false, transition: null };
 }
 
 /**
@@ -3969,6 +3993,26 @@ export function selectLatestMergedFixPr(prs) {
   return best;
 }
 
+/** Select only a newly merged PR whose explicit daily item marker matches the
+ * outcome being reconciled. A merge for a sibling FU is not delivery evidence. */
+export function selectMergedDailyItemPr(prs, itemId, outcomeAt) {
+  const wanted = String(itemId || '').toUpperCase();
+  const cutoff = Number(outcomeAt);
+  if (!FOLLOWUP_ITEM_ID_SINGLE_RE.test(wanted) || !Number.isFinite(cutoff)) return null;
+  let best = null;
+  for (const pr of Array.isArray(prs) ? prs : []) {
+    const mergedAt = Date.parse(String(pr?.mergedAt || ''));
+    const markers = followupItemMarkers(pr?.body || '');
+    if (!Number.isFinite(mergedAt) || mergedAt <= cutoff
+        || markers.length !== 1 || markers[0] !== wanted) continue;
+    if (best && mergedAt <= best.mergedAt) continue;
+    const number = Number(pr?.number);
+    if (!Number.isInteger(number) || number <= 0) continue;
+    best = { number, mergedAt, itemId: wanted };
+  }
+  return best;
+}
+
 /** Ultima PR fix MERGIATA di questa issue: `{mergedAt, mergeSha, files,
  * filesKnown}` (epoch ms, SHA del commit di merge, path modificati), o null se
  * non ne esiste nessuna / errore gh. La timeline REST segue i cross-reference
@@ -4026,6 +4070,41 @@ function mergedFixPr(num) {
     ...linked,
     ...(Array.isArray(branchFallback) ? branchFallback : []),
   ]);
+}
+
+/** A daily `pr-created` outcome advances only after its own marked PR merges. */
+function mergedDailyItemPr(num, itemId, outcomeAt) {
+  const linked = [];
+  try {
+    const raw = gh([
+      'api',
+      `repos/${REPO}/issues/${num}/timeline?per_page=100`,
+      '--paginate',
+      '--slurp',
+    ]);
+    for (const prNumber of linkedPullRequestNumbers(raw)) {
+      try {
+        linked.push(gh([
+          'pr', 'view', String(prNumber), '--repo', REPO,
+          '--json', 'number,mergedAt,body',
+        ]));
+      } catch {
+        // One inaccessible historical PR cannot hide a matching delivery.
+      }
+    }
+  } catch {
+    // The deterministic branch query below is a fallback, never a false proof.
+  }
+  try {
+    const branchFallback = gh([
+      'pr', 'list', '--repo', REPO, '--head', `fix/issue-${num}`,
+      '--state', 'merged', '--json', 'number,mergedAt,body', '--limit', '20',
+    ]);
+    if (Array.isArray(branchFallback)) linked.push(...branchFallback);
+  } catch {
+    // Timeline candidates remain usable if the legacy branch lookup fails.
+  }
+  return selectMergedDailyItemPr(linked, itemId, outcomeAt);
 }
 
 function labelAddedAt(num, label) {
@@ -5046,9 +5125,14 @@ export function runDrain() {
       // dev'essere `detectAlreadyResolved()` al giro dopo, sul corpo, non questo
       // ramo sulla provenienza. `mergedFixPrAt()` costa una chiamata `gh`, per
       // questo sta DOPO il test su `outcome`, che è già in memoria.
-      const deliveredParked = outcome === 'pr-created' && mergedFixPrAt(iss.number) !== null;
+      const dailyIssue = dailyBucketInfo(iss.title || '') !== null;
+      const canUnparkWithoutVerdict = outcome === null
+        && (!dailyIssue || dailyBucketQueueDecision(iss).eligible);
+      const deliveredParked = !dailyIssue
+        && outcome === 'pr-created'
+        && mergedFixPrAt(iss.number) !== null;
 
-      if ((outcome === null || deliveredParked) && !isUnparkedOnce(iss)) {
+      if ((canUnparkWithoutVerdict || deliveredParked) && !isUnparkedOnce(iss)) {
         attempted++;
         if (DRY) {
           succeeded++;
@@ -5083,8 +5167,8 @@ export function runDrain() {
       // A daily issue is only a container. Apply an attributable terminal
       // outcome to its FU item, then let the next open item re-enter the queue;
       // never close/flag/defer the whole bucket from one item's verdict.
-      if (dailyBucketInfo(iss.title || '')
-          && (NON_RETRYABLE.has(outcome) || DAILY_TRANSIENT_OUTCOMES.has(outcome))) {
+      if (dailyIssue
+          && (NON_RETRYABLE.has(outcome) || DAILY_TRANSIENT_OUTCOMES.has(outcome) || outcome === 'pr-created')) {
         let liveIssue = null;
         try {
           liveIssue = gh(['issue', 'view', String(iss.number), '--repo', REPO, '--json', 'title,body']);
@@ -5093,7 +5177,17 @@ export function runDrain() {
           console.log(`DAILY-OUTCOME-SKIP #${iss.number}: body live non leggibile, nessuna uscita issue-wide.`);
           continue;
         }
-        const transition = dailyBucketOutcomeTransition(liveIssue, outcome, outcomeEntry.comment?.body);
+        const outcomeBody = outcomeEntry.comment?.body;
+        const mergedItemPr = outcome === 'pr-created'
+          ? mergedDailyItemPr(iss.number, dailyOutcomeItemId(outcomeBody), outcomeEntry.at)
+          : null;
+        const composeTransition = (snapshot) => dailyBucketOutcomeTransition(
+          snapshot,
+          outcome,
+          outcomeBody,
+          { verifiedMergedItemId: mergedItemPr?.itemId || null },
+        );
+        let transition = composeTransition(liveIssue);
         if (!transition.handled) continue;
         if (outcome === 'overlap-skip' && transition.action === 'retry') {
           const comments = issueComments(iss.number);
@@ -5104,8 +5198,8 @@ export function runDrain() {
           }
         }
         attempted++;
-        const outcomeConsumed = transition.action === 'outcome-consumed';
-        const action = outcomeConsumed ? transition.reconcileAction : transition.action;
+        let outcomeConsumed = transition.action === 'outcome-consumed';
+        let action = outcomeConsumed ? transition.reconcileAction : transition.action;
         if (!['retry', 'requeue', 'settled', 'blocked'].includes(action)) {
           console.log(`DAILY-OUTCOME-SKIP #${iss.number} (${transition.action}${transition.reason ? `: ${transition.reason}` : ''}) → nessuna transizione issue-wide.`);
           continue;
@@ -5128,8 +5222,21 @@ export function runDrain() {
         // `outcome-consumed` means the body already contains the item State.
         // The previous tick may still have failed at the label edit, so keep
         // reconciling labels from that durable body state without rewriting it.
-        if (!outcomeConsumed
-            && !updateDailyIssueBody({ ...iss, title: liveIssue.title, body: liveIssue.body }, transition.body)) continue;
+        if (!outcomeConsumed) {
+          const write = updateDailyIssueBody(
+            { ...iss, title: liveIssue.title, body: liveIssue.body },
+            composeTransition,
+            transition,
+          );
+          if (!write.ok) continue;
+          transition = write.transition;
+          outcomeConsumed = transition.action === 'outcome-consumed';
+          action = outcomeConsumed ? transition.reconcileAction : transition.action;
+          if (!['retry', 'requeue', 'settled', 'blocked'].includes(action)) {
+            console.log(`DAILY-OUTCOME-SKIP #${iss.number} (ricomposizione ${transition.action}${transition.reason ? `: ${transition.reason}` : ''}) → nessuna transizione issue-wide.`);
+            continue;
+          }
+        }
 
         const attemptLabels = names(iss).filter((name) => /^fu-(?:attempt|reparked):\d+$/.test(name));
         // A blocked item with no next open FU is a technical terminal state for

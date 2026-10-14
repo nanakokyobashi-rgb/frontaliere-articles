@@ -27,8 +27,9 @@ import {
   dailyOutcomeItemId,
   detectDataPending,
   parentDequeueCommentDecision,
+  selectMergedDailyItemPr,
 } from '../../scripts/ci/followup-drainer.mjs';
-import { isDailyBucketTitle } from '../../scripts/ci/followup-resolution-match.mjs';
+import { dailyBucketScopeDecision, isDailyBucketTitle } from '../../scripts/ci/followup-resolution-match.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const DRAINER = readFileSync(path.join(ROOT, 'scripts/ci/followup-drainer.mjs'), 'utf8');
@@ -151,6 +152,84 @@ const DAILY_OUTCOME_BODY = [
   '- State: blocked',
   '- Suggested action: thirdAcceptanceToken()',
 ].join('\n');
+
+test('il preflight daily distingue item open, in-progress, terminale e bucket malformato', () => {
+  const open = dailyBucketScopeDecision(DAILY_OUTCOME_TITLE, DAILY_OUTCOME_BODY);
+  assert.equal(open.valid, true);
+  assert.equal(open.terminal, false);
+  assert.equal(open.item.id, 'FU-2026-10-02-001');
+
+  const inProgressBody = DAILY_OUTCOME_BODY.replaceAll('- State: open', '- State: in-progress');
+  const inProgress = dailyBucketScopeDecision(DAILY_OUTCOME_TITLE, inProgressBody);
+  assert.equal(inProgress.valid, true);
+  assert.equal(inProgress.terminal, false);
+  assert.equal(inProgress.reason, 'item-in-progress');
+
+  const settledBody = DAILY_OUTCOME_BODY
+    .replaceAll('- State: open', '- State: done');
+  const settled = dailyBucketScopeDecision(DAILY_OUTCOME_TITLE, settledBody);
+  assert.equal(settled.valid, true);
+  assert.equal(settled.terminal, true);
+
+  const empty = dailyBucketScopeDecision(DAILY_OUTCOME_TITLE, '');
+  assert.equal(empty.valid, false);
+  assert.equal(empty.terminal, false);
+  assert.equal(empty.reason, 'bucket-not-sealed');
+
+  const malformed = dailyBucketScopeDecision(
+    DAILY_OUTCOME_TITLE,
+    DAILY_OUTCOME_BODY.replace('- State: open', '- State: unknown'),
+  );
+  assert.equal(malformed.valid, false);
+  assert.equal(malformed.terminal, false);
+  assert.equal(malformed.reason, 'invalid-item-state');
+});
+
+test('un pr-created daily attende la PR mergiata dello stesso FU e avanza solo quel FU', () => {
+  const outcome = '<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: pr-created -->';
+  const waiting = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'pr-created',
+    outcome,
+  );
+  assert.equal(waiting.action, 'awaiting-merged-pr');
+
+  const siblingProof = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'pr-created',
+    outcome,
+    { verifiedMergedItemId: 'FU-2026-10-02-002' },
+  );
+  assert.equal(siblingProof.action, 'awaiting-merged-pr');
+
+  const merged = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'pr-created',
+    outcome,
+    { verifiedMergedItemId: 'FU-2026-10-02-001' },
+  );
+  assert.equal(merged.action, 'requeue');
+  assert.equal(merged.itemId, 'FU-2026-10-02-001');
+  assert.equal(merged.state, 'done');
+  assert.equal(merged.nextItem.id, 'FU-2026-10-02-002');
+  assert.match(merged.body, /### FU-2026-10-02-001[\s\S]*?- State: done/);
+});
+
+test('la prova merged daily richiede marker FU esatto e merge successivo al verdetto', () => {
+  const cutoff = Date.parse('2026-10-02T12:00:00Z');
+  const selected = selectMergedDailyItemPr([
+    { number: 91, mergedAt: '2026-10-02T11:59:00Z', body: 'Follow-up item: FU-2026-10-02-001' },
+    { number: 92, mergedAt: '2026-10-02T12:02:00Z', body: 'Follow-up item: FU-2026-10-02-002' },
+    { number: 93, mergedAt: '2026-10-02T12:03:00Z', body: 'Follow-up item: FU-2026-10-02-001' },
+    { number: 94, mergedAt: '2026-10-02T12:04:00Z', body: 'Follow-up item: FU-2026-10-02-001\nFollow-up item: FU-2026-10-02-002' },
+  ], 'FU-2026-10-02-001', cutoff);
+  assert.deepEqual(selected, {
+    number: 93,
+    mergedAt: Date.parse('2026-10-02T12:03:00Z'),
+    itemId: 'FU-2026-10-02-001',
+  });
+  assert.equal(selectMergedDailyItemPr([], 'FU-2026-10-02-001', null), null);
+});
 
 test('il verdetto daily cambia solo l’item attribuito e riaccoda il successivo', () => {
   const outcomeComment = [
@@ -368,12 +447,16 @@ test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide'
   const stage = DRAINER.slice(start, end);
   assert.ok(start >= 0 && end > start, 'stadi VERDICT-EXIT non trovati');
   assert.match(stage, /latestFixOutcomeCommentFromComments\(comments\)/);
-  assert.match(stage, /dailyBucketOutcomeTransition\(liveIssue, outcome, outcomeEntry\.comment\?\.body\)/);
+  assert.match(stage, /const composeTransition = \(snapshot\) => dailyBucketOutcomeTransition\(/);
+  assert.match(stage, /let transition = composeTransition\(liveIssue\)/);
   assert.match(stage, /dailyOverlapRetryHold\(comments, readOverlapBlocker\)/);
-  assert.match(stage, /const action = outcomeConsumed \? transition\.reconcileAction : transition\.action/);
+  assert.match(stage, /let action = outcomeConsumed \? transition\.reconcileAction : transition\.action/);
   assert.match(stage, /labelsNeedRepair/);
   assert.match(stage, /loadOpenPrsForDailyMutex\(\)/);
   assert.match(stage, /updateDailyIssueBody\(/);
+  assert.match(stage, /outcome === 'pr-created'/);
+  assert.match(stage, /mergedDailyItemPr\(iss\.number, dailyOutcomeItemId\(outcomeBody\), outcomeEntry\.at\)/);
+  assert.match(stage, /verifiedMergedItemId: mergedItemPr\?\.itemId \|\| null/);
   assert.match(stage, /if \(!outcomeConsumed\) commentIssue\(iss\.number, note, 'daily item outcome comment'\)/);
   assert.match(stage, /const add = action === 'requeue' \|\| action === 'retry' \? \[LBL_QUEUED\]/);
   assert.ok(stage.indexOf('dailyBucketOutcomeTransition(') < stage.indexOf('verdictExitDecision('));
@@ -394,8 +477,11 @@ test('tutti i writer automatici del body daily condividono un mutex repo-scoped 
     const executableSource = source.replace(/^[ \t]*#.*$/gm, '');
     assert.match(executableSource, /concurrency:\s*\n\s+group: followup-daily-\$\{\{ github\.repository \}\}\s*\n\s+cancel-in-progress: false/, `${file}: mutex condiviso richiesto`);
   }
-  assert.match(DRAINER, /GitHub issue edits have no body CAS/);
+  assert.match(DRAINER, /issue endpoint does not support conditional PATCH/);
   assert.match(DRAINER, /shared repo-scoped `followup-daily-` Actions mutex/);
+  assert.match(DRAINER, /for \(let attempt = 0; attempt < 3; attempt\+\+\)/);
+  assert.match(DRAINER, /composeTransition\(latest\)/);
+  assert.match(DRAINER, /body cambiato durante tre re-read/);
   assert.doesNotMatch(DRAINER, /prima della scrittura CAS/);
 });
 

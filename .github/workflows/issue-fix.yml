@@ -325,16 +325,14 @@ jobs:
           gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json number,title,body,labels,state > "$CTX_DIR/issue.json"
           node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" >> "$GITHUB_OUTPUT" <<'NODE'
           import fs from 'node:fs';
-          import { dailyBucketInfo, parseFollowupItems } from './scripts/ci/followup-resolution-match.mjs';
+          import { dailyBucketInfo, dailyBucketScopeDecision } from './scripts/ci/followup-resolution-match.mjs';
 
           const [issuePath, scopePath, issueNumber, repository] = process.argv.slice(2);
           const issue = JSON.parse(fs.readFileSync(issuePath, 'utf8'));
           const info = dailyBucketInfo(issue.title || '');
-          const items = info ? parseFollowupItems(issue.body || '') : [];
-          const item = info
-            ? items.find((candidate) => candidate.id && candidate.state === 'open')
-            : null;
-          const dailyTerminal = Boolean(info && !item);
+          const dailyScope = dailyBucketScopeDecision(issue.title || '', issue.body || '');
+          const item = dailyScope.item;
+          const dailyTerminal = Boolean(info && dailyScope.valid && dailyScope.terminal);
 
           const scoped = {
             target: { issue: Number(issueNumber), repo: repository },
@@ -349,6 +347,8 @@ jobs:
           console.log(`is_daily_bucket=${info ? 'true' : 'false'}`);
           console.log(`selected_item_id=${item?.id || ''}`);
           console.log(`daily_terminal=${dailyTerminal ? 'true' : 'false'}`);
+          console.log(`daily_scope_valid=${dailyScope.valid ? 'true' : 'false'}`);
+          if (info && !dailyScope.valid) console.log(`::warning::daily bucket non terminale perché scope malformato: ${dailyScope.reason}`);
           console.log(`scope_snapshot_file=${scopePath}`);
           NODE
 
@@ -1606,6 +1606,7 @@ jobs:
           REPO: ${{ github.repository }}
           ISSUE: ${{ github.event.issue.number }}
           ACTION_OUTCOME: ${{ steps.codex_fix.outcome }}
+          DAILY_ITEM_ID: ${{ steps.tier.outputs.selected_item_id }}
         run: |
           set -uo pipefail
           action_outcome="${ACTION_OUTCOME:-}"
@@ -1647,7 +1648,11 @@ jobs:
               ;;
           esac
           echo "FIX_OUTCOME issue=$ISSUE outcome=$OUT (backstop deterministico)"
-          if ! gh issue comment "$ISSUE" --repo "$REPO" --body "$(printf '<!-- FIX_OUTCOME: %s -->\n_Outcome rilevato dal post-step deterministico (telemetria lessons-harvester)._' "$OUT")"; then
+          item_marker=''
+          if [[ "${DAILY_ITEM_ID:-}" =~ ^FU-[0-9]{4}-[0-9]{2}-[0-9]{2}-[0-9]{3}$ ]]; then
+            item_marker="$(printf '\n<!-- FOLLOWUP_ITEM: %s -->' "$DAILY_ITEM_ID")"
+          fi
+          if ! gh issue comment "$ISSUE" --repo "$REPO" --body "$(printf '<!-- FIX_OUTCOME: %s -->\n_Outcome rilevato dal post-step deterministico (telemetria lessons-harvester)._%s' "$OUT" "$item_marker")"; then
             echo "::warning::marker FIX_OUTCOME non postato; nessuna garanzia di telemetria."
           fi
 
