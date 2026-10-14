@@ -124,15 +124,44 @@ test('ISO and date-first fuel observations reject nonexistent civil days', () =>
   assert.equal(fuel.available, false, 'aggregate timestamps obey the same civil-date guard');
 });
 
-test('HTTP 200 reports with null rows degrade the optional audience block without throwing', async () => {
-  const demand = await fetchSearchDemand({}, day(0), { tokenImpl: async () => 'fixture', fetchImpl: async () => ({ ok: true, json: async () => ({ rows: null }) }) });
-  assert.equal(demand.available, false);
-  assert.equal(demand.partial, true);
-  assert.deepEqual(demand.sources, { gsc: false, ga4: false });
-  const blocks = { jobs: { available: true }, exchange: { available: true, rate: 1.07 }, fuel: { available: true }, borderWait: { available: true } };
-  const before = structuredClone(blocks);
-  assert.equal(buildDailyBriefInsights({ todayIso: day(0), blocks, searchDemand: demand }).searchDemand, undefined);
-  assert.deepEqual(blocks, before);
+test('HTTP 200 reports with malformed rows degrade the optional audience block without throwing', async () => {
+  for (const rows of [null, {}, 'invalid', 42]) {
+    const demand = await fetchSearchDemand({}, day(0), { tokenImpl: async () => 'fixture', fetchImpl: async () => ({ ok: true, json: async () => ({ rows }) }) });
+    assert.equal(demand.available, false);
+    assert.equal(demand.partial, true);
+    assert.deepEqual(demand.sources, { gsc: false, ga4: false });
+    const blocks = { jobs: { available: true }, exchange: { available: true, rate: 1.07 }, fuel: { available: true }, borderWait: { available: true } };
+    const before = structuredClone(blocks);
+    assert.equal(buildDailyBriefInsights({ todayIso: day(0), blocks, searchDemand: demand }).searchDemand, undefined);
+    assert.deepEqual(blocks, before);
+  }
+});
+
+test('nonpositive Italian quotes cannot enter the edition or validate aggregate counters', () => {
+  for (const minPriceEur of [0, -1, 0.0001]) {
+    const fuel = shapeFuel({ generatedAt: new Date(now - 1000).toISOString(), summary: { municipalityCount: 999 }, rankings: {
+      cheapestItalyMunicipalities: [{ municipality: 'Impossible', minPriceEur }, { municipality: 'Fresh', minPriceEur: 1.7 }],
+      bestCrossBorderSavings: [],
+    } }, { nowMs: now });
+    assert.deepEqual(fuel.cheapestItaly.map(row => row.municipality), ['Fresh']);
+    assert.equal(fuel.municipalityCount, null);
+    const article = buildDailyBriefArticle({ dateIso: day(0), blocks: { fuel } });
+    for (const locale of ['it', 'en', 'de', 'fr']) assert.doesNotMatch(article.content[locale].body2, /Impossible|999/);
+  }
+});
+
+test('absent or malformed savings rankings cannot attest to aggregate comparisons', () => {
+  const summary = { municipalityCount: 999, municipalitiesWithSwissComparison: 666, cheaperItalyCount: 888, cheaperSwissCount: 777, tieCount: 555 };
+  for (const bestCrossBorderSavings of [undefined, null, {}, 'invalid', 42]) {
+    const fuel = shapeFuel({ generatedAt: new Date(now - 1000).toISOString(), summary, rankings: {
+      cheapestItalyMunicipalities: [{ municipality: 'Fresh', minPriceEur: 1.7 }], bestCrossBorderSavings,
+    } }, { nowMs: now });
+    assert.equal(fuel.available, true);
+    assert.equal(fuel.cheapestItaly.length, 1);
+    for (const field of ['municipalityCount', 'comparedMunicipalityCount', 'cheaperItalyCount', 'cheaperSwissCount', 'tieCount']) assert.equal(fuel[field], null);
+    const article = buildDailyBriefArticle({ dateIso: day(0), blocks: { fuel } });
+    for (const locale of ['it', 'en', 'de', 'fr']) assert.doesNotMatch(article.content[locale].body2, /999|888|777|666|555/);
+  }
 });
 
 test('leader labels cannot introduce Markdown syntax into observed tables', () => {

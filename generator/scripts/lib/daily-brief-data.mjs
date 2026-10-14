@@ -333,8 +333,9 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
   }
   const summary = meta.summary || {};
   const rankings = meta.rankings || {};
-  const rankedItaly = Array.isArray(rankings.cheapestItalyMunicipalities) ? rankings.cheapestItalyMunicipalities : [];
-  const verifiedItaly = rankedItaly.filter(m => m?.municipality && round(m.minPriceEur, 3) != null && fuelQuoteIsFresh(m.cheapestStation, nowMs));
+  const italyRankingValid = Array.isArray(rankings.cheapestItalyMunicipalities);
+  const rankedItaly = italyRankingValid ? rankings.cheapestItalyMunicipalities : [];
+  const verifiedItaly = rankedItaly.filter(m => m?.municipality && round(m.minPriceEur, 3) > 0 && fuelQuoteIsFresh(m.cheapestStation, nowMs));
   const cheapestItaly = verifiedItaly
     .map((m) => ({
       municipality: m?.municipality ?? null,
@@ -347,7 +348,8 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
     }))
     .filter((m) => m.municipality && m.minPriceEur != null)
     .slice(0, 5);
-  const savingsRows = Array.isArray(rankings.bestCrossBorderSavings) ? rankings.bestCrossBorderSavings : [];
+  const savingsRankingValid = Array.isArray(rankings.bestCrossBorderSavings);
+  const savingsRows = savingsRankingValid ? rankings.bestCrossBorderSavings : [];
   const verifiedSavings = savingsRows.filter(m => {
     if (!m?.municipality || round(m.saving50LEur, 2) == null) return false;
     const ranked = verifiedItaly.find(row => row.municipality === m.municipality && row.province === m.province);
@@ -367,7 +369,7 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
     if (swissQuote != null && swissQuote !== round(m.swissPriceEur, 3)) return false;
     return true;
   });
-  const summaryComparable = verifiedItaly.length === rankedItaly.length && verifiedSavings.length === savingsRows.length;
+  const summaryComparable = italyRankingValid && savingsRankingValid && verifiedItaly.length === rankedItaly.length && verifiedSavings.length === savingsRows.length;
   const bestSavings = verifiedSavings
     .map((m) => ({
       municipality: m?.municipality ?? null,
