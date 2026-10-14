@@ -19,6 +19,8 @@ import { reviewInputRevisions } from '../../scripts/ci/lib/review-input-revision
 const run = promisify(execFile);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const ACTION_DIR = path.join(ROOT, '.github/actions/claude-codex-fallback');
+const CORPUS_REPOSITORY = 'nanakokyobashi-rgb/frontaliere-articles';
+const SITE_REPOSITORY = 'valerielinc-ops/frontaliere-si-o-no';
 const REVIEW_PR = '8488';
 const HEAD_SHA = 'e'.repeat(40);
 const EXPECTED_REVISION = `body:${'d'.repeat(64)}`;
@@ -36,7 +38,13 @@ async function waitFor(pathname) {
   throw new Error(`timeout waiting for ${pathname}`);
 }
 
-function startFixture({ root, endpoint, published, expectedRevision = EXPECTED_REVISION }) {
+function startFixture({
+  root,
+  endpoint,
+  published,
+  repository = CORPUS_REPOSITORY,
+  expectedRevision = EXPECTED_REVISION,
+}) {
   const fakeGh = path.join(root, 'gh');
   writeFileSync(fakeGh, `#!/bin/sh
 set -eu
@@ -55,18 +63,20 @@ done
   const server = spawn(process.execPath, [path.join(ACTION_DIR, 'gh-bridge-server.mjs')], {
     env: {
       PATH: '/usr/bin:/bin',
-      HEAD_SHA,
       CODEX_BRIDGE_TRANSPORT: 'files',
       CODEX_GH_SOCKET: endpoint,
       CODEX_GH_AUTH: 'fixture-token',
+      CODEX_GH_CORPUS_AUTH: 'fixture-corpus-token',
+      CODEX_GH_SITE_AUTH: 'fixture-site-token',
       CODEX_REAL_GH: fakeGh,
       CODEX_GH_CWD: root,
       CODEX_GH_WORKSPACE: root,
       CODEX_GH_SCRATCH: root,
-      CODEX_GH_REPOSITORY: 'owner/repo',
+      CODEX_GH_REPOSITORY: repository,
       CODEX_GH_HOST: 'github.com',
       CODEX_GH_REVIEW_INPUT_REVISION: expectedRevision,
       CODEX_GH_REVIEW_PR_NUMBER: REVIEW_PR,
+      CODEX_GH_REVIEW_HEAD_SHA: HEAD_SHA,
     },
     stdio: 'ignore',
   });
@@ -109,6 +119,7 @@ test('ogni avvio del bridge server passa la revisione e la PR fuori dal modello'
   for (const { line, text } of blocks) {
     assert.match(text, /CODEX_GH_REVIEW_INPUT_REVISION=/u, `avvio alla riga ${line}`);
     assert.match(text, /CODEX_GH_REVIEW_PR_NUMBER=/u, `avvio alla riga ${line}`);
+    assert.match(text, /CODEX_GH_REVIEW_HEAD_SHA=/u, `avvio alla riga ${line}`);
   }
 });
 
@@ -182,7 +193,9 @@ test('il bridge timbra il body prima di pubblicare la review e deduplica il body
   try {
     await waitFor(endpoint);
     writeFileSync(source, `${reviewMarker(`body:${'a'.repeat(63)}`)}\n## LGTM\n\ncase: first`);
-    const args = ['pr', 'review', REVIEW_PR, '--comment', '--body-file', source];
+    const args = [
+      'pr', 'review', REVIEW_PR, '--repo', CORPUS_REPOSITORY, '--comment', '--body-file', source,
+    ];
     await run(process.execPath, [path.join(ACTION_DIR, 'gh-bridge-client.mjs'), ...args], {
       env: { CODEX_BRIDGE_TRANSPORT: 'files', CODEX_GH_SOCKET: endpoint },
       timeout: 10_000,
@@ -214,11 +227,40 @@ test('il bridge pubblica il body originale quando la revisione host non è dispo
   try {
     await waitFor(endpoint);
     await run(process.execPath, [path.join(ACTION_DIR, 'gh-bridge-client.mjs'),
-      'pr', 'review', REVIEW_PR, '--comment', '--body-file', source], {
+      'pr', 'review', REVIEW_PR, '--repo', CORPUS_REPOSITORY, '--comment', '--body-file', source], {
       env: { CODEX_BRIDGE_TRANSPORT: 'files', CODEX_GH_SOCKET: endpoint },
       timeout: 10_000,
     });
     assert.equal(readFileSync(published, 'utf8'), body);
+  } finally {
+    await stopFixture(server);
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il bridge non timbra review di un altro repository o di un altro numero PR', async () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'codex-review-marker-target-scope-'));
+  const endpoint = path.join(root, 'mailbox');
+  const published = path.join(root, 'published-body');
+  const source = path.join(root, 'review.md');
+  const body = '## LGTM\n\nreview fuori dal target della run';
+  writeFileSync(source, body);
+  const server = startFixture({ root, endpoint, published });
+  try {
+    await waitFor(endpoint);
+    await run(process.execPath, [path.join(ACTION_DIR, 'gh-bridge-client.mjs'),
+      'pr', 'review', REVIEW_PR, '--repo', SITE_REPOSITORY, '--comment', '--body-file', source], {
+      env: { CODEX_BRIDGE_TRANSPORT: 'files', CODEX_GH_SOCKET: endpoint },
+      timeout: 10_000,
+    });
+    assert.equal(readFileSync(published, 'utf8'), body, 'una review su un altro repo non va timbrata');
+
+    await run(process.execPath, [path.join(ACTION_DIR, 'gh-bridge-client.mjs'),
+      'pr', 'review', '8489', '--repo', CORPUS_REPOSITORY, '--comment', '--body-file', source], {
+      env: { CODEX_BRIDGE_TRANSPORT: 'files', CODEX_GH_SOCKET: endpoint },
+      timeout: 10_000,
+    });
+    assert.equal(readFileSync(published, 'utf8'), body, 'una review su un’altra PR non va timbrata');
   } finally {
     await stopFixture(server);
     rmSync(root, { recursive: true, force: true });
@@ -231,8 +273,12 @@ test('action e prompt passano la revisione solo al bridge host-side', () => {
   assert.match(action, /codex_review_input_revision="\$\{REVIEW_REVISION:-\}"/u);
   assert.match(action, /CODEX_GH_REVIEW_INPUT_REVISION="\$codex_review_input_revision"/u);
   assert.match(action, /CODEX_GH_REVIEW_PR_NUMBER="\$codex_review_pr_number"/u);
+  assert.match(action, /codex_review_head_sha="\$\{HEAD_SHA:-\}"/u);
+  assert.match(action, /CODEX_GH_REVIEW_HEAD_SHA="\$codex_review_head_sha"/u);
   assert.match(action, /claude_review_input_revision="\$\{REVIEW_REVISION:-\}"/u);
   assert.match(action, /claude_review_pr_number="\$\{PR_NUMBER:-\}"/u);
+  assert.match(action, /claude_review_head_sha="\$\{HEAD_SHA:-\}"/u);
+  assert.match(action, /CODEX_GH_REVIEW_HEAD_SHA="\$claude_review_head_sha"/u);
   const reviewStepStart = workflow.indexOf('      - name: Run Codex Luna Max review');
   const reviewStep = workflow.slice(reviewStepStart, workflow.indexOf('\n      - name: ', reviewStepStart + 1));
   assert.match(reviewStep, /REVIEW_REVISION: \$\{\{ steps\.review_input\.outputs\.review_revision \}\}/u);

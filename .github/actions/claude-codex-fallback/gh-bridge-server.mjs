@@ -959,7 +959,9 @@ function main() {
       const commandIndex = commandIndexFor(args);
       let executionArgs = args;
       let reviewBodyOverride;
-      if (scope.kind === 'site' && isPullRequestReviewArgs(args)) {
+      if (isPullRequestReviewArgs(args)
+        && scope.repository === repository
+        && pullRequestReviewNumber(args, commandIndex) === reviewPrNumber) {
         try {
           const materialized = materializePullRequestReviewBody(args, commandIndex + 1, {
             reviewRevision: reviewInputRevision,
@@ -979,7 +981,7 @@ function main() {
         cwd,
         workspaceRoot,
         scratchRoot,
-        headSha: process.env.HEAD_SHA,
+        headSha: process.env.CODEX_GH_REVIEW_HEAD_SHA,
         bodyOverride: reviewBodyOverride,
       });
       const reviewKey = postedReviewKey(reviewDetails);
