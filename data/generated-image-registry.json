@@ -19241,24 +19241,6 @@
     },
     {
       "schema": 1,
-      "assetId": "bollettino-frontaliere-2026-10-14",
-      "source": "deterministic-card",
-      "provider": "site-owned",
-      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
-      "credit": "frontaliereticino.ch",
-      "producer": "generator/scripts/lib/daily-brief-image.mjs",
-      "templateVersion": "frontaliereticino.daily-brief-card.v1",
-      "license": "private-grant",
-      "sha256": "f60fdad00b8a01adec7b5050531769e1721bec2e3de3860b469633146b3c952b",
-      "bytes": 26758,
-      "width": 1200,
-      "height": 675,
-      "format": "webp",
-      "scope": "article-hero",
-      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-14.webp"
-    },
-    {
-      "schema": 1,
       "assetId": "article-easy-work-chiusura-264",
       "kind": "generated",
       "provider": "openai-codex",
@@ -19428,6 +19410,24 @@
         "is_topic_relevant": true,
         "notes": "Generic photorealistic-style synthetic editorial illustration showing construction safety gear, railway infrastructure, a commuter train, and a Ticino/Lake Como alpine setting. No readable text, logos, faces, or foreground person are visible."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-14",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "456175cef1b76ab9084ca5d37f9300def9fdd1d1b225f0154926e849b67edc9e",
+      "bytes": 27446,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-14.webp"
     }
   ]
 }

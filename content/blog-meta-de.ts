@@ -13151,7 +13151,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.arresti-truffa-chiamate-ticino.title': 'Schock-Betrug: drei Festnahmen im Kanton Tessin',
     'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'Im Kanton Tessin wurde ein Netzwerk von Betrügern zerschlagen, die sich auf sogenannte Schocks spezialisiert haben: Drei Personen wurden verhaftet.',
     'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'Ansicht von Lugano mit einem Smartphone im Vordergrund',
-    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Grenzgänger-Tagesbulletin – 14. Oktober 2026: 921 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Grenzgänger: 921 neue Stellen in der Schweiz gestern — 14. Oktober 2026',
     'blog.article.bollettino-frontaliere-2026-10-14.excerpt': 'Die Zahlen von heute, 14. Oktober 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
     'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 14. Oktober 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Grenzgänger-Bulletin vom 14. Oktober 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
