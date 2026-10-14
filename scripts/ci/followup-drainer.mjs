@@ -410,23 +410,30 @@ export function dailyBucketQueueDecision(issue) {
 /**
  * Return the open PR that claims a daily-bucket item, if any. A PR explicitly
  * marked for another item does not hold this one back. A legacy PR with no item
- * marker that cites this bucket remains an ambiguous, fail-closed mutex.
+ * marker that cites this bucket, or whose head branch is `fix/issue-N` for this
+ * bucket, remains an ambiguous, fail-closed mutex.
  *
  * @param {string} itemId
- * @param {Array<{number?: number, title?: string, body?: string}>} openPrs
+ * @param {Array<{number?: number, title?: string, body?: string, head?: {ref?: string}, headRefName?: string}>} openPrs
  * @param {number|null} issueNumber
- * @returns {{number?: number, title?: string, body?: string}|null}
+ * @returns {{number?: number, title?: string, body?: string, head?: {ref?: string}, headRefName?: string}|null}
  */
 export function openPrForDailyItem(itemId, openPrs, issueNumber = null) {
   const wanted = String(itemId || '').toUpperCase();
   if (!/^FU-\d{4}-\d{2}-\d{2}-\d{3}$/.test(wanted)) return null;
   const issueRef = Number(issueNumber);
+  const legacyBranch = Number.isInteger(issueRef) && issueRef > 0
+    ? `fix/issue-${issueRef}`
+    : null;
   return (Array.isArray(openPrs) ? openPrs : []).find((pr) => {
     const text = `${pr?.title || ''}\n${pr?.body || ''}`;
     const markers = followupItemMarkers(text);
     if (markers.includes(wanted)) return true;
     if (!Number.isInteger(issueRef) || issueRef <= 0 || markers.length) return false;
-    return new RegExp(`(^|[^\\d])#${issueRef}(?!\\d)`).test(text);
+    const headRefs = [pr?.head?.ref, pr?.headRefName];
+    const legacyBranchMatches = legacyBranch !== null && headRefs.some((ref) => ref === legacyBranch);
+    const legacyTextMatches = new RegExp(`(^|[^\\d])#${issueRef}(?!\\d)`).test(text);
+    return legacyBranchMatches || legacyTextMatches;
   }) || null;
 }
 

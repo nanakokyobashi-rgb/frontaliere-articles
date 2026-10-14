@@ -216,3 +216,14 @@ test('il capability guard workflows legge solo il FU daily scelto e annota il ve
     'lo snapshot per-item deve precedere il guard che può parcheggiare la issue',
   );
 });
+
+test('il guard daily ritenta il marker e ripristina la coda se il commento non passa', () => {
+  const guard = step('Pre-flight — workflows-scope capability guard (zero-Claude)');
+  assert.ok(guard, 'manca il capability guard workflows');
+  assert.match(guard, /for attempt in 1 2 3/);
+  assert.match(guard, /marker_posted=false/);
+  assert.match(guard, /gh issue comment "\$ISSUE_NUMBER" --repo "\$GH_REPO" --body-file/);
+  assert.match(guard, /gh issue edit "\$ISSUE_NUMBER" --repo "\$GH_REPO" \\\s+--remove-label fu-parked --add-label agent:fix-queued/);
+  assert.match(guard, /fu-parked senza FOLLOWUP_ITEM/);
+  assert.match(guard, /recovery label daily workflows-scope fallita/);
+});

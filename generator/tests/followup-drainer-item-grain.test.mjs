@@ -237,6 +237,24 @@ test('il mutex daily non blocca un FU diverso ma mantiene il legacy ambiguo in f
   assert.equal(dailyMutexDecision(wanted, legacyIssuePr, 9999).eligible, true);
 });
 
+test('il mutex daily tratta come legacy anche una PR markerless sul branch issue', () => {
+  const wanted = 'FU-2026-10-02-001';
+  for (const pr of [
+    { number: 2573, title: 'fix senza marker', body: 'nessun riferimento all’issue', head: { ref: 'fix/issue-2151' } },
+    { number: 2574, title: 'fix senza marker', body: 'nessun riferimento all’issue', headRefName: 'fix/issue-2151' },
+  ]) {
+    const decision = dailyMutexDecision(wanted, { ok: true, prs: [pr] }, 2151);
+    assert.deepEqual(decision, { eligible: false, reason: 'item-pr-open', pr });
+  }
+  const differentIssueBranch = {
+    number: 2575,
+    title: 'fix senza marker',
+    body: 'nessun riferimento all’issue',
+    head: { ref: 'fix/issue-9999' },
+  };
+  assert.equal(dailyMutexDecision(wanted, { ok: true, prs: [differentIssueBranch] }, 2151).eligible, true);
+});
+
 test('un vecchio pr-already-open riaccoda il primo FU open se la sua PR non è più attiva', () => {
   const result = dailyBucketOutcomeTransition(
     { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },

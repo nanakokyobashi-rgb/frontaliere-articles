@@ -523,8 +523,28 @@ jobs:
           EOF
               printf '<!-- FOLLOWUP_ITEM: %s -->\n' "$DAILY_ITEM_ID"
             } > "$marker_file"
-            if ! gh issue comment "$ISSUE_NUMBER" --repo "$GH_REPO" --body-file "$marker_file"; then
-              echo "::error::marker daily workflows-scope non postato: esito non ammesso senza FOLLOWUP_ITEM"
+            marker_posted=false
+            for attempt in 1 2 3; do
+              if gh issue comment "$ISSUE_NUMBER" --repo "$GH_REPO" --body-file "$marker_file"; then
+                marker_posted=true
+                break
+              fi
+              echo "::warning::marker daily workflows-scope non postato (tentativo $attempt/3)"
+            done
+            if [ "$marker_posted" != 'true' ]; then
+              echo "::error::marker daily workflows-scope non postato: ripristino la issue in coda per non lasciare fu-parked senza FOLLOWUP_ITEM"
+              recovered=false
+              for attempt in 1 2 3; do
+                if gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" \
+                    --remove-label fu-parked --add-label agent:fix-queued; then
+                  recovered=true
+                  break
+                fi
+                echo "::warning::recovery label daily workflows-scope fallita (tentativo $attempt/3)"
+              done
+              if [ "$recovered" != 'true' ]; then
+                echo "::error::recovery daily workflows-scope non riuscita: verificare manualmente label e attribuzione dell'item"
+              fi
               exit 1
             fi
           fi
