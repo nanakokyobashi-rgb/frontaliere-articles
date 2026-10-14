@@ -330,11 +330,11 @@ describe('wiring — create-article.mjs usa il protocollo sui due campi', () => 
 
   it('il protocollo legge il valore GREZZO, prima della sanitizzazione', () => {
     const raw = src.indexOf("parseArticleIdentityField(original, { field: 'slug', locale })");
-    const sanitize = src.indexOf('const normalizedSlug = truncateSlugAtWordBoundary(');
+    const sanitize = src.indexOf('const normalizedSlug = normalizeSlugCandidate(data.slugs[locale]);');
     assert.ok(raw > 0 && sanitize > 0);
     assert.ok(
       raw < sanitize,
-      'il protocollo gira DOPO la sanitizzazione: `<<SLUG:en>>` sarebbe gia\' diventato `slug-en`, ' +
+      'il protocollo gira DOPO la normalizzazione: `<<SLUG:en>>` sarebbe gia\' diventato `slug-en`, ' +
         'cioe\' la forma ambigua che questa fix toglie',
     );
     assert.match(
