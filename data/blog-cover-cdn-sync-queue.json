@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-grigioni-preventivo-contributi-terzi.webp",
+      "sha256": "7975c2c43346c17c22780ac1c062ce9e15bca6a23ec314f42691604bc0a4469e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-grigioni-preventivo-contributi-terzi-480w.webp",
+      "sha256": "a020888eb46eab4b0427245ea1bb9cded06a0a06fe1b63363375ed7cc14e1299"
+    }
+  ]
 }
