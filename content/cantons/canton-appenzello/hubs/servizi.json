@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "06d170953c85cd8ee575de91fa1b2ae4db5aa646b91f0bc4575d4997f347f9bf",
+  "updatedAt": "2026-10-14T07:35:36.633Z",
+  "contentHash": "c7b8fb6daaf5702b3fa2a572c117163bc45f77602e476a2f7fd95448038d912a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-13T19:22:49.823Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -98,25 +93,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
           "updatedAt": "2026-10-13T22:49:00.460Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "12 °C",
-              "detail": "oggi da 7 a 14 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "12 °C",
-              "detail": "oggi da 8 a 14 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +217,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -312,25 +288,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
           "updatedAt": "2026-10-13T22:49:00.460Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "12 °C",
-              "detail": "today from 7 to 14 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "12 °C",
-              "detail": "today from 8 to 14 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -447,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -518,25 +475,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
           "updatedAt": "2026-10-13T22:49:00.460Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "12 °C",
-              "detail": "heute 7 bis 14 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "12 °C",
-              "detail": "heute 8 bis 14 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -653,7 +591,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -724,25 +662,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
           "updatedAt": "2026-10-13T22:49:00.460Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Appenzell",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 7 à 14 °C"
-            },
-            {
-              "label": "Herisau",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 8 à 14 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -851,7 +770,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     }
   }
 }

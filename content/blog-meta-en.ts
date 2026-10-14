@@ -13143,6 +13143,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incidente-vedeggio-cassarate.title': 'Accident in Vedeggio-Cassarate, traffic in tilt',
     'blog.article.incidente-vedeggio-cassarate.excerpt': 'Incident at 17.15 in the Vedeggio-Cassarate Tunnel closed towards Lugano and traffic in the queue Reopening around 17.55 At 18.30 similar situation',
     'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Traffic queued near the Vedeggio-Cassarate tunnel in Lugano',
+    'blog.article.easy-work-chiusura-264.title': 'Easy Work closes: 264 jobs at risk in Chiasso',
+    'blog.article.easy-work-chiusura-264.excerpt': 'Easy Work will close by December 31 264 jobs at risk Seven administrative employees and 257 temporary workers involved Consultation launched with OCST Decision',
+    'blog.article.easy-work-chiusura-264.imageAlt': 'Closure of the Easy Work office in Chiasso, corso San Gottardo 106, with a closed sign',
 };
 
 export default blogMetaEn;

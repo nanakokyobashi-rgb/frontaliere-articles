@@ -107556,6 +107556,40 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-easy-work-chiusura-264': {
+    title: 'Easy Work chiude: 264 posti a rischio a Chiasso',
+    description: 'Easy Work chiuderà entro il 31 dicembre A rischio 264 posti di lavoro Sette amministrativi e 257 interinali coinvolti Consultazione avviata con l\'OCST Decisione',
+    keywords: 'frontalieri, ticino, svizzera, italia, easy, work, chiude, posti',
+    ogTitle: 'Easy Work chiude: 264 posti a rischio a Chiasso',
+    ogDescription: 'Easy Work chiuderà entro il 31 dicembre A rischio 264 posti di lavoro Sette amministrativi e 257 interinali coinvolti Consultazione avviata con l\'OCST Decisione',
+    canonicalPath: '/articoli-frontaliere/easy-work-chiusura-264/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Easy Work chiude: 264 posti a rischio a Chiasso",
+      "description": "Easy Work chiuderà entro il 31 dicembre A rischio 264 posti di lavoro Sette amministrativi e 257 interinali coinvolti Consultazione avviata con l'OCST Decisione",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/swiss-life-taglio-posti-lavoro-2028.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Chiusura dell'ufficio Easy Work a Chiasso, corso San Gottardo 106, con cartello di chiusura"
+      },
+      "datePublished": "2026-10-14T07:30:20+00:00",
+      "dateModified": "2026-10-14T07:30:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/easy-work-chiusura-264/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
