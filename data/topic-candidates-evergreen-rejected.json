@@ -800,10 +800,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/ticino/attualita/1956149/strategia-associazione-ated-ticino-cantone-critica-aziende-digital": {
-      "section": "frontaliere",
-      "ts": 1791803836141
-    },
     "svizzera::https://www.admin.ch/it/newnsb/rubawc8r9zfg": {
       "section": "svizzera",
       "ts": 1791807477151
@@ -1091,6 +1087,14 @@
     "frontaliere::https://www.laregione.ch/cantone/luganese/1956506/la-citta-chiarisca-quanto-costa-un-affitto-sostenibile": {
       "section": "frontaliere",
       "ts": 1791976293405
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/amazon-lascia-malpensa-sindacati-nessuno-deve-essere-lasciato-indietro/2707141": {
+      "section": "frontaliere",
+      "ts": 1791980222000
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/all%e2%80%99usi-un-nuovo-master-in-oncologia-e-immunologia--4162690.html": {
+      "section": "frontaliere",
+      "ts": 1791980257895
     }
   }
 }

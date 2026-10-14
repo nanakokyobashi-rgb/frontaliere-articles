@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T11:36:00.094Z",
       "lastFailureAt": "2026-10-14T11:36:00.094Z"
+    },
+    {
+      "articleId": "arresti-auto-como-minacce",
+      "title": "Due arresti a Como: furti nelle auto e automobilista ferito",
+      "fallbackImage": "/images/blog/article-como-pass-auto-rinnovo-annuale.webp",
+      "reason": "All image providers failed for article-arresti-auto-como-minacce: openai-codex (vision gate rejected image: Generic synthetic dawn street scene relevant to the subject, with no peo",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T12:24:36.676Z",
+      "lastFailureAt": "2026-10-14T12:24:36.676Z"
     }
   ]
 }

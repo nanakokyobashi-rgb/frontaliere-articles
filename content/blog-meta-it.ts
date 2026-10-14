@@ -13167,6 +13167,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Oltre 75.293 infortuni in Lombardia tra gennaio e agosto 2026 I decessi totali salgono a 101, contro 97 nel 2025 Como registra 3.795 denunce e un aumento',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Immagine editoriale relativa a: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    'blog.article.arresti-auto-como-minacce.title': 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    'blog.article.arresti-auto-como-minacce.excerpt': 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    'blog.article.arresti-auto-como-minacce.imageAlt': 'Strada urbana vicino al confine con auto parcheggiate e autosilo all\'alba',
 };
 
 export default blogMetaIt;

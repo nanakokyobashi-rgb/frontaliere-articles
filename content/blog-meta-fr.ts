@@ -13168,6 +13168,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Accidents du travail en Lombardie : les données 2026 s\'aggravent, les pics Côme',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Plus de 75 293 accidents en Lombardie entre janvier et août 2026 Le nombre total de décès s\'élève à 101, contre 97 en 2025 Como enregistre 3 795 plaintes et une augmentation',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Image éditoriale relative à: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    'blog.article.arresti-auto-como-minacce.title': 'Deux arrestations à Côme : vol de voiture et automobiliste blessé',
+    'blog.article.arresti-auto-como-minacce.excerpt': 'Deux arrestations à Como après des signalements de résidents Une voiture forcée et un deuxième véhicule endommagé Un automobiliste signale une blessure à un bras',
+    'blog.article.arresti-auto-como-minacce.imageAlt': 'Rue urbaine près de la frontière avec voitures garées et parking à l\'aube',
 };
 
 export default blogMetaFr;
