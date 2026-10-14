@@ -8466,13 +8466,13 @@ function findHtmlClosingTag(html, from, name) {
   return null;
 }
 
-function nextHtmlElement(html, name, from = 0) {
+function nextHtmlElementWhere(html, predicate, from = 0) {
   let cursor = from;
   let tag;
   while ((tag = nextHtmlTag(html, cursor)) !== null) {
     cursor = tag.end;
-    if (tag.closing || tag.name !== name) continue;
-    const close = findHtmlClosingTag(html, tag.end, name);
+    if (tag.closing || !predicate(tag)) continue;
+    const close = findHtmlClosingTag(html, tag.end, tag.name);
     if (!close) continue;
     return {
       ...tag,
@@ -8483,6 +8483,10 @@ function nextHtmlElement(html, name, from = 0) {
     };
   }
   return null;
+}
+
+function nextHtmlElement(html, name, from = 0) {
+  return nextHtmlElementWhere(html, (tag) => tag.name === name, from);
 }
 
 function findHtmlRawTextClosingTag(html, from, name) {
@@ -8573,6 +8577,11 @@ function nestedNeuhausenCards(html, baseUrl) {
   let link = nextHtmlElement(html, 'a');
   while (link) {
     const nextLink = nextHtmlElement(html, 'a', link.end);
+    const rawHref = headlineHrefValue(link.attrs);
+    if (!rawHref) {
+      link = nextLink;
+      continue;
+    }
     let dateSection = null;
     for (const section of sections) {
       if (!section.date || link.start < section.contentStart || link.start >= section.contentEnd) continue;
@@ -8583,7 +8592,7 @@ function nestedNeuhausenCards(html, baseUrl) {
     }
     if (dateSection) {
       try {
-        const href = new URL(headlineAttributeValue(link.attrs, 'href'), baseUrl).href;
+        const href = new URL(rawHref, baseUrl).href;
         if (href.startsWith('http')) {
           const specificity = dateSection.contentEnd - dateSection.contentStart;
           const previous = datesByUrl.get(href);
@@ -8655,9 +8664,15 @@ function extractDatesFromHtml(html, baseUrl) {
     const anchorEnd = anchor.end;
     const inner = anchor.inner;
     const nextAnchor = nextHtmlElement(html, 'a', anchorEnd);
+    const rawHref = headlineHrefValue(anchor.attrs);
+    if (!rawHref) {
+      lastAnchorEnd = anchorEnd;
+      anchor = nextAnchor;
+      continue;
+    }
     // Resolve to the absolute URL so the key matches extractHeadlines' lookup.
     let href;
-    try { href = new URL(headlineAttributeValue(anchor.attrs, 'href'), baseUrl).href; } catch {
+    try { href = new URL(rawHref, baseUrl).href; } catch {
       lastAnchorEnd = anchorEnd;
       anchor = nextAnchor;
       continue;
@@ -8733,20 +8748,24 @@ function extractEmbeddedHeadlineDates(html, field) {
     }
     for (const child of Object.values(value)) visit(child);
   };
-  const scriptRe = /<script\b([^>]*)>([\s\S]*?)<\/script>/giu;
-  let match;
-  while ((match = scriptRe.exec(String(html || ''))) !== null) {
-    const attrs = match[1] || '';
+  const source = String(html || '');
+  let script = nextHtmlElement(source, 'script');
+  while (script) {
+    const nextScript = nextHtmlElement(source, 'script', script.end);
+    const attrs = script.attrs || '';
     const type = attrs.match(/\btype\s*=\s*["']([^"']+)["']/iu)?.[1] || '';
-    if (type && !/json/iu.test(type)) continue;
-    const body = match[2].trim();
-    if (!body || (!/^\s*[\[{]/u.test(body) && !/\bng-state\b/iu.test(attrs))) continue;
-    try {
-      visit(JSON.parse(body));
-    } catch {
-      // Inline JavaScript and truncated JSON are not page-state data. The
-      // opt-in quirk must fail closed instead of pairing unrelated strings.
+    const body = script.inner.trim();
+    if ((!type || /json/iu.test(type))
+      && body
+      && (/^\s*[\[{]/u.test(body) || /\bng-state\b/iu.test(attrs))) {
+      try {
+        visit(JSON.parse(body));
+      } catch {
+        // Inline JavaScript and truncated JSON are not page-state data. The
+        // opt-in quirk must fail closed instead of pairing unrelated strings.
+      }
     }
+    script = nextScript;
   }
   return out;
 }
@@ -8791,6 +8810,11 @@ function headlineAttributeValue(attrs, name) {
   );
   const match = re.exec(attrs || '');
   return match ? (match[1] ?? match[2] ?? match[3] ?? '') : '';
+}
+
+function headlineHrefValue(attrs) {
+  const href = headlineAttributeValue(attrs, 'href').trim();
+  return href || null;
 }
 
 function headlineTextFromMarkup(markup) {
@@ -8941,28 +8965,34 @@ function publicCardLead(html, linkStart, quirks) {
     const range = headlineElementEnd(html, card);
     const inner = html.slice(card.openEnd, range.start);
     if (mode === 'media-title') {
-      const imageRe = /<(?:img|source)\b[^>]*>/gi;
-      let image;
-      while ((image = imageRe.exec(inner)) !== null) {
-        const title = headlineTextFromMarkup(headlineAttributeValue(image[0], 'title'));
-        if (title && title.length <= 1200) return title;
+      let image = nextHtmlTag(inner);
+      while (image) {
+        if (!image.closing && (image.name === 'img' || image.name === 'source')) {
+          const title = headlineTextFromMarkup(headlineAttributeValue(image.attrs, 'title'));
+          if (title && title.length <= 1200) return title;
+        }
+        image = nextHtmlTag(inner, image.end);
       }
     }
     if (mode === 'text') {
-      const paragraphRe = /<p\b[^>]*>([\s\S]*?)<\/p>/gi;
-      let paragraph;
-      while ((paragraph = paragraphRe.exec(inner)) !== null) {
-        const text = headlineTextFromMarkup(paragraph[1]);
+      let paragraph = nextHtmlElement(inner, 'p');
+      while (paragraph) {
+        const text = headlineTextFromMarkup(paragraph.inner);
         if (text.length >= 20) return text.slice(0, 600);
+        paragraph = nextHtmlElement(inner, 'p', paragraph.end);
       }
-      const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
-      while ((paragraph = hintedRe.exec(inner)) !== null) {
-        const attrs = paragraph[2] || '';
+      let hinted = nextHtmlElementWhere(inner, () => true);
+      while (hinted) {
+        const attrs = hinted.attrs || '';
         if (!/(?:lead|teaser|description|summary|abstract)/i.test(
           headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id'),
-        )) continue;
-        const text = headlineTextFromMarkup(paragraph[3]);
+        )) {
+          hinted = nextHtmlElementWhere(inner, () => true, hinted.end);
+          continue;
+        }
+        const text = headlineTextFromMarkup(hinted.inner);
         if (text.length >= 20) return text.slice(0, 600);
+        hinted = nextHtmlElementWhere(inner, () => true, hinted.end);
       }
     }
   }
@@ -9029,17 +9059,20 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
     ];
     for (const value of cardAttributes) addCandidate(value, 95);
 
-    const headingRe = /<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi;
-    let match;
-    while ((match = headingRe.exec(inner)) !== null) addCandidate(match[1], 80, match.index);
+    let heading = nextHtmlElementWhere(inner, (tag) => /^h[1-6]$/u.test(tag.name));
+    while (heading) {
+      addCandidate(heading.inner, 80, heading.start);
+      heading = nextHtmlElementWhere(inner, (tag) => /^h[1-6]$/u.test(tag.name), heading.end);
+    }
 
-    const hintedRe = /<([a-z][\w:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
-    while ((match = hintedRe.exec(inner)) !== null) {
-      const attrs = match[2] || '';
+    let hinted = nextHtmlElementWhere(inner, () => true);
+    while (hinted) {
+      const attrs = hinted.attrs || '';
       const hint = headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id');
       if (/(?:title|headline|subject|caption)/i.test(hint)) {
-        addCandidate(match[3], 75, match.index);
+        addCandidate(hinted.inner, 75, hinted.start);
       }
+      hinted = nextHtmlElementWhere(inner, () => true, hinted.end);
     }
 
     candidates.sort((a, b) => b.score - a.score || a.distance - b.distance);
@@ -9068,7 +9101,12 @@ function extractHeadlines(html, baseUrl) {
       anchor = nextAnchor;
       continue;
     }
-    let href = headlineAttributeValue(anchor.attrs, 'href');
+    const rawHref = headlineHrefValue(anchor.attrs);
+    if (!rawHref) {
+      anchor = nextAnchor;
+      continue;
+    }
+    let href = rawHref;
     let text = headlineTextFromMarkup(anchor.inner).replace(/\s+/g, ' ').trim();
     const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
     if (configuredHeadline) text = configuredHeadline;

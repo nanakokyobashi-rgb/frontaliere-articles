@@ -36,9 +36,8 @@ function slice(startMarker, endMarker) {
   return SRC.slice(start, end + endMarker.length);
 }
 
-// extractHeadlines closes over extractDatesFromHtml, which closes over
-// nothing outside the three functions themselves — no module-scope names
-// need injecting.
+// The slice includes the quote-aware walker and the date/embedded scanners
+// used by extractHeadlines; no module-scope names need injecting.
 // `.replace(/^export /gm, '')`: dal 2026-08-13 il blocco contiene anche
 // `parseHeadlineDate` e il suo registro di formati (issue #190 punto 2), che
 // sono esportati per essere provati altrove. `new Function` non accetta
@@ -49,9 +48,9 @@ const BLOCK = slice('function extractDateFromUrl(url) {', '\n// ── Step 1b-b
 assert.match(BLOCK, /function extractHeadlines\(html, baseUrl\) \{/, 'il blocco deve contenere extractHeadlines — delimitatori da aggiornare');
 assert.match(BLOCK, /function extractDatesFromHtml\(html, baseUrl\) \{/, 'il blocco deve contenere extractDatesFromHtml — delimitatori da aggiornare');
 
-const { extractHeadlines } = new Function(
+const { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates } = new Function(
   'decodeHtmlEntities',
-  `${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractDateFromUrl };`,
+  `${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates, extractDateFromUrl };`,
 )(decodeHtmlEntities);
 
 const BASE_URL = 'https://www.admin.ch/it/newnsb';
@@ -113,4 +112,58 @@ test('quote-aware date and structural scans keep a card headline and its time da
 
   assert.equal(item.headline, 'Il Consiglio federale approva il nuovo accordo');
   assert.equal(item.date?.toISOString(), '2026-10-14T09:30:00.000Z');
+});
+
+test('does not turn anchors without a non-empty href into the listing URL', () => {
+  const headline = 'Il Consiglio federale approva il nuovo accordo senza href';
+  const html = `<a>${headline}</a><a href="">${headline}</a>`
+    + `<a href="/it/newnsb/2026/comunicato-09">${headline}</a>`;
+  const items = extractHeadlines(html, BASE_URL);
+
+  assert.deepEqual(items.map((item) => item.url), [
+    'https://www.admin.ch/it/newnsb/2026/comunicato-09',
+  ]);
+
+  const sectionHtml = `<section><h4>14 ottobre 2026</h4><a>${headline}</a><a href="">${headline}</a></section>`;
+  assert.deepEqual(
+    [...extractDatesFromHtml(sectionHtml, BASE_URL, { dateFromSectionHeading: 'h4' })],
+    [],
+  );
+});
+
+test('quote-aware embedded script scanning preserves the publish date', () => {
+  const title = 'Il Consiglio federale approva il nuovo accordo embedded';
+  const html = '<script type="application/json" data-note="a > b">'
+    + JSON.stringify({ cards: [{ title, publishDate: '2026-10-14T09:30:00Z' }] })
+    + '</script>'
+    + `<a href="/it/newnsb/2026/comunicato-10">${title}</a>`;
+  const [item] = extractHeadlines(html, BASE_URL, { quirks: { embeddedDateField: 'publishDate' } });
+
+  assert.equal(item.date?.toISOString(), '2026-10-14T09:30:00.000Z');
+  assert.equal(
+    extractEmbeddedHeadlineDates(html, 'publishDate').get(title)?.toISOString(),
+    '2026-10-14T09:30:00.000Z',
+  );
+});
+
+test('quote-aware structural and text-lead readers preserve card content', () => {
+  const html = '<article class="news-card">'
+    + '<h2 data-label="headline > title">Il Consiglio federale approva il nuovo accordo strutturale</h2>'
+    + '<div class="teaser" data-note="lead > text">Il Consiglio federale presenta oggi nuove misure per il mercato del lavoro</div>'
+    + '<a href="/it/newnsb/2026/comunicato-11">Leggi tutto</a>'
+    + '</article>';
+  const [item] = extractHeadlines(html, BASE_URL, { quirks: { extractCardLead: 'text' } });
+
+  assert.equal(item.headline, 'Il Consiglio federale approva il nuovo accordo strutturale');
+  assert.equal(item.lead, 'Il Consiglio federale presenta oggi nuove misure per il mercato del lavoro');
+});
+
+test('quote-aware media lead reader preserves an image title', () => {
+  const html = '<article class="news-card">'
+    + '<img data-note="image > metadata" title="Il Consiglio federale presenta una nuova misura importante">'
+    + '<a href="/it/newnsb/2026/comunicato-12">Una headline già disponibile nel link</a>'
+    + '</article>';
+  const [item] = extractHeadlines(html, BASE_URL, { quirks: { extractCardLead: 'media-title' } });
+
+  assert.equal(item.lead, 'Il Consiglio federale presenta una nuova misura importante');
 });
