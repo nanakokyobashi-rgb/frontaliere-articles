@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-decisioni-avs-ue-voto.webp",
+      "sha256": "7a5b702e8f713e3e7d130372556150b4e2a2a7d874ffb2de48ee22072f8fdde8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-decisioni-avs-ue-voto-480w.webp",
+      "sha256": "1eef4f8ee230320bc14b6bb64fd40b94854d334a39ab2c50fd2f44450fd3b25e"
+    }
+  ]
 }
