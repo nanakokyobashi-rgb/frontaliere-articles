@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/8qdeko8cquh2": {
-    "articleId": "emissione-prestiti-federali-2026",
-    "ts": "2026-09-09T16:49:45.300Z",
-    "keyForm": 2
-  },
   "https://www.stelle.admin.ch/it": {
     "articleId": "offerte-formazione-federale",
     "ts": "2026-10-13T23:44:58.193Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1956796/organizzazione-procedura-alliance-fallimento-cure": {
     "articleId": "alliance-care-fallimento-procedura",
     "ts": "2026-10-14T20:03:54.369Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/jmo3fhpgmujt": {
+    "articleId": "consiglio-federale-doganal-consultazione",
+    "ts": "2026-10-14T20:22:36.030Z",
     "keyForm": 2
   }
 }

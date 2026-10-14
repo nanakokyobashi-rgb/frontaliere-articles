@@ -8276,6 +8276,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.alliance-care-fallimento-procedura.title': 'Alliance Care schließt: Konkursverfahren eingeleitet',
     'blog.article.alliance-care-fallimento-procedura.excerpt': 'Alliance Care schließt und leitet das Konkursverfahren ein Die Entscheidung wurde in Bern getroffen 17 Entlassungen bei 91 Beschäftigten Die ASI hatte Darlehen gewährt Organisation →',
     'blog.article.alliance-care-fallimento-procedura.imageAlt': 'Leerer Flur einer schweizerischen Gesundheitseinrichtung mit natürlichem Licht, Symbol für die Schließung von Alliance Care.',
+    'blog.article.consiglio-federale-doganal-consultazione.title': 'Bundesrat eröffnet Vernehmlassung zu Zollverordnungen',
+    'blog.article.consiglio-federale-doganal-consultazione.excerpt': 'Der Bundesrat eröffnet am 14.',
+    'blog.article.consiglio-federale-doganal-consultazione.imageAlt': 'Schweizerisches Bundeshaus in Bern mit Zollbeamten an der Grenze',
 };
 
 export default blogMetaChDe;

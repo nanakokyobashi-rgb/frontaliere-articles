@@ -104456,6 +104456,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-consiglio-federale-doganal-consultazione': {
+    title: 'Consiglio federale avvia consultazione ordinanze doganali',
+    description: 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Il progetto riguarda la revisione totale del diritto doganale Il termine della consultazione è',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, avvia, consultazione',
+    ogTitle: 'Consultazione ordinanze doganali avviata',
+    ogDescription: 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Il progetto riguarda la revisione totale del diritto doganale Il termine della consultazione è',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-doganal-consultazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale avvia consultazione ordinanze doganali",
+      "description": "Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Il progetto riguarda la revisione totale del diritto doganale Il termine della consultazione è",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-consiglio-federale-doganal-consultazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale svizzero a Berna con funzionari doganali al confine"
+      },
+      "datePublished": "2026-10-14T20:22:35+00:00",
+      "dateModified": "2026-10-14T20:22:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-doganal-consultazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

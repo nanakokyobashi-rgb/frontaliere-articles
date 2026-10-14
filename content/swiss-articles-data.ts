@@ -27631,6 +27631,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'consiglio-federale-doganal-consultazione',
+    category: 'fiscale',
+    date: '2026-10-14T20:22:35.412Z',
+    image: '/images/blog/article-consiglio-federale-doganal-consultazione.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

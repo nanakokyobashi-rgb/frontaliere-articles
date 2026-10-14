@@ -8276,6 +8276,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.alliance-care-fallimento-procedura.title': 'Alliance Care chiude dopo poco più di un anno: avviata la procedura di fallimento',
     'blog.article.alliance-care-fallimento-procedura.excerpt': 'Alliance Care chiude e avvia il fallimento La decisione è stata presa a Berna 17 licenziamenti su 91 dipendenti L\'ASI aveva concesso prestiti Organizzazione →',
     'blog.article.alliance-care-fallimento-procedura.imageAlt': 'Corridoio vuoto di una struttura sanitaria svizzera con luce naturale, simbolo della chiusura di Alliance Care.',
+    'blog.article.consiglio-federale-doganal-consultazione.title': 'Consiglio federale avvia consultazione ordinanze doganali',
+    'blog.article.consiglio-federale-doganal-consultazione.excerpt': 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Il progetto riguarda la revisione totale del diritto doganale Il termine della consultazione è',
+    'blog.article.consiglio-federale-doganal-consultazione.imageAlt': 'Palazzo federale svizzero a Berna con funzionari doganali al confine',
 };
 
 export default blogMetaChIt;

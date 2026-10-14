@@ -8276,6 +8276,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.alliance-care-fallimento-procedura.title': 'Alliance Care ferme : procédure de faillite engagée',
     'blog.article.alliance-care-fallimento-procedura.excerpt': 'Alliance Care ferme et engage la procédure de faillite La décision a été prise à Berne 17 licenciements sur 91 employés L\'ASI avait accordé des prêts Organisation →',
     'blog.article.alliance-care-fallimento-procedura.imageAlt': 'Couloir vide d\'un établissement de santé suisse avec lumière naturelle, symbole de la fermeture d\'Alliance Care.',
+    'blog.article.consiglio-federale-doganal-consultazione.title': 'Le Conseil fédéral lance la consultation sur les ordonnances douanières',
+    'blog.article.consiglio-federale-doganal-consultazione.excerpt': 'Le Conseil fédéral lance la consultation le 14 octobre 2026 Le projet concerne la révision totale du droit douanier Le délai de consultation est',
+    'blog.article.consiglio-federale-doganal-consultazione.imageAlt': 'Palais fédéral suisse à Berne avec des douaniers à la frontière',
 };
 
 export default blogMetaChFr;
