@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-fallimenti-aziendali-svizzera-aumento.webp",
+      "sha256": "ff47c737f13e83112f4610b1ec33b350df000a4e38d95cd1d38f6d876b47c95f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-fallimenti-aziendali-svizzera-aumento-480w.webp",
+      "sha256": "45a90ed811e4a4d37f9f8c4c5eae95455fff65caede672d4f4d437aa53f62af6"
+    }
+  ]
 }
