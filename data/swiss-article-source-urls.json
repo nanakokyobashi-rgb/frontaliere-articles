@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1949053/zimmer-processo-biomet-winterthur-impieghi": {
-    "articleId": "zimmer-biomet-tagli-impieghi",
-    "ts": "2026-09-09T14:26:36.694Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1949067/ubs-yumo-svizzera-piattaforma-giovani-insegna-fare-risparmi-investimenti": {
     "articleId": "ubs-yumo-educazione-finanziaria",
     "ts": "2026-09-09T14:43:40.499Z",
@@ -2497,6 +2492,11 @@
   "https://www.seco.admin.ch/it/newnsb/cx62zqr2mreh": {
     "articleId": "nuovo-accordo-commercio-elettronico",
     "ts": "2026-10-14T17:04:53.632Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/aziende-caute-nell%27assumere%2c-malgrado-la-buona-congiuntura/92217267": {
+    "articleId": "assunzioni-svizzera-cautela-2026",
+    "ts": "2026-10-14T17:31:30.647Z",
     "keyForm": 2
   }
 }
