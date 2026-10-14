@@ -8225,6 +8225,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Licenza esercizio pubblico Zurigo: requisiti e domanda',
     'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Guida alla licenza per esercizi pubblici nel Cantone di Zurigo: autorità competenti, requisiti, scadenze, fisco e gestione del personale.',
     'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Licenza per esercizio pubblico nel Cantone di Zurigo',
+    'blog.article.tasse-universitarie-zurigo-guida.title': 'Tasse universitarie Canton Zurigo: guida e iscrizione',
+    'blog.article.tasse-universitarie-zurigo-guida.excerpt': 'Scopri come orientarti tra le tasse universitarie nel Cantone di Zurigo, dalle categorie di studenti alle procedure di iscrizione e contributi.',
+    'blog.article.tasse-universitarie-zurigo-guida.imageAlt': 'Edificio universitario e studenti nel Cantone di Zurigo',
 };
 
 export default blogMetaChIt;

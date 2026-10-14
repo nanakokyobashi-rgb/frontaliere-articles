@@ -2764,6 +2764,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'grandine-svizzera-danni-swiss-re': { it: 'grandine-svizzera-danni-swiss-re', en: 'swiss-hail-damage-swiss-re', de: 'schweizer-hagelschaden-swiss-re', fr: 'grele-suisse-dommages-swiss-re' },
  'collaudo-veicoli-canton-zurigo': { it: 'collaudo-veicoli-canton-zurigo', en: 'vehicle-inspection-canton-zurich', de: 'fahrzeugkontrolle-kanton-zuerich', fr: 'controle-vehicules-canton-zurich' },
  'licenza-pubblico-zurigo-requisiti': { it: 'licenza-pubblico-zurigo-requisiti', en: 'zurich-public-establishment-license-requirements', de: 'zuerich-gastgewerbebewilligung-anforderungen', fr: 'licence-etablissement-public-zurich-exigences' },
+ 'tasse-universitarie-zurigo-guida': { it: 'tasse-universitarie-zurigo-guida', en: 'zurich-university-tuition-fees-guide', de: 'universitaetsgebuehren-zuerich-leitfaden', fr: 'frais-universitaires-zurich-guide' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

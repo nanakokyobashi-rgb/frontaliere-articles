@@ -8225,6 +8225,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Zurich public establishment license: requirements and application',
     'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Guide to the license for public establishments in the Canton of Zurich: competent authorities, requirements, deadlines, taxation and personnel management.',
     'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Public establishment license in the Canton of Zurich',
+    'blog.article.tasse-universitarie-zurigo-guida.title': 'University tuition fees in the Canton of Zurich: guide and enrollment',
+    'blog.article.tasse-universitarie-zurigo-guida.excerpt': 'Discover how to navigate university fees in the Canton of Zurich, from student categories to enrollment procedures and contributions.',
+    'blog.article.tasse-universitarie-zurigo-guida.imageAlt': 'University building and students in the Canton of Zurich',
 };
 
 export default blogMetaChEn;

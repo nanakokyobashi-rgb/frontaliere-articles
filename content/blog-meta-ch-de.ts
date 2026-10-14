@@ -8225,6 +8225,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Gastgewerbebewilligung Zürich: Voraussetzungen und Antrag',
     'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Leitfaden zur Bewilligung für Gastgewerbebetriebe im Kanton Zürich: zuständige Behörden, Voraussetzungen, Fristen, Steuern und Personalführung.',
     'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Gastgewerbebewilligung im Kanton Zürich',
+    'blog.article.tasse-universitarie-zurigo-guida.title': 'Studiengebühren im Kanton Zürich: Leitfaden und Einschreibung',
+    'blog.article.tasse-universitarie-zurigo-guida.excerpt': 'Erfahre, wie du dich bei den Studiengebühren im Kanton Zürich zurechtfindest, von den Studierendenkategorien bis zu den Einschreibungsverfahren und Beiträgen.',
+    'blog.article.tasse-universitarie-zurigo-guida.imageAlt': 'Universitätsgebäude und Studierende im Kanton Zürich',
 };
 
 export default blogMetaChDe;

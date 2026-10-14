@@ -8225,6 +8225,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Licence d’établissement public à Zurich : conditions et demande',
     'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Guide de la licence pour les établissements publics dans le canton de Zurich : autorités compétentes, conditions, délais, fiscalité et gestion du personnel.',
     'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Licence d\'établissement public dans le canton de Zurich',
+    'blog.article.tasse-universitarie-zurigo-guida.title': 'Frais universitaires dans le canton de Zurich : guide et inscription',
+    'blog.article.tasse-universitarie-zurigo-guida.excerpt': 'Découvrez comment vous y retrouver parmi les frais universitaires dans le canton de Zurich, des catégories d’étudiants aux procédures d’inscription et aux contributions.',
+    'blog.article.tasse-universitarie-zurigo-guida.imageAlt': 'Bâtiment universitaire et étudiants dans le canton de Zurich',
 };
 
 export default blogMetaChFr;

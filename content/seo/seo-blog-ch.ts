@@ -103793,6 +103793,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tasse-universitarie-zurigo-guida': {
+    title: 'Tasse universitarie Canton Zurigo: guida e iscrizione',
+    description: 'Guida pratica alle tasse universitarie nel Cantone di Zurigo: istituzioni, categorie di studenti, procedure di iscrizione, esenzioni e contributi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tasse, universitarie, canton, zurigo',
+    ogTitle: 'Tasse universitarie Canton Zurigo: guida a iscrizione e contributi',
+    ogDescription: 'Tutto quello che serve sapere sulle tasse universitarie nel Cantone di Zurigo: come verificare le istituzioni, le categorie di studenti, le procedure di iscrizione, le esenzioni e i contributi ufficiali.',
+    canonicalPath: '/articoli-svizzera/tasse-universitarie-zurigo-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tasse universitarie Canton Zurigo: guida e iscrizione",
+      "description": "Guida pratica alle tasse universitarie nel Cantone di Zurigo: istituzioni, categorie di studenti, procedure di iscrizione, esenzioni e contributi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tasse-universitarie-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio universitario e studenti nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-14T04:09:09+00:00",
+      "dateModified": "2026-10-14T04:09:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tasse-universitarie-zurigo-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
