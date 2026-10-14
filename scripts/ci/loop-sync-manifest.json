@@ -2860,7 +2860,7 @@
       "reason": "Scanner HTML quote-aware condiviso da create-article.mjs e canton-news-sources.mjs per il generatore e il crawler delle fonti, entrambi corpus-specifici. Il sito non ha un consumer da importare attraverso il confine HTTP; un eventuale porting richiede una valutazione e un adattamento separati.",
       "baseline": {
         "site": null,
-        "corpus": "d4e37d319f8e5a7b",
+        "corpus": "44e8e866f127bf72",
         "alignedAt": "2026-10-14"
       }
     },
