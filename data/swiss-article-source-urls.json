@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/s/4068571": {
-    "articleId": "f35-caccia-commissione-amherd",
-    "ts": "2026-09-09T02:21:06.197Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/ambiente/isole-di-calore-serve-pi%c3%b9-verde-in-citt%c3%a0--4065398.html": {
     "articleId": "regola-3-30-300-verde-citta",
     "ts": "2026-09-09T05:21:41.639Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/banca-cantonale-grigione%3a-reto-m%c3%bcller-nuovo-membro-consiglio-banca/92210917": {
     "articleId": "bcg-consiglio-mueller",
     "ts": "2026-10-13T22:56:26.657Z",
+    "keyForm": 2
+  },
+  "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/le-giovani-guadagnano-meno-nonostante-maggiore-istruzione/92206648": {
+    "articleId": "divario-reddito-giovani-svizzera",
+    "ts": "2026-10-14T00:12:27.072Z",
     "keyForm": 2
   }
 }

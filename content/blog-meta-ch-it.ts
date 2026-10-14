@@ -8201,6 +8201,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.offerte-formazione-federale.title': 'Amministrazione federale: lavoro, praticantati e formazione',
     'blog.article.offerte-formazione-federale.excerpt': 'L\'Amministrazione federale propone un lavoro significativo Gli studenti neolaureati hanno un\'ampia gamma di praticantati Sono disponibili 50 formazioni',
     'blog.article.offerte-formazione-federale.imageAlt': 'Castelgrande a Bellinzona, immagine svizzera per il lavoro federale',
+    'blog.article.divario-reddito-giovani-svizzera.title': 'Divario salariale giovani Svizzera: cala il gap di reddito',
+    'blog.article.divario-reddito-giovani-svizzera.excerpt': 'Tra i nati nel 1995, il divario di reddito è del 14% Tra i nati nel 1965, il divario era del 55% Nel 2025, il titolo terziario riguarda il 54% delle giovani',
+    'blog.article.divario-reddito-giovani-svizzera.imageAlt': 'Vista di Lugano con giovani professionisti',
 };
 
 export default blogMetaChIt;

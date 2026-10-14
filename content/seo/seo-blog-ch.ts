@@ -103496,6 +103496,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-divario-reddito-giovani-svizzera': {
+    title: 'Divario salariale giovani Svizzera: cala il gap di reddito',
+    description: 'Tra i nati nel 1995, il divario di reddito è del 14% Tra i nati nel 1965, il divario era del 55% Nel 2025, il titolo terziario riguarda il 54% delle giovani',
+    keywords: 'frontalieri, ticino, svizzera, italia, divario, salariale, giovani, cala',
+    ogTitle: 'Divario salariale giovani Svizzera: cala il gap di reddito',
+    ogDescription: 'Tra i nati nel 1995, il divario di reddito è del 14% Tra i nati nel 1965, il divario era del 55% Nel 2025, il titolo terziario riguarda il 54% delle giovani',
+    canonicalPath: '/articoli-svizzera/divario-reddito-giovani-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Divario salariale giovani Svizzera: cala il gap di reddito",
+      "description": "Tra i nati nel 1995, il divario di reddito è del 14% Tra i nati nel 1965, il divario era del 55% Nel 2025, il titolo terziario riguarda il 54% delle giovani",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-divario-reddito-giovani-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con giovani professionisti"
+      },
+      "datePublished": "2026-10-14T00:12:26+00:00",
+      "dateModified": "2026-10-14T00:12:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/divario-reddito-giovani-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
