@@ -179,7 +179,7 @@ test('il preflight del daily usa il mutex FU selezionato e attribuisce il verdet
   assert.match(SRC, /il drainer applica l'esito solo a quell'item/);
 });
 
-test('il gate stale legge lo scope FU prima del branch mutex e filtra le PR daily', () => {
+test('il gate stale congela lo scope FU ma mantiene il mutex sul branch daily condiviso', () => {
   const scope = step('Pre-flight — freeze daily item scope (zero-Claude)');
   const stale = step('Pre-flight — stale-dispatch gate (zero-Claude)');
   assert.ok(scope, 'manca lo snapshot per-item prima del gate stale-dispatch');
@@ -190,8 +190,9 @@ test('il gate stale legge lo scope FU prima del branch mutex e filtra le PR dail
     'il gate non deve valutare il branch aggregato prima di conoscere il FU selezionato',
   );
   assert.match(scope, /mutex-bin\/gh/);
-  assert.match(scope, /followupItemMarkers/);
-  assert.match(scope, /markers\.length === 0 \|\| !selected \|\| markers\.includes\(selected\)/);
+  assert.match(scope, /Tutti i FU daily usano ancora `fix\/issue-N`/);
+  assert.match(scope, /process\.stdout\.write\(JSON\.stringify\(prs\)\)/);
+  assert.doesNotMatch(scope, /followupItemMarkers/);
   assert.match(stale, /DAILY_BUCKET: \$\{\{ steps\.scope_input\.outputs\.is_daily_bucket \}\}/);
   assert.match(stale, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);
   assert.match(stale, /MUTEX_BASE_PATH: \$\{\{ steps\.scope_input\.outputs\.mutex_base_path \}\}/);
@@ -223,7 +224,8 @@ test('il guard daily ritenta il marker e ripristina la coda se il commento non p
   assert.match(guard, /for attempt in 1 2 3/);
   assert.match(guard, /marker_posted=false/);
   assert.match(guard, /gh issue comment "\$ISSUE_NUMBER" --repo "\$GH_REPO" --body-file/);
-  assert.match(guard, /gh issue edit "\$ISSUE_NUMBER" --repo "\$GH_REPO" \\\s+--remove-label fu-parked --add-label agent:fix-queued/);
+  assert.match(guard, /gh issue edit "\$ISSUE_NUMBER" --repo "\$GH_REPO" \\\s+--remove-label fu-parked --remove-label automation-deferred \\\s+--add-label agent:fix-queued/);
   assert.match(guard, /fu-parked senza FOLLOWUP_ITEM/);
+  assert.match(guard, /automation-deferred/);
   assert.match(guard, /recovery label daily workflows-scope fallita/);
 });
