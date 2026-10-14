@@ -8216,6 +8216,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zurich : guide des plaques et de l’immatriculation',
     'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Procédure d’immatriculation, documents et changement de propriétaire : vérifiez les exigences et les coûts auprès de l’office de la circulation compétent.',
     'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Mains tenant une plaque d\'immatriculation suisse dans un bureau de circulation à Zurich',
+    'blog.article.grandine-svizzera-danni-swiss-re.title': 'Grêle en août : Swiss Re estime les dommages à 1,7 milliard',
+    'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re estime à 1,7 milliard de francs les dommages assurés Environ 800 millions de francs concernent les véhicules L’orage du 28 août 2026 a touché cinq',
+    'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Grosses grêlons sur un asphalte mouillé en Suisse',
 };
 
 export default blogMetaChFr;

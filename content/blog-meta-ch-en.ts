@@ -8216,6 +8216,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zurich: guide to license plates and registration',
     'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Procedure for registration, documents, and change of ownership: verify the requirements and costs with the relevant motor vehicle office.',
     'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Hands handling a Swiss license plate in a traffic authority office in Zurich',
+    'blog.article.grandine-svizzera-danni-swiss-re.title': 'August hail: Swiss Re estimates 1,7 mld in damages',
+    'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re estimates 1,7 billion francs in insured losses Approximately 800 million francs concern vehicles The storm on August 28, 2026 affected five',
+    'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Large hailstones on wet asphalt in Switzerland',
 };
 
 export default blogMetaChEn;

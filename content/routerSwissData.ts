@@ -2761,6 +2761,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'pfister-risorse-difesa-federale': { it: 'pfister-risorse-difesa-federale', en: 'pfister-swiss-defense-resources', de: 'pfister-ressourcen-schweizer-armee', fr: 'pfister-ressources-armee-suisse' },
  'licenza-caccia-zurigo-requisiti': { it: 'licenza-caccia-zurigo-requisiti', en: 'zurich-hunting-license-requirements', de: 'zuerich-jagdschein-anforderungen', fr: 'permis-chasse-zurich-exigences' },
  'zurigo-targhe-immatricolazione-guida': { it: 'zurigo-targhe-immatricolazione-guida', en: 'zurich-plates-registration-guide', de: 'zuerich-kennzeichen-registrierung', fr: 'zurich-plaques-immatriculation' },
+ 'grandine-svizzera-danni-swiss-re': { it: 'grandine-svizzera-danni-swiss-re', en: 'swiss-hail-damage-swiss-re', de: 'schweizer-hagelschaden-swiss-re', fr: 'grele-suisse-dommages-swiss-re' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

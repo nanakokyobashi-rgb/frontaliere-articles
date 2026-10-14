@@ -103681,6 +103681,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-grandine-svizzera-danni-swiss-re': {
+    title: 'Grandine agosto: Swiss Re stima 1,7 mld danni | Frontaliere Ticino',
+    description: 'Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque',
+    keywords: 'frontalieri, ticino, svizzera, italia, grandine, agosto, swiss, stima',
+    ogTitle: 'Grandine agosto: Swiss Re stima 1,7 mld danni',
+    ogDescription: 'Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque',
+    canonicalPath: '/articoli-svizzera/grandine-svizzera-danni-swiss-re/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Grandine agosto: Swiss Re stima 1,7 mld danni",
+      "description": "Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-grandine-svizzera-danni-swiss-re.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Grossi chicchi di grandine su un'asfalto bagnato in Svizzera"
+      },
+      "datePublished": "2026-10-14T02:27:16+00:00",
+      "dateModified": "2026-10-14T02:27:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/grandine-svizzera-danni-swiss-re/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

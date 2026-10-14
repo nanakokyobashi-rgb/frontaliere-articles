@@ -8216,6 +8216,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zürich: Leitfaden zu Kontrollschildern und Zulassung',
     'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Verfahren für Zulassung, Dokumente und Halterwechsel: Anforderungen und Kosten beim zuständigen Strassenverkehrsamt prüfen.',
     'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Hände, die eine Schweizer Kennnummer in einem Strassenverkehrsamt in Zürich bearbeiten',
+    'blog.article.grandine-svizzera-danni-swiss-re.title': 'Hagel im August: Swiss Re schätzt Schäden in Höhe von 1,7 Mrd.',
+    'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re schätzt versicherte Schäden in Höhe von 1,7 Milliarden Franken Rund 800 Millionen Franken entfallen auf Fahrzeuge Das Unwetter vom 28.',
+    'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Große Hagelkörner auf nassem Asphalt in der Schweiz',
 };
 
 export default blogMetaChDe;

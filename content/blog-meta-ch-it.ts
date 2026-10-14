@@ -8216,6 +8216,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zurigo: guida a targhe e immatricolazione',
     'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Procedura per registrazione, documenti e cambio proprietario: verifica requisiti e costi presso l\'ufficio della circolazione competente.',
     'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Mani che trattano una targa svizzera in un ufficio dell\'autorità di circolazione a Zurigo',
+    'blog.article.grandine-svizzera-danni-swiss-re.title': 'Grandine agosto: Swiss Re stima 1,7 mld danni',
+    'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque',
+    'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Grossi chicchi di grandine su un\'asfalto bagnato in Svizzera',
 };
 
 export default blogMetaChIt;
