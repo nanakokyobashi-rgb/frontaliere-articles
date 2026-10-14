@@ -8282,6 +8282,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.consultazione-omc-commercio-digitale.title': 'Switzerland, consultation on the WTO e-commerce agreement',
     'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Plurilateral Agreement on Electronic Commerce at the WTO 67 members, including Switzerland, choose provisional implementation Consultation from 14 October 2026',
     'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzona, a symbolic Swiss setting for digital commerce.',
+    'blog.article.liberta-fondo-pene-sostitutive.title': 'Unpaid fines? Here’s who can save you from prison',
+    'blog.article.liberta-fondo-pene-sostitutive.excerpt': 'Freiheitsfonds has raised almost 100\'000 francs.',
+    'blog.article.liberta-fondo-pene-sostitutive.imageAlt': 'Person with fine and freedom fund symbol, Switzerland',
 };
 
 export default blogMetaChEn;

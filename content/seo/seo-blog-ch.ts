@@ -104549,6 +104549,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-liberta-fondo-pene-sostitutive': {
+    title: 'Multe non pagate? Ecco chi può salvarvi dal carcere',
+    description: 'Il Freiheitsfonds ha raccolto quasi 100\'000 franchi. 47 persone hanno evitato complessivamente 451 giorni di carcere. Nel 2024 ci sono stati 3\'935 ingressi',
+    keywords: 'frontalieri, ticino, svizzera, italia, multe, pagate, ecco, salvarvi',
+    ogTitle: 'Multe non pagate? Ecco chi può salvarvi dal carcere',
+    ogDescription: 'Il Freiheitsfonds ha raccolto quasi 100\'000 franchi.',
+    canonicalPath: '/articoli-svizzera/liberta-fondo-pene-sostitutive/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Multe non pagate? Ecco chi può salvarvi dal carcere",
+      "description": "Il Freiheitsfonds ha raccolto quasi 100'000 franchi. 47 persone hanno evitato complessivamente 451 giorni di carcere. Nel 2024 ci sono stati 3'935 ingressi",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/lavori-pubblica-utilita-multe-pene.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona con multa e simbolo del fondo libertà, Svizzera"
+      },
+      "datePublished": "2026-10-14T21:58:02+00:00",
+      "dateModified": "2026-10-14T21:58:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/liberta-fondo-pene-sostitutive/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

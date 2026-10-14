@@ -40,6 +40,16 @@
       "failureCount": 1,
       "requestedAt": "2026-10-14T18:54:17.455Z",
       "lastFailureAt": "2026-10-14T20:32:49.078Z"
+    },
+    {
+      "articleId": "liberta-fondo-pene-sostitutive",
+      "title": "Multe non pagate? Ecco chi può salvarvi dal carcere",
+      "fallbackImage": "/images/blog/lavori-pubblica-utilita-multe-pene.webp",
+      "reason": "All image providers failed for article-liberta-fondo-pene-sostitutive: openai-codex (vision gate rejected image: Generic synthetic Swiss scene relevant to the topic, but it include",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T21:58:03.380Z",
+      "lastFailureAt": "2026-10-14T21:58:03.380Z"
     }
   ]
 }

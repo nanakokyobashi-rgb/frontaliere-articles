@@ -8282,6 +8282,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.consultazione-omc-commercio-digitale.title': 'Suisse, consultation sur l\'accord OMC e-commerce',
     'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Accord plurilatéral sur le commerce électronique à l\'OMC 67 membres, dont la Suisse, choisissent la mise en œuvre provisoire Consultation à partir du 14 octobre 2026',
     'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzone, décor suisse symbolique du commerce numérique.',
+    'blog.article.liberta-fondo-pene-sostitutive.title': 'Amendes impayées ? Voici qui peut vous sauver de la prison',
+    'blog.article.liberta-fondo-pene-sostitutive.excerpt': 'Le Freiheitsfonds a récolté près de 100\'000 francs.',
+    'blog.article.liberta-fondo-pene-sostitutive.imageAlt': 'Personne avec amende et symbole du fonds de liberté, Suisse',
 };
 
 export default blogMetaChFr;

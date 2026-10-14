@@ -2783,6 +2783,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'alliance-care-fallimento-procedura': { it: 'alliance-care-fallimento-procedura', en: 'alliance-care-closes-after-just-over-a-year-bankruptcy-proceedings-initiated', de: 'alliance-care-schlie-t-konkursverfahren-eingeleitet', fr: 'alliance-care-ferme-procedure-de-faillite-engagee' },
  'consiglio-federale-doganal-consultazione': { it: 'consiglio-federale-doganal-consultazione', en: 'federal-council-customs-consultation', de: 'bunderrat-zollberatung', fr: 'conseil-federal-douanes-consultation' },
  'consultazione-omc-commercio-digitale': { it: 'consultazione-omc-commercio-digitale', en: 'wto-digital-trade-consultation', de: 'wto-konsultation-digitalhandel', fr: 'consultation-omc-commerce-numerique' },
+ 'liberta-fondo-pene-sostitutive': { it: 'liberta-fondo-pene-sostitutive', en: 'freedom-funds-alternative-sentences', de: 'freiheitsfonds-strafen-ersatz', fr: 'fonds-liberte-peines-substitutives' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

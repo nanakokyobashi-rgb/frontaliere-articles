@@ -8282,6 +8282,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.consultazione-omc-commercio-digitale.title': 'Schweiz, Vernehmlassung zum WTO-E-Commerce-Abkommen',
     'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Plurilaterales Abkommen über den elektronischen Geschäftsverkehr in der WTO 67 Mitglieder, darunter die Schweiz, entscheiden sich für die vorläufige Umsetzung Konsultation ab 14.',
     'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzona als symbolischer Schweizer Ort für den digitalen Handel.',
+    'blog.article.liberta-fondo-pene-sostitutive.title': 'Unbezahlte Bussen? Hier erfahren Sie, wer Sie vor dem Gefängnis bewahren kann',
+    'blog.article.liberta-fondo-pene-sostitutive.excerpt': 'Der Freiheitsfonds hat fast 100\'000 Franken gesammelt.',
+    'blog.article.liberta-fondo-pene-sostitutive.imageAlt': 'Person mit Strafe und Freiheitsfonds-Symbol, Schweiz',
 };
 
 export default blogMetaChDe;

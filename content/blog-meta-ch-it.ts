@@ -8282,6 +8282,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.consultazione-omc-commercio-digitale.title': 'Svizzera, consultazione sull\'accordo OMC per l\'e-commerce',
     'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Accordo plurilaterale sul commercio elettronico all\'OMC 67 membri, tra cui la Svizzera, scelgono l\'attuazione provvisoria Consultazione dal 14 ottobre 2026',
     'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzona, immagine simbolica della Svizzera e del commercio digitale.',
+    'blog.article.liberta-fondo-pene-sostitutive.title': 'Multe non pagate? Ecco chi può salvarvi dal carcere',
+    'blog.article.liberta-fondo-pene-sostitutive.excerpt': 'Il Freiheitsfonds ha raccolto quasi 100\'000 franchi.',
+    'blog.article.liberta-fondo-pene-sostitutive.imageAlt': 'Persona con multa e simbolo del fondo libertà, Svizzera',
 };
 
 export default blogMetaChIt;
