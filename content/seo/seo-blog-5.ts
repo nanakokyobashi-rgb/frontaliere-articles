@@ -108121,10 +108121,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-derby-basket-ticinese-massagno.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Derby di basket ticinese con Massagno"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T19:23:38+00:00",
       "dateModified": "2026-10-14T19:23:38+00:00",
@@ -108160,10 +108160,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "url": `${BASE_URL}/images/blog/article-controlli-polizia-cuvio-cuveglio.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Auto della Polizia Locale durante i controlli stradali tra Cuveglio e Cuvio"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T19:44:45+00:00",
       "dateModified": "2026-10-14T19:44:45+00:00",

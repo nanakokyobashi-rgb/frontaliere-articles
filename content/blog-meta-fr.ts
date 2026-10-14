@@ -13191,10 +13191,10 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.arma-biasca-inchiesta.imageAlt': 'Police sur les lieux de l\'agression au couteau à Biasca, Via Bellinzona',
     'blog.article.derby-basket-ticinese-massagno.title': 'Derby tessinois de basket : Massagno est le favori',
     'blog.article.derby-basket-ticinese-massagno.excerpt': 'Samedi, le premier duel entièrement tessinois sous les panneaux : Massagno est le favori, mais le derby peut obéir à des logiques différentes.',
-    'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Derby de basket tessinois avec Massagno',
+    'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Illustration générée pour cet article',
     'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Contrôles à Cuvio et Cuveglio : 7 permis retirés et 10 saisies',
     'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Sept permis retirés et dix véhicules saisis Contrôles également avec éthylomètre et taux supérieurs à 1,5 g/l Davantage d\'agents, approximativement entre 17 h et 20 h Le projet',
-    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Voiture de la police locale lors des contrôles routiers entre Cuveglio et Cuvio',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Illustration générée pour cet article',
 };
 
 export default blogMetaFr;

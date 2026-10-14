@@ -5,11 +5,11 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to work/training in Switzerland, but a recognizable foreground person is present.); gem",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office scene relevant to work; a recognizable foreground person is visible from behind.); gemini (Gemini image r",
       "status": "failed",
-      "failureCount": 2,
+      "failureCount": 3,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-14T10:35:45.585Z"
+      "lastFailureAt": "2026-10-14T20:27:12.097Z"
     },
     {
       "articleId": "gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel",
@@ -32,74 +32,14 @@
       "lastFailureAt": "2026-10-14T16:02:09.189Z"
     },
     {
-      "articleId": "rapporto-riciclaggio-denaro-svizzera",
-      "title": "Riciclaggio in Svizzera: servono più risorse e sanzioni",
-      "fallbackImage": "/images/blog/accordi-svizzera-ue-consiglio-federale.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T16:21:06.223Z",
-      "lastFailureAt": "2026-10-14T16:21:06.223Z"
-    },
-    {
-      "articleId": "assunzioni-svizzera-cautela-2026",
-      "title": "Assunzioni in Svizzera: aziende caute nonostante il PIL",
-      "fallbackImage": "/images/blog/asb-banche-svizzera-crescita-2026.webp",
-      "reason": "All image providers failed for article-assunzioni-svizzera-cautela-2026: openai-codex (vision gate rejected image: Generic synthetic business scene relevant to the topic, with no t",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T17:31:30.645Z",
-      "lastFailureAt": "2026-10-14T17:31:30.645Z"
-    },
-    {
-      "articleId": "legge-piattaforme-tutela-giovani",
-      "title": "Consiglio federale rafforza tutela giovani sulle piattaforme",
-      "fallbackImage": "/images/blog/accordi-svizzera-ue-consiglio-federale.webp",
-      "reason": "All image providers failed for article-legge-piattaforme-tutela-giovani: openai-codex (vision gate rejected image: Synthetic photorealistic illustration relevant to the topic, but",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T17:57:03.782Z",
-      "lastFailureAt": "2026-10-14T17:57:03.782Z"
-    },
-    {
       "articleId": "arma-biasca-inchiesta",
       "title": "Biasca, confermato l'arresto del 17enne",
       "fallbackImage": "/images/blog/article-biasca-17enne-arrestato-accoltellamento.webp",
-      "reason": "All image providers failed for article-arma-biasca-inchiesta: openai-codex (vision gate rejected image: Generic synthetic alpine street scene, but it contains two recognizable fore",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-14T18:54:17.455Z",
-      "lastFailureAt": "2026-10-14T18:54:17.455Z"
-    },
-    {
-      "articleId": "derby-basket-ticinese-massagno",
-      "title": "Derby ticinese di basket: Massagno è il favorito",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-derby-basket-ticinese-massagno: openai-codex (vision gate rejected image: Generic synthetic basketball illustration relevant to the topic, wi",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T19:23:38.999Z",
-      "lastFailureAt": "2026-10-14T19:23:38.999Z"
-    },
-    {
-      "articleId": "controlli-polizia-cuvio-cuveglio",
-      "title": "Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-controlli-polizia-cuvio-cuveglio: openai-codex (vision gate rejected image: Synthetic photorealistic illustration matching the police-road su",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T19:44:45.987Z",
-      "lastFailureAt": "2026-10-14T19:44:45.987Z"
-    },
-    {
-      "articleId": "alliance-care-fallimento-procedura",
-      "title": "Alliance Care chiude dopo poco più di un anno: avviata la procedura di fallimento",
-      "fallbackImage": "/images/blog/article-wagner-chiude-waldstatt-69-licenziamenti.webp",
-      "reason": "All image providers failed for article-alliance-care-fallimento-procedura: openai-codex (vision gate rejected image: Synthetic healthcare corridor illustration; the circular leaf e",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T20:03:54.367Z",
-      "lastFailureAt": "2026-10-14T20:03:54.367Z"
+      "lastFailureAt": "2026-10-14T20:32:49.078Z"
     }
   ]
 }

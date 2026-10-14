@@ -104212,10 +104212,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/accordi-svizzera-ue-consiglio-federale.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rapporto-riciclaggio-denaro-svizzera.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Palazzo federale a Berna, sede del Consiglio federale svizzero"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T16:21:05+00:00",
       "dateModified": "2026-10-14T16:21:05+00:00",
@@ -104285,10 +104290,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell'1,5% nel secondo trimestre 2026 Junior: 35% più",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/asb-banche-svizzera-crescita-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-assunzioni-svizzera-cautela-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ufficio moderno in Svizzera con vista sul lago per rappresentare il mercato del lavoro"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T17:31:30+00:00",
       "dateModified": "2026-10-14T17:31:30+00:00",
@@ -104319,10 +104329,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il Consiglio federale decide il 14 ottobre 2026. Il DATEC preparerà il messaggio entro giugno 2027. La segnalazione riguarderà tutti i contenuti presumibilmente",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/accordi-svizzera-ue-consiglio-federale.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-legge-piattaforme-tutela-giovani.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Teen svizzero che usa un laptop con icone social davanti alle Alpi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T17:57:03+00:00",
       "dateModified": "2026-10-14T17:57:03+00:00",
@@ -104436,10 +104451,10 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-wagner-chiude-waldstatt-69-licenziamenti.webp`,
+        "url": `${BASE_URL}/images/blog/article-alliance-care-fallimento-procedura.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Corridoio vuoto di una struttura sanitaria svizzera con luce naturale, simbolo della chiusura di Alliance Care."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T20:03:54+00:00",
       "dateModified": "2026-10-14T20:03:54+00:00",
