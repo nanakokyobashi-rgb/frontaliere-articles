@@ -162,7 +162,11 @@ test('build-api.mjs reads the frontaliere override file and feeds it into the fr
   );
   const callMatch = src.match(/buildSitemap\(\s*SECTION_REGISTRIES\[section\.section\],[^;]*?\)\s*,\s*\);/s);
   assert.ok(callMatch, 'could not find the per-section buildSitemap(...) call to inspect');
-  assert.match(callMatch[0], /SECTION_SITEMAP_SHADOW\[section\.section\],?\s*\)/);
+  assert.match(
+    callMatch[0],
+    /SECTION_SITEMAP_SHADOW\[section\.section\],\s*SECTION_SLUG_MODULES\[section\.section\]\.fallbackReasons\s*\?\?\s*\{\},\s*\)/,
+    'the canton sitemap must pass fallback provenance after its shadow set',
+  );
 });
 
 // Same class of defect, second surface: `collect()` (build-api.mjs) emits
