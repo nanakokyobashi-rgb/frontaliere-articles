@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/08/27/leggi-notizia/argomenti/varese/articolo/varese-la-bretella-autostradale-dovra-riaprire-in-entrambi-i-sensi-a-meta-settembre-anche-se-i-la.html": {
-    "articleId": "varese-bretella-riapertura-2026",
-    "ts": "2026-08-27T19:37:00.474Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/economia/1946424/bancastato-fabrizio-cieslakiewicz-c-e-una-reale-soddisfazione": {
     "articleId": "bancastato-semestrale-2026",
     "ts": "2026-08-28T04:00:55.545Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1956491/un-incidente-nella-vedeggio-cassarate-ha-mandato-in-tilt-il-traffico": {
     "articleId": "incidente-vedeggio-cassarate",
     "ts": "2026-10-14T02:51:33.173Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1956594/work-angelo-decisione-lavoratori-easy": {
+    "articleId": "easy-work-chiusura-264",
+    "ts": "2026-10-14T07:30:20.965Z",
     "keyForm": 2
   }
 }

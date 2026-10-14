@@ -44317,6 +44317,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'easy-work-chiusura-264',
+ category: 'novita',
+ date: '2026-10-14T07:30:20.276Z',
+ image: '/images/blog/swiss-life-taglio-posti-lavoro-2028.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
