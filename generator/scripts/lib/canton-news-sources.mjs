@@ -98,6 +98,14 @@ import {
   withItemIdentity,
 } from './source-url-ledger.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import {
+  findHtmlTagEndOutsideQuotes,
+  findHtmlRawTextClosingTag as rawTextClosingTag,
+  nextHtmlTag,
+  nextHtmlTagOutsideRawText,
+} from './html-tag-scanner.mjs';
+
+export { findHtmlTagEndOutsideQuotes };
 
 const SOURCE_CITATION_PREFIX_RE = /\*Fonte:\s*\[([^\]]+)\]\(/gu;
 
@@ -279,64 +287,6 @@ const CHARSET_RAW_TEXT_TAGS = new Set([
 
 function isHtmlWhitespace(char) {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
-}
-
-export function findHtmlTagEndOutsideQuotes(html, start) {
-  let quote = '';
-  for (let i = start + 1; i < html.length; i++) {
-    const char = html[i];
-    if (quote) {
-      if (char === quote) quote = '';
-    } else if (char === '"' || char === "'") {
-      quote = char;
-    } else if (char === '>') {
-      return i;
-    }
-  }
-  return -1;
-}
-
-function readHtmlTagAt(html, start) {
-  if (html[start] !== '<') return null;
-  let i = start + 1;
-  const closing = html[i] === '/';
-  if (closing) i += 1;
-  const nameStart = i;
-  if (!/[A-Za-z]/u.test(html[i] || '')) return null;
-  i += 1;
-  while (i < html.length && /[\w-]/u.test(html[i])) i += 1;
-  if (html[i] && !/[\s/>]/u.test(html[i])) return null;
-  const nameEnd = i;
-  const endIndex = findHtmlTagEndOutsideQuotes(html, start);
-  if (endIndex < 0) return null;
-  const attrs = html.slice(nameEnd, endIndex);
-  return {
-    start,
-    end: endIndex + 1,
-    closing,
-    name: html.slice(nameStart, nameEnd).toLowerCase(),
-    attrs,
-    selfClosing: !closing && isHtmlSelfClosingStartTag(html, nameEnd, endIndex),
-  };
-}
-
-function nextHtmlTag(html, from = 0) {
-  let start = html.indexOf('<', from);
-  while (start !== -1) {
-    const tag = readHtmlTagAt(html, start);
-    if (tag) return tag;
-    start = html.indexOf('<', start + 1);
-  }
-  return null;
-}
-
-function findHtmlRawTextClosingTag(html, from, name) {
-  const closing = new RegExp(`</${name}\\s*>`, 'ig');
-  closing.lastIndex = from;
-  const match = closing.exec(html);
-  return match
-    ? { start: match.index, end: match.index + match[0].length }
-    : null;
 }
 
 /** Legge gli stati degli attributi fino al `>` per distinguere `/` sintattico da un valore. */
@@ -603,20 +553,13 @@ function htmlAttributeValue(attrs, name) {
 export function selectPublishedTime(html) {
   const input = String(html || '');
   const publicationDates = [];
-  let cursor = 0;
-  while (cursor < input.length) {
-    const tag = nextHtmlTag(input, cursor);
-    if (!tag) break;
-    cursor = tag.end;
-    if (tag.closing) continue;
-    if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
-      const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
-      cursor = close?.end ?? input.length;
+  let tag = nextHtmlTagOutsideRawText(input);
+  while (tag) {
+    if (tag.closing || tag.name !== 'time') {
+      tag = nextHtmlTagOutsideRawText(input, tag.end);
       continue;
     }
-    if (tag.name !== 'time') continue;
-
-    const attrs = tag.attrs;
+    const attrs = tag.attrs || '';
     const itemprop = htmlAttributeValue(attrs, 'itemprop');
     const property = htmlAttributeValue(attrs, 'property');
     const className = htmlAttributeValue(attrs, 'class');
@@ -636,10 +579,14 @@ export function selectPublishedTime(html) {
     const classMarker = classTokens.some((token) => /^(?:published|pubdate|datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(token))
       || /^(?:(?:article|news|post))?(?:datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(compactClass);
     const dataMarker = /(?:^|\s)data-(?:published|date-published)(?:\s|=|$)/i.test(attrs);
-    if (!semanticMarker && !classMarker && !dataMarker) continue;
+    if (!semanticMarker && !classMarker && !dataMarker) {
+      tag = nextHtmlTagOutsideRawText(input, tag.end);
+      continue;
+    }
 
     const date = validDate(htmlAttributeValue(attrs, 'datetime'));
     if (date) publicationDates.push(date);
+    tag = nextHtmlTagOutsideRawText(input, tag.end);
   }
 
   const timestamps = new Set(publicationDates.map((date) => date.getTime()));
@@ -657,15 +604,15 @@ export function extractPublishedDateFromHtml(html) {
   const input = String(html || '');
   let jsonLdDate = null;
   let metaDate = null;
-  let cursor = 0;
-  while (cursor < input.length) {
-    const tag = nextHtmlTag(input, cursor);
-    if (!tag) break;
-    cursor = tag.end;
-    if (tag.closing) continue;
+  let tag = nextHtmlTag(input);
+  while (tag) {
+    if (tag.closing) {
+      tag = nextHtmlTag(input, tag.end);
+      continue;
+    }
 
     if (tag.name === 'script') {
-      const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
+      const close = rawTextClosingTag(input, tag.end, tag.name);
       if (!close) break;
       const type = htmlAttributeValue(tag.attrs, 'type').split(';', 1)[0].trim().toLowerCase();
       if (!jsonLdDate && type === 'application/ld+json') {
@@ -673,21 +620,23 @@ export function extractPublishedDateFromHtml(html) {
         const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(scriptBody));
         jsonLdDate = validDate(value?.[1]);
       }
-      cursor = close.end;
-      continue;
-    }
-    if (tag.name !== 'meta' || metaDate) {
-      if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
-        const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
-        cursor = close?.end ?? input.length;
-      }
+      tag = nextHtmlTag(input, close.end);
       continue;
     }
 
-    const attrs = tag.attrs;
-    const key = htmlAttributeValue(attrs, 'property') || htmlAttributeValue(attrs, 'name');
-    if (!/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) continue;
-    metaDate = validDate(htmlAttributeValue(attrs, 'content'));
+    if (tag.name === 'meta' && !metaDate) {
+      const key = htmlAttributeValue(tag.attrs, 'property') || htmlAttributeValue(tag.attrs, 'name');
+      if (/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) {
+        metaDate = validDate(htmlAttributeValue(tag.attrs, 'content'));
+      }
+    }
+
+    if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const close = rawTextClosingTag(input, tag.end, tag.name);
+      tag = close ? nextHtmlTag(input, close.end) : null;
+      continue;
+    }
+    tag = nextHtmlTag(input, tag.end);
   }
 
   if (jsonLdDate) return jsonLdDate;
@@ -883,7 +832,7 @@ function sourceArticleText(html, requestedHeadline = '') {
     const out = [];
     let open = nextHtmlTag(page);
     while (open) {
-      if (open.closing || open.name !== tag) {
+      if (open.closing || open.name !== tag || open.selfClosing) {
         open = nextHtmlTag(page, open.end);
         continue;
       }

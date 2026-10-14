@@ -35,6 +35,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import * as htmlTagScanner from '../scripts/lib/html-tag-scanner.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -52,7 +53,10 @@ function sliceBlock(startNeedle, fnNeedle) {
 }
 
 function sandbox(code, returnExpr) {
-  return new Function(`${code.replace(/^export /gm, '')}\nreturn ${returnExpr};`)();
+  return new Function(
+    'htmlTagScanner',
+    `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag } = htmlTagScanner;\n${code.replace(/^export /gm, '')}\nreturn ${returnExpr};`,
+  )(htmlTagScanner);
 }
 
 const { selectUndatedBySourceQuota, UNDATED_TOTAL_BUDGET, UNDATED_PER_SOURCE_QUOTA } = sandbox(

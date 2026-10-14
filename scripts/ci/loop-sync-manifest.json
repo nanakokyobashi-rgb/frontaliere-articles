@@ -2855,6 +2855,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/html-tag-scanner.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner HTML quote-aware condiviso da create-article.mjs e canton-news-sources.mjs per il generatore e il crawler delle fonti, entrambi corpus-specifici. Il sito non ha un consumer da importare attraverso il confine HTTP; un eventuale porting richiede una valutazione e un adattamento separati.",
+      "baseline": {
+        "site": null,
+        "corpus": "44e8e866f127bf72",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
       "path": "generator/scripts/lib/registry-canton-field.mjs",
       "mode": "corpus-only",
       "reason": "Lettura e scrittura testuale della riga `canton: [...]` nelle voci di content/*-articles-data.ts (inserita dopo articleType, idempotente, codici validati); importata da registry-article-type.mjs (renderRegistryEntry), dal backfill e dai test senza `npm ci`. Corpus-only: il registry vive solo qui, il sito legge articles.json attraverso l'allowlist di scripts/lib/registry-api-entry.mjs che non contiene `canton`.",
