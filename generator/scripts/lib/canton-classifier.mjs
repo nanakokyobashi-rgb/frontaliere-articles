@@ -344,7 +344,16 @@ const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ 
   .join('|');
 const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}|${caseInitial('l')}['’]?\\s*)?`;
 const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
-const AUDIENCE_RECIPIENT = `(?:\\p{Ll}[\\p{L}'-]*\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
+// Solo teste che nominano esplicitamente i destinatari: «gli abitanti del
+// Ticino», non «il mercato del Ticino» o «il lavoro in Ticino».
+const AUDIENCE_RECIPIENT_HEADS = [
+  'abitant[ei]', 'popolazion[ei]', 'resident[ei]', 'cittadin[aoei]',
+  'lavorator[ei]', 'frontalier[ei]', 'pendolar[ei]', 'famigli[ae]',
+  'student[ei]', 'studentess[ae]', 'pensionat[oi]', 'elettor[ei]',
+  'consumator[ei]', 'contribuent[ei]', 'aziend[ae]', 'imprese',
+];
+const AUDIENCE_RECIPIENT_HEAD = `(?:${AUDIENCE_RECIPIENT_HEADS.map(caseInitial).join('|')})`;
+const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_HEAD}\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
 const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
 const AUDIENCE_TARGET = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
@@ -385,17 +394,19 @@ const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
  * grigionese», «hockey ticinese»).
  */
 const PERSON_LEAD_WORDS = new Set([
-  'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'dieci', 'cento', 'mille', 'molti', 'tanti',
-  'alcuni', 'tutti', 'altri', 'altre', 'molte', 'diversi', 'numerosi', 'migliaia', 'centinaia', 'decine',
+  'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'sei', 'sette', 'otto', 'nove', 'dieci',
+  'cento', 'mille', 'molti', 'molte', 'tanti', 'tante', 'alcuni', 'alcune', 'tutti', 'tutte', 'altri', 'altre',
+  'diversi', 'diverse', 'numerosi', 'numerose', 'vari', 'varie', 'qualche', 'parecchi', 'parecchie', 'pochi',
+  'poche', 'migliaia', 'centinaia', 'decine',
   'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'del', 'dello', 'della', 'dei', 'degli', 'delle',
   'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
   'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'col', 'colla', 'coi', 'cogli', 'colle',
   'all', 'dall', 'nell', 'sull', 'coll',
 ]);
 /** Forme lessicali complete: evita falsi prefissi come «atletica» e «target». */
-const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
-/** Eta' scritta in cifre o in forma lessicale: «68enne», «quarantenne». */
-const PERSON_AGE_RE = /^(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]$/u;
+const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|lavoratric[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|giocatric[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|studentess[ae]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
+/** Eta' scritta in cifre o in forma lessicale, anche composta: «68enne», «ventiduenne». */
+const PERSON_AGE_RE = /^(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent)|(?:vent|trent|quarant|cinquant|sessant|settant|ottant|novant)(?:un|[ia](?:du|tre|quattr|cinqu|sei|sett|ott|nov)))enn[ei]$/u;
 /** Quantita' che possono reggere «di + demonimo»: «decine di ticinesi». */
 const PERSON_QUANTITY_RE = /^(?:pai[oa]|decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */

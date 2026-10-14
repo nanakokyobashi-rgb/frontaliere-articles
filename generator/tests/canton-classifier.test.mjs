@@ -167,8 +167,20 @@ describe('omonimi e falsi amici', () => {
       'Dei ticinesi bloccati all\'estero.',
       'Agli ticinesi serve assistenza.',
       'Decine di ticinesi attendono il rimpatrio.',
+      'Studentesse ticinesi in gara.',
+      'Giocatrici ticinesi in campo.',
+      'Lavoratrici ticinesi in sciopero.',
+      'Sei ticinesi feriti.',
+      'Sette ticinesi feriti.',
+      'Otto ticinesi feriti.',
+      'Nove ticinesi feriti.',
+      'Qualche ticinese ferito.',
+      'Numerose ticinesi ferite.',
+      'Varie ticinesi ferite.',
       '68enne ticinese ferito.',
       'Quarantenne ticinese soccorso.',
+      'Ventiduenne ticinese ferito.',
+      'Quarantaduenne ticinese ferita.',
     ]) {
       assert.equal(c.mentionsIn(text).find((m) => m.group === 'TI')?.who, true, text);
     }
@@ -264,6 +276,8 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Implicazioni per gli abitanti del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per la popolazione del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Impatto sul mercato del Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Impatto sul lavoro in Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
     // Un fatto in Ticino resta in Ticino.
     assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
