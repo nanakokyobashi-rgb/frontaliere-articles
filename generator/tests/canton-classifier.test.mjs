@@ -13,6 +13,7 @@
  *   - una testata ticinese supplementare non e' piu' fra le NEWS_SOURCES;
  *   - la riga `canton:` del registry non si scrive/rilegge in modo idempotente,
  *     o `canton` entra nell'API pubblica;
+ *   - i due falsi positivi source-backed della review P6a tornano nel registry;
  *   - `create-article.mjs` smette di popolare `canton` prima del lock.
  */
 import { test, describe } from 'node:test';
@@ -354,6 +355,12 @@ describe('dati', () => {
 });
 
 describe('campo canton nel registry', () => {
+  test('i falsi positivi source-backed della review P6a restano senza cantone', () => {
+    const registry = readRegistryCantons(fs.readFileSync(path.join(ROOT, 'content/blog-articles-data.ts'), 'utf8'));
+    assert.equal(registry.has('turisti-ticinesi-bloccati-medio-oriente'), false);
+    assert.equal(registry.has('uzbekistan-oro-gas-ticino-implicazioni'), false);
+  });
+
   const ENTRY = [
     '  {',
     "    id: 'a',",
