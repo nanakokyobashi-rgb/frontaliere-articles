@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-consiglio-federale-doganal-consultazione.webp",
-      "sha256": "7c325aaeafc1f5e6bc2710bc27f367b3e30bc3c9ca6bffc8d65b6123156f4495"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-consiglio-federale-doganal-consultazione-480w.webp",
-      "sha256": "533e8c0ab49ae1df34cd30622d9f2f5f7a0e5ccbde0b0b55262b1fe67a6806b2"
-    }
-  ]
+  "items": []
 }
