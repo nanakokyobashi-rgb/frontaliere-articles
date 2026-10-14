@@ -27,6 +27,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.uscita-svizzera-schengen-controlli.title': 'Schengen : contrôles systématiques possibles aux frontières',
     'blog.article.uscita-svizzera-schengen-controlli.excerpt': 'Rapport fédéral publié le 18 septembre 2026 Sans Schengen : contrôles systématiques aux frontières Jusqu’à 422.000 heures perdues chaque jour dans les embouteillages',
     'blog.article.uscita-svizzera-schengen-controlli.imageAlt': 'Trafic à la frontière entre l\'Italie et la Suisse dans le canton du Tessin',
+    'blog.article.sala-risveglio-bellinzona.title': 'Bloc opératoire San Giovanni à Bellinzona',
+    'blog.article.sala-risveglio-bellinzona.excerpt': 'Salle de réveil : 6 places adultes et 3 pédiatriques Parcours de la chirurgie générale à la robotique Environnements modernes, fonctionnels et technologiquement avancés Flux',
+    'blog.article.sala-risveglio-bellinzona.imageAlt': 'Salle de réveil du bloc opératoire de l\'Hôpital San Giovanni à Bellinzona',
 };
 
 export default blogMetaCantonTiFr;

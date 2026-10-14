@@ -27,6 +27,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.uscita-svizzera-schengen-controlli.title': 'Schengen: possibili controlli sistematici ai confini',
     'blog.article.uscita-svizzera-schengen-controlli.excerpt': 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi',
     'blog.article.uscita-svizzera-schengen-controlli.imageAlt': 'Traffico al confine tra Italia e Svizzera in Canton Ticino',
+    'blog.article.sala-risveglio-bellinzona.title': 'Blocco operatorio san giovanni a Bellinzona',
+    'blog.article.sala-risveglio-bellinzona.excerpt': 'Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi',
+    'blog.article.sala-risveglio-bellinzona.imageAlt': 'Sala risveglio del blocco operatorio dell\'Ospedale San Giovanni a Bellinzona',
 };
 
 export default blogMetaCantonTiIt;

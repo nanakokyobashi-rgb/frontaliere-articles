@@ -27,6 +27,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.uscita-svizzera-schengen-controlli.title': 'Schengen: mögliche systematische Kontrollen an den Grenzen',
     'blog.article.uscita-svizzera-schengen-controlli.excerpt': 'Bundesbericht veröffentlicht am 18.',
     'blog.article.uscita-svizzera-schengen-controlli.imageAlt': 'Verkehr an der Grenze zwischen Italien und der Schweiz im Kanton Tessin',
+    'blog.article.sala-risveglio-bellinzona.title': 'Operationsblock San Giovanni in Bellinzona',
+    'blog.article.sala-risveglio-bellinzona.excerpt': 'Aufwachraum: 6 Plätze für Erwachsene und 3 pädiatrische Plätze Von der Allgemeinchirurgie bis zur Robotik Moderne, funktionale und technologisch fortschrittliche Räumlichkeiten Abläufe',
+    'blog.article.sala-risveglio-bellinzona.imageAlt': 'Aufwachraum des Operationsblocks im Spital San Giovanni in Bellinzona',
 };
 
 export default blogMetaCantonTiDe;

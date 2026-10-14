@@ -27,6 +27,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.uscita-svizzera-schengen-controlli.title': 'Schengen: possible systematic border checks',
     'blog.article.uscita-svizzera-schengen-controlli.excerpt': 'Federal report published on September 18, 2026 Without Schengen: systematic border checks Up to 422.000 hours per day lost in traffic jams',
     'blog.article.uscita-svizzera-schengen-controlli.imageAlt': 'Traffic at the border between Italy and Switzerland in Canton Ticino',
+    'blog.article.sala-risveglio-bellinzona.title': 'San Giovanni operating room in Bellinzona',
+    'blog.article.sala-risveglio-bellinzona.excerpt': 'Recovery room: 6 adult and 3 pediatric beds Path from general surgery to robotics Modern, functional and technologically advanced environments Flows',
+    'blog.article.sala-risveglio-bellinzona.imageAlt': 'Recovery room of the San Giovanni Hospital operating block in Bellinzona',
 };
 
 export default blogMetaCantonTiEn;
