@@ -271,7 +271,7 @@ const T = {
     seoDescription: (dateLabel) =>
       `Bollettino frontalieri del ${dateLabel}: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.`,
     ogDescription: (dateLabel) =>
-      `I numeri del ${dateLabel} per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, il cambio del franco rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.`,
+      `I numeri del ${dateLabel} per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.`,
     imageAlt: (dateLabel) => `I numeri del giorno per i frontalieri – ${dateLabel}: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro`,
     intro: (wd, dateLabel) =>
       `Buongiorno, è ${wd} ${dateLabel}. Questo è il bollettino quotidiano per chi vive da una parte del confine e lavora dall'altra: quattro temi seguiti dal nostro monitoraggio — code ai valichi, benzina, cambio e lavoro — con i link alle pagine live per seguirli durante la giornata.`,
@@ -332,7 +332,7 @@ const T = {
     seoDescription: (dateLabel) =>
       `Cross-border brief, ${dateLabel}: latest measured border waiting times, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.`,
     ogDescription: (dateLabel) =>
-      `The numbers for ${dateLabel}, for cross-border commuters: how long the queue is at each crossing, which towns have the cheapest fuel, the latest recorded franc-euro rate and how many Swiss job listings were posted.`,
+      `The numbers for ${dateLabel}, for cross-border commuters: how long the queue is at each crossing, which towns have the cheapest fuel, what the latest recorded franc-euro rate is and how many Swiss job listings were posted.`,
     imageAlt: (dateLabel) => `The day's numbers for cross-border commuters – ${dateLabel}: border waits, fuel prices, CHF-EUR rate and job listings`,
     intro: (wd, dateLabel) =>
       `Hello — it's ${wd}, ${dateLabel}. This is the daily brief for people who live on one side of the border and work on the other: four topics tracked by our monitoring — border queues, fuel, the exchange rate and jobs — each with a link to its live page.`,
@@ -393,7 +393,7 @@ const T = {
     seoDescription: (dateLabel) =>
       `Grenzgänger-Bulletin vom ${dateLabel}: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.`,
     ogDescription: (dateLabel) =>
-      `Die Zahlen vom ${dateLabel} für Grenzgänger: wie lange man an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, den zuletzt erfassten Franken-Euro-Kurs und wie viele Stellen neu dazugekommen sind.`,
+      `Die Zahlen vom ${dateLabel} für Grenzgänger: wie lange man an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, wie der Franken zuletzt zum Euro stand und wie viele Stellen neu dazugekommen sind.`,
     imageAlt: (dateLabel) => `Die Zahlen des Tages für Grenzgänger – ${dateLabel}: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote`,
     intro: (wd, dateLabel) =>
       `Guten Tag — heute ist ${wd}, der ${dateLabel}. Das ist das tägliche Bulletin für alle, die auf der einen Seite der Grenze wohnen und auf der anderen arbeiten: vier Themen aus unserem Monitoring — Staus an den Übergängen, Benzin, Wechselkurs und Arbeitsmarkt — jeweils mit Link zur Live-Seite.`,
@@ -454,7 +454,7 @@ const T = {
     seoDescription: (dateLabel) =>
       `Bulletin du frontalier du ${dateLabel} : les files relevées aux douanes, l'essence la moins chère, taux franc-euro et nouvelles offres d'emploi en Suisse.`,
     ogDescription: (dateLabel) =>
-      `Les chiffres du ${dateLabel} pour les frontaliers : combien de temps on attend à chaque douane, où l'essence coûte le moins cher, le dernier taux franc-euro relevé et combien d'offres d'emploi sont parues en Suisse.`,
+      `Les chiffres du ${dateLabel} pour les frontaliers : combien de temps on attend à chaque douane, où l'essence coûte le moins cher, quel est le dernier taux franc-euro relevé et combien d'offres d'emploi sont parues en Suisse.`,
     imageAlt: (dateLabel) => `Les chiffres du jour pour les frontaliers – ${dateLabel} : attentes aux douanes, prix de l'essence, taux CHF-EUR et offres d'emploi`,
     intro: (wd, dateLabel) =>
       `Bonjour — nous sommes ${wd} ${dateLabel}. Voici le bulletin quotidien pour celles et ceux qui vivent d'un côté de la frontière et travaillent de l'autre : quatre thèmes suivis par notre monitoring — files aux douanes, essence, taux de change et emploi — chacun avec le lien vers sa page en direct.`,
