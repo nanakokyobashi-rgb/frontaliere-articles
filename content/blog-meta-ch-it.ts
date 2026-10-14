@@ -125,7 +125,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': 'La 13esima AVS va in conferenza di conciliazione',
     'blog.article.avs-finanziamento-13esima.excerpt': 'Nessun accordo tra Consiglio Nazionale e Stati sul finanziamento della 13esima AVS',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Edificio del Parlamento svizzero a Berna con logo AVS',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan: licenziamenti per furto di essenze',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan licenzia dipendenti a Vernier (Ginevra)',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Industria chimica in Svizzera',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi cambia ai vertici e cerca nuovi soci',

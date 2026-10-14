@@ -3448,16 +3448,16 @@ const BLOG_SEO_METADATA: Record<string, SEOMetadata> = {
  },
 
  'blog-salario-minimo-ticino-accordo': {
- title: 'Salario minimo Ticino: si punta a 22 CHF l\'ora',
+ title: 'Salario minimo Ticino: proposta a 22 CHF l\'ora',
  description: 'Scopri i dettagli della bozza di accordo sul salario minimo in Ticino: aumento graduale da 20.50 a 22 CHF orari entro il 2029. Cosa cambia per i frontalieri.',
  keywords: 'salario minimo ticino, stipendio frontalieri, aumento salario svizzera, lavoro ticino, 22 franchi ora, contratti collettivi, busta paga svizzera',
- ogTitle: 'Salario minimo in Ticino verso i 22 CHF orari: cosa significa per la tua busta paga',
+ ogTitle: 'Salario minimo Ticino: proposta a 22 CHF l\'ora',
  ogDescription: 'Un accordo politico potrebbe portare il salario minimo ticinese a 4\'000 CHF mensili. Ecco il piano di aumento e le novità per i frontalieri.',
  canonicalPath: '/articoli-frontaliere/salario-minimo-ticino-accordo-aumento-22-franchi/',
  structuredData: {
  "@context": "https://schema.org",
  "@type": "NewsArticle",
- "headline": "Salario minimo in Ticino verso i 22 CHF orari: cosa significa per la tua busta paga",
+ "headline": "Salario minimo Ticino: proposta a 22 CHF l'ora",
  "description": "Scopri i dettagli della bozza di accordo sul salario minimo in Ticino: aumento graduale da 20.50 a 22 CHF orari entro il 2029. Cosa cambia per i frontalieri.",
  "image": {
  "@type": "ImageObject", "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.", "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini", "creator": { "@type": "NewsMediaOrganization", "@id": "https://frontaliereticino.ch/#organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" }, "creditText": "Frontaliere Ticino", "url": `${BASE_URL}/images/blog/salario-minimo-ticino-accordo.webp`,

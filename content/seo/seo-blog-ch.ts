@@ -1506,16 +1506,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-givaudan-licenziamenti': {
-    title: 'Givaudan: licenziamenti per furto di essenze | Frontaliere Ticino',
+    title: 'Givaudan licenzia dipendenti a Vernier (Ginevra)',
     description: 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta. Dati aggiornati 2026 per frontalieri in',
     keywords: 'frontalieri, ticino, svizzera, italia, givaudan, licenza, dipendenti, leader',
-    ogTitle: 'Givaudan: licenziamenti per furto di essenze',
+    ogTitle: 'Givaudan licenzia dipendenti a Vernier (Ginevra)',
     ogDescription: 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta.',
     canonicalPath: '/articoli-svizzera/givaudan-licenziamenti/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Givaudan: licenziamenti per furto di essenze",
+      "headline": "Givaudan licenzia dipendenti a Vernier (Ginevra)",
       "description": "Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze. Denuncia penale sporta. Dati aggiornati 2026 per frontalieri in",
       "image": {
         "@type": "ImageObject",
