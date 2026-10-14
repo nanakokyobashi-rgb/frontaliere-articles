@@ -1090,6 +1090,16 @@ export function dailyOutcomeItemId(commentBody) {
 
 const DAILY_TRANSIENT_OUTCOMES = new Set(['overlap-skip', 'pr-already-open']);
 
+function dailyBucketRouting(body) {
+  const items = parseFollowupItems(body || '');
+  const nextItem = selectFirstOpenItem(body || '');
+  if (nextItem) return { action: 'requeue', nextItem };
+  if (items.length && items.every((entry) => entry.state === 'done')) {
+    return { action: 'settled', nextItem: null };
+  }
+  return { action: 'blocked', nextItem: null };
+}
+
 /**
  * Convert one terminal fixer verdict into a daily-item transition. Returning
  * `handled: true` with a non-mutating action is deliberate: an unattributed or
@@ -1105,19 +1115,6 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
     return { handled: true, action: 'invalid-bucket', reason: validation.reason };
   }
 
-  if (DAILY_TRANSIENT_OUTCOMES.has(outcome)) {
-    if (!validation.item) return { handled: true, action: 'no-open-item', reason: validation.reason };
-    return {
-      handled: true,
-      action: 'retry',
-      itemId: validation.item.id,
-      state: validation.item.state,
-      body: String(issue.body || ''),
-      nextItem: validation.item,
-      changed: false,
-    };
-  }
-
   const itemId = dailyOutcomeItemId(outcomeCommentBody);
   if (!itemId) return { handled: true, action: 'unattributed', reason: 'outcome senza un solo FU stabile' };
   const items = parseFollowupItems(issue?.body || '');
@@ -1125,16 +1122,40 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
   if (!item || !item.state) {
     return { handled: true, action: 'item-missing', itemId, reason: 'FU assente o privo di State nel bucket' };
   }
-  // FIX_OUTCOME resta l'ultimo marker anche quando il bucket passa al FU
-  // successivo. Un item terminale dimostra quindi che questo marker è già
-  // stato consumato: non si deve riusare per riaccodare un altro item.
-  if (item.state !== 'open' && item.state !== 'in-progress') {
+  if (DAILY_TRANSIENT_OUTCOMES.has(outcome)) {
+    // Il retry agisce sulla label aggregata, che seleziona sempre il primo FU
+    // aperto. Non riaccodare quindi un marker vecchio (anche se punta a un FU
+    // ormai terminale) né un esito attribuito a un item diverso.
+    if (!validation.item || validation.item.id?.toUpperCase() !== itemId) {
+      return { handled: true, action: 'stale-attribution', itemId, reason: 'FOLLOWUP_ITEM non coincide con il primo FU aperto' };
+    }
     return {
       handled: true,
-      action: 'outcome-consumed',
+      action: 'retry',
       itemId,
       state: item.state,
-      reason: 'l’item ha già uno stato terminale; il FIX_OUTCOME non va riapplicato',
+      body: String(issue.body || ''),
+      nextItem: item,
+      changed: false,
+      consumed: false,
+    };
+  }
+
+  // Il body può essere già terminale anche se il successivo edit delle label
+  // è fallito. In tal caso non riapplichiamo il verdetto, ma riconciliamo la
+  // coda secondo lo stato complessivo del bucket: è il recovery idempotente
+  // della transizione body→label.
+  if (item.state !== 'open' && item.state !== 'in-progress') {
+    const routing = dailyBucketRouting(issue?.body || '');
+    return {
+      handled: true,
+      ...routing,
+      itemId,
+      state: item.state,
+      body: String(issue.body || ''),
+      changed: false,
+      consumed: true,
+      reason: 'verdetto già applicato; riconciliare soltanto le label del bucket',
     };
   }
 
@@ -1143,12 +1164,15 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
   if (body === null) {
     return { handled: true, action: 'item-uneditable', itemId, reason: 'State FU non aggiornabile in modo sicuro' };
   }
-  const remaining = parseFollowupItems(body);
-  const nextItem = selectFirstOpenItem(body);
-  const action = nextItem ? 'requeue' : remaining.length && remaining.every((entry) => entry.state === 'done')
-    ? 'settled'
-    : 'blocked';
-  return { handled: true, action, itemId, state, body, nextItem, changed: body !== String(issue.body || '') };
+  return {
+    handled: true,
+    ...dailyBucketRouting(body),
+    itemId,
+    state,
+    body,
+    changed: body !== String(issue.body || ''),
+    consumed: false,
+  };
 }
 
 // Esiti ZERO-WORK: la run è morta PRIMA che l'agent leggesse la issue, quindi
@@ -2215,6 +2239,24 @@ export function overlapSkipBlocker(comments) {
 /** La PR bloccante è ancora lavoro in volo? (`gh pr view --json state,labels`). Pura. */
 export function overlapBlockerActive(pr) {
   return String(pr?.state || '').toUpperCase() === 'OPEN' && !isStalledPr(pr?.labels || []);
+}
+
+/**
+ * A daily overlap retry waits while its declared PR is active. Missing comment
+ * or PR state is not proof that the blocker ended, so those reads fail closed.
+ */
+export function dailyOverlapRetryHold(comments, readBlocker) {
+  if (!Array.isArray(comments)) return { hold: true, blocker: null, reason: 'comments-unreadable' };
+  const blocker = overlapSkipBlocker(comments);
+  if (blocker === null) return { hold: false, blocker: null, reason: 'no-declared-blocker' };
+  let pr = null;
+  try {
+    if (typeof readBlocker === 'function') pr = readBlocker(blocker);
+  } catch {}
+  if (!pr) return { hold: true, blocker, reason: 'blocker-unverifiable' };
+  return overlapBlockerActive(pr)
+    ? { hold: true, blocker, reason: 'blocker-active' }
+    : { hold: false, blocker, reason: 'blocker-inactive' };
 }
 
 /**
@@ -3372,7 +3414,12 @@ function editChecked(num, { add = [], remove = [] }) {
   }
 }
 
-/** Replace a daily issue body only if the exact snapshot we parsed is still live. */
+/**
+ * Replace a daily issue body only if the exact snapshot we parsed is still live.
+ * GitHub issue edits have no body CAS; all automated daily-body writers must
+ * therefore stay in the shared repo-scoped `followup-daily-` Actions mutex.
+ * The fresh-read comparison is an additional stale-snapshot guard, not CAS.
+ */
 function updateDailyIssueBody(issue, nextBody) {
   const expectedTitle = String(issue?.title || '');
   const expectedBody = String(issue?.body || '');
@@ -3390,7 +3437,7 @@ function updateDailyIssueBody(issue, nextBody) {
     }
   })();
   if (!latest || String(latest.title || '') !== expectedTitle || String(latest.body || '') !== expectedBody) {
-    console.log(`DAILY-OUTCOME-SKIP #${issue.number}: titolo/body cambiato o illeggibile prima della scrittura CAS.`);
+    console.log(`DAILY-OUTCOME-SKIP #${issue.number}: titolo/body cambiato o illeggibile prima della scrittura.`);
     return false;
   }
 
@@ -5046,6 +5093,14 @@ export function runDrain() {
         }
         const transition = dailyBucketOutcomeTransition(liveIssue, outcome, outcomeEntry.comment?.body);
         if (!transition.handled) continue;
+        if (outcome === 'overlap-skip' && transition.action === 'retry') {
+          const comments = issueComments(iss.number);
+          const hold = dailyOverlapRetryHold(comments, readOverlapBlocker);
+          if (hold.hold) {
+            console.log(`DAILY-OUTCOME-HOLD #${iss.number}: ${hold.reason}${hold.blocker ? ` PR #${hold.blocker}` : ''} → item non riaccodato.`);
+            continue;
+          }
+        }
         attempted++;
         if (!['retry', 'requeue', 'settled', 'blocked'].includes(transition.action)) {
           console.log(`DAILY-OUTCOME-SKIP #${iss.number} (${transition.action}${transition.reason ? `: ${transition.reason}` : ''}) → nessuna transizione issue-wide.`);
@@ -5084,7 +5139,7 @@ export function runDrain() {
           : transition.action === 'settled'
             ? `✅ **Daily bucket riconciliato item per item:** ${transition.itemId} → ${transition.state} dall’ultimo FIX_OUTCOME ${outcome}; tutti gli item sono ora done. La chiusura resta al reconciler del corpus.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`
             : `⏸️ **Daily item bloccato dal verdetto del fixer:** ${transition.itemId} → blocked (FIX_OUTCOME ${outcome}). Il bucket resta aperto/parcheggiato; gli altri item non vengono dichiarati risolti.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`;
-        commentIssue(iss.number, note, 'daily item outcome comment');
+        if (!transition.consumed) commentIssue(iss.number, note, 'daily item outcome comment');
         console.log(`DAILY-OUTCOME #${iss.number}: ${transition.itemId} → ${transition.state}; ${transition.action}${transition.nextItem ? `, prossimo ${transition.nextItem.id}` : ''}`);
         continue;
       }

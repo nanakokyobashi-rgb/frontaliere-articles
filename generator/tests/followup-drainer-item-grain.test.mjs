@@ -23,6 +23,7 @@ import {
   applyParentDequeue,
   dailyBucketOutcomeTransition,
   dailyMutexDecision,
+  dailyOverlapRetryHold,
   dailyOutcomeItemId,
   detectDataPending,
   parentDequeueCommentDecision,
@@ -187,7 +188,7 @@ test('un verdetto terminale non risolutivo blocca un solo item e non ferma gli a
   assert.match(result.body, /### FU-2026-10-02-002[\s\S]*?- State: open/);
 });
 
-test('un FIX_OUTCOME già consumato non riaccoda un altro item né azzera il tentativo', () => {
+test('un FIX_OUTCOME già consumato ripara il routing senza riapplicare il verdetto', () => {
   for (const state of ['done', 'blocked']) {
     const body = DAILY_OUTCOME_BODY.replace('- State: open', `- State: ${state}`);
     const result = dailyBucketOutcomeTransition(
@@ -195,10 +196,13 @@ test('un FIX_OUTCOME già consumato non riaccoda un altro item né azzera il ten
       'already-fixed',
       '<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: already-fixed -->',
     );
-    assert.equal(result.action, 'outcome-consumed', `${state}: outcome non deve essere riapplicato`);
+    assert.equal(result.action, 'requeue', `${state}: il prossimo item deve tornare in coda`);
     assert.equal(result.itemId, 'FU-2026-10-02-001');
     assert.equal(result.state, state);
-    assert.equal(result.body, undefined);
+    assert.equal(result.nextItem.id, 'FU-2026-10-02-002');
+    assert.equal(result.body, body);
+    assert.equal(result.changed, false);
+    assert.equal(result.consumed, true, 'il verdetto non deve essere applicato/commentato due volte');
   }
 });
 
@@ -255,17 +259,63 @@ test('il mutex daily tratta come legacy anche una PR markerless sul branch issue
   assert.equal(dailyMutexDecision(wanted, { ok: true, prs: [differentIssueBranch] }, 2151).eligible, true);
 });
 
-test('un vecchio pr-already-open riaccoda il primo FU open se la sua PR non è più attiva', () => {
+test('un pr-already-open attribuito riaccoda solo il FU attualmente selezionato', () => {
   const result = dailyBucketOutcomeTransition(
     { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
     'pr-already-open',
-    'PR già in volo: #2571, skip.\n\n<!-- FIX_OUTCOME: pr-already-open -->',
+    'PR già in volo: #2571, skip.\n<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n\n<!-- FIX_OUTCOME: pr-already-open -->',
   );
   assert.equal(result.action, 'retry');
   assert.equal(result.itemId, 'FU-2026-10-02-001');
   assert.equal(result.nextItem.id, 'FU-2026-10-02-001');
   assert.equal(result.changed, false);
   assert.equal(result.body, DAILY_OUTCOME_BODY);
+});
+
+test('un marker transient stantio o attribuito a un altro FU non riaccoda il bucket', () => {
+  const result = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'pr-already-open',
+    '<!-- FOLLOWUP_ITEM: FU-2026-10-02-002 -->\n<!-- FIX_OUTCOME: pr-already-open -->',
+  );
+  assert.equal(result.action, 'stale-attribution');
+  assert.equal(result.itemId, 'FU-2026-10-02-002');
+  assert.equal(result.body, undefined);
+});
+
+test('un outcome transient del FU terminale non riaccoda il FU successivo', () => {
+  const body = DAILY_OUTCOME_BODY.replace(
+    '### FU-2026-10-02-001 — primo item\n- Target repository: nanakokyobashi-rgb/frontaliere-articles\n- State: open',
+    '### FU-2026-10-02-001 — primo item\n- Target repository: nanakokyobashi-rgb/frontaliere-articles\n- State: done',
+  );
+  const result = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body },
+    'pr-already-open',
+    'PR già in volo: #2571, skip.\n<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: pr-already-open -->',
+  );
+  assert.equal(result.action, 'stale-attribution');
+  assert.equal(result.itemId, 'FU-2026-10-02-001');
+  assert.equal(result.nextItem, undefined);
+  assert.equal(result.body, undefined);
+});
+
+test('overlap-skip trattiene il daily finché la PR dichiarata è attiva o non verificabile', () => {
+  const comments = [{
+    body: 'File già in volo nella PR #2571 — skip.\n<!-- FIX_OUTCOME: overlap-skip -->',
+    createdAt: '2026-10-02T12:00:00Z',
+  }];
+  assert.deepEqual(dailyOverlapRetryHold(null, () => null), {
+    hold: true, blocker: null, reason: 'comments-unreadable',
+  });
+  assert.deepEqual(dailyOverlapRetryHold(comments, () => ({ state: 'OPEN', labels: [] })), {
+    hold: true, blocker: 2571, reason: 'blocker-active',
+  });
+  assert.deepEqual(dailyOverlapRetryHold(comments, () => null), {
+    hold: true, blocker: 2571, reason: 'blocker-unverifiable',
+  });
+  assert.deepEqual(dailyOverlapRetryHold(comments, () => ({ state: 'CLOSED', labels: [] })), {
+    hold: false, blocker: 2571, reason: 'blocker-inactive',
+  });
 });
 
 test('un esito terminale su un daily senza altri open resta aggregato e non chiude', () => {
@@ -288,11 +338,32 @@ test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide'
   assert.ok(start >= 0 && end > start, 'stadi VERDICT-EXIT non trovati');
   assert.match(stage, /latestFixOutcomeCommentFromComments\(comments\)/);
   assert.match(stage, /dailyBucketOutcomeTransition\(liveIssue, outcome, outcomeEntry\.comment\?\.body\)/);
+  assert.match(stage, /dailyOverlapRetryHold\(comments, readOverlapBlocker\)/);
   assert.match(stage, /loadOpenPrsForDailyMutex\(\)/);
   assert.match(stage, /updateDailyIssueBody\(/);
+  assert.match(stage, /if \(!transition\.consumed\) commentIssue\(iss\.number, note, 'daily item outcome comment'\)/);
   assert.match(stage, /const add = transition\.action === 'requeue' \|\| transition\.action === 'retry' \? \[LBL_QUEUED\]/);
   assert.ok(stage.indexOf('dailyBucketOutcomeTransition(') < stage.indexOf('verdictExitDecision('));
   assert.match(DRAINER, /const dailyBucket = dailyBucketInfo\(iss\?\.title/);
+});
+
+test('tutti i writer automatici del body daily condividono un mutex repo-scoped non cancellabile', () => {
+  const writers = [
+    ['followup-drainer.yml', 'scripts/ci/followup-drainer.mjs'],
+    ['followup-reconcile.yml', 'scripts/ci/reconcile-followups.mjs'],
+    // Questo workflow ospita sia il collector sia gate-minted-followups.
+    ['post-merge-followup.yml', 'scripts/ci/collect-followup-batch.mjs'],
+    ['post-merge-followup.yml', 'scripts/ci/gate-minted-followups.mjs'],
+  ];
+  for (const [file, writer] of writers) {
+    const source = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
+    assert.ok(source.includes(writer), `${file} deve restare il workflow del writer ${writer}`);
+    const executableSource = source.replace(/^[ \t]*#.*$/gm, '');
+    assert.match(executableSource, /concurrency:\s*\n\s+group: followup-daily-\$\{\{ github\.repository \}\}\s*\n\s+cancel-in-progress: false/, `${file}: mutex condiviso richiesto`);
+  }
+  assert.match(DRAINER, /GitHub issue edits have no body CAS/);
+  assert.match(DRAINER, /shared repo-scoped `followup-daily-` Actions mutex/);
+  assert.doesNotMatch(DRAINER, /prima della scrittura CAS/);
 });
 
 test('il guard workflow del drainer è per-item e annota il blocco nello stesso esito', () => {
