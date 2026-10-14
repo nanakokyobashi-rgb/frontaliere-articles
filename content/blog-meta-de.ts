@@ -13144,7 +13144,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Stau nahe dem Vedeggio-Cassarate-Tunnel in Lugano',
     'blog.article.easy-work-chiusura-264.title': 'Easy Work schließt: 264 Arbeitsplätze in Chiasso gefährdet',
     'blog.article.easy-work-chiusura-264.excerpt': 'Easy Work wird bis zum 31.',
-    'blog.article.easy-work-chiusura-264.imageAlt': 'Schließung des Easy Work Büros in Chiasso, corso San Gottardo 106, mit geschlossenem Schild',
+    'blog.article.easy-work-chiusura-264.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.incidente-varesina-venegono.title': 'Massenkarambolage auf der Varesina: vier Verletzte in Venegono',
     'blog.article.incidente-varesina-venegono.excerpt': 'Unfall um 7 Uhr auf der Sp 233 in Venegono Inferiore Vier Autos beteiligt und vier Menschen verletzt Zwei Krankenwagen, ein Notarztwagen, Feuerwehr und Carabinieri',
     'blog.article.incidente-varesina-venegono.imageAlt': 'Stau auf der Varesina nach einem Unfall in Venegono Inferiore',
@@ -13158,7 +13158,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'Die Zahlen vom 14. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
     'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Arbeitslosigkeit im Tessin: voraussichtlich 3,45% Anfang 2027',
     'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Arbeitslosigkeit im Tessin auf dem Vormarsch: Prognostiziert 3,45% Anfang 2027 Ausländische Einwohner und Jugendliche, die am stärksten von dem Phänomen betroffen sind Aktuelle Quote von 2,87% im 3.',
-    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Blick auf das Finanzviertel in Lugano',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Für diesen Artikel erstellte Illustration',
 };
 
 export default blogMetaDe;

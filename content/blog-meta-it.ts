@@ -13146,7 +13146,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Traffico in coda nei pressi della galleria Vedeggio-Cassarate a Lugano',
     'blog.article.easy-work-chiusura-264.title': 'Easy Work chiude: 264 posti a rischio a Chiasso',
     'blog.article.easy-work-chiusura-264.excerpt': 'Easy Work chiuderà entro il 31 dicembre A rischio 264 posti di lavoro Sette amministrativi e 257 interinali coinvolti Consultazione avviata con l\'OCST Decisione',
-    'blog.article.easy-work-chiusura-264.imageAlt': 'Chiusura dell\'ufficio Easy Work a Chiasso, corso San Gottardo 106, con cartello di chiusura',
+    'blog.article.easy-work-chiusura-264.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.incidente-varesina-venegono.title': 'Carambola sulla Varesina: quattro feriti a Venegono',
     'blog.article.incidente-varesina-venegono.excerpt': 'Incidente alle 7 sulla Sp 233 a Venegono Inferiore Quattro auto coinvolte e quattro persone ferite Due ambulanze, automedica, vigili del fuoco e carabinieri',
     'blog.article.incidente-varesina-venegono.imageAlt': 'Traffico fermo sulla Varesina dopo un incidente a Venegono Inferiore',
@@ -13160,7 +13160,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
     'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Disoccupazione in Ticino: previsto 3,45% a inizio 2027',
     'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Disoccupazione in Ticino in crescita: previsto 3,45% a inizio 2027 Residenti stranieri e giovani i più colpiti dal fenomeno Tasso attuale al 2,87% nel terzo',
-    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Vista del distretto finanziario di Lugano',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Illustrazione generata per questo articolo',
 };
 
 export default blogMetaIt;

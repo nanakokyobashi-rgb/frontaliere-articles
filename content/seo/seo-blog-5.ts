@@ -107570,10 +107570,15 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Easy Work chiuderà entro il 31 dicembre A rischio 264 posti di lavoro Sette amministrativi e 257 interinali coinvolti Consultazione avviata con l'OCST Decisione",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/swiss-life-taglio-posti-lavoro-2028.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-easy-work-chiusura-264.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Chiusura dell'ufficio Easy Work a Chiasso, corso San Gottardo 106, con cartello di chiusura"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T07:30:20+00:00",
       "dateModified": "2026-10-14T07:30:20+00:00",
@@ -107726,10 +107731,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52.webp`,
+        "url": `${BASE_URL}/images/blog/article-previsioni-disoccupazione-ticino-2027.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Vista del distretto finanziario di Lugano"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T10:28:51+00:00",
       "dateModified": "2026-10-14T10:28:51+00:00",

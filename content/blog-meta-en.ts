@@ -13145,7 +13145,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Traffic queued near the Vedeggio-Cassarate tunnel in Lugano',
     'blog.article.easy-work-chiusura-264.title': 'Easy Work closes: 264 jobs at risk in Chiasso',
     'blog.article.easy-work-chiusura-264.excerpt': 'Easy Work will close by December 31 264 jobs at risk Seven administrative employees and 257 temporary workers involved Consultation launched with OCST Decision',
-    'blog.article.easy-work-chiusura-264.imageAlt': 'Closure of the Easy Work office in Chiasso, corso San Gottardo 106, with a closed sign',
+    'blog.article.easy-work-chiusura-264.imageAlt': 'Illustration generated for this article',
     'blog.article.incidente-varesina-venegono.title': 'Pile-up on the Varesina: four injured in Venegono',
     'blog.article.incidente-varesina-venegono.excerpt': 'Incident at 7 on the SP 233 in Venegono Inferiore Four cars involved and four people injured Two ambulances, a medical response car, firefighters and Carabinieri',
     'blog.article.incidente-varesina-venegono.imageAlt': 'Traffic halted on the Varesina road after a crash in Venegono Inferiore',
@@ -13159,7 +13159,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'The numbers for October 14, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
     'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Unemployment in Ticino: expected 3.45% at the beginning of 2027',
     'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Unemployment in Ticino rising: expected 3.45% at the beginning of 2027 Foreign residents and young people most affected by the phenomenon Current rate at 2.87% in the third',
-    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'View of the financial district in Lugano',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Illustration generated for this article',
 };
 
 export default blogMetaEn;
