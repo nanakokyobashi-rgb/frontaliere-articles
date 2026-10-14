@@ -103871,6 +103871,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-festivi-berna-calendario-guida': {
+    title: 'Giorni festivi Cantone di Berna: calendario e regole',
+    description: 'Guida ufficiale ai giorni festivi del Cantone di Berna. Scopri come verificare il calendario, le chiusure degli uffici e i rapporti con il livello federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, giorni, festivi, cantone, berna',
+    ogTitle: 'Giorni festivi Cantone di Berna: calendario e regole',
+    ogDescription: 'Guida completa e pratica per verificare il calendario dei giorni festivi nel Cantone di Berna, distinguendo tra livello cantonale, comunale e federale.',
+    canonicalPath: '/articoli-svizzera/festivi-berna-calendario-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giorni festivi Cantone di Berna: calendario e regole",
+      "description": "Guida ufficiale ai giorni festivi del Cantone di Berna. Scopri come verificare il calendario, le chiusure degli uffici e i rapporti con il livello federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-festivi-berna-calendario-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Calendario dei giorni festivi e guida amministrativa del Cantone di Berna"
+      },
+      "datePublished": "2026-10-14T04:59:00+00:00",
+      "dateModified": "2026-10-14T04:59:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/festivi-berna-calendario-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

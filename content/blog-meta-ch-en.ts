@@ -8231,6 +8231,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.zurigo-corsi-lingua-integrazione.title': 'Language courses in Zurich: integration and subsidies',
     'blog.article.zurigo-corsi-lingua-integrazione.excerpt': 'Guide to language courses and integration programs in the Canton of Zurich: competence, requirements, deadlines, SEM permits and contributions.',
     'blog.article.zurigo-corsi-lingua-integrazione.imageAlt': 'Administrative building in Zurich for language courses and integration',
+    'blog.article.festivi-berna-calendario-guida.title': 'Public holidays in the Canton of Bern: calendar and rules',
+    'blog.article.festivi-berna-calendario-guida.excerpt': 'Guide to the calendar of public holidays recognized by the Canton of Bern, with checks on offices, municipalities, institutions and federal levels.',
+    'blog.article.festivi-berna-calendario-guida.imageAlt': 'Public holidays calendar and administrative guide of the Canton of Bern',
 };
 
 export default blogMetaChEn;

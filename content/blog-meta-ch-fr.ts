@@ -8231,6 +8231,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.zurigo-corsi-lingua-integrazione.title': 'Cours de langue à Zurich : intégration et subventions',
     'blog.article.zurigo-corsi-lingua-integrazione.excerpt': 'Guide des cours de langue et des programmes d\'intégration dans le canton de Zurich : compétence, conditions requises, échéances, permis du SEM et subventions.',
     'blog.article.zurigo-corsi-lingua-integrazione.imageAlt': 'Bâtiment administratif à Zurich pour cours de langue et intégration',
+    'blog.article.festivi-berna-calendario-guida.title': 'Jours fériés du canton de Berne : calendrier et règles',
+    'blog.article.festivi-berna-calendario-guida.excerpt': 'Guide du calendrier des jours fériés reconnus par le canton de Berne, avec des vérifications concernant les bureaux, les communes, les institutions et les niveaux fédéraux.',
+    'blog.article.festivi-berna-calendario-guida.imageAlt': 'Calendrier des jours feries et guide administratif du Canton de Berne',
 };
 
 export default blogMetaChFr;
