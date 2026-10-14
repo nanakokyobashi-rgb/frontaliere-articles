@@ -274,7 +274,7 @@ const T = {
       `I numeri del ${dateLabel} per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.`,
     imageAlt: (dateLabel) => `I numeri del giorno per i frontalieri – ${dateLabel}: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro`,
     intro: (wd, dateLabel) =>
-      `Buongiorno, è ${wd} ${dateLabel}. Questo è il bollettino quotidiano per chi vive da una parte del confine e lavora dall'altra: quattro temi seguiti dal nostro monitoraggio — code ai valichi, benzina, cambio e lavoro — con i link alle pagine live per seguirli durante la giornata.`,
+      `È ${wd} ${dateLabel}. Questo è il bollettino quotidiano per chi vive da una parte del confine e lavora dall'altra: quattro temi seguiti dal nostro monitoraggio — code ai valichi, benzina, cambio e lavoro — con i link alle pagine live per seguirli durante la giornata.`,
     bwH: 'Attese ai valichi: rilevamenti disponibili',
     bwLead: (b) =>
       b.worst.waitMinutes >= 10
@@ -283,7 +283,7 @@ const T = {
     bwCols: ['Valico', 'Attesa', 'Stato'],
     bwMin: (n) => `${n} min`,
     bwLink: `Il traffico cambia di ora in ora: la situazione live di ogni valico è sulla [pagina del traffico alle dogane](${HUB.traffic.it}).`,
-    bwDown: '⚠️ Il monitoraggio dei valichi non ha dati freschi per questa edizione: il blocco torna nella prossima edizione. La situazione live resta sulla [pagina del traffico alle dogane](/traffico-dogane/).',
+    bwDown: '⚠️ Non ci sono dati sufficienti sui valichi per questa edizione: il blocco torna quando sono disponibili dati verificabili. La situazione live resta sulla [pagina del traffico alle dogane](/traffico-dogane/).',
     fuelH: 'Carburanti: prezzi comunicati al confine',
     fuelLead: (f) =>
       `Su ${f.municipalityCount} comuni di confine monitorati, nel riepilogo il pieno risulta meno caro in Svizzera in ${f.cheaperSwissCount} casi e in Italia in ${f.cheaperItalyCount}.`,
@@ -297,16 +297,16 @@ const T = {
     fuelDown: '⚠️ Il monitoraggio carburanti non ha dati verificabili per questa edizione: la sezione torna quando sono di nuovo disponibili dati verificabili. Intanto: [prezzi benzina al confine](/prezzi-benzina/oggi/).',
     fxH: 'Cambio franco–euro',
     fxLead: (e) =>
-      `Un franco vale **${fmt('it', e.rate, 4)} €** (rilevamento del ${e.lastDate}). Rispetto al giorno precedente ${describeDeltaIt(e.delta1d)}; su sette giorni la variazione è di ${signed('it', e.delta7d, 4)} €.`,
+      `Un franco vale **${fmt('it', e.rate, 4)} €** (rilevamento del ${e.lastDate}). Rispetto al precedente rilevamento ${describeDeltaIt(e.delta1d)}; rispetto al riferimento settimanale disponibile la variazione è di ${signed('it', e.delta7d, 4)} €.`,
     fxWhy: `💡 Per chi prende lo stipendio in franchi e spende in euro, il cambio È una parte dello stipendio: su 4.000 CHF, un centesimo di variazione vale 40 € al mese. Il [calcolatore dello stipendio netto](${HUB.salary.it}) e il [confronto dei servizi di cambio](${HUB.fx.it}) fanno i conti sul tuo caso.`,
-    fxDown: '⚠️ La serie del cambio non è aggiornata: il blocco torna nella prossima edizione. Il confronto dei servizi di cambio resta [qui](/compara-servizi/cambio-franco-euro/).',
+    fxDown: '⚠️ Non ci sono dati verificabili sul cambio per questa edizione: il blocco torna quando sono disponibili. Il confronto dei servizi di cambio resta [qui](/compara-servizi/cambio-franco-euro/).',
     jobsH: 'Lavoro: i numeri di ieri',
     jobsLead: (j) =>
       `Ieri sono arrivati **${fmt('it', j.yesterdayAdded)} nuovi annunci** di lavoro in Svizzera sul nostro job board; negli ultimi sette giorni ${fmt('it', j.last7dAdded)}. In totale gli annunci attivi sono **${fmt('it', j.activeJobs)}**${j.activeCompanies ? `, da ${fmt('it', j.activeCompanies)} aziende` : ''}.`,
     jobsLeadTotal: (j) =>
       `Sul nostro job board gli annunci di lavoro attivi in Svizzera sono **${fmt('it', j.activeJobs)}**${j.activeCompanies ? `, da ${fmt('it', j.activeCompanies)} aziende` : ''}${Number.isFinite(j.last7dAdded) ? `; negli ultimi sette giorni ne sono arrivati ${fmt('it', j.last7dAdded)} nuovi` : ''}.`,
     jobsLink: `Le offerte si filtrano per cantone, settore e città: [cerca lavoro in Ticino e in Svizzera](${HUB.jobs.it}).`,
-    jobsDown: '⚠️ Le statistiche del job board non sono aggiornate: il blocco torna nella prossima edizione. Gli annunci restano su [cerca lavoro](/cerca-lavoro-ticino/).',
+    jobsDown: '⚠️ Non ci sono statistiche verificabili del job board per questa edizione: il blocco torna quando sono disponibili. Gli annunci restano su [cerca lavoro](/cerca-lavoro-ticino/).',
     methodH: 'Come nasce questo bollettino',
     method:
       `I numeri qui sopra non arrivano da un'agenzia: sono il nostro monitoraggio. Le attese ai valichi vengono campionate più volte l'ora su tutti i valichi di confine svizzeri; i prezzi dei carburanti coprono i comuni italiani di fascia e i distributori svizzeri vicini al confine; il cambio segue la serie ufficiale giornaliera; gli annunci arrivano dai crawler del nostro job board. Il bollettino esce ogni giorno e può essere aggiornato durante la giornata — i periodi di osservazione dipendono dalla fonte, le pagine linkate restano live tutto il giorno.`,
@@ -344,7 +344,7 @@ const T = {
     bwCols: ['Crossing', 'Wait', 'Status'],
     bwMin: (n) => `${n} min`,
     bwLink: `Traffic shifts by the hour — every crossing's live status is on the [border traffic page](${HUB.traffic.en}).`,
-    bwDown: '⚠️ Border monitoring has no fresh data for this edition; this section returns in the next edition. Live status stays on the [border traffic page](/en/border-wait/).',
+    bwDown: '⚠️ There are insufficient border readings for this edition; this section returns when verifiable data is available. Live status stays on the [border traffic page](/en/border-wait/).',
     fuelH: 'Fuel: reported prices near the border',
     fuelLead: (f) =>
       `Across ${f.municipalityCount} monitored border municipalities, filling up is cheaper in Switzerland in ${f.cheaperSwissCount} of them and in Italy in ${f.cheaperItalyCount}.`,
@@ -358,16 +358,16 @@ const T = {
     fuelDown: '⚠️ Fuel monitoring has no verifiable data for this edition; this section returns when verifiable data are available again. Meanwhile: [border fuel prices](/en/gasoline-price-switzerland/today/).',
     fxH: 'CHF–EUR exchange rate',
     fxLead: (e) =>
-      `One franc buys **€${fmt('en', e.rate, 4)}** (reported on ${e.lastDate}). Versus the previous day ${describeDeltaEn(e.delta1d)}; over seven days the move is ${signed('en', e.delta7d, 4)} €.`,
+      `One franc buys **€${fmt('en', e.rate, 4)}** (reported on ${e.lastDate}). Versus the previous reading ${describeDeltaEn(e.delta1d)}; against the available weekly reference the move is ${signed('en', e.delta7d, 4)} €.`,
     fxWhy: `💡 If you earn francs and spend euros, the rate IS part of your salary: on CHF 4,000, one cent of movement is worth €40 a month. The [net salary calculator](${HUB.salary.en}) and the [currency-exchange comparison](${HUB.fx.en}) run the numbers for your case.`,
-    fxDown: '⚠️ The exchange-rate series is not up to date; this section returns in the next edition. The exchange comparison stays [here](/en/service-comparison/chf-eur-exchange-rate/).',
+    fxDown: '⚠️ Verifiable exchange-rate data is unavailable for this edition; this section returns when it is available. The exchange comparison stays [here](/en/service-comparison/chf-eur-exchange-rate/).',
     jobsH: 'Jobs: yesterday’s numbers',
     jobsLead: (j) =>
       `**${fmt('en', j.yesterdayAdded)} new Swiss job listings** landed on our job board yesterday; ${fmt('en', j.last7dAdded)} over the last seven days. Active listings now total **${fmt('en', j.activeJobs)}**${j.activeCompanies ? ` from ${fmt('en', j.activeCompanies)} companies` : ''}.`,
     jobsLeadTotal: (j) =>
       `Our job board currently carries **${fmt('en', j.activeJobs)} active Swiss job listings**${j.activeCompanies ? ` from ${fmt('en', j.activeCompanies)} companies` : ''}${Number.isFinite(j.last7dAdded) ? `; ${fmt('en', j.last7dAdded)} new ones arrived over the last seven days` : ''}.`,
     jobsLink: `Filter by canton, sector and city: [find jobs in Ticino and Switzerland](${HUB.jobs.en}).`,
-    jobsDown: '⚠️ Job-board statistics are not up to date; this section returns in the next edition. Listings stay on [find jobs](/en/find-jobs-ticino/).',
+    jobsDown: '⚠️ Verifiable job-board statistics are unavailable for this edition; this section returns when they are available. Listings stay on [find jobs](/en/find-jobs-ticino/).',
     methodH: 'How this brief is made',
     method:
       'None of the numbers above come from an agency feed — they are our own monitoring: border queues sampled several times an hour at every Swiss crossing, fuel prices across Italian border municipalities and nearby Swiss stations, the official daily CHF/EUR series, and our job-board crawlers. The brief is published daily and may be refreshed during the day; observation periods depend on the source, the linked pages stay live all day.',
@@ -405,7 +405,7 @@ const T = {
     bwCols: ['Übergang', 'Wartezeit', 'Status'],
     bwMin: (n) => `${n} Min.`,
     bwLink: `Der Verkehr ändert sich stündlich — der Live-Status jedes Übergangs steht auf der [Seite zur Wartezeit an der Grenze](${HUB.traffic.de}).`,
-    bwDown: '⚠️ Die Grenzüberwachung hat keine frischen Daten für diese Ausgabe; der Abschnitt kehrt in der nächsten Ausgabe zurück. Live-Status: [Wartezeit an der Grenze](/de/wartezeit-grenze/).',
+    bwDown: '⚠️ Für diese Ausgabe liegen keine ausreichenden Grenzmessungen vor; der Abschnitt kehrt mit verifizierbaren Daten zurück. Live-Status: [Wartezeit an der Grenze](/de/wartezeit-grenze/).',
     fuelH: 'Kraftstoff: gemeldete Preise an der Grenze',
     fuelLead: (f) =>
       `In ${f.municipalityCount} überwachten Grenzgemeinden ist das Tanken laut Übersicht günstiger in ${f.cheaperSwissCount} Fällen in der Schweiz und in ${f.cheaperItalyCount} in Italien.`,
@@ -419,16 +419,16 @@ const T = {
     fuelDown: '⚠️ Die Kraftstoffüberwachung hat keine verifizierbaren Daten für diese Ausgabe; der Abschnitt kehrt zurück, sobald wieder verifizierbare Daten vorliegen. Inzwischen: [Benzinpreise an der Grenze](/de/benzinpreis-schweiz/heute/).',
     fxH: 'Wechselkurs Franken–Euro',
     fxLead: (e) =>
-      `Ein Franken ist **${fmt('de', e.rate, 4)} €** wert (Stand ${e.lastDate}). Gegenüber dem Vortag ${describeDeltaDe(e.delta1d)}; über sieben Tage beträgt die Veränderung ${signed('de', e.delta7d, 4)} €.`,
+      `Ein Franken ist **${fmt('de', e.rate, 4)} €** wert (Stand ${e.lastDate}). Gegenüber der vorherigen Messung ${describeDeltaDe(e.delta1d)}; gegenüber dem verfügbaren Wochenvergleich beträgt die Veränderung ${signed('de', e.delta7d, 4)} €.`,
     fxWhy: `💡 Wer in Franken verdient und in Euro ausgibt, für den IST der Kurs ein Teil des Lohns: Bei 4.000 CHF ist ein Rappen Bewegung 40 € im Monat wert. Der [Nettolohn-Rechner](${HUB.salary.de}) und der [Vergleich der Wechseldienste](${HUB.fx.de}) rechnen Ihren Fall durch.`,
-    fxDown: '⚠️ Die Kursreihe ist nicht aktuell; der Abschnitt kehrt in der nächsten Ausgabe zurück. Der Vergleich der Wechseldienste bleibt [hier](/de/service-vergleich/chf-eur-wechselkurs/).',
+    fxDown: '⚠️ Für diese Ausgabe liegen keine verifizierbaren Wechselkursdaten vor; der Abschnitt kehrt zurück, sobald sie verfügbar sind. Der Vergleich der Wechseldienste bleibt [hier](/de/service-vergleich/chf-eur-wechselkurs/).',
     jobsH: 'Arbeitsmarkt: die Zahlen von gestern',
     jobsLead: (j) =>
       `Gestern kamen **${fmt('de', j.yesterdayAdded)} neue Stellenangebote** in der Schweiz auf unser Job-Board; in den letzten sieben Tagen ${fmt('de', j.last7dAdded)}. Insgesamt sind **${fmt('de', j.activeJobs)}** Anzeigen aktiv${j.activeCompanies ? `, von ${fmt('de', j.activeCompanies)} Unternehmen` : ''}.`,
     jobsLeadTotal: (j) =>
       `Auf unserem Job-Board sind derzeit **${fmt('de', j.activeJobs)} Stellenangebote in der Schweiz aktiv**${j.activeCompanies ? `, von ${fmt('de', j.activeCompanies)} Unternehmen` : ''}${Number.isFinite(j.last7dAdded) ? `; in den letzten sieben Tagen kamen ${fmt('de', j.last7dAdded)} neue hinzu` : ''}.`,
     jobsLink: `Nach Kanton, Branche und Stadt filtern: [Jobs im Tessin und in der Schweiz](${HUB.jobs.de}).`,
-    jobsDown: '⚠️ Die Job-Board-Statistik ist nicht aktuell; der Abschnitt kehrt in der nächsten Ausgabe zurück. Die Angebote bleiben unter [Jobs im Tessin](/de/jobs-im-tessin/).',
+    jobsDown: '⚠️ Für diese Ausgabe liegen keine verifizierbaren Job-Board-Statistiken vor; der Abschnitt kehrt zurück, sobald sie verfügbar sind. Die Angebote bleiben unter [Jobs im Tessin](/de/jobs-im-tessin/).',
     methodH: 'Wie dieses Bulletin entsteht',
     method:
       'Keine der Zahlen oben stammt aus einem Agentur-Feed — es ist unsere eigene Messung: mehrmals pro Stunde erfasste Warteschlangen an jedem Schweizer Grenzübergang, Kraftstoffpreise in den italienischen Grenzgemeinden und an nahen Schweizer Tankstellen, die offizielle tägliche CHF/EUR-Reihe und die Crawler unseres Job-Boards. Das Bulletin erscheint täglich und kann im Tagesverlauf aktualisiert werden; die Beobachtungszeiträume hängen von der Quelle ab, die verlinkten Seiten bleiben den ganzen Tag live.',
@@ -466,7 +466,7 @@ const T = {
     bwCols: ['Douane', 'Attente', 'État'],
     bwMin: (n) => `${n} min`,
     bwLink: `Le trafic change d'heure en heure — l'état en direct de chaque douane est sur la [page du temps d'attente](${HUB.traffic.fr}).`,
-    bwDown: '⚠️ Le suivi des douanes n’a pas de données fraîches pour cette édition ; la section revient dans la prochaine édition. L’état en direct reste sur la [page du temps d’attente](/fr/temps-attente-douane/).',
+    bwDown: '⚠️ Les données des douanes ne sont pas suffisantes pour cette édition ; la section revient lorsque des données vérifiables sont disponibles. L’état en direct reste sur la [page du temps d’attente](/fr/temps-attente-douane/).',
     fuelH: 'Carburants : prix communiqués à la frontière',
     fuelLead: (f) =>
       `Sur ${f.municipalityCount} communes frontalières suivies, faire le plein revient moins cher selon le relevé en Suisse dans ${f.cheaperSwissCount} cas et en Italie dans ${f.cheaperItalyCount}.`,
@@ -480,16 +480,16 @@ const T = {
     fuelDown: '⚠️ Le suivi des carburants n’a pas de données vérifiables pour cette édition ; la section revient dès que des données vérifiables sont de nouveau disponibles. En attendant : [prix de l’essence à la frontière](/fr/prix-essence-suisse/aujourd-hui/).',
     fxH: 'Taux de change franc–euro',
     fxLead: (e) =>
-      `Un franc vaut **${fmt('fr', e.rate, 4)} €** (relevé du ${e.lastDate}). Par rapport à la veille ${describeDeltaFr(e.delta1d)} ; sur sept jours, la variation est de ${signed('fr', e.delta7d, 4)} €.`,
+      `Un franc vaut **${fmt('fr', e.rate, 4)} €** (relevé du ${e.lastDate}). Par rapport au relevé précédent ${describeDeltaFr(e.delta1d)} ; par rapport au relevé hebdomadaire disponible, la variation est de ${signed('fr', e.delta7d, 4)} €.`,
     fxWhy: `💡 Quand on gagne en francs et qu'on dépense en euros, le taux fait partie du salaire : sur 4 000 CHF, un centime de variation vaut 40 € par mois. Le [calculateur de salaire net](${HUB.salary.fr}) et le [comparatif des services de change](${HUB.fx.fr}) font le calcul pour votre cas.`,
-    fxDown: '⚠️ La série du taux de change n’est pas à jour ; la section revient dans la prochaine édition. Le comparatif des services de change reste [ici](/fr/comparaison-services/taux-change-chf-eur/).',
+    fxDown: '⚠️ Les données de change vérifiables ne sont pas disponibles pour cette édition ; la section revient dès qu’elles le sont. Le comparatif des services de change reste [ici](/fr/comparaison-services/taux-change-chf-eur/).',
     jobsH: 'Emploi : les chiffres d’hier',
     jobsLead: (j) =>
       `Hier, **${fmt('fr', j.yesterdayAdded)} nouvelles offres d'emploi** en Suisse sont arrivées sur notre job board ; ${fmt('fr', j.last7dAdded)} sur les sept derniers jours. Au total, **${fmt('fr', j.activeJobs)}** annonces sont actives${j.activeCompanies ? `, de ${fmt('fr', j.activeCompanies)} entreprises` : ''}.`,
     jobsLeadTotal: (j) =>
       `Notre job board compte actuellement **${fmt('fr', j.activeJobs)} offres d'emploi actives en Suisse**${j.activeCompanies ? `, de ${fmt('fr', j.activeCompanies)} entreprises` : ''}${Number.isFinite(j.last7dAdded) ? ` ; ${fmt('fr', j.last7dAdded)} nouvelles sont arrivées sur les sept derniers jours` : ''}.`,
     jobsLink: `Filtrez par canton, secteur et ville : [trouver un emploi au Tessin et en Suisse](${HUB.jobs.fr}).`,
-    jobsDown: '⚠️ Les statistiques du job board ne sont pas à jour ; la section revient dans la prochaine édition. Les offres restent sur [trouver un emploi](/fr/trouver-emploi-tessin/).',
+    jobsDown: '⚠️ Les statistiques vérifiables du job board ne sont pas disponibles pour cette édition ; la section revient dès qu’elles le sont. Les offres restent sur [trouver un emploi](/fr/trouver-emploi-tessin/).',
     methodH: 'Comment naît ce bulletin',
     method:
       'Aucun des chiffres ci-dessus ne vient d’un flux d’agence — c’est notre propre suivi : files échantillonnées plusieurs fois par heure à chaque passage frontalier suisse, prix des carburants dans les communes frontalières italiennes et aux stations suisses proches, série officielle quotidienne CHF/EUR et crawlers de notre job board. Le bulletin est publié chaque jour et peut être actualisé dans la journée ; les périodes d’observation dépendent de la source, les pages liées restent en direct toute la journée.',

@@ -27,7 +27,7 @@ import {
 } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
-import { shapeBorderWait, shapeFuel, BORDER_WAIT_MIN_CROSSINGS } from '../scripts/lib/daily-brief-data.mjs';
+import { shapeBorderWait, shapeExchange, shapeFuel, BORDER_WAIT_MIN_CROSSINGS } from '../scripts/lib/daily-brief-data.mjs';
 
 const BRIEF = {
   schemaVersion: 1,
@@ -228,6 +228,33 @@ test('the maximum wait is attributed to available observations, not the newest c
       assert.match(article.content[locale].body1, new RegExp(`Worst Border.*${maximum}|${maximum}.*Worst Border`, 's'));
       assert.doesNotMatch(article.content[locale].body1, /rilevamento più recente|latest reading|jüngste Messung|letzter Messung|dernier relevé/i);
     }
+  }
+});
+
+test('fresh border readings below the coverage floor are not described as missing fresh data', () => {
+  const nowMs = Date.parse('2026-10-14T15:00:00Z');
+  const borderWait = shapeBorderWait([{ slug: 'fresh-border', crossingName: 'Fresh Border', waitTimeMinutes: 8, lastUpdate: '2026-10-14T14:59:00Z' }], { nowMs });
+  assert.equal(borderWait.available, false);
+  const article = buildDailyBriefArticle({ ...BRIEF, blocks: { ...BRIEF.blocks, borderWait } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.doesNotMatch(article.content[locale].body1, /non ha dati freschi|no fresh data|keine frischen Daten|pas de données fraîches/);
+    assert.match(article.content[locale].body1, /sufficienti|sufficient|ausreichend|suffisantes/);
+  }
+});
+
+test('Friday-to-Monday exchange comparison refers to the preceding observation', () => {
+  const exchange = shapeExchange({ points: [
+    { date: '2026-10-02', rate: 1.06 },
+    { date: '2026-10-09', rate: 1.07 },
+    { date: '2026-10-12', rate: 1.08 },
+  ] }, { todayIso: '2026-10-12' });
+  assert.equal(exchange.available, true);
+  assert.equal(exchange.prevDate, '2026-10-09');
+  assert.equal(exchange.delta1d, 0.01);
+  const article = buildDailyBriefArticle({ dateIso: '2026-10-12', blocks: { exchange } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.match(article.content[locale].body3, /precedente rilevamento|previous reading|vorherigen Messung|relevé précédent/);
+    assert.doesNotMatch(article.content[locale].body3, /giorno precedente|previous day|Vortag|la veille/);
   }
 });
 
