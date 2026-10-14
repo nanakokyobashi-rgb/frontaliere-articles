@@ -6026,7 +6026,7 @@
       "reason": "Collector opzionale del bollettino: legge Search Console e Firebase Analytics con il service account del producer e pubblica solo aggregati predefiniti. Il sito consuma la superficie JSON via HTTP, senza questo collector.",
       "baseline": {
         "site": null,
-        "corpus": "aae10c23b8672fe8",
+        "corpus": "a9b22932398764fc",
         "alignedAt": "2026-10-14"
       }
     },
@@ -6036,7 +6036,7 @@
       "reason": "Composizione pura delle osservazioni e delle etichette del bollettino datato: settimane complete, cambio, valichi e domanda aggregata. Bollettino e writer vivono nel corpus; il sito consuma il JSON pubblicato.",
       "baseline": {
         "site": null,
-        "corpus": "9bb19ddc86fdb034",
+        "corpus": "01aaf92a0eb715a2",
         "alignedAt": "2026-10-14"
       }
     },

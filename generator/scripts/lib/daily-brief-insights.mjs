@@ -15,7 +15,8 @@ const number = value => typeof value === 'number' && Number.isFinite(value) ? va
 function leaders(rows) {
   return (Array.isArray(rows) ? rows : [])
     .filter(row => typeof row?.name === 'string' && number(row.count) > 0)
-    .map(row => ({ name: row.name.replace(/[|\r\n[\]]/g, ' ').trim().slice(0, 100), count: row.count }))
+    .map(row => ({ name: row.name.replace(/[|\r\n\[\]*_`<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 100), count: row.count }))
+    .filter(row => row.name)
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name)).slice(0, 5);
 }
 

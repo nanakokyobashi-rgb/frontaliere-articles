@@ -16,9 +16,13 @@ export { DEMAND_THEMES } from './daily-brief-insights.mjs';
 
 /** Only predefined theme IDs and aggregate counters leave this function. */
 export function shapeSearchDemand({ gscRows = [], ga4Rows = [], startDate, endDate, gscAvailable = false, ga4Available = false, partial = false }) {
+  // Explicit null/non-array rows are a malformed optional response, not a
+  // reason to abort the four core data blocks. Missing rows means an empty report.
+  if (!Array.isArray(gscRows)) { gscRows = []; gscAvailable = false; partial = true; }
+  if (!Array.isArray(ga4Rows)) { ga4Rows = []; ga4Available = false; partial = true; }
   const counts = new Map();
   const themeFor = (query, origin = '') => {
-    if (!query || /^(?:\(not set\)|\(other\))$/i.test(query)) return null;
+    if (typeof query !== 'string' || !query || /^(?:\(not set\)|\(other\))$/i.test(query)) return null;
     if (/job.board|job.search/i.test(origin)) return 'jobs';
     for (const locale of ['it', 'en', 'de', 'fr']) {
       const hits = matchContentLinks(query, locale).sort((a, b) => b.score - a.score);
@@ -32,8 +36,8 @@ export function shapeSearchDemand({ gscRows = [], ga4Rows = [], startDate, endDa
     row[metric] += value;
     counts.set(theme, row);
   };
-  for (const row of gscRows) add(themeFor(row.keys?.[0]), 'impressions', row.impressions);
-  for (const row of ga4Rows) add(themeFor(row.dimensionValues?.[0]?.value, row.dimensionValues?.[1]?.value), 'searches', Number(row.metricValues?.[0]?.value));
+  for (const row of gscRows) add(themeFor(row?.keys?.[0]), 'impressions', row?.impressions);
+  for (const row of ga4Rows) add(themeFor(row?.dimensionValues?.[0]?.value, row?.dimensionValues?.[1]?.value), 'searches', Number(row?.metricValues?.[0]?.value));
   const topics = [...counts.values()].filter(row => row.impressions >= 20 || row.searches >= 5)
     .sort((a, b) => b.impressions - a.impressions || b.searches - a.searches || a.theme.localeCompare(b.theme)).slice(0, 5);
   return { available: topics.length > 0, startDate, endDate, topics, partial,
