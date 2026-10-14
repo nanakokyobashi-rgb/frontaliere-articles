@@ -258,6 +258,20 @@ test('Friday-to-Monday exchange comparison refers to the preceding observation',
   }
 });
 
+test('a usable exchange rate without a weekly baseline states that the comparison is unavailable', () => {
+  const exchange = shapeExchange({ points: [
+    { date: '2026-10-09', rate: 1.07 },
+    { date: '2026-10-12', rate: 1.08 },
+  ] }, { todayIso: '2026-10-12' });
+  assert.equal(exchange.available, true);
+  assert.equal(exchange.delta7d, null);
+  const article = buildDailyBriefArticle({ dateIso: '2026-10-12', blocks: { exchange } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.match(article.content[locale].body3, /confronto settimanale non è disponibile|weekly comparison is unavailable|Wochenvergleich ist nicht verfügbar|comparaison hebdomadaire n’est pas disponible/);
+    assert.doesNotMatch(article.content[locale].body3, /variazione è di —|the move is —|Veränderung —|variation est de —/);
+  }
+});
+
 test('fresh fuel metadata rejected by validation is not described as a stopped source', () => {
   const nowMs = Date.parse('2026-10-14T15:00:00Z');
   const fuel = shapeFuel({ generatedAt: '2026-10-14T14:59:00Z', rankings: {

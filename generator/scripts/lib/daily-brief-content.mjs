@@ -297,7 +297,7 @@ const T = {
     fuelDown: '⚠️ Il monitoraggio carburanti non ha dati verificabili per questa edizione: la sezione torna quando sono di nuovo disponibili dati verificabili. Intanto: [prezzi benzina al confine](/prezzi-benzina/oggi/).',
     fxH: 'Cambio franco–euro',
     fxLead: (e) =>
-      `Un franco vale **${fmt('it', e.rate, 4)} €** (rilevamento del ${e.lastDate}). Rispetto al precedente rilevamento ${describeDeltaIt(e.delta1d)}; rispetto al riferimento settimanale disponibile la variazione è di ${signed('it', e.delta7d, 4)} €.`,
+      `Un franco vale **${fmt('it', e.rate, 4)} €** (rilevamento del ${e.lastDate}). Rispetto al precedente rilevamento ${describeDeltaIt(e.delta1d)}; ${Number.isFinite(e.delta7d) ? `rispetto al riferimento settimanale disponibile la variazione è di ${signed('it', e.delta7d, 4)} €` : 'il confronto settimanale non è disponibile'}.`,
     fxWhy: `💡 Per chi prende lo stipendio in franchi e spende in euro, il cambio È una parte dello stipendio: su 4.000 CHF, un centesimo di variazione vale 40 € al mese. Il [calcolatore dello stipendio netto](${HUB.salary.it}) e il [confronto dei servizi di cambio](${HUB.fx.it}) fanno i conti sul tuo caso.`,
     fxDown: '⚠️ Non ci sono dati verificabili sul cambio per questa edizione: il blocco torna quando sono disponibili. Il confronto dei servizi di cambio resta [qui](/compara-servizi/cambio-franco-euro/).',
     jobsH: 'Lavoro: i numeri di ieri',
@@ -358,7 +358,7 @@ const T = {
     fuelDown: '⚠️ Fuel monitoring has no verifiable data for this edition; this section returns when verifiable data are available again. Meanwhile: [border fuel prices](/en/gasoline-price-switzerland/today/).',
     fxH: 'CHF–EUR exchange rate',
     fxLead: (e) =>
-      `One franc buys **€${fmt('en', e.rate, 4)}** (reported on ${e.lastDate}). Versus the previous reading ${describeDeltaEn(e.delta1d)}; against the available weekly reference the move is ${signed('en', e.delta7d, 4)} €.`,
+      `One franc buys **€${fmt('en', e.rate, 4)}** (reported on ${e.lastDate}). Versus the previous reading ${describeDeltaEn(e.delta1d)}; ${Number.isFinite(e.delta7d) ? `against the available weekly reference the move is ${signed('en', e.delta7d, 4)} €` : 'the weekly comparison is unavailable'}.`,
     fxWhy: `💡 If you earn francs and spend euros, the rate IS part of your salary: on CHF 4,000, one cent of movement is worth €40 a month. The [net salary calculator](${HUB.salary.en}) and the [currency-exchange comparison](${HUB.fx.en}) run the numbers for your case.`,
     fxDown: '⚠️ Verifiable exchange-rate data is unavailable for this edition; this section returns when it is available. The exchange comparison stays [here](/en/service-comparison/chf-eur-exchange-rate/).',
     jobsH: 'Jobs: yesterday’s numbers',
@@ -419,7 +419,7 @@ const T = {
     fuelDown: '⚠️ Die Kraftstoffüberwachung hat keine verifizierbaren Daten für diese Ausgabe; der Abschnitt kehrt zurück, sobald wieder verifizierbare Daten vorliegen. Inzwischen: [Benzinpreise an der Grenze](/de/benzinpreis-schweiz/heute/).',
     fxH: 'Wechselkurs Franken–Euro',
     fxLead: (e) =>
-      `Ein Franken ist **${fmt('de', e.rate, 4)} €** wert (Stand ${e.lastDate}). Gegenüber der vorherigen Messung ${describeDeltaDe(e.delta1d)}; gegenüber dem verfügbaren Wochenvergleich beträgt die Veränderung ${signed('de', e.delta7d, 4)} €.`,
+      `Ein Franken ist **${fmt('de', e.rate, 4)} €** wert (Stand ${e.lastDate}). Gegenüber der vorherigen Messung ${describeDeltaDe(e.delta1d)}; ${Number.isFinite(e.delta7d) ? `gegenüber dem verfügbaren Wochenvergleich beträgt die Veränderung ${signed('de', e.delta7d, 4)} €` : 'der Wochenvergleich ist nicht verfügbar'}.`,
     fxWhy: `💡 Wer in Franken verdient und in Euro ausgibt, für den IST der Kurs ein Teil des Lohns: Bei 4.000 CHF ist ein Rappen Bewegung 40 € im Monat wert. Der [Nettolohn-Rechner](${HUB.salary.de}) und der [Vergleich der Wechseldienste](${HUB.fx.de}) rechnen Ihren Fall durch.`,
     fxDown: '⚠️ Für diese Ausgabe liegen keine verifizierbaren Wechselkursdaten vor; der Abschnitt kehrt zurück, sobald sie verfügbar sind. Der Vergleich der Wechseldienste bleibt [hier](/de/service-vergleich/chf-eur-wechselkurs/).',
     jobsH: 'Arbeitsmarkt: die Zahlen von gestern',
@@ -480,7 +480,7 @@ const T = {
     fuelDown: '⚠️ Le suivi des carburants n’a pas de données vérifiables pour cette édition ; la section revient dès que des données vérifiables sont de nouveau disponibles. En attendant : [prix de l’essence à la frontière](/fr/prix-essence-suisse/aujourd-hui/).',
     fxH: 'Taux de change franc–euro',
     fxLead: (e) =>
-      `Un franc vaut **${fmt('fr', e.rate, 4)} €** (relevé du ${e.lastDate}). Par rapport au relevé précédent ${describeDeltaFr(e.delta1d)} ; par rapport au relevé hebdomadaire disponible, la variation est de ${signed('fr', e.delta7d, 4)} €.`,
+      `Un franc vaut **${fmt('fr', e.rate, 4)} €** (relevé du ${e.lastDate}). Par rapport au relevé précédent ${describeDeltaFr(e.delta1d)} ; ${Number.isFinite(e.delta7d) ? `par rapport au relevé hebdomadaire disponible, la variation est de ${signed('fr', e.delta7d, 4)} €` : 'la comparaison hebdomadaire n’est pas disponible'}.`,
     fxWhy: `💡 Quand on gagne en francs et qu'on dépense en euros, le taux fait partie du salaire : sur 4 000 CHF, un centime de variation vaut 40 € par mois. Le [calculateur de salaire net](${HUB.salary.fr}) et le [comparatif des services de change](${HUB.fx.fr}) font le calcul pour votre cas.`,
     fxDown: '⚠️ Les données de change vérifiables ne sont pas disponibles pour cette édition ; la section revient dès qu’elles le sont. Le comparatif des services de change reste [ici](/fr/comparaison-services/taux-change-chf-eur/).',
     jobsH: 'Emploi : les chiffres d’hier',
