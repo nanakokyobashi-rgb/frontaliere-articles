@@ -193,10 +193,15 @@ test('il gate stale congela lo scope FU ma mantiene il mutex sul branch daily co
   assert.match(scope, /Tutti i FU daily usano ancora `fix\/issue-N`/);
   assert.match(scope, /process\.stdout\.write\(JSON\.stringify\(prs\)\)/);
   assert.doesNotMatch(scope, /followupItemMarkers/);
+  assert.doesNotMatch(scope, /throw new Error\('daily bucket senza un FU open/);
+  assert.match(scope, /daily_terminal=\$\{dailyTerminal \? 'true' : 'false'\}/);
+  assert.match(scope, /FOLLOWUP_ITEM: \$\{dailyItemId\}/);
   assert.match(stale, /DAILY_BUCKET: \$\{\{ steps\.scope_input\.outputs\.is_daily_bucket \}\}/);
   assert.match(stale, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);
+  assert.match(stale, /DAILY_TERMINAL: \$\{\{ steps\.scope_input\.outputs\.daily_terminal \}\}/);
+  assert.match(stale, /remove-label agent:fix --remove-label agent:fix-queued/);
   assert.match(stale, /MUTEX_BASE_PATH: \$\{\{ steps\.scope_input\.outputs\.mutex_base_path \}\}/);
-  assert.match(stale, /run: node scripts\/ci\/check-stale-issue-dispatch\.mjs/);
+  assert.match(stale, /node scripts\/ci\/check-stale-issue-dispatch\.mjs/);
 });
 
 test('il capability guard workflows legge solo il FU daily scelto e annota il verdetto nello stesso commento', () => {
@@ -206,7 +211,7 @@ test('il capability guard workflows legge solo il FU daily scelto e annota il ve
   assert.ok(guard, 'manca il capability guard workflows');
   assert.match(input, /parseFollowupItems\(issue\.body \|\| ''\)/);
   assert.match(input, /candidate\.state === 'open'/);
-  assert.match(input, /body: info \? item\.raw : issue\.body/);
+  assert.match(input, /body: info && item \? item\.raw : issue\.body/);
   assert.match(guard, /ISSUE_FIX_SNAPSHOT_FILE: \$\{\{ steps\.scope_input\.outputs\.scope_snapshot_file \}\}/);
   assert.match(guard, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);
   assert.match(guard, /FIX_OUTCOME: blocked-workflows-scope[\s\S]*FOLLOWUP_ITEM/);

@@ -351,6 +351,17 @@ test('un esito terminale su un daily senza altri open resta aggregato e non chiu
   assert.match(result.body, /### FU-2026-10-02-003[\s\S]*?- State: blocked/);
 });
 
+test('un daily blocked senza prossimo item esce tecnicamente dal pool parked', () => {
+  const start = DRAINER.indexOf('// A daily issue is only a container.');
+  const end = DRAINER.indexOf('const add = action ===', start);
+  assert.ok(start >= 0 && end > start, 'blocco daily non trovato');
+  const branch = DRAINER.slice(start, end);
+  assert.match(branch, /if \(action === 'blocked'\)/);
+  assert.match(branch, /deferAutomationIssue\(iss\.number/);
+  assert.match(branch, /remove: \[LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_QUEUED, LBL_FIX/);
+  assert.match(branch, /daily-bucket-blocked/);
+});
+
 test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide', () => {
   const start = DRAINER.indexOf('// --- VERDICT-EXIT:');
   const end = DRAINER.indexOf('// --- TOO-LARGE ESCALATION', start);

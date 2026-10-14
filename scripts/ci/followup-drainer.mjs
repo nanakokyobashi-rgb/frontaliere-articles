@@ -5132,6 +5132,30 @@ export function runDrain() {
             && !updateDailyIssueBody({ ...iss, title: liveIssue.title, body: liveIssue.body }, transition.body)) continue;
 
         const attemptLabels = names(iss).filter((name) => /^fu-(?:attempt|reparked):\d+$/.test(name));
+        // A blocked item with no next open FU is a technical terminal state for
+        // the whole bucket. Remove it from the parked VERDICT-EXIT pool after
+        // adding the durable defer marker; otherwise the same consumed outcome
+        // remains eligible on every tick and burns one scan slot forever.
+        if (action === 'blocked') {
+          if (DRY) {
+            succeeded++;
+            console.log(`[dry] daily outcome #${iss.number}: ${transition.itemId} → ${transition.state}; blocked → ${LBL_AUTOMATION_DEFERRED}`);
+            continue;
+          }
+          if (!deferAutomationIssue(iss.number, {
+            remove: [LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_QUEUED, LBL_FIX, ...attemptLabels],
+            reason: 'daily-bucket-blocked',
+          })) continue;
+          succeeded++;
+          if (outcomeConsumed) {
+            console.log(`DAILY-OUTCOME-DEFERRED #${iss.number}: body già terminale e bucket bloccato (${transition.itemId})`);
+            continue;
+          }
+          const note = `⏸️ **Daily item bloccato dal verdetto del fixer:** ${transition.itemId} → blocked (FIX_OUTCOME ${outcome}). Il bucket non ha altri FU open: viene differito tecnicamente; nessun item viene dichiarato risolto.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`;
+          commentIssue(iss.number, note, 'daily item blocked outcome comment');
+          console.log(`DAILY-OUTCOME #${iss.number}: ${transition.itemId} → ${transition.state}; blocked → ${LBL_AUTOMATION_DEFERRED}`);
+          continue;
+        }
         const add = action === 'requeue' || action === 'retry' ? [LBL_QUEUED] : [];
         const remove = action === 'requeue' || action === 'retry'
           ? [LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_AUTOMATION_DEFERRED, ...attemptLabels]

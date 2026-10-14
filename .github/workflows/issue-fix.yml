@@ -307,7 +307,9 @@ jobs:
       # `fix/issue-N` è condiviso da tutti i FU del bucket: il marker identifica
       # l'evidence, ma non può separare il mutex finché una PR su quel branch è
       # aperta. Le PR legacy senza marker `Follow-up item` restano ambigue e
-      # bloccanti, come ogni altra PR sul branch condiviso.
+      # bloccanti, come ogni altra PR sul branch condiviso. Un bucket senza FU
+      # open è invece già terminale: si conserva lo snapshot aggregato e il
+      # gate successivo consuma l'evento senza avviare un fixer senza item.
       - name: Pre-flight — freeze daily item scope (zero-Claude)
         id: scope_input
         if: steps.preflight.outputs.already_resolved != 'true'
@@ -328,25 +330,25 @@ jobs:
           const [issuePath, scopePath, issueNumber, repository] = process.argv.slice(2);
           const issue = JSON.parse(fs.readFileSync(issuePath, 'utf8'));
           const info = dailyBucketInfo(issue.title || '');
+          const items = info ? parseFollowupItems(issue.body || '') : [];
           const item = info
-            ? parseFollowupItems(issue.body || '').find((candidate) => candidate.id && candidate.state === 'open')
+            ? items.find((candidate) => candidate.id && candidate.state === 'open')
             : null;
-          if (info && !item) {
-            throw new Error('daily bucket senza un FU open stabile per il guard workflows');
-          }
+          const dailyTerminal = Boolean(info && !item);
 
           const scoped = {
             target: { issue: Number(issueNumber), repo: repository },
             state: String(issue.state || 'OPEN').toUpperCase(),
             // Un titolo item-scoped evita che il recurrence mode del guard
             // erediti la diagnosi di un altro item dello stesso contenitore.
-            title: info ? `${issue.title} — ${item.id}` : issue.title,
-            body: info ? item.raw : issue.body,
+            title: info && item ? `${issue.title} — ${item.id}` : issue.title,
+            body: info && item ? item.raw : issue.body,
             labels: issue.labels,
           };
           fs.writeFileSync(scopePath, `${JSON.stringify(scoped)}\n`);
           console.log(`is_daily_bucket=${info ? 'true' : 'false'}`);
           console.log(`selected_item_id=${item?.id || ''}`);
+          console.log(`daily_terminal=${dailyTerminal ? 'true' : 'false'}`);
           console.log(`scope_snapshot_file=${scopePath}`);
           NODE
 
@@ -360,6 +362,23 @@ jobs:
             ...process.env,
             PATH: process.env.MUTEX_BASE_PATH || process.env.PATH || '',
           };
+
+          // Il gate stale emette il FIX_OUTCOME, ma per un daily il drainer
+          // deve poterlo attribuire allo stesso FU congelato prima del gate.
+          // Questo wrapper è nel PATH solo dello step stale, quindi il marker
+          // finisce nella stessa chiamata `gh issue comment`, non in un
+          // commento successivo che potrebbe essere scambiato per un nuovo esito.
+          const dailyItemId = process.env.DAILY_ITEM_ID || '';
+          const bodyIndex = args.indexOf('--body');
+          const isDailyOutcomeComment = process.env.DAILY_BUCKET === 'true'
+            && dailyItemId
+            && args[0] === 'issue'
+            && args[1] === 'comment'
+            && bodyIndex >= 0
+            && bodyIndex + 1 < args.length;
+          if (isDailyOutcomeComment && !String(args[bodyIndex + 1]).includes('FOLLOWUP_ITEM:')) {
+            args[bodyIndex + 1] = `${args[bodyIndex + 1]}\n\n<!-- FOLLOWUP_ITEM: ${dailyItemId} -->`;
+          }
 
           function forward(argv) {
             if (!realGh) {
@@ -446,11 +465,24 @@ jobs:
           STAGE: fix
           DAILY_BUCKET: ${{ steps.scope_input.outputs.is_daily_bucket }}
           DAILY_ITEM_ID: ${{ steps.scope_input.outputs.selected_item_id }}
+          DAILY_TERMINAL: ${{ steps.scope_input.outputs.daily_terminal }}
           MUTEX_REAL_GH: ${{ steps.scope_input.outputs.mutex_real_gh }}
           MUTEX_BASE_PATH: ${{ steps.scope_input.outputs.mutex_base_path }}
           MUTEX_REPO_ROOT: ${{ github.workspace }}
           PATH: ${{ steps.scope_input.outputs.mutex_bin }}:${{ steps.scope_input.outputs.mutex_base_path }}
-        run: node scripts/ci/check-stale-issue-dispatch.mjs
+        run: |
+          set -euo pipefail
+          if [ "${DAILY_TERMINAL:-false}" = 'true' ]; then
+            echo "Daily bucket senza FU open: evento agent:fix già terminale, nessun fixer avviato."
+            gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" \
+              --remove-label agent:fix --remove-label agent:fix-queued
+            echo 'stale_dispatch=true' >> "$GITHUB_OUTPUT"
+            if [ -n "${GITHUB_STEP_SUMMARY:-}" ]; then
+              printf '%s\n' "## Pre-flight stale-dispatch: daily bucket già terminale" >> "$GITHUB_STEP_SUMMARY"
+            fi
+            exit 0
+          fi
+          node scripts/ci/check-stale-issue-dispatch.mjs
 
       # ── Pre-flight 2d: diagnosi gia' consegnata al sito ───────────────────
       # Il POST-step qui sotto («Consegna al sito…») consegna e, se la consegna
