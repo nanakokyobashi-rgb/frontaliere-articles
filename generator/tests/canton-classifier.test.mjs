@@ -336,6 +336,9 @@ describe('regole di assegnazione', () => {
     const milanoAudience = 'Conseguenze per i lavoratori di Milano e per il Ticino';
     assert.equal(classifier.mentionsItalianPlace(milanoAudience), true);
     assert.deepEqual(codes({ title: milanoAudience }), []);
+    const prefacedMilanoAudience = 'Implicazioni concrete per i lavoratori di Milano e per il Ticino';
+    assert.equal(classifier.mentionsItalianPlace(prefacedMilanoAudience), true);
+    assert.deepEqual(codes({ title: prefacedMilanoAudience }), []);
     const longMilanoAudience = 'Cosa cambia per i lavoratori frontalieri che lavorano a Milano e per il Ticino';
     assert.deepEqual(classifier.mentionsIn(longMilanoAudience).map((m) => m.group), []);
     assert.equal(classifier.mentionsItalianPlace(longMilanoAudience), true);
