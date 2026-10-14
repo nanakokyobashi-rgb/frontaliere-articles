@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "6485cb572e4099989160e23e84cae589d469b96854795d9167c00671bc2734d3",
+  "updatedAt": "2026-10-14T06:26:10.900Z",
+  "contentHash": "4d2b906094990186761fa507147d4befcc20c902ef2f291d1af5bdd0d9e8c61a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -76,11 +76,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-13T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-14T16:30:00.000Z"
             },
             {
@@ -92,6 +87,11 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -177,7 +177,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:26:10.900Z"
     },
     "en": {
       "canton": "JU",
@@ -226,11 +226,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-13T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-14T16:30:00.000Z"
             },
             {
@@ -242,6 +237,11 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -323,7 +323,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:26:10.900Z"
     },
     "de": {
       "canton": "JU",
@@ -372,11 +372,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-13T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-14T16:30:00.000Z"
             },
             {
@@ -388,6 +383,11 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -469,7 +469,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:26:10.900Z"
     },
     "fr": {
       "canton": "JU",
@@ -518,11 +518,6 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-13T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Coop",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-14T16:30:00.000Z"
             },
             {
@@ -534,6 +529,11 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
+            },
+            {
+              "label": "Pharmacie Neukomm",
+              "detail": "Courgenay, Ajoie",
+              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -611,7 +611,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:26:10.900Z"
     }
   }
 }
