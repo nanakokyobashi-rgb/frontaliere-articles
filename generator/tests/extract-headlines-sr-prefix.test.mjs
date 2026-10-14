@@ -102,6 +102,16 @@ test('quote-aware anchor scanning preserves attributes containing > before and a
   ]);
 });
 
+test('an unclosed later anchor cannot donate its date to the previous link', () => {
+  const headline = 'Il Consiglio federale approva il nuovo accordo precedente';
+  const html = '<a href="/it/newnsb/comunicato-06">' + headline + '</a>'
+    + '<a data-note="date > metadata" href="/it/newnsb/comunicato-07">'
+    + '14 ottobre 2026 Il Consiglio federale approva il nuovo accordo successivo';
+  const [item] = extractHeadlines(html, BASE_URL);
+
+  assert.equal(item.date, null);
+});
+
 test('quote-aware date and structural scans keep a card headline and its time date', () => {
   const html = '<article class="news-card" data-note="a > b">'
     + '<h2>Il Consiglio federale approva il nuovo accordo</h2>'

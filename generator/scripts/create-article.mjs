@@ -8489,6 +8489,17 @@ function nextHtmlElement(html, name, from = 0) {
   return nextHtmlElementWhere(html, (tag) => tag.name === name, from);
 }
 
+/** Trova il prossimo tag di apertura senza richiedere un elemento bilanciato. */
+function nextHtmlOpeningTag(html, name, from = 0) {
+  let cursor = from;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+    cursor = tag.end;
+    if (!tag.closing && tag.name === name) return tag;
+  }
+  return null;
+}
+
 function findHtmlRawTextClosingTag(html, from, name) {
   const closing = new RegExp(`</${name}\\s*>`, 'ig');
   closing.lastIndex = from;
@@ -8663,7 +8674,10 @@ function extractDatesFromHtml(html, baseUrl) {
     const anchorStart = anchor.start;
     const anchorEnd = anchor.end;
     const inner = anchor.inner;
-    const nextAnchor = nextHtmlElement(html, 'a', anchorEnd);
+    // The next opening tag is the boundary even when a later anchor is
+    // malformed and has no closing tag; using the balanced-element walker
+    // would let its date leak into this link's proximity window.
+    const nextAnchor = nextHtmlOpeningTag(html, 'a', anchorEnd);
     const rawHref = headlineHrefValue(anchor.attrs);
     if (!rawHref) {
       lastAnchorEnd = anchorEnd;
