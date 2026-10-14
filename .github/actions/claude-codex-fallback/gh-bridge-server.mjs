@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import * as net from './bridge-transport.mjs';
+import os from 'node:os';
 import path from 'node:path';
 import { spawn } from 'node:child_process';
 import {
@@ -81,6 +82,8 @@ const apiEndpointValueFlags = new Set([
 const prBodyFileFlags = new Set(['--body-file', '-F']);
 const prBodyInlineFlags = new Set(['--body', '-b']);
 const MAX_PR_BODY_BYTES = 512 * 1024;
+const BODY_REVISION_RE = /^body:[0-9a-f]{64}$/u;
+const REVIEW_INPUT_MARKER_LINE_RE = /^[ \t]*<!--[ \t]*REVIEW_INPUT_REVISION:[^\r\n]*?(?:\r\n|\n|\r|\\r\\n|\\n|$)/gimu;
 const IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Implementato\b/im;
 const NON_IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato[^\n]*\(ancora\)/im;
 const NON_IMPLEMENTED_ANY_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato\b/im;
@@ -190,6 +193,131 @@ export function isMutatingGhArgs(args) {
   const commandIndex = commandIndexFor(args);
   const command = args[commandIndex];
   return mutatingSubcommands.get(command)?.has(firstOperationArg(args, commandIndex + 1)) ?? false;
+}
+
+/** Return whether a request is a pull-request review operation. */
+export function isPullRequestReviewArgs(args) {
+  if (!Array.isArray(args)) return false;
+  const commandIndex = commandIndexFor(args);
+  return args[commandIndex] === 'pr' && firstOperationArg(args, commandIndex + 1) === 'review';
+}
+
+function pullRequestReviewNumber(args, commandIndex) {
+  let operationSeen = false;
+  for (let index = commandIndex + 1; index < args.length; index += 1) {
+    const arg = args[index];
+    if (arg === '--') return args[index + 1] || '';
+    if (arg.startsWith('-')) {
+      if (!arg.includes('=') && operationValueFlags.has(arg)) index += 1;
+      continue;
+    }
+    if (!operationSeen) {
+      operationSeen = true;
+      continue;
+    }
+    return arg;
+  }
+  return '';
+}
+
+function pullRequestReviewBody(args, commandIndex, context) {
+  const start = commandIndex + 1;
+  const inline = prBodyOption(args, start, prBodyInlineFlags);
+  if (inline) return inline.value;
+  const bodyFile = prBodyOption(args, start, prBodyFileFlags);
+  if (!bodyFile) return '';
+  return bodyFilePath(bodyFile.value, context).body || '';
+}
+
+/** Mirror the trusted review-input revision normalization without imports. */
+export function normalizeBodyRevision(value) {
+  const revision = String(value ?? '').trim().toLowerCase();
+  return BODY_REVISION_RE.test(revision) ? revision : '';
+}
+
+/** Remove all model markers and prepend exactly one host-trusted marker. */
+export function stampReviewInputRevision(body, expectedRevision) {
+  const revision = normalizeBodyRevision(expectedRevision);
+  if (!revision) return body;
+  const withoutModelMarkers = String(body ?? '').replace(REVIEW_INPUT_MARKER_LINE_RE, '');
+  return `<!-- REVIEW_INPUT_REVISION: ${revision} -->\n${withoutModelMarkers}`;
+}
+
+/** Materialize a review body privately so `gh` publishes the stamped content. */
+export function materializePullRequestReviewBody(args, start, {
+  reviewRevision,
+  reviewPrNumber,
+  cwd,
+  allowedRoots = [],
+} = {}) {
+  const revision = normalizeBodyRevision(reviewRevision);
+  const configuredPrNumber = String(reviewPrNumber ?? '').trim();
+  if (!revision || !/^[1-9]\d*$/u.test(configuredPrNumber) || !isPullRequestReviewArgs(args)) {
+    return { args, body: undefined, cleanup: () => {} };
+  }
+  const commandIndex = commandIndexFor(args);
+  const pullNumber = pullRequestReviewNumber(args, commandIndex);
+  if (pullNumber !== configuredPrNumber) return { args, body: undefined, cleanup: () => {} };
+
+  const inline = prBodyOption(args, start, prBodyInlineFlags);
+  const bodyFile = inline ? null : prBodyOption(args, start, prBodyFileFlags);
+  const option = inline || bodyFile;
+  if (!option) return { args, body: undefined, cleanup: () => {} };
+  let sourceBody = inline ? inline.value : '';
+  if (bodyFile) {
+    const source = bodyFilePath(bodyFile.value, { cwd: cwd || process.cwd(), allowedRoots });
+    if (source.error) throw new Error(source.error);
+    sourceBody = source.body;
+  }
+  const body = stampReviewInputRevision(sourceBody, revision);
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-gh-review-'));
+  let cleaned = false;
+  const cleanup = () => {
+    if (cleaned) return;
+    cleaned = true;
+    fs.rmSync(directory, { recursive: true, force: true });
+  };
+  try {
+    fs.chmodSync(directory, 0o700);
+    const bodyPath = path.join(directory, 'review.md');
+    fs.writeFileSync(bodyPath, body, { flag: 'wx', mode: 0o600 });
+    return {
+      args: replacePullRequestReviewBodyOption(args, option, bodyPath),
+      body,
+      cleanup,
+      bodyPath,
+    };
+  } catch (error) {
+    cleanup();
+    throw error;
+  }
+}
+
+/** Build the review idempotency input from the normalized body and HEAD. */
+export function reviewRetryDetails(args, commandIndex, {
+  cwd,
+  workspaceRoot,
+  scratchRoot,
+  headSha,
+  bodyOverride,
+} = {}) {
+  if (!isPullRequestReviewArgs(args)) return null;
+  const pullNumber = pullRequestReviewNumber(args, commandIndex ?? commandIndexFor(args));
+  const body = bodyOverride === undefined
+    ? pullRequestReviewBody(args, commandIndex ?? commandIndexFor(args), {
+      cwd: cwd || process.cwd(),
+      allowedRoots: [realRoot(workspaceRoot || cwd), realRoot(scratchRoot)].filter(Boolean),
+    })
+    : bodyOverride;
+  const normalizedHead = String(headSha || '').trim();
+  if (!/^\d+$/u.test(pullNumber) || !body || !/^[0-9a-f]{40}$/iu.test(normalizedHead)) return null;
+  return { pullNumber, body, headSha: normalizedHead };
+}
+
+/** Return the per-run key for one review body on one PR HEAD. */
+export function postedReviewKey(details) {
+  if (!details) return '';
+  return JSON.stringify([details.pullNumber, details.headSha.toLowerCase(), details.body.trimEnd()]);
 }
 
 function hasExplicitOption(args, name) {
@@ -549,11 +677,22 @@ function prBodyOption(args, start, flags) {
   for (let index = start; index < args.length; index += 1) {
     const arg = args[index];
     for (const flag of flags) {
-      if (arg === flag) return { flag, value: args[index + 1] || '', next: index + 1 };
-      if (arg.startsWith(`${flag}=`)) return { flag, value: arg.slice(flag.length + 1), next: index };
+      if (arg === flag) return { flag, value: args[index + 1] || '', index, next: index + 1 };
+      if (arg.startsWith(`${flag}=`)) return { flag, value: arg.slice(flag.length + 1), index, next: index };
     }
   }
   return null;
+}
+
+function replacePullRequestReviewBodyOption(args, option, bodyPath) {
+  const replaced = args.slice();
+  if (option.next === option.index) {
+    replaced[option.index] = `--body-file=${bodyPath}`;
+  } else {
+    replaced[option.index] = '--body-file';
+    replaced[option.index + 1] = bodyPath;
+  }
+  return replaced;
 }
 
 function validatePrBodyArgs(args, commandIndex, context) {
@@ -672,6 +811,8 @@ function main() {
   );
   const host = normalizedHost(process.env.CODEX_GH_HOST);
   const corpusRepository = process.env.CODEX_GH_CORPUS_REPOSITORY || CORPUS_REPOSITORY;
+  const reviewInputRevision = normalizeBodyRevision(process.env.CODEX_GH_REVIEW_INPUT_REVISION);
+  const reviewPrNumber = String(process.env.CODEX_GH_REVIEW_PR_NUMBER || '').trim();
   if (!socketPath || !currentToken || !realGh || !cwd || !workspaceRoot || !scratchRoot || !repository || !siteRepository || !host
     || corpusRepository !== CORPUS_REPOSITORY) process.exit(2);
   const baseEnv = {
@@ -682,6 +823,7 @@ function main() {
   let activeConnections = 0;
   const children = new Set();
   const clients = new Set();
+  const postedReviewKeys = new Set();
   let shuttingDown = false;
   let shutdownFinalized = false;
   let shutdownTimer = null;
@@ -711,6 +853,7 @@ function main() {
     let terminationRequested = false;
     let responseSent = false;
     let timedOut = false;
+    let cleanupExecution = () => {};
     const terminateChild = (reason) => {
       if (!child || childExited) return;
       if (reason === 'child-timeout' || reason === 'socket-timeout') timedOut = true;
@@ -727,6 +870,9 @@ function main() {
       responseSent = true;
       if (childTimer) clearTimeout(childTimer);
       if (childTerminationTimer) clearTimeout(childTerminationTimer);
+      const cleanup = cleanupExecution;
+      cleanupExecution = () => {};
+      cleanup();
       if (childExited) releaseSlot();
       responseFor(client, result);
     };
@@ -779,8 +925,43 @@ function main() {
         return;
       }
       if (isMutatingGhArgs(args)) markSideEffect(sideEffectFile);
+      const commandIndex = commandIndexFor(args);
+      let executionArgs = args;
+      let reviewBodyOverride;
+      if (scope.kind === 'site' && isPullRequestReviewArgs(args)) {
+        try {
+          const materialized = materializePullRequestReviewBody(args, commandIndex + 1, {
+            reviewRevision: reviewInputRevision,
+            reviewPrNumber,
+            cwd,
+            allowedRoots: [realRoot(workspaceRoot), realRoot(scratchRoot)].filter(Boolean),
+          });
+          executionArgs = materialized.args;
+          reviewBodyOverride = materialized.body;
+          cleanupExecution = materialized.cleanup;
+        } catch (error) {
+          finish({ code: 2, stderr: `bridge request: ${error.message}\n` });
+          return;
+        }
+      }
+      const reviewDetails = reviewRetryDetails(executionArgs, commandIndex, {
+        cwd,
+        workspaceRoot,
+        scratchRoot,
+        headSha: process.env.HEAD_SHA,
+        bodyOverride: reviewBodyOverride,
+      });
+      const reviewKey = postedReviewKey(reviewDetails);
+      if (reviewKey && postedReviewKeys.has(reviewKey)) {
+        finish({
+          code: 0,
+          stdout: '',
+          stderr: `Codex GitHub bridge: this exact review is already posted on PR #${reviewDetails.pullNumber}; it was not posted again.\n`,
+        });
+        return;
+      }
       client.setTimeout(RESPONSE_TIMEOUT_MS, timeoutClient);
-      child = spawn(realGh, args, {
+      child = spawn(realGh, executionArgs, {
         cwd,
         env: {
           ...baseEnv,
@@ -827,7 +1008,16 @@ function main() {
         const detail = timedOut
           ? `${stderr}Codex GitHub bridge child timed out\n`
           : outputTooLarge ? `${stderr}Codex GitHub bridge output exceeded its limit\n` : stderr;
-        finish({ code: timedOut || outputTooLarge ? 1 : code ?? 1, stdout, stderr: detail });
+        const result = { code: timedOut || outputTooLarge ? 1 : code ?? 1, stdout, stderr: detail };
+        if (result.code === 0 && isPullRequestReviewArgs(args)) {
+          if (reviewKey) postedReviewKeys.add(reviewKey);
+          finish({
+            ...result,
+            stderr: `${result.stderr}Codex GitHub bridge: review posted; do not post it again.\n`,
+          });
+        } else {
+          finish(result);
+        }
         if (shuttingDown && children.size === 0) finalizeShutdown();
       });
     });

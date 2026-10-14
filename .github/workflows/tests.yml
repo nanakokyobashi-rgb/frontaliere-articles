@@ -1427,6 +1427,7 @@ jobs:
             echo "## Metadata"
             echo "- PR: #$PR_NUMBER"
             echo "- HEAD: $HEAD_SHA"
+            echo "- Review input revision: host-stamped (opaque to reviewer)"
             echo "- Tier: ${TIER:-unknown}"
             echo "- Incremental base: ${INCREMENTAL_BASE:-none}"
             echo "- Changed file entries: $(wc -l < "$CTX_DIR/files.txt")"
@@ -1538,6 +1539,7 @@ jobs:
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           PR_TITLE: ${{ steps.resolve.outputs.title }}
           HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
+          REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
@@ -1558,7 +1560,7 @@ jobs:
             Test files are excluded from review by owner policy: do not read, probe or raise findings on tests, including during cross-file analysis.
             Report the exact workflow tier `${{ steps.tier.outputs.tier }}` in Scope; this classifies review scope, not model reasoning effort.
             Reviewer automatico PR #${{ steps.resolve.outputs.pr_number }} (HEAD ${{ steps.resolve.outputs.head_sha }}). Tier: ${{ steps.tier.outputs.tier }}.
-            Questa review vale esclusivamente per la revisione input `${{ steps.review_input.outputs.review_revision }}`. La review che posti DEVE contenere, come riga propria e senza modificarlo, il marker esatto `<!-- REVIEW_INPUT_REVISION: ${{ steps.review_input.outputs.review_revision }} -->`; senza quel marker il gate non può accettare alcun verdetto.
+            Do not add or edit a `REVIEW_INPUT_REVISION` marker: the host-side gh bridge removes any model-supplied marker and stamps exactly one trusted marker on the published review body. The revision is intentionally opaque to the reviewer.
 
             Questo repo (`frontaliere-articles`) pubblica una superficie dati su HTTP che il sito consuma in produzione: `dist/api/` (manifest, articles.json, meta per locale, slugs, sitemap blog, dieci feed RSS, news-ticker). Un bug in cio' che la genera esce **live senza che il sito faccia un deploy** — non c'e' una build del sito a fare da rete.
 
