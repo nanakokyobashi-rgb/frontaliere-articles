@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "0422a9794e434e0cc09d3a8d1d88a4a63ea9751bbfd49a4db8e5d34a7c83cce7",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "f0840b17d401089a9a5ed1082a93bec88f064cc904b2df1c9a990f8a54c2134d",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -157,6 +157,12 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "AVS e prestazioni complementari nel Canton Berna",
+          "url": "/articoli-svizzera/avs-integrazioni-canton-berna/",
+          "excerpt": "Come funziona il calcolo della rendita AVS nel Canton Berna: contributi obbligatori, lacune contributive, prestazioni complementari e copertura del minimo vitale.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
           "title": "AVS Cantone Berna: rendita, lacune e prestazioni",
           "url": "/articoli-svizzera/avs-berna-rendita-lacune-contributive/",
           "excerpt": "Primo pilastro AVS nel Cantone di Berna: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari al minimo vitale.",
@@ -169,16 +175,16 @@
           "date": "2026-10-03T13:22:34.891Z"
         },
         {
-          "title": "AVS e prestazioni complementari nel Canton Berna",
-          "url": "/articoli-svizzera/avs-integrazioni-canton-berna/",
-          "excerpt": "Come funziona il calcolo della rendita AVS nel Canton Berna: contributi obbligatori, lacune contributive, prestazioni complementari e copertura del minimo vitale.",
-          "date": "2026-09-07T05:07:41.223Z"
-        },
-        {
           "title": "AVS e prestazioni complementari nel Cantone Berna",
           "url": "/articoli-svizzera/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione/",
           "excerpt": "La cassa di compensazione del Cantone Berna influenza le prestazioni complementari dell'AVS, ma la fonte non fornisce informazioni specifiche.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Formazione continua nel Canton Berna: requisiti e contributi",
+          "url": "/articoli-svizzera/contributi-formazione-berna-requisiti/",
+          "excerpt": "Nel Canton Berna requisiti, termini e importi dei contributi alla formazione continua seguono regole cantonali e vanno verificati sulla fonte ufficiale.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Mercato del lavoro Berna: salari, formazione e previdenza",
@@ -205,7 +211,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BE",
@@ -335,6 +341,12 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "AVS and complementary services in Canton Bern",
+          "url": "/en/swiss-articles/avs-integrations-canton-bern/",
+          "excerpt": "How the calculation of the AVS pension works in the Canton of Bern: mandatory contributions, contribution gaps, supplementary benefits and coverage of the minimum living allowance.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
           "title": "AVS Canton Bern: annuity, gaps and benefits",
           "url": "/en/swiss-articles/avs-bern-pension-contribution-gaps/",
           "excerpt": "First AVS pillar in the Canton of Bern: cantonal compensation fund, pension calculation, contribution gaps and benefits complementary to the minimum living allowance.",
@@ -348,15 +360,15 @@
         },
         {
           "title": "AVS and complementary services in Canton Bern",
-          "url": "/en/swiss-articles/avs-integrations-canton-bern/",
-          "excerpt": "How the calculation of the AVS pension works in the Canton of Bern: mandatory contributions, contribution gaps, supplementary benefits and coverage of the minimum living allowance.",
-          "date": "2026-09-07T05:07:41.223Z"
-        },
-        {
-          "title": "AVS and complementary services in Canton Bern",
           "url": "/en/swiss-articles/avs-and-complementary-benefits-cantone-bern-compensation-fund/",
           "excerpt": "The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Continuing education in the Canton of Bern: requirements and contributions",
+          "url": "/en/swiss-articles/bern-continuing-education-grants-requirements/",
+          "excerpt": "In the Canton of Bern, requirements, deadlines and amounts of continuing education contributions follow cantonal rules and must be verified against the official source.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Labour market Bern: wages, training and social security",
@@ -383,7 +395,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BE",
@@ -513,6 +525,12 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "AHV und Ergänzungsleistungen im Kanton Bern",
+          "url": "/de/schweiz-artikel/ahv-zulagen-kanton-bern/",
+          "excerpt": "So funktioniert die Berechnung der AHV-Rente im Kanton Bern: Pflichtbeiträge, Beitragslücken, Ergänzungsleistungen und Lebensminimum.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
           "title": "AHV Kanton Bern: Rente, Lücken und Leistungen",
           "url": "/de/schweiz-artikel/avs-bern-rente-beitragslucken/",
           "excerpt": "Erste AHV-Säule im Kanton Bern: kantonale Ausgleichskasse, Rentenberechnung, Beitragslücken und Ergänzungsleistungen zum Lebensminimum.",
@@ -526,15 +544,15 @@
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Bern",
-          "url": "/de/schweiz-artikel/ahv-zulagen-kanton-bern/",
-          "excerpt": "So funktioniert die Berechnung der AHV-Rente im Kanton Bern: Pflichtbeiträge, Beitragslücken, Ergänzungsleistungen und Lebensminimum.",
-          "date": "2026-09-07T05:07:41.223Z"
-        },
-        {
-          "title": "AHV und Ergänzungsleistungen im Kanton Bern",
           "url": "/de/schweiz-artikel/avs-und-zusatzleistungen-cantone-bern-entschadigungsfonds/",
           "excerpt": "Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Weiterbildung im Kanton Bern: Voraussetzungen und Beiträge",
+          "url": "/de/schweiz-artikel/bern-weiterbildung-beitrage-voraussetzungen/",
+          "excerpt": "Im Kanton Bern richten sich die Voraussetzungen, Fristen und Beträge der Beiträge zur Weiterbildung nach kantonalen Regeln und müssen anhand der offiziellen Quelle überprüft werden.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Arbeitsmarkt Bern: Löhne, Ausbildung und Vorsorge",
@@ -561,7 +579,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -691,6 +709,12 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "AVS et prestations complémentaires dans le canton de Berne",
+          "url": "/fr/articles-suisse/ava-allocations-canton-berne/",
+          "excerpt": "Comment fonctionne le calcul de la rente AVS dans le canton de Berne : cotisations obligatoires, lacunes de cotisation, prestations complémentaires et couverture du minimum vital.",
+          "date": "2026-09-07T05:07:41.223Z"
+        },
+        {
           "title": "AVS Canton de Berne : rente, lacunes et prestations",
           "url": "/fr/articles-suisse/avs-berne-rente-lacunes-cotisations/",
           "excerpt": "Premier pilier AVS dans le canton de Berne : caisse de compensation cantonale, calcul de la rente, lacunes contributives et prestations complémentaires au minimum vital.",
@@ -704,15 +728,15 @@
         },
         {
           "title": "AVS et prestations complémentaires dans le canton de Berne",
-          "url": "/fr/articles-suisse/ava-allocations-canton-berne/",
-          "excerpt": "Comment fonctionne le calcul de la rente AVS dans le canton de Berne : cotisations obligatoires, lacunes de cotisation, prestations complémentaires et couverture du minimum vital.",
-          "date": "2026-09-07T05:07:41.223Z"
-        },
-        {
-          "title": "AVS et prestations complémentaires dans le canton de Berne",
           "url": "/fr/articles-suisse/avs-et-benefices-complementaires-cantone-berne-fonds-de-compensation/",
           "excerpt": "La caisse de compensation du canton de Berne influe sur les prestations complémentaires de l'AVS, mais la source ne fournit pas d'informations spécifiques.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Formation continue dans le canton de Berne : exigences et contributions",
+          "url": "/fr/articles-suisse/berne-formation-continue-aides-conditions/",
+          "excerpt": "Dans le canton de Berne, les exigences, les délais et les montants des contributions à la formation continue suivent les règles cantonales et doivent être vérifiés dans la source officielle.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Marché du travail Berne : salaires, formation et prévoyance",
@@ -739,7 +763,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

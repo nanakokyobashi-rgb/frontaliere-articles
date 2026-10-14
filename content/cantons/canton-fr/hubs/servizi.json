@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "f20a3e3132a4e97d8746ef2c41fc6930c2673c68b8f5ef0fc4fb437c6c1fed75",
+  "updatedAt": "2026-10-14T08:24:32.182Z",
+  "contentHash": "f5cc42ed1705a083fa816b2add1f70faf495264e47bf308107251e27dbe30c3d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -141,12 +141,6 @@
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
-          "title": "Premi assicurazione malattia Friburgo: come funzionano le fasce di premio",
-          "url": "/articoli-svizzera/premi-cassa-malati-friburgo-riduzione/",
-          "excerpt": "I premi della assicurazione malattia obbligatoria nel Cantone di Friburgo sono stati ridisegnati per offrire una copertura più equa ai cittadini.",
-          "date": "2026-08-17T18:57:41.324Z"
-        },
-        {
           "title": "Permesso di dimora B nel Canton Friburgo: requisiti, rinnovo e procedure",
           "url": "/articoli-svizzera/permesso-dimora-b-canton-friburgo-requisiti-rinnovo/",
           "excerpt": "Guida pratica ai requisiti per ottenere e rinnovare il permesso B nel Canton Friburgo, con documenti necessari e iter procedurale.",
@@ -159,28 +153,34 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
-          "title": "Premi cassa malati Friburgo: riduzione e sussidi",
-          "url": "/articoli-svizzera/premi-lamal-friburgo-2026/",
-          "excerpt": "Guida ai premi dell'assicurazione malattia obbligatoria nel Canton Friburgo: franchigie, modelli alternativi e procedura per ottenere la riduzione dei premi",
-          "date": "2026-08-31T23:41:46.736Z"
+          "title": "Permesso c canton Friburgo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-friburgo-guida-requisiti/",
+          "excerpt": "Regole, tempistiche di residenza, criteri di integrazione e procedura per ottenere il permesso di domicilio C nel Cantone di Friburgo.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
-          "title": "Premi LAMal Friburgo: franchigie e sussidi 2026",
-          "url": "/articoli-svizzera/premi-lamal-friburgo-sussidi/",
-          "excerpt": "Franchigie LAMal nel Canton Friburgo, come scegliere, procedure per accedere alla riduzione di premio e scadenze ufficiali 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
+          "title": "Permesso L Friburgo: durata e rinnovo",
+          "url": "/articoli-svizzera/permesso-l-friburgo-durata-rinnovo/",
+          "excerpt": "Permesso L Friburgo: validità fino a 1 anno, rinnovo e passaggio ai permessi B e C. Procedure, documenti e vincoli del datore di lavoro.",
+          "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Asilo nido e custodia bambini nel Cantone di Friburgo: costi e opzioni",
-          "url": "/articoli-svizzera/asilo-nido-custodia-friburgo-costi/",
-          "excerpt": "Il Cantone di Friburgo offre diverse opzioni di asilo nido e custodia bambini, con tariffe calcolate sul reddito e sussidi cantonali disponibili.",
-          "date": "2026-08-18T00:24:16.744Z"
+          "title": "Permesso B Friburgo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-friburgo-rinnovo-procedura/",
+          "excerpt": "Permesso B rinnovabile a Friburgo: requisiti, documenti e procedura presso l'ufficio cantonale della migrazione. Guida alla richiesta e rinnovo.",
+          "date": "2026-08-23T23:28:41.725Z"
         },
         {
           "title": "Patente di guida a Friburgo: conversione e requisiti",
           "url": "/articoli-svizzera/patente-di-guida-friburgo-conversione-ed-esami/",
           "excerpt": "Conversione della patente di guida estera nel Cantone di Friburgo, esami teorici e pratici, corsi obbligatori e ufficio della circolazione competente.",
           "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Premi assicurazione malattia Friburgo: come funzionano le fasce di premio",
+          "url": "/articoli-svizzera/premi-cassa-malati-friburgo-riduzione/",
+          "excerpt": "I premi della assicurazione malattia obbligatoria nel Cantone di Friburgo sono stati ridisegnati per offrire una copertura più equa ai cittadini.",
+          "date": "2026-08-17T18:57:41.324Z"
         }
       ],
       "links": [
@@ -209,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "en": {
       "canton": "FR",
@@ -328,12 +328,6 @@
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
-          "title": "Health insurance premiums Fribourg: how the premium bands work",
-          "url": "/en/swiss-articles/premi-cassa-malati-fribourg/",
-          "excerpt": "Compulsory health insurance premiums in the Canton of Fribourg have been redesigned to offer fairer coverage to citizens.",
-          "date": "2026-08-17T18:57:41.324Z"
-        },
-        {
           "title": "Residence permit B in Fribourg: requirements, renewal & procedures",
           "url": "/en/swiss-articles/residence-permit-b-canton-fribourg-requirements-renewal/",
           "excerpt": "Practical guide to the requirements for obtaining and renewing the B permit in the Canton of Fribourg, with the necessary documents and procedure.",
@@ -346,28 +340,34 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
-          "title": "Sick pay premiums Fribourg: reduction and subsidies",
-          "url": "/en/swiss-articles/fribourg-health-insurance-premiums-2026/",
-          "excerpt": "Guide to compulsory health insurance premiums in the Canton of Fribourg: deductibles, alternative models and procedure for obtaining premium reductions",
-          "date": "2026-08-31T23:41:46.736Z"
+          "title": "Permit c canton Fribourg: requirements and application",
+          "url": "/en/swiss-articles/settlement-permit-c-fribourg-requirements-application/",
+          "excerpt": "Rules, residence times, integration criteria and procedure for obtaining residence permit C in the Canton of Fribourg.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
-          "title": "KVG premiums Fribourg: deductibles and subsidies 2026",
-          "url": "/en/swiss-articles/health-insurance-premiums-fribourg-subsidies/",
-          "excerpt": "KVG deductibles in the Canton of Fribourg, how to choose, procedures for accessing the premium reduction and official deadlines 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
+          "title": "L Fribourg permit: duration and renewal",
+          "url": "/en/swiss-articles/l-permit-fribourg-duration-renewal/",
+          "excerpt": "L Fribourg permit: valid for up to 1 year, renewal and transition to B and C permits. Procedures, documents and employer constraints.",
+          "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Nursery and childcare in the Canton of Fribourg: costs and options",
-          "url": "/en/swiss-articles/nursery-and-childcare-in-the-canton-of-fribourg-costs-and-options/",
-          "excerpt": "The Canton of Fribourg offers several daycare and childcare options, with income-based fees and cantonal subsidies available.",
-          "date": "2026-08-18T00:24:16.744Z"
+          "title": "Permit B Fribourg: Requirements and Renewal",
+          "url": "/en/swiss-articles/residence-permit-b-fribourg-renewal-procedure/",
+          "excerpt": "Renewable permit B in Fribourg: requirements, documents and procedure at the cantonal migration office. Application and renewal guide.",
+          "date": "2026-08-23T23:28:41.725Z"
         },
         {
           "title": "Driving licence in Fribourg: conversion and requirements",
           "url": "/en/swiss-articles/driving-license-fribourg-conversion-and-exams/",
           "excerpt": "Conversion of the foreign driver's license in the Canton of Fribourg, theoretical and practical exams, compulsory courses and competent traffic office.",
           "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Health insurance premiums Fribourg: how the premium bands work",
+          "url": "/en/swiss-articles/premi-cassa-malati-fribourg/",
+          "excerpt": "Compulsory health insurance premiums in the Canton of Fribourg have been redesigned to offer fairer coverage to citizens.",
+          "date": "2026-08-17T18:57:41.324Z"
         }
       ],
       "links": [
@@ -392,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "de": {
       "canton": "FR",
@@ -511,12 +511,6 @@
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
-          "title": "Krankenkassenprämien Freiburg: So funktionieren die Prämienbänder",
-          "url": "/de/schweiz-artikel/pflichtkrankenkassenpreise-kanton-freiburg/",
-          "excerpt": "Die Prämien der gesetzlichen Krankenversicherung im Kanton Freiburg wurden neu gestaltet, um den Bürgern eine gerechtere Deckung zu bieten.",
-          "date": "2026-08-17T18:57:41.324Z"
-        },
-        {
           "title": "Aufenthaltsbewilligung B in Freiburg: Voraussetzungen & Verfahren",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-kanton-freiburg-voraussetzungen-verlaengerung/",
           "excerpt": "Praktischer Leitfaden zu den Voraussetzungen für die Erlangung und Erneuerung der B-Bewilligung im Kanton Freiburg, mit notwendigen Unterlagen und Verfahrensablauf.",
@@ -529,28 +523,34 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
-          "title": "Krankenkassenprämien Freiburg: Kürzung und Zuschüsse",
-          "url": "/de/schweiz-artikel/praemien-krankenversicherung-freiburg-2026/",
-          "excerpt": "Prämienleitfaden für die obligatorische Krankenversicherung im Kanton Freiburg: Franchisen, alternative Modelle und Verfahren zur Erlangung der Prämienverbilligung",
-          "date": "2026-08-31T23:41:46.736Z"
+          "title": "Kantonsgenehmigung Freiburg: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-freiburg-voraussetzungen-gesuch/",
+          "excerpt": "Regeln, Aufenthaltszeiten, Integrationskriterien und Verfahren zur Erlangung der Niederlassungsbewilligung C im Kanton Freiburg.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
-          "title": "KVG-Prämien Freiburg: Selbstbeteiligungen und Subventionen 2026",
-          "url": "/de/schweiz-artikel/praemien-krankenversicherung-freiburg-subventionen/",
-          "excerpt": "KVG-Franchisen im Kanton Freiburg, wie man wählt, Verfahren für den Zugang zur Prämienverbilligung und offizielle Fristen 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
+          "title": "L-Freiburg-Genehmigung: Dauer und Verlängerung",
+          "url": "/de/schweiz-artikel/l-bewilligung-freiburg-gueltigkeitsdauer-verlaengerung/",
+          "excerpt": "L-Freiburg-Permit: gültig bis zu 1 Jahr, Verlängerung und Umstellung auf B- und C-Permits. Verfahren, Dokumente und Arbeitgeberbeschränkungen.",
+          "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Freiburg: Kosten und Optionen",
-          "url": "/de/schweiz-artikel/asilo-nido-custodia-freiburg-kosten/",
-          "excerpt": "Der Kanton Freiburg bietet verschiedene Möglichkeiten der Kindertagesstätte und Kinderbetreuung mit einkommensabhängigen Tarifen und kantonalen Zuschüssen an.",
-          "date": "2026-08-18T00:24:16.744Z"
+          "title": "B-Bewilligung Freiburg: Voraussetzungen und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-freiburg-erneuerung-verfahren/",
+          "excerpt": "Erneuerbare B-Bewilligung in Freiburg: Anforderungen, Dokumente und Verfahren beim kantonalen Migrationsamt. Leitfaden für die Beantragung und Erneuerung.",
+          "date": "2026-08-23T23:28:41.725Z"
         },
         {
           "title": "Führerschein in Freiburg: Umstellung und Voraussetzungen",
           "url": "/de/schweiz-artikel/fuehrerschein-freiburg-umstellung-und-pruefungen/",
           "excerpt": "Umwandlung des ausländischen Führerscheins im Kanton Freiburg, theoretische und praktische Prüfungen, Pflichtkurse und zuständiges Strassenverkehrsamt.",
           "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Krankenkassenprämien Freiburg: So funktionieren die Prämienbänder",
+          "url": "/de/schweiz-artikel/pflichtkrankenkassenpreise-kanton-freiburg/",
+          "excerpt": "Die Prämien der gesetzlichen Krankenversicherung im Kanton Freiburg wurden neu gestaltet, um den Bürgern eine gerechtere Deckung zu bieten.",
+          "date": "2026-08-17T18:57:41.324Z"
         }
       ],
       "links": [
@@ -575,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "fr": {
       "canton": "FR",
@@ -694,12 +694,6 @@
           "date": "2026-10-10T17:43:08.538Z"
         },
         {
-          "title": "Fasce di premio assicurazione malattia Fribourg",
-          "url": "/fr/articles-suisse/premieres-maladie-obligatoire-canton-fribourg/",
-          "excerpt": "Les primes de l'assurance maladie obligatoire dans le canton de Fribourg ont été redessinées pour offrir une couverture plus équitable aux citoyens.",
-          "date": "2026-08-17T18:57:41.324Z"
-        },
-        {
           "title": "Permis B Fribourg : exigences, renouvellement et démarches",
           "url": "/fr/articles-suisse/permis-sejour-b-canton-fribourg-exigences-renouvellement/",
           "excerpt": "Guide pratique des exigences pour obtenir et renouveler le permis B dans le canton de Fribourg, avec les documents nécessaires et les procédures.",
@@ -712,28 +706,34 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
-          "title": "Primes caisse-maladie Fribourg : réduction et allocations",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-fribourg-2026/",
-          "excerpt": "Guide des primes de l'assurance maladie obligatoire dans le canton de Fribourg : franchises, modèles alternatifs et procédure pour obtenir la réduction des primes",
-          "date": "2026-08-31T23:41:46.736Z"
+          "title": "Permis c canton de Fribourg : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-fribourg-conditions-demande/",
+          "excerpt": "Règles, temps de résidence, critères d'intégration et procédure d'obtention du permis de séjour C dans le canton de Fribourg.",
+          "date": "2026-09-22T05:55:12.294Z"
         },
         {
-          "title": "Primes LAMal Fribourg : franchises et subventions 2026",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-fribourg-subventions/",
-          "excerpt": "Les franchises KVG dans le canton de Fribourg, comment choisir, les procédures pour accéder à la réduction de prime et les délais officiels 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
+          "title": "Permis de L Fribourg : durée et renouvellement",
+          "url": "/fr/articles-suisse/permis-l-fribourg-duree-renouvellement/",
+          "excerpt": "Permis L Fribourg : validité jusqu'à 1 an, renouvellement et passage aux permis B et C. Procédures, documents et contraintes de l'employeur.",
+          "date": "2026-09-01T17:14:48.698Z"
         },
         {
-          "title": "Garderie et garde d'enfants dans le canton de Fribourg : coûts et options",
-          "url": "/fr/articles-suisse/asilo-nido-custodia-fribourg-couts/",
-          "excerpt": "Le canton de Fribourg offre plusieurs options de crèche et de garde d'enfants, avec des tarifs calculés sur le revenu et des allocations cantonales disponibles.",
-          "date": "2026-08-18T00:24:16.744Z"
+          "title": "Permis B Fribourg : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-fribourg-renouvellement-procedure/",
+          "excerpt": "Permis B renouvelable à Fribourg : exigences, documents et procédure auprès de l'Office cantonal des migrations. Guide de la demande et du renouvellement.",
+          "date": "2026-08-23T23:28:41.725Z"
         },
         {
           "title": "Permis de conduire à Fribourg : conversion et exigences",
           "url": "/fr/articles-suisse/permis-de-conduire-fribourg-conversion-et-examen/",
           "excerpt": "Conversion du permis de conduire étranger dans le canton de Fribourg, examens théoriques et pratiques, cours obligatoires et bureau de la circulation compétent.",
           "date": "2026-08-18T01:35:04.695Z"
+        },
+        {
+          "title": "Fasce di premio assicurazione malattia Fribourg",
+          "url": "/fr/articles-suisse/premieres-maladie-obligatoire-canton-fribourg/",
+          "excerpt": "Les primes de l'assurance maladie obligatoire dans le canton de Fribourg ont été redessinées pour offrir une couverture plus équitable aux citoyens.",
+          "date": "2026-08-17T18:57:41.324Z"
         }
       ],
       "links": [
@@ -754,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     }
   }
 }

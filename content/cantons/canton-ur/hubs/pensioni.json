@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "5e50509c34796835b6edb027bcab8e187b226c7554a00dc6ae056fb162d090ed",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "962ec7cf1157aecf7dd7ba213e955196a792b2a9a071e437d920964b34f5c905",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -140,10 +140,10 @@
           "date": "2026-08-29T11:33:47.607Z"
         },
         {
-          "title": "AVS e prestazioni complementari nel canton Uri",
-          "url": "/articoli-svizzera/avs-prestazioni-uri-cassa/",
-          "excerpt": "Cassa di compensazione, calcolo della rendita e lacune contributive nel primo pilastro: come funzionano le prestazioni complementari a Uri",
-          "date": "2026-08-22T17:57:19.704Z"
+          "title": "AVS e prestazioni complementari nel Canton Uri",
+          "url": "/articoli-svizzera/avs-prestazioni-complementari-uri/",
+          "excerpt": "Come funziona il primo pilastro nel Canton Uri: cassa di compensazione, calcolo della rendita, lacune contributive e prestazioni complementari per il minimo vitale.",
+          "date": "2026-08-22T18:37:21.319Z"
         }
       ],
       "links": [
@@ -164,7 +164,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "UR",
@@ -282,10 +282,10 @@
           "date": "2026-08-29T11:33:47.607Z"
         },
         {
-          "title": "AVS and complementary services in canton Uri",
-          "url": "/en/swiss-articles/ahv-benefits-uri-compensation/",
-          "excerpt": "Compensation fund, pension calculation and contribution gaps in the first pillar: how URI supplementary benefits work",
-          "date": "2026-08-22T17:57:19.704Z"
+          "title": "AVS and complementary services in Canton Uri",
+          "url": "/en/swiss-articles/avs-complementary-benefits-canton-uri/",
+          "excerpt": "How the first pillar works in Canton Uri: compensation fund, pension calculation, contribution gaps and supplementary benefits for the minimum living wage.",
+          "date": "2026-08-22T18:37:21.319Z"
         }
       ],
       "links": [
@@ -306,7 +306,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "UR",
@@ -425,9 +425,9 @@
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Uri",
-          "url": "/de/schweiz-artikel/ahv-ergaenzungsleistungen-uri/",
-          "excerpt": "Ausgleichskasse, Rentenberechnung und Beitragslücken in der ersten Säule: So funktionieren die URI-Zusatzleistungen",
-          "date": "2026-08-22T17:57:19.704Z"
+          "url": "/de/schweiz-artikel/avs-zusatzleistungen-kanton-uri/",
+          "excerpt": "Wie funktioniert die erste Säule im Kanton Uri: Ausgleichskasse, Rentenberechnung, Beitragslücken und Ergänzungsleistungen für das Existenzminimum.",
+          "date": "2026-08-22T18:37:21.319Z"
         }
       ],
       "links": [
@@ -448,7 +448,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "UR",
@@ -567,9 +567,9 @@
         },
         {
           "title": "AVS et prestations complémentaires dans le canton d'Uri",
-          "url": "/fr/articles-suisse/avs-prestazioni-uri-caisse/",
-          "excerpt": "Caisse de compensation, calcul de la rente et lacunes contributives dans le premier pilier : comment fonctionnent les prestations complémentaires à URI",
-          "date": "2026-08-22T17:57:19.704Z"
+          "url": "/fr/articles-suisse/avs-prestations-complementaires-canton-uri/",
+          "excerpt": "Comment fonctionne le premier pilier dans le canton d'Uri : caisse de compensation, calcul de la rente, lacunes de cotisation et prestations complémentaires pour le minimum vital.",
+          "date": "2026-08-22T18:37:21.319Z"
         }
       ],
       "links": [
@@ -590,7 +590,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

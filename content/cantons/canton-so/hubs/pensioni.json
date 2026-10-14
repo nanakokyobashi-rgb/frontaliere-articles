@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "22b3fce41eccf868d7a7a887f8d4745c9998a2536978c5b40200437d8bff2c6a",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "2ef2c71a9c827a8052585d6ecd75169251be110968e4baca31488d04846ba73d",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -128,16 +128,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "AVS e prestazioni complementari nel Cantone di Soletta",
-          "url": "/articoli-svizzera/avs-prestazioni-complementari-soletta/",
-          "excerpt": "La cassa di compensazione cantonale di Soletta gestisce il primo pilastro AVS, calcolando rendite e prestazioni complementari per garantire il minimo vitale.",
-          "date": "2026-09-06T02:10:52.722Z"
-        },
-        {
           "title": "AVS e prestazioni complementari nel Soletta",
           "url": "/articoli-svizzera/avs-soletta-cassa-compensazione/",
           "excerpt": "Cassa di compensazione, calcolo rendita AVS e prestazioni complementari nel Cantone Soletta: come funziona il sistema previdenziale locale.",
           "date": "2026-09-06T02:19:35.234Z"
+        },
+        {
+          "title": "AVS e prestazioni complementari nel Cantone di Soletta",
+          "url": "/articoli-svizzera/avs-prestazioni-complementari-soletta/",
+          "excerpt": "La cassa di compensazione cantonale di Soletta gestisce il primo pilastro AVS, calcolando rendite e prestazioni complementari per garantire il minimo vitale.",
+          "date": "2026-09-06T02:10:52.722Z"
         },
         {
           "title": "AVS e prestazioni complementari nel Canton Soletta",
@@ -164,7 +164,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SO",
@@ -270,16 +270,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "AVS and complementary services in the Canton of Solothurn",
-          "url": "/en/swiss-articles/avs-complementary-benefits-solothurn/",
-          "excerpt": "The cantonal compensation fund of Solothurn manages the first AVS pillar, calculating complementary annuities and benefits to ensure the minimum living.",
-          "date": "2026-09-06T02:10:52.722Z"
-        },
-        {
           "title": "AVS and complementary performance in the Insole",
           "url": "/en/swiss-articles/ahv-solothurn-compensation-fund/",
           "excerpt": "Compensation fund, calculation of AVS annuity and complementary benefits in the Canton of Solothurn: how the local social security system works.",
           "date": "2026-09-06T02:19:35.234Z"
+        },
+        {
+          "title": "AVS and complementary services in the Canton of Solothurn",
+          "url": "/en/swiss-articles/avs-complementary-benefits-solothurn/",
+          "excerpt": "The cantonal compensation fund of Solothurn manages the first AVS pillar, calculating complementary annuities and benefits to ensure the minimum living.",
+          "date": "2026-09-06T02:10:52.722Z"
         },
         {
           "title": "AVS and complementary services in the canton of Solothurn",
@@ -306,7 +306,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SO",
@@ -412,16 +412,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "AHV und Ergänzungsleistungen im Kanton Solothurn",
-          "url": "/de/schweiz-artikel/avs-zusatzleistungen-solothurn/",
-          "excerpt": "Die kantonale Ausgleichskasse Solothurn betreibt die erste AHV-Säule und berechnet Renten und Ergänzungsleistungen zur Sicherung des Existenzminimums.",
-          "date": "2026-09-06T02:10:52.722Z"
-        },
-        {
           "title": "AHV und Ergänzungsleistungen in Solothurn",
           "url": "/de/schweiz-artikel/ahv-solothurn-ausgleichskasse/",
           "excerpt": "Ausgleichskasse, AHV-Rentenberechnung und Ergänzungsleistungen im Kanton Solothurn: So funktioniert das lokale Vorsorgesystem.",
           "date": "2026-09-06T02:19:35.234Z"
+        },
+        {
+          "title": "AHV und Ergänzungsleistungen im Kanton Solothurn",
+          "url": "/de/schweiz-artikel/avs-zusatzleistungen-solothurn/",
+          "excerpt": "Die kantonale Ausgleichskasse Solothurn betreibt die erste AHV-Säule und berechnet Renten und Ergänzungsleistungen zur Sicherung des Existenzminimums.",
+          "date": "2026-09-06T02:10:52.722Z"
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Solothurn",
@@ -448,7 +448,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SO",
@@ -554,16 +554,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "AVS et prestations complémentaires dans le canton de Soleure",
-          "url": "/fr/articles-suisse/avs-prestations-complementaires-soleure/",
-          "excerpt": "La caisse de compensation cantonale de Soleure gère le premier pilier AVS, calculant les rentes et prestations complémentaires pour assurer le minimum vital.",
-          "date": "2026-09-06T02:10:52.722Z"
-        },
-        {
           "title": "AVS et prestations complémentaires à Soleure",
           "url": "/fr/articles-suisse/avs-soleure-caisse-compensation/",
           "excerpt": "Caisse de compensation, calcul des rentes AVS et prestations complémentaires dans le canton de Soleure : comment fonctionne le système de prévoyance local.",
           "date": "2026-09-06T02:19:35.234Z"
+        },
+        {
+          "title": "AVS et prestations complémentaires dans le canton de Soleure",
+          "url": "/fr/articles-suisse/avs-prestations-complementaires-soleure/",
+          "excerpt": "La caisse de compensation cantonale de Soleure gère le premier pilier AVS, calculant les rentes et prestations complémentaires pour assurer le minimum vital.",
+          "date": "2026-09-06T02:10:52.722Z"
         },
         {
           "title": "AVS et prestations complémentaires dans le canton de Soleure",
@@ -590,7 +590,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

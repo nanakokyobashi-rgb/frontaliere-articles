@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "64ef56eded86124d4f07b8fe16b4fd55ce29f369086d683034df1d25f0f190c6",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "0db3ff1e7c4c54bbe2a575a6ab832c0ab7ff732b67064f67e5d82a857d0bcf22",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -120,6 +120,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Canton Uri, bilancio 2027 con avanzo di 1,1 milioni",
+          "url": "/articoli-uri/uri-budget-avanzo-2027/",
+          "excerpt": "Il Canton Uri prevede per il 2027 un avanzo di CHF 1,1 milioni: entrate a 514,4 milioni e spese a 513,3 milioni.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
           "title": "Imposta sugli autoveicoli Uri: calcolo e pagamento",
           "url": "/articoli-svizzera/imposta-veicoli-uri-calcolo/",
           "excerpt": "Nel Cantone di Uri, calcolo, termini e importi dell'imposta sugli autoveicoli seguono regole cantonali: cosa verificare per veicolo e indirizzo.",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-uri-aliquote/",
           "excerpt": "Imposta di successione e donazione nel Cantone di Uri: aliquote per grado di parentela",
           "date": "2026-08-16T10:39:50.404Z"
-        },
-        {
-          "title": "Cassa malati Uri: franchigie, modelli e riduzione",
-          "url": "/articoli-svizzera/uri-franchigie-modelli-sussidio/",
-          "excerpt": "Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere al sussidio cantonale.",
-          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -172,7 +172,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "UR",
@@ -270,6 +270,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Canton Uri, 2027 budget with a surplus of 1,1 million",
+          "url": "/en/uri-articles/uri-budget-surplus-2027/",
+          "excerpt": "The Canton of Uri expects a surplus of CHF 1,1 million in 2027: revenue of 514,4 million and expenditure of 513,3 million.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
           "title": "Uri motor vehicle tax: calculation and payment",
           "url": "/en/swiss-articles/uri-vehicle-tax-calculation/",
           "excerpt": "In the Canton of Uri, the calculation, deadlines and amounts of the motor vehicle tax follow cantonal rules: what to check for each vehicle and address.",
@@ -292,12 +298,6 @@
           "url": "/en/swiss-articles/succession-and-donation-taxes-in-the-canton-of-uri/",
           "excerpt": "Inheritance and gift tax in the Canton of Uri: rates by degree of kinship",
           "date": "2026-08-16T10:39:50.404Z"
-        },
-        {
-          "title": "Uri sick fund: deductibles, models and reduction",
-          "url": "/en/swiss-articles/uri-franchises-models-subsidy/",
-          "excerpt": "In Canton Uri, LAMal premiums vary by deductible and insurance model. Discover the bands available (CHF 300–2500), the coverage models and how to access the cantonal subsidy.",
-          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -322,7 +322,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "UR",
@@ -420,6 +420,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Kanton Uri, Budget 2027 mit einem Überschuss von 1,1 Millionen",
+          "url": "/de/uri-artikel/uri-budget-ueberschuss-2027/",
+          "excerpt": "Der Kanton Uri erwartet für 2027 einen Überschuss von CHF 1,1 Millionen: Einnahmen von 514,4 Millionen und Ausgaben von 513,3 Millionen.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
           "title": "Motorfahrzeugsteuer Uri: Berechnung und Zahlung",
           "url": "/de/schweiz-artikel/uri-motorfahrzeugsteuer-berechnung/",
           "excerpt": "Im Kanton Uri richten sich Berechnung, Fristen und Beträge der Motorfahrzeugsteuer nach kantonalen Regeln: Was für Fahrzeug und Adresse zu prüfen ist.",
@@ -442,12 +448,6 @@
           "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuern-im-kanton-uri/",
           "excerpt": "Erbschafts- und Schenkungssteuer im Kanton Uri: Sätze pro Verwandtschaftsgrad",
           "date": "2026-08-16T10:39:50.404Z"
-        },
-        {
-          "title": "URI-Krankenkasse: Selbstbehalte, Modelle und Reduktion",
-          "url": "/de/schweiz-artikel/uri-franchisen-modelle-subvention/",
-          "excerpt": "Im Kanton Uri variieren die KVG-Prämien je nach Franchise und Versicherungsmodell. Entdecken Sie die verfügbaren Spannen (CHF 300–2500), die Deckungsmodelle und wie Sie auf den Kantonsbeitrag zugreifen können.",
-          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -472,7 +472,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "UR",
@@ -570,6 +570,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Canton d’Uri, budget 2027 avec un excédent de 1,1 million",
+          "url": "/fr/articles-uri/budget-uri-excedent-2027/",
+          "excerpt": "Le canton d’Uri prévoit pour 2027 un excédent de CHF 1,1 million : recettes de 514,4 millions et dépenses de 513,3 millions.",
+          "date": "2026-10-10T22:08:05.095Z"
+        },
+        {
           "title": "Impôt sur les véhicules à moteur à Uri : calcul et paiement",
           "url": "/fr/articles-suisse/taxe-vehicules-uri-calcul/",
           "excerpt": "Dans le canton d'Uri, le calcul, les délais et les montants de l'impôt sur les véhicules à moteur suivent les règles cantonales : ce qu'il faut vérifier pour le véhicule et l'adresse.",
@@ -592,12 +598,6 @@
           "url": "/fr/articles-suisse/impots-sur-la-succession-et-la-donation-au-canton-d-uri/",
           "excerpt": "Droits de succession et de donation dans le canton d'Uri : taux par degré de parenté",
           "date": "2026-08-16T10:39:50.404Z"
-        },
-        {
-          "title": "Caisse maladie URI : franchises, modèles et réduction",
-          "url": "/fr/articles-suisse/uri-franchises-modeles-subsides/",
-          "excerpt": "Dans le canton d'Uri, les primes LAMal varient selon la franchise et le modèle d'assurance. Découvrez les tranches disponibles (CHF 300–2500), les modèles de couverture et comment accéder à l'allocation cantonale.",
-          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -622,7 +622,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

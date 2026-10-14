@@ -909,14 +909,15 @@ test('tetto, ordinamento e qualita\' gia\' calcolata', async () => {
 });
 
 test('classificatore a parole chiave di eventi e servizi: dichiarato nel file dati, multilingue', () => {
-  const emptyClusters = CANTON_HUB_TOPIC_KEYS.filter((t) => CANTON_HUB_TOPIC_CLUSTERS[t].length === 0);
-  assert.deepEqual(Object.keys(CONFIG.keywordTopics).sort(), [...emptyClusters].sort(), 'un classificatore per ogni tema senza cluster nell\'engine, e solo per quelli');
+  assert.deepEqual(Object.keys(CONFIG.keywordTopics).sort(), [...CANTON_HUB_TOPIC_KEYS].sort(), 'un classificatore lessicale dichiarato per ogni tema');
   for (const [topic, cfg] of Object.entries(CONFIG.keywordTopics)) {
     assert.ok(Number.isInteger(cfg.minScore) && cfg.minScore >= 3);
     for (const locale of HUB_LOCALES) {
       assert.ok(cfg.terms[locale].length >= 8, `${topic}/${locale}: troppo pochi termini`);
       assert.ok(Array.isArray(cfg.exclude[locale]));
       assert.equal(new Set(cfg.terms[locale]).size, cfg.terms[locale].length, `${topic}/${locale}: termini duplicati`);
+      if (cfg.requiredTerms) assert.ok(cfg.requiredTerms[locale].length >= 8, `${topic}/${locale}: requiredTerms troppo pochi`);
+      if (cfg.excludeUnless) assert.ok(Array.isArray(cfg.excludeUnless[locale]));
     }
   }
   const art = (title, excerpt) => ({ title, excerpt });
@@ -946,6 +947,78 @@ test('classificatore a parole chiave di eventi e servizi: dichiarato nel file da
     same(''),
   ), servizi);
   assert.ok(pharmacy.titleHit && pharmacy.score >= servizi.minScore);
+  const genericCommuters = keywordTopicScore(art(
+    {
+      it: 'Friburgo: 2140 frontalieri esteri a fine giugno 2026',
+      en: 'Fribourg: 2140 foreign cross-border commuters at the end of June 2026',
+      de: 'Freiburg: 2140 ausländische Grenzgänger Ende Juni 2026',
+      fr: 'Fribourg : 2140 frontaliers étrangers à fin juin 2026',
+    },
+    {
+      it: 'Il numero dei frontalieri esteri cresce nel cantone.',
+      en: 'The number of foreign cross-border workers is growing in the canton.',
+      de: 'Die Zahl der ausländischen Grenzgänger im Kanton wächst.',
+      fr: 'Le nombre de travailleurs frontaliers étrangers augmente dans le canton.',
+    },
+  ), CONFIG.keywordTopics.mobilita);
+  assert.ok(genericCommuters.score < CONFIG.keywordTopics.mobilita.minScore, 'un dato sui frontalieri non e\' automaticamente mobilita\'');
+  const genericBorder = keywordTopicScore(art(
+    { it: 'Confine e frontiera: dati sui lavoratori', en: 'Border data on foreign workers', de: 'Grenze: Daten zu ausländischen Arbeitskräften', fr: 'Frontière : données sur les travailleurs étrangers' },
+    same(''),
+  ), CONFIG.keywordTopics.mobilita);
+  assert.ok(genericBorder.score >= CONFIG.keywordTopics.mobilita.minScore);
+  assert.equal(genericBorder.requiredHit, false, 'confine generico non è evidenza di mobilità');
+  const labourMarket = keywordTopicScore(art(
+    { it: 'Il mercato del lavoro cantonale cresce', en: 'The labour market grows in the canton', de: 'Der Arbeitsmarkt im Kanton wächst', fr: 'Le marché du travail cantonal progresse' },
+    same(''),
+  ), eventi);
+  assert.ok(labourMarket.score < eventi.minScore, 'mercato del lavoro non è un evento');
+  const fuelPriceMetaphor = keywordTopicScore(art(
+    { it: 'Esplosione dei prezzi della benzina', en: 'Explosion in petrol prices', de: 'Explosion der Benzinpreise', fr: 'Explosion des prix de l’essence' },
+    same(''),
+  ), CONFIG.keywordTopics.carburanti);
+  assert.equal(fuelPriceMetaphor.excluded, false, 'la metafora sui prezzi non è un incidente');
+  const fuelFire = keywordTopicScore(art(
+    { it: 'Incendio alla stazione di servizio', en: 'Fire at a filling station', de: 'Brand an einer Tankstelle', fr: 'Incendie dans une station-service' },
+    same(''),
+  ), CONFIG.keywordTopics.carburanti);
+  assert.equal(fuelFire.excluded, true, 'un incidente alla stazione resta escluso');
+});
+
+test('lessico diretto completa i cluster senza inventare fisco o mobilita\'', async () => {
+  const road = article(
+    'ti-strada-chiusa',
+    'canton-ti',
+    'Strada chiusa e lavori sulla viabilità ticinese',
+    'La chiusura della strada impone deviazioni e modifica il traffico.',
+    { days: 1 },
+  );
+  const budget = article(
+    'ti-budget-disavanzo',
+    'canton-ti',
+    'Budget cantonale e disavanzo: nuove misure fiscali',
+    'Il bilancio e le imposte del cantone sono al centro del provvedimento.',
+    { days: 1 },
+  );
+  const phishing = article(
+    'ti-phishing-fisco',
+    'canton-ti',
+    'Phishing e falsa e-mail del fisco: attenzione alla truffa',
+    'Il messaggio imita una comunicazione sulle imposte.',
+    { days: 1 },
+  );
+  const genericBorder = article(
+    'ti-frontaliere-generico',
+    'canton-ti',
+    'Frontalieri esteri in crescita',
+    'Il numero dei frontalieri esteri cresce nel cantone.',
+    { days: 1 },
+  );
+  const { byTopic } = await curatedFor('canton-ti', [...CORPUS, road, budget, phishing, genericBorder]);
+  assert.ok(idsOf(byTopic.mobilita).includes(road.id));
+  assert.ok(idsOf(byTopic.fisco).includes(budget.id));
+  assert.ok(!idsOf(byTopic.fisco).includes(phishing.id), 'le esclusioni lessicali valgono anche sul cluster TF-IDF');
+  assert.ok(!idsOf(byTopic.mobilita).includes(genericBorder.id), 'un confine generico non supera il gate trasporto/dogana');
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

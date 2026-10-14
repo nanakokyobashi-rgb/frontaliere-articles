@@ -13150,6 +13150,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incidente-varesina-venegono.title': 'Carambola sulla Varesina: quattro feriti a Venegono',
     'blog.article.incidente-varesina-venegono.excerpt': 'Incidente alle 7 sulla Sp 233 a Venegono Inferiore Quattro auto coinvolte e quattro persone ferite Due ambulanze, automedica, vigili del fuoco e carabinieri',
     'blog.article.incidente-varesina-venegono.imageAlt': 'Traffico fermo sulla Varesina dopo un incidente a Venegono Inferiore',
+    'blog.article.arresti-truffa-chiamate-ticino.title': 'Truffa chiamate shock: tre arresti in Canton Ticino',
+    'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'Smantellata in Canton Ticino una rete di truffatori specializzati nelle cosiddette chiamate shock: tre persone sono state arrestate.',
+    'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'Vista di Lugano con smartphone in primo piano',
 };
 
 export default blogMetaIt;

@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "c1bd7a7ec4ba87062c00a5784d8b8208fd53d199a841f1421b44e5504d436cb6",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "416d46cc807559940d4caa32debd7ab863b810f8e684a3f7f0f64d4de1125828",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -116,6 +116,12 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-appenzello-interno/",
           "excerpt": "Trasporti pubblici ad Appenzello Interno: comunità tariffaria, zone, abbonamenti annuali e mensili, metà-prezzo, GA, sconti per studenti e apprendisti.",
           "date": "2026-09-03T05:33:21.516Z"
+        },
+        {
+          "title": "Wagner chiude a Waldstatt: 69 posti persi",
+          "url": "/articoli-svizzera/wagner-chiude-waldstatt-69-licenziamenti/",
+          "excerpt": "Wagner chiude a Waldstatt, nel cantone di Appenzello Esterno La chiusura riguarda 69 posti di lavoro Le attività passano gradualmente a partner esterni",
+          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "links": [
@@ -128,7 +134,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -227,6 +233,12 @@
           "url": "/en/swiss-articles/public-transit-passes-appenzell-canton/",
           "excerpt": "Public transport in Appenzell Innerrhoden: fare community, zones, annual and monthly subscriptions, half-price, GA, discounts for students and apprentices.",
           "date": "2026-09-03T05:33:21.516Z"
+        },
+        {
+          "title": "Wagner closes in Waldstatt: 69 jobs lost",
+          "url": "/en/swiss-articles/wagner-closes-waldstatt-69-layoffs/",
+          "excerpt": "Wagner is closing in Waldstatt, in the canton of Appenzell Ausserrhoden The closure affects 69 jobs Operations are gradually being transferred to external partners",
+          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "links": [
@@ -239,7 +251,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -338,6 +350,12 @@
           "url": "/de/schweiz-artikel/fahrkarten-appenzell-innerrhoden/",
           "excerpt": "Öffentlicher Verkehr in Appenzell Innerrhoden: Tarifgemeinschaft, Zonen, Jahres- und Monatsabonnements, Halbtax, GA, Studenten- und Lehrlingsrabatte.",
           "date": "2026-09-03T05:33:21.516Z"
+        },
+        {
+          "title": "Wagner schließt in Waldstatt: 69 Arbeitsplätze gehen verloren",
+          "url": "/de/schweiz-artikel/wagner-schliesst-waldstatt-69-kundigungen/",
+          "excerpt": "Wagner schließt in Waldstatt, im Kanton Appenzell Ausserrhoden Die Schließung betrifft 69 Arbeitsplätze Die Aktivitäten werden schrittweise an externe Partner übertragen",
+          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "links": [
@@ -350,7 +368,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -449,6 +467,12 @@
           "url": "/fr/articles-suisse/abonnements-transports-appenzell-rhodes-interieures/",
           "excerpt": "Transports publics à Appenzell Interne : communauté tarifaire, zones, abonnements annuels et mensuels, demi-tarif, GA, réductions pour étudiants et apprentis.",
           "date": "2026-09-03T05:33:21.516Z"
+        },
+        {
+          "title": "Wagner ferme à Waldstatt : 69 emplois perdus",
+          "url": "/fr/articles-suisse/wagner-ferme-waldstatt-69-licenciements/",
+          "excerpt": "Wagner ferme à Waldstatt, dans le canton d’Appenzell Rhodes-Extérieures La fermeture concerne 69 emplois Les activités sont progressivement confiées à des partenaires externes",
+          "date": "2026-10-13T04:32:01.538Z"
         }
       ],
       "links": [
@@ -461,7 +485,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

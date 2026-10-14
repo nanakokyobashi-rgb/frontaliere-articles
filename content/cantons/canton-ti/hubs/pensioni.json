@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "4c41d5eeac167d81ad942716380cd7c14bddc47efe80f989829b25760c898b3e",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "7268f8d7d4e368743b7ee21271449a058a983b27eb83c066b8187f0a56ab09c7",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -128,10 +128,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
+          "url": "/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/",
+          "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "Secondo pilastro e frontalieri: stop rimborso in Ticino",
           "url": "/articoli-frontaliere/ticino-rimborso-lpp-2024/",
           "excerpt": "Dal 2024 il Canton Ticino non rimborsa più l'imposta alla fonte sul capitale LPP per i frontalieri residenti in Italia. Ecco cosa cambia.",
           "date": "2026-10-02T06:18:48.609Z"
+        },
+        {
+          "title": "Totalizzazione contributi AVS e INPS per i frontalieri ticinesi",
+          "url": "/articoli-frontaliere/totalizzazione-contributi-avs-inps-frontalieri-ticino/",
+          "excerpt": "La totalizzazione dei contributi AVS e INPS per i frontalieri ticinesi è un processo complesso che richiede la presentazione di una domanda agli uffici di competenza",
+          "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Aumento beneficiari rendite AVS in Ticino: +40.400 nel 2025",
@@ -140,10 +152,28 @@
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
-          "title": "Totalizzazione contributi AVS e INPS per i frontalieri ticinesi",
-          "url": "/articoli-frontaliere/totalizzazione-contributi-avs-inps-frontalieri-ticino/",
-          "excerpt": "La totalizzazione dei contributi AVS e INPS per i frontalieri ticinesi è un processo complesso che richiede la presentazione di una domanda agli uffici di competenza",
-          "date": "2026-08-12T02:47:34.595Z"
+          "title": "Una 13esima AVS solidale per i giovani ticinesi",
+          "url": "/articoli-frontaliere/patto-generazionale-avs-ticino/",
+          "excerpt": "Il Fondo Patto Generazionale invita i beneficiari AVS a donare parte o tutta la tredicesima per sostenere giovani ticinesi tra 0 e 30 anni.",
+          "date": "2026-10-04T00:02:46.900Z"
+        },
+        {
+          "title": "Fondo AVS in Ticino: la 13esima ai giovani",
+          "url": "/articoli-frontaliere/fondo-13esima-avs-giovani/",
+          "excerpt": "Presentato in Ticino un Fondo: chi potrà e vorrà rinunciare alla 13esima AVS sosterrà progetti dedicati alle nuove generazioni a favore della collettività.",
+          "date": "2026-10-04T01:05:00.388Z"
+        },
+        {
+          "title": "Tredicesima AVS, nasce il fondo patto generazionale",
+          "url": "/articoli-frontaliere/fondo-avs-solidarieta-giovani/",
+          "excerpt": "In Ticino oltre 86mila beneficiari riceveranno più di 140 milioni di franchi: una parte della tredicesima AVS potrà sostenere progetti per i giovani.",
+          "date": "2026-10-02T04:18:56.269Z"
+        },
+        {
+          "title": "Rimborso imposta LPP bloccato per i frontalieri",
+          "url": "/articoli-frontaliere/rimborso-imposta-lpp-2024/",
+          "excerpt": "Dal 2024 il Canton Ticino non rimborsa più l'imposta alla fonte del 7% sul capitale LPP, costringendo i frontalieri a pagare anche l'imposta sostitutiva italiana del 5%.",
+          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "links": [
@@ -164,7 +194,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "TI",
@@ -270,10 +300,21 @@
       ],
       "curatedArticles": [
         {
+          "title": "LPP capital: Ticino denies withholding tax refund",
+          "url": "/en/ticino-articles/lpp-capital-withholding-tax-refund/",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "Second Pillar and Cross-Border Workers: Reimbursements Suspended in Ticino",
           "url": "/en/cross-border-articles/ticino-lpp-refund-2024/",
           "excerpt": "Starting in 2024, the Canton of Ticino will no longer refund withholding tax on LPP assets for cross-border workers residing in Italy. Here’s what’s changing.",
           "date": "2026-10-02T06:18:48.609Z"
+        },
+        {
+          "title": "Totalisation of AVS and INPS contributions for Ticino border crossers",
+          "url": "/en/cross-border-articles/totalization-contributions-avs-inps-frontaliers-ticino/",
+          "excerpt": "The aggregation of AVS and INPS contributions for Ticino border workers is a complex process that requires the submission of an application to the competent offices",
+          "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Increase in AVS pension recipients in Ticino: +40,400 in 2025",
@@ -282,10 +323,28 @@
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
-          "title": "Totalisation of AVS and INPS contributions for Ticino border crossers",
-          "url": "/en/cross-border-articles/totalization-contributions-avs-inps-frontaliers-ticino/",
-          "excerpt": "The aggregation of AVS and INPS contributions for Ticino border workers is a complex process that requires the submission of an application to the competent offices",
-          "date": "2026-08-12T02:47:34.595Z"
+          "title": "A solidarity 13th AVS payment for young people from Ticino",
+          "url": "/en/cross-border-articles/generational-pact-avs-ticino/",
+          "excerpt": "The Fondo Patto Generazionale invites AVS beneficiaries to donate part or all of their thirteenth payment to support young people from Ticino aged between 0 and 30.",
+          "date": "2026-10-04T00:02:46.900Z"
+        },
+        {
+          "title": "AVS Fund in Ticino: the 13th payment for young people",
+          "url": "/en/cross-border-articles/ticino-avs-13th-fund/",
+          "excerpt": "A Fund was presented in Ticino: those who will be able and willing to waive the 13th AVS payment will support projects dedicated to the younger generations for the benefit of the community.",
+          "date": "2026-10-04T01:05:00.388Z"
+        },
+        {
+          "title": "13th AVS payment, generational pact fund created",
+          "url": "/en/cross-border-articles/avs-generational-solidarity-fund/",
+          "excerpt": "In Ticino, more than 86 thousand beneficiaries will receive more than 140 million francs: part of the thirteenth AHV will be able to support projects for young people.",
+          "date": "2026-10-02T04:18:56.269Z"
+        },
+        {
+          "title": "LPP tax refund blocked for border workers",
+          "url": "/en/cross-border-articles/lpp-tax-refund-2024/",
+          "excerpt": "From 2024, the Canton of Ticino no longer reimburses the 7% tax at source on LPP capital, forcing border workers to also pay the 5% Italian substitute tax.",
+          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "links": [
@@ -306,7 +365,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "TI",
@@ -412,10 +471,21 @@
       ],
       "curatedArticles": [
         {
+          "title": "BVG-Kapital: Tessin verweigert Rückerstattung der Quellensteuer",
+          "url": "/de/tessin-artikel/lpp-kapital-quellensteuer-rueckerstattung/",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "Zweite Säule und Grenzgänger: Keine Rückerstattungen mehr im Tessin",
           "url": "/de/grenzgaenger-artikel/tessin-lpp-erstattung-2024/",
           "excerpt": "Ab 2024 erstattet der Kanton Tessin die Quellensteuer auf BVG-Kapital für in Italien wohnhafte Grenzgänger nicht mehr. Hier erfahren Sie, was sich ändert.",
           "date": "2026-10-02T06:18:48.609Z"
+        },
+        {
+          "title": "AHV- und NISF-Beiträge für Tessiner Grenzgänger summieren",
+          "url": "/de/grenzgaenger-artikel/totalisierung-beitrage-avs-inps-frontaliers-tessin/",
+          "excerpt": "Die Zusammenrechnung der AHV- und INPS-Beiträge für Tessiner Grenzgänger ist ein komplexer Prozess, der die Einreichung eines Gesuchs bei den zuständigen Stellen erfordert",
+          "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Steigerung der AVS-Rentenempfänger im Tessin: +40.400 im Jahr 2025",
@@ -424,10 +494,28 @@
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
-          "title": "AHV- und NISF-Beiträge für Tessiner Grenzgänger summieren",
-          "url": "/de/grenzgaenger-artikel/totalisierung-beitrage-avs-inps-frontaliers-tessin/",
-          "excerpt": "Die Zusammenrechnung der AHV- und INPS-Beiträge für Tessiner Grenzgänger ist ein komplexer Prozess, der die Einreichung eines Gesuchs bei den zuständigen Stellen erfordert",
-          "date": "2026-08-12T02:47:34.595Z"
+          "title": "Eine solidarische 13. AHV-Rente für junge Menschen im Tessin",
+          "url": "/de/grenzgaenger-artikel/generationenpakt-ahv-tessin/",
+          "excerpt": "Der Fondo Patto Generazionale lädt AHV-Beziehende dazu ein, einen Teil oder die gesamte 13. AHV-Rente zu spenden, um junge Menschen im Tessin im Alter von 0 bis 30 Jahren zu unterstützen.",
+          "date": "2026-10-04T00:02:46.900Z"
+        },
+        {
+          "title": "AHV-Fonds im Tessin: 13. für Jugendliche",
+          "url": "/de/grenzgaenger-artikel/tessin-avs-dreizehnte-fonds/",
+          "excerpt": "Im Tessin wird ein Fonds präsentiert: Wer auf die 13. AHV verzichten kann und will, unterstützt Projekte für die neue Generation zugunsten der Allgemeinheit.",
+          "date": "2026-10-04T01:05:00.388Z"
+        },
+        {
+          "title": "Dreizehnte AHV, der Generationenpakt-Fonds wird geboren",
+          "url": "/de/grenzgaenger-artikel/avs-generationenfonds-jugendliche/",
+          "excerpt": "Im Tessin werden über 86.000 Begünstigte mehr als 140 Millionen Franken erhalten: Ein Teil der dreizehnten AHV-Rente könnte zur Unterstützung von Jugendprojekten eingesetzt werden.",
+          "date": "2026-10-02T04:18:56.269Z"
+        },
+        {
+          "title": "BVG-Steuerrückerstattung für Grenzgänger gesperrt",
+          "url": "/de/grenzgaenger-artikel/lpp-steuererstattung-2024/",
+          "excerpt": "Seit 2024 erstattet der Kanton Tessin die Quellensteuer von 7% auf das BVG-Kapital nicht mehr UND zwingt die Grenzgänger, auch die italienische Ersatzsteuer von 5% zu zahlen.",
+          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "links": [
@@ -448,7 +536,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -554,10 +642,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Capital LPP : le Tessin refuse le remboursement de l'impôt à la source",
+          "url": "/fr/articles-tessin/capital-lpp-remboursement-impot-source/",
+          "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source",
+          "date": "2026-10-08T12:15:50.666Z"
+        },
+        {
           "title": "Deuxième pilier et frontaliers : fin des remboursements au Tessin",
           "url": "/fr/articles-frontalier/tessin-remboursement-lpp-2024/",
           "excerpt": "À partir de 2024, le canton du Tessin ne remboursera plus l'impôt à la source sur le capital LPP aux frontaliers résidant en Italie. Voici ce qui change.",
           "date": "2026-10-02T06:18:48.609Z"
+        },
+        {
+          "title": "Totalisation des cotisations AVS et INPS pour les frontaliers tessinois",
+          "url": "/fr/articles-frontalier/totalisation-contributions-avs-inps-frontaliers-tessin/",
+          "excerpt": "La totalisation des cotisations AVS et INPS pour les frontaliers tessinois est un processus complexe qui nécessite le dépôt d'une demande auprès des bureaux compétents",
+          "date": "2026-08-12T02:47:34.595Z"
         },
         {
           "title": "Augmentation des bénéficiaires de rentes AVS au Tessin: +40.400 en 2025",
@@ -566,10 +666,28 @@
           "date": "2026-05-27T02:33:06.970Z"
         },
         {
-          "title": "Totalisation des cotisations AVS et INPS pour les frontaliers tessinois",
-          "url": "/fr/articles-frontalier/totalisation-contributions-avs-inps-frontaliers-tessin/",
-          "excerpt": "La totalisation des cotisations AVS et INPS pour les frontaliers tessinois est un processus complexe qui nécessite le dépôt d'une demande auprès des bureaux compétents",
-          "date": "2026-08-12T02:47:34.595Z"
+          "title": "Un 13e AVS solidaire pour les jeunes Tessinois",
+          "url": "/fr/articles-frontalier/pacte-generation-avs-tessin/",
+          "excerpt": "Fondo Patto Generazionale invite les bénéficiaires de l'AVS à donner une partie ou la totalité de la treizième mensualité afin de soutenir les jeunes tessinois âgés de 0 à 30 ans.",
+          "date": "2026-10-04T00:02:46.900Z"
+        },
+        {
+          "title": "Fonds AVS au Tessin : la 13e pour les jeunes",
+          "url": "/fr/articles-frontalier/fonds-avs-13e-tessin/",
+          "excerpt": "Au Tessin, un Fonds a été présenté : toute personne qui pourra et voudra renoncer à la 13e AVS soutiendra des projets dédiés aux nouvelles générations en faveur de la collectivité.",
+          "date": "2026-10-04T01:05:00.388Z"
+        },
+        {
+          "title": "Le treizième AHV, le fonds de pacte générationnel, est né",
+          "url": "/fr/articles-frontalier/fonds-avs-solidarite-jeunes/",
+          "excerpt": "Au Tessin, plus de 86 000 bénéficiaires recevront plus de 140 millions de francs : une partie de la treizième AVS pourra soutenir des projets pour les jeunes.",
+          "date": "2026-10-02T04:18:56.269Z"
+        },
+        {
+          "title": "Remboursement de la taxe LPP bloquée pour les frontaliers",
+          "url": "/fr/articles-frontalier/remboursement-taxe-lpp-2024/",
+          "excerpt": "Depuis 2024, le canton du Tessin ne rembourse plus l'impôt à la source de 7 % sur le capital LPP, obligeant les frontaliers à payer également l'impôt de remplacement italien de 5 %.",
+          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "links": [
@@ -590,7 +708,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

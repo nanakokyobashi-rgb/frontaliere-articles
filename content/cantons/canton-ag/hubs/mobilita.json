@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "742d8a932fc134ef2866029d8a12147291a389ba13131dc971a80b5be750410b",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "74db5486219fc0b0a98e959925f49d22f74b9ece5d29b6d5a044722f1d3a30d0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -195,7 +195,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Hochrheinbahn chiusa: Basilea-Rheinfelden dal 10 ottobre",
+          "url": "/articoli-argovia/chiusura-hochrheinbahn-2026/",
+          "excerpt": "Dal 10 ottobre 2026 la Hochrheinbahn chiude tra Basilea e Rheinfelden: lavori, ritardi e bus sostitutivi modificano gli spostamenti dei pendolari.",
+          "date": "2026-10-08T14:00:19.714Z"
+        },
+        {
+          "title": "Obermumpf: lavori sulla K491 fino all'autunno 2027",
+          "url": "/articoli-argovia/obermumpf-strada-sanificazione-2024/",
+          "excerpt": "Lunedì 12 ottobre partono i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova passerella sul Fischingerbach, fino all'autunno 2027.",
+          "date": "2026-10-09T06:35:59.639Z"
+        }
+      ],
       "links": [
         {
           "label": "Attese ai valichi verso Germania",
@@ -226,7 +239,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "AG",
@@ -399,7 +412,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Hochrheinbahn closed: Basel-Rheinfelden from October 10",
+          "url": "/en/aargau-articles/hochrheinbahn-basel-rheinfelden-closure-2026/",
+          "excerpt": "From October 10, 2026, the Hochrheinbahn will be closed between Basel and Rheinfelden: construction work, delays and replacement buses will affect commuters’ journeys.",
+          "date": "2026-10-08T14:00:19.714Z"
+        },
+        {
+          "title": "Obermumpf: construction work on the K491 until autumn 2027",
+          "url": "/en/aargau-articles/obermumpf-construction-work-on-the-k491-until-autumn-2027/",
+          "excerpt": "Monday, October 12, rehabilitation works begin on Hauptstrasse K491 in Obermumpf: 1.250 metres of road, accessible bus stops with 22 cm curbs and a new footbridge over the Fischingerbach, through autumn 2027.",
+          "date": "2026-10-09T06:35:59.639Z"
+        }
+      ],
       "links": [
         {
           "label": "Border waits towards Germany",
@@ -430,7 +456,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "AG",
@@ -603,7 +629,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Hochrheinbahn gesperrt: Basel-Rheinfelden ab 10. Oktober",
+          "url": "/de/aargau-artikel/hochrheinbahn-streckensperrung-2026/",
+          "excerpt": "Ab dem 10. Oktober 2026 wird die Hochrheinbahn zwischen Basel und Rheinfelden gesperrt: Bauarbeiten, Verspätungen und Ersatzbusse verändern die Wege der Pendler.",
+          "date": "2026-10-08T14:00:19.714Z"
+        },
+        {
+          "title": "Obermumpf: Bauarbeiten an der K491 bis Herbst 2027",
+          "url": "/de/aargau-artikel/obermumpf-bauarbeiten-an-der-k491-bis-herbst-2027/",
+          "excerpt": "Am Montag, 12.",
+          "date": "2026-10-09T06:35:59.639Z"
+        }
+      ],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Deutschland",
@@ -634,7 +673,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "AG",
@@ -807,7 +846,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Hochrheinbahn fermée : Bâle-Rheinfelden à partir du 10 octobre",
+          "url": "/fr/articles-argovie/fermeture-hochrheinbahn-bale-rheinfelden-2026/",
+          "excerpt": "À partir du 10 octobre 2026, la Hochrheinbahn sera fermée entre Bâle et Rheinfelden : les travaux, les retards et les bus de remplacement modifieront les déplacements des navetteurs.",
+          "date": "2026-10-08T14:00:19.714Z"
+        },
+        {
+          "title": "Obermumpf : travaux sur la K491 jusqu'à l'automne 2027",
+          "url": "/fr/articles-argovie/obermumpf-travaux-sur-la-k491-jusqu-a-l-automne-2027/",
+          "excerpt": "Lundi 12 octobre débutent les travaux d'assainissement de la Hauptstrasse K491 à Obermumpf : 1.250 mètres de route, arrêts de bus accessibles avec des bordures de 22 cm et nouvelle passerelle sur le Fischingerbach…",
+          "date": "2026-10-09T06:35:59.639Z"
+        }
+      ],
       "links": [
         {
           "label": "Attente aux frontières vers Allemagne",
@@ -838,7 +890,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

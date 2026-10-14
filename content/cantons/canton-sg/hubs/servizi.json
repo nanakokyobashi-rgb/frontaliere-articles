@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "1f5be34188a337d3b9c5c488d2b8204a7bcb7a8d4deae369fd37018a505cfe19",
+  "updatedAt": "2026-10-14T08:24:32.182Z",
+  "contentHash": "5c755b4ce4966c55e1fdb10f2d3581bb874345133467a8e252aee144269c7769",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -152,10 +152,28 @@
           "date": "2026-09-03T23:47:01.349Z"
         },
         {
+          "title": "Permesso L San Gallo: validità e proroga",
+          "url": "/articoli-svizzera/permesso-l-san-gallo-proroga/",
+          "excerpt": "Permesso L di breve durata fino a 1 anno, procedure di rinnovo, vincoli al datore di lavoro, trasformazione in permesso B. Guida pratica.",
+          "date": "2026-09-04T02:14:48.927Z"
+        },
+        {
+          "title": "Permesso domicilio C San Gallo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-san-gallo-residenza-lunga/",
+          "excerpt": "Guida completa al permesso C nel cantone di San Gallo: 10 anni residenza (5 per UE/AELS), criteri integrazione, lingua, procedura domanda e rinnovo.",
+          "date": "2026-08-27T05:45:51.936Z"
+        },
+        {
           "title": "Costi asili nido e custodia nel Canton San Gallo",
           "url": "/articoli-svizzera/costi-nidi-servizi-infanzia-canton-sg/",
           "excerpt": "Guida alle rette per nidi, famiglie diurne e doposcuola nel Cantone di San Gallo: tariffe su reddito, sussidi comunali e sgravi fiscali.",
           "date": "2026-09-12T02:05:29.896Z"
+        },
+        {
+          "title": "Patente estera a San Gallo: conversione ed esami",
+          "url": "/articoli-svizzera/patente-guida-san-gallo-conversione/",
+          "excerpt": "Come convertire la patente straniera nel canton San Gallo: iter differenziato per paese UE/AELS e paesi terzi, documenti e ufficio competente.",
+          "date": "2026-08-30T14:01:40.347Z"
         },
         {
           "title": "Premi cassa malati San Gallo: riduzione e modelli",
@@ -164,16 +182,10 @@
           "date": "2026-09-09T22:37:47.464Z"
         },
         {
-          "title": "Asilo nido a San Gallo: tariffe, sussidi e procedura",
-          "url": "/articoli-svizzera/asilo-nido-custodia-san-gallo-tariffe/",
-          "excerpt": "Custodia dei bambini nel Cantone di San Gallo: asili nido, famiglie diurne e doposcuola, tariffe legate al reddito e sussidi cantonali.",
-          "date": "2026-08-30T05:20:41.202Z"
-        },
-        {
-          "title": "Asilo nido nel Canton San Gallo: costi e sussidi",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-san-gallo/",
-          "excerpt": "Tariffe decise dai Comuni, sussidi cantonali, famiglie diurne e doposcuola: guida pratica alla custodia extrafamiliare nel Canton San Gallo.",
-          "date": "2026-08-30T04:49:56.308Z"
+          "title": "Permesso L nel Canton San Gallo: validità 12 mesi e regole di proroga",
+          "url": "/articoli-svizzera/permesso-l-canton-san-gallo-validita-proroga/",
+          "excerpt": "Il permesso L di breve durata nel Canton San Gallo ha durata massima di 12 mesi, è legato al datore di lavoro e prevede la proroga solo in casi eccezionali. Ecco come funziona.",
+          "date": "2026-08-30T01:38:51.813Z"
         }
       ],
       "links": [
@@ -202,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "en": {
       "canton": "SG",
@@ -332,10 +344,28 @@
           "date": "2026-09-03T23:47:01.349Z"
         },
         {
+          "title": "St. Gallen permit: validity and extension",
+          "url": "/en/swiss-articles/permit-l-st-gallen-validity-renewal/",
+          "excerpt": "Short-term permit L up to 1 year, renewal procedures, constraints on the employer, transformation into permit B. Practical guide.",
+          "date": "2026-09-04T02:14:48.927Z"
+        },
+        {
+          "title": "Residence permit C St. Gallen: requirements and application",
+          "url": "/en/swiss-articles/residence-permit-c-canton-st-gallen-requirements/",
+          "excerpt": "Complete Guide to the C permit in the canton of St. Gallen: 10 years residence (5 for EU/EFTA), integration criteria, language, application and renewal procedure.",
+          "date": "2026-08-27T05:45:51.936Z"
+        },
+        {
           "title": "Childcare and custody costs in the Canton of St. Gallen",
           "url": "/en/swiss-articles/childcare-costs-daycare-canton-st-gallen/",
           "excerpt": "Guide to fees for nurseries, day families and after-school in the Canton of St. Gallen: rates on income, municipal subsidies and tax reductions.",
           "date": "2026-09-12T02:05:29.896Z"
+        },
+        {
+          "title": "Foreign license in St. Gallen: conversion and examinations",
+          "url": "/en/swiss-articles/driving-license-st-gallen-conversion/",
+          "excerpt": "How to convert the foreign driver's license in the canton of St. Gallen: differentiated procedure by EU/EFTA country and third countries, documents and competent office.",
+          "date": "2026-08-30T14:01:40.347Z"
         },
         {
           "title": "St Gallen sick pay premiums: reduction and models",
@@ -344,16 +374,10 @@
           "date": "2026-09-09T22:37:47.464Z"
         },
         {
-          "title": "Nursery in St. Gallen: fees, subsidies and procedure",
-          "url": "/en/swiss-articles/childcare-st-gallen-daycare-costs/",
-          "excerpt": "Childcare in the Canton of St. Gallen: nurseries, day and after-school families, income-related fees and cantonal subsidies.",
-          "date": "2026-08-30T05:20:41.202Z"
-        },
-        {
-          "title": "Nursery in the Canton of St. Gallen: costs and subsidies",
-          "url": "/en/swiss-articles/childcare-daycare-st-gallen-costs/",
-          "excerpt": "Rates decided by the Municipalities, cantonal subsidies, day families and after-school: practical guide to extra-family custody in the Canton of St. Gallen.",
-          "date": "2026-08-30T04:49:56.308Z"
+          "title": "Permit L in the Canton of St. Gallen: validity 12 months and extension rules",
+          "url": "/en/swiss-articles/l-permit-canton-st-gallen-validity-renewal/",
+          "excerpt": "The short-term L permit in the Canton of St. Gallen has a maximum duration of 12 months, is linked to the employer and provides for extension only in exceptional cases. Here's how it works.",
+          "date": "2026-08-30T01:38:51.813Z"
         }
       ],
       "links": [
@@ -378,7 +402,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "de": {
       "canton": "SG",
@@ -508,10 +532,28 @@
           "date": "2026-09-03T23:47:01.349Z"
         },
         {
+          "title": "Ausweis L St. Gallen: Gültigkeit und Verlängerung",
+          "url": "/de/schweiz-artikel/permit-l-sanktgallen-gultigkeit-erneuerung/",
+          "excerpt": "Kurzzeitbewilligung L bis zu 1 Jahr, Verlängerungsverfahren, Verpflichtungen gegenüber dem Arbeitgeber, Umwandlung in Bewilligung B. Praktischer Leitfaden.",
+          "date": "2026-09-04T02:14:48.927Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C St. Gallen: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-kanton-st-gallen-bedingungen/",
+          "excerpt": "Vollständiger Führerschein zur Bewilligung C im Kanton St. Gallen: 10 Jahre Wohnsitz (5 für EU/EFTA), Integrationskriterien, Sprache, Antragsverfahren und Erneuerung.",
+          "date": "2026-08-27T05:45:51.936Z"
+        },
+        {
           "title": "Kinderkrippen- und Betreuungskosten im Kanton St. Gallen",
           "url": "/de/schweiz-artikel/kita-kosten-kinderbetreuung-kanton-st-gallen/",
           "excerpt": "Leitfaden für Kindertages-, Tages- und Nachschulgebühren im Kanton St. Gallen: Einkommenstarife, Gemeindezuschüsse und Steuererleichterungen.",
           "date": "2026-09-12T02:05:29.896Z"
+        },
+        {
+          "title": "Ausländischer Führerschein in St. Gallen: Umschreibung und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-st-gallen-umschreibung/",
+          "excerpt": "So lassen Sie Ihren ausländischen Führerschein im Kanton St. Gallen umschreiben: Unterschiedliche Verfahren für EU-/EFTA-Länder und Drittstaaten, erforderliche Unterlagen und zuständige Behörde.",
+          "date": "2026-08-30T14:01:40.347Z"
         },
         {
           "title": "Krankenkassenprämien St. Gallen: Reduktion und Modelle",
@@ -520,16 +562,10 @@
           "date": "2026-09-09T22:37:47.464Z"
         },
         {
-          "title": "Kindertagesstätte St. Gallen: Tarife, Zuschüsse und Verfahren",
-          "url": "/de/schweiz-artikel/kinderbetreuung-st-gallen-kosten/",
-          "excerpt": "Kinderbetreuung im Kanton St. Gallen: Kindergärten, Tages- und Nachschulfamilien, einkommensabhängige Tarife und Kantonsbeiträge.",
-          "date": "2026-08-30T05:20:41.202Z"
-        },
-        {
-          "title": "Kindertagesstätte im Kanton St. Gallen: Kosten und Zuschüsse",
-          "url": "/de/schweiz-artikel/kita-kinderbetreuung-st-gallen-kosten/",
-          "excerpt": "Von den Gemeinden beschlossene Tarife, Kantonsbeiträge, Tages- und Nachschulfamilien: Praktischer Leitfaden zur ausserfamiliären Obhut im Kanton St. Gallen.",
-          "date": "2026-08-30T04:49:56.308Z"
+          "title": "Ausweis L im Kanton St. Gallen: Gültigkeit 12 Monate und Verlängerungsregeln",
+          "url": "/de/schweiz-artikel/l-bewilligung-kanton-st-gallen-gueltigkeit-verlaengerung/",
+          "excerpt": "Die Kurzzeitbewilligung L im Kanton St. Gallen hat eine Höchstdauer von 12 Monaten, ist an den Arbeitgeber gebunden und sieht eine Verlängerung nur in Ausnahmefällen vor. So funktioniert es.",
+          "date": "2026-08-30T01:38:51.813Z"
         }
       ],
       "links": [
@@ -554,7 +590,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "fr": {
       "canton": "SG",
@@ -684,10 +720,28 @@
           "date": "2026-09-03T23:47:01.349Z"
         },
         {
+          "title": "Permis L Saint-Gall : validité et prorogation",
+          "url": "/fr/articles-suisse/permis-l-saint-gall-validite-renouvellement/",
+          "excerpt": "Permis L de courte durée jusqu'à 1 an, procédures de renouvellement, contraintes à l'employeur, transformation en permis B. Guide pratique.",
+          "date": "2026-09-04T02:14:48.927Z"
+        },
+        {
+          "title": "Permis domicile C Saint-Gall : exigences et demande",
+          "url": "/fr/articles-suisse/permis-domicile-c-canton-saint-gall-exigences/",
+          "excerpt": "Guide complet du permis C dans le canton de Saint-Gall : 10 ans de résidence (5 ans pour l'UE/AELE), critères d'intégration, langue, procédure de demande et de renouvellement.",
+          "date": "2026-08-27T05:45:51.936Z"
+        },
+        {
           "title": "Frais de crèche et de garde dans le canton de Saint-Gall",
           "url": "/fr/articles-suisse/frais-garde-enfants-creche-canton-saint-gall/",
           "excerpt": "Guide des frais de scolarité pour les crèches, les familles de jour et après l'école dans le canton de Saint-Gall : tarifs sur les revenus, subventions municipales et allégements fiscaux.",
           "date": "2026-09-12T02:05:29.896Z"
+        },
+        {
+          "title": "Permis étranger à Saint-Gall : conversion et examens",
+          "url": "/fr/articles-suisse/permis-conduire-saint-gall-conversion/",
+          "excerpt": "Comment faire reconnaître son permis de conduire étranger dans le canton de Saint-Gall : procédure différente selon qu’il s’agit d’un pays de l’UE/AELE ou d’un pays tiers, documents requis et service compétent.",
+          "date": "2026-08-30T14:01:40.347Z"
         },
         {
           "title": "Primes caisse maladie Saint-Gall : réduction et modèles",
@@ -696,16 +750,10 @@
           "date": "2026-09-09T22:37:47.464Z"
         },
         {
-          "title": "Garderie à Saint-Gall : tarifs, subventions et procédure",
-          "url": "/fr/articles-suisse/garde-enfants-saint-gall-tarifs/",
-          "excerpt": "Garde d'enfants dans le canton de Saint-Gall : crèches, familles de jour et après l'école, tarifs liés au revenu et allocations cantonales.",
-          "date": "2026-08-30T05:20:41.202Z"
-        },
-        {
-          "title": "Garderie dans le canton de Saint-Gall : coûts et subventions",
-          "url": "/fr/articles-suisse/creche-garde-enfants-saint-gall-couts/",
-          "excerpt": "Tarifs décidés par les communes, allocations cantonales, familles de jour et après l'école : guide pratique de la garde extrafamiliale dans le canton de Saint-Gall.",
-          "date": "2026-08-30T04:49:56.308Z"
+          "title": "Permis L à Saint-Gall : validité et prolongation en 12 mois",
+          "url": "/fr/articles-suisse/permis-l-canton-saint-gall-validite-prorogation/",
+          "excerpt": "Le permis L de courte durée dans le canton de Saint-Gall a une durée maximale de 12 mois, est lié à l'employeur et ne peut être prolongé que dans des cas exceptionnels. Voici comment cela fonctionne.",
+          "date": "2026-08-30T01:38:51.813Z"
         }
       ],
       "links": [
@@ -726,7 +774,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "81bdd690ddec96676c72ad0be1f9f6c1e988058ba28da6038acbad97dc43b112",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "260926aa7dfcb561160916eb994a5bd0f869e8457a6ad0321892817f661b2625",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -100,6 +100,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Museo storico a Palazzo Civico: mozione interpartitica a Lugano",
+          "url": "/articoli-frontaliere/museo-storico-palazzo-civico-lugano/",
+          "excerpt": "Dieci consiglieri comunali chiedono di valutare un museo storico al secondo piano di Palazzo Civico, che si libererà nel 2028 col trasloco a Cornaredo.",
+          "date": "2026-10-03T17:47:01.448Z"
+        },
+        {
           "title": "Scacchi a Bissone: i vincitori del VI Festival",
           "url": "/articoli-frontaliere/bissone-torneo-scacchi/",
           "excerpt": "Domenica 11 ottobre si è svolta la sesta edizione Christian De Lucia ha vinto il Trofeo Borromini Under 16 Vladimir Paleologu ha conquistato il titolo Semilampo",
@@ -124,28 +130,22 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
+          "title": "Teatro di Locarno: chiesti più fondi agli enti pubblici",
+          "url": "/articoli-frontaliere/teatro-locarno-fondi-pubblici/",
+          "excerpt": "Oltre cento soci all’assemblea di giovedì sera Deficit di circa 55'000 franchi nella stagione 2025/26 Il disavanzo è stato coperto con il patrimonio sociale",
+          "date": "2026-10-09T23:43:17.647Z"
+        },
+        {
           "title": "Rientro al lavoro dopo la maternità: incontri a Mendrisio",
           "url": "/articoli-svizzera/rientro-maternita-filanda/",
           "excerpt": "Le Città di Chiasso e Mendrisio promuovono a LaFilanda un percorso gratuito con colloqui, incontri e babysitting per il rientro al lavoro dopo la maternità.",
           "date": "2026-10-02T07:54:35.169Z"
         },
         {
-          "title": "Pre-festival a Locarno: un evento tra luci e luci (troppe)",
-          "url": "/articoli-frontaliere/pre-festival-locarno-2024/",
-          "excerpt": "La 79ª edizione del Festival del Film di Locarno si apre con una proiezione di \"Chi ha incastrato Roger Rabbit?\" che suscita perplessità e discussioni.",
-          "date": "2026-08-05T02:14:46.445Z"
-        },
-        {
-          "title": "Massimo Balena: agricoltore ticinese nel calendario svizzero",
-          "url": "/articoli-svizzera/massimo-balena-calendario-agricoltori-ticino/",
-          "excerpt": "Il 29enne di Bellinzona racconta l'apprendistato in tedesco, la chiusura dell'azienda con 650 galline e il lavoro intensivo fino a 15 ore al giorno.",
-          "date": "2026-09-28T05:05:48.854Z"
-        },
-        {
-          "title": "Ticino Musica si fa in quattro (concerti)",
-          "url": "/articoli-frontaliere/tacito-musica-ticino-concerti/",
-          "excerpt": "Il Festival Ticino Musica prosegue con una giornata ricca di appuntamenti che accompagneranno il pubblico dal pomeriggio alla sera.",
-          "date": "2026-07-28T05:51:38.011Z"
+          "title": "Locarno Film Festival: la cultura come legame",
+          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
+          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "TI",
@@ -250,6 +250,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Historical Museum at Palazzo Civico: cross-party motion in Lugano",
+          "url": "/en/cross-border-articles/historical-museum-palazzo-civico-lugano/",
+          "excerpt": "Ten city councillors ask to evaluate a historical museum on the second floor of Palazzo Civico, which will be liberated in 2028 with the move to Cornaredo.",
+          "date": "2026-10-03T17:47:01.448Z"
+        },
+        {
           "title": "Chess in Bissone: the winners of the VI Festival",
           "url": "/en/cross-border-articles/bissone-chess-festival-winners/",
           "excerpt": "On Sunday, October 11, the sixth edition took place Christian De Lucia won the Borromini Under 16 Trophy Vladimir Paleologu won the Rapid title",
@@ -274,28 +280,22 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
+          "title": "Teatro di Locarno: more funding sought from public authorities",
+          "url": "/en/cross-border-articles/locarno-theatre-public-funding/",
+          "excerpt": "More than one hundred members at Thursday evening's assembly A deficit of approximately 55'000 francs in the 2025/26 season The shortfall was covered with the association's assets",
+          "date": "2026-10-09T23:43:17.647Z"
+        },
+        {
           "title": "Returning to Work After Maternity Leave: Events in Mendrisio",
           "url": "/en/swiss-articles/return-to-work-maternity-filanda/",
           "excerpt": "The cities of Chiasso and Mendrisio are offering a free program at LaFilanda that includes counseling sessions, meetings, and childcare services to help women return to work after maternity leave.",
           "date": "2026-10-02T07:54:35.169Z"
         },
         {
-          "title": "Pre-festival in Locarno: an event between lights and lights (too many)",
-          "url": "/en/cross-border-articles/pre-locarno-film-festival-2024/",
-          "excerpt": "The 79th edition of the Locarno Film Festival opens with a screening of \"Who Framed Roger Rabbit?\" that sparks perplexity and discussion.",
-          "date": "2026-08-05T02:14:46.445Z"
-        },
-        {
-          "title": "Massimo Balena: Ticino farmer in the Swiss calendar",
-          "url": "/en/swiss-articles/massimo-balena-swiss-farmer-calendar/",
-          "excerpt": "The 29-year-old from Bellinzona recounts the apprenticeship in German, the closure of the company with 650 hens, and the intensive work of up to 15 hours a day.",
-          "date": "2026-09-28T05:05:48.854Z"
-        },
-        {
-          "title": "Ticino Music is done in four (concerts)",
-          "url": "/en/cross-border-articles/tacito-musica-ticino-concerts/",
-          "excerpt": "The Ticino Music Festival continues with a day full of events that will accompany the public from afternoon to evening.",
-          "date": "2026-07-28T05:51:38.011Z"
+          "title": "Locarno Film Festival: culture as a link",
+          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
+          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -312,7 +312,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "TI",
@@ -400,6 +400,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Historisches Museum im Palazzo Civico: parteiübergreifender Antrag in Lugano",
+          "url": "/de/grenzgaenger-artikel/historisches-museum-palazzo-civico-lugano/",
+          "excerpt": "Zehn Gemeinderäte fordern die Bewertung eines historischen Museums im zweiten Stock des Palazzo Civico, das 2028 mit dem Umzug nach Cornaredo freigegeben wird.",
+          "date": "2026-10-03T17:47:01.448Z"
+        },
+        {
           "title": "Schach in Bissone: die Gewinner des VI Festivals",
           "url": "/de/grenzgaenger-artikel/schachfestival-bissone-sieger/",
           "excerpt": "Am Sonntag, dem 11.",
@@ -424,28 +430,22 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
+          "title": "Teatro di Locarno: Mehr Mittel von den öffentlichen Stellen gefordert",
+          "url": "/de/grenzgaenger-artikel/theater-locarno-oeffentliche-gelder/",
+          "excerpt": "Über hundert Mitglieder an der Versammlung am Donnerstagabend Defizit von rund 55'000 Franken in der Saison 2025/26 Das Defizit wurde mit dem Vereinsvermögen gedeckt",
+          "date": "2026-10-09T23:43:17.647Z"
+        },
+        {
           "title": "Rückkehr in den Beruf nach dem Mutterschaftsurlaub: Veranstaltungen in Mendrisio",
           "url": "/de/schweiz-artikel/wiedereinstieg-mutterschaft-filanda/",
           "excerpt": "Die Städte Chiasso und Mendrisio bieten bei LaFilanda ein kostenloses Programm mit Beratungsgesprächen, Treffen und Kinderbetreuung an, um Frauen den Wiedereinstieg in den Beruf nach der Mutterschaft zu erleichtern.",
           "date": "2026-10-02T07:54:35.169Z"
         },
         {
-          "title": "Pre-Festival in Locarno: ein Ereignis zwischen Licht und Licht (zu viele)",
-          "url": "/de/grenzgaenger-artikel/vor-locarno-filmfestival-2024/",
-          "excerpt": "Die 79. Ausgabe des Filmfestivals von Locarno beginnt mit einer Vorführung von „Wer hat Roger Rabbit reingelegt?“, die Verwirrung und Diskussionen hervorruft.",
-          "date": "2026-08-05T02:14:46.445Z"
-        },
-        {
-          "title": "Massimo Balena: Tessiner Landwirt im Schweizer Kalender",
-          "url": "/de/schweiz-artikel/massimo-balena-schweizer-landbaukalender/",
-          "excerpt": "Der 29-Jährige aus Bellinzona erzählt von seiner Lehre auf Deutsch, der Schließung des Betriebs mit 650 Hühnern und der intensiven Arbeit von bis zu 15 Stunden pro Tag.",
-          "date": "2026-09-28T05:05:48.854Z"
-        },
-        {
-          "title": "Tessin-Musik macht man zu viert (Konzerte)",
-          "url": "/de/grenzgaenger-artikel/tacito-musica-tessin-konzerte/",
-          "excerpt": "Das Tessiner Musikfestival wird mit einem Tag voller Veranstaltungen fortgesetzt, die das Publikum von Nachmittag bis Abend begleiten werden.",
-          "date": "2026-07-28T05:51:38.011Z"
+          "title": "Locarno Film Festival: Kultur als Verbindung",
+          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
+          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -462,7 +462,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -550,6 +550,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Musée historique au Palazzo Civico : motion interpartisane à Lugano",
+          "url": "/fr/articles-frontalier/musee-historique-palazzo-civico-lugano/",
+          "excerpt": "Dix conseillers municipaux demandent d’envisager un musée historique au deuxième étage du Palazzo Civico, qui sera libéré en 2028 avec le déménagement à Cornaredo.",
+          "date": "2026-10-03T17:47:01.448Z"
+        },
+        {
           "title": "Échecs à Bissone : les vainqueurs du VI Festival",
           "url": "/fr/articles-frontalier/festival-echecs-bissone-gagnants/",
           "excerpt": "Dimanche 11 octobre s’est déroulée la sixième édition Christian De Lucia a remporté le Trophée Borromini Under 16 Vladimir Paleologu a conquis le titre Semilampo",
@@ -574,28 +580,22 @@
           "date": "2026-10-06T11:41:53.257Z"
         },
         {
+          "title": "Théâtre de Locarno : vous avez demandé plus de fonds aux organismes publics",
+          "url": "/fr/articles-frontalier/theatre-locarno-fonds-publics/",
+          "excerpt": "Plus de cent associés à l'assemblée du jeudi soir Déficit d'environ 55'000 francs pour la saison 2025/26 Le déficit a été couvert par le patrimoine social",
+          "date": "2026-10-09T23:43:17.647Z"
+        },
+        {
           "title": "Retour au travail après un congé maternité : rencontres à Mendrisio",
           "url": "/fr/articles-suisse/retour-travail-maternite-filanda/",
           "excerpt": "Les villes de Chiasso et de Mendrisio proposent à LaFilanda un parcours gratuit comprenant des entretiens, des rencontres et un service de garde d'enfants pour faciliter le retour au travail après un congé maternité.",
           "date": "2026-10-02T07:54:35.169Z"
         },
         {
-          "title": "Pré-festival à Locarno : un événement entre lumières et lumières (trop)",
-          "url": "/fr/articles-frontalier/avant-le-festival-du-film-de-locarno-2024/",
-          "excerpt": "La 79ème édition du Festival du Film de Locarno s'ouvre par une projection de « Qui a piégé Roger Rabbit ? » qui suscite perplexité et discussions.",
-          "date": "2026-08-05T02:14:46.445Z"
-        },
-        {
-          "title": "Massimo Balena : agriculteur tessinois dans le calendrier suisse",
-          "url": "/fr/articles-suisse/massimo-balena-calendrier-agriculteurs/",
-          "excerpt": "Le jeune homme de 29 ans de Bellinzone raconte son apprentissage en allemand, la fermeture de l’entreprise comptant 650 poules et le travail intensif jusqu’à 15 heures par jour.",
-          "date": "2026-09-28T05:05:48.854Z"
-        },
-        {
-          "title": "Tessin Musique se fait en quatre (concerts)",
-          "url": "/fr/articles-frontalier/tacito-musica-tessin-concerts/",
-          "excerpt": "Le Festival Tessin Musica se poursuit avec une journée riche en événements qui accompagneront le public de l'après-midi au soir.",
-          "date": "2026-07-28T05:51:38.011Z"
+          "title": "Festival du film de Locarno : la culture comme lien",
+          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
+          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -612,7 +612,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

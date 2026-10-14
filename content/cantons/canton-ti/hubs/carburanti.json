@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "carburanti",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "e6d403b68239dd667b364e016571f5010407eb54fb0109f5aa46b9189a003b1e",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "72fdbec0fe4f811b1e68e4f68d38d9e412cf55a7a1e1b31c21099dd646be2f43",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -83,40 +83,40 @@
           "date": "2026-08-26T07:06:02.859Z"
         },
         {
-          "title": "Nuove accise sui carburanti: come cambiano i prezzi in Ticino",
-          "url": "/articoli-frontaliere/nuove-accise-carburanti-2026/",
-          "excerpt": "Dai 2 maggio 2026 le accise sulla benzina e sul GPL sono aumentate, mentre il diesel è in lieve calo. Ecco come cambia il costo del carburante per i frontalieri",
-          "date": "2026-05-04T09:11:32.268Z"
-        },
-        {
-          "title": "Caro-carburanti: dove fare il pieno in Ticino",
-          "url": "/articoli-frontaliere/carburanti-ticino-confronto-2024/",
-          "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici",
-          "date": "2026-04-27T09:12:47.619Z"
-        },
-        {
-          "title": "Prezzi Carburanti Ticino 2026 — Benzina e Diesel Aggiornati | Frontaliere Ticino",
-          "url": "/articoli-frontaliere/carburanti-ticino-aumento-prezzi/",
-          "excerpt": "Prezzi carburante in Ticino aggiornati 2026: rincari di +19 millesimi benzina e +46 millesimi diesel. Classifica distributori più convenienti e confronto con l'Italia per i frontalieri.",
-          "date": "2026-04-07T09:55:25.056Z"
-        },
-        {
           "title": "Commissione della concorrenza indaga sul caro carburanti in Ticino",
           "url": "/articoli-frontaliere/caro-carburanti-svizzera-indagine-comco/",
           "excerpt": "Il consigliere Benoît Gaillard solleva il sospetto di intese sui prezzi della benzina dopo l’arrivo di Etzelpark a Bellinzona.",
           "date": "2026-07-29T23:23:39.353Z"
         },
         {
-          "title": "Carburanti in rialzo: prezzo diesel oltre 2 euro in Ticino",
-          "url": "/articoli-frontaliere/carburanti-prezzo-rialzo-ticino/",
-          "excerpt": "Il prezzo di benzina e diesel aumenta, con il gasolio che supera i 2 euro. Ecco cosa sapere.",
-          "date": "2026-03-25T10:07:18.643Z"
+          "title": "Prezzo diesel Agrola Bellinzona oggi: aggiornamento e dettagli",
+          "url": "/articoli-svizzera/prezzo-diesel-agrola-bellinzona-oggi/",
+          "excerpt": "Il prezzo attuale del diesel presso Agrola in via San Gottardo, Bellinzona: dati aggiornati e dettagli pratici per chi rifornisce in Svizzera.",
+          "date": "2026-06-25T22:48:18.705Z"
         },
         {
-          "title": "Prezzo Diesel Ticino 2026 — Confronto Distributori Oggi | Frontaliere Ticino",
-          "url": "/articoli-frontaliere/diesel-aumento-prezzi-svizzera-2026/",
-          "excerpt": "Prezzo diesel in Ticino e Svizzera aggiornato 2026: CHF 2,10/litro, confronto con l'Italia, classifica distributori più convenienti e consigli per i frontalieri.",
-          "date": "2026-03-21T10:03:22.205Z"
+          "title": "Nuove accise sui carburanti: come cambiano i prezzi in Ticino",
+          "url": "/articoli-frontaliere/nuove-accise-carburanti-2026/",
+          "excerpt": "Dai 2 maggio 2026 le accise sulla benzina e sul GPL sono aumentate, mentre il diesel è in lieve calo. Ecco come cambia il costo del carburante per i frontalieri",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Costo benzina in Ticino: perché i frontalieri pagano di più",
+          "url": "/articoli-frontaliere/costo-benzina-ticino-frontalieri-2026/",
+          "excerpt": "I prezzi della benzina in Ticino rimangono elevati, con differenze di oltre 20 centesimi al litro tra le diverse zone. Ecco cosa cambia per i frontalieri",
+          "date": "2026-05-16T02:47:05.638Z"
+        },
+        {
+          "title": "Caro carburanti, rischio stop trasporto pubblico in Ticino",
+          "url": "/articoli-frontaliere/carburanti-tpl-ticino-2026/",
+          "excerpt": "Il caro carburanti minaccia il trasporto pubblico locale, con costi aggiuntivi stimati in 0,54 milioni di euro al giorno per il diesel.",
+          "date": "2026-04-27T19:01:21.210Z"
+        },
+        {
+          "title": "Caro-carburanti: dove fare il pieno in Ticino",
+          "url": "/articoli-frontaliere/carburanti-ticino-confronto-2024/",
+          "excerpt": "Confronta i prezzi della benzina e del diesel in Ticino e risparmia con i nostri consigli pratici",
+          "date": "2026-04-27T09:12:47.619Z"
         }
       ],
       "links": [
@@ -145,7 +145,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "TI",
@@ -215,40 +215,40 @@
           "date": "2026-08-26T07:06:02.859Z"
         },
         {
-          "title": "New fuel excise duties: price changes in Ticino",
-          "url": "/en/cross-border-articles/new-fuel-taxes-2026/",
-          "excerpt": "As of May 2, 2026, excise duties on gasoline and LPG have increased, while diesel has slightly decreased. Here's how fuel costs change for cross-border workers",
-          "date": "2026-05-04T09:11:32.268Z"
-        },
-        {
-          "title": "Fuel price hike: where to fill up in Ticino",
-          "url": "/en/cross-border-articles/fuel-comparison-ticino-2024/",
-          "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips",
-          "date": "2026-04-27T09:12:47.619Z"
-        },
-        {
-          "title": "Ticino Fuel Prices 2026 — Petrol and Diesel Live Rates | Frontaliere Ticino",
-          "url": "/en/cross-border-articles/ticino-fuel-prices-2026/",
-          "excerpt": "Live 2026 fuel prices in Ticino: +19 millesimi petrol and +46 millesimi diesel. Ranking of cheapest fuel stations and cross-border comparison with Italy for commuters.",
-          "date": "2026-04-07T09:55:25.056Z"
-        },
-        {
           "title": "Competition Commission investigates expensive fuels in Ticino",
           "url": "/en/cross-border-articles/high-fuel-prices-switzerland-comco-investigation/",
           "excerpt": "Councillor Benoît Gaillard raises suspicion of understandings on gasoline prices after Etzelpark's arrival in Bellinzona.",
           "date": "2026-07-29T23:23:39.353Z"
         },
         {
-          "title": "Fuel Prices on the Rise: Diesel Exceeds 2 Euros in Ticino",
-          "url": "/en/cross-border-articles/fuel-price-increase-ticino/",
-          "excerpt": "The price of gasoline and diesel is increasing, with diesel surpassing 2 euros. Here’s what you need to know.",
-          "date": "2026-03-25T10:07:18.643Z"
+          "title": "Agrola Bellinzona diesel price today: update and details",
+          "url": "/en/swiss-articles/agrola-diesel-price-bellinzona-today/",
+          "excerpt": "The current price of diesel at Agrola in via San Gottardo, Bellinzona: up-to-date data and practical details for those supplying in Switzerland.",
+          "date": "2026-06-25T22:48:18.705Z"
         },
         {
-          "title": "Diesel Price Ticino 2026 — Compare Swiss Fuel Stations Today | Frontaliere Ticino",
-          "url": "/en/cross-border-articles/diesel-price-increase-switzerland-2026/",
-          "excerpt": "Diesel price in Ticino and Switzerland updated 2026: CHF 2.10/liter, comparison with Italy, ranking of cheapest fuel stations and tips for cross-border workers.",
-          "date": "2026-03-21T10:03:22.205Z"
+          "title": "New fuel excise duties: price changes in Ticino",
+          "url": "/en/cross-border-articles/new-fuel-taxes-2026/",
+          "excerpt": "As of May 2, 2026, excise duties on gasoline and LPG have increased, while diesel has slightly decreased. Here's how fuel costs change for cross-border workers",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Why cross-border workers pay more for fuel in Ticino",
+          "url": "/en/cross-border-articles/gas-price-ticino-cross-border-workers-2026/",
+          "excerpt": "Fuel prices in Ticino remain high, with differences of over 20 cents per litre between different areas. Here's what changes for cross-border workers",
+          "date": "2026-05-16T02:47:05.638Z"
+        },
+        {
+          "title": "Fuel prices threaten public transport in Ticino",
+          "url": "/en/cross-border-articles/fuel-prices-tpl-ticino-2026/",
+          "excerpt": "High fuel prices are threatening local public transport, with additional costs estimated at 0.54 million euros per day for diesel.",
+          "date": "2026-04-27T19:01:21.210Z"
+        },
+        {
+          "title": "Fuel price hike: where to fill up in Ticino",
+          "url": "/en/cross-border-articles/fuel-comparison-ticino-2024/",
+          "excerpt": "Compare gasoline and diesel prices in Ticino and save with our practical tips",
+          "date": "2026-04-27T09:12:47.619Z"
         }
       ],
       "links": [
@@ -277,7 +277,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "TI",
@@ -347,40 +347,40 @@
           "date": "2026-08-26T07:06:02.859Z"
         },
         {
-          "title": "Neue Kraftstoffsteuern: Preise im Tessin ändern sich",
-          "url": "/de/grenzgaenger-artikel/neue-kraftstoffsteuern-2026/",
-          "excerpt": "Ab dem 2. Mai 2026 steigen die Steuern auf Benzin und LPG, während Diesel leicht sinkt. So ändern sich die Kraftstoffkosten für Grenzgänger.",
-          "date": "2026-05-04T09:11:32.268Z"
-        },
-        {
-          "title": "Hohe Kraftstoffpreise: Wo tanken in der Schweiz?",
-          "url": "/de/grenzgaenger-artikel/kraftstoffvergleich-tessin-2024/",
-          "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps",
-          "date": "2026-04-27T09:12:47.619Z"
-        },
-        {
-          "title": "Kraftstoffpreise Tessin 2026 — Benzin und Diesel Live | Frontaliere Ticino",
-          "url": "/de/grenzgaenger-artikel/kraftstoffpreise-tessin-2026/",
-          "excerpt": "Aktuelle Kraftstoffpreise Tessin 2026: +19 Rappen Benzin und +46 Rappen Diesel. Ranking der günstigsten Tankstellen und Preisvergleich mit Italien für Grenzgänger.",
-          "date": "2026-04-07T09:55:25.056Z"
-        },
-        {
           "title": "Wettbewerbskommission untersucht teure Treibstoffe im Tessin",
           "url": "/de/grenzgaenger-artikel/hohe-kraftstoffpreise-schweiz-comco-untersuchung/",
           "excerpt": "Stadtrat Benoît Gaillard wirft nach der Ankunft des Etzelparks in Bellinzona den Verdacht auf eine Verständigung über die Benzinpreise auf.",
           "date": "2026-07-29T23:23:39.353Z"
         },
         {
-          "title": "Kraftstoffpreise steigen: Dieselpreis über 2 Euro im Tessin",
-          "url": "/de/grenzgaenger-artikel/kraftstoffpreisanstieg-tessin/",
-          "excerpt": "Die Preise für Benzin und Diesel steigen, wobei der Diesel die 2-Euro-Marke überschreitet. Hier ist, was Sie wissen müssen.",
-          "date": "2026-03-25T10:07:18.643Z"
+          "title": "Dieselpreis Agrola Bellinzona heute: Update und Details",
+          "url": "/de/schweiz-artikel/agrola-dieselpreis-bellinzona-heute/",
+          "excerpt": "Aktueller Dieselpreis bei Agrola in der Via San Gottardo, Bellinzona: Aktuelle Daten und praktische Details für Versorger in der Schweiz.",
+          "date": "2026-06-25T22:48:18.705Z"
         },
         {
-          "title": "Dieselpreis Schweiz 2026 — Aktuelle Preise Tessin (CHF 2,10/L) | Frontaliere Ticino",
-          "url": "/de/grenzgaenger-artikel/diesel-preiserhohung-schweiz-2026/",
-          "excerpt": "Aktueller Dieselpreis Schweiz 2026: CHF 2,10/Liter. Tankstellen-Vergleich Tessin, Ranking der günstigsten Tankstellen und Spartipps für Grenzgänger — März–April 2026.",
-          "date": "2026-03-21T10:03:22.205Z"
+          "title": "Neue Kraftstoffsteuern: Preise im Tessin ändern sich",
+          "url": "/de/grenzgaenger-artikel/neue-kraftstoffsteuern-2026/",
+          "excerpt": "Ab dem 2. Mai 2026 steigen die Steuern auf Benzin und LPG, während Diesel leicht sinkt. So ändern sich die Kraftstoffkosten für Grenzgänger.",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Benzinpreis im Tessin: Warum Grenzgänger mehr zahlen",
+          "url": "/de/grenzgaenger-artikel/benzinkosten-tessin-grenzgaenger-2026/",
+          "excerpt": "Die Benzinpreise im Tessin bleiben hoch, mit Unterschieden von über 20 Rappen pro Liter zwischen den verschiedenen Regionen. Hier erfahren Sie, was sich für Grenzgänger ändert.",
+          "date": "2026-05-16T02:47:05.638Z"
+        },
+        {
+          "title": "Hohe Kraftstoffkosten gefährden den öffentlichen Verkehr im",
+          "url": "/de/grenzgaenger-artikel/kraftstoffpreise-tpl-tessin-2026/",
+          "excerpt": "Die hohen Kraftstoffkosten bedrohen den öffentlichen Nahverkehr, mit zusätzlichen Kosten von geschätzten 0,54 Millionen Euro pro Tag für Diesel.",
+          "date": "2026-04-27T19:01:21.210Z"
+        },
+        {
+          "title": "Hohe Kraftstoffpreise: Wo tanken in der Schweiz?",
+          "url": "/de/grenzgaenger-artikel/kraftstoffvergleich-tessin-2024/",
+          "excerpt": "Vergleichen Sie die Preise für Benzin und Diesel in der Schweiz und sparen Sie mit unseren praktischen Tipps",
+          "date": "2026-04-27T09:12:47.619Z"
         }
       ],
       "links": [
@@ -405,7 +405,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,40 +475,40 @@
           "date": "2026-08-26T07:06:02.859Z"
         },
         {
-          "title": "Nouvelles taxes sur les carburants: les prix changent en Tessin",
-          "url": "/fr/articles-frontalier/nouvelles-taxes-sur-les-carburants-2026/",
-          "excerpt": "Depuis le 2 mai 2026, les taxes sur l'essence et le GPL ont augmenté, tandis que le diesel baisse légèrement. Voici comment change le coût du carburant pour les frontaliers.",
-          "date": "2026-05-04T09:11:32.268Z"
-        },
-        {
-          "title": "Coût des carburants : où faire le plein en Tessin",
-          "url": "/fr/articles-frontalier/comparaison-carburants-tessin-2024/",
-          "excerpt": "Comparez les prix de l'essence et du diesel en Tessin et économisez avec nos conseils pratiques",
-          "date": "2026-04-27T09:12:47.619Z"
-        },
-        {
-          "title": "Prix Carburants Tessin 2026 — Essence et Diesel en Direct | Frontaliere Ticino",
-          "url": "/fr/articles-frontalier/prix-carburants-tessin-2026/",
-          "excerpt": "Prix carburants Tessin 2026 : +19 millièmes essence et +46 millièmes diesel. Classement des stations-service les moins chères et comparatif avec l'Italie pour les frontaliers.",
-          "date": "2026-04-07T09:55:25.056Z"
-        },
-        {
           "title": "Commission de la concurrence enquête sur le cher carburant au Tessin",
           "url": "/fr/articles-frontalier/prix-eleves-carburants-suisse-enquete-comco/",
           "excerpt": "Le conseiller Benoît Gaillard soupçonne des ententes sur les prix de l'essence après l’arrivée d'Etzelpark à Bellinzone.",
           "date": "2026-07-29T23:23:39.353Z"
         },
         {
-          "title": "Carburants en hausse : le diesel dépasse 2 euros au Tessin",
-          "url": "/fr/articles-frontalier/augmentation-prix-carburant-tessin/",
-          "excerpt": "Les prix de l'essence et du diesel augmentent, le gazole franchissant les 2 euros. Voici ce qu'il faut savoir.",
-          "date": "2026-03-25T10:07:18.643Z"
+          "title": "Prix diesel Agrola Bellinzona aujourd'hui : mise à jour et détails",
+          "url": "/fr/articles-suisse/prix-diesel-agrola-bellinzone-aujourdhui/",
+          "excerpt": "Le prix actuel du diesel à Agrola via San Gottardo, Bellinzona : données actualisées et détails pratiques pour les fournisseurs en Suisse.",
+          "date": "2026-06-25T22:48:18.705Z"
         },
         {
-          "title": "Prix Diesel Tessin 2026 — Comparatif Stations-Service Aujourd'hui | Frontaliere Ticino",
-          "url": "/fr/articles-frontalier/augmentation-prix-diesel-suisse-2026/",
-          "excerpt": "Prix du diesel au Tessin et en Suisse 2026 : CHF 2,10/litre. Comparaison avec l'Italie, classement des stations les moins chères et astuces pour frontaliers.",
-          "date": "2026-03-21T10:03:22.205Z"
+          "title": "Nouvelles taxes sur les carburants: les prix changent en Tessin",
+          "url": "/fr/articles-frontalier/nouvelles-taxes-sur-les-carburants-2026/",
+          "excerpt": "Depuis le 2 mai 2026, les taxes sur l'essence et le GPL ont augmenté, tandis que le diesel baisse légèrement. Voici comment change le coût du carburant pour les frontaliers.",
+          "date": "2026-05-04T09:11:32.268Z"
+        },
+        {
+          "title": "Prix de l'essence au Tessin: pourquoi les frontaliers paient plus cher",
+          "url": "/fr/articles-frontalier/prix-essence-tessin-travailleurs-frontaliers-2026/",
+          "excerpt": "Les prix de l'essence au Tessin restent élevés, avec des différences de plus de 20 centimes par litre entre les différentes zones. Voici ce qui change pour les frontaliers",
+          "date": "2026-05-16T02:47:05.638Z"
+        },
+        {
+          "title": "Cherté des carburants, risque d'arrêt des transports publics",
+          "url": "/fr/articles-frontalier/prix-carburants-tpl-tessin-2026/",
+          "excerpt": "La cherté des carburants menace les transports publics locaux, avec des coûts supplémentaires estimés à 0,54 million d'euros par jour pour le diesel.",
+          "date": "2026-04-27T19:01:21.210Z"
+        },
+        {
+          "title": "Coût des carburants : où faire le plein en Tessin",
+          "url": "/fr/articles-frontalier/comparaison-carburants-tessin-2024/",
+          "excerpt": "Comparez les prix de l'essence et du diesel en Tessin et économisez avec nos conseils pratiques",
+          "date": "2026-04-27T09:12:47.619Z"
         }
       ],
       "links": [
@@ -537,7 +537,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

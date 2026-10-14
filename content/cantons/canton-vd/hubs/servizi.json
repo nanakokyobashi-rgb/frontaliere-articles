@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "0766e773e19d25b5d040b0245db4f0c0c780a67fcb5fde71102c087ac4d91cac",
+  "updatedAt": "2026-10-14T08:24:32.182Z",
+  "contentHash": "cc73e8e55fb5267e82f9a6244252a8cf61790a49a7a9489106c6e309b50447a6",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -141,10 +141,10 @@
           "date": "2026-10-02T02:25:28.395Z"
         },
         {
-          "title": "Sistema sanitario svizzero LAMal nel Canton Vaud",
-          "url": "/articoli-svizzera/sistema-sanitario-lamal-2026-vaud/",
-          "excerpt": "Guida completa al sistema sanitario svizzero nel Canton Vaud: obbligo LAMal, scelta della cassa malati, franchigie e sussidi cantonali.",
-          "date": "2026-08-20T02:15:48.837Z"
+          "title": "Permesso L in Vaud: validità 1 anno e rinnovo fino a 24 mesi",
+          "url": "/articoli-svizzera/permesso-l-vaud-validita-rinnovo/",
+          "excerpt": "Il permesso L dura max 1 anno, rinnovabile per un secondo anno. Dopo 24 mesi passa al permesso B. Guida completa per il Cantone di Vaud.",
+          "date": "2026-09-19T02:58:18.030Z"
         },
         {
           "title": "Permesso di dimora B canton Vaud: requisiti e rinnovo",
@@ -153,22 +153,34 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Asilo nido e custodia bambini nel Canton Vaud: costi e sussidi",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-vaud/",
-          "excerpt": "Come funziona la custodia nel Canton Vaud: asili nido, famiglie diurne, doposcuola con tariffe progressive sul reddito e sussidi cantonali disponibili.",
-          "date": "2026-09-04T22:15:17.620Z"
+          "title": "Permesso L breve durata Vaud: durata, proroga e diritti",
+          "url": "/articoli-svizzera/permesso-l-breve-durata-vaud-proroga/",
+          "excerpt": "Il permesso L consente di lavorare in Svizzera fino a 1 anno ed è rinnovabile. Scopri come richiedere la proroga, passare al permesso B e quali sono gli obblighi fiscali.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Premi cassa malati Vaud: come ottenere la riduzione",
-          "url": "/articoli-svizzera/premi-cassa-malati-vaud-riduzione/",
-          "excerpt": "Franchigie, modelli alternativi e requisiti per il sussidio cantonale: guida pratica ai premi LAMal nel Canton Vaud.",
-          "date": "2026-09-12T20:12:56.485Z"
+          "title": "Permesso L in Vaud: validità max 1 anno e proroga",
+          "url": "/articoli-svizzera/permesso-l-vaud-proroga/",
+          "excerpt": "Validità fino a 1 anno, vincolo al datore di lavoro e gestione SEM. Le regole per la proroga o il passaggio al permesso B.",
+          "date": "2026-09-18T04:49:19.725Z"
+        },
+        {
+          "title": "Sistema sanitario svizzero LAMal nel Canton Vaud",
+          "url": "/articoli-svizzera/sistema-sanitario-lamal-2026-vaud/",
+          "excerpt": "Guida completa al sistema sanitario svizzero nel Canton Vaud: obbligo LAMal, scelta della cassa malati, franchigie e sussidi cantonali.",
+          "date": "2026-08-20T02:15:48.837Z"
         },
         {
           "title": "Patente di guida nel Cantone di Vaud: conversione, esami e corsi obbligatori",
           "url": "/articoli-svizzera/patente-guida-canton-vaud-conversione-esami/",
           "excerpt": "Guida pratica alla conversione della patente di guida estera nel Cantone di Vaud, inclusi esami teorici e pratici, corsi obbligatori e ufficio della circolazione competente.",
           "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Sistema scolastico Canton Vaud: iscrizioni e cicli",
+          "url": "/articoli-svizzera/scuola-canton-vaud-iscrizioni-cicli/",
+          "excerpt": "Guida completa alla scuola dell'obbligo nel Canton Vaud: cicli di studio, età di iscrizione, lingue e passaggio alle medie superiori.",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -197,7 +209,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "en": {
       "canton": "VD",
@@ -316,10 +328,10 @@
           "date": "2026-10-02T02:25:28.395Z"
         },
         {
-          "title": "Swiss health system LAMal in the Canton of Vaud",
-          "url": "/en/swiss-articles/switzerland-healthcare-lamal-vaud/",
-          "excerpt": "Complete guide to the Swiss health system in the Canton of Vaud: LAMal obligation, choice of the sick fund, deductibles and cantonal subsidies.",
-          "date": "2026-08-20T02:15:48.837Z"
+          "title": "Permit L in Vaud: validity 1 year and renewal up to 24 months",
+          "url": "/en/swiss-articles/vaud-l-permit-validity-renewal/",
+          "excerpt": "The L permit lasts a maximum of 1 year, renewable for a second year. After 24 months it passes to permit B. Complete guide for the Canton of Vaud.",
+          "date": "2026-09-19T02:58:18.030Z"
         },
         {
           "title": "Residence permit B canton Vaud: requirements and renewal",
@@ -328,22 +340,34 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Nursery and childcare in the Canton of Vaud: costs and subsidies",
-          "url": "/en/swiss-articles/nursery-childcare-vaud-costs-subsidies/",
-          "excerpt": "How custody works in the Canton of Vaud: kindergartens, day families, after-school with progressive income rates and available cantonal subsidies.",
-          "date": "2026-09-04T22:15:17.620Z"
+          "title": "Permit L short duration Vaud: duration, extension and rights",
+          "url": "/en/swiss-articles/work-permit-l-short-term-vaud/",
+          "excerpt": "The L permit allows you to work in Switzerland for up to 1 year and is renewable. Learn how to apply for the extension, move to permit B, and what your tax obligations are.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Vaud sick pay premiums: how to get the reduction",
-          "url": "/en/swiss-articles/vaud-health-insurance-premiums-reduction/",
-          "excerpt": "Deductibles, alternative models and cantonal subsidy requirements: a practical guide to LAMal awards in the Canton of Vaud.",
-          "date": "2026-09-12T20:12:56.485Z"
+          "title": "Permit L in Vaud: validity max 1 year and extension",
+          "url": "/en/swiss-articles/l-permit-vaud-extension/",
+          "excerpt": "Validity up to 1 year, employer constraint and SEM management. The rules for the extension or transition to permit B.",
+          "date": "2026-09-18T04:49:19.725Z"
+        },
+        {
+          "title": "Swiss health system LAMal in the Canton of Vaud",
+          "url": "/en/swiss-articles/switzerland-healthcare-lamal-vaud/",
+          "excerpt": "Complete guide to the Swiss health system in the Canton of Vaud: LAMal obligation, choice of the sick fund, deductibles and cantonal subsidies.",
+          "date": "2026-08-20T02:15:48.837Z"
         },
         {
           "title": "Driver's license in the Canton of Vaud: conversion, exams and compulsory courses",
           "url": "/en/swiss-articles/driving-license-canton-vaud-conversion-exams/",
           "excerpt": "Practical guide to the conversion of the foreign driver's license in the Canton of Vaud, including theoretical and practical exams, compulsory courses and the competent traffic office.",
           "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Canton Vaud school system: enrolments and cycles",
+          "url": "/en/swiss-articles/vaud-school-system-enrollment-cycles/",
+          "excerpt": "Complete guide to compulsory education in the Canton of Vaud: study cycles, age of enrollment, languages and transition to high school.",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -368,7 +392,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "de": {
       "canton": "VD",
@@ -487,10 +511,10 @@
           "date": "2026-10-02T02:25:28.395Z"
         },
         {
-          "title": "Schweizerisches Gesundheitssystem KVG im Kanton Waadt",
-          "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-waadt/",
-          "excerpt": "Vollständiger Leitfaden zum Schweizer Gesundheitssystem im Kanton Waadt: KVG-Pflicht, Krankenkassenwahl, Franchisen und Kantonsbeiträge.",
-          "date": "2026-08-20T02:15:48.837Z"
+          "title": "Führerschein L Waadt: 1 Jahr gültig, Verlängerung",
+          "url": "/de/schweiz-artikel/waadt-l-ausweis-gultigkeit-verlaengerung/",
+          "excerpt": "Die Genehmigung L gilt für maximal 1 Jahr und kann um ein zweites Jahr verlängert werden. Nach 24 Monaten geht er in die Bewilligung B. Vollständiger Leitfaden für den Kanton Waadt.",
+          "date": "2026-09-19T02:58:18.030Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Kanton Waadt: Voraussetzungen und Verlängerung",
@@ -499,22 +523,34 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Waadt: Kosten und Leistungen",
-          "url": "/de/schweiz-artikel/kita-kinderbetreuung-waadt-kosten-subventionen/",
-          "excerpt": "Wie die Obhut im Kanton Waadt funktioniert: Kindergärten, Tagesfamilien, Nachschule mit progressiven Einkommensraten und kantonale Zuschüsse stehen zur Verfügung.",
-          "date": "2026-09-04T22:15:17.620Z"
+          "title": "Kurzzeiturlaub Waadt: Dauer, Verlängerung und Rechte",
+          "url": "/de/schweiz-artikel/arbeitserlaubnis-l-kurzfristig-waadt/",
+          "excerpt": "Die Bewilligung L erlaubt bis zu 1 Jahr in der Schweiz zu arbeiten und ist verlängerbar. Erfahren Sie, wie Sie die Verlängerung beantragen, auf die B-Bewilligung wechseln und welche Steuerpflichten bestehen.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Krankenkassenprämien Waadt: So erhalten Sie die Ermäßigung",
-          "url": "/de/schweiz-artikel/waadt-krankenkassen-praemien-ermaessigung/",
-          "excerpt": "Franchisen, alternative Modelle und Voraussetzungen für den Kantonsbeitrag: Praktischer Leitfaden zu den KVG-Prämien im Kanton Waadt.",
-          "date": "2026-09-12T20:12:56.485Z"
+          "title": "Ausweis L in der Waadt: Gültigkeit max. 1 Jahr und Verlängerung",
+          "url": "/de/schweiz-artikel/l-ausweis-waadt-verlaengerung/",
+          "excerpt": "Gültigkeit bis zu 1 Jahr, Bindung an den Arbeitgeber und SEM-Verwaltung. Die Regeln für die Verlängerung oder den Übergang zur B-Bewilligung.",
+          "date": "2026-09-18T04:49:19.725Z"
+        },
+        {
+          "title": "Schweizerisches Gesundheitssystem KVG im Kanton Waadt",
+          "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-waadt/",
+          "excerpt": "Vollständiger Leitfaden zum Schweizer Gesundheitssystem im Kanton Waadt: KVG-Pflicht, Krankenkassenwahl, Franchisen und Kantonsbeiträge.",
+          "date": "2026-08-20T02:15:48.837Z"
         },
         {
           "title": "Führerschein im Kanton Waadt: Umschulung, Prüfungen und Pflichtkurse",
           "url": "/de/schweiz-artikel/fuhrerschein-kanton-waadt-umwandlung-pruefungen/",
           "excerpt": "Praktischer Leitfaden für den Umtausch des ausländischen Führerscheins im Kanton Waadt, einschliesslich theoretischer und praktischer Prüfungen, Pflichtkurse und des zuständigen Strassenverkehrsamtes.",
           "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Schulsystem Kanton Waadt: Einschreibungen und Zyklen",
+          "url": "/de/schweiz-artikel/schulsystem-kanton-waadt-anmeldung/",
+          "excerpt": "Vollständiger Leitfaden zur obligatorischen Schule im Kanton Waadt: Studiengänge, Einschreibungsalter, Sprachen und Übergang in die Sekundarstufe II",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -539,7 +575,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "fr": {
       "canton": "VD",
@@ -658,10 +694,10 @@
           "date": "2026-10-02T02:25:28.395Z"
         },
         {
-          "title": "Système de santé suisse LAMal dans le canton de Vaud",
-          "url": "/fr/articles-suisse/systeme-sante-suisse-lamal-vaud/",
-          "excerpt": "Guide complet du système de santé suisse dans le canton de Vaud : obligation LAMal, choix de la caisse-maladie, franchises et allocations cantonales.",
-          "date": "2026-08-20T02:15:48.837Z"
+          "title": "Permis L en Vaud : validité 1 an et renouvellement jusqu'à 24 mois",
+          "url": "/fr/articles-suisse/permis-l-vaud-duree-renouvellement/",
+          "excerpt": "Le permis L dure 1 an maximum, renouvelable pour une deuxième année. Après 24 mois, il passe au permis B. Guide complet pour le canton de Vaud.",
+          "date": "2026-09-19T02:58:18.030Z"
         },
         {
           "title": "Permis de séjour B canton de Vaud : exigences et renouvellement",
@@ -670,22 +706,34 @@
           "date": "2026-09-04T06:34:11.412Z"
         },
         {
-          "title": "Garderie et garde d'enfants dans le canton de Vaud : frais et allocations",
-          "url": "/fr/articles-suisse/garderie-garde-enfants-vaud-couts-allocations/",
-          "excerpt": "Comment fonctionne la garde dans le canton de Vaud : crèches, familles de jour, après l'école avec des tarifs progressifs sur le revenu et des allocations cantonales disponibles.",
-          "date": "2026-09-04T22:15:17.620Z"
+          "title": "Permis L courte durée vaudois : durée, prorogation et droits",
+          "url": "/fr/articles-suisse/permis-l-courte-duree-vaud/",
+          "excerpt": "Le permis L permet de travailler en Suisse jusqu'à 1 an et est renouvelable. Découvrez comment demander la prolongation, passer au permis B et quelles sont les obligations fiscales.",
+          "date": "2026-09-04T08:00:51.242Z"
         },
         {
-          "title": "Primes caisse-maladie Vaud : comment obtenir la réduction",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-vaud-reduction/",
-          "excerpt": "Franchises, modèles alternatifs et conditions pour l'allocation cantonale : guide pratique des prix LAMal dans le canton de Vaud.",
-          "date": "2026-09-12T20:12:56.485Z"
+          "title": "Permis L en Vaud : validité max 1 an et prolongation",
+          "url": "/fr/articles-suisse/permis-l-vaud-prolongation/",
+          "excerpt": "Validité jusqu'à 1 an, obligation à l'employeur et gestion SEM. Les règles pour la prolongation ou le passage au permis B.",
+          "date": "2026-09-18T04:49:19.725Z"
+        },
+        {
+          "title": "Système de santé suisse LAMal dans le canton de Vaud",
+          "url": "/fr/articles-suisse/systeme-sante-suisse-lamal-vaud/",
+          "excerpt": "Guide complet du système de santé suisse dans le canton de Vaud : obligation LAMal, choix de la caisse-maladie, franchises et allocations cantonales.",
+          "date": "2026-08-20T02:15:48.837Z"
         },
         {
           "title": "Permis de conduire dans le canton de Vaud : conversion, examens et cours",
           "url": "/fr/articles-suisse/permis-de-conduire-canton-de-vaud-conversion-examens/",
           "excerpt": "Guide pratique à la conversion du permis de conduire étranger dans le canton de Vaud, comprenant examens théoriques et pratiques, cours obligatoires et office de la circulation compétent.",
           "date": "2026-09-05T09:26:04.187Z"
+        },
+        {
+          "title": "Système scolaire canton de Vaud : inscriptions et cycles",
+          "url": "/fr/articles-suisse/systeme-scolaire-canton-vaud-inscription/",
+          "excerpt": "Guide complet de l'école obligatoire dans le canton de Vaud : filières d'études, âge d'inscription, langues et passage au lycée.",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -706,7 +754,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     }
   }
 }

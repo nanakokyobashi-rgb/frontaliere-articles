@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "1e10f37ff31da5cb8bdf4f76916c40948fbc60e92624224f0805bed0abd10933",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "8b3ac333781f08ad74a879dcb8a54abbc678485746354d119dcf3c97c954b2a4",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -57,7 +57,7 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -72,6 +72,12 @@
           "url": "/articoli-svizzera/trasporti-pubblici-glarona/",
           "excerpt": "Scopri i dettagli sui abbonamenti trasporti pubblici nel Cantone Glarona, incluse le zone, le tariffe e le combinazioni con metà-prezzo e AG",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Sistema scolastico Canton Glarona: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-glarona-iscrizione-e-cicli/",
+          "excerpt": "Scegli la scuola giusta per i tuoi figli in Canton Glarona",
+          "date": "2026-08-17T03:31:47.206Z"
         }
       ],
       "links": [
@@ -84,7 +90,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GL",
@@ -129,7 +135,7 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -144,6 +150,12 @@
           "url": "/en/swiss-articles/public-transport-glaurus/",
           "excerpt": "Find out details about public transport passes in the Canton of Glarus, including zones, fares and half-price and AG combinations",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Canton of Glarus school system: enrolment and cycles",
+          "url": "/en/swiss-articles/education-system-canton-glarus-enrollment-and-cycles/",
+          "excerpt": "Choose the right school for your children in Canton Glarus",
+          "date": "2026-08-17T03:31:47.206Z"
         }
       ],
       "links": [
@@ -156,7 +168,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GL",
@@ -201,7 +213,7 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -216,6 +228,12 @@
           "url": "/de/schweiz-artikel/oeffentlicher-verkehr-glauis/",
           "excerpt": "Erfahren Sie mehr über die ÖV-Abos im Kanton Glarus inklusive Zonen, Tarife und Kombinationen mit Halbtax und GA",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Schulsystem des Kantons Glarus: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/bildungssystem-kanton-glarus-anmeldung-und-lehrjahre/",
+          "excerpt": "Wählen Sie die richtige Schule für Ihre Kinder im Kanton Glarus",
+          "date": "2026-08-17T03:31:47.206Z"
         }
       ],
       "links": [
@@ -228,7 +246,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GL",
@@ -273,7 +291,7 @@
               "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30249"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -288,6 +306,12 @@
           "url": "/fr/articles-suisse/transport-en-commun-glauis/",
           "excerpt": "Découvrez les détails sur les abonnements transports publics dans le canton de Glaris, y compris les zones, les tarifs et les combinaisons avec demi-tarif et AG",
           "date": "2026-08-17T05:40:06.559Z"
+        },
+        {
+          "title": "Système scolaire canton de Glaris : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-educatif-canton-de-glaris-inscription-et-cycles/",
+          "excerpt": "Choisissez la bonne école pour vos enfants à Canton de Glaris",
+          "date": "2026-08-17T03:31:47.206Z"
         }
       ],
       "links": [
@@ -300,7 +324,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

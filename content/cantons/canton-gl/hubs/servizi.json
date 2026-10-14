@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "29b5801441ae15c33238c2c4537a9e4e22f7f7e94596f2481cd7b0dab28da1b8",
+  "updatedAt": "2026-10-14T08:24:32.182Z",
+  "contentHash": "55d5161461aff9826cdc81a72832d5e0a32ef6222fa3b17704144f801e9a96e9",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -85,6 +85,12 @@
           "date": "2026-10-08T13:30:13.016Z"
         },
         {
+          "title": "Permesso di domicilio C Canton Glarona: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-glarona-requisiti/",
+          "excerpt": "Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
           "title": "Premi cassa malati Canton Glarona: fasce, franchigie e riduzione",
           "url": "/articoli-svizzera/premi-lamal-glarona-modelli-franchigie/",
           "excerpt": "Nel Cantone di Glarona i premi LAMal variano per fascia di premio e franchigia; è possibile ottenere la riduzione cantonale entro tre mesi dall’iscrizione.",
@@ -109,22 +115,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Permesso di domicilio C Canton Glarona: requisiti e domanda",
-          "url": "/articoli-svizzera/permesso-c-glarona-requisiti/",
-          "excerpt": "Guida ai requisiti per il permesso C a Glarona: anni di residenza, integrazione linguistica e procedura di rilascio per cittadini UE/AELS e terzi stati.",
-          "date": "2026-09-18T04:16:44.938Z"
+          "title": "Permesso C Glarona: requisiti, procedure e domanda",
+          "url": "/articoli-svizzera/permesso-c-glarona-come-richiederlo/",
+          "excerpt": "Residenza permanente in Cantone Glarona: guida ai requisiti del permesso C, conoscenze linguistiche, integrazione e procedura di domanda presso le autorità cantonali.",
+          "date": "2026-09-04T15:52:04.016Z"
         },
         {
-          "title": "Patente di guida canton Glarona: conversione ed esami",
-          "url": "/articoli-svizzera/patente-guida-glarona-conversione/",
-          "excerpt": "Come convertire la patente straniera nel canton Glarona: procedura completa, esami teorico-pratici e corsi obbligatori per chi si trasferisce in Svizzera.",
-          "date": "2026-09-04T19:18:40.066Z"
-        },
-        {
-          "title": "Asilo nido e custodia bambini Canton Glarona costi",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-glarona/",
-          "excerpt": "Tariffe calcolate sul reddito e sussidi cantonali disponibili per le famiglie con reddito basso",
-          "date": "2026-08-17T03:47:42.989Z"
+          "title": "Permesso C Glarona: requisiti e come fare domanda",
+          "url": "/articoli-svizzera/domanda-permesso-c-glarona-guida/",
+          "excerpt": "Guida completa al permesso di domicilio C nel canton Glarona: anni di residenza richiesti, integrazione, procedure di domanda e passaggio verso la naturalizzazione.",
+          "date": "2026-09-04T15:11:21.894Z"
         }
       ],
       "links": [
@@ -153,7 +153,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "en": {
       "canton": "GL",
@@ -221,6 +221,12 @@
           "date": "2026-10-08T13:30:13.016Z"
         },
         {
+          "title": "Residence permit C Canton Glarus: requirements and application",
+          "url": "/en/swiss-articles/permit-c-glarus-requirements/",
+          "excerpt": "Guide to the requirements for the C permit in Glarus: years of residence, language integration and issuance procedure for EU/EFTA citizens and third states.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
           "title": "Health insurance premiums Canton Glarus: bands, deductibles and reduction",
           "url": "/en/swiss-articles/lamal-premiums-glarus-models-deductibles/",
           "excerpt": "In the Canton of Glarus, LAMal premiums vary by premium range and deductible; it is possible to obtain the cantonal reduction within three months of registration.",
@@ -245,22 +251,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Residence permit C Canton Glarus: requirements and application",
-          "url": "/en/swiss-articles/permit-c-glarus-requirements/",
-          "excerpt": "Guide to the requirements for the C permit in Glarus: years of residence, language integration and issuance procedure for EU/EFTA citizens and third states.",
-          "date": "2026-09-18T04:16:44.938Z"
+          "title": "Glarus C Permit: Requirements, Procedures and Application",
+          "url": "/en/swiss-articles/residence-permit-c-glarus-how-to-apply/",
+          "excerpt": "Permanent residence in Canton Glarus: guide to C permit requirements, language skills, integration and application procedure with cantonal authorities.",
+          "date": "2026-09-04T15:52:04.016Z"
         },
         {
-          "title": "Canton Glarus Driving License: Conversion and Exams",
-          "url": "/en/swiss-articles/driver-license-glarus-conversion/",
-          "excerpt": "How to convert your foreign driver's license in the canton of Glarus: complete procedure, theoretical-practical exams and mandatory courses for those who move to Switzerland.",
-          "date": "2026-09-04T19:18:40.066Z"
-        },
-        {
-          "title": "Nursery and childcare Canton Glarus costs",
-          "url": "/en/swiss-articles/nursery-and-custody-of-children-in-the-canton-of-glarus/",
-          "excerpt": "Income Calculated Rates and Cantonal Subsidies Available for Low-Income Families",
-          "date": "2026-08-17T03:47:42.989Z"
+          "title": "Glarus C Permit: Requirements and How to Apply",
+          "url": "/en/swiss-articles/residence-permit-c-glarus-application-guide/",
+          "excerpt": "Complete guide to residence permit C in the canton of Glarus: years of residence required, integration, application procedures and transition to naturalization.",
+          "date": "2026-09-04T15:11:21.894Z"
         }
       ],
       "links": [
@@ -285,7 +285,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "de": {
       "canton": "GL",
@@ -353,6 +353,12 @@
           "date": "2026-10-08T13:30:13.016Z"
         },
         {
+          "title": "Niederlassungsbewilligung C Kanton Glarus: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/bewilligung-c-glarus-anforderungen/",
+          "excerpt": "Leitfaden zu den Voraussetzungen für die Bewilligung C in Glarus: Aufenthaltsjahre, Sprachintegration und Erteilungsverfahren für EU-/EFTA-Bürger und Drittstaaten.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
           "title": "Krankenkassenprämien Kanton Glarus: Zeitabschnitte, Selbstbehalte und Kürzungen",
           "url": "/de/schweiz-artikel/lamal-beitraege-glarus-modelle-selbstbehalte/",
           "excerpt": "Im Kanton Glarus variieren die KVG-Prämien je nach Prämienspanne und Franchise; die kantonale Reduktion ist innerhalb von drei Monaten nach der Anmeldung möglich.",
@@ -377,22 +383,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Niederlassungsbewilligung C Kanton Glarus: Voraussetzungen und Antrag",
-          "url": "/de/schweiz-artikel/bewilligung-c-glarus-anforderungen/",
-          "excerpt": "Leitfaden zu den Voraussetzungen für die Bewilligung C in Glarus: Aufenthaltsjahre, Sprachintegration und Erteilungsverfahren für EU-/EFTA-Bürger und Drittstaaten.",
-          "date": "2026-09-18T04:16:44.938Z"
+          "title": "Genehmigung C Glarus: Anforderungen, Verfahren und Antrag",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-glarus-beantragen/",
+          "excerpt": "Ständiger Wohnsitz im Kanton Glarus: Leitfaden zu den Anforderungen der C-Bewilligung, Sprachkenntnisse, Integration und Antragsverfahren bei den kantonalen Behörden.",
+          "date": "2026-09-04T15:52:04.016Z"
         },
         {
-          "title": "Führerschein Kanton Glarus: Umschulung und Prüfungen",
-          "url": "/de/schweiz-artikel/fuehrerschein-glarus-umwandlung/",
-          "excerpt": "Wie man einen ausländischen Führerschein im Kanton Glarus umwandelt: komplettes Verfahren, theoretisch-praktische Prüfungen und Pflichtkurse für Personen, die in die Schweiz ziehen.",
-          "date": "2026-09-04T19:18:40.066Z"
-        },
-        {
-          "title": "Kindertagesstätte und Kinderbetreuung Kanton Glarus Kosten",
-          "url": "/de/schweiz-artikel/kindergarten-und-custodia-dei-bambini-im-kanton-glarus/",
-          "excerpt": "Berechnete Einkommenstarife und kantonale Zuschüsse für einkommensschwache Haushalte verfügbar",
-          "date": "2026-08-17T03:47:42.989Z"
+          "title": "Führerschein C Glarus: Voraussetzungen und Beantragung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-c-glarus-antrag-leitfaden/",
+          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Glarus: erforderliche Aufenthaltsjahre, Integration, Antragsverfahren und Übergang zur Einbürgerung.",
+          "date": "2026-09-04T15:11:21.894Z"
         }
       ],
       "links": [
@@ -417,7 +417,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "fr": {
       "canton": "GL",
@@ -485,6 +485,12 @@
           "date": "2026-10-08T13:30:13.016Z"
         },
         {
+          "title": "Permis de séjour C Canton de Glaris : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-glaris-conditions/",
+          "excerpt": "Guide des exigences pour le permis C à Glaris : années de résidence, intégration linguistique et procédure de délivrance pour les citoyens de l'UE/AELE et des pays tiers.",
+          "date": "2026-09-18T04:16:44.938Z"
+        },
+        {
           "title": "Primes caisse-maladie Canton de Glaris : fourchettes, franchises et réduction",
           "url": "/fr/articles-suisse/cotisations-lamal-glaris-modeles-franchises/",
           "excerpt": "Dans le canton de Glaris, les primes LAMal varient selon la fourchette de primes et de franchises ; la réduction cantonale peut être obtenue dans les trois mois suivant l'inscription.",
@@ -509,22 +515,16 @@
           "date": "2026-08-17T02:02:39.630Z"
         },
         {
-          "title": "Permis de séjour C Canton de Glaris : exigences et demande",
-          "url": "/fr/articles-suisse/permis-c-glaris-conditions/",
-          "excerpt": "Guide des exigences pour le permis C à Glaris : années de résidence, intégration linguistique et procédure de délivrance pour les citoyens de l'UE/AELE et des pays tiers.",
-          "date": "2026-09-18T04:16:44.938Z"
+          "title": "Permis C Glaris : exigences, procédures et demande",
+          "url": "/fr/articles-suisse/permis-residence-c-glaris-demander/",
+          "excerpt": "Résidence permanente dans le canton de Glaris : guide des exigences du permis C, des connaissances linguistiques, de l'intégration et de la procédure de demande auprès des autorités cantonales.",
+          "date": "2026-09-04T15:52:04.016Z"
         },
         {
-          "title": "Permis de conduire canton de Glaris : conversion et examens",
-          "url": "/fr/articles-suisse/permis-glaris-conversion/",
-          "excerpt": "Comment convertir le permis étranger dans le canton de Glaris : procédure complète, examens théoriques et pratiques et cours obligatoires pour ceux qui déménagent en Suisse.",
-          "date": "2026-09-04T19:18:40.066Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants Canton de Glaris coûts",
-          "url": "/fr/articles-suisse/creche-et-custodia-des-enfants-au-canton-de-glaris/",
-          "excerpt": "Tarifs calculés sur le revenu et allocations cantonales disponibles pour les ménages à faible revenu",
-          "date": "2026-08-17T03:47:42.989Z"
+          "title": "Permis C Glaris : exigences et comment postuler",
+          "url": "/fr/articles-suisse/permis-residence-c-glaris-demande-guide/",
+          "excerpt": "Guide complet du permis de séjour C dans le canton de Glaris : années de résidence requises, intégration, procédures de demande et passage vers la naturalisation.",
+          "date": "2026-09-04T15:11:21.894Z"
         }
       ],
       "links": [
@@ -545,7 +545,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     }
   }
 }

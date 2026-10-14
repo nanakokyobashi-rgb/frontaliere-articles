@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "545088a3e4ee743edbefc0a95d15bd19df63962610f7576bb5d9523b2fe6db17",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "5a8a11c8a74894bf00a681d9c1881a5d9c92f9db8ec8d9894c2effe30717d126",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -209,6 +209,12 @@
           "date": "2026-10-07T10:36:03.789Z"
         },
         {
+          "title": "Lavori sulla Hauptstrasse a Wartau dal 19 ottobre 2026",
+          "url": "/articoli-san-gallo/lavori-strada-wartau-plattis/",
+          "excerpt": "A Wartau i lavori sulla Hauptstrasse iniziano il 19 ottobre 2026: nel tratto Plattis saranno rinnovate le condotte di drenaggio e il fondo stradale.",
+          "date": "2026-10-09T20:23:10.514Z"
+        },
+        {
           "title": "Abbonamenti trasporti San Gallo: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-san-gallo/",
           "excerpt": "Scopri la struttura tariffaria del Canton San Gallo: comunità tariffaria, zone, abbonamenti annuali e mensili, Metà-prezzo e AG, sconti per studenti.",
@@ -249,7 +255,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SG",
@@ -435,6 +441,12 @@
           "date": "2026-10-07T10:36:03.789Z"
         },
         {
+          "title": "Roadworks on Hauptstrasse in Wartau from October 19, 2026",
+          "url": "/en/st-gallen-articles/roadworks-wartau-plattis/",
+          "excerpt": "In Wartau, work on Hauptstrasse will begin on October 19, 2026: in the Plattis section, the drainage pipes and road surface will be renewed.",
+          "date": "2026-10-09T20:23:10.514Z"
+        },
+        {
           "title": "St. Gallen Transportation Subscriptions: Zones and Rates",
           "url": "/en/swiss-articles/st-gallen-public-transport-passes/",
           "excerpt": "Discover the tariff structure of the Canton of St. Gallen: tariff community, zones, annual and monthly subscriptions, Half-price and AG, discounts for students.",
@@ -475,7 +487,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SG",
@@ -661,6 +673,12 @@
           "date": "2026-10-07T10:36:03.789Z"
         },
         {
+          "title": "Arbeiten an der Hauptstrasse in Wartau ab dem 19. Oktober 2026",
+          "url": "/de/st-gallen-artikel/bauarbeiten-wartau-plattis/",
+          "excerpt": "In Wartau beginnen die Arbeiten an der Hauptstrasse am 19.",
+          "date": "2026-10-09T20:23:10.514Z"
+        },
+        {
           "title": "Verkehrstickets St. Gallen: Zonen und Tarife",
           "url": "/de/schweiz-artikel/san-gallen-abonnementsverkehr/",
           "excerpt": "Entdecken Sie die Tarifstruktur des Kantons St. Gallen: Tarifgemeinschaft, Zonen, Jahres- und Monatsabonnements, Halbtax und GA, Studentenrabatte.",
@@ -701,7 +719,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SG",
@@ -888,6 +906,12 @@
           "date": "2026-10-07T10:36:03.789Z"
         },
         {
+          "title": "Travaux sur la Hauptstrasse à Wartau à partir du 19 octobre 2026",
+          "url": "/fr/articles-saint-gall/travaux-routiers-wartau-plattis/",
+          "excerpt": "À Wartau, les travaux sur la Hauptstrasse commencent le 19 octobre 2026 : sur le tronçon de Plattis, les conduites de drainage et la chaussée seront rénovées.",
+          "date": "2026-10-09T20:23:10.514Z"
+        },
+        {
           "title": "Abonnements transports Saint-Gall : zones et tarifs",
           "url": "/fr/articles-suisse/abonnements-transports-saint-gall/",
           "excerpt": "Découvrez la structure tarifaire du canton de Saint-Gall : communauté tarifaire, zones, abonnements annuels et mensuels, demi-tarif et AG, réductions pour étudiants.",
@@ -928,7 +952,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "9b7cdf161185bb6bb1c565b5a55b127ed54eba67519582af6a26d2de8e007af8",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "bb811045e3f30739b016dc425af49d9bf0495c3e37e85be5b6bca9c89ff097cc",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -115,15 +115,15 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Imposta sugli autoveicoli canton Lucerna: calcolo e pagamento",
-          "url": "/articoli-svizzera/imposta-autoveicoli-lucerna-calcolo/",
-          "excerpt": "Imposta sugli autoveicoli nel Cantone di Lucerna: calcolo, scadenze, importi e pagamento. Cambio veicolo e indirizzo secondo le regole cantonali di Lucerna.",
-          "date": "2026-10-08T03:11:14.601Z"
+          "title": "Kriens torna in rosso dopo surplus milionari",
+          "url": "/articoli-lucerna/kriens-torna-in-deficit/",
+          "excerpt": "Dopo surplus milionari, Kriens torna in deficit: il titolo segnala un nuovo passivo, ma non indica ancora importo, data o causa.",
+          "date": "2026-10-09T00:40:17.368Z"
         },
         {
           "title": "Imposta cantonale confronto Svizzera 2026: canton Lucerna",
@@ -132,10 +132,16 @@
           "date": "2026-10-01T03:47:26.930Z"
         },
         {
-          "title": "Imposte cantonali canton Lucerna: aliquote e deduzioni",
-          "url": "/articoli-svizzera/imposte-cantonali-canton-lucerna-aliquote/",
-          "excerpt": "Guida alle imposte cantonali e comunali nel Cantone di Lucerna con aliquote, scaglioni, deduzioni e portale ufficiale dell'amministrazione fiscale.",
-          "date": "2026-08-14T01:47:31.544Z"
+          "title": "Imposta sugli autoveicoli canton Lucerna: calcolo e pagamento",
+          "url": "/articoli-svizzera/imposta-autoveicoli-lucerna-calcolo/",
+          "excerpt": "Imposta sugli autoveicoli nel Cantone di Lucerna: calcolo, scadenze, importi e pagamento. Cambio veicolo e indirizzo secondo le regole cantonali di Lucerna.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
+        {
+          "title": "Comprare casa a Lucerna: mutuo ipotecario e imposte",
+          "url": "/articoli-svizzera/comprare-casa-lucerna-ipoteca-pratica/",
+          "excerpt": "Acquistare una proprietà nel Canton Lucerna richiede competenze fiscal-finanziarie: imposte sui trapassi, mutuo sostenibile, spese notarili. Guida operativa 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Imposta di successione e donazione Canton Lucerna: aliquote",
@@ -144,10 +150,10 @@
           "date": "2026-08-22T12:05:19.300Z"
         },
         {
-          "title": "Comprare casa a Lucerna: mutuo ipotecario e imposte",
-          "url": "/articoli-svizzera/comprare-casa-lucerna-ipoteca-pratica/",
-          "excerpt": "Acquistare una proprietà nel Canton Lucerna richiede competenze fiscal-finanziarie: imposte sui trapassi, mutuo sostenibile, spese notarili. Guida operativa 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
+          "title": "Imposte cantonali canton Lucerna: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonali-canton-lucerna-aliquote/",
+          "excerpt": "Guida alle imposte cantonali e comunali nel Cantone di Lucerna con aliquote, scaglioni, deduzioni e portale ufficiale dell'amministrazione fiscale.",
+          "date": "2026-08-14T01:47:31.544Z"
         },
         {
           "title": "Imposta di successione e donazione nel Cantone di Lucerna",
@@ -184,7 +190,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "LU",
@@ -277,15 +283,15 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Motor vehicle tax in the canton of Lucerne: calculation and payment",
-          "url": "/en/swiss-articles/lucerne-vehicle-tax-calculation/",
-          "excerpt": "Motor vehicle tax in the Canton of Lucerne: calculation, deadlines, amounts and payment. Change of vehicle and address according to the cantonal rules of Lucerne.",
-          "date": "2026-10-08T03:11:14.601Z"
+          "title": "Kriens back in the red after million-dollar surpluses",
+          "url": "/en/lucerne-articles/kriens-returns-to-deficit/",
+          "excerpt": "After multimillion surpluses, Kriens returns to a deficit: the headline indicates a new liability, but does not yet specify the amount, date, or cause.",
+          "date": "2026-10-09T00:40:17.368Z"
         },
         {
           "title": "Swiss Cantonal Tax Comparison 2026: Canton of Lucerne",
@@ -294,10 +300,16 @@
           "date": "2026-10-01T03:47:26.930Z"
         },
         {
-          "title": "Cantonal taxes canton Lucerne: rates and deductions",
-          "url": "/en/swiss-articles/canton-lucerne-cantonal-taxes-deductions/",
-          "excerpt": "Guide to cantonal and municipal taxes in the Canton of Lucerne with rates, brackets, deductions and official portal of the tax administration.",
-          "date": "2026-08-14T01:47:31.544Z"
+          "title": "Motor vehicle tax in the canton of Lucerne: calculation and payment",
+          "url": "/en/swiss-articles/lucerne-vehicle-tax-calculation/",
+          "excerpt": "Motor vehicle tax in the Canton of Lucerne: calculation, deadlines, amounts and payment. Change of vehicle and address according to the cantonal rules of Lucerne.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
+        {
+          "title": "Buying a house in Lucerne: mortgage and taxes",
+          "url": "/en/swiss-articles/buy-home-lucerne-mortgage-guide/",
+          "excerpt": "Buying a property in the Canton of Lucerne requires fiscal-financial skills: transfer taxes, sustainable mortgage, notary fees. Operating Guide 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Inheritance and gift tax Canton Lucerne: rates",
@@ -306,10 +318,10 @@
           "date": "2026-08-22T12:05:19.300Z"
         },
         {
-          "title": "Buying a house in Lucerne: mortgage and taxes",
-          "url": "/en/swiss-articles/buy-home-lucerne-mortgage-guide/",
-          "excerpt": "Buying a property in the Canton of Lucerne requires fiscal-financial skills: transfer taxes, sustainable mortgage, notary fees. Operating Guide 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
+          "title": "Cantonal taxes canton Lucerne: rates and deductions",
+          "url": "/en/swiss-articles/canton-lucerne-cantonal-taxes-deductions/",
+          "excerpt": "Guide to cantonal and municipal taxes in the Canton of Lucerne with rates, brackets, deductions and official portal of the tax administration.",
+          "date": "2026-08-14T01:47:31.544Z"
         },
         {
           "title": "Inheritance and gift tax in the Canton of Lucerne",
@@ -346,7 +358,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "LU",
@@ -439,15 +451,15 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung und Zahlung",
-          "url": "/de/schweiz-artikel/luzern-motorfahrzeugsteuer-berechnung/",
-          "excerpt": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung, Fristen, Beträge und Zahlung. Fahrzeug- und Adresswechsel gemäß den kantonalen Regeln von Luzern.",
-          "date": "2026-10-08T03:11:14.601Z"
+          "title": "Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen",
+          "url": "/de/luzern-artikel/kriens-rutscht-wieder-ins-minus/",
+          "excerpt": "Nach Überschüssen in Millionenhöhe ist Kriens wieder im Defizit: Die Überschrift weist auf einen neuen Fehlbetrag hin, nennt aber noch keinen Betrag, kein Datum und keine Ursache.",
+          "date": "2026-10-09T00:40:17.368Z"
         },
         {
           "title": "Kantonale Steuern im Vergleich – Schweiz 2026: Kanton Luzern",
@@ -456,10 +468,16 @@
           "date": "2026-10-01T03:47:26.930Z"
         },
         {
-          "title": "Kantonale Steuern Kanton Luzern: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/kantonssteuern-kanton-luzern-abzuege/",
-          "excerpt": "Leitfaden zu den Kantons- und Gemeindesteuern im Kanton Luzern mit Steuersätzen, Staffelungen, Abzügen und dem offiziellen Portal der Steuerverwaltung.",
-          "date": "2026-08-14T01:47:31.544Z"
+          "title": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung und Zahlung",
+          "url": "/de/schweiz-artikel/luzern-motorfahrzeugsteuer-berechnung/",
+          "excerpt": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung, Fristen, Beträge und Zahlung. Fahrzeug- und Adresswechsel gemäß den kantonalen Regeln von Luzern.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
+        {
+          "title": "Haus kaufen in Luzern: Hypothekendarlehen und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-luzern-hypothek-anleitung/",
+          "excerpt": "Der Kauf einer Immobilie im Kanton Luzern erfordert steuerliche und finanzielle Kompetenzen: Abgeltungssteuern, nachhaltiges Darlehen, Notarkosten. Betriebsanleitung 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Erbschafts- und Schenkungssteuer Kanton Luzern: Steuersätze",
@@ -468,10 +486,10 @@
           "date": "2026-08-22T12:05:19.300Z"
         },
         {
-          "title": "Haus kaufen in Luzern: Hypothekendarlehen und Steuern",
-          "url": "/de/schweiz-artikel/haus-kaufen-luzern-hypothek-anleitung/",
-          "excerpt": "Der Kauf einer Immobilie im Kanton Luzern erfordert steuerliche und finanzielle Kompetenzen: Abgeltungssteuern, nachhaltiges Darlehen, Notarkosten. Betriebsanleitung 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
+          "title": "Kantonale Steuern Kanton Luzern: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/kantonssteuern-kanton-luzern-abzuege/",
+          "excerpt": "Leitfaden zu den Kantons- und Gemeindesteuern im Kanton Luzern mit Steuersätzen, Staffelungen, Abzügen und dem offiziellen Portal der Steuerverwaltung.",
+          "date": "2026-08-14T01:47:31.544Z"
         },
         {
           "title": "Erbschafts- und Schenkungssteuer im Kanton Luzern",
@@ -508,7 +526,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "LU",
@@ -601,15 +619,15 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Impôt sur les véhicules à Lucerne : calcul et paiement",
-          "url": "/fr/articles-suisse/lucerne-impot-vehicules-calcul/",
-          "excerpt": "Impôt sur les véhicules automobiles dans le canton de Lucerne : calcul, échéances, montants et paiement. Changement de véhicule et d’adresse selon les règles cantonales de Lucerne.",
-          "date": "2026-10-08T03:11:14.601Z"
+          "title": "Kriens repasse dans le rouge après des excédents de plusieurs millions",
+          "url": "/fr/articles-lucerne/kriens-repasse-dans-le-rouge/",
+          "excerpt": "Après des excédents de plusieurs millions, Kriens repasse en déficit : le titre signale un nouveau passif, mais n’indique encore ni montant, ni date ni cause.",
+          "date": "2026-10-09T00:40:17.368Z"
         },
         {
           "title": "Comparaison fiscale cantonale en Suisse 2026 : canton de Lucerne",
@@ -618,10 +636,16 @@
           "date": "2026-10-01T03:47:26.930Z"
         },
         {
-          "title": "Impôts cantonaux canton de Lucerne : taux et déductions",
-          "url": "/fr/articles-suisse/impots-cantonaux-canton-lucerne-baremes/",
-          "excerpt": "Guide des impôts cantonaux et communaux dans le canton de Lucerne avec taux, tranches, déductions et portail officiel de l'administration fiscale.",
-          "date": "2026-08-14T01:47:31.544Z"
+          "title": "Impôt sur les véhicules à Lucerne : calcul et paiement",
+          "url": "/fr/articles-suisse/lucerne-impot-vehicules-calcul/",
+          "excerpt": "Impôt sur les véhicules automobiles dans le canton de Lucerne : calcul, échéances, montants et paiement. Changement de véhicule et d’adresse selon les règles cantonales de Lucerne.",
+          "date": "2026-10-08T03:11:14.601Z"
+        },
+        {
+          "title": "Acheter une maison à Lucerne : hypothèque et impôts",
+          "url": "/fr/articles-suisse/acheter-maison-lucerne-hypotheque-guide/",
+          "excerpt": "L'achat d'une propriété dans le canton de Lucerne nécessite des compétences fiscales et financières : taxes de passage, hypothèque durable, frais de notaire. Guide opérationnel 2026.",
+          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Droits de succession et de donation Canton de Lucerne : taux",
@@ -630,10 +654,10 @@
           "date": "2026-08-22T12:05:19.300Z"
         },
         {
-          "title": "Acheter une maison à Lucerne : hypothèque et impôts",
-          "url": "/fr/articles-suisse/acheter-maison-lucerne-hypotheque-guide/",
-          "excerpt": "L'achat d'une propriété dans le canton de Lucerne nécessite des compétences fiscales et financières : taxes de passage, hypothèque durable, frais de notaire. Guide opérationnel 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
+          "title": "Impôts cantonaux canton de Lucerne : taux et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-canton-lucerne-baremes/",
+          "excerpt": "Guide des impôts cantonaux et communaux dans le canton de Lucerne avec taux, tranches, déductions et portail officiel de l'administration fiscale.",
+          "date": "2026-08-14T01:47:31.544Z"
         },
         {
           "title": "Droits de succession et de donation dans le canton de Lucerne",
@@ -670,7 +694,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "20feed492f18dd42727f92acb271bae91b5bb16726280bf76e1bd5a853692c37",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "146722556e892df5c938c75a3fd692ee6ed0060aa0213d0a56f2bdc515345290",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -134,6 +134,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
+          "url": "/articoli-uri/uri-chiusura-passhoehe/",
+          "excerpt": "Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
           "title": "Trasporti pubblici nel Cantone Uri: zone e abbonamenti",
           "url": "/articoli-svizzera/abbonamenti-trasporti-uri-zone/",
           "excerpt": "Sistema Passepartout nel Cantone Uri: come funzionano le zone, gli abbonamenti annuali e mensili, la metà-prezzo e l'AG delle FFS.",
@@ -146,16 +152,16 @@
           "date": "2026-08-16T10:15:45.029Z"
         },
         {
-          "title": "Abbonamenti Uri: zone, tariffe e offerte nazionali",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-uri-zone-tariffe/",
-          "excerpt": "Come funziona la comunità tariffaria Uri: zone, abbonamenti annuali e mensili, sconti per studenti e combinazioni con Halbtax e AG.",
-          "date": "2026-08-29T18:28:00.260Z"
-        },
-        {
           "title": "Pendolare inverso: da Altdorf a Lugano ogni giorno. Ma i treni non bastano",
           "url": "/articoli-frontaliere/pendolare-inverso-altdorf-lugano-problemi/",
           "excerpt": "Carla Scheidegger viaggia ogni giorno da Kriens ad Altdorf per lavorare al MASI a Lugano. Criticità: treni ogni due ore e vagoni affollati. La sua battaglia per un trasporto sostenibile.",
           "date": "2026-04-16T10:11:40.179Z"
+        },
+        {
+          "title": "Sistema scolastico Canton Uri: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-uri-iscrizione-e-cicli/",
+          "excerpt": "Cicli di scuola, età di iscrizione, calendario scolastico, lingue di insegnamento e passaggio alle scuole medie superiori nel Cantone di Uri.",
+          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "links": [
@@ -168,7 +174,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "UR",
@@ -285,6 +291,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passhöhe-Urnerboden: nighttime road closure",
+          "url": "/en/uri-articles/uri-night-road-closure/",
+          "excerpt": "Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
           "title": "Public transport in Canton Uri: zones and season tickets",
           "url": "/en/swiss-articles/uri-canton-transport-zones/",
           "excerpt": "Passepartout system in Canton Uri: how the SBB zones, annual and monthly subscriptions, half-price and AG work.",
@@ -297,16 +309,16 @@
           "date": "2026-08-16T10:15:45.029Z"
         },
         {
-          "title": "Uri subscriptions: zones, rates and national offers",
-          "url": "/en/swiss-articles/uri-public-transport-zone-fares/",
-          "excerpt": "How the URI pricing community works: zones, annual and monthly subscriptions, student discounts, and combinations with Halbtax and AG.",
-          "date": "2026-08-29T18:28:00.260Z"
-        },
-        {
           "title": "Reverse commuting: from Altdorf to Lugano every day. But the trains aren't enough",
           "url": "/en/cross-border-articles/reverse-commuter-altdorf-lugano-delays-connections/",
           "excerpt": "Carla Scheidegger travels from Kriens to Altdorf every day to work at the MASI in Lugano. Key issues: trains every two hours and overcrowded carriages. Her fight for sustainable transport.",
           "date": "2026-04-16T10:11:40.179Z"
+        },
+        {
+          "title": "Canton Uri school system: enrolment and cycles",
+          "url": "/en/swiss-articles/school-system-canton-uri-enrollment-and-classes/",
+          "excerpt": "School cycles, age of enrolment, school calendar, languages of instruction and transition to secondary schools in the Canton of Uri.",
+          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "links": [
@@ -319,7 +331,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "UR",
@@ -436,6 +448,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passhöhe-Urnerboden: nächtliche Sperrung der Straße",
+          "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
+          "excerpt": "Kantonsstraße zwischen Passhöhe und Urnerboden in der Nacht vom 14.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
           "title": "Öffentlicher Verkehr im Kanton Uri: Zonen und Abos",
           "url": "/de/schweiz-artikel/abos-nahverkehr-kanton-uri-zonen/",
           "excerpt": "Passepartout-System im Kanton Uri: Funktionsweise der Zonen, Jahres- und Monatsabos, Halbtax und GA der SBB.",
@@ -448,16 +466,16 @@
           "date": "2026-08-16T10:15:45.029Z"
         },
         {
-          "title": "URI-Abonnements: Zonen, Tarife und nationale Angebote",
-          "url": "/de/schweiz-artikel/uri-oeffentliche-verkehrszonen-tarife/",
-          "excerpt": "So funktioniert die URI-Tarifgemeinschaft: Zonen, Jahres- und Monatsabonnements, Studentenrabatte und Kombinationen mit Halbtax und AG.",
-          "date": "2026-08-29T18:28:00.260Z"
-        },
-        {
           "title": "Pendeln in die andere Richtung: Jeden Tag von Altdorf nach Lugano. Doch die Züge reichen nicht",
           "url": "/de/grenzgaenger-artikel/pendler-gegenrichtung-altdorf-lugano-verspaetungen/",
           "excerpt": "Carla Scheidegger pendelt jeden Tag von Kriens nach Altdorf, um am MASI in Lugano zu arbeiten. Doch die Kritikpunkte bleiben: Züge im Zwei-Stunden-Takt und überfüllte Waggons. Ihr Einsatz für einen nachhaltigen Verkehr.",
           "date": "2026-04-16T10:11:40.179Z"
+        },
+        {
+          "title": "Schulsystem Kanton Uri: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/schausystem-kanton-ur-einschreibung-und-klassen/",
+          "excerpt": "Schulzyklen, Einschreibungsalter, Schulkalender, Unterrichtssprachen und Übergang in die Sekundarstufe II im Kanton Uri.",
+          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "links": [
@@ -470,7 +488,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "UR",
@@ -587,6 +605,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Passhöhe-Urnerboden : fermeture nocturne de la route",
+          "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
+          "excerpt": "Route cantonale fermée de nuit entre Passhöhe et Urnerboden du 14 au 15 octobre pour des travaux de revêtement ; en cas de mauvais temps, les travaux sont reportés.",
+          "date": "2026-10-08T23:39:16.200Z"
+        },
+        {
           "title": "Transports publics dans le canton d'Uri : zones et abonnements",
           "url": "/fr/articles-suisse/abonnements-transports-uri-zones/",
           "excerpt": "Système Passepartout dans le canton d'Uri : fonctionnement des zones, abonnements annuels et mensuels, demi-tarif et AG des CFF.",
@@ -599,16 +623,16 @@
           "date": "2026-08-16T10:15:45.029Z"
         },
         {
-          "title": "Abonnements URI : zones, tarifs et offres nationales",
-          "url": "/fr/articles-suisse/abonnements-transports-uri-zones-tarifs/",
-          "excerpt": "Comment fonctionne la communauté tarifaire URI : zones, abonnements annuels et mensuels, réductions pour étudiants et combinaisons avec Halbtax et AG.",
-          "date": "2026-08-29T18:28:00.260Z"
-        },
-        {
           "title": "Pendulaire inversé : de Altdorf à Lugano chaque jour. Mais les trains ne suffisent pas",
           "url": "/fr/articles-frontalier/navetteur-inverse-altdorf-lugano-retards-connexions/",
           "excerpt": "Carla Scheidegger parcourt chaque jour le trajet entre Kriens et Altdorf pour se rendre à son travail au MASI à Lugano. Les principales difficultés : des trains espacés de deux heures et des wagons bondés. Son combat…",
           "date": "2026-04-16T10:11:40.179Z"
+        },
+        {
+          "title": "Système scolaire Canton Uri : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-scolaire-canton-ur-inscription-et-classe/",
+          "excerpt": "Cycles scolaires, âge d'inscription, calendrier scolaire, langues d'enseignement et passage au lycée dans le canton d'Uri.",
+          "date": "2026-08-16T02:47:26.266Z"
         }
       ],
       "links": [
@@ -621,7 +645,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

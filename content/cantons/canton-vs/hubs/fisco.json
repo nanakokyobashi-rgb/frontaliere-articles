@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "008e0d30e71c8bac72946a721c9f116aeef0255d5cfdbe2bd654d592a8bc3654",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "3ce22f9ee0c12c12ecd751c57a932c69236a8dcbe2bcb9574326410cf040ec40",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -120,7 +120,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -153,6 +153,18 @@
           "url": "/articoli-svizzera/eredita-donazioni-vallese-guida/",
           "excerpt": "La successione nel Vallese è soggetta a imposte cantonali calcolate per grado di parentela. Coniuge e discendenti hanno esenzioni specifiche. Ecco come funziona e quali procedimenti seguire.",
           "date": "2026-09-06T14:17:14.380Z"
+        },
+        {
+          "title": "Vivere a Gressan e lavorare nel Vallese: fiscalità da frontaliere",
+          "url": "/articoli-frontaliere/vivere-gressan-lavorare-vallese-frontaliere/",
+          "excerpt": "Nuovo accordo 2024: imposta alla fonte in Svizzera, franchigie CHF 7.500/10.000, modello 730 e credito d'imposta. Tutto ciò che serve sapere.",
+          "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Vivere a Valpelline e lavorare in Vallese: regole e fiscalità",
+          "url": "/articoli-frontaliere/vivere-valpelline-lavorare-vallese/",
+          "excerpt": "Guida operativa sul nuovo accordo fiscale, gestione del reddito e obblighi previdenziali per i lavoratori frontalieri in Svizzera.",
+          "date": "2026-08-11T13:11:13.729Z"
         }
       ],
       "links": [
@@ -181,7 +193,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "VS",
@@ -279,7 +291,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -312,6 +324,18 @@
           "url": "/en/swiss-articles/inheritance-donations-valais-guide/",
           "excerpt": "Succession in Valais is subject to cantonal taxes calculated by degree of kinship. Spouse and descendants have specific exemptions. Here's how it works and what procedures to follow.",
           "date": "2026-09-06T14:17:14.380Z"
+        },
+        {
+          "title": "Living in Gressan and working in Valais: border taxation",
+          "url": "/en/cross-border-articles/live-gressan-work-valais-frontier-worker/",
+          "excerpt": "New agreement 2024: source tax in Switzerland, deductibles CHF 7,500/10,000, model 730 and tax credit. Everything you need to know.",
+          "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Living in Valpelline and working in Valais: rules and taxation",
+          "url": "/en/cross-border-articles/living-valpelline-working-valais/",
+          "excerpt": "Operational guidance on the new tax agreement, income management and social security obligations for frontier workers in Switzerland.",
+          "date": "2026-08-11T13:11:13.729Z"
         }
       ],
       "links": [
@@ -340,7 +364,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "VS",
@@ -438,7 +462,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -471,6 +495,18 @@
           "url": "/de/schweiz-artikel/erbschaft-schenkung-wallis-leitfaden/",
           "excerpt": "Die Erbschaft im Wallis unterliegt kantonalen Steuern, die nach Verwandtschaftsgrad berechnet werden. Ehepartner und Nachkommen haben spezifische Ausnahmen. Hier ist, wie es funktioniert und welche Schritte zu befolgen…",
           "date": "2026-09-06T14:17:14.380Z"
+        },
+        {
+          "title": "Wohnen in Gressan und Arbeiten im Wallis: Grenzgängerbesteuerung",
+          "url": "/de/grenzgaenger-artikel/in-gressan-wohnen-im-wallis-arbeiten-grenzgaenger/",
+          "excerpt": "Neues Abkommen 2024: Quellensteuer in der Schweiz, Franchisen CHF 7 '500.10' 000, Vordruck 730 und Steuergutschrift. Alles, was Sie wissen müssen.",
+          "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Leben in Valpelline und Arbeiten im Wallis: Regeln und Besteuerung",
+          "url": "/de/grenzgaenger-artikel/leben-valpelline-arbeiten-wallis/",
+          "excerpt": "Operativer Leitfaden zum neuen Steuerabkommen, Einkommensmanagement und Vorsorgepflichten für Grenzgänger in der Schweiz.",
+          "date": "2026-08-11T13:11:13.729Z"
         }
       ],
       "links": [
@@ -499,7 +535,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "VS",
@@ -597,7 +633,7 @@
               "url": "https://www.vs.ch/web/communication/detail?groupId=508074&articleId=49548538"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -630,6 +666,18 @@
           "url": "/fr/articles-suisse/heritage-donations-valais-guide/",
           "excerpt": "La succession en Valais est soumise à des impôts cantonaux calculés par degré de parenté. Le conjoint et les descendants bénéficient d'exemptions spécifiques. Voici comment cela fonctionne et quelles procédures suivre.",
           "date": "2026-09-06T14:17:14.380Z"
+        },
+        {
+          "title": "Vivre à Gressan et travailler en Valais : fiscalité frontalière",
+          "url": "/fr/articles-frontalier/vivre-a-gressan-travailler-en-valais-frontalier/",
+          "excerpt": "Nouvel accord 2024 : impôt à la source en Suisse, franchises CHF 7.500/10.000, modèle 730 et crédit d'impôt. Tout ce qu'il faut savoir.",
+          "date": "2026-08-22T03:23:40.233Z"
+        },
+        {
+          "title": "Vivre à Valpelline et travailler en Valais : règles et fiscalité",
+          "url": "/fr/articles-frontalier/vivre-valpelline-travailler-valais/",
+          "excerpt": "Guide opérationnel sur le nouvel accord fiscal, la gestion des revenus et les obligations de sécurité sociale pour les travailleurs frontaliers en Suisse.",
+          "date": "2026-08-11T13:11:13.729Z"
         }
       ],
       "links": [
@@ -658,7 +706,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

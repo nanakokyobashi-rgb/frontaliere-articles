@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "83b8058e61f70018ffced5498934d07be42a6afc09922f02d924ebf3d5472c17",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "33215b18d4308ab282a9ec36f14f14585f9d82598ec6fc91dac4d7b99a8c7467",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -151,16 +151,16 @@
           "date": "2026-10-01T03:25:07.406Z"
         },
         {
-          "title": "Imposte San Gallo: aliquote, scaglioni e deduzioni",
-          "url": "/articoli-svizzera/imposte-cantonali-san-gallo-aliquote-deduzioni/",
-          "excerpt": "Come funzionano le imposte cantonali e comunali nel Cantone di San Gallo: aliquote, scaglioni, deduzioni ammesse e scadenze per la dichiarazione.",
-          "date": "2026-08-27T05:18:13.001Z"
-        },
-        {
           "title": "Imposta successione San Gallo: aliquote e esenzioni",
           "url": "/articoli-svizzera/imposta-successione-san-gallo-aliquote/",
           "excerpt": "Come funziona l'imposta di successione e donazione nel Canton San Gallo: aliquote per grado di parentela, esenzioni per coniuge e discendenti, procedura di dichiarazione e termini di legge.",
           "date": "2026-08-30T16:16:46.912Z"
+        },
+        {
+          "title": "Imposte San Gallo: aliquote, scaglioni e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonali-san-gallo-aliquote-deduzioni/",
+          "excerpt": "Come funzionano le imposte cantonali e comunali nel Cantone di San Gallo: aliquote, scaglioni, deduzioni ammesse e scadenze per la dichiarazione.",
+          "date": "2026-08-27T05:18:13.001Z"
         },
         {
           "title": "Aprire attività a San Gallo: tasse e procedure",
@@ -179,6 +179,12 @@
           "url": "/articoli-svizzera/comprare-casa-san-gallo-mutuo/",
           "excerpt": "Guida all'acquisto immobiliare in Svizzera: mutuo ipotecario, fondi propri, imposta sui trapassi e procedure step-by-step per chi compra nel Canton San Gallo.",
           "date": "2026-09-04T05:24:58.077Z"
+        },
+        {
+          "title": "Violenza domestica: a San Gallo la prevenzione passa dal dialogo",
+          "url": "/articoli-frontaliere/prevenzione-violenza-domestica-san-gallo-2026/",
+          "excerpt": "A San Gallo, la polizia intercetta potenziali autori di violenza domestica e li coinvolge in colloqui preventivi con un tasso di successo del 90%.",
+          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "links": [
@@ -207,7 +213,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SG",
@@ -336,16 +342,16 @@
           "date": "2026-10-01T03:25:07.406Z"
         },
         {
-          "title": "St. Gallen taxes: rates, brackets and deductions",
-          "url": "/en/swiss-articles/cantonal-taxes-st-gallen-rates-deductions/",
-          "excerpt": "How cantonal and municipal taxes work in the Canton of St. Gallen: rates, brackets, allowable deductions and deadlines for filing.",
-          "date": "2026-08-27T05:18:13.001Z"
-        },
-        {
           "title": "St Gallen Inheritance Tax: Rates and Exemptions",
           "url": "/en/swiss-articles/succession-tax-st-gallen-rates-exemptions/",
           "excerpt": "How inheritance and gift tax works in the Canton of St. Gallen: rates for degree of kinship, exemptions for spouse and descendants, declaration procedure and legal terms.",
           "date": "2026-08-30T16:16:46.912Z"
+        },
+        {
+          "title": "St. Gallen taxes: rates, brackets and deductions",
+          "url": "/en/swiss-articles/cantonal-taxes-st-gallen-rates-deductions/",
+          "excerpt": "How cantonal and municipal taxes work in the Canton of St. Gallen: rates, brackets, allowable deductions and deadlines for filing.",
+          "date": "2026-08-27T05:18:13.001Z"
         },
         {
           "title": "Opening a business in St. Gallen: taxes and procedures",
@@ -364,6 +370,12 @@
           "url": "/en/swiss-articles/buy-home-st-gallen-mortgage/",
           "excerpt": "Guide to buying real estate in Switzerland: mortgage, own funds, transfer tax and step-by-step procedures for buyers in the Canton of St. Gallen.",
           "date": "2026-09-04T05:24:58.077Z"
+        },
+        {
+          "title": "Domestic violence: prevention through dialogue in St. Gallen",
+          "url": "/en/cross-border-articles/domestic-violence-prevention-st-gallen-2026/",
+          "excerpt": "In St. Gallen, the police intercept potential domestic violence offenders and engage them in preventive talks with a 90% success rate.",
+          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "links": [
@@ -392,7 +404,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SG",
@@ -521,16 +533,16 @@
           "date": "2026-10-01T03:25:07.406Z"
         },
         {
-          "title": "Steuern St. Gallen: Steuersätze, Staffeln und Abzüge",
-          "url": "/de/schweiz-artikel/kantonale-steuern-st-gallen-satze-abzuege/",
-          "excerpt": "Wie die Kantons- und Gemeindesteuern im Kanton St. Gallen funktionieren: Sätze, Stufen, zulässige Abzüge und Fristen für die Deklaration.",
-          "date": "2026-08-27T05:18:13.001Z"
-        },
-        {
           "title": "Erbschaftssteuer St. Gallen: Steuersätze und Befreiungen",
           "url": "/de/schweiz-artikel/erbschaftsteuer-st-gallen-saetze-befreiungen/",
           "excerpt": "Wie funktioniert die Erbschafts- und Schenkungssteuer im Kanton St. Gallen: Sätze pro Verwandtschaftsgrad, Befreiungen für Ehegatten und Nachkommen, Meldeverfahren und gesetzliche Fristen.",
           "date": "2026-08-30T16:16:46.912Z"
+        },
+        {
+          "title": "Steuern St. Gallen: Steuersätze, Staffeln und Abzüge",
+          "url": "/de/schweiz-artikel/kantonale-steuern-st-gallen-satze-abzuege/",
+          "excerpt": "Wie die Kantons- und Gemeindesteuern im Kanton St. Gallen funktionieren: Sätze, Stufen, zulässige Abzüge und Fristen für die Deklaration.",
+          "date": "2026-08-27T05:18:13.001Z"
         },
         {
           "title": "Geschäft in St. Gallen eröffnen: Gebühren und Verfahren",
@@ -549,6 +561,12 @@
           "url": "/de/schweiz-artikel/haus-kaufen-sankt-gallen-hypothek/",
           "excerpt": "Leitfaden zum Immobilienkauf in der Schweiz: Hypothekendarlehen, Eigenmittel, Abgeltungssteuer und Schritt-für-Schritt-Verfahren für Käufer im Kanton St. Gallen.",
           "date": "2026-09-04T05:24:58.077Z"
+        },
+        {
+          "title": "Haushaltsgewalt: In St. Gallen geht die Prävention über Dialog",
+          "url": "/de/grenzgaenger-artikel/gewaltpraevention-st-gallen-2026/",
+          "excerpt": "In St. Gallen schaltet die Polizei potenzielle Täter von Haushaltsgewalt und bindet sie in präventive Gespräche ein, mit einer Erfolgsquote von 90%.",
+          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "links": [
@@ -577,7 +595,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SG",
@@ -706,16 +724,16 @@
           "date": "2026-10-01T03:25:07.406Z"
         },
         {
-          "title": "Impôts Saint-Gall : taux, échelonnements et déductions",
-          "url": "/fr/articles-suisse/impots-cantonaux-saint-gall-taux-deductions/",
-          "excerpt": "Comment fonctionnent les impôts cantonaux et communaux dans le canton de Saint-Gall : taux, tranches, déductions admises et délais de déclaration.",
-          "date": "2026-08-27T05:18:13.001Z"
-        },
-        {
           "title": "Impôt succession Saint-Gall : taux et exonérations",
           "url": "/fr/articles-suisse/impot-succession-saint-gall-tarifs-exemptions/",
           "excerpt": "Comment fonctionne l'impôt sur les successions et les donations dans le canton de Saint-Gall : taux par degré de parenté, exonérations pour conjoint et descendants, procédure de déclaration et délais légaux.",
           "date": "2026-08-30T16:16:46.912Z"
+        },
+        {
+          "title": "Impôts Saint-Gall : taux, échelonnements et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-saint-gall-taux-deductions/",
+          "excerpt": "Comment fonctionnent les impôts cantonaux et communaux dans le canton de Saint-Gall : taux, tranches, déductions admises et délais de déclaration.",
+          "date": "2026-08-27T05:18:13.001Z"
         },
         {
           "title": "Ouvrir une entreprise à Saint-Gall : taxes et procédures",
@@ -734,6 +752,12 @@
           "url": "/fr/articles-suisse/acheter-maison-saint-gall-hypotheque/",
           "excerpt": "Guide d'achat immobilier en Suisse : hypothèque, fonds propres, taxe de passage et procédures étape par étape pour ceux qui achètent dans le canton de Saint-Gall.",
           "date": "2026-09-04T05:24:58.077Z"
+        },
+        {
+          "title": "Violence domestique : à Saint-Gall, la prévention passe par le dialogue",
+          "url": "/fr/articles-frontalier/prevention-violence-domestique-saint-gall-2026/",
+          "excerpt": "À Saint-Gall, la police intercepte les auteurs potentiels de violence domestique et les implique dans des entretiens préventifs avec un taux de réussite de 90%.",
+          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "links": [
@@ -762,7 +786,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -30,6 +30,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.sala-risveglio-bellinzona.title': 'Blocco operatorio san giovanni a Bellinzona',
     'blog.article.sala-risveglio-bellinzona.excerpt': 'Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi',
     'blog.article.sala-risveglio-bellinzona.imageAlt': 'Sala risveglio del blocco operatorio dell\'Ospedale San Giovanni a Bellinzona',
+    'blog.article.commissione-scuola-ticino.title': 'Scuola media, audizione in Ticino sui corsi attitudinali',
+    'blog.article.commissione-scuola-ticino.excerpt': 'Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull\'iniziativa IP158 Prossima riunione: 19',
+    'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzona, riunione su corsi e iniziative della scuola media',
 };
 
 export default blogMetaCantonTiIt;

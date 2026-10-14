@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "49a08ca26f2176b39799e24078425071cee72e5b6527a0ac3ee4afe433322916",
+  "updatedAt": "2026-10-14T08:24:32.182Z",
+  "contentHash": "b2bff6116a13afe454940c508ff7e943571ca4390cf35ad48cc4f3c840c57c34",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -64,6 +64,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
+          "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
+          "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
           "title": "Patente di guida nel Canton Neuchâtel: conversione ed esami",
           "url": "/articoli-svizzera/patente-guida-neuchatel-conversione-ed-esami/",
           "excerpt": "Scopri come convertire la tua patente estera e sostenere gli esami nel Canton Neuchâtel.",
@@ -108,7 +114,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "en": {
       "canton": "NE",
@@ -155,6 +161,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "New asylum reception centre in Couvet: the project starts",
+          "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
+          "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
           "title": "Driver's license in the canton of Neuchâtel: conversion and exams",
           "url": "/en/swiss-articles/driving-license-neuchatel-conversion-and-exams/",
           "excerpt": "Learn how to convert your foreign license and take exams in the Canton of Neuchâtel.",
@@ -195,7 +207,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "de": {
       "canton": "NE",
@@ -242,6 +254,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
+          "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
+          "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
           "title": "Führerschein im Kanton Neuenburg: Umschulung und Prüfungen",
           "url": "/de/schweiz-artikel/fuhrerschein-neuenburg-umwandlung-und-pruefungen/",
           "excerpt": "Erfahren Sie, wie Sie Ihren ausländischen Führerschein umtauschen und Prüfungen im Kanton Neuenburg ablegen können.",
@@ -282,7 +300,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "fr": {
       "canton": "NE",
@@ -329,6 +347,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
+          "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
+          "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
+        {
           "title": "Permis de conduire dans le canton de Neuchâtel : conversion et examens",
           "url": "/fr/articles-suisse/permis-de-conduire-neuchatel-conversion-et-examens/",
           "excerpt": "Découvrez comment convertir votre permis étranger et passer les examens dans le canton de Neuchâtel.",
@@ -365,7 +389,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     }
   }
 }

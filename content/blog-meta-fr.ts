@@ -13151,6 +13151,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incidente-varesina-venegono.title': 'Carambolage sur la Varesina : quatre blessés à Venegono',
     'blog.article.incidente-varesina-venegono.excerpt': 'Accident à 7 h sur la Sp 233 à Venegono Inferiore Quatre voitures impliquées et quatre personnes blessées Deux ambulances, un véhicule médicalisé, les sapeurs-pompiers et les carabiniers',
     'blog.article.incidente-varesina-venegono.imageAlt': 'Circulation bloquée sur la Varesina après un accident à Venegono Inferiore',
+    'blog.article.arresti-truffa-chiamate-ticino.title': 'Escroquerie appel choc : trois arrestations dans le canton du Tessin',
+    'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'Un réseau d\'escrocs spécialisés dans les soi-disant chocs a été démantelé dans le canton du Tessin : trois personnes ont été arrêtées.',
+    'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'Vue de Lugano avec un smartphone au premier plan',
 };
 
 export default blogMetaFr;

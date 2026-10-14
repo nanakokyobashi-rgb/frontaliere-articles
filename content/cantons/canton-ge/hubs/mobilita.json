@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "67e285e4a56307e9063b474356461779c60e2822cea6c4755c2a9acfe068c8b5",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "b11bcd3c8eb8f61c36201c449e02b56d080d0ced5f55ba652102f0396d1f80de",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -209,10 +209,22 @@
           "date": "2026-10-10T20:45:24.102Z"
         },
         {
+          "title": "Ginevra chiede lo stop dei lavori per l'autostrada A412",
+          "url": "/articoli-ginevra/ginevra-stop-autostrada-a412/",
+          "excerpt": "La Ville de Genève chiede di fermare i lavori della A412 Sei comuni ginevrini aderiscono alla procedura La Cour d'appel de Lyon decide il 14 ottobre Nel mirino",
+          "date": "2026-10-08T15:48:49.584Z"
+        },
+        {
           "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
           "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
           "excerpt": "Tredici interruzioni sulla linea dall'inizio dell'anno Oltre 150’000 passeggeri e più di 700 treni ogni giorno Cavi incendiati, binari danneggiati e un volatile",
           "date": "2026-10-08T21:08:07.621Z"
+        },
+        {
+          "title": "Sistema scolastico nel Canton Ginevra: cicli, iscrizione e calendario",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-ginevra-iscrizione-cicli/",
+          "excerpt": "Come funziona la scuola dell'obbligo a Ginevra: cicli, età di iscrizione, lingue di insegnamento e passaggio alle medie superiori.",
+          "date": "2026-09-07T16:16:52.427Z"
         }
       ],
       "links": [
@@ -245,7 +257,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GE",
@@ -432,10 +444,22 @@
           "date": "2026-10-10T20:45:24.102Z"
         },
         {
+          "title": "Geneva calls for work on the A412 motorway to be halted",
+          "url": "/en/geneva-articles/geneva-stop-a412-highway/",
+          "excerpt": "The City of Geneva calls for work on the A412 to be halted Six Geneva municipalities join the proceedings The Lyon Court of Appeal will rule on October 14",
+          "date": "2026-10-08T15:48:49.584Z"
+        },
+        {
           "title": "Geneva–Fribourg, a railway route under pressure",
           "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
           "excerpt": "Thirteen disruptions on the line since the beginning of the year More than 150’000 passengers and over 700 trains every day Burnt cables, damaged tracks and a bird",
           "date": "2026-10-08T21:08:07.621Z"
+        },
+        {
+          "title": "School system in the Canton of Geneva: cycles, enrolment and calendar",
+          "url": "/en/swiss-articles/canton-geneva-school-system-enrollment-cycles/",
+          "excerpt": "How compulsory school works in Geneva: cycles, enrolment age, teaching languages and transition to high school.",
+          "date": "2026-09-07T16:16:52.427Z"
         }
       ],
       "links": [
@@ -468,7 +492,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GE",
@@ -655,10 +679,22 @@
           "date": "2026-10-10T20:45:24.102Z"
         },
         {
+          "title": "Genf fordert den Baustopp für die Autobahn A412",
+          "url": "/de/genf-artikel/genf-stopp-autobahn-a412/",
+          "excerpt": "Die Stadt Genf fordert, die Arbeiten an der A412 einzustellen Sechs Genfer Gemeinden schließen sich dem Verfahren an Das Berufungsgericht von Lyon entscheidet",
+          "date": "2026-10-08T15:48:49.584Z"
+        },
+        {
           "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
           "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
           "excerpt": "Dreizehn Unterbrechungen auf der Strecke seit Jahresbeginn Über 150’000 Fahrgäste und mehr als 700 Züge täglich Verbrannte Kabel, beschädigte Gleise und ein Vogel",
           "date": "2026-10-08T21:08:07.621Z"
+        },
+        {
+          "title": "Schulsystem im Kanton Genf: Zyklen, Einschreibung und Kalender",
+          "url": "/de/schweiz-artikel/kanton-genf-schulsystem-einschreibung-zyklen/",
+          "excerpt": "Wie funktioniert die obligatorische Schule in Genf: Zyklen, Einschreibungsalter, Unterrichtssprachen und Übergang in die Sekundarstufe II?",
+          "date": "2026-09-07T16:16:52.427Z"
         }
       ],
       "links": [
@@ -691,7 +727,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GE",
@@ -878,10 +914,22 @@
           "date": "2026-10-10T20:45:24.102Z"
         },
         {
+          "title": "Genève demande l'arrêt des travaux de l'autoroute A412",
+          "url": "/fr/articles-geneve/geneve-arret-travaux-a412/",
+          "excerpt": "La Ville de Genève demande l'arrêt des travaux de l'A412 Six communes genevoises adhèrent à la procédure La Cour d'appel de Lyon statue le 14 octobre",
+          "date": "2026-10-08T15:48:49.584Z"
+        },
+        {
           "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
           "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
           "excerpt": "Treize interruptions sur la ligne depuis le début de l’année Plus de 150’000 passagers et plus de 700 trains chaque jour Des câbles incendiés, des voies endommagées et un volatile",
           "date": "2026-10-08T21:08:07.621Z"
+        },
+        {
+          "title": "Système scolaire dans le canton de Genève : cycles, inscription et calendrier",
+          "url": "/fr/articles-suisse/canton-geneve-systeme-scolaire-inscription-cycles/",
+          "excerpt": "Comment fonctionne l'école obligatoire à Genève : cycles, âge d'inscription, langues d'enseignement et passage au lycée.",
+          "date": "2026-09-07T16:16:52.427Z"
         }
       ],
       "links": [
@@ -914,7 +962,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

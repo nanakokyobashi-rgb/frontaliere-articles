@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "8f912cf97fb9c0f2a170605b248b31f3f2dcd251523e3f0c9790e3839ed00702",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "a8f04fa8fe791b15a67c68aa80ab374b69a9a6341f95154de35580ff57f74e36",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -129,18 +129,6 @@
           "url": "/articoli-svizzera/imposte-cantonal-obvaldo-aliquote-deduzioni/",
           "excerpt": "Informazioni sulle imposte cantonali nel Cantone di Obvaldo, inclusi gli scaglioni, le deduzioni ammesse e le scadenze di consegna.",
           "date": "2026-08-16T15:56:46.963Z"
-        },
-        {
-          "title": "Premi LAMal Obvaldo: franchigie e riduzione",
-          "url": "/articoli-svizzera/franchigie-obvaldo-malattia-riduzione/",
-          "excerpt": "Franchigie obbligatorie, riduzioni di premio e sussidi cantonali per l'assicurazione malattia nel Cantone di Obvaldo. Procedura di richiesta e modelli assicurativi alternativi.",
-          "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Premi cassa malati nel Cantone di Obvaldo: riduzione e franchigie",
-          "url": "/articoli-svizzera/premi-cassa-malati-obvaldo-riduzione/",
-          "excerpt": "La legge cantonale sulle assicurazioni malattie nel Cantone di Obvaldo prevede fasce di età e franchigie per ridurre i premi.",
-          "date": "2026-08-16T14:15:52.976Z"
         }
       ],
       "links": [
@@ -165,7 +153,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "OW",
@@ -272,18 +260,6 @@
           "url": "/en/swiss-articles/cantonal-taxes-obwalden-rates-deductions/",
           "excerpt": "Information on cantonal taxes in the Canton of Obwalden, including the brackets, allowable deductions and delivery deadlines.",
           "date": "2026-08-16T15:56:46.963Z"
-        },
-        {
-          "title": "LAMal Obwalden premiums: deductibles and reduction",
-          "url": "/en/swiss-articles/obwalden-health-insurance-deductibles-subsidies/",
-          "excerpt": "Compulsory deductibles, premium reductions and cantonal health insurance benefits in the Canton of Obwalden. Application procedure and alternative insurance models.",
-          "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Sick pay premiums in the Canton of Obwalden: reduction and deductibles",
-          "url": "/en/swiss-articles/canton-obwalden-maladie-insurance-premiums-reduction/",
-          "excerpt": "The cantonal law on health insurance in the Canton of Obwalden provides for age groups and deductibles to reduce premiums.",
-          "date": "2026-08-16T14:15:52.976Z"
         }
       ],
       "links": [
@@ -308,7 +284,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "OW",
@@ -415,18 +391,6 @@
           "url": "/de/schweiz-artikel/kantonale-steuern-obwalden-satze-abzuge/",
           "excerpt": "Informationen zu den kantonalen Steuern im Kanton Obwalden inkl. Staffeln, zulässigen Abzügen und Lieferfristen.",
           "date": "2026-08-16T15:56:46.963Z"
-        },
-        {
-          "title": "KVG-Prämien Obwalden: Selbstbehalte und Kürzung",
-          "url": "/de/schweiz-artikel/obwalden-krankenversicherung-franchisen-reduktion/",
-          "excerpt": "Obligatorische Franchisen, Prämienverbilligungen und kantonale Krankenversicherungsbeiträge im Kanton Obwalden. Antragsverfahren und alternative Versicherungsmodelle.",
-          "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Krankenkassenprämien im Kanton Obwalden: Reduktion und Franchisen",
-          "url": "/de/schweiz-artikel/kanton-obwalden-krankenversicherung-pramien-reduktion/",
-          "excerpt": "Das kantonale Krankenversicherungsgesetz im Kanton Obwalden sieht Altersgruppen und Franchisen zur Prämienverbilligung vor.",
-          "date": "2026-08-16T14:15:52.976Z"
         }
       ],
       "links": [
@@ -451,7 +415,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "OW",
@@ -558,18 +522,6 @@
           "url": "/fr/articles-suisse/impots-cantonaux-obwald-taux-deductions/",
           "excerpt": "Informations sur les impôts cantonaux dans le canton d'Obwald, y compris les tranches, les déductions admises et les délais de livraison.",
           "date": "2026-08-16T15:56:46.963Z"
-        },
-        {
-          "title": "Primes LAMal Obwald : franchises et réduction",
-          "url": "/fr/articles-suisse/obwald-assurance-maladie-franchises-reduction/",
-          "excerpt": "Franchises obligatoires, réductions de primes et allocations cantonales pour l'assurance-maladie dans le canton d'Obwald. Procédure de demande et modèles d'assurance alternatifs.",
-          "date": "2026-08-23T05:27:44.369Z"
-        },
-        {
-          "title": "Primes caisse-maladie dans le canton d'Obwald : réduction et franchises",
-          "url": "/fr/articles-suisse/canton-obwald-assurance-maladie-primes-reduction/",
-          "excerpt": "La loi cantonale sur l'assurance-maladie dans le canton d'Obwald prévoit des tranches d'âge et des franchises pour réduire les primes.",
-          "date": "2026-08-16T14:15:52.976Z"
         }
       ],
       "links": [
@@ -594,7 +546,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

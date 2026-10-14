@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "424564fb6a088a9f6f86e1a5e775765494e5a0d80285755d9d6cd0e8c809d9c4",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "4eb0d8aa4ce5678fe0a6f3f9d803843cdd96e24fb93ef03027efa148167987c1",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,7 +98,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Siccità estrema: chiude la piscina comunale di Uzwil",
+          "url": "/articoli-svizzera/chiusura-piscina-uzwil-siccita/",
+          "excerpt": "La carenza d'acqua potabile in Svizzera orientale impone restrizioni: Uzwil chiude la piscina per risparmiare fino a 150'000 litri al giorno.",
+          "date": "2026-08-13T21:21:36.698Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton San Gallo",
@@ -109,7 +116,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SG",
@@ -195,7 +202,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Extreme drought: Uzwil municipal swimming pool closes",
+          "url": "/en/swiss-articles/uzwil-pool-closed-drought/",
+          "excerpt": "Potable water shortages in eastern Switzerland impose restrictions: Uzwil closes the pool to save up to 150,000 litres per day.",
+          "date": "2026-08-13T21:21:36.698Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of St. Gallen",
@@ -206,7 +220,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SG",
@@ -292,7 +306,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Extreme Trockenheit: Das städtische Schwimmbad in Uzwil wird geschlossen",
+          "url": "/de/schweiz-artikel/schwimmbad-uzwil-wegen-trockenheit-geschlossen/",
+          "excerpt": "Der Trinkwassermangel in der Ostschweiz schränkt ein: Uzwil schliesst den Pool, um bis zu 150'000 Liter pro Tag einzusparen.",
+          "date": "2026-08-13T21:21:36.698Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton St. Gallen",
@@ -303,7 +324,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SG",
@@ -389,7 +410,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Sécheresse extrême : fermeture de la piscine municipale d'Uzwil",
+          "url": "/fr/articles-suisse/piscine-uzwil-fermee-secheresse/",
+          "excerpt": "Le manque d'eau potable en Suisse orientale impose des restrictions : Uzwil ferme la piscine pour économiser jusqu'à 150'000 litres par jour.",
+          "date": "2026-08-13T21:21:36.698Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Saint-Gall",
@@ -400,7 +428,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

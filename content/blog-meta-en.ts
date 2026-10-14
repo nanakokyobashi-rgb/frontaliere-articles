@@ -13149,6 +13149,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incidente-varesina-venegono.title': 'Pile-up on the Varesina: four injured in Venegono',
     'blog.article.incidente-varesina-venegono.excerpt': 'Incident at 7 on the SP 233 in Venegono Inferiore Four cars involved and four people injured Two ambulances, a medical response car, firefighters and Carabinieri',
     'blog.article.incidente-varesina-venegono.imageAlt': 'Traffic halted on the Varesina road after a crash in Venegono Inferiore',
+    'blog.article.arresti-truffa-chiamate-ticino.title': 'Shock call scam: three arrests in Canton Ticino',
+    'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'A network of scammers specialising in so-called shock calls has been dismantled in Canton Ticino: three people have been arrested.',
+    'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'View of Lugano with a smartphone in the foreground',
 };
 
 export default blogMetaEn;
