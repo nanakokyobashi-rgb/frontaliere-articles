@@ -1118,17 +1118,16 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
   if (!item || !item.state) {
     return { handled: true, action: 'item-missing', itemId, reason: 'FU assente o privo di State nel bucket' };
   }
-
   // FIX_OUTCOME resta l'ultimo marker anche quando il bucket passa al FU
   // successivo. Un item terminale dimostra quindi che questo marker è già
   // stato consumato: non si deve riusare per riaccodare un altro item.
-  if (item.state === 'done' || item.state === 'blocked') {
+  if (item.state !== 'open' && item.state !== 'in-progress') {
     return {
       handled: true,
       action: 'outcome-consumed',
       itemId,
       state: item.state,
-      reason: 'esito già applicato a un FU terminale',
+      reason: 'l’item ha già uno stato terminale; il FIX_OUTCOME non va riapplicato',
     };
   }
 
@@ -2960,17 +2959,22 @@ export function isReparkableCandidate(iss) {
  * @param {{title?: string, labels?: Array<string|{name:string}>}} iss
  */
 export function isVerdictExitCandidate(iss) {
-  const isDaily = !!dailyBucketInfo(iss?.title || '');
-  const isDailyDeferred = isDaily && has(iss, LBL_AUTOMATION_DEFERRED);
-  const queueManaged = isQueueManaged(iss) || (isDailyDeferred && isQueueManaged({
-    ...iss,
-    labels: names(iss).filter((label) => label !== LBL_AUTOMATION_DEFERRED),
-  }));
-  if (!has(iss, LBL_PARKED) || !queueManaged) return false;
+  if (!has(iss, LBL_PARKED)) return false;
+  const dailyBucket = dailyBucketInfo(iss?.title || '');
+  const labels = names(iss);
+  const hasHumanDecision = labels.includes('needs-human');
+  const hasTechnicalDefer = labels.includes(LBL_AUTOMATION_DEFERRED);
+  const dailyDeferredQueueManaged = dailyBucket && hasTechnicalDefer && !hasHumanDecision
+    && classifyIssue(iss?.title, labels.filter((label) => label !== LBL_AUTOMATION_DEFERRED)).route === 'queue';
+  if (!isQueueManaged(iss) && !dailyDeferredQueueManaged) return false;
   if (hasActiveAgentClaim(iss) || has(iss, LBL_FIX)) return false;
-  if (has(iss, 'needs-human') || (has(iss, LBL_AUTOMATION_DEFERRED) && !isDaily)) return false;
+  if (hasHumanDecision) return false;
+  // `automation-deferred` on a daily bucket can describe only the current FU:
+  // let VERDICT-EXIT apply that item's outcome before its requeue clears the
+  // aggregate routing label. Non-daily issues keep the technical veto.
+  if (hasTechnicalDefer && !dailyBucket) return false;
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false;
-  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED) && !isDaily) return false;
+  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED) && !dailyBucket) return false;
   return !isPermanentTracker(iss);
 }
 /**

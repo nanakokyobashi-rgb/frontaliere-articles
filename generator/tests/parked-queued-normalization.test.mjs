@@ -83,11 +83,14 @@ test('#1997/#1495: i verdetti fermi nella coda in conflitto raggiungono VERDICT-
   assert.equal(isVerdictExitCandidate(queuedParked), true);
   assert.equal(isVerdictExitCandidate(alreadyFlagged), true);
   assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'maybe-resolved')), true);
-  assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'automation-deferred')), true);
+  assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'automation-deferred')), true,
+    'un defer tecnico sul bucket daily va consumato item per item');
   assert.equal(isVerdictExitCandidate({
     ...issue('follow-up', 'fu-parked', 'automation-deferred'),
-    title: 'follow-up(#12): item — owner/repo',
-  }), false);
+    title: 'follow-up',
+  }), false, 'il defer tecnico resta un veto per le issue non daily');
+  assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'automation-deferred', 'needs-human')), false,
+    'daily non deve scavalcare una decisione umana');
   assert.equal(isVerdictExitCandidate({
     ...issue('follow-up', 'fu-parked', 'maybe-resolved'),
     title: 'follow-up',
