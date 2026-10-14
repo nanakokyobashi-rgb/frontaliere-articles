@@ -14,8 +14,10 @@ import '../../host/cantonSectionsBootstrap.mjs';
  * elsewhere (publish-api.yml). Keeping this module free of `.ts` imports is
  * what lets a real behavioural test of the sitemap output run in that gate.
  *
- * The builder keeps the existing shape and arguments, with one publish-boundary
- * invariant: a reserved nullish slug is never emitted as a URL or alternate.
+ * The builder keeps the existing shape and arguments, with two publish-boundary
+ * invariants: a reserved nullish slug is never emitted as a URL or alternate;
+ * family sitemaps emit a `<loc>` for every available published locale, not just
+ * the Italian canonical.
  */
 
 import { isReservedPublishedSlug } from './published-slug-guard.mjs';
@@ -68,6 +70,25 @@ export function countSitemapEntries(entries, slugMap, shadowed = new Set()) {
 }
 
 /**
+ * Localized article URLs that the publisher can announce for one registry row.
+ * The Italian slug is mandatory because the registry is Italian-canonical; a
+ * missing translation simply has no published URL (and therefore no alternate)
+ * instead of becoming a guessed or potentially 404 path.
+ */
+export function publishedArticleLocales(article, paths, slugMap, shadowed = new Set()) {
+  const italianSlug = slugMap?.[article.id]?.it;
+  if (!sitemapEntryIsEmitted(article, slugMap, shadowed) || shadowed.has(italianSlug)) return [];
+  return SITEMAP_LOCALES.flatMap((locale) => {
+    const slug = slugMap?.[article.id]?.[locale];
+    const prefix = paths?.[locale];
+    if (typeof prefix !== 'string' || !prefix || typeof slug !== 'string' || !slug.trim() || isReservedPublishedSlug(slug)) {
+      return [];
+    }
+    return [{ locale, prefix, slug }];
+  });
+}
+
+/**
  * @param entries article registry entries ({ id, image?, updatedAt?, date? }[])
  * @param section 'frontaliere' | 'svizzera'
  * @param slugMap id -> { it, en, de, fr } page slug
@@ -94,53 +115,51 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
 }
 
 /**
- * I blocchi `<url>` degli articoli di una sezione, uno per articolo con la loc
- * IT e gli alternate delle quattro locali. E' il corpo di `buildSitemap`
- * (stesso output byte per byte) separato perche' anche la sitemap di una
- * sezione di famiglia (`buildFamilySectionSitemap`) elenca i suoi articoli
- * con la stessa forma.
+ * I blocchi `<url>` degli articoli di una sezione. Per le sezioni storiche il
+ * blocco resta uno per articolo, con loc IT e alternate; per le sezioni di
+ * famiglia `emitLocalizedLocs` aggiunge una loc per ogni slug locale
+ * pubblicato. In entrambi i casi ogni blocco ripete lo stesso insieme coerente
+ * di alternate.
  *
  * @param {Record<string, string>} paths prefisso della sezione per locale (`/articoli-x/`)
+ * @param {{emitLocalizedLocs?: boolean}} [options]
  */
-export function buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed = new Set()) {
-  const sectionPath = paths.it;
+export function buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed = new Set(), { emitLocalizedLocs = false } = {}) {
   const urls = [];
   for (const a of entries) {
-    const slug = slugMap?.[a.id]?.it;
-    if (!sitemapEntryIsEmitted(a, slugMap, shadowed)) continue;
-    // A canonical-overridden ("shadowed") article points its canonical at a
-    // different winner URL, so listing it here — as <loc> OR as an hreflang
-    // alternate — contradicts the self-canonical gate the consumer enforces
-    // (tests/blog-slugs-sitemap-sync.test.ts, guarding against #3120).
-    if (shadowed.has(slug)) continue;
+    const localeRows = publishedArticleLocales(a, paths, slugMap, shadowed);
+    const locRows = emitLocalizedLocs ? localeRows : localeRows.filter(({ locale }) => locale === 'it');
+    if (locRows.length === 0) continue;
+    const italian = localeRows.find(({ locale }) => locale === 'it');
     const title = meta[`blog.article.${a.id}.title`];
     const alt = meta[`blog.article.${a.id}.imageAlt`];
     const lastmod = a.updatedAt || a.date || '';
     const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
-    const parts = [`  <url>`, `    <loc>${SITE}${sectionPath}${xmlEsc(slug)}/</loc>`];
-    if (img) {
-      parts.push(`    <image:image>`);
-      parts.push(`      <image:loc>${xmlEsc(img)}</image:loc>`);
-      if (title) parts.push(`      <image:title>${xmlEsc(title)}</image:title>`);
-      if (alt) parts.push(`      <image:caption>${xmlEsc(alt)}</image:caption>`);
-      parts.push(`    </image:image>`);
-    }
-    for (const loc of ['it', 'en', 'de', 'fr']) {
-      const s2 = slugMap?.[a.id]?.[loc];
-      if (s2 && !isReservedPublishedSlug(s2)) {
+    for (const { locale, prefix, slug } of locRows) {
+      const parts = [`  <url>`, `    <loc>${SITE}${prefix}${xmlEsc(slug)}/</loc>`];
+      // Keep the image once, on the Italian canonical, so localized locs do
+      // not multiply the same image entry while still carrying all article URLs.
+      if (locale === 'it' && img) {
+        parts.push(`    <image:image>`);
+        parts.push(`      <image:loc>${xmlEsc(img)}</image:loc>`);
+        if (title) parts.push(`      <image:title>${xmlEsc(title)}</image:title>`);
+        if (alt) parts.push(`      <image:caption>${xmlEsc(alt)}</image:caption>`);
+        parts.push(`    </image:image>`);
+      }
+      for (const alternate of localeRows) {
         parts.push(
-          `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${xmlEsc(s2)}/" />`,
+          `    <xhtml:link rel="alternate" hreflang="${alternate.locale}" href="${SITE}${alternate.prefix}${xmlEsc(alternate.slug)}/" />`,
         );
       }
+      parts.push(
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${italian.prefix}${xmlEsc(italian.slug)}/" />`,
+      );
+      if (lastmod) parts.push(`    <lastmod>${lastmod}</lastmod>`);
+      parts.push(`    <changefreq>monthly</changefreq>`);
+      parts.push(`    <priority>0.7</priority>`);
+      parts.push(`  </url>`);
+      urls.push(parts.join('\n'));
     }
-    parts.push(
-      `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${sectionPath}${xmlEsc(slug)}/" />`,
-    );
-    if (lastmod) parts.push(`    <lastmod>${lastmod}</lastmod>`);
-    parts.push(`    <changefreq>monthly</changefreq>`);
-    parts.push(`    <priority>0.7</priority>`);
-    parts.push(`  </url>`);
-    urls.push(parts.join('\n'));
   }
   return urls;
 }
@@ -219,10 +238,11 @@ export function archiveUnionSize(metaIt, slugMap) {
 
 /**
  * La sitemap di UNA sezione di famiglia (`sitemap-articles-<id>.xml`): le sue
- * pagine di sezione (una `<url>` per locale) e poi i suoi articoli (loc IT con
- * gli alternate, come `sitemap-blog.xml`). `articleCount` e' il numero di
- * articoli emessi, separato da `count` perche' i pavimenti si misurano sugli
- * articoli: contare anche landing e hub li renderebbe sempre soddisfatti.
+ * pagine di sezione (una `<url>` per locale) e poi gli articoli (una loc per
+ * ogni locale pubblicato, con gli alternate coerenti). `articleCount` e' il
+ * numero di articoli, non il numero di URL localizzati, separato da `count`
+ * perche' i pavimenti si misurano sugli articoli: contare anche landing e hub
+ * li renderebbe sempre soddisfatti.
  * `retiredPaths` sono i path che il registro della sezione dichiara `gone` o
  * `redirects`: una pagina di sezione con UNA variante locale ritirata esce
  * intera (le sue `<url>` si citano a vicenda come alternate).
@@ -231,7 +251,16 @@ export function archiveUnionSize(metaIt, slugMap) {
  */
 export function buildFamilySectionSitemap({ section, entries, slugMap, meta, pageSize, shadowed = new Set(), retiredPaths = new Set() }) {
   const paths = sectionPathsOf(section);
-  const articleUrls = buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed);
+  const articleUrls = buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed, { emitLocalizedLocs: true });
+  const articleLocaleCounts = Object.fromEntries(
+    SITEMAP_LOCALES.map((locale) => [
+      locale,
+      (entries ?? []).reduce(
+        (count, article) => count + publishedArticleLocales(article, paths, slugMap, shadowed).filter((row) => row.locale === locale).length,
+        0,
+      ),
+    ]),
+  );
   const pageUrls = [];
   for (const page of familySectionPages(section, archiveUnionSize(meta, slugMap), pageSize)) {
     if (SITEMAP_LOCALES.some((loc) => retiredPaths.has(page.paths[loc]))) continue;
@@ -259,7 +288,9 @@ export function buildFamilySectionSitemap({ section, entries, slugMap, meta, pag
       urls.join('\n') +
       `\n</urlset>\n`,
     count: urls.length,
-    articleCount: articleUrls.length,
+    articleCount: countSitemapEntries(entries, slugMap, shadowed),
+    articleUrlCount: articleUrls.length,
+    articleLocaleCounts,
     pageCount: pageUrls.length,
   };
 }

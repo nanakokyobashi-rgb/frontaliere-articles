@@ -328,15 +328,18 @@ test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, artic
   ];
   const slugMap = Object.fromEntries(entries.map(({ id }) => [id, { it: `${id}-it`, en: `${id}-en`, de: `${id}-de`, fr: `${id}-fr` }]));
   const built = buildFamilySectionSitemap({ section: 'canton-ti', entries, slugMap, meta: {}, pageSize: 2 });
-  // (landing + 6 hub + 2 pagine d'archivio) x 4 locali + 3 articoli.
+  // (landing + 6 hub + 2 pagine d'archivio) x 4 locali + 3 articoli x 4 locali.
   assert.equal(built.pageCount, (1 + 6 + 2) * 4);
   assert.equal(built.articleCount, 3);
-  assert.equal(built.count, built.pageCount + 3);
+  assert.equal(built.articleUrlCount, 3 * 4);
+  assert.deepEqual(built.articleLocaleCounts, { it: 3, en: 3, de: 3, fr: 3 });
+  assert.equal(built.count, built.pageCount + 3 * 4);
   assert.equal(countXmlTags(built.xml, 'url'), built.count);
   for (const loc of [
     '/articoli-ticino/', '/en/ticino-articles/', '/articoli-ticino/carburanti/', '/en/ticino-articles/fuel/',
     '/de/tessin-artikel/dienstleistungen/', '/fr/articles-tessin/fiscalite/', '/articoli-ticino/tutti/',
-    '/articoli-ticino/tutti/page-2/', '/de/tessin-artikel/alle/page-2/', '/articoli-ticino/a-it/',
+    '/articoli-ticino/tutti/page-2/', '/de/tessin-artikel/alle/page-2/',
+    '/articoli-ticino/a-it/', '/en/ticino-articles/a-en/', '/de/tessin-artikel/a-de/', '/fr/articles-tessin/a-fr/',
   ]) {
     assert.ok(built.xml.includes(`<loc>https://frontaliereticino.ch${loc}</loc>`), loc);
   }
@@ -344,7 +347,17 @@ test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, artic
   assert.ok(!/noindex/.test(built.xml));
   // Gli articoli hanno la stessa forma della sitemap blog.
   const blocks = buildArticleUrlBlocks(entries, { it: '/articoli-ticino/', en: '/en/ticino-articles/', de: '/de/tessin-artikel/', fr: '/fr/articles-tessin/' }, slugMap, {});
-  assert.ok(built.xml.includes(blocks.join('\n')));
+  assert.ok(blocks.every((block) => built.xml.includes(block)));
+  // Ogni locale pubblicata e' una loc propria e ripete lo stesso set di
+  // alternate; una regressione che torni alle sole alternate IT deve fallire.
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const slug = `a-${locale}`;
+    const block = built.xml.match(new RegExp(`<url>[\\s\\S]*?<loc>https://frontaliereticino\\.ch/[^<]+/${slug}/</loc>[\\s\\S]*?</url>`))?.[0];
+    assert.ok(block, `manca la loc ${locale} dell'articolo a`);
+    for (const alternate of ['it', 'en', 'de', 'fr', 'x-default']) {
+      assert.match(block, new RegExp(`hreflang="${alternate}"`), `${locale}: alternate ${alternate}`);
+    }
+  }
   // Una pagina di sezione ritirata dal registro in una locale esce in tutte e quattro.
   const cut = buildFamilySectionSitemap({ section: 'canton-ti', entries, slugMap, meta: {}, pageSize: 2,
     retiredPaths: new Set(['/en/ticino-articles/fuel/']) });
@@ -1114,6 +1127,23 @@ test('sitemap di sezione: le pagine d\'archivio si contano sull\'unione del rend
   });
   assert.equal(built.articleCount, 1);
   assert.ok(built.xml.includes('<loc>https://frontaliereticino.ch/articoli-ticino/tutti/page-2/</loc>'));
+});
+
+test('sitemap cantonale: una traduzione assente non diventa una loc o un alternate 404', () => {
+  const built = buildFamilySectionSitemap({
+    section: 'canton-ti',
+    entries: [{ id: 'a', date: '2026-10-01' }],
+    slugMap: { a: { it: 'a-it', en: 'a-en', de: 'a-de' } },
+    meta: {},
+    pageSize: 24,
+  });
+  assert.equal(built.articleCount, 1);
+  assert.equal(built.articleUrlCount, 3);
+  assert.deepEqual(built.articleLocaleCounts, { it: 1, en: 1, de: 1, fr: 0 });
+  assert.doesNotMatch(built.xml, /\/fr\/articles-tessin\/a-fr\//);
+  const articleBlocks = [...built.xml.matchAll(/<url>[\s\S]*?<loc>https:\/\/frontaliereticino\.ch\/[^<]+\/a-(?:it|en|de)\/</g)].map(([match]) => match);
+  assert.equal(articleBlocks.length, 3);
+  assert.doesNotMatch(built.xml, /hreflang="fr" href="https:\/\/frontaliereticino\.ch\/fr\/articles-tessin\/a-fr\//);
 });
 
 test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non il parser del feed', () => {
