@@ -13,6 +13,7 @@
  *   - una testata ticinese supplementare non e' piu' fra le NEWS_SOURCES;
  *   - la riga `canton:` del registry non si scrive/rilegge in modo idempotente,
  *     o `canton` entra nell'API pubblica;
+ *   - i due falsi positivi source-backed della review P6a tornano nel registry;
  *   - `create-article.mjs` smette di popolare `canton` prima del lock.
  */
 import { test, describe } from 'node:test';
@@ -159,11 +160,64 @@ describe('omonimi e falsi amici', () => {
     const c = defaultCantonClassifier();
     assert.deepEqual(c.mentionsIn('Il Lugano batte il San Gallo 2-1.').map((m) => m.group), []);
     assert.deepEqual(c.mentionsIn('Filippo, un ticinese alla guida del festival.').map((m) => m.group), []);
+    assert.equal(c.mentionsIn('Atletica ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
+    assert.equal(c.mentionsIn('Target ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
+    assert.equal(c.mentionsIn('Atleti ticinesi in gara.').find((m) => m.group === 'TI')?.who, true);
+    for (const text of [
+      'Dei ticinesi bloccati all\'estero.',
+      'Agli ticinesi serve assistenza.',
+      'Decine di ticinesi attendono il rimpatrio.',
+      'Studentesse ticinesi in gara.',
+      'Giocatrici ticinesi in campo.',
+      'Lavoratrici ticinesi in sciopero.',
+      'Sei ticinesi feriti.',
+      'Sette ticinesi feriti.',
+      'Otto ticinesi feriti.',
+      'Nove ticinesi feriti.',
+      'Qualche ticinese ferito.',
+      'Numerose ticinesi ferite.',
+      'Varie ticinesi ferite.',
+      '68enne ticinese ferito.',
+      'Quarantenne ticinese soccorso.',
+      'Studentesse ticinesi in gara.',
+      'Giocatrici ticinesi in finale.',
+      'Lavoratrici ticinesi in sciopero.',
+      'Dipendenti ticinesi chiedono un aumento.',
+      'Sei ticinesi bloccati all\'estero.',
+      'Sette ticinesi rientrano.',
+      'Otto ticinesi sono stati soccorsi.',
+      'Nove ticinesi attendono assistenza.',
+      'Qualche ticinese attende aiuto.',
+      'Numerose ticinesi rientrano.',
+      'Varie ticinesi sono state soccorse.',
+      'Ventiduenne ticinese ferita.',
+      'Quarantaduenne ticinese soccorsa.',
+      'Ventiduenne ticinese ferito.',
+      'Quarantaduenne ticinese ferita.',
+    ]) {
+      assert.equal(c.mentionsIn(text).find((m) => m.group === 'TI')?.who, true, text);
+    }
     assert.deepEqual(
       [...new Set(c.mentionsIn('Pfäffikon (Kanton Schwyz): tre arresti.').map((m) => m.group))],
       ['SZ'],
     );
     assert.equal(isInCantonArea('UR', 'Uri Geller arriva a Milano.'), false);
+  });
+
+  test('le eta composte riconoscono anche diciassettenne e diciassettenni', () => {
+    const c = defaultCantonClassifier();
+    for (const text of [
+      'Diciassettenne ticinese ferito.',
+      'Diciassettenni ticinesi soccorsi.',
+    ]) {
+      assert.equal(c.mentionsIn(text).find((m) => m.group === 'TI')?.who, true, text);
+    }
+    for (const title of [
+      'Diciassettenne ticinese ferito',
+      'Diciassettenni ticinesi soccorsi',
+    ]) {
+      assert.deepEqual(codes({ title, excerpt: title, body: '' }), [], title);
+    }
   });
 });
 
@@ -205,6 +259,86 @@ describe('regole di assegnazione', () => {
       excerpt: 'Guida per chi vive a Porlezza.',
       body: 'Il Ticino offre salari alti. A Lugano. Il Ticino. Il Ticino.',
     }), ['TI']);
+  });
+
+  test('un demonimo nel titolo dice chi, non dove: serve un luogo dello stesso cantone', () => {
+    assert.deepEqual(codes({
+      title: 'Turisti ticinesi bloccati in Medio Oriente',
+      excerpt: 'Circa 400 turisti svizzeri bloccati senza comunicazioni.',
+      body: 'Turisti ticinesi bloccati negli Emirati. I ticinesi chiedono aiuto. Altri ticinesi in attesa.',
+    }), []);
+    for (const title of [
+      'Studentesse ticinesi in gara',
+      'Giocatrici ticinesi in finale',
+      'Lavoratrici ticinesi in sciopero',
+      'Dipendenti ticinesi chiedono un aumento',
+      'Sei ticinesi bloccati in Medio Oriente',
+      'Qualche ticinese attende aiuto',
+      'Numerose ticinesi rientrano',
+      'Varie ticinesi sono state soccorse',
+      'Ventiduenne ticinese ferita',
+      'Quarantaduenne ticinese soccorsa',
+    ]) {
+      assert.deepEqual(codes({ title, excerpt: title, body: '' }), [], title);
+    }
+    assert.deepEqual(codes({
+      title: 'Ristoratore ticinese sorprende ladro',
+      excerpt: 'Furto in un ristorante di Mendrisio.',
+      body: 'A Mendrisio un ristoratore ha sorpreso un ladro. Il ticinese ha chiamato la polizia.',
+    }), ['TI']);
+    assert.deepEqual(codes({
+      title: 'Gruppo di ticinesi bloccato in Medio Oriente',
+      excerpt: 'La comitiva attende assistenza consolare.',
+      sourceUrl: 'https://www.tio.ch/estero/cronaca/123456/gruppo-bloccato',
+      body: 'Il gruppo di ticinesi attende un volo. I ticinesi chiedono aiuto.',
+    }), []);
+    assert.deepEqual(codes({
+      title: 'Un paio di ticinesi bloccati in Medio Oriente',
+      excerpt: 'Un paio di ticinesi attendono assistenza consolare.',
+      body: 'I due cittadini aspettano di rientrare.',
+    }), []);
+  });
+
+  test('il cantone come destinatario non e\' il luogo della notizia, neppure nel titolo', () => {
+    assert.deepEqual(codes({
+      title: 'Uzbekistan, oro e gas al centro del mondo: implicazioni per il Ticino',
+      excerpt: 'Come l\'apertura economica dell\'Uzbekistan influisce sul Ticino e i frontalieri.',
+      body: 'Tashkent cresce. Cosa significa per il Ticino? Lugano e Bellinzona osservano. Ticino.',
+    }), []);
+    const classifier = defaultCantonClassifier();
+    assert.deepEqual(classifier.mentionsIn('Benzinai esauriti, cosa cambia per chi lavora in Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('L\'impatto sul Ticino della riforma').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per il Canton Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per il Cantone di Ginevra').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per il Cantone dei Grigioni').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Cosa Cambia per Il Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per il Ticino e i Grigioni').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per il Canton San Gallo, Basilea Campagna e il Vallese').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per l’Appenzello').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Impatto sull’Appenzello').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per gli abitanti del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per la popolazione del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Impatto sul mercato del Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Impatto sul lavoro in Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Cosa cambia per il lavoro in Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
+    // Un fatto in Ticino resta in Ticino.
+    assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Cosa cambia in Ticino dal 2026').map((m) => m.group), ['TI']);
+  });
+
+  test('cornice e portata nazionale anche con la maiuscola a inizio frase', () => {
+    assert.deepEqual(codes({
+      title: 'Precompilata 2026: la guida',
+      excerpt: 'Frontalieri che lavorano in Ticino: cosa sapere. Lugano.',
+      body: 'Frontalieri del Ticino. Lavoratori frontalieri in Ticino. A Lugano lo sportello.',
+    }), []);
+    assert.deepEqual(codes({
+      title: 'Estate torrida, produttivita\' in calo',
+      excerpt: 'Tutti i cantoni colpiti, Birsfelden in testa.',
+      body: 'Svizzeri al caldo. A Birsfelden, nel canton Basilea Campagna, il picco. A Birsfelden.',
+    }), []);
   });
 
   test('excerpt con un solo cantone e prove nel corpo: assegnato', () => {
@@ -314,6 +448,12 @@ describe('dati', () => {
 });
 
 describe('campo canton nel registry', () => {
+  test('i falsi positivi source-backed della review P6a restano senza cantone', () => {
+    const registry = readRegistryCantons(fs.readFileSync(path.join(ROOT, 'content/blog-articles-data.ts'), 'utf8'));
+    assert.equal(registry.has('turisti-ticinesi-bloccati-medio-oriente'), false);
+    assert.equal(registry.has('uzbekistan-oro-gas-ticino-implicazioni'), false);
+  });
+
   const ENTRY = [
     '  {',
     "    id: 'a',",

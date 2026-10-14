@@ -306,13 +306,65 @@ const EXCLUDED_PHRASES = [
  */
 const FRAMING_CANTONS = '(?:Ticino|Grigioni|Vallese|Svizzera)';
 const FRAMING_PHRASES = [
-  new RegExp(`\\b(?:frontalier[ei]|pendolar[ei]|lavorator[ei]|dipendent[ei]|residenti)['"»]?\\s+(?:[\\p{L}']+\\s+){0,3}(?:in|del|dal|nel|dei|verso\\s+il|per\\s+il)\\s+${FRAMING_CANTONS}\\b`, 'gu'),
-  new RegExp(`\\b(?:lavor[\\p{L}]*|impieg[\\p{L}]*|occupat[\\p{L}]*|assunt[\\p{L}]*|frontalier[\\p{L}]*)\\s+(?:[\\p{L}']+\\s+){0,2}in\\s+${FRAMING_CANTONS}\\b`, 'gu'),
-  /\b(?:frontalier[ei]|frontiera)\s+ticines[ei]\b/gu,
-  /\bin\s+Ticino\s+e\s+in\s+Svizzera\b|\bin\s+Svizzera\s+e\s+in\s+Ticino\b/gu,
-  /\bfrontalier[ei]\s+Ticino\b/gu,
-  /\b(?:(?:per|al|nel|del)\s+)?(?:il\s+)?Ticino\s+e\s+(?:per\s+)?(?:i\s+)?frontalier[ei]\b/gu,
-  /\bpendolar[\p{L}]*\s+(?:[\p{L}']+\s+){0,2}(?:in|verso|per)\s+(?:il\s+)?Ticino\b/gu,
+  new RegExp(`\\b(?:frontalier[ei]|pendolar[ei]|lavorator[ei]|dipendent[ei]|residenti)['"»]?\\s+(?:[\\p{L}']+\\s+){0,3}(?:in|del|dal|nel|dei|verso\\s+il|per\\s+il)\\s+${FRAMING_CANTONS}\\b`, 'giu'),
+  new RegExp(`\\b(?:lavor[\\p{L}]*|impieg[\\p{L}]*|occupat[\\p{L}]*|assunt[\\p{L}]*|frontalier[\\p{L}]*)\\s+(?:[\\p{L}']+\\s+){0,2}in\\s+${FRAMING_CANTONS}\\b`, 'giu'),
+  /\b(?:frontalier[ei]|frontiera)\s+ticines[ei]\b/giu,
+  /\bin\s+Ticino\s+e\s+in\s+Svizzera\b|\bin\s+Svizzera\s+e\s+in\s+Ticino\b/giu,
+  /\bfrontalier[ei]\s+Ticino\b/giu,
+  /\b(?:(?:per|al|nel|del)\s+)?(?:il\s+)?Ticino\s+e\s+(?:per\s+)?(?:i\s+)?frontalier[ei]\b/giu,
+  /\bpendolar[\p{L}]*\s+(?:[\p{L}']+\s+){0,2}(?:in|verso|per)\s+(?:il\s+)?Ticino\b/giu,
+];
+
+/**
+ * Il cantone come DESTINATARIO, non come luogo: «implicazioni per il Ticino»,
+ * «cosa cambia per chi lavora in Ticino», «l'impatto sul Ticino». Un pezzo
+ * sull'Uzbekistan o sui benzinai lombardi resta tale anche se il titolo lo
+ * chiude cosi'. Cancellate da tutti i campi, titolo compreso. Solo la prima
+ * lettera delle parole chiave e' indifferente alle maiuscole: i nomi dopo la
+ * preposizione devono restare maiuscoli (toponimi), anche quando sono
+ * composti o in una lista coordinata.
+ */
+const caseInitial = (word) => `[${word[0].toUpperCase()}${word[0]}]${word.slice(1)}`;
+const AUDIENCE_HEADS = ['implicazion[ei]', 'impatt[oi]', 'effett[oi]', 'conseguenz[ae]', 'ricadut[ae]',
+  'riflessi', 'influisc\\p{L}*', 'influenz\\p{L}*'];
+const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui', 'sugli', 'sulle'].map(caseInitial).join('|')}|${caseInitial('sull')}['’]|${caseInitial('anche')}\\s+${caseInitial('per')})`;
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
+}
+
+// Il destinatario puo' contenere una testa esplicitamente personale («gli
+// abitanti del Ticino»), ma non un nome settoriale («il lavoro in Ticino»).
+// Il termine finale deve inoltre essere un cantone noto: maiuscole arbitrarie
+// oscurerebbero anche comuni reali come «Lugano».
+const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ names = [], guarded = [] }) => [
+  ...names,
+  ...guarded,
+].map((name) => foldKeepCase(name))))]
+  .sort((a, b) => b.length - a.length)
+  .map(escapeRegExp)
+  .join('|');
+const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}|${caseInitial('l')}['’]?\\s*)?`;
+const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
+// Solo teste che nominano esplicitamente i destinatari: «gli abitanti del
+// Ticino», non «il mercato del Ticino» o «il lavoro in Ticino».
+const AUDIENCE_RECIPIENT_HEADS = [
+  'chi', 'abitant[ei]', 'popolazion[ei]', 'resident[ei]', 'cittadin[aoei]',
+  'lavorator[ei]', 'lavoratric[ei]', 'dipendent[ei]', 'frontalier[ei]', 'pendolar[ei]',
+  'famigli[ae]', 'person[ae]', 'student[ei]', 'studentess[ae]', 'pensionat[oi]',
+  'elettor[ei]', 'consumator[ei]', 'contribuent[ei]', 'aziend[ae]', 'imprese',
+];
+const AUDIENCE_RECIPIENT_HEAD = `(?:${AUDIENCE_RECIPIENT_HEADS.map(caseInitial).join('|')})`;
+const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'-]*){0,2}\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
+const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
+const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
+const AUDIENCE_TARGET = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
+const AUDIENCE_RES = [
+  // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
+  // maltempo in Ticino», che e' un fatto in Ticino.
+  new RegExp(`\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+(?:[\\p{L}']+\\s+){0,3}?${AUDIENCE_LINK}${AUDIENCE_TARGET}`, 'gu'),
+  // «cosa cambia per chi lavora in Ticino», «cosa significa per il Ticino»:
+  // serve il «per» del destinatario, non «cosa cambia in Ticino dal 2026».
+  new RegExp(`\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}${AUDIENCE_TARGET}`, 'gu'),
 ];
 
 /**
@@ -332,22 +384,51 @@ const PLACE_COMPLEMENT_LINKS = new Set(['di', 'd', 'sul', 'sulla']);
 const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
 
 /**
+ * Demonimo riferito a PERSONE o alla PROVENIENZA di una cosa: dopo un
+ * articolo/determinante articolato o un numero («i ticinesi», «agli ticinesi»,
+ * «due ticinesi»), dopo una quantita' collegata da «di» («decine di
+ * ticinesi»), dopo un sostantivo di persona o di veicolo («turisti ticinesi»,
+ * «frontalieri ticinesi», «auto ticinese»), o in apertura di frase («Ginevrino
+ * in isolamento»). Dice chi o da dove, non dove: conta per il punteggio, ma da
+ * solo non mette il cantone nel titolo. Resta luogo come aggettivo di
+ * un'istituzione o di un settore («economia ticinese», «Banca cantonale
+ * grigionese», «hockey ticinese»).
+ */
+const PERSON_LEAD_WORDS = new Set([
+  'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'sei', 'sette', 'otto', 'nove', 'dieci',
+  'cento', 'mille', 'molti', 'molte', 'tanti', 'tante', 'alcuni', 'alcune', 'tutti', 'tutte', 'altri', 'altre',
+  'diversi', 'diverse', 'numerosi', 'numerose', 'vari', 'varie', 'qualche', 'parecchi', 'parecchie', 'pochi',
+  'poche', 'migliaia', 'centinaia', 'decine',
+  'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'del', 'dello', 'della', 'dei', 'degli', 'delle',
+  'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
+  'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'col', 'colla', 'coi', 'cogli', 'colle',
+  'all', 'dall', 'nell', 'sull', 'coll',
+]);
+/** Forme lessicali complete: evita falsi prefissi come «atletica» e «target». */
+const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|lavoratric[ei]|dipendent[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|giocatric[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|studentess[ae]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
+/** Eta' scritta in cifre o in forma lessicale, anche composta: «68enne», «diciassettenne», «ventiduenne». */
+const PERSON_AGE_RE = /^(?:(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciassett|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]|(?:venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)(?:du|tre|quattr|cinqu|sei|sett|nov)enn[ei]|(?:vent|trent|quarant|cinquant|sessant|settant|ottant|novant)(?:un|ott)enn[ei])$/u;
+/** Quantita' che possono reggere «di + demonimo»: «decine di ticinesi». */
+const PERSON_QUANTITY_RE = /^(?:pai[oa]|decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
+/** Parole intere (come radici catturerebbero «autorita'», «motore»). */
+const PERSON_HEAD_WORDS = new Set(['auto', 'automobile', 'automobili', 'moto']);
+const PERSON_GROUP_RE = /^(?:grupp[oi]|comitiv[ae]|delegazion[ei]|squadr[ae]|famigli[ae]|coppi[ae])$/u;
+const PERSON_GROUP_LINKS = new Set(['di', 'dei', 'degli', 'delle']);
+
+/**
  * Portata nazionale dichiarata nel titolo, nell'excerpt o nell'attacco: una
  * classifica dei comuni svizzeri, una votazione federale. Senza un cantone nel
  * titolo, il comune in testa alla classifica non fa dell'articolo un articolo
  * di quel cantone.
  */
-const NATIONAL_SCOPE_HEADLINE_RE = /\b(?:(?:in|della|dalla|nella|alla|la|tutta\s+la)\s+Svizzera|svizzer[ei]|elvetic[aoh]e?|nazional[ei]|cantoni)\b/u;
-const NATIONAL_SCOPE_LEAD_RE = /\b(?:tutti\s+i\s+cantoni|comuni\s+svizzeri|cantoni\s+svizzeri|citta\s+svizzere|in\s+tutta\s+la\s+Svizzera|a\s+livello\s+nazionale|economia\s+(?:elvetica|svizzera))\b/u;
+const NATIONAL_SCOPE_HEADLINE_RE = /\b(?:(?:in|della|dalla|nella|alla|la|tutta\s+la)\s+Svizzera|svizzer[ei]|elvetic[aoh]e?|nazional[ei]|cantoni)\b/iu;
+const NATIONAL_SCOPE_LEAD_RE = /\b(?:tutti\s+i\s+cantoni|comuni\s+svizzeri|cantoni\s+svizzeri|citta\s+svizzere|in\s+tutta\s+la\s+Svizzera|a\s+livello\s+nazionale|economia\s+(?:elvetica|svizzera))\b/iu;
 
 /** Testi che parlano del WEF: «Davos» e' il forum, non i Grigioni. */
 const WEF_RE = /\b(?:WEF|World\s+Economic\s+Forum|Forum\s+economico\s+mondiale|Forum\s+di\s+Davos)\b/iu;
 
 /** Parole che dicono residenza o provenienza di una persona. */
-const ORIGIN_STEMS = [
-  'resident', 'domiciliat', 'originari', 'provenient', 'immatricolat', 'targat',
-  'abitant', 'nativ',
-];
+const ORIGIN_RE = /^(?:resident[ei]|domiciliat[aeio]|originari[aeio]|provenient[ei]|immatricolat[aeio]|targat[aeio]|abitant[ei]|nativ[aeio])$/u;
 const ORIGIN_WORDS = new Set(['nato', 'nata', 'nati', 'nate', 'targa', 'targhe']);
 const ORIGIN_WINDOW = 6;
 
@@ -604,6 +685,7 @@ export function createCantonClassifier({
       .replace(/\]\([^)]*\)/gu, '] ')
       .replace(/\b(?:https?:\/\/|www\.)\S+/giu, ' ');
     for (const re of EXCLUDED_PHRASES) t = t.replace(re, (m) => ' '.repeat(m.length));
+    for (const re of AUDIENCE_RES) t = t.replace(re, (m) => ' '.repeat(m.length));
     if (framing) for (const re of FRAMING_PHRASES) t = t.replace(re, (m) => ' '.repeat(m.length));
     if (WEF_RE.test(t)) t = t.replace(/\bDavos\b/gu, '     ');
     return t;
@@ -626,7 +708,7 @@ export function createCantonClassifier({
     for (let k = i - 1; k >= 0 && k >= i - ORIGIN_WINDOW; k -= 1) {
       if (sentenceBreak(text, tokens[k], tokens[k + 1])) return false;
       const w = tokens[k].norm;
-      if (ORIGIN_WORDS.has(w) || ORIGIN_STEMS.some((s) => w.startsWith(s))) return true;
+      if (ORIGIN_WORDS.has(w) || ORIGIN_RE.test(w)) return true;
     }
     return false;
   }
@@ -658,6 +740,20 @@ export function createCantonClassifier({
     const k = i - 1;
     if (k < 0 || sentenceBreak(text, tokens[k], tokens[i])) return false;
     return PERSON_ARTICLES.has(tokens[k].norm);
+  }
+
+  /** Vedi PERSON_*: il demonimo dice chi o da dove. */
+  function isWhoDemonym(text, tokens, i) {
+    const k = i - 1;
+    if (k < 0 || sentenceBreak(text, tokens[k], tokens[i])) return true;
+    const prev = tokens[k].norm;
+    if (PERSON_LEAD_WORDS.has(prev) || PERSON_HEAD_WORDS.has(prev) || /^\d+$/u.test(prev)
+      || PERSON_HEAD_RE.test(prev) || PERSON_AGE_RE.test(prev)) return true;
+    const head = tokens[k - 1];
+    if (!head || sentenceBreak(text, head, tokens[k])) return false;
+    if (PERSON_GROUP_LINKS.has(prev)
+      && (PERSON_GROUP_RE.test(head.norm) || PERSON_QUANTITY_RE.test(head.norm))) return true;
+    return false;
   }
 
   function isClubContext(text, tokens, i) {
@@ -711,7 +807,10 @@ export function createCantonClassifier({
       // demonimi: minuscole o inizio frase
       for (const { group, re } of demonymRes) {
         if (re.test(tokens[i].norm) && !isOriginContext(text, tokens, i) && !isPersonDemonym(text, tokens, i)) {
-          out.push({ group, kind: 'demonym', term: tokens[i].norm, start: tokens[i].start });
+          out.push({
+            group, kind: 'demonym', term: tokens[i].norm, start: tokens[i].start,
+            ...(isWhoDemonym(text, tokens, i) ? { who: true } : {}),
+          });
         }
       }
       if (!tokens[i].upper) continue;
@@ -775,7 +874,7 @@ export function createCantonClassifier({
     };
     const per = new Map();
     const slot = (group) => {
-      if (!per.has(group)) per.set(group, { score: 0, evidence: new Map(), headline: false, inTitle: false, inExcerpt: false, excerptPlace: false, lead: false, terms: new Set(), bodyTerms: new Set(), bodyCount: 0 });
+      if (!per.has(group)) per.set(group, { score: 0, evidence: new Map(), headline: false, inTitle: false, titlePlace: false, placeConfirmed: false, inExcerpt: false, excerptPlace: false, lead: false, terms: new Set(), bodyTerms: new Set(), bodyCount: 0 });
       return per.get(group);
     };
     // «Asilo nido Berna: tariffe…»: nel titolo un nome «guardato» senza
@@ -796,6 +895,12 @@ export function createCantonClassifier({
         const key = `${m.group}\u0000${m.term}\u0000${m.kind}`;
         counts.set(key, (counts.get(key) || 0) + 1);
         if (field === 'body' && m.start < LEAD_CHARS) slot(m.group).lead = true;
+        if (m.kind !== 'demonym' || !m.who) {
+          if (field === 'title') slot(m.group).titlePlace = true;
+          // Solo l'excerpt conferma: nel corpo «G.B. di Gordola» e' ancora la
+          // provenienza di una persona, non il luogo della notizia.
+          else if (field !== 'body') slot(m.group).placeConfirmed = true;
+        }
       }
       for (const [key, count] of counts) {
         const [group, term, kind] = key.split('\u0000');
@@ -831,7 +936,10 @@ export function createCantonClassifier({
       canton,
       score: Math.round(s.score * 10) / 10,
       headline: s.headline,
-      inTitle: s.inTitle,
+      // Un demonimo di persona nel titolo («Turisti ticinesi bloccati in Medio
+      // Oriente») dice chi, non dove: conta solo con un luogo dello stesso
+      // cantone nel titolo o nell'excerpt.
+      inTitle: s.inTitle && (s.titlePlace || s.placeConfirmed),
       inExcerpt: s.inExcerpt,
       excerptPlace: s.excerptPlace,
       distinctTerms: s.terms.size,
