@@ -8267,6 +8267,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.legge-piattaforme-tutela-giovani.title': 'Consiglio federale rafforza tutela giovani sulle piattaforme',
     'blog.article.legge-piattaforme-tutela-giovani.excerpt': 'Il Consiglio federale decide il 14 ottobre 2026.',
     'blog.article.legge-piattaforme-tutela-giovani.imageAlt': 'Teen svizzero che usa un laptop con icone social davanti alle Alpi',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.title': 'Svizzera partecipa a FMI e Banca mondiale a Bangkok 2026',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.excerpt': 'Vertice FMI e Banca mondiale a Bangkok dal 15 al 17 ottobre 2026 Parmelin, Keller-Sutter e Schlegel nella delegazione svizzera Nuovo accordo di partenariato',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.imageAlt': 'Vista del lago di Lugano con la bandiera svizzera, simbolo dell\'impegno svizzero nella finanza globale',
 };
 
 export default blogMetaChIt;

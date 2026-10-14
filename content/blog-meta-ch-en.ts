@@ -8267,6 +8267,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.legge-piattaforme-tutela-giovani.title': 'Federal Council strengthens protection of young people on platforms',
     'blog.article.legge-piattaforme-tutela-giovani.excerpt': 'The Federal Council decides on October 14, 2026.',
     'blog.article.legge-piattaforme-tutela-giovani.imageAlt': 'Swiss teen using a laptop with social media icons in front of the Alps',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.title': 'Switzerland participates in IMF and World Bank in Bangkok 2026',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.excerpt': 'IMF and World Bank summit in Bangkok from October 15 to 17, 2026 Parmelin, Keller-Sutter and Schlegel in the Swiss delegation New partnership agreement',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.imageAlt': 'View of Lake Lugano with the Swiss flag, symbol of Switzerland\'s commitment to global finance',
 };
 
 export default blogMetaChEn;

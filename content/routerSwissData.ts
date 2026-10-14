@@ -2778,6 +2778,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'nuovo-accordo-commercio-elettronico': { it: 'nuovo-accordo-commercio-elettronico', en: 'new-agreement-electronic-commerce', de: 'neues-abkommen-elektronischer-handel', fr: 'nouvel-accord-commerce-electronique' },
  'assunzioni-svizzera-cautela-2026': { it: 'assunzioni-svizzera-cautela-2026', en: 'switzerland-hiring-caution-2026', de: 'schweiz-einstellungen-vorsicht-2026', fr: 'suisse-recrutement-prudence-2026' },
  'legge-piattaforme-tutela-giovani': { it: 'legge-piattaforme-tutela-giovani', en: 'law-platforms-youth-protection', de: 'gesetz-plattformen-jugendschutz', fr: 'loi-plateformes-protection-jeunes' },
+ 'svizzera-partecipa-fmi-bangkok-2026': { it: 'svizzera-partecipa-fmi-bangkok-2026', en: 'switzerland-participates-in-imf-and-world-bank-in-bangkok-2026', de: 'die-schweiz-nimmt-2026-in-bangkok-an-iwf-und-weltbank-teil', fr: 'la-suisse-participe-au-fmi-et-a-la-banque-mondiale-a-bangkok-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

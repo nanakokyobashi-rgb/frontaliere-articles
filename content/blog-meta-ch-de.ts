@@ -8267,6 +8267,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.legge-piattaforme-tutela-giovani.title': 'Bundesrat stärkt den Schutz junger Menschen auf Plattformen',
     'blog.article.legge-piattaforme-tutela-giovani.excerpt': 'Der Bundesrat entscheidet am 14.',
     'blog.article.legge-piattaforme-tutela-giovani.imageAlt': 'Schweizer Jugendlicher mit Laptop und Social-Media-Icons vor den Alpen',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.title': 'Die Schweiz nimmt 2026 in Bangkok an IWF und Weltbank teil',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.excerpt': 'IWF- und Weltbankgipfel in Bangkok vom 15.',
+    'blog.article.svizzera-partecipa-fmi-bangkok-2026.imageAlt': 'Blick auf den Luganer See mit der Schweizer Fahne, Symbol für das Engagement der Schweiz in der globalen Finanzwelt',
 };
 
 export default blogMetaChDe;
