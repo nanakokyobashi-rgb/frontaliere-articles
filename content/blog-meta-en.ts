@@ -13159,7 +13159,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'The numbers for October 14, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
     'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Unemployment in Ticino: expected 3.45% at the beginning of 2027',
     'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Unemployment in Ticino rising: expected 3.45% at the beginning of 2027 Foreign residents and young people most affected by the phenomenon Current rate at 2.87% in the third',
-    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Illustration generated for this article',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'View of the financial district in Lugano',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto Ceresio: former customs house reborn as tourist office',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Sunday, October 18, ribbon-cutting at 11 a.m.',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'The former Royal Customs House in Porto Ceresio, now a Tourist Office, against a backdrop of Lake Lugano and mountains.',
 };
 
 export default blogMetaEn;

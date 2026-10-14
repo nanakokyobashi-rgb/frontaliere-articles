@@ -13160,7 +13160,10 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
     'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Disoccupazione in Ticino: previsto 3,45% a inizio 2027',
     'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Disoccupazione in Ticino in crescita: previsto 3,45% a inizio 2027 Residenti stranieri e giovani i più colpiti dal fenomeno Tasso attuale al 2,87% nel terzo',
-    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Vista del distretto finanziario di Lugano',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto ceresio: ex dogana rinasce ufficio turistico',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'L\'ex Regia Dogana di Porto Ceresio, ora Ufficio Turistico, con il lago e le montagne sullo sfondo.',
 };
 
 export default blogMetaIt;

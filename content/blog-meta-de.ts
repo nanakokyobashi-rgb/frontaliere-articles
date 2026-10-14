@@ -13158,7 +13158,10 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'Die Zahlen vom 14. Oktober 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
     'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Arbeitslosigkeit im Tessin: voraussichtlich 3,45% Anfang 2027',
     'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Arbeitslosigkeit im Tessin auf dem Vormarsch: Prognostiziert 3,45% Anfang 2027 Ausländische Einwohner und Jugendliche, die am stärksten von dem Phänomen betroffen sind Aktuelle Quote von 2,87% im 3.',
-    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Blick auf das Finanzviertel in Lugano',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto Ceresio: Aus ehemaliger Zollstelle wird Tourismusbüro',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Am Sonntag, 18.',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'Das ehemalige Königliche Zollamt in Porto Ceresio, jetzt Tourismusbüro, mit Luganersee und Bergen im Hintergrund.',
 };
 
 export default blogMetaDe;

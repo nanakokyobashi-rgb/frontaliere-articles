@@ -107750,6 +107750,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-porto-ceresio-dogana-ufficio-turistico': {
+    title: 'Porto ceresio: ex dogana rinasce ufficio turistico',
+    description: 'Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto',
+    keywords: 'frontalieri, ticino, svizzera, italia, porto, ceresio, dogana, rinasce',
+    ogTitle: 'Porto Ceresio: ex Dogana rinasce Ufficio Turistico il 18/10',
+    ogDescription: 'Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto',
+    canonicalPath: '/articoli-frontaliere/porto-ceresio-dogana-ufficio-turistico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porto ceresio: ex dogana rinasce ufficio turistico",
+      "description": "Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-porto-ceresio-dogana-ufficio-turistico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'ex Regia Dogana di Porto Ceresio, ora Ufficio Turistico, con il lago e le montagne sullo sfondo."
+      },
+      "datePublished": "2026-10-14T10:42:39+00:00",
+      "dateModified": "2026-10-14T10:42:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/porto-ceresio-dogana-ufficio-turistico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -13161,7 +13161,10 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'Les chiffres du 14 octobre 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
     'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Chômage au Tessin : 3,45 % prévu début 2027',
     'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Chômage au Tessin en hausse : prévu 3,45 % au début de 2027 Résidents étrangers et jeunes les plus touchés par le phénomène Taux actuel à 2,87 % au troisième',
-    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'Vue du quartier financier de Lugano',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto ceresio : l’ancienne douane renaît en office de tourisme',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Dimanche 18 octobre l’inauguration à 11 heures L’ancienne Regia Dogana se trouve via Mazzini Le bâtiment devient le nouvel office de tourisme Réhabilitation soutenue',
+    'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'L\'ancienne Douane Royale de Porto Ceresio, transformée en Office de Tourisme, avec le lac de Lugano et les montagnes.',
 };
 
 export default blogMetaFr;
