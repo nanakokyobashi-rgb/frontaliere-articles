@@ -27433,6 +27433,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'collaudo-veicoli-canton-zurigo',
+    category: 'pratico',
+    date: '2026-10-14T03:22:13.865Z',
+    image: '/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

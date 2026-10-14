@@ -8219,6 +8219,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.grandine-svizzera-danni-swiss-re.title': 'Grêle en août : Swiss Re estime les dommages à 1,7 milliard',
     'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re estime à 1,7 milliard de francs les dommages assurés Environ 800 millions de francs concernent les véhicules L’orage du 28 août 2026 a touché cinq',
     'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Grosses grêlons sur un asphalte mouillé en Suisse',
+    'blog.article.collaudo-veicoli-canton-zurigo.title': 'Contrôle véhicules Zurich : convocations et requis',
+    'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'À Zurich, le contrôle technique relève du niveau cantonal La procédure comprend la convocation, les documents et les exigences techniques Les contrôles périodiques font partie de la procédure',
+    'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Centre de contrôle des véhicules dans le canton de Zurich',
 };
 
 export default blogMetaChFr;

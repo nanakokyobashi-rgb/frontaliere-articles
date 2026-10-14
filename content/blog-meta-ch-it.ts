@@ -8219,6 +8219,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.grandine-svizzera-danni-swiss-re.title': 'Grandine agosto: Swiss Re stima 1,7 mld danni',
     'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque',
     'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Grossi chicchi di grandine su un\'asfalto bagnato in Svizzera',
+    'blog.article.collaudo-veicoli-canton-zurigo.title': 'Collaudo veicoli Canton Zurigo: convocazione e requisiti',
+    'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell\'iter',
+    'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Centro di collaudo veicoli nel Cantone di Zurigo',
 };
 
 export default blogMetaChIt;

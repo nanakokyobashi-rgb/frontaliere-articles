@@ -8219,6 +8219,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.grandine-svizzera-danni-swiss-re.title': 'Hagel im August: Swiss Re schätzt Schäden in Höhe von 1,7 Mrd.',
     'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re schätzt versicherte Schäden in Höhe von 1,7 Milliarden Franken Rund 800 Millionen Franken entfallen auf Fahrzeuge Das Unwetter vom 28.',
     'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Große Hagelkörner auf nassem Asphalt in der Schweiz',
+    'blog.article.collaudo-veicoli-canton-zurigo.title': 'Fahrzeugprüfung Kanton Zürich: Aufgebot und Anforderungen',
+    'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'In Zürich erfolgt die Fahrzeugprüfung auf kantonaler Ebene Das Verfahren umfasst Aufgebot, Dokumente und technische Anforderungen Die periodischen Kontrollen sind Teil des Verfahrens',
+    'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Fahrzeugprüfzentrum im Kanton Zürich',
 };
 
 export default blogMetaChDe;

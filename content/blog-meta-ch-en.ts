@@ -8219,6 +8219,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.grandine-svizzera-danni-swiss-re.title': 'August hail: Swiss Re estimates 1,7 mld in damages',
     'blog.article.grandine-svizzera-danni-swiss-re.excerpt': 'Swiss Re estimates 1,7 billion francs in insured losses Approximately 800 million francs concern vehicles The storm on August 28, 2026 affected five',
     'blog.article.grandine-svizzera-danni-swiss-re.imageAlt': 'Large hailstones on wet asphalt in Switzerland',
+    'blog.article.collaudo-veicoli-canton-zurigo.title': 'Vehicle inspection in the Canton of Zurich: summons and requirements',
+    'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'In Zurich, the inspection follows the cantonal level The procedure includes the summons, documents and technical requirements Periodic checks are part of the process',
+    'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Vehicle inspection center in Canton Zurich',
 };
 
 export default blogMetaChEn;

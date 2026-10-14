@@ -103720,6 +103720,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-collaudo-veicoli-canton-zurigo': {
+    title: 'Collaudo veicoli Canton Zurigo: convocazione e requisiti',
+    description: 'A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell\'iter',
+    keywords: 'frontalieri, ticino, svizzera, italia, collaudo, veicoli, canton, zurigo',
+    ogTitle: 'Collaudo veicoli Canton Zurigo: convocazione e requisiti',
+    ogDescription: 'A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell\'iter',
+    canonicalPath: '/articoli-svizzera/collaudo-veicoli-canton-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Collaudo veicoli Canton Zurigo: convocazione e requisiti",
+      "description": "A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell'iter",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di collaudo veicoli nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-14T03:22:14+00:00",
+      "dateModified": "2026-10-14T03:22:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/collaudo-veicoli-canton-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
