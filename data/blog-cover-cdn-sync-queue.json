@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-arresti-truffa-chiamate-ticino.webp",
+      "sha256": "a5212a3f43b6f6e051f72d3b9b409568260790fb8a71281edb13ac0f2cb1f322"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-arresti-truffa-chiamate-ticino-480w.webp",
+      "sha256": "5bbdff6adb3c8693a861612043c08d769014e41a3d28e2edea6b73ecfba16b9d"
+    }
+  ]
 }
