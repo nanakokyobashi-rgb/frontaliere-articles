@@ -19413,24 +19413,6 @@
     },
     {
       "schema": 1,
-      "assetId": "bollettino-frontaliere-2026-10-14",
-      "source": "deterministic-card",
-      "provider": "site-owned",
-      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
-      "credit": "frontaliereticino.ch",
-      "producer": "generator/scripts/lib/daily-brief-image.mjs",
-      "templateVersion": "frontaliereticino.daily-brief-card.v1",
-      "license": "private-grant",
-      "sha256": "456175cef1b76ab9084ca5d37f9300def9fdd1d1b225f0154926e849b67edc9e",
-      "bytes": 27446,
-      "width": 1200,
-      "height": 675,
-      "format": "webp",
-      "scope": "article-hero",
-      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-14.webp"
-    },
-    {
-      "schema": 1,
       "assetId": "article-fallimenti-aziendali-svizzera-aumento",
       "kind": "generated",
       "provider": "openai-codex",
@@ -19815,6 +19797,24 @@
         "is_topic_relevant": true,
         "notes": "Generic synthetic editorial illustration of rail commuting and fiscal balance in a Ticino-like setting; no readable text, logos, or identifiable people."
       }
+    },
+    {
+      "schema": 1,
+      "assetId": "bollettino-frontaliere-2026-10-14",
+      "source": "deterministic-card",
+      "provider": "site-owned",
+      "note": "Deterministic SVG card rendered by the repository; no external image provider is used.",
+      "credit": "frontaliereticino.ch",
+      "producer": "generator/scripts/lib/daily-brief-image.mjs",
+      "templateVersion": "frontaliereticino.daily-brief-card.v1",
+      "license": "private-grant",
+      "sha256": "ea47fde9323d7abafe562cf69afedfa969c190607ed3717023c1afae1fa87a39",
+      "bytes": 27306,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/bollettino-frontaliere-2026-10-14.webp"
     }
   ]
 }
