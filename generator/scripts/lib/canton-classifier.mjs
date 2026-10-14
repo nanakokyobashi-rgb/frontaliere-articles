@@ -345,10 +345,15 @@ const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ 
   .join('|');
 const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}|${caseInitial('l')}['’]?\\s*)?`;
 const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
-const AUDIENCE_RECIPIENT_HEAD = `(?:${[
-  'chi', 'abitant[ei]', 'popolazion[ei]', 'lavorator[ei]', 'frontalier[ei]', 'resident[ei]',
-  'cittadin[aoei]', 'dipendent[ei]', 'person[ae]', 'famigli[ae]', 'student[ei]', 'pendolar[ei]',
-].map(caseInitial).join('|')})`;
+// Solo teste che nominano esplicitamente i destinatari: «gli abitanti del
+// Ticino», non «il mercato del Ticino» o «il lavoro in Ticino».
+const AUDIENCE_RECIPIENT_HEADS = [
+  'chi', 'abitant[ei]', 'popolazion[ei]', 'resident[ei]', 'cittadin[aoei]',
+  'lavorator[ei]', 'lavoratric[ei]', 'dipendent[ei]', 'frontalier[ei]', 'pendolar[ei]',
+  'famigli[ae]', 'person[ae]', 'student[ei]', 'studentess[ae]', 'pensionat[oi]',
+  'elettor[ei]', 'consumator[ei]', 'contribuent[ei]', 'aziend[ae]', 'imprese',
+];
+const AUDIENCE_RECIPIENT_HEAD = `(?:${AUDIENCE_RECIPIENT_HEADS.map(caseInitial).join('|')})`;
 const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'-]*){0,2}\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
 const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
@@ -390,10 +395,10 @@ const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
  * grigionese», «hockey ticinese»).
  */
 const PERSON_LEAD_WORDS = new Set([
-  'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'dieci', 'cento', 'mille', 'molti', 'tanti',
-  'sei', 'sette', 'otto', 'nove', 'alcuni', 'alcune', 'tutti', 'tutte', 'altri', 'altre', 'molte', 'diversi', 'diverse',
-  'numerosi', 'numerose', 'qualche', 'varie', 'vari', 'pochi', 'poche', 'parecchi', 'parecchie',
-  'migliaia', 'centinaia', 'decine',
+  'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'sei', 'sette', 'otto', 'nove', 'dieci',
+  'cento', 'mille', 'molti', 'molte', 'tanti', 'tante', 'alcuni', 'alcune', 'tutti', 'tutte', 'altri', 'altre',
+  'diversi', 'diverse', 'numerosi', 'numerose', 'vari', 'varie', 'qualche', 'parecchi', 'parecchie', 'pochi',
+  'poche', 'migliaia', 'centinaia', 'decine',
   'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'del', 'dello', 'della', 'dei', 'degli', 'delle',
   'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
   'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'col', 'colla', 'coi', 'cogli', 'colle',

@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "a6290a11c14150a1543fe5fec34ae50ecac95a5edf03750901c96ba729ceb465",
+  "updatedAt": "2026-10-14T06:37:00.336Z",
+  "contentHash": "ab46460c0c767dfee7c223df919cda09dee2d591d8cd22ac6e822007544eb995",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -120,6 +120,12 @@
           "date": "2026-10-01T00:55:32.594Z"
         },
         {
+          "title": "Imposta sui cani nel Cantone di Berna: guida a importi e regole",
+          "url": "/articoli-svizzera/imposta-cani-berna-guida/",
+          "excerpt": "Guida pratica all'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni e autorità competenti.",
+          "date": "2026-10-14T06:31:49.509Z"
+        },
+        {
           "title": "Imposta sugli autoveicoli a Berna: calcolo e pagamento",
           "url": "/articoli-svizzera/veicoli-berna-calcolo-pratico/",
           "excerpt": "Nel Cantone di Berna criteri, scadenze, importi e ufficio per l'imposta sugli autoveicoli dipendono dalle regole cantonali.",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-berna-aliquote/",
           "excerpt": "Conoscere le aliquote per grado di parentela e le esenzioni per coniuge e discendenti",
           "date": "2026-08-14T01:09:05.964Z"
-        },
-        {
-          "title": "Comprare casa a Berna: prezzi, mutuo e tasse",
-          "url": "/articoli-svizzera/acquistare-casa-berna-mutuo-tasse-guida/",
-          "excerpt": "Guida pratica all'acquisto immobiliare nel Canton Berna: imposta sui trapassi, spese notarili, fondi propri richiesti e sostenibilità del mutuo ipotecario.",
-          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -172,7 +172,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     },
     "en": {
       "canton": "BE",
@@ -275,6 +275,12 @@
           "date": "2026-10-01T00:55:32.594Z"
         },
         {
+          "title": "Dog tax in the Canton of Bern: guide to amounts and rules",
+          "url": "/en/swiss-articles/bern-dog-tax-guide/",
+          "excerpt": "Practical guide to the dog tax in the Canton of Bern: possible obligation, registration, exemptions and competent authorities.",
+          "date": "2026-10-14T06:31:49.509Z"
+        },
+        {
           "title": "Motor vehicle tax in Bern: calculation and payment",
           "url": "/en/swiss-articles/bern-vehicle-tax-calculation-payment/",
           "excerpt": "In the Canton of Bern, the criteria, deadlines, amounts and office responsible for motor vehicle tax depend on cantonal rules.",
@@ -297,12 +303,6 @@
           "url": "/en/swiss-articles/inheritance-and-donation-tax-canton-bern-rates/",
           "excerpt": "Know the kinship rates and exemptions for spouses and descendants",
           "date": "2026-08-14T01:09:05.964Z"
-        },
-        {
-          "title": "Buying a house in Bern: prices, mortgage and taxes",
-          "url": "/en/swiss-articles/buy-house-bern-mortgage-taxes-guide/",
-          "excerpt": "Practical guide to buying real estate in the Canton of Bern: transfer tax, notary fees, own funds required and mortgage loan sustainability.",
-          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -327,7 +327,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     },
     "de": {
       "canton": "BE",
@@ -430,6 +430,12 @@
           "date": "2026-10-01T00:55:32.594Z"
         },
         {
+          "title": "Hundesteuer im Kanton Bern: Leitfaden zu Beträgen und Regeln",
+          "url": "/de/schweiz-artikel/hundesteuer-bern-leitfaden/",
+          "excerpt": "Praktischer Leitfaden zur Hundesteuer im Kanton Bern: allfällige Pflicht, Registrierung, Befreiungen und zuständige Behörden.",
+          "date": "2026-10-14T06:31:49.509Z"
+        },
+        {
           "title": "Motorfahrzeugsteuer in Bern: Berechnung und Zahlung",
           "url": "/de/schweiz-artikel/bern-autosteuer-berechnung-zahlung/",
           "excerpt": "Im Kanton Bern richten sich Kriterien, Fristen, Beträge und die Kfz-Steuerstelle nach den kantonalen Regelungen.",
@@ -452,12 +458,6 @@
           "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuer-kanton-bern-zahlungen/",
           "excerpt": "Kennen Sie die Sätze nach Verwandtschaftsgrad und die Befreiungen für Ehepartner und Nachkommen",
           "date": "2026-08-14T01:09:05.964Z"
-        },
-        {
-          "title": "Haus kaufen in Bern: Preise, Hypothek und Steuern",
-          "url": "/de/schweiz-artikel/haus-kaufen-bern-hypothek-steuern-leitfaden/",
-          "excerpt": "Praktischer Leitfaden zum Immobilienkauf im Kanton Bern: Stempelsteuer, Notarkosten, geforderte Eigenmittel und Tragbarkeit des Hypothekardarlehens.",
-          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -482,7 +482,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     },
     "fr": {
       "canton": "BE",
@@ -585,6 +585,12 @@
           "date": "2026-10-01T00:55:32.594Z"
         },
         {
+          "title": "Impôt sur les chiens dans le canton de Berne : guide des montants et des règles",
+          "url": "/fr/articles-suisse/taxe-chiens-berne-guide/",
+          "excerpt": "Guide pratique de l'impôt sur les chiens dans le canton de Berne : obligation éventuelle, enregistrement, exemptions et autorités compétentes.",
+          "date": "2026-10-14T06:31:49.509Z"
+        },
+        {
           "title": "Taxe automobile à Berne : calcul et paiement",
           "url": "/fr/articles-suisse/berne-impot-vehicules-calcul-paiement/",
           "excerpt": "Dans le canton de Berne, les critères, les délais, les montants et le bureau compétent pour l'impôt sur les véhicules automobiles dépendent des règles cantonales.",
@@ -607,12 +613,6 @@
           "url": "/fr/articles-suisse/taxe-sur-la-succesions-et-la-donation-canton-de-berne/",
           "excerpt": "Connaître les taux par degré de parenté et les exemptions pour conjoint et descendants",
           "date": "2026-08-14T01:09:05.964Z"
-        },
-        {
-          "title": "Acheter une maison à Berne : prix, hypothèque et taxes",
-          "url": "/fr/articles-suisse/acheter-maison-berne-hypotheque-impots-guide/",
-          "excerpt": "Guide pratique de l'achat immobilier dans le canton de Berne : taxe de passage, frais de notaire, fonds propres requis et viabilité du prêt hypothécaire.",
-          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -637,7 +637,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     }
   }
 }

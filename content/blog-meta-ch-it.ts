@@ -8237,6 +8237,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.negozi-berna-orari-festivi-regole.title': 'Orari negozi Cantone di Berna: guida a festivi e regole',
     'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Guida ufficiale agli orari commerciali, giorni festivi, autorizzazioni speciali e limiti di lavoro nel Cantone di Berna.',
     'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Orari e regole commerciali dei negozi nel Cantone di Berna',
+    'blog.article.imposta-cani-berna-guida.title': 'Imposta sui cani nel Cantone di Berna: guida a importi e regole',
+    'blog.article.imposta-cani-berna-guida.excerpt': 'Guida pratica all\'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni e autorità competenti.',
+    'blog.article.imposta-cani-berna-guida.imageAlt': 'Imposta sui cani nel Cantone di Berna: regole e registrazione',
 };
 
 export default blogMetaChIt;
