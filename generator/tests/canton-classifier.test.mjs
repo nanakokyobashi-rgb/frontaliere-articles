@@ -207,6 +207,46 @@ describe('regole di assegnazione', () => {
     }), ['TI']);
   });
 
+  test('un demonimo nel titolo dice chi, non dove: serve un luogo dello stesso cantone', () => {
+    assert.deepEqual(codes({
+      title: 'Turisti ticinesi bloccati in Medio Oriente',
+      excerpt: 'Circa 400 turisti svizzeri bloccati senza comunicazioni.',
+      body: 'Turisti ticinesi bloccati negli Emirati. I ticinesi chiedono aiuto. Altri ticinesi in attesa.',
+    }), []);
+    assert.deepEqual(codes({
+      title: 'Ristoratore ticinese sorprende ladro',
+      excerpt: 'Furto in un ristorante di Mendrisio.',
+      body: 'A Mendrisio un ristoratore ha sorpreso un ladro. Il ticinese ha chiamato la polizia.',
+    }), ['TI']);
+  });
+
+  test('il cantone come destinatario non e\' il luogo della notizia, neppure nel titolo', () => {
+    assert.deepEqual(codes({
+      title: 'Uzbekistan, oro e gas al centro del mondo: implicazioni per il Ticino',
+      excerpt: 'Come l\'apertura economica dell\'Uzbekistan influisce sul Ticino e i frontalieri.',
+      body: 'Tashkent cresce. Cosa significa per il Ticino? Lugano e Bellinzona osservano. Ticino.',
+    }), []);
+    const classifier = defaultCantonClassifier();
+    assert.deepEqual(classifier.mentionsIn('Benzinai esauriti, cosa cambia per chi lavora in Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('L\'impatto sul Ticino della riforma').map((m) => m.group), []);
+    // Un fatto in Ticino resta in Ticino.
+    assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('Cosa cambia in Ticino dal 2026').map((m) => m.group), ['TI']);
+  });
+
+  test('cornice e portata nazionale anche con la maiuscola a inizio frase', () => {
+    assert.deepEqual(codes({
+      title: 'Precompilata 2026: la guida',
+      excerpt: 'Frontalieri che lavorano in Ticino: cosa sapere. Lugano.',
+      body: 'Frontalieri del Ticino. Lavoratori frontalieri in Ticino. A Lugano lo sportello.',
+    }), []);
+    assert.deepEqual(codes({
+      title: 'Estate torrida, produttivita\' in calo',
+      excerpt: 'Tutti i cantoni colpiti, Birsfelden in testa.',
+      body: 'Svizzeri al caldo. A Birsfelden, nel canton Basilea Campagna, il picco. A Birsfelden.',
+    }), []);
+  });
+
   test('excerpt con un solo cantone e prove nel corpo: assegnato', () => {
     assert.deepEqual(codes({
       title: 'Crisi per il colosso dell\'auto: 110 posti a rischio',
