@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/gkso6mcdgugd": {
-    "articleId": "divieto-oro-sudan-consiglio-federale",
-    "ts": "2026-09-09T19:24:59.361Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/aeroporto-zurigo%2c-bus-navetta-viaggiano-senza-autista/92032182": {
     "articleId": "aeroporto-zurigo-shuttle-autonomi",
     "ts": "2026-09-09T19:49:00.197Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/ul1b8dikrufv": {
     "articleId": "consiglio-federale-knifefish-adesione",
     "ts": "2026-10-14T23:04:45.110Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4161292": {
+    "articleId": "hacker-frigoriferi-connessi",
+    "ts": "2026-10-14T23:24:39.477Z",
     "keyForm": 2
   }
 }
