@@ -1162,6 +1162,20 @@ test('sitemap cantonale: uno slug IT provvisorio non diventa una loc tradotta', 
   assert.doesNotMatch(built.xml, /hreflang="en" href="https:\/\/frontaliereticino\.ch\/en\/ticino-articles\/a-it\//);
 });
 
+test('sitemap cantonale: uno slug IT provvisorio rifiuta l’identità prima del floor', () => {
+  assert.throws(
+    () => buildFamilySectionSitemap({
+      section: 'canton-ti',
+      entries: [{ id: 'a', date: '2026-10-01' }],
+      slugMap: { a: { it: 'a-it', en: 'a-en', de: 'a-de', fr: 'a-fr' } },
+      fallbackReasons: { a: { it: { source: 'it-slug', reason: 'invalid-canonical-test' } } },
+      meta: {},
+      pageSize: 24,
+    }),
+    /slug IT provvisorio/,
+  );
+});
+
 test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non il parser del feed', () => {
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /familyRssRows\.push\(\{ section: section\.id, source: countSourceArticles\(ROOT, section\.id\), emitted: sectionItems \}\)/);

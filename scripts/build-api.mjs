@@ -632,6 +632,10 @@ for (const section of PUBLIC_API_SECTIONS) {
 // le sitemap cantonali, che ora emettono una URL per ogni locale. Il vecchio `< 100`
 // proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la sitemap
 // svizzera; un parse troncato restava quindi pubblicabile senza errori.
+// Un'eventuale provenienza di fallback sulla locale IT e' invece un errore duro
+// in `publishedArticleLocales`, prima di arrivare qui: non si lascia che una
+// identita' senza canonical IT riduca il rapporto del floor e passi per una
+// sitemap intenzionalmente piu' corta.
 //
 // Politica per tipo (corpus-floors.mjs, `KIND_FLOOR_POLICY`): le sezioni
 // storiche hanno il pavimento proprio e una sitemap vuota e' un rifiuto; una

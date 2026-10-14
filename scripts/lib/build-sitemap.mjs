@@ -84,6 +84,15 @@ export function countSitemapEntries(entries, slugMap, shadowed = new Set()) {
 export function publishedArticleLocales(article, paths, slugMap, shadowed = new Set(), fallbackReasons = {}) {
   const italianSlug = slugMap?.[article.id]?.it;
   if (!sitemapEntryIsEmitted(article, slugMap, shadowed) || shadowed.has(italianSlug)) return [];
+  // An article without a trustworthy Italian canonical cannot be represented
+  // by either the historical sitemap or a family sitemap: dropping just the
+  // IT row would leave the localized rows without x-default, and counting it
+  // in the floor would let a truncated surface pass. The generator currently
+  // records fallbacks only for en/de/fr, but fail closed if that invariant ever
+  // changes rather than publishing a URL with an untrusted canonical.
+  if (isFallbackLocale(fallbackReasons, article.id, 'it')) {
+    throw new Error(`publishedArticleLocales: slug IT provvisorio per articolo "${article.id}"`);
+  }
   return SITEMAP_LOCALES.flatMap((locale) => {
     const slug = slugMap?.[article.id]?.[locale];
     const prefix = paths?.[locale];
@@ -151,6 +160,7 @@ export function buildArticleUrlBlocks(
     const locRows = emitLocalizedLocs ? localeRows : localeRows.filter(({ locale }) => locale === 'it');
     if (locRows.length === 0) continue;
     const italian = localeRows.find(({ locale }) => locale === 'it');
+    if (!italian) throw new Error(`buildArticleUrlBlocks: articolo "${a.id}" senza loc IT canonica`);
     const title = meta[`blog.article.${a.id}.title`];
     const alt = meta[`blog.article.${a.id}.imageAlt`];
     const lastmod = a.updatedAt || a.date || '';
