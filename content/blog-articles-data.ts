@@ -44357,6 +44357,17 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'previsioni-disoccupazione-ticino-2027',
+ category: 'pratico',
+ date: '2026-10-14T10:28:50.950Z',
+ image: '/images/blog/article-zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

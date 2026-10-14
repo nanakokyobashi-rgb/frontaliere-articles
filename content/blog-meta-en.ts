@@ -13157,6 +13157,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'The day\'s numbers for cross-border commuters – October 14, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Cross-border brief, October 14, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'The numbers for October 14, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.previsioni-disoccupazione-ticino-2027.title': 'Unemployment in Ticino: expected 3.45% at the beginning of 2027',
+    'blog.article.previsioni-disoccupazione-ticino-2027.excerpt': 'Unemployment in Ticino rising: expected 3.45% at the beginning of 2027 Foreign residents and young people most affected by the phenomenon Current rate at 2.87% in the third',
+    'blog.article.previsioni-disoccupazione-ticino-2027.imageAlt': 'View of the financial district in Lugano',
 };
 
 export default blogMetaEn;
