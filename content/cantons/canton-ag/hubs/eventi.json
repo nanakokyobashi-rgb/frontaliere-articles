@@ -5,7 +5,7 @@
   "canton": "AG",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "7be4de83e3e35d328c35638b139ca102d45030dde5a7bfb77bf01417575f6c8a",
+  "contentHash": "e37c16ab64f44faacd872eb3173ac603e6e512d89fef9f310cc05c404be4913f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -116,44 +116,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Affitti Svizzera 2026: mercato immobiliare Argovia",
-          "url": "/articoli-svizzera/inquilini-cantoni-disdetta/",
-          "excerpt": "Mercato degli affitti svizzero nel 2026: in Argovia cauzione massima di tre mensilità, modulo cantonale e 30 giorni per contestare.",
-          "date": "2026-10-03T08:05:54.332Z"
-        },
-        {
-          "title": "Mercato del lavoro Argovia: salari, settori e formazione",
-          "url": "/articoli-svizzera/argovia-mercato-lavoro-settori/",
-          "excerpt": "Nel canton Argovia il mercato del lavoro segue il sistema svizzero: formazione determina i salari, contratti collettivi fissano i minimi, diritti federali garantiscono ferie e orari.",
-          "date": "2026-09-07T02:52:53.978Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro canton Argovia",
-          "url": "/articoli-svizzera/lavoro-argovia-salari-diritti/",
-          "excerpt": "Come funziona il mercato del lavoro in Argovia: stipendi, diritti, contratti collettivi e contributi previdenziali secondo la legge federale svizzera.",
-          "date": "2026-09-03T01:55:14.438Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro in Argovia: guida",
-          "url": "/articoli-svizzera/salari-lavoro-argovia-guida/",
-          "excerpt": "Come funziona il mercato del lavoro nel cantone Argovia? Salari, settori, tassazione e contributi secondo le normative federali e cantonali svizzere.",
-          "date": "2026-09-03T01:06:36.539Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro in Argovia: settori e livelli",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-argovia/",
-          "excerpt": "Nel cantone Argovia, i salari variano per formazione e contratti collettivi. Scopri i differenziali retributivi, i contributi sociali e le protezioni federali del lavoro.",
-          "date": "2026-09-07T03:24:02.111Z"
-        },
-        {
-          "title": "Mercato degli affitti nel Cantone di Argovia: canoni medi e diritto di locazione",
-          "url": "/articoli-svizzera/mercato-affitti-canton-argovia/",
-          "excerpt": "Scopri i canoni medi degli affitti nel Cantone di Argovia, le normative sul deposito di garanzia e i diritti degli inquilini.",
-          "date": "2026-09-06T10:41:46.549Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi in Argovia",
@@ -263,44 +226,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Swiss rentals 2026: Aargau real estate market",
-          "url": "/en/swiss-articles/swiss-rent-tenant-rights/",
-          "excerpt": "Swiss rental market in 2026: in Aargau, a maximum deposit of three months’ rent, a cantonal form, and 30 days to contest.",
-          "date": "2026-10-03T08:05:54.332Z"
-        },
-        {
-          "title": "Aargau Labour Market: Wages, Sectors and Training",
-          "url": "/en/swiss-articles/aargau-labour-market-sectors/",
-          "excerpt": "In the canton of Aargau, the labour market follows the Swiss system: training determines wages, collective agreements set minimums, federal rights guarantee holidays and hours.",
-          "date": "2026-09-07T02:52:53.978Z"
-        },
-        {
-          "title": "Wages and labour market canton Aargau",
-          "url": "/en/swiss-articles/aargau-labor-market-salaries-rights/",
-          "excerpt": "How the labour market works in Aargau: wages, entitlements, collective agreements and social security contributions according to Swiss federal law.",
-          "date": "2026-09-03T01:55:14.438Z"
-        },
-        {
-          "title": "Wages and the labour market in Aargau: a guide",
-          "url": "/en/swiss-articles/salaries-labor-market-aargau-guide/",
-          "excerpt": "How does the labour market in the canton of Aargau work? Wages, sectors, taxation and contributions according to Swiss federal and cantonal regulations.",
-          "date": "2026-09-03T01:06:36.539Z"
-        },
-        {
-          "title": "Wages and the labour market in Aargau: sectors and levels",
-          "url": "/en/swiss-articles/salaries-job-market-aargau/",
-          "excerpt": "In the canton of Aargau, salaries vary for training and collective agreements. Learn about pay differentials, social contributions, and federal labor protections.",
-          "date": "2026-09-07T03:24:02.111Z"
-        },
-        {
-          "title": "Rental market in the Canton of Aargau: average fees and rental rights",
-          "url": "/en/swiss-articles/rent-market-canton-aargau/",
-          "excerpt": "Learn about average rental fees in the Canton of Aargau, security deposit regulations, and tenants' rights.",
-          "date": "2026-09-06T10:41:46.549Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "All events in Aargau",
@@ -410,44 +336,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Mieten Schweiz 2026: Immobilienmarkt Aargau",
-          "url": "/de/schweiz-artikel/mietrecht-schweiz-argau/",
-          "excerpt": "Schweizer Mietmarkt 2026: Im Aargau gelten eine maximale Kaution von drei Monatsmieten, ein kantonales Formular und 30 Tage für eine Anfechtung.",
-          "date": "2026-10-03T08:05:54.332Z"
-        },
-        {
-          "title": "Arbeitsmarkt Aargau: Löhne, Branchen und Ausbildung",
-          "url": "/de/schweiz-artikel/aargau-arbeitsmarkt-sektoren/",
-          "excerpt": "Im Kanton Aargau orientiert sich der Arbeitsmarkt am schweizerischen System: Ausbildung bestimmt die Löhne, Kollektivverträge legen die Mindestlöhne fest, Bundesrechte garantieren Ferien und Arbeitszeiten.",
-          "date": "2026-09-07T02:52:53.978Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt Kanton Aargau",
-          "url": "/de/schweiz-artikel/aargau-arbeitsmarkt-lohne-rechte/",
-          "excerpt": "Wie der Arbeitsmarkt im Aargau funktioniert: Löhne, Ansprüche, Kollektivverträge und Sozialversicherungsbeiträge gemäss Schweizer Bundesgesetz.",
-          "date": "2026-09-03T01:55:14.438Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt im Aargau: Leitfaden",
-          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-aargau-leitfaden/",
-          "excerpt": "Wie funktioniert der Arbeitsmarkt im Kanton Aargau? Löhne, Branchen, Steuern und Beiträge gemäss den schweizerischen eidgenössischen und kantonalen Vorschriften.",
-          "date": "2026-09-03T01:06:36.539Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt im Aargau: Branchen und Niveaus",
-          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-aargau/",
-          "excerpt": "Im Kanton Aargau variieren die Löhne je nach Ausbildung und Kollektivverträgen. Entdecken Sie Lohnunterschiede, Sozialbeiträge und Bundesarbeitsschutz.",
-          "date": "2026-09-07T03:24:02.111Z"
-        },
-        {
-          "title": "Mietmarkt im Kanton Aargau: Durchschnittsmieten und Mietrecht",
-          "url": "/de/schweiz-artikel/mietmarkt-kanton-aargau/",
-          "excerpt": "Informieren Sie sich über die durchschnittlichen Mieten im Kanton Aargau, die Regelungen zur Kaution und die Mieterrechte.",
-          "date": "2026-09-06T10:41:46.549Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Aargau",
@@ -557,44 +446,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Locations en Suisse 2026 : marché immobilier d’Argovie",
-          "url": "/fr/articles-suisse/location-suisse-argovie/",
-          "excerpt": "Marché suisse des loyers en 2026 : en Argovie, caution maximale de trois mensualités, formulaire cantonal et 30 jours pour contester.",
-          "date": "2026-10-03T08:05:54.332Z"
-        },
-        {
-          "title": "Marché du travail Argovie : salaires, secteurs et formation",
-          "url": "/fr/articles-suisse/argovie-marche-travail-secteurs/",
-          "excerpt": "Dans le canton d'Argovie, le marché du travail suit le système suisse : la formation détermine les salaires, les conventions collectives fixent les minima, les droits fédéraux garantissent les congés et les horaires.",
-          "date": "2026-09-07T02:52:53.978Z"
-        },
-        {
-          "title": "Salaires et marché du travail canton d'Argovie",
-          "url": "/fr/articles-suisse/marche-travail-argovie-salaires-droits/",
-          "excerpt": "Comment fonctionne le marché du travail en Argovie : salaires, droits, conventions collectives et cotisations de sécurité sociale selon la loi fédérale suisse.",
-          "date": "2026-09-03T01:55:14.438Z"
-        },
-        {
-          "title": "Salaires et marché du travail en Argovie : guide",
-          "url": "/fr/articles-suisse/salaires-marche-travail-argovie-guide/",
-          "excerpt": "Comment fonctionne le marché du travail dans le canton d'Argovie ? Salaires, secteurs, fiscalité et cotisations selon les réglementations fédérales et cantonales suisses.",
-          "date": "2026-09-03T01:06:36.539Z"
-        },
-        {
-          "title": "Salaires et marché du travail en Argovie : secteurs et niveaux",
-          "url": "/fr/articles-suisse/salaires-marche-travail-argovie/",
-          "excerpt": "Dans le canton d'Argovie, les salaires varient par formation et conventions collectives. Découvrez les écarts de rémunération, les cotisations sociales et les protections fédérales du travail.",
-          "date": "2026-09-07T03:24:02.111Z"
-        },
-        {
-          "title": "Marché locatif dans le canton d'Argovie : loyers moyens et droit locatif",
-          "url": "/fr/articles-suisse/marche-locatif-canton-argovie/",
-          "excerpt": "Découvrez les loyers moyens dans le canton d'Argovie, les réglementations sur le dépôt de garantie et les droits des locataires.",
-          "date": "2026-09-06T10:41:46.549Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tous les événements en Argovie",

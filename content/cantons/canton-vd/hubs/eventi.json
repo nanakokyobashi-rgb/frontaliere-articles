@@ -5,7 +5,7 @@
   "canton": "VD",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "ee720cdebdaab7175d2a8aa5421677b8617afd01950dc86098bd73a70d3ef6d8",
+  "contentHash": "15a6c56428e05c7b5a60c52e5015b2e94ff72c4cb19a4a8aefb4b143d1991652",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -121,20 +121,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Affitti in Svizzera 2026: mercato immobiliare Vaud",
-          "url": "/articoli-svizzera/locazioni-vaud-regole-2026/",
-          "excerpt": "Nel canton Vaud valgono le regole federali: deposito massimo di tre mesi, conto vincolato e 30 giorni per contestare la disdetta.",
-          "date": "2026-10-03T03:18:23.091Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro Vaud: settori e livelli",
-          "url": "/articoli-svizzera/lavoro-vaud-regole-salariali/",
-          "excerpt": "Nessun salario minimo federale: nel Canton Vaud il confronto passa da orari, contributi AVS/LPP, LAMal, imposte e costo della vita.",
-          "date": "2026-09-30T04:41:01.030Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Vaud",
@@ -249,20 +236,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Rentals in Switzerland 2026: Vaud real estate market",
-          "url": "/en/swiss-articles/vaud-rent-rights-2026/",
-          "excerpt": "In the canton of Vaud, federal rules apply: a maximum deposit of three months, a blocked account and 30 days to contest the termination notice.",
-          "date": "2026-10-03T03:18:23.091Z"
-        },
-        {
-          "title": "Salaries and the labor market in Vaud: sectors and levels",
-          "url": "/en/swiss-articles/vaud-labour-market-rules/",
-          "excerpt": "No federal minimum wage: in the Canton of Vaud, the comparison involves hourly wages, AVS/LPP contributions, LAMal, taxes, and cost of living.",
-          "date": "2026-09-30T04:41:01.030Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "All events in the canton of Vaud",
@@ -377,20 +351,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Mieten in der Schweiz 2026: Immobilienmarkt Waadt",
-          "url": "/de/schweiz-artikel/mietrecht-waadt-2026/",
-          "excerpt": "Im Kanton Waadt gelten die Bundesregeln: maximal drei Monatsmieten als Kaution, ein Sperrkonto und 30 Tage, um die Kündigung anzufechten.",
-          "date": "2026-10-03T03:18:23.091Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt Waadt: Branchen und Ebenen",
-          "url": "/de/schweiz-artikel/waadt-arbeitsmarkt-regeln/",
-          "excerpt": "Kein eidgenössischer Mindestlohn: Im Kanton Waadt geht es um Zeitpläne, AHV/BVG-BEITRÄGE, KVG, Steuern und Lebenshaltungskosten.",
-          "date": "2026-09-30T04:41:01.030Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen in der Waadt",
@@ -505,20 +466,7 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Loyers en Suisse 2026 : marché immobilier du canton de Vaud",
-          "url": "/fr/articles-suisse/loyers-vaud-droits-2026/",
-          "excerpt": "Dans le canton de Vaud, les règles fédérales s'appliquent : garantie locative maximale de trois mois, compte bloqué et 30 jours pour contester le congé.",
-          "date": "2026-10-03T03:18:23.091Z"
-        },
-        {
-          "title": "Salaires et marché du travail vaudois : secteurs et niveaux",
-          "url": "/fr/articles-suisse/marche-travail-vaud-regles/",
-          "excerpt": "Pas de salaire minimum fédéral : dans le canton de Vaud, la comparaison passe par les horaires, les cotisations AVS/LPP, LAMal, les impôts et le coût de la vie.",
-          "date": "2026-09-30T04:41:01.030Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Vaud",

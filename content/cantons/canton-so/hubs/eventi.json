@@ -5,7 +5,7 @@
   "canton": "SO",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "6b997480f2e7c4aab9e27b1c6d2d3dd684a551a366617a4bdc7e0ca68b463955",
+  "contentHash": "755db3e65c7380a95c557315f55db8ec0d144ef4b9eee2f3b584016853c87cf1",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -100,34 +100,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Mercato affitti Soletta: canoni e diritto di locazione",
-          "url": "/articoli-svizzera/soletta-locazione-affitti-guida-pratica/",
-          "excerpt": "Guida completa al diritto di locazione nel Canton Soletta: regole federali su deposito cauzionale, disdetta, contestazione dei canoni e autorità di conciliazione.",
-          "date": "2026-09-01T23:05:26.177Z"
-        },
-        {
-          "title": "Mercato lavoro Soletta: salari, settori e livelli",
-          "url": "/articoli-svizzera/mercato-soletta-occupazione-settori/",
-          "excerpt": "Salari, fasce formative, contratti collettivi e contributi previdenziali nel Canton Soletta. Guida alla ricerca di lavoro e procedure di assunzione in Svizzera.",
-          "date": "2026-08-24T10:08:08.984Z"
-        },
-        {
-          "title": "Mercato degli affitti nel Cantone di Soletta: canoni medi e diritto di locazione",
-          "url": "/articoli-svizzera/affitti-cantone-soletta-canoni-medi-e-diritto-di-locazione/",
-          "excerpt": "I canoni medi per zona, deposito di garanzia, contestazione del canone iniziale, disdetta e autorità di conciliazione in materia di locazione nel Cantone di Soletta.",
-          "date": "2026-08-18T03:30:28.672Z"
-        },
-        {
           "title": "Patente Soletta: cosa fare e come procedere",
           "url": "/articoli-svizzera/patente-di-guida-canton-soletta-conversione-ed-esami/",
           "excerpt": "Conversione della patente di guida estera nel Cantone di Soletta: come richiedere la conversione e cosa fare durante gli esami.",
           "date": "2026-08-18T04:08:47.013Z"
-        },
-        {
-          "title": "Affitti a Soletta: prezzi medi e regole per inquilini",
-          "url": "/articoli-svizzera/soletta-affitti-canoni-diritto/",
-          "excerpt": "Analisi dei canoni di locazione, del deposito di garanzia e delle procedure di contestazione nel Cantone di Soletta.",
-          "date": "2026-08-24T08:37:12.606Z"
         },
         {
           "title": "Giornate di Soletta 2026: Continua la Sfida Finanziaria",
@@ -234,34 +210,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Solothurn rental market: fees and rental rights",
-          "url": "/en/swiss-articles/solothurn-rental-lease-rights-guide/",
-          "excerpt": "Complete Guide to the Right of Tenancy in the Canton of Solothurn: Federal Rules on Security Deposit, Cancellation, Rent Dispute and Conciliation Authority.",
-          "date": "2026-09-01T23:05:26.177Z"
-        },
-        {
-          "title": "Labour Market Slab: Wages, Sectors and Levels",
-          "url": "/en/swiss-articles/solothurn-labour-market-sectors-salaries/",
-          "excerpt": "Wages, training bands, collective agreements and social security contributions in the Canton of Solothurn. Guide to job search and recruitment procedures in Switzerland.",
-          "date": "2026-08-24T10:08:08.984Z"
-        },
-        {
-          "title": "Rental market in the Canton of Solothurn: average fees and rental rights",
-          "url": "/en/swiss-articles/solothurn-rental-market-average-prices-and-tenant-rights/",
-          "excerpt": "The average rents by area, security deposit, dispute of the initial rent, cancellation and conciliation authority on lease in the Canton of Solothurn.",
-          "date": "2026-08-18T03:30:28.672Z"
-        },
-        {
           "title": "Soleta licence: what to do and how to proceed",
           "url": "/en/swiss-articles/solothurn-switzerland-driving-license-conversion-exams/",
           "excerpt": "Conversion of the foreign driver's license in the Canton of Solothurn: how to apply for the conversion and what to do during the exams.",
           "date": "2026-08-18T04:08:47.013Z"
-        },
-        {
-          "title": "Rentals market in Solothurn: average fees and legal fees",
-          "url": "/en/swiss-articles/solothurn-rents-market-and-tenancy-law/",
-          "excerpt": "Analysis of rent, security deposit and dispute procedures in the Canton of Solothurn.",
-          "date": "2026-08-24T08:37:12.606Z"
         },
         {
           "title": "Solothurn Film Festival 2026: The Financial Challenge Continues",
@@ -368,34 +320,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Mietmarkt Solothurn: Mieten und Mietrecht",
-          "url": "/de/schweiz-artikel/solothurn-mietwohnung-mietrecht-leitfaden/",
-          "excerpt": "Vollständiger Leitfaden zum Mietrecht im Kanton Solothurn: Bundesregeln zur Kaution, Kündigung, Gebührenbeanstandung und Schlichtungsbehörde.",
-          "date": "2026-09-01T23:05:26.177Z"
-        },
-        {
-          "title": "Arbeitsmarkt Solothurn: Löhne, Branchen und Niveaus",
-          "url": "/de/schweiz-artikel/solothurn-arbeitsmarkt-sektoren-verdienstniveaus/",
-          "excerpt": "Löhne, Bildungsstufen, Kollektivverträge und Sozialversicherungsbeiträge im Kanton Solothurn. Leitfaden zur Stellensuche und Einstellungsverfahren in der Schweiz.",
-          "date": "2026-08-24T10:08:08.984Z"
-        },
-        {
-          "title": "Mietmarkt im Kanton Solothurn: Durchschnittsmieten und Mietrecht",
-          "url": "/de/schweiz-artikel/mietpreise-im-kanton-soelothurn-und-mieterrechte/",
-          "excerpt": "Die Durchschnittsmieten pro Zone, Kaution, Anfechtung der Anfangsmiete, Kündigung und Schlichtungsstelle in Mietsachen im Kanton Solothurn.",
-          "date": "2026-08-18T03:30:28.672Z"
-        },
-        {
           "title": "Solothurn-Führerschein: Was zu tun ist und wie vorzugehen",
           "url": "/de/schweiz-artikel/fahrerschein-kanton-solothurn-umstellung-und-pruefungen/",
           "excerpt": "Umbau des ausländischen Führerscheins im Kanton Solothurn: Wie beantrage ich den Umbau und was mache ich während der Prüfungen?",
           "date": "2026-08-18T04:08:47.013Z"
-        },
-        {
-          "title": "Mietmarkt in Solothurn: Durchschnitts- und Rechtsmieten",
-          "url": "/de/schweiz-artikel/solothurn-mietmarkt-und-mietrecht/",
-          "excerpt": "Analyse der Mietzins-, Kautions- und Streitverfahren im Kanton Solothurn.",
-          "date": "2026-08-24T08:37:12.606Z"
         },
         {
           "title": "Solothurn Film Festival 2026: Die finanzielle Herausforderung geht weiter",
@@ -502,34 +430,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Marché locations Soleure : loyers et droit de location",
-          "url": "/fr/articles-suisse/soleure-location-droits-locataire-guide/",
-          "excerpt": "Guide complet du droit locatif dans le canton de Soleure : règles fédérales sur le dépôt de garantie, la résiliation, la contestation des loyers et l'autorité de conciliation.",
-          "date": "2026-09-01T23:05:26.177Z"
-        },
-        {
-          "title": "Marché du travail Soleure : salaires, secteurs et niveaux",
-          "url": "/fr/articles-suisse/soleure-marche-travail-secteurs-salaires/",
-          "excerpt": "Salaires, tranches de formation, conventions collectives et cotisations de sécurité sociale dans le canton de Soleure. Guide de recherche d'emploi et procédures d'embauche en Suisse.",
-          "date": "2026-08-24T10:08:08.984Z"
-        },
-        {
-          "title": "Marché locatif dans le canton de Soleure : loyers moyens et droit de location",
-          "url": "/fr/articles-suisse/le-marche-locatif-du-canton-de-soleure-prix-moyens-et-droits-du-locataire/",
-          "excerpt": "Les loyers moyens par zone, dépôt de garantie, contestation du loyer initial, résiliation et autorité de conciliation en matière de location dans le canton de Soleure.",
-          "date": "2026-08-18T03:30:28.672Z"
-        },
-        {
           "title": "Permis de conduire de Soleure : quoi faire et comment procéder",
           "url": "/fr/articles-suisse/permis-de-conduire-canton-soleure-conversion-et-examens/",
           "excerpt": "Conversion d'un permis de conduire étranger dans le canton de Soleure : comment demander une conversion et quoi faire pendant les examens.",
           "date": "2026-08-18T04:08:47.013Z"
-        },
-        {
-          "title": "Marché des loyers à Soleure : loyers moyens et droit",
-          "url": "/fr/articles-suisse/soleure-marche-loyers-droit-bail/",
-          "excerpt": "Analyse des loyers, du dépôt de garantie et des procédures de contestation dans le canton de Soleure.",
-          "date": "2026-08-24T08:37:12.606Z"
         },
         {
           "title": "Festival du film de Soleure 2026 : Le défi financier continue",

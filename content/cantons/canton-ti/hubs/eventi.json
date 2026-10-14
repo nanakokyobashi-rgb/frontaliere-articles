@@ -5,7 +5,7 @@
   "canton": "TI",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "74c7299ad73c81404293089a27f65021eab7116b19cad5380f9c58d5518edcf5",
+  "contentHash": "260926aa7dfcb561160916eb994a5bd0f869e8457a6ad0321892817f661b2625",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -118,12 +118,6 @@
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Brindisi solidale al Mercato Coperto di Giubiasco",
-          "url": "/articoli-frontaliere/aperitivo-solidale-giubiasco/",
-          "excerpt": "Il Kiwanis Club Bellinzona e Valli festeggia 40 anni",
-          "date": "2026-10-08T14:47:03.662Z"
-        },
-        {
           "title": "Sagra dell'uva a Mendrisio: bilancio positivo",
           "url": "/articoli-frontaliere/sagra-uva-mendrisio-bilancio/",
           "excerpt": "Bilancio positivo per la 70ª Sagra dell'uva di Mendrisio: stimate 20-25mila persone e nessun intervento di rilievo per la sicurezza.",
@@ -146,6 +140,12 @@
           "url": "/articoli-svizzera/rientro-maternita-filanda/",
           "excerpt": "Le Città di Chiasso e Mendrisio promuovono a LaFilanda un percorso gratuito con colloqui, incontri e babysitting per il rientro al lavoro dopo la maternità.",
           "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Locarno Film Festival: la cultura come legame",
+          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
+          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -268,11 +268,6 @@
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Solidarity toast at the Giubiasco Covered Market",
-          "url": "/en/cross-border-articles/solidarity-toast-giubiasco-market/",
-          "date": "2026-10-08T14:47:03.662Z"
-        },
-        {
           "title": "Grape Festival in Mendrisio: positive outcome",
           "url": "/en/cross-border-articles/mendrisio-grape-festival-results/",
           "excerpt": "Positive outcome for the 70th Mendrisio Grape Festival: an estimated 20,000–25,000 people and no major security interventions.",
@@ -295,6 +290,12 @@
           "url": "/en/swiss-articles/return-to-work-maternity-filanda/",
           "excerpt": "The cities of Chiasso and Mendrisio are offering a free program at LaFilanda that includes counseling sessions, meetings, and childcare services to help women return to work after maternity leave.",
           "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Locarno Film Festival: culture as a link",
+          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
+          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -417,11 +418,6 @@
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Solidarischer Umtrunk im Mercato Coperto di Giubiasco",
-          "url": "/de/grenzgaenger-artikel/solidaritaetsanlass-markt-giubiasco/",
-          "date": "2026-10-08T14:47:03.662Z"
-        },
-        {
           "title": "Traubenfest in Mendrisio: positive Bilanz",
           "url": "/de/grenzgaenger-artikel/traubenfest-mendrisio-bilanz/",
           "excerpt": "Positive Bilanz für das 70. Traubenfest von Mendrisio: schätzungsweise 20-25 Tausend Personen und kein nennenswerter Sicherheitseinsatz.",
@@ -444,6 +440,12 @@
           "url": "/de/schweiz-artikel/wiedereinstieg-mutterschaft-filanda/",
           "excerpt": "Die Städte Chiasso und Mendrisio bieten bei LaFilanda ein kostenloses Programm mit Beratungsgesprächen, Treffen und Kinderbetreuung an, um Frauen den Wiedereinstieg in den Beruf nach der Mutterschaft zu erleichtern.",
           "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Locarno Film Festival: Kultur als Verbindung",
+          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
+          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [
@@ -566,12 +568,6 @@
           "date": "2026-09-16T01:17:21.635Z"
         },
         {
-          "title": "Brindisi solidaire au Marché couvert de Giubiasco",
-          "url": "/fr/articles-frontalier/aperitif-solidaire-marche-giubiasco/",
-          "excerpt": "Le Kiwanis Club Bellinzona e Valli fête ses 40 ans",
-          "date": "2026-10-08T14:47:03.662Z"
-        },
-        {
           "title": "Fête du raisin à Mendrisio : bilan positif",
           "url": "/fr/articles-frontalier/fete-raisin-mendrisio-bilan/",
           "excerpt": "Bilan positif pour la 70e Fête du raisin de Mendrisio : 20-25 mille personnes estimées et aucune intervention notable pour la sécurité.",
@@ -594,6 +590,12 @@
           "url": "/fr/articles-suisse/retour-travail-maternite-filanda/",
           "excerpt": "Les villes de Chiasso et de Mendrisio proposent à LaFilanda un parcours gratuit comprenant des entretiens, des rencontres et un service de garde d'enfants pour faciliter le retour au travail après un congé maternité.",
           "date": "2026-10-02T07:54:35.169Z"
+        },
+        {
+          "title": "Festival du film de Locarno : la culture comme lien",
+          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
+          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "links": [

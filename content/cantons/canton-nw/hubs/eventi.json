@@ -5,7 +5,7 @@
   "canton": "NW",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "5e2e118cfe9a6ce8ac168cab4ccf8fce6df7172d26e72dc01b4715371e72c0ba",
+  "contentHash": "83655d1bb491f5a9b55843c3f08fd3f7c60d4448ef272074576d6b455f27ce41",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,26 +98,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Salari e mercato del lavoro canton Nidvaldo: settori e livelli",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-canton-nidvaldo-settori-livelli/",
-          "excerpt": "Mercato del lavoro nel Cantone di Nidvaldo: settori che assumono, livelli salariali per grado di formazione, contratti collettivi in vigore e salario minimo dove previsto.",
-          "date": "2026-08-16T23:59:15.962Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro nel Cantone di Nidvaldo",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-canton-nidvaldo/",
-          "excerpt": "Analisi dei settori che assumono, dei livelli salariali per formazione, dei contratti collettivi e del contesto normativo nel Cantone di Nidvaldo.",
-          "date": "2026-08-16T23:48:24.883Z"
-        },
-        {
-          "title": "Mercato degli affitti nel Canton Nidvaldo: canoni medi e diritto di locazione",
-          "url": "/articoli-svizzera/mercato-gli-affitti-canton-nidvaldo/",
-          "excerpt": "I canoni medi per affitti nel Canton Nidvaldo sono di CHF 2'500 per mese.",
-          "date": "2026-08-16T21:20:30.368Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Nidvaldo",
@@ -214,26 +195,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Wages and labour market canton Nidwalden: sectors and levels",
-          "url": "/en/swiss-articles/salaries-labor-market-canton-nidwalden-sectors-levels/",
-          "excerpt": "Labour market in the Canton of Nidwalden: hiring sectors, wage levels by level of training, collective agreements in force and minimum wage where applicable.",
-          "date": "2026-08-16T23:59:15.962Z"
-        },
-        {
-          "title": "Wages and labour market in the Canton of Nidwalden",
-          "url": "/en/swiss-articles/wages-labor-market-canton-nidwalden/",
-          "excerpt": "Analysis of the sectors they hire, salary levels for training, collective agreements and the regulatory environment in the Canton of Nidwalden.",
-          "date": "2026-08-16T23:48:24.883Z"
-        },
-        {
-          "title": "Rental market in the canton of Nidwalden: average rents and tenancy law",
-          "url": "/en/swiss-articles/nidwalden-rental-market/",
-          "excerpt": "The average rent in the canton of Nidwalden is CHF 2,500 per month.",
-          "date": "2026-08-16T21:20:30.368Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "All events in Nidwalden",
@@ -330,26 +292,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Löhne und Arbeitsmarkt Kanton Nidwalden: Branchen und Niveaus",
-          "url": "/de/schweiz-artikel/gehalter-arbeitsmarkt-kanton-nidwalden-sektoren-stufen/",
-          "excerpt": "Arbeitsmarkt im Kanton Nidwalden: Einstellungsbranchen, Lohnniveau nach Bildungsgrad, geltende Tarifverträge und Mindestlohn wo vorgesehen.",
-          "date": "2026-08-16T23:59:15.962Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt im Kanton Nidwalden",
-          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-kanton-nidwalden/",
-          "excerpt": "Analyse der von ihnen übernommenen Branchen, des Lohnniveaus pro Ausbildung, der Tarifverträge und des regulatorischen Umfelds im Kanton Nidwalden.",
-          "date": "2026-08-16T23:48:24.883Z"
-        },
-        {
-          "title": "Mietmarkt im Kanton Nidwalden: Durchschnittsmieten und Mietrecht",
-          "url": "/de/schweiz-artikel/nidwalden-mietwohnungsmarkt/",
-          "excerpt": "Die durchschnittliche Miete im Kanton Nidwalden beträgt 2.500 CHF pro Monat.",
-          "date": "2026-08-16T21:20:30.368Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen in Nidwalden",
@@ -446,26 +389,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Salaires et marché du travail canton de Nidwald : secteurs et niveaux",
-          "url": "/fr/articles-suisse/salaire-marche-du-travail-canton-nidwald-secteurs-niveaux/",
-          "excerpt": "Marché du travail dans le canton de Nidwald : secteurs qui embauchent, niveaux de salaire par niveau de formation, conventions collectives en vigueur et salaire minimum le cas échéant.",
-          "date": "2026-08-16T23:59:15.962Z"
-        },
-        {
-          "title": "Salaires et marché du travail dans le canton de Nidwald",
-          "url": "/fr/articles-suisse/salaires-marche-travail-canton-nidwald/",
-          "excerpt": "Analyse des secteurs qu'ils prennent, des niveaux de salaire par formation, des conventions collectives et de l'environnement réglementaire dans le canton de Nidwald.",
-          "date": "2026-08-16T23:48:24.883Z"
-        },
-        {
-          "title": "Marché locatif à Nidwald : loyers moyens et droit du bail",
-          "url": "/fr/articles-suisse/nidwald-marche-des-louages/",
-          "excerpt": "Le loyer moyen dans le canton de Nidwald est de 2 500 CHF par mois.",
-          "date": "2026-08-16T21:20:30.368Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tous les événements à Nidwald",

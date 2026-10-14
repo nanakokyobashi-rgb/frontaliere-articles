@@ -5,7 +5,7 @@
   "canton": "SZ",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "81582d7ae24675a8f0d1fd41ee2767409e4b514e7838e7c0d37cabc9be9c8355",
+  "contentHash": "938f80e3d0b169b7b9295a3628ef2e2e736661934ebc58495fca5a06bb0ea026",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,26 +98,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Salari e mercato del lavoro Canton Svitto: settori e livelli",
-          "url": "/articoli-svizzera/svitto-salari-formazione-settori/",
-          "excerpt": "Il mercato del lavoro nel Cantone di Svitto: struttura salariale per grado di formazione, contratti collettivi, contributi obbligatori e diritti minimi.",
-          "date": "2026-08-30T01:06:57.873Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro nel Cantone di Svitto: settori e livelli",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-cantone-svitto/",
-          "excerpt": "La situazione del mercato del lavoro nel Cantone di Svitto, con dati e statistiche sulle condizioni di lavoro e sui salari.",
-          "date": "2026-08-16T14:04:48.936Z"
-        },
-        {
-          "title": "Mercato degli affitti nel Cantone di Svitto: canoni medi e diritto di locazione",
-          "url": "/articoli-svizzera/mercato-affitti-cantone-svitto/",
-          "excerpt": "I canoni medi per zona nel Cantone di Svitto sono di CHF 1'500 per mese.",
-          "date": "2026-08-16T13:13:38.652Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Svitto",
@@ -214,26 +195,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Wages and labour market Canton of Switzerland: sectors and levels",
-          "url": "/en/swiss-articles/schwyz-salaries-labor-market-education/",
-          "excerpt": "The labour market in the Canton of Schwyz: wage structure by degree of training, collective agreements, compulsory contributions and minimum rights.",
-          "date": "2026-08-30T01:06:57.873Z"
-        },
-        {
-          "title": "Wages and the labour market in the Canton of Schwyz: sectors and levels",
-          "url": "/en/swiss-articles/salaries-labor-market-canton-schwyz/",
-          "excerpt": "The situation of the labour market in the Canton of Schwyz, with data and statistics on working conditions and wages.",
-          "date": "2026-08-16T14:04:48.936Z"
-        },
-        {
-          "title": "Rental market in the Canton of Schwyz: average fees and rental rights",
-          "url": "/en/swiss-articles/affitts-in-canton-schwyz/",
-          "excerpt": "Average rents per area in the Canton of Schwyz are CHF 1,500 per month.",
-          "date": "2026-08-16T13:13:38.652Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "All events in the canton of Schwyz",
@@ -330,26 +292,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Löhne und Arbeitsmarkt Kanton Schwyz: Branchen und Niveaus",
-          "url": "/de/schweiz-artikel/schwyz-lohne-arbeitsmarkt-bildung/",
-          "excerpt": "Der Arbeitsmarkt im Kanton Schwyz: Lohnstruktur nach Bildungsgrad, Tarifverträge, Pflichtbeiträge und Mindestansprüche.",
-          "date": "2026-08-30T01:06:57.873Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt im Kanton Schwyz: Branchen und Niveaus",
-          "url": "/de/schweiz-artikel/lohne-arbeitsmarkt-kanton-schwyz/",
-          "excerpt": "Die Arbeitsmarktsituation im Kanton Schwyz mit Daten und Statistiken zu Arbeitsbedingungen und Löhnen.",
-          "date": "2026-08-16T14:04:48.936Z"
-        },
-        {
-          "title": "Mietmarkt im Kanton Schwyz: Durchschnittsmieten und Mietrecht",
-          "url": "/de/schweiz-artikel/mietpreise-im-kanton-schwyz/",
-          "excerpt": "Die durchschnittlichen Gebühren pro Zone im Kanton Schwyz betragen CHF 1'500 pro Monat.",
-          "date": "2026-08-16T13:13:38.652Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Schwyz",
@@ -446,26 +389,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Salaires et marché du travail Canton de Schwytz : secteurs et niveaux",
-          "url": "/fr/articles-suisse/schwytz-salaires-marche-travail-formation/",
-          "excerpt": "Le marché du travail dans le canton de Schwytz : structure des salaires par niveau de formation, conventions collectives, cotisations obligatoires et droits minimaux.",
-          "date": "2026-08-30T01:06:57.873Z"
-        },
-        {
-          "title": "Salaires et marché du travail dans le canton de Schwytz : secteurs et niveaux",
-          "url": "/fr/articles-suisse/salaires-marche-du-travail-canton-schwytz/",
-          "excerpt": "La situation du marché du travail dans le canton de Schwytz, avec des données et des statistiques sur les conditions de travail et les salaires.",
-          "date": "2026-08-16T14:04:48.936Z"
-        },
-        {
-          "title": "Marché locatif à Schwytz : loyers moyens et droit du bail",
-          "url": "/fr/articles-suisse/logement-dans-le-canton-de-schwytz/",
-          "excerpt": "Les loyers moyens par zone dans le canton de Schwytz sont de CHF 1'500 par mois.",
-          "date": "2026-08-16T13:13:38.652Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton de Schwytz",

@@ -5,7 +5,7 @@
   "canton": "AG",
   "topic": "mobilita",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "eb4b4b50118d2eb6f45cbc3aae645b09efe8eb48ff52e4c352431c81defa8eb7",
+  "contentHash": "74db5486219fc0b0a98e959925f49d22f74b9ece5d29b6d5a044722f1d3a30d0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -207,12 +207,6 @@
           "url": "/articoli-argovia/obermumpf-strada-sanificazione-2024/",
           "excerpt": "Lunedì 12 ottobre partono i lavori di risanamento della Hauptstrasse K491 a Obermumpf: 1.250 metri di strada, fermate bus accessibili con bordi a 22 cm e nuova passerella sul Fischingerbach, fino all'autunno 2027.",
           "date": "2026-10-09T06:35:59.639Z"
-        },
-        {
-          "title": "Incidente ad Aarau: 18enne frontaliero ubriaco causa danni totali",
-          "url": "/articoli-frontaliere/incidente-aarau-18enne-frontaliere/",
-          "excerpt": "Un giovane apprendista di 18 anni, residente in Ticino, ha causato un incidente stradale ad Aarau, provocando danni totali all'auto.",
-          "date": "2026-04-29T08:55:31.413Z"
         }
       ],
       "links": [
@@ -430,12 +424,6 @@
           "url": "/en/aargau-articles/obermumpf-construction-work-on-the-k491-until-autumn-2027/",
           "excerpt": "Monday, October 12, rehabilitation works begin on Hauptstrasse K491 in Obermumpf: 1.250 metres of road, accessible bus stops with 22 cm curbs and a new footbridge over the Fischingerbach, through autumn 2027.",
           "date": "2026-10-09T06:35:59.639Z"
-        },
-        {
-          "title": "Aarau crash: drunk 18-year-old cross-border worker totals car",
-          "url": "/en/cross-border-articles/aarau-crash-18-year-old-cross-border-worker/",
-          "excerpt": "An 18-year-old apprentice from Ticino caused a road accident in Aarau, resulting in total damage to the car.",
-          "date": "2026-04-29T08:55:31.413Z"
         }
       ],
       "links": [
@@ -653,12 +641,6 @@
           "url": "/de/aargau-artikel/obermumpf-bauarbeiten-an-der-k491-bis-herbst-2027/",
           "excerpt": "Am Montag, 12.",
           "date": "2026-10-09T06:35:59.639Z"
-        },
-        {
-          "title": "Unfall in Aarau: Betrunkener Grenzgänger verursacht Totalschaden",
-          "url": "/de/grenzgaenger-artikel/aarau-unfall-18-jahriger-grenzgaenger/",
-          "excerpt": "Ein 18-jähriger Lehrling aus dem Tessin verursachte in Aarau einen Verkehrsunfall und richtete Totalschaden am Auto an.",
-          "date": "2026-04-29T08:55:31.413Z"
         }
       ],
       "links": [
@@ -876,12 +858,6 @@
           "url": "/fr/articles-argovie/obermumpf-travaux-sur-la-k491-jusqu-a-l-automne-2027/",
           "excerpt": "Lundi 12 octobre débutent les travaux d'assainissement de la Hauptstrasse K491 à Obermumpf : 1.250 mètres de route, arrêts de bus accessibles avec des bordures de 22 cm et nouvelle passerelle sur le Fischingerbach…",
           "date": "2026-10-09T06:35:59.639Z"
-        },
-        {
-          "title": "Accident à Aarau: un frontalier ivre cause des dégâts totaux",
-          "url": "/fr/articles-frontalier/accident-aarau-18-ans-frontalier/",
-          "excerpt": "Un jeune apprenti de 18 ans, résidant au Tessin, a causé un accident de la route à Aarau, provoquant des dégâts totaux à la voiture.",
-          "date": "2026-04-29T08:55:31.413Z"
         }
       ],
       "links": [

@@ -5,7 +5,7 @@
   "canton": "LU",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "1a77644d3080885dafbb0793ef4add0253d008a0c76a786e851ddc8bd66166fd",
+  "contentHash": "24383028f85c15508b1dfc4f31dc6bc5fc7371f86a9a47ab0b9acb138815e343",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -142,30 +142,6 @@
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Affitti in Svizzera 2026: mercato immobiliare a Lucerna",
-          "url": "/articoli-svizzera/canoni-casa-lucerna-2026/",
-          "excerpt": "Affitti in Svizzera nel 2026: cauzione fino a tre mesi, conto vincolato e 30 giorni per contestare la disdetta. Focus sul canton Lucerna.",
-          "date": "2026-10-03T05:29:36.089Z"
-        },
-        {
-          "title": "Mercato degli affitti nel Canton di Lucerna: canoni medi e diritto di locazione",
-          "url": "/articoli-svizzera/mercato-gli-affitti-canton-lucerna/",
-          "excerpt": "Il mercato degli affitti nel Canton di Lucerna: canoni medi per zona, deposito di garanzia, contestazione del canone iniziale, disdetta e autorità di conciliazione.",
-          "date": "2026-08-15T18:11:18.228Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro canton Lucerna",
-          "url": "/articoli-svizzera/lucerna-salari-formazione/",
-          "excerpt": "Livelli salariali per grado di formazione, settori che assumono, contratti collettivi. Come valutare un'offerta e calcolare il netto in Svizzera.",
-          "date": "2026-08-22T11:32:42.615Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro nel Cantone di Lucerna: settori e livelli",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-lucerna-settori-livelli/",
-          "excerpt": "Il Cantone di Lucerna offre una varietà di settori che assumono e livelli salariali diversi, a seconda del grado di formazione.",
-          "date": "2026-08-15T22:38:13.578Z"
-        },
         {
           "title": "Patente di guida a Lucerna: cosa fare e sapere",
           "url": "/articoli-svizzera/patente-guida-lucerna-conversione-ed-esami/",
@@ -309,30 +285,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Rentals in Switzerland 2026: real estate market in Lucerne",
-          "url": "/en/swiss-articles/swiss-rental-market-lucerne-2026/",
-          "excerpt": "Rentals in Switzerland in 2026: a deposit of up to three months, an escrow account and 30 days to contest the termination notice. Focus on the canton of Lucerne.",
-          "date": "2026-10-03T05:29:36.089Z"
-        },
-        {
-          "title": "Rental market in the canton of Lucerne: average fees and rental rights",
-          "url": "/en/swiss-articles/lucerne-cantonal-rental-market/",
-          "excerpt": "The rental market in the Canton of Lucerne: average rents by area, security deposit, dispute of the initial rent, cancellation and conciliation authority.",
-          "date": "2026-08-15T18:11:18.228Z"
-        },
-        {
-          "title": "Wages and labour market canton Lucerne",
-          "url": "/en/swiss-articles/lucerne-wages-education/",
-          "excerpt": "Wage levels by level of training, sectors they hire, collective agreements. How to evaluate an offer and calculate the net in Switzerland.",
-          "date": "2026-08-22T11:32:42.615Z"
-        },
-        {
-          "title": "Wages and the labour market in the Canton of Lucerne: sectors and levels",
-          "url": "/en/swiss-articles/salaries-labor-market-lucerne-sectors-levels/",
-          "excerpt": "The Canton of Lucerne offers a variety of hiring sectors and different salary levels, depending on the degree of training.",
-          "date": "2026-08-15T22:38:13.578Z"
-        },
-        {
           "title": "Driver's license in Lucerne: what to do and know",
           "url": "/en/swiss-articles/driver-s-license-in-lucerne-what-to-do-and-know/",
           "excerpt": "The conversion of the driving licence in the Canton of Lucerne: requirements, procedures and timelines.",
@@ -475,30 +427,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Mieten in der Schweiz 2026: Immobilienmarkt in Luzern",
-          "url": "/de/schweiz-artikel/mietmarkt-schweiz-luzern-2026/",
-          "excerpt": "Mieten in der Schweiz im Jahr 2026: Kaution bis zu drei Monatsmieten, Sperrkonto und 30 Tage, um die Kündigung anzufechten. Fokus auf den Kanton Luzern.",
-          "date": "2026-10-03T05:29:36.089Z"
-        },
-        {
-          "title": "Mietmarkt im Kanton Luzern: Durchschnittsmieten und Mietrecht",
-          "url": "/de/schweiz-artikel/mietmarkt-kanton-luzern/",
-          "excerpt": "Der Mietmarkt im Kanton Luzern: Durchschnittsmieten pro Zone, Kaution, Anfechtung der Erstmiete, Kündigung und Schlichtungsstelle.",
-          "date": "2026-08-15T18:11:18.228Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt Kanton Luzern",
-          "url": "/de/schweiz-artikel/luzern-loehne-ausbildung/",
-          "excerpt": "Lohnniveaus nach Bildungsabschluss, Bereiche, die sie übernehmen, Tarifverträge. Wie bewerte ich ein Angebot und berechne das Netto in der Schweiz.",
-          "date": "2026-08-22T11:32:42.615Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt im Kanton Luzern: Branchen und Niveaus",
-          "url": "/de/schweiz-artikel/gehalte-arbeitsmarkt-luzern-sektoren-stufen/",
-          "excerpt": "Der Kanton Luzern bietet je nach Bildungsgrad eine Vielzahl von Einstellungsbranchen und unterschiedliche Lohnniveaus.",
-          "date": "2026-08-15T22:38:13.578Z"
-        },
-        {
           "title": "Führerschein in Luzern: was zu tun und zu wissen ist",
           "url": "/de/schweiz-artikel/fuhrerschein-in-luzern-was-zu-tun-und-zu-wissen-ist/",
           "excerpt": "Die Umstellung des Führerscheins im Kanton Luzern: Voraussetzungen, Verfahren und Fristen.",
@@ -640,30 +568,6 @@
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Loyers en Suisse 2026 : marché immobilier à Lucerne",
-          "url": "/fr/articles-suisse/marche-locatif-suisse-lucerne-2026/",
-          "excerpt": "Loyers en Suisse en 2026 : dépôt de garantie jusqu'à trois mois, compte bloqué et 30 jours pour contester la résiliation. Focus sur le canton de Lucerne.",
-          "date": "2026-10-03T05:29:36.089Z"
-        },
-        {
-          "title": "Marché locatif dans le canton de Lucerne : loyers moyens et droit de location",
-          "url": "/fr/articles-suisse/marche-du-location-canton-de-lucerne/",
-          "excerpt": "Le marché locatif dans le canton de Lucerne : loyers moyens par zone, dépôt de garantie, contestation du loyer initial, résiliation et autorité de conciliation.",
-          "date": "2026-08-15T18:11:18.228Z"
-        },
-        {
-          "title": "Salaires et marché du travail canton de Lucerne",
-          "url": "/fr/articles-suisse/lucerne-salaires-formation/",
-          "excerpt": "Niveaux de salaire par niveau de formation, secteurs qu'ils embauchent, conventions collectives. Comment évaluer une offre et calculer le net en Suisse.",
-          "date": "2026-08-22T11:32:42.615Z"
-        },
-        {
-          "title": "Salaires et marché du travail dans le canton de Lucerne : secteurs et niveaux",
-          "url": "/fr/articles-suisse/salaires-marche-du-travail-lucerne-secteurs-niveaux/",
-          "excerpt": "Le canton de Lucerne offre une variété de secteurs d'activité et des niveaux de salaire différents, en fonction du degré de formation.",
-          "date": "2026-08-15T22:38:13.578Z"
-        },
         {
           "title": "Permis de conduire à Lucerne : que faire et que savoir",
           "url": "/fr/articles-suisse/permis-de-conduire-a-lucerne-que-faire-et-que-savoir/",

@@ -5,7 +5,7 @@
   "canton": "UR",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "f5e5d5a66cc85c91867ebfaac22b3fe14a39c661d6f059a50543186e6b70406b",
+  "contentHash": "d3448ac07daed438d30a1f55f3fb68a5603c1514b2b132872df521268f012189",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,26 +98,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Salari e mercato del lavoro nel canton Uri",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-uri-settori/",
-          "excerpt": "Analisi dei livelli salariali per formazione, settori di impiego, contratti collettivi e salario minimo nel mercato del lavoro del canton Uri.",
-          "date": "2026-09-03T21:16:59.901Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro in Uri",
-          "url": "/articoli-svizzera/uri-settori-assunzione-retribuzioni/",
-          "excerpt": "Come si determinano gli stipendi in Uri? Scopri settori, livelli di formazione, contratti collettivi, tassazione e previdenza nel cantone alpino svizzero.",
-          "date": "2026-08-22T20:41:32.432Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro in Uri: chi assume e contratti collettivi",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-cantone-uri/",
-          "excerpt": "Il Cantone di Uri ha un tasso di occupazione alto e una forte domanda di lavoro. I settori che assumono di più sono l'industria, la costruzione e i servizi.",
-          "date": "2026-08-16T10:46:28.174Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Uri",
@@ -214,26 +195,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Wages and labour market in canton Uri",
-          "url": "/en/swiss-articles/wages-labor-market-uri-canton-sectors/",
-          "excerpt": "Analysis of wage levels by training, employment sectors, collective agreements and minimum wage in the labour market of canton Uri.",
-          "date": "2026-09-03T21:16:59.901Z"
-        },
-        {
-          "title": "Wages and labour market in URIs",
-          "url": "/en/swiss-articles/uri-sectors-employment-compensation/",
-          "excerpt": "How are salaries determined in URIs? Discover sectors, levels of training, collective agreements, taxation and social security in the Swiss Alpine canton.",
-          "date": "2026-08-22T20:41:32.432Z"
-        },
-        {
-          "title": "Wages and Labour Market in URIs: Hiring and Collective Bargaining",
-          "url": "/en/swiss-articles/wages-and-labour-market-in-uris-hiring-and-collective-bargaining/",
-          "excerpt": "The Canton of Uri has a high employment rate and a strong demand for labour. The sectors that hire the most are industry, construction and services.",
-          "date": "2026-08-16T10:46:28.174Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "All events in the canton of Uri",
@@ -330,26 +292,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Löhne und Arbeitsmarkt im Kanton Uri",
-          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-uri-kanton-sektoren/",
-          "excerpt": "Analyse des Lohnniveaus nach Ausbildung, Berufsfeldern, Tarifverträgen und Mindestlohn auf dem Arbeitsmarkt des Kantons Uri.",
-          "date": "2026-09-03T21:16:59.901Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt in Uri",
-          "url": "/de/schweiz-artikel/uri-sektoren-beschaeftigung-verguetung/",
-          "excerpt": "Wie werden die Gehälter in Uri ermittelt? Entdecken Sie Branchen, Ausbildungsniveaus, Tarifverträge, Besteuerung und Vorsorge im Schweizer Alpenkanton.",
-          "date": "2026-08-22T20:41:32.432Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt in Uri: Wer beschäftigt und Tarifverträge",
-          "url": "/de/schweiz-artikel/lohne-und-arbeitsmarkt-in-uri-wer-beschaftigt-und-tarifvertrage/",
-          "excerpt": "Der Kanton Uri hat eine hohe Beschäftigungsquote und eine hohe Nachfrage nach Arbeitskräften. Die Sektoren, die am meisten beschäftigen, sind die Industrie, das Baugewerbe und der Dienstleistungssektor.",
-          "date": "2026-08-16T10:46:28.174Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Uri",
@@ -446,26 +389,7 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [
-        {
-          "title": "Salaires et marché du travail dans le canton d'Uri",
-          "url": "/fr/articles-suisse/salaires-marche-travail-canton-uri-secteurs/",
-          "excerpt": "Analyse des niveaux de salaire pour la formation, les secteurs d'emploi, les conventions collectives et le salaire minimum sur le marché du travail du canton d'Uri.",
-          "date": "2026-09-03T21:16:59.901Z"
-        },
-        {
-          "title": "Salaires et marché du travail à URI",
-          "url": "/fr/articles-suisse/uri-secteurs-emploi-remuneration/",
-          "excerpt": "Comment sont déterminés les salaires en URI ? Découvrez les secteurs, les niveaux de formation, les conventions collectives, la fiscalité et la prévoyance dans le canton alpin suisse.",
-          "date": "2026-08-22T20:41:32.432Z"
-        },
-        {
-          "title": "Salaires et marché du travail à URI : qui embauche et conventions collectives",
-          "url": "/fr/articles-suisse/salaires-et-marche-du-travail-a-uri-qui-embauche-et-conventions-collectives/",
-          "excerpt": "Le canton d'Uri a un taux d'emploi élevé et une forte demande de travail. Les secteurs qui recrutent le plus sont l'industrie, la construction et les services.",
-          "date": "2026-08-16T10:46:28.174Z"
-        }
-      ],
+      "curatedArticles": [],
       "links": [
         {
           "label": "Tous les événements dans le canton d'Uri",

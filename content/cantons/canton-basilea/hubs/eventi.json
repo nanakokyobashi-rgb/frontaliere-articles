@@ -5,7 +5,7 @@
   "canton": "BASILEA",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "a881210a046cfac7e7ae39e0222640f802b6929fe5585c2351b0339b80c1a3f5",
+  "contentHash": "13f9c0e6c6cccb8bd5829e558e05a5cc429218388788395f6f774505b810e04f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -99,30 +99,6 @@
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Mercato del lavoro Basilea Campagna: salari e settori",
-          "url": "/articoli-svizzera/canton-basilea-campagna-settori/",
-          "excerpt": "Guida pratica a salari, orari, diritti e previdenza nel mercato del lavoro svizzero. Scopri contributi AVS, LPP, tassazione cantonale e come valutare un'offerta.",
-          "date": "2026-08-20T04:03:27.824Z"
-        },
-        {
-          "title": "Mercato lavoro Basilea Città: salari, settori e contratti",
-          "url": "/articoli-svizzera/settori-salari-basilea-livelli-formazione/",
-          "excerpt": "Guida ai livelli salariali per grado di formazione, settori che assumono, contratti collettivi e meccanismi del mercato del lavoro nel Cantone di Basilea Città.",
-          "date": "2026-08-19T18:28:29.965Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro a Basilea Città",
-          "url": "/articoli-svizzera/salari-mercato-lavoro-basilea-citta/",
-          "excerpt": "Sistema di contributi, orari e diritti dei lavoratori nel cantone di Basilea Città: norme federali, previdenza obbligatoria e regole cantonali per chi lavora in Svizzera.",
-          "date": "2026-08-19T17:56:04.922Z"
-        },
-        {
-          "title": "Mercato degli affitti in Basilea Città: canoni medi e diritto di locazione",
-          "url": "/articoli-svizzera/affitti-basilea-citta/",
-          "excerpt": "I canoni medi per zona, deposito di garanzia e diritto di locazione in Basilea Città.",
-          "date": "2026-08-18T12:17:20.375Z"
-        },
         {
           "title": "Gratis al museo in costume da bagno: l'iniziativa della Fondazione Beyeler",
           "url": "/articoli-frontaliere/gratis-museo-costume-bagno-2026/",
@@ -228,30 +204,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Labour market Basel Countryside: wages and sectors",
-          "url": "/en/swiss-articles/canton-basel-landschaft-sectors/",
-          "excerpt": "Practical guide to wages, hours, rights and social security in the Swiss labour market. Discover AVS contributions, LPP, cantonal taxation and how to evaluate an offer.",
-          "date": "2026-08-20T04:03:27.824Z"
-        },
-        {
-          "title": "Labour market Basel City: wages, sectors and contracts",
-          "url": "/en/swiss-articles/basel-city-labor-market-sectors-salaries-qualification/",
-          "excerpt": "Guide to wage levels by education level, hiring sectors, collective agreements and labour market mechanisms in the Canton of Basel-City.",
-          "date": "2026-08-19T18:28:29.965Z"
-        },
-        {
-          "title": "Wages and the labour market in Basel City",
-          "url": "/en/swiss-articles/wages-labor-market-basel-stadt/",
-          "excerpt": "System of contributions, hours and workers' rights in the canton of Basel-City: federal rules, compulsory social security and cantonal rules for those working in Switzerland.",
-          "date": "2026-08-19T17:56:04.922Z"
-        },
-        {
-          "title": "Basel City Rental Market: Average Rentals and Lease Fee",
-          "url": "/en/swiss-articles/basel-city-rentals/",
-          "excerpt": "Average rents by area, security deposit and rental right in Basel City.",
-          "date": "2026-08-18T12:17:20.375Z"
-        },
-        {
           "title": "Free Museum Entry in Swimwear at Beyeler Foundation",
           "url": "/en/cross-border-articles/free-museum-swimwear-2026/",
           "excerpt": "The Beyeler Foundation in Riehen offers free entry in swimwear for a day dedicated to Paul Cézanne and his paintings of bathers.",
@@ -356,30 +308,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Arbeitsmarkt Basel-Landschaft: Löhne und Branchen",
-          "url": "/de/schweiz-artikel/kanton-basel-landschaft-sektoren/",
-          "excerpt": "Praktischer Leitfaden zu Löhnen, Arbeitszeiten, Ansprüchen und Vorsorge auf dem Schweizer Arbeitsmarkt. Entdecken Sie AHV-Beiträge, BVG, kantonale Besteuerung und wie Sie ein Angebot bewerten.",
-          "date": "2026-08-20T04:03:27.824Z"
-        },
-        {
-          "title": "Arbeitsmarkt Basel-Stadt: Löhne, Branchen und Verträge",
-          "url": "/de/schweiz-artikel/basel-stadt-arbeitsmarkt-sektoren-loehne-ausbildung/",
-          "excerpt": "Leitfaden zu den Lohnniveaus nach Bildungsabschluss, eingestellten Branchen, Tarifverträgen und Arbeitsmarktmechanismen im Kanton Basel-Stadt.",
-          "date": "2026-08-19T18:28:29.965Z"
-        },
-        {
-          "title": "Löhne und Arbeitsmarkt in Basel-Stadt",
-          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-basel-stadt/",
-          "excerpt": "System der Beiträge, Arbeitszeiten und Arbeitnehmerrechte im Kanton Basel-Stadt: Bundesvorschriften, obligatorische Vorsorge und kantonale Regelungen für Erwerbstätige in der Schweiz.",
-          "date": "2026-08-19T17:56:04.922Z"
-        },
-        {
-          "title": "Mietmarkt Basel-Stadt: Durchschnittsmieten und Mietrecht",
-          "url": "/de/schweiz-artikel/mieten-basel-stadt/",
-          "excerpt": "Die Durchschnittsmieten pro Zone, Kaution und Mietrecht in Basel-Stadt.",
-          "date": "2026-08-18T12:17:20.375Z"
-        },
-        {
           "title": "Kostenlos im Museum im Badeanzug: Initiative der Fondation Beyeler",
           "url": "/de/grenzgaenger-artikel/museum-kostenlos-badekleidung-2026/",
           "excerpt": "Die Fondation Beyeler in Riehen bietet freien Eintritt im Badeanzug für einen Tag, der Paul Cézanne und seinen Gemälden von Badenden gewidmet ist.",
@@ -483,30 +411,6 @@
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Marché du travail Bâle-Campagne : salaires et secteurs",
-          "url": "/fr/articles-suisse/canton-bale-campagne-secteurs/",
-          "excerpt": "Guide pratique sur les salaires, les horaires, les droits et la prévoyance sur le marché du travail suisse. Découvrez les cotisations AVS, LPP, la fiscalité cantonale et comment évaluer une offre.",
-          "date": "2026-08-20T04:03:27.824Z"
-        },
-        {
-          "title": "Marché du travail Bâle-Ville : salaires, secteurs et contrats",
-          "url": "/fr/articles-suisse/bale-ville-marche-travail-secteurs-salaires-formation/",
-          "excerpt": "Guide des niveaux de salaire par niveau de formation, secteurs qu'ils embauchent, conventions collectives et mécanismes du marché du travail dans le canton de Bâle-Ville.",
-          "date": "2026-08-19T18:28:29.965Z"
-        },
-        {
-          "title": "Salaires et marché du travail à Bâle-Ville",
-          "url": "/fr/articles-suisse/salaires-marche-travail-bale-ville/",
-          "excerpt": "Système de cotisations, horaires et droits des travailleurs dans le canton de Bâle-Ville : règles fédérales, prévoyance obligatoire et règles cantonales pour ceux qui travaillent en Suisse.",
-          "date": "2026-08-19T17:56:04.922Z"
-        },
-        {
-          "title": "Marché locatif à Bâle-Ville : loyers moyens et droit de location",
-          "url": "/fr/articles-suisse/locations-bale-ville/",
-          "excerpt": "Les loyers moyens par zone, dépôt de garantie et droit de location à Bâle-Ville.",
-          "date": "2026-08-18T12:17:20.375Z"
-        },
         {
           "title": "Entrée gratuite en maillot de bain au musée Beyeler",
           "url": "/fr/articles-frontalier/musee-gratuit-maillot-de-bain-2026/",

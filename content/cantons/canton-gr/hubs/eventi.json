@@ -5,7 +5,7 @@
   "canton": "GR",
   "topic": "eventi",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "0f02eeb2f79b2b745f9ed7d3b080ac43327d2ee1c0a3c04eefb360b92362f3f9",
+  "contentHash": "3a5e4c4fc22f25e9491b3d1227277d6873523c148ca95d3f559dd1b8f1ef9dfb",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -110,18 +110,6 @@
           "url": "/articoli-svizzera/guida-imprenditoriale-grigioni/",
           "excerpt": "Nel Canton Grigioni il percorso unisce forma giuridica, registro di commercio, capitale minimo, tasse d'iscrizione e obblighi assicurativi.",
           "date": "2026-10-02T17:40:42.667Z"
-        },
-        {
-          "title": "Salari e mercato del lavoro in Grigioni",
-          "url": "/articoli-svizzera/salari-grigioni-settori-livelli/",
-          "excerpt": "Settori che assumono, livelli salariali per formazione e contratti collettivi nel Canton Grigioni: guida ai meccanismi svizzeri.",
-          "date": "2026-09-02T06:07:54.532Z"
-        },
-        {
-          "title": "Mercato del lavoro nei Grigioni: salari e livelli",
-          "url": "/articoli-svizzera/mercato-lavoro-canton-grigioni/",
-          "excerpt": "Guida completa a struttura salariale, tassazione e contributi sociali nel Canton Grigioni. Stipendi, livelli di formazione e contratti collettivi.",
-          "date": "2026-09-02T04:17:01.793Z"
         },
         {
           "title": "Laboratorio estivo al Museo Moesano: archeologia per ragazzi",
@@ -258,18 +246,6 @@
           "date": "2026-10-02T17:40:42.667Z"
         },
         {
-          "title": "Wages and the Labor Market in Graubünden",
-          "url": "/en/swiss-articles/salaries-graubunden-sectors-levels/",
-          "excerpt": "Sectors with job openings, salary levels by education level, and collective bargaining agreements in the Canton of Graubünden: a guide to the Swiss system.",
-          "date": "2026-09-02T06:07:54.532Z"
-        },
-        {
-          "title": "Labour market in Graubünden: wages and levels",
-          "url": "/en/swiss-articles/labour-market-canton-graubunden/",
-          "excerpt": "Complete guide to wage structure, taxation and social contributions in the Canton of Graubünden. Salaries, training levels and collective agreements.",
-          "date": "2026-09-02T04:17:01.793Z"
-        },
-        {
           "title": "Summer lab at Moesano Museum: archaeology for kids",
           "url": "/en/cross-border-articles/summer-workshop-moesano-museum-2026/",
           "excerpt": "From 3 to 7 August 2026, children and young people aged 7-12 discover the cup-marked stones with a theatrical workshop at the Moesano Museum in San Vittore",
@@ -404,18 +380,6 @@
           "date": "2026-10-02T17:40:42.667Z"
         },
         {
-          "title": "Löhne und Arbeitsmarkt in Graubünden",
-          "url": "/de/schweiz-artikel/loehne-graubuenden-sektoren-niveaus/",
-          "excerpt": "Branchen mit Stellenangeboten, Lohnniveaus nach Ausbildung und Gesamtarbeitsverträge im Kanton Graubünden: Ein Leitfaden zu den Schweizer Regelungen.",
-          "date": "2026-09-02T06:07:54.532Z"
-        },
-        {
-          "title": "Arbeitsmarkt in Graubünden: Löhne und Niveaus",
-          "url": "/de/schweiz-artikel/arbeitsmarkt-kanton-graubunden/",
-          "excerpt": "Umfassender Leitfaden zu Lohnstruktur, Besteuerung und Sozialversicherungsbeiträgen im Kanton Graubünden. Löhne, Ausbildungsniveaus und Tarifverträge.",
-          "date": "2026-09-02T04:17:01.793Z"
-        },
-        {
           "title": "Sommerlabor im Moesano-Museum: Archäologie für Kinder",
           "url": "/de/grenzgaenger-artikel/sommer-workshop-moesano-museum-2026/",
           "excerpt": "Vom 3. bis 7. August 2026 entdecken Kinder und Jugendliche im Alter von 7 bis 12 Jahren die Cupellari-Steine mit einem Theaterlabor im Moesano-Museum in San Vittore.",
@@ -548,18 +512,6 @@
           "url": "/fr/articles-suisse/creer-entreprise-grisons-couts/",
           "excerpt": "Dans le canton des Grisons, le cursus combine la forme juridique, le registre commercial, le capital minimum, les frais d’enregistrement et les obligations d’assurance.",
           "date": "2026-10-02T17:40:42.667Z"
-        },
-        {
-          "title": "Salaires et marché du travail dans les Grisons",
-          "url": "/fr/articles-suisse/salaires-grisons-secteurs-niveaux/",
-          "excerpt": "Secteurs qui embauchent, niveaux de salaire selon la formation et conventions collectives dans le canton des Grisons : guide des mécanismes suisses.",
-          "date": "2026-09-02T06:07:54.532Z"
-        },
-        {
-          "title": "Marché du travail dans les Grisons : salaires et niveaux",
-          "url": "/fr/articles-suisse/marche-travail-canton-grisons/",
-          "excerpt": "Guide complet de la structure des salaires, de la fiscalité et des cotisations sociales dans le canton des Grisons. Salaires, niveaux de formation et conventions collectives.",
-          "date": "2026-09-02T04:17:01.793Z"
         },
         {
           "title": "Atelier estival au Musée Moesano: archéologie pour enfants",

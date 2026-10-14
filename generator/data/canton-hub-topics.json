@@ -1,5 +1,5 @@
 {
-  "_comment": "Configurazione degli hub tematici cantonali (P10, D17). `keywordTopics`: classificatore deterministico a parole chiave dichiarate per tutti i temi: completa i cluster TF-IDF quando un titolo esplicito (per esempio strada, imposte, pensioni o benzina) non condivide abbastanza seed e mantiene eventi/servizi senza cluster. I termini sono stem confrontati a INIZIO parola, senza maiuscole ne' diacritici (`termHits`), ciascuno contro il testo della propria lingua. Punteggio per locale = 3 x (occorrenze nel titolo, max 2) + (occorrenze nell'estratto, max 3); l'articolo entra nel tema se la somma sulle 4 locali raggiunge `minScore`, almeno un termine compare in un titolo e nessun termine `exclude` compare in un titolo. `neighbours`: Paesi confinanti di ogni gruppo URL (geografia, non dato di dataset), usati solo per scegliere la variante dell'intro. `ranking`: pesi dell'ordinamento delle news promosse; `minTopicStrength` e' il coseno minimo fra l'articolo e i seed del suo cluster perche' entri in un hub (sotto, il tema e' solo sfiorato), `fullTopicStrength` il coseno che vale rilevanza piena.",
+  "_comment": "Configurazione degli hub tematici cantonali (P10, D17). `keywordTopics`: classificatore deterministico a parole chiave dichiarate per tutti i temi: completa i cluster TF-IDF quando un titolo esplicito (per esempio strada, imposte, pensioni o benzina) non condivide abbastanza seed e mantiene eventi/servizi senza cluster. I termini sono stem confrontati a INIZIO parola, senza maiuscole ne' diacritici (`termHits`), ciascuno contro il testo della propria lingua. Punteggio per locale = 3 x (occorrenze nel titolo, max 2) + (occorrenze nell'estratto, max 3); l'articolo entra nel tema se la somma sulle 4 locali raggiunge `minScore`, almeno un termine compare in un titolo, eventuali `requiredTerms` compaiono in un titolo e nessun termine `exclude` compare in un titolo senza un'eccezione `excludeUnless`. `neighbours`: Paesi confinanti di ogni gruppo URL (geografia, non dato di dataset), usati solo per scegliere la variante dell'intro. `ranking`: pesi dell'ordinamento delle news promosse; `minTopicStrength` e' il coseno minimo fra l'articolo e i seed del suo cluster perche' entri in un hub (sotto, il tema e' solo sfiorato), `fullTopicStrength` il coseno che vale rilevanza piena.",
   "schemaVersion": 1,
   "maxCuratedArticles": 8,
   "maxKeyFacts": 4,
@@ -28,6 +28,12 @@
         "en": ["fire", "explosion"],
         "de": ["brand", "explosion"],
         "fr": ["incendie", "explosion"]
+      },
+      "excludeUnless": {
+        "it": ["prezz"],
+        "en": ["price"],
+        "de": ["preis", "benzinpreis"],
+        "fr": ["prix", "tarif"]
       }
     },
     "fisco": {
@@ -52,6 +58,12 @@
         "en": ["mobility", "transport", "train", "railway", "motorway", "highway", "road", "traffic", "construction", "roadwork", "closed", "closure", "detour", "bus", "tram", "cycle", "customs", "border", "crossing", "sbb", "cff", "schengen", "a2", "a5", "a9", "a13"],
         "de": ["mobilität", "verkehr", "transport", "zug", "bahn", "eisenbahn", "autobahn", "strasse", "straße", "baustelle", "gesperr", "umleitung", "bus", "tram", "velo", "zoll", "grenze", "grenzübergang", "sbb", "cff", "schengen", "a2", "a5", "a9", "a13"],
         "fr": ["mobilité", "transport", "train", "ferroviaire", "autoroute", "route", "trafic", "chantier", "ferm", "déviation", "bus", "tram", "cycl", "douane", "frontière", "passage", "sbb", "cff", "schengen", "a2", "a5", "a9", "a13"]
+      },
+      "requiredTerms": {
+        "it": ["mobilit", "trasport", "treno", "ferrovi", "autostrad", "strad", "traffico", "cantiere", "cantier", "chius", "deviazion", "bus", "autobus", "tram", "ciclab", "biciclet", "dogana", "valico", "viabil", "sbb", "cff", "schengen", "a2", "a5", "a9", "a13"],
+        "en": ["mobility", "transport", "train", "railway", "motorway", "highway", "road", "traffic", "construction", "roadwork", "closed", "closure", "detour", "bus", "tram", "cycle", "customs", "sbb", "cff", "schengen", "a2", "a5", "a9", "a13"],
+        "de": ["mobilität", "verkehr", "transport", "zug", "bahn", "eisenbahn", "autobahn", "strasse", "straße", "baustelle", "gesperr", "umleitung", "bus", "tram", "velo", "zoll", "sbb", "cff", "schengen", "a2", "a5", "a9", "a13"],
+        "fr": ["mobilité", "transport", "train", "ferroviaire", "autoroute", "route", "trafic", "chantier", "ferm", "déviation", "bus", "tram", "cycl", "douane", "sbb", "cff", "schengen", "a2", "a5", "a9", "a13"]
       },
       "exclude": {
         "it": ["gara d'appalto", "mercato"],
@@ -78,10 +90,10 @@
     "eventi": {
       "minScore": 6,
       "terms": {
-        "it": ["evento", "eventi", "festival", "sagra", "sagre", "concerto", "concerti", "mostra", "mostre", "fiera", "fiere", "mercatino", "mercatini", "mercato", "carnevale", "spettacol", "teatro", "museo", "cinema", "rassegna", "manifestazion", "appuntamenti", "calendario", "fine settimana", "weekend", "lido", "piscina", "torneo", "cosa fare"],
-        "en": ["event", "festival", "concert", "exhibition", "fair", "market", "christmas market", "carnival", "show", "theatre", "museum", "cinema", "programme", "calendar", "weekend", "opening", "pool", "tournament", "what to do", "things to do"],
-        "de": ["veranstaltung", "festival", "konzert", "ausstellung", "messe", "markt", "weihnachtsmarkt", "fasnacht", "wochenende", "openair", "open air", "volksfest", "theater", "museum", "kino", "eröffnung", "schwimmbad", "turnier", "veranstaltungskalender"],
-        "fr": ["événement", "festival", "concert", "exposition", "foire", "marché", "marché de noël", "carnaval", "spectacle", "théâtre", "musée", "cinéma", "manifestation", "agenda", "week-end", "fête", "ouverture", "piscine", "tournoi", "que faire"]
+        "it": ["evento", "eventi", "festival", "sagra", "sagre", "concerto", "concerti", "mostra", "mostre", "fiera", "fiere", "mercatino", "mercatini", "mercato di natale", "carnevale", "spettacol", "teatro", "museo", "cinema", "rassegna", "manifestazion", "appuntamenti", "calendario", "fine settimana", "weekend", "lido", "piscina", "torneo", "cosa fare"],
+        "en": ["event", "festival", "concert", "exhibition", "fair", "christmas market", "carnival", "show", "theatre", "museum", "cinema", "programme", "calendar", "weekend", "opening", "pool", "tournament", "what to do", "things to do"],
+        "de": ["veranstaltung", "festival", "konzert", "ausstellung", "messe", "weihnachtsmarkt", "fasnacht", "wochenende", "openair", "open air", "volksfest", "theater", "museum", "kino", "eröffnung", "schwimmbad", "turnier", "veranstaltungskalender"],
+        "fr": ["événement", "festival", "concert", "exposition", "foire", "marché de noël", "carnaval", "spectacle", "théâtre", "musée", "cinéma", "manifestation", "agenda", "week-end", "fête", "ouverture", "piscine", "tournoi", "que faire"]
       },
       "exclude": {
         "it": ["incidente", "arrest", "rapina", "processo", "condann", "evento sismico", "evento meteo"],

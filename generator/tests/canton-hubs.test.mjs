@@ -916,6 +916,8 @@ test('classificatore a parole chiave di eventi e servizi: dichiarato nel file da
       assert.ok(cfg.terms[locale].length >= 8, `${topic}/${locale}: troppo pochi termini`);
       assert.ok(Array.isArray(cfg.exclude[locale]));
       assert.equal(new Set(cfg.terms[locale]).size, cfg.terms[locale].length, `${topic}/${locale}: termini duplicati`);
+      if (cfg.requiredTerms) assert.ok(cfg.requiredTerms[locale].length >= 8, `${topic}/${locale}: requiredTerms troppo pochi`);
+      if (cfg.excludeUnless) assert.ok(Array.isArray(cfg.excludeUnless[locale]));
     }
   }
   const art = (title, excerpt) => ({ title, excerpt });
@@ -960,6 +962,27 @@ test('classificatore a parole chiave di eventi e servizi: dichiarato nel file da
     },
   ), CONFIG.keywordTopics.mobilita);
   assert.ok(genericCommuters.score < CONFIG.keywordTopics.mobilita.minScore, 'un dato sui frontalieri non e\' automaticamente mobilita\'');
+  const genericBorder = keywordTopicScore(art(
+    { it: 'Confine e frontiera: dati sui lavoratori', en: 'Border data on foreign workers', de: 'Grenze: Daten zu ausländischen Arbeitskräften', fr: 'Frontière : données sur les travailleurs étrangers' },
+    same(''),
+  ), CONFIG.keywordTopics.mobilita);
+  assert.ok(genericBorder.score >= CONFIG.keywordTopics.mobilita.minScore);
+  assert.equal(genericBorder.requiredHit, false, 'confine generico non è evidenza di mobilità');
+  const labourMarket = keywordTopicScore(art(
+    { it: 'Il mercato del lavoro cantonale cresce', en: 'The labour market grows in the canton', de: 'Der Arbeitsmarkt im Kanton wächst', fr: 'Le marché du travail cantonal progresse' },
+    same(''),
+  ), eventi);
+  assert.ok(labourMarket.score < eventi.minScore, 'mercato del lavoro non è un evento');
+  const fuelPriceMetaphor = keywordTopicScore(art(
+    { it: 'Esplosione dei prezzi della benzina', en: 'Explosion in petrol prices', de: 'Explosion der Benzinpreise', fr: 'Explosion des prix de l’essence' },
+    same(''),
+  ), CONFIG.keywordTopics.carburanti);
+  assert.equal(fuelPriceMetaphor.excluded, false, 'la metafora sui prezzi non è un incidente');
+  const fuelFire = keywordTopicScore(art(
+    { it: 'Incendio alla stazione di servizio', en: 'Fire at a filling station', de: 'Brand an einer Tankstelle', fr: 'Incendie dans une station-service' },
+    same(''),
+  ), CONFIG.keywordTopics.carburanti);
+  assert.equal(fuelFire.excluded, true, 'un incidente alla stazione resta escluso');
 });
 
 test('lessico diretto completa i cluster senza inventare fisco o mobilita\'', async () => {

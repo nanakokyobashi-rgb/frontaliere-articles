@@ -200,21 +200,26 @@ export function loadCantonPool(root, section, load = loadSectionArticles) {
 
 /**
  * Punteggio del classificatore a parole chiave per un tema.
- * @returns {{ score: number, titleHit: boolean, excluded: boolean }}
+ * @returns {{ score: number, titleHit: boolean, requiredHit: boolean, excluded: boolean }}
  */
 export function keywordTopicScore(article, topicConfig) {
   let score = 0;
   let titleHit = false;
+  let requiredHit = !topicConfig.requiredTerms;
   let excluded = false;
   for (const locale of HUB_LOCALES) {
     const terms = topicConfig.terms?.[locale] ?? [];
+    const requiredTerms = topicConfig.requiredTerms?.[locale] ?? [];
     const inTitle = Math.min(2, termHits(article.title[locale], terms));
     const inExcerpt = Math.min(3, termHits(article.excerpt[locale], terms));
     if (inTitle > 0) titleHit = true;
+    if (termHits(article.title[locale], requiredTerms) > 0) requiredHit = true;
     score += 3 * inTitle + inExcerpt;
-    if (termHits(article.title[locale], topicConfig.exclude?.[locale] ?? []) > 0) excluded = true;
+    const hasExcludedTerm = termHits(article.title[locale], topicConfig.exclude?.[locale] ?? []) > 0;
+    const hasExceptionTerm = termHits(article.title[locale], topicConfig.excludeUnless?.[locale] ?? []) > 0;
+    if (hasExcludedTerm && !hasExceptionTerm) excluded = true;
   }
-  return { score, titleHit, excluded };
+  return { score, titleHit, requiredHit, excluded };
 }
 
 const titleKey = (title) => foldForMatch(title).replace(/[^a-z0-9]+/g, ' ').trim();
@@ -355,7 +360,7 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
     for (const topic of keywordTopics) {
       const cfg = config.keywordTopics[topic];
       const result = keywordResults.get(topic);
-      if (result.excluded || !result.titleHit || result.score < cfg.minScore) continue;
+      if (result.excluded || !result.requiredHit || !result.titleHit || result.score < cfg.minScore) continue;
       addMatch({
         topic,
         strength: Math.min(1, result.score / (3 * cfg.minScore)),
