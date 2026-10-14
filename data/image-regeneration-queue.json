@@ -30,6 +30,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T01:47:39.159Z",
       "lastFailureAt": "2026-10-14T01:47:39.159Z"
+    },
+    {
+      "articleId": "zurigo-targhe-immatricolazione-guida",
+      "title": "Zurigo: guida a targhe e immatricolazione",
+      "fallbackImage": "/images/blog/apprendistato-formazione-zurigo-guida.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T02:15:22.049Z",
+      "lastFailureAt": "2026-10-14T02:15:22.049Z"
     }
   ]
 }

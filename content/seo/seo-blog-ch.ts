@@ -103647,6 +103647,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-targhe-immatricolazione-guida': {
+    title: 'Zurigo: guida a targhe e immatricolazione | Frontaliere Ticino',
+    description: 'Guida pratico a targhe e immatricolazione a Zurigo: registro, documenti, cambio proprietario e costi. Verifica presso l\'ufficio della circolazione competente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, targhe, immatricolazione, procedura',
+    ogTitle: 'Zurigo: guida a targhe e immatricolazione',
+    ogDescription: 'Scopri la procedura per targhe e immatricolazione a Zurigo. Guida completa su registrazione, documenti, cambio proprietario e imposta sugli autoveicoli. Verifica i costi ufficiali.',
+    canonicalPath: '/articoli-svizzera/zurigo-targhe-immatricolazione-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo: guida a targhe e immatricolazione",
+      "description": "Guida pratico a targhe e immatricolazione a Zurigo: registro, documenti, cambio proprietario e costi. Verifica presso l'ufficio della circolazione competente.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mani che trattano una targa svizzera in un ufficio dell'autorità di circolazione a Zurigo"
+      },
+      "datePublished": "2026-10-14T02:15:21+00:00",
+      "dateModified": "2026-10-14T02:15:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zurigo-targhe-immatricolazione-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

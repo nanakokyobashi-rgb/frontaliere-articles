@@ -8213,6 +8213,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.licenza-caccia-zurigo-requisiti.title': 'Permis de chasse à Zurich : conditions requises et demande',
     'blog.article.licenza-caccia-zurigo-requisiti.excerpt': 'Guide pratique de la procédure cantonale : vérification des conditions requises, examens, délais et montants auprès de la source officielle.',
     'blog.article.licenza-caccia-zurigo-requisiti.imageAlt': 'Chasseur préparant son équipement dans une forêt suisse avec vue sur le lac, lumière du matin.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zurich : guide des plaques et de l’immatriculation',
+    'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Procédure d’immatriculation, documents et changement de propriétaire : vérifiez les exigences et les coûts auprès de l’office de la circulation compétent.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Mains tenant une plaque d\'immatriculation suisse dans un bureau de circulation à Zurich',
 };
 
 export default blogMetaChFr;

@@ -8213,6 +8213,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.licenza-caccia-zurigo-requisiti.title': 'Hunting license in Zurich: requirements and application',
     'blog.article.licenza-caccia-zurigo-requisiti.excerpt': 'Practical guide to the cantonal procedure: verify requirements, exams, deadlines and amounts with the official source.',
     'blog.article.licenza-caccia-zurigo-requisiti.imageAlt': 'Hunter preparing equipment in a Swiss forest with lake view, morning light.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zurich: guide to license plates and registration',
+    'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Procedure for registration, documents, and change of ownership: verify the requirements and costs with the relevant motor vehicle office.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Hands handling a Swiss license plate in a traffic authority office in Zurich',
 };
 
 export default blogMetaChEn;

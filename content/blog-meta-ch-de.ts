@@ -8213,6 +8213,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenza-caccia-zurigo-requisiti.title': 'Jagdlizenz in Zürich: Voraussetzungen und Antrag',
     'blog.article.licenza-caccia-zurigo-requisiti.excerpt': 'Praktischer Leitfaden für das kantonale Verfahren: Voraussetzungen, Prüfungen, Fristen und Beträge anhand der offiziellen Quelle prüfen.',
     'blog.article.licenza-caccia-zurigo-requisiti.imageAlt': 'Jäger bereitet Ausrüstung in einem Schweizer Wald mit Seeblick vor, Morgenlicht.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zürich: Leitfaden zu Kontrollschildern und Zulassung',
+    'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Verfahren für Zulassung, Dokumente und Halterwechsel: Anforderungen und Kosten beim zuständigen Strassenverkehrsamt prüfen.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Hände, die eine Schweizer Kennnummer in einem Strassenverkehrsamt in Zürich bearbeiten',
 };
 
 export default blogMetaChDe;

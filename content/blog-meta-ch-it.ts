@@ -8213,6 +8213,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.licenza-caccia-zurigo-requisiti.title': 'Licenza di caccia a Zurigo: requisiti e domanda',
     'blog.article.licenza-caccia-zurigo-requisiti.excerpt': 'Guida pratica per la procedura cantonale: verifica requisiti, esami, scadenze e importi presso la fonte ufficiale.',
     'blog.article.licenza-caccia-zurigo-requisiti.imageAlt': 'Cacciatore che prepara l\'attrezzatura in un bosco svizzero con vista sul lago, luce mattutina.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.title': 'Zurigo: guida a targhe e immatricolazione',
+    'blog.article.zurigo-targhe-immatricolazione-guida.excerpt': 'Procedura per registrazione, documenti e cambio proprietario: verifica requisiti e costi presso l\'ufficio della circolazione competente.',
+    'blog.article.zurigo-targhe-immatricolazione-guida.imageAlt': 'Mani che trattano una targa svizzera in un ufficio dell\'autorità di circolazione a Zurigo',
 };
 
 export default blogMetaChIt;
