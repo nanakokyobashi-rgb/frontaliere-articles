@@ -104115,6 +104115,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prezzi-auto-nuove-usate-calo': {
+    title: 'Prezzi auto nuove e usate in calo grazie ai marchi cinesi',
+    description: 'Nel terzo trimestre calano i prezzi medi delle auto nuove. Anche l\'usato scende, con un\'offerta in aumento. I marchi cinesi aumentano la pressione sui prezzi',
+    keywords: 'frontalieri, ticino, svizzera, italia, prezzi, auto, nuove, usate',
+    ogTitle: 'Prezzi auto nuove e usate in calo grazie ai marchi cinesi',
+    ogDescription: 'Nel terzo trimestre calano i prezzi medi delle auto nuove.',
+    canonicalPath: '/articoli-svizzera/prezzi-auto-nuove-usate-calo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prezzi auto nuove e usate in calo grazie ai marchi cinesi",
+      "description": "Nel terzo trimestre calano i prezzi medi delle auto nuove. Anche l'usato scende, con un'offerta in aumento. I marchi cinesi aumentano la pressione sui prezzi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-prezzi-auto-nuove-usate-calo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lot di automobili nuove e usate in una concessionaria svizzera con prezzi visibili"
+      },
+      "datePublished": "2026-10-14T13:53:50+00:00",
+      "dateModified": "2026-10-14T13:53:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-auto-nuove-usate-calo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

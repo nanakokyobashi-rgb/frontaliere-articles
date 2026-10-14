@@ -8249,6 +8249,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Faillites d’entreprises en forte hausse, record en 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 entreprises insolvables entre janvier et septembre Faillites d’entreprises à 13’660, +38,4% sur un an Nouvelles inscriptions au registre : 41’706 Particuliers : 8’003 faillites',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vue sur le lac de Lugano avec des bâtiments de bureau et de l\'eau calme, journée dégagée',
+    'blog.article.prezzi-auto-nuove-usate-calo.title': 'Les prix des voitures neuves et d’occasion baissent grâce aux marques chinoises',
+    'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Au troisième trimestre, les prix moyens des voitures neuves baissent.',
+    'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Lot d\'une concession suisse montrant des véhicules neufs et d\'occasion avec étiquettes de prix visibles',
 };
 
 export default blogMetaChFr;
