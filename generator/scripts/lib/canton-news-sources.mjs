@@ -316,7 +316,7 @@ function readHtmlTagAt(html, start) {
     closing,
     name: html.slice(nameStart, nameEnd).toLowerCase(),
     attrs,
-    selfClosing: !closing && /\/\s*$/u.test(attrs),
+    selfClosing: !closing && isHtmlSelfClosingStartTag(html, nameEnd, endIndex),
   };
 }
 
@@ -330,7 +330,17 @@ function nextHtmlTag(html, from = 0) {
   return null;
 }
 
-function isCharsetSelfClosingStartTag(html, nameEnd, end) {
+function findNextClosingHtmlTag(html, name, from) {
+  let tag = nextHtmlTag(html, from);
+  while (tag) {
+    if (tag.closing && tag.name === name) return tag;
+    tag = nextHtmlTag(html, tag.end);
+  }
+  return null;
+}
+
+/** Legge gli stati degli attributi fino al `>` per distinguere `/` sintattico da un valore. */
+function isHtmlSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && isHtmlWhitespace(html[i])) i++;
@@ -383,7 +393,7 @@ function readCharsetTag(html, start) {
     end,
     name,
     selfClosing: !closing && CHARSET_VOID_ELEMENTS.has(name)
-      && isCharsetSelfClosingStartTag(html, i, end),
+      && isHtmlSelfClosingStartTag(html, i, end),
   };
 }
 
@@ -593,10 +603,13 @@ function htmlAttributeValue(attrs, name) {
 export function selectPublishedTime(html) {
   const input = String(html || '');
   const publicationDates = [];
-  const time = /<time\b([^>]*)>/gi;
-  let match;
-  while ((match = time.exec(input)) !== null) {
-    const attrs = match[1] || '';
+  let tag = nextHtmlTag(input);
+  while (tag) {
+    if (tag.closing || tag.name !== 'time') {
+      tag = nextHtmlTag(input, tag.end);
+      continue;
+    }
+    const attrs = tag.attrs || '';
     const itemprop = htmlAttributeValue(attrs, 'itemprop');
     const property = htmlAttributeValue(attrs, 'property');
     const className = htmlAttributeValue(attrs, 'class');
@@ -616,10 +629,14 @@ export function selectPublishedTime(html) {
     const classMarker = classTokens.some((token) => /^(?:published|pubdate|datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(token))
       || /^(?:(?:article|news|post))?(?:datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(compactClass);
     const dataMarker = /(?:^|\s)data-(?:published|date-published)(?:\s|=|$)/i.test(attrs);
-    if (!semanticMarker && !classMarker && !dataMarker) continue;
+    if (!semanticMarker && !classMarker && !dataMarker) {
+      tag = nextHtmlTag(input, tag.end);
+      continue;
+    }
 
     const date = validDate(htmlAttributeValue(attrs, 'datetime'));
     if (date) publicationDates.push(date);
+    tag = nextHtmlTag(input, tag.end);
   }
 
   const timestamps = new Set(publicationDates.map((date) => date.getTime()));
@@ -635,21 +652,38 @@ export function selectPublishedTime(html) {
  */
 export function extractPublishedDateFromHtml(html) {
   const input = String(html || '');
-  const jsonLd = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
-  let match;
-  while ((match = jsonLd.exec(input)) !== null) {
-    const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(match[1]));
-    const date = validDate(value?.[1]);
-    if (date) return date;
+  let tag = nextHtmlTag(input);
+  while (tag) {
+    if (tag.closing || tag.name !== 'script') {
+      tag = nextHtmlTag(input, tag.end);
+      continue;
+    }
+    const close = findNextClosingHtmlTag(input, 'script', tag.end);
+    if (!close) break;
+    const type = htmlAttributeValue(tag.attrs, 'type');
+    if (/^application\/ld\+json$/i.test(type.trim())) {
+      const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(
+        decodeHtmlEntities(input.slice(tag.end, close.start)),
+      );
+      const date = validDate(value?.[1]);
+      if (date) return date;
+    }
+    tag = nextHtmlTag(input, close.end);
   }
 
-  const meta = /<meta\b([^>]*)>/gi;
-  while ((match = meta.exec(input)) !== null) {
-    const attrs = match[1] || '';
+  tag = nextHtmlTag(input);
+  while (tag) {
+    if (tag.closing || tag.name !== 'meta') {
+      tag = nextHtmlTag(input, tag.end);
+      continue;
+    }
+    const attrs = tag.attrs || '';
     const key = htmlAttributeValue(attrs, 'property') || htmlAttributeValue(attrs, 'name');
-    if (!/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) continue;
-    const date = validDate(htmlAttributeValue(attrs, 'content'));
-    if (date) return date;
+    if (/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) {
+      const date = validDate(htmlAttributeValue(attrs, 'content'));
+      if (date) return date;
+    }
+    tag = nextHtmlTag(input, tag.end);
   }
 
   return selectPublishedTime(input);
@@ -991,11 +1025,13 @@ const CMS_TITLE_FIELDS = Object.freeze(['kachellabel', 'listlabel', 'articleHead
 /**
  * Forma titolo dei CMS SH: il payload può contenere più alias, anche vuoti.
  * Si sceglie il primo titolo leggibile nell'ordine documentato, rendendo
- * osservabile quando il valore arriva da un alias successivo.
+ * osservabile quando il valore arriva da un alias successivo. I valori non
+ * stringa restano nei campi osservati per la diagnostica, ma non sono titoli.
  */
 export function cmsPayloadShape(row) {
   const fields = CMS_TITLE_FIELDS.filter((field) => Object.hasOwn(row || {}, field) && row[field] != null);
   const selected = fields
+    .filter((field) => typeof row[field] === 'string')
     .map((field) => ({ field, headline: stripTags(row[field]) }))
     .find(({ headline }) => headline.length >= 10);
   return {

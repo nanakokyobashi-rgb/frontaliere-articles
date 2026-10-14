@@ -28,6 +28,7 @@ import {
 } from './lib/registry-article-type.mjs';
 import { parseSourceCitations } from './lib/canton-news-sources.mjs';
 import {
+  itemIdentityOf,
   legacyNewsUrlKey,
   newsUrlKey,
   readLedgerEntry,
@@ -179,6 +180,9 @@ export function isGeneratedSourceCitation(body3, articleId, sourceUrls) {
   if (!citation) return false;
   const citationKey = newsUrlKey(citation.url);
   if (readLedgerEntry(sourceUrls[citationKey])?.articleId === articleId) return true;
+  // Una citazione item-scoped e' provabile solo dalla chiave corrente esatta:
+  // il ponte storico path-only non puo' distinguere due item dello stesso URL.
+  if (itemIdentityOf(citation.url)) return false;
 
   // Fonte riusate aggiungono l'identita' dell'item solo al ledger; la
   // citazione pubblica usa l'URL senza quel frammento.

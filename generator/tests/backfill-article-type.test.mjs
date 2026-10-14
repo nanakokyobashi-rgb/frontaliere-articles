@@ -112,6 +112,14 @@ describe('articleType dal corpo italiano', () => {
     );
   });
 
+  test('una citazione item-scoped non ricade su una voce storica path-only', () => {
+    const url = 'https://example.ch/news?id=7#ft-item=deadbeefcafe';
+    const body = `Testo della notizia.\n\n*Fonte: [example.ch](${url})*`;
+    const historicalLedger = { [legacyNewsUrlKey(url)]: 'article-historical' };
+    assert.equal(isGeneratedSourceCitation(body, 'article-historical', historicalLedger), false);
+    assert.equal(articleTypeFromItalianBody(body, 'article-historical', historicalLedger), undefined);
+  });
+
   test('lascia senza tipo una citazione non finale o non unica', () => {
     assert.equal(articleTypeFromItalianBody(`${SOURCE}\n\nAltro testo.`, 'article-1', generatedSource('article-1')), undefined);
     assert.equal(articleTypeFromItalianBody(`Primo\n\n${SOURCE}\n\nSecondo\n\n${SOURCE}`, 'article-1', generatedSource('article-1')), undefined);
