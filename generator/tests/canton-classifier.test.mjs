@@ -331,6 +331,7 @@ describe('regole di assegnazione', () => {
       'Implicazioni per le nuove misure fiscali e sociali per il Ticino',
       'Impatto per gli abitanti residenti e iscritti del Canton Ticino',
       'Implicazioni per gli abitanti del Canton Ticino, dei Grigioni e del Vallese',
+      'Cosa cambia per il Ticino e i Grigioni e il Vallese',
     ]) {
       assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
     }

@@ -327,6 +327,8 @@ const FRAMING_PHRASES = [
 const caseInitial = (word) => `[${word[0].toUpperCase()}${word[0]}]${word.slice(1)}`;
 const AUDIENCE_HEADS = ['implicazion[ei]', 'impatt[oi]', 'effett[oi]', 'conseguenz[ae]', 'ricadut[ae]',
   'riflessi', 'influisc\\p{L}*', 'influenz\\p{L}*'];
+const AUDIENCE_HEAD_PREFIX = `\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+`;
+const AUDIENCE_COSA_PREFIX = `\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}`;
 const AUDIENCE_APOSTROPHE_LINK = `(?:${['all', 'dall', 'dell', 'nell', 'sull'].map(caseInitial).join('|')})['’]`;
 const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui', 'sugli', 'sulle'].map(caseInitial).join('|')}|${AUDIENCE_APOSTROPHE_LINK}|${caseInitial('anche')}\\s+${caseInitial('per')})`;
 function escapeRegExp(value) {
@@ -367,10 +369,10 @@ const AUDIENCE_TARGET_LONG = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_LONG_ITEM}(?
 const AUDIENCE_RES = [
   // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
   // maltempo in Ticino», che e' un fatto in Ticino.
-  new RegExp(`\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+(?:[\\p{L}']+\\s+){0,3}?${AUDIENCE_LINK}${AUDIENCE_TARGET}`, 'gu'),
+  new RegExp(`${AUDIENCE_HEAD_PREFIX}(?:[\\p{L}']+\\s+){0,3}?${AUDIENCE_LINK}${AUDIENCE_TARGET}`, 'gu'),
   // «cosa cambia per chi lavora in Ticino», «cosa significa per il Ticino»:
   // serve il «per» del destinatario, non «cosa cambia in Ticino dal 2026».
-  new RegExp(`\\b${caseInitial('cosa')}\\s+(?:${['cambia', 'significa', 'comporta'].map(caseInitial).join('|')})\\s+${caseInitial('per')}${AUDIENCE_TARGET}`, 'gu'),
+  new RegExp(`${AUDIENCE_COSA_PREFIX}${AUDIENCE_TARGET}`, 'gu'),
 ];
 /**
  * Variante senza il limite di tre parole intermedie e con una coda di target
@@ -379,7 +381,7 @@ const AUDIENCE_RES = [
  * luoghi da oscurare.
  */
 const AUDIENCE_RES_LONG = new RegExp(
-  `\\b(?:${AUDIENCE_HEADS.map(caseInitial).join('|')})\\s+(?:[\\p{L}][\\p{L}'’\\-]*\\s+)*?${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
+  `(?:${AUDIENCE_HEAD_PREFIX}(?:[\\p{L}][\\p{L}'’\\-]*\\s+)*?${AUDIENCE_LINK}|${AUDIENCE_COSA_PREFIX})${AUDIENCE_TARGET_LONG}`,
   'gu',
 );
 
