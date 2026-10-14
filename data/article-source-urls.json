@@ -1,14 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/traffico-ferroviario-in-tilt-tra-arbedo-castione-e-biasca-441666": {
-    "articleId": "traffico-ferroviario-bloccato-ticino",
-    "ts": "2026-08-31T13:43:29.183Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/commissione-lpp%3a-aumentare-il-tasso-d%27interesse-minimo-di-0%2c5-punti/91982518": {
-    "articleId": "aumento-tasso-interesse-lpp",
-    "ts": "2026-08-31T16:56:09.911Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/estero/confine/1947152/trenord-da-domani-biglietti-piu-cari-rincaro-del-3-88": {
     "articleId": "trenord-rincaro-388-linee-ticino",
     "ts": "2026-08-31T20:12:12.975Z",
@@ -2497,6 +2487,16 @@
   "https://www.varesenoi.it/2026/10/13/leggi-notizia/argomenti/cronaca-20/articolo/truffa-delle-chiamate-shock-tre-arresti-in-canton-ticino.html": {
     "articleId": "arresti-truffa-chiamate-ticino",
     "ts": "2026-10-14T08:56:53.878Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1956621/la-disoccupazione-in-ticino-continua-a-crescere": {
+    "articleId": "previsioni-disoccupazione-ticino-2027",
+    "ts": "2026-10-14T10:28:51.228Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/lex-regia-dogana-di-porto-ceresio-rinasce-e-diventa-il-nuovo-ufficio-turistico/2707654": {
+    "articleId": "porto-ceresio-dogana-ufficio-turistico",
+    "ts": "2026-10-14T10:42:39.457Z",
     "keyForm": 2
   }
 }
