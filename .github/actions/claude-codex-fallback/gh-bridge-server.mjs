@@ -216,7 +216,7 @@ function pullRequestReviewNumber(args, commandIndex) {
     const arg = args[index];
     if (arg === '--') return args[index + 1] || '';
     if (arg.startsWith('-')) {
-      if (!arg.includes('=') && operationValueFlags.has(arg)) index += 1;
+      if (!arg.includes('=') && !PR_REVIEW_ACTION_FLAGS.has(arg) && operationValueFlags.has(arg)) index += 1;
       continue;
     }
     if (!operationSeen) {
