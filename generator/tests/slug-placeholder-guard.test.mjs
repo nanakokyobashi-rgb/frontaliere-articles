@@ -133,6 +133,7 @@ function slicePlaceholderBlock() {
 function loadGuard() {
   const block = [
     'const SLUG_MAX_LENGTH = 80;',
+    sliceFn('function normalizeSlugCandidate(input) {'),
     sliceFn('function slugifySlugPart(input) {'),
     slicePlaceholderBlock(),
     // La rilocalizzazione degli slug (issue #191) e' l'ultimo passaggio di
@@ -210,6 +211,7 @@ const UNRECOVERABLE = [
   'slug-tedesco',
   'slug-francese',
   'kebab-case-3-5-words-max-40-chars',
+  'id-kebab-case-ascii-3-5-parole-max-40-char',
   'placeholder',
   'undefined',
   'null',
@@ -232,6 +234,7 @@ const RECOVERABLE = [
   ['slug-terzo-pilastro-3a-schweiz', 'terzo-pilastro-3a-schweiz'],
   ['slug-terzo-pilastro-3a-suisse', 'terzo-pilastro-3a-suisse'],
   ['kebab-case-turismo-ticino', 'turismo-ticino'],
+  ['id-kebab-case-ascii-3-5-parole-max-40-char-guida-ticino', 'guida-ticino'],
   ['kebab-case-ticino-nubifragio-grigioni', 'ticino-nubifragio-grigioni'],
   ['kebab-case-rossi-bruxelles-ticino', 'rossi-bruxelles-ticino'],
 ];
@@ -283,6 +286,7 @@ test('strip: rimuove etichette e istruzioni del prompt senza pubblicare residui'
     ['Slug - new-agreement', 'new-agreement'],
     ['slug-new-agreement', 'new-agreement'],
     ['kebab-case-turismo-ticino', 'turismo-ticino'],
+    ['id-kebab-case-ascii-3-5-parole-max-40-char-guida-ticino', 'guida-ticino'],
   ];
   for (const [raw, expected] of recoverable) {
     assert.ok(findSlugPromptLeak(raw), `l'etichetta non e' stata trovata: ${raw}`);
@@ -297,6 +301,25 @@ test('strip: rimuove etichette e istruzioni del prompt senza pubblicare residui'
     assert.ok(findSlugPromptLeak(raw), `l'eco del prompt non e' stata trovata: ${raw}`);
     assert.equal(stripSlugPromptLeak(raw), '', `l'eco non ha lasciato vuoto: ${raw}`);
   }
+});
+
+test('classifica il valore completo prima del cap a 80 caratteri', () => {
+  const { findSlugPromptLeak, inspectSlugForPromptPlaceholder, slugifySlugPart, stripSlugPromptLeak } = freshGuard();
+  const editorial = 'a'.repeat(73);
+  const raw = `${editorial}-max-40-chars`;
+
+  // Il troncamento precedente lasciava visibile soltanto max-40, che non
+  // corrisponde piu' alla regola completa max-40-chars.
+  assert.equal(slugifySlugPart(raw), `${editorial}-max-40`);
+  assert.equal(findSlugPromptLeak(slugifySlugPart(raw)), null);
+
+  assert.equal(findSlugPromptLeak(raw)?.pattern, 'char-limit');
+  assert.deepEqual(inspectSlugForPromptPlaceholder(raw), {
+    slug: editorial,
+    leaked: true,
+    recovered: true,
+  });
+  assert.equal(stripSlugPromptLeak(raw), editorial);
 });
 
 test('il classificatore del topic gate distingue i marker di servizio dagli slug veri', () => {

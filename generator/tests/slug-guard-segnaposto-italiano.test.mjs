@@ -81,6 +81,7 @@ function cut(startAnchor, endAnchor, min = 40) {
 const harness = new Function(
   'truncateSlugAtWordBoundary',
   `${cut('const SLUG_MAX_LENGTH =', ';', 20)}
+   ${cutDecl('function normalizeSlugCandidate(')}
    ${cutDecl('function slugifySlugPart(')}
    ${cut('const PROMPT_SLUG_PREFIX_RX =', '\n/**\n * Classify one slug candidate')
       .slice(0, -'\n/**\n * Classify one slug candidate'.length)

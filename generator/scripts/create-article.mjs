@@ -13864,19 +13864,9 @@ function validate(data, opts = {}) {
       // torna a essere la forma ambigua che questa fix toglie. Sanitizzare
       // prima di leggere significa buttare via la prova.
       const rawVerdict = parseArticleIdentityField(original, { field: 'slug', locale });
-      // Il taglio a 80 e' `truncateSlugAtWordBoundary` e non `.slice(0, 80)`
-      // per la ragione argomentata su `slugifySlugPart` (issue #191): a log si
-      // leggevano slug fr troncati a meta' parola, e un token spezzato e' un
-      // URL diverso, non un URL piu' corto.
-      const normalizedSlug = truncateSlugAtWordBoundary(
-        String(data.slugs[locale])
-          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .replace(/[^a-z0-9-]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, ''),
-        SLUG_MAX_LENGTH,
-      );
+      // Il classificatore lavora sul candidato completo. La funzione che
+      // ripulisce eventuali leak applica poi il limite di 80 ai residui validi.
+      const normalizedSlug = normalizeSlugCandidate(data.slugs[locale]);
       // Ripulisci la forma gia' normalizzata con lo stesso classificatore del
       // write path condiviso. Un residuo utile resta; un eco puro diventa vuoto
       // e segue il fallback italiano provvisorio.
@@ -18811,15 +18801,17 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
  * cade dentro una parola, e accetta il taglio secco solo se arretrare
  * costerebbe piu' del 25% del cap. */
 const SLUG_MAX_LENGTH = 80;
-function slugifySlugPart(input) {
-  const normalized = String(input || '')
+function normalizeSlugCandidate(input) {
+  return String(input || '')
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
-  return truncateSlugAtWordBoundary(normalized, SLUG_MAX_LENGTH);
+}
+function slugifySlugPart(input) {
+  return truncateSlugAtWordBoundary(normalizeSlugCandidate(input), SLUG_MAX_LENGTH);
 }
 
 /**
@@ -18902,6 +18894,20 @@ const WHOLE_SLUG_LEAKS = new Set([
   'undefined', 'null', 'none', 'na', 'n-a', 'value', 'valore',
 ]);
 
+// Tokens that describe the schema, not an article. A recovered value is useful
+// only when removing prompt instructions leaves at least one editorial token.
+const SCHEMA_ONLY_SLUG_TOKENS = new Set([
+  'id', 'ascii', 'slug', 'kebab', 'case', 'max',
+  'word', 'words', 'parole', 'parola', 'char', 'chars',
+  'character', 'characters', 'carattere', 'caratteri',
+  '3', '5', '40',
+]);
+
+function hasEditorialIdentityResidue(value) {
+  return String(value ?? '').split('-')
+    .some((token) => token && !SCHEMA_ONLY_SLUG_TOKENS.has(token));
+}
+
 const WHOLE_SLUG_LEAK_PATTERNS = [
   { name: 'locale-slug-placeholder', re: /^slug[-_][a-z]{2,12}$/i },
   { name: 'schema-hint-bare', re: /^\d+[-_](?:words?|chars?|characters?)$/i },
@@ -18978,7 +18984,9 @@ function stripSchemaPlaceholderPrefix(input) {
 
 /** Return the first prompt instruction fragment found in a slug candidate. */
 export function findSlugPromptLeak(input) {
-  const value = slugifySlugPart(input);
+  // Classify before the 80-character publication cap: truncation can split a
+  // complete prompt fragment (max-40-chars) into an unrecognized max-40.
+  const value = normalizeSlugCandidate(input);
   if (!value) return null;
   if (WHOLE_SLUG_LEAKS.has(value)) {
     return { pattern: 'whole-slug-placeholder', match: value };
@@ -18998,10 +19006,13 @@ export function findSlugPromptLeak(input) {
 
 /** Strip prompt labels and instructions, or return '' when no valid slug remains. */
 export function stripSlugPromptLeak(input) {
-  let value = slugifySlugPart(input);
+  let value = normalizeSlugCandidate(input);
   if (!value) return '';
   if (WHOLE_SLUG_LEAKS.has(value)) return '';
   if (WHOLE_SLUG_LEAK_PATTERNS.some(({ re }) => re.test(value))) return '';
+  if (!findSlugPromptLeak(value)) {
+    return truncateSlugAtWordBoundary(value, SLUG_MAX_LENGTH);
+  }
   if (PROMPT_SLUG_PREFIX_RX.test(value)) {
     value = stripSchemaPlaceholderPrefix(value);
     if (!value) return '';
@@ -19014,8 +19025,11 @@ export function stripSlugPromptLeak(input) {
     .replace(/[^a-z0-9-]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
-  if (!value || findSlugPromptLeak(value)) return '';
-  return value;
+  // The id field label and ASCII qualifier are not editorial identity.
+  // Without this cleanup, id-kebab-case-ascii-... degrades to id-ascii.
+  value = value.replace(/^id(?:-ascii)?(?:-|$)/i, '').replace(/^ascii(?:-|$)/i, '');
+  if (!value || !hasEditorialIdentityResidue(value) || findSlugPromptLeak(value)) return '';
+  return truncateSlugAtWordBoundary(value, SLUG_MAX_LENGTH);
 }
 
 /** Hard gate immediately before a router write. */
@@ -19043,10 +19057,16 @@ export function assertNoSlugPromptLeak(slugs, context = {}) {
  *   `recovered`— `leaked` and a usable remainder was salvaged from it.
  */
 export function inspectSlugForPromptPlaceholder(input) {
-  const normalized = slugifySlugPart(input);
+  const normalized = normalizeSlugCandidate(input);
   if (!normalized) return { slug: '', leaked: false, recovered: false };
   const leaked = findSlugPromptLeak(normalized);
-  if (!leaked) return { slug: normalized, leaked: false, recovered: false };
+  if (!leaked) {
+    return {
+      slug: truncateSlugAtWordBoundary(normalized, SLUG_MAX_LENGTH),
+      leaked: false,
+      recovered: false,
+    };
+  }
   const slug = stripSlugPromptLeak(normalized);
   return { slug, leaked: true, recovered: Boolean(slug) };
 }
