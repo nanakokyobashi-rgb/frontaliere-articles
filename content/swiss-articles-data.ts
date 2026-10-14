@@ -27381,6 +27381,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'decisioni-avs-ue-voto',
+    category: 'novita',
+    date: '2026-10-14T00:54:06.050Z',
+    image: '/images/blog/article-decisioni-avs-ue-voto.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

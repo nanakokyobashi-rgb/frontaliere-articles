@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/ambiente/isole-di-calore-serve-pi%c3%b9-verde-in-citt%c3%a0--4065398.html": {
-    "articleId": "regola-3-30-300-verde-citta",
-    "ts": "2026-09-09T05:21:41.639Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1948977/prezzi-franchi-carburanti-svizzera-litro-pompa": {
     "articleId": "carburanti-record-prezzi-2026",
     "ts": "2026-09-09T10:07:20.739Z",
@@ -2497,6 +2492,11 @@
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/le-giovani-guadagnano-meno-nonostante-maggiore-istruzione/92206648": {
     "articleId": "divario-reddito-giovani-svizzera",
     "ts": "2026-10-14T00:12:27.072Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it": {
+    "articleId": "decisioni-avs-ue-voto",
+    "ts": "2026-10-14T00:54:06.449Z",
     "keyForm": 2
   }
 }

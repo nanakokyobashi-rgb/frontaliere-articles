@@ -8204,6 +8204,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.divario-reddito-giovani-svizzera.title': 'Wage gap among young people in Switzerland: income gap narrows',
     'blog.article.divario-reddito-giovani-svizzera.excerpt': 'Among those born in 1995, the income gap is 14% Among those born in 1965, the gap was 55% In 2025, 54% of young women have a tertiary qualification',
     'blog.article.divario-reddito-giovani-svizzera.imageAlt': 'View of Lugano with young professionals',
+    'blog.article.decisioni-avs-ue-voto.title': 'Federal Council: AHV, EU and 2026 vote',
+    'blog.article.decisioni-avs-ue-voto.excerpt': 'Guy Parmelin to leave the Federal Council on 31.12.2026 AHV/IV pensions to increase by around 1.6% The Swiss-EU package has been in parliament since 13 March 2026',
+    'blog.article.decisioni-avs-ue-voto.imageAlt': 'Castelgrande in an editorial scene about Swiss federal decisions',
 };
 
 export default blogMetaChEn;

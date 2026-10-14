@@ -103535,6 +103535,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-decisioni-avs-ue-voto': {
+    title: 'Consiglio federale: AVS, UE e voto 2026 | Frontaliere Ticino',
+    description: 'Guy Parmelin lascerà il Consiglio federale il 31.12.2026 Le rendite AVS/AI aumenteranno di circa 1,6% Il pacchetto Svizzera-UE è al Parlamento dal 13 marzo 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, voto, parmelin',
+    ogTitle: 'Consiglio federale: AVS, UE e voto 2026',
+    ogDescription: 'Guy Parmelin lascerà il Consiglio federale il 31.12.2026 Le rendite AVS/AI aumenteranno di circa 1,6% Il pacchetto Svizzera-UE è al Parlamento dal 13 marzo 2026',
+    canonicalPath: '/articoli-svizzera/decisioni-avs-ue-voto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale: AVS, UE e voto 2026",
+      "description": "Guy Parmelin lascerà il Consiglio federale il 31.12.2026 Le rendite AVS/AI aumenteranno di circa 1,6% Il pacchetto Svizzera-UE è al Parlamento dal 13 marzo 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-decisioni-avs-ue-voto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castelgrande in una scena editoriale sulle decisioni federali"
+      },
+      "datePublished": "2026-10-14T00:54:06+00:00",
+      "dateModified": "2026-10-14T00:54:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/decisioni-avs-ue-voto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

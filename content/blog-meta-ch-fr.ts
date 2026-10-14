@@ -8204,6 +8204,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.divario-reddito-giovani-svizzera.title': 'Écart salarial des jeunes Suisse : l\'écart de revenu se réduit',
     'blog.article.divario-reddito-giovani-svizzera.excerpt': 'Parmi les nés en 1995, l\'écart de revenu est de 14% Parmi les nés en 1965, l\'écart était de 55% En 2025, le titre tertiaire concerne 54% des jeunes',
     'blog.article.divario-reddito-giovani-svizzera.imageAlt': 'Vue de Lugano avec de jeunes professionnels',
+    'blog.article.decisioni-avs-ue-voto.title': 'Conseil fédéral : AHV, UE et vote de 2026',
+    'blog.article.decisioni-avs-ue-voto.excerpt': 'Guy Parmelin quittera le Conseil fédéral au 31.12.2026 Les pensions AHV/IV augmenteront d\'environ 1,6 % Le paquet suisse-UE est au parlement depuis le 13 mars 2026',
+    'blog.article.decisioni-avs-ue-voto.imageAlt': 'Castelgrande dans une scène éditoriale sur les décisions fédérales suisses',
 };
 
 export default blogMetaChFr;

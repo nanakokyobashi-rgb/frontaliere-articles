@@ -797,10 +797,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1956064/manifestazione-berna-centinaia-manifestanti-svizzera": {
-      "section": "svizzera",
-      "ts": 1791764478452
-    },
     "frontaliere::https://www.ticinonews.ch/ticino/veicolo-in-fiamme-tra-giornico-e-la-galleria-della-biaschina-444417": {
       "section": "frontaliere",
       "ts": 1791769790125
@@ -1072,6 +1068,26 @@
     "svizzera::https://www.tvsvizzera.it/tvs/svizzera-istruzioni-per-luso": {
       "section": "svizzera",
       "ts": 1791936110531
+    },
+    "frontaliere::https://www.swissinfo.ch/ita/zurigo%3a-primi-segnali-di-distensione-per-tasso-sfitto-e-pigioni/92208856": {
+      "section": "frontaliere",
+      "ts": 1791937944513
+    },
+    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
+      "section": "frontaliere",
+      "ts": 1791938277931
+    },
+    "frontaliere::https://www.rsi.ch/s/4160968": {
+      "section": "frontaliere",
+      "ts": 1791938290083
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/alloggi-a-pigione-moderata-il-parlamento-si-divide--4160968.html": {
+      "section": "frontaliere",
+      "ts": 1791938299983
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1956440/trasparenza-societa-municipio-partecipate-fare-chiarezza-vuole": {
+      "section": "frontaliere",
+      "ts": 1791938326247
     }
   }
 }
