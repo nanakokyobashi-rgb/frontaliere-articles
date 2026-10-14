@@ -13540,10 +13540,10 @@ function validate(data, opts = {}) {
   // damage is confined to the URL, which is exactly the part that cannot be
   // fixed later without a redirect and a ranking reset.
   //
-  // Stripped rather than rejected: the leak is in the id only, and the title is
-  // right there to derive a clean one from. Failing the whole generation would
-  // throw away a good article over a prefix.
-  // ISSUE #138 PUNTO 3 — qui si RIFIUTA, non si indovina piu'.
+  // A useful residue can be stripped from the label. A pure instruction echo
+  // has no identity to recover and must be rejected; deriving an id from the
+  // title would hide the model failure and could bypass collision checks.
+  // ISSUE #138 PUNTO 3 — non si indovina piu' un valore mancante.
   //
   // Questo blocco ricostruiva l'id: toglieva il prefisso `kebab-case-` e
   // teneva il resto (`kebab-case-turismo-ticino` -> `turismo-ticino`), oppure
@@ -13561,10 +13561,8 @@ function validate(data, opts = {}) {
   // `EMPTY` e' l'unico rigetto che NON si propaga: un id assente non e'
   // ambiguo, e il blocco subito sotto lo sintetizza dal titolo italiano da
   // sempre — comportamento invariato.
-  const PROMPT_ID_LEAK_RX = /^kebab[-_]?case[-_]?/i;
   const idVerdict = parseArticleIdentityField(data.id, {
     field: 'id',
-    legacyLeaked: Boolean(data.id) && PROMPT_ID_LEAK_RX.test(String(data.id)),
   });
   if (!idVerdict.ok && idVerdict.rejection !== IDENTITY_REJECTION.EMPTY) {
     const err = new Error(
@@ -13585,6 +13583,29 @@ function validate(data, opts = {}) {
     }
     console.error(`⚠️  Campo "id" mancante — sintetizzato dal titolo IT: "${generatedId}"`);
     data.id = generatedId;
+  }
+
+  // A valid residue may be recovered (`kebab-case-turismo-ticino` →
+  // `turismo-ticino`), but a pure instruction echo has no identity to recover.
+  // The latter must trigger regeneration: inventing an id from the title here
+  // would hide the model failure and could publish a value never checked for
+  // collision by the caller.
+  const idLeak = findSlugPromptLeak(data.id);
+  if (idLeak) {
+    const recoveredId = stripSlugPromptLeak(data.id);
+    if (!recoveredId || findSlugPromptLeak(recoveredId)) {
+      const err = new Error(
+        `id RIGETTATO (${IDENTITY_REJECTION.AMBIGUOUS_LEGACY_SHAPE}): ` +
+          `il valore contiene un'istruzione del prompt (${idLeak.pattern}: "${idLeak.match}") ` +
+          `e non lascia uno slug valido: "${data.id}"\n` +
+          identityCorrectionNote(IDENTITY_REJECTION.AMBIGUOUS_LEGACY_SHAPE, { field: 'id' }),
+      );
+      err.qualityReject = true;
+      err.identityRejected = true;
+      throw err;
+    }
+    console.warn(`  ⚠️  [slug-placeholder] id ripulito: "${data.id}" → "${recoveredId}"`);
+    data.id = recoveredId;
   }
 
   // Default category to 'novita' (generic news) if missing — the mapping below
@@ -13848,40 +13869,22 @@ function validate(data, opts = {}) {
       // torna a essere la forma ambigua che questa fix toglie. Sanitizzare
       // prima di leggere significa buttare via la prova.
       const rawVerdict = parseArticleIdentityField(original, { field: 'slug', locale });
-      // Il taglio a 80 e' `truncateSlugAtWordBoundary` e non `.slice(0, 80)`
-      // per la ragione argomentata su `slugifySlugPart` (issue #191): a log si
-      // leggevano slug fr troncati a meta' parola, e un token spezzato e' un
-      // URL diverso, non un URL piu' corto.
-      data.slugs[locale] = truncateSlugAtWordBoundary(
-        String(data.slugs[locale])
-          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-          .toLowerCase()
-          .replace(/[^a-z0-9-]/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-|-$/g, ''),
-        SLUG_MAX_LENGTH,
-      );
-      // Same prompt-placeholder leak the id is guarded against above, and the
-      // reason this branch no longer strips `kebab-case-` by hand: the schema
-      // shown to the model spells the id as "kebab-case-3-5-words-max-40-chars"
-      // AND the slugs as "slug-en"/"slug-de"/"slug-fr", and only the first of
-      // the two families was ever covered here — the `slug-*` family reached
-      // production 24 times. `inspectSlugForPromptPlaceholder()` is the shared
-      // classifier, the SAME one `deriveAndSanitizeArticleSlugs()` enforces at
-      // the write path, so the two cannot drift into disagreeing about what a
-      // placeholder is. The IT slug is safe by construction (assigned from the
-      // already-cleaned id); these three are not.
-      const check = inspectSlugForPromptPlaceholder(data.slugs[locale]);
+      // Il classificatore lavora sul candidato completo. La funzione che
+      // ripulisce eventuali leak applica poi il limite di 80 ai residui validi.
+      const normalizedSlug = normalizeSlugCandidate(data.slugs[locale]);
+      // Ripulisci la forma gia' normalizzata con lo stesso classificatore del
+      // write path condiviso. Un residuo utile resta; un eco puro diventa vuoto
+      // e segue il fallback italiano provvisorio.
+      data.slugs[locale] = stripSlugPromptLeak(normalizedSlug);
       const verdict = rawVerdict.ok
-        ? parseArticleIdentityField(data.slugs[locale], { field: 'slug', locale, legacyLeaked: check.leaked })
+        ? parseArticleIdentityField(data.slugs[locale], { field: 'slug', locale })
         : rawVerdict;
       if (!verdict.ok) {
         console.warn(`  ❌ [slug-identity] Slug ${locale} RIGETTATO (${verdict.rejection}): ${verdict.detail}`);
       }
-      // ISSUE #138 PUNTO 3 — qui c'era `check.slug || data.slugs.it`, e
-      // `check.slug` era il resto del segnaposto: `slug-gaggiolo-traffic`
-      // diventava `gaggiolo-traffic`, cioe' si assumeva che il testo incollato
-      // fosse la scelta del modello. Indecidibile, quindi tolto.
+      // ISSUE #138 PUNTO 3 — il vecchio codice assumeva che il testo incollato
+      // fosse la scelta del modello. Ora `stripSlugPromptLeak()` decide in un
+      // solo punto: conserva solo un residuo che resta uno slug valido.
       //
       // Il ripiego resta lo slug ITALIANO, che non e' un indovinello ma una
       // costante: e' l'unica risposta deterministica su questa chiamata (siamo
@@ -14933,6 +14936,14 @@ function getLastArticleId(src) {
 }
 
 function modifyRouterTs(data) {
+  // Both the primary AI flow and registerArticleFiles() converge here before
+  // touching the routing registry. Keep the final prompt-leak gate at this
+  // boundary so a producer that bypasses validate() cannot publish an echo.
+  assertNoSlugPromptLeak(data.slugs, {
+    id: data.id,
+    title: data.content?.it?.title,
+    source: 'modifyRouterTs',
+  });
   // The svizzera section does NOT maintain the BlogArticleId union in
   // router.ts (ids are loose strings, validated at runtime via REVERSE_SWISS).
   // Only the frontaliere section touches router.ts.
@@ -18795,15 +18806,17 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
  * cade dentro una parola, e accetta il taglio secco solo se arretrare
  * costerebbe piu' del 25% del cap. */
 const SLUG_MAX_LENGTH = 80;
-function slugifySlugPart(input) {
-  const normalized = String(input || '')
+function normalizeSlugCandidate(input) {
+  return String(input || '')
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '');
-  return truncateSlugAtWordBoundary(normalized, SLUG_MAX_LENGTH);
+}
+function slugifySlugPart(input) {
+  return truncateSlugAtWordBoundary(normalizeSlugCandidate(input), SLUG_MAX_LENGTH);
 }
 
 /**
@@ -18818,12 +18831,11 @@ function slugifySlugPart(input) {
  *
  * The template now says `<<ID>>` and `<<SLUG:xx>>` — outside the slug
  * alphabet, so an echo is decidable instead of merely suspicious — and the
- * parsing rejects rather than recovers (see `parseArticleIdentityField()` in
- * `lib/prompt-placeholder-guard.mjs`). THIS classifier stays exactly as it
- * was: it is the net for the values already in the registry and for the
- * secondary producers that never see the prompt, and its aggressiveness is
- * pinned to 28 hits over 15.172 published slugs. Widening or narrowing it
- * here would move that measurement, which is not what #138 item 3 asks for.
+ * parsing rejects rather than guessing (see `parseArticleIdentityField()` in
+ * `lib/prompt-placeholder-guard.mjs`). This classifier is also the net for
+ * secondary producers that never see the prompt: it recognizes legacy
+ * prefixes and instruction-shaped n-grams that a reworded prompt can leak.
+ * Its aggressiveness remains pinned by the published-registry sweep.
  *
  * A model that runs out of attention echoes them back instead of replacing
  * them — either verbatim (`slug-en`), or with the placeholder glued onto a
@@ -18831,7 +18843,7 @@ function slugifySlugPart(input) {
  * downstream noticed: `slugifySlugPart()` sees a perfectly well-formed
  * lowercase-ASCII-hyphen token and passes it through unchanged, and the
  * sanitizer in `validate()` only ever stripped the `kebab-case-` prefix — the
- * `slug-` family was never covered.
+ * `slug-` family and reworded instructions were never covered.
  *
  * MEASURED 2026-08-09 on the published `slugs.json`: 24 live slugs across 8
  * articles, all answering 200 and all listed in `sitemap-blog.xml` /
@@ -18868,6 +18880,43 @@ function slugifySlugPart(input) {
  * come through untouched.
  */
 const PROMPT_SLUG_PREFIX_RX = /^(?:slug|kebab[-_]?case)[-_]+/i;
+
+/** The schema labels that models can echo into a URL, in any locale. */
+const SLUG_PROMPT_LEAK_PATTERNS = Object.freeze([
+  { name: 'casing-convention', re: /(kebab|snake|camel|pascal|sentence)[-_]?case/gi },
+  { name: 'char-limit', re: /(?:max[-_]?\d+[-_]?(?:characters?|chars?|caratteri)|\d+[-_]?(?:characters?|chars?|caratteri)[-_]?max|max[-_]?(?:characters?|chars?|length|lunghezza)|char[-_]?limit)/gi },
+  { name: 'word-count', re: /(?:\d+[-_]\d+[-_]?(?:words?|parole)|(?:words?|parole)[-_]?max|max[-_]?\d+[-_]?(?:words?|parole)|\d+[-_]?(?:words?|parole)[-_]?max)/gi },
+  { name: 'case-instruction', re: /(?:lower|upper)[-_]?case/gi },
+  { name: 'slug-instruction', re: /(?:url[-_]?(?:safe|slug|friendly)|(?:article|your|the)[-_]slug|slug[-_](?:here|format|only|value)|formato[-_]slug)/gi },
+  { name: 'format-instruction', re: /(?:no[-_](?:accents?|diacritics?|spaces?)|senza[-_]accenti|hyphen[-_]?separated|separated[-_]by[-_]hyphens|trattini[-_]bassi)/gi },
+  { name: 'placeholder', re: /(?:placeholder|segnaposto|lorem[-_]ipsum|(?:title|titolo|text|testo|keyword|topic)[-_]here|your[-_](?:title|text|keyword|topic)|tuo[-_](?:titolo|testo))/gi },
+  { name: 'unfilled-marker', re: /(?:^|[-_])(?:xxx+|tbd|todo|fixme|placehold)(?=[-_]|$)/gi },
+]);
+
+const WHOLE_SLUG_LEAKS = new Set([
+  'slug', 'id', 'title', 'titolo', 'string', 'stringa',
+  'example', 'esempio', 'test', 'article', 'articolo',
+  'undefined', 'null', 'none', 'na', 'n-a', 'value', 'valore',
+]);
+
+// Tokens that describe the schema, not an article. A recovered value is useful
+// only when removing prompt instructions leaves at least one editorial token.
+const SCHEMA_ONLY_SLUG_TOKENS = new Set([
+  'id', 'ascii', 'slug', 'kebab', 'case', 'max',
+  'word', 'words', 'parole', 'parola', 'char', 'chars',
+  'character', 'characters', 'carattere', 'caratteri',
+  '3', '5', '40',
+]);
+
+function hasEditorialIdentityResidue(value) {
+  return String(value ?? '').split('-')
+    .some((token) => token && !SCHEMA_ONLY_SLUG_TOKENS.has(token));
+}
+
+const WHOLE_SLUG_LEAK_PATTERNS = [
+  { name: 'locale-slug-placeholder', re: /^slug[-_][a-z]{2,12}$/i },
+  { name: 'schema-hint-bare', re: /^\d+[-_](?:words?|chars?|characters?)$/i },
+];
 
 /**
  * What is left after the prefix is stripped, when the remainder is still part
@@ -18923,6 +18972,86 @@ const SCHEMA_HINT_SHAPE_RX = new RegExp(
   'i',
 );
 
+/** Remove every schema prefix (`slug-`, `kebab-case-`, including repeats). */
+function stripSchemaPlaceholderPrefix(input) {
+  let value = String(input ?? '').trim().toLowerCase();
+  if (!PROMPT_SLUG_PREFIX_RX.test(value)) return value;
+  for (let i = 0; i < 4 && PROMPT_SLUG_PREFIX_RX.test(value); i += 1) {
+    value = value.replace(PROMPT_SLUG_PREFIX_RX, '');
+  }
+  if (
+    value.length < 4
+    || NON_SLUG_REMAINDER_RX.test(value)
+    || SCHEMA_HINT_SHAPE_RX.test(value)
+  ) return '';
+  return value;
+}
+
+/** Return the first prompt instruction fragment found in a slug candidate. */
+export function findSlugPromptLeak(input) {
+  // Classify before the 80-character publication cap: truncation can split a
+  // complete prompt fragment (max-40-chars) into an unrecognized max-40.
+  const value = normalizeSlugCandidate(input);
+  if (!value) return null;
+  if (WHOLE_SLUG_LEAKS.has(value)) {
+    return { pattern: 'whole-slug-placeholder', match: value };
+  }
+  for (const { name, re } of WHOLE_SLUG_LEAK_PATTERNS) {
+    if (re.test(value)) return { pattern: name, match: value };
+  }
+  const prefix = value.match(PROMPT_SLUG_PREFIX_RX);
+  if (prefix) return { pattern: 'schema-placeholder-prefix', match: prefix[0] };
+  for (const { name, re } of SLUG_PROMPT_LEAK_PATTERNS) {
+    re.lastIndex = 0;
+    const match = re.exec(value);
+    if (match) return { pattern: name, match: match[0] };
+  }
+  return null;
+}
+
+/** Strip prompt labels and instructions, or return '' when no valid slug remains. */
+export function stripSlugPromptLeak(input) {
+  let value = normalizeSlugCandidate(input);
+  if (!value) return '';
+  if (WHOLE_SLUG_LEAKS.has(value)) return '';
+  if (WHOLE_SLUG_LEAK_PATTERNS.some(({ re }) => re.test(value))) return '';
+  if (!findSlugPromptLeak(value)) {
+    return truncateSlugAtWordBoundary(value, SLUG_MAX_LENGTH);
+  }
+  if (PROMPT_SLUG_PREFIX_RX.test(value)) {
+    value = stripSchemaPlaceholderPrefix(value);
+    if (!value) return '';
+  }
+  for (const { re } of SLUG_PROMPT_LEAK_PATTERNS) {
+    re.lastIndex = 0;
+    value = value.replace(re, '-');
+  }
+  value = value
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  // The id field label and ASCII qualifier are not editorial identity.
+  // Without this cleanup, id-kebab-case-ascii-... degrades to id-ascii.
+  value = value.replace(/^id(?:-ascii)?(?:-|$)/i, '').replace(/^ascii(?:-|$)/i, '');
+  if (!value || !hasEditorialIdentityResidue(value) || findSlugPromptLeak(value)) return '';
+  return truncateSlugAtWordBoundary(value, SLUG_MAX_LENGTH);
+}
+
+/** Hard gate immediately before a router write. */
+export function assertNoSlugPromptLeak(slugs, context = {}) {
+  const offenders = [];
+  for (const [locale, slug] of Object.entries(slugs || {})) {
+    const leak = findSlugPromptLeak(slug);
+    if (leak) offenders.push(`${locale}="${slug}" (${leak.pattern}: "${leak.match}")`);
+  }
+  if (offenders.length === 0) return;
+  const source = context.source ? ` [${context.source}]` : '';
+  const id = context.id ? ` id="${context.id}"` : '';
+  throw new Error(
+    `slug contaminato dal template del prompt${source}:${id}: ${offenders.join('; ')}`,
+  );
+}
+
 /**
  * Classify one slug candidate against the prompt schema.
  *
@@ -18933,28 +19062,18 @@ const SCHEMA_HINT_SHAPE_RX = new RegExp(
  *   `recovered`— `leaked` and a usable remainder was salvaged from it.
  */
 export function inspectSlugForPromptPlaceholder(input) {
-  const normalized = slugifySlugPart(input);
+  const normalized = normalizeSlugCandidate(input);
   if (!normalized) return { slug: '', leaked: false, recovered: false };
-
-  // A value that IS a placeholder, with no prefix to strip (`undefined`,
-  // `placeholder`, a bare `slug`, `3-5-words-max-40-chars`).
-  if (NON_SLUG_REMAINDER_RX.test(normalized) || SCHEMA_HINT_SHAPE_RX.test(normalized)) {
-    return { slug: '', leaked: true, recovered: false };
+  const leaked = findSlugPromptLeak(normalized);
+  if (!leaked) {
+    return {
+      slug: truncateSlugAtWordBoundary(normalized, SLUG_MAX_LENGTH),
+      leaked: false,
+      recovered: false,
+    };
   }
-  if (!PROMPT_SLUG_PREFIX_RX.test(normalized)) {
-    return { slug: normalized, leaked: false, recovered: false };
-  }
-
-  // Strip repeatedly: `slug-kebab-case-x` and `slug-slug-en` both occur.
-  let remainder = normalized;
-  for (let i = 0; i < 4 && PROMPT_SLUG_PREFIX_RX.test(remainder); i += 1) {
-    remainder = remainder.replace(PROMPT_SLUG_PREFIX_RX, '');
-  }
-  const usable =
-    remainder.length >= 4 &&
-    !NON_SLUG_REMAINDER_RX.test(remainder) &&
-    !SCHEMA_HINT_SHAPE_RX.test(remainder);
-  return { slug: usable ? remainder : '', leaked: true, recovered: usable };
+  const slug = stripSlugPromptLeak(normalized);
+  return { slug, leaked: true, recovered: Boolean(slug) };
 }
 
 // ── Rilocalizzazione degli slug dopo la traduzione (issue #191) ───────────
@@ -19280,9 +19399,8 @@ function sectionLocaleSlugTaken(locale, slug) {
  *    the body filename and the hreflang anchor, and `registerArticleFiles()`
  *    has ALREADY run `checkArticleIdExists(data.id)` by the time we get here.
  *    Rewriting it at this point would publish the article under an id nobody
- *    checked for collisions. There is a correct place to recover it — the
- *    `PROMPT_ID_LEAK_RX` branch in `validate()`, which rebuilds it from the
- *    Italian title and can retry the whole generation — so reaching this
+ *    checked for collisions. There is a correct place to recover a valid
+ *    residue — the prompt-leak branch in `validate()` — so reaching this
  *    function with a leaked id means a producer bypassed that path, which is a
  *    bug to surface, not to paper over.
  *
@@ -19330,21 +19448,22 @@ export function deriveAndSanitizeArticleSlugs(data) {
       continue;
     }
     const raw = String(data.slugs[locale]);
-    const check = inspectSlugForPromptPlaceholder(raw);
-    if (!check.leaked) {
-      data.slugs[locale] = check.slug || data.slugs.it;
+    const leak = findSlugPromptLeak(raw);
+    const cleaned = stripSlugPromptLeak(raw);
+    if (!leak) {
+      data.slugs[locale] = cleaned || data.slugs.it;
       continue;
     }
     // Quarta derivazione di uno slug da un titolo LOCALIZZATO, e per la stessa
     // ragione delle altre tre passa dal classificatore condiviso (#868 item 1):
     // con `data.slugs.de` segnaposto puro e `content.de.title === 'Null'`,
-    // `check.slug` e' vuoto e `slugifySlugPart()` nudo scriveva
+    // `cleaned` e' vuoto e `slugifySlugPart()` nudo scriveva
     // `data.slugs.de = 'null'` — che `relocalizeSlugsAfterTranslation()` non
     // ripara, perche' `needsWork` e' falso su uno slug diverso dall'italiano.
     const localizedTitle = String(data.content?.[locale]?.title || '').trim();
     const fromTitle = localizedTitleSlugCandidate(localizedTitle);
-    const replacement = check.slug || fromTitle || data.slugs.it;
-    const source = check.slug ? 'resto del segnaposto' : fromTitle ? `titolo ${locale}` : 'slug IT';
+    const replacement = cleaned || fromTitle || data.slugs.it;
+    const source = cleaned ? 'residuo ripulito' : fromTitle ? `titolo ${locale}` : 'slug IT';
     console.error(
       `❌ [slug-placeholder] lo slug ${locale} e' un segnaposto del prompt: "${raw}" → "${replacement}" (da: ${source}). ` +
         'Il modello ha ricopiato lo schema invece di compilarlo — se ricorre, e\' il prompt a dover cambiare, ' +

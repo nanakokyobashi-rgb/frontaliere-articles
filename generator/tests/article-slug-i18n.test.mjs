@@ -68,6 +68,10 @@ function sliceBlock(startNeedle, fnNeedle) {
 
 function loadSlugSandbox() {
   const slugify = sliceBlock('const SLUG_MAX_LENGTH = 80;', 'function slugifySlugPart(input) {');
+  const normalizeCandidate = sliceBlock(
+    'function normalizeSlugCandidate(input) {',
+    'function slugifySlugPart(input) {',
+  );
   // Il classificatore di segnaposto entra in sandbox perche'
   // `relocalizeSlugsAfterTranslation` lo attraversa: e' cio' che tiene fuori
   // `null` dallo slug di un titolo `de` che vale `Null` (#868 item 1).
@@ -79,7 +83,7 @@ function loadSlugSandbox() {
     "export const PROVISIONAL_IT_SLUG_FIELD = '_slugsProvisionalFromIt';",
     'export function relocalizeSlugsAfterTranslation(data, opts = {}) {',
   );
-  const code = `${slugify}\n${placeholderGuard}\n${relocalize}`.replace(/^export /gm, '');
+  const code = `${slugify}\n${normalizeCandidate}\n${placeholderGuard}\n${relocalize}`.replace(/^export /gm, '');
   // `metaFieldPlausibilityMiss` entra in sandbox IMPORTATO dal suo modulo, non
   // ricopiato (AGENTS.md #6): `localizedTitleSlugCandidate` lo attraversa, ed
   // e' cio' che tiene un titolo tradotto troppo corto per essere un titolo

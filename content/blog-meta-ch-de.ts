@@ -8249,6 +8249,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Unternehmensinsolvenzen deutlich gestiegen, Rekord 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvente Unternehmen zwischen Januar und September Unternehmenskonkurse bei 13’660, +38,4% im Jahresvergleich Neue Eintragungen ins Register: 41’706 Privatpersonen: 8’003 Konkurse',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Blick auf den Luganer See mit Bürogebäuden und ruhigem Wasser, klarer Tag',
+    'blog.article.prezzi-auto-nuove-usate-calo.title': 'Preise für Neu- und Gebrauchtwagen sinken dank chinesischer Marken',
+    'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Im dritten Quartal sinken die Durchschnittspreise für Neuwagen.',
+    'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Schweizer Autohaus-Lot mit neuen und gebrauchten Fahrzeugen und sichtbaren Preisschildern',
 };
 
 export default blogMetaChDe;

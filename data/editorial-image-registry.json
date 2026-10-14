@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "assetCount": 1,
+  "assets": [
+    {
+      "schema": 1,
+      "source": "editorial-upload",
+      "cover": "/images/blog/asvz-blackbirds-champions-bowl-2026.webp",
+      "rightsHolder": "Football Flag / Swiss American Football Verband (SAFV)",
+      "license": "Uso editoriale con attribuzione a Noa Monn",
+      "proofUrl": "https://drive.google.com/drive/folders/1nR9HcOlLeFGJ0_KfNVwsFfuARTujcNup?usp=sharing",
+      "author": "Noa Monn",
+      "sourceUrl": "https://drive.google.com/drive/folders/1nR9HcOlLeFGJ0_KfNVwsFfuARTujcNup?usp=sharing",
+      "modified": "cropped",
+      "fetchedAt": "2026-10-14T14:00:00.000Z",
+      "status": "ok",
+      "sha256": "5bddf9531dd48e04bfe0250c2994c3dbb2ec22530e1bceddbf3609e46168163f",
+      "bytes": 223018,
+      "width": 1200,
+      "height": 675
+    }
+  ]
+}

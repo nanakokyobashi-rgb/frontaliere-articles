@@ -8249,6 +8249,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Corporate bankruptcies sharply on the rise, record high in 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvent companies between January and September Company bankruptcies at 13’660, +38,4% year-on-year New registrations in the register: 41’706 Individuals: 8’003 bankruptcies',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Lugano lake view with office buildings and calm water, clear day',
+    'blog.article.prezzi-auto-nuove-usate-calo.title': 'New and used car prices falling thanks to Chinese brands',
+    'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'In the third quarter, average prices of new cars decline.',
+    'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Swiss car dealership lot showing new and used vehicles with visible price tags',
 };
 
 export default blogMetaChEn;
