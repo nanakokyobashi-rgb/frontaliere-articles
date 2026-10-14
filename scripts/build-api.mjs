@@ -92,6 +92,7 @@ import {
   buildSitemap,
   buildFamilySectionSitemap,
   countSitemapEntries,
+  publishedArticleLocales,
 } from './lib/build-sitemap.mjs';
 // Le sezioni da pubblicare vengono dal core (lista ATTIVA), con i nomi della
 // superficie pubblicata dichiarati una volta in corpus-sections.mjs.
@@ -1074,7 +1075,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   const candidateBlocks = [];
   let considered = 0;
 
-  const collect = (entries, sectionId, slugMap, meta, shadowed = new Set()) => {
+  const collect = (entries, sectionId, slugMap, meta, shadowed = new Set(), fallbackReasons = {}) => {
     const paths = SECTION_PATHS[sectionId];
     for (const a of entries) {
       const slug = slugMap?.[a.id]?.it;
@@ -1084,6 +1085,9 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       // points elsewhere, so listing its <loc> here is the same defect this PR
       // fixes for the blog sitemap, just in the news-candidates feed instead.
       if (shadowed.has(slug)) continue;
+      const localeRows = publishedArticleLocales(a, paths, slugMap, shadowed, fallbackReasons);
+      const italian = localeRows.find(({ locale }) => locale === 'it');
+      if (!italian) continue;
       const publishedAt = a.date;
       if (!publishedAt) continue;
       considered += 1;
@@ -1119,13 +1123,10 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       // an editorial update supersedes it. Rebuilding is not a content change.
       const lastmod = a.updatedAt || publishedAt;
       const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${xmlEsc(lastmod)}</lastmod>`];
-      for (const loc of LOCALES) {
-        const s2 = slugMap?.[a.id]?.[loc];
-        if (s2 && !isReservedPublishedSlug(s2)) {
-          parts.push(
-            `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${xmlEsc(s2)}/" />`,
-          );
-        }
+      for (const { locale, prefix, slug: localizedSlug } of localeRows) {
+        parts.push(
+          `    <xhtml:link rel="alternate" hreflang="${locale}" href="${SITE}${prefix}${xmlEsc(localizedSlug)}/" />`,
+        );
       }
       parts.push(
         `    <xhtml:link rel="alternate" hreflang="x-default" href="${itLoc}" />`,
@@ -1171,6 +1172,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       slugMapOf(section.section),
       SECTION_META_IT[section.section],
       SECTION_SITEMAP_SHADOW[section.section],
+      SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
     );
   }
 
