@@ -345,7 +345,7 @@ const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ 
 const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}|${caseInitial('l')}['’]?\\s*)?`;
 const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
 const AUDIENCE_RECIPIENT = `(?:\\p{Ll}[\\p{L}'-]*\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
-const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della'].map(caseInitial).join('|')}))?\\s+)?`;
+const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
 const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
 const AUDIENCE_TARGET = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
 const AUDIENCE_RES = [
@@ -397,7 +397,7 @@ const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|pendolar[ei
 /** Eta' scritta in cifre o in forma lessicale: «68enne», «quarantenne». */
 const PERSON_AGE_RE = /^(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]$/u;
 /** Quantita' che possono reggere «di + demonimo»: «decine di ticinesi». */
-const PERSON_QUANTITY_RE = /^(?:decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
+const PERSON_QUANTITY_RE = /^(?:pai[oa]|decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */
 const PERSON_HEAD_WORDS = new Set(['auto', 'automobile', 'automobili', 'moto']);
 const PERSON_GROUP_RE = /^(?:grupp[oi]|comitiv[ae]|delegazion[ei]|squadr[ae]|famigli[ae]|coppi[ae])$/u;

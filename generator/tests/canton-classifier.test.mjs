@@ -237,6 +237,11 @@ describe('regole di assegnazione', () => {
       sourceUrl: 'https://www.tio.ch/estero/cronaca/123456/gruppo-bloccato',
       body: 'Il gruppo di ticinesi attende un volo. I ticinesi chiedono aiuto.',
     }), []);
+    assert.deepEqual(codes({
+      title: 'Un paio di ticinesi bloccati in Medio Oriente',
+      excerpt: 'Un paio di ticinesi attendono assistenza consolare.',
+      body: 'I due cittadini aspettano di rientrare.',
+    }), []);
   });
 
   test('il cantone come destinatario non e\' il luogo della notizia, neppure nel titolo', () => {
@@ -250,6 +255,7 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('L\'impatto sul Ticino della riforma').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per il Canton Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per il Cantone di Ginevra').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per il Cantone dei Grigioni').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Cosa Cambia per Il Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per il Ticino e i Grigioni').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per il Canton San Gallo, Basilea Campagna e il Vallese').map((m) => m.group), []);
