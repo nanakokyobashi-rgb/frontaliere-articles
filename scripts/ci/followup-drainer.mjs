@@ -1119,6 +1119,19 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
     return { handled: true, action: 'item-missing', itemId, reason: 'FU assente o privo di State nel bucket' };
   }
 
+  // FIX_OUTCOME resta l'ultimo marker anche quando il bucket passa al FU
+  // successivo. Un item terminale dimostra quindi che questo marker è già
+  // stato consumato: non si deve riusare per riaccodare un altro item.
+  if (item.state === 'done' || item.state === 'blocked') {
+    return {
+      handled: true,
+      action: 'outcome-consumed',
+      itemId,
+      state: item.state,
+      reason: 'esito già applicato a un FU terminale',
+    };
+  }
+
   const state = outcome === 'already-fixed' ? 'done' : 'blocked';
   const body = updateFollowupItemState(issue.body, itemId, state);
   if (body === null) {
@@ -2941,15 +2954,23 @@ export function isReparkableCandidate(iss) {
  * attiva: il DRAIN la esclude e quindi il VERDICT-EXIT deve poter consumare i
  * verdetti non ri-tentabili che il PARKED-RETRY non ri-accoda. Una issue già
  * `maybe-resolved` rientra solo quando conserva anche la label queued, così il
- * pass può togliere quella label stantia senza riaprire il caso umano.
+ * pass può togliere quella label stantia senza riaprire il caso umano. Un daily
+ * può invece conservare `automation-deferred` dopo un preflight per-item: il
+ * verdetto va riconciliato sul FU prima di rimettere in coda il successivo.
  * @param {{title?: string, labels?: Array<string|{name:string}>}} iss
  */
 export function isVerdictExitCandidate(iss) {
-  if (!has(iss, LBL_PARKED) || !isQueueManaged(iss)) return false;
+  const isDaily = !!dailyBucketInfo(iss?.title || '');
+  const isDailyDeferred = isDaily && has(iss, LBL_AUTOMATION_DEFERRED);
+  const queueManaged = isQueueManaged(iss) || (isDailyDeferred && isQueueManaged({
+    ...iss,
+    labels: names(iss).filter((label) => label !== LBL_AUTOMATION_DEFERRED),
+  }));
+  if (!has(iss, LBL_PARKED) || !queueManaged) return false;
   if (hasActiveAgentClaim(iss) || has(iss, LBL_FIX)) return false;
-  if (has(iss, 'needs-human') || has(iss, LBL_AUTOMATION_DEFERRED)) return false;
+  if (has(iss, 'needs-human') || (has(iss, LBL_AUTOMATION_DEFERRED) && !isDaily)) return false;
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false;
-  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED) && !dailyBucketInfo(iss?.title || '')) return false;
+  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED) && !isDaily) return false;
   return !isPermanentTracker(iss);
 }
 /**

@@ -248,6 +248,25 @@ test('un esito terminale su un daily senza altri open resta aggregato e non chiu
   assert.match(result.body, /### FU-2026-10-02-003[\s\S]*?- State: blocked/);
 });
 
+test('un FIX_OUTCOME già consumato su un item terminale non riaccoda il successivo', () => {
+  for (const state of ['done', 'blocked']) {
+    const body = DAILY_OUTCOME_BODY.replace(
+      '### FU-2026-10-02-001 — primo item\n- Target repository: nanakokyobashi-rgb/frontaliere-articles\n- State: open',
+      `### FU-2026-10-02-001 — primo item\n- Target repository: nanakokyobashi-rgb/frontaliere-articles\n- State: ${state}`,
+    );
+    const result = dailyBucketOutcomeTransition(
+      { title: DAILY_OUTCOME_TITLE, body },
+      'already-fixed',
+      '<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: already-fixed -->',
+    );
+    assert.equal(result.handled, true);
+    assert.equal(result.action, 'outcome-consumed');
+    assert.equal(result.itemId, 'FU-2026-10-02-001');
+    assert.equal(result.state, state);
+    assert.equal(result.reason, 'esito già applicato a un FU terminale');
+  }
+});
+
 test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide', () => {
   const start = DRAINER.indexOf('// --- VERDICT-EXIT:');
   const end = DRAINER.indexOf('// --- TOO-LARGE ESCALATION', start);
@@ -259,7 +278,7 @@ test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide'
   assert.match(stage, /updateDailyIssueBody\(/);
   assert.match(stage, /const add = transition\.action === 'requeue' \|\| transition\.action === 'retry' \? \[LBL_QUEUED\]/);
   assert.ok(stage.indexOf('dailyBucketOutcomeTransition(') < stage.indexOf('verdictExitDecision('));
-  assert.match(DRAINER, /has\(iss, LBL_MAYBE_RESOLVED\)[\s\S]*?!dailyBucketInfo\(iss\?\.title/);
+  assert.match(DRAINER, /const isDaily = !!dailyBucketInfo\(iss\?\.title/);
 });
 
 const DAILY_TITLE = 'follow-up(daily:2026-10-02): 3 items — nanakokyobashi-rgb/frontaliere-articles';

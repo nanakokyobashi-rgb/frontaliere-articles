@@ -83,6 +83,11 @@ test('#1997/#1495: i verdetti fermi nella coda in conflitto raggiungono VERDICT-
   assert.equal(isVerdictExitCandidate(queuedParked), true);
   assert.equal(isVerdictExitCandidate(alreadyFlagged), true);
   assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'maybe-resolved')), true);
+  assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'automation-deferred')), true);
+  assert.equal(isVerdictExitCandidate({
+    ...issue('follow-up', 'fu-parked', 'automation-deferred'),
+    title: 'follow-up(#12): item — owner/repo',
+  }), false);
   assert.equal(isVerdictExitCandidate({
     ...issue('follow-up', 'fu-parked', 'maybe-resolved'),
     title: 'follow-up',
