@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-grandine-svizzera-danni-swiss-re.webp",
+      "sha256": "ddec034cd3bde4bb7da890a1e4a30b7de2ebaefbdd0db7bc2784e7b5f099dfd3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-grandine-svizzera-danni-swiss-re-480w.webp",
+      "sha256": "04e1259a54f45bcf6031cfe773413c9e87c7719a3795bcfaa1a65ee85579b558"
+    }
+  ]
 }
