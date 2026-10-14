@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-zurigo-corsi-lingua-integrazione.webp",
-      "sha256": "772d0dc6e59fbe7c35967f4f13d8d3c573a20c39f7972aa3c8c7bcdbda33df3c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-zurigo-corsi-lingua-integrazione-480w.webp",
-      "sha256": "0d0af10a0dbeda80a535e6d7f01e118cceeb605d839fb125f2fd55eda2798af5"
-    }
-  ]
+  "items": []
 }
