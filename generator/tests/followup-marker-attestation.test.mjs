@@ -142,6 +142,40 @@ test('010: un solo marker non ha ordine da decidere, anche senza data', () => {
   assert.equal(latestTriageCommentBody('non json'), null);
 });
 
+test('1721: bucket e item nei claim; i bucket sotto Dropped sono solo contesto', () => {
+  const marker = [
+    '## Post-merge follow-up triage',
+    '',
+    'Created/updated: daily bucket #2562 `follow-up(daily:2026-10-10)` (corpus) con 3 item già esistenti, 0 nuovi item:',
+    '- `FU-2026-10-10-017` — aggiunta `PR #2664` a `Sources`.',
+    '- `FU-2026-10-10-018` — aggiunta `PR #2664` a `Sources`.',
+    '- `FU-2026-10-10-019` — aggiunta `PR #2664` a `Sources`.',
+    '',
+    'Dropped:',
+    '- Il bullet `Per scelta, questa PR non chiude i bucket #2365, #2544 o #2562` — contesto storico.',
+  ].join('\n');
+  const expectedItems = [
+    'FU-2026-10-10-017',
+    'FU-2026-10-10-018',
+    'FU-2026-10-10-019',
+  ];
+  const expectation = triageMarkerPersistenceExpectation(marker);
+  assert.deepEqual(expectation.items, expectedItems);
+  assert.deepEqual(expectation.buckets, [2562]);
+
+  const reads = [];
+  const persistedBucket = {
+    number: 2562,
+    title: 'follow-up(daily:2026-10-10): 19 items — nanakokyobashi-rgb/frontaliere-articles',
+    body: '### FU-2026-10-10-017 — x\n- Sources: PR #2664\n',
+  };
+  assert.equal(verifyTriageMarkerPersistence(marker, 2664, (number) => {
+    reads.push(number);
+    return number === 2562 ? persistedBucket : null;
+  }), true);
+  assert.deepEqual(reads, [2562]);
+});
+
 test('2299: una correzione con gli stessi ID eredita il bucket del marker precedente', () => {
   const original = [
     '## Post-merge follow-up triage',
