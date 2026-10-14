@@ -128,6 +128,8 @@ import { escapeRegExpLiteral } from './escape-regexp.mjs';
  * `id` e `slugs` sono inclusi per completezza del lock (il test verifica che
  * qualcuno li copra) ma non producono matcher qui — vedi l'intestazione.
  */
+import { editorialHeadlineGuidance } from './editorial-headline-guidance.mjs';
+
 export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   '<<ID: kebab-case ASCII, 3-5 parole, max 40 char>>',
   'max 125 chars',
@@ -135,7 +137,7 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   '<<SLUG:en>>',
   '<<SLUG:de>>',
   '<<SLUG:fr>>',
-  "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
+  ...['it', 'en', 'de', 'fr'].map(editorialHeadlineGuidance),
   'Sottotitolo con dati concreti DALLA FONTE (max 160 chars)',
   "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
   'Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.',
@@ -176,6 +178,7 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
 export const HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
   "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (3-8 coppie termine→valore presenti nella fonte; ometti campi assenti, niente placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
+  "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
 ]);
 
 /**
@@ -506,10 +509,12 @@ const escapeRx = (s) => escapeRegExpLiteral(s);
 // Non mescolare questi matcher con quelli derivati dal template corrente:
 // sono compatibilità di lettura per gli schemi storici già pubblicati.
 const HISTORICAL_SCHEMA_RULES = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS.map((literal, index) => ({
-  id: index === 0 ? 'legacy-schema-body1-fixed-key-facts' : 'legacy-schema-body1-optional-key-facts',
+  id: index === 0 ? 'legacy-schema-body1-fixed-key-facts' : index === 1 ? 'legacy-schema-body1-optional-key-facts' : 'legacy-schema-title',
   kind: 'schema-echo',
   rx: new RegExp(escapeRx(literal), 'i'),
-  why: 'Schema storico di body1 (`3-8` o `5-8` coppie) ancora presente in un output pubblicato.',
+  why: index < 2
+    ? 'Schema storico di body1 (`3-8` o `5-8` coppie) ancora presente in un output pubblicato.'
+    : 'Istruzione storica del titolo ricopiata dallo schema JSON.',
   literal,
 }));
 

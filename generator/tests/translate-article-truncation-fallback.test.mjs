@@ -1,3 +1,5 @@
+import { editorialHeadlineGuidance } from '../scripts/lib/editorial-headline-guidance.mjs';
+import { enrichArticleInternalLinks } from '../scripts/lib/contextual-article-links.mjs';
 /**
  * translate-article-truncation-fallback.test.mjs — un fallback IT vuoto non
  * deve sovrascrivere un body tradotto troncato-ma-presente (#686).
@@ -830,30 +832,24 @@ function extractFunctionSource(startMarker) {
 
 const COLLECT_BODY_SECTIONS_SRC = extractFunctionSource('function collectBodySections(content) {');
 const CTA_SRC = extractFunctionSource('function validateAndEnforceCTA(data) {');
-const LINKS_SRC = (() => {
-  const a = src.indexOf('const LINK_CLUSTER_PATTERNS = {');
-  assert.notEqual(a, -1, 'LINK_CLUSTER_PATTERNS non trovato — aggiornare questo test');
-  const fnAt = src.indexOf('function enforceStrongInternalLinks(data) {', a);
-  assert.notEqual(fnAt, -1, 'enforceStrongInternalLinks non trovato dopo le sue costanti');
-  return src.slice(a, src.indexOf('\n}\n', fnAt) + 2);
-})();
+const LINKS_SRC = extractFunctionSource('function enforceStrongInternalLinks(data) {');
 const SOURCE_COPY_INPUT_SRC = extractFunctionSource('function sourceCopyInputText(pageContent) {');
 
 function runDownstreamMutators(data) {
   const fn = new Function(
     'data', 'isBodyTranslationPending', 'console',
-    'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
+    'enrichArticleInternalLinks', 'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
     `${COLLECT_BODY_SECTIONS_SRC}\n${LINKS_SRC}\n${CTA_SRC}\nvalidateAndEnforceCTA(data);\nenforceStrongInternalLinks(data);\nreturn data;`,
   );
   const cta = { it: '\n\nCTA it', en: '\n\nCTA en', de: '\n\nCTA de', fr: '\n\nCTA fr' };
   return fn(
     data, isBodyTranslationPending, { error: () => {}, warn: () => {} },
-    () => '', () => cta, ['cta-it'], ['cta-en'], ['cta-de'], ['cta-fr'],
+    enrichArticleInternalLinks, () => '', () => cta, ['cta-it'], ['cta-en'], ['cta-de'], ['cta-fr'],
   );
 }
 
 test('#1875: CTA e link interni non ricreano body3/body2 lasciati in attesa, e restano invariati altrove', () => {
-  const lang = (l) => ({ title: `T ${l}`, excerpt: `E ${l}`, body1: `B1 ${l}`, body2: `B2 ${l}`, body3: `B3 ${l}` });
+  const lang = (l) => ({ title: `T ${l}`, excerpt: `E ${l}`, body1: `B1 ${l}`, body2: ({it: 'stipendio netto', en: 'net salary', de: 'Nettolohn', fr: 'salaire net'})[l], body3: `B3 ${l}` });
   const data = { id: 'prova', category: 'novita', content: { it: lang('it'), en: lang('en'), de: lang('de'), fr: lang('fr') } };
   markBodyTranslationPending(data, { locale: 'fr', field: 'body3', reason: 'retry-error' });
   markBodyTranslationPending(data, { locale: 'de', field: 'body2', reason: 'retry-capped' });
@@ -862,19 +858,19 @@ test('#1875: CTA e link interni non ricreano body3/body2 lasciati in attesa, e r
 
   assert.equal(Object.hasOwn(data.content.fr, 'body3'), false, 'nessun body3 fr di sola CTA');
   assert.equal(Object.hasOwn(data.content.de, 'body2'), false, 'nessun body2 de di soli link');
-  assert.match(data.content.en.body3, /CTA en$/, 'la CTA resta dove il body3 e\' tradotto');
-  assert.match(data.content.de.body3, /CTA de$/);
+  assert.equal(data.content.en.body3, 'B3 en', 'no unrelated CTA is appended');
+  assert.equal(data.content.de.body3, 'B3 de');
   assert.match(data.content.fr.body2, /nav:calculator/, 'il blocco di link resta dove il body2 e\' tradotto');
   assert.match(data.content.en.body2, /nav:calculator/);
 });
 
-test('#1875: senza marker i mutatori ricreano il campo mancante come prima (il salto dipende solo dal marker)', () => {
+test('#1875: without a pending marker, missing fields still cannot be recreated by a link block', () => {
   const data = { id: 'prova', category: 'novita', content: { it: { title: 'T', body1: 'B1', body2: 'B2' }, en: { title: 'T', body1: 'B1' } } };
 
   runDownstreamMutators(data);
 
-  assert.match(data.content.en.body3, /CTA en$/);
-  assert.match(data.content.en.body2, /nav:calculator/);
+  assert.equal(Object.hasOwn(data.content.en, 'body3'), false);
+  assert.equal(Object.hasOwn(data.content.en, 'body2'), false);
 });
 
 test('#1875: translateArticle azzera i marker per articolo e la riga FREE_MT_RECOVERY_OUTCOME li conta', () => {
@@ -958,7 +954,7 @@ async function runPostTranslationToBodyFiles(data, url) {
   const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
   const fn = new AsyncFunction(
     'data', 'url', 'pageContent', 'isBodyTranslationPending', 'console',
-    'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
+    'enrichArticleInternalLinks', 'bodyTextForQuality', 'pickDefaultCTA', 'CTA_KEYWORDS_IT', 'CTA_KEYWORDS_EN', 'CTA_KEYWORDS_DE', 'CTA_KEYWORDS_FR',
     'decodeHtmlEntities', 'normalizeLocalizedToponymText', 'META_SEO_FIELDS', 'escapeForSingleQuoteTS', 'MAX_BODY_KEYS',
     'evaluateSourceCopy', 'logSourceCopyVerdict', 'SOURCE_COPY_OVERLAP_THRESHOLD', 'SourceCopyError', 'sourceCopyRetries', 'sourceCopyMode', 'repairGeneratedArticleSourceCopy', 'appendSourceCitation',
     `${COLLECT_BODY_SECTIONS_SRC}\n${BOLD_SRC}\n${LINKS_SRC}\n${CTA_SRC}\n${DECODE_ENTITIES_SRC}\n${BUILD_BODY_FILE_SRC}\n${SOURCE_COPY_INPUT_SRC}\n`
@@ -968,7 +964,7 @@ async function runPostTranslationToBodyFiles(data, url) {
   const cta = { it: '\n\nCTA it calcolatore', en: '\n\nCTA en calculator', de: '\n\nCTA de rechner', fr: '\n\nCTA fr calculateur' };
   return fn(
     data, url, '', isBodyTranslationPending, { error: () => {}, warn: () => {} },
-    () => '', () => cta, ['calcolatore'], ['calculator'], ['rechner'], ['calculateur'],
+    enrichArticleInternalLinks, () => '', () => cta, ['calcolatore'], ['calculator'], ['rechner'], ['calculateur'],
     decodeHtmlEntities, normalizeLocalizedToponymText, META_SEO_FIELDS, escapeForSingleQuoteTS, MAX_BODY_KEYS,
     evaluateSourceCopy, logSourceCopyVerdict, SOURCE_COPY_OVERLAP_THRESHOLD, SourceCopyError, 0, 'warn',
     async (article) => ({
@@ -1021,7 +1017,8 @@ test('#1875 end-to-end: la chiave in attesa resta ASSENTE nel file di body emess
     assert.doesNotMatch(files[locale], /corpo italiano/, `nessun testo italiano nel file ${locale}`);
     assert.doesNotMatch(files[locale], /\.body\d+': '',/, `nessun body vuoto emesso nel file ${locale}`);
   }
-  assert.match(files.fr, /Third fr body\.[\s\S]*CTA fr calculateur/, 'dove il body c\'e\' la CTA continua ad arrivare');
+  assert.match(files.fr, /Third fr body\./, 'existing body text survives');
+  assert.doesNotMatch(files.fr, /CTA fr calculateur/, 'no unrelated CTA is synthesized');
 });
 
 // ── validate(): il sanitizer dei body non crea chiavi assenti ──────────────
@@ -1104,13 +1101,13 @@ const COUNT_WORDS_SRC = extractFunctionSource("function countWords(text = '') {"
 async function runLegacyTranslateContent(sourceContent, callWithRetry) {
   const fn = new Function(
     'sourceContent', 'callWithRetry', 'ARTICLE_TRANSLATE_FREE_MT', 'translateContentFreeMt', 'TRANSLATION_CHUNK_THRESHOLD',
-    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console',
+    'translatedStringOrNull', 'isSourcePassthrough', 'sanitizeBodyText', 'joinTranslatedChunks', 'localizedToponymInstruction', 'console', 'editorialHeadlineGuidance',
     `${COLLECT_BODY_SECTIONS_SRC}\n${COUNT_WORDS_SRC}\n${SPLIT_CHUNKS_SRC}\n${TRANSLATE_IN_CHUNKS_SRC}\n${TRANSLATE_CONTENT_SRC}\n`
     + "return translateContent('it', 'fr', '4/5', sourceContent);",
   );
   return fn(
     sourceContent, callWithRetry, false, async () => { throw new Error('ramo free-MT non atteso'); }, TRANSLATION_CHUNK_THRESHOLD,
-    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, localizedToponymInstruction, { error: () => {}, warn: () => {} },
+    translatedStringOrNull, isSourcePassthrough, (v) => v, joinTranslatedChunks, localizedToponymInstruction, { error: () => {}, warn: () => {} }, editorialHeadlineGuidance,
   );
 }
 

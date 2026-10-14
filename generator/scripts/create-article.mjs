@@ -20,7 +20,7 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *   1. Fetches the web page content at the given URL
  *   2. Calls the configured LLM provider chain to generate article data in 4 languages
  *   3. Generates a governed illustrative article image through the shared engine
- *   4. Validates CTA presence and enforces internal links to site tools
+ *   4. Links relevant concepts in localized prose to site tools
  *   5. Programmatically detects duplicates (Jaccard similarity on titles + ID/slug checks)
  *   6. Modifies 9 source files to register the new article
  *   5. Updates sitemap-blog.xml with the new article URL and hreflang alternates
@@ -345,6 +345,8 @@ import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
+import { editorialHeadlineGuidance } from './lib/editorial-headline-guidance.mjs';
+import { enrichArticleInternalLinks } from './lib/contextual-article-links.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { activeCorpusCoreMap } from '../../scripts/lib/corpus-sections.mjs';
@@ -10279,15 +10281,15 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   const ctaDefaultLine = localNewsSource
     ? `CTA: nessuna CTA obbligatoria. Chiudi body3 con un link nav: solo se un tool è davvero pertinente alla notizia (es. strade e valichi → border, traffic-history).`
     : IS_FRONTALIERE
-    ? `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`
-    : `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`;
+    ? `CTA: termina body3 con un link al tool pertinente; senza intento chiaro, ometti la CTA. Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`
+    : `CTA: termina body3 con un link al tool pertinente; senza intento chiaro, ometti la CTA. Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`;
 
   const internalLinksRuleLines = localNewsSource
     ? `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, SOLO se pertinenti alla notizia: nessun minimo, e zero link è corretto per cronaca, sport e cultura.`
-    : `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, MINIMO 3 per articolo (4 se supera 1200 parole):
-- 1 in body1 o body2 (contestuale al fatto)
-- 1 in body2 o body3 (contestuale all'analisi)
-- 1 nella CTA finale di body3 (calculator preferito)`;
+    : `LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, massimo 3 collegamenti pertinenti per articolo:
+- Se utile, in body1 o body2 (contestuale al fatto)
+- Se utile, in body2 o body3 (contestuale all'analisi)
+- CTA finale di body3 verso la destinazione pertinente; omettila se manca un intento chiaro`;
 
   // Una sola volta. La specifica di `imagePrompt` era dichiarata due volte —
   // qui dentro lo schema JSON e di nuovo in REGOLE FINALI
@@ -10516,7 +10518,7 @@ Genera JSON (no markdown, no code fences):
   "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },`}
   "content": {
     "it": {${_isBody ? '' : `
-      "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
+      "title": "${editorialHeadlineGuidance(primaryLocale)}",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
 ${localNewsSource ? `      "body1": "Cronaca locale — inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. Lunghezza secondo MINIMUM LENGTH (escluse TL;DR/Fatti chiave).",
       "body2": "Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. Lunghezza secondo MINIMUM LENGTH.",
@@ -11874,7 +11876,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
             { role: 'system', content: `Sei un giornalista finanziario esperto. Rispondi SOLO con JSON valido senza markdown.\n\n${JSON_QUOTE_SAFETY_RULE_IT}` },
             {
               role: 'user',
-              content: `Riformula il seguente titolo in italiano per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${firstCap.originalLength} caratteri, troppo lungo):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere il suffisso " | Frontaliere Ticino" (verrà aggiunto automaticamente).\n- Mantieni la keyword principale e il significato.\n- Stile giornalistico, niente clickbait.\n\nRispondi con JSON: {"title": "..."}`,
+              content: `Riformula il seguente titolo in italiano per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${firstCap.originalLength} caratteri, troppo lungo):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere il suffisso " | Frontaliere Ticino" (verrà aggiunto automaticamente).\n- Mantieni la keyword principale e il significato.\n- Stile giornalistico, niente clickbait.\n\nRispondi con JSON: {"title": "..."}\n${editorialHeadlineGuidance('it')}`,
             },
           ],
           // Title reformulation is a short, low-stakes rewrite to ≤60 chars whose
@@ -12805,7 +12807,7 @@ ${localizedToponymInstruction(targetLang)}`;
       // Se la lingua target tende a espandersi (DE/FR), riformula in modo più conciso
       // mantenendo la keyword principale — non tradurre letteralmente parola per parola.
       callWithRetry(makePrompt(
-        `CONTENUTO ITALIANO DA TRADURRE:\n- title: ${sourceContent.title}\n- excerpt: ${sourceContent.excerpt}\n\nVINCOLI OBBLIGATORI per il title tradotto:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula se necessario per restare entro 60 caratteri.`,
+        `CONTENUTO ITALIANO DA TRADURRE:\n- title: ${sourceContent.title}\n- excerpt: ${sourceContent.excerpt}\n\nVINCOLI OBBLIGATORI per il title tradotto:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula se necessario per restare entro 60 caratteri.\n${editorialHeadlineGuidance(targetLang)}`,
         '{"title": "...", "excerpt": "..."}',
       ), 1000, `${targetLang}:meta`, { translation: true }).catch(onTranslateFail(`${targetLang}:meta`)),
       // Body fields with dynamic sizing + sub-chunking safety.
@@ -13295,7 +13297,7 @@ ${localizedToponymInstruction(targetLang)}`;
       console.warn(`  ⚠️ [title-cap] ${locale.toUpperCase()} title ${initialCap.originalLength} chars > ${BLOG_TITLE_RETRY_THRESHOLD} — retry traduzione titolo con vincolo di lunghezza...`);
       try {
         const retryResult = await callWithRetry(
-          `Riformula il seguente titolo in ${langName} per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${initialCap.originalLength} caratteri, troppo lungo):\n${localeContent.title}\n\nTITOLO ITALIANO ORIGINALE (riferimento):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula in modo conciso.\n\nRispondi SOLO con JSON: {"title": "..."}`,
+          `Riformula il seguente titolo in ${langName} per il sito Frontaliere Ticino.\n\nTITOLO ATTUALE (${initialCap.originalLength} caratteri, troppo lungo):\n${localeContent.title}\n\nTITOLO ITALIANO ORIGINALE (riferimento):\n${itContent.title}\n\nVINCOLI OBBLIGATORI:\n- MASSIMO 60 caratteri totali (target 50-55).\n- NON includere "| Frontaliere Ticino" (aggiunto automaticamente).\n- Mantieni la keyword principale; abbrevia o riformula in modo conciso.\n\nRispondi SOLO con JSON: {"title": "..."}\n${editorialHeadlineGuidance(locale)}`,
           1000,
           `${locale}:title-length-retry`,
           { translation: true },
@@ -13765,7 +13767,7 @@ function validate(data, opts = {}) {
   }
   // Validate new image fields (non-blocking — provide defaults)
   if (!data.imagePrompt) {
-    data.imagePrompt = `Illustrative editorial scene about the article topic in Ticino, with symbolic objects and places, warm natural palette`;
+    data.imagePrompt = `Photorealistic synthetic editorial scene about: ${data.seo?.headline || data.seo?.title || data.content?.it?.title || data.id}. Use concrete topic-specific objects, realistic proportions and natural light; no cartoon or invented documentary event.`;
   }
   if (!data.imageAlt || typeof data.imageAlt !== 'object') {
     const itTitle = (data.content.it || data.content).title || data.id;
@@ -13868,7 +13870,7 @@ function validate(data, opts = {}) {
     'calculator', 'exchange', 'health', 'cost-of-living', 'pension', 'pillar3',
     'payslip', 'tax-return', 'residency', 'ristorni', 'unemployment', 'jobs', 'companies', 'banks',
     'first-day', 'permits', 'border', 'calendar', 'whatif', 'shopping', 'transport',
-    'salary-compare', 'traffic-history',
+    'salary-compare', 'traffic-history', 'job-board', 'jobs-observatory', 'search-jobs',
     'border-map', 'municipalities', 'car-transfer', 'car-cost', 'permit-compare', 'renovation',
     'mobile', 'ral', 'parental-leave', 'nursery', 'living-ch', 'living-it', 'livability',
   ]);
@@ -14027,15 +14029,7 @@ function sanitizeBoldFormatting(data) {
 }
 
 // ── Step 3a.1: Validate CTA / internal links in body3 ──────
-const CTA_KEYWORDS_IT = [
-  'calcolatore', 'comparatore', 'simulatore', 'convertitore', 'pianificatore',
-  'frontaliereticino', 'confronto', 'calcola', 'strumenti', 'strumento',
-  'nostro sito', 'il nostro', 'piattaforma', 'scopri', 'prova',
-];
-const CTA_KEYWORDS_EN = ['calculator', 'comparator', 'simulator', 'converter', 'planner', 'our site', 'our platform', 'tool', 'try our', 'discover'];
-const CTA_KEYWORDS_DE = ['rechner', 'vergleich', 'simulator', 'umrechner', 'planer', 'unsere plattform', 'tool', 'werkzeug', 'entdecken'];
-const CTA_KEYWORDS_FR = ['calculateur', 'comparateur', 'simulateur', 'convertisseur', 'planificateur', 'notre site', 'notre plateforme', 'outil', 'découvrez'];
-
+// Historical CTA prose remains here solely for bodyTextForCantonPostcondition.
 const CTA_POOL = [
   {
     it: '\n\nPer un calcolo preciso del tuo stipendio netto come frontaliere, usa il nostro [comparatore fiscale](nav:calculator): confronta il netto in busta tra permesso G e permesso B con tutte le deduzioni aggiornate al 2026.',
@@ -14087,65 +14081,19 @@ const CTA_POOL = [
   },
 ];
 
-function pickDefaultCTA(articleCategory) {
-  const preferred = { fiscale: [0, 1, 6], pratico: [1, 7, 3], novita: [3, 0, 2], pensione: [4, 0, 5] };
-  const indices = preferred[articleCategory] || [0, 1, 2];
-  return CTA_POOL[indices[Math.floor(Math.random() * indices.length)]];
-}
-
-const DEFAULT_CTA = CTA_POOL[0];
-
 function validateAndEnforceCTA(data) {
   const contentIt = data?.content?.it || data?.content;
   if (contentIt && typeof data._cantonGuardBodyBeforeCta !== 'string') {
     data._cantonGuardBodyBeforeCta = bodyTextForQuality(contentIt);
   }
-  if (data?._localNewsSource === true) {
-    console.error('  ℹ️  CTA omessa: cronaca locale senza bisogno concreto documentato dalla fonte.');
-    return data;
-  }
-  const localeKeywords = { it: CTA_KEYWORDS_IT, en: CTA_KEYWORDS_EN, de: CTA_KEYWORDS_DE, fr: CTA_KEYWORDS_FR };
-  const cta = pickDefaultCTA(data.category);
-
-  for (const locale of ['it', 'en', 'de', 'fr']) {
-    if (!data.content[locale]) continue; // translations may not exist yet
-    // Un body3 lasciato NON tradotto (#1875) non va ricreato con la sola CTA:
-    // il moncone cancellerebbe il marker di attesa e, nella SPA, vincerebbe
-    // sul body3 italiano completo che il sito mostra al posto della chiave
-    // mancante (quella versione porta gia' la CTA italiana).
-    if (isBodyTranslationPending(data, locale, 'body3')) {
-      console.error(`  ⏳ CTA [${locale}] saltata: body3 non tradotto, resta in attesa (#1875)`);
-      continue;
-    }
-    const body3 = (data.content[locale].body3 || '').toLowerCase();
-    const keywords = localeKeywords[locale];
-    const hasCTA = keywords.some(kw => body3.includes(kw));
-
-    if (!hasCTA) {
-      console.error(`  ⚠️  CTA mancante in body3 [${locale}] — aggiungo CTA (${data.category})`);
-      data.content[locale].body3 = (data.content[locale].body3 || '') + cta[locale];
-    }
-  }
-
+  // Contextual links and the reader's CTA cards provide the relevant action.
+  // Do not append a category-random paragraph containing unrelated claims.
   return data;
 }
 
-// ── Step 3a.2: Enforce strong internal-link clusters ───────
-// Guarantees at least 2 internal nav links in article body for SEO distribution.
-// Cluster focus: taxes (entro/oltre 20km), pension, exchange CHF/EUR.
-const LINK_CLUSTER_PATTERNS = {
-  taxes20km: /(20\s?km|entro\s*i\s*20|oltre\s*i\s*20|imposta|irpef|credito\s*d[' ]?imposta|doppia\s+imposizione|accordo\s+fiscale|fascia)/i,
-  pension: /(pensione|avs|inps|lpp|secondo\s+pilastro|terzo\s+pilastro|pillar\s*3)/i,
-  exchange: /(cambio|chf|eur|franco|euro|tasso\s*di\s*cambio|valuta|bonifico|wise)/i,
-};
-
-const LINK_CLUSTER_ACTIONS = {
-  taxes20km: ['calculator', 'tax-return'],
-  pension: ['pension', 'pillar3'],
-  exchange: ['exchange', 'banks'],
-  generic: ['calculator', 'exchange'],
-};
-
+// ── Step 3a.2: Enrich existing prose with relevant multilingual links ───────
+// Historical generated appendages are still excluded by the canton checker
+// when an old article is refreshed. They are never appended to new articles.
 const INTERNAL_LINK_BLOCK = {
   it: {
     taxes20km: '\n\n## Tool utili per il tuo caso\nPer verificare in modo pratico il tuo scenario entro/oltre 20 km, usa il [calcolatore stipendio netto](nav:calculator) e la [guida dichiarazione redditi](nav:tax-return).',
@@ -14174,47 +14122,9 @@ const INTERNAL_LINK_BLOCK = {
 };
 
 function enforceStrongInternalLinks(data) {
-  if (data?._localNewsSource === true) {
-    console.error('  ℹ️  Link interni automatici omessi: cronaca locale senza destinazione nav documentata.');
-    return data;
-  }
-  for (const locale of ['it', 'en', 'de', 'fr']) {
-    if (!data.content[locale]) continue;
-
-    const bodySections = collectBodySections(data.content[locale]);
-    const body1 = String(bodySections.body1 || '');
-    const body2 = String(bodySections.body2 || '');
-    const body3 = String(bodySections.body3 || '');
-    const context = `${data.id} ${data.content[locale].title || ''} ${data.content[locale].excerpt || ''} ${Object.values(bodySections).join(' ')}`;
-
-    const cluster =
-      LINK_CLUSTER_PATTERNS.taxes20km.test(context) ? 'taxes20km'
-      : LINK_CLUSTER_PATTERNS.pension.test(context) ? 'pension'
-      : LINK_CLUSTER_PATTERNS.exchange.test(context) ? 'exchange'
-      : 'generic';
-
-    const actions = LINK_CLUSTER_ACTIONS[cluster];
-    const combined = Object.values(bodySections).join('\n');
-    const existingActions = new Set(
-      [...combined.matchAll(/\[[^\]]+\]\(nav:([a-z-]+)\)/g)].map((m) => m[1])
-    );
-    const hasAllClusterLinks = actions.every((action) => existingActions.has(action));
-    const totalLinks = [...combined.matchAll(/\[[^\]]+\]\(nav:[a-z-]+\)/g)].length;
-
-    if (!hasAllClusterLinks || totalLinks < 2) {
-      // Stessa ragione della CTA: un body2 non tradotto (#1875) non si ricrea
-      // con il solo blocco di link, che prenderebbe il posto del body2
-      // italiano mostrato dal sito al posto della chiave mancante.
-      if (isBodyTranslationPending(data, locale, 'body2')) {
-        console.error(`  ⏳ Link interni [${locale}] saltati: body2 non tradotto, resta in attesa (#1875)`);
-        continue;
-      }
-      data.content[locale].body2 = `${body2}${INTERNAL_LINK_BLOCK[locale][cluster]}`;
-      console.error(`  🔗 Link interni rinforzati in ${locale}.body2 (cluster: ${cluster})`);
-    }
-  }
-
-  return data;
+  return enrichArticleInternalLinks(data, {
+    isPending: isBodyTranslationPending, bodySections: collectBodySections,
+  });
 }
 
 /** Lazy-loaded set of normalized existing IT blog titles (lowercased, trimmed,
@@ -18482,7 +18392,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
             'calculator', 'exchange', 'health', 'cost-of-living', 'pension', 'pillar3',
             'payslip', 'tax-return', 'residency', 'ristorni', 'unemployment', 'jobs', 'companies', 'banks',
             'first-day', 'permits', 'border', 'calendar', 'whatif', 'shopping', 'transport',
-            'salary-compare', 'traffic-history',
+            'salary-compare', 'traffic-history', 'job-board', 'jobs-observatory', 'search-jobs',
             'border-map', 'municipalities', 'car-transfer', 'car-cost', 'permit-compare', 'renovation',
             'mobile', 'ral', 'parental-leave', 'nursery', 'living-ch', 'living-it', 'livability',
           ]);
@@ -18514,10 +18424,9 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
     throw e;
   }
 
-  // Run the canton guard after translation/sanitization but BEFORE CTA and
-  // internal-link injection. CTA_POOL contains generic Ticino copy; checking
-  // after that mutation would reject a valid Grigioni/Vallese guide because
-  // of the site's own navigation copy rather than the generated article.
+  // Check translated prose before contextual links are added. The historical
+  // CTA templates remain only for excluding legacy navigation copy when an
+  // existing article is refreshed. New enrichment does not append prose.
   assertGeneratedArticleQuality(data);
 
   // Step 3d: Enforce CTA / internal links (all 4 locales)
