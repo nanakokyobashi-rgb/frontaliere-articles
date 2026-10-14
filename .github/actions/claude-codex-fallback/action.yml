@@ -1003,7 +1003,7 @@ runs:
         : > "$codex_side_effect_file"
         chmod 600 "$codex_side_effect_file"
         # The review marker is stamped by the host bridge, never copied from
-        # the model. Keep both values outside Codex's environment: env -i below
+        # the model. Keep the review identity outside Codex's environment: env -i below
         # is the only path that delivers them to gh-server.mjs.
         codex_review_input_revision="${REVIEW_REVISION:-}"
         codex_review_pr_number="${PR_NUMBER:-}"
@@ -1036,7 +1036,7 @@ runs:
           CODEX_GH_CORPUS_REPOSITORY="nanakokyobashi-rgb/frontaliere-articles" \
           CODEX_GH_REVIEW_INPUT_REVISION="$codex_review_input_revision" \
           CODEX_GH_REVIEW_PR_NUMBER="$codex_review_pr_number" \
-          CODEX_GH_REVIEW_HEAD_SHA="$codex_review_head_sha" \
+          HEAD_SHA="$codex_review_head_sha" \
           CODEX_GH_SIDE_EFFECT_FILE="$codex_side_effect_file" \
           PATH="$gh_host_tools/bin:$PATH" \
           HOME="$scratch_home" \
@@ -1454,7 +1454,7 @@ runs:
         : > "$side_effect_file"
         chmod 600 "$side_effect_file"
         # Keep the review identity host-only, with the same values as the Codex
-        # lane. The fallback model never receives either value.
+        # lane. The fallback model never receives these values.
         claude_review_input_revision="${REVIEW_REVISION:-}"
         claude_review_pr_number="${PR_NUMBER:-}"
         claude_review_head_sha="${HEAD_SHA:-}"
@@ -1474,7 +1474,7 @@ runs:
           CODEX_GH_CORPUS_REPOSITORY="nanakokyobashi-rgb/frontaliere-articles" \
           CODEX_GH_REVIEW_INPUT_REVISION="$claude_review_input_revision" \
           CODEX_GH_REVIEW_PR_NUMBER="$claude_review_pr_number" \
-          CODEX_GH_REVIEW_HEAD_SHA="$claude_review_head_sha" \
+          HEAD_SHA="$claude_review_head_sha" \
           CODEX_GH_SIDE_EFFECT_FILE="$side_effect_file" \
           PATH="$(dirname "$node_bin"):/usr/bin:/bin" \
           HOME="$bridge_root/home" \

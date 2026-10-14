@@ -981,7 +981,7 @@ function main() {
         cwd,
         workspaceRoot,
         scratchRoot,
-        headSha: process.env.CODEX_GH_REVIEW_HEAD_SHA,
+        headSha: process.env.HEAD_SHA,
         bodyOverride: reviewBodyOverride,
       });
       const reviewKey = postedReviewKey(reviewDetails);

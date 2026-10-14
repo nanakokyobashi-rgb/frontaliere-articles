@@ -63,6 +63,7 @@ done
   const server = spawn(process.execPath, [path.join(ACTION_DIR, 'gh-bridge-server.mjs')], {
     env: {
       PATH: '/usr/bin:/bin',
+      HEAD_SHA,
       CODEX_BRIDGE_TRANSPORT: 'files',
       CODEX_GH_SOCKET: endpoint,
       CODEX_GH_AUTH: 'fixture-token',
@@ -76,7 +77,6 @@ done
       CODEX_GH_HOST: 'github.com',
       CODEX_GH_REVIEW_INPUT_REVISION: expectedRevision,
       CODEX_GH_REVIEW_PR_NUMBER: REVIEW_PR,
-      CODEX_GH_REVIEW_HEAD_SHA: HEAD_SHA,
     },
     stdio: 'ignore',
   });
@@ -109,7 +109,7 @@ function bridgeServerLaunchBlocks(action) {
   return blocks;
 }
 
-test('ogni avvio del bridge server passa la revisione e la PR fuori dal modello', () => {
+test('ogni avvio del bridge server passa revisione, PR e HEAD fuori dal modello', () => {
   const action = fs.readFileSync(path.join(ACTION_DIR, 'action.yml'), 'utf8');
   const launchRe = /gh-(?:bridge-)?server\.mjs[^\n]*&/gu;
   const launches = action.match(launchRe) || [];
@@ -119,7 +119,7 @@ test('ogni avvio del bridge server passa la revisione e la PR fuori dal modello'
   for (const { line, text } of blocks) {
     assert.match(text, /CODEX_GH_REVIEW_INPUT_REVISION=/u, `avvio alla riga ${line}`);
     assert.match(text, /CODEX_GH_REVIEW_PR_NUMBER=/u, `avvio alla riga ${line}`);
-    assert.match(text, /CODEX_GH_REVIEW_HEAD_SHA=/u, `avvio alla riga ${line}`);
+    assert.match(text, /^\s*HEAD_SHA=/mu, `avvio alla riga ${line}`);
   }
 });
 
@@ -274,11 +274,11 @@ test('action e prompt passano la revisione solo al bridge host-side', () => {
   assert.match(action, /CODEX_GH_REVIEW_INPUT_REVISION="\$codex_review_input_revision"/u);
   assert.match(action, /CODEX_GH_REVIEW_PR_NUMBER="\$codex_review_pr_number"/u);
   assert.match(action, /codex_review_head_sha="\$\{HEAD_SHA:-\}"/u);
-  assert.match(action, /CODEX_GH_REVIEW_HEAD_SHA="\$codex_review_head_sha"/u);
+  assert.match(action, /HEAD_SHA="\$codex_review_head_sha"/u);
   assert.match(action, /claude_review_input_revision="\$\{REVIEW_REVISION:-\}"/u);
   assert.match(action, /claude_review_pr_number="\$\{PR_NUMBER:-\}"/u);
   assert.match(action, /claude_review_head_sha="\$\{HEAD_SHA:-\}"/u);
-  assert.match(action, /CODEX_GH_REVIEW_HEAD_SHA="\$claude_review_head_sha"/u);
+  assert.match(action, /HEAD_SHA="\$claude_review_head_sha"/u);
   const reviewStepStart = workflow.indexOf('      - name: Run Codex Luna Max review');
   const reviewStep = workflow.slice(reviewStepStart, workflow.indexOf('\n      - name: ', reviewStepStart + 1));
   assert.match(reviewStep, /REVIEW_REVISION: \$\{\{ steps\.review_input\.outputs\.review_revision \}\}/u);
