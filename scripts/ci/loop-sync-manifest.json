@@ -2522,8 +2522,8 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "cf99554fa328e354",
-        "corpus": "cf99554fa328e354",
+        "site": "3604c629453c9f0b",
+        "corpus": "3604c629453c9f0b",
         "alignedAt": "2026-10-14"
       }
     },
