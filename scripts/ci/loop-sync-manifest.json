@@ -2724,6 +2724,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/decisions-api.mjs",
+      "mode": "corpus-only",
+      "reason": "Client server-side del pre-spend topic gate per OpenAI Decisions API. Il generatore e la sua chiave Remote Config vivono nel corpus; il sito consuma gli articoli pubblicati e non ha un gemello operativo di questo client.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
       "path": "generator/scripts/lib/deterministic-card-provenance.mjs",
       "mode": "corpus-only",
       "reason": "Contratto di provenance per le card deterministiche del Bollettino, usato dal producer dell'immagine e dal registry delle copertine. Il generatore e i suoi record vivono nel corpus; il sito consuma il JSON pubblicato e non ha un gemello di questo helper.",
