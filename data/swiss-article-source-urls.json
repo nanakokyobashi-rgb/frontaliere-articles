@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/pkgtw7aoiyfn": {
-    "articleId": "banda-larga-consiglio-federale",
-    "ts": "2026-09-09T18:15:37.817Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/casse-pensioni%3a-in-agosto-rendimento-positivo/92032364": {
     "articleId": "previdenza-agosto-rendimenti-positivi",
     "ts": "2026-09-09T18:43:10.477Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/jssj2o8gzqlt": {
     "articleId": "ordinanza-animali-compagnia-ue",
     "ts": "2026-10-14T22:26:00.813Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/gr%3a-questi-settori-pesano-sempre-pi%c3%b9-sul-preventivo-cantonale/92216775": {
+    "articleId": "grigioni-preventivo-contributi-terzi",
+    "ts": "2026-10-14T22:47:30.803Z",
     "keyForm": 2
   }
 }
