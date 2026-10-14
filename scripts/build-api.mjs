@@ -601,6 +601,7 @@ for (const section of PUBLIC_API_SECTIONS) {
       meta: SECTION_META_IT[section.section],
       pageSize: ARTICLES_PAGE_SIZE,
       shadowed: SECTION_SITEMAP_SHADOW[section.section],
+      fallbackReasons: SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
       retiredPaths: new Set([
         ...Object.keys(declaredSections.sections[section.section]?.redirects ?? {}),
         ...(declaredSections.sections[section.section]?.gone ?? []),
@@ -618,6 +619,7 @@ for (const section of PUBLIC_API_SECTIONS) {
       slugMapOf(section.section),
       SECTION_META_IT[section.section],
       SECTION_SITEMAP_SHADOW[section.section],
+      SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
     ),
   );
 }

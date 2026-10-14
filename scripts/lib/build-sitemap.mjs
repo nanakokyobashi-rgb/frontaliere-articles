@@ -14,8 +14,9 @@ import '../../host/cantonSectionsBootstrap.mjs';
  * elsewhere (publish-api.yml). Keeping this module free of `.ts` imports is
  * what lets a real behavioural test of the sitemap output run in that gate.
  *
- * The builder keeps the existing shape and arguments, with two publish-boundary
+ * The builder keeps the existing shape and arguments, with three publish-boundary
  * invariants: a reserved nullish slug is never emitted as a URL or alternate;
+ * a provisional Italian fallback is never announced as a translated URL; and
  * family sitemaps emit a `<loc>` for every available published locale, not just
  * the Italian canonical.
  */
@@ -58,6 +59,11 @@ function sitemapEntryIsEmitted(article, slugMap, shadowed) {
   return Boolean(slug) && !isReservedPublishedSlug(slug) && !shadowed.has(slug);
 }
 
+function isFallbackLocale(fallbackReasons, articleId, locale) {
+  const reasons = fallbackReasons?.[articleId];
+  return Boolean(reasons && Object.prototype.hasOwnProperty.call(reasons, locale));
+}
+
 /**
  * Count the IT entries the sitemap builder can actually emit.
  *
@@ -75,13 +81,20 @@ export function countSitemapEntries(entries, slugMap, shadowed = new Set()) {
  * missing translation simply has no published URL (and therefore no alternate)
  * instead of becoming a guessed or potentially 404 path.
  */
-export function publishedArticleLocales(article, paths, slugMap, shadowed = new Set()) {
+export function publishedArticleLocales(article, paths, slugMap, shadowed = new Set(), fallbackReasons = {}) {
   const italianSlug = slugMap?.[article.id]?.it;
   if (!sitemapEntryIsEmitted(article, slugMap, shadowed) || shadowed.has(italianSlug)) return [];
   return SITEMAP_LOCALES.flatMap((locale) => {
     const slug = slugMap?.[article.id]?.[locale];
     const prefix = paths?.[locale];
-    if (typeof prefix !== 'string' || !prefix || typeof slug !== 'string' || !slug.trim() || isReservedPublishedSlug(slug)) {
+    if (
+      isFallbackLocale(fallbackReasons, article.id, locale) ||
+      typeof prefix !== 'string' ||
+      !prefix ||
+      typeof slug !== 'string' ||
+      !slug.trim() ||
+      isReservedPublishedSlug(slug)
+    ) {
       return [];
     }
     return [{ locale, prefix, slug }];
@@ -100,8 +113,8 @@ export function publishedArticleLocales(article, paths, slugMap, shadowed = new 
  *   ("Sitemap <loc> URLs MUST self-canonicalize"), so this is the one place
  *   that failure is preventable before it is published.
  */
-export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set()) {
-  const urls = buildArticleUrlBlocks(entries, SECTION_PATHS[section], slugMap, meta, shadowed);
+export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set(), fallbackReasons = {}) {
+  const urls = buildArticleUrlBlocks(entries, SECTION_PATHS[section], slugMap, meta, shadowed, { fallbackReasons });
   return {
     xml:
       `<?xml version="1.0" encoding="UTF-8"?>\n` +
@@ -122,12 +135,19 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
  * di alternate.
  *
  * @param {Record<string, string>} paths prefisso della sezione per locale (`/articoli-x/`)
- * @param {{emitLocalizedLocs?: boolean}} [options]
+ * @param {{emitLocalizedLocs?: boolean, fallbackReasons?: Record<string, Record<string, unknown>>}} [options]
  */
-export function buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed = new Set(), { emitLocalizedLocs = false } = {}) {
+export function buildArticleUrlBlocks(
+  entries,
+  paths,
+  slugMap,
+  meta,
+  shadowed = new Set(),
+  { emitLocalizedLocs = false, fallbackReasons = {} } = {},
+) {
   const urls = [];
   for (const a of entries) {
-    const localeRows = publishedArticleLocales(a, paths, slugMap, shadowed);
+    const localeRows = publishedArticleLocales(a, paths, slugMap, shadowed, fallbackReasons);
     const locRows = emitLocalizedLocs ? localeRows : localeRows.filter(({ locale }) => locale === 'it');
     if (locRows.length === 0) continue;
     const italian = localeRows.find(({ locale }) => locale === 'it');
@@ -249,14 +269,26 @@ export function archiveUnionSize(metaIt, slugMap) {
  * Le pagine dell'archivio si contano su `archiveUnionSize` (la stessa unione
  * del renderer), non sugli articoli elencati qui.
  */
-export function buildFamilySectionSitemap({ section, entries, slugMap, meta, pageSize, shadowed = new Set(), retiredPaths = new Set() }) {
+export function buildFamilySectionSitemap({
+  section,
+  entries,
+  slugMap,
+  meta,
+  pageSize,
+  shadowed = new Set(),
+  retiredPaths = new Set(),
+  fallbackReasons = {},
+}) {
   const paths = sectionPathsOf(section);
-  const articleUrls = buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed, { emitLocalizedLocs: true });
+  const articleUrls = buildArticleUrlBlocks(entries, paths, slugMap, meta, shadowed, {
+    emitLocalizedLocs: true,
+    fallbackReasons,
+  });
   const articleLocaleCounts = Object.fromEntries(
     SITEMAP_LOCALES.map((locale) => [
       locale,
       (entries ?? []).reduce(
-        (count, article) => count + publishedArticleLocales(article, paths, slugMap, shadowed).filter((row) => row.locale === locale).length,
+        (count, article) => count + publishedArticleLocales(article, paths, slugMap, shadowed, fallbackReasons).filter((row) => row.locale === locale).length,
         0,
       ),
     ]),

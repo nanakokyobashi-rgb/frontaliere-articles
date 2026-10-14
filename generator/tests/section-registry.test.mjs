@@ -1146,6 +1146,22 @@ test('sitemap cantonale: una traduzione assente non diventa una loc o un alterna
   assert.doesNotMatch(built.xml, /hreflang="fr" href="https:\/\/frontaliereticino\.ch\/fr\/articles-tessin\/a-fr\//);
 });
 
+test('sitemap cantonale: uno slug IT provvisorio non diventa una loc tradotta', () => {
+  const built = buildFamilySectionSitemap({
+    section: 'canton-ti',
+    entries: [{ id: 'a', date: '2026-10-01' }],
+    slugMap: { a: { it: 'a-it', en: 'a-it', de: 'a-de', fr: 'a-fr' } },
+    fallbackReasons: { a: { en: { source: 'it-slug', reason: 'translation-pending' } } },
+    meta: {},
+    pageSize: 24,
+  });
+  assert.equal(built.articleCount, 1);
+  assert.equal(built.articleUrlCount, 3);
+  assert.deepEqual(built.articleLocaleCounts, { it: 1, en: 0, de: 1, fr: 1 });
+  assert.doesNotMatch(built.xml, /\/en\/ticino-articles\/a-it\//);
+  assert.doesNotMatch(built.xml, /hreflang="en" href="https:\/\/frontaliereticino\.ch\/en\/ticino-articles\/a-it\//);
+});
+
 test('build-api: il pavimento RSS di famiglia ha il corpus come riferimento, non il parser del feed', () => {
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /familyRssRows\.push\(\{ section: section\.id, source: countSourceArticles\(ROOT, section\.id\), emitted: sectionItems \}\)/);
