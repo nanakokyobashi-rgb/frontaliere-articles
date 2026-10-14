@@ -2949,7 +2949,7 @@ export function isVerdictExitCandidate(iss) {
   if (hasActiveAgentClaim(iss) || has(iss, LBL_FIX)) return false;
   if (has(iss, 'needs-human') || has(iss, LBL_AUTOMATION_DEFERRED)) return false;
   if (has(iss, LBL_DECOMP_QUEUED) || has(iss, LBL_DECOMP) || has(iss, LBL_DECOMPOSED)) return false;
-  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED) && !dailyBucketInfo(iss?.title || '')) return false;
+  if (has(iss, LBL_MAYBE_RESOLVED) && !has(iss, LBL_QUEUED)) return false;
   return !isPermanentTracker(iss);
 }
 /**

@@ -259,7 +259,7 @@ test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide'
   assert.match(stage, /updateDailyIssueBody\(/);
   assert.match(stage, /const add = transition\.action === 'requeue' \|\| transition\.action === 'retry' \? \[LBL_QUEUED\]/);
   assert.ok(stage.indexOf('dailyBucketOutcomeTransition(') < stage.indexOf('verdictExitDecision('));
-  assert.match(DRAINER, /has\(iss, LBL_MAYBE_RESOLVED\)[\s\S]*?!dailyBucketInfo\(iss\?\.title/);
+  assert.match(DRAINER, /if \(has\(iss, LBL_MAYBE_RESOLVED\) && !has\(iss, LBL_QUEUED\)\) return false;/);
 });
 
 const DAILY_TITLE = 'follow-up(daily:2026-10-02): 3 items — nanakokyobashi-rgb/frontaliere-articles';
