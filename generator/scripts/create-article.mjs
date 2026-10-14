@@ -9,8 +9,8 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *
  * Auto-scan mode (default):
  *   1. Scans multiple Ticino + frontalieri news sources for recent headlines
- *   2. Uses the configured Decisions API gate (with Gemini fallback) to
- *      select the most relevant article for frontalieri
+ *   2. Uses the configured Decisions API gate first, then preserves the
+ *      existing LLM classifier pattern if that gate is unavailable
  *   3. Checks against existing articles to avoid duplicates
  *   4. Generates full article in 4 languages + image
  *
@@ -1018,6 +1018,10 @@ ${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(sum
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 
+  // Decisions API e' solo il nuovo primo tentativo. Se manca la chiave o la
+  // chiamata fallisce, il wrapper restituisce null e si prosegue nel percorso
+  // LLM storico qui sotto: questa integrazione non sceglie un provider
+  // fallback separato.
   if (process.env.DECISION_API_ENABLED === '1') {
     const decision = await tryDecisionsApiClassifier(prompt, classifierCallTimeout, SECTION_NAME);
     if (decision) return decision;
@@ -1089,7 +1093,8 @@ async function tryDecisionsApiClassifier(input, timeoutMs, sectionName) {
       timeoutMs,
     });
   } catch (err) {
-    // Fail over without logging source text, response body or credentials.
+    // Restituisce null per riprendere il percorso LLM storico senza loggare
+    // testo sorgente, body della risposta o credenziali.
     _decisionApiCircuitOpen = true;
     console.error(`PRESPEND_DECISION_API_FALLBACK section=${sectionName || 'unknown'} code=${err?.code || 'DECISIONS_API_ERROR'}`);
     return null;
