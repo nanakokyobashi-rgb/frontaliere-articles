@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-consultazione-omc-commercio-digitale.webp",
-      "sha256": "deb27ba036453748b18e5b3fbae2703925d424f288d362aaea65e7c6b52c2f79"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-consultazione-omc-commercio-digitale-480w.webp",
-      "sha256": "0a1056a456587785bfc20228931e4da65deb39d74bcf04607a74e5b979f0945b"
-    }
-  ]
+  "items": []
 }
