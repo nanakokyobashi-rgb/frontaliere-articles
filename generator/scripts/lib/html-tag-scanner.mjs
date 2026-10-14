@@ -1,0 +1,157 @@
+/** Trova la fine di un tag senza confondere `>` dentro un attributo quotato. */
+export function findHtmlTagEndOutsideQuotes(html, start) {
+  let quote = '';
+  for (let index = start + 1; index < html.length; index += 1) {
+    const character = html[index];
+    if (quote) {
+      if (character === quote) quote = '';
+    } else if (character === '"' || character === "'") {
+      quote = character;
+    } else if (character === '>') {
+      return index;
+    }
+  }
+  return -1;
+}
+
+function isHtmlWhitespace(character) {
+  return character === ' ' || character === '\t' || character === '\n'
+    || character === '\r' || character === '\f';
+}
+
+/** Distingue `/>` dalla slash finale di un valore non quotato. */
+function isHtmlSelfClosingStartTag(html, nameEnd, end) {
+  let index = nameEnd;
+  while (index < end) {
+    while (index < end && isHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    if (html[index] === '/') return index + 1 === end;
+
+    while (
+      index < end
+      && !isHtmlWhitespace(html[index])
+      && html[index] !== '='
+      && html[index] !== '/'
+      && html[index] !== '>'
+    ) index += 1;
+    if (html[index] !== '=') continue;
+
+    index += 1;
+    while (index < end && isHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    const quote = html[index];
+    if (quote === '"' || quote === "'") {
+      index += 1;
+      while (index < end && html[index] !== quote) index += 1;
+      if (index >= end) return false;
+      index += 1;
+      continue;
+    }
+    while (index < end && !isHtmlWhitespace(html[index]) && html[index] !== '>') index += 1;
+  }
+  return false;
+}
+
+export function readHtmlTagAt(html, start) {
+  if (html[start] !== '<') return null;
+  let index = start + 1;
+  const closing = html[index] === '/';
+  if (closing) index += 1;
+  const nameStart = index;
+  if (!/[A-Za-z]/u.test(html[index] || '')) return null;
+  index += 1;
+  while (index < html.length && /[\w:-]/u.test(html[index])) index += 1;
+  if (html[index] && !/[\s/>]/u.test(html[index])) return null;
+
+  const endIndex = findHtmlTagEndOutsideQuotes(html, start);
+  if (endIndex < 0) return null;
+  return {
+    start,
+    end: endIndex + 1,
+    closing,
+    name: html.slice(nameStart, index).toLowerCase(),
+    attrs: html.slice(index, endIndex),
+    selfClosing: !closing && isHtmlSelfClosingStartTag(html, index, endIndex),
+  };
+}
+
+export function nextHtmlTag(html, from = 0, skipComments = true) {
+  let start = html.indexOf('<', from);
+  while (start !== -1) {
+    if (skipComments && html.startsWith('<!--', start)) {
+      const commentEnd = html.indexOf('-->', start + 4);
+      if (commentEnd < 0) return null;
+      start = html.indexOf('<', commentEnd + 3);
+      continue;
+    }
+    const tag = readHtmlTagAt(html, start);
+    if (tag) return tag;
+    start = html.indexOf('<', start + 1);
+  }
+  return null;
+}
+
+export function findHtmlClosingTag(html, from, name) {
+  let cursor = from;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor, true)) !== null) {
+    if (tag.closing && tag.name === name) return tag;
+    cursor = tag.end;
+  }
+  return null;
+}
+
+export function nextHtmlElementWhere(html, predicate, from = 0) {
+  let cursor = from;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.closing || !predicate(tag)) continue;
+    const close = findHtmlClosingTag(html, tag.end, tag.name);
+    if (!close) continue;
+    return {
+      ...tag,
+      openEnd: tag.end,
+      closeStart: close.start,
+      end: close.end,
+      inner: html.slice(tag.end, close.start),
+    };
+  }
+  return null;
+}
+
+export function nextHtmlElement(html, name, from = 0) {
+  return nextHtmlElementWhere(html, (tag) => tag.name === name, from);
+}
+
+/** Trova il prossimo tag d'apertura anche se non ha un elemento bilanciato. */
+export function nextHtmlOpeningTag(html, name, from = 0) {
+  let tag = nextHtmlTag(html, from, true);
+  while (tag) {
+    if (!tag.closing && tag.name === name) return tag;
+    tag = nextHtmlTag(html, tag.end, true);
+  }
+  return null;
+}
+
+export function findHtmlRawTextClosingTag(html, from, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = from;
+  const match = closing.exec(html);
+  return match ? { start: match.index, end: closing.lastIndex } : null;
+}
+
+/** Cerca markup visibile saltando commenti e i contenuti raw di script/style. */
+export function nextHtmlTagOutsideRawText(html, from = 0) {
+  let tag = nextHtmlTag(html, from, true);
+  while (tag) {
+    if (!tag.closing && !tag.selfClosing && (tag.name === 'script' || tag.name === 'style')) {
+      const close = findHtmlRawTextClosingTag(html, tag.end, tag.name);
+      if (!close) return null;
+      tag = nextHtmlTag(html, close.end, true);
+      continue;
+    }
+    return tag;
+  }
+  return null;
+}

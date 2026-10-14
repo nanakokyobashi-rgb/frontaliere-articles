@@ -82,6 +82,14 @@ import {
 } from './lib/blog-image-policy.mjs';
 import { decodeSyntheticSourceToken, isZeroSourceForGenerationBudget, markSyntheticSourceValidation } from './lib/synthetic-source-contract.mjs';
 import { writeFileSnapshotAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
+import {
+  findHtmlRawTextClosingTag,
+  findHtmlTagEndOutsideQuotes,
+  nextHtmlElement,
+  nextHtmlElementWhere,
+  nextHtmlOpeningTag,
+  nextHtmlTag,
+} from './lib/html-tag-scanner.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -8364,149 +8372,6 @@ export function parseFeedDate(raw) {
 }
 
 /** Trova la fine di un tag senza confondere `>` dentro un attributo quotato. */
-function findHtmlTagEndOutsideQuotes(html, start) {
-  let quote = '';
-  for (let index = start + 1; index < html.length; index += 1) {
-    const character = html[index];
-    if (quote) {
-      if (character === quote) quote = '';
-    } else if (character === '"' || character === "'") {
-      quote = character;
-    } else if (character === '>') {
-      return index;
-    }
-  }
-  return -1;
-}
-
-function isHtmlWhitespace(character) {
-  return character === ' ' || character === '\t' || character === '\n'
-    || character === '\r' || character === '\f';
-}
-
-/** Distingue `/>` dalla slash finale di un valore non quotato. */
-function isHtmlSelfClosingStartTag(html, nameEnd, end) {
-  let index = nameEnd;
-  while (index < end) {
-    while (index < end && isHtmlWhitespace(html[index])) index += 1;
-    if (index >= end) return false;
-    if (html[index] === '/') return index + 1 === end;
-
-    while (
-      index < end
-      && !isHtmlWhitespace(html[index])
-      && html[index] !== '='
-      && html[index] !== '/'
-      && html[index] !== '>'
-    ) index += 1;
-    if (html[index] !== '=') continue;
-
-    index += 1;
-    while (index < end && isHtmlWhitespace(html[index])) index += 1;
-    if (index >= end) return false;
-    const quote = html[index];
-    if (quote === '"' || quote === "'") {
-      index += 1;
-      while (index < end && html[index] !== quote) index += 1;
-      if (index >= end) return false;
-      index += 1;
-      continue;
-    }
-    while (index < end && !isHtmlWhitespace(html[index]) && html[index] !== '>') index += 1;
-  }
-  return false;
-}
-
-function readHtmlTagAt(html, start) {
-  if (html[start] !== '<') return null;
-  let index = start + 1;
-  const closing = html[index] === '/';
-  if (closing) index += 1;
-  const nameStart = index;
-  if (!/[A-Za-z]/u.test(html[index] || '')) return null;
-  index += 1;
-  while (index < html.length && /[\w:-]/u.test(html[index])) index += 1;
-  if (html[index] && !/[\s/>]/u.test(html[index])) return null;
-
-  const endIndex = findHtmlTagEndOutsideQuotes(html, start);
-  if (endIndex < 0) return null;
-  return {
-    start,
-    end: endIndex + 1,
-    closing,
-    name: html.slice(nameStart, index).toLowerCase(),
-    attrs: html.slice(index, endIndex),
-    selfClosing: !closing && isHtmlSelfClosingStartTag(html, index, endIndex),
-  };
-}
-
-function nextHtmlTag(html, from = 0, skipComments = false) {
-  let start = html.indexOf('<', from);
-  while (start !== -1) {
-    if (skipComments && html.startsWith('<!--', start)) {
-      const commentEnd = html.indexOf('-->', start + 4);
-      if (commentEnd < 0) return null;
-      start = html.indexOf('<', commentEnd + 3);
-      continue;
-    }
-    const tag = readHtmlTagAt(html, start);
-    if (tag) return tag;
-    start = html.indexOf('<', start + 1);
-  }
-  return null;
-}
-
-function findHtmlClosingTag(html, from, name) {
-  let cursor = from;
-  let tag;
-  while ((tag = nextHtmlTag(html, cursor, true)) !== null) {
-    if (tag.closing && tag.name === name) return tag;
-    cursor = tag.end;
-  }
-  return null;
-}
-
-function nextHtmlElementWhere(html, predicate, from = 0) {
-  let cursor = from;
-  let tag;
-  while ((tag = nextHtmlTag(html, cursor)) !== null) {
-    cursor = tag.end;
-    if (tag.closing || !predicate(tag)) continue;
-    const close = findHtmlClosingTag(html, tag.end, tag.name);
-    if (!close) continue;
-    return {
-      ...tag,
-      openEnd: tag.end,
-      closeStart: close.start,
-      end: close.end,
-      inner: html.slice(tag.end, close.start),
-    };
-  }
-  return null;
-}
-
-function nextHtmlElement(html, name, from = 0) {
-  return nextHtmlElementWhere(html, (tag) => tag.name === name, from);
-}
-
-/** Trova il prossimo tag di apertura senza richiedere un elemento bilanciato. */
-function nextHtmlOpeningTag(html, name, from = 0) {
-  let cursor = from;
-  let tag;
-  while ((tag = nextHtmlTag(html, cursor)) !== null) {
-    cursor = tag.end;
-    if (!tag.closing && tag.name === name) return tag;
-  }
-  return null;
-}
-
-function findHtmlRawTextClosingTag(html, from, name) {
-  const closing = new RegExp(`</${name}\\s*>`, 'ig');
-  closing.lastIndex = from;
-  const match = closing.exec(html);
-  return match ? { start: match.index, end: closing.lastIndex } : null;
-}
-
 function stripHtmlTags(markup) {
   const source = String(markup || '');
   let text = '';
@@ -8674,10 +8539,11 @@ function extractDatesFromHtml(html, baseUrl) {
     const anchorStart = anchor.start;
     const anchorEnd = anchor.end;
     const inner = anchor.inner;
-    // The next opening tag is the boundary even when a later anchor is
-    // malformed and has no closing tag; using the balanced-element walker
-    // would let its date leak into this link's proximity window.
-    const nextAnchor = nextHtmlOpeningTag(html, 'a', anchorEnd);
+    // Iteration keeps using complete anchors. The next opening tag is a
+    // separate date-window boundary so a malformed later anchor cannot donate
+    // its date to this link.
+    const nextAnchor = nextHtmlElement(html, 'a', anchorEnd);
+    const nextAnchorOpening = nextHtmlOpeningTag(html, 'a', anchorEnd);
     const rawHref = headlineHrefValue(anchor.attrs);
     if (!rawHref) {
       lastAnchorEnd = anchorEnd;
@@ -8710,7 +8576,7 @@ function extractDatesFromHtml(html, baseUrl) {
     //    non usano <time> scrivono la data: fuori dal link, dentro la card.
     if (!hit) {
       const before = html.slice(Math.max(lastAnchorEnd, anchorStart - 300), anchorStart);
-      const after = html.slice(anchorEnd, Math.min(nextAnchor?.start ?? html.length, anchorEnd + 300));
+      const after = html.slice(anchorEnd, Math.min(nextAnchorOpening?.start ?? html.length, anchorEnd + 300));
       hit = parseHeadlineDate(before) || parseHeadlineDate(after);
     }
 

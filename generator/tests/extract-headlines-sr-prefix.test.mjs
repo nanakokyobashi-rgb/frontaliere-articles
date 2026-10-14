@@ -19,6 +19,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
+import * as htmlTagScanner from '../scripts/lib/html-tag-scanner.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -50,8 +51,9 @@ assert.match(BLOCK, /function extractDatesFromHtml\(html, baseUrl\) \{/, 'il blo
 
 const { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates } = new Function(
   'decodeHtmlEntities',
-  `${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates, extractDateFromUrl };`,
-)(decodeHtmlEntities);
+  'htmlTagScanner',
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag } = htmlTagScanner;\n${BLOCK}\nreturn { extractHeadlines, extractDatesFromHtml, extractEmbeddedHeadlineDates, extractDateFromUrl };`,
+)(decodeHtmlEntities, htmlTagScanner);
 
 const BASE_URL = 'https://www.admin.ch/it/newnsb';
 

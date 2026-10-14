@@ -98,6 +98,11 @@ import {
   withItemIdentity,
 } from './source-url-ledger.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import {
+  findHtmlRawTextClosingTag as rawTextClosingTag,
+  nextHtmlTag,
+  nextHtmlTagOutsideRawText,
+} from './html-tag-scanner.mjs';
 
 const SOURCE_CITATION_PREFIX_RE = /\*Fonte:\s*\[([^\]]+)\]\(/gu;
 
@@ -546,10 +551,13 @@ function htmlAttributeValue(attrs, name) {
 export function selectPublishedTime(html) {
   const input = String(html || '');
   const publicationDates = [];
-  const time = /<time\b([^>]*)>/gi;
-  let match;
-  while ((match = time.exec(input)) !== null) {
-    const attrs = match[1] || '';
+  let tag = nextHtmlTagOutsideRawText(input);
+  while (tag) {
+    if (tag.closing || tag.name !== 'time') {
+      tag = nextHtmlTagOutsideRawText(input, tag.end);
+      continue;
+    }
+    const attrs = tag.attrs || '';
     const itemprop = htmlAttributeValue(attrs, 'itemprop');
     const property = htmlAttributeValue(attrs, 'property');
     const className = htmlAttributeValue(attrs, 'class');
@@ -569,10 +577,14 @@ export function selectPublishedTime(html) {
     const classMarker = classTokens.some((token) => /^(?:published|pubdate|datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(token))
       || /^(?:(?:article|news|post))?(?:datepublished|publicationdate|publicationdatetime|publisheddate|publishedtime)$/.test(compactClass);
     const dataMarker = /(?:^|\s)data-(?:published|date-published)(?:\s|=|$)/i.test(attrs);
-    if (!semanticMarker && !classMarker && !dataMarker) continue;
+    if (!semanticMarker && !classMarker && !dataMarker) {
+      tag = nextHtmlTagOutsideRawText(input, tag.end);
+      continue;
+    }
 
     const date = validDate(htmlAttributeValue(attrs, 'datetime'));
     if (date) publicationDates.push(date);
+    tag = nextHtmlTagOutsideRawText(input, tag.end);
   }
 
   const timestamps = new Set(publicationDates.map((date) => date.getTime()));
@@ -588,21 +600,37 @@ export function selectPublishedTime(html) {
  */
 export function extractPublishedDateFromHtml(html) {
   const input = String(html || '');
-  const jsonLd = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
-  let match;
-  while ((match = jsonLd.exec(input)) !== null) {
-    const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(match[1]));
-    const date = validDate(value?.[1]);
-    if (date) return date;
+  let tag = nextHtmlTag(input);
+  while (tag) {
+    if (!tag.closing && !tag.selfClosing && tag.name === 'script') {
+      const close = rawTextClosingTag(input, tag.end, 'script');
+      if (!close) break;
+      const type = htmlAttributeValue(tag.attrs, 'type');
+      if (/^application\/ld\+json$/i.test(type)) {
+        const body = input.slice(tag.end, close.start);
+        const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(body));
+        const date = validDate(value?.[1]);
+        if (date) return date;
+      }
+      tag = nextHtmlTag(input, close.end);
+      continue;
+    }
+    tag = nextHtmlTag(input, tag.end);
   }
 
-  const meta = /<meta\b([^>]*)>/gi;
-  while ((match = meta.exec(input)) !== null) {
-    const attrs = match[1] || '';
+  tag = nextHtmlTagOutsideRawText(input);
+  while (tag) {
+    if (tag.closing || tag.name !== 'meta') {
+      tag = nextHtmlTagOutsideRawText(input, tag.end);
+      continue;
+    }
+    const attrs = tag.attrs || '';
     const key = htmlAttributeValue(attrs, 'property') || htmlAttributeValue(attrs, 'name');
-    if (!/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) continue;
-    const date = validDate(htmlAttributeValue(attrs, 'content'));
-    if (date) return date;
+    if (/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) {
+      const date = validDate(htmlAttributeValue(attrs, 'content'));
+      if (date) return date;
+    }
+    tag = nextHtmlTagOutsideRawText(input, tag.end);
   }
 
   return selectPublishedTime(input);
@@ -687,10 +715,10 @@ const SECTIONING_TAGS = new Set(['article', 'aside', 'main', 'section']);
 const SECTIONING_ROLES = new Set(['article', 'complementary', 'main', 'region']);
 /** Il contenuto principale della pagina (`<main>` o `role="main"`) sta in questo markup? */
 function containsMainContent(masked) {
-  const re = /<([a-zA-Z][\w-]*)\b([^>]*)>/g;
-  let m;
-  while ((m = re.exec(masked)) !== null) {
-    if (m[1].toLowerCase() === 'main' || roleTokens(m[2]).includes('main')) return true;
+  let tag = nextHtmlTag(masked);
+  while (tag) {
+    if (!tag.closing && (tag.name === 'main' || roleTokens(tag.attrs).includes('main'))) return true;
+    tag = nextHtmlTag(masked, tag.end);
   }
   return false;
 }
@@ -723,44 +751,56 @@ export function stripPageChrome(html) {
   // non e' un link. Resi spazi a pari lunghezza (gli indici restano quelli del
   // documento), e cosi' restano anche in uscita: l'estrattore non li vede.
   const masked = maskLedgerInactiveMarkup(html);
-  const tagRe = /<(\/?)([a-zA-Z][\w-]*)\b([^>]*)>/g;
   const ranges = [];
   let sectioningDepth = 0;
   // Fine degli elementi `role="main|article|…"` aperti: finche' ce n'e' uno,
   // header e footer sono di quella sezione.
   const roleSectionEnds = [];
-  let m;
-  while ((m = tagRe.exec(masked)) !== null) {
-    const closing = m[1] === '/';
-    const name = m[2].toLowerCase();
-    const attrs = m[3] || '';
-    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= m.index) roleSectionEnds.pop();
+  let tag = nextHtmlTag(masked);
+  while (tag) {
+    const { closing, name, attrs } = tag;
+    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= tag.start) roleSectionEnds.pop();
     if (SECTIONING_TAGS.has(name)) {
       sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
-      if (closing) continue;
+      if (closing) {
+        tag = nextHtmlTag(masked, tag.end);
+        continue;
+      }
     }
-    if (closing || /\/\s*$/.test(attrs)) continue;
+    if (closing || /\/\s*$/.test(attrs)) {
+      tag = nextHtmlTag(masked, tag.end);
+      continue;
+    }
     const roles = roleTokens(attrs);
     if (!SECTIONING_TAGS.has(name) && roles.some((r) => SECTIONING_ROLES.has(r))) {
-      const sectionEnd = matchingCloseEnd(masked, name, tagRe.lastIndex);
+      const sectionEnd = matchingCloseEnd(masked, name, tag.end);
       if (sectionEnd !== -1) roleSectionEnds.push(sectionEnd);
     }
     const inSection = sectioningDepth > 0 || roleSectionEnds.length > 0;
     const isChrome = name === 'nav'
       || roles.some((r) => CHROME_ROLES.has(r))
       || ((name === 'header' || name === 'footer') && !inSection);
-    if (!isChrome) continue;
-    const end = matchingCloseEnd(masked, name, tagRe.lastIndex);
-    if (end === -1) continue;
+    if (!isChrome) {
+      tag = nextHtmlTag(masked, tag.end);
+      continue;
+    }
+    const end = matchingCloseEnd(masked, name, tag.end);
+    if (end === -1) {
+      tag = nextHtmlTag(masked, tag.end);
+      continue;
+    }
     // Una «navigazione» che contiene il contenuto principale e' un wrapper
     // marcato male, non un menu: aarau.ch avvolge sottomenu E `<main>` in un
     // `<div role="navigation">`, e tagliarlo toglieva 15 comunicati datati su
     // 15. Si scende dentro: i `<nav>` veri che contiene cadono lo stesso.
-    if (containsMainContent(masked.slice(tagRe.lastIndex, end))) continue;
-    ranges.push([m.index, end]);
+    if (containsMainContent(masked.slice(tag.end, end))) {
+      tag = nextHtmlTag(masked, tag.end);
+      continue;
+    }
+    ranges.push([tag.start, end]);
     // L'area intera e' tolta: quello che contiene (anche i tag di sezione,
     // aperti E chiusi li' dentro) non sposta il conteggio.
-    tagRe.lastIndex = end;
+    tag = nextHtmlTag(masked, end);
   }
   if (ranges.length === 0) return { html: masked, removed: 0 };
   let out = '';
@@ -782,17 +822,23 @@ function sourceArticleText(html, requestedHeadline = '') {
   const page = stripPageChrome(html).html;
   const blocks = (tag) => {
     const out = [];
-    const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
-    let open;
-    while ((open = openRe.exec(page)) !== null) {
-      const end = matchingCloseEnd(page, tag, open.index + open[0].length);
-      if (end < 0) continue;
-      const text = stripTags(page.slice(open.index, end));
+    let open = nextHtmlTag(page);
+    while (open) {
+      if (open.closing || open.name !== tag || open.selfClosing) {
+        open = nextHtmlTag(page, open.end);
+        continue;
+      }
+      const end = matchingCloseEnd(page, tag, open.end);
+      if (end < 0) {
+        open = nextHtmlTag(page, open.end);
+        continue;
+      }
+      const text = stripTags(page.slice(open.start, end));
       out.push({ tag, text });
       // Do not treat nested containers as separate candidates when an outer
       // element already delimits this block; the other tag family (main or
       // article) is scanned independently below.
-      openRe.lastIndex = end;
+      open = nextHtmlTag(page, end);
     }
     return out;
   };
@@ -820,17 +866,16 @@ function sourceArticleText(html, requestedHeadline = '') {
 
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
 function matchingCloseEnd(masked, name, from) {
-  const re = new RegExp(`<(/?)${name}(?=[\\s/>])[^>]*>`, 'gi');
-  re.lastIndex = from;
+  let tag = nextHtmlTag(masked, from);
   let depth = 1;
-  let m;
-  while ((m = re.exec(masked)) !== null) {
-    if (m[1] === '/') {
+  while (tag) {
+    if (tag.name === name && tag.closing) {
       depth -= 1;
-      if (depth === 0) return re.lastIndex;
-    } else if (!/\/\s*>$/.test(m[0])) {
+      if (depth === 0) return tag.end;
+    } else if (tag.name === name && !tag.closing && !tag.selfClosing) {
       depth += 1;
     }
+    tag = nextHtmlTag(masked, tag.end);
   }
   return -1;
 }

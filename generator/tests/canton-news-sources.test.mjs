@@ -56,6 +56,7 @@ import {
 import { itemIdentityOf, newsUrlKey, stripItemIdentity } from '../scripts/lib/source-url-ledger.mjs';
 import { PARSERS } from '../../scripts/ci/validate-canton-sections.mjs';
 import { decodeHtmlEntities } from '../scripts/lib/decode-html-entities.mjs';
+import * as htmlTagScanner from '../scripts/lib/html-tag-scanner.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FIX = path.join(HERE, 'fixtures', 'canton-sources');
@@ -71,8 +72,9 @@ const endAt = SRC.indexOf(END, startAt);
 assert.ok(startAt !== -1 && endAt !== -1, 'delimitatori degli estrattori non trovati in create-article.mjs — aggiornare questo test');
 const { extractRssItems, extractHeadlines } = new Function(
   'decodeHtmlEntities',
-  `${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
-)(decodeHtmlEntities);
+  'htmlTagScanner',
+  `const { findHtmlRawTextClosingTag, findHtmlTagEndOutsideQuotes, nextHtmlElement, nextHtmlElementWhere, nextHtmlOpeningTag, nextHtmlTag } = htmlTagScanner;\n${SRC.slice(startAt, endAt).replace(/^export /gm, '')}\nreturn { extractRssItems, extractHeadlines };`,
+)(decodeHtmlEntities, htmlTagScanner);
 
 const fixture = (name) => fs.readFileSync(path.join(FIX, name));
 const sourceOf = (code, url) => {
@@ -201,6 +203,17 @@ test('date dettaglio: JSON-LD, meta e time sono letti senza usare il corpo', () 
     '2026-10-05T14:00:00.000Z',
   );
   assert.equal(extractPublishedDateFromHtml('<article><p>nessuna data</p></article>'), null);
+});
+
+test('date dettaglio: il `>` quotato non tronca gli attributi di meta e time', () => {
+  assert.equal(
+    extractPublishedDateFromHtml('<meta data-label="x > y" property="article:published_time" content="2026-10-05T13:30:00+02:00">')?.toISOString(),
+    '2026-10-05T11:30:00.000Z',
+  );
+  assert.equal(
+    extractPublishedDateFromHtml('<time data-label="x > y" itemprop="datePublished" datetime="2026-10-05T14:00:00Z">5 ottobre</time>')?.toISOString(),
+    '2026-10-05T14:00:00.000Z',
+  );
 });
 
 test('date dettaglio: selectPublishedTime ignora eventi generici e rifiuta due pubblicazioni discordanti', () => {
@@ -1062,7 +1075,7 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   assert.equal(cleaned.removed, 0);
   assert.equal(cleaned.html.length, inactive.length, 'a pari lunghezza');
   assert.deepEqual(extractHeadlines(cleaned.html, 'https://x.ch/').map((h) => h.url), ['https://x.ch/news/9']);
-  assert.equal(extractHeadlines(inactive, 'https://x.ch/').length, 3, 'premessa: l\'estrattore storico li prende tutti');
+  assert.equal(extractHeadlines(inactive, 'https://x.ch/').length, 2, 'i tag commentati non sono link HTML attivi');
   const nestedTemplate = '<template><template></template><a href="/menu/nested">Voce del menu nel template esterno</a></template>'
     + '<p><a href="/news/nested">Titolo del comunicato ancora attivo</a></p>';
   const nestedCleaned = stripPageChrome(nestedTemplate);
@@ -1090,6 +1103,17 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   const open = '<nav><a href="/a">Voce di un menu non chiuso</a><main><a href="/news/3">Titolo del terzo comunicato</a></main>';
   assert.deepEqual(stripPageChrome(open), { html: open, removed: 0 });
   assert.deepEqual(stripPageChrome(''), { html: '', removed: 0 });
+});
+
+test('stripPageChrome: attributi quotati con `>` non nascondono i ruoli né rompono il bilanciamento', () => {
+  const html = '<div role="navigation"><span data-label="x > <div> y">'
+    + '<a href="/menu">Voce del menu laterale</a>'
+    + '</span></div><p>Contenuto editoriale conservato</p>';
+
+  assert.deepEqual(stripPageChrome(html), {
+    html: '<p>Contenuto editoriale conservato</p>',
+    removed: 1,
+  });
 });
 
 test('articlePathPattern: ogni dichiarazione del profilo e\' su una fonte html-links e compila', () => {
