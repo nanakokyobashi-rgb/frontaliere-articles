@@ -8,7 +8,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const createArticle = fs.readFileSync(path.join(ROOT, 'generator', 'scripts', 'create-article.mjs'), 'utf8');
 const loadRemoteConfig = fs.readFileSync(path.join(ROOT, 'generator', 'scripts', 'load-rc-env.mjs'), 'utf8');
 
-test('il gate pre-spend usa Decisions API solo dietro flag e conserva il fallback LLM', () => {
+test('il gate pre-spend usa Decisions API solo dietro flag e conserva il percorso LLM storico', () => {
   assert.match(createArticle, /import \{ classifyWithDecisionsApi \} from '\.\/lib\/decisions-api\.mjs';/);
   assert.match(createArticle, /process\.env\.DECISION_API_ENABLED === '1'/);
   assert.match(createArticle, /tryDecisionsApiClassifier\(prompt, classifierCallTimeout, SECTION_NAME\)/);
