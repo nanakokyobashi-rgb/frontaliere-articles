@@ -323,6 +323,17 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Impatto sul lavoro in Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia per il lavoro in Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
+    for (const text of [
+      'Implicazioni per il Ticino e i Grigioni e il Vallese',
+      'Implicazioni per il Ticino ed Uri e del Vallese',
+      'Implicazioni per il Ticino, i Grigioni, il Vallese, Ginevra e Berna',
+      'Conseguenze per il Canton San Gallo, Basilea Campagna, Appenzello Esterno e il Vallese',
+      'Implicazioni per le nuove misure fiscali e sociali per il Ticino',
+      'Impatto per gli abitanti residenti e iscritti del Canton Ticino',
+      'Implicazioni per gli abitanti del Canton Ticino, dei Grigioni e del Vallese',
+    ]) {
+      assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
+    }
     // Un fatto in Ticino resta in Ticino.
     assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia in Ticino dal 2026').map((m) => m.group), ['TI']);
