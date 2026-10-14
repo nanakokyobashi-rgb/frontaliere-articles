@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { activeCorpusCoreEntries, CORPUS_ACTIVE_CANTON_CODES } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const BOOTSTRAP_RE = /(?:from\s+|import\s*\(\s*)['"][^'"]*(?:cantonSectionsBootstrap\.mjs|siteShellBootstrap(?:\.ts)?)/g;
+const BOOTSTRAP_RE = /(?:from\s+|import\s+|import\s*\(\s*)['"][^'"]*(?:cantonSectionsBootstrap\.mjs|siteShellBootstrap(?:\.ts)?)/g;
 const ENGINE_IMPORT_RE = /(?:from\s+|import\s*\(\s*)['"][^'"]*engine\//g;
 const DIRECTORIES = ['scripts', 'generator/scripts', 'generator/tests', 'host'];
 const CLOSED_SET_HELPERS = new Set([

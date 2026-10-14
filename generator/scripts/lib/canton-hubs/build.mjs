@@ -16,6 +16,7 @@
  *
  * Puro: nessun I/O, l'orologio arriva come `nowMs`.
  */
+import '../../../../host/cantonSectionsBootstrap.mjs';
 import { createHash } from 'node:crypto';
 import { ARTICLE_SECTION_CORE_ALL } from '../../../../engine/shared/articleSectionCore.mjs';
 import { CANTON_HUB_TOPIC_KEYS } from '../../../../engine/shared/cantonArticleSectionCore.generated.mjs';

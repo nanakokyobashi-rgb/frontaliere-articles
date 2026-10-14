@@ -9,6 +9,7 @@
  * published by build-blog-index.mjs as `data/image-credits-blog.json`.
  */
 
+import '../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';

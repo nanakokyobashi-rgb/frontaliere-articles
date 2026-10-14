@@ -127,6 +127,8 @@ const SECTION_GATE_JOB = `  section_gate:
             engine/shared
             generator/data
             generator/scripts
+            host
+            scripts/lib
             scripts/ci
 
       - name: Section gate — setup Node.js

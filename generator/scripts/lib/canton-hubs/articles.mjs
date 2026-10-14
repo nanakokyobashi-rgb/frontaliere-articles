@@ -15,6 +15,7 @@
  *
  * Tutto deterministico: stesso corpus e stesso giorno → stesso elenco.
  */
+import '../../../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { ARTICLE_SECTION_CORE_ALL, articleSectionEntry, isCantonSection } from '../../../../engine/shared/articleSectionCore.mjs';
