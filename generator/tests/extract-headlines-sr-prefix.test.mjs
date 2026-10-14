@@ -143,6 +143,19 @@ test('does not turn anchors without a non-empty href into the listing URL', () =
   );
 });
 
+test('an unlinked unclosed anchor cannot consume the next linked headline', () => {
+  const headline = 'Il Consiglio federale approva il nuovo accordo per il mercato del lavoro';
+  const url = 'https://www.admin.ch/it/newnsb/2026/comunicato-13';
+  const html = `<a>azione senza destinazione <a href="/it/newnsb/2026/comunicato-13">${headline}</a>`;
+  const items = extractHeadlines(html, BASE_URL);
+
+  assert.deepEqual(items.map((item) => item.url), [url]);
+  assert.deepEqual(items.map((item) => item.headline), [headline]);
+
+  const datedHtml = `<a>azione senza destinazione <a href="/it/newnsb/2026/comunicato-13">14.10.2026 ${headline}</a>`;
+  assert.ok(extractDatesFromHtml(datedHtml, BASE_URL).has(url), 'il date scanner deve mantenere il pairing link/data');
+});
+
 test('quote-aware embedded script scanning preserves the publish date', () => {
   const title = 'Il Consiglio federale approva il nuovo accordo embedded';
   const html = '<script type="application/json" data-note="a > b">'
@@ -168,6 +181,16 @@ test('quote-aware structural and text-lead readers preserve card content', () =>
 
   assert.equal(item.headline, 'Il Consiglio federale approva il nuovo accordo strutturale');
   assert.equal(item.lead, 'Il Consiglio federale presenta oggi nuove misure per il mercato del lavoro');
+});
+
+test('finds a hinted title nested inside an unmarked card wrapper', () => {
+  const headline = 'Il Consiglio federale approva nuove misure per il mercato del lavoro';
+  const html = '<article class="news-card"><div class="unmarked-wrapper">'
+    + `<div class="title">${headline}</div></div>`
+    + '<a href="/it/newnsb/2026/comunicato-14">Leggi tutto</a></article>';
+  const [item] = extractHeadlines(html, BASE_URL);
+
+  assert.equal(item?.headline, headline);
 });
 
 test('quote-aware media lead reader preserves an image title', () => {

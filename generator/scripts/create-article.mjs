@@ -8450,9 +8450,9 @@ function nestedNeuhausenCards(html, baseUrl) {
   }
 
   const datesByUrl = new Map();
-  let link = nextHtmlElement(html, 'a');
+  let link = nextHeadlineAnchor(html);
   while (link) {
-    const nextLink = nextHtmlElement(html, 'a', link.end);
+    const nextLink = nextHeadlineAnchor(html, link.end);
     const rawHref = headlineHrefValue(link.attrs);
     if (!rawHref) {
       link = nextLink;
@@ -8533,7 +8533,7 @@ function extractDatesFromHtml(html, baseUrl) {
   // non solo per la prima che l'aveva imparata — stesso anti-pattern gia'
   // corretto in scripts/lib/postch-job-parser.mjs (parseDdMmYyyy) e
   // scripts/crawl-ge-agenda.mjs (parseGeneveDateFr / isValidCalendarDate).
-  let anchor = nextHtmlElement(html, 'a');
+  let anchor = nextHeadlineAnchor(html);
   let lastAnchorEnd = 0;
   while (anchor) {
     const anchorStart = anchor.start;
@@ -8542,7 +8542,7 @@ function extractDatesFromHtml(html, baseUrl) {
     // Iteration keeps using complete anchors. The next opening tag is a
     // separate date-window boundary so a malformed later anchor cannot donate
     // its date to this link.
-    const nextAnchor = nextHtmlElement(html, 'a', anchorEnd);
+    const nextAnchor = nextHeadlineAnchor(html, anchorEnd);
     const nextAnchorOpening = nextHtmlOpeningTag(html, 'a', anchorEnd);
     const rawHref = headlineHrefValue(anchor.attrs);
     if (!rawHref) {
@@ -8697,6 +8697,45 @@ function headlineHrefValue(attrs) {
   return href || null;
 }
 
+/**
+ * Walk opening anchors before balancing them, so a malformed or unlinked
+ * `<a>` cannot borrow the closing tag of the next real link.
+ */
+function scanHeadlineAnchor(html, from = 0, { requireHref = false } = {}) {
+  let opening = nextHtmlOpeningTag(html, 'a', from);
+  while (opening) {
+    if (opening.selfClosing || (requireHref && !headlineHrefValue(opening.attrs))) {
+      opening = nextHtmlOpeningTag(html, 'a', opening.end);
+      continue;
+    }
+
+    let tag = nextHtmlTag(html, opening.end);
+    while (tag && tag.name !== 'a') tag = nextHtmlTag(html, tag.end);
+    if (tag?.closing) {
+      return {
+        ...opening,
+        openEnd: opening.end,
+        closeStart: tag.start,
+        end: tag.end,
+        inner: html.slice(opening.end, tag.start),
+      };
+    }
+
+    // A new opening anchor before this one closes makes the first malformed;
+    // resume there rather than letting it consume a later link's `</a>`.
+    opening = nextHtmlOpeningTag(html, 'a', opening.end);
+  }
+  return null;
+}
+
+function nextHeadlineAnchor(html, from = 0) {
+  return scanHeadlineAnchor(html, from, { requireHref: true });
+}
+
+function nextBalancedHeadlineAnchor(html, from = 0) {
+  return scanHeadlineAnchor(html, from);
+}
+
 function headlineTextFromMarkup(markup) {
   return decodeHtmlEntities(stripHtmlTags(String(markup || '')
     .replace(/<!--[\s\S]*?-->/g, ' '))
@@ -8721,7 +8760,7 @@ function headlineMarkupWithoutActionLinks(markup) {
   const source = String(markup || '');
   let output = '';
   let cursor = 0;
-  let anchor = nextHtmlElement(source, 'a');
+  let anchor = nextBalancedHeadlineAnchor(source);
   while (anchor) {
     output += source.slice(cursor, anchor.start);
     const openTag = source.slice(anchor.start, anchor.openEnd);
@@ -8732,7 +8771,7 @@ function headlineMarkupWithoutActionLinks(markup) {
       output += source.slice(anchor.start, anchor.end);
     }
     cursor = anchor.end;
-    anchor = nextHtmlElement(source, 'a', anchor.end);
+    anchor = nextBalancedHeadlineAnchor(source, anchor.end);
   }
   return output + source.slice(cursor);
 }
@@ -8790,6 +8829,19 @@ function headlineElementEnd(html, node) {
     }
   }
   return { start: html.length, end: html.length };
+}
+
+/** Find balanced elements in opening-tag order without skipping descendants. */
+function nextHeadlineElementForOpening(html, predicate, from = 0) {
+  let opening = nextHtmlTag(html, from);
+  while (opening) {
+    if (!opening.closing && predicate(opening)) {
+      const element = nextHtmlElementWhere(html, (candidate) => candidate.start === opening.start, opening.start);
+      if (element) return element;
+    }
+    opening = nextHtmlTag(html, opening.end);
+  }
+  return null;
 }
 
 function headlineNodeHasHint(node) {
@@ -8855,24 +8907,24 @@ function publicCardLead(html, linkStart, quirks) {
       }
     }
     if (mode === 'text') {
-      let paragraph = nextHtmlElement(inner, 'p');
+      let paragraph = nextHeadlineElementForOpening(inner, (tag) => tag.name === 'p');
       while (paragraph) {
         const text = headlineTextFromMarkup(paragraph.inner);
         if (text.length >= 20) return text.slice(0, 600);
-        paragraph = nextHtmlElement(inner, 'p', paragraph.end);
+        paragraph = nextHeadlineElementForOpening(inner, (tag) => tag.name === 'p', paragraph.openEnd);
       }
-      let hinted = nextHtmlElementWhere(inner, () => true);
+      let hinted = nextHeadlineElementForOpening(inner, () => true);
       while (hinted) {
         const attrs = hinted.attrs || '';
         if (!/(?:lead|teaser|description|summary|abstract)/i.test(
           headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id'),
         )) {
-          hinted = nextHtmlElementWhere(inner, () => true, hinted.end);
+          hinted = nextHeadlineElementForOpening(inner, () => true, hinted.openEnd);
           continue;
         }
         const text = headlineTextFromMarkup(hinted.inner);
         if (text.length >= 20) return text.slice(0, 600);
-        hinted = nextHtmlElementWhere(inner, () => true, hinted.end);
+        hinted = nextHeadlineElementForOpening(inner, () => true, hinted.openEnd);
       }
     }
   }
@@ -8939,20 +8991,20 @@ function structuralHeadlineForLink(html, linkStart, anchorTag) {
     ];
     for (const value of cardAttributes) addCandidate(value, 95);
 
-    let heading = nextHtmlElementWhere(inner, (tag) => /^h[1-6]$/u.test(tag.name));
+    let heading = nextHeadlineElementForOpening(inner, (tag) => /^h[1-6]$/u.test(tag.name));
     while (heading) {
       addCandidate(heading.inner, 80, heading.start);
-      heading = nextHtmlElementWhere(inner, (tag) => /^h[1-6]$/u.test(tag.name), heading.end);
+      heading = nextHeadlineElementForOpening(inner, (tag) => /^h[1-6]$/u.test(tag.name), heading.openEnd);
     }
 
-    let hinted = nextHtmlElementWhere(inner, () => true);
+    let hinted = nextHeadlineElementForOpening(inner, () => true);
     while (hinted) {
       const attrs = hinted.attrs || '';
       const hint = headlineAttributeValue(attrs, 'class') + ' ' + headlineAttributeValue(attrs, 'id');
       if (/(?:title|headline|subject|caption)/i.test(hint)) {
         addCandidate(hinted.inner, 75, hinted.start);
       }
-      hinted = nextHtmlElementWhere(inner, () => true, hinted.end);
+      hinted = nextHeadlineElementForOpening(inner, () => true, hinted.openEnd);
     }
 
     candidates.sort((a, b) => b.score - a.score || a.distance - b.distance);
@@ -8970,9 +9022,9 @@ function extractHeadlines(html, baseUrl) {
   const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
   // Match <a href="...">text</a> with the same quote-aware walker used by
   // the ancestor/date scanners; an attribute value may contain `>`.
-  let anchor = nextHtmlElement(html, 'a');
+  let anchor = nextHeadlineAnchor(html);
   while (anchor) {
-    const nextAnchor = nextHtmlElement(html, 'a', anchor.end);
+    const nextAnchor = nextHeadlineAnchor(html, anchor.end);
     const ancestors = headlineAncestorStack(html, anchor.start);
     const anchorTag = html.slice(anchor.start, anchor.openEnd);
     const markup = html.slice(anchor.start, anchor.end);
