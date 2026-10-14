@@ -1,3 +1,4 @@
+import { editorialHeadlineGuidance } from '../scripts/lib/editorial-headline-guidance.mjs';
 /**
  * news-prompt-token-budget.test.mjs — «perche' genera solo evergreen?»
  *
@@ -153,7 +154,7 @@ const DEPS = [
   'isLocalNewsWithoutFrontaliereAngle',
   // Sezione cantonale (P6b): il flag di tipo e le righe del profilo cantonale
   // (REGOLA #0, ruolo, colore locale) che sostituiscono quelle nazionali.
-  'IS_CANTON', 'CANTON_LINES',
+  'IS_CANTON', 'CANTON_LINES', 'editorialHeadlineGuidance',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -209,6 +210,7 @@ const NEWS_PARAGRAPH = `Il Consiglio di Stato del Canton Ticino ha approvato il 
 const NEWS_PAGE_CONTENT = NEWS_PARAGRAPH.repeat(11).slice(0, 8000);
 
 const BASE_DEPS = {
+  editorialHeadlineGuidance,
   existingIds,
   CREATE_ARTICLE_MIN_IT_WORDS: 900,
   AI_SEARCH_PROMPT_BLOCK_IT,
@@ -429,7 +431,7 @@ test('cronaca locale senza angolo frontaliere: niente sei termini obbligatori, e
   assert.equal(isLocalNewsWithoutFrontaliereAngle(NEWS_PAGE_CONTENT), false);
   assert.match(news.prompt, /Almeno 6 dei seguenti termini DEVONO comparire/);
   assert.match(news.prompt, /FRONTALIERI AL CENTRO/);
-  assert.match(news.prompt, /MINIMO 3 per articolo/);
+  assert.match(news.prompt, /massimo 3 collegamenti pertinenti per articolo/);
   assert.match(news.prompt, /Descrivi PROCEDURE concrete/);
   assert.match(news.prompt, /"body3": "Azione: procedura step-by-step, scadenze, strumenti \+ CTA finale\./);
 });

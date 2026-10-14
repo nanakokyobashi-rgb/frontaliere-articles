@@ -125,7 +125,7 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': 'La 13esima AVS va in conferenza di conciliazione',
     'blog.article.avs-finanziamento-13esima.excerpt': 'Nessun accordo tra Consiglio Nazionale e Stati sul finanziamento della 13esima AVS',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Edificio del Parlamento svizzero a Berna con logo AVS',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan: licenziamenti per furto di essenze',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan licenzia dipendenti a Vernier (Ginevra)',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, leader mondiale negli aromi e profumi, licenzia dipendenti per furto di essenze.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Industria chimica in Svizzera',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi cambia ai vertici e cerca nuovi soci',
@@ -8243,6 +8243,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.title': 'Licenza di caccia canton Berna requisiti e domanda',
     'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Scopri come richiedere la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.',
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paesaggio del Cantone di Berna in Svizzera',
+    'blog.article.investimenti-illiquidi-pensione-2026.title': 'Casse pensioni: investimenti illiquidi al 36% del patrimonio',
+    'blog.article.investimenti-illiquidi-pensione-2026.excerpt': 'Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi',
 };
 
 export default blogMetaChIt;

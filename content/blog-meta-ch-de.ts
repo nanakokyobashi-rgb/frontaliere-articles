@@ -125,7 +125,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': 'Die 13. AHV kommt in die Schlichtungskonferenz',
     'blog.article.avs-finanziamento-13esima.excerpt': 'Keine Einigung zwischen Nationalrat und Ständerat über die Finanzierung der 13. AHV',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Gebäude des Schweizer Parlaments in Bern mit AHV-Logo',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan entlässt Mitarbeiter',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan entlässt Mitarbeitende in Vernier (Genf)',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, Weltmarktführer bei Aromen und Düften, entlässt Mitarbeiter wegen Diebstahl von Essenzen.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Chemische Industrie in der Schweiz',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi cambia vertici e cerca nuovi soci',
@@ -8243,6 +8243,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.title': 'Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag',
     'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.',
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landschaft im Kanton Bern in der Schweiz',
+    'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pensionskassen: Illiquide Anlagen machen 36% des Vermögens aus',
+    'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% des Vermögens sind in nicht unmittelbar handelbaren Anlagen investiert Der Anteil ist in den letzten 15 Jahren gestiegen Immobilien, Hypotheken und alternative Anlagen bieten Stabilität',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pensionskassen-Büro in Zürich mit Analysten, die illiquide Portfolios prüfen',
 };
 
 export default blogMetaChDe;

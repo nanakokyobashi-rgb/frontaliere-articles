@@ -23,6 +23,8 @@
  * stops being a note and becomes something a human is made to read.
  */
 
+import { buildDailyBriefInsights } from './daily-brief-insights.mjs';
+
 const HOUR_MS = 60 * 60 * 1000;
 
 /** A block whose source is fresh no longer than this is publishable. */
@@ -35,6 +37,8 @@ export const BORDER_WAIT_DOC_MAX_AGE_MS = 24 * HOUR_MS;
  */
 export const BORDER_WAIT_MIN_CROSSINGS = 30;
 export const FUEL_MAX_AGE_MS = 48 * HOUR_MS;
+/** A fresh aggregate must not turn a months-old station quote into today's price. */
+export const FUEL_QUOTE_MAX_AGE_MS = 7 * 24 * HOUR_MS;
 /** FX has weekend gaps; five calendar days tolerates Fri→Wed without lying. */
 export const EXCHANGE_MAX_AGE_DAYS = 5;
 export const JOBS_MAX_AGE_MS = 48 * HOUR_MS;
@@ -160,6 +164,25 @@ function isoDayMs(value) {
   return Number.isFinite(ms) && new Date(ms).getUTCDate() === Number(value.slice(8, 10)) ? ms : NaN;
 }
 
+/** Reject civil dates Date.parse would normalize (e.g. 31 February).
+ * Date-first MIMIT values have no timezone; compare their reported calendar
+ * day, preserving that feed's day-level freshness contract.
+ */
+function observationTimestampMs(value, { allowDayFirst = false } = {}) {
+  if (typeof value !== 'string') return NaN;
+  const dayFirst = allowDayFirst
+    ? /^(\d{2})\/(\d{2})\/(\d{4})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?$/.exec(value)
+    : null;
+  const isoDate = /^(\d{4}-\d{2}-\d{2})(?:[ T]|$)/.exec(value)?.[1];
+  const day = dayFirst ? `${dayFirst[3]}-${dayFirst[2]}-${dayFirst[1]}` : isoDate;
+  if (!day || !Number.isFinite(isoDayMs(day))) return NaN;
+  if (dayFirst) {
+    if (Number(dayFirst[4] || 0) > 23 || Number(dayFirst[5] || 0) > 59 || Number(dayFirst[6] || 0) > 59) return NaN;
+    return isoDayMs(day);
+  }
+  return Date.parse(value);
+}
+
 /**
  * The non-canonical rows of a dated series that could still be inside the
  * window the caller actually reads.
@@ -257,7 +280,7 @@ export function shapeBorderWait(docs, { nowMs = Date.now() } = {}) {
     // with no reading would pass the filter below as a real 0-minute wait,
     // inflate `zeroWaitCount` and count toward the minimum-crossings gate.
     const wait = toFiniteNumber(d?.waitTimeMinutes);
-    const updatedMs = Date.parse(d?.lastUpdate || '');
+    const updatedMs = observationTimestampMs(d?.lastUpdate);
     if (!Number.isFinite(wait) || wait < 0) continue;
     // A lastUpdate in the future proves nothing about freshness: dropped like
     // an old one (same rule as the plate-auction editorial, review on 2037).
@@ -269,6 +292,7 @@ export function shapeBorderWait(docs, { nowMs = Date.now() } = {}) {
       waitMinutes: Math.round(wait),
       status: d.status || null,
       direction: d.direction || null,
+      updatedAt: d.lastUpdate,
     });
   }
   if (rows.length < BORDER_WAIT_MIN_CROSSINGS) {
@@ -290,9 +314,18 @@ export function shapeBorderWait(docs, { nowMs = Date.now() } = {}) {
 }
 
 /** Fuel block from the decoded `fuelPrices/metadata` doc (summary + rankings). */
+export function fuelQuoteIsFresh(station, nowMs) {
+  const value = station?.updatedAt;
+  // Older payloads did not carry per-station clocks; their aggregate freshness
+  // remains the compatibility contract. An explicit station clock wins over it.
+  if (value == null) return true;
+  const timestamp = observationTimestampMs(value, { allowDayFirst: true });
+  return Number.isFinite(timestamp) && timestamp <= nowMs && nowMs - timestamp <= FUEL_QUOTE_MAX_AGE_MS;
+}
+
 export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
   if (!meta || typeof meta !== 'object') return unavailable('fuelPrices/metadata missing');
-  const generatedMs = Date.parse(meta.generatedAt || '');
+  const generatedMs = observationTimestampMs(meta.generatedAt);
   if (!Number.isFinite(generatedMs)) return unavailable('fuelPrices/metadata has no generatedAt');
   if (generatedMs > nowMs) return unavailable('fuelPrices/metadata generatedAt is in the future');
   if (nowMs - generatedMs > FUEL_MAX_AGE_MS) {
@@ -300,16 +333,44 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
   }
   const summary = meta.summary || {};
   const rankings = meta.rankings || {};
-  const cheapestItaly = (Array.isArray(rankings.cheapestItalyMunicipalities) ? rankings.cheapestItalyMunicipalities : [])
+  const italyRankingValid = Array.isArray(rankings.cheapestItalyMunicipalities);
+  const rankedItaly = italyRankingValid ? rankings.cheapestItalyMunicipalities : [];
+  const verifiedItaly = rankedItaly.filter(m => m?.municipality && round(m.minPriceEur, 3) > 0 && fuelQuoteIsFresh(m.cheapestStation, nowMs));
+  const cheapestItaly = verifiedItaly
     .map((m) => ({
       municipality: m?.municipality ?? null,
       province: m?.province ?? null,
       minPriceEur: round(m?.minPriceEur, 3),
       stationName: m?.cheapestStation?.stationName ?? null,
+      stationId: m?.cheapestStation?.id ?? null,
+      dieselPriceEur: round(m?.cheapestStation?.dieselPriceEur, 3),
+      observedAt: m?.cheapestStation?.updatedAt ?? null,
     }))
     .filter((m) => m.municipality && m.minPriceEur != null)
     .slice(0, 5);
-  const bestSavings = (Array.isArray(rankings.bestCrossBorderSavings) ? rankings.bestCrossBorderSavings : [])
+  const savingsRankingValid = Array.isArray(rankings.bestCrossBorderSavings);
+  const savingsRows = savingsRankingValid ? rankings.bestCrossBorderSavings : [];
+  const verifiedSavings = savingsRows.filter(m => {
+    if (!m?.municipality || round(m.saving50LEur, 2) == null) return false;
+    const ranked = verifiedItaly.find(row => row.municipality === m.municipality && row.province === m.province);
+    // A matching municipality alone cannot attest to a different Italian quote.
+    if (!ranked || round(m.italyPriceEur, 3) !== round(ranked.minPriceEur, 3)) return false;
+    if (!fuelQuoteIsFresh(m.swissStation, nowMs)) return false;
+    const italyPrice = round(m.italyPriceEur, 3);
+    const swissPrice = round(m.swissPriceEur, 3);
+    if (!(italyPrice > 0) || !(swissPrice > 0)) return false;
+    const cheaperCountry = italyPrice < swissPrice ? 'IT' : italyPrice > swissPrice ? 'CH' : null;
+    if (m.cheaperCountry !== cheaperCountry) return false;
+    // Displayed prices are rounded to 0.001 EUR/L; two quote roundings can
+    // explain at most 0.05 EUR on 50 L, not an unrelated stale advantage.
+    const expectedSaving = round(Math.abs(italyPrice - swissPrice) * 50, 2);
+    if (Math.abs(round(m.saving50LEur, 2) - expectedSaving) > 0.050001) return false;
+    const swissQuote = round(m.swissStation?.sp95PriceEur, 3);
+    if (swissQuote != null && swissQuote !== round(m.swissPriceEur, 3)) return false;
+    return true;
+  });
+  const summaryComparable = italyRankingValid && savingsRankingValid && verifiedItaly.length === rankedItaly.length && verifiedSavings.length === savingsRows.length;
+  const bestSavings = verifiedSavings
     .map((m) => ({
       municipality: m?.municipality ?? null,
       province: m?.province ?? null,
@@ -341,10 +402,15 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
     // summary that simply did not carry the field. Same class as the null wait
     // read as a 0-minute queue — `null` here means "not measured", and the copy
     // builder drops the sentence rather than asserting a zero.
-    municipalityCount: finiteOrNull(summary.municipalityCount),
-    cheaperItalyCount: finiteOrNull(summary.cheaperItalyCount),
-    cheaperSwissCount: finiteOrNull(summary.cheaperSwissCount),
-    tieCount: finiteOrNull(summary.tieCount),
+    // The aggregate has no per-municipality quote clocks. Once any observed
+    // ranking/advantage is rejected, its population is no longer comparable;
+    // omit the counted comparison rather than transfer raw totals to the subset.
+    municipalityCount: summaryComparable ? finiteOrNull(summary.municipalityCount) : null,
+    comparedMunicipalityCount: summaryComparable ? finiteOrNull(summary.municipalitiesWithSwissComparison) : null,
+    sources: meta.sources || null,
+    cheaperItalyCount: summaryComparable ? finiteOrNull(summary.cheaperItalyCount) : null,
+    cheaperSwissCount: summaryComparable ? finiteOrNull(summary.cheaperSwissCount) : null,
+    tieCount: summaryComparable ? finiteOrNull(summary.tieCount) : null,
     cheapestItaly,
     bestSavings,
     cheapestSwissStation: cheapestSwiss
@@ -548,7 +614,7 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
 /** Jobs block from the CDN `jobs-stats.json` payload. */
 export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   if (!stats || typeof stats !== 'object') return unavailable('jobs-stats.json missing');
-  const generatedMs = Date.parse(stats.generatedAt || '');
+  const generatedMs = observationTimestampMs(stats.generatedAt);
   if (!Number.isFinite(generatedMs)) return unavailable('jobs-stats.json has no generatedAt');
   if (generatedMs > nowMs) return unavailable('jobs-stats.json generatedAt is in the future');
   if (nowMs - generatedMs > JOBS_MAX_AGE_MS) {
@@ -679,7 +745,7 @@ function previousDegradedEditions(previous, block) {
  * `previous` is the snapshot the last edition wrote (`null` on a first run):
  * it carries nothing but the per-block degradation streaks forward.
  */
-export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous = null }) {
+export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous = null, previousSnapshot = previous, searchDemand = null }) {
   // Same test as everywhere else in the module: a day that exists. The raw
   // regex used to let `2026-02-31` through here and have it refused deeper in,
   // which wrote and committed a snapshot whose `dateIso` is a day nobody has —
@@ -712,6 +778,7 @@ export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, 
       jobsActive: blocks.jobs.available ? blocks.jobs.activeJobs : 0,
     },
     blocks,
+    insights: buildDailyBriefInsights({ blocks, jobsStats, todayIso, previousSnapshot, searchDemand }),
   };
 }
 

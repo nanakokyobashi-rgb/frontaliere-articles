@@ -6019,6 +6019,46 @@
         "corpus": null,
         "alignedAt": "2026-10-07"
       }
+    },
+    {
+      "path": "generator/scripts/lib/contextual-article-links.mjs",
+      "mode": "corpus-only",
+      "reason": "Adapter del generatore corpus: collega i body localizzati e rispetta le traduzioni pending attraverso il matcher mirrorato. Il sito usa direttamente il linker dell’engine; non necessita di questo adapter del writer.",
+      "baseline": {
+        "site": null,
+        "corpus": "c7f22a4b09ba57b1",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/daily-brief-demand.mjs",
+      "mode": "corpus-only",
+      "reason": "Collector opzionale del bollettino: legge Search Console e Firebase Analytics con il service account del producer e pubblica solo aggregati predefiniti. Il sito consuma la superficie JSON via HTTP, senza questo collector.",
+      "baseline": {
+        "site": null,
+        "corpus": "a9b22932398764fc",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/daily-brief-insights.mjs",
+      "mode": "corpus-only",
+      "reason": "Composizione pura delle osservazioni e delle etichette del bollettino datato: settimane complete, cambio, valichi e domanda aggregata. Bollettino e writer vivono nel corpus; il sito consuma il JSON pubblicato.",
+      "baseline": {
+        "site": null,
+        "corpus": "01aaf92a0eb715a2",
+        "alignedAt": "2026-10-14"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/editorial-headline-guidance.mjs",
+      "mode": "corpus-only",
+      "reason": "Istruzione condivisa dalla generazione e traduzione dei titoli nel writer corpus per frontalieri, Svizzera e cantoni. Il writer del sito è dormante e non appartiene alla pipeline di generazione attiva.",
+      "baseline": {
+        "site": null,
+        "corpus": "d93304353efdfdcb",
+        "alignedAt": "2026-10-14"
+      }
     }
   ]
 }

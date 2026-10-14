@@ -4,17 +4,17 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "e920e458d44ce0e4d7b41140cfa5637ada368629d34a85956050334cf2bc15ba",
+  "updatedAt": "2026-10-14T13:00:39.075Z",
+  "contentHash": "6a16dbcd341c59fef6052c17b75577f6ecbf523bad4a57cfd90c3752c9eb02ac",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-12T23:59:59.000Z",
+      "updatedAt": "2026-10-13T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T19:37:23.778Z",
+      "updatedAt": "2026-10-14T05:32:06.894Z",
       "keyFacts": 2
     },
     {
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, settimana conclusa: 12 ottobre 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, settimana conclusa: 13 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "9",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "22",
-          "note": "segnalazioni aggiornate: 13 ottobre 2026"
+          "value": "21",
+          "note": "segnalazioni aggiornate: 14 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 6 ottobre 2026 – 12 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 7 ottobre 2026 – 13 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -255,7 +255,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T13:00:39.075Z"
     },
     "en": {
       "canton": "ZH",
@@ -266,24 +266,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, week ending 12 October 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, week ending 13 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "9",
-          "note": "reports as of 13 October 2026"
+          "note": "reports as of 14 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "22",
-          "note": "reports as of 13 October 2026"
+          "value": "21",
+          "note": "reports as of 14 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 6 October 2026 to 12 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 7 October 2026 to 13 October 2026, fastest first.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
@@ -336,7 +336,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -393,7 +393,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -488,7 +488,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T13:00:39.075Z"
     },
     "de": {
       "canton": "ZH",
@@ -499,24 +499,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, Woche bis 12. Oktober 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, Woche bis 13. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "9",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "note": "Meldungen vom 14. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "22",
-          "note": "Meldungen vom 13. Oktober 2026"
+          "value": "21",
+          "note": "Meldungen vom 14. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 6. Oktober 2026 bis 12. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 7. Oktober 2026 bis 13. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
@@ -569,7 +569,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -626,7 +626,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -721,7 +721,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T13:00:39.075Z"
     },
     "fr": {
       "canton": "ZH",
@@ -732,24 +732,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Hohentengen am Hochrhein – Wasterkingen, semaine jusqu’au 12 octobre 2026"
+          "note": "Hohentengen am Hochrhein – Wasterkingen, semaine jusqu’au 13 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "9",
-          "note": "signalements au 13 octobre 2026"
+          "note": "signalements au 14 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "22",
-          "note": "signalements au 13 octobre 2026"
+          "value": "21",
+          "note": "signalements au 14 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 6 octobre 2026 au 12 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 7 octobre 2026 au 13 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Hohentengen am Hochrhein – Wasterkingen",
@@ -802,7 +802,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-12T23:59:59.000Z"
+          "updatedAt": "2026-10-13T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -859,7 +859,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T19:37:23.778Z"
+          "updatedAt": "2026-10-14T05:32:06.894Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -954,7 +954,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T13:00:39.075Z"
     }
   }
 }

@@ -125,7 +125,7 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': 'La 13e AVS en conférence de conciliation',
     'blog.article.avs-finanziamento-13esima.excerpt': 'Pas d\'accord entre le Conseil national et les États sur le financement de la 13e AVS',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Bâtiment du Parlement suisse à Berne avec logo AVS',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan licencie des employés',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan licencie des employés à Vernier (Genève)',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, leader mondial des arômes et parfums, licencie des employés pour vol d\'essences.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Industrie chimique en Suisse',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi change de tête et cherche de nouveaux associés',
@@ -8243,6 +8243,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.title': 'Permis de chasse dans le canton de Berne : conditions et demande',
     'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.',
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paysage du canton de Berne en Suisse',
+    'blog.article.investimenti-illiquidi-pensione-2026.title': 'Caisses de pension : investissements illiquides à 36% du patrimoine',
+    'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% du patrimoine est investi dans des actifs non immédiatement négociables La part a augmenté au cours des 15 dernières années L’immobilier, les hypothèques et les placements alternatifs offrent de la stabilité',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Bureau de caisse de pension à Zurich avec analystes examinant des portefeuilles illiquides',
 };
 
 export default blogMetaChFr;

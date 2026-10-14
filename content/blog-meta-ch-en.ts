@@ -125,7 +125,7 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.avs-finanziamento-13esima.title': '13th AHV goes to conciliation conference',
     'blog.article.avs-finanziamento-13esima.excerpt': 'No agreement between National Council and States on financing the 13th AHV',
     'blog.article.avs-finanziamento-13esima.imageAlt': 'Swiss Parliament building in Bern with AVS logo',
-    'blog.article.givaudan-licenziamenti.title': 'Givaudan fires staff',
+    'blog.article.givaudan-licenziamenti.title': 'Givaudan fires staff in Vernier, Geneva',
     'blog.article.givaudan-licenziamenti.excerpt': 'Givaudan, global leader in fragrances and flavors, fires employees for stealing essences.',
     'blog.article.givaudan-licenziamenti.imageAlt': 'Chemical industry in Switzerland',
     'blog.article.agefi-nuovi-vertici.title': 'L\'Agefi shakes up leadership and seeks new partners',
@@ -8243,6 +8243,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.title': 'Hunting license in the canton of Bern: requirements and application',
     'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.',
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landscape of the Canton of Bern in Switzerland',
+    'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pension funds: illiquid investments account for 36% of assets',
+    'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% of the assets are in investments that are not immediately tradable The share has grown over the past 15 years Real estate, mortgages and alternative investments offer stability',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pension fund office in Zurich with analysts reviewing illiquid portfolios',
 };
 
 export default blogMetaChEn;

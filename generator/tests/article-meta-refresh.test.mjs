@@ -852,11 +852,11 @@ test('wiring: refreshMetaAndSeo mappa data.content/data.seo su refreshDescriptiv
     id: 'demo-id',
     content: {
       it: { excerpt: 'E it', seoDescription: 'S it', ogDescription: 'O it' },
-      en: { excerpt: 'E en', seoDescription: 'S en', ogDescription: 'O en' },
+      en: { title: 'New title', excerpt: 'E en', seoDescription: 'S en', ogDescription: 'O en' },
       de: { excerpt: 'E de', seoDescription: 'S de', ogDescription: 'O de' },
       fr: { excerpt: 'E fr', seoDescription: 'S fr', ogDescription: 'O fr' },
     },
-    seo: { description: 'S it', ogDescription: 'O it' },
+    seo: { title: 'IT title', ogTitle: 'IT title', headline: 'IT title', description: 'S it', ogDescription: 'O it' },
   };
   const result = refreshMetaAndSeo(data);
 
@@ -864,14 +864,29 @@ test('wiring: refreshMetaAndSeo mappa data.content/data.seo su refreshDescriptiv
   assert.equal(calls[0].id, 'demo-id');
   assert.deepEqual(
     calls[0].localeTexts.en,
-    { excerpt: 'E en', seoDescription: 'S en', ogDescription: 'O en' },
+    { title: 'New title', excerpt: 'E en', seoDescription: 'S en', ogDescription: 'O en' },
     'i testi EN passati non sono quelli di data.content.en',
   );
   assert.deepEqual(
     calls[0].seoTexts,
-    { description: 'S it', ogDescription: 'O it' },
+    { title: 'IT title', ogTitle: 'IT title', headline: 'IT title', description: 'S it', ogDescription: 'O it' },
     "l'entry SEO deve venire da data.seo.description/ogDescription (IT-only)",
   );
+  assert.equal(calls[0].opts.refreshTitles, true);
   assert.equal(calls[0].opts.repoRoot, FAKE_ROOT, 'repoRoot non propagato');
   assert.deepEqual(result, { changed: true, touched: ['stub-file'] }, 'il valore di ritorno deve essere quello di refreshDescriptiveTexts, non ricostruito');
+});
+
+ test('same-day title refresh is explicit, scoped and idempotent across metadata twins', () => {
+  const title = '921 nuovi annunci in Svizzera';
+  assert.equal(upsertLocaleMetaFields(META_FIXTURE, 'demo-id', { title }), META_FIXTURE);
+  const meta = upsertLocaleMetaFields(META_FIXTURE, 'demo-id', { title }, { refreshTitles: true });
+  assert.ok(meta.includes(title));
+  assert.ok(meta.includes("'blog.article.before-article.title': 'Prima'"));
+  assert.equal(upsertLocaleMetaFields(meta, 'demo-id', { title }, { refreshTitles: true }), meta);
+  const seo = upsertSeoDescriptionBlock(SEO_FIXTURE, 'demo-id', { title, ogTitle: title, headline: title }, { refreshTitles: true });
+  assert.ok(seo.includes("title: '" + title + "'"));
+  assert.ok(seo.includes("ogTitle: '" + title + "'"));
+  assert.ok(seo.includes('"headline": "' + title + '"'));
+  assert.equal(upsertSeoDescriptionBlock(seo, 'demo-id', { title, ogTitle: title, headline: title }, { refreshTitles: true }), seo);
 });
