@@ -28,6 +28,7 @@ import {
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
 import { shapeBorderWait, shapeExchange, shapeFuel, BORDER_WAIT_MIN_CROSSINGS } from '../scripts/lib/daily-brief-data.mjs';
+import { buildDailyBriefInsights } from '../scripts/lib/daily-brief-insights.mjs';
 
 const BRIEF = {
   schemaVersion: 1,
@@ -251,10 +252,13 @@ test('Friday-to-Monday exchange comparison refers to the preceding observation',
   assert.equal(exchange.available, true);
   assert.equal(exchange.prevDate, '2026-10-09');
   assert.equal(exchange.delta1d, 0.01);
-  const article = buildDailyBriefArticle({ dateIso: '2026-10-12', blocks: { exchange } });
+  const blocks = { exchange };
+  const insights = buildDailyBriefInsights({ todayIso: '2026-10-12', blocks });
+  const article = buildDailyBriefArticle({ dateIso: '2026-10-12', blocks, insights });
   for (const locale of ['it', 'en', 'de', 'fr']) {
     assert.match(article.content[locale].body3, /precedente rilevamento|previous reading|vorherigen Messung|relevé précédent/);
     assert.doesNotMatch(article.content[locale].body3, /giorno precedente|previous day|Vortag|la veille/);
+    assert.doesNotMatch(article.content[locale].body3, /cambio di sette giorni prima|exchange rate seven days earlier|Wechselkurs sieben Tage zuvor|taux de change sept jours auparavant/);
   }
 });
 
