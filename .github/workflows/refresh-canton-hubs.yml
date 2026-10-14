@@ -72,7 +72,10 @@ jobs:
         run: |
           set -euo pipefail
           if [ "${{ github.event_name }}" = "push" ]; then
-            DRY=true
+            # Un articolo nuovo deve rigenerare e pubblicare subito gli hub.
+            # Il commit del refresh non riavvia questo workflow: i path degli
+            # hub sono esclusi dal trigger push qui sopra.
+            DRY=false
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             DRY="${{ inputs.dry_run }}"
           else
@@ -130,25 +133,20 @@ jobs:
             exit 1
           fi
 
-      # Con zero sezioni il job finisce qui, verde. Il self-test su push non ha
-      # secret e di norma nessuna sezione accesa: esercita il producer in
-      # dry-run sul Ticino, cosi' una modifica rotta si vede prima del cron.
+      # Con zero sezioni il job finisce qui, verde. Un push di un nuovo articolo
+      # segue il percorso reale; il dry-run resta disponibile solo per un
+      # workflow_dispatch esplicito.
       - name: Resolve canton sections
         id: sections
         env:
           REQUESTED: ${{ inputs.sections }}
           DRY: ${{ steps.mode.outputs.dry }}
-          EVENT: ${{ github.event_name }}
         run: |
           set -euo pipefail
           if [ -n "${REQUESTED:-}" ]; then
             SECTIONS="$(printf '%s' "$REQUESTED" | tr -d '[:space:]')"
           else
             SECTIONS="$(node generator/scripts/generate-canton-hubs.mjs --list-enabled | paste -sd, -)"
-          fi
-          if [ -z "$SECTIONS" ] && [ "$EVENT" = "push" ] && [ "$DRY" = "true" ]; then
-            SECTIONS="canton-ti"
-            echo "self-test: nessuna sezione accesa, dry-run su canton-ti"
           fi
           if [ -z "$SECTIONS" ]; then
             echo "count=0" >> "$GITHUB_OUTPUT"

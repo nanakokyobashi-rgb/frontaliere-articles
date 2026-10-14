@@ -297,16 +297,22 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
           const cosine = model.cosineWithBag(a.id, seed.bag, seed.norm);
           const titleHit = [...titleTokens].some((tok) => seed.bag.has(tok));
           const seedHitCount = engine.tokenize(`${a.title.it} ${a.excerpt.it}`).filter((tok) => seed.bag.has(tok)).length;
-          return { cosine, titleHit, seedHitCount, primary: topic === primaryTopic };
+          return { cluster, cosine, titleHit, seedHitCount, primary: topic === primaryTopic };
         })
-        .sort((x, y) => y.cosine - x.cosine)[0];
+        // Scegli fra i cluster che sono già ammissibili. Un cluster
+        // semanticamente vicino ma senza prova nel titolo non deve oscurare
+        // l'altro cluster che invece prova il tema (in particolare mobilita').
+        .filter((match) => match.titleHit && match.cosine >= minTopicStrength
+          && (match.primary || match.seedHitCount >= 2))
+        .sort((x, y) => y.cosine - x.cosine
+          || y.seedHitCount - x.seedHitCount
+          || x.cluster.localeCompare(y.cluster))[0];
       // Una parola ambigua condivisa dal seed (per esempio «guardie» in una
       // cronaca di polizia) non basta per un secondo tema. Il tema primario
       // dell'engine può usare il match singolo; ogni tema aggiuntivo richiede
       // due occorrenze di lessico nel titolo+estratto, senza allargare la
       // pertinenza con la sola presenza nel cantone.
-      if (!best?.titleHit || best.cosine < minTopicStrength
-        || (!best.primary && best.seedHitCount < 2)) continue;
+      if (!best) continue;
       matches.push({
         topic,
         strength: Math.min(1, best.cosine / fullTopicStrength),

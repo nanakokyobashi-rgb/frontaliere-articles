@@ -712,6 +712,18 @@ test('evidenza diretta multi-tema: una news entra in ogni hub pertinente e non i
   assert.ok(stats.multiTopic >= 1);
 });
 
+test('mobilita sceglie un cluster ammissibile anche se un altro ha cosine maggiore senza titolo', async () => {
+  const border = article(
+    'ti-confine-title-only',
+    'canton-ti',
+    'Controlli dogana e confine ticinese: nuove regole',
+    'Treni TILO, treni regionali, autobus, abbonamenti, trasporti, traffico, autostrada, code e pendolari cambiano questa settimana.',
+    { days: 1 },
+  );
+  const { byTopic } = await curatedFor('canton-ti', [...CORPUS, border]);
+  assert.ok(idsOf(byTopic.mobilita).includes(border.id), 'il cluster confine resta visibile anche se trasporti domina il cosine');
+});
+
 test('il tetto editoriale privilegia la sezione propria prima dei fallback multi-label', async () => {
   const own = article(
     'ti-fisco-proprio',
@@ -1190,6 +1202,8 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   assert.ok(cron, 'cron giornaliero mancante');
   assert.ok(Number(cron[1]) % 15 !== 0, 'il minuto del cron va sfalsato dai quarti d\'ora');
   assert.match(wf, /workflow_dispatch:/);
+  assert.match(wf, /if \[ "\$\{\{ github\.event_name \}\}" = "push" \]; then[\s\S]*?DRY=false/);
+  assert.doesNotMatch(wf, /self-test/);
   assert.match(wf, /- 'content\/blog-body-canton-\*\/\*\*'/);
   assert.match(wf, /- 'content\/blog-meta-canton-\*'/);
   assert.match(wf, /- 'content\/cantons\/\*\/registry\.ts'/);
