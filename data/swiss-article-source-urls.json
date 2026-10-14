@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/aeroporto-zurigo%2c-bus-navetta-viaggiano-senza-autista/92032182": {
-    "articleId": "aeroporto-zurigo-shuttle-autonomi",
-    "ts": "2026-09-09T19:49:00.197Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/ubs-lancia-yumo%2c-piattaforma-spiega-ai-giovani-denaro-ed-economia/92031883": {
     "articleId": "yumo-piattaforma-giovani-finanza",
     "ts": "2026-09-09T20:44:51.116Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4161292": {
     "articleId": "hacker-frigoriferi-connessi",
     "ts": "2026-10-14T23:24:39.477Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956716/trump-dazi-seco-oro-popolo-orologio-lingotto": {
+    "articleId": "orologio-lingotto-trump-seco",
+    "ts": "2026-10-14T23:41:42.253Z",
     "keyForm": 2
   }
 }
