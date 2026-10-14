@@ -104378,6 +104378,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-comco-sentenza-fibra-ottica': {
+    title: 'Multa Swisscom annullata: COMCO valuta il ricorso',
+    description: 'Il TAF annulla la multa di 18,4 milioni a Swisscom. La COMCO analizzerà la sentenza e deciderà se ricorrere al Tribunale federale per la fibra ottica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, multa, swisscom, annullata, comco',
+    ogTitle: 'Swisscom, multa annullata: COMCO valuta il ricorso',
+    ogDescription: 'La sentenza del Tribunale amministrativo federale annulla la sanzione inflitta a Swisscom nel dicembre 2023. Ora la Commissione della concorrenza deve scegliere se accettare il giudizio o presentare ricorso sulla fibra ottica.',
+    canonicalPath: '/articoli-svizzera/comco-sentenza-fibra-ottica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Multa Swisscom annullata: COMCO valuta il ricorso",
+      "description": "Il TAF annulla la multa di 18,4 milioni a Swisscom. La COMCO analizzerà la sentenza e deciderà se ricorrere al Tribunale federale per la fibra ottica.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-comco-sentenza-fibra-ottica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cabinetto in fibra ottica accanto a un moderno edificio urbano svizzero"
+      },
+      "datePublished": "2026-10-14T19:07:30+00:00",
+      "dateModified": "2026-10-14T19:07:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/comco-sentenza-fibra-ottica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/guerre-e-caldo-frenano-i-viaggi%2c-fatturato-tour-operator-in-calo/92028475": {
-    "articleId": "tour-operator-calo-conflitti",
-    "ts": "2026-09-09T16:03:45.072Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1949044/federale-ampliamento-consiglio-internet-zone-accesso": {
     "articleId": "banda-larga-zone-rurali",
     "ts": "2026-09-09T16:22:52.272Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/wxerneam2iop": {
     "articleId": "svizzera-partecipa-fmi-bangkok-2026",
     "ts": "2026-10-14T18:22:18.576Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956674/swisscom-comco-ricorso-multa-annullata": {
+    "articleId": "comco-sentenza-fibra-ottica",
+    "ts": "2026-10-14T19:07:30.719Z",
     "keyForm": 2
   }
 }

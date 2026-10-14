@@ -8270,6 +8270,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-partecipa-fmi-bangkok-2026.title': 'Switzerland participates in IMF and World Bank in Bangkok 2026',
     'blog.article.svizzera-partecipa-fmi-bangkok-2026.excerpt': 'IMF and World Bank summit in Bangkok from October 15 to 17, 2026 Parmelin, Keller-Sutter and Schlegel in the Swiss delegation New partnership agreement',
     'blog.article.svizzera-partecipa-fmi-bangkok-2026.imageAlt': 'View of Lake Lugano with the Swiss flag, symbol of Switzerland\'s commitment to global finance',
+    'blog.article.comco-sentenza-fibra-ottica.title': 'Swisscom fine annulled: COMCO assesses the appeal',
+    'blog.article.comco-sentenza-fibra-ottica.excerpt': 'The TAF annuls Swisscom’s 18,4 million fine.',
+    'blog.article.comco-sentenza-fibra-ottica.imageAlt': 'Fiber-optic cabinet beside a modern Swiss urban building',
 };
 
 export default blogMetaChEn;

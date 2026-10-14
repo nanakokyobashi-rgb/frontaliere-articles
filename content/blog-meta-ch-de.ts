@@ -8270,6 +8270,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-partecipa-fmi-bangkok-2026.title': 'Die Schweiz nimmt 2026 in Bangkok an IWF und Weltbank teil',
     'blog.article.svizzera-partecipa-fmi-bangkok-2026.excerpt': 'IWF- und Weltbankgipfel in Bangkok vom 15.',
     'blog.article.svizzera-partecipa-fmi-bangkok-2026.imageAlt': 'Blick auf den Luganer See mit der Schweizer Fahne, Symbol für das Engagement der Schweiz in der globalen Finanzwelt',
+    'blog.article.comco-sentenza-fibra-ottica.title': 'Swisscom-Busse aufgehoben: WEKO prüft Beschwerde',
+    'blog.article.comco-sentenza-fibra-ottica.excerpt': 'Das BVGer hebt die Busse von 18,4 Millionen gegen Swisscom auf.',
+    'blog.article.comco-sentenza-fibra-ottica.imageAlt': 'Glasfaserschrank neben einem modernen Schweizer Stadtgebäude',
 };
 
 export default blogMetaChDe;
