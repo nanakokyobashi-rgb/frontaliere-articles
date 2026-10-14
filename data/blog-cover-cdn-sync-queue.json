@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-comco-sentenza-fibra-ottica.webp",
+      "sha256": "5726d519941adf1b7c31b0d959a0611037df66a2abe9ade90a6afa89f84a8e44"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-comco-sentenza-fibra-ottica-480w.webp",
+      "sha256": "36b6ab23eeb8d3889c2937fdf0ac2c539f84c7e5a5c450e4a70be2d49eaabccf"
+    }
+  ]
 }
