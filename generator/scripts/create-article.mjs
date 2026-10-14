@@ -8363,14 +8363,6 @@ export function parseFeedDate(raw) {
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
-/** A quale lingua attribuire un nome di mese, per la sola etichetta di formato. */
-function monthFormatTag(name) {
-  if (/^(gennaio|gen|febbraio|marzo|aprile|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|dicembre|dic)$/.test(name)) return 'it-textual';
-  if (/^(januar|jan|februar|marz|märz|mai|juni|juli|august|aug|september|sep|sept|oktober|okt|november|dezember|dez)$/.test(name)) return 'de-textual';
-  if (/^(janvier|fevrier|février|mars|avril|juin|juillet|aout|août|septembre|octobre|decembre|décembre)$/.test(name)) return 'fr-textual';
-  return 'en-textual';
-}
-
 /** Trova la fine di un tag senza confondere `>` dentro un attributo quotato. */
 function findHtmlTagEndOutsideQuotes(html, start) {
   let quote = '';
@@ -8448,10 +8440,10 @@ function readHtmlTagAt(html, start) {
   };
 }
 
-function nextHtmlTag(html, from = 0) {
+function nextHtmlTag(html, from = 0, skipComments = false) {
   let start = html.indexOf('<', from);
   while (start !== -1) {
-    if (html.startsWith('<!--', start)) {
+    if (skipComments && html.startsWith('<!--', start)) {
       const commentEnd = html.indexOf('-->', start + 4);
       if (commentEnd < 0) return null;
       start = html.indexOf('<', commentEnd + 3);
@@ -8467,7 +8459,7 @@ function nextHtmlTag(html, from = 0) {
 function findHtmlClosingTag(html, from, name) {
   let cursor = from;
   let tag;
-  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+  while ((tag = nextHtmlTag(html, cursor, true)) !== null) {
     if (tag.closing && tag.name === name) return tag;
     cursor = tag.end;
   }
@@ -8516,13 +8508,21 @@ function stripHtmlTags(markup) {
   return text + source.slice(cursor);
 }
 
+/** A quale lingua attribuire un nome di mese, per la sola etichetta di formato. */
+function monthFormatTag(name) {
+  if (/^(gennaio|gen|febbraio|marzo|aprile|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|dicembre|dic)$/.test(name)) return 'it-textual';
+  if (/^(januar|jan|februar|marz|märz|mai|juni|juli|august|aug|september|sep|sept|oktober|okt|november|dezember|dez)$/.test(name)) return 'de-textual';
+  if (/^(janvier|fevrier|février|mars|avril|juin|juillet|aout|août|septembre|octobre|decembre|décembre)$/.test(name)) return 'fr-textual';
+  return 'en-textual';
+}
+
 /** URL → data delle card Neuhausen, con i confini delle section annidate rispettati. */
 function nestedNeuhausenCards(html, baseUrl) {
   const rootSections = [];
   const sectionStack = [];
   let cursor = 0;
   let tag;
-  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+  while ((tag = nextHtmlTag(html, cursor, true)) !== null) {
     cursor = tag.end;
     if (!tag.closing && (tag.name === 'script' || tag.name === 'style')) {
       const rawClose = findHtmlRawTextClosingTag(html, tag.end, tag.name);
