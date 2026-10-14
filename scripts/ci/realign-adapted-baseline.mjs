@@ -101,6 +101,10 @@
  *   REALIGN_WINDOW_DAYS        default 14: finestra delle PR dichiaranti
  *   REALIGN_STALE_DAYS         default 7: eta' oltre cui una dichiarazione trattenuta e' un warning
  *   GITHUB_STEP_SUMMARY        se presente, riceve il riepilogo
+ *
+ * Le letture JSON dell'API GitHub ritentano gli errori di rete e i 5xx per un
+ * numero bounded di volte. Un 4xx, un rate-limit o un 5xx persistente resta
+ * invece una lettura fallita: il riallineamento non inventa prove mancanti.
  */
 
 import fs from 'node:fs';
@@ -123,6 +127,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const TOOL = 'realign-adapted-baseline';
 const SITE_MAIN = 'main';
 const DAY_MS = 24 * 60 * 60 * 1000;
+export const REALIGN_READ_ATTEMPTS = 3;
+export const REALIGN_READ_RETRY_DELAY_MS = 2_000;
 /** Commit per pagina dell'API `commits`: la storia del sito si legge in una pagina sola. */
 const SITE_HISTORY_MAX = 100;
 /** Exit di un esito parziale: voci certificate da pushare, ma il job resta rosso. */
@@ -130,6 +136,48 @@ export const EXIT_PARTIAL = 3;
 
 /** Titolo dell'allarme quando una dichiarazione resta trattenuta troppo a lungo. */
 export const STALE_DECLARATION_TITLE = 'Mirror: gemello `adapted` con riallineamento dichiarato e mai avvenuto';
+
+const defaultSleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
+/** Solo gli errori del server sono transienti: un 4xx non migliora ritentando. */
+export function isTransientReadStatus(status) {
+  return Number.isInteger(status) && status >= 500 && status <= 599;
+}
+
+/**
+ * Esegue una lettura API idempotente con retry bounded per rete/5xx.
+ *
+ * Il fetcher cross-repo puo' lanciare un errore rate-limit invece di restituire
+ * una Response: il suo `status` impedisce che venga scambiato per un errore di
+ * rete e ritentato senza rispettare il limite.
+ */
+export async function fetchWithTransientRetry(
+  url,
+  {
+    api,
+    attempts = REALIGN_READ_ATTEMPTS,
+    sleep = defaultSleep,
+  } = {},
+) {
+  if (typeof api !== 'function' || typeof sleep !== 'function') {
+    throw new TypeError('fetchWithTransientRetry richiede api e sleep');
+  }
+  const maxAttempts = Number.isInteger(attempts) && attempts > 0 ? attempts : REALIGN_READ_ATTEMPTS;
+  let lastError;
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    if (attempt > 1) await sleep(REALIGN_READ_RETRY_DELAY_MS * (attempt - 1));
+    try {
+      const response = await api(url, { Accept: 'application/vnd.github+json' });
+      if (!isTransientReadStatus(response?.status)) return response;
+      lastError = new Error(`GET ${url} → HTTP ${response.status}`);
+      try { await response.body?.cancel(); } catch { /* il retry resta il verdetto */ }
+    } catch (error) {
+      if (Number.isInteger(error?.status) && !isTransientReadStatus(error.status)) throw error;
+      lastError = error;
+    }
+  }
+  throw lastError || new Error(`GET ${url} → nessuna risposta leggibile`);
+}
 
 /** Una riga che VUOLE essere una dichiarazione (anche se poi e' malformata). */
 const DECLARATION_PREFIX_RE = /^\s*(?:[-*]\s+)?Realign-adapted:/;
@@ -447,15 +495,21 @@ export async function evaluateDeclaration({ entry, declaration, io, cap }) {
 
 // ───────────────────────────── I/O ─────────────────────────────
 
-function createIo({ siteRepo, api }) {
+export function createIo({
+  siteRepo,
+  api,
+  attempts = REALIGN_READ_ATTEMPTS,
+  sleep = defaultSleep,
+}) {
+  const request = (url) => fetchWithTransientRetry(url, { api, attempts, sleep });
   const getJson = async (url) => {
-    const res = await api(url, { Accept: 'application/vnd.github+json' });
+    const res = await request(url);
     if (!res.ok) throw new Error(`GET ${url} → HTTP ${res.status}`);
     return res.json();
   };
   return {
     async sitePr(number) {
-      const res = await api(`https://api.github.com/repos/${siteRepo}/pulls/${number}`, { Accept: 'application/vnd.github+json' });
+      const res = await request(`https://api.github.com/repos/${siteRepo}/pulls/${number}`);
       if (res.status === 404) return { number, merged: false, baseRef: null };
       if (!res.ok) throw new Error(`GET pulls/${number} del sito → HTTP ${res.status}`);
       const pr = await res.json();
@@ -490,9 +544,9 @@ async function listDeclaringPrs({ repo, sinceMs, api, maxPages = 10 }) {
   const prs = [];
   let truncated = true;
   for (let page = 1; page <= maxPages; page += 1) {
-    const res = await api(
+    const res = await fetchWithTransientRetry(
       `https://api.github.com/repos/${repo}/pulls?state=closed&base=main&sort=updated&direction=desc&per_page=100&page=${page}`,
-      { Accept: 'application/vnd.github+json' },
+      { api },
     );
     if (!res.ok) throw new Error(`GET pulls del corpus (pagina ${page}) → HTTP ${res.status}`);
     const batch = await res.json();
