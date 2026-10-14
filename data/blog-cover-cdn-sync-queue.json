@@ -1,17 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-diritti-politici-disabilita.webp",
-      "sha256": "d4e3b90d49e8310f5df5ebc247d29e7f78a76e09535e832fb6f6b5bf8035a3c3"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-diritti-politici-disabilita-480w.webp",
-      "sha256": "2fd7cff69d4b9e0d496e0271292b23b6b0524aeec6dd8caa0ff594e8b8d3e9c8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/asvz-blackbirds-champions-bowl-2026-480w.webp",
-      "sha256": "16c0932ece754876a47337b4bf0317fd01ff45905bf30a675ffc665e37a4db9b"
-    }
-  ]
+  "items": []
 }
