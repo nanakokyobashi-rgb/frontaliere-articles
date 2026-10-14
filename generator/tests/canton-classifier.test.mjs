@@ -322,6 +322,7 @@ describe('regole di assegnazione', () => {
     for (const text of [
       'Implicazioni per i lavoratori frontalieri in Ticino',
       'Implicazioni per i lavoratori frontalieri che lavorano in Ticino',
+      'Implicazioni per i lavoratori italiani in Ticino',
       'Implicazioni per i frontalieri che lavorano in Ticino',
     ]) {
       assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
@@ -337,6 +338,8 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn(longMilanoAudience).map((m) => m.group), []);
     assert.equal(classifier.mentionsItalianPlace(longMilanoAudience), true);
     assert.deepEqual(codes({ title: longMilanoAudience }), []);
+    const invalidItalianDestination = 'Conseguenze per i lavoratori a Milano cambiano e per il Ticino';
+    assert.deepEqual(classifier.mentionsIn(invalidItalianDestination).map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
     for (const text of [
       'Implicazioni per il Ticino e i Grigioni e il Vallese',
@@ -344,6 +347,7 @@ describe('regole di assegnazione', () => {
       'Implicazioni per il Ticino, i Grigioni, il Vallese, Ginevra e Berna',
       'Conseguenze per il Canton San Gallo, Basilea Campagna, Appenzello Esterno e il Vallese',
       'Implicazioni per le nuove misure fiscali e sociali per il Ticino',
+      'Cosa cambia per le nuove misure fiscali e sociali per il Ticino',
       'Impatto per gli abitanti residenti e iscritti del Canton Ticino',
       'Implicazioni per gli abitanti del Canton Ticino, dei Grigioni e del Vallese',
       'Cosa cambia per il Ticino e i Grigioni e il Vallese',
