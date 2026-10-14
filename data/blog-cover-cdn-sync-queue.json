@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-licenza-pubblico-zurigo-requisiti.webp",
+      "sha256": "34ff3df3fd5cd39c7fe9e0b1bbb39ec2be84852ef633d1a923027f237eeee120"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-licenza-pubblico-zurigo-requisiti-480w.webp",
+      "sha256": "c17ba9a4cbd158861166b0f72cd54fae8b469335d38598c16b2864770286fa33"
+    }
+  ]
 }
