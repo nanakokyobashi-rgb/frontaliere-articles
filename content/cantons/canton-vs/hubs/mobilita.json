@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "ccc459943f5a271ef0d22fe81f43e9fe444cf38ee3558396ba2360d270ecdd5d",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "54b96c048250bb9595c274bff4157bbf7c37e04b7b6f33f8cfaa0d380fa9e0d1",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -185,10 +185,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "A9 Sion-Sierre: tre settimane di chiusure notturne",
+          "url": "/articoli-vallese/a9-chiusure-notturne-sion-sierre/",
+          "excerpt": "Tre settimane di chiusure: dal 12 al 30 ottobre Lavori fermi d'inverno, ripresa a marzo 2027 Chiusure notturne dalle 20 alle 5 Tratta → A9 tra Sion e Sierre",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
           "title": "Trasporti pubblici in Vallese: zone, tariffe e abbonamenti",
           "url": "/articoli-svizzera/trasporti-pubblici-vallese-guida/",
           "excerpt": "Guida pratica al sistema di mobilità vallesano: come funzionano zone e abbonamenti per pendolari e residenti nel rispetto delle direttive federali.",
           "date": "2026-09-06T11:54:06.584Z"
+        },
+        {
+          "title": "Sistema scolastico canton Vallese: iscrizione e cicli",
+          "url": "/articoli-svizzera/scuola-vallese-cicli-iscrizione/",
+          "excerpt": "Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.",
+          "date": "2026-09-30T08:39:22.953Z"
+        },
+        {
+          "title": "Sistema scolastico Cantone Vallese: guida a cicli e iscrizioni",
+          "url": "/articoli-svizzera/istruzione-obbligatoria-canton-vallese/",
+          "excerpt": "Scopri come funziona l'istruzione obbligatoria nel Vallese: dalla struttura dei cicli scolastici alle procedure pratiche di iscrizione per le famiglie.",
+          "date": "2026-09-06T01:55:16.584Z"
         }
       ],
       "links": [
@@ -225,7 +243,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "VS",
@@ -388,10 +406,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "A9 Sion-Sierre: three weeks of nighttime closures",
+          "url": "/en/valais-articles/a9-night-closures-sion-sierre/",
+          "excerpt": "Three weeks of closures: from October 12 to 30 Work halted over the winter, resumption in March 2027 Nighttime closures from 20 to 5 Route → A9 between Sion",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
           "title": "Public transport in Valais: zones, fares and season tickets",
           "url": "/en/swiss-articles/public-transport-valais-guide/",
           "excerpt": "Practical guide to the Valais mobility system: how commuter and resident zones and passes work in compliance with federal directives.",
           "date": "2026-09-06T11:54:06.584Z"
+        },
+        {
+          "title": "Valais cantonal school system: enrollment and cycles",
+          "url": "/en/swiss-articles/valais-school-enrolment-cycles/",
+          "excerpt": "Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.",
+          "date": "2026-09-30T08:39:22.953Z"
+        },
+        {
+          "title": "Canton of Valais school system: guide to cycles and enrolments",
+          "url": "/en/swiss-articles/compulsory-education-canton-valais/",
+          "excerpt": "Find out how compulsory education works in Valais: from the structure of school cycles to practical enrolment procedures for families.",
+          "date": "2026-09-06T01:55:16.584Z"
         }
       ],
       "links": [
@@ -428,7 +464,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "VS",
@@ -591,10 +627,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "A9 Sitten-Sierre: drei Wochen nächtliche Sperrungen",
+          "url": "/de/wallis-artikel/a9-nachtsperrungen-sitten-sierre/",
+          "excerpt": "Drei Wochen Sperrungen: vom 12.",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
           "title": "Öffentlicher Verkehr im Wallis: Zonen, Tarife und Abonnements",
           "url": "/de/schweiz-artikel/oeffentlicher-verkehr-wallis-leitfaden/",
           "excerpt": "Praktischer Leitfaden zum Walliser Mobilitätssystem: So funktionieren Zonen und Abos für Pendler und Anwohner unter Beachtung der Bundesrichtlinien.",
           "date": "2026-09-06T11:54:06.584Z"
+        },
+        {
+          "title": "Schulsystem Kanton Wallis: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/walliser-schulsystem-anmeldung-zyklen/",
+          "excerpt": "Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.",
+          "date": "2026-09-30T08:39:22.953Z"
+        },
+        {
+          "title": "Schulsystem Kanton Wallis: Zyklus- und Einschreibungsleitfaden",
+          "url": "/de/schweiz-artikel/schulpflicht-kanton-wallis/",
+          "excerpt": "Erfahren Sie, wie die Schulpflicht im Wallis funktioniert: von der Struktur der Schulzyklen bis hin zu praktischen Anmeldeverfahren für Familien.",
+          "date": "2026-09-06T01:55:16.584Z"
         }
       ],
       "links": [
@@ -631,7 +685,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "VS",
@@ -794,10 +848,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "A9 Sion-Sierre : trois semaines de fermetures nocturnes",
+          "url": "/fr/articles-valais/a9-fermetures-nocturnes-sion-sierre/",
+          "excerpt": "Trois semaines de fermetures : du 12 au 30 octobre Travaux interrompus en hiver, reprise en mars 2027 Fermetures nocturnes de 20 h à 5 h Tronçon → A9 entre Sion",
+          "date": "2026-10-08T15:24:54.934Z"
+        },
+        {
           "title": "Transports publics en Valais : zones, tarifs et abonnements",
           "url": "/fr/articles-suisse/transports-publics-valais-guide/",
           "excerpt": "Guide pratique du système de mobilité valaisan : comment fonctionnent les zones et les abonnements pour les navetteurs et les résidents conformément aux directives fédérales.",
           "date": "2026-09-06T11:54:06.584Z"
+        },
+        {
+          "title": "Système scolaire du canton du Valais : inscription et cycles",
+          "url": "/fr/articles-suisse/ecole-valais-inscription-cycles/",
+          "excerpt": "Cycles, âge d'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.",
+          "date": "2026-09-30T08:39:22.953Z"
+        },
+        {
+          "title": "Système scolaire canton du Valais : guide des cycles et des inscriptions",
+          "url": "/fr/articles-suisse/scolarite-obligatoire-canton-valais/",
+          "excerpt": "Découvrez le fonctionnement de l'enseignement obligatoire en Valais : de la structure des cycles scolaires aux procédures pratiques d'inscription pour les familles.",
+          "date": "2026-09-06T01:55:16.584Z"
         }
       ],
       "links": [
@@ -834,7 +906,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

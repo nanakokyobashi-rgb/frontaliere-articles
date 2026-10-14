@@ -4,13 +4,18 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "fa3413f06ca0150469613ac9afc113bfbea8ec7ee163fdd2f8e94d898823934c",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "7a6d8f3fd831f61f6f3b4155484b99b5a3f8b8e44b61d22ad5b3d52960065192",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -47,6 +52,20 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "oggi da 9 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -89,16 +108,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Permesso di dimora B Canton Zugo: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-b-zugo-guida-pratica/",
-          "excerpt": "Guida al permesso di dimora B a Zugo: come funziona il permesso rinnovabile, quali requisiti federali e cantonali seguire, documenti e procedura di rinnovo.",
-          "date": "2026-09-04T21:30:16.529Z"
-        },
-        {
-          "title": "Premi cassa malati canton Zugo e riduzione premi",
-          "url": "/articoli-svizzera/zugo-riduzione-premi-sussidio/",
-          "excerpt": "Come funzionano i premi LAMal nel Canton Zugo, le sei franchigie disponibili e come accedere ai sussidi cantonali per ridurre il costo dell'assicurazione malattia.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
+          "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
+          "excerpt": "La scuola Sternmatt 1 affronta il 2026/27 mettendo al centro un uso responsabile dell'intelligenza artificiale nelle aule.",
+          "date": "2026-10-08T18:01:57.824Z"
         },
         {
           "title": "Patente di guida nel Canton Zugo: conversione licenza estera, esami e procedure",
@@ -107,28 +120,40 @@
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
+          "title": "Permesso di dimora B Canton Zugo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-zugo-guida-pratica/",
+          "excerpt": "Guida al permesso di dimora B a Zugo: come funziona il permesso rinnovabile, quali requisiti federali e cantonali seguire, documenti e procedura di rinnovo.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Permesso B a Zugo: requisiti, procedura e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-zugo-requisiti-rinnovo/",
+          "excerpt": "Come ottenere e rinnovare il permesso di dimora B nel Canton Zugo: documenti, durata fino a 5 anni per UE/AELS e passi burocratici.",
+          "date": "2026-08-30T17:46:10.812Z"
+        },
+        {
+          "title": "Permesso di domicilio C nel Cantone di Zugo: la guida",
+          "url": "/articoli-svizzera/permesso-domicilio-c-zugo-guida/",
+          "excerpt": "Come ottenere il permesso di domicilio C nel Cantone di Zugo: requisiti di residenza, integrazione e la procedura presso l'Ufficio della migrazione.",
+          "date": "2026-08-23T15:57:53.136Z"
+        },
+        {
+          "title": "Premi cassa malati canton Zugo e riduzione premi",
+          "url": "/articoli-svizzera/zugo-riduzione-premi-sussidio/",
+          "excerpt": "Come funzionano i premi LAMal nel Canton Zugo, le sei franchigie disponibili e come accedere ai sussidi cantonali per ridurre il costo dell'assicurazione malattia.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Permesso L di breve durata nel Canton Zugo: validità, proroga e passaggio al permesso B",
+          "url": "/articoli-svizzera/permesso-l-breve-durata-canton-zugo-validita-proroga/",
+          "excerpt": "Durata massima del permesso L nel Canton Zugo, condizioni per la proroga, vincoli con il datore di lavoro e requisiti per passare al permesso di dimora B.",
+          "date": "2026-08-17T09:55:05.441Z"
+        },
+        {
           "title": "Premi cassa malati cantone Zugo e riduzione premi",
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-zugo-riduzione-premi/",
           "excerpt": "I premi per l'assicurazione malattia obbligatoria nel Cantone di Zugo: fasce di premio, franchigie, modelli alternativi e requisiti per beneficiare della riduzione dei premi.",
           "date": "2026-08-17T08:03:04.287Z"
-        },
-        {
-          "title": "Asilo nido Zugo: costi, tariffe e sussidi cantonali",
-          "url": "/articoli-svizzera/custodia-bambini-zugo-tariffe-sussidi/",
-          "excerpt": "Nel canton Zugo, asili nido e custodia seguono tariffe progressive su base reddituale. Scopri le opzioni disponibili, i sussidi cantonali e le procedure di accesso.",
-          "date": "2026-09-04T23:16:38.350Z"
-        },
-        {
-          "title": "Asilo nido e custodia bambini in Canton Zug: costi",
-          "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-zugo-costi/",
-          "excerpt": "I costi per l'asilo nido e la custodia dei bambini in Canton Zug possono variare in base alla tariffa calcolata sul reddito e ai sussidi cantonali disponibili.",
-          "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Patente di guida nel Cantone di Zugo: conversione della licenza estera",
-          "url": "/articoli-svizzera/patente-guida-cantone-zugo-conversione/",
-          "excerpt": "La conversione della licenza di guida estera è obbligatoria per i frontalieri che risiedono nel Cantone di Zugo.",
-          "date": "2026-08-17T17:33:42.509Z"
         }
       ],
       "links": [
@@ -157,7 +182,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "ZG",
@@ -187,6 +212,20 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "today from 9 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -229,16 +268,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Residence permit B Canton Zug: requirements and renewal",
-          "url": "/en/swiss-articles/permit-b-zug-practical-guide/",
-          "excerpt": "Guide to residence permit B in Zug: how the renewable permit works, what federal and cantonal requirements to follow, documents and renewal procedure.",
-          "date": "2026-09-04T21:30:16.529Z"
-        },
-        {
-          "title": "Canton Zug health insurance premiums and premium reductions",
-          "url": "/en/swiss-articles/zug-lamal-premium-subsidy/",
-          "excerpt": "How LAMal premiums work in the Canton of Zug, the six deductibles available and how to access cantonal benefits to reduce the cost of health insurance.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "title": "Sternmatt School 1: AI marks 2026/27",
+          "url": "/en/zug-articles/sternmatt-school-ai-2026/",
+          "excerpt": "The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.",
+          "date": "2026-10-08T18:01:57.824Z"
         },
         {
           "title": "Driving licence Zug: foreign conversion, exams & procedures",
@@ -247,28 +280,40 @@
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
+          "title": "Residence permit B Canton Zug: requirements and renewal",
+          "url": "/en/swiss-articles/permit-b-zug-practical-guide/",
+          "excerpt": "Guide to residence permit B in Zug: how the renewable permit works, what federal and cantonal requirements to follow, documents and renewal procedure.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Permit B to Zug: requirements, procedure and renewal",
+          "url": "/en/swiss-articles/zug-b-residence-permit-requirements-renewal/",
+          "excerpt": "How to obtain and renew the residence permit B in the Canton of Zug: documents, duration up to 5 years for EU/EFTA and bureaucratic steps.",
+          "date": "2026-08-30T17:46:10.812Z"
+        },
+        {
+          "title": "Residence permit C in the Canton of Zug: the guide",
+          "url": "/en/swiss-articles/residence-permit-c-zug-guide/",
+          "excerpt": "How to obtain residence permit C in the Canton of Zug: residency requirements, integration and the procedure at the Migration Office.",
+          "date": "2026-08-23T15:57:53.136Z"
+        },
+        {
+          "title": "Canton Zug health insurance premiums and premium reductions",
+          "url": "/en/swiss-articles/zug-lamal-premium-subsidy/",
+          "excerpt": "How LAMal premiums work in the Canton of Zug, the six deductibles available and how to access cantonal benefits to reduce the cost of health insurance.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Short-term permit L in Zug: validity, extensions & transfer to B",
+          "url": "/en/swiss-articles/short-term-l-permit-canton-zug-validity-extension/",
+          "excerpt": "Maximum duration of the L permit in the Canton of Zug, conditions for the extension, constraints with the employer and requirements to move to the B residence permit.",
+          "date": "2026-08-17T09:55:05.441Z"
+        },
+        {
           "title": "Canton Zug health insurance premiums and premium reductions",
           "url": "/en/swiss-articles/premi-cassa-malati-canton-zug-riduzione-premi/",
           "excerpt": "Premiums for compulsory health insurance in the canton of Zug: premium ranges, deductibles, alternative models and requirements for benefiting from premium reductions.",
           "date": "2026-08-17T08:03:04.287Z"
-        },
-        {
-          "title": "Zug kindergarten: cantonal costs, fees and subsidies",
-          "url": "/en/swiss-articles/childcare-zug-tariffs-subsidies/",
-          "excerpt": "In the canton of Zug, nurseries and childcare facilities follow progressive rates on an income basis. Learn about available options, cantonal subsidies, and access procedures.",
-          "date": "2026-09-04T23:16:38.350Z"
-        },
-        {
-          "title": "Kindergarten and childcare in Canton Zug: costs",
-          "url": "/en/swiss-articles/kindergarten-and-childcare-in-canton-zug-costs/",
-          "excerpt": "Costs for childcare and childcare in Canton Zug may vary based on the calculated rate on income and available cantonal subsidies.",
-          "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Driver's license in the Canton of Zug: conversion of the foreign license",
-          "url": "/en/swiss-articles/canton-zug-driving-license-conversion/",
-          "excerpt": "The conversion of the foreign driving license is mandatory for border workers residing in the Canton of Zug.",
-          "date": "2026-08-17T17:33:42.509Z"
         }
       ],
       "links": [
@@ -293,7 +338,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "ZG",
@@ -323,6 +368,20 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "heute 9 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -365,16 +424,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Aufenthaltsbewilligung B Kanton Zug: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-zug-praktischer-leitfaden/",
-          "excerpt": "Leitfaden Aufenthaltsbewilligung B in Zug: Wie funktioniert die erneuerbare Bewilligung, welche eidgenössischen und kantonalen Anforderungen gelten, Dokumente und Erneuerungsverfahren.",
-          "date": "2026-09-04T21:30:16.529Z"
-        },
-        {
-          "title": "Krankenkassenprämien Kanton Zug und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/zug-krankenkasse-praemien-reduktion/",
-          "excerpt": "Wie die KVG-Prämien im Kanton Zug funktionieren, welche sechs Franchisen zur Verfügung stehen und wie Sie auf kantonale Beiträge zugreifen können, um die Kosten der Krankenversicherung zu senken.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "title": "Schule Sternmatt 1: KI prägt das Schuljahr 2026/27",
+          "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
+          "excerpt": "Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.",
+          "date": "2026-10-08T18:01:57.824Z"
         },
         {
           "title": "Führerschein Kt. Zug: Ausländ. Umwandlung, Prüfungen & Verfahren",
@@ -383,28 +436,40 @@
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
+          "title": "Aufenthaltsbewilligung B Kanton Zug: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-zug-praktischer-leitfaden/",
+          "excerpt": "Leitfaden Aufenthaltsbewilligung B in Zug: Wie funktioniert die erneuerbare Bewilligung, welche eidgenössischen und kantonalen Anforderungen gelten, Dokumente und Erneuerungsverfahren.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Führerschein B in Zug: Voraussetzungen, Verfahren und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-zug-voraussetzungen-verlaengerung/",
+          "excerpt": "So erhalten und verlängern Sie die Aufenthaltsbewilligung B im Kanton Zug: Dokumente, Dauer bis zu 5 Jahren für EU/EFTA und bürokratische Schritte.",
+          "date": "2026-08-30T17:46:10.812Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C im Kanton Zug: der Führer",
+          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-zug-leitfaden/",
+          "excerpt": "So erhalten Sie die Niederlassungsbewilligung C im Kanton Zug: Aufenthaltsvoraussetzungen, Integration und das Verfahren beim Migrationsamt.",
+          "date": "2026-08-23T15:57:53.136Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Zug und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/zug-krankenkasse-praemien-reduktion/",
+          "excerpt": "Wie die KVG-Prämien im Kanton Zug funktionieren, welche sechs Franchisen zur Verfügung stehen und wie Sie auf kantonale Beiträge zugreifen können, um die Kosten der Krankenversicherung zu senken.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Bewilligung L (Zug): Gültigkeit, Verlängerung, Übergang zu B",
+          "url": "/de/schweiz-artikel/kurzfristige-aufenthaltsbewilligung-l-kanton-zug-gultigkeit-verlangerung/",
+          "excerpt": "Maximale Dauer der Bewilligung L im Kanton Zug, Bedingungen für die Verlängerung, Bindungen an den Arbeitgeber und Voraussetzungen für den Übergang zur Aufenthaltsbewilligung B.",
+          "date": "2026-08-17T09:55:05.441Z"
+        },
+        {
           "title": "Krankenversicherungsprämien im Kanton Zug und Prämiensenkungen",
           "url": "/de/schweiz-artikel/premi-cassa-malati-kanton-zug-riduzione-premi/",
           "excerpt": "Prämien für die Pflichtkrankenversicherung im Kanton Zug: Prämienbereiche, Selbstbeteiligungen, alternative Modelle und Anforderungen für den Vorteil von Prämiensenkungen.",
           "date": "2026-08-17T08:03:04.287Z"
-        },
-        {
-          "title": "Kindergarten Zug: Kosten, Tarife und kantonale Zuschüsse",
-          "url": "/de/schweiz-artikel/kinderbetreuung-zug-tarife-subventionen/",
-          "excerpt": "Im Kanton Zug gelten für Kinderkrippen und Kinderbetreuung progressive Tarife auf Einkommensbasis. Informieren Sie sich über die verfügbaren Optionen, die kantonalen Subventionen und die Zugangsverfahren.",
-          "date": "2026-09-04T23:16:38.350Z"
-        },
-        {
-          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Zug: Kosten",
-          "url": "/de/schweiz-artikel/asilo-nido-e-custodia-bambini-canton-zug-kosten/",
-          "excerpt": "Die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zug können je nach dem berechneten Einkommenstarif und den verfügbaren kantonalen Leistungen variieren.",
-          "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Führerschein im Kanton Zug: Umtausch des ausländischen Führerscheins",
-          "url": "/de/schweiz-artikel/fuehrerschein-kanton-zug-umstellung/",
-          "excerpt": "Der Umtausch des ausländischen Führerscheins ist für Grenzgänger mit Wohnsitz im Kanton Zug obligatorisch.",
-          "date": "2026-08-17T17:33:42.509Z"
         }
       ],
       "links": [
@@ -429,7 +494,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "ZG",
@@ -459,6 +524,20 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 9 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -501,16 +580,10 @@
       ],
       "curatedArticles": [
         {
-          "title": "Permis de séjour B Canton Zoug : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-b-zoug-guide-pratique/",
-          "excerpt": "Guide du permis de séjour B à Zoug : comment fonctionne le permis renouvelable, quelles exigences fédérales et cantonales suivre, documents et procédure de renouvellement.",
-          "date": "2026-09-04T21:30:16.529Z"
-        },
-        {
-          "title": "Primes caisse-maladie canton de Zoug et réduction des primes",
-          "url": "/fr/articles-suisse/zoug-reduction-primes-maladie/",
-          "excerpt": "Comment fonctionnent les primes LAMal dans le canton de Zoug, les six franchises disponibles et comment accéder aux allocations cantonales pour réduire le coût de l'assurance maladie.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "title": "École Sternmatt 1 : l’IA marque l’année 2026/27",
+          "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
+          "excerpt": "L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.",
+          "date": "2026-10-08T18:01:57.824Z"
         },
         {
           "title": "Permis de conduire Zoug : conversion, examens, démarches",
@@ -519,28 +592,40 @@
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
+          "title": "Permis de séjour B Canton Zoug : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-b-zoug-guide-pratique/",
+          "excerpt": "Guide du permis de séjour B à Zoug : comment fonctionne le permis renouvelable, quelles exigences fédérales et cantonales suivre, documents et procédure de renouvellement.",
+          "date": "2026-09-04T21:30:16.529Z"
+        },
+        {
+          "title": "Permis B à Zoug : exigences, procédure et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-zoug-exigences-renouvellement/",
+          "excerpt": "Comment obtenir et renouveler le permis de séjour B dans le canton de Zoug : documents, durée jusqu'à 5 ans pour l'UE/AELE et démarches administratives.",
+          "date": "2026-08-30T17:46:10.812Z"
+        },
+        {
+          "title": "Permis de domicile C dans le canton de Zoug : le guide",
+          "url": "/fr/articles-suisse/permis-etablissement-c-zoug-guide/",
+          "excerpt": "Comment obtenir le permis de séjour C dans le canton de Zoug : conditions de résidence, d'intégration et procédure auprès de l'Office des migrations.",
+          "date": "2026-08-23T15:57:53.136Z"
+        },
+        {
+          "title": "Primes caisse-maladie canton de Zoug et réduction des primes",
+          "url": "/fr/articles-suisse/zoug-reduction-primes-maladie/",
+          "excerpt": "Comment fonctionnent les primes LAMal dans le canton de Zoug, les six franchises disponibles et comment accéder aux allocations cantonales pour réduire le coût de l'assurance maladie.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
+          "title": "Permis L à Zoug : validité, prolongation et permis B",
+          "url": "/fr/articles-suisse/permis-l-courte-duree-canton-zoug-validite-prolongation/",
+          "excerpt": "Durée maximale du permis L dans le canton de Zoug, conditions de prolongation, liens avec l'employeur et conditions de passage au permis de séjour B.",
+          "date": "2026-08-17T09:55:05.441Z"
+        },
+        {
           "title": "Primes d'assurance santé dans le canton de Zoug et réductions de primes",
           "url": "/fr/articles-suisse/premi-cassa-malati-canton-de-zoug-riduzione-premi/",
           "excerpt": "Primes pour l'assurance maladie obligatoire dans le canton de Zou : fourchettes de primes, franchises, modèles alternatifs et exigences pour bénéficier de réductions de primes.",
           "date": "2026-08-17T08:03:04.287Z"
-        },
-        {
-          "title": "Garderie Zoug : coûts, tarifs et subventions cantonales",
-          "url": "/fr/articles-suisse/garde-enfants-zoug-tarifs-subventions/",
-          "excerpt": "Dans le canton de Zoug, les crèches et garderies suivent des tarifs progressifs sur la base des revenus. Découvrez les options disponibles, les subventions cantonales et les procédures d'accès.",
-          "date": "2026-09-04T23:16:38.350Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants dans le canton de Zoug : coûts",
-          "url": "/fr/articles-suisse/asilo-nido-e-custodia-bambini-canton-zoug-couts/",
-          "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Zoug peuvent varier en fonction du tarif calculé sur le revenu et des allocations cantonales disponibles.",
-          "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Permis de conduire dans le canton de Zoug : conversion du permis étranger",
-          "url": "/fr/articles-suisse/permis-de-conduire-canton-de-zoug-conversion/",
-          "excerpt": "La conversion du permis de conduire étranger est obligatoire pour les frontaliers résidant dans le canton de Zoug.",
-          "date": "2026-08-17T17:33:42.509Z"
         }
       ],
       "links": [
@@ -561,7 +646,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

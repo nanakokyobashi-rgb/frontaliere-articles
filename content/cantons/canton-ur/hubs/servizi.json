@@ -4,13 +4,18 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "0ca11bc95c2fb0c6333b6175901d75dcab252b49b152d273c4e9f210dcc8d19e",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "b5fa3033d75d65b25b312029b93c0ef8e089985800f5aecb7a809a6ff44e6ad5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -49,6 +54,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "14 °C",
+              "detail": "oggi da 11 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -64,22 +83,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Autorizzazione edilizia canton Uri: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-edilizio-uri/",
+          "excerpt": "Nel Cantone di Uri l'autorizzazione edilizia richiede verifiche su requisiti, documenti, uffici, termini e opposizioni: i lavori partono solo dopo il permesso.",
+          "date": "2026-10-11T11:17:28.171Z"
+        },
+        {
+          "title": "Permesso B nel Canton Uri: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-canton-uri-requisiti-rinnovo/",
+          "excerpt": "Come richiedere e rinnovare il permesso di dimora B nel Canton Uri: documenti, durata, ufficio cantonale della migrazione e iter completo.",
+          "date": "2026-08-28T04:32:29.395Z"
+        },
+        {
           "title": "Premi cassa malati Uri e riduzione premi LAMal",
           "url": "/articoli-svizzera/premi-cassa-malati-uri-riduzione/",
           "excerpt": "Guida ai premi della cassa malati obbligatoria nel Cantone di Uri, fasce, franchigie e requisiti per la riduzione dei premi.",
           "date": "2026-08-28T04:09:53.075Z"
-        },
-        {
-          "title": "Premi cassa malati Cantone Uri e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-cantone-uri/",
-          "excerpt": "I premi cassa malati nel Cantone Uri e le condizioni per la riduzione dei premi.",
-          "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "Uri: premi cassa malati specifici e sussidi",
-          "url": "/articoli-svizzera/premi-cassa-malati-uri-sussidi/",
-          "excerpt": "Il Cantone di Uri applica tariffe specifiche per i premi dell'assicurazione malattia obbligatoria (LAMal). L'accesso ai sussidi avviene tramite la riduzione dei premi, con franchigie flessibili per gli adulti.",
-          "date": "2026-08-28T04:24:42.361Z"
         },
         {
           "title": "Permesso di dimora B Uri: requisiti e rinnovo",
@@ -94,22 +113,22 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "Cassa malati Uri: franchigie, modelli e riduzione",
-          "url": "/articoli-svizzera/uri-franchigie-modelli-sussidio/",
-          "excerpt": "Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere al sussidio cantonale.",
-          "date": "2026-09-09T01:23:52.363Z"
+          "title": "Permesso C canton Uri: anni e procedura",
+          "url": "/articoli-svizzera/permesso-c-canton-uri-richiesta/",
+          "excerpt": "Requisiti federali e cantonali per ottenere il permesso di domicilio C nel Cantone Uri: 10 anni di residenza, integrazione e conoscenze linguistiche.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "Asilo nido e custodia bambini nella Canton Uri: costo e servizi",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-uri/",
-          "excerpt": "La Canton Uri offre asili nido e servizi di custodia bambini, ma a cosa aspettarsi e come funzionano?",
-          "date": "2026-08-16T06:28:47.805Z"
+          "title": "Premi cassa malati Cantone Uri e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-cantone-uri/",
+          "excerpt": "I premi cassa malati nel Cantone Uri e le condizioni per la riduzione dei premi.",
+          "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Asilo nido e custodia bambini nel Canton Uri: costi e opzioni",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-ur-i-costi/",
-          "excerpt": "Scopri i costi e le opzioni di asilo nido e custodia bambini nel Canton Uri.",
-          "date": "2026-08-16T07:43:34.393Z"
+          "title": "Uri: premi cassa malati specifici e sussidi",
+          "url": "/articoli-svizzera/premi-cassa-malati-uri-sussidi/",
+          "excerpt": "Il Cantone di Uri applica tariffe specifiche per i premi dell'assicurazione malattia obbligatoria (LAMal). L'accesso ai sussidi avviene tramite la riduzione dei premi, con franchigie flessibili per gli adulti.",
+          "date": "2026-08-28T04:24:42.361Z"
         }
       ],
       "links": [
@@ -138,7 +157,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "UR",
@@ -170,6 +189,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "14 °C",
+              "detail": "today from 11 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -185,22 +218,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Building permit in the canton of Uri: requirements and procedure",
+          "url": "/en/swiss-articles/uri-building-permit-requirements/",
+          "excerpt": "In the Canton of Uri, a building permit requires checks on requirements, documents, offices, deadlines and objections: work may begin only after the permit has been issued.",
+          "date": "2026-10-11T11:17:28.171Z"
+        },
+        {
+          "title": "Permit B in Canton Uri: Requirements and Renewal",
+          "url": "/en/swiss-articles/canton-uri-permit-b-requirements-renewal/",
+          "excerpt": "How to apply for and renew residence permit B in Canton Uri: documents, duration, cantonal migration office and full procedure.",
+          "date": "2026-08-28T04:32:29.395Z"
+        },
+        {
           "title": "Uri sick pay premiums and LAMal premium reductions",
           "url": "/en/swiss-articles/health-insurance-uri-reduction/",
           "excerpt": "Guide to the compulsory health insurance premiums in the Canton of Uri, bands, deductibles and requirements for the reduction of premiums.",
           "date": "2026-08-28T04:09:53.075Z"
-        },
-        {
-          "title": "Health insurance premiums Canton Uri and premium reduction",
-          "url": "/en/swiss-articles/health-insurance-premiums-canton-uri-and-premium-reduction/",
-          "excerpt": "The sick cash premiums in Canton Uri and the conditions for the reduction of the premiums.",
-          "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "Uri: specific sick pay premiums and subsidies",
-          "url": "/en/swiss-articles/health-insurance-premiums-uri-subsidies/",
-          "excerpt": "The Canton of Uri applies specific rates for compulsory health insurance premiums (LAMal). Access to the subsidies takes place through the reduction of premiums, with flexible deductibles for adults.",
-          "date": "2026-08-28T04:24:42.361Z"
         },
         {
           "title": "B Uri Residence Permit: Requirements and Renewal",
@@ -215,22 +248,22 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "Uri sick fund: deductibles, models and reduction",
-          "url": "/en/swiss-articles/uri-franchises-models-subsidy/",
-          "excerpt": "In Canton Uri, LAMal premiums vary by deductible and insurance model. Discover the bands available (CHF 300–2500), the coverage models and how to access the cantonal subsidy.",
-          "date": "2026-09-09T01:23:52.363Z"
+          "title": "Permit C canton Uri: years and procedure",
+          "url": "/en/swiss-articles/permit-c-canton-uri-request/",
+          "excerpt": "Federal and cantonal requirements to obtain residence permit C in Canton Uri: 10 years of residence, integration and language skills.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "Nursery and childcare in Canton Uri: cost and services",
-          "url": "/en/swiss-articles/nursery-and-childcare-in-canton-uri-cost-and-services/",
-          "excerpt": "Canton Uri offers daycare and childcare services, but what to expect and how do they work?",
-          "date": "2026-08-16T06:28:47.805Z"
+          "title": "Health insurance premiums Canton Uri and premium reduction",
+          "url": "/en/swiss-articles/health-insurance-premiums-canton-uri-and-premium-reduction/",
+          "excerpt": "The sick cash premiums in Canton Uri and the conditions for the reduction of the premiums.",
+          "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Nursery and childcare in Canton Uri: costs and options",
-          "url": "/en/swiss-articles/childcare-and-custody-in-ur-children-cantonal-costs/",
-          "excerpt": "Learn about the costs and options of daycare and childcare in Canton Uri.",
-          "date": "2026-08-16T07:43:34.393Z"
+          "title": "Uri: specific sick pay premiums and subsidies",
+          "url": "/en/swiss-articles/health-insurance-premiums-uri-subsidies/",
+          "excerpt": "The Canton of Uri applies specific rates for compulsory health insurance premiums (LAMal). Access to the subsidies takes place through the reduction of premiums, with flexible deductibles for adults.",
+          "date": "2026-08-28T04:24:42.361Z"
         }
       ],
       "links": [
@@ -255,7 +288,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "UR",
@@ -287,6 +320,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "14 °C",
+              "detail": "heute 11 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -302,22 +349,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Baubewilligung im Kanton Uri: Anforderungen und Verfahren",
+          "url": "/de/schweiz-artikel/baugesuch-uri-anforderungen/",
+          "excerpt": "Im Kanton Uri erfordert die Baubewilligung die Prüfung von Anforderungen, Unterlagen, Behörden, Fristen und Einsprachen: Die Arbeiten beginnen erst nach der Bewilligung.",
+          "date": "2026-10-11T11:17:28.171Z"
+        },
+        {
+          "title": "B-Bewilligung im Kanton Uri: Voraussetzungen und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthalt-b-kanton-uri-voraussetzungen-verlaengerung/",
+          "excerpt": "So beantragen und erneuern Sie die Aufenthaltsbewilligung B im Kanton Uri: Dokumente, Dauer, kantonale Migrationsstelle und vollständiger Ablauf.",
+          "date": "2026-08-28T04:32:29.395Z"
+        },
+        {
           "title": "Krankenkassenprämien URI und KVG-Prämienverbilligung",
           "url": "/de/schweiz-artikel/krankenkassenpraemien-uri-reduktion/",
           "excerpt": "Prämienleitfaden der obligatorischen Krankenkasse im Kanton Uri, Zeitabschnitte, Franchisen und Voraussetzungen für die Prämienverbilligung.",
           "date": "2026-08-28T04:09:53.075Z"
-        },
-        {
-          "title": "Krankenkassenprämien Kanton Uri und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-uri-und-pramienverbilligung/",
-          "excerpt": "Die Krankenkassenprämien im Kanton Uri und die Bedingungen für die Prämienverbilligung.",
-          "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "URI: Spezifische Krankenkassenprämien und Zuschüsse",
-          "url": "/de/schweiz-artikel/krankenkassenpraemien-uri-zuschuesse/",
-          "excerpt": "Der Kanton Uri wendet spezifische Tarife für die Prämien der obligatorischen Krankenversicherung (KVG) an. Der Zugang zu den Beiträgen erfolgt durch Prämienverbilligung mit flexiblen Franchisen für Erwachsene.",
-          "date": "2026-08-28T04:24:42.361Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Uri: Voraussetzungen und Verlängerung",
@@ -332,22 +379,22 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "URI-Krankenkasse: Selbstbehalte, Modelle und Reduktion",
-          "url": "/de/schweiz-artikel/uri-franchisen-modelle-subvention/",
-          "excerpt": "Im Kanton Uri variieren die KVG-Prämien je nach Franchise und Versicherungsmodell. Entdecken Sie die verfügbaren Spannen (CHF 300–2500), die Deckungsmodelle und wie Sie auf den Kantonsbeitrag zugreifen können.",
-          "date": "2026-09-09T01:23:52.363Z"
+          "title": "Ausweis C Kanton Uri: Jahre und Verfahren",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-kanton-uri-antrag/",
+          "excerpt": "Eidgenössische und kantonale Voraussetzungen für die Niederlassungsbewilligung C im Kanton Uri: 10 Jahre Aufenthalt, Integration und Sprachkenntnisse.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Uri: Kosten und Leistungen",
-          "url": "/de/schweiz-artikel/kindertagesstatte-und-kinderbetreuung-im-kanton-uri-kosten-und-leistungen/",
-          "excerpt": "Der Kanton Uri bietet Kinderkrippen und Kinderbetreuungseinrichtungen an, aber was ist zu erwarten und wie funktionieren sie?",
-          "date": "2026-08-16T06:28:47.805Z"
+          "title": "Krankenkassenprämien Kanton Uri und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-uri-und-pramienverbilligung/",
+          "excerpt": "Die Krankenkassenprämien im Kanton Uri und die Bedingungen für die Prämienverbilligung.",
+          "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Uri: Kosten und Optionen",
-          "url": "/de/schweiz-artikel/kindergarten-und-sorge-fur-kinder-kanton-ur-kosten/",
-          "excerpt": "Entdecken Sie die Kosten und Möglichkeiten der Kinderbetreuung im Kanton Uri.",
-          "date": "2026-08-16T07:43:34.393Z"
+          "title": "URI: Spezifische Krankenkassenprämien und Zuschüsse",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-uri-zuschuesse/",
+          "excerpt": "Der Kanton Uri wendet spezifische Tarife für die Prämien der obligatorischen Krankenversicherung (KVG) an. Der Zugang zu den Beiträgen erfolgt durch Prämienverbilligung mit flexiblen Franchisen für Erwachsene.",
+          "date": "2026-08-28T04:24:42.361Z"
         }
       ],
       "links": [
@@ -372,7 +419,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "UR",
@@ -404,6 +451,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Altdorf",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 11 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -419,22 +480,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Autorisation de construire dans le canton d’Uri : exigences et procédure",
+          "url": "/fr/articles-suisse/permis-construire-uri-exigences/",
+          "excerpt": "Dans le canton d’Uri, l’autorisation de construire nécessite des vérifications concernant les exigences, les documents, les services compétents, les délais et les oppositions : les travaux ne commencent qu’après…",
+          "date": "2026-10-11T11:17:28.171Z"
+        },
+        {
+          "title": "Permis B dans le canton d'Uri : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-canton-uri-conditions-renouvellement/",
+          "excerpt": "Comment demander et renouveler le permis de séjour B dans le canton d'Uri : documents, durée, office cantonal des migrations et parcours complet.",
+          "date": "2026-08-28T04:32:29.395Z"
+        },
+        {
           "title": "Primes caisse-maladie URI et réduction des primes LAMal",
           "url": "/fr/articles-suisse/primes-assurance-maladie-uri-reduction/",
           "excerpt": "Guide des primes de la caisse-maladie obligatoire dans le canton d'Uri, des tranches, des franchises et des conditions de réduction des primes.",
           "date": "2026-08-28T04:09:53.075Z"
-        },
-        {
-          "title": "Primes caisse-maladie Canton URI et réduction des primes",
-          "url": "/fr/articles-suisse/primes-caisse-maladie-canton-uri-et-reduction-des-primes/",
-          "excerpt": "Les primes caisse-maladie dans le canton d'Uri et les conditions de réduction des primes.",
-          "date": "2026-08-15T23:51:12.284Z"
-        },
-        {
-          "title": "URI : primes de caisse-maladie spécifiques et subventions",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-uri-subventions/",
-          "excerpt": "Le canton d'Uri applique des tarifs spécifiques pour les primes de l'assurance maladie obligatoire (LAMal). L'accès aux subventions se fait par la réduction des primes, avec des franchises flexibles pour les adultes.",
-          "date": "2026-08-28T04:24:42.361Z"
         },
         {
           "title": "Permis de séjour B URI : exigences et renouvellement",
@@ -449,22 +510,22 @@
           "date": "2026-08-16T00:13:35.081Z"
         },
         {
-          "title": "Caisse maladie URI : franchises, modèles et réduction",
-          "url": "/fr/articles-suisse/uri-franchises-modeles-subsides/",
-          "excerpt": "Dans le canton d'Uri, les primes LAMal varient selon la franchise et le modèle d'assurance. Découvrez les tranches disponibles (CHF 300–2500), les modèles de couverture et comment accéder à l'allocation cantonale.",
-          "date": "2026-09-09T01:23:52.363Z"
+          "title": "Permis C canton URI : années et procédure",
+          "url": "/fr/articles-suisse/permis-c-canton-uri-demande/",
+          "excerpt": "Conditions fédérales et cantonales pour obtenir le permis de séjour C dans le canton d'Uri : 10 ans de résidence, d'intégration et de connaissances linguistiques.",
+          "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "Garderie et garde d'enfants dans le canton d'Uri : coût et services",
-          "url": "/fr/articles-suisse/garderie-et-garde-d-enfants-dans-le-canton-d-uri-cout-et-services/",
-          "excerpt": "Le canton d'Uri offre des garderies et des services de garde d'enfants, mais à quoi s'attendre et comment fonctionnent-ils ?",
-          "date": "2026-08-16T06:28:47.805Z"
+          "title": "Primes caisse-maladie Canton URI et réduction des primes",
+          "url": "/fr/articles-suisse/primes-caisse-maladie-canton-uri-et-reduction-des-primes/",
+          "excerpt": "Les primes caisse-maladie dans le canton d'Uri et les conditions de réduction des primes.",
+          "date": "2026-08-15T23:51:12.284Z"
         },
         {
-          "title": "Garde d'enfants dans le canton d'Uri : coûts et options",
-          "url": "/fr/articles-suisse/garderie-etrust-enfant-en-ur-couts-cantonaux/",
-          "excerpt": "Découvrez les coûts et les options de la garderie et de la garde d'enfants dans le canton d'Uri.",
-          "date": "2026-08-16T07:43:34.393Z"
+          "title": "URI : primes de caisse-maladie spécifiques et subventions",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-uri-subventions/",
+          "excerpt": "Le canton d'Uri applique des tarifs spécifiques pour les primes de l'assurance maladie obligatoire (LAMal). L'accès aux subventions se fait par la réduction des primes, avec des franchises flexibles pour les adultes.",
+          "date": "2026-08-28T04:24:42.361Z"
         }
       ],
       "links": [
@@ -485,7 +546,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

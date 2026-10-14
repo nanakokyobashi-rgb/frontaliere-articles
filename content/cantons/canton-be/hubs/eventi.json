@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "3e73cf479ae9ad45ab7d194d66261997912868e4a26b5479e84a26789ff7ab2a",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "2e7ae940fece65abc0db438b1ed42b02883442732868a1f0ee90297a6d2e2f1f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -116,6 +116,12 @@
           "url": "/articoli-svizzera/elezioni-berna-guida-voto/",
           "excerpt": "Guida pratica alle elezioni cantonali nel Cantone di Berna: sistema elettorale, calendario, modalità di voto, liste e competenze istituzionali.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Aprire un'attività a Berna: procedure e costi",
+          "url": "/articoli-svizzera/avviare-ditta-berna-registrazione/",
+          "excerpt": "Guida completa all'apertura nel Cantone di Berna: forme giuridiche, iscrizione registro commercio, imposte a tre livelli e obblighi assicurativi per dipendenti.",
+          "date": "2026-08-26T00:30:42.460Z"
         }
       ],
       "links": [
@@ -128,7 +134,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BE",
@@ -232,6 +238,12 @@
           "url": "/en/swiss-articles/bern-cantonal-elections-voting-guide/",
           "excerpt": "Practical guide to cantonal elections in the Canton of Bern: electoral system, calendar, voting procedures, lists and institutional responsibilities.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Opening a business in Bern: procedures and costs",
+          "url": "/en/swiss-articles/starting-business-bern-registration/",
+          "excerpt": "Complete guide to opening in the Canton of Bern: legal forms, trade register registration, three-tier taxes and insurance obligations for employees.",
+          "date": "2026-08-26T00:30:42.460Z"
         }
       ],
       "links": [
@@ -244,7 +256,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BE",
@@ -348,6 +360,12 @@
           "url": "/de/schweiz-artikel/kantonale-wahlen-bern-abstimmungsfuehrer/",
           "excerpt": "Praktischer Leitfaden zu den kantonalen Wahlen im Kanton Bern: Wahlsystem, Zeitplan, Abstimmungsmodalitäten, Listen und institutionelle Kompetenzen.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Ein Geschäft in Bern eröffnen: Verfahren und Kosten",
+          "url": "/de/schweiz-artikel/geschaeft-eroeffnung-bern-registrierung/",
+          "excerpt": "Vollständiger Leitfaden zur Eröffnung im Kanton Bern: Rechtsformen, Handelsregistereintrag, dreistufige Steuern und Versicherungsverpflichtungen für Arbeitnehmer.",
+          "date": "2026-08-26T00:30:42.460Z"
         }
       ],
       "links": [
@@ -360,7 +378,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -464,6 +482,12 @@
           "url": "/fr/articles-suisse/elections-cantonales-berne-guide-vote/",
           "excerpt": "Guide pratique des élections cantonales dans le canton de Berne : système électoral, calendrier, modalités de vote, listes et compétences institutionnelles.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Ouvrir une entreprise à Berne : procédures et coûts",
+          "url": "/fr/articles-suisse/demarrer-entreprise-berne-enregistrement/",
+          "excerpt": "Guide complet d'ouverture dans le canton de Berne : formes juridiques, inscription au registre du commerce, impôts à trois niveaux et obligations d'assurance pour les salariés.",
+          "date": "2026-08-26T00:30:42.460Z"
         }
       ],
       "links": [
@@ -476,7 +500,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

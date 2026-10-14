@@ -4,13 +4,18 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "49a08ca26f2176b39799e24078425071cee72e5b6527a0ac3ee4afe433322916",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "dbabbffe931be2dacb81c5787e63c805aee9690786e99c552ccae9b0b16fd183",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -49,6 +54,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "16 °C",
+              "detail": "oggi da 11 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -63,6 +82,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
+          "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
+          "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
         {
           "title": "Patente di guida nel Canton Neuchâtel: conversione ed esami",
           "url": "/articoli-svizzera/patente-guida-neuchatel-conversione-ed-esami/",
@@ -108,7 +133,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "NE",
@@ -140,6 +165,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "16 °C",
+              "detail": "today from 11 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -154,6 +193,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "New asylum reception centre in Couvet: the project starts",
+          "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
+          "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
         {
           "title": "Driver's license in the canton of Neuchâtel: conversion and exams",
           "url": "/en/swiss-articles/driving-license-neuchatel-conversion-and-exams/",
@@ -195,7 +240,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "NE",
@@ -227,6 +272,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "16 °C",
+              "detail": "heute 11 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -241,6 +300,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
+          "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
+          "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
         {
           "title": "Führerschein im Kanton Neuenburg: Umschulung und Prüfungen",
           "url": "/de/schweiz-artikel/fuhrerschein-neuenburg-umwandlung-und-pruefungen/",
@@ -282,7 +347,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "NE",
@@ -314,6 +379,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Neuchâtel",
+              "value": "16 °C",
+              "detail": "aujourd’hui de 11 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -328,6 +407,12 @@
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
+          "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
+          "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
+          "date": "2026-10-10T19:55:31.284Z"
+        },
         {
           "title": "Permis de conduire dans le canton de Neuchâtel : conversion et examens",
           "url": "/fr/articles-suisse/permis-de-conduire-neuchatel-conversion-et-examens/",
@@ -365,7 +450,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

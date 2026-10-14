@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:41:07.739Z",
-  "contentHash": "67f24b8e6457aa21d43256a4b542ff5d1af2f7cc8216f5216011d67c22a99490",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "7bab09f44a93a3c0b29c934835daaa6506d63dd6f16343308307898cb93b52f4",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -120,21 +120,21 @@
               "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Canton Soletta: imposta di successione e donazione",
-          "url": "/articoli-svizzera/fisco-eredita-soletta/",
-          "excerpt": "Fiscalità svizzera a tre livelli: per il Cantone di Soletta contano parentela, esenzioni, dichiarazione e termini.",
-          "date": "2026-09-30T00:20:55.906Z"
-        },
         {
           "title": "Soletta: aliquote successione e donazione senza imposta federale",
           "url": "/articoli-svizzera/soletta-successione-donazione-aliquote/",
           "excerpt": "In Soletta la competenza è esclusivamente cantonale e comunale; AFC/ESTV non gestisce questo prelievo.",
           "date": "2026-09-29T20:00:46.355Z"
+        },
+        {
+          "title": "Canton Soletta: imposta di successione e donazione",
+          "url": "/articoli-svizzera/fisco-eredita-soletta/",
+          "excerpt": "Fiscalità svizzera a tre livelli: per il Cantone di Soletta contano parentela, esenzioni, dichiarazione e termini.",
+          "date": "2026-09-30T00:20:55.906Z"
         },
         {
           "title": "Imposte di successione e donazione nel Cantone di Soletta",
@@ -165,7 +165,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SO",
@@ -263,21 +263,21 @@
               "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Canton of Solothurn: inheritance and gift tax",
-          "url": "/en/swiss-articles/solothurn-inheritance-gift-tax/",
-          "excerpt": "Swiss taxation at three levels: for the Canton of Solothurn, kinship, exemptions, declaration and deadlines matter.",
-          "date": "2026-09-30T00:20:55.906Z"
-        },
         {
           "title": "Solothurn: inheritance and gift tax rates without federal tax",
           "url": "/en/swiss-articles/solothurn-inheritance-donation-rates/",
           "excerpt": "In Solothurn, responsibility lies exclusively with the canton and municipalities; AFC/ESTV does not administer this tax.",
           "date": "2026-09-29T20:00:46.355Z"
+        },
+        {
+          "title": "Canton of Solothurn: inheritance and gift tax",
+          "url": "/en/swiss-articles/solothurn-inheritance-gift-tax/",
+          "excerpt": "Swiss taxation at three levels: for the Canton of Solothurn, kinship, exemptions, declaration and deadlines matter.",
+          "date": "2026-09-30T00:20:55.906Z"
         },
         {
           "title": "Inheritance and gift taxes in the Canton of Solothurn",
@@ -308,7 +308,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SO",
@@ -406,21 +406,21 @@
               "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Kanton Solothurn: Erbschafts- und Schenkungssteuer",
-          "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-solothurn/",
-          "excerpt": "Dreistufige Schweizer Besteuerung: Für den Kanton Solothurn zählen Verwandtschaft, Befreiungen, Erklärung und Fristen.",
-          "date": "2026-09-30T00:20:55.906Z"
-        },
         {
           "title": "Solothurn: Erbschafts- und Schenkungssteuersätze ohne Bundessteuer",
           "url": "/de/schweiz-artikel/solothurn-erbschaft-schenkung-saetze/",
           "excerpt": "In Solothurn liegt die Zuständigkeit ausschließlich beim Kanton und bei der Gemeinde; AFC/ESTV verwaltet diese Abgabe nicht.",
           "date": "2026-09-29T20:00:46.355Z"
+        },
+        {
+          "title": "Kanton Solothurn: Erbschafts- und Schenkungssteuer",
+          "url": "/de/schweiz-artikel/erbschafts-schenkungssteuer-solothurn/",
+          "excerpt": "Dreistufige Schweizer Besteuerung: Für den Kanton Solothurn zählen Verwandtschaft, Befreiungen, Erklärung und Fristen.",
+          "date": "2026-09-30T00:20:55.906Z"
         },
         {
           "title": "Erbschafts- und Schenkungssteuern im Kanton Solothurn",
@@ -451,7 +451,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SO",
@@ -549,21 +549,21 @@
               "url": "https://so.ch/verwaltung/finanzdepartement/steueramt/aktuell/aktuell/news/neuorganisation-abteilung-natuerliche-personen/"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Canton de Soleure : impôt sur les successions et les donations",
-          "url": "/fr/articles-suisse/impot-succession-donation-soleure/",
-          "excerpt": "Fiscalité suisse à trois niveaux : pour le canton de Soleure, le lien de parenté, les exonérations, la déclaration et les délais comptent.",
-          "date": "2026-09-30T00:20:55.906Z"
-        },
         {
           "title": "Soleure : taux des droits de succession et de donation sans impôt fédéral",
           "url": "/fr/articles-suisse/soleure-heritage-donation-taux/",
           "excerpt": "À Soleure, la compétence est exclusivement cantonale et communale ; AFC/ESTV ne gère pas ce prélèvement.",
           "date": "2026-09-29T20:00:46.355Z"
+        },
+        {
+          "title": "Canton de Soleure : impôt sur les successions et les donations",
+          "url": "/fr/articles-suisse/impot-succession-donation-soleure/",
+          "excerpt": "Fiscalité suisse à trois niveaux : pour le canton de Soleure, le lien de parenté, les exonérations, la déclaration et les délais comptent.",
+          "date": "2026-09-30T00:20:55.906Z"
         },
         {
           "title": "Impôts de succession et donation dans le canton de Soleure",
@@ -594,7 +594,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:41:07.739Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

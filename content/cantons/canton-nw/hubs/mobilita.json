@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "8a1d60d9f40613d77c5c2e283631a2a421a1fa3c567fb54a7aa2cb04c9bb6650",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "3c42d8fd042b1c38ff551d7302c7031a8f15479d34d06e495034fec17b9be29f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -139,6 +139,12 @@
           "url": "/articoli-svizzera/nidvaldo-trasporti-pubblici/",
           "excerpt": "Guida completa ai trasporti pubblici nel Cantone di Nidvaldo, alle comunità tariffarie, alle zone, agli abbonamenti e alle combinazioni con i titoli di viaggio federali.",
           "date": "2026-08-16T23:28:45.057Z"
+        },
+        {
+          "title": "Sistema scolastico Canton Nidvaldo: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-nidvaldo-iscrizione-e-cicli/",
+          "excerpt": "I cicli scolastici e le scadenze per l'iscrizione nel Canton Nidvaldo",
+          "date": "2026-08-16T20:51:37.781Z"
         }
       ],
       "links": [
@@ -151,7 +157,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "NW",
@@ -273,6 +279,12 @@
           "url": "/en/swiss-articles/nidwalden-public-transport-passes-zones/",
           "excerpt": "Comprehensive guide to public transport in the Canton of Nidwalden, fare communities, zones, season tickets and combinations with federal travel documents.",
           "date": "2026-08-16T23:28:45.057Z"
+        },
+        {
+          "title": "Canton Nidwalden school system: enrolment and cycles",
+          "url": "/en/swiss-articles/canton-nidwalden-school-system-enrolment-and-cycles/",
+          "excerpt": "School curricula and deadlines for enrolment in the Canton of Nidwalden",
+          "date": "2026-08-16T20:51:37.781Z"
         }
       ],
       "links": [
@@ -285,7 +297,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "NW",
@@ -407,6 +419,12 @@
           "url": "/de/schweiz-artikel/nidwalden-oev-abos-zonen/",
           "excerpt": "Umfassender Leitfaden zum öffentlichen Verkehr im Kanton Nidwalden, zu Tarifgemeinschaften, Zonen, Abos und Kombinationen mit eidgenössischen Fahrausweisen.",
           "date": "2026-08-16T23:28:45.057Z"
+        },
+        {
+          "title": "Schulsystem Kanton Nidwalden: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/schulsystem-kanton-nidwalden-einschreibung-und-zyklen/",
+          "excerpt": "Die Schulzyklen und Anmeldefristen im Kanton Nidwalden",
+          "date": "2026-08-16T20:51:37.781Z"
         }
       ],
       "links": [
@@ -419,7 +437,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "NW",
@@ -541,6 +559,12 @@
           "url": "/fr/articles-suisse/nidwald-transports-publics-abonnements-zones/",
           "excerpt": "Guide complet des transports publics dans le canton de Nidwald, des communautés tarifaires, des zones, des abonnements et des combinaisons avec les titres de voyage fédéraux.",
           "date": "2026-08-16T23:28:45.057Z"
+        },
+        {
+          "title": "Système scolaire canton de Nidwald : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-scolaire-canton-de-nidwald-inscription-et-cycles/",
+          "excerpt": "Les cycles scolaires et les délais d'inscription dans le canton de Nidwald",
+          "date": "2026-08-16T20:51:37.781Z"
         }
       ],
       "links": [
@@ -553,7 +577,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

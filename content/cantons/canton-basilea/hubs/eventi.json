@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "052d745ab5b5330768f49871ebd10e66989446f52b78908b4948af43b41aa055",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "13f9c0e6c6cccb8bd5829e558e05a5cc429218388788395f6f774505b810e04f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,7 +98,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Gratis al museo in costume da bagno: l'iniziativa della Fondazione Beyeler",
+          "url": "/articoli-frontaliere/gratis-museo-costume-bagno-2026/",
+          "excerpt": "La Fondazione Beyeler di Riehen offre ingresso gratuito in costume da bagno per una giornata dedicata a Paul Cézanne e ai suoi dipinti di bagnanti.",
+          "date": "2026-05-02T01:26:52.789Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nella regione di Basilea",
@@ -109,7 +116,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,7 +202,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Free Museum Entry in Swimwear at Beyeler Foundation",
+          "url": "/en/cross-border-articles/free-museum-swimwear-2026/",
+          "excerpt": "The Beyeler Foundation in Riehen offers free entry in swimwear for a day dedicated to Paul Cézanne and his paintings of bathers.",
+          "date": "2026-05-02T01:26:52.789Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the Basel region",
@@ -206,7 +220,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -292,7 +306,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Kostenlos im Museum im Badeanzug: Initiative der Fondation Beyeler",
+          "url": "/de/grenzgaenger-artikel/museum-kostenlos-badekleidung-2026/",
+          "excerpt": "Die Fondation Beyeler in Riehen bietet freien Eintritt im Badeanzug für einen Tag, der Paul Cézanne und seinen Gemälden von Badenden gewidmet ist.",
+          "date": "2026-05-02T01:26:52.789Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen in der Region Basel",
@@ -303,7 +324,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -389,7 +410,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Entrée gratuite en maillot de bain au musée Beyeler",
+          "url": "/fr/articles-frontalier/musee-gratuit-maillot-de-bain-2026/",
+          "excerpt": "La Fondation Beyeler de Riehen offre un accès gratuit en maillot de bain pour une journée dédiée à Paul Cézanne et à ses peintures de baigneurs.",
+          "date": "2026-05-02T01:26:52.789Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans la région bâloise",
@@ -400,7 +428,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

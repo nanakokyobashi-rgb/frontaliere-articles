@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "d37ee4175527a13c8779fee9e281b8e4c1725ea468cd5e8596bb8f5d2cfa4139",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "3161c2dda6ffdb87fb7f9eebd31b1a4d91ad35f629a9c941f025a04330673ee2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -53,10 +53,23 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Porrentruy: piscina comunale, frontalieri pagano il doppio",
+          "url": "/articoli-frontaliere/porrentruy-piscina-frontaliere-tariffe/",
+          "excerpt": "A Porrentruy, biglietti piscina raddoppiati per frontalieri e stop agli abbonamenti: adulti 15 CHF, giovani 10 CHF, solo online.",
+          "date": "2026-05-27T03:08:28.091Z"
+        },
+        {
+          "title": "Porrentruy potrà vietare l'accesso alla piscina comunale ai non residenti",
+          "url": "/articoli-frontaliere/porrentruy-piscina-comunale-divieto/",
+          "excerpt": "Il Consiglio comunale di Porrentruy ha approvato una modifica legale per autorizzare il Municipio a imporre restrizioni all'accesso della piscina all'aperto.",
+          "date": "2026-03-20T17:50:17.309Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Giura",
@@ -67,7 +80,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "JU",
@@ -108,10 +121,23 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Porrentruy: double pool tickets for cross-border workers",
+          "url": "/en/cross-border-articles/porrentruy-pool-crossborder-prices/",
+          "excerpt": "In Porrentruy, pool tickets for cross-border workers have doubled and season passes are no longer available: adults pay 15 CHF, youths 10 CHF, tickets only sold online.",
+          "date": "2026-05-27T03:08:28.091Z"
+        },
+        {
+          "title": "Porrentruy to restrict access to municipal pool for non-residents",
+          "url": "/en/cross-border-articles/porrentruy-municipal-pool-ban/",
+          "excerpt": "The Porrentruy Municipal Council has approved a legal amendment allowing the Municipal Council to impose restrictions on access to the outdoor municipal pool.",
+          "date": "2026-03-20T17:50:17.309Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Jura",
@@ -122,7 +148,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "JU",
@@ -163,10 +189,23 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Porrentruy: Stadtbad, Grenzgänger zahlen doppelt",
+          "url": "/de/grenzgaenger-artikel/porrentruy-schwimmbad-grenzgaenger-tarife/",
+          "excerpt": "In Porrentruy, Eintrittspreise für das Schwimmbad für Grenzgänger verdoppelt und Abonnements gestoppt: Erwachsene 15 Franken, Jugendliche 10 Franken, nur online verfügbar.",
+          "date": "2026-05-27T03:08:28.091Z"
+        },
+        {
+          "title": "Porrentruy kann den Zugang zum Gemeindepool für Nichtansässige verbieten",
+          "url": "/de/grenzgaenger-artikel/porrentruy-gemeinsames-schwimmbad-verbot/",
+          "excerpt": "Der Gemeinderat von Porrentruy hat eine Gesetzesänderung genehmigt, die es dem Municipio ermöglicht, den Zugang zum öffentlichen Pool einzuschränken.",
+          "date": "2026-03-20T17:50:17.309Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Jura",
@@ -177,7 +216,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "JU",
@@ -218,10 +257,23 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Porrentruy: piscine, frontaliers tarifs doublés",
+          "url": "/fr/articles-frontalier/porrentruy-piscine-frontaliers-tarifs/",
+          "excerpt": "A Porrentruy, tarifs piscine doublés pour les frontaliers et fin des abonnements: adultes 15 CHF, jeunes 10 CHF, uniquement en ligne.",
+          "date": "2026-05-27T03:08:28.091Z"
+        },
+        {
+          "title": "Porrentruy pourra interdire l'accès à la piscine communale aux non-résidents",
+          "url": "/fr/articles-frontalier/porrentruy-piscine-communale-interdiction/",
+          "excerpt": "Le Conseil communal de Porrentruy a approuvé une modification légale pour autoriser le Municipalité à imposer des restrictions d'accès à la piscine en plein air.",
+          "date": "2026-03-20T17:50:17.309Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton du Jura",
@@ -232,7 +284,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

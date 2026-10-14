@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "c2990e897268c0ef55197cbfe0eea63d695cc58a0187e5f46b05f1a8a691bc9c",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "3a4e0717f81cece81871e215e33b91389335aca185dd7d33d462e4ad57a257b0",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -125,6 +125,24 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-pubblici-canton-lucerna/",
           "excerpt": "La VBL offre diversi tipi di abbonamenti, tra cui il abbonamento mensile e annuale, per i residenti e gli studenti.",
           "date": "2026-08-15T21:36:07.353Z"
+        },
+        {
+          "title": "Lugano-Lucerna a Cornaredo: strade chiuse e ritardi sabato",
+          "url": "/articoli-frontaliere/lugano-lucerna-partita-traffico/",
+          "excerpt": "Sabato: FC Lugano-FC Lucerna alle 18 a Cornaredo",
+          "date": "2026-10-08T11:18:04.293Z"
+        },
+        {
+          "title": "Sistema scolastico cantonale di Lucerna: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-lucerna-iscrizione-e-cicli/",
+          "excerpt": "Informati sui cicli di scuola, età di iscrizione e calendario scolastico per il Cantone di Lucerna",
+          "date": "2026-08-14T02:37:30.479Z"
+        },
+        {
+          "title": "Lucerna supera Zugo: nuovo paradiso fiscale per le imprese",
+          "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
+          "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -137,7 +155,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "LU",
@@ -244,6 +262,23 @@
           "url": "/en/swiss-articles/public-transport-passes-canton-lucerne-zones-and-fares/",
           "excerpt": "The VBL offers different types of subscriptions, including monthly and annual subscription, for residents and students.",
           "date": "2026-08-15T21:36:07.353Z"
+        },
+        {
+          "title": "Lucerne fans in Lugano: road closures, traffic delays",
+          "url": "/en/cross-border-articles/lucerne-fans-in-lugano-road-closures-traffic-delays/",
+          "date": "2026-10-08T11:18:04.293Z"
+        },
+        {
+          "title": "Lucerne cantonal school system: enrolment and cycles",
+          "url": "/en/swiss-articles/lucerne-school-system-enrollment-and-cycles/",
+          "excerpt": "Find out about the school cycles, enrolment age and school calendar for the Canton of Lucerne",
+          "date": "2026-08-14T02:37:30.479Z"
+        },
+        {
+          "title": "Lucerne overtakes Zug: new tax haven for businesses",
+          "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
+          "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -256,7 +291,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "LU",
@@ -363,6 +398,23 @@
           "url": "/de/schweiz-artikel/ov-abos-kanton-luzern-zonen-und-tarife/",
           "excerpt": "Die VBL bietet verschiedene Arten von Abonnements, einschließlich Monats- und Jahresabonnements, für Bewohner und Studenten an.",
           "date": "2026-08-15T21:36:07.353Z"
+        },
+        {
+          "title": "Luzern-Fans in Lugano: Straßensperrungen, Verkehrsbehinderungen",
+          "url": "/de/grenzgaenger-artikel/luzern-fans-in-lugano-stra-ensperrungen-verkehrsbehinderungen/",
+          "date": "2026-10-08T11:18:04.293Z"
+        },
+        {
+          "title": "Kantonales Schulsystem Luzern: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/kantonales-schulsystem-luzern-einschreibung-und-zyklen/",
+          "excerpt": "Informieren Sie sich über die Schulzyklen, das Einschreibealter und den Schulkalender für den Kanton Luzern",
+          "date": "2026-08-14T02:37:30.479Z"
+        },
+        {
+          "title": "Luzern überholt Zug: Neuer Steuerparadies für Unternehmen",
+          "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
+          "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -375,7 +427,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "LU",
@@ -483,6 +535,24 @@
           "url": "/fr/articles-suisse/abonnements-transports-publics-canton-lucerne-zones-et-tarifs/",
           "excerpt": "La VBL propose différents types d'abonnements, dont l'abonnement mensuel et annuel, pour les résidents et les étudiants.",
           "date": "2026-08-15T21:36:07.353Z"
+        },
+        {
+          "title": "Supporters de Lucerne à Lugano : fermetures de routes, retards de circulation",
+          "url": "/fr/articles-frontalier/supporters-de-lucerne-a-lugano-fermetures-de-routes-retards-de-circulation/",
+          "excerpt": "Samedi : FC Lugano-FC Lucerne à 18 h à Cornaredo",
+          "date": "2026-10-08T11:18:04.293Z"
+        },
+        {
+          "title": "Système scolaire cantonal de Lucerne : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-scolaire-canton-lucerne-inscription-et-cycles/",
+          "excerpt": "Renseignez-vous sur les cycles scolaires, l'âge d'inscription et le calendrier scolaire pour le canton de Lucerne",
+          "date": "2026-08-14T02:37:30.479Z"
+        },
+        {
+          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
+          "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
+          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -495,7 +565,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

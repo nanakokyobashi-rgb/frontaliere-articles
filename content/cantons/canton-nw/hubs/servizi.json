@@ -4,13 +4,18 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "ca08c03f65e115a23cdc140cd037e5f7b57c22ac13fe623e49dd7416305b0f6b",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "c8cd1cf54b8a139bd6633f04751db6b22876b9c639259c3698f47b65481b1916",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -49,6 +54,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "oggi da 11 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -79,10 +98,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Premi cassa malati canton Nidvaldo e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-cantone-nidvaldo/",
-          "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Cantone di Nidvaldo ha ridotto i premi per le assicurazioni malattie.",
-          "date": "2026-08-16T19:00:08.445Z"
+          "title": "Permesso B: rinnovo e requisiti nel Nidvaldo",
+          "url": "/articoli-svizzera/permesso-b-nidvaldo-procedura-rinnovo/",
+          "excerpt": "Come rinnovare il permesso di dimora B nel Cantone di Nidvaldo: procedura amministrativa, documenti obbligatori, durata della validità e contatti dell'amministrazione.",
+          "date": "2026-09-04T06:55:02.066Z"
+        },
+        {
+          "title": "Permesso B Nidvaldo: guida a requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-nidvaldo/",
+          "excerpt": "Permesso di dimora B nel Canton Nidvaldo: come richiederlo, quali documenti servono, durata e procedura di rinnovo con contatti ufficio migrazione.",
+          "date": "2026-08-23T10:13:59.842Z"
+        },
+        {
+          "title": "Permesso C Canton Nidvaldo: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-nidvaldo-requisiti/",
+          "excerpt": "Guida completa al permesso di domicilio C nel Cantone di Nidvaldo: anni di residenza, criteri di integrazione e procedura.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Permesso di dimora B nel Cantone di Nidvaldo: requisiti e rinnovo",
@@ -91,10 +122,10 @@
           "date": "2026-08-16T19:18:57.651Z"
         },
         {
-          "title": "Asilo nido e custodia bambini Canton Nidvaldo: costi",
-          "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-nidvaldo-costi/",
-          "excerpt": "I costi per l'asilo nido e la custodia dei bambini nel Canton Nidvaldo possono variare in base al tipo di assistenza richiesta.",
-          "date": "2026-08-16T23:10:33.638Z"
+          "title": "Premi cassa malati canton Nidvaldo e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-cantone-nidvaldo/",
+          "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Cantone di Nidvaldo ha ridotto i premi per le assicurazioni malattie.",
+          "date": "2026-08-16T19:00:08.445Z"
         },
         {
           "title": "Patente di guida in Nidvaldo: conversione e esami obbligatori",
@@ -103,16 +134,16 @@
           "date": "2026-08-17T01:54:54.677Z"
         },
         {
-          "title": "Patente di guida nel Cantone di Nidvaldo: conversione e esami",
-          "url": "/articoli-svizzera/patente-guida-canton-nidvaldo-conversione-ed-esami/",
-          "excerpt": "Per ottenere la patente di guida nel Cantone di Nidvaldo, i frontaliari devono convertire la loro licenza estera e superare un esame teorico e pratico, nonché iscriversi a corsi obbligatori.",
-          "date": "2026-08-16T23:55:01.723Z"
-        },
-        {
           "title": "Permesso di domicilio C nel Cantone di Nidvaldo: requisiti e domanda",
           "url": "/articoli-svizzera/permesso-di-domicilio-c-nidvaldo-requisiti-e-domanda/",
           "excerpt": "Requisiti di integrazione, conoscenze linguistiche e procedura di domanda per il permesso di domicilio C nel Cantone di Nidvaldo.",
           "date": "2026-08-16T20:42:07.603Z"
+        },
+        {
+          "title": "Permessi L di breve durata nel Canton Nidvaldo: validità e proroga",
+          "url": "/articoli-svizzera/permesso-l-di-breve-durata-canton-nidvaldo-validita-e-proroga/",
+          "excerpt": "Il permesso L di breve durata nel Canton Nidvaldo è valido per un massimo di 1 anno.",
+          "date": "2026-08-16T19:30:43.489Z"
         }
       ],
       "links": [
@@ -141,7 +172,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "NW",
@@ -171,6 +202,20 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "today from 11 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -203,10 +248,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Canton Nidwalden health insurance premiums and premium reductions",
-          "url": "/en/swiss-articles/canton-nidwalden-health-insurance-premiums/",
-          "excerpt": "The law on compulsory health insurance in the Canton of Nidwalden has reduced health insurance premiums.",
-          "date": "2026-08-16T19:00:08.445Z"
+          "title": "Permit B: renewal and requirements in the Nidwalden",
+          "url": "/en/swiss-articles/permit-b-nidwalden-renewal-procedure/",
+          "excerpt": "How to renew the residence permit B in the Canton of Nidwalden: administrative procedure, mandatory documents, duration of validity and contacts of the administration.",
+          "date": "2026-09-04T06:55:02.066Z"
+        },
+        {
+          "title": "Permit B Nidwalden: guide to requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-nidwalden/",
+          "excerpt": "Residence permit B in Canton Nidwalden: how to request it, what documents are needed, duration and renewal procedure with migration office contacts.",
+          "date": "2026-08-23T10:13:59.842Z"
+        },
+        {
+          "title": "Permit C Canton Nidwalden: requirements and application",
+          "url": "/en/swiss-articles/permits-c-nidwalden-requirements/",
+          "excerpt": "Complete guide to residence permit C in the Canton of Nidwalden: years of residence, integration criteria and procedure.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Residence permit B in the Canton of Nidwalden: requirements and renewal",
@@ -215,10 +272,10 @@
           "date": "2026-08-16T19:18:57.651Z"
         },
         {
-          "title": "Nursery and childcare Canton Nidwalden: costs",
-          "url": "/en/swiss-articles/nursery-and-childcare-canton-nidwalden-costs/",
-          "excerpt": "Costs for daycare and childcare in Canton Nidwalden may vary depending on the type of assistance required.",
-          "date": "2026-08-16T23:10:33.638Z"
+          "title": "Canton Nidwalden health insurance premiums and premium reductions",
+          "url": "/en/swiss-articles/canton-nidwalden-health-insurance-premiums/",
+          "excerpt": "The law on compulsory health insurance in the Canton of Nidwalden has reduced health insurance premiums.",
+          "date": "2026-08-16T19:00:08.445Z"
         },
         {
           "title": "Driving licence in Nidwalden: conversion and mandatory exams",
@@ -227,16 +284,16 @@
           "date": "2026-08-17T01:54:54.677Z"
         },
         {
-          "title": "Driver's license in the Canton of Nidwalden: conversion and exams",
-          "url": "/en/swiss-articles/driver-s-license-in-the-canton-of-nidwalden-conversion-and-exams/",
-          "excerpt": "To obtain a driving licence in the Canton of Nidwalden, frontier workers must convert their foreign licence and pass a theoretical and practical exam, as well as enrol in compulsory courses.",
-          "date": "2026-08-16T23:55:01.723Z"
-        },
-        {
           "title": "Residence permit C in the Canton of Nidwalden: requirements and application",
           "url": "/en/swiss-articles/permesso-di-domicilio-c-nidwalden/",
           "excerpt": "Integration requirements, language skills and application procedure for residence permit C in the Canton of Nidwalden.",
           "date": "2026-08-16T20:42:07.603Z"
+        },
+        {
+          "title": "Short-term L permits in the canton of Nidwalden: validity and extension",
+          "url": "/en/swiss-articles/permesso-l-brief-duration-nidwalden-canton/",
+          "excerpt": "The short-term L permit in Canton Nidwalden is valid for a maximum of 1 year.",
+          "date": "2026-08-16T19:30:43.489Z"
         }
       ],
       "links": [
@@ -261,7 +318,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "NW",
@@ -291,6 +348,20 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "heute 11 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -323,10 +394,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Krankenkassenprämien Kanton Nidwalden und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/kanton-nidwalden-krankenversicherungspramien/",
-          "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Nidwalden hat die Prämien für die Krankenversicherungen gesenkt.",
-          "date": "2026-08-16T19:00:08.445Z"
+          "title": "Führerschein B: Erneuerung und Voraussetzungen im Nidwalden",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-nidwalden-verlaengerung/",
+          "excerpt": "So erneuern Sie die Aufenthaltsbewilligung B im Kanton Nidwalden: Verwaltungsverfahren, Pflichtdokumente, Gültigkeitsdauer und Kontakte der Verwaltung.",
+          "date": "2026-09-04T06:55:02.066Z"
+        },
+        {
+          "title": "Führerschein B Nidwalden: Anforderungs- und Verlängerungsleitfaden",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-nidwalden/",
+          "excerpt": "Aufenthaltsbewilligung B im Kanton Nidwalden: Wie beantragt man sie, welche Dokumente benötigt werden, Dauer und Erneuerungsverfahren mit Kontakten der Migrationsstelle.",
+          "date": "2026-08-23T10:13:59.842Z"
+        },
+        {
+          "title": "C-Genehmigung Kanton Nidwalden: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/bewilligung-c-nidwalden-voraussetzungen/",
+          "excerpt": "Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Nidwalden: Aufenthaltsjahre, Integrationskriterien und Verfahren.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Aufenthaltsbewilligung B im Kanton Nidwalden: Voraussetzungen und Verlängerung",
@@ -335,10 +418,10 @@
           "date": "2026-08-16T19:18:57.651Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung Kanton Nidwalden: Kosten",
-          "url": "/de/schweiz-artikel/kindertagesstatte-und-kinderbetreuung-kanton-nidwalden-kosten/",
-          "excerpt": "Die Kosten für Kindergarten und Kinderbetreuung im Kanton Nidwalden können je nach Art der benötigten Betreuung variieren.",
-          "date": "2026-08-16T23:10:33.638Z"
+          "title": "Krankenkassenprämien Kanton Nidwalden und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/kanton-nidwalden-krankenversicherungspramien/",
+          "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Nidwalden hat die Prämien für die Krankenversicherungen gesenkt.",
+          "date": "2026-08-16T19:00:08.445Z"
         },
         {
           "title": "Führerschein in Nidwalden: Umschulung und Pflichtprüfungen",
@@ -347,16 +430,16 @@
           "date": "2026-08-17T01:54:54.677Z"
         },
         {
-          "title": "Führerschein im Kanton Nidwalden: Umschulung und Prüfungen",
-          "url": "/de/schweiz-artikel/fuhrerschein-im-kanton-nidwalden-umschulung-und-prufungen/",
-          "excerpt": "Um den Führerschein im Kanton Nidwalden zu erhalten, müssen die Frontalangestellten ihren ausländischen Führerschein umtauschen und eine theoretische und praktische Prüfung ablegen sowie sich in Pflichtkursen…",
-          "date": "2026-08-16T23:55:01.723Z"
-        },
-        {
           "title": "Niederlassungsbewilligung C im Kanton Nidwalden: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/permesso-di-domicilio-c-nidwalden/",
           "excerpt": "Integrationsvoraussetzungen, Sprachkenntnisse und Antragsverfahren für die Niederlassungsbewilligung C im Kanton Nidwalden.",
           "date": "2026-08-16T20:42:07.603Z"
+        },
+        {
+          "title": "Kurzfristige L-Bewilligungen im Kanton Nidwalden: Gültigkeit und Verlängerung",
+          "url": "/de/schweiz-artikel/ermesse-l-kurze-geltung-nidwalden-kanton/",
+          "excerpt": "Der Kurzzeitausweis L im Kanton Nidwalden ist maximal 1 Jahr gültig.",
+          "date": "2026-08-16T19:30:43.489Z"
         }
       ],
       "links": [
@@ -381,7 +464,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "NW",
@@ -411,6 +494,20 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 11 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,10 +540,22 @@
       ],
       "curatedArticles": [
         {
-          "title": "Primes caisse-maladie canton de Nidwald et réduction des primes",
-          "url": "/fr/articles-suisse/canton-nidwald-premies-assurance-maladie/",
-          "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Nidwald a réduit les primes pour les assurances-maladie.",
-          "date": "2026-08-16T19:00:08.445Z"
+          "title": "Permis B : renouvellement et exigences dans le Nidwald",
+          "url": "/fr/articles-suisse/permis-b-nidwald-procedure-renouvellement/",
+          "excerpt": "Comment renouveler le permis de séjour B dans le canton de Nidwald : procédure administrative, documents obligatoires, durée de validité et contacts de l'administration.",
+          "date": "2026-09-04T06:55:02.066Z"
+        },
+        {
+          "title": "Permis B Nidwald : guide des exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-nidwald/",
+          "excerpt": "Permis de séjour B dans le canton de Nidwald : comment le demander, quels sont les documents nécessaires, la durée et la procédure de renouvellement avec les contacts du service des migrations.",
+          "date": "2026-08-23T10:13:59.842Z"
+        },
+        {
+          "title": "Permis C canton Nidwald : exigences et demande",
+          "url": "/fr/articles-suisse/permis-c-nidwald-conditions/",
+          "excerpt": "Guide complet du permis de séjour C dans le canton de Nidwald : années de résidence, critères d'intégration et procédure.",
+          "date": "2026-09-14T00:24:26.273Z"
         },
         {
           "title": "Permis de séjour B dans le canton de Nidwald : exigences et renouvellement",
@@ -455,10 +564,10 @@
           "date": "2026-08-16T19:18:57.651Z"
         },
         {
-          "title": "Garderie et garde d'enfants Canton de Nidwald : coûts",
-          "url": "/fr/articles-suisse/garderie-et-garde-d-enfants-canton-de-nidwald-couts/",
-          "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Nidwald peuvent varier en fonction du type d'assistance demandée.",
-          "date": "2026-08-16T23:10:33.638Z"
+          "title": "Primes caisse-maladie canton de Nidwald et réduction des primes",
+          "url": "/fr/articles-suisse/canton-nidwald-premies-assurance-maladie/",
+          "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Nidwald a réduit les primes pour les assurances-maladie.",
+          "date": "2026-08-16T19:00:08.445Z"
         },
         {
           "title": "Permis de conduire à Nidwald : conversion et examens obligatoires",
@@ -467,16 +576,16 @@
           "date": "2026-08-17T01:54:54.677Z"
         },
         {
-          "title": "Permis de conduire dans le canton de Nidwald : conversion et examens",
-          "url": "/fr/articles-suisse/permis-de-conduire-dans-le-canton-de-nidwald-conversion-et-examens/",
-          "excerpt": "Pour obtenir le permis de conduire dans le canton de Nidwald, les frontaliers doivent convertir leur licence étrangère et passer un examen théorique et pratique, ainsi que s'inscrire aux cours obligatoires.",
-          "date": "2026-08-16T23:55:01.723Z"
-        },
-        {
           "title": "Permis de séjour C dans le canton de Nidwald : exigences et demande",
           "url": "/fr/articles-suisse/permesso-di-domicilio-c-nidwald/",
           "excerpt": "Conditions d'intégration, connaissances linguistiques et procédure de demande de permis de séjour C dans le canton de Nidwald.",
           "date": "2026-08-16T20:42:07.603Z"
+        },
+        {
+          "title": "Permis L de courte durée dans le canton de Nidwald : validité et prolongation",
+          "url": "/fr/articles-suisse/permis-l-breve-duree-nidwald-canton/",
+          "excerpt": "Le permis L de courte durée dans le canton de Nidwald est valable pour une durée maximale d'un an.",
+          "date": "2026-08-16T19:30:43.489Z"
         }
       ],
       "links": [
@@ -497,7 +606,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

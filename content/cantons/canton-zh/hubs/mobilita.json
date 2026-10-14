@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "a9dde5323fd9fd6eb3abbcdac32a8e3b52b686943cc775d82ec17935bdbcb111",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "e920e458d44ce0e4d7b41140cfa5637ada368629d34a85956050334cf2bc15ba",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -183,6 +183,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "SBB: 500 milioni per la flotta di Zurigo",
+          "url": "/articoli-zurigo/sbb-flotta-zurigo-500m/",
+          "excerpt": "Le SBB investono 500 milioni di franchi per rinnovare la flotta della S-Bahn di Zurigo: migliore ricezione mobile e nuove imbottiture sui treni zurighesi.",
+          "date": "2026-10-08T17:26:18.316Z"
+        },
+        {
+          "title": "Zurigo: no al divieto delle velostrade davanti alle scuole",
+          "url": "/articoli-zurigo/zurigo-velostrade-scuole/",
+          "excerpt": "Dopo le obiezioni provenienti da Wollishofen, il governo cantonale di Zurigo si schiera contro il divieto delle velostrade davanti alle scuole.",
+          "date": "2026-10-09T22:34:18.458Z"
+        },
+        {
           "title": "Abbonamenti trasporti pubblici Canton Zurigo: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-pubblici-canton-zurigo/",
           "excerpt": "Gli abbonamenti trasporti pubblici nel Canton Zurigo sono stati recentemente modificati.",
@@ -199,6 +211,18 @@
           "url": "/articoli-frontaliere/treno-guasto-bellinzona-2026/",
           "excerpt": "Guasto tecnico sopprime il treno delle 19:00, nessun sostitutivo. Passeggeri in attesa alla stazione di Bellinzona",
           "date": "2026-04-27T04:40:54.725Z"
+        },
+        {
+          "title": "Sistema scolastico del Cantone di Zurigo: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-zugo-iscrizione-e-cicli/",
+          "excerpt": "Il sistema scolastico del Cantone di Zurigo è caratterizzato da un ciclo di istruzione obbligatoria di 9 anni. Gli studenti frequentano le scuole elementari dal 1° al 6° grado, seguiti dalle scuole medie superiori.",
+          "date": "2026-08-17T10:27:42.514Z"
+        },
+        {
+          "title": "Il sistema scolastico del Canton Zurigo: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-zurigo-iscrizione-e-cicli/",
+          "excerpt": "Ecco i cicli e le età di iscrizione per la scuola dell'obbligo nel Canton Zurigo.",
+          "date": "2026-08-11T11:58:09.280Z"
         }
       ],
       "links": [
@@ -231,7 +255,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "ZH",
@@ -392,6 +416,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "SBB: 500 million for Zurich’s fleet",
+          "url": "/en/zurich-articles/sbb-zurich-sbahn-fleet/",
+          "excerpt": "SBB invest 500 million francs to renew Zurich’s S-Bahn fleet: better mobile reception and new upholstery on Zurich trains.",
+          "date": "2026-10-08T17:26:18.316Z"
+        },
+        {
+          "title": "Zurich: no to the ban on cycle highways in front of schools",
+          "url": "/en/zurich-articles/zurich-school-bike-routes-ban/",
+          "excerpt": "Following objections from Wollishofen, the cantonal government of Zurich opposes the ban on bicycle streets in front of schools.",
+          "date": "2026-10-09T22:34:18.458Z"
+        },
+        {
           "title": "Public transport tickets Canton Zurich: zones and fares",
           "url": "/en/swiss-articles/public-transport-abonnements-canton-zurich/",
           "excerpt": "Public transport passes in the Canton of Zurich have recently been changed.",
@@ -408,6 +444,18 @@
           "url": "/en/cross-border-articles/train-breakdown-bellinzona-2026/",
           "excerpt": "Technical fault cancels the 19:00 train, no replacement. Passengers waiting at Bellinzona station",
           "date": "2026-04-27T04:40:54.725Z"
+        },
+        {
+          "title": "School system of the Canton of Zurich: enrolment and cycles",
+          "url": "/en/swiss-articles/school-system-canton-zurich-enrolment-and-grades/",
+          "excerpt": "The school system of the Canton of Zurich is characterized by a 9-year compulsory education cycle. Students attend elementary schools from 1st to 6th grade, followed by middle and high schools.",
+          "date": "2026-08-17T10:27:42.514Z"
+        },
+        {
+          "title": "The school system of the Canton of Zurich: enrolment and cycles",
+          "url": "/en/swiss-articles/sistema-scolastico-canton-zurich-iscrizione-e-cicli/",
+          "excerpt": "Here are the cycles and enrolment ages for compulsory schooling in the Canton of Zurich.",
+          "date": "2026-08-11T11:58:09.280Z"
         }
       ],
       "links": [
@@ -440,7 +488,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "ZH",
@@ -601,6 +649,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "SBB: 500 Millionen für die Zürcher Flotte",
+          "url": "/de/zurich-artikel/sbb-zuercher-sbahn-flotte/",
+          "excerpt": "Die SBB investieren 500 Millionen Franken, um die Flotte der Zürcher S-Bahn zu erneuern: besserer Mobilfunkempfang und neue Polsterungen in den Zürcher Zügen.",
+          "date": "2026-10-08T17:26:18.316Z"
+        },
+        {
+          "title": "Zürich: Nein zum Verbot von Velostrassen vor Schulen",
+          "url": "/de/zurich-artikel/zuerich-veloschnellstrassen-schulen/",
+          "excerpt": "Nach Einwänden aus Wollishofen stellt sich die Zürcher Kantonsregierung gegen das Verbot von Velostrassen vor Schulen.",
+          "date": "2026-10-09T22:34:18.458Z"
+        },
+        {
           "title": "Abos ÖV Kanton Zürich: Zonen und Tarife",
           "url": "/de/schweiz-artikel/offentliche-verkehr-abonnements-kanton-zurich/",
           "excerpt": "Die ÖV-Abos im Kanton Zürich wurden kürzlich geändert.",
@@ -617,6 +677,18 @@
           "url": "/de/grenzgaenger-artikel/zugausfall-bellinzona-2026/",
           "excerpt": "Technischer Defekt legt den Zug um 19:00 Uhr lahm, kein Ersatzverkehr. Fahrgäste warten am Bahnhof Bellinzona",
           "date": "2026-04-27T04:40:54.725Z"
+        },
+        {
+          "title": "Schulsystem des Kantons Zürich: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/bildungssystem-kanton-zuerich-anmeldung-und-stufen/",
+          "excerpt": "Das Schulsystem des Kantons Zürich zeichnet sich durch einen 9-jährigen Pflichtschulabschluss aus. Die Schüler besuchen die Grundschulen der 1. bis 6. Klasse, gefolgt von der Mittelschule.",
+          "date": "2026-08-17T10:27:42.514Z"
+        },
+        {
+          "title": "Das Schulsystem des Kantons Zürich: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/sistema-scolastico-canton-zurich-iscrizione-e-cicli/",
+          "excerpt": "Hier sind die Zyklen und das Einschreibealter für die obligatorische Schule im Kanton Zürich.",
+          "date": "2026-08-11T11:58:09.280Z"
         }
       ],
       "links": [
@@ -649,7 +721,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "ZH",
@@ -810,6 +882,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "SBB : 500 millions pour la flotte de Zurich",
+          "url": "/fr/articles-zurich/sbb-flotte-sbahn-zurich/",
+          "excerpt": "Les SBB investissent 500 millions de francs pour rénover la flotte du S-Bahn de Zurich : meilleure réception mobile et nouveaux rembourrages dans les trains zurichois.",
+          "date": "2026-10-08T17:26:18.316Z"
+        },
+        {
+          "title": "Zurich : non à l’interdiction des véloroutes devant les écoles",
+          "url": "/fr/articles-zurich/zurich-veloroutes-ecoles/",
+          "excerpt": "Après les objections venues de Wollishofen, le gouvernement cantonal de Zurich se prononce contre l’interdiction des véloroutes devant les écoles.",
+          "date": "2026-10-09T22:34:18.458Z"
+        },
+        {
           "title": "Abonnements transports publics Canton de Zurich : zones et tarifs",
           "url": "/fr/articles-suisse/transport-public-abonnements-canton-de-zurich/",
           "excerpt": "Les abonnements aux transports publics dans le canton de Zurich ont été récemment modifiés.",
@@ -826,6 +910,18 @@
           "url": "/fr/articles-frontalier/panne-de-train-bellinzone-2026/",
           "excerpt": "Une panne technique supprime le train de 19h00, aucun remplacement. Les passagers attendent à la gare de Bellinzone",
           "date": "2026-04-27T04:40:54.725Z"
+        },
+        {
+          "title": "Système scolaire du canton de Zurich : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-educatif-canton-de-zurich-inscription-et-niveaux/",
+          "excerpt": "Le système scolaire du canton de Zurich se caractérise par un cycle d'enseignement obligatoire de 9 ans. Les élèves fréquentent les écoles primaires de la 1ère à la 6ème année, suivies des lycées.",
+          "date": "2026-08-17T10:27:42.514Z"
+        },
+        {
+          "title": "Le système scolaire du canton de Zurich : inscription et cycles",
+          "url": "/fr/articles-suisse/sistema-scolastico-canton-zurich-iscrizione-e-cicli/",
+          "excerpt": "Voici les cycles et les âges d'inscription pour l'école obligatoire dans le canton de Zurich.",
+          "date": "2026-08-11T11:58:09.280Z"
         }
       ],
       "links": [
@@ -858,7 +954,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

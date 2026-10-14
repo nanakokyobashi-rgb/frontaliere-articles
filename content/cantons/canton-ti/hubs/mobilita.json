@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "265d1c969f454437da0e059bfa7dd69494c8a2db9c2eb76e6d83a2bb913f1ed1",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "7af49b12ca9608ad182ee9e3ea4cf703abbc40f47253ce66f59f5414668b2563",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -209,16 +209,16 @@
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
-          "title": "Estradato dalla Svizzera, arrestato a Ponte Chiasso",
-          "url": "/articoli-frontaliere/estradizione-arresto-como/",
-          "excerpt": "Ponte Chiasso: il 18 settembre un 28enne nigeriano è stato consegnato dalla Svizzera e arrestato. Deve scontare quattro anni, nove mesi e 18 giorni di reclusione.",
-          "date": "2026-10-01T12:10:19.439Z"
+          "title": "Mendrisiotto: al via i primi quattro bus elettrici AMSA",
+          "url": "/articoli-ticino/autobus-elettrici-mendrisiotto-amsa/",
+          "excerpt": "Quattro autobus elettrici AMSA entrano in servizio Coinvolte le linee 2, 3 e 4 nel Mendrisiotto Il progetto di elettrificazione è partito nel 2022",
+          "date": "2026-10-10T10:49:09.228Z"
         },
         {
-          "title": "Modifiche TILO: bus al posto della S10 Chiasso-Melide",
-          "url": "/articoli-frontaliere/tilo-s10-bus-chiasso-melide/",
-          "excerpt": "Dal 13 settembre 2026 la corsa TILO delle 4:11 da Mendrisio verso Chiasso sarà sostituita da un autobus, con partenza anticipata, fino al 19 ottobre 2026.",
-          "date": "2026-09-11T18:59:52.263Z"
+          "title": "A2 Mendrisio-Melano: il progetto MeMe di risanamento",
+          "url": "/articoli-ticino/a2-mendrisio-melano-risanamento/",
+          "excerpt": "L’USTRA ha pubblicato il progetto A2 tra Mendrisio e Melano.",
+          "date": "2026-10-07T06:12:18.855Z"
         },
         {
           "title": "Mendrisiotto, carne e vino non dichiarati alla dogana",
@@ -227,28 +227,28 @@
           "date": "2026-10-09T08:55:22.214Z"
         },
         {
-          "title": "Trenord, rincaro del 3,88% sulle linee con il Ticino",
-          "url": "/articoli-frontaliere/trenord-rincaro-388-linee-ticino/",
-          "excerpt": "Dal 1° settembre biglietti e abbonamenti Trenord più cari del 3,88%: rincaro disposto dalla Giunta di Regione Lombardia, con eccezioni per Malpensa Express e Como-Malpensa via Chiasso e Mendrisio.",
-          "date": "2026-08-31T20:12:12.781Z"
+          "title": "Semafori a Cadenazzo e traffico: effetti previsti nel 2027",
+          "url": "/articoli-frontaliere/semafori-cadenazzo-traffico/",
+          "excerpt": "Il Consiglio federale risponde sui semafori a Cadenazzo: efficacia del traffico tra Bellinzona e Locarno attesa a fine 2027.",
+          "date": "2026-09-23T01:21:51.666Z"
         },
         {
-          "title": "Monte Olimpino 1: modifiche ai TILO tra Chiasso e Como",
-          "url": "/articoli-frontaliere/monte-olimpino-collegamenti-tilo/",
-          "excerpt": "Nei weekend 9-12, 16-19 ottobre e 13-16, 20-23 novembre 2026, la chiusura cambia RE80, S10 e S40 tra Chiasso e Como.",
-          "date": "2026-10-06T10:25:20.912Z"
+          "title": "Mendrisio-Melano, progetto MeMe per ridurre il rumore dell'autostrada",
+          "url": "/articoli-frontaliere/mendrisio-melano-progetto-meme-risanamento-fonico/",
+          "excerpt": "L'Ufficio federale delle strade (USTRA) ha pubblicato il disegno per il progetto MeMe, un piano di risanamento globale per il tratto dell'autostrada A2 tra Mendrisio e Melano.",
+          "date": "2026-09-15T02:42:05.181Z"
         },
         {
-          "title": "Controlli velocità in Ticino dal 5 all'11 ottobre",
-          "url": "/articoli-frontaliere/radar-strade-ticinesi-ottobre/",
-          "excerpt": "Dal 5 all'11 ottobre sono previsti controlli sulle strade ticinesi. La Polizia cantonale cura la mappa dei radar e indica le località interessate.",
-          "date": "2026-10-03T05:47:16.038Z"
+          "title": "Inizia la costruzione del tram-treno del Luganese",
+          "url": "/articoli-frontaliere/tram-treno-lugano-lavori-inizio/",
+          "excerpt": "I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno.",
+          "date": "2026-09-07T10:00:13.893Z"
         },
         {
-          "title": "Ufficio doganale unico per Mendrisio e Sopraceneri",
-          "url": "/articoli-frontaliere/ufficio-doganale-unico-mendrisio-sopraceneri/",
-          "excerpt": "Novità dalla riorganizzazione dell'Ufficio federale della dogana e della sicurezza dei confini con l'accorpamento dei Grigioni alla Regione Sud.",
-          "date": "2026-08-12T08:18:46.588Z"
+          "title": "Modifiche TILO: bus al posto della S10 Chiasso-Melide",
+          "url": "/articoli-frontaliere/tilo-s10-bus-chiasso-melide/",
+          "excerpt": "Dal 13 settembre 2026 la corsa TILO delle 4:11 da Mendrisio verso Chiasso sarà sostituita da un autobus, con partenza anticipata, fino al 19 ottobre 2026.",
+          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "links": [
@@ -293,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "TI",
@@ -480,16 +480,15 @@
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
-          "title": "Extradited from Switzerland, arrested in Ponte Chiasso",
-          "url": "/en/cross-border-articles/extradition-arrest-como/",
-          "excerpt": "Ponte Chiasso: On 18 September, a 28-year-old Nigerian man was handed over from Switzerland and arrested. He must serve four years, nine months and 18 days in prison.",
-          "date": "2026-10-01T12:10:19.439Z"
+          "title": "Mendrisiotto: the first four AMSA electric buses are now in service",
+          "url": "/en/ticino-articles/electric-buses-mendrisiotto-amsa/",
+          "excerpt": "Four AMSA electric buses enter service Lines 2, 3 and 4 in Mendrisiotto involved The electrification project began in 2022",
+          "date": "2026-10-10T10:49:09.228Z"
         },
         {
-          "title": "TILO changes: bus instead of the S10 Chiasso-Melide",
-          "url": "/en/cross-border-articles/tilo-changes-bus-instead-of-the-s10-chiasso-melide/",
-          "excerpt": "From 13 September 2026, the 4:11 TILO ride from Mendrisio to Chiasso will be replaced by a bus, with early departure, until 19 October 2026.",
-          "date": "2026-09-11T18:59:52.263Z"
+          "title": "A2 Mendrisio-Melano: the MeMe rehabilitation project",
+          "url": "/en/ticino-articles/a2-mendrisio-melano-renovation/",
+          "date": "2026-10-07T06:12:18.855Z"
         },
         {
           "title": "Mendrisiotto, meat and wine not declared to customs",
@@ -498,28 +497,28 @@
           "date": "2026-10-09T08:55:22.214Z"
         },
         {
-          "title": "Trenord, 3.88% increase on lines with Ticino",
-          "url": "/en/cross-border-articles/trenord-388-price-hike-ticino-lines/",
-          "excerpt": "From 1 September, tickets and Trenord subscriptions are 3.88% more expensive: an increase ordered by the Lombardy Regional Government, with exceptions for Malpensa Express and Como-Malpensa via Chiasso and Mendrisio.",
-          "date": "2026-08-31T20:12:12.781Z"
+          "title": "Traffic lights in Cadenazzo and traffic: effects expected in 2027",
+          "url": "/en/cross-border-articles/cadenazzo-traffic-lights/",
+          "excerpt": "The Federal Council responds to the traffic lights in Cadenazzo: effective traffic between Bellinzona and Locarno expected at the end of 2027.",
+          "date": "2026-09-23T01:21:51.666Z"
         },
         {
-          "title": "Monte Olimpino 1: changes to TILO services between Chiasso and Como",
-          "url": "/en/cross-border-articles/monte-olimpino-tilo-chiasso-como/",
-          "excerpt": "On the weekends of October 9–12 and 16–19 and November 13–16 and 20–23, 2026, the closure affects RE80, S10 and S40 between Chiasso and Como.",
-          "date": "2026-10-06T10:25:20.912Z"
+          "title": "Mendrisio-Melano, MeMe project to reduce highway noise",
+          "url": "/en/cross-border-articles/mendrisio-melano-meme-project-noise-reduction/",
+          "excerpt": "The Federal Office of Roads (USTRA) has published the design for the MeMe project, a comprehensive rehabilitation plan for the stretch of the A2 motorway between Mendrisio and Melano.",
+          "date": "2026-09-15T02:42:05.181Z"
         },
         {
-          "title": "Speed checks in Ticino from October 5 to 11",
-          "url": "/en/cross-border-articles/ticino-speed-checks-october/",
-          "excerpt": "From 5 to 11 October, checks are planned on Ticino's roads. The Cantonal Police manages the speed-camera map and indicates the locations concerned.",
-          "date": "2026-10-03T05:47:16.038Z"
+          "title": "Construction of the Lugano tram-train begins",
+          "url": "/en/cross-border-articles/tram-train-lugano-works-start/",
+          "excerpt": "Preliminary work for the Luganese tram-train will begin at the end of October 2026 on the Bioggio-Manno section.",
+          "date": "2026-09-07T10:00:13.893Z"
         },
         {
-          "title": "Single customs office for Mendrisio and Sopraceneri",
-          "url": "/en/cross-border-articles/single-customs-office-mendrisio-sopraceneri/",
-          "excerpt": "New from the reorganization of the Federal Office of Customs and Border Security with the merger of the Graubünden with the Southern Region.",
-          "date": "2026-08-12T08:18:46.588Z"
+          "title": "TILO changes: bus instead of the S10 Chiasso-Melide",
+          "url": "/en/cross-border-articles/tilo-changes-bus-instead-of-the-s10-chiasso-melide/",
+          "excerpt": "From 13 September 2026, the 4:11 TILO ride from Mendrisio to Chiasso will be replaced by a bus, with early departure, until 19 October 2026.",
+          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "links": [
@@ -564,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "TI",
@@ -751,16 +750,15 @@
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
-          "title": "Ausgeliefert aus der Schweiz, in Ponte Chiasso verhaftet",
-          "url": "/de/grenzgaenger-artikel/auslieferung-verhaftung-como/",
-          "excerpt": "Ponte Chiasso: Am 18. September wurde ein 28-jähriger Nigerianer aus der Schweiz übergeben und festgenommen. Er muss vier Jahre, neun Monate und 18 Tage im Gefängnis verbüßen.",
-          "date": "2026-10-01T12:10:19.439Z"
+          "title": "Mendrisiotto: Die ersten vier Elektrobusse von AMSA nehmen den Betrieb auf",
+          "url": "/de/tessin-artikel/elektrobusse-mendrisiotto-amsa/",
+          "excerpt": "Vier Elektrobusse von AMSA nehmen den Betrieb auf Betroffen sind die Linien 2, 3 und 4 im Mendrisiotto Das Elektrifizierungsprojekt begann im Jahr 2022",
+          "date": "2026-10-10T10:49:09.228Z"
         },
         {
-          "title": "Änderungen TILO: Bus statt S10 Chiasso-Melide",
-          "url": "/de/grenzgaenger-artikel/anderungen-tilo-bus-statt-s10-chiasso-melide/",
-          "excerpt": "Ab dem 13. September 2026 wird die 4:11 -Tilo-Fahrt von Mendrisio nach Chiasso bis zum 19. Oktober 2026 durch einen Bus mit vorzeitiger Abfahrt ersetzt.",
-          "date": "2026-09-11T18:59:52.263Z"
+          "title": "A2 Mendrisio-Melano: das Sanierungsprojekt MeMe",
+          "url": "/de/tessin-artikel/a2-mendrisio-melano-sanierung/",
+          "date": "2026-10-07T06:12:18.855Z"
         },
         {
           "title": "Mendrisiotto, beim Zoll nicht deklariertes Fleisch und nicht deklarierter Wein",
@@ -769,28 +767,28 @@
           "date": "2026-10-09T08:55:22.214Z"
         },
         {
-          "title": "Trenord, 3,88% Teuerung auf den Strecken mit dem Tessin",
-          "url": "/de/grenzgaenger-artikel/trenord-preiserhoehung-388-tessin-linien/",
-          "excerpt": "Ab dem 1. September teurere Trenord-Tickets und -Abonnements von 3,88%: Preiserhöhung durch die Regionalregierung der Lombardei, mit Ausnahme von Malpensa Express und Como-Malpensa über Chiasso und Mendrisio.",
-          "date": "2026-08-31T20:12:12.781Z"
+          "title": "Ampeln in Cadenazzo und Verkehr: erwartete Auswirkungen im Jahr 2027",
+          "url": "/de/grenzgaenger-artikel/cadenazzo-ampeln-verkehr/",
+          "excerpt": "Der Bundesrat antwortet an den Ampeln in Cadenazzo: Ende 2027 erwartete Verkehrseffizienz zwischen Bellinzona und Locarno.",
+          "date": "2026-09-23T01:21:51.666Z"
         },
         {
-          "title": "Monte Olimpino 1: Änderungen bei den TILO-Verbindungen zwischen Chiasso und Como",
-          "url": "/de/grenzgaenger-artikel/monte-olimpino-tilo-chiasso-como/",
-          "excerpt": "An den Wochenenden 9.–12. und 16.–19. Oktober sowie 13.–16. und 20.–23. November 2026 betrifft die Sperrung RE80, S10 und S40 zwischen Chiasso und Como.",
-          "date": "2026-10-06T10:25:20.912Z"
+          "title": "Mendrisio-Melano, MeMe-Projekt zur Reduzierung des Autobahnlärms",
+          "url": "/de/grenzgaenger-artikel/mendrisio-melano-meme-projekt-larmreduzierung/",
+          "excerpt": "Das Bundesamt für Strassen (Astra) hat den Entwurf für das Projekt MeMe, einen umfassenden Sanierungsplan für den Autobahnabschnitt A2 zwischen Mendrisio und Melano, veröffentlicht.",
+          "date": "2026-09-15T02:42:05.181Z"
         },
         {
-          "title": "Geschwindigkeitskontrollen im Tessin vom 5. bis 11. Oktober",
-          "url": "/de/grenzgaenger-artikel/geschwindigkeitskontrollen-tessin-oktober/",
-          "excerpt": "Vom 5. bis 11. Oktober sind auf den Tessiner Straßen Kontrollen vorgesehen. Die Kantonspolizei betreut die Radarkarte und gibt die betroffenen Orte an.",
-          "date": "2026-10-03T05:47:16.038Z"
+          "title": "Baubeginn des Luganer Tram-Zuges",
+          "url": "/de/grenzgaenger-artikel/strassenbahn-bahn-lugano-bauarbeiten-beginnen/",
+          "excerpt": "Die Vorarbeiten für den Luganer Tram-Zug werden Ende Oktober 2026 auf der Strecke Bioggio-Manno beginnen.",
+          "date": "2026-09-07T10:00:13.893Z"
         },
         {
-          "title": "Einheitliche Zollstelle für Mendrisio und Sopraceneri",
-          "url": "/de/grenzgaenger-artikel/zollbuero-mendrisio-sopraceneri/",
-          "excerpt": "Neuigkeiten aus der Reorganisation des Bundesamtes für Zoll und Grenzsicherheit mit der Eingliederung Graubündens in die Region Süd.",
-          "date": "2026-08-12T08:18:46.588Z"
+          "title": "Änderungen TILO: Bus statt S10 Chiasso-Melide",
+          "url": "/de/grenzgaenger-artikel/anderungen-tilo-bus-statt-s10-chiasso-melide/",
+          "excerpt": "Ab dem 13. September 2026 wird die 4:11 -Tilo-Fahrt von Mendrisio nach Chiasso bis zum 19. Oktober 2026 durch einen Bus mit vorzeitiger Abfahrt ersetzt.",
+          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "links": [
@@ -835,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -1022,16 +1020,16 @@
           "date": "2026-10-12T23:42:13.529Z"
         },
         {
-          "title": "Extradé de Suisse, arrêté à Ponte Chiasso",
-          "url": "/fr/articles-frontalier/extradition-arrestation-como/",
-          "excerpt": "Ponte Chiasso : Le 18 septembre, un Nigérian de 28 ans a été livré de Suisse et arrêté. Il doit purger quatre ans, neuf mois et 18 jours de prison.",
-          "date": "2026-10-01T12:10:19.439Z"
+          "title": "Mendrisiotto : mise en service des quatre premiers bus électriques AMSA",
+          "url": "/fr/articles-tessin/bus-electriques-mendrisiotto-amsa/",
+          "excerpt": "Quatre autobus électriques AMSA entrent en service Les lignes 2, 3 et 4 du Mendrisiotto sont concernées Le projet d’électrification a débuté en 2022",
+          "date": "2026-10-10T10:49:09.228Z"
         },
         {
-          "title": "Modifications TILO : bus à la place du S10 Chiasso-Melide",
-          "url": "/fr/articles-frontalier/modifications-tilo-bus-a-la-place-du-s10-chiasso-melide/",
-          "excerpt": "À partir du 13 septembre 2026, la course TILO de 4h11 de Mendrisio à Chiasso sera remplacée par un bus, avec départ anticipé, jusqu'au 19 octobre 2026.",
-          "date": "2026-09-11T18:59:52.263Z"
+          "title": "A2 Mendrisio-Melano : le projet MeMe d’assainissement",
+          "url": "/fr/articles-tessin/a2-mendrisio-melano-renovation/",
+          "excerpt": "L’USTRA a publié le projet A2 entre Mendrisio et Melano.",
+          "date": "2026-10-07T06:12:18.855Z"
         },
         {
           "title": "Mendrisiotto, viande et vin non déclarés à la douane",
@@ -1040,28 +1038,28 @@
           "date": "2026-10-09T08:55:22.214Z"
         },
         {
-          "title": "Trenord, renchérissement de 3,88 % sur les lignes avec le Tessin",
-          "url": "/fr/articles-frontalier/trenord-hausse-388-lignes-tessin/",
-          "excerpt": "Depuis le 1er septembre, les billets et les abonnements Trenord sont plus chers de 3,88 % : renchérissement ordonné par le Conseil de la Région Lombardie, à l'exception de Malpensa Express et de Como-Malpensa via…",
-          "date": "2026-08-31T20:12:12.781Z"
+          "title": "Feu de signalisation à Cadenazzo et circulation : effets attendus en 2027",
+          "url": "/fr/articles-frontalier/feux-cadenazzo-trafic/",
+          "excerpt": "Le Conseil fédéral répond aux feux à Cadenazzo : efficacité du trafic entre Bellinzone et Locarno attendue fin 2027.",
+          "date": "2026-09-23T01:21:51.666Z"
         },
         {
-          "title": "Monte Olimpino 1 : modifications des services TILO entre Chiasso et Como",
-          "url": "/fr/articles-frontalier/monte-olimpino-tilo-chiasso-como/",
-          "excerpt": "Pendant les week-ends du 9 au 12 et du 16 au 19 octobre ainsi que du 13 au 16 et du 20 au 23 novembre 2026, la fermeture affecte les RE80, S10 et S40 entre Chiasso et Como.",
-          "date": "2026-10-06T10:25:20.912Z"
+          "title": "Mendrisio-Melano, projet MeMe pour réduire le bruit de l'autoroute",
+          "url": "/fr/articles-frontalier/mendrisio-melano-projet-meme-reduction-bruit/",
+          "excerpt": "L'Office fédéral des routes (OFROU) a publié le dessin pour le projet MeMe, un plan d'assainissement global pour le tronçon de l'autoroute A2 entre Mendrisio et Melano.",
+          "date": "2026-09-15T02:42:05.181Z"
         },
         {
-          "title": "Contrôles de vitesse au Tessin du 5 au 11 octobre",
-          "url": "/fr/articles-frontalier/controles-vitesse-tessin-octobre/",
-          "excerpt": "Du 5 au 11 octobre, des contrôles sont prévus sur les routes tessinoises. La Police cantonale gère la carte des radars et indique les localités concernées.",
-          "date": "2026-10-03T05:47:16.038Z"
+          "title": "Début de la construction du tram-train du Luganese",
+          "url": "/fr/articles-frontalier/tram-train-lugano-travaux-debut/",
+          "excerpt": "Les travaux préliminaires pour le tram-train du Luganese débuteront fin octobre 2026 sur le tronçon Bioggio-Manno.",
+          "date": "2026-09-07T10:00:13.893Z"
         },
         {
-          "title": "Bureau de douane unique pour Mendrisio et Sopraceneri",
-          "url": "/fr/articles-frontalier/bureau-douanier-unique-mendrisio-sopraceneri/",
-          "excerpt": "Nouveauté de la réorganisation de l'Office fédéral des douanes et de la sécurité des frontières avec le rattachement des Grisons à la Région Sud.",
-          "date": "2026-08-12T08:18:46.588Z"
+          "title": "Modifications TILO : bus à la place du S10 Chiasso-Melide",
+          "url": "/fr/articles-frontalier/modifications-tilo-bus-a-la-place-du-s10-chiasso-melide/",
+          "excerpt": "À partir du 13 septembre 2026, la course TILO de 4h11 de Mendrisio à Chiasso sera remplacée par un bus, avec départ anticipé, jusqu'au 19 octobre 2026.",
+          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "links": [
@@ -1106,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

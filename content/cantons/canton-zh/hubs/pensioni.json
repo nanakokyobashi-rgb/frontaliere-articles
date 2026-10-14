@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "6ad872e5ae628c83a95782bac764bf877c004c6f223f73ee7059de8246521c14",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "c1324aaa7862a3a7e33b2d410d044e6908c43cd5a90477d51a9bf3e89f22a8b8",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -171,22 +171,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "Calcolo della rendita AVS e prestazioni complementari nel cantone di Zurigo",
-          "url": "/articoli-svizzera/avs-calcolo-rendita-zurigo/",
-          "excerpt": "La cassa di compensazione cantonale di Zurigo gestisce il calcolo della rendita AVS e delle prestazioni complementari per garantire una pensione adeguata.",
-          "date": "2026-09-03T00:24:33.041Z"
-        },
-        {
           "title": "Formazione continua Canton Zurigo: requisiti e contributi",
           "url": "/articoli-svizzera/formazione-continua-zurigo-contributi/",
           "excerpt": "Nel Canton Zurigo programmi riconosciuti, requisiti, termini e contributi vanno verificati presso la fonte ufficiale cantonale.",
           "date": "2026-10-05T03:02:04.320Z"
         },
         {
-          "title": "Secondo pilastro LPP Svizzera guida 2026 canton Zurigo",
-          "url": "/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-zurigo/",
-          "excerpt": "Guida al secondo pilastro LPP 2026: contributi 7-18% per età, riscatto lacune, prelievo capitale e confronto nazionale con focus sul canton Zurigo",
-          "date": "2026-08-08T18:13:20.030Z"
+          "title": "Calcolo della rendita AVS e prestazioni complementari nel cantone di Zurigo",
+          "url": "/articoli-svizzera/avs-calcolo-rendita-zurigo/",
+          "excerpt": "La cassa di compensazione cantonale di Zurigo gestisce il calcolo della rendita AVS e delle prestazioni complementari per garantire una pensione adeguata.",
+          "date": "2026-09-03T00:24:33.041Z"
         },
         {
           "title": "Terzo pilastro 3a: vantaggi 2026 nel canton Zurigo",
@@ -195,10 +189,22 @@
           "date": "2026-10-03T12:39:34.477Z"
         },
         {
+          "title": "AVS e prestazioni complementari a Zurigo",
+          "url": "/articoli-svizzera/cassa-compensazione-zurigo-rendita-avs/",
+          "excerpt": "Cassa di compensazione, rendita AVS e prestazioni complementari nel Cantone di Zurigo. Guida completa al primo pilastro: calcolo, lacune contributive, minimo vitale.",
+          "date": "2026-08-21T22:38:24.764Z"
+        },
+        {
           "title": "Rendita AVS a Zurigo: come funziona il primo pilastro",
           "url": "/articoli-svizzera/primo-pilastro-zurigo-minimo-vitale/",
           "excerpt": "Guida al sistema AVS nel Cantone Zurigo: cassa di compensazione, calcolo della rendita, lacune contributive e prestazioni complementari per il minimo vitale.",
           "date": "2026-08-21T21:34:42.130Z"
+        },
+        {
+          "title": "AVS e complementari a Zurigo: guida al minimo vitale",
+          "url": "/articoli-svizzera/prestazioni-complementari-zurigo-minimo/",
+          "excerpt": "Nel cantone Zurigo la cassa di compensazione calcola la rendita AVS e interviene con prestazioni complementari se il primo pilastro non copre il minimo vitale.",
+          "date": "2026-08-21T20:44:12.172Z"
         },
         {
           "title": "AVS e prestazioni complementari nel Canton Zurigo",
@@ -207,16 +213,10 @@
           "date": "2026-08-21T19:16:14.034Z"
         },
         {
-          "title": "AVS e prestazioni complementari a Zurigo",
-          "url": "/articoli-svizzera/cassa-compensazione-zurigo-rendita-avs/",
-          "excerpt": "Cassa di compensazione, rendita AVS e prestazioni complementari nel Cantone di Zurigo. Guida completa al primo pilastro: calcolo, lacune contributive, minimo vitale.",
-          "date": "2026-08-21T22:38:24.764Z"
-        },
-        {
-          "title": "AVS e complementari a Zurigo: guida al minimo vitale",
-          "url": "/articoli-svizzera/prestazioni-complementari-zurigo-minimo/",
-          "excerpt": "Nel cantone Zurigo la cassa di compensazione calcola la rendita AVS e interviene con prestazioni complementari se il primo pilastro non copre il minimo vitale.",
-          "date": "2026-08-21T20:44:12.172Z"
+          "title": "Secondo pilastro LPP Svizzera guida 2026 canton Zurigo",
+          "url": "/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-zurigo/",
+          "excerpt": "Guida al secondo pilastro LPP 2026: contributi 7-18% per età, riscatto lacune, prelievo capitale e confronto nazionale con focus sul canton Zurigo",
+          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -237,7 +237,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "ZH",
@@ -381,22 +381,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "AVS pension & supplementary benefits in Zurich",
-          "url": "/en/swiss-articles/avs-pension-calculation-zurich/",
-          "excerpt": "The cantonal compensation fund in Zurich handles the calculation of the AVS pension and supplementary benefits to ensure an adequate pension.",
-          "date": "2026-09-03T00:24:33.041Z"
-        },
-        {
           "title": "Continuing education Canton Zurich: requirements and contributions",
           "url": "/en/swiss-articles/zurich-continuing-education-grants/",
           "excerpt": "In the Canton of Zurich, recognized programs, requirements, deadlines and contributions must be verified at the official cantonal source.",
           "date": "2026-10-05T03:02:04.320Z"
         },
         {
-          "title": "Second pillar LPP Switzerland guide 2026 canton Zurich",
-          "url": "/en/swiss-articles/second-pillar-lpp-switzerland-guide-2026-zurich/",
-          "excerpt": "Guide to the second pillar LPP 2026: contributions 7-18% by age, redemption of gaps, capital levy and national comparison with a focus on the canton of Zurich",
-          "date": "2026-08-08T18:13:20.030Z"
+          "title": "AVS pension & supplementary benefits in Zurich",
+          "url": "/en/swiss-articles/avs-pension-calculation-zurich/",
+          "excerpt": "The cantonal compensation fund in Zurich handles the calculation of the AVS pension and supplementary benefits to ensure an adequate pension.",
+          "date": "2026-09-03T00:24:33.041Z"
         },
         {
           "title": "Third pillar 3a: 2026 advantages in the canton of Zurich",
@@ -405,10 +399,22 @@
           "date": "2026-10-03T12:39:34.477Z"
         },
         {
+          "title": "AVS and complementary services in Zurich",
+          "url": "/en/swiss-articles/zurich-aof-benefits-compensation-fund/",
+          "excerpt": "Compensation fund, AVH annuity and supplementary benefits in the Canton of Zurich. Complete guide to the first pillar: calculation, contribution gaps, vital minimum.",
+          "date": "2026-08-21T22:38:24.764Z"
+        },
+        {
           "title": "AVS Income in Zurich: how the first pillar works",
           "url": "/en/swiss-articles/first-pillar-zurich-minimum-living-standard/",
           "excerpt": "Guide to the AVS system in the Canton of Zurich: compensation fund, pension calculation, contribution gaps and supplementary benefits for the minimum living wage.",
           "date": "2026-08-21T21:34:42.130Z"
+        },
+        {
+          "title": "AVS and complementary in Zurich: a guide to the bare minimum",
+          "url": "/en/swiss-articles/supplementary-benefits-zurich-minimum-living/",
+          "excerpt": "In the canton of Zurich, the compensation fund calculates the AVS annuity and intervenes with complementary benefits if the first pillar does not cover the vital minimum.",
+          "date": "2026-08-21T20:44:12.172Z"
         },
         {
           "title": "AVS and complementary services in the Canton of Zurich",
@@ -417,16 +423,10 @@
           "date": "2026-08-21T19:16:14.034Z"
         },
         {
-          "title": "AVS and complementary services in Zurich",
-          "url": "/en/swiss-articles/zurich-aof-benefits-compensation-fund/",
-          "excerpt": "Compensation fund, AVH annuity and supplementary benefits in the Canton of Zurich. Complete guide to the first pillar: calculation, contribution gaps, vital minimum.",
-          "date": "2026-08-21T22:38:24.764Z"
-        },
-        {
-          "title": "AVS and complementary in Zurich: a guide to the bare minimum",
-          "url": "/en/swiss-articles/supplementary-benefits-zurich-minimum-living/",
-          "excerpt": "In the canton of Zurich, the compensation fund calculates the AVS annuity and intervenes with complementary benefits if the first pillar does not cover the vital minimum.",
-          "date": "2026-08-21T20:44:12.172Z"
+          "title": "Second pillar LPP Switzerland guide 2026 canton Zurich",
+          "url": "/en/swiss-articles/second-pillar-lpp-switzerland-guide-2026-zurich/",
+          "excerpt": "Guide to the second pillar LPP 2026: contributions 7-18% by age, redemption of gaps, capital levy and national comparison with a focus on the canton of Zurich",
+          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -447,7 +447,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "ZH",
@@ -591,22 +591,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "Berechnung der AHV-Rente und Ergänzungsleistungen im Kanton Zürich",
-          "url": "/de/schweiz-artikel/ahv-rentenberechnung-zurich/",
-          "excerpt": "Die kantonale Ausgleichskasse Zürich führt die Berechnung der AHV-Rente und der Ergänzungsleistungen durch, um eine angemessene Rente zu gewährleisten.",
-          "date": "2026-09-03T00:24:33.041Z"
-        },
-        {
           "title": "Weiterbildung im Kanton Zürich: Anforderungen und Beiträge",
           "url": "/de/schweiz-artikel/weiterbildung-zuerich-beitraege/",
           "excerpt": "Im Kanton Zürich müssen anerkannte Programme, Anforderungen, Fristen und Beiträge anhand der offiziellen kantonalen Quelle überprüft werden.",
           "date": "2026-10-05T03:02:04.320Z"
         },
         {
-          "title": "Zweite Säule BVG Schweiz Führer 2026 Kanton Zürich",
-          "url": "/de/schweiz-artikel/zweite-saeule-bvg-schweiz-leitfaden-2026-zurich/",
-          "excerpt": "Leitfaden 2. Säule BVG 2026: 7-18% Altersbeiträge, Lückenrückkauf, Kapitalbezug und nationaler Vergleich mit Fokus Kanton Zürich",
-          "date": "2026-08-08T18:13:20.030Z"
+          "title": "Berechnung der AHV-Rente und Ergänzungsleistungen im Kanton Zürich",
+          "url": "/de/schweiz-artikel/ahv-rentenberechnung-zurich/",
+          "excerpt": "Die kantonale Ausgleichskasse Zürich führt die Berechnung der AHV-Rente und der Ergänzungsleistungen durch, um eine angemessene Rente zu gewährleisten.",
+          "date": "2026-09-03T00:24:33.041Z"
         },
         {
           "title": "Dritte Säule 3a: Vorteile 2026 im Kanton Zürich",
@@ -615,10 +609,22 @@
           "date": "2026-10-03T12:39:34.477Z"
         },
         {
+          "title": "AHV und Ergänzungsleistungen in Zürich",
+          "url": "/de/schweiz-artikel/zuericher-avs-ergaenzungsleistungen-rente/",
+          "excerpt": "Ausgleichskasse, AHV-Rente und Ergänzungsleistungen im Kanton Zürich. Vollständiger Leitfaden zur ersten Säule: Berechnung, Beitragslücken, Existenzminimum.",
+          "date": "2026-08-21T22:38:24.764Z"
+        },
+        {
           "title": "AHV-Rente in Zürich: So funktioniert die erste Säule",
           "url": "/de/schweiz-artikel/erste-saule-zuerich-existenzminimum/",
           "excerpt": "Leitfaden zum AHV-System im Kanton Zürich: Ausgleichskasse, Rentenberechnung, Beitragslücken und Ergänzungsleistungen für das Lebensminimum.",
           "date": "2026-08-21T21:34:42.130Z"
+        },
+        {
+          "title": "AHV und Ergänzungen in Zürich: Leitfaden zum Lebensminimum",
+          "url": "/de/schweiz-artikel/zusatzleistungen-zurich-existenzminimum/",
+          "excerpt": "Im Kanton Zürich berechnet die Ausgleichskasse die AHV-Rente und greift mit Ergänzungsleistungen ein, wenn die erste Säule nicht das Existenzminimum abdeckt.",
+          "date": "2026-08-21T20:44:12.172Z"
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Zürich",
@@ -627,16 +633,10 @@
           "date": "2026-08-21T19:16:14.034Z"
         },
         {
-          "title": "AHV und Ergänzungsleistungen in Zürich",
-          "url": "/de/schweiz-artikel/zuericher-avs-ergaenzungsleistungen-rente/",
-          "excerpt": "Ausgleichskasse, AHV-Rente und Ergänzungsleistungen im Kanton Zürich. Vollständiger Leitfaden zur ersten Säule: Berechnung, Beitragslücken, Existenzminimum.",
-          "date": "2026-08-21T22:38:24.764Z"
-        },
-        {
-          "title": "AHV und Ergänzungen in Zürich: Leitfaden zum Lebensminimum",
-          "url": "/de/schweiz-artikel/zusatzleistungen-zurich-existenzminimum/",
-          "excerpt": "Im Kanton Zürich berechnet die Ausgleichskasse die AHV-Rente und greift mit Ergänzungsleistungen ein, wenn die erste Säule nicht das Existenzminimum abdeckt.",
-          "date": "2026-08-21T20:44:12.172Z"
+          "title": "Zweite Säule BVG Schweiz Führer 2026 Kanton Zürich",
+          "url": "/de/schweiz-artikel/zweite-saeule-bvg-schweiz-leitfaden-2026-zurich/",
+          "excerpt": "Leitfaden 2. Säule BVG 2026: 7-18% Altersbeiträge, Lückenrückkauf, Kapitalbezug und nationaler Vergleich mit Fokus Kanton Zürich",
+          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -657,7 +657,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "ZH",
@@ -801,22 +801,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "Calcul de la rente AVS et prestations complémentaires dans le canton de Zurich",
-          "url": "/fr/articles-suisse/calcul-rente-avs-zurich/",
-          "excerpt": "La caisse de compensation cantonale de Zurich gère le calcul de la rente AVS et des prestations complémentaires pour assurer une pension adéquate.",
-          "date": "2026-09-03T00:24:33.041Z"
-        },
-        {
           "title": "Formation continue Canton de Zurich : exigences et cotisations",
           "url": "/fr/articles-suisse/formation-continue-zurich-subventions/",
           "excerpt": "Dans le canton de Zurich, les programmes reconnus, les exigences, les délais et les contributions doivent être vérifiés auprès de la source cantonale officielle.",
           "date": "2026-10-05T03:02:04.320Z"
         },
         {
-          "title": "Deuxième pilier LPP Suisse guide 2026 canton Zurich",
-          "url": "/fr/articles-suisse/deuxieme-pilier-lpp-suisse-guide-2026-zurich/",
-          "excerpt": "Guide du 2e pilier LPP 2026 : cotisations 7-18% par âge, rachat lacunes, prélèvement capital et comparaison nationale en mettant l'accent sur le canton de Zurich",
-          "date": "2026-08-08T18:13:20.030Z"
+          "title": "Calcul de la rente AVS et prestations complémentaires dans le canton de Zurich",
+          "url": "/fr/articles-suisse/calcul-rente-avs-zurich/",
+          "excerpt": "La caisse de compensation cantonale de Zurich gère le calcul de la rente AVS et des prestations complémentaires pour assurer une pension adéquate.",
+          "date": "2026-09-03T00:24:33.041Z"
         },
         {
           "title": "Troisième pilier 3a : avantages 2026 dans le canton de Zurich",
@@ -825,10 +819,22 @@
           "date": "2026-10-03T12:39:34.477Z"
         },
         {
+          "title": "AVS et prestations complémentaires à Zurich",
+          "url": "/fr/articles-suisse/zurich-avs-prestations-complementaires/",
+          "excerpt": "Caisse de compensation, rente AVS et prestations complémentaires dans le canton de Zurich. Guide complet du premier pilier : calcul, lacunes contributives, minimum vital.",
+          "date": "2026-08-21T22:38:24.764Z"
+        },
+        {
           "title": "Revenu AVS à Zurich : comment fonctionne le premier pilier",
           "url": "/fr/articles-suisse/premier-pilier-zurich-minimum-vital/",
           "excerpt": "Guide du système AVS dans le canton de Zurich : caisse de compensation, calcul de la rente, lacunes contributives et prestations complémentaires pour le minimum vital.",
           "date": "2026-08-21T21:34:42.130Z"
+        },
+        {
+          "title": "AVS et complémentaires à Zurich : guide au minimum vital",
+          "url": "/fr/articles-suisse/prestations-complementaires-zurich-minimum-vital/",
+          "excerpt": "Dans le canton de Zurich, la caisse de compensation calcule la rente AVS et intervient avec des prestations complémentaires si le premier pilier ne couvre pas le minimum vital.",
+          "date": "2026-08-21T20:44:12.172Z"
         },
         {
           "title": "AVS et prestations complémentaires dans le canton de Zurich",
@@ -837,16 +843,10 @@
           "date": "2026-08-21T19:16:14.034Z"
         },
         {
-          "title": "AVS et prestations complémentaires à Zurich",
-          "url": "/fr/articles-suisse/zurich-avs-prestations-complementaires/",
-          "excerpt": "Caisse de compensation, rente AVS et prestations complémentaires dans le canton de Zurich. Guide complet du premier pilier : calcul, lacunes contributives, minimum vital.",
-          "date": "2026-08-21T22:38:24.764Z"
-        },
-        {
-          "title": "AVS et complémentaires à Zurich : guide au minimum vital",
-          "url": "/fr/articles-suisse/prestations-complementaires-zurich-minimum-vital/",
-          "excerpt": "Dans le canton de Zurich, la caisse de compensation calcule la rente AVS et intervient avec des prestations complémentaires si le premier pilier ne couvre pas le minimum vital.",
-          "date": "2026-08-21T20:44:12.172Z"
+          "title": "Deuxième pilier LPP Suisse guide 2026 canton Zurich",
+          "url": "/fr/articles-suisse/deuxieme-pilier-lpp-suisse-guide-2026-zurich/",
+          "excerpt": "Guide du 2e pilier LPP 2026 : cotisations 7-18% par âge, rachat lacunes, prélèvement capital et comparaison nationale en mettant l'accent sur le canton de Zurich",
+          "date": "2026-08-08T18:13:20.030Z"
         }
       ],
       "links": [
@@ -867,7 +867,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

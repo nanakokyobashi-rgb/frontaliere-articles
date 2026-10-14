@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "f8af7b01bf6aae21a42421f40ed201009defd84f0b101bf14637ed95738ef220",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "16da534e6f55d8f6763bec2a68fa1028022f15e1edac5a1b61b3ecb3bfd301a3",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -129,6 +129,42 @@
           "url": "/articoli-svizzera/trasporti-pubblici-zugo-abbonamenti/",
           "excerpt": "I principali dati sull'abbonamento dei trasporti pubblici nel Cantone di Zurigo",
           "date": "2026-08-17T16:02:49.928Z"
+        },
+        {
+          "title": "Aprire attività a Zugo: registro di commercio e costi",
+          "url": "/articoli-svizzera/aprire-attivita-zugo-registro-commercio/",
+          "excerpt": "Cantone di Zugo: forme giuridiche, capitale minimo federale, tasse d'iscrizione cantonali, AVS, LAINF e passi operativi per avviare un'impresa.",
+          "date": "2026-08-31T22:42:08.783Z"
+        },
+        {
+          "title": "Chronext chiude: fallimento orologi lusso Zugo",
+          "url": "/articoli-svizzera/chronext-fallimento-zugo/",
+          "excerpt": "Fallimento dichiarato il 19 agosto dal Tribunale cantonale di Zugo. Chronext, società di e-commerce nel lusso, aveva 150 dipendenti e ricavi di centinaia di milioni. Nel 2022 aveva già licenziato 40 persone.",
+          "date": "2026-08-26T23:53:50.373Z"
+        },
+        {
+          "title": "Salari e lavoro nel Canton Zugo: formazione e livelli",
+          "url": "/articoli-svizzera/salari-zugo-formazione-livelli/",
+          "excerpt": "Mercato del lavoro svizzero: stipendi per grado di formazione, orari legali, previdenza obbligatoria (AVS, LPP, LAMal) e contratti collettivi.",
+          "date": "2026-08-23T21:37:47.053Z"
+        },
+        {
+          "title": "Aprire attività a Zugo: iscrizione e obblighi",
+          "url": "/articoli-svizzera/attivita-zugo-iscrizione-contributi-obblighi/",
+          "excerpt": "Iscrivere attività a Zugo: forme giuridiche, iscrizione registro commercio, obblighi previdenziali (AVS/AI, LPP) e assicurazioni. Guida federale e cantonale.",
+          "date": "2026-08-23T19:50:57.418Z"
+        },
+        {
+          "title": "Apprendistato e formazione professionale nel Canton Zugo",
+          "url": "/articoli-svizzera/apprendistato-zugo/",
+          "excerpt": "Impostazioni e procedure per l'assunzione di un apprendista nel Canton Zugo, con riferimento alle leggi cantonali e federali.",
+          "date": "2026-08-17T13:36:28.291Z"
+        },
+        {
+          "title": "Lucerna supera Zugo: nuovo paradiso fiscale per le imprese",
+          "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
+          "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -141,7 +177,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "ZG",
@@ -253,6 +289,42 @@
           "url": "/en/swiss-articles/public-transport-zug-subscriptions/",
           "excerpt": "The main data on public transport subscription in the Canton of Zurich",
           "date": "2026-08-17T16:02:49.928Z"
+        },
+        {
+          "title": "Opening a business in Zug: trade register and costs",
+          "url": "/en/swiss-articles/open-business-zug-commercial-register/",
+          "excerpt": "Canton of Zug: legal forms, federal minimum capital, cantonal registration fees, AVS, LAINF and operational steps to start a business.",
+          "date": "2026-08-31T22:42:08.783Z"
+        },
+        {
+          "title": "Chronext closes: Zug luxury watches bankruptcy",
+          "url": "/en/swiss-articles/chronext-bankruptcy-zug/",
+          "excerpt": "Bankruptcy declared on 19 August by the Cantonal Court of Zug. Luxury e-commerce company Chronext had 150 employees and revenues of hundreds of millions. By 2022, it had already laid off 40 people.",
+          "date": "2026-08-26T23:53:50.373Z"
+        },
+        {
+          "title": "Wages and work in the Canton of Zug: training and levels",
+          "url": "/en/swiss-articles/wages-zug-education-levels/",
+          "excerpt": "Swiss labour market: salaries by degree of training, legal hours, compulsory social security (AVS, LPP, LAMal) and collective agreements.",
+          "date": "2026-08-23T21:37:47.053Z"
+        },
+        {
+          "title": "Opening a business in Zug: registration and obligations",
+          "url": "/en/swiss-articles/activity-zug-registration-contributions-obligations/",
+          "excerpt": "Register activities in Zug: legal forms, trade register registration, social security obligations (AVS/AI, LPP) and insurance. Federal and cantonal guidance.",
+          "date": "2026-08-23T19:50:57.418Z"
+        },
+        {
+          "title": "Apprenticeship and vocational training in the Canton of Zug",
+          "url": "/en/swiss-articles/apprenticeship-zug/",
+          "excerpt": "Settings and procedures for hiring an apprentice in the Canton of Zug, with reference to cantonal and federal laws.",
+          "date": "2026-08-17T13:36:28.291Z"
+        },
+        {
+          "title": "Lucerne overtakes Zug: new tax haven for businesses",
+          "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
+          "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -265,7 +337,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "ZG",
@@ -377,6 +449,42 @@
           "url": "/de/schweiz-artikel/offentliche-verkehrsmittel-zug-abos/",
           "excerpt": "Die wichtigsten Fakten zum ÖV-Abo im Kanton Zürich",
           "date": "2026-08-17T16:02:49.928Z"
+        },
+        {
+          "title": "Geschäft in Zug eröffnen: Handelsregister und Kosten",
+          "url": "/de/schweiz-artikel/geschaeft-eroeffnen-zug-handelsregister/",
+          "excerpt": "Kanton Zug: Rechtsformen, Bundesmindestkapital, kantonale Einschreibegebühren, AHV, UVG und operative Schritte zur Unternehmensgründung.",
+          "date": "2026-08-31T22:42:08.783Z"
+        },
+        {
+          "title": "Chronext schließt: Konkurs Luxusuhren Zug",
+          "url": "/de/schweiz-artikel/chronext-konkurs-zug/",
+          "excerpt": "Konkurs eröffnet am 19. August durch das Kantonsgericht Zug. Chronext, ein E-Commerce-Unternehmen im Luxusbereich, hatte 150 Mitarbeiter und einen Umsatz von Hunderten von Millionen. Im Jahr 2022 hatte er bereits 40…",
+          "date": "2026-08-26T23:53:50.373Z"
+        },
+        {
+          "title": "Löhne und Arbeit im Kanton Zug: Ausbildung und Niveaustufen",
+          "url": "/de/schweiz-artikel/loehne-zug-bildung-stufen/",
+          "excerpt": "Schweizer Arbeitsmarkt: Löhne nach Bildungsgrad, gesetzliche Arbeitszeiten, obligatorische Vorsorge (AHV, BVG, KVG) und Kollektivverträge.",
+          "date": "2026-08-23T21:37:47.053Z"
+        },
+        {
+          "title": "Geschäft in Zug eröffnen: Anmeldung und Verpflichtungen",
+          "url": "/de/schweiz-artikel/aktivitaet-zug-anmeldung-beitraege-pflichten/",
+          "excerpt": "Aktivitäten in Zug eintragen: Rechtsformen, Handelsregistereintrag, Vorsorgepflichten (AHV/IV, BVG) und Versicherungen. Eidgenössischer und kantonaler Führer.",
+          "date": "2026-08-23T19:50:57.418Z"
+        },
+        {
+          "title": "Lehre und Berufsausbildung im Kanton Zug",
+          "url": "/de/schweiz-artikel/berufsausbildung-zug/",
+          "excerpt": "Einstellungen und Verfahren für die Anstellung eines Lehrlings im Kanton Zug unter Bezugnahme auf die kantonalen und bundesstaatlichen Gesetze.",
+          "date": "2026-08-17T13:36:28.291Z"
+        },
+        {
+          "title": "Luzern überholt Zug: Neuer Steuerparadies für Unternehmen",
+          "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
+          "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -389,7 +497,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "ZG",
@@ -501,6 +609,42 @@
           "url": "/fr/articles-suisse/transports-publics-zoug-abonnements/",
           "excerpt": "Les principales données sur l'abonnement aux transports publics dans le canton de Zurich",
           "date": "2026-08-17T16:02:49.928Z"
+        },
+        {
+          "title": "Ouvrir une entreprise à Zoug : registre du commerce et des coûts",
+          "url": "/fr/articles-suisse/ouvrir-activite-zoug-registre-commerce/",
+          "excerpt": "Canton de Zoug : formes juridiques, capital minimum fédéral, frais d'inscription cantonaux, AVS, LAA et démarches opérationnelles pour créer une entreprise.",
+          "date": "2026-08-31T22:42:08.783Z"
+        },
+        {
+          "title": "Chronext ferme : faillite montres luxe Zoug",
+          "url": "/fr/articles-suisse/chronext-faillite-zoug/",
+          "excerpt": "Faillite prononcée le 19 août par le Tribunal cantonal de Zoug. Chronext, société de commerce électronique de luxe, comptait 150 employés et des revenus de centaines de millions. En 2022, il avait déjà licencié 40…",
+          "date": "2026-08-26T23:53:50.373Z"
+        },
+        {
+          "title": "Salaires et emploi dans le canton de Zoug : formation et niveaux",
+          "url": "/fr/articles-suisse/salaires-zoug-formation-niveaux/",
+          "excerpt": "Marché du travail suisse : salaires par niveau de formation, horaires légaux, prévoyance obligatoire (AVS, LPP, LAMal) et conventions collectives.",
+          "date": "2026-08-23T21:37:47.053Z"
+        },
+        {
+          "title": "Ouvrir une entreprise à Zoug : inscription et obligations",
+          "url": "/fr/articles-suisse/activite-zoug-inscription-cotisations-obligations/",
+          "excerpt": "Enregistrer des activités à Zoug : formes juridiques, inscription au registre du commerce, obligations de sécurité sociale (AVS/AI, LPP) et assurances. Guide fédéral et cantonal.",
+          "date": "2026-08-23T19:50:57.418Z"
+        },
+        {
+          "title": "Apprentissage et formation professionnelle dans le canton de Zoug",
+          "url": "/fr/articles-suisse/apprentissage-zoug/",
+          "excerpt": "Paramètres et procédures pour l'embauche d'un apprenti dans le canton de Zoug, en référence aux lois cantonales et fédérales.",
+          "date": "2026-08-17T13:36:28.291Z"
+        },
+        {
+          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
+          "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
+          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
+          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "links": [
@@ -513,7 +657,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

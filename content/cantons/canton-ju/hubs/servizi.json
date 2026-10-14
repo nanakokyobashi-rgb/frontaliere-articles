@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "80e72867cc02d92c942db87e55ae22715e89c9c3732c23621edbf8017196dd2c",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "bb1488f07352393c60da8e145840a16d44b23ff5956c4b6dedb9df6df91ab7af",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -15,6 +15,11 @@
     {
       "id": "farmacie-di-turno",
       "updatedAt": "2026-10-13T20:56:48.532Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
       "keyFacts": 0
     },
     {
@@ -82,16 +87,25 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
           "updatedAt": "2026-10-13T20:56:48.532Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "15 °C",
+              "detail": "oggi da 9 a 17 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,12 +128,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Premi cassa malati nel canton Giura: riduzioni e fasce 2024",
-          "url": "/articoli-svizzera/premi-cassa-malati-canton-giura-riduzioni/",
-          "excerpt": "Guida pratica ai premi LAMal nel Canton Giura: fasce di franchigia, modelli alternativi e requisiti per ottenere la riduzione cantonale dei premi.",
-          "date": "2026-09-11T00:48:35.425Z"
-        },
-        {
           "title": "Permesso di dimora B in Giura: requisiti, documenti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-canton-giura/",
           "excerpt": "Scopri i requisiti, i documenti da produrre e la procedura di rinnovo del permesso B nel Cantone Giura, con indicazioni pratiche per chi vive in Svizzera.",
@@ -130,6 +138,12 @@
           "url": "/articoli-svizzera/permesso-b-jura-requisiti-rinnovo/",
           "excerpt": "Scopri come funziona il permesso B nel Cantone di Giura, dalla documentazione alla procedura di rinnovo, con focus su tassazione e assicurazione obbligatoria.",
           "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Premi cassa malati nel canton Giura: riduzioni e fasce 2024",
+          "url": "/articoli-svizzera/premi-cassa-malati-canton-giura-riduzioni/",
+          "excerpt": "Guida pratica ai premi LAMal nel Canton Giura: fasce di franchigia, modelli alternativi e requisiti per ottenere la riduzione cantonale dei premi.",
+          "date": "2026-09-11T00:48:35.425Z"
         }
       ],
       "links": [
@@ -158,7 +172,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "JU",
@@ -218,16 +232,25 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
           "updatedAt": "2026-10-13T20:56:48.532Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "15 °C",
+              "detail": "today from 9 to 17 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -250,12 +273,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Health insurance premiums in the canton of Jura: reductions and bands 2024",
-          "url": "/en/swiss-articles/health-insurance-premiums-jura-canton-reductions/",
-          "excerpt": "Practical Guide to LAMal Awards in the Canton of Jura: Deductible Bands, Alternative Models, and Requirements to Achieve Cantonal Premium Reduction.",
-          "date": "2026-09-11T00:48:35.425Z"
-        },
-        {
           "title": "Residence permit B in Jura: requirements, documents and renewal",
           "url": "/en/swiss-articles/residence-permit-b-jura/",
           "excerpt": "Discover the requirements, the documents to be produced and the procedure for renewing the B permit in the Canton of Jura, with practical instructions for those living in Switzerland.",
@@ -266,6 +283,12 @@
           "url": "/en/swiss-articles/permit-b-jura-requirements-renewal/",
           "excerpt": "Find out how the B permit works in the Canton of Jura, from the documentation to the renewal procedure, with a focus on taxation and compulsory insurance.",
           "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Health insurance premiums in the canton of Jura: reductions and bands 2024",
+          "url": "/en/swiss-articles/health-insurance-premiums-jura-canton-reductions/",
+          "excerpt": "Practical Guide to LAMal Awards in the Canton of Jura: Deductible Bands, Alternative Models, and Requirements to Achieve Cantonal Premium Reduction.",
+          "date": "2026-09-11T00:48:35.425Z"
         }
       ],
       "links": [
@@ -290,7 +313,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "JU",
@@ -350,16 +373,25 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
           "updatedAt": "2026-10-13T20:56:48.532Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "15 °C",
+              "detail": "heute 9 bis 17 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -382,12 +414,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Krankenkassenprämien im Kanton Jura: Kürzungen und Bandbreiten 2024",
-          "url": "/de/schweiz-artikel/krankenkassenpraemien-kanton-jura-verbilligungen/",
-          "excerpt": "Praktischer Leitfaden zu den KVG-Prämien im Kanton Jura: Franchise-Bänder, alternative Modelle und Voraussetzungen für die kantonale Prämienverbilligung.",
-          "date": "2026-09-11T00:48:35.425Z"
-        },
-        {
           "title": "Aufenthaltsbewilligung B im Jura: Voraussetzungen, Dokumente und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-jura/",
           "excerpt": "Informieren Sie sich über die Anforderungen, die einzureichenden Dokumente und das Erneuerungsverfahren der B-Bewilligung im Kanton Jura mit praktischen Hinweisen für Personen, die in der Schweiz leben.",
@@ -398,6 +424,12 @@
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-jura-anforderungen-verlaengerung/",
           "excerpt": "Erfahren Sie, wie die B-Bewilligung im Kanton Jura funktioniert, von der Dokumentation bis zum Erneuerungsverfahren, mit Fokus auf Besteuerung und Pflichtversicherung.",
           "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Krankenkassenprämien im Kanton Jura: Kürzungen und Bandbreiten 2024",
+          "url": "/de/schweiz-artikel/krankenkassenpraemien-kanton-jura-verbilligungen/",
+          "excerpt": "Praktischer Leitfaden zu den KVG-Prämien im Kanton Jura: Franchise-Bänder, alternative Modelle und Voraussetzungen für die kantonale Prämienverbilligung.",
+          "date": "2026-09-11T00:48:35.425Z"
         }
       ],
       "links": [
@@ -422,7 +454,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "JU",
@@ -482,16 +514,25 @@
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
               "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
           "updatedAt": "2026-10-13T20:56:48.532Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 9 à 17 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -514,12 +555,6 @@
       ],
       "curatedArticles": [
         {
-          "title": "Primes caisse-maladie dans le canton du Jura : réductions et tranches 2024",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-jura-reductions/",
-          "excerpt": "Guide pratique des primes LAMal dans le canton du Jura : fourchettes de franchise, modèles alternatifs et conditions pour obtenir la réduction cantonale des primes.",
-          "date": "2026-09-11T00:48:35.425Z"
-        },
-        {
           "title": "Permis de séjour B dans le Jura : exigences, documents et renouvellement",
           "url": "/fr/articles-suisse/permis-dimora-b-jura/",
           "excerpt": "Découvrez les exigences, les documents à produire et la procédure de renouvellement du permis B dans le canton du Jura, avec des indications pratiques pour ceux qui vivent en Suisse.",
@@ -530,6 +565,12 @@
           "url": "/fr/articles-suisse/permis-b-jura-exigences-renouvellement/",
           "excerpt": "Découvrez comment fonctionne le permis B dans le canton du Jura, de la documentation à la procédure de renouvellement, en mettant l'accent sur la fiscalité et l'assurance obligatoire.",
           "date": "2026-09-11T03:38:57.302Z"
+        },
+        {
+          "title": "Primes caisse-maladie dans le canton du Jura : réductions et tranches 2024",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-jura-reductions/",
+          "excerpt": "Guide pratique des primes LAMal dans le canton du Jura : fourchettes de franchise, modèles alternatifs et conditions pour obtenir la réduction cantonale des primes.",
+          "date": "2026-09-11T00:48:35.425Z"
         }
       ],
       "links": [
@@ -550,7 +591,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

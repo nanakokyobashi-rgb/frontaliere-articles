@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "ebf011310d63c8e2c3041a8939fe67776358453d90c465dfe1ae8bf9a7dac716",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "dbde5720d8a91ccc13e9c40760b023a8a212a67688d45f502f936ea0dd4174ec",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -90,6 +95,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "oggi da 8 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -136,16 +155,34 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
-          "title": "Premi cassa malati canton Argovia e riduzione premi",
-          "url": "/articoli-svizzera/argovia-sussidi-cassa-malati-2026/",
-          "excerpt": "Scopri come funzionano i premi dell'assicurazione malattia in Argovia, le franchigie disponibili e come richiedere la riduzione attraverso i sussidi cantonali.",
-          "date": "2026-09-02T06:54:26.361Z"
+          "title": "Permesso L nel Canton Argovia: validità e rinnovo",
+          "url": "/articoli-svizzera/permesso-l-argovia-guida/",
+          "excerpt": "Guida al permesso L di breve durata nel Canton Argovia: regole di validità, procedure di proroga e criteri per il passaggio al permesso B.",
+          "date": "2026-09-02T10:05:18.887Z"
         },
         {
           "title": "Permesso dimora B Argovia: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-argovia-requisiti/",
           "excerpt": "Permesso B è la dimora rinnovabile in Svizzera. Procedura federale SEM, competenza ufficio cantonale. Guida completa a requisiti, rinnovo e scadenze.",
           "date": "2026-09-02T08:19:43.153Z"
+        },
+        {
+          "title": "Premi cassa malati canton Argovia e riduzione premi",
+          "url": "/articoli-svizzera/argovia-sussidi-cassa-malati-2026/",
+          "excerpt": "Scopri come funzionano i premi dell'assicurazione malattia in Argovia, le franchigie disponibili e come richiedere la riduzione attraverso i sussidi cantonali.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Velo nelle scuole argoviesi: diritti e costituzione",
+          "url": "/articoli-svizzera/parlamento-svizzero-velo-divieto-diritti/",
+          "excerpt": "Il Parlamento di Argovia ha votato per vietare il velo nelle scuole pubbliche fino ai 16 anni con 78 sì e 54 no, ma il Tribunale federale mette in dubbio la legalità della misura.",
+          "date": "2026-08-25T23:47:24.519Z"
+        },
+        {
+          "title": "Argovia verso il divieto del velo nelle scuole",
+          "url": "/articoli-svizzera/argovia-divieto-velo-scuole/",
+          "excerpt": "Gran Consiglio argoviese approva mozione con 78 voti. Governo cantonale si oppone per dubbi costituzionali sulla base della sentenza del Tribunale federale del 2015.",
+          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "links": [
@@ -174,7 +211,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "AG",
@@ -242,6 +279,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "today from 8 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -288,16 +339,34 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
-          "title": "Health Insurance Premiums in the Canton of Aargau and Premium Reductions",
-          "url": "/en/swiss-articles/aargau-health-insurance-premium-subsidies/",
-          "excerpt": "Find out how health insurance premiums work in Aargau, what deductibles are available, and how to apply for a reduction through cantonal subsidies.",
-          "date": "2026-09-02T06:54:26.361Z"
+          "title": "Permit L in the Canton of Aargau: validity and renewal",
+          "url": "/en/swiss-articles/residence-permit-l-aargau-guide/",
+          "excerpt": "Guide to Short-Term Permit L in the Canton of Aargau: Validity Rules, Extension Procedures, and Criteria for Switching to Permit B.",
+          "date": "2026-09-02T10:05:18.887Z"
         },
         {
           "title": "Residence permit B Aargau: requirements and renewal",
           "url": "/en/swiss-articles/residence-permit-b-aargau-requirements/",
           "excerpt": "Permit B is the renewable residence in Switzerland. Federal SEM procedure, cantonal office competence. Complete guide to requirements, renewal and deadlines.",
           "date": "2026-09-02T08:19:43.153Z"
+        },
+        {
+          "title": "Health Insurance Premiums in the Canton of Aargau and Premium Reductions",
+          "url": "/en/swiss-articles/aargau-health-insurance-premium-subsidies/",
+          "excerpt": "Find out how health insurance premiums work in Aargau, what deductibles are available, and how to apply for a reduction through cantonal subsidies.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Veil in Argovian schools: rights and constitution",
+          "url": "/en/swiss-articles/swiss-parliament-veil-ban-rights/",
+          "excerpt": "The Parliament of Aargau voted to ban the veil in public schools until the age of 16 with 78 yes and 54 no, but the Federal Court questions the legality of the measure.",
+          "date": "2026-08-25T23:47:24.519Z"
+        },
+        {
+          "title": "Aargau towards a ban on headscarves in schools",
+          "url": "/en/swiss-articles/aargau-veil-ban-schools/",
+          "excerpt": "The Argovian Grand Council approved the motion with 78 votes. Cantonal government objects due to constitutional doubts on the basis of the 2015 Federal Court ruling.",
+          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "links": [
@@ -322,7 +391,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "AG",
@@ -390,6 +459,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "heute 8 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -436,16 +519,34 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
-          "title": "Krankenkassenprämien im Kanton Aargau und Prämienermäßigung",
-          "url": "/de/schweiz-artikel/aargau-krankenkasse-praemienzuschuesse/",
-          "excerpt": "Erfahren Sie, wie die Krankenkassenprämien im Kanton Aargau funktionieren, welche Franchisen es gibt und wie Sie eine Prämienermäßigung durch kantonale Zuschüsse beantragen können.",
-          "date": "2026-09-02T06:54:26.361Z"
+          "title": "L-Bewilligung im Kanton Aargau: Gültigkeit und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-l-aargau-leitfaden/",
+          "excerpt": "Leitfaden zur Kurzzeitbewilligung L im Kanton Aargau: Gültigkeitsregeln, Verlängerungsverfahren und Kriterien für den Übergang zur Bewilligung B.",
+          "date": "2026-09-02T10:05:18.887Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Aargau: Voraussetzungen und Erneuerung",
           "url": "/de/schweiz-artikel/aufenthaltsgenehmigung-b-aargau-anforderungen/",
           "excerpt": "Permit B ist der erneuerbare Wohnsitz in der Schweiz. Bundesverfahren sem, Zuständigkeit kantonales Amt. Vollständiger Leitfaden zu Anforderungen, Erneuerung und Fristen.",
           "date": "2026-09-02T08:19:43.153Z"
+        },
+        {
+          "title": "Krankenkassenprämien im Kanton Aargau und Prämienermäßigung",
+          "url": "/de/schweiz-artikel/aargau-krankenkasse-praemienzuschuesse/",
+          "excerpt": "Erfahren Sie, wie die Krankenkassenprämien im Kanton Aargau funktionieren, welche Franchisen es gibt und wie Sie eine Prämienermäßigung durch kantonale Zuschüsse beantragen können.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Velo in den Aargauer Schulen: Rechte und Verfassung",
+          "url": "/de/schweiz-artikel/schweizer-parlament-kopftuch-verbot/",
+          "excerpt": "Das Aargauer Parlament hat mit 78 Ja und 54 Nein für ein Kopftuchverbot in öffentlichen Schulen bis 16 Jahre gestimmt, doch das Bundesgericht stellt die Rechtmässigkeit der Massnahme in Frage.",
+          "date": "2026-08-25T23:47:24.519Z"
+        },
+        {
+          "title": "Aargau auf dem Weg zum Kopftuchverbot in Schulen",
+          "url": "/de/schweiz-artikel/aargau-kopftuch-verbot-schulen/",
+          "excerpt": "Der Grosse Aargauer Rat nimmt die Motion mit 78 Stimmen an. Die Kantonsregierung wendet sich aus verfassungsrechtlichen Gründen gegen das Bundesgerichtsurteil von 2015.",
+          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "links": [
@@ -470,7 +571,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "AG",
@@ -538,6 +639,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 8 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -584,16 +699,34 @@
           "date": "2026-10-07T09:03:30.904Z"
         },
         {
-          "title": "Primes d'assurance maladie du canton d'Argovie et réduction des primes",
-          "url": "/fr/articles-suisse/argovie-subventions-primes-sante/",
-          "excerpt": "Découvrez comment fonctionnent les primes d'assurance maladie en Argovie, les franchises disponibles et comment demander une réduction grâce aux aides cantonales.",
-          "date": "2026-09-02T06:54:26.361Z"
+          "title": "Permis L dans le canton d'Argovie : validité et renouvellement",
+          "url": "/fr/articles-suisse/permis-l-argovie-guide/",
+          "excerpt": "Guide du permis L de courte durée dans le canton d'Argovie : règles de validité, procédures de prolongation et critères de passage au permis B.",
+          "date": "2026-09-02T10:05:18.887Z"
         },
         {
           "title": "Permis de séjour B Argovie : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-sejour-b-argovie-exigences/",
           "excerpt": "Le permis B est la résidence renouvelable en Suisse. Procédure fédérale SEM, compétence office cantonal. Guide complet des exigences, du renouvellement et des délais.",
           "date": "2026-09-02T08:19:43.153Z"
+        },
+        {
+          "title": "Primes d'assurance maladie du canton d'Argovie et réduction des primes",
+          "url": "/fr/articles-suisse/argovie-subventions-primes-sante/",
+          "excerpt": "Découvrez comment fonctionnent les primes d'assurance maladie en Argovie, les franchises disponibles et comment demander une réduction grâce aux aides cantonales.",
+          "date": "2026-09-02T06:54:26.361Z"
+        },
+        {
+          "title": "Voile dans les écoles argoviennes : droits et constitution",
+          "url": "/fr/articles-suisse/parlement-suisse-voile-interdiction/",
+          "excerpt": "Le Parlement d'Argovie a voté pour interdire le voile dans les écoles publiques jusqu'à 16 ans avec 78 oui et 54 non, mais le Tribunal fédéral met en doute la légalité de la mesure.",
+          "date": "2026-08-25T23:47:24.519Z"
+        },
+        {
+          "title": "Argovie vers l'interdiction du voile dans les écoles",
+          "url": "/fr/articles-suisse/argovie-interdiction-voile-ecoles/",
+          "excerpt": "Le Grand Conseil argovien approuve la motion par 78 voix. Le gouvernement cantonal s'y oppose pour des doutes constitutionnels sur la base de l'arrêt du Tribunal fédéral de 2015.",
+          "date": "2026-08-25T16:30:23.961Z"
         }
       ],
       "links": [
@@ -614,7 +747,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

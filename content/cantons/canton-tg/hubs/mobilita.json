@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "6cf8e1c15b163fb37130921f35d8c0b8b35c4fe7341d4844e790574c4d6a1a4b",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "21db95ba2308027aaba7929731a46f8ac2de9dde5494b72c9bb7be466d957ea3",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -165,7 +165,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Kesswil: Uttwilerstrasse chiusa dal 15 al 18 ottobre 2026",
+          "url": "/articoli-turgovia/chiusura-strada-kesswil/",
+          "excerpt": "La Uttwilerstrasse di Kesswil sarà chiusa dal 15 ottobre 2026 alle 7 al 18 ottobre alle 17. Traffico deviato e possibile rinvio per pioggia o freddo.",
+          "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Tragico incidente stradale ad Amlikon-Bissegg: muore 18enne",
+          "url": "/articoli-svizzera/incidente-moto-amlikon-bissegg-18-anni/",
+          "excerpt": "Una motociclista diciottenne è deceduta in ospedale in seguito alle gravissime ferite riportate nello scontro tra la sua moto e un furgone.",
+          "date": "2026-08-16T19:03:12.024Z"
+        }
+      ],
       "links": [
         {
           "label": "Attese ai valichi verso Germania",
@@ -196,7 +209,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "TG",
@@ -339,7 +352,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Kesswil: Uttwilerstrasse closed from October 15 to 18, 2026",
+          "url": "/en/thurgau-articles/kesswil-road-closure-october-2026/",
+          "excerpt": "The Uttwilerstrasse in Kesswil will be closed from 7 on October 15, 2026, until 17 on October 18. Traffic will be diverted, and postponement is possible due to rain or cold.",
+          "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Tragic road accident in Amlikon-Bissegg: 18-year-old dies",
+          "url": "/en/swiss-articles/motorcycle-accident-amlikon-bissegg-18-years/",
+          "excerpt": "An eighteen-year-old motorcyclist died in hospital following the very serious injuries sustained in the collision between her motorcycle and a van.",
+          "date": "2026-08-16T19:03:12.024Z"
+        }
+      ],
       "links": [
         {
           "label": "Border waits towards Germany",
@@ -370,7 +396,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "TG",
@@ -513,7 +539,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Kesswil: Uttwilerstrasse vom 15. bis 18. Oktober 2026 gesperrt",
+          "url": "/de/thurgau-artikel/strassensperrung-kesswil-oktober-2026/",
+          "excerpt": "Die Uttwilerstrasse in Kesswil wird vom 15. Oktober 2026 um 7 Uhr bis zum 18. Oktober um 17 Uhr gesperrt. Der Verkehr wird umgeleitet, und wegen Regen oder Kälte ist eine Verschiebung möglich.",
+          "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Tragischer Verkehrsunfall in Amlikon-Bissegg: 18-Jähriger stirbt",
+          "url": "/de/schweiz-artikel/motorradunfall-amlikon-bissegg-18-jaehrig/",
+          "excerpt": "Eine 18-jährige Motorradfahrerin starb im Krankenhaus an den schweren Verletzungen, die sie bei der Kollision zwischen ihrem Motorrad und einem Lieferwagen erlitten hatte.",
+          "date": "2026-08-16T19:03:12.024Z"
+        }
+      ],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Deutschland",
@@ -544,7 +583,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "TG",
@@ -687,7 +726,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Kesswil : Uttwilerstrasse fermée du 15 au 18 octobre 2026",
+          "url": "/fr/articles-thurgovie/fermeture-route-kesswil-octobre-2026/",
+          "excerpt": "L’Uttwilerstrasse de Kesswil sera fermée du 15 octobre 2026 à 7 h au 18 octobre à 17 h. Trafic dévié et report possible en cas de pluie ou de froid.",
+          "date": "2026-10-08T11:25:33.511Z"
+        },
+        {
+          "title": "Accident de la route tragique à Amlikon-Bissegg : mort de 18 ans",
+          "url": "/fr/articles-suisse/accident-moto-amlikon-bissegg-18-ans/",
+          "excerpt": "Une motocycliste de dix-huit ans est décédée à l'hôpital des suites des très graves blessures rapportées lors de l'affrontement entre sa moto et un fourgon.",
+          "date": "2026-08-16T19:03:12.024Z"
+        }
+      ],
       "links": [
         {
           "label": "Attente aux frontières vers Allemagne",
@@ -718,7 +770,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

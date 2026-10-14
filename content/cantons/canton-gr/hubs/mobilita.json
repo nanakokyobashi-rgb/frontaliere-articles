@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "81d0d0dcc2f84831a832c9a519b97d9b38281c211372dfca9428ebb57e18db3e",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "5bf09c2d8dcac75e1cd726fc9e2f6dee902350b20e08fda6770d8defd362788f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -193,10 +193,22 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fläsch chiude strada, sentieri e area d'arrampicata",
+          "url": "/articoli-grigioni/flaesch-strada-sentieri-chiusi/",
+          "excerpt": "Sopra Fläsch il rischio di distacco di roccia porta a chiusure precauzionali di strada, sentieri escursionistici e palestra d'arrampicata.",
+          "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Strada della Calanca: chiusura totale tra Molina e Arvigo",
+          "url": "/articoli-grigioni/strada-calanca-chiusura-preventiva/",
+          "excerpt": "Chiusura totale da mercoledì alle 21",
+          "date": "2026-10-07T06:43:54.388Z"
+        },
         {
           "title": "Abbonamenti trasporti pubblici Grigioni: zone e tariffe",
           "url": "/articoli-svizzera/grigioni-percorso-quotidiano-pass/",
@@ -204,16 +216,10 @@
           "date": "2026-10-01T03:03:01.471Z"
         },
         {
-          "title": "Vivere a Ponte in Valtellina, lavorare nei Grigioni",
-          "url": "/articoli-frontaliere/ponte-valtellina-grigioni-frontaliere/",
-          "excerpt": "Guida completa per frontalieri: imposta alla fonte, Permesso G, franchigia €10k, AVS/LAMal, costo della vita. Dal 2024.",
-          "date": "2026-09-06T23:13:28.583Z"
-        },
-        {
-          "title": "TRIP: sviluppo mobilità tra Lombardia e Grigioni",
-          "url": "/articoli-frontaliere/trip-progetto-treni-retici-in-progress/",
-          "excerpt": "Il progetto TRIP collega Lombardia e Grigioni: obiettivi, rete ferroviaria e prospettive della mobilità transfrontaliera.",
-          "date": "2026-07-24T16:10:28.808Z"
+          "title": "Semafori contro il traffico parassitario: la strategia dei Grigioni funziona",
+          "url": "/articoli-frontaliere/semafori-grigioni-traffico-parassitario/",
+          "excerpt": "L'Ufficio tecnico retico ha installato cinque semafori per contrastare il traffico parassitario, con buoni risultati",
+          "date": "2026-08-16T22:36:02.756Z"
         },
         {
           "title": "Da S-chanf a Livigno in treno, Coira dice sì",
@@ -228,22 +234,16 @@
           "date": "2026-08-09T00:40:13.497Z"
         },
         {
-          "title": "Berzo Demo e Grigioni: vivere da frontaliere al confine",
-          "url": "/articoli-frontaliere/vivere-berzo-demo-lavorare-grigioni/",
-          "excerpt": "Guida completa per chi vive a Berzo Demo e lavora in Grigioni: normative fiscali svizzere, Permesso G, AVS/LAMal, franchigie, contributi e procedure.",
-          "date": "2026-08-22T01:23:08.125Z"
-        },
-        {
           "title": "Grigioni: traffico di sviamento, UDC critica il Governo",
           "url": "/articoli-svizzera/grigioni-traffico-sviamento-udc/",
           "excerpt": "L'UDC grigionese propone il modello di Birsfelden per contrastare il traffico di sviamento sulla A13. Il Governo chiede chiarezza giuridica prima di procedere.",
           "date": "2026-07-21T16:56:20.835Z"
         },
         {
-          "title": "Grigioni inviano fattura all'Italia per i costi del traffico olimpico",
-          "url": "/articoli-frontaliere/grigioni-fattura-italia-olimpiadi/",
-          "excerpt": "Il cantone dei Grigioni ha inviato una fattura da 2,6 milioni di franchi all'Italia per coprire i costi del piano trasporti durante le Olimpiadi di Milano-Cortina 2026.",
-          "date": "2026-05-08T04:56:14.368Z"
+          "title": "TRIP: sviluppo mobilità tra Lombardia e Grigioni",
+          "url": "/articoli-frontaliere/trip-progetto-treni-retici-in-progress/",
+          "excerpt": "Il progetto TRIP collega Lombardia e Grigioni: obiettivi, rete ferroviaria e prospettive della mobilità transfrontaliera.",
+          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "links": [
@@ -284,7 +284,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GR",
@@ -422,7 +422,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -455,10 +455,21 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fläsch closes road, trails and climbing area",
+          "url": "/en/graubunden-articles/flaesch-road-trails-closed/",
+          "excerpt": "Above Fläsch, the risk of rockfall leads to precautionary closures of the road, hiking trails, and climbing gym.",
+          "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Calanca Road: complete closure between Molina and Arvigo",
+          "url": "/en/graubunden-articles/calanca-road-preventive-closure/",
+          "date": "2026-10-07T06:43:54.388Z"
+        },
         {
           "title": "Graubünden Public Transportation Passes: Zones and Fares",
           "url": "/en/swiss-articles/graubunden-public-transport-pass/",
@@ -466,16 +477,10 @@
           "date": "2026-10-01T03:03:01.471Z"
         },
         {
-          "title": "Living in Ponte in Valtellina, working in Graubünden",
-          "url": "/en/cross-border-articles/live-ponte-valtelline-work-graubunden/",
-          "excerpt": "Complete guide for border workers: source tax, G Permit, €10k deductible, AVS/LAMal, cost of living. Since 2024.",
-          "date": "2026-09-06T23:13:28.583Z"
-        },
-        {
-          "title": "TRIP: mobility development between Lombardy and Graubünden",
-          "url": "/en/cross-border-articles/trip-project-trains-retici-progress/",
-          "excerpt": "The TRIP project aims to develop mobility between Lombardy and Graubünden.",
-          "date": "2026-07-24T16:10:28.808Z"
+          "title": "Traffic lights against parasitic traffic: the Graubünden strategy works",
+          "url": "/en/cross-border-articles/traffic-lights-against-parasitic-traffic-the-graubunden-strategy-works/",
+          "excerpt": "The Rhaetian Technical Office has installed five traffic lights to combat parasitic traffic, with good results",
+          "date": "2026-08-16T22:36:02.756Z"
         },
         {
           "title": "From S-chanf to Livigno by train, Chur says yes",
@@ -490,22 +495,16 @@
           "date": "2026-08-09T00:40:13.497Z"
         },
         {
-          "title": "Berzo Demo and Graubünden: living as frontiersmen at the border",
-          "url": "/en/cross-border-articles/living-berzo-demo-working-graubunden/",
-          "excerpt": "Complete guide for those who live in Berzo Demo and work in Graubünden: Swiss tax regulations, G Permit, AVS/LAMal, deductibles, contributions and procedures.",
-          "date": "2026-08-22T01:23:08.125Z"
-        },
-        {
           "title": "Graubünden: diversion traffic, UDC criticizes the Government",
           "url": "/en/swiss-articles/graubunden-diversion-traffic-udc/",
           "excerpt": "The greyish CDU proposes the Birsfelden model to counteract diversion traffic on the A13. The Government asks for legal clarity before proceeding.",
           "date": "2026-07-21T16:56:20.835Z"
         },
         {
-          "title": "Graubünden send Italy bill for Olympic traffic costs",
-          "url": "/en/cross-border-articles/graubunden-bill-italy-olympics/",
-          "excerpt": "The canton of Graubünden has sent a bill for 2.6 million francs to Italy to cover the costs of the transport plan during the Milan-Cortina 2026 Olympics.",
-          "date": "2026-05-08T04:56:14.368Z"
+          "title": "TRIP: mobility development between Lombardy and Graubünden",
+          "url": "/en/cross-border-articles/trip-project-trains-retici-progress/",
+          "excerpt": "The TRIP project aims to develop mobility between Lombardy and Graubünden.",
+          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "links": [
@@ -546,7 +545,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GR",
@@ -684,7 +683,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -717,10 +716,22 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fläsch sperrt Straße, Wanderwege und Klettergarten",
+          "url": "/de/graubunden-artikel/flaesch-strasse-wanderwege-gesperrt/",
+          "excerpt": "Oberhalb von Fläsch führt die Gefahr eines Felsabbruchs zu vorsorglichen Sperrungen der Straße, der Wanderwege und des Klettergartens.",
+          "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Calanca-Straße: vollständige Schließung zwischen Molina und Arvigo",
+          "url": "/de/graubunden-artikel/calancastrasse-praventive-sperrung/",
+          "excerpt": "Vollständige Schließung von Mittwoch um 21 Uhr",
+          "date": "2026-10-07T06:43:54.388Z"
+        },
         {
           "title": "Abonnements für den öffentlichen Nahverkehr in Graubünden: Zonen und Tarife",
           "url": "/de/schweiz-artikel/graubuenden-oev-abos/",
@@ -728,16 +739,10 @@
           "date": "2026-10-01T03:03:01.471Z"
         },
         {
-          "title": "Leben in Ponte in Valtellina, Arbeiten in Graubünden",
-          "url": "/de/grenzgaenger-artikel/in-ponte-wohnen-graubuenden-arbeiten/",
-          "excerpt": "Vollständiger Leitfaden für Grenzgänger: Quellensteuer, G-Bewilligung, € 10k-Franchise, AHV/KVG, Lebenshaltungskosten. Ab 2024.",
-          "date": "2026-09-06T23:13:28.583Z"
-        },
-        {
-          "title": "TRIP: Mobilitätsentwicklung zwischen Lombardei und Graubünden",
-          "url": "/de/grenzgaenger-artikel/trip-projekt-zuege-retici-fortschritt/",
-          "excerpt": "Das TRIP-Projekt zielt darauf ab, die Mobilität zwischen der Lombardei und Graubünden zu entwickeln.",
-          "date": "2026-07-24T16:10:28.808Z"
+          "title": "Ampeln gegen parasitären Verkehr: Bündner Strategie funktioniert",
+          "url": "/de/grenzgaenger-artikel/ampeln-gegen-parasitaren-verkehr-bundner-strategie-funktioniert/",
+          "excerpt": "Das rätische technische Büro hat fünf Ampeln installiert, um dem parasitären Verkehr entgegenzuwirken, mit guten Ergebnissen",
+          "date": "2026-08-16T22:36:02.756Z"
         },
         {
           "title": "Von S-chanf nach Livigno mit dem Zug, Chur sagt ja",
@@ -752,22 +757,16 @@
           "date": "2026-08-09T00:40:13.497Z"
         },
         {
-          "title": "Berzo Demo und Graubünden: Grenzgänger leben an der Grenze",
-          "url": "/de/grenzgaenger-artikel/leben-berzo-demo-arbeiten-graubuenden/",
-          "excerpt": "Vollständiger Leitfaden für diejenigen, die in Berzo Demo leben und in Graubünden arbeiten: Schweizer Steuervorschriften, G-Bewilligung, AHV/KVG, Franchisen, Beiträge und Verfahren.",
-          "date": "2026-08-22T01:23:08.125Z"
-        },
-        {
           "title": "Graubünden: Umleitungsverkehr, SVP kritisiert Regierung",
           "url": "/de/schweiz-artikel/graubuenden-ausweichverkehr-svp/",
           "excerpt": "Die Bündner SVP schlägt das Birsfelden-Modell vor, um dem Umleitungsverkehr auf der A13 entgegenzuwirken. Die Regierung verlangt rechtliche Klarheit, bevor sie fortfährt.",
           "date": "2026-07-21T16:56:20.835Z"
         },
         {
-          "title": "Graubünden stellt Italien Rechnung für olympischen Verkehr",
-          "url": "/de/grenzgaenger-artikel/graubunden-rechnung-italien-olympiade/",
-          "excerpt": "Der Kanton Graubünden hat Italien eine Rechnung über 2,6 Millionen Franken für die Transportkosten während der Olympischen Spiele Mailand-Cortina 2026 gestellt.",
-          "date": "2026-05-08T04:56:14.368Z"
+          "title": "TRIP: Mobilitätsentwicklung zwischen Lombardei und Graubünden",
+          "url": "/de/grenzgaenger-artikel/trip-projekt-zuege-retici-fortschritt/",
+          "excerpt": "Das TRIP-Projekt zielt darauf ab, die Mobilität zwischen der Lombardei und Graubünden zu entwickeln.",
+          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "links": [
@@ -808,7 +807,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GR",
@@ -946,7 +945,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -979,10 +978,22 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/fideris-kueblis-neue-linienfuehrung/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fläsch ferme la route, les sentiers et le site d’escalade",
+          "url": "/fr/articles-grisons/flaesch-route-sentiers-fermes/",
+          "excerpt": "Au-dessus de Fläsch, le risque de chute de rochers entraîne la fermeture préventive de la route, des sentiers de randonnée et du site d’escalade.",
+          "date": "2026-10-09T11:33:58.551Z"
+        },
+        {
+          "title": "Route de la Calanca : fermeture totale entre Molina et Arvigo",
+          "url": "/fr/articles-grisons/route-calanca-fermeture-preventive/",
+          "excerpt": "Fermeture totale à partir de mercredi à 21 h",
+          "date": "2026-10-07T06:43:54.388Z"
+        },
         {
           "title": "Abonnements aux transports publics des Grisons : zones et tarifs",
           "url": "/fr/articles-suisse/grisons-transports-abonnements/",
@@ -990,16 +1001,10 @@
           "date": "2026-10-01T03:03:01.471Z"
         },
         {
-          "title": "Vivre à Ponte in Valtellina, travailler dans les Grisons",
-          "url": "/fr/articles-frontalier/vivre-ponte-valteline-travailler-grisons/",
-          "excerpt": "Guide complet pour frontaliers : taxe à la source, permis G, franchise € 10k, AVS/LAMal, coût de la vie. A partir de 2024.",
-          "date": "2026-09-06T23:13:28.583Z"
-        },
-        {
-          "title": "TRIP : développement de la mobilité entre la Lombardie et les Grisons",
-          "url": "/fr/articles-frontalier/trip-projet-trains-retici-progres/",
-          "excerpt": "Le projet TRIP vise à développer la mobilité entre la Lombardie et les Grisons.",
-          "date": "2026-07-24T16:10:28.808Z"
+          "title": "Semafori contro il traffico parassitario",
+          "url": "/fr/articles-frontalier/semafori-contro-il-traffico-parassitario/",
+          "excerpt": "Le bureau technique rhétique a installé cinq feux de circulation pour lutter contre le trafic parasitaire, avec de bons résultats",
+          "date": "2026-08-16T22:36:02.756Z"
         },
         {
           "title": "De S-chanf à Livigno en train, Coire dit oui",
@@ -1014,22 +1019,16 @@
           "date": "2026-08-09T00:40:13.497Z"
         },
         {
-          "title": "Berzo Demo et Grisons : vivre en frontalier à la frontière",
-          "url": "/fr/articles-frontalier/vivre-berzo-demo-travailler-grisons/",
-          "excerpt": "Guide complet pour ceux qui vivent à Berzo Demo et travaillent dans les Grisons : réglementations fiscales suisses, permis G, AVS/LAMal, franchises, cotisations et procédures.",
-          "date": "2026-08-22T01:23:08.125Z"
-        },
-        {
           "title": "Grisons : trafic de détournement, UDC critique le gouvernement",
           "url": "/fr/articles-suisse/grisons-trafic-evitement-udc/",
           "excerpt": "L'UDC grisonne propose le modèle de Birsfelden pour contrer le trafic de détournement sur l'A13. Le Gouvernement demande des éclaircissements juridiques avant de procéder.",
           "date": "2026-07-21T16:56:20.835Z"
         },
         {
-          "title": "Les Grisons envoient une facture à l'Italie pour les coûts du trafic olympique",
-          "url": "/fr/articles-frontalier/grisons-facture-italie-olympiades/",
-          "excerpt": "Le canton des Grisons a envoyé une facture de 2,6 millions de francs à l'Italie pour couvrir les coûts du plan de transport pendant les Jeux olympiques de Milan-Cortina 2026.",
-          "date": "2026-05-08T04:56:14.368Z"
+          "title": "TRIP : développement de la mobilité entre la Lombardie et les Grisons",
+          "url": "/fr/articles-frontalier/trip-projet-trains-retici-progres/",
+          "excerpt": "Le projet TRIP vise à développer la mobilité entre la Lombardie et les Grisons.",
+          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "links": [
@@ -1070,7 +1069,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

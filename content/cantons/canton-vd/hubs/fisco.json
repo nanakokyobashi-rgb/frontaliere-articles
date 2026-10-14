@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "f47173ed98df7b89266246b6926f3d97303200feb82bc1d66426d7ac52c30dbe",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "323d2b5c143f5d6ba8d6f809dacde735dd0c67b5e2c1d0d13f0466243d6653b8",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -115,21 +115,33 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Losanna: deficit di 77,7 milioni nel budget 2027",
+          "url": "/articoli-vaud/losanna-budget-deficit-2027/",
+          "excerpt": "Il budget 2027 di Losanna presenta un deficit di 77,7 milioni di franchi.",
+          "date": "2026-10-07T11:12:50.818Z"
+        },
+        {
+          "title": "Vaud: la destra rilancia il bouclier fiscal",
+          "url": "/articoli-vaud/vaud-revision-bouclier-fiscal-2024/",
+          "excerpt": "Il Gran Consiglio vota per ripristinare la revisione 2024 dello scudo fiscale, nonostante il voto popolare. La sinistra annuncia un referendum.",
+          "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "Vaud rivede il budget 2027 per coprire il buco dei 12%",
+          "url": "/articoli-vaud/vaud-budget-2027-revisione-12percento/",
+          "excerpt": "Minori entrate fiscali: 272 milioni di franchi",
+          "date": "2026-10-08T11:43:59.351Z"
+        },
         {
           "title": "Dichiarazione imposte Svizzera: guida Vaud 2026",
           "url": "/articoli-svizzera/guida-fiscale-vaud-2026/",
           "excerpt": "Tre livelli fiscali, moltiplicatore comunale e procedura online: la guida 2026 alla dichiarazione in Svizzera con focus sul canton Vaud.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Imposte cantonali nel canton Vaud: aliquote e deduzioni",
-          "url": "/articoli-svizzera/imposte-cantonali-vaud-aliquote/",
-          "excerpt": "Sistema fiscale a 3 livelli, aliquote progressive per scaglioni di reddito, deduzioni ammesse e portale ufficiale del canton Vaud per le dichiarazioni.",
-          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Vaud, taglio fiscale del 12% sul reddito e sulla sostanza",
@@ -144,28 +156,16 @@
           "date": "2026-09-27T13:05:48.387Z"
         },
         {
-          "title": "Imposta cantonale: confronto Svizzera 2026 - Cantone Vaud",
-          "url": "/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-vaud/",
-          "excerpt": "Il cantone Vaud ha un'aliquota di imposta cantonale del 10,5%.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
-          "title": "Scontro sulle tasse: sfida alla voracità fiscale nel Canton Vaud",
-          "url": "/articoli-svizzera/scontro-tasse-vodese-2024/",
-          "excerpt": "L'iniziativa del 12% propone uno sconto del 12% sull'imposta cantonale sul reddito e sul patrimonio.",
-          "date": "2026-08-17T13:10:46.376Z"
+          "title": "Imposte cantonali nel canton Vaud: aliquote e deduzioni",
+          "url": "/articoli-svizzera/imposte-cantonali-vaud-aliquote/",
+          "excerpt": "Sistema fiscale a 3 livelli, aliquote progressive per scaglioni di reddito, deduzioni ammesse e portale ufficiale del canton Vaud per le dichiarazioni.",
+          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Imposta successione e donazione nel Cantone di Vaud",
           "url": "/articoli-svizzera/imposta-successione-donazione-vaud/",
           "excerpt": "Guida alle aliquote e alle esenzioni per eredi e donatari nel sistema fiscale del Cantone di Vaud, con focus sui rapporti di parentela.",
           "date": "2026-09-05T09:40:27.337Z"
-        },
-        {
-          "title": "Imposta cantonale: confronto 2026 e focus sul Canton Vaud",
-          "url": "/articoli-svizzera/confronto-imposte-cantonali-2026/",
-          "excerpt": "Analisi delle aliquote fiscali cantonali per il 2026, differenze tra i cantoni svizzeri e focus specifico sul sistema fiscale del Canton Vaud.",
-          "date": "2026-08-02T02:12:08.749Z"
         }
       ],
       "links": [
@@ -194,7 +194,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "VD",
@@ -287,21 +287,32 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Lausanne: deficit of 77,7 million in the 2027 budget",
+          "url": "/en/vaud-articles/lausanne-budget-deficit-2027/",
+          "excerpt": "The 2027 budget of Lausanne presents a deficit of 77,7 million francs.",
+          "date": "2026-10-07T11:12:50.818Z"
+        },
+        {
+          "title": "Vaud: the right revives the tax shield",
+          "url": "/en/vaud-articles/vaud-tax-shield-revision-2024/",
+          "excerpt": "The Grand Council votes to restore the 2024 revision of the tax shield, despite the popular vote. The left announces a referendum.",
+          "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "Vaud revises the 2027 budget to cover the 12% shortfall",
+          "url": "/en/vaud-articles/vaud-revises-the-2027-budget-to-cover-the-12-shortfall/",
+          "date": "2026-10-08T11:43:59.351Z"
+        },
         {
           "title": "Swiss tax return: Vaud 2026 guide",
           "url": "/en/swiss-articles/swiss-tax-return-vaud-2026/",
           "excerpt": "Three tax levels, municipal multiplier and online procedure: the 2026 guide to filing a tax return in Switzerland with a focus on the canton of Vaud.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Cantonal taxes in the canton of Vaud: rates and deductions",
-          "url": "/en/swiss-articles/canton-vaud-cantonal-tax-rates/",
-          "excerpt": "3-tier tax system, progressive rates for income brackets, allowable deductions and official portal of the canton of Vaud for declarations.",
-          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Vaud, 12% tax cut on income and wealth",
@@ -316,28 +327,16 @@
           "date": "2026-09-27T13:05:48.387Z"
         },
         {
-          "title": "Cantonal tax: comparison Switzerland 2026 - Canton Vaud",
-          "url": "/en/swiss-articles/tax-cantonal-comparison-switzerland-2026-canton-vaud/",
-          "excerpt": "The canton of Vaud has a cantonal tax rate of 10.5%.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
-          "title": "Tax Clash: Challenging Tax Voracity in the Canton of Vaud",
-          "url": "/en/swiss-articles/tax-clash-challenging-tax-voracity-in-the-canton-of-vaud/",
-          "excerpt": "The 12% initiative proposes a 12% discount on cantonal income and wealth tax.",
-          "date": "2026-08-17T13:10:46.376Z"
+          "title": "Cantonal taxes in the canton of Vaud: rates and deductions",
+          "url": "/en/swiss-articles/canton-vaud-cantonal-tax-rates/",
+          "excerpt": "3-tier tax system, progressive rates for income brackets, allowable deductions and official portal of the canton of Vaud for declarations.",
+          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Tax succession and donation in the Canton of Vaud",
           "url": "/en/swiss-articles/inheritance-gift-tax-vaud-canton/",
           "excerpt": "Guide to rates and exemptions for heirs and donors in the tax system of the Canton of Vaud, with a focus on kinship relationships.",
           "date": "2026-09-05T09:40:27.337Z"
-        },
-        {
-          "title": "Cantonal tax: comparison 2026 and focus on the canton of Vaud",
-          "url": "/en/swiss-articles/cantonal-tax-comparison-2026-vaud/",
-          "excerpt": "Analysis of cantonal tax rates for 2026, differences between Swiss cantons and specific focus on the tax system of the Canton of Vaud.",
-          "date": "2026-08-02T02:12:08.749Z"
         }
       ],
       "links": [
@@ -366,7 +365,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "VD",
@@ -459,21 +458,32 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Lausanne: Defizit von 77,7 Millionen im Budget 2027",
+          "url": "/de/waadt-artikel/lausanne-budget-defizit-2027/",
+          "excerpt": "Das Budget 2027 von Lausanne weist ein Defizit von 77,7 Millionen Franken auf.",
+          "date": "2026-10-07T11:12:50.818Z"
+        },
+        {
+          "title": "Waadt: Die Rechte belebt den fiskalischen Bouclier neu.",
+          "url": "/de/waadt-artikel/waadt-steuerbremse-revision-2024/",
+          "excerpt": "Der Grosse Rat stimmt dafür, die Revision 2024 des Fiskalschildes trotz der Volksabstimmung wieder aufzunehmen. Die Linke kündigt ein Referendum an.",
+          "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "Waadt überarbeitet das Budget 2027, um die 12%-Lücke zu schliessen",
+          "url": "/de/waadt-artikel/waadt-uberarbeitet-das-budget-2027-um-die-12-lucke-zu-schliessen/",
+          "date": "2026-10-08T11:43:59.351Z"
+        },
         {
           "title": "Steuererklärung Schweiz: Leitfaden Waadt 2026",
           "url": "/de/schweiz-artikel/steuererklaerung-waadt-2026/",
           "excerpt": "Drei Steuerstufen, kommunaler Steuerfuss und Online-Verfahren: der Leitfaden 2026 zur Steuererklärung in der Schweiz mit Fokus auf den Kanton Waadt.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Kantonale Steuern im Kanton Waadt: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/kanton-waadt-kantonssteuer-saetze/",
-          "excerpt": "3-stufiges Steuersystem, progressive Steuersätze für Einkommensstufen, zulässige Abzüge und offizielles Portal des Kantons Waadt für Erklärungen.",
-          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Waadt, Steuersenkung von 12% auf Einkommen und Vermögen",
@@ -488,28 +498,16 @@
           "date": "2026-09-27T13:05:48.387Z"
         },
         {
-          "title": "Kantonssteuer: Vergleich Schweiz 2026 - Kanton Waadt",
-          "url": "/de/schweiz-artikel/steuerliche-vergleichung-schweiz-2026-kanton-waadt/",
-          "excerpt": "Der Kanton Waadt hat einen kantonalen Steuersatz von 10,5%.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
-          "title": "Steuerstreit: Herausforderung Steuergier im Kanton Waadt",
-          "url": "/de/schweiz-artikel/steuerstreit-herausforderung-steuergier-im-kanton-waadt/",
-          "excerpt": "Die 12% -Initiative schlägt einen Rabatt von 12% auf die kantonale Einkommens- und Vermögenssteuer vor.",
-          "date": "2026-08-17T13:10:46.376Z"
+          "title": "Kantonale Steuern im Kanton Waadt: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/kanton-waadt-kantonssteuer-saetze/",
+          "excerpt": "3-stufiges Steuersystem, progressive Steuersätze für Einkommensstufen, zulässige Abzüge und offizielles Portal des Kantons Waadt für Erklärungen.",
+          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Erbschafts- und Schenkungssteuer im Kanton Waadt",
           "url": "/de/schweiz-artikel/erbschaft-schenkungssteuer-kanton-waadt/",
           "excerpt": "Leitfaden zu den Steuersätzen und Befreiungen für Erben und Schenkende im Steuersystem des Kantons Waadt mit Schwerpunkt auf Verwandtschaftsverhältnissen.",
           "date": "2026-09-05T09:40:27.337Z"
-        },
-        {
-          "title": "Kantonssteuer: Vergleich 2026 und Fokus auf den Kanton Waadt",
-          "url": "/de/schweiz-artikel/kantonale-steuervergleich-2026-waadt/",
-          "excerpt": "Analyse der kantonalen Steuersätze für 2026, Unterschiede zwischen Schweizer Kantonen und besonderer Fokus auf das Steuersystem des Kantons Waadt.",
-          "date": "2026-08-02T02:12:08.749Z"
         }
       ],
       "links": [
@@ -538,7 +536,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "VD",
@@ -631,21 +629,33 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Lausanne : déficit de 77,7 millions dans le budget 2027",
+          "url": "/fr/articles-vaud/budget-lausanne-deficit-2027/",
+          "excerpt": "Le budget 2027 de Lausanne présente un déficit de 77,7 millions de francs.",
+          "date": "2026-10-07T11:12:50.818Z"
+        },
+        {
+          "title": "Vaud : la droite relance le bouclier fiscal",
+          "url": "/fr/articles-vaud/vaud-la-droite-relance-le-bouclier-fiscal/",
+          "excerpt": "Le Grand Conseil vote pour rétablir la révision 2024 du bouclier fiscal, malgré le vote populaire. La gauche annonce un référendum.",
+          "date": "2026-10-07T10:47:31.180Z"
+        },
+        {
+          "title": "Vaud revoit le budget 2027 pour combler le trou de 12 %",
+          "url": "/fr/articles-vaud/vaud-revoit-le-budget-2027-pour-combler-le-trou-de-12/",
+          "excerpt": "Recettes fiscales en moins : 272 millions de francs",
+          "date": "2026-10-08T11:43:59.351Z"
+        },
         {
           "title": "Déclaration d'impôts en Suisse : guide Vaud 2026",
           "url": "/fr/articles-suisse/declaration-impots-vaud-2026/",
           "excerpt": "Trois niveaux fiscaux, multiplicateur communal et procédure en ligne : le guide 2026 de la déclaration en Suisse, avec un focus sur le canton de Vaud.",
           "date": "2026-10-03T11:04:13.754Z"
-        },
-        {
-          "title": "Impôts cantonaux dans le canton de Vaud : taux et déductions",
-          "url": "/fr/articles-suisse/impots-cantonaux-vaud-taux/",
-          "excerpt": "Système fiscal à 3 niveaux, taux progressifs par tranches de revenus, déductions admises et portail officiel du canton de Vaud pour les déclarations.",
-          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Vaud, réduction d'impôt de 12 % sur le revenu et la fortune",
@@ -660,28 +670,16 @@
           "date": "2026-09-27T13:05:48.387Z"
         },
         {
-          "title": "Impôt cantonal : comparaison Suisse 2026 - Canton de Vaud",
-          "url": "/fr/articles-suisse/comparaison-fiscale-suisse-2026-canton-vaud/",
-          "excerpt": "Le canton de Vaud a un taux d'imposition cantonal de 10,5 %.",
-          "date": "2026-08-09T22:03:21.979Z"
-        },
-        {
-          "title": "Choc fiscal : défi à la voracité fiscale dans le canton de Vaud",
-          "url": "/fr/articles-suisse/choc-fiscal-defi-a-la-voracite-fiscale-dans-le-canton-de-vaud/",
-          "excerpt": "L'initiative des 12% propose une remise de 12% sur l'impôt cantonal sur le revenu et la fortune.",
-          "date": "2026-08-17T13:10:46.376Z"
+          "title": "Impôts cantonaux dans le canton de Vaud : taux et déductions",
+          "url": "/fr/articles-suisse/impots-cantonaux-vaud-taux/",
+          "excerpt": "Système fiscal à 3 niveaux, taux progressifs par tranches de revenus, déductions admises et portail officiel du canton de Vaud pour les déclarations.",
+          "date": "2026-09-04T03:23:19.992Z"
         },
         {
           "title": "Impôt succession et donation dans le canton de Vaud",
           "url": "/fr/articles-suisse/impot-succession-donation-canton-vaud/",
           "excerpt": "Guide des taux et des exonérations pour les héritiers et les donataires dans le système fiscal du canton de Vaud, en mettant l'accent sur les relations de parenté.",
           "date": "2026-09-05T09:40:27.337Z"
-        },
-        {
-          "title": "Taxe cantonale : comparaison 2026 et focus sur le canton de Vaud",
-          "url": "/fr/articles-suisse/comparaison-impots-cantonaux-2026-vaud/",
-          "excerpt": "Analyse des taux d’imposition cantonaux pour 2026, des différences entre les cantons suisses et l’attention particulière portée au système fiscal du canton de Vaud.",
-          "date": "2026-08-02T02:12:08.749Z"
         }
       ],
       "links": [
@@ -710,7 +708,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -9,8 +9,11 @@
  * L'assegnazione al tema usa la tassonomia dell'engine
  * (`assignArticlesToTopics` sui 14 `TOPIC_CLUSTERS`, poi la mappa hub→cluster
  * di `engine/shared/cantonSectionCopy.mjs`) per carburanti, fisco, mobilita' e
- * pensioni; eventi e servizi non hanno un cluster e passano dal classificatore
- * a parole chiave dichiarato in `generator/data/canton-hub-topics.json`.
+ * pensioni; ogni tema puo' anche avere un classificatore lessicale diretto
+ * dichiarato in `generator/data/canton-hub-topics.json`. Il lessico diretto
+ * recupera titoli editorialmente espliciti che il seed TF-IDF non riconosce
+ * (per esempio una strada chiusa o un bilancio cantonale), senza trasformare
+ * un articolo genericamente cantonale in una news di tema.
  * L'assegnazione dell'engine resta il segnale principale, ma la pertinenza
  * viene verificata direttamente per OGNI tema: una news con evidenza esplicita
  * in due temi alimenta entrambi gli hub. Le news della sezione propria hanno
@@ -196,22 +199,27 @@ export function loadCantonPool(root, section, load = loadSectionArticles) {
 }
 
 /**
- * Punteggio del classificatore a parole chiave per un tema senza cluster.
- * @returns {{ score: number, titleHit: boolean, excluded: boolean }}
+ * Punteggio del classificatore a parole chiave per un tema.
+ * @returns {{ score: number, titleHit: boolean, requiredHit: boolean, excluded: boolean }}
  */
 export function keywordTopicScore(article, topicConfig) {
   let score = 0;
   let titleHit = false;
+  let requiredHit = !topicConfig.requiredTerms;
   let excluded = false;
   for (const locale of HUB_LOCALES) {
     const terms = topicConfig.terms?.[locale] ?? [];
+    const requiredTerms = topicConfig.requiredTerms?.[locale] ?? [];
     const inTitle = Math.min(2, termHits(article.title[locale], terms));
     const inExcerpt = Math.min(3, termHits(article.excerpt[locale], terms));
     if (inTitle > 0) titleHit = true;
+    if (termHits(article.title[locale], requiredTerms) > 0) requiredHit = true;
     score += 3 * inTitle + inExcerpt;
-    if (termHits(article.title[locale], topicConfig.exclude?.[locale] ?? []) > 0) excluded = true;
+    const hasExcludedTerm = termHits(article.title[locale], topicConfig.exclude?.[locale] ?? []) > 0;
+    const hasExceptionTerm = termHits(article.title[locale], topicConfig.excludeUnless?.[locale] ?? []) > 0;
+    if (hasExcludedTerm && !hasExceptionTerm) excluded = true;
   }
-  return { score, titleHit, excluded };
+  return { score, titleHit, requiredHit, excluded };
 }
 
 const titleKey = (title) => foldForMatch(title).replace(/[^a-z0-9]+/g, ' ').trim();
@@ -268,9 +276,11 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
     return [t.key, { bag, norm: model.normOfTokens(bag) }];
   }));
 
-  const keywordTopics = CANTON_HUB_TOPIC_KEYS.filter((t) => CANTON_HUB_TOPIC_CLUSTERS[t].length === 0);
-  for (const t of keywordTopics) {
-    if (!config.keywordTopics?.[t]) throw new Error(`canton-hubs: il tema "${t}" non ha cluster nell'engine ne' classificatore in canton-hub-topics.json`);
+  const keywordTopics = CANTON_HUB_TOPIC_KEYS.filter((t) => config.keywordTopics?.[t]);
+  for (const t of CANTON_HUB_TOPIC_KEYS) {
+    if (CANTON_HUB_TOPIC_CLUSTERS[t].length === 0 && !config.keywordTopics?.[t]) {
+      throw new Error(`canton-hubs: il tema "${t}" non ha cluster nell'engine ne' classificatore in canton-hub-topics.json`);
+    }
   }
 
   const { freshnessHalfLifeDays, weights, neutralQuality, minTopicStrength, fullTopicStrength } = config.ranking;
@@ -282,7 +292,23 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
   for (const a of eligible) {
     const primaryTopic = cantonHubTopicForCluster(assignment.topicOf.get(a.id));
     const titleTokens = new Set(engine.tokenize(a.title.it));
-    const matches = [];
+    const articleTokens = new Set(engine.tokenize(`${a.title.it} ${a.excerpt.it}`));
+    // Calcola una volta le esclusioni lessicali: valgono anche per il match
+    // semantico. Un titolo esplicitamente escluso (per esempio un phishing
+    // che usa la parola «fisco») non deve rientrare nell'hub solo perché il
+    // cluster TF-IDF gli assegna un coseno sufficiente.
+    const keywordResults = new Map(keywordTopics.map((topic) => [
+      topic,
+      keywordTopicScore(a, config.keywordTopics[topic]),
+    ]));
+    const isExcluded = (topic) => keywordResults.get(topic)?.excluded === true;
+    const matchesByTopic = new Map();
+    const addMatch = (match) => {
+      const previous = matchesByTopic.get(match.topic);
+      if (!previous || Number(match.primary) > Number(previous.primary) || match.strength > previous.strength) {
+        matchesByTopic.set(match.topic, match);
+      }
+    };
 
     // Per i temi con cluster, valuta tutti i cluster che alimentano l'hub,
     // non solo il vincitore monolabel dell'engine. Il titolo resta una prova
@@ -296,14 +322,21 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
           const seed = seedBags.get(cluster);
           const cosine = model.cosineWithBag(a.id, seed.bag, seed.norm);
           const titleHit = [...titleTokens].some((tok) => seed.bag.has(tok));
-          const seedHitCount = engine.tokenize(`${a.title.it} ${a.excerpt.it}`).filter((tok) => seed.bag.has(tok)).length;
+          const seedHitCount = [...articleTokens].filter((tok) => seed.bag.has(tok)).length;
           return { cluster, cosine, titleHit, seedHitCount, primary: topic === primaryTopic };
         })
         // Scegli fra i cluster che sono già ammissibili. Un cluster
         // semanticamente vicino ma senza prova nel titolo non deve oscurare
         // l'altro cluster che invece prova il tema (in particolare mobilita').
         .filter((match) => match.titleHit && match.cosine >= minTopicStrength
-          && (match.primary || match.seedHitCount >= 2))
+          && !isExcluded(topic)
+          && (keywordResults.get(topic)?.requiredHit ?? true)
+          // «frontaliere»/«confine» da soli descrivono il pubblico, non
+          // necessariamente una notizia di mobilita'. Per il cluster
+          // specifico servono due termini del seme tra titolo ed estratto.
+          && (match.cluster === 'confine-dogana'
+            ? match.seedHitCount >= 2
+            : (match.primary || match.seedHitCount >= 2)))
         .sort((x, y) => y.cosine - x.cosine
           || y.seedHitCount - x.seedHitCount
           || x.cluster.localeCompare(y.cluster))[0];
@@ -313,7 +346,7 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
       // due occorrenze di lessico nel titolo+estratto, senza allargare la
       // pertinenza con la sola presenza nel cantone.
       if (!best) continue;
-      matches.push({
+      addMatch({
         topic,
         strength: Math.min(1, best.cosine / fullTopicStrength),
         source: 'cluster',
@@ -321,22 +354,22 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
       });
     }
 
-    // Eventi e servizi erano prima valutati solo quando l'engine non aveva
-    // assegnato alcun cluster. Questo perdeva, per esempio, una news sanitaria
-    // che l'engine assegnava a «famiglia-scuola». Sono temi indipendenti:
-    // applica il loro classificatore dichiarato anche in presenza di un altro
-    // match tassonomico e conserva ogni match valido, non solo il migliore.
+    // Il lessico dichiarato e' un secondo segnale diretto, non un fallback
+    // esclusivo: vale anche quando l'engine ha scelto un cluster diverso.
+    // Questo recupera titoli cantonali espliciti che i seed non coprono e
+    // conserva i match multi-tema senza duplicare una voce nello stesso hub.
     for (const topic of keywordTopics) {
       const cfg = config.keywordTopics[topic];
-      const result = keywordTopicScore(a, cfg);
-      if (result.excluded || !result.titleHit || result.score < cfg.minScore) continue;
-      matches.push({
+      const result = keywordResults.get(topic);
+      if (result.excluded || !result.requiredHit || !result.titleHit || result.score < cfg.minScore) continue;
+      addMatch({
         topic,
         strength: Math.min(1, result.score / (3 * cfg.minScore)),
         source: 'keyword',
         primary: topic === primaryTopic,
       });
     }
+    const matches = [...matchesByTopic.values()];
     if (matches.length === 0) continue;
     assignedArticles.add(a.id);
     if (matches.length > 1) multiTopicArticles.add(a.id);
