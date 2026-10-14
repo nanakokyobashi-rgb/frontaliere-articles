@@ -205,6 +205,22 @@ test('date dettaglio: JSON-LD, meta e time sono letti senza usare il corpo', () 
   assert.equal(extractPublishedDateFromHtml('<article><p>nessuna data</p></article>'), null);
 });
 
+test('date dettaglio: i lettori tollerano > negli attributi quotati di script, meta e time', () => {
+  assert.equal(
+    extractPublishedDateFromHtml('<meta property="article:published_time" content="2026-10-04T12:30:00Z">'
+      + '<script data-note="a > b" type="application/ld+json">{"datePublished":"2026-10-05T12:30:00Z"}</script>')?.toISOString(),
+    '2026-10-05T12:30:00.000Z',
+  );
+  assert.equal(
+    extractPublishedDateFromHtml('<meta data-note="a > b" property="article:published_time" content="2026-10-05T13:30:00Z">')?.toISOString(),
+    '2026-10-05T13:30:00.000Z',
+  );
+  assert.equal(
+    selectPublishedTime('<time data-note="a > b" itemprop="datePublished" datetime="2026-10-05T14:00:00Z">pubblicazione</time>')?.toISOString(),
+    '2026-10-05T14:00:00.000Z',
+  );
+});
+
 test('date dettaglio: selectPublishedTime ignora eventi generici e rifiuta due pubblicazioni discordanti', () => {
   const eventOnly = '<article><time datetime="2026-10-11T12:30:00Z">evento</time></article>';
   assert.equal(selectPublishedTime(eventOnly), null);
@@ -276,6 +292,27 @@ test('CMS SH: payload misto usa un titolo successivo e lascia una nota esplicita
   const scanned = await scanCantonSource({ url: api, parser: 'json-api' }, ctx(impl));
   assert.equal(scanned.headlines[0].headline, row.articleHeadline);
   assert.match(scanned.notes.join(' '), /CMS payload misto/);
+});
+
+test('CMS SH: gli alias non-stringa non diventano titoli tramite coercizione', () => {
+  const api = 'https://sh.ch/CMS/content/list?language=DE';
+  const row = {
+    kachellabel: { title: 'Titolo artificiale dal payload' },
+    articleHeadline: 'Titolo editoriale valido recuperato dal fallback',
+    publication_date: '05.10.2026',
+    permalink: '/Webseite/Schaffhauser-Polizei-124-DE.html',
+  };
+  const shape = cmsPayloadShape(row);
+  assert.equal(shape.titleField, 'articleHeadline');
+  assert.equal(shape.headline, row.articleHeadline);
+
+  const items = extractJsonApiItems(JSON.stringify([row]), api);
+  assert.equal(items.length, 1);
+  assert.equal(items[0].headline, row.articleHeadline);
+  assert.ok(!items[0].headline.includes('[object Object]'));
+
+  const objectOnly = { ...row, articleHeadline: undefined };
+  assert.equal(extractJsonApiItems(JSON.stringify([objectOnly]), api).length, 0);
 });
 
 test('CMS SH: sourceContent elimina tag con > dentro attributi quotati', () => {
@@ -1094,6 +1131,13 @@ test('stripPageChrome: nav, ruoli ARIA, header/footer di pagina; il resto intatt
   assert.ok(!quotedResult.html.includes('/menu'));
   assert.ok(quotedResult.html.includes('<main data-note="c > d">'));
   assert.ok(quotedResult.html.includes('/news/quoted'));
+
+  const unquotedSlash = '<nav data-url=/menu/><a href="/menu">Link di navigazione candidato</a></nav>'
+    + '<main><a href="/news/unquoted-slash">Notizia autentica con data</a></main>';
+  const unquotedSlashResult = stripPageChrome(unquotedSlash);
+  assert.equal(unquotedSlashResult.removed, 1);
+  assert.ok(!unquotedSlashResult.html.includes('Link di navigazione candidato'));
+  assert.ok(unquotedSlashResult.html.includes('/news/unquoted-slash'));
 
   const html = [
     '<body><header><a href="/chi">Chi siamo, la nostra storia</a></header>',

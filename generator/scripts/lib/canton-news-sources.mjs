@@ -316,7 +316,7 @@ function readHtmlTagAt(html, start) {
     closing,
     name: html.slice(nameStart, nameEnd).toLowerCase(),
     attrs,
-    selfClosing: !closing && /\/\s*$/u.test(attrs),
+    selfClosing: !closing && isHtmlSelfClosingStartTag(html, nameEnd, endIndex),
   };
 }
 
@@ -330,7 +330,16 @@ function nextHtmlTag(html, from = 0) {
   return null;
 }
 
-function isCharsetSelfClosingStartTag(html, nameEnd, end) {
+function findHtmlRawTextClosingTag(html, from, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = from;
+  const match = closing.exec(html);
+  return match
+    ? { start: match.index, end: match.index + match[0].length }
+    : null;
+}
+
+function isHtmlSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && isHtmlWhitespace(html[i])) i++;
@@ -383,7 +392,7 @@ function readCharsetTag(html, start) {
     end,
     name,
     selfClosing: !closing && CHARSET_VOID_ELEMENTS.has(name)
-      && isCharsetSelfClosingStartTag(html, i, end),
+      && isHtmlSelfClosingStartTag(html, i, end),
   };
 }
 
@@ -593,10 +602,20 @@ function htmlAttributeValue(attrs, name) {
 export function selectPublishedTime(html) {
   const input = String(html || '');
   const publicationDates = [];
-  const time = /<time\b([^>]*)>/gi;
-  let match;
-  while ((match = time.exec(input)) !== null) {
-    const attrs = match[1] || '';
+  let cursor = 0;
+  while (cursor < input.length) {
+    const tag = nextHtmlTag(input, cursor);
+    if (!tag) break;
+    cursor = tag.end;
+    if (tag.closing) continue;
+    if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
+      cursor = close?.end ?? input.length;
+      continue;
+    }
+    if (tag.name !== 'time') continue;
+
+    const attrs = tag.attrs;
     const itemprop = htmlAttributeValue(attrs, 'itemprop');
     const property = htmlAttributeValue(attrs, 'property');
     const className = htmlAttributeValue(attrs, 'class');
@@ -635,23 +654,43 @@ export function selectPublishedTime(html) {
  */
 export function extractPublishedDateFromHtml(html) {
   const input = String(html || '');
-  const jsonLd = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
-  let match;
-  while ((match = jsonLd.exec(input)) !== null) {
-    const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(match[1]));
-    const date = validDate(value?.[1]);
-    if (date) return date;
-  }
+  let jsonLdDate = null;
+  let metaDate = null;
+  let cursor = 0;
+  while (cursor < input.length) {
+    const tag = nextHtmlTag(input, cursor);
+    if (!tag) break;
+    cursor = tag.end;
+    if (tag.closing) continue;
 
-  const meta = /<meta\b([^>]*)>/gi;
-  while ((match = meta.exec(input)) !== null) {
-    const attrs = match[1] || '';
+    if (tag.name === 'script') {
+      const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
+      if (!close) break;
+      const type = htmlAttributeValue(tag.attrs, 'type').split(';', 1)[0].trim().toLowerCase();
+      if (!jsonLdDate && type === 'application/ld+json') {
+        const scriptBody = input.slice(tag.end, close.start);
+        const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(scriptBody));
+        jsonLdDate = validDate(value?.[1]);
+      }
+      cursor = close.end;
+      continue;
+    }
+    if (tag.name !== 'meta' || metaDate) {
+      if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+        const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
+        cursor = close?.end ?? input.length;
+      }
+      continue;
+    }
+
+    const attrs = tag.attrs;
     const key = htmlAttributeValue(attrs, 'property') || htmlAttributeValue(attrs, 'name');
     if (!/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) continue;
-    const date = validDate(htmlAttributeValue(attrs, 'content'));
-    if (date) return date;
+    metaDate = validDate(htmlAttributeValue(attrs, 'content'));
   }
 
+  if (jsonLdDate) return jsonLdDate;
+  if (metaDate) return metaDate;
   return selectPublishedTime(input);
 }
 
@@ -996,6 +1035,7 @@ const CMS_TITLE_FIELDS = Object.freeze(['kachellabel', 'listlabel', 'articleHead
 export function cmsPayloadShape(row) {
   const fields = CMS_TITLE_FIELDS.filter((field) => Object.hasOwn(row || {}, field) && row[field] != null);
   const selected = fields
+    .filter((field) => typeof row[field] === 'string')
     .map((field) => ({ field, headline: stripTags(row[field]) }))
     .find(({ headline }) => headline.length >= 10);
   return {

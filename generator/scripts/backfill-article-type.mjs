@@ -28,6 +28,7 @@ import {
 } from './lib/registry-article-type.mjs';
 import { parseSourceCitations } from './lib/canton-news-sources.mjs';
 import {
+  itemIdentityOf,
   legacyNewsUrlKey,
   newsUrlKey,
   readLedgerEntry,
@@ -191,8 +192,11 @@ export function isGeneratedSourceCitation(body3, articleId, sourceUrls) {
     const sourceWithoutItemIdentity = stripItemIdentity(sourceUrl);
     if (ledgerEntry.keyForm === 1) {
       // Le chiavi storiche hanno perso la query identificante: confrontarle
-      // con la forma 2 ricreerebbe una falsa assenza di provenienza.
-      if (legacyNewsUrlKey(sourceWithoutItemIdentity) === legacyNewsUrlKey(citation.url)) return true;
+      // con la forma 2 ricreerebbe una falsa assenza di provenienza. Hanno
+      // perso anche l'identita' dell'item, quindi non provano citazioni che la
+      // portano esplicitamente.
+      if (!itemIdentityOf(citation.url)
+        && legacyNewsUrlKey(sourceWithoutItemIdentity) === legacyNewsUrlKey(citation.url)) return true;
     } else if (newsUrlKey(sourceWithoutItemIdentity) === citationKey) {
       return true;
     }

@@ -112,6 +112,14 @@ describe('articleType dal corpo italiano', () => {
     );
   });
 
+  test('una chiave storica path-only non prova una citazione con identita\u0300 item', () => {
+    const urlWithItem = `${SOURCE_URL}#ft-item=012345abcdef`;
+    const body = `Testo della notizia.\n\n*Fonte: [tio.ch](${urlWithItem})*`;
+    const oldLedger = { [legacyNewsUrlKey(SOURCE_URL)]: 'article-item-2' };
+    assert.equal(isGeneratedSourceCitation(body, 'article-item-2', oldLedger), false);
+    assert.equal(articleTypeFromItalianBody(body, 'article-item-2', oldLedger), undefined);
+  });
+
   test('lascia senza tipo una citazione non finale o non unica', () => {
     assert.equal(articleTypeFromItalianBody(`${SOURCE}\n\nAltro testo.`, 'article-1', generatedSource('article-1')), undefined);
     assert.equal(articleTypeFromItalianBody(`Primo\n\n${SOURCE}\n\nSecondo\n\n${SOURCE}`, 'article-1', generatedSource('article-1')), undefined);
