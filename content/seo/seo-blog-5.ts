@@ -107960,7 +107960,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp`,
+        "url": `${BASE_URL}/images/blog/asvz-blackbirds-champions-bowl-2026.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine editoriale relativa a: Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football"
@@ -107979,6 +107979,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-fibra-ottica-145-comuni-como': {
+    title: 'Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €',
+    description: 'Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga',
+    keywords: 'frontalieri, ticino, svizzera, italia, finitura, lavori, fibra, ottica',
+    ogTitle: 'Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €',
+    ogDescription: 'Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga',
+    canonicalPath: '/articoli-frontaliere/fibra-ottica-145-comuni-como/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Finitura lavori fibra ottica in 145 comuni di Como, 27,9 mln €",
+      "description": "Rete in ultimazione in 145 comuni comaschi Oltre 27,9 milioni di fondi pubblici a Como Adesione alla banda ultra-larga: 23% contro 17% Piano Italia 1 Giga",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fibra-ottica-145-comuni-como.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Installazione di cavo in fibra ottica in un comune della provincia di Como, vista ravvicinata e dettagliata."
+      },
+      "datePublished": "2026-10-14T14:32:25+00:00",
+      "dateModified": "2026-10-14T14:32:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fibra-ottica-145-comuni-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

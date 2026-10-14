@@ -44429,6 +44429,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fibra-ottica-145-comuni-como',
+ category: 'novita',
+ date: '2026-10-14T14:32:25.506Z',
+ image: '/images/blog/article-fibra-ottica-145-comuni-como.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

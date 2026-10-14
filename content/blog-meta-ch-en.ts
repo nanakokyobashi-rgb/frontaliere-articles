@@ -8252,6 +8252,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.prezzi-auto-nuove-usate-calo.title': 'New and used car prices falling thanks to Chinese brands',
     'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'In the third quarter, average prices of new cars decline.',
     'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Swiss car dealership lot showing new and used vehicles with visible price tags',
+    'blog.article.diritti-politici-disabilita.title': 'People with intellectual disabilities, consultation on political rights',
+    'blog.article.diritti-politici-disabilita.excerpt': 'The Federal Council launches the consultation on October 14, 2026 Consultation deadline: January 28 Proposed: federal vote and signing of initiatives',
+    'blog.article.diritti-politici-disabilita.imageAlt': 'Swiss civic building symbolizing inclusive political participation',
 };
 
 export default blogMetaChEn;

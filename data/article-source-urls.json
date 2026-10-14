@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/chiusure-notturne-tra-a8-e-diramazione-gallarate-gattico-il-4-settembre-percorsi-alternativi-e-orari/2667724": {
-    "articleId": "chiusure-notturne-a8-dir-gallarate-gattico",
-    "ts": "2026-09-01T12:13:48.256Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/con-il-primo-settembre-aumentano-biglietti-e-abbonamenti-trenord/2667790": {
     "articleId": "mobilita-trenord-aumento-biglietti-2026",
     "ts": "2026-09-01T12:31:53.105Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/i-carabinieri-arrivano-sul-cantiere-in-provincia-di-como-tutto-sospeso-e-sanzioni-per-26mila-euro": {
     "articleId": "ispezione-edile-lurate",
     "ts": "2026-10-14T13:27:51.187Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/lavori-finiti-fibra-ottica-in-145-comuni-della-provincia-di-como-costo-totale-28-milioni-di-euro": {
+    "articleId": "fibra-ottica-145-comuni-como",
+    "ts": "2026-10-14T14:32:25.967Z",
     "keyForm": 2
   }
 }
