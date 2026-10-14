@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "ddad779e3f25997e8428783d8ffb4a6b2b8d9a6f4b041a1d2f8678171a8ce362",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "3e73cf479ae9ad45ab7d194d66261997912868e4a26b5479e84a26789ff7ab2a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "211",
+          "value": "212",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,72 +33,91 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Afternoon Tea at Lake Thun",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
+              "label": "Wie die Eiszeiten unsere Landschaft prägten",
+              "detail": "KAGA, Kies AG Aaretal, Kiesen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/bildung/kurse/kiesen/wie-die-eiszeiten-unsere-landschaft-praegten_A5ZS2T6"
             },
             {
-              "label": "Andy Trinkler Solo / CH",
-              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
+              "label": "Backen im historischen «Ofehüsi Diemtigen»",
+              "detail": "Reformierte Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/backen-im-historischen-ofehuesi-diemtigen/"
             },
             {
-              "label": "Lisa Catena & Rolf Marti Mys Käthi schmöckt nach Schoggola – Hommage an den Berner Troubadour Bernhard Stirnemann",
-              "detail": "La Cappella",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
+              "label": "Quand l’Europe découvrait le pays des tsars : les voyageurs occidentaux en Russie",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quand-leurope-decouvrait-le-pays-des-tsars-les-voyageurs-occidentaux-en-russie/"
             },
             {
-              "label": "Ungerwäx – un concerto commentato",
-              "detail": "Zentrum Artos, Interlaken",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+              "label": "Werkgespräch mit Sabine Hertig und Dirk Koy",
+              "detail": "Thun",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkgespraech-mit-sabine-hertig-und-dirk-koy/"
             },
             {
-              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
-              "detail": "Süri — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+              "label": "Ich, du, wir singen - Singabende (Mittwoch)",
+              "detail": "Biel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-du-wir-singen-singabende-mittwoch/"
             },
             {
-              "label": "Oktoberfest Süri",
-              "detail": "Laupenstrasse 21, Mühleberg — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+              "label": "\"wild\" - Märchen für mutige Erwachsene",
+              "detail": "Ligerz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-maerchen-fuer-mutige-erwachsene/"
             },
             {
-              "label": "Herbstausstellung 2026",
-              "detail": "Rütschelen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+              "label": "Vivaldi - Die vier Jahreszeiten mit Anton Violinist & Friends",
+              "detail": "Yehudi Menuhin Forum, Bern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-mit-anton-violinist-friends-1/"
             },
             {
-              "label": "Making a chocolate cow at Early Beck",
-              "detail": "Early Beck Productions, Saanen — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
+              "label": "CHRISTY DORAN & IMRAN KHAN WORLD JAZZ",
+              "detail": "ONO Kulturlokal",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/christy-doran-und-imran-khan-world-jazz_AWKkbWB"
             },
             {
-              "label": "Observing red deer in enclousure",
-              "detail": "3777 Saanenmöser, Saanen — in corso, ultimo giorno: 13 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
+              "label": "DR. FEELGOOD",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
             },
             {
-              "label": "L'arte delle marionette: Visita guidata e conferenza di Sasha Morgenthaler",
-              "detail": "Puppenklinik Sashaswelt, Büren an der Aare — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
+              "label": "Judith Hill",
+              "detail": "Bierhübeli",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Berna: possibili disagi per manifestazione non autorizzata",
+          "url": "/articoli-berna/traffico-berna-manifestazione/",
+          "excerpt": "Berna segnala possibili chiusure stradali e disagi domenica 11 ottobre 2026 per una manifestazione non autorizzata: indicazioni per chi viaggia in città.",
+          "date": "2026-10-10T07:15:47.682Z"
+        },
+        {
+          "title": "Giorni festivi Cantone di Berna: calendario e regole",
+          "url": "/articoli-svizzera/festivi-berna-calendario-guida/",
+          "excerpt": "Guida al calendario dei giorni festivi riconosciuti dal Cantone di Berna, con verifiche su uffici, comuni, istituzioni e livelli federali.",
+          "date": "2026-10-14T04:59:00.389Z"
+        },
+        {
+          "title": "Elezioni cantonali a Berna: guida a calendario e voto",
+          "url": "/articoli-svizzera/elezioni-berna-guida-voto/",
+          "excerpt": "Guida pratica alle elezioni cantonali nel Cantone di Berna: sistema elettorale, calendario, modalità di voto, liste e competenze istituzionali.",
+          "date": "2026-10-06T04:48:46.950Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Berna",
@@ -109,7 +128,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "BE",
@@ -119,7 +138,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "211",
+          "value": "212",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,72 +149,91 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Afternoon Tea at Lake Thun",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
+              "label": "Wie die Eiszeiten unsere Landschaft prägten",
+              "detail": "KAGA, Kies AG Aaretal, Kiesen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/bildung/kurse/kiesen/wie-die-eiszeiten-unsere-landschaft-praegten_A5ZS2T6"
             },
             {
-              "label": "Andy Trinkler Solo / CH",
-              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
+              "label": "Backen im historischen «Ofehüsi Diemtigen»",
+              "detail": "Reformierte Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/backen-im-historischen-ofehuesi-diemtigen/"
             },
             {
-              "label": "Lisa Catena & Rolf Marti: “Mys Käthi” Smells Like Chocolate – A Tribute to the Bernese Troubadour Bernhard Stirnemann",
-              "detail": "La Cappella",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
+              "label": "Quand l’Europe découvrait le pays des tsars : les voyageurs occidentaux en Russie",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quand-leurope-decouvrait-le-pays-des-tsars-les-voyageurs-occidentaux-en-russie/"
             },
             {
-              "label": "Ungerwäx—A Concert with Commentary",
-              "detail": "Zentrum Artos, Interlaken",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+              "label": "Werkgespräch mit Sabine Hertig und Dirk Koy",
+              "detail": "Thun",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkgespraech-mit-sabine-hertig-und-dirk-koy/"
             },
             {
-              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
-              "detail": "Süri — ongoing, last day: 24 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+              "label": "Ich, du, wir singen - Singabende (Mittwoch)",
+              "detail": "Biel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-du-wir-singen-singabende-mittwoch/"
             },
             {
-              "label": "Oktoberfest Süri",
-              "detail": "Laupenstrasse 21, Mühleberg — ongoing, last day: 24 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+              "label": "\"wild\" - Märchen für mutige Erwachsene",
+              "detail": "Ligerz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-maerchen-fuer-mutige-erwachsene/"
             },
             {
-              "label": "Herbstausstellung 2026",
-              "detail": "Rütschelen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+              "label": "Vivaldi - Die vier Jahreszeiten mit Anton Violinist & Friends",
+              "detail": "Yehudi Menuhin Forum, Bern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-mit-anton-violinist-friends-1/"
             },
             {
-              "label": "Making a chocolate cow at Early Beck",
-              "detail": "Early Beck Productions, Saanen — ongoing, last day: 15 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
+              "label": "CHRIST DOR DORAN & IMRAN KHAN W",
+              "detail": "ONO Kulturlokal",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/christy-doran-und-imran-khan-world-jazz_AWKkbWB"
             },
             {
-              "label": "Observing red deer in enclousure",
-              "detail": "3777 Saanenmöser, Saanen — ongoing, last day: 13 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
+              "label": "DR. FEELGOOD",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
             },
             {
-              "label": "The art of puppets: Guided tour & lecture on Sasha Morgenthaler",
-              "detail": "Puppenklinik Sashaswelt, Büren an der Aare — ongoing, last day: 19 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
+              "label": "Judith Hill",
+              "detail": "Bierhübeli",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Bern: possible disruptions due to unauthorized demonstration",
+          "url": "/en/bern-articles/bern-traffic-demonstration/",
+          "excerpt": "Bern warns of possible road closures and disruptions on Sunday, October 11, 2026, due to an unauthorized demonstration: information for those traveling in the city.",
+          "date": "2026-10-10T07:15:47.682Z"
+        },
+        {
+          "title": "Public holidays in the Canton of Bern: calendar and rules",
+          "url": "/en/swiss-articles/bern-public-holidays-calendar-guide/",
+          "excerpt": "Guide to the calendar of public holidays recognized by the Canton of Bern, with checks on offices, municipalities, institutions and federal levels.",
+          "date": "2026-10-14T04:59:00.389Z"
+        },
+        {
+          "title": "Cantonal elections in Bern: guide to the calendar and voting",
+          "url": "/en/swiss-articles/bern-cantonal-elections-voting-guide/",
+          "excerpt": "Practical guide to cantonal elections in the Canton of Bern: electoral system, calendar, voting procedures, lists and institutional responsibilities.",
+          "date": "2026-10-06T04:48:46.950Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Bern",
@@ -206,7 +244,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "BE",
@@ -216,7 +254,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "211",
+          "value": "212",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,72 +265,91 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Afternoon Tea Thunersee",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
+              "label": "Wie die Eiszeiten unsere Landschaft prägten",
+              "detail": "KAGA, Kies AG Aaretal, Kiesen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/bildung/kurse/kiesen/wie-die-eiszeiten-unsere-landschaft-praegten_A5ZS2T6"
             },
             {
-              "label": "Andy Trinkler Solo / CH",
-              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
+              "label": "Backen im historischen «Ofehüsi Diemtigen»",
+              "detail": "Reformierte Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/backen-im-historischen-ofehuesi-diemtigen/"
             },
             {
-              "label": "Lisa Catena & Rolf Marti: „Mys Käthi schmöckt nach Schoggola“ – Eine Hommage an den Berner Troubadour Bernhard…",
-              "detail": "La Cappella",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
+              "label": "Quand l’Europe découvrait le pays des tsars : les voyageurs occidentaux en Russie",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quand-leurope-decouvrait-le-pays-des-tsars-les-voyageurs-occidentaux-en-russie/"
             },
             {
-              "label": "Ungerwäx - ein kommentiertes Konzert",
-              "detail": "Zentrum Artos, Interlaken",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+              "label": "Werkgespräch mit Sabine Hertig und Dirk Koy",
+              "detail": "Thun",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkgespraech-mit-sabine-hertig-und-dirk-koy/"
             },
             {
-              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
-              "detail": "Süri — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+              "label": "Ich, du, wir singen - Singabende (Mittwoch)",
+              "detail": "Biel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-du-wir-singen-singabende-mittwoch/"
             },
             {
-              "label": "Oktoberfest Süri",
-              "detail": "Laupenstrasse 21, Mühleberg — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+              "label": "\"wild\" - Märchen für mutige Erwachsene",
+              "detail": "Ligerz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-maerchen-fuer-mutige-erwachsene/"
             },
             {
-              "label": "Herbstausstellung 2026",
-              "detail": "Rütschelen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+              "label": "Vivaldi - Die vier Jahreszeiten mit Anton Violinist & Friends",
+              "detail": "Yehudi Menuhin Forum, Bern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-mit-anton-violinist-friends-1/"
             },
             {
-              "label": "Schokoladenkuh herstellen bei Early Beck",
-              "detail": "Early Beck Productions, Saanen — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
+              "label": "CHRISTKÜRZ DORAN & IMRAN KHAN SZIGORLD SZIGAZZ",
+              "detail": "ONO Kulturlokal",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/christy-doran-und-imran-khan-world-jazz_AWKkbWB"
             },
             {
-              "label": "Rothirsche im Gehege beobachten",
-              "detail": "3777 Saanenmöser, Saanen — läuft, letzter Tag: 13. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
+              "label": "DR. FEELGOOD",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
             },
             {
-              "label": "Die Kunst der Puppen: Führung & Vortrag zu Sasha Morgenthaler",
-              "detail": "Puppenklinik Sashaswelt, Büren an der Aare — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
+              "label": "Judith Hill",
+              "detail": "Bierhübeli",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Bern: Nicht genehmigte Demonstrationen können zu Störungen führen.",
+          "url": "/de/bern-artikel/bern-verkehr-kundgebung/",
+          "excerpt": "Bern meldet mögliche Straßensperrungen und Behinderungen am Sonntag, den 11.",
+          "date": "2026-10-10T07:15:47.682Z"
+        },
+        {
+          "title": "Feiertage im Kanton Bern: Kalender und Regeln",
+          "url": "/de/schweiz-artikel/kanton-bern-feiertage-kalender-leitfaden/",
+          "excerpt": "Leitfaden zum Kalender der vom Kanton Bern anerkannten Feiertage einschließlich der Prüfung von Ämtern, Gemeinden, Institutionen und Bundesebenen.",
+          "date": "2026-10-14T04:59:00.389Z"
+        },
+        {
+          "title": "Kantonswahlen in Bern: Kalender- und Abstimmungsleitfaden",
+          "url": "/de/schweiz-artikel/kantonale-wahlen-bern-abstimmungsfuehrer/",
+          "excerpt": "Praktischer Leitfaden zu den kantonalen Wahlen im Kanton Bern: Wahlsystem, Zeitplan, Abstimmungsmodalitäten, Listen und institutionelle Kompetenzen.",
+          "date": "2026-10-06T04:48:46.950Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Bern",
@@ -303,7 +360,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -313,7 +370,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "211",
+          "value": "212",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,72 +381,91 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Thé de l'après-midi au lac de Thoune",
-              "detail": "Thunersee, Thun",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/afternoon-tea-at-lake-thun/"
+              "label": "Wie die Eiszeiten unsere Landschaft prägten",
+              "detail": "KAGA, Kies AG Aaretal, Kiesen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/bildung/kurse/kiesen/wie-die-eiszeiten-unsere-landschaft-praegten_A5ZS2T6"
             },
             {
-              "label": "Andy Trinkler Solo / CH",
-              "detail": "Restaurant Rebleuten, Oberhofen am Thunersee",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/andy-trinkler-solo-ch_ARncZW5"
+              "label": "Backen im historischen «Ofehüsi Diemtigen»",
+              "detail": "Reformierte Kirchgemeinde Diemtigen, Diemtigen",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/backen-im-historischen-ofehuesi-diemtigen/"
             },
             {
-              "label": "Lisa Catena & Rolf Marti : « Mys Käthi » a un goût de chocolat – Hommage au troubadour bernois Bernhard Stirnemann",
-              "detail": "La Cappella",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/lisa-catena-und-rolf-marti-mys-kaethi-schmoeckt-nach-schoggola-hommage-an-den-berner-troubadour-bernhard-stirnemann_ArfHDra"
+              "label": "Quand l’Europe découvrait le pays des tsars : les voyageurs occidentaux en Russie",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quand-leurope-decouvrait-le-pays-des-tsars-les-voyageurs-occidentaux-en-russie/"
             },
             {
-              "label": "Ungerwäx – un concert commenté",
-              "detail": "Zentrum Artos, Interlaken",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/eventos/musica/interlaken/ungerwaex-un-concierto-comentado_AUBfCfq"
+              "label": "Werkgespräch mit Sabine Hertig und Dirk Koy",
+              "detail": "Thun",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkgespraech-mit-sabine-hertig-und-dirk-koy/"
             },
             {
-              "label": "Bogenschiessen - Einsteiger:innenkurs Oktober 2026",
-              "detail": "Süri — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bogenschiessen-einsteigerinnenkurs-oktober-2026/"
+              "label": "Ich, du, wir singen - Singabende (Mittwoch)",
+              "detail": "Biel",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ich-du-wir-singen-singabende-mittwoch/"
             },
             {
-              "label": "Oktoberfest Süri",
-              "detail": "Laupenstrasse 21, Mühleberg — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-sueri/"
+              "label": "\"wild\" - Märchen für mutige Erwachsene",
+              "detail": "Ligerz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-maerchen-fuer-mutige-erwachsene/"
             },
             {
-              "label": "Herbstausstellung 2026",
-              "detail": "Rütschelen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstausstellung-2026/"
+              "label": "Vivaldi - Die vier Jahreszeiten mit Anton Violinist & Friends",
+              "detail": "Yehudi Menuhin Forum, Bern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-mit-anton-violinist-friends-1/"
             },
             {
-              "label": "Fabriquer une vache en chocolat chez Early Beck",
-              "detail": "Early Beck Productions, Saanen — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/fabriquer-une-vache-en-chocolat-chez-early-beck/"
+              "label": "CHRISTY DORAN & IMRAN KHAN JAZZ MONDIAL",
+              "detail": "ONO Kulturlokal",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/christy-doran-und-imran-khan-world-jazz_AWKkbWB"
             },
             {
-              "label": "Observer les cerfs rouges dans l'enclos",
-              "detail": "3777 Saanenmöser, Saanen — en cours, dernier jour : 13 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/observing-red-deer-in-enclousure-1/"
+              "label": "DR. FEELGOOD",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/dr-feelgood_AyuZjRb"
             },
             {
-              "label": "L'art des marionnettes : Visite guidée & conférence sur Sasha Morgenthaler",
-              "detail": "Puppenklinik Sashaswelt, Büren an der Aare — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/die-kunst-der-puppen-fuehrung-vortrag-zu-sasha-morgenthaler/"
+              "label": "Judith Hill",
+              "detail": "Bierhübeli",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-hill_Amm5VRW"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Berne : perturbations possibles en raison d'une manifestation non autorisée",
+          "url": "/fr/articles-berne/berne-trafic-manifestation/",
+          "excerpt": "Berne signale de possibles fermetures de routes et des perturbations le dimanche 11 octobre 2026 en raison d'une manifestation non autorisée : indications pour les personnes qui se déplacent en ville.",
+          "date": "2026-10-10T07:15:47.682Z"
+        },
+        {
+          "title": "Jours fériés du canton de Berne : calendrier et règles",
+          "url": "/fr/articles-suisse/jours-feries-berne-calendrier-guide/",
+          "excerpt": "Guide du calendrier des jours fériés reconnus par le canton de Berne, avec des vérifications concernant les bureaux, les communes, les institutions et les niveaux fédéraux.",
+          "date": "2026-10-14T04:59:00.389Z"
+        },
+        {
+          "title": "Élections cantonales à Berne : guide du calendrier et du vote",
+          "url": "/fr/articles-suisse/elections-cantonales-berne-guide-vote/",
+          "excerpt": "Guide pratique des élections cantonales dans le canton de Berne : système électoral, calendrier, modalités de vote, listes et compétences institutionnelles.",
+          "date": "2026-10-06T04:48:46.950Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Berne",
@@ -400,7 +476,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

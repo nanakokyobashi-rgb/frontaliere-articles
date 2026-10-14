@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "ec28974e120148736d5d715c6ccbbdb379b6eb38dc8bfab6482a9da99251d75b",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "06d170953c85cd8ee575de91fa1b2ae4db5aa646b91f0bc4575d4997f347f9bf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -76,23 +81,42 @@
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
             },
             {
+              "label": "AR8924",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
+            },
+            {
               "label": "AR4790",
               "value": "750 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            },
-            {
-              "label": "AR6176",
-              "value": "750 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "oggi da 7 a 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "oggi da 8 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +154,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -139,6 +163,18 @@
           "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
           "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
           "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Premi cassa malati nel Cantone di Appenzello Interno e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-appenzello-interno-riduzione/",
+          "excerpt": "Scopri le fasce di premio, franchigie e modelli alternativi per l'assicurazione malattia obbligatoria nel Cantone di Appenzello Interno.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "Premi LAMal Appenzello Esterno e riduzione premi",
+          "url": "/articoli-svizzera/premi-lamal-appenzello-esterno-riduzione/",
+          "excerpt": "Guida ai premi LAMal nel Cantone di Appenzello Esterno: franchigie, modelli assicurativi disponibili, sussidi cantonali e procedura per richiedere la riduzione basata su reddito.",
+          "date": "2026-08-20T23:06:24.555Z"
         },
         {
           "title": "Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe",
@@ -159,28 +195,16 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "Patente di guida Appenzello Esterno: conversione e esami",
-          "url": "/articoli-svizzera/patente-guida-appenzello-esterno-conversione/",
-          "excerpt": "Come convertire la patente estera ad Appenzello Esterno: esame teorico, pratico, corsi e procedura presso l'Ufficio della circolazione cantonale.",
-          "date": "2026-09-07T00:59:19.046Z"
-        },
-        {
-          "title": "Premi cassa malati nel Cantone di Appenzello Interno e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-appenzello-interno-riduzione/",
-          "excerpt": "Scopri le fasce di premio, franchigie e modelli alternativi per l'assicurazione malattia obbligatoria nel Cantone di Appenzello Interno.",
-          "date": "2026-09-02T23:34:05.913Z"
-        },
-        {
-          "title": "Asilo nido e custodia: costi in Appenzello Esterno",
-          "url": "/articoli-svizzera/asilo-custodia-appenzello-esterno/",
-          "excerpt": "Tariffe calcolate sul reddito, sussidi cantonali e deduzioni fiscali: tutto su asili nido, famiglie diurne e doposcuola nel canton Appenzello Esterno.",
-          "date": "2026-08-21T01:51:49.937Z"
-        },
-        {
           "title": "Premi cassa malati Appenzello Esterno: franchigie e sussidi",
           "url": "/articoli-svizzera/premi-franchigie-appenzello-esterno/",
           "excerpt": "Come funziona l'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.",
           "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "Patente di guida Appenzello Esterno: conversione e esami",
+          "url": "/articoli-svizzera/patente-guida-appenzello-esterno-conversione/",
+          "excerpt": "Come convertire la patente estera ad Appenzello Esterno: esame teorico, pratico, corsi e procedura presso l'Ufficio della circolazione cantonale.",
+          "date": "2026-09-07T00:59:19.046Z"
         }
       ],
       "links": [
@@ -217,7 +241,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -271,23 +295,42 @@
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
             },
             {
+              "label": "AR8924",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
+            },
+            {
               "label": "AR4790",
               "value": "750 CHF",
               "detail": "current bid",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            },
-            {
-              "label": "AR6176",
-              "value": "750 CHF",
-              "detail": "current bid",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "today from 7 to 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "today from 8 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -325,7 +368,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -334,6 +377,18 @@
           "url": "/en/appenzell-articles/heiden-base-waste-fee/",
           "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
           "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Sick pay premiums in the Inner Appenzell Canton and premium reductions",
+          "url": "/en/swiss-articles/health-insurance-premiums-appenzell-interno-reduction/",
+          "excerpt": "Discover the premium ranges, deductibles and alternative models for compulsory health insurance in the Canton of Appenzell Innerrhoden.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "LAMal External Appenzell Rewards and premium reduction",
+          "url": "/en/swiss-articles/lamal-premiums-appenzell-rhodes-reduction/",
+          "excerpt": "Guide to LAMal premiums in the Canton of Appenzell Outer: deductibles, available insurance models, cantonal subsidies and procedure to apply for the income-based reduction.",
+          "date": "2026-08-20T23:06:24.555Z"
         },
         {
           "title": "Nursery and childcare in the Inner Appenzell Canton: costs and fees",
@@ -354,28 +409,16 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "External Appenzell Driving License: Conversion and Exams",
-          "url": "/en/swiss-articles/driving-license-appenzell-eastern-conversion/",
-          "excerpt": "How to convert the foreign license to External Appenzell: theoretical, practical exam, courses and procedure at the Cantonal Traffic Office.",
-          "date": "2026-09-07T00:59:19.046Z"
-        },
-        {
-          "title": "Sick pay premiums in the Inner Appenzell Canton and premium reductions",
-          "url": "/en/swiss-articles/health-insurance-premiums-appenzell-interno-reduction/",
-          "excerpt": "Discover the premium ranges, deductibles and alternative models for compulsory health insurance in the Canton of Appenzell Innerrhoden.",
-          "date": "2026-09-02T23:34:05.913Z"
-        },
-        {
-          "title": "Nursery and care: costs in the External Appenzell",
-          "url": "/en/swiss-articles/childcare-daycare-appenzell-rhodes-outer/",
-          "excerpt": "Rates calculated on income, cantonal subsidies and tax deductions: all on kindergartens, day families and after-school in the canton of Appenzell Ausserrhoden.",
-          "date": "2026-08-21T01:51:49.937Z"
-        },
-        {
           "title": "Sick pay premiums Appenzell Ausserrhoden: deductibles and subsidies",
           "url": "/en/swiss-articles/health-insurance-appenzell-outsrhoden-deductibles/",
           "excerpt": "How health insurance works in Appenzell Ausserrhoden: available deductibles, coverage models and procedures to access premium subsidies.",
           "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "External Appenzell Driving License: Conversion and Exams",
+          "url": "/en/swiss-articles/driving-license-appenzell-eastern-conversion/",
+          "excerpt": "How to convert the foreign license to External Appenzell: theoretical, practical exam, courses and procedure at the Cantonal Traffic Office.",
+          "date": "2026-09-07T00:59:19.046Z"
         }
       ],
       "links": [
@@ -404,7 +447,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -458,23 +501,42 @@
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
             },
             {
+              "label": "AR8924",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
+            },
+            {
               "label": "AR4790",
               "value": "750 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            },
-            {
-              "label": "AR6176",
-              "value": "750 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "heute 7 bis 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "heute 8 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -512,7 +574,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -521,6 +583,18 @@
           "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
           "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
           "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Krankenkassenprämien im Kanton Appenzell Innerrhoden und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenversicherungspramien-appenzell-interno-reduktion/",
+          "excerpt": "Entdecken Sie die Prämiensparten, Franchisen und alternativen Modelle für die obligatorische Krankenversicherung im Kanton Appenzell Innerrhoden.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "Prämien KVG Appenzell Ausserrhoden und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenkasse-appenzell-ausserrhoden-reduktion/",
+          "excerpt": "Prämienleitfaden KVG im Kanton Appenzell Ausserrhoden: Franchisen, verfügbare Versicherungsmodelle, Kantonsbeiträge und Verfahren zur Beantragung der einkommensabhängigen Reduktion.",
+          "date": "2026-08-20T23:06:24.555Z"
         },
         {
           "title": "Kinderbetreuung Appenzell: Kosten & Tarife",
@@ -541,28 +615,16 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "Führerschein Appenzell Ausserrhoden: Umbau und Prüfungen",
-          "url": "/de/schweiz-artikel/fuehrerschein-appenzell-ausserrhoden-umwandlung/",
-          "excerpt": "Wie man den ausländischen Führerschein in Appenzell Ausserrhoden umwandelt: Theorie-, Praxis-, Kurs- und Verfahrensprüfung beim kantonalen Strassenverkehrsamt.",
-          "date": "2026-09-07T00:59:19.046Z"
-        },
-        {
-          "title": "Krankenkassenprämien im Kanton Appenzell Innerrhoden und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/krankenversicherungspramien-appenzell-interno-reduktion/",
-          "excerpt": "Entdecken Sie die Prämiensparten, Franchisen und alternativen Modelle für die obligatorische Krankenversicherung im Kanton Appenzell Innerrhoden.",
-          "date": "2026-09-02T23:34:05.913Z"
-        },
-        {
-          "title": "Kindertagesstätte und Obhut: Kosten in Appenzell Ausserrhoden",
-          "url": "/de/schweiz-artikel/kinderbetreuung-appenzell-ausserrhoden-kosten/",
-          "excerpt": "Berechnete Einkommenstarife, Kantonsbeiträge und Steuerabzüge: Alles rund um Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung im Kanton Appenzell Ausserrhoden.",
-          "date": "2026-08-21T01:51:49.937Z"
-        },
-        {
           "title": "Krankenkassenprämien Appenzell Ausserrhoden: Selbstbehalte und Zuschüsse",
           "url": "/de/schweiz-artikel/praemien-franchisen-appenzell-ausserrhoden/",
           "excerpt": "So funktioniert die Krankenversicherung in Appenzell Ausserrhoden: verfügbare Selbstbehalte, Deckungsmodelle und Verfahren für den Zugang zu Prämienbeiträgen.",
           "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "Führerschein Appenzell Ausserrhoden: Umbau und Prüfungen",
+          "url": "/de/schweiz-artikel/fuehrerschein-appenzell-ausserrhoden-umwandlung/",
+          "excerpt": "Wie man den ausländischen Führerschein in Appenzell Ausserrhoden umwandelt: Theorie-, Praxis-, Kurs- und Verfahrensprüfung beim kantonalen Strassenverkehrsamt.",
+          "date": "2026-09-07T00:59:19.046Z"
         }
       ],
       "links": [
@@ -591,7 +653,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -645,23 +707,42 @@
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1783"
             },
             {
+              "label": "AR8924",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-18T16:00:00.000Z",
+              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1786"
+            },
+            {
               "label": "AR4790",
               "value": "750 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-18T16:00:00.000Z",
               "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1784"
-            },
-            {
-              "label": "AR6176",
-              "value": "750 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-18T16:00:00.000Z",
-              "url": "https://eauktion.ar.ch/ecari-auction/ui/app/details/app?id=1785"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder/liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 7 à 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 8 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -699,7 +780,7 @@
               "url": "https://ar.ch/schnellzugriff/medienmitteilungen-der-kantonalen-verwaltung/detail/news/ostschweizer-kantone-bremsen-kostenwachstum-im-gesundheitswesen/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -708,6 +789,18 @@
           "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
           "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
           "date": "2026-10-08T18:18:38.682Z"
+        },
+        {
+          "title": "Récompenses de la caisse-maladie dans le canton d'Appenzell Interne et réduction des primes",
+          "url": "/fr/articles-suisse/primes-d-assurance-maladie-appenzell-interno-reduction/",
+          "excerpt": "Découvrez les fourchettes de primes, franchises et modèles alternatifs pour l'assurance maladie obligatoire dans le canton d'Appenzell Intérieur.",
+          "date": "2026-09-02T23:34:05.913Z"
+        },
+        {
+          "title": "Prix LAMal Appenzell Extérieur et réduction des prix",
+          "url": "/fr/articles-suisse/primes-lamal-appenzell-rhodes-reduction/",
+          "excerpt": "Guide des primes LAMal dans le canton d'Appenzell Extérieur : franchises, modèles d'assurance disponibles, subventions cantonales et procédure de demande de réduction basée sur le revenu.",
+          "date": "2026-08-20T23:06:24.555Z"
         },
         {
           "title": "Garderie et garde d'enfants dans le canton d'Appenzell : coûts et tarifs",
@@ -728,28 +821,16 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "Permis de conduire Appenzell Extérieur : conversion et examens",
-          "url": "/fr/articles-suisse/permis-conduire-appenzell-externe-conversion/",
-          "excerpt": "Comment convertir le permis étranger en Appenzell Extérieur : examen théorique, pratique, cours et procédure auprès de l'Office de la circulation cantonale.",
-          "date": "2026-09-07T00:59:19.046Z"
-        },
-        {
-          "title": "Récompenses de la caisse-maladie dans le canton d'Appenzell Interne et réduction des primes",
-          "url": "/fr/articles-suisse/primes-d-assurance-maladie-appenzell-interno-reduction/",
-          "excerpt": "Découvrez les fourchettes de primes, franchises et modèles alternatifs pour l'assurance maladie obligatoire dans le canton d'Appenzell Intérieur.",
-          "date": "2026-09-02T23:34:05.913Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants : coûts à Appenzell Extérieur",
-          "url": "/fr/articles-suisse/garde-enfants-appenzell-rhodes-exterieures/",
-          "excerpt": "Tarifs calculés sur le revenu, allocations cantonales et déductions fiscales : tout sur les crèches, les familles de jour et après l'école dans le canton d'Appenzell Extérieur.",
-          "date": "2026-08-21T01:51:49.937Z"
-        },
-        {
           "title": "Primes caisse-maladie Appenzell Extérieur : franchises et subventions",
           "url": "/fr/articles-suisse/primes-franchises-appenzell-rhodes-exterieures/",
           "excerpt": "Comment fonctionne l'assurance maladie à Appenzell Extérieur : franchises disponibles, modèles de couverture et procédures d'accès aux allocations sur primes.",
           "date": "2026-08-21T00:08:39.612Z"
+        },
+        {
+          "title": "Permis de conduire Appenzell Extérieur : conversion et examens",
+          "url": "/fr/articles-suisse/permis-conduire-appenzell-externe-conversion/",
+          "excerpt": "Comment convertir le permis étranger en Appenzell Extérieur : examen théorique, pratique, cours et procédure auprès de l'Office de la circulation cantonale.",
+          "date": "2026-09-07T00:59:19.046Z"
         }
       ],
       "links": [
@@ -770,7 +851,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

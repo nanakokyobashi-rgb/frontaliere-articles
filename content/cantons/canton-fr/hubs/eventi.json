@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "4afc093ae22db19def461f0aeb2386447bd7a02f999b5192c6d414c07b312256",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "7d02d5b9bf164bbe8509580a9dd57d790f3f4d4daffcda0f94dd21eceb44f88d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -33,54 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Le hérisson, un ami qui pique un peu",
-              "detail": "Fribourg",
-              "date": "2026-10-13",
-              "url": "https://www.fr.ch/mhnf/evenements/le-herisson-un-ami-qui-pique-un-peu"
-            },
-            {
-              "label": "Vokalensemble Graindelavoix (BE) Josquin the Undead. Musik von Josquin des Prez",
-              "detail": "St. Laurenzen, Prez",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-graindelavoix-be-josquin-the-undead-musik-von-josquin-des-prez_AVyRWRm"
-            },
-            {
-              "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "Camp de football",
-              "detail": "MS Sports — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "The Autumn Trail",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg",
               "date": "2026-10-14",
@@ -91,11 +43,59 @@
               "detail": "Fribourg",
               "date": "2026-10-14",
               "url": "https://www.fr.ch/mhnf/evenements/chevreuil-renard-hibou-et-cie"
+            },
+            {
+              "label": "Des vides à remplir : Atelier créatif avec Caroline Bourrit et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-14",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-caroline-bourrit-et-denis-roueche"
+            },
+            {
+              "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
+              "detail": "Café Tivoli, Châtel-Saint-Denis — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+            },
+            {
+              "label": "Camp de football",
+              "detail": "MS Sports — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
+            },
+            {
+              "label": "The Autumn Trail",
+              "detail": "Parcours D'Hubert Audriaz, Fribourg — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Guided tours: ‘Bulle, 1000 Years of History’",
+              "detail": "Bulle",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "FR",
@@ -130,54 +130,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Le hérisson, un ami qui pique un peu",
-              "detail": "Fribourg",
-              "date": "2026-10-13",
-              "url": "https://www.fr.ch/mhnf/evenements/le-herisson-un-ami-qui-pique-un-peu"
-            },
-            {
-              "label": "Vokalensemble Graindelavoix (BE) Josquin the Undead. Musik von Josquin des Prez",
-              "detail": "St. Laurenzen, Prez",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-graindelavoix-be-josquin-the-undead-musik-von-josquin-des-prez_AVyRWRm"
-            },
-            {
-              "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — ongoing, last day: 25 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "Football Camp",
-              "detail": "MS Sports — ongoing, last day: 16 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "The Autumn Trail",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — ongoing, last day: 18 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — ongoing, last day: 25 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg",
               "date": "2026-10-14",
@@ -188,11 +140,59 @@
               "detail": "Fribourg",
               "date": "2026-10-14",
               "url": "https://www.fr.ch/mhnf/evenements/chevreuil-renard-hibou-et-cie"
+            },
+            {
+              "label": "Des vides à remplir : Atelier créatif avec Caroline Bourrit et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-14",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-caroline-bourrit-et-denis-roueche"
+            },
+            {
+              "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
+              "detail": "Café Tivoli, Châtel-Saint-Denis — ongoing, last day: 25 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+            },
+            {
+              "label": "Football Camp",
+              "detail": "MS Sports — ongoing, last day: 16 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
+            },
+            {
+              "label": "The Autumn Trail",
+              "detail": "Parcours D'Hubert Audriaz, Fribourg — ongoing, last day: 18 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — ongoing, last day: 25 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Guided tours: ‘Bulle, 1000 Years of History’",
+              "detail": "Bulle",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "FR",
@@ -227,54 +227,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Le hérisson, un ami qui pique un peu",
-              "detail": "Fribourg",
-              "date": "2026-10-13",
-              "url": "https://www.fr.ch/mhnf/evenements/le-herisson-un-ami-qui-pique-un-peu"
-            },
-            {
-              "label": "Vokalensemble Graindelavoix (BE) Josquin the Undead. Musik von Josquin des Prez",
-              "detail": "St. Laurenzen, Prez",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-graindelavoix-be-josquin-the-undead-musik-von-josquin-des-prez_AVyRWRm"
-            },
-            {
-              "label": "Kilbi-Menu in Café Tivoli in Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "Fußballcamp",
-              "detail": "MS Sports — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "Der Herbst-Rundgang",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg",
               "date": "2026-10-14",
@@ -285,11 +237,59 @@
               "detail": "Fribourg",
               "date": "2026-10-14",
               "url": "https://www.fr.ch/mhnf/evenements/chevreuil-renard-hibou-et-cie"
+            },
+            {
+              "label": "Des vides à remplir : Atelier créatif avec Caroline Bourrit et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-14",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-caroline-bourrit-et-denis-roueche"
+            },
+            {
+              "label": "Kilbi-Menu in Café Tivoli in Châtel-St-Denis",
+              "detail": "Café Tivoli, Châtel-Saint-Denis — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+            },
+            {
+              "label": "Fußballcamp",
+              "detail": "MS Sports — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
+            },
+            {
+              "label": "Der Herbst-Rundgang",
+              "detail": "Parcours D'Hubert Audriaz, Fribourg — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Geführte Touren: ‘Bulle, 1000 Jahre Geschichte(n)’",
+              "detail": "Bulle",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "FR",
@@ -324,54 +324,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Le hérisson, un ami qui pique un peu",
-              "detail": "Fribourg",
-              "date": "2026-10-13",
-              "url": "https://www.fr.ch/mhnf/evenements/le-herisson-un-ami-qui-pique-un-peu"
-            },
-            {
-              "label": "Vokalensemble Graindelavoix (BE) Josquin the Undead. Musik von Josquin des Prez",
-              "detail": "St. Laurenzen, Prez",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/vokalensemble-graindelavoix-be-josquin-the-undead-musik-von-josquin-des-prez_AVyRWRm"
-            },
-            {
-              "label": "Menu de Bénichon au Café Tivoli à Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
-            },
-            {
-              "label": "Football Camp",
-              "detail": "MS Sports — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
-            },
-            {
-              "label": "Le Parcours d’automne",
-              "detail": "Parcours D'Hubert Audriaz, Fribourg — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
-            },
-            {
-              "label": "Regards affinés",
-              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
-            },
-            {
-              "label": "Halloween à Moléson",
-              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
               "label": "Des vides à remplir",
               "detail": "Bibliothèque cantonale et universitaire (BCU), Fribourg",
               "date": "2026-10-14",
@@ -382,11 +334,59 @@
               "detail": "Fribourg",
               "date": "2026-10-14",
               "url": "https://www.fr.ch/mhnf/evenements/chevreuil-renard-hibou-et-cie"
+            },
+            {
+              "label": "Des vides à remplir : Atelier créatif avec Caroline Bourrit et Denis Roueche",
+              "detail": "Fribourg",
+              "date": "2026-10-14",
+              "url": "https://www.fr.ch/bcu/evenements/des-vides-a-remplir-atelier-creatif-avec-caroline-bourrit-et-denis-roueche"
+            },
+            {
+              "label": "Menu de Bénichon au Café Tivoli à Châtel-St-Denis",
+              "detail": "Café Tivoli, Châtel-Saint-Denis — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+            },
+            {
+              "label": "Football Camp",
+              "detail": "MS Sports — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/camp-de-football/"
+            },
+            {
+              "label": "Le Parcours d’automne",
+              "detail": "Parcours D'Hubert Audriaz, Fribourg — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-herbst-rundgang/"
+            },
+            {
+              "label": "Regards affinés",
+              "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
+            },
+            {
+              "label": "Halloween à Moléson",
+              "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
+            },
+            {
+              "label": "Automne à Charmey",
+              "detail": "Case postale, Val-de-Charmey — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
+            },
+            {
+              "label": "Visites guidées « Bulle, 1000 ans d’histoire(s) »",
+              "detail": "Bulle",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tours-bulle-1000-years-of-history/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

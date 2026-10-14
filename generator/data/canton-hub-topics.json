@@ -18,10 +18,10 @@
     "eventi": {
       "minScore": 6,
       "terms": {
-        "it": ["evento", "eventi", "festival", "sagra", "sagre", "concerto", "concerti", "mostra", "mostre", "fiera", "fiere", "mercatino", "mercatini", "carnevale", "spettacol", "rassegna", "manifestazion", "fine settimana", "weekend", "cosa fare"],
-        "en": ["event", "festival", "concert", "exhibition", "fair", "christmas market", "carnival", "show", "weekend", "what to do", "things to do"],
-        "de": ["veranstaltung", "festival", "konzert", "ausstellung", "messe", "weihnachtsmarkt", "fasnacht", "wochenende", "openair", "open air", "volksfest"],
-        "fr": ["événement", "festival", "concert", "exposition", "foire", "marché de noël", "carnaval", "spectacle", "week-end", "fête", "que faire"]
+        "it": ["evento", "eventi", "festival", "sagra", "sagre", "concerto", "concerti", "mostra", "mostre", "fiera", "fiere", "mercatino", "mercatini", "carnevale", "spettacol", "rassegna", "manifestazion", "appuntamenti", "calendario", "fine settimana", "weekend", "cosa fare"],
+        "en": ["event", "festival", "concert", "exhibition", "fair", "christmas market", "carnival", "show", "programme", "calendar", "weekend", "what to do", "things to do"],
+        "de": ["veranstaltung", "festival", "konzert", "ausstellung", "messe", "weihnachtsmarkt", "fasnacht", "wochenende", "openair", "open air", "volksfest", "veranstaltungskalender"],
+        "fr": ["événement", "festival", "concert", "exposition", "foire", "marché de noël", "carnaval", "spectacle", "manifestation", "agenda", "week-end", "fête", "que faire"]
       },
       "exclude": {
         "it": ["incidente", "arrest", "rapina", "processo", "condann", "evento sismico", "evento meteo"],
@@ -33,10 +33,10 @@
     "servizi": {
       "minScore": 6,
       "terms": {
-        "it": ["farmaci", "cassa malati", "casse malati", "premi di cassa", "lamal", "ospedal", "pronto soccorso", "medico di famiglia", "sanità", "sanitari", "permesso di dimora", "permessi di lavoro", "sportello", "asilo nido", "asili nido", "rifiuti", "targhe", "patente", "allerta meteo", "servizi pubblici", "posta"],
-        "en": ["pharmac", "health insurance", "hospital", "emergency room", "family doctor", "healthcare", "residence permit", "work permit", "counter service", "childcare", "nursery", "waste", "number plate", "licence plate", "driving licence", "weather alert", "public service", "post office"],
-        "de": ["apotheke", "krankenkasse", "krankenversicherung", "spital", "notfall", "hausarzt", "gesundheitswesen", "aufenthaltsbewilligung", "arbeitsbewilligung", "schalter", "kita", "kinderkrippe", "abfall", "kontrollschild", "führerausweis", "unwetterwarnung", "service public", "poststelle"],
-        "fr": ["pharmaci", "assurance-maladie", "caisse maladie", "caisses maladie", "hôpital", "urgences", "médecin de famille", "santé publique", "permis de séjour", "permis de travail", "guichet", "crèche", "déchets", "plaque d’immatriculation", "permis de conduire", "alerte météo", "service public", "office de poste"]
+        "it": ["farmaci", "cassa malati", "casse malati", "premi di cassa", "premi malattia", "riduzione premi", "premi standard", "assicurazione malattia", "lamal", "ospedal", "ambulator", "pronto soccorso", "medico di famiglia", "sanità", "sanitari", "salute", "cure", "permesso di dimora", "permessi di lavoro", "sportello", "asilo nido", "asili nido", "rifiuti", "targhe", "patente", "allerta meteo", "servizi pubblici", "posta"],
+        "en": ["pharmac", "health insurance", "insurance premium", "premium reduction", "hospital", "outpatient", "emergency room", "family doctor", "healthcare", "health", "medical care", "residence permit", "work permit", "counter service", "childcare", "nursery", "waste", "number plate", "licence plate", "driving licence", "weather alert", "public service", "post office"],
+        "de": ["apotheke", "krankenkasse", "krankenversicherung", "prämien", "praemie", "prämienverbilligung", "spital", "ambulant", "notfall", "hausarzt", "gesundheitswesen", "gesundheit", "aufenthaltsbewilligung", "arbeitsbewilligung", "schalter", "kita", "kinderkrippe", "abfall", "kontrollschild", "führerausweis", "unwetterwarnung", "service public", "poststelle"],
+        "fr": ["pharmaci", "assurance-maladie", "caisse maladie", "caisses maladie", "prime maladie", "réduction de primes", "hôpital", "ambulatoire", "urgences", "médecin de famille", "santé publique", "santé", "soins", "permis de séjour", "permis de travail", "guichet", "crèche", "déchets", "plaque d’immatriculation", "permis de conduire", "alerte météo", "service public", "office de poste"]
       },
       "exclude": {
         "it": ["incidente", "muore", "morto", "morta", "arrest", "rapina"],

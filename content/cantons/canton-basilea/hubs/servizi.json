@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "33d35b1e5c7898783a5de77efe4f95a5164e3aa9f84cf6ae51f202e9a1122b0a",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "ca4bb7d70d4397fcfa451b013efe3fa8d70fdda2e1f34058e61ab3dbaf0d1f34",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,13 +14,18 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-13T08:13:47.853Z",
+      "updatedAt": "2026-10-13T20:56:48.532Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -76,11 +81,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-12T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-13T22:00:00.000Z"
             },
             {
@@ -102,11 +102,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-17T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-18T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
+          "updatedAt": "2026-10-13T20:56:48.532Z"
         },
         {
           "id": "aste-targhe",
@@ -137,7 +142,26 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "15 °C",
+              "detail": "oggi da 10 a 16 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "15 °C",
+              "detail": "oggi da 9 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -160,34 +184,34 @@
           "date": "2026-10-01T01:12:49.462Z"
         },
         {
-          "title": "Permesso di dimora B a Basilea Città: requisiti e procedura",
-          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-basilea-citta/",
-          "excerpt": "Ecco i requisiti e i documenti necessari per ottenere il permesso di dimora B nel Cantone di Basilea Città, nonché la procedura di rinnovo e l'ufficio competente.",
-          "date": "2026-08-18T06:57:51.193Z"
-        },
-        {
-          "title": "Permesso dimora B Basilea Città: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-b-basilea-citta/",
-          "excerpt": "Guida pratica al permesso di dimora rinnovabile nel Cantone di Basilea Città: requisiti, documenti, durata, procedura di rinnovo e contatti dell'ufficio della migrazione.",
-          "date": "2026-08-24T12:28:08.819Z"
-        },
-        {
-          "title": "Permesso di dimora B Basilea Campagna: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-dimora-b-basilea-campagna/",
-          "excerpt": "Guida ai requisiti e alla procedura di rinnovo del permesso B nel Canton Basilea Campagna. Durata, documenti e contatti utili.",
-          "date": "2026-08-24T15:36:51.306Z"
-        },
-        {
           "title": "Guida al sistema sanitario svizzero: LAMal e scelta della cassa malati",
           "url": "/articoli-svizzera/sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea/",
           "excerpt": "Tutti i dati necessari per comprendere il sistema sanitario svizzero e la scelta della cassa malati nel canton Basilea",
           "date": "2026-08-09T17:41:08.024Z"
         },
         {
-          "title": "Asilo nido e custodia bambini a Basilea Città: tariffe e sussidi",
-          "url": "/articoli-svizzera/asilo-custodia-basilea-citta-tariffe/",
-          "excerpt": "Guida alla custodia dei bambini nel canton Basilea Città: tariffe progressive, sussidi cantonali e deduzioni fiscali federali per famiglie. Come accedere ai servizi.",
-          "date": "2026-09-02T02:13:24.377Z"
+          "title": "Permesso di dimora B a Basilea Città: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-basilea-citta/",
+          "excerpt": "Ecco i requisiti e i documenti necessari per ottenere il permesso di dimora B nel Cantone di Basilea Città, nonché la procedura di rinnovo e l'ufficio competente.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Premi cassa malati nel Cantone di Basilea Città: riduzione annunciata",
+          "url": "/articoli-svizzera/premi-cassa-malati-basilea-citt-riduzione/",
+          "excerpt": "Il Cantone di Basilea Città ha annunciato la riduzione dei premi per la cassa malati.",
+          "date": "2026-08-18T04:30:52.311Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini a Basilea Campagna: costi",
+          "url": "/articoli-svizzera/asilo-nido-custodia-basilea-campagna-costi/",
+          "excerpt": "Tariffe e sussidi per asili nido e custodia in Basilea Campagna. Come funziona la tariffazione calcolata sul reddito e quali agevolazioni sono disponibili.",
+          "date": "2026-09-02T05:50:07.078Z"
+        },
+        {
+          "title": "Permesso dimora B Basilea Città: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-basilea-citta/",
+          "excerpt": "Guida pratica al permesso di dimora rinnovabile nel Cantone di Basilea Città: requisiti, documenti, durata, procedura di rinnovo e contatti dell'ufficio della migrazione.",
+          "date": "2026-08-24T12:28:08.819Z"
         }
       ],
       "links": [
@@ -224,7 +248,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -278,11 +302,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-12T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-13T22:00:00.000Z"
             },
             {
@@ -304,11 +323,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-17T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-18T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
+          "updatedAt": "2026-10-13T20:56:48.532Z"
         },
         {
           "id": "aste-targhe",
@@ -339,7 +363,26 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "15 °C",
+              "detail": "today from 10 to 16 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "15 °C",
+              "detail": "today from 9 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -362,34 +405,34 @@
           "date": "2026-10-01T01:12:49.462Z"
         },
         {
-          "title": "Residence permit B in Basel City: requirements and procedure",
-          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-basel-citta-en/",
-          "excerpt": "Here are the requirements and documents necessary to obtain the residence permit B in the Canton of Basel-City, as well as the renewal procedure and the competent office.",
-          "date": "2026-08-18T06:57:51.193Z"
-        },
-        {
-          "title": "Residence permit B Basel City: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-basel-city/",
-          "excerpt": "Practical guide to the renewable residence permit in the Canton of Basel-City: requirements, documents, duration, renewal procedure and contacts of the migration office.",
-          "date": "2026-08-24T12:28:08.819Z"
-        },
-        {
-          "title": "Residence Permit B Basel Countryside: Requirements and Renewal",
-          "url": "/en/swiss-articles/residence-permit-b-basel-landschaft-requirements-renewal/",
-          "excerpt": "Guide to the requirements and procedure for renewing the B permit in the Basel-Country Canton. Duration, documents and useful contacts.",
-          "date": "2026-08-24T15:36:51.306Z"
-        },
-        {
           "title": "Guide to the Swiss health system: LAMal and the choice of the sick fund",
           "url": "/en/swiss-articles/swiss-healthcare-system-lamal-guide-2026-canton-basel/",
           "excerpt": "All the data necessary to understand the Swiss health system and the choice of the health insurance fund in the canton of Basel",
           "date": "2026-08-09T17:41:08.024Z"
         },
         {
-          "title": "Nursery and childcare in Basel City: fees and subsidies",
-          "url": "/en/swiss-articles/nursery-childcare-basel-city-fees/",
-          "excerpt": "Guide to Child Custody in the Canton of Basel-City: Progressive Fees, Cantonal Subsidies, and Federal Family Tax Deductions. How to access services.",
-          "date": "2026-09-02T02:13:24.377Z"
+          "title": "Residence permit B in Basel City: requirements and procedure",
+          "url": "/en/swiss-articles/permesso-di-dimora-b-canton-basel-citta-en/",
+          "excerpt": "Here are the requirements and documents necessary to obtain the residence permit B in the Canton of Basel-City, as well as the renewal procedure and the competent office.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Health insurance premiums in the canton of Basel-City: reduction announced",
+          "url": "/en/swiss-articles/health-insurance-premium-reduced-basel-city/",
+          "excerpt": "The Canton of Basel-City has announced the reduction of sickness insurance premiums.",
+          "date": "2026-08-18T04:30:52.311Z"
+        },
+        {
+          "title": "Daycare and Childcare in Basel-Landschaft: Costs",
+          "url": "/en/swiss-articles/nursery-childcare-basel-landschaft-costs/",
+          "excerpt": "Fees and Subsidies for Daycare and Childcare in Basel-Landschaft. How income-based fees work and what financial assistance is available.",
+          "date": "2026-09-02T05:50:07.078Z"
+        },
+        {
+          "title": "Residence permit B Basel City: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-basel-city/",
+          "excerpt": "Practical guide to the renewable residence permit in the Canton of Basel-City: requirements, documents, duration, renewal procedure and contacts of the migration office.",
+          "date": "2026-08-24T12:28:08.819Z"
         }
       ],
       "links": [
@@ -418,7 +461,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -472,11 +515,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-12T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-13T22:00:00.000Z"
             },
             {
@@ -498,11 +536,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-17T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-18T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
+          "updatedAt": "2026-10-13T20:56:48.532Z"
         },
         {
           "id": "aste-targhe",
@@ -533,7 +576,26 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "15 °C",
+              "detail": "heute 10 bis 16 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "15 °C",
+              "detail": "heute 9 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -556,34 +618,34 @@
           "date": "2026-10-01T01:12:49.462Z"
         },
         {
-          "title": "Aufenthaltsbewilligung B in Basel-Stadt: Voraussetzungen und Verfahren",
-          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-basel-citta-de/",
-          "excerpt": "Hier finden Sie die Voraussetzungen und Unterlagen zur Erlangung der Aufenthaltsbewilligung B im Kanton Basel-Stadt sowie das Erneuerungsverfahren und die zuständige Stelle.",
-          "date": "2026-08-18T06:57:51.193Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B Basel-Stadt: Voraussetzungen und Erneuerung",
-          "url": "/de/schweiz-artikel/aufenthaltsgenehmigung-b-basel-stadt/",
-          "excerpt": "Praktischer Leitfaden zur erneuerbaren Aufenthaltsbewilligung im Kanton Basel-Stadt: Voraussetzungen, Dokumente, Dauer, Erneuerungsverfahren und Kontakte der Migrationsstelle.",
-          "date": "2026-08-24T12:28:08.819Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B Basel-Landschaft: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-baselland-anforderungen-erneuerung/",
-          "excerpt": "Leitfaden zu den Anforderungen und Verfahren für die Erneuerung der B-Bewilligung im Kanton Basel-Landschaft. Dauer, Dokumente und nützliche Kontakte.",
-          "date": "2026-08-24T15:36:51.306Z"
-        },
-        {
           "title": "Leitfaden zum schweizerischen Gesundheitssystem: KVG und Wahl der Krankenkasse",
           "url": "/de/schweiz-artikel/schweizer-gesundheitssystem-lamal-anleitung-2026-kanton-basel/",
           "excerpt": "Alle notwendigen Daten, um das Schweizer Gesundheitssystem und die Wahl der Krankenkasse im Kanton Basel zu verstehen",
           "date": "2026-08-09T17:41:08.024Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung in Basel-Stadt: Tarife und Zuschüsse",
-          "url": "/de/schweiz-artikel/kindergarten-kinderbetreuung-basel-stadt-gebuehren/",
-          "excerpt": "Leitfaden zur Kinderbetreuung im Kanton Basel-Stadt: Progressive Tarife, Kantonsbeiträge und eidgenössische Familiensteuerabzüge. So greifen Sie auf die Dienste zu.",
-          "date": "2026-09-02T02:13:24.377Z"
+          "title": "Aufenthaltsbewilligung B in Basel-Stadt: Voraussetzungen und Verfahren",
+          "url": "/de/schweiz-artikel/permesso-di-dimora-b-canton-basel-citta-de/",
+          "excerpt": "Hier finden Sie die Voraussetzungen und Unterlagen zur Erlangung der Aufenthaltsbewilligung B im Kanton Basel-Stadt sowie das Erneuerungsverfahren und die zuständige Stelle.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Krankenkassenprämien im Kanton Basel-Stadt: Reduktion angekündigt",
+          "url": "/de/schweiz-artikel/krankenversicherungsbeitrag-reduziert-basel-stadt/",
+          "excerpt": "Der Kanton Basel-Stadt hat die Senkung der Krankenkassenprämien angekündigt.",
+          "date": "2026-08-18T04:30:52.311Z"
+        },
+        {
+          "title": "Kindertagesstätten und Kinderbetreuung im Kanton Basel-Landschaft: Kosten",
+          "url": "/de/schweiz-artikel/kindergarten-kinderbetreuung-basellandschaft-kosten/",
+          "excerpt": "Gebühren und Zuschüsse für Kindertagesstätten und Kinderbetreuung im Kanton Basel-Landschaft. Wie funktioniert die einkommensabhängige Gebührenberechnung und welche Vergünstigungen gibt es?",
+          "date": "2026-09-02T05:50:07.078Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Basel-Stadt: Voraussetzungen und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltsgenehmigung-b-basel-stadt/",
+          "excerpt": "Praktischer Leitfaden zur erneuerbaren Aufenthaltsbewilligung im Kanton Basel-Stadt: Voraussetzungen, Dokumente, Dauer, Erneuerungsverfahren und Kontakte der Migrationsstelle.",
+          "date": "2026-08-24T12:28:08.819Z"
         }
       ],
       "links": [
@@ -612,7 +674,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -666,11 +728,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-12T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-13T22:00:00.000Z"
             },
             {
@@ -692,11 +749,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-17T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-18T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
+          "updatedAt": "2026-10-13T20:56:48.532Z"
         },
         {
           "id": "aste-targhe",
@@ -727,7 +789,26 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 10 à 16 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 9 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -750,34 +831,34 @@
           "date": "2026-10-01T01:12:49.462Z"
         },
         {
-          "title": "Permis de séjour B à Bâle-Ville : exigences et procédure",
-          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-bale-citta-fr/",
-          "excerpt": "Voici les conditions et les documents nécessaires pour obtenir le permis de séjour B dans le canton de Bâle-Ville, ainsi que la procédure de renouvellement et le bureau compétent.",
-          "date": "2026-08-18T06:57:51.193Z"
-        },
-        {
-          "title": "Permis de séjour B Bâle-Ville : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-sejour-b-bale-ville/",
-          "excerpt": "Guide pratique du permis de séjour renouvelable dans le canton de Bâle-Ville : exigences, documents, durée, procédure de renouvellement et contacts de l'Office des migrations.",
-          "date": "2026-08-24T12:28:08.819Z"
-        },
-        {
-          "title": "Permis de séjour B Bâle-Campagne : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-sejour-b-bale-campagne-renouvellement/",
-          "excerpt": "Guide des exigences et de la procédure de renouvellement du permis B dans le canton de Bâle-Campagne. Durée, documents et contacts utiles.",
-          "date": "2026-08-24T15:36:51.306Z"
-        },
-        {
           "title": "Guide du système de santé suisse : LAMal et choix de la caisse-maladie",
           "url": "/fr/articles-suisse/systeme-de-sante-suisse-lamal-guide-2026-canton-de-bale/",
           "excerpt": "Toutes les données nécessaires pour comprendre le système de santé suisse et le choix de la caisse-maladie dans le canton de Bâle",
           "date": "2026-08-09T17:41:08.024Z"
         },
         {
-          "title": "Garderie et garde d'enfants à Bâle-Ville : tarifs et subventions",
-          "url": "/fr/articles-suisse/garderie-garde-enfants-bale-ville-tarifs/",
-          "excerpt": "Guide de garde d'enfants dans le canton de Bâle-Ville : tarifs progressifs, allocations cantonales et déductions fiscales fédérales pour les familles. Comment accéder aux services.",
-          "date": "2026-09-02T02:13:24.377Z"
+          "title": "Permis de séjour B à Bâle-Ville : exigences et procédure",
+          "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-bale-citta-fr/",
+          "excerpt": "Voici les conditions et les documents nécessaires pour obtenir le permis de séjour B dans le canton de Bâle-Ville, ainsi que la procédure de renouvellement et le bureau compétent.",
+          "date": "2026-08-18T06:57:51.193Z"
+        },
+        {
+          "title": "Primes caisse-maladie dans le canton de Bâle-Ville : réduction annoncée",
+          "url": "/fr/articles-suisse/forfait-maladie-reduit-bale-ville/",
+          "excerpt": "Le canton de Bâle-Ville a annoncé la réduction des primes pour la caisse-maladie.",
+          "date": "2026-08-18T04:30:52.311Z"
+        },
+        {
+          "title": "Crèches et garde d'enfants à Bâle-Campagne : tarifs",
+          "url": "/fr/articles-suisse/creche-garde-enfants-bale-campagne-couts/",
+          "excerpt": "Tarifs et aides financières pour les crèches et les services de garde d'enfants à Bâle-Campagne. Comment fonctionne le calcul des tarifs en fonction des revenus et quelles sont les aides disponibles ?",
+          "date": "2026-09-02T05:50:07.078Z"
+        },
+        {
+          "title": "Permis de séjour B Bâle-Ville : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-bale-ville/",
+          "excerpt": "Guide pratique du permis de séjour renouvelable dans le canton de Bâle-Ville : exigences, documents, durée, procédure de renouvellement et contacts de l'Office des migrations.",
+          "date": "2026-08-24T12:28:08.819Z"
         }
       ],
       "links": [
@@ -798,7 +879,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

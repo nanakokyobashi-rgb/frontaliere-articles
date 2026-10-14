@@ -666,7 +666,7 @@ test('le news promosse deduplicano gli URL localizzati anche con titoli IT disti
   assert.deepEqual(selected.map(({ article }) => article.id), ['meglio-classificato', 'altro-url']);
 });
 
-test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettati; un articolo sta in un solo hub', async () => {
+test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettati; una news puo\' alimentare piu\' hub', async () => {
   const { pool, byTopic } = await curatedFor('canton-ti');
   assert.ok(idsOf(pool).includes('ti-benzina-prezzi'), 'sezione propria');
   assert.ok(idsOf(pool).includes('imposta-fonte-ticino'), 'frontaliere con canton TI');
@@ -685,7 +685,7 @@ test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettat
   assert.deepEqual(idsOf(byTopic.servizi), ['farmacie-turno-ticino'], 'la cronaca con «ospedale» nel titolo e\' esclusa');
 
   const everywhere = Object.values(byTopic).flatMap(idsOf);
-  assert.equal(new Set(everywhere).size, everywhere.length, 'nessun articolo in due hub dello stesso cantone');
+  assert.ok(new Set(everywhere).size <= everywhere.length);
   assert.ok(!everywhere.includes('vivere-a-comune'), 'una guida che sfiora il tema solo nell\'estratto non e\' una news del tema');
 
   const gr = await curatedFor('canton-gr');
@@ -695,6 +695,40 @@ test('il bacino e\' la sezione del cantone piu\' frontaliere/svizzera etichettat
   const be = await curatedFor('canton-be');
   assert.deepEqual(idsOf(be.byTopic.fisco), ['imposte-berna']);
   assert.deepEqual(idsOf(be.byTopic.pensioni), ['avs-berna']);
+});
+
+test('evidenza diretta multi-tema: una news entra in ogni hub pertinente e non in temi sfiorati', async () => {
+  const multi = article(
+    'ti-imposta-pensione',
+    'canton-ti',
+    'Imposta alla fonte e pensione AVS in Ticino: regole 2026',
+    'La dichiarazione fiscale e la pensione AVS cambiano per i frontalieri.',
+    { days: 1 },
+  );
+  const { byTopic, stats } = await curatedFor('canton-ti', [...CORPUS, multi]);
+  assert.ok(idsOf(byTopic.fisco).includes(multi.id));
+  assert.ok(idsOf(byTopic.pensioni).includes(multi.id));
+  assert.ok(!idsOf(byTopic.servizi).includes(multi.id));
+  assert.ok(stats.multiTopic >= 1);
+});
+
+test('il tetto editoriale privilegia la sezione propria prima dei fallback multi-label', async () => {
+  const own = article(
+    'ti-fisco-proprio',
+    'canton-ti',
+    'Imposte cantonali in Ticino: nuova revisione fiscale',
+    'La revisione fiscale aggiorna aliquote e dichiarazione dei redditi.',
+    { days: 45 },
+  );
+  const fallback = article(
+    'ti-fisco-fallback',
+    'frontaliere',
+    'Imposte in Ticino: guida aggiornata per i frontalieri',
+    'Aliquote, imposta alla fonte e dichiarazione dei redditi.',
+    { cantons: ['TI'], days: 1 },
+  );
+  const { byTopic } = await curatedFor('canton-ti', [...CORPUS, own, fallback]);
+  assert.equal(idsOf(byTopic.fisco)[0], own.id);
 });
 
 test('canonical override: si leggono le chiavi di `overrides`; una forma sconosciuta ferma il producer', () => {
@@ -1156,6 +1190,13 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   assert.ok(cron, 'cron giornaliero mancante');
   assert.ok(Number(cron[1]) % 15 !== 0, 'il minuto del cron va sfalsato dai quarti d\'ora');
   assert.match(wf, /workflow_dispatch:/);
+  assert.match(wf, /- 'content\/blog-body-canton-\*\/\*\*'/);
+  assert.match(wf, /- 'content\/blog-meta-canton-\*'/);
+  assert.match(wf, /- 'content\/cantons\/\*\/registry\.ts'/);
+  assert.match(wf, /- 'content\/cantons\/\*\/seo\.ts'/);
+  assert.match(wf, /- 'content\/cantons\/\*\/slugs\.ts'/);
+  assert.match(wf, /- 'data\/sections\/canton-\*\/articles\/\*\*'/);
+  assert.doesNotMatch(wf, /- 'content\/cantons\/\*\*'/, 'il trigger non deve riavviarsi sui propri hub');
   assert.match(wf, /--list-enabled/);
   assert.match(wf, /count=0/);
   // Ogni step dopo la risoluzione delle sezioni e' condizionato a count != 0.

@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "a18cbf8026a7c4ccaff47c837022370a1adbe660eb404ce696ffb27e658fef4f",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "8a1d60d9f40613d77c5c2e283631a2a421a1fa3c567fb54a7aa2cb04c9bb6650",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "5",
+          "value": "7",
           "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -100,9 +100,24 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Älperchilbi: Einschränkungen im Verkehr",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2992174"
+            },
+            {
+              "label": "Verkehrseinschränkung CISM OL WM 2026",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2999005"
+            },
+            {
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
+            },
+            {
+              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
+              "date": "2026-10-06",
+              "url": "https://www.nw.ch/_rte/information/138826"
             },
             {
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
@@ -110,27 +125,12 @@
               "url": "https://www.buochs.ch/_rte/information/3000736"
             },
             {
-              "label": "Baustellen-News 24.09.2026",
-              "date": "2026-09-24",
-              "url": "https://www.buochs.ch/_rte/information/2994295"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
-              "date": "2026-08-27",
-              "url": "https://www.buochs.ch/_rte/information/2966428"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
-              "date": "2026-08-24",
-              "url": "https://www.buochs.ch/_rte/information/2962954"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
-              "date": "2026-08-21",
-              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
+              "date": "2026-09-29",
+              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "NW",
@@ -166,7 +166,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "5",
+          "value": "7",
           "note": "reports as of 13 October 2026"
         }
       ],
@@ -226,7 +226,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -234,9 +234,24 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Älperchilbi: Einschränkungen im Verkehr",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2992174"
+            },
+            {
+              "label": "Verkehrseinschränkung CISM OL WM 2026",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2999005"
+            },
+            {
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
+            },
+            {
+              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
+              "date": "2026-10-06",
+              "url": "https://www.nw.ch/_rte/information/138826"
             },
             {
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
@@ -244,27 +259,12 @@
               "url": "https://www.buochs.ch/_rte/information/3000736"
             },
             {
-              "label": "Baustellen-News 24.09.2026",
-              "date": "2026-09-24",
-              "url": "https://www.buochs.ch/_rte/information/2994295"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
-              "date": "2026-08-27",
-              "url": "https://www.buochs.ch/_rte/information/2966428"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
-              "date": "2026-08-24",
-              "url": "https://www.buochs.ch/_rte/information/2962954"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
-              "date": "2026-08-21",
-              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
+              "date": "2026-09-29",
+              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "NW",
@@ -300,7 +300,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "5",
+          "value": "7",
           "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
@@ -360,7 +360,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -368,9 +368,24 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Älperchilbi: Einschränkungen im Verkehr",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2992174"
+            },
+            {
+              "label": "Verkehrseinschränkung CISM OL WM 2026",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2999005"
+            },
+            {
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
+            },
+            {
+              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
+              "date": "2026-10-06",
+              "url": "https://www.nw.ch/_rte/information/138826"
             },
             {
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
@@ -378,27 +393,12 @@
               "url": "https://www.buochs.ch/_rte/information/3000736"
             },
             {
-              "label": "Baustellen-News 24.09.2026",
-              "date": "2026-09-24",
-              "url": "https://www.buochs.ch/_rte/information/2994295"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
-              "date": "2026-08-27",
-              "url": "https://www.buochs.ch/_rte/information/2966428"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
-              "date": "2026-08-24",
-              "url": "https://www.buochs.ch/_rte/information/2962954"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
-              "date": "2026-08-21",
-              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
+              "date": "2026-09-29",
+              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "NW",
@@ -434,7 +434,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "5",
+          "value": "7",
           "note": "signalements au 13 octobre 2026"
         }
       ],
@@ -494,7 +494,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -502,9 +502,24 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Älperchilbi: Einschränkungen im Verkehr",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2992174"
+            },
+            {
+              "label": "Verkehrseinschränkung CISM OL WM 2026",
+              "date": "2026-10-13",
+              "url": "https://www.stans.ch/_rte/information/2999005"
+            },
+            {
               "label": "Postauto Fahrplanwechsel ab dem 13. Dezember 2026",
               "date": "2026-10-09",
               "url": "https://www.buochs.ch/_rte/information/3007873"
+            },
+            {
+              "label": "Mehr Sicherheit auf dem Fuss- und Veloweg am Lopper",
+              "date": "2026-10-06",
+              "url": "https://www.nw.ch/_rte/information/138826"
             },
             {
               "label": "Baustellen-News 01.10.2026: Ersatz Wasserleitung in Turmattstrasse‌",
@@ -512,27 +527,12 @@
               "url": "https://www.buochs.ch/_rte/information/3000736"
             },
             {
-              "label": "Baustellen-News 24.09.2026",
-              "date": "2026-09-24",
-              "url": "https://www.buochs.ch/_rte/information/2994295"
-            },
-            {
-              "label": "A2 Lehnenviadukt Beckenried Verkehrsumstellung für die nächste Bauphase",
-              "date": "2026-08-27",
-              "url": "https://www.buochs.ch/_rte/information/2966428"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026) – Informationsflyer",
-              "date": "2026-08-24",
-              "url": "https://www.buochs.ch/_rte/information/2962954"
-            },
-            {
-              "label": "Streckensperre Zentralbahn zwischen Stansstad–Engelberg (07.09.–01.11.2026)",
-              "date": "2026-08-21",
-              "url": "https://www.stansstad.ch/portraet/neuigkeiten/details.html/19/news/852"
+              "label": "Der öffentliche Verkehr in Nidwalden bleibt attraktiv",
+              "date": "2026-09-29",
+              "url": "https://www.nw.ch/_rte/information/138538"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

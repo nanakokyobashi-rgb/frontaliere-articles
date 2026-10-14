@@ -32,6 +32,16 @@ on:
       - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/data/canton-hub-topics.json'
       - 'generator/data/canton-hub-links.json'
+      # Un nuovo articolo aggiorna registro, slug/meta, corpo e sorgente dati.
+      # I path dei soli hub non sono inclusi: il push del refresh non riavvia
+      # se stesso, mentre il push del generatore cantonale avvia subito questo
+      # workflow (non si aspetta il cron del giorno dopo).
+      - 'content/blog-body-canton-*/**'
+      - 'content/blog-meta-canton-*'
+      - 'content/cantons/*/registry.ts'
+      - 'content/cantons/*/seo.ts'
+      - 'content/cantons/*/slugs.ts'
+      - 'data/sections/canton-*/articles/**'
   workflow_dispatch:
     inputs:
       sections:

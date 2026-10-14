@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "cad29246ab36a2db7da2e766a1ba5ec14d9493b08170b8b1928023e726028f69",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "755db3e65c7380a95c557315f55db8ec0d144ef4b9eee2f3b584016853c87cf1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "63",
+          "value": "65",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
-            {
-              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
-              "detail": "La Profumoteca — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
-            },
-            {
-              "label": "Was vom Tage übrigbleibt: Sonnenuntergang auf dem St. Ursenturm",
-              "detail": "Soletta — in corso, ultimo giorno: 13 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
-            },
             {
               "label": "Lehrreiche Nachrichten und lustige Erzählungen",
               "detail": "Solothurn",
@@ -73,6 +43,30 @@
               "detail": "Mehrzweckhalle, Riedholz",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — in corso, ultimo giorno: 15 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
             },
             {
               "label": "cinedolcevita – Kinogenuss am Nachmittag",
@@ -91,11 +85,17 @@
               "detail": "Altes Spital, Solothurn",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/reto-burrell-feat-lin-stucki-jon-kenzie-uk/"
+            },
+            {
+              "label": "HITS ONLY",
+              "detail": "Solothurn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -122,7 +122,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "SO",
@@ -132,7 +132,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "63",
+          "value": "65",
           "note": "from the site’s events calendar"
         }
       ],
@@ -142,36 +142,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — ongoing, last day: 18 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — ongoing, last day: 25 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
-            {
-              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
-              "detail": "La Profumoteca — ongoing, last day: 15 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
-            },
-            {
-              "label": "What remains of the day: sunset on the St. Ursenturm tower",
-              "detail": "Soletta — ongoing, last day: 13 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
-            },
             {
               "label": "Lehrreiche Nachrichten und lustige Erzählungen",
               "detail": "Solothurn",
@@ -183,6 +153,30 @@
               "detail": "Mehrzweckhalle, Riedholz",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — ongoing, last day: 18 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — ongoing, last day: 25 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — ongoing, last day: 15 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
             },
             {
               "label": "cinedolcevita – Kinogenuss am Nachmittag",
@@ -201,11 +195,17 @@
               "detail": "Altes Spital, Solothurn",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/reto-burrell-feat-lin-stucki-jon-kenzie-uk/"
+            },
+            {
+              "label": "HITS ONLY",
+              "detail": "Solothurn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -232,7 +232,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "SO",
@@ -242,7 +242,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "63",
+          "value": "65",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -252,36 +252,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
-            {
-              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
-              "detail": "La Profumoteca — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
-            },
-            {
-              "label": "Was vom Tage übrigbleibt: Sonnenuntergang auf dem St. Ursenturm",
-              "detail": "Soletta — läuft, letzter Tag: 13. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
-            },
             {
               "label": "Lehrreiche Nachrichten und lustige Erzählungen",
               "detail": "Solothurn",
@@ -293,6 +263,30 @@
               "detail": "Mehrzweckhalle, Riedholz",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — läuft, letzter Tag: 15. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
             },
             {
               "label": "cinedolcevita – Kinogenuss am Nachmittag",
@@ -311,11 +305,17 @@
               "detail": "Altes Spital, Solothurn",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/reto-burrell-feat-lin-stucki-jon-kenzie-uk/"
+            },
+            {
+              "label": "HITS ONLY",
+              "detail": "Solothurn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -342,7 +342,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "SO",
@@ -352,7 +352,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "63",
+          "value": "65",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -362,36 +362,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Hühner – unterschätztes Federvieh",
-              "detail": "Naturmuseum, Solothurn — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
-            {
-              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
-              "detail": "La Profumoteca — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
-            },
-            {
-              "label": "Ce qu'il reste du jour : coucher de soleil sur la tour St-Ursanne",
-              "detail": "Soletta — en cours, dernier jour : 13 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/was-vom-tage-uebrigbleibt-sonnenuntergang-auf-dem-st-ursenturm/"
-            },
             {
               "label": "Lehrreiche Nachrichten und lustige Erzählungen",
               "detail": "Solothurn",
@@ -403,6 +373,30 @@
               "detail": "Mehrzweckhalle, Riedholz",
               "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/theaterabend/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Hühner – unterschätztes Federvieh",
+              "detail": "Naturmuseum, Solothurn — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/huehner-unterschaetztes-federvieh/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+            },
+            {
+              "label": "Verführerisch: Kreieren Sie Ihr eigenes Parfum",
+              "detail": "La Profumoteca — en cours, dernier jour : 15 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verfuehrerisch-kreieren-sie-ihr-eigenes-parfum/"
             },
             {
               "label": "cinedolcevita – Kinogenuss am Nachmittag",
@@ -421,11 +415,17 @@
               "detail": "Altes Spital, Solothurn",
               "date": "2026-10-15",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/reto-burrell-feat-lin-stucki-jon-kenzie-uk/"
+            },
+            {
+              "label": "HITS ONLY",
+              "detail": "Solothurn",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hits-only-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +452,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

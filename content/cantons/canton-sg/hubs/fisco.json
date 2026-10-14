@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "65582838a82dd438ed6cececfa98c3b63e721c1d814c8e7e34dbe21b5c3585a5",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "83b8058e61f70018ffced5498934d07be42a6afc09922f02d924ebf3d5472c17",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -140,7 +140,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -173,6 +173,12 @@
           "url": "/articoli-svizzera/dichiarazione-imposte-svizzera-guida-2026-canton-san-gallo/",
           "excerpt": "Scadenze cantonali, deduzioni ammesse e procedura online per la dichiarazione fiscale 2026. Dati specifici per il canton San Gallo e confronto nazionale.",
           "date": "2026-07-21T10:48:26.222Z"
+        },
+        {
+          "title": "Comprare casa San Gallo: mutuo e imposte",
+          "url": "/articoli-svizzera/comprare-casa-san-gallo-mutuo/",
+          "excerpt": "Guida all'acquisto immobiliare in Svizzera: mutuo ipotecario, fondi propri, imposta sui trapassi e procedure step-by-step per chi compra nel Canton San Gallo.",
+          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "links": [
@@ -201,7 +207,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "SG",
@@ -319,7 +325,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -352,6 +358,12 @@
           "url": "/en/swiss-articles/switzerland-tax-declaration-2026-guide-st-gallen-canton/",
           "excerpt": "Cantonal deadlines, allowable deductions and online procedure for the 2026 tax return. Specific data for the canton of St. Gallen and national comparison.",
           "date": "2026-07-21T10:48:26.222Z"
+        },
+        {
+          "title": "Buying a house in St. Gallen: mortgage and taxes",
+          "url": "/en/swiss-articles/buy-home-st-gallen-mortgage/",
+          "excerpt": "Guide to buying real estate in Switzerland: mortgage, own funds, transfer tax and step-by-step procedures for buyers in the Canton of St. Gallen.",
+          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "links": [
@@ -380,7 +392,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "SG",
@@ -498,7 +510,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -531,6 +543,12 @@
           "url": "/de/schweiz-artikel/schweiz-steuererklaerung-2026-leitfaden-kanton-st-gallen/",
           "excerpt": "Kantonale Fälligkeiten, zulässige Abzüge und Online-Verfahren für die Steuererklärung 2026. Kantonsspezifische Daten und nationaler Vergleich.",
           "date": "2026-07-21T10:48:26.222Z"
+        },
+        {
+          "title": "Haus St. Gallen kaufen: Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-sankt-gallen-hypothek/",
+          "excerpt": "Leitfaden zum Immobilienkauf in der Schweiz: Hypothekendarlehen, Eigenmittel, Abgeltungssteuer und Schritt-für-Schritt-Verfahren für Käufer im Kanton St. Gallen.",
+          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "links": [
@@ -559,7 +577,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "SG",
@@ -677,7 +695,7 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/09/erste-durchfuehrung-der-talent-days-bodensee-2026-war-ein-voller.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -710,6 +728,12 @@
           "url": "/fr/articles-suisse/declaration-impots-suisse-2026-guide-canton-saint-gall/",
           "excerpt": "Délais cantonaux, déductions admises et procédure en ligne pour la déclaration fiscale 2026. Données spécifiques pour le canton de Saint-Gall et comparaison nationale.",
           "date": "2026-07-21T10:48:26.222Z"
+        },
+        {
+          "title": "Acheter maison Saint-Gall : hypothèque et taxes",
+          "url": "/fr/articles-suisse/acheter-maison-saint-gall-hypotheque/",
+          "excerpt": "Guide d'achat immobilier en Suisse : hypothèque, fonds propres, taxe de passage et procédures étape par étape pour ceux qui achètent dans le canton de Saint-Gall.",
+          "date": "2026-09-04T05:24:58.077Z"
         }
       ],
       "links": [
@@ -738,7 +762,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

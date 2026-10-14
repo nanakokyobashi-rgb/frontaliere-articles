@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "fisco",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "77d3338a35eab259d72e0a4e266cc68452a58f8daeebcd6577efffa56885828b",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "f5a7ad21fb5591bb54ec1fb177234dd53297eeb9219b1d857447bdbb6b8e0b07",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -125,10 +125,17 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Comprare casa in Turgovia: tasse e mutuo ipotecario",
+          "url": "/articoli-svizzera/comprare-casa-turgovia-mutuo/",
+          "excerpt": "Acquistare immobile in Turgovia: costi fiscali, fondi propri richiesti, sostenibilità mutuo ipotecario, procedure notarili e tempistiche in Svizzera.",
+          "date": "2026-09-03T02:50:15.636Z"
+        }
+      ],
       "links": [
         {
           "label": "Calcolatore dello stipendio netto",
@@ -155,7 +162,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "TG",
@@ -258,10 +265,17 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Buying a house in Thurgau: taxes and mortgage",
+          "url": "/en/swiss-articles/buy-house-thurgau-mortgage/",
+          "excerpt": "Buying property in Thurgau: tax costs, own funds required, mortgage mortgage sustainability, notary procedures and timing in Switzerland.",
+          "date": "2026-09-03T02:50:15.636Z"
+        }
+      ],
       "links": [
         {
           "label": "Net salary calculator",
@@ -288,7 +302,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "TG",
@@ -391,10 +405,17 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Haus kaufen im Thurgau: Steuern und Hypothekendarlehen",
+          "url": "/de/schweiz-artikel/haus-kaufen-thurgau-hypothek/",
+          "excerpt": "Immobilienkauf im Thurgau: Steuerkosten, Eigenkapitalbedarf, Tragbarkeit Hypothekendarlehen, Notarverfahren und Fristen in der Schweiz.",
+          "date": "2026-09-03T02:50:15.636Z"
+        }
+      ],
       "links": [
         {
           "label": "Nettolohn-Rechner",
@@ -421,7 +442,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "TG",
@@ -524,10 +545,17 @@
               "url": "https://steuerverwaltung.tg.ch/news/detailseite-news.html/4067/news/80050"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Acheter une maison en Thurgovie : taxes et hypothèque",
+          "url": "/fr/articles-suisse/acheter-maison-thurgovie-hypotheque/",
+          "excerpt": "Acheter un bien immobilier en Thurgovie : coûts fiscaux, fonds propres requis, viabilité hypothécaire, procédures notariales et délais en Suisse.",
+          "date": "2026-09-03T02:50:15.636Z"
+        }
+      ],
       "links": [
         {
           "label": "Calculateur de salaire net",
@@ -554,7 +582,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

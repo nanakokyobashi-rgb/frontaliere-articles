@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "1b9ce919b153a7e67107e1851f0dd74ab35440045be286bf54cc779acaec474a",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "fb072970a326a42e7b99911f2ddd41cdb20efb8aa2bc2438c3d676277fbef3f7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -49,6 +54,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "oggi da 12 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -64,10 +83,16 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Premi LAMal Obvaldo: franchigie e riduzione",
+          "url": "/articoli-svizzera/franchigie-obvaldo-malattia-riduzione/",
+          "excerpt": "Franchigie obbligatorie, riduzioni di premio e sussidi cantonali per l'assicurazione malattia nel Cantone di Obvaldo. Procedura di richiesta e modelli assicurativi alternativi.",
+          "date": "2026-08-23T05:27:44.369Z"
+        },
         {
           "title": "Permesso di dimora B in Obvaldo: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-obvaldo-rinnovo/",
@@ -81,28 +106,22 @@
           "date": "2026-08-16T16:18:18.990Z"
         },
         {
-          "title": "Asilo nido e custodia bambini Canton Obvaldo costi",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-obvaldo-costi/",
-          "excerpt": "Scopri i costi di un asilo nido e le politiche di sussidi del Canton Obvaldo.",
-          "date": "2026-08-16T17:43:41.742Z"
-        },
-        {
           "title": "Premi cassa malati nel Cantone di Obvaldo: riduzione e franchigie",
           "url": "/articoli-svizzera/premi-cassa-malati-obvaldo-riduzione/",
           "excerpt": "La legge cantonale sulle assicurazioni malattie nel Cantone di Obvaldo prevede fasce di età e franchigie per ridurre i premi.",
           "date": "2026-08-16T14:15:52.976Z"
         },
         {
+          "title": "Asilo nido e custodia bambini Canton Obvaldo costi",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-obvaldo-costi/",
+          "excerpt": "Scopri i costi di un asilo nido e le politiche di sussidi del Canton Obvaldo.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
           "title": "Patente di guida Obvaldo: conversione ed esami",
           "url": "/articoli-svizzera/patente-guida-obvaldo-conversione/",
           "excerpt": "Guida completa alla conversione della patente estera nel Cantone di Obvaldo: procedura, esame teorico e pratico, corsi obbligatori e documenti necessari.",
           "date": "2026-08-23T09:58:00.247Z"
-        },
-        {
-          "title": "Premi LAMal Obvaldo: franchigie e riduzione",
-          "url": "/articoli-svizzera/franchigie-obvaldo-malattia-riduzione/",
-          "excerpt": "Franchigie obbligatorie, riduzioni di premio e sussidi cantonali per l'assicurazione malattia nel Cantone di Obvaldo. Procedura di richiesta e modelli assicurativi alternativi.",
-          "date": "2026-08-23T05:27:44.369Z"
         }
       ],
       "links": [
@@ -131,7 +150,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "OW",
@@ -163,6 +182,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "today from 12 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -178,10 +211,16 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "LAMal Obwalden premiums: deductibles and reduction",
+          "url": "/en/swiss-articles/obwalden-health-insurance-deductibles-subsidies/",
+          "excerpt": "Compulsory deductibles, premium reductions and cantonal health insurance benefits in the Canton of Obwalden. Application procedure and alternative insurance models.",
+          "date": "2026-08-23T05:27:44.369Z"
+        },
         {
           "title": "Residence permit B in Obwalden: requirements and renewal",
           "url": "/en/swiss-articles/residence-permit-b-obwalden-renewal/",
@@ -195,28 +234,22 @@
           "date": "2026-08-16T16:18:18.990Z"
         },
         {
-          "title": "Nursery and childcare Canton Obwalden costs",
-          "url": "/en/swiss-articles/childcare-custody-canton-obwalden-costs/",
-          "excerpt": "Discover the costs of a kindergarten and the subsidy policies of the Obwalden Canton.",
-          "date": "2026-08-16T17:43:41.742Z"
-        },
-        {
           "title": "Sick pay premiums in the Canton of Obwalden: reduction and deductibles",
           "url": "/en/swiss-articles/canton-obwalden-maladie-insurance-premiums-reduction/",
           "excerpt": "The cantonal law on health insurance in the Canton of Obwalden provides for age groups and deductibles to reduce premiums.",
           "date": "2026-08-16T14:15:52.976Z"
         },
         {
+          "title": "Nursery and childcare Canton Obwalden costs",
+          "url": "/en/swiss-articles/childcare-custody-canton-obwalden-costs/",
+          "excerpt": "Discover the costs of a kindergarten and the subsidy policies of the Obwalden Canton.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
           "title": "Obwalden Driving License: Conversion and Exams",
           "url": "/en/swiss-articles/driving-licence-obwalden-conversion/",
           "excerpt": "Complete guide to the conversion of the foreign licence in the Canton of Obwalden: procedure, theoretical and practical examination, compulsory courses and necessary documents.",
           "date": "2026-08-23T09:58:00.247Z"
-        },
-        {
-          "title": "LAMal Obwalden premiums: deductibles and reduction",
-          "url": "/en/swiss-articles/obwalden-health-insurance-deductibles-subsidies/",
-          "excerpt": "Compulsory deductibles, premium reductions and cantonal health insurance benefits in the Canton of Obwalden. Application procedure and alternative insurance models.",
-          "date": "2026-08-23T05:27:44.369Z"
         }
       ],
       "links": [
@@ -241,7 +274,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "OW",
@@ -273,6 +306,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "heute 12 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -288,10 +335,16 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "KVG-Prämien Obwalden: Selbstbehalte und Kürzung",
+          "url": "/de/schweiz-artikel/obwalden-krankenversicherung-franchisen-reduktion/",
+          "excerpt": "Obligatorische Franchisen, Prämienverbilligungen und kantonale Krankenversicherungsbeiträge im Kanton Obwalden. Antragsverfahren und alternative Versicherungsmodelle.",
+          "date": "2026-08-23T05:27:44.369Z"
+        },
         {
           "title": "Aufenthaltsbewilligung B in Obwalden: Voraussetzungen und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-obwalden-verlaengerung/",
@@ -305,28 +358,22 @@
           "date": "2026-08-16T16:18:18.990Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung Kanton Obwalden Kosten",
-          "url": "/de/schweiz-artikel/kindergeld-pflege-kanton-obwalden-kosten/",
-          "excerpt": "Entdecken Sie die Kosten einer Kindertagesstätte und die Subventionspolitik des Kantons Obwalden.",
-          "date": "2026-08-16T17:43:41.742Z"
-        },
-        {
           "title": "Krankenkassenprämien im Kanton Obwalden: Reduktion und Franchisen",
           "url": "/de/schweiz-artikel/kanton-obwalden-krankenversicherung-pramien-reduktion/",
           "excerpt": "Das kantonale Krankenversicherungsgesetz im Kanton Obwalden sieht Altersgruppen und Franchisen zur Prämienverbilligung vor.",
           "date": "2026-08-16T14:15:52.976Z"
         },
         {
+          "title": "Kindertagesstätte und Kinderbetreuung Kanton Obwalden Kosten",
+          "url": "/de/schweiz-artikel/kindergeld-pflege-kanton-obwalden-kosten/",
+          "excerpt": "Entdecken Sie die Kosten einer Kindertagesstätte und die Subventionspolitik des Kantons Obwalden.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
           "title": "Führerschein Obwalden: Umschulung und Prüfungen",
           "url": "/de/schweiz-artikel/fuehrerschein-obwalden-umwandlung/",
           "excerpt": "Vollständiger Leitfaden zur Umwandlung des ausländischen Führerscheins im Kanton Obwalden: Verfahren, theoretische und praktische Prüfung, Pflichtkurse und erforderliche Unterlagen.",
           "date": "2026-08-23T09:58:00.247Z"
-        },
-        {
-          "title": "KVG-Prämien Obwalden: Selbstbehalte und Kürzung",
-          "url": "/de/schweiz-artikel/obwalden-krankenversicherung-franchisen-reduktion/",
-          "excerpt": "Obligatorische Franchisen, Prämienverbilligungen und kantonale Krankenversicherungsbeiträge im Kanton Obwalden. Antragsverfahren und alternative Versicherungsmodelle.",
-          "date": "2026-08-23T05:27:44.369Z"
         }
       ],
       "links": [
@@ -351,7 +398,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "OW",
@@ -383,6 +430,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sarnen",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 12 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -398,10 +459,16 @@
               "url": "https://www.ow.ch/_rte/information/137884"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Primes LAMal Obwald : franchises et réduction",
+          "url": "/fr/articles-suisse/obwald-assurance-maladie-franchises-reduction/",
+          "excerpt": "Franchises obligatoires, réductions de primes et allocations cantonales pour l'assurance-maladie dans le canton d'Obwald. Procédure de demande et modèles d'assurance alternatifs.",
+          "date": "2026-08-23T05:27:44.369Z"
+        },
         {
           "title": "Permis de séjour B à Obwald : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-de-sejour-b-obwald-renouvellement/",
@@ -415,28 +482,22 @@
           "date": "2026-08-16T16:18:18.990Z"
         },
         {
-          "title": "Garderie et garde d'enfants Canton Obwald coûts",
-          "url": "/fr/articles-suisse/enfance-garde-canton-obwald-couts/",
-          "excerpt": "Découvrez les coûts d'une crèche et les politiques de subventions du canton Obwald.",
-          "date": "2026-08-16T17:43:41.742Z"
-        },
-        {
           "title": "Primes caisse-maladie dans le canton d'Obwald : réduction et franchises",
           "url": "/fr/articles-suisse/canton-obwald-assurance-maladie-primes-reduction/",
           "excerpt": "La loi cantonale sur l'assurance-maladie dans le canton d'Obwald prévoit des tranches d'âge et des franchises pour réduire les primes.",
           "date": "2026-08-16T14:15:52.976Z"
         },
         {
+          "title": "Garderie et garde d'enfants Canton Obwald coûts",
+          "url": "/fr/articles-suisse/enfance-garde-canton-obwald-couts/",
+          "excerpt": "Découvrez les coûts d'une crèche et les politiques de subventions du canton Obwald.",
+          "date": "2026-08-16T17:43:41.742Z"
+        },
+        {
           "title": "Permis de conduire Obwald : conversion et examens",
           "url": "/fr/articles-suisse/permis-de-conduire-obwald-conversion/",
           "excerpt": "Guide complet pour la conversion du permis étranger dans le canton d'Obwald : procédure, examen théorique et pratique, cours obligatoires et documents nécessaires.",
           "date": "2026-08-23T09:58:00.247Z"
-        },
-        {
-          "title": "Primes LAMal Obwald : franchises et réduction",
-          "url": "/fr/articles-suisse/obwald-assurance-maladie-franchises-reduction/",
-          "excerpt": "Franchises obligatoires, réductions de primes et allocations cantonales pour l'assurance-maladie dans le canton d'Obwald. Procédure de demande et modèles d'assurance alternatifs.",
-          "date": "2026-08-23T05:27:44.369Z"
         }
       ],
       "links": [
@@ -457,7 +518,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

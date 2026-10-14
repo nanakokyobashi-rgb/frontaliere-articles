@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "b11d786a706bb0bf7a1c91e0125d5507037dbdf1229a9b7fc8ef6e48822d716b",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "64ef56eded86124d4f07b8fe16b4fd55ce29f369086d683034df1d25f0f190c6",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -16,6 +16,11 @@
       "id": "imposta-alla-fonte",
       "updatedAt": "2026-10-05T07:54:42.677Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -98,6 +103,19 @@
           "sourceName": "Autorità fiscale cantonale",
           "sourceUrl": "https://www.ur.ch/finanzen/1576",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Ausgleich der kalten Progression für das Steuerjahr ...",
+              "date": "2026-09-30",
+              "url": "https://www.ur.ch/_rte/information/138694"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -124,6 +142,12 @@
           "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-uri-aliquote/",
           "excerpt": "Imposta di successione e donazione nel Cantone di Uri: aliquote per grado di parentela",
           "date": "2026-08-16T10:39:50.404Z"
+        },
+        {
+          "title": "Cassa malati Uri: franchigie, modelli e riduzione",
+          "url": "/articoli-svizzera/uri-franchigie-modelli-sussidio/",
+          "excerpt": "Nel Canton Uri, i premi LAMal variano per franchigia e modello assicurativo. Scopri le fasce disponibili (CHF 300–2500), i modelli di copertura e come accedere al sussidio cantonale.",
+          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -148,7 +172,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "UR",
@@ -229,6 +253,19 @@
           "sourceName": "Cantonal tax authority",
           "sourceUrl": "https://www.ur.ch/finanzen/1576",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Ausgleich der kalten Progression für das Steuerjahr ...",
+              "date": "2026-09-30",
+              "url": "https://www.ur.ch/_rte/information/138694"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -255,6 +292,12 @@
           "url": "/en/swiss-articles/succession-and-donation-taxes-in-the-canton-of-uri/",
           "excerpt": "Inheritance and gift tax in the Canton of Uri: rates by degree of kinship",
           "date": "2026-08-16T10:39:50.404Z"
+        },
+        {
+          "title": "Uri sick fund: deductibles, models and reduction",
+          "url": "/en/swiss-articles/uri-franchises-models-subsidy/",
+          "excerpt": "In Canton Uri, LAMal premiums vary by deductible and insurance model. Discover the bands available (CHF 300–2500), the coverage models and how to access the cantonal subsidy.",
+          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -279,7 +322,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "UR",
@@ -360,6 +403,19 @@
           "sourceName": "Kantonale Steuerbehörde",
           "sourceUrl": "https://www.ur.ch/finanzen/1576",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Ausgleich der kalten Progression für das Steuerjahr ...",
+              "date": "2026-09-30",
+              "url": "https://www.ur.ch/_rte/information/138694"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -386,6 +442,12 @@
           "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuern-im-kanton-uri/",
           "excerpt": "Erbschafts- und Schenkungssteuer im Kanton Uri: Sätze pro Verwandtschaftsgrad",
           "date": "2026-08-16T10:39:50.404Z"
+        },
+        {
+          "title": "URI-Krankenkasse: Selbstbehalte, Modelle und Reduktion",
+          "url": "/de/schweiz-artikel/uri-franchisen-modelle-subvention/",
+          "excerpt": "Im Kanton Uri variieren die KVG-Prämien je nach Franchise und Versicherungsmodell. Entdecken Sie die verfügbaren Spannen (CHF 300–2500), die Deckungsmodelle und wie Sie auf den Kantonsbeitrag zugreifen können.",
+          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -410,7 +472,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "UR",
@@ -491,6 +553,19 @@
           "sourceName": "Autorité fiscale cantonale",
           "sourceUrl": "https://www.ur.ch/finanzen/1576",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Ausgleich der kalten Progression für das Steuerjahr ...",
+              "date": "2026-09-30",
+              "url": "https://www.ur.ch/_rte/information/138694"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -517,6 +592,12 @@
           "url": "/fr/articles-suisse/impots-sur-la-succession-et-la-donation-au-canton-d-uri/",
           "excerpt": "Droits de succession et de donation dans le canton d'Uri : taux par degré de parenté",
           "date": "2026-08-16T10:39:50.404Z"
+        },
+        {
+          "title": "Caisse maladie URI : franchises, modèles et réduction",
+          "url": "/fr/articles-suisse/uri-franchises-modeles-subsides/",
+          "excerpt": "Dans le canton d'Uri, les primes LAMal varient selon la franchise et le modèle d'assurance. Découvrez les tranches disponibles (CHF 300–2500), les modèles de couverture et comment accéder à l'allocation cantonale.",
+          "date": "2026-09-09T01:23:52.363Z"
         }
       ],
       "links": [
@@ -541,7 +622,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

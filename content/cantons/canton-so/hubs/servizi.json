@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "18438edf7f7a211a08ebf74b25aae6e8358c5f8b63e7848d4776a236e899f042",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "09bda1c0f7b0de90fea353613ddf6923b028c5377edf41acaa74e02a7f241401",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,18 +13,18 @@
       "keyFacts": 1
     },
     {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-13T08:13:47.853Z",
-      "keyFacts": 0
-    },
-    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "6",
-          "note": "offerta mediana 870 CHF"
+          "note": "offerta mediana 900 CHF"
         }
       ],
       "dataBlocks": [
@@ -62,31 +62,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -117,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "oggi da 7 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -145,7 +134,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -168,6 +157,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Premi cassa malati canton Soletta e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-canton-soletta-riduzione/",
+          "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
           "title": "Permesso di dimora B in Soletta: requisiti e procedura",
           "url": "/articoli-svizzera/permesso-di-dimora-b-canton-soletta/",
           "excerpt": "I requisiti per ottenere un permesso di dimora B nel Canton Soletta sono specificati nella legge cantonale.",
@@ -184,12 +179,6 @@
           "url": "/articoli-svizzera/asilo-nido-canton-soletta-costi/",
           "excerpt": "Guida completa alla custodia dei bambini nel Cantone di Soletta: tariffe basate sul reddito, asili nido, famiglie diurne e doposcuola.",
           "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Premi cassa malati canton Soletta e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-canton-soletta-riduzione/",
-          "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta",
-          "date": "2026-08-18T01:51:08.948Z"
         },
         {
           "title": "Permesso dimora B Soletta: requisiti e rinnovo",
@@ -224,7 +213,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "SO",
@@ -241,7 +230,7 @@
         {
           "label": "Plate auctions running",
           "value": "6",
-          "note": "typical bid 870 CHF"
+          "note": "typical bid 900 CHF"
         }
       ],
       "dataBlocks": [
@@ -259,31 +248,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -314,7 +278,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "today from 7 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -342,7 +320,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -365,6 +343,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Canton health insurance premiums Slab and premium reduction",
+          "url": "/en/swiss-articles/canton-health-insurance-premiums-slab-and-premium-reduction/",
+          "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
           "title": "Residence permit B in Soleta: requirements and procedure",
           "url": "/en/swiss-articles/residence-permit-b-in-soleta-requirements-and-procedure/",
           "excerpt": "The requirements for obtaining a B residence permit in the Canton of Solothurn are specified in the cantonal law.",
@@ -381,12 +365,6 @@
           "url": "/en/swiss-articles/solothurn-daycare-costs/",
           "excerpt": "Complete guide to childcare in the Canton of Solothurn: income-based rates, nurseries, day families and after-school.",
           "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Canton health insurance premiums Slab and premium reduction",
-          "url": "/en/swiss-articles/canton-health-insurance-premiums-slab-and-premium-reduction/",
-          "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn",
-          "date": "2026-08-18T01:51:08.948Z"
         },
         {
           "title": "Residence permit B Slab: requirements and renewal",
@@ -417,7 +395,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "SO",
@@ -434,7 +412,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "6",
-          "note": "mittleres Gebot 870 CHF"
+          "note": "mittleres Gebot 900 CHF"
         }
       ],
       "dataBlocks": [
@@ -452,31 +430,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -507,7 +460,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "heute 7 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -535,7 +502,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -558,6 +525,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Krankenkassenprämien Kanton Solothurn und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-solothurn-und-pramienverbilligung/",
+          "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
           "title": "Aufenthaltsbewilligung B in Solothurn: Voraussetzungen und Verfahren",
           "url": "/de/schweiz-artikel/permesso-di-dimora-b-kanton-solothurn/",
           "excerpt": "Die Voraussetzungen für eine Aufenthaltsbewilligung B im Kanton Solothurn sind im kantonalen Gesetz festgelegt.",
@@ -574,12 +547,6 @@
           "url": "/de/schweiz-artikel/krippe-solothurn-kosten/",
           "excerpt": "Umfassender Leitfaden zur Kinderbetreuung im Kanton Solothurn: einkommensabhängige Tarife, Kindergärten, Tages- und Nachschulfamilien.",
           "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Krankenkassenprämien Kanton Solothurn und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-solothurn-und-pramienverbilligung/",
-          "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn",
-          "date": "2026-08-18T01:51:08.948Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Solothurn: Voraussetzungen und Verlängerung",
@@ -610,7 +577,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "SO",
@@ -627,7 +594,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "6",
-          "note": "offre centrale 870 CHF"
+          "note": "offre centrale 900 CHF"
         }
       ],
       "dataBlocks": [
@@ -645,31 +612,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Saner Apotheke Dornach",
-              "detail": "Dornach, Dorneck-Thierstein",
-              "date": "2026-10-18T07:00:00.000Z"
-            },
-            {
-              "label": "Central-Apotheke Olten",
-              "detail": "Olten, Olten",
-              "date": "2026-10-18T08:00:00.000Z"
-            },
-            {
-              "label": "Medbase Apotheke - Zuchwil",
-              "detail": "Zuchwil, Solothurn",
-              "date": "2026-10-18T08:00:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-13T08:13:47.853Z"
         },
         {
           "id": "aste-targhe",
@@ -700,7 +642,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 7 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -728,7 +684,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -751,6 +707,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Primes d'assurance maladie dans le canton de Soleure et réductions de primes",
+          "url": "/fr/articles-suisse/primes-d-assurance-maladie-dans-le-canton-de-soleure-et-reductions-de-primes/",
+          "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure",
+          "date": "2026-08-18T01:51:08.948Z"
+        },
+        {
           "title": "Permis de séjour B à Soleure : exigences et procédure",
           "url": "/fr/articles-suisse/permesso-di-dimora-b-canton-de-soleure/",
           "excerpt": "Les conditions d'obtention d'un permis de séjour B dans le canton de Soleure sont précisées dans la loi cantonale.",
@@ -767,12 +729,6 @@
           "url": "/fr/articles-suisse/creche-soleure-couts/",
           "excerpt": "Guide complet de garde d'enfants dans le canton de Soleure : tarifs basés sur le revenu, crèches, familles de jour et après l'école.",
           "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Primes d'assurance maladie dans le canton de Soleure et réductions de primes",
-          "url": "/fr/articles-suisse/primes-d-assurance-maladie-dans-le-canton-de-soleure-et-reductions-de-primes/",
-          "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure",
-          "date": "2026-08-18T01:51:08.948Z"
         },
         {
           "title": "Permis de séjour B Soleure : exigences et renouvellement",
@@ -799,7 +755,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }
