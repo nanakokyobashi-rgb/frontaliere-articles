@@ -109,9 +109,10 @@ test('loop-drift-check: il report accetta anche `1` e `True` e il rosso gia\' ri
 
   const provenance = stepBlock(WORKFLOW, PROVENANCE);
   assert.match(provenance, /id: provenance_report/);
-  assert.match(
+  assert.doesNotMatch(
     provenance,
-    /continue-on-error: \$\{\{ steps\.drift_report\.outputs\.issue_reported == 'true' \}\}/,
+    /continue-on-error:|steps\.drift_report\.outputs\.issue_reported/,
+    'la persistenza del report generico non deve assorbire una failure di provenance',
   );
 });
 

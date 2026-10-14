@@ -176,10 +176,9 @@ jobs:
       - name: Verifica la provenienza del contratto cross-repo
         id: provenance_report
         if: always()
-        # Solo la prova emessa dal passo precedente abilita l'advisory: un
-        # crash, un errore di rete o una write fallita non diventano verdi e
-        # il job conserva il proprio rosso.
-        continue-on-error: ${{ steps.drift_report.outputs.issue_reported == 'true' }}
+        # Il suo opt-in `--strict` e' indipendente dal report generico del
+        # passo precedente: `issue_reported` non prova che un errore di
+        # provenienza sia stato persistito e non deve assorbirne il failure.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
