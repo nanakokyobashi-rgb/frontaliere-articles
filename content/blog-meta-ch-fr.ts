@@ -8252,6 +8252,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.prezzi-auto-nuove-usate-calo.title': 'Les prix des voitures neuves et d’occasion baissent grâce aux marques chinoises',
     'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Au troisième trimestre, les prix moyens des voitures neuves baissent.',
     'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Lot d\'une concession suisse montrant des véhicules neufs et d\'occasion avec étiquettes de prix visibles',
+    'blog.article.diritti-politici-disabilita.title': 'Déficience intellectuelle : droits politiques, consultation',
+    'blog.article.diritti-politici-disabilita.excerpt': 'Le Conseil fédéral lance la consultation le 14 octobre 2026 Date limite de la consultation : 28 janvier En proposition, vote fédéral et signature d’initiatives',
+    'blog.article.diritti-politici-disabilita.imageAlt': 'Bâtiment civique suisse, symbole de la participation politique inclusive',
 };
 
 export default blogMetaChFr;
