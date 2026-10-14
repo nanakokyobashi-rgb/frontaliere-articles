@@ -85,3 +85,32 @@ test('a link with no real title left after stripping the prefix is dropped by th
   const results = extractHeadlines(html, BASE_URL);
   assert.deepEqual(results, []);
 });
+
+test('quote-aware anchor scanning preserves attributes containing > before and after href', () => {
+  const html = '<a data-x="a > b" href="/it/newnsb/2026/comunicato-06">'
+    + 'Il Consiglio federale approva il nuovo accordo prima</a>'
+    + '<a href="/it/newnsb/2026/comunicato-07" data-x="a > b">'
+    + 'Il Consiglio federale approva il nuovo accordo dopo</a>';
+  const items = extractHeadlines(html, BASE_URL);
+
+  assert.deepEqual(items.map((item) => item.url), [
+    'https://www.admin.ch/it/newnsb/2026/comunicato-06',
+    'https://www.admin.ch/it/newnsb/2026/comunicato-07',
+  ]);
+  assert.deepEqual(items.map((item) => item.headline), [
+    'Il Consiglio federale approva il nuovo accordo prima',
+    'Il Consiglio federale approva il nuovo accordo dopo',
+  ]);
+});
+
+test('quote-aware date and structural scans keep a card headline and its time date', () => {
+  const html = '<article class="news-card" data-note="a > b">'
+    + '<h2>Il Consiglio federale approva il nuovo accordo</h2>'
+    + '<time data-note="c > d" datetime="2026-10-14T09:30:00Z">14 ottobre</time>'
+    + '<a href="/it/newnsb/2026/comunicato-08" data-note="e > f">Leggi tutto</a>'
+    + '</article>';
+  const [item] = extractHeadlines(html, BASE_URL);
+
+  assert.equal(item.headline, 'Il Consiglio federale approva il nuovo accordo');
+  assert.equal(item.date?.toISOString(), '2026-10-14T09:30:00.000Z');
+});

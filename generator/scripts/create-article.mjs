@@ -8255,7 +8255,7 @@ export function parseHeadlineDate(text) {
     if (!Number.isNaN(d.getTime())) return { date: d, format: 'time-datetime' };
   }
 
-  const plain = text.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ');
+  const plain = stripHtmlTags(text).replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ');
 
   // ISO per primo: e' l'unica forma non ambigua, e `2026-08-12` non puo' essere
   // letta male da nessuna delle regole successive.
@@ -8371,29 +8371,180 @@ function monthFormatTag(name) {
   return 'en-textual';
 }
 
+/** Trova la fine di un tag senza confondere `>` dentro un attributo quotato. */
+function findHtmlTagEndOutsideQuotes(html, start) {
+  let quote = '';
+  for (let index = start + 1; index < html.length; index += 1) {
+    const character = html[index];
+    if (quote) {
+      if (character === quote) quote = '';
+    } else if (character === '"' || character === "'") {
+      quote = character;
+    } else if (character === '>') {
+      return index;
+    }
+  }
+  return -1;
+}
+
+function isHtmlWhitespace(character) {
+  return character === ' ' || character === '\t' || character === '\n'
+    || character === '\r' || character === '\f';
+}
+
+/** Distingue `/>` dalla slash finale di un valore non quotato. */
+function isHtmlSelfClosingStartTag(html, nameEnd, end) {
+  let index = nameEnd;
+  while (index < end) {
+    while (index < end && isHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    if (html[index] === '/') return index + 1 === end;
+
+    while (
+      index < end
+      && !isHtmlWhitespace(html[index])
+      && html[index] !== '='
+      && html[index] !== '/'
+      && html[index] !== '>'
+    ) index += 1;
+    if (html[index] !== '=') continue;
+
+    index += 1;
+    while (index < end && isHtmlWhitespace(html[index])) index += 1;
+    if (index >= end) return false;
+    const quote = html[index];
+    if (quote === '"' || quote === "'") {
+      index += 1;
+      while (index < end && html[index] !== quote) index += 1;
+      if (index >= end) return false;
+      index += 1;
+      continue;
+    }
+    while (index < end && !isHtmlWhitespace(html[index]) && html[index] !== '>') index += 1;
+  }
+  return false;
+}
+
+function readHtmlTagAt(html, start) {
+  if (html[start] !== '<') return null;
+  let index = start + 1;
+  const closing = html[index] === '/';
+  if (closing) index += 1;
+  const nameStart = index;
+  if (!/[A-Za-z]/u.test(html[index] || '')) return null;
+  index += 1;
+  while (index < html.length && /[\w:-]/u.test(html[index])) index += 1;
+  if (html[index] && !/[\s/>]/u.test(html[index])) return null;
+
+  const endIndex = findHtmlTagEndOutsideQuotes(html, start);
+  if (endIndex < 0) return null;
+  return {
+    start,
+    end: endIndex + 1,
+    closing,
+    name: html.slice(nameStart, index).toLowerCase(),
+    attrs: html.slice(index, endIndex),
+    selfClosing: !closing && isHtmlSelfClosingStartTag(html, index, endIndex),
+  };
+}
+
+function nextHtmlTag(html, from = 0) {
+  let start = html.indexOf('<', from);
+  while (start !== -1) {
+    if (html.startsWith('<!--', start)) {
+      const commentEnd = html.indexOf('-->', start + 4);
+      if (commentEnd < 0) return null;
+      start = html.indexOf('<', commentEnd + 3);
+      continue;
+    }
+    const tag = readHtmlTagAt(html, start);
+    if (tag) return tag;
+    start = html.indexOf('<', start + 1);
+  }
+  return null;
+}
+
+function findHtmlClosingTag(html, from, name) {
+  let cursor = from;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+    if (tag.closing && tag.name === name) return tag;
+    cursor = tag.end;
+  }
+  return null;
+}
+
+function nextHtmlElement(html, name, from = 0) {
+  let cursor = from;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.closing || tag.name !== name) continue;
+    const close = findHtmlClosingTag(html, tag.end, name);
+    if (!close) continue;
+    return {
+      ...tag,
+      openEnd: tag.end,
+      closeStart: close.start,
+      end: close.end,
+      inner: html.slice(tag.end, close.start),
+    };
+  }
+  return null;
+}
+
+function findHtmlRawTextClosingTag(html, from, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = from;
+  const match = closing.exec(html);
+  return match ? { start: match.index, end: closing.lastIndex } : null;
+}
+
+function stripHtmlTags(markup) {
+  const source = String(markup || '');
+  let text = '';
+  let cursor = 0;
+  let tagStart = source.indexOf('<');
+  while (tagStart !== -1) {
+    const tagEnd = findHtmlTagEndOutsideQuotes(source, tagStart);
+    if (tagEnd < 0) break;
+    text += source.slice(cursor, tagStart);
+    text += ' ';
+    cursor = tagEnd + 1;
+    tagStart = source.indexOf('<', cursor);
+  }
+  return text + source.slice(cursor);
+}
+
 /** URL → data delle card Neuhausen, con i confini delle section annidate rispettati. */
 function nestedNeuhausenCards(html, baseUrl) {
-  const sectionTagRe = /<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script\s*>|<style\b[^>]*>[\s\S]*?<\/style\s*>|<\/?section\b[^>]*>/gi;
   const rootSections = [];
   const sectionStack = [];
+  let cursor = 0;
   let tag;
-  while ((tag = sectionTagRe.exec(html)) !== null) {
-    const markup = tag[0];
-    if (/^(?:<!--|<script\b|<style\b)/i.test(markup)) continue;
-    if (/^<\//u.test(markup)) {
+  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+    cursor = tag.end;
+    if (!tag.closing && (tag.name === 'script' || tag.name === 'style')) {
+      const rawClose = findHtmlRawTextClosingTag(html, tag.end, tag.name);
+      if (!rawClose) break;
+      cursor = rawClose.end;
+      continue;
+    }
+    if (tag.name !== 'section') continue;
+    if (tag.closing) {
       const section = sectionStack.pop();
       if (!section) continue;
-      section.contentEnd = tag.index;
-      section.closeEnd = sectionTagRe.lastIndex;
+      section.contentEnd = tag.start;
+      section.closeEnd = tag.end;
       const parent = sectionStack[sectionStack.length - 1];
       (parent ? parent.children : rootSections).push(section);
-    } else if (!/\/\s*>$/u.test(markup)) {
+    } else if (!tag.selfClosing) {
       sectionStack.push({
-        contentStart: sectionTagRe.lastIndex,
+        contentStart: tag.end,
         contentEnd: null,
         closeEnd: null,
         children: [],
-        openStart: tag.index,
+        openStart: tag.start,
       });
     }
   }
@@ -8414,32 +8565,35 @@ function nestedNeuhausenCards(html, baseUrl) {
   };
   for (const section of rootSections) collectSections(section);
   for (const section of sections) {
-    const dateNode = ownSectionContent(section).match(/<h4\b[^>]*>([\s\S]*?)<\/h4>/i);
-    section.date = parseHeadlineDate(dateNode?.[1] || '')?.date || null;
+    const dateNode = nextHtmlElement(ownSectionContent(section), 'h4');
+    section.date = parseHeadlineDate(dateNode?.inner || '')?.date || null;
   }
 
   const datesByUrl = new Map();
-  const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>/gi;
-  let link;
-  while ((link = linkRe.exec(html)) !== null) {
+  let link = nextHtmlElement(html, 'a');
+  while (link) {
+    const nextLink = nextHtmlElement(html, 'a', link.end);
     let dateSection = null;
     for (const section of sections) {
-      if (!section.date || link.index < section.contentStart || link.index >= section.contentEnd) continue;
+      if (!section.date || link.start < section.contentStart || link.start >= section.contentEnd) continue;
       if (!dateSection
         || section.contentEnd - section.contentStart < dateSection.contentEnd - dateSection.contentStart) {
         dateSection = section;
       }
     }
-    if (!dateSection) continue;
-    try {
-      const href = new URL(link[1], baseUrl).href;
-      if (!href.startsWith('http')) continue;
-      const specificity = dateSection.contentEnd - dateSection.contentStart;
-      const previous = datesByUrl.get(href);
-      if (!previous || specificity < previous.specificity) {
-        datesByUrl.set(href, { date: dateSection.date, specificity });
-      }
-    } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
+    if (dateSection) {
+      try {
+        const href = new URL(headlineAttributeValue(link.attrs, 'href'), baseUrl).href;
+        if (href.startsWith('http')) {
+          const specificity = dateSection.contentEnd - dateSection.contentStart;
+          const previous = datesByUrl.get(href);
+          if (!previous || specificity < previous.specificity) {
+            datesByUrl.set(href, { date: dateSection.date, specificity });
+          }
+        }
+      } catch { /* link non assoluto: l'estrattore principale lo scarterà */ }
+    }
+    link = nextLink;
   }
   return new Map([...datesByUrl].map(([href, entry]) => [href, entry.date]));
 }
@@ -8448,21 +8602,23 @@ function nestedNeuhausenCards(html, baseUrl) {
 function extractDatesFromHtml(html, baseUrl) {
   const quirks = arguments[2] || {};
   const dateMap = new Map();
-  // Match <time datetime="..."> anywhere in HTML — build global date context
-  const timeRe = /<time[^>]*datetime=["']([^"']+)["'][^>]*>/gi;
-  let tm;
-  while ((tm = timeRe.exec(html)) !== null) {
-    const dateStr = tm[1];
-    const pos = tm.index;
-    // Find the nearest <a href> within 500 chars before or after this <time>
-    const context = html.slice(Math.max(0, pos - 500), pos + 500);
-    const nearbyLink = context.match(/href=["'](https?:\/\/[^"']+)["']/);
-    if (nearbyLink) {
-      try {
-        const d = new Date(dateStr);
-        if (!isNaN(d.getTime())) dateMap.set(nearbyLink[1], d);
-      } catch { /* skip invalid dates */ }
+  // Legge gli elementi con il walker: `>` dentro un attributo non tronca il tag.
+  let time = nextHtmlTag(html);
+  while (time) {
+    if (!time.closing && time.name === 'time') {
+      const dateStr = headlineAttributeValue(time.attrs, 'datetime');
+      const pos = time.start;
+      // Find the nearest <a href> within 500 chars before or after this <time>
+      const context = html.slice(Math.max(0, pos - 500), pos + 500);
+      const nearbyLink = context.match(/href=["'](https?:\/\/[^"']+)["']/);
+      if (dateStr && nearbyLink) {
+        try {
+          const d = new Date(dateStr);
+          if (!isNaN(d.getTime())) dateMap.set(nearbyLink[1], d);
+        } catch { /* skip invalid dates */ }
+      }
     }
+    time = nextHtmlTag(html, time.end);
   }
 
   // Alcune liste istituzionali mettono il link al PDF in fondo alla card,
@@ -8492,17 +8648,25 @@ function extractDatesFromHtml(html, baseUrl) {
   // non solo per la prima che l'aveva imparata — stesso anti-pattern gia'
   // corretto in scripts/lib/postch-job-parser.mjs (parseDdMmYyyy) e
   // scripts/crawl-ge-agenda.mjs (parseGeneveDateFr / isValidCalendarDate).
-  const anchorRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-  let am;
+  let anchor = nextHtmlElement(html, 'a');
   let lastAnchorEnd = 0;
-  while ((am = anchorRe.exec(html)) !== null) {
-    const anchorStart = am.index;
-    const anchorEnd = anchorRe.lastIndex;
-    const inner = am[2];
+  while (anchor) {
+    const anchorStart = anchor.start;
+    const anchorEnd = anchor.end;
+    const inner = anchor.inner;
+    const nextAnchor = nextHtmlElement(html, 'a', anchorEnd);
     // Resolve to the absolute URL so the key matches extractHeadlines' lookup.
     let href;
-    try { href = new URL(am[1], baseUrl).href; } catch { lastAnchorEnd = anchorEnd; continue; }
-    if (!href.startsWith('http') || dateMap.has(href)) { lastAnchorEnd = anchorEnd; continue; }
+    try { href = new URL(headlineAttributeValue(anchor.attrs, 'href'), baseUrl).href; } catch {
+      lastAnchorEnd = anchorEnd;
+      anchor = nextAnchor;
+      continue;
+    }
+    if (!href.startsWith('http') || dateMap.has(href)) {
+      lastAnchorEnd = anchorEnd;
+      anchor = nextAnchor;
+      continue;
+    }
 
     // 1) L'inner HTML dell'anchor. E' la sede esatta: il pairing link↔data non
     //    puo' sbagliare, ed e' la ragione per cui la finestra di prossimita' non
@@ -8517,13 +8681,13 @@ function extractDatesFromHtml(html, baseUrl) {
     //    non usano <time> scrivono la data: fuori dal link, dentro la card.
     if (!hit) {
       const before = html.slice(Math.max(lastAnchorEnd, anchorStart - 300), anchorStart);
-      const nextAnchor = html.indexOf('<a', anchorEnd);
-      const after = html.slice(anchorEnd, Math.min(nextAnchor === -1 ? html.length : nextAnchor, anchorEnd + 300));
+      const after = html.slice(anchorEnd, Math.min(nextAnchor?.start ?? html.length, anchorEnd + 300));
       hit = parseHeadlineDate(before) || parseHeadlineDate(after);
     }
 
     lastAnchorEnd = anchorEnd;
     if (hit) dateMap.set(href, hit.date);
+    anchor = nextAnchor;
   }
 
   return dateMap;
@@ -8630,9 +8794,8 @@ function headlineAttributeValue(attrs, name) {
 }
 
 function headlineTextFromMarkup(markup) {
-  return decodeHtmlEntities(String(markup || '')
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<[^>]+>/g, ' ')
+  return decodeHtmlEntities(stripHtmlTags(String(markup || '')
+    .replace(/<!--[\s\S]*?-->/g, ' '))
     .replace(/\s+/g, ' ')
     .trim());
 }
@@ -8651,14 +8814,23 @@ function isGenericHeadlineLinkLabel(text) {
 }
 
 function headlineMarkupWithoutActionLinks(markup) {
-  return String(markup || '').replace(/<a\b[^>]*>([\s\S]*?)<\/a>/gi, (full, inner) => {
-    const openEnd = full.indexOf('>');
-    const openTag = openEnd === -1 ? full : full.slice(0, openEnd + 1);
+  const source = String(markup || '');
+  let output = '';
+  let cursor = 0;
+  let anchor = nextHtmlElement(source, 'a');
+  while (anchor) {
+    output += source.slice(cursor, anchor.start);
+    const openTag = source.slice(anchor.start, anchor.openEnd);
     const accessibleLabel = headlineAttributeValue(openTag, 'aria-label')
       || headlineAttributeValue(openTag, 'title')
-      || inner;
-    return isGenericHeadlineLinkLabel(accessibleLabel) ? ' ' : full;
-  });
+      || anchor.inner;
+    if (!isGenericHeadlineLinkLabel(accessibleLabel)) {
+      output += source.slice(anchor.start, anchor.end);
+    }
+    cursor = anchor.end;
+    anchor = nextHtmlElement(source, 'a', anchor.end);
+  }
+  return output + source.slice(cursor);
 }
 
 function headlineCandidateIsUsable(text) {
@@ -8680,12 +8852,11 @@ function configuredHeadlineFromAnchor(anchorTag, quirks) {
  * server-rendered delle liste comunali (e tollerante verso HTML incompleto). */
 function headlineAncestorStack(html, before) {
   const stack = [];
-  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
-  let match;
-  while ((match = tagRe.exec(html)) !== null && match.index < before) {
-    const closing = match[1] === '/';
-    const name = match[2].toLowerCase();
-    const attrs = match[3] || '';
+  let cursor = 0;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null && tag.start < before) {
+    cursor = tag.end;
+    const { closing, name, attrs } = tag;
     if (closing) {
       for (let i = stack.length - 1; i >= 0; i -= 1) {
         if (stack[i].name !== name) continue;
@@ -8694,22 +8865,23 @@ function headlineAncestorStack(html, before) {
       }
       continue;
     }
-    if (HEADLINE_VOID_ELEMENTS.has(name) || /\/\s*$/.test(attrs)) continue;
-    stack.push({ name, attrs, openEnd: tagRe.lastIndex, start: match.index });
+    if (HEADLINE_VOID_ELEMENTS.has(name) || tag.selfClosing) continue;
+    stack.push({ name, attrs, openEnd: tag.end, start: tag.start });
   }
   return stack;
 }
 
 function headlineElementEnd(html, node) {
-  const closeRe = new RegExp('<(/?)' + node.name + '(?=[\\s/>])[^>]*>', 'gi');
-  closeRe.lastIndex = node.openEnd;
   let depth = 1;
-  let match;
-  while ((match = closeRe.exec(html)) !== null) {
-    if (match[1] === '/') {
+  let cursor = node.openEnd;
+  let tag;
+  while ((tag = nextHtmlTag(html, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.name !== node.name) continue;
+    if (tag.closing) {
       depth -= 1;
-      if (depth === 0) return { start: match.index, end: closeRe.lastIndex };
-    } else if (!/\/\s*>$/.test(match[0])) {
+      if (depth === 0) return { start: tag.start, end: tag.end };
+    } else if (!tag.selfClosing) {
       depth += 1;
     }
   }
@@ -8730,11 +8902,12 @@ function isHeadlineCardNode(node) {
 
 function headlineStackHasPremiumMarker(stack, inlineMarkup = '') {
   const nodes = [...stack];
-  const tagRe = /<(\/)?([a-zA-Z][\w:-]*)([^>]*)>/g;
-  let match;
-  while ((match = tagRe.exec(inlineMarkup)) !== null) {
-    if (match[1]) continue;
-    nodes.push({ name: match[2].toLowerCase(), attrs: match[3] || '' });
+  let cursor = 0;
+  let tag;
+  while ((tag = nextHtmlTag(inlineMarkup, cursor)) !== null) {
+    cursor = tag.end;
+    if (tag.closing) continue;
+    nodes.push({ name: tag.name, attrs: tag.attrs });
   }
 
   return nodes.some((node) => {
@@ -8882,17 +9055,21 @@ function extractHeadlines(html, baseUrl) {
   const results = [];
   const htmlDateMap = extractDatesFromHtml(html, baseUrl, source?.quirks);
   const embeddedDateMap = extractEmbeddedHeadlineDates(metadataHtml, source?.quirks?.embeddedDateField);
-  // Match <a href="...">text</a> — capture href and inner text
-  const linkRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
-  let m;
-  while ((m = linkRe.exec(html)) !== null) {
-    const ancestors = headlineAncestorStack(html, m.index);
-    const anchorTagEnd = m[0].indexOf('>');
-    const anchorTag = anchorTagEnd === -1 ? m[0] : m[0].slice(0, anchorTagEnd + 1);
+  // Match <a href="...">text</a> with the same quote-aware walker used by
+  // the ancestor/date scanners; an attribute value may contain `>`.
+  let anchor = nextHtmlElement(html, 'a');
+  while (anchor) {
+    const nextAnchor = nextHtmlElement(html, 'a', anchor.end);
+    const ancestors = headlineAncestorStack(html, anchor.start);
+    const anchorTag = html.slice(anchor.start, anchor.openEnd);
+    const markup = html.slice(anchor.start, anchor.end);
     if (source?.quirks?.excludePaywalledCards
-      && headlineStackHasPremiumMarker(ancestors, m[0])) continue;
-    let href = m[1];
-    let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      && headlineStackHasPremiumMarker(ancestors, markup)) {
+      anchor = nextAnchor;
+      continue;
+    }
+    let href = headlineAttributeValue(anchor.attrs, 'href');
+    let text = headlineTextFromMarkup(anchor.inner).replace(/\s+/g, ' ').trim();
     const configuredHeadline = configuredHeadlineFromAnchor(anchorTag, source?.quirks);
     if (configuredHeadline) text = configuredHeadline;
     // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every
@@ -8903,26 +9080,42 @@ function extractHeadlines(html, baseUrl) {
     // boilerplate that never carries a topic signal.
     text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
     if (isGenericHeadlineLinkLabel(text)) {
-      text = structuralHeadlineForLink(html, m.index, anchorTag);
-      if (!text) continue;
+      text = structuralHeadlineForLink(html, anchor.start, anchorTag);
+      if (!text) {
+        anchor = nextAnchor;
+        continue;
+      }
     }
     // Only keep links with meaningful text (likely headlines)
-    if (text.length < 15 || text.length > 300) continue;
+    if (text.length < 15 || text.length > 300) {
+      anchor = nextAnchor;
+      continue;
+    }
     // Resolve relative URLs
     try {
       href = new URL(href, baseUrl).href;
-    } catch { continue; }
+    } catch {
+      anchor = nextAnchor;
+      continue;
+    }
     // Skip anchor links, javascript, mailto, etc.
-    if (!href.startsWith('http')) continue;
+    if (!href.startsWith('http')) {
+      anchor = nextAnchor;
+      continue;
+    }
     // Skip non-article links (categories, tags, pagination, login, etc.)
-    if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) continue;
+    if (/\/(tag|categor|page|login|registr|cookie|privacy|contatt|archiv|abonn)/i.test(href)) {
+      anchor = nextAnchor;
+      continue;
+    }
     // Extract date from URL path or from nearby <time> elements
     const date = extractDateFromUrl(href)
       || htmlDateMap.get(href)
       || embeddedDateMap.get(embeddedHeadlineDateKey(text))
       || null;
-    const lead = publicCardLead(html, m.index, source?.quirks);
+    const lead = publicCardLead(html, anchor.start, source?.quirks);
     results.push({ url: href, headline: text, date, ...(lead ? { lead } : {}) });
+    anchor = nextAnchor;
   }
   // Deduplicate by URL
   const seen = new Set();
