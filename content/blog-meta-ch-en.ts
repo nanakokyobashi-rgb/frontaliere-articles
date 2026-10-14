@@ -8234,6 +8234,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.festivi-berna-calendario-guida.title': 'Public holidays in the Canton of Bern: calendar and rules',
     'blog.article.festivi-berna-calendario-guida.excerpt': 'Guide to the calendar of public holidays recognized by the Canton of Bern, with checks on offices, municipalities, institutions and federal levels.',
     'blog.article.festivi-berna-calendario-guida.imageAlt': 'Public holidays calendar and administrative guide of the Canton of Bern',
+    'blog.article.negozi-berna-orari-festivi-regole.title': 'Bern Canton shop hours: holidays and rules',
+    'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Official guide to business hours, public holidays, special permits, and work restrictions in the Canton of Bern.',
+    'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Business hours and retail regulations in the Canton of Bern',
 };
 
 export default blogMetaChEn;

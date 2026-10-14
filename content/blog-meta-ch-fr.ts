@@ -8234,6 +8234,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.festivi-berna-calendario-guida.title': 'Jours fériés du canton de Berne : calendrier et règles',
     'blog.article.festivi-berna-calendario-guida.excerpt': 'Guide du calendrier des jours fériés reconnus par le canton de Berne, avec des vérifications concernant les bureaux, les communes, les institutions et les niveaux fédéraux.',
     'blog.article.festivi-berna-calendario-guida.imageAlt': 'Calendrier des jours feries et guide administratif du Canton de Berne',
+    'blog.article.negozi-berna-orari-festivi-regole.title': 'Magasins Berne : horaires et jours fériés',
+    'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Guide officielle des horaires commerciaux, des jours fériés, des autorisations spéciales et des limites de travail dans le canton de Berne.',
+    'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Horaires et reglementation commerciale dans le canton de Berne',
 };
 
 export default blogMetaChFr;

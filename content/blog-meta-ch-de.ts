@@ -8234,6 +8234,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.festivi-berna-calendario-guida.title': 'Feiertage im Kanton Bern: Kalender und Regeln',
     'blog.article.festivi-berna-calendario-guida.excerpt': 'Leitfaden zum Kalender der vom Kanton Bern anerkannten Feiertage einschließlich der Prüfung von Ämtern, Gemeinden, Institutionen und Bundesebenen.',
     'blog.article.festivi-berna-calendario-guida.imageAlt': 'Feiertagskalender und Verwaltungsleitfaden des Kantons Bern',
+    'blog.article.negozi-berna-orari-festivi-regole.title': 'Öffnungszeiten der Geschäfte im Kanton Bern: Leitfaden zu Feiertagen und Regeln',
+    'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Offizieller Leitfaden zu Ladenöffnungszeiten, Feiertagen, Sonderbewilligungen und Arbeitszeitgrenzen im Kanton Bern.',
+    'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Oeffnungszeiten und Geschaeftsregeln im Kanton Bern',
 };
 
 export default blogMetaChDe;

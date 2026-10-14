@@ -103910,6 +103910,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-negozi-berna-orari-festivi-regole': {
+    title: 'Orari negozi Cantone di Berna: guida a festivi e regole',
+    description: 'Scopri la guida ufficiale per orari commerciali, giorni festivi, autorizzazioni e limite di 45 ore settimanali nel Cantone di Berna.',
+    keywords: 'frontalieri, ticino, svizzera, italia, orari, negozi, cantone, berna',
+    ogTitle: 'Orari negozi Cantone di Berna: guida a festivi e regole',
+    ogDescription: 'Guida pratica agli orari commerciali, giorni festivi, eccezioni e turni di lavoro nel Cantone di Berna per esercenti e dipendenti.',
+    canonicalPath: '/articoli-svizzera/negozi-berna-orari-festivi-regole/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Orari negozi Cantone di Berna: guida a festivi e regole",
+      "description": "Scopri la guida ufficiale per orari commerciali, giorni festivi, autorizzazioni e limite di 45 ore settimanali nel Cantone di Berna.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-negozi-berna-orari-festivi-regole.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Orari e regole commerciali dei negozi nel Cantone di Berna"
+      },
+      "datePublished": "2026-10-14T05:28:35+00:00",
+      "dateModified": "2026-10-14T05:28:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/negozi-berna-orari-festivi-regole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
