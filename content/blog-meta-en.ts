@@ -13192,7 +13192,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Illustration generated for this article',
     'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Checks in Cuvio and Cuveglio: 7 driver\'s licenses withdrawn and 10 seizures',
     'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Seven driving licences withdrawn and ten vehicles seized Checks also with breathalyzer and readings above 1,5 g/l More officers approximately between 17 and 20 The project',
-    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Illustration generated for this article',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Local Police car during road checks between Cuveglio and Cuvio',
+    'blog.article.due-arresti-malpra-varese.title': 'Varese, two arrests for domestic abuse involving five minors',
+    'blog.article.due-arresti-malpra-varese.excerpt': 'Two arrests in Varese for domestic abuse The first incident occurred on Saturday afternoon Five minor children were present, between 5 and 8 years old',
+    'blog.article.due-arresti-malpra-varese.imageAlt': 'Police car stopped in front of a downtown Varese building at sunset.',
 };
 
 export default blogMetaEn;

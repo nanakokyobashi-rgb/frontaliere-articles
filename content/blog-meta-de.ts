@@ -13191,7 +13191,10 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Kontrollen Cuvio/Cuveglio: 7 Führerscheine, 10 konfisziert',
     'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Sieben eingezogene Führerscheine und zehn beschlagnahmte Fahrzeuge Kontrollen auch mit Atemalkoholmessgerät und Werten über 1,5 g/l Mehr Beamte etwa zwischen 17 und 20 Uhr Das Projekt',
-    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Lokale Polizeiauto während der Straßenkontrollen zwischen Cuveglio und Cuvio',
+    'blog.article.due-arresti-malpra-varese.title': 'Varese, zwei Festnahmen wegen Misshandlung von Familienangehörigen im Beisein von fünf Minderjährigen',
+    'blog.article.due-arresti-malpra-varese.excerpt': 'Zwei Festnahmen in Varese wegen Misshandlung von Familienangehörigen Der erste Vorfall ereignete sich am Samstagnachmittag Fünf minderjährige Kinder waren anwesend, im Alter zwischen 5 und 8 Jahren',
+    'blog.article.due-arresti-malpra-varese.imageAlt': 'Polizeiauto vor einem Gebäude im Stadtzentrum von Varese bei Sonnenuntergang.',
 };
 
 export default blogMetaDe;

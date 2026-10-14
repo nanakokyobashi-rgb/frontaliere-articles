@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/tariffe-ail-2027-nessun-aumento-per-l%e2%80%99energia--4052673.html": {
-    "articleId": "tariffe-ail-2027-stabili",
-    "ts": "2026-09-01T19:27:51.834Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4052919": {
     "articleId": "eoc-ospedali-comunicazione-pazienti",
     "ts": "2026-09-01T20:22:04.534Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/rafforzati-i-controlli-della-polizia-locale-di-cuvio-e-cuveglio-sette-patenti-ritirate-e-dieci-veicoli-sequestrati/2708299": {
     "articleId": "controlli-polizia-cuvio-cuveglio",
     "ts": "2026-10-14T19:44:45.989Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-varese-due-arresti-per-maltrattamenti-in-famiglia-coinvolti-anche-cinque-minori/2707666": {
+    "articleId": "due-arresti-malpra-varese",
+    "ts": "2026-10-14T21:01:45.742Z",
     "keyForm": 2
   }
 }
