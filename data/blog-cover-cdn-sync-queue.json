@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-due-arresti-malpra-varese.webp",
+      "sha256": "fcf3521abc5d33a3aaffc77882e3b7cdabc13f6f0ab3090301e71076e349f966"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-due-arresti-malpra-varese-480w.webp",
+      "sha256": "07e9ef916a45e8714aecc617a8f14f3483f0662cb354e62a8c037dc1aa1aeadd"
+    }
+  ]
 }
