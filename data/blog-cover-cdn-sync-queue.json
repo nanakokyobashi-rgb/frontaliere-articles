@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-licenza-caccia-berna-requisiti.webp",
+      "sha256": "0d2160c7d53ab901dfb834f6ac2da0e0c0c680e80a68edeca8c93929a5239031"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-licenza-caccia-berna-requisiti-480w.webp",
+      "sha256": "1c5d9d3beb936ac45ee55fbc23d0b0b9db9587b9aee0bb69fdac666d09f5f075"
+    }
+  ]
 }
