@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-incidente-varesina-venegono.webp",
+      "sha256": "eb976f996e82aa90f3a1def9802568b73820fc6676fea30945e7c5c8d1ca2e1a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-incidente-varesina-venegono-480w.webp",
+      "sha256": "5403cb5542cf4778571804f6b5e675c5f96eec0c30abf1e72824bda30082469e"
+    }
+  ]
 }
