@@ -8273,6 +8273,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.comco-sentenza-fibra-ottica.title': 'Swisscom-Busse aufgehoben: WEKO prüft Beschwerde',
     'blog.article.comco-sentenza-fibra-ottica.excerpt': 'Das BVGer hebt die Busse von 18,4 Millionen gegen Swisscom auf.',
     'blog.article.comco-sentenza-fibra-ottica.imageAlt': 'Glasfaserschrank neben einem modernen Schweizer Stadtgebäude',
+    'blog.article.alliance-care-fallimento-procedura.title': 'Alliance Care schließt: Konkursverfahren eingeleitet',
+    'blog.article.alliance-care-fallimento-procedura.excerpt': 'Alliance Care schließt und leitet das Konkursverfahren ein Die Entscheidung wurde in Bern getroffen 17 Entlassungen bei 91 Beschäftigten Die ASI hatte Darlehen gewährt Organisation →',
+    'blog.article.alliance-care-fallimento-procedura.imageAlt': 'Leerer Flur einer schweizerischen Gesundheitseinrichtung mit natürlichem Licht, Symbol für die Schließung von Alliance Care.',
 };
 
 export default blogMetaChDe;

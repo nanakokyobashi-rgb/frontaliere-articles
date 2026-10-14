@@ -104417,6 +104417,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-alliance-care-fallimento-procedura': {
+    title: 'Alliance Care chiude dopo poco più di un anno: avviata la procedura di fallimento',
+    description: 'Alliance Care chiude e avvia il fallimento La decisione è stata presa a Berna 17 licenziamenti su 91 dipendenti L\'ASI aveva concesso prestiti Organizzazione →',
+    keywords: 'frontalieri, ticino, svizzera, italia, alliance, care, chiude, dopo',
+    ogTitle: 'Alliance Care chiude: avviata la procedura di fallimento',
+    ogDescription: 'Alliance Care chiude e avvia il fallimento La decisione è stata presa a Berna 17 licenziamenti su 91 dipendenti L\'ASI aveva concesso prestiti Organizzazione →',
+    canonicalPath: '/articoli-svizzera/alliance-care-fallimento-procedura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Alliance Care chiude dopo poco più di un anno: avviata la procedura di fallimento",
+      "description": "Alliance Care chiude e avvia il fallimento La decisione è stata presa a Berna 17 licenziamenti su 91 dipendenti L'ASI aveva concesso prestiti Organizzazione →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-wagner-chiude-waldstatt-69-licenziamenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Corridoio vuoto di una struttura sanitaria svizzera con luce naturale, simbolo della chiusura di Alliance Care."
+      },
+      "datePublished": "2026-10-14T20:03:54+00:00",
+      "dateModified": "2026-10-14T20:03:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/alliance-care-fallimento-procedura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

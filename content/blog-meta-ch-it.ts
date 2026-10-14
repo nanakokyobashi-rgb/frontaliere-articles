@@ -8273,6 +8273,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.comco-sentenza-fibra-ottica.title': 'Multa Swisscom annullata: COMCO valuta il ricorso',
     'blog.article.comco-sentenza-fibra-ottica.excerpt': 'Il TAF annulla la multa di 18,4 milioni a Swisscom.',
     'blog.article.comco-sentenza-fibra-ottica.imageAlt': 'Cabinetto in fibra ottica accanto a un moderno edificio urbano svizzero',
+    'blog.article.alliance-care-fallimento-procedura.title': 'Alliance Care chiude dopo poco più di un anno: avviata la procedura di fallimento',
+    'blog.article.alliance-care-fallimento-procedura.excerpt': 'Alliance Care chiude e avvia il fallimento La decisione è stata presa a Berna 17 licenziamenti su 91 dipendenti L\'ASI aveva concesso prestiti Organizzazione →',
+    'blog.article.alliance-care-fallimento-procedura.imageAlt': 'Corridoio vuoto di una struttura sanitaria svizzera con luce naturale, simbolo della chiusura di Alliance Care.',
 };
 
 export default blogMetaChIt;

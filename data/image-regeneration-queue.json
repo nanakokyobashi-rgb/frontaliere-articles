@@ -90,6 +90,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T19:44:45.987Z",
       "lastFailureAt": "2026-10-14T19:44:45.987Z"
+    },
+    {
+      "articleId": "alliance-care-fallimento-procedura",
+      "title": "Alliance Care chiude dopo poco più di un anno: avviata la procedura di fallimento",
+      "fallbackImage": "/images/blog/article-wagner-chiude-waldstatt-69-licenziamenti.webp",
+      "reason": "All image providers failed for article-alliance-care-fallimento-procedura: openai-codex (vision gate rejected image: Synthetic healthcare corridor illustration; the circular leaf e",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T20:03:54.367Z",
+      "lastFailureAt": "2026-10-14T20:03:54.367Z"
     }
   ]
 }

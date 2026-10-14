@@ -8273,6 +8273,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.comco-sentenza-fibra-ottica.title': 'Amende infligée à Swisscom annulée : la COMCO évalue le recours',
     'blog.article.comco-sentenza-fibra-ottica.excerpt': 'Le TAF annule l’amende de 18,4 millions infligée à Swisscom.',
     'blog.article.comco-sentenza-fibra-ottica.imageAlt': 'Armoire de fibre optique devant un bâtiment urbain suisse moderne',
+    'blog.article.alliance-care-fallimento-procedura.title': 'Alliance Care ferme : procédure de faillite engagée',
+    'blog.article.alliance-care-fallimento-procedura.excerpt': 'Alliance Care ferme et engage la procédure de faillite La décision a été prise à Berne 17 licenciements sur 91 employés L\'ASI avait accordé des prêts Organisation →',
+    'blog.article.alliance-care-fallimento-procedura.imageAlt': 'Couloir vide d\'un établissement de santé suisse avec lumière naturelle, symbole de la fermeture d\'Alliance Care.',
 };
 
 export default blogMetaChFr;

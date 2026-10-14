@@ -8273,6 +8273,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.comco-sentenza-fibra-ottica.title': 'Swisscom fine annulled: COMCO assesses the appeal',
     'blog.article.comco-sentenza-fibra-ottica.excerpt': 'The TAF annuls Swisscom’s 18,4 million fine.',
     'blog.article.comco-sentenza-fibra-ottica.imageAlt': 'Fiber-optic cabinet beside a modern Swiss urban building',
+    'blog.article.alliance-care-fallimento-procedura.title': 'Alliance Care closes after just over a year: bankruptcy proceedings initiated',
+    'blog.article.alliance-care-fallimento-procedura.excerpt': 'Alliance Care closes and files for bankruptcy The decision was made in Bern 17 layoffs among 91 employees ASI had granted loans Organization →',
+    'blog.article.alliance-care-fallimento-procedura.imageAlt': 'Empty corridor of a Swiss healthcare facility with natural light, symbolizing the closure of Alliance Care.',
 };
 
 export default blogMetaChEn;

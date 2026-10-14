@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1949044/federale-ampliamento-consiglio-internet-zone-accesso": {
-    "articleId": "banda-larga-zone-rurali",
-    "ts": "2026-09-09T16:22:52.272Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/8qdeko8cquh2": {
     "articleId": "emissione-prestiti-federali-2026",
     "ts": "2026-09-09T16:49:45.300Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956674/swisscom-comco-ricorso-multa-annullata": {
     "articleId": "comco-sentenza-fibra-ottica",
     "ts": "2026-10-14T19:07:30.719Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1956796/organizzazione-procedura-alliance-fallimento-cure": {
+    "articleId": "alliance-care-fallimento-procedura",
+    "ts": "2026-10-14T20:03:54.369Z",
     "keyForm": 2
   }
 }
