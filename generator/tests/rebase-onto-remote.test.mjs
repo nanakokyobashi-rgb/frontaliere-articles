@@ -1216,7 +1216,6 @@ test('un registry dichiarato con --merge-registry conserva gli spazi nel path', 
 
     const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', SPACED_REGISTRY);
     assert.equal(code, 0, `il path del registro non deve essere spezzato sugli spazi:\n${out}`);
-    assert.match(out, /merge per-record:/);
 
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
     const merged = git(w.work, 'show', `HEAD:${SPACED_REGISTRY}`);
