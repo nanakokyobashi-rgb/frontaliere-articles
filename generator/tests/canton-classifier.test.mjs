@@ -322,6 +322,10 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Impatto sul mercato del Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Impatto sul lavoro in Ticino').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia per il lavoro in Ticino').map((m) => m.group), ['TI']);
+    assert.deepEqual(classifier.mentionsIn('effetti sulle famiglie colpite dal terremoto in Ticino').map((m) => m.group), ['TI']);
+    const milanoAudience = 'Conseguenze per i lavoratori di Milano e per il Ticino';
+    assert.equal(classifier.mentionsItalianPlace(milanoAudience), true);
+    assert.deepEqual(codes({ title: milanoAudience }), []);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per Lugano').map((m) => m.group), ['TI']);
     for (const text of [
       'Implicazioni per il Ticino e i Grigioni e il Vallese',

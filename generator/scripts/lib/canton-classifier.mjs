@@ -358,7 +358,12 @@ const AUDIENCE_RECIPIENT_HEADS = [
   'elettor[ei]', 'consumator[ei]', 'contribuent[ei]', 'aziend[ae]', 'imprese',
 ];
 const AUDIENCE_RECIPIENT_HEAD = `(?:${AUDIENCE_RECIPIENT_HEADS.map(caseInitial).join('|')})`;
-const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'’\\-]*)*?\\s+${AUDIENCE_RECIPIENT_LINK_PREFIX})?`;
+// I qualificatori del destinatario sono intenzionalmente chiusi: una coda
+// libera puo' assorbire un fatto locativo, per esempio «famiglie colpite dal
+// terremoto in Ticino», come se «in Ticino» qualificasse le famiglie.
+const AUDIENCE_RECIPIENT_QUALIFIER = `(?:${['residenti', 'iscritti'].map(caseInitial).join('|')})`;
+const AUDIENCE_RECIPIENT_QUALIFIERS = `${AUDIENCE_RECIPIENT_QUALIFIER}(?:\\s+(?:${caseInitial('e')}|${caseInitial('ed')})\\s+${AUDIENCE_RECIPIENT_QUALIFIER}){0,2}`;
+const AUDIENCE_RECIPIENT = `(?:(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+${AUDIENCE_RECIPIENT_QUALIFIERS})?|${caseInitial('chi')}\\s+${caseInitial('lavora')})\\s+${AUDIENCE_RECIPIENT_LINK_PREFIX})?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;
 const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
 const AUDIENCE_TARGET = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
@@ -366,6 +371,13 @@ const AUDIENCE_LINK_PREFIX = `(?:${AUDIENCE_LINK}\\s+|${AUDIENCE_APOSTROPHE_LINK
 const AUDIENCE_TARGET_LONG_ITEM = `(?:${AUDIENCE_LINK_PREFIX}|${AUDIENCE_RECIPIENT_LINK_PREFIX})?${AUDIENCE_TARGET_ITEM}`;
 const AUDIENCE_COORDINATOR = `(?:${caseInitial('ed')}|${caseInitial('e')})`;
 const AUDIENCE_TARGET_LONG = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_LONG_ITEM}(?:(?:\\s*,\\s*(?:${AUDIENCE_COORDINATOR}\\s+)?|\\s+${AUDIENCE_COORDINATOR}\\s+)${AUDIENCE_TARGET_LONG_ITEM})*`;
+// Il caso «lavoratori di Milano e per il Ticino» coordina un destinatario
+// italiano e uno cantonale. La coda e' finita: non puo' saltare da un link
+// non cantonale a un successivo `per`/`sul` in un'altra parte della frase.
+const AUDIENCE_RECIPIENT_COORDINATED = new RegExp(
+  `${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK_PREFIX}${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT_HEAD}(?:\\s+[\\p{L}][\\p{L}'’\\-]*){0,4}?\\s+${AUDIENCE_COORDINATOR}\\s+${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
+  'gu',
+);
 const AUDIENCE_RES = [
   // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
   // maltempo in Ticino», che e' un fatto in Ticino.
@@ -374,14 +386,13 @@ const AUDIENCE_RES = [
   // serve il «per» del destinatario, non «cosa cambia in Ticino dal 2026».
   new RegExp(`${AUDIENCE_COSA_PREFIX}${AUDIENCE_TARGET}`, 'gu'),
 ];
-/**
- * Variante senza il limite di tre parole intermedie e con una coda di target
- * coordinati completa. Gli item restano vincolati ai nomi cantonali noti: la
- * forma lunga amplia la grammatica della destinazione, non il perimetro dei
- * luoghi da oscurare.
- */
+// Questa locuzione editoriale e' l'unico preambolo multi-link attestato nei
+// titoli: mantenerlo esplicito evita che la scansione salti un primo link e
+// inglobi luoghi italiani prima di un successivo «per il Ticino».
+const AUDIENCE_POLICY_MEASURES = `${caseInitial('le')}\\s+${caseInitial('nuove')}\\s+${caseInitial('misure')}\\s+${caseInitial('fiscali')}\\s+${caseInitial('e')}\\s+${caseInitial('sociali')}`;
 const AUDIENCE_RES_LONG = new RegExp(
-  `(?:${AUDIENCE_HEAD_PREFIX}(?:[\\p{L}][\\p{L}'’\\-]*\\s+)*?${AUDIENCE_LINK}|${AUDIENCE_COSA_PREFIX})${AUDIENCE_TARGET_LONG}`,
+  `(?:${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK}|${AUDIENCE_COSA_PREFIX})${AUDIENCE_TARGET_LONG}`
+    + `|${AUDIENCE_HEAD_PREFIX}${AUDIENCE_LINK_PREFIX}${AUDIENCE_POLICY_MEASURES}\\s+${AUDIENCE_LINK}${AUDIENCE_TARGET_LONG}`,
   'gu',
 );
 
@@ -698,11 +709,31 @@ export function createCantonClassifier({
 
   const sourceDomains = cantonSections ? buildSourceDomainMap(cantonSections) : new Map();
 
+  function blankAudiencePreservingItalianPlaces(match) {
+    const masked = Array.from(' '.repeat(match.length));
+    const tokens = tokensOf(match);
+    for (let i = 0; i < tokens.length; i += 1) {
+      if (!tokens[i].upper) continue;
+      for (let n = Math.min(italianMaxTokens, tokens.length - i); n >= 1; n -= 1) {
+        const key = tokens.slice(i, i + n).map((token) => token.norm).join(' ');
+        if (!italianPlaces.has(key)) continue;
+        const start = tokens[i].start;
+        const end = tokens[i + n - 1].end;
+        for (let offset = start; offset < end; offset += 1) masked[offset] = match[offset];
+        i += n - 1;
+        break;
+      }
+    }
+    return masked.join('');
+  }
+
   function prepare(text, { framing = false } = {}) {
     let t = foldKeepCase(text)
       .replace(/\]\([^)]*\)/gu, '] ')
       .replace(/\b(?:https?:\/\/|www\.)\S+/giu, ' ');
     for (const re of EXCLUDED_PHRASES) t = t.replace(re, (m) => ' '.repeat(m.length));
+    AUDIENCE_RECIPIENT_COORDINATED.lastIndex = 0;
+    t = t.replace(AUDIENCE_RECIPIENT_COORDINATED, blankAudiencePreservingItalianPlaces);
     AUDIENCE_RES_LONG.lastIndex = 0;
     if (AUDIENCE_RES_LONG.test(t)) {
       AUDIENCE_RES_LONG.lastIndex = 0;
