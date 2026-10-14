@@ -512,7 +512,9 @@ const HISTORICAL_SCHEMA_RULES = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS.map((lite
   id: index === 0 ? 'legacy-schema-body1-fixed-key-facts' : index === 1 ? 'legacy-schema-body1-optional-key-facts' : 'legacy-schema-title',
   kind: 'schema-echo',
   rx: new RegExp(escapeRx(literal), 'i'),
-  why: 'Schema storico di body1 (`3-8` o `5-8` coppie) ancora presente in un output pubblicato.',
+  why: index < 2
+    ? 'Schema storico di body1 (`3-8` o `5-8` coppie) ancora presente in un output pubblicato.'
+    : 'Istruzione storica del titolo ricopiata dallo schema JSON.',
   literal,
 }));
 
