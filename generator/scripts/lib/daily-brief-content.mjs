@@ -309,9 +309,9 @@ const T = {
     jobsDown: '⚠️ Le statistiche del job board non sono aggiornate: il blocco torna nella prossima edizione. Gli annunci restano su [cerca lavoro](/cerca-lavoro-ticino/).',
     methodH: 'Come nasce questo bollettino',
     method:
-      `I numeri qui sopra non arrivano da un'agenzia: sono il nostro monitoraggio. Le attese ai valichi vengono campionate più volte l'ora su tutti i valichi di confine svizzeri; i prezzi dei carburanti coprono i comuni italiani di fascia e i distributori svizzeri vicini al confine; il cambio segue la serie ufficiale giornaliera; gli annunci arrivano dai crawler del nostro job board. Il bollettino esce ogni giorno e può essere aggiornato durante la giornata — ogni sezione indica il periodo di osservazione dei dati, le pagine linkate restano live tutto il giorno.`,
+      `I numeri qui sopra non arrivano da un'agenzia: sono il nostro monitoraggio. Le attese ai valichi vengono campionate più volte l'ora su tutti i valichi di confine svizzeri; i prezzi dei carburanti coprono i comuni italiani di fascia e i distributori svizzeri vicini al confine; il cambio segue la serie ufficiale giornaliera; gli annunci arrivano dai crawler del nostro job board. Il bollettino esce ogni giorno e può essere aggiornato durante la giornata — i periodi di osservazione dipendono dalla fonte, le pagine linkate restano live tutto il giorno.`,
     faq: (ctx) => [
-      { q: 'Quando esce il bollettino del frontaliere?', a: `Ogni giorno, con possibili aggiornamenti durante la giornata. Questa edizione è del ${ctx.dateLabel}; i periodi di osservazione sono indicati nelle singole sezioni.` },
+      { q: 'Quando esce il bollettino del frontaliere?', a: `Ogni giorno, con possibili aggiornamenti durante la giornata. Questa edizione è del ${ctx.dateLabel}; i dati delle diverse fonti possono riferirsi a momenti diversi.` },
       { q: 'Da dove arrivano i dati?', a: 'Dal monitoraggio proprietario di frontaliereticino.ch: rilevamento delle code su tutti i valichi svizzeri, prezzi carburante nei comuni di confine, serie giornaliera del cambio CHF/EUR e crawler del job board. Nessun dato di seconda mano.' },
       { q: 'I numeri restano validi tutta la giornata?', a: 'No: si riferiscono ai periodi di osservazione delle singole fonti e possono cambiare quando questa edizione viene aggiornata. Per la situazione in tempo reale usa le pagine live linkate in ogni sezione.' },
     ],
@@ -370,11 +370,11 @@ const T = {
     jobsDown: '⚠️ Job-board statistics are not up to date; this section returns in the next edition. Listings stay on [find jobs](/en/find-jobs-ticino/).',
     methodH: 'How this brief is made',
     method:
-      'None of the numbers above come from an agency feed — they are our own monitoring: border queues sampled several times an hour at every Swiss crossing, fuel prices across Italian border municipalities and nearby Swiss stations, the official daily CHF/EUR series, and our job-board crawlers. The brief is published daily and may be refreshed during the day; each section names its observation period, the linked pages stay live all day.',
+      'None of the numbers above come from an agency feed — they are our own monitoring: border queues sampled several times an hour at every Swiss crossing, fuel prices across Italian border municipalities and nearby Swiss stations, the official daily CHF/EUR series, and our job-board crawlers. The brief is published daily and may be refreshed during the day; observation periods depend on the source, the linked pages stay live all day.',
     faq: (ctx) => [
-      { q: 'When is the cross-border daily brief published?', a: `Daily, with possible updates during the day. This edition is dated ${ctx.dateLabel}; each section states its observation period.` },
+      { q: 'When is the cross-border daily brief published?', a: `Daily, with possible updates during the day. This edition is dated ${ctx.dateLabel}; data from different sources may refer to different times.` },
       { q: 'Where does the data come from?', a: 'From frontaliereticino.ch’s proprietary monitoring: queue sampling at every Swiss border crossing, fuel prices in border municipalities, the daily CHF/EUR series and our job-board crawlers. No second-hand data.' },
-      { q: 'Do the numbers stay valid all day?', a: 'No — the values refer to each source’s stated observation period and can change when this edition is updated. For current conditions, follow the live pages linked in each section.' },
+      { q: 'Do the numbers stay valid all day?', a: 'No — the values refer to each source’s observation period and can change when this edition is updated. For current conditions, follow the live pages linked in each section.' },
     ],
   },
   de: {
@@ -431,9 +431,9 @@ const T = {
     jobsDown: '⚠️ Die Job-Board-Statistik ist nicht aktuell; der Abschnitt kehrt in der nächsten Ausgabe zurück. Die Angebote bleiben unter [Jobs im Tessin](/de/jobs-im-tessin/).',
     methodH: 'Wie dieses Bulletin entsteht',
     method:
-      'Keine der Zahlen oben stammt aus einem Agentur-Feed — es ist unsere eigene Messung: mehrmals pro Stunde erfasste Warteschlangen an jedem Schweizer Grenzübergang, Kraftstoffpreise in den italienischen Grenzgemeinden und an nahen Schweizer Tankstellen, die offizielle tägliche CHF/EUR-Reihe und die Crawler unseres Job-Boards. Das Bulletin erscheint täglich und kann im Tagesverlauf aktualisiert werden; jeder Abschnitt nennt seinen Beobachtungszeitraum, die verlinkten Seiten bleiben den ganzen Tag live.',
+      'Keine der Zahlen oben stammt aus einem Agentur-Feed — es ist unsere eigene Messung: mehrmals pro Stunde erfasste Warteschlangen an jedem Schweizer Grenzübergang, Kraftstoffpreise in den italienischen Grenzgemeinden und an nahen Schweizer Tankstellen, die offizielle tägliche CHF/EUR-Reihe und die Crawler unseres Job-Boards. Das Bulletin erscheint täglich und kann im Tagesverlauf aktualisiert werden; die Beobachtungszeiträume hängen von der Quelle ab, die verlinkten Seiten bleiben den ganzen Tag live.',
     faq: (ctx) => [
-      { q: 'Wann erscheint das Grenzgänger-Tagesbulletin?', a: `Täglich, mit möglichen Aktualisierungen im Tagesverlauf. Diese Ausgabe ist vom ${ctx.dateLabel}; die Beobachtungszeiträume stehen in den einzelnen Abschnitten.` },
+      { q: 'Wann erscheint das Grenzgänger-Tagesbulletin?', a: `Täglich, mit möglichen Aktualisierungen im Tagesverlauf. Diese Ausgabe ist vom ${ctx.dateLabel}; die Daten der verschiedenen Quellen können sich auf unterschiedliche Zeitpunkte beziehen.` },
       { q: 'Woher stammen die Daten?', a: 'Aus der eigenen Messung von frontaliereticino.ch: Stau-Erfassung an jedem Schweizer Grenzübergang, Kraftstoffpreise in den Grenzgemeinden, die tägliche CHF/EUR-Reihe und die Crawler des Job-Boards. Keine Daten aus zweiter Hand.' },
       { q: 'Gelten die Zahlen den ganzen Tag?', a: 'Nein — die Werte beziehen sich auf die Beobachtungszeiträume der einzelnen Quellen und können sich bei einer Aktualisierung dieser Ausgabe ändern. Für den Echtzeit-Status nutzen Sie die in jedem Abschnitt verlinkten Live-Seiten.' },
     ],
@@ -492,9 +492,9 @@ const T = {
     jobsDown: '⚠️ Les statistiques du job board ne sont pas à jour ; la section revient dans la prochaine édition. Les offres restent sur [trouver un emploi](/fr/trouver-emploi-tessin/).',
     methodH: 'Comment naît ce bulletin',
     method:
-      'Aucun des chiffres ci-dessus ne vient d’un flux d’agence — c’est notre propre suivi : files échantillonnées plusieurs fois par heure à chaque passage frontalier suisse, prix des carburants dans les communes frontalières italiennes et aux stations suisses proches, série officielle quotidienne CHF/EUR et crawlers de notre job board. Le bulletin est publié chaque jour et peut être actualisé dans la journée ; chaque section indique sa période d’observation, les pages liées restent en direct toute la journée.',
+      'Aucun des chiffres ci-dessus ne vient d’un flux d’agence — c’est notre propre suivi : files échantillonnées plusieurs fois par heure à chaque passage frontalier suisse, prix des carburants dans les communes frontalières italiennes et aux stations suisses proches, série officielle quotidienne CHF/EUR et crawlers de notre job board. Le bulletin est publié chaque jour et peut être actualisé dans la journée ; les périodes d’observation dépendent de la source, les pages liées restent en direct toute la journée.',
     faq: (ctx) => [
-      { q: 'Quand paraît le bulletin quotidien du frontalier ?', a: `Chaque jour, avec des actualisations possibles dans la journée. Cette édition date du ${ctx.dateLabel} ; chaque section précise sa période d’observation.` },
+      { q: 'Quand paraît le bulletin quotidien du frontalier ?', a: `Chaque jour, avec des actualisations possibles dans la journée. Cette édition date du ${ctx.dateLabel} ; les données des différentes sources peuvent se rapporter à des moments différents.` },
       { q: 'D’où viennent les données ?', a: 'Du suivi propriétaire de frontaliereticino.ch : relevé des files à chaque passage frontalier suisse, prix des carburants dans les communes frontalières, série quotidienne CHF/EUR et crawlers du job board. Aucune donnée de seconde main.' },
       { q: 'Les chiffres restent-ils valables toute la journée ?', a: 'Non — les valeurs correspondent aux périodes d’observation de chaque source et peuvent changer lors d’une actualisation de cette édition. Pour l’état en temps réel, utilisez les pages en direct liées dans chaque section.' },
     ],
