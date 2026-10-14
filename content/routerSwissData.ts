@@ -2759,6 +2759,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'divario-reddito-giovani-svizzera': { it: 'divario-reddito-giovani-svizzera', en: 'gender-pay-gap-young-switzerland', de: 'lohngefalle-junge-schweiz', fr: 'ecart-salaire-jeunes-suisse' },
  'decisioni-avs-ue-voto': { it: 'decisioni-avs-ue-voto', en: 'swiss-federal-decisions-avs-eu-vote', de: 'schweiz-bundesrat-ahv-eu-abstimmung', fr: 'decisions-conseil-federal-avs-ue-vote' },
  'pfister-risorse-difesa-federale': { it: 'pfister-risorse-difesa-federale', en: 'pfister-swiss-defense-resources', de: 'pfister-ressourcen-schweizer-armee', fr: 'pfister-ressources-armee-suisse' },
+ 'licenza-caccia-zurigo-requisiti': { it: 'licenza-caccia-zurigo-requisiti', en: 'zurich-hunting-license-requirements', de: 'zuerich-jagdschein-anforderungen', fr: 'permis-chasse-zurich-exigences' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

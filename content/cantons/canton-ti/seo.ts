@@ -309,6 +309,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sala-risveglio-bellinzona': {
+    title: 'Blocco operatorio san giovanni a Bellinzona | Frontaliere Ticino',
+    description: 'Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi',
+    keywords: 'frontalieri, ticino, svizzera, italia, blocco, operatorio, giovanni, bellinzona',
+    ogTitle: 'Blocco operatorio San Giovanni a Bellinzona',
+    ogDescription: 'Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi',
+    canonicalPath: '/articoli-ticino/sala-risveglio-bellinzona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Blocco operatorio san giovanni a Bellinzona",
+      "description": "Sala risveglio: 6 posti adulti e 3 pediatrici Percorso dalla chirurgia generale alla robotica Ambienti moderni, funzionali e tecnologicamente avanzati Flussi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sala-risveglio-bellinzona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala risveglio del blocco operatorio dell'Ospedale San Giovanni a Bellinzona"
+      },
+      "datePublished": "2026-10-14T01:31:32+00:00",
+      "dateModified": "2026-10-14T01:31:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/sala-risveglio-bellinzona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

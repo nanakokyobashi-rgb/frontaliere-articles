@@ -8210,6 +8210,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pfister-risorse-difesa-federale.title': 'Pfister: risorse insufficienti per l\'esercito svizzero',
     'blog.article.pfister-risorse-difesa-federale.excerpt': 'Al LAC di Lugano Pfister denuncia risorse insufficienti per l\'esercito svizzero; il piano di finanziamento è legato a un aumento temporaneo dell\'IVA.',
     'blog.article.pfister-risorse-difesa-federale.imageAlt': 'Il LAC di Lugano, dove Martin Pfister ha parlato delle risorse dell\'esercito svizzero.',
+    'blog.article.licenza-caccia-zurigo-requisiti.title': 'Licenza di caccia a Zurigo: requisiti e domanda',
+    'blog.article.licenza-caccia-zurigo-requisiti.excerpt': 'Guida pratica per la procedura cantonale: verifica requisiti, esami, scadenze e importi presso la fonte ufficiale.',
+    'blog.article.licenza-caccia-zurigo-requisiti.imageAlt': 'Cacciatore che prepara l\'attrezzatura in un bosco svizzero con vista sul lago, luce mattutina.',
 };
 
 export default blogMetaChIt;
