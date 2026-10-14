@@ -106717,10 +106717,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-teatro-intred-varese-stagione-2026.webp`,
+        "url": `${BASE_URL}/images/blog/article-fabio-de-luigi-biol-varese.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Pubblico al Teatro di Varese durante lo spettacolo di Fabio De Luigi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-13T00:24:02+00:00",
       "dateModified": "2026-10-13T00:24:02+00:00",
@@ -107848,10 +107848,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-como-pass-auto-rinnovo-annuale.webp`,
+        "url": `${BASE_URL}/images/blog/article-arresti-auto-como-minacce.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Strada urbana vicino al confine con auto parcheggiate e autosilo all'alba"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T12:24:36+00:00",
       "dateModified": "2026-10-14T12:24:36+00:00",
@@ -107887,10 +107887,10 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-deficit-comune-preventivo-2027.webp`,
+        "url": `${BASE_URL}/images/blog/article-disavanzo-cantonale-2027-2030.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Vista del lago di Lugano con skyline cittadino e passeggiata tranquilla"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T12:50:16+00:00",
       "dateModified": "2026-10-14T12:50:16+00:00",

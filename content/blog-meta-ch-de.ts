@@ -8245,7 +8245,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landschaft im Kanton Bern in der Schweiz',
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pensionskassen: Illiquide Anlagen machen 36% des Vermögens aus',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% des Vermögens sind in nicht unmittelbar handelbaren Anlagen investiert Der Anteil ist in den letzten 15 Jahren gestiegen Immobilien, Hypotheken und alternative Anlagen bieten Stabilität',
-    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pensionskassen-Büro in Zürich mit Analysten, die illiquide Portfolios prüfen',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Unternehmensinsolvenzen deutlich gestiegen, Rekord 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvente Unternehmen zwischen Januar und September Unternehmenskonkurse bei 13’660, +38,4% im Jahresvergleich Neue Eintragungen ins Register: 41’706 Privatpersonen: 8’003 Konkurse',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Blick auf den Luganer See mit Bürogebäuden und ruhigem Wasser, klarer Tag',

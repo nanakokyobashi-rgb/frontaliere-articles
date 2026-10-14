@@ -2,16 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "fabio-de-luigi-biol-varese",
-      "title": "Fabio De Luigi apre la stagione teatrale di Varese",
-      "fallbackImage": "/images/blog/article-teatro-intred-varese-stagione-2026.webp",
-      "reason": "All image providers failed for article-fabio-de-luigi-biol-varese: openai-codex (vision gate rejected image: Original illustration with a prominent foreground performer seen from behind; no readable text, logos, or recognizable face.); gemi",
-      "status": "failed",
-      "failureCount": 5,
-      "requestedAt": "2026-10-13T00:24:03.070Z",
-      "lastFailureAt": "2026-10-14T05:47:27.773Z"
-    },
-    {
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
@@ -22,54 +12,24 @@
       "lastFailureAt": "2026-10-14T10:35:45.585Z"
     },
     {
-      "articleId": "investimenti-illiquidi-pensione-2026",
-      "title": "Casse pensioni: investimenti illiquidi al 36% del patrimonio",
-      "fallbackImage": "/images/blog/accordo-investimenti-saudi-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T11:36:00.094Z",
-      "lastFailureAt": "2026-10-14T11:36:00.094Z"
-    },
-    {
-      "articleId": "arresti-auto-como-minacce",
-      "title": "Due arresti a Como: furti nelle auto e automobilista ferito",
-      "fallbackImage": "/images/blog/article-como-pass-auto-rinnovo-annuale.webp",
-      "reason": "All image providers failed for article-arresti-auto-como-minacce: openai-codex (vision gate rejected image: Generic synthetic dawn street scene relevant to the subject, with no peo",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T12:24:36.676Z",
-      "lastFailureAt": "2026-10-14T12:24:36.676Z"
-    },
-    {
-      "articleId": "disavanzo-cantonale-2027-2030",
-      "title": "Disavanzo cantonale ticinese previsto fino a 460 milioni",
-      "fallbackImage": "/images/blog/article-deficit-comune-preventivo-2027.webp",
-      "reason": "All image providers failed for article-disavanzo-cantonale-2027-2030: openai-codex (vision gate rejected image: Synthetic editorial illustration of Lake Lugano/Ticino; generic fore",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-14T12:50:17.019Z",
-      "lastFailureAt": "2026-10-14T12:50:17.019Z"
-    },
-    {
       "articleId": "gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel",
       "title": "Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football",
       "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
-      "reason": "All image providers failed for article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel: openai-codex (spawn codex ENOENT); gemini (Gemini image requ",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel: openai-codex (vision gate rejected image: Generic synthetic flag-football scene with no readable text or obvious logo, b",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-14T13:35:23.185Z",
-      "lastFailureAt": "2026-10-14T13:35:23.185Z"
+      "lastFailureAt": "2026-10-14T16:00:08.996Z"
     },
     {
       "articleId": "soccorsi-coda-autostrada-lombarda",
       "title": "Incidente sulla A8 tra Castellanza e Busto: lunga coda",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-soccorsi-coda-autostrada-lombarda: openai-codex (vision gate rejected image: Photorealistic documentary-style motorway traffic image with vis",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "image generation deadline exceeded",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-14T15:46:26.992Z",
-      "lastFailureAt": "2026-10-14T15:46:26.992Z"
+      "lastFailureAt": "2026-10-14T16:02:09.189Z"
     }
   ]
 }

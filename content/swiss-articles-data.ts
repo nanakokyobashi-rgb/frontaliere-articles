@@ -27525,7 +27525,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'investimenti-illiquidi-pensione-2026',
     category: 'pensione',
     date: '2026-10-14T11:35:59.775Z',
-    image: '/images/blog/accordo-investimenti-saudi-2026.webp',
+    image: '/images/blog/article-investimenti-illiquidi-pensione-2026.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'laura-bianchi',

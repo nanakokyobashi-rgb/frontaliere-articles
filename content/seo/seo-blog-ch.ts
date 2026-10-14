@@ -104056,10 +104056,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/accordo-investimenti-saudi-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-investimenti-illiquidi-pensione-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T11:35:59+00:00",
       "dateModified": "2026-10-14T11:35:59+00:00",
