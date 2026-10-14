@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "59cf84a2653c4ebad67a6982dd3000b329e3ae0626b6778693dc2315218f44ee",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "c44b726177720c52f8955c5deb4388b656c7e8a97a4e57d245627596c65c20e8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -90,6 +95,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "oggi da 7 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -138,6 +157,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Permesso dimora B Soletta: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-dimora-b-soletta-requisiti-rinnovo/",
+          "excerpt": "Guida completa al permesso B nel cantone Soletta. Scopri requisiti, documenti da produrre, durata 5 anni e procedura di rinnovo entro 3 mesi dalla scadenza.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
           "title": "Premi cassa malati canton Soletta e riduzione premi",
           "url": "/articoli-svizzera/premi-cassa-malati-canton-soletta-riduzione/",
           "excerpt": "Fatti chiave sulla riduzione dei premi cassa malati nel Cantone di Soletta",
@@ -150,22 +175,16 @@
           "date": "2026-08-18T01:22:42.942Z"
         },
         {
-          "title": "Asilo nido e custodia bambini nel Canton Soletta: costi e tariffe",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-soletta-costi/",
-          "excerpt": "Scopri i costi e le tariffe per la custodia dei bambini nel Canton Soletta, inclusi asili nido, famiglie diurne e doposcuola.",
-          "date": "2026-09-05T19:02:52.084Z"
+          "title": "Permesso L in Soletta: durata e condizioni",
+          "url": "/articoli-svizzera/permesso-l-soletta-validita-e-proroga/",
+          "excerpt": "Il permesso L di breve durata nel Cantone di Soletta è valido per un massimo di 1 anno. Le condizioni di proroga e il passaggio al permesso di dimora sono descritte di seguito.",
+          "date": "2026-08-18T02:26:24.720Z"
         },
         {
-          "title": "Asilo nido e custodia bambini Soletta: costi e sussidi",
-          "url": "/articoli-svizzera/asilo-nido-canton-soletta-costi/",
-          "excerpt": "Guida completa alla custodia dei bambini nel Cantone di Soletta: tariffe basate sul reddito, asili nido, famiglie diurne e doposcuola.",
-          "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Permesso dimora B Soletta: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-dimora-b-soletta-requisiti-rinnovo/",
-          "excerpt": "Guida completa al permesso B nel cantone Soletta. Scopri requisiti, documenti da produrre, durata 5 anni e procedura di rinnovo entro 3 mesi dalla scadenza.",
-          "date": "2026-08-24T04:51:47.353Z"
+          "title": "Permesso di domicilio C canton Soletta: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-domicilio-c-soletta/",
+          "excerpt": "Analisi dei requisiti, dei criteri di integrazione e della procedura per richiedere il permesso di domicilio C nel Cantone di Soletta.",
+          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -194,7 +213,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SO",
@@ -262,6 +281,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "today from 7 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -310,6 +343,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Residence permit B Slab: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-solothurn-requirements-renewal/",
+          "excerpt": "Complete guide to permit B in the canton of Solothurn. Discover requirements, documents to be produced, duration 5 years and renewal procedure within 3 months of expiry.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
           "title": "Canton health insurance premiums Slab and premium reduction",
           "url": "/en/swiss-articles/canton-health-insurance-premiums-slab-and-premium-reduction/",
           "excerpt": "Key facts about the reduction of sick pay premiums in the Canton of Solothurn",
@@ -322,22 +361,16 @@
           "date": "2026-08-18T01:22:42.942Z"
         },
         {
-          "title": "Nursery and childcare in the canton of Solothurn: costs and fees",
-          "url": "/en/swiss-articles/childcare-costs-canton-solothurn/",
-          "excerpt": "Find out about childcare costs and fees in the Canton of Solothurn, including nurseries, day families and afterschool.",
-          "date": "2026-09-05T19:02:52.084Z"
+          "title": "L Permit in Slab: duration and conditions",
+          "url": "/en/swiss-articles/l-permit-in-slab-duration-and-conditions/",
+          "excerpt": "The short-term L permit in the Canton of Solothurn is valid for a maximum of 1 year. The conditions of extension and the transition to a residence permit are described below.",
+          "date": "2026-08-18T02:26:24.720Z"
         },
         {
-          "title": "Nursery and childcare Insole: costs and subsidies",
-          "url": "/en/swiss-articles/solothurn-daycare-costs/",
-          "excerpt": "Complete guide to childcare in the Canton of Solothurn: income-based rates, nurseries, day families and after-school.",
-          "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Residence permit B Slab: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-solothurn-requirements-renewal/",
-          "excerpt": "Complete guide to permit B in the canton of Solothurn. Discover requirements, documents to be produced, duration 5 years and renewal procedure within 3 months of expiry.",
-          "date": "2026-08-24T04:51:47.353Z"
+          "title": "Residence permit C canton Solothurn: requirements and application",
+          "url": "/en/swiss-articles/c-permit-solothurn-requirements-application/",
+          "excerpt": "Analysis of the requirements, integration criteria and procedure for applying for residence permit C in the Canton of Solothurn.",
+          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -362,7 +395,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SO",
@@ -430,6 +463,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "heute 7 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -478,6 +525,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Aufenthaltsbewilligung B Solothurn: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-solothurn-anforderungen-erneuerung/",
+          "excerpt": "Vollständiger Führerschein B im Kanton Solothurn. Entdecken Sie die Anforderungen, die einzureichenden Dokumente, die Dauer von 5 Jahren und das Erneuerungsverfahren innerhalb von 3 Monaten nach Ablauf.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
           "title": "Krankenkassenprämien Kanton Solothurn und Prämienverbilligung",
           "url": "/de/schweiz-artikel/krankenkassenpramien-kanton-solothurn-und-pramienverbilligung/",
           "excerpt": "Wichtige Fakten zur Reduzierung der Krankenversicherungsprämien im Kanton Solothurn",
@@ -490,22 +543,16 @@
           "date": "2026-08-18T01:22:42.942Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Solothurn: Kosten und Tarife",
-          "url": "/de/schweiz-artikel/kinderbetreuungskosten-kanton-solothurn/",
-          "excerpt": "Informieren Sie sich über die Kosten und Tarife für die Kinderbetreuung im Kanton Solothurn inklusive Kindergärten, Tagesfamilien und Kindergarten.",
-          "date": "2026-09-05T19:02:52.084Z"
+          "title": "Erlaubnis L in Solothurn: Dauer und Bedingungen",
+          "url": "/de/schweiz-artikel/erlaubnis-l-in-solothurn-dauer-und-bedingungen/",
+          "excerpt": "Die Kurzzeitbewilligung L im Kanton Solothurn ist maximal 1 Jahr gültig. Die Bedingungen für die Verlängerung und den Übergang zur Aufenthaltsbewilligung sind nachfolgend beschrieben.",
+          "date": "2026-08-18T02:26:24.720Z"
         },
         {
-          "title": "Kindertagesstätte und Kinderbetreuung Solothurn: Kosten und Leistungen",
-          "url": "/de/schweiz-artikel/krippe-solothurn-kosten/",
-          "excerpt": "Umfassender Leitfaden zur Kinderbetreuung im Kanton Solothurn: einkommensabhängige Tarife, Kindergärten, Tages- und Nachschulfamilien.",
-          "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B Solothurn: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-solothurn-anforderungen-erneuerung/",
-          "excerpt": "Vollständiger Führerschein B im Kanton Solothurn. Entdecken Sie die Anforderungen, die einzureichenden Dokumente, die Dauer von 5 Jahren und das Erneuerungsverfahren innerhalb von 3 Monaten nach Ablauf.",
-          "date": "2026-08-24T04:51:47.353Z"
+          "title": "Niederlassungsbewilligung C Kanton Solothurn: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/niederlassungsbewilligung-c-kanton-solothurn-voraussetzungen/",
+          "excerpt": "Analyse der Voraussetzungen, der Integrationskriterien und des Verfahrens zur Beantragung der Niederlassungsbewilligung C im Kanton Solothurn.",
+          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -530,7 +577,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SO",
@@ -598,6 +645,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Solothurn",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 7 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -646,6 +707,12 @@
           "date": "2026-09-29T05:42:57.002Z"
         },
         {
+          "title": "Permis de séjour B Soleure : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-soleure-exigences-renouvellement/",
+          "excerpt": "Guide complet du permis B dans le canton de Soleure. Découvrez les exigences, les documents à produire, la durée de 5 ans et la procédure de renouvellement dans les 3 mois suivant l'expiration.",
+          "date": "2026-08-24T04:51:47.353Z"
+        },
+        {
           "title": "Primes d'assurance maladie dans le canton de Soleure et réductions de primes",
           "url": "/fr/articles-suisse/primes-d-assurance-maladie-dans-le-canton-de-soleure-et-reductions-de-primes/",
           "excerpt": "Faits clés sur la réduction des primes de caisse-maladie dans le canton de Soleure",
@@ -658,22 +725,16 @@
           "date": "2026-08-18T01:22:42.942Z"
         },
         {
-          "title": "Garderie et garde d'enfants dans le canton de Soleure : coûts et tarifs",
-          "url": "/fr/articles-suisse/couts-de-garde-d-enfants-canton-de-soleure/",
-          "excerpt": "Découvrez les coûts et les tarifs pour la garde des enfants dans le canton de Soleure, y compris les crèches, les familles de jour et après l'école.",
-          "date": "2026-09-05T19:02:52.084Z"
+          "title": "Permis L à Soleure : durée et conditions",
+          "url": "/fr/articles-suisse/permis-l-a-soleure-duree-et-conditions/",
+          "excerpt": "Le permis L de courte durée dans le canton de Soleure est valable pour une durée maximale d'un an. Les conditions de prolongation et de passage à l'autorisation de séjour sont décrites ci-dessous.",
+          "date": "2026-08-18T02:26:24.720Z"
         },
         {
-          "title": "Garderie et garde d'enfants Soleure : coûts et subventions",
-          "url": "/fr/articles-suisse/creche-soleure-couts/",
-          "excerpt": "Guide complet de garde d'enfants dans le canton de Soleure : tarifs basés sur le revenu, crèches, familles de jour et après l'école.",
-          "date": "2026-08-18T03:06:46.710Z"
-        },
-        {
-          "title": "Permis de séjour B Soleure : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-de-sejour-b-soleure-exigences-renouvellement/",
-          "excerpt": "Guide complet du permis B dans le canton de Soleure. Découvrez les exigences, les documents à produire, la durée de 5 ans et la procédure de renouvellement dans les 3 mois suivant l'expiration.",
-          "date": "2026-08-24T04:51:47.353Z"
+          "title": "Permis de séjour C canton de Soleure : exigences et demande",
+          "url": "/fr/articles-suisse/permis-etablissement-c-canton-soleure-conditions/",
+          "excerpt": "Analyse des exigences, des critères d'intégration et de la procédure de demande du permis de séjour C dans le canton de Soleure.",
+          "date": "2026-08-18T02:02:28.862Z"
         }
       ],
       "links": [
@@ -694,7 +755,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "a5602e3dcfdf0b7af6c97414f4a0bbe31c34ed08c7b7c43498740c1c56f04840",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "5cee286749a5cfbcf573359a084947ff83b40562b455394bef3d96eb57df53f0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -95,6 +100,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "15 °C",
+              "detail": "oggi da 9 a 17 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -153,10 +172,16 @@
           "date": "2026-09-05T20:58:25.674Z"
         },
         {
-          "title": "Premi LAMal nel Vallese: fasce e riduzioni 2026",
-          "url": "/articoli-svizzera/premi-lamal-vallese-riduzione/",
-          "excerpt": "Guida ai premi obbligatori di cassa malati nel canton Vallese: franchigie disponibili, modelli assicurativi, riduzione premi e procedura per ottenere sussidi cantonali.",
-          "date": "2026-09-05T16:42:46.103Z"
+          "title": "Permesso B Vallese: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-vallese-b-procedure/",
+          "excerpt": "Come rinnovare il permesso di dimora B nel Vallese: i requisiti, i documenti necessari e le procedure presso l'Ufficio cantonale della migrazione.",
+          "date": "2026-09-05T17:13:22.938Z"
+        },
+        {
+          "title": "Sistema scolastico canton Vallese: iscrizione e cicli",
+          "url": "/articoli-svizzera/scuola-vallese-cicli-iscrizione/",
+          "excerpt": "Cicli, età di iscrizione, calendario, lingue e passaggio alle scuole medie superiori nel sistema scolastico del Vallese.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "Permesso di domicilio C nel Canton Vallese: requisiti e domanda",
@@ -165,22 +190,16 @@
           "date": "2026-09-06T00:58:20.006Z"
         },
         {
-          "title": "Crans-Montana, fatture ospedaliere: non tutti gli ospedali le hanno inviate",
-          "url": "/articoli-frontaliere/crans-montana-fatture-ospedali-2026/",
-          "excerpt": "Non tutti gli ospedali svizzeri hanno inviato le fatture ai pazienti italiani feriti nell'incendio di Crans-Montana.",
-          "date": "2026-05-01T09:01:00.384Z"
+          "title": "Premi LAMal nel Vallese: fasce e riduzioni 2026",
+          "url": "/articoli-svizzera/premi-lamal-vallese-riduzione/",
+          "excerpt": "Guida ai premi obbligatori di cassa malati nel canton Vallese: franchigie disponibili, modelli assicurativi, riduzione premi e procedura per ottenere sussidi cantonali.",
+          "date": "2026-09-05T16:42:46.103Z"
         },
         {
-          "title": "Costi sanitari Crans-Montana: Marchesi chiede chiarimenti",
-          "url": "/articoli-frontaliere/svizzera-deroghe-costi-sanitari-crans-montana/",
-          "excerpt": "Il consigliere nazionale Piero Marchesi presenta un'interpellanza sul trattamento dei costi sanitari legati al dramma di Crans-Montana, sollevando preoccupazioni su possibili disparità di trattamento.",
-          "date": "2026-05-07T10:14:18.326Z"
-        },
-        {
-          "title": "Cassis e Cornado: tensione su fatture ospedaliere per feriti di Crans-Montana",
-          "url": "/articoli-frontaliere/cassis-italia-cornado-risarcimento/",
-          "excerpt": "L'ambasciatore italiano Gian Lorenzo Cornado replica a Cassis: «Parlo senza mezzi termini». La questione riguarda le fatture ospedaliere per i feriti di Crans-Montana.",
-          "date": "2026-05-07T07:37:15.149Z"
+          "title": "Permesso L di breve durata nel Canton Vallese: validità e proroga",
+          "url": "/articoli-svizzera/permesso-l-breve-durata-canton-vallese/",
+          "excerpt": "Il permesso L di breve durata nel Cantone di Vallese ha una validità massima di 1 anno e può essere prorogato solo in casi specifici.",
+          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "links": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "VS",
@@ -282,6 +301,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "15 °C",
+              "detail": "today from 9 to 17 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -340,10 +373,16 @@
           "date": "2026-09-05T20:58:25.674Z"
         },
         {
-          "title": "LAMal awards in Valais: bands and reductions 2026",
-          "url": "/en/swiss-articles/valais-lamal-premiums-reduction/",
-          "excerpt": "Guide to compulsory sick pay premiums in the canton of Valais: deductibles available, insurance models, premium reduction and procedure for obtaining cantonal subsidies.",
-          "date": "2026-09-05T16:42:46.103Z"
+          "title": "Permit B Valais: requirements and renewal",
+          "url": "/en/swiss-articles/valais-residence-permit-b-procedures/",
+          "excerpt": "How to renew the residence permit B in Valais: the requirements, the necessary documents and the procedures at the Cantonal Office of Migration.",
+          "date": "2026-09-05T17:13:22.938Z"
+        },
+        {
+          "title": "Valais cantonal school system: enrollment and cycles",
+          "url": "/en/swiss-articles/valais-school-enrolment-cycles/",
+          "excerpt": "Cycles, enrollment age, calendar, languages and transition to upper secondary schools in the school system of Valais.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "Residence permit C in the Canton of Valais: requirements and application",
@@ -352,22 +391,16 @@
           "date": "2026-09-06T00:58:20.006Z"
         },
         {
-          "title": "Crans-Montana, hospital bills: not all sent to Italian patients",
-          "url": "/en/cross-border-articles/crans-montana-bills-hospitals-2026/",
-          "excerpt": "Not all Swiss hospitals have sent bills to Italian patients injured in the Crans-Montana fire.",
-          "date": "2026-05-01T09:01:00.384Z"
+          "title": "LAMal awards in Valais: bands and reductions 2026",
+          "url": "/en/swiss-articles/valais-lamal-premiums-reduction/",
+          "excerpt": "Guide to compulsory sick pay premiums in the canton of Valais: deductibles available, insurance models, premium reduction and procedure for obtaining cantonal subsidies.",
+          "date": "2026-09-05T16:42:46.103Z"
         },
         {
-          "title": "Health costs in Crans-Montana: Marchesi asks for clarification",
-          "url": "/en/cross-border-articles/switzerland-derogations-health-costs-crans-montana/",
-          "excerpt": "National councillor Piero Marchesi submits an interpellation on the treatment of health costs related to the Crans-Montana drama, raising concerns about possible disparities in treatment.",
-          "date": "2026-05-07T10:14:18.326Z"
-        },
-        {
-          "title": "Cassis and Cornado: tension over Crans-Montana hospital bills",
-          "url": "/en/cross-border-articles/cassis-italy-cornado-compensation/",
-          "excerpt": "Italian ambassador Gian Lorenzo Cornado replies to Cassis: 'I speak without mincing words'. The issue concerns hospital bills for Crans-Montana's injured.",
-          "date": "2026-05-07T07:37:15.149Z"
+          "title": "Short-term permit L in the Canton of Valais: validity and extension",
+          "url": "/en/swiss-articles/short-term-permit-canton-valais/",
+          "excerpt": "The short-term L permit in the Canton of Valais is valid for a maximum of 1 year and can only be extended in specific cases.",
+          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "links": [
@@ -392,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "VS",
@@ -465,6 +498,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "15 °C",
+              "detail": "heute 9 bis 17 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -523,10 +570,16 @@
           "date": "2026-09-05T20:58:25.674Z"
         },
         {
-          "title": "KVG-Prämien im Wallis: Zeitabschnitte und Kürzungen 2026",
-          "url": "/de/schweiz-artikel/wallis-lamal-praemien-reduktion/",
-          "excerpt": "Leitfaden zu den obligatorischen Krankenkassenprämien im Kanton Wallis: verfügbare Franchisen, Versicherungsmodelle, Prämienverbilligung und Verfahren zur Erlangung kantonaler Beiträge.",
-          "date": "2026-09-05T16:42:46.103Z"
+          "title": "B-Bewilligung Wallis: Voraussetzungen und Erneuerung",
+          "url": "/de/schweiz-artikel/walliser-aufenthaltsbewilligung-b-verfahren/",
+          "excerpt": "So erneuern Sie die Aufenthaltsbewilligung B im Wallis: Voraussetzungen, erforderliche Unterlagen und Verfahren beim kantonalen Migrationsamt.",
+          "date": "2026-09-05T17:13:22.938Z"
+        },
+        {
+          "title": "Schulsystem Kanton Wallis: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/walliser-schulsystem-anmeldung-zyklen/",
+          "excerpt": "Zyklen, Einschreibungsalter, Kalender, Sprachen und Übergang in die Sekundarstufe II im Walliser Schulsystem.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "Niederlassungsbewilligung C im Kanton Wallis: Voraussetzungen und Antrag",
@@ -535,22 +588,16 @@
           "date": "2026-09-06T00:58:20.006Z"
         },
         {
-          "title": "Crans-Montana: Nicht alle Spitäler haben Rechnungen geschickt",
-          "url": "/de/grenzgaenger-artikel/crans-montana-rechnungen-krankenhauser-2026/",
-          "excerpt": "Nicht alle Schweizer Spitäler haben den italienischen Patienten, die beim Brand in Crans-Montana verletzt wurden, Rechnungen geschickt.",
-          "date": "2026-05-01T09:01:00.384Z"
+          "title": "KVG-Prämien im Wallis: Zeitabschnitte und Kürzungen 2026",
+          "url": "/de/schweiz-artikel/wallis-lamal-praemien-reduktion/",
+          "excerpt": "Leitfaden zu den obligatorischen Krankenkassenprämien im Kanton Wallis: verfügbare Franchisen, Versicherungsmodelle, Prämienverbilligung und Verfahren zur Erlangung kantonaler Beiträge.",
+          "date": "2026-09-05T16:42:46.103Z"
         },
         {
-          "title": "Krankenkosten Crans-Montana: Marchesi fordert Aufklärung",
-          "url": "/de/grenzgaenger-artikel/schweiz-abweichungen-kosten-crans-montana/",
-          "excerpt": "Nationalrat Piero Marchesi stellt eine Interpellation zur Behandlung der Gesundheitskosten im Zusammenhang mit dem Drama von Crans-Montana und äussert Bedenken über mögliche Ungleichbehandlungen.",
-          "date": "2026-05-07T10:14:18.326Z"
-        },
-        {
-          "title": "Cassis und Cornado: Spannung um Spitalrechnungen für Crans-Montana-Verletzte",
-          "url": "/de/grenzgaenger-artikel/cassis-italien-cornado-entschaedigung/",
-          "excerpt": "Der italienische Botschafter Gian Lorenzo Cornado antwortet auf Cassis: 'Ich spreche ohne Umschweife.' Es geht um die Spitalrechnungen für die Verletzten von Crans-Montana.",
-          "date": "2026-05-07T07:37:15.149Z"
+          "title": "Kurzzeitbewilligung L im Kanton Wallis: Gültigkeit und Verlängerung",
+          "url": "/de/schweiz-artikel/kurzfristige-bewilligung-kanton-wallis/",
+          "excerpt": "Die Kurzzeitbewilligung L im Kanton Wallis ist maximal 1 Jahr gültig und kann nur in Einzelfällen verlängert werden.",
+          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "links": [
@@ -575,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "VS",
@@ -648,6 +695,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Sion",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 9 à 17 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -706,10 +767,16 @@
           "date": "2026-09-05T20:58:25.674Z"
         },
         {
-          "title": "Primes LAMal en Valais : fourchettes et réductions 2026",
-          "url": "/fr/articles-suisse/valais-lamal-cotisazioni-riduzione/",
-          "excerpt": "Guide des primes obligatoires d'assurance-maladie dans le canton du Valais : franchises disponibles, modèles d'assurance, réduction des primes et procédure d'obtention des allocations cantonales.",
-          "date": "2026-09-05T16:42:46.103Z"
+          "title": "Permis B Valais : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-sejour-b-valais-procedures/",
+          "excerpt": "Comment renouveler le permis de séjour B en Valais : les exigences, les documents nécessaires et les procédures auprès de l'Office cantonal des migrations.",
+          "date": "2026-09-05T17:13:22.938Z"
+        },
+        {
+          "title": "Système scolaire du canton du Valais : inscription et cycles",
+          "url": "/fr/articles-suisse/ecole-valais-inscription-cycles/",
+          "excerpt": "Cycles, âge d'inscription, calendrier, langues et passage aux écoles du secondaire II dans le système scolaire du Valais.",
+          "date": "2026-09-30T08:39:22.953Z"
         },
         {
           "title": "Permis de séjour C dans le canton du Valais : exigences et demande",
@@ -718,22 +785,16 @@
           "date": "2026-09-06T00:58:20.006Z"
         },
         {
-          "title": "Crans-Montana, factures hospitalières: tous les hôpitaux ne les ont pas envoyées",
-          "url": "/fr/articles-frontalier/crans-montana-factures-hopitaux-2026/",
-          "excerpt": "Tous les hôpitaux suisses n'ont pas envoyé les factures aux patients italiens blessés dans l'incendie de Crans-Montana.",
-          "date": "2026-05-01T09:01:00.384Z"
+          "title": "Primes LAMal en Valais : fourchettes et réductions 2026",
+          "url": "/fr/articles-suisse/valais-lamal-cotisazioni-riduzione/",
+          "excerpt": "Guide des primes obligatoires d'assurance-maladie dans le canton du Valais : franchises disponibles, modèles d'assurance, réduction des primes et procédure d'obtention des allocations cantonales.",
+          "date": "2026-09-05T16:42:46.103Z"
         },
         {
-          "title": "Coûts sanitaires Crans-Montana: Marchesi demande des éclaircissements",
-          "url": "/fr/articles-frontalier/suisse-derogations-couts-crans-montana/",
-          "excerpt": "Le conseiller national Piero Marchesi dépose une interpellation sur le traitement des coûts sanitaires liés au drame de Crans-Montana, soulevant des inquiétudes sur d'éventuelles inégalités de traitement.",
-          "date": "2026-05-07T10:14:18.326Z"
-        },
-        {
-          "title": "Tension à Cassis et Cornado sur les factures d'hôpitaux",
-          "url": "/fr/articles-frontalier/cassis-italie-cornado-indemnisation/",
-          "excerpt": "L'ambassadeur italien Gian Lorenzo Cornado répond à Cassis: «Je parle sans détour». La question concerne les factures d'hôpitaux pour les blessés de Crans-Montana.",
-          "date": "2026-05-07T07:37:15.149Z"
+          "title": "Permis L de courte durée dans le canton du Valais : validité et prolongation",
+          "url": "/fr/articles-suisse/permis-de-courte-duree-canton-valais/",
+          "excerpt": "Le permis L de courte durée dans le canton du Valais a une durée de validité maximale de 1 an et ne peut être prolongé que dans des cas spécifiques.",
+          "date": "2026-09-06T01:34:18.109Z"
         }
       ],
       "links": [
@@ -754,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

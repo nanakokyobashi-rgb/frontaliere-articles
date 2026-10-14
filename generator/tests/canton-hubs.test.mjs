@@ -1018,7 +1018,7 @@ test('lessico diretto completa i cluster senza inventare fisco o mobilita\'', as
   assert.ok(idsOf(byTopic.mobilita).includes(road.id));
   assert.ok(idsOf(byTopic.fisco).includes(budget.id));
   assert.ok(!idsOf(byTopic.fisco).includes(phishing.id), 'le esclusioni lessicali valgono anche sul cluster TF-IDF');
-  assert.ok(!idsOf(byTopic.mobilita).includes(genericBorder.id), 'un solo token ripetuto del cluster confine non basta');
+  assert.ok(!idsOf(byTopic.mobilita).includes(genericBorder.id), 'un confine generico non supera il gate trasporto/dogana');
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

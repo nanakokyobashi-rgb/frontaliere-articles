@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "4c7132635f75a2c6d95b6881d7c9492fa5ff5d641f99a3a1e1a198cb3f1f31cd",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "f26231e8a0840782575fcc195bf6f4a06d612d199582157c097b56fbb8844e37",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -100,6 +105,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "oggi da 9 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -141,46 +160,46 @@
           "date": "2026-09-27T21:30:24.165Z"
         },
         {
+          "title": "Permesso L Grigioni: validità e proroga",
+          "url": "/articoli-svizzera/permesso-l-grigioni-validita-proroga/",
+          "excerpt": "Il permesso L per i Grigioni ha validità fino a 1 anno, con possibilità di proroga e passaggio a permesso B sotto specifiche condizioni e vincoli per il datore di lavoro.",
+          "date": "2026-09-20T01:34:30.789Z"
+        },
+        {
+          "title": "Permesso domicilio C Grigioni: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-domicilio-c-grigioni-requisiti/",
+          "excerpt": "Il permesso C è la licenza di residenza permanente in Svizzera. Scopri come richiederlo nel canton Grigioni, gli anni di residenza richiesti, le implicazioni fiscali, AVS/LPP e il percorso verso la naturalizzazione…",
+          "date": "2026-08-30T21:37:04.514Z"
+        },
+        {
+          "title": "Scuol chiude scuole a Ftan e Tarasp, genitori ricorrono",
+          "url": "/articoli-svizzera/chiusura-scuole-ftan-tarasp/",
+          "excerpt": "Il Municipio di Scuol vuole chiudere due sedi entro il 2028/29 per motivi finanziari e demografici. I genitori hanno presentato ricorso al Tribunale d'appello dei Grigioni.",
+          "date": "2026-09-30T22:52:15.843Z"
+        },
+        {
+          "title": "Frontaliere Poggiridenti-Grigioni: tassazione e permessi",
+          "url": "/articoli-frontaliere/frontaliere-poggiridenti-grigioni/",
+          "excerpt": "Vivere a Poggiridenti e lavorare nei Grigioni: permesso G, imposta alla fonte, Nuovo Accordo Frontalieri 2024 e contributi AVS/LPP. Guida pratica e checklist.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Permesso L nei Grigioni: durata, proroga e cambio datore",
+          "url": "/articoli-svizzera/permesso-l-breve-durata-grigioni-validita/",
+          "excerpt": "Nel Cantone dei Grigioni il permesso L ha durata fino a 12 mesi, proroghe solo in casi eccezionali e cambio datore subordinato a nuova domanda cantonale.",
+          "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
           "title": "LAMal Grigioni: premi, franchigie e riduzione",
           "url": "/articoli-svizzera/lam-grigioni-premi-riduzione/",
           "excerpt": "Scopri come funziona l'assicurazione malattia LAMal nel canton Grigioni, quali franchigie scegliere e come accedere ai sussidi cantonali di riduzione dei premi.",
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Ospedale Grigioni: 518 milioni per 12 anni",
-          "url": "/articoli-svizzera/ospedale-grigioni-ampliamento-500m/",
-          "excerpt": "La nuova ala dell'Ospedale cantonale dei Grigioni entra in servizio a fine novembre 2026 dopo 518 milioni investiti. Sale operatorie aumentano da 10 a 13.",
-          "date": "2026-08-18T19:56:19.062Z"
-        },
-        {
-          "title": "Ospedale Grigioni: 518 milioni per nuova ala",
-          "url": "/articoli-svizzera/ospedale-grigioni-ampliamento-2026/",
-          "excerpt": "Dodici anni di cantiere terminano. L'ospedale cantonale dei Grigioni a Coira inaugura la nuova struttura con 518 milioni di franchi investiti. Sale operatorie aumentate, trasloco fine novembre.",
-          "date": "2026-08-18T19:20:17.561Z"
-        },
-        {
-          "title": "Premi LAMal Canton Grigioni: franchigie e riduzione",
-          "url": "/articoli-svizzera/premi-cassa-malati-grigioni/",
-          "excerpt": "Guida ai premi dell'assicurazione malattia nel Canton Grigioni: franchigie da CHF 300 a 2500, modelli alternativi, sussidi riduzione e procedura di richiesta.",
-          "date": "2026-08-30T19:32:40.110Z"
-        },
-        {
-          "title": "Asilo nido e custodia bambini nel Canton Grigioni",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-grigioni/",
-          "excerpt": "Opzioni di custodia, tariffe calcolate sul reddito e sussidi cantonali: guida pratica per famiglie nel Grigioni.",
-          "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "Grigioni: le finanze degli ospedali tornano in attivo",
-          "url": "/articoli-svizzera/ripresa-finanziaria-ospedali-grigionesi/",
-          "excerpt": "Dopo un 2024 difficile, i nosocomi grigionesi registrano risultati positivi nel 2025. Ecco la panoramica finanziaria delle principali strutture sanitarie.",
-          "date": "2026-07-14T13:24:13.191Z"
-        },
-        {
-          "title": "Grigioni: autocertificazione penali per permessi di dimora",
-          "url": "/articoli-frontaliere/grigioni-permessi-dimora-2026/",
-          "excerpt": "Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso.",
-          "date": "2026-04-23T21:32:48.344Z"
+          "title": "Paisco Loveno-Grigioni: guida frontaliere, tasse, permessi",
+          "url": "/articoli-frontaliere/vivere-paisco-loveno-lavorare-grigioni-frontaliere/",
+          "excerpt": "Lavorare in Grigioni da Paisco Loveno: Permesso G, trattenute alla fonte, esenzione €10'000, LAMal, credito d'imposta e procedura dal 2024.",
+          "date": "2026-08-25T10:25:07.764Z"
         }
       ],
       "links": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GR",
@@ -287,6 +306,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "today from 9 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -328,46 +361,46 @@
           "date": "2026-09-27T21:30:24.165Z"
         },
         {
+          "title": "Permit L Graubünden: validity and extension",
+          "url": "/en/swiss-articles/permit-l-graubunden-validity-extension/",
+          "excerpt": "The L permit for Graubünden is valid for up to 1 year, with the possibility of extension and transfer to B permit under specific conditions and constraints for the employer.",
+          "date": "2026-09-20T01:34:30.789Z"
+        },
+        {
+          "title": "Residence permit C Graubünden: requirements and application",
+          "url": "/en/swiss-articles/residence-permit-c-graubunden-requirements/",
+          "excerpt": "The C permit is the permanent residence permit in Switzerland. Find out how to apply in the canton of Graubünden, the years of residence required, the tax implications, AVS/LPP and the path to ordinary naturalisation.",
+          "date": "2026-08-30T21:37:04.514Z"
+        },
+        {
+          "title": "Scuol closes schools in Ftan and Tarasp, parents appeal",
+          "url": "/en/swiss-articles/school-closure-ftan-tarasp/",
+          "excerpt": "The Scuol municipal government plans to close two schools by 2028/29 for financial and demographic reasons. Parents have filed an appeal with the Graubünden Court of Appeals.",
+          "date": "2026-09-30T22:52:15.843Z"
+        },
+        {
+          "title": "Frontiere Poggiridenti-Grisioni: taxation and permits",
+          "url": "/en/cross-border-articles/cross-border-poggiridenti-graubunden/",
+          "excerpt": "Living in Poggiridenti and working in Graubünden: G permit, tax at source, New Frontier Agreement 2024 and AVS/LPP contributions. Practical guide and checklist.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Permit L in Graubünden: duration, extension and change of employer",
+          "url": "/en/swiss-articles/short-term-l-permit-graubunden-validity/",
+          "excerpt": "In the Canton of Graubünden, the L permit lasts up to 12 months, extensions only in exceptional cases and change of employer subject to new cantonal application.",
+          "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
           "title": "LAMal Grisioni: premiums, deductibles and reduction",
           "url": "/en/swiss-articles/lamal-graubunden-premiums-reduction/",
           "excerpt": "Find out how LAMal health insurance works in the canton of Graubünden, which deductibles to choose and how to access cantonal premium reduction subsidies.",
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Graubünden Hospital: 518 million over 12 years",
-          "url": "/en/swiss-articles/graubunden-hospital-expansion-500m/",
-          "excerpt": "The new wing of the Cantonal Hospital of Graubünden comes into service at the end of November 2026 after 518 million invested. Operating rooms increase from 10 to 13.",
-          "date": "2026-08-18T19:56:19.062Z"
-        },
-        {
-          "title": "Graubünden Hospital: 518 million for new wing",
-          "url": "/en/swiss-articles/graubunden-hospital-expansion-2026/",
-          "excerpt": "Twelve years of construction end. The cantonal hospital of Graubünden in Chur inaugurates the new structure with 518 million francs invested. Operating rooms increased, moving at the end of November.",
-          "date": "2026-08-18T19:20:17.561Z"
-        },
-        {
-          "title": "LAMal Canton Graubünden Awards: deductibles and reduction",
-          "url": "/en/swiss-articles/health-insurance-premiums-graubunden/",
-          "excerpt": "Guide to health insurance premiums in the Canton of Graubünden: deductibles from CHF 300 to 2500, alternative models, reduction subsidies and application procedure.",
-          "date": "2026-08-30T19:32:40.110Z"
-        },
-        {
-          "title": "Nursery and childcare in the Canton of Graubünden",
-          "url": "/en/swiss-articles/nursery-childcare-graubunden-costs/",
-          "excerpt": "Custody options, income-based fees and cantonal subsidies: a practical guide for families in Graubünden.",
-          "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "Graubünden: hospitals' finances return to service",
-          "url": "/en/swiss-articles/financial-recovery-graubunden-hospitals/",
-          "excerpt": "After a difficult 2024, Grisonian nosocomes register positive results in 2025. Here is the financial overview of the main healthcare facilities.",
-          "date": "2026-07-14T13:24:13.191Z"
-        },
-        {
-          "title": "Grison: Self-declaration of criminal records for residence permits",
-          "url": "/en/cross-border-articles/graubunden-residence-permits-2026/",
-          "excerpt": "From May 2026, anyone applying for a residence permit in Grison will need to declare any criminal records or ongoing proceedings.",
-          "date": "2026-04-23T21:32:48.344Z"
+          "title": "Paisco Loveno-Grisioni: border guide, taxes, permits",
+          "url": "/en/cross-border-articles/living-paisco-loveno-working-graubunden-cross-border/",
+          "excerpt": "Working in Graubünden from Paisco Loveno: G Permit, withholding tax, €10,000 exemption, LAMal, tax credit and procedure from 2024.",
+          "date": "2026-08-25T10:25:07.764Z"
         }
       ],
       "links": [
@@ -392,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GR",
@@ -470,6 +503,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "heute 9 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -511,46 +558,46 @@
           "date": "2026-09-27T21:30:24.165Z"
         },
         {
+          "title": "Genehmigung L Graubünden: Gültigkeit und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-l-graubunden-gueltigkeit-verlaengerung/",
+          "excerpt": "Die L-Bewilligung für Graubünden ist bis zu 1 Jahr gültig, mit der Möglichkeit der Verlängerung und des Übergangs auf die B-Bewilligung unter bestimmten Bedingungen und Einschränkungen für den Arbeitgeber.",
+          "date": "2026-09-20T01:34:30.789Z"
+        },
+        {
+          "title": "Niederlassungsbewilligung C Graubünden: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-graubuenden-anforderungen/",
+          "excerpt": "Die Bewilligung C ist die Daueraufenthaltsbewilligung in der Schweiz. Erfahren Sie, wie Sie es im Kanton Graubünden beantragen können, welche Aufenthaltsjahre erforderlich sind, welche steuerlichen Auswirkungen es hat…",
+          "date": "2026-08-30T21:37:04.514Z"
+        },
+        {
+          "title": "Scuol schließt Schulen in Ftan und Tarasp, Eltern legen Widerspruch ein",
+          "url": "/de/schweiz-artikel/schulschliessung-ftan-tarasp/",
+          "excerpt": "Der Gemeindevorstand von Scuol will aus finanziellen und demografischen Gründen bis 2028/29 zwei Schulstandorte schliessen. Die Eltern haben beim Appellationsgericht des Kantons Graubünden Rekurs eingelegt.",
+          "date": "2026-09-30T22:52:15.843Z"
+        },
+        {
+          "title": "Grenzgänger Wohnortstütze-Graubünden: Besteuerung und Bewilligungen",
+          "url": "/de/grenzgaenger-artikel/grenzgaenger-poggiridenti-graubuenden/",
+          "excerpt": "Wohnen in Poggiridenti und Arbeiten in Graubünden: Bewilligung G, Quellensteuer, Neue Grenzgängervereinbarung 2024 und AHV/BVG-BEITRÄGE. Praktischer Leitfaden und Checkliste.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "L-Bewilligung in Graubünden: Dauer, Verlängerung und Wechsel des Arbeitgebers",
+          "url": "/de/schweiz-artikel/kurzaufenthaltsbewilligung-l-graubuenden-gueltigkeit/",
+          "excerpt": "Im Kanton Graubünden ist die L-Bewilligung bis zu 12 Monate gültig, Verlängerungen nur in Ausnahmefällen und Arbeitgeberwechsel nur auf erneutes kantonales Gesuch.",
+          "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
           "title": "KVG Graubünden: Prämien, Franchisen und Reduktionen",
           "url": "/de/schweiz-artikel/lamal-graubuenden-praemien-reduktion/",
           "excerpt": "Erfahren Sie, wie die KVG-Krankenversicherung im Kanton Graubünden funktioniert, welche Franchisen Sie wählen und wie Sie auf kantonale Prämienverbilligungsbeiträge zugreifen können.",
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Spital Graubünden: 518 Millionen für 12 Jahre",
-          "url": "/de/schweiz-artikel/graubuenden-spital-erweiterung-500m/",
-          "excerpt": "Der neue Flügel des Kantonsspitals Graubünden wird Ende November 2026 nach Investitionen von 518 Millionen in Betrieb genommen. Operationssäle werden von 10 auf 13 erhöht.",
-          "date": "2026-08-18T19:56:19.062Z"
-        },
-        {
-          "title": "Spital Graubünden: 518 Millionen für neuen Flügel",
-          "url": "/de/schweiz-artikel/graubuenden-spital-erweiterung-2026/",
-          "excerpt": "Zwölf Baujahre gehen zu Ende. Das Kantonsspital Graubünden in Chur weiht die neue Struktur mit 518 Millionen Franken ein. Erhöhte Operationssäle, Umzug Ende November.",
-          "date": "2026-08-18T19:20:17.561Z"
-        },
-        {
-          "title": "KVG-Prämien Kanton Graubünden: Franchisen und Reduktionen",
-          "url": "/de/schweiz-artikel/krankenkasse-praemien-graubuenden/",
-          "excerpt": "Leitfaden zu den Krankenkassenprämien im Kanton Graubünden: Franchisen von CHF 300 bis 2500, alternative Modelle, Reduktionsbeiträge und Antragsverfahren.",
-          "date": "2026-08-30T19:32:40.110Z"
-        },
-        {
-          "title": "Kindertagesstätte und Kinderbetreuung im Kanton Graubünden",
-          "url": "/de/schweiz-artikel/kindergarten-betreuung-graubuenden-kosten/",
-          "excerpt": "Betreuungsmöglichkeiten, einkommensberechnete Tarife und Kantonsbeiträge: Praktischer Leitfaden für Familien in Graubünden.",
-          "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "Graubünden: Spitalfinanzen wieder auf Kurs",
-          "url": "/de/schweiz-artikel/finanzielle-erholung-graubuender-spitaeler/",
-          "excerpt": "Nach einem schwierigen Jahr 2024 verzeichnen die Bündner Spitäler im Jahr 2025 positive Ergebnisse. Hier ist die finanzielle Übersicht der wichtigsten Gesundheitseinrichtungen.",
-          "date": "2026-07-14T13:24:13.191Z"
-        },
-        {
-          "title": "Graubünden: Strafregister für Aufenthaltsbewilligungen",
-          "url": "/de/grenzgaenger-artikel/graubunden-aufenthaltsbewilligungen-2026/",
-          "excerpt": "Ab Mai 2026 müssen Antragsteller für eine Aufenthaltsbewilligung in Graubünden etwaige Vorstrafen oder laufende Strafverfahren angeben.",
-          "date": "2026-04-23T21:32:48.344Z"
+          "title": "Paisco Loveno-Graubünden: Grenzführer, Steuern, Genehmigungen",
+          "url": "/de/grenzgaenger-artikel/in-paisco-loveno-wohnen-in-graubuenden-arbeiten-frontalier/",
+          "excerpt": "Arbeiten in Graubünden ab Paisco Loveno: Bewilligung G, Quellensteuer, Befreiung € 10'000, KVG, Steuergutschrift und Verfahren ab 2024.",
+          "date": "2026-08-25T10:25:07.764Z"
         }
       ],
       "links": [
@@ -575,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GR",
@@ -653,6 +700,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 9 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -694,46 +755,46 @@
           "date": "2026-09-27T21:30:24.165Z"
         },
         {
+          "title": "Permis L Grisons : validité et prolongation",
+          "url": "/fr/articles-suisse/permis-l-grisons-validite-prolongation/",
+          "excerpt": "Le permis L pour les Grisons est valable jusqu'à 1 an, avec possibilité de prolongation et de passage au permis B sous des conditions et des contraintes spécifiques pour l'employeur.",
+          "date": "2026-09-20T01:34:30.789Z"
+        },
+        {
+          "title": "Permis domicile C Grisons : exigences et demande",
+          "url": "/fr/articles-suisse/permis-sejour-c-grisons-conditions/",
+          "excerpt": "Le permis C est le permis de résidence permanente en Suisse. Découvrez comment le demander dans le canton des Grisons, les années de résidence requises, les implications fiscales, l'AVS/LPP et le parcours vers la…",
+          "date": "2026-08-30T21:37:04.514Z"
+        },
+        {
+          "title": "Scuol ferme les écoles de Ftan et Tarasp, les parents recourent",
+          "url": "/fr/articles-suisse/fermeture-ecoles-ftan-tarasp/",
+          "excerpt": "La municipalité de Scuol souhaite fermer deux sites d’ici 2028/29 pour des raisons financières et démographiques. Les parents ont déposé un recours auprès du Tribunal d’appel des Grisons.",
+          "date": "2026-09-30T22:52:15.843Z"
+        },
+        {
+          "title": "Frontière Poggiridenti-Grisons : fiscalité et permis",
+          "url": "/fr/articles-frontalier/frontalier-poggiridenti-grisons/",
+          "excerpt": "Vivre à Poggiridenti et travailler dans les Grisons : permis G, impôt à la source, nouvel accord frontalier 2024 et cotisations AVS/LPP. Guide pratique et checklist.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Permis L dans les Grisons : durée, prolongation et changement d'employeur",
+          "url": "/fr/articles-suisse/permis-l-courte-duree-grisons-validite/",
+          "excerpt": "Dans le canton des Grisons, le permis L a une durée maximale de 12 mois, prorogation uniquement dans des cas exceptionnels et changement d'employeur subordonné à une nouvelle demande cantonale.",
+          "date": "2026-08-30T22:08:30.040Z"
+        },
+        {
           "title": "LAMal Grisons : primes, franchises et réduction",
           "url": "/fr/articles-suisse/lamal-grisons-primes-reduction/",
           "excerpt": "Découvrez comment fonctionne l'assurance maladie LAMal dans le canton des Grisons, quelles franchises choisir et comment accéder aux allocations cantonales de réduction des primes.",
           "date": "2026-08-30T18:10:50.603Z"
         },
         {
-          "title": "Hôpital Grisons : 518 millions pour 12 ans",
-          "url": "/fr/articles-suisse/hopital-grisons-extension-500m/",
-          "excerpt": "La nouvelle aile de l'Hôpital cantonal des Grisons entre en service fin novembre 2026 après 518 millions investis. Les salles d'opération passent de 10 à 13.",
-          "date": "2026-08-18T19:56:19.062Z"
-        },
-        {
-          "title": "Hôpital Grisons : 518 millions pour une nouvelle aile",
-          "url": "/fr/articles-suisse/grisons-hopital-extension-2026/",
-          "excerpt": "Douze ans de chantier se terminent. L'hôpital cantonal des Grisons à Coire inaugure la nouvelle structure avec 518 millions de francs investis. Salles d'opération augmentées, déménagement fin novembre.",
-          "date": "2026-08-18T19:20:17.561Z"
-        },
-        {
-          "title": "Primes LAMal Canton des Grisons : franchises et réductions",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-grisons/",
-          "excerpt": "Guide des primes d’assurance maladie dans le canton des Grisons : franchises de 300 CHF à 2500, modèles alternatifs, subventions de réduction et processus de demande.",
-          "date": "2026-08-30T19:32:40.110Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants dans le canton des Grisons",
-          "url": "/fr/articles-suisse/garderie-enfants-grisons-tarifs/",
-          "excerpt": "Options de garde, tarifs calculés sur le revenu et allocations cantonales : guide pratique pour les familles dans les Grisons.",
-          "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "Grisons : les finances des hôpitaux reviennent à l'actif",
-          "url": "/fr/articles-suisse/reprise-financiere-hopitaux-grisons/",
-          "excerpt": "Après une 2024 difficile, les nosocomes grisons enregistrent des résultats positifs en 2025. Voici l'aperçu financier des principaux établissements de santé.",
-          "date": "2026-07-14T13:24:13.191Z"
-        },
-        {
-          "title": "Grisons : autocertification pénale pour les permis de séjour",
-          "url": "/fr/articles-frontalier/grisons-permis-de-sejour-2026/",
-          "excerpt": "À partir de mai 2026, toute personne demandant un permis de séjour dans les Grisons devra déclarer d'éventuels antécédents pénaux ou procédures en cours.",
-          "date": "2026-04-23T21:32:48.344Z"
+          "title": "Paisco Loveno-Grisons : guide frontalier, taxes, permis",
+          "url": "/fr/articles-frontalier/vivre-paisco-loveno-travailler-grisons-frontalier/",
+          "excerpt": "Travailler dans les Grisons de Paisco Loveno : Permis G, retenues à la source, exonération € 10'000, LAMal, crédit d'impôt et procédure à partir de 2024.",
+          "date": "2026-08-25T10:25:07.764Z"
         }
       ],
       "links": [
@@ -754,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

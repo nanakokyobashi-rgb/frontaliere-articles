@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "8c0cc5aa41d781ef5f59e7143a77e92de767b7f078ad7546f600a20267fcc46a",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "6a977bad8fbf083f06484670d11b4ebe6980e27f1c760dc4986c2103bbb5351e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -100,6 +105,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "oggi da 8 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -115,16 +134,40 @@
       ],
       "curatedArticles": [
         {
+          "title": "Licenza di caccia canton Berna requisiti e domanda",
+          "url": "/articoli-svizzera/licenza-caccia-berna-requisiti/",
+          "excerpt": "Scopri come richiedere la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.",
+          "date": "2026-10-14T07:05:00.305Z"
+        },
+        {
+          "title": "Autorizzazione edilizia a Berna: requisiti e procedura",
+          "url": "/articoli-svizzera/permesso-edilizio-berna-procedura/",
+          "excerpt": "Cantone di Berna: quando serve l'autorizzazione edilizia, quali documenti preparare e perché i lavori non possono iniziare prima del permesso.",
+          "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Scuola qualità a Berna: il voto è fissato al 2026",
+          "url": "/articoli-svizzera/votazione-scuola-qualita-berna-2026/",
+          "excerpt": "L'iniziativa per inserire un mandato costituzionale sulla scuola sarà sottoposta agli elettori il 27 settembre 2026.",
+          "date": "2026-09-14T10:07:20.143Z"
+        },
+        {
+          "title": "A scuola solo 4 giorni, l'esperimento (per ora) convince",
+          "url": "/articoli-svizzera/scuola-4-giorni-belp/",
+          "excerpt": "Da tre settimane, a Belp, nel Canton Berna, è in corso un nuovo progetto pilota con 4 giorni di scuola e 6 settimane di vacanza.",
+          "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Permesso B Berna: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-b-berna-requisiti-rinnovo/",
+          "excerpt": "Permesso dimora B Cantone Berna: requisiti, documentazione, durata e procedura di rinnovo. Guida completa e step-by-step da autorità SEM.",
+          "date": "2026-08-21T20:18:13.610Z"
+        },
+        {
           "title": "Premi cassa malati Cantone Berna e riduzione premi",
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-bern-riduzione/",
           "excerpt": "Ecco i fatti chiave per i premi dell'assicurazione malattia obbligatoria nel Cantone di Berna.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Asilo nido e custodia bambini Berna: costi e sussidi",
-          "url": "/articoli-svizzera/costi-asilo-nido-custodia-berna/",
-          "excerpt": "Scopri i costi degli asili nido nel Canton Berna, le tariffe basate sul reddito, le famiglie diurne e i sussidi cantonali disponibili per la custodia dei bambini.",
-          "date": "2026-08-13T03:12:52.951Z"
         },
         {
           "title": "Patente di guida a Berna: conversione e requisiti",
@@ -133,34 +176,10 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "Premi LAMal Canton Berna: fasce e riduzioni",
-          "url": "/articoli-svizzera/premi-lamal-berna-sussidio/",
-          "excerpt": "Nel Canton Berna i premi LAMal variano secondo la franchigia scelta. Ecco come funziona il sistema e come accedere ai sussidi per la riduzione.",
-          "date": "2026-08-25T11:39:39.350Z"
-        },
-        {
           "title": "Permesso di domicilio C nel Canton Berna: requisiti e domanda",
           "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-berna-requisiti-e-domanda/",
           "excerpt": "Il permesso di domicilio C nel Canton Berna: requisiti, domanda e procedura di applicazione",
           "date": "2026-08-12T20:41:31.313Z"
-        },
-        {
-          "title": "LAMal nel Cantone Berna: guida ai premi e sussidi",
-          "url": "/articoli-svizzera/premi-cassa-malati-lamal-2026-cantone-bern/",
-          "excerpt": "I premi LAMal nel Cantone Berna sono soggetti a differenze rispetto ad altri cantoni svizzeri. Ecco cosa sapere.",
-          "date": "2026-08-09T23:13:30.885Z"
-        },
-        {
-          "title": "Premi LAMal 2026 a Berna: come scegliere la franchigia giusta",
-          "url": "/articoli-svizzera/premi-lamal-2026-bern-guida/",
-          "excerpt": "Guida ai premi cassa malati 2026 nel canton Berna: differenze cantonali, franchigia ottimale, cambio cassa e sussidi. Confronto nazionale.",
-          "date": "2026-08-07T22:49:53.113Z"
-        },
-        {
-          "title": "Patente di guida nel Canton Berna: conversione ed esami",
-          "url": "/articoli-svizzera/patente-guida-berna-conversione/",
-          "excerpt": "Guida ufficiale alla conversione della licenza estera, esami e procedure presso l'Ufficio della circolazione del Canton Berna per i nuovi residenti.",
-          "date": "2026-08-13T18:13:24.195Z"
         }
       ],
       "links": [
@@ -189,7 +208,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BE",
@@ -267,6 +286,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "today from 8 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -282,16 +315,40 @@
       ],
       "curatedArticles": [
         {
+          "title": "Hunting license in the canton of Bern: requirements and application",
+          "url": "/en/swiss-articles/hunting-license-bern-requirements/",
+          "excerpt": "Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.",
+          "date": "2026-10-14T07:05:00.305Z"
+        },
+        {
+          "title": "Building permit in Bern: requirements and procedure",
+          "url": "/en/swiss-articles/bern-building-permit-process/",
+          "excerpt": "Canton of Bern: when a building permit is required, which documents to prepare, and why work cannot begin before the permit.",
+          "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Quality school in Bern: the grade is set for 2026",
+          "url": "/en/swiss-articles/bern-school-quality-vote-2026/",
+          "excerpt": "The initiative to insert a constitutional mandate on the school will be submitted to the voters on September 27, 2026.",
+          "date": "2026-09-14T10:07:20.143Z"
+        },
+        {
+          "title": "At school only 4 days, the experiment (for now) convinces",
+          "url": "/en/swiss-articles/school-4-days-belp/",
+          "excerpt": "For three weeks, in Belp, in the Canton of Bern, a new pilot project has been underway with 4 days of school and 6 weeks of vacation.",
+          "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Permit B Bern: requirements and renewal",
+          "url": "/en/swiss-articles/permit-b-bern-requirements-renewal/",
+          "excerpt": "Residence permit B Canton Bern: requirements, documentation, duration and renewal procedure. Complete and step-by-step guidance from SEM authority.",
+          "date": "2026-08-21T20:18:13.610Z"
+        },
+        {
           "title": "Health insurance premiums Canton Bern and premium reductions",
           "url": "/en/swiss-articles/health-insurance-premiums-cantonal-bern-reduction/",
           "excerpt": "Here are the key facts for compulsory health insurance premiums in the Canton of Bern.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Nursery and childcare Bern: costs and subsidies",
-          "url": "/en/swiss-articles/childcare-costs-bern-canton/",
-          "excerpt": "Find out about kindergarten costs in the Canton of Bern, income-based rates, day families and cantonal childcare subsidies available.",
-          "date": "2026-08-13T03:12:52.951Z"
         },
         {
           "title": "Driving licence in Bern: conversion and requirements",
@@ -300,34 +357,10 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "LAMal Canton Bern Awards: bands and reductions",
-          "url": "/en/swiss-articles/health-insurance-premiums-canton-bern-subsidies/",
-          "excerpt": "In the Canton of Bern, LAMal premiums vary according to the deductible chosen. Here's how the system works and how to access reduction subsidies.",
-          "date": "2026-08-25T11:39:39.350Z"
-        },
-        {
           "title": "Residence permit C in Canton Bern: requirements and application",
           "url": "/en/swiss-articles/c-permit-bern-switzerland-requisites-and-application/",
           "excerpt": "Residence permit C in the Canton of Bern: requirements, application and application procedure",
           "date": "2026-08-12T20:41:31.313Z"
-        },
-        {
-          "title": "LAMal in the Canton of Bern: a guide to premiums and subsidies",
-          "url": "/en/swiss-articles/lamal-2026-cantone-bern/",
-          "excerpt": "LAMal premiums in Canton Bern are subject to differences compared to other Swiss cantons. Here's what to know.",
-          "date": "2026-08-09T23:13:30.885Z"
-        },
-        {
-          "title": "LAMal 2026 Awards in Bern: How to Choose the Right Deductible",
-          "url": "/en/swiss-articles/lamal-premiums-2026-bern/",
-          "excerpt": "Guide to the 2026 cash premiums in the canton of Bern: cantonal differences, optimal deductible, cash changeover and subsidies. National comparison.",
-          "date": "2026-08-07T22:49:53.113Z"
-        },
-        {
-          "title": "Driver's license in the Canton of Bern: conversion and exams",
-          "url": "/en/swiss-articles/driving-license-bern-conversion/",
-          "excerpt": "Official Guide to Foreign License Conversion, Examinations and Procedures at the Canton of Bern Traffic Office for New Residents.",
-          "date": "2026-08-13T18:13:24.195Z"
         }
       ],
       "links": [
@@ -352,7 +385,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BE",
@@ -430,6 +463,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "heute 8 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -445,16 +492,40 @@
       ],
       "curatedArticles": [
         {
+          "title": "Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/jagdkarte-bern-voraussetzungen/",
+          "excerpt": "Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.",
+          "date": "2026-10-14T07:05:00.305Z"
+        },
+        {
+          "title": "Baubewilligung in Bern: Anforderungen und Verfahren",
+          "url": "/de/schweiz-artikel/baubewilligung-bern-verfahren/",
+          "excerpt": "Kanton Bern: wann eine Baubewilligung erforderlich ist, welche Unterlagen vorzubereiten sind und warum die Arbeiten nicht vor Erteilung der Bewilligung beginnen dürfen.",
+          "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Qualitätsschule in Bern: Die Note ist auf 2026 festgelegt",
+          "url": "/de/schweiz-artikel/berner-schulqualita-volksabstimmung-2026/",
+          "excerpt": "Die Initiative zur Aufnahme eines Verfassungsauftrags an der Schule wird am 27. September 2026 den Wählern vorgelegt.",
+          "date": "2026-09-14T10:07:20.143Z"
+        },
+        {
+          "title": "In der Schule nur 4 Tage, überzeugt das Experiment (vorerst)",
+          "url": "/de/schweiz-artikel/schule-4-tage-belp/",
+          "excerpt": "Seit drei Wochen läuft in Belp im Kanton Bern ein neues Pilotprojekt mit 4 Schultagen und 6 Wochen Ferien.",
+          "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Ausweis B Bern: Voraussetzungen und Erneuerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-bern-voraussetzungen-verlaengerung/",
+          "excerpt": "Aufenthaltsbewilligung B Kanton Bern: Voraussetzungen, Unterlagen, Dauer und Erneuerungsverfahren. Komplette Anleitung und Schritt-für-Schritt-Anleitung durch die SEM-Behörde.",
+          "date": "2026-08-21T20:18:13.610Z"
+        },
+        {
           "title": "Krankenkassenprämien Kanton Bern und Prämienverbilligung",
           "url": "/de/schweiz-artikel/kostenvoranschlag-kv-bern-kanton/",
           "excerpt": "Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Kindertagesstätte und Kinderbetreuung Bern: Kosten und Leistungen",
-          "url": "/de/schweiz-artikel/kinderbetreuungskosten-kanton-bern/",
-          "excerpt": "Informieren Sie sich über die Kosten der Kindertagesstätten im Kanton Bern, die einkommensabhängigen Tarife, die Tagesfamilien und die kantonalen Kinderbetreuungsbeihilfen.",
-          "date": "2026-08-13T03:12:52.951Z"
         },
         {
           "title": "Führerschein in Bern: Umstellung und Voraussetzungen",
@@ -463,34 +534,10 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "KVG-Prämien Kanton Bern: Zeitabschnitte und Kürzungen",
-          "url": "/de/schweiz-artikel/versicherungspraemien-kanton-bern-subventionen/",
-          "excerpt": "Im Kanton Bern variieren die KVG-Prämien je nach gewählter Franchise. So funktioniert das System und wie Sie auf die Reduktionszuschüsse zugreifen können.",
-          "date": "2026-08-25T11:39:39.350Z"
-        },
-        {
           "title": "Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/c-bescheinigung-bern-schweiz-anforderungen-und-antragstellung/",
           "excerpt": "Die Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen, Antrag und Antragsverfahren",
           "date": "2026-08-12T20:41:31.313Z"
-        },
-        {
-          "title": "KVG im Kanton Bern: Leitfaden zu Prämien und Beiträgen",
-          "url": "/de/schweiz-artikel/lamal-2026-kanton-bern/",
-          "excerpt": "Die KVG-Prämien im Kanton Bern unterliegen Abweichungen im Vergleich zu anderen Schweizer Kantonen. Hier ist, was Sie wissen müssen.",
-          "date": "2026-08-09T23:13:30.885Z"
-        },
-        {
-          "title": "KVG-Prämien 2026 in Bern: So wählen Sie die richtige Franchise",
-          "url": "/de/schweiz-artikel/lamal-praemien-2026-bern/",
-          "excerpt": "Leitfaden zu den Krankenkassenprämien 2026 im Kanton Bern: kantonale Unterschiede, optimale Franchise, Kassenwechsel und Beiträge. Nationaler Vergleich.",
-          "date": "2026-08-07T22:49:53.113Z"
-        },
-        {
-          "title": "Führerschein im Kanton Bern: Umschulung und Prüfungen",
-          "url": "/de/schweiz-artikel/fuehrerschein-bern-umschreibung/",
-          "excerpt": "Amtlicher Leitfaden zur Umwandlung des ausländischen Ausweises, Prüfungen und Verfahren beim Strassenverkehrsamt des Kantons Bern für Neubürger.",
-          "date": "2026-08-13T18:13:24.195Z"
         }
       ],
       "links": [
@@ -515,7 +562,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -593,6 +640,20 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 8 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -608,16 +669,40 @@
       ],
       "curatedArticles": [
         {
+          "title": "Permis de chasse dans le canton de Berne : conditions et demande",
+          "url": "/fr/articles-suisse/permis-chasse-berne-conditions/",
+          "excerpt": "Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.",
+          "date": "2026-10-14T07:05:00.305Z"
+        },
+        {
+          "title": "Autorisation de construire à Berne : exigences et procédure",
+          "url": "/fr/articles-suisse/permis-construire-berne-procedure/",
+          "excerpt": "Canton de Berne : quand une autorisation de construire est nécessaire, quels documents préparer et pourquoi les travaux ne peuvent pas commencer avant l'obtention de l'autorisation.",
+          "date": "2026-10-06T01:17:07.729Z"
+        },
+        {
+          "title": "Ecole qualité à Berne : le vote est fixé à 2026",
+          "url": "/fr/articles-suisse/vote-qualite-ecole-berne-2026/",
+          "excerpt": "L'initiative d'insérer un mandat constitutionnel sur l'école sera soumise aux électeurs le 27 septembre 2026.",
+          "date": "2026-09-14T10:07:20.143Z"
+        },
+        {
+          "title": "À l'école seulement 4 jours, l'expérience (pour l'instant) convainc",
+          "url": "/fr/articles-suisse/ecole-4-jours-belp/",
+          "excerpt": "Depuis trois semaines, à Belp, dans le canton de Berne, un nouveau projet pilote est en cours avec 4 jours d'école et 6 semaines de vacances.",
+          "date": "2026-09-04T21:47:50.000Z"
+        },
+        {
+          "title": "Permis B Berne : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-b-berne-conditions-renouvellement/",
+          "excerpt": "Permis de séjour B canton de Berne : exigences, documentation, durée et procédure de renouvellement. Guide complet et étape par étape par l'autorité SEM.",
+          "date": "2026-08-21T20:18:13.610Z"
+        },
+        {
           "title": "Primes caisse-maladie canton de Berne et réduction des primes",
           "url": "/fr/articles-suisse/primes-assurance-maladie-canton-de-bourbourg/",
           "excerpt": "Voici les faits clés pour les primes de l'assurance maladie obligatoire dans le canton de Berne.",
           "date": "2026-08-12T09:20:30.193Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants Berne : coûts et allocations",
-          "url": "/fr/articles-suisse/couts-creche-garde-enfants-canton-berne/",
-          "excerpt": "Découvrez les coûts des crèches dans le canton de Berne, les tarifs basés sur le revenu, les familles de jour et les allocations cantonales disponibles pour la garde des enfants.",
-          "date": "2026-08-13T03:12:52.951Z"
         },
         {
           "title": "Permis de conduire à Berne : conversion et exigences",
@@ -626,34 +711,10 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "Prix LAMal canton Berne : fourchettes et réductions",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-berne-subventions/",
-          "excerpt": "Dans le canton de Berne, les primes LAMal varient selon la franchise choisie. Voici comment fonctionne le système et comment accéder aux subventions pour la réduction.",
-          "date": "2026-08-25T11:39:39.350Z"
-        },
-        {
           "title": "Permis de séjour C dans le canton de Berne : exigences et demande",
           "url": "/fr/articles-suisse/permis-de-sejour-c-bourg-de-berne-requisits-et-demande/",
           "excerpt": "Le permis de séjour C dans le canton de Berne : exigences, demande et procédure d'application",
           "date": "2026-08-12T20:41:31.313Z"
-        },
-        {
-          "title": "LAMal dans le canton de Berne : guide des primes et subventions",
-          "url": "/fr/articles-suisse/lamal-2026-canton-de-bourges/",
-          "excerpt": "Les prix LAMal dans le canton de Berne sont soumis à des différences par rapport aux autres cantons suisses. Voici ce qu'il faut savoir.",
-          "date": "2026-08-09T23:13:30.885Z"
-        },
-        {
-          "title": "Prix LAMal 2026 à Berne : comment choisir la bonne franchise",
-          "url": "/fr/articles-suisse/primes-lamal-2026-berne/",
-          "excerpt": "Guide des primes caisse-maladie 2026 dans le canton de Berne : différences cantonales, franchise optimale, change de caisse et allocations. Comparaison nationale.",
-          "date": "2026-08-07T22:49:53.113Z"
-        },
-        {
-          "title": "Permis de conduire dans le canton de Berne : conversion et examens",
-          "url": "/fr/articles-suisse/permis-conduire-berne-conversion/",
-          "excerpt": "Guide officiel de conversion de la licence étrangère, examens et procédures auprès de l'Office de la circulation du canton de Berne pour les nouveaux résidents.",
-          "date": "2026-08-13T18:13:24.195Z"
         }
       ],
       "links": [
@@ -674,7 +735,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

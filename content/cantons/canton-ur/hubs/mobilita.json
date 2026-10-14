@@ -5,7 +5,7 @@
   "canton": "UR",
   "topic": "mobilita",
   "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "d15b9fa5a92538f7a89dd715a81084d0ed42566d9f0cd5bebcb8ac4931ad9c5e",
+  "contentHash": "146722556e892df5c938c75a3fd692ee6ed0060aa0213d0a56f2bdc515345290",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -150,12 +150,6 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-canton-uri/",
           "excerpt": "Conoscere le zone e le tariffe degli abbonamenti trasporti pubblici nel Cantone di Uri",
           "date": "2026-08-16T10:15:45.029Z"
-        },
-        {
-          "title": "Abbonamenti Uri: zone, tariffe e offerte nazionali",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-uri-zone-tariffe/",
-          "excerpt": "Come funziona la comunità tariffaria Uri: zone, abbonamenti annuali e mensili, sconti per studenti e combinazioni con Halbtax e AG.",
-          "date": "2026-08-29T18:28:00.260Z"
         },
         {
           "title": "Pendolare inverso: da Altdorf a Lugano ogni giorno. Ma i treni non bastano",
@@ -315,12 +309,6 @@
           "date": "2026-08-16T10:15:45.029Z"
         },
         {
-          "title": "Uri subscriptions: zones, rates and national offers",
-          "url": "/en/swiss-articles/uri-public-transport-zone-fares/",
-          "excerpt": "How the URI pricing community works: zones, annual and monthly subscriptions, student discounts, and combinations with Halbtax and AG.",
-          "date": "2026-08-29T18:28:00.260Z"
-        },
-        {
           "title": "Reverse commuting: from Altdorf to Lugano every day. But the trains aren't enough",
           "url": "/en/cross-border-articles/reverse-commuter-altdorf-lugano-delays-connections/",
           "excerpt": "Carla Scheidegger travels from Kriens to Altdorf every day to work at the MASI in Lugano. Key issues: trains every two hours and overcrowded carriages. Her fight for sustainable transport.",
@@ -478,12 +466,6 @@
           "date": "2026-08-16T10:15:45.029Z"
         },
         {
-          "title": "URI-Abonnements: Zonen, Tarife und nationale Angebote",
-          "url": "/de/schweiz-artikel/uri-oeffentliche-verkehrszonen-tarife/",
-          "excerpt": "So funktioniert die URI-Tarifgemeinschaft: Zonen, Jahres- und Monatsabonnements, Studentenrabatte und Kombinationen mit Halbtax und AG.",
-          "date": "2026-08-29T18:28:00.260Z"
-        },
-        {
           "title": "Pendeln in die andere Richtung: Jeden Tag von Altdorf nach Lugano. Doch die Züge reichen nicht",
           "url": "/de/grenzgaenger-artikel/pendler-gegenrichtung-altdorf-lugano-verspaetungen/",
           "excerpt": "Carla Scheidegger pendelt jeden Tag von Kriens nach Altdorf, um am MASI in Lugano zu arbeiten. Doch die Kritikpunkte bleiben: Züge im Zwei-Stunden-Takt und überfüllte Waggons. Ihr Einsatz für einen nachhaltigen Verkehr.",
@@ -639,12 +621,6 @@
           "url": "/fr/articles-suisse/cartes-de-transport-uri-canton/",
           "excerpt": "Connaître les zones et les tarifs des abonnements aux transports publics dans le canton d'Uri",
           "date": "2026-08-16T10:15:45.029Z"
-        },
-        {
-          "title": "Abonnements URI : zones, tarifs et offres nationales",
-          "url": "/fr/articles-suisse/abonnements-transports-uri-zones-tarifs/",
-          "excerpt": "Comment fonctionne la communauté tarifaire URI : zones, abonnements annuels et mensuels, réductions pour étudiants et combinaisons avec Halbtax et AG.",
-          "date": "2026-08-29T18:28:00.260Z"
         },
         {
           "title": "Pendulaire inversé : de Altdorf à Lugano chaque jour. Mais les trains ne suffisent pas",

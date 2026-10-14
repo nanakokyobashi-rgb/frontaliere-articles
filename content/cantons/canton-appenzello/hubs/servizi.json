@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:35:36.633Z",
-  "contentHash": "c7b8fb6daaf5702b3fa2a572c117163bc45f77602e476a2f7fd95448038d912a",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "8f4d86f7de9fec6bd0879e9fb4e98d7c0665c6940128bf634a8f7d0ab80f0ac5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -95,6 +100,25 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "oggi da 7 a 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "oggi da 8 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -147,18 +171,6 @@
           "date": "2026-09-02T23:34:05.913Z"
         },
         {
-          "title": "Premi LAMal Appenzello Esterno e riduzione premi",
-          "url": "/articoli-svizzera/premi-lamal-appenzello-esterno-riduzione/",
-          "excerpt": "Guida ai premi LAMal nel Cantone di Appenzello Esterno: franchigie, modelli assicurativi disponibili, sussidi cantonali e procedura per richiedere la riduzione basata su reddito.",
-          "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe",
-          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-appenzello-interno/",
-          "excerpt": "Scopri le opzioni di custodia per bambini nel Canton Appenzello Interno, inclusi asili nido, famiglie diurne e doposcuola, con tariffe calcolate sul reddito e sussidi cantonali disponibili.",
-          "date": "2026-09-07T10:09:56.666Z"
-        },
-        {
           "title": "Permesso di dimora B nel Cantone di Appenzello Interno: requisiti e rinnovo",
           "url": "/articoli-svizzera/permesso-dimora-b-appenzello-interno-requisiti-rinnovo/",
           "excerpt": "Scopri i requisiti e la procedura di rinnovo del permesso di dimora B nel Cantone di Appenzello Interno.",
@@ -171,10 +183,22 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "Premi cassa malati Appenzello Esterno: franchigie e sussidi",
-          "url": "/articoli-svizzera/premi-franchigie-appenzello-esterno/",
-          "excerpt": "Come funziona l'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.",
-          "date": "2026-08-21T00:08:39.612Z"
+          "title": "Permesso C Appenzello Esterno: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-c-appenzello-esterno-domanda/",
+          "excerpt": "Residenza minima, integrazione linguistica e procedura per il permesso di domicilio C nel cantone nord-orientale: tempi, documenti e step-by-step.",
+          "date": "2026-08-21T00:38:18.201Z"
+        },
+        {
+          "title": "Premi LAMal Appenzello Esterno e riduzione premi",
+          "url": "/articoli-svizzera/premi-lamal-appenzello-esterno-riduzione/",
+          "excerpt": "Guida ai premi LAMal nel Cantone di Appenzello Esterno: franchigie, modelli assicurativi disponibili, sussidi cantonali e procedura per richiedere la riduzione basata su reddito.",
+          "date": "2026-08-20T23:06:24.555Z"
+        },
+        {
+          "title": "Asilo nido e custodia bambini nel Canton Appenzello Interno: costi e tariffe",
+          "url": "/articoli-svizzera/asilo-nido-custodia-bambini-canton-appenzello-interno/",
+          "excerpt": "Scopri le opzioni di custodia per bambini nel Canton Appenzello Interno, inclusi asili nido, famiglie diurne e doposcuola, con tariffe calcolate sul reddito e sussidi cantonali disponibili.",
+          "date": "2026-09-07T10:09:56.666Z"
         },
         {
           "title": "Patente di guida Appenzello Esterno: conversione e esami",
@@ -217,7 +241,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -290,6 +314,25 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "today from 7 to 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "today from 8 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -342,18 +385,6 @@
           "date": "2026-09-02T23:34:05.913Z"
         },
         {
-          "title": "LAMal External Appenzell Rewards and premium reduction",
-          "url": "/en/swiss-articles/lamal-premiums-appenzell-rhodes-reduction/",
-          "excerpt": "Guide to LAMal premiums in the Canton of Appenzell Outer: deductibles, available insurance models, cantonal subsidies and procedure to apply for the income-based reduction.",
-          "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Nursery and childcare in the Inner Appenzell Canton: costs and fees",
-          "url": "/en/swiss-articles/daycare-childcare-canton-appenzell-innerrhoden/",
-          "excerpt": "Discover childcare options in the Inner Appenzell Canton, including nurseries, day families and after-school, with income-based fees and cantonal subsidies available.",
-          "date": "2026-09-07T10:09:56.666Z"
-        },
-        {
           "title": "Residence permit B in the Inner Appenzell Canton: requirements and renewal",
           "url": "/en/swiss-articles/residence-permit-b-appenzell-interno-requirements-renewal/",
           "excerpt": "Find out the requirements and the procedure for renewing the B residence permit in the Canton of Appenzell Innerrhoden.",
@@ -366,10 +397,22 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "Sick pay premiums Appenzell Ausserrhoden: deductibles and subsidies",
-          "url": "/en/swiss-articles/health-insurance-appenzell-outsrhoden-deductibles/",
-          "excerpt": "How health insurance works in Appenzell Ausserrhoden: available deductibles, coverage models and procedures to access premium subsidies.",
-          "date": "2026-08-21T00:08:39.612Z"
+          "title": "Permit C External Appenzell: requirements and application",
+          "url": "/en/swiss-articles/residence-permit-c-appenzell-outer-rhodes-requirements/",
+          "excerpt": "Minimum residence, language integration and procedure for residence permit C in the north-eastern canton: time, documents and step-by-step.",
+          "date": "2026-08-21T00:38:18.201Z"
+        },
+        {
+          "title": "LAMal External Appenzell Rewards and premium reduction",
+          "url": "/en/swiss-articles/lamal-premiums-appenzell-rhodes-reduction/",
+          "excerpt": "Guide to LAMal premiums in the Canton of Appenzell Outer: deductibles, available insurance models, cantonal subsidies and procedure to apply for the income-based reduction.",
+          "date": "2026-08-20T23:06:24.555Z"
+        },
+        {
+          "title": "Nursery and childcare in the Inner Appenzell Canton: costs and fees",
+          "url": "/en/swiss-articles/daycare-childcare-canton-appenzell-innerrhoden/",
+          "excerpt": "Discover childcare options in the Inner Appenzell Canton, including nurseries, day families and after-school, with income-based fees and cantonal subsidies available.",
+          "date": "2026-09-07T10:09:56.666Z"
         },
         {
           "title": "External Appenzell Driving License: Conversion and Exams",
@@ -404,7 +447,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -477,6 +520,25 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "heute 7 bis 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "heute 8 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -529,18 +591,6 @@
           "date": "2026-09-02T23:34:05.913Z"
         },
         {
-          "title": "Prämien KVG Appenzell Ausserrhoden und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/krankenkasse-appenzell-ausserrhoden-reduktion/",
-          "excerpt": "Prämienleitfaden KVG im Kanton Appenzell Ausserrhoden: Franchisen, verfügbare Versicherungsmodelle, Kantonsbeiträge und Verfahren zur Beantragung der einkommensabhängigen Reduktion.",
-          "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Kinderbetreuung Appenzell: Kosten & Tarife",
-          "url": "/de/schweiz-artikel/kindertagesstatte-kinderbetreuung-kanton-appenzell-innerrhoden/",
-          "excerpt": "Entdecken Sie die Kinderbetreuungsmöglichkeiten im Kanton Appenzell Innerrhoden, inklusive Kindergärten, Tages- und Nachschulfamilien, mit einkommensabhängigen Tarifen und kantonalen Zuschüssen.",
-          "date": "2026-09-07T10:09:56.666Z"
-        },
-        {
           "title": "Aufenthaltserlaubnis B im Kanton Appenzell Innerrhoden: Anforderungen und Verlängerung",
           "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-appenzell-interno-anforderungen-verlangerung/",
           "excerpt": "Erfahren Sie mehr über die Voraussetzungen und das Verfahren zur Verlängerung der Aufenthaltsbewilligung B im Kanton Appenzell Innerrhoden.",
@@ -553,10 +603,22 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "Krankenkassenprämien Appenzell Ausserrhoden: Selbstbehalte und Zuschüsse",
-          "url": "/de/schweiz-artikel/praemien-franchisen-appenzell-ausserrhoden/",
-          "excerpt": "So funktioniert die Krankenversicherung in Appenzell Ausserrhoden: verfügbare Selbstbehalte, Deckungsmodelle und Verfahren für den Zugang zu Prämienbeiträgen.",
-          "date": "2026-08-21T00:08:39.612Z"
+          "title": "C-Genehmigung Appenzell Ausserrhoden: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-c-appenzell-ausserrhoden-voraussetzungen/",
+          "excerpt": "Mindestaufenthalt, Sprachintegration und Verfahren für die Niederlassungsbewilligung C im Nordostkanton: Zeiten, Dokumente und Schritt-für-Schritt.",
+          "date": "2026-08-21T00:38:18.201Z"
+        },
+        {
+          "title": "Prämien KVG Appenzell Ausserrhoden und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenkasse-appenzell-ausserrhoden-reduktion/",
+          "excerpt": "Prämienleitfaden KVG im Kanton Appenzell Ausserrhoden: Franchisen, verfügbare Versicherungsmodelle, Kantonsbeiträge und Verfahren zur Beantragung der einkommensabhängigen Reduktion.",
+          "date": "2026-08-20T23:06:24.555Z"
+        },
+        {
+          "title": "Kinderbetreuung Appenzell: Kosten & Tarife",
+          "url": "/de/schweiz-artikel/kindertagesstatte-kinderbetreuung-kanton-appenzell-innerrhoden/",
+          "excerpt": "Entdecken Sie die Kinderbetreuungsmöglichkeiten im Kanton Appenzell Innerrhoden, inklusive Kindergärten, Tages- und Nachschulfamilien, mit einkommensabhängigen Tarifen und kantonalen Zuschüssen.",
+          "date": "2026-09-07T10:09:56.666Z"
         },
         {
           "title": "Führerschein Appenzell Ausserrhoden: Umbau und Prüfungen",
@@ -591,7 +653,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -664,6 +726,25 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Appenzell",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 7 à 14 °C"
+            },
+            {
+              "label": "Herisau",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 8 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -716,18 +797,6 @@
           "date": "2026-09-02T23:34:05.913Z"
         },
         {
-          "title": "Prix LAMal Appenzell Extérieur et réduction des prix",
-          "url": "/fr/articles-suisse/primes-lamal-appenzell-rhodes-reduction/",
-          "excerpt": "Guide des primes LAMal dans le canton d'Appenzell Extérieur : franchises, modèles d'assurance disponibles, subventions cantonales et procédure de demande de réduction basée sur le revenu.",
-          "date": "2026-08-20T23:06:24.555Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants dans le canton d'Appenzell : coûts et tarifs",
-          "url": "/fr/articles-suisse/garde-d-enfants-canton-appenzell-rhodes-interieures/",
-          "excerpt": "Découvrez les options de garde d'enfants dans le canton d'Appenzell Interne, y compris les crèches, les familles de jour et après l'école, avec des tarifs calculés sur le revenu et des subventions cantonales disponibles.",
-          "date": "2026-09-07T10:09:56.666Z"
-        },
-        {
           "title": "Permis B Appenzell, Innerrhoden : exigences et renouvellement",
           "url": "/fr/articles-suisse/permis-de-sejour-b-appenzell-interno-conditions-renouvellement/",
           "excerpt": "Renseignez-vous sur les exigences et la procédure pour renouveler votre permis de séjour B dans le canton d'Appenzell, en Inerrhoden.",
@@ -740,10 +809,22 @@
           "date": "2026-08-21T00:16:38.270Z"
         },
         {
-          "title": "Primes caisse-maladie Appenzell Extérieur : franchises et subventions",
-          "url": "/fr/articles-suisse/primes-franchises-appenzell-rhodes-exterieures/",
-          "excerpt": "Comment fonctionne l'assurance maladie à Appenzell Extérieur : franchises disponibles, modèles de couverture et procédures d'accès aux allocations sur primes.",
-          "date": "2026-08-21T00:08:39.612Z"
+          "title": "Permis C Appenzell Externe : exigences et demande",
+          "url": "/fr/articles-suisse/permis-domicile-c-appenzell-rhodes-exte-conditions-demande/",
+          "excerpt": "Résidence minimale, intégration linguistique et procédure de permis de séjour C dans le canton du Nord-Est : délais, documents et étape par étape.",
+          "date": "2026-08-21T00:38:18.201Z"
+        },
+        {
+          "title": "Prix LAMal Appenzell Extérieur et réduction des prix",
+          "url": "/fr/articles-suisse/primes-lamal-appenzell-rhodes-reduction/",
+          "excerpt": "Guide des primes LAMal dans le canton d'Appenzell Extérieur : franchises, modèles d'assurance disponibles, subventions cantonales et procédure de demande de réduction basée sur le revenu.",
+          "date": "2026-08-20T23:06:24.555Z"
+        },
+        {
+          "title": "Garderie et garde d'enfants dans le canton d'Appenzell : coûts et tarifs",
+          "url": "/fr/articles-suisse/garde-d-enfants-canton-appenzell-rhodes-interieures/",
+          "excerpt": "Découvrez les options de garde d'enfants dans le canton d'Appenzell Interne, y compris les crèches, les familles de jour et après l'école, avec des tarifs calculés sur le revenu et des subventions cantonales disponibles.",
+          "date": "2026-09-07T10:09:56.666Z"
         },
         {
           "title": "Permis de conduire Appenzell Extérieur : conversion et examens",
@@ -770,7 +851,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T07:35:36.633Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

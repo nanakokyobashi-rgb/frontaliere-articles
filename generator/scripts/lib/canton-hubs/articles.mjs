@@ -330,6 +330,7 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
         // l'altro cluster che invece prova il tema (in particolare mobilita').
         .filter((match) => match.titleHit && match.cosine >= minTopicStrength
           && !isExcluded(topic)
+          && (keywordResults.get(topic)?.requiredHit ?? true)
           // «frontaliere»/«confine» da soli descrivono il pubblico, non
           // necessariamente una notizia di mobilita'. Per il cluster
           // specifico servono due termini del seme tra titolo ed estratto.
