@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "c540c58544b91781e712a56f2ba8f9674efce55ae03e039e8a166d256ed117f0",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "0422a9794e434e0cc09d3a8d1d88a4a63ea9751bbfd49a4db8e5d34a7c83cce7",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -146,7 +146,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -179,6 +179,12 @@
           "url": "/articoli-svizzera/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione/",
           "excerpt": "La cassa di compensazione del Cantone Berna influenza le prestazioni complementari dell'AVS, ma la fonte non fornisce informazioni specifiche.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Mercato del lavoro Berna: salari, formazione e previdenza",
+          "url": "/articoli-svizzera/mercato-berna-salari-formazione/",
+          "excerpt": "Nessun salario minimo federale svizzero. Scopri orari, contributi AVS/LPP, livelli salariali per formazione e contratti collettivi nel Canton Berna.",
+          "date": "2026-08-22T04:38:04.511Z"
         }
       ],
       "links": [
@@ -199,7 +205,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "BE",
@@ -318,7 +324,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -351,6 +357,12 @@
           "url": "/en/swiss-articles/avs-and-complementary-benefits-cantone-bern-compensation-fund/",
           "excerpt": "The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Labour market Bern: wages, training and social security",
+          "url": "/en/swiss-articles/bern-labour-market-salaries-training/",
+          "excerpt": "No Swiss federal minimum wage. Discover timetables, AVS/LPP contributions, salary levels for training and collective agreements in the Canton of Bern.",
+          "date": "2026-08-22T04:38:04.511Z"
         }
       ],
       "links": [
@@ -371,7 +383,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "BE",
@@ -490,7 +502,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -523,6 +535,12 @@
           "url": "/de/schweiz-artikel/avs-und-zusatzleistungen-cantone-bern-entschadigungsfonds/",
           "excerpt": "Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Arbeitsmarkt Bern: Löhne, Ausbildung und Vorsorge",
+          "url": "/de/schweiz-artikel/arbeitsmarkt-bern-loehne-ausbildung/",
+          "excerpt": "Kein schweizerischer Bundesmindestlohn. Entdecken Sie Fahrpläne, AHV/BVG-Beiträge, Bildungslohnniveaus und Kollektivverträge im Kanton Bern.",
+          "date": "2026-08-22T04:38:04.511Z"
         }
       ],
       "links": [
@@ -543,7 +561,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -662,7 +680,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Informationsanlass-fuer-angehende-Pensionierte-1.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -695,6 +713,12 @@
           "url": "/fr/articles-suisse/avs-et-benefices-complementaires-cantone-berne-fonds-de-compensation/",
           "excerpt": "La caisse de compensation du canton de Berne influe sur les prestations complémentaires de l'AVS, mais la source ne fournit pas d'informations spécifiques.",
           "date": "2026-08-13T16:04:43.335Z"
+        },
+        {
+          "title": "Marché du travail Berne : salaires, formation et prévoyance",
+          "url": "/fr/articles-suisse/marche-travail-berne-salaires-formation/",
+          "excerpt": "Pas de salaire minimum fédéral suisse. Découvrez les horaires, les cotisations AVS/LPP, les niveaux de salaire pour la formation et les conventions collectives dans le canton de Berne.",
+          "date": "2026-08-22T04:38:04.511Z"
         }
       ],
       "links": [
@@ -715,7 +739,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

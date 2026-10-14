@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "a5033b4699ac0beef9165123acca7cd626a4f8c1f8a0429b1d8cd03c7b19281a",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "c90bbe948e9c0d1a653f1257dd75109575891159b62e3294e76e7631a499f53b",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,6 +108,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "Tasse universitarie Canton Zurigo: guida e iscrizione",
+          "url": "/articoli-svizzera/tasse-universitarie-zurigo-guida/",
+          "excerpt": "Scopri come orientarti tra le tasse universitarie nel Cantone di Zurigo, dalle categorie di studenti alle procedure di iscrizione e contributi.",
+          "date": "2026-10-14T04:09:09.746Z"
+        },
+        {
           "title": "Imposta sui cani a Zurigo: guida alla registrazione",
           "url": "/articoli-svizzera/imposta-cani-zurigo-guida/",
           "excerpt": "Nel Cantone di Zurigo l'imposta sui cani segue regole cantonali e comunali.",
@@ -126,16 +132,16 @@
           "date": "2026-10-04T15:14:54.836Z"
         },
         {
-          "title": "Cembra e Vontobel lasciano Zurigo: fisco e spazi spingono il trasloco",
-          "url": "/articoli-svizzera/cembra-vontobel-sede-baden-baar/",
-          "excerpt": "Cembra sposta 660 dipendenti a Baden (15% imposte) in autunno 2027; Vontobel porta 1.500 posti a Baar (12%) entro il 2030. Zurigo al 20%.",
-          "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
           "title": "Imposta successione Zurigo: aliquote e esenzioni 2026",
           "url": "/articoli-svizzera/successione-donazione-zurigo-guida/",
           "excerpt": "Imposte di successione e donazione nel Canton Zurigo: aliquote per grado di parentela, esenzioni totali per coniuge e figli, dichiarazione obbligatoria e scadenze da rispettare.",
           "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Cembra e Vontobel lasciano Zurigo: fisco e spazi spingono il trasloco",
+          "url": "/articoli-svizzera/cembra-vontobel-sede-baden-baar/",
+          "excerpt": "Cembra sposta 660 dipendenti a Baden (15% imposte) in autunno 2027; Vontobel porta 1.500 posti a Baar (12%) entro il 2030. Zurigo al 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
         },
         {
           "title": "Imposte di successione e donazione nel Cantone di Zurigo",
@@ -170,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "ZH",
@@ -261,6 +267,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "University tuition fees in the Canton of Zurich: guide and enrollment",
+          "url": "/en/swiss-articles/zurich-university-tuition-fees-guide/",
+          "excerpt": "Discover how to navigate university fees in the Canton of Zurich, from student categories to enrollment procedures and contributions.",
+          "date": "2026-10-14T04:09:09.746Z"
+        },
+        {
           "title": "Dog tax in Zurich: registration guide",
           "url": "/en/swiss-articles/dog-tax-in-zurich-registration-guide/",
           "excerpt": "In the Canton of Zurich, the dog tax follows cantonal and municipal rules.",
@@ -279,16 +291,16 @@
           "date": "2026-10-04T15:14:54.836Z"
         },
         {
-          "title": "Cembra and Vontobel leave Zurich: taxes and space drive the move",
-          "url": "/en/swiss-articles/cembra-vontobel-relocation-baden-baar/",
-          "excerpt": "Cembra moves 660 employees to Baden (15% taxes) in autumn 2027; Vontobel brings 1.500 jobs to Baar (12%) by 2030. Zurich at 20%.",
-          "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
           "title": "Zurich inheritance tax: rates and exemptions 2026",
           "url": "/en/swiss-articles/succession-donation-zurich-guide/",
           "excerpt": "Inheritance and gift taxes in the Canton of Zurich: rates for degree of kinship, total exemptions for spouse and children, mandatory declaration and deadlines to be met.",
           "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Cembra and Vontobel leave Zurich: taxes and space drive the move",
+          "url": "/en/swiss-articles/cembra-vontobel-relocation-baden-baar/",
+          "excerpt": "Cembra moves 660 employees to Baden (15% taxes) in autumn 2027; Vontobel brings 1.500 jobs to Baar (12%) by 2030. Zurich at 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
         },
         {
           "title": "Inheritance and gift taxes in the Canton of Zurich",
@@ -323,7 +335,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "ZH",
@@ -414,6 +426,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "Studiengebühren im Kanton Zürich: Leitfaden und Einschreibung",
+          "url": "/de/schweiz-artikel/universitaetsgebuehren-zuerich-leitfaden/",
+          "excerpt": "Erfahre, wie du dich bei den Studiengebühren im Kanton Zürich zurechtfindest, von den Studierendenkategorien bis zu den Einschreibungsverfahren und Beiträgen.",
+          "date": "2026-10-14T04:09:09.746Z"
+        },
+        {
           "title": "Hundesteuer in Zürich: Leitfaden zur Registrierung",
           "url": "/de/schweiz-artikel/hundesteuer-in-zurich-leitfaden-zur-registrierung/",
           "excerpt": "Im Kanton Zürich richtet sich die Hundesteuer nach kantonalen und kommunalen Vorschriften.",
@@ -432,16 +450,16 @@
           "date": "2026-10-04T15:14:54.836Z"
         },
         {
-          "title": "Cembra & Vontobel Zürich: Steuern & Räume treiben Umzug",
-          "url": "/de/schweiz-artikel/cembra-vontobel-sitz-baden-baar/",
-          "excerpt": "Cembra verlegt im Herbst 2027 660 Mitarbeitende nach Baden (15% Steuern); Vontobel verlegt bis 2030 1.500 Arbeitsplätze nach Baar (12%). Zürich bei 20%.",
-          "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
           "title": "Erbschaftssteuer Zürich: Steuersätze und Befreiungen 2026",
           "url": "/de/schweiz-artikel/erbschaft-schenkung-zuerich-leitfaden/",
           "excerpt": "Erbschafts- und Schenkungssteuern im Kanton Zürich: Sätze pro Verwandtschaftsgrad, Totalbefreiungen für Ehepartner und Kinder, Meldepflicht und einzuhaltende Fristen.",
           "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Cembra & Vontobel Zürich: Steuern & Räume treiben Umzug",
+          "url": "/de/schweiz-artikel/cembra-vontobel-sitz-baden-baar/",
+          "excerpt": "Cembra verlegt im Herbst 2027 660 Mitarbeitende nach Baden (15% Steuern); Vontobel verlegt bis 2030 1.500 Arbeitsplätze nach Baar (12%). Zürich bei 20%.",
+          "date": "2026-09-25T22:08:30.423Z"
         },
         {
           "title": "Erbschafts- und Schenkungssteuern im Kanton Zürich",
@@ -476,7 +494,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "ZH",
@@ -567,6 +585,12 @@
           "date": "2026-10-03T08:33:46.697Z"
         },
         {
+          "title": "Frais universitaires dans le canton de Zurich : guide et inscription",
+          "url": "/fr/articles-suisse/frais-universitaires-zurich-guide/",
+          "excerpt": "Découvrez comment vous y retrouver parmi les frais universitaires dans le canton de Zurich, des catégories d’étudiants aux procédures d’inscription et aux contributions.",
+          "date": "2026-10-14T04:09:09.746Z"
+        },
+        {
           "title": "Taxe sur les chiens à Zurich : guide d'enregistrement",
           "url": "/fr/articles-suisse/taxe-sur-les-chiens-a-zurich-guide-d-enregistrement/",
           "excerpt": "Dans le canton de Zurich, l'impôt sur les chiens suit les règles cantonales et communales.",
@@ -585,16 +609,16 @@
           "date": "2026-10-04T15:14:54.836Z"
         },
         {
-          "title": "Cembra et Vontobel quittent Zurich : fiscalité et locaux",
-          "url": "/fr/articles-suisse/cembra-vontobel-siege-baden-baar/",
-          "excerpt": "Cembra déplace 660 employés à Baden (15 % d'impôts) à l'automne 2027 ; Vontobel apporte 1 500 postes à Baar (12 %) d'ici 2030. Zurich à 20 %.",
-          "date": "2026-09-25T22:08:30.423Z"
-        },
-        {
           "title": "Impôt succession Zurich : taux et exonérations 2026",
           "url": "/fr/articles-suisse/succession-donation-zurich-guide/",
           "excerpt": "Droits de succession et de donation dans le canton de Zurich : taux par degré de parenté, exonérations totales pour conjoint et enfants, déclaration obligatoire et délais à respecter.",
           "date": "2026-08-25T09:33:40.022Z"
+        },
+        {
+          "title": "Cembra et Vontobel quittent Zurich : fiscalité et locaux",
+          "url": "/fr/articles-suisse/cembra-vontobel-siege-baden-baar/",
+          "excerpt": "Cembra déplace 660 employés à Baden (15 % d'impôts) à l'automne 2027 ; Vontobel apporte 1 500 postes à Baar (12 %) d'ici 2030. Zurich à 20 %.",
+          "date": "2026-09-25T22:08:30.423Z"
         },
         {
           "title": "Droits de succession et de donation dans le canton de Zurich",
@@ -629,7 +653,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

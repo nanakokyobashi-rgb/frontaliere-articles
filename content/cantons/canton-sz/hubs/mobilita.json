@@ -4,17 +4,17 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "63a55a22cd852dc9f7cb28888f187ef392a471dbc66c996dd6e96db94a0ff3f9",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "a44cbe17e4daf99a692cd2135f4bea40a61c713e266c1ad03edf9a151ebe952c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "1",
+          "value": "2",
           "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
@@ -47,6 +47,12 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen Svincolo autostradale Arth Situazione: uscita chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 21 ottobre 2026",
+              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie…",
@@ -74,7 +80,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -102,7 +108,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "SZ",
@@ -133,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "1",
+          "value": "2",
           "note": "reports as of 13 October 2026"
         },
         {
@@ -153,6 +159,12 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen Svincolo autostradale Arth Situazione: uscita chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 21 October 2026",
+              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie…",
@@ -180,7 +192,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -208,7 +220,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "SZ",
@@ -239,7 +251,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "1",
+          "value": "2",
           "note": "Meldungen vom 13. Oktober 2026"
         },
         {
@@ -259,6 +271,12 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Zürich -> Brunnen Anschluss Arth Sachlage: Ausfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 21. Oktober 2026",
+              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen…",
@@ -286,7 +304,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -314,7 +332,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -335,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "SZ",
@@ -345,7 +363,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "1",
+          "value": "2",
           "note": "signalements au 13 octobre 2026"
         },
         {
@@ -365,6 +383,12 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A4 Zurich -> Brunnen Jonction autoroutière Arth Situation: sortie fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 21 octobre 2026",
+              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies sur une…",
@@ -392,7 +416,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -420,7 +444,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -441,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "b70b1035783b2880b10ffe4815407ed5d005f193ee9d4352dbaa406681842570",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "a6290a11c14150a1543fe5fec34ae50ecac95a5edf03750901c96ba729ceb465",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Imposta trasferimenti Berna: franchigia 800k",
+          "url": "/articoli-berna/simplificazione-imposta-trasferimento-berna/",
+          "excerpt": "Il Governo propone l'uso non esclusivo e il rimborso entro 4 anni. Consultazione aperta fino al 7 gennaio 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Dichiarazione imposte svizzera: guida pratica 2026 a Berna",
           "url": "/articoli-svizzera/fisco-berna-guida-2026/",
           "excerpt": "Tre livelli fiscali, moltiplicatore comunale e competenze separate: la guida 2026 alla dichiarazione online nel canton Berna, con confronto nazionale.",
@@ -136,6 +142,12 @@
           "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-berna-aliquote/",
           "excerpt": "Conoscere le aliquote per grado di parentela e le esenzioni per coniuge e discendenti",
           "date": "2026-08-14T01:09:05.964Z"
+        },
+        {
+          "title": "Comprare casa a Berna: prezzi, mutuo e tasse",
+          "url": "/articoli-svizzera/acquistare-casa-berna-mutuo-tasse-guida/",
+          "excerpt": "Guida pratica all'acquisto immobiliare nel Canton Berna: imposta sui trapassi, spese notarili, fondi propri richiesti e sostenibilità del mutuo ipotecario.",
+          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -160,7 +172,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "BE",
@@ -245,6 +257,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bern transfer tax: 800k exemption",
+          "url": "/en/bern-articles/berns-transfer-tax-simplification/",
+          "excerpt": "The Government proposes non-exclusive use and repayment within 4 years. Consultation open until January 7, 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Swiss tax return: practical guide for 2026 in Bern",
           "url": "/en/swiss-articles/swiss-tax-guide-bern-2026/",
           "excerpt": "Three tax levels, municipal multiplier and separate jurisdictions: the 2026 guide to the online tax return in the Canton of Bern, with a national comparison.",
@@ -279,6 +297,12 @@
           "url": "/en/swiss-articles/inheritance-and-donation-tax-canton-bern-rates/",
           "excerpt": "Know the kinship rates and exemptions for spouses and descendants",
           "date": "2026-08-14T01:09:05.964Z"
+        },
+        {
+          "title": "Buying a house in Bern: prices, mortgage and taxes",
+          "url": "/en/swiss-articles/buy-house-bern-mortgage-taxes-guide/",
+          "excerpt": "Practical guide to buying real estate in the Canton of Bern: transfer tax, notary fees, own funds required and mortgage loan sustainability.",
+          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -303,7 +327,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "BE",
@@ -388,6 +412,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Handänderungssteuer Bern: Freibetrag 800k",
+          "url": "/de/bern-artikel/berner-handaenderungssteuer-vereinfachung/",
+          "excerpt": "Die Regierung schlägt eine nicht ausschließliche Nutzung und eine Rückerstattung innerhalb von 4 Jahren vor. Die Vernehmlassung ist bis zum 7. Januar 2027 offen.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Schweizer Steuererklärung: praktischer Leitfaden 2026 in Bern",
           "url": "/de/schweiz-artikel/steuererklaerung-bern-2026/",
           "excerpt": "Drei Steuerstufen, kommunaler Steuerfuss und getrennte Zuständigkeiten: der Leitfaden 2026 zur Online-Steuererklärung im Kanton Bern, mit einem nationalen Vergleich.",
@@ -422,6 +452,12 @@
           "url": "/de/schweiz-artikel/erbschafts-und-schenkungssteuer-kanton-bern-zahlungen/",
           "excerpt": "Kennen Sie die Sätze nach Verwandtschaftsgrad und die Befreiungen für Ehepartner und Nachkommen",
           "date": "2026-08-14T01:09:05.964Z"
+        },
+        {
+          "title": "Haus kaufen in Bern: Preise, Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-bern-hypothek-steuern-leitfaden/",
+          "excerpt": "Praktischer Leitfaden zum Immobilienkauf im Kanton Bern: Stempelsteuer, Notarkosten, geforderte Eigenmittel und Tragbarkeit des Hypothekardarlehens.",
+          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -446,7 +482,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -531,6 +567,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Impôt sur les transferts à Berne : franchise de 800k",
+          "url": "/fr/articles-berne/simplification-impot-transfer-berne/",
+          "excerpt": "Le Gouvernement propose l’usage non exclusif et le remboursement dans un délai de 4 ans. Consultation ouverte jusqu’au 7 janvier 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Déclaration fiscale suisse : guide pratique 2026 à Berne",
           "url": "/fr/articles-suisse/declaration-impots-berne-2026/",
           "excerpt": "Trois niveaux fiscaux, multiplicateur communal et compétences distinctes : le guide 2026 de la déclaration en ligne dans le canton de Berne, avec comparaison nationale.",
@@ -565,6 +607,12 @@
           "url": "/fr/articles-suisse/taxe-sur-la-succesions-et-la-donation-canton-de-berne/",
           "excerpt": "Connaître les taux par degré de parenté et les exemptions pour conjoint et descendants",
           "date": "2026-08-14T01:09:05.964Z"
+        },
+        {
+          "title": "Acheter une maison à Berne : prix, hypothèque et taxes",
+          "url": "/fr/articles-suisse/acheter-maison-berne-hypotheque-impots-guide/",
+          "excerpt": "Guide pratique de l'achat immobilier dans le canton de Berne : taxe de passage, frais de notaire, fonds propres requis et viabilité du prêt hypothécaire.",
+          "date": "2026-09-07T04:34:41.374Z"
         }
       ],
       "links": [
@@ -589,7 +637,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

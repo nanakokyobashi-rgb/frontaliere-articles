@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "fe0b29777a5b390d19ae6bff2c3f8c746debeb382b61f07fa0f4d5fd1e774dad",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "424564fb6a088a9f6f86e1a5e775765494e5a0d80285755d9d6cd0e8c809d9c4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "87",
+          "value": "85",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,42 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
-              "detail": "Parkplatz SeeJet, Quarten",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
-            },
-            {
-              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
-              "detail": "Rheumaliga",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
-            },
-            {
-              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
-              "detail": "Rheumaliga, St. Gallen",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
-            },
-            {
-              "label": "83a OLMA - Fiera svizzera dell'agricoltura e dell'alimentazione",
-              "detail": "Olma Areal — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Emily Lane – Singer-Songwriterin",
               "detail": "DenkBar",
@@ -91,11 +55,47 @@
               "detail": "Lukas Bar",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "83a OLMA - Fiera svizzera dell'agricoltura e dell'alimentazione",
+              "detail": "Olma Areal — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Gallusfeier 2026",
+              "detail": "Pfalzkeller, St. Gallen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+            },
+            {
+              "label": "Candy Dulfer",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "SG",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "87",
+          "value": "85",
           "note": "from the site’s events calendar"
         }
       ],
@@ -129,42 +129,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
-              "detail": "Parkplatz SeeJet, Quarten",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
-            },
-            {
-              "label": "Ausir Stress auf die Gesundheit reduzieren - k",
-              "detail": "Rheumaliga",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
-            },
-            {
-              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
-              "detail": "Rheumaliga, St. Gallen",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
-            },
-            {
-              "label": "83rd OLMA - Swiss Agriculture and Food Fair",
-              "detail": "Olma Areal — ongoing, last day: 18 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Emily Lane – Singer-Songwriter",
               "detail": "DenkBar",
@@ -188,11 +152,47 @@
               "detail": "Lukas Bar",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — ongoing, last day: 16 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "83rd OLMA - Swiss Agriculture and Food Fair",
+              "detail": "Olma Areal — ongoing, last day: 18 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Gallusfeier 2026",
+              "detail": "Pfalzkeller, St. Gallen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+            },
+            {
+              "label": "Candy Dulfer",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "SG",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "87",
+          "value": "85",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -226,42 +226,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
-              "detail": "Parkplatz SeeJet, Quarten",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
-            },
-            {
-              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren – was kann ich tun?",
-              "detail": "Rheumaliga",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
-            },
-            {
-              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
-              "detail": "Rheumaliga, St. Gallen",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
-            },
-            {
-              "label": "83. OLMA – Schweizer Messe für Landwirtschaft und Ernährung",
-              "detail": "Olma Areal — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Emily Lane – Singer-Songwriter",
               "detail": "DenkBar",
@@ -285,11 +249,47 @@
               "detail": "Lukas Bar",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "83. OLMA – Schweizer Messe für Landwirtschaft und Ernährung",
+              "detail": "Olma Areal — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Gallusfeier 2026",
+              "detail": "Pfalzkeller, St. Gallen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+            },
+            {
+              "label": "Candy Dulfer",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "SG",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "87",
+          "value": "85",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -323,42 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Jugendwoche in den Herbstferien",
-              "detail": "Stadtbibliothek Wil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
-            },
-            {
-              "label": "Gemeindeviehschau und Jahrmarkt in Oberterzen",
-              "detail": "Parkplatz SeeJet, Quarten",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gemeindeviehschau-und-jahrmarkt-in-oberterzen/"
-            },
-            {
-              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun ?",
-              "detail": "Rheumaliga",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/st-gallen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun_Ah6MMiM"
-            },
-            {
-              "label": "Auswirkungen von neg. Stress auf die Gesundheit reduzieren - was kann ich tun?",
-              "detail": "Rheumaliga, St. Gallen",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auswirkungen-von-neg-stress-auf-die-gesundheit-reduzieren-was-kann-ich-tun/"
-            },
-            {
-              "label": "83e OLMA - Foire suisse de l'agriculture et de l'alimentation",
-              "detail": "Olma Areal — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Emily Lane – Auteure-compositrice-interprète",
               "detail": "DenkBar",
@@ -382,11 +346,47 @@
               "detail": "Lukas Bar",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/maekkelae_AMyyhFC"
+            },
+            {
+              "label": "Jugendwoche in den Herbstferien",
+              "detail": "Stadtbibliothek Wil — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/wil-sg/jugendwoche-in-den-herbstferien_A3k8NWy"
+            },
+            {
+              "label": "83e OLMA - Foire suisse de l'agriculture et de l'alimentation",
+              "detail": "Olma Areal — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/83a-olma-fiera-svizzera-dellagricoltura-e-dellalimentazione/"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "Jintan-LAN 2026",
+              "detail": "Sportanlage Progy, Rebstein",
+              "date": "2026-10-15",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jintan-lan-2026/"
+            },
+            {
+              "label": "Gallusfeier 2026",
+              "detail": "Pfalzkeller, St. Gallen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gallusfeier-2026/"
+            },
+            {
+              "label": "Candy Dulfer",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-16",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rapperswil-sg/candy-dulfer_AECkSvw"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

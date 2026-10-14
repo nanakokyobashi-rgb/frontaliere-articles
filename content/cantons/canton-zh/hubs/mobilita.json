@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "1f6a5dbdf3ea311b70cf332677d619d3b023e06d9504b953e9ba08b9a363b63c",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "a9dde5323fd9fd6eb3abbcdac32a8e3b52b686943cc775d82ec17935bdbcb111",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "10",
+          "value": "9",
           "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -178,7 +178,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -231,7 +231,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "ZH",
@@ -246,7 +246,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "10",
+          "value": "9",
           "note": "reports as of 13 October 2026"
         },
         {
@@ -369,7 +369,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -387,7 +387,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -440,7 +440,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "ZH",
@@ -455,7 +455,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "10",
+          "value": "9",
           "note": "Meldungen vom 13. Oktober 2026"
         },
         {
@@ -578,7 +578,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -596,7 +596,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "ZH",
@@ -664,7 +664,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "10",
+          "value": "9",
           "note": "signalements au 13 octobre 2026"
         },
         {
@@ -787,7 +787,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -805,7 +805,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -858,7 +858,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

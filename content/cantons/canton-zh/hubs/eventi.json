@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "668a8fe06d2868acdfe2350f61c67acf0561aa69cc7b5f1be6fd18a9ddc25923",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "f64fb985e5b64ea2f6233b3fcabce5f5341d46b816b658deb876e174ddd0b4da",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "310",
+          "value": "322",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,72 +33,84 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+              "label": "Mittagstisch/Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
             },
             {
-              "label": "Hommage à Géza Anda",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+              "label": "Familienführung Opernhaus",
+              "detail": "Opernhaus Zürich, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
             },
             {
-              "label": "Ivo Martin",
-              "detail": "Komplex457",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
+              "detail": "Sportzentrum Schachen, Bonstetten",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
             },
             {
-              "label": "DanyMar",
-              "detail": "Aelpli Bar",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+              "label": "Hammershøi – Klang und Raum",
+              "detail": "Moser-Bau, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
             },
             {
-              "label": "Judith Hill",
-              "detail": "Kaufleuten",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+              "label": "«zäme stah»",
+              "detail": "Amthaus",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
             },
             {
-              "label": "Jazz Jam",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
+              "detail": "THE HALL, Dübendorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+            },
+            {
+              "label": "ZSC Lions Frauen / Zug",
+              "detail": "Swiss Life Arena, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+            },
+            {
+              "label": "JazzBaragge Wednesday Jam",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
             },
             {
               "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
               "detail": "Dietikon — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
             },
             {
               "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
               "detail": "Zurich, Zürich — in corso, ultimo giorno: 15 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
-            },
-            {
-              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
-            },
-            {
-              "label": "Viaggio in Giappone: I sapori dell'autunno",
-              "detail": "Zurigo, Zürich — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Giorni festivi Cantone Zurigo: guida a calendario e regole",
+          "url": "/articoli-svizzera/giorni-festivi-canton-zurigo-guida/",
+          "excerpt": "Come distinguere le festività cantonali da quelle federali.",
+          "date": "2026-10-12T00:26:51.075Z"
+        },
+        {
+          "title": "Elezioni cantonali a Zurigo: guida a calendario e voto",
+          "url": "/articoli-svizzera/elezioni-cantonali-zurigo-vademecum/",
+          "excerpt": "Guida pratica alle elezioni cantonali nel Cantone di Zurigo: cosa controllare su calendario, modalità di voto, liste e informazioni ufficiali.",
+          "date": "2026-10-05T01:17:29.052Z"
+        },
         {
           "title": "Festival Zurigo: alla Svizzera luna wedler il golden eye award",
           "url": "/articoli-svizzera/luna-wedler-golden-eye-award-zurigo/",
@@ -116,7 +128,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "ZH",
@@ -126,7 +138,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "310",
+          "value": "322",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,72 +149,84 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+              "label": "Mittagstisch/Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
             },
             {
-              "label": "Hommage à Géza Anda",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+              "label": "Family Tour of the Opera House",
+              "detail": "Opernhaus Zürich, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
             },
             {
-              "label": "Ivo Martin",
-              "detail": "Komplex457",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
+              "detail": "Sportzentrum Schachen, Bonstetten",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
             },
             {
-              "label": "DanyMar",
-              "detail": "Aelpli Bar",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+              "label": "Hammershøi – Klang und Raum",
+              "detail": "Moser-Bau, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
             },
             {
-              "label": "Judith Hill",
-              "detail": "Kaufleuten",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+              "label": "\"zäme stah\"",
+              "detail": "Amthaus",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
             },
             {
-              "label": "Jazz Jam",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
+              "detail": "THE HALL, Dübendorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+            },
+            {
+              "label": "ZSC Lions Frauen / Zug",
+              "detail": "Swiss Life Arena, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+            },
+            {
+              "label": "JazzBaragge Wednesday Jam",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
             },
             {
               "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
               "detail": "Dietikon — ongoing, last day: 15 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
             },
             {
               "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
               "detail": "Zurich, Zürich — ongoing, last day: 15 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
-            },
-            {
-              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich — ongoing, last day: 1 November 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
-            },
-            {
-              "label": "Japanese Journey: A Taste of Autumn",
-              "detail": "Zurigo, Zürich — ongoing, last day: 17 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Public holidays in the Canton of Zurich: guide to the calendar and rules",
+          "url": "/en/swiss-articles/public-holidays-zurich-canton-guide/",
+          "excerpt": "How to distinguish cantonal holidays from federal ones.",
+          "date": "2026-10-12T00:26:51.075Z"
+        },
+        {
+          "title": "Cantonal elections in Zurich: a guide to the calendar and voting",
+          "url": "/en/swiss-articles/zurich-cantonal-elections-voting-guide/",
+          "excerpt": "Practical guide to the cantonal elections in the Canton of Zurich: what to check regarding the election schedule, voting methods, lists, and official information.",
+          "date": "2026-10-05T01:17:29.052Z"
+        },
         {
           "title": "Festival Zurich: the golden eye award goes to Luna Wedler in Switzerland",
           "url": "/en/swiss-articles/luna-wedler-golden-eye-award-zurich/",
@@ -220,7 +244,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "ZH",
@@ -230,7 +254,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "310",
+          "value": "322",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -241,72 +265,84 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+              "label": "Mittagstisch/Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
             },
             {
-              "label": "Hommage à Géza Anda",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+              "label": "Familienführung durch das Opernhaus",
+              "detail": "Opernhaus Zürich, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
             },
             {
-              "label": "Ivo Martin",
-              "detail": "Komplex457",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
+              "detail": "Sportzentrum Schachen, Bonstetten",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
             },
             {
-              "label": "DanyMar",
-              "detail": "Aelpli Bar",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+              "label": "Hammershøi – Klang und Raum",
+              "detail": "Moser-Bau, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
             },
             {
-              "label": "Judith Hill",
-              "detail": "Kaufleuten",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+              "label": "\"zäme stah\"",
+              "detail": "Amthaus",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
             },
             {
-              "label": "Jazz Jam",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
+              "detail": "THE HALL, Dübendorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+            },
+            {
+              "label": "ZSC Lions Frauen / Zug",
+              "detail": "Swiss Life Arena, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+            },
+            {
+              "label": "JazzBaragge Wednesday Jam",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
             },
             {
               "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
               "detail": "Dietikon — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
             },
             {
               "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
               "detail": "Zurich, Zürich — läuft, letzter Tag: 15. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
-            },
-            {
-              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
-            },
-            {
-              "label": "Japanese Journey: Taste of Autumn",
-              "detail": "Zurigo, Zürich — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Feiertage im Kanton Zürich: Leitfaden zu Kalender und Regeln",
+          "url": "/de/schweiz-artikel/feiertage-kanton-zuerich-leitfaden/",
+          "excerpt": "Wie man kantonale Feiertage von eidgenössischen unterscheidet.",
+          "date": "2026-10-12T00:26:51.075Z"
+        },
+        {
+          "title": "Kantonswahlen in Zürich: Kalender- und Abstimmungsleitfaden",
+          "url": "/de/schweiz-artikel/zuerich-kantonswahlen-wahlleitfaden/",
+          "excerpt": "Praktischer Leitfaden zu den Kantonswahlen im Kanton Zürich: Was ist in Kalender, Abstimmungsmodalitäten, Listen und amtlichen Informationen zu beachten?",
+          "date": "2026-10-05T01:17:29.052Z"
+        },
         {
           "title": "Festival Zürich: An die Schweiz Luna Wedler den Golden Eye Award",
           "url": "/de/schweiz-artikel/luna-wedler-golden-eye-award-zuerich/",
@@ -324,7 +360,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "ZH",
@@ -334,7 +370,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "310",
+          "value": "322",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -345,72 +381,84 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-28/"
+              "label": "Mittagstisch/Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittagstischorganisiert-vom-frauenverein-7/"
             },
             {
-              "label": "Hommage à Géza Anda",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/hommage-a-geza-anda/"
+              "label": "Visite guidée en famille de l'Opéra",
+              "detail": "Opernhaus Zürich, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/familienfuehrung-opernhaus_AGyxWYB"
             },
             {
-              "label": "Ivo Martin",
-              "detail": "Komplex457",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ivo-martin_AUkuQUD"
+              "label": "Derniere-Circolino Pipistrello spielt \"Der Kroko-Deal\"",
+              "detail": "Sportzentrum Schachen, Bonstetten",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/derniere-circolino-pipistrello-spielt-der-kroko-deal/"
             },
             {
-              "label": "DanyMar",
-              "detail": "Aelpli Bar",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/danymar_AhjdWsy"
+              "label": "Hammershøi – Klang und Raum",
+              "detail": "Moser-Bau, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/hammershoi-klang-und-raum/"
             },
             {
-              "label": "Judith Hill",
-              "detail": "Kaufleuten",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/judith-hill_AEThauN"
+              "label": "« Zäme stah »",
+              "detail": "Amthaus",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rueti-zh/zaeme-stah_AX5mbZP"
             },
             {
-              "label": "Jazz Jam",
-              "detail": "Musikklub Mehrspur",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/zuerich/jazz-jam_AKySDmy"
+              "label": "Myles Smith - My Mess, My Heart, My Life. Tour",
+              "detail": "THE HALL, Dübendorf",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/myles-smith-my-mess-my-heart-my-life-tour/"
+            },
+            {
+              "label": "ZSC Lions Frauen / Zug",
+              "detail": "Swiss Life Arena, Zürich",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/zsc-lions-frauen-zug/"
+            },
+            {
+              "label": "JazzBaragge Wednesday Jam",
+              "detail": "Moods im Schiffbau",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jazzbaragge-wednesday-jam_AcidTJb"
             },
             {
               "label": "Herbstabenteuer im Chrüzi (Kursnr. 2.4e)",
               "detail": "Dietikon — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstabenteuer-im-chruezi-kursnr-24e/"
             },
             {
               "label": "Workshop-Woche in den Herbstferien «COOL-TUR»",
               "detail": "Zurich, Zürich — en cours, dernier jour : 15 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshop-woche-in-den-herbstferien-cool-tur/"
-            },
-            {
-              "label": "Bauschänzli Oktoberfest - Bayrischer Brunch",
-              "detail": "Bauschänzli Biergarten & Grill, Zürich — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/bauschaenzli-oktoberfest-bayrischer-brunch/"
-            },
-            {
-              "label": "Voyage au Japon : Saveurs d'automne",
-              "detail": "Zurigo, Zürich — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanese-journey-taste-of-autumn/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Jours fériés du canton de Zurich : guide du calendrier et des règles",
+          "url": "/fr/articles-suisse/jours-feries-canton-zurich-guide/",
+          "excerpt": "Comment distinguer les jours fériés cantonaux des jours fériés fédéraux.",
+          "date": "2026-10-12T00:26:51.075Z"
+        },
+        {
+          "title": "Élections cantonales à Zurich : guide du calendrier et du vote",
+          "url": "/fr/articles-suisse/elections-cantonales-zurich-guide-vote/",
+          "excerpt": "Guide pratique des élections cantonales dans le canton de Zurich : ce qu'il faut vérifier concernant le calendrier, les modalités de vote, les listes et les informations officielles.",
+          "date": "2026-10-05T01:17:29.052Z"
+        },
         {
           "title": "Festival Zurich : à la Suisse luna wedler le golden eye award",
           "url": "/fr/articles-suisse/luna-wedler-golden-eye-award-zurich/",
@@ -428,7 +476,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

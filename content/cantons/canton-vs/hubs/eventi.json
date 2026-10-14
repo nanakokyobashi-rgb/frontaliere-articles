@@ -4,12 +4,12 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "90d5c5afd2eec20a6b6990439b8c1277951eae36ffdf10a1e80380b454b89381",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "643e83f63b57066186e3c4c32927fc366e43d90a90990c449e6948670f1eb4d2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "66",
+          "value": "65",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "èsprik",
+              "label": "Come and make your own 'tomme' cheese !",
+              "detail": "Ferme la Vernettaz, Veysonnaz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "St Gallus Market",
+              "detail": "Zentrum Brig",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/st-gallusmarkt/"
+            },
+            {
+              "label": "Contes du mercredi",
               "detail": "Saint-Maurice",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esprik/"
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-du-mercredi-2/"
             },
             {
               "label": "Alpaca Walk",
               "detail": "auf Anfrage, Bellwald — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
-            },
-            {
-              "label": "Familienerlebnis: Mineralien und Gesteine",
-              "detail": "Binn — in corso, ultimo giorno: 13 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/familienerlebnis-mineralien-und-gesteine-1/"
             },
             {
               "label": "East-West Encounters",
               "detail": "Maison de la Bourgeoisie, Sierre — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Geek – Mostra sulle console di gioco",
               "detail": "Galerie St. Laurent, Leukerbad — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Parental Leave, with a Twist",
               "detail": "Gasthaus Heiligkreuz, Binn — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
             },
             {
               "label": "Oeno events",
               "detail": "Vercorin, Chalais — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Acrobates",
               "detail": "Espace Culturel El Encuentro, Sion — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
             },
             {
               "label": "Mostra di Mathieu Bonvin",
               "detail": "Sierre — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Vinyard hikes in autumn",
-              "detail": "Inden — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vallese/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "VS",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "66",
+          "value": "65",
           "note": "from the site’s events calendar"
         }
       ],
@@ -130,69 +130,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "èsprik",
+              "label": "Come and make your own 'tomme' cheese !",
+              "detail": "Ferme la Vernettaz, Veysonnaz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "St Gallus Market",
+              "detail": "Zentrum Brig",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/st-gallusmarkt/"
+            },
+            {
+              "label": "Contes du mercredi",
               "detail": "Saint-Maurice",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esprik/"
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-du-mercredi-2/"
             },
             {
               "label": "Alpaca Walk",
               "detail": "auf Anfrage, Bellwald — ongoing, last day: 21 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
-            },
-            {
-              "label": "Familienerlebnis: Mineralien und Gesteine",
-              "detail": "Binn — ongoing, last day: 13 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/familienerlebnis-mineralien-und-gesteine-1/"
             },
             {
               "label": "East-West Encounters",
               "detail": "Maison de la Bourgeoisie, Sierre — ongoing, last day: 23 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Geek—Video Game Consoles Exhibition",
               "detail": "Galerie St. Laurent, Leukerbad — ongoing, last day: 31 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Parental Leave, with a Twist",
               "detail": "Gasthaus Heiligkreuz, Binn — ongoing, last day: 21 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
             },
             {
               "label": "Oeno events",
               "detail": "Vercorin, Chalais — ongoing, last day: 30 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Acrobates",
               "detail": "Espace Culturel El Encuentro, Sion — ongoing, last day: 31 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
             },
             {
               "label": "Exhibition by Mathieu Bonvin",
               "detail": "Sierre — ongoing, last day: 29 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Vinyard hikes in autumn",
-              "detail": "Inden — ongoing, last day: 29 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/valais/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "VS",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "66",
+          "value": "65",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -227,69 +227,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "èsprik",
+              "label": "Käse selber machen – so geht’s!",
+              "detail": "Ferme la Vernettaz, Veysonnaz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "St. Gallusmarkt",
+              "detail": "Zentrum Brig",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/st-gallusmarkt/"
+            },
+            {
+              "label": "Contes du mercredi",
               "detail": "Saint-Maurice",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esprik/"
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-du-mercredi-2/"
             },
             {
               "label": "Alpaka Spaziergang",
               "detail": "auf Anfrage, Bellwald — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
-            },
-            {
-              "label": "Familienerlebnis: Mineralien und Gesteine",
-              "detail": "Binn — läuft, letzter Tag: 13. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/familienerlebnis-mineralien-und-gesteine-1/"
             },
             {
               "label": "Begegnungen zwischen Orient und Okzident",
               "detail": "Maison de la Bourgeoisie, Sierre — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Geek – Spielkonsolen Ausstellung",
               "detail": "Galerie St. Laurent, Leukerbad — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Elternzeit mal anders",
               "detail": "Gasthaus Heiligkreuz, Binn — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
             },
             {
               "label": "Veranstaltungen von Oeno",
               "detail": "Vercorin, Chalais — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Akrobaten",
               "detail": "Espace Culturel El Encuentro, Sion — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
             },
             {
               "label": "Ausstellung von Mathieu Bonvin",
               "detail": "Sierre — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Rebwanderungen im Herbst",
-              "detail": "Inden — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/wallis/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "VS",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "66",
+          "value": "65",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -324,69 +324,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "èsprik",
+              "label": "Fais ta tomme !",
+              "detail": "Ferme la Vernettaz, Veysonnaz",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/come-and-make-your-own-tomme-cheese/"
+            },
+            {
+              "label": "Marché de Saint-Gall",
+              "detail": "Zentrum Brig",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/st-gallusmarkt/"
+            },
+            {
+              "label": "Contes du mercredi",
               "detail": "Saint-Maurice",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/esprik/"
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-du-mercredi-2/"
             },
             {
               "label": "Promenade avec des alpagas",
               "detail": "auf Anfrage, Bellwald — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/alpaka-spaziergang/"
-            },
-            {
-              "label": "Découverte en famille: Minéraux et Roches",
-              "detail": "Binn — en cours, dernier jour : 13 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/familienerlebnis-mineralien-und-gesteine-1/"
             },
             {
               "label": "Rencontres Orient Occident",
               "detail": "Maison de la Bourgeoisie, Sierre — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/rencontres-orient-occident/"
             },
             {
               "label": "Exposition « Geek – Consoles de jeux »",
               "detail": "Galerie St. Laurent, Leukerbad — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
             },
             {
               "label": "Un congé parental pas comme les autres",
               "detail": "Gasthaus Heiligkreuz, Binn — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/elternzeit-mal-anders/"
             },
             {
               "label": "Événements à l'Oeno",
               "detail": "Vercorin, Chalais — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
             },
             {
               "label": "Clowns & Acrobates",
               "detail": "Espace Culturel El Encuentro, Sion — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
             },
             {
               "label": "Exposition de Mathieu Bonvin",
               "detail": "Sierre — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
-            },
-            {
-              "label": "Randonnés en automne",
-              "detail": "Inden — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/valais/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

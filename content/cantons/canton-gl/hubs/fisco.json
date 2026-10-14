@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "22b8bf3b129afc7f41f9e7aee4eabdc51c4a4e37949ff461aa6e4b90026b3503",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "08f358fc25b91c8a823b3d5fda5f8e4902c20fef9a75b1f16af3470363545bda",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -135,7 +135,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -162,6 +162,24 @@
           "url": "/articoli-frontaliere/landsgemeinde-glarona-2026-finanze-alloggi/",
           "excerpt": "La Landsgemeinde del canton Glarona ha votato su temi finanziari e abitativi. Aliquota fiscale confermata al 58%, nuove detrazioni per pendolari e sussidi per cassa malati.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "LAMal Glarona: franchigie, sussidio e scelta modello",
+          "url": "/articoli-svizzera/assicurazione-salute-glarona-sussidio/",
+          "excerpt": "In Glarona l’assicurazione LAMal è obbligatoria entro 3 mesi, con franchigie da 300 a 2 500 CHF e possibili riduzioni cantonali basate su reddito e composizione familiare.",
+          "date": "2026-09-16T10:26:48.561Z"
+        },
+        {
+          "title": "Comprare casa in Glarona: mutuo e imposte",
+          "url": "/articoli-svizzera/comprare-casa-glarona-mutuo/",
+          "excerpt": "Guida all'acquisto immobiliare in Glarona: fondi propri, mutuo ipotecario, imposte federali e cantonali, imposta sui trapassi e spese notarili.",
+          "date": "2026-08-23T13:55:09.396Z"
+        },
+        {
+          "title": "Premi cassa malati Canton Glarona: fasce, franchigie e riduzione",
+          "url": "/articoli-svizzera/premi-lamal-glarona-modelli-franchigie/",
+          "excerpt": "Nel Cantone di Glarona i premi LAMal variano per fascia di premio e franchigia; è possibile ottenere la riduzione cantonale entro tre mesi dall’iscrizione.",
+          "date": "2026-09-16T11:54:46.142Z"
         }
       ],
       "links": [
@@ -186,7 +204,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "GL",
@@ -299,7 +317,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -326,6 +344,24 @@
           "url": "/en/cross-border-articles/glarus-landsgemeinde-2026-finances-housing/",
           "excerpt": "The Glarus Landsgemeinde voted on financial and housing issues. Tax rate confirmed at 58%, new deductions for commuters and health insurance subsidies.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "LAMal Glarus: deductibles, subsidy and model choice",
+          "url": "/en/swiss-articles/health-insurance-glarus-subsidy/",
+          "excerpt": "In Glarus, LAMal insurance is mandatory within 3 months, with deductibles from CHF 300 to CHF 2,500 and possible cantonal reductions based on income and family composition.",
+          "date": "2026-09-16T10:26:48.561Z"
+        },
+        {
+          "title": "Buying a house in Glarus: mortgage and taxes",
+          "url": "/en/swiss-articles/buy-house-glarus-mortgage/",
+          "excerpt": "Guide to buying real estate in Glarus: own funds, mortgage, federal and cantonal taxes, transfer tax and notary fees.",
+          "date": "2026-08-23T13:55:09.396Z"
+        },
+        {
+          "title": "Health insurance premiums Canton Glarus: bands, deductibles and reduction",
+          "url": "/en/swiss-articles/lamal-premiums-glarus-models-deductibles/",
+          "excerpt": "In the Canton of Glarus, LAMal premiums vary by premium range and deductible; it is possible to obtain the cantonal reduction within three months of registration.",
+          "date": "2026-09-16T11:54:46.142Z"
         }
       ],
       "links": [
@@ -350,7 +386,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "GL",
@@ -463,7 +499,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -490,6 +526,24 @@
           "url": "/de/grenzgaenger-artikel/landsgemeinde-glarus-2026-finanzen-wohnung/",
           "excerpt": "Die Landsgemeinde des Kantons Glarus hat über finanzielle und wohnungsbezogene Themen abgestimmt. Der Steuersatz bleibt bei 58%, es gibt neue Abzüge für Pendler und Subventionen für die Krankenkasse.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "KVG Glarus: Selbstbehalte, Beitrag und Modellwahl",
+          "url": "/de/schweiz-artikel/krankenversicherung-glarus-zuschuss/",
+          "excerpt": "In Glarus ist die KVG-Versicherung innerhalb von 3 Monaten obligatorisch, mit Franchisen von 300 bis 2 500 CHF und möglichen kantonalen Ermäßigungen aufgrund von Einkommen und Familienzusammensetzung.",
+          "date": "2026-09-16T10:26:48.561Z"
+        },
+        {
+          "title": "Haus kaufen in Glarus: Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-glarus-hypothek/",
+          "excerpt": "Leitfaden zum Immobilienkauf in Glarus: Eigenmittel, Hypothekendarlehen, eidgenössische und kantonale Steuern, Abgeltungssteuer und Notargebühren.",
+          "date": "2026-08-23T13:55:09.396Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Glarus: Zeitabschnitte, Selbstbehalte und Kürzungen",
+          "url": "/de/schweiz-artikel/lamal-beitraege-glarus-modelle-selbstbehalte/",
+          "excerpt": "Im Kanton Glarus variieren die KVG-Prämien je nach Prämienspanne und Franchise; die kantonale Reduktion ist innerhalb von drei Monaten nach der Anmeldung möglich.",
+          "date": "2026-09-16T11:54:46.142Z"
         }
       ],
       "links": [
@@ -514,7 +568,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "GL",
@@ -627,7 +681,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -654,6 +708,24 @@
           "url": "/fr/articles-frontalier/landsgemeinde-glaris-2026-finances-logement/",
           "excerpt": "La Landsgemeinde du canton de Glaris a voté sur des thèmes financiers et immobiliers. Taux d'imposition confirmé à 58 %, nouvelles déductions pour les frontaliers et subventions pour l'assurance maladie.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "LAMal Glaris : franchises, subvention et choix modèle",
+          "url": "/fr/articles-suisse/assurance-sante-glaris-subvention/",
+          "excerpt": "À Glaris, l’assurance LAMal est obligatoire dans les 3 mois, avec des franchises de 300 à 2 500 CHF et d'éventuelles réductions cantonales basées sur le revenu et la composition familiale.",
+          "date": "2026-09-16T10:26:48.561Z"
+        },
+        {
+          "title": "Acheter une maison à Glaris : hypothèque et impôts",
+          "url": "/fr/articles-suisse/acheter-maison-glaris-hypotheque/",
+          "excerpt": "Guide d'achat immobilier à Glaris : fonds propres, hypothèque, impôts fédéraux et cantonaux, taxe de passage et frais de notaire.",
+          "date": "2026-08-23T13:55:09.396Z"
+        },
+        {
+          "title": "Primes caisse-maladie Canton de Glaris : fourchettes, franchises et réduction",
+          "url": "/fr/articles-suisse/cotisations-lamal-glaris-modeles-franchises/",
+          "excerpt": "Dans le canton de Glaris, les primes LAMal varient selon la fourchette de primes et de franchises ; la réduction cantonale peut être obtenue dans les trois mois suivant l'inscription.",
+          "date": "2026-09-16T11:54:46.142Z"
         }
       ],
       "links": [
@@ -678,7 +750,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "dbf3bb66bdeaa0548f16297faacb47ac7aee533ce1691014f52817f7bd14a68b",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "21ef55c33c92c291756a3758fc7f49269f83b493710eb666ad1b3a3c67c12267",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -112,6 +112,12 @@
           "url": "/articoli-svizzera/imposta-successione-donazione-sciaffusa/",
           "excerpt": "Scopri aliquote, esenzioni per coniuge e discendenti, procedure e termini per l'imposta di successione nel canton Sciaffusa. Guida completa per eredi.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Comprare casa Sciaffusa: prezzi, mutuo e imposte",
+          "url": "/articoli-svizzera/comprare-casa-sciaffusa-mutuo/",
+          "excerpt": "Guida operativa all'acquisto immobiliare nel canton Sciaffusa: fondi propri richiesti, sostenibilità del mutuo, imposta sui trapassi cantonale, spese notarili e procedura step-by-step.",
+          "date": "2026-08-20T18:36:03.975Z"
         }
       ],
       "links": [
@@ -140,7 +146,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "SH",
@@ -235,6 +241,12 @@
           "url": "/en/swiss-articles/shaffhausen-inheritance-donation-tax-rates/",
           "excerpt": "Discover rates, exemptions for spouses and descendants, procedures and terms for inheritance tax in the canton of Schaffhausen. Complete guide for heirs.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Buying a Schaffhausen Home: Prices, Mortgage and Taxes",
+          "url": "/en/swiss-articles/buy-home-schaffhausen-mortgage/",
+          "excerpt": "Operational guide for the purchase of real estate in the canton of Schaffhausen: own funds required, sustainability of the mortgage, cantonal transfer tax, notary fees and step-by-step procedure.",
+          "date": "2026-08-20T18:36:03.975Z"
         }
       ],
       "links": [
@@ -263,7 +275,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "SH",
@@ -358,6 +370,12 @@
           "url": "/de/schweiz-artikel/schaffhausen-erbschaft-schenkungsteuer-saetze/",
           "excerpt": "Entdecken Sie Steuersätze, Befreiungen für Ehepartner und Nachkommen, Verfahren und Fristen für die Erbschaftssteuer im Kanton Schaffhausen. Komplette Anleitung für Erben.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Haus kaufen Schaffhausen: Preise, Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-schaffhausen-hypothek/",
+          "excerpt": "Operativer Leitfaden zum Immobilienkauf im Kanton Schaffhausen: erforderliche Eigenmittel, Tragbarkeit des Darlehens, kantonale Stempelsteuer, Notarkosten und Schritt-für-Schritt-Verfahren.",
+          "date": "2026-08-20T18:36:03.975Z"
         }
       ],
       "links": [
@@ -386,7 +404,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "SH",
@@ -481,6 +499,12 @@
           "url": "/fr/articles-suisse/schaffhouse-impot-succession-donation-taux/",
           "excerpt": "Découvrez les taux, les exonérations pour conjoint et descendants, les procédures et les délais pour l'impôt sur les successions dans le canton de Schaffhouse. Guide complet pour les héritiers.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Acheter maison Schaffhouse : prix, hypothèque et taxes",
+          "url": "/fr/articles-suisse/acheter-maison-schaffhouse-hypotheque/",
+          "excerpt": "Guide opérationnel pour l'achat immobilier dans le canton de Schaffhouse : fonds propres requis, viabilité du prêt, taxe sur les passages cantonaux, frais de notaire et procédure étape par étape.",
+          "date": "2026-08-20T18:36:03.975Z"
         }
       ],
       "links": [
@@ -509,7 +533,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

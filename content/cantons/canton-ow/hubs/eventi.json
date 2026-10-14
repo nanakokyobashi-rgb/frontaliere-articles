@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "70bfbdc6413d5f4ddd7dd07b378fccc4a8a6d134235d9f3923216dda35d8ba91",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "c0adb5781ca052ab0b075fb4ade83eef58726b1c58932cd068d5a63b3af32755",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "36",
+          "value": "33",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "FG Sarnen: Armband mit Heilsteinen",
-              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/88742"
-            },
-            {
-              "label": "Monatsübung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/87512"
-            },
-            {
-              "label": "NEW BALKAN FOLK",
-              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/91726"
-            },
             {
               "label": "Lotto",
               "detail": "Felsenheim, Sachseln, Sachseln",
@@ -91,11 +73,29 @@
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
               "date": "2026-10-16",
               "url": "https://www.ow.ch/_rte/anlass/94054"
+            },
+            {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
+              "label": "Cattle show Engelberg & Grafenort 2026",
+              "detail": "Festi, Engelberg",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
+            },
+            {
+              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
+              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/88739"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "OW",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "36",
+          "value": "33",
           "note": "from the site’s events calendar"
         }
       ],
@@ -129,24 +129,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "FG Sarnen: Armband mit Heilsteinen",
-              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/88742"
-            },
-            {
-              "label": "Monatsübung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/87512"
-            },
-            {
-              "label": "NEW BALKAN FOLK",
-              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/91726"
-            },
             {
               "label": "Lotto",
               "detail": "Felsenheim, Sachseln, Sachseln",
@@ -188,11 +170,29 @@
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
               "date": "2026-10-16",
               "url": "https://www.ow.ch/_rte/anlass/94054"
+            },
+            {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
+              "label": "Cattle show Engelberg & Grafenort 2026",
+              "detail": "Festi, Engelberg",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
+            },
+            {
+              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
+              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/88739"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "OW",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "36",
+          "value": "33",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -226,24 +226,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "FG Sarnen: Armband mit Heilsteinen",
-              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/88742"
-            },
-            {
-              "label": "Monatsübung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/87512"
-            },
-            {
-              "label": "NEW BALKAN FOLK",
-              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/91726"
-            },
             {
               "label": "Lotto",
               "detail": "Felsenheim, Sachseln, Sachseln",
@@ -285,11 +267,29 @@
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
               "date": "2026-10-16",
               "url": "https://www.ow.ch/_rte/anlass/94054"
+            },
+            {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
+              "label": "Viehschau Engelberg & Grafenort 2026",
+              "detail": "Festi, Engelberg",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
+            },
+            {
+              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
+              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/88739"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "OW",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "36",
+          "value": "33",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -323,24 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "FG Sarnen: Armband mit Heilsteinen",
-              "detail": "Pfarreizentrum/Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/88742"
-            },
-            {
-              "label": "Monatsübung",
-              "detail": "MZG, Giswil, Giswil",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/87512"
-            },
-            {
-              "label": "NEW BALKAN FOLK",
-              "detail": "Restaurant Hotel Peterhof, Sarnen, Sarnen",
-              "date": "2026-10-13",
-              "url": "https://www.ow.ch/_rte/anlass/91726"
-            },
             {
               "label": "Lotto",
               "detail": "Felsenheim, Sachseln, Sachseln",
@@ -382,11 +364,29 @@
               "detail": "Sternoase - Strahlen - Funkeln - Leuchten, Sarnen, Sarnen",
               "date": "2026-10-16",
               "url": "https://www.ow.ch/_rte/anlass/94054"
+            },
+            {
+              "label": "Wildwochenende im Kurhaus",
+              "detail": "Hotel Kurhaus am Sarnersee, Sarnen",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wildwochenende-im-kurhaus/"
+            },
+            {
+              "label": "Cattle show Engelberg & Grafenort 2026",
+              "detail": "Festi, Engelberg",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/cattle-show-engelberg-grafenort-2026/"
+            },
+            {
+              "label": "FG Sarnen/Familientreff: geWALDiger Spiel- und Begegnungsplatz",
+              "detail": "Feuerstelle Zubersrüti Chärwald, Kerns, Kerns",
+              "date": "2026-10-17",
+              "url": "https://www.ow.ch/_rte/anlass/88739"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }
