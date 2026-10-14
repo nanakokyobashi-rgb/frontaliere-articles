@@ -8243,6 +8243,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.title': 'Hunting license in the canton of Bern: requirements and application',
     'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.',
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landscape of the Canton of Bern in Switzerland',
+    'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pension funds: illiquid investments account for 36% of assets',
+    'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% of the assets are in investments that are not immediately tradable The share has grown over the past 15 years Real estate, mortgages and alternative investments offer stability',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pension fund office in Zurich with analysts reviewing illiquid portfolios',
 };
 
 export default blogMetaChEn;

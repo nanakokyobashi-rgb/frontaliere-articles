@@ -13153,7 +13153,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arresti-truffa-chiamate-ticino.title': 'Truffa chiamate shock: tre arresti in Canton Ticino',
     'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'Smantellata in Canton Ticino una rete di truffatori specializzati nelle cosiddette chiamate shock: tre persone sono state arrestate.',
     'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'Vista di Lugano con smartphone in primo piano',
-    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri',
+    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
     'blog.article.bollettino-frontaliere-2026-10-14.excerpt': 'I numeri di oggi, 14 ottobre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
     'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'I numeri del giorno per i frontalieri – 14 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
@@ -13164,6 +13164,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto ceresio: ex dogana rinasce ufficio turistico',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'L\'ex Regia Dogana di Porto Ceresio, ora Ufficio Turistico, con il lago e le montagne sullo sfondo.',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Oltre 75.293 infortuni in Lombardia tra gennaio e agosto 2026 I decessi totali salgono a 101, contro 97 nel 2025 Como registra 3.795 denunce e un aumento',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Immagine editoriale relativa a: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    'blog.article.arresti-auto-como-minacce.title': 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    'blog.article.arresti-auto-como-minacce.excerpt': 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    'blog.article.arresti-auto-como-minacce.imageAlt': 'Strada urbana vicino al confine con auto parcheggiate e autosilo all\'alba',
 };
 
 export default blogMetaIt;

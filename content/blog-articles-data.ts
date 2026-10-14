@@ -44378,6 +44378,26 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como',
+ category: 'novita',
+ date: '2026-10-14T11:18:47.152Z',
+ image: '/images/blog/article-infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'arresti-auto-como-minacce',
+ category: 'novita',
+ date: '2026-10-14T12:24:36.166Z',
+ image: '/images/blog/article-como-pass-auto-rinnovo-annuale.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

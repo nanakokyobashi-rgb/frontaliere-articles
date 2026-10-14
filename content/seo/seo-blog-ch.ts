@@ -104042,6 +104042,40 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-investimenti-illiquidi-pensione-2026': {
+    title: 'Casse pensioni: investimenti illiquidi al 36% del patrimonio',
+    description: 'Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, pensioni, investimenti, illiquidi',
+    ogTitle: 'Casse pensioni: investimenti illiquidi al 36% del patrimonio',
+    ogDescription: 'Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità',
+    canonicalPath: '/articoli-svizzera/investimenti-illiquidi-pensione-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse pensioni: investimenti illiquidi al 36% del patrimonio",
+      "description": "Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/accordo-investimenti-saudi-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi"
+      },
+      "datePublished": "2026-10-14T11:35:59+00:00",
+      "dateModified": "2026-10-14T11:35:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/investimenti-illiquidi-pensione-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
