@@ -408,10 +408,10 @@ export function dailyBucketQueueDecision(issue) {
 }
 
 /**
- * Return the open PR that claims a daily-bucket item, if any. A PR explicitly
- * marked for another item does not hold this one back. A legacy PR with no item
- * marker that cites this bucket, or whose head branch is `fix/issue-N` for this
- * bucket, remains an ambiguous, fail-closed mutex.
+ * Return the open PR that claims a daily-bucket item, if any. The deterministic
+ * fixer branch is shared by every FU in the bucket, so a PR marked for another
+ * item still holds this one back while that branch is open. A legacy PR with no
+ * item marker that cites this bucket remains an ambiguous, fail-closed mutex.
  *
  * @param {string} itemId
  * @param {Array<{number?: number, title?: string, body?: string, head?: {ref?: string}, headRefName?: string}>} openPrs
@@ -429,11 +429,13 @@ export function openPrForDailyItem(itemId, openPrs, issueNumber = null) {
     const text = `${pr?.title || ''}\n${pr?.body || ''}`;
     const markers = followupItemMarkers(text);
     if (markers.includes(wanted)) return true;
-    if (!Number.isInteger(issueRef) || issueRef <= 0 || markers.length) return false;
     const headRefs = [pr?.head?.ref, pr?.headRefName];
     const legacyBranchMatches = legacyBranch !== null && headRefs.some((ref) => ref === legacyBranch);
+    // Marker diversi separano l'evidence, non il branch condiviso.
+    if (legacyBranchMatches) return true;
+    if (!Number.isInteger(issueRef) || issueRef <= 0 || markers.length) return false;
     const legacyTextMatches = new RegExp(`(^|[^\\d])#${issueRef}(?!\\d)`).test(text);
-    return legacyBranchMatches || legacyTextMatches;
+    return legacyTextMatches;
   }) || null;
 }
 
@@ -1137,25 +1139,24 @@ export function dailyBucketOutcomeTransition(issue, outcome, outcomeCommentBody)
       body: String(issue.body || ''),
       nextItem: item,
       changed: false,
-      consumed: false,
     };
   }
 
-  // Il body può essere già terminale anche se il successivo edit delle label
-  // è fallito. In tal caso non riapplichiamo il verdetto, ma riconciliamo la
-  // coda secondo lo stato complessivo del bucket: è il recovery idempotente
-  // della transizione body→label.
+  // FIX_OUTCOME resta l'ultimo marker anche quando il bucket passa al FU
+  // successivo. Un item terminale dimostra quindi che questo marker è già
+  // stato consumato: non si deve riusare per riaccodare un altro item. La
+  // label phase può però essere fallita dopo la scrittura del body; in quel
+  // caso il body terminale conserva l'azione che va riconciliata al tick dopo.
   if (item.state !== 'open' && item.state !== 'in-progress') {
     const routing = dailyBucketRouting(issue?.body || '');
     return {
       handled: true,
-      ...routing,
+      action: 'outcome-consumed',
       itemId,
       state: item.state,
-      body: String(issue.body || ''),
-      changed: false,
-      consumed: true,
-      reason: 'verdetto già applicato; riconciliare soltanto le label del bucket',
+      nextItem: routing.nextItem,
+      reconcileAction: routing.action,
+      reason: 'l’item ha già uno stato terminale; il FIX_OUTCOME non va riapplicato',
     };
   }
 
@@ -2724,7 +2725,8 @@ function loadOpenPrsForDailyMutex() {
     ]);
     const prs = flattenPaginatedOpenPrs(raw);
     if (!prs || !prs.every((pr) => Number.isInteger(Number(pr.number)) && Number(pr.number) > 0
-      && typeof pr.title === 'string' && (typeof pr.body === 'string' || pr.body === null))) {
+      && typeof pr.title === 'string' && (typeof pr.body === 'string' || pr.body === null)
+      && typeof pr.head?.ref === 'string' && pr.head.ref.trim())) {
       return { ok: false, prs: [] };
     }
     return { ok: true, prs };
@@ -5102,7 +5104,9 @@ export function runDrain() {
           }
         }
         attempted++;
-        if (!['retry', 'requeue', 'settled', 'blocked'].includes(transition.action)) {
+        const outcomeConsumed = transition.action === 'outcome-consumed';
+        const action = outcomeConsumed ? transition.reconcileAction : transition.action;
+        if (!['retry', 'requeue', 'settled', 'blocked'].includes(action)) {
           console.log(`DAILY-OUTCOME-SKIP #${iss.number} (${transition.action}${transition.reason ? `: ${transition.reason}` : ''}) → nessuna transizione issue-wide.`);
           continue;
         }
@@ -5118,29 +5122,44 @@ export function runDrain() {
 
         if (DRY) {
           succeeded++;
-          console.log(`[dry] daily outcome #${iss.number}: ${transition.itemId} → ${transition.state}; ${transition.action}${transition.nextItem ? `, prossimo ${transition.nextItem.id}` : ''}`);
+          console.log(`[dry] daily outcome #${iss.number}: ${transition.itemId} → ${transition.state}; ${action}${transition.nextItem ? `, prossimo ${transition.nextItem.id}` : ''}`);
           continue;
         }
-        if (!updateDailyIssueBody({ ...iss, title: liveIssue.title, body: liveIssue.body }, transition.body)) continue;
+        // `outcome-consumed` means the body already contains the item State.
+        // The previous tick may still have failed at the label edit, so keep
+        // reconciling labels from that durable body state without rewriting it.
+        if (!outcomeConsumed
+            && !updateDailyIssueBody({ ...iss, title: liveIssue.title, body: liveIssue.body }, transition.body)) continue;
 
         const attemptLabels = names(iss).filter((name) => /^fu-(?:attempt|reparked):\d+$/.test(name));
-        const add = transition.action === 'requeue' || transition.action === 'retry' ? [LBL_QUEUED] : [];
-        const remove = transition.action === 'requeue' || transition.action === 'retry'
+        const add = action === 'requeue' || action === 'retry' ? [LBL_QUEUED] : [];
+        const remove = action === 'requeue' || action === 'retry'
           ? [LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_AUTOMATION_DEFERRED, ...attemptLabels]
-          : transition.action === 'settled'
+          : action === 'settled'
             ? [LBL_PARKED, LBL_MAYBE_RESOLVED, LBL_QUEUED, LBL_AUTOMATION_DEFERRED, ...attemptLabels]
             : [LBL_MAYBE_RESOLVED, LBL_QUEUED, ...attemptLabels];
+        const currentLabels = new Set(names(iss));
+        const labelsNeedRepair = add.some((label) => !currentLabels.has(label))
+          || remove.some((label) => currentLabels.has(label));
+        if (outcomeConsumed && !labelsNeedRepair) {
+          console.log(`DAILY-OUTCOME-OK #${iss.number}: body già terminale e label già riconciliate (${action})`);
+          continue;
+        }
         if (!edit(iss.number, { add, remove })) continue;
         succeeded++;
-        const note = transition.action === 'retry'
+        if (outcomeConsumed) {
+          console.log(`DAILY-OUTCOME-RECOVER #${iss.number}: label riconciliate dal body terminale (${transition.itemId} → ${action})`);
+          continue;
+        }
+        const note = action === 'retry'
           ? `♻️ **Daily item ri-accodato dopo un blocco transitorio:** ${transition.itemId} resta ${transition.state}; l’esito ${outcome} non conclude un item. Nessuna PR aperta reclama questo item, quindi il bucket può proseguire senza attendere PR relative ad altri FU.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`
-          : transition.action === 'requeue'
+          : action === 'requeue'
           ? `♻️ **Esito daily item applicato dal followup-drainer:** ${transition.itemId} → ${transition.state} in base all’ultimo FIX_OUTCOME ${outcome}. Il bucket resta aperto e il prossimo item ${transition.nextItem.id} torna in coda; nessun verdetto del singolo item viene applicato all’intero issue.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`
-          : transition.action === 'settled'
+          : action === 'settled'
             ? `✅ **Daily bucket riconciliato item per item:** ${transition.itemId} → ${transition.state} dall’ultimo FIX_OUTCOME ${outcome}; tutti gli item sono ora done. La chiusura resta al reconciler del corpus.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`
             : `⏸️ **Daily item bloccato dal verdetto del fixer:** ${transition.itemId} → blocked (FIX_OUTCOME ${outcome}). Il bucket resta aperto/parcheggiato; gli altri item non vengono dichiarati risolti.\n\n<!-- DAILY_ITEM_OUTCOME: ${transition.itemId} -->`;
-        if (!transition.consumed) commentIssue(iss.number, note, 'daily item outcome comment');
-        console.log(`DAILY-OUTCOME #${iss.number}: ${transition.itemId} → ${transition.state}; ${transition.action}${transition.nextItem ? `, prossimo ${transition.nextItem.id}` : ''}`);
+        if (!outcomeConsumed) commentIssue(iss.number, note, 'daily item outcome comment');
+        console.log(`DAILY-OUTCOME #${iss.number}: ${transition.itemId} → ${transition.state}; ${action}${transition.nextItem ? `, prossimo ${transition.nextItem.id}` : ''}`);
         continue;
       }
 

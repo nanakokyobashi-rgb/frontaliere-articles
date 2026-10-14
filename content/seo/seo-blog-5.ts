@@ -107590,6 +107590,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incidente-varesina-venegono': {
+    title: 'Carambola sulla Varesina: quattro feriti a Venegono',
+    description: 'Incidente alle 7 sulla Sp 233 a Venegono Inferiore Quattro auto coinvolte e quattro persone ferite Due ambulanze, automedica, vigili del fuoco e carabinieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, carambola, sulla, varesina, quattro',
+    ogTitle: 'Carambola sulla Varesina: quattro feriti a Venegono',
+    ogDescription: 'Incidente alle 7 sulla Sp 233 a Venegono Inferiore Quattro auto coinvolte e quattro persone ferite Due ambulanze, automedica, vigili del fuoco e carabinieri',
+    canonicalPath: '/articoli-frontaliere/incidente-varesina-venegono/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Carambola sulla Varesina: quattro feriti a Venegono",
+      "description": "Incidente alle 7 sulla Sp 233 a Venegono Inferiore Quattro auto coinvolte e quattro persone ferite Due ambulanze, automedica, vigili del fuoco e carabinieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-incidente-varesina-venegono.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico fermo sulla Varesina dopo un incidente a Venegono Inferiore"
+      },
+      "datePublished": "2026-10-14T07:58:31+00:00",
+      "dateModified": "2026-10-14T07:58:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/incidente-varesina-venegono/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

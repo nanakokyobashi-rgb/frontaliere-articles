@@ -196,13 +196,13 @@ test('un FIX_OUTCOME già consumato ripara il routing senza riapplicare il verde
       'already-fixed',
       '<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: already-fixed -->',
     );
-    assert.equal(result.action, 'requeue', `${state}: il prossimo item deve tornare in coda`);
+    assert.equal(result.action, 'outcome-consumed', `${state}: il verdetto non deve essere riapplicato`);
     assert.equal(result.itemId, 'FU-2026-10-02-001');
     assert.equal(result.state, state);
+    assert.equal(result.action, 'outcome-consumed');
+    assert.equal(result.reconcileAction, 'requeue', 'un body già aggiornato conserva l’azione label da riprovare');
     assert.equal(result.nextItem.id, 'FU-2026-10-02-002');
-    assert.equal(result.body, body);
-    assert.equal(result.changed, false);
-    assert.equal(result.consumed, true, 'il verdetto non deve essere applicato/commentato due volte');
+    assert.equal(result.body, undefined);
   }
 });
 
@@ -221,13 +221,33 @@ test('l’attribuzione daily usa un solo item esplicito e fallisce chiusa se amb
   });
 });
 
-test('il mutex daily non blocca un FU diverso ma mantiene il legacy ambiguo in fail-closed', () => {
+test('il mutex daily blocca anche un FU diverso sul branch condiviso e mantiene il legacy ambiguo in fail-closed', () => {
   const wanted = 'FU-2026-10-02-001';
   const scanForOtherItem = {
     ok: true,
-    prs: [{ number: 2571, title: 'fix daily item', body: 'Addresses #2151\nFollow-up item: FU-2026-10-02-006' }],
+    prs: [{
+      number: 2571,
+      title: 'fix daily item',
+      body: 'Addresses #2151\nFollow-up item: FU-2026-10-02-006',
+      head: { ref: 'fix/issue-2151' },
+    }],
   };
-  assert.equal(dailyMutexDecision(wanted, scanForOtherItem, 2151).eligible, true);
+  assert.deepEqual(dailyMutexDecision(wanted, scanForOtherItem, 2151), {
+    eligible: false,
+    reason: 'item-pr-open',
+    pr: scanForOtherItem.prs[0],
+  });
+
+  const separateBranch = {
+    ok: true,
+    prs: [{
+      number: 2576,
+      title: 'fix daily item',
+      body: 'Addresses #2151\nFollow-up item: FU-2026-10-02-006',
+      head: { ref: 'fix/issue-2151-FU-006' },
+    }],
+  };
+  assert.equal(dailyMutexDecision(wanted, separateBranch, 2151).eligible, true);
 
   const legacyIssuePr = {
     ok: true,
@@ -339,10 +359,12 @@ test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide'
   assert.match(stage, /latestFixOutcomeCommentFromComments\(comments\)/);
   assert.match(stage, /dailyBucketOutcomeTransition\(liveIssue, outcome, outcomeEntry\.comment\?\.body\)/);
   assert.match(stage, /dailyOverlapRetryHold\(comments, readOverlapBlocker\)/);
+  assert.match(stage, /const action = outcomeConsumed \? transition\.reconcileAction : transition\.action/);
+  assert.match(stage, /labelsNeedRepair/);
   assert.match(stage, /loadOpenPrsForDailyMutex\(\)/);
   assert.match(stage, /updateDailyIssueBody\(/);
-  assert.match(stage, /if \(!transition\.consumed\) commentIssue\(iss\.number, note, 'daily item outcome comment'\)/);
-  assert.match(stage, /const add = transition\.action === 'requeue' \|\| transition\.action === 'retry' \? \[LBL_QUEUED\]/);
+  assert.match(stage, /if \(!outcomeConsumed\) commentIssue\(iss\.number, note, 'daily item outcome comment'\)/);
+  assert.match(stage, /const add = action === 'requeue' \|\| action === 'retry' \? \[LBL_QUEUED\]/);
   assert.ok(stage.indexOf('dailyBucketOutcomeTransition(') < stage.indexOf('verdictExitDecision('));
   assert.match(DRAINER, /const dailyBucket = dailyBucketInfo\(iss\?\.title/);
 });

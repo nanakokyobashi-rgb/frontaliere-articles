@@ -303,11 +303,11 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: node scripts/ci/check-issue-already-resolved.mjs
 
-      # Lo scope viene congelato PRIMA del gate stale-dispatch: sul branch
-      # condiviso `fix/issue-N` una PR daily di FU-B non deve far scartare il
-      # dispatch successivo di FU-A. Il wrapper creato qui restringe la sola
-      # query `gh pr list --head fix/issue-N` del gate all'item scelto; le PR
-      # legacy senza marker `Follow-up item` restano ambigue e bloccanti.
+      # Lo scope viene congelato PRIMA del gate stale-dispatch. Il branch
+      # `fix/issue-N` è condiviso da tutti i FU del bucket: il marker identifica
+      # l'evidence, ma non può separare il mutex finché una PR su quel branch è
+      # aperta. Le PR legacy senza marker `Follow-up item` restano ambigue e
+      # bloccanti, come ogni altra PR sul branch condiviso.
       - name: Pre-flight — freeze daily item scope (zero-Claude)
         id: scope_input
         if: steps.preflight.outputs.already_resolved != 'true'
@@ -353,8 +353,6 @@ jobs:
           cat > "$CTX_DIR/mutex-bin/gh" <<'NODE'
           #!/usr/bin/env node
           import { spawnSync } from 'node:child_process';
-          import path from 'node:path';
-          import { pathToFileURL } from 'node:url';
 
           const args = process.argv.slice(2);
           const realGh = process.env.MUTEX_REAL_GH || '';
@@ -417,24 +415,11 @@ jobs:
             process.exit(0);
           }
 
-          let followupItemMarkers;
-          try {
-            const root = process.env.MUTEX_REPO_ROOT || process.cwd();
-            ({ followupItemMarkers } = await import(
-              pathToFileURL(path.join(root, 'scripts/ci/followup-resolution-match.mjs')).href,
-            ));
-          } catch {
-            process.stdout.write('null\n');
-            process.exit(0);
-          }
-
-          const selected = String(process.env.DAILY_ITEM_ID || '').trim().toUpperCase();
-          const scoped = prs.filter((pr) => {
-            const markers = followupItemMarkers(pr?.body || '');
-            // No marker is legacy/ambiguous and therefore remains a mutex.
-            return markers.length === 0 || !selected || markers.includes(selected);
-          });
-          process.stdout.write(JSON.stringify(scoped));
+          // Tutti i FU daily usano ancora `fix/issue-N`: il body marker è
+          // evidence per-item, non una partizione del branch. Restituire una
+          // PR marcata per un FU diverso farebbe correre due run sullo stesso
+          // branch/PR e mescolerebbe codice, review e outcome.
+          process.stdout.write(JSON.stringify(prs));
           NODE
           chmod +x "$CTX_DIR/mutex-bin/gh"
           printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin" >> "$GITHUB_OUTPUT"
@@ -448,8 +433,8 @@ jobs:
       # issue?». Da #908 la chiave di concorrenza e' per-issue, quindi un secondo
       # `labeled` sulla stessa issue non muore piu' sfrattato: aspetta il primo e
       # poi esegue, con il payload catturato prima — anche se la prima run ha nel
-      # frattempo aperto la PR o si e' presa la label. Per i daily, il wrapper
-      # item-scoped sopra evita che una PR di un FU diverso sembri gia' in volo.
+      # frattempo aperto la PR o si e' presa la label. Per i daily, il branch
+      # condiviso resta un mutex unico finché la PR non è più aperta.
       - name: Pre-flight — stale-dispatch gate (zero-Claude)
         id: stale
         if: steps.preflight.outputs.already_resolved != 'true'
@@ -536,14 +521,15 @@ jobs:
               recovered=false
               for attempt in 1 2 3; do
                 if gh issue edit "$ISSUE_NUMBER" --repo "$GH_REPO" \
-                    --remove-label fu-parked --add-label agent:fix-queued; then
+                    --remove-label fu-parked --remove-label automation-deferred \
+                    --add-label agent:fix-queued; then
                   recovered=true
                   break
                 fi
                 echo "::warning::recovery label daily workflows-scope fallita (tentativo $attempt/3)"
               done
               if [ "$recovered" != 'true' ]; then
-                echo "::error::recovery daily workflows-scope non riuscita: verificare manualmente label e attribuzione dell'item"
+                echo "::error::recovery daily workflows-scope non riuscita: verificare manualmente label, automation-deferred e attribuzione dell'item"
               fi
               exit 1
             fi
