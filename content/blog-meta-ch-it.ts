@@ -8264,6 +8264,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.assunzioni-svizzera-cautela-2026.title': 'Assunzioni in Svizzera: aziende caute nonostante il PIL',
     'blog.article.assunzioni-svizzera-cautela-2026.excerpt': 'NEO svizzero a +21% per ottobre-dicembre 2026 NEO globale +29%; media europea +20% Pil elvetico in crescita dell\'1,5% nel secondo trimestre 2026 Junior: 35% più',
     'blog.article.assunzioni-svizzera-cautela-2026.imageAlt': 'Ufficio moderno in Svizzera con vista sul lago per rappresentare il mercato del lavoro',
+    'blog.article.legge-piattaforme-tutela-giovani.title': 'Consiglio federale rafforza tutela giovani sulle piattaforme',
+    'blog.article.legge-piattaforme-tutela-giovani.excerpt': 'Il Consiglio federale decide il 14 ottobre 2026.',
+    'blog.article.legge-piattaforme-tutela-giovani.imageAlt': 'Teen svizzero che usa un laptop con icone social davanti alle Alpi',
 };
 
 export default blogMetaChIt;
