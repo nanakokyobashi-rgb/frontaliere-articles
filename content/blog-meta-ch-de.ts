@@ -8240,6 +8240,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposta-cani-berna-guida.title': 'Hundesteuer im Kanton Bern: Leitfaden zu Beträgen und Regeln',
     'blog.article.imposta-cani-berna-guida.excerpt': 'Praktischer Leitfaden zur Hundesteuer im Kanton Bern: allfällige Pflicht, Registrierung, Befreiungen und zuständige Behörden.',
     'blog.article.imposta-cani-berna-guida.imageAlt': 'Hundesteuer im Kanton Bern: Regeln und Anmeldung',
+    'blog.article.licenza-caccia-berna-requisiti.title': 'Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag',
+    'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.',
+    'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landschaft im Kanton Bern in der Schweiz',
 };
 
 export default blogMetaChDe;

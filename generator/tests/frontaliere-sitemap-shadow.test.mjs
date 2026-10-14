@@ -162,7 +162,11 @@ test('build-api.mjs reads the frontaliere override file and feeds it into the fr
   );
   const callMatch = src.match(/buildSitemap\(\s*SECTION_REGISTRIES\[section\.section\],[^;]*?\)\s*,\s*\);/s);
   assert.ok(callMatch, 'could not find the per-section buildSitemap(...) call to inspect');
-  assert.match(callMatch[0], /SECTION_SITEMAP_SHADOW\[section\.section\],?\s*\)/);
+  assert.match(
+    callMatch[0],
+    /SECTION_SITEMAP_SHADOW\[section\.section\],\s*SECTION_SLUG_MODULES\[section\.section\]\.fallbackReasons\s*\?\?\s*\{\},\s*\)/,
+    'the canton sitemap must pass fallback provenance after its shadow set',
+  );
 });
 
 // Same class of defect, second surface: `collect()` (build-api.mjs) emits
@@ -181,9 +185,9 @@ test('build-api.mjs feeds the shadow sets into both collect(...) calls that buil
   assert.ok(collectCall, 'could not find the per-section collect(...) loop to inspect');
   assert.match(
     collectCall[1],
-    /SECTION_REGISTRIES\[section\.section\],[\s\S]*,\s*SECTION_SITEMAP_SHADOW\[section\.section\],?\s*$/,
-    'the collect(...) call no longer passes the section\'s sitemap shadow set — canonical-shadowed ' +
-      'pages could leak back into sitemap-news-candidates.xml while still inside the 48h window',
+    /SECTION_REGISTRIES\[section\.section\],[\s\S]*,\s*SECTION_SITEMAP_SHADOW\[section\.section\],\s*SECTION_SLUG_MODULES\[section\.section\]\.fallbackReasons\s*\?\?\s*\{\},\s*$/,
+    'the collect(...) call must pass both the section shadow set and fallback provenance — ' +
+      'canonical-shadowed or provisional localized pages could leak back into sitemap-news-candidates.xml',
   );
   assert.doesNotMatch(src, /collect\([^)]*new Set\(\)\s*\)/, 'a collect(...) call with an empty shadow set');
 });

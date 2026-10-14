@@ -104003,6 +104003,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-licenza-caccia-berna-requisiti': {
+    title: 'Licenza di caccia canton Berna requisiti e domanda',
+    description: 'Guida alla licenza di caccia nel Cantone di Berna: requisiti, esami, periodi, specie cacciabili, documenti, scadenze e importi ufficiali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenza, caccia, canton, berna',
+    ogTitle: 'Licenza di caccia canton Berna requisiti e domanda',
+    ogDescription: 'Scopri la procedura ufficiale per la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.',
+    canonicalPath: '/articoli-svizzera/licenza-caccia-berna-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Licenza di caccia canton Berna requisiti e domanda",
+      "description": "Guida alla licenza di caccia nel Cantone di Berna: requisiti, esami, periodi, specie cacciabili, documenti, scadenze e importi ufficiali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-licenza-caccia-berna-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio del Cantone di Berna in Svizzera"
+      },
+      "datePublished": "2026-10-14T07:05:00+00:00",
+      "dateModified": "2026-10-14T07:05:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenza-caccia-berna-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

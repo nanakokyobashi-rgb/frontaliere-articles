@@ -8240,6 +8240,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.imposta-cani-berna-guida.title': 'Imposta sui cani nel Cantone di Berna: guida a importi e regole',
     'blog.article.imposta-cani-berna-guida.excerpt': 'Guida pratica all\'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni e autorità competenti.',
     'blog.article.imposta-cani-berna-guida.imageAlt': 'Imposta sui cani nel Cantone di Berna: regole e registrazione',
+    'blog.article.licenza-caccia-berna-requisiti.title': 'Licenza di caccia canton Berna requisiti e domanda',
+    'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Scopri come richiedere la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.',
+    'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paesaggio del Cantone di Berna in Svizzera',
 };
 
 export default blogMetaChIt;

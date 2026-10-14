@@ -1466,11 +1466,12 @@
     {
       "path": ".github/workflows/post-merge-followup.yml",
       "mode": "adapted",
-      "reason": "Adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */2 sfasato; budget della sessione Codex uguale al sito dal 2026-09-27 (cap di sessione 14 PR, cron ogni 2h, job 140 min, step 120, watchdog 6840s), ma espresso con l'input dell'action del corpus (`exec_timeout_seconds: '6840'`) invece di `exec_timeout_minutes: \"114\"` del sito.",
+      "reason": "Adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */2 sfasato; budget della sessione Codex uguale al sito dal 2026-09-27 (cap di sessione 14 PR, cron ogni 2h, job 140 min, step 120, watchdog 6840s), ma espresso con l'input dell'action del corpus (`exec_timeout_seconds: '6840'`) invece di `exec_timeout_minutes: \"114\"` del sito. RIALLINEATO 2026-10-14 (FU-2026-09-30-027): baseline aggiornata sui due origin/main dopo il merge del corpus #1983 e del sito #10338; restano distinti l'identita' di questo repo e il timeout dell'action del corpus.",
       "baseline": {
-        "site": "5e8e926af147845d",
-        "corpus": "81b31776d8541a6c",
-        "alignedAt": "2026-09-03"
+        "site": "d537b62f5f5fc3bd",
+        "corpus": "c9757f9e6b152d30",
+        "alignedAt": "2026-10-14",
+        "forcedAt": "2026-10-14T06:59:54.000Z"
       }
     },
     {
@@ -1494,23 +1495,23 @@
     {
       "path": "scripts/ci/collect-followup-batch.mjs",
       "mode": "adapted",
-      "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito. RIALLINEATO 2026-09-29 (both-moved, valerielinc-ops/frontaliere-si-o-no#7483): i due lati usano contratti DIVERSI per il marker di triage, ciascuno coerente con il prompt di `post-merge-followup.yml` del proprio repo (sito: riga `Created/updated:`; qui: `Follow-up item: FU-…`, bucket giornaliero, skip anti-nipote), e quella differenza resta per scelta. Audit dei commit solo-corpus dal 2026-09-10: gia' sul sito #1589, #1593 e #1822; portato con valerielinc-ops/frontaliere-si-o-no#10288 FU-009 di #1785 (uno zero si attesta solo con una riga di esito fuori da recinti e citazioni; la review del sito ha aggiunto la chiusura dei recinti alla CommonMark e le intestazioni ancorate a fine riga, riapplicate qui nella stessa PR con i test in `followup-marker-attestation.test.mjs`); non applicabili per contratto #1383, #1642, #1703 e #1783(a); osservabilita' senza caso osservato #1375, #1386, #1399 e #1783(c). I commit gemelli (#1572, #1581, #1718, #1390, #1943, #1951) sono gia' su entrambi i lati. Baseline come `--init --only --force` sui due hash di oggi.",
+      "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito. RIALLINEATO 2026-09-29 (both-moved, valerielinc-ops/frontaliere-si-o-no#7483): i due lati usano contratti DIVERSI per il marker di triage, ciascuno coerente con il prompt di `post-merge-followup.yml` del proprio repo (sito: riga `Created/updated:`; qui: `Follow-up item: FU-…`, bucket giornaliero, skip anti-nipote), e quella differenza resta per scelta. Audit dei commit solo-corpus dal 2026-09-10: gia' sul sito #1589, #1593 e #1822; portato con valerielinc-ops/frontaliere-si-o-no#10288 FU-009 di #1785 (uno zero si attesta solo con una riga di esito fuori da recinti e citazioni; la review del sito ha aggiunto la chiusura dei recinti alla CommonMark e le intestazioni ancorate a fine riga, riapplicate qui nella stessa PR con i test in `followup-marker-attestation.test.mjs`); non applicabili per contratto #1383, #1642, #1703 e #1783(a); osservabilita' senza caso osservato #1375, #1386, #1399 e #1783(c). I commit gemelli (#1572, #1581, #1718, #1390, #1943, #1951) sono gia' su entrambi i lati. RIALLINEATO 2026-10-14 (FU-2026-09-30-027): registrati i main post-merge dopo corpus #1983 e sito #10338; nel corpus il collector include la correzione di triage #2560 e i claim item/bucket limitati alla finestra dichiarata in #2678, mentre il sito mantiene il proprio marker. La guardia entrypoint #12043 sul sito e' meccanica.",
       "baseline": {
-        "site": "e95de573ea7eac19",
-        "corpus": "e55a806fce7e1d86",
-        "alignedAt": "2026-10-06",
-        "forcedAt": "2026-10-06T23:19:30.205Z"
+        "site": "4f7b8d0aca3aa31e",
+        "corpus": "9efaf29688af49ed",
+        "alignedAt": "2026-10-14",
+        "forcedAt": "2026-10-14T06:59:54.000Z"
       }
     },
     {
       "path": "scripts/ci/gate-minted-followups.mjs",
       "mode": "adapted",
-      "reason": "Gate corpus adattato al parser `parse-positive-num.mjs` e alla sorgente `manifest-pinned-issues.mjs`; esegue controlli di freschezza fail-closed prima delle scritture (senza promettere una CAS HTTP atomica), e non chiude i trackingIssue pinnati. Non aggiunge `agent:fix-queued` a un issue `fu-parked`, così la mintatura non scavalca il cooldown gestito dal PARKED-RETRY. Il gemello del sito resta distinto per il suo parser e il suo manifest.",
+      "reason": "Gate corpus adattato al parser `parse-positive-num.mjs` e alla sorgente `manifest-pinned-issues.mjs`; esegue controlli di freschezza fail-closed prima delle scritture (senza promettere una CAS HTTP atomica), e non chiude i trackingIssue pinnati. Non aggiunge `agent:fix-queued` a un issue `fu-parked`, così la mintatura non scavalca il cooldown gestito dal PARKED-RETRY. Il gemello del sito resta distinto per il suo parser e il suo manifest. RIALLINEATO 2026-10-14 (FU-2026-09-30-027): baseline dopo corpus #1983 e sito #10338, includendo gli aggiornamenti merged dei due gate; il parser e il manifest corpus restano adattamenti locali.",
       "baseline": {
-        "site": "7d10dc4d094256eb",
-        "corpus": "80793d795df62223",
-        "alignedAt": "2026-09-10",
-        "forcedAt": "2026-09-10T12:33:13.580Z"
+        "site": "47fbf166e06985bc",
+        "corpus": "27003408f294ba8e",
+        "alignedAt": "2026-10-14",
+        "forcedAt": "2026-10-14T06:59:54.000Z"
       }
     },
     {
@@ -1566,11 +1567,12 @@
     {
       "path": "FOLLOWUP.md",
       "mode": "adapted",
-      "reason": "Stessa struttura del contratto del sito (gate anti-nipote, parse rules, i quattro hard-exclude) con il filtro di scopo di questo repo, e il formato del corpo della issue aggregata che la chiusura (`reconcile-followups.mjs`, `identical`) deve poter parsare.",
+      "reason": "Stessa struttura del contratto del sito (gate anti-nipote, parse rules, i quattro hard-exclude) con il filtro di scopo di questo repo, e il formato del corpo della issue aggregata che la chiusura (`reconcile-followups.mjs`, `identical`) deve poter parsare. RIALLINEATO 2026-10-14 (FU-2026-09-30-027): riallineati i main dopo corpus #1983 e sito #10338 e le successive evoluzioni merged del contratto; restano espliciti il filtro di scopo e il formato parser del corpus.",
       "baseline": {
-        "site": "ba86d79cae8e91ab",
-        "corpus": "22688b9eada13b5c",
-        "alignedAt": "2026-08-07"
+        "site": "2ebc204e48008aab",
+        "corpus": "91216ab3006560fe",
+        "alignedAt": "2026-10-14",
+        "forcedAt": "2026-10-14T06:59:54.000Z"
       }
     },
     {

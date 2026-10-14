@@ -8240,6 +8240,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.imposta-cani-berna-guida.title': 'Impôt sur les chiens dans le canton de Berne : guide des montants et des règles',
     'blog.article.imposta-cani-berna-guida.excerpt': 'Guide pratique de l\'impôt sur les chiens dans le canton de Berne : obligation éventuelle, enregistrement, exemptions et autorités compétentes.',
     'blog.article.imposta-cani-berna-guida.imageAlt': 'Taxe sur les chiens dans le canton de Berne: règles et enregistrement',
+    'blog.article.licenza-caccia-berna-requisiti.title': 'Permis de chasse dans le canton de Berne : conditions et demande',
+    'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Découvrez comment demander le permis de chasse dans le canton de Berne : vérifiez la compétence, les conditions, les examens, les espèces chassables, les documents, les délais et les montants.',
+    'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paysage du canton de Berne en Suisse',
 };
 
 export default blogMetaChFr;

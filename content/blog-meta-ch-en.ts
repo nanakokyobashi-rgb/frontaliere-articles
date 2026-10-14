@@ -8240,6 +8240,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.imposta-cani-berna-guida.title': 'Dog tax in the Canton of Bern: guide to amounts and rules',
     'blog.article.imposta-cani-berna-guida.excerpt': 'Practical guide to the dog tax in the Canton of Bern: possible obligation, registration, exemptions and competent authorities.',
     'blog.article.imposta-cani-berna-guida.imageAlt': 'Dog tax in Canton Bern: rules and registration',
+    'blog.article.licenza-caccia-berna-requisiti.title': 'Hunting license in the canton of Bern: requirements and application',
+    'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Discover how to apply for a hunting license in the Canton of Bern: verify competence, requirements, exams, huntable species, documents, deadlines, and amounts.',
+    'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landscape of the Canton of Bern in Switzerland',
 };
 
 export default blogMetaChEn;

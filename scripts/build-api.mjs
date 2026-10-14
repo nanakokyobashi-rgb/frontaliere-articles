@@ -92,6 +92,7 @@ import {
   buildSitemap,
   buildFamilySectionSitemap,
   countSitemapEntries,
+  publishedArticleLocales,
 } from './lib/build-sitemap.mjs';
 // Le sezioni da pubblicare vengono dal core (lista ATTIVA), con i nomi della
 // superficie pubblicata dichiarati una volta in corpus-sections.mjs.
@@ -503,8 +504,10 @@ if (reservedSlugEntries.length > 0) {
 // them alongside the JSON is what lets a new article be announced to crawlers
 // without the site deploying: the site serves these as static files.
 //
-// Shape matches what the site published before the split, byte-for-byte in
-// structure: IT locs only, an image block, lastmod, monthly/0.7.
+// Shape matches what the site published before the split, byte-for-byte for the
+// historical sections: IT locs only, an image block, lastmod, monthly/0.7.
+// Canton family sitemaps additionally emit one loc per published locale so the
+// four localized article pages are all directly discoverable.
 //
 // SITE, xmlEsc, SECTION_PATHS and buildSitemap() itself live in
 // ./lib/build-sitemap.mjs (imported above) — moved there so the sitemap logic
@@ -599,6 +602,7 @@ for (const section of PUBLIC_API_SECTIONS) {
       meta: SECTION_META_IT[section.section],
       pageSize: ARTICLES_PAGE_SIZE,
       shadowed: SECTION_SITEMAP_SHADOW[section.section],
+      fallbackReasons: SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
       retiredPaths: new Set([
         ...Object.keys(declaredSections.sections[section.section]?.redirects ?? {}),
         ...(declaredSections.sections[section.section]?.gone ?? []),
@@ -616,6 +620,7 @@ for (const section of PUBLIC_API_SECTIONS) {
       slugMapOf(section.section),
       SECTION_META_IT[section.section],
       SECTION_SITEMAP_SHADOW[section.section],
+      SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
     ),
   );
 }
@@ -623,9 +628,14 @@ for (const section of PUBLIC_API_SECTIONS) {
 // validate (canonical override e daily edition ritirate), non al predicato del
 // builder: un filtro nuovo o una slug map troncata deve far scattare il floor,
 // non abbassarlo insieme alla sitemap. Gli override hanno una chiave per
-// locale, mentre questa sitemap ha una sola URL per articolo. Il vecchio `< 100`
+// locale; il contatore del floor resta a una identita' per articolo anche per
+// le sitemap cantonali, che ora emettono una URL per ogni locale. Il vecchio `< 100`
 // proteggeva il 2,6% del corpus frontaliere e non proteggeva affatto la sitemap
 // svizzera; un parse troncato restava quindi pubblicabile senza errori.
+// Un'eventuale provenienza di fallback sulla locale IT e' invece un errore duro
+// in `publishedArticleLocales`, prima di arrivare qui: non si lascia che una
+// identita' senza canonical IT riduca il rapporto del floor e passi per una
+// sitemap intenzionalmente piu' corta.
 //
 // Politica per tipo (corpus-floors.mjs, `KIND_FLOOR_POLICY`): le sezioni
 // storiche hanno il pavimento proprio e una sitemap vuota e' un rifiuto; una
@@ -1069,7 +1079,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   const candidateBlocks = [];
   let considered = 0;
 
-  const collect = (entries, sectionId, slugMap, meta, shadowed = new Set()) => {
+  const collect = (entries, sectionId, slugMap, meta, shadowed = new Set(), fallbackReasons = {}) => {
     const paths = SECTION_PATHS[sectionId];
     for (const a of entries) {
       const slug = slugMap?.[a.id]?.it;
@@ -1079,6 +1089,9 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       // points elsewhere, so listing its <loc> here is the same defect this PR
       // fixes for the blog sitemap, just in the news-candidates feed instead.
       if (shadowed.has(slug)) continue;
+      const localeRows = publishedArticleLocales(a, paths, slugMap, shadowed, fallbackReasons);
+      const italian = localeRows.find(({ locale }) => locale === 'it');
+      if (!italian) continue;
       const publishedAt = a.date;
       if (!publishedAt) continue;
       considered += 1;
@@ -1114,13 +1127,10 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       // an editorial update supersedes it. Rebuilding is not a content change.
       const lastmod = a.updatedAt || publishedAt;
       const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${xmlEsc(lastmod)}</lastmod>`];
-      for (const loc of LOCALES) {
-        const s2 = slugMap?.[a.id]?.[loc];
-        if (s2 && !isReservedPublishedSlug(s2)) {
-          parts.push(
-            `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${xmlEsc(s2)}/" />`,
-          );
-        }
+      for (const { locale, prefix, slug: localizedSlug } of localeRows) {
+        parts.push(
+          `    <xhtml:link rel="alternate" hreflang="${locale}" href="${SITE}${prefix}${xmlEsc(localizedSlug)}/" />`,
+        );
       }
       parts.push(
         `    <xhtml:link rel="alternate" hreflang="x-default" href="${itLoc}" />`,
@@ -1166,6 +1176,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       slugMapOf(section.section),
       SECTION_META_IT[section.section],
       SECTION_SITEMAP_SHADOW[section.section],
+      SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
     );
   }
 
