@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.webp",
+      "sha256": "046f5543338be5653738eb70b1258c8ffd9e915859b949aaf053f510525a366a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como-480w.webp",
+      "sha256": "22323efac4e56ec2092d92f5f3ad6b5c4cc1e874685821eecb3edb238c17b14d"
+    }
+  ]
 }
