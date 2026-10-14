@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-easy-work-chiusura-264.webp",
-      "sha256": "6d515b29462603137b654aed56e8859d8c892accf406b12504ed0cc1e8e3d405"
-    },
-    {
-      "path": "public/images/blog/article-previsioni-disoccupazione-ticino-2027.webp",
-      "sha256": "69327120eb58328481d47819213d57a33f75815b2a67277ea9df6e9cf5912e0a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-easy-work-chiusura-264-480w.webp",
-      "sha256": "06c4dfe5b65c60535f78f3300bbce7c58f7288799578159c35f83cfa547306d2"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-previsioni-disoccupazione-ticino-2027-480w.webp",
-      "sha256": "c4be014680d0ba048aafec8baa0d892531df51a76036f062adedd0fdc1f91744"
-    }
-  ]
+  "items": []
 }
