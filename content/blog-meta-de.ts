@@ -13189,6 +13189,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.derby-basket-ticinese-massagno.title': 'Tessiner Basketball-Derby: Massagno ist der Favorit',
     'blog.article.derby-basket-ticinese-massagno.excerpt': 'Am Samstag das erste rein tessinische Duell unter den Körben: Massagno ist der Favorit, aber das Derby kann anderen Gesetzmäßigkeiten folgen.',
     'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Basketball-Derby im Tessin mit Massagno',
+    'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Kontrollen Cuvio/Cuveglio: 7 Führerscheine, 10 konfisziert',
+    'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Sieben eingezogene Führerscheine und zehn beschlagnahmte Fahrzeuge Kontrollen auch mit Atemalkoholmessgerät und Werten über 1,5 g/l Mehr Beamte etwa zwischen 17 und 20 Uhr Das Projekt',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Lokale Polizeiauto während der Straßenkontrollen zwischen Cuveglio und Cuvio',
 };
 
 export default blogMetaDe;

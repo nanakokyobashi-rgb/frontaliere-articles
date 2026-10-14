@@ -108141,6 +108141,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-controlli-polizia-cuvio-cuveglio': {
+    title: 'Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri',
+    description: 'Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto',
+    keywords: 'frontalieri, ticino, svizzera, italia, controlli, cuvio, cuveglio, patenti',
+    ogTitle: 'Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri',
+    ogDescription: 'Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto',
+    canonicalPath: '/articoli-frontaliere/controlli-polizia-cuvio-cuveglio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri",
+      "description": "Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto della Polizia Locale durante i controlli stradali tra Cuveglio e Cuvio"
+      },
+      "datePublished": "2026-10-14T19:44:45+00:00",
+      "dateModified": "2026-10-14T19:44:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/controlli-polizia-cuvio-cuveglio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

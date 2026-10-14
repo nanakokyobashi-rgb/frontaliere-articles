@@ -80,6 +80,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T19:23:38.999Z",
       "lastFailureAt": "2026-10-14T19:23:38.999Z"
+    },
+    {
+      "articleId": "controlli-polizia-cuvio-cuveglio",
+      "title": "Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-controlli-polizia-cuvio-cuveglio: openai-codex (vision gate rejected image: Synthetic photorealistic illustration matching the police-road su",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T19:44:45.987Z",
+      "lastFailureAt": "2026-10-14T19:44:45.987Z"
     }
   ]
 }

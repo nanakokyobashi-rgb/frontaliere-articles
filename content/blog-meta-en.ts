@@ -13190,6 +13190,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.derby-basket-ticinese-massagno.title': 'Ticino basketball derby: Massagno is the favorite',
     'blog.article.derby-basket-ticinese-massagno.excerpt': 'On Saturday, the first all-Ticino showdown under the hoops: Massagno is the favorite, but the derby may follow different logic.',
     'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Ticino basketball derby featuring Massagno',
+    'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Checks in Cuvio and Cuveglio: 7 driver\'s licenses withdrawn and 10 seizures',
+    'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Seven driving licences withdrawn and ten vehicles seized Checks also with breathalyzer and readings above 1,5 g/l More officers approximately between 17 and 20 The project',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Local Police car during road checks between Cuveglio and Cuvio',
 };
 
 export default blogMetaEn;

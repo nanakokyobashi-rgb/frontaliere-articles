@@ -13191,6 +13191,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.derby-basket-ticinese-massagno.title': 'Derby ticinese di basket: Massagno è il favorito',
     'blog.article.derby-basket-ticinese-massagno.excerpt': 'Sabato la prima sfida tutta ticinese sotto le plance: Massagno è il favorito, ma il derby può seguire logiche diverse.',
     'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Derby di basket ticinese con Massagno',
+    'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri',
+    'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Auto della Polizia Locale durante i controlli stradali tra Cuveglio e Cuvio',
 };
 
 export default blogMetaIt;
