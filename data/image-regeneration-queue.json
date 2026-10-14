@@ -15,21 +15,21 @@
       "articleId": "gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel",
       "title": "Gli ASVZ Blackbirds vincono il Champions Bowl: primo titolo europeo svizzero nel flag football",
       "fallbackImage": "/images/blog/affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo.webp",
-      "reason": "All image providers failed for article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel: openai-codex (vision gate rejected image: Generic synthetic flag-football scene with no readable text or obvious logo, b",
+      "reason": "All image providers failed for article-gli-asvz-blackbirds-vincono-il-champions-bowl-primo-titolo-europeo-svizzero-nel: openai-codex (vision gate rejected image: Generic synthetic flag-football scene with a foreground player visible from be",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-14T13:35:23.185Z",
-      "lastFailureAt": "2026-10-14T16:00:08.996Z"
+      "lastFailureAt": "2026-10-14T23:39:05.174Z"
     },
     {
       "articleId": "soccorsi-coda-autostrada-lombarda",
       "title": "Incidente sulla A8 tra Castellanza e Busto: lunga coda",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "image generation deadline exceeded",
+      "reason": "All image providers failed for article-soccorsi-coda-autostrada-lombarda: openai-codex (vision gate rejected image: Generic traffic-jam scene relevant to the subject, but visible vehicle badges/emblems count as trademarks.); gemini (Gemini ",
       "status": "failed",
-      "failureCount": 1,
+      "failureCount": 2,
       "requestedAt": "2026-10-14T15:46:26.992Z",
-      "lastFailureAt": "2026-10-14T16:02:09.189Z"
+      "lastFailureAt": "2026-10-14T23:40:13.772Z"
     },
     {
       "articleId": "arma-biasca-inchiesta",
@@ -45,11 +45,11 @@
       "articleId": "liberta-fondo-pene-sostitutive",
       "title": "Multe non pagate? Ecco chi può salvarvi dal carcere",
       "fallbackImage": "/images/blog/lavori-pubblica-utilita-multe-pene.webp",
-      "reason": "All image providers failed for article-liberta-fondo-pene-sostitutive: openai-codex (vision gate rejected image: Generic synthetic Swiss scene relevant to the topic, but it include",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-liberta-fondo-pene-sostitutive: openai-codex (vision gate rejected image: Synthetic editorial-style legal consultation scene; no readable text, logos, or specific real event, but recognizable foregroun",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-14T21:58:03.380Z",
-      "lastFailureAt": "2026-10-14T21:58:03.380Z"
+      "lastFailureAt": "2026-10-14T23:41:18.777Z"
     }
   ]
 }
