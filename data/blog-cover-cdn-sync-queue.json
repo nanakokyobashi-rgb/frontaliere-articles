@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-svizzera-partecipa-fmi-bangkok-2026.webp",
+      "sha256": "5aa17ab36706d06b9cf2921e889100a4bc3b3ec2677c6416408930d955468e8d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-svizzera-partecipa-fmi-bangkok-2026-480w.webp",
+      "sha256": "18982ed66b2bab4309b6d4512e1daae822f05c87f28b646cfe1a55fd8c58554d"
+    }
+  ]
 }
