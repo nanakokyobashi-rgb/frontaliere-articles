@@ -163,6 +163,7 @@ function loadGuard() {
     'reportSlugI18nEvent',
     'RUN_REPORT',
     `${block}\nreturn { inspectSlugForPromptPlaceholder, deriveAndSanitizeArticleSlugs, slugifySlugPart,` +
+      ' findSlugPromptLeak, stripSlugPromptLeak, assertNoSlugPromptLeak,' +
       ' PROMPT_SLUG_PREFIX_RX, NON_SLUG_REMAINDER_RX, SCHEMA_HINT_SHAPE_RX };',
   );
 }
@@ -272,6 +273,29 @@ test('inspect: gli slug veri non si muovono', () => {
     const r = inspectSlugForPromptPlaceholder(value);
     assert.equal(r.leaked, false, `falso positivo su uno slug reale: "${value}"`);
     assert.equal(r.slug, value, `"${value}" e' stato alterato in "${r.slug}"`);
+  }
+});
+
+test('strip: rimuove etichette e istruzioni del prompt senza pubblicare residui', () => {
+  const { findSlugPromptLeak, stripSlugPromptLeak } = freshGuard();
+  const recoverable = [
+    ['Slug: new-agreement', 'new-agreement'],
+    ['Slug - new-agreement', 'new-agreement'],
+    ['slug-new-agreement', 'new-agreement'],
+    ['kebab-case-turismo-ticino', 'turismo-ticino'],
+  ];
+  for (const [raw, expected] of recoverable) {
+    assert.ok(findSlugPromptLeak(raw), `l'etichetta non e' stata trovata: ${raw}`);
+    assert.equal(stripSlugPromptLeak(raw), expected, `${raw} non e' stato ripulito correttamente`);
+  }
+
+  for (const raw of [
+    'kebab-case-3-5-words-max-40-chars',
+    'lowercase-hyphen-separated-max-40-characters',
+    'slug-en',
+  ]) {
+    assert.ok(findSlugPromptLeak(raw), `l'eco del prompt non e' stata trovata: ${raw}`);
+    assert.equal(stripSlugPromptLeak(raw), '', `l'eco non ha lasciato vuoto: ${raw}`);
   }
 });
 

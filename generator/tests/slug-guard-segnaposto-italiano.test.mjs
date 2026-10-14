@@ -82,11 +82,9 @@ const harness = new Function(
   'truncateSlugAtWordBoundary',
   `${cut('const SLUG_MAX_LENGTH =', ';', 20)}
    ${cutDecl('function slugifySlugPart(')}
-   ${cut('const NON_SLUG_REMAINDER_RX =', ';')}
-   ${cut('const SCHEMA_HINT_UNIT =', ';')}
-   ${cut('const SCHEMA_HINT_UNIT_UNAMBIGUOUS =', ';')}
-   ${cut('const SCHEMA_HINT_SHAPE_RX = new RegExp(', "\n);")}
-   ${cut('const PROMPT_SLUG_PREFIX_RX =', ';')}
+   ${cut('const PROMPT_SLUG_PREFIX_RX =', '\n/**\n * Classify one slug candidate')
+      .slice(0, -'\n/**\n * Classify one slug candidate'.length)
+      .replaceAll('export function ', 'function ')}
    ${cutDecl('export function inspectSlugForPromptPlaceholder(').replace('export ', '')}
    return { slugifySlugPart, inspectSlugForPromptPlaceholder };`,
 )(truncateSlugAtWordBoundary);
