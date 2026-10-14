@@ -8231,6 +8231,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.zurigo-corsi-lingua-integrazione.title': 'Sprachkurse in Zürich: Integration und Beiträge',
     'blog.article.zurigo-corsi-lingua-integrazione.excerpt': 'Leitfaden zu Sprachkursen und Integrationsprogrammen im Kanton Zürich: Zuständigkeit, Voraussetzungen, Fristen, SEM-Bewilligungen und Beiträge.',
     'blog.article.zurigo-corsi-lingua-integrazione.imageAlt': 'Verwaltungsgebäude in Zürich für Sprachkurse und Integration',
+    'blog.article.festivi-berna-calendario-guida.title': 'Feiertage im Kanton Bern: Kalender und Regeln',
+    'blog.article.festivi-berna-calendario-guida.excerpt': 'Leitfaden zum Kalender der vom Kanton Bern anerkannten Feiertage einschließlich der Prüfung von Ämtern, Gemeinden, Institutionen und Bundesebenen.',
+    'blog.article.festivi-berna-calendario-guida.imageAlt': 'Feiertagskalender und Verwaltungsleitfaden des Kantons Bern',
 };
 
 export default blogMetaChDe;

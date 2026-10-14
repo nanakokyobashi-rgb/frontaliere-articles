@@ -27477,6 +27477,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'festivi-berna-calendario-guida',
+    category: 'pratico',
+    date: '2026-10-14T04:59:00.389Z',
+    image: '/images/blog/article-festivi-berna-calendario-guida.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['BE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
