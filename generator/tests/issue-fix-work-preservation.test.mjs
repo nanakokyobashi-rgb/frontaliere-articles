@@ -179,6 +179,25 @@ test('il preflight del daily usa il mutex FU selezionato e attribuisce il verdet
   assert.match(SRC, /il drainer applica l'esito solo a quell'item/);
 });
 
+test('il gate stale legge lo scope FU prima del branch mutex e filtra le PR daily', () => {
+  const scope = step('Pre-flight — freeze daily item scope (zero-Claude)');
+  const stale = step('Pre-flight — stale-dispatch gate (zero-Claude)');
+  assert.ok(scope, 'manca lo snapshot per-item prima del gate stale-dispatch');
+  assert.ok(stale, 'manca il gate stale-dispatch');
+  assert.ok(
+    SRC.indexOf('- name: Pre-flight — freeze daily item scope (zero-Claude)')
+      < SRC.indexOf('- name: Pre-flight — stale-dispatch gate (zero-Claude)'),
+    'il gate non deve valutare il branch aggregato prima di conoscere il FU selezionato',
+  );
+  assert.match(scope, /mutex-bin\/gh/);
+  assert.match(scope, /followupItemMarkers/);
+  assert.match(scope, /markers\.length === 0 \|\| !selected \|\| markers\.includes\(selected\)/);
+  assert.match(stale, /DAILY_BUCKET: \$\{\{ steps\.scope_input\.outputs\.is_daily_bucket \}\}/);
+  assert.match(stale, /DAILY_ITEM_ID: \$\{\{ steps\.scope_input\.outputs\.selected_item_id \}\}/);
+  assert.match(stale, /MUTEX_BASE_PATH: \$\{\{ steps\.scope_input\.outputs\.mutex_base_path \}\}/);
+  assert.match(stale, /run: node scripts\/ci\/check-stale-issue-dispatch\.mjs/);
+});
+
 test('il capability guard workflows legge solo il FU daily scelto e annota il verdetto nello stesso commento', () => {
   const input = step('Pre-flight — freeze daily item scope (zero-Claude)');
   const guard = step('Pre-flight — workflows-scope capability guard (zero-Claude)');

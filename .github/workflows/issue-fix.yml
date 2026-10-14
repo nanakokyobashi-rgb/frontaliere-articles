@@ -303,44 +303,23 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: node scripts/ci/check-issue-already-resolved.mjs
 
-      # ── Pre-flight 2b: dispatch stantio ───────────────────────────────────
-      # Il pre-flight 2 risponde a «e' gia' risolta?», e su una PR aperta fa
-      # PROCEED di proposito (PR aperta = lavoro in corso, non fatto). Qui la
-      # domanda e' un'altra: «questo EVENTO descrive ancora lo stato della
-      # issue?». Da #908 la chiave di concorrenza e' per-issue, quindi un secondo
-      # `labeled` sulla stessa issue non muore piu' sfrattato: aspetta il primo e
-      # poi esegue, con il payload catturato prima — anche se la prima run ha nel
-      # frattempo aperto la PR o si e' presa la label. Difesa unica rimasta era
-      # l'istruzione di prompt «PR gia' in volo: skip», cioe' una run Codex
-      # intera sulla quota condivisa per scoprire una cosa che si legge con due
-      # chiamate `gh`. Bias a PROCEDERE su qualunque dubbio (#918).
-      - name: Pre-flight — stale-dispatch gate (zero-Claude)
-        id: stale
+      # Lo scope viene congelato PRIMA del gate stale-dispatch: sul branch
+      # condiviso `fix/issue-N` una PR daily di FU-B non deve far scartare il
+      # dispatch successivo di FU-A. Il wrapper creato qui restringe la sola
+      # query `gh pr list --head fix/issue-N` del gate all'item scelto; le PR
+      # legacy senza marker `Follow-up item` restano ambigue e bloccanti.
+      - name: Pre-flight — freeze daily item scope (zero-Claude)
+        id: scope_input
         if: steps.preflight.outputs.already_resolved != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-          DISPATCH_LABEL: ${{ github.event.label.name }}
-          STAGE: fix
-        run: node scripts/ci/check-stale-issue-dispatch.mjs
-
-      # Il guard di capability è un gemello identical e legge un solo issue
-      # payload. Per un daily quel payload deve essere l'item selezionato, non
-      # il contenitore: altrimenti un path workflow di un FU diverso parcheggia
-      # l'intero bucket. Questo snapshot è anche la sorgente stabile per il
-      # marker FOLLOWUP_ITEM emesso quando il guard blocca l'item.
-      - name: Pre-flight — freeze daily item scope (zero-Claude)
-        id: scope_input
-        if: steps.preflight.outputs.already_resolved != 'true' && steps.stale.outputs.stale_dispatch != 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
           CTX_DIR: ${{ runner.temp }}/issue-fix-ctx
+          TRUSTED_GH: ${{ steps.trusted_gh.outputs.path }}
         run: |
           set -euo pipefail
-          mkdir -p "$CTX_DIR"
+          mkdir -p "$CTX_DIR/mutex-bin"
           gh issue view "$ISSUE_NUMBER" --repo "$GH_REPO" --json number,title,body,labels,state > "$CTX_DIR/issue.json"
           node --input-type=module - "$CTX_DIR/issue.json" "$CTX_DIR/scope-issue.json" "$ISSUE_NUMBER" "$GH_REPO" >> "$GITHUB_OUTPUT" <<'NODE'
           import fs from 'node:fs';
@@ -370,6 +349,123 @@ jobs:
           console.log(`selected_item_id=${item?.id || ''}`);
           console.log(`scope_snapshot_file=${scopePath}`);
           NODE
+
+          cat > "$CTX_DIR/mutex-bin/gh" <<'NODE'
+          #!/usr/bin/env node
+          import { spawnSync } from 'node:child_process';
+          import path from 'node:path';
+          import { pathToFileURL } from 'node:url';
+
+          const args = process.argv.slice(2);
+          const realGh = process.env.MUTEX_REAL_GH || '';
+          const forwardEnv = {
+            ...process.env,
+            PATH: process.env.MUTEX_BASE_PATH || process.env.PATH || '',
+          };
+
+          function forward(argv) {
+            if (!realGh) {
+              process.stdout.write('null\n');
+              return 0;
+            }
+            const result = spawnSync(realGh, argv, {
+              encoding: 'utf8',
+              env: forwardEnv,
+              maxBuffer: 32 * 1024 * 1024,
+            });
+            if (result.stdout) process.stdout.write(result.stdout);
+            if (result.stderr) process.stderr.write(result.stderr);
+            return result.status === null ? 1 : result.status;
+          }
+
+          const headIndex = args.indexOf('--head');
+          const targetBranch = `fix/issue-${process.env.ISSUE_NUMBER || ''}`;
+          const isDailyMutexQuery = process.env.DAILY_BUCKET === 'true'
+            && headIndex >= 0
+            && args[headIndex + 1] === targetBranch
+            && args[0] === 'pr'
+            && args[1] === 'list';
+          if (!isDailyMutexQuery) process.exit(forward(args));
+
+          const jsonIndex = args.indexOf('--json');
+          if (jsonIndex < 0 || !args[jsonIndex + 1]) process.exit(forward(args));
+          const query = [...args];
+          query[jsonIndex + 1] = 'number,headRefName,body';
+          const result = realGh
+            ? spawnSync(realGh, query, {
+              encoding: 'utf8',
+              env: forwardEnv,
+              maxBuffer: 32 * 1024 * 1024,
+            })
+            : null;
+          if (!result || result.status !== 0) {
+            // The underlying gate is fail-open on unreadable state; never
+            // expose an unfiltered aggregate-branch list in that case.
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+
+          let prs;
+          try {
+            prs = JSON.parse(result.stdout || 'null');
+          } catch {
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+          if (!Array.isArray(prs)) {
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+
+          let followupItemMarkers;
+          try {
+            const root = process.env.MUTEX_REPO_ROOT || process.cwd();
+            ({ followupItemMarkers } = await import(
+              pathToFileURL(path.join(root, 'scripts/ci/followup-resolution-match.mjs')).href,
+            ));
+          } catch {
+            process.stdout.write('null\n');
+            process.exit(0);
+          }
+
+          const selected = String(process.env.DAILY_ITEM_ID || '').trim().toUpperCase();
+          const scoped = prs.filter((pr) => {
+            const markers = followupItemMarkers(pr?.body || '');
+            // No marker is legacy/ambiguous and therefore remains a mutex.
+            return markers.length === 0 || !selected || markers.includes(selected);
+          });
+          process.stdout.write(JSON.stringify(scoped));
+          NODE
+          chmod +x "$CTX_DIR/mutex-bin/gh"
+          printf 'mutex_bin=%s\n' "$CTX_DIR/mutex-bin" >> "$GITHUB_OUTPUT"
+          printf 'mutex_base_path=%s\n' "$PATH" >> "$GITHUB_OUTPUT"
+          printf 'mutex_real_gh=%s\n' "$TRUSTED_GH" >> "$GITHUB_OUTPUT"
+
+      # ── Pre-flight 2b: dispatch stantio ───────────────────────────────────
+      # Il pre-flight 2 risponde a «e' gia' risolta?», e su una PR aperta fa
+      # PROCEED di proposito (PR aperta = lavoro in corso, non fatto). Qui la
+      # domanda e' un'altra: «questo EVENTO descrive ancora lo stato della
+      # issue?». Da #908 la chiave di concorrenza e' per-issue, quindi un secondo
+      # `labeled` sulla stessa issue non muore piu' sfrattato: aspetta il primo e
+      # poi esegue, con il payload catturato prima — anche se la prima run ha nel
+      # frattempo aperto la PR o si e' presa la label. Per i daily, il wrapper
+      # item-scoped sopra evita che una PR di un FU diverso sembri gia' in volo.
+      - name: Pre-flight — stale-dispatch gate (zero-Claude)
+        id: stale
+        if: steps.preflight.outputs.already_resolved != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          DISPATCH_LABEL: ${{ github.event.label.name }}
+          STAGE: fix
+          DAILY_BUCKET: ${{ steps.scope_input.outputs.is_daily_bucket }}
+          DAILY_ITEM_ID: ${{ steps.scope_input.outputs.selected_item_id }}
+          MUTEX_REAL_GH: ${{ steps.scope_input.outputs.mutex_real_gh }}
+          MUTEX_BASE_PATH: ${{ steps.scope_input.outputs.mutex_base_path }}
+          MUTEX_REPO_ROOT: ${{ github.workspace }}
+          PATH: ${{ steps.scope_input.outputs.mutex_bin }}:${{ steps.scope_input.outputs.mutex_base_path }}
+        run: node scripts/ci/check-stale-issue-dispatch.mjs
 
       # ── Pre-flight 2d: diagnosi gia' consegnata al sito ───────────────────
       # Il POST-step qui sotto («Consegna al sito…») consegna e, se la consegna
