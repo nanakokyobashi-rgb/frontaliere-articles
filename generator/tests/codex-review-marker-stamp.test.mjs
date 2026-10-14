@@ -12,7 +12,9 @@ import {
   postedReviewKey,
   reviewRetryDetails,
   stampReviewInputRevision,
+  validateGhArgs,
 } from '../../.github/actions/claude-codex-fallback/gh-bridge-server.mjs';
+import { reviewInputRevisions } from '../../scripts/ci/lib/review-input-revision.mjs';
 
 const run = promisify(execFile);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -78,6 +80,38 @@ async function stopFixture(server) {
   await exited;
 }
 
+function bridgeServerLaunchBlocks(action) {
+  const lines = action.split('\n');
+  const launchRe = /gh-(?:bridge-)?server\.mjs[^\n]*&/u;
+  const blocks = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    if (!/^\s*env -i\b/u.test(lines[index])) continue;
+    const block = [];
+    for (let cursor = index; cursor < lines.length; cursor += 1) {
+      if (cursor > index && /^\s*env -i\b/u.test(lines[cursor])) break;
+      block.push(lines[cursor]);
+      if (launchRe.test(lines[cursor])) {
+        blocks.push({ line: index + 1, text: block.join('\n') });
+        break;
+      }
+    }
+  }
+  return blocks;
+}
+
+test('ogni avvio del bridge server passa la revisione e la PR fuori dal modello', () => {
+  const action = fs.readFileSync(path.join(ACTION_DIR, 'action.yml'), 'utf8');
+  const launchRe = /gh-(?:bridge-)?server\.mjs[^\n]*&/gu;
+  const launches = action.match(launchRe) || [];
+  const blocks = bridgeServerLaunchBlocks(action);
+  assert.equal(blocks.length, launches.length, 'un avvio server non è dentro un blocco env -i');
+  assert.equal(launches.length, 2, 'il censimento degli avvii server è cambiato');
+  for (const { line, text } of blocks) {
+    assert.match(text, /CODEX_GH_REVIEW_INPUT_REVISION=/u, `avvio alla riga ${line}`);
+    assert.match(text, /CODEX_GH_REVIEW_PR_NUMBER=/u, `avvio alla riga ${line}`);
+  }
+});
+
 test('il bridge rimuove marker assente, malformato, duplicato o corretto e ne timbra uno solo', () => {
   const cases = [
     ['63 caratteri', `${reviewMarker(`body:${'a'.repeat(63)}`)}\n## LGTM`],
@@ -92,6 +126,12 @@ test('il bridge rimuove marker assente, malformato, duplicato o corretto e ne ti
     assert.match(stamped, /## LGTM/u, label);
   }
   assert.equal(normalizeBodyRevision(` BODY:${'A'.repeat(64)} `), `body:${'a'.repeat(64)}`);
+});
+
+test('il gate legge il marker solo come riga Markdown completa, non inline o in citazione', () => {
+  assert.deepEqual(reviewInputRevisions(`prefix ${EXPECTED_MARKER}`), []);
+  assert.deepEqual(reviewInputRevisions(`> ${EXPECTED_MARKER}`), []);
+  assert.deepEqual(reviewInputRevisions(`${EXPECTED_MARKER}\n## LGTM`), [EXPECTED_REVISION]);
 });
 
 test('il bridge lascia il body invariato quando la revisione attesa manca o è malformata', () => {
@@ -109,8 +149,28 @@ test('la chiave di idempotenza usa il body già normalizzato e timbrato', () => 
   );
   assert.equal(
     postedReviewKey(details),
-    JSON.stringify([REVIEW_PR, HEAD_SHA, body.trimEnd()]),
+    JSON.stringify([REVIEW_PR, HEAD_SHA, 'comment', body.trimEnd()]),
   );
+  const differentAction = reviewRetryDetails(
+    ['pr', 'review', REVIEW_PR, '-r', '--body', 'model body'],
+    0,
+    { headSha: HEAD_SHA, bodyOverride: body },
+  );
+  assert.notEqual(postedReviewKey(details), postedReviewKey(differentAction));
+});
+
+test('il bridge rifiuta una review con --body e --body-file insieme', () => {
+  const error = validateGhArgs(
+    ['pr', 'review', REVIEW_PR, '--comment', '--body', 'inline', '--body-file', 'review.md'],
+    {
+      cwd: ROOT,
+      workspaceRoot: ROOT,
+      scratchRoot: ROOT,
+      repository: 'owner/repo',
+      host: 'github.com',
+    },
+  );
+  assert.equal(error, 'gh pr review cannot combine --body and --body-file in the Codex fallback bridge');
 });
 
 test('il bridge timbra il body prima di pubblicare la review e deduplica il body timbrato', async () => {
@@ -171,9 +231,16 @@ test('action e prompt passano la revisione solo al bridge host-side', () => {
   assert.match(action, /codex_review_input_revision="\$\{REVIEW_REVISION:-\}"/u);
   assert.match(action, /CODEX_GH_REVIEW_INPUT_REVISION="\$codex_review_input_revision"/u);
   assert.match(action, /CODEX_GH_REVIEW_PR_NUMBER="\$codex_review_pr_number"/u);
+  assert.match(action, /claude_review_input_revision="\$\{REVIEW_REVISION:-\}"/u);
+  assert.match(action, /claude_review_pr_number="\$\{PR_NUMBER:-\}"/u);
   const reviewStepStart = workflow.indexOf('      - name: Run Codex Luna Max review');
   const reviewStep = workflow.slice(reviewStepStart, workflow.indexOf('\n      - name: ', reviewStepStart + 1));
   assert.match(reviewStep, /REVIEW_REVISION: \$\{\{ steps\.review_input\.outputs\.review_revision \}\}/u);
   assert.match(reviewStep, /Do not add or edit a `REVIEW_INPUT_REVISION` marker/u);
   assert.doesNotMatch(reviewStep, /DEVE contenere.*REVIEW_INPUT_REVISION/u);
+  const claudeStepStart = action.indexOf('    - name: Run Claude fallback');
+  const claudeStepEnd = action.indexOf('\n    - name: Cleanup Claude fallback GitHub bridge', claudeStepStart);
+  const claudeStep = action.slice(claudeStepStart, claudeStepEnd);
+  assert.match(claudeStep, /prompt: \$\{\{ inputs\.prompt \}\}/u);
+  assert.doesNotMatch(claudeStep, /REVIEW_INPUT_REVISION/u);
 });

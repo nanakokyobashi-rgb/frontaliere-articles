@@ -52,8 +52,8 @@ const operationValueFlags = new Set([
 ]);
 const blockedMutationFlags = new Set([
   '--close', '--reopen', '--lock', '--unlock', '--delete', '--delete-branch',
-  '--reason', '--admin', '--merge', '--squash', '--rebase', '--approve',
-  '--request-changes', '--dismiss', '--cancel',
+  '--reason', '--admin', '--merge', '--squash', '--rebase', '--approve', '-a',
+  '--request-changes', '-r', '--dismiss', '--cancel',
 ]);
 const blockedCommands = new Set([
   'auth', 'config', 'alias', 'extension', 'secret', 'secrets', 'variable',
@@ -84,6 +84,14 @@ const prBodyInlineFlags = new Set(['--body', '-b']);
 const MAX_PR_BODY_BYTES = 512 * 1024;
 const BODY_REVISION_RE = /^body:[0-9a-f]{64}$/u;
 const REVIEW_INPUT_MARKER_LINE_RE = /^[ \t]*<!--[ \t]*REVIEW_INPUT_REVISION:[^\r\n]*?(?:\r\n|\n|\r|\\r\\n|\\n|$)/gimu;
+const PR_REVIEW_ACTION_FLAGS = new Map([
+  ['--comment', 'comment'],
+  ['-c', 'comment'],
+  ['--approve', 'approve'],
+  ['-a', 'approve'],
+  ['--request-changes', 'request-changes'],
+  ['-r', 'request-changes'],
+]);
 const IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Implementato\b/im;
 const NON_IMPLEMENTED_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato[^\n]*\(ancora\)/im;
 const NON_IMPLEMENTED_ANY_HEADER_RE = /^[ \t]{0,3}#{2,3}[ \t]+Non[ \t]+implementato\b/im;
@@ -229,6 +237,15 @@ function pullRequestReviewBody(args, commandIndex, context) {
   return bodyFilePath(bodyFile.value, context).body || '';
 }
 
+function pullRequestReviewAction(args, start) {
+  const actions = new Set();
+  for (const arg of args.slice(start)) {
+    const action = PR_REVIEW_ACTION_FLAGS.get(arg);
+    if (action) actions.add(action);
+  }
+  return actions.size > 0 ? [...actions].sort().join('+') : 'default';
+}
+
 /** Mirror the trusted review-input revision normalization without imports. */
 export function normalizeBodyRevision(value) {
   const revision = String(value ?? '').trim().toLowerCase();
@@ -293,7 +310,7 @@ export function materializePullRequestReviewBody(args, start, {
   }
 }
 
-/** Build the review idempotency input from the normalized body and HEAD. */
+/** Build the review idempotency input from the action, body and HEAD. */
 export function reviewRetryDetails(args, commandIndex, {
   cwd,
   workspaceRoot,
@@ -302,22 +319,33 @@ export function reviewRetryDetails(args, commandIndex, {
   bodyOverride,
 } = {}) {
   if (!isPullRequestReviewArgs(args)) return null;
-  const pullNumber = pullRequestReviewNumber(args, commandIndex ?? commandIndexFor(args));
+  const resolvedCommandIndex = commandIndex ?? commandIndexFor(args);
+  const pullNumber = pullRequestReviewNumber(args, resolvedCommandIndex);
   const body = bodyOverride === undefined
-    ? pullRequestReviewBody(args, commandIndex ?? commandIndexFor(args), {
+    ? pullRequestReviewBody(args, resolvedCommandIndex, {
       cwd: cwd || process.cwd(),
       allowedRoots: [realRoot(workspaceRoot || cwd), realRoot(scratchRoot)].filter(Boolean),
     })
     : bodyOverride;
   const normalizedHead = String(headSha || '').trim();
   if (!/^\d+$/u.test(pullNumber) || !body || !/^[0-9a-f]{40}$/iu.test(normalizedHead)) return null;
-  return { pullNumber, body, headSha: normalizedHead };
+  return {
+    pullNumber,
+    body,
+    headSha: normalizedHead,
+    action: pullRequestReviewAction(args, resolvedCommandIndex + 1),
+  };
 }
 
-/** Return the per-run key for one review body on one PR HEAD. */
+/** Return the per-run key for one review action/body on one PR HEAD. */
 export function postedReviewKey(details) {
   if (!details) return '';
-  return JSON.stringify([details.pullNumber, details.headSha.toLowerCase(), details.body.trimEnd()]);
+  return JSON.stringify([
+    details.pullNumber,
+    details.headSha.toLowerCase(),
+    details.action || 'default',
+    details.body.trimEnd(),
+  ]);
 }
 
 function hasExplicitOption(args, name) {
@@ -697,9 +725,12 @@ function replacePullRequestReviewBodyOption(args, option, bodyPath) {
 
 function validatePrBodyArgs(args, commandIndex, context) {
   const operation = firstOperationArg(args, commandIndex + 1);
-  if (operation !== 'create' && operation !== 'edit') return '';
   const bodyFile = prBodyOption(args, commandIndex + 1, prBodyFileFlags);
   const bodyInline = prBodyOption(args, commandIndex + 1, prBodyInlineFlags);
+  if (operation === 'review' && bodyInline && bodyFile) {
+    return 'gh pr review cannot combine --body and --body-file in the Codex fallback bridge';
+  }
+  if (operation !== 'create' && operation !== 'edit') return '';
   if (bodyInline) {
     return `gh pr ${operation} cannot use inline --body; use a validated --body-file`;
   }
