@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/galleria-moscia-acapulco-il-progetto-entra-nel-vivo-un-investimento-da-180-milioni-441726": {
-    "articleId": "galleria-moscia-acapulco-180-milioni",
-    "ts": "2026-09-01T10:37:01.451Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/chiusure-notturne-tra-a8-e-diramazione-gallarate-gattico-il-4-settembre-percorsi-alternativi-e-orari/2667724": {
     "articleId": "chiusure-notturne-a8-dir-gallarate-gattico",
     "ts": "2026-09-01T12:13:48.256Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/conti-cantonali-disavanzo-fino-a-460-milioni-perche-il-governo-rinvia-le-scelte-444581": {
     "articleId": "disavanzo-cantonale-2027-2030",
     "ts": "2026-10-14T12:50:17.020Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/i-carabinieri-arrivano-sul-cantiere-in-provincia-di-como-tutto-sospeso-e-sanzioni-per-26mila-euro": {
+    "articleId": "ispezione-edile-lurate",
+    "ts": "2026-10-14T13:27:51.187Z",
     "keyForm": 2
   }
 }

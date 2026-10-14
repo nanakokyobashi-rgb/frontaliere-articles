@@ -13173,6 +13173,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.disavanzo-cantonale-2027-2030.title': 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
     'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
     'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Vista del lago di Lugano con skyline cittadino e passeggiata tranquilla',
+    'blog.article.ispezione-edile-lurate.title': 'Cantiere sospeso a Lurate Caccivio: denuncia',
+    'blog.article.ispezione-edile-lurate.excerpt': '12 ottobre 2026: controlli in un cantiere a Lurate Caccivio Ispezione dei Carabinieri di Como e dell\'Ispettorato del Lavoro Rilevate carenze su POS, scale',
+    'blog.article.ispezione-edile-lurate.imageAlt': 'Cantiere edile a Lurate Caccivio sottoposto a controlli e sospeso.',
 };
 
 export default blogMetaIt;

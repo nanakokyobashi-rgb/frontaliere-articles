@@ -13174,6 +13174,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.disavanzo-cantonale-2027-2030.title': 'Déficit cantonal tessinois prévu jusqu’à 460 millions',
     'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Le budget 2027 prévoit un déficit de 98,5 millions.',
     'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Vue sur le lac de Lugano avec la ligne d\'horizon de la ville et une promenade paisible',
+    'blog.article.ispezione-edile-lurate.title': 'Chantier suspendu à Lurate Caccivio : signalement',
+    'blog.article.ispezione-edile-lurate.excerpt': '12 octobre 2026 : contrôles sur un chantier à Lurate Caccivio Inspection des Carabinieri de Como et de l’Inspection du travail Lacunes relevées concernant le POS et les échelles',
+    'blog.article.ispezione-edile-lurate.imageAlt': 'Chantier à Lurate Caccivio contrôlé puis suspendu pour des irrégularités.',
 };
 
 export default blogMetaFr;

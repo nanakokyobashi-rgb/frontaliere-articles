@@ -13171,6 +13171,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.disavanzo-cantonale-2027-2030.title': 'Erwartetes Defizit des Kantons Tessin von bis zu 460 Millionen',
     'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von 98,5 Millionen vor.',
     'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Blick auf den Luganer See mit Stadtpanorama und ruhiger Promenade',
+    'blog.article.ispezione-edile-lurate.title': 'Baustelle in Lurate Caccivio stillgelegt: Anzeige',
+    'blog.article.ispezione-edile-lurate.excerpt': '12. Oktober 2026: Kontrollen auf einer Baustelle in Lurate Caccivio. Inspektion durch die Carabinieri von Como und das Arbeitsinspektorat. Mängel beim POS und bei den Leitern festgestellt.',
+    'blog.article.ispezione-edile-lurate.imageAlt': 'Baustelle in Lurate Caccivio nach Sicherheitskontrollen stillgelegt.',
 };
 
 export default blogMetaDe;
