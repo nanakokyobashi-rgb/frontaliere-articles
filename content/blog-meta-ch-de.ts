@@ -8237,6 +8237,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.negozi-berna-orari-festivi-regole.title': 'Öffnungszeiten der Geschäfte im Kanton Bern: Leitfaden zu Feiertagen und Regeln',
     'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Offizieller Leitfaden zu Ladenöffnungszeiten, Feiertagen, Sonderbewilligungen und Arbeitszeitgrenzen im Kanton Bern.',
     'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Oeffnungszeiten und Geschaeftsregeln im Kanton Bern',
+    'blog.article.imposta-cani-berna-guida.title': 'Hundesteuer im Kanton Bern: Leitfaden zu Beträgen und Regeln',
+    'blog.article.imposta-cani-berna-guida.excerpt': 'Praktischer Leitfaden zur Hundesteuer im Kanton Bern: allfällige Pflicht, Registrierung, Befreiungen und zuständige Behörden.',
+    'blog.article.imposta-cani-berna-guida.imageAlt': 'Hundesteuer im Kanton Bern: Regeln und Anmeldung',
 };
 
 export default blogMetaChDe;

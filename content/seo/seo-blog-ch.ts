@@ -103964,6 +103964,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposta-cani-berna-guida': {
+    title: 'Imposta sui cani nel Cantone di Berna: guida a importi e regole',
+    description: 'Scopri la guida completa sull\'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni, autorità e modalità di pagamento ufficiali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, cani, cantone, berna',
+    ogTitle: 'Guida all\'imposta sui cani nel Cantone di Berna',
+    ogDescription: 'Tutto quello che c\'è da sapere sull\'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione dell\'animale, esenzioni e regole di pagamento comunali e cantonali.',
+    canonicalPath: '/articoli-svizzera/imposta-cani-berna-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta sui cani nel Cantone di Berna: guida a importi e regole",
+      "description": "Scopri la guida completa sull'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni, autorità e modalità di pagamento ufficiali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imposta-cani-berna-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imposta sui cani nel Cantone di Berna: regole e registrazione"
+      },
+      "datePublished": "2026-10-14T06:31:49+00:00",
+      "dateModified": "2026-10-14T06:31:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-cani-berna-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
