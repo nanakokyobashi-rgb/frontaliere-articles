@@ -4527,8 +4527,8 @@
       "mode": "identical",
       "reason": "Riallineato il 2026-10-12 alla lineage generata dal sito: il contratto e i 24 artifact crawler osservati sono byte-identici fra sito e corpus, con il roster corrente di 627 crawler e provenance ancorata al merge sito `97a954ad5b2f2e8ed8828ef265f1cc8bc145588b`.",
       "baseline": {
-        "site": "23b6dcd8a516b4c0",
-        "corpus": "23b6dcd8a516b4c0",
+        "site": "4149c259fe4f5f9c",
+        "corpus": "4149c259fe4f5f9c",
         "alignedAt": "2026-10-14"
       }
     },
