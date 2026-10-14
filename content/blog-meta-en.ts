@@ -13163,6 +13163,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto Ceresio: former customs house reborn as tourist office',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Sunday, October 18, ribbon-cutting at 11 a.m.',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'The former Royal Customs House in Porto Ceresio, now a Tourist Office, against a backdrop of Lake Lugano and mountains.',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Work accidents Lombardy: 2026 data worsen, Como peaks',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Over 75,293 accidents in Lombardy between January and August 2026 Total deaths rise to 101, compared to 97 in 2025 Como records 3,795 complaints and an increase',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Editorial image related to: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
 };
 
 export default blogMetaEn;

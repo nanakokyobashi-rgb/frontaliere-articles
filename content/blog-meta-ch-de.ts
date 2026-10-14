@@ -8243,6 +8243,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.title': 'Jagdlizenz im Kanton Bern: Voraussetzungen und Antrag',
     'blog.article.licenza-caccia-berna-requisiti.excerpt': 'Erfahren Sie, wie Sie die Jagdlizenz im Kanton Bern beantragen: Prüfen Sie Zuständigkeit, Voraussetzungen, Prüfungen, jagdbare Arten, Dokumente, Fristen und Beträge.',
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landschaft im Kanton Bern in der Schweiz',
+    'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pensionskassen: Illiquide Anlagen machen 36% des Vermögens aus',
+    'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% des Vermögens sind in nicht unmittelbar handelbaren Anlagen investiert Der Anteil ist in den letzten 15 Jahren gestiegen Immobilien, Hypotheken und alternative Anlagen bieten Stabilität',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pensionskassen-Büro in Zürich mit Analysten, die illiquide Portfolios prüfen',
 };
 
 export default blogMetaChDe;

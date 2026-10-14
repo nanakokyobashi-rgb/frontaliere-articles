@@ -13164,6 +13164,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto ceresio: ex dogana rinasce ufficio turistico',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Domenica 18 ottobre il taglio del nastro alle ore 11 L’ex Regia Dogana è in via Mazzini L’edificio diventa il nuovo Ufficio Turistico Recupero sostenuto',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'L\'ex Regia Dogana di Porto Ceresio, ora Ufficio Turistico, con il lago e le montagne sullo sfondo.',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Oltre 75.293 infortuni in Lombardia tra gennaio e agosto 2026 I decessi totali salgono a 101, contro 97 nel 2025 Como registra 3.795 denunce e un aumento',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Immagine editoriale relativa a: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
 };
 
 export default blogMetaIt;

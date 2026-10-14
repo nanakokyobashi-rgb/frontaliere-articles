@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/svizzera/una-stablecoin-in-franchi-il-progetto-entra-nella-fase-operativa--4067737.html": {
-    "articleId": "stablecoin-franco-fase-operativa",
-    "ts": "2026-09-09T11:48:44.960Z",
-    "keyForm": 2
-  },
   "https://www.seco.admin.ch/it/newnsb/5xgohc4gf9pm": {
     "articleId": "accordo-clima-commercio-consultazione",
     "ts": "2026-09-09T12:32:04.547Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956415/grandine-swiss-agosto-danni-re-svizzera-miliardi": {
     "articleId": "grandine-svizzera-danni-swiss-re",
     "ts": "2026-10-14T02:27:16.744Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1956672/investimenti-casse-pensioni-illiquidi-rischi": {
+    "articleId": "investimenti-illiquidi-pensione-2026",
+    "ts": "2026-10-14T11:36:00.096Z",
     "keyForm": 2
   }
 }
