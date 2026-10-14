@@ -13077,7 +13077,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Franco Ossola stadium in Varese with green pitch',
     'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi opens Varese\'s theater season',
     'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi returns to the theater after twenty-five years BIOL',
-    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Audience at Teatro di Varese during Fabio De Luigi\'s show',
+    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Illustration generated for this article',
     'blog.article.rio-scorta-giro-como.title': 'Como, Rio is born under escort during the Giro',
     'blog.article.rio-scorta-giro-como.excerpt': 'At Como, during the Giro di Lombardia, traffic was blocked Elisa called after her water broke Rio was born at 16.57, after a motorcycle escort',
     'blog.article.rio-scorta-giro-como.imageAlt': 'Illustration generated for this article',
@@ -13168,10 +13168,10 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Editorial image related to: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
     'blog.article.arresti-auto-como-minacce.title': 'Two arrests in Como: carjackings and injured motorist',
     'blog.article.arresti-auto-como-minacce.excerpt': 'Two stops at Como after resident reports A forced car and a second vehicle damaged A motorist reports an injury to an arm',
-    'blog.article.arresti-auto-como-minacce.imageAlt': 'Urban street near the border with parked cars and a parking garage at dawn',
+    'blog.article.arresti-auto-como-minacce.imageAlt': 'Illustration generated for this article',
     'blog.article.disavanzo-cantonale-2027-2030.title': 'Ticino cantonal deficit expected to reach 460 million',
     'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'The 2027 budget forecasts a deficit of 98,5 million.',
-    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'View of Lake Lugano with city skyline and tranquil promenade',
+    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Illustration generated for this article',
     'blog.article.ispezione-edile-lurate.title': 'Construction site suspended in Lurate Caccivio: complaint',
     'blog.article.ispezione-edile-lurate.excerpt': 'October 12, 2026: checks at a construction site in Lurate Caccivio Inspection by the Carabinieri of Como and the Labor Inspectorate Shortcomings found regarding the POS and ladders',
     'blog.article.ispezione-edile-lurate.imageAlt': 'Building site in Lurate Caccivio inspected and suspended after safety violations.',
@@ -13181,6 +13181,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.title': 'Completion of fiber-optic work in 145 municipalities in Como, 27,9 mln €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Network nearing completion in 145 municipalities in the Como area More than 27,9 million in public funds for Como Adoption of ultra-broadband: 23% versus 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Fiber optic cable installation in a Como province town, close-up and detailed view.',
+    'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Accident on the A8 between Castellanza and Busto: long tailback',
+    'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Accident on the A8 shortly after 4 p.m.',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Traffic queue on the A8 motorway between Castellanza and Busto Arsizio after a crash',
 };
 
 export default blogMetaEn;

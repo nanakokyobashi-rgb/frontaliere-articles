@@ -13076,7 +13076,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.manutenzione-prato-franco-ossola-2026.imageAlt': 'Franco-Ossola-Stadion in Varese mit grünem Rasen',
     'blog.article.fabio-de-luigi-biol-varese.title': 'Fabio De Luigi eröffnet die Theatersaison in Varese',
     'blog.article.fabio-de-luigi-biol-varese.excerpt': 'Fabio De Luigi kehrt nach 25 Jahren ins Theater zurück BIOL',
-    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Publikum im Teatro di Varese während der Show von Fabio De Luigi',
+    'blog.article.fabio-de-luigi-biol-varese.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.rio-scorta-giro-como.title': 'Como, Rio wird mit Begleitung während des Giro geboren',
     'blog.article.rio-scorta-giro-como.excerpt': 'Bei Como, während der Lombardei-Rundfahrt, war die Straße blockiert Elisa rief an, nachdem sie das Wasser gebrochen hatte Rio wurde um 16.57 Uhr geboren, nach einer Begleitung mit dem Motorrad',
     'blog.article.rio-scorta-giro-como.imageAlt': 'Für diesen Artikel erstellte Illustration',
@@ -13167,10 +13167,10 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Redaktionelles Bild zu: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
     'blog.article.arresti-auto-como-minacce.title': 'Zwei Festnahmen in Como: Autodiebstahl und verletzter Autofahrer',
     'blog.article.arresti-auto-como-minacce.excerpt': 'Zwei Verhaftungen bei Como nach Meldungen von Anwohnern Ein erzwungenes Auto und ein zweites beschädigtes Fahrzeug Ein Autofahrer meldet eine Verletzung an einem Arm',
-    'blog.article.arresti-auto-como-minacce.imageAlt': 'Stadtstrasse nahe der Grenze mit parkierten Autos und Parkhaus im Morgengrauen',
+    'blog.article.arresti-auto-como-minacce.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.disavanzo-cantonale-2027-2030.title': 'Erwartetes Defizit des Kantons Tessin von bis zu 460 Millionen',
     'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von 98,5 Millionen vor.',
-    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Blick auf den Luganer See mit Stadtpanorama und ruhiger Promenade',
+    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.ispezione-edile-lurate.title': 'Baustelle in Lurate Caccivio stillgelegt: Anzeige',
     'blog.article.ispezione-edile-lurate.excerpt': '12. Oktober 2026: Kontrollen auf einer Baustelle in Lurate Caccivio. Inspektion durch die Carabinieri von Como und das Arbeitsinspektorat. Mängel beim POS und bei den Leitern festgestellt.',
     'blog.article.ispezione-edile-lurate.imageAlt': 'Baustelle in Lurate Caccivio nach Sicherheitskontrollen stillgelegt.',
@@ -13180,6 +13180,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fibra-ottica-145-comuni-como.title': 'Glasfaserarbeiten: 145 Gemeinden Como fertig, 27,9 Mio €',
     'blog.article.fibra-ottica-145-comuni-como.excerpt': 'Netz in 145 Gemeinden der Provinz Como kurz vor der Fertigstellung Über 27,9 Millionen an öffentlichen Mitteln für Como Anschlussquote beim Ultrabreitband: 23% gegenüber 17% Piano Italia 1 Giga',
     'blog.article.fibra-ottica-145-comuni-como.imageAlt': 'Glasfaserkabelinstallation in einer Gemeinde der Provinz Como, Nahaufnahme mit vielen Details.',
+    'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Unfall auf der A8 zwischen Castellanza und Busto: langer Stau',
+    'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Unfall auf der A8 kurz nach 16 Uhr Vier Personen beteiligt Zwei Rettungswagen und ein Notarzteinsatzfahrzeug mit höchster Dringlichkeitsstufe Langer Stau ab der Verzweigung A8/A9 Was: Verkehrsunfall',
+    'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Stau auf der A8 zwischen Castellanza und Busto Arsizio nach einem Unfall',
 };
 
 export default blogMetaDe;

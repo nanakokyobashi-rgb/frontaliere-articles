@@ -8245,13 +8245,19 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Landschaft im Kanton Bern in der Schweiz',
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pensionskassen: Illiquide Anlagen machen 36% des Vermögens aus',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% des Vermögens sind in nicht unmittelbar handelbaren Anlagen investiert Der Anteil ist in den letzten 15 Jahren gestiegen Immobilien, Hypotheken und alternative Anlagen bieten Stabilität',
-    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pensionskassen-Büro in Zürich mit Analysten, die illiquide Portfolios prüfen',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Für diesen Artikel erstellte Illustration',
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Unternehmensinsolvenzen deutlich gestiegen, Rekord 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvente Unternehmen zwischen Januar und September Unternehmenskonkurse bei 13’660, +38,4% im Jahresvergleich Neue Eintragungen ins Register: 41’706 Privatpersonen: 8’003 Konkurse',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Blick auf den Luganer See mit Bürogebäuden und ruhigem Wasser, klarer Tag',
     'blog.article.prezzi-auto-nuove-usate-calo.title': 'Preise für Neu- und Gebrauchtwagen sinken dank chinesischer Marken',
     'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Im dritten Quartal sinken die Durchschnittspreise für Neuwagen.',
     'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Schweizer Autohaus-Lot mit neuen und gebrauchten Fahrzeugen und sichtbaren Preisschildern',
+    'blog.article.diritti-politici-disabilita.title': 'Menschen mit geistiger Behinderung, Vernehmlassung zu den politischen Rechten',
+    'blog.article.diritti-politici-disabilita.excerpt': 'Der Bundesrat eröffnet die Vernehmlassung am 14.',
+    'blog.article.diritti-politici-disabilita.imageAlt': 'Schweizerisches Amtsgebäude als Symbol für politische Teilhabe',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Geldwäscherei in der Schweiz: Mehr Ressourcen und Sanktionen sind nötig',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Die Risiken bleiben in der Schweiz hoch Der Bundesrat nimmt den dritten Bericht zur Kenntnis Die GCRF formuliert acht Empfehlungen Mehr Ressourcen und Sanktionen sind nötig',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Bundesrates',
 };
 
 export default blogMetaChDe;

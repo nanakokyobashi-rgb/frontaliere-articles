@@ -8245,13 +8245,19 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paysage du canton de Berne en Suisse',
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Caisses de pension : investissements illiquides à 36% du patrimoine',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% du patrimoine est investi dans des actifs non immédiatement négociables La part a augmenté au cours des 15 dernières années L’immobilier, les hypothèques et les placements alternatifs offrent de la stabilité',
-    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Bureau de caisse de pension à Zurich avec analystes examinant des portefeuilles illiquides',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Illustration générée pour cet article',
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Faillites d’entreprises en forte hausse, record en 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 entreprises insolvables entre janvier et septembre Faillites d’entreprises à 13’660, +38,4% sur un an Nouvelles inscriptions au registre : 41’706 Particuliers : 8’003 faillites',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vue sur le lac de Lugano avec des bâtiments de bureau et de l\'eau calme, journée dégagée',
     'blog.article.prezzi-auto-nuove-usate-calo.title': 'Les prix des voitures neuves et d’occasion baissent grâce aux marques chinoises',
     'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Au troisième trimestre, les prix moyens des voitures neuves baissent.',
     'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Lot d\'une concession suisse montrant des véhicules neufs et d\'occasion avec étiquettes de prix visibles',
+    'blog.article.diritti-politici-disabilita.title': 'Déficience intellectuelle : droits politiques, consultation',
+    'blog.article.diritti-politici-disabilita.excerpt': 'Le Conseil fédéral lance la consultation le 14 octobre 2026 Date limite de la consultation : 28 janvier En proposition, vote fédéral et signature d’initiatives',
+    'blog.article.diritti-politici-disabilita.imageAlt': 'Bâtiment civique suisse, symbole de la participation politique inclusive',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Blanchiment d’argent en Suisse : il faut davantage de ressources et de sanctions',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Les risques restent élevés en Suisse Le Conseil fédéral prend acte du troisième rapport Le GCRF formule huit recommandations Il faut davantage de ressources et de sanctions',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Conseil fédéral suisse',
 };
 
 export default blogMetaChFr;

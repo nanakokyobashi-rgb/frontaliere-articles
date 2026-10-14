@@ -104056,10 +104056,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/accordo-investimenti-saudi-2026.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-investimenti-illiquidi-pensione-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T11:35:59+00:00",
       "dateModified": "2026-10-14T11:35:59+00:00",
@@ -104150,6 +104155,79 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-auto-nuove-usate-calo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-diritti-politici-disabilita': {
+    title: 'Disabili intellettivi, consultazione sui diritti politici',
+    description: 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Scadenza della consultazione: 28 gennaio In proposta voto federale e firma di iniziative',
+    keywords: 'frontalieri, ticino, svizzera, italia, disabili, intellettivi, consultazione, diritti',
+    ogTitle: 'Disabili intellettivi, consultazione sui diritti politici',
+    ogDescription: 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Scadenza della consultazione: 28 gennaio In proposta voto federale e firma di iniziative',
+    canonicalPath: '/articoli-svizzera/diritti-politici-disabilita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disabili intellettivi, consultazione sui diritti politici",
+      "description": "Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Scadenza della consultazione: 28 gennaio In proposta voto federale e firma di iniziative",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-diritti-politici-disabilita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio civico svizzero, simbolo della partecipazione politica inclusiva"
+      },
+      "datePublished": "2026-10-14T15:17:53+00:00",
+      "dateModified": "2026-10-14T15:17:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/diritti-politici-disabilita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rapporto-riciclaggio-denaro-svizzera': {
+    title: 'Riciclaggio in Svizzera: servono più risorse e sanzioni',
+    description: 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, riciclaggio, servono, risorse, sanzioni',
+    ogTitle: 'Riciclaggio in Svizzera: rischi elevati e nuove misure',
+    ogDescription: 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
+    canonicalPath: '/articoli-svizzera/rapporto-riciclaggio-denaro-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Riciclaggio in Svizzera: servono più risorse e sanzioni",
+      "description": "I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/accordi-svizzera-ue-consiglio-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del Consiglio federale svizzero"
+      },
+      "datePublished": "2026-10-14T16:21:05+00:00",
+      "dateModified": "2026-10-14T16:21:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rapporto-riciclaggio-denaro-svizzera/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

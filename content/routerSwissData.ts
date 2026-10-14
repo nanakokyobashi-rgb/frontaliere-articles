@@ -2773,6 +2773,8 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'investimenti-illiquidi-pensione-2026': { it: 'investimenti-illiquidi-pensione-2026', en: 'illiquid-investments-pension-2026', de: 'illiquide-anlagen-pension-2026', fr: 'investissements-illiquides-pension-2026' },
  'fallimenti-aziendali-svizzera-aumento': { it: 'fallimenti-aziendali-svizzera-aumento', en: 'corporate-bankruptcies-sharply-on-the-rise-record-high-in-2025-2026', de: 'unternehmensinsolvenzen-deutlich-gestiegen-rekord-2025-2026', fr: 'faillites-d-entreprises-en-forte-hausse-record-en-2025-2026' },
  'prezzi-auto-nuove-usate-calo': { it: 'prezzi-auto-nuove-usate-calo', en: 'new-and-used-car-prices-falling-thanks-to-chinese-brands', de: 'preise-fur-neu-und-gebrauchtwagen-sinken-dank-chinesischer-marken', fr: 'les-prix-des-voitures-neuves-et-d-occasion-baissent-grace-aux-marques-chinoises' },
+ 'diritti-politici-disabilita': { it: 'diritti-politici-disabilita', en: 'political-rights-intellectual-disability', de: 'politische-rechte-geistige-behinderung', fr: 'droits-politiques-handicap-intellectuel' },
+ 'rapporto-riciclaggio-denaro-svizzera': { it: 'rapporto-riciclaggio-denaro-svizzera', en: 'switzerland-money-laundering-report', de: 'schweiz-geldwaesche-bericht', fr: 'suisse-rapport-blanchiment-argent' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

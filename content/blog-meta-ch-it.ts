@@ -8245,13 +8245,19 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.licenza-caccia-berna-requisiti.imageAlt': 'Paesaggio del Cantone di Berna in Svizzera',
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Casse pensioni: investimenti illiquidi al 36% del patrimonio',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': 'Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità',
-    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi',
+    'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
     'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
     'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vista del lago di Lugano con edifici uffici e acqua calma, giorno sereno',
     'blog.article.prezzi-auto-nuove-usate-calo.title': 'Prezzi auto nuove e usate in calo grazie ai marchi cinesi',
     'blog.article.prezzi-auto-nuove-usate-calo.excerpt': 'Nel terzo trimestre calano i prezzi medi delle auto nuove.',
     'blog.article.prezzi-auto-nuove-usate-calo.imageAlt': 'Lot di automobili nuove e usate in una concessionaria svizzera con prezzi visibili',
+    'blog.article.diritti-politici-disabilita.title': 'Disabili intellettivi, consultazione sui diritti politici',
+    'blog.article.diritti-politici-disabilita.excerpt': 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Scadenza della consultazione: 28 gennaio In proposta voto federale e firma di iniziative',
+    'blog.article.diritti-politici-disabilita.imageAlt': 'Edificio civico svizzero, simbolo della partecipazione politica inclusiva',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Riciclaggio in Svizzera: servono più risorse e sanzioni',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Palazzo federale a Berna, sede del Consiglio federale svizzero',
 };
 
 export default blogMetaChIt;
