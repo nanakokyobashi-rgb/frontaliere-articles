@@ -362,7 +362,17 @@ jobs:
             # run, così nessuna provenance viene persa.
             set +e
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
-              data/generated-image-registry.json 2>&1 \
+              data/generated-image-registry.json \
+              --merge-registry content/blogArticleIds.ts \
+              --merge-registry content/routerBlogData.ts \
+              --merge-registry content/blog-articles-data.ts \
+              --merge-registry content/blog-meta-it.ts \
+              --merge-registry content/blog-meta-en.ts \
+              --merge-registry content/blog-meta-de.ts \
+              --merge-registry content/blog-meta-fr.ts \
+              --merge-registry "content/seo/seo-blog-*.ts" \
+              --take-theirs content/blog-body/ \
+              --take-theirs public/images/blog/ 2>&1 \
               | tee -a "$PUSH_LOG"
             rebase_status=${PIPESTATUS[0]}
             set -e

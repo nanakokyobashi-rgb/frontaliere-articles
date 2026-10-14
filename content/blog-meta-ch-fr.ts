@@ -8279,6 +8279,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.consiglio-federale-doganal-consultazione.title': 'Le Conseil fédéral lance la consultation sur les ordonnances douanières',
     'blog.article.consiglio-federale-doganal-consultazione.excerpt': 'Le Conseil fédéral lance la consultation le 14 octobre 2026 Le projet concerne la révision totale du droit douanier Le délai de consultation est',
     'blog.article.consiglio-federale-doganal-consultazione.imageAlt': 'Palais fédéral suisse à Berne avec des douaniers à la frontière',
+    'blog.article.consultazione-omc-commercio-digitale.title': 'Suisse, consultation sur l\'accord OMC e-commerce',
+    'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Accord plurilatéral sur le commerce électronique à l\'OMC 67 membres, dont la Suisse, choisissent la mise en œuvre provisoire Consultation à partir du 14 octobre 2026',
+    'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzone, décor suisse symbolique du commerce numérique.',
 };
 
 export default blogMetaChFr;

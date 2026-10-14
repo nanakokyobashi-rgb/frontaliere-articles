@@ -1,9 +1,4 @@
 {
-  "https://www.stelle.admin.ch/it": {
-    "articleId": "offerte-formazione-federale",
-    "ts": "2026-10-13T23:44:58.193Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1949079/cantone-e-comuni-si-confrontano-su-fisco-progetto-ticino-2020-e-riforma-arp": {
     "articleId": "cantone-comuni-fisco-riforma-arp",
     "ts": "2026-09-09T17:32:52.261Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/jmo3fhpgmujt": {
     "articleId": "consiglio-federale-doganal-consultazione",
     "ts": "2026-10-14T20:22:36.030Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/j4ovbnyxb8fq": {
+    "articleId": "consultazione-omc-commercio-digitale",
+    "ts": "2026-10-14T21:29:46.303Z",
     "keyForm": 2
   }
 }

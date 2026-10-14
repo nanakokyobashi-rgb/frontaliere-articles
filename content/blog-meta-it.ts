@@ -13193,7 +13193,10 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Illustrazione generata per questo articolo',
     'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Controlli a Cuvio e Cuveglio: 7 patenti ritirate e 10 sequestri',
     'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Sette patenti ritirate e dieci veicoli sequestrati Controlli anche con etilometro e tassi sopra 1,5 g/l Più agenti indicativamente tra le 17 e le 20 Il progetto',
-    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Auto della Polizia Locale durante i controlli stradali tra Cuveglio e Cuvio',
+    'blog.article.due-arresti-malpra-varese.title': 'Varese, due arresti per maltrattamenti familiari con cinque minori',
+    'blog.article.due-arresti-malpra-varese.excerpt': 'Due arresti a Varese per maltrattamenti familiari Il primo episodio si è verificato sabato pomeriggio Cinque figli minori erano presenti, tra 5 e 8 anni',
+    'blog.article.due-arresti-malpra-varese.imageAlt': 'Auto dei carabinieri fermata davanti a un edificio del centro di Varese al tramonto.',
 };
 
 export default blogMetaIt;

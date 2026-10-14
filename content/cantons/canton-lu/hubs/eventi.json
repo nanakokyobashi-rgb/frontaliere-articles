@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "24383028f85c15508b1dfc4f31dc6bc5fc7371f86a9a47ab0b9acb138815e343",
+  "updatedAt": "2026-10-14T21:07:05.190Z",
+  "contentHash": "b134e448456272d3a0dfd62ba25b90fa44b2964c4573b6fb52cb0d27926e6a50",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T21:57:18.142Z",
+      "updatedAt": "2026-10-14T13:57:52.093Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "updatedAt": "2026-10-14T10:37:16.619Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,18 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -131,14 +136,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-08T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -159,7 +159,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T21:07:05.190Z"
     },
     "en": {
       "canton": "LU",
@@ -242,13 +242,18 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -273,14 +278,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-08T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -301,7 +301,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T21:07:05.190Z"
     },
     "de": {
       "canton": "LU",
@@ -384,13 +384,18 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -415,14 +420,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-08T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -443,7 +443,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T21:07:05.190Z"
     },
     "fr": {
       "canton": "LU",
@@ -526,13 +526,18 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-13T21:57:18.142Z"
+          "updatedAt": "2026-10-14T13:57:52.093Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Im Gespräch über Sicherheit und Sauberkeit",
+              "date": "2026-10-14T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7688353"
+            },
             {
               "label": "KulTour - Blick hinter die Türen von Kulturschaffenden",
               "date": "2026-10-11T22:00:00.000Z",
@@ -557,14 +562,9 @@
               "label": "Salonkonzert",
               "date": "2026-10-08T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463704"
-            },
-            {
-              "label": "Kunstausstellung Weltformat",
-              "date": "2026-10-02T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-13T21:59:58.321Z"
+          "updatedAt": "2026-10-14T10:37:16.619Z"
         }
       ],
       "curatedArticles": [
@@ -585,7 +585,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T21:07:05.190Z"
     }
   }
 }

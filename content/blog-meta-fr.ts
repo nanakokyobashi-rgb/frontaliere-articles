@@ -13194,7 +13194,10 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.derby-basket-ticinese-massagno.imageAlt': 'Illustration générée pour cet article',
     'blog.article.controlli-polizia-cuvio-cuveglio.title': 'Contrôles à Cuvio et Cuveglio : 7 permis retirés et 10 saisies',
     'blog.article.controlli-polizia-cuvio-cuveglio.excerpt': 'Sept permis retirés et dix véhicules saisis Contrôles également avec éthylomètre et taux supérieurs à 1,5 g/l Davantage d\'agents, approximativement entre 17 h et 20 h Le projet',
-    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.controlli-polizia-cuvio-cuveglio.imageAlt': 'Voiture de la police locale lors des contrôles routiers entre Cuveglio et Cuvio',
+    'blog.article.due-arresti-malpra-varese.title': 'Varese, deux arrestations pour maltraitances familiales impliquant cinq mineurs',
+    'blog.article.due-arresti-malpra-varese.excerpt': 'Deux arrestations à Varese pour maltraitances familiales Le premier épisode s’est produit samedi après-midi Cinq enfants mineurs étaient présents, entre 5 et 8 ans',
+    'blog.article.due-arresti-malpra-varese.imageAlt': 'Voiture de police arrêtée devant un bâtiment du centre de Varese au coucher du soleil.',
 };
 
 export default blogMetaFr;

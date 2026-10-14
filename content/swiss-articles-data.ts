@@ -27641,6 +27641,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'consultazione-omc-commercio-digitale',
+    category: 'novita',
+    date: '2026-10-14T21:29:45.970Z',
+    image: '/images/blog/article-consultazione-omc-commercio-digitale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
