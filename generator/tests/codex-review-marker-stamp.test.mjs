@@ -171,6 +171,10 @@ test('action e prompt passano la revisione solo al bridge host-side', () => {
   assert.match(action, /codex_review_input_revision="\$\{REVIEW_REVISION:-\}"/u);
   assert.match(action, /CODEX_GH_REVIEW_INPUT_REVISION="\$codex_review_input_revision"/u);
   assert.match(action, /CODEX_GH_REVIEW_PR_NUMBER="\$codex_review_pr_number"/u);
+  assert.match(action, /claude_bridge_review_input_revision="\$\{REVIEW_REVISION:-\}"/u);
+  assert.match(action, /claude_bridge_review_pr_number="\$\{PR_NUMBER:-\}"/u);
+  assert.match(action, /CODEX_GH_REVIEW_INPUT_REVISION="\$claude_bridge_review_input_revision"/u);
+  assert.match(action, /CODEX_GH_REVIEW_PR_NUMBER="\$claude_bridge_review_pr_number"/u);
   const reviewStepStart = workflow.indexOf('      - name: Run Codex Luna Max review');
   const reviewStep = workflow.slice(reviewStepStart, workflow.indexOf('\n      - name: ', reviewStepStart + 1));
   assert.match(reviewStep, /REVIEW_REVISION: \$\{\{ steps\.review_input\.outputs\.review_revision \}\}/u);

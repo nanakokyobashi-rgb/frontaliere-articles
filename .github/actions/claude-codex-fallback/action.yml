@@ -1451,6 +1451,10 @@ runs:
         side_effect_file="$bridge_root/side-effects"
         : > "$side_effect_file"
         chmod 600 "$side_effect_file"
+        # Keep the review identity in the host-side bridge only. Claude's model
+        # environment remains isolated from these workflow values.
+        claude_bridge_review_input_revision="${REVIEW_REVISION:-}"
+        claude_bridge_review_pr_number="${PR_NUMBER:-}"
         env -i \
           CODEX_BRIDGE_TRANSPORT=files \
           CODEX_GH_AUTH="$current_token" \
@@ -1465,6 +1469,8 @@ runs:
           CODEX_GH_SITE_REPOSITORY="valerielinc-ops/frontaliere-si-o-no" \
           CODEX_GH_HOST="${GITHUB_SERVER_URL:?GitHub host unavailable}" \
           CODEX_GH_CORPUS_REPOSITORY="nanakokyobashi-rgb/frontaliere-articles" \
+          CODEX_GH_REVIEW_INPUT_REVISION="$claude_bridge_review_input_revision" \
+          CODEX_GH_REVIEW_PR_NUMBER="$claude_bridge_review_pr_number" \
           CODEX_GH_SIDE_EFFECT_FILE="$side_effect_file" \
           PATH="$(dirname "$node_bin"):/usr/bin:/bin" \
           HOME="$bridge_root/home" \
