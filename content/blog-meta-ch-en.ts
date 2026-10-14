@@ -8258,6 +8258,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Recycling in Switzerland: more resources and penalties are needed',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Risks remain high in Switzerland The Federal Council takes note of the third report The GCRF makes eight recommendations More resources and sanctions are needed',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Federal Palace in Bern, seat of the Swiss Federal Council',
+    'blog.article.nuovo-accordo-commercio-elettronico.title': 'New e-commerce agreement',
+    'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'The Federal Council launches the consultation on ACE.',
+    'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop with digital trade chart in front of Lake Lugano',
 };
 
 export default blogMetaChEn;

@@ -8258,6 +8258,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Riciclaggio in Svizzera: servono più risorse e sanzioni',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Palazzo federale a Berna, sede del Consiglio federale svizzero',
+    'blog.article.nuovo-accordo-commercio-elettronico.title': 'Nuovo accordo per il commercio elettronico',
+    'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'Il Consiglio federale avvia la consultazione sull\'ACE.',
+    'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop con grafico del commercio digitale davanti al lago Lugano',
 };
 
 export default blogMetaChIt;

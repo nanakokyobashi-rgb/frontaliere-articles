@@ -8258,6 +8258,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Blanchiment d’argent en Suisse : il faut davantage de ressources et de sanctions',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Les risques restent élevés en Suisse Le Conseil fédéral prend acte du troisième rapport Le GCRF formule huit recommandations Il faut davantage de ressources et de sanctions',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Conseil fédéral suisse',
+    'blog.article.nuovo-accordo-commercio-elettronico.title': 'Nouvel accord sur le commerce électronique',
+    'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'Le Conseil fédéral lance la consultation sur l\'ACE.',
+    'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Ordinateur montrant un graphique du commerce électronique devant le lac de Lugano',
 };
 
 export default blogMetaChFr;

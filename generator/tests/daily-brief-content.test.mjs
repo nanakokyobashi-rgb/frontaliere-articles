@@ -27,6 +27,8 @@ import {
 } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
 import { findArticleLocalizedToponymMismatches } from '../scripts/lib/localized-toponyms.mjs';
+import { shapeBorderWait, shapeExchange, shapeFuel, BORDER_WAIT_MIN_CROSSINGS } from '../scripts/lib/daily-brief-data.mjs';
+import { buildDailyBriefInsights } from '../scripts/lib/daily-brief-insights.mjs';
 
 const BRIEF = {
   schemaVersion: 1,
@@ -118,6 +120,25 @@ test('every locale gets 4 bodies, its hub links and a 3-question FAQ', () => {
   assert.match(article.content.fr.body4, /\/fr\/trouver-emploi-tessin\//);
 });
 
+test('the published copy reflects available observations and verified-data recovery', () => {
+  const article = buildDailyBriefArticle(BRIEF);
+  assert.match(article.content.it.body1, /Tra i rilevamenti disponibili/);
+  assert.match(article.content.en.body1, /Among the available readings/);
+  assert.match(article.content.de.body1, /Unter den verfügbaren Messungen/);
+  assert.match(article.content.fr.body1, /Parmi les relevés disponibles/);
+
+  const degradedFuel = structuredClone(BRIEF);
+  degradedFuel.blocks.fuel.available = false;
+  const degradedArticle = buildDailyBriefArticle(degradedFuel);
+  assert.match(degradedArticle.content.it.body2, /quando sono di nuovo disponibili dati verificabili/);
+  assert.match(degradedArticle.content.en.body2, /when verifiable data are available again/);
+  assert.match(degradedArticle.content.de.body2, /sobald wieder verifizierbare Daten vorliegen/);
+  assert.match(degradedArticle.content.fr.body2, /dès que des données vérifiables sont de nouveau disponibles/);
+
+  assert.match(article.content.de.body2, /beträgt die Differenz der gemeldeten Preise .* pro 50-Liter-Tank/);
+  assert.doesNotMatch(article.content.de.body2, /pro 50-Liter-Tank\*\* wert/);
+});
+
 test('localizes dynamic border-crossing exonyms before the shared factuality gate', () => {
   const brief = structuredClone(BRIEF);
   const name = 'Basel – Weil am Rhein, Autostrada A2/A5';
@@ -188,6 +209,87 @@ const SURFACE_BUDGETS = {
 };
 /** The site's hard bound on `description`, mirrored so a drift here is loud. */
 const SITE_DESCRIPTION_HARD_MAX = 170;
+
+test('the maximum wait is attributed to available observations, not the newest crossing update', () => {
+  const nowMs = Date.parse('2026-10-14T15:00:00Z');
+  const older = '2026-10-14T14:00:00Z';
+  const newer = '2026-10-14T14:58:00Z';
+  for (const maximum of [8, 30]) {
+    const docs = Array.from({ length: BORDER_WAIT_MIN_CROSSINGS }, (_, i) => ({
+      slug: `crossing-${i}`, crossingName: i === 0 ? 'Worst Border' : `Border ${i}`,
+      waitTimeMinutes: i === 0 ? maximum : 0, lastUpdate: i === 0 ? older : newer,
+    }));
+    const borderWait = shapeBorderWait(docs, { nowMs });
+    assert.equal(borderWait.available, true);
+    assert.equal(borderWait.worst.waitMinutes, maximum);
+    assert.equal(Date.parse(borderWait.updatedAt), Date.parse(newer));
+    assert.equal(borderWait.crossings[0].updatedAt, older);
+    const article = buildDailyBriefArticle({ dateIso: '2026-10-14', blocks: { borderWait } });
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      assert.match(article.content[locale].body1, new RegExp(`Worst Border.*${maximum}|${maximum}.*Worst Border`, 's'));
+      assert.doesNotMatch(article.content[locale].body1, /rilevamento più recente|latest reading|jüngste Messung|letzter Messung|dernier relevé/i);
+    }
+  }
+});
+
+test('fresh border readings below the coverage floor are not described as missing fresh data', () => {
+  const nowMs = Date.parse('2026-10-14T15:00:00Z');
+  const borderWait = shapeBorderWait([{ slug: 'fresh-border', crossingName: 'Fresh Border', waitTimeMinutes: 8, lastUpdate: '2026-10-14T14:59:00Z' }], { nowMs });
+  assert.equal(borderWait.available, false);
+  const article = buildDailyBriefArticle({ ...BRIEF, blocks: { ...BRIEF.blocks, borderWait } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.doesNotMatch(article.content[locale].body1, /non ha dati freschi|no fresh data|keine frischen Daten|pas de données fraîches/);
+    assert.match(article.content[locale].body1, /sufficienti|sufficient|ausreichend|suffisantes/);
+  }
+});
+
+test('Friday-to-Monday exchange comparison refers to the preceding observation', () => {
+  const exchange = shapeExchange({ points: [
+    { date: '2026-10-02', rate: 1.06 },
+    { date: '2026-10-09', rate: 1.07 },
+    { date: '2026-10-12', rate: 1.08 },
+  ] }, { todayIso: '2026-10-12' });
+  assert.equal(exchange.available, true);
+  assert.equal(exchange.prevDate, '2026-10-09');
+  assert.equal(exchange.delta1d, 0.01);
+  const blocks = { exchange };
+  const insights = buildDailyBriefInsights({ todayIso: '2026-10-12', blocks });
+  const article = buildDailyBriefArticle({ dateIso: '2026-10-12', blocks, insights });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.match(article.content[locale].body3, /precedente rilevamento|previous reading|vorherigen Messung|relevé précédent/);
+    assert.doesNotMatch(article.content[locale].body3, /giorno precedente|previous day|Vortag|la veille/);
+    assert.doesNotMatch(article.content[locale].body3, /cambio di sette giorni prima|exchange rate seven days earlier|Wechselkurs sieben Tage zuvor|taux de change sept jours auparavant/);
+  }
+});
+
+test('a usable exchange rate without a weekly baseline states that the comparison is unavailable', () => {
+  const exchange = shapeExchange({ points: [
+    { date: '2026-10-09', rate: 1.07 },
+    { date: '2026-10-12', rate: 1.08 },
+  ] }, { todayIso: '2026-10-12' });
+  assert.equal(exchange.available, true);
+  assert.equal(exchange.delta7d, null);
+  const article = buildDailyBriefArticle({ dateIso: '2026-10-12', blocks: { exchange } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.match(article.content[locale].body3, /confronto settimanale non è disponibile|weekly comparison is unavailable|Wochenvergleich ist nicht verfügbar|comparaison hebdomadaire n’est pas disponible/);
+    assert.doesNotMatch(article.content[locale].body3, /variazione è di —|the move is —|Veränderung —|variation est de —/);
+  }
+});
+
+test('fresh fuel metadata rejected by validation is not described as a stopped source', () => {
+  const nowMs = Date.parse('2026-10-14T15:00:00Z');
+  const fuel = shapeFuel({ generatedAt: '2026-10-14T14:59:00Z', rankings: {
+    cheapestItalyMunicipalities: [{ municipality: 'Rejected quote', minPriceEur: -1 }],
+    bestCrossBorderSavings: [],
+  } }, { nowMs });
+  assert.equal(fuel.available, false);
+  assert.equal(fuel.reason, 'fuel rankings are empty');
+  const article = buildDailyBriefArticle({ ...BRIEF, blocks: { ...BRIEF.blocks, fuel } });
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.doesNotMatch(article.content[locale].body2, /fonte riprende|source is back|Quelle wieder liefert|source reprend|48/);
+    assert.match(article.content[locale].body2, /verificabili|verifiable|verifizierbare|vérifiables/);
+  }
+});
 
 test('the three descriptive surfaces each fit their own budget, every locale, every date', () => {
   assert.ok(

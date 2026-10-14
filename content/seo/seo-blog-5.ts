@@ -107675,16 +107675,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-bollettino-frontaliere-2026-10-14': {
     title: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
-    description: 'Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    description: 'Bollettino frontalieri del 14 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
     ogTitle: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
-    ogDescription: 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    ogDescription: 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.',
     canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-14/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026",
-      "description": "Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "description": "Bollettino frontalieri del 14 ottobre 2026: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
@@ -107960,6 +107960,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://drive.google.com/drive/folders/1nR9HcOlLeFGJ0_KfNVwsFfuARTujcNup?usp=sharing",
+        "copyrightNotice": "© Football Flag / Swiss American Football Verband (SAFV)",
+        "license": "Uso editoriale con attribuzione a Noa Monn",
+        "creator": { "@type": "Person", "name": "Noa Monn" },
+        "creditText": "Noa Monn",
         "url": `${BASE_URL}/images/blog/asvz-blackbirds-champions-bowl-2026.webp`,
         "width": 1200,
         "height": 675,
