@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/unia-su-tagli-a-winterthur%2c-%22lavoratori-non-paghino-per-azionisti%22/92031502": {
-    "articleId": "zimmer-biomet-svizzera-unia",
-    "ts": "2026-09-09T17:53:18.756Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/pkgtw7aoiyfn": {
     "articleId": "banda-larga-consiglio-federale",
     "ts": "2026-09-09T18:15:37.817Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/cronaca/1956740/multe-non-pagate-ecco-chi-puo-salvarvi-dal-carcere": {
     "articleId": "liberta-fondo-pene-sostitutive",
     "ts": "2026-10-14T21:58:03.382Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/jssj2o8gzqlt": {
+    "articleId": "ordinanza-animali-compagnia-ue",
+    "ts": "2026-10-14T22:26:00.813Z",
     "keyForm": 2
   }
 }
