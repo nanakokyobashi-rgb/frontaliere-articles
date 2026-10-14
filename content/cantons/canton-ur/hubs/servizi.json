@@ -4,18 +4,13 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "8bb9c58ca28348738358331fa64e944d0965be0e8ab7f78b095ac1814dedf42f",
+  "updatedAt": "2026-10-14T07:35:36.633Z",
+  "contentHash": "0ca11bc95c2fb0c6333b6175901d75dcab252b49b152d273c4e9f210dcc8d19e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-11T10:51:47.772Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-13T19:22:49.823Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -52,20 +47,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Altdorf",
-              "value": "14 °C",
-              "detail": "oggi da 11 a 16 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -157,7 +138,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     },
     "en": {
       "canton": "UR",
@@ -187,20 +168,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Altdorf",
-              "value": "14 °C",
-              "detail": "today from 11 to 16 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -288,7 +255,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     },
     "de": {
       "canton": "UR",
@@ -318,20 +285,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Altdorf",
-              "value": "14 °C",
-              "detail": "heute 11 bis 16 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -419,7 +372,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     },
     "fr": {
       "canton": "UR",
@@ -449,20 +402,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Altdorf",
-              "value": "14 °C",
-              "detail": "aujourd’hui de 11 à 16 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -546,7 +485,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:35:36.633Z"
     }
   }
 }
