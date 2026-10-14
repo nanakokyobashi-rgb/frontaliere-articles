@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T10:32:27.019Z",
-  "contentHash": "ff3623dc96aa5cdd796102e96fc5144f452c53a7ddb3c2d73da232be1c80234f",
+  "updatedAt": "2026-10-14T14:37:09.792Z",
+  "contentHash": "98fd26c040000ff9df8d264f79ff181747a59233c420455407c4d017a517f550",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
+          "value": "3",
           "note": "segnalazioni aggiornate: 14 ottobre 2026"
         },
         {
@@ -123,12 +123,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "Vira Gambarogno -> Indemini tra Uscita autostradale Monti di Fosano E Luogo Alpe di Neggia Situazione: chiusa Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 14 ottobre 2026",
-              "date": "2026-10-08T13:30:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
@@ -153,6 +147,11 @@
               "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Luogo Contone Situazione: colonna Causa: traffico congestionato",
               "value": "Traffico",
               "date": "2026-10-14T05:21:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-14T05:22:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -289,7 +288,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:37:09.792Z"
     },
     "en": {
       "canton": "TI",
@@ -304,7 +303,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
+          "value": "3",
           "note": "reports as of 14 October 2026"
         },
         {
@@ -390,12 +389,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "Vira Gambarogno -> Indemini tra Uscita autostradale Monti di Fosano E Luogo Alpe di Neggia Situazione: chiusa Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 14 October 2026",
-              "date": "2026-10-08T13:30:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Closure",
               "detail": "until 22 October 2026",
@@ -420,6 +413,11 @@
               "label": "406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Luogo Contone Situazione: colonna Causa: traffico congestionato",
               "value": "Traffic",
               "date": "2026-10-14T05:21:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Cadenazzo Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-14T05:22:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -555,7 +553,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:37:09.792Z"
     },
     "de": {
       "canton": "TI",
@@ -570,7 +568,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
+          "value": "3",
           "note": "Meldungen vom 14. Oktober 2026"
         },
         {
@@ -656,12 +654,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "Vira Gambarogno -> Indemini zwischen Autobahnausfahrt Monti di Fosano und Ortschaft Alpe di Neggia Sachlage: Strecke gesperrt Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 14. Oktober 2026",
-              "date": "2026-10-08T13:30:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
@@ -686,6 +678,11 @@
               "label": "406 Cadenazzo -> Riazzino zwischen Ortschaft Cadenazzo und Ortschaft Contone Sachlage: Stau Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
               "date": "2026-10-14T05:21:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo zwischen Anschluss Flughafen Locarno und Ortschaft Cadenazzo Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-14T05:22:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -821,7 +818,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:37:09.792Z"
     },
     "fr": {
       "canton": "TI",
@@ -836,7 +833,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
+          "value": "3",
           "note": "signalements au 14 octobre 2026"
         },
         {
@@ -922,12 +919,6 @@
               "date": "2026-09-21T14:56:00.000Z"
             },
             {
-              "label": "Vira Gambarogno -> Indemini entre Sortie autoroutière Monti di Fosano et Localité Alpe di Neggia Situation: fermé Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 14 octobre 2026",
-              "date": "2026-10-08T13:30:00.000Z"
-            },
-            {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
@@ -952,6 +943,11 @@
               "label": "406 Cadenazzo -> Riazzino entre Localité Cadenazzo et Localité Contone Situation: bouchon Raison: surcharge de trafic",
               "value": "Trafic",
               "date": "2026-10-14T05:21:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo entre Jonction autoroutière Aeroprt de Locarno et Localité Cadenazzo Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-14T05:22:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1088,7 +1084,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T10:32:27.019Z"
+      "updatedAt": "2026-10-14T14:37:09.792Z"
     }
   }
 }
