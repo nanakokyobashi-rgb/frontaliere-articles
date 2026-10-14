@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-festivi-berna-calendario-guida.webp",
-      "sha256": "cb82b00befe305589555a2dc1b41b23bb7d5a2eaf0e36d307d23d0af11958788"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-festivi-berna-calendario-guida-480w.webp",
-      "sha256": "339b30372b95a327be21fadade1d1cfe2014a9709d999032bfe149c28fc44a74"
-    }
-  ]
+  "items": []
 }
