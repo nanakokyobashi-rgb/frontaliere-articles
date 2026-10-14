@@ -8234,6 +8234,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.festivi-berna-calendario-guida.title': 'Giorni festivi Cantone di Berna: calendario e regole',
     'blog.article.festivi-berna-calendario-guida.excerpt': 'Guida al calendario dei giorni festivi riconosciuti dal Cantone di Berna, con verifiche su uffici, comuni, istituzioni e livelli federali.',
     'blog.article.festivi-berna-calendario-guida.imageAlt': 'Calendario dei giorni festivi e guida amministrativa del Cantone di Berna',
+    'blog.article.negozi-berna-orari-festivi-regole.title': 'Orari negozi Cantone di Berna: guida a festivi e regole',
+    'blog.article.negozi-berna-orari-festivi-regole.excerpt': 'Guida ufficiale agli orari commerciali, giorni festivi, autorizzazioni speciali e limiti di lavoro nel Cantone di Berna.',
+    'blog.article.negozi-berna-orari-festivi-regole.imageAlt': 'Orari e regole commerciali dei negozi nel Cantone di Berna',
 };
 
 export default blogMetaChIt;

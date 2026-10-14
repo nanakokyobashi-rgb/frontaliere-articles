@@ -2767,6 +2767,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tasse-universitarie-zurigo-guida': { it: 'tasse-universitarie-zurigo-guida', en: 'zurich-university-tuition-fees-guide', de: 'universitaetsgebuehren-zuerich-leitfaden', fr: 'frais-universitaires-zurich-guide' },
  'zurigo-corsi-lingua-integrazione': { it: 'zurigo-corsi-lingua-integrazione', en: 'zurich-language-courses-integration', de: 'zuerich-sprachkurse-integration', fr: 'zurich-cours-langue-integration' },
  'festivi-berna-calendario-guida': { it: 'festivi-berna-calendario-guida', en: 'bern-public-holidays-calendar-guide', de: 'kanton-bern-feiertage-kalender-leitfaden', fr: 'jours-feries-berne-calendrier-guide' },
+ 'negozi-berna-orari-festivi-regole': { it: 'negozi-berna-orari-festivi-regole', en: 'bern-shops-hours-holidays-rules', de: 'bern-geschaefte-oeffnungszeiten-feiertage', fr: 'berne-magasins-horaires-jours-feries' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
