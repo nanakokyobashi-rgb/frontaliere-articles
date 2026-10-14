@@ -27444,6 +27444,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'licenza-pubblico-zurigo-requisiti',
+    category: 'pratico',
+    date: '2026-10-14T03:42:26.062Z',
+    image: '/images/blog/article-licenza-pubblico-zurigo-requisiti.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

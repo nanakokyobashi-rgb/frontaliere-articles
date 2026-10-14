@@ -8222,6 +8222,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.collaudo-veicoli-canton-zurigo.title': 'Vehicle inspection in the Canton of Zurich: summons and requirements',
     'blog.article.collaudo-veicoli-canton-zurigo.excerpt': 'In Zurich, the inspection follows the cantonal level The procedure includes the summons, documents and technical requirements Periodic checks are part of the process',
     'blog.article.collaudo-veicoli-canton-zurigo.imageAlt': 'Vehicle inspection center in Canton Zurich',
+    'blog.article.licenza-pubblico-zurigo-requisiti.title': 'Zurich public establishment license: requirements and application',
+    'blog.article.licenza-pubblico-zurigo-requisiti.excerpt': 'Guide to the license for public establishments in the Canton of Zurich: competent authorities, requirements, deadlines, taxation and personnel management.',
+    'blog.article.licenza-pubblico-zurigo-requisiti.imageAlt': 'Public establishment license in the Canton of Zurich',
 };
 
 export default blogMetaChEn;
