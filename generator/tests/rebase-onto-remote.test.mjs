@@ -1111,6 +1111,7 @@ test('an empty allowlist is a caller bug, not a silent always-abort', () => {
 
 const REGISTRY = 'content/blog-articles-data.ts';
 const SWISS_REGISTRY = 'content/swiss-articles-data.ts';
+const SPACED_REGISTRY = 'content/registry with spaces.ts';
 const RESOLVER = path.resolve(HERE, '../../scripts/lib/merge-content-registry-conflict.mjs');
 
 /** Il registro FRONTALIERE con gli id dati, nella forma reale (array di oggetti). */
@@ -1200,6 +1201,33 @@ function helperArgsFromWorkflowText(yamlText) {
 function helperArgsFromWorkflow() {
   return helperArgsFromWorkflowText(readFileSync(WORKFLOW, 'utf8'));
 }
+
+test('un registry dichiarato con --merge-registry conserva gli spazi nel path', () => {
+  const w = makeWorld();
+  try {
+    landUpstream(w, [[
+      SPACED_REGISTRY,
+      articlesRegistry(['articolo-base', 'articolo-concorrente']),
+      'concurrent publisher updates spaced registry',
+    ]]);
+
+    write(w.work, SPACED_REGISTRY, articlesRegistry(['articolo-base', 'articolo-locale']));
+    commitAll(w.work, 'publish local record to spaced registry');
+
+    const { code, out } = runHelper(w.work, w.upstream, '--merge-registry', SPACED_REGISTRY);
+    assert.equal(code, 0, `il path del registro non deve essere spezzato sugli spazi:\n${out}`);
+    assert.match(out, /merge per-record:/);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const merged = git(w.work, 'show', `HEAD:${SPACED_REGISTRY}`);
+    for (const id of ['articolo-base', 'articolo-concorrente', 'articolo-locale']) {
+      assert.match(merged, new RegExp(id), `${id} deve restare nel registro con path spazioso`);
+    }
+    assert.doesNotMatch(merged, /<{7}|={7}|>{7}/, 'il registro fuso non deve contenere marker di conflitto');
+  } finally {
+    w.cleanup();
+  }
+});
 
 test('due articoli appesi allo stesso punto sopravvivono entrambi (FRONTALIERE, #255)', () => {
   const w = makeWorld();
