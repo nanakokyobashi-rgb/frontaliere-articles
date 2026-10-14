@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-orologio-lingotto-trump-seco.webp",
+      "sha256": "5f916c9990595bea3c3521f9a00a7277de98819f45535c22b908f68fdfd2f40c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-orologio-lingotto-trump-seco-480w.webp",
+      "sha256": "25a84d32de17573a44f9cc6428aa50e64ed2c48a9b9296182eef16d8b6fedb53"
+    }
+  ]
 }
