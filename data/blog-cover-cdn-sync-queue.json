@@ -1,29 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-collaudo-veicoli-canton-zurigo.webp",
-      "sha256": "5676b21daba7104c05fc24ca2be35152badb8025999fa3f702c8511ce3de61ce"
-    },
-    {
-      "path": "public/images/blog/article-licenza-caccia-zurigo-requisiti.webp",
-      "sha256": "5f1ae8571e1099f1fe6ae26f3da5e680eea9046e1c2d38505878f99ec0d8bcd2"
-    },
-    {
-      "path": "public/images/blog/article-zurigo-targhe-immatricolazione-guida.webp",
-      "sha256": "f481a6374512422c4298096ecea3b93b813f8dcc323f201d9b17e10b22dda217"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-collaudo-veicoli-canton-zurigo-480w.webp",
-      "sha256": "344d179410e7ba5f70d92f17e790ab050151d2dc99f1a852692e6b08bb39b059"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-licenza-caccia-zurigo-requisiti-480w.webp",
-      "sha256": "4fcf78289a22f95f04c536a4f74da87e13f7fbb14a96a1691107b4c091df17e0"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-zurigo-targhe-immatricolazione-guida-480w.webp",
-      "sha256": "cda524383418d0257923c371e7130f9c0989e40041da4422f8d667ac6d54483b"
-    }
-  ]
+  "items": []
 }
