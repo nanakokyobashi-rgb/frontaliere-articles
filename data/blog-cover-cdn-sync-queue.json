@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tasse-universitarie-zurigo-guida.webp",
+      "sha256": "a86dfe19a950b9fa915f386bfbc9b5e3c8145aea03a3fbb6af5b70067c1acc1e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tasse-universitarie-zurigo-guida-480w.webp",
+      "sha256": "76e4f42cb4383fb678781d441b624ec61beca3cb2aef80a20a02d3e7b8c1ca4b"
+    }
+  ]
 }
