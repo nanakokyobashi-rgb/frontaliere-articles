@@ -21,6 +21,9 @@ import { fileURLToPath } from 'node:url';
 import {
   PARENT_DEQUEUED_MARKER,
   applyParentDequeue,
+  dailyBucketOutcomeTransition,
+  dailyMutexDecision,
+  dailyOutcomeItemId,
   detectDataPending,
   parentDequeueCommentDecision,
 } from '../../scripts/ci/followup-drainer.mjs';
@@ -123,6 +126,140 @@ test('lo stadio PARENT-DEQUEUE passa dal helper e pubblica il contatore', () => 
   assert.match(stage, /GITHUB_STEP_SUMMARY/);
   // Il commento non si posta più fuori dal helper: sarebbe di nuovo senza marker.
   assert.doesNotMatch(stage, /^\s*commentIssue\(p\.number/m);
+});
+
+const DAILY_OUTCOME_TITLE = 'follow-up(daily:2026-10-02): 3 items — nanakokyobashi-rgb/frontaliere-articles';
+const DAILY_OUTCOME_BODY = [
+  `## ${DAILY_OUTCOME_TITLE}`,
+  '- Daily key: 2026-10-02',
+  '- Target repository: nanakokyobashi-rgb/frontaliere-articles',
+  '- State: sealed',
+  '',
+  '### FU-2026-10-02-001 — primo item',
+  '- Target repository: nanakokyobashi-rgb/frontaliere-articles',
+  '- State: open',
+  '- Suggested action: firstAcceptanceToken()',
+  '',
+  '### FU-2026-10-02-002 — secondo item',
+  '- Target repository: nanakokyobashi-rgb/frontaliere-articles',
+  '- State: open',
+  '- Suggested action: secondAcceptanceToken()',
+  '',
+  '### FU-2026-10-02-003 — terzo item',
+  '- Target repository: nanakokyobashi-rgb/frontaliere-articles',
+  '- State: blocked',
+  '- Suggested action: thirdAcceptanceToken()',
+].join('\n');
+
+test('il verdetto daily cambia solo l’item attribuito e riaccoda il successivo', () => {
+  const outcomeComment = [
+    'Verifica `already-fixed` per `FU-2026-10-02-001`: il fix è già presente.',
+    '',
+    'Un altro residuo citato è FU-2026-10-02-003, che resta fuori dall’esito.',
+  ].join('\n');
+  const result = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'already-fixed',
+    outcomeComment,
+  );
+
+  assert.equal(result.action, 'requeue');
+  assert.equal(result.itemId, 'FU-2026-10-02-001');
+  assert.equal(result.state, 'done');
+  assert.equal(result.nextItem.id, 'FU-2026-10-02-002');
+  assert.deepEqual(result.body.match(/^- State: (?:open|done|blocked)$/gm), [
+    '- State: done',
+    '- State: open',
+    '- State: blocked',
+  ]);
+});
+
+test('un verdetto terminale non risolutivo blocca un solo item e non ferma gli altri', () => {
+  const result = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'no-root-cause',
+    'FU-2026-10-02-001: non ho trovato una causa verificabile.\n\n<!-- FIX_OUTCOME: no-root-cause -->',
+  );
+  assert.equal(result.action, 'requeue');
+  assert.equal(result.state, 'blocked');
+  assert.equal(result.nextItem.id, 'FU-2026-10-02-002');
+  assert.match(result.body, /### FU-2026-10-02-001[\s\S]*?- State: blocked/);
+  assert.match(result.body, /### FU-2026-10-02-002[\s\S]*?- State: open/);
+});
+
+test('l’attribuzione daily usa un solo item esplicito e fallisce chiusa se ambigua', () => {
+  assert.equal(dailyOutcomeItemId('<!-- FOLLOWUP_ITEM: FU-2026-10-02-002 -->\n\nFU-2026-10-02-001'), 'FU-2026-10-02-002');
+  assert.equal(dailyOutcomeItemId('Esito per FU-2026-10-02-001 e FU-2026-10-02-002.'), null);
+  const result = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'already-fixed',
+    'Esito indistinguibile per FU-2026-10-02-001 e FU-2026-10-02-002.\n\n<!-- FIX_OUTCOME: already-fixed -->',
+  );
+  assert.deepEqual(result, {
+    handled: true,
+    action: 'unattributed',
+    reason: 'outcome senza un solo FU stabile',
+  });
+});
+
+test('il mutex daily non blocca un FU diverso ma mantiene il legacy ambiguo in fail-closed', () => {
+  const wanted = 'FU-2026-10-02-001';
+  const scanForOtherItem = {
+    ok: true,
+    prs: [{ number: 2571, title: 'fix daily item', body: 'Addresses #2151\nFollow-up item: FU-2026-10-02-006' }],
+  };
+  assert.equal(dailyMutexDecision(wanted, scanForOtherItem, 2151).eligible, true);
+
+  const legacyIssuePr = {
+    ok: true,
+    prs: [{ number: 2572, title: 'Addresses #2151', body: 'legacy PR with no FU marker' }],
+  };
+  assert.deepEqual(dailyMutexDecision(wanted, legacyIssuePr, 2151), {
+    eligible: false,
+    reason: 'item-pr-open',
+    pr: legacyIssuePr.prs[0],
+  });
+  assert.equal(dailyMutexDecision(wanted, legacyIssuePr, 9999).eligible, true);
+});
+
+test('un vecchio pr-already-open riaccoda il primo FU open se la sua PR non è più attiva', () => {
+  const result = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body: DAILY_OUTCOME_BODY },
+    'pr-already-open',
+    'PR già in volo: #2571, skip.\n\n<!-- FIX_OUTCOME: pr-already-open -->',
+  );
+  assert.equal(result.action, 'retry');
+  assert.equal(result.itemId, 'FU-2026-10-02-001');
+  assert.equal(result.nextItem.id, 'FU-2026-10-02-001');
+  assert.equal(result.changed, false);
+  assert.equal(result.body, DAILY_OUTCOME_BODY);
+});
+
+test('un esito terminale su un daily senza altri open resta aggregato e non chiude', () => {
+  const body = DAILY_OUTCOME_BODY
+    .replace('### FU-2026-10-02-002 — secondo item\n- Target repository: nanakokyobashi-rgb/frontaliere-articles\n- State: open', '### FU-2026-10-02-002 — secondo item\n- Target repository: nanakokyobashi-rgb/frontaliere-articles\n- State: done');
+  const result = dailyBucketOutcomeTransition(
+    { title: DAILY_OUTCOME_TITLE, body },
+    'already-fixed',
+    '<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: already-fixed -->',
+  );
+  assert.equal(result.action, 'blocked', 'l’item 003 è ancora blocked: non si dichiara chiuso il bucket');
+  assert.equal(result.nextItem, null);
+  assert.match(result.body, /### FU-2026-10-02-003[\s\S]*?- State: blocked/);
+});
+
+test('VERDICT-EXIT instrada il daily prima della decisione terminale issue-wide', () => {
+  const start = DRAINER.indexOf('// --- VERDICT-EXIT:');
+  const end = DRAINER.indexOf('// --- TOO-LARGE ESCALATION', start);
+  const stage = DRAINER.slice(start, end);
+  assert.ok(start >= 0 && end > start, 'stadi VERDICT-EXIT non trovati');
+  assert.match(stage, /latestFixOutcomeCommentFromComments\(comments\)/);
+  assert.match(stage, /dailyBucketOutcomeTransition\(liveIssue, outcome, outcomeEntry\.comment\?\.body\)/);
+  assert.match(stage, /loadOpenPrsForDailyMutex\(\)/);
+  assert.match(stage, /updateDailyIssueBody\(/);
+  assert.match(stage, /const add = transition\.action === 'requeue' \|\| transition\.action === 'retry' \? \[LBL_QUEUED\]/);
+  assert.ok(stage.indexOf('dailyBucketOutcomeTransition(') < stage.indexOf('verdictExitDecision('));
+  assert.match(DRAINER, /has\(iss, LBL_MAYBE_RESOLVED\)[\s\S]*?!dailyBucketInfo\(iss\?\.title/);
 });
 
 const DAILY_TITLE = 'follow-up(daily:2026-10-02): 3 items — nanakokyobashi-rgb/frontaliere-articles';

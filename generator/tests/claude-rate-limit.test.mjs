@@ -4,6 +4,7 @@ import { describe, it } from 'node:test';
 import {
   detectClaudeRateLimit,
   formatRateLimitComment,
+  latestFixOutcomeCommentFromComments,
   latestFixRunOutcomeEntryFromComments,
   maxQuotaResetsAt,
   parseExecutionMessages,
@@ -118,6 +119,25 @@ describe('latestFixRunOutcomeEntryFromComments', () => {
       outcome: 'no-root-cause',
       at: Date.parse('2026-09-03T00:00:00Z'),
     });
+  });
+});
+
+describe('latestFixOutcomeCommentFromComments', () => {
+  it('conserva il commento che attribuisce il verdetto e ignora il backstop generico', () => {
+    const attributed = {
+      body: '<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: already-fixed -->',
+      createdAt: '2026-10-02T10:00:00Z',
+    };
+    const result = latestFixOutcomeCommentFromComments([
+      attributed,
+      {
+        body: '<!-- FIX_OUTCOME: no-pr-unspecified -->\npost-step deterministico',
+        createdAt: '2026-10-02T11:00:00Z',
+      },
+    ]);
+    assert.equal(result.outcome, 'already-fixed');
+    assert.equal(result.at, Date.parse('2026-10-02T10:00:00Z'));
+    assert.equal(result.comment, attributed);
   });
 });
 

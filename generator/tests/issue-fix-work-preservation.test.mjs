@@ -170,3 +170,11 @@ test('un errore nel lookup delle PR resta distinto dalla non-consegna della CLI'
   assert.match(evaluate, /delivery-evaluation-failed/, 'il motivo dell\'errore di lookup deve restare osservabile');
   assert.match(s, /--evidence/, 'il classificatore deve ricevere lo stato unavailable senza trasformarlo in una lista vuota');
 });
+
+test('il preflight del daily usa il mutex FU selezionato e attribuisce il verdetto al singolo item', () => {
+  assert.match(SRC, /Mutex PR per grana:[\s\S]*?daily bucket[\s\S]*?Follow-up item:[\s\S]*?selected_item_id/);
+  assert.match(SRC, /gh pr list --state open --json number,title,labels,body/);
+  assert.match(SRC, /PR legacy senza marker FU, quindi ambigua/);
+  assert.match(SRC, /FOLLOWUP_ITEM: \$\{\{ steps\.tier\.outputs\.selected_item_id \}\}/);
+  assert.match(SRC, /il drainer applica l'esito solo a quell'item/);
+});
