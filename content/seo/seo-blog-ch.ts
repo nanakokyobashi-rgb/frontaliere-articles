@@ -103647,6 +103647,230 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-targhe-immatricolazione-guida': {
+    title: 'Zurigo: guida a targhe e immatricolazione | Frontaliere Ticino',
+    description: 'Guida pratico a targhe e immatricolazione a Zurigo: registro, documenti, cambio proprietario e costi. Verifica presso l\'ufficio della circolazione competente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, targhe, immatricolazione, procedura',
+    ogTitle: 'Zurigo: guida a targhe e immatricolazione',
+    ogDescription: 'Scopri la procedura per targhe e immatricolazione a Zurigo. Guida completa su registrazione, documenti, cambio proprietario e imposta sugli autoveicoli. Verifica i costi ufficiali.',
+    canonicalPath: '/articoli-svizzera/zurigo-targhe-immatricolazione-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo: guida a targhe e immatricolazione",
+      "description": "Guida pratico a targhe e immatricolazione a Zurigo: registro, documenti, cambio proprietario e costi. Verifica presso l'ufficio della circolazione competente.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/apprendistato-formazione-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Mani che trattano una targa svizzera in un ufficio dell'autorità di circolazione a Zurigo"
+      },
+      "datePublished": "2026-10-14T02:15:21+00:00",
+      "dateModified": "2026-10-14T02:15:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zurigo-targhe-immatricolazione-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-grandine-svizzera-danni-swiss-re': {
+    title: 'Grandine agosto: Swiss Re stima 1,7 mld danni | Frontaliere Ticino',
+    description: 'Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque',
+    keywords: 'frontalieri, ticino, svizzera, italia, grandine, agosto, swiss, stima',
+    ogTitle: 'Grandine agosto: Swiss Re stima 1,7 mld danni',
+    ogDescription: 'Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque',
+    canonicalPath: '/articoli-svizzera/grandine-svizzera-danni-swiss-re/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Grandine agosto: Swiss Re stima 1,7 mld danni",
+      "description": "Swiss Re stima 1,7 miliardi di franchi di danni assicurati Circa 800 milioni di franchi riguardano i veicoli Il temporale del 28 agosto 2026 ha colpito cinque",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-grandine-svizzera-danni-swiss-re.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Grossi chicchi di grandine su un'asfalto bagnato in Svizzera"
+      },
+      "datePublished": "2026-10-14T02:27:16+00:00",
+      "dateModified": "2026-10-14T02:27:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/grandine-svizzera-danni-swiss-re/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-collaudo-veicoli-canton-zurigo': {
+    title: 'Collaudo veicoli Canton Zurigo: convocazione e requisiti',
+    description: 'A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell\'iter',
+    keywords: 'frontalieri, ticino, svizzera, italia, collaudo, veicoli, canton, zurigo',
+    ogTitle: 'Collaudo veicoli Canton Zurigo: convocazione e requisiti',
+    ogDescription: 'A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell\'iter',
+    canonicalPath: '/articoli-svizzera/collaudo-veicoli-canton-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Collaudo veicoli Canton Zurigo: convocazione e requisiti",
+      "description": "A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell'iter",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro di collaudo veicoli nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-14T03:22:14+00:00",
+      "dateModified": "2026-10-14T03:22:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/collaudo-veicoli-canton-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-licenza-pubblico-zurigo-requisiti': {
+    title: 'Licenza esercizio pubblico Zurigo: requisiti e domanda',
+    description: 'Scopri come richiedere la licenza per esercizi pubblici a Zurigo. Regole, autorità competenti, requisiti, fisco svizzero e gestione del personale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenza, esercizio, pubblico, zurigo',
+    ogTitle: 'Licenza esercizio pubblico Zurigo: requisiti e domanda',
+    ogDescription: 'Guida completa per la licenza di esercizi pubblici nel Cantone di Zurigo: autorità competenti, requisiti, scadenze, tassazione e regole per il personale.',
+    canonicalPath: '/articoli-svizzera/licenza-pubblico-zurigo-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Licenza esercizio pubblico Zurigo: requisiti e domanda",
+      "description": "Scopri come richiedere la licenza per esercizi pubblici a Zurigo. Regole, autorità competenti, requisiti, fisco svizzero e gestione del personale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-licenza-pubblico-zurigo-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Licenza per esercizio pubblico nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-14T03:42:26+00:00",
+      "dateModified": "2026-10-14T03:42:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenza-pubblico-zurigo-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-tasse-universitarie-zurigo-guida': {
+    title: 'Tasse universitarie Canton Zurigo: guida e iscrizione',
+    description: 'Guida pratica alle tasse universitarie nel Cantone di Zurigo: istituzioni, categorie di studenti, procedure di iscrizione, esenzioni e contributi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tasse, universitarie, canton, zurigo',
+    ogTitle: 'Tasse universitarie Canton Zurigo: guida a iscrizione e contributi',
+    ogDescription: 'Tutto quello che serve sapere sulle tasse universitarie nel Cantone di Zurigo: come verificare le istituzioni, le categorie di studenti, le procedure di iscrizione, le esenzioni e i contributi ufficiali.',
+    canonicalPath: '/articoli-svizzera/tasse-universitarie-zurigo-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tasse universitarie Canton Zurigo: guida e iscrizione",
+      "description": "Guida pratica alle tasse universitarie nel Cantone di Zurigo: istituzioni, categorie di studenti, procedure di iscrizione, esenzioni e contributi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tasse-universitarie-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio universitario e studenti nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-14T04:09:09+00:00",
+      "dateModified": "2026-10-14T04:09:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tasse-universitarie-zurigo-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-zurigo-corsi-lingua-integrazione': {
+    title: 'Corsi di lingua a Zurigo: integrazione e contributi',
+    description: 'Scopri come accedere ai corsi di lingua e programmi di integrazione nel Cantone di Zurigo. Requisiti, scadenze, permessi SEM e uffici competenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, corsi, lingua, zurigo, integrazione',
+    ogTitle: 'Corsi di lingua a Zurigo: integrazione e contributi',
+    ogDescription: 'Guida pratica per i corsi di lingua e programmi di integrazione nel Cantone di Zurigo. Scopri le autorità competenti, i permessi SEM, le scadenze e i requisiti per i contributi.',
+    canonicalPath: '/articoli-svizzera/zurigo-corsi-lingua-integrazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Corsi di lingua a Zurigo: integrazione e contributi",
+      "description": "Scopri come accedere ai corsi di lingua e programmi di integrazione nel Cantone di Zurigo. Requisiti, scadenze, permessi SEM e uffici competenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-corsi-lingua-integrazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo a Zurigo per corsi di lingua e integrazione"
+      },
+      "datePublished": "2026-10-14T04:35:31+00:00",
+      "dateModified": "2026-10-14T04:35:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zurigo-corsi-lingua-integrazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -300,10 +300,12 @@ export const RC_TO_ENV = {
   EMPLOYER_PROFILE_MID_AD_TEST_VARIANT: ['EMPLOYER_PROFILE_MID_AD_TEST_VARIANT'],
   // Exact-job application-intent ranking (#9934); absent/false stays control.
   APPLICATION_INTENT_RANKING_ENABLED: ['APPLICATION_INTENT_RANKING_ENABLED'],
-  // Job-email ranking (#7922). Keep the complete tuning surface in Remote
-  // Config so the experiment can be reduced or disabled without a deploy.
+  // Job-email ranking (#7922). Keep the switch, treatment and legacy tuning
+  // surface in Remote Config so the experiment can be reduced or disabled
+  // without a deploy.
   JOB_EMAIL_RANKING_ENABLED:      ['JOB_EMAIL_RANKING_ENABLED'],
   JOB_EMAIL_RANKING_ROLLOUT:      ['JOB_EMAIL_RANKING_ROLLOUT'],
+  JOB_EMAIL_RANKING_TREATMENT:    ['JOB_EMAIL_RANKING_TREATMENT'],
   JOB_EMAIL_RANKING_ALPHA:        ['JOB_EMAIL_RANKING_ALPHA'],
   JOB_EMAIL_RANKING_EPSILON:      ['JOB_EMAIL_RANKING_EPSILON'],
   JOB_EMAIL_RANKING_WINDOW_DAYS:  ['JOB_EMAIL_RANKING_WINDOW_DAYS'],
@@ -413,6 +415,7 @@ export const ALLOW_EMPTY_RC_KEYS = new Set([
   // collapsed into "missing" and replaced by the consumer's internal default.
   'JOB_EMAIL_RANKING_ENABLED',
   'JOB_EMAIL_RANKING_ROLLOUT',
+  'JOB_EMAIL_RANKING_TREATMENT',
   'JOB_EMAIL_RANKING_ALPHA',
   'JOB_EMAIL_RANKING_EPSILON',
   'JOB_EMAIL_RANKING_WINDOW_DAYS',

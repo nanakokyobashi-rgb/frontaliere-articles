@@ -33,7 +33,7 @@ import {
   ratchetShrinkVerdict,
   ratchetVerdict,
 } from '../../scripts/ci/lib/adapted-drift.mjs';
-import { main as ratchetMain } from '../../scripts/ci/adapted-drift-ratchet.mjs';
+import { EXIT_FRESH_DRIFT, main as ratchetMain } from '../../scripts/ci/adapted-drift-ratchet.mjs';
 import {
   buildRegister,
   compareUrl,
@@ -109,7 +109,7 @@ test('il ratchet del repo registra solo gemelli `adapted` del manifest', () => {
   assert.deepEqual(ratchet.paths.filter((p) => !adapted.has(p)), []);
 });
 
-test('CLI: --enforce va rosso su un drift fuori elenco, senza --enforce resta un avviso', () => {
+test('CLI: --enforce distingue il drift nuovo dagli errori operativi, senza --enforce resta un avviso', () => {
   const ratchet = parseRatchet(fs.readFileSync(path.join(ROOT, ADAPTED_DRIFT_RATCHET_PATH), 'utf8'));
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ratchet-report-'));
   const write = (rows) => {
@@ -124,7 +124,7 @@ test('CLI: --enforce va rosso su un drift fuori elenco, senza --enforce resta un
   console.log = () => {};
   try {
     assert.equal(ratchetMain(['--report', known, '--enforce']), 0);
-    assert.equal(ratchetMain(['--report', grown, '--enforce']), 1);
+    assert.equal(ratchetMain(['--report', grown, '--enforce']), EXIT_FRESH_DRIFT);
     assert.equal(ratchetMain(['--report', grown]), 0);
     // Report assente: rosso solo dove il gate deve decidere.
     assert.equal(ratchetMain(['--report', path.join(dir, 'manca.json'), '--enforce']), 1);
@@ -134,7 +134,7 @@ test('CLI: --enforce va rosso su un drift fuori elenco, senza --enforce resta un
   }
 });
 
-test('workflow: il ratchet legge il report che il passo del drift scrive, e decide con la stessa regola di --strict', () => {
+test('workflow: il ratchet legge il report del drift e non duplica una issue gia\' persistita', () => {
   const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/loop-drift-check.yml'), 'utf8');
   assert.match(wf, /export LOOP_DRIFT_REPORT_JSON="\$RUNNER_TEMP\/loop-drift-report\.json"/);
   const step = wf.slice(wf.indexOf('- name: Ratchet dei gemelli adapted in drift'));
@@ -145,6 +145,10 @@ test('workflow: il ratchet legge il report che il passo del drift scrive, e deci
   assert.match(block, /node scripts\/ci\/adapted-drift-ratchet\.mjs/);
   assert.match(block, /github\.event_name \}\}" = "schedule"[\s\S]*report_issue[\s\S]*args\+=\(--enforce\)/);
   assert.match(block, /"pull_request" \][\s\S]*--base-ref "origin\/\$\{\{ github\.base_ref \}\}"/);
+  assert.match(block, /RATCHET_STATUS=\$\?/);
+  assert.match(block, /\[ "\$RATCHET_STATUS" -eq 3 \] && \[ "\$\{\{ steps\.drift_report\.outputs\.issue_reported \}\}" = "true" \]/);
+  assert.match(block, /exit "\$RATCHET_STATUS"/);
+  assert.doesNotMatch(block, /continue-on-error:/);
 });
 
 // ───────────── registro: merge a 3 vie su repo git temporanei ─────────────

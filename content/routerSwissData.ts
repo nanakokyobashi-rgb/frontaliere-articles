@@ -2760,6 +2760,12 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'decisioni-avs-ue-voto': { it: 'decisioni-avs-ue-voto', en: 'swiss-federal-decisions-avs-eu-vote', de: 'schweiz-bundesrat-ahv-eu-abstimmung', fr: 'decisions-conseil-federal-avs-ue-vote' },
  'pfister-risorse-difesa-federale': { it: 'pfister-risorse-difesa-federale', en: 'pfister-swiss-defense-resources', de: 'pfister-ressourcen-schweizer-armee', fr: 'pfister-ressources-armee-suisse' },
  'licenza-caccia-zurigo-requisiti': { it: 'licenza-caccia-zurigo-requisiti', en: 'zurich-hunting-license-requirements', de: 'zuerich-jagdschein-anforderungen', fr: 'permis-chasse-zurich-exigences' },
+ 'zurigo-targhe-immatricolazione-guida': { it: 'zurigo-targhe-immatricolazione-guida', en: 'zurich-plates-registration-guide', de: 'zuerich-kennzeichen-registrierung', fr: 'zurich-plaques-immatriculation' },
+ 'grandine-svizzera-danni-swiss-re': { it: 'grandine-svizzera-danni-swiss-re', en: 'swiss-hail-damage-swiss-re', de: 'schweizer-hagelschaden-swiss-re', fr: 'grele-suisse-dommages-swiss-re' },
+ 'collaudo-veicoli-canton-zurigo': { it: 'collaudo-veicoli-canton-zurigo', en: 'vehicle-inspection-canton-zurich', de: 'fahrzeugkontrolle-kanton-zuerich', fr: 'controle-vehicules-canton-zurich' },
+ 'licenza-pubblico-zurigo-requisiti': { it: 'licenza-pubblico-zurigo-requisiti', en: 'zurich-public-establishment-license-requirements', de: 'zuerich-gastgewerbebewilligung-anforderungen', fr: 'licence-etablissement-public-zurich-exigences' },
+ 'tasse-universitarie-zurigo-guida': { it: 'tasse-universitarie-zurigo-guida', en: 'zurich-university-tuition-fees-guide', de: 'universitaetsgebuehren-zuerich-leitfaden', fr: 'frais-universitaires-zurich-guide' },
+ 'zurigo-corsi-lingua-integrazione': { it: 'zurigo-corsi-lingua-integrazione', en: 'zurich-language-courses-integration', de: 'zuerich-sprachkurse-integration', fr: 'zurich-cours-langue-integration' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

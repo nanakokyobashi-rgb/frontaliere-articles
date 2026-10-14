@@ -13139,6 +13139,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.allarme-bernasconi-artificieri.title': 'Chiasso, verdächtiger Rucksack: Bank evakuiert, keine Gefahr',
     'blog.article.allarme-bernasconi-artificieri.excerpt': 'Alarm nach 12.30 Uhr auf der Piazza Bernasconi Eine Bank evakuiert und das Gebiet abgeriegelt Verdächtige Gegenstände, darunter ein Rucksack, kontrolliert Gebiet um 14 Uhr wieder geöffnet, keine',
     'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.incidente-vedeggio-cassarate.title': 'Unfall in der Vedeggio-Cassarate, Verkehr in Tilt',
+    'blog.article.incidente-vedeggio-cassarate.excerpt': 'Unfall um 17.15 Uhr im Tunnel Vedeggio-Cassarate Tunnel in Richtung Lugano geschlossen und Verkehr in der Warteschlange Wiedereröffnung um 17.55 Uhr bis 18.30 Uhr ähnliche Situation',
+    'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Stau nahe dem Vedeggio-Cassarate-Tunnel in Lugano',
 };
 
 export default blogMetaDe;

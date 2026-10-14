@@ -30,6 +30,26 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T01:47:39.159Z",
       "lastFailureAt": "2026-10-14T01:47:39.159Z"
+    },
+    {
+      "articleId": "zurigo-targhe-immatricolazione-guida",
+      "title": "Zurigo: guida a targhe e immatricolazione",
+      "fallbackImage": "/images/blog/apprendistato-formazione-zurigo-guida.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T02:15:22.049Z",
+      "lastFailureAt": "2026-10-14T02:15:22.049Z"
+    },
+    {
+      "articleId": "collaudo-veicoli-canton-zurigo",
+      "title": "Collaudo veicoli Canton Zurigo: convocazione e requisiti",
+      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp",
+      "reason": "image generation deadline exceeded",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T03:22:14.450Z",
+      "lastFailureAt": "2026-10-14T03:22:14.450Z"
     }
   ]
 }
