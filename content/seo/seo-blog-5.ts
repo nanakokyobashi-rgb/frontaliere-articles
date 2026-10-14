@@ -107960,6 +107960,11 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "description": "Gli ASVZ Blackbirds trionfano al Champions Bowl 2026, conquistando il primo storico titolo europeo nel flag football per una squadra svizzera.",
       "image": {
         "@type": "ImageObject",
+        "acquireLicensePage": "https://drive.google.com/drive/folders/1nR9HcOlLeFGJ0_KfNVwsFfuARTujcNup?usp=sharing",
+        "copyrightNotice": "© Football Flag / Swiss American Football Verband (SAFV)",
+        "license": "Uso editoriale con attribuzione a Noa Monn",
+        "creator": { "@type": "Person", "name": "Noa Monn" },
+        "creditText": "Noa Monn",
         "url": `${BASE_URL}/images/blog/asvz-blackbirds-champions-bowl-2026.webp`,
         "width": 1200,
         "height": 675,
