@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-hacker-frigoriferi-connessi.webp",
+      "sha256": "6637a7a32a9343d496e227761d8eb55bc731d0f67c65f2d659ce8b1e98558489"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-hacker-frigoriferi-connessi-480w.webp",
+      "sha256": "a39aa312bf47b6075ff64b1f2f1ef7cb19232d19aa9b962654c6a0df41553e95"
+    }
+  ]
 }
