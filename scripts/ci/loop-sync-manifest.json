@@ -2300,9 +2300,9 @@
       "path": "scripts/lib/pipeline-phase-timing.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "c85bf41b32069f6c",
-        "corpus": "c85bf41b32069f6c",
-        "alignedAt": "2026-10-13"
+        "site": "db770569fe162eee",
+        "corpus": "db770569fe162eee",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -2521,9 +2521,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3a0ba1d6b2f707d1",
-        "corpus": "3a0ba1d6b2f707d1",
-        "alignedAt": "2026-10-11"
+        "site": "cf99554fa328e354",
+        "corpus": "cf99554fa328e354",
+        "alignedAt": "2026-10-14"
       }
     },
     {
@@ -3734,9 +3734,9 @@
       "sitePath": "services/seo/imageObjectLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "baf2693412c35ed8",
-        "corpus": "baf2693412c35ed8",
-        "alignedAt": "2026-10-11"
+        "site": "72cd99f91baa80f0",
+        "corpus": "72cd99f91baa80f0",
+        "alignedAt": "2026-10-14"
       }
     },
     {
