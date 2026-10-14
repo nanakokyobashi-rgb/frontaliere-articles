@@ -8255,6 +8255,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.diritti-politici-disabilita.title': 'Déficience intellectuelle : droits politiques, consultation',
     'blog.article.diritti-politici-disabilita.excerpt': 'Le Conseil fédéral lance la consultation le 14 octobre 2026 Date limite de la consultation : 28 janvier En proposition, vote fédéral et signature d’initiatives',
     'blog.article.diritti-politici-disabilita.imageAlt': 'Bâtiment civique suisse, symbole de la participation politique inclusive',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Blanchiment d’argent en Suisse : il faut davantage de ressources et de sanctions',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Les risques restent élevés en Suisse Le Conseil fédéral prend acte du troisième rapport Le GCRF formule huit recommandations Il faut davantage de ressources et de sanctions',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Conseil fédéral suisse',
 };
 
 export default blogMetaChFr;

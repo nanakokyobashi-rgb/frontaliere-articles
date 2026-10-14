@@ -1,9 +1,4 @@
 {
-  "https://www.admin.ch/it/newnsb/tcvrfkjrt6rn": {
-    "articleId": "legge-militare-struttura-condotta-2026",
-    "ts": "2026-09-09T13:43:52.956Z",
-    "keyForm": 2
-  },
   "https://www.admin.ch/it/newnsb/u1cjj4hjgi5y": {
     "articleId": "consiglio-federale-ruag-mro",
     "ts": "2026-09-09T14:04:13.916Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4162597": {
     "articleId": "diritti-politici-disabilita",
     "ts": "2026-10-14T15:17:54.350Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1956666/svizzera-contrasto-rapporto-riciclaggio-denaro": {
+    "articleId": "rapporto-riciclaggio-denaro-svizzera",
+    "ts": "2026-10-14T16:21:06.225Z",
     "keyForm": 2
   }
 }

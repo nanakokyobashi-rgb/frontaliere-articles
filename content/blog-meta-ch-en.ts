@@ -8255,6 +8255,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.diritti-politici-disabilita.title': 'People with intellectual disabilities, consultation on political rights',
     'blog.article.diritti-politici-disabilita.excerpt': 'The Federal Council launches the consultation on October 14, 2026 Consultation deadline: January 28 Proposed: federal vote and signing of initiatives',
     'blog.article.diritti-politici-disabilita.imageAlt': 'Swiss civic building symbolizing inclusive political participation',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Recycling in Switzerland: more resources and penalties are needed',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Risks remain high in Switzerland The Federal Council takes note of the third report The GCRF makes eight recommendations More resources and sanctions are needed',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Federal Palace in Bern, seat of the Swiss Federal Council',
 };
 
 export default blogMetaChEn;

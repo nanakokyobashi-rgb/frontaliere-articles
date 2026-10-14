@@ -8255,6 +8255,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.diritti-politici-disabilita.title': 'Disabili intellettivi, consultazione sui diritti politici',
     'blog.article.diritti-politici-disabilita.excerpt': 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Scadenza della consultazione: 28 gennaio In proposta voto federale e firma di iniziative',
     'blog.article.diritti-politici-disabilita.imageAlt': 'Edificio civico svizzero, simbolo della partecipazione politica inclusiva',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Riciclaggio in Svizzera: servono più risorse e sanzioni',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'I rischi restano elevati in Svizzera Il Consiglio federale prende nota del terzo rapporto Il GCRF formula otto raccomandazioni Servono più risorse e sanzioni',
+    'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Palazzo federale a Berna, sede del Consiglio federale svizzero',
 };
 
 export default blogMetaChIt;
