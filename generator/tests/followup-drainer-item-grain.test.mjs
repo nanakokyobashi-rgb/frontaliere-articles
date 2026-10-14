@@ -187,6 +187,21 @@ test('un verdetto terminale non risolutivo blocca un solo item e non ferma gli a
   assert.match(result.body, /### FU-2026-10-02-002[\s\S]*?- State: open/);
 });
 
+test('un FIX_OUTCOME già consumato non riaccoda un altro item né azzera il tentativo', () => {
+  for (const state of ['done', 'blocked']) {
+    const body = DAILY_OUTCOME_BODY.replace('- State: open', `- State: ${state}`);
+    const result = dailyBucketOutcomeTransition(
+      { title: DAILY_OUTCOME_TITLE, body },
+      'already-fixed',
+      '<!-- FOLLOWUP_ITEM: FU-2026-10-02-001 -->\n<!-- FIX_OUTCOME: already-fixed -->',
+    );
+    assert.equal(result.action, 'outcome-consumed', `${state}: outcome non deve essere riapplicato`);
+    assert.equal(result.itemId, 'FU-2026-10-02-001');
+    assert.equal(result.state, state);
+    assert.equal(result.body, undefined);
+  }
+});
+
 test('l’attribuzione daily usa un solo item esplicito e fallisce chiusa se ambigua', () => {
   assert.equal(dailyOutcomeItemId('<!-- FOLLOWUP_ITEM: FU-2026-10-02-002 -->\n\nFU-2026-10-02-001'), 'FU-2026-10-02-002');
   assert.equal(dailyOutcomeItemId('Esito per FU-2026-10-02-001 e FU-2026-10-02-002.'), null);
