@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-consiglio-federale-knifefish-adesione.webp",
+      "sha256": "939657c6ad1ced384697408f924eb0cc01dda979e0d5990111f0e247778ba25a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-consiglio-federale-knifefish-adesione-480w.webp",
+      "sha256": "55cc15ea2f1ee91013c8e8e22053895f87540d9cee08c9bdfd0b709daf05a421"
+    }
+  ]
 }
