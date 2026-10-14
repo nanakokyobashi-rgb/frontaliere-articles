@@ -34,6 +34,10 @@ import { latestRedcheckFixClaims } from './redcheck-review-prefilter.mjs';
 import { normalizeReviewInputRevision, PR_BODY_JQ } from './review-test-policy.mjs';
 import { isPrimaryRateLimitError, parseRateLimitMarker } from './lib/gh-rate-limit.mjs';
 import { VITEST_CHECK_NAME } from './lib/constants.mjs';
+import {
+  REVIEW_GATE_FAILURE_STEP_NAME,
+  vitestFailureIsReviewGate,
+} from './lib/vitestCheck.mjs';
 
 export const REVIEW_QUOTA_RETRY_MARKER = '<!-- REVIEW_QUOTA_RETRY:';
 export const REVIEW_TRANSIENT_RETRY_MARKER = '<!-- REVIEW_TRANSIENT_RETRY:';
@@ -1287,6 +1291,11 @@ export const RATE_LIMIT_WINDOW_SEC = 60 * 60;
 export const RATE_LIMIT_RESET_GRACE_SEC = 60;
 export const RATE_LIMIT_LOOKBACK_SEC = 3 * 60 * 60;
 export const MAX_RATE_LIMIT_FAILED_ATTEMPTS = 2;
+export const QUOTA_RECOVERY_OUTCOMES = Object.freeze({
+  INSTALLATION_QUOTA: 'installation-quota',
+  REVIEW_GATE: 'review-gate',
+  UNVERIFIED: 'unverified',
+});
 const MAX_RATE_LIMIT_INSPECTIONS = positiveInt(process.env.REVIEW_RATE_LIMIT_RESCUER_MAX_INSPECTIONS, 2);
 const MAX_RATE_LIMIT_RETRIES = positiveInt(process.env.REVIEW_RATE_LIMIT_RESCUER_MAX_RETRIES, 1);
 const RATE_LIMIT_SCAN = process.env.REVIEW_RATE_LIMIT_SCAN !== 'false';
@@ -1316,6 +1325,54 @@ export function rateLimitEvidence(annotations = [], { completedAt = '' } = {}) {
     }
   }
   return resetAt > 0 ? { resetAt } : null;
+}
+
+/**
+ * Classify the cause that the installation-quota recovery path is allowed to
+ * handle. The required job can be red because the repository GITHUB_TOKEN hit
+ * its REST bucket, because the review gate produced a normal/transient
+ * failure, or because the available evidence is incomplete. Those outcomes
+ * have different consumers: only the first one may wait for a reset and rerun
+ * from this path. A review-gate failure is deliberately returned as a distinct
+ * outcome so it remains with the review-claim recovery path, while incomplete
+ * evidence stays fail-closed.
+ *
+ * An explicit installation-quota annotation wins when both signals are
+ * present: it is the only evidence that supplies a safe reset moment for the
+ * bounded post-reset recovery.
+ *
+ * @param {{annotations?: Array<object>, completedAt?: string,
+ *          steps?: Array<{name?: string, conclusion?: string}>}} job
+ * @returns {{outcome: 'installation-quota'|'review-gate'|'unverified',
+ *            resetAt: number|null, gateFailureKind?: 'verdict'|'transient'|'unknown'}}
+ */
+export function quotaRecoveryOutcome({ annotations = [], completedAt = '', steps = [] } = {}) {
+  const evidence = rateLimitEvidence(annotations, { completedAt });
+  if (evidence) {
+    return {
+      outcome: QUOTA_RECOVERY_OUTCOMES.INSTALLATION_QUOTA,
+      resetAt: evidence.resetAt,
+    };
+  }
+
+  if (Array.isArray(steps) && vitestFailureIsReviewGate(steps)) {
+    const classifier = steps.find((step) => step?.name === REVIEW_GATE_FAILURE_STEP_NAME);
+    const gateFailureKind = classifier?.conclusion === 'failure'
+      ? 'verdict'
+      : classifier?.conclusion === 'success'
+        ? 'transient'
+        : 'unknown';
+    return {
+      outcome: QUOTA_RECOVERY_OUTCOMES.REVIEW_GATE,
+      resetAt: null,
+      gateFailureKind,
+    };
+  }
+
+  return {
+    outcome: QUOTA_RECOVERY_OUTCOMES.UNVERIFIED,
+    resetAt: null,
+  };
 }
 
 /** Marker durevole del rerun post-reset. Pura. */
@@ -1444,7 +1501,11 @@ function failedRequiredJobAnnotations(run) {
   if (!Array.isArray(pages) || pages.some((page) => !Array.isArray(page))) {
     throw new Error(`annotation del check-run ${checkRunId} malformate`);
   }
-  return { annotations: pages.flat(), completedAt: job.completed_at || run.updated_at };
+  return {
+    annotations: pages.flat(),
+    completedAt: job.completed_at || run.updated_at,
+    steps: Array.isArray(job.steps) ? job.steps : [],
+  };
 }
 
 function postRateLimitRetryComment(number, body) {
@@ -1476,32 +1537,39 @@ function rescueRateLimitedTests(prs, commentsByPr, nowSec = Math.floor(Date.now(
   for (const { pr, head, run } of selection.items) {
     if (retried >= MAX_RATE_LIMIT_RETRIES) break;
     const number = Number(pr.number);
-    let evidence = null;
+    let recovery = null;
     try {
       const job = failedRequiredJobAnnotations(run);
-      evidence = job ? rateLimitEvidence(job.annotations, { completedAt: job.completedAt }) : null;
+      recovery = quotaRecoveryOutcome(job || {});
     } catch (error) {
       console.log(`::warning::PR #${number}: annotation della run tests #${run.id} non verificabili — nessun rerun (${String(error?.message || error).slice(0, 180)}).`);
       continue;
     }
-    if (!evidence) {
-      console.log(`PR #${number}: run tests #${run.id} rossa senza prova di rate limit — non e' compito di questo percorso.`);
+    if (recovery.outcome !== QUOTA_RECOVERY_OUTCOMES.INSTALLATION_QUOTA) {
+      if (recovery.outcome === QUOTA_RECOVERY_OUTCOMES.REVIEW_GATE) {
+        console.log(
+          `PR #${number}: run tests #${run.id} classificata come review-gate `
+          + `(${recovery.gateFailureKind}); nessun recovery quota/installazione.`,
+        );
+      } else {
+        console.log(`PR #${number}: run tests #${run.id} senza outcome quota/installazione verificabile — nessun rerun.`);
+      }
       continue;
     }
-    const dueAt = evidence.resetAt + RATE_LIMIT_RESET_GRACE_SEC;
+    const dueAt = recovery.resetAt + RATE_LIMIT_RESET_GRACE_SEC;
     if (nowSec < dueAt) {
-      console.log(`PR #${number}: run tests #${run.id} rossa per rate limit; reset ${new Date(evidence.resetAt * 1000).toISOString()}, rerun rimandato di ${dueAt - nowSec} s.`);
+      console.log(`PR #${number}: run tests #${run.id} rossa per quota/installazione; reset ${new Date(recovery.resetAt * 1000).toISOString()}, rerun rimandato di ${dueAt - nowSec} s.`);
       continue;
     }
     const fields = {
       head,
       sourceRunId: String(run.id),
       sourceAttempt: Number(run.run_attempt) || 1,
-      resetAt: evidence.resetAt,
+      resetAt: recovery.resetAt,
       runId: process.env.GITHUB_RUN_ID || 'review-rate-limit-rescuer',
     };
     if (DRY_RUN) {
-      console.log(`[dry] PR #${number}: rilancerei tests #${run.id} (rate limit, reset passato) sulla HEAD ${head.slice(0, 12)}.`);
+      console.log(`[dry] PR #${number}: rilancerei tests #${run.id} (quota/installazione, reset passato) sulla HEAD ${head.slice(0, 12)}.`);
       continue;
     }
     if (!postRateLimitRetryComment(number, reviewRateLimitRetryBody({ ...fields, state: 'requested' }))) {

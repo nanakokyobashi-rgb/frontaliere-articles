@@ -7,6 +7,7 @@ import {
   groupPublisherOutbox,
   publisherStatusIsComplete,
   selectNewRunId,
+  watchPublisherRun,
 } from '../../scripts/ci/cover-publisher-drain.mjs';
 
 function outbox(items) {
@@ -111,6 +112,49 @@ test('un esito parziale resta non riuscito per il codice del drain, anche con ac
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'success' }] }), true);
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'in-progress' }] }), false);
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'failed' }] }), false);
+});
+
+test('il watcher ritenta una lettura transitoria prima di classificare la run', async () => {
+  let nowMs = 0;
+  let observations = 0;
+  const sleeps = [];
+  const result = await watchPublisherRun({
+    repo: 'nanakokyobashi-rgb/frontaliere-articles',
+    runId: '123',
+    deadlineAt: 10_000,
+    now: () => nowMs,
+    readRun: async () => {
+      observations += 1;
+      if (observations === 1) throw new Error('jobs are not visible yet');
+      if (observations === 2) return { status: 'queued', conclusion: null };
+      return { status: 'completed', conclusion: 'success' };
+    },
+    sleepFor: async (ms) => {
+      sleeps.push(ms);
+      nowMs += ms;
+    },
+    intervalMs: 2_000,
+  });
+
+  assert.deepEqual(result, { status: 'success' });
+  assert.equal(observations, 3);
+  assert.deepEqual(sleeps, [2_000, 2_000]);
+});
+
+test('il watcher segnala solo una conclusione terminale negativa come fallimento', async () => {
+  const result = await watchPublisherRun({
+    repo: 'nanakokyobashi-rgb/frontaliere-articles',
+    runId: '123',
+    deadlineAt: 10_000,
+    now: () => 0,
+    readRun: async () => ({ status: 'completed', conclusion: 'failure' }),
+    sleepFor: async () => assert.fail('non deve attendere una run già conclusa'),
+  });
+
+  assert.deepEqual(result, {
+    status: 'failed',
+    error: 'publisher run 123 concluded failure',
+  });
 });
 
 test('correla la run nuova con il nonce, ignorando una dispatch concorrente della stessa workflow', () => {

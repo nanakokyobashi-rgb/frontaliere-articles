@@ -2758,6 +2758,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'offerte-formazione-federale': { it: 'offerte-formazione-federale', en: 'federal-jobs-training', de: 'bund-jobs-ausbildung', fr: 'emploi-federal-formation' },
  'divario-reddito-giovani-svizzera': { it: 'divario-reddito-giovani-svizzera', en: 'gender-pay-gap-young-switzerland', de: 'lohngefalle-junge-schweiz', fr: 'ecart-salaire-jeunes-suisse' },
  'decisioni-avs-ue-voto': { it: 'decisioni-avs-ue-voto', en: 'swiss-federal-decisions-avs-eu-vote', de: 'schweiz-bundesrat-ahv-eu-abstimmung', fr: 'decisions-conseil-federal-avs-ue-vote' },
+ 'pfister-risorse-difesa-federale': { it: 'pfister-risorse-difesa-federale', en: 'pfister-swiss-defense-resources', de: 'pfister-ressourcen-schweizer-armee', fr: 'pfister-ressources-armee-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

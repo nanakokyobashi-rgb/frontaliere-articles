@@ -27391,6 +27391,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'pfister-risorse-difesa-federale',
+    category: 'novita',
+    date: '2026-10-14T01:19:47.735Z',
+    image: '/images/blog/article-pfister-risorse-difesa-federale.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

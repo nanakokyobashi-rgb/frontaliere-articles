@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1948977/prezzi-franchi-carburanti-svizzera-litro-pompa": {
-    "articleId": "carburanti-record-prezzi-2026",
-    "ts": "2026-09-09T10:07:20.739Z",
-    "keyForm": 2
-  },
   "https://www.seco.admin.ch/it/newnsb/-qcngz3zj7rv": {
     "articleId": "prezzi-amministrati-concorrenza-potere",
     "ts": "2026-09-09T10:57:16.063Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it": {
     "articleId": "decisioni-avs-ue-voto",
     "ts": "2026-10-14T00:54:06.449Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1956548/pfister-svizzera-esercito-lugano-federale": {
+    "articleId": "pfister-risorse-difesa-federale",
+    "ts": "2026-10-14T01:19:48.177Z",
     "keyForm": 2
   }
 }

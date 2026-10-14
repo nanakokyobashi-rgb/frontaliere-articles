@@ -8207,6 +8207,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.decisioni-avs-ue-voto.title': 'Bundesrat: AHV, EU und Wahl 2026',
     'blog.article.decisioni-avs-ue-voto.excerpt': 'Guy Parmelin verlässt den Bundesrat am 31.12.2026 AHV/IV-Renten steigen um rund 1,6 % Das Schweizer-EU-Paket befindet sich seit dem 13.',
     'blog.article.decisioni-avs-ue-voto.imageAlt': 'Castelgrande in einer redaktionellen Szene zu Schweizer Bundesentscheiden',
+    'blog.article.pfister-risorse-difesa-federale.title': 'Pfister: unzureichende Mittel für die Schweizer Armee',
+    'blog.article.pfister-risorse-difesa-federale.excerpt': 'Im LAC in Lugano prangert Pfister unzureichende Mittel für die Schweizer Armee an; der Finanzierungsplan ist an eine vorübergehende Erhöhung der Mehrwertsteuer gebunden.',
+    'blog.article.pfister-risorse-difesa-federale.imageAlt': 'Das LAC in Lugano, wo Martin Pfister über die Ressourcen der Schweizer Armee sprach.',
 };
 
 export default blogMetaChDe;
