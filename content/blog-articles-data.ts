@@ -44307,6 +44307,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'incidente-vedeggio-cassarate',
+ category: 'novita',
+ date: '2026-10-14T02:51:32.460Z',
+ image: '/images/blog/article-incidente-vedeggio-cassarate.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/economia/gli-svizzeri-non-hanno-mai-guadagnato-e-risparmiato-come-oggi--4010966.html": {
-    "articleId": "reddito-record-svizzera-2025",
-    "ts": "2026-08-27T15:49:08.082Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/08/27/leggi-notizia/argomenti/varese/articolo/varese-la-bretella-autostradale-dovra-riaprire-in-entrambi-i-sensi-a-meta-settembre-anche-se-i-la.html": {
     "articleId": "varese-bretella-riapertura-2026",
     "ts": "2026-08-27T19:37:00.474Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/zaino-sospetto-davanti-a-una-banca-a-chiasso-evacuato-ledificio-nessun-pericolo/2706709": {
     "articleId": "allarme-bernasconi-artificieri",
     "ts": "2026-10-13T14:39:37.819Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1956491/un-incidente-nella-vedeggio-cassarate-ha-mandato-in-tilt-il-traffico": {
+    "articleId": "incidente-vedeggio-cassarate",
+    "ts": "2026-10-14T02:51:33.173Z",
     "keyForm": 2
   }
 }

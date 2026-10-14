@@ -13140,6 +13140,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.allarme-bernasconi-artificieri.title': 'Chiasso, suspicious backpack: bank evacuated, no danger',
     'blog.article.allarme-bernasconi-artificieri.excerpt': 'Alert after 12.30 in Piazza Bernasconi A bank evacuated and the area cordoned off Suspicious objects checked, including a backpack Area reopened at 14, no',
     'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Illustration generated for this article',
+    'blog.article.incidente-vedeggio-cassarate.title': 'Accident in Vedeggio-Cassarate, traffic in tilt',
+    'blog.article.incidente-vedeggio-cassarate.excerpt': 'Incident at 17.15 in the Vedeggio-Cassarate Tunnel closed towards Lugano and traffic in the queue Reopening around 17.55 At 18.30 similar situation',
+    'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Traffic queued near the Vedeggio-Cassarate tunnel in Lugano',
 };
 
 export default blogMetaEn;

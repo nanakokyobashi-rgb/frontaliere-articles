@@ -13141,6 +13141,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.allarme-bernasconi-artificieri.title': 'Chiasso, zaino sospetto: banca evacuata, nessun pericolo',
     'blog.article.allarme-bernasconi-artificieri.excerpt': 'Allarme dopo le 12.30 in piazza Bernasconi Evacuata una banca e isolata l\'area Controllati oggetti sospetti, tra cui uno zaino Zona riaperta alle 14, nessun',
     'blog.article.allarme-bernasconi-artificieri.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.incidente-vedeggio-cassarate.title': 'Incidente nella Vedeggio-Cassarate, traffico in tilt',
+    'blog.article.incidente-vedeggio-cassarate.excerpt': 'Incidente alle 17.15 nella galleria Vedeggio-Cassarate Tunnel chiuso verso Lugano e traffico in coda Riapertura intorno alle 17.55 Alle 18.30 situazione simile',
+    'blog.article.incidente-vedeggio-cassarate.imageAlt': 'Traffico in coda nei pressi della galleria Vedeggio-Cassarate a Lugano',
 };
 
 export default blogMetaIt;
