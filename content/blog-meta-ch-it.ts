@@ -8279,6 +8279,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.consiglio-federale-doganal-consultazione.title': 'Consiglio federale avvia consultazione ordinanze doganali',
     'blog.article.consiglio-federale-doganal-consultazione.excerpt': 'Il Consiglio federale avvia la consultazione il 14 ottobre 2026 Il progetto riguarda la revisione totale del diritto doganale Il termine della consultazione è',
     'blog.article.consiglio-federale-doganal-consultazione.imageAlt': 'Palazzo federale svizzero a Berna con funzionari doganali al confine',
+    'blog.article.consultazione-omc-commercio-digitale.title': 'Svizzera, consultazione sull\'accordo OMC per l\'e-commerce',
+    'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Accordo plurilaterale sul commercio elettronico all\'OMC 67 membri, tra cui la Svizzera, scelgono l\'attuazione provvisoria Consultazione dal 14 ottobre 2026',
+    'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzona, immagine simbolica della Svizzera e del commercio digitale.',
 };
 
 export default blogMetaChIt;

@@ -8279,6 +8279,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.consiglio-federale-doganal-consultazione.title': 'Bundesrat eröffnet Vernehmlassung zu Zollverordnungen',
     'blog.article.consiglio-federale-doganal-consultazione.excerpt': 'Der Bundesrat eröffnet am 14.',
     'blog.article.consiglio-federale-doganal-consultazione.imageAlt': 'Schweizerisches Bundeshaus in Bern mit Zollbeamten an der Grenze',
+    'blog.article.consultazione-omc-commercio-digitale.title': 'Schweiz, Vernehmlassung zum WTO-E-Commerce-Abkommen',
+    'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Plurilaterales Abkommen über den elektronischen Geschäftsverkehr in der WTO 67 Mitglieder, darunter die Schweiz, entscheiden sich für die vorläufige Umsetzung Konsultation ab 14.',
+    'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzona als symbolischer Schweizer Ort für den digitalen Handel.',
 };
 
 export default blogMetaChDe;

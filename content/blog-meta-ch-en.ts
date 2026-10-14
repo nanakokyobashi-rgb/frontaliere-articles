@@ -8279,6 +8279,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.consiglio-federale-doganal-consultazione.title': 'Federal Council launches consultation on customs ordinances',
     'blog.article.consiglio-federale-doganal-consultazione.excerpt': 'The Federal Council launches the consultation on October 14, 2026 The project concerns the total revision of customs law The consultation deadline is',
     'blog.article.consiglio-federale-doganal-consultazione.imageAlt': 'Swiss Federal Palace in Bern with customs officials at the border',
+    'blog.article.consultazione-omc-commercio-digitale.title': 'Switzerland, consultation on the WTO e-commerce agreement',
+    'blog.article.consultazione-omc-commercio-digitale.excerpt': 'Plurilateral Agreement on Electronic Commerce at the WTO 67 members, including Switzerland, choose provisional implementation Consultation from 14 October 2026',
+    'blog.article.consultazione-omc-commercio-digitale.imageAlt': 'Bellinzona, a symbolic Swiss setting for digital commerce.',
 };
 
 export default blogMetaChEn;
