@@ -758,18 +758,19 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
     // resterebbe verde su un'assertion legata a un elenco di identificatori,
     // ed e' la stessa forma di difetto che aveva lasciato passare il ramo di
     // recupero del segnaposto. Si conta ogni CALL-SITE, comunque si chiami
-    // l'argomento: la definizione a parte, oggi sono tre e sono nominati.
+    // l'argomento: la definizione a parte, oggi sono cinque e i tre call-site
+    // interni ai classificatori sono nominati esplicitamente sotto.
     const tutte = [...codice.matchAll(/(function\s+)?\bslugifySlugPart\s*\(/g)];
     assert.equal(tutte.filter((m) => m[1]).length, 1, 'una sola definizione di slugifySlugPart');
     const nude = tutte.filter((m) => !m[1]);
     assert.equal(
       nude.length,
-      3,
+      5,
       'nessuna derivazione da titolo localizzato puo’ saltare il classificatore: '
-        + 'le sole `slugifySlugPart()` nude ammesse sono la sintesi dell’`id` dal titolo IT '
-        + 'e il ramo `for (const locale of [\'it\'])` di validate() — dove il titolo e’ la '
-        + 'sorgente e non una traduzione — piu’ la normalizzazione interna a '
-        + 'inspectSlugForPromptPlaceholder(), che E’ il classificatore',
+        + 'le sole `slugifySlugPart()` nude ammesse sono due in validate() — sintesi '
+        + 'dell’`id` dal titolo IT e ramo `for (const locale of [\'it\'])`, dove il titolo '
+        + 'e’ la sorgente — e una per ciascuno dei classificatori '
+        + 'findSlugPromptLeak(), inspectSlugForPromptPlaceholder() e stripSlugPromptLeak()',
     );
     // Ancorate alla funzione che le contiene, non a una finestra di righe: due
     // righe aggiunte nel mezzo non devono far fallire il test.
@@ -794,8 +795,14 @@ describe('slug: un titolo `Null` non produce /de/blog/null', () => {
     };
     assert.deepEqual(
       nude.map((m) => funzioneChiudente(m.index)).sort(),
-      ['inspectSlugForPromptPlaceholder', 'validate', 'validate'],
-      'una `slugifySlugPart()` nuda fuori da validate()/inspectSlugForPromptPlaceholder() e’ una nuova derivazione',
+      [
+        'findSlugPromptLeak',
+        'inspectSlugForPromptPlaceholder',
+        'stripSlugPromptLeak',
+        'validate',
+        'validate',
+      ],
+      'una `slugifySlugPart()` nuda fuori dai due rami sorgente IT e dai tre classificatori e’ una nuova derivazione',
     );
     // E una sola delle due in validate() sta dentro il loop IT-only: l'altra
     // sintetizza l'`id` dal titolo italiano, che e' la sorgente.
