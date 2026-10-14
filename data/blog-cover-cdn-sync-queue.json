@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "sha256": "c67734d34c603dc583e0282dd795d9e59356a2710235d71abffd6e7b5696ce08"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-divario-reddito-giovani-svizzera-480w.webp",
-      "sha256": "5c4fc01badbd482407ce3d84ed639f564573163c7adbdddff40a72de8e97ef81"
-    }
-  ]
+  "items": []
 }
