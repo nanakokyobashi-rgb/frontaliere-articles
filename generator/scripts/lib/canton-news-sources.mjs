@@ -281,7 +281,7 @@ function isHtmlWhitespace(char) {
   return char === ' ' || char === '\t' || char === '\n' || char === '\r' || char === '\f';
 }
 
-function findCharsetTagEnd(html, start) {
+export function findHtmlTagEndOutsideQuotes(html, start) {
   let quote = '';
   for (let i = start + 1; i < html.length; i++) {
     const char = html[i];
@@ -296,7 +296,51 @@ function findCharsetTagEnd(html, start) {
   return -1;
 }
 
-function isCharsetSelfClosingStartTag(html, nameEnd, end) {
+function readHtmlTagAt(html, start) {
+  if (html[start] !== '<') return null;
+  let i = start + 1;
+  const closing = html[i] === '/';
+  if (closing) i += 1;
+  const nameStart = i;
+  if (!/[A-Za-z]/u.test(html[i] || '')) return null;
+  i += 1;
+  while (i < html.length && /[\w-]/u.test(html[i])) i += 1;
+  if (html[i] && !/[\s/>]/u.test(html[i])) return null;
+  const nameEnd = i;
+  const endIndex = findHtmlTagEndOutsideQuotes(html, start);
+  if (endIndex < 0) return null;
+  const attrs = html.slice(nameEnd, endIndex);
+  return {
+    start,
+    end: endIndex + 1,
+    closing,
+    name: html.slice(nameStart, nameEnd).toLowerCase(),
+    attrs,
+    selfClosing: !closing && isHtmlSelfClosingStartTag(html, nameEnd, endIndex),
+  };
+}
+
+function nextHtmlTag(html, from = 0) {
+  let start = html.indexOf('<', from);
+  while (start !== -1) {
+    const tag = readHtmlTagAt(html, start);
+    if (tag) return tag;
+    start = html.indexOf('<', start + 1);
+  }
+  return null;
+}
+
+function findHtmlRawTextClosingTag(html, from, name) {
+  const closing = new RegExp(`</${name}\\s*>`, 'ig');
+  closing.lastIndex = from;
+  const match = closing.exec(html);
+  return match
+    ? { start: match.index, end: match.index + match[0].length }
+    : null;
+}
+
+/** Legge gli stati degli attributi fino al `>` per distinguere `/` sintattico da un valore. */
+function isHtmlSelfClosingStartTag(html, nameEnd, end) {
   let i = nameEnd;
   while (i < end) {
     while (i < end && isHtmlWhitespace(html[i])) i++;
@@ -341,7 +385,7 @@ function readCharsetTag(html, start) {
   if (i === nameStart) return null;
   const boundary = html[i] ?? '';
   if (boundary && !/[\s/>]/.test(boundary)) return null;
-  const end = findCharsetTagEnd(html, start);
+  const end = findHtmlTagEndOutsideQuotes(html, start);
   if (end < 0) return null;
   const name = html.slice(nameStart, i).toLowerCase();
   return {
@@ -349,7 +393,7 @@ function readCharsetTag(html, start) {
     end,
     name,
     selfClosing: !closing && CHARSET_VOID_ELEMENTS.has(name)
-      && isCharsetSelfClosingStartTag(html, i, end),
+      && isHtmlSelfClosingStartTag(html, i, end),
   };
 }
 
@@ -516,7 +560,20 @@ export function decodeHtmlEntities(value) {
 }
 
 function stripTags(value) {
-  return decodeHtmlEntities(String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, ' '))
+  const source = String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
+  let text = '';
+  let cursor = 0;
+  let tagStart = source.indexOf('<');
+  while (tagStart !== -1) {
+    const tagEnd = findHtmlTagEndOutsideQuotes(source, tagStart);
+    if (tagEnd < 0) break;
+    text += source.slice(cursor, tagStart);
+    text += ' ';
+    cursor = tagEnd + 1;
+    tagStart = source.indexOf('<', cursor);
+  }
+  text += source.slice(cursor);
+  return decodeHtmlEntities(text)
     .replace(/\s+/g, ' ')
     .trim();
 }
@@ -546,10 +603,20 @@ function htmlAttributeValue(attrs, name) {
 export function selectPublishedTime(html) {
   const input = String(html || '');
   const publicationDates = [];
-  const time = /<time\b([^>]*)>/gi;
-  let match;
-  while ((match = time.exec(input)) !== null) {
-    const attrs = match[1] || '';
+  let cursor = 0;
+  while (cursor < input.length) {
+    const tag = nextHtmlTag(input, cursor);
+    if (!tag) break;
+    cursor = tag.end;
+    if (tag.closing) continue;
+    if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+      const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
+      cursor = close?.end ?? input.length;
+      continue;
+    }
+    if (tag.name !== 'time') continue;
+
+    const attrs = tag.attrs;
     const itemprop = htmlAttributeValue(attrs, 'itemprop');
     const property = htmlAttributeValue(attrs, 'property');
     const className = htmlAttributeValue(attrs, 'class');
@@ -588,23 +655,43 @@ export function selectPublishedTime(html) {
  */
 export function extractPublishedDateFromHtml(html) {
   const input = String(html || '');
-  const jsonLd = /<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
-  let match;
-  while ((match = jsonLd.exec(input)) !== null) {
-    const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(match[1]));
-    const date = validDate(value?.[1]);
-    if (date) return date;
-  }
+  let jsonLdDate = null;
+  let metaDate = null;
+  let cursor = 0;
+  while (cursor < input.length) {
+    const tag = nextHtmlTag(input, cursor);
+    if (!tag) break;
+    cursor = tag.end;
+    if (tag.closing) continue;
 
-  const meta = /<meta\b([^>]*)>/gi;
-  while ((match = meta.exec(input)) !== null) {
-    const attrs = match[1] || '';
+    if (tag.name === 'script') {
+      const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
+      if (!close) break;
+      const type = htmlAttributeValue(tag.attrs, 'type').split(';', 1)[0].trim().toLowerCase();
+      if (!jsonLdDate && type === 'application/ld+json') {
+        const scriptBody = input.slice(tag.end, close.start);
+        const value = /["']datePublished["']\s*:\s*["']([^"']+)["']/i.exec(decodeHtmlEntities(scriptBody));
+        jsonLdDate = validDate(value?.[1]);
+      }
+      cursor = close.end;
+      continue;
+    }
+    if (tag.name !== 'meta' || metaDate) {
+      if (CHARSET_RAW_TEXT_TAGS.has(tag.name)) {
+        const close = findHtmlRawTextClosingTag(input, tag.end, tag.name);
+        cursor = close?.end ?? input.length;
+      }
+      continue;
+    }
+
+    const attrs = tag.attrs;
     const key = htmlAttributeValue(attrs, 'property') || htmlAttributeValue(attrs, 'name');
     if (!/^(?:article:published_time|datePublished|datepublished)$/i.test(key)) continue;
-    const date = validDate(htmlAttributeValue(attrs, 'content'));
-    if (date) return date;
+    metaDate = validDate(htmlAttributeValue(attrs, 'content'));
   }
 
+  if (jsonLdDate) return jsonLdDate;
+  if (metaDate) return metaDate;
   return selectPublishedTime(input);
 }
 
@@ -687,10 +774,10 @@ const SECTIONING_TAGS = new Set(['article', 'aside', 'main', 'section']);
 const SECTIONING_ROLES = new Set(['article', 'complementary', 'main', 'region']);
 /** Il contenuto principale della pagina (`<main>` o `role="main"`) sta in questo markup? */
 function containsMainContent(masked) {
-  const re = /<([a-zA-Z][\w-]*)\b([^>]*)>/g;
-  let m;
-  while ((m = re.exec(masked)) !== null) {
-    if (m[1].toLowerCase() === 'main' || roleTokens(m[2]).includes('main')) return true;
+  let tag = nextHtmlTag(masked);
+  while (tag) {
+    if (!tag.closing && (tag.name === 'main' || roleTokens(tag.attrs).includes('main'))) return true;
+    tag = nextHtmlTag(masked, tag.end);
   }
   return false;
 }
@@ -723,44 +810,56 @@ export function stripPageChrome(html) {
   // non e' un link. Resi spazi a pari lunghezza (gli indici restano quelli del
   // documento), e cosi' restano anche in uscita: l'estrattore non li vede.
   const masked = maskLedgerInactiveMarkup(html);
-  const tagRe = /<(\/?)([a-zA-Z][\w-]*)\b([^>]*)>/g;
   const ranges = [];
   let sectioningDepth = 0;
   // Fine degli elementi `role="main|article|…"` aperti: finche' ce n'e' uno,
   // header e footer sono di quella sezione.
   const roleSectionEnds = [];
-  let m;
-  while ((m = tagRe.exec(masked)) !== null) {
-    const closing = m[1] === '/';
-    const name = m[2].toLowerCase();
-    const attrs = m[3] || '';
-    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= m.index) roleSectionEnds.pop();
+  let tag = nextHtmlTag(masked);
+  while (tag) {
+    const { start, end, closing, name, attrs, selfClosing } = tag;
+    while (roleSectionEnds.length > 0 && roleSectionEnds[roleSectionEnds.length - 1] <= start) roleSectionEnds.pop();
     if (SECTIONING_TAGS.has(name)) {
-      sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
-      if (closing) continue;
+      if (!selfClosing) sectioningDepth = Math.max(0, sectioningDepth + (closing ? -1 : 1));
+      if (closing) {
+        tag = nextHtmlTag(masked, end);
+        continue;
+      }
     }
-    if (closing || /\/\s*$/.test(attrs)) continue;
+    if (closing || selfClosing) {
+      tag = nextHtmlTag(masked, end);
+      continue;
+    }
     const roles = roleTokens(attrs);
     if (!SECTIONING_TAGS.has(name) && roles.some((r) => SECTIONING_ROLES.has(r))) {
-      const sectionEnd = matchingCloseEnd(masked, name, tagRe.lastIndex);
+      const sectionEnd = matchingCloseEnd(masked, name, end);
       if (sectionEnd !== -1) roleSectionEnds.push(sectionEnd);
     }
     const inSection = sectioningDepth > 0 || roleSectionEnds.length > 0;
     const isChrome = name === 'nav'
       || roles.some((r) => CHROME_ROLES.has(r))
       || ((name === 'header' || name === 'footer') && !inSection);
-    if (!isChrome) continue;
-    const end = matchingCloseEnd(masked, name, tagRe.lastIndex);
-    if (end === -1) continue;
+    if (!isChrome) {
+      tag = nextHtmlTag(masked, end);
+      continue;
+    }
+    const sectionEnd = matchingCloseEnd(masked, name, end);
+    if (sectionEnd === -1) {
+      tag = nextHtmlTag(masked, end);
+      continue;
+    }
     // Una «navigazione» che contiene il contenuto principale e' un wrapper
     // marcato male, non un menu: aarau.ch avvolge sottomenu E `<main>` in un
     // `<div role="navigation">`, e tagliarlo toglieva 15 comunicati datati su
     // 15. Si scende dentro: i `<nav>` veri che contiene cadono lo stesso.
-    if (containsMainContent(masked.slice(tagRe.lastIndex, end))) continue;
-    ranges.push([m.index, end]);
+    if (containsMainContent(masked.slice(end, sectionEnd))) {
+      tag = nextHtmlTag(masked, end);
+      continue;
+    }
+    ranges.push([start, sectionEnd]);
     // L'area intera e' tolta: quello che contiene (anche i tag di sezione,
     // aperti E chiusi li' dentro) non sposta il conteggio.
-    tagRe.lastIndex = end;
+    tag = nextHtmlTag(masked, sectionEnd);
   }
   if (ranges.length === 0) return { html: masked, removed: 0 };
   let out = '';
@@ -782,17 +881,23 @@ function sourceArticleText(html, requestedHeadline = '') {
   const page = stripPageChrome(html).html;
   const blocks = (tag) => {
     const out = [];
-    const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
-    let open;
-    while ((open = openRe.exec(page)) !== null) {
-      const end = matchingCloseEnd(page, tag, open.index + open[0].length);
-      if (end < 0) continue;
-      const text = stripTags(page.slice(open.index, end));
+    let open = nextHtmlTag(page);
+    while (open) {
+      if (open.closing || open.name !== tag) {
+        open = nextHtmlTag(page, open.end);
+        continue;
+      }
+      const end = matchingCloseEnd(page, tag, open.end);
+      if (end < 0) {
+        open = nextHtmlTag(page, open.end);
+        continue;
+      }
+      const text = stripTags(page.slice(open.start, end));
       out.push({ tag, text });
       // Do not treat nested containers as separate candidates when an outer
       // element already delimits this block; the other tag family (main or
       // article) is scanned independently below.
-      openRe.lastIndex = end;
+      open = nextHtmlTag(page, end);
     }
     return out;
   };
@@ -820,17 +925,20 @@ function sourceArticleText(html, requestedHeadline = '') {
 
 /** Fine (indice dopo `</name>`) dell'elemento `name` aperto prima di `from`, o -1. */
 function matchingCloseEnd(masked, name, from) {
-  const re = new RegExp(`<(/?)${name}(?=[\\s/>])[^>]*>`, 'gi');
-  re.lastIndex = from;
   let depth = 1;
-  let m;
-  while ((m = re.exec(masked)) !== null) {
-    if (m[1] === '/') {
+  let tag = nextHtmlTag(masked, from);
+  while (tag) {
+    if (tag.name !== name) {
+      tag = nextHtmlTag(masked, tag.end);
+      continue;
+    }
+    if (tag.closing) {
       depth -= 1;
-      if (depth === 0) return re.lastIndex;
-    } else if (!/\/\s*>$/.test(m[0])) {
+      if (depth === 0) return tag.end;
+    } else if (!tag.selfClosing) {
       depth += 1;
     }
+    tag = nextHtmlTag(masked, tag.end);
   }
   return -1;
 }
@@ -917,20 +1025,38 @@ export function extractJsonEntitiesItems(html, pageUrl) {
   return dedupByUrl(out);
 }
 
+/** Alias CMS SH in ordine di priorità: la prima forma stabile prima dei fallback. */
+const CMS_TITLE_FIELDS = Object.freeze(['kachellabel', 'listlabel', 'articleHeadline', 'label']);
+
 /**
- * `json-api`: le due API cantonali del profilo, riconosciute dalla forma.
- *   - zh.ch: `{ news: [{ title, date: 'dd.mm.yyyy', link: '/de/…', teaserText }] }`
- *   - be.ch: `[{ id, publishOn, contentList: [{ title, lead, languageCode }] }]`,
- *     pagina pubblica `https://www.be.ch/<lingua>/start.html?newsID=<id>` (la
- *     forma che la news sitemap di be.ch elenca)
- * Una forma diversa torna [] e la fonte risulta sterile: un'API non
- * documentata che cambia forma si deve vedere nel log, non indovinare.
- *
+ * Forma titolo dei CMS SH: il payload può contenere più alias, anche vuoti.
+ * Si sceglie il primo titolo leggibile nell'ordine documentato, rendendo
+ * osservabile quando il valore arriva da un alias successivo. I valori non
+ * stringa restano nei campi osservati per la diagnostica, ma non sono titoli.
+ */
+export function cmsPayloadShape(row) {
+  const fields = CMS_TITLE_FIELDS.filter((field) => Object.hasOwn(row || {}, field) && row[field] != null);
+  const selected = fields
+    .filter((field) => typeof row[field] === 'string')
+    .map((field) => ({ field, headline: stripTags(row[field]) }))
+    .find(({ headline }) => headline.length >= 10);
+  return {
+    fields,
+    titleField: selected?.field ?? null,
+    headline: selected?.headline ?? '',
+    mixed: fields.length > 1,
+    fallback: Boolean(selected && fields[0] !== selected.field),
+  };
+}
+
+/**
+ * Estrae solo le forme JSON API riconosciute; le forme sconosciute restano
+ * sterili e i payload CMS misti aggiungono una nota diagnostica.
  * @param {string} text
  * @param {string} apiUrl
- * @returns {Array<{url: string, headline: string, date: Date | null, lead?: string, sourceContent?: string}>}
+ * @param {{ notes?: string[] }} [options]
  */
-export function extractJsonApiItems(text, apiUrl) {
+export function extractJsonApiItems(text, apiUrl, { notes = [] } = {}) {
   let data;
   try {
     data = JSON.parse(String(text || ''));
@@ -997,7 +1123,17 @@ export function extractJsonApiItems(text, apiUrl) {
   if (Array.isArray(data) && data.some((n) => n && n.permalink && n.publication_date)) {
     for (const n of data) {
       const url = absoluteUrl(n?.permalink, apiUrl);
-      const headline = stripTags(n?.kachellabel ?? n?.listlabel ?? n?.articleHeadline ?? n?.label);
+      const shape = cmsPayloadShape(n);
+      if ((shape.mixed || shape.fallback) && Array.isArray(notes)) {
+        const fields = shape.fields.join(', ') || 'nessun alias titolo';
+        notes.push(
+          'CMS payload misto: campi titolo '
+            + fields
+            + '; usato '
+            + (shape.titleField || 'nessun titolo valido'),
+        );
+      }
+      const headline = shape.headline;
       if (!url || headline.length < 10) continue;
       // `publication_date` is day-only on the CMS; `transactiontime` carries
       // the publication timestamp and keeps the 3-day window honest around
@@ -1435,7 +1571,7 @@ export async function scanCantonSource(source, ctx) {
       case 'json-entities':
         return extractJsonEntitiesItems(text, url);
       case 'json-api':
-        return extractJsonApiItems(text, url);
+        return extractJsonApiItems(text, url, { notes });
       default:
         // news-sitemap, sitemap, weekly-sitemap
         return extractSitemapNewsItems(text, url, { dedup: !quirks.urlReusedForDifferentStories });

@@ -27,6 +27,13 @@ import {
   registryArticleTypeForRun,
 } from './lib/registry-article-type.mjs';
 import { parseSourceCitations } from './lib/canton-news-sources.mjs';
+import {
+  itemIdentityOf,
+  legacyNewsUrlKey,
+  newsUrlKey,
+  readLedgerEntry,
+  stripItemIdentity,
+} from './lib/source-url-ledger.mjs';
 import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
 
@@ -37,6 +44,14 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 
 export const ARTICLE_TYPE_READINGS_PATH = 'data/article-type-readings.json';
 export const ARTICLE_TYPE_READINGS_MANIFEST_PATH = 'data/article-type-readings.manifest.json';
+const SOURCE_URLS_PATH = Object.freeze({
+  frontaliere: 'data/article-source-urls.json',
+  svizzera: 'data/swiss-article-source-urls.json',
+});
+const SYNTHETIC_CITATION_KEYS = Object.freeze({
+  'stats-bfs://': newsUrlKey('https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html'),
+  'stats-astra://': newsUrlKey('https://www.astra.admin.ch/astra/it/home/documentazione/dati-aperti/veicoli.html'),
+});
 
 const LEDGER_DECISIONS = new Set(['news', 'evergreen', 'unclassified']);
 const LEDGER_KEYS = ['basis', 'decision', 'id', 'readAt', 'reason'];
@@ -103,10 +118,12 @@ export const SECTIONS = Object.freeze({
   frontaliere: {
     registry: 'content/blog-articles-data.ts',
     bodyDir: 'content/blog-body/it',
+    sourceUrls: SOURCE_URLS_PATH.frontaliere,
   },
   svizzera: {
     registry: 'content/swiss-articles-data.ts',
     bodyDir: 'content/blog-body-ch/it',
+    sourceUrls: SOURCE_URLS_PATH.svizzera,
   },
 });
 
@@ -119,12 +136,11 @@ function normalizedHostname(url) {
 }
 
 /**
- * Regola dimostrabile: la citazione finale unica con il dominio come etichetta
- * e' scritta da un solo punto, lo Step 3e di `create-article.mjs`, e solo
- * quando l'URL della run NON e' `evergreen://`. Chi la porta e' quindi nato da
- * una run non evergreen, e il suo tipo e' quello che il writer assegna oggi a
- * quella run: `registryArticleTypeForRun`, la stessa definizione, non una
- * seconda regola scritta qui.
+ * La forma finale con dominio come etichetta e' emessa dallo Step 3e di
+ * `create-article.mjs`, ma il body da solo non prova la provenienza: puo' essere
+ * scritto manualmente o dal modello. `isGeneratedSourceCitation` richiede anche la
+ * corrispondenza URL→ID nel ledger della sezione, poi usa la classificazione
+ * corrente del writer invece di duplicarne le regole.
  *
  * Vale anche per le due citazioni statistiche. Lo Step 3e sostituisce le
  * chiavi sintetiche `stats-bfs://` e `stats-astra://` con la pagina pubblica
@@ -136,19 +152,73 @@ function normalizedHostname(url) {
  * Le due premesse sul generatore sono blindate da
  * `generator/tests/backfill-article-type.test.mjs`.
  */
-export function articleTypeFromItalianBody(body3) {
+function finalGeneratedCitation(body3) {
   const body = String(body3 || '').trimEnd();
   const citations = parseSourceCitations(body);
-  if (citations.length !== 1) return undefined;
+  if (citations.length !== 1) return null;
   const [citation] = citations;
-  if (citation.end !== body.length || !body.slice(0, citation.start).endsWith('\n\n')) return undefined;
+  if (citation.end !== body.length || !body.slice(0, citation.start).endsWith('\n\n')) return null;
   const { label, url } = citation;
   const domain = normalizedHostname(url);
-  if (!domain || label !== domain) return undefined;
-  // L'etichetta di telemetria della run non e' nel corpus; `undefined` e' il
-  // valore delle run manuali, e nessuna etichetta `evergreen_*` convive con
-  // un URL che produce la citazione.
-  return registryArticleTypeForRun(undefined, url);
+  if (!domain || label !== domain) return null;
+  try {
+    if (!['http:', 'https:'].includes(new URL(url).protocol)) return null;
+  } catch {
+    return null;
+  }
+  return citation;
+}
+
+/**
+ * La forma Markdown non prova chi l'ha scritta. Il ledger URL→articolo collega
+ * la citazione canonica all'ID assegnato dopo una generazione riuscita.
+ * Accetta sia le stringhe storiche sia le voci correnti con articleId.
+ */
+export function isGeneratedSourceCitation(body3, articleId, sourceUrls) {
+  if (typeof articleId !== 'string' || !articleId || !sourceUrls || typeof sourceUrls !== 'object') return false;
+  const citation = finalGeneratedCitation(body3);
+  if (!citation) return false;
+  const citationKey = newsUrlKey(citation.url);
+  if (readLedgerEntry(sourceUrls[citationKey])?.articleId === articleId) return true;
+
+  // Fonte riusate aggiungono l'identita' dell'item solo al ledger; la
+  // citazione pubblica usa l'URL senza quel frammento.
+  for (const [sourceUrl, entry] of Object.entries(sourceUrls)) {
+    const ledgerEntry = readLedgerEntry(entry);
+    if (ledgerEntry?.articleId !== articleId) continue;
+    const syntheticCitation = Object.entries(SYNTHETIC_CITATION_KEYS)
+      .find(([prefix]) => sourceUrl.startsWith(prefix));
+    if (syntheticCitation?.[1] === citationKey) return true;
+    const sourceWithoutItemIdentity = stripItemIdentity(sourceUrl);
+    if (ledgerEntry.keyForm === 1) {
+      // Le chiavi storiche hanno perso la query identificante: confrontarle
+      // con la forma 2 ricreerebbe una falsa assenza di provenienza. Hanno
+      // perso anche l'identita' dell'item, quindi non provano citazioni che la
+      // portano esplicitamente.
+      if (!itemIdentityOf(citation.url)
+        && legacyNewsUrlKey(sourceWithoutItemIdentity) === legacyNewsUrlKey(citation.url)) return true;
+    } else if (newsUrlKey(sourceWithoutItemIdentity) === citationKey) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export function articleTypeFromItalianBody(body3, articleId, sourceUrls) {
+  if (!isGeneratedSourceCitation(body3, articleId, sourceUrls)) return undefined;
+  const citation = finalGeneratedCitation(body3);
+  return registryArticleTypeForRun(undefined, citation.url);
+}
+
+function readSourceUrlLedger(root, relativePath) {
+  try {
+    const ledger = JSON.parse(readFileSync(path.join(root, relativePath), 'utf8'));
+    if (!ledger || typeof ledger !== 'object' || Array.isArray(ledger)) return {};
+    return ledger;
+  } catch {
+    // Missing or malformed provenance fails closed.
+    return {};
+  }
 }
 
 function body3For(root, bodyDir, id) {
@@ -235,6 +305,7 @@ export function planBackfill(root = ROOT) {
   const readingsById = new Map(readArticleTypeReadings(root).map((row) => [row.id, row]));
   const result = {};
   for (const [section, spec] of Object.entries(SECTIONS)) {
+    const sourceUrls = readSourceUrlLedger(root, spec.sourceUrls);
     const registryFile = path.join(root, spec.registry);
     const source = readFileSync(registryFile, 'utf8');
     const entries = readRegistryEntries(source);
@@ -254,7 +325,7 @@ export function planBackfill(root = ROOT) {
         }
         continue;
       }
-      const type = articleTypeFromItalianBody(body3);
+      const type = articleTypeFromItalianBody(body3, entry.id, sourceUrls);
       if (type) typesById.set(entry.id, type);
       else {
         withoutType += 1;
