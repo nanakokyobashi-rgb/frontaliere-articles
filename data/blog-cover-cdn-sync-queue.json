@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-prezzi-auto-nuove-usate-calo.webp",
+      "sha256": "4899ac1652ae149785401b49d816d462ad6f4f6773dcb038d0bcf85449d23235"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-prezzi-auto-nuove-usate-calo-480w.webp",
+      "sha256": "31863f0d3dd82bfce194108be5e94038c8accbb1b0f8553bd90c0607a0b17d56"
+    }
+  ]
 }
