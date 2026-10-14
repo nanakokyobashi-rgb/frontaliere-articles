@@ -316,7 +316,7 @@ const blogMetaIt: Record<string, string> = {
  'blog.article.fonderie-svizzere-crisi-2025.title': 'Fonderie Svizzere: produzione giù del 7,6%',
  'blog.article.fonderie-svizzere-crisi-2025.excerpt': 'Il settore metalmeccanico svizzero, pilastro per l\'occupazione in Ticino, ha chiuso il 2025 con un forte calo. Tra le cause i dazi USA e la crisi dell\'auto tedesca.',
  'blog.article.fonderie-svizzere-crisi-2025.imageAlt': 'Interno di una moderna fonderia nel Canton Ticino, con un operaio specializzato che ispeziona un pezzo metallico.',
- 'blog.article.salario-minimo-ticino-accordo.title': 'Salario minimo Ticino: si punta a 22 CHF l\'ora',
+ 'blog.article.salario-minimo-ticino-accordo.title': 'Salario minimo Ticino: proposta a 22 CHF l\'ora',
  'blog.article.salario-minimo-ticino-accordo.excerpt': 'Presentata la bozza di accordo che porterebbe il minimo salariale a 22 CHF orari entro il 2029. Previsto un aumento graduale in tre tappe a partire dal 2027.',
  'blog.article.salario-minimo-ticino-accordo.imageAlt': 'Palazzo del Governo a Bellinzona, dove si discutono le politiche salariali del Canton Ticino',
  'blog.article.trasporti-pubblici-crescita-svizzera.title': 'Trasporti pubblici, fatturato record: cosa cambia per i pendolari?',
