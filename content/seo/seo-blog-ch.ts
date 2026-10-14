@@ -104076,6 +104076,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fallimenti-aziendali-svizzera-aumento': {
+    title: 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
+    description: '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, fallimenti, aziendali, netto, aumento',
+    ogTitle: 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
+    ogDescription: '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
+    canonicalPath: '/articoli-svizzera/fallimenti-aziendali-svizzera-aumento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fallimenti aziendali in netto aumento, record nel 2025-2026",
+      "description": "11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fallimenti-aziendali-svizzera-aumento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con edifici uffici e acqua calma, giorno sereno"
+      },
+      "datePublished": "2026-10-14T13:06:00+00:00",
+      "dateModified": "2026-10-14T13:06:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fallimenti-aziendali-svizzera-aumento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

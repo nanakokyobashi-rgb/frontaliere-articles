@@ -8246,6 +8246,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Caisses de pension : investissements illiquides à 36% du patrimoine',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% du patrimoine est investi dans des actifs non immédiatement négociables La part a augmenté au cours des 15 dernières années L’immobilier, les hypothèques et les placements alternatifs offrent de la stabilité',
     'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Bureau de caisse de pension à Zurich avec analystes examinant des portefeuilles illiquides',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Faillites d’entreprises en forte hausse, record en 2025-2026',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 entreprises insolvables entre janvier et septembre Faillites d’entreprises à 13’660, +38,4% sur un an Nouvelles inscriptions au registre : 41’706 Particuliers : 8’003 faillites',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vue sur le lac de Lugano avec des bâtiments de bureau et de l\'eau calme, journée dégagée',
 };
 
 export default blogMetaChFr;

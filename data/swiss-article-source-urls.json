@@ -1,9 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/5xgohc4gf9pm": {
-    "articleId": "accordo-clima-commercio-consultazione",
-    "ts": "2026-09-09T12:32:04.547Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4071154": {
     "articleId": "internet-banda-larga-svizzera",
     "ts": "2026-09-09T12:52:12.835Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1956672/investimenti-casse-pensioni-illiquidi-rischi": {
     "articleId": "investimenti-illiquidi-pensione-2026",
     "ts": "2026-10-14T11:36:00.096Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/fallimenti-in-netto-aumento%2c-%c3%a8-record-per-quelli-aziendali/92213801": {
+    "articleId": "fallimenti-aziendali-svizzera-aumento",
+    "ts": "2026-10-14T13:06:01.445Z",
     "keyForm": 2
   }
 }

@@ -2771,6 +2771,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'imposta-cani-berna-guida': { it: 'imposta-cani-berna-guida', en: 'bern-dog-tax-guide', de: 'hundesteuer-bern-leitfaden', fr: 'taxe-chiens-berne-guide' },
  'licenza-caccia-berna-requisiti': { it: 'licenza-caccia-berna-requisiti', en: 'hunting-license-bern-requirements', de: 'jagdkarte-bern-voraussetzungen', fr: 'permis-chasse-berne-conditions' },
  'investimenti-illiquidi-pensione-2026': { it: 'investimenti-illiquidi-pensione-2026', en: 'illiquid-investments-pension-2026', de: 'illiquide-anlagen-pension-2026', fr: 'investissements-illiquides-pension-2026' },
+ 'fallimenti-aziendali-svizzera-aumento': { it: 'fallimenti-aziendali-svizzera-aumento', en: 'corporate-bankruptcies-sharply-on-the-rise-record-high-in-2025-2026', de: 'unternehmensinsolvenzen-deutlich-gestiegen-rekord-2025-2026', fr: 'faillites-d-entreprises-en-forte-hausse-record-en-2025-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

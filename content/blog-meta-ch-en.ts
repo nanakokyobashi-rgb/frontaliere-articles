@@ -8246,6 +8246,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Pension funds: illiquid investments account for 36% of assets',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': '36% of the assets are in investments that are not immediately tradable The share has grown over the past 15 years Real estate, mortgages and alternative investments offer stability',
     'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Pension fund office in Zurich with analysts reviewing illiquid portfolios',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Corporate bankruptcies sharply on the rise, record high in 2025-2026',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 insolvent companies between January and September Company bankruptcies at 13’660, +38,4% year-on-year New registrations in the register: 41’706 Individuals: 8’003 bankruptcies',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Lugano lake view with office buildings and calm water, clear day',
 };
 
 export default blogMetaChEn;

@@ -8246,6 +8246,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.investimenti-illiquidi-pensione-2026.title': 'Casse pensioni: investimenti illiquidi al 36% del patrimonio',
     'blog.article.investimenti-illiquidi-pensione-2026.excerpt': 'Il 36% del patrimonio è in attività non immediatamente negoziabili La quota è cresciuta negli ultimi 15 anni Immobili, ipoteche e alternativi offrono stabilità',
     'blog.article.investimenti-illiquidi-pensione-2026.imageAlt': 'Ufficio cassa pensioni a Zurigo con analisti che esaminano portafogli illiquidi',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.title': 'Fallimenti aziendali in netto aumento, record nel 2025-2026',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.excerpt': '11’063 aziende insolventi tra gennaio e settembre Fallimenti di ditte a 13’660, +38,4% annuo Nuove iscrizioni al registro: 41’706 Privati: 8’003 fallimenti',
+    'blog.article.fallimenti-aziendali-svizzera-aumento.imageAlt': 'Vista del lago di Lugano con edifici uffici e acqua calma, giorno sereno',
 };
 
 export default blogMetaChIt;

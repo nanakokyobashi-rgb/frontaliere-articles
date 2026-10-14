@@ -27531,6 +27531,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'fallimenti-aziendali-svizzera-aumento',
+    category: 'pratico',
+    date: '2026-10-14T13:06:00.817Z',
+    image: '/images/blog/article-fallimenti-aziendali-svizzera-aumento.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
