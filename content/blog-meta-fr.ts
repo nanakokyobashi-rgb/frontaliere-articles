@@ -13148,6 +13148,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.easy-work-chiusura-264.title': 'Easy Work ferme ses portes : 264 emplois menacés à Chiasso.',
     'blog.article.easy-work-chiusura-264.excerpt': 'Easy Work fermera ses portes le 31 décembre.',
     'blog.article.easy-work-chiusura-264.imageAlt': 'Fermeture du bureau Easy Work à Chiasso, corso San Gottardo 106, avec panneau de fermeture',
+    'blog.article.incidente-varesina-venegono.title': 'Carambolage sur la Varesina : quatre blessés à Venegono',
+    'blog.article.incidente-varesina-venegono.excerpt': 'Accident à 7 h sur la Sp 233 à Venegono Inferiore Quatre voitures impliquées et quatre personnes blessées Deux ambulances, un véhicule médicalisé, les sapeurs-pompiers et les carabiniers',
+    'blog.article.incidente-varesina-venegono.imageAlt': 'Circulation bloquée sur la Varesina après un accident à Venegono Inferiore',
 };
 
 export default blogMetaFr;
