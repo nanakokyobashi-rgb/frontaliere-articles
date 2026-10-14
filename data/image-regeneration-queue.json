@@ -70,6 +70,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T18:54:17.455Z",
       "lastFailureAt": "2026-10-14T18:54:17.455Z"
+    },
+    {
+      "articleId": "derby-basket-ticinese-massagno",
+      "title": "Derby ticinese di basket: Massagno è il favorito",
+      "fallbackImage": "/images/places/lugano-view.webp",
+      "reason": "All image providers failed for article-derby-basket-ticinese-massagno: openai-codex (vision gate rejected image: Generic synthetic basketball illustration relevant to the topic, wi",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T19:23:38.999Z",
+      "lastFailureAt": "2026-10-14T19:23:38.999Z"
     }
   ]
 }

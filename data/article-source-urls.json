@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/08/davide-bellotto-fillea-cgil-ancora-un-morto-sul-lavoro-non-possiamo-limitarci-a-contare-le-vittime/2666782": {
-    "articleId": "origgio-tragedia-cantiere-2026",
-    "ts": "2026-09-01T15:08:54.746Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/confapi-tensioni-geopolitiche-e-credito-difficile-frenano-investimenti-e-crescita-delle-pmi/2667685": {
     "articleId": "confapi-pmi-varese-credito-2026",
     "ts": "2026-09-01T15:51:24.576Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4160155": {
     "articleId": "arma-biasca-inchiesta",
     "ts": "2026-10-14T18:54:17.457Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/sport/basket/1956524/la-logica-direbbe-massagno-ma-i-derby-non-sempre-la-rispettano": {
+    "articleId": "derby-basket-ticinese-massagno",
+    "ts": "2026-10-14T19:23:39.001Z",
     "keyForm": 2
   }
 }

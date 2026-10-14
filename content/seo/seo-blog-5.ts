@@ -108102,6 +108102,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-derby-basket-ticinese-massagno': {
+    title: 'Derby ticinese di basket: Massagno è il favorito',
+    description: 'Sabato la prima sfida tutta ticinese sotto le plance: Massagno è il favorito, ma il derby può portare altri aspetti oltre la logica del pronostico iniziale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, derby, ticinese, basket, massagno',
+    ogTitle: 'Derby ticinese di basket: Massagno favorito',
+    ogDescription: 'La prima sfida tutta ticinese sotto le plance è fissata per sabato. Massagno viene indicato come chiaro favorito, ma il derby introduce una variabile precisa: gli altri aspetti della sfida possono allontanare il verdetto dalla logica del pronostico.',
+    canonicalPath: '/articoli-frontaliere/derby-basket-ticinese-massagno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Derby ticinese di basket: Massagno è il favorito",
+      "description": "Sabato la prima sfida tutta ticinese sotto le plance: Massagno è il favorito, ma il derby può portare altri aspetti oltre la logica del pronostico iniziale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/places/lugano-view.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Derby di basket ticinese con Massagno"
+      },
+      "datePublished": "2026-10-14T19:23:38+00:00",
+      "dateModified": "2026-10-14T19:23:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/derby-basket-ticinese-massagno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
