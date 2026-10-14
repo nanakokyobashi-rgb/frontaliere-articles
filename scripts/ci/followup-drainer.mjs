@@ -2179,6 +2179,35 @@ export function isStuckFixRescueCandidate(iss) {
 }
 
 /**
+ * Direct `agent:fix` can outlive the classification that assigned it: a
+ * permanent pin or technical defer may be added afterward, making the current
+ * route `none`. The queued path has its own de-queue pre-flight; this covers
+ * only the stale direct route and never a live claim.
+ * @param {{title?: string, body?: string, labels?: Array<string|{name:string}>}} iss
+ */
+export function isStaleDirectFixRouteCandidate(iss) {
+  if (!has(iss, LBL_FIX) || has(iss, LBL_QUEUED) || hasActiveAgentClaim(iss)) return false;
+  return classifyIssue(String(iss?.title || ''), names(iss), String(iss?.body || '')).route === 'none';
+}
+
+/** Gate the stale direct-route cleanup; unreadable run/PR/claim state fails closed. */
+export function staleDirectFixRouteDecision(iss, {
+  inFlight = Number.POSITIVE_INFINITY,
+  liveClaimAllowed = false,
+  hasOpenPr = null,
+  settling = true,
+} = {}) {
+  if (!isStaleDirectFixRouteCandidate(iss)) {
+    return { action: 'keep', reason: 'route non diretto o ancora eleggibile' };
+  }
+  if (inFlight !== 0) return { action: 'wait', reason: 'run issue-fix attiva o non leggibile' };
+  if (!liveClaimAllowed) return { action: 'keep', reason: 'claim attivo o non leggibile' };
+  if (hasOpenPr !== false) return { action: 'keep', reason: 'PR aperta o non verificabile' };
+  if (settling) return { action: 'wait', reason: 'promozione nella finestra di assestamento' };
+  return { action: 'dequeue', reason: 'la classificazione corrente restituisce route none' };
+}
+
+/**
  * Tracker / issue-contatore PERMANENTE (`agent:no-age-out`, #5615).
  *
  * Esiste per essere una condizione permanentemente visibile: non si chiude mai e
@@ -2731,6 +2760,19 @@ function liveIssueForClaim(num) {
     return issue && Array.isArray(issue.labels) ? issue : null;
   } catch {
     // Il chiamante aggiunge lo stage e applica il fail-closed uniforme.
+    return null;
+  }
+}
+
+/** Live classification inputs for the stale direct-route reconciliation. */
+function liveIssueForDirectRoute(num) {
+  try {
+    const issue = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'title,labels,updatedAt']);
+    return issue && typeof issue.title === 'string' && Array.isArray(issue.labels)
+      && typeof issue.updatedAt === 'string'
+      ? issue
+      : null;
+  } catch {
     return null;
   }
 }
@@ -3507,12 +3549,16 @@ function routeToDecompose(num, { remove = [], note }) {
  * contava la PR mergiata come in-flight per sempre → mai rescue né park).
  * Issue aperta + PR chiusa + vecchia = orfana: re-queue; il pre-flight
  * already-resolved di issue-fix protegge dal re-run inutile se è done. */
-function hasFixPR(num) {
+function hasFixPR(num, { failClosed = false } = {}) {
   for (const branch of [`fix/issue-${num}`]) {
     try {
       const prs = gh(['pr', 'list', '--repo', REPO, '--head', branch, '--state', 'open', '--json', 'number', '--limit', '1']);
+      if (!Array.isArray(prs)) return failClosed;
       if (Array.isArray(prs) && prs.length) return true;
-    } catch { /* ignore */ }
+    } catch {
+      if (failClosed) return true;
+      /* Existing rescue path remains best-effort. */
+    }
   }
   return false;
 }
@@ -5216,10 +5262,61 @@ export function runDrain() {
   }
 
   const stuckFix = rescueSafe ? allFix.filter(isStuckFixRescueCandidate) : [];
+  const staleDirectFixes = rescueSafe ? allFix.filter(isStaleDirectFixRouteCandidate) : [];
   // Il complemento esatto di `stuckFix` dentro `agent:fix`: i crawler
   // (`route='fix'`, unica categoria non queue-managed). Erano l'unica categoria
   // che nessuno strato di recupero guardava — vedi `crawlerFixDecision` (#5514).
   const crawlerFix = rescueSafe ? allFix.filter(isCrawlerRescueCandidate) : [];
+
+  // Riconcilia il routing diretto diventato invalido dopo l'applicazione del
+  // pin. `classifyIssue` è la sorgente del route: il check usa lo snapshot per
+  // selezionare pochi candidati e rilegge le label prima della mutazione. La
+  // issue resta aperta e il pin resta intatto; non è un age-out né una chiusura.
+  let staleDirectFixesRemoved = 0;
+  let staleDirectFixesPreviewed = 0;
+  for (const iss of staleDirectFixes) {
+    if (!budget.take(`#${iss.number} (dequeue direct fix pinned)`, ITEM_COST_MS)) break;
+    const live = DRY ? { title: iss.title, labels: iss.labels, updatedAt: iss.updatedAt } : liveIssueForDirectRoute(iss.number);
+    if (!live || !isStaleDirectFixRouteCandidate({ ...iss, title: live.title, labels: live.labels })) {
+      console.log(`PIN-ROUTE-SKIP #${iss.number}: il routing live non è più un direct fix non eleggibile, oppure le label non sono leggibili.`);
+      continue;
+    }
+    const hasOpenPr = hasFixPR(iss.number, { failClosed: true });
+    const liveClaimAllowed = liveClaimAllowsMutation(iss.number);
+    const settling = isSettlingPromotion({
+      outcome: null,
+      ageMin: minutesSince(live.updatedAt),
+      settleMin: SETTLE_MIN,
+    });
+    const decision = staleDirectFixRouteDecision({ ...iss, title: live.title, labels: live.labels }, {
+      inFlight: inflight,
+      liveClaimAllowed,
+      hasOpenPr,
+      settling,
+    });
+    if (decision.action !== 'dequeue') {
+      console.log(`PIN-ROUTE-SKIP #${iss.number} (${decision.reason}) — routing lasciato intatto.`);
+      continue;
+    }
+    if (DRY) {
+      staleDirectFixesPreviewed++;
+      console.log(`[dry] PIN-ROUTE-RECONCILE #${iss.number}: rimuoverei agent:fix; issue e pin restano aperti.`);
+      continue;
+    }
+    if (!commentIssue(iss.number,
+      `📌 **Pre-flight drainer (zero-Claude): routing diretto non più valido.** La classificazione corrente restituisce \`route=none\`; rimuovo solo \`agent:fix\`. Questa azione non chiude la issue e lascia intatti i pin; gli stadi dedicati al completamento restano invariati.\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`,
+      'stale direct-fix route comment')) continue;
+    if (!edit(iss.number, { remove: [LBL_FIX] })) continue;
+    staleDirectFixesRemoved++;
+    console.log(`PIN-ROUTE-RECONCILE #${iss.number} (route=none) — "${iss.title?.slice(0, 50)}"`);
+  }
+  if (staleDirectFixes.length > 0) {
+    const outcome = DRY
+      ? `stale_direct_fix_routes_would_remove=${staleDirectFixesPreviewed}/${staleDirectFixes.length}`
+      : `stale_direct_fix_routes_removed=${staleDirectFixesRemoved}/${staleDirectFixes.length}`;
+    console.log(outcome);
+  }
+
   // Promozioni "in assestamento": un agent:fix follow-up giovane e senza PR ha
   // la run viva OPPURE non ancora registrata in `gh run list` (latenza
   // queue→listing di alcuni secondi). In entrambi i casi lo slot issue-fix è
