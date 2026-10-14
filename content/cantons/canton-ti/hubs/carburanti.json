@@ -4,14 +4,14 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "carburanti",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "e2535a142d0d5fd7db07bc1d850fea141b4d2ae69d24f2493c3fc5d798cdd39f",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "e6d403b68239dd667b364e016571f5010407eb54fb0109f5aa46b9189a003b1e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-12T16:03:22.277Z",
+      "updatedAt": "2026-10-13T14:34:38.425Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-18T05:48:57.000Z"
+      "carryUntilAt": "2026-10-19T06:00:26.000Z"
     }
   ],
   "locales": {
@@ -55,18 +55,18 @@
             {
               "label": "Benzina 95 — Italia",
               "value": "2,029 EUR/l",
-              "detail": "media regionale: minimo 1,989 EUR/l, 306 stazioni rilevate",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "media regionale: minimo 1,989 EUR/l, 304 stazioni rilevate",
+              "date": "2026-10-12T06:00:26.000Z"
             },
             {
               "label": "Diesel — Italia",
               "value": "2,254 EUR/l",
-              "detail": "media regionale: minimo 2,190 EUR/l, 305 stazioni rilevate",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "media regionale: minimo 2,190 EUR/l, 303 stazioni rilevate",
+              "date": "2026-10-12T06:00:26.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-13T14:34:38.425Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +145,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "TI",
@@ -187,18 +187,18 @@
             {
               "label": "Petrol 95 — Italy",
               "value": "2.029 EUR/l",
-              "detail": "regional average: lowest 1.989 EUR/l, 306 stations surveyed",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "regional average: lowest 1.989 EUR/l, 304 stations surveyed",
+              "date": "2026-10-12T06:00:26.000Z"
             },
             {
               "label": "Diesel — Italy",
               "value": "2.254 EUR/l",
-              "detail": "regional average: lowest 2.190 EUR/l, 305 stations surveyed",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "regional average: lowest 2.190 EUR/l, 303 stations surveyed",
+              "date": "2026-10-12T06:00:26.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-13T14:34:38.425Z"
         }
       ],
       "curatedArticles": [
@@ -277,7 +277,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "TI",
@@ -319,18 +319,18 @@
             {
               "label": "Benzin 95 — Italien",
               "value": "2.029 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.989 EUR/l, 306 erfasste Tankstellen",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.989 EUR/l, 304 erfasste Tankstellen",
+              "date": "2026-10-12T06:00:26.000Z"
             },
             {
               "label": "Diesel — Italien",
               "value": "2.254 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.190 EUR/l, 305 erfasste Tankstellen",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.190 EUR/l, 303 erfasste Tankstellen",
+              "date": "2026-10-12T06:00:26.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-13T14:34:38.425Z"
         }
       ],
       "curatedArticles": [
@@ -405,7 +405,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -447,18 +447,18 @@
             {
               "label": "Essence 95 — Italie",
               "value": "2,029 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,989 EUR/l, 306 stations relevées",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "moyenne régionale : prix le plus bas 1,989 EUR/l, 304 stations relevées",
+              "date": "2026-10-12T06:00:26.000Z"
             },
             {
               "label": "Diesel — Italie",
               "value": "2,254 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,190 EUR/l, 305 stations relevées",
-              "date": "2026-10-11T05:48:57.000Z"
+              "detail": "moyenne régionale : prix le plus bas 2,190 EUR/l, 303 stations relevées",
+              "date": "2026-10-12T06:00:26.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); MIMIT Osservaprezzi carburanti (open data)",
-          "updatedAt": "2026-10-12T16:03:22.277Z"
+          "updatedAt": "2026-10-13T14:34:38.425Z"
         }
       ],
       "curatedArticles": [
@@ -537,7 +537,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

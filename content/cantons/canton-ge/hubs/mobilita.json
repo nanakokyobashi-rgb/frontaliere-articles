@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "f855b3129d566d93e63ecfeffec79d4f79ae062c5f8d2f9e6b838c797a7db7c7",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "67e285e4a56307e9063b474356461779c60e2822cea6c4755c2a9acfe068c8b5",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "20",
           "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
@@ -135,18 +135,6 @@
               "date": "2026-09-09T05:39:00.000Z"
             },
             {
-              "label": "A1 Genève -> Lausanne Svincolo autostradale Perly Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 14 ottobre 2026",
-              "date": "2026-09-09T05:46:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Perly Sud E Svincolo autostradale Bernex Situazione: chiusa cantiere, lunghezza [km] 3.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 14 ottobre 2026",
-              "date": "2026-09-09T05:47:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
@@ -157,16 +145,43 @@
               "value": "Chiusura",
               "detail": "fine prevista: 17 ottobre 2026",
               "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Perly Nord Situazione: uscita chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 24 ottobre 2026",
+              "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Diramazione Perly Raccordo autostradale Diramazione Perly Situazione: uscita chiusa cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Chiusura",
+              "detail": "fine prevista: 24 ottobre 2026",
+              "date": "2026-09-24T08:10:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
+              "date": "2026-10-13T13:46:35.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/13/trafic-interrompu-entre-annemasse-et-thonon-les-bains/"
+            },
+            {
+              "label": "Feuille de route pour les mobilités Canton - Trois-Chêne 2026-2028",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45208"
+            },
+            {
+              "label": "Mobilités dans les Trois-Chêne: canton et communes s’accordent sur une feuille de route commune",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45209"
+            },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
@@ -181,24 +196,9 @@
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-10-02",
               "url": "https://www.ge.ch/node/41839"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
-              "date": "2026-10-01",
-              "url": "https://www.ge.ch/node/45079"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
-              "date": "2026-09-24",
-              "url": "https://www.ge.ch/node/44965"
-            },
-            {
-              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
-              "date": "2026-09-22",
-              "url": "https://www.ge.ch/node/44042"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -245,7 +245,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "GE",
@@ -260,7 +260,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "20",
           "note": "reports as of 13 October 2026"
         },
         {
@@ -358,18 +358,6 @@
               "date": "2026-09-09T05:39:00.000Z"
             },
             {
-              "label": "A1 Genève -> Lausanne Svincolo autostradale Perly Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Closure",
-              "detail": "until 14 October 2026",
-              "date": "2026-09-09T05:46:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne tra Svincolo autostradale Perly Sud E Svincolo autostradale Bernex Situazione: chiusa cantiere, lunghezza [km] 3.2",
-              "value": "Closure",
-              "detail": "until 14 October 2026",
-              "date": "2026-09-09T05:47:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne Svincolo autostradale Genève Aéroport Situazione: raccordo autostradale chiuso in entrata cantiere",
               "value": "Closure",
               "detail": "until 29 October 2026",
@@ -380,16 +368,43 @@
               "value": "Closure",
               "detail": "until 17 October 2026",
               "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Svincolo autostradale Perly Nord Situazione: uscita chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 24 October 2026",
+              "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Diramazione Perly Raccordo autostradale Diramazione Perly Situazione: uscita chiusa cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Closure",
+              "detail": "until 24 October 2026",
+              "date": "2026-09-24T08:10:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
+              "date": "2026-10-13T13:46:35.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/13/trafic-interrompu-entre-annemasse-et-thonon-les-bains/"
+            },
+            {
+              "label": "Feuille de route pour les mobilités Canton - Trois-Chêne 2026-2028",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45208"
+            },
+            {
+              "label": "Mobilités dans les Trois-Chêne: canton et communes s’accordent sur une feuille de route commune",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45209"
+            },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
@@ -404,24 +419,9 @@
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-10-02",
               "url": "https://www.ge.ch/node/41839"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
-              "date": "2026-10-01",
-              "url": "https://www.ge.ch/node/45079"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
-              "date": "2026-09-24",
-              "url": "https://www.ge.ch/node/44965"
-            },
-            {
-              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
-              "date": "2026-09-22",
-              "url": "https://www.ge.ch/node/44042"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -468,7 +468,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "GE",
@@ -483,7 +483,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "20",
           "note": "Meldungen vom 13. Oktober 2026"
         },
         {
@@ -581,18 +581,6 @@
               "date": "2026-09-09T05:39:00.000Z"
             },
             {
-              "label": "A1 Genf -> Lausanne Anschluss Perly Nord Sachlage: Einfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 14. Oktober 2026",
-              "date": "2026-09-09T05:46:00.000Z"
-            },
-            {
-              "label": "A1 Genf -> Lausanne zwischen Anschluss Perly Süd und Anschluss Bernex Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.2",
-              "value": "Sperrung",
-              "detail": "bis 14. Oktober 2026",
-              "date": "2026-09-09T05:47:00.000Z"
-            },
-            {
               "label": "A1 Genf -> Lausanne Anschluss Flughafen Genf Sachlage: Einfahrt gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
@@ -603,16 +591,43 @@
               "value": "Sperrung",
               "detail": "bis 17. Oktober 2026",
               "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genf Anschluss Perly Nord Sachlage: Ausfahrt gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 24. Oktober 2026",
+              "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Verzweigung Perly Autobahndreieck Verzweigung Perly Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
+              "value": "Sperrung",
+              "detail": "bis 24. Oktober 2026",
+              "date": "2026-09-24T08:10:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
+              "date": "2026-10-13T13:46:35.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/13/trafic-interrompu-entre-annemasse-et-thonon-les-bains/"
+            },
+            {
+              "label": "Feuille de route pour les mobilités Canton - Trois-Chêne 2026-2028",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45208"
+            },
+            {
+              "label": "Mobilités dans les Trois-Chêne: canton et communes s’accordent sur une feuille de route commune",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45209"
+            },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
@@ -627,24 +642,9 @@
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-10-02",
               "url": "https://www.ge.ch/node/41839"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
-              "date": "2026-10-01",
-              "url": "https://www.ge.ch/node/45079"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
-              "date": "2026-09-24",
-              "url": "https://www.ge.ch/node/44965"
-            },
-            {
-              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
-              "date": "2026-09-22",
-              "url": "https://www.ge.ch/node/44042"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -691,7 +691,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "GE",
@@ -706,7 +706,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "20",
           "note": "signalements au 13 octobre 2026"
         },
         {
@@ -804,18 +804,6 @@
               "date": "2026-09-09T05:39:00.000Z"
             },
             {
-              "label": "A1 Genève -> Lausanne Jonction autoroutière Perly Nord Situation: entrée fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 14 octobre 2026",
-              "date": "2026-09-09T05:46:00.000Z"
-            },
-            {
-              "label": "A1 Genève -> Lausanne entre Jonction autoroutière Perly Sud et Jonction autoroutière Bernex Situation: fermé travaux, longueur [km] 3.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 14 octobre 2026",
-              "date": "2026-09-09T05:47:00.000Z"
-            },
-            {
               "label": "A1 Genève -> Lausanne Jonction autoroutière Aéroport de Genève Situation: entrée fermée travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
@@ -826,16 +814,43 @@
               "value": "Fermeture",
               "detail": "jusqu’au 17 octobre 2026",
               "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1 Lausanne -> Genève Jonction autoroutière Perly Nord Situation: sortie fermée travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 24 octobre 2026",
+              "date": "2026-09-24T08:08:00.000Z"
+            },
+            {
+              "label": "A1a Etoile -> Echangeur de Perly Echangeur Echangeur de Perly Situation: sortie fermée travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5",
+              "value": "Fermeture",
+              "detail": "jusqu’au 24 octobre 2026",
+              "date": "2026-09-24T08:10:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Trafic interrompu entre Annemasse et Thonon-les-Bains",
+              "date": "2026-10-13T13:46:35.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/13/trafic-interrompu-entre-annemasse-et-thonon-les-bains/"
+            },
+            {
+              "label": "Feuille de route pour les mobilités Canton - Trois-Chêne 2026-2028",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45208"
+            },
+            {
+              "label": "Mobilités dans les Trois-Chêne: canton et communes s’accordent sur une feuille de route commune",
+              "date": "2026-10-13",
+              "url": "https://www.ge.ch/node/45209"
+            },
             {
               "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 12 octobre 2026",
               "date": "2026-10-08",
@@ -850,24 +865,9 @@
               "label": "Info chantier Voie verte Genève-Satigny",
               "date": "2026-10-02",
               "url": "https://www.ge.ch/node/41839"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 5 octobre 2026",
-              "date": "2026-10-01",
-              "url": "https://www.ge.ch/node/45079"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 28 septembre 2026",
-              "date": "2026-09-24",
-              "url": "https://www.ge.ch/node/44965"
-            },
-            {
-              "label": "Végétalisation et mobilité durable: premières avancées de la Loi sur le climat urbain",
-              "date": "2026-09-22",
-              "url": "https://www.ge.ch/node/44042"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -914,7 +914,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

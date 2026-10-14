@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "cdb30a6e5f31872ac6afa981b08dda5431542dfa9cdecd221cca9c60644846fe",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "81bdd690ddec96676c72ad0be1f9f6c1e988058ba28da6038acbad97dc43b112",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "231",
+          "value": "244",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Gyotaku - Tracce di pesci",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/61721"
+              "label": "Carlo Agostino Meletta - pittore",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63364"
             },
             {
-              "label": "Jannis Kounellis: Io sono un pittore",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63037"
+              "label": "Fuori di Zucca, il villaggio delle zucche",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64302"
             },
             {
-              "label": "Mona Caron - La resilienza della vita",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63363"
+              "label": "In orbita - mostra di ceramiche",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63668"
             },
             {
-              "label": "A fox under the pink moon",
+              "label": "Pierrette Bloch. Il gesto di scrivere",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64342"
+            },
+            {
+              "label": "Nyumba",
               "detail": "Cinema Corso, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63915"
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63918"
             },
             {
-              "label": "Immaginario illustrato",
-              "detail": "Il Rifugio Letterario, Massagno",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64190"
+              "label": "Ceramiche dell'antico Perù. Dal Pacifico alle Ande",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64065"
             },
             {
-              "label": "Bertille Bak. Voci dalla terra",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62429"
+              "label": "Rulba rulba! - Baby atelier",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64072"
             },
             {
-              "label": "Kaari Upson. Dollhouse – Una retrospettiva",
-              "detail": "MASI, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63581"
+              "label": "One more show",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63919"
             },
             {
-              "label": "Sentimento e osservazione",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/53980"
-            },
-            {
-              "label": "Umberto Boccioni",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62804"
+              "label": "Al cinema con 'La lanterna magica'!",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64049"
             },
             {
               "label": "DONAZIONE DI SANGUE",
-              "detail": "centro La Torre, Losone",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64425"
+              "detail": "Capannone Garbinasca, Novazzano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64426"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -136,16 +136,16 @@
           "date": "2026-08-05T02:14:46.445Z"
         },
         {
+          "title": "Massimo Balena: agricoltore ticinese nel calendario svizzero",
+          "url": "/articoli-svizzera/massimo-balena-calendario-agricoltori-ticino/",
+          "excerpt": "Il 29enne di Bellinzona racconta l'apprendistato in tedesco, la chiusura dell'azienda con 650 galline e il lavoro intensivo fino a 15 ore al giorno.",
+          "date": "2026-09-28T05:05:48.854Z"
+        },
+        {
           "title": "Ticino Musica si fa in quattro (concerti)",
           "url": "/articoli-frontaliere/tacito-musica-ticino-concerti/",
           "excerpt": "Il Festival Ticino Musica prosegue con una giornata ricca di appuntamenti che accompagneranno il pubblico dal pomeriggio alla sera.",
           "date": "2026-07-28T05:51:38.011Z"
-        },
-        {
-          "title": "Locarno Film Festival: chi sarà il prossimo presidente?",
-          "url": "/articoli-frontaliere/presidente-locarno-film-festival/",
-          "excerpt": "Il Locarno Film Festival cerca un nuovo presidente. Le voci si rincorrono, ma nessuna conferma ufficiale.",
-          "date": "2026-08-08T23:56:06.372Z"
         }
       ],
       "links": [
@@ -162,7 +162,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "TI",
@@ -172,7 +172,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "231",
+          "value": "244",
           "note": "from the site’s events calendar"
         }
       ],
@@ -183,69 +183,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Gyotaku - Fish Trails",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/61721"
+              "label": "Carlo Agostino Meletta - painter",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63364"
             },
             {
-              "label": "Jannis Kounellis: I am a painter",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63037"
+              "label": "Outside of Zucca, the village of pumpkins",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64302"
             },
             {
-              "label": "Mona Caron - The Resilience of Life",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63363"
+              "label": "In orbit - ceramics exhibition",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63668"
             },
             {
-              "label": "Under the pink moon",
+              "label": "Pierrette Bloch. The gesture of writing",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64342"
+            },
+            {
+              "label": "Num",
               "detail": "Cinema Corso, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63915"
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63918"
             },
             {
-              "label": "Picture illustrated",
-              "detail": "Il Rifugio Letterario, Massagno",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64190"
+              "label": "Ceramics of ancient Peru. From the Pacific to the Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64065"
             },
             {
-              "label": "Bertille Bak. Voices from the Earth",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62429"
+              "label": "Rulba rulba! - Bab atelier",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64072"
             },
             {
-              "label": "Kaari Upson. Dollhouse – A Retrospective",
-              "detail": "MASI, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63581"
+              "label": "One more Sho sho",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63919"
             },
             {
-              "label": "Feeling and Observation",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/53980"
-            },
-            {
-              "label": "Umberto Boccioni",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62804"
+              "label": "To the cinema with 'The magic lantern'!",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64049"
             },
             {
               "label": "Blood donation",
-              "detail": "centro La Torre, Losone",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64425"
+              "detail": "Capannone Garbinasca, Novazzano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64426"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -286,16 +286,16 @@
           "date": "2026-08-05T02:14:46.445Z"
         },
         {
+          "title": "Massimo Balena: Ticino farmer in the Swiss calendar",
+          "url": "/en/swiss-articles/massimo-balena-swiss-farmer-calendar/",
+          "excerpt": "The 29-year-old from Bellinzona recounts the apprenticeship in German, the closure of the company with 650 hens, and the intensive work of up to 15 hours a day.",
+          "date": "2026-09-28T05:05:48.854Z"
+        },
+        {
           "title": "Ticino Music is done in four (concerts)",
           "url": "/en/cross-border-articles/tacito-musica-ticino-concerts/",
           "excerpt": "The Ticino Music Festival continues with a day full of events that will accompany the public from afternoon to evening.",
           "date": "2026-07-28T05:51:38.011Z"
-        },
-        {
-          "title": "Locarno Film Festival: who will be the next president?",
-          "url": "/en/cross-border-articles/locarno-film-festival-president/",
-          "excerpt": "The Locarno Film Festival is looking for a new president. The rumors chase each other, but no official confirmation.",
-          "date": "2026-08-08T23:56:06.372Z"
         }
       ],
       "links": [
@@ -312,7 +312,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "TI",
@@ -322,7 +322,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "231",
+          "value": "244",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -333,69 +333,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Gyotaku - Spuren von Fischen",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/61721"
+              "label": "Carlo Agostino Meletta - Maler",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63364"
             },
             {
-              "label": "Jannis Kounellis: Ich bin Maler",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63037"
+              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64302"
             },
             {
-              "label": "Mona Caron - Die Belastbarkeit des Lebens",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63363"
+              "label": "Im Orbit – Keramikausstellung",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63668"
             },
             {
-              "label": "Ein Fuchs unter dem rosa Mond",
+              "label": "Pierrette Bloch. Die Geste des Schreibens",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64342"
+            },
+            {
+              "label": "N ⑤umba",
               "detail": "Cinema Corso, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63915"
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63918"
             },
             {
-              "label": "Imaginär illustriert",
-              "detail": "Il Rifugio Letterario, Massagno",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64190"
+              "label": "Keramik aus dem alten Peru. Vom Pazifik bis in die Anden",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64065"
             },
             {
-              "label": "Bertille Bak. Stimmen aus der Erde",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62429"
+              "label": "Rulba rulba! - Babyatelier",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64072"
             },
             {
-              "label": "Kaari Upson. Dollhouse – Eine Retrospektive",
-              "detail": "MASI, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63581"
+              "label": "Eine weitere Show",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63919"
             },
             {
-              "label": "Gefühl und Beobachtung",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/53980"
-            },
-            {
-              "label": "Umberto Boccioni",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62804"
+              "label": "Im Kino mit 'La Lanterna Magica'!",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64049"
             },
             {
               "label": "Blutspende",
-              "detail": "centro La Torre, Losone",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64425"
+              "detail": "Capannone Garbinasca, Novazzano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64426"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -436,16 +436,16 @@
           "date": "2026-08-05T02:14:46.445Z"
         },
         {
+          "title": "Massimo Balena: Tessiner Landwirt im Schweizer Kalender",
+          "url": "/de/schweiz-artikel/massimo-balena-schweizer-landbaukalender/",
+          "excerpt": "Der 29-Jährige aus Bellinzona erzählt von seiner Lehre auf Deutsch, der Schließung des Betriebs mit 650 Hühnern und der intensiven Arbeit von bis zu 15 Stunden pro Tag.",
+          "date": "2026-09-28T05:05:48.854Z"
+        },
+        {
           "title": "Tessin-Musik macht man zu viert (Konzerte)",
           "url": "/de/grenzgaenger-artikel/tacito-musica-tessin-konzerte/",
           "excerpt": "Das Tessiner Musikfestival wird mit einem Tag voller Veranstaltungen fortgesetzt, die das Publikum von Nachmittag bis Abend begleiten werden.",
           "date": "2026-07-28T05:51:38.011Z"
-        },
-        {
-          "title": "Locarno Film Festival: Wer wird der nächste Präsident?",
-          "url": "/de/grenzgaenger-artikel/locarno-filmfestival-praesident/",
-          "excerpt": "Das Locarno Film Festival sucht einen neuen Präsidenten. Gerüchte werden gejagt, aber keine offizielle Bestätigung.",
-          "date": "2026-08-08T23:56:06.372Z"
         }
       ],
       "links": [
@@ -462,7 +462,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -472,7 +472,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "231",
+          "value": "244",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -483,69 +483,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Gyotaku - Traces de poissons",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/61721"
+              "label": "Carlo Agostino Meletta - peintre",
+              "detail": "Museo Onsernonese, Locarno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63364"
             },
             {
-              "label": "Jannis Kounellis : Je suis un peintre",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63037"
+              "label": "En dehors de Zucca, le village des citrouilles",
+              "detail": "Fuori di Zucca, Savosa",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64302"
             },
             {
-              "label": "Mona Caron - La résilience de la vie",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63363"
+              "label": "In orbit - exposition de céramique",
+              "detail": "Galleria Job, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63668"
             },
             {
-              "label": "Un renard sous la lune rose",
+              "label": "Pierrette Bloch. Le geste d'écrire",
+              "detail": "Museo Villa dei Cedri, Bellinzona",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64342"
+            },
+            {
+              "label": "Nombre",
               "detail": "Cinema Corso, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63915"
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63918"
             },
             {
-              "label": "Imaginaire illustré",
-              "detail": "Il Rifugio Letterario, Massagno",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64190"
+              "label": "Céramiques de l'ancien Pérou. Du Pacifique aux Andes",
+              "detail": "Palazzo comunale, Riva San Vitale",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64065"
             },
             {
-              "label": "Bertille Bak. Des voix de la terre",
-              "detail": "Museo Vincenzo Vela, Mendrisio",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62429"
+              "label": "Rulba rulba ! - Baby atelier",
+              "detail": "Museo in erba, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64072"
             },
             {
-              "label": "Kaari Upson. Dollhouse – Une rétrospective",
-              "detail": "MASI, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/63581"
+              "label": "Encore un spectacle",
+              "detail": "Cinema Corso, Lugano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/63919"
             },
             {
-              "label": "Sentiment et observation",
-              "detail": "MASI, sede Lac, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/53980"
-            },
-            {
-              "label": "Umberto Boccioni a écrit:",
-              "detail": "Museo d’arte della Svizzera italiana, Lugano",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/62804"
+              "label": "Au cinéma avec 'La lanterne magique' !",
+              "detail": "Lux Art House, Massagno",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64049"
             },
             {
               "label": "Don de sang",
-              "detail": "centro La Torre, Losone",
-              "date": "2026-10-13",
-              "url": "https://www.tio.ch/agenda/day/20261013/64425"
+              "detail": "Capannone Garbinasca, Novazzano",
+              "date": "2026-10-14",
+              "url": "https://www.tio.ch/agenda/day/20261014/64426"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [
@@ -586,16 +586,16 @@
           "date": "2026-08-05T02:14:46.445Z"
         },
         {
+          "title": "Massimo Balena : agriculteur tessinois dans le calendrier suisse",
+          "url": "/fr/articles-suisse/massimo-balena-calendrier-agriculteurs/",
+          "excerpt": "Le jeune homme de 29 ans de Bellinzone raconte son apprentissage en allemand, la fermeture de l’entreprise comptant 650 poules et le travail intensif jusqu’à 15 heures par jour.",
+          "date": "2026-09-28T05:05:48.854Z"
+        },
+        {
           "title": "Tessin Musique se fait en quatre (concerts)",
           "url": "/fr/articles-frontalier/tacito-musica-tessin-concerts/",
           "excerpt": "Le Festival Tessin Musica se poursuit avec une journée riche en événements qui accompagneront le public de l'après-midi au soir.",
           "date": "2026-07-28T05:51:38.011Z"
-        },
-        {
-          "title": "Festival du film de Locarno : qui sera le prochain président ?",
-          "url": "/fr/articles-frontalier/president-festival-locarno/",
-          "excerpt": "Le Locarno Film Festival cherche un nouveau président. Les rumeurs courent, mais pas de confirmation officielle.",
-          "date": "2026-08-08T23:56:06.372Z"
         }
       ],
       "links": [
@@ -612,7 +612,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

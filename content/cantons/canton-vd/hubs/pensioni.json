@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "2d333b6e544fdb3cbae85b3285a5a36266af7bfc4ed7ac9dd745786db4d4adc5",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "2da8e5798d39c82f0a34a3414669e35fa9bb25225b96bf0564b2454c72787aa0",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
+              "date": "2026-10-12",
+              "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
+            },
+            {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T07:58:53.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26678-trente-ans-de-politique-dintegration-dans-le-canton-de-vaud"
@@ -159,14 +164,9 @@
               "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
               "date": "2026-08-27",
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
-            },
-            {
-              "label": "Bouquet de chantier à Bussigny : une étape importante pour le projet Terre d’Argile",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -213,7 +213,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "VD",
@@ -322,6 +322,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
+              "date": "2026-10-12",
+              "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
+            },
+            {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T07:58:53.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26678-trente-ans-de-politique-dintegration-dans-le-canton-de-vaud"
@@ -345,14 +350,9 @@
               "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
               "date": "2026-08-27",
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
-            },
-            {
-              "label": "Bouquet de chantier à Bussigny : une étape importante pour le projet Terre d’Argile",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -399,7 +399,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "VD",
@@ -508,6 +508,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
+              "date": "2026-10-12",
+              "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
+            },
+            {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T07:58:53.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26678-trente-ans-de-politique-dintegration-dans-le-canton-de-vaud"
@@ -531,14 +536,9 @@
               "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
               "date": "2026-08-27",
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
-            },
-            {
-              "label": "Bouquet de chantier à Bussigny : une étape importante pour le projet Terre d’Argile",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -585,7 +585,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "VD",
@@ -694,6 +694,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Table ronde « L’argent de nos retraites à l’épreuve de la transparence » - Communication du CA",
+              "date": "2026-10-12",
+              "url": "https://www.cpev.ch/actualites/table-ronde-largent-de-nos-retraites-lepreuve-de-la-transparence-communication-du-ca"
+            },
+            {
               "label": "Trente ans de politique d’intégration dans le canton de Vaud",
               "date": "2026-10-05T07:58:53.000Z",
               "url": "https://www.vd.ch/actualites/actualite/news/26678-trente-ans-de-politique-dintegration-dans-le-canton-de-vaud"
@@ -717,14 +722,9 @@
               "label": "L’Autorité de surveillance accepte le retrait du plan de prévoyance 2027",
               "date": "2026-08-27",
               "url": "https://www.cpev.ch/actualites/lautorite-de-surveillance-accepte-le-retrait-du-plan-de-prevoyance-2027"
-            },
-            {
-              "label": "Bouquet de chantier à Bussigny : une étape importante pour le projet Terre d’Argile",
-              "date": "2026-08-27",
-              "url": "https://www.cpev.ch/actualites/bouquet-de-chantier-bussigny-une-etape-importante-pour-le-projet-terre-dargile"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -771,7 +771,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

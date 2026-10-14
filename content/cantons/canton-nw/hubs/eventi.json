@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "da239614dd46b323699e195c26ced9a4a41578f98ed138018a6d705ad591d824",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "83655d1bb491f5a9b55843c3f08fd3f7c60d4448ef272074576d6b455f27ce41",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "68",
+          "value": "67",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "d'Wärchi - ElKi Dienstagmorgen",
-              "detail": "d'Wärchi, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94357"
-            },
-            {
-              "label": "Handwerkstube",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92668"
-            },
-            {
-              "label": "Heimische Vitalpilze",
-              "detail": "Schulhaus Kniri, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94450"
-            },
-            {
-              "label": "Wandern 60plus",
-              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/88946"
-            },
-            {
-              "label": "Elternabend Medienschulung",
-              "detail": "MZA Steini, Dallenwil, Dallenwil",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92200"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "d'Wärchi - Batik-Workshop",
               "detail": "d'Wärchi, Stans, Stans",
@@ -91,11 +49,53 @@
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-14",
               "url": "https://www.nw.ch/_rte/anlass/92008"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/89782"
+            },
+            {
+              "label": "Senioren-Mittagstisch",
+              "detail": "Hotel Engel, Emmetten, Emmetten",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/88664"
+            },
+            {
+              "label": "Senioren-Treff",
+              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/85837"
+            },
+            {
+              "label": "Im Dialog - Mythen - Wo Geschichte in Erzählungen kippt",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92716"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Doggä ufem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-15",
+              "url": "https://www.nw.ch/_rte/anlass/90631"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -109,7 +109,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "NW",
@@ -119,7 +119,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "68",
+          "value": "67",
           "note": "from the site’s events calendar"
         }
       ],
@@ -129,48 +129,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "d'Wärchi - ElKi Dienstagmorgen",
-              "detail": "d'Wärchi, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94357"
-            },
-            {
-              "label": "Handwerkstube",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92668"
-            },
-            {
-              "label": "Heimische Vitalpilze",
-              "detail": "Schulhaus Kniri, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94450"
-            },
-            {
-              "label": "Wandern 60plus",
-              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/88946"
-            },
-            {
-              "label": "Elternabend Medienschulung",
-              "detail": "MZA Steini, Dallenwil, Dallenwil",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92200"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "d'Wärchi - Batik-Workshop",
               "detail": "d'Wärchi, Stans, Stans",
@@ -188,11 +146,53 @@
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-14",
               "url": "https://www.nw.ch/_rte/anlass/92008"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/89782"
+            },
+            {
+              "label": "Senioren-Mittagstisch",
+              "detail": "Hotel Engel, Emmetten, Emmetten",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/88664"
+            },
+            {
+              "label": "Senioren-Treff",
+              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/85837"
+            },
+            {
+              "label": "Im Dialog - Mythen - Wo Geschichte in Erzählungen kippt",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92716"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Doggä ufem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-15",
+              "url": "https://www.nw.ch/_rte/anlass/90631"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -206,7 +206,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "NW",
@@ -216,7 +216,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "68",
+          "value": "67",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -226,48 +226,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "d'Wärchi - ElKi Dienstagmorgen",
-              "detail": "d'Wärchi, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94357"
-            },
-            {
-              "label": "Handwerkstube",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92668"
-            },
-            {
-              "label": "Heimische Vitalpilze",
-              "detail": "Schulhaus Kniri, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94450"
-            },
-            {
-              "label": "Wandern 60plus",
-              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/88946"
-            },
-            {
-              "label": "Elternabend Medienschulung",
-              "detail": "MZA Steini, Dallenwil, Dallenwil",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92200"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "d'Wärchi - Batik-Workshop",
               "detail": "d'Wärchi, Stans, Stans",
@@ -285,11 +243,53 @@
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-14",
               "url": "https://www.nw.ch/_rte/anlass/92008"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/89782"
+            },
+            {
+              "label": "Senioren-Mittagstisch",
+              "detail": "Hotel Engel, Emmetten, Emmetten",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/88664"
+            },
+            {
+              "label": "Senioren-Treff",
+              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/85837"
+            },
+            {
+              "label": "Im Dialog - Mythen - Wo Geschichte in Erzählungen kippt",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92716"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Doggä ufem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-15",
+              "url": "https://www.nw.ch/_rte/anlass/90631"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -303,7 +303,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "NW",
@@ -313,7 +313,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "68",
+          "value": "67",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -323,48 +323,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "d'Wärchi - ElKi Dienstagmorgen",
-              "detail": "d'Wärchi, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94357"
-            },
-            {
-              "label": "Handwerkstube",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92668"
-            },
-            {
-              "label": "Heimische Vitalpilze",
-              "detail": "Schulhaus Kniri, Stans, Stans",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/94450"
-            },
-            {
-              "label": "Wandern 60plus",
-              "detail": "TP Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/88946"
-            },
-            {
-              "label": "Elternabend Medienschulung",
-              "detail": "MZA Steini, Dallenwil, Dallenwil",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/92200"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "d'Wärchi - Batik-Workshop",
               "detail": "d'Wärchi, Stans, Stans",
@@ -382,11 +340,53 @@
               "detail": "kath. Pfarrkirche, Buochs, Buochs",
               "date": "2026-10-14",
               "url": "https://www.nw.ch/_rte/anlass/92008"
+            },
+            {
+              "label": "begegnen und bewegen",
+              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/89782"
+            },
+            {
+              "label": "Senioren-Mittagstisch",
+              "detail": "Hotel Engel, Emmetten, Emmetten",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/88664"
+            },
+            {
+              "label": "Senioren-Treff",
+              "detail": "Alterswohnheim Hungacher, Beckenried, Beckenried",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/85837"
+            },
+            {
+              "label": "Im Dialog - Mythen - Wo Geschichte in Erzählungen kippt",
+              "detail": "Nidwaldner Museum Winkelriedhaus, Stans, Stans",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/92716"
+            },
+            {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
+              "label": "Doggä ufem Stanserhorn",
+              "detail": "Stanserhorn, Stans, Stans",
+              "date": "2026-10-15",
+              "url": "https://www.nw.ch/_rte/anlass/90631"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
       "curatedArticles": [],
@@ -400,7 +400,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

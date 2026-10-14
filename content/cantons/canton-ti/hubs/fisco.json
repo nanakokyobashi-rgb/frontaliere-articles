@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "4a7e1155dc5bc8b5bc656b0b54fa5228aad4e4788412f6304afdcb0d825b0281",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "0cef07af28d62f57a88b4f78b6b7c820b13ef29039e3f764c2a07b786aa225fe",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -144,10 +144,10 @@
           "date": "2026-08-22T08:50:53.328Z"
         },
         {
-          "title": "Vivere a Mornago, lavorare in Ticino: tassazione e permesso G",
-          "url": "/articoli-frontaliere/mornago-frontaliere/",
-          "excerpt": "Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri garantisce franchigia €10.000 ai nuovi frontalieri. Scopri tassazione, AVS, LPP e LAMal per chi vive a Mornago e lavora in Ticino.",
-          "date": "2026-09-02T13:35:07.451Z"
+          "title": "Frontaliere Lezzeno-Ticino: permesso G, tasse e procedimenti",
+          "url": "/articoli-frontaliere/vivere-lezzeno-lavorare-ticino-frontaliere/",
+          "excerpt": "Chi vive a Lezzeno e lavora in Ticino può lavorare con il permesso G da frontaliere. Imposta alla fonte in Svizzera, ristorni, AVS, LPP e LAMal: tutto quello che serve sapere.",
+          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -176,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "TI",
@@ -302,10 +302,10 @@
           "date": "2026-08-22T08:50:53.328Z"
         },
         {
-          "title": "Living in Mornago, working in Ticino: taxation and permit G",
-          "url": "/en/cross-border-articles/live-mornago-work-ticino-cross-border/",
-          "excerpt": "From 1 January 2024, the New Frontier Agreement guarantees a €10,000 exemption to new frontier workers. Discover taxation, AVS, LPP and LAMal for those who live in Mornago and work in Ticino.",
-          "date": "2026-09-02T13:35:07.451Z"
+          "title": "Lezzeno-Ticino border guards: G permit, taxes and procedures",
+          "url": "/en/cross-border-articles/live-lezzeno-work-ticino-commuter/",
+          "excerpt": "Those who live in Lezzeno and work in Ticino can work with the G permit as border workers. Tax at source in Switzerland, refreshments, AVS, LPP and LAMal: everything you need to know.",
+          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -334,7 +334,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "TI",
@@ -460,10 +460,10 @@
           "date": "2026-08-22T08:50:53.328Z"
         },
         {
-          "title": "Leben in Mornago, Arbeiten im Tessin: Besteuerung und Genehmigung G",
-          "url": "/de/grenzgaenger-artikel/in-mornago-leben-im-tessin-arbeiten-grenzgaenger/",
-          "excerpt": "Ab dem 1. Januar 2024 garantiert die Neue Grenzgängervereinbarung den neuen Grenzgängern eine Selbstbeteiligung von 10.000 €. Entdecken Sie Besteuerung, AHV, BVG und KVG für diejenigen, die in Mornago leben und im…",
-          "date": "2026-09-02T13:35:07.451Z"
+          "title": "Grenzgänger Lezzeno-Tessin: G-Genehmigung, Gebühren und Verfahren",
+          "url": "/de/grenzgaenger-artikel/in-lezzeno-leben-tessin-arbeiten/",
+          "excerpt": "Wer in Lezzeno lebt und im Tessin arbeitet, kann mit der Grenzgängerbewilligung G arbeiten. Quellensteuer in der Schweiz, Rückerstattungen, AHV, BVG und KVG: Alles, was Sie wissen müssen.",
+          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -492,7 +492,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -619,10 +619,10 @@
           "date": "2026-08-22T08:50:53.328Z"
         },
         {
-          "title": "Vivre à Mornago, travailler au Tessin : fiscalité et permis G",
-          "url": "/fr/articles-frontalier/vivre-mornago-travailler-tessin-frontalier/",
-          "excerpt": "À partir du 1er janvier 2024, le nouvel accord frontalier garantit une franchise de 10 000 € aux nouveaux frontaliers. Découvrez la fiscalité, l'AVS, la LPP et la LAMal pour ceux qui vivent à Mornago et travaillent au…",
-          "date": "2026-09-02T13:35:07.451Z"
+          "title": "Frontière Lezzeno-Tessin : permis G, taxes et procédures",
+          "url": "/fr/articles-frontalier/vivre-lezzeno-travailler-tessin-frontalier/",
+          "excerpt": "Ceux qui vivent à Lezzeno et travaillent au Tessin peuvent travailler avec le permis G en tant que frontalier. Taxe à la source en Suisse, restaurations, AVS, LPP et LAMal : tout ce qu'il faut savoir.",
+          "date": "2026-08-24T03:46:57.696Z"
         }
       ],
       "links": [
@@ -651,7 +651,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

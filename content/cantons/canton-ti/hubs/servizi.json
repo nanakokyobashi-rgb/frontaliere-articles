@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "a4eeb50476df82c770be6964abefc7b78df9f466f4141092ce5414f5be746c0c",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "0e3b45c64d8c87a90deaad4881cf729b5929e3f2d581fa7efc49dd89b44de7d5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,23 @@
       "keyFacts": 1
     },
     {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-13T20:56:00.837Z",
+      "keyFacts": 0
+    },
+    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "2",
-          "note": "offerta mediana 11.950 CHF"
+          "note": "offerta mediana 12.025 CHF"
         }
       ],
       "dataBlocks": [
@@ -64,6 +74,46 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Pharmaexpress",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Teatro",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-12T16:30:00.000Z"
+            },
+            {
+              "label": "Ferrari",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-13T06:00:00.000Z"
+            },
+            {
+              "label": "delle Alpi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-10-16T16:00:00.000Z"
+            },
+            {
+              "label": "Semine",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-13T20:56:00.837Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Aste delle targhe",
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
@@ -77,7 +127,7 @@
             },
             {
               "label": "TI10769",
-              "value": "900 CHF",
+              "value": "1050 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-14T18:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
@@ -85,7 +135,41 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "15 °C",
+              "detail": "oggi da 12 a 17 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "oggi da 12 a 17 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "oggi da 14 a 18 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "15 °C",
+              "detail": "oggi da 12 a 17 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "oggi da 10 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,15 +207,33 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Premi cassa malati Ticino 2027: aumento del 3,7%",
-          "url": "/articoli-frontaliere/stangata-premi-cassa-malati-ticino/",
-          "excerpt": "Nel 2027 i premi di cassa malati in Ticino aumentano del 3,7%, portando il premio medio a 520 franchi al mese, il più alto della Svizzera.",
-          "date": "2026-09-29T12:24:49.493Z"
+          "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
+          "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
+          "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
+          "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
+          "title": "Inaugurati nuovi spazi ambulatoriali a San Giovanni",
+          "url": "/articoli-ticino/nuovi-spazi-ambulatoriali-bellinzona/",
+          "excerpt": "Oggi inaugurati nuovi spazi all'Ospedale San Giovanni Poliambulatorio Turrita e Dermatologia nella sede di Bellinzona Ambienti pensati per pazienti",
+          "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Tassa salute e ristorni: tavolo del 17 settembre a Berna",
+          "url": "/articoli-frontaliere/tassa-salute-ristorni-17-settembre/",
+          "excerpt": "Il 17 settembre si discute di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, mettendo a rischio 120 milioni di franchi per i Comuni di frontiera.",
+          "date": "2026-10-12T19:46:56.997Z"
+        },
+        {
+          "title": "Tassa salute frontalieri Ticino: via a settembre?",
+          "url": "/articoli-frontaliere/tassa-salute-frontalieri-ticino-settembre/",
+          "excerpt": "Nuova tassa sanitaria per frontalieri: avvio previsto entro settembre, ma mancano decreti attuativi e pagamenti non ancora riscossi.",
+          "date": "2026-10-04T18:17:43.880Z"
         },
         {
           "title": "Premi di cassa malati: quando il 3,7% non racconta tutto",
@@ -146,34 +248,16 @@
           "date": "2026-10-06T07:13:37.693Z"
         },
         {
-          "title": "La sanità ticinese ha bisogno di nuovi incentivi",
-          "url": "/articoli-svizzera/costi-sanita-incentivi/",
-          "excerpt": "Il Covid ha lasciato costi straordinari e duraturi; le casse malati trattengono al massimo il 5% della spesa; fino a un quinto della spesa sanitaria è legato a prestazioni inutili.",
-          "date": "2026-09-25T21:17:42.290Z"
+          "title": "Premi cassa malati Ticino 2027: aumento del 3,7%",
+          "url": "/articoli-frontaliere/stangata-premi-cassa-malati-ticino/",
+          "excerpt": "Nel 2027 i premi di cassa malati in Ticino aumentano del 3,7%, portando il premio medio a 520 franchi al mese, il più alto della Svizzera.",
+          "date": "2026-09-29T12:24:49.493Z"
         },
         {
-          "title": "Premi cassa malati 2027 in Ticino: +3,7% e EFAS dal 2028",
-          "url": "/articoli-svizzera/lucas-engelberger-premi-cassa-malati-2027/",
-          "excerpt": "Lukas Engelberger: il sistema è buono e costa. In Ticino i premi salgono del 3,7%, con EFAS atteso dal 2028.",
-          "date": "2026-09-29T16:13:57.565Z"
-        },
-        {
-          "title": "Farmacie in Ticino: elenco e contatti",
-          "url": "/articoli-svizzera/farmacie-ticino-elenco-contatti/",
-          "excerpt": "Elenco delle farmacie in Ticino con contatti e catalogo regionale: come cercare una sede e verificare orari e turni aggiornati.",
-          "date": "2026-09-14T20:06:49.755Z"
-        },
-        {
-          "title": "Farmacie di turno in Ticino: guida a fonti e copertura",
-          "url": "/articoli-svizzera/farmacie-turno-ticino-guida/",
-          "excerpt": "Turni di farmacia in Ticino: fonti ufficiali, copertura regionale e limiti del catalogo per verificare l'apertura prima di partire.",
-          "date": "2026-09-14T20:06:49.427Z"
-        },
-        {
-          "title": "Farmacia aperta o di turno: come leggere l’elenco",
-          "url": "/articoli-svizzera/farmacia-aperta-turno-elenco/",
-          "excerpt": "Come trovare una farmacia aperta o di turno tra Ticino e province di confine, leggendo cataloghi, orari e fonti ufficiali.",
-          "date": "2026-09-14T20:06:51.005Z"
+          "title": "Salute mentale: il DSS porta la prevenzione nelle aziende",
+          "url": "/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/",
+          "excerpt": "Il DSS e il Forum GSA Ticino promuovono la salute mentale sul lavoro. Dati: il 32,3% dei giovani ticinesi si sente svuotato, il 61% degli apprendisti soffre.",
+          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -210,7 +294,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "TI",
@@ -227,7 +311,7 @@
         {
           "label": "Plate auctions running",
           "value": "2",
-          "note": "typical bid 11,950 CHF"
+          "note": "typical bid 12,025 CHF"
         }
       ],
       "dataBlocks": [
@@ -252,6 +336,46 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Pharmaexpress",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Teatro",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-12T16:30:00.000Z"
+            },
+            {
+              "label": "Ferrari",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-13T06:00:00.000Z"
+            },
+            {
+              "label": "delle Alpi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-10-16T16:00:00.000Z"
+            },
+            {
+              "label": "Semine",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-13T20:56:00.837Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Number plate auctions",
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
@@ -265,7 +389,7 @@
             },
             {
               "label": "TI10769",
-              "value": "900 CHF",
+              "value": "1,050 CHF",
               "detail": "current bid",
               "date": "2026-10-14T18:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
@@ -273,7 +397,41 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "15 °C",
+              "detail": "today from 12 to 17 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "today from 12 to 17 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "today from 14 to 18 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "15 °C",
+              "detail": "today from 12 to 17 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "today from 10 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,15 +469,32 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Ticino health insurance premiums 2027: 3,7% increase",
-          "url": "/en/cross-border-articles/health-insurance-premiums-ticino-2027/",
-          "excerpt": "In 2027, health insurance premiums in Ticino increase by 3,7%, bringing the average premium to 520 francs per month, the highest in Switzerland.",
-          "date": "2026-09-29T12:24:49.493Z"
+          "title": "Healthcare tax decree for cross-border workers approved",
+          "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
+          "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
+          "title": "New outpatient facilities inaugurated in San Giovanni",
+          "url": "/en/ticino-articles/new-outpatient-spaces-bellinzona/",
+          "excerpt": "New spaces inaugurated today at Ospedale San Giovanni Poliambulatorio Turrita and Dermatology at the Bellinzona site Spaces designed for patients",
+          "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Health tax and rebates: roundtable on September 17 in Bern",
+          "url": "/en/cross-border-articles/health-tax-and-rebates-roundtable-on-september-17-in-bern/",
+          "excerpt": "On September 17, the health tax, double taxation and statute will be discussed; Ticino threatens to block the tax rebates, putting 120 million francs for border municipalities at risk.",
+          "date": "2026-10-12T19:46:56.997Z"
+        },
+        {
+          "title": "Ticino health tax for cross-border workers: starting in September?",
+          "url": "/en/cross-border-articles/health-tax-cross-border-workers-ticino-september/",
+          "excerpt": "New healthcare tax for cross-border workers: launch expected by September, but implementing decrees are missing and payments have not yet been collected.",
+          "date": "2026-10-04T18:17:43.880Z"
         },
         {
           "title": "Health Insurance Premiums: When 3.7% Doesn't Tell the Whole Story",
@@ -334,34 +509,16 @@
           "date": "2026-10-06T07:13:37.693Z"
         },
         {
-          "title": "Ticino's healthcare system needs new incentives",
-          "url": "/en/swiss-articles/ticino-s-healthcare-system-needs-new-incentives/",
-          "excerpt": "Covid has left extraordinary and lasting costs; health insurers retain at most 5% of expenditure; up to one fifth of healthcare spending is linked to unnecessary services.",
-          "date": "2026-09-25T21:17:42.290Z"
+          "title": "Ticino health insurance premiums 2027: 3,7% increase",
+          "url": "/en/cross-border-articles/health-insurance-premiums-ticino-2027/",
+          "excerpt": "In 2027, health insurance premiums in Ticino increase by 3,7%, bringing the average premium to 520 francs per month, the highest in Switzerland.",
+          "date": "2026-09-29T12:24:49.493Z"
         },
         {
-          "title": "Health insurance premiums 2027 in Ticino: +3,7% and EFAS from 2028",
-          "url": "/en/swiss-articles/lucas-engelberger-2027-health-insurance-premiums/",
-          "excerpt": "Lukas Engelberger: the system is good and costs money. In Ticino, premiums are rising by 3,7%, with EFAS expected from 2028.",
-          "date": "2026-09-29T16:13:57.565Z"
-        },
-        {
-          "title": "Pharmacies in Ticino: directory and contacts",
-          "url": "/en/swiss-articles/ticino-pharmacy-directory-contacts/",
-          "excerpt": "A starting point for finding pharmacies present in the Ticino directory and opening the local records that are available. 207 Ticino records and 542 records in provinces CO, VA and VB; regional duty verified in the…",
-          "date": "2026-09-14T20:06:49.755Z"
-        },
-        {
-          "title": "Ticino on-duty pharmacies: a guide to sources and coverage",
-          "url": "/en/swiss-articles/ticino-on-duty-pharmacies-guide/",
-          "excerpt": "This guide explains where to read Ticino pharmacy duty information and how to interpret regional coverage correctly. 207 Ticino records and 542 records in provinces CO, VA and VB; regional duty verified in the five…",
-          "date": "2026-09-14T20:06:49.427Z"
-        },
-        {
-          "title": "Open or on duty? How to read the pharmacy directory",
-          "url": "/en/swiss-articles/open-pharmacy-duty-directory-guide/",
-          "excerpt": "The practical difference between finding a pharmacy in a directory, reading published hours and checking OFCT duty information. 207 Ticino records and 542 records in provinces CO, VA and VB; regional duty verified in…",
-          "date": "2026-09-14T20:06:51.005Z"
+          "title": "Mental health: DSS brings prevention into companies",
+          "url": "/en/cross-border-articles/mental-health-prevention-ticino-companies/",
+          "excerpt": "DSS and Forum GSA Ticino promote mental health at work. Data: 32,3% of young people in Ticino feel drained, 61% of apprentices are suffering.",
+          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -394,7 +551,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "TI",
@@ -411,7 +568,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "2",
-          "note": "mittleres Gebot 11’950 CHF"
+          "note": "mittleres Gebot 12’025 CHF"
         }
       ],
       "dataBlocks": [
@@ -436,6 +593,46 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Pharmaexpress",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Teatro",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-12T16:30:00.000Z"
+            },
+            {
+              "label": "Ferrari",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-13T06:00:00.000Z"
+            },
+            {
+              "label": "delle Alpi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-10-16T16:00:00.000Z"
+            },
+            {
+              "label": "Semine",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-13T20:56:00.837Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Kontrollschild-Auktionen",
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
@@ -449,7 +646,7 @@
             },
             {
               "label": "TI10769",
-              "value": "900 CHF",
+              "value": "1’050 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-14T18:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
@@ -457,7 +654,41 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "15 °C",
+              "detail": "heute 12 bis 17 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "heute 12 bis 17 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "heute 14 bis 18 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "15 °C",
+              "detail": "heute 12 bis 17 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "heute 10 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -495,15 +726,32 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Krankenkassenprämien im Tessin 2027: Anstieg um 3,7%",
-          "url": "/de/grenzgaenger-artikel/krankenkassenpraemien-tessin-2027/",
-          "excerpt": "Im Jahr 2027 steigen die Krankenkassenprämien im Tessin um 3,7%, wodurch die durchschnittliche Prämie auf 520 Franken pro Monat steigt, die höchste in der Schweiz.",
-          "date": "2026-09-29T12:24:49.493Z"
+          "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
+          "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
+          "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
+          "title": "Neue ambulante Räumlichkeiten in San Giovanni eingeweiht",
+          "url": "/de/tessin-artikel/neue-ambulante-raeume-bellinzona/",
+          "excerpt": "Heute wurden neue Räume im Krankenhaus San Giovanni Poliambulatorio Turrita e Dermatologia am Sitz in Bellinzona eingeweiht.",
+          "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Gesundheitssteuer & Rückerstattungen: Termin in Bern",
+          "url": "/de/grenzgaenger-artikel/gesundheitssteuer-ruckerstattungen-termin-in-bern/",
+          "excerpt": "Am 17. September wird über die Gesundheitssteuer, die Doppelbesteuerung und den Status diskutiert; das Tessin droht, die Steuerrückvergütungen zu blockieren, und gefährdet damit 120 Millionen Franken für die…",
+          "date": "2026-10-12T19:46:56.997Z"
+        },
+        {
+          "title": "Gesundheitsabgabe für Grenzgänger im Tessin: Start im September?",
+          "url": "/de/grenzgaenger-artikel/gesundheitssteuer-grenzgaenger-tessin-september/",
+          "excerpt": "Neue Gesundheitsabgabe für Grenzgänger: Einführung bis September geplant, doch es fehlen noch die Ausführungsverordnungen, und Zahlungen wurden noch nicht eingezogen.",
+          "date": "2026-10-04T18:17:43.880Z"
         },
         {
           "title": "Krankenkassenprämien: Wenn 3,7 % nicht alles sagen",
@@ -518,34 +766,16 @@
           "date": "2026-10-06T07:13:37.693Z"
         },
         {
-          "title": "Das Tessiner Gesundheitswesen braucht neue Anreize.",
-          "url": "/de/schweiz-artikel/das-tessiner-gesundheitswesen-braucht-neue-anreize/",
-          "excerpt": "Covid hat außergewöhnliche und anhaltende Kosten hinterlassen; die Krankenkassen behalten höchstens 5% der Ausgaben ein; bis zu einem Fünftel der Gesundheitsausgaben ist mit unnötigen Leistungen verbunden.",
-          "date": "2026-09-25T21:17:42.290Z"
+          "title": "Krankenkassenprämien im Tessin 2027: Anstieg um 3,7%",
+          "url": "/de/grenzgaenger-artikel/krankenkassenpraemien-tessin-2027/",
+          "excerpt": "Im Jahr 2027 steigen die Krankenkassenprämien im Tessin um 3,7%, wodurch die durchschnittliche Prämie auf 520 Franken pro Monat steigt, die höchste in der Schweiz.",
+          "date": "2026-09-29T12:24:49.493Z"
         },
         {
-          "title": "Krankenkassenprämien 2027 im Tessin: +3,7% und EFAS ab 2028",
-          "url": "/de/schweiz-artikel/lucas-engelberger-2027-krankenversicherungspramien/",
-          "excerpt": "Lukas Engelberger: Das System ist gut und kostet Geld. Im Tessin steigen die Prämien um 3,7%, wobei EFAS ab 2028 erwartet wird.",
-          "date": "2026-09-29T16:13:57.565Z"
-        },
-        {
-          "title": "Apotheken im Tessin: Verzeichnis und Kontakte",
-          "url": "/de/schweiz-artikel/apotheken-tessin-verzeichnis-kontakte/",
-          "excerpt": "Ein Ausgangspunkt für die Suche nach Apotheken im Tessiner Verzeichnis und für den Aufruf der verfügbaren lokalen Einträge. 207 Einträge im Tessin und 542 Einträge in den Provinzen CO, VA und VB; regionaler Notdienst…",
-          "date": "2026-09-14T20:06:49.755Z"
-        },
-        {
-          "title": "Notdienst-Apotheken im Tessin: Quellen und Abdeckung",
-          "url": "/de/schweiz-artikel/notdienst-apotheken-tessin-leitfaden/",
-          "excerpt": "Dieser Leitfaden erklärt, wo der Tessiner Apotheken-Notdienst veröffentlicht wird und wie die regionale Abdeckung zu lesen ist. 207 Einträge im Tessin und 542 Einträge in den Provinzen CO, VA und VB; regionaler…",
-          "date": "2026-09-14T20:06:49.427Z"
-        },
-        {
-          "title": "Apotheke geöffnet oder Notdienst? Das Verzeichnis richtig lesen",
-          "url": "/de/schweiz-artikel/apotheke-geoeffnet-notdienst-verzeichnis/",
-          "excerpt": "Der praktische Unterschied zwischen einem Verzeichniseintrag, veröffentlichten Öffnungszeiten und OFCT-Notdienstangaben. 207 Einträge im Tessin und 542 Einträge in den Provinzen CO, VA und VB; regionaler Notdienst in…",
-          "date": "2026-09-14T20:06:51.005Z"
+          "title": "Psychische Gesundheit: DSS bringt Prävention in Unternehmen",
+          "url": "/de/grenzgaenger-artikel/praevention-psychische-gesundheit-tessin/",
+          "excerpt": "Das DSS und das Forum GSA Tessin fördern die psychische Gesundheit am Arbeitsplatz. Daten: 32,3% der jungen Tessiner fühlen sich leer, 61% der Lernenden leiden.",
+          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -578,7 +808,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -595,7 +825,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "2",
-          "note": "offre centrale 11 950 CHF"
+          "note": "offre centrale 12 025 CHF"
         }
       ],
       "dataBlocks": [
@@ -620,6 +850,46 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Moderna",
+              "detail": "Bodio, Biasca e Valli",
+              "date": "2026-10-09T16:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Pharmaexpress",
+              "detail": "Lugano, Luganese",
+              "date": "2026-10-10T06:00:00.000Z"
+            },
+            {
+              "label": "Teatro",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-12T16:30:00.000Z"
+            },
+            {
+              "label": "Ferrari",
+              "detail": "Mendrisio, Mendrisiotto",
+              "date": "2026-10-13T06:00:00.000Z"
+            },
+            {
+              "label": "delle Alpi",
+              "detail": "Faido, Biasca e Valli",
+              "date": "2026-10-16T16:00:00.000Z"
+            },
+            {
+              "label": "Semine",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-16T16:30:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-13T20:56:00.837Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Enchères de plaques",
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
@@ -633,7 +903,7 @@
             },
             {
               "label": "TI10769",
-              "value": "900 CHF",
+              "value": "1 050 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-14T18:00:00.000Z",
               "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1538"
@@ -641,7 +911,41 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 12 à 17 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 12 à 17 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 14 à 18 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 12 à 17 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 10 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -679,15 +983,33 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
         {
-          "title": "Primes d'assurance-maladie dans le canton du Tessin 2027 : hausse de 3,7%",
-          "url": "/fr/articles-frontalier/primes-assurance-maladie-ticin-2027/",
-          "excerpt": "En 2027, les primes d'assurance-maladie dans le canton du Tessin augmentent de 3,7%, portant la prime moyenne à 520 francs par mois, la plus élevée de Suisse.",
-          "date": "2026-09-29T12:24:49.493Z"
+          "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
+          "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
+          "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
+          "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
+          "title": "De nouveaux espaces ambulatoires inaugurés à San Giovanni",
+          "url": "/fr/articles-tessin/nouveaux-espaces-ambulatoires-bellinzona/",
+          "excerpt": "Aujourd’hui, inauguration de nouveaux espaces à l’Ospedale San Giovanni Poliambulatorio Turrita et dermatologie sur le site de Bellinzona Des espaces pensés pour les patients",
+          "date": "2026-10-10T11:19:26.395Z"
+        },
+        {
+          "title": "Taxe santé et rétrocessions : réunion du 17 septembre à Berne",
+          "url": "/fr/articles-frontalier/taxe-sante-et-retrocessions-reunion-du-17-septembre-a-berne/",
+          "excerpt": "Le 17 septembre, il sera question de taxe sur la santé, de double imposition et de statut ; le Tessin menace de bloquer les rétrocessions, mettant en péril 120 millions de francs pour les communes frontalières.",
+          "date": "2026-10-12T19:46:56.997Z"
+        },
+        {
+          "title": "Taxe santé des frontaliers au Tessin : lancement en septembre ?",
+          "url": "/fr/articles-frontalier/taxe-sante-travailleurs-frontaliers-tessin-septembre/",
+          "excerpt": "Nouvelle taxe sanitaire pour les frontaliers : entrée en vigueur prévue d’ici septembre, mais les décrets d’application font encore défaut et les paiements n’ont pas encore été recouvrés.",
+          "date": "2026-10-04T18:17:43.880Z"
         },
         {
           "title": "Primes d'assurance maladie : quand le 3,7% ne dit pas tout",
@@ -702,34 +1024,16 @@
           "date": "2026-10-06T07:13:37.693Z"
         },
         {
-          "title": "Le système de santé tessinois a besoin de nouvelles incitations",
-          "url": "/fr/articles-suisse/le-systeme-de-sante-tessinois-a-besoin-de-nouvelles-incitations/",
-          "excerpt": "La Covid a laissé des coûts extraordinaires et durables ; les caisses-maladie ne retiennent au maximum que 5 % des dépenses ; jusqu’à un cinquième des dépenses de santé est lié à des prestations inutiles.",
-          "date": "2026-09-25T21:17:42.290Z"
+          "title": "Primes d'assurance-maladie dans le canton du Tessin 2027 : hausse de 3,7%",
+          "url": "/fr/articles-frontalier/primes-assurance-maladie-ticin-2027/",
+          "excerpt": "En 2027, les primes d'assurance-maladie dans le canton du Tessin augmentent de 3,7%, portant la prime moyenne à 520 francs par mois, la plus élevée de Suisse.",
+          "date": "2026-09-29T12:24:49.493Z"
         },
         {
-          "title": "Primes d'assurance-maladie 2027 au Tessin : +3,7% et EFAS à partir de 2028",
-          "url": "/fr/articles-suisse/lucas-engelberger-premiums-assurance-maladie-2027/",
-          "excerpt": "Lukas Engelberger : le système est bon et coûte cher. Au Tessin, les primes augmentent de 3,7%, avec EFAS attendu à partir de 2028.",
-          "date": "2026-09-29T16:13:57.565Z"
-        },
-        {
-          "title": "Pharmacies au Tessin : répertoire et contacts",
-          "url": "/fr/articles-suisse/repertoire-pharmacies-tessin-contacts/",
-          "excerpt": "Un point de départ pour rechercher les pharmacies présentes dans le répertoire tessinois et ouvrir les fiches locales disponibles. 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB; gardes régionales…",
-          "date": "2026-09-14T20:06:49.755Z"
-        },
-        {
-          "title": "Pharmacies de garde au Tessin : sources et couverture",
-          "url": "/fr/articles-suisse/guide-pharmacies-garde-tessin/",
-          "excerpt": "Ce guide indique où consulter les gardes des pharmacies au Tessin et comment comprendre leur couverture régionale. 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB; gardes régionales vérifiées dans…",
-          "date": "2026-09-14T20:06:49.427Z"
-        },
-        {
-          "title": "Pharmacie ouverte ou de garde ? Comment lire le répertoire",
-          "url": "/fr/articles-suisse/pharmacie-ouverte-garde-repertoire/",
-          "excerpt": "La différence pratique entre trouver une pharmacie dans un répertoire, lire des horaires publiés et vérifier une garde OFCT. 207 entrées au Tessin et 542 entrées dans les provinces CO, VA et VB; gardes régionales…",
-          "date": "2026-09-14T20:06:51.005Z"
+          "title": "Santé mentale : le DSS introduit la prévention dans les entreprises",
+          "url": "/fr/articles-frontalier/prevention-sante-mentale-entreprises-tessin/",
+          "excerpt": "Le DSS et le Forum GSA Tessin promeuvent la santé mentale au travail. Données : 32,3% des jeunes tessinois se sentent vidés, 61% des apprentis souffrent.",
+          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -758,7 +1062,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

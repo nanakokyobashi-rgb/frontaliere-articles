@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "e3c937b4bbe57dbb8da8db83a0101f4667ee2190b82a4b6d56f8b9cc4bf3a7a5",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "c1ff7e28ec061993ff3c7ef8ce42d648089b4fd2aba2ae4dab6e8559516f9955",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "23",
+          "value": "25",
           "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -176,16 +176,10 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Traffico Yverdon-Losanna: treni di nuovo regolari",
-          "url": "/articoli-svizzera/linea-yverdon-losanna-riaperta/",
-          "excerpt": "Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay",
-          "date": "2026-10-11T13:01:23.198Z"
-        },
         {
           "title": "Treni CFF tra Yverdon-les-Bains e Losanna: traffico ripreso",
           "url": "/articoli-vaud/cff-eclepens-treni-ripresa/",
@@ -193,16 +187,22 @@
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
-          "title": "Abbonamenti trasporti canton Vaud: zone e tariffe",
-          "url": "/articoli-svizzera/abbonamenti-trasporti-vaud-zone/",
-          "excerpt": "Abbonamenti mensili, annuali, metà-prezzo e Generale Abonnement nei trasporti pubblici svizzeri. Come funzionano le zone tariffarie e gli sconti per studenti.",
-          "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
           "title": "Morges: le richieste sulla mobilità al 2045",
           "url": "/articoli-vaud/morges-mobilita-consultazione-2045/",
           "excerpt": "Morges interviene nella consultazione federale «Transports ’45»",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Traffico Yverdon-Losanna: treni di nuovo regolari",
+          "url": "/articoli-svizzera/linea-yverdon-losanna-riaperta/",
+          "excerpt": "Traffico normale tra Yverdon e Losanna dalle 05:40 Incendio doloso scoperto venerdì verso le 03:00 Interrotta la circolazione tra Cossonay-Penthalaz e Chavornay",
+          "date": "2026-10-11T13:01:23.198Z"
+        },
+        {
+          "title": "Abbonamenti trasporti canton Vaud: zone e tariffe",
+          "url": "/articoli-svizzera/abbonamenti-trasporti-vaud-zone/",
+          "excerpt": "Abbonamenti mensili, annuali, metà-prezzo e Generale Abonnement nei trasporti pubblici svizzeri. Come funzionano le zone tariffarie e gli sconti per studenti.",
+          "date": "2026-09-05T05:50:23.197Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "VD",
@@ -255,7 +255,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "23",
+          "value": "25",
           "note": "reports as of 13 October 2026"
         }
       ],
@@ -361,7 +361,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -389,16 +389,10 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Yverdon-Lausanne traffic: trains running regularly again",
-          "url": "/en/swiss-articles/yverdon-lausanne-rail-service-restored/",
-          "excerpt": "Normal traffic between Yverdon and Lausanne from 05:40 Arson discovered on Friday at around 03:00 Traffic interrupted between Cossonay-Penthalaz and Chavornay",
-          "date": "2026-10-11T13:01:23.198Z"
-        },
         {
           "title": "CFF trains between Yverdon-les-Bains and Lausanne: service resumed",
           "url": "/en/vaud-articles/sbb-eclepens-train-service-resumed/",
@@ -406,15 +400,21 @@
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
+          "title": "Morges: mobility requirements for 2045",
+          "url": "/en/vaud-articles/morges-mobility-consultation-2045/",
+          "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Yverdon-Lausanne traffic: trains running regularly again",
+          "url": "/en/swiss-articles/yverdon-lausanne-rail-service-restored/",
+          "excerpt": "Normal traffic between Yverdon and Lausanne from 05:40 Arson discovered on Friday at around 03:00 Traffic interrupted between Cossonay-Penthalaz and Chavornay",
+          "date": "2026-10-11T13:01:23.198Z"
+        },
+        {
           "title": "Vaud canton transport subscriptions: zones and rates",
           "url": "/en/swiss-articles/public-transport-subscriptions-vaud-zones/",
           "excerpt": "Monthly, annual, half-price and General Subscriptions in Swiss public transport. How fare zones and student discounts work.",
           "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
-          "title": "Morges: mobility requirements for 2045",
-          "url": "/en/vaud-articles/morges-mobility-consultation-2045/",
-          "date": "2026-10-08T11:29:50.102Z"
         }
       ],
       "links": [
@@ -447,7 +447,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "VD",
@@ -467,7 +467,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "23",
+          "value": "25",
           "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
@@ -573,7 +573,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -601,16 +601,10 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Zugverkehr Yverdon-Lausanne: Züge wieder regulär",
-          "url": "/de/schweiz-artikel/bahnverkehr-yverdon-lausanne-wieder-normal/",
-          "excerpt": "Normaler Verkehr zwischen Yverdon und Lausanne ab 05:40 Brandstiftung am Freitag gegen 03:00 Uhr entdeckt Zugverkehr zwischen Cossonay-Penthalaz und Chavornay unterbrochen",
-          "date": "2026-10-11T13:01:23.198Z"
-        },
         {
           "title": "CFF-Züge zwischen Yverdon-les-Bains und Lausanne: Verkehr wieder aufgenommen",
           "url": "/de/waadt-artikel/sbb-eclepens-zugverkehr-wieder-normal/",
@@ -618,15 +612,21 @@
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
+          "title": "Morges: Forderungen zur Mobilität für 2045",
+          "url": "/de/waadt-artikel/morges-mobilitat-konsultation-2045/",
+          "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Zugverkehr Yverdon-Lausanne: Züge wieder regulär",
+          "url": "/de/schweiz-artikel/bahnverkehr-yverdon-lausanne-wieder-normal/",
+          "excerpt": "Normaler Verkehr zwischen Yverdon und Lausanne ab 05:40 Brandstiftung am Freitag gegen 03:00 Uhr entdeckt Zugverkehr zwischen Cossonay-Penthalaz und Chavornay unterbrochen",
+          "date": "2026-10-11T13:01:23.198Z"
+        },
+        {
           "title": "Verkehrstickets Kanton Waadt: Zonen und Tarife",
           "url": "/de/schweiz-artikel/abos-oepnv-waadt-zonen/",
           "excerpt": "Monats-, Jahres-, Halbtax- und General Abonnement-Abonnements im öffentlichen Verkehr der Schweiz. Wie Tarifzonen und Studentenrabatte funktionieren.",
           "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
-          "title": "Morges: Forderungen zur Mobilität für 2045",
-          "url": "/de/waadt-artikel/morges-mobilitat-konsultation-2045/",
-          "date": "2026-10-08T11:29:50.102Z"
         }
       ],
       "links": [
@@ -659,7 +659,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "VD",
@@ -679,7 +679,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "23",
+          "value": "25",
           "note": "signalements au 13 octobre 2026"
         }
       ],
@@ -785,7 +785,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -813,16 +813,10 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Trafic Yverdon-Lausanne : trains à nouveau réguliers",
-          "url": "/fr/articles-suisse/trafic-ferroviaire-yverdon-lausanne-retabli/",
-          "excerpt": "Trafic normal entre Yverdon et Lausanne dès 05:40 Incendie criminel découvert vendredi vers 03:00 Circulation interrompue entre Cossonay-Penthalaz et Chavornay",
-          "date": "2026-10-11T13:01:23.198Z"
-        },
         {
           "title": "Trains CFF entre Yverdon-les-Bains et Lausanne : trafic rétabli",
           "url": "/fr/articles-vaud/cff-eclepens-trafic-repris/",
@@ -830,16 +824,22 @@
           "date": "2026-10-12T03:05:29.472Z"
         },
         {
-          "title": "Abonnements transports canton de Vaud : zones et tarifs",
-          "url": "/fr/articles-suisse/abonnements-transports-vaud-zones/",
-          "excerpt": "Abonnements mensuels, annuels, demi-tarif et Général Abonnement dans les transports publics suisses. Comment fonctionnent les zones tarifaires et les réductions pour les étudiants.",
-          "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
           "title": "Morges : les demandes en matière de mobilité à l’horizon 2045",
           "url": "/fr/articles-vaud/morges-mobilite-consultation-2045/",
           "excerpt": "Morges intervient dans la consultation fédérale « Transports ’45 »",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Trafic Yverdon-Lausanne : trains à nouveau réguliers",
+          "url": "/fr/articles-suisse/trafic-ferroviaire-yverdon-lausanne-retabli/",
+          "excerpt": "Trafic normal entre Yverdon et Lausanne dès 05:40 Incendie criminel découvert vendredi vers 03:00 Circulation interrompue entre Cossonay-Penthalaz et Chavornay",
+          "date": "2026-10-11T13:01:23.198Z"
+        },
+        {
+          "title": "Abonnements transports canton de Vaud : zones et tarifs",
+          "url": "/fr/articles-suisse/abonnements-transports-vaud-zones/",
+          "excerpt": "Abonnements mensuels, annuels, demi-tarif et Général Abonnement dans les transports publics suisses. Comment fonctionnent les zones tarifaires et les réductions pour les étudiants.",
+          "date": "2026-09-05T05:50:23.197Z"
         }
       ],
       "links": [
@@ -872,7 +872,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

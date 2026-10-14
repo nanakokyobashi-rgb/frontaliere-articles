@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "b71d6bae443811ec9dbdb684581b44692147867ed34adf54d750cb7756912779",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "c1bd7a7ec4ba87062c00a5784d8b8208fd53d199a841f1421b44e5504d436cb6",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "1",
+          "value": "2",
           "note": "segnalazioni aggiornate: 13 ottobre 2026"
         }
       ],
@@ -40,19 +40,19 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
               "label": "Oberegg - Viehschau",
               "value": "Traffico",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
@@ -60,10 +60,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.18 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 22 ottobre 2026",
+              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -101,7 +107,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -122,7 +128,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -132,7 +138,7 @@
       "keyFacts": [
         {
           "label": "Roadworks active or imminent",
-          "value": "1",
+          "value": "2",
           "note": "reports as of 13 October 2026"
         }
       ],
@@ -145,19 +151,19 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
               "label": "Oberegg - Viehschau",
               "value": "Traffic",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
@@ -165,10 +171,16 @@
               "value": "Roadworks",
               "detail": "until 13 November 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.18 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
+              "value": "Roadworks",
+              "detail": "until 22 October 2026",
+              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -206,7 +218,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -227,7 +239,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -237,7 +249,7 @@
       "keyFacts": [
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "1",
+          "value": "2",
           "note": "Meldungen vom 13. Oktober 2026"
         }
       ],
@@ -250,19 +262,19 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
               "label": "Oberegg - Viehschau",
               "value": "Verkehr",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
@@ -270,10 +282,16 @@
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.18 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
+              "value": "Baustelle",
+              "detail": "bis 22. Oktober 2026",
+              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,7 +329,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -332,7 +350,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -342,7 +360,7 @@
       "keyFacts": [
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "1",
+          "value": "2",
           "note": "signalements au 13 octobre 2026"
         }
       ],
@@ -355,19 +373,19 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
               "label": "Oberegg - Viehschau",
               "value": "Trafic",
-              "date": "2026-10-13T01:02:53.675Z",
+              "date": "2026-10-13T19:37:23.778Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/viehschau-verkehrsbehinderungen"
             },
             {
@@ -375,10 +393,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-10-05T06:20:00.000Z"
+            },
+            {
+              "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.18 Gestion du trafic: circulation alternée à une voie Complément 1…",
+              "value": "Chantier",
+              "detail": "jusqu’au 22 octobre 2026",
+              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -416,7 +440,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +461,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "f0ebc7213b3f2e4fb0ade957cee2a47360e6d1493ed38ca6bd8566659c0dccf6",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "24383028f85c15508b1dfc4f31dc6bc5fc7371f86a9a47ab0b9acb138815e343",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "85",
+          "value": "87",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,48 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Preisverleihung der Stiftung Schloss Wyher",
-              "detail": "Wasserschloss Wyher, Ettiswil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/preisverleihung-der-stiftung-schloss-wyher_A8AaT5t"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Fiera d'autunno - Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
-              "detail": "Gipfel-Restaurant Rothorn — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Wine and Dine trip",
-              "detail": "Lucerne — in corso, ultimo giorno: 16 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Escursione meditativa",
-              "detail": "6356 Rigi Kaltbad — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
-            },
             {
               "label": "Globine zu Gast im Buchhaus!",
               "detail": "Lucerne",
@@ -96,11 +54,53 @@
               "detail": "Stadtbibliothek Kriens, Kriens",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+            },
+            {
+              "label": "HANNA & HARALD",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Fiera d'autunno - Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — in corso, ultimo giorno: 18 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
+              "detail": "Gipfel-Restaurant Rothorn — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Wine and Dine trip",
+              "detail": "Lucerne — in corso, ultimo giorno: 16 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Escursione meditativa",
+              "detail": "6356 Rigi Kaltbad — in corso, ultimo giorno: 17 ottobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -159,7 +159,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "LU",
@@ -169,7 +169,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "85",
+          "value": "87",
           "note": "from the site’s events calendar"
         }
       ],
@@ -179,48 +179,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Award Ceremony of the Schloss Wyher Foundation",
-              "detail": "Wasserschloss Wyher, Ettiswil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/preisverleihung-der-stiftung-schloss-wyher_A8AaT5t"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Autumn Fair - Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — ongoing, last day: 18 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
-              "detail": "Gipfel-Restaurant Rothorn — ongoing, last day: 25 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Wine and Dine trip",
-              "detail": "Lucerne — ongoing, last day: 16 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — ongoing, last day: 23 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Meditative Hike",
-              "detail": "6356 Rigi Kaltbad — ongoing, last day: 17 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
-            },
             {
               "label": "Globine zu Gast im Buchhaus!",
               "detail": "Lucerne",
@@ -238,11 +196,53 @@
               "detail": "Stadtbibliothek Kriens, Kriens",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+            },
+            {
+              "label": "HANNA & HARALD",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Autumn Fair - Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — ongoing, last day: 18 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
+              "detail": "Gipfel-Restaurant Rothorn — ongoing, last day: 25 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Wine and Dine trip",
+              "detail": "Lucerne — ongoing, last day: 16 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — ongoing, last day: 23 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Meditative Hike",
+              "detail": "6356 Rigi Kaltbad — ongoing, last day: 17 October 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -280,7 +280,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -301,7 +301,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "LU",
@@ -311,7 +311,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "85",
+          "value": "87",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -321,48 +321,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Preisvergabe der Stiftung Schloss",
-              "detail": "Wasserschloss Wyher, Ettiswil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/preisverleihung-der-stiftung-schloss-wyher_A8AaT5t"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Herbstmesse – Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Sonnenuntergangsfahrten Brienzer Rothorn mit 3-Gänge-Menü",
-              "detail": "Gipfel-Restaurant Rothorn — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Wine und Dine Fahrt",
-              "detail": "Lucerne — läuft, letzter Tag: 16. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Meditative Wanderung",
-              "detail": "6356 Rigi Kaltbad — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
-            },
             {
               "label": "Globine zu Gast im Buchhaus!",
               "detail": "Lucerne",
@@ -380,11 +338,53 @@
               "detail": "Stadtbibliothek Kriens, Kriens",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+            },
+            {
+              "label": "HANNA & HARALD",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Herbstmesse – Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — läuft, letzter Tag: 18. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Sonnenuntergangsfahrten Brienzer Rothorn mit 3-Gänge-Menü",
+              "detail": "Gipfel-Restaurant Rothorn — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Wine und Dine Fahrt",
+              "detail": "Lucerne — läuft, letzter Tag: 16. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Meditative Wanderung",
+              "detail": "6356 Rigi Kaltbad — läuft, letzter Tag: 17. Oktober 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -422,7 +422,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -443,7 +443,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "LU",
@@ -453,7 +453,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "85",
+          "value": "87",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -463,48 +463,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Cérémonie de remise des prix de la Fondation du château de Wyher",
-              "detail": "Wasserschloss Wyher, Ettiswil",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ettiswil/preisverleihung-der-stiftung-schloss-wyher_A8AaT5t"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Foire d'automne - Lozärner Määs",
-              "detail": "Luzern Inseli, Luzern — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
-            },
-            {
-              "label": "Croisières au coucher du soleil au Rothorn de Brienz avec menu à 3 plats",
-              "detail": "Gipfel-Restaurant Rothorn — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Voyage à la découverte du vin et de la gastronomie",
-              "detail": "Lucerne — en cours, dernier jour : 16 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
-            },
-            {
-              "label": "Randonnée méditative",
-              "detail": "6356 Rigi Kaltbad — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
-            },
             {
               "label": "Globine zu Gast im Buchhaus!",
               "detail": "Lucerne",
@@ -522,11 +480,53 @@
               "detail": "Stadtbibliothek Kriens, Kriens",
               "date": "2026-10-14",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/kriens/goldwaschen-in-der-schweiz_A74wH5d"
+            },
+            {
+              "label": "HANNA & HARALD",
+              "detail": "Hotel Schweizerhof, Luzern",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/hanna-harald/"
+            },
+            {
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
+            },
+            {
+              "label": "Foire d'automne - Lozärner Määs",
+              "detail": "Luzern Inseli, Luzern — en cours, dernier jour : 18 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-fair-lozaerner-maeaes/"
+            },
+            {
+              "label": "Croisières au coucher du soleil au Rothorn de Brienz avec menu à 3 plats",
+              "detail": "Gipfel-Restaurant Rothorn — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
+            },
+            {
+              "label": "Voyage à la découverte du vin et de la gastronomie",
+              "detail": "Lucerne — en cours, dernier jour : 16 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wine-and-dine-trip/"
+            },
+            {
+              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
+              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Randonnée méditative",
+              "detail": "6356 Rigi Kaltbad — en cours, dernier jour : 17 octobre 2026",
+              "date": "2026-10-14",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/escursione-meditativa-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/6840391"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -585,7 +585,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

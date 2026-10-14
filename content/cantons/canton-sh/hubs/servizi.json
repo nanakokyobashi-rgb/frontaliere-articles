@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "49ffda25d681497e427c581d5307c0b1307e1f1abc83ac3d58095690a3d4a22a",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "68eacb4175449ea928e2730e0677b95d27930eaca69f927184cfb679a92b2ed2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "oggi da 7 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -98,16 +117,16 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
-          "title": "Permesso dimora B Sciaffusa: requisiti e rinnovo",
-          "url": "/articoli-svizzera/sciaffusa-permesso-dimora-b/",
-          "excerpt": "Il permesso B è un permesso rinnovabile per risiedere e lavorare in Svizzera, gestito da SEM. Scopri come ottenerlo e rinnovarlo nel canton Sciaffusa.",
-          "date": "2026-08-20T06:03:39.078Z"
-        },
-        {
           "title": "Premi cassa malati Canton Sciaffusa e riduzione",
           "url": "/articoli-svizzera/premi-assicurazione-malati-sciaffusa/",
           "excerpt": "Obblighi, franchigie, modelli di copertura e procedura per richiedere il sussidio cantonale nel Canton Sciaffusa: guida pratica.",
           "date": "2026-08-20T05:38:37.337Z"
+        },
+        {
+          "title": "Permesso dimora B Sciaffusa: requisiti e rinnovo",
+          "url": "/articoli-svizzera/sciaffusa-permesso-dimora-b/",
+          "excerpt": "Il permesso B è un permesso rinnovabile per risiedere e lavorare in Svizzera, gestito da SEM. Scopri come ottenerlo e rinnovarlo nel canton Sciaffusa.",
+          "date": "2026-08-20T06:03:39.078Z"
         }
       ],
       "links": [
@@ -136,7 +155,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "SH",
@@ -206,7 +225,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "today from 7 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -217,16 +250,16 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
-          "title": "Residence permit B Schaffhausen: requirements and renewal",
-          "url": "/en/swiss-articles/schaffhausen-residence-permit-category-b/",
-          "excerpt": "Permit B is a renewable permit to reside and work in Switzerland, managed by SEM. Find out how to get it and renew it in the canton of Schaffhausen.",
-          "date": "2026-08-20T06:03:39.078Z"
-        },
-        {
           "title": "Health insurance premiums Canton Schaffhausen and reduction",
           "url": "/en/swiss-articles/health-insurance-premiums-schaffhausen/",
           "excerpt": "Obligations, deductibles, coverage models and procedure to apply for cantonal subsidy in the Canton of Schaffhausen: practical guide.",
           "date": "2026-08-20T05:38:37.337Z"
+        },
+        {
+          "title": "Residence permit B Schaffhausen: requirements and renewal",
+          "url": "/en/swiss-articles/schaffhausen-residence-permit-category-b/",
+          "excerpt": "Permit B is a renewable permit to reside and work in Switzerland, managed by SEM. Find out how to get it and renew it in the canton of Schaffhausen.",
+          "date": "2026-08-20T06:03:39.078Z"
         }
       ],
       "links": [
@@ -251,7 +284,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "SH",
@@ -321,7 +354,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "heute 7 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -332,16 +379,16 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
-          "title": "Aufenthaltsbewilligung B Schaffhausen: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/schaffhausen-aufenthaltsgenehmigung-kategorie-b/",
-          "excerpt": "Die Bewilligung B ist eine erneuerbare Bewilligung zum Aufenthalt und Arbeiten in der Schweiz, die von sem verwaltet wird. Erfahren Sie, wie Sie es im Kanton Schaffhausen beziehen und erneuern können.",
-          "date": "2026-08-20T06:03:39.078Z"
-        },
-        {
           "title": "Krankenkassenprämien Kanton Schaffhausen und Reduktion",
           "url": "/de/schweiz-artikel/krankenversicherungspraemien-schaffhausen/",
           "excerpt": "Pflichten, Franchisen, Deckungsmodelle und Verfahren zur Beantragung des Kantonsbeitrags im Kanton Schaffhausen: Praxisleitfaden.",
           "date": "2026-08-20T05:38:37.337Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B Schaffhausen: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/schaffhausen-aufenthaltsgenehmigung-kategorie-b/",
+          "excerpt": "Die Bewilligung B ist eine erneuerbare Bewilligung zum Aufenthalt und Arbeiten in der Schweiz, die von sem verwaltet wird. Erfahren Sie, wie Sie es im Kanton Schaffhausen beziehen und erneuern können.",
+          "date": "2026-08-20T06:03:39.078Z"
         }
       ],
       "links": [
@@ -366,7 +413,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "SH",
@@ -436,7 +483,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 7 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         }
       ],
       "curatedArticles": [
@@ -447,16 +508,16 @@
           "date": "2026-10-08T08:29:37.131Z"
         },
         {
-          "title": "Permis de séjour B Schaffhouse : exigences et renouvellement",
-          "url": "/fr/articles-suisse/schaffhouse-permis-de-sejour-categorie-b/",
-          "excerpt": "Le permis B est un permis renouvelable pour résider et travailler en Suisse, géré par SEM. Découvrez comment l'obtenir et le renouveler dans le canton de Schaffhouse.",
-          "date": "2026-08-20T06:03:39.078Z"
-        },
-        {
           "title": "Primes caisse-maladie Canton Schaffhouse et réduction",
           "url": "/fr/articles-suisse/primes-assurance-maladie-schaffhouse/",
           "excerpt": "Obligations, franchises, modèles de couverture et procédure de demande d'allocation cantonale dans le canton de Schaffhouse : guide pratique.",
           "date": "2026-08-20T05:38:37.337Z"
+        },
+        {
+          "title": "Permis de séjour B Schaffhouse : exigences et renouvellement",
+          "url": "/fr/articles-suisse/schaffhouse-permis-de-sejour-categorie-b/",
+          "excerpt": "Le permis B est un permis renouvelable pour résider et travailler en Suisse, géré par SEM. Découvrez comment l'obtenir et le renouveler dans le canton de Schaffhouse.",
+          "date": "2026-08-20T06:03:39.078Z"
         }
       ],
       "links": [
@@ -477,7 +538,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

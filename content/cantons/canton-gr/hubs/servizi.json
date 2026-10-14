@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "cf1c0b8cb7626a88fd7a318b6b3e17b249d8c909ee5130020ab61f73b8802ecf",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "5a7dac71d94490d734403364e36d90ca6ea9d67b3b1ae5027c4c5e8fd2e5b9db",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -75,7 +80,7 @@
           "items": [
             {
               "label": "GR11376",
-              "value": "550 CHF",
+              "value": "800 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
@@ -97,7 +102,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "oggi da 9 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +149,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -139,6 +158,12 @@
           "url": "/articoli-svizzera/sanita-alta-engadina-samedan/",
           "excerpt": "Il voto degli undici Comuni assicura quasi 28,5 milioni di franchi per l'ospedale di Samedan, case anziani, Spitex e l'ente Sanadura dal 2027 al 2029.",
           "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "LAMal Grigioni: premi, franchigie e riduzione",
+          "url": "/articoli-svizzera/lam-grigioni-premi-riduzione/",
+          "excerpt": "Scopri come funziona l'assicurazione malattia LAMal nel canton Grigioni, quali franchigie scegliere e come accedere ai sussidi cantonali di riduzione dei premi.",
+          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Ospedale Grigioni: 518 milioni per 12 anni",
@@ -153,16 +178,16 @@
           "date": "2026-08-18T19:20:17.561Z"
         },
         {
+          "title": "Premi LAMal Canton Grigioni: franchigie e riduzione",
+          "url": "/articoli-svizzera/premi-cassa-malati-grigioni/",
+          "excerpt": "Guida ai premi dell'assicurazione malattia nel Canton Grigioni: franchigie da CHF 300 a 2500, modelli alternativi, sussidi riduzione e procedura di richiesta.",
+          "date": "2026-08-30T19:32:40.110Z"
+        },
+        {
           "title": "Asilo nido e custodia bambini nel Canton Grigioni",
           "url": "/articoli-svizzera/asilo-nido-custodia-bambini-grigioni/",
           "excerpt": "Opzioni di custodia, tariffe calcolate sul reddito e sussidi cantonali: guida pratica per famiglie nel Grigioni.",
           "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "LAMal Grigioni: premi, franchigie e riduzione",
-          "url": "/articoli-svizzera/lam-grigioni-premi-riduzione/",
-          "excerpt": "Scopri come funziona l'assicurazione malattia LAMal nel canton Grigioni, quali franchigie scegliere e come accedere ai sussidi cantonali di riduzione dei premi.",
-          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Grigioni: le finanze degli ospedali tornano in attivo",
@@ -175,12 +200,6 @@
           "url": "/articoli-frontaliere/grigioni-permessi-dimora-2026/",
           "excerpt": "Da maggio 2026, chi richiede un permesso di dimora nei Grigioni dovrà dichiarare eventuali precedenti penali o procedimenti in corso.",
           "date": "2026-04-23T21:32:48.344Z"
-        },
-        {
-          "title": "Grigioni, stretta sui permessi di dimora dopo l’infiltrazione mafiosa a Roveredo",
-          "url": "/articoli-frontaliere/grigioni-stretta-permessi-dimora-2026/",
-          "excerpt": "Nuove regole per i permessi di dimora nei Grigioni: dichiarazione obbligatoria di precedenti penali e procedimenti in corso.",
-          "date": "2026-04-25T16:21:51.853Z"
         }
       ],
       "links": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "GR",
@@ -262,7 +281,7 @@
           "items": [
             {
               "label": "GR11376",
-              "value": "550 CHF",
+              "value": "800 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
@@ -284,7 +303,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "today from 9 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +350,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -326,6 +359,12 @@
           "url": "/en/swiss-articles/upper-engadine-healthcare-samedan/",
           "excerpt": "The vote of the eleven Municipalities ensures almost 28.5 million francs for the Samedan hospital, elderly homes, Spitex and the Sanadura entity from 2027 to 2029.",
           "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "LAMal Grisioni: premiums, deductibles and reduction",
+          "url": "/en/swiss-articles/lamal-graubunden-premiums-reduction/",
+          "excerpt": "Find out how LAMal health insurance works in the canton of Graubünden, which deductibles to choose and how to access cantonal premium reduction subsidies.",
+          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Graubünden Hospital: 518 million over 12 years",
@@ -340,16 +379,16 @@
           "date": "2026-08-18T19:20:17.561Z"
         },
         {
+          "title": "LAMal Canton Graubünden Awards: deductibles and reduction",
+          "url": "/en/swiss-articles/health-insurance-premiums-graubunden/",
+          "excerpt": "Guide to health insurance premiums in the Canton of Graubünden: deductibles from CHF 300 to 2500, alternative models, reduction subsidies and application procedure.",
+          "date": "2026-08-30T19:32:40.110Z"
+        },
+        {
           "title": "Nursery and childcare in the Canton of Graubünden",
           "url": "/en/swiss-articles/nursery-childcare-graubunden-costs/",
           "excerpt": "Custody options, income-based fees and cantonal subsidies: a practical guide for families in Graubünden.",
           "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "LAMal Grisioni: premiums, deductibles and reduction",
-          "url": "/en/swiss-articles/lamal-graubunden-premiums-reduction/",
-          "excerpt": "Find out how LAMal health insurance works in the canton of Graubünden, which deductibles to choose and how to access cantonal premium reduction subsidies.",
-          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Graubünden: hospitals' finances return to service",
@@ -362,12 +401,6 @@
           "url": "/en/cross-border-articles/graubunden-residence-permits-2026/",
           "excerpt": "From May 2026, anyone applying for a residence permit in Grison will need to declare any criminal records or ongoing proceedings.",
           "date": "2026-04-23T21:32:48.344Z"
-        },
-        {
-          "title": "Graubünden, stricter rules for residence permits after mafia infiltration in Roveredo",
-          "url": "/en/cross-border-articles/graubunden-tightens-residence-permits-2026/",
-          "excerpt": "New rules for residence permits in the Graubünden: mandatory declaration of criminal records and ongoing proceedings.",
-          "date": "2026-04-25T16:21:51.853Z"
         }
       ],
       "links": [
@@ -392,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "GR",
@@ -445,7 +478,7 @@
           "items": [
             {
               "label": "GR11376",
-              "value": "550 CHF",
+              "value": "800 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
@@ -467,7 +500,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "heute 9 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -500,7 +547,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -509,6 +556,12 @@
           "url": "/de/schweiz-artikel/oberengadin-gesundheitswesen-samedan/",
           "excerpt": "Die Zustimmung der elf Gemeinden sichert von 2027 bis 2029 fast 28,5 Millionen Franken für das Spital Samedan, Altersheime, Spitex und die Sanadura.",
           "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "KVG Graubünden: Prämien, Franchisen und Reduktionen",
+          "url": "/de/schweiz-artikel/lamal-graubuenden-praemien-reduktion/",
+          "excerpt": "Erfahren Sie, wie die KVG-Krankenversicherung im Kanton Graubünden funktioniert, welche Franchisen Sie wählen und wie Sie auf kantonale Prämienverbilligungsbeiträge zugreifen können.",
+          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Spital Graubünden: 518 Millionen für 12 Jahre",
@@ -523,16 +576,16 @@
           "date": "2026-08-18T19:20:17.561Z"
         },
         {
+          "title": "KVG-Prämien Kanton Graubünden: Franchisen und Reduktionen",
+          "url": "/de/schweiz-artikel/krankenkasse-praemien-graubuenden/",
+          "excerpt": "Leitfaden zu den Krankenkassenprämien im Kanton Graubünden: Franchisen von CHF 300 bis 2500, alternative Modelle, Reduktionsbeiträge und Antragsverfahren.",
+          "date": "2026-08-30T19:32:40.110Z"
+        },
+        {
           "title": "Kindertagesstätte und Kinderbetreuung im Kanton Graubünden",
           "url": "/de/schweiz-artikel/kindergarten-betreuung-graubuenden-kosten/",
           "excerpt": "Betreuungsmöglichkeiten, einkommensberechnete Tarife und Kantonsbeiträge: Praktischer Leitfaden für Familien in Graubünden.",
           "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "KVG Graubünden: Prämien, Franchisen und Reduktionen",
-          "url": "/de/schweiz-artikel/lamal-graubuenden-praemien-reduktion/",
-          "excerpt": "Erfahren Sie, wie die KVG-Krankenversicherung im Kanton Graubünden funktioniert, welche Franchisen Sie wählen und wie Sie auf kantonale Prämienverbilligungsbeiträge zugreifen können.",
-          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Graubünden: Spitalfinanzen wieder auf Kurs",
@@ -545,12 +598,6 @@
           "url": "/de/grenzgaenger-artikel/graubunden-aufenthaltsbewilligungen-2026/",
           "excerpt": "Ab Mai 2026 müssen Antragsteller für eine Aufenthaltsbewilligung in Graubünden etwaige Vorstrafen oder laufende Strafverfahren angeben.",
           "date": "2026-04-23T21:32:48.344Z"
-        },
-        {
-          "title": "Graubünden: Strengere Aufenthaltsbewilligungen nach Mafia-Infiltration in Roveredo",
-          "url": "/de/grenzgaenger-artikel/graubunden-verschartft-aufenthaltsbewilligungen-2026/",
-          "excerpt": "Neue Regeln für Aufenthaltsbewilligungen in Graubünden: Die Meldung von Vorstrafen und laufenden Verfahren wird obligatorisch.",
-          "date": "2026-04-25T16:21:51.853Z"
         }
       ],
       "links": [
@@ -575,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "GR",
@@ -628,7 +675,7 @@
           "items": [
             {
               "label": "GR11376",
-              "value": "550 CHF",
+              "value": "800 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.gr.ch/ecari-auction/ui/app/details/app?id=2253&locale=de_ch"
@@ -650,7 +697,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Chur",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 9 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -683,7 +744,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -692,6 +753,12 @@
           "url": "/fr/articles-suisse/sante-haute-engadine-samedan/",
           "excerpt": "Le vote des onze communes assure près de 28,5 millions de francs pour l’hôpital de Samedan, les maisons de retraite, Spitex et l’organisme Sanadura de 2027 à 2029.",
           "date": "2026-09-27T21:30:24.165Z"
+        },
+        {
+          "title": "LAMal Grisons : primes, franchises et réduction",
+          "url": "/fr/articles-suisse/lamal-grisons-primes-reduction/",
+          "excerpt": "Découvrez comment fonctionne l'assurance maladie LAMal dans le canton des Grisons, quelles franchises choisir et comment accéder aux allocations cantonales de réduction des primes.",
+          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Hôpital Grisons : 518 millions pour 12 ans",
@@ -706,16 +773,16 @@
           "date": "2026-08-18T19:20:17.561Z"
         },
         {
+          "title": "Primes LAMal Canton des Grisons : franchises et réductions",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-grisons/",
+          "excerpt": "Guide des primes d’assurance maladie dans le canton des Grisons : franchises de 300 CHF à 2500, modèles alternatifs, subventions de réduction et processus de demande.",
+          "date": "2026-08-30T19:32:40.110Z"
+        },
+        {
           "title": "Garderie et garde d'enfants dans le canton des Grisons",
           "url": "/fr/articles-suisse/garderie-enfants-grisons-tarifs/",
           "excerpt": "Options de garde, tarifs calculés sur le revenu et allocations cantonales : guide pratique pour les familles dans les Grisons.",
           "date": "2026-09-01T21:51:40.121Z"
-        },
-        {
-          "title": "LAMal Grisons : primes, franchises et réduction",
-          "url": "/fr/articles-suisse/lamal-grisons-primes-reduction/",
-          "excerpt": "Découvrez comment fonctionne l'assurance maladie LAMal dans le canton des Grisons, quelles franchises choisir et comment accéder aux allocations cantonales de réduction des primes.",
-          "date": "2026-08-30T18:10:50.603Z"
         },
         {
           "title": "Grisons : les finances des hôpitaux reviennent à l'actif",
@@ -728,12 +795,6 @@
           "url": "/fr/articles-frontalier/grisons-permis-de-sejour-2026/",
           "excerpt": "À partir de mai 2026, toute personne demandant un permis de séjour dans les Grisons devra déclarer d'éventuels antécédents pénaux ou procédures en cours.",
           "date": "2026-04-23T21:32:48.344Z"
-        },
-        {
-          "title": "Grisons, contrôle renforcé sur les permis de séjour après l'infiltration mafieuse à Roveredo",
-          "url": "/fr/articles-frontalier/grisons-renforce-permis-de-sejour-2026/",
-          "excerpt": "Nouvelles règles pour les permis de séjour dans les Grisons : déclaration obligatoire des antécédents pénaux et des procédures en cours.",
-          "date": "2026-04-25T16:21:51.853Z"
         }
       ],
       "links": [
@@ -754,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

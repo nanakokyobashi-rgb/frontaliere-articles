@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "937d94394223f7441ead93122809a6c7dbd2839fdb6c861d554a95301696dc45",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "e04ab887dcf750858bd9eb3f15f93074dc28ac78561c202f47765279cc96975a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -59,6 +64,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "oggi da 9 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -94,15 +113,33 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Riduzione premi negata a padre divorziato a Lucerna",
+          "url": "/articoli-lucerna/riduzione-premi-padre-divorziato-lucerna/",
+          "excerpt": "Il Tribunale federale conferma: niente forfait 9.000 CHF/figlio se già detratti i contributi di mantenimento.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Lucerna: giornata sulla salute mentale il 10 ottobre",
+          "url": "/articoli-lucerna/lucerna-salute-mentale-banchi/",
+          "excerpt": "10 ottobre 2026: giornata cantonale a Lucerna",
+          "date": "2026-10-07T17:52:11.678Z"
+        },
         {
           "title": "Premi cassa malati LAMal 2026: canton Lucerna",
           "url": "/articoli-svizzera/franchigia-lamal-lucerna-guida/",
           "excerpt": "A Lucerna i premi LAMal dipendono da cantone e regione: franchigie adulti, cambio cassa e riduzione premi cantonale per il 2026.",
           "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Premi cassa malati Canton Lucerna e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-lucerna-2026/",
+          "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Canton Lucerna: fasce di premio, franchigie, modelli alternativi e requisiti per ottenere la riduzione dei premi.",
+          "date": "2026-08-14T01:51:57.093Z"
         },
         {
           "title": "Permesso di dimora B Lucerna: requisiti e rinnovo",
@@ -123,16 +160,10 @@
           "date": "2026-09-03T19:12:14.541Z"
         },
         {
-          "title": "Premi cassa malati Canton Lucerna e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-lucerna-2026/",
-          "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Canton Lucerna: fasce di premio, franchigie, modelli alternativi e requisiti per ottenere la riduzione dei premi.",
-          "date": "2026-08-14T01:51:57.093Z"
-        },
-        {
-          "title": "Asilo nido e custodia bambini Canton Lucerna: costi",
-          "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-lucerna-costi/",
-          "excerpt": "I costi per l'asilo nido e la custodia dei bambini nel Canton Lucerna sono soggetti a diversi fattori.",
-          "date": "2026-08-14T02:53:59.094Z"
+          "title": "Patente di guida a Lucerna: cosa fare e sapere",
+          "url": "/articoli-svizzera/patente-guida-lucerna-conversione-ed-esami/",
+          "excerpt": "La conversione della patente di guida nel Cantone di Lucerna: requisiti, procedure e tempistiche.",
+          "date": "2026-08-15T20:25:03.719Z"
         }
       ],
       "links": [
@@ -161,7 +192,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "LU",
@@ -203,6 +234,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "today from 9 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -238,15 +283,32 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Premium reduction denied to divorced father in Lucerne",
+          "url": "/en/lucerne-articles/premium-reduction-divorced-father-lucerne/",
+          "excerpt": "The Federal Tribunal confirms: no flat rate of 9.000 CHF/child if maintenance contributions have already been deducted.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Lucerne: mental health day on October 10",
+          "url": "/en/lucerne-articles/lucerne-mental-health-benches/",
+          "date": "2026-10-07T17:52:11.678Z"
+        },
         {
           "title": "KVG health insurance premiums 2026: Canton of Lucerne",
           "url": "/en/swiss-articles/lucerne-lamal-deductible-guide/",
           "excerpt": "In Lucerne, LAMal premiums depend on the canton and region: adult deductibles, changing health insurer and cantonal premium reduction for 2026.",
           "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Health insurance premiums Canton Lucerne and premium reductions",
+          "url": "/en/swiss-articles/health-insurance-premiums-lucerne/",
+          "excerpt": "The law on compulsory health insurance in the Canton of Lucerne: premium bands, deductibles, alternative models and requirements to obtain the reduction of premiums.",
+          "date": "2026-08-14T01:51:57.093Z"
         },
         {
           "title": "Residence permit B Lucerne: requirements and renewal",
@@ -267,16 +329,10 @@
           "date": "2026-09-03T19:12:14.541Z"
         },
         {
-          "title": "Health insurance premiums Canton Lucerne and premium reductions",
-          "url": "/en/swiss-articles/health-insurance-premiums-lucerne/",
-          "excerpt": "The law on compulsory health insurance in the Canton of Lucerne: premium bands, deductibles, alternative models and requirements to obtain the reduction of premiums.",
-          "date": "2026-08-14T01:51:57.093Z"
-        },
-        {
-          "title": "Kindergarten and childcare in the canton of Lucerne: costs",
-          "url": "/en/swiss-articles/kindergarten-and-childcare-in-the-canton-of-lucerne-costs/",
-          "excerpt": "The costs for daycare and childcare in the Canton of Lucerne are subject to several factors.",
-          "date": "2026-08-14T02:53:59.094Z"
+          "title": "Driver's license in Lucerne: what to do and know",
+          "url": "/en/swiss-articles/driver-s-license-in-lucerne-what-to-do-and-know/",
+          "excerpt": "The conversion of the driving licence in the Canton of Lucerne: requirements, procedures and timelines.",
+          "date": "2026-08-15T20:25:03.719Z"
         }
       ],
       "links": [
@@ -301,7 +357,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "LU",
@@ -343,6 +399,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "heute 9 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -378,15 +448,32 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Prämienverbilligung für geschiedenen Vater in Luzern abgelehnt",
+          "url": "/de/luzern-artikel/praemienverbilligung-geschiedener-vater-luzern/",
+          "excerpt": "Das Bundesgericht bestätigt: kein Pauschalabzug von 9.000 CHF/Kind, wenn die Unterhaltsbeiträge bereits abgezogen wurden.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Luzern: Tag der psychischen Gesundheit am 10. Oktober",
+          "url": "/de/luzern-artikel/luzern-psychische-gesundheit-baenke/",
+          "date": "2026-10-07T17:52:11.678Z"
+        },
         {
           "title": "KVG Krankenversicherungsprämien 2026: Kanton Luzern",
           "url": "/de/schweiz-artikel/lamal-praemien-kanton-luzern-2026/",
           "excerpt": "In Luzern hängen die LAMal-Prämien von Kanton und Region ab: Erwachsenenfranchisen, Kassenwechsel und kantonale Prämienverbilligung für 2026.",
           "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Krankenkassenprämien Kanton Luzern und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/krankenversicherungspramien-luzern/",
+          "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Luzern: Prämienklassen, Franchisen, alternative Modelle und Voraussetzungen für die Prämienverbilligung.",
+          "date": "2026-08-14T01:51:57.093Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Luzern: Voraussetzungen und Verlängerung",
@@ -407,16 +494,10 @@
           "date": "2026-09-03T19:12:14.541Z"
         },
         {
-          "title": "Krankenkassenprämien Kanton Luzern und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/krankenversicherungspramien-luzern/",
-          "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Luzern: Prämienklassen, Franchisen, alternative Modelle und Voraussetzungen für die Prämienverbilligung.",
-          "date": "2026-08-14T01:51:57.093Z"
-        },
-        {
-          "title": "Kindergarten und Kinderbetreuung im Kanton Luzern: Kosten",
-          "url": "/de/schweiz-artikel/asilo-nido-e-custodia-bambini-kanton-luzern-kosten/",
-          "excerpt": "Die Kosten für Kindertagesstätten und Kinderbetreuung im Kanton Luzern unterliegen verschiedenen Faktoren.",
-          "date": "2026-08-14T02:53:59.094Z"
+          "title": "Führerschein in Luzern: was zu tun und zu wissen ist",
+          "url": "/de/schweiz-artikel/fuhrerschein-in-luzern-was-zu-tun-und-zu-wissen-ist/",
+          "excerpt": "Die Umstellung des Führerscheins im Kanton Luzern: Voraussetzungen, Verfahren und Fristen.",
+          "date": "2026-08-15T20:25:03.719Z"
         }
       ],
       "links": [
@@ -441,7 +522,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "LU",
@@ -483,6 +564,20 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Luzern",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 9 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -518,15 +613,33 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Réduction des primes refusée à un père divorcé à Lucerne",
+          "url": "/fr/articles-lucerne/reduction-primes-pere-divorce-lucerne/",
+          "excerpt": "Le Tribunal fédéral confirme : pas de forfait 9.000 CHF/enfant si les contributions d’entretien ont déjà été déduites.",
+          "date": "2026-10-10T09:02:37.771Z"
+        },
+        {
+          "title": "Lucerne : journée sur la santé mentale le 10 octobre",
+          "url": "/fr/articles-lucerne/lucerne-sante-mentale-bancs/",
+          "excerpt": "10 octobre 2026 : journée cantonale à Lucerne",
+          "date": "2026-10-07T17:52:11.678Z"
+        },
         {
           "title": "Primes d’assurance santé KVG 2026 : Canton de Lucerne",
           "url": "/fr/articles-suisse/primes-lamal-canton-lucerne-2026/",
           "excerpt": "À Lucerne, les primes KVG dépendent du canton et de la région : franchises adultes, change de monnaie et réduction de primes cantonale pour 2026.",
           "date": "2026-10-02T03:42:39.056Z"
+        },
+        {
+          "title": "Primes caisse-maladie Canton de Lucerne et réduction des primes",
+          "url": "/fr/articles-suisse/primes-maladie-lucerne/",
+          "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Lucerne : fourchettes de primes, franchises, modèles alternatifs et conditions pour obtenir la réduction des primes.",
+          "date": "2026-08-14T01:51:57.093Z"
         },
         {
           "title": "Permis de séjour B Lucerne : exigences et renouvellement",
@@ -547,16 +660,10 @@
           "date": "2026-09-03T19:12:14.541Z"
         },
         {
-          "title": "Primes caisse-maladie Canton de Lucerne et réduction des primes",
-          "url": "/fr/articles-suisse/primes-maladie-lucerne/",
-          "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Lucerne : fourchettes de primes, franchises, modèles alternatifs et conditions pour obtenir la réduction des primes.",
-          "date": "2026-08-14T01:51:57.093Z"
-        },
-        {
-          "title": "Garderie et garde d'enfants Canton de Lucerne : coûts",
-          "url": "/fr/articles-suisse/asilo-nido-e-custodia-bambini-canton-de-lucerne-couts/",
-          "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Lucerne sont soumis à plusieurs facteurs.",
-          "date": "2026-08-14T02:53:59.094Z"
+          "title": "Permis de conduire à Lucerne : que faire et que savoir",
+          "url": "/fr/articles-suisse/permis-de-conduire-a-lucerne-que-faire-et-que-savoir/",
+          "excerpt": "La conversion du permis de conduire dans le canton de Lucerne : exigences, procédures et délais.",
+          "date": "2026-08-15T20:25:03.719Z"
         }
       ],
       "links": [
@@ -577,7 +684,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "f665bb499523171905c1a49d87e7a69162b2c48d348b77b03cb5c86a66c04ba6",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "e37c16ab64f44faacd872eb3173ac603e6e512d89fef9f310cc05c404be4913f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "87",
+          "value": "86",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,34 +38,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Energie-Apéros Aargau 2026/2027",
-              "detail": "Eniwa",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
-            },
-            {
-              "label": "Seelentanz-Achterbahn",
-              "detail": "Reusspark - Zentrum für Pflege und Betreung",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
-            },
-            {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — in corso, ultimo giorno: 17 ottobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
-            {
-              "label": "Naturspaziergang",
-              "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — in corso, ultimo giorno: 13 ottobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
@@ -96,11 +78,29 @@
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Drink & Draw – Programmgruppe Bar im Stall",
+              "detail": "Aarau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/drink-draw-programmgruppe-bar-im-stall/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [],
@@ -127,7 +127,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "AG",
@@ -137,7 +137,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "87",
+          "value": "86",
           "note": "from the site’s events calendar"
         }
       ],
@@ -148,34 +148,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Energie-Apéros Aargau 2026/2027",
-              "detail": "Eniwa",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
-            },
-            {
-              "label": "Seelentanz-Achterbahn",
-              "detail": "Reusspark - Zentrum für Pflege und Betreung",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
-            },
-            {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — ongoing, last day: 19 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — ongoing, last day: 17 October 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
-            {
-              "label": "Naturspaziergang",
-              "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — ongoing, last day: 13 October 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
@@ -206,11 +188,29 @@
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Drink & Draw – Programmgruppe Bar im Stall",
+              "detail": "Aarau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/drink-draw-programmgruppe-bar-im-stall/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +223,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [],
@@ -237,7 +237,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "AG",
@@ -247,7 +247,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "87",
+          "value": "86",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -258,34 +258,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Energie-Apéros Aargau 2026/2027",
-              "detail": "Eniwa",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
-            },
-            {
-              "label": "Seelentanz-Achterbahn",
-              "detail": "Reusspark - Zentrum für Pflege und Betreung",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
-            },
-            {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — läuft, letzter Tag: 17. Oktober 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
-            {
-              "label": "Naturspaziergang",
-              "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — läuft, letzter Tag: 13. Oktober 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
@@ -316,11 +298,29 @@
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Drink & Draw – Programmgruppe Bar im Stall",
+              "detail": "Aarau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/drink-draw-programmgruppe-bar-im-stall/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -333,7 +333,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [],
@@ -347,7 +347,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "AG",
@@ -357,7 +357,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "87",
+          "value": "86",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -368,34 +368,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Energie-Apéros Aargau 2026/2027",
-              "detail": "Eniwa",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/buchs-ag/energie-aperos-aargau-20262027_AGghP9A"
-            },
-            {
-              "label": "Seelentanz-Achterbahn",
-              "detail": "Reusspark - Zentrum für Pflege und Betreung",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederwil-ag/seelentanz-achterbahn_AB7SVuE"
-            },
-            {
               "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
               "detail": "Wettingen — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
             },
             {
               "label": "Feldschlösschen Oktoberfest",
               "detail": "Feldschlösschen Brauwelt, Rheinfelden — en cours, dernier jour : 17 octobre 2026",
-              "date": "2026-10-13",
+              "date": "2026-10-14",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/feldschloesschen-oktoberfest/"
-            },
-            {
-              "label": "Naturspaziergang",
-              "detail": "Sprützehüsli, Sternenplatz, Spreitenbach — en cours, dernier jour : 13 octobre 2026",
-              "date": "2026-10-13",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/spreitenbach/naturspaziergang_A4CKfWa"
             },
             {
               "label": "Afterwork Live Musik - The Cordon Blues Band",
@@ -426,11 +408,29 @@
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-15",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/polarbaeren-x-la-nefera_AGbac1H"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Drink & Draw – Programmgruppe Bar im Stall",
+              "detail": "Aarau",
+              "date": "2026-10-16",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/drink-draw-programmgruppe-bar-im-stall/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -443,7 +443,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [],
@@ -457,7 +457,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "81e8ea1f4fe73ef721f032e59a934c787deadc70bae53f35da4969cb557b4768",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "5d7b5dbb01adab1c9d3caac86e2549360cc4df4d27ee364dc24a623a00abb468",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -140,7 +140,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -155,6 +155,12 @@
           "url": "/articoli-svizzera/imposte-cantonali-ginevra-aliquote-deduzioni/",
           "excerpt": "Scopri le aliquote e deduzioni delle imposte cantonali a Ginevra, incluse scadenze di consegna e il portale online dell'amministrazione fiscale.",
           "date": "2026-09-07T13:39:12.387Z"
+        },
+        {
+          "title": "Premi LAMal 2026 a Ginevra: franchigia, cambio cassa e sussidi",
+          "url": "/articoli-svizzera/premi-lamal-2026-ginevra-guida/",
+          "excerpt": "Guida ai premi cassa malati 2026 nel canton Ginevra: franchigie CHF 300–2500, diritto d'opzione per frontalieri, confronto nazionale e passaggi per cambiare assicurazione.",
+          "date": "2026-08-07T20:56:09.960Z"
         }
       ],
       "links": [
@@ -183,7 +189,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "GE",
@@ -301,7 +307,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -316,6 +322,12 @@
           "url": "/en/swiss-articles/canton-geneva-tax-rates-deductions/",
           "excerpt": "Check out cantonal tax rates and deductions in Geneva, including delivery deadlines and the tax administration's online portal.",
           "date": "2026-09-07T13:39:12.387Z"
+        },
+        {
+          "title": "LAMal 2026 awards in Geneva: deductible, cash changeover and subsidies",
+          "url": "/en/swiss-articles/lamal-premiums-2026-geneva-guide/",
+          "excerpt": "Guide to sick pay premiums 2026 in the canton of Geneva: deductibles CHF 300–2500, right of option for border workers, national comparison and steps to change insurance.",
+          "date": "2026-08-07T20:56:09.960Z"
         }
       ],
       "links": [
@@ -344,7 +356,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "GE",
@@ -462,7 +474,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -477,6 +489,12 @@
           "url": "/de/schweiz-artikel/kanton-genf-steuersaetze-absetzungen/",
           "excerpt": "Entdecken Sie die kantonalen Steuersätze und -abzüge in Genf inklusive Liefertermine und das Online-Portal der Steuerverwaltung.",
           "date": "2026-09-07T13:39:12.387Z"
+        },
+        {
+          "title": "KVG-Prämien 2026 in Genf: Franchise, Kassenwechsel und Beiträge",
+          "url": "/de/schweiz-artikel/lamal-praemien-2026-genf-leitfaden/",
+          "excerpt": "Leitfaden zu den Krankenkassenprämien 2026 im Kanton Genf: Franchisen CHF 300–2500, Optionsrecht für Grenzgänger, Landesvergleich und Wechselschritte.",
+          "date": "2026-08-07T20:56:09.960Z"
         }
       ],
       "links": [
@@ -505,7 +523,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "GE",
@@ -623,7 +641,7 @@
               "url": "https://statistique.ge.ch/rss/affiche_article.asp?utm_source=reader&utm_medium=itm&utm_term=rss&utm_content=guid_10872&utm_campaign=ocstat&url=https://statistique.ge.ch/actualites/welcome.asp?actu=6043"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -638,6 +656,12 @@
           "url": "/fr/articles-suisse/canton-geneve-taux-deductions/",
           "excerpt": "Découvrez les taux et déductions des impôts cantonaux à Genève, y compris les délais de livraison et le portail en ligne de l'administration fiscale.",
           "date": "2026-09-07T13:39:12.387Z"
+        },
+        {
+          "title": "Prix LAMal 2026 à Genève : franchise, changement de caisse et subventions",
+          "url": "/fr/articles-suisse/primes-lamal-2026-geneve-guide/",
+          "excerpt": "Guide des primes caisse-maladie 2026 dans le canton de Genève : franchises CHF 300–2500, droit d'option pour frontaliers, comparaison nationale et passages pour changer d'assurance.",
+          "date": "2026-08-07T20:56:09.960Z"
         }
       ],
       "links": [
@@ -666,7 +690,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

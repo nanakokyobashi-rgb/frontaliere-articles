@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "d8c4a3f0951eda9207f796d2d944b55dfc7950c7d2a42bd1fc230abafa2f1b52",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "ccc459943f5a271ef0d22fe81f43e9fe444cf38ee3558396ba2360d270ecdd5d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "22",
+          "value": "23",
           "note": "segnalazioni aggiornate: 13 ottobre 2026"
         },
         {
@@ -142,13 +142,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
+              "date": "2026-10-13T10:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
+            },
             {
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
@@ -173,14 +178,9 @@
               "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
               "date": "2026-10-11T17:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
-            },
-            {
-              "label": "Trasporto merci, sul Sempione utilizzato il 26,3% della capacità ferroviaria",
-              "date": "2026-10-11T10:20:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/confine/articolo/trasporto-merci-sul-sempione-utilizzato-il-263-della-capacita-ferroviaria.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -225,7 +225,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "VS",
@@ -240,7 +240,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "22",
+          "value": "23",
           "note": "reports as of 13 October 2026"
         },
         {
@@ -345,13 +345,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
+              "date": "2026-10-13T10:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
+            },
             {
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
@@ -376,14 +381,9 @@
               "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
               "date": "2026-10-11T17:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
-            },
-            {
-              "label": "Trasporto merci, sul Sempione utilizzato il 26,3% della capacità ferroviaria",
-              "date": "2026-10-11T10:20:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/confine/articolo/trasporto-merci-sul-sempione-utilizzato-il-263-della-capacita-ferroviaria.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "VS",
@@ -443,7 +443,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "22",
+          "value": "23",
           "note": "Meldungen vom 13. Oktober 2026"
         },
         {
@@ -548,13 +548,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
+              "date": "2026-10-13T10:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
+            },
             {
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
@@ -579,14 +584,9 @@
               "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
               "date": "2026-10-11T17:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
-            },
-            {
-              "label": "Trasporto merci, sul Sempione utilizzato il 26,3% della capacità ferroviaria",
-              "date": "2026-10-11T10:20:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/confine/articolo/trasporto-merci-sul-sempione-utilizzato-il-263-della-capacita-ferroviaria.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -631,7 +631,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "VS",
@@ -646,7 +646,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "22",
+          "value": "23",
           "note": "signalements au 13 octobre 2026"
         },
         {
@@ -751,13 +751,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Galleria Montecrevola, prima i lavori al tornante sulla provinciale 166",
+              "date": "2026-10-13T10:10:00.000Z",
+              "url": "https://www.ossolanews.it/2026/10/13/leggi-notizia/argomenti/viabilita-e-trasporti-8/articolo/galleria-montecrevola-prima-i-lavori-al-tornante-sulla-provinciale-166.html"
+            },
             {
               "label": "Al via i lavori per il parcheggio di via Cadorna FOTO",
               "date": "2026-10-12T17:10:00.000Z",
@@ -782,14 +787,9 @@
               "label": "Al via i lavori nel tunnel di Montecrevola: rischio intasamento sulla provinciale verso il confine",
               "date": "2026-10-11T17:00:00.000Z",
               "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/ossola/articolo/al-via-i-lavori-anas-nel-tunnel-di-montecrevola-ce-il-rischio-intasamento-sulla-provinciale-vers.html"
-            },
-            {
-              "label": "Trasporto merci, sul Sempione utilizzato il 26,3% della capacità ferroviaria",
-              "date": "2026-10-11T10:20:00.000Z",
-              "url": "https://www.ossolanews.it/2026/10/11/leggi-notizia/argomenti/confine/articolo/trasporto-merci-sul-sempione-utilizzato-il-263-della-capacita-ferroviaria.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -834,7 +834,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

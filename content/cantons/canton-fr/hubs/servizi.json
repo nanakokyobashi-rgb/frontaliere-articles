@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "5cd9cb3a15c7188b072d5f3842fbdb142f835fa4150be3bd572e61d6ee91c148",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "e4507101633f7eed4d5afb19acfde3c27aa91e8ff6daf97accd960043d487a0a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +97,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "14 °C",
+              "detail": "oggi da 9 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +149,7 @@
               "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -139,6 +158,12 @@
           "url": "/articoli-friburgo/garanzia-hib-payerne/",
           "excerpt": "CHF 44,8 milioni per il finanziamento dell'HIB 103 voti espressi, tutti favorevoli Lavori previsti tra il 2028 e il 2032 Il Vaud deve ancora approvare CHF 67,2",
           "date": "2026-10-10T17:43:08.538Z"
+        },
+        {
+          "title": "Premi assicurazione malattia Friburgo: come funzionano le fasce di premio",
+          "url": "/articoli-svizzera/premi-cassa-malati-friburgo-riduzione/",
+          "excerpt": "I premi della assicurazione malattia obbligatoria nel Cantone di Friburgo sono stati ridisegnati per offrire una copertura più equa ai cittadini.",
+          "date": "2026-08-17T18:57:41.324Z"
         },
         {
           "title": "Permesso di dimora B nel Canton Friburgo: requisiti, rinnovo e procedure",
@@ -153,6 +178,18 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
+          "title": "Premi cassa malati Friburgo: riduzione e sussidi",
+          "url": "/articoli-svizzera/premi-lamal-friburgo-2026/",
+          "excerpt": "Guida ai premi dell'assicurazione malattia obbligatoria nel Canton Friburgo: franchigie, modelli alternativi e procedura per ottenere la riduzione dei premi",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "Premi LAMal Friburgo: franchigie e sussidi 2026",
+          "url": "/articoli-svizzera/premi-lamal-friburgo-sussidi/",
+          "excerpt": "Franchigie LAMal nel Canton Friburgo, come scegliere, procedure per accedere alla riduzione di premio e scadenze ufficiali 2026.",
+          "date": "2026-09-01T00:44:12.131Z"
+        },
+        {
           "title": "Asilo nido e custodia bambini nel Cantone di Friburgo: costi e opzioni",
           "url": "/articoli-svizzera/asilo-nido-custodia-friburgo-costi/",
           "excerpt": "Il Cantone di Friburgo offre diverse opzioni di asilo nido e custodia bambini, con tariffe calcolate sul reddito e sussidi cantonali disponibili.",
@@ -163,24 +200,6 @@
           "url": "/articoli-svizzera/patente-di-guida-friburgo-conversione-ed-esami/",
           "excerpt": "Conversione della patente di guida estera nel Cantone di Friburgo, esami teorici e pratici, corsi obbligatori e ufficio della circolazione competente.",
           "date": "2026-08-18T01:35:04.695Z"
-        },
-        {
-          "title": "Premi cassa malati Friburgo: riduzione e sussidi",
-          "url": "/articoli-svizzera/premi-lamal-friburgo-2026/",
-          "excerpt": "Guida ai premi dell'assicurazione malattia obbligatoria nel Canton Friburgo: franchigie, modelli alternativi e procedura per ottenere la riduzione dei premi",
-          "date": "2026-08-31T23:41:46.736Z"
-        },
-        {
-          "title": "Patente di guida in Friburgo: conversione ed esami",
-          "url": "/articoli-svizzera/patente-guida-friburgo-procedura/",
-          "excerpt": "Procedura di conversione della patente estera nel Cantone di Friburgo: corsi obbligatori, esami teorici e pratici, documenti richiesti e roadmap step-by-step.",
-          "date": "2026-09-01T20:58:54.961Z"
-        },
-        {
-          "title": "Ospedale di Friburgo cerca infermieri con contratto di 12 mesi",
-          "url": "/articoli-svizzera/ospedale-friburgo-posto-lavoro/",
-          "excerpt": "L'ospedale di Friburgo cerca infermieri con contratto CDD di 12 mesi al 60-100% di impiego",
-          "date": "2026-06-26T02:41:15.688Z"
         }
       ],
       "links": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "FR",
@@ -279,7 +298,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "14 °C",
+              "detail": "today from 9 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +350,7 @@
               "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -326,6 +359,12 @@
           "url": "/en/fribourg-articles/fribourg-hib-guarantee/",
           "excerpt": "CHF 44,8 million for HIB financing 103 votes cast, all in favor Work planned between 2028 and 2032 Vaud still has to approve CHF 67,2 million Beneficiary →",
           "date": "2026-10-10T17:43:08.538Z"
+        },
+        {
+          "title": "Health insurance premiums Fribourg: how the premium bands work",
+          "url": "/en/swiss-articles/premi-cassa-malati-fribourg/",
+          "excerpt": "Compulsory health insurance premiums in the Canton of Fribourg have been redesigned to offer fairer coverage to citizens.",
+          "date": "2026-08-17T18:57:41.324Z"
         },
         {
           "title": "Residence permit B in Fribourg: requirements, renewal & procedures",
@@ -340,6 +379,18 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
+          "title": "Sick pay premiums Fribourg: reduction and subsidies",
+          "url": "/en/swiss-articles/fribourg-health-insurance-premiums-2026/",
+          "excerpt": "Guide to compulsory health insurance premiums in the Canton of Fribourg: deductibles, alternative models and procedure for obtaining premium reductions",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "KVG premiums Fribourg: deductibles and subsidies 2026",
+          "url": "/en/swiss-articles/health-insurance-premiums-fribourg-subsidies/",
+          "excerpt": "KVG deductibles in the Canton of Fribourg, how to choose, procedures for accessing the premium reduction and official deadlines 2026.",
+          "date": "2026-09-01T00:44:12.131Z"
+        },
+        {
           "title": "Nursery and childcare in the Canton of Fribourg: costs and options",
           "url": "/en/swiss-articles/nursery-and-childcare-in-the-canton-of-fribourg-costs-and-options/",
           "excerpt": "The Canton of Fribourg offers several daycare and childcare options, with income-based fees and cantonal subsidies available.",
@@ -350,24 +401,6 @@
           "url": "/en/swiss-articles/driving-license-fribourg-conversion-and-exams/",
           "excerpt": "Conversion of the foreign driver's license in the Canton of Fribourg, theoretical and practical exams, compulsory courses and competent traffic office.",
           "date": "2026-08-18T01:35:04.695Z"
-        },
-        {
-          "title": "Sick pay premiums Fribourg: reduction and subsidies",
-          "url": "/en/swiss-articles/fribourg-health-insurance-premiums-2026/",
-          "excerpt": "Guide to compulsory health insurance premiums in the Canton of Fribourg: deductibles, alternative models and procedure for obtaining premium reductions",
-          "date": "2026-08-31T23:41:46.736Z"
-        },
-        {
-          "title": "Driving license in Fribourg: conversion and exams",
-          "url": "/en/swiss-articles/driving-license-fribourg-procedure/",
-          "excerpt": "Procedure for converting a foreign driver's license in the Canton of Fribourg: compulsory courses, theoretical and practical exams, required documents and step-by-step roadmaps.",
-          "date": "2026-09-01T20:58:54.961Z"
-        },
-        {
-          "title": "Fribourg Hospital seeks nurses with 12-month contract",
-          "url": "/en/swiss-articles/fribourg-hospital-job-nurse/",
-          "excerpt": "Fribourg hospital is looking for nurses with a 12-month CDD contract at 60-100% employment",
-          "date": "2026-06-26T02:41:15.688Z"
         }
       ],
       "links": [
@@ -392,7 +425,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "FR",
@@ -462,7 +495,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "14 °C",
+              "detail": "heute 9 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -500,7 +547,7 @@
               "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -509,6 +556,12 @@
           "url": "/de/freiburg-artikel/freiburg-hib-buergschaft/",
           "excerpt": "CHF 44,8 Millionen für die Finanzierung des HIB 103 abgegebene Stimmen, alle dafür Bauarbeiten zwischen 2028 und 2032 vorgesehen Der Kanton Waadt muss noch CHF",
           "date": "2026-10-10T17:43:08.538Z"
+        },
+        {
+          "title": "Krankenkassenprämien Freiburg: So funktionieren die Prämienbänder",
+          "url": "/de/schweiz-artikel/pflichtkrankenkassenpreise-kanton-freiburg/",
+          "excerpt": "Die Prämien der gesetzlichen Krankenversicherung im Kanton Freiburg wurden neu gestaltet, um den Bürgern eine gerechtere Deckung zu bieten.",
+          "date": "2026-08-17T18:57:41.324Z"
         },
         {
           "title": "Aufenthaltsbewilligung B in Freiburg: Voraussetzungen & Verfahren",
@@ -523,6 +576,18 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
+          "title": "Krankenkassenprämien Freiburg: Kürzung und Zuschüsse",
+          "url": "/de/schweiz-artikel/praemien-krankenversicherung-freiburg-2026/",
+          "excerpt": "Prämienleitfaden für die obligatorische Krankenversicherung im Kanton Freiburg: Franchisen, alternative Modelle und Verfahren zur Erlangung der Prämienverbilligung",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "KVG-Prämien Freiburg: Selbstbeteiligungen und Subventionen 2026",
+          "url": "/de/schweiz-artikel/praemien-krankenversicherung-freiburg-subventionen/",
+          "excerpt": "KVG-Franchisen im Kanton Freiburg, wie man wählt, Verfahren für den Zugang zur Prämienverbilligung und offizielle Fristen 2026.",
+          "date": "2026-09-01T00:44:12.131Z"
+        },
+        {
           "title": "Kindertagesstätte und Kinderbetreuung im Kanton Freiburg: Kosten und Optionen",
           "url": "/de/schweiz-artikel/asilo-nido-custodia-freiburg-kosten/",
           "excerpt": "Der Kanton Freiburg bietet verschiedene Möglichkeiten der Kindertagesstätte und Kinderbetreuung mit einkommensabhängigen Tarifen und kantonalen Zuschüssen an.",
@@ -533,24 +598,6 @@
           "url": "/de/schweiz-artikel/fuehrerschein-freiburg-umstellung-und-pruefungen/",
           "excerpt": "Umwandlung des ausländischen Führerscheins im Kanton Freiburg, theoretische und praktische Prüfungen, Pflichtkurse und zuständiges Strassenverkehrsamt.",
           "date": "2026-08-18T01:35:04.695Z"
-        },
-        {
-          "title": "Krankenkassenprämien Freiburg: Kürzung und Zuschüsse",
-          "url": "/de/schweiz-artikel/praemien-krankenversicherung-freiburg-2026/",
-          "excerpt": "Prämienleitfaden für die obligatorische Krankenversicherung im Kanton Freiburg: Franchisen, alternative Modelle und Verfahren zur Erlangung der Prämienverbilligung",
-          "date": "2026-08-31T23:41:46.736Z"
-        },
-        {
-          "title": "Führerschein in Freiburg: Umschulung und Prüfungen",
-          "url": "/de/schweiz-artikel/fuehrerschein-freiburg-verfahren/",
-          "excerpt": "Umwandlungsverfahren des ausländischen Führerscheins im Kanton Freiburg: Pflichtkurse, theoretische und praktische Prüfungen, erforderliche Unterlagen und Schritt-für-Schritt-Roadmaps.",
-          "date": "2026-09-01T20:58:54.961Z"
-        },
-        {
-          "title": "Spital Freiburg sucht Krankenschwestern mit 12-monatigem Vertrag",
-          "url": "/de/schweiz-artikel/freiburg-spital-arbeit-pflegefachmann/",
-          "excerpt": "Das Spital Freiburg sucht Pflegekräfte mit 12-monatigem CDD-Vertrag bei 60-100% Beschäftigung",
-          "date": "2026-06-26T02:41:15.688Z"
         }
       ],
       "links": [
@@ -575,7 +622,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "FR",
@@ -645,7 +692,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 9 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -683,7 +744,7 @@
               "url": "https://www.fr.ch/de/gsd/news/40-jahre-freiburger-fachstelle-fuer-sexuelle-gesundheit"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -692,6 +753,12 @@
           "url": "/fr/articles-fribourg/fribourg-garantie-hib/",
           "excerpt": "44,8 millions de CHF pour le financement de l'HIB 103 votes exprimés, tous favorables Travaux prévus entre 2028 et 2032 Le canton de Vaud doit encore approuver",
           "date": "2026-10-10T17:43:08.538Z"
+        },
+        {
+          "title": "Fasce di premio assicurazione malattia Fribourg",
+          "url": "/fr/articles-suisse/premieres-maladie-obligatoire-canton-fribourg/",
+          "excerpt": "Les primes de l'assurance maladie obligatoire dans le canton de Fribourg ont été redessinées pour offrir une couverture plus équitable aux citoyens.",
+          "date": "2026-08-17T18:57:41.324Z"
         },
         {
           "title": "Permis B Fribourg : exigences, renouvellement et démarches",
@@ -706,6 +773,18 @@
           "date": "2026-09-05T16:17:35.042Z"
         },
         {
+          "title": "Primes caisse-maladie Fribourg : réduction et allocations",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-fribourg-2026/",
+          "excerpt": "Guide des primes de l'assurance maladie obligatoire dans le canton de Fribourg : franchises, modèles alternatifs et procédure pour obtenir la réduction des primes",
+          "date": "2026-08-31T23:41:46.736Z"
+        },
+        {
+          "title": "Primes LAMal Fribourg : franchises et subventions 2026",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-fribourg-subventions/",
+          "excerpt": "Les franchises KVG dans le canton de Fribourg, comment choisir, les procédures pour accéder à la réduction de prime et les délais officiels 2026.",
+          "date": "2026-09-01T00:44:12.131Z"
+        },
+        {
           "title": "Garderie et garde d'enfants dans le canton de Fribourg : coûts et options",
           "url": "/fr/articles-suisse/asilo-nido-custodia-fribourg-couts/",
           "excerpt": "Le canton de Fribourg offre plusieurs options de crèche et de garde d'enfants, avec des tarifs calculés sur le revenu et des allocations cantonales disponibles.",
@@ -716,24 +795,6 @@
           "url": "/fr/articles-suisse/permis-de-conduire-fribourg-conversion-et-examen/",
           "excerpt": "Conversion du permis de conduire étranger dans le canton de Fribourg, examens théoriques et pratiques, cours obligatoires et bureau de la circulation compétent.",
           "date": "2026-08-18T01:35:04.695Z"
-        },
-        {
-          "title": "Primes caisse-maladie Fribourg : réduction et allocations",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-fribourg-2026/",
-          "excerpt": "Guide des primes de l'assurance maladie obligatoire dans le canton de Fribourg : franchises, modèles alternatifs et procédure pour obtenir la réduction des primes",
-          "date": "2026-08-31T23:41:46.736Z"
-        },
-        {
-          "title": "Permis de conduire à Fribourg : conversion et examens",
-          "url": "/fr/articles-suisse/permis-conduite-fribourg-procedure/",
-          "excerpt": "Procédure de conversion du permis étranger dans le canton de Fribourg : cours obligatoires, examens théoriques et pratiques, documents requis et feuille de route étape par étape.",
-          "date": "2026-09-01T20:58:54.961Z"
-        },
-        {
-          "title": "Hôpital de Fribourg à la recherche d'infirmières sous contrat de 12 mois",
-          "url": "/fr/articles-suisse/hopital-fribourg-emploi-infirmiere/",
-          "excerpt": "L'hôpital de Fribourg recherche des infirmières sous contrat CDD de 12 mois à 60-100% d'emploi",
-          "date": "2026-06-26T02:41:15.688Z"
         }
       ],
       "links": [
@@ -754,7 +815,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }
