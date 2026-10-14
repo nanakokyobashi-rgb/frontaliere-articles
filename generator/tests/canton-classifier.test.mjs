@@ -239,6 +239,8 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Implicazioni per il Canton Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per il Cantone di Ginevra').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Cosa Cambia per Il Ticino').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per il Ticino e i Grigioni').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Conseguenze per il Canton San Gallo, Basilea Campagna e il Vallese').map((m) => m.group), []);
     // Un fatto in Ticino resta in Ticino.
     assert.deepEqual(classifier.mentionsIn('Effetti del maltempo in Ticino: frane').map((m) => m.group), ['TI']);
     assert.deepEqual(classifier.mentionsIn('Cosa cambia in Ticino dal 2026').map((m) => m.group), ['TI']);

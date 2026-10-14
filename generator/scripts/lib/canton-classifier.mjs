@@ -320,14 +320,17 @@ const FRAMING_PHRASES = [
  * «cosa cambia per chi lavora in Ticino», «l'impatto sul Ticino». Un pezzo
  * sull'Uzbekistan o sui benzinai lombardi resta tale anche se il titolo lo
  * chiude cosi'. Cancellate da tutti i campi, titolo compreso. Solo la prima
- * lettera delle parole chiave e' indifferente alle maiuscole: il nome dopo la
- * preposizione deve restare maiuscolo (un toponimo).
+ * lettera delle parole chiave e' indifferente alle maiuscole: i nomi dopo la
+ * preposizione devono restare maiuscoli (toponimi), anche quando sono
+ * composti o in una lista coordinata.
  */
 const caseInitial = (word) => `[${word[0].toUpperCase()}${word[0]}]${word.slice(1)}`;
 const AUDIENCE_HEADS = ['implicazion[ei]', 'impatt[oi]', 'effett[oi]', 'conseguenz[ae]', 'ricadut[ae]',
   'riflessi', 'influisc\\p{L}*', 'influenz\\p{L}*'];
 const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui'].map(caseInitial).join('|')}|${caseInitial('anche')}\\s+${caseInitial('per')})`;
-const AUDIENCE_TARGET = `\\s+(?:${caseInitial('il')}\\s+|${caseInitial('i')}\\s+|${caseInitial('l')}')?(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della'].map(caseInitial).join('|')}))?\\s+)?\\p{Lu}\\p{L}+`;
+const AUDIENCE_NAME = '\\p{Lu}\\p{L}+(?:[-\\s]+\\p{Lu}\\p{L}+)*';
+const AUDIENCE_TARGET_ITEM = `(?:${caseInitial('il')}\\s+|${caseInitial('i')}\\s+|${caseInitial('l')}['’]?\\s*)?(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della'].map(caseInitial).join('|')}))?\\s+)?${AUDIENCE_NAME}`;
+const AUDIENCE_TARGET = `\\s+${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
 const AUDIENCE_RES = [
   // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
   // maltempo in Ticino», che e' un fatto in Ticino.
