@@ -365,7 +365,7 @@ const AUDIENCE_RECIPIENT_QUALIFIER_WORDS = [
   'residenti', 'iscritti', 'frontalieri', 'italiano', 'italiana', 'italiani', 'italiane',
 ];
 const AUDIENCE_RECIPIENT_QUALIFIER = `(?:${caseInitial('frontalieri')}\\s+${caseInitial('che')}\\s+${caseInitial('lavorano')}|${AUDIENCE_RECIPIENT_QUALIFIER_WORDS.map(caseInitial).join('|')}|${caseInitial('che')}\\s+${caseInitial('lavorano')})`;
-const AUDIENCE_RECIPIENT_QUALIFIERS = `${AUDIENCE_RECIPIENT_QUALIFIER}(?:\\s+(?:${caseInitial('e')}|${caseInitial('ed')})\\s+${AUDIENCE_RECIPIENT_QUALIFIER}){0,2}`;
+const AUDIENCE_RECIPIENT_QUALIFIERS = `${AUDIENCE_RECIPIENT_QUALIFIER}(?:\\s+(?:(?:${caseInitial('e')}|${caseInitial('ed')})\\s+)?${AUDIENCE_RECIPIENT_QUALIFIER}){0,2}`;
 const AUDIENCE_RECIPIENT_BODY = `(?:${AUDIENCE_RECIPIENT_HEAD}(?:\\s+${AUDIENCE_RECIPIENT_QUALIFIERS})?|${caseInitial('chi')}\\s+${caseInitial('lavora')})`;
 const AUDIENCE_RECIPIENT = `(?:${AUDIENCE_RECIPIENT_BODY}\\s+${AUDIENCE_RECIPIENT_LINK_PREFIX})?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della', 'dei', 'degli', 'delle'].map(caseInitial).join('|')}))?\\s+)?`;

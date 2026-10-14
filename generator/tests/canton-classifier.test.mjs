@@ -324,6 +324,8 @@ describe('regole di assegnazione', () => {
       'Implicazioni per i lavoratori frontalieri che lavorano in Ticino',
       'Implicazioni per i lavoratori italiani in Ticino',
       'Implicazioni per i frontalieri che lavorano in Ticino',
+      'Impatto per i cittadini italiani residenti in Ticino',
+      'Impatto per i lavoratori italiani che lavorano in Ticino',
     ]) {
       assert.deepEqual(classifier.mentionsIn(text).map((m) => m.group), [], text);
     }
