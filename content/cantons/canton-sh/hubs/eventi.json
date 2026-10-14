@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "5f7b2f814967de65a2de4c95b240f8fede6991389a10c0bb7f0aff27d90a3537",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "fe9b32c123814bc7148e89c7a46b01d5ff45ee2c8345cd8a5e014cd19b1ee0db",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -116,7 +116,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salari e mercato del lavoro a Sciaffusa",
+          "url": "/articoli-svizzera/salari-mercato-lavoro-sciaffusa-settori/",
+          "excerpt": "Struttura salariale svizzera per livelli di formazione, contratti collettivi, sistema di previdenza (AVS/LPP) e salario minimo cantonale. Guida pratica per verificare il proprio stipendio.",
+          "date": "2026-09-02T18:39:40.504Z"
+        },
+        {
+          "title": "Mercato degli affitti a Sciaffusa: cauzione e diritto di locazione",
+          "url": "/articoli-svizzera/mercato-affitti-schiaffusa/",
+          "excerpt": "Il diritto di locazione a Sciaffusa è regolato dall'articolo 253 del codice civile svizzero. La cauzione è vincolata su conto intestato all'inquilino.",
+          "date": "2026-08-20T21:06:12.099Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Sciaffusa",
@@ -127,7 +140,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SH",
@@ -226,7 +239,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Wages and labour market in Schaffhausen",
+          "url": "/en/swiss-articles/salaries-labour-market-schaffhausen-sectors/",
+          "excerpt": "Swiss wage structure for training levels, collective agreements, social security system (AVS/LPP) and cantonal minimum wage. A practical guide to verifying your salary.",
+          "date": "2026-09-02T18:39:40.504Z"
+        },
+        {
+          "title": "Rental market in Schaffhausen: deposit and rental right",
+          "url": "/en/swiss-articles/schaffhausen-rental-market/",
+          "excerpt": "The right to rent in Schaffhausen is governed by Article 253 of the Swiss Civil Code. The deposit is held on account in the tenant's name.",
+          "date": "2026-08-20T21:06:12.099Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Schaffhausen",
@@ -237,7 +263,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SH",
@@ -336,7 +362,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Löhne und Arbeitsmarkt in Schaffhausen",
+          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-schaffhausen-sektoren/",
+          "excerpt": "Schweizer Lohnstruktur nach Bildungsstufen, Kollektivverträgen, Vorsorgesystem (AHV/BVG) und kantonalem Mindestlohn. Praktischer Leitfaden zur Überprüfung Ihres Gehalts.",
+          "date": "2026-09-02T18:39:40.504Z"
+        },
+        {
+          "title": "Mietmarkt in Schaffhausen: Kaution und Mietrecht",
+          "url": "/de/schweiz-artikel/schaffhausen-mietmarkt/",
+          "excerpt": "Das Mietrecht in Schaffhausen richtet sich nach Artikel 253 des Schweizerischen Zivilgesetzbuches. Die Kaution ist auf ein auf den Mieter lautendes Konto gebunden.",
+          "date": "2026-08-20T21:06:12.099Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Schaffhausen",
@@ -347,7 +386,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SH",
@@ -446,7 +485,20 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salaires et marché du travail à Schaffhouse",
+          "url": "/fr/articles-suisse/salaires-marche-travail-schaffhouse-secteurs/",
+          "excerpt": "Structure salariale suisse par niveaux de formation, conventions collectives, système de prévoyance (AVS/LPP) et salaire minimum cantonal. Guide pratique pour vérifier votre salaire.",
+          "date": "2026-09-02T18:39:40.504Z"
+        },
+        {
+          "title": "Marché locatif à Schaffhouse : caution et droit de location",
+          "url": "/fr/articles-suisse/schaffhouse-marche-locatif/",
+          "excerpt": "Le droit de location à Schaffhouse est régi par l'article 253 du code civil suisse. La caution est liée sur un compte au nom du locataire.",
+          "date": "2026-08-20T21:06:12.099Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Schaffhouse",
@@ -457,7 +509,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

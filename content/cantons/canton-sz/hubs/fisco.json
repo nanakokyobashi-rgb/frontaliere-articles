@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "e011d1114eaf69724b87fae4b688149d8681035d6f52027284604029f80429d6",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "65fabbc76a012fb85dd9090bea4bb34fade41970f83a916deed166e1be4fbf3c",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -138,18 +138,6 @@
           "date": "2026-08-16T11:01:27.469Z"
         },
         {
-          "title": "Premi LAMal in Svitto: franchigie e riduzione premi",
-          "url": "/articoli-svizzera/premi-lamal-svitto-riduzione/",
-          "excerpt": "Come funzionano i premi dell'assicurazione malattia obbligatoria nel Cantone di Svitto, le franchigie disponibili e come richiedere la riduzione tramite sussidio.",
-          "date": "2026-08-22T23:40:49.373Z"
-        },
-        {
-          "title": "Premi cassa malati Svitto: fasce, franchigie e sussidi",
-          "url": "/articoli-svizzera/premi-cassa-malati-svitto/",
-          "excerpt": "Analisi dei premi dell'assicurazione malattia obbligatoria nel Cantone di Svitto: fasce di premio, franchigie, modelli e requisiti per la riduzione.",
-          "date": "2026-08-16T11:05:05.342Z"
-        },
-        {
           "title": "Imposte di successione e donazioni nel Cantone di Svitto",
           "url": "/articoli-svizzera/imposta-succesione-donazione-canton-svitto-aliquote/",
           "excerpt": "Le aliquote per la successione e le donazioni nel Cantone di Svitto sono stabilite dalla legge cantonale.",
@@ -178,7 +166,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SZ",
@@ -294,18 +282,6 @@
           "date": "2026-08-16T11:01:27.469Z"
         },
         {
-          "title": "LAMal Unwinding Rewards: deductibles and premium reductions",
-          "url": "/en/swiss-articles/health-insurance-premiums-schwyz-reduction/",
-          "excerpt": "How the compulsory health insurance premiums work in the Canton of Schwyz, the deductibles available and how to claim the reduction via subsidy.",
-          "date": "2026-08-22T23:40:49.373Z"
-        },
-        {
-          "title": "Schwyz sick pay premiums: bands, deductibles and subsidies",
-          "url": "/en/swiss-articles/schwyz-health-insurance-premiums/",
-          "excerpt": "Analysis of compulsory health insurance premiums in the Canton of Schwyz: premium brackets, deductibles, models and requirements for reduction.",
-          "date": "2026-08-16T11:05:05.342Z"
-        },
-        {
           "title": "Inheritance taxes and donations in the Canton of Schwyz",
           "url": "/en/swiss-articles/succession-donation-cantonal-schwyz/",
           "excerpt": "The rates for succession and donations in the Canton of Schwyz are set by cantonal law.",
@@ -334,7 +310,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SZ",
@@ -450,18 +426,6 @@
           "date": "2026-08-16T11:01:27.469Z"
         },
         {
-          "title": "KVG-Prämien in Schwyz: Franchisen und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/krankenkassenpramien-schwyz-reduktion/",
-          "excerpt": "Wie die Prämien der obligatorischen Krankenversicherung im Kanton Schwyz funktionieren, welche Franchisen zur Verfügung stehen und wie Sie die Reduktion mittels Subvention beantragen können.",
-          "date": "2026-08-22T23:40:49.373Z"
-        },
-        {
-          "title": "Krankenkassenprämien Schwyz: Zeitabschnitte, Franchisen und Zuschüsse",
-          "url": "/de/schweiz-artikel/krankenkassenpraemien-schwyz/",
-          "excerpt": "Prämienanalyse der obligatorischen Krankenversicherung im Kanton Schwyz: Prämienspannen, Franchisen, Modelle und Reduktionsvoraussetzungen.",
-          "date": "2026-08-16T11:05:05.342Z"
-        },
-        {
           "title": "Erbschafts- und Schenkungssteuern im Kanton Schwyz",
           "url": "/de/schweiz-artikel/erbschaftssteuer-spendenbeschwerdung-kanton-schwyz/",
           "excerpt": "Die Sätze für Erb- und Schenkungen im Kanton Schwyz sind im kantonalen Gesetz festgelegt.",
@@ -490,7 +454,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SZ",
@@ -606,18 +570,6 @@
           "date": "2026-08-16T11:01:27.469Z"
         },
         {
-          "title": "Primes LAMal à Schwytz : franchises et réductions de primes",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-schwytz-reduction/",
-          "excerpt": "Comment fonctionnent les primes de l'assurance maladie obligatoire dans le canton de Schwytz, les franchises disponibles et comment demander la réduction par allocation.",
-          "date": "2026-08-22T23:40:49.373Z"
-        },
-        {
-          "title": "Primes caisse-maladie Schwytz : tranches, franchises et subventions",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-schwytz/",
-          "excerpt": "Analyse des primes de l'assurance maladie obligatoire dans le canton de Schwytz : fourchettes de primes, franchises, modèles et conditions de réduction.",
-          "date": "2026-08-16T11:05:05.342Z"
-        },
-        {
           "title": "Impôts de succession et donations dans le canton de Schwytz",
           "url": "/fr/articles-suisse/droit-successoral-dons-canton-schwytz/",
           "excerpt": "Les taux d'héritage et de dons dans le canton de Schwytz sont fixés dans la loi cantonale.",
@@ -646,7 +598,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

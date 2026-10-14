@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "b61fd525c887112c41995b32c30c7dc2fd5ee25ff6299dc0c89336fb36aae86a",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "5d50bd5d77bdaafd024457b93a2f1514242ea54fe018e903bb1b6fe7162adfb4",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,7 +98,38 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salari e mercato del lavoro canton Zugo: settori e livelli",
+          "url": "/articoli-svizzera/salari-canton-zugo-contratti/",
+          "excerpt": "Mercato del lavoro svizzero: come funziona la determinazione dei salari tra contratti collettivi, tassazione cantonale e livelli di formazione.",
+          "date": "2026-09-05T12:52:10.533Z"
+        },
+        {
+          "title": "Mercato del lavoro a Zugo: salari e dinamiche settoriali",
+          "url": "/articoli-svizzera/mercato-lavoro-zugo-analisi/",
+          "excerpt": "Analisi del mercato zughese: settori trainanti, dinamiche salariali, fiscalità competitiva e previdenza obbligatoria per professionisti e lavoratori.",
+          "date": "2026-08-23T22:46:44.305Z"
+        },
+        {
+          "title": "Mercato del lavoro Zugo: salari, settori e formazione",
+          "url": "/articoli-svizzera/zugo-salari-occupazione-guida/",
+          "excerpt": "Guida pratica ai salari e alle opportunità di occupazione nel cantone di Zugo: livelli salariali per formazione, diritti dei lavoratori e calcolo dello stipendio netto in Svizzera.",
+          "date": "2026-09-05T11:49:46.863Z"
+        },
+        {
+          "title": "Salari e mercato del lavoro: il Canton Zugo",
+          "url": "/articoli-svizzera/salari-mercato-zugo-settori/",
+          "excerpt": "Livelli salariali per formazione, settori, orari massimi, contributi federali e contratti collettivi in vigore nel Canton Zugo.",
+          "date": "2026-08-23T21:12:41.822Z"
+        },
+        {
+          "title": "Mercato degli affitti nel Cantone di Zugo: canoni medi e diritto di locazione",
+          "url": "/articoli-svizzera/affitti-zugo-cantoni-medi/",
+          "excerpt": "Gli affitti nel Cantone di Zugo: i canoni medi e il diritto di locazione.",
+          "date": "2026-08-17T15:34:37.280Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Zugo",
@@ -109,7 +140,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "ZG",
@@ -195,7 +226,38 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Wages and the labour market in the canton of Zug: sectors and levels",
+          "url": "/en/swiss-articles/salary-zug-canton-employment/",
+          "excerpt": "Swiss labour market: how wage determination works between collective agreements, cantonal taxation and education levels.",
+          "date": "2026-09-05T12:52:10.533Z"
+        },
+        {
+          "title": "Labour market in Zug: wages and sectoral dynamics",
+          "url": "/en/swiss-articles/zug-labor-market-analysis/",
+          "excerpt": "Analysis of the Zurich market: leading sectors, wage dynamics, competitive taxation and mandatory pensions for professionals and workers.",
+          "date": "2026-08-23T22:46:44.305Z"
+        },
+        {
+          "title": "Zug Labour Market: Wages, Sectors and Training",
+          "url": "/en/swiss-articles/zug-salary-occupation-guide/",
+          "excerpt": "Practical guide to wages and employment opportunities in the canton of Zug: wage levels for training, workers' rights and net wage calculation in Switzerland.",
+          "date": "2026-09-05T11:49:46.863Z"
+        },
+        {
+          "title": "Wages and the labour market: the Canton of Zug",
+          "url": "/en/swiss-articles/wages-labour-market-zug-sectors/",
+          "excerpt": "Salary levels for training, sectors, maximum hours, federal contributions and collective agreements in force in the Canton of Zug.",
+          "date": "2026-08-23T21:12:41.822Z"
+        },
+        {
+          "title": "Rental market in the Canton of Zug: average fees and rental rights",
+          "url": "/en/swiss-articles/affitti-zug-cantonal-rents/",
+          "excerpt": "Rentals in the Canton of Zug: average rents and rental rights.",
+          "date": "2026-08-17T15:34:37.280Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Zug",
@@ -206,7 +268,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "ZG",
@@ -292,7 +354,38 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Löhne und Arbeitsmarkt Kanton Zug: Branchen und Niveaus",
+          "url": "/de/schweiz-artikel/lohn-kanton-zug-collective/",
+          "excerpt": "Schweizer Arbeitsmarkt: Wie funktioniert die Lohnfindung zwischen Tarifverträgen, kantonaler Besteuerung und Bildungsniveau?",
+          "date": "2026-09-05T12:52:10.533Z"
+        },
+        {
+          "title": "Arbeitsmarkt in Zug: Löhne und Branchendynamik",
+          "url": "/de/schweiz-artikel/arbeitsmarkt-zug-analyse/",
+          "excerpt": "Analyse des Zuger Marktes: treibende Sektoren, Lohndynamik, wettbewerbsfähige Besteuerung und obligatorische Vorsorge für Berufstätige und Arbeitnehmer.",
+          "date": "2026-08-23T22:46:44.305Z"
+        },
+        {
+          "title": "Arbeitsmarkt Zug: Löhne, Branchen und Ausbildung",
+          "url": "/de/schweiz-artikel/zug-loehne-arbeitsmarkt-leitfaden/",
+          "excerpt": "Praktischer Leitfaden zu Löhnen und Beschäftigungsmöglichkeiten im Kanton Zug: Ausbildungslöhne, Arbeitnehmerrechte und Nettolohnberechnung in der Schweiz.",
+          "date": "2026-09-05T11:49:46.863Z"
+        },
+        {
+          "title": "Löhne und Arbeitsmarkt: der Kanton Zug",
+          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-kanton-zug-sektoren/",
+          "excerpt": "Lohnniveaus nach Ausbildung, Branchen, Maximalstunden, Bundesbeiträgen und im Kanton Zug geltenden Tarifverträgen.",
+          "date": "2026-08-23T21:12:41.822Z"
+        },
+        {
+          "title": "Mietmarkt im Kanton Zug: Durchschnittsmieten und Mietrecht",
+          "url": "/de/schweiz-artikel/mieten-zug-kantonale-mieten/",
+          "excerpt": "Die Mieten im Kanton Zug: die Durchschnittsmieten und das Mietrecht.",
+          "date": "2026-08-17T15:34:37.280Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Zug",
@@ -303,7 +396,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "ZG",
@@ -389,7 +482,38 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salaires et marché du travail canton de Zoug : secteurs et niveaux",
+          "url": "/fr/articles-suisse/salaires-canton-zoug-collective/",
+          "excerpt": "Marché du travail suisse : comment fonctionne la détermination des salaires entre conventions collectives, fiscalité cantonale et niveaux de formation.",
+          "date": "2026-09-05T12:52:10.533Z"
+        },
+        {
+          "title": "Marché du travail à Zoug : salaires et dynamiques sectorielles",
+          "url": "/fr/articles-suisse/analyse-marche-travail-zoug/",
+          "excerpt": "Analyse du marché zugien : secteurs moteurs, dynamique des salaires, fiscalité compétitive et prévoyance obligatoire pour les professionnels et les travailleurs.",
+          "date": "2026-08-23T22:46:44.305Z"
+        },
+        {
+          "title": "Marché du travail Zoug : salaires, secteurs et formation",
+          "url": "/fr/articles-suisse/zoug-salaires-marche-travail-guide/",
+          "excerpt": "Guide pratique sur les salaires et les opportunités d'emploi dans le canton de Zoug : niveaux de salaire pour la formation, droits des travailleurs et calcul du salaire net en Suisse.",
+          "date": "2026-09-05T11:49:46.863Z"
+        },
+        {
+          "title": "Salaires et marché du travail : le canton de Zoug",
+          "url": "/fr/articles-suisse/salaires-marche-travail-canton-zoug-secteurs/",
+          "excerpt": "Niveaux de salaire pour la formation, les secteurs, les horaires maximums, les cotisations fédérales et les conventions collectives en vigueur dans le canton de Zoug.",
+          "date": "2026-08-23T21:12:41.822Z"
+        },
+        {
+          "title": "Marché locatif dans le canton de Zoug : loyers moyens et droit de location",
+          "url": "/fr/articles-suisse/locations-zoug-revenus-cantonaux/",
+          "excerpt": "Les loyers dans le canton de Zoug : les loyers moyens et le droit de location.",
+          "date": "2026-08-17T15:34:37.280Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Zoug",
@@ -400,7 +524,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

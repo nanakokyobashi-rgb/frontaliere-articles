@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "a44cbe17e4daf99a692cd2135f4bea40a61c713e266c1ad03edf9a151ebe952c",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "91ba9d083f1666ceff9ba42cce26bf195cdb66d9bcf9591046b4bea0e5f25eb0",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -113,10 +113,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Einsiedeln: chiusure stradali per il Gallusmarkt 2026",
+          "url": "/articoli-svitto/chiusura-strade-gallusmarkt-svitto/",
+          "excerpt": "Accesso e uscita vietati in Hauptstrasse e Sagenplatz dalle 5.00 alle 20.00 del giorno del mercato. Rumori da lunedì alle 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        },
+        {
           "title": "Abbonamenti trasporti pubblici Svitto: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-svitto/",
           "excerpt": "Guida completa agli abbonamenti, alle zone tariffarie e alle riduzioni per i mezzi pubblici nel Cantone di Svitto.",
           "date": "2026-08-16T13:32:24.597Z"
+        },
+        {
+          "title": "Sistema scolastico del Cantone Svitto: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-svitto-iscrizione-e-cicli/",
+          "excerpt": "Informazioni sul sistema scolastico del Cantone Svitto, compresi i cicli e l'età di iscrizione.",
+          "date": "2026-08-16T11:49:12.314Z"
         }
       ],
       "links": [
@@ -129,7 +141,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SZ",
@@ -225,10 +237,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Einsiedeln: road closures for Gallusmarkt 2026",
+          "url": "/en/schwyz-articles/road-closure-gallusmarkt-schwyz/",
+          "excerpt": "Access and exit prohibited on Hauptstrasse and Sagenplatz from 5.00 to 20.00 on market day. Noise from Monday at 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        },
+        {
           "title": "Tickets for public transport in Switzerland: zones and fares",
           "url": "/en/swiss-articles/public-transport-passes-schwyz/",
           "excerpt": "Complete guide to subscriptions, fare zones and reductions for public transport in the Canton of Schwyz.",
           "date": "2026-08-16T13:32:24.597Z"
+        },
+        {
+          "title": "School system of the Canton of Schwyz: enrolment and cycles",
+          "url": "/en/swiss-articles/education-system-canton-schwyz-enrolment-and-phases/",
+          "excerpt": "Information on the school system of the Canton of Swabia, including cycles and age of enrolment.",
+          "date": "2026-08-16T11:49:12.314Z"
         }
       ],
       "links": [
@@ -241,7 +265,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SZ",
@@ -337,10 +361,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Einsiedeln: Strassensperrungen für den Gallusmarkt 2026",
+          "url": "/de/schwyz-artikel/strassensperrung-gallusmarkt-schwyz/",
+          "excerpt": "Zufahrt und Ausfahrt in der Hauptstrasse und am Sagenplatz am Markttag von 5.00 bis 20.00 Uhr verboten. Lärm ab Montag um 5.00 Uhr.",
+          "date": "2026-10-07T09:21:09.358Z"
+        },
+        {
           "title": "Fahrkarten für den öffentlichen Verkehr Schwyz: Zonen und Tarife",
           "url": "/de/schweiz-artikel/oev-abonnemente-kanton-schwyz/",
           "excerpt": "Vollständiger Leitfaden zu Abos, Tarifzonen und Ermäßigungen für den öffentlichen Verkehr im Kanton Schwyz.",
           "date": "2026-08-16T13:32:24.597Z"
+        },
+        {
+          "title": "Schulsystem des Kantons Schwyz: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/bildungssystem-kanton-schwyz-anmeldung-und-phasen/",
+          "excerpt": "Informationen über das Schulsystem des Kantons Schwyz inkl. Zyklen und Einschreibungsalter.",
+          "date": "2026-08-16T11:49:12.314Z"
         }
       ],
       "links": [
@@ -353,7 +389,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SZ",
@@ -449,10 +485,22 @@
       ],
       "curatedArticles": [
         {
+          "title": "Einsiedeln : fermetures routières pour le Gallusmarkt 2026",
+          "url": "/fr/articles-schwytz/fermeture-routes-gallusmarkt-schwytz/",
+          "excerpt": "Accès et sortie interdits dans la Hauptstrasse et sur la Sagenplatz de 5.00 à 20.00 le jour du marché. Bruits à partir de lundi à 5.00.",
+          "date": "2026-10-07T09:21:09.358Z"
+        },
+        {
           "title": "Abonnements transports publics Schwytz : zones et tarifs",
           "url": "/fr/articles-suisse/abonnements-transports-schwytz/",
           "excerpt": "Guide complet des abonnements, des zones tarifaires et des réductions pour les transports publics dans le canton de Schwytz.",
           "date": "2026-08-16T13:32:24.597Z"
+        },
+        {
+          "title": "Système scolaire du canton de Schwytz : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-educatif-canton-de-schwytz-inscription-et-phases/",
+          "excerpt": "Informations sur le système scolaire du canton de Schwytz, y compris les cycles et l'âge d'inscription.",
+          "date": "2026-08-16T11:49:12.314Z"
         }
       ],
       "links": [
@@ -465,7 +513,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

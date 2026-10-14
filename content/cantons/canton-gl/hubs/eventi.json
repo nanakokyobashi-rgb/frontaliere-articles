@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "97d41607817c6682d16e967f0b96f3e338bdf20a11d5693af266e57a1b9630ae",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "ba585baf01b0861331c4316c776ca7fc4605eab77363e4d38d2752bcbbe008d7",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -116,7 +116,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Mercato degli affitti in Canton Glarona: canoni medi e diritto di locazione",
+          "url": "/articoli-svizzera/affitti-glarona-2026/",
+          "excerpt": "Gli affitti in Canton Glarona sono aumentati nel 2026. Ecco i canoni medi e le informazioni pratiche per i locatori e gli inquilini.",
+          "date": "2026-08-17T05:35:43.640Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Glarona",
@@ -127,7 +134,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GL",
@@ -226,7 +233,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Rental market in the canton of Glarus: average fees and rental rights",
+          "url": "/en/swiss-articles/rent-glarus-2026/",
+          "excerpt": "Rents in Canton Glarus increased in 2026. Here are the average fees and practical information for landlords and tenants.",
+          "date": "2026-08-17T05:35:43.640Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Glarus",
@@ -237,7 +251,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GL",
@@ -336,7 +350,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Mietmarkt im Kanton Glarus: Durchschnittsmieten und Mietrecht",
+          "url": "/de/schweiz-artikel/miete-glarus-2026/",
+          "excerpt": "Die Mieten im Kanton Glarus stiegen im Jahr 2026. Hier die Durchschnittsmieten und die praktischen Informationen für Vermieter und Mieter.",
+          "date": "2026-08-17T05:35:43.640Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Glarnerland",
@@ -347,7 +368,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GL",
@@ -446,7 +467,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Marché locatif dans le canton de Glaris : loyers moyens et droit de location",
+          "url": "/fr/articles-suisse/location-glaris-2026/",
+          "excerpt": "Les loyers dans le canton de Glaris ont augmenté en 2026. Voici les loyers moyens et les informations pratiques pour les bailleurs et les locataires.",
+          "date": "2026-08-17T05:35:43.640Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Glaris",
@@ -457,7 +485,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "aad9ee0b60b63fdb473e29238ecd6b482e16e4410628c17aceaacbdb2009aaa9",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "bc2f5714e4213294eaf5c918f5dadf57031b5ad61217a4553c27c346bf1c8110",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -135,6 +135,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
+          "url": "/articoli-friburgo/nuovo-piano-ciclabile-friburgo/",
+          "excerpt": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
+          "date": "2026-10-08T15:33:51.044Z"
+        },
+        {
           "title": "Ginevra-Friburgo, una tratta ferroviaria sotto pressione",
           "url": "/articoli-svizzera/linea-ginevra-friburgo-pressione/",
           "excerpt": "Tredici interruzioni sulla linea dall'inizio dell'anno Oltre 150’000 passeggeri e più di 700 treni ogni giorno Cavi incendiati, binari danneggiati e un volatile",
@@ -163,6 +169,12 @@
           "url": "/articoli-svizzera/stadler-rail-friburgo-117-milioni/",
           "excerpt": "Stadler Rail fornirà 13 nuovi treni Flirt Evo ai Trasporti pubblici friburghesi per 117 milioni CHF. Prime consegne a dicembre 2028.",
           "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "Sistema scolastico Canton Friburgo: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-friburgo/",
+          "excerpt": "L'età di iscrizione, i cicli di studi e il calendario scolastico nel Cantone di Friburgo.",
+          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "links": [
@@ -175,7 +187,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "FR",
@@ -293,6 +305,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fribourg: new cycle network plan approved",
+          "url": "/en/fribourg-articles/fribourg-new-bicycle-network-plan/",
+          "excerpt": "RIMU approves the new cantonal cycle plan Consultation: 80 opinions and almost 270 observations Goal: more bikes in daily life by 2042 The plan covers network",
+          "date": "2026-10-08T15:33:51.044Z"
+        },
+        {
           "title": "Geneva–Fribourg, a railway route under pressure",
           "url": "/en/swiss-articles/geneva-fribourg-rail-line-pressure/",
           "excerpt": "Thirteen disruptions on the line since the beginning of the year More than 150’000 passengers and over 700 trains every day Burnt cables, damaged tracks and a bird",
@@ -321,6 +339,12 @@
           "url": "/en/swiss-articles/stadler-rail-fribourg-117-million/",
           "excerpt": "Stadler Rail will supply 13 new Flirt Evo trains to the Fribourg Public Transport for CHF 117 million. First deliveries in December 2028.",
           "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "School system Canton Fribourg: enrolment and cycles",
+          "url": "/en/swiss-articles/school-system-canton-fribourg/",
+          "excerpt": "The age of enrolment, curricula and school calendar in the Canton of Fribourg.",
+          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "links": [
@@ -333,7 +357,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "FR",
@@ -451,6 +475,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Freiburg: Neuer Radnetzplan genehmigt",
+          "url": "/de/freiburg-artikel/freiburg-neuer-velowegnetzplan/",
+          "excerpt": "RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt",
+          "date": "2026-10-08T15:33:51.044Z"
+        },
+        {
           "title": "Genf-Freiburg, eine unter Druck stehende Bahnstrecke",
           "url": "/de/schweiz-artikel/bahnstrecke-genf-freiburg-unter-druck/",
           "excerpt": "Dreizehn Unterbrechungen auf der Strecke seit Jahresbeginn Über 150’000 Fahrgäste und mehr als 700 Züge täglich Verbrannte Kabel, beschädigte Gleise und ein Vogel",
@@ -479,6 +509,12 @@
           "url": "/de/schweiz-artikel/stadler-rail-freiburg-117-millionen/",
           "excerpt": "Stadler Rail wird 13 neue Flirt Evo-Züge für CHF 117 Mio. an den öffentlichen Verkehr in Freiburg liefern. Erste Auslieferungen im Dezember 2028.",
           "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "Schulsystem Kanton Freiburg: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/schulsystem-kanton-freiburg/",
+          "excerpt": "Das Einschreibungsalter, die Studiengänge und der Schulkalender im Kanton Freiburg.",
+          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "links": [
@@ -491,7 +527,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "FR",
@@ -609,6 +645,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fribourg : le nouveau plan du réseau cyclable approuvé",
+          "url": "/fr/articles-fribourg/fribourg-nouveau-plan-reseau-cyclable/",
+          "excerpt": "RIMU approuve le nouveau plan cyclable cantonal Consultation : 80 avis et près de 270 observations Objectif : plus de vélos dans la vie quotidienne d'ici 2042",
+          "date": "2026-10-08T15:33:51.044Z"
+        },
+        {
           "title": "Genève-Fribourg, une ligne ferroviaire sous pression",
           "url": "/fr/articles-suisse/ligne-geneve-fribourg-sous-pression/",
           "excerpt": "Treize interruptions sur la ligne depuis le début de l’année Plus de 150’000 passagers et plus de 700 trains chaque jour Des câbles incendiés, des voies endommagées et un volatile",
@@ -637,6 +679,12 @@
           "url": "/fr/articles-suisse/stadler-rail-fribourg-117-millions/",
           "excerpt": "Stadler Rail fournira 13 nouveaux trains Flirt Evo aux Transports publics fribourgeois pour CHF 117 millions. Premières livraisons en décembre 2028.",
           "date": "2026-08-21T09:43:21.760Z"
+        },
+        {
+          "title": "Système scolaire canton de Fribourg : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-educatif-canton-fribourg/",
+          "excerpt": "L'âge d'inscription, les cursus et le calendrier scolaire dans le canton de Fribourg.",
+          "date": "2026-08-17T23:38:08.486Z"
         }
       ],
       "links": [
@@ -649,7 +697,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "e05f2eb545d496e2fdb929596b9888c04d1a38d2aec8b7a473feaf18b5580529",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "96acdeefc1b77738a6f923bdced8ac96fc4123e206e3d2c3f09affbb2c4eea03",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -124,6 +124,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Comprare casa in Nidvaldo: prezzi, mutuo e fiscalità",
+          "url": "/articoli-svizzera/nidvaldo-comprare-casa-costi-fiscali/",
+          "excerpt": "Acquistare casa in Svizzera richiede di orientarsi tra tre livelli di tassazione, mutuo ipotecario e spese notarili. Scopri come funziona il sistema e come valutare la sostenibilità del prestito.",
+          "date": "2026-09-04T13:14:44.775Z"
+        },
+        {
           "title": "Comprare casa a Nidvaldo: mutui, imposte e procedura",
           "url": "/articoli-svizzera/comprare-casa-nidvaldo-mutuo-guida/",
           "excerpt": "Guida completa all'acquisto abitazione nel Cantone di Nidvaldo: procedura notarile, imposta sui trapassi, spese e criteri di sostenibilità del mutuo ipotecario in Svizzera.",
@@ -158,7 +164,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "NW",
@@ -260,6 +266,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Buying a house in Nidwalden: prices, mortgage and taxation",
+          "url": "/en/swiss-articles/nidwalden-buying-house-costs-taxes/",
+          "excerpt": "Buying a house in Switzerland requires you to navigate between three levels of taxation, mortgage and notary fees. Learn how the system works and how to assess loan sustainability.",
+          "date": "2026-09-04T13:14:44.775Z"
+        },
+        {
           "title": "Buying a house in Nidwalden: mortgages, taxes and procedure",
           "url": "/en/swiss-articles/buy-house-nidwalden-mortgage-guide/",
           "excerpt": "A Complete Guide to Buying a Home in the Canton of Nidwalden: Notary Procedures, Transfer Tax, Fees, and Sustainability Criteria for Mortgages in Switzerland.",
@@ -294,7 +306,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "NW",
@@ -396,6 +408,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Haus kaufen in Nidwalden: Preise, Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/nidwalden-haus-kaufen-kosten-steuern/",
+          "excerpt": "Beim Hauskauf in der Schweiz müssen Sie sich zwischen drei Steuerstufen, Hypothekendarlehen und Notarkosten orientieren. Erfahren Sie, wie das System funktioniert und wie Sie die Tragbarkeit des Darlehens bewerten…",
+          "date": "2026-09-04T13:14:44.775Z"
+        },
+        {
           "title": "Haus kaufen in Nidwalden: Hypotheken, Steuern und Verfahren",
           "url": "/de/schweiz-artikel/haus-kaufen-nidwalden-hypothek-leitfaden/",
           "excerpt": "Umfassender Leitfaden zum Immobilienkauf im Kanton Nidwalden: notarielles Verfahren, Handänderungssteuer, Kosten und Nachhaltigkeitskriterien für Hypothekendarlehen in der Schweiz.",
@@ -430,7 +448,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "NW",
@@ -532,6 +550,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Acheter une maison à Nidwald : prix, hypothèque et fiscalité",
+          "url": "/fr/articles-suisse/nidwald-acheter-maison-couts-fiscalite/",
+          "excerpt": "Acheter une maison en Suisse nécessite de s'orienter entre trois niveaux d'imposition, de prêt hypothécaire et de frais de notaire. Découvrez comment fonctionne le système et comment évaluer la durabilité du prêt.",
+          "date": "2026-09-04T13:14:44.775Z"
+        },
+        {
           "title": "Acheter une maison à Nidwald : hypothèques, taxes et procédure",
           "url": "/fr/articles-suisse/acheter-maison-nidwald-hypotheque-guide/",
           "excerpt": "Guide complet pour l'achat d'un logement dans le canton de Nidwald : procédure notariale, taxe de passage, frais et critères de viabilité du prêt hypothécaire en Suisse.",
@@ -566,7 +590,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

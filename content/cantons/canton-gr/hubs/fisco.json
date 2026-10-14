@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "1003722d4582e372221fdbba95725ca63c3341a7c8c178cd13c4bb43d7a09f6d",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "77242adb64285bb006a3a68ed945f723dc673bd40239d32c5c6a3d3dc0685dee",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -138,6 +138,12 @@
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
+          "title": "Malles Venosta e Grigioni: fiscalita frontaliere 2024",
+          "url": "/articoli-frontaliere/vivere-malles-venosta-lavorare-grigioni/",
+          "excerpt": "Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri modifica tassazione e permessi. Scopri imposta alla fonte, franchigie, AVS e LAMal per chi vive in Val Venosta e lavora in Svizzera.",
+          "date": "2026-09-02T23:22:12.929Z"
+        },
+        {
           "title": "Vivere a Silandro e lavorare in Grigioni: guida fiscale",
           "url": "/articoli-frontaliere/silandro-grigioni-tassazione-permesso-g/",
           "excerpt": "Nuovo Accordo Frontalieri dal 1° gennaio 2024: esenzione €7.500 per vecchi frontalieri, €10.000 per nuovi. Imposta alla fonte in Svizzera, credito d'imposta in Italia. AVS e LPP versati solo in Svizzera.",
@@ -150,22 +156,16 @@
           "date": "2026-08-25T10:25:07.764Z"
         },
         {
+          "title": "Frontaliere Tubre-Grigioni: fiscalità e permesso G",
+          "url": "/articoli-frontaliere/frontaliere-tubre-grigioni-guida/",
+          "excerpt": "Guida completa per chi vive a Tubre e lavora in Grigioni: tassazione alla fonte, ristorni, LAMal, AVS e procedure amministrative per frontalieri.",
+          "date": "2026-08-21T18:17:22.585Z"
+        },
+        {
           "title": "Frontaliere Poggiridenti-Grigioni: tassazione e permessi",
           "url": "/articoli-frontaliere/frontaliere-poggiridenti-grigioni/",
           "excerpt": "Vivere a Poggiridenti e lavorare nei Grigioni: permesso G, imposta alla fonte, Nuovo Accordo Frontalieri 2024 e contributi AVS/LPP. Guida pratica e checklist.",
           "date": "2026-09-06T23:47:41.211Z"
-        },
-        {
-          "title": "Comprare casa Grigioni: mutuo e imposte",
-          "url": "/articoli-svizzera/comprare-casa-grigioni-mutuo-imposte/",
-          "excerpt": "Acquistare nel Grigioni: fondi propri 20-30%, mutuo ipotecario fino all'80%, imposta trasporto variabile per comune, spese notarili 1-2%. Procedura e costi spiegati.",
-          "date": "2026-09-06T03:48:30.725Z"
-        },
-        {
-          "title": "LAMal Grigioni: premi, franchigie e riduzione",
-          "url": "/articoli-svizzera/lam-grigioni-premi-riduzione/",
-          "excerpt": "Scopri come funziona l'assicurazione malattia LAMal nel canton Grigioni, quali franchigie scegliere e come accedere ai sussidi cantonali di riduzione dei premi.",
-          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -194,7 +194,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GR",
@@ -310,6 +310,12 @@
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
+          "title": "Malles Venosta and Graubünden: border tax 2024",
+          "url": "/en/cross-border-articles/living-malles-venosta-working-graubunden/",
+          "excerpt": "From 1 January 2024, the New Frontier Agreement modifies taxation and permits. Discover tax at source, deductibles, AVS and LAMal for those who live in Val Venosta and work in Switzerland.",
+          "date": "2026-09-02T23:22:12.929Z"
+        },
+        {
           "title": "Living in Silandro and working in Graubünden: a tax guide",
           "url": "/en/cross-border-articles/silandro-graubunden-taxation-permit-g/",
           "excerpt": "New Frontier Agreement from 1 January 2024: exemption €7,500 for old frontier workers, €10,000 for new ones. Tax at source in Switzerland, tax credit in Italy. AVS and LPP paid only in Switzerland.",
@@ -322,22 +328,16 @@
           "date": "2026-08-25T10:25:07.764Z"
         },
         {
+          "title": "Frontier ships Tubre-Grisioni: taxation and G permit",
+          "url": "/en/cross-border-articles/cross-border-worker-tubre-graubunden-guide/",
+          "excerpt": "Complete guide for those who live in Tubre and work in Graubünden: taxation at source, refunds, LAMal, AVS and administrative procedures for border workers.",
+          "date": "2026-08-21T18:17:22.585Z"
+        },
+        {
           "title": "Frontiere Poggiridenti-Grisioni: taxation and permits",
           "url": "/en/cross-border-articles/cross-border-poggiridenti-graubunden/",
           "excerpt": "Living in Poggiridenti and working in Graubünden: G permit, tax at source, New Frontier Agreement 2024 and AVS/LPP contributions. Practical guide and checklist.",
           "date": "2026-09-06T23:47:41.211Z"
-        },
-        {
-          "title": "Buying Casa Grisioni: mortgage and taxes",
-          "url": "/en/swiss-articles/buy-house-graubunden-mortgage-taxes/",
-          "excerpt": "Purchase in Graubünden: own funds 20-30%, mortgage loan up to 80%, variable transport tax per municipality, notary fees 1-2%. Explained procedure and costs.",
-          "date": "2026-09-06T03:48:30.725Z"
-        },
-        {
-          "title": "LAMal Grisioni: premiums, deductibles and reduction",
-          "url": "/en/swiss-articles/lamal-graubunden-premiums-reduction/",
-          "excerpt": "Find out how LAMal health insurance works in the canton of Graubünden, which deductibles to choose and how to access cantonal premium reduction subsidies.",
-          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -366,7 +366,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GR",
@@ -482,6 +482,12 @@
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
+          "title": "Mals Vinschgau und Graubünden: Grenzsteuer 2024",
+          "url": "/de/grenzgaenger-artikel/leben-malles-venosta-arbeiten-graubuenden/",
+          "excerpt": "Ab dem 1. Januar 2024 ändert die Neue Grenzgängervereinbarung die Besteuerung und Genehmigungen. Entdecken Sie Quellensteuer, Franchisen, AHV und KVG für diejenigen, die im Vinschgau leben und in der Schweiz arbeiten.",
+          "date": "2026-09-02T23:22:12.929Z"
+        },
+        {
           "title": "Wohnen in Schlanders und Arbeiten in Graubünden: Steuerleitfaden",
           "url": "/de/grenzgaenger-artikel/silandro-graubuenden-besteuerung-grenzgaenger/",
           "excerpt": "Neue Grenzgängervereinbarung ab 1. Januar 2024: Freistellung € 7.500 für alte Grenzgänger, € 10.000 für neue Grenzgänger. Quellensteuer in der Schweiz, Steuergutschrift in Italien. AHV und BVG werden nur in der Schweiz…",
@@ -494,22 +500,16 @@
           "date": "2026-08-25T10:25:07.764Z"
         },
         {
+          "title": "Grenzgänger Tubre-Graubünden: Besteuerung und G-Genehmigung",
+          "url": "/de/grenzgaenger-artikel/grenzgaenger-tubre-graubuenden-leitfaden/",
+          "excerpt": "Vollständiger Leitfaden für diejenigen, die in Taufers leben und in Graubünden arbeiten: Quellensteuer, Rückerstattungen, KVG, AHV und Verwaltungsverfahren für Grenzgänger.",
+          "date": "2026-08-21T18:17:22.585Z"
+        },
+        {
           "title": "Grenzgänger Wohnortstütze-Graubünden: Besteuerung und Bewilligungen",
           "url": "/de/grenzgaenger-artikel/grenzgaenger-poggiridenti-graubuenden/",
           "excerpt": "Wohnen in Poggiridenti und Arbeiten in Graubünden: Bewilligung G, Quellensteuer, Neue Grenzgängervereinbarung 2024 und AHV/BVG-BEITRÄGE. Praktischer Leitfaden und Checkliste.",
           "date": "2026-09-06T23:47:41.211Z"
-        },
-        {
-          "title": "Graubünden Haus kaufen: Hypothek und Steuern",
-          "url": "/de/schweiz-artikel/haus-kaufen-graubuenden-hypothek-steuern/",
-          "excerpt": "Kaufen in Graubünden: Eigenmittel 20-30%, Hypothekendarlehen bis 80%, variable Transportsteuer pro Gemeinde, Notarkosten 1-2%. Vorgehensweise und Kosten erklärt.",
-          "date": "2026-09-06T03:48:30.725Z"
-        },
-        {
-          "title": "KVG Graubünden: Prämien, Franchisen und Reduktionen",
-          "url": "/de/schweiz-artikel/lamal-graubuenden-praemien-reduktion/",
-          "excerpt": "Erfahren Sie, wie die KVG-Krankenversicherung im Kanton Graubünden funktioniert, welche Franchisen Sie wählen und wie Sie auf kantonale Prämienverbilligungsbeiträge zugreifen können.",
-          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -538,7 +538,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GR",
@@ -654,6 +654,12 @@
           "date": "2026-09-02T21:26:24.983Z"
         },
         {
+          "title": "Malles Venosta et Grisons : fiscalité frontalière 2024",
+          "url": "/fr/articles-frontalier/vivre-malles-venosta-travailler-grisons/",
+          "excerpt": "Depuis le 1er janvier 2024, le nouvel accord frontalier modifie la fiscalité et les permis. Découvrez l'impôt à la source, les franchises, l'AVS et la LAMal pour ceux qui vivent dans le Val Venosta et travaillent en…",
+          "date": "2026-09-02T23:22:12.929Z"
+        },
+        {
           "title": "Vivre à Silandro et travailler dans les Grisons : guide fiscal",
           "url": "/fr/articles-frontalier/silandro-grisons-fiscalite-permis-g/",
           "excerpt": "Nouvel accord frontalier à compter du 1er janvier 2024 : exemption de 7 500 € pour les anciens frontaliers, de 10 000 € pour les nouveaux. Impôt à la source en Suisse, crédit d'impôt en Italie. AVS et LPP payés…",
@@ -666,22 +672,16 @@
           "date": "2026-08-25T10:25:07.764Z"
         },
         {
+          "title": "Frontière Tubre-Grisons : fiscalité et permis G",
+          "url": "/fr/articles-frontalier/travailleur-frontalier-tubre-grisons-guide/",
+          "excerpt": "Guide complet pour ceux qui vivent à Tubre et travaillent dans les Grisons : taxation à la source, restaurations, LAMal, AVS et procédures administratives pour les frontaliers.",
+          "date": "2026-08-21T18:17:22.585Z"
+        },
+        {
           "title": "Frontière Poggiridenti-Grisons : fiscalité et permis",
           "url": "/fr/articles-frontalier/frontalier-poggiridenti-grisons/",
           "excerpt": "Vivre à Poggiridenti et travailler dans les Grisons : permis G, impôt à la source, nouvel accord frontalier 2024 et cotisations AVS/LPP. Guide pratique et checklist.",
           "date": "2026-09-06T23:47:41.211Z"
-        },
-        {
-          "title": "Acheter maison Grisons : hypothèque et taxes",
-          "url": "/fr/articles-suisse/acheter-maison-grisons-hypotheque-impots/",
-          "excerpt": "Acheter dans les Grisons : fonds propres 20-30%, prêt hypothécaire jusqu'à 80%, taxe de transport variable par commune, frais de notaire 1-2%. Procédure et coûts expliqués.",
-          "date": "2026-09-06T03:48:30.725Z"
-        },
-        {
-          "title": "LAMal Grisons : primes, franchises et réduction",
-          "url": "/fr/articles-suisse/lamal-grisons-primes-reduction/",
-          "excerpt": "Découvrez comment fonctionne l'assurance maladie LAMal dans le canton des Grisons, quelles franchises choisir et comment accéder aux allocations cantonales de réduction des primes.",
-          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -710,7 +710,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

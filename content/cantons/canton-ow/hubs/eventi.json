@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "c0adb5781ca052ab0b075fb4ade83eef58726b1c58932cd068d5a63b3af32755",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "2907f48fb1b93d3908a5bfe3891c39af8a6d921ed3c57d7ea311830f28f0a37f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,7 +98,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Mercato degli affitti nel Canton Obvaldo: canoni medi e diritto di locazione",
+          "url": "/articoli-svizzera/affitti-obvaldo-cantoni-medi-diritti-locazione/",
+          "excerpt": "Nel Canton Obvaldo, i canoni medi di affitto variano a seconda della zona. Il deposito cauzionale massimo è di 3 mesi di pigione.",
+          "date": "2026-08-16T17:59:22.089Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Obvaldo",
@@ -109,7 +116,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "OW",
@@ -195,7 +202,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Rental market in the canton of Obwalden: average fees and rental rights",
+          "url": "/en/swiss-articles/rentals-obwalden-cantons-average-rights/",
+          "excerpt": "In the Canton of Obwalden, the average rental fees vary depending on the area. The maximum security deposit is 3 months' rent.",
+          "date": "2026-08-16T17:59:22.089Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in Obwalden",
@@ -206,7 +220,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "OW",
@@ -292,7 +306,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Mietmarkt im Kanton Obwalden: Durchschnittsmieten und Mietrecht",
+          "url": "/de/schweiz-artikel/mieten-obwalden-kantone-mittelrechte/",
+          "excerpt": "Im Kanton Obwalden variieren die durchschnittlichen Mieten je nach Gebiet. Die maximale Mietkaution beträgt 3 Monate.",
+          "date": "2026-08-16T17:59:22.089Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen in Obwalden",
@@ -303,7 +324,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "OW",
@@ -389,7 +410,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Marché locatif dans le canton d'Obwald : loyers moyens et droit locatif",
+          "url": "/fr/articles-suisse/locations-obwald-cantons-moyennes-droits/",
+          "excerpt": "Dans le canton d'Obwald, les loyers moyens varient selon les zones. Le dépôt de garantie maximum est de 3 mois de loyer.",
+          "date": "2026-08-16T17:59:22.089Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements à Obwald",
@@ -400,7 +428,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

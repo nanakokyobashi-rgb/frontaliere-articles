@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "f64fb985e5b64ea2f6233b3fcabce5f5341d46b816b658deb876e174ddd0b4da",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "685312f87694ea7ac9e3e3869c956b2fc11bc54b5d8cea981e69c2dd797b894b",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -106,6 +106,12 @@
           "date": "2026-10-12T00:26:51.075Z"
         },
         {
+          "title": "Affitti Svizzera 2026: mercato immobiliare nel canton Zurigo",
+          "url": "/articoli-svizzera/affitti-zurigo-cauzione-disdetta-2026/",
+          "excerpt": "Affitti in Svizzera nel 2026: cauzione massima di tre mesi, disdetta del locatore e contestazione entro 30 giorni, con focus sul canton Zurigo.",
+          "date": "2026-10-02T23:51:27.489Z"
+        },
+        {
           "title": "Elezioni cantonali a Zurigo: guida a calendario e voto",
           "url": "/articoli-svizzera/elezioni-cantonali-zurigo-vademecum/",
           "excerpt": "Guida pratica alle elezioni cantonali nel Cantone di Zurigo: cosa controllare su calendario, modalità di voto, liste e informazioni ufficiali.",
@@ -116,6 +122,24 @@
           "url": "/articoli-svizzera/luna-wedler-golden-eye-award-zurigo/",
           "excerpt": "L'attrice svizzera riceve il premio per essere la prima attrice svizzera a vincere il Golden Eye Award.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Salari e mercato del lavoro a Zurigo: settori e livelli",
+          "url": "/articoli-svizzera/salari-mercato-lavoro-zurigo/",
+          "excerpt": "Analisi approfondita del mercato del lavoro nel Cantone di Zurigo, con focus sui settori chiave, i livelli salariali e le normative in vigore.",
+          "date": "2026-08-12T03:51:57.456Z"
+        },
+        {
+          "title": "Mercato degli affitti nel Cantone di Zurigo: canoni medi e diritto di locazione",
+          "url": "/articoli-svizzera/affitti-zurigo-canoni-medi-e-diritto-di-locazione/",
+          "excerpt": "I canoni medi di affitto nel Cantone di Zurigo sono tra i più alti della Svizzera. Ecco cosa devi sapere sui diritti dei locatari e locatori.",
+          "date": "2026-08-11T22:09:21.494Z"
+        },
+        {
+          "title": "Borse europee in flessione, Zurigo non decolla",
+          "url": "/articoli-frontaliere/borse-zurigo-flessione-2026/",
+          "excerpt": "Le borse europee mostrano una linea comune incerta, mentre Zurigo registra un listino primario in flessione.",
+          "date": "2026-04-28T13:58:44.687Z"
         }
       ],
       "links": [
@@ -128,7 +152,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "ZH",
@@ -222,6 +246,12 @@
           "date": "2026-10-12T00:26:51.075Z"
         },
         {
+          "title": "Swiss Rents 2026: real estate market in the canton of Zurich",
+          "url": "/en/swiss-articles/swiss-rents-zurich-deposit-2026/",
+          "excerpt": "Rents in Switzerland in 2026: maximum security deposit of three months, landlord's termination notice and challenge within 30 days, with a focus on the canton of Zurich.",
+          "date": "2026-10-02T23:51:27.489Z"
+        },
+        {
           "title": "Cantonal elections in Zurich: a guide to the calendar and voting",
           "url": "/en/swiss-articles/zurich-cantonal-elections-voting-guide/",
           "excerpt": "Practical guide to the cantonal elections in the Canton of Zurich: what to check regarding the election schedule, voting methods, lists, and official information.",
@@ -232,6 +262,24 @@
           "url": "/en/swiss-articles/luna-wedler-golden-eye-award-zurich/",
           "excerpt": "The Swiss actress receives the award for being the first Swiss actress to win the Golden Eye Award.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Wages and the labour market in Zurich: sectors and levels",
+          "url": "/en/swiss-articles/salaries-labor-market-canton-zurich/",
+          "excerpt": "In-depth analysis of the labour market in the Canton of Zurich, with a focus on key sectors, wage levels and regulations in force.",
+          "date": "2026-08-12T03:51:57.456Z"
+        },
+        {
+          "title": "Rental market in the canton of Zurich: average rents and tenancy law",
+          "url": "/en/swiss-articles/zurich-rent-prices-and-tenant-rights/",
+          "excerpt": "Average rents in the canton of Zurich are among the highest in Switzerland. Here's what you need to know about tenant and landlord rights.",
+          "date": "2026-08-11T22:09:21.494Z"
+        },
+        {
+          "title": "European markets falter, Zurich struggles",
+          "url": "/en/cross-border-articles/zurich-stock-exchange-decline-2026/",
+          "excerpt": "European markets show a common uncertain trend, while Zurich registers a primary list in decline.",
+          "date": "2026-04-28T13:58:44.687Z"
         }
       ],
       "links": [
@@ -244,7 +292,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "ZH",
@@ -338,6 +386,12 @@
           "date": "2026-10-12T00:26:51.075Z"
         },
         {
+          "title": "Mieten Schweiz 2026: Immobilienmarkt im Kanton Zürich",
+          "url": "/de/schweiz-artikel/mieten-zuerich-kaution-2026/",
+          "excerpt": "Mieten in der Schweiz im Jahr 2026: maximale Kaution von drei Monatsmieten, Kündigung durch den Vermieter und Anfechtung innerhalb von 30 Tagen, mit Fokus auf den Kanton Zürich.",
+          "date": "2026-10-02T23:51:27.489Z"
+        },
+        {
           "title": "Kantonswahlen in Zürich: Kalender- und Abstimmungsleitfaden",
           "url": "/de/schweiz-artikel/zuerich-kantonswahlen-wahlleitfaden/",
           "excerpt": "Praktischer Leitfaden zu den Kantonswahlen im Kanton Zürich: Was ist in Kalender, Abstimmungsmodalitäten, Listen und amtlichen Informationen zu beachten?",
@@ -348,6 +402,24 @@
           "url": "/de/schweiz-artikel/luna-wedler-golden-eye-award-zuerich/",
           "excerpt": "Die Schweizer Schauspielerin erhält den Preis, weil sie als erste Schweizer Schauspielerin den Golden Eye Award gewonnen hat.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Löhne und Arbeitsmarkt in Zürich: Branchen und Niveaus",
+          "url": "/de/schweiz-artikel/gehaelter-arbeitsmarkt-kanton-zuerich/",
+          "excerpt": "Gründliche Analyse des Arbeitsmarktes im Kanton Zürich mit Schwerpunkt auf Schlüsselbranchen, Lohnniveaus und geltenden Vorschriften.",
+          "date": "2026-08-12T03:51:57.456Z"
+        },
+        {
+          "title": "Mietmarkt im Kanton Zürich: Durchschnittsmieten und Mietrecht",
+          "url": "/de/schweiz-artikel/zuerich-mietpreise-und-mieterrechte/",
+          "excerpt": "Die durchschnittlichen Mieten im Kanton Zürich gehören zu den höchsten in der Schweiz. Hier erfahren Sie, was Sie über die Rechte von Mietern und Vermietern wissen müssen.",
+          "date": "2026-08-11T22:09:21.494Z"
+        },
+        {
+          "title": "Europäische Börsen schwächeln, Zürich stagniert",
+          "url": "/de/grenzgaenger-artikel/zuricher-borse-rueckgang-2026/",
+          "excerpt": "Die europäischen Börsen zeigen eine gemeinsame unsichere Tendenz, während Zürich einen primären Kursrückgang verzeichnet.",
+          "date": "2026-04-28T13:58:44.687Z"
         }
       ],
       "links": [
@@ -360,7 +432,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "ZH",
@@ -454,6 +526,12 @@
           "date": "2026-10-12T00:26:51.075Z"
         },
         {
+          "title": "Locations en Suisse 2026 : marché immobilier dans le canton de Zurich",
+          "url": "/fr/articles-suisse/loyers-zurich-caution-2026/",
+          "excerpt": "Locations en Suisse en 2026 : garantie de loyer de trois mois maximum, résiliation par le bailleur et contestation dans les 30 jours, avec un focus sur le canton de Zurich.",
+          "date": "2026-10-02T23:51:27.489Z"
+        },
+        {
           "title": "Élections cantonales à Zurich : guide du calendrier et du vote",
           "url": "/fr/articles-suisse/elections-cantonales-zurich-guide-vote/",
           "excerpt": "Guide pratique des élections cantonales dans le canton de Zurich : ce qu'il faut vérifier concernant le calendrier, les modalités de vote, les listes et les informations officielles.",
@@ -464,6 +542,24 @@
           "url": "/fr/articles-suisse/luna-wedler-golden-eye-award-zurich/",
           "excerpt": "L'actrice suisse reçoit le prix pour être la première actrice suisse à remporter le Golden Eye Award.",
           "date": "2026-09-07T13:05:51.871Z"
+        },
+        {
+          "title": "Salaires et marché du travail à Zurich : secteurs et niveaux",
+          "url": "/fr/articles-suisse/salaires-marche-travail-canton-zurich/",
+          "excerpt": "Analyse approfondie du marché du travail dans le canton de Zurich, en mettant l'accent sur les secteurs clés, les niveaux de salaire et les réglementations en vigueur.",
+          "date": "2026-08-12T03:51:57.456Z"
+        },
+        {
+          "title": "Marché locatif dans le canton de Zurich : loyers moyens et droit des locations",
+          "url": "/fr/articles-suisse/prix-de-location-a-zurich-et-droits-des-locataires/",
+          "excerpt": "Les loyers moyens dans le canton de Zurich comptent parmi les plus élevés de Suisse. Voici ce que vous devez savoir sur les droits des locataires et des propriétaires.",
+          "date": "2026-08-11T22:09:21.494Z"
+        },
+        {
+          "title": "Bourses européennes en baisse, Zurich ne décolle pas",
+          "url": "/fr/articles-frontalier/bourse-zurich-baisse-2026/",
+          "excerpt": "Les bourses européennes affichent une tendance incertaine, tandis que Zurich enregistre un marché primaire en baisse.",
+          "date": "2026-04-28T13:58:44.687Z"
         }
       ],
       "links": [
@@ -476,7 +572,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

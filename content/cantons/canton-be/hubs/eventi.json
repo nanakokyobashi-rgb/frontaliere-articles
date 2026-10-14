@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "3e73cf479ae9ad45ab7d194d66261997912868e4a26b5479e84a26789ff7ab2a",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "fece5e8f83b10eac56bbe5274b7ba85884937fc4c49151446def75d10dbca9d8",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -106,6 +106,12 @@
           "date": "2026-10-10T07:15:47.682Z"
         },
         {
+          "title": "Affitti in Svizzera 2026: mercato e diritti a Berna",
+          "url": "/articoli-svizzera/tutela-inquilini-berna-2026/",
+          "excerpt": "Deposito cauzionale fino a tre mensilità e disdetta del locatore su modulo cantonale: le regole federali per chi cerca casa a Berna nel 2026.",
+          "date": "2026-10-03T01:27:54.646Z"
+        },
+        {
           "title": "Giorni festivi Cantone di Berna: calendario e regole",
           "url": "/articoli-svizzera/festivi-berna-calendario-guida/",
           "excerpt": "Guida al calendario dei giorni festivi riconosciuti dal Cantone di Berna, con verifiche su uffici, comuni, istituzioni e livelli federali.",
@@ -116,6 +122,30 @@
           "url": "/articoli-svizzera/elezioni-berna-guida-voto/",
           "excerpt": "Guida pratica alle elezioni cantonali nel Cantone di Berna: sistema elettorale, calendario, modalità di voto, liste e competenze istituzionali.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Mercato del lavoro Berna: salari, formazione e previdenza",
+          "url": "/articoli-svizzera/mercato-berna-salari-formazione/",
+          "excerpt": "Nessun salario minimo federale svizzero. Scopri orari, contributi AVS/LPP, livelli salariali per formazione e contratti collettivi nel Canton Berna.",
+          "date": "2026-08-22T04:38:04.511Z"
+        },
+        {
+          "title": "Salari e mercato del lavoro nel Canton Berna",
+          "url": "/articoli-svizzera/mercato-lavoro-berna-salari/",
+          "excerpt": "Analisi dei settori, livelli salariali e normative sul lavoro nel Canton Berna. Informazioni su contratti, salario minimo e tutele per i lavoratori.",
+          "date": "2026-08-13T23:20:21.850Z"
+        },
+        {
+          "title": "Mercato degli affitti nel Canton Berna: canoni medi e diritto di locazione",
+          "url": "/articoli-svizzera/mercati-affitti-canton-berna/",
+          "excerpt": "Gli affitti nel Canton Berna sono in costante crescita. Scopri i canoni medi per zona e il diritto di locazione.",
+          "date": "2026-08-13T07:01:34.453Z"
+        },
+        {
+          "title": "Mercati degli affitti nel Cantone di Berna: canoni medi e diritto di locazione",
+          "url": "/articoli-svizzera/mercati-affitti-cantone-berna/",
+          "excerpt": "Il mercato degli affitti nel Cantone di Berna: cosa cambiare nella vita di chi vive o lavora in Svizzera?",
+          "date": "2026-08-13T06:51:24.544Z"
         }
       ],
       "links": [
@@ -128,7 +158,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BE",
@@ -222,6 +252,12 @@
           "date": "2026-10-10T07:15:47.682Z"
         },
         {
+          "title": "Renting in Switzerland 2026: market and rights in Bern",
+          "url": "/en/swiss-articles/swiss-rental-rights-bern-2026/",
+          "excerpt": "Security deposit of up to three months' rent and the landlord's termination notice using a cantonal form: the federal rules for those looking for a home in Bern in 2026.",
+          "date": "2026-10-03T01:27:54.646Z"
+        },
+        {
           "title": "Public holidays in the Canton of Bern: calendar and rules",
           "url": "/en/swiss-articles/bern-public-holidays-calendar-guide/",
           "excerpt": "Guide to the calendar of public holidays recognized by the Canton of Bern, with checks on offices, municipalities, institutions and federal levels.",
@@ -232,6 +268,30 @@
           "url": "/en/swiss-articles/bern-cantonal-elections-voting-guide/",
           "excerpt": "Practical guide to cantonal elections in the Canton of Bern: electoral system, calendar, voting procedures, lists and institutional responsibilities.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Labour market Bern: wages, training and social security",
+          "url": "/en/swiss-articles/bern-labour-market-salaries-training/",
+          "excerpt": "No Swiss federal minimum wage. Discover timetables, AVS/LPP contributions, salary levels for training and collective agreements in the Canton of Bern.",
+          "date": "2026-08-22T04:38:04.511Z"
+        },
+        {
+          "title": "Wages and the labour market in the Canton of Bern",
+          "url": "/en/swiss-articles/labor-market-bern-salaries/",
+          "excerpt": "Analysis of sectors, wage levels and labour regulations in the Canton of Bern. Information on contracts, minimum wage and protections for workers.",
+          "date": "2026-08-13T23:20:21.850Z"
+        },
+        {
+          "title": "Rental market in the Canton of Bern: average fees and rental rights",
+          "url": "/en/swiss-articles/mercato-affitti-canton-bern/",
+          "excerpt": "Rentals in the Canton of Bern are constantly growing. Find out the average rents by area and the rental right.",
+          "date": "2026-08-13T07:01:34.453Z"
+        },
+        {
+          "title": "Rental markets in the Canton of Bern: average fees and rental rights",
+          "url": "/en/swiss-articles/rental-market-canton-of-bern/",
+          "excerpt": "The rental market in the Canton of Bern: what to change in the lives of those who live or work in Switzerland?",
+          "date": "2026-08-13T06:51:24.544Z"
         }
       ],
       "links": [
@@ -244,7 +304,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BE",
@@ -338,6 +398,12 @@
           "date": "2026-10-10T07:15:47.682Z"
         },
         {
+          "title": "Mieten in der Schweiz 2026: Markt und Rechte in Bern",
+          "url": "/de/schweiz-artikel/mietrecht-schweiz-bern-2026/",
+          "excerpt": "Kaution von bis zu drei Monatsmieten und Kündigung durch den Vermieter mit kantonalem Formular: die bundesrechtlichen Regeln für Personen, die 2026 eine Wohnung in Bern suchen.",
+          "date": "2026-10-03T01:27:54.646Z"
+        },
+        {
           "title": "Feiertage im Kanton Bern: Kalender und Regeln",
           "url": "/de/schweiz-artikel/kanton-bern-feiertage-kalender-leitfaden/",
           "excerpt": "Leitfaden zum Kalender der vom Kanton Bern anerkannten Feiertage einschließlich der Prüfung von Ämtern, Gemeinden, Institutionen und Bundesebenen.",
@@ -348,6 +414,30 @@
           "url": "/de/schweiz-artikel/kantonale-wahlen-bern-abstimmungsfuehrer/",
           "excerpt": "Praktischer Leitfaden zu den kantonalen Wahlen im Kanton Bern: Wahlsystem, Zeitplan, Abstimmungsmodalitäten, Listen und institutionelle Kompetenzen.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Arbeitsmarkt Bern: Löhne, Ausbildung und Vorsorge",
+          "url": "/de/schweiz-artikel/arbeitsmarkt-bern-loehne-ausbildung/",
+          "excerpt": "Kein schweizerischer Bundesmindestlohn. Entdecken Sie Fahrpläne, AHV/BVG-Beiträge, Bildungslohnniveaus und Kollektivverträge im Kanton Bern.",
+          "date": "2026-08-22T04:38:04.511Z"
+        },
+        {
+          "title": "Löhne und Arbeitsmarkt im Kanton Bern",
+          "url": "/de/schweiz-artikel/arbeitsmarkt-bern-loehne/",
+          "excerpt": "Branchenanalysen, Lohnniveaus und arbeitsrechtliche Regelungen im Kanton Bern. Informationen zu Verträgen, Mindestlohn und Arbeitnehmerschutz.",
+          "date": "2026-08-13T23:20:21.850Z"
+        },
+        {
+          "title": "Mietmarkt im Kanton Bern: Durchschnittsmieten und Mietrecht",
+          "url": "/de/schweiz-artikel/mercato-affitti-canton-bern/",
+          "excerpt": "Die Mieten im Kanton Bern wachsen stetig. Entdecken Sie die durchschnittlichen Gebühren pro Zone und das Mietrecht.",
+          "date": "2026-08-13T07:01:34.453Z"
+        },
+        {
+          "title": "Mietmärkte im Kanton Bern: Durchschnittsmieten und Mietrecht",
+          "url": "/de/schweiz-artikel/mietmarkt-kanton-bern/",
+          "excerpt": "Der Mietmarkt im Kanton Bern: Was ändert sich im Leben derer, die in der Schweiz leben oder arbeiten?",
+          "date": "2026-08-13T06:51:24.544Z"
         }
       ],
       "links": [
@@ -360,7 +450,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -454,6 +544,12 @@
           "date": "2026-10-10T07:15:47.682Z"
         },
         {
+          "title": "Loyers en Suisse 2026 : marché et droits à Berne",
+          "url": "/fr/articles-suisse/droits-locataire-suisse-berne-2026/",
+          "excerpt": "Garantie locative allant jusqu’à trois mois de loyer et résiliation par le bailleur au moyen d’un formulaire cantonal : les règles fédérales pour les personnes qui cherchent un logement à Berne en 2026.",
+          "date": "2026-10-03T01:27:54.646Z"
+        },
+        {
           "title": "Jours fériés du canton de Berne : calendrier et règles",
           "url": "/fr/articles-suisse/jours-feries-berne-calendrier-guide/",
           "excerpt": "Guide du calendrier des jours fériés reconnus par le canton de Berne, avec des vérifications concernant les bureaux, les communes, les institutions et les niveaux fédéraux.",
@@ -464,6 +560,30 @@
           "url": "/fr/articles-suisse/elections-cantonales-berne-guide-vote/",
           "excerpt": "Guide pratique des élections cantonales dans le canton de Berne : système électoral, calendrier, modalités de vote, listes et compétences institutionnelles.",
           "date": "2026-10-06T04:48:46.950Z"
+        },
+        {
+          "title": "Marché du travail Berne : salaires, formation et prévoyance",
+          "url": "/fr/articles-suisse/marche-travail-berne-salaires-formation/",
+          "excerpt": "Pas de salaire minimum fédéral suisse. Découvrez les horaires, les cotisations AVS/LPP, les niveaux de salaire pour la formation et les conventions collectives dans le canton de Berne.",
+          "date": "2026-08-22T04:38:04.511Z"
+        },
+        {
+          "title": "Salaires et marché du travail dans le canton de Berne",
+          "url": "/fr/articles-suisse/marche-travail-berne-salaires/",
+          "excerpt": "Analyse des secteurs, des niveaux de salaire et de la réglementation du travail dans le canton de Berne. Informations sur les contrats, le salaire minimum et les protections pour les travailleurs.",
+          "date": "2026-08-13T23:20:21.850Z"
+        },
+        {
+          "title": "Marché locatif dans le canton de Berne : loyers moyens et droit locatif",
+          "url": "/fr/articles-suisse/mercato-affitti-canton-berne/",
+          "excerpt": "Les loyers dans le canton de Berne sont en constante augmentation. Découvrez les loyers moyens par zone et le droit de location.",
+          "date": "2026-08-13T07:01:34.453Z"
+        },
+        {
+          "title": "Marchés des loyers dans le canton de Berne : loyers moyens et droit de location",
+          "url": "/fr/articles-suisse/marche-locatif-canton-de-berne/",
+          "excerpt": "Le marché locatif dans le canton de Berne : que changer dans la vie de ceux qui vivent ou travaillent en Suisse ?",
+          "date": "2026-08-13T06:51:24.544Z"
         }
       ],
       "links": [
@@ -476,7 +596,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "761ce803e9847024e36e1df90eee9b1467674a9e82cae8144e8dbab9d88b645d",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "987e30aa3eab5fa3c1103deb4228d8a13f21882a02dc814add576e36c60ba4cf",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -115,10 +115,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
+          "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
+          "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Soletta: Governo chiede correzioni su progetti trasporti",
+          "url": "/articoli-soletta/soletta-progetti-trasporto-governo/",
+          "excerpt": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
           "title": "Abbonamenti trasporti pubblici Canton Soletta zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-soletta-abbonamenti/",
           "excerpt": "Informazioni sui tarifferi e le zone dei trasporti pubblici nel Canton Soletta",
           "date": "2026-08-18T03:49:17.861Z"
+        },
+        {
+          "title": "Sistema scolastico del Cantone di Soletta: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-soletta-iscrizione-e-cicli/",
+          "excerpt": "Cicli, età di iscrizione, calendario scolastico, lingue di insegnamento e passaggio alle scuole medie superiori.",
+          "date": "2026-08-18T02:39:49.282Z"
         }
       ],
       "links": [
@@ -131,7 +149,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SO",
@@ -229,10 +247,27 @@
       ],
       "curatedArticles": [
         {
+          "title": "A5 at Luterbach: four ramps closed in October",
+          "url": "/en/solothurn-articles/luterbach-a5-night-ramps/",
+          "excerpt": "At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Solothurn: Government calls for corrections to transport projects",
+          "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
           "title": "Public transport subscriptions Canton Solothurn zones and fares",
           "url": "/en/swiss-articles/public-transport-canton-solothurn-tickets/",
           "excerpt": "Information on fares and public transport zones in the canton of Solothurn",
           "date": "2026-08-18T03:49:17.861Z"
+        },
+        {
+          "title": "School system of the Canton of Solothurn: enrolment and cycles",
+          "url": "/en/swiss-articles/canton-solothurn-school-system-enrolment-and-cycles/",
+          "excerpt": "Cycles, age of enrollment, school calendar, languages of instruction and transition to high school.",
+          "date": "2026-08-18T02:39:49.282Z"
         }
       ],
       "links": [
@@ -245,7 +280,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SO",
@@ -343,10 +378,27 @@
       ],
       "curatedArticles": [
         {
+          "title": "A5 bei Luterbach: vier Rampen im Oktober gesperrt",
+          "url": "/de/solothurn-artikel/luterbach-a5-nachtsperren/",
+          "excerpt": "Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
+          "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
           "title": "Abonnements für öffentliche Verkehrsmittel Kanton Solothurn Zonen und Tarife",
           "url": "/de/schweiz-artikel/oeffentliche-verkehrsmittel-kanton-solothurn-fahrkarten/",
           "excerpt": "Informationen zu Tarifen und Zonen des öffentlichen Verkehrs im Kanton Solothurn",
           "date": "2026-08-18T03:49:17.861Z"
+        },
+        {
+          "title": "Schulsystem des Kantons Solothurn: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/schulwesen-kanton-solothurn-anmeldung-und-schuljahre/",
+          "excerpt": "Zyklen, Einschreibungsalter, Schulkalender, Unterrichtssprachen und Übergang in die Sekundarstufe.",
+          "date": "2026-08-18T02:39:49.282Z"
         }
       ],
       "links": [
@@ -359,7 +411,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SO",
@@ -457,10 +509,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
+          "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
+          "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
+          "date": "2026-10-08T11:26:57.068Z"
+        },
+        {
+          "title": "Soleure : projets de transport, corrections demandées",
+          "url": "/fr/articles-soleure/soleure-projets-transport-gouvernement/",
+          "excerpt": "Soleure soutient « Verkehr ’45 » et demande des corrections.",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
           "title": "Abonnements transports publics Canton Soleure zones et tarifs",
           "url": "/fr/articles-suisse/transports-publics-canton-de-soleure-abonnements/",
           "excerpt": "Informations sur les tarifs et les zones des transports publics dans le canton de Soleure",
           "date": "2026-08-18T03:49:17.861Z"
+        },
+        {
+          "title": "Système scolaire du canton de Soleure : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-d-enseignement-canton-soleure-inscription-et-cycles/",
+          "excerpt": "Cycles, âge d'inscription, calendrier scolaire, langues d'enseignement et passage au lycée.",
+          "date": "2026-08-18T02:39:49.282Z"
         }
       ],
       "links": [
@@ -473,7 +543,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

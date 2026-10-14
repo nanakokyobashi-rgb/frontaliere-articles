@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "424564fb6a088a9f6f86e1a5e775765494e5a0d80285755d9d6cd0e8c809d9c4",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "ece24cef1334ed8da3d7db37a94fbfec5ad4bb9874f63007b06d858817db05a1",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,7 +98,32 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Mercato degli affitti in Svizzera 2026: San Gallo",
+          "url": "/articoli-svizzera/deposito-modulo-conciliazione/",
+          "excerpt": "Affitti in Svizzera nel 2026: deposito massimo di tre mensilità, conto vincolato e 30 giorni per contestare la disdetta del locatore a San Gallo.",
+          "date": "2026-10-03T03:34:59.466Z"
+        },
+        {
+          "title": "Affitti in Canton San Gallo: diritto di locazione e mercato",
+          "url": "/articoli-svizzera/affitti-san-gallo-diritto-locazione/",
+          "excerpt": "Diritto di locazione uniforme in tutta la Svizzera (CO art. 253 segg.): cauzione max 3 mensilità, contestazione del canone entro 30 giorni.",
+          "date": "2026-08-30T06:09:04.732Z"
+        },
+        {
+          "title": "Siccità estrema: chiude la piscina comunale di Uzwil",
+          "url": "/articoli-svizzera/chiusura-piscina-uzwil-siccita/",
+          "excerpt": "La carenza d'acqua potabile in Svizzera orientale impone restrizioni: Uzwil chiude la piscina per risparmiare fino a 150'000 litri al giorno.",
+          "date": "2026-08-13T21:21:36.698Z"
+        },
+        {
+          "title": "Salari e mercato del lavoro nel Cantone di San Gallo",
+          "url": "/articoli-svizzera/salari-mercato-lavoro-san-gallo/",
+          "excerpt": "San Gallo: economia diversificata tra industria, servizi e commercio, nessun salario minimo federale e salari legati a formazione, esperienza e responsabilità.",
+          "date": "2026-08-30T11:09:27.649Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton San Gallo",
@@ -109,7 +134,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SG",
@@ -195,7 +220,32 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Swiss rental market 2026: St. Gallen",
+          "url": "/en/swiss-articles/rental-deposit-official-form/",
+          "excerpt": "Rentals in Switzerland in 2026: maximum deposit of three months' rent, an escrow account, and 30 days to challenge the landlord's termination notice in St. Gallen.",
+          "date": "2026-10-03T03:34:59.466Z"
+        },
+        {
+          "title": "Rentals in the Canton of St. Gallen: lease and market rights",
+          "url": "/en/swiss-articles/rent-st-gallen-tenancy-law/",
+          "excerpt": "Uniform rental right throughout Switzerland (CO art. 253 et seq.): maximum deposit of 3 months, dispute of the rent within 30 days.",
+          "date": "2026-08-30T06:09:04.732Z"
+        },
+        {
+          "title": "Extreme drought: Uzwil municipal swimming pool closes",
+          "url": "/en/swiss-articles/uzwil-pool-closed-drought/",
+          "excerpt": "Potable water shortages in eastern Switzerland impose restrictions: Uzwil closes the pool to save up to 150,000 litres per day.",
+          "date": "2026-08-13T21:21:36.698Z"
+        },
+        {
+          "title": "Wages and the labour market in the Canton of St Gallen",
+          "url": "/en/swiss-articles/salaries-labour-market-st-gallen/",
+          "excerpt": "St. Gallen: Diversified economy between industry, services and trade, no federal minimum wage and wages related to training, experience and responsibility.",
+          "date": "2026-08-30T11:09:27.649Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of St. Gallen",
@@ -206,7 +256,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SG",
@@ -292,7 +342,32 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Schweizer Mietmarkt 2026: St. Gallen",
+          "url": "/de/schweiz-artikel/mietkaution-formular-schlichtung/",
+          "excerpt": "Mieten in der Schweiz im Jahr 2026: Kaution von höchstens drei Monatsmieten, Sperrkonto und 30 Tage, um die Kündigung des Vermieters in St. Gallen anzufechten.",
+          "date": "2026-10-03T03:34:59.466Z"
+        },
+        {
+          "title": "Mieten im Kanton St. Gallen: Mietrecht und Markt",
+          "url": "/de/schweiz-artikel/mieten-st-gallen-mietrecht/",
+          "excerpt": "Einheitliches Mietrecht in der ganzen Schweiz (OR Art. 253 ff.): Kaution max. 3 Monatsraten, Mietzinsbeanstandung innert 30 Tagen.",
+          "date": "2026-08-30T06:09:04.732Z"
+        },
+        {
+          "title": "Extreme Trockenheit: Das städtische Schwimmbad in Uzwil wird geschlossen",
+          "url": "/de/schweiz-artikel/schwimmbad-uzwil-wegen-trockenheit-geschlossen/",
+          "excerpt": "Der Trinkwassermangel in der Ostschweiz schränkt ein: Uzwil schliesst den Pool, um bis zu 150'000 Liter pro Tag einzusparen.",
+          "date": "2026-08-13T21:21:36.698Z"
+        },
+        {
+          "title": "Löhne und Arbeitsmarkt im Kanton St. Gallen",
+          "url": "/de/schweiz-artikel/loehne-arbeitsmarkt-st-gallen/",
+          "excerpt": "St. Gallen: Diversifizierte Wirtschaft zwischen Industrie, Dienstleistungen und Handel, kein eidgenössischer Mindestlohn und Löhne nach Ausbildung, Erfahrung und Verantwortung.",
+          "date": "2026-08-30T11:09:27.649Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton St. Gallen",
@@ -303,7 +378,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SG",
@@ -389,7 +464,32 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Marché locatif en Suisse 2026 : Saint-Gall",
+          "url": "/fr/articles-suisse/depot-formulaire-conciliation/",
+          "excerpt": "Locations en Suisse en 2026 : dépôt de garantie maximal de trois mois de loyer, compte bloqué et 30 jours pour contester la résiliation du bailleur à Saint-Gall.",
+          "date": "2026-10-03T03:34:59.466Z"
+        },
+        {
+          "title": "Location dans le canton de Saint-Gall : droit de location et marché",
+          "url": "/fr/articles-suisse/locations-saint-gall-droit-bail/",
+          "excerpt": "Droit de location uniforme dans toute la Suisse (CO art. 253 s.) : cautionnement maximum 3 mois, contestation du loyer dans les 30 jours.",
+          "date": "2026-08-30T06:09:04.732Z"
+        },
+        {
+          "title": "Sécheresse extrême : fermeture de la piscine municipale d'Uzwil",
+          "url": "/fr/articles-suisse/piscine-uzwil-fermee-secheresse/",
+          "excerpt": "Le manque d'eau potable en Suisse orientale impose des restrictions : Uzwil ferme la piscine pour économiser jusqu'à 150'000 litres par jour.",
+          "date": "2026-08-13T21:21:36.698Z"
+        },
+        {
+          "title": "Salaires et marché du travail dans le canton de Saint-Gall",
+          "url": "/fr/articles-suisse/salaires-marche-travail-saint-gall/",
+          "excerpt": "Saint-Gall : économie diversifiée entre industrie, services et commerce, pas de salaire minimum fédéral et salaires liés à la formation, à l'expérience et aux responsabilités.",
+          "date": "2026-08-30T11:09:27.649Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Saint-Gall",
@@ -400,7 +500,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

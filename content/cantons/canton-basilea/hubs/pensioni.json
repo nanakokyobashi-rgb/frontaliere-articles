@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "b8c8bc68492f437f69b787c39a965294a8987f703cec3c938e7b5bc39ecf4304",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "a1c8a449b6837de9a41689b13ede950dc73185a919ce5cb325458a86c9ffe0cd",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -168,7 +168,7 @@
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -179,16 +179,22 @@
           "date": "2026-10-01T01:37:16.473Z"
         },
         {
+          "title": "Gestione del primo pilastro AVS nel Cantone di Basilea Campagna",
+          "url": "/articoli-svizzera/avs-prestazioni-complementari-basilea-campagna/",
+          "excerpt": "Il Cantone di Basilea Campagna gestisce il primo pilastro AVS con una cassa di compensazione cantonale, garantendo il minimo vitale.",
+          "date": "2026-09-06T07:48:25.232Z"
+        },
+        {
           "title": "AVS e prestazioni complementari Canton Basilea Campagna",
           "url": "/articoli-svizzera/avs-prestazioni-complementari-basilicacampagna/",
           "excerpt": "Come funziona il primo pilastro svizzero nella cassa di compensazione cantonale. Rendite AVS, lacune contributive e prestazioni per il minimo vitale.",
           "date": "2026-09-02T07:26:36.499Z"
         },
         {
-          "title": "Gestione del primo pilastro AVS nel Cantone di Basilea Campagna",
-          "url": "/articoli-svizzera/avs-prestazioni-complementari-basilea-campagna/",
-          "excerpt": "Il Cantone di Basilea Campagna gestisce il primo pilastro AVS con una cassa di compensazione cantonale, garantendo il minimo vitale.",
-          "date": "2026-09-06T07:48:25.232Z"
+          "title": "AVS e prestazioni complementari: guida Canton Basilea Città",
+          "url": "/articoli-svizzera/avs-prestazioni-complementari-basilea/",
+          "excerpt": "Primo pilastro e cassa di compensazione cantonale: come funziona il calcolo della rendita AVS, colmare le lacune contributive e accedere alle prestazioni complementari per il minimo vitale a Basilea Città.",
+          "date": "2026-08-19T17:14:54.356Z"
         },
         {
           "title": "Secondo pilastro LPP Svizzera guida 2026 canton Basilea",
@@ -197,10 +203,10 @@
           "date": "2026-08-08T21:38:34.424Z"
         },
         {
-          "title": "AVS e prestazioni complementari: guida Canton Basilea Città",
-          "url": "/articoli-svizzera/avs-prestazioni-complementari-basilea/",
-          "excerpt": "Primo pilastro e cassa di compensazione cantonale: come funziona il calcolo della rendita AVS, colmare le lacune contributive e accedere alle prestazioni complementari per il minimo vitale a Basilea Città.",
-          "date": "2026-08-19T17:14:54.356Z"
+          "title": "Terzo pilastro 3a: vantaggi per i frontalieri nel canton Basilea",
+          "url": "/articoli-svizzera/terzo-pilastro-3a-vantaggi-2026-basilea/",
+          "excerpt": "La nuova convenzione doppie imposizioni Italia-Svizzera e il regime transitorio per i frontalieri.",
+          "date": "2026-07-23T05:15:40.596Z"
         }
       ],
       "links": [
@@ -221,7 +227,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -362,7 +368,7 @@
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -373,16 +379,22 @@
           "date": "2026-10-01T01:37:16.473Z"
         },
         {
+          "title": "Management of the first AVS pillar in the Canton of Basel-Country",
+          "url": "/en/swiss-articles/avs-complementary-benefits-basel-countryside/",
+          "excerpt": "The Canton of Basel-Country manages the first AVS pillar with a cantonal compensation fund, guaranteeing the minimum of life.",
+          "date": "2026-09-06T07:48:25.232Z"
+        },
+        {
           "title": "AVS and Supplementary Benefits in the Canton of Basel-Landschaft",
           "url": "/en/swiss-articles/avs-complementary-benefits-basel-landschaft/",
           "excerpt": "How the Swiss First Pillar Works in the Cantonal Compensation Fund. AVS Pensions, Contribution Gaps, and Benefits to Ensure a Minimum Standard of Living.",
           "date": "2026-09-02T07:26:36.499Z"
         },
         {
-          "title": "Management of the first AVS pillar in the Canton of Basel-Country",
-          "url": "/en/swiss-articles/avs-complementary-benefits-basel-countryside/",
-          "excerpt": "The Canton of Basel-Country manages the first AVS pillar with a cantonal compensation fund, guaranteeing the minimum of life.",
-          "date": "2026-09-06T07:48:25.232Z"
+          "title": "AVS and complementary services: guide Canton Basel City",
+          "url": "/en/swiss-articles/avs-complementary-benefits-basel/",
+          "excerpt": "First pillar and cantonal compensation fund: how the calculation of the AVS annuity works, fill contribution gaps and access supplementary benefits for the minimum living wage in Basel-City.",
+          "date": "2026-08-19T17:14:54.356Z"
         },
         {
           "title": "Second pillar LPP Switzerland guide 2026 canton Basel",
@@ -391,10 +403,10 @@
           "date": "2026-08-08T21:38:34.424Z"
         },
         {
-          "title": "AVS and complementary services: guide Canton Basel City",
-          "url": "/en/swiss-articles/avs-complementary-benefits-basel/",
-          "excerpt": "First pillar and cantonal compensation fund: how the calculation of the AVS annuity works, fill contribution gaps and access supplementary benefits for the minimum living wage in Basel-City.",
-          "date": "2026-08-19T17:14:54.356Z"
+          "title": "Third pillar 3a: benefits for border workers in the canton of Basel",
+          "url": "/en/swiss-articles/terzo-pilastro-3a-vantaggi-2026-basel/",
+          "excerpt": "The new Italy-Switzerland double taxation convention and the transitional regime for border workers.",
+          "date": "2026-07-23T05:15:40.596Z"
         }
       ],
       "links": [
@@ -415,7 +427,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -556,7 +568,7 @@
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -567,16 +579,22 @@
           "date": "2026-10-01T01:37:16.473Z"
         },
         {
+          "title": "Verwaltung der ersten AHV-Säule im Kanton Basel-Landschaft",
+          "url": "/de/schweiz-artikel/avs-zusatzleistungen-baselland/",
+          "excerpt": "Der Kanton Basel-Landschaft betreibt die erste AHV-Säule mit einer kantonalen Ausgleichskasse und sichert das Existenzminimum.",
+          "date": "2026-09-06T07:48:25.232Z"
+        },
+        {
           "title": "AHV und Ergänzungsleistungen im Kanton Basel-Landschaft",
           "url": "/de/schweiz-artikel/avs-ergaenzungsleistungen-baselland/",
           "excerpt": "So funktioniert die erste Säule in der kantonalen Ausgleichskasse. AHV-Renten, Beitragslücken und Leistungen zum Existenzminimum.",
           "date": "2026-09-02T07:26:36.499Z"
         },
         {
-          "title": "Verwaltung der ersten AHV-Säule im Kanton Basel-Landschaft",
-          "url": "/de/schweiz-artikel/avs-zusatzleistungen-baselland/",
-          "excerpt": "Der Kanton Basel-Landschaft betreibt die erste AHV-Säule mit einer kantonalen Ausgleichskasse und sichert das Existenzminimum.",
-          "date": "2026-09-06T07:48:25.232Z"
+          "title": "AHV und Ergänzungsleistungen: Führer Kanton Basel-Stadt",
+          "url": "/de/schweiz-artikel/ahv-ergaenzungsleistungen-basel/",
+          "excerpt": "Erste Säule und kantonale Ausgleichskasse: Wie die AHV-Rentenberechnung funktioniert, Beitragslücken schliessen und Ergänzungsleistungen für das Existenzminimum in Basel-Stadt beziehen.",
+          "date": "2026-08-19T17:14:54.356Z"
         },
         {
           "title": "Zweite Säule BVG Schweiz Führer 2026 Kanton Basel",
@@ -585,10 +603,10 @@
           "date": "2026-08-08T21:38:34.424Z"
         },
         {
-          "title": "AHV und Ergänzungsleistungen: Führer Kanton Basel-Stadt",
-          "url": "/de/schweiz-artikel/ahv-ergaenzungsleistungen-basel/",
-          "excerpt": "Erste Säule und kantonale Ausgleichskasse: Wie die AHV-Rentenberechnung funktioniert, Beitragslücken schliessen und Ergänzungsleistungen für das Existenzminimum in Basel-Stadt beziehen.",
-          "date": "2026-08-19T17:14:54.356Z"
+          "title": "Dritte Säule 3a: Vorteile für Grenzgänger im Kanton Basel",
+          "url": "/de/schweiz-artikel/terzo-pilastro-3a-vantaggi-2026-basel/",
+          "excerpt": "Das neue Doppelbesteuerungsabkommen Italien-Schweiz und die Übergangsregelung für Grenzgänger.",
+          "date": "2026-07-23T05:15:40.596Z"
         }
       ],
       "links": [
@@ -609,7 +627,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -750,7 +768,7 @@
               "url": "https://www.blpk.ch/infocenter/news/investitonen-in-ruestung.html"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -761,16 +779,22 @@
           "date": "2026-10-01T01:37:16.473Z"
         },
         {
+          "title": "Gestion du premier pilier AVS dans le canton de Bâle-Campagne",
+          "url": "/fr/articles-suisse/gestion-premier-pilier-avs-bale-campagne/",
+          "excerpt": "Le canton de Bâle-Campagne gère le premier pilier AVS avec une caisse de compensation cantonale, garantissant le minimum vital.",
+          "date": "2026-09-06T07:48:25.232Z"
+        },
+        {
           "title": "AVS et prestations complémentaires dans le canton de Bâle-Campagne",
           "url": "/fr/articles-suisse/avs-prestations-complementaires-bale-campagne/",
           "excerpt": "Comment fonctionne le premier pilier suisse au sein de la caisse de compensation cantonale ? Retraites AVS, lacunes de cotisation et prestations pour le minimum vital.",
           "date": "2026-09-02T07:26:36.499Z"
         },
         {
-          "title": "Gestion du premier pilier AVS dans le canton de Bâle-Campagne",
-          "url": "/fr/articles-suisse/gestion-premier-pilier-avs-bale-campagne/",
-          "excerpt": "Le canton de Bâle-Campagne gère le premier pilier AVS avec une caisse de compensation cantonale, garantissant le minimum vital.",
-          "date": "2026-09-06T07:48:25.232Z"
+          "title": "AVS et prestations complémentaires : guide Canton Bâle-Ville",
+          "url": "/fr/articles-suisse/avs-prestations-complementaires-bale/",
+          "excerpt": "Premier pilier et caisse de compensation cantonale : comment fonctionne le calcul de la rente AVS, combler les lacunes en matière de cotisations et accéder aux prestations complémentaires pour le minimum vital à…",
+          "date": "2026-08-19T17:14:54.356Z"
         },
         {
           "title": "Deuxième pilier LPP Suisse guide 2026 canton Bâle",
@@ -779,10 +803,10 @@
           "date": "2026-08-08T21:38:34.424Z"
         },
         {
-          "title": "AVS et prestations complémentaires : guide Canton Bâle-Ville",
-          "url": "/fr/articles-suisse/avs-prestations-complementaires-bale/",
-          "excerpt": "Premier pilier et caisse de compensation cantonale : comment fonctionne le calcul de la rente AVS, combler les lacunes en matière de cotisations et accéder aux prestations complémentaires pour le minimum vital à…",
-          "date": "2026-08-19T17:14:54.356Z"
+          "title": "Troisième pilier 3a : avantages pour les frontaliers dans le canton de Bâle",
+          "url": "/fr/articles-suisse/terzo-pilastro-3a-vantaggi-2026-bale/",
+          "excerpt": "La nouvelle convention double imposition Italie-Suisse et le régime transitoire pour les frontaliers.",
+          "date": "2026-07-23T05:15:40.596Z"
         }
       ],
       "links": [
@@ -803,7 +827,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

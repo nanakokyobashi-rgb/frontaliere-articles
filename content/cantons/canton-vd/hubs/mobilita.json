@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "c1ff7e28ec061993ff3c7ef8ce42d648089b4fd2aba2ae4dab6e8559516f9955",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "1fedd439d3026f087247549dcbd24518a26b288b014e66bdca50db9c581c395a",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -199,10 +199,34 @@
           "date": "2026-10-11T13:01:23.198Z"
         },
         {
+          "title": "Ferrovia Yverdon-Losanna: ritorno alle 05.40",
+          "url": "/articoli-svizzera/treni-vd-ritorno-normale/",
+          "excerpt": "Tra Yverdon-les-Bains e Losanna si torna alla normalità alle 05.40 Oggi due treni a lunga percorrenza l'ora, con forti rallentamenti Il traffico regionale è",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Ferrovia: ancora disagi tra Yverdon e Losanna",
+          "url": "/articoli-svizzera/disagi-treni-vaud-eclepens/",
+          "excerpt": "La linea Yverdon-les-Bains-Losanna resta interrotta Due treni a lunga percorrenza all'ora, con rallentamenti Regionali e aeroporto di Ginevra: autobus Problemi",
+          "date": "2026-10-10T13:48:28.714Z"
+        },
+        {
           "title": "Abbonamenti trasporti canton Vaud: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-vaud-zone/",
           "excerpt": "Abbonamenti mensili, annuali, metà-prezzo e Generale Abonnement nei trasporti pubblici svizzeri. Come funzionano le zone tariffarie e gli sconti per studenti.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Migros valuta la chiusura a Écublens: 57 posti",
+          "url": "/articoli-svizzera/migros-ecublens-57-posti/",
+          "excerpt": "Migros valuta la chiusura della Centrale Traiteur A rischio 57 impieghi a Écublens La consultazione con il personale è in corso Nessuna decisione finale è stata",
+          "date": "2026-10-13T21:00:56.385Z"
+        },
+        {
+          "title": "Sistema scolastico Canton Vaud: iscrizioni e cicli",
+          "url": "/articoli-svizzera/scuola-canton-vaud-iscrizioni-cicli/",
+          "excerpt": "Guida completa alla scuola dell'obbligo nel Canton Vaud: cicli di studio, età di iscrizione, lingue e passaggio alle medie superiori.",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -235,7 +259,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "VD",
@@ -411,10 +435,34 @@
           "date": "2026-10-11T13:01:23.198Z"
         },
         {
+          "title": "Yverdon-Lausanne railway: return at 05.40",
+          "url": "/en/swiss-articles/vd-trains-normal-service/",
+          "excerpt": "Between Yverdon-les-Bains and Lausanne, service returns to normal at 05.40 Today, two long-distance trains per hour, with major delays Regional traffic is",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Railway: disruptions continue between Yverdon and Lausanne",
+          "url": "/en/swiss-articles/rail-delays-vaud-eclepens/",
+          "excerpt": "The Yverdon-les-Bains-Lausanne line remains disrupted Two long-distance trains per hour, with delays Regional trains and Geneva airport: buses Problems",
+          "date": "2026-10-10T13:48:28.714Z"
+        },
+        {
           "title": "Vaud canton transport subscriptions: zones and rates",
           "url": "/en/swiss-articles/public-transport-subscriptions-vaud-zones/",
           "excerpt": "Monthly, annual, half-price and General Subscriptions in Swiss public transport. How fare zones and student discounts work.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Migros evaluates the closure in Écublens: 57 places",
+          "url": "/en/swiss-articles/migros-ecublens-57-jobs/",
+          "excerpt": "Migros assesses the closure of the Traiteur At-Risk Plant 57 jobs in Écublens Consultation with staff is ongoing No final decision has been",
+          "date": "2026-10-13T21:00:56.385Z"
+        },
+        {
+          "title": "Canton Vaud school system: enrolments and cycles",
+          "url": "/en/swiss-articles/vaud-school-system-enrollment-cycles/",
+          "excerpt": "Complete guide to compulsory education in the Canton of Vaud: study cycles, age of enrollment, languages and transition to high school.",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -447,7 +495,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "VD",
@@ -623,10 +671,34 @@
           "date": "2026-10-11T13:01:23.198Z"
         },
         {
+          "title": "Bahnstrecke Yverdon-Lausanne: Rückkehr zum Normalbetrieb um 05.40 Uhr",
+          "url": "/de/schweiz-artikel/vd-zugverkehr-wieder-normal/",
+          "excerpt": "Zwischen Yverdon-les-Bains und Lausanne kehrt um 05.40 Uhr der Normalbetrieb zurück Heute zwei Fernverkehrszüge pro Stunde, mit starken Verspätungen Der Regionalverkehr ist",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Bahnverkehr: weiterhin Beeinträchtigungen zwischen Yverdon und Lausanne",
+          "url": "/de/schweiz-artikel/bahnstoerung-waadt-eclepens/",
+          "excerpt": "Die Strecke Yverdon-les-Bains-Lausanne bleibt unterbrochen Zwei Fernverkehrszüge pro Stunde, mit Verzögerungen Regionalverkehr und Flughafen Genf: Busse Probleme",
+          "date": "2026-10-10T13:48:28.714Z"
+        },
+        {
           "title": "Verkehrstickets Kanton Waadt: Zonen und Tarife",
           "url": "/de/schweiz-artikel/abos-oepnv-waadt-zonen/",
           "excerpt": "Monats-, Jahres-, Halbtax- und General Abonnement-Abonnements im öffentlichen Verkehr der Schweiz. Wie Tarifzonen und Studentenrabatte funktionieren.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Migros prüft Schließung in Écublens: 57 Plätze",
+          "url": "/de/schweiz-artikel/migros-ecublens-57-stellen/",
+          "excerpt": "Migros prüft Schließung der Zentrale Traiteur A Risk 57 Stellen in Écublens Konsultation des Personals läuft Keine abschließende Entscheidung getroffen",
+          "date": "2026-10-13T21:00:56.385Z"
+        },
+        {
+          "title": "Schulsystem Kanton Waadt: Einschreibungen und Zyklen",
+          "url": "/de/schweiz-artikel/schulsystem-kanton-waadt-anmeldung/",
+          "excerpt": "Vollständiger Leitfaden zur obligatorischen Schule im Kanton Waadt: Studiengänge, Einschreibungsalter, Sprachen und Übergang in die Sekundarstufe II",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -659,7 +731,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "VD",
@@ -836,10 +908,34 @@
           "date": "2026-10-11T13:01:23.198Z"
         },
         {
+          "title": "Ligne ferroviaire Yverdon-Lausanne : retour à la normale à 05.40",
+          "url": "/fr/articles-suisse/trains-vd-retour-normal/",
+          "excerpt": "Entre Yverdon-les-Bains et Lausanne retour à la normale à 05.40 Aujourd’hui deux trains longue distance par heure avec de forts ralentissements Le trafic régional est",
+          "date": "2026-10-10T17:52:43.456Z"
+        },
+        {
+          "title": "Chemin de fer : encore des perturbations entre Yverdon et Lausanne",
+          "url": "/fr/articles-suisse/retards-trains-vaud-eclepens/",
+          "excerpt": "La ligne Yverdon-les-Bains-Lausanne reste interrompue Deux trains longue distance par heure, avec des ralentissements Trains régionaux et aéroport de Genève : bus Problèmes",
+          "date": "2026-10-10T13:48:28.714Z"
+        },
+        {
           "title": "Abonnements transports canton de Vaud : zones et tarifs",
           "url": "/fr/articles-suisse/abonnements-transports-vaud-zones/",
           "excerpt": "Abonnements mensuels, annuels, demi-tarif et Général Abonnement dans les transports publics suisses. Comment fonctionnent les zones tarifaires et les réductions pour les étudiants.",
           "date": "2026-09-05T05:50:23.197Z"
+        },
+        {
+          "title": "Migros évalue la fermeture à Écublens : 57 places",
+          "url": "/fr/articles-suisse/migros-ecublens-57-emplois/",
+          "excerpt": "Migros évalue la fermeture de la Centrale Traiteur À risque 57 emplois à Écublens La consultation avec le personnel est en cours Aucune décision finale n'a été",
+          "date": "2026-10-13T21:00:56.385Z"
+        },
+        {
+          "title": "Système scolaire canton de Vaud : inscriptions et cycles",
+          "url": "/fr/articles-suisse/systeme-scolaire-canton-vaud-inscription/",
+          "excerpt": "Guide complet de l'école obligatoire dans le canton de Vaud : filières d'études, âge d'inscription, langues et passage au lycée.",
+          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "links": [
@@ -872,7 +968,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

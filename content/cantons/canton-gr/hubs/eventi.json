@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "3c8ed41f0ef2468ff46d1326a1f2e1810b3727184847f405fd95f18096f4f87f",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "0f02eeb2f79b2b745f9ed7d3b080ac43327d2ee1c0a3c04eefb360b92362f3f9",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -100,6 +100,36 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lido Grono, apertura confermata per l'estate 2027",
+          "url": "/articoli-grigioni/lido-grono-estate-2027/",
+          "excerpt": "Apertura del Lido Grono confermata per l'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco",
+          "date": "2026-10-10T18:56:18.018Z"
+        },
+        {
+          "title": "Aprire attività nel Canton Grigioni: registro e costi",
+          "url": "/articoli-svizzera/guida-imprenditoriale-grigioni/",
+          "excerpt": "Nel Canton Grigioni il percorso unisce forma giuridica, registro di commercio, capitale minimo, tasse d'iscrizione e obblighi assicurativi.",
+          "date": "2026-10-02T17:40:42.667Z"
+        },
+        {
+          "title": "Salari e mercato del lavoro in Grigioni",
+          "url": "/articoli-svizzera/salari-grigioni-settori-livelli/",
+          "excerpt": "Settori che assumono, livelli salariali per formazione e contratti collettivi nel Canton Grigioni: guida ai meccanismi svizzeri.",
+          "date": "2026-09-02T06:07:54.532Z"
+        },
+        {
+          "title": "Mercato del lavoro nei Grigioni: salari e livelli",
+          "url": "/articoli-svizzera/mercato-lavoro-canton-grigioni/",
+          "excerpt": "Guida completa a struttura salariale, tassazione e contributi sociali nel Canton Grigioni. Stipendi, livelli di formazione e contratti collettivi.",
+          "date": "2026-09-02T04:17:01.793Z"
+        },
+        {
+          "title": "Laboratorio estivo al Museo Moesano: archeologia per ragazzi",
+          "url": "/articoli-frontaliere/laboratorio-estivo-museo-moesano-2026/",
+          "excerpt": "Dal 3 al 7 agosto 2026, bambini e ragazzi di 7-12 anni scoprono i massi cuppellari con un laboratorio teatrale al Museo Moesano di San Vittore",
+          "date": "2026-05-03T19:00:09.428Z"
+        },
+        {
           "title": "MisoXperience 2024: il festival degli sport all'aperto in Mesolcina",
           "url": "/articoli-frontaliere/misoexperience-festival-sport-2024/",
           "excerpt": "Dal 9 al 17 maggio, la valle Mesolcina ospita il MisoXperience Festival con kayak, bouldering e parapendio. Ecco il programma completo",
@@ -128,7 +158,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GR",
@@ -216,6 +246,36 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lido Grono, opening confirmed for summer 2027",
+          "url": "/en/graubunden-articles/grono-pool-opening-2027/",
+          "excerpt": "Opening of Lido Grono confirmed for summer 2027 Construction of the new municipal swimming pool still ongoing Expected costs: approximately 5 million Mayor's announcement",
+          "date": "2026-10-10T18:56:18.018Z"
+        },
+        {
+          "title": "Opening a business in the Canton of Graubünden: register and costs",
+          "url": "/en/swiss-articles/graubunden-business-registration-costs/",
+          "excerpt": "In the canton of Graubünden, the course combines legal form, commercial register, minimum capital, registration fees and insurance obligations.",
+          "date": "2026-10-02T17:40:42.667Z"
+        },
+        {
+          "title": "Wages and the Labor Market in Graubünden",
+          "url": "/en/swiss-articles/salaries-graubunden-sectors-levels/",
+          "excerpt": "Sectors with job openings, salary levels by education level, and collective bargaining agreements in the Canton of Graubünden: a guide to the Swiss system.",
+          "date": "2026-09-02T06:07:54.532Z"
+        },
+        {
+          "title": "Labour market in Graubünden: wages and levels",
+          "url": "/en/swiss-articles/labour-market-canton-graubunden/",
+          "excerpt": "Complete guide to wage structure, taxation and social contributions in the Canton of Graubünden. Salaries, training levels and collective agreements.",
+          "date": "2026-09-02T04:17:01.793Z"
+        },
+        {
+          "title": "Summer lab at Moesano Museum: archaeology for kids",
+          "url": "/en/cross-border-articles/summer-workshop-moesano-museum-2026/",
+          "excerpt": "From 3 to 7 August 2026, children and young people aged 7-12 discover the cup-marked stones with a theatrical workshop at the Moesano Museum in San Vittore",
+          "date": "2026-05-03T19:00:09.428Z"
+        },
+        {
           "title": "Mesolcina Hosts MisoXperience 2024: Outdoor Sports Festival",
           "url": "/en/cross-border-articles/misoexperience-sports-festival-2024/",
           "excerpt": "From May 9 to 17, the Mesolcina valley will host the MisoXperience Festival featuring kayak, bouldering, and paragliding. Here is the complete program.",
@@ -244,7 +304,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GR",
@@ -332,6 +392,36 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lido Grono, Eröffnung für den Sommer 2027 bestätigt",
+          "url": "/de/graubunden-artikel/grono-schwimmbad-2027/",
+          "excerpt": "Eröffnung des Lido Grono für den Sommer 2027 bestätigt Baustelle des neuen kommunalen Schwimmbads weiterhin im Gange Vorgesehene Kosten: etwa 5 Millionen Ankündigung des Bürgermeisters",
+          "date": "2026-10-10T18:56:18.018Z"
+        },
+        {
+          "title": "Geschäftsgründung im Kanton Graubünden: Registrierung und Kosten",
+          "url": "/de/schweiz-artikel/geschaeft-gruenden-graubuenden-kosten/",
+          "excerpt": "Im Kanton Graubünden kombiniert der Kurs Rechtsform, Handelsregister, Mindestkapital, Registrierungsgebühren und Versicherungspflichten.",
+          "date": "2026-10-02T17:40:42.667Z"
+        },
+        {
+          "title": "Löhne und Arbeitsmarkt in Graubünden",
+          "url": "/de/schweiz-artikel/loehne-graubuenden-sektoren-niveaus/",
+          "excerpt": "Branchen mit Stellenangeboten, Lohnniveaus nach Ausbildung und Gesamtarbeitsverträge im Kanton Graubünden: Ein Leitfaden zu den Schweizer Regelungen.",
+          "date": "2026-09-02T06:07:54.532Z"
+        },
+        {
+          "title": "Arbeitsmarkt in Graubünden: Löhne und Niveaus",
+          "url": "/de/schweiz-artikel/arbeitsmarkt-kanton-graubunden/",
+          "excerpt": "Umfassender Leitfaden zu Lohnstruktur, Besteuerung und Sozialversicherungsbeiträgen im Kanton Graubünden. Löhne, Ausbildungsniveaus und Tarifverträge.",
+          "date": "2026-09-02T04:17:01.793Z"
+        },
+        {
+          "title": "Sommerlabor im Moesano-Museum: Archäologie für Kinder",
+          "url": "/de/grenzgaenger-artikel/sommer-workshop-moesano-museum-2026/",
+          "excerpt": "Vom 3. bis 7. August 2026 entdecken Kinder und Jugendliche im Alter von 7 bis 12 Jahren die Cupellari-Steine mit einem Theaterlabor im Moesano-Museum in San Vittore.",
+          "date": "2026-05-03T19:00:09.428Z"
+        },
+        {
           "title": "MisoXperience 2024: Abenteuer in der Mesolcina",
           "url": "/de/grenzgaenger-artikel/misoexperience-sportfestival-2024/",
           "excerpt": "Vom 9. bis 17. Mai gastiert das MisoXperience Festival in der Mesolcina mit Kayak, Bouldern und Paragliding. Hier ist das umfassende Programm",
@@ -360,7 +450,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GR",
@@ -448,6 +538,36 @@
       ],
       "curatedArticles": [
         {
+          "title": "Lido Grono, ouverture confirmée pour l'été 2027",
+          "url": "/fr/articles-grisons/piscine-grono-ete-2027/",
+          "excerpt": "Ouverture du Lido Grono confirmée pour l'été 2027 Chantier de la nouvelle piscine communale encore en cours Coûts prévus : environ 5 millions Annonce du maire",
+          "date": "2026-10-10T18:56:18.018Z"
+        },
+        {
+          "title": "Ouverture d’une entreprise dans le canton des Grisons : registre et coûts",
+          "url": "/fr/articles-suisse/creer-entreprise-grisons-couts/",
+          "excerpt": "Dans le canton des Grisons, le cursus combine la forme juridique, le registre commercial, le capital minimum, les frais d’enregistrement et les obligations d’assurance.",
+          "date": "2026-10-02T17:40:42.667Z"
+        },
+        {
+          "title": "Salaires et marché du travail dans les Grisons",
+          "url": "/fr/articles-suisse/salaires-grisons-secteurs-niveaux/",
+          "excerpt": "Secteurs qui embauchent, niveaux de salaire selon la formation et conventions collectives dans le canton des Grisons : guide des mécanismes suisses.",
+          "date": "2026-09-02T06:07:54.532Z"
+        },
+        {
+          "title": "Marché du travail dans les Grisons : salaires et niveaux",
+          "url": "/fr/articles-suisse/marche-travail-canton-grisons/",
+          "excerpt": "Guide complet de la structure des salaires, de la fiscalité et des cotisations sociales dans le canton des Grisons. Salaires, niveaux de formation et conventions collectives.",
+          "date": "2026-09-02T04:17:01.793Z"
+        },
+        {
+          "title": "Atelier estival au Musée Moesano: archéologie pour enfants",
+          "url": "/fr/articles-frontalier/atelier-dete-musee-moesano-2026/",
+          "excerpt": "Du 3 au 7 août 2026, les enfants de 7 à 12 ans découvrent les pierres cupellaires avec un atelier théâtral au Musée Moesano de San Vittore",
+          "date": "2026-05-03T19:00:09.428Z"
+        },
+        {
           "title": "MisoXperience 2024: le festival des sports à l'air libre en Mesolcina",
           "url": "/fr/articles-frontalier/festival-des-sports-misoexperience-2024/",
           "excerpt": "Du 9 au 17 mai, la vallée de Mesolcina accueille le MisoXperience Festival avec kayak, escalade sur blocs et parapente. Voici le programme complet",
@@ -476,7 +596,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

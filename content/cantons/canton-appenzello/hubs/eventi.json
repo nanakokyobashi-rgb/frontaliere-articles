@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "6ba9d67aa6dcdaeb240c5c9b4578f6ca80177166927493d0b3ee394d2562c930",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "f6617c99f55efc0e0cd93f7dbdf3f007580216dd4121163a85b41a2928847161",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-13T00:02:43.981Z",
+      "updatedAt": "2026-10-13T21:57:18.142Z",
       "keyFacts": 1
     }
   ],
@@ -95,10 +95,29 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Mercato degli affitti in Appenzello Esterno: canoni medi e diritto di locazione",
+          "url": "/articoli-svizzera/mercato-gli-affitti-appenzello-esterno/",
+          "excerpt": "Il mercato degli affitti in Appenzello Esterno segue le norme federali e cantonali. Il deposito cauzionale massimo è determinato dalle leggi cantonali.",
+          "date": "2026-08-21T03:06:42.397Z"
+        },
+        {
+          "title": "Salari e mercato del lavoro in Appenzello Esterno",
+          "url": "/articoli-svizzera/mercato-lavoro-appenzello-esterno/",
+          "excerpt": "Analisi completa: stipendi per livello di formazione, settori che assumono, contratti collettivi, protezioni del lavoratore e salario minimo nei cantoni svizzeri.",
+          "date": "2026-09-02T22:40:23.728Z"
+        },
+        {
+          "title": "Salari e mercato del lavoro in Appenzello Interno",
+          "url": "/articoli-svizzera/salari-appenzello-interno-settori/",
+          "excerpt": "Guida ai livelli salariali per grado di formazione, settori occupazionali, contributi AVS/LPP/LAMal, orari legali e strumenti per calcolare lo stipendio netto nel canton Appenzello Interno.",
+          "date": "2026-08-27T03:26:08.634Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi in Appenzello",
@@ -109,7 +128,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -192,10 +211,29 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Rental market in the External Appenzell: average fees and rental rights",
+          "url": "/en/swiss-articles/appenzell-esterno-rental-market/",
+          "excerpt": "The rental market in Outer Appenzell follows federal and cantonal regulations. The maximum security deposit is determined by cantonal laws.",
+          "date": "2026-08-21T03:06:42.397Z"
+        },
+        {
+          "title": "Wages and the labour market in Appenzell Ausserrhoden",
+          "url": "/en/swiss-articles/labour-market-appenzell-ausserrhoden/",
+          "excerpt": "Comprehensive analysis: salaries by level of training, hiring sectors, collective agreements, worker protections and minimum wage in the Swiss cantons.",
+          "date": "2026-09-02T22:40:23.728Z"
+        },
+        {
+          "title": "Wages and the labour market in Appenzell Interna",
+          "url": "/en/swiss-articles/salaries-appenzell-rhodes-sectors/",
+          "excerpt": "Guide to salary levels by level of training, employment sectors, AVS/LPP/LAMal contributions, legal hours and tools to calculate net salary in the Inner Appenzell canton.",
+          "date": "2026-08-27T03:26:08.634Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in Appenzell",
@@ -206,7 +244,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -289,10 +327,29 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Mietmarkt Appenzell Ausserrhoden: Durchschnittsmieten und Mietrecht",
+          "url": "/de/schweiz-artikel/appenzell-ostern-mietmarkt/",
+          "excerpt": "Der Mietmarkt in Appenzell Ausserrhoden folgt den Vorgaben von Bund und Kantonen. Die maximale Kaution richtet sich nach den kantonalen Gesetzen.",
+          "date": "2026-08-21T03:06:42.397Z"
+        },
+        {
+          "title": "Löhne und Arbeitsmarkt in Appenzell Ausserrhoden",
+          "url": "/de/schweiz-artikel/arbeitsmarkt-appenzell-ausserrhoden/",
+          "excerpt": "Umfassende Analyse: Löhne nach Bildungsniveau, eingestellte Branchen, Tarifverträge, Arbeitnehmerschutz und Mindestlohn in den Schweizer Kantonen.",
+          "date": "2026-09-02T22:40:23.728Z"
+        },
+        {
+          "title": "Löhne und Arbeitsmarkt in Appenzell Innerrhoden",
+          "url": "/de/schweiz-artikel/loehne-appenzell-innerrhoden-bereiche/",
+          "excerpt": "Leitfaden zur Lohnhöhe nach Bildungsabschluss, Berufsfeldern, AHV/BVG/KVG-BEITRÄGEN, gesetzlichen Stundenplänen und Instrumenten zur Berechnung des Nettolohns im Kanton Appenzell Innerrhoden.",
+          "date": "2026-08-27T03:26:08.634Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Appenzellerland",
@@ -303,7 +360,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -386,10 +443,29 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-13T00:02:43.981Z"
+          "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Marché des loyers à Appenzell Externe : loyers moyens et droit de location",
+          "url": "/fr/articles-suisse/appenzell-est-marche-du-locaux/",
+          "excerpt": "Le marché locatif d'Appenzell Extérieur suit les règles fédérales et cantonales. Le dépôt de garantie maximal est déterminé par les lois cantonales.",
+          "date": "2026-08-21T03:06:42.397Z"
+        },
+        {
+          "title": "Salaires et marché du travail à Appenzell Extérieur",
+          "url": "/fr/articles-suisse/marche-du-travail-appenzell-rhodes-exterieures/",
+          "excerpt": "Analyse complète : salaires par niveau de formation, secteurs qu'ils embauchent, conventions collectives, protections du travailleur et salaire minimum dans les cantons suisses.",
+          "date": "2026-09-02T22:40:23.728Z"
+        },
+        {
+          "title": "Salaires et marché du travail à Appenzell",
+          "url": "/fr/articles-suisse/salaires-appenzell-rhodes-secteurs/",
+          "excerpt": "Guide des niveaux de salaire par niveau de formation, secteurs d'emploi, cotisations AVS/LPP/LAMal, horaires légaux et outils de calcul du salaire net dans le canton d'Appenzell.",
+          "date": "2026-08-27T03:26:08.634Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements en Appenzell",
@@ -400,7 +476,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

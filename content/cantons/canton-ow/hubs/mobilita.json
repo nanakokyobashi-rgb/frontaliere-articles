@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "4fe84a99bf414a3c68b881e3e0217b39bc7c2bf33fb94f16f95cf5a94a0c2058",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "9cc697e9f5d915dac5b4568291d7a4b8a00a38ee3350dada0e17d29c139a1a87",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -112,6 +112,12 @@
           "url": "/articoli-svizzera/obvaldo-abbonamenti-trasporti/",
           "excerpt": "Informazioni sugli abbonamenti del Canton Obvaldo, comprese le zone e le tariffe.",
           "date": "2026-08-16T18:43:33.355Z"
+        },
+        {
+          "title": "Sistema scolastico Canton Obvaldo: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-obvaldo-iscrizione-e-cicli/",
+          "excerpt": "I cicli scolastici nel Canton di Obvaldo sono divisi in tre fasi: asilo nido, scuola elementare e scuola secondaria.",
+          "date": "2026-08-16T16:26:07.130Z"
         }
       ],
       "links": [
@@ -124,7 +130,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "OW",
@@ -219,6 +225,12 @@
           "url": "/en/swiss-articles/obwalden-transportation-passes/",
           "excerpt": "Information about the subscriptions of the Canton Obwalden, including zones and rates.",
           "date": "2026-08-16T18:43:33.355Z"
+        },
+        {
+          "title": "Canton Obwalden school system: enrolment and cycles",
+          "url": "/en/swiss-articles/sistema-scolastico-canton-obwalden-iscrizione-e-cicli-en/",
+          "excerpt": "The school cycles in the Canton of Obwalden are divided into three phases: kindergarten, primary school and secondary school.",
+          "date": "2026-08-16T16:26:07.130Z"
         }
       ],
       "links": [
@@ -231,7 +243,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "OW",
@@ -326,6 +338,12 @@
           "url": "/de/schweiz-artikel/obwalden-verkehrskarte/",
           "excerpt": "Informationen zu den Abos des Kantons Obwalden inkl. Zonen und Tarife.",
           "date": "2026-08-16T18:43:33.355Z"
+        },
+        {
+          "title": "Schulsystem Kanton Obwalden: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/sistema-scolastico-canton-obwalden-iscrizione-e-cicli-de/",
+          "excerpt": "Die Schulzyklen im Kanton Obwalden sind in drei Phasen unterteilt: Kindergarten, Grundschule und Sekundarschule.",
+          "date": "2026-08-16T16:26:07.130Z"
         }
       ],
       "links": [
@@ -338,7 +356,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "OW",
@@ -433,6 +451,12 @@
           "url": "/fr/articles-suisse/obwald-titre-de-transport/",
           "excerpt": "Informations sur les abonnements du canton Obwald, y compris les zones et les tarifs.",
           "date": "2026-08-16T18:43:33.355Z"
+        },
+        {
+          "title": "Système scolaire Canton Obwald : inscription et cycles",
+          "url": "/fr/articles-suisse/sistema-scolastico-canton-obwald-iscrizione-e-cicli-fr/",
+          "excerpt": "Les cycles scolaires dans le canton d'Obwald sont divisés en trois phases : crèche, école primaire et école secondaire.",
+          "date": "2026-08-16T16:26:07.130Z"
         }
       ],
       "links": [
@@ -445,7 +469,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

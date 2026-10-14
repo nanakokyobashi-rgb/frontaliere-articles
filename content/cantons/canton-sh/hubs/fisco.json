@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "21ef55c33c92c291756a3758fc7f49269f83b493710eb666ad1b3a3c67c12267",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "bb360e0d77a35da80b67e086d5bfd22ec1a209fa2c263f7bc05650a21702c1a4",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,16 +102,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "Imposte cantonali Sciaffusa: aliquote e deduzioni",
-          "url": "/articoli-svizzera/canton-sciaffusa-aliquote-deduzioni/",
-          "excerpt": "Guida pratica al sistema di imposte cantonali e comunali nel Canton Sciaffusa. Aliquote, deduzioni ammesse, scadenze di dichiarazione e accesso al portale online dell'amministrazione fiscale.",
-          "date": "2026-08-20T04:30:06.520Z"
-        },
-        {
           "title": "Imposta successione e donazione Sciaffusa: aliquote",
           "url": "/articoli-svizzera/imposta-successione-donazione-sciaffusa/",
           "excerpt": "Scopri aliquote, esenzioni per coniuge e discendenti, procedure e termini per l'imposta di successione nel canton Sciaffusa. Guida completa per eredi.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Imposte cantonali Sciaffusa: aliquote e deduzioni",
+          "url": "/articoli-svizzera/canton-sciaffusa-aliquote-deduzioni/",
+          "excerpt": "Guida pratica al sistema di imposte cantonali e comunali nel Canton Sciaffusa. Aliquote, deduzioni ammesse, scadenze di dichiarazione e accesso al portale online dell'amministrazione fiscale.",
+          "date": "2026-08-20T04:30:06.520Z"
         },
         {
           "title": "Comprare casa Sciaffusa: prezzi, mutuo e imposte",
@@ -146,7 +146,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SH",
@@ -231,16 +231,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "Cantonal taxes Schaffhausen: rates and deductions",
-          "url": "/en/swiss-articles/canton-schaffhausen-taxes-deductions/",
-          "excerpt": "Practical guide to the cantonal and municipal tax system in the Canton of Schaffhausen. Rates, allowable deductions, reporting deadlines and access to the online portal of the tax administration.",
-          "date": "2026-08-20T04:30:06.520Z"
-        },
-        {
           "title": "Tax succession and donation Schaffhausen: rates",
           "url": "/en/swiss-articles/shaffhausen-inheritance-donation-tax-rates/",
           "excerpt": "Discover rates, exemptions for spouses and descendants, procedures and terms for inheritance tax in the canton of Schaffhausen. Complete guide for heirs.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Cantonal taxes Schaffhausen: rates and deductions",
+          "url": "/en/swiss-articles/canton-schaffhausen-taxes-deductions/",
+          "excerpt": "Practical guide to the cantonal and municipal tax system in the Canton of Schaffhausen. Rates, allowable deductions, reporting deadlines and access to the online portal of the tax administration.",
+          "date": "2026-08-20T04:30:06.520Z"
         },
         {
           "title": "Buying a Schaffhausen Home: Prices, Mortgage and Taxes",
@@ -275,7 +275,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SH",
@@ -360,16 +360,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "Kantonale Steuern Schaffhausen: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/kanton-schaffhausen-steuersaetze-abzuege/",
-          "excerpt": "Praktischer Leitfaden zum System der Kantons- und Gemeindesteuern im Kanton Schaffhausen. Steuersätze, zulässige Abzüge, Anmeldefristen und Zugang zum Online-Portal der Steuerverwaltung.",
-          "date": "2026-08-20T04:30:06.520Z"
-        },
-        {
           "title": "Erbschafts- und Schenkungssteuer Schaffhausen: Steuersätze",
           "url": "/de/schweiz-artikel/schaffhausen-erbschaft-schenkungsteuer-saetze/",
           "excerpt": "Entdecken Sie Steuersätze, Befreiungen für Ehepartner und Nachkommen, Verfahren und Fristen für die Erbschaftssteuer im Kanton Schaffhausen. Komplette Anleitung für Erben.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Kantonale Steuern Schaffhausen: Steuersätze und Abzüge",
+          "url": "/de/schweiz-artikel/kanton-schaffhausen-steuersaetze-abzuege/",
+          "excerpt": "Praktischer Leitfaden zum System der Kantons- und Gemeindesteuern im Kanton Schaffhausen. Steuersätze, zulässige Abzüge, Anmeldefristen und Zugang zum Online-Portal der Steuerverwaltung.",
+          "date": "2026-08-20T04:30:06.520Z"
         },
         {
           "title": "Haus kaufen Schaffhausen: Preise, Hypothek und Steuern",
@@ -404,7 +404,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SH",
@@ -489,16 +489,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "Impôts cantonaux Schaffhouse : taux et déductions",
-          "url": "/fr/articles-suisse/canton-schaffhouse-impots-deductions/",
-          "excerpt": "Guide pratique du système d'impôts cantonaux et communaux dans le canton de Schaffhouse. Taux, déductions autorisées, délais de déclaration et accès au portail en ligne de l'administration fiscale.",
-          "date": "2026-08-20T04:30:06.520Z"
-        },
-        {
           "title": "Impôt sur les successions et les donations Schaffhouse : taux",
           "url": "/fr/articles-suisse/schaffhouse-impot-succession-donation-taux/",
           "excerpt": "Découvrez les taux, les exonérations pour conjoint et descendants, les procédures et les délais pour l'impôt sur les successions dans le canton de Schaffhouse. Guide complet pour les héritiers.",
           "date": "2026-08-20T22:44:06.580Z"
+        },
+        {
+          "title": "Impôts cantonaux Schaffhouse : taux et déductions",
+          "url": "/fr/articles-suisse/canton-schaffhouse-impots-deductions/",
+          "excerpt": "Guide pratique du système d'impôts cantonaux et communaux dans le canton de Schaffhouse. Taux, déductions autorisées, délais de déclaration et accès au portail en ligne de l'administration fiscale.",
+          "date": "2026-08-20T04:30:06.520Z"
         },
         {
           "title": "Acheter maison Schaffhouse : prix, hypothèque et taxes",
@@ -533,7 +533,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

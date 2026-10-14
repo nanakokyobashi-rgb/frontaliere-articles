@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "86f4a7d8a8bc689398bd16ed9ea7fe92ab487024a822d4bc463b191d30dab2dc",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "83a211294667226435ad326051efa3873adcbf6941e27aeee580e6722a07b84e",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -132,6 +132,18 @@
           "url": "/articoli-svizzera/avs-prestazioni-complementari-grigioni/",
           "excerpt": "Primo pilastro, lacune contributive e accesso alle prestazioni complementari: guida pratica per residenti e contribuenti del Canton Grigioni.",
           "date": "2026-09-02T01:39:16.684Z"
+        },
+        {
+          "title": "AVS Grigioni: cassa e prestazioni complementari",
+          "url": "/articoli-svizzera/grigioni-primo-pilastro-rendita/",
+          "excerpt": "Nel Cantone dei Grigioni, la cassa di compensazione collega calcolo AVS, lacune contributive e prestazioni complementari per il minimo vitale.",
+          "date": "2026-10-01T02:46:48.789Z"
+        },
+        {
+          "title": "Ticino: contributo cantonale per ripristino strutture agricole danneggiate dal nubifragio 2024 nei Grigioni",
+          "url": "/articoli-frontaliere/kebab-case-ticino-nubifragio-grigioni/",
+          "excerpt": "Il governo grigionese concede 511'000 franchi per ripristino strutture agricole danneggiate dal nubifragio del 2024 nella regione Grigioni.",
+          "date": "2026-03-20T21:58:42.386Z"
         }
       ],
       "links": [
@@ -152,7 +164,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "GR",
@@ -262,6 +274,18 @@
           "url": "/en/swiss-articles/avs-complementary-benefits-canton-graubunden/",
           "excerpt": "First pillar, contribution gaps and access to supplementary benefits: a practical guide for residents and taxpayers of the Canton of Graubünden.",
           "date": "2026-09-02T01:39:16.684Z"
+        },
+        {
+          "title": "AVS Graubünden: Pension Fund and Supplemental Benefits",
+          "url": "/en/swiss-articles/graubunden-ahv-supplementary-benefits/",
+          "excerpt": "In the canton of Graubünden, the compensation office links AHV calculations, contribution gaps and supplementary benefits for the minimum subsistence.",
+          "date": "2026-10-01T02:46:48.789Z"
+        },
+        {
+          "title": "Ticino: Federal Contribution for Restoration of Agrarian Structures Damaged by the 2024 Flood in the Graubünden Region",
+          "url": "/en/cross-border-articles/graubunden-flood-ticino/",
+          "excerpt": "The Graubünden government grants 511,000 Swiss francs for the restoration of agrarian structures damaged by the 2024 flood in the Graubünden region.",
+          "date": "2026-03-20T21:58:42.386Z"
         }
       ],
       "links": [
@@ -282,7 +306,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "GR",
@@ -392,6 +416,18 @@
           "url": "/de/schweiz-artikel/avs-ergaenzungsleistungen-kanton-graubuenden/",
           "excerpt": "Erste Säule, Beitragslücken und Zugang zu Ergänzungsleistungen: Praktischer Leitfaden für Bewohner und Steuerpflichtige des Kantons Graubünden.",
           "date": "2026-09-02T01:39:16.684Z"
+        },
+        {
+          "title": "AHV Graubünden: Kasse und Zusatzleistungen",
+          "url": "/de/schweiz-artikel/graubuenden-ahv-ergaenzungsleistungen/",
+          "excerpt": "Im Kanton Graubünden vereint die Ausgleichskasse die Berechnung der AHV, Beitragslücken und Ergänzungsleistungen zum Existenzminimum.",
+          "date": "2026-10-01T02:46:48.789Z"
+        },
+        {
+          "title": "Tessin: Beitrag des Kantons für die Wiederherstellung von landwirtschaftlichen Strukturen, die durch das Unwetter 2024 in der Region Graubünden beschädigt wurden",
+          "url": "/de/grenzgaenger-artikel/graubunden-überschwemmung-tessin/",
+          "excerpt": "Die Regierung von Graubünden gewährt einen kantonalen Beitrag von 511.000 Franken für die Wiederherstellung von landwirtschaftlichen Strukturen, die durch das Unwetter 2024 in der Region Graubünden beschädigt wurden.",
+          "date": "2026-03-20T21:58:42.386Z"
         }
       ],
       "links": [
@@ -412,7 +448,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "GR",
@@ -522,6 +558,18 @@
           "url": "/fr/articles-suisse/avs-prestations-complementaires-canton-grisons/",
           "excerpt": "Premier pilier, lacunes en matière de cotisations et accès aux prestations complémentaires : guide pratique pour les résidents et les contribuables du canton des Grisons.",
           "date": "2026-09-02T01:39:16.684Z"
+        },
+        {
+          "title": "AHV Grisons : Assurance complémentaire et avantages sociaux",
+          "url": "/fr/articles-suisse/grisons-avs-caisse-prestations-complementaires/",
+          "excerpt": "Dans le canton des Grisons, le bureau de compensation relie les calculs de la valeur de la vie, les écarts de contributions et les prestations complémentaires pour la subsistance minimale.",
+          "date": "2026-10-01T02:46:48.789Z"
+        },
+        {
+          "title": "Tessin: contribution cantonale pour la remise en état des structures agricoles endommagées par l'orage de 2024 dans la région des Grisons",
+          "url": "/fr/articles-frontalier/inondation-grisons-tessin/",
+          "excerpt": "Le gouvernement grison accorde 511 000 francs pour la remise en état des structures agricoles endommagées par l'orage de 2024 dans la région des Grisons.",
+          "date": "2026-03-20T21:58:42.386Z"
         }
       ],
       "links": [
@@ -542,7 +590,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

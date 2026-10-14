@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "922c42872da1f61208cdcf4b9254e9304c77889334acf041236d26259ed0c91e",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "8d96fc0d11ba7945be8f27f31d1ee845cb15fdbeeba32e73ff8f596f1ffad61e",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -126,7 +126,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salari e mercato del lavoro Neuchâtel: settori e formazione",
+          "url": "/articoli-svizzera/neuchatel-salari-settori-formazione/",
+          "excerpt": "Stipendi, settori che assumono e contratti collettivi nel Cantone di Neuchâtel: come funziona il sistema svizzero di salari per grado di formazione e contributi.",
+          "date": "2026-09-07T06:38:33.886Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Neuchâtel",
@@ -137,7 +144,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "NE",
@@ -246,7 +253,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Wages and the labour market Neuchâtel: sectors and training",
+          "url": "/en/swiss-articles/neuchatel-salaries-sectors-education/",
+          "excerpt": "Salaries, hiring sectors and collective agreements in the Canton of Neuchâtel: how the Swiss system of salaries by level of training and contributions works.",
+          "date": "2026-09-07T06:38:33.886Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Neuchâtel",
@@ -257,7 +271,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "NE",
@@ -366,7 +380,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Löhne und Arbeitsmarkt Neuenburg: Branchen und Ausbildung",
+          "url": "/de/schweiz-artikel/neuenburg-loehne-sektoren-bildung/",
+          "excerpt": "Löhne, Einstellungsbereiche und Kollektivverträge im Kanton Neuenburg: Wie funktioniert das schweizerische Lohnsystem nach Bildungsgrad und Beiträgen?",
+          "date": "2026-09-07T06:38:33.886Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Neuenburg",
@@ -377,7 +398,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "NE",
@@ -486,7 +507,14 @@
           "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salaires et marché du travail Neuchâtel : secteurs et formation",
+          "url": "/fr/articles-suisse/neuchatel-salaires-secteurs-formation/",
+          "excerpt": "Salaires, secteurs qu'ils embauchent et conventions collectives dans le canton de Neuchâtel : comment fonctionne le système suisse de salaires par niveau de formation et cotisations.",
+          "date": "2026-09-07T06:38:33.886Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Neuchâtel",
@@ -497,7 +525,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "38348dca463573e8e86e5c92fbf4b399c1d32416b8bcc020d8a8f940a765e3c5",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "8cc13bef2cdb35818a38b5f8fa4acf819a8ee012ac29e46c1ec3e70072fe61d2",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -156,12 +156,6 @@
           "url": "/articoli-svizzera/imposte-cantoni-friburgo-aliquote-deduzioni/",
           "excerpt": "L'aliquota media nel Canton Friburgo è del 12,7% e le deduzioni ammesse sono del 20,5%.",
           "date": "2026-08-17T18:09:37.236Z"
-        },
-        {
-          "title": "Premi LAMal Friburgo: franchigie e sussidi 2026",
-          "url": "/articoli-svizzera/premi-lamal-friburgo-sussidi/",
-          "excerpt": "Franchigie LAMal nel Canton Friburgo, come scegliere, procedure per accedere alla riduzione di premio e scadenze ufficiali 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
         }
       ],
       "links": [
@@ -186,7 +180,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "FR",
@@ -319,12 +313,6 @@
           "url": "/en/swiss-articles/cantonal-taxes-in-the-canton-of-fribourg-rates-and-deductions/",
           "excerpt": "The average rate in the Canton of Fribourg is 12.7% and the allowable deductions are 20.5%.",
           "date": "2026-08-17T18:09:37.236Z"
-        },
-        {
-          "title": "KVG premiums Fribourg: deductibles and subsidies 2026",
-          "url": "/en/swiss-articles/health-insurance-premiums-fribourg-subsidies/",
-          "excerpt": "KVG deductibles in the Canton of Fribourg, how to choose, procedures for accessing the premium reduction and official deadlines 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
         }
       ],
       "links": [
@@ -349,7 +337,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "FR",
@@ -482,12 +470,6 @@
           "url": "/de/schweiz-artikel/imposten-kantonen-freiburg-aliquoten-abzuge/",
           "excerpt": "Der durchschnittliche Steuersatz im Kanton Freiburg beträgt 12,7% und die zulässigen Abzüge 20,5%.",
           "date": "2026-08-17T18:09:37.236Z"
-        },
-        {
-          "title": "KVG-Prämien Freiburg: Selbstbeteiligungen und Subventionen 2026",
-          "url": "/de/schweiz-artikel/praemien-krankenversicherung-freiburg-subventionen/",
-          "excerpt": "KVG-Franchisen im Kanton Freiburg, wie man wählt, Verfahren für den Zugang zur Prämienverbilligung und offizielle Fristen 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
         }
       ],
       "links": [
@@ -512,7 +494,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "FR",
@@ -646,12 +628,6 @@
           "url": "/fr/articles-suisse/impostes-cantons-fribourg-aliquots-deductions/",
           "excerpt": "Le taux moyen dans le canton de Fribourg est de 12,7 % et les déductions admises sont de 20,5 %.",
           "date": "2026-08-17T18:09:37.236Z"
-        },
-        {
-          "title": "Primes LAMal Fribourg : franchises et subventions 2026",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-fribourg-subventions/",
-          "excerpt": "Les franchises KVG dans le canton de Fribourg, comment choisir, les procédures pour accéder à la réduction de prime et les délais officiels 2026.",
-          "date": "2026-09-01T00:44:12.131Z"
         }
       ],
       "links": [
@@ -676,7 +652,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

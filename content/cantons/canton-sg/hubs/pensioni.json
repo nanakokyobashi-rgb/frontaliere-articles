@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T10:56:00.728Z",
-  "contentHash": "9accd411f4e775096487609cc54d4521722fb0f6fc46362960d08872eb4d41ad",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "c248a4f9404531037c58a1385d317c88e431658903a3fa9207257d701293256a",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -156,7 +156,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -177,6 +177,12 @@
           "url": "/articoli-svizzera/avs-prestazioni-complementari-san-gallo-cassa/",
           "excerpt": "Cassa AVS e ufficio PC sono due enti distinti: ecco come funziona il primo pilastro a San Gallo e quando chiedere le prestazioni complementari.",
           "date": "2026-08-30T06:52:34.422Z"
+        },
+        {
+          "title": "Terzo pilastro 3a svizzero: vantaggi 2026 nel Canton San Gallo",
+          "url": "/articoli-svizzera/terzo-pilastro-3a-vantaggi-2026-canton-san-gallo/",
+          "excerpt": "La convenzione doppie imposizioni Italia-Svizzera è stata firmata il 9 marzo 1976. I nuovi frontalieri hanno una franchigia di €10.000.",
+          "date": "2026-07-23T04:10:42.678Z"
         }
       ],
       "links": [
@@ -197,7 +203,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "SG",
@@ -326,7 +332,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -347,6 +353,12 @@
           "url": "/en/swiss-articles/avs-supplementary-benefits-st-gallen-fund/",
           "excerpt": "AVS cashier and PC office are two separate entities: this is how the first pillar works in St. Gallen and when to ask for complementary services.",
           "date": "2026-08-30T06:52:34.422Z"
+        },
+        {
+          "title": "Swiss 3rd Pillar: Advantages 2026 in the Canton of St. Gallen",
+          "url": "/en/swiss-articles/third-pillar-3a-swiss-benefits-2026-canton-sankt-gallen/",
+          "excerpt": "The Italy-Switzerland double taxation agreement was signed on 9 March 1976. The new frontier workers have a deductible of €10,000.",
+          "date": "2026-07-23T04:10:42.678Z"
         }
       ],
       "links": [
@@ -367,7 +379,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "SG",
@@ -496,7 +508,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -517,6 +529,12 @@
           "url": "/de/schweiz-artikel/ahv-ergaenzungsleistungen-st-gallen-kasse/",
           "excerpt": "AHV-Kasse und PC-Büro sind zwei getrennte Körperschaften: So funktioniert die erste Säule in St. Gallen und wann Sie Ergänzungsleistungen beantragen sollten.",
           "date": "2026-08-30T06:52:34.422Z"
+        },
+        {
+          "title": "Dritte Säule 3a Schweiz: Vorteile 2026 im Kanton St. Gallen",
+          "url": "/de/schweiz-artikel/dritter-stutzpfeiler-3a-schweizer-vorteile-2026-kanton-sankt-gallen/",
+          "excerpt": "Das Doppelbesteuerungsabkommen Italien-Schweiz wurde am 9. März 1976 unterzeichnet. Die neuen Grenzgänger haben eine Selbstbeteiligung von 10.000 €.",
+          "date": "2026-07-23T04:10:42.678Z"
         }
       ],
       "links": [
@@ -537,7 +555,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "SG",
@@ -666,7 +684,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -687,6 +705,12 @@
           "url": "/fr/articles-suisse/avs-prestations-complementaires-saint-gall-caisse/",
           "excerpt": "Caisse AVS et bureau PC sont deux entités distinctes : voici comment fonctionne le premier pilier à Saint-Gall et quand demander les prestations complémentaires.",
           "date": "2026-08-30T06:52:34.422Z"
+        },
+        {
+          "title": "Troisième pilier 3a suisse : avantages 2026 dans le canton de Saint-Gall",
+          "url": "/fr/articles-suisse/troisieme-pilier-3a-suisse-avantages-2026-canton-saint-gall/",
+          "excerpt": "La convention double imposition Italie-Suisse a été signée le 9 mars 1976. Les nouveaux frontaliers bénéficient d'une franchise de 10 000 € .",
+          "date": "2026-07-23T04:10:42.678Z"
         }
       ],
       "links": [
@@ -707,7 +731,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T10:56:00.728Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

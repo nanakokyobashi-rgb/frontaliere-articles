@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "9177c47b0a755420da2aba6e70e99734d2fe31b3dd074a43a26ab0df95072a2f",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "8b89c0f54bdad6c26e4f54e12dedb1cef30bd96e1b6451ff00a127c9b46c6578",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -189,16 +189,16 @@
           "date": "2026-08-24T14:42:33.929Z"
         },
         {
-          "title": "Imposta di successione e donazione: Basilea Campagna",
-          "url": "/articoli-svizzera/imposta-successione-donazione-basilea-campagna/",
-          "excerpt": "Come funzionano le imposte su successioni e donazioni nel cantone di Basilea Campagna: aliquote, esenzioni per familiari e procedure di dichiarazione.",
-          "date": "2026-08-24T17:56:22.422Z"
-        },
-        {
           "title": "Imposte cantonali e comunali in Basilea Città: aliquote e deduzioni",
           "url": "/articoli-svizzera/imposte-cantonali-basilea-citta-aliquote/",
           "excerpt": "Le imposte cantonali e comunali in Basilea Città sono tra le più alte della Svizzera.",
           "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Imposta di successione e donazione: Basilea Campagna",
+          "url": "/articoli-svizzera/imposta-successione-donazione-basilea-campagna/",
+          "excerpt": "Come funzionano le imposte su successioni e donazioni nel cantone di Basilea Campagna: aliquote, esenzioni per familiari e procedure di dichiarazione.",
+          "date": "2026-08-24T17:56:22.422Z"
         },
         {
           "title": "Imposta cantonale confronto Svizzera 2026 canton Basilea",
@@ -239,7 +239,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -406,16 +406,16 @@
           "date": "2026-08-24T14:42:33.929Z"
         },
         {
-          "title": "Inheritance and Donation Tax: Basel Countryside",
-          "url": "/en/swiss-articles/inheritance-donation-tax-basel-landschaft/",
-          "excerpt": "How inheritance and gift taxes work in the canton of Basel-Country: rates, family exemptions and reporting procedures.",
-          "date": "2026-08-24T17:56:22.422Z"
-        },
-        {
           "title": "Cantonal and municipal taxes in Basel City: rates and deductions",
           "url": "/en/swiss-articles/cantonal-and-municipal-taxes-in-basel-city-rates-and-deductions/",
           "excerpt": "Cantonal and municipal taxes in Basel City are among the highest in Switzerland.",
           "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Inheritance and Donation Tax: Basel Countryside",
+          "url": "/en/swiss-articles/inheritance-donation-tax-basel-landschaft/",
+          "excerpt": "How inheritance and gift taxes work in the canton of Basel-Country: rates, family exemptions and reporting procedures.",
+          "date": "2026-08-24T17:56:22.422Z"
         },
         {
           "title": "Cantonal tax comparison Switzerland 2026 canton Basel",
@@ -456,7 +456,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -623,16 +623,16 @@
           "date": "2026-08-24T14:42:33.929Z"
         },
         {
-          "title": "Erbschafts- und Schenkungssteuer: Basel-Landschaft",
-          "url": "/de/schweiz-artikel/erbschafts-donationsteuer-baselland/",
-          "excerpt": "Wie funktionieren Erbschafts- und Schenkungssteuern im Kanton Basel-Landschaft: Steuersätze, Steuerbefreiungen für Angehörige und Meldeverfahren.",
-          "date": "2026-08-24T17:56:22.422Z"
-        },
-        {
           "title": "Kantons- und Gemeindesteuern in Basel-Stadt: Steuersätze und Abzüge",
           "url": "/de/schweiz-artikel/steuern-kanton-basel-stadt-besteuerung/",
           "excerpt": "Die Kantons- und Gemeindesteuern in Basel-Stadt gehören zu den höchsten der Schweiz.",
           "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Erbschafts- und Schenkungssteuer: Basel-Landschaft",
+          "url": "/de/schweiz-artikel/erbschafts-donationsteuer-baselland/",
+          "excerpt": "Wie funktionieren Erbschafts- und Schenkungssteuern im Kanton Basel-Landschaft: Steuersätze, Steuerbefreiungen für Angehörige und Meldeverfahren.",
+          "date": "2026-08-24T17:56:22.422Z"
         },
         {
           "title": "Kantonssteuer Vergleich Schweiz 2026 Kanton Basel",
@@ -673,7 +673,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -840,16 +840,16 @@
           "date": "2026-08-24T14:42:33.929Z"
         },
         {
-          "title": "Droits de succession et de donation : Bâle-Campagne",
-          "url": "/fr/articles-suisse/impot-succession-donation-bale-campagne/",
-          "excerpt": "Comment fonctionnent les impôts sur les successions et les donations dans le canton de Bâle-Campagne : taux, exonérations pour les membres de la famille et procédures de déclaration.",
-          "date": "2026-08-24T17:56:22.422Z"
-        },
-        {
           "title": "Impôts cantonaux et communaux à Bâle-Ville : taux et déductions",
           "url": "/fr/articles-suisse/impots-canton-de-bale-ville-imposition/",
           "excerpt": "Les impôts cantonaux et communaux à Bâle-Ville sont parmi les plus élevés de Suisse.",
           "date": "2026-08-18T06:47:30.240Z"
+        },
+        {
+          "title": "Droits de succession et de donation : Bâle-Campagne",
+          "url": "/fr/articles-suisse/impot-succession-donation-bale-campagne/",
+          "excerpt": "Comment fonctionnent les impôts sur les successions et les donations dans le canton de Bâle-Campagne : taux, exonérations pour les membres de la famille et procédures de déclaration.",
+          "date": "2026-08-24T17:56:22.422Z"
         },
         {
           "title": "Impôt cantonal comparaison Suisse 2026 canton Bâle",
@@ -890,7 +890,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

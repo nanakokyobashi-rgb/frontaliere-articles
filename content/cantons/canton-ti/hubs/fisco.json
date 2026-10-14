@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "fisco",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "0cef07af28d62f57a88b4f78b6b7c820b13ef29039e3f764c2a07b786aa225fe",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "dd166889143e3e876febe4c3312b6e1aec54a99563df8ebdbfc0212ea8e64358",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,16 +108,16 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
-          "title": "Come calcolare imposta fonte Ticino",
-          "url": "/articoli-frontaliere/calcolare-imposta-fonte-ticino/",
-          "excerpt": "Guida pratica al calcolo dell'imposta alla fonte per frontalieri Ticino-Italia: aliquote, franchigie 2024, credito d'imposta nel 730 e simulatore interattivo.",
-          "date": "2026-08-22T08:37:30.365Z"
+          "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
+          "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
+          "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
+          "date": "2026-10-08T11:44:40.237Z"
         },
         {
-          "title": "Rimborso imposta LPP bloccato per i frontalieri",
-          "url": "/articoli-frontaliere/rimborso-imposta-lpp-2024/",
-          "excerpt": "Dal 2024 il Canton Ticino non rimborsa più l'imposta alla fonte del 7% sul capitale LPP, costringendo i frontalieri a pagare anche l'imposta sostitutiva italiana del 5%.",
-          "date": "2026-09-23T10:40:11.448Z"
+          "title": "Preventivo 2027: disavanzo e conti pubblici in Ticino",
+          "url": "/articoli-svizzera/preventivo-2027-conti-pubblici/",
+          "excerpt": "Il Preventivo 2027 del Cantone prevede un disavanzo di 98,5 milioni. Tra burocrazia, personale e fisco, ecco le reazioni e il dibattito a Bellinzona.",
+          "date": "2026-10-01T04:47:59.002Z"
         },
         {
           "title": "Incentivo fiscale per acquisti locali in Ticino: proposta",
@@ -126,10 +126,10 @@
           "date": "2026-09-25T14:19:43.225Z"
         },
         {
-          "title": "Imposta alla fonte 2026: aliquote Ticino",
-          "url": "/articoli-frontaliere/aliquote-imposta-fonte-ticino-2026/",
-          "excerpt": "Come funziona la quellensteuer nel Cantone Ticino? Scopri le aliquote 2026, gli abbuoni, la franchigia del Nuovo Accordo e la soglia NOV di CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
+          "title": "Rimborso imposta LPP bloccato per i frontalieri",
+          "url": "/articoli-frontaliere/rimborso-imposta-lpp-2024/",
+          "excerpt": "Dal 2024 il Canton Ticino non rimborsa più l'imposta alla fonte del 7% sul capitale LPP, costringendo i frontalieri a pagare anche l'imposta sostitutiva italiana del 5%.",
+          "date": "2026-09-23T10:40:11.448Z"
         },
         {
           "title": "Frontalieri a Laveno-Mombello: guida e fisco in Ticino",
@@ -138,16 +138,16 @@
           "date": "2026-09-12T01:10:28.373Z"
         },
         {
-          "title": "Busta paga dei frontalieri: simulare l'imposta alla fonte",
-          "url": "/articoli-frontaliere/simulatore-busta-paga-ticino-frontalieri/",
-          "excerpt": "Imposta alla fonte Ticino: aliquote federali 2026, esenzioni frontalieri €7'500–€10'000, credito d'imposta italiano e simulatore passo passo.",
-          "date": "2026-08-22T08:50:53.328Z"
+          "title": "Vivere a Mornago, lavorare in Ticino: tassazione e permesso G",
+          "url": "/articoli-frontaliere/mornago-frontaliere/",
+          "excerpt": "Dal 1° gennaio 2024 il Nuovo Accordo Frontalieri garantisce franchigia €10.000 ai nuovi frontalieri. Scopri tassazione, AVS, LPP e LAMal per chi vive a Mornago e lavora in Ticino.",
+          "date": "2026-09-02T13:35:07.451Z"
         },
         {
-          "title": "Frontaliere Lezzeno-Ticino: permesso G, tasse e procedimenti",
-          "url": "/articoli-frontaliere/vivere-lezzeno-lavorare-ticino-frontaliere/",
-          "excerpt": "Chi vive a Lezzeno e lavora in Ticino può lavorare con il permesso G da frontaliere. Imposta alla fonte in Svizzera, ristorni, AVS, LPP e LAMal: tutto quello che serve sapere.",
-          "date": "2026-08-24T03:46:57.696Z"
+          "title": "Imposta alla fonte 2026: aliquote Ticino",
+          "url": "/articoli-frontaliere/aliquote-imposta-fonte-ticino-2026/",
+          "excerpt": "Come funziona la quellensteuer nel Cantone Ticino? Scopri le aliquote 2026, gli abbuoni, la franchigia del Nuovo Accordo e la soglia NOV di CHF 120'000.",
+          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -176,7 +176,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "TI",
@@ -266,16 +266,15 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
-          "title": "How to calculate Ticino source tax",
-          "url": "/en/cross-border-articles/calculate-withholding-tax-ticino/",
-          "excerpt": "Practical guide to the calculation of the tax at source for border workers Ticino-Italy: rates, 2024 deductibles, tax credit in 730 and interactive simulator.",
-          "date": "2026-08-22T08:37:30.365Z"
+          "title": "Healthcare tax decree for cross-border workers approved",
+          "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
+          "date": "2026-10-08T11:44:40.237Z"
         },
         {
-          "title": "LPP tax refund blocked for border workers",
-          "url": "/en/cross-border-articles/lpp-tax-refund-2024/",
-          "excerpt": "From 2024, the Canton of Ticino no longer reimburses the 7% tax at source on LPP capital, forcing border workers to also pay the 5% Italian substitute tax.",
-          "date": "2026-09-23T10:40:11.448Z"
+          "title": "2027 budget: deficit and public accounts in Ticino",
+          "url": "/en/swiss-articles/preventivo-2027-public-accounts/",
+          "excerpt": "The Canton's 2027 Budget forecasts a deficit of 98.5 million. Between bureaucracy, personnel and taxation, here are the reactions and the debate in Bellinzona.",
+          "date": "2026-10-01T04:47:59.002Z"
         },
         {
           "title": "Tax incentive for local purchases in Ticino: proposal",
@@ -284,10 +283,10 @@
           "date": "2026-09-25T14:19:43.225Z"
         },
         {
-          "title": "Tax at source 2026: Ticino rates",
-          "url": "/en/cross-border-articles/withholding-tax-rates-ticino-2026/",
-          "excerpt": "How does the quellensteuer work in the Canton of Ticino? Discover the 2026 rates, the rebates, the New Deal deductible and the NOV threshold of CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
+          "title": "LPP tax refund blocked for border workers",
+          "url": "/en/cross-border-articles/lpp-tax-refund-2024/",
+          "excerpt": "From 2024, the Canton of Ticino no longer reimburses the 7% tax at source on LPP capital, forcing border workers to also pay the 5% Italian substitute tax.",
+          "date": "2026-09-23T10:40:11.448Z"
         },
         {
           "title": "Frontier workers in Laveno-Mombello: driving and tax in Ticino",
@@ -296,16 +295,16 @@
           "date": "2026-09-12T01:10:28.373Z"
         },
         {
-          "title": "How to calculate source tax in Ticino",
-          "url": "/en/cross-border-articles/payslip-simulator-ticino-cross-border/",
-          "excerpt": "Tax at source Ticino: federal rates 2026, border exemptions €7,500- €10,000, Italian tax credit and step-by-step simulator.",
-          "date": "2026-08-22T08:50:53.328Z"
+          "title": "Living in Mornago, working in Ticino: taxation and permit G",
+          "url": "/en/cross-border-articles/live-mornago-work-ticino-cross-border/",
+          "excerpt": "From 1 January 2024, the New Frontier Agreement guarantees a €10,000 exemption to new frontier workers. Discover taxation, AVS, LPP and LAMal for those who live in Mornago and work in Ticino.",
+          "date": "2026-09-02T13:35:07.451Z"
         },
         {
-          "title": "Lezzeno-Ticino border guards: G permit, taxes and procedures",
-          "url": "/en/cross-border-articles/live-lezzeno-work-ticino-commuter/",
-          "excerpt": "Those who live in Lezzeno and work in Ticino can work with the G permit as border workers. Tax at source in Switzerland, refreshments, AVS, LPP and LAMal: everything you need to know.",
-          "date": "2026-08-24T03:46:57.696Z"
+          "title": "Tax at source 2026: Ticino rates",
+          "url": "/en/cross-border-articles/withholding-tax-rates-ticino-2026/",
+          "excerpt": "How does the quellensteuer work in the Canton of Ticino? Discover the 2026 rates, the rebates, the New Deal deductible and the NOV threshold of CHF 120'000.",
+          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -334,7 +333,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "TI",
@@ -424,16 +423,15 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
-          "title": "So berechnen Sie die Quellensteuer Tessin",
-          "url": "/de/grenzgaenger-artikel/quellensteuer-tessin-berechnen/",
-          "excerpt": "Praktischer Leitfaden zur Berechnung der Quellensteuer für Grenzgänger Tessin-Italien: Sätze, Franchisen 2024, Steuergutschrift im Jahr 730 und interaktiver Simulator.",
-          "date": "2026-08-22T08:37:30.365Z"
+          "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
+          "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
+          "date": "2026-10-08T11:44:40.237Z"
         },
         {
-          "title": "BVG-Steuerrückerstattung für Grenzgänger gesperrt",
-          "url": "/de/grenzgaenger-artikel/lpp-steuererstattung-2024/",
-          "excerpt": "Seit 2024 erstattet der Kanton Tessin die Quellensteuer von 7% auf das BVG-Kapital nicht mehr UND zwingt die Grenzgänger, auch die italienische Ersatzsteuer von 5% zu zahlen.",
-          "date": "2026-09-23T10:40:11.448Z"
+          "title": "Haushalt 2027: Defizit und öffentliche Konten im Tessin",
+          "url": "/de/schweiz-artikel/preventivo-2027-oeffentliche-finanzen/",
+          "excerpt": "Der Kantonshaushalt für 2027 prognostiziert ein Defizit von 98,5 Millionen. Zwischen Bürokratie, Personal und Steuern sind hier die Reaktionen und die Debatte in Bellinzona.",
+          "date": "2026-10-01T04:47:59.002Z"
         },
         {
           "title": "Steuerlicher Anreiz für lokale Einkäufe im Tessin: Vorschlag",
@@ -442,10 +440,10 @@
           "date": "2026-09-25T14:19:43.225Z"
         },
         {
-          "title": "Quellensteuer 2026: Tessiner Steuersätze",
-          "url": "/de/grenzgaenger-artikel/quellensteuer-saetze-tessin-2026/",
-          "excerpt": "Wie funktioniert die quellensteuer im Kanton Tessin? Entdecken Sie die Sätze 2026, die Rabatte, die Franchise des Neuen Abkommens und den NOV-SCHWELLENWERT von CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
+          "title": "BVG-Steuerrückerstattung für Grenzgänger gesperrt",
+          "url": "/de/grenzgaenger-artikel/lpp-steuererstattung-2024/",
+          "excerpt": "Seit 2024 erstattet der Kanton Tessin die Quellensteuer von 7% auf das BVG-Kapital nicht mehr UND zwingt die Grenzgänger, auch die italienische Ersatzsteuer von 5% zu zahlen.",
+          "date": "2026-09-23T10:40:11.448Z"
         },
         {
           "title": "Grenzgänger in Laveno-Mombello: Fahren und Steuern im Tessin",
@@ -454,16 +452,16 @@
           "date": "2026-09-12T01:10:28.373Z"
         },
         {
-          "title": "So berechnen Sie die Quellensteuer im Tessin",
-          "url": "/de/grenzgaenger-artikel/lohnrechner-tessin-grenzgaenger/",
-          "excerpt": "Quellensteuer Tessin: Bundessätze 2026, Grenzbefreiungen € 7'500–€ 10'000, italienische Steuergutschrift und Schritt-für-Schritt-Simulator.",
-          "date": "2026-08-22T08:50:53.328Z"
+          "title": "Leben in Mornago, Arbeiten im Tessin: Besteuerung und Genehmigung G",
+          "url": "/de/grenzgaenger-artikel/in-mornago-leben-im-tessin-arbeiten-grenzgaenger/",
+          "excerpt": "Ab dem 1. Januar 2024 garantiert die Neue Grenzgängervereinbarung den neuen Grenzgängern eine Selbstbeteiligung von 10.000 €. Entdecken Sie Besteuerung, AHV, BVG und KVG für diejenigen, die in Mornago leben und im…",
+          "date": "2026-09-02T13:35:07.451Z"
         },
         {
-          "title": "Grenzgänger Lezzeno-Tessin: G-Genehmigung, Gebühren und Verfahren",
-          "url": "/de/grenzgaenger-artikel/in-lezzeno-leben-tessin-arbeiten/",
-          "excerpt": "Wer in Lezzeno lebt und im Tessin arbeitet, kann mit der Grenzgängerbewilligung G arbeiten. Quellensteuer in der Schweiz, Rückerstattungen, AHV, BVG und KVG: Alles, was Sie wissen müssen.",
-          "date": "2026-08-24T03:46:57.696Z"
+          "title": "Quellensteuer 2026: Tessiner Steuersätze",
+          "url": "/de/grenzgaenger-artikel/quellensteuer-saetze-tessin-2026/",
+          "excerpt": "Wie funktioniert die quellensteuer im Kanton Tessin? Entdecken Sie die Sätze 2026, die Rabatte, die Franchise des Neuen Abkommens und den NOV-SCHWELLENWERT von CHF 120'000.",
+          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -492,7 +490,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "TI",
@@ -583,16 +581,16 @@
           "date": "2026-10-08T12:15:50.666Z"
         },
         {
-          "title": "Comment calculer l'impôt source Tessin",
-          "url": "/fr/articles-frontalier/calculer-impot-source-tessin/",
-          "excerpt": "Guide pratique pour le calcul de l'impôt à la source pour les frontaliers Tessin-Italie : taux, franchises 2024, crédit d'impôt en 730 et simulateur interactif.",
-          "date": "2026-08-22T08:37:30.365Z"
+          "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
+          "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
+          "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
+          "date": "2026-10-08T11:44:40.237Z"
         },
         {
-          "title": "Remboursement de la taxe LPP bloquée pour les frontaliers",
-          "url": "/fr/articles-frontalier/remboursement-taxe-lpp-2024/",
-          "excerpt": "Depuis 2024, le canton du Tessin ne rembourse plus l'impôt à la source de 7 % sur le capital LPP, obligeant les frontaliers à payer également l'impôt de remplacement italien de 5 %.",
-          "date": "2026-09-23T10:40:11.448Z"
+          "title": "Budget 2027 : déficit et comptes publics au Tessin",
+          "url": "/fr/articles-suisse/preventivo-2027-comptes-publics/",
+          "excerpt": "Le budget 2027 du canton prévoit un déficit de 98,5 millions. Entre bureaucratie, personnel et fiscalité, voici les réactions et le débat à Bellinzona.",
+          "date": "2026-10-01T04:47:59.002Z"
         },
         {
           "title": "Incitation fiscale pour les achats locaux au Tessin : proposition",
@@ -601,10 +599,10 @@
           "date": "2026-09-25T14:19:43.225Z"
         },
         {
-          "title": "Impôt à la source 2026 : taux Tessin",
-          "url": "/fr/articles-frontalier/taux-prelevements-frontaliers-tessin-2026/",
-          "excerpt": "Comment fonctionne la quellensteuer dans le canton du Tessin ? Découvrez les taux 2026, les bonifications, la franchise du Nouvel Accord et le seuil NOV de CHF 120'000.",
-          "date": "2026-08-22T09:44:56.523Z"
+          "title": "Remboursement de la taxe LPP bloquée pour les frontaliers",
+          "url": "/fr/articles-frontalier/remboursement-taxe-lpp-2024/",
+          "excerpt": "Depuis 2024, le canton du Tessin ne rembourse plus l'impôt à la source de 7 % sur le capital LPP, obligeant les frontaliers à payer également l'impôt de remplacement italien de 5 %.",
+          "date": "2026-09-23T10:40:11.448Z"
         },
         {
           "title": "Frontaliers à Laveno-Mombello : guide et fiscalité au Tessin",
@@ -613,16 +611,16 @@
           "date": "2026-09-12T01:10:28.373Z"
         },
         {
-          "title": "Comment calculer l'impôt à la source au Tessin",
-          "url": "/fr/articles-frontalier/simulateur-fiche-paie-tessin-frontaliers/",
-          "excerpt": "Impôt à la source Tessin : taux fédéraux 2026, exonérations frontalières € 7'500–€ 10'000, crédit d'impôt italien et simulateur pas à pas.",
-          "date": "2026-08-22T08:50:53.328Z"
+          "title": "Vivre à Mornago, travailler au Tessin : fiscalité et permis G",
+          "url": "/fr/articles-frontalier/vivre-mornago-travailler-tessin-frontalier/",
+          "excerpt": "À partir du 1er janvier 2024, le nouvel accord frontalier garantit une franchise de 10 000 € aux nouveaux frontaliers. Découvrez la fiscalité, l'AVS, la LPP et la LAMal pour ceux qui vivent à Mornago et travaillent au…",
+          "date": "2026-09-02T13:35:07.451Z"
         },
         {
-          "title": "Frontière Lezzeno-Tessin : permis G, taxes et procédures",
-          "url": "/fr/articles-frontalier/vivre-lezzeno-travailler-tessin-frontalier/",
-          "excerpt": "Ceux qui vivent à Lezzeno et travaillent au Tessin peuvent travailler avec le permis G en tant que frontalier. Taxe à la source en Suisse, restaurations, AVS, LPP et LAMal : tout ce qu'il faut savoir.",
-          "date": "2026-08-24T03:46:57.696Z"
+          "title": "Impôt à la source 2026 : taux Tessin",
+          "url": "/fr/articles-frontalier/taux-prelevements-frontaliers-tessin-2026/",
+          "excerpt": "Comment fonctionne la quellensteuer dans le canton du Tessin ? Découvrez les taux 2026, les bonifications, la franchise du Nouvel Accord et le seuil NOV de CHF 120'000.",
+          "date": "2026-08-22T09:44:56.523Z"
         }
       ],
       "links": [
@@ -651,7 +649,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

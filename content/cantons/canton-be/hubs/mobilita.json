@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "213e41860d51c4af7eb4a501cf0bf0290408fcd1238aaee87aa03280e988f60f",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "a90d4f84de78d8a1b7cc9e471420c309ebdad3cf9f4579995af50393b7934f85",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -134,10 +134,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "Ipsach: cede una gru, chiuse ferrovia e strada",
+          "url": "/articoli-berna/ipsach-gru-linea-strada/",
+          "excerpt": "Una gru da lavoro è caduta su edificio, ferrovia e strada.",
+          "date": "2026-10-08T19:26:56.613Z"
+        },
+        {
+          "title": "Approvati il tram di Kleinwabern e il risanamento di Wabern",
+          "url": "/articoli-berna/wabern-tram-risanamento/",
+          "excerpt": "Il BAV approva il tram fino a Kleinwabern e il risanamento della Seftigenstrasse: lavori non prima del 2028, fase di ricorso in corso.",
+          "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
           "title": "Abbonamenti trasporti pubblici Canton Berna: zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-berna-abbonamenti/",
           "excerpt": "Informazioni sulle zone e le tariffe degli abbonamenti trasporti pubblici nel Canton Berna",
           "date": "2026-08-13T07:24:39.765Z"
+        },
+        {
+          "title": "Sistema scolastico del Canton Berna: iscrizione e cicli",
+          "url": "/articoli-svizzera/sistema-scolastico-canton-berna-iscrizione-e-cicli/",
+          "excerpt": "Sapere cosa accade con l'iscrizione dei figli ai cicli scolastici nel Canton Berna. Scopri i requisiti, il calendario e le lingue di insegnamento.",
+          "date": "2026-08-13T00:11:48.311Z"
         }
       ],
       "links": [
@@ -150,7 +168,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "BE",
@@ -267,10 +285,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "Ipsach: crane collapses, railway and road closed",
+          "url": "/en/bern-articles/ipsach-crane-railway-road/",
+          "excerpt": "A work crane fell onto a building, railway, and road.",
+          "date": "2026-10-08T19:26:56.613Z"
+        },
+        {
+          "title": "Kleinwabern tram and Wabern renovation approved",
+          "url": "/en/bern-articles/kleinwabern-tram-wabern-renovation/",
+          "excerpt": "The BAV approves the tram extension to Kleinwabern and the renovation of Seftigenstrasse: construction will not begin before 2028, with the appeals phase ongoing.",
+          "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
           "title": "Public transport passes Canton Bern: zones and fares",
           "url": "/en/swiss-articles/public-transport-canton-bern-subscriptions/",
           "excerpt": "Information on areas and fares for public transport passes in the Canton of Bern",
           "date": "2026-08-13T07:24:39.765Z"
+        },
+        {
+          "title": "School system of the Canton of Bern: enrolment and cycles",
+          "url": "/en/swiss-articles/canton-bern-school-system-enrollment-and-grades/",
+          "excerpt": "Know what happens with the enrolment of children in school in the Canton of Bern. Learn about the requirements, calendar, and languages of instruction.",
+          "date": "2026-08-13T00:11:48.311Z"
         }
       ],
       "links": [
@@ -283,7 +319,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "BE",
@@ -400,10 +436,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "Ipsach: Kran stürzt um, Bahnstrecke und Strasse gesperrt",
+          "url": "/de/bern-artikel/ipsach-arbeitskran-bahnstrasse/",
+          "excerpt": "Ein Arbeitskran ist auf ein Gebäude, die Bahnstrecke und die Strasse gestürzt.",
+          "date": "2026-10-08T19:26:56.613Z"
+        },
+        {
+          "title": "Tram nach Kleinwabern und Sanierung von Wabern genehmigt",
+          "url": "/de/bern-artikel/tram-kleinwabern-sanierung-wabern/",
+          "excerpt": "Das BAV genehmigt die Tramverlängerung bis Kleinwabern und die Sanierung der Seftigenstrasse: Bauarbeiten frühestens 2028, Beschwerdephase läuft.",
+          "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
           "title": "Öffentliche Verkehrsmittel Kanton Bern: Zonen und Tarife",
           "url": "/de/schweiz-artikel/offentlicher-verkehr-kanton-bern-abonnements/",
           "excerpt": "Informationen zu den Zonen und Tarifen der ÖV-Abos im Kanton Bern",
           "date": "2026-08-13T07:24:39.765Z"
+        },
+        {
+          "title": "Schulsystem des Kantons Bern: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/bildungssystem-kanton-bern-anmeldung-und-noten/",
+          "excerpt": "Wissen, was mit der Einschreibung der Kinder in die Schulklassen im Kanton Bern passiert. Informieren Sie sich über die Anforderungen, den Zeitplan und die Unterrichtssprachen.",
+          "date": "2026-08-13T00:11:48.311Z"
         }
       ],
       "links": [
@@ -416,7 +470,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -533,10 +587,28 @@
       ],
       "curatedArticles": [
         {
+          "title": "Ipsach : une grue s'effondre, chemin de fer et route fermés",
+          "url": "/fr/articles-berne/ipsach-grue-voie-route/",
+          "excerpt": "Une grue de chantier est tombée sur un bâtiment, la voie ferrée et la route.",
+          "date": "2026-10-08T19:26:56.613Z"
+        },
+        {
+          "title": "Approuvés : le tram jusqu’à Kleinwabern et l’assainissement de Wabern",
+          "url": "/fr/articles-berne/tram-kleinwabern-renovation-wabern/",
+          "excerpt": "L’OFT approuve le tram jusqu’à Kleinwabern et l’assainissement de la Seftigenstrasse : travaux pas avant 2028, phase de recours en cours.",
+          "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
           "title": "Abonnements transports publics Canton de Berne : zones et tarifs",
           "url": "/fr/articles-suisse/transports-publiques-canton-de-berne-abonnements/",
           "excerpt": "Informations sur les zones et les tarifs des abonnements transports publics dans le canton de Berne",
           "date": "2026-08-13T07:24:39.765Z"
+        },
+        {
+          "title": "Système scolaire du canton de Berne : inscription et cycles",
+          "url": "/fr/articles-suisse/systeme-educatif-canton-de-bourguignon-inscription-et-notations/",
+          "excerpt": "Savoir ce qui se passe avec l'inscription des enfants dans les cycles scolaires dans le canton de Berne. Découvrez les exigences, le calendrier et les langues d'enseignement.",
+          "date": "2026-08-13T00:11:48.311Z"
         }
       ],
       "links": [
@@ -549,7 +621,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-14T05:25:52.000Z",
-  "contentHash": "7d02d5b9bf164bbe8509580a9dd57d790f3f4d4daffcda0f94dd21eceb44f88d",
+  "updatedAt": "2026-10-14T07:06:25.000Z",
+  "contentHash": "410994556b71e973edba6040eb088c3cd301dd7af5eed7e0d990d16b5cefc85c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -98,7 +98,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salari e mercato del lavoro canton Friburgo: settori e livelli",
+          "url": "/articoli-svizzera/salari-mercato-lavoro-friburgo-settori-livelli/",
+          "excerpt": "Fatti e cifre sulla situazione lavorativa nel canton Friburgo: salari, settori in crescita, contratti collettivi e salario minimo.",
+          "date": "2026-08-18T01:28:04.888Z"
+        }
+      ],
       "links": [
         {
           "label": "Tutti gli eventi nel Canton Friburgo",
@@ -109,7 +116,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "en": {
       "canton": "FR",
@@ -195,7 +202,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Wages and labour market canton Fribourg: sectors and levels",
+          "url": "/en/swiss-articles/salaries-labor-market-fribourg-sectors-levels/",
+          "excerpt": "Facts and figures on the employment situation in the canton of Fribourg: wages, growing sectors, collective agreements and minimum wage.",
+          "date": "2026-08-18T01:28:04.888Z"
+        }
+      ],
       "links": [
         {
           "label": "All events in the canton of Fribourg",
@@ -206,7 +220,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "de": {
       "canton": "FR",
@@ -292,7 +306,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Löhne und Arbeitsmarkt Kanton Freiburg: Branchen und Niveaus",
+          "url": "/de/schweiz-artikel/lohne-arbeitsmarkt-freiburg-sektoren-niveaus/",
+          "excerpt": "Zahlen und Fakten zur Arbeitssituation im Kanton Freiburg: Löhne, Wachstumsbranchen, Tarifverträge und Mindestlohn.",
+          "date": "2026-08-18T01:28:04.888Z"
+        }
+      ],
       "links": [
         {
           "label": "Alle Veranstaltungen im Kanton Freiburg",
@@ -303,7 +324,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     },
     "fr": {
       "canton": "FR",
@@ -389,7 +410,14 @@
           "updatedAt": "2026-10-13T21:57:18.142Z"
         }
       ],
-      "curatedArticles": [],
+      "curatedArticles": [
+        {
+          "title": "Salaires et marché du travail canton de Fribourg : secteurs et niveaux",
+          "url": "/fr/articles-suisse/salaire-marche-du-travail-fribourg-secteurs-niveaux/",
+          "excerpt": "Faits et chiffres sur la situation de l'emploi dans le canton de Fribourg : salaires, secteurs en croissance, conventions collectives et salaire minimum.",
+          "date": "2026-08-18T01:28:04.888Z"
+        }
+      ],
       "links": [
         {
           "label": "Tous les événements dans le canton de Fribourg",
@@ -400,7 +428,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-14T05:25:52.000Z"
+      "updatedAt": "2026-10-14T07:06:25.000Z"
     }
   }
 }
