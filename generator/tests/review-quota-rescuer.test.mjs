@@ -35,6 +35,8 @@ import {
   RATE_LIMIT_RESET_GRACE_SEC,
   RATE_LIMIT_WINDOW_SEC,
   rateLimitEvidence,
+  quotaRecoveryOutcome,
+  QUOTA_RECOVERY_OUTCOMES,
   rateLimitRerunCandidates,
   reviewRateLimitRetryAdmission,
   reviewRateLimitRetryBody,
@@ -920,6 +922,85 @@ test('rate limit: la prova viene dalle annotation failure del job, col reset del
   assert.equal(rateLimitEvidence([{ annotation_level: 'failure', message: 'API rate limit exceeded' }], { completedAt: '' }), null);
 });
 
+test('quotaRecoveryOutcome separa quota/installazione, review gate e prova insufficiente', () => {
+  const resetAt = RL_NOW - 60;
+  const installation = quotaRecoveryOutcome({
+    annotations: [{
+      annotation_level: 'failure',
+      message: `Resolve review input revision: ${rateLimitMarker({ resource: 'core', resetAt })}`,
+    }],
+    completedAt: rlIso(RL_NOW - 600),
+    steps: [{ name: 'Require approving Codex review', conclusion: 'failure' }],
+  });
+  assert.deepEqual(installation, {
+    outcome: QUOTA_RECOVERY_OUTCOMES.INSTALLATION_QUOTA,
+    resetAt,
+  });
+
+  const reviewGate = quotaRecoveryOutcome({
+    steps: [
+      { name: 'Require approving Codex review', conclusion: 'failure' },
+      { name: 'Classify review gate failure', conclusion: 'failure' },
+    ],
+  });
+  assert.deepEqual(reviewGate, {
+    outcome: QUOTA_RECOVERY_OUTCOMES.REVIEW_GATE,
+    resetAt: null,
+    gateFailureKind: 'verdict',
+  });
+
+  assert.deepEqual(quotaRecoveryOutcome({
+    steps: [
+      { name: 'Require approving Codex review', conclusion: 'failure' },
+      { name: 'Classify review gate failure', conclusion: 'success' },
+    ],
+  }), {
+    outcome: QUOTA_RECOVERY_OUTCOMES.REVIEW_GATE,
+    resetAt: null,
+    gateFailureKind: 'transient',
+  });
+
+  assert.deepEqual(quotaRecoveryOutcome({
+    annotations: [{ annotation_level: 'failure', message: 'test assertion failed' }],
+    steps: [{ name: 'Run node:test', conclusion: 'failure' }],
+  }), {
+    outcome: QUOTA_RECOVERY_OUTCOMES.UNVERIFIED,
+    resetAt: null,
+  });
+});
+
+test('rate limit: un review gate puro resta nel recovery review e un job misto resta non verificato', () => {
+  const nowSec = Math.floor(Date.now() / 1000);
+  const recent = rlRun({ created_at: rlIso(nowSec - 1800), updated_at: rlIso(nowSec - 1700) });
+  const reviewGateSteps = [
+    { name: 'Require approving Codex review', conclusion: 'failure' },
+    { name: 'Classify review gate failure', conclusion: 'failure' },
+  ];
+  const noRateLimit = [[{ annotation_level: 'failure', message: 'Nessuna review approvante sulla head' }]];
+  const reviewGate = runRateLimitRescuer({
+    resetAt: nowSec - RATE_LIMIT_RESET_GRACE_SEC - 5,
+    runs: [recent],
+    annotations: noRateLimit,
+    jobSteps: reviewGateSteps,
+  });
+  assert.equal(reviewGate.status, 0, reviewGate.stderr);
+  assert.equal(reviewGate.calls.some((call) => call.startsWith('run rerun') || call.startsWith('pr comment')), false, reviewGate.calls.join('\n'));
+  assert.match(reviewGate.stdout, /classificata come review-gate \(verdict\)/);
+
+  const mixed = runRateLimitRescuer({
+    resetAt: nowSec - RATE_LIMIT_RESET_GRACE_SEC - 5,
+    runs: [recent],
+    annotations: noRateLimit,
+    jobSteps: [
+      ...reviewGateSteps,
+      { name: 'Run node:test', conclusion: 'failure' },
+    ],
+  });
+  assert.equal(mixed.status, 0, mixed.stderr);
+  assert.equal(mixed.calls.some((call) => call.startsWith('run rerun') || call.startsWith('pr comment')), false, mixed.calls.join('\n'));
+  assert.match(mixed.stdout, /senza outcome quota\/installazione verificabile/);
+});
+
 test('rate limit: il marker durevole fa andata e ritorno e rifiuta le forme spurie', () => {
   const event = parseReviewRateLimitRetryMarker(rlComment('requested').body);
   assert.equal(event.head, RL_HEAD);
@@ -960,17 +1041,40 @@ test('rate limit: candidata solo l\'ULTIMA run pull_request della HEAD, rossa e 
  * Il rescuer vero, con un `gh` finto che serve PR, commenti, run `tests`, job e
  * annotation e registra le scritture.
  */
-function runRateLimitRescuer({ resetAt, comments = [], runs = [rlRun()], scan, annotationLevel = 'failure', graphqlSnapshot = null }) {
+function runRateLimitRescuer({
+  resetAt,
+  comments = [],
+  runs = [rlRun()],
+  scan,
+  annotationLevel = 'failure',
+  annotations,
+  jobSteps = [],
+  graphqlSnapshot = null,
+}) {
   const dir = fs.mkdtempSync(path.join(fs.realpathSync('/tmp'), 'review-rate-limit-rescuer-'));
   const calls = path.join(dir, 'calls');
   const fixture = path.join(dir, 'fixture.json');
   fs.writeFileSync(calls, '');
+  const fixtureAnnotations = annotations ?? [[{
+    annotation_level: annotationLevel,
+    message: `Resolve review input revision: rate limit ${rateLimitMarker({ resource: 'core', resetAt })}`,
+  }]];
   fs.writeFileSync(fixture, JSON.stringify({
     prs: [[rlPr()]],
     comments: [comments],
     runs: [{ total_count: runs.length, workflow_runs: runs }],
-    jobs: { total_count: 1, jobs: [{ id: 777, name: 'tests (node --test)', conclusion: 'failure', check_run_url: 'https://api.github.com/repos/o/r/check-runs/777', completed_at: rlIso(RL_NOW - 3500) }] },
-    annotations: [[{ annotation_level: annotationLevel, message: `Resolve review input revision: rate limit ${rateLimitMarker({ resource: 'core', resetAt })}` }]],
+    jobs: {
+      total_count: 1,
+      jobs: [{
+        id: 777,
+        name: 'tests (node --test)',
+        conclusion: 'failure',
+        check_run_url: 'https://api.github.com/repos/o/r/check-runs/777',
+        completed_at: rlIso(RL_NOW - 3500),
+        steps: jobSteps,
+      }],
+    },
+    annotations: fixtureAnnotations,
     graphql: graphqlSnapshot,
   }));
   fs.writeFileSync(path.join(dir, 'gh'), `#!/usr/bin/env node
