@@ -327,7 +327,7 @@ const FRAMING_PHRASES = [
 const caseInitial = (word) => `[${word[0].toUpperCase()}${word[0]}]${word.slice(1)}`;
 const AUDIENCE_HEADS = ['implicazion[ei]', 'impatt[oi]', 'effett[oi]', 'conseguenz[ae]', 'ricadut[ae]',
   'riflessi', 'influisc\\p{L}*', 'influenz\\p{L}*'];
-const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui', 'sugli', 'sulle'].map(caseInitial).join('|')}|${caseInitial('anche')}\\s+${caseInitial('per')})`;
+const AUDIENCE_LINK = `(?:${['per', 'sul', 'sulla', 'sui', 'sugli', 'sulle'].map(caseInitial).join('|')}|${caseInitial('sull')}['’]|${caseInitial('anche')}\\s+${caseInitial('per')})`;
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
 }
@@ -342,12 +342,12 @@ const AUDIENCE_CANTON_NAME = [...new Set(Object.values(CANTON_NAMES).flatMap(({ 
   .sort((a, b) => b.length - a.length)
   .map(escapeRegExp)
   .join('|');
-const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}${caseInitial('l')}['’]?\\s*)?`;
+const AUDIENCE_ARTICLE = `(?:${['il', 'i', 'gli', 'lo', 'la', 'le', 'un', 'uno', 'una'].map((word) => `${caseInitial(word)}\\s+`).join('|')}|${caseInitial('l')}['’]?\\s*)?`;
 const AUDIENCE_RECIPIENT_LINK = `(?:${['di', 'del', 'della', 'dei', 'degli', 'delle', 'in', 'nel', 'nella', 'nei', 'negli', 'nelle'].map(caseInitial).join('|')})`;
 const AUDIENCE_RECIPIENT = `(?:\\p{Ll}[\\p{L}'-]*\\s+${AUDIENCE_RECIPIENT_LINK}\\s+)?`;
 const AUDIENCE_CANTON_PREFIX = `(?:(?:${caseInitial('canton')}(?:e)?)(?:\\s+(?:${['di', 'del', 'della'].map(caseInitial).join('|')}))?\\s+)?`;
 const AUDIENCE_TARGET_ITEM = `${AUDIENCE_ARTICLE}${AUDIENCE_RECIPIENT}${AUDIENCE_CANTON_PREFIX}(?:${AUDIENCE_CANTON_NAME})(?!\\p{L})`;
-const AUDIENCE_TARGET = `\\s+${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
+const AUDIENCE_TARGET = `(?:\\s+|(?<=['’]))${AUDIENCE_TARGET_ITEM}(?:\\s*,\\s*${AUDIENCE_TARGET_ITEM})*(?:\\s+${caseInitial('e')}\\s+${AUDIENCE_TARGET_ITEM})?`;
 const AUDIENCE_RES = [
   // «implicazioni per il Ticino», «l'impatto sul Ticino»: non «effetti del
   // maltempo in Ticino», che e' un fatto in Ticino.
@@ -375,19 +375,29 @@ const PERSON_ARTICLES = new Set(['un', 'una', 'uno']);
 
 /**
  * Demonimo riferito a PERSONE o alla PROVENIENZA di una cosa: dopo un
- * articolo o un numero («i ticinesi», «due ticinesi»), dopo un sostantivo di
- * persona o di veicolo («turisti ticinesi», «frontalieri ticinesi», «auto
- * ticinese»), o in apertura di frase («Ginevrino in isolamento»). Dice chi o
- * da dove, non dove: conta per il punteggio, ma da solo non mette il cantone
- * nel titolo. Resta luogo come aggettivo di un'istituzione o di un settore
- * («economia ticinese», «Banca cantonale grigionese», «hockey ticinese»).
+ * articolo/determinante articolato o un numero («i ticinesi», «agli ticinesi»,
+ * «due ticinesi»), dopo una quantita' collegata da «di» («decine di
+ * ticinesi»), dopo un sostantivo di persona o di veicolo («turisti ticinesi»,
+ * «frontalieri ticinesi», «auto ticinese»), o in apertura di frase («Ginevrino
+ * in isolamento»). Dice chi o da dove, non dove: conta per il punteggio, ma da
+ * solo non mette il cantone nel titolo. Resta luogo come aggettivo di
+ * un'istituzione o di un settore («economia ticinese», «Banca cantonale
+ * grigionese», «hockey ticinese»).
  */
 const PERSON_LEAD_WORDS = new Set([
   'i', 'gli', 'le', 'il', 'la', 'l', 'due', 'tre', 'quattro', 'cinque', 'dieci', 'cento', 'mille', 'molti', 'tanti',
   'alcuni', 'tutti', 'altri', 'altre', 'molte', 'diversi', 'numerosi', 'migliaia', 'centinaia', 'decine',
+  'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'del', 'dello', 'della', 'dei', 'degli', 'delle',
+  'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
+  'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'col', 'colla', 'coi', 'cogli', 'colle',
+  'all', 'dall', 'nell', 'sull', 'coll',
 ]);
 /** Forme lessicali complete: evita falsi prefissi come «atletica» e «target». */
 const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
+/** Eta' scritta in cifre o in forma lessicale: «68enne», «quarantenne». */
+const PERSON_AGE_RE = /^(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]$/u;
+/** Quantita' che possono reggere «di + demonimo»: «decine di ticinesi». */
+const PERSON_QUANTITY_RE = /^(?:decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */
 const PERSON_HEAD_WORDS = new Set(['auto', 'automobile', 'automobili', 'moto']);
 const PERSON_GROUP_RE = /^(?:grupp[oi]|comitiv[ae]|delegazion[ei]|squadr[ae]|famigli[ae]|coppi[ae])$/u;
@@ -720,16 +730,18 @@ export function createCantonClassifier({
     return PERSON_ARTICLES.has(tokens[k].norm);
   }
 
-  /** Vedi PERSON_HEAD_RE: il demonimo dice chi o da dove. */
+  /** Vedi PERSON_*: il demonimo dice chi o da dove. */
   function isWhoDemonym(text, tokens, i) {
     const k = i - 1;
     if (k < 0 || sentenceBreak(text, tokens[k], tokens[i])) return true;
     const prev = tokens[k].norm;
     if (PERSON_LEAD_WORDS.has(prev) || PERSON_HEAD_WORDS.has(prev) || /^\d+$/u.test(prev)
-      || PERSON_HEAD_RE.test(prev)) return true;
+      || PERSON_HEAD_RE.test(prev) || PERSON_AGE_RE.test(prev)) return true;
     const head = tokens[k - 1];
-    return Boolean(head) && !sentenceBreak(text, head, tokens[k]) && PERSON_GROUP_LINKS.has(prev)
-      && PERSON_GROUP_RE.test(head.norm);
+    if (!head || sentenceBreak(text, head, tokens[k])) return false;
+    if (PERSON_GROUP_LINKS.has(prev)
+      && (PERSON_GROUP_RE.test(head.norm) || PERSON_QUANTITY_RE.test(head.norm))) return true;
+    return false;
   }
 
   function isClubContext(text, tokens, i) {

@@ -163,6 +163,15 @@ describe('omonimi e falsi amici', () => {
     assert.equal(c.mentionsIn('Atletica ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
     assert.equal(c.mentionsIn('Target ticinese in crescita.').find((m) => m.group === 'TI')?.who, undefined);
     assert.equal(c.mentionsIn('Atleti ticinesi in gara.').find((m) => m.group === 'TI')?.who, true);
+    for (const text of [
+      'Dei ticinesi bloccati all\'estero.',
+      'Agli ticinesi serve assistenza.',
+      'Decine di ticinesi attendono il rimpatrio.',
+      '68enne ticinese ferito.',
+      'Quarantenne ticinese soccorso.',
+    ]) {
+      assert.equal(c.mentionsIn(text).find((m) => m.group === 'TI')?.who, true, text);
+    }
     assert.deepEqual(
       [...new Set(c.mentionsIn('Pfäffikon (Kanton Schwyz): tre arresti.').map((m) => m.group))],
       ['SZ'],
@@ -244,6 +253,8 @@ describe('regole di assegnazione', () => {
     assert.deepEqual(classifier.mentionsIn('Cosa Cambia per Il Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per il Ticino e i Grigioni').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per il Canton San Gallo, Basilea Campagna e il Vallese').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Implicazioni per l’Appenzello').map((m) => m.group), []);
+    assert.deepEqual(classifier.mentionsIn('Impatto sull’Appenzello').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Implicazioni per gli abitanti del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Conseguenze per la popolazione del Ticino').map((m) => m.group), []);
     assert.deepEqual(classifier.mentionsIn('Impatto sugli abitanti del Ticino').map((m) => m.group), []);
