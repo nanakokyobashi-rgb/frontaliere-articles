@@ -8,6 +8,10 @@
  *   - Firestore `fuelPrices/metadata`       → fuel block (pre-computed rankings)
  *   - Firestore `exchangeHistory/chf-eur-1m`→ CHF→EUR block
  *   - CDN `data/jobs-stats.json`            → jobs block (public HTTP, no auth)
+ *   - Search Console + Firebase Analytics  → optional aggregated reader demand
+ *
+ * Audience demand covers settled days and carries partial-source coverage. It
+ * is kept in insights, outside the four core-block availability gates.
  *
  * Firestore goes through the REST API with a service-account token from
  * lib/google-service-account-token.mjs — NOT firebase-admin: this repo has no
@@ -33,6 +37,7 @@ import { getServiceAccountAccessToken } from './lib/google-service-account-token
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { decodeFields, buildDailyBrief, degradationAlarms, degradationState, isDegradationCarrier, MAX_CONSECUTIVE_DEGRADED_EDITIONS } from './lib/daily-brief-data.mjs';
 import { MIN_AVAILABLE_BLOCKS } from './lib/daily-brief-content.mjs';
+import { fetchSearchDemand } from './lib/daily-brief-demand.mjs';
 import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS, extractGoogleErrorReason } from './load-rc-env.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 
@@ -218,13 +223,15 @@ export function writeDegradationState(brief, statePath = DEGRADATION_STATE_PATH)
 export async function collectDailyBrief({ todayIso, nowMs = Date.now(), previous = readPreviousSnapshot() } = {}) {
   const creds = loadServiceAccountCreds();
   const token = await getServiceAccountAccessToken(creds, FIRESTORE_SCOPE);
-  const [borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats] = await Promise.all([
+  const [borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, searchDemand] = await Promise.all([
     tryFetch('trafficCurrent', () => listCollectionDocs(token, 'trafficCurrent')),
     tryFetch('fuelPrices/metadata', () => getDoc(token, 'fuelPrices/metadata')),
     tryFetch('exchangeHistory/chf-eur-1m', () => getDoc(token, 'exchangeHistory/chf-eur-1m')),
     tryFetch('jobs-stats', () => fetchJson(JOBS_STATS_URL)),
+    tryFetch('audience-demand', () => fetchSearchDemand(creds, todayIso)),
   ]);
-  return buildDailyBrief({ todayIso, nowMs, borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous });
+  return buildDailyBrief({ todayIso, nowMs, borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous,
+    previousSnapshot: readPreviousSnapshot(), searchDemand });
 }
 
 /** `DEGRADED (3rd edition in a row) — reason`: the streak belongs in the log. */

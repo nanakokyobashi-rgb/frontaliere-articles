@@ -1,9 +1,9 @@
 /**
  * Hero-image generation for the daily "Bollettino del Frontaliere" edition.
  *
- * Discover's requirement is a UNIQUE image ≥1200px wide per edition — a shared
- * catalog photo (the evergreen digests' `/images/places/…` route) does not
- * qualify. So the hero is generated from the day's numbers: an SVG stat card
+ * Google recommends a relevant image ≥1200px wide; uniqueness is not an
+ * eligibility requirement. Each edition visualizes its actual numbers rather
+ * than reusing an unrelated catalog image: an SVG stat card
  * rasterized to 1200×675 webp (the site's og:image geometry, same as
  * create-article.mjs's optimizeImageToWebp target).
  *
@@ -53,7 +53,7 @@ const IMG_T = {
     tagline: 'I numeri del giorno, dal nostro monitoraggio',
     bw: 'VALICHI — ATTESA MASSIMA',
     bwNone: 'senza coda',
-    fuel: 'BENZINA — MINIMO ITALIA',
+    fuel: 'BENZINA — MINIMO RILEVATO',
     fx: 'CAMBIO — 1 CHF IN EUR',
     jobs: 'LAVORO — NUOVI ANNUNCI IERI',
     na: 'dato non disponibile',
@@ -65,7 +65,7 @@ const IMG_T = {
     tagline: "The day's numbers, from our monitoring",
     bw: 'BORDER — LONGEST WAIT',
     bwNone: 'no queue',
-    fuel: 'FUEL — LOWEST IN ITALY',
+    fuel: 'PETROL — REPORTED MINIMUM',
     fx: 'EXCHANGE — 1 CHF IN EUR',
     jobs: 'JOBS — NEW LISTINGS YESTERDAY',
     na: 'no data',
@@ -77,7 +77,7 @@ const IMG_T = {
     tagline: 'Die Zahlen des Tages, aus eigener Messung',
     bw: 'GRENZE — LÄNGSTE WARTEZEIT',
     bwNone: 'keine Warteschlange',
-    fuel: 'BENZIN — TIEFSTPREIS ITALIEN',
+    fuel: 'BENZIN — GEMELDETES MINIMUM',
     fx: 'WECHSELKURS — 1 CHF IN EUR',
     jobs: 'ARBEIT — NEUE STELLEN GESTERN',
     na: 'keine Daten',
@@ -89,7 +89,7 @@ const IMG_T = {
     tagline: 'Les chiffres du jour, de notre suivi',
     bw: 'DOUANES — ATTENTE MAXIMALE',
     bwNone: 'aucune file',
-    fuel: 'ESSENCE — MINIMUM ITALIE',
+    fuel: 'ESSENCE — MINIMUM RELEVÉ',
     fx: 'CHANGE — 1 CHF EN EUR',
     jobs: 'EMPLOI — NOUVELLES OFFRES HIER',
     na: 'donnée indisponible',
@@ -143,7 +143,7 @@ export function buildDailyBriefSvg(brief, { locale = 'it' } = {}) {
 
   const jobs = blocks.jobs;
   const jobsBig = jobs?.available && Number.isFinite(jobs.yesterdayAdded) ? `+${fmtNum(locale, jobs.yesterdayAdded)}` : '—';
-  const jobsSmall = jobs?.available ? `${fmtNum(locale, jobs.activeJobs)} tot.` : t.na;
+  const jobsSmall = jobs?.available ? `${fmtNum(locale, jobs.activeJobs)} CH` : t.na;
 
   const M = 48; // outer margin
   const GAP = 24;

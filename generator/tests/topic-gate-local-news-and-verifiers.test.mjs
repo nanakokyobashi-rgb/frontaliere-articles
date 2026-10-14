@@ -1,3 +1,4 @@
+import { enrichArticleInternalLinks } from '../scripts/lib/contextual-article-links.mjs';
 /**
  * topic-gate-local-news-and-verifiers.test.mjs
  *
@@ -100,18 +101,20 @@ test('the post-generation density abort spares local news without a frontaliere 
 // needs a local branch too, or a robbery still gets a salary-calculator CTA
 // and a «Tool consigliati» block appended after generation.
 function ctaAndLinkEnforcers() {
-  const start = SRC.indexOf('const CTA_KEYWORDS_IT = [');
+  const start = SRC.indexOf('const CTA_POOL = [');
   const end = SRC.indexOf('/** Lazy-loaded set of normalized existing IT blog titles', start);
   assert.ok(start !== -1 && end > start, 'blocco CTA/link interni non trovato');
   // The module-scope names the block reads: the two content helpers are
   // stubbed on the test's own article shape, `isBodyTranslationPending` is the
   // real one from the module create-article.mjs imports it from.
   return new Function(
+    'enrichArticleInternalLinks',
     'bodyTextForQuality',
     'collectBodySections',
     'isBodyTranslationPending',
     `${SRC.slice(start, end)}\nreturn { validateAndEnforceCTA, enforceStrongInternalLinks };`,
   )(
+    enrichArticleInternalLinks,
     (content) => `${content.body1} ${content.body2} ${content.body3}`,
     (content) => ({ body1: content.body1, body2: content.body2, body3: content.body3 }),
     isBodyTranslationPending,
@@ -138,8 +141,8 @@ test('local news gets no frontaliere CTA and no tool block after generation', ()
   // The canton guard snapshot is still taken before the early return.
   assert.equal(typeof local._cantonGuardBodyBeforeCta, 'string');
   const frontaliere = enforceStrongInternalLinks(validateAndEnforceCTA(article(false)));
-  assert.match(frontaliere.content.it.body3, /\(nav:[a-z-]+\)/);
-  assert.match(frontaliere.content.it.body2, /\(nav:[a-z-]+\)/);
+  assert.equal(frontaliere.content.it.body3, 'Seguito.', 'absence of intent must not create a random CTA');
+  assert.equal(frontaliere.content.it.body2, 'Contesto.');
 });
 
 test('the flag comes from the same local-news predicate as the prompt, and is dropped after use', () => {
