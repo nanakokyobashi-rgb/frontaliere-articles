@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-incidente-vedeggio-cassarate.webp",
+      "sha256": "fbb3cfcb0dc15da35038132da6dccbc4297d48889a25c303ce3e1e4af4f077eb"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-incidente-vedeggio-cassarate-480w.webp",
+      "sha256": "b1e5f8f50567276164a9775590152e466bad0f1c3fd6df488ef483133a472edd"
+    }
+  ]
 }
