@@ -82,7 +82,11 @@ test('#1997/#1495: i verdetti fermi nella coda in conflitto raggiungono VERDICT-
   assert.equal(isDrainPromotable(queuedParked), false);
   assert.equal(isVerdictExitCandidate(queuedParked), true);
   assert.equal(isVerdictExitCandidate(alreadyFlagged), true);
-  assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'maybe-resolved')), false);
+  assert.equal(isVerdictExitCandidate(issue('follow-up', 'fu-parked', 'maybe-resolved')), true);
+  assert.equal(isVerdictExitCandidate({
+    ...issue('follow-up', 'fu-parked', 'maybe-resolved'),
+    title: 'follow-up',
+  }), false);
   assert.equal(isVerdictExitCandidate(issue('follow-up', 'agent:fix-queued')), false);
   assert.equal(verdictExitDecision('already-fixed', { noAutoclose: true }).action, 'flag');
   assert.equal(verdictExitDecision('no-root-cause').action, 'escalate');
