@@ -168,6 +168,16 @@ test('la chiave di idempotenza usa il body già normalizzato e timbrato', () => 
     { headSha: HEAD_SHA, bodyOverride: body },
   );
   assert.notEqual(postedReviewKey(details), postedReviewKey(differentAction));
+
+  const commentBeforeNumber = reviewRetryDetails(
+    ['pr', 'review', '--comment', REVIEW_PR, '--body', 'model body'],
+    0,
+    { headSha: HEAD_SHA, bodyOverride: body },
+  );
+  assert.equal(
+    postedReviewKey(commentBeforeNumber),
+    JSON.stringify([REVIEW_PR, HEAD_SHA, 'comment', body.trimEnd()]),
+  );
 });
 
 test('il bridge rifiuta una review con --body e --body-file insieme', () => {
@@ -194,7 +204,7 @@ test('il bridge timbra il body prima di pubblicare la review e deduplica il body
     await waitFor(endpoint);
     writeFileSync(source, `${reviewMarker(`body:${'a'.repeat(63)}`)}\n## LGTM\n\ncase: first`);
     const args = [
-      'pr', 'review', REVIEW_PR, '--repo', CORPUS_REPOSITORY, '--comment', '--body-file', source,
+      'pr', 'review', '--comment', REVIEW_PR, '--repo', CORPUS_REPOSITORY, '--body-file', source,
     ];
     await run(process.execPath, [path.join(ACTION_DIR, 'gh-bridge-client.mjs'), ...args], {
       env: { CODEX_BRIDGE_TRANSPORT: 'files', CODEX_GH_SOCKET: endpoint },
