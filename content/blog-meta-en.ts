@@ -13184,6 +13184,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Accident on the A8 between Castellanza and Busto: long tailback',
     'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Accident on the A8 shortly after 4 p.m.',
     'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Traffic queue on the A8 motorway between Castellanza and Busto Arsizio after a crash',
+    'blog.article.arma-biasca-inchiesta.title': 'Biasca, the 17-year-old\'s arrest confirmed',
+    'blog.article.arma-biasca-inchiesta.excerpt': 'The stabbing took place on October 5 in Biasca.',
+    'blog.article.arma-biasca-inchiesta.imageAlt': 'Police at the scene of the stabbing in Biasca, along Via Bellinzona',
 };
 
 export default blogMetaEn;

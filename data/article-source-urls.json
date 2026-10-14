@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/dogane%3a-nuova-informatica-a-udsc%2c-costi-gi%c3%b9%2c-benefici-per-economia/91987363": {
-    "articleId": "dogane-udsc-nuova-informatica",
-    "ts": "2026-09-01T13:39:37.686Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/08/davide-bellotto-fillea-cgil-ancora-un-morto-sul-lavoro-non-possiamo-limitarci-a-contare-le-vittime/2666782": {
     "articleId": "origgio-tragedia-cantiere-2026",
     "ts": "2026-09-01T15:08:54.746Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/incidente-in-autostrada-a8-tra-castellanza-e-busto-soccorsi-e-lunga-coda/2708227": {
     "articleId": "soccorsi-coda-autostrada-lombarda",
     "ts": "2026-10-14T15:46:26.994Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4160155": {
+    "articleId": "arma-biasca-inchiesta",
+    "ts": "2026-10-14T18:54:17.457Z",
     "keyForm": 2
   }
 }

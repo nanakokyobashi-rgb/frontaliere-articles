@@ -13183,6 +13183,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Unfall auf der A8 zwischen Castellanza und Busto: langer Stau',
     'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Unfall auf der A8 kurz nach 16 Uhr Vier Personen beteiligt Zwei Rettungswagen und ein Notarzteinsatzfahrzeug mit höchster Dringlichkeitsstufe Langer Stau ab der Verzweigung A8/A9 Was: Verkehrsunfall',
     'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Stau auf der A8 zwischen Castellanza und Busto Arsizio nach einem Unfall',
+    'blog.article.arma-biasca-inchiesta.title': 'Biasca, die Festnahme des 17-Jährigen bestätigt',
+    'blog.article.arma-biasca-inchiesta.excerpt': 'Der Messerangriff ereignete sich am 5.',
+    'blog.article.arma-biasca-inchiesta.imageAlt': 'Polizei am Ort des Messerangriffs in Biasca an der Via Bellinzona',
 };
 
 export default blogMetaDe;

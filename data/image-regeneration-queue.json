@@ -60,6 +60,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T17:57:03.782Z",
       "lastFailureAt": "2026-10-14T17:57:03.782Z"
+    },
+    {
+      "articleId": "arma-biasca-inchiesta",
+      "title": "Biasca, confermato l'arresto del 17enne",
+      "fallbackImage": "/images/blog/article-biasca-17enne-arrestato-accoltellamento.webp",
+      "reason": "All image providers failed for article-arma-biasca-inchiesta: openai-codex (vision gate rejected image: Generic synthetic alpine street scene, but it contains two recognizable fore",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T18:54:17.455Z",
+      "lastFailureAt": "2026-10-14T18:54:17.455Z"
     }
   ]
 }

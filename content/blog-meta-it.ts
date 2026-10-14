@@ -13185,6 +13185,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.soccorsi-coda-autostrada-lombarda.title': 'Incidente sulla A8 tra Castellanza e Busto: lunga coda',
     'blog.article.soccorsi-coda-autostrada-lombarda.excerpt': 'Incidente sulla A8 poco dopo le 16 Quattro persone coinvolte Due ambulanze e un\'automedica in codice rosso Lunga coda dal bivio A8/A9 Cosa: incidente stradale',
     'blog.article.soccorsi-coda-autostrada-lombarda.imageAlt': 'Coda sull\'autostrada A8 tra Castellanza e Busto Arsizio dopo un incidente',
+    'blog.article.arma-biasca-inchiesta.title': 'Biasca, confermato l\'arresto del 17enne',
+    'blog.article.arma-biasca-inchiesta.excerpt': 'L\'accoltellamento è avvenuto il 5 ottobre a Biasca.',
+    'blog.article.arma-biasca-inchiesta.imageAlt': 'Polizia sul luogo dell\'accoltellamento a Biasca, lungo Via Bellinzona',
 };
 
 export default blogMetaIt;
