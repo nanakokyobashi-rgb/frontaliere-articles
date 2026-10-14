@@ -2757,6 +2757,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bcg-consiglio-mueller': { it: 'bcg-consiglio-mueller', en: 'graubunden-bank-mueller-board', de: 'graubuenden-bankrat-mueller', fr: 'banque-grisons-conseil-mueller' },
  'offerte-formazione-federale': { it: 'offerte-formazione-federale', en: 'federal-jobs-training', de: 'bund-jobs-ausbildung', fr: 'emploi-federal-formation' },
  'divario-reddito-giovani-svizzera': { it: 'divario-reddito-giovani-svizzera', en: 'gender-pay-gap-young-switzerland', de: 'lohngefalle-junge-schweiz', fr: 'ecart-salaire-jeunes-suisse' },
+ 'decisioni-avs-ue-voto': { it: 'decisioni-avs-ue-voto', en: 'swiss-federal-decisions-avs-eu-vote', de: 'schweiz-bundesrat-ahv-eu-abstimmung', fr: 'decisions-conseil-federal-avs-ue-vote' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

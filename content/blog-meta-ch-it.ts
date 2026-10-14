@@ -8204,6 +8204,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.divario-reddito-giovani-svizzera.title': 'Divario salariale giovani Svizzera: cala il gap di reddito',
     'blog.article.divario-reddito-giovani-svizzera.excerpt': 'Tra i nati nel 1995, il divario di reddito è del 14% Tra i nati nel 1965, il divario era del 55% Nel 2025, il titolo terziario riguarda il 54% delle giovani',
     'blog.article.divario-reddito-giovani-svizzera.imageAlt': 'Vista di Lugano con giovani professionisti',
+    'blog.article.decisioni-avs-ue-voto.title': 'Consiglio federale: AVS, UE e voto 2026',
+    'blog.article.decisioni-avs-ue-voto.excerpt': 'Guy Parmelin lascerà il Consiglio federale il 31.12.2026 Le rendite AVS/AI aumenteranno di circa 1,6% Il pacchetto Svizzera-UE è al Parlamento dal 13 marzo 2026',
+    'blog.article.decisioni-avs-ue-voto.imageAlt': 'Castelgrande in una scena editoriale sulle decisioni federali',
 };
 
 export default blogMetaChIt;

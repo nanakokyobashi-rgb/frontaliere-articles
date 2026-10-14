@@ -8204,6 +8204,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.divario-reddito-giovani-svizzera.title': 'Lohngefälle bei jungen Menschen in der Schweiz: Einkommenslücke geht zurück',
     'blog.article.divario-reddito-giovani-svizzera.excerpt': 'Bei den 1995 Geborenen beträgt die Einkommenslücke 14% Bei den 1965 Geborenen lag die Lücke bei 55% Im Jahr 2025 hatten 54% der jungen Frauen einen tertiären Bildungsabschluss',
     'blog.article.divario-reddito-giovani-svizzera.imageAlt': 'Ansicht von Lugano mit jungen Fachkräften',
+    'blog.article.decisioni-avs-ue-voto.title': 'Bundesrat: AHV, EU und Wahl 2026',
+    'blog.article.decisioni-avs-ue-voto.excerpt': 'Guy Parmelin verlässt den Bundesrat am 31.12.2026 AHV/IV-Renten steigen um rund 1,6 % Das Schweizer-EU-Paket befindet sich seit dem 13.',
+    'blog.article.decisioni-avs-ue-voto.imageAlt': 'Castelgrande in einer redaktionellen Szene zu Schweizer Bundesentscheiden',
 };
 
 export default blogMetaChDe;
