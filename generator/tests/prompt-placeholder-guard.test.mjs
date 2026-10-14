@@ -1,3 +1,4 @@
+import { editorialHeadlineGuidance } from '../scripts/lib/editorial-headline-guidance.mjs';
 /**
  * prompt-placeholder-guard.test.mjs — banco del guard sui segnaposto del
  * prompt, piu' il LOCK sul template e il gate sull'output pubblicato.
@@ -737,6 +738,10 @@ function extractSchemaLiterals(src) {
   const rx = /"([A-Za-z0-9_]+)"\s*:\s*"((?:[^"\\]|\\.)*)"/g;
   let m;
   while ((m = rx.exec(block)) !== null) {
+    if (m[2] === '${editorialHeadlineGuidance(primaryLocale)}') {
+      out.push(...['it', 'en', 'de', 'fr'].map(editorialHeadlineGuidance));
+      continue;
+    }
     if (m[2].includes('${')) continue;
     out.push(m[2]);
   }
@@ -1381,3 +1386,9 @@ describe('coerenza interna delle regole', () => {
     }
   });
 });
+
+ it('editorial headline guidance is rejected as schema echo in every locale', () => {
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    assert.throws(() => sanitizePromptPlaceholders({ id: 'example', content: { [locale]: { title: editorialHeadlineGuidance(locale) } } }));
+  }
+ });
