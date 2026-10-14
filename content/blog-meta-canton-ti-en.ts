@@ -30,6 +30,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.sala-risveglio-bellinzona.title': 'San Giovanni operating room in Bellinzona',
     'blog.article.sala-risveglio-bellinzona.excerpt': 'Recovery room: 6 adult and 3 pediatric beds Path from general surgery to robotics Modern, functional and technologically advanced environments Flows',
     'blog.article.sala-risveglio-bellinzona.imageAlt': 'Recovery room of the San Giovanni Hospital operating block in Bellinzona',
+    'blog.article.commissione-scuola-ticino.title': 'Middle school, audition in Ticino on aptitude courses',
+    'blog.article.commissione-scuola-ticino.excerpt': 'Hearing in Bellinzona on the DECs and sit aptitude and base courses among the representatives heard Report signed on the IP158 initiative Next meeting: 19',
+    'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzona meeting on lower secondary school courses and initiatives',
 };
 
 export default blogMetaCantonTiEn;

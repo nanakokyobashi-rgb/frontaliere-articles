@@ -30,6 +30,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.sala-risveglio-bellinzona.title': 'Bloc opératoire San Giovanni à Bellinzona',
     'blog.article.sala-risveglio-bellinzona.excerpt': 'Salle de réveil : 6 places adultes et 3 pédiatriques Parcours de la chirurgie générale à la robotique Environnements modernes, fonctionnels et technologiquement avancés Flux',
     'blog.article.sala-risveglio-bellinzona.imageAlt': 'Salle de réveil du bloc opératoire de l\'Hôpital San Giovanni à Bellinzona',
+    'blog.article.commissione-scuola-ticino.title': 'Collège, audition au Tessin sur les cours d\'aptitude',
+    'blog.article.commissione-scuola-ticino.excerpt': 'Audition à Bellinzone sur les cours d\'aptitude et de base DECS et SIT parmi les représentants entendus Rapport signé sur l\'initiative IP158 Prochaine réunion : 19',
+    'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzone : réunion sur les cours et initiatives de l\'école moyenne',
 };
 
 export default blogMetaCantonTiFr;

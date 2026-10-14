@@ -30,6 +30,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.sala-risveglio-bellinzona.title': 'Operationsblock San Giovanni in Bellinzona',
     'blog.article.sala-risveglio-bellinzona.excerpt': 'Aufwachraum: 6 Plätze für Erwachsene und 3 pädiatrische Plätze Von der Allgemeinchirurgie bis zur Robotik Moderne, funktionale und technologisch fortschrittliche Räumlichkeiten Abläufe',
     'blog.article.sala-risveglio-bellinzona.imageAlt': 'Aufwachraum des Operationsblocks im Spital San Giovanni in Bellinzona',
+    'blog.article.commissione-scuola-ticino.title': 'Mittelschule, Anhörung im Tessin zu den Eignungskursen',
+    'blog.article.commissione-scuola-ticino.excerpt': 'Anhörung in Bellinzona zu Eignungskursen und Basis DECS und Sit unter den angehörten Vertretern Unterzeichneter Bericht über die IP158-Initiative Nächstes Treffen: 19',
+    'blog.article.commissione-scuola-ticino.imageAlt': 'Bellinzona: Sitzung zu Kursen und Initiativen der Sekundarschule',
 };
 
 export default blogMetaCantonTiDe;

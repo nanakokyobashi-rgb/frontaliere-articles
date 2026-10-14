@@ -348,6 +348,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-commissione-scuola-ticino': {
+    title: 'Scuola media, audizione in Ticino sui corsi attitudinali',
+    description: 'Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull\'iniziativa IP158 Prossima riunione: 19',
+    keywords: 'frontalieri, ticino, svizzera, italia, scuola, media, audizione, corsi',
+    ogTitle: 'Scuola media, audizione in Ticino sui corsi attitudinali',
+    ogDescription: 'Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull\'iniziativa IP158 Prossima riunione: 19',
+    canonicalPath: '/articoli-ticino/commissione-scuola-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Scuola media, audizione in Ticino sui corsi attitudinali",
+      "description": "Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull'iniziativa IP158 Prossima riunione: 19",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-commissione-scuola-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bellinzona, riunione su corsi e iniziative della scuola media"
+      },
+      "datePublished": "2026-10-14T08:06:11+00:00",
+      "dateModified": "2026-10-14T08:06:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/commissione-scuola-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
