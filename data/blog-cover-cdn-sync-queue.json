@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-commissione-scuola-ticino.webp",
-      "sha256": "86aac653c69b294e903153091de40fbf77680048aa0bddaba6a186d9e92e1087"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-commissione-scuola-ticino-480w.webp",
-      "sha256": "e9a1b6468a44627c66eba3d46ccecc2468d131491def0224249fce74dbad0b83"
-    }
-  ]
+  "items": []
 }
