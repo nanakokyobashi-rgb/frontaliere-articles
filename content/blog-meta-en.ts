@@ -13152,6 +13152,11 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arresti-truffa-chiamate-ticino.title': 'Shock call scam: three arrests in Canton Ticino',
     'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'A network of scammers specialising in so-called shock calls has been dismantled in Canton Ticino: three people have been arrested.',
     'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'View of Lugano with a smartphone in the foreground',
+    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Cross-border daily brief – October 14, 2026: 921 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-10-14.excerpt': 'Today\'s numbers, October 14, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'The day\'s numbers for cross-border commuters – October 14, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Cross-border brief, October 14, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'The numbers for October 14, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
 };
 
 export default blogMetaEn;

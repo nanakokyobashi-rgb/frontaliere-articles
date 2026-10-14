@@ -13153,6 +13153,11 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arresti-truffa-chiamate-ticino.title': 'Truffa chiamate shock: tre arresti in Canton Ticino',
     'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'Smantellata in Canton Ticino una rete di truffatori specializzati nelle cosiddette chiamate shock: tre persone sono state arrestate.',
     'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'Vista di Lugano con smartphone in primo piano',
+    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri',
+    'blog.article.bollettino-frontaliere-2026-10-14.excerpt': 'I numeri di oggi, 14 ottobre 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'I numeri del giorno per i frontalieri – 14 ottobre 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-10-14.ogDescription': 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
 };
 
 export default blogMetaIt;

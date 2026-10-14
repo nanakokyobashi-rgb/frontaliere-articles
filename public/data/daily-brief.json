@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T12:33:13.192Z",
-  "dateIso": "2026-10-13",
+  "generatedAt": "2026-10-14T10:02:36.611Z",
+  "dateIso": "2026-10-14",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 31,
-    "jobsActive": 32199
+    "jobsActive": 32083
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-10-13T11:07:48.048Z",
+      "updatedAt": "2026-10-14T07:08:31.745Z",
       "count": 141,
       "zeroWaitCount": 141,
       "worst": {
@@ -1013,10 +1013,10 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-10-13T08:27:37.183Z",
+      "generatedAt": "2026-10-14T06:42:38.098Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 115,
-      "cheaperSwissCount": 15,
+      "cheaperItalyCount": 114,
+      "cheaperSwissCount": 16,
       "tieCount": 1,
       "cheapestItaly": [
         {
@@ -1084,25 +1084,25 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.073,
-      "lastDate": "2026-10-12",
-      "prevRate": 1.0722,
-      "prevDate": "2026-10-11",
-      "delta1d": 0.0008,
-      "rate7dAgo": 1.0737,
-      "delta7d": -0.0007,
+      "rate": 1.0738,
+      "lastDate": "2026-10-13",
+      "prevRate": 1.0738,
+      "prevDate": "2026-10-12",
+      "delta1d": 0,
+      "rate7dAgo": 1.0715,
+      "delta7d": 0.0023,
       "source": "frankfurter",
       "pointCount": 31,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-10-13T05:47:29.780Z",
-      "activeJobs": 32199,
-      "activeCompanies": 859,
-      "todayAdded": 544,
-      "yesterdayAdded": 858,
-      "last7dAdded": 7106,
+      "generatedAt": "2026-10-14T01:09:05.694Z",
+      "activeJobs": 32083,
+      "activeCompanies": 863,
+      "todayAdded": 578,
+      "yesterdayAdded": 921,
+      "last7dAdded": 7158,
       "degradedEditions": 0
     }
   }
