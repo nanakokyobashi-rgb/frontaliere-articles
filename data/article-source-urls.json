@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/provincia-di-como-sempre-meno-case-per-lavoratori-giovani-e-famiglie-sono-1302-gli-alloggi-sfitti": {
-    "articleId": "como-crisi-abitativa-alloggi-sfitti",
-    "ts": "2026-08-31T21:24:57.974Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/mendrisiotto/1947144/municipio-di-chiasso-extra-muros-proiezioni-finanziarie-complicate": {
     "articleId": "chiasso-potenziamento-a2-misure",
     "ts": "2026-09-01T05:24:55.241Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/infortuni-sul-lavoro-i-dati-peggiorano-in-tutta-la-lombardia-picchi-a-pavia-e-como-numeri-alti-a-milano-e-brescia": {
     "articleId": "infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como",
     "ts": "2026-10-14T11:18:47.543Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/dal-mondo/cronaca/1956683/21enne-19enne-due-auto-automobilista-minacce-como-ferito": {
+    "articleId": "arresti-auto-como-minacce",
+    "ts": "2026-10-14T12:24:36.678Z",
     "keyForm": 2
   }
 }

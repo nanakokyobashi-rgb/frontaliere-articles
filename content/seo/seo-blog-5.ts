@@ -107674,16 +107674,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
   },
 
   'blog-bollettino-frontaliere-2026-10-14': {
-    title: 'Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri',
+    title: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
     description: 'Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
-    ogTitle: 'Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri',
+    ogTitle: 'Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026',
     ogDescription: 'I numeri del 14 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
     canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-10-14/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Bollettino del frontaliere – 14 ottobre 2026: 921 nuovi annunci di lavoro ieri",
+      "headline": "Frontalieri: 921 nuovi annunci in Svizzera ieri — 14 ottobre 2026",
       "description": "Bollettino frontalieri del 14 ottobre 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
       "image": {
         "@type": "ImageObject",
@@ -107825,6 +107825,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-arresti-auto-como-minacce': {
+    title: 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    description: 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    keywords: 'frontalieri, ticino, svizzera, italia, arresti, como, furti, nelle',
+    ogTitle: 'Due arresti a Como: furti nelle auto e automobilista ferito',
+    ogDescription: 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
+    canonicalPath: '/articoli-frontaliere/arresti-auto-como-minacce/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Due arresti a Como: furti nelle auto e automobilista ferito",
+      "description": "Due arresti a Como dopo le segnalazioni dei residenti Un'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-pass-auto-rinnovo-annuale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada urbana vicino al confine con auto parcheggiate e autosilo all'alba"
+      },
+      "datePublished": "2026-10-14T12:24:36+00:00",
+      "dateModified": "2026-10-14T12:24:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/arresti-auto-como-minacce/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

@@ -9,7 +9,8 @@ import '../../host/cantonSectionsBootstrap.mjs';
  *
  * Auto-scan mode (default):
  *   1. Scans multiple Ticino + frontalieri news sources for recent headlines
- *   2. Uses Gemini to select the most relevant article for frontalieri
+ *   2. Uses the configured Decisions API gate (with Gemini fallback) to
+ *      select the most relevant article for frontalieri
  *   3. Checks against existing articles to avoid duplicates
  *   4. Generates full article in 4 languages + image
  *
@@ -69,6 +70,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readArticleRegistry } from '../../scripts/lib/registry-image-reader.mjs';
 import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, getProviderRosterStatus, providerRosterReady, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { classifyWithDecisionsApi } from './lib/decisions-api.mjs';
 import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './lib/fetch-with-ref-timeout.mjs';
 import {
@@ -875,6 +877,8 @@ function countTopicalHits(text, national) {
 // interno fallisce fail-open e non rigetta, ma una cache avvelenata da un
 // throw inatteso sopravviverebbe all'intero run.
 const _preSpendGateCache = new Map();
+let _decisionApiMissingKeyLogged = false;
+let _decisionApiCircuitOpen = false;
 
 // La chiave della memo. Estratta perche' ora la calcola il wrapper di cache e
 // non piu' il corpo del classifier. Trimmata una volta sola cosi' che la
@@ -1014,6 +1018,11 @@ ${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(sum
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 
+  if (process.env.DECISION_API_ENABLED === '1') {
+    const decision = await tryDecisionsApiClassifier(prompt, classifierCallTimeout, SECTION_NAME);
+    if (decision) return decision;
+  }
+
   let text = '';
   try {
     text = await _aiCallLLM(
@@ -1060,6 +1069,31 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
     parsed,
   };
   return result;
+}
+
+async function tryDecisionsApiClassifier(input, timeoutMs, sectionName) {
+  if (_decisionApiCircuitOpen) return null;
+  if (!String(process.env.DECISION_API_KEY || '').trim()) {
+    if (!_decisionApiMissingKeyLogged) {
+      console.error(`PRESPEND_DECISION_API_FALLBACK section=${sectionName || 'unknown'} code=DECISIONS_API_KEY_MISSING`);
+      _decisionApiMissingKeyLogged = true;
+    }
+    _decisionApiCircuitOpen = true;
+    return null;
+  }
+  try {
+    return await classifyWithDecisionsApi({
+      apiKey: process.env.DECISION_API_KEY,
+      input,
+      instructions: 'Use the editorial scope, inclusions and exclusions in the input. Evaluate its HEADLINE, FONTE and SOMMARIO, then choose relevant only when the described content satisfies that scope.',
+      timeoutMs,
+    });
+  } catch (err) {
+    // Fail over without logging source text, response body or credentials.
+    _decisionApiCircuitOpen = true;
+    console.error(`PRESPEND_DECISION_API_FALLBACK section=${sectionName || 'unknown'} code=${err?.code || 'DECISIONS_API_ERROR'}`);
+    return null;
+  }
 }
 
 // Tetto di chiamate al classifier per invocazione del gate.

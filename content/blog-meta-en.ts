@@ -13152,7 +13152,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arresti-truffa-chiamate-ticino.title': 'Shock call scam: three arrests in Canton Ticino',
     'blog.article.arresti-truffa-chiamate-ticino.excerpt': 'A network of scammers specialising in so-called shock calls has been dismantled in Canton Ticino: three people have been arrested.',
     'blog.article.arresti-truffa-chiamate-ticino.imageAlt': 'View of Lugano with a smartphone in the foreground',
-    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Cross-border daily brief – October 14, 2026: 921 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-10-14.title': 'Cross-border workers: 921 new Swiss job listings yesterday — October 14, 2026',
     'blog.article.bollettino-frontaliere-2026-10-14.excerpt': 'Today\'s numbers, October 14, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
     'blog.article.bollettino-frontaliere-2026-10-14.imageAlt': 'The day\'s numbers for cross-border commuters – October 14, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-10-14.seoDescription': 'Cross-border brief, October 14, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
@@ -13166,6 +13166,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Work accidents Lombardy: 2026 data worsen, Como peaks',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Over 75,293 accidents in Lombardy between January and August 2026 Total deaths rise to 101, compared to 97 in 2025 Como records 3,795 complaints and an increase',
     'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Editorial image related to: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
+    'blog.article.arresti-auto-como-minacce.title': 'Two arrests in Como: carjackings and injured motorist',
+    'blog.article.arresti-auto-como-minacce.excerpt': 'Two stops at Como after resident reports A forced car and a second vehicle damaged A motorist reports an injury to an arm',
+    'blog.article.arresti-auto-como-minacce.imageAlt': 'Urban street near the border with parked cars and a parking garage at dawn',
 };
 
 export default blogMetaEn;

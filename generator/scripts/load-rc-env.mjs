@@ -292,8 +292,15 @@ export const RC_TO_ENV = {
   // Resend webhook (newsletter delivery tracking)
   RESEND_WEBHOOK_SECRET:          ['RESEND_WEBHOOK_SECRET'],
 
+  // Server-only OpenAI Decisions API credential. It is intentionally not
+  // mirrored to any VITE_* variable or client-visible bundle.
+  DECISION_API_KEY:               ['DECISION_API_KEY'],
+
   // Feature flags
   ENABLE_JOB_ALERTS:              ['ENABLE_JOB_ALERTS'],
+  // Opt-in rollout for the pre-spend topic gate. Missing/0 keeps the current
+  // Gemini classifier; set to 1 only after the Remote Config rollout is ready.
+  DECISION_API_ENABLED:           ['DECISION_API_ENABLED'],
   // Site-owned static employer-profile ad test. Keep this in the workspace
   // loader so `bin/rc-env.sh` can activate the site build from one RC source;
   // the corpus generator itself does not consume the flag.
@@ -454,6 +461,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'NEAR_DUP_COSINE',
   'ENABLE_HAIKU_ARTICLE_FALLBACK',
   'ENABLE_CODEX_ARTICLE_FALLBACK',
+  'DECISION_API_ENABLED',
   'OMNIROUTE_PROVIDER_ALLOWLIST',
   'ENABLE_OMNIROUTE_FALLBACK',
   'CANTON_ARTICLE_SECTIONS_KILL',
