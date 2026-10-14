@@ -8228,6 +8228,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tasse-universitarie-zurigo-guida.title': 'Studiengebühren im Kanton Zürich: Leitfaden und Einschreibung',
     'blog.article.tasse-universitarie-zurigo-guida.excerpt': 'Erfahre, wie du dich bei den Studiengebühren im Kanton Zürich zurechtfindest, von den Studierendenkategorien bis zu den Einschreibungsverfahren und Beiträgen.',
     'blog.article.tasse-universitarie-zurigo-guida.imageAlt': 'Universitätsgebäude und Studierende im Kanton Zürich',
+    'blog.article.zurigo-corsi-lingua-integrazione.title': 'Sprachkurse in Zürich: Integration und Beiträge',
+    'blog.article.zurigo-corsi-lingua-integrazione.excerpt': 'Leitfaden zu Sprachkursen und Integrationsprogrammen im Kanton Zürich: Zuständigkeit, Voraussetzungen, Fristen, SEM-Bewilligungen und Beiträge.',
+    'blog.article.zurigo-corsi-lingua-integrazione.imageAlt': 'Verwaltungsgebäude in Zürich für Sprachkurse und Integration',
 };
 
 export default blogMetaChDe;

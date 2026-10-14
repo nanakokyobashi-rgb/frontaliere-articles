@@ -8228,6 +8228,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tasse-universitarie-zurigo-guida.title': 'Frais universitaires dans le canton de Zurich : guide et inscription',
     'blog.article.tasse-universitarie-zurigo-guida.excerpt': 'Découvrez comment vous y retrouver parmi les frais universitaires dans le canton de Zurich, des catégories d’étudiants aux procédures d’inscription et aux contributions.',
     'blog.article.tasse-universitarie-zurigo-guida.imageAlt': 'Bâtiment universitaire et étudiants dans le canton de Zurich',
+    'blog.article.zurigo-corsi-lingua-integrazione.title': 'Cours de langue à Zurich : intégration et subventions',
+    'blog.article.zurigo-corsi-lingua-integrazione.excerpt': 'Guide des cours de langue et des programmes d\'intégration dans le canton de Zurich : compétence, conditions requises, échéances, permis du SEM et subventions.',
+    'blog.article.zurigo-corsi-lingua-integrazione.imageAlt': 'Bâtiment administratif à Zurich pour cours de langue et intégration',
 };
 
 export default blogMetaChFr;

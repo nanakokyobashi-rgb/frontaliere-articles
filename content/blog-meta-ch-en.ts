@@ -8228,6 +8228,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tasse-universitarie-zurigo-guida.title': 'University tuition fees in the Canton of Zurich: guide and enrollment',
     'blog.article.tasse-universitarie-zurigo-guida.excerpt': 'Discover how to navigate university fees in the Canton of Zurich, from student categories to enrollment procedures and contributions.',
     'blog.article.tasse-universitarie-zurigo-guida.imageAlt': 'University building and students in the Canton of Zurich',
+    'blog.article.zurigo-corsi-lingua-integrazione.title': 'Language courses in Zurich: integration and subsidies',
+    'blog.article.zurigo-corsi-lingua-integrazione.excerpt': 'Guide to language courses and integration programs in the Canton of Zurich: competence, requirements, deadlines, SEM permits and contributions.',
+    'blog.article.zurigo-corsi-lingua-integrazione.imageAlt': 'Administrative building in Zurich for language courses and integration',
 };
 
 export default blogMetaChEn;

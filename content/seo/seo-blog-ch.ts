@@ -103832,6 +103832,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-corsi-lingua-integrazione': {
+    title: 'Corsi di lingua a Zurigo: integrazione e contributi',
+    description: 'Scopri come accedere ai corsi di lingua e programmi di integrazione nel Cantone di Zurigo. Requisiti, scadenze, permessi SEM e uffici competenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, corsi, lingua, zurigo, integrazione',
+    ogTitle: 'Corsi di lingua a Zurigo: integrazione e contributi',
+    ogDescription: 'Guida pratica per i corsi di lingua e programmi di integrazione nel Cantone di Zurigo. Scopri le autorità competenti, i permessi SEM, le scadenze e i requisiti per i contributi.',
+    canonicalPath: '/articoli-svizzera/zurigo-corsi-lingua-integrazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Corsi di lingua a Zurigo: integrazione e contributi",
+      "description": "Scopri come accedere ai corsi di lingua e programmi di integrazione nel Cantone di Zurigo. Requisiti, scadenze, permessi SEM e uffici competenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-corsi-lingua-integrazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo a Zurigo per corsi di lingua e integrazione"
+      },
+      "datePublished": "2026-10-14T04:35:31+00:00",
+      "dateModified": "2026-10-14T04:35:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zurigo-corsi-lingua-integrazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

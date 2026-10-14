@@ -27466,6 +27466,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'zurigo-corsi-lingua-integrazione',
+    category: 'pratico',
+    date: '2026-10-14T04:35:31.018Z',
+    image: '/images/blog/article-zurigo-corsi-lingua-integrazione.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
