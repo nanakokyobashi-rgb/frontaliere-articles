@@ -203,6 +203,22 @@ describe('omonimi e falsi amici', () => {
     );
     assert.equal(isInCantonArea('UR', 'Uri Geller arriva a Milano.'), false);
   });
+
+  test('le eta composte riconoscono anche diciassettenne e diciassettenni', () => {
+    const c = defaultCantonClassifier();
+    for (const text of [
+      'Diciassettenne ticinese ferito.',
+      'Diciassettenni ticinesi soccorsi.',
+    ]) {
+      assert.equal(c.mentionsIn(text).find((m) => m.group === 'TI')?.who, true, text);
+    }
+    for (const title of [
+      'Diciassettenne ticinese ferito',
+      'Diciassettenni ticinesi soccorsi',
+    ]) {
+      assert.deepEqual(codes({ title, excerpt: title, body: '' }), [], title);
+    }
+  });
 });
 
 describe('regole di assegnazione', () => {

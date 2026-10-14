@@ -406,8 +406,8 @@ const PERSON_LEAD_WORDS = new Set([
 ]);
 /** Forme lessicali complete: evita falsi prefissi come «atletica» e «target». */
 const PERSON_HEAD_RE = /^(?:turist[aei]|frontalier[ei]|lavorator[ei]|lavoratric[ei]|dipendent[ei]|pendolar[ei]|resident[ei]|cittadin[aoei]|abitant[ei]|medic[aoei]|oftalmolog[oi]|infermier[aeio]|atlet[aei]|sportiv[aeio]|giocator[ei]|giocatric[ei]|tennist[aei]|scalator[ei]|alpinist[aei]|student[ei]|studentess[ae]|giovan[eio]|anzian[aeio]|famigli[ae]|pazient[ei]|allevator[ei]|agricoltor[ei]|contadin[aoei]|imprenditor[ei]|automobilist[aei]|motociclist[aei]|ciclist[aei]|camionist[aei]|autist[aei]|conducent[ei]|passegger[oi]|viaggiator[ei]|escursionist[aei]|emigrat[aeio]|emigrant[ei]|donn[ae]|uom(?:o|ini)|ragazz[aoei]|bambin[aoei]|coppi[ae]|person[ae]|veicol[oi]|camion|furgon[ei]|targ(?:a|he|at[aeio]))$/u;
-/** Eta' scritta in cifre o in forma lessicale, anche composta: «68enne», «ventiduenne». */
-const PERSON_AGE_RE = /^(?:(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]|(?:venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)(?:du|tre|quattr|cinqu|sei|sett|nov)enn[ei]|(?:vent|trent|quarant|cinquant|sessant|settant|ottant|novant)(?:un|ott)enn[ei])$/u;
+/** Eta' scritta in cifre o in forma lessicale, anche composta: «68enne», «diciassettenne», «ventiduenne». */
+const PERSON_AGE_RE = /^(?:(?:\d{1,3}|(?:undic|dodic|tredic|quattordic|quindic|sedic|diciassett|diciott|diciannov|vent|trent|quarant|cinquant|sessant|settant|ottant|novant|cent))enn[ei]|(?:venti|trenta|quaranta|cinquanta|sessanta|settanta|ottanta|novanta)(?:du|tre|quattr|cinqu|sei|sett|nov)enn[ei]|(?:vent|trent|quarant|cinquant|sessant|settant|ottant|novant)(?:un|ott)enn[ei])$/u;
 /** Quantita' che possono reggere «di + demonimo»: «decine di ticinesi». */
 const PERSON_QUANTITY_RE = /^(?:pai[oa]|decin[ae]|centinai[ae]|migliai[ae]|dozzin[ae]|ventin[ae]|trentin[ae]|quarantin[ae]|cinquantin[ae]|sessantin[ae]|settantin[ae]|ottantin[ae]|novantin[ae]|centinai[oe]|migliai[oi])$/u;
 /** Parole intere (come radici catturerebbero «autorita'», «motore»). */
