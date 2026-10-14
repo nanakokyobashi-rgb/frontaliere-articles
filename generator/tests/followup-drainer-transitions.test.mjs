@@ -39,7 +39,7 @@ test('la descrizione UNPARKED resta entro il limite GitHub', () => {
 });
 
 test('UNPARK verifica provisioning/edit prima di memo, successo e commento', () => {
-  const start = src.indexOf('if ((outcome === null || deliveredParked) && !isUnparkedOnce(iss)) {');
+  const start = src.indexOf('if ((canUnparkWithoutVerdict || deliveredParked) && !isUnparkedOnce(iss)) {');
   const end = src.indexOf('// A daily issue is only a container.', start);
   assert.ok(start >= 0 && end > start, 'il blocco UNPARK deve precedere la gestione item-scoped daily');
   const branch = src.slice(start, end);
