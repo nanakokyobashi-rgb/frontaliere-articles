@@ -23,6 +23,8 @@
  * stops being a note and becomes something a human is made to read.
  */
 
+import { buildDailyBriefInsights } from './daily-brief-insights.mjs';
+
 const HOUR_MS = 60 * 60 * 1000;
 
 /** A block whose source is fresh no longer than this is publishable. */
@@ -35,6 +37,8 @@ export const BORDER_WAIT_DOC_MAX_AGE_MS = 24 * HOUR_MS;
  */
 export const BORDER_WAIT_MIN_CROSSINGS = 30;
 export const FUEL_MAX_AGE_MS = 48 * HOUR_MS;
+/** A fresh aggregate must not turn a months-old station quote into today's price. */
+export const FUEL_QUOTE_MAX_AGE_MS = 7 * 24 * HOUR_MS;
 /** FX has weekend gaps; five calendar days tolerates Fri→Wed without lying. */
 export const EXCHANGE_MAX_AGE_DAYS = 5;
 export const JOBS_MAX_AGE_MS = 48 * HOUR_MS;
@@ -269,6 +273,7 @@ export function shapeBorderWait(docs, { nowMs = Date.now() } = {}) {
       waitMinutes: Math.round(wait),
       status: d.status || null,
       direction: d.direction || null,
+      updatedAt: d.lastUpdate,
     });
   }
   if (rows.length < BORDER_WAIT_MIN_CROSSINGS) {
@@ -290,6 +295,18 @@ export function shapeBorderWait(docs, { nowMs = Date.now() } = {}) {
 }
 
 /** Fuel block from the decoded `fuelPrices/metadata` doc (summary + rankings). */
+export function fuelQuoteIsFresh(station, nowMs) {
+  const value = station?.updatedAt;
+  // Older payloads did not carry per-station clocks; their aggregate freshness
+  // remains the compatibility contract. An explicit station clock wins over it.
+  if (value == null) return true;
+  const dayFirst = /^(\d{2})\/(\d{2})\/(\d{4})\b/.exec(String(value));
+  const normalized = dayFirst ? `${dayFirst[3]}-${dayFirst[2]}-${dayFirst[1]}T00:00:00Z` : value;
+  const timestamp = Date.parse(normalized);
+  if (dayFirst && new Date(timestamp).getUTCDate() !== Number(dayFirst[1])) return false;
+  return Number.isFinite(timestamp) && timestamp <= nowMs && nowMs - timestamp <= FUEL_QUOTE_MAX_AGE_MS;
+}
+
 export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
   if (!meta || typeof meta !== 'object') return unavailable('fuelPrices/metadata missing');
   const generatedMs = Date.parse(meta.generatedAt || '');
@@ -301,15 +318,23 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
   const summary = meta.summary || {};
   const rankings = meta.rankings || {};
   const cheapestItaly = (Array.isArray(rankings.cheapestItalyMunicipalities) ? rankings.cheapestItalyMunicipalities : [])
+    .filter(m => fuelQuoteIsFresh(m?.cheapestStation, nowMs))
     .map((m) => ({
       municipality: m?.municipality ?? null,
       province: m?.province ?? null,
       minPriceEur: round(m?.minPriceEur, 3),
       stationName: m?.cheapestStation?.stationName ?? null,
+      stationId: m?.cheapestStation?.id ?? null,
+      dieselPriceEur: round(m?.cheapestStation?.dieselPriceEur, 3),
+      observedAt: m?.cheapestStation?.updatedAt ?? null,
     }))
     .filter((m) => m.municipality && m.minPriceEur != null)
     .slice(0, 5);
   const bestSavings = (Array.isArray(rankings.bestCrossBorderSavings) ? rankings.bestCrossBorderSavings : [])
+    .filter(m => {
+      const ranked = (Array.isArray(rankings.cheapestItalyMunicipalities) ? rankings.cheapestItalyMunicipalities : []).find(row => row.municipality === m.municipality);
+      return !ranked || fuelQuoteIsFresh(ranked.cheapestStation, nowMs);
+    })
     .map((m) => ({
       municipality: m?.municipality ?? null,
       province: m?.province ?? null,
@@ -342,6 +367,8 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
     // read as a 0-minute queue — `null` here means "not measured", and the copy
     // builder drops the sentence rather than asserting a zero.
     municipalityCount: finiteOrNull(summary.municipalityCount),
+    comparedMunicipalityCount: finiteOrNull(summary.municipalitiesWithSwissComparison),
+    sources: meta.sources || null,
     cheaperItalyCount: finiteOrNull(summary.cheaperItalyCount),
     cheaperSwissCount: finiteOrNull(summary.cheaperSwissCount),
     tieCount: finiteOrNull(summary.tieCount),
@@ -679,7 +706,7 @@ function previousDegradedEditions(previous, block) {
  * `previous` is the snapshot the last edition wrote (`null` on a first run):
  * it carries nothing but the per-block degradation streaks forward.
  */
-export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous = null }) {
+export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, fuelMetadata, exchangeDoc, jobsStats, previous = null, previousSnapshot = previous, searchDemand = null }) {
   // Same test as everywhere else in the module: a day that exists. The raw
   // regex used to let `2026-02-31` through here and have it refused deeper in,
   // which wrote and committed a snapshot whose `dateIso` is a day nobody has —
@@ -712,6 +739,7 @@ export function buildDailyBrief({ todayIso, nowMs = Date.now(), borderWaitDocs, 
       jobsActive: blocks.jobs.available ? blocks.jobs.activeJobs : 0,
     },
     blocks,
+    insights: buildDailyBriefInsights({ blocks, jobsStats, todayIso, previousSnapshot, searchDemand }),
   };
 }
 

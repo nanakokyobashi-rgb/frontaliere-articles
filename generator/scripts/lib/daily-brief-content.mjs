@@ -21,6 +21,7 @@
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { replaceLocalizedToponymMismatches } from './localized-toponyms.mjs';
+import { DEMAND_THEMES } from './daily-brief-demand.mjs';
 
 export const DAILY_BRIEF_ID_PREFIX = 'bollettino-frontaliere-';
 /** Keep this many editions in the blog sitemap; older ones are de-listed. */
@@ -258,13 +259,13 @@ const T = {
     briefName: 'Bollettino del frontaliere',
     headline: (h) => ({
       borderWait: `a ${h.name} ${h.minutes} minuti di coda`,
-      jobs: `${fmt('it', h.count)} nuovi annunci di lavoro ieri`,
+      jobs: `${fmt('it', h.count)} nuovi annunci in Svizzera ieri`,
       jobsTotal: `${fmt('it', h.count)} annunci di lavoro attivi in Svizzera`,
       exchange: `franco a ${fmt('it', h.rate, 4)} €`,
       fuel: `benzina da ${fmt('it', h.priceEur, 3)} €/L a ${h.municipality}`,
       fuelSaving: `a ${h.municipality} il pieno giusto vale ${fmt('it', h.saving50LEur, 0)} €`,
     })[h.kind],
-    title: (dateLabel, headline) => `Bollettino del frontaliere – ${dateLabel}: ${headline}`,
+    title: (dateLabel, headline) => `Frontalieri: ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
       `I numeri di oggi, ${dateLabel}, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.`,
     seoDescription: (dateLabel) =>
@@ -283,10 +284,10 @@ const T = {
     bwMin: (n) => `${n} min`,
     bwLink: `Il traffico cambia di ora in ora: la situazione live di ogni valico è sulla [pagina del traffico alle dogane](${HUB.traffic.it}).`,
     bwDown: '⚠️ Il monitoraggio dei valichi non ha dati freschi stamattina: il blocco torna nella prossima edizione. La situazione live resta sulla [pagina del traffico alle dogane](/traffico-dogane/).',
-    fuelH: 'Benzina: dove costa meno oggi',
+    fuelH: 'Carburanti: prezzi comunicati al confine',
     fuelLead: (f) =>
-      `Su ${f.municipalityCount} comuni di confine monitorati, oggi conviene fare il pieno in Svizzera in ${f.cheaperSwissCount} casi e in Italia in ${f.cheaperItalyCount}.`,
-    fuelCols: ['Comune (IT)', 'Verde, prezzo minimo'],
+      `Su ${f.municipalityCount} comuni di confine monitorati, nel riepilogo il pieno risulta meno caro in Svizzera in ${f.cheaperSwissCount} casi e in Italia in ${f.cheaperItalyCount}.`,
+    fuelCols: ['Comune (IT)', 'Benzina, minimo comunicato'],
     fuelPrice: (p) => `${fmt('it', p, 3)} €/L`,
     fuelSaving: (s) =>
       `📊 **Il pieno giusto dal lato giusto.** A **${s.municipality}** (${s.province}) il divario oggi vale **${fmt('it', s.saving50LEur, 2)} € su un pieno da 50 litri** (${fmt('it', s.italyPriceEur, 3)} €/L in Italia contro ${fmt('it', s.swissPriceEur, 3)} €/L al distributore svizzero più vicino).`,
@@ -319,13 +320,13 @@ const T = {
     briefName: 'Cross-border daily brief',
     headline: (h) => ({
       borderWait: `${h.minutes}-minute queue at ${h.name}`,
-      jobs: `${fmt('en', h.count)} new job listings yesterday`,
+      jobs: `${fmt('en', h.count)} new Swiss job listings yesterday`,
       jobsTotal: `${fmt('en', h.count)} active job listings in Switzerland`,
       exchange: `franc at €${fmt('en', h.rate, 4)}`,
       fuel: `petrol from €${fmt('en', h.priceEur, 3)}/L in ${h.municipality}`,
       fuelSaving: `the right fill-up in ${h.municipality} is worth €${fmt('en', h.saving50LEur, 0)}`,
     })[h.kind],
-    title: (dateLabel, headline) => `Cross-border daily brief – ${dateLabel}: ${headline}`,
+    title: (dateLabel, headline) => `Cross-border workers: ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
       `Today's numbers, ${dateLabel}, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday's close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.`,
     seoDescription: (dateLabel) =>
@@ -344,10 +345,10 @@ const T = {
     bwMin: (n) => `${n} min`,
     bwLink: `Traffic shifts by the hour — every crossing's live status is on the [border traffic page](${HUB.traffic.en}).`,
     bwDown: '⚠️ Border monitoring has no fresh data this morning; this section returns in the next edition. Live status stays on the [border traffic page](/en/border-wait/).',
-    fuelH: 'Fuel: where it costs least today',
+    fuelH: 'Fuel: reported prices near the border',
     fuelLead: (f) =>
       `Across ${f.municipalityCount} monitored border municipalities, filling up is cheaper in Switzerland in ${f.cheaperSwissCount} of them and in Italy in ${f.cheaperItalyCount}.`,
-    fuelCols: ['Municipality (IT)', 'Unleaded, lowest price'],
+    fuelCols: ['Municipality (IT)', 'Unleaded, reported minimum'],
     fuelPrice: (p) => `€${fmt('en', p, 3)}/L`,
     fuelSaving: (s) =>
       `📊 **The right side for a full tank.** In **${s.municipality}** (${s.province}) today's gap is worth **€${fmt('en', s.saving50LEur, 2)} on a 50-litre tank** (€${fmt('en', s.italyPriceEur, 3)}/L in Italy vs €${fmt('en', s.swissPriceEur, 3)}/L at the nearest Swiss station).`,
@@ -380,13 +381,13 @@ const T = {
     briefName: 'Grenzgänger-Tagesbulletin',
     headline: (h) => ({
       borderWait: `${h.minutes} Minuten Wartezeit in ${h.name}`,
-      jobs: `${fmt('de', h.count)} neue Stellenangebote gestern`,
+      jobs: `${fmt('de', h.count)} neue Stellen in der Schweiz gestern`,
       jobsTotal: `${fmt('de', h.count)} aktive Stellenangebote in der Schweiz`,
       exchange: `Franken bei ${fmt('de', h.rate, 4)} €`,
       fuel: `Benzin ab ${fmt('de', h.priceEur, 3)} €/L in ${h.municipality}`,
       fuelSaving: `in ${h.municipality} ist die richtige Tankfüllung ${fmt('de', h.saving50LEur, 0)} € wert`,
     })[h.kind],
-    title: (dateLabel, headline) => `Grenzgänger-Tagesbulletin – ${dateLabel}: ${headline}`,
+    title: (dateLabel, headline) => `Grenzgänger: ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
       `Die Zahlen von heute, ${dateLabel}, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.`,
     seoDescription: (dateLabel) =>
@@ -405,10 +406,10 @@ const T = {
     bwMin: (n) => `${n} Min.`,
     bwLink: `Der Verkehr ändert sich stündlich — der Live-Status jedes Übergangs steht auf der [Seite zur Wartezeit an der Grenze](${HUB.traffic.de}).`,
     bwDown: '⚠️ Die Grenzüberwachung hat heute Morgen keine frischen Daten; der Abschnitt kehrt in der nächsten Ausgabe zurück. Live-Status: [Wartezeit an der Grenze](/de/wartezeit-grenze/).',
-    fuelH: 'Benzin: Wo es heute am wenigsten kostet',
+    fuelH: 'Kraftstoff: gemeldete Preise an der Grenze',
     fuelLead: (f) =>
-      `In ${f.municipalityCount} überwachten Grenzgemeinden lohnt sich das Tanken heute in ${f.cheaperSwissCount} Fällen in der Schweiz und in ${f.cheaperItalyCount} in Italien.`,
-    fuelCols: ['Gemeinde (IT)', 'Bleifrei, Tiefstpreis'],
+      `In ${f.municipalityCount} überwachten Grenzgemeinden ist das Tanken laut Übersicht günstiger in ${f.cheaperSwissCount} Fällen in der Schweiz und in ${f.cheaperItalyCount} in Italien.`,
+    fuelCols: ['Gemeinde (IT)', 'Bleifrei, gemeldeter Tiefstpreis'],
     fuelPrice: (p) => `${fmt('de', p, 3)} €/L`,
     fuelSaving: (s) =>
       `📊 **Die richtige Seite für eine volle Tankfüllung.** In **${s.municipality}** (${s.province}) ist die Differenz heute **${fmt('de', s.saving50LEur, 2)} € pro 50-Liter-Tank** wert (${fmt('de', s.italyPriceEur, 3)} €/L in Italien gegenüber ${fmt('de', s.swissPriceEur, 3)} €/L an der nächsten Schweizer Tankstelle).`,
@@ -441,13 +442,13 @@ const T = {
     briefName: 'Bulletin quotidien du frontalier',
     headline: (h) => ({
       borderWait: `${h.minutes} minutes d'attente à ${h.name}`,
-      jobs: `${fmt('fr', h.count)} nouvelles offres d'emploi hier`,
+      jobs: `${fmt('fr', h.count)} nouvelles offres en Suisse hier`,
       jobsTotal: `${fmt('fr', h.count)} offres d'emploi actives en Suisse`,
       exchange: `franc à ${fmt('fr', h.rate, 4)} €`,
       fuel: `essence dès ${fmt('fr', h.priceEur, 3)} €/L à ${h.municipality}`,
       fuelSaving: `à ${h.municipality}, le bon plein vaut ${fmt('fr', h.saving50LEur, 0)} €`,
     })[h.kind],
-    title: (dateLabel, headline) => `Bulletin du frontalier – ${dateLabel} : ${headline}`,
+    title: (dateLabel, headline) => `Frontaliers : ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
       `Les chiffres du jour, ${dateLabel}, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.`,
     seoDescription: (dateLabel) =>
@@ -466,10 +467,10 @@ const T = {
     bwMin: (n) => `${n} min`,
     bwLink: `Le trafic change d'heure en heure — l'état en direct de chaque douane est sur la [page du temps d'attente](${HUB.traffic.fr}).`,
     bwDown: '⚠️ Le suivi des douanes n’a pas de données fraîches ce matin ; la section revient dans la prochaine édition. L’état en direct reste sur la [page du temps d’attente](/fr/temps-attente-douane/).',
-    fuelH: 'Essence : où elle coûte le moins cher aujourd’hui',
+    fuelH: 'Carburants : prix communiqués à la frontière',
     fuelLead: (f) =>
-      `Sur ${f.municipalityCount} communes frontalières suivies, faire le plein revient aujourd'hui moins cher en Suisse dans ${f.cheaperSwissCount} cas et en Italie dans ${f.cheaperItalyCount}.`,
-    fuelCols: ['Commune (IT)', 'Sans plomb, prix minimum'],
+      `Sur ${f.municipalityCount} communes frontalières suivies, faire le plein revient moins cher selon le relevé en Suisse dans ${f.cheaperSwissCount} cas et en Italie dans ${f.cheaperItalyCount}.`,
+    fuelCols: ['Commune (IT)', 'Sans plomb, minimum communiqué'],
     fuelPrice: (p) => `${fmt('fr', p, 3)} €/L`,
     fuelSaving: (s) =>
       `📊 **Le bon côté pour un plein.** À **${s.municipality}** (${s.province}), l'écart vaut aujourd'hui **${fmt('fr', s.saving50LEur, 2)} € sur un plein de 50 litres** (${fmt('fr', s.italyPriceEur, 3)} €/L en Italie contre ${fmt('fr', s.swissPriceEur, 3)} €/L à la station suisse la plus proche).`,
@@ -571,6 +572,41 @@ function mdTable(headerCells, rows) {
   return `${header}\n${sep}\n${body}`;
 }
 
+const INSIGHT_COPY = {
+  it: { week: 'Annunci aggiunti nelle ultime due settimane complete', companies: 'Aziende con più annunci attivi in Svizzera', locations: 'Località con più annunci attivi', entity: 'Azienda / località', count: 'Annunci attivi', closed: 'Sette giorni fino al', prior: 'Sette giorni precedenti', change: 'Variazione', fx: 'Simulazione del solo cambio su 4.000 CHF', fxValue: 'Controvalore lordo in euro', fxDelta: 'Differenza rispetto al cambio di sette giorni prima', waits: 'Confronto con la precedente edizione', fuel: 'Prezzi comunicati presso gli stessi distributori', petrol: 'Benzina €/L', diesel: 'Diesel €/L', observed: 'Ultima comunicazione', search: 'I temi cercati dai lettori', theme: 'Tema', demand: 'Impression in Ricerca Google', searches: 'Ricerche sul sito', note: 'Dati aggregati per tema: non sono pubblicate ricerche individuali. Le impression misurano esposizione su Google, non il numero di persone.', source: 'Fonte', checked: 'Rilevamento', sample: 'campione parziale' },
+  en: { week: 'Listings added in the last two complete weeks', companies: 'Companies with the most active listings in Switzerland', locations: 'Locations with the most active listings', entity: 'Company / location', count: 'Active listings', closed: 'Seven days ending', prior: 'Previous seven days', change: 'Change', fx: 'Exchange-only illustration for CHF 4,000', fxValue: 'Gross euro equivalent', fxDelta: 'Difference from the exchange rate seven days earlier', waits: 'Comparison with the previous edition', fuel: 'Reported prices at the same stations', petrol: 'Petrol EUR/L', diesel: 'Diesel EUR/L', observed: 'Last report', search: 'Topics readers search for', theme: 'Topic', demand: 'Google Search impressions', searches: 'Site searches', note: 'Aggregated topics only: individual searches are never published. Impressions measure Google exposure, not people.', source: 'Source', checked: 'Observation', sample: 'partial sample' },
+  de: { week: 'Neue Inserate in den letzten zwei vollständigen Wochen', companies: 'Unternehmen mit den meisten aktiven Inseraten in der Schweiz', locations: 'Orte mit den meisten aktiven Inseraten', entity: 'Unternehmen / Ort', count: 'Aktive Inserate', closed: 'Sieben Tage bis', prior: 'Vorherige sieben Tage', change: 'Veränderung', fx: 'Reines Wechselkursbeispiel für CHF 4.000', fxValue: 'Bruttogegenwert in Euro', fxDelta: 'Differenz zum Wechselkurs sieben Tage zuvor', waits: 'Vergleich mit der vorherigen Ausgabe', fuel: 'Gemeldete Preise an denselben Tankstellen', petrol: 'Benzin EUR/L', diesel: 'Diesel EUR/L', observed: 'Letzte Meldung', search: 'Von Lesern gesuchte Themen', theme: 'Thema', demand: 'Impressionen in der Google Suche', searches: 'Suchen auf der Website', note: 'Nur aggregierte Themen: einzelne Suchanfragen werden nie veröffentlicht. Impressionen messen Sichtbarkeit auf Google, nicht Personen.', source: 'Quelle', checked: 'Messung', sample: 'unvollständige Stichprobe' },
+  fr: { week: 'Annonces ajoutées durant les deux dernières semaines complètes', companies: 'Entreprises avec le plus d’annonces actives en Suisse', locations: 'Localités avec le plus d’annonces actives', entity: 'Entreprise / localité', count: 'Annonces actives', closed: 'Sept jours jusqu’au', prior: 'Sept jours précédents', change: 'Variation', fx: 'Simulation du seul change pour 4.000 CHF', fxValue: 'Contre-valeur brute en euros', fxDelta: 'Différence avec le taux de change sept jours auparavant', waits: 'Comparaison avec l’édition précédente', fuel: 'Prix communiqués dans les mêmes stations', petrol: 'Essence EUR/L', diesel: 'Diesel EUR/L', observed: 'Dernière communication', search: 'Les thèmes recherchés par les lecteurs', theme: 'Thème', demand: 'Impressions dans la Recherche Google', searches: 'Recherches sur le site', note: 'Thèmes agrégés uniquement : aucune recherche individuelle n’est publiée. Les impressions mesurent la visibilité sur Google, pas des personnes.', source: 'Source', checked: 'Relevé', sample: 'échantillon partiel' },
+};
+
+function insightSections(locale, brief) {
+  const copy = INSIGHT_COPY[locale];
+  const insights = brief.insights || {};
+  const sections = { borderWait: [], fuel: [], exchange: [], jobs: [] };
+  const bw = insights.borderWait;
+  if (bw && Number.isFinite(bw.changeMinutes)) sections.borderWait.push(`### ${copy.waits}\n${localizeBorderWaitName(bw.name, locale, bw.slug)}: ${bw.previousWaitMinutes} → ${bw.waitMinutes} min (${bw.previousDate} → ${brief.dateIso}).`);
+  const fuel = brief.blocks?.fuel;
+  if (fuel?.available) {
+    const rows = fuel.cheapestItaly.filter(row => Number.isFinite(row.dieselPriceEur));
+    if (rows.length) sections.fuel.push(`### ${copy.fuel}\n${mdTable([copy.entity, copy.petrol, copy.diesel, copy.observed], rows.map(row => [row.municipality, fmt(locale, row.minPriceEur, 3), fmt(locale, row.dieselPriceEur, 3), row.observedAt || '—']))}`);
+    sections.fuel.push(`${copy.checked}: ${fuel.generatedAt}.`);
+  }
+  const fx = insights.exchange;
+  if (fx) {
+    sections.exchange.push(`### ${copy.fx}\n${copy.fxValue}: **${fmt(locale, fx.salaryValueEur, 2)} EUR** (${fx.lastDate}).`);
+    if (Number.isFinite(fx.weeklySalaryChangeEur)) sections.exchange.push(`${copy.fxDelta}: **${signed(locale, fx.weeklySalaryChangeEur, 2)} EUR**.`);
+  }
+  const jobs = insights.jobs;
+  if (jobs) {
+    if (Number.isFinite(jobs.currentWeekAdded) && Number.isFinite(jobs.previousWeekAdded)) sections.jobs.push(`### ${copy.week}\n${mdTable([copy.closed, copy.prior, copy.change], [[`${jobs.lastClosedDay}: ${fmt(locale, jobs.currentWeekAdded)}`, fmt(locale, jobs.previousWeekAdded), signed(locale, jobs.weeklyChange, 0)]])}`);
+    for (const [key, heading] of [['topCompanies', copy.companies], ['topLocations', copy.locations]]) {
+      const rows = jobs[key];
+      if (rows?.length) sections.jobs.push(`### ${heading}\n${mdTable([copy.entity, copy.count], rows.map(row => [key === 'topLocations' ? localizeBorderWaitName(row.name, locale) : row.name, fmt(locale, row.count)]))}`);
+    }
+  }
+  return sections;
+}
+
 function buildLocaleContent(locale, brief, headline) {
   const t = T[locale];
   const blocks = projectDailyBriefForLocale(brief, locale).blocks;
@@ -582,6 +618,7 @@ function buildLocaleContent(locale, brief, headline) {
     : headline;
   const dateLabel = humanDate(brief.dateIso, locale);
   const wd = weekday(brief.dateIso, locale);
+  const insights = insightSections(locale, brief);
 
   // body1 — intro + border waits
   const parts1 = [t.intro(wd, dateLabel)];
@@ -593,7 +630,7 @@ function buildLocaleContent(locale, brief, headline) {
     if (top.length >= 2) {
       parts1.push(mdTable(t.bwCols, top.map((c) => [c.name, t.bwMin(c.waitMinutes), STATUS_LABEL[locale][c.status] || '—'])));
     }
-    parts1.push(t.bwLink);
+    parts1.push(...insights.borderWait, t.bwLink);
   } else {
     parts1.push(t.bwDown);
   }
@@ -617,7 +654,7 @@ function buildLocaleContent(locale, brief, headline) {
     if (fuel.bestSavings[0]) parts2.push(t.fuelSaving(fuel.bestSavings[0]));
     const swiss = t.fuelSwiss(fuel.cheapestSwissStation);
     if (swiss) parts2.push(swiss);
-    parts2.push(t.fuelLink);
+    parts2.push(...insights.fuel, t.fuelLink);
   } else {
     parts2.push(t.fuelDown);
   }
@@ -627,6 +664,7 @@ function buildLocaleContent(locale, brief, headline) {
   const fx = blocks.exchange;
   if (fx?.available) {
     parts3.push(t.fxLead(fx));
+    parts3.push(...insights.exchange);
     parts3.push(t.fxWhy);
   } else {
     parts3.push(t.fxDown);
@@ -646,6 +684,22 @@ function buildLocaleContent(locale, brief, headline) {
     parts4.push(t.jobsLink);
   } else {
     parts4.push(t.jobsDown);
+  }
+  parts4.push(...insights.jobs);
+  const demand = brief.insights?.searchDemand;
+  if (demand?.available && demand.topics?.length) {
+    const copy = INSIGHT_COPY[locale];
+    const rows = demand.topics.filter(row => DEMAND_THEMES[row.theme]);
+    if (rows.length) {
+      parts4.push(`## ${copy.search}\n${demand.startDate} → ${demand.endDate}`);
+      parts4.push(mdTable([copy.theme, copy.demand, copy.searches], rows.map(row => [
+        DEMAND_THEMES[row.theme][LOCALES.indexOf(locale)],
+        demand.sources.gsc ? fmt(locale, row.impressions) : '—',
+        demand.sources.ga4 ? fmt(locale, row.searches) : '—',
+      ])));
+      parts4.push(copy.note);
+      parts4.push(`${copy.source}: ${[demand.sources.gsc ? 'Google Search Console' : '', demand.sources.ga4 ? 'Firebase Analytics / GA4' : ''].filter(Boolean).join(', ')}${demand.partial ? ` (${copy.sample})` : ''}.`);
+    }
   }
   parts4.push(`## ${t.methodH}`);
   parts4.push(t.method);

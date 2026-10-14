@@ -1,9 +1,9 @@
 /**
  * Hero-image generation for the daily "Bollettino del Frontaliere" edition.
  *
- * Discover's requirement is a UNIQUE image ≥1200px wide per edition — a shared
- * catalog photo (the evergreen digests' `/images/places/…` route) does not
- * qualify. So the hero is generated from the day's numbers: an SVG stat card
+ * Google recommends a relevant image ≥1200px wide; uniqueness is not an
+ * eligibility requirement. Each edition visualizes its actual numbers rather
+ * than reusing an unrelated catalog image: an SVG stat card
  * rasterized to 1200×675 webp (the site's og:image geometry, same as
  * create-article.mjs's optimizeImageToWebp target).
  *

@@ -96,7 +96,8 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 
 /**
  * The per-locale meta fields this module may touch, in the order they'd be
- * INSERTED when missing. `title`/`imageAlt` are never touched here — this
+ * INSERTED when missing. `imageAlt` is never touched; titles require the explicit
+ * `refreshTitles` option used by the same-day daily edition. Historically this
  * issue is scoped to the three descriptive surfaces #79/#80/#83 collapsed and
  * split, not to every field the meta block carries.
  */
@@ -212,9 +213,9 @@ function localeMetaFieldPattern(id, field) {
  * @param {Record<string,string>} fields - a subset of LOCALE_FIELDS → value
  * @returns {string} the new content (`=== src` when nothing changed)
  */
-export function upsertLocaleMetaFields(src, id, fields) {
+export function upsertLocaleMetaFields(src, id, fields, { refreshTitles = false } = {}) {
   const requested = [];
-  for (const field of LOCALE_FIELDS) {
+  for (const field of refreshTitles ? ['title', ...LOCALE_FIELDS] : LOCALE_FIELDS) {
     if (!(field in fields)) continue;
     const value = fields[field];
     if (typeof value !== 'string' || value.trim() === '') continue;
@@ -287,10 +288,22 @@ function replaceIndentedSeoField(source, field, value) {
  * @param {{description?:string, ogDescription?:string}} seo
  * @returns {string} the new content (`=== src` when nothing changed)
  */
-export function upsertSeoDescriptionBlock(src, id, seo) {
+export function upsertSeoDescriptionBlock(src, id, seo, { refreshTitles = false } = {}) {
   const { index: startIdx, closeIdx } = findUniqueSeoEntry(src, id);
   const original = src.slice(startIdx, closeIdx + 1);
   let block = original;
+
+  if (refreshTitles) {
+    for (const field of ['title', 'ogTitle']) {
+      if (typeof seo[field] === 'string' && seo[field].trim()) {
+        block = replaceIndentedSeoField(block, field, escapeForSingleQuoteTS(seo[field]));
+      }
+    }
+    if (typeof seo.headline === 'string' && seo.headline.trim()) {
+      block = block.replace(/("headline":\s*")((?:[^"\\]|\\.)*)(")/,
+        (_, before, _old, after) => before + JSON.stringify(seo.headline).slice(1, -1) + after);
+    }
+  }
 
   if (typeof seo.description === 'string' && seo.description.trim() !== '') {
     const single = escapeForSingleQuoteTS(seo.description);
@@ -330,6 +343,7 @@ export function upsertSeoDescriptionBlock(src, id, seo) {
  * @param {(file: string, content: string) => void} [opts.writeFile] - optional staged writer
  * @param {(file: string, encoding?: string) => string} [opts.readFile] - optional staged reader
  * @param {string} [opts.section] - explicit article section; inferred from metaPrefix otherwise
+ * @param {boolean} [opts.refreshTitles] - refresh title/ogTitle/headline from the observed daily snapshot
  * @param {boolean} [opts.lockHeld] - caller already holds the section refresh lock
  * @returns {{ changed: boolean, touched: string[] }}
  */
@@ -375,10 +389,10 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
     // The section lock must cover the complete read-modify-write, not just
     // the writes: recovery can otherwise replace the SEO/registry snapshot
     // between this preflight read and the eventual rename.
-    if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription)) {
+    if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription || (opts.refreshTitles && clampedSeoTexts.title))) {
       const seoPath = path.join(repoRoot, corpusPath(seoFile));
       const before = readFile(seoPath, 'utf-8');
-      const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts);
+      const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts, opts);
       seoUpdate = { file: seoPath, before, after };
     }
 
@@ -388,7 +402,7 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
       const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS);
       const file = path.join(repoRoot, corpusPath(`services/locales/${metaPrefix}-${locale}.ts`));
       const before = readFile(file, 'utf-8');
-      const after = upsertLocaleMetaFields(before, id, fields);
+      const after = upsertLocaleMetaFields(before, id, fields, opts);
       if (after !== before) {
         localeUpdates.push({ file, after });
       }
