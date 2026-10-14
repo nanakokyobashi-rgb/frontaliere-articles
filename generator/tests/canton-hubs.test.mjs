@@ -1204,8 +1204,19 @@ test('workflow refresh-canton-hubs: cron giornaliero, zero sezioni = successo, r
   assert.match(wf, /workflow_dispatch:/);
   assert.match(wf, /if \[ "\$\{\{ github\.event_name \}\}" = "push" \]; then[\s\S]*?DRY=false/);
   assert.doesNotMatch(wf, /self-test/);
+  assert.match(wf, /push:\n\s+branches: \[main\]/);
+  for (const pattern of [
+    'content/blog-body/**',
+    'content/blog-body-ch/**',
+    'content/blog-meta-*',
+    'content/blog-articles-data.ts',
+    'content/swiss-articles-data.ts',
+    'content/routerBlogData.ts',
+    'content/routerSwissData.ts',
+    'data/blog-articles/**',
+    'data/swiss-articles/**',
+  ]) assert.ok(wf.includes(`- '${pattern}'`), `${pattern}: path trigger mancante`);
   assert.match(wf, /- 'content\/blog-body-canton-\*\/\*\*'/);
-  assert.match(wf, /- 'content\/blog-meta-canton-\*'/);
   assert.match(wf, /- 'content\/cantons\/\*\/registry\.ts'/);
   assert.match(wf, /- 'content\/cantons\/\*\/seo\.ts'/);
   assert.match(wf, /- 'content\/cantons\/\*\/slugs\.ts'/);

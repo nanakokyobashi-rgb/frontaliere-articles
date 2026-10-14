@@ -25,6 +25,7 @@ on:
     # sito (06:37) e il crawl degli eventi (05:40), sfalsato dagli altri cron.
     - cron: '23 8 * * *'
   push:
+    branches: [main]
     paths:
       - '.github/workflows/refresh-canton-hubs.yml'
       - 'generator/scripts/generate-canton-hubs.mjs'
@@ -32,15 +33,27 @@ on:
       - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/data/canton-hub-topics.json'
       - 'generator/data/canton-hub-links.json'
-      # Un nuovo articolo aggiorna registro, slug/meta, corpo e sorgente dati.
+      # Un nuovo articolo aggiorna registro, slug/meta, corpo e sidecar. Il
+      # bacino D17 legge anche frontaliere/svizzera con label cantonale, non
+      # solo le 24 sezioni proprie.
       # I path dei soli hub non sono inclusi: il push del refresh non riavvia
       # se stesso, mentre il push del generatore cantonale avvia subito questo
       # workflow (non si aspetta il cron del giorno dopo).
       - 'content/blog-body-canton-*/**'
-      - 'content/blog-meta-canton-*'
+      - 'content/blog-body/**'
+      - 'content/blog-body-ch/**'
+      - 'content/blog-meta-*'
+      - 'content/blog-articles-data.ts'
+      - 'content/swiss-articles-data.ts'
+      - 'content/routerBlogData.ts'
+      - 'content/routerSwissData.ts'
       - 'content/cantons/*/registry.ts'
       - 'content/cantons/*/seo.ts'
       - 'content/cantons/*/slugs.ts'
+      - 'data/blog-articles/**'
+      - 'data/swiss-articles/**'
+      - 'data/article-source-urls.json'
+      - 'data/swiss-article-source-urls.json'
       - 'data/sections/canton-*/articles/**'
   workflow_dispatch:
     inputs:
