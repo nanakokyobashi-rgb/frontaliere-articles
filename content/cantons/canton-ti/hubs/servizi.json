@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-14T07:06:25.000Z",
-  "contentHash": "0e3b45c64d8c87a90deaad4881cf729b5929e3f2d581fa7efc49dd89b44de7d5",
+  "updatedAt": "2026-10-14T08:24:32.182Z",
+  "contentHash": "654c78f32b050a496ad8a63a5783ee91d386bfc543be85dfff757b3d4a35988e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -21,11 +21,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-13T19:22:49.823Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -138,40 +133,6 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "oggi da 12 a 17 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "14 °C",
-              "detail": "oggi da 12 a 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "oggi da 14 a 18 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "15 °C",
-              "detail": "oggi da 12 a 17 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "13 °C",
-              "detail": "oggi da 10 a 16 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -224,6 +185,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Scuola media, audizione in Ticino sui corsi attitudinali",
+          "url": "/articoli-ticino/commissione-scuola-ticino/",
+          "excerpt": "Audizione a Bellinzona sui corsi attitudinali e base DECS e SIT tra i rappresentanti ascoltati Rapporto firmato sull'iniziativa IP158 Prossima riunione: 19",
+          "date": "2026-10-14T08:06:11.860Z"
+        },
+        {
           "title": "Tassa salute e ristorni: tavolo del 17 settembre a Berna",
           "url": "/articoli-frontaliere/tassa-salute-ristorni-17-settembre/",
           "excerpt": "Il 17 settembre si discute di tassa sulla salute, doppia imposizione e statuto; il Ticino minaccia di bloccare i ristorni, mettendo a rischio 120 milioni di franchi per i Comuni di frontiera.",
@@ -252,12 +219,6 @@
           "url": "/articoli-frontaliere/stangata-premi-cassa-malati-ticino/",
           "excerpt": "Nel 2027 i premi di cassa malati in Ticino aumentano del 3,7%, portando il premio medio a 520 franchi al mese, il più alto della Svizzera.",
           "date": "2026-09-29T12:24:49.493Z"
-        },
-        {
-          "title": "Salute mentale: il DSS porta la prevenzione nelle aziende",
-          "url": "/articoli-frontaliere/prevenzione-salute-aziende-ticinesi/",
-          "excerpt": "Il DSS e il Forum GSA Ticino promuovono la salute mentale sul lavoro. Dati: il 32,3% dei giovani ticinesi si sente svuotato, il 61% degli apprendisti soffre.",
-          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -294,7 +255,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "en": {
       "canton": "TI",
@@ -400,40 +361,6 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "today from 12 to 17 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "14 °C",
-              "detail": "today from 12 to 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "today from 14 to 18 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "15 °C",
-              "detail": "today from 12 to 17 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "13 °C",
-              "detail": "today from 10 to 16 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -485,6 +412,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Middle school, audition in Ticino on aptitude courses",
+          "url": "/en/ticino-articles/ticino-school-commission-hearing/",
+          "excerpt": "Hearing in Bellinzona on the DECs and sit aptitude and base courses among the representatives heard Report signed on the IP158 initiative Next meeting: 19",
+          "date": "2026-10-14T08:06:11.860Z"
+        },
+        {
           "title": "Health tax and rebates: roundtable on September 17 in Bern",
           "url": "/en/cross-border-articles/health-tax-and-rebates-roundtable-on-september-17-in-bern/",
           "excerpt": "On September 17, the health tax, double taxation and statute will be discussed; Ticino threatens to block the tax rebates, putting 120 million francs for border municipalities at risk.",
@@ -513,12 +446,6 @@
           "url": "/en/cross-border-articles/health-insurance-premiums-ticino-2027/",
           "excerpt": "In 2027, health insurance premiums in Ticino increase by 3,7%, bringing the average premium to 520 francs per month, the highest in Switzerland.",
           "date": "2026-09-29T12:24:49.493Z"
-        },
-        {
-          "title": "Mental health: DSS brings prevention into companies",
-          "url": "/en/cross-border-articles/mental-health-prevention-ticino-companies/",
-          "excerpt": "DSS and Forum GSA Ticino promote mental health at work. Data: 32,3% of young people in Ticino feel drained, 61% of apprentices are suffering.",
-          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -551,7 +478,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "de": {
       "canton": "TI",
@@ -657,40 +584,6 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "heute 12 bis 17 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "14 °C",
-              "detail": "heute 12 bis 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "heute 14 bis 18 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "15 °C",
-              "detail": "heute 12 bis 17 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "13 °C",
-              "detail": "heute 10 bis 16 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -742,6 +635,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Mittelschule, Anhörung im Tessin zu den Eignungskursen",
+          "url": "/de/tessin-artikel/tessin-schulkommission-anhoerung/",
+          "excerpt": "Anhörung in Bellinzona zu Eignungskursen und Basis DECS und Sit unter den angehörten Vertretern Unterzeichneter Bericht über die IP158-Initiative Nächstes Treffen: 19",
+          "date": "2026-10-14T08:06:11.860Z"
+        },
+        {
           "title": "Gesundheitssteuer & Rückerstattungen: Termin in Bern",
           "url": "/de/grenzgaenger-artikel/gesundheitssteuer-ruckerstattungen-termin-in-bern/",
           "excerpt": "Am 17. September wird über die Gesundheitssteuer, die Doppelbesteuerung und den Status diskutiert; das Tessin droht, die Steuerrückvergütungen zu blockieren, und gefährdet damit 120 Millionen Franken für die…",
@@ -770,12 +669,6 @@
           "url": "/de/grenzgaenger-artikel/krankenkassenpraemien-tessin-2027/",
           "excerpt": "Im Jahr 2027 steigen die Krankenkassenprämien im Tessin um 3,7%, wodurch die durchschnittliche Prämie auf 520 Franken pro Monat steigt, die höchste in der Schweiz.",
           "date": "2026-09-29T12:24:49.493Z"
-        },
-        {
-          "title": "Psychische Gesundheit: DSS bringt Prävention in Unternehmen",
-          "url": "/de/grenzgaenger-artikel/praevention-psychische-gesundheit-tessin/",
-          "excerpt": "Das DSS und das Forum GSA Tessin fördern die psychische Gesundheit am Arbeitsplatz. Daten: 32,3% der jungen Tessiner fühlen sich leer, 61% der Lernenden leiden.",
-          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -808,7 +701,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     },
     "fr": {
       "canton": "TI",
@@ -914,40 +807,6 @@
           "updatedAt": "2026-10-13T22:49:00.460Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 12 à 17 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "14 °C",
-              "detail": "aujourd’hui de 12 à 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 14 à 18 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 12 à 17 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 10 à 16 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-13T19:22:49.823Z"
-        },
-        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -1000,6 +859,12 @@
           "date": "2026-10-10T11:19:26.395Z"
         },
         {
+          "title": "Collège, audition au Tessin sur les cours d'aptitude",
+          "url": "/fr/articles-tessin/commission-ecole-tessin-audition/",
+          "excerpt": "Audition à Bellinzone sur les cours d'aptitude et de base DECS et SIT parmi les représentants entendus Rapport signé sur l'initiative IP158 Prochaine réunion : 19",
+          "date": "2026-10-14T08:06:11.860Z"
+        },
+        {
           "title": "Taxe santé et rétrocessions : réunion du 17 septembre à Berne",
           "url": "/fr/articles-frontalier/taxe-sante-et-retrocessions-reunion-du-17-septembre-a-berne/",
           "excerpt": "Le 17 septembre, il sera question de taxe sur la santé, de double imposition et de statut ; le Tessin menace de bloquer les rétrocessions, mettant en péril 120 millions de francs pour les communes frontalières.",
@@ -1028,12 +893,6 @@
           "url": "/fr/articles-frontalier/primes-assurance-maladie-ticin-2027/",
           "excerpt": "En 2027, les primes d'assurance-maladie dans le canton du Tessin augmentent de 3,7%, portant la prime moyenne à 520 francs par mois, la plus élevée de Suisse.",
           "date": "2026-09-29T12:24:49.493Z"
-        },
-        {
-          "title": "Santé mentale : le DSS introduit la prévention dans les entreprises",
-          "url": "/fr/articles-frontalier/prevention-sante-mentale-entreprises-tessin/",
-          "excerpt": "Le DSS et le Forum GSA Tessin promeuvent la santé mentale au travail. Données : 32,3% des jeunes tessinois se sentent vidés, 61% des apprentis souffrent.",
-          "date": "2026-10-05T08:37:00.594Z"
         }
       ],
       "links": [
@@ -1062,7 +921,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-14T07:06:25.000Z"
+      "updatedAt": "2026-10-14T08:24:32.182Z"
     }
   }
 }
