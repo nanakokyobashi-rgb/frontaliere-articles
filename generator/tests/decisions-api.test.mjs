@@ -31,7 +31,10 @@ test('invia una choice question Decisions API e normalizza una decisione rilevan
           name: 'relevance',
           choice: 'relevant',
           confidence: 0.98,
-          probabilities: { relevant: 0.98, not_relevant: 0.02 },
+          probabilities: [
+            { value: 'relevant', probability: 0.98 },
+            { value: 'not_relevant', probability: 0.02 },
+          ],
         }],
         usage: { input_tokens: 20, total_tokens: 20 },
       });
@@ -116,6 +119,23 @@ test('trasforma il timeout AbortController in un errore classificabile', async (
           error.name = 'AbortError';
           reject(error);
         }, { once: true });
+      }),
+    }),
+    (error) => error.code === 'DECISIONS_API_TIMEOUT',
+  );
+});
+
+test('mantiene la deadline anche se il body HTTP non termina', async () => {
+  await assert.rejects(
+    classifyWithDecisionsApi({
+      apiKey: 'test-decision-key',
+      input: 'contenuto',
+      instructions: 'criteri',
+      timeoutMs: 5,
+      fetchImpl: async () => ({
+        ok: true,
+        status: 200,
+        json: async () => new Promise(() => {}),
       }),
     }),
     (error) => error.code === 'DECISIONS_API_TIMEOUT',
