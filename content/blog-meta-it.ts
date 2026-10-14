@@ -13147,6 +13147,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.easy-work-chiusura-264.title': 'Easy Work chiude: 264 posti a rischio a Chiasso',
     'blog.article.easy-work-chiusura-264.excerpt': 'Easy Work chiuderà entro il 31 dicembre A rischio 264 posti di lavoro Sette amministrativi e 257 interinali coinvolti Consultazione avviata con l\'OCST Decisione',
     'blog.article.easy-work-chiusura-264.imageAlt': 'Chiusura dell\'ufficio Easy Work a Chiasso, corso San Gottardo 106, con cartello di chiusura',
+    'blog.article.incidente-varesina-venegono.title': 'Carambola sulla Varesina: quattro feriti a Venegono',
+    'blog.article.incidente-varesina-venegono.excerpt': 'Incidente alle 7 sulla Sp 233 a Venegono Inferiore Quattro auto coinvolte e quattro persone ferite Due ambulanze, automedica, vigili del fuoco e carabinieri',
+    'blog.article.incidente-varesina-venegono.imageAlt': 'Traffico fermo sulla Varesina dopo un incidente a Venegono Inferiore',
 };
 
 export default blogMetaIt;

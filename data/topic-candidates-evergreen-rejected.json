@@ -800,38 +800,6 @@
     "vivere in Valtellina e lavorare nei Grigioni da frontaliere": 3
   },
   "topicGateUrls": {
-    "frontaliere::https://www.ticinonews.ch/ticino/veicolo-in-fiamme-tra-giornico-e-la-galleria-della-biaschina-444417": {
-      "section": "frontaliere",
-      "ts": 1791769790125
-    },
-    "frontaliere::https://www.vconews.it/2026/10/11/leggi-notizia/argomenti/attualita-27/articolo/ennesimo-sos-sulla-carenza-di-personale-al-tribunale-di-verbania.html": {
-      "section": "frontaliere",
-      "ts": 1791770880500
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/11/leggi-notizia/argomenti/cronaca-20/articolo/notte-di-incidenti-a-varese-ragazza-contro-ostacolo-in-via-autostrada-pedone-investito-fuori-dal-t.html": {
-      "section": "frontaliere",
-      "ts": 1791771133917
-    },
-    "svizzera::https://www.tio.ch/ticino/cronaca/1956049/tutti-pazzi-per-la-sagra-della-castagna-ma-quelle-servite-non-sono-ticinesi": {
-      "section": "svizzera",
-      "ts": 1791771952452
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1956041/stati-costa-florida-tempesta-elettricita-centinaia-morti-quattro-isaias-migliaia": {
-      "section": "svizzera",
-      "ts": 1791771970263
-    },
-    "svizzera::https://www.swissinfo.ch/ita/mille-persone-a-manifestazione-berna-a-un-anno-da-disordini/92200201": {
-      "section": "svizzera",
-      "ts": 1791773313704
-    },
-    "svizzera::https://www.swissinfo.ch/ita/polizia-in-forze-a-berna-per-manifestazione-non-autorizzata/92199608": {
-      "section": "svizzera",
-      "ts": 1791773335359
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1955840/il-fondo-per-la-formazione-professionale-risponde-ancora-ai-suoi-compiti": {
-      "section": "frontaliere",
-      "ts": 1791787103981
-    },
     "svizzera::https://www.tio.ch/svizzera/attualita/1956038/puo-sintomi-disturbi-sclerosi-quando-diagnosi-casa-possono-ospedale-rimandata": {
       "section": "svizzera",
       "ts": 1791791774942
@@ -1091,6 +1059,30 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1956440/trasparenza-societa-municipio-partecipate-fare-chiarezza-vuole": {
       "section": "frontaliere",
       "ts": 1791938326247
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1956456/alcoltest-al-lavoro-si-poteva-dire-no-e-cosa-rischia-chi-rifiuta": {
+      "section": "frontaliere",
+      "ts": 1791964239510
+    },
+    "frontaliere::https://comozero.it/attualita/migros-chiusura-centrale-traiteur-ecublens": {
+      "section": "frontaliere",
+      "ts": 1791964285133
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1956451/mercato-affitti-citta-affitto-via": {
+      "section": "frontaliere",
+      "ts": 1791964307750
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/parita-salariale-a-varese-il-confronto-sul-decreto-96-la-trasparenza-e-una-sfida-culturale/2707474": {
+      "section": "frontaliere",
+      "ts": 1791964321523
+    },
+    "frontaliere::https://comozero.it/attualita/mazzata-pedaggio-milano-meda-spuntano-agevolazioni-per-i-pendolari-ma-e-polemica-ora-arriva-la-lega": {
+      "section": "frontaliere",
+      "ts": 1791964335120
+    },
+    "frontaliere::https://www.ticinonews.ch/ticino/docenti-in-ticino-nove-azioni-per-ripensare-la-formazione-444552": {
+      "section": "frontaliere",
+      "ts": 1791964349863
     }
   }
 }
