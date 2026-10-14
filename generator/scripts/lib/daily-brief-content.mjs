@@ -313,7 +313,7 @@ const T = {
     faq: (ctx) => [
       { q: 'Quando esce il bollettino del frontaliere?', a: `Ogni giorno, con possibili aggiornamenti durante la giornata. Questa edizione è del ${ctx.dateLabel}; i periodi di osservazione sono indicati nelle singole sezioni.` },
       { q: 'Da dove arrivano i dati?', a: 'Dal monitoraggio proprietario di frontaliereticino.ch: rilevamento delle code su tutti i valichi svizzeri, prezzi carburante nei comuni di confine, serie giornaliera del cambio CHF/EUR e crawler del job board. Nessun dato di seconda mano.' },
-      { q: 'I numeri restano validi tutta la giornata?', a: 'No: fotografano il momento della pubblicazione. Per la situazione in tempo reale usa le pagine live linkate in ogni sezione, aggiornate durante tutta la giornata.' },
+      { q: 'I numeri restano validi tutta la giornata?', a: 'No: si riferiscono ai periodi di osservazione delle singole fonti e possono cambiare quando questa edizione viene aggiornata. Per la situazione in tempo reale usa le pagine live linkate in ogni sezione.' },
     ],
   },
   en: {
@@ -374,7 +374,7 @@ const T = {
     faq: (ctx) => [
       { q: 'When is the cross-border daily brief published?', a: `Daily, with possible updates during the day. This edition is dated ${ctx.dateLabel}; each section states its observation period.` },
       { q: 'Where does the data come from?', a: 'From frontaliereticino.ch’s proprietary monitoring: queue sampling at every Swiss border crossing, fuel prices in border municipalities, the daily CHF/EUR series and our job-board crawlers. No second-hand data.' },
-      { q: 'Do the numbers stay valid all day?', a: 'No — they are a snapshot at publication time. For real-time status use the live pages linked in each section, updated throughout the day.' },
+      { q: 'Do the numbers stay valid all day?', a: 'No — the values refer to each source’s stated observation period and can change when this edition is updated. For current conditions, follow the live pages linked in each section.' },
     ],
   },
   de: {
@@ -435,7 +435,7 @@ const T = {
     faq: (ctx) => [
       { q: 'Wann erscheint das Grenzgänger-Tagesbulletin?', a: `Täglich, mit möglichen Aktualisierungen im Tagesverlauf. Diese Ausgabe ist vom ${ctx.dateLabel}; die Beobachtungszeiträume stehen in den einzelnen Abschnitten.` },
       { q: 'Woher stammen die Daten?', a: 'Aus der eigenen Messung von frontaliereticino.ch: Stau-Erfassung an jedem Schweizer Grenzübergang, Kraftstoffpreise in den Grenzgemeinden, die tägliche CHF/EUR-Reihe und die Crawler des Job-Boards. Keine Daten aus zweiter Hand.' },
-      { q: 'Gelten die Zahlen den ganzen Tag?', a: 'Nein — sie sind eine Momentaufnahme zum Zeitpunkt der Veröffentlichung. Für den Echtzeit-Status nutzen Sie die in jedem Abschnitt verlinkten Live-Seiten.' },
+      { q: 'Gelten die Zahlen den ganzen Tag?', a: 'Nein — die Werte beziehen sich auf die Beobachtungszeiträume der einzelnen Quellen und können sich bei einer Aktualisierung dieser Ausgabe ändern. Für den Echtzeit-Status nutzen Sie die in jedem Abschnitt verlinkten Live-Seiten.' },
     ],
   },
   fr: {
@@ -496,7 +496,7 @@ const T = {
     faq: (ctx) => [
       { q: 'Quand paraît le bulletin quotidien du frontalier ?', a: `Chaque jour, avec des actualisations possibles dans la journée. Cette édition date du ${ctx.dateLabel} ; chaque section précise sa période d’observation.` },
       { q: 'D’où viennent les données ?', a: 'Du suivi propriétaire de frontaliereticino.ch : relevé des files à chaque passage frontalier suisse, prix des carburants dans les communes frontalières, série quotidienne CHF/EUR et crawlers du job board. Aucune donnée de seconde main.' },
-      { q: 'Les chiffres restent-ils valables toute la journée ?', a: 'Non — ce sont des instantanés au moment de la publication. Pour l’état en temps réel, utilisez les pages en direct liées dans chaque section.' },
+      { q: 'Les chiffres restent-ils valables toute la journée ?', a: 'Non — les valeurs correspondent aux périodes d’observation de chaque source et peuvent changer lors d’une actualisation de cette édition. Pour l’état en temps réel, utilisez les pages en direct liées dans chaque section.' },
     ],
   },
 };
