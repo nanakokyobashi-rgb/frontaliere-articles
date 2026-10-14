@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "b70b1035783b2880b10ffe4815407ed5d005f193ee9d4352dbaa406681842570",
+  "updatedAt": "2026-10-14T06:37:00.336Z",
+  "contentHash": "ab46460c0c767dfee7c223df919cda09dee2d591d8cd22ac6e822007544eb995",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Imposta trasferimenti Berna: franchigia 800k",
+          "url": "/articoli-berna/simplificazione-imposta-trasferimento-berna/",
+          "excerpt": "Il Governo propone l'uso non esclusivo e il rimborso entro 4 anni. Consultazione aperta fino al 7 gennaio 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Dichiarazione imposte svizzera: guida pratica 2026 a Berna",
           "url": "/articoli-svizzera/fisco-berna-guida-2026/",
           "excerpt": "Tre livelli fiscali, moltiplicatore comunale e competenze separate: la guida 2026 alla dichiarazione online nel canton Berna, con confronto nazionale.",
@@ -112,6 +118,12 @@
           "url": "/articoli-svizzera/mappa-fiscale-berna-2026/",
           "excerpt": "Nel 2026 il confronto fiscale parte da IFD federale, imposta cantonale e imposta comunale: per Berna conta anche il moltiplicatore comunale.",
           "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Imposta sui cani nel Cantone di Berna: guida a importi e regole",
+          "url": "/articoli-svizzera/imposta-cani-berna-guida/",
+          "excerpt": "Guida pratica all'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni e autorità competenti.",
+          "date": "2026-10-14T06:31:49.509Z"
         },
         {
           "title": "Imposta sugli autoveicoli a Berna: calcolo e pagamento",
@@ -160,7 +172,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     },
     "en": {
       "canton": "BE",
@@ -245,6 +257,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bern transfer tax: 800k exemption",
+          "url": "/en/bern-articles/berns-transfer-tax-simplification/",
+          "excerpt": "The Government proposes non-exclusive use and repayment within 4 years. Consultation open until January 7, 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Swiss tax return: practical guide for 2026 in Bern",
           "url": "/en/swiss-articles/swiss-tax-guide-bern-2026/",
           "excerpt": "Three tax levels, municipal multiplier and separate jurisdictions: the 2026 guide to the online tax return in the Canton of Bern, with a national comparison.",
@@ -255,6 +273,12 @@
           "url": "/en/swiss-articles/swiss-tax-map-bern-2026/",
           "excerpt": "In 2026, the tax comparison will be based on the federal direct tax, cantonal tax, and municipal tax; for Bern, the municipal multiplier will also be taken into account.",
           "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Dog tax in the Canton of Bern: guide to amounts and rules",
+          "url": "/en/swiss-articles/bern-dog-tax-guide/",
+          "excerpt": "Practical guide to the dog tax in the Canton of Bern: possible obligation, registration, exemptions and competent authorities.",
+          "date": "2026-10-14T06:31:49.509Z"
         },
         {
           "title": "Motor vehicle tax in Bern: calculation and payment",
@@ -303,7 +327,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     },
     "de": {
       "canton": "BE",
@@ -388,6 +412,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Handänderungssteuer Bern: Freibetrag 800k",
+          "url": "/de/bern-artikel/berner-handaenderungssteuer-vereinfachung/",
+          "excerpt": "Die Regierung schlägt eine nicht ausschließliche Nutzung und eine Rückerstattung innerhalb von 4 Jahren vor. Die Vernehmlassung ist bis zum 7. Januar 2027 offen.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Schweizer Steuererklärung: praktischer Leitfaden 2026 in Bern",
           "url": "/de/schweiz-artikel/steuererklaerung-bern-2026/",
           "excerpt": "Drei Steuerstufen, kommunaler Steuerfuss und getrennte Zuständigkeiten: der Leitfaden 2026 zur Online-Steuererklärung im Kanton Bern, mit einem nationalen Vergleich.",
@@ -398,6 +428,12 @@
           "url": "/de/schweiz-artikel/steuervergleich-bern-schweiz-2026/",
           "excerpt": "Im Jahr 2026 basiert der Steuervergleich auf der eidgenössischen direkten Steuer, der Kantonssteuer und der Gemeindesteuer; für Bern spielt zudem der Gemeindemultiplikator eine Rolle.",
           "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Hundesteuer im Kanton Bern: Leitfaden zu Beträgen und Regeln",
+          "url": "/de/schweiz-artikel/hundesteuer-bern-leitfaden/",
+          "excerpt": "Praktischer Leitfaden zur Hundesteuer im Kanton Bern: allfällige Pflicht, Registrierung, Befreiungen und zuständige Behörden.",
+          "date": "2026-10-14T06:31:49.509Z"
         },
         {
           "title": "Motorfahrzeugsteuer in Bern: Berechnung und Zahlung",
@@ -446,7 +482,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     },
     "fr": {
       "canton": "BE",
@@ -531,6 +567,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Impôt sur les transferts à Berne : franchise de 800k",
+          "url": "/fr/articles-berne/simplification-impot-transfer-berne/",
+          "excerpt": "Le Gouvernement propose l’usage non exclusif et le remboursement dans un délai de 4 ans. Consultation ouverte jusqu’au 7 janvier 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
+        },
+        {
           "title": "Déclaration fiscale suisse : guide pratique 2026 à Berne",
           "url": "/fr/articles-suisse/declaration-impots-berne-2026/",
           "excerpt": "Trois niveaux fiscaux, multiplicateur communal et compétences distinctes : le guide 2026 de la déclaration en ligne dans le canton de Berne, avec comparaison nationale.",
@@ -541,6 +583,12 @@
           "url": "/fr/articles-suisse/comparatif-fiscal-berne-suisse-2026/",
           "excerpt": "En 2026, la comparaison fiscale commence avec le DFI fédéral, l’impôt cantonal et l’impôt municipal : pour Berne, le multiplicateur municipal compte également.",
           "date": "2026-10-01T00:55:32.594Z"
+        },
+        {
+          "title": "Impôt sur les chiens dans le canton de Berne : guide des montants et des règles",
+          "url": "/fr/articles-suisse/taxe-chiens-berne-guide/",
+          "excerpt": "Guide pratique de l'impôt sur les chiens dans le canton de Berne : obligation éventuelle, enregistrement, exemptions et autorités compétentes.",
+          "date": "2026-10-14T06:31:49.509Z"
         },
         {
           "title": "Taxe automobile à Berne : calcul et paiement",
@@ -589,7 +637,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T06:37:00.336Z"
     }
   }
 }

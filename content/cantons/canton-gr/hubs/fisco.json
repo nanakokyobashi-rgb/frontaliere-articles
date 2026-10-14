@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "859ee9292acdf572967def098f97fc38908aaa1cddc54f421f4db3d1cff02ca8",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "1003722d4582e372221fdbba95725ca63c3341a7c8c178cd13c4bb43d7a09f6d",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -148,6 +148,24 @@
           "url": "/articoli-frontaliere/vivere-paisco-loveno-lavorare-grigioni-frontaliere/",
           "excerpt": "Lavorare in Grigioni da Paisco Loveno: Permesso G, trattenute alla fonte, esenzione €10'000, LAMal, credito d'imposta e procedura dal 2024.",
           "date": "2026-08-25T10:25:07.764Z"
+        },
+        {
+          "title": "Frontaliere Poggiridenti-Grigioni: tassazione e permessi",
+          "url": "/articoli-frontaliere/frontaliere-poggiridenti-grigioni/",
+          "excerpt": "Vivere a Poggiridenti e lavorare nei Grigioni: permesso G, imposta alla fonte, Nuovo Accordo Frontalieri 2024 e contributi AVS/LPP. Guida pratica e checklist.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Comprare casa Grigioni: mutuo e imposte",
+          "url": "/articoli-svizzera/comprare-casa-grigioni-mutuo-imposte/",
+          "excerpt": "Acquistare nel Grigioni: fondi propri 20-30%, mutuo ipotecario fino all'80%, imposta trasporto variabile per comune, spese notarili 1-2%. Procedura e costi spiegati.",
+          "date": "2026-09-06T03:48:30.725Z"
+        },
+        {
+          "title": "LAMal Grigioni: premi, franchigie e riduzione",
+          "url": "/articoli-svizzera/lam-grigioni-premi-riduzione/",
+          "excerpt": "Scopri come funziona l'assicurazione malattia LAMal nel canton Grigioni, quali franchigie scegliere e come accedere ai sussidi cantonali di riduzione dei premi.",
+          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -176,7 +194,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "GR",
@@ -269,7 +287,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -302,6 +320,24 @@
           "url": "/en/cross-border-articles/living-paisco-loveno-working-graubunden-cross-border/",
           "excerpt": "Working in Graubünden from Paisco Loveno: G Permit, withholding tax, €10,000 exemption, LAMal, tax credit and procedure from 2024.",
           "date": "2026-08-25T10:25:07.764Z"
+        },
+        {
+          "title": "Frontiere Poggiridenti-Grisioni: taxation and permits",
+          "url": "/en/cross-border-articles/cross-border-poggiridenti-graubunden/",
+          "excerpt": "Living in Poggiridenti and working in Graubünden: G permit, tax at source, New Frontier Agreement 2024 and AVS/LPP contributions. Practical guide and checklist.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Buying Casa Grisioni: mortgage and taxes",
+          "url": "/en/swiss-articles/buy-house-graubunden-mortgage-taxes/",
+          "excerpt": "Purchase in Graubünden: own funds 20-30%, mortgage loan up to 80%, variable transport tax per municipality, notary fees 1-2%. Explained procedure and costs.",
+          "date": "2026-09-06T03:48:30.725Z"
+        },
+        {
+          "title": "LAMal Grisioni: premiums, deductibles and reduction",
+          "url": "/en/swiss-articles/lamal-graubunden-premiums-reduction/",
+          "excerpt": "Find out how LAMal health insurance works in the canton of Graubünden, which deductibles to choose and how to access cantonal premium reduction subsidies.",
+          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -330,7 +366,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "GR",
@@ -423,7 +459,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -456,6 +492,24 @@
           "url": "/de/grenzgaenger-artikel/in-paisco-loveno-wohnen-in-graubuenden-arbeiten-frontalier/",
           "excerpt": "Arbeiten in Graubünden ab Paisco Loveno: Bewilligung G, Quellensteuer, Befreiung € 10'000, KVG, Steuergutschrift und Verfahren ab 2024.",
           "date": "2026-08-25T10:25:07.764Z"
+        },
+        {
+          "title": "Grenzgänger Wohnortstütze-Graubünden: Besteuerung und Bewilligungen",
+          "url": "/de/grenzgaenger-artikel/grenzgaenger-poggiridenti-graubuenden/",
+          "excerpt": "Wohnen in Poggiridenti und Arbeiten in Graubünden: Bewilligung G, Quellensteuer, Neue Grenzgängervereinbarung 2024 und AHV/BVG-BEITRÄGE. Praktischer Leitfaden und Checkliste.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Graubünden Haus kaufen: Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-graubuenden-hypothek-steuern/",
+          "excerpt": "Kaufen in Graubünden: Eigenmittel 20-30%, Hypothekendarlehen bis 80%, variable Transportsteuer pro Gemeinde, Notarkosten 1-2%. Vorgehensweise und Kosten erklärt.",
+          "date": "2026-09-06T03:48:30.725Z"
+        },
+        {
+          "title": "KVG Graubünden: Prämien, Franchisen und Reduktionen",
+          "url": "/de/schweiz-artikel/lamal-graubuenden-praemien-reduktion/",
+          "excerpt": "Erfahren Sie, wie die KVG-Krankenversicherung im Kanton Graubünden funktioniert, welche Franchisen Sie wählen und wie Sie auf kantonale Prämienverbilligungsbeiträge zugreifen können.",
+          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -484,7 +538,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "GR",
@@ -577,7 +631,7 @@
               "url": "https://www.gr.ch/DE/institutionen/verwaltung/dfg/stv/mitteilungen/Seiten/Systemwechsel-bei-der-Wohneigentumsbesteuerung-und-Einf%C3%BChrung-einer-besonderen-Liegenschaftssteuer.aspx"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -610,6 +664,24 @@
           "url": "/fr/articles-frontalier/vivre-paisco-loveno-travailler-grisons-frontalier/",
           "excerpt": "Travailler dans les Grisons de Paisco Loveno : Permis G, retenues à la source, exonération € 10'000, LAMal, crédit d'impôt et procédure à partir de 2024.",
           "date": "2026-08-25T10:25:07.764Z"
+        },
+        {
+          "title": "Frontière Poggiridenti-Grisons : fiscalité et permis",
+          "url": "/fr/articles-frontalier/frontalier-poggiridenti-grisons/",
+          "excerpt": "Vivre à Poggiridenti et travailler dans les Grisons : permis G, impôt à la source, nouvel accord frontalier 2024 et cotisations AVS/LPP. Guide pratique et checklist.",
+          "date": "2026-09-06T23:47:41.211Z"
+        },
+        {
+          "title": "Acheter maison Grisons : hypothèque et taxes",
+          "url": "/fr/articles-suisse/acheter-maison-grisons-hypotheque-impots/",
+          "excerpt": "Acheter dans les Grisons : fonds propres 20-30%, prêt hypothécaire jusqu'à 80%, taxe de transport variable par commune, frais de notaire 1-2%. Procédure et coûts expliqués.",
+          "date": "2026-09-06T03:48:30.725Z"
+        },
+        {
+          "title": "LAMal Grisons : primes, franchises et réduction",
+          "url": "/fr/articles-suisse/lamal-grisons-primes-reduction/",
+          "excerpt": "Découvrez comment fonctionne l'assurance maladie LAMal dans le canton des Grisons, quelles franchises choisir et comment accéder aux allocations cantonales de réduction des primes.",
+          "date": "2026-08-30T18:10:50.603Z"
         }
       ],
       "links": [
@@ -638,7 +710,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

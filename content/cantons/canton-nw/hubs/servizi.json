@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "b1418eccceda7a8aaf3a2087daf163b0b4647402b2bbd8217e6fdb342bea5a05",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "a7b42660acdb5a3efe9226235c1f1c910a618b97b9ddbac5eee247bf81f8c0b8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -49,10 +54,34 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "oggi da 11 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Verkürzte Öffnungszeiten am 14.10.2026",
+              "date": "2026-09-29",
+              "url": "https://www.hergiswil.ch/_rte/information/2998528"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.nw.ch/_rte/information/137764"
+            },
             {
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
@@ -64,21 +93,21 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Permesso di dimora B nel Cantone di Nidvaldo: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-nidvaldo-requisiti-rinnovo/",
-          "excerpt": "Il permesso di dimora B nel Cantone di Nidvaldo è un documento importante per i frontalieri che desiderano risiedere nel cantone.",
-          "date": "2026-08-16T19:18:57.651Z"
-        },
         {
           "title": "Premi cassa malati canton Nidvaldo e riduzione premi",
           "url": "/articoli-svizzera/premi-cassa-malati-cantone-nidvaldo/",
           "excerpt": "La legge sulle assicurazioni malattie obbligatorie nel Cantone di Nidvaldo ha ridotto i premi per le assicurazioni malattie.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Permesso di dimora B nel Cantone di Nidvaldo: requisiti e rinnovo",
+          "url": "/articoli-svizzera/permesso-di-dimora-b-canton-nidvaldo-requisiti-rinnovo/",
+          "excerpt": "Il permesso di dimora B nel Cantone di Nidvaldo è un documento importante per i frontalieri che desiderano risiedere nel cantone.",
+          "date": "2026-08-16T19:18:57.651Z"
         },
         {
           "title": "Asilo nido e custodia bambini Canton Nidvaldo: costi",
@@ -131,7 +160,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "NW",
@@ -163,10 +192,34 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "today from 11 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Verkürzte Öffnungszeiten am 14.10.2026",
+              "date": "2026-09-29",
+              "url": "https://www.hergiswil.ch/_rte/information/2998528"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.nw.ch/_rte/information/137764"
+            },
             {
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
@@ -178,21 +231,21 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Residence permit B in the Canton of Nidwalden: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-in-the-canton-of-nidwalden-requirements-and-renewal/",
-          "excerpt": "The residence permit B in the Canton of Nidwalden is an important document for border workers who wish to reside in the canton.",
-          "date": "2026-08-16T19:18:57.651Z"
-        },
         {
           "title": "Canton Nidwalden health insurance premiums and premium reductions",
           "url": "/en/swiss-articles/canton-nidwalden-health-insurance-premiums/",
           "excerpt": "The law on compulsory health insurance in the Canton of Nidwalden has reduced health insurance premiums.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Residence permit B in the Canton of Nidwalden: requirements and renewal",
+          "url": "/en/swiss-articles/residence-permit-b-in-the-canton-of-nidwalden-requirements-and-renewal/",
+          "excerpt": "The residence permit B in the Canton of Nidwalden is an important document for border workers who wish to reside in the canton.",
+          "date": "2026-08-16T19:18:57.651Z"
         },
         {
           "title": "Nursery and childcare Canton Nidwalden: costs",
@@ -241,7 +294,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "NW",
@@ -273,10 +326,34 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "heute 11 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Verkürzte Öffnungszeiten am 14.10.2026",
+              "date": "2026-09-29",
+              "url": "https://www.hergiswil.ch/_rte/information/2998528"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.nw.ch/_rte/information/137764"
+            },
             {
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
@@ -288,21 +365,21 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Aufenthaltsbewilligung B im Kanton Nidwalden: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-im-kanton-nidwalden-voraussetzungen-und-verlangerung/",
-          "excerpt": "Die Aufenthaltsbewilligung B im Kanton Nidwalden ist ein wichtiges Dokument für Grenzgänger, die im Kanton Nidwalden wohnen möchten.",
-          "date": "2026-08-16T19:18:57.651Z"
-        },
         {
           "title": "Krankenkassenprämien Kanton Nidwalden und Prämienverbilligung",
           "url": "/de/schweiz-artikel/kanton-nidwalden-krankenversicherungspramien/",
           "excerpt": "Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Nidwalden hat die Prämien für die Krankenversicherungen gesenkt.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Aufenthaltsbewilligung B im Kanton Nidwalden: Voraussetzungen und Verlängerung",
+          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-im-kanton-nidwalden-voraussetzungen-und-verlangerung/",
+          "excerpt": "Die Aufenthaltsbewilligung B im Kanton Nidwalden ist ein wichtiges Dokument für Grenzgänger, die im Kanton Nidwalden wohnen möchten.",
+          "date": "2026-08-16T19:18:57.651Z"
         },
         {
           "title": "Kindertagesstätte und Kinderbetreuung Kanton Nidwalden: Kosten",
@@ -351,7 +428,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "NW",
@@ -383,10 +460,34 @@
           "updatedAt": "2026-10-11T10:51:47.772Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Stans",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 11 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Verkürzte Öffnungszeiten am 14.10.2026",
+              "date": "2026-09-29",
+              "url": "https://www.hergiswil.ch/_rte/information/2998528"
+            },
+            {
+              "label": "30 Jahre RAV Obwalden Nidwalden: Zusammenarbeit bewährt sich",
+              "date": "2026-09-07",
+              "url": "https://www.nw.ch/_rte/information/137764"
+            },
             {
               "label": "Öffnungszeiten Maria Himmelfahrt",
               "date": "2026-08-12",
@@ -398,21 +499,21 @@
               "url": "https://www.buochs.ch/_rte/information/2939209"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
-        {
-          "title": "Permis de séjour B dans le canton de Nidwald : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-de-sejour-b-dans-le-canton-de-nidwald-exigences-et-renouvellement/",
-          "excerpt": "Le permis de séjour B dans le canton de Nidwald est un document important pour les frontaliers qui souhaitent résider dans le canton.",
-          "date": "2026-08-16T19:18:57.651Z"
-        },
         {
           "title": "Primes caisse-maladie canton de Nidwald et réduction des primes",
           "url": "/fr/articles-suisse/canton-nidwald-premies-assurance-maladie/",
           "excerpt": "La loi sur les assurances-maladie obligatoires dans le canton de Nidwald a réduit les primes pour les assurances-maladie.",
           "date": "2026-08-16T19:00:08.445Z"
+        },
+        {
+          "title": "Permis de séjour B dans le canton de Nidwald : exigences et renouvellement",
+          "url": "/fr/articles-suisse/permis-de-sejour-b-dans-le-canton-de-nidwald-exigences-et-renouvellement/",
+          "excerpt": "Le permis de séjour B dans le canton de Nidwald est un document important pour les frontaliers qui souhaitent résider dans le canton.",
+          "date": "2026-08-16T19:18:57.651Z"
         },
         {
           "title": "Garderie et garde d'enfants Canton de Nidwald : coûts",
@@ -457,7 +558,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

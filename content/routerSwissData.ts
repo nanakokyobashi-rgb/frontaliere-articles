@@ -2766,6 +2766,10 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'licenza-pubblico-zurigo-requisiti': { it: 'licenza-pubblico-zurigo-requisiti', en: 'zurich-public-establishment-license-requirements', de: 'zuerich-gastgewerbebewilligung-anforderungen', fr: 'licence-etablissement-public-zurich-exigences' },
  'tasse-universitarie-zurigo-guida': { it: 'tasse-universitarie-zurigo-guida', en: 'zurich-university-tuition-fees-guide', de: 'universitaetsgebuehren-zuerich-leitfaden', fr: 'frais-universitaires-zurich-guide' },
  'zurigo-corsi-lingua-integrazione': { it: 'zurigo-corsi-lingua-integrazione', en: 'zurich-language-courses-integration', de: 'zuerich-sprachkurse-integration', fr: 'zurich-cours-langue-integration' },
+ 'festivi-berna-calendario-guida': { it: 'festivi-berna-calendario-guida', en: 'bern-public-holidays-calendar-guide', de: 'kanton-bern-feiertage-kalender-leitfaden', fr: 'jours-feries-berne-calendrier-guide' },
+ 'negozi-berna-orari-festivi-regole': { it: 'negozi-berna-orari-festivi-regole', en: 'bern-shops-hours-holidays-rules', de: 'bern-geschaefte-oeffnungszeiten-feiertage', fr: 'berne-magasins-horaires-jours-feries' },
+ 'imposta-cani-berna-guida': { it: 'imposta-cani-berna-guida', en: 'bern-dog-tax-guide', de: 'hundesteuer-bern-leitfaden', fr: 'taxe-chiens-berne-guide' },
+ 'licenza-caccia-berna-requisiti': { it: 'licenza-caccia-berna-requisiti', en: 'hunting-license-bern-requirements', de: 'jagdkarte-bern-voraussetzungen', fr: 'permis-chasse-berne-conditions' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "pensioni",
-  "updatedAt": "2026-10-07T09:59:11.306Z",
-  "contentHash": "ce59d3429aed5822ff77e8a232d781020475a1ac74fbae23cafebb1a55d4ef8f",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "6ad872e5ae628c83a95782bac764bf877c004c6f223f73ee7059de8246521c14",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-06T21:55:10.346Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -166,7 +166,7 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -187,6 +187,12 @@
           "url": "/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-zurigo/",
           "excerpt": "Guida al secondo pilastro LPP 2026: contributi 7-18% per età, riscatto lacune, prelievo capitale e confronto nazionale con focus sul canton Zurigo",
           "date": "2026-08-08T18:13:20.030Z"
+        },
+        {
+          "title": "Terzo pilastro 3a: vantaggi 2026 nel canton Zurigo",
+          "url": "/articoli-svizzera/pilastro3a-zurigo-strategia/",
+          "excerpt": "Guida 2026 al terzo pilastro 3a nel canton Zurigo: tre livelli fiscali, moltiplicatore comunale e provider bancari o assicurativi.",
+          "date": "2026-10-03T12:39:34.477Z"
         },
         {
           "title": "Rendita AVS a Zurigo: come funziona il primo pilastro",
@@ -231,7 +237,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "ZH",
@@ -370,7 +376,7 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -391,6 +397,12 @@
           "url": "/en/swiss-articles/second-pillar-lpp-switzerland-guide-2026-zurich/",
           "excerpt": "Guide to the second pillar LPP 2026: contributions 7-18% by age, redemption of gaps, capital levy and national comparison with a focus on the canton of Zurich",
           "date": "2026-08-08T18:13:20.030Z"
+        },
+        {
+          "title": "Third pillar 3a: 2026 advantages in the canton of Zurich",
+          "url": "/en/swiss-articles/pillar3a-zurich-strategy/",
+          "excerpt": "Guide 2026 to the third pillar 3a in the canton of Zurich: three tax levels, municipal multiplier and banking or insurance providers.",
+          "date": "2026-10-03T12:39:34.477Z"
         },
         {
           "title": "AVS Income in Zurich: how the first pillar works",
@@ -435,7 +447,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "ZH",
@@ -574,7 +586,7 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -595,6 +607,12 @@
           "url": "/de/schweiz-artikel/zweite-saeule-bvg-schweiz-leitfaden-2026-zurich/",
           "excerpt": "Leitfaden 2. Säule BVG 2026: 7-18% Altersbeiträge, Lückenrückkauf, Kapitalbezug und nationaler Vergleich mit Fokus Kanton Zürich",
           "date": "2026-08-08T18:13:20.030Z"
+        },
+        {
+          "title": "Dritte Säule 3a: Vorteile 2026 im Kanton Zürich",
+          "url": "/de/schweiz-artikel/saeule3a-zuerich-strategie/",
+          "excerpt": "Leitfaden 2026 zur dritten Säule 3a im Kanton Zürich: drei Steuerstufen, kommunaler Multiplikator und Bank- oder Versicherungsanbieter.",
+          "date": "2026-10-03T12:39:34.477Z"
         },
         {
           "title": "AHV-Rente in Zürich: So funktioniert die erste Säule",
@@ -639,7 +657,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "ZH",
@@ -778,7 +796,7 @@
               "url": "https://bvk.ch/de/bvk-aktuell/detail/sonnige-aussichten-in-down-under"
             }
           ],
-          "updatedAt": "2026-10-06T21:55:10.346Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -799,6 +817,12 @@
           "url": "/fr/articles-suisse/deuxieme-pilier-lpp-suisse-guide-2026-zurich/",
           "excerpt": "Guide du 2e pilier LPP 2026 : cotisations 7-18% par âge, rachat lacunes, prélèvement capital et comparaison nationale en mettant l'accent sur le canton de Zurich",
           "date": "2026-08-08T18:13:20.030Z"
+        },
+        {
+          "title": "Troisième pilier 3a : avantages 2026 dans le canton de Zurich",
+          "url": "/fr/articles-suisse/pilier3a-zurich-strategie/",
+          "excerpt": "Guide 2026 du troisième pilier 3a dans le canton de Zurich : trois niveaux fiscaux, multiplicateur communal et prestataires bancaires ou d’assurance.",
+          "date": "2026-10-03T12:39:34.477Z"
         },
         {
           "title": "Revenu AVS à Zurich : comment fonctionne le premier pilier",
@@ -843,7 +867,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-07T09:59:11.306Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

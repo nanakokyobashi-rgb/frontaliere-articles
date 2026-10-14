@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "pensioni",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "f848465f04ddacc3f8bd3dc1673e4c80baa8d6f48d35b24e74b4fde9dd41ce72",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "a6b8897f99d7055410a6902d38eccf8fac9f04026b510365a94b0b2d80180a1b",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -136,7 +136,7 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -157,6 +157,12 @@
           "url": "/articoli-svizzera/avs-prestazioni-complementari-obvaldo-guida/",
           "excerpt": "Come funziona il primo pilastro AVS nel Canton Obvaldo: ruolo della cassa di compensazione, lacune contributive e prestazioni complementari a copertura del minimo vitale nel 2026.",
           "date": "2026-08-30T05:56:32.507Z"
+        },
+        {
+          "title": "AVS nel Cantone di Obvaldo: la cassa di compensazione",
+          "url": "/articoli-svizzera/avs-e-prestazioni-complementari-cantone-obvaldo-cassa-di-compensazione/",
+          "excerpt": "Il Cantone di Obvaldo gestisce la cassa di compensazione cantonale. Le prestazioni complementari dell'AVS sono cruciali per garantire un minimo vitale.",
+          "date": "2026-08-16T18:24:50.792Z"
         }
       ],
       "links": [
@@ -177,7 +183,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "OW",
@@ -286,7 +292,7 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -307,6 +313,12 @@
           "url": "/en/swiss-articles/avs-supplementary-benefits-obwalden-guide/",
           "excerpt": "How the first AVS pillar works in the Obwalden Canton: role of the compensation fund, contribution gaps and complementary benefits to cover the minimum living wage in 2026.",
           "date": "2026-08-30T05:56:32.507Z"
+        },
+        {
+          "title": "AVS in the Canton of Obwalden: the compensation fund",
+          "url": "/en/swiss-articles/avs-in-the-canton-of-obwalden-the-compensation-fund/",
+          "excerpt": "The Canton of Obwalden manages the cantonal clearing house. The complementary performance of the AVS is crucial to ensure a vital minimum.",
+          "date": "2026-08-16T18:24:50.792Z"
         }
       ],
       "links": [
@@ -327,7 +339,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "OW",
@@ -436,7 +448,7 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -457,6 +469,12 @@
           "url": "/de/schweiz-artikel/ahs-ergaenzungsleistungen-obwalden-leitfaden/",
           "excerpt": "Wie die erste AHV-Säule im Kanton Obwalden funktioniert: Rolle der Ausgleichskasse, Beitragslücken und Ergänzungsleistungen zur Deckung des Existenzminimums im Jahr 2026.",
           "date": "2026-08-30T05:56:32.507Z"
+        },
+        {
+          "title": "AHV im Kanton Obwalden: die Ausgleichskasse",
+          "url": "/de/schweiz-artikel/ahv-im-kanton-obwalden-die-ausgleichskasse/",
+          "excerpt": "Der Kanton Obwalden führt die kantonale Ausgleichskasse. Die Ergänzungsleistungen der AHV sind entscheidend für die Sicherstellung eines Existenzminimums.",
+          "date": "2026-08-16T18:24:50.792Z"
         }
       ],
       "links": [
@@ -477,7 +495,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "OW",
@@ -586,7 +604,7 @@
               "url": "https://www.ow.ch/_rte/information/137992"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -607,6 +625,12 @@
           "url": "/fr/articles-suisse/avs-prestations-complementaires-obwald-guide/",
           "excerpt": "Comment fonctionne le premier pilier AVS dans le canton d'Obwald : rôle de la caisse de compensation, lacunes de cotisation et prestations complémentaires pour couvrir le minimum vital en 2026.",
           "date": "2026-08-30T05:56:32.507Z"
+        },
+        {
+          "title": "AVS dans le canton d'Obwald : la caisse de compensation",
+          "url": "/fr/articles-suisse/avs-dans-le-canton-d-obwald-la-caisse-de-compensation/",
+          "excerpt": "Le canton d'Obwald gère la caisse de compensation cantonale. Les prestations complémentaires de l'AVS sont cruciales pour assurer un minimum vital.",
+          "date": "2026-08-16T18:24:50.792Z"
         }
       ],
       "links": [
@@ -627,7 +651,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

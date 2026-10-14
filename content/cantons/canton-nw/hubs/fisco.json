@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "4c83c8864b4600f5bcdc050e6a874ab75c1f2b5cce1aae2075906957168e459d",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "e05f2eb545d496e2fdb929596b9888c04d1a38d2aec8b7a473feaf18b5580529",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -119,7 +119,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -128,6 +128,12 @@
           "url": "/articoli-svizzera/comprare-casa-nidvaldo-mutuo-guida/",
           "excerpt": "Guida completa all'acquisto abitazione nel Cantone di Nidvaldo: procedura notarile, imposta sui trapassi, spese e criteri di sostenibilità del mutuo ipotecario in Svizzera.",
           "date": "2026-08-30T12:36:04.705Z"
+        },
+        {
+          "title": "Comprare casa nel Nidvaldo: mutuo e tasse",
+          "url": "/articoli-svizzera/nidvaldo-immobiliare-mutuo-ipotecario/",
+          "excerpt": "Guida pratica all'acquisto immobiliare nel Cantone di Nidvaldo: requisiti mutuo ipotecario, calcolo della sostenibilità, imposte sui trapassi e spese notarili.",
+          "date": "2026-08-23T10:50:11.516Z"
         }
       ],
       "links": [
@@ -152,7 +158,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "NW",
@@ -249,7 +255,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -258,6 +264,12 @@
           "url": "/en/swiss-articles/buy-house-nidwalden-mortgage-guide/",
           "excerpt": "A Complete Guide to Buying a Home in the Canton of Nidwalden: Notary Procedures, Transfer Tax, Fees, and Sustainability Criteria for Mortgages in Switzerland.",
           "date": "2026-08-30T12:36:04.705Z"
+        },
+        {
+          "title": "Buying a house in Nidwalden: mortgage and taxes",
+          "url": "/en/swiss-articles/nidwalden-real-estate-mortgage-guide/",
+          "excerpt": "Practical guide to buying real estate in the Canton of Nidwalden: mortgage loan requirements, calculation of sustainability, transfer taxes and notary fees.",
+          "date": "2026-08-23T10:50:11.516Z"
         }
       ],
       "links": [
@@ -282,7 +294,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "NW",
@@ -379,7 +391,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -388,6 +400,12 @@
           "url": "/de/schweiz-artikel/haus-kaufen-nidwalden-hypothek-leitfaden/",
           "excerpt": "Umfassender Leitfaden zum Immobilienkauf im Kanton Nidwalden: notarielles Verfahren, Handänderungssteuer, Kosten und Nachhaltigkeitskriterien für Hypothekendarlehen in der Schweiz.",
           "date": "2026-08-30T12:36:04.705Z"
+        },
+        {
+          "title": "Haus kaufen im Nidwalden: Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/nidwalden-immobilien-hypothek-guide/",
+          "excerpt": "Praktischer Leitfaden zum Immobilienkauf im Kanton Nidwalden: Hypothekardarlehensanforderungen, Tragbarkeitsberechnung, Ablösesummen und Notarkosten.",
+          "date": "2026-08-23T10:50:11.516Z"
         }
       ],
       "links": [
@@ -412,7 +430,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "NW",
@@ -509,7 +527,7 @@
               "url": "https://www.steuern-nw.ch/steuergesetzrevision-2029-abschaffung-des-eigenmietwerts/"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -518,6 +536,12 @@
           "url": "/fr/articles-suisse/acheter-maison-nidwald-hypotheque-guide/",
           "excerpt": "Guide complet pour l'achat d'un logement dans le canton de Nidwald : procédure notariale, taxe de passage, frais et critères de viabilité du prêt hypothécaire en Suisse.",
           "date": "2026-08-30T12:36:04.705Z"
+        },
+        {
+          "title": "Acheter une maison à Nidwald : hypothèque et taxes",
+          "url": "/fr/articles-suisse/nidwald-immobilier-hypotheque-guide/",
+          "excerpt": "Guide pratique de l'achat immobilier dans le canton de Nidwald : exigences hypothécaires, calcul de la durabilité, taxes de passage et frais de notaire.",
+          "date": "2026-08-23T10:50:11.516Z"
         }
       ],
       "links": [
@@ -542,7 +566,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

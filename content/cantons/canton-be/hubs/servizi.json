@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "4d3f78c3502b52d79f8291841efdcb32e15d3ca367d1a0662bcbf88ff56969b3",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "ff5c843c47ebc523ebc3141cdd53015fb93420540cc55dbff654c12ffdb4b679",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -97,7 +102,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "oggi da 8 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -110,10 +129,16 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Premi cassa malati Cantone Berna e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-cantone-bern-riduzione/",
+          "excerpt": "Ecco i fatti chiave per i premi dell'assicurazione malattia obbligatoria nel Cantone di Berna.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
         {
           "title": "Asilo nido e custodia bambini Berna: costi e sussidi",
           "url": "/articoli-svizzera/costi-asilo-nido-custodia-berna/",
@@ -127,16 +152,28 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "Premi cassa malati Cantone Berna e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-cantone-bern-riduzione/",
-          "excerpt": "Ecco i fatti chiave per i premi dell'assicurazione malattia obbligatoria nel Cantone di Berna.",
-          "date": "2026-08-12T09:20:30.193Z"
+          "title": "Premi LAMal Canton Berna: fasce e riduzioni",
+          "url": "/articoli-svizzera/premi-lamal-berna-sussidio/",
+          "excerpt": "Nel Canton Berna i premi LAMal variano secondo la franchigia scelta. Ecco come funziona il sistema e come accedere ai sussidi per la riduzione.",
+          "date": "2026-08-25T11:39:39.350Z"
         },
         {
           "title": "Permesso di domicilio C nel Canton Berna: requisiti e domanda",
           "url": "/articoli-svizzera/permesso-di-domicilio-c-canton-berna-requisiti-e-domanda/",
           "excerpt": "Il permesso di domicilio C nel Canton Berna: requisiti, domanda e procedura di applicazione",
           "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "LAMal nel Cantone Berna: guida ai premi e sussidi",
+          "url": "/articoli-svizzera/premi-cassa-malati-lamal-2026-cantone-bern/",
+          "excerpt": "I premi LAMal nel Cantone Berna sono soggetti a differenze rispetto ad altri cantoni svizzeri. Ecco cosa sapere.",
+          "date": "2026-08-09T23:13:30.885Z"
+        },
+        {
+          "title": "Premi LAMal 2026 a Berna: come scegliere la franchigia giusta",
+          "url": "/articoli-svizzera/premi-lamal-2026-bern-guida/",
+          "excerpt": "Guida ai premi cassa malati 2026 nel canton Berna: differenze cantonali, franchigia ottimale, cambio cassa e sussidi. Confronto nazionale.",
+          "date": "2026-08-07T22:49:53.113Z"
         },
         {
           "title": "Patente di guida nel Canton Berna: conversione ed esami",
@@ -171,7 +208,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "BE",
@@ -246,7 +283,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "today from 8 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,10 +310,16 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Health insurance premiums Canton Bern and premium reductions",
+          "url": "/en/swiss-articles/health-insurance-premiums-cantonal-bern-reduction/",
+          "excerpt": "Here are the key facts for compulsory health insurance premiums in the Canton of Bern.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
         {
           "title": "Nursery and childcare Bern: costs and subsidies",
           "url": "/en/swiss-articles/childcare-costs-bern-canton/",
@@ -276,16 +333,28 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "Health insurance premiums Canton Bern and premium reductions",
-          "url": "/en/swiss-articles/health-insurance-premiums-cantonal-bern-reduction/",
-          "excerpt": "Here are the key facts for compulsory health insurance premiums in the Canton of Bern.",
-          "date": "2026-08-12T09:20:30.193Z"
+          "title": "LAMal Canton Bern Awards: bands and reductions",
+          "url": "/en/swiss-articles/health-insurance-premiums-canton-bern-subsidies/",
+          "excerpt": "In the Canton of Bern, LAMal premiums vary according to the deductible chosen. Here's how the system works and how to access reduction subsidies.",
+          "date": "2026-08-25T11:39:39.350Z"
         },
         {
           "title": "Residence permit C in Canton Bern: requirements and application",
           "url": "/en/swiss-articles/c-permit-bern-switzerland-requisites-and-application/",
           "excerpt": "Residence permit C in the Canton of Bern: requirements, application and application procedure",
           "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "LAMal in the Canton of Bern: a guide to premiums and subsidies",
+          "url": "/en/swiss-articles/lamal-2026-cantone-bern/",
+          "excerpt": "LAMal premiums in Canton Bern are subject to differences compared to other Swiss cantons. Here's what to know.",
+          "date": "2026-08-09T23:13:30.885Z"
+        },
+        {
+          "title": "LAMal 2026 Awards in Bern: How to Choose the Right Deductible",
+          "url": "/en/swiss-articles/lamal-premiums-2026-bern/",
+          "excerpt": "Guide to the 2026 cash premiums in the canton of Bern: cantonal differences, optimal deductible, cash changeover and subsidies. National comparison.",
+          "date": "2026-08-07T22:49:53.113Z"
         },
         {
           "title": "Driver's license in the Canton of Bern: conversion and exams",
@@ -316,7 +385,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "BE",
@@ -391,7 +460,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "heute 8 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -404,10 +487,16 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Krankenkassenprämien Kanton Bern und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/kostenvoranschlag-kv-bern-kanton/",
+          "excerpt": "Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
         {
           "title": "Kindertagesstätte und Kinderbetreuung Bern: Kosten und Leistungen",
           "url": "/de/schweiz-artikel/kinderbetreuungskosten-kanton-bern/",
@@ -421,16 +510,28 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "Krankenkassenprämien Kanton Bern und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/kostenvoranschlag-kv-bern-kanton/",
-          "excerpt": "Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.",
-          "date": "2026-08-12T09:20:30.193Z"
+          "title": "KVG-Prämien Kanton Bern: Zeitabschnitte und Kürzungen",
+          "url": "/de/schweiz-artikel/versicherungspraemien-kanton-bern-subventionen/",
+          "excerpt": "Im Kanton Bern variieren die KVG-Prämien je nach gewählter Franchise. So funktioniert das System und wie Sie auf die Reduktionszuschüsse zugreifen können.",
+          "date": "2026-08-25T11:39:39.350Z"
         },
         {
           "title": "Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen und Antrag",
           "url": "/de/schweiz-artikel/c-bescheinigung-bern-schweiz-anforderungen-und-antragstellung/",
           "excerpt": "Die Niederlassungsbewilligung C im Kanton Bern: Voraussetzungen, Antrag und Antragsverfahren",
           "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "KVG im Kanton Bern: Leitfaden zu Prämien und Beiträgen",
+          "url": "/de/schweiz-artikel/lamal-2026-kanton-bern/",
+          "excerpt": "Die KVG-Prämien im Kanton Bern unterliegen Abweichungen im Vergleich zu anderen Schweizer Kantonen. Hier ist, was Sie wissen müssen.",
+          "date": "2026-08-09T23:13:30.885Z"
+        },
+        {
+          "title": "KVG-Prämien 2026 in Bern: So wählen Sie die richtige Franchise",
+          "url": "/de/schweiz-artikel/lamal-praemien-2026-bern/",
+          "excerpt": "Leitfaden zu den Krankenkassenprämien 2026 im Kanton Bern: kantonale Unterschiede, optimale Franchise, Kassenwechsel und Beiträge. Nationaler Vergleich.",
+          "date": "2026-08-07T22:49:53.113Z"
         },
         {
           "title": "Führerschein im Kanton Bern: Umschulung und Prüfungen",
@@ -461,7 +562,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "BE",
@@ -536,7 +637,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bern",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 8 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,10 +664,16 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Primes caisse-maladie canton de Berne et réduction des primes",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-de-bourbourg/",
+          "excerpt": "Voici les faits clés pour les primes de l'assurance maladie obligatoire dans le canton de Berne.",
+          "date": "2026-08-12T09:20:30.193Z"
+        },
         {
           "title": "Garderie et garde d'enfants Berne : coûts et allocations",
           "url": "/fr/articles-suisse/couts-creche-garde-enfants-canton-berne/",
@@ -566,16 +687,28 @@
           "date": "2026-08-13T17:49:01.339Z"
         },
         {
-          "title": "Primes caisse-maladie canton de Berne et réduction des primes",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-de-bourbourg/",
-          "excerpt": "Voici les faits clés pour les primes de l'assurance maladie obligatoire dans le canton de Berne.",
-          "date": "2026-08-12T09:20:30.193Z"
+          "title": "Prix LAMal canton Berne : fourchettes et réductions",
+          "url": "/fr/articles-suisse/primes-assurance-maladie-canton-berne-subventions/",
+          "excerpt": "Dans le canton de Berne, les primes LAMal varient selon la franchise choisie. Voici comment fonctionne le système et comment accéder aux subventions pour la réduction.",
+          "date": "2026-08-25T11:39:39.350Z"
         },
         {
           "title": "Permis de séjour C dans le canton de Berne : exigences et demande",
           "url": "/fr/articles-suisse/permis-de-sejour-c-bourg-de-berne-requisits-et-demande/",
           "excerpt": "Le permis de séjour C dans le canton de Berne : exigences, demande et procédure d'application",
           "date": "2026-08-12T20:41:31.313Z"
+        },
+        {
+          "title": "LAMal dans le canton de Berne : guide des primes et subventions",
+          "url": "/fr/articles-suisse/lamal-2026-canton-de-bourges/",
+          "excerpt": "Les prix LAMal dans le canton de Berne sont soumis à des différences par rapport aux autres cantons suisses. Voici ce qu'il faut savoir.",
+          "date": "2026-08-09T23:13:30.885Z"
+        },
+        {
+          "title": "Prix LAMal 2026 à Berne : comment choisir la bonne franchise",
+          "url": "/fr/articles-suisse/primes-lamal-2026-berne/",
+          "excerpt": "Guide des primes caisse-maladie 2026 dans le canton de Berne : différences cantonales, franchise optimale, change de caisse et allocations. Comparaison nationale.",
+          "date": "2026-08-07T22:49:53.113Z"
         },
         {
           "title": "Permis de conduire dans le canton de Berne : conversion et examens",
@@ -602,7 +735,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

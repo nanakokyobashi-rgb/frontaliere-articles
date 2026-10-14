@@ -103627,10 +103627,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Informazioni su requisiti, esami, scadenze e importi per la licenza di caccia nel Cantone di Zurigo. Verifica la fonte ufficiale.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-zurigo-guida.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-licenza-caccia-zurigo-requisiti.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Cacciatore che prepara l'attrezzatura in un bosco svizzero con vista sul lago, luce mattutina."
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T01:47:38+00:00",
       "dateModified": "2026-10-14T01:47:38+00:00",
@@ -103661,10 +103666,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "Guida pratico a targhe e immatricolazione a Zurigo: registro, documenti, cambio proprietario e costi. Verifica presso l'ufficio della circolazione competente.",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/apprendistato-formazione-zurigo-guida.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-targhe-immatricolazione-guida.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Mani che trattano una targa svizzera in un ufficio dell'autorità di circolazione a Zurigo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T02:15:21+00:00",
       "dateModified": "2026-10-14T02:15:21+00:00",
@@ -103734,10 +103744,15 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "description": "A Zurigo il collaudo segue il livello cantonale La pratica comprende convocazione, documenti e requisiti tecnici I controlli periodici fanno parte dell'iter",
       "image": {
         "@type": "ImageObject",
-        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp`,
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-collaudo-veicoli-canton-zurigo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Centro di collaudo veicoli nel Cantone di Zurigo"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-14T03:22:14+00:00",
       "dateModified": "2026-10-14T03:22:14+00:00",
@@ -103867,6 +103882,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/zurigo-corsi-lingua-integrazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-festivi-berna-calendario-guida': {
+    title: 'Giorni festivi Cantone di Berna: calendario e regole',
+    description: 'Guida ufficiale ai giorni festivi del Cantone di Berna. Scopri come verificare il calendario, le chiusure degli uffici e i rapporti con il livello federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, giorni, festivi, cantone, berna',
+    ogTitle: 'Giorni festivi Cantone di Berna: calendario e regole',
+    ogDescription: 'Guida completa e pratica per verificare il calendario dei giorni festivi nel Cantone di Berna, distinguendo tra livello cantonale, comunale e federale.',
+    canonicalPath: '/articoli-svizzera/festivi-berna-calendario-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Giorni festivi Cantone di Berna: calendario e regole",
+      "description": "Guida ufficiale ai giorni festivi del Cantone di Berna. Scopri come verificare il calendario, le chiusure degli uffici e i rapporti con il livello federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-festivi-berna-calendario-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Calendario dei giorni festivi e guida amministrativa del Cantone di Berna"
+      },
+      "datePublished": "2026-10-14T04:59:00+00:00",
+      "dateModified": "2026-10-14T04:59:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/festivi-berna-calendario-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-negozi-berna-orari-festivi-regole': {
+    title: 'Orari negozi Cantone di Berna: guida a festivi e regole',
+    description: 'Scopri la guida ufficiale per orari commerciali, giorni festivi, autorizzazioni e limite di 45 ore settimanali nel Cantone di Berna.',
+    keywords: 'frontalieri, ticino, svizzera, italia, orari, negozi, cantone, berna',
+    ogTitle: 'Orari negozi Cantone di Berna: guida a festivi e regole',
+    ogDescription: 'Guida pratica agli orari commerciali, giorni festivi, eccezioni e turni di lavoro nel Cantone di Berna per esercenti e dipendenti.',
+    canonicalPath: '/articoli-svizzera/negozi-berna-orari-festivi-regole/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Orari negozi Cantone di Berna: guida a festivi e regole",
+      "description": "Scopri la guida ufficiale per orari commerciali, giorni festivi, autorizzazioni e limite di 45 ore settimanali nel Cantone di Berna.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-negozi-berna-orari-festivi-regole.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Orari e regole commerciali dei negozi nel Cantone di Berna"
+      },
+      "datePublished": "2026-10-14T05:28:35+00:00",
+      "dateModified": "2026-10-14T05:28:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/negozi-berna-orari-festivi-regole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imposta-cani-berna-guida': {
+    title: 'Imposta sui cani nel Cantone di Berna: guida a importi e regole',
+    description: 'Scopri la guida completa sull\'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni, autorità e modalità di pagamento ufficiali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, cani, cantone, berna',
+    ogTitle: 'Guida all\'imposta sui cani nel Cantone di Berna',
+    ogDescription: 'Tutto quello che c\'è da sapere sull\'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione dell\'animale, esenzioni e regole di pagamento comunali e cantonali.',
+    canonicalPath: '/articoli-svizzera/imposta-cani-berna-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta sui cani nel Cantone di Berna: guida a importi e regole",
+      "description": "Scopri la guida completa sull'imposta sui cani nel Cantone di Berna: obbligo eventuale, registrazione, esenzioni, autorità e modalità di pagamento ufficiali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imposta-cani-berna-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imposta sui cani nel Cantone di Berna: regole e registrazione"
+      },
+      "datePublished": "2026-10-14T06:31:49+00:00",
+      "dateModified": "2026-10-14T06:31:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-cani-berna-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-licenza-caccia-berna-requisiti': {
+    title: 'Licenza di caccia canton Berna requisiti e domanda',
+    description: 'Guida alla licenza di caccia nel Cantone di Berna: requisiti, esami, periodi, specie cacciabili, documenti, scadenze e importi ufficiali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, licenza, caccia, canton, berna',
+    ogTitle: 'Licenza di caccia canton Berna requisiti e domanda',
+    ogDescription: 'Scopri la procedura ufficiale per la licenza di caccia nel Cantone di Berna: verifica competenza, requisiti, esami, specie cacciabili, documenti, scadenze e importi.',
+    canonicalPath: '/articoli-svizzera/licenza-caccia-berna-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Licenza di caccia canton Berna requisiti e domanda",
+      "description": "Guida alla licenza di caccia nel Cantone di Berna: requisiti, esami, periodi, specie cacciabili, documenti, scadenze e importi ufficiali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-licenza-caccia-berna-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio del Cantone di Berna in Svizzera"
+      },
+      "datePublished": "2026-10-14T07:05:00+00:00",
+      "dateModified": "2026-10-14T07:05:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/licenza-caccia-berna-requisiti/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

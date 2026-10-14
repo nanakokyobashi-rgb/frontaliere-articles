@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "61bebac582b40b0a7c2048e6d3209b6568bd6a6d21efa242720bb2bcc99ec5a5",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "ae7565912eab3d0fe8dea2520138384d782c1cdb5fad1a8a022b8e552e8ad85d",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -160,7 +160,7 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -199,6 +199,18 @@
           "url": "/articoli-svizzera/imposte-appenzello-esterno-aliquote/",
           "excerpt": "Guida completa alle imposte cantonali e comunali in Appenzello Esterno: struttura a 3 livelli, aliquote, deduzioni ammesse, scadenze dichiarative e procedura online.",
           "date": "2026-08-25T03:40:05.091Z"
+        },
+        {
+          "title": "Comprare casa Appenzello Interno: mutuo e tasse",
+          "url": "/articoli-svizzera/appenzello-interno-sostenibilita/",
+          "excerpt": "Procedura, fondi propri, sostenibilità mutuo, spese notarili e imposte cantonali per acquistare immobili in Appenzello Interno.",
+          "date": "2026-09-03T04:44:30.774Z"
+        },
+        {
+          "title": "Comprare casa ad Appenzello Interno: mutuo e imposte",
+          "url": "/articoli-svizzera/mutuo-ipotecario-appenzello-interno/",
+          "excerpt": "Guida all'acquisto di un immobile in Appenzello Interno. Analisi di costi, imposte sui trapassi, spese notarili, mutuo ipotecario e sostenibilità finanziaria.",
+          "date": "2026-09-03T04:12:57.105Z"
         }
       ],
       "links": [
@@ -223,7 +235,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -361,7 +373,7 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -400,6 +412,18 @@
           "url": "/en/swiss-articles/canton-appenzell-ausserrhoden-cantonal-taxes-rates/",
           "excerpt": "Complete guide to cantonal and municipal taxes in Appenzell Ausserrhoden: 3-level structure, rates, allowable deductions, declaratory deadlines and online procedure.",
           "date": "2026-08-25T03:40:05.091Z"
+        },
+        {
+          "title": "Buying a house in Appenzell Innerrhoden: mortgage and taxes",
+          "url": "/en/swiss-articles/appenzell-innerrhoden-home-sustainability/",
+          "excerpt": "Procedure, own funds, mortgage sustainability, notary fees and cantonal taxes to purchase properties in Appenzell Internno.",
+          "date": "2026-09-03T04:44:30.774Z"
+        },
+        {
+          "title": "Buying a house in Appenzell Innerrhoden: mortgage and taxes",
+          "url": "/en/swiss-articles/mortgage-appenzell-inner-rhoden/",
+          "excerpt": "Guide to buying a property in Appenzell Innerrhoden. Analysis of costs, transfer taxes, notary fees, mortgage and financial sustainability.",
+          "date": "2026-09-03T04:12:57.105Z"
         }
       ],
       "links": [
@@ -424,7 +448,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -562,7 +586,7 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -601,6 +625,18 @@
           "url": "/de/schweiz-artikel/kanton-appenzell-ausserrhoden-kantonale-steuern-saetze/",
           "excerpt": "Vollständiger Leitfaden zu den Kantons- und Gemeindesteuern in Appenzell Ausserrhoden: 3-stufige Struktur, Steuersätze, zulässige Abzüge, Deklarationsfristen und Online-Verfahren.",
           "date": "2026-08-25T03:40:05.091Z"
+        },
+        {
+          "title": "Haus kaufen Appenzell Innerrhoden: Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/appenzell-innerrhoden-hauserwerb/",
+          "excerpt": "Verfahren, Eigenmittel, Tragbarkeit Darlehen, Notarkosten und kantonale Steuern zum Kauf von Immobilien in Appenzell Innerrhoden.",
+          "date": "2026-09-03T04:44:30.774Z"
+        },
+        {
+          "title": "Haus kaufen in Appenzell Innerrhoden: Darlehen und Steuern",
+          "url": "/de/schweiz-artikel/hypothek-appenzell-innerrhoden-guide/",
+          "excerpt": "Leitfaden zum Kauf einer Immobilie in Appenzell Innerrhoden. Kostenanalyse, Übertrittssteuern, Notarkosten, Hypothekendarlehen und finanzielle Tragbarkeit.",
+          "date": "2026-09-03T04:12:57.105Z"
         }
       ],
       "links": [
@@ -625,7 +661,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -763,7 +799,7 @@
               "url": "https://www.ai.ch/themen/steuern/aktuelles/warnung-vor-betruegerischen-e-mails-im-namen-von-etax"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -802,6 +838,18 @@
           "url": "/fr/articles-suisse/canton-appenzell-rhodes-exterieures-impots-cantonaux-taux/",
           "excerpt": "Guide complet des impôts cantonaux et communaux à Appenzell Extérieur : structure à 3 niveaux, taux, déductions admises, délais déclaratifs et procédure en ligne.",
           "date": "2026-08-25T03:40:05.091Z"
+        },
+        {
+          "title": "Acheter maison Appenzell Interne : hypothèque et taxes",
+          "url": "/fr/articles-suisse/appenzell-rhodes-interieures-immobilier/",
+          "excerpt": "Procédure, fonds propres, viabilité hypothécaire, frais de notaire et impôts cantonaux pour l'achat de biens immobiliers à Appenzell Interne.",
+          "date": "2026-09-03T04:44:30.774Z"
+        },
+        {
+          "title": "Acheter une maison à Appenzell Interne : hypothèque et taxes",
+          "url": "/fr/articles-suisse/pret-hypothecaire-appenzell-rhodes/",
+          "excerpt": "Guide d'achat d'un bien immobilier à Appenzell Interne. Analyse des coûts, taxes de passage, frais de notaire, hypothèque et viabilité financière.",
+          "date": "2026-09-03T04:12:57.105Z"
         }
       ],
       "links": [
@@ -826,7 +874,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

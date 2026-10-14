@@ -177,7 +177,7 @@ export async function generateCantonHubs({ root = ROOT, sections, topics = [], d
         .filter((id) => id && frontaliere.has(id))
         .map((id) => [id, frontaliere.get(id)]),
     );
-    log(`[generate-canton-hubs] ${section}: bacino ${stats.pool} articoli (${stats.clusterAssigned} via tassonomia, ${stats.keywordAssigned} via parole chiave, ${stats.unassigned} senza tema hub)`);
+    log(`[generate-canton-hubs] ${section}: bacino ${stats.pool} articoli (${stats.clusterAssigned} con evidenza tassonomica, ${stats.keywordAssigned} con parole chiave, ${stats.multiTopic} multi-tema, ${stats.unassigned} senza tema hub)`);
     for (const topic of wantedTopics) {
       const rel = hubFilePath(section, topic);
       const file = path.join(root, rel);

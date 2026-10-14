@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "fisco",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "20e8d41cb43442f8fb944f1de318e552b147dc97b53bd0ee0c02cf3275c5540c",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "9177c47b0a755420da2aba6e70e99734d2fe31b3dd074a43a26ab0df95072a2f",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -16,6 +16,11 @@
       "id": "imposta-alla-fonte",
       "updatedAt": "2026-10-05T07:54:42.677Z",
       "keyFacts": 1
+    },
+    {
+      "id": "avvisi-ufficiali",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -138,6 +143,24 @@
           "sourceName": "Autorità fiscale cantonale",
           "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avvisi ufficiali",
+          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
+          "items": [
+            {
+              "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
+              "date": "2026-10-13",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
+            },
+            {
+              "label": "Warnung vor betrügerischen E-Mails zu Steuerzahlungen und Mahnungen",
+              "date": "2026-09-25",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -216,7 +239,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -337,6 +360,24 @@
           "sourceName": "Cantonal tax authority",
           "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Official notices",
+          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
+          "items": [
+            {
+              "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
+              "date": "2026-10-13",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
+            },
+            {
+              "label": "Warnung vor betrügerischen E-Mails zu Steuerzahlungen und Mahnungen",
+              "date": "2026-09-25",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -415,7 +456,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -536,6 +577,24 @@
           "sourceName": "Kantonale Steuerbehörde",
           "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Amtliche Mitteilungen",
+          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
+          "items": [
+            {
+              "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
+              "date": "2026-10-13",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
+            },
+            {
+              "label": "Warnung vor betrügerischen E-Mails zu Steuerzahlungen und Mahnungen",
+              "date": "2026-09-25",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -614,7 +673,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -735,6 +794,24 @@
           "sourceName": "Autorité fiscale cantonale",
           "sourceUrl": "https://www.baselland.ch/politik-und-behorden/direktionen/finanz-und-kirchendirektion/steuerverwaltung/quellensteuer",
           "updatedAt": "2026-10-05T07:54:42.677Z"
+        },
+        {
+          "id": "avvisi-ufficiali",
+          "title": "Avis officiels",
+          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
+          "items": [
+            {
+              "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
+              "date": "2026-10-13",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
+            },
+            {
+              "label": "Warnung vor betrügerischen E-Mails zu Steuerzahlungen und Mahnungen",
+              "date": "2026-09-25",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
+            }
+          ],
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +890,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

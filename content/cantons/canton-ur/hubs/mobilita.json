@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "46e8837f30646aa8f029f05734759f6b000c5760d71989e327f9c92a979d66d6",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "20feed492f18dd42727f92acb271bae91b5bb16726280bf76e1bd5a853692c37",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-13T01:02:53.675Z",
+      "updatedAt": "2026-10-13T19:37:23.778Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -99,22 +99,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Die Sanierung der ersten Gotthardröhre",
-              "date": "2026-07-13",
-              "url": "https://gotthardtunnel.ch/news/sanierung-erste-roehre"
+              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138850"
             },
             {
-              "label": "5 Fragen an Charly Simmen, Sicherheitsbeauftragter der Baustelle Göschenen",
-              "date": "2026-07-10",
-              "url": "https://gotthardtunnel.ch/news/5-fragen-charly-simmen"
+              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138922"
             },
             {
-              "label": "Zwei Dörfer in Orange",
-              "date": "2026-07-08",
-              "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
+              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
+              "date": "2026-10-12",
+              "url": "https://www.ur.ch/_rte/information/138895"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
+              "date": "2026-10-08",
+              "url": "https://www.ur.ch/_rte/information/138844"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138700"
+            },
+            {
+              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -153,7 +168,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "UR",
@@ -227,7 +242,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -235,22 +250,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Die Sanierung der ersten Gotthardröhre",
-              "date": "2026-07-13",
-              "url": "https://gotthardtunnel.ch/news/sanierung-erste-roehre"
+              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138850"
             },
             {
-              "label": "5 Fragen an Charly Simmen, Sicherheitsbeauftragter der Baustelle Göschenen",
-              "date": "2026-07-10",
-              "url": "https://gotthardtunnel.ch/news/5-fragen-charly-simmen"
+              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138922"
             },
             {
-              "label": "Zwei Dörfer in Orange",
-              "date": "2026-07-08",
-              "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
+              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
+              "date": "2026-10-12",
+              "url": "https://www.ur.ch/_rte/information/138895"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
+              "date": "2026-10-08",
+              "url": "https://www.ur.ch/_rte/information/138844"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138700"
+            },
+            {
+              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +319,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "UR",
@@ -363,7 +393,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -371,22 +401,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Die Sanierung der ersten Gotthardröhre",
-              "date": "2026-07-13",
-              "url": "https://gotthardtunnel.ch/news/sanierung-erste-roehre"
+              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138850"
             },
             {
-              "label": "5 Fragen an Charly Simmen, Sicherheitsbeauftragter der Baustelle Göschenen",
-              "date": "2026-07-10",
-              "url": "https://gotthardtunnel.ch/news/5-fragen-charly-simmen"
+              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138922"
             },
             {
-              "label": "Zwei Dörfer in Orange",
-              "date": "2026-07-08",
-              "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
+              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
+              "date": "2026-10-12",
+              "url": "https://www.ur.ch/_rte/information/138895"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
+              "date": "2026-10-08",
+              "url": "https://www.ur.ch/_rte/information/138844"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138700"
+            },
+            {
+              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +470,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "UR",
@@ -499,7 +544,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-13T01:02:53.675Z"
+          "updatedAt": "2026-10-13T19:37:23.778Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,22 +552,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Die Sanierung der ersten Gotthardröhre",
-              "date": "2026-07-13",
-              "url": "https://gotthardtunnel.ch/news/sanierung-erste-roehre"
+              "label": "Bristenstrasse: Sperrungen wegen Nachtarbeiten",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138850"
             },
             {
-              "label": "5 Fragen an Charly Simmen, Sicherheitsbeauftragter der Baustelle Göschenen",
-              "date": "2026-07-10",
-              "url": "https://gotthardtunnel.ch/news/5-fragen-charly-simmen"
+              "label": "Tunnelsperrungen zwischen Amsteg und Gurtnellen",
+              "date": "2026-10-13",
+              "url": "https://www.ur.ch/_rte/information/138922"
             },
             {
-              "label": "Zwei Dörfer in Orange",
-              "date": "2026-07-08",
-              "url": "https://gotthardtunnel.ch/news/zwei-doerfer-in-orange"
+              "label": "A2 Lehnenviadukt Beckenried – Verkehrsumstellung für ...",
+              "date": "2026-10-12",
+              "url": "https://www.ur.ch/_rte/information/138895"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Belagseinbau",
+              "date": "2026-10-08",
+              "url": "https://www.ur.ch/_rte/information/138844"
+            },
+            {
+              "label": "Klausenpass: Nachtsperrung wegen Demontagearbeiten",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138700"
+            },
+            {
+              "label": "Vorlage zur verkehrsträgerübergreifenden Bewältigung ...",
+              "date": "2026-10-01",
+              "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +621,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

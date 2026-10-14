@@ -10,8 +10,12 @@
  * (`assignArticlesToTopics` sui 14 `TOPIC_CLUSTERS`, poi la mappa hub→cluster
  * di `engine/shared/cantonSectionCopy.mjs`) per carburanti, fisco, mobilita' e
  * pensioni; eventi e servizi non hanno un cluster e passano dal classificatore
- * a parole chiave dichiarato in `generator/data/canton-hub-topics.json`. Un
- * articolo sta in UN solo hub del cantone: vince il cluster dell'engine.
+ * a parole chiave dichiarato in `generator/data/canton-hub-topics.json`.
+ * L'assegnazione dell'engine resta il segnale principale, ma la pertinenza
+ * viene verificata direttamente per OGNI tema: una news con evidenza esplicita
+ * in due temi alimenta entrambi gli hub. Le news della sezione propria hanno
+ * priorita' nel tetto editoriale; quelle multi-label storiche restano il
+ * fallback D13.
  *
  * Tutto deterministico: stesso corpus e stesso giorno → stesso elenco.
  */
@@ -240,7 +244,7 @@ export function filterUniqueCuratedCandidates(candidates) {
  * @param {any} args.config `canton-hub-topics.json`
  * @param {{ assignArticlesToTopics: Function, TOPIC_CLUSTERS: ReadonlyArray<{key: string, seedText: string}> }} args.engine
  * @param {number} args.nowMs
- * @returns {{ byTopic: Record<string, any[]>, stats: { pool: number, clusterAssigned: number, keywordAssigned: number, unassigned: number } }}
+ * @returns {{ byTopic: Record<string, any[]>, stats: { pool: number, clusterAssigned: number, keywordAssigned: number, unassigned: number, multiTopic: number } }}
  */
 export function selectCuratedArticles({ pool, section, config, engine, nowMs }) {
   const today = Date.parse(`${isoDayOf(nowMs)}T00:00:00Z`);
@@ -249,12 +253,13 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
   const eligible = pool.filter((a) => dateMs(a.date) <= nowMs + CLOCK_SKEW_MS);
   const inputs = eligible.map((a) => ({ articleId: a.id, title: a.title.it, excerpt: a.excerpt.it, datePub: a.date, category: a.category }));
   const seeds = engine.TOPIC_CLUSTERS.map((t) => ({ key: t.key, seedText: t.seedText }));
-  // Solo il match DIRETTO sui seed (`threshold` sopra ogni coseno possibile
-  // spegne gli archi, quindi la propagazione per componenti). La propagazione
-  // serve agli hub di argomento del sito, che vogliono copertura su migliaia
-  // di articoli; misurata sul bacino del Ticino (2026-10-05) portava dentro
-  // «fisco» e «pensioni» decine di guide «Vivere a <comune>» che il tema non
-  // lo trattano. Qui si promuovono le news MIGLIORI: conta la precisione.
+  // L'engine calcola comunque l'assegnazione canonica D17 sul corpus filtrato
+  // per cantone. Per la promozione, però, non si usa il suo `topicOf` come
+  // etichetta esclusiva: la stessa news può avere due evidenze dirette e deve
+  // poter arrivare a entrambi gli hub. Le componenti propagate non bastano da
+  // sole: la verifica sotto richiede un termine del tema nel titolo e il
+  // coseno minimo, così una guida generica non viene inventata come news
+  // fiscale o pensionistica.
   const assignment = engine.assignArticlesToTopics(inputs, seeds, { threshold: 2 });
   const model = engine.buildCorpusModel(inputs);
   const seedBags = new Map(seeds.map((t) => {
@@ -270,58 +275,109 @@ export function selectCuratedArticles({ pool, section, config, engine, nowMs }) 
 
   const { freshnessHalfLifeDays, weights, neutralQuality, minTopicStrength, fullTopicStrength } = config.ranking;
   const byTopic = Object.fromEntries(CANTON_HUB_TOPIC_KEYS.map((t) => [t, []]));
-  let clusterAssigned = 0;
-  let keywordAssigned = 0;
+  const clusterArticles = new Set();
+  const keywordArticles = new Set();
+  const assignedArticles = new Set();
+  const multiTopicArticles = new Set();
   for (const a of eligible) {
-    const cluster = assignment.topicOf.get(a.id);
-    let topic = cluster ? cantonHubTopicForCluster(cluster) : null;
-    let strength = 0;
-    if (topic) {
-      const seed = seedBags.get(cluster);
-      const cosine = model.cosineWithBag(a.id, seed.bag, seed.norm);
-      // Stessa regola del classificatore a parole chiave: il tema deve stare
-      // nel TITOLO, non solo in una riga dell'estratto, e con forza sufficiente.
-      const titleHit = engine.tokenize(a.title.it).some((tok) => seed.bag.has(tok));
-      if (!titleHit || cosine < minTopicStrength) continue;
-      strength = Math.min(1, cosine / fullTopicStrength);
-      clusterAssigned += 1;
-    } else {
-      // Nessun cluster, o un cluster che non alimenta alcun hub (salute, lavoro…):
-      // l'articolo puo' ancora essere di eventi o servizi.
-      let best = null;
-      for (const t of keywordTopics) {
-        const cfg = config.keywordTopics[t];
-        const r = keywordTopicScore(a, cfg);
-        if (r.excluded || !r.titleHit || r.score < cfg.minScore) continue;
-        // A parita' vince il tema che viene prima nell'ordine canonico.
-        if (!best || r.score > best.score) best = { topic: t, score: r.score, min: cfg.minScore };
-      }
+    const primaryTopic = cantonHubTopicForCluster(assignment.topicOf.get(a.id));
+    const titleTokens = new Set(engine.tokenize(a.title.it));
+    const matches = [];
+
+    // Per i temi con cluster, valuta tutti i cluster che alimentano l'hub,
+    // non solo il vincitore monolabel dell'engine. Il titolo resta una prova
+    // editoriale necessaria: l'estratto da solo non trasforma una news
+    // generica in una news di tema.
+    for (const topic of CANTON_HUB_TOPIC_KEYS) {
+      const clusters = CANTON_HUB_TOPIC_CLUSTERS[topic];
+      if (clusters.length === 0) continue;
+      const best = clusters
+        .map((cluster) => {
+          const seed = seedBags.get(cluster);
+          const cosine = model.cosineWithBag(a.id, seed.bag, seed.norm);
+          const titleHit = [...titleTokens].some((tok) => seed.bag.has(tok));
+          const seedHitCount = engine.tokenize(`${a.title.it} ${a.excerpt.it}`).filter((tok) => seed.bag.has(tok)).length;
+          return { cluster, cosine, titleHit, seedHitCount, primary: topic === primaryTopic };
+        })
+        // Scegli fra i cluster che sono già ammissibili. Un cluster
+        // semanticamente vicino ma senza prova nel titolo non deve oscurare
+        // l'altro cluster che invece prova il tema (in particolare mobilita').
+        .filter((match) => match.titleHit && match.cosine >= minTopicStrength
+          && (match.primary || match.seedHitCount >= 2))
+        .sort((x, y) => y.cosine - x.cosine
+          || y.seedHitCount - x.seedHitCount
+          || x.cluster.localeCompare(y.cluster))[0];
+      // Una parola ambigua condivisa dal seed (per esempio «guardie» in una
+      // cronaca di polizia) non basta per un secondo tema. Il tema primario
+      // dell'engine può usare il match singolo; ogni tema aggiuntivo richiede
+      // due occorrenze di lessico nel titolo+estratto, senza allargare la
+      // pertinenza con la sola presenza nel cantone.
       if (!best) continue;
-      topic = best.topic;
-      strength = Math.min(1, best.score / (3 * best.min));
-      keywordAssigned += 1;
+      matches.push({
+        topic,
+        strength: Math.min(1, best.cosine / fullTopicStrength),
+        source: 'cluster',
+        primary: topic === primaryTopic,
+      });
     }
+
+    // Eventi e servizi erano prima valutati solo quando l'engine non aveva
+    // assegnato alcun cluster. Questo perdeva, per esempio, una news sanitaria
+    // che l'engine assegnava a «famiglia-scuola». Sono temi indipendenti:
+    // applica il loro classificatore dichiarato anche in presenza di un altro
+    // match tassonomico e conserva ogni match valido, non solo il migliore.
+    for (const topic of keywordTopics) {
+      const cfg = config.keywordTopics[topic];
+      const result = keywordTopicScore(a, cfg);
+      if (result.excluded || !result.titleHit || result.score < cfg.minScore) continue;
+      matches.push({
+        topic,
+        strength: Math.min(1, result.score / (3 * cfg.minScore)),
+        source: 'keyword',
+        primary: topic === primaryTopic,
+      });
+    }
+    if (matches.length === 0) continue;
+    assignedArticles.add(a.id);
+    if (matches.length > 1) multiTopicArticles.add(a.id);
+    if (matches.some((match) => match.source === 'cluster')) clusterArticles.add(a.id);
+    if (matches.some((match) => match.source === 'keyword')) keywordArticles.add(a.id);
+
     const ageDays = Math.max(0, Math.floor((today - Date.parse(`${isoDayOf(a.date)}T00:00:00Z`)) / DAY_MS));
     const freshness = 0.5 ** (ageDays / freshnessHalfLifeDays);
     // Un articolo della sezione del cantone parla solo di lui; uno etichettato
     // con tre cantoni e' meno «del cantone» di uno etichettato con uno.
     const own = a.section === section ? 1 : 1 / Math.max(1, a.cantons.length);
-    const relevance = 0.4 * own + 0.6 * strength;
     const quality = a.quality ?? neutralQuality;
-    const score = Math.round((weights.freshness * freshness + weights.relevance * relevance + weights.quality * quality) * 1e6) / 1e6;
-    byTopic[topic].push({ article: a, score });
+    for (const match of matches) {
+      const relevance = 0.4 * own + 0.6 * match.strength;
+      const score = Math.round((weights.freshness * freshness + weights.relevance * relevance + weights.quality * quality) * 1e6) / 1e6;
+      byTopic[match.topic].push({ article: a, score, own: a.section === section, primary: match.primary });
+    }
   }
 
   const max = config.maxCuratedArticles;
   for (const topic of CANTON_HUB_TOPIC_KEYS) {
     byTopic[topic] = filterUniqueCuratedCandidates(byTopic[topic]
-      .sort((x, y) => y.score - x.score || y.article.date.localeCompare(x.article.date) || x.article.id.localeCompare(y.article.id)))
+      .sort((x, y) => Number(y.own) - Number(x.own)
+        || Number(y.primary) - Number(x.primary)
+        || y.score - x.score
+        || y.article.date.localeCompare(x.article.date)
+        || x.article.id.localeCompare(y.article.id)))
       .slice(0, max)
       .map(({ article }) => article);
   }
   return {
     byTopic,
-    stats: { pool: eligible.length, clusterAssigned, keywordAssigned, unassigned: eligible.length - clusterAssigned - keywordAssigned },
+    stats: {
+      pool: eligible.length,
+      // Sono conteggi di articoli, non di slot: un articolo puo' appartenere
+      // sia a un tema tassonomico sia a eventi/servizi e a piu' hub.
+      clusterAssigned: clusterArticles.size,
+      keywordAssigned: keywordArticles.size,
+      unassigned: eligible.length - assignedArticles.size,
+      multiTopic: multiTopicArticles.size,
+    },
   };
 }
 

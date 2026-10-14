@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { isArticleNewsEligible, NEWS_SITEMAP_WINDOW_HOURS } from '../data/news-sitemap-whitelist.mjs';
-import { xmlEsc, SITE } from '../../scripts/lib/build-sitemap.mjs';
+import { xmlEsc, SITE, publishedArticleLocales } from '../../scripts/lib/build-sitemap.mjs';
 import { isReservedPublishedSlug } from '../../scripts/lib/published-slug-guard.mjs';
 import { sanitizeXmlDocument, assertNoControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
 
@@ -30,10 +30,14 @@ function render(entries, clock) {
     API_SECTIONS: [{ section: 'frontaliere' }, { section: 'svizzera' }],
     SECTION_REGISTRIES: { frontaliere: entries, svizzera: [] },
     slugMapOf: (section) => (section === 'frontaliere' ? slugMap : {}),
+    SECTION_SLUG_MODULES: {
+      frontaliere: { fallbackReasons: {} },
+      svizzera: { fallbackReasons: {} },
+    },
     SECTION_META_IT: { frontaliere: {}, svizzera: {} },
     SECTION_SITEMAP_SHADOW: { frontaliere: new Set(), svizzera: new Set() },
     SECTION_PATHS: { frontaliere: Object.fromEntries(locales.map(l => [l, `/${l}/news/`])), svizzera: {} },
-    SITE, LOCALES: locales, NEWS_CANDIDATES: 'news.xml', isArticleNewsEligible,
+    SITE, LOCALES: locales, NEWS_CANDIDATES: 'news.xml', isArticleNewsEligible, publishedArticleLocales,
     NEWS_SITEMAP_WINDOW_HOURS, isReservedPublishedSlug, xmlEsc, sanitizeXmlDocument, assertNoControlChars,
     reportStrippedControlChars() {}, byteSize: s => Buffer.byteLength(s), written: {}, newsCandidateCount: 0,
     console: { log() {} },

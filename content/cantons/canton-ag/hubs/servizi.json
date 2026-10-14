@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "56c24f3ea39a547b7757ff57fc6a5f4e866919d381aa78da985482db114918d2",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "1648b1ce7d0c89a818d29e117d21788d4c996f1bfc0cc610b563f12c265b4a05",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-13T00:45:03.256Z",
+      "updatedAt": "2026-10-13T22:49:00.460Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 2190 CHF"
+          "note": "offerta mediana 2370 CHF"
         }
       ],
       "dataBlocks": [
@@ -65,7 +70,7 @@
           "items": [
             {
               "label": "AG7797",
-              "value": "8200 CHF",
+              "value": "8600 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58771"
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "oggi da 8 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,10 +144,16 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Riduzione premi Argovia 2027: domanda entro il 31 dicembre",
+          "url": "/articoli-argovia/riduzione-premi-argovia-2027/",
+          "excerpt": "La SVA Aargau invia i codici per la riduzione dei premi. Per il 2027 la domanda va presentata entro giovedì 31 dicembre.",
+          "date": "2026-10-07T09:03:30.904Z"
+        },
         {
           "title": "Premi cassa malati canton Argovia e riduzione premi",
           "url": "/articoli-svizzera/argovia-sussidi-cassa-malati-2026/",
@@ -168,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "AG",
@@ -185,7 +210,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 2,190 CHF"
+          "note": "typical bid 2,370 CHF"
         }
       ],
       "dataBlocks": [
@@ -211,7 +236,7 @@
           "items": [
             {
               "label": "AG7797",
-              "value": "8,200 CHF",
+              "value": "8,600 CHF",
               "detail": "current bid",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58771"
@@ -233,7 +258,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "today from 8 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,10 +310,16 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Aargau premium reduction 2027: application by 31 December",
+          "url": "/en/aargau-articles/aargau-premium-reduction-2027/",
+          "excerpt": "SVA Aargau sends the codes for premium reduction. For 2027, the application must be submitted by Thursday, December 31.",
+          "date": "2026-10-07T09:03:30.904Z"
+        },
         {
           "title": "Health Insurance Premiums in the Canton of Aargau and Premium Reductions",
           "url": "/en/swiss-articles/aargau-health-insurance-premium-subsidies/",
@@ -310,7 +355,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "AG",
@@ -327,7 +372,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 2’190 CHF"
+          "note": "mittleres Gebot 2’370 CHF"
         }
       ],
       "dataBlocks": [
@@ -353,7 +398,7 @@
           "items": [
             {
               "label": "AG7797",
-              "value": "8’200 CHF",
+              "value": "8’600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58771"
@@ -375,7 +420,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "heute 8 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -413,10 +472,16 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Prämienverbilligung Aargau 2027: Antrag bis zum 31. Dezember",
+          "url": "/de/aargau-artikel/praemienverbilligung-aargau-2027/",
+          "excerpt": "Die SVA Aargau versendet die Codes für die Prämienverbilligung. Für 2027 muss der Antrag bis Donnerstag, 31. Dezember, eingereicht werden.",
+          "date": "2026-10-07T09:03:30.904Z"
+        },
         {
           "title": "Krankenkassenprämien im Kanton Aargau und Prämienermäßigung",
           "url": "/de/schweiz-artikel/aargau-krankenkasse-praemienzuschuesse/",
@@ -452,7 +517,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "AG",
@@ -469,7 +534,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 2 190 CHF"
+          "note": "offre centrale 2 370 CHF"
         }
       ],
       "dataBlocks": [
@@ -495,7 +560,7 @@
           "items": [
             {
               "label": "AG7797",
-              "value": "8 200 CHF",
+              "value": "8 600 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-14T19:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58771"
@@ -517,7 +582,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-13T00:45:03.256Z"
+          "updatedAt": "2026-10-13T22:49:00.460Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 8 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -555,10 +634,16 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Réduction des primes en Argovie 2027 : demande avant le 31 décembre",
+          "url": "/fr/articles-argovie/reduction-primes-argovie-2027/",
+          "excerpt": "La SVA Aargau envoie les codes pour la réduction des primes. Pour 2027, la demande doit être déposée d’ici au jeudi 31 décembre.",
+          "date": "2026-10-07T09:03:30.904Z"
+        },
         {
           "title": "Primes d'assurance maladie du canton d'Argovie et réduction des primes",
           "url": "/fr/articles-suisse/argovie-subventions-primes-sante/",
@@ -590,7 +675,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }

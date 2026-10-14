@@ -25,6 +25,7 @@ on:
     # sito (06:37) e il crawl degli eventi (05:40), sfalsato dagli altri cron.
     - cron: '23 8 * * *'
   push:
+    branches: [main]
     paths:
       - '.github/workflows/refresh-canton-hubs.yml'
       - 'generator/scripts/generate-canton-hubs.mjs'
@@ -32,6 +33,28 @@ on:
       - 'scripts/lib/canton-hub-content.mjs'
       - 'generator/data/canton-hub-topics.json'
       - 'generator/data/canton-hub-links.json'
+      # Un nuovo articolo aggiorna registro, slug/meta, corpo e sidecar. Il
+      # bacino D17 legge anche frontaliere/svizzera con label cantonale, non
+      # solo le 24 sezioni proprie.
+      # I path dei soli hub non sono inclusi: il push del refresh non riavvia
+      # se stesso, mentre il push del generatore cantonale avvia subito questo
+      # workflow (non si aspetta il cron del giorno dopo).
+      - 'content/blog-body-canton-*/**'
+      - 'content/blog-body/**'
+      - 'content/blog-body-ch/**'
+      - 'content/blog-meta-*'
+      - 'content/blog-articles-data.ts'
+      - 'content/swiss-articles-data.ts'
+      - 'content/routerBlogData.ts'
+      - 'content/routerSwissData.ts'
+      - 'content/cantons/*/registry.ts'
+      - 'content/cantons/*/seo.ts'
+      - 'content/cantons/*/slugs.ts'
+      - 'data/blog-articles/**'
+      - 'data/swiss-articles/**'
+      - 'data/article-source-urls.json'
+      - 'data/swiss-article-source-urls.json'
+      - 'data/sections/canton-*/articles/**'
   workflow_dispatch:
     inputs:
       sections:
@@ -62,7 +85,10 @@ jobs:
         run: |
           set -euo pipefail
           if [ "${{ github.event_name }}" = "push" ]; then
-            DRY=true
+            # Un articolo nuovo deve rigenerare e pubblicare subito gli hub.
+            # Il commit del refresh non riavvia questo workflow: i path degli
+            # hub sono esclusi dal trigger push qui sopra.
+            DRY=false
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             DRY="${{ inputs.dry_run }}"
           else
@@ -120,25 +146,20 @@ jobs:
             exit 1
           fi
 
-      # Con zero sezioni il job finisce qui, verde. Il self-test su push non ha
-      # secret e di norma nessuna sezione accesa: esercita il producer in
-      # dry-run sul Ticino, cosi' una modifica rotta si vede prima del cron.
+      # Con zero sezioni il job finisce qui, verde. Un push di un nuovo articolo
+      # segue il percorso reale; il dry-run resta disponibile solo per un
+      # workflow_dispatch esplicito.
       - name: Resolve canton sections
         id: sections
         env:
           REQUESTED: ${{ inputs.sections }}
           DRY: ${{ steps.mode.outputs.dry }}
-          EVENT: ${{ github.event_name }}
         run: |
           set -euo pipefail
           if [ -n "${REQUESTED:-}" ]; then
             SECTIONS="$(printf '%s' "$REQUESTED" | tr -d '[:space:]')"
           else
             SECTIONS="$(node generator/scripts/generate-canton-hubs.mjs --list-enabled | paste -sd, -)"
-          fi
-          if [ -z "$SECTIONS" ] && [ "$EVENT" = "push" ] && [ "$DRY" = "true" ]; then
-            SECTIONS="canton-ti"
-            echo "self-test: nessuna sezione accesa, dry-run su canton-ti"
           fi
           if [ -z "$SECTIONS" ]; then
             echo "count=0" >> "$GITHUB_OUTPUT"

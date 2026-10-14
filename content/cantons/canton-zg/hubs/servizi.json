@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-13T16:09:21.473Z",
-  "contentHash": "dc0af84d712cd38e196a8640a2943e4ae791c3c556bcbea344b516448334d4c8",
+  "updatedAt": "2026-10-14T05:25:52.000Z",
+  "contentHash": "5127a0370ac28a31bb7208f059ee6056f5f5057f4d197d134b73175bf97eac8e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,8 +13,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-13T19:22:49.823Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-12T23:48:12.301Z",
+      "updatedAt": "2026-10-13T21:59:58.321Z",
       "keyFacts": 0
     }
   ],
@@ -47,6 +52,20 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "oggi da 9 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -84,7 +103,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -95,16 +114,22 @@
           "date": "2026-09-04T21:30:16.529Z"
         },
         {
+          "title": "Premi cassa malati canton Zugo e riduzione premi",
+          "url": "/articoli-svizzera/zugo-riduzione-premi-sussidio/",
+          "excerpt": "Come funzionano i premi LAMal nel Canton Zugo, le sei franchigie disponibili e come accedere ai sussidi cantonali per ridurre il costo dell'assicurazione malattia.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
           "title": "Patente di guida nel Canton Zugo: conversione licenza estera, esami e procedure",
           "url": "/articoli-svizzera/patente-guida-zugo-conversione-esami/",
           "excerpt": "Guida completa alla conversione della patente di guida estera nel Canton Zugo: documenti richiesti, esami teorico e pratico, corsi obbligatori e scadenze.",
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
-          "title": "Premi cassa malati canton Zugo e riduzione premi",
-          "url": "/articoli-svizzera/zugo-riduzione-premi-sussidio/",
-          "excerpt": "Come funzionano i premi LAMal nel Canton Zugo, le sei franchigie disponibili e come accedere ai sussidi cantonali per ridurre il costo dell'assicurazione malattia.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "title": "Premi cassa malati cantone Zugo e riduzione premi",
+          "url": "/articoli-svizzera/premi-cassa-malati-cantone-zugo-riduzione-premi/",
+          "excerpt": "I premi per l'assicurazione malattia obbligatoria nel Cantone di Zugo: fasce di premio, franchigie, modelli alternativi e requisiti per beneficiare della riduzione dei premi.",
+          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Asilo nido Zugo: costi, tariffe e sussidi cantonali",
@@ -117,12 +142,6 @@
           "url": "/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-zugo-costi/",
           "excerpt": "I costi per l'asilo nido e la custodia dei bambini in Canton Zug possono variare in base alla tariffa calcolata sul reddito e ai sussidi cantonali disponibili.",
           "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Premi cassa malati cantone Zugo e riduzione premi",
-          "url": "/articoli-svizzera/premi-cassa-malati-cantone-zugo-riduzione-premi/",
-          "excerpt": "I premi per l'assicurazione malattia obbligatoria nel Cantone di Zugo: fasce di premio, franchigie, modelli alternativi e requisiti per beneficiare della riduzione dei premi.",
-          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Patente di guida nel Cantone di Zugo: conversione della licenza estera",
@@ -157,7 +176,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "en": {
       "canton": "ZG",
@@ -187,6 +206,20 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "today from 9 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +257,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -235,6 +268,12 @@
           "date": "2026-09-04T21:30:16.529Z"
         },
         {
+          "title": "Canton Zug health insurance premiums and premium reductions",
+          "url": "/en/swiss-articles/zug-lamal-premium-subsidy/",
+          "excerpt": "How LAMal premiums work in the Canton of Zug, the six deductibles available and how to access cantonal benefits to reduce the cost of health insurance.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
           "title": "Driving licence Zug: foreign conversion, exams & procedures",
           "url": "/en/swiss-articles/zug-driving-license-conversion-exams/",
           "excerpt": "Complete guide to converting a foreign driver's license in the canton of Zug: required documents, theoretical and practical exams, mandatory courses and deadlines.",
@@ -242,9 +281,9 @@
         },
         {
           "title": "Canton Zug health insurance premiums and premium reductions",
-          "url": "/en/swiss-articles/zug-lamal-premium-subsidy/",
-          "excerpt": "How LAMal premiums work in the Canton of Zug, the six deductibles available and how to access cantonal benefits to reduce the cost of health insurance.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "url": "/en/swiss-articles/premi-cassa-malati-canton-zug-riduzione-premi/",
+          "excerpt": "Premiums for compulsory health insurance in the canton of Zug: premium ranges, deductibles, alternative models and requirements for benefiting from premium reductions.",
+          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Zug kindergarten: cantonal costs, fees and subsidies",
@@ -257,12 +296,6 @@
           "url": "/en/swiss-articles/kindergarten-and-childcare-in-canton-zug-costs/",
           "excerpt": "Costs for childcare and childcare in Canton Zug may vary based on the calculated rate on income and available cantonal subsidies.",
           "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Canton Zug health insurance premiums and premium reductions",
-          "url": "/en/swiss-articles/premi-cassa-malati-canton-zug-riduzione-premi/",
-          "excerpt": "Premiums for compulsory health insurance in the canton of Zug: premium ranges, deductibles, alternative models and requirements for benefiting from premium reductions.",
-          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Driver's license in the Canton of Zug: conversion of the foreign license",
@@ -293,7 +326,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "de": {
       "canton": "ZG",
@@ -323,6 +356,20 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "heute 9 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -360,7 +407,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -371,16 +418,22 @@
           "date": "2026-09-04T21:30:16.529Z"
         },
         {
+          "title": "Krankenkassenprämien Kanton Zug und Prämienverbilligung",
+          "url": "/de/schweiz-artikel/zug-krankenkasse-praemien-reduktion/",
+          "excerpt": "Wie die KVG-Prämien im Kanton Zug funktionieren, welche sechs Franchisen zur Verfügung stehen und wie Sie auf kantonale Beiträge zugreifen können, um die Kosten der Krankenversicherung zu senken.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
           "title": "Führerschein Kt. Zug: Ausländ. Umwandlung, Prüfungen & Verfahren",
           "url": "/de/schweiz-artikel/zug-fuhrerschein-umtausch-prufungen/",
           "excerpt": "Vollständiger Leitfaden zur Umwandlung eines ausländischen Führerscheins im Kanton Zug: erforderliche Dokumente, theoretische und praktische Prüfungen, Pflichtkurse und Fristen.",
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
-          "title": "Krankenkassenprämien Kanton Zug und Prämienverbilligung",
-          "url": "/de/schweiz-artikel/zug-krankenkasse-praemien-reduktion/",
-          "excerpt": "Wie die KVG-Prämien im Kanton Zug funktionieren, welche sechs Franchisen zur Verfügung stehen und wie Sie auf kantonale Beiträge zugreifen können, um die Kosten der Krankenversicherung zu senken.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "title": "Krankenversicherungsprämien im Kanton Zug und Prämiensenkungen",
+          "url": "/de/schweiz-artikel/premi-cassa-malati-kanton-zug-riduzione-premi/",
+          "excerpt": "Prämien für die Pflichtkrankenversicherung im Kanton Zug: Prämienbereiche, Selbstbeteiligungen, alternative Modelle und Anforderungen für den Vorteil von Prämiensenkungen.",
+          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Kindergarten Zug: Kosten, Tarife und kantonale Zuschüsse",
@@ -393,12 +446,6 @@
           "url": "/de/schweiz-artikel/asilo-nido-e-custodia-bambini-canton-zug-kosten/",
           "excerpt": "Die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zug können je nach dem berechneten Einkommenstarif und den verfügbaren kantonalen Leistungen variieren.",
           "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Krankenversicherungsprämien im Kanton Zug und Prämiensenkungen",
-          "url": "/de/schweiz-artikel/premi-cassa-malati-kanton-zug-riduzione-premi/",
-          "excerpt": "Prämien für die Pflichtkrankenversicherung im Kanton Zug: Prämienbereiche, Selbstbeteiligungen, alternative Modelle und Anforderungen für den Vorteil von Prämiensenkungen.",
-          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Führerschein im Kanton Zug: Umtausch des ausländischen Führerscheins",
@@ -429,7 +476,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     },
     "fr": {
       "canton": "ZG",
@@ -459,6 +506,20 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-11T10:51:47.772Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zug",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 9 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-13T19:22:49.823Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -496,7 +557,7 @@
               "url": "https://zg.ch/de/news/2026/July/sonn-und-feiertagsverkaeufe-2027"
             }
           ],
-          "updatedAt": "2026-10-12T23:48:12.301Z"
+          "updatedAt": "2026-10-13T21:59:58.321Z"
         }
       ],
       "curatedArticles": [
@@ -507,16 +568,22 @@
           "date": "2026-09-04T21:30:16.529Z"
         },
         {
+          "title": "Primes caisse-maladie canton de Zoug et réduction des primes",
+          "url": "/fr/articles-suisse/zoug-reduction-primes-maladie/",
+          "excerpt": "Comment fonctionnent les primes LAMal dans le canton de Zoug, les six franchises disponibles et comment accéder aux allocations cantonales pour réduire le coût de l'assurance maladie.",
+          "date": "2026-08-23T15:41:16.849Z"
+        },
+        {
           "title": "Permis de conduire Zoug : conversion, examens, démarches",
           "url": "/fr/articles-suisse/zoug-permis-conduite-conversion-examens/",
           "excerpt": "Guide complet pour convertir un permis de conduire étranger dans le canton de Zoug : documents obligatoires, examens théoriques et pratiques, cours obligatoires et délais.",
           "date": "2026-09-22T00:32:07.582Z"
         },
         {
-          "title": "Primes caisse-maladie canton de Zoug et réduction des primes",
-          "url": "/fr/articles-suisse/zoug-reduction-primes-maladie/",
-          "excerpt": "Comment fonctionnent les primes LAMal dans le canton de Zoug, les six franchises disponibles et comment accéder aux allocations cantonales pour réduire le coût de l'assurance maladie.",
-          "date": "2026-08-23T15:41:16.849Z"
+          "title": "Primes d'assurance santé dans le canton de Zoug et réductions de primes",
+          "url": "/fr/articles-suisse/premi-cassa-malati-canton-de-zoug-riduzione-premi/",
+          "excerpt": "Primes pour l'assurance maladie obligatoire dans le canton de Zou : fourchettes de primes, franchises, modèles alternatifs et exigences pour bénéficier de réductions de primes.",
+          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Garderie Zoug : coûts, tarifs et subventions cantonales",
@@ -529,12 +596,6 @@
           "url": "/fr/articles-suisse/asilo-nido-e-custodia-bambini-canton-zoug-couts/",
           "excerpt": "Les frais de crèche et de garde d'enfants dans le canton de Zoug peuvent varier en fonction du tarif calculé sur le revenu et des allocations cantonales disponibles.",
           "date": "2026-08-17T15:14:36.291Z"
-        },
-        {
-          "title": "Primes d'assurance santé dans le canton de Zoug et réductions de primes",
-          "url": "/fr/articles-suisse/premi-cassa-malati-canton-de-zoug-riduzione-premi/",
-          "excerpt": "Primes pour l'assurance maladie obligatoire dans le canton de Zou : fourchettes de primes, franchises, modèles alternatifs et exigences pour bénéficier de réductions de primes.",
-          "date": "2026-08-17T08:03:04.287Z"
         },
         {
           "title": "Permis de conduire dans le canton de Zoug : conversion du permis étranger",
@@ -561,7 +622,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-13T16:09:21.473Z"
+      "updatedAt": "2026-10-14T05:25:52.000Z"
     }
   }
 }
