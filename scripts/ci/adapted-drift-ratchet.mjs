@@ -11,10 +11,13 @@
  * Uso (in `.github/workflows/loop-drift-check.yml`):
  *   node scripts/ci/adapted-drift-ratchet.mjs --report <file> [--enforce] [--base-ref <ref>]
  *
- *   --enforce         un path in drift fuori dal ratchet, o un report illeggibile,
- *                     e' un exit 1 (schedule e dispatch con `report_issue`). Senza,
- *                     solo avviso: in PR la crescita la fa il sito, non chi ha
- *                     aperto la PR.
+ *   --enforce         un path in drift fuori dal ratchet e' un exit 3; un report
+ *                     illeggibile o un errore del gate resta exit 1 (schedule e
+ *                     dispatch con `report_issue`). La distinzione permette al
+ *                     workflow di assorbire SOLO il drift gia' persistito nella
+ *                     issue canonica, senza nascondere un guasto del ratchet.
+ *                     Senza, solo avviso: in PR la crescita la fa il sito, non
+ *                     chi ha aperto la PR.
  *   --base-ref <ref>  in PR: il ratchet non puo' AGGIUNGERE path rispetto a
  *                     `<ref>`. Questo e' sempre un exit 1: l'elenco della PR e'
  *                     interamente nelle mani di chi l'ha aperta.
@@ -36,6 +39,8 @@ import {
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const TOOL = 'adapted-drift-ratchet';
+/** Drift nuovo correttamente misurato; distinto dagli errori operativi (exit 1). */
+export const EXIT_FRESH_DRIFT = 3;
 
 function argValue(argv, name) {
   const i = argv.indexOf(`--${name}`);
@@ -67,6 +72,7 @@ export function main(argv) {
     return 1;
   }
   let failed = false;
+  let freshDrift = false;
 
   if (baseRef) {
     const shrink = ratchetShrinkVerdict({ before: baseRatchetPaths(baseRef), after: ratchet.paths });
@@ -118,7 +124,7 @@ export function main(argv) {
     const title = `adapted-3way: ${verdict.fresh.length} gemelli adapted in drift oltre il ratchet`;
     const detail = `${verdict.fresh.join(', ')}. Riconcilia il file con una PR del corpus che dichiara \`Realign-adapted: <path> site-prs=#N\`, oppure riattesta la baseline se il cambiamento del sito non riguarda il corpus.`;
     if (enforce) {
-      failed = true;
+      freshDrift = true;
       console.log(`::error title=${title}::${detail}`);
     } else {
       console.log(`::warning title=${title}::${detail} (solo avviso: in PR la crescita viene dal sito, non dalla PR).`);
@@ -127,7 +133,7 @@ export function main(argv) {
   if (verdict.stale.length) {
     console.log(`::notice title=${TOOL}: ratchet da potare::${verdict.stale.length} path registrati non sono piu' in drift.`);
   }
-  return failed ? 1 : 0;
+  return failed ? 1 : freshDrift ? EXIT_FRESH_DRIFT : 0;
 }
 
 const isDirectRun = (() => {

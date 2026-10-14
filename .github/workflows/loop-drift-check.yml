@@ -132,8 +132,11 @@ jobs:
       # Gate `adapted-drift-budget` (issue #339): il numero di gemelli `adapted`
       # in drift non cresce. L'elenco accettato come debito e'
       # `scripts/ci/adapted-drift-ratchet.json`; un path in drift che non c'e'
-      # e' un rosso sullo schedule (e sul dispatch con `report_issue`), un
-      # avviso sulle PR — la crescita la fa il sito, non chi apre la PR. Sulle
+      # e' un rosso sullo schedule (e sul dispatch con `report_issue`) FINCHE'
+      # il report non e' stato persistito nella issue canonica. Dopo quella
+      # prova l'exit 3 non deve aprire anche una issue `Workflow Failure`; ogni
+      # altro exit resta rosso. Sulle PR e' un avviso — la crescita la fa il
+      # sito, non chi apre la PR. Sulle
       # PR e' invece sempre un rosso AGGIUNGERE path all'elenco rispetto a
       # main: un drift nuovo si riconcilia, non si dichiara accettato. Il job
       # `realign-adapted` toglie dall'elenco i path che riattesta.
@@ -148,7 +151,21 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             args+=(--base-ref "origin/${{ github.base_ref }}")
           fi
+          set +e
           node scripts/ci/adapted-drift-ratchet.mjs "${args[@]}"
+          RATCHET_STATUS=$?
+          set -e
+
+          # Exit 3 significa soltanto «nuovo drift adapted». Se il passo
+          # precedente ha gia' persistito lo stesso report in #339, fallire il
+          # job produrrebbe la issue workflow duplicata #1610. Errori operativi
+          # (exit 1), crash/segnali e violazioni del ratchet in PR non passano
+          # mai da questa eccezione.
+          if [ "$RATCHET_STATUS" -eq 3 ] && [ "${{ steps.drift_report.outputs.issue_reported }}" = "true" ]; then
+            echo "::notice title=adapted-drift-ratchet::Nuovo drift gia' persistito nella issue canonica; nessuna Workflow Failure duplicata."
+            exit 0
+          fi
+          exit "$RATCHET_STATUS"
 
       # I 24 artifact cross-repo hanno tre famiglie di digest e finora solo una
       # era confrontata con qualcosa (issue #916): `generatorSha256` e i 24
@@ -159,10 +176,9 @@ jobs:
       - name: Verifica la provenienza del contratto cross-repo
         id: provenance_report
         if: always()
-        # Solo la prova emessa dal passo precedente abilita l'advisory: un
-        # crash, un errore di rete o una write fallita non diventano verdi e
-        # il job conserva il proprio rosso.
-        continue-on-error: ${{ steps.drift_report.outputs.issue_reported == 'true' }}
+        # Il suo opt-in `--strict` e' indipendente dal report generico del
+        # passo precedente: `issue_reported` non prova che un errore di
+        # provenienza sia stato persistito e non deve assorbirne il failure.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SITE_REPO: valerielinc-ops/frontaliere-si-o-no
