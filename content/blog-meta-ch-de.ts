@@ -8258,6 +8258,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rapporto-riciclaggio-denaro-svizzera.title': 'Geldwäscherei in der Schweiz: Mehr Ressourcen und Sanktionen sind nötig',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.excerpt': 'Die Risiken bleiben in der Schweiz hoch Der Bundesrat nimmt den dritten Bericht zur Kenntnis Die GCRF formuliert acht Empfehlungen Mehr Ressourcen und Sanktionen sind nötig',
     'blog.article.rapporto-riciclaggio-denaro-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Bundesrates',
+    'blog.article.nuovo-accordo-commercio-elettronico.title': 'Neues Abkommen über den elektronischen Handel',
+    'blog.article.nuovo-accordo-commercio-elettronico.excerpt': 'Der Bundesrat eröffnet die Vernehmlassung zum ACE.',
+    'blog.article.nuovo-accordo-commercio-elettronico.imageAlt': 'Laptop mit Digitalhandel‑Diagramm vor dem Luganersee',
 };
 
 export default blogMetaChDe;
