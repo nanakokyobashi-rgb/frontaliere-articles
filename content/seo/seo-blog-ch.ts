@@ -103574,6 +103574,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pfister-risorse-difesa-federale': {
+    title: 'Pfister: risorse insufficienti per l\'esercito svizzero',
+    description: 'Al LAC di Lugano Martin Pfister segnala risorse insufficienti per l\'esercito svizzero e sostiene nuovi investimenti legati a un aumento temporaneo dell\'IVA.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pfister, risorse, insufficienti, esercito',
+    ogTitle: 'Esercito svizzero: l\'allarme di Pfister',
+    ogDescription: 'Al LAC di Lugano, Pfister ha indicato droni, sabotaggi e ciberattacchi tra le minacce moderne. La risposta passa da nuovi investimenti, cooperazione con i Paesi europei e revisione delle norme sull\'esportazione di materiale bellico.',
+    canonicalPath: '/articoli-svizzera/pfister-risorse-difesa-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pfister: risorse insufficienti per l'esercito svizzero",
+      "description": "Al LAC di Lugano Martin Pfister segnala risorse insufficienti per l'esercito svizzero e sostiene nuovi investimenti legati a un aumento temporaneo dell'IVA.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pfister-risorse-difesa-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il LAC di Lugano, dove Martin Pfister ha parlato delle risorse dell'esercito svizzero."
+      },
+      "datePublished": "2026-10-14T01:19:47+00:00",
+      "dateModified": "2026-10-14T01:19:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pfister-risorse-difesa-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

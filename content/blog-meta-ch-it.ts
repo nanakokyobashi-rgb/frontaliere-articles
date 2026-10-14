@@ -8207,6 +8207,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.decisioni-avs-ue-voto.title': 'Consiglio federale: AVS, UE e voto 2026',
     'blog.article.decisioni-avs-ue-voto.excerpt': 'Guy Parmelin lascerà il Consiglio federale il 31.12.2026 Le rendite AVS/AI aumenteranno di circa 1,6% Il pacchetto Svizzera-UE è al Parlamento dal 13 marzo 2026',
     'blog.article.decisioni-avs-ue-voto.imageAlt': 'Castelgrande in una scena editoriale sulle decisioni federali',
+    'blog.article.pfister-risorse-difesa-federale.title': 'Pfister: risorse insufficienti per l\'esercito svizzero',
+    'blog.article.pfister-risorse-difesa-federale.excerpt': 'Al LAC di Lugano Pfister denuncia risorse insufficienti per l\'esercito svizzero; il piano di finanziamento è legato a un aumento temporaneo dell\'IVA.',
+    'blog.article.pfister-risorse-difesa-federale.imageAlt': 'Il LAC di Lugano, dove Martin Pfister ha parlato delle risorse dell\'esercito svizzero.',
 };
 
 export default blogMetaChIt;

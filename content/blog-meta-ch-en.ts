@@ -8207,6 +8207,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.decisioni-avs-ue-voto.title': 'Federal Council: AHV, EU and 2026 vote',
     'blog.article.decisioni-avs-ue-voto.excerpt': 'Guy Parmelin to leave the Federal Council on 31.12.2026 AHV/IV pensions to increase by around 1.6% The Swiss-EU package has been in parliament since 13 March 2026',
     'blog.article.decisioni-avs-ue-voto.imageAlt': 'Castelgrande in an editorial scene about Swiss federal decisions',
+    'blog.article.pfister-risorse-difesa-federale.title': 'Pfister: insufficient resources for the Swiss army',
+    'blog.article.pfister-risorse-difesa-federale.excerpt': 'At the LAC in Lugano, Pfister denounces insufficient resources for the Swiss army; the financing plan is tied to a temporary increase in VAT.',
+    'blog.article.pfister-risorse-difesa-federale.imageAlt': 'LAC in Lugano, where Martin Pfister discussed resources for the Swiss army.',
 };
 
 export default blogMetaChEn;
