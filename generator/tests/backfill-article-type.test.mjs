@@ -22,38 +22,77 @@ import {
 import * as backfillType from '../scripts/backfill-article-type.mjs';
 import * as backfillCantons from '../scripts/backfill-article-cantons.mjs';
 import * as tsStringMap from '../scripts/lib/ts-string-map.mjs';
+import { newsUrlKey } from '../scripts/lib/source-url-ledger.mjs';
 
 const { articleTypeFromItalianBody, readTsStringMap } = backfillType;
+const { isGeneratedSourceCitation } = backfillType;
 const CREATE_ARTICLE = readFileSync(
   new URL('../scripts/create-article.mjs', import.meta.url),
   'utf8',
 );
 
 const SOURCE = '*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/123)*';
+const SOURCE_URL = 'https://www.tio.ch/ticino/attualita/123';
+const generatedSource = (articleId, url = SOURCE_URL) => ({
+  [newsUrlKey(url)]: { articleId, ts: '2026-10-06T12:00:00.000Z' },
+});
 
 describe('articleType dal corpo italiano', () => {
-  test('riconosce la citazione finale unica del generatore come news', () => {
-    assert.equal(articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`), 'news');
+  test('riconosce la citazione solo se il ledger la collega allo stesso articolo', () => {
+    const body = `Testo della notizia.\n\n${SOURCE}`;
+    assert.equal(isGeneratedSourceCitation(body, 'article-1', generatedSource('article-1')), true);
+    assert.equal(articleTypeFromItalianBody(body, 'article-1', generatedSource('article-1')), 'news');
+    assert.equal(isGeneratedSourceCitation(body, 'article-2', generatedSource('article-1')), false);
+    assert.equal(isGeneratedSourceCitation(body, 'article-1', {}), false);
+    assert.equal(
+      isGeneratedSourceCitation(body, 'article-1', { [newsUrlKey(SOURCE_URL)]: 'article-1' }),
+      true,
+      'mantiene compatibilità con le voci storiche del ledger',
+    );
+    assert.equal(
+      isGeneratedSourceCitation(body, 'article-1', {
+        [newsUrlKey(SOURCE_URL + '#ft-item=012345abcdef')]: { articleId: 'article-1' },
+      }),
+      true,
+      'l’identità del feed resta nel ledger ma non nella citazione pubblica',
+    );
   });
 
   test('riconosce URL Markdown con parentesi bilanciate', () => {
     const balanced = String.raw`Testo della notizia.
 
 *Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/articolo_(completo).html)*`;
-    assert.equal(articleTypeFromItalianBody(balanced), 'news');
+    assert.equal(
+      articleTypeFromItalianBody(
+        balanced,
+        'article-balanced',
+        generatedSource('article-balanced', 'https://www.tio.ch/ticino/attualita/articolo_(completo).html'),
+      ),
+      'news',
+    );
   });
 
   test('riconosce parentesi escaped e conserva la citazione semplice', () => {
     const escaped = String.raw`Testo della notizia.
 
 *Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/articolo\(completo\).html)*`;
-    assert.equal(articleTypeFromItalianBody(escaped), 'news');
-    assert.equal(articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`), 'news');
+    assert.equal(
+      articleTypeFromItalianBody(
+        escaped,
+        'article-escaped',
+        generatedSource('article-escaped', 'https://www.tio.ch/ticino/attualita/articolo(completo).html'),
+      ),
+      'news',
+    );
+    assert.equal(
+      articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`, 'article-1', generatedSource('article-1')),
+      'news',
+    );
   });
 
   test('lascia senza tipo una citazione non finale o non unica', () => {
-    assert.equal(articleTypeFromItalianBody(`${SOURCE}\n\nAltro testo.`), undefined);
-    assert.equal(articleTypeFromItalianBody(`Primo\n\n${SOURCE}\n\nSecondo\n\n${SOURCE}`), undefined);
+    assert.equal(articleTypeFromItalianBody(`${SOURCE}\n\nAltro testo.`, 'article-1', generatedSource('article-1')), undefined);
+    assert.equal(articleTypeFromItalianBody(`Primo\n\n${SOURCE}\n\nSecondo\n\n${SOURCE}`, 'article-1', generatedSource('article-1')), undefined);
   });
 
   test('le citazioni statistiche BFS e ASTRA ricevono il tipo che il writer da\' a quelle run', () => {
@@ -68,7 +107,11 @@ describe('articleType dal corpo italiano', () => {
       const writer = registryArticleTypeForRun(null, runUrl);
       assert.equal(writer, 'news', runUrl);
       assert.equal(
-        articleTypeFromItalianBody(`Dati del periodo.\n\n*Fonte: [${domain}](${citationUrl})*`),
+        articleTypeFromItalianBody(
+          `Dati del periodo.\n\n*Fonte: [${domain}](${citationUrl})*`,
+          domain,
+          generatedSource(domain, runUrl),
+        ),
         writer,
         `${domain}: il backfill deve coincidere col writer`,
       );
@@ -77,13 +120,17 @@ describe('articleType dal corpo italiano', () => {
 
   test('richiede il dominio nel link, come la citazione del generatore', () => {
     assert.equal(
-      articleTypeFromItalianBody('Testo.\n\n*Fonte: [Ufficio federale](https://www.tio.ch/ticino/attualita/123)*'),
+      articleTypeFromItalianBody(
+        'Testo.\n\n*Fonte: [Ufficio federale](https://www.tio.ch/ticino/attualita/123)*',
+        'article-1',
+        generatedSource('article-1'),
+      ),
       undefined,
     );
   });
 
   test('una voce ambigua resta senza tipo', () => {
-    assert.equal(articleTypeFromItalianBody('Guida pratica senza fonte unica.'), undefined);
+    assert.equal(articleTypeFromItalianBody('Guida pratica senza fonte unica.', 'article-1', generatedSource('article-1')), undefined);
   });
 });
 
@@ -305,6 +352,18 @@ describe('ledger di lettura e piano di backfill', () => {
       join(root, 'content/blog-body-ch/it/swiss-citation.ts'),
       "const fields = {\n  'blog.article.swiss-citation.body3': 'Testo.\\n\\n*Fonte: [tio.ch](https://www.tio.ch/ticino/attualita/124)*',\n};\n",
     );
+    writeFileSync(
+      join(root, 'data/article-source-urls.json'),
+      JSON.stringify({
+        [SOURCE_URL]: { articleId: 'citation-news', ts: '2026-10-06T12:00:00.000Z' },
+      }),
+    );
+    writeFileSync(
+      join(root, 'data/swiss-article-source-urls.json'),
+      JSON.stringify({
+        'https://www.tio.ch/ticino/attualita/124': { articleId: 'swiss-citation', ts: '2026-10-06T12:00:00.000Z' },
+      }),
+    );
     writeLedger(root, [
       { id: 'ledger-news', decision: 'news', reason: 'Cronaca datata inequivocabile.', readAt: '2026-10-06', basis: 'reading' },
       { id: 'ledger-guide', decision: 'evergreen', reason: 'Guida pratica inequivocabile.', readAt: '2026-10-06', basis: 'reading' },
@@ -327,6 +386,17 @@ describe('ledger di lettura e piano di backfill', () => {
       assert.equal(plan.frontaliere.withoutType, 1);
       assert.equal(plan.frontaliere.missingBody, 1);
       assert.deepEqual([...plan.svizzera.typesById.entries()], [['swiss-citation', 'news']]);
+    });
+  });
+
+  test('una citazione senza corrispondenza URL→ID non autorizza il tipo', () => {
+    withFixture((root) => {
+      writeFileSync(join(root, 'data/article-source-urls.json'), JSON.stringify({
+        [SOURCE_URL]: { articleId: 'un-altro-articolo', ts: '2026-10-06T12:00:00.000Z' },
+      }));
+      const plan = backfillType.planBackfill(root);
+      assert.equal(plan.frontaliere.typesById.has('citation-news'), false);
+      assert.equal(plan.frontaliere.withoutType, 2);
     });
   });
 
