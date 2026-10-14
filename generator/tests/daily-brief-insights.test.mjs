@@ -6,7 +6,7 @@ import { fuelQuoteIsFresh, shapeFuel } from '../scripts/lib/daily-brief-data.mjs
 import { buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 import { enrichArticleInternalLinks } from '../scripts/lib/contextual-article-links.mjs';
 
-const now = Date.now();
+const now = Date.parse('2026-10-14T12:00:00.000Z');
 const day = n => new Date(now - n * 86400000).toISOString().slice(0, 10);
 const history = Array.from({ length: 14 }, (_, i) => ({ date: day(i + 1), added: i < 7 ? 10 : 5 }));
 

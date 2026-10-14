@@ -138,7 +138,7 @@ export function buildDailyBriefSvg(brief, { locale = 'it' } = {}) {
   const fx = blocks.exchange;
   const fxBig = fx?.available ? `${fmtNum(locale, fx.rate, 4)} €` : '—';
   const fxDelta = fx?.available && Number.isFinite(fx.delta1d)
-    ? `${fx.delta1d > 0 ? '+' : ''}${fmtNum(locale, fx.delta1d, 4)} (1d)`
+    ? `Δ ${fx.delta1d > 0 ? '+' : ''}${fmtNum(locale, fx.delta1d, 4)}`
     : t.na;
 
   const jobs = blocks.jobs;

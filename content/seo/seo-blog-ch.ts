@@ -104232,6 +104232,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuovo-accordo-commercio-elettronico': {
+    title: 'Nuovo accordo per il commercio elettronico | Frontaliere Ticino',
+    description: 'Il Consiglio federale avvia la consultazione sull\'ACE. L\'accordo riunisce 67 membri dell\'OMC. La consultazione termina il 28 gennaio 2027. L\'ACE vieta i dazi',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovo, accordo, commercio, elettronico',
+    ogTitle: 'Nuovo accordo per il commercio elettronico',
+    ogDescription: 'Il Consiglio federale avvia la consultazione sull\'ACE.',
+    canonicalPath: '/articoli-svizzera/nuovo-accordo-commercio-elettronico/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuovo accordo per il commercio elettronico",
+      "description": "Il Consiglio federale avvia la consultazione sull'ACE. L'accordo riunisce 67 membri dell'OMC. La consultazione termina il 28 gennaio 2027. L'ACE vieta i dazi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-nuovo-accordo-commercio-elettronico.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Laptop con grafico del commercio digitale davanti al lago Lugano"
+      },
+      "datePublished": "2026-10-14T17:04:53+00:00",
+      "dateModified": "2026-10-14T17:04:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/nuovo-accordo-commercio-elettronico/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
