@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-sala-risveglio-bellinzona.webp",
+      "sha256": "07b9d211f781e6829477ebccb607b8ab6dedbde7321b4dd5012634d979c4870b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-sala-risveglio-bellinzona-480w.webp",
+      "sha256": "aad8689ce323b68e88761537bc8de235242764a6355ecae52ada9e8f30b8e8c9"
+    }
+  ]
 }
