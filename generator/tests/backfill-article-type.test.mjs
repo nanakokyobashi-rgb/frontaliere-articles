@@ -22,7 +22,7 @@ import {
 import * as backfillType from '../scripts/backfill-article-type.mjs';
 import * as backfillCantons from '../scripts/backfill-article-cantons.mjs';
 import * as tsStringMap from '../scripts/lib/ts-string-map.mjs';
-import { newsUrlKey } from '../scripts/lib/source-url-ledger.mjs';
+import { legacyNewsUrlKey, newsUrlKey } from '../scripts/lib/source-url-ledger.mjs';
 
 const { articleTypeFromItalianBody, readTsStringMap } = backfillType;
 const { isGeneratedSourceCitation } = backfillType;
@@ -87,6 +87,28 @@ describe('articleType dal corpo italiano', () => {
     assert.equal(
       articleTypeFromItalianBody(`Testo della notizia.\n\n${SOURCE}`, 'article-1', generatedSource('article-1')),
       'news',
+    );
+  });
+
+  test('mantiene la compatibilita\u0300 con una chiave storica senza query identificante', () => {
+    const url = 'https://example.ch/news?id=7';
+    const body = `Testo della notizia.\n\n*Fonte: [example.ch](${url})*`;
+    assert.equal(
+      articleTypeFromItalianBody(
+        body,
+        'article-historical-query',
+        { [legacyNewsUrlKey(url)]: 'article-historical-query' },
+      ),
+      'news',
+    );
+    assert.equal(
+      isGeneratedSourceCitation(
+        body,
+        'article-query-7',
+        { [newsUrlKey('https://example.ch/news?id=8')]: { articleId: 'article-query-7', keyForm: 2 } },
+      ),
+      false,
+      'una voce corrente con un id diverso non deve ricadere sul path storico',
     );
   });
 

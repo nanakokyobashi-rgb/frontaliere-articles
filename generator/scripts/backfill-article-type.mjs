@@ -27,7 +27,12 @@ import {
   registryArticleTypeForRun,
 } from './lib/registry-article-type.mjs';
 import { parseSourceCitations } from './lib/canton-news-sources.mjs';
-import { newsUrlKey, stripItemIdentity } from './lib/source-url-ledger.mjs';
+import {
+  legacyNewsUrlKey,
+  newsUrlKey,
+  readLedgerEntry,
+  stripItemIdentity,
+} from './lib/source-url-ledger.mjs';
 import { writeFilePairAtomically } from '../../scripts/lib/write-file-pair-atomically.mjs';
 import { readTsStringLiteral, readTsStringMap } from './lib/ts-string-map.mjs';
 
@@ -173,17 +178,24 @@ export function isGeneratedSourceCitation(body3, articleId, sourceUrls) {
   const citation = finalGeneratedCitation(body3);
   if (!citation) return false;
   const citationKey = newsUrlKey(citation.url);
-  const ledgerArticleId = (entry) => (typeof entry === 'string' ? entry : entry?.articleId);
-  if (ledgerArticleId(sourceUrls[citationKey]) === articleId) return true;
+  if (readLedgerEntry(sourceUrls[citationKey])?.articleId === articleId) return true;
 
   // Fonte riusate aggiungono l'identita' dell'item solo al ledger; la
   // citazione pubblica usa l'URL senza quel frammento.
   for (const [sourceUrl, entry] of Object.entries(sourceUrls)) {
-    if (ledgerArticleId(entry) !== articleId) continue;
+    const ledgerEntry = readLedgerEntry(entry);
+    if (ledgerEntry?.articleId !== articleId) continue;
     const syntheticCitation = Object.entries(SYNTHETIC_CITATION_KEYS)
       .find(([prefix]) => sourceUrl.startsWith(prefix));
     if (syntheticCitation?.[1] === citationKey) return true;
-    if (newsUrlKey(stripItemIdentity(sourceUrl)) === citationKey) return true;
+    const sourceWithoutItemIdentity = stripItemIdentity(sourceUrl);
+    if (ledgerEntry.keyForm === 1) {
+      // Le chiavi storiche hanno perso la query identificante: confrontarle
+      // con la forma 2 ricreerebbe una falsa assenza di provenienza.
+      if (legacyNewsUrlKey(sourceWithoutItemIdentity) === legacyNewsUrlKey(citation.url)) return true;
+    } else if (newsUrlKey(sourceWithoutItemIdentity) === citationKey) {
+      return true;
+    }
   }
   return false;
 }

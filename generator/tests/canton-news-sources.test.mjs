@@ -278,6 +278,20 @@ test('CMS SH: payload misto usa un titolo successivo e lascia una nota esplicita
   assert.match(scanned.notes.join(' '), /CMS payload misto/);
 });
 
+test('CMS SH: sourceContent elimina tag con > dentro attributi quotati', () => {
+  const api = 'https://sh.ch/CMS/content/list?language=DE';
+  const expected = Array.from({ length: 12 }, () => 'Testo pubblico del comunicato con informazioni verificabili.').join(' ');
+  const rows = [{
+    kachellabel: 'Comunicazione con corpo pubblico',
+    publication_date: '05.10.2026',
+    permalink: '/Webseite/Comunicazione-123-DE.html',
+    post_content: `<p data-note="a > b">${expected}</p>`,
+  }];
+  const [item] = extractJsonApiItems(JSON.stringify(rows), api);
+  assert.equal(item.sourceContent, expected);
+  assert.doesNotMatch(item.sourceContent, /b">/u);
+});
+
 test('timestamp CMS SH: secondi, SQL e ISO precedono il fallback day-only', () => {
   const dotted = parseDottedDate('05.10.2026 17:15:36');
   assert.equal(dotted.getHours(), 17);

@@ -550,7 +550,20 @@ export function decodeHtmlEntities(value) {
 }
 
 function stripTags(value) {
-  return decodeHtmlEntities(String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').replace(/<[^>]+>/g, ' '))
+  const source = String(value || '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
+  let text = '';
+  let cursor = 0;
+  let tagStart = source.indexOf('<');
+  while (tagStart !== -1) {
+    const tagEnd = findHtmlTagEndOutsideQuotes(source, tagStart);
+    if (tagEnd < 0) break;
+    text += source.slice(cursor, tagStart);
+    text += ' ';
+    cursor = tagEnd + 1;
+    tagStart = source.indexOf('<', cursor);
+  }
+  text += source.slice(cursor);
+  return decodeHtmlEntities(text)
     .replace(/\s+/g, ' ')
     .trim();
 }
