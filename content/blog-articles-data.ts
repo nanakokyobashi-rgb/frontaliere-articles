@@ -44398,6 +44398,17 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'disavanzo-cantonale-2027-2030',
+ category: 'fiscale',
+ date: '2026-10-14T12:50:16.750Z',
+ image: '/images/blog/article-deficit-comune-preventivo-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

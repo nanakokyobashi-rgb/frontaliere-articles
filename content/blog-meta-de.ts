@@ -13168,6 +13168,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.arresti-auto-como-minacce.title': 'Zwei Festnahmen in Como: Autodiebstahl und verletzter Autofahrer',
     'blog.article.arresti-auto-como-minacce.excerpt': 'Zwei Verhaftungen bei Como nach Meldungen von Anwohnern Ein erzwungenes Auto und ein zweites beschädigtes Fahrzeug Ein Autofahrer meldet eine Verletzung an einem Arm',
     'blog.article.arresti-auto-como-minacce.imageAlt': 'Stadtstrasse nahe der Grenze mit parkierten Autos und Parkhaus im Morgengrauen',
+    'blog.article.disavanzo-cantonale-2027-2030.title': 'Erwartetes Defizit des Kantons Tessin von bis zu 460 Millionen',
+    'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Der Voranschlag 2027 sieht ein Defizit von 98,5 Millionen vor.',
+    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Blick auf den Luganer See mit Stadtpanorama und ruhiger Promenade',
 };
 
 export default blogMetaDe;

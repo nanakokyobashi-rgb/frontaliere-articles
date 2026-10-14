@@ -13171,6 +13171,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.arresti-auto-como-minacce.title': 'Deux arrestations à Côme : vol de voiture et automobiliste blessé',
     'blog.article.arresti-auto-como-minacce.excerpt': 'Deux arrestations à Como après des signalements de résidents Une voiture forcée et un deuxième véhicule endommagé Un automobiliste signale une blessure à un bras',
     'blog.article.arresti-auto-como-minacce.imageAlt': 'Rue urbaine près de la frontière avec voitures garées et parking à l\'aube',
+    'blog.article.disavanzo-cantonale-2027-2030.title': 'Déficit cantonal tessinois prévu jusqu’à 460 millions',
+    'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Le budget 2027 prévoit un déficit de 98,5 millions.',
+    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Vue sur le lac de Lugano avec la ligne d\'horizon de la ville et une promenade paisible',
 };
 
 export default blogMetaFr;

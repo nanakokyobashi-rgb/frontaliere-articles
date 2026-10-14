@@ -40,6 +40,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-14T12:24:36.676Z",
       "lastFailureAt": "2026-10-14T12:24:36.676Z"
+    },
+    {
+      "articleId": "disavanzo-cantonale-2027-2030",
+      "title": "Disavanzo cantonale ticinese previsto fino a 460 milioni",
+      "fallbackImage": "/images/blog/article-deficit-comune-preventivo-2027.webp",
+      "reason": "All image providers failed for article-disavanzo-cantonale-2027-2030: openai-codex (vision gate rejected image: Synthetic editorial illustration of Lake Lugano/Ticino; generic fore",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-14T12:50:17.019Z",
+      "lastFailureAt": "2026-10-14T12:50:17.019Z"
     }
   ]
 }

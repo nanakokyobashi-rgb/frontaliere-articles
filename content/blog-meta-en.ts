@@ -13169,6 +13169,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arresti-auto-como-minacce.title': 'Two arrests in Como: carjackings and injured motorist',
     'blog.article.arresti-auto-como-minacce.excerpt': 'Two stops at Como after resident reports A forced car and a second vehicle damaged A motorist reports an injury to an arm',
     'blog.article.arresti-auto-como-minacce.imageAlt': 'Urban street near the border with parked cars and a parking garage at dawn',
+    'blog.article.disavanzo-cantonale-2027-2030.title': 'Ticino cantonal deficit expected to reach 460 million',
+    'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'The 2027 budget forecasts a deficit of 98,5 million.',
+    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'View of Lake Lugano with city skyline and tranquil promenade',
 };
 
 export default blogMetaEn;

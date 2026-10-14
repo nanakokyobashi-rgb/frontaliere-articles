@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/cantone/mendrisiotto/1947144/municipio-di-chiasso-extra-muros-proiezioni-finanziarie-complicate": {
-    "articleId": "chiasso-potenziamento-a2-misure",
-    "ts": "2026-09-01T05:24:55.241Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/galleria-moscia-acapulco-il-progetto-entra-nel-vivo-un-investimento-da-180-milioni-441726": {
     "articleId": "galleria-moscia-acapulco-180-milioni",
     "ts": "2026-09-01T10:37:01.451Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/dal-mondo/cronaca/1956683/21enne-19enne-due-auto-automobilista-minacce-como-ferito": {
     "articleId": "arresti-auto-como-minacce",
     "ts": "2026-10-14T12:24:36.678Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/conti-cantonali-disavanzo-fino-a-460-milioni-perche-il-governo-rinvia-le-scelte-444581": {
+    "articleId": "disavanzo-cantonale-2027-2030",
+    "ts": "2026-10-14T12:50:17.020Z",
     "keyForm": 2
   }
 }

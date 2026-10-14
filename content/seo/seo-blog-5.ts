@@ -107868,6 +107868,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-disavanzo-cantonale-2027-2030': {
+    title: 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
+    description: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni. Il deficit prospettato arriva a 460 milioni nel 2030. Dal 2028 l’autofinanziamento dovrebbe diventare',
+    keywords: 'frontalieri, ticino, svizzera, italia, disavanzo, cantonale, ticinese, previsto',
+    ogTitle: 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
+    ogDescription: 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
+    canonicalPath: '/articoli-frontaliere/disavanzo-cantonale-2027-2030/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Disavanzo cantonale ticinese previsto fino a 460 milioni",
+      "description": "Il Preventivo 2027 prevede un disavanzo di 98,5 milioni. Il deficit prospettato arriva a 460 milioni nel 2030. Dal 2028 l’autofinanziamento dovrebbe diventare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-deficit-comune-preventivo-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del lago di Lugano con skyline cittadino e passeggiata tranquilla"
+      },
+      "datePublished": "2026-10-14T12:50:16+00:00",
+      "dateModified": "2026-10-14T12:50:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/disavanzo-cantonale-2027-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -13170,6 +13170,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arresti-auto-como-minacce.title': 'Due arresti a Como: furti nelle auto e automobilista ferito',
     'blog.article.arresti-auto-como-minacce.excerpt': 'Due arresti a Como dopo le segnalazioni dei residenti Un\'auto forzata e un secondo veicolo danneggiato Un automobilista riferisce una ferita a un braccio',
     'blog.article.arresti-auto-como-minacce.imageAlt': 'Strada urbana vicino al confine con auto parcheggiate e autosilo all\'alba',
+    'blog.article.disavanzo-cantonale-2027-2030.title': 'Disavanzo cantonale ticinese previsto fino a 460 milioni',
+    'blog.article.disavanzo-cantonale-2027-2030.excerpt': 'Il Preventivo 2027 prevede un disavanzo di 98,5 milioni.',
+    'blog.article.disavanzo-cantonale-2027-2030.imageAlt': 'Vista del lago di Lugano con skyline cittadino e passeggiata tranquilla',
 };
 
 export default blogMetaIt;
