@@ -270,9 +270,10 @@ export const realIo = {
 
 /**
  * OGNI URL che una sitemap di sezione annuncia, come path canonici: le `<loc>`
- * e gli `href` degli alternate (`xhtml:link`). Gli articoli hanno la loc in IT
- * e le altre tre lingue SOLO negli alternate: leggere le sole `<loc>` lascerebbe
- * fuori tre pagine su quattro. Un URL fuori dall'apex e' un errore.
+ * e gli `href` degli alternate (`xhtml:link`). Gli articoli cantonali hanno ora
+ * una `<loc>` per ogni locale pubblicato; leggere anche gli alternate resta
+ * necessario per verificare la coerenza dei collegamenti e coprire eventuali
+ * release storiche. Un URL fuori dall'apex e' un errore.
  */
 export function sitemapPaths(sitemapXml, label = 'sitemap') {
   const urls = [
