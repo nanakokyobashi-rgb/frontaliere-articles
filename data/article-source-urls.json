@@ -1,9 +1,4 @@
 {
-  "https://www.laregione.ch/estero/confine/1947152/trenord-da-domani-biglietti-piu-cari-rincaro-del-3-88": {
-    "articleId": "trenord-rincaro-388-linee-ticino",
-    "ts": "2026-08-31T20:12:12.975Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/provincia-di-como-sempre-meno-case-per-lavoratori-giovani-e-famiglie-sono-1302-gli-alloggi-sfitti": {
     "articleId": "como-crisi-abitativa-alloggi-sfitti",
     "ts": "2026-08-31T21:24:57.974Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/lex-regia-dogana-di-porto-ceresio-rinasce-e-diventa-il-nuovo-ufficio-turistico/2707654": {
     "articleId": "porto-ceresio-dogana-ufficio-turistico",
     "ts": "2026-10-14T10:42:39.457Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/infortuni-sul-lavoro-i-dati-peggiorano-in-tutta-la-lombardia-picchi-a-pavia-e-como-numeri-alti-a-milano-e-brescia": {
+    "articleId": "infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como",
+    "ts": "2026-10-14T11:18:47.543Z",
     "keyForm": 2
   }
 }

@@ -13165,6 +13165,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.porto-ceresio-dogana-ufficio-turistico.title': 'Porto ceresio : l’ancienne douane renaît en office de tourisme',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.excerpt': 'Dimanche 18 octobre l’inauguration à 11 heures L’ancienne Regia Dogana se trouve via Mazzini Le bâtiment devient le nouvel office de tourisme Réhabilitation soutenue',
     'blog.article.porto-ceresio-dogana-ufficio-turistico.imageAlt': 'L\'ancienne Douane Royale de Porto Ceresio, transformée en Office de Tourisme, avec le lac de Lugano et les montagnes.',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.title': 'Accidents du travail en Lombardie : les données 2026 s\'aggravent, les pics Côme',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.excerpt': 'Plus de 75 293 accidents en Lombardie entre janvier et août 2026 Le nombre total de décès s\'élève à 101, contre 97 en 2025 Como enregistre 3 795 plaintes et une augmentation',
+    'blog.article.infortuni-lavoro-lombardia-dati-2026-peggiorano-picchi-como.imageAlt': 'Image éditoriale relative à: Infortuni lavoro Lombardia: dati 2026 peggiorano, picchi Como',
 };
 
 export default blogMetaFr;
