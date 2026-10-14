@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-nuovo-accordo-commercio-elettronico.webp",
-      "sha256": "eca6585d4f8d86cb84d23a7321e4c72851f1b6b768f62aa4cb2db7a2073a49dd"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-nuovo-accordo-commercio-elettronico-480w.webp",
-      "sha256": "e040e6b4348792e98ca480e63f1eda7ccb8dff78138dd975d53eb26174d53f71"
-    }
-  ]
+  "items": []
 }
