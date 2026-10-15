@@ -2790,6 +2790,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'hacker-frigoriferi-connessi': { it: 'hacker-frigoriferi-connessi', en: 'hackers-connected-refrigeration', de: 'hacker-vernetzte-kuehlung', fr: 'hackers-refrigeration-connectee' },
  'orologio-lingotto-trump-seco': { it: 'orologio-lingotto-trump-seco', en: 'watch-and-gold-bar-for-trump-seco-they-were-for-the-american-people', de: 'uhr-und-goldbarren-fur-trump-seco-sie-waren-fur-das-amerikanische-volk', fr: 'montre-et-lingot-d-or-trump-seco-pour-peuple-americain' },
  'ordinanza-dispositivi-vitali': { it: 'ordinanza-dispositivi-vitali', en: 'vital-medical-device-ordinance', de: 'verordnung-lebenswichtige-medizinprodukte', fr: 'ordonnance-dispositifs-medicaux-vitaux' },
+ 'tasse-universitarie-berna-guida': { it: 'tasse-universitarie-berna-guida', en: 'university-fees-bern-guide', de: 'studiengebuehren-bern-guide', fr: 'frais-scolarite-berne-guide' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

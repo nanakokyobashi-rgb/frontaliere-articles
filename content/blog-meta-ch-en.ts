@@ -8303,6 +8303,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ordinanza-dispositivi-vitali.title': 'Vital medical devices: DEFR opens a consultation',
     'blog.article.ordinanza-dispositivi-vitali.excerpt': 'The DEFR opens a consultation on vital medical devices The project aims to monitor supply Start: October 14, 2026 End: January 28',
     'blog.article.ordinanza-dispositivi-vitali.imageAlt': 'Bern and vital medical devices in an editorial image about the DEFR consultation',
+    'blog.article.tasse-universitarie-berna-guida.title': 'Tuition fees Bern: enrolment guide',
+    'blog.article.tasse-universitarie-berna-guida.excerpt': 'How to check requirements, deadlines and amounts for tuition fees in the Canton of Bern: practical guide by categories and institutions.',
+    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Student verifying requirements for university fees in the Canton of Bern',
 };
 
 export default blogMetaChEn;

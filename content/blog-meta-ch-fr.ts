@@ -8303,6 +8303,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ordinanza-dispositivi-vitali.title': 'Dispositifs médicaux vitaux : le DEFR ouvre une consultation',
     'blog.article.ordinanza-dispositivi-vitali.excerpt': 'Le DEFR ouvre une consultation sur les dispositifs médicaux vitaux Le projet vise à surveiller l\'approvisionnement Début : 14 octobre 2026 Fin : 28 janvier',
     'blog.article.ordinanza-dispositivi-vitali.imageAlt': 'Berne et dispositifs médicaux vitaux pour la consultation du DEFR',
+    'blog.article.tasse-universitarie-berna-guida.title': 'Frais de scolarité à Berne : guide d\'inscription',
+    'blog.article.tasse-universitarie-berna-guida.excerpt': 'Comment vérifier les exigences, les délais et les montants des frais de scolarité dans le canton de Berne : guide pratique par catégories et institutions.',
+    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Étudiant vérifiant les conditions des frais de scolarité dans le canton de Berne',
 };
 
 export default blogMetaChFr;

@@ -8303,6 +8303,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ordinanza-dispositivi-vitali.title': 'Dispositivi medici vitali: il DEFR apre una consultazione',
     'blog.article.ordinanza-dispositivi-vitali.excerpt': 'Il DEFR apre una consultazione sui dispositivi medici vitali Il progetto punta a monitorare l\'approvvigionamento Inizio: 14 ottobre 2026 Termine: 28 gennaio',
     'blog.article.ordinanza-dispositivi-vitali.imageAlt': 'Berna e dispositivi medici in un\'illustrazione sulla consultazione del DEFR',
+    'blog.article.tasse-universitarie-berna-guida.title': 'Tasse universitarie Berna: guida iscrizione',
+    'blog.article.tasse-universitarie-berna-guida.excerpt': 'Come verificare requisiti, scadenze e importi per le tasse universitarie nel Cantone di Berna: guida pratica per categorie e istituzioni.',
+    'blog.article.tasse-universitarie-berna-guida.imageAlt': 'Studente che verifica i requisiti per le tasse universitarie nel Cantone di Berna',
 };
 
 export default blogMetaChIt;
