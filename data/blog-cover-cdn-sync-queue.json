@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-arresto-lite-domestica-luganese.webp",
+      "sha256": "1d14196f7e03c8cc59e8918dc9cbce31e9d8dcafd34161a53907a99dec9cd7b0"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-arresto-lite-domestica-luganese-480w.webp",
+      "sha256": "a8a17ca5492966f33672f7255bc3820f6a7cf22d026b5062f96ac71fd99a461a"
+    }
+  ]
 }
